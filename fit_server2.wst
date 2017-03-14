@@ -1,0 +1,5 @@
+  GetWSTResourceManager().AddResource('FIT_SERVER2',
+    #0#0#0#20'WST_METADATA_0.2.2.0'#0#0#0#11'fit_server2'#1#0#0#0#11'IFitServer2'
+    +#1#0#0#0#13'GetMaxRFactor'#1#0#0#0#6'result'#0#0#0#6'Double'#0#0#0#0#0#0#0#3
+    +''
+  );

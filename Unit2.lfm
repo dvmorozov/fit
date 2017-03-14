@@ -1,0 +1,441 @@
+object CreateSpecialCurveDlg: TCreateSpecialCurveDlg
+  Left = 146
+  Height = 311
+  Top = 162
+  Width = 391
+  HorzScrollBar.Page = 390
+  VertScrollBar.Page = 310
+  ActiveControl = BtnCancel
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsDialog
+  Caption = 'Special Curve'
+  ClientHeight = 311
+  ClientWidth = 391
+  Position = poMainFormCenter
+  object Bevel1: TBevel
+    Left = 8
+    Height = 249
+    Top = 8
+    Width = 375
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    Shape = bsFrame
+  end
+  object Label1: TLabel
+    Left = 22
+    Height = 18
+    Top = 61
+    Width = 68
+    AutoSize = False
+    Caption = 'Expression:'
+    ParentColor = False
+  end
+  object Label2: TLabel
+    Left = 22
+    Height = 18
+    Top = 24
+    Width = 68
+    AutoSize = False
+    Caption = 'Name:'
+    ParentColor = False
+  end
+  object BtnCancel: TButton
+    Left = 295
+    Height = 25
+    Top = 272
+    Width = 75
+    Anchors = [akLeft, akBottom]
+    BorderSpacing.InnerBorder = 4
+    Caption = 'Cancel'
+    ModalResult = 2
+    TabOrder = 41
+  end
+  object BtnContinue: TButton
+    Left = 200
+    Height = 25
+    Top = 272
+    Width = 91
+    Anchors = [akLeft, akBottom]
+    BorderSpacing.InnerBorder = 4
+    Cancel = True
+    Caption = 'Contunue >>'
+    Default = True
+    ModalResult = 1
+    TabOrder = 42
+  end
+  object EditExpression: TEdit
+    Left = 96
+    Height = 21
+    Top = 61
+    Width = 274
+    OnKeyPress = EditExpressionKeyPress
+    TabOrder = 0
+  end
+  object ButtonSin: TButton
+    Left = 22
+    Height = 25
+    Top = 96
+    Width = 40
+    Caption = 'Sin'
+    OnClick = ButtonSinClick
+    TabOrder = 1
+  end
+  object ButtonCos: TButton
+    Left = 66
+    Height = 25
+    Top = 96
+    Width = 40
+    Caption = 'Cos'
+    OnClick = ButtonCosClick
+    TabOrder = 2
+  end
+  object ButtonTg: TButton
+    Left = 110
+    Height = 25
+    Top = 96
+    Width = 40
+    Caption = 'Tg'
+    OnClick = ButtonTgClick
+    TabOrder = 3
+  end
+  object Button7: TButton
+    Left = 198
+    Height = 25
+    Top = 96
+    Width = 40
+    Caption = '7'
+    OnClick = Button7Click
+    TabOrder = 21
+  end
+  object Button9: TButton
+    Left = 286
+    Height = 25
+    Top = 96
+    Width = 40
+    Caption = '9'
+    OnClick = Button9Click
+    TabOrder = 23
+  end
+  object Button8: TButton
+    Left = 242
+    Height = 25
+    Top = 96
+    Width = 40
+    Caption = '8'
+    OnClick = Button8Click
+    TabOrder = 22
+  end
+  object ButtonDiv: TButton
+    Left = 330
+    Height = 25
+    Top = 96
+    Width = 40
+    Caption = '/'
+    OnClick = ButtonDivClick
+    TabOrder = 24
+  end
+  object ButtonSh: TButton
+    Left = 22
+    Height = 25
+    Top = 125
+    Width = 40
+    Caption = 'Sh'
+    OnClick = ButtonShClick
+    TabOrder = 5
+  end
+  object ButtonCh: TButton
+    Left = 66
+    Height = 25
+    Top = 125
+    Width = 40
+    Caption = 'Ch'
+    OnClick = ButtonChClick
+    TabOrder = 6
+  end
+  object ButtonTh: TButton
+    Left = 110
+    Height = 25
+    Top = 125
+    Width = 40
+    Caption = 'Th'
+    OnClick = ButtonThClick
+    TabOrder = 7
+  end
+  object Button4: TButton
+    Left = 198
+    Height = 25
+    Top = 125
+    Width = 40
+    Caption = '4'
+    OnClick = Button4Click
+    TabOrder = 25
+  end
+  object Button5: TButton
+    Left = 242
+    Height = 25
+    Top = 125
+    Width = 40
+    Caption = '5'
+    OnClick = Button5Click
+    TabOrder = 26
+  end
+  object Button6: TButton
+    Left = 286
+    Height = 25
+    Top = 125
+    Width = 40
+    Caption = '6'
+    OnClick = Button6Click
+    TabOrder = 27
+  end
+  object ButtonMul: TButton
+    Left = 330
+    Height = 25
+    Top = 125
+    Width = 40
+    Caption = '*'
+    OnClick = ButtonMulClick
+    TabOrder = 28
+  end
+  object ButtonArcsin: TButton
+    Left = 22
+    Height = 25
+    Top = 154
+    Width = 40
+    Caption = 'Arcsin'
+    OnClick = ButtonArcsinClick
+    TabOrder = 9
+  end
+  object ButtonArccos: TButton
+    Left = 66
+    Height = 25
+    Top = 154
+    Width = 40
+    Caption = 'Arccos'
+    OnClick = ButtonArccosClick
+    TabOrder = 10
+  end
+  object ButtonArctg: TButton
+    Left = 110
+    Height = 25
+    Top = 154
+    Width = 40
+    Caption = 'Arctg'
+    OnClick = ButtonArctgClick
+    TabOrder = 11
+  end
+  object Button1: TButton
+    Left = 198
+    Height = 25
+    Top = 154
+    Width = 40
+    Caption = '1'
+    OnClick = Button1Click
+    TabOrder = 29
+  end
+  object Button2: TButton
+    Left = 242
+    Height = 25
+    Top = 154
+    Width = 40
+    Caption = '2'
+    OnClick = Button2Click
+    TabOrder = 30
+  end
+  object Button3: TButton
+    Left = 286
+    Height = 25
+    Top = 154
+    Width = 40
+    Caption = '3'
+    OnClick = Button3Click
+    TabOrder = 31
+  end
+  object ButtonMinus: TButton
+    Left = 330
+    Height = 25
+    Top = 154
+    Width = 40
+    Caption = '-'
+    OnClick = ButtonMinusClick
+    TabOrder = 32
+  end
+  object ButtonArsh: TButton
+    Left = 22
+    Height = 25
+    Top = 184
+    Width = 40
+    Caption = 'Arsh'
+    OnClick = ButtonArshClick
+    TabOrder = 13
+  end
+  object ButtonArch: TButton
+    Left = 66
+    Height = 25
+    Top = 184
+    Width = 40
+    Caption = 'Arch'
+    OnClick = ButtonArchClick
+    TabOrder = 14
+  end
+  object ButtonArth: TButton
+    Left = 110
+    Height = 25
+    Top = 184
+    Width = 40
+    Caption = 'Arth'
+    OnClick = ButtonArthClick
+    TabOrder = 15
+  end
+  object Button0: TButton
+    Left = 198
+    Height = 25
+    Top = 184
+    Width = 40
+    Caption = '0'
+    OnClick = Button0Click
+    TabOrder = 33
+  end
+  object ButtonBrackets: TButton
+    Left = 242
+    Height = 25
+    Top = 184
+    Width = 40
+    Caption = '(  )'
+    OnClick = ButtonBracketsClick
+    TabOrder = 34
+  end
+  object ButtonDecimal: TButton
+    Left = 286
+    Height = 25
+    Top = 184
+    Width = 40
+    Caption = ','
+    OnClick = ButtonDecimalClick
+    TabOrder = 35
+  end
+  object ButtonPlus: TButton
+    Left = 330
+    Height = 25
+    Top = 184
+    Width = 40
+    Caption = '+'
+    OnClick = ButtonPlusClick
+    TabOrder = 36
+  end
+  object ButtonSch: TButton
+    Left = 22
+    Height = 25
+    Top = 213
+    Width = 40
+    Caption = 'Sch'
+    OnClick = ButtonSchClick
+    TabOrder = 17
+  end
+  object ButtonCsch: TButton
+    Left = 66
+    Height = 25
+    Top = 213
+    Width = 40
+    Caption = 'Csch'
+    OnClick = ButtonCschClick
+    TabOrder = 18
+  end
+  object ButtonLn: TButton
+    Left = 110
+    Height = 25
+    Top = 213
+    Width = 40
+    Caption = 'Ln'
+    OnClick = ButtonLnClick
+    TabOrder = 19
+  end
+  object ButtonPower: TButton
+    Left = 198
+    Height = 25
+    Top = 213
+    Width = 40
+    Caption = '^'
+    OnClick = ButtonPowerClick
+    TabOrder = 37
+  end
+  object ButtonExp: TButton
+    Left = 242
+    Height = 25
+    Top = 213
+    Width = 40
+    Caption = 'Exp'
+    OnClick = ButtonExpClick
+    TabOrder = 38
+  end
+  object ButtonAbs: TButton
+    Left = 286
+    Height = 25
+    Top = 213
+    Width = 40
+    Caption = 'Abs'
+    OnClick = ButtonAbsClick
+    TabOrder = 39
+  end
+  object ButtonSqrt: TButton
+    Left = 330
+    Height = 25
+    Top = 213
+    Width = 40
+    Caption = 'Sqrt'
+    OnClick = ButtonSqrtClick
+    TabOrder = 40
+  end
+  object ButtonCtg: TButton
+    Left = 154
+    Height = 25
+    Top = 96
+    Width = 40
+    Caption = 'Ctg'
+    OnClick = ButtonCtgClick
+    TabOrder = 4
+  end
+  object ButtonCth: TButton
+    Left = 154
+    Height = 25
+    Top = 125
+    Width = 40
+    Caption = 'Cth'
+    OnClick = ButtonCthClick
+    TabOrder = 8
+  end
+  object ButtonArcctg: TButton
+    Left = 154
+    Height = 25
+    Top = 154
+    Width = 40
+    Caption = 'Arcctg'
+    OnClick = ButtonArcctgClick
+    TabOrder = 12
+  end
+  object ButtonArcth: TButton
+    Left = 154
+    Height = 25
+    Top = 184
+    Width = 40
+    Caption = 'Arcth'
+    OnClick = ButtonArcthClick
+    TabOrder = 16
+  end
+  object ButtonLog: TButton
+    Left = 154
+    Height = 25
+    Top = 213
+    Width = 40
+    Caption = 'Log'
+    OnClick = ButtonLogClick
+    TabOrder = 20
+  end
+  object EditCurveName: TEdit
+    Left = 96
+    Height = 21
+    Top = 24
+    Width = 274
+    OnKeyPress = EditExpressionKeyPress
+    TabOrder = 43
+  end
+end

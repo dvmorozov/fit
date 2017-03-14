@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual C++ Express 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MathExpr", "MathExpr.vcproj", "{526FF702-4D4C-4280-B8DB-AE28B4432F8D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{526FF702-4D4C-4280-B8DB-AE28B4432F8D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{526FF702-4D4C-4280-B8DB-AE28B4432F8D}.Debug|Win32.Build.0 = Debug|Win32
+		{526FF702-4D4C-4280-B8DB-AE28B4432F8D}.Release|Win32.ActiveCfg = Release|Win32
+		{526FF702-4D4C-4280-B8DB-AE28B4432F8D}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

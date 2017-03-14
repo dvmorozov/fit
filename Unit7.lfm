@@ -1,0 +1,175 @@
+object SpecialCurvePropDlg: TSpecialCurvePropDlg
+  Left = 560
+  Height = 306
+  Top = 167
+  Width = 392
+  HorzScrollBar.Page = 391
+  VertScrollBar.Page = 305
+  ActiveControl = BtnDone
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsDialog
+  Caption = 'Special Curve Properties'
+  ClientHeight = 306
+  ClientWidth = 392
+  OnActivate = FormActivate
+  Position = poMainFormCenter
+  object Bevel1: TBevel
+    Left = 8
+    Height = 244
+    Top = 8
+    Width = 376
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    Shape = bsFrame
+  end
+  object Label2: TLabel
+    Left = 22
+    Height = 18
+    Top = 53
+    Width = 68
+    AutoSize = False
+    Caption = 'Argument:'
+    ParentColor = False
+  end
+  object Label1: TLabel
+    Left = 22
+    Height = 35
+    Top = 111
+    Width = 68
+    AutoSize = False
+    Caption = 'Fixed'#13#10'parameters:'
+    ParentColor = False
+  end
+  object Label3: TLabel
+    Left = 22
+    Height = 35
+    Top = 208
+    Width = 68
+    AutoSize = False
+    Caption = 'Initial value:'
+    ParentColor = False
+  end
+  object Label4: TLabel
+    Left = 22
+    Height = 18
+    Top = 24
+    Width = 68
+    AutoSize = False
+    Caption = 'Expression:'
+    ParentColor = False
+  end
+  object Label5: TLabel
+    Left = 22
+    Height = 26
+    Top = 82
+    Width = 68
+    AutoSize = False
+    Caption = 'Position'#13#10'parameter:'
+    ParentColor = False
+  end
+  object BtnDone: TButton
+    Left = 216
+    Height = 25
+    Top = 267
+    Width = 75
+    Anchors = [akLeft, akBottom]
+    BorderSpacing.InnerBorder = 4
+    Caption = 'Done'
+    Default = True
+    ModalResult = 1
+    TabOrder = 6
+  end
+  object BtnCancel: TButton
+    Left = 295
+    Height = 25
+    Top = 267
+    Width = 75
+    Anchors = [akLeft, akBottom]
+    BorderSpacing.InnerBorder = 4
+    Caption = 'Cancel'
+    ModalResult = 2
+    TabOrder = 7
+  end
+  object BtnBacktrack: TButton
+    Left = 120
+    Height = 25
+    Top = 267
+    Width = 93
+    Anchors = [akLeft, akBottom]
+    BorderSpacing.InnerBorder = 4
+    Caption = '<< Backtrack'
+    ModalResult = 4
+    TabOrder = 5
+  end
+  object ComboArgument: TComboBox
+    Left = 96
+    Height = 21
+    Top = 53
+    Width = 274
+    AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
+    Items.Strings = (
+      'item1'
+      'item2'
+      'item3'
+    )
+    MaxLength = 65535
+    OnChange = ComboArgumentChange
+    Sorted = True
+    Style = csDropDownList
+    TabOrder = 0
+  end
+  object CheckListFixed: TCheckListBox
+    Left = 96
+    Height = 89
+    Top = 112
+    Width = 274
+    OnClick = CheckListFixedClick
+    OnClickCheck = CheckListFixedClickCheck
+    Sorted = True
+    TabOrder = 2
+    TopIndex = -1
+  end
+  object EditExpression: TEdit
+    Left = 96
+    Height = 21
+    Top = 24
+    Width = 274
+    Color = clBtnFace
+    ReadOnly = True
+    TabOrder = 8
+  end
+  object EditInitValue: TEdit
+    Left = 96
+    Height = 21
+    Top = 208
+    Width = 195
+    TabOrder = 3
+  end
+  object BtnApply: TButton
+    Left = 295
+    Height = 25
+    Top = 208
+    Width = 75
+    Anchors = [akLeft, akBottom]
+    BorderSpacing.InnerBorder = 4
+    Caption = 'Apply'
+    OnClick = BtnApplyClick
+    TabOrder = 4
+  end
+  object ComboPosition: TComboBox
+    Left = 96
+    Height = 21
+    Top = 82
+    Width = 274
+    AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
+    Items.Strings = (
+      'item1'
+      'item2'
+      'item3'
+    )
+    MaxLength = 65535
+    OnChange = ComboPositionChange
+    Sorted = True
+    Style = csDropDownList
+    TabOrder = 1
+  end
+end

@@ -1,0 +1,17 @@
+{ Это - файл ресурсов, автоматически созданный lazarus }
+
+LazarusResources.Add('TForm1','FORMDATA',[
+  'TPF0'#6'TForm1'#5'Form1'#4'Left'#2'j'#6'Height'#3','#1#3'Top'#2'e'#5'Width'#3
+  +#144#1#18'HorzScrollBar.Page'#3#143#1#18'VertScrollBar.Page'#3'+'#1#11'Borde'
+  +'rIcons'#11#12'biSystemMenu'#0#11'BorderStyle'#7#8'bsDialog'#7'Caption'#6#18
+  +'Graphs for Problem'#12'ClientHeight'#3','#1#11'ClientWidth'#3#144#1#0#6'TPa'
+  +'nel'#6'Panel1'#6'Height'#3','#1#5'Width'#3#144#1#5'Align'#7#8'alClient'#10
+  +'BevelOuter'#7#6'bvNone'#12'ClientHeight'#3','#1#11'ClientWidth'#3#144#1#8'T'
+  +'abOrder'#2#0#0#8'TTAChart'#5'Chart'#6'Height'#3','#1#5'Width'#3#144#1#14'Au'
+  +'toUpdateXMin'#9#14'AutoUpdateXMax'#9#14'AutoUpdateYMin'#9#14'AutoUpdateYMax'
+  +#9#10'ShowLegend'#9#5'Align'#7#8'alClient'#11'ParentColor'#8#14'ParentShowHi'
+  +'nt'#8#8'AutoSize'#9#0#0#0#22'TApplicationProperties'#22'ApplicationProperti'
+  +'es1'#17'CaptureExceptions'#9#9'HintColor'#7#8'clInfoBk'#13'HintHidePause'#3
+  +#196#9#9'HintPause'#3#244#1#13'HintShortCuts'#9#8'ShowHint'#9#5'Title'#6#9'F'
+  +'itServer'#4'left'#2#16#3'top'#3#248#0#0#0#0
+]);

@@ -1,0 +1,26 @@
+object FormHint: TFormHint
+  Left = 193
+  Height = 37
+  Top = 104
+  Width = 104
+  HorzScrollBar.Page = 103
+  VertScrollBar.Page = 36
+  BorderIcons = [biSystemMenu, biMinimize]
+  BorderStyle = bsToolWindow
+  Caption = 'FormHint'
+  ClientHeight = 37
+  ClientWidth = 104
+  OnShow = FormShow
+  object Label1: TLabel
+    Height = 14
+    Width = 23
+    Caption = 'Text'
+    ParentColor = False
+    WordWrap = True
+  end
+  object Timer1: TTimer
+    OnTimer = Timer1Timer
+    left = 32000
+    top = 32000
+  end
+end

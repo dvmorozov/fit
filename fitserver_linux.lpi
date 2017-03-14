@@ -1,0 +1,780 @@
+<?xml version="1.0"?>
+<CONFIG>
+  <ProjectOptions>
+    <PathDelim Value="/"/>
+    <Version Value="6"/>
+    <General>
+      <MainUnit Value="0"/>
+      <IconPath Value="./"/>
+      <TargetFileExt Value=".exe"/>
+      <Title Value="FitServer"/>
+      <UseXPManifest Value="True"/>
+      <ActiveEditorIndexAtStart Value="1"/>
+    </General>
+    <VersionInfo>
+      <ProjectVersion Value=""/>
+    </VersionInfo>
+    <PublishOptions>
+      <Version Value="2"/>
+      <IgnoreBinaries Value="False"/>
+      <IncludeFileFilter Value="*.(pas|pp|inc|lfm|lpr|lrs|lpi|lpk|sh|xml)"/>
+      <ExcludeFileFilter Value="*.(bak|ppu|ppw|o|so);*~;backup"/>
+    </PublishOptions>
+    <RunParams>
+      <local>
+        <FormatVersion Value="1"/>
+        <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
+      </local>
+    </RunParams>
+    <RequiredPackages Count="6">
+      <Item1>
+        <PackageName Value="TurboPowerIPro"/>
+        <MinVersion Major="1" Valid="True"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="IDEIntf"/>
+        <MinVersion Major="1" Valid="True"/>
+      </Item2>
+      <Item3>
+        <PackageName Value="FCL"/>
+        <MinVersion Major="1" Valid="True"/>
+      </Item3>
+      <Item4>
+        <PackageName Value="LCL"/>
+      </Item4>
+      <Item5>
+        <PackageName Value="FitGrids_linux"/>
+      </Item5>
+      <Item6>
+        <PackageName Value="TA_LINUX"/>
+      </Item6>
+    </RequiredPackages>
+    <Units Count="81">
+      <Unit0>
+        <Filename Value="fitserver_linux.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="fitserver_linux"/>
+        <CursorPos X="5" Y="46"/>
+        <TopLine Value="28"/>
+        <EditorIndex Value="1"/>
+        <UsageCount Value="200"/>
+        <Loaded Value="True"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="Unit1.pas"/>
+        <ComponentName Value="Form1"/>
+        <HasResources Value="True"/>
+        <ResourceFilename Value="Unit1.lrs"/>
+        <UnitName Value="Unit1"/>
+        <CursorPos X="34" Y="570"/>
+        <TopLine Value="550"/>
+        <UsageCount Value="186"/>
+        <Bookmarks Count="1">
+          <Item0 X="1" Y="468" ID="0"/>
+        </Bookmarks>
+      </Unit1>
+      <Unit2>
+        <Filename Value="DataLoader.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="DataLoader"/>
+        <CursorPos X="5" Y="283"/>
+        <TopLine Value="263"/>
+        <EditorIndex Value="10"/>
+        <UsageCount Value="200"/>
+        <Loaded Value="True"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="PointSetViewer.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="PointSetViewer"/>
+        <CursorPos X="30" Y="603"/>
+        <TopLine Value="589"/>
+        <EditorIndex Value="15"/>
+        <UsageCount Value="200"/>
+        <Loaded Value="True"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="IntegralInt.pas"/>
+        <UnitName Value="IntegralInt"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="9"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="Unit3.pas"/>
+        <ComponentName Value="InputWavelengthDlg"/>
+        <HasResources Value="True"/>
+        <ResourceFilename Value="Unit3.lrs"/>
+        <UnitName Value="Unit3"/>
+        <CursorPos X="13" Y="48"/>
+        <TopLine Value="30"/>
+        <UsageCount Value="186"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="Unit12.pas"/>
+        <ComponentName Value="AboutBox"/>
+        <HasResources Value="True"/>
+        <ResourceFilename Value="Unit12.lrs"/>
+        <UnitName Value="Unit12"/>
+        <CursorPos X="52" Y="49"/>
+        <TopLine Value="29"/>
+        <UsageCount Value="186"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="Minimizer_S.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Minimizer_S"/>
+        <CursorPos X="48" Y="287"/>
+        <TopLine Value="268"/>
+        <UsageCount Value="200"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="Minimizer.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Minimizer"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="200"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="MSCRDataClasses.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="MSCRDataClasses"/>
+        <CursorPos X="21" Y="1"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="7"/>
+        <UsageCount Value="200"/>
+        <Loaded Value="True"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="TAGraph/Component/TAGraph.pas"/>
+        <UnitName Value="tagraph"/>
+        <CursorPos X="24" Y="233"/>
+        <TopLine Value="215"/>
+        <UsageCount Value="151"/>
+      </Unit10>
+      <Unit11>
+        <Filename Value="Minimizer_DS.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Minimizer_DS"/>
+        <CursorPos X="36" Y="22"/>
+        <TopLine Value="15"/>
+        <EditorIndex Value="4"/>
+        <UsageCount Value="200"/>
+        <Loaded Value="True"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="Unit5.pas"/>
+        <ComponentName Value="InputBackFactorDlg"/>
+        <HasResources Value="True"/>
+        <ResourceFilename Value="Unit5.lrs"/>
+        <UnitName Value="Unit5"/>
+        <CursorPos X="1" Y="50"/>
+        <TopLine Value="29"/>
+        <UsageCount Value="187"/>
+      </Unit12>
+      <Unit13>
+        <Filename Value="CombEnumerator.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="CombEnumerator"/>
+        <CursorPos X="11" Y="163"/>
+        <TopLine Value="146"/>
+        <UsageCount Value="200"/>
+      </Unit13>
+      <Unit14>
+        <Filename Value="SimpMath.pas"/>
+        <UnitName Value="SimpMath"/>
+        <CursorPos X="25" Y="267"/>
+        <TopLine Value="6"/>
+        <UsageCount Value="145"/>
+      </Unit14>
+      <Unit15>
+        <Filename Value="CBRCComponent.pas"/>
+        <UnitName Value="CBRCComponent"/>
+        <CursorPos X="13" Y="13"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="145"/>
+      </Unit15>
+      <Unit16>
+        <Filename Value="SelfSaved.pas"/>
+        <UnitName Value="SelfSaved"/>
+        <CursorPos X="10" Y="23"/>
+        <TopLine Value="5"/>
+        <UsageCount Value="101"/>
+      </Unit16>
+      <Unit17>
+        <Filename Value="ClassInheritIDs.pas"/>
+        <UnitName Value="ClassInheritIDs"/>
+        <CursorPos X="17" Y="163"/>
+        <TopLine Value="154"/>
+        <UsageCount Value="100"/>
+      </Unit17>
+      <Unit18>
+        <Filename Value="MyExceptions.pas"/>
+        <UnitName Value="MyExceptions"/>
+        <CursorPos X="19" Y="20"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="151"/>
+      </Unit18>
+      <Unit19>
+        <Filename Value="Tools.pas"/>
+        <UnitName Value="Tools"/>
+        <CursorPos X="73" Y="421"/>
+        <TopLine Value="529"/>
+        <UsageCount Value="152"/>
+      </Unit19>
+      <Unit20>
+        <Filename Value="SelfCopied.pas"/>
+        <UnitName Value="SelfCopied"/>
+        <CursorPos X="1" Y="133"/>
+        <TopLine Value="105"/>
+        <UsageCount Value="152"/>
+      </Unit20>
+      <Unit21>
+        <Filename Value="DataClasses.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="DataClasses"/>
+        <CursorPos X="31" Y="146"/>
+        <TopLine Value="108"/>
+        <EditorIndex Value="2"/>
+        <UsageCount Value="207"/>
+        <Loaded Value="True"/>
+      </Unit21>
+      <Unit22>
+        <Filename Value="Math3d.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Math3d"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="207"/>
+      </Unit22>
+      <Unit23>
+        <Filename Value="DownhillSimplexContainer.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="DownhillSimplexContainer"/>
+        <CursorPos X="23" Y="389"/>
+        <TopLine Value="366"/>
+        <EditorIndex Value="5"/>
+        <UsageCount Value="207"/>
+        <Loaded Value="True"/>
+      </Unit23>
+      <Unit24>
+        <Filename Value="DownhillSimplexAlgorithm.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="DownhillSimplexAlgorithm"/>
+        <CursorPos X="5" Y="449"/>
+        <TopLine Value="469"/>
+        <EditorIndex Value="6"/>
+        <UsageCount Value="207"/>
+        <Loaded Value="True"/>
+      </Unit24>
+      <Unit25>
+        <Filename Value="Decisions.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Decisions"/>
+        <CursorPos X="62" Y="17"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="207"/>
+      </Unit25>
+      <Unit26>
+        <Filename Value="Algorithm.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Algorithm"/>
+        <CursorPos X="19" Y="18"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="207"/>
+      </Unit26>
+      <Unit27>
+        <Filename Value="AlgorithmContainer.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="AlgorithmContainer"/>
+        <CursorPos X="17" Y="42"/>
+        <TopLine Value="23"/>
+        <UsageCount Value="207"/>
+      </Unit27>
+      <Unit28>
+        <Filename Value="ObjSavingStringList.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ObjSavingStringList"/>
+        <CursorPos X="49" Y="14"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="207"/>
+      </Unit28>
+      <Unit29>
+        <Filename Value="FFDataFile.pas"/>
+        <UnitName Value="FFDataFile"/>
+        <CursorPos X="49" Y="13"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="12"/>
+      </Unit29>
+      <Unit30>
+        <Filename Value="Unit4.pas"/>
+        <ComponentName Value="InputMaxRFactorDlg"/>
+        <HasResources Value="True"/>
+        <ResourceFilename Value="Unit4.lrs"/>
+        <UnitName Value="Unit4"/>
+        <CursorPos X="1" Y="12"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="186"/>
+      </Unit30>
+      <Unit31>
+        <Filename Value="ComponentList.pas"/>
+        <UnitName Value="ComponentList"/>
+        <CursorPos X="1" Y="225"/>
+        <TopLine Value="206"/>
+        <UsageCount Value="152"/>
+      </Unit31>
+      <Unit32>
+        <Filename Value="Plotter2.pas"/>
+        <UnitName Value="Plotter2"/>
+        <CursorPos X="30" Y="6"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="12"/>
+      </Unit32>
+      <Unit33>
+        <Filename Value="Runner.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Runner"/>
+        <CursorPos X="6" Y="28"/>
+        <TopLine Value="10"/>
+        <UsageCount Value="207"/>
+      </Unit33>
+      <Unit34>
+        <Filename Value="TableComp.pas"/>
+        <UnitName Value="TableComp"/>
+        <CursorPos X="16" Y="452"/>
+        <TopLine Value="430"/>
+        <UsageCount Value="152"/>
+      </Unit34>
+      <Unit35>
+        <Filename Value="NumericGrid.pas"/>
+        <UnitName Value="NumericGrid"/>
+        <CursorPos X="19" Y="301"/>
+        <TopLine Value="293"/>
+        <UsageCount Value="145"/>
+      </Unit35>
+      <Unit36>
+        <Filename Value="FitServer.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="FitServer"/>
+        <CursorPos X="5" Y="611"/>
+        <TopLine Value="583"/>
+        <EditorIndex Value="0"/>
+        <UsageCount Value="200"/>
+        <Loaded Value="True"/>
+      </Unit36>
+      <Unit37>
+        <Filename Value="FitClient.pas"/>
+        <UnitName Value="FitClient"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="187"/>
+      </Unit37>
+      <Unit38>
+        <Filename Value="MainCalcThread.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="MainCalcThread"/>
+        <CursorPos X="1" Y="59"/>
+        <TopLine Value="35"/>
+        <UsageCount Value="200"/>
+      </Unit38>
+      <Unit39>
+        <Filename Value="FitClientStub.pas"/>
+        <UnitName Value="FitClientStub"/>
+        <CursorPos X="43" Y="35"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="191"/>
+      </Unit39>
+      <Unit40>
+        <Filename Value="FitServerStub.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="FitServerStub"/>
+        <CursorPos X="32" Y="706"/>
+        <TopLine Value="687"/>
+        <EditorIndex Value="11"/>
+        <UsageCount Value="204"/>
+        <Loaded Value="True"/>
+      </Unit40>
+      <Unit41>
+        <Filename Value="FitServerProxy.pas"/>
+        <UnitName Value="FitServerProxy"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="188"/>
+      </Unit41>
+      <Unit42>
+        <Filename Value="FitClientProxy.pas"/>
+        <UnitName Value="FitClientProxy"/>
+        <CursorPos X="15" Y="563"/>
+        <TopLine Value="544"/>
+        <UsageCount Value="190"/>
+      </Unit42>
+      <Unit43>
+        <Filename Value="FitClientApp.pas"/>
+        <UnitName Value="FitClientApp"/>
+        <CursorPos X="21" Y="32"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="202"/>
+      </Unit43>
+      <Unit44>
+        <Filename Value="FitServerApp.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="FitServerApp"/>
+        <CursorPos X="30" Y="100"/>
+        <TopLine Value="67"/>
+        <EditorIndex Value="14"/>
+        <UsageCount Value="200"/>
+        <Loaded Value="True"/>
+      </Unit44>
+      <Unit45>
+        <Filename Value="FitServerWithThread.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="FitServerWithThread"/>
+        <CursorPos X="65" Y="78"/>
+        <TopLine Value="58"/>
+        <EditorIndex Value="9"/>
+        <UsageCount Value="200"/>
+        <Loaded Value="True"/>
+      </Unit45>
+      <Unit46>
+        <Filename Value="FitTaskWithThread.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="FitTaskWithThread"/>
+        <CursorPos X="65" Y="144"/>
+        <TopLine Value="124"/>
+        <EditorIndex Value="8"/>
+        <UsageCount Value="200"/>
+        <Loaded Value="True"/>
+      </Unit46>
+      <Unit47>
+        <Filename Value="FitTask.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="FitTask"/>
+        <CursorPos X="55" Y="1651"/>
+        <TopLine Value="1623"/>
+        <EditorIndex Value="3"/>
+        <UsageCount Value="200"/>
+        <Loaded Value="True"/>
+      </Unit47>
+      <Unit48>
+        <Filename Value="FitServerMultithreaded.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="FitServerMultithreaded"/>
+        <CursorPos X="5" Y="67"/>
+        <TopLine Value="54"/>
+        <UsageCount Value="200"/>
+      </Unit48>
+      <Unit49>
+        <Filename Value="Unit2.pas"/>
+        <ComponentName Value="CreateSpecialCurveDlg"/>
+        <ResourceFilename Value="Unit2.lrs"/>
+        <UnitName Value="Unit2"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="187"/>
+      </Unit49>
+      <Unit50>
+        <Filename Value="Settings.pas"/>
+        <UnitName Value="Settings"/>
+        <CursorPos X="16" Y="21"/>
+        <TopLine Value="2"/>
+        <UsageCount Value="186"/>
+      </Unit50>
+      <Unit51>
+        <Filename Value="Unit7.pas"/>
+        <ComponentName Value="SpecialCurvePropDlg"/>
+        <HasResources Value="True"/>
+        <ResourceFilename Value="Unit7.lrs"/>
+        <UnitName Value="Unit7"/>
+        <CursorPos X="13" Y="140"/>
+        <TopLine Value="122"/>
+        <UsageCount Value="189"/>
+      </Unit51>
+      <Unit52>
+        <Filename Value="E:/lazarus/lcl/grids.pas"/>
+        <UnitName Value="Grids"/>
+        <CursorPos X="33" Y="6796"/>
+        <TopLine Value="6776"/>
+        <UsageCount Value="9"/>
+      </Unit52>
+      <Unit53>
+        <Filename Value="Unit1.lfm"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="103"/>
+        <Loaded Value="True"/>
+        <SyntaxHighlighter Value="LFM"/>
+      </Unit53>
+      <Unit54>
+        <Filename Value="Packages/FitGrids/Tools.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Tools"/>
+        <UsageCount Value="201"/>
+        <SyntaxHighlighter Value="Text"/>
+      </Unit54>
+      <Unit55>
+        <Filename Value="Packages/FitGrids/CBRCComponent.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="CBRCComponent"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="201"/>
+      </Unit55>
+      <Unit56>
+        <Filename Value="Packages/FitGrids/ClassInheritIDs.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ClassInheritIDs"/>
+        <CursorPos X="74" Y="125"/>
+        <TopLine Value="106"/>
+        <UsageCount Value="201"/>
+      </Unit56>
+      <Unit57>
+        <Filename Value="Packages/FitGrids/ComponentList.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ComponentList"/>
+        <CursorPos X="6" Y="39"/>
+        <TopLine Value="59"/>
+        <UsageCount Value="201"/>
+      </Unit57>
+      <Unit58>
+        <Filename Value="Packages/FitGrids/MyExceptions.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="MyExceptions"/>
+        <CursorPos X="69" Y="9"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="201"/>
+      </Unit58>
+      <Unit59>
+        <Filename Value="Packages/FitGrids/NumericGrid.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="NumericGrid"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="201"/>
+      </Unit59>
+      <Unit60>
+        <Filename Value="Packages/FitGrids/SelfCopied.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="SelfCopied"/>
+        <CursorPos X="5" Y="49"/>
+        <TopLine Value="34"/>
+        <UsageCount Value="201"/>
+      </Unit60>
+      <Unit61>
+        <Filename Value="Packages/FitGrids/SelfSaved.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="SelfSaved"/>
+        <UsageCount Value="201"/>
+        <SyntaxHighlighter Value="Text"/>
+      </Unit61>
+      <Unit62>
+        <Filename Value="Packages/FitGrids/SimpMath.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="SimpMath"/>
+        <CursorPos X="7" Y="21"/>
+        <TopLine Value="10"/>
+        <UsageCount Value="201"/>
+      </Unit62>
+      <Unit63>
+        <Filename Value="Packages/FitGrids/TableComp.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="TableComp"/>
+        <UsageCount Value="201"/>
+        <SyntaxHighlighter Value="Text"/>
+      </Unit63>
+      <Unit64>
+        <Filename Value="Packages/TAGraph/Component/TAGraph.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="TAGraph"/>
+        <CursorPos X="31" Y="1979"/>
+        <TopLine Value="1931"/>
+        <EditorIndex Value="16"/>
+        <UsageCount Value="201"/>
+        <Loaded Value="True"/>
+      </Unit64>
+      <Unit65>
+        <Filename Value="fit_server_imp.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="fit_server_imp"/>
+        <CursorPos X="20" Y="2404"/>
+        <TopLine Value="2377"/>
+        <EditorIndex Value="12"/>
+        <UsageCount Value="202"/>
+        <Loaded Value="True"/>
+      </Unit65>
+      <Unit66>
+        <Filename Value="fit_server.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="fit_server"/>
+        <CursorPos X="4" Y="129"/>
+        <TopLine Value="103"/>
+        <EditorIndex Value="17"/>
+        <UsageCount Value="201"/>
+        <Loaded Value="True"/>
+      </Unit66>
+      <Unit67>
+        <Filename Value="fit_server_binder.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="fit_server_binder"/>
+        <CursorPos X="13" Y="2029"/>
+        <TopLine Value="2008"/>
+        <UsageCount Value="201"/>
+      </Unit67>
+      <Unit68>
+        <Filename Value="E:/lazarus_lib/synapse/synapse/source/lib/blcksock.pas"/>
+        <UnitName Value="blcksock"/>
+        <CursorPos X="29" Y="2493"/>
+        <TopLine Value="2472"/>
+        <UsageCount Value="9"/>
+      </Unit68>
+      <Unit69>
+        <Filename Value="E:/lazarus/fpc/2.2.0/source/rtl/inc/except.inc"/>
+        <CursorPos X="27" Y="178"/>
+        <TopLine Value="169"/>
+        <UsageCount Value="7"/>
+      </Unit69>
+      <Unit70>
+        <Filename Value="fit_server2_imp.pas"/>
+        <UnitName Value="fit_server2_imp"/>
+        <UsageCount Value="1"/>
+        <SyntaxHighlighter Value="Text"/>
+      </Unit70>
+      <Unit71>
+        <Filename Value="fit_server2.pas"/>
+        <UnitName Value="fit_server2"/>
+        <UsageCount Value="1"/>
+        <SyntaxHighlighter Value="Text"/>
+      </Unit71>
+      <Unit72>
+        <Filename Value="Main.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Main"/>
+        <CursorPos X="39" Y="180"/>
+        <TopLine Value="142"/>
+        <EditorIndex Value="13"/>
+        <UsageCount Value="206"/>
+        <Loaded Value="True"/>
+      </Unit72>
+      <Unit73>
+        <Filename Value="/lazarus_lib/wst-0.5/base_service_intf.pas"/>
+        <UnitName Value="base_service_intf"/>
+        <CursorPos X="44" Y="332"/>
+        <TopLine Value="317"/>
+        <UsageCount Value="8"/>
+      </Unit73>
+      <Unit74>
+        <Filename Value="CommonTypes.pas"/>
+        <UnitName Value="CommonTypes"/>
+        <CursorPos X="39" Y="21"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="2"/>
+      </Unit74>
+      <Unit75>
+        <Filename Value="FormServer.pas"/>
+        <ComponentName Value="Form1"/>
+        <IsPartOfProject Value="True"/>
+        <ResourceFilename Value="FormServer.lrs"/>
+        <UnitName Value="FormServer"/>
+        <CursorPos X="71" Y="25"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="176"/>
+      </Unit75>
+      <Unit76>
+        <Filename Value="E:/lazarus_lib/wst-0.5/base_service_intf.pas"/>
+        <UnitName Value="base_service_intf"/>
+        <CursorPos X="22" Y="2888"/>
+        <TopLine Value="2861"/>
+        <UsageCount Value="2"/>
+      </Unit76>
+      <Unit77>
+        <Filename Value="fit_server_proxy.pas"/>
+        <UnitName Value="fit_server_proxy"/>
+        <CursorPos X="26" Y="1531"/>
+        <TopLine Value="1504"/>
+        <UsageCount Value="10"/>
+      </Unit77>
+      <Unit78>
+        <Filename Value="E:/lazarus/lcl/controls.pp"/>
+        <UnitName Value="Controls"/>
+        <CursorPos X="15" Y="935"/>
+        <TopLine Value="905"/>
+        <UsageCount Value="3"/>
+      </Unit78>
+      <Unit79>
+        <Filename Value="/lazarus/fpc/2.2.0/source/rtl/objpas/classes/classesh.inc"/>
+        <CursorPos X="3" Y="380"/>
+        <TopLine Value="363"/>
+        <UsageCount Value="12"/>
+      </Unit79>
+      <Unit80>
+        <Filename Value="GeneralHashFunctions.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="GeneralHashfunctions"/>
+        <CursorPos X="16" Y="27"/>
+        <TopLine Value="23"/>
+        <UsageCount Value="99"/>
+      </Unit80>
+    </Units>
+    <JumpHistory Count="0" HistoryIndex="-1"/>
+  </ProjectOptions>
+  <CompilerOptions>
+    <Version Value="5"/>
+    <Target>
+      <Filename Value="o/$(TargetCPU)-$(TargetOS)/FitServer.exe"/>
+    </Target>
+    <SearchPaths>
+      <IncludeFiles Value="$(LazarusDir)/components/jpeg/;$(LazarusDir)/components/images/;/home/dmitry/lib/synapse/synapse/source/lib/;Packages/TAGraph/Component/;Packages/FitGrids/;/home/dmitry/lib/synapse/synapse/source/;/home/dmitry/lib/wst-0.5/"/>
+      <OtherUnitFiles Value="$(LazarusDir)/components/jpeg/;$(LazarusDir)/components/images/;/home/dmitry/lib/synapse/synapse/source/lib/;Packages/TAGraph/Component/;Packages/FitGrids/;/home/dmitry/lib/synapse/synapse/source/;/home/dmitry/lib/wst-0.5/"/>
+      <UnitOutputDirectory Value="o/fitserver_linux/$(TargetCPU)-$(TargetOS)"/>
+      <SrcPath Value="$(LazarusDir)/components/jpeg/;$(LazarusDir)/components/images/;/home/dmitry/lib/synapse/synapse/source/lib/;Packages/TAGraph/Component/;Packages/FitGrids/;/home/dmitry/lib/synapse/synapse/source/;/home/dmitry/lib/wst-0.5/"/>
+    </SearchPaths>
+    <Parsing>
+      <SyntaxOptions>
+        <IncludeAssertionCode Value="True"/>
+        <DelphiCompat Value="True"/>
+      </SyntaxOptions>
+    </Parsing>
+    <Linking>
+      <Debugging>
+        <GenerateDebugInfo Value="True"/>
+      </Debugging>
+      <Options>
+        <Win32>
+          <GraphicApplication Value="True"/>
+        </Win32>
+      </Options>
+    </Linking>
+    <Other>
+      <CustomOptions Value="-dSERVER -dFITSERVER -dEXCLUDE_SOMETHING -dFITCLIENTINSERVER
+"/>
+      <CompilerPath Value="$(CompPath)"/>
+    </Other>
+  </CompilerOptions>
+  <Debugging>
+    <Watches Count="5">
+      <Item1>
+        <Expression Value="GridBackground.Options"/>
+      </Item1>
+      <Item2>
+        <Expression Value="RFactorIntervals.PointsCount"/>
+      </Item2>
+      <Item3>
+        <Expression Value="ATypeInfo^"/>
+      </Item3>
+      <Item4>
+        <Expression Value="objData"/>
+      </Item4>
+      <Item5>
+        <Expression Value="AData^"/>
+      </Item5>
+    </Watches>
+    <Exceptions Count="2">
+      <Item1>
+        <Name Value="ECodetoolError"/>
+      </Item1>
+      <Item2>
+        <Name Value="EFOpenError"/>
+      </Item2>
+    </Exceptions>
+  </Debugging>
+</CONFIG>

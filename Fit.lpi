@@ -13,7 +13,7 @@
     </General>
     <VersionInfo>
       <AutoIncrementBuild Value="True"/>
-      <BuildNr Value="1038"/>
+      <BuildNr Value="1040"/>
       <StringTable ProductVersion="0.0.0.1001"/>
     </VersionInfo>
     <BuildModes Count="2">
@@ -27,7 +27,7 @@
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(LazarusDir)\lcl\interfaces\win32;$(LazarusDir)\lcl\include"/>
-            <OtherUnitFiles Value="..\Repository\NewVCL;C:\lazarus_lib\synapse\synapse\source\lib\;C:\lazarus_lib\wst-0.5\;Packages\FitGrids;$(LazarusDir)\components\codetools\units\i386-win32;Packages\TAGraph\Component"/>
+            <OtherUnitFiles Value="C:\lazarus_lib\synapse\synapse\source\lib\;C:\lazarus_lib\wst-0.5\;$(LazarusDir)\components\codetools\units\i386-win32;C:\lazarus_lib\FitGrids\;C:\lazarus_lib\FitMinimizers\;Packages\TAGraph\Component"/>
             <UnitOutputDirectory Value="o\Fit\$(TargetCPU)-$(TargetOS)"/>
           </SearchPaths>
           <Parsing>
@@ -69,38 +69,43 @@
         <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
       </local>
     </RunParams>
-    <RequiredPackages Count="6">
+    <RequiredPackages Count="7">
       <Item1>
-        <PackageName Value="FitGrids"/>
-        <MinVersion Valid="True"/>
+        <PackageName Value="FitMinimizers"/>
       </Item1>
       <Item2>
-        <PackageName Value="ta"/>
-        <MinVersion Major="1" Minor="1" Valid="True"/>
+        <PackageName Value="FitGrids"/>
+        <MinVersion Valid="True"/>
       </Item2>
       <Item3>
-        <PackageName Value="LCL"/>
+        <PackageName Value="ta"/>
+        <MinVersion Major="1" Minor="1" Valid="True"/>
       </Item3>
       <Item4>
-        <PackageName Value="FCL"/>
-        <MinVersion Major="1" Valid="True"/>
+        <PackageName Value="LCL"/>
       </Item4>
       <Item5>
-        <PackageName Value="IDEIntf"/>
+        <PackageName Value="FCL"/>
         <MinVersion Major="1" Valid="True"/>
       </Item5>
       <Item6>
-        <PackageName Value="TurboPowerIPro"/>
+        <PackageName Value="IDEIntf"/>
         <MinVersion Major="1" Valid="True"/>
       </Item6>
+      <Item7>
+        <PackageName Value="TurboPowerIPro"/>
+        <MinVersion Major="1" Valid="True"/>
+      </Item7>
     </RequiredPackages>
-    <Units Count="79">
+    <Units Count="80">
       <Unit0>
         <Filename Value="Fit.lpr"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="13"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="19"/>
         <WindowIndex Value="1"/>
-        <CursorPos X="3" Y="24"/>
+        <TopLine Value="18"/>
+        <CursorPos X="63" Y="31"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -112,8 +117,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="757"/>
-        <CursorPos X="33" Y="761"/>
+        <TopLine Value="4"/>
+        <CursorPos X="27" Y="17"/>
         <UsageCount Value="200"/>
         <Bookmarks Count="1">
           <Item0 Y="476"/>
@@ -125,7 +130,7 @@
       <Unit2>
         <Filename Value="DataLoader.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="18"/>
+        <EditorIndex Value="24"/>
         <WindowIndex Value="1"/>
         <TopLine Value="1597"/>
         <CursorPos X="5" Y="1608"/>
@@ -136,10 +141,10 @@
       <Unit3>
         <Filename Value="PointSetViewer.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="10"/>
+        <EditorIndex Value="16"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="377"/>
-        <CursorPos X="26" Y="408"/>
+        <TopLine Value="648"/>
+        <CursorPos X="34" Y="661"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -150,7 +155,7 @@
         <ComponentName Value="InputWavelengthDlg"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="12"/>
+        <EditorIndex Value="18"/>
         <WindowIndex Value="1"/>
         <TopLine Value="30"/>
         <CursorPos X="13" Y="48"/>
@@ -174,29 +179,32 @@
       <Unit6>
         <Filename Value="Minimizer_S.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="-1"/>
+        <EditorIndex Value="12"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="103"/>
-        <CursorPos X="23" Y="134"/>
+        <CursorPos X="45" Y="13"/>
         <UsageCount Value="200"/>
+        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit6>
       <Unit7>
         <Filename Value="Minimizer.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="-1"/>
+        <EditorIndex Value="7"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="52"/>
-        <CursorPos X="19" Y="74"/>
+        <TopLine Value="100"/>
+        <CursorPos X="23" Y="110"/>
         <UsageCount Value="200"/>
+        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit7>
       <Unit8>
         <Filename Value="MSCRDataClasses.pas"/>
         <IsPartOfProject Value="True"/>
-        <TopLine Value="11"/>
-        <CursorPos X="5" Y="25"/>
+        <EditorIndex Value="3"/>
+        <WindowIndex Value="1"/>
+        <CursorPos X="26" Y="7"/>
         <UsageCount Value="200"/>
+        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit8>
       <Unit9>
@@ -206,16 +214,15 @@
         <WindowIndex Value="1"/>
         <TopLine Value="513"/>
         <CursorPos X="29" Y="526"/>
-        <UsageCount Value="109"/>
+        <UsageCount Value="104"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit9>
       <Unit10>
         <Filename Value="Minimizer_DS.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="17"/>
+        <EditorIndex Value="23"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="155"/>
-        <CursorPos X="35" Y="172"/>
+        <CursorPos X="45" Y="13"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -226,7 +233,7 @@
         <ComponentName Value="InputBackFactorDlg"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="5"/>
         <WindowIndex Value="1"/>
         <TopLine Value="29"/>
         <CursorPos Y="50"/>
@@ -246,13 +253,13 @@
         <Filename Value="SimpMath.pas"/>
         <TopLine Value="6"/>
         <CursorPos X="25" Y="267"/>
-        <UsageCount Value="96"/>
+        <UsageCount Value="91"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit13>
       <Unit14>
         <Filename Value="CBRCComponent.pas"/>
         <CursorPos X="13" Y="13"/>
-        <UsageCount Value="96"/>
+        <UsageCount Value="91"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit14>
       <Unit15>
@@ -261,25 +268,25 @@
         <WindowIndex Value="1"/>
         <TopLine Value="68"/>
         <CursorPos X="19" Y="86"/>
-        <UsageCount Value="66"/>
+        <UsageCount Value="61"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit15>
       <Unit16>
         <Filename Value="ClassInheritIDs.pas"/>
         <TopLine Value="154"/>
         <CursorPos X="17" Y="163"/>
-        <UsageCount Value="51"/>
+        <UsageCount Value="46"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit16>
       <Unit17>
         <Filename Value="MyExceptions.pas"/>
         <CursorPos X="19" Y="20"/>
-        <UsageCount Value="102"/>
+        <UsageCount Value="97"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit17>
       <Unit18>
         <Filename Value="Tools.pas"/>
-        <EditorIndex Value="19"/>
+        <EditorIndex Value="25"/>
         <WindowIndex Value="1"/>
         <TopLine Value="137"/>
         <CursorPos Y="151"/>
@@ -289,20 +296,20 @@
       </Unit18>
       <Unit19>
         <Filename Value="SelfCopied.pas"/>
-        <EditorIndex Value="-1"/>
+        <EditorIndex Value="2"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="18"/>
-        <CursorPos X="18" Y="40"/>
-        <UsageCount Value="128"/>
+        <TopLine Value="36"/>
+        <CursorPos X="45" Y="49"/>
+        <UsageCount Value="123"/>
+        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit19>
       <Unit20>
         <Filename Value="DataClasses.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="9"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="345"/>
-        <CursorPos X="19" Y="353"/>
+        <CursorPos X="25" Y="14"/>
         <UsageCount Value="207"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -316,7 +323,7 @@
       <Unit22>
         <Filename Value="DownhillSimplexContainer.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="6"/>
         <WindowIndex Value="1"/>
         <TopLine Value="145"/>
         <CursorPos X="13" Y="154"/>
@@ -329,8 +336,8 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="581"/>
-        <CursorPos X="45" Y="591"/>
+        <TopLine Value="147"/>
+        <CursorPos X="43" Y="160"/>
         <UsageCount Value="207"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit23>
@@ -351,7 +358,7 @@
       <Unit26>
         <Filename Value="AlgorithmContainer.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="8"/>
         <WindowIndex Value="1"/>
         <TopLine Value="33"/>
         <CursorPos X="28" Y="44"/>
@@ -362,8 +369,11 @@
       <Unit27>
         <Filename Value="ObjSavingStringList.pas"/>
         <IsPartOfProject Value="True"/>
-        <CursorPos X="49" Y="14"/>
+        <EditorIndex Value="10"/>
+        <WindowIndex Value="1"/>
+        <CursorPos X="16" Y="14"/>
         <UsageCount Value="207"/>
+        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit27>
       <Unit28>
@@ -372,7 +382,7 @@
         <ComponentName Value="InputMaxRFactorDlg"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="11"/>
+        <EditorIndex Value="17"/>
         <WindowIndex Value="1"/>
         <CursorPos X="11" Y="16"/>
         <UsageCount Value="200"/>
@@ -383,7 +393,7 @@
         <Filename Value="ComponentList.pas"/>
         <TopLine Value="206"/>
         <CursorPos Y="225"/>
-        <UsageCount Value="103"/>
+        <UsageCount Value="98"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit29>
       <Unit30>
@@ -396,7 +406,7 @@
       </Unit30>
       <Unit31>
         <Filename Value="TableComp.pas"/>
-        <EditorIndex Value="9"/>
+        <EditorIndex Value="15"/>
         <WindowIndex Value="1"/>
         <TopLine Value="440"/>
         <CursorPos X="42" Y="450"/>
@@ -406,23 +416,24 @@
       </Unit31>
       <Unit32>
         <Filename Value="NumericGrid.pas"/>
-        <UsageCount Value="96"/>
+        <UsageCount Value="91"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit32>
       <Unit33>
         <Filename Value="FitServer.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="-1"/>
+        <EditorIndex Value="11"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="2569"/>
-        <CursorPos X="29" Y="2555"/>
+        <TopLine Value="2110"/>
+        <CursorPos X="29" Y="2121"/>
         <UsageCount Value="200"/>
+        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit33>
       <Unit34>
         <Filename Value="FitClient.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="14"/>
+        <EditorIndex Value="20"/>
         <WindowIndex Value="1"/>
         <TopLine Value="1220"/>
         <CursorPos X="28" Y="1225"/>
@@ -451,7 +462,7 @@
       <Unit37>
         <Filename Value="FitServerStub.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="15"/>
+        <EditorIndex Value="21"/>
         <WindowIndex Value="1"/>
         <TopLine Value="403"/>
         <CursorPos X="33" Y="411"/>
@@ -471,11 +482,9 @@
       <Unit39>
         <Filename Value="FitClientProxy.pas"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="16"/>
+        <EditorIndex Value="22"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="101"/>
-        <CursorPos X="19" Y="111"/>
+        <CursorPos X="35" Y="137"/>
         <UsageCount Value="202"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -518,7 +527,7 @@
       <Unit44>
         <Filename Value="FitTask.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="7"/>
+        <EditorIndex Value="13"/>
         <WindowIndex Value="1"/>
         <TopLine Value="1303"/>
         <CursorPos Y="1312"/>
@@ -541,7 +550,7 @@
         <ComponentName Value="CreateSpecialCurveDlg"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="4"/>
         <WindowIndex Value="1"/>
         <CursorPos X="22" Y="12"/>
         <UsageCount Value="201"/>
@@ -551,9 +560,12 @@
       <Unit47>
         <Filename Value="Settings.pas"/>
         <IsPartOfProject Value="True"/>
-        <TopLine Value="2"/>
-        <CursorPos X="16" Y="21"/>
+        <EditorIndex Value="1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="203"/>
+        <CursorPos X="32" Y="216"/>
         <UsageCount Value="200"/>
+        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit47>
       <Unit48>
@@ -562,7 +574,7 @@
         <ComponentName Value="SpecialCurvePropDlg"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="20"/>
+        <EditorIndex Value="26"/>
         <WindowIndex Value="1"/>
         <CursorPos X="39"/>
         <UsageCount Value="203"/>
@@ -575,7 +587,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="753"/>
         <CursorPos X="21" Y="777"/>
-        <UsageCount Value="65"/>
+        <UsageCount Value="60"/>
         <DefaultSyntaxHighlighter Value="LFM"/>
       </Unit49>
       <Unit50>
@@ -617,12 +629,11 @@
       <Unit55>
         <Filename Value="Packages\FitGrids\NumericGrid.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <TopLine Value="25"/>
         <CursorPos Y="45"/>
         <UsageCount Value="201"/>
-        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit55>
       <Unit56>
@@ -677,13 +688,13 @@
         <Filename Value="D:\lazarus\fpc\2.2.0\source\rtl\inc\except.inc"/>
         <TopLine Value="192"/>
         <CursorPos Y="213"/>
-        <UsageCount Value="69"/>
+        <UsageCount Value="64"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit62>
       <Unit63>
         <Filename Value="CommonTypes.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="21"/>
+        <EditorIndex Value="27"/>
         <WindowIndex Value="1"/>
         <TopLine Value="14"/>
         <CursorPos X="19" Y="20"/>
@@ -695,21 +706,21 @@
         <Filename Value="D:\lazarus\fpc\2.2.0\source\rtl\objpas\classes\classesh.inc"/>
         <TopLine Value="379"/>
         <CursorPos X="3" Y="380"/>
-        <UsageCount Value="55"/>
+        <UsageCount Value="50"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit64>
       <Unit65>
         <Filename Value="D:\lazarus\fpc\2.2.0\source\rtl\win\wininc\redef.inc"/>
         <TopLine Value="173"/>
         <CursorPos X="78" Y="193"/>
-        <UsageCount Value="67"/>
+        <UsageCount Value="62"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit65>
       <Unit66>
         <Filename Value="D:\lazarus\fpc\2.2.0\source\rtl\inc\threadh.inc"/>
         <TopLine Value="121"/>
         <CursorPos X="30" Y="145"/>
-        <UsageCount Value="67"/>
+        <UsageCount Value="62"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit66>
       <Unit67>
@@ -718,7 +729,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="2158"/>
         <CursorPos Y="2169"/>
-        <UsageCount Value="26"/>
+        <UsageCount Value="21"/>
       </Unit67>
       <Unit68>
         <Filename Value="C:\lazarus\lcl\include\customform.inc"/>
@@ -726,7 +737,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="1939"/>
         <CursorPos Y="1951"/>
-        <UsageCount Value="26"/>
+        <UsageCount Value="21"/>
       </Unit68>
       <Unit69>
         <Filename Value="C:\lazarus\lcl\lresources.pp"/>
@@ -735,7 +746,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="2690"/>
         <CursorPos Y="2708"/>
-        <UsageCount Value="26"/>
+        <UsageCount Value="21"/>
       </Unit69>
       <Unit70>
         <Filename Value="C:\lazarus\ide\main.pp"/>
@@ -744,67 +755,81 @@
         <WindowIndex Value="1"/>
         <TopLine Value="12750"/>
         <CursorPos Y="12788"/>
-        <UsageCount Value="21"/>
+        <UsageCount Value="16"/>
       </Unit70>
       <Unit71>
         <Filename Value="C:\lazarus\lcl\include\control.inc"/>
-        <EditorIndex Value="8"/>
+        <EditorIndex Value="14"/>
         <WindowIndex Value="1"/>
         <TopLine Value="3656"/>
         <CursorPos Y="3667"/>
-        <UsageCount Value="45"/>
+        <UsageCount Value="68"/>
         <Loaded Value="True"/>
       </Unit71>
       <Unit72>
-        <Filename Value="C:\lazarus\fpc\2.6.2\source\rtl\objpas\classes\compon.inc"/>
-        <EditorIndex Value="-1"/>
-        <WindowIndex Value="1"/>
-        <UsageCount Value="2"/>
-      </Unit72>
-      <Unit73>
-        <Filename Value="C:\lazarus\fpc\2.6.2\source\rtl\objpas\classes\reader.inc"/>
-        <EditorIndex Value="-1"/>
-        <WindowIndex Value="1"/>
-        <UsageCount Value="2"/>
-      </Unit73>
-      <Unit74>
         <Filename Value="C:\lazarus\lcl\include\customnotebook.inc"/>
         <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <TopLine Value="891"/>
         <CursorPos X="21" Y="891"/>
-        <UsageCount Value="14"/>
-      </Unit74>
-      <Unit75>
+        <UsageCount Value="9"/>
+      </Unit72>
+      <Unit73>
         <Filename Value="fit_server.pas"/>
         <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <TopLine Value="16"/>
         <CursorPos X="13" Y="32"/>
-        <UsageCount Value="13"/>
+        <UsageCount Value="8"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
-      </Unit75>
-      <Unit76>
+      </Unit73>
+      <Unit74>
         <Filename Value="C:\lazarus\packager\registration\fcllaz.pas"/>
         <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
-        <UsageCount Value="13"/>
-      </Unit76>
-      <Unit77>
+        <UsageCount Value="8"/>
+      </Unit74>
+      <Unit75>
         <Filename Value="C:\lazarus\fpc\2.6.4\source\rtl\objpas\classes\classesh.inc"/>
         <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <TopLine Value="332"/>
         <CursorPos X="15" Y="349"/>
-        <UsageCount Value="105"/>
-      </Unit77>
-      <Unit78>
+        <UsageCount Value="100"/>
+      </Unit75>
+      <Unit76>
         <Filename Value="C:\lazarus\ide\lazarus.pp"/>
         <UnitName Value="Lazarus"/>
         <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
-        <UsageCount Value="5"/>
+        <UsageCount Value="10"/>
+      </Unit76>
+      <Unit77>
+        <Filename Value="E:\04 - morozov\my\appsoft\science\institute\software\Lazarus\IntegralIntensities\Packages\FitMinimizers\DownhillSimplexAlgorithm.pas"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="145"/>
+        <CursorPos X="28" Y="163"/>
+        <UsageCount Value="32"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit77>
+      <Unit78>
+        <Filename Value="E:\04 - morozov\my\appsoft\science\institute\software\Lazarus\IntegralIntensities\Packages\FitMinimizers\ComponentList.pas"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <CursorPos X="64" Y="8"/>
+        <UsageCount Value="12"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit78>
+      <Unit79>
+        <Filename Value="E:\04 - morozov\my\appsoft\science\institute\software\Lazarus\IntegralIntensities\Packages\FitMinimizers\Tools.pas"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="4"/>
+        <CursorPos X="42" Y="13"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit79>
     </Units>
     <CustomDefines Count="5">
       <Define0 Value="FIT"/>
@@ -813,118 +838,126 @@
       <Define3 Value="WINDOWS"/>
       <Define4 Value="Lazarus"/>
     </CustomDefines>
-    <JumpHistory Count="29" HistoryIndex="28">
+    <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="FitTask.pas"/>
-        <Caret Line="829" TopLine="809"/>
+        <Filename Value="AlgorithmContainer.pas"/>
       </Position1>
       <Position2>
-        <Filename Value="FitTask.pas"/>
-        <Caret Line="1312" TopLine="1303"/>
-      </Position2>
-      <Position3>
-        <Filename Value="DataLoader.pas"/>
-        <Caret Line="1530" TopLine="1522"/>
-      </Position3>
-      <Position4>
-        <Filename Value="DataLoader.pas"/>
-        <Caret Line="1608" Column="5" TopLine="1597"/>
-      </Position4>
-      <Position5>
-        <Filename Value="Packages\FitGrids\NumericGrid.pas"/>
-        <Caret Line="597" Column="47" TopLine="584"/>
-      </Position5>
-      <Position6>
-        <Filename Value="Packages\FitGrids\NumericGrid.pas"/>
-        <Caret Line="20" TopLine="10"/>
-      </Position6>
-      <Position7>
-        <Filename Value="Packages\FitGrids\NumericGrid.pas"/>
-        <Caret Line="427" Column="39" TopLine="416"/>
-      </Position7>
-      <Position8>
-        <Filename Value="TableComp.pas"/>
-        <Caret Line="448" Column="32" TopLine="443"/>
-      </Position8>
-      <Position9>
-        <Filename Value="TableComp.pas"/>
-        <Caret Line="450" Column="55" TopLine="440"/>
-      </Position9>
-      <Position10>
-        <Filename Value="Packages\FitGrids\NumericGrid.pas"/>
-        <Caret Line="129" Column="5" TopLine="118"/>
-      </Position10>
-      <Position11>
-        <Filename Value="Packages\FitGrids\NumericGrid.pas"/>
-        <Caret Line="131" Column="32" TopLine="118"/>
-      </Position11>
-      <Position12>
-        <Filename Value="Packages\FitGrids\NumericGrid.pas"/>
-        <Caret Line="1670" Column="39" TopLine="1652"/>
-      </Position12>
-      <Position13>
-        <Filename Value="Packages\FitGrids\NumericGrid.pas"/>
-        <Caret Line="1815" Column="40" TopLine="1810"/>
-      </Position13>
-      <Position14>
-        <Filename Value="Packages\FitGrids\NumericGrid.pas"/>
-      </Position14>
-      <Position15>
-        <Filename Value="Packages\FitGrids\NumericGrid.pas"/>
-      </Position15>
-      <Position16>
-        <Filename Value="DataClasses.pas"/>
-      </Position16>
-      <Position17>
-        <Filename Value="Packages\FitGrids\NumericGrid.pas"/>
-        <Caret Line="154" Column="41" TopLine="144"/>
-      </Position17>
-      <Position18>
-        <Filename Value="Packages\FitGrids\NumericGrid.pas"/>
-      </Position18>
-      <Position19>
-        <Filename Value="AlgorithmContainer.pas"/>
-      </Position19>
-      <Position20>
         <Filename Value="DownhillSimplexContainer.pas"/>
         <Caret Line="383" Column="108" TopLine="368"/>
-      </Position20>
-      <Position21>
+      </Position2>
+      <Position3>
         <Filename Value="DataClasses.pas"/>
         <Caret Line="356" Column="15" TopLine="345"/>
-      </Position21>
-      <Position22>
+      </Position3>
+      <Position4>
         <Filename Value="DataClasses.pas"/>
         <Caret Line="353" Column="19" TopLine="345"/>
-      </Position22>
-      <Position23>
-        <Filename Value="Packages\FitGrids\NumericGrid.pas"/>
-        <Caret Line="1250" TopLine="1211"/>
-      </Position23>
-      <Position24>
-        <Filename Value="Packages\FitGrids\NumericGrid.pas"/>
-        <Caret Line="45" TopLine="25"/>
-      </Position24>
-      <Position25>
+      </Position4>
+      <Position5>
         <Filename Value="CommonTypes.pas"/>
         <Caret Line="30" Column="9" TopLine="2"/>
-      </Position25>
-      <Position26>
+      </Position5>
+      <Position6>
         <Filename Value="CommonTypes.pas"/>
         <Caret Line="20" Column="19" TopLine="14"/>
-      </Position26>
-      <Position27>
+      </Position6>
+      <Position7>
         <Filename Value="Unit1.pas"/>
         <Caret Line="761" Column="33" TopLine="757"/>
-      </Position27>
-      <Position28>
+      </Position7>
+      <Position8>
         <Filename Value="FitClient.pas"/>
         <Caret Line="1225" Column="28" TopLine="1220"/>
-      </Position28>
-      <Position29>
+      </Position8>
+      <Position9>
         <Filename Value="FitClientProxy.pas"/>
         <Caret Line="111" Column="19" TopLine="102"/>
+      </Position9>
+      <Position10>
+        <Filename Value="Minimizer.pas"/>
+        <Caret Line="74" Column="19" TopLine="52"/>
+      </Position10>
+      <Position11>
+        <Filename Value="SelfCopied.pas"/>
+        <Caret Line="40" Column="18" TopLine="18"/>
+      </Position11>
+      <Position12>
+        <Filename Value="SelfCopied.pas"/>
+        <Caret Line="18" Column="14" TopLine="5"/>
+      </Position12>
+      <Position13>
+        <Filename Value="MSCRDataClasses.pas"/>
+        <Caret Line="25" Column="5" TopLine="11"/>
+      </Position13>
+      <Position14>
+        <Filename Value="DataClasses.pas"/>
+        <Caret Line="353" Column="19" TopLine="340"/>
+      </Position14>
+      <Position15>
+        <Filename Value="ObjSavingStringList.pas"/>
+        <Caret Line="14" Column="49"/>
+      </Position15>
+      <Position16>
+        <Filename Value="FitServer.pas"/>
+        <Caret Line="2555" Column="29" TopLine="2568"/>
+      </Position16>
+      <Position17>
+        <Filename Value="Minimizer_S.pas"/>
+        <Caret Line="134" Column="23" TopLine="103"/>
+      </Position17>
+      <Position18>
+        <Filename Value="Minimizer_DS.pas"/>
+        <Caret Line="172" Column="35" TopLine="155"/>
+      </Position18>
+      <Position19>
+        <Filename Value="FitServer.pas"/>
+        <Caret Line="35" Column="38" TopLine="22"/>
+      </Position19>
+      <Position20>
+        <Filename Value="PointSetViewer.pas"/>
+        <Caret Line="408" Column="26" TopLine="377"/>
+      </Position20>
+      <Position21>
+        <Filename Value="PointSetViewer.pas"/>
+        <Caret Line="19" Column="32" TopLine="6"/>
+      </Position21>
+      <Position22>
+        <Filename Value="Unit1.pas"/>
+        <Caret Line="761" Column="33" TopLine="757"/>
+      </Position22>
+      <Position23>
+        <Filename Value="Settings.pas"/>
+        <Caret Line="21" Column="16" TopLine="2"/>
+      </Position23>
+      <Position24>
+        <Filename Value="Settings.pas"/>
+        <Caret Line="12" Column="28"/>
+      </Position24>
+      <Position25>
+        <Filename Value="Settings.pas"/>
+        <Caret Line="57" Column="34" TopLine="44"/>
+      </Position25>
+      <Position26>
+        <Filename Value="Settings.pas"/>
+        <Caret Line="69" Column="43" TopLine="57"/>
+      </Position26>
+      <Position27>
+        <Filename Value="Settings.pas"/>
+        <Caret Line="197" Column="32" TopLine="184"/>
+      </Position27>
+      <Position28>
+        <Filename Value="PointSetViewer.pas"/>
+        <Caret Line="57" Column="36" TopLine="45"/>
+      </Position28>
+      <Position29>
+        <Filename Value="FitServer.pas"/>
+        <Caret Line="132" Column="31" TopLine="119"/>
       </Position29>
+      <Position30>
+        <Filename Value="Fit.lpr"/>
+        <Caret Line="24" Column="3"/>
+      </Position30>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
@@ -964,7 +997,7 @@
     </Other>
   </CompilerOptions>
   <Debugging>
-    <BreakPoints Count="6">
+    <BreakPoints Count="7">
       <Item1>
         <Kind Value="bpkSource"/>
         <WatchScope Value="wpsLocal"/>
@@ -1007,6 +1040,13 @@
         <Source Value="TableComp.pas"/>
         <Line Value="450"/>
       </Item6>
+      <Item7>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="SelfCopied.pas"/>
+        <Line Value="18"/>
+      </Item7>
     </BreakPoints>
     <Watches Count="4">
       <Item1>

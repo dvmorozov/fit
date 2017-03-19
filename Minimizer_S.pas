@@ -10,7 +10,7 @@ unit Minimizer_S;
 
 interface
 
-uses Minimizer, MSCRDataClasses, ComponentList, Classes, SysUtils (* ??? *)(*, Windows  ??? *);
+uses Minimizer, MSCRDataClasses, SelfCheckedComponentList, Classes, SysUtils (* ??? *)(*, Windows  ??? *);
 
 type
     //  realizuet prostoy algoritm pokoordinatnogo spuska

@@ -10,7 +10,7 @@ unit Minimizer_DS;
 
 interface
 
-uses Minimizer, MSCRDataClasses, ComponentList, Classes,
+uses Minimizer, MSCRDataClasses, SelfCheckedComponentList, Classes,
     DownhillSimplexContainer, Tools, Algorithm, DownhillSimplexAlgorithm(*,
     Windows  ??? *);
 

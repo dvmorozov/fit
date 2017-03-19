@@ -15,7 +15,7 @@ unit SelfCopied;
 interface
 
 uses
-    Classes, ComponentList, SysUtils, CBRCComponent, MyExceptions;
+    Classes, SelfCheckedComponentList, SysUtils, CBRCComponent, MyExceptions;
 
 type
     ISelfCopied = interface
@@ -46,7 +46,7 @@ type
 
     ESelfCopiedCompList = class(Exception);
 
-    TSelfCopiedCompList = class(TComponentList, ISelfCopied)
+    TSelfCopiedCompList = class(TSelfCheckedComponentList, ISelfCopied)
         //  !!! по умолчанию список всегда активен, поэтому копия списка
         //  всегда находтся в активном состоянии; при необходимости объект,
         //  которому нужна копия должен сам сделать список неактивным !!!

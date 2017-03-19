@@ -28,7 +28,7 @@ uses
   FitServerStub, FitServerProxy, FitClientApp, FitServerApp,
   DataClasses, FitServerWithThread, FitTask, 
   FitServerMultithreaded, Unit2, Settings, Unit7, TurboPowerIPro,
-  FitGrids, Tools, CBRCComponent, ClassInheritIDs, ComponentList,
+  FitGrids, Tools, CBRCComponent, ClassInheritIDs, SelfCheckedComponentList,
   MyExceptions, NumericGrid, SelfCopied, SelfSaved, SimpMath, TableComp,
   TAGraph, FitTaskWithThread, StrUtils
 {$ifdef windows}

@@ -4,7 +4,7 @@ unit MSCRDataClasses;
 
 interface
 
-uses Classes, ComponentList, Grids, SysUtils, NumericGrid, SimpMath,
+uses Classes, SelfCheckedComponentList, Grids, SysUtils, NumericGrid, SimpMath,
      Tools, TableComp, DataClasses, DataLoader;
 
 const

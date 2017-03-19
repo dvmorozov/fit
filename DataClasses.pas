@@ -11,7 +11,7 @@ unit DataClasses;
 interface
 
 uses
-    Classes, ComponentList, Grids, SysUtils, NumericGrid, SimpMath,
+    Classes, SelfCheckedComponentList, Grids, SysUtils, NumericGrid, SimpMath,
     Math3d, Tools, TableComp, DownhillSimplexContainer, SelfCopied,
     ObjSavingStringList, Graphics, DataLoader;
 

@@ -9,7 +9,7 @@ interface
 
 uses
     Classes, SysUtils, LCLProc, Laz_XMLStreaming, Laz_DOM, Laz_XMLCfg, TypInfo,
-    DataLoader, ComponentList;
+    DataLoader, SelfCheckedComponentList;
 
 type
     //  klass, sohranyayuschiy svoystva matematicheskogo vyrazheniya
@@ -54,7 +54,7 @@ type
     //  chto mogut byt' i drugie sohranyaemye parametry
     Settings_v1 = class(TComponent)
     private
-        FCurveTypes: TComponentList;
+        FCurveTypes: TSelfCheckedComponentList;
         FReserved: LongInt;
         
         procedure ReadCurveTypes(Reader: TReader);
@@ -66,7 +66,7 @@ type
         //  !!! ne rabotaet s XML-potokami !!!
         procedure DefineProperties(Filer: TFiler); override;
 
-        property Curve_types: TComponentList read FCurveTypes write FCurveTypes;
+        property Curve_types: TSelfCheckedComponentList read FCurveTypes write FCurveTypes;
         
     published
         //  !!! bez etogo pri chtenii voznikaet isklyuchenie !!!
@@ -194,7 +194,7 @@ end;
 constructor Settings_v1.Create(Owner: TComponent);
 begin
     inherited Create(Owner);
-    FCurveTypes := TComponentList.Create(nil);
+    FCurveTypes := TSelfCheckedComponentList.Create(nil);
     FReserved := -1;
 end;
 
@@ -213,7 +213,7 @@ end;
 procedure Settings_v1.ReadCurveTypes(Reader: TReader);
 begin
     FCurveTypes.Free;
-    FCurveTypes := TComponentList(Reader.ReadComponent);
+    FCurveTypes := TSelfCheckedComponentList(Reader.ReadComponent);
 end;
 
 procedure Settings_v1.WriteCurveTypes(Writer: TWriter);

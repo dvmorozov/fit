@@ -16,7 +16,7 @@ uses DataLoader, Classes, SysUtils, Graphics, SelfCopied, CheckLst,
     // TFitClient i TFitViewer v TFitClient ???
     FitClient,
 {$ENDIF}
-    tagraph, Forms, ComponentList, MSCRDataClasses;
+    tagraph, Forms, SelfCheckedComponentList, MSCRDataClasses;
 
 {$IFNDEF SERVER}
 {$DEFINE USE_LEGEND}
@@ -54,7 +54,7 @@ type
         //  !!! spisok passivnyy - soderzhit ukazateli na vneshnie dannye !!!
 
     protected
-        PointsSetList: TComponentList;
+        PointsSetList: TSelfCheckedComponentList;
 {$IFDEF USE_GRIDS}
         procedure FillDatasheetTable(
             Profile: TTitlePointsSet;
@@ -658,7 +658,7 @@ end;
 constructor TFitViewer.Create(AOwner: TComponent);
 begin
     inherited Create(AOwner);
-    PointsSetList := TComponentList.Create(nil);
+    PointsSetList := TSelfCheckedComponentList.Create(nil);
     PointsSetList.SetState(cfPassive);
     FXCoordMode := 0;
 end;

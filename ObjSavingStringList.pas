@@ -11,7 +11,7 @@ unit ObjSavingStringList;
 interface
 
 uses
-    ComponentList, SelfCopied, SysUtils, Classes;
+    SelfCheckedComponentList, SelfCopied, SysUtils, Classes;
 
 type
     TObjSavingStringList = class(TSelfCopiedCompList)

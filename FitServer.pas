@@ -32,7 +32,7 @@ unit FitServer;
 
 interface
 
-uses Classes, DataLoader, ComponentList, SysUtils, MSCRDataClasses,
+uses Classes, DataLoader, SelfCheckedComponentList, SysUtils, MSCRDataClasses,
      Dialogs,
 {$IFDEF FIT}
      // obratnaya svyaz' est' tol'ko v monolitnom prilozhenii
@@ -129,7 +129,7 @@ type
         //  ispol'zuyutsya libo dannye vybrannoy oblasti, libo dannye
         //  polnogo profilya
         FSelectedAreaMode: Boolean;
-        TaskList: TComponentList;   //  po-umolchaniyu spisok aktivnyy
+        TaskList: TSelfCheckedComponentList;   //  po-umolchaniyu spisok aktivnyy
         //  parametry pol'zovatel'skoy krivoy;
         //  ob'ekt sozdaetsya serverom; nuzhen dlya obespecheniya
         //  vozmozhnosti redaktirovaniya parametrov v kliente
@@ -2118,7 +2118,7 @@ begin
     CurvePositions.Sort;        //  !!! to zhe samoe !!!
     
     TaskList.Free; TaskList := nil;
-    TaskList := TComponentList.Create(nil);
+    TaskList := TSelfCheckedComponentList.Create(nil);
 
     //  sozdanie i zapolnenie podzadach
     //  odna podzadacha sozdaetsya dazhe kogda intervaly ne opredeleny;

@@ -1,0 +1,6 @@
+inherited CGIDatamodule2: TCGIDatamodule2
+  Height = 240
+  HorizontalOffset = 12
+  VerticalOffset = 119
+  Width = 320
+end

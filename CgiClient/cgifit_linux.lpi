@@ -1,0 +1,578 @@
+<?xml version="1.0"?>
+<CONFIG>
+  <ProjectOptions>
+    <PathDelim Value="/"/>
+    <Version Value="6"/>
+    <General>
+      <MainUnit Value="0"/>
+      <IconPath Value="./"/>
+      <TargetFileExt Value=".exe"/>
+      <Title Value="cgifit"/>
+      <UseAppBundle Value="False"/>
+      <ActiveEditorIndexAtStart Value="15"/>
+    </General>
+    <VersionInfo>
+      <ProjectVersion Value=""/>
+    </VersionInfo>
+    <PublishOptions>
+      <Version Value="2"/>
+      <IgnoreBinaries Value="False"/>
+      <IncludeFileFilter Value="*.(pas|pp|inc|lfm|lpr|lrs|lpi|lpk|sh|xml)"/>
+      <ExcludeFileFilter Value="*.(bak|ppu|ppw|o|so);*~;backup"/>
+    </PublishOptions>
+    <RunParams>
+      <local>
+        <FormatVersion Value="1"/>
+        <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
+      </local>
+    </RunParams>
+    <RequiredPackages Count="3">
+      <Item1>
+        <PackageName Value="LCL"/>
+        <MinVersion Major="1" Valid="True"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="CGILaz"/>
+      </Item2>
+      <Item3>
+        <PackageName Value="TA_LINUX"/>
+      </Item3>
+    </RequiredPackages>
+    <Units Count="55">
+      <Unit0>
+        <Filename Value="cgifit_linux.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="cgifit_linux"/>
+        <CursorPos X="44" Y="28"/>
+        <TopLine Value="9"/>
+        <EditorIndex Value="0"/>
+        <UsageCount Value="200"/>
+        <Loaded Value="True"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="E:/lazarus/components/cgi/cgimodules.pas"/>
+        <ComponentName Value="CGIDatamodule"/>
+        <HasResources Value="True"/>
+        <UnitName Value="cgiModules"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="10"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="Unit2.pas"/>
+        <ComponentName Value="CGIDatamodule2"/>
+        <IsPartOfProject Value="True"/>
+        <ResourceFilename Value="Unit2.lrs"/>
+        <UnitName Value="Unit2"/>
+        <CursorPos X="38" Y="2684"/>
+        <TopLine Value="4194"/>
+        <EditorIndex Value="2"/>
+        <UsageCount Value="202"/>
+        <Loaded Value="True"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="data.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="data"/>
+        <CursorPos X="26" Y="50"/>
+        <TopLine Value="28"/>
+        <EditorIndex Value="12"/>
+        <UsageCount Value="203"/>
+        <Loaded Value="True"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="background.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="background"/>
+        <CursorPos X="27" Y="54"/>
+        <TopLine Value="41"/>
+        <EditorIndex Value="9"/>
+        <UsageCount Value="200"/>
+        <Loaded Value="True"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="background_more.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="background_more"/>
+        <CursorPos X="1" Y="20"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="10"/>
+        <UsageCount Value="200"/>
+        <Loaded Value="True"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="project_files_empty.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="project_files_empty"/>
+        <CursorPos X="1" Y="26"/>
+        <TopLine Value="7"/>
+        <EditorIndex Value="25"/>
+        <UsageCount Value="202"/>
+        <Loaded Value="True"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="pattern_more.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="pattern_more"/>
+        <CursorPos X="5" Y="23"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="8"/>
+        <UsageCount Value="205"/>
+        <Loaded Value="True"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="specimen_parameters_file.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="specimen_parameters_file"/>
+        <CursorPos X="21" Y="12"/>
+        <TopLine Value="3"/>
+        <EditorIndex Value="17"/>
+        <UsageCount Value="205"/>
+        <Loaded Value="True"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="specimen_intervals.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="specimen_intervals"/>
+        <CursorPos X="22" Y="53"/>
+        <TopLine Value="23"/>
+        <EditorIndex Value="13"/>
+        <UsageCount Value="202"/>
+        <Loaded Value="True"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="gen_spec_int_progress.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="gen_spec_int_progress"/>
+        <CursorPos X="31" Y="29"/>
+        <TopLine Value="3"/>
+        <EditorIndex Value="32"/>
+        <UsageCount Value="202"/>
+        <Loaded Value="True"/>
+      </Unit10>
+      <Unit11>
+        <Filename Value="cgimodules.pas"/>
+        <ComponentName Value="CGIDatamodule"/>
+        <HasResources Value="True"/>
+        <IsPartOfProject Value="True"/>
+        <ResourceFilename Value="cgimodules.lrs"/>
+        <UnitName Value="cgiModules"/>
+        <CursorPos X="86" Y="136"/>
+        <TopLine Value="119"/>
+        <EditorIndex Value="1"/>
+        <UsageCount Value="207"/>
+        <Loaded Value="True"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="start.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="start"/>
+        <CursorPos X="15" Y="195"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="11"/>
+        <UsageCount Value="207"/>
+        <Loaded Value="True"/>
+      </Unit12>
+      <Unit13>
+        <Filename Value="error.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="error"/>
+        <CursorPos X="23" Y="27"/>
+        <TopLine Value="7"/>
+        <EditorIndex Value="5"/>
+        <UsageCount Value="207"/>
+        <Loaded Value="True"/>
+      </Unit13>
+      <Unit14>
+        <Filename Value="../fit_server_proxy.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="fit_server_proxy"/>
+        <CursorPos X="22" Y="1104"/>
+        <TopLine Value="1091"/>
+        <EditorIndex Value="37"/>
+        <UsageCount Value="202"/>
+        <Loaded Value="True"/>
+      </Unit14>
+      <Unit15>
+        <Filename Value="../DataLoader.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="DataLoader"/>
+        <CursorPos X="15" Y="1370"/>
+        <TopLine Value="1355"/>
+        <EditorIndex Value="14"/>
+        <UsageCount Value="201"/>
+        <Loaded Value="True"/>
+      </Unit15>
+      <Unit16>
+        <Filename Value="../FitClientProxy.pas"/>
+        <UnitName Value="FitClientProxy"/>
+        <CursorPos X="19" Y="129"/>
+        <TopLine Value="109"/>
+        <EditorIndex Value="34"/>
+        <UsageCount Value="112"/>
+        <Loaded Value="True"/>
+      </Unit16>
+      <Unit17>
+        <Filename Value="../Main.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Main"/>
+        <CursorPos X="41" Y="266"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="15"/>
+        <UsageCount Value="205"/>
+        <Loaded Value="True"/>
+      </Unit17>
+      <Unit18>
+        <Filename Value="../PointSetViewer.pas"/>
+        <UnitName Value="PointSetViewer"/>
+        <CursorPos X="25" Y="36"/>
+        <TopLine Value="18"/>
+        <UsageCount Value="7"/>
+      </Unit18>
+      <Unit19>
+        <Filename Value="../Packages/VariousGrids/SelfCopied.pas"/>
+        <UnitName Value="SelfCopied"/>
+        <CursorPos X="3" Y="2"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="93"/>
+      </Unit19>
+      <Unit20>
+        <Filename Value="../CommonTypes.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="CommonTypes"/>
+        <CursorPos X="65" Y="22"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="36"/>
+        <UsageCount Value="203"/>
+        <Loaded Value="True"/>
+      </Unit20>
+      <Unit21>
+        <Filename Value="specimen_positions.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="specimen_positions"/>
+        <CursorPos X="94" Y="62"/>
+        <TopLine Value="43"/>
+        <EditorIndex Value="18"/>
+        <UsageCount Value="202"/>
+        <Loaded Value="True"/>
+      </Unit21>
+      <Unit22>
+        <Filename Value="../MSCRDataClasses.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="MSCRDataClasses"/>
+        <CursorPos X="21" Y="58"/>
+        <TopLine Value="46"/>
+        <EditorIndex Value="38"/>
+        <UsageCount Value="201"/>
+        <Loaded Value="True"/>
+      </Unit22>
+      <Unit23>
+        <Filename Value="fitting.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="fitting"/>
+        <CursorPos X="40" Y="23"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="21"/>
+        <UsageCount Value="201"/>
+        <Loaded Value="True"/>
+      </Unit23>
+      <Unit24>
+        <Filename Value="lazarus/fpc/2.2.0/source/rtl/objpas/sysutils/osutilsh.inc"/>
+        <CursorPos X="25" Y="36"/>
+        <TopLine Value="22"/>
+        <UsageCount Value="10"/>
+      </Unit24>
+      <Unit25>
+        <Filename Value="fitting_process.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="fitting_process"/>
+        <CursorPos X="28" Y="9"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="22"/>
+        <UsageCount Value="200"/>
+        <Loaded Value="True"/>
+      </Unit25>
+      <Unit26>
+        <Filename Value="../Packages/VariousGrids/SimpMath.pas"/>
+        <UnitName Value="SimpMath"/>
+        <CursorPos X="28" Y="113"/>
+        <TopLine Value="95"/>
+        <EditorIndex Value="29"/>
+        <UsageCount Value="93"/>
+        <Loaded Value="True"/>
+      </Unit26>
+      <Unit27>
+        <Filename Value="gen_spec_pos_progress.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="gen_spec_pos_progress"/>
+        <CursorPos X="11" Y="16"/>
+        <TopLine Value="3"/>
+        <EditorIndex Value="31"/>
+        <UsageCount Value="204"/>
+        <Loaded Value="True"/>
+      </Unit27>
+      <Unit28>
+        <Filename Value="gen_back_progress.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="gen_back_progress"/>
+        <CursorPos X="60" Y="27"/>
+        <TopLine Value="3"/>
+        <EditorIndex Value="33"/>
+        <UsageCount Value="204"/>
+        <Loaded Value="True"/>
+      </Unit28>
+      <Unit29>
+        <Filename Value="fitting_progress.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="fitting_progress"/>
+        <CursorPos X="28" Y="9"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="23"/>
+        <UsageCount Value="204"/>
+        <Loaded Value="True"/>
+      </Unit29>
+      <Unit30>
+        <Filename Value="registration_free.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="registration_free"/>
+        <CursorPos X="18" Y="12"/>
+        <TopLine Value="6"/>
+        <EditorIndex Value="30"/>
+        <UsageCount Value="212"/>
+        <Loaded Value="True"/>
+      </Unit30>
+      <Unit31>
+        <Filename Value="E:/lazarus/fpc/2.2.0/source/rtl/inc/systemh.inc"/>
+        <CursorPos X="3" Y="379"/>
+        <TopLine Value="359"/>
+        <UsageCount Value="10"/>
+      </Unit31>
+      <Unit32>
+        <Filename Value="E:/lazarus/fpc/2.2.0/source/rtl/objpas/sysutils/filutilh.inc"/>
+        <CursorPos X="3" Y="17"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="11"/>
+      </Unit32>
+      <Unit33>
+        <Filename Value="E:/lazarus/fpc/2.2.0/source/rtl/objpas/sysutils/sysutilh.inc"/>
+        <CursorPos X="4" Y="36"/>
+        <TopLine Value="16"/>
+        <UsageCount Value="10"/>
+      </Unit33>
+      <Unit34>
+        <Filename Value="Settings.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Settings"/>
+        <CursorPos X="45" Y="8"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="27"/>
+        <UsageCount Value="201"/>
+        <Loaded Value="True"/>
+      </Unit34>
+      <Unit35>
+        <Filename Value="E:/lazarus/fpc/2.2.0/source/packages/fcl-base/src/inc/custapp.pp"/>
+        <UnitName Value="CustApp"/>
+        <CursorPos X="26" Y="57"/>
+        <TopLine Value="46"/>
+        <UsageCount Value="10"/>
+      </Unit35>
+      <Unit36>
+        <Filename Value="projects_empty.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="projects_empty"/>
+        <CursorPos X="1" Y="26"/>
+        <TopLine Value="2"/>
+        <EditorIndex Value="19"/>
+        <UsageCount Value="200"/>
+        <Loaded Value="True"/>
+      </Unit36>
+      <Unit37>
+        <Filename Value="file_results_empty.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="file_results_empty"/>
+        <CursorPos X="20" Y="19"/>
+        <TopLine Value="2"/>
+        <EditorIndex Value="20"/>
+        <UsageCount Value="201"/>
+        <Loaded Value="True"/>
+      </Unit37>
+      <Unit38>
+        <Filename Value="../Unit2.pas"/>
+        <ComponentName Value="CreateSpecialCurveDlg"/>
+        <HasResources Value="True"/>
+        <UnitName Value="Unit2"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="5"/>
+      </Unit38>
+      <Unit39>
+        <Filename Value="GeneralHashFunctions.pas"/>
+        <UnitName Value="GeneralHashfunctions"/>
+        <CursorPos X="45" Y="18"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="106"/>
+      </Unit39>
+      <Unit40>
+        <Filename Value="pattern.htm"/>
+        <UsageCount Value="7"/>
+        <SyntaxHighlighter Value="Text"/>
+      </Unit40>
+      <Unit41>
+        <Filename Value="pattern.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="pattern"/>
+        <CursorPos X="1" Y="11"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="7"/>
+        <UsageCount Value="200"/>
+        <Loaded Value="True"/>
+      </Unit41>
+      <Unit42>
+        <Filename Value="projects.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="projects"/>
+        <CursorPos X="12" Y="31"/>
+        <TopLine Value="11"/>
+        <EditorIndex Value="26"/>
+        <UsageCount Value="200"/>
+        <Loaded Value="True"/>
+      </Unit42>
+      <Unit43>
+        <Filename Value="specimen_parameters.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="specimen_parameters"/>
+        <CursorPos X="1" Y="38"/>
+        <TopLine Value="6"/>
+        <EditorIndex Value="16"/>
+        <UsageCount Value="200"/>
+        <Loaded Value="True"/>
+      </Unit43>
+      <Unit44>
+        <Filename Value="project_files.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="project_files"/>
+        <CursorPos X="37" Y="25"/>
+        <TopLine Value="11"/>
+        <EditorIndex Value="24"/>
+        <UsageCount Value="201"/>
+        <Loaded Value="True"/>
+      </Unit44>
+      <Unit45>
+        <Filename Value="../GeneralHashFunctions.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="GeneralHashFunctions"/>
+        <UsageCount Value="166"/>
+        <SyntaxHighlighter Value="Text"/>
+      </Unit45>
+      <Unit46>
+        <Filename Value="E:/lazarus_lib/wst-0.5/binary_streamer.pas"/>
+        <UnitName Value="binary_streamer"/>
+        <CursorPos X="10" Y="505"/>
+        <TopLine Value="483"/>
+        <UsageCount Value="6"/>
+      </Unit46>
+      <Unit47>
+        <Filename Value="file_results.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="file_results"/>
+        <CursorPos X="28" Y="24"/>
+        <TopLine Value="6"/>
+        <EditorIndex Value="6"/>
+        <UsageCount Value="93"/>
+        <Loaded Value="True"/>
+      </Unit47>
+      <Unit48>
+        <Filename Value="../fit_server.pas"/>
+        <UnitName Value="fit_server"/>
+        <CursorPos X="27" Y="246"/>
+        <TopLine Value="226"/>
+        <EditorIndex Value="35"/>
+        <UsageCount Value="17"/>
+        <Loaded Value="True"/>
+      </Unit48>
+      <Unit49>
+        <Filename Value="registration.pas"/>
+        <UnitName Value="registration"/>
+        <CursorPos X="18" Y="16"/>
+        <TopLine Value="6"/>
+        <UsageCount Value="10"/>
+      </Unit49>
+      <Unit50>
+        <Filename Value="E:/lazarus/fpc/2.2.0/source/rtl/win/wininc/func.inc"/>
+        <CursorPos X="10" Y="216"/>
+        <TopLine Value="196"/>
+        <UsageCount Value="13"/>
+      </Unit50>
+      <Unit51>
+        <Filename Value="../DataClasses.pas"/>
+        <UnitName Value="DataClasses"/>
+        <CursorPos X="11" Y="15"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="3"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit51>
+      <Unit52>
+        <Filename Value="../Math3d.pas"/>
+        <UnitName Value="Math3d"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="4"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit52>
+      <Unit53>
+        <Filename Value="../Packages/TAGraph/Component/TAGraph.pas"/>
+        <UnitName Value="TAGraph"/>
+        <CursorPos X="14" Y="2767"/>
+        <TopLine Value="2749"/>
+        <EditorIndex Value="28"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit53>
+      <Unit54>
+        <Filename Value="../../../../lib/wst-0.5/binary_streamer.pas"/>
+        <UnitName Value="binary_streamer"/>
+        <CursorPos X="38" Y="428"/>
+        <TopLine Value="410"/>
+        <UsageCount Value="10"/>
+      </Unit54>
+    </Units>
+    <JumpHistory Count="0" HistoryIndex="-1"/>
+  </ProjectOptions>
+  <CompilerOptions>
+    <Version Value="5"/>
+    <Target>
+      <Filename Value="o/FitCgi/$(TargetCPU)-$(TargetOS)/fit.cgi"/>
+    </Target>
+    <SearchPaths>
+      <OtherUnitFiles Value="/home/dmitry/projects/science/integral_intensities/;/usr/lib/lazarus/components/codetools/;/home/dmitry/lib/synapse/synapse/source/;/home/dmitry/projects/science/integral_intensities/Packages/VariousGrids/;/home/dmitry/lib/wst-0.5/;/home/dmitry/projects/science/integral_intensities/Packages/TAGraph/Component/;/home/dmitry/lib/synapse/synapse/source/lib/"/>
+      <UnitOutputDirectory Value="o/$(TargetCPU)-$(TargetOS)"/>
+      <SrcPath Value="/home/dmitry/projects/science/integral_intensities/;/home/dmitry/lib/synapse/synapse/source/;/home/dmitry/projects/science/integral_intensities/Packages/VariousGrids/;/home/dmitry/lib/wst-0.5/;/home/dmitry/projects/science/integral_intensities/Packages/TAGraph/Component/;/home/dmitry/lib/synapse/synapse/source/lib/;/usr/lib/lazarus/components/codetools/"/>
+    </SearchPaths>
+    <CodeGeneration>
+      <Generate Value="Faster"/>
+    </CodeGeneration>
+    <Linking>
+      <Debugging>
+        <StripSymbols Value="True"/>
+      </Debugging>
+      <LinkSmart Value="True"/>
+    </Linking>
+    <Other>
+      <CustomOptions Value="-dFITCGI -dEXCLUDE_SOMETHING
+"/>
+      <CompilerPath Value="$(CompPath)"/>
+    </Other>
+  </CompilerOptions>
+  <Debugging>
+    <Exceptions Count="2">
+      <Item1>
+        <Name Value="ECodetoolError"/>
+      </Item1>
+      <Item2>
+        <Name Value="EFOpenError"/>
+      </Item2>
+    </Exceptions>
+  </Debugging>
+</CONFIG>

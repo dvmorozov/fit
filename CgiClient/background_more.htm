@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+    <HEAD>
+        <TITLE></TITLE>
+    </HEAD>
+    <BODY>
+        <TABLE id="Table5" cellspacing="5" cellpadding="0" width="100%" border="0">
+            <TR>
+                <TD><STRONG><FONT face="Arial" color="gray">Ввод данных</FONT></STRONG></TD>
+                <TD><STRONG><FONT face="Arial" color="maroon">Удаление фона</FONT></STRONG></TD>
+                <TD><STRONG><FONT face="Arial" color="gray">Коррекция модели</FONT></STRONG></TD>
+                <TD><STRONG><FONT face="Arial" color="gray">Подгонка модели</FONT></STRONG></TD>
+            </TR>
+        </TABLE>
+        <HR noshade>
+        <TABLE id="Table1" cellspacing="10" cellpadding="0" width="100%" border="0">
+            <TR>
+                <TD><STRONG><FONT face="Arial" color="gray">Автоматическая генерация точек фона</FONT></STRONG></TD>
+            </TR>
+            <TR>
+                <TD>
+                    <TABLE id="Table2" bgcolor="aqua" cellspacing="0" cellpadding="20" width="100%" border="0">
+                        <TR>
+                            <TD height="60">
+                                <STRONG><FONT face="Arial" color="gray">Автоматическая генерация точек возможна только 
+                                        если фон напоминает гладкую вогнутую вниз кривую</FONT></STRONG>
+                            </TD>
+                            <TD align="right" height="60">
+                            </TD>
+                        </TR>
+                        <TR>
+                            <TD height="60">
+                                <STRONG><FONT face="Arial" color="gray">Доля максимальной амплитуды, используемая для автоматической генерации точек фона</FONT></STRONG>
+                            </TD>
+                            <TD align="right" height="60">
+                                <INPUT type="text" value="" ID="Text1" NAME="input_max_ampl">
+                            </TD>
+                        </TR>
+                        <TR>
+                            <TD>
+                            </TD>
+                            <TD align="right" height="60">
+                                <INPUT type="button" value="Генерировать" ID="Button2" NAME="generate">
+                            </TD>
+                        </TR>
+                    </TABLE>
+                </TD>
+            </TR>
+            <TR>
+                <TD><STRONG><FONT face="Arial" color="gray">Выбор точек фона</FONT></STRONG></TD>
+            </TR>
+            <TR>
+                <TD>
+                    <TABLE id="Table4" cellspacing="5" cellpadding="0" width="100%" border="0">
+                        <TR>
+                            <TD width="40%">
+                                <TABLE id="Table3" cellspacing="0" cellpadding="0" width="100%" border="0">
+                                    <TR>
+                                        <TD>
+                                            <STRONG><FONT face="Arial" color="gray">Аргумент</FONT></STRONG>
+                                        </TD>
+                                        <TD>
+                                            <STRONG><FONT face="Arial" color="gray">Значение</FONT></STRONG>
+                                        </TD>
+                                        <TD>
+                                            <STRONG><FONT face="Arial" color="gray">Точка фона?</FONT></STRONG>
+                                        </TD>
+                                    </TR>
+                                    <TR>
+                                        <TD>
+                                            <STRONG><FONT face="Arial" color="gray">0.001</FONT></STRONG>
+                                        </TD>
+                                        <TD>
+                                            <STRONG><FONT face="Arial" color="gray">10.00</FONT></STRONG>
+                                        </TD>
+                                        <TD>
+                                            <STRONG><FONT face="Arial" color="gray">Нет</FONT></STRONG>
+                                        </TD>
+                                    </TR>
+                                    <TR>
+                                        <TD>
+                                            <STRONG><FONT face="Arial" color="gray">0.002</FONT></STRONG>
+                                        </TD>
+                                        <TD>
+                                            <STRONG><FONT face="Arial" color="gray">20.00</FONT></STRONG>
+                                        </TD>
+                                        <TD>
+                                            <STRONG><FONT face="Arial" color="gray">Нет</FONT></STRONG>
+                                        </TD>
+                                    </TR>
+                                    <TR>
+                                        <TD>
+                                            <STRONG><FONT face="Arial" color="gray">0.003</FONT></STRONG>
+                                        </TD>
+                                        <TD>
+                                            <STRONG><FONT face="Arial" color="gray">30.00</FONT></STRONG>
+                                        </TD>
+                                        <TD>
+                                            <STRONG><FONT face="Arial" color="gray">Да</FONT></STRONG>
+                                        </TD>
+                                    </TR>
+                                    <TR>
+                                        <TD><HR noshade>
+                                        </TD>
+                                        <TD><HR noshade>
+                                        </TD>
+                                        <TD><HR noshade>
+                                        </TD>
+                                    </TR>
+                                    <TR>
+                                        <TD align="left">
+                                            <INPUT type="text" value="" ID="input_arg" NAME="input_arg">
+                                        </TD>
+                                        <TD>
+                                        </TD>
+                                        <TD>
+                                            <INPUT type="button" value="Точка фона" ID="button_add" NAME="button_add">
+                                        </TD>
+                                    </TR>
+                                    <TR>
+                                        <TD><HR noshade>
+                                        </TD>
+                                        <TD><HR noshade>
+                                        </TD>
+                                        <TD><HR noshade>
+                                        </TD>
+                                    </TR>
+                                    <TR>
+                                        <TD align="left">
+                                            <INPUT type="text" value="" ID="input_arg2" NAME="input_arg2">
+                                        </TD>
+                                        <TD>
+                                        </TD>
+                                        <TD>
+                                            <INPUT type="button" value="Не точка фона" ID="button_del" NAME="button_del">
+                                        </TD>
+                                    </TR>
+                                </TABLE>
+                            </TD>
+                            <TD align="center">
+                                <STRONG><FONT face="Arial" color="gray">Место для графика</FONT></STRONG>
+                            </TD>
+                        </TR>
+                        <TR>
+                            <TD></TD>
+                            <TD align="right">
+                                <INPUT type="button" value="Пропустить удаление фона" ID="button_skip"
+                                    NAME="button_skip">
+                                <INPUT type="button" value="Удалить фон" ID="button_next"
+                                    NAME="button_next">
+                            </TD>
+                        </TR>
+                    </TABLE>
+                </TD>
+            </TR>
+        </TABLE>
+    </BODY>
+</HTML>

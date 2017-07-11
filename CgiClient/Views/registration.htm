@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+    <HEAD>
+        <META name="DESCRIPTION" content="The service for fitting of parameters of models
+            approximately coinciding with some kinds of experimental data.">
+        <META name="KEYWORDS" content="model fitting, fitting, fit, model, experimental data, motif, pattern, tool, peaks, software, storage">
+        <META name="AUTHOR" content="Dmitry Morozov, dvmorozov@mail.ru">
+        <META name="ROBOTS" content="INDEX,FOLLOW">
+        <TITLE>Title</TITLE>
+        <STYLE type="text/css"> 
+        @import url(http://ServerName/fit/sheet_main.css); 
+	    </STYLE>
+    </HEAD>
+    <BODY>
+        <TABLE cellspacing="10" cellpadding="0" width="100%" border="0">
+            <TR>
+                <TD class="NAV_CURRENT_ITEM" width="25%">CaptFitService</TD>
+                <TD class="NAV_ITEM" width="25%"></TD>
+                <TD class="NAV_ITEM" width="25%"></TD>
+                <TD class="NAV_ITEM" width="25%"></TD>
+            </TR>
+        </TABLE>
+        <HR noshade>
+        <TABLE cellspacing="10" cellpadding="0" width="100%" border="0">
+            <TR>
+                <TD valign="top" width="50%">
+                    <TABLE cellspacing="0" cellpadding="0" width="100%" border="0">
+                        <TR>
+                            <TD class="HEADER">CaptLicense</TD>
+                        </TR>
+                        <TR>
+                            <TD>
+                                <TABLE class="HINT" cellspacing="0" cellpadding="20" width="100%" border="0">
+                                    <TR>
+                                        <TD class="HINT" height="60">HintLicense</TD>
+                                    </TR>
+                                </TABLE>
+                            </TD>
+                        </TR>
+                    </TABLE>
+                </TD>
+                <TD valign="top" width="50%">
+                    <TABLE cellspacing="0" cellpadding="0" width="100%" border="0">
+                        <TR>
+                            <TD class="HEADER">CaptRegistration</TD>
+                        </TR>
+                        <TR>
+                            <TD>
+                                <TABLE class="HINT" cellspacing="0" cellpadding="20" width="100%" border="0">
+                                    <TR>
+                                        <TD class="HINT" height="60">HintRegistration</TD>
+                                    </TR>
+                                </TABLE>
+                            </TD>
+                        </TR>
+                        <TR>
+                            <TD>
+                                <TABLE cellspacing="5" cellpadding="0" width="100%" border="0">
+                                    <TR>
+                                        <TD width="100%" valign="top">
+                                            <TABLE cellspacing="2" cellpadding="0" width="100%" border="0">
+                                                <FORM action="http://ServerName/cgi-bin/fit.cgi" method="post" enctype="multipart/form-data">
+                                                    <TR>
+                                                        <TD class="HEADER" style="text-align: right;" width="50%">CaptName</TD>
+                                                        <TD width="*"><INPUT type="text" class="TEXT" NAME="username" style="width: 100%;"></TD>
+                                                    </TR>
+                                                    <TR>
+                                                        <TD class="HEADER" style="text-align: right;" width="50%">CaptPassword</TD>
+                                                        <TD width="*"><INPUT type="password" class="TEXT" NAME="password" style="width: 100%;"></TD>
+                                                    </TR>
+                                                    <TR>
+                                                        <TD class="HEADER" style="text-align: right;" width="50%">CaptRetypePassword</TD>
+                                                        <TD width="*"><INPUT type="password" class="TEXT" NAME="password2" style="width: 100%;"></TD>
+                                                    </TR>
+                                                    <TR>
+                                                        <TD height="10" colspan="2"></TD>
+                                                    </TR>
+                                                    <TR>
+                                                        <TD align="left">
+                                                            <INPUT type="hidden" value="register" NAME="command">
+                                                        </TD>
+                                                        <TD>
+                                                            <INPUT type="submit" value="CaptButRegister">
+                                                        </TD>
+                                                    </TR>
+                                                </FORM>
+                                            </TABLE>
+                                        </TD>
+                                    </TR>
+                                </TABLE>
+                            </TD>
+                        </TR>
+                    </TABLE>
+                </TD>
+            </TR>
+            <TR>
+                <TD colspan="2">
+                    <TABLE class="ABOUT" cellspacing="0" cellpadding="20" width="100%" border="0" ID="Table1">
+                        <TR>
+                            <TD class="ABOUT" width="100%" valign="top">HintAbout</TD>
+                        </TR>
+                    </TABLE>
+                </TD>
+            </TR>
+        </TABLE>
+    </BODY>
+</HTML>

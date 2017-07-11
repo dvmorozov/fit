@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+    <HEAD>
+        <TITLE>Title</TITLE>
+        <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+        <meta http-equiv="Content-Language" content="en">
+        <meta name="AUTHOR" content="Dmitry Morozov, dvmorozov@mail.ru">
+        <link href="http://ServerName/fit/sheet_main.css" rel="stylesheet" type="text/css">
+    </HEAD>
+    <BODY>
+		<div class="column-left">
+			<!-- FitEasily (large skyscraper) -->		
+			<div class="large-skyscraper">
+				<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+				<ins class="adsbygoogle"
+					 style="display:inline-block;width:300px;height:600px"
+					 data-ad-client="ca-pub-8470958084127593"
+					 data-ad-slot="1045521869"></ins>
+				<script>
+				(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>		
+			</div>
+			<!-- FitEasily II (large skyscraper) -->			
+			<div class="large-skyscraper">
+				<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+				<ins class="adsbygoogle"
+					 style="display:inline-block;width:300px;height:600px"
+					 data-ad-client="ca-pub-8470958084127593"
+					 data-ad-slot="6922101860"></ins>
+				<script>
+				(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
+			</div>
+		</div>
+	
+        <div id="conteiner">
+            <div>
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td class="company_name">
+                            Fit Easily</td>
+                        <td valign="top">
+                            <table border="0" align="right" cellpadding="0" cellspacing="0">
+                                <tr>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div id="header">
+                <div id="t1">
+                    <h1>CaptPatternSelection</h1>
+                    <div>HintPatternSelection</div>
+                </div>
+            </div>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr valign="top">
+                    <TD valign="top" class="inp1">
+                        <!--<h1>CaptPatternSelection</h1>-->
+                        <TABLE cellspacing="0" cellpadding="0" width="100%" border="0">
+                            <TR>
+                                <TD></TD>
+                                <TD class="inp1"><h3>CaptPatternName</h3></TD>
+                                <TD class="inp1"><h3>CaptPatternExpr</h3></TD>
+                            </TR>
+                            <FORM action="http://ServerName/cgi-bin/fit.cgi" method="post" enctype="multipart/form-data">
+                                <TR>
+                                    <TD class="inp1"><INPUT type="radio" value="gaussian" name="pattern_type" checked></TD>
+                                    <TD class="inp1"><h3>Gaussian</h3></TD>
+                                    <TD class="inp1" style="white-space: nowrap;"><h2><!-- A/(Sigma*Sqrt(2*pi))*exp(-1*Sqr(x0-x)/(2*Sqr(Sigma))) -->
+                                        <SUP>A</SUP>&#8260;<SUB>&#963;&#8730;2&#960;</SUB><SUP>e<SUP>-(x<SUB>0</SUB>-x)<SUP>2</SUP></SUP>&#8260; 
+                                            2&#963;<SUP>2</SUP></SUP></h2>
+                                    </TD>
+                                </TR>
+                                <TR>
+                                    <TD class="inp1"><INPUT type="radio" value="lorentzian" name="pattern_type"></TD>
+                                    <TD class="inp1"><h3>Lorentzian</h3></TD>
+                                    <TD class="inp1" style="white-space: nowrap;"><h2><!-- A*(1/(pi*Sigma/2))*(1/(1+Sqr((x-x0)/(Sigma/2)))) -->
+                                        <SUP>2A</SUP>&#8260;<SUB>(&#960;&#963)(1+(<SUP>2(x<SUB>0</SUB>-x)</SUP>/<SUB>&#963;</SUB>)<SUP>2</SUP>)</SUB></h2>
+                                    </TD>
+                                </TR>
+                                <TR>
+                                    <TD class="inp1"><INPUT type="radio" value="pseudovoigt" name="pattern_type"></TD>
+                                    <TD class="inp1"><h3>Pseudo-Voigt</h3></TD>
+                                    <TD class="inp1" style="white-space: nowrap;">
+                                        <h2><SUP>A[(1-&#951;)[2&#8730;ln2</SUP>&#8260;<SUB>&#963;&#8730;&#960;</SUB><SUP>e<SUP>-(x<SUB>0</SUB>-x)<SUP>2</SUP>4ln2</SUP>&#8260; 
+                                            &#963;<SUP>2</SUP></SUP><SUP>]+&#951;[2</SUP>&#8260;<SUB>(&#960;&#963)(1+(<SUP>2(x<SUB>0</SUB>-x)</SUP>/<SUB>&#963;</SUB>)<SUP>2</SUP>)</SUB>]]</h2>
+                                    </TD>
+                                </TR>
+                                <TR>
+                                    <TD colspan="3"><HR noshade>
+                                    </TD>
+                                </TR>
+                                <TR>
+                                    <TD colspan="3" align="right">
+                                        <INPUT type="hidden" value="do_pattern_action" NAME="command">
+                                        <INPUT type="hidden" value="ProblemID" NAME="problem_id"> 
+                                        <INPUT type="hidden" value="Key" NAME="key">
+                                        <INPUT type="hidden" value="CurChunkNum" NAME="cur_chunk_num">
+                                        <INPUT type="hidden" value="select_pattern" NAME="action">
+                                        <input type="image" src="http://ServerName/fit/select_pattern.gif" style="margin-left:7px;">
+                                    </TD>
+                                </TR>
+                            </FORM>
+                        </TABLE>
+                    </TD>
+                    <td class="body_txt" valign="top">
+                    </td>
+                </tr>
+            </table>
+            <br>
+            <IMG alt="Graph" src="GraphURL&width=700&height=450" border="0" width="700" height="450">
+            <div id="footer2">
+                <table align="left" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td class="nav_cur_pos">CaptPatternSelection</td>
+                        <td class="nav_item">> CaptSpecimenPositions</td>
+                        <td class="nav_item">> CaptSpecimenIntervals</td>
+                        <td class="nav_item">> CaptSpecimenParameters</td>
+                    </tr>
+                </table>
+                <FORM action="http://ServerName/cgi-bin/fit.cgi" method="post" enctype="multipart/form-data">
+                    <INPUT type="hidden" value="log_out" NAME="command"> 
+                    <INPUT type="hidden" value="Key" NAME="key">
+                    <div align="right">
+                        <input type="image" src="http://ServerName/fit/log_out.gif" style="margin-left:7px;">
+                    </div>
+                </FORM>
+                <div class="bottom_addr">HintAbout</div>
+            </div>
+        </div>
+    </BODY>
+</HTML>

@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+    <HEAD>
+        <TITLE>Title</TITLE>
+        <STYLE type="text/css">
+        @import url(http://ServerName/fit/sheet_main.css);
+        </STYLE>
+    </HEAD>
+    <BODY>
+        <TABLE cellspacing="10" cellpadding="0" width="100%" border="0">
+            <TR>
+                <TD class="NAV_ITEM" width="25%">CaptDataInput</TD>
+                <TD class="NAV_ITEM" width="25%">CaptBackDeleting</TD>
+                <TD class="NAV_CURRENT_ITEM" width="25%">CaptModelCreating</TD>
+                <TD class="NAV_ITEM" width="25%">CaptModelFitting</TD>
+            </TR>
+            <TR>
+                <TD class="NAV_CURRENT_ITEM" width="25%">CaptPatternSelection</TD>
+                <TD class="NAV_ITEM" width="25%">CaptSpecimenPositions</TD>
+                <TD class="NAV_ITEM" width="25%">CaptSpecimenIntervals</TD>
+                <TD class="NAV_ITEM" width="25%">CaptSpecimenParameters</TD>
+            </TR>
+        </TABLE>
+        <HR noshade>
+        <TABLE cellspacing="10" cellpadding="0" width="100%" border="0">
+            <TR>
+                <TD>
+                    <TABLE class="HINT" cellspacing="0" cellpadding="20" width="100%" border="0">
+                        <TR>
+                            <TD class="HINT" height="60" valign="top">HintPatternSelection</TD>
+                            <TD class="HINT_LARGE" style="text-align: right;" height="60" valign="top">
+                                <A href="http://ServerName/cgi-bin/fit.cgi?command=create_pattern&key=Key&problem_id=ProblemID&cur_chunk_num=CurChunkNum">
+                                    CaptButCreatePattern</A>
+                            </TD>
+                        </TR>
+                    </TABLE>
+                </TD>
+            </TR>
+            <TR>
+                <TD>
+                    <TABLE cellspacing="0" cellpadding="0" width="100%" border="0">
+                        <TR>
+                            <TD width="40%" valign="top">
+                                <TABLE cellspacing="5" cellpadding="0" width="100%" border="0">
+                                    <TR>
+                                        <TD class="TABLE_HEADER"></TD>
+                                        <TD class="TABLE_HEADER">CaptPatternName</TD>
+                                        <TD class="TABLE_HEADER">CaptPatternExpr</TD>
+                                    </TR>
+                                    <FORM action="http://ServerName/cgi-bin/fit.cgi" method="post" enctype="multipart/form-data">
+                                        <TR>
+                                            <TD class="TABLE_CELL"><INPUT type="radio" value="gaussian" name="pattern_type" checked></TD>
+                                            <TD class="TABLE_CELL">Gaussian</TD>
+                                            <TD class="TABLE_CELL"><!-- A/(Sigma*Sqrt(2*pi))*exp(-1*Sqr(x0-x)/(2*Sqr(Sigma))) -->
+                                                <SUP>A</SUP>&#8260;<SUB>&#963;&#8730;2&#960;</SUB>e<SUP><SUP>-(x<SUB>0</SUB>-x)<SUP>2</SUP></SUP>&#8260; 
+                                                    2&#963;<SUP>2</SUP></SUP>
+                                            </TD>
+                                        </TR>
+                                        <TR>
+                                            <TD class="TABLE_CELL"><INPUT type="radio" value="lorentzian" name="pattern_type"></TD>
+                                            <TD class="TABLE_CELL">Lorentzian</TD>
+                                            <TD class="TABLE_CELL"><!-- A/(Sigma*Sqrt(2*pi))*exp(-1*Abs(x0-x)/(2*Sqr(Sigma))) -->
+                                                <SUP>A</SUP>&#8260;<SUB>&#963;&#8730;2&#960;</SUB>e<SUP><SUP>-|x<SUB>0</SUB>-x|</SUP>&#8260; 
+                                                    2&#963;<SUP>2</SUP></SUP>
+                                            </TD>
+                                        </TR>
+                                        <TR>
+                                            <TD colspan="3"><HR noshade>
+                                            </TD>
+                                        </TR>
+                                        <TR>
+                                            <TD class="TABLE_CELL" colspan="3" style="text-align: center;">CaptAction</TD>
+                                        </TR>
+                                        <TR>
+                                            <TD class="TABLE_CELL"><INPUT type="radio" value="select_pattern" name="action" checked></TD>
+                                            <TD class="TABLE_CELL" colspan="2">CaptButNextStage</TD>
+                                        </TR>
+                                        <TR>
+                                            <TD class="TABLE_CELL"><INPUT type="radio" value="edit_pattern" name="action"></TD>
+                                            <TD class="TABLE_CELL" colspan="2">CaptButEditPattern</TD>
+                                        </TR>
+                                        <TR>
+                                            <TD class="TABLE_CELL"><INPUT type="radio" value="delete_pattern" name="action"></TD>
+                                            <TD class="TABLE_CELL" colspan="2">CaptButDeletePattern</TD>
+                                        </TR>
+                                        <TR>
+                                            <TD colspan="3"><HR noShade></TD>
+                                        </TR>
+                                        <TR>
+                                            <TD colspan="3" align="right">
+                                                <INPUT type="hidden" value="do_pattern_action" NAME="command">
+                                                <INPUT type="hidden" value="ProblemID" NAME="problem_id"> 
+                                                <INPUT type="hidden" value="Key" NAME="key">
+                                                <INPUT type="hidden" value="CurChunkNum" NAME="cur_chunk_num">
+                                                <INPUT type="submit" value="CaptButDoAction">
+                                            </TD>
+                                        </TR>
+                                    </FORM>
+                                </TABLE>
+                            </TD>
+                            <TD align="right" valign="top" width="*">
+                                <IMG border="0" alt="Graph" src="GraphURL">
+                            </TD>
+                        </TR>
+                    </TABLE>
+                </TD>
+            </TR>
+            <TR>
+                <TD>
+                    <TABLE class="ABOUT" cellspacing="0" cellpadding="20" width="100%" border="0">
+                        <TR>
+                            <TD class="ABOUT" width="100%" valign="top">HintAbout</TD>
+                            <TD align="left" width="*" valign="top">
+                                <FORM action="http://ServerName/cgi-bin/fit.cgi" method="post" enctype="multipart/form-data">
+                                    <INPUT type="hidden" value="log_out" NAME="command"> 
+                                    <INPUT type="hidden" value="Key" NAME="key">
+                                    <INPUT type="hidden" value="ProblemID" NAME="problem_id">
+                                    <INPUT type="submit" value="CaptButLogOut">
+                                </FORM>
+                            </TD>
+                        </TR>
+                    </TABLE>
+                </TD>
+            </TR>
+        </TABLE>
+    </BODY>
+</HTML>

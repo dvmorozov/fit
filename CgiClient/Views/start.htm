@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<title>Title</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+		<meta http-equiv="Content-Language" content="en">
+		<meta name="description" content="Online service for building the model of some experimental data, fitting its parameters and storing the results together with the data.">
+		<meta name="keywords" content="model fitting, fitting, fit, model, experimental data, motif, pattern, tool, peaks, software, storage, online, profile, diffraction, service, curve, gaussian, lorentzian, pseudo-voigt,
+									   diffraction profile fitting, diffraction pattern fitting, fitting diffraction pattern, data modelling, fitting model of data, removing baseline, peak splitting, automatic peak splitting,
+									   diffraction data treatment, fit model to data, fit model to curve, fitting model to data, fitting model to curve, fitting model to experimental data, fit model by data, 
+									   fit model by curve, fitting model by data, fitting model by curve, model fitting, online model fitting, building model of experimental data, building model for experimental data,
+									   creating model of experimental data, creating model for experimental data, integral intensities, peak decomposition">
+		<meta name="AUTHOR" content="Dmitry Morozov, dvmorozov@mail.ru">
+		<meta name="ROBOTS" content="INDEX,FOLLOW">
+		
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+		<script src="//code.jquery.com/jquery-1.9.1.js"></script>
+		<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>	
+		<script>
+			$(function() {
+				$( document ).tooltip();
+			});
+			$(function() {
+				$( "#dialog" ).dialog({
+					height: 600,
+					width: 900,
+					autoOpen: false,
+					show: {
+						effect: "explode",
+						duration: 500
+					},
+					hide: {
+						effect: "explode",
+						duration: 500
+					}
+			});
+			$( "#opener" ).click(function() {
+				$( "#dialog" ).dialog( "open" );
+			});
+		  });
+		</script>
+		<link href="http://ServerName/fit/sheet_main.css" rel="stylesheet" type="text/css">						
+	</head>
+	<body>
+		<div class="column-left">
+			<!-- FitEasily (large skyscraper) -->		
+			<div class="large-skyscraper">
+				<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+				<ins class="adsbygoogle"
+					 style="display:inline-block;width:300px;height:600px"
+					 data-ad-client="ca-pub-8470958084127593"
+					 data-ad-slot="1045521869"></ins>
+				<script>
+				(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>		
+			</div>
+			<!-- FitEasily II (large skyscraper) -->			
+			<div class="large-skyscraper">
+				<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+				<ins class="adsbygoogle"
+					 style="display:inline-block;width:300px;height:600px"
+					 data-ad-client="ca-pub-8470958084127593"
+					 data-ad-slot="6922101860"></ins>
+				<script>
+				(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
+			</div>
+		</div>
+	
+		<div id="conteiner">
+			<div>
+				<table width="100%" border="0" cellspacing="0" cellpadding="0">
+					<tr>
+						<td class="company_name">
+							Fit Easily</td>
+						<td valign="top">
+							<table border="0" align="right" cellpadding="0" cellspacing="0">
+								<tr>
+									<td class="menu">
+										<a href="http://ServerName/cgi-bin/fit.cgi?command=evaluation">Evaluate</a></td>
+									<td>
+										<img src="http://ServerName/fit/msep.gif" alt="" width="1" height="44"></td>
+									<td class="menu">
+										<a href="http://ServerName/cgi-bin/fit.cgi?command=registration">Create account</a></td>
+									<td>
+										<img src="http://ServerName/fit/msep.gif" alt="" width="1" height="44"></td>
+									<td class="menu">
+										<a href="http://ServerName/fit/downloads.html">Downloads</a></td>
+									<td>
+										<img src="http://ServerName/fit/msep.gif" alt="" width="1" height="44"></td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div id="header">
+				<div id="t1" style="text-align:justify;">
+					<h1>
+						CaptLogIn</h1>
+					<p>
+						HintNewUser1 <a href="http://ServerName/cgi-bin/fit.cgi?command=registration">Registration</a>
+						HintNewUser2<a href="http://ServerName/cgi-bin/fit.cgi?command=evaluation">Evaluation</a>HintNewUser3
+					</p>
+				</div>
+			</div>
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr valign="top">
+					<td width="200" bgcolor="#0b0b0b" class="lblock_bot">
+						<div id="lblock_title">
+							CaptLogIn
+						</div>
+						<form action="http://ServerName/cgi-bin/fit.cgi" method="post" enctype="multipart/form-data">
+							<div id="lblock_cont">
+								<div class="inp1" style="text-align:left;">
+									<p>CaptName<input type="text" class="login_form" value="" name="username"></p>
+								</div>
+								<div class="inp1" style="text-align:left;">
+									<p>CaptPassword<input type="password" class="login_form" value="" name="password"></p>
+								</div>
+								<input type="hidden" value="log_in" name="command">
+								<div align="right">
+									<input type="image" src="http://ServerName/fit/log_in.gif" style="margin-left:7px;">
+								</div>
+							</div>
+						</form>
+						<br>
+						<div style="text-align: center;">
+							<!-- <a HREF="https://docs.google.com/forms/d/1Vx_tohSZXh25Jt66vT5GRowg1M1ECiVsQPrFAcZjM5k/viewform" target="_blank">Answer a few questions<br>to help make this better</a>  -->
+							<a href="#" id="opener">Answer a few questions<br>to help make this better</a>
+						</div>
+						<div id="dialog" title="Thank you for your attention">
+							<iframe src="https://docs.google.com/forms/d/1Vx_tohSZXh25Jt66vT5GRowg1M1ECiVsQPrFAcZjM5k/viewform?embedded=true" seamless="seamless" frameborder="0" marginheight="0" marginwidth="0" style="width: 100%; height: 100%;">????????...</iframe>
+						</div>
+					</td>
+					<td class="body_txt">
+						<h1>CaptService</h1>
+						HintService
+					</td>
+				</tr>
+			</table>
+			<div id="footer2">
+				<div class="bottom_addr" style="text-align:left;">
+					<table align="left" border="0" cellpadding="0" cellspacing="10">
+						<tr>
+							<td class="nav_item"><a href="http://ServerName/cgi-bin/fit.cgi?command=evaluation">Evaluate</a></td>
+							<td class="nav_item"><a href="http://ServerName/cgi-bin/fit.cgi?command=registration">Create account</a></td>
+							<td width="100%" style="text-align: right;">HintAbout</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

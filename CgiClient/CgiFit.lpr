@@ -6,12 +6,12 @@ uses
   cgiModules, Unit2, SysUtils, data, background, background_more,
 project_files_empty,
   pattern_more, specimen_parameters_file, specimen_intervals,
-gen_spec_int_progress, start, error,
-  Main, CommonTypes, specimen_positions, DataLoader, MSCRDataClasses, ta,
+gen_spec_int_progress, start, error, specimen_positions, ta,
   fitting, fitting_process, gen_spec_pos_progress, gen_back_progress,
   fitting_progress, registration_free, Settings, projects_empty,
-file_results_empty, pattern, projects, specimen_parameters, project_files,
-  fit_server_proxy, GeneralHashFunctions, file_results, evaluation;
+file_results_empty, pattern, projects, specimen_parameters, project_files, file_results, evaluation,
+CommonTypes, DataLoader, fit_server_proxy, GeneralHashFunctions, Main,
+MSCRDataClasses;
   
 var MSec: Comp;
     FileName: string;

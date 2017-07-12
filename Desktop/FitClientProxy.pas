@@ -1169,7 +1169,7 @@ var Res: LongInt;
     ErrMsg: string;
 begin
     Assert(Assigned(FitStub));
-    Res := FitStub.AllPointsAsPeakPositions(ErrMsg);
+    Res := FitStub.AllPointsAsPeakPositions(ErrMsg).ErrCode;
     case Res of
         -1: raise EUserException.Create(ErrMsg);
         -2: raise Exception.Create(ErrMsg);

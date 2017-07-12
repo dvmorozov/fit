@@ -232,6 +232,9 @@ Type
     function GetSqrRFactorStr(
       const  ProblemID : integer
     ):TStringResult;
+    function AllPointsAsPeakPositions(
+      var ErrMsg : string
+    ):TResult;
   End;
 
   Function wst_CreateInstance_IFitServer(const AFormat : string = 'SOAP:'; const ATransport : string = 'HTTP:'):IFitServer;
@@ -1741,6 +1744,13 @@ Begin
   End;
 End;
 
+function TFitServer_Proxy.AllPointsAsPeakPositions(
+  var ErrMsg : string
+):TResult;
+Begin
+  Result.ErrCode := -1;
+  Result.ErrMsg := 'Not implemented';
+End;
 
 initialization
   {$i fit_server.wst}

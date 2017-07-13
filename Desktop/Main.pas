@@ -114,7 +114,7 @@ const
     InternalPort: string = '1234';
     //  IP dlya svyazi brauzera s CGI-klientom;
     //  eti dannye vstavlyayutsya v ishodyaschie stranitsy
-    ExternalIP: string = 'fiteasily.com';
+    ExternalIP: string = 'fiteasily.townbreath.com';
     ExternalPort: string = '80';//'8778';
 {$ENDIF}
 

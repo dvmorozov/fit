@@ -75,7 +75,7 @@ ul {
 
 .menu 
 {
-	background-image: url(http://fiteasily.com/fit/btn_bg.gif);
+	background-image: url(http://fiteasily.townbreath.com/fit/btn_bg.gif);
 	background-repeat: repeat-x;
 	font-weight: bold;
 	padding-right: 15px;
@@ -206,7 +206,7 @@ ul {
 	text-decoration: underline;
 }
 
-#header{background:url(http://fiteasily.com/fit/p1bg.jpg) no-repeat; height:241px;}
+#header{background:url(http://fiteasily.townbreath.com/fit/p1bg.jpg) no-repeat; height:241px;}
 
 #lblock_title
 {
@@ -214,7 +214,7 @@ ul {
 	font-size: 15px;
 	color: #98c932;
 	text-align: center;
-	background-image: url(http://fiteasily.com/fit/lblock-top.gif);
+	background-image: url(http://fiteasily.townbreath.com/fit/lblock-top.gif);
 	background-repeat: no-repeat;
 	background-position: top;
 	padding-top: 5px;
@@ -225,7 +225,7 @@ ul {
 .lblock_bot
 {
 	background-color: #0B0B0B;
-	background-image: url(http://fiteasily.com/fit/lblock-bot.gif);
+	background-image: url(http://fiteasily.townbreath.com/fit/lblock-bot.gif);
 	background-repeat: no-repeat;
 	background-position: bottom;
 }
@@ -239,7 +239,7 @@ ul {
 	padding-left: 15px;
 	padding-top: 10px;
 	padding-bottom: 10px;
-	background-image: url(http://fiteasily.com/fit/lsep.gif);
+	background-image: url(http://fiteasily.townbreath.com/fit/lsep.gif);
 	background-repeat: no-repeat;
 	background-position: center top;
 }

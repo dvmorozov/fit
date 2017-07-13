@@ -343,9 +343,6 @@ type
     function GetSqrRFactorStr(
       const  ProblemID : integer
     ):TStringResult;
-    function AllPointsAsPeakPositions(
-      var ErrMsg : string
-    ):TResult;
   end;
 
   procedure Register_fit_server_ServiceMetadata();
@@ -1629,4 +1626,4 @@ initialization
   GetTypeRegistry().ItemByTypeInfo[TypeInfo(TPictureResult)].RegisterExternalPropertyName('_Result','Result');
   GetTypeRegistry().ItemByTypeInfo[TypeInfo(TStringResult)].RegisterExternalPropertyName('_Result','Result');
 
-End.
+End.

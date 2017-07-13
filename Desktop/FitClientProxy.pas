@@ -117,8 +117,9 @@ type
         procedure FindPeakBounds;
         procedure FindBackPoints;
         procedure FindPeakPositions;
+{$IFDEF FIT}
         procedure AllPointsAsPeakPositions;
-        
+{$ENDIF}
 {$IFDEF FITCGI}
         function GetGraph(
             const Width: LongInt; const Height: LongInt): TMemoryStream;
@@ -1164,17 +1165,19 @@ begin
     end;
 end;
 
+{$IFDEF FIT}
 procedure TFitClientProxy.AllPointsAsPeakPositions;
 var Res: LongInt;
     ErrMsg: string;
 begin
     Assert(Assigned(FitStub));
-    Res := FitStub.AllPointsAsPeakPositions(ErrMsg).ErrCode;
+    Res := FitStub.AllPointsAsPeakPositions(ErrMsg);
     case Res of
         -1: raise EUserException.Create(ErrMsg);
         -2: raise Exception.Create(ErrMsg);
     end;
 end;
+{$ENDIF}
 
 procedure TFitClientProxy.StopAsyncOper;
 var Res: LongInt;

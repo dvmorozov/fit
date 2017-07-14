@@ -27,15 +27,15 @@
     </RunParams>
     <RequiredPackages Count="3">
       <Item1>
-        <PackageName Value="CGILaz"/>
+        <PackageName Value="ta"/>
+        <MinVersion Major="1" Minor="1" Valid="True"/>
       </Item1>
       <Item2>
         <PackageName Value="LCL"/>
         <MinVersion Major="1" Valid="True"/>
       </Item2>
       <Item3>
-        <PackageName Value="ta"/>
-        <MinVersion Major="1" Minor="1" Valid="True"/>
+        <PackageName Value="CGILaz"/>
       </Item3>
     </RequiredPackages>
     <Units Count="58">
@@ -511,16 +511,7 @@
         <Loaded Value="True"/>
       </Unit57>
     </Units>
-    <JumpHistory Count="2" HistoryIndex="1">
-      <Position1>
-        <Filename Value="..\Desktop\FitClientProxy.pas"/>
-        <Caret Line="1172" Column="60" TopLine="1161"/>
-      </Position1>
-      <Position2>
-        <Filename Value="..\Desktop\FitClientProxy.pas"/>
-        <Caret Line="1180" Column="1" TopLine="1167"/>
-      </Position2>
-    </JumpHistory>
+    <JumpHistory Count="0" HistoryIndex="-1"/>
   </ProjectOptions>
   <CompilerOptions>
     <Version Value="5"/>

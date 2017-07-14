@@ -4382,7 +4382,7 @@ end;
 function TCGIDatamodule2.GetGraphURL: string;
 begin
     Assert(ProblemID <> 0);
-    Result := 'http://' + ExternalIP + ':' + ExternalPort +
+    Result := 'https://' + ExternalIP + ':' + ExternalPort +
         '/cgi-bin/fit.cgi?command=get_graph&problem_id=' + IntToStr(ProblemID);
 end;
 

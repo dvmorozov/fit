@@ -85,8 +85,8 @@ const
         //'Вам всегда доступна самая последняя версия программы.'                 +
         '<LI>'                                                                  +
         'But there are traditional desktop version of the application '         +
-        'available for <a href="http://ServerName/fit/Fit-i386-win32.zip">Windows</a> ' +
-        'and <a href="http://ServerName/fit/Fit-i386-linux.zip">Linux</a>.'     +
+        'available for <a href="https://ServerName/fit/Fit-i386-win32.zip">Windows</a> ' +
+        'and <a href="https://ServerName/fit/Fit-i386-linux.zip">Linux</a>.'     +
 
         '</UL>'                                                                 +
         'Working with the service consists from sequence of stages:'            +
@@ -101,7 +101,7 @@ const
         '<A HREF="#" Title="Part of experimental data that can not be taken into account by the model.">' +
         'baseline</A> if this is necessary.'                                  +
         //'Удаление '                                                             +
-        //'<A HREF="#" ONCLICK="window.open(''http://ServerName/fit/_background_rus.htm'','''',''Toolbar=0,Location=0,Directories=0,Status=0,Menubar=0,Scrollbars=1,Resizable=1,Width=550,Height=100'');">' +
+        //'<A HREF="#" ONCLICK="window.open(''https://ServerName/fit/_background_rus.htm'','''',''Toolbar=0,Location=0,Directories=0,Status=0,Menubar=0,Scrollbars=1,Resizable=1,Width=550,Height=100'');">' +
         //'фона</A> данных, если это необходимо.'                                 +
 
         '<LI>'                                                                  +
@@ -111,9 +111,9 @@ const
         '<A HREF="#" Title="Set of parametrized pattern instances which in adding form a curve approximating the experimental data in the best way.">' +
         'model</A> creation.'                                                   +
         //'Выбор '                                                                +
-        //'<A HREF="#" ONCLICK="window.open(''http://ServerName/fit/_pattern_rus.htm'','''',''Toolbar=0,Location=0,Directories=0,Status=0,Menubar=0,Scrollbars=1,Resizable=1,Width=550,Height=100'');">' +
+        //'<A HREF="#" ONCLICK="window.open(''https://ServerName/fit/_pattern_rus.htm'','''',''Toolbar=0,Location=0,Directories=0,Status=0,Menubar=0,Scrollbars=1,Resizable=1,Width=550,Height=100'');">' +
         //'паттерна</A> для создания '                                            +
-        //'<A HREF="#" ONCLICK="window.open(''http://ServerName/fit/_model_rus.htm'','''',''Toolbar=0,Location=0,Directories=0,Status=0,Menubar=0,Scrollbars=1,Resizable=1,Width=550,Height=100'');">' +
+        //'<A HREF="#" ONCLICK="window.open(''https://ServerName/fit/_model_rus.htm'','''',''Toolbar=0,Location=0,Directories=0,Status=0,Menubar=0,Scrollbars=1,Resizable=1,Width=550,Height=100'');">' +
         //'модели</A>.'                                                           +
 
         '<LI>'                                                                  +
@@ -126,9 +126,9 @@ const
         'this job could be done automatically, after than '                     +
         'could be corrected manually.'                                          +
         //'Выбор '                                                                +
-        //'<A HREF="#" ONCLICK="window.open(''http://ServerName/fit/_spec_positions_rus.htm'','''',''Toolbar=0,Location=0,Directories=0,Status=0,Menubar=0,Scrollbars=1,Resizable=1,Width=550,Height=100'');">' +
+        //'<A HREF="#" ONCLICK="window.open(''https://ServerName/fit/_spec_positions_rus.htm'','''',''Toolbar=0,Location=0,Directories=0,Status=0,Menubar=0,Scrollbars=1,Resizable=1,Width=550,Height=100'');">' +
         //'точек привязки</A> экземпляра паттерна, если паттерн имеет '           +
-        //'<A HREF="#" ONCLICK="window.open(''http://ServerName/fit/_spec_positions_param_rus.htm'','''',''Toolbar=0,Location=0,Directories=0,Status=0,Menubar=0,Scrollbars=1,Resizable=1,Width=550,Height=100'');">' +
+        //'<A HREF="#" ONCLICK="window.open(''https://ServerName/fit/_spec_positions_param_rus.htm'','''',''Toolbar=0,Location=0,Directories=0,Status=0,Menubar=0,Scrollbars=1,Resizable=1,Width=550,Height=100'');">' +
         //'параметр привязки</A>. Для данных имеющих вид профиля '                +
         //'эта работа может быть выполнена автоматически, после чего '            +
         //'скорректирована вручную.'                                              +
@@ -141,7 +141,7 @@ const
         'peaks this job could be done automatically, after than '               +
         'could be corrected manually.'                                          +
         //'Выбор '                                                                +
-        //'<A HREF="#" ONCLICK="window.open(''http://ServerName/fit/_specimen_application_intervals_rus.htm'','''',''Toolbar=0,Location=0,Directories=0,Status=0,Menubar=0,Scrollbars=1,Resizable=1,Width=550,Height=100'');">' +
+        //'<A HREF="#" ONCLICK="window.open(''https://ServerName/fit/_specimen_application_intervals_rus.htm'','''',''Toolbar=0,Location=0,Directories=0,Status=0,Menubar=0,Scrollbars=1,Resizable=1,Width=550,Height=100'');">' +
         //'интервалов применения экземпляров паттерна</A>. '                      +
         //'Для данных, имеющих вид профиля эта работа может быть выполнена '      +
         //'автоматически, после чего скорректирована вручную.'                    +

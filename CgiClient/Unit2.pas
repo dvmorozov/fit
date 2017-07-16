@@ -2348,7 +2348,7 @@ begin
     Pair[1][2] := Hint;
     Template := ReplaceStrings(Template, Pair, 1);
     Pair[1][1] := 'ServerName';
-    Pair[1][2] := ExternalIP + ':' + ExternalPort;
+    Pair[1][2] := ExternalIP;
     Template := ReplaceStrings(Template, Pair, 1);
     //  vyvod stranitsy
     CGIDatamodule2.AddResponseLn(Template);
@@ -4382,7 +4382,7 @@ end;
 function TCGIDatamodule2.GetGraphURL: string;
 begin
     Assert(ProblemID <> 0);
-    Result := 'https://' + ExternalIP + ':' + ExternalPort +
+    Result := 'https://' + ExternalIP +
         '/cgi-bin/fit.cgi?command=get_graph&problem_id=' + IntToStr(ProblemID);
 end;
 

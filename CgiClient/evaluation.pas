@@ -47,7 +47,7 @@ begin
     Result := ReplaceStrings(Result, CommonPairArray, CommonPairCount);
     //  zapolneniye licenzionnogo soglascheniya
     Result := ReplaceStrings_registration(Result);
-    Pair[1][1] := 'ServerName'; Pair[1][2] := ExternalIP + ':' + ExternalPort;
+    Pair[1][1] := 'ServerName'; Pair[1][2] := ExternalIP;
     Result := ReplaceStrings(Result, Pair, 1);
 end;
 

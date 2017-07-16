@@ -105,7 +105,6 @@ const
 {$ELSE}
     ExternalIP: string = '127.0.0.1';
 {$ENDIF}
-    ExternalPort: string = '80';
 {$ELSE}
     //  IP dlya svyazi CGI-klienta s serverom prilozheniya
     //InternalIP: string = '192.168.0.190';
@@ -115,11 +114,10 @@ const
     //  IP dlya svyazi brauzera s CGI-klientom;
     //  eti dannye vstavlyayutsya v ishodyaschie stranitsy
     ExternalIP: string = 'fiteasily.townbreath.com';
-    ExternalPort: string = '80';//'8778';
 {$ENDIF}
 
 implementation
-
+    
 var SequentialErrorCode: LongInt = 1000;
 function GetSeqErrorCode(): LongInt;
 begin

@@ -38,7 +38,7 @@ var Pair: array[1..1] of TStringPair;
 begin
     Result := ReplaceStrings(Text, CommonPairArray, CommonPairCount);
     Result := ReplaceStrings(Result, PairArray, PairCount);
-    Pair[1][1] := 'ServerName'; Pair[1][2] := ExternalIP + ':' + ExternalPort;
+    Pair[1][1] := 'ServerName'; Pair[1][2] := ExternalIP;
     Result := ReplaceStrings(Result, Pair, 1);
 end;
 

@@ -75,7 +75,6 @@ ul {
 
 .menu 
 {
-	background-image: url(https://fiteasily.townbreath.com/fit/btn_bg.gif);
 	background-repeat: repeat-x;
 	font-weight: bold;
 	padding-right: 15px;
@@ -316,4 +315,8 @@ ul {
 	margin-left: 9px;
 	margin-top: 9px;
 	display: inline-block;
+}
+
+.banner {
+	margin-top: 9px;
 }

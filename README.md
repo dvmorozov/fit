@@ -1,2 +1,0 @@
-# fit
-Curve fitting application.

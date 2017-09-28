@@ -1,0 +1,729 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+<title>Fit: fit_server_binder: Class TFitServer_ServiceBinder</title>
+<meta name="generator" content="PasDoc 0.14.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<table class="container"><tr><td class="navigation">
+<h2>Fit</h2><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p><p><a href="GVClasses.png" class="navigation">Classes hierarchy graph</a></p></td><td class="content">
+<a name="TFitServer_ServiceBinder"></a><h1 class="cio">Class TFitServer_ServiceBinder</h1>
+<table class="sections wide_list">
+<tr>
+<td><a class="section" href="#PasDoc-Description">Description</a></td><td><a class="section" href="#PasDoc-Hierarchy">Hierarchy</a></td><td>Fields</td><td><a class="section" href="#PasDoc-Methods">Methods</a></td><td>Properties</td></tr></table>
+<a name="PasDoc-Description"></a><h2 class="unit">Unit</h2>
+<p class="unitlink">
+<a  href="fit_server_binder.html">fit_server_binder</a></p>
+<h2 class="declaration">Declaration</h2>
+<p class="declaration">
+<code>type TFitServer_ServiceBinder = class(TBaseServiceBinder)</code></p>
+<h2 class="description">Description</h2>
+<a name="PasDoc-Hierarchy"></a><h2 class="hierarchy">Hierarchy</h2>
+<ul class="hierarchy"><li class="ancestor">TBaseServiceBinder</li>
+<li class="thisitem">TFitServer_ServiceBinder</li></ul><h2 class="overview">Overview</h2>
+<a name="PasDoc-Methods"></a><h3 class="summary">Methods</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>constructor <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#Create">Create</a></b>();</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#AddPointToBackgroundHandler">AddPointToBackgroundHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#AddPointToDataHandler">AddPointToDataHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#AddPointToSpecimenIntervalsHandler">AddPointToSpecimenIntervalsHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#AddPointToSpecimenPositionsHandler">AddPointToSpecimenPositionsHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#AsyncOperHandler">AsyncOperHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#CreateProblemHandler">CreateProblemHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#CreateSpecimenListHandler">CreateSpecimenListHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#DiscardProblemHandler">DiscardProblemHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#DoAllAutomaticallyHandler">DoAllAutomaticallyHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#FindBackPointsHandler">FindBackPointsHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#FindSpecimenIntervalsHandler">FindSpecimenIntervalsHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#FindSpecimenPositionsHandler">FindSpecimenPositionsHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#GetAbsRFactorStrHandler">GetAbsRFactorStrHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#GetBackFactorHandler">GetBackFactorHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#GetBackgroundPointsHandler">GetBackgroundPointsHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#GetCalcProfilePointsSetHandler">GetCalcProfilePointsSetHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#GetCalcTimeStrHandler">GetCalcTimeStrHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#GetCurveThreshHandler">GetCurveThreshHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#GetCurveTypeHandler">GetCurveTypeHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#GetDeltaProfilePointsSetHandler">GetDeltaProfilePointsSetHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#GetGraphHandler">GetGraphHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#GetMaxRFactorHandler">GetMaxRFactorHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#GetProfileChunkCountHandler">GetProfileChunkCountHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#GetProfileChunkHandler">GetProfileChunkHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#GetProfilePointsSetHandler">GetProfilePointsSetHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#GetRFactorStrHandler">GetRFactorStrHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#GetSelectedAreaHandler">GetSelectedAreaHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#GetSpecimenCountHandler">GetSpecimenCountHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#GetSpecimenIntervalsHandler">GetSpecimenIntervalsHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#GetSpecimenParameterCountHandler">GetSpecimenParameterCountHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#GetSpecimenParameterHandler">GetSpecimenParameterHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#GetSpecimenPointsHandler">GetSpecimenPointsHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#GetSpecimenPositionsHandler">GetSpecimenPositionsHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#GetSqrRFactorStrHandler">GetSqrRFactorStrHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#GetStateHandler">GetStateHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#GetWaveLengthHandler">GetWaveLengthHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#MinimizeDifferenceHandler">MinimizeDifferenceHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#MinimizeNumberOfSpecimensHandler">MinimizeNumberOfSpecimensHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#ReplacePointInBackgroundHandler">ReplacePointInBackgroundHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#ReplacePointInProfileHandler">ReplacePointInProfileHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#ReplacePointInSpecimenIntervalsHandler">ReplacePointInSpecimenIntervalsHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#ReplacePointInSpecimenPositionsHandler">ReplacePointInSpecimenPositionsHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#ReturnToTotalProfileHandler">ReturnToTotalProfileHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#SelectAreaHandler">SelectAreaHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#SetBackFactorHandler">SetBackFactorHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#SetBackgroundPointsSetHandler">SetBackgroundPointsSetHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#SetCurveThreshHandler">SetCurveThreshHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#SetCurveTypeHandler">SetCurveTypeHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#SetMaxRFactorHandler">SetMaxRFactorHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#SetProfilePointsSetHandler">SetProfilePointsSetHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#SetSpecimenIntervalsHandler">SetSpecimenIntervalsHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#SetSpecimenParameterHandler">SetSpecimenParameterHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#SetSpecimenPositionsHandler">SetSpecimenPositionsHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#SetWaveLengthHandler">SetWaveLengthHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#SmoothProfileHandler">SmoothProfileHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#StopAsyncOperHandler">StopAsyncOperHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server_binder.TFitServer_ServiceBinder.html#SubtractAllBackgroundHandler">SubtractAllBackgroundHandler</a></b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Methods</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Create"></a><code>constructor <b>Create</b>();</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="AddPointToBackgroundHandler"></a><code>procedure <b>AddPointToBackgroundHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="AddPointToDataHandler"></a><code>procedure <b>AddPointToDataHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="AddPointToSpecimenIntervalsHandler"></a><code>procedure <b>AddPointToSpecimenIntervalsHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="AddPointToSpecimenPositionsHandler"></a><code>procedure <b>AddPointToSpecimenPositionsHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="AsyncOperHandler"></a><code>procedure <b>AsyncOperHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="CreateProblemHandler"></a><code>procedure <b>CreateProblemHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="CreateSpecimenListHandler"></a><code>procedure <b>CreateSpecimenListHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="DiscardProblemHandler"></a><code>procedure <b>DiscardProblemHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="DoAllAutomaticallyHandler"></a><code>procedure <b>DoAllAutomaticallyHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="FindBackPointsHandler"></a><code>procedure <b>FindBackPointsHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="FindSpecimenIntervalsHandler"></a><code>procedure <b>FindSpecimenIntervalsHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="FindSpecimenPositionsHandler"></a><code>procedure <b>FindSpecimenPositionsHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="GetAbsRFactorStrHandler"></a><code>procedure <b>GetAbsRFactorStrHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="GetBackFactorHandler"></a><code>procedure <b>GetBackFactorHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="GetBackgroundPointsHandler"></a><code>procedure <b>GetBackgroundPointsHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="GetCalcProfilePointsSetHandler"></a><code>procedure <b>GetCalcProfilePointsSetHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="GetCalcTimeStrHandler"></a><code>procedure <b>GetCalcTimeStrHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="GetCurveThreshHandler"></a><code>procedure <b>GetCurveThreshHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="GetCurveTypeHandler"></a><code>procedure <b>GetCurveTypeHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="GetDeltaProfilePointsSetHandler"></a><code>procedure <b>GetDeltaProfilePointsSetHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="GetGraphHandler"></a><code>procedure <b>GetGraphHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="GetMaxRFactorHandler"></a><code>procedure <b>GetMaxRFactorHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="GetProfileChunkCountHandler"></a><code>procedure <b>GetProfileChunkCountHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="GetProfileChunkHandler"></a><code>procedure <b>GetProfileChunkHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="GetProfilePointsSetHandler"></a><code>procedure <b>GetProfilePointsSetHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="GetRFactorStrHandler"></a><code>procedure <b>GetRFactorStrHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="GetSelectedAreaHandler"></a><code>procedure <b>GetSelectedAreaHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="GetSpecimenCountHandler"></a><code>procedure <b>GetSpecimenCountHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="GetSpecimenIntervalsHandler"></a><code>procedure <b>GetSpecimenIntervalsHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="GetSpecimenParameterCountHandler"></a><code>procedure <b>GetSpecimenParameterCountHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="GetSpecimenParameterHandler"></a><code>procedure <b>GetSpecimenParameterHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="GetSpecimenPointsHandler"></a><code>procedure <b>GetSpecimenPointsHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="GetSpecimenPositionsHandler"></a><code>procedure <b>GetSpecimenPositionsHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="GetSqrRFactorStrHandler"></a><code>procedure <b>GetSqrRFactorStrHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="GetStateHandler"></a><code>procedure <b>GetStateHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="GetWaveLengthHandler"></a><code>procedure <b>GetWaveLengthHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="MinimizeDifferenceHandler"></a><code>procedure <b>MinimizeDifferenceHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="MinimizeNumberOfSpecimensHandler"></a><code>procedure <b>MinimizeNumberOfSpecimensHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="ReplacePointInBackgroundHandler"></a><code>procedure <b>ReplacePointInBackgroundHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="ReplacePointInProfileHandler"></a><code>procedure <b>ReplacePointInProfileHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="ReplacePointInSpecimenIntervalsHandler"></a><code>procedure <b>ReplacePointInSpecimenIntervalsHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="ReplacePointInSpecimenPositionsHandler"></a><code>procedure <b>ReplacePointInSpecimenPositionsHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="ReturnToTotalProfileHandler"></a><code>procedure <b>ReturnToTotalProfileHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="SelectAreaHandler"></a><code>procedure <b>SelectAreaHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="SetBackFactorHandler"></a><code>procedure <b>SetBackFactorHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="SetBackgroundPointsSetHandler"></a><code>procedure <b>SetBackgroundPointsSetHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="SetCurveThreshHandler"></a><code>procedure <b>SetCurveThreshHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="SetCurveTypeHandler"></a><code>procedure <b>SetCurveTypeHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="SetMaxRFactorHandler"></a><code>procedure <b>SetMaxRFactorHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="SetProfilePointsSetHandler"></a><code>procedure <b>SetProfilePointsSetHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="SetSpecimenIntervalsHandler"></a><code>procedure <b>SetSpecimenIntervalsHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="SetSpecimenParameterHandler"></a><code>procedure <b>SetSpecimenParameterHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="SetSpecimenPositionsHandler"></a><code>procedure <b>SetSpecimenPositionsHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="SetWaveLengthHandler"></a><code>procedure <b>SetWaveLengthHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="SmoothProfileHandler"></a><code>procedure <b>SmoothProfileHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="StopAsyncOperHandler"></a><code>procedure <b>StopAsyncOperHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="SubtractAllBackgroundHandler"></a><code>procedure <b>SubtractAllBackgroundHandler</b>(AFormatter : IFormatterResponse; AContext : ICallContext);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<hr noshade size="1"><span class="appinfo"><em>Generated by <a  href="http://pasdoc.sourceforge.net/">PasDoc 0.14.0</a>. </em>
+</span>
+</td></tr></table></body></html>

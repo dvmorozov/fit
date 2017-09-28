@@ -1,0 +1,271 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+<title>Fit: CombEnumerator: Class TCombEnumerator</title>
+<meta name="generator" content="PasDoc 0.14.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<table class="container"><tr><td class="navigation">
+<h2>Fit</h2><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p><p><a href="GVClasses.png" class="navigation">Classes hierarchy graph</a></p></td><td class="content">
+<a name="TCombEnumerator"></a><h1 class="cio">Class TCombEnumerator</h1>
+<table class="sections wide_list">
+<tr>
+<td><a class="section" href="#PasDoc-Description">Description</a></td><td><a class="section" href="#PasDoc-Hierarchy">Hierarchy</a></td><td><a class="section" href="#PasDoc-Fields">Fields</a></td><td><a class="section" href="#PasDoc-Methods">Methods</a></td><td><a class="section" href="#PasDoc-Properties">Properties</a></td></tr></table>
+<a name="PasDoc-Description"></a><h2 class="unit">Unit</h2>
+<p class="unitlink">
+<a  href="CombEnumerator.html">CombEnumerator</a></p>
+<h2 class="declaration">Declaration</h2>
+<p class="declaration">
+<code>type TCombEnumerator = class(TObject)</code></p>
+<h2 class="description">Description</h2>
+<a name="PasDoc-Hierarchy"></a><h2 class="hierarchy">Hierarchy</h2>
+<ul class="hierarchy"><li class="ancestor">TObject</li>
+<li class="thisitem">TCombEnumerator</li></ul><h2 class="overview">Overview</h2>
+<a name="PasDoc-Fields"></a><h3 class="summary">Fields</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="CombEnumerator.TCombEnumerator.html#FCurrentComb">FCurrentComb</a></b>: LongInt;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="CombEnumerator.TCombEnumerator.html#FIsCombDefined">FIsCombDefined</a></b>: Boolean;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="CombEnumerator.TCombEnumerator.html#NumbersOfValues">NumbersOfValues</a></b>: array of LongInt;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="CombEnumerator.TCombEnumerator.html#ValuesIndexes">ValuesIndexes</a></b>: array of LongInt;</code></td>
+</tr>
+</table>
+<a name="PasDoc-Methods"></a><h3 class="summary">Methods</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>destructor <b><a  href="CombEnumerator.TCombEnumerator.html#Destroy">Destroy</a></b>; override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>function <b><a  href="CombEnumerator.TCombEnumerator.html#GetCombNumber">GetCombNumber</a></b>: LongInt;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>function <b><a  href="CombEnumerator.TCombEnumerator.html#GetCombNumberStartStop">GetCombNumberStartStop</a></b>( const StartIndex, StopIndex: LongInt): LongInt;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>function <b><a  href="CombEnumerator.TCombEnumerator.html#GetValueIndex">GetValueIndex</a></b>(index: LongInt): LongInt;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>function <b><a  href="CombEnumerator.TCombEnumerator.html#GetValuesNumber">GetValuesNumber</a></b>: LongInt;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="CombEnumerator.TCombEnumerator.html#AddNumberOfValues">AddNumberOfValues</a></b>(const ANumberOfValues: LongInt); virtual;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="CombEnumerator.TCombEnumerator.html#ClearListOfNumbersOfValues">ClearListOfNumbersOfValues</a></b>; virtual;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="CombEnumerator.TCombEnumerator.html#SetCurrentComb">SetCurrentComb</a></b>(const ACurrentComb: LongInt); virtual;</code></td>
+</tr>
+</table>
+<a name="PasDoc-Properties"></a><h3 class="summary">Properties</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="CombEnumerator.TCombEnumerator.html#CombNumber">CombNumber</a></b>: LongInt
+            
+            
+            read <a  href="CombEnumerator.TCombEnumerator.html#GetCombNumber">GetCombNumber</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="CombEnumerator.TCombEnumerator.html#CurrentComb">CurrentComb</a></b>: LongInt
+            
+            read <a  href="CombEnumerator.TCombEnumerator.html#FCurrentComb">FCurrentComb</a>               write <a  href="CombEnumerator.TCombEnumerator.html#SetCurrentComb">SetCurrentComb</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="CombEnumerator.TCombEnumerator.html#ValueIndex">ValueIndex</a></b>[index:LongInt]: LongInt
+            
+            
+            
+            read <a  href="CombEnumerator.TCombEnumerator.html#GetValueIndex">GetValueIndex</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="CombEnumerator.TCombEnumerator.html#ValuesNumber">ValuesNumber</a></b>: LongInt
+            
+            read <a  href="CombEnumerator.TCombEnumerator.html#GetValuesNumber">GetValuesNumber</a>;</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Fields</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="FCurrentComb"></a><code><b>FCurrentComb</b>: LongInt;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+indeksy vozmozhnyh znacheniy diskretnyh velichin, opredelennye v sootvetstvii s nomerom tekuschey zadannoy kombinatsii</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="FIsCombDefined"></a><code><b>FIsCombDefined</b>: Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="NumbersOfValues"></a><code><b>NumbersOfValues</b>: array of LongInt;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+klass, realizuyuschiy algoritm perebora vseh vozmozhnyh znacheniy zadannyh diskretnyh velichin; !!! velichina dolzhna imet' ne menee odnogo vozmozhnogo znacheniya !!!</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="ValuesIndexes"></a><code><b>ValuesIndexes</b>: array of LongInt;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+massiv, soderzhaschiy chisla, kazhdoe iz kotoryh predstavlyaet soboy chislo vozmozhnyh znacheniy, kotoroe mozhet prinimat' nekotoraya diskretnaya velichina; sama velichina v dannom sluchae ne konkretizirovana</p>
+</td></tr>
+</table>
+<h3 class="detail">Methods</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Destroy"></a><code>destructor <b>Destroy</b>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="GetCombNumber"></a><code>function <b>GetCombNumber</b>: LongInt;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+soderzhit True, esli tekuschaya kombinatsiya byla opredelena posredstvom SetCurrentComb, False v protivnom sluchae</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="GetCombNumberStartStop"></a><code>function <b>GetCombNumberStartStop</b>( const StartIndex, StopIndex: LongInt): LongInt;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="GetValueIndex"></a><code>function <b>GetValueIndex</b>(index: LongInt): LongInt;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="GetValuesNumber"></a><code>function <b>GetValuesNumber</b>: LongInt;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="AddNumberOfValues"></a><code>procedure <b>AddNumberOfValues</b>(const ANumberOfValues: LongInt); virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="ClearListOfNumbersOfValues"></a><code>procedure <b>ClearListOfNumbersOfValues</b>; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+dobavlyaet v spisok novuyu velichinu - kolichestvo prinimaemyh znacheniy nekotoroy diskretnoy velichiny</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="SetCurrentComb"></a><code>procedure <b>SetCurrentComb</b>(const ACurrentComb: LongInt); virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<h3 class="detail">Properties</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="CombNumber"></a><code>property <b>CombNumber</b>: LongInt
+            
+            
+            read <a  href="CombEnumerator.TCombEnumerator.html#GetCombNumber">GetCombNumber</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="CurrentComb"></a><code>property <b>CurrentComb</b>: LongInt
+            
+            read <a  href="CombEnumerator.TCombEnumerator.html#FCurrentComb">FCurrentComb</a>               write <a  href="CombEnumerator.TCombEnumerator.html#SetCurrentComb">SetCurrentComb</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+polnoe chislo kombinatsiy, kotoroe mozhno postroit' iz nekotorogo nabora diskretnyh velichin</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="ValueIndex"></a><code>property <b>ValueIndex</b>[index:LongInt]: LongInt
+            
+            
+            
+            read <a  href="CombEnumerator.TCombEnumerator.html#GetValueIndex">GetValueIndex</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+nomer vybrannoy kombinatsii v dannyy moment</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="ValuesNumber"></a><code>property <b>ValuesNumber</b>: LongInt
+            
+            read <a  href="CombEnumerator.TCombEnumerator.html#GetValuesNumber">GetValuesNumber</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+indeks odnogo iz vozmozhnyh diskretnyh znacheniy velichiny, zadavaemoy parametrom index; indeks opredelyaetsya v sootvetstvii s tekuschey vybrannoy kombinatsiey</p>
+</td></tr>
+</table>
+<hr noshade size="1"><span class="appinfo"><em>Generated by <a  href="http://pasdoc.sourceforge.net/">PasDoc 0.14.0</a>. </em>
+</span>
+</td></tr></table></body></html>

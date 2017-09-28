@@ -1,0 +1,172 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+<title>Fit: Main</title>
+<meta name="generator" content="PasDoc 0.14.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<table class="container"><tr><td class="navigation">
+<h2>Fit</h2><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p><p><a href="GVClasses.png" class="navigation">Classes hierarchy graph</a></p></td><td class="content">
+<h1 class="unit">Unit Main</h1>
+<table class="sections wide_list">
+<tr>
+<td><a class="section" href="#PasDoc-Description">Description</a></td><td>Uses</td><td>Classes, Interfaces, Objects and Records</td><td><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></td><td><a class="section" href="#PasDoc-Types">Types</a></td><td><a class="section" href="#PasDoc-Constants">Constants</a></td><td>Variables</td></tr></table>
+<a name="PasDoc-Description"></a><h2 class="description">Description</h2>
+&nbsp;<a name="PasDoc-Uses"></a><h2 class="overview">Overview</h2>
+<a name="PasDoc-FuncsProcs"></a><h3 class="summary">Functions and Procedures</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code>function <b><a  href="Main.html#CreateErrorMessage">CreateErrorMessage</a></b>(Msg: string): string;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a  href="Main.html#GetConfigDir">GetConfigDir</a></b>: string;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a  href="Main.html#GetSeqErrorCode">GetSeqErrorCode</a></b>(): LongInt;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a  href="Main.html#GetUserDir">GetUserDir</a></b>: string;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="Main.html#WriteLog">WriteLog</a></b>(Msg: string; MsgType: <a  href="Main.html#TMsgType">TMsgType</a>);</code></td>
+</tr>
+</table>
+<a name="PasDoc-Types"></a><h3 class="summary">Types</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><b><a  href="Main.html#TMsgType">TMsgType</a></b> = (...);</code></td>
+</tr>
+</table>
+<a name="PasDoc-Constants"></a><h3 class="summary">Constants</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><b><a  href="Main.html#ExternalIP">ExternalIP</a></b>: string = 'ec2-107-22-106-211.compute-1.amazonaws.com';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="Main.html#InternalError">InternalError</a></b>: string = 'Internal service error. Error code: ';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="Main.html#InternalIP">InternalIP</a></b>: string = '127.0.0.1';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="Main.html#InternalPort">InternalPort</a></b>: string = '1234';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="Main.html#Slash">Slash</a></b>: string = '/';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="Main.html#StrErrorID">StrErrorID</a></b>: string = ' Error identifier: ';</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Functions and Procedures</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="CreateErrorMessage"></a><code>function <b>CreateErrorMessage</b>(Msg: string): string;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+dopolnyaet soobschenie kodom oschibki</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="GetConfigDir"></a><code>function <b>GetConfigDir</b>: string;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="GetSeqErrorCode"></a><code>function <b>GetSeqErrorCode</b>(): LongInt;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="GetUserDir"></a><code>function <b>GetUserDir</b>: string;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+{$IFDEF FITPRO} trebuetsya dlya cgifit {$ENDIF} peremennye vyneseny v otdel'nyi modul', dlya togo chtoby k nim mozhno bylo by poluchit' dostup iz drugih modulei FITCGI FITCLIENT funkcii dlya opredeleniya mestopolozheniya ??? f-i d. rabotat' v mnogopotochnom okruzhenii</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="WriteLog"></a><code>procedure <b>WriteLog</b>(Msg: string; MsgType: <a  href="Main.html#TMsgType">TMsgType</a>);</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<h3 class="detail">Types</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TMsgType"></a><code><b>TMsgType</b> = (...);</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;<h6 class="description_section">Values</h6>
+<ul>
+<li>
+Fatal: &nbsp;</li>
+<li>
+Surprising: &nbsp;</li>
+<li>
+Notification_: &nbsp;</li>
+<li>
+User: &nbsp;</li>
+</ul>
+</td></tr>
+</table>
+<h3 class="detail">Constants</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="ExternalIP"></a><code><b>ExternalIP</b>: string = 'ec2-107-22-106-211.compute-1.amazonaws.com';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+IP dlya svyazi brauzera s CGI-klientom; eti dannye vstavlyayutsya v ishodyaschie stranitsy</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="InternalError"></a><code><b>InternalError</b>: string = 'Internal service error. Error code: ';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="InternalIP"></a><code><b>InternalIP</b>: string = '127.0.0.1';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+IP dlya svyazi CGI-klienta s serverom prilozheniya InternalIP: string = '192.168.0.190'; CGI-klient i server rabotayut na odnom kompyutere</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="InternalPort"></a><code><b>InternalPort</b>: string = '1234';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="Slash"></a><code><b>Slash</b>: string = '/';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="StrErrorID"></a><code><b>StrErrorID</b>: string = ' Error identifier: ';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<hr noshade size="1"><span class="appinfo"><em>Generated by <a  href="http://pasdoc.sourceforge.net/">PasDoc 0.14.0</a>. </em>
+</span>
+</td></tr></table></body></html>

@@ -1,0 +1,282 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+<title>Fit: FitServer</title>
+<meta name="generator" content="PasDoc 0.14.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<table class="container"><tr><td class="navigation">
+<h2>Fit</h2><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p><p><a href="GVClasses.png" class="navigation">Classes hierarchy graph</a></p></td><td class="content">
+<h1 class="unit">Unit FitServer</h1>
+<table class="sections wide_list">
+<tr>
+<td><a class="section" href="#PasDoc-Description">Description</a></td><td>Uses</td><td><a class="section" href="#PasDoc-Classes">Classes, Interfaces, Objects and Records</a></td><td>Functions and Procedures</td><td><a class="section" href="#PasDoc-Types">Types</a></td><td><a class="section" href="#PasDoc-Constants">Constants</a></td><td>Variables</td></tr></table>
+<a name="PasDoc-Description"></a><h2 class="description">Description</h2>
+<p>
+modul' soderzhit klass, realizuyuschiy logiku servera zdes' net nichego, chto svyazano s pol'zovatel'skim interfeysom; obrabotka isklyucheniy i preobrazovanie ih v soobscheniya ponimaemye aktorom dolzhna delat'sya v pogranichnyh ob'ektah; poetomu metody granichnyh ob'ektov dolzhny nah-sya blizhe k vershine steka, poetomu potok prilozheniya d. krutit'sya v metode granichnogo ob'ekta; isklyucheniya delyatsya na dva tipa dlya togo, chtoby mozhno bylo otpravlyat' klientu dva tipa soobscheniy !!! Vozniknovenie EAssertionFailed na vyhode metoda d. ponimat'sya kak nedopustimost' sostoyaniya dlya vyzova metoda, pri etom sostoyanie servera menyat'sya ne dolzhno !!! !!! Vozniknovenie lyubogo drugogo isklyucheniya d. interpretirovat'sya kak fatal'naya oshibka, pri etom sostoyanie servera d. privodit'sya k iznachal'nomu, kot. bylo posle zapuska !!! !!! Inogda, kogda metod mozhet vypolnit' svoyu semantiku EAssertionFailed mozhet pogloschat'sya vnutri metoda !!! !!! Dlya signalizatsii o nedopustimom sostoyanii luchshe ispol'zovat' ne EAssertionFailed, a isklyuchenie drugogo tipa, poskol'ku EAssertionFailed m. vyzyvat'sya iz bibliotek, a v takom sluchae nel'zya garantirovat' sohranenie sostoyaniya prgrammy !!!</p>
+<a name="PasDoc-Uses"></a><h2 class="overview">Overview</h2>
+<a name="PasDoc-Classes"></a><h3 class="cio">Classes, Interfaces, Objects and Records</h3>
+<table class="classestable wide_list">
+<tr class="listheader">
+<th class="itemname">Name</th>
+<th class="itemdesc">Description</th>
+</tr>
+<tr class="list">
+<td class="itemname">Class&nbsp;<a class="bold" href="FitServer.TFitServer.html"><code>TFitServer</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+</table>
+<a name="PasDoc-Types"></a><h3 class="summary">Types</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><b><a  href="FitServer.html#TRecreateServer">TRecreateServer</a></b> = procedure of object;</code></td>
+</tr>
+</table>
+<a name="PasDoc-Constants"></a><h3 class="summary">Constants</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><b><a  href="FitServer.html#BackPointsNum">BackPointsNum</a></b>: string = 'The number of background points should not be less then 2.';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="FitServer.html#BackRemoving">BackRemoving</a></b>: string = 'Now background points should be defined.';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="FitServer.html#CalcAborted">CalcAborted</a></b>: string = 'Calculation aborted.';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="FitServer.html#CalcNotStarted">CalcNotStarted</a></b>: string = 'The calculation not started.';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="FitServer.html#CRLF">CRLF</a></b>: string = #13#10;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="FitServer.html#DataMustBeSet">DataMustBeSet</a></b>: string = 'Define data before.';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="FitServer.html#EntireAlready">EntireAlready</a></b>: string = 'Entire dataset already selected.';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="FitServer.html#InadmissibleData">InadmissibleData</a></b>: string =
+        'Inadmissible data for this operation.';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="FitServer.html#InadmissibleParameterIndex">InadmissibleParameterIndex</a></b>: string = 'Inadmissible parameter index.';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="FitServer.html#InadmissibleServerState">InadmissibleServerState</a></b>: string =
+        'Inadmissible state for this operation.';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="FitServer.html#InadmissibleSpecimenIndex">InadmissibleSpecimenIndex</a></b>: string = 'Inadmissible specimen index.';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="FitServer.html#IsProfileWaiting">IsProfileWaiting</a></b>: string = 'Now the program waits data.';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="FitServer.html#IsReadyForAutoFit">IsReadyForAutoFit</a></b>: string = 'Now the program is ready for fitting with automatically selected conditions.';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="FitServer.html#IsReadyForFit">IsReadyForFit</a></b>: string = 'Now the program is ready for fitting with selected conditions.';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="FitServer.html#NotAllData">NotAllData</a></b>: string = 'Not all necessary data has been defined for the calculation.';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="FitServer.html#NowCalculation">NowCalculation</a></b>: string =
+        
+        'Now Calculation is executing.';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="FitServer.html#RangeAlready">RangeAlready</a></b>: string = 'Range of data already selected.';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="FitServer.html#RFactorStillNotCalculated">RFactorStillNotCalculated</a></b>: string = 'Not calculated';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="FitServer.html#SpecimenListNotReady">SpecimenListNotReady</a></b>: string = 'Specimen list not ready.';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="FitServer.html#SpecimenParameterListNotReady">SpecimenParameterListNotReady</a></b>: string = 'Specimen parameter list not ready.';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="FitServer.html#StillNotDone">StillNotDone</a></b>: string = 'The calculation still not accomplished.';</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Types</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="TRecreateServer"></a><code><b>TRecreateServer</b> = procedure of object;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Pri variatsii parametrov gaussianov seychas var'iruetsya amplituda i polozhenie, shirina prinimaetsya dlya vseh odinakovoy.</p>
+</td></tr>
+</table>
+<h3 class="detail">Constants</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="BackPointsNum"></a><code><b>BackPointsNum</b>: string = 'The number of background points should not be less then 2.';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="BackRemoving"></a><code><b>BackRemoving</b>: string = 'Now background points should be defined.';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="CalcAborted"></a><code><b>CalcAborted</b>: string = 'Calculation aborted.';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="CalcNotStarted"></a><code><b>CalcNotStarted</b>: string = 'The calculation not started.';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Raschet ne byl zapuschen</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="CRLF"></a><code><b>CRLF</b>: string = #13#10;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="DataMustBeSet"></a><code><b>DataMustBeSet</b>: string = 'Define data before.';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="EntireAlready"></a><code><b>EntireAlready</b>: string = 'Entire dataset already selected.';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="InadmissibleData"></a><code><b>InadmissibleData</b>: string =
+        'Inadmissible data for this operation.';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="InadmissibleParameterIndex"></a><code><b>InadmissibleParameterIndex</b>: string = 'Inadmissible parameter index.';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="InadmissibleServerState"></a><code><b>InadmissibleServerState</b>: string =
+        'Inadmissible state for this operation.';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="InadmissibleSpecimenIndex"></a><code><b>InadmissibleSpecimenIndex</b>: string = 'Inadmissible specimen index.';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="IsProfileWaiting"></a><code><b>IsProfileWaiting</b>: string = 'Now the program waits data.';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="IsReadyForAutoFit"></a><code><b>IsReadyForAutoFit</b>: string = 'Now the program is ready for fitting with automatically selected conditions.';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+dannaya stroka dolzhna poyavlyat'sya kogda nekotorye dannye esche ne zadany pol'zovatelem i v sluchae zapuska podgonki budut vybrany programmoy</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="IsReadyForFit"></a><code><b>IsReadyForFit</b>: string = 'Now the program is ready for fitting with selected conditions.';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+dannaya stroka dolzhna poyavlyat'sya kogda vse neobhodimye dlya rascheta dannye byli zadany pol'zovatelem</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="NotAllData"></a><code><b>NotAllData</b>: string = 'Not all necessary data has been defined for the calculation.';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="NowCalculation"></a><code><b>NowCalculation</b>: string =
+        
+        'Now Calculation is executing.';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="RangeAlready"></a><code><b>RangeAlready</b>: string = 'Range of data already selected.';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="RFactorStillNotCalculated"></a><code><b>RFactorStillNotCalculated</b>: string = 'Not calculated';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+'Now calculation is performing.';</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SpecimenListNotReady"></a><code><b>SpecimenListNotReady</b>: string = 'Specimen list not ready.';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="SpecimenParameterListNotReady"></a><code><b>SpecimenParameterListNotReady</b>: string = 'Specimen parameter list not ready.';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><a name="StillNotDone"></a><code><b>StillNotDone</b>: string = 'The calculation still not accomplished.';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Tekst d.b. primerno takoy: Ne vse neobhodimye dlya rascheta dannye opredeleny. Vy dolzhny zadat' samostoyatel'no, ili pozvolit' programme sgenerirovat' sleduyuschie dannye: intervaly primeneniya patternov, tochki privyazki i nachal'nye znacheniya parametrov patternov.</p>
+</td></tr>
+</table>
+<hr noshade size="1"><span class="appinfo"><em>Generated by <a  href="http://pasdoc.sourceforge.net/">PasDoc 0.14.0</a>. </em>
+</span>
+</td></tr></table></body></html>

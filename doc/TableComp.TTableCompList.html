@@ -1,0 +1,1340 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+<title>Fit: TableComp: Class TTableCompList</title>
+<meta name="generator" content="PasDoc 0.14.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<table class="container"><tr><td class="navigation">
+<h2>Fit</h2><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p><p><a href="GVClasses.png" class="navigation">Classes hierarchy graph</a></p></td><td class="content">
+<a name="TTableCompList"></a><h1 class="cio">Class TTableCompList</h1>
+<table class="sections wide_list">
+<tr>
+<td><a class="section" href="#PasDoc-Description">Description</a></td><td><a class="section" href="#PasDoc-Hierarchy">Hierarchy</a></td><td><a class="section" href="#PasDoc-Fields">Fields</a></td><td><a class="section" href="#PasDoc-Methods">Methods</a></td><td><a class="section" href="#PasDoc-Properties">Properties</a></td></tr></table>
+<a name="PasDoc-Description"></a><h2 class="unit">Unit</h2>
+<p class="unitlink">
+<a  href="TableComp.html">TableComp</a></p>
+<h2 class="declaration">Declaration</h2>
+<p class="declaration">
+<code>type TTableCompList = class(<a class="normal" href="SelfCopied.TSelfCopiedCompList.html">TSelfCopiedCompList</a>, IGridDataSource)</code></p>
+<h2 class="description">Description</h2>
+<div class="nodescription">no description available, TSelfCopiedCompList description follows</div><a name="PasDoc-Hierarchy"></a><h2 class="hierarchy">Hierarchy</h2>
+<ul class="hierarchy"><li class="ancestor">TSelfCheckedComponentList</li>
+<li class="ancestor"><a class="normal" href="SelfCopied.TSelfCopiedCompList.html">TSelfCopiedCompList</a></li>
+<li class="thisitem">TTableCompList</li></ul><h2 class="overview">Overview</h2>
+<a name="PasDoc-Fields"></a><h3 class="summary">Fields</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="TableComp.TTableCompList.html#AreColWidthsReady">AreColWidthsReady</a></b>: Boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="TableComp.TTableCompList.html#AreRowHeightsReady">AreRowHeightsReady</a></b>: Boolean;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="TableComp.TTableCompList.html#Destroying">Destroying</a></b>: Boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="TableComp.TTableCompList.html#FCaption">FCaption</a></b>: string;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="TableComp.TTableCompList.html#FSavedCol">FSavedCol</a></b>: LongInt;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="TableComp.TTableCompList.html#FSavedLeftCol">FSavedLeftCol</a></b>: LongInt;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="TableComp.TTableCompList.html#FSavedRow">FSavedRow</a></b>: LongInt;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="TableComp.TTableCompList.html#FSavedSelection">FSavedSelection</a></b>: TGridRect;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="TableComp.TTableCompList.html#FSavedTopRow">FSavedTopRow</a></b>: LongInt;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="TableComp.TTableCompList.html#HeightsSaved">HeightsSaved</a></b>: Boolean;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="TableComp.TTableCompList.html#SavedColWidths">SavedColWidths</a></b>: <a  href="Tools.html#TLongArray">TLongArray</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="TableComp.TTableCompList.html#SavedRowHeights">SavedRowHeights</a></b>: <a  href="Tools.html#TLongArray">TLongArray</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="TableComp.TTableCompList.html#SettingsSaved">SettingsSaved</a></b>: Boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="TableComp.TTableCompList.html#WidthsSaved">WidthsSaved</a></b>: Boolean;</code></td>
+</tr>
+</table>
+<a name="PasDoc-Methods"></a><h3 class="summary">Methods</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>constructor <b><a  href="TableComp.TTableCompList.html#Create">Create</a></b>(AOwner: TComponent); override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>destructor <b><a  href="TableComp.TTableCompList.html#Destroy">Destroy</a></b>; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="TableComp.TTableCompList.html#AutoHeights">AutoHeights</a></b>: Boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="TableComp.TTableCompList.html#AutoWidths">AutoWidths</a></b>: Boolean;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="TableComp.TTableCompList.html#GetCellColor">GetCellColor</a></b>( const ACol, ARow: LongInt; var Color: TColor): Boolean; virtual;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="TableComp.TTableCompList.html#GetCellEditMask">GetCellEditMask</a></b>( const ACol, ARow: LongInt): string; virtual; abstract;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="TableComp.TTableCompList.html#GetCellEnabledCharSet">GetCellEnabledCharSet</a></b>( const ACol, ARow: LongInt): <a  href="Tools.html#TCharSet">TCharSet</a>; virtual; abstract;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="TableComp.TTableCompList.html#GetCol">GetCol</a></b>: LongInt;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="TableComp.TTableCompList.html#GetColContents">GetColContents</a></b>( Grid: TStringGrid; ColNum: LongInt): Boolean; virtual; abstract;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="TableComp.TTableCompList.html#GetColCount">GetColCount</a></b>: LongInt; virtual;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="TableComp.TTableCompList.html#GetColNumFixed">GetColNumFixed</a></b>: Boolean; virtual;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="TableComp.TTableCompList.html#GetColWidth">GetColWidth</a></b>(const Col: LongInt): LongInt;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="TableComp.TTableCompList.html#GetColWidthByDefault">GetColWidthByDefault</a></b>( const Index: LongInt): LongInt; virtual;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="TableComp.TTableCompList.html#GetDataFromGrid">GetDataFromGrid</a></b>(Grid: TStringGrid): Boolean; virtual; abstract;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="TableComp.TTableCompList.html#GetFixedCols">GetFixedCols</a></b>: LongInt; virtual;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="TableComp.TTableCompList.html#GetFixedRows">GetFixedRows</a></b>: LongInt; virtual;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="TableComp.TTableCompList.html#GetInfoCols">GetInfoCols</a></b>: LongInt; virtual; abstract;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="TableComp.TTableCompList.html#GetInfoRows">GetInfoRows</a></b>: LongInt; virtual; abstract;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="TableComp.TTableCompList.html#GetLeftCol">GetLeftCol</a></b>: LongInt;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="TableComp.TTableCompList.html#GetRow">GetRow</a></b>: LongInt;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="TableComp.TTableCompList.html#GetRowContents">GetRowContents</a></b>( Grid: TStringGrid; RowNum: LongInt): Boolean; virtual; abstract;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="TableComp.TTableCompList.html#GetRowCount">GetRowCount</a></b>: LongInt; virtual;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="TableComp.TTableCompList.html#GetRowHeight">GetRowHeight</a></b>(const Row: LongInt): LongInt;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="TableComp.TTableCompList.html#GetRowHeightByDefault">GetRowHeightByDefault</a></b>( const Index: LongInt): LongInt; virtual;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="TableComp.TTableCompList.html#GetRowNumFixed">GetRowNumFixed</a></b>: Boolean; virtual;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="TableComp.TTableCompList.html#GetSelection">GetSelection</a></b>: TGridRect;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="TableComp.TTableCompList.html#GetTopRow">GetTopRow</a></b>: LongInt;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="TableComp.TTableCompList.html#IsCellDisabled">IsCellDisabled</a></b>( const ACol, ARow: LongInt): Boolean; virtual;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="TableComp.TTableCompList.html#IsDataSourceEmpty">IsDataSourceEmpty</a></b>: Boolean; virtual; abstract;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="TableComp.TTableCompList.html#IsDataValid">IsDataValid</a></b>(const ACol, ARow: LongInt; const AString: string): Boolean; virtual; abstract;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="TableComp.TTableCompList.html#MayIDoAddColumn">MayIDoAddColumn</a></b>: Boolean; virtual;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="TableComp.TTableCompList.html#MayIDoAddRow">MayIDoAddRow</a></b>: Boolean; virtual;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="TableComp.TTableCompList.html#MayIDoClearAllCells">MayIDoClearAllCells</a></b>: Boolean; virtual;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="TableComp.TTableCompList.html#MayIDoClearSelectedArea">MayIDoClearSelectedArea</a></b>: Boolean; virtual;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="TableComp.TTableCompList.html#MayIDoDeleteAllData">MayIDoDeleteAllData</a></b>: Boolean; virtual;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="TableComp.TTableCompList.html#MayIDoDeleteColumns">MayIDoDeleteColumns</a></b>(StartCol, ColsCount: LongInt): Boolean; virtual;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="TableComp.TTableCompList.html#MayIDoDeleteRows">MayIDoDeleteRows</a></b>(StartRow, RowsCount: LongInt): Boolean; virtual;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="TableComp.TTableCompList.html#MayIDoInsertColumns">MayIDoInsertColumns</a></b>(StartCol, ColsCount: LongInt): Boolean; virtual;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="TableComp.TTableCompList.html#MayIDoInsertRows">MayIDoInsertRows</a></b>(StartRow, RowsCount: LongInt): Boolean; virtual;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="TableComp.TTableCompList.html#ValueToString">ValueToString</a></b>(const ACol, ARow: LongInt ): string; virtual; abstract;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="TableComp.TTableCompList.html#AddColWidthItem">AddColWidthItem</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="TableComp.TTableCompList.html#AddRowHeightItem">AddRowHeightItem</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="TableComp.TTableCompList.html#AllDataDeleted">AllDataDeleted</a></b>; virtual;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="TableComp.TTableCompList.html#BeforeStringToValue">BeforeStringToValue</a></b>(const ACol, ARow: LongInt; const AString: string); virtual; abstract;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="TableComp.TTableCompList.html#ColumnAdded">ColumnAdded</a></b>; virtual;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="TableComp.TTableCompList.html#ColumnsDeleted">ColumnsDeleted</a></b>( const StartCol, ColsCount: LongInt); virtual;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="TableComp.TTableCompList.html#ColumnsInserted">ColumnsInserted</a></b>( const StartCol, ColsCount: LongInt); virtual;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="TableComp.TTableCompList.html#DeleteAllColWidthItems">DeleteAllColWidthItems</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="TableComp.TTableCompList.html#DeleteAllRowHeightItems">DeleteAllRowHeightItems</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="TableComp.TTableCompList.html#DeleteColWidthItem">DeleteColWidthItem</a></b>(const Index: LongInt);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="TableComp.TTableCompList.html#DeleteRowHeightItem">DeleteRowHeightItem</a></b>(const Index: LongInt);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="TableComp.TTableCompList.html#GetColWidths">GetColWidths</a></b>(Grid: TStringGrid);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="TableComp.TTableCompList.html#GetRowHeights">GetRowHeights</a></b>(Grid: TStringGrid);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="TableComp.TTableCompList.html#GridAssign">GridAssign</a></b>(Grid: TStringGrid); virtual;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="TableComp.TTableCompList.html#GridRelease">GridRelease</a></b>(Grid: TStringGrid); virtual;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="TableComp.TTableCompList.html#InitColWidths">InitColWidths</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="TableComp.TTableCompList.html#InitRowHeights">InitRowHeights</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="TableComp.TTableCompList.html#InsertColWidthItem">InsertColWidthItem</a></b>(const Index: LongInt);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="TableComp.TTableCompList.html#InsertRowHeightItem">InsertRowHeightItem</a></b>(const Index: LongInt);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="TableComp.TTableCompList.html#RowAdded">RowAdded</a></b>; virtual;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="TableComp.TTableCompList.html#RowsDeleted">RowsDeleted</a></b>( const StartRow, RowsCount: LongInt); virtual;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="TableComp.TTableCompList.html#RowsInserted">RowsInserted</a></b>( const StartRow, RowsCount: LongInt); virtual;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="TableComp.TTableCompList.html#SaveCol">SaveCol</a></b>(const Col: LongInt);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="TableComp.TTableCompList.html#SaveColWidth">SaveColWidth</a></b>(const Col, Width: LongInt);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="TableComp.TTableCompList.html#SaveLeftCol">SaveLeftCol</a></b>(const LeftCol: LongInt);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="TableComp.TTableCompList.html#SaveRow">SaveRow</a></b>(const Row: LongInt);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="TableComp.TTableCompList.html#SaveRowHeight">SaveRowHeight</a></b>(const Row, Height: LongInt);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="TableComp.TTableCompList.html#SaveSelection">SaveSelection</a></b>(const Selection: TGridRect);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="TableComp.TTableCompList.html#SaveTopRow">SaveTopRow</a></b>(const TopRow: LongInt);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="TableComp.TTableCompList.html#SetCaption">SetCaption</a></b>(Grid: TStringGrid); virtual; abstract;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="TableComp.TTableCompList.html#SetColContents">SetColContents</a></b>( Grid: TStringGrid; ColNum: LongInt); virtual; abstract;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="TableComp.TTableCompList.html#SetColFunc">SetColFunc</a></b>(Grid: TStringGrid); virtual;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="TableComp.TTableCompList.html#SetColOptions">SetColOptions</a></b>(Grid: TStringGrid); virtual; abstract;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="TableComp.TTableCompList.html#SetColWidths">SetColWidths</a></b>(Grid: TStringGrid);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="TableComp.TTableCompList.html#SetDataToGrid">SetDataToGrid</a></b>(Grid: TStringGrid); virtual; abstract;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="TableComp.TTableCompList.html#SetRowContents">SetRowContents</a></b>( Grid: TStringGrid; RowNum: LongInt); virtual; abstract;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="TableComp.TTableCompList.html#SetRowHeights">SetRowHeights</a></b>(Grid: TStringGrid);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="TableComp.TTableCompList.html#SetValueByDefault">SetValueByDefault</a></b>(const ACol, ARow: LongInt); virtual; abstract;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="TableComp.TTableCompList.html#StringToValue">StringToValue</a></b>(const ACol, ARow: LongInt; const AString: string ); virtual; abstract;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="TableComp.TTableCompList.html#CheckColIndex">CheckColIndex</a></b>(const Index: LongInt);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="TableComp.TTableCompList.html#CheckRowIndex">CheckRowIndex</a></b>(const Index: LongInt);</code></td>
+</tr>
+</table>
+<a name="PasDoc-Properties"></a><h3 class="summary">Properties</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="TableComp.TTableCompList.html#Caption">Caption</a></b>: string
+            read <a  href="TableComp.TTableCompList.html#FCaption">FCaption</a>               write <a  href="TableComp.TTableCompList.html#FCaption">FCaption</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="TableComp.TTableCompList.html#SavedCol">SavedCol</a></b>: LongInt
+            read <a  href="TableComp.TTableCompList.html#GetCol">GetCol</a>                 write <a  href="TableComp.TTableCompList.html#SaveCol">SaveCol</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="TableComp.TTableCompList.html#SavedLeftCol">SavedLeftCol</a></b>: LongInt
+            read <a  href="TableComp.TTableCompList.html#GetLeftCol">GetLeftCol</a>             write <a  href="TableComp.TTableCompList.html#SaveLeftCol">SaveLeftCol</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="TableComp.TTableCompList.html#SavedRow">SavedRow</a></b>: LongInt
+            read <a  href="TableComp.TTableCompList.html#GetRow">GetRow</a>                 write <a  href="TableComp.TTableCompList.html#SaveRow">SaveRow</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="TableComp.TTableCompList.html#SavedSelection">SavedSelection</a></b>: TGridRect
+            read <a  href="TableComp.TTableCompList.html#GetSelection">GetSelection</a>           write <a  href="TableComp.TTableCompList.html#SaveSelection">SaveSelection</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="TableComp.TTableCompList.html#SavedTopRow">SavedTopRow</a></b>: LongInt
+            read <a  href="TableComp.TTableCompList.html#GetTopRow">GetTopRow</a>              write <a  href="TableComp.TTableCompList.html#SaveTopRow">SaveTopRow</a>;</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Fields</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="AreColWidthsReady"></a><code><b>AreColWidthsReady</b>: Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+массивы удаляются в деструкторе, поэтому удаление элементов массива в момент удаления всего обекта должно быть запрещено</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="AreRowHeightsReady"></a><code><b>AreRowHeightsReady</b>: Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+признак того, что массив уже</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="Destroying"></a><code><b>Destroying</b>: Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="FCaption"></a><code><b>FCaption</b>: string;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+абстрактный список компонентов, который умеет отображать свойства компонентов в таблице; класс реализует функции сохранения/чтения свойств таблицы, но никак не связывает расположение данных в таблице с элементами списка !!! при изменении количества колонок, возвращаемое GetColCount нужно обязательно провести соответсвующие изменения в SetCaption, SetColOptions, SetColFunc, SetRowContents, GetRowContents !!!</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="FSavedCol"></a><code><b>FSavedCol</b>: LongInt;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+инициализирован сохраненные свойства таблицы</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="FSavedLeftCol"></a><code><b>FSavedLeftCol</b>: LongInt;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+инициализирован сохраненные свойства таблицы</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="FSavedRow"></a><code><b>FSavedRow</b>: LongInt;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+инициализирован сохраненные свойства таблицы</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="FSavedSelection"></a><code><b>FSavedSelection</b>: TGridRect;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="FSavedTopRow"></a><code><b>FSavedTopRow</b>: LongInt;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+инициализирован сохраненные свойства таблицы</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="HeightsSaved"></a><code><b>HeightsSaved</b>: Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+признак того, что параметры таблицы были сохранены - устанавливается в GridRelease</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="SavedColWidths"></a><code><b>SavedColWidths</b>: <a  href="Tools.html#TLongArray">TLongArray</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="SavedRowHeights"></a><code><b>SavedRowHeights</b>: <a  href="Tools.html#TLongArray">TLongArray</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="SettingsSaved"></a><code><b>SettingsSaved</b>: Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="WidthsSaved"></a><code><b>WidthsSaved</b>: Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+признак того, что параметры таблицы были сохранены - устанавливается в GridRelease</p>
+</td></tr>
+</table>
+<h3 class="detail">Methods</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Create"></a><code>constructor <b>Create</b>(AOwner: TComponent); override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Destroy"></a><code>destructor <b>Destroy</b>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="AutoHeights"></a><code>function <b>AutoHeights</b>: Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="AutoWidths"></a><code>function <b>AutoWidths</b>: Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="GetCellColor"></a><code>function <b>GetCellColor</b>( const ACol, ARow: LongInt; var Color: TColor): Boolean; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+устанавливает правильное значение &quot;по умолчанию&quot; для данной ячейки; используется при обработке операции очистки ячейки</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="GetCellEditMask"></a><code>function <b>GetCellEditMask</b>( const ACol, ARow: LongInt): string; virtual; abstract;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="GetCellEnabledCharSet"></a><code>function <b>GetCellEnabledCharSet</b>( const ACol, ARow: LongInt): <a  href="Tools.html#TCharSet">TCharSet</a>; virtual; abstract;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="GetCol"></a><code>function <b>GetCol</b>: LongInt;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="GetColContents"></a><code>function <b>GetColContents</b>( Grid: TStringGrid; ColNum: LongInt): Boolean; virtual; abstract;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="GetColCount"></a><code>function <b>GetColCount</b>: LongInt; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="GetColNumFixed"></a><code>function <b>GetColNumFixed</b>: Boolean; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+число фиксированных строк (по умолчанию = 1)</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="GetColWidth"></a><code>function <b>GetColWidth</b>(const Col: LongInt): LongInt;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+(по умолчанию = False)</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="GetColWidthByDefault"></a><code>function <b>GetColWidthByDefault</b>( const Index: LongInt): LongInt; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="GetDataFromGrid"></a><code>function <b>GetDataFromGrid</b>(Grid: TStringGrid): Boolean; virtual; abstract;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="GetFixedCols"></a><code>function <b>GetFixedCols</b>: LongInt; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+число строк информационной части таблицы</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="GetFixedRows"></a><code>function <b>GetFixedRows</b>: LongInt; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+число фиксированных колонок (по умолчанию = 1)</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="GetInfoCols"></a><code>function <b>GetInfoCols</b>: LongInt; virtual; abstract;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+полное число строк, включая Fixed</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="GetInfoRows"></a><code>function <b>GetInfoRows</b>: LongInt; virtual; abstract;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+число колонок информационной части таблицы</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="GetLeftCol"></a><code>function <b>GetLeftCol</b>: LongInt;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="GetRow"></a><code>function <b>GetRow</b>: LongInt;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="GetRowContents"></a><code>function <b>GetRowContents</b>( Grid: TStringGrid; RowNum: LongInt): Boolean; virtual; abstract;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="GetRowCount"></a><code>function <b>GetRowCount</b>: LongInt; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+полное число колонок, включая Fixed</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="GetRowHeight"></a><code>function <b>GetRowHeight</b>(const Row: LongInt): LongInt;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="GetRowHeightByDefault"></a><code>function <b>GetRowHeightByDefault</b>( const Index: LongInt): LongInt; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="GetRowNumFixed"></a><code>function <b>GetRowNumFixed</b>: Boolean; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+(по умолчанию = False)</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="GetSelection"></a><code>function <b>GetSelection</b>: TGridRect;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="GetTopRow"></a><code>function <b>GetTopRow</b>: LongInt;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="IsCellDisabled"></a><code>function <b>IsCellDisabled</b>( const ACol, ARow: LongInt): Boolean; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="IsDataSourceEmpty"></a><code>function <b>IsDataSourceEmpty</b>: Boolean; virtual; abstract;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+///////////////////////////////////////////////////////////////////// методы нового интерфейса
+
+<p>методы данного интерфейса подразумевают, что активной является сетка, а источник данных пассивный (это также отражается в названиях методов) /////////////////////////////////////////////////////////////////////</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="IsDataValid"></a><code>function <b>IsDataValid</b>(const ACol, ARow: LongInt; const AString: string): Boolean; virtual; abstract;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="MayIDoAddColumn"></a><code>function <b>MayIDoAddColumn</b>: Boolean; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="MayIDoAddRow"></a><code>function <b>MayIDoAddRow</b>: Boolean; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="MayIDoClearAllCells"></a><code>function <b>MayIDoClearAllCells</b>: Boolean; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="MayIDoClearSelectedArea"></a><code>function <b>MayIDoClearSelectedArea</b>: Boolean; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="MayIDoDeleteAllData"></a><code>function <b>MayIDoDeleteAllData</b>: Boolean; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="MayIDoDeleteColumns"></a><code>function <b>MayIDoDeleteColumns</b>(StartCol, ColsCount: LongInt): Boolean; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="MayIDoDeleteRows"></a><code>function <b>MayIDoDeleteRows</b>(StartRow, RowsCount: LongInt): Boolean; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="MayIDoInsertColumns"></a><code>function <b>MayIDoInsertColumns</b>(StartCol, ColsCount: LongInt): Boolean; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="MayIDoInsertRows"></a><code>function <b>MayIDoInsertRows</b>(StartRow, RowsCount: LongInt): Boolean; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+все функции проверки возможности выполнения действия возвращают False; классы - потомки должны перекрыть их</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="ValueToString"></a><code>function <b>ValueToString</b>(const ACol, ARow: LongInt ): string; virtual; abstract;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="AddColWidthItem"></a><code>procedure <b>AddColWidthItem</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="AddRowHeightItem"></a><code>procedure <b>AddRowHeightItem</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="AllDataDeleted"></a><code>procedure <b>AllDataDeleted</b>; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="BeforeStringToValue"></a><code>procedure <b>BeforeStringToValue</b>(const ACol, ARow: LongInt; const AString: string); virtual; abstract;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="ColumnAdded"></a><code>procedure <b>ColumnAdded</b>; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="ColumnsDeleted"></a><code>procedure <b>ColumnsDeleted</b>( const StartCol, ColsCount: LongInt); virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="ColumnsInserted"></a><code>procedure <b>ColumnsInserted</b>( const StartCol, ColsCount: LongInt); virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="DeleteAllColWidthItems"></a><code>procedure <b>DeleteAllColWidthItems</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+функции управления массивами сохраненных значений ширины (высоты) колонок (столбцов)</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="DeleteAllRowHeightItems"></a><code>procedure <b>DeleteAllRowHeightItems</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="DeleteColWidthItem"></a><code>procedure <b>DeleteColWidthItem</b>(const Index: LongInt);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="DeleteRowHeightItem"></a><code>procedure <b>DeleteRowHeightItem</b>(const Index: LongInt);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="GetColWidths"></a><code>procedure <b>GetColWidths</b>(Grid: TStringGrid);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+устанавливает ширину колонок таблицы</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="GetRowHeights"></a><code>procedure <b>GetRowHeights</b>(Grid: TStringGrid);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+устанавливает высоту строк таблицы</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="GridAssign"></a><code>procedure <b>GridAssign</b>(Grid: TStringGrid); virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+///////////////////////////////////////////////////////////////////// методы старого интерфейса сохранить для совместимости с прежними приложениями, а также для того, чтобы можно было работать с неактивными сетками или когда активность таблицы не требуется
+
+<p>методы данного интерфейса подразумевают, что источник данных является активным, а сетка пассивной (это отражается в названиях методов) /////////////////////////////////////////////////////////////////////</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="GridRelease"></a><code>procedure <b>GridRelease</b>(Grid: TStringGrid); virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+установка параметров таблицы; когда данные устанавливаются в сетку по инициативе источника данных ввод в таблицу запрещен</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="InitColWidths"></a><code>procedure <b>InitColWidths</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="InitRowHeights"></a><code>procedure <b>InitRowHeights</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+первоначальная инициализация массива</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="InsertColWidthItem"></a><code>procedure <b>InsertColWidthItem</b>(const Index: LongInt);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="InsertRowHeightItem"></a><code>procedure <b>InsertRowHeightItem</b>(const Index: LongInt);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="RowAdded"></a><code>procedure <b>RowAdded</b>; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="RowsDeleted"></a><code>procedure <b>RowsDeleted</b>( const StartRow, RowsCount: LongInt); virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+эти методы удаления, вставки, очистки вызывают исключение с сообщением о невозможности выполнить данное действие; классы - потомки должны перекрыть эти методы для реализации требуемых действий</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="RowsInserted"></a><code>procedure <b>RowsInserted</b>( const StartRow, RowsCount: LongInt); virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="SaveCol"></a><code>procedure <b>SaveCol</b>(const Col: LongInt);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+номер текущей выбранной колонки</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="SaveColWidth"></a><code>procedure <b>SaveColWidth</b>(const Col, Width: LongInt);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="SaveLeftCol"></a><code>procedure <b>SaveLeftCol</b>(const LeftCol: LongInt);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="SaveRow"></a><code>procedure <b>SaveRow</b>(const Row: LongInt);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+номер текущей выбранной строки</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="SaveRowHeight"></a><code>procedure <b>SaveRowHeight</b>(const Row, Height: LongInt);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="SaveSelection"></a><code>procedure <b>SaveSelection</b>(const Selection: TGridRect);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="SaveTopRow"></a><code>procedure <b>SaveTopRow</b>(const TopRow: LongInt);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="SetCaption"></a><code>procedure <b>SetCaption</b>(Grid: TStringGrid); virtual; abstract;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="SetColContents"></a><code>procedure <b>SetColContents</b>( Grid: TStringGrid; ColNum: LongInt); virtual; abstract;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="SetColFunc"></a><code>procedure <b>SetColFunc</b>(Grid: TStringGrid); virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+устанавливает опции колонок в Grid'е</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="SetColOptions"></a><code>procedure <b>SetColOptions</b>(Grid: TStringGrid); virtual; abstract;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="SetColWidths"></a><code>procedure <b>SetColWidths</b>(Grid: TStringGrid);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+устанавливает функции для колонок</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="SetDataToGrid"></a><code>procedure <b>SetDataToGrid</b>(Grid: TStringGrid); virtual; abstract;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+сохранение изменений параметров таблицы</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="SetRowContents"></a><code>procedure <b>SetRowContents</b>( Grid: TStringGrid; RowNum: LongInt); virtual; abstract;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+сохраняет во внутренних полях значения высоты строк таблицы</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="SetRowHeights"></a><code>procedure <b>SetRowHeights</b>(Grid: TStringGrid);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+сохраняет во внутренних полях значения ширины колонок таблицы</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="SetValueByDefault"></a><code>procedure <b>SetValueByDefault</b>(const ACol, ARow: LongInt); virtual; abstract;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="StringToValue"></a><code>procedure <b>StringToValue</b>(const ACol, ARow: LongInt; const AString: string ); virtual; abstract;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="CheckColIndex"></a><code>procedure <b>CheckColIndex</b>(const Index: LongInt);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+объект находится в состоянии удаления проверяют допустимость значений индекса колонки (строки), в случае недопустимости возбуждается исключение</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="CheckRowIndex"></a><code>procedure <b>CheckRowIndex</b>(const Index: LongInt);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<h3 class="detail">Properties</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Caption"></a><code>property <b>Caption</b>: string
+            read <a  href="TableComp.TTableCompList.html#FCaption">FCaption</a>               write <a  href="TableComp.TTableCompList.html#FCaption">FCaption</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="SavedCol"></a><code>property <b>SavedCol</b>: LongInt
+            read <a  href="TableComp.TTableCompList.html#GetCol">GetCol</a>                 write <a  href="TableComp.TTableCompList.html#SaveCol">SaveCol</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="SavedLeftCol"></a><code>property <b>SavedLeftCol</b>: LongInt
+            read <a  href="TableComp.TTableCompList.html#GetLeftCol">GetLeftCol</a>             write <a  href="TableComp.TTableCompList.html#SaveLeftCol">SaveLeftCol</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="SavedRow"></a><code>property <b>SavedRow</b>: LongInt
+            read <a  href="TableComp.TTableCompList.html#GetRow">GetRow</a>                 write <a  href="TableComp.TTableCompList.html#SaveRow">SaveRow</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="SavedSelection"></a><code>property <b>SavedSelection</b>: TGridRect
+            read <a  href="TableComp.TTableCompList.html#GetSelection">GetSelection</a>           write <a  href="TableComp.TTableCompList.html#SaveSelection">SaveSelection</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="SavedTopRow"></a><code>property <b>SavedTopRow</b>: LongInt
+            read <a  href="TableComp.TTableCompList.html#GetTopRow">GetTopRow</a>              write <a  href="TableComp.TTableCompList.html#SaveTopRow">SaveTopRow</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<hr noshade size="1"><span class="appinfo"><em>Generated by <a  href="http://pasdoc.sourceforge.net/">PasDoc 0.14.0</a>. </em>
+</span>
+</td></tr></table></body></html>

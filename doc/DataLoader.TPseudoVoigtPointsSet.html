@@ -1,0 +1,240 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+<title>Fit: DataLoader: Class TPseudoVoigtPointsSet</title>
+<meta name="generator" content="PasDoc 0.14.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<table class="container"><tr><td class="navigation">
+<h2>Fit</h2><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p><p><a href="GVClasses.png" class="navigation">Classes hierarchy graph</a></p></td><td class="content">
+<a name="TPseudoVoigtPointsSet"></a><h1 class="cio">Class TPseudoVoigtPointsSet</h1>
+<table class="sections wide_list">
+<tr>
+<td><a class="section" href="#PasDoc-Description">Description</a></td><td><a class="section" href="#PasDoc-Hierarchy">Hierarchy</a></td><td><a class="section" href="#PasDoc-Fields">Fields</a></td><td><a class="section" href="#PasDoc-Methods">Methods</a></td><td><a class="section" href="#PasDoc-Properties">Properties</a></td></tr></table>
+<a name="PasDoc-Description"></a><h2 class="unit">Unit</h2>
+<p class="unitlink">
+<a  href="DataLoader.html">DataLoader</a></p>
+<h2 class="declaration">Declaration</h2>
+<p class="declaration">
+<code>type TPseudoVoigtPointsSet = class(<a class="normal" href="DataLoader.TCurvePointsSet.html">TCurvePointsSet</a>)</code></p>
+<h2 class="description">Description</h2>
+<div class="nodescription">no description available, TCurvePointsSet description follows</div><p>
+bazovyy konteyner nabora tochek dlya vseh rasschityvaemyh krivyh !!! TCurvePointsSet dolzhna nasledovat' Lambda ot TNeutronPointsSet dlya togo, chtoby otobrazhat'sya v grafikah soglasovanno s TNeutronPointsSet !!!</p>
+<a name="PasDoc-Hierarchy"></a><h2 class="hierarchy">Hierarchy</h2>
+<ul class="hierarchy"><li class="ancestor">TCBRCComponent</li>
+<li class="ancestor"><a class="normal" href="SelfCopied.TSelfCopiedComponent.html">TSelfCopiedComponent</a></li>
+<li class="ancestor"><a class="normal" href="DataLoader.TPointsSet.html">TPointsSet</a></li>
+<li class="ancestor"><a class="normal" href="DataLoader.TNeutronPointsSet.html">TNeutronPointsSet</a></li>
+<li class="ancestor"><a class="normal" href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a></li>
+<li class="ancestor"><a class="normal" href="DataLoader.TCurvePointsSet.html">TCurvePointsSet</a></li>
+<li class="thisitem">TPseudoVoigtPointsSet</li></ul><h2 class="overview">Overview</h2>
+<a name="PasDoc-Fields"></a><h3 class="summary">Fields</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="DataLoader.TPseudoVoigtPointsSet.html#EtaIndex">EtaIndex</a></b>: LongInt;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="DataLoader.TPseudoVoigtPointsSet.html#EtaP">EtaP</a></b>: <a  href="DataLoader.TSpecialCurveParameter.html">TSpecialCurveParameter</a>;</code></td>
+</tr>
+</table>
+<a name="PasDoc-Methods"></a><h3 class="summary">Methods</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>constructor <b><a  href="DataLoader.TPseudoVoigtPointsSet.html#Create">Create</a></b>(AOwner: TComponent); override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="DataLoader.TPseudoVoigtPointsSet.html#GetName">GetName</a></b>: string; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="DataLoader.TPseudoVoigtPointsSet.html#HasEta">HasEta</a></b>: Boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>function <b><a  href="DataLoader.TPseudoVoigtPointsSet.html#GetEta">GetEta</a></b>: Double;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>function <b><a  href="DataLoader.TPseudoVoigtPointsSet.html#GetParam">GetParam</a></b>(Index: LongInt): Double; override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>function <b><a  href="DataLoader.TPseudoVoigtPointsSet.html#GetParamByName">GetParamByName</a></b>(Name: string): Double; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="DataLoader.TPseudoVoigtPointsSet.html#DoCalc">DoCalc</a></b>(const Intervals: <a  href="DataLoader.TPointsSet.html">TPointsSet</a>); override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="DataLoader.TPseudoVoigtPointsSet.html#SetEta">SetEta</a></b>(Value: Double);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="DataLoader.TPseudoVoigtPointsSet.html#SetParam">SetParam</a></b>(Index: LongInt; Value: Double); override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="DataLoader.TPseudoVoigtPointsSet.html#SetParamByName">SetParamByName</a></b>(Name: string; Value: Double); override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="DataLoader.TPseudoVoigtPointsSet.html#SetSpecParamPtr">SetSpecParamPtr</a></b>(P: <a  href="DataLoader.TSpecialCurveParameter.html">TSpecialCurveParameter</a>); override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="DataLoader.TPseudoVoigtPointsSet.html#SetSpecParamVarIndex">SetSpecParamVarIndex</a></b>( P: <a  href="DataLoader.TSpecialCurveParameter.html">TSpecialCurveParameter</a>; Index: LongInt); override;</code></td>
+</tr>
+</table>
+<a name="PasDoc-Properties"></a><h3 class="summary">Properties</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="DataLoader.TPseudoVoigtPointsSet.html#Eta">Eta</a></b>: Double read <a  href="DataLoader.TPseudoVoigtPointsSet.html#GetEta">GetEta</a> write <a  href="DataLoader.TPseudoVoigtPointsSet.html#SetEta">SetEta</a>;</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Fields</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="EtaIndex"></a><code><b>EtaIndex</b>: LongInt;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="EtaP"></a><code><b>EtaP</b>: <a  href="DataLoader.TSpecialCurveParameter.html">TSpecialCurveParameter</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Eta - otnositel'nyi ves gaussiana i lorentziana</p>
+</td></tr>
+</table>
+<h3 class="detail">Methods</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Create"></a><code>constructor <b>Create</b>(AOwner: TComponent); override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="GetName"></a><code>function <b>GetName</b>: string; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="HasEta"></a><code>function <b>HasEta</b>: Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="GetEta"></a><code>function <b>GetEta</b>: Double;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="GetParam"></a><code>function <b>GetParam</b>(Index: LongInt): Double; override;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+predostavlyayut dostup k var'iruemym parametram</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="GetParamByName"></a><code>function <b>GetParamByName</b>(Name: string): Double; override;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+predostavlyayut dostup ko vsem parametram</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="DoCalc"></a><code>procedure <b>DoCalc</b>(const Intervals: <a  href="DataLoader.TPointsSet.html">TPointsSet</a>); override;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+vypolnyaet polnyy pereschet tochek funktsii</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="SetEta"></a><code>procedure <b>SetEta</b>(Value: Double);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="SetParam"></a><code>procedure <b>SetParam</b>(Index: LongInt; Value: Double); override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="SetParamByName"></a><code>procedure <b>SetParamByName</b>(Name: string; Value: Double); override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="SetSpecParamPtr"></a><code>procedure <b>SetSpecParamPtr</b>(P: <a  href="DataLoader.TSpecialCurveParameter.html">TSpecialCurveParameter</a>); override;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+ustanavlivaet ukazateli na parametry s predopredelennoy semantikoy</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="SetSpecParamVarIndex"></a><code>procedure <b>SetSpecParamVarIndex</b>( P: <a  href="DataLoader.TSpecialCurveParameter.html">TSpecialCurveParameter</a>; Index: LongInt); override;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+ustanavlivaet indeksy var'iruemyh parametrov s predopredelennoy semantikoy</p>
+</td></tr>
+</table>
+<h3 class="detail">Properties</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Eta"></a><code>property <b>Eta</b>: Double read <a  href="DataLoader.TPseudoVoigtPointsSet.html#GetEta">GetEta</a> write <a  href="DataLoader.TPseudoVoigtPointsSet.html#SetEta">SetEta</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<hr noshade size="1"><span class="appinfo"><em>Generated by <a  href="http://pasdoc.sourceforge.net/">PasDoc 0.14.0</a>. </em>
+</span>
+</td></tr></table></body></html>

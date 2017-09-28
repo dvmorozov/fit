@@ -1,0 +1,729 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+<title>Fit: DataLoader: Class TCurvePointsSet</title>
+<meta name="generator" content="PasDoc 0.14.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<table class="container"><tr><td class="navigation">
+<h2>Fit</h2><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p><p><a href="GVClasses.png" class="navigation">Classes hierarchy graph</a></p></td><td class="content">
+<a name="TCurvePointsSet"></a><h1 class="cio">Class TCurvePointsSet</h1>
+<table class="sections wide_list">
+<tr>
+<td><a class="section" href="#PasDoc-Description">Description</a></td><td><a class="section" href="#PasDoc-Hierarchy">Hierarchy</a></td><td><a class="section" href="#PasDoc-Fields">Fields</a></td><td><a class="section" href="#PasDoc-Methods">Methods</a></td><td><a class="section" href="#PasDoc-Properties">Properties</a></td></tr></table>
+<a name="PasDoc-Description"></a><h2 class="unit">Unit</h2>
+<p class="unitlink">
+<a  href="DataLoader.html">DataLoader</a></p>
+<h2 class="declaration">Declaration</h2>
+<p class="declaration">
+<code>type TCurvePointsSet = class(<a class="normal" href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>)</code></p>
+<h2 class="description">Description</h2>
+<p>
+bazovyy konteyner nabora tochek dlya vseh rasschityvaemyh krivyh !!! TCurvePointsSet dolzhna nasledovat' Lambda ot TNeutronPointsSet dlya togo, chtoby otobrazhat'sya v grafikah soglasovanno s TNeutronPointsSet !!!</p>
+<a name="PasDoc-Hierarchy"></a><h2 class="hierarchy">Hierarchy</h2>
+<ul class="hierarchy"><li class="ancestor">TCBRCComponent</li>
+<li class="ancestor"><a class="normal" href="SelfCopied.TSelfCopiedComponent.html">TSelfCopiedComponent</a></li>
+<li class="ancestor"><a class="normal" href="DataLoader.TPointsSet.html">TPointsSet</a></li>
+<li class="ancestor"><a class="normal" href="DataLoader.TNeutronPointsSet.html">TNeutronPointsSet</a></li>
+<li class="ancestor"><a class="normal" href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a></li>
+<li class="thisitem">TCurvePointsSet</li></ul><h2 class="overview">Overview</h2>
+<a name="PasDoc-Fields"></a><h3 class="summary">Fields</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code><b><a  href="DataLoader.TCurvePointsSet.html#AmplIndex">AmplIndex</a></b>: LongInt;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="DataLoader.TCurvePointsSet.html#AmplitudeP">AmplitudeP</a></b>: <a  href="DataLoader.TSpecialCurveParameter.html">TSpecialCurveParameter</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="DataLoader.TCurvePointsSet.html#ArgP">ArgP</a></b>: <a  href="DataLoader.TSpecialCurveParameter.html">TSpecialCurveParameter</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="DataLoader.TCurvePointsSet.html#FParams">FParams</a></b>: <a  href="DataLoader.Curve_parameters.html">Curve_parameters</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="DataLoader.TCurvePointsSet.html#Fx0High">Fx0High</a></b>: Double;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="DataLoader.TCurvePointsSet.html#Fx0IsSet">Fx0IsSet</a></b>: Boolean;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="DataLoader.TCurvePointsSet.html#Fx0Low">Fx0Low</a></b>: Double;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code><b><a  href="DataLoader.TCurvePointsSet.html#InitHash">InitHash</a></b>: Cardinal;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code><b><a  href="DataLoader.TCurvePointsSet.html#Initx0">Initx0</a></b>: Double;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="DataLoader.TCurvePointsSet.html#Links">Links</a></b>: TList;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code><b><a  href="DataLoader.TCurvePointsSet.html#MaxX">MaxX</a></b>: Double;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code><b><a  href="DataLoader.TCurvePointsSet.html#MinX">MinX</a></b>: Double;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="DataLoader.TCurvePointsSet.html#Modified">Modified</a></b>: Boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code><b><a  href="DataLoader.TCurvePointsSet.html#PosIndex">PosIndex</a></b>: LongInt;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="DataLoader.TCurvePointsSet.html#PositionP">PositionP</a></b>: <a  href="DataLoader.TSpecialCurveParameter.html">TSpecialCurveParameter</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code><b><a  href="DataLoader.TCurvePointsSet.html#RangeDefined">RangeDefined</a></b>: Boolean;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code><b><a  href="DataLoader.TCurvePointsSet.html#SigmaIndex">SigmaIndex</a></b>: LongInt;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="DataLoader.TCurvePointsSet.html#SigmaP">SigmaP</a></b>: <a  href="DataLoader.TSpecialCurveParameter.html">TSpecialCurveParameter</a>;</code></td>
+</tr>
+</table>
+<a name="PasDoc-Methods"></a><h3 class="summary">Methods</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>constructor <b><a  href="DataLoader.TCurvePointsSet.html#Create">Create</a></b>(AOwner: TComponent); override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>destructor <b><a  href="DataLoader.TCurvePointsSet.html#Destroy">Destroy</a></b>; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="DataLoader.TCurvePointsSet.html#GetName">GetName</a></b>: string; virtual; abstract;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="DataLoader.TCurvePointsSet.html#HasA">HasA</a></b>: Boolean;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="DataLoader.TCurvePointsSet.html#HasSigma">HasSigma</a></b>: Boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="DataLoader.TCurvePointsSet.html#Hasx0">Hasx0</a></b>: Boolean;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>function <b><a  href="DataLoader.TCurvePointsSet.html#GetA">GetA</a></b>: Double;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>function <b><a  href="DataLoader.TCurvePointsSet.html#GetParam">GetParam</a></b>(Index: LongInt): Double; virtual;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>function <b><a  href="DataLoader.TCurvePointsSet.html#GetParamByName">GetParamByName</a></b>(Name: string): Double; virtual;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>function <b><a  href="DataLoader.TCurvePointsSet.html#GetParamCount">GetParamCount</a></b>: LongInt;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>function <b><a  href="DataLoader.TCurvePointsSet.html#GetSigma">GetSigma</a></b>: Double;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>function <b><a  href="DataLoader.TCurvePointsSet.html#Getx0">Getx0</a></b>: Double;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="DataLoader.TCurvePointsSet.html#CopyParameters">CopyParameters</a></b>(const Dest: TObject); override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="DataLoader.TCurvePointsSet.html#ReCalc">ReCalc</a></b>(const Intervals: <a  href="DataLoader.TPointsSet.html">TPointsSet</a> );</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="DataLoader.TCurvePointsSet.html#RestoreParams">RestoreParams</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="DataLoader.TCurvePointsSet.html#SetParameters">SetParameters</a></b>(AParams: <a  href="DataLoader.Curve_parameters.html">Curve_parameters</a>);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="DataLoader.TCurvePointsSet.html#StoreParams">StoreParams</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="DataLoader.TCurvePointsSet.html#DoCalc">DoCalc</a></b>(const Intervals: <a  href="DataLoader.TPointsSet.html">TPointsSet</a>); virtual; abstract;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="DataLoader.TCurvePointsSet.html#InitLinks">InitLinks</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="DataLoader.TCurvePointsSet.html#ScaleCurve">ScaleCurve</a></b>(const Factor: Double);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="DataLoader.TCurvePointsSet.html#SetA">SetA</a></b>(Value: Double);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="DataLoader.TCurvePointsSet.html#SetParam">SetParam</a></b>(Index: LongInt; Value: Double); virtual;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="DataLoader.TCurvePointsSet.html#SetParamByName">SetParamByName</a></b>(Name: string; Value: Double); virtual;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="DataLoader.TCurvePointsSet.html#SetSigma">SetSigma</a></b>(Value: Double);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="DataLoader.TCurvePointsSet.html#SetSpecParamPtr">SetSpecParamPtr</a></b>(P: <a  href="DataLoader.TSpecialCurveParameter.html">TSpecialCurveParameter</a>); virtual;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="DataLoader.TCurvePointsSet.html#SetSpecParamVarIndex">SetSpecParamVarIndex</a></b>( P: <a  href="DataLoader.TSpecialCurveParameter.html">TSpecialCurveParameter</a>; Index: LongInt); virtual;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="DataLoader.TCurvePointsSet.html#Setx0">Setx0</a></b>(Value: Double);</code></td>
+</tr>
+</table>
+<a name="PasDoc-Properties"></a><h3 class="summary">Properties</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="DataLoader.TCurvePointsSet.html#A">A</a></b>: Double read <a  href="DataLoader.TCurvePointsSet.html#GetA">GetA</a> write <a  href="DataLoader.TCurvePointsSet.html#SetA">SetA</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="DataLoader.TCurvePointsSet.html#Param">Param</a></b>[index:LongInt]: Double read <a  href="DataLoader.TCurvePointsSet.html#GetParam">GetParam</a> write <a  href="DataLoader.TCurvePointsSet.html#SetParam">SetParam</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="DataLoader.TCurvePointsSet.html#ParamByName">ParamByName</a></b>[Name:string]: Double
+            read <a  href="DataLoader.TCurvePointsSet.html#GetParamByName">GetParamByName</a> write <a  href="DataLoader.TCurvePointsSet.html#SetParamByName">SetParamByName</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="DataLoader.TCurvePointsSet.html#ParamCount">ParamCount</a></b>: LongInt read <a  href="DataLoader.TCurvePointsSet.html#GetParamCount">GetParamCount</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="DataLoader.TCurvePointsSet.html#Params">Params</a></b>: <a  href="DataLoader.Curve_parameters.html">Curve_parameters</a> read <a  href="DataLoader.TCurvePointsSet.html#FParams">FParams</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="DataLoader.TCurvePointsSet.html#Sigma">Sigma</a></b>: Double read <a  href="DataLoader.TCurvePointsSet.html#GetSigma">GetSigma</a> write <a  href="DataLoader.TCurvePointsSet.html#SetSigma">SetSigma</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="DataLoader.TCurvePointsSet.html#x0">x0</a></b>: Double read <a  href="DataLoader.TCurvePointsSet.html#Getx0">Getx0</a> write <a  href="DataLoader.TCurvePointsSet.html#Setx0">Setx0</a>;</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Fields</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="AmplIndex"></a><code><b>AmplIndex</b>: LongInt;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+indeksy parametrov s predopredelennoy semantikoy; !!! indeksy zapolnyayutsya tol'ko v tom sluchae, esli parametry s trebuemymi imenami yavlyayutsya peremennymi i yavlyayutsya indeksami v spiske Links; eto neobhodimo dlya togo, chtoby pri dostupe k var'iruemym parametram cherez Param[Index] mozhno bylo by zadavat' znacheniya parametrov s predopredelennoy semantikoy s uchetom ogranicheniy !!! !!! dolzhny byt' opublikovany dlya privyazki schaga optimizatsii !!!</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="AmplitudeP"></a><code><b>AmplitudeP</b>: <a  href="DataLoader.TSpecialCurveParameter.html">TSpecialCurveParameter</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+hranit ukazateli na var'iruemye parametry dlya optimizatsii dostupa - ne osvobozhdaet ob'ekty parametry s predopredelennoy semantikoy imeyut ogranicheniya, kotorye mogut byt' svyazany s tochkami krivoy; isp. uk-li dlya obespecheniya dostupa k parametram s predopredelennoy semantikoy nezavisimo ot togo, yavlyayutsya li parametry var'iruemymi ili net сами параметры определяются в конструкторах наследников и доб. в общий список параметров; эти атрибуты хранят ссылки на них;</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="ArgP"></a><code><b>ArgP</b>: <a  href="DataLoader.TSpecialCurveParameter.html">TSpecialCurveParameter</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="FParams"></a><code><b>FParams</b>: <a  href="DataLoader.Curve_parameters.html">Curve_parameters</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="Fx0High"></a><code><b>Fx0High</b>: Double;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="Fx0IsSet"></a><code><b>Fx0IsSet</b>: Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="Fx0Low"></a><code><b>Fx0Low</b>: Double;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="InitHash"></a><code><b>InitHash</b>: Cardinal;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+hash nachal'nyh znacheniy parametrov</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Initx0"></a><code><b>Initx0</b>: Double;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+nachal'noe znachenie x0 - ispol'zuetsya v nekotoryh algoritmah</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="Links"></a><code><b>Links</b>: TList;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+ob'ekt ispol'zuetsya dlya vydachi sv-v krivoy proizvol'nogo tipa v vide spiska;</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="MaxX"></a><code><b>MaxX</b>: Double;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+shirina krivoy granitsy dlya rascheta R-faktora (granitsy vklyuchayutsya)</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="MinX"></a><code><b>MinX</b>: Double;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+shirina krivoy granitsy dlya rascheta R-faktora (granitsy vklyuchayutsya)</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="Modified"></a><code><b>Modified</b>: Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="PosIndex"></a><code><b>PosIndex</b>: LongInt;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+amplituda krivoy</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="PositionP"></a><code><b>PositionP</b>: <a  href="DataLoader.TSpecialCurveParameter.html">TSpecialCurveParameter</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="RangeDefined"></a><code><b>RangeDefined</b>: Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+priznak togo, chto granitsy dlya rascheta R-faktora zadany; esli False, to R-faktor schitaetsya dlya vseh tochek krivoy</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="SigmaIndex"></a><code><b>SigmaIndex</b>: LongInt;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+polozhenie krivoy</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="SigmaP"></a><code><b>SigmaP</b>: <a  href="DataLoader.TSpecialCurveParameter.html">TSpecialCurveParameter</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<h3 class="detail">Methods</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Create"></a><code>constructor <b>Create</b>(AOwner: TComponent); override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Destroy"></a><code>destructor <b>Destroy</b>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="GetName"></a><code>function <b>GetName</b>: string; virtual; abstract;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+luchshe f-ey, a ne svoystvom, potomu chto sv-vo podrazumevaet hranenie dannyh v ob'ekte, a zdes' etogo ne trebuetsya</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="HasA"></a><code>function <b>HasA</b>: Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="HasSigma"></a><code>function <b>HasSigma</b>: Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Hasx0"></a><code>function <b>Hasx0</b>: Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+proverka nalichiya parametrov s predopredelennoy semantikoy</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="GetA"></a><code>function <b>GetA</b>: Double;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="GetParam"></a><code>function <b>GetParam</b>(Index: LongInt): Double; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+granitsy izmeneniya x0 predostavlyayut dostup k var'iruemym parametram</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="GetParamByName"></a><code>function <b>GetParamByName</b>(Name: string): Double; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+predostavlyayut dostup ko vsem parametram</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="GetParamCount"></a><code>function <b>GetParamCount</b>: LongInt;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+vozvraschaet chislo var'iruemyh parametrov</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="GetSigma"></a><code>function <b>GetSigma</b>: Double;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="Getx0"></a><code>function <b>Getx0</b>: Double;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="CopyParameters"></a><code>procedure <b>CopyParameters</b>(const Dest: TObject); override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="ReCalc"></a><code>procedure <b>ReCalc</b>(const Intervals: <a  href="DataLoader.TPointsSet.html">TPointsSet</a> );</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="RestoreParams"></a><code>procedure <b>RestoreParams</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+vosstanavlivaet var'iruemye parametry iz vnutrennih peremennyh</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="SetParameters"></a><code>procedure <b>SetParameters</b>(AParams: <a  href="DataLoader.Curve_parameters.html">Curve_parameters</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+prinimaet ob'ekt po znacheniyu i hranit ego</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="StoreParams"></a><code>procedure <b>StoreParams</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+sohranyaet var'iruemye parametry vo vnutrennih peremennyh</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="DoCalc"></a><code>procedure <b>DoCalc</b>(const Intervals: <a  href="DataLoader.TPointsSet.html">TPointsSet</a>); virtual; abstract;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+vypolnyaet polnyy pereschet tochek funktsii</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="InitLinks"></a><code>procedure <b>InitLinks</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+vypolnyaet pervonachal'noe zapolnenie spiska var'iruemyh parametrov i ustanovku AmplIndex, PosIndex, SigmaIndex</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="ScaleCurve"></a><code>procedure <b>ScaleCurve</b>(const Factor: Double);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+umnozhaet tochki krivoy na zadannyy koeffitsient</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="SetA"></a><code>procedure <b>SetA</b>(Value: Double);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="SetParam"></a><code>procedure <b>SetParam</b>(Index: LongInt; Value: Double); virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="SetParamByName"></a><code>procedure <b>SetParamByName</b>(Name: string; Value: Double); virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="SetSigma"></a><code>procedure <b>SetSigma</b>(Value: Double);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="SetSpecParamPtr"></a><code>procedure <b>SetSpecParamPtr</b>(P: <a  href="DataLoader.TSpecialCurveParameter.html">TSpecialCurveParameter</a>); virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+ustanavlivaet ukazateli na parametry s predopredelennoy semantikoy</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="SetSpecParamVarIndex"></a><code>procedure <b>SetSpecParamVarIndex</b>( P: <a  href="DataLoader.TSpecialCurveParameter.html">TSpecialCurveParameter</a>; Index: LongInt); virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+ustanavlivaet indeksy var'iruemyh parametrov s predopredelennoy semantikoy</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><a name="Setx0"></a><code>procedure <b>Setx0</b>(Value: Double);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+eti funktsii ne vyzyvayut perescheta krivoy i primenyayutsya pri initsializatsii (no ust. Modified)</p>
+</td></tr>
+</table>
+<h3 class="detail">Properties</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="A"></a><code>property <b>A</b>: Double read <a  href="DataLoader.TCurvePointsSet.html#GetA">GetA</a> write <a  href="DataLoader.TCurvePointsSet.html#SetA">SetA</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Param"></a><code>property <b>Param</b>[index:LongInt]: Double read <a  href="DataLoader.TCurvePointsSet.html#GetParam">GetParam</a> write <a  href="DataLoader.TCurvePointsSet.html#SetParam">SetParam</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+!!! predostavlyayut dostup optimizatoru k var'iruemym parametram !!!</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="ParamByName"></a><code>property <b>ParamByName</b>[Name:string]: Double
+            read <a  href="DataLoader.TCurvePointsSet.html#GetParamByName">GetParamByName</a> write <a  href="DataLoader.TCurvePointsSet.html#SetParamByName">SetParamByName</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+predostavlyayut dostup ko vsem parametram</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="ParamCount"></a><code>property <b>ParamCount</b>: LongInt read <a  href="DataLoader.TCurvePointsSet.html#GetParamCount">GetParamCount</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Params"></a><code>property <b>Params</b>: <a  href="DataLoader.Curve_parameters.html">Curve_parameters</a> read <a  href="DataLoader.TCurvePointsSet.html#FParams">FParams</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+vozvraschaet po ssylke ob'ekt, soderzhaschiy spisok vseh parametrov</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="Sigma"></a><code>property <b>Sigma</b>: Double read <a  href="DataLoader.TCurvePointsSet.html#GetSigma">GetSigma</a> write <a  href="DataLoader.TCurvePointsSet.html#SetSigma">SetSigma</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="x0"></a><code>property <b>x0</b>: Double read <a  href="DataLoader.TCurvePointsSet.html#Getx0">Getx0</a> write <a  href="DataLoader.TCurvePointsSet.html#Setx0">Setx0</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+predostavlyayut dostup k parametram s predopredelennoy semantikoy dlya dostupa spets. algoritmov; !!! nuzhno ispol'zovat' f-i Has... dlya proverki nalichiya takih parametrov !!! izmenenie parametra x0 ogranicheno dvumya sosednimi tochkami</p>
+</td></tr>
+</table>
+<hr noshade size="1"><span class="appinfo"><em>Generated by <a  href="http://pasdoc.sourceforge.net/">PasDoc 0.14.0</a>. </em>
+</span>
+</td></tr></table></body></html>

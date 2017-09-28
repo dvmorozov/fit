@@ -1,5 +1,0 @@
-<?xml version="1.0"?>
-<CONFIG>
-  <Compiler Value="c:\lazarus\fpc\2.0.4\bin\i386-win32\fpc.exe" Date="895835052"/>
-  <Params Value=" -S2cgi -OG1 -gl -WG -vewnhi -l -Fu..\Component\lib\ -Fu..\..\..\..\lcl\units\i386-win32\ -Fu..\..\..\..\lcl\units\i386-win32\win32\ -Fu..\..\..\..\packager\units\i386-win32\ -Fu. -oTestOfTAGraph.exe -dLCL -dLCLwin32 TestOfTAGraph.lpr"/>
-</CONFIG>

@@ -21,7 +21,7 @@
 <code>type TRunningAlgorithmContainer = class(<a class="normal" href="AlgorithmContainer.TAlgorithmContainer.html">TAlgorithmContainer</a>)</code></p>
 <h2 class="description">Description</h2>
 <p>
-relizuet zapusk algoritma v otdel'nom potoke !!! DestroyAlgorithm dolzhen vyzyvat'sya obyazatel'no posle unichtozheniya Runner'a !!!</p>
+Class allows executing algorithm in separate thread.</p>
 <a name="PasDoc-Hierarchy"></a><h2 class="hierarchy">Hierarchy</h2>
 <ul class="hierarchy"><li class="ancestor">TComponent</li>
 <li class="ancestor"><a class="normal" href="AlgorithmContainer.TAlgorithmContainer.html">TAlgorithmContainer</a></li>
@@ -64,7 +64,9 @@ relizuet zapusk algoritma v otdel'nom potoke !!! DestroyAlgorithm dolzhen vyzyva
 <td class="itemcode"><a name="Runner"></a><code><b>Runner</b>: <a  href="Runner.TRunner.html">TRunner</a>;</code></td>
 </tr>
 <tr><td colspan="2">
-&nbsp;</td></tr>
+<p>
+Object implementing separate thread. DestroyAlgorithm must be called after destroying the object.</p>
+</td></tr>
 </table>
 <h3 class="detail">Methods</h3>
 <table class="detail wide_list">

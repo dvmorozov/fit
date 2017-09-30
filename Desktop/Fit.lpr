@@ -14,9 +14,6 @@ uses
   PointSetViewer in 'PointSetViewer.pas',
   Math3d in '..\..\Library\Math\Math3d.pas',
   DownhillSimplexContainer in '..\..\Library\Algorithms\DownhillSimplexContainer.pas',
-  DownhillSimplexAlgorithm in '..\..\Library\Algorithms\DownhillSimplexAlgorithm.pas',
-  Decisions in '..\..\Library\Algorithms\Decisions.pas',
-  Algorithm in '..\..\Library\Algorithms\Algorithm.pas',
   AlgorithmContainer in '..\..\Library\Algorithms\AlgorithmContainer.pas',
   Runner in '..\..\Library\Common\Runner.pas',
   ObjSavingStringList in '..\..\Library\Common\ObjSavingStringList.pas',
@@ -28,9 +25,8 @@ uses
   FitServerStub, FitServerProxy, FitClientApp, FitServerApp,
   DataClasses, FitServerWithThread, FitTask, 
   FitServerMultithreaded, Unit2, Settings, Unit7, TurboPowerIPro,
-  FitGrids, Tools, CBRCComponent, ClassInheritIDs, SelfCheckedComponentList,
-  MyExceptions, NumericGrid, SelfCopied, SelfSaved, SimpMath, TableComp,
-  TAGraph, FitTaskWithThread, StrUtils
+  FitGrids, SelfCheckedComponentList,
+  FitTaskWithThread, StrUtils
 {$ifdef windows}
   ,ta
 {$else}

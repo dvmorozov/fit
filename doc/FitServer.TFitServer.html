@@ -21,7 +21,7 @@
 <code>type TFitServer = class(TComponent)</code></p>
 <h2 class="description">Description</h2>
 <p>
-komponent, kot. realizuet vsyu logiku servera, razbivaet zadachu podgonki profilya na podzadachi podgonki uchastkov (predvaritel'no uchastki d.b. opredeleny vruchnuyu ili avtomaticheski); vse interfeysnye metody d. dopuskat' vozmozhnost' vyzova v proizvol'nom sostoyanii - eto ne dolzhno schitat'sya nedopustimoy situatsiey, no dolzhen vozvraschat'sya kod oshibki; pri reshenii zadach, vozlozhennyh na komponent znanie dliny volny ne trebuetsya, poetomu vse komponenty TNeutronPointsSet zameneny na TPointsSet; eto sootvetstvuet takzhe abstraktsii komponenta ot zadach neytronografii i perehodu k zadacham iz proizvol'noy oblasti, v kotoryh dannye imeyut vid profilya; !!! nel'zya prosto zamenit' TNeutronPoinstSet na TPointsSet, poskol'ku na storone servera vyzyvayutsya metody TFitViewer, kotorye trebuyut TTitlePointsSet; krome togo poka na storone servera risuyutsya grafiki sleduet ispol'zovat' TNeutronPointsSet, kotoryi podderzhivaet pereschet argumenta !!! !!! interfeysnye metody vozvraschayut priznak dopustimosti sostoyaniya dlya vypolneniya operatsii; ne stoit ispol'zovat' EAssertionFailed kak signal o nedopustimom sostoyanii, t.k. nel'zya garantirovat', chto eto isklyuchenie ne vozniknet v biblioteke, poetomu vozvrat vybrosom EUserException (ispol'zovanie isklyucheniya pozvolyaet peredavat' na verhniy uroven' soobschenie); takoe povedenie dopustimo tol'ko v klassah, kotorye vypolnyayut komandy pol'zovatelya, ostal'nye dolzhny v sluchae nedopustimogo sostoyaniya vybrasyvat' EAssertionFailed; granichnyy klass d. interpretirovat' takoe isklyuchenie kak fatal'n. oshibku, a vozvrat EUserException kak oshibku sostoyaniya !!! dannyy klass servera vypolnyaet vsyu rabotu v potoke vyzyvayuschego prilozheniya !!! d. hranit' vse neobhodimye dannye, v t.ch. vydelennuyu oblast', poskol'ku klient mozhet voobsche ne imet' vozm. hranit' dannye !!!</p>
+komponent, kot. realizuet vsyu logiku servera, razbivaet zadachu podgonki profilya na podzadachi podgonki uchastkov (predvaritel'no uchastki d.b. opredeleny vruchnuyu ili avtomaticheski); vse interfeysnye metody d. dopuskat' vozmozhnost' vyzova v proizvol'nom sostoyanii - eto ne dolzhno schitat'sya nedopustimoy situatsiey, no dolzhen vozvraschat'sya kod oshibki; pri reshenii zadach, vozlozhennyh na komponent znanie dliny volny ne trebuetsya, poetomu vse komponenty <a class="normal" href="DataLoader.TNeutronPointsSet.html">TNeutronPointsSet</a> zameneny na <a class="normal" href="DataLoader.TPointsSet.html">TPointsSet</a>; eto sootvetstvuet takzhe abstraktsii komponenta ot zadach neytronografii i perehodu k zadacham iz proizvol'noy oblasti, v kotoryh dannye imeyut vid profilya; !!! nel'zya prosto zamenit' TNeutronPoinstSet na <a class="normal" href="DataLoader.TPointsSet.html">TPointsSet</a>, poskol'ku na storone servera vyzyvayutsya metody <a class="normal" href="PointSetViewer.TFitViewer.html">TFitViewer</a>, kotorye trebuyut <a class="normal" href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>; krome togo poka na storone servera risuyutsya grafiki sleduet ispol'zovat' <a class="normal" href="DataLoader.TNeutronPointsSet.html">TNeutronPointsSet</a>, kotoryi podderzhivaet pereschet argumenta !!! !!! interfeysnye metody vozvraschayut priznak dopustimosti sostoyaniya dlya vypolneniya operatsii; ne stoit ispol'zovat' EAssertionFailed kak signal o nedopustimom sostoyanii, t.k. nel'zya garantirovat', chto eto isklyuchenie ne vozniknet v biblioteke, poetomu vozvrat vybrosom EUserException (ispol'zovanie isklyucheniya pozvolyaet peredavat' na verhniy uroven' soobschenie); takoe povedenie dopustimo tol'ko v klassah, kotorye vypolnyayut komandy pol'zovatelya, ostal'nye dolzhny v sluchae nedopustimogo sostoyaniya vybrasyvat' EAssertionFailed; granichnyy klass d. interpretirovat' takoe isklyuchenie kak fatal'n. oshibku, a vozvrat EUserException kak oshibku sostoyaniya !!! dannyy klass servera vypolnyaet vsyu rabotu v potoke vyzyvayuschego prilozheniya !!! d. hranit' vse neobhodimye dannye, v t.ch. vydelennuyu oblast', poskol'ku klient mozhet voobsche ne imet' vozm. hranit' dannye !!!</p>
 <a name="PasDoc-Hierarchy"></a><h2 class="hierarchy">Hierarchy</h2>
 <ul class="hierarchy"><li class="ancestor">TComponent</li>
 <li class="thisitem">TFitServer</li></ul><h2 class="overview">Overview</h2>
@@ -735,7 +735,7 @@ uchastok profilya, s kotorym pol'zovatel' rabotaet v dannyy moment</p>
 </tr>
 <tr><td colspan="2">
 <p>
-rezul'tiruyuschiy nabor parametrov ekzemplyarov patternov ??? izmenit' tip i udalit' SetWaveLength</p>
+rezul'tiruyuschiy nabor parametrov ekzemplyarov patternov ??? izmenit' tip i udalit' <a class="normal" href="FitServer.TFitServer.html#SetWaveLength">SetWaveLength</a></p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1130,7 +1130,7 @@ tochki pikov otdelyaet ot tochek fona i pomeschaet v rezul'tat</p>
 </tr>
 <tr><td colspan="2">
 <p>
-lineyno vychitaet fon v SelectedArea i obnovlyaet SelectedArea procedure SubtractBackground; !!! vychislyaet faktor rashodimosti CalcProfile i SelectedArea summirovaniem po vsem podzadacham !!!</p>
+lineyno vychitaet fon v <a class="normal" href="FitServer.TFitServer.html#SelectedArea">SelectedArea</a> i obnovlyaet <a class="normal" href="FitServer.TFitServer.html#SelectedArea">SelectedArea</a> procedure SubtractBackground; !!! vychislyaet faktor rashodimosti <a class="normal" href="FitServer.TFitServer.html#CalcProfile">CalcProfile</a> i <a class="normal" href="FitServer.TFitServer.html#SelectedArea">SelectedArea</a> summirovaniem po vsem podzadacham !!!</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1190,7 +1190,7 @@ sinhronnoe preryvanie dlitel'noy operatsii bez vyzova protsedury zaversheniya</p
 </tr>
 <tr><td colspan="2">
 <p>
-!!! server d. podderzhivat' primitivy dobavleniya/zameny tochki, chtoby podderzhivat' tonkie klienty, kot. ne mogut hranit' ves' nabor dannyh !!! !!! vse vyzyvayut AddPoint !!!</p>
+!!! server d. podderzhivat' primitivy dobavleniya/zameny tochki, chtoby podderzhivat' tonkie klienty, kot. ne mogut hranit' ves' nabor dannyh !!! !!! vse vyzyvayut <a class="normal" href="FitServer.TFitServer.html#AddPoint">AddPoint</a> !!!</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1436,7 +1436,7 @@ ischet tochki fona</p>
 </tr>
 <tr><td colspan="2">
 <p>
-============= perehodniki k sootvet. metodam TFitTask ==============</p>
+============= perehodniki k sootvet. metodam <a class="normal" href="FitTask.TFitTask.html">TFitTask</a> ==============</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1446,7 +1446,7 @@ ischet tochki fona</p>
 </tr>
 <tr><td colspan="2">
 <p>
-============ algoritmy - metody, vyzyvaemye asinhronno ============= ischet granitsy rascheta R-faktora na osnove dannyh, poluchennyh iz FindPeaksInternal</p>
+============ algoritmy - metody, vyzyvaemye asinhronno ============= ischet granitsy rascheta R-faktora na osnove dannyh, poluchennyh iz <a class="normal" href="FitServer.TFitServer.html#FindPeaksInternal">FindPeaksInternal</a></p>
 </td></tr>
 </table>
 <table class="detail wide_list">

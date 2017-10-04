@@ -20,6 +20,8 @@
 <p class="declaration">
 <code>type TCombEnumerator = class(TObject)</code></p>
 <h2 class="description">Description</h2>
+<p>
+Enumerates all possible combinations of a set of discrete values. Value must have at least single possible value.</p>
 <a name="PasDoc-Hierarchy"></a><h2 class="hierarchy">Hierarchy</h2>
 <ul class="hierarchy"><li class="ancestor">TObject</li>
 <li class="thisitem">TCombEnumerator</li></ul><h2 class="overview">Overview</h2>
@@ -116,7 +118,7 @@
 </tr>
 <tr><td colspan="2">
 <p>
-indeksy vozmozhnyh znacheniy diskretnyh velichin, opredelennye v sootvetstvii s nomerom tekuschey zadannoy kombinatsii</p>
+Through index of currently selected combination.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -134,7 +136,7 @@ indeksy vozmozhnyh znacheniy diskretnyh velichin, opredelennye v sootvetstvii s 
 </tr>
 <tr><td colspan="2">
 <p>
-klass, realizuyuschiy algoritm perebora vseh vozmozhnyh znacheniy zadannyh diskretnyh velichin; !!! velichina dolzhna imet' ne menee odnogo vozmozhnogo znacheniya !!!</p>
+Contains numbers of possible values of discrete quantities. Quantities by themselves can be any.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -144,7 +146,7 @@ klass, realizuyuschiy algoritm perebora vseh vozmozhnyh znacheniy zadannyh diskr
 </tr>
 <tr><td colspan="2">
 <p>
-massiv, soderzhaschiy chisla, kazhdoe iz kotoryh predstavlyaet soboy chislo vozmozhnyh znacheniy, kotoroe mozhet prinimat' nekotoraya diskretnaya velichina; sama velichina v dannom sluchae ne konkretizirovana</p>
+Indexes of possible values of discrete quantities. Set of indexes enumerates possible combinations of quantity values. Each index can take value from 0 to the value of corresponding item from NumberOfValues minus 1.</p>
 </td></tr>
 </table>
 <h3 class="detail">Methods</h3>
@@ -163,7 +165,7 @@ massiv, soderzhaschiy chisla, kazhdoe iz kotoryh predstavlyaet soboy chislo vozm
 </tr>
 <tr><td colspan="2">
 <p>
-soderzhit True, esli tekuschaya kombinatsiya byla opredelena posredstvom SetCurrentComb, False v protivnom sluchae</p>
+soderzhit True, esli tekuschaya kombinatsiya byla opredelena posredstvom <a class="normal" href="CombEnumerator.TCombEnumerator.html#SetCurrentComb">SetCurrentComb</a>, False v protivnom sluchae</p>
 </td></tr>
 </table>
 <table class="detail wide_list">

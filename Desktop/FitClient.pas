@@ -611,6 +611,8 @@ procedure TFitClient.ShowCurMin(Min: Double);
 begin
     CurMin := Min;  //  prosto zapominaem zdes' znachenie
     FormMain.ShowTime;
+    //???
+    UpdateAll;
 end;
 
 function TFitClient.GetProfilePointsSet: TTitlePointsSet;

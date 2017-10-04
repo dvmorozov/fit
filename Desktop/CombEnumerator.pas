@@ -18,83 +18,72 @@ interface
 uses SysUtils;
 
 type
-	{ Enumerates all possible combinations of a set of discrete values. Value must have at least single possible value. }
+    { Enumerates all possible combinations of a set of discrete values. Value must have at least single possible value. }
     TCombEnumerator = class
     protected
-		{ Contains numbers of possible values of discrete quantities. Quantities by themselves can be any. }
+        { Contains numbers of possible values of discrete quantities. Quantities by themselves can be any. }
         NumbersOfValues: array of LongInt;
-		{ Indexes of possible values of discrete quantities. Set of indexes enumerates possible combinations of quantity values.
-		  Each index can take value from 0 to the value of corresponding item from NumberOfValues minus 1. }
+        { Indexes of possible values of discrete quantities. Set of indexes enumerates possible combinations of quantity values.
+          Each index can take value from 0 to the value of corresponding item from NumberOfValues minus 1. }
         ValuesIndexes: array of LongInt;
-		{ Through index of currently selected combination. }
+        { Through index of currently selected combination. }
         FCurrentComb: LongInt;
-		{ Is True if current combination was set up via SetCurrentComb, False otherwise. }
+        { Is True if current combination was set up via SetCurrentComb, False otherwise. }
         FIsCombDefined: Boolean;
-
+        { Returns total number of combinations. }
         function GetCombNumber: LongInt;
+        { Returns number of combinations which can be created with quantities belonging to given interval of indexes.
+          @param(StartIndex Index of quantity in the NumberOfValues array.)
+          @param(StopIndex Index of quantity in the NumberOfValues array.) }
         function GetCombNumberStartStop(
-            //  vozvraschaet chislo kombinatsiy, kotoroe mozhno sostavit' iz
-            //  diskretnyh velichin, nahodyaschihsya mezhdu startovym i stopovym
-            //  ideksami vklyuchitel'no
             const StartIndex, StopIndex: LongInt): LongInt;
+        { Selects combination by given through index. }
         procedure SetCurrentComb(const ACurrentComb: LongInt); virtual;
+        { Returns current value index for the given quantity index. }
         function GetValueIndex(index: LongInt): LongInt;
+        { Returns number of discrete quantities. }
         function GetValuesNumber: LongInt;
 
     public
         destructor Destroy; override;
+        { Adds new quantity having given number of discrete values. }
         procedure AddNumberOfValues(const ANumberOfValues: LongInt); virtual;
-            //  dobavlyaet v spisok novuyu velichinu - kolichestvo
-            //  prinimaemyh znacheniy nekotoroy diskretnoy velichiny
+        { Removes all quantities. }
         procedure ClearListOfNumbersOfValues; virtual;
 
-        property CombNumber: LongInt
-            //  polnoe chislo kombinatsiy, kotoroe mozhno postroit'
-            //  iz nekotorogo nabora diskretnyh velichin
-            read GetCombNumber;
-        property CurrentComb: LongInt
-            //  nomer vybrannoy kombinatsii v dannyy moment
-            read FCurrentComb               write SetCurrentComb;
-        property ValueIndex[index: LongInt]: LongInt
-            //  indeks odnogo iz vozmozhnyh diskretnyh znacheniy velichiny,
-            //  zadavaemoy parametrom index; indeks opredelyaetsya v sootvetstvii
-            //  s tekuschey vybrannoy kombinatsiey
-            read GetValueIndex;
-        property ValuesNumber: LongInt
-            //  kolichestvo diskretnyh velichin, uchastvuyuschih v obrazovanii kombinatsiy
-            read GetValuesNumber;
+        property CombNumber: LongInt read GetCombNumber;
+        property CurrentComb: LongInt read FCurrentComb write SetCurrentComb;
+        property ValueIndex[index: LongInt]: LongInt read GetValueIndex;
+        property ValuesNumber: LongInt read GetValuesNumber;
     end;
 
+    { Defines functionality of discrete quantity. Quantity must have at least single value. }
     IDiscretValue = interface
-        //  interfeys diskretnoy velichiny;
-        //  !!! velichina dolzhna imet' ne menee
-        //  odnogo vozmozhnogo znacheniya !!!
+        { Returns number of quantity values. }
         function GetNumberOfValues: LongInt;
-        //  vozvraschaet chislo vozmozhnyh znacheniy diskretnoy velichiny
+        { Returns index of currently selected value. }
         function GetValueIndex: LongInt;
-        //  vozvraschaet indeks tekuschego znacheniya diskret velichiny
+        { Sets up index of currently selected value. }
         procedure SetValueIndex(const AValueIndex: LongInt);
-        //  ustanavlivaet indeks tekuschego znacheniya diskret velichiny
 
-        property NumberOfValues: LongInt
-            //  kolichestvo diskretnyh znacheniy, kotorye mozhet prinimat' velichina
-            read GetNumberOfValues;
-        property ValueIndex: LongInt
-            //  indeks diskretnogo znacheniya, vybrannogo v dannyy moment
-            read GetValueIndex              write SetValueIndex;
+        property NumberOfValues: LongInt read GetNumberOfValues;
+        property ValueIndex: LongInt read GetValueIndex write SetValueIndex;
     end;
 
+    { Container of discrete quantities. See @link(IDiscretValue). }
     TCombSelector = class(TCombEnumerator)
-        //  hranit ukazateli na interfeysy, podderzhivayuschie vybor
-        //  indeksov dopustimyh znacheniy diskretnoy velichiny
     protected
         FValuesList: array of IDiscretValue;
         procedure SetCurrentComb(const ACurrentComb: LongInt); override;
 
     public
+        { In addition to inherited behaviour adds empty item to FValueList. }
         procedure AddNumberOfValues(const ANumberOfValues: LongInt); override;
+        { Releases interfaces and destroys the array FValuesList. }
         procedure ClearListOfNumbersOfValues; override;
+        { Adds new interface. }
         procedure AddDiscretValue(const AValue: IDiscretValue);
+        { Calls @link(ClearListOfNumbersOfValues). }
         procedure ClearDiscretValuesList;
     end;
 
@@ -144,7 +133,7 @@ var TempCurrentComb, TempCombNumber: LongInt;
     i: LongInt;
 begin
     Assert(not ((ACurrentComb < 0) or (ACurrentComb >= CombNumber)));
-    //  algoritm vybora kombinatsii znacheniy po indeksu kombinatsii
+    //  Algorithm selecting entity combination by through index.
     TempCurrentComb := ACurrentComb;
     FCurrentComb := ACurrentComb;
     for i := 0 to ValuesNumber - 2 do
@@ -192,9 +181,7 @@ var i: LongInt;
 begin
     inherited ClearListOfNumbersOfValues;
     for i := 0 to Length(FValuesList) - 1 do
-        FValuesList[i] := nil;  //  dlya vyzova _Release
-                                //  ??? budet li _Release vyzyvat'sya korrektno,
-                                //  esli prosto ispol'zovat' Finalize
+        FValuesList[i] := nil;  //  Calling _Release.
     Finalize(FValuesList);
 end;
 

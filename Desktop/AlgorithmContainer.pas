@@ -20,15 +20,15 @@ uses
     Classes, Runner, Algorithm, Tools;
 
 type
-	{ Class defines abstract methods to control any type of algorithms. } 
+    { Class defines abstract methods to control any type of algorithms. } 
     TAlgorithmContainer = class(TComponent)
     protected
         Algorithm: TAlgorithm;
-		{Method creates appropriate environment for executing algorithm,
-		create algorithm object and start execution.}
+        {Method creates appropriate environment for executing algorithm,
+        create algorithm object and start execution.}
         procedure Running; virtual; abstract;
-		{Method is called after finishing execution of algorithm. 
-		Can be used to do post processing and displaying results.}
+        {Method is called after finishing execution of algorithm. 
+        Can be used to do post processing and displaying results.}
         procedure RunningFinished; virtual; abstract;
         {Descendants override this method to create algorithm object of appropriate type.}
         procedure CreateAlgorithm; virtual; abstract;
@@ -36,16 +36,16 @@ type
         procedure DestroyAlgorithm; virtual; abstract;
 
     public
-		{Method implements actions necessary to abort execution of algorithm.}
+        {Method implements actions necessary to abort execution of algorithm.}
         procedure StopAlgorithm; virtual; abstract;
         procedure Run; virtual;
     end;
 
-	{Class allows executing algorithm in separate thread.}
+    {Class allows executing algorithm in separate thread.}
     TRunningAlgorithmContainer = class(TAlgorithmContainer)
     protected
-		{Object implementing separate thread.
-		DestroyAlgorithm must be called after destroying the object.}
+        {Object implementing separate thread.
+        DestroyAlgorithm must be called after destroying the object.}
         Runner: TRunner;
     public
         constructor Create(AOwner: TComponent); override;

@@ -1,9 +1,14 @@
-//      dvoynoy kosoy chertoy kommentiruyutsya zamechaniya, sohranyaemye vo
-//      vseh versiyah ishodnika; figurnymi skobkami kommentiruyutsya zamechaniya,
-//      sohranyaemye tol'ko v versii ishodnika dlya besplatnogo rasprostraneniya
-{------------------------------------------------------------------------------}
-{       Copyright (C) 1999-2007 D.Morozov (dvmorozov@mail.ru)                  }
-{------------------------------------------------------------------------------}
+{
+This software is distributed under GPL
+in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
+
+@abstract(Contains definitions of container classes.)
+
+@author(Dmitry Morozov dvmorozov@hotmail.com, 
+LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
+Facebook https://www.facebook.com/profile.php?id=100004082021870)
+}
 unit DataClasses;
 
 {$MODE Delphi}
@@ -16,13 +21,13 @@ uses
     ObjSavingStringList, Graphics, DataLoader;
 
 type
-    //  nabor ekzemplyarov patternov sozdayuschih raschetnyy profil'
+	{ Set of pattern instances forming the calculated profile in sum. }
     TSpecimenList = class(TRowCompList)
     protected
         function CreateNewObject: TComponent; override;
-        //  bazovaya f-ya dlya perescheta znacheniy parametrov vyvodimyh pol'zovatelyu
+        { Generic method for conversion values to user friendly representation. }
         function RecalcParamValue(P: TSpecialCurveParameter): Double; virtual;
-        //  bazovaya f-ya dlya obratnogo perescheta znacheniy parametrov vvodimyh pol'zovatelem
+		{ Generic method for reverse conversion of value from user to internal representation. }
         procedure ReverseCalcParamValue(
             P: TSpecialCurveParameter; NewValue: Double); virtual;
 
@@ -33,27 +38,15 @@ type
             Grid: TStringGrid; RowNum: LongInt): Boolean; override;
         procedure SetRowContents(Grid: TStringGrid; RowNum: LongInt); override;
 
-        ////////////////////////////////////////////////////////////////////////
-        //  funktsii novogo interfeysa
-        ////////////////////////////////////////////////////////////////////////
-        function ValueToString(const ACol, ARow: LongInt
-            ): string; override;
-        procedure StringToValue(const ACol, ARow: LongInt;
-            const AString: string
-            ); override;
+        function ValueToString(const ACol, ARow: LongInt): string; override;
+        procedure StringToValue(const ACol, ARow: LongInt; const AString: string); override;
+		{ Sets valid default value for the cell with given coordinates. Is used in cell initialization. }
         procedure SetValueByDefault(const ACol, ARow: LongInt); override;
-            //  ustanavlivaet pravil'noe znachenie "po umolchaniyu"
-            //  dlya dannoy yacheyki; ispol'zuetsya pri obrabotke operatsii
-            //  ochistki yacheyki
-        function IsDataValid(const ACol, ARow: LongInt;
-            //  vypolnyaet "myagkuyu" proverku dannyh bez vozbuzhdeniya
-            //  isklyucheniya; odnako, esli koordinaty stroki/kolonki
-            //  imeyut nedorustimye znacheniya isklyuchenie vyzyvaetsya;
-            //  vsegda vozvraschaet True - perekryt' dlya realizatsii
-            //  nuzhnyh proverok
-            const AString: string): Boolean; override;
-        function GetCellEnabledCharSet(
-            const ACol, ARow: LongInt): TCharSet; override;
+		{ Performs "soft" data validation without throwing an exception. However if coordinates of row
+          or column have inadmissible values exception is thrown. Always returns true. Override to 
+          perform suitable validation. }
+        function IsDataValid(const ACol, ARow: LongInt; const AString: string): Boolean; override;
+        function GetCellEnabledCharSet(const ACol, ARow: LongInt): TCharSet; override;
 
         function GetInfoCols: LongInt; override;
     end;
@@ -71,8 +64,8 @@ begin
     if Count <> 0 then
     begin
         Index := 0;
-        //  esli nabor parametrov krivyh pust nel'zya
-        //  ustanovit' zagolovki parametrov
+		//	If the set of curver parameters is empty
+		//	then it's impossible to set up headers.
         CP := Curve_parameters(Items[0]);
         //  !!! dolzhny obrabatyvat'sya vse parametry, krome argumenta !!!
         Assert(Grid.ColCount - Grid.FixedCols = CP.Params.Count - 1);
@@ -101,7 +94,7 @@ begin
             if Count <> 0 then
             begin
                 CP := Curve_parameters(Items[0]);
-                //  !!! dolzhny obrabatyvat'sya vse parametry, krome argumenta !!!
+				//	All parameters must be processed except the argument.
                 Assert(Grid.ColCount - Grid.FixedCols = CP.Params.Count - 1);
                 Index := 0;
                 for i := 0 to CP.Params.Count - 1 do
@@ -137,7 +130,7 @@ begin
             Cells[0, RowNum] := IntToStr(RowNum);
             
             CP := Curve_parameters(Items[RowNum - FixedRows]);
-            //  !!! dolzhny obrabatyvat'sya vse parametry, krome argumenta !!!
+            //	All parameters must be processed except the argument.
             Assert(Grid.ColCount - Grid.FixedCols = CP.Params.Count - 1);
             Index := 0;
             for i := 0 to CP.Params.Count - 1 do
@@ -153,7 +146,7 @@ begin
         end
         else
         begin
-            //  initsializiruetsya pustaya stroka
+			//	Empty row is initialized.
             Cells[0, RowNum] := IntToStr(RowNum);
             for i := FixedCols to ColCount - 1 do Cells[i, RowNum] := '';
         end;
@@ -170,7 +163,7 @@ begin
         Assert((RowNum - FixedRows >= 0) and (RowNum - FixedRows < Count));
         
         CP := Curve_parameters(Items[RowNum - FixedRows]);
-        //  !!! dolzhny obrabatyvat'sya vse parametry, krome argumenta !!!
+        //	All parameters must be processed except the argument.
         Assert(Grid.ColCount - Grid.FixedCols = CP.Params.Count - 1);
         Index := 0;
         for i := 0 to CP.Params.Count - 1 do
@@ -182,8 +175,7 @@ begin
                     ReverseCalcParamValue(P,
                         StrToFloat(Cells[FixedCols + Index, RowNum]));
                 except
-                    //  nefatal'naya oshibka pol'zovatelya,
-                    //  vyyavlennaya pri preobrazovanii stroki
+					//	Non-fatal error in string conversion.
                     Result := False;
                 end;
                 Inc(Index);
@@ -232,14 +224,12 @@ end;
 function TSpecimenList.ValueToString(const ACol, ARow: Integer): string;
 var TN: Curve_parameters;
 begin
-    Assert(False);    //???
-
     CheckColIndex(ACol);
     CheckRowIndex(ARow);
 
     if ARow <= GetFixedRows - 1 then
     begin
-        //  zapolnyaetsya verhnyaya chast' tablitsy - zagolovki kolonok
+		//	Column headers are filled.
         if ARow > 0 then Result := ''
         else
         begin
@@ -250,7 +240,7 @@ begin
 
     if (ACol <= GetFixedCols - 1) and (ARow > GetFixedRows - 1) then
     begin
-        //  zapolnyayutsya fiksirovannye polya strok - nomera
+		//	Fixed row cells are filled by sequential numbers.
         if ACol > 0 then Result := ''
         else Result := IntToStr(ARow - (GetFixedRows - 1));
         Exit;
@@ -258,11 +248,11 @@ begin
 
     if (ACol > GetFixedCols - 1) and (ARow > GetFixedRows - 1) then
     begin
-        //  zapolnyaetsya informatsionnaya chast' tablitsy
+		//	Information area of the table is filled.
         if Count <> 0 then
-            //  esli spisok pust f-ya dolzhna vernut' pustuyu stroku,
-            //  chtoby obespechit' vozmozhnost' setke zapolnit' pustuyu
-            //  stroku, dlya kotoroy real'no net ob'ekta spiska
+			//	If the list is empty then the method must return empty string
+			//	to allow the grid filling empty row for which there isn't real
+			//	data object in the list.
         begin
             (* ???
             TN := Curve_parameters(Items[ARow - GetFixedRows]);
@@ -286,8 +276,6 @@ end;
 function TSpecimenList.IsDataValid(const ACol, ARow: Integer;
     const AString: string): Boolean;
 begin
-    Assert(False);  //  ???
-    
     CheckColIndex(ACol);
     CheckRowIndex(ARow);
     if (ACol > GetFixedCols - 1) and (ARow > GetFixedRows - 1) then
@@ -303,13 +291,11 @@ end;
 procedure TSpecimenList.SetValueByDefault(const ACol, ARow: Integer);
 var TN: Curve_parameters;
 begin
-    Assert(False);  //  ???
-    
     if (ACol > GetFixedCols - 1) and (ARow > GetFixedRows - 1) then
         if Count <> 0 then
-            //  esli spisok pust f-ya ne dolzhna nichego delat',
-            //  chtoby obespechit' vozmozhnost' setke ochistit' pustuyu
-            //  stroku, dlya kotoroy real'no net ob'ekta spiska
+			//	If the list is empty then the method must return empty string
+			//	to allow the grid filling empty row for which there isn't real
+			//	data object in the list.
         begin
             TN := Curve_parameters(Items[ARow - GetFixedRows]);
             (* ???
@@ -329,8 +315,6 @@ procedure TSpecimenList.StringToValue(const ACol, ARow: Integer;
     const AString: string);
 var TN: Curve_parameters;
 begin
-    Assert(False);  //  ???
-    
     BeforeStringToValue(ACol, ARow, AString);
     if (ACol > GetFixedCols - 1) and (ARow > GetFixedRows - 1) then
     begin

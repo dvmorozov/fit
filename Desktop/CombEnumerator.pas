@@ -1,9 +1,14 @@
-//      dvoynoy kosoy chertoy kommentiruyutsya zamechaniya, sohranyaemye vo
-//      vseh versiyah ishodnika; figurnymi skobkami kommentiruyutsya zamechaniya,
-//      sohranyaemye tol'ko v versii ishodnika dlya besplatnogo rasprostraneniya
-{------------------------------------------------------------------------------}
-{       Copyright (C) 1999-2007 D.Morozov (dvmorozov@mail.ru)                  }
-{------------------------------------------------------------------------------}
+{
+This software is distributed under GPL
+in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
+
+@abstract(Contains definitions of classes used to iterate through set of possible task solution.)
+
+@author(Dmitry Morozov dvmorozov@hotmail.com, 
+LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
+Facebook https://www.facebook.com/profile.php?id=100004082021870)
+}
 unit CombEnumerator;
 
 {$MODE Delphi}
@@ -13,23 +18,18 @@ interface
 uses SysUtils;
 
 type
+	{ Enumerates all possible combinations of a set of discrete values. Value must have at least single possible value. }
     TCombEnumerator = class
-        //  klass, realizuyuschiy algoritm perebora vseh
-        //  vozmozhnyh znacheniy zadannyh diskretnyh velichin;
-        //  !!! velichina dolzhna imet' ne menee odnogo vozmozhnogo znacheniya !!!
     protected
+		{ Contains numbers of possible values of discrete quantities. Quantities by themselves can be any. }
         NumbersOfValues: array of LongInt;
-            //  massiv, soderzhaschiy chisla, kazhdoe iz kotoryh predstavlyaet soboy
-            //  chislo vozmozhnyh znacheniy, kotoroe mozhet prinimat' nekotoraya
-            //  diskretnaya velichina; sama velichina v dannom sluchae ne
-            //  konkretizirovana
+		{ Indexes of possible values of discrete quantities. Set of indexes enumerates possible combinations of quantity values.
+		  Each index can take value from 0 to the value of corresponding item from NumberOfValues minus 1. }
         ValuesIndexes: array of LongInt;
-            //  indeksy vozmozhnyh znacheniy diskretnyh velichin, opredelennye
-            //  v sootvetstvii s nomerom tekuschey zadannoy kombinatsii
+		{ Through index of currently selected combination. }
         FCurrentComb: LongInt;
+		{ Is True if current combination was set up via SetCurrentComb, False otherwise. }
         FIsCombDefined: Boolean;
-            //  soderzhit True, esli tekuschaya kombinatsiya byla opredelena
-            //  posredstvom SetCurrentComb, False v protivnom sluchae
 
         function GetCombNumber: LongInt;
         function GetCombNumberStartStop(

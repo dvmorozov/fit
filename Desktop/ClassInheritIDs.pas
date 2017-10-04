@@ -1,21 +1,19 @@
-//      двойной косой чертой комментируются замечания, сохраняемые во
-//      всех версиях исходника; фигурными скобками комментируются замечания,
-//      сохраняемые только в версии исходника для бесплатного распространения
-{------------------------------------------------------------------------------
-    This software is distributed under GPL (see gpl.txt for details)
-    in the hope that it will be useful, but WITHOUT ANY WARRANTY;
-    without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
+{   
+This software is distributed under GPL
+in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
 
-    Copyright (C) 1999-2008 D.Morozov (dvmorozov@mail.ru)
-------------------------------------------------------------------------------}
+@abstract(Contains definitions of constant identifiers of 
+classes. These constants are used in data serialization.)
+
+@author(Dmitry Morozov dvmorozov@hotmail.com, 
+LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
+Facebook https://www.facebook.com/profile.php?id=100004082021870)
+}
+
 unit ClassInheritIDs;
 
 {$MODE Delphi}
-
-//  модуль содержит определения констант - идентификаторов
-//  в цепи наследования всех классов проекта (поскольку
-//  константы задаются раз и навсегда); здесь же хранятся
-//  константы версий параметров классов
 
 interface
 

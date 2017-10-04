@@ -1,9 +1,15 @@
-//      dvoynoy kosoy chertoy kommentiruyutsya zamechaniya, sohranyaemye vo
-//      vseh versiyah ishodnika; figurnymi skobkami kommentiruyutsya zamechaniya,
-//      sohranyaemye tol'ko v versii ishodnika dlya besplatnogo rasprostraneniya
-{------------------------------------------------------------------------------}
-{       Copyright (C) 1999-2007 D.Morozov (dvmorozov@mail.ru)                  }
-{------------------------------------------------------------------------------}
+{
+This software is distributed under GPL
+in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
+
+@abstract(Contains definitions of auxiliary classes used to control algorithm execution.)
+
+@author(Dmitry Morozov dvmorozov@hotmail.com, 
+LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
+Facebook https://www.facebook.com/profile.php?id=100004082021870)
+}
+
 unit AlgorithmContainer;
 
 {$MODE Delphi}
@@ -14,31 +20,32 @@ uses
     Classes, Runner, Algorithm, Tools;
 
 type
+	{ Class defines abstract methods to control any type of algorithms. } 
     TAlgorithmContainer = class(TComponent)
     protected
         Algorithm: TAlgorithm;
-        //  vypolnyaet nastroyku okruzheniya dlya vyzova algoritma,
-        //  sozdaet ob'ekt algoritma i zapuskaet metod ego realizatsii
+		{Method creates appropriate environment for executing algorithm,
+		create algorithm object and start execution.}
         procedure Running; virtual; abstract;
-        //  vyzyvaetsya posle zaversheniya raboty algoritma -
-        //  mozhet vydavat' kakoy-nibud' signal
+		{Method is called after finishing execution of algorithm. 
+		Can be used to do post processing and displaying results.}
         procedure RunningFinished; virtual; abstract;
-        //  sozdaet trebuemyy algoritm
+        {Descendants override this method to create algorithm object of appropriate type.}
         procedure CreateAlgorithm; virtual; abstract;
-        //  unichtozhaet komponent - algoritm;
+        {Method destroys algorithm object.}
         procedure DestroyAlgorithm; virtual; abstract;
 
     public
-        //  ustanavlivaet flagi, neobhodimye dlya prekrascheniya raboty algoritma
+		{Method implements actions necessary to abort execution of algorithm.}
         procedure StopAlgorithm; virtual; abstract;
         procedure Run; virtual;
     end;
 
-    //  relizuet zapusk algoritma v otdel'nom potoke
-    //  !!! DestroyAlgorithm dolzhen vyzyvat'sya
-    //  obyazatel'no posle unichtozheniya Runner'a !!!
+	{Class allows executing algorithm in separate thread.}
     TRunningAlgorithmContainer = class(TAlgorithmContainer)
     protected
+		{Object implementing separate thread.
+		DestroyAlgorithm must be called after destroying the object.}
         Runner: TRunner;
     public
         constructor Create(AOwner: TComponent); override;

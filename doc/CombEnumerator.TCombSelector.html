@@ -21,7 +21,7 @@
 <code>type TCombSelector = class(<a class="normal" href="CombEnumerator.TCombEnumerator.html">TCombEnumerator</a>)</code></p>
 <h2 class="description">Description</h2>
 <p>
-indeks diskretnogo znacheniya, vybrannogo v dannyy moment</p>
+Container of discrete quantities. See <a class="normal" href="CombEnumerator.IDiscretValue.html">IDiscretValue</a>.</p>
 <a name="PasDoc-Hierarchy"></a><h2 class="hierarchy">Hierarchy</h2>
 <ul class="hierarchy"><li class="ancestor">TObject</li>
 <li class="ancestor"><a class="normal" href="CombEnumerator.TCombEnumerator.html">TCombEnumerator</a></li>
@@ -64,9 +64,7 @@ indeks diskretnogo znacheniya, vybrannogo v dannyy moment</p>
 <td class="itemcode"><a name="FValuesList"></a><code><b>FValuesList</b>: array of <a  href="CombEnumerator.IDiscretValue.html">IDiscretValue</a>;</code></td>
 </tr>
 <tr><td colspan="2">
-<p>
-hranit ukazateli na interfeysy, podderzhivayuschie vybor indeksov dopustimyh znacheniy diskretnoy velichiny</p>
-</td></tr>
+&nbsp;</td></tr>
 </table>
 <h3 class="detail">Methods</h3>
 <table class="detail wide_list">
@@ -75,7 +73,9 @@ hranit ukazateli na interfeysy, podderzhivayuschie vybor indeksov dopustimyh zna
 <td class="itemcode"><a name="AddDiscretValue"></a><code>procedure <b>AddDiscretValue</b>(const AValue: <a  href="CombEnumerator.IDiscretValue.html">IDiscretValue</a>);</code></td>
 </tr>
 <tr><td colspan="2">
-&nbsp;</td></tr>
+<p>
+Adds new interface.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -83,7 +83,9 @@ hranit ukazateli na interfeysy, podderzhivayuschie vybor indeksov dopustimyh zna
 <td class="itemcode"><a name="AddNumberOfValues"></a><code>procedure <b>AddNumberOfValues</b>(const ANumberOfValues: LongInt); override;</code></td>
 </tr>
 <tr><td colspan="2">
-&nbsp;</td></tr>
+<p>
+In addition to inherited behaviour adds empty item to FValueList.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -91,7 +93,9 @@ hranit ukazateli na interfeysy, podderzhivayuschie vybor indeksov dopustimyh zna
 <td class="itemcode"><a name="ClearDiscretValuesList"></a><code>procedure <b>ClearDiscretValuesList</b>;</code></td>
 </tr>
 <tr><td colspan="2">
-&nbsp;</td></tr>
+<p>
+Calls <a class="normal" href="CombEnumerator.TCombSelector.html#ClearListOfNumbersOfValues">ClearListOfNumbersOfValues</a>.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -99,7 +103,9 @@ hranit ukazateli na interfeysy, podderzhivayuschie vybor indeksov dopustimyh zna
 <td class="itemcode"><a name="ClearListOfNumbersOfValues"></a><code>procedure <b>ClearListOfNumbersOfValues</b>; override;</code></td>
 </tr>
 <tr><td colspan="2">
-&nbsp;</td></tr>
+<p>
+Releases interfaces and destroys the array <a class="normal" href="CombEnumerator.TCombSelector.html#FValuesList">FValuesList</a>.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">

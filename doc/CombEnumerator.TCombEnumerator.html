@@ -83,30 +83,19 @@ Enumerates all possible combinations of a set of discrete values. Value must hav
 <table class="summary wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>property <b><a  href="CombEnumerator.TCombEnumerator.html#CombNumber">CombNumber</a></b>: LongInt
-            
-            
-            read <a  href="CombEnumerator.TCombEnumerator.html#GetCombNumber">GetCombNumber</a>;</code></td>
+<td class="itemcode"><code>property <b><a  href="CombEnumerator.TCombEnumerator.html#CombNumber">CombNumber</a></b>: LongInt read <a  href="CombEnumerator.TCombEnumerator.html#GetCombNumber">GetCombNumber</a>;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>property <b><a  href="CombEnumerator.TCombEnumerator.html#CurrentComb">CurrentComb</a></b>: LongInt
-            
-            read <a  href="CombEnumerator.TCombEnumerator.html#FCurrentComb">FCurrentComb</a>               write <a  href="CombEnumerator.TCombEnumerator.html#SetCurrentComb">SetCurrentComb</a>;</code></td>
+<td class="itemcode"><code>property <b><a  href="CombEnumerator.TCombEnumerator.html#CurrentComb">CurrentComb</a></b>: LongInt read <a  href="CombEnumerator.TCombEnumerator.html#FCurrentComb">FCurrentComb</a> write <a  href="CombEnumerator.TCombEnumerator.html#SetCurrentComb">SetCurrentComb</a>;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>property <b><a  href="CombEnumerator.TCombEnumerator.html#ValueIndex">ValueIndex</a></b>[index:LongInt]: LongInt
-            
-            
-            
-            read <a  href="CombEnumerator.TCombEnumerator.html#GetValueIndex">GetValueIndex</a>;</code></td>
+<td class="itemcode"><code>property <b><a  href="CombEnumerator.TCombEnumerator.html#ValueIndex">ValueIndex</a></b>[index:LongInt]: LongInt read <a  href="CombEnumerator.TCombEnumerator.html#GetValueIndex">GetValueIndex</a>;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>property <b><a  href="CombEnumerator.TCombEnumerator.html#ValuesNumber">ValuesNumber</a></b>: LongInt
-            
-            read <a  href="CombEnumerator.TCombEnumerator.html#GetValuesNumber">GetValuesNumber</a>;</code></td>
+<td class="itemcode"><code>property <b><a  href="CombEnumerator.TCombEnumerator.html#ValuesNumber">ValuesNumber</a></b>: LongInt read <a  href="CombEnumerator.TCombEnumerator.html#GetValuesNumber">GetValuesNumber</a>;</code></td>
 </tr>
 </table>
 <h2 class="description">Description</h2>
@@ -127,7 +116,9 @@ Through index of currently selected combination.</p>
 <td class="itemcode"><a name="FIsCombDefined"></a><code><b>FIsCombDefined</b>: Boolean;</code></td>
 </tr>
 <tr><td colspan="2">
-&nbsp;</td></tr>
+<p>
+Is True if current combination was set up via <a class="normal" href="CombEnumerator.TCombEnumerator.html#SetCurrentComb">SetCurrentComb</a>, False otherwise.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -165,7 +156,7 @@ Indexes of possible values of discrete quantities. Set of indexes enumerates pos
 </tr>
 <tr><td colspan="2">
 <p>
-soderzhit True, esli tekuschaya kombinatsiya byla opredelena posredstvom <a class="normal" href="CombEnumerator.TCombEnumerator.html#SetCurrentComb">SetCurrentComb</a>, False v protivnom sluchae</p>
+Returns total number of combinations.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -174,7 +165,16 @@ soderzhit True, esli tekuschaya kombinatsiya byla opredelena posredstvom <a clas
 <td class="itemcode"><a name="GetCombNumberStartStop"></a><code>function <b>GetCombNumberStartStop</b>( const StartIndex, StopIndex: LongInt): LongInt;</code></td>
 </tr>
 <tr><td colspan="2">
-&nbsp;</td></tr>
+<p>
+Returns number of combinations which can be created with quantities belonging to given interval of indexes.  </p>
+<h6 class="description_section">Parameters</h6>
+<dl class="parameters">
+<dt>StartIndex</dt>
+<dd>Index of quantity in the NumberOfValues array.</dd>
+<dt>StopIndex</dt>
+<dd>Index of quantity in the NumberOfValues array.</dd>
+</dl>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -182,7 +182,9 @@ soderzhit True, esli tekuschaya kombinatsiya byla opredelena posredstvom <a clas
 <td class="itemcode"><a name="GetValueIndex"></a><code>function <b>GetValueIndex</b>(index: LongInt): LongInt;</code></td>
 </tr>
 <tr><td colspan="2">
-&nbsp;</td></tr>
+<p>
+Returns current value index for the given quantity index.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -190,7 +192,9 @@ soderzhit True, esli tekuschaya kombinatsiya byla opredelena posredstvom <a clas
 <td class="itemcode"><a name="GetValuesNumber"></a><code>function <b>GetValuesNumber</b>: LongInt;</code></td>
 </tr>
 <tr><td colspan="2">
-&nbsp;</td></tr>
+<p>
+Returns number of discrete quantities.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -198,7 +202,9 @@ soderzhit True, esli tekuschaya kombinatsiya byla opredelena posredstvom <a clas
 <td class="itemcode"><a name="AddNumberOfValues"></a><code>procedure <b>AddNumberOfValues</b>(const ANumberOfValues: LongInt); virtual;</code></td>
 </tr>
 <tr><td colspan="2">
-&nbsp;</td></tr>
+<p>
+Adds new quantity having given number of discrete values.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -207,7 +213,7 @@ soderzhit True, esli tekuschaya kombinatsiya byla opredelena posredstvom <a clas
 </tr>
 <tr><td colspan="2">
 <p>
-dobavlyaet v spisok novuyu velichinu - kolichestvo prinimaemyh znacheniy nekotoroy diskretnoy velichiny</p>
+Removes all quantities.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -216,16 +222,15 @@ dobavlyaet v spisok novuyu velichinu - kolichestvo prinimaemyh znacheniy nekotor
 <td class="itemcode"><a name="SetCurrentComb"></a><code>procedure <b>SetCurrentComb</b>(const ACurrentComb: LongInt); virtual;</code></td>
 </tr>
 <tr><td colspan="2">
-&nbsp;</td></tr>
+<p>
+Selects combination by given through index.</p>
+</td></tr>
 </table>
 <h3 class="detail">Properties</h3>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><a name="CombNumber"></a><code>property <b>CombNumber</b>: LongInt
-            
-            
-            read <a  href="CombEnumerator.TCombEnumerator.html#GetCombNumber">GetCombNumber</a>;</code></td>
+<td class="itemcode"><a name="CombNumber"></a><code>property <b>CombNumber</b>: LongInt read <a  href="CombEnumerator.TCombEnumerator.html#GetCombNumber">GetCombNumber</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -233,40 +238,26 @@ dobavlyaet v spisok novuyu velichinu - kolichestvo prinimaemyh znacheniy nekotor
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><a name="CurrentComb"></a><code>property <b>CurrentComb</b>: LongInt
-            
-            read <a  href="CombEnumerator.TCombEnumerator.html#FCurrentComb">FCurrentComb</a>               write <a  href="CombEnumerator.TCombEnumerator.html#SetCurrentComb">SetCurrentComb</a>;</code></td>
+<td class="itemcode"><a name="CurrentComb"></a><code>property <b>CurrentComb</b>: LongInt read <a  href="CombEnumerator.TCombEnumerator.html#FCurrentComb">FCurrentComb</a> write <a  href="CombEnumerator.TCombEnumerator.html#SetCurrentComb">SetCurrentComb</a>;</code></td>
 </tr>
 <tr><td colspan="2">
-<p>
-polnoe chislo kombinatsiy, kotoroe mozhno postroit' iz nekotorogo nabora diskretnyh velichin</p>
-</td></tr>
+&nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><a name="ValueIndex"></a><code>property <b>ValueIndex</b>[index:LongInt]: LongInt
-            
-            
-            
-            read <a  href="CombEnumerator.TCombEnumerator.html#GetValueIndex">GetValueIndex</a>;</code></td>
+<td class="itemcode"><a name="ValueIndex"></a><code>property <b>ValueIndex</b>[index:LongInt]: LongInt read <a  href="CombEnumerator.TCombEnumerator.html#GetValueIndex">GetValueIndex</a>;</code></td>
 </tr>
 <tr><td colspan="2">
-<p>
-nomer vybrannoy kombinatsii v dannyy moment</p>
-</td></tr>
+&nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><a name="ValuesNumber"></a><code>property <b>ValuesNumber</b>: LongInt
-            
-            read <a  href="CombEnumerator.TCombEnumerator.html#GetValuesNumber">GetValuesNumber</a>;</code></td>
+<td class="itemcode"><a name="ValuesNumber"></a><code>property <b>ValuesNumber</b>: LongInt read <a  href="CombEnumerator.TCombEnumerator.html#GetValuesNumber">GetValuesNumber</a>;</code></td>
 </tr>
 <tr><td colspan="2">
-<p>
-indeks odnogo iz vozmozhnyh diskretnyh znacheniy velichiny, zadavaemoy parametrom index; indeks opredelyaetsya v sootvetstvii s tekuschey vybrannoy kombinatsiey</p>
-</td></tr>
+&nbsp;</td></tr>
 </table>
 <hr noshade size="1"><span class="appinfo"><em>Generated by <a  href="http://pasdoc.sourceforge.net/">PasDoc 0.14.0</a>. </em>
 </span>

@@ -1,25 +1,29 @@
-//      dvoynoy kosoy chertoy kommentiruyutsya zamechaniya, sohranyaemye vo
-//      vseh versiyah ishodnika; figurnymi skobkami kommentiruyutsya zamechaniya,
-//      sohranyaemye tol'ko v versii ishodnika dlya besplatnogo rasprostraneniya
-{------------------------------------------------------------------------------}
-{       Copyright (C) 1999-2007 D.Morozov (dvmorozov@mail.ru)                  }
-{------------------------------------------------------------------------------}
+{
+This software is distributed under GPL
+in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
+
+@abstract(Contains definitions of classes used in data loading.)
+
+@author(Dmitry Morozov dvmorozov@hotmail.com, 
+LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
+Facebook https://www.facebook.com/profile.php?id=100004082021870)
+}
 unit DataLoader;
 
 {$MODE Delphi}
 
 interface
 
-uses Classes, SysUtils, SimpMath, SelfCopied; (*, Windows; peredelat' bez ispol'zovaniya...*)
+uses Classes, SysUtils, SimpMath, SelfCopied;
 
 type
-    //  ??? nasledovat' ot spets. klassa dlya prostogo perehvata
     EFileNotExists = class(Exception);
     EInvalidFileFormat = class(Exception);
     EWavelengthIsNotSpecified = class(Exception);
 
+	{ Generic point set. }
     TPointsSet = class(TSelfCopiedComponent)
-    //  realizuet nabor tochek v obschem vide
     protected
         FPoints: TwoDimArray;
         
@@ -42,9 +46,9 @@ type
         procedure DeletePoint(XValue: Double);
         procedure Clear;
         procedure Sort; virtual;
-        //  vozvraschaet -1 esli tochka s zadannym X ne naydena
+		{ Returns index of point with given X, -1 if point not found. }
         function IndexOfValueX(XValue: Double): LongInt;
-        //  vozvraschaet indeks tochki, blizhayschey k zadannomu znacheniyu
+		{ Returns index of point having X closest to the given value. }
         function IndexOfNearestToX(XValue: Double): LongInt;
 
         property PointsCount: LongInt read GetPointsCount;
@@ -57,9 +61,9 @@ type
         property MaxYCoord: Double read GetMaxYCoord;
     end;
 
+	{ Implements point set of experimental neutronogram. It's assumed that
+      point coordinates are expressed in 2 * Theta. }
     TNeutronPointsSet = class(TPointsSet)
-    //  realizuet nabor tochek eksperimental'noy neytronogrammy
-    //  podrazumevaetsya, chto koordinaty x tochek vyrazheny v 2 * Theta
     protected
         FLambda: Double;
         
@@ -85,12 +89,11 @@ type
         property PointSinTL[index: LongInt]: Double read GetPointSinTL;
     end;
   
-    //  !!! d. nasledovat' ot TNeutronPointsSet vozmozhnost'
-    //  perescheta argumenta !!!
+	{ Point set with title. TODO: must implement functionality of argument recalculation. }
     TTitlePointsSet = class(TNeutronPointsSet)
     public
-        Title: string;      //  zagolovok, vyvodimyi v legende
-                            //  pri risovanii grafika dannyh
+		{ Title which is displayed in chart legend. }
+        Title: string;
         
         procedure CopyParameters(const Dest: TObject); override;
         constructor CreateFromPoints(
@@ -101,16 +104,19 @@ const ZeroCurveAmplitude: Double = 1;
 
 type
     TParameterType = (
-        Shared,             //  sozdan pol'z. i ne var'iruetsya
-                            //  !!! takie parametry var'iruyutsya
-                            //  vmeste dlya vseh ekzemplyarov v
-                            //  dannom intervale, esli ne zaprescheno
-                            //  special'no !!!
-        Variable,           //  sozdan pol'z. i var'iruetsya
-        Calculated,         //  sozdan programmoy
-        Argument,           //  argument vyrazheniya (vsegda peremennyy)
-        InvariablePosition, //  fiksirovannyy parametr polozheniya krivoy
-        VariablePosition    //  peremennyy parametr polozheniya krivoy
+		{ Created by user and non-variable. Such parameters are variated together for all 
+		instances in the given interval if it isn't disabled by special flag. }
+        Shared,
+		{ Created by user and variable. }
+        Variable,
+		{ Created by the application. }
+        Calculated,
+		{ Argument of expression. Always variable. }
+        Argument,
+		{ Non-variable parameter describing instance position. }
+        InvariablePosition,
+		{ Variable parameter describing instance position. }
+        VariablePosition
         );
 
     TSpecialCurveParameter = class(TCollectionItem)
@@ -138,28 +144,20 @@ type
             read FVariationStep write FVariationStep;
 
     published
-        //  published dlya togo, chtoby sohranyat' v potoke (xml)
+		{ Published for XML-serialization. }
         property Name: string read FName write FName;
-        //  !!! sv-vo pochemu-to ne sohranyalos' v XML-potoke kak Double =>
-        //  peredelano v string !!!
+		{ String because some problem with XML-serialization as Double. }
         property Value_: string read GetValue_ write SetValue_;
         property Type_: TParameterType read FType write FType;
     end;
 
-    //  obschiy tip konteynera parametrov krivyh neobhodim dlya
-    //  hraneniya parametrov pol'zovatel'skih krivyh, no ispol'zuetsya
-    //  takzhe dlya hraneniya parametrov vseh predopredelennyh tipov krivyh;
-    //  konteyner, a ne naslednik ot TCollection potomu,
-    //  chto d.b. samokopiruemym ob'ektom
+	{ Generic type of instance parameter container. }
     Curve_parameters = class(TSelfCopiedComponent)
     protected
         FParams: TCollection;
 
     public
-        //  sohranennyi kluch nachal'nyh znacheniy parametrov
-        //  sootvetstvuyuschego ekzemplyara patterna (dlya obratnoy
-        //  ustanovki v novyi ekzemplyar ranee poluchennyh znacheniy
-        //  parametrov)
+		{ Initial parameters hash. Should be used for copying optimization. }
         SavedInitHash: Cardinal;
         
         constructor Create(AOwner: TComponent); override;
@@ -168,50 +166,47 @@ type
         procedure CopyParameters(const Dest: TObject); override;
 
     published
-        //  dlya sohraneniya v XML-potoke
+        { Published for XML-serialization. }
         property Params: TCollection read FParams write FParams;
     end;
 
-    //  bazovyy konteyner nabora tochek dlya vseh rasschityvaemyh krivyh
-    //  !!! TCurvePointsSet dolzhna nasledovat' Lambda ot TNeutronPointsSet
-    //  dlya togo, chtoby otobrazhat'sya v grafikah soglasovanno s
-    //  TNeutronPointsSet !!!
+	{ Generic container for point set of all calcuated curves. TODO: must
+      inherit Lambda from TNeutronPointsSet to adjust calculated and experimental
+      curves on chart. }
     TCurvePointsSet = class(TTitlePointsSet)
     protected
-        FParams: Curve_parameters;  //  ob'ekt ispol'zuetsya dlya vydachi sv-v
-                                    //  krivoy proizvol'nogo tipa v vide spiska;
-        Links: TList;               //  hranit ukazateli na var'iruemye parametry
-                                    //  dlya optimizatsii dostupa - ne osvobozhdaet
-                                    //  ob'ekty
-        //  parametry s predopredelennoy semantikoy imeyut ogranicheniya,
-        //  kotorye mogut byt' svyazany s tochkami krivoy;
-        //  isp. uk-li dlya obespecheniya dostupa k parametram
-        //  s predopredelennoy semantikoy nezavisimo ot togo,
-        //  yavlyayutsya li parametry var'iruemymi ili net
-        //  сами параметры определяются в конструкторах наследников и доб.
-        //  в общий список параметров; эти атрибуты хранят ссылки на них;
+		{ List of curve parameters. }
+        FParams: Curve_parameters;
+		{ List of variable parameters. }
+        Links: TList;
+		{ Parameters with predefined semantics have constraints, which
+          can be associated with curve points. Attributes store pointers
+          to parameters with predefined semantics. Parameters are created
+          in descendant constructors. }
         AmplitudeP: TSpecialCurveParameter;
         PositionP: TSpecialCurveParameter;
         SigmaP: TSpecialCurveParameter;
         ArgP: TSpecialCurveParameter;
 
         Fx0IsSet: Boolean;
-        Fx0Low, Fx0High: Double;    //  granitsy izmeneniya x0
+		{ X0 variation boundaries. }
+        Fx0Low, Fx0High: Double;
 
         //  predostavlyayut dostup k var'iruemym parametram
+		{ Returns variable parameter by through index. }
         function GetParam(Index: LongInt): Double; virtual;
+		{ Sets value of variable parameter. }
         procedure SetParam(Index: LongInt; Value: Double); virtual;
-        //  vozvraschaet chislo var'iruemyh parametrov
+		{ Returns total number of variable parameters. }
         function GetParamCount: LongInt;
         
-        //  predostavlyayut dostup ko vsem parametram
+		{ Returns value of parameter with given name. }
         function GetParamByName(Name: string): Double; virtual;
         procedure SetParamByName(Name: string; Value: Double); virtual;
         
-        //  ustanavlivaet ukazateli na parametry s predopredelennoy semantikoy
+		{ Initializes pointers to parameters with predefined semantics. }
         procedure SetSpecParamPtr(P: TSpecialCurveParameter); virtual;
-        //  ustanavlivaet indeksy var'iruemyh parametrov s predopredelennoy
-        //  semantikoy
+		{ Initializes indexes of variable parameters with predefined semantics. }
         procedure SetSpecParamVarIndex(
             P: TSpecialCurveParameter; Index: LongInt); virtual;
 

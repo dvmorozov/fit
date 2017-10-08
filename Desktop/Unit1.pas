@@ -479,12 +479,16 @@ end;
 procedure TFormMain.CheckListBoxLegendDrawItem(
     Control: TWinControl; Index: Integer;
     ARect: TRect; State: TOwnerDrawState);
+(*
 var LB: TCheckListBox;
     TS: TTASerie;
     Size: Longint;
     Color: TColor;
     Square: TRect;
+    *)
 begin
+    (*
+    Temporarily disabled due to failure in debugging.
     TS := TTASerie(Chart.GetSerie(Index)); //  otsutstvie serii s dannym
                                               //  indeksom est' nedopustimoe
                                               //  sostoyanie => d.b. isklyuchenie
@@ -541,6 +545,7 @@ begin
     LB.Canvas.Brush.Color := Color;           //  vosstanovlenie tsveta
     LB.Canvas.TextOut(
         ARect.Left + Size + 6, ARect.Top, LB.Items.Strings[Index]);
+        *)
 end;
 
 procedure TFormMain.CheckStateTimerTimer(Sender: TObject);

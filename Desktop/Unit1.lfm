@@ -660,6 +660,7 @@ object FormMain: TFormMain
         BorderStyle = bsNone
         ItemHeight = 13
         OnClick = CheckListBoxLegendClick
+        OnDrawItem = CheckListBoxLegendDrawItem
         OnKeyPress = CheckListBoxLegendKeyPress
         Style = lbOwnerDrawFixed
         TabOrder = 0
@@ -711,7 +712,6 @@ object FormMain: TFormMain
       ShowVerticalReticule = False
       ShowReticule = True
       OnDrawReticule = ChartDrawReticule
-      ParentColor = False
       ParentShowHint = False
       ShowHint = True
       Anchors = [akTop, akLeft, akRight, akBottom]

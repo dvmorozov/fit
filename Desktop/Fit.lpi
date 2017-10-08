@@ -13,7 +13,7 @@
     </General>
     <VersionInfo>
       <AutoIncrementBuild Value="True"/>
-      <BuildNr Value="1049"/>
+      <BuildNr Value="1050"/>
       <StringTable ProductVersion="0.0.0.1001"/>
     </VersionInfo>
     <BuildModes Count="2">
@@ -745,7 +745,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="891"/>
         <CursorPos X="21" Y="891"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
       </Unit72>
       <Unit73>
         <Filename Value="fit_server.pas"/>
@@ -876,7 +876,7 @@
       <Define3 Value="WINDOWS"/>
       <Define4 Value="Lazarus"/>
     </CustomDefines>
-    <JumpHistory Count="30" HistoryIndex="29">
+    <JumpHistory Count="27" HistoryIndex="26">
       <Position1>
         <Filename Value="FitTaskWithThread.pas"/>
         <Caret Line="163" TopLine="150"/>
@@ -898,105 +898,93 @@
         <Caret Line="187" Column="19" TopLine="176"/>
       </Position5>
       <Position6>
-        <Filename Value="FitTask.pas"/>
-        <Caret Line="1381" Column="20" TopLine="1508"/>
+        <Filename Value="PointSetViewer.pas"/>
+        <Caret Line="304" TopLine="291"/>
       </Position6>
       <Position7>
         <Filename Value="PointSetViewer.pas"/>
-        <Caret Line="304" TopLine="291"/>
+        <Caret Line="306" TopLine="291"/>
       </Position7>
       <Position8>
-        <Filename Value="PointSetViewer.pas"/>
-        <Caret Line="306" TopLine="291"/>
-      </Position8>
-      <Position9>
         <Filename Value="FitClient.pas"/>
         <Caret Line="867" TopLine="854"/>
+      </Position8>
+      <Position9>
+        <Filename Value="FitServer.pas"/>
+        <Caret Line="2255" Column="12" TopLine="2242"/>
       </Position9>
       <Position10>
         <Filename Value="FitServer.pas"/>
-        <Caret Line="2255" Column="12" TopLine="2242"/>
+        <Caret Line="1950" Column="18" TopLine="1934"/>
       </Position10>
       <Position11>
         <Filename Value="FitServer.pas"/>
-        <Caret Line="1950" Column="18" TopLine="1934"/>
+        <Caret Line="1341" Column="25" TopLine="1326"/>
       </Position11>
       <Position12>
         <Filename Value="FitServer.pas"/>
-        <Caret Line="1341" Column="25" TopLine="1326"/>
+        <Caret Line="1916" Column="30" TopLine="1902"/>
       </Position12>
       <Position13>
         <Filename Value="FitServer.pas"/>
-        <Caret Line="1916" Column="30" TopLine="1902"/>
+        <Caret Line="1935" Column="46" TopLine="1928"/>
       </Position13>
       <Position14>
         <Filename Value="FitServer.pas"/>
-        <Caret Line="1935" Column="46" TopLine="1928"/>
+        <Caret Line="1641" Column="13" TopLine="1614"/>
       </Position14>
       <Position15>
         <Filename Value="FitServer.pas"/>
-        <Caret Line="1641" Column="13" TopLine="1614"/>
+        <Caret Line="2577" Column="9" TopLine="2553"/>
       </Position15>
       <Position16>
         <Filename Value="FitServer.pas"/>
-        <Caret Line="2577" Column="9" TopLine="2553"/>
+        <Caret Line="1616" Column="30" TopLine="1608"/>
       </Position16>
       <Position17>
         <Filename Value="FitServer.pas"/>
-        <Caret Line="1616" Column="30" TopLine="1608"/>
+        <Caret Line="2165" Column="36" TopLine="2154"/>
       </Position17>
       <Position18>
         <Filename Value="FitServer.pas"/>
-        <Caret Line="2165" Column="36" TopLine="2154"/>
+        <Caret Line="2230" Column="25" TopLine="2216"/>
       </Position18>
       <Position19>
         <Filename Value="FitServer.pas"/>
-        <Caret Line="2230" Column="25" TopLine="2216"/>
+        <Caret Line="2231" Column="46" TopLine="2216"/>
       </Position19>
       <Position20>
-        <Filename Value="FitTask.pas"/>
-        <Caret Line="1381" Column="20" TopLine="1508"/>
+        <Filename Value="FitServer.pas"/>
+        <Caret Line="1624" Column="14" TopLine="1615"/>
       </Position20>
       <Position21>
         <Filename Value="FitServer.pas"/>
-        <Caret Line="2231" Column="46" TopLine="2216"/>
+        <Caret Line="1685" Column="13" TopLine="1672"/>
       </Position21>
       <Position22>
-        <Filename Value="FitServer.pas"/>
-        <Caret Line="1624" Column="14" TopLine="1615"/>
-      </Position22>
-      <Position23>
-        <Filename Value="FitServer.pas"/>
-        <Caret Line="1685" Column="13" TopLine="1672"/>
-      </Position23>
-      <Position24>
         <Filename Value="PointSetViewer.pas"/>
         <Caret Line="295" Column="53" TopLine="291"/>
-      </Position24>
-      <Position25>
+      </Position22>
+      <Position23>
         <Filename Value="FitTask.pas"/>
         <Caret Line="1580" TopLine="1572"/>
+      </Position23>
+      <Position24>
+        <Filename Value="FitServer.pas"/>
+        <Caret Line="2167" Column="48" TopLine="2152"/>
+      </Position24>
+      <Position25>
+        <Filename Value="FitServer.pas"/>
+        <Caret Line="2233" Column="52" TopLine="2218"/>
       </Position25>
       <Position26>
         <Filename Value="FitServer.pas"/>
-        <Caret Line="1971" TopLine="1995"/>
+        <Caret Line="176" Column="29" TopLine="168"/>
       </Position26>
       <Position27>
         <Filename Value="FitServer.pas"/>
-        <Caret Line="2167" Column="48" TopLine="2152"/>
-      </Position27>
-      <Position28>
-        <Filename Value="FitServer.pas"/>
-        <Caret Line="2233" Column="52" TopLine="2218"/>
-      </Position28>
-      <Position29>
-        <Filename Value="FitServer.pas"/>
-        <Caret Line="176" Column="29" TopLine="168"/>
-      </Position29>
-      <Position30>
-        <Filename Value="FitServer.pas"/>
         <Caret Line="1624" Column="19" TopLine="1608"/>
-      </Position30>
+      </Position27>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

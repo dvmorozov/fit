@@ -1680,7 +1680,10 @@ begin
         //  poetomu mozhno ispuskat' te zhe isklyucheniya
 {$IFDEF FIT}
         if Assigned(FitProxy) then
+        begin
+            CreateResultedCurvesList();
             FitProxy.ShowCurMin(CurrentMinimum);
+        end;
 {$ENDIF}
     end;
 end;

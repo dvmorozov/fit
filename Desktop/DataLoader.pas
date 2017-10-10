@@ -214,17 +214,17 @@ type
         Modified: Boolean;
 
     protected
-        //  vypolnyaet polnyy pereschet tochek funktsii
+		{ Performs recalculation of all profile points. }
         procedure DoCalc(const Intervals: TPointsSet); virtual; abstract;
-        //  umnozhaet tochki krivoy na zadannyy koeffitsient
+		{ Multiplies profile points by given factor. }
         procedure ScaleCurve(const Factor: Double);
-        //  vypolnyaet pervonachal'noe zapolnenie spiska
-        //  var'iruemyh parametrov i ustanovku AmplIndex, PosIndex,
-        //  SigmaIndex
+		{ Performs intialization of variable list parameters and 
+          set up of AmplIndex, PosIndex, SigmaIndex. }
         procedure InitLinks;
         
-        //  eti funktsii ne vyzyvayut perescheta krivoy
-        //  i primenyayutsya pri initsializatsii (no ust. Modified)
+		{ These functions don't perform profile recalculation and
+          are used for initialization purposes (when Modified is set up). }
+		
         procedure Setx0(Value: Double);
         procedure SetA(Value: Double);
         procedure SetSigma(Value: Double);
@@ -233,76 +233,75 @@ type
         function GetSigma: Double;
 
     public
-        //  indeksy parametrov s predopredelennoy semantikoy;
-        //  !!! indeksy zapolnyayutsya tol'ko v tom sluchae, esli
-        //  parametry s trebuemymi imenami yavlyayutsya peremennymi
-        //  i yavlyayutsya indeksami v spiske Links; eto neobhodimo
-        //  dlya togo, chtoby pri dostupe k var'iruemym parametram
-        //  cherez Param[Index] mozhno bylo by zadavat' znacheniya
-        //  parametrov s predopredelennoy semantikoy s uchetom
-        //  ogranicheniy !!!
-        //  !!! dolzhny byt' opublikovany dlya privyazki schaga
-        //  optimizatsii !!!
-        AmplIndex: LongInt;         //  amplituda krivoy
-        PosIndex: LongInt;          //  polozhenie krivoy
-        SigmaIndex: LongInt;        //  shirina krivoy
+		{ Indexes of attributes with predefined semantics. Indexes are 
+		  filled only in the case if parameters with requirede names are
+          variable and are indexes in the List. It's necessary in accessing
+          to variable parameters via Param[Index] it would be possible to
+          set up parameters with predefined semantics in according to 
+          restrictions. Must be public to assign optimization step. }
+		{ Curve amplitude. }
+        AmplIndex: LongInt;
+		{ Curve position. }
+        PosIndex: LongInt;
+		{ Curve width. }
+        SigmaIndex: LongInt;
 
-        //  granitsy dlya rascheta R-faktora (granitsy vklyuchayutsya)
+		{ Boundaries for R-factor calculation. }
         MinX, MaxX: Double;
-        //  priznak togo, chto granitsy dlya rascheta R-faktora zadany;
-        //  esli False, to R-faktor schitaetsya dlya vseh tochek krivoy
+		{ Flag designating that boundaries of R-factor calculation
+          has been set up. If False R-factor is calculated for all 
+          points of profile. }
         RangeDefined: Boolean;
-        //  hash nachal'nyh znacheniy parametrov
+		{ Hash of initial parameter values. }
         InitHash: Cardinal;
-        //  nachal'noe znachenie x0 - ispol'zuetsya v nekotoryh algoritmah
+		{ Initial value of x0. It's used in some algorithms. }
         Initx0: Double;
 
         constructor Create(AOwner: TComponent); override;
         destructor Destroy; override;
-        //  prinimaet ob'ekt po znacheniyu i hranit ego
         procedure SetParameters(AParams: Curve_parameters);
-        //  luchshe f-ey, a ne svoystvom, potomu chto sv-vo
-        //  podrazumevaet hranenie dannyh v ob'ekte, a
-        //  zdes' etogo ne trebuetsya
+		{ Returns name of the curve. It's better to use function
+          instead of property because property assumes storing data
+          in object, but storing any data is not necessary in this case. }
         function GetName: string; virtual; abstract;
-
-        procedure ReCalc(const Intervals: TPointsSet
-            //  spisok tochek, sostoyaschiy iz par INDEKSOV v koordinate X
-            //  obrazuyuschih intervaly, v kotoryh nuzhno rasschityvat' funktsiyu
-            //  (granitsy intervalov vklyuchayutsya); ravenstvo nil oznachaet,
-            //  chto rasschityvat' f-yu nuzhno dlya vseh tochek; indeksy vmesto
-            //  koordinat ispol'zuyutsya dlya togo, chtoby izbavit'sya ot poiska
-            );
-        //  sohranyaet var'iruemye parametry vo vnutrennih peremennyh
+		{ Set of pairs of indexes of X-coordinates forming intervals in
+		  which functions should be calcuated (boundaries are included). 
+		  Equity to nil designates that functions should be calculated 
+		  for all points. Indexes instead of coordinates are used to 
+		  avoid searching. }
+        procedure ReCalc(const Intervals: TPointsSet);
+		{ Temporarily stores values of variable parameters in internal memory area. }
         procedure StoreParams;
-        //  vosstanavlivaet var'iruemye parametry iz vnutrennih peremennyh
+		{ Restores values of variable parameters from temporary storage. }
         procedure RestoreParams;
         procedure CopyParameters(const Dest: TObject); override;
-        //  proverka nalichiya parametrov s predopredelennoy semantikoy
+
+		{ Designate initialization of attributes with predefined semantics. }
+		
         function Hasx0: Boolean;
         function HasA: Boolean;
         function HasSigma: Boolean;
-        //  !!! predostavlyayut dostup optimizatoru k var'iruemym parametram !!!
+
+		{ Provides access to variable parameters for optimizer. }
         property Param[index: LongInt]: Double read GetParam write SetParam;
         property ParamCount: LongInt read GetParamCount;
-        //  predostavlyayut dostup ko vsem parametram
-        property ParamByName[Name: string]: Double
-            read GetParamByName write SetParamByName;
-        //  vozvraschaet po ssylke ob'ekt, soderzhaschiy spisok vseh parametrov
+		{ Provides access to all parameters by name. }
+        property ParamByName[Name: string]: Double read GetParamByName write SetParamByName;
+		{ Returns object containing all parameters. }
         property Params: Curve_parameters read FParams;
-        //  predostavlyayut dostup k parametram s predopredelennoy semantikoy
-        //  dlya dostupa spets. algoritmov;
-        //  !!! nuzhno ispol'zovat' f-i Has... dlya proverki nalichiya takih
-        //  parametrov !!!
-        //  izmenenie parametra x0 ogranicheno dvumya sosednimi tochkami
+		{ Properties provide access to attributes having predefined semantics for special algorithms.
+		  Use methods HasX before to check existense of such attributes. }
+
+        { Variation of the parameter x0 is limited by two adjacent points. }
         property x0: Double read Getx0 write Setx0;
         property A: Double read GetA write SetA;
         property Sigma: Double read GetSigma write SetSigma;
     end;
-  
+
+	{ Function having Gauss form. }
     TGaussPointsSet = class(TCurvePointsSet)
     protected
-        //  vypolnyaet polnyy pereschet tochek funktsii
+		{ Performs recalculation of all points of function. }
         procedure DoCalc(const Intervals: TPointsSet); override;
 
     public
@@ -316,41 +315,41 @@ type
       Y: double;
     end;
 
-    //  nasleduet vse svoystva i sposoby raboty s nimi
+	{ Function having Lorentz form. }
     TLorentzPointsSet = class(TGaussPointsSet)
     protected
-        //  vypolnyaet polnyy pereschet tochek funktsii
         procedure DoCalc(const Intervals: TPointsSet); override;
         
     public
         function GetName: string; override;
     end;
     
+	{ Function having Pseudo-Voigt form. }
     TPseudoVoigtPointsSet = class(TCurvePointsSet)
     protected
-        //  Eta - otnositel'nyi ves gaussiana i lorentziana
+		{ Relative weights of gaussian and lorentzian. }
         EtaP: TSpecialCurveParameter;
         EtaIndex: LongInt;
         
         procedure SetEta(Value: Double);
         function GetEta: Double;
         
-        //  ustanavlivaet ukazateli na parametry s predopredelennoy semantikoy
+		{ Initializes pointers to parameters with predefined semantics. }
         procedure SetSpecParamPtr(P: TSpecialCurveParameter); override;
-        //  ustanavlivaet indeksy var'iruemyh parametrov s predopredelennoy
-        //  semantikoy
-        procedure SetSpecParamVarIndex(
-            P: TSpecialCurveParameter; Index: LongInt); override;
+		{ Initializes indexes of parameters with predefined semantics. }
+        procedure SetSpecParamVarIndex(P: TSpecialCurveParameter; Index: LongInt); override;
         
-        //  predostavlyayut dostup k var'iruemym parametram
+		{ Returns variable parameter with given index. }
         function GetParam(Index: LongInt): Double; override;
+		{ Sets up variable paremeter with given index. }
         procedure SetParam(Index: LongInt; Value: Double); override;
         
-        //  predostavlyayut dostup ko vsem parametram
+		{ Returns parameter with given name. }
         function GetParamByName(Name: string): Double; override;
+		{ Sets up parameter with given name. }
         procedure SetParamByName(Name: string; Value: Double); override;
 
-        //  vypolnyaet polnyy pereschet tochek funktsii
+		{ Performs recalculation of all points of function. }
         procedure DoCalc(const Intervals: TPointsSet); override;
 
     public
@@ -362,32 +361,34 @@ type
         property Eta: Double read GetEta write SetEta;
     end;
     
+	{ Function having asymmetrical Pseudo-Voigt form. }
     TAsymPseudoVoigtPointsSet = class(TPseudoVoigtPointsSet)
     protected
-        //  izmenenie poluschiriny levoy i pravoy storon krivoy
+		{ Difference of half-widths of left and right sides of the curve. }
         DeltaSigmaP: TSpecialCurveParameter;
         DeltaSigmaIndex: LongInt;
 
         procedure SetDeltaSigma(Value: Double);
         function GetDeltaSigma: Double;
 
-        //  ustanavlivaet ukazateli na parametry s predopredelennoy semantikoy
+		{ Sets up pointers to parameters with predefined semantics. }
         procedure SetSpecParamPtr(P: TSpecialCurveParameter); override;
-        //  ustanavlivaet indeksy var'iruemyh parametrov s predopredelennoy
-        //  semantikoy
-        procedure SetSpecParamVarIndex(
-            P: TSpecialCurveParameter; Index: LongInt); override;
+		{ Sets up indexes of parameters with predefined semantics. }
+        procedure SetSpecParamVarIndex(P: TSpecialCurveParameter; Index: LongInt); override;
 
-        //  predostavlyayut dostup k var'iruemym parametram
+		{ Returns parameter with given index. }
         function GetParam(Index: LongInt): Double; override;
+		{ Sets up variable paremeter with given index. }
         procedure SetParam(Index: LongInt; Value: Double); override;
         
-        //  predostavlyayut dostup ko vsem parametram
+        { Returns parameter with given name. }
         function GetParamByName(Name: string): Double; override;
+		{ Sets up parameter with given name. }
         procedure SetParamByName(Name: string; Value: Double); override;
 
-        //  vypolnyaet polnyy pereschet tochek funktsii
+        { Performs recalculation of all points of function. }
         procedure DoCalc(const Intervals: TPointsSet); override;
+		
     public
         constructor Create(AOwner: TComponent); override;
         function GetName: string; override;
@@ -415,23 +416,24 @@ type
         procedure SetEta(Value: Double);
         function GetEta: Double;
 
-        //  ustanavlivaet ukazateli na parametry s predopredelennoy semantikoy
+        { Sets up pointers to parameters with predefined semantics. }
         procedure SetSpecParamPtr(P: TSpecialCurveParameter); override;
-        //  ustanavlivaet indeksy var'iruemyh parametrov s predopredelennoy
-        //  semantikoy
-        procedure SetSpecParamVarIndex(
-            P: TSpecialCurveParameter; Index: LongInt); override;
+        { Sets up indexes of parameters with predefined semantics. }
+        procedure SetSpecParamVarIndex(P: TSpecialCurveParameter; Index: LongInt); override;
 
-        //  predostavlyayut dostup k var'iruemym parametram
+		{ Returns variable parameter with given index. }
         function GetParam(Index: LongInt): Double; override;
+		{ Sets up variable paremeter with given index. }
         procedure SetParam(Index: LongInt; Value: Double); override;
         
-        //  predostavlyayut dostup ko vsem parametram
+        { Returns parameter with given name. }
         function GetParamByName(Name: string): Double; override;
+		{ Sets up parameter with given name. }
         procedure SetParamByName(Name: string; Value: Double); override;
 
-        //  vypolnyaet polnyy pereschet tochek funktsii
+        { Performs recalculation of all points of function. }
         procedure DoCalc(const Intervals: TPointsSet); override;
+		
     public
         constructor Create(AOwner: TComponent); override;
         function GetName: string; override;

@@ -15,7 +15,13 @@
 <td><a class="section" href="#PasDoc-Description">Description</a></td><td>Uses</td><td><a class="section" href="#PasDoc-Classes">Classes, Interfaces, Objects and Records</a></td><td><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></td><td><a class="section" href="#PasDoc-Types">Types</a></td><td><a class="section" href="#PasDoc-Constants">Constants</a></td><td>Variables</td></tr></table>
 <a name="PasDoc-Description"></a><h2 class="description">Description</h2>
 <p>
-&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</p>
+Contains definitions of classes used in <a class="normal" href="data.html">data</a> loading.</p>
+<p>
+This software is distributed under GPL in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
+
+<p>
+
+<p></p>
 <a name="PasDoc-Uses"></a><h2 class="overview">Overview</h2>
 <a name="PasDoc-Classes"></a><h3 class="cio">Classes, Interfaces, Objects and Records</h3>
 <table class="classestable wide_list">
@@ -25,11 +31,11 @@
 </tr>
 <tr class="list">
 <td class="itemname">Class&nbsp;<a class="bold" href="DataLoader.Curve_parameters.html"><code>Curve_parameters</code></a></td>
-<td class="itemdesc">obschiy tip konteynera parametrov krivyh neobhodim dlya hraneniya parametrov pol'zovatel'skih krivyh, no ispol'zuetsya takzhe dlya hraneniya parametrov vseh predopredelennyh tipov krivyh; konteyner, a ne naslednik ot TCollection potomu, chto d.b.</td>
+<td class="itemdesc">Generic type of instance parameter container.</td>
 </tr>
 <tr class="list2">
 <td class="itemname">Class&nbsp;<a class="bold" href="DataLoader.EFileNotExists.html"><code>EFileNotExists</code></a></td>
-<td class="itemdesc">??? nasledovat' ot spets.</td>
+<td class="itemdesc">&nbsp;</td>
 </tr>
 <tr class="list">
 <td class="itemname">Class&nbsp;<a class="bold" href="DataLoader.EInvalidFileFormat.html"><code>EInvalidFileFormat</code></a></td>
@@ -45,11 +51,11 @@
 </tr>
 <tr class="list2">
 <td class="itemname">Class&nbsp;<a class="bold" href="DataLoader.TAsymPseudoVoigtPointsSet.html"><code>TAsymPseudoVoigtPointsSet</code></a></td>
-<td class="itemdesc">&nbsp;</td>
+<td class="itemdesc">Function having asymmetrical Pseudo-Voigt form.</td>
 </tr>
 <tr class="list">
 <td class="itemname">Class&nbsp;<a class="bold" href="DataLoader.TCurvePointsSet.html"><code>TCurvePointsSet</code></a></td>
-<td class="itemdesc">bazovyy konteyner nabora tochek dlya vseh rasschityvaemyh krivyh !!! <code>TCurvePointsSet</code> dolzhna nasledovat' <a class="normal" href="DataLoader.TNeutronPointsSet.html#Lambda">Lambda</a> ot <a class="normal" href="DataLoader.TNeutronPointsSet.html">TNeutronPointsSet</a> dlya togo, chtoby otobrazhat'sya v grafikah soglasovanno s <a class="normal" href="DataLoader.TNeutronPointsSet.html">TNeutronPointsSet</a> !!!</td>
+<td class="itemdesc">Generic container for point set of all calcuated curves.</td>
 </tr>
 <tr class="list2">
 <td class="itemname">Class&nbsp;<a class="bold" href="DataLoader.TDataLoader.html"><code>TDataLoader</code></a></td>
@@ -61,11 +67,11 @@
 </tr>
 <tr class="list2">
 <td class="itemname">Class&nbsp;<a class="bold" href="DataLoader.TGaussPointsSet.html"><code>TGaussPointsSet</code></a></td>
-<td class="itemdesc">&nbsp;</td>
+<td class="itemdesc">Function having Gauss form.</td>
 </tr>
 <tr class="list">
 <td class="itemname">Class&nbsp;<a class="bold" href="DataLoader.TLorentzPointsSet.html"><code>TLorentzPointsSet</code></a></td>
-<td class="itemdesc">nasleduet vse svoystva i sposoby raboty s nimi</td>
+<td class="itemdesc">Function having Lorentz form.</td>
 </tr>
 <tr class="list2">
 <td class="itemname">Class&nbsp;<a class="bold" href="DataLoader.TNamedPointsSet.html"><code>TNamedPointsSet</code></a></td>
@@ -73,19 +79,19 @@
 </tr>
 <tr class="list">
 <td class="itemname">Class&nbsp;<a class="bold" href="DataLoader.TNeutronPointsSet.html"><code>TNeutronPointsSet</code></a></td>
-<td class="itemdesc">&nbsp;</td>
+<td class="itemdesc">Implements point set of experimental neutronogram.</td>
 </tr>
 <tr class="list2">
 <td class="itemname">Class&nbsp;<a class="bold" href="DataLoader.TPointsSet.html"><code>TPointsSet</code></a></td>
-<td class="itemdesc">&nbsp;</td>
+<td class="itemdesc">Generic point set.</td>
 </tr>
 <tr class="list">
 <td class="itemname">Class&nbsp;<a class="bold" href="DataLoader.TPseudoVoigtPointsSet.html"><code>TPseudoVoigtPointsSet</code></a></td>
-<td class="itemdesc">&nbsp;</td>
+<td class="itemdesc">Function having Pseudo-Voigt form.</td>
 </tr>
 <tr class="list2">
 <td class="itemname">Class&nbsp;<a class="bold" href="DataLoader.TSpecialCurveParameter.html"><code>TSpecialCurveParameter</code></a></td>
-<td class="itemdesc">peremennyy parametr polozheniya krivoy</td>
+<td class="itemdesc">&nbsp;</td>
 </tr>
 <tr class="list">
 <td class="itemname">Class&nbsp;<a class="bold" href="DataLoader.TSpecialPointsSet.html"><code>TSpecialPointsSet</code></a></td>
@@ -93,7 +99,7 @@
 </tr>
 <tr class="list2">
 <td class="itemname">Class&nbsp;<a class="bold" href="DataLoader.TTitlePointsSet.html"><code>TTitlePointsSet</code></a></td>
-<td class="itemdesc">!!! d.</td>
+<td class="itemdesc">Point set with <a class="normal" href="DataLoader.TTitlePointsSet.html#Title">title</a>.</td>
 </tr>
 <tr class="list">
 <td class="itemname">Class&nbsp;<a class="bold" href="DataLoader.ValuePair.html"><code>ValuePair</code></a></td>
@@ -152,17 +158,17 @@
 &nbsp;<h6 class="description_section">Values</h6>
 <ul>
 <li>
-Shared: &nbsp;</li>
+Shared: Created by user and non-variable. Such parameters are variated together for all instances in the given interval if it isn't disabled by special flag.</li>
 <li>
-Variable: sozdan pol'z. i ne var'iruetsya !!! takie parametry var'iruyutsya vmeste dlya vseh ekzemplyarov v dannom intervale, esli ne zaprescheno special'no !!!</li>
+Variable: Created by user and variable.</li>
 <li>
-Calculated: sozdan pol'z. i var'iruetsya</li>
+Calculated: Created by the <a class="normal" href="cgiModules.html#Application">application</a>.</li>
 <li>
-Argument: sozdan programmoy</li>
+Argument: Argument of expression. Always variable.</li>
 <li>
-InvariablePosition: argument vyrazheniya (vsegda peremennyy)</li>
+InvariablePosition: Non-variable parameter describing instance position.</li>
 <li>
-VariablePosition: fiksirovannyy parametr polozheniya krivoy</li>
+VariablePosition: Variable parameter describing instance position.</li>
 </ul>
 </td></tr>
 </table>
@@ -190,6 +196,12 @@ minimal'no vozmozhnoe chislo</p>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
+<h2 class="authors">Author</h2>
+<ul class="authors">
+<li>Dmitry Morozov <a  href="mailto:dvmorozov@hotmail.com">dvmorozov@hotmail.com</a>, 
+LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
+Facebook https://www.facebook.com/profile.php?id=100004082021870</li>
+</ul>
 <hr noshade size="1"><span class="appinfo"><em>Generated by <a  href="http://pasdoc.sourceforge.net/">PasDoc 0.14.0</a>. </em>
 </span>
 </td></tr></table></body></html>

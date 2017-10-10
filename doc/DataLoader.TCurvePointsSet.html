@@ -21,7 +21,7 @@
 <code>type TCurvePointsSet = class(<a class="normal" href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>)</code></p>
 <h2 class="description">Description</h2>
 <p>
-bazovyy konteyner nabora tochek dlya vseh rasschityvaemyh krivyh !!! <code>TCurvePointsSet</code> dolzhna nasledovat' <a class="normal" href="DataLoader.TNeutronPointsSet.html#Lambda">Lambda</a> ot <a class="normal" href="DataLoader.TNeutronPointsSet.html">TNeutronPointsSet</a> dlya togo, chtoby otobrazhat'sya v grafikah soglasovanno s <a class="normal" href="DataLoader.TNeutronPointsSet.html">TNeutronPointsSet</a> !!!</p>
+Generic container for point set of all calcuated curves. TODO: must inherit <a class="normal" href="DataLoader.TNeutronPointsSet.html#Lambda">Lambda</a> from <a class="normal" href="DataLoader.TNeutronPointsSet.html">TNeutronPointsSet</a> to adjust calculated and experimental curves on chart.</p>
 <a name="PasDoc-Hierarchy"></a><h2 class="hierarchy">Hierarchy</h2>
 <ul class="hierarchy"><li class="ancestor">TCBRCComponent</li>
 <li class="ancestor"><a class="normal" href="SelfCopied.TSelfCopiedComponent.html">TSelfCopiedComponent</a></li>
@@ -160,7 +160,7 @@ bazovyy konteyner nabora tochek dlya vseh rasschityvaemyh krivyh !!! <code>TCurv
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="DataLoader.TCurvePointsSet.html#ReCalc">ReCalc</a></b>(const Intervals: <a  href="DataLoader.TPointsSet.html">TPointsSet</a> );</code></td>
+<td class="itemcode"><code>procedure <b><a  href="DataLoader.TCurvePointsSet.html#ReCalc">ReCalc</a></b>(const Intervals: <a  href="DataLoader.TPointsSet.html">TPointsSet</a>);</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
@@ -227,8 +227,7 @@ bazovyy konteyner nabora tochek dlya vseh rasschityvaemyh krivyh !!! <code>TCurv
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>property <b><a  href="DataLoader.TCurvePointsSet.html#ParamByName">ParamByName</a></b>[Name:string]: Double
-            read <a  href="DataLoader.TCurvePointsSet.html#GetParamByName">GetParamByName</a> write <a  href="DataLoader.TCurvePointsSet.html#SetParamByName">SetParamByName</a>;</code></td>
+<td class="itemcode"><code>property <b><a  href="DataLoader.TCurvePointsSet.html#ParamByName">ParamByName</a></b>[Name:string]: Double read <a  href="DataLoader.TCurvePointsSet.html#GetParamByName">GetParamByName</a> write <a  href="DataLoader.TCurvePointsSet.html#SetParamByName">SetParamByName</a>;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
@@ -256,7 +255,7 @@ bazovyy konteyner nabora tochek dlya vseh rasschityvaemyh krivyh !!! <code>TCurv
 </tr>
 <tr><td colspan="2">
 <p>
-indeksy parametrov s predopredelennoy semantikoy; !!! indeksy zapolnyayutsya tol'ko v tom sluchae, esli parametry s trebuemymi imenami yavlyayutsya peremennymi i yavlyayutsya indeksami v spiske <a class="normal" href="DataLoader.TCurvePointsSet.html#Links">Links</a>; eto neobhodimo dlya togo, chtoby pri dostupe k var'iruemym parametram cherez <a class="normal" href="DataLoader.TCurvePointsSet.html#Param">Param</a>[Index] mozhno bylo by zadavat' znacheniya parametrov s predopredelennoy semantikoy s uchetom ogranicheniy !!! !!! dolzhny byt' opublikovany dlya privyazki schaga optimizatsii !!!</p>
+Curve amplitude.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -266,7 +265,7 @@ indeksy parametrov s predopredelennoy semantikoy; !!! indeksy zapolnyayutsya tol
 </tr>
 <tr><td colspan="2">
 <p>
-hranit ukazateli na var'iruemye parametry dlya optimizatsii dostupa - ne osvobozhdaet ob'ekty parametry s predopredelennoy semantikoy imeyut ogranicheniya, kotorye mogut byt' svyazany s tochkami krivoy; isp. uk-li dlya obespecheniya dostupa k parametram s predopredelennoy semantikoy nezavisimo ot togo, yavlyayutsya li parametry var'iruemymi ili net сами параметры определяются в конструкторах наследников и доб. в общий список параметров; эти атрибуты хранят ссылки на них;</p>
+Parameters with predefined semantics have constraints, which can be associated with curve <a class="normal" href="DataLoader.TPointsSet.html#Points">points</a>. Attributes store pointers to parameters with predefined semantics. Parameters are created in descendant constructors.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -283,7 +282,9 @@ hranit ukazateli na var'iruemye parametry dlya optimizatsii dostupa - ne osvoboz
 <td class="itemcode"><a name="FParams"></a><code><b>FParams</b>: <a  href="DataLoader.Curve_parameters.html">Curve_parameters</a>;</code></td>
 </tr>
 <tr><td colspan="2">
-&nbsp;</td></tr>
+<p>
+List of curve parameters.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -291,7 +292,9 @@ hranit ukazateli na var'iruemye parametry dlya optimizatsii dostupa - ne osvoboz
 <td class="itemcode"><a name="Fx0High"></a><code><b>Fx0High</b>: Double;</code></td>
 </tr>
 <tr><td colspan="2">
-&nbsp;</td></tr>
+<p>
+<a class="normal" href="DataLoader.TCurvePointsSet.html#x0">X0</a> variation boundaries.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -307,7 +310,9 @@ hranit ukazateli na var'iruemye parametry dlya optimizatsii dostupa - ne osvoboz
 <td class="itemcode"><a name="Fx0Low"></a><code><b>Fx0Low</b>: Double;</code></td>
 </tr>
 <tr><td colspan="2">
-&nbsp;</td></tr>
+<p>
+<a class="normal" href="DataLoader.TCurvePointsSet.html#x0">X0</a> variation boundaries.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -316,7 +321,7 @@ hranit ukazateli na var'iruemye parametry dlya optimizatsii dostupa - ne osvoboz
 </tr>
 <tr><td colspan="2">
 <p>
-hash nachal'nyh znacheniy parametrov</p>
+Hash of initial parameter values.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -326,7 +331,7 @@ hash nachal'nyh znacheniy parametrov</p>
 </tr>
 <tr><td colspan="2">
 <p>
-nachal'noe znachenie <a class="normal" href="DataLoader.TCurvePointsSet.html#x0">x0</a> - ispol'zuetsya v nekotoryh algoritmah</p>
+Initial value of <a class="normal" href="DataLoader.TCurvePointsSet.html#x0">x0</a>. It's used in some algorithms.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -336,7 +341,7 @@ nachal'noe znachenie <a class="normal" href="DataLoader.TCurvePointsSet.html#x0"
 </tr>
 <tr><td colspan="2">
 <p>
-ob'ekt ispol'zuetsya dlya vydachi sv-v krivoy proizvol'nogo tipa v vide spiska;</p>
+List of variable parameters.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -346,7 +351,7 @@ ob'ekt ispol'zuetsya dlya vydachi sv-v krivoy proizvol'nogo tipa v vide spiska;<
 </tr>
 <tr><td colspan="2">
 <p>
-shirina krivoy granitsy dlya rascheta R-faktora (granitsy vklyuchayutsya)</p>
+Boundaries for R-factor calculation.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -356,7 +361,7 @@ shirina krivoy granitsy dlya rascheta R-faktora (granitsy vklyuchayutsya)</p>
 </tr>
 <tr><td colspan="2">
 <p>
-shirina krivoy granitsy dlya rascheta R-faktora (granitsy vklyuchayutsya)</p>
+Boundaries for R-factor calculation.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -374,7 +379,7 @@ shirina krivoy granitsy dlya rascheta R-faktora (granitsy vklyuchayutsya)</p>
 </tr>
 <tr><td colspan="2">
 <p>
-amplituda krivoy</p>
+Curve position.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -392,7 +397,7 @@ amplituda krivoy</p>
 </tr>
 <tr><td colspan="2">
 <p>
-priznak togo, chto granitsy dlya rascheta R-faktora zadany; esli False, to R-faktor schitaetsya dlya vseh tochek krivoy</p>
+Flag designating that boundaries of R-factor calculation has been set up. If False R-factor is calculated for all <a class="normal" href="DataLoader.TPointsSet.html#Points">points</a> of profile.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -402,7 +407,7 @@ priznak togo, chto granitsy dlya rascheta R-faktora zadany; esli False, to R-fak
 </tr>
 <tr><td colspan="2">
 <p>
-polozhenie krivoy</p>
+Curve width.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -437,7 +442,7 @@ polozhenie krivoy</p>
 </tr>
 <tr><td colspan="2">
 <p>
-luchshe f-ey, <a class="normal" href="DataLoader.TCurvePointsSet.html#A">a</a> ne svoystvom, potomu chto sv-vo podrazumevaet hranenie dannyh v ob'ekte, <a class="normal" href="DataLoader.TCurvePointsSet.html#A">a</a> zdes' etogo ne trebuetsya</p>
+Returns name of the curve. It's better to use function instead of property because property assumes storing <a class="normal" href="data.html">data</a> in object, but storing any <a class="normal" href="data.html">data</a> is not necessary in this case.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -463,7 +468,7 @@ luchshe f-ey, <a class="normal" href="DataLoader.TCurvePointsSet.html#A">a</a> n
 </tr>
 <tr><td colspan="2">
 <p>
-proverka nalichiya parametrov s predopredelennoy semantikoy</p>
+Designate initialization of attributes with predefined semantics.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -481,7 +486,7 @@ proverka nalichiya parametrov s predopredelennoy semantikoy</p>
 </tr>
 <tr><td colspan="2">
 <p>
-granitsy izmeneniya <a class="normal" href="DataLoader.TCurvePointsSet.html#x0">x0</a> predostavlyayut dostup k var'iruemym parametram</p>
+Returns variable parameter by through index.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -491,7 +496,7 @@ granitsy izmeneniya <a class="normal" href="DataLoader.TCurvePointsSet.html#x0">
 </tr>
 <tr><td colspan="2">
 <p>
-predostavlyayut dostup ko vsem parametram</p>
+Returns value of parameter with given name.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -501,7 +506,7 @@ predostavlyayut dostup ko vsem parametram</p>
 </tr>
 <tr><td colspan="2">
 <p>
-vozvraschaet chislo var'iruemyh parametrov</p>
+Returns total number of variable parameters.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -531,10 +536,12 @@ vozvraschaet chislo var'iruemyh parametrov</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><a name="ReCalc"></a><code>procedure <b>ReCalc</b>(const Intervals: <a  href="DataLoader.TPointsSet.html">TPointsSet</a> );</code></td>
+<td class="itemcode"><a name="ReCalc"></a><code>procedure <b>ReCalc</b>(const Intervals: <a  href="DataLoader.TPointsSet.html">TPointsSet</a>);</code></td>
 </tr>
 <tr><td colspan="2">
-&nbsp;</td></tr>
+<p>
+Set of pairs of indexes of X-coordinates forming intervals in which functions should be calcuated (boundaries are included). Equity to nil designates that functions should be calculated for all <a class="normal" href="DataLoader.TPointsSet.html#Points">points</a>. Indexes instead of coordinates are used to avoid searching.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -543,7 +550,7 @@ vozvraschaet chislo var'iruemyh parametrov</p>
 </tr>
 <tr><td colspan="2">
 <p>
-vosstanavlivaet var'iruemye parametry iz vnutrennih peremennyh</p>
+Restores values of variable parameters from temporary storage.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -552,9 +559,7 @@ vosstanavlivaet var'iruemye parametry iz vnutrennih peremennyh</p>
 <td class="itemcode"><a name="SetParameters"></a><code>procedure <b>SetParameters</b>(AParams: <a  href="DataLoader.Curve_parameters.html">Curve_parameters</a>);</code></td>
 </tr>
 <tr><td colspan="2">
-<p>
-prinimaet ob'ekt po znacheniyu i hranit ego</p>
-</td></tr>
+&nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -563,7 +568,7 @@ prinimaet ob'ekt po znacheniyu i hranit ego</p>
 </tr>
 <tr><td colspan="2">
 <p>
-sohranyaet var'iruemye parametry vo vnutrennih peremennyh</p>
+Temporarily stores values of variable parameters in internal memory area.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -573,7 +578,7 @@ sohranyaet var'iruemye parametry vo vnutrennih peremennyh</p>
 </tr>
 <tr><td colspan="2">
 <p>
-vypolnyaet polnyy pereschet tochek funktsii</p>
+Performs recalculation of all profile <a class="normal" href="DataLoader.TPointsSet.html#Points">points</a>.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -583,7 +588,7 @@ vypolnyaet polnyy pereschet tochek funktsii</p>
 </tr>
 <tr><td colspan="2">
 <p>
-vypolnyaet pervonachal'noe zapolnenie spiska var'iruemyh parametrov i ustanovku <a class="normal" href="DataLoader.TCurvePointsSet.html#AmplIndex">AmplIndex</a>, <a class="normal" href="DataLoader.TCurvePointsSet.html#PosIndex">PosIndex</a>, <a class="normal" href="DataLoader.TCurvePointsSet.html#SigmaIndex">SigmaIndex</a></p>
+Performs intialization of variable list parameters and set up of <a class="normal" href="DataLoader.TCurvePointsSet.html#AmplIndex">AmplIndex</a>, <a class="normal" href="DataLoader.TCurvePointsSet.html#PosIndex">PosIndex</a>, <a class="normal" href="DataLoader.TCurvePointsSet.html#SigmaIndex">SigmaIndex</a>.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -593,7 +598,7 @@ vypolnyaet pervonachal'noe zapolnenie spiska var'iruemyh parametrov i ustanovku 
 </tr>
 <tr><td colspan="2">
 <p>
-umnozhaet tochki krivoy na zadannyy koeffitsient</p>
+Multiplies profile <a class="normal" href="DataLoader.TPointsSet.html#Points">points</a> by given factor.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -610,7 +615,9 @@ umnozhaet tochki krivoy na zadannyy koeffitsient</p>
 <td class="itemcode"><a name="SetParam"></a><code>procedure <b>SetParam</b>(Index: LongInt; Value: Double); virtual;</code></td>
 </tr>
 <tr><td colspan="2">
-&nbsp;</td></tr>
+<p>
+Sets value of variable parameter.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -635,7 +642,7 @@ umnozhaet tochki krivoy na zadannyy koeffitsient</p>
 </tr>
 <tr><td colspan="2">
 <p>
-ustanavlivaet ukazateli na parametry s predopredelennoy semantikoy</p>
+Initializes pointers to parameters with predefined semantics.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -645,7 +652,7 @@ ustanavlivaet ukazateli na parametry s predopredelennoy semantikoy</p>
 </tr>
 <tr><td colspan="2">
 <p>
-ustanavlivaet indeksy var'iruemyh parametrov s predopredelennoy semantikoy</p>
+Initializes indexes of variable parameters with predefined semantics.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -655,7 +662,7 @@ ustanavlivaet indeksy var'iruemyh parametrov s predopredelennoy semantikoy</p>
 </tr>
 <tr><td colspan="2">
 <p>
-eti funktsii ne vyzyvayut perescheta krivoy i primenyayutsya pri initsializatsii (no ust. <a class="normal" href="DataLoader.TCurvePointsSet.html#Modified">Modified</a>)</p>
+These functions don't perform profile recalculation and are used for initialization purposes (when <a class="normal" href="DataLoader.TCurvePointsSet.html#Modified">Modified</a> is set up).</p>
 </td></tr>
 </table>
 <h3 class="detail">Properties</h3>
@@ -674,18 +681,17 @@ eti funktsii ne vyzyvayut perescheta krivoy i primenyayutsya pri initsializatsii
 </tr>
 <tr><td colspan="2">
 <p>
-!!! predostavlyayut dostup optimizatoru k var'iruemym parametram !!!</p>
+Provides access to variable parameters for optimizer.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><a name="ParamByName"></a><code>property <b>ParamByName</b>[Name:string]: Double
-            read <a  href="DataLoader.TCurvePointsSet.html#GetParamByName">GetParamByName</a> write <a  href="DataLoader.TCurvePointsSet.html#SetParamByName">SetParamByName</a>;</code></td>
+<td class="itemcode"><a name="ParamByName"></a><code>property <b>ParamByName</b>[Name:string]: Double read <a  href="DataLoader.TCurvePointsSet.html#GetParamByName">GetParamByName</a> write <a  href="DataLoader.TCurvePointsSet.html#SetParamByName">SetParamByName</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
-predostavlyayut dostup ko vsem parametram</p>
+Provides access to all parameters by name.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -703,7 +709,7 @@ predostavlyayut dostup ko vsem parametram</p>
 </tr>
 <tr><td colspan="2">
 <p>
-vozvraschaet po ssylke ob'ekt, soderzhaschiy spisok vseh parametrov</p>
+Returns object containing all parameters.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -721,7 +727,7 @@ vozvraschaet po ssylke ob'ekt, soderzhaschiy spisok vseh parametrov</p>
 </tr>
 <tr><td colspan="2">
 <p>
-predostavlyayut dostup k parametram s predopredelennoy semantikoy dlya dostupa spets. algoritmov; !!! nuzhno ispol'zovat' f-i Has... dlya proverki nalichiya takih parametrov !!! izmenenie parametra <code>x0</code> ogranicheno dvumya sosednimi tochkami</p>
+Variation of the parameter <code>x0</code> is limited by two adjacent <a class="normal" href="DataLoader.TPointsSet.html#Points">points</a>.</p>
 </td></tr>
 </table>
 <hr noshade size="1"><span class="appinfo"><em>Generated by <a  href="http://pasdoc.sourceforge.net/">PasDoc 0.14.0</a>. </em>

@@ -32,7 +32,7 @@ Set of <a class="normal" href="pattern.html">pattern</a> instances forming the c
 <table class="summary wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="DataClasses.TSpecimenList.html#GetCellEnabledCharSet">GetCellEnabledCharSet</a></b>( const ACol, ARow: LongInt): <a  href="Tools.html#TCharSet">TCharSet</a>; override;</code></td>
+<td class="itemcode"><code>function <b><a  href="DataClasses.TSpecimenList.html#GetCellEnabledCharSet">GetCellEnabledCharSet</a></b>(const ACol, ARow: LongInt): <a  href="Tools.html#TCharSet">TCharSet</a>; override;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
@@ -48,7 +48,7 @@ Set of <a class="normal" href="pattern.html">pattern</a> instances forming the c
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="DataClasses.TSpecimenList.html#ValueToString">ValueToString</a></b>(const ACol, ARow: LongInt ): string; override;</code></td>
+<td class="itemcode"><code>function <b><a  href="DataClasses.TSpecimenList.html#ValueToString">ValueToString</a></b>(const ACol, ARow: LongInt): string; override;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
@@ -76,7 +76,7 @@ Set of <a class="normal" href="pattern.html">pattern</a> instances forming the c
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="DataClasses.TSpecimenList.html#StringToValue">StringToValue</a></b>(const ACol, ARow: LongInt; const AString: string ); override;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="DataClasses.TSpecimenList.html#StringToValue">StringToValue</a></b>(const ACol, ARow: LongInt; const AString: string); override;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
@@ -88,7 +88,7 @@ Set of <a class="normal" href="pattern.html">pattern</a> instances forming the c
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><a name="GetCellEnabledCharSet"></a><code>function <b>GetCellEnabledCharSet</b>( const ACol, ARow: LongInt): <a  href="Tools.html#TCharSet">TCharSet</a>; override;</code></td>
+<td class="itemcode"><a name="GetCellEnabledCharSet"></a><code>function <b>GetCellEnabledCharSet</b>(const ACol, ARow: LongInt): <a  href="Tools.html#TCharSet">TCharSet</a>; override;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -116,18 +116,16 @@ Set of <a class="normal" href="pattern.html">pattern</a> instances forming the c
 </tr>
 <tr><td colspan="2">
 <p>
-ustanavlivaet pravil'noe znachenie &quot;po umolchaniyu&quot; dlya dannoy yacheyki; ispol'zuetsya pri obrabotke operatsii ochistki yacheyki</p>
+Performs &quot;soft&quot; <a class="normal" href="data.html">data</a> validation without throwing an exception. However if coordinates of row or column have inadmissible values exception is thrown. Always returns true. Override to perform suitable validation.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><a name="ValueToString"></a><code>function <b>ValueToString</b>(const ACol, ARow: LongInt ): string; override;</code></td>
+<td class="itemcode"><a name="ValueToString"></a><code>function <b>ValueToString</b>(const ACol, ARow: LongInt): string; override;</code></td>
 </tr>
 <tr><td colspan="2">
-<p>
-///////////////////////////////////////////////////////////////////// funktsii novogo interfeysa /////////////////////////////////////////////////////////////////////</p>
-</td></tr>
+&nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -144,7 +142,7 @@ ustanavlivaet pravil'noe znachenie &quot;po umolchaniyu&quot; dlya dannoy yachey
 </tr>
 <tr><td colspan="2">
 <p>
-bazovaya f-ya dlya perescheta znacheniy parametrov vyvodimyh pol'zovatelyu</p>
+Generic method for conversion values to user friendly representation.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -177,12 +175,14 @@ bazovaya f-ya dlya perescheta znacheniy parametrov vyvodimyh pol'zovatelyu</p>
 <td class="itemcode"><a name="SetValueByDefault"></a><code>procedure <b>SetValueByDefault</b>(const ACol, ARow: LongInt); override;</code></td>
 </tr>
 <tr><td colspan="2">
-&nbsp;</td></tr>
+<p>
+Sets valid default value for the cell with given coordinates. Is used in cell initialization.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><a name="StringToValue"></a><code>procedure <b>StringToValue</b>(const ACol, ARow: LongInt; const AString: string ); override;</code></td>
+<td class="itemcode"><a name="StringToValue"></a><code>procedure <b>StringToValue</b>(const ACol, ARow: LongInt; const AString: string); override;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -194,7 +194,7 @@ bazovaya f-ya dlya perescheta znacheniy parametrov vyvodimyh pol'zovatelyu</p>
 </tr>
 <tr><td colspan="2">
 <p>
-bazovaya f-ya dlya obratnogo perescheta znacheniy parametrov vvodimyh pol'zovatelem</p>
+Generic method for reverse conversion of value from user to internal representation.</p>
 </td></tr>
 </table>
 <hr noshade size="1"><span class="appinfo"><em>Generated by <a  href="http://pasdoc.sourceforge.net/">PasDoc 0.14.0</a>. </em>

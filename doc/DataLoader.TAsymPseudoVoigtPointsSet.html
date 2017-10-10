@@ -20,8 +20,8 @@
 <p class="declaration">
 <code>type TAsymPseudoVoigtPointsSet = class(<a class="normal" href="DataLoader.TPseudoVoigtPointsSet.html">TPseudoVoigtPointsSet</a>)</code></p>
 <h2 class="description">Description</h2>
-<div class="nodescription">no description available, TPseudoVoigtPointsSet description follows</div><div class="nodescription">no description available, TCurvePointsSet description follows</div><p>
-bazovyy konteyner nabora tochek dlya vseh rasschityvaemyh krivyh !!! <code>TCurvePointsSet</code> dolzhna nasledovat' <a class="normal" href="DataLoader.TNeutronPointsSet.html#Lambda">Lambda</a> ot <a class="normal" href="DataLoader.TNeutronPointsSet.html">TNeutronPointsSet</a> dlya togo, chtoby otobrazhat'sya v grafikah soglasovanno s <a class="normal" href="DataLoader.TNeutronPointsSet.html">TNeutronPointsSet</a> !!!</p>
+<p>
+Function having asymmetrical Pseudo-Voigt form.</p>
 <a name="PasDoc-Hierarchy"></a><h2 class="hierarchy">Hierarchy</h2>
 <ul class="hierarchy"><li class="ancestor">TCBRCComponent</li>
 <li class="ancestor"><a class="normal" href="SelfCopied.TSelfCopiedComponent.html">TSelfCopiedComponent</a></li>
@@ -90,7 +90,7 @@ bazovyy konteyner nabora tochek dlya vseh rasschityvaemyh krivyh !!! <code>TCurv
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="DataLoader.TAsymPseudoVoigtPointsSet.html#SetSpecParamVarIndex">SetSpecParamVarIndex</a></b>( P: <a  href="DataLoader.TSpecialCurveParameter.html">TSpecialCurveParameter</a>; Index: LongInt); override;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="DataLoader.TAsymPseudoVoigtPointsSet.html#SetSpecParamVarIndex">SetSpecParamVarIndex</a></b>(P: <a  href="DataLoader.TSpecialCurveParameter.html">TSpecialCurveParameter</a>; Index: LongInt); override;</code></td>
 </tr>
 </table>
 <a name="PasDoc-Properties"></a><h3 class="summary">Properties</h3>
@@ -117,7 +117,7 @@ bazovyy konteyner nabora tochek dlya vseh rasschityvaemyh krivyh !!! <code>TCurv
 </tr>
 <tr><td colspan="2">
 <p>
-izmenenie poluschiriny levoy i pravoy storon krivoy</p>
+Difference of half-widths of left and right sides of the curve.</p>
 </td></tr>
 </table>
 <h3 class="detail">Methods</h3>
@@ -160,7 +160,7 @@ izmenenie poluschiriny levoy i pravoy storon krivoy</p>
 </tr>
 <tr><td colspan="2">
 <p>
-predostavlyayut dostup k var'iruemym parametram</p>
+Returns parameter with given index.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -170,7 +170,7 @@ predostavlyayut dostup k var'iruemym parametram</p>
 </tr>
 <tr><td colspan="2">
 <p>
-predostavlyayut dostup ko vsem parametram</p>
+Returns parameter with given name.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -180,7 +180,7 @@ predostavlyayut dostup ko vsem parametram</p>
 </tr>
 <tr><td colspan="2">
 <p>
-vypolnyaet polnyy pereschet tochek funktsii</p>
+Performs recalculation of all <a class="normal" href="DataLoader.TPointsSet.html#Points">points</a> of function.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -197,7 +197,9 @@ vypolnyaet polnyy pereschet tochek funktsii</p>
 <td class="itemcode"><a name="SetParam"></a><code>procedure <b>SetParam</b>(Index: LongInt; Value: Double); override;</code></td>
 </tr>
 <tr><td colspan="2">
-&nbsp;</td></tr>
+<p>
+Sets up variable paremeter with given index.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -205,7 +207,9 @@ vypolnyaet polnyy pereschet tochek funktsii</p>
 <td class="itemcode"><a name="SetParamByName"></a><code>procedure <b>SetParamByName</b>(Name: string; Value: Double); override;</code></td>
 </tr>
 <tr><td colspan="2">
-&nbsp;</td></tr>
+<p>
+Sets up parameter with given name.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -214,17 +218,17 @@ vypolnyaet polnyy pereschet tochek funktsii</p>
 </tr>
 <tr><td colspan="2">
 <p>
-ustanavlivaet ukazateli na parametry s predopredelennoy semantikoy</p>
+Sets up pointers to parameters with predefined semantics.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><a name="SetSpecParamVarIndex"></a><code>procedure <b>SetSpecParamVarIndex</b>( P: <a  href="DataLoader.TSpecialCurveParameter.html">TSpecialCurveParameter</a>; Index: LongInt); override;</code></td>
+<td class="itemcode"><a name="SetSpecParamVarIndex"></a><code>procedure <b>SetSpecParamVarIndex</b>(P: <a  href="DataLoader.TSpecialCurveParameter.html">TSpecialCurveParameter</a>; Index: LongInt); override;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
-ustanavlivaet indeksy var'iruemyh parametrov s predopredelennoy semantikoy</p>
+Sets up indexes of parameters with predefined semantics.</p>
 </td></tr>
 </table>
 <h3 class="detail">Properties</h3>

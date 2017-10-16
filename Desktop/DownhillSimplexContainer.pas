@@ -1,9 +1,14 @@
-//      dvoynoy kosoy chertoy kommentiruyutsya zamechaniya, sohranyaemye vo
-//      vseh versiyah ishodnika; figurnymi skobkami kommentiruyutsya zamechaniya,
-//      sohranyaemye tol'ko v versii ishodnika dlya besplatnogo rasprostraneniya
-{------------------------------------------------------------------------------}
-{       Copyright (C) 1999-2007 D.Morozov (dvmorozov@mail.ru)                  }
-{------------------------------------------------------------------------------}
+{
+This software is distributed under GPL
+in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
+
+@abstract(Contains definitions of auxiliary classes used in downhill simplex optimization.)
+
+@author(Dmitry Morozov dvmorozov@hotmail.com, 
+LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
+Facebook https://www.facebook.com/profile.php?id=100004082021870)
+}
 unit DownhillSimplexContainer;
 
 {$MODE Delphi}
@@ -15,52 +20,49 @@ uses
     SimpMath, CombEnumerator, CBRCComponent, Tools, MyExceptions;
 
 const
-    //  konstanty vozmozhnyh faz raboty s parametrami v TDownhillRealParameters
-    PH_CREATING    = 0;     //  faza ozhidaniya vyzova f-i CreateParameters
-    PH_WORKING     = 1;     //  faza raboty
+	{ Possible states of parameters in TDownhillRealParameters. }
+	{ Waiting for call of CreateParameters. }
+    PH_CREATING    = 0;
+	{ Processing. }
+    PH_WORKING     = 1;
 
 type
     TVariableParameter = record
         Value: Double;
+		{ If True possible values of parameter are limited by MaxLimit, MinLimit. }
         Limited: Boolean;
-            //  priznak ogranicheniya vozmozhnyh znacheniy parametra
-        MaxLimit, MinLimit: Double;
-            //  maksimal'no i minimal'no vozmozhnye znacheniya parametra;
-            //  ispol'zuyutya pri uslovii, chto ogranicheniya zadeystvovany
+		{ Maximal possible value of parameter. Is used if Limited is True. }
+        MaxLimit: Double; 
+		{ Minimal possible value of parameter. Is used if Limited is True. }
+		MinLimit: Double;
     end;
 
+    { Provides access to variable parameters to algorithm container. }
     IDownhillSimplexParameters = interface(IDiscretValue)
-        //  interfeys, predostavlyayuschiy parametry dlya raboty konteynera algoritma;
-        //  zdes' svoystva NumberOfValues i ValueIndex, nasledovannye ot IDiscretValue
-        //  indeksiruyut diskretnye urovni, zavisyaschie ot parametrov, kotorye mozhet
-        //  prinimat' velichina
         function GetParametersNumber: LongInt;
         function GetParameter(index: LongInt): TVariableParameter;
         procedure SetParameter(index: LongInt; AParameter: TVariableParameter);
-
-        property ParametersNumber: LongInt
-            read GetParametersNumber;
-            //  chislo parametrov dlya optimizatsii
+		{ Total number of variable parameters. }
+        property ParametersNumber: LongInt read GetParametersNumber;
         property Parameter[index: LongInt]: TVariableParameter
             read GetParameter           write SetParameter;
     end;
 
+	{ Provides additional methods to work with parameters. }
     IDownhillRealParameters = interface(IDownhillSimplexParameters)
-        //  realizuet dopolnitel'nye funktsii raboty s parametrami, esli eto neobhodimo
+        { Initializing parameter list. }
         procedure CreateParameters;
-            //  metod, prednaznachennyy dlya pervonachal'nogo sozdaniya spiska parmetrov
+        { Finalizing cycle of parameter updating. }
         procedure ParametersUpdated;
-            //  cherez etod metod klassu, predostavlyayuschemu interfeys soobschaetsya ob
-            //  okonchanii tsikla manipulyatsiy s parametrami
     end;
 
+	{ Provides values of optimized function. }
     IOptimizedFunction = interface
-        //  interfeys predostavlyayuschiy znachenie optimiziruemoy funktsii
         function GetOptimizedFunction: Double;
     end;
 
+	{ Provides way of displaying results. }
     IUpdatingResults = interface
-        //  interfeys predostavlyayuschiy vozmozhnost' vyvoda rezul'tatov
         procedure ShowCurJobProgress(Sender: TComponent;
             MinValue, MaxValue, CurValue: LongInt);
         procedure ResetCurJobProgress(Sender: TComponent);
@@ -70,24 +72,24 @@ type
 
     EDownhillRealParameters = class(Exception);
 
+	{ Container for algorithm parameters. }
     TDownhillRealParameters = class(TCBRCComponent, IDownhillRealParameters)
-        //  komponent - nositel' interfeysa
     protected
-        FParameters: Pointer;           //  kazatel' na massiv parametrov
-        FParametersNumber: LongInt;     //  real'noe chislo parametrov v massive
-        PhaseParameters: Byte;          //  tekuschaya faza raboty s parametrami
+		{ Pointer to parameter array. }
+        FParameters: Pointer;
+		{ Total number of parameters in array. }
+        FParametersNumber: LongInt;
+		{ Current state of parameter processing. }
+        PhaseParameters: Byte;
 
         procedure CreateParameters; virtual;
         procedure FreeParameters;
+		{ Initializes parameters. }
         procedure FillParameters; virtual; abstract;
-            //  generiruet parametry i zapolnyaet imi massiv
+		{ Converts parameters from array to components of vectors of magnetic moments. }
         procedure ParametersUpdated; virtual; abstract;
-            //  preobrazuet parametry iz massiva v
-            //  komponenty vektorov magnitnyh momentov
-
+		{ Returns actual number of parameters. }
         function GetActualParametersNumber: LongInt; virtual; abstract;
-            //  vozvraschaet chislo parametrov poluchennoe
-            //  putem neposredstvennogo perescheta
         function GetParametersNumber: LongInt;
         function GetParameter(index: LongInt): TVariableParameter;
         procedure SetParameter(index: LongInt; AParameter: TVariableParameter);
@@ -99,31 +101,25 @@ type
     public
         constructor Create(AOwner: TComponent); override;
         destructor Destroy; override;
-
-        property ParametersNumber: LongInt  read GetParametersNumber;
-            //  chislo parametrov dlya optimizatsii; ot IDownhillSimplexParameters
+		{ Implementation of IDownhillSimplexParameters }
+		{ Number of variable parameters. }
+        property ParametersNumber: LongInt read GetParametersNumber;
         property Parameter[index: LongInt]: TVariableParameter
-            //  ot IDownhillSimplexParameters
-                read GetParameter           write SetParameter;
-
-        property NumberOfValues: LongInt    read GetNumberOfValues;
-            //  kolichestvo diskretnyh znacheniy, kotorye mozhet prinimat' velichina
-        property ValueIndex: LongInt
-            //  ot IDiscretValue
-            //  indeks diskretnogo znacheniya, vybrannogo v dannyy moment
-                read GetValueIndex          write SetValueIndex;
+			read GetParameter write SetParameter;
+		{ Implementation of IDiscretValue }
+		{ Number of discrete values which the quantity can take. }
+        property NumberOfValues: LongInt read GetNumberOfValues;
+		{ Index of discrete value selected at this moment. }
+        property ValueIndex: LongInt read GetValueIndex write SetValueIndex;
     end;
 
     EDownhillSimplexContainer = class(Exception);
 
+	{ Container servicing algorithm. Container is responsible for
+      limiting values of parameters by cyclical boundary conditions. }
     TDownhillSimplexContainer = class(TAlgorithmContainer, IDownhillSimplexServer)
-        //  rol' konteynera svoditsya k obsluzhivaniyu zaprosov algoritma;
-        //  konteyner sledit za popadaniem znacheniy parametrov v
-        //  zadannye intervaly (primenyaet tsiklicheskie granichnye usloviya)
-        //  !!! etot konteyner bol'she ne sozdaet potok !!!
     protected
-        //  massiv interfeysov, kotorye ispol'zuyutsya
-        //  dlya polucheniya parametrov
+		{ Array of interfaces used for getting parameters. }
         FParametersInterfaces : array of IDownhillRealParameters;
         FIOptimizedFunction: IOptimizedFunction;
         FIUpdatingResults: IUpdatingResults;
@@ -136,13 +132,13 @@ type
 
         EOC: Boolean;
         message: string;
-        //  podgotovka okruzheniya i zapusk algoritma
+		{ Initializes environment and starts algorithm. }
         procedure Running; override;
         procedure RunningFinished; override;
 
-        //  funktsiya bez parametrov, potomu chto peredavalas' v Synchronize
+		{ Methods don't use parameters because are called by Synchronize }
+		
         procedure ShowMessage;
-        //  funktsiya bez parametrov, potomu chto peredavalas' v Synchronize
         procedure UpdateMainForm;
         
         procedure FillParameters(Decision: TFloatDecision); virtual;
@@ -150,20 +146,17 @@ type
         procedure CreateParameters;
         procedure DestroyAlgorithm; override;
 
+		{ Returns initial characteristic length for every parameter. }
         function GetInitParamLength(Sender: TComponent;
             ParameterNumber, ParametersCount: LongInt): Double; virtual;
-            //  vozvraschaet nachal'nuyu harakteristicheskuyu
-            //  dlinu dlya kazhdogo parametra
         procedure FillStartDecision(Sender: TComponent;
             StartDecision: TFloatDecision); virtual;
-        procedure EvaluateDecision(Sender: TComponent;
-            Decision: TFloatDecision); virtual;
-            //  rasschityvaet znachenie funktsii dlya parametrov dannogo resheniya
+		{ Calculates function value for set of parameters of solution object. }
+        procedure EvaluateDecision(Sender: TComponent; Decision: TFloatDecision); virtual;
         procedure UpdateResults(Sender: TComponent;
             Decision: TFloatDecision); virtual;
-        //  interfeysnyy metod
+        { Calculates condition of calculation termination. }
         function EndOfCalculation(Sender: TComponent): Boolean;
-            //  vozvraschaet priznak neobhodimosti zaversheniya rascheta
 
         function GetIUpdatingResults: IUpdatingResults;
         function GetIOptimizedFunction: IOptimizedFunction;
@@ -176,16 +169,15 @@ type
         function GetParametersNumber: LongInt;
         function GetParameter(index: LongInt): TVariableParameter;
         procedure SetParameter(index: LongInt; AParameter: TVariableParameter);
-
+		{ Total number of variable parameters. }
         property ParametersNumber: LongInt  read GetParametersNumber;
-            //  polnoe chislo parametrov dlya optimizatsii
         property Parameter[index: LongInt]: TVariableParameter
                 read GetParameter           write SetParameter;
 
     public
-        TotalMinimum: Double;           //  eta peremennaya nuzhna, chtoby
-                                        //  opredelyat' obschiy minimum sredi
-                                        //  vseh tsiklov optimizatsii
+		{ Overall minimum among all optimization cycles. }
+        TotalMinimum: Double;
+		
         constructor Create(AOwner: TComponent); override;
         destructor Destroy; override;
         
@@ -195,20 +187,16 @@ type
         procedure AddIDSPToList(const IDSP_: IDownhillRealParameters);
 
         property OptimizedFunction: IOptimizedFunction
-                read GetIOptimizedFunction  write FIOptimizedFunction;
+                read GetIOptimizedFunction write FIOptimizedFunction;
         property UpdatingResults: IUpdatingResults
-                read GetIUpdatingResults    write FIUpdatingResults;
+                read GetIUpdatingResults write FIUpdatingResults;
 
-            //  konteyner dolzhen hranit' kopii etih svoystv, potomu chto v techenii
-            //  protsessa rascheta ob'ekt - algoritm mozhet sozdavat'sya neskol'ko raz
-        property FinalTolerance: Double
-                read FFinalTolerance        write FFinalTolerance;
-        property RestartDisabled: Boolean
-                read FRestartDisabled       write FRestartDisabled;
-        property ExitDerivative: Double
-            //  esli izmenenie naibolee optimal'nogo znacheniya za tsikl
-            //  men'she zadannogo, to vyhod
-                read FExitDerivative        write FExitDerivative;
+		{ Container must save copies of these properties because during
+          calculation process algorithm object can be created a few times. }
+        property FinalTolerance: Double read FFinalTolerance write FFinalTolerance;
+        property RestartDisabled: Boolean read FRestartDisabled write FRestartDisabled;
+		{ Stops calculation if minimal value changed less than on this value for optimization cycle. }
+        property ExitDerivative: Double read FExitDerivative write FExitDerivative;
     end;
 
 implementation

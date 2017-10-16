@@ -22,7 +22,7 @@ type
     EInvalidFileFormat = class(Exception);
     EWavelengthIsNotSpecified = class(Exception);
 
-	{ Generic point set. }
+    { Generic point set. }
     TPointsSet = class(TSelfCopiedComponent)
     protected
         FPoints: TwoDimArray;
@@ -46,9 +46,9 @@ type
         procedure DeletePoint(XValue: Double);
         procedure Clear;
         procedure Sort; virtual;
-		{ Returns index of point with given X, -1 if point not found. }
+        { Returns index of point with given X, -1 if point not found. }
         function IndexOfValueX(XValue: Double): LongInt;
-		{ Returns index of point having X closest to the given value. }
+        { Returns index of point having X closest to the given value. }
         function IndexOfNearestToX(XValue: Double): LongInt;
 
         property PointsCount: LongInt read GetPointsCount;
@@ -61,7 +61,7 @@ type
         property MaxYCoord: Double read GetMaxYCoord;
     end;
 
-	{ Implements point set of experimental neutronogram. It's assumed that
+    { Implements point set of experimental neutronogram. It's assumed that
       point coordinates are expressed in 2 * Theta. }
     TNeutronPointsSet = class(TPointsSet)
     protected
@@ -89,10 +89,10 @@ type
         property PointSinTL[index: LongInt]: Double read GetPointSinTL;
     end;
   
-	{ Point set with title. TODO: must implement functionality of argument recalculation. }
+    { Point set with title. TODO: must implement functionality of argument recalculation. }
     TTitlePointsSet = class(TNeutronPointsSet)
     public
-		{ Title which is displayed in chart legend. }
+        { Title which is displayed in chart legend. }
         Title: string;
         
         procedure CopyParameters(const Dest: TObject); override;
@@ -104,18 +104,18 @@ const ZeroCurveAmplitude: Double = 1;
 
 type
     TParameterType = (
-		{ Created by user and non-variable. Such parameters are variated together for all 
-		instances in the given interval if it isn't disabled by special flag. }
+        { Created by user and non-variable. Such parameters are variated together for all 
+        instances in the given interval if it isn't disabled by special flag. }
         Shared,
-		{ Created by user and variable. }
+        { Created by user and variable. }
         Variable,
-		{ Created by the application. }
+        { Created by the application. }
         Calculated,
-		{ Argument of expression. Always variable. }
+        { Argument of expression. Always variable. }
         Argument,
-		{ Non-variable parameter describing instance position. }
+        { Non-variable parameter describing instance position. }
         InvariablePosition,
-		{ Variable parameter describing instance position. }
+        { Variable parameter describing instance position. }
         VariablePosition
         );
 
@@ -144,20 +144,20 @@ type
             read FVariationStep write FVariationStep;
 
     published
-		{ Published for XML-serialization. }
+        { Published for XML-serialization. }
         property Name: string read FName write FName;
-		{ String because some problem with XML-serialization as Double. }
+        { String because some problem with XML-serialization as Double. }
         property Value_: string read GetValue_ write SetValue_;
         property Type_: TParameterType read FType write FType;
     end;
 
-	{ Generic type of instance parameter container. }
+    { Generic type of instance parameter container. }
     Curve_parameters = class(TSelfCopiedComponent)
     protected
         FParams: TCollection;
 
     public
-		{ Initial parameters hash. Should be used for copying optimization. }
+        { Initial parameters hash. Should be used for copying optimization. }
         SavedInitHash: Cardinal;
         
         constructor Create(AOwner: TComponent); override;
@@ -170,16 +170,16 @@ type
         property Params: TCollection read FParams write FParams;
     end;
 
-	{ Generic container for point set of all calcuated curves. TODO: must
+    { Generic container for point set of all calcuated curves. TODO: must
       inherit Lambda from TNeutronPointsSet to adjust calculated and experimental
       curves on chart. }
     TCurvePointsSet = class(TTitlePointsSet)
     protected
-		{ List of curve parameters. }
+        { List of curve parameters. }
         FParams: Curve_parameters;
-		{ List of variable parameters. }
+        { List of variable parameters. }
         Links: TList;
-		{ Parameters with predefined semantics have constraints, which
+        { Parameters with predefined semantics have constraints, which
           can be associated with curve points. Attributes store pointers
           to parameters with predefined semantics. Parameters are created
           in descendant constructors. }
@@ -189,24 +189,24 @@ type
         ArgP: TSpecialCurveParameter;
 
         Fx0IsSet: Boolean;
-		{ X0 variation boundaries. }
+        { X0 variation boundaries. }
         Fx0Low, Fx0High: Double;
 
         //  predostavlyayut dostup k var'iruemym parametram
-		{ Returns variable parameter by through index. }
+        { Returns variable parameter by through index. }
         function GetParam(Index: LongInt): Double; virtual;
-		{ Sets value of variable parameter. }
+        { Sets value of variable parameter. }
         procedure SetParam(Index: LongInt; Value: Double); virtual;
-		{ Returns total number of variable parameters. }
+        { Returns total number of variable parameters. }
         function GetParamCount: LongInt;
         
-		{ Returns value of parameter with given name. }
+        { Returns value of parameter with given name. }
         function GetParamByName(Name: string): Double; virtual;
         procedure SetParamByName(Name: string; Value: Double); virtual;
         
-		{ Initializes pointers to parameters with predefined semantics. }
+        { Initializes pointers to parameters with predefined semantics. }
         procedure SetSpecParamPtr(P: TSpecialCurveParameter); virtual;
-		{ Initializes indexes of variable parameters with predefined semantics. }
+        { Initializes indexes of variable parameters with predefined semantics. }
         procedure SetSpecParamVarIndex(
             P: TSpecialCurveParameter; Index: LongInt); virtual;
 
@@ -214,17 +214,17 @@ type
         Modified: Boolean;
 
     protected
-		{ Performs recalculation of all profile points. }
+        { Performs recalculation of all profile points. }
         procedure DoCalc(const Intervals: TPointsSet); virtual; abstract;
-		{ Multiplies profile points by given factor. }
+        { Multiplies profile points by given factor. }
         procedure ScaleCurve(const Factor: Double);
-		{ Performs intialization of variable list parameters and 
+        { Performs intialization of variable list parameters and 
           set up of AmplIndex, PosIndex, SigmaIndex. }
         procedure InitLinks;
         
-		{ These functions don't perform profile recalculation and
+        { These functions don't perform profile recalculation and
           are used for initialization purposes (when Modified is set up). }
-		
+        
         procedure Setx0(Value: Double);
         procedure SetA(Value: Double);
         procedure SetSigma(Value: Double);
@@ -233,64 +233,64 @@ type
         function GetSigma: Double;
 
     public
-		{ Indexes of attributes with predefined semantics. Indexes are 
-		  filled only in the case if parameters with requirede names are
+        { Indexes of attributes with predefined semantics. Indexes are 
+          filled only in the case if parameters with requirede names are
           variable and are indexes in the List. It's necessary in accessing
           to variable parameters via Param[Index] it would be possible to
           set up parameters with predefined semantics in according to 
           restrictions. Must be public to assign optimization step. }
-		{ Curve amplitude. }
+        { Curve amplitude. }
         AmplIndex: LongInt;
-		{ Curve position. }
+        { Curve position. }
         PosIndex: LongInt;
-		{ Curve width. }
+        { Curve width. }
         SigmaIndex: LongInt;
 
-		{ Boundaries for R-factor calculation. }
+        { Boundaries for R-factor calculation. }
         MinX, MaxX: Double;
-		{ Flag designating that boundaries of R-factor calculation
+        { Flag designating that boundaries of R-factor calculation
           has been set up. If False R-factor is calculated for all 
           points of profile. }
         RangeDefined: Boolean;
-		{ Hash of initial parameter values. }
+        { Hash of initial parameter values. }
         InitHash: Cardinal;
-		{ Initial value of x0. It's used in some algorithms. }
+        { Initial value of x0. It's used in some algorithms. }
         Initx0: Double;
 
         constructor Create(AOwner: TComponent); override;
         destructor Destroy; override;
         procedure SetParameters(AParams: Curve_parameters);
-		{ Returns name of the curve. It's better to use function
+        { Returns name of the curve. It's better to use function
           instead of property because property assumes storing data
           in object, but storing any data is not necessary in this case. }
         function GetName: string; virtual; abstract;
-		{ Set of pairs of indexes of X-coordinates forming intervals in
-		  which functions should be calcuated (boundaries are included). 
-		  Equity to nil designates that functions should be calculated 
-		  for all points. Indexes instead of coordinates are used to 
-		  avoid searching. }
+        { Set of pairs of indexes of X-coordinates forming intervals in
+          which functions should be calcuated (boundaries are included). 
+          Equity to nil designates that functions should be calculated 
+          for all points. Indexes instead of coordinates are used to 
+          avoid searching. }
         procedure ReCalc(const Intervals: TPointsSet);
-		{ Temporarily stores values of variable parameters in internal memory area. }
+        { Temporarily stores values of variable parameters in internal memory area. }
         procedure StoreParams;
-		{ Restores values of variable parameters from temporary storage. }
+        { Restores values of variable parameters from temporary storage. }
         procedure RestoreParams;
         procedure CopyParameters(const Dest: TObject); override;
 
-		{ Designate initialization of attributes with predefined semantics. }
-		
+        { Designate initialization of attributes with predefined semantics. }
+        
         function Hasx0: Boolean;
         function HasA: Boolean;
         function HasSigma: Boolean;
 
-		{ Provides access to variable parameters for optimizer. }
+        { Provides access to variable parameters for optimizer. }
         property Param[index: LongInt]: Double read GetParam write SetParam;
         property ParamCount: LongInt read GetParamCount;
-		{ Provides access to all parameters by name. }
+        { Provides access to all parameters by name. }
         property ParamByName[Name: string]: Double read GetParamByName write SetParamByName;
-		{ Returns object containing all parameters. }
+        { Returns object containing all parameters. }
         property Params: Curve_parameters read FParams;
-		{ Properties provide access to attributes having predefined semantics for special algorithms.
-		  Use methods HasX before to check existense of such attributes. }
+        { Properties provide access to attributes having predefined semantics for special algorithms.
+          Use methods HasX before to check existense of such attributes. }
 
         { Variation of the parameter x0 is limited by two adjacent points. }
         property x0: Double read Getx0 write Setx0;
@@ -298,10 +298,10 @@ type
         property Sigma: Double read GetSigma write SetSigma;
     end;
 
-	{ Function having Gauss form. }
+    { Function having Gauss form. }
     TGaussPointsSet = class(TCurvePointsSet)
     protected
-		{ Performs recalculation of all points of function. }
+        { Performs recalculation of all points of function. }
         procedure DoCalc(const Intervals: TPointsSet); override;
 
     public
@@ -315,7 +315,7 @@ type
       Y: double;
     end;
 
-	{ Function having Lorentz form. }
+    { Function having Lorentz form. }
     TLorentzPointsSet = class(TGaussPointsSet)
     protected
         procedure DoCalc(const Intervals: TPointsSet); override;
@@ -324,32 +324,32 @@ type
         function GetName: string; override;
     end;
     
-	{ Function having Pseudo-Voigt form. }
+    { Function having Pseudo-Voigt form. }
     TPseudoVoigtPointsSet = class(TCurvePointsSet)
     protected
-		{ Relative weights of gaussian and lorentzian. }
+        { Relative weights of gaussian and lorentzian. }
         EtaP: TSpecialCurveParameter;
         EtaIndex: LongInt;
         
         procedure SetEta(Value: Double);
         function GetEta: Double;
         
-		{ Initializes pointers to parameters with predefined semantics. }
+        { Initializes pointers to parameters with predefined semantics. }
         procedure SetSpecParamPtr(P: TSpecialCurveParameter); override;
-		{ Initializes indexes of parameters with predefined semantics. }
+        { Initializes indexes of parameters with predefined semantics. }
         procedure SetSpecParamVarIndex(P: TSpecialCurveParameter; Index: LongInt); override;
         
-		{ Returns variable parameter with given index. }
+        { Returns variable parameter with given index. }
         function GetParam(Index: LongInt): Double; override;
-		{ Sets up variable paremeter with given index. }
+        { Sets up variable paremeter with given index. }
         procedure SetParam(Index: LongInt; Value: Double); override;
         
-		{ Returns parameter with given name. }
+        { Returns parameter with given name. }
         function GetParamByName(Name: string): Double; override;
-		{ Sets up parameter with given name. }
+        { Sets up parameter with given name. }
         procedure SetParamByName(Name: string; Value: Double); override;
 
-		{ Performs recalculation of all points of function. }
+        { Performs recalculation of all points of function. }
         procedure DoCalc(const Intervals: TPointsSet); override;
 
     public
@@ -361,34 +361,34 @@ type
         property Eta: Double read GetEta write SetEta;
     end;
     
-	{ Function having asymmetrical Pseudo-Voigt form. }
+    { Function having asymmetrical Pseudo-Voigt form. }
     TAsymPseudoVoigtPointsSet = class(TPseudoVoigtPointsSet)
     protected
-		{ Difference of half-widths of left and right sides of the curve. }
+        { Difference of half-widths of left and right sides of the curve. }
         DeltaSigmaP: TSpecialCurveParameter;
         DeltaSigmaIndex: LongInt;
 
         procedure SetDeltaSigma(Value: Double);
         function GetDeltaSigma: Double;
 
-		{ Sets up pointers to parameters with predefined semantics. }
+        { Sets up pointers to parameters with predefined semantics. }
         procedure SetSpecParamPtr(P: TSpecialCurveParameter); override;
-		{ Sets up indexes of parameters with predefined semantics. }
+        { Sets up indexes of parameters with predefined semantics. }
         procedure SetSpecParamVarIndex(P: TSpecialCurveParameter; Index: LongInt); override;
 
-		{ Returns parameter with given index. }
+        { Returns parameter with given index. }
         function GetParam(Index: LongInt): Double; override;
-		{ Sets up variable paremeter with given index. }
+        { Sets up variable paremeter with given index. }
         procedure SetParam(Index: LongInt; Value: Double); override;
         
         { Returns parameter with given name. }
         function GetParamByName(Name: string): Double; override;
-		{ Sets up parameter with given name. }
+        { Sets up parameter with given name. }
         procedure SetParamByName(Name: string; Value: Double); override;
 
         { Performs recalculation of all points of function. }
         procedure DoCalc(const Intervals: TPointsSet); override;
-		
+        
     public
         constructor Create(AOwner: TComponent); override;
         function GetName: string; override;
@@ -398,6 +398,7 @@ type
         property DeltaSigma: Double read GetDeltaSigma write SetDeltaSigma;
     end;
 
+    { Pseudo-Voigt curve having different form parameters for the right and left branches. }
     T2BranchesPseudoVoigtPointsSet = class(TCurvePointsSet)
     protected
         SigmaRightP: TSpecialCurveParameter;
@@ -421,19 +422,19 @@ type
         { Sets up indexes of parameters with predefined semantics. }
         procedure SetSpecParamVarIndex(P: TSpecialCurveParameter; Index: LongInt); override;
 
-		{ Returns variable parameter with given index. }
+        { Returns variable parameter with given index. }
         function GetParam(Index: LongInt): Double; override;
-		{ Sets up variable paremeter with given index. }
+        { Sets up variable paremeter with given index. }
         procedure SetParam(Index: LongInt; Value: Double); override;
         
         { Returns parameter with given name. }
         function GetParamByName(Name: string): Double; override;
-		{ Sets up parameter with given name. }
+        { Sets up parameter with given name. }
         procedure SetParamByName(Name: string; Value: Double); override;
 
         { Performs recalculation of all points of function. }
         procedure DoCalc(const Intervals: TPointsSet); override;
-		
+        
     public
         constructor Create(AOwner: TComponent); override;
         function GetName: string; override;
@@ -447,9 +448,9 @@ type
         property Eta: Double read GetEta write SetEta;
     end;
 
-    //  klass pozvolyaet pol'zovatelyu zadavat' imya nabora tocheck;
-    //  eto imya otlichaet vse krivye dannogo tipa ot krivyh drugih tipov;
-    //  semantika imeni ne sovpadaet s semantikoy zagolovka (Title)
+    { Basic curve class allowing setting up type name. Type name distinguishes 
+      this curve from all other curve types, as opposite to the 'Title' attributes
+      which is used to distinguish separate curve instances. }
     TNamedPointsSet = class(TCurvePointsSet)
     protected
         FName: string;
@@ -473,15 +474,16 @@ type
     *)
 
 type
-    //  konteyner dlya tochek pol'zovatel'skoy krivoy, zadannoy v vide vyrazheniya
+    { Container for points of user curve given as expression. }
     TSpecialPointsSet = class(TCurvePointsSet)
     protected
-        FExpression: string;        //  vyrazhenie v obschem vide
+        { Expression given in general text form. }
+        FExpression: string;
         FName: string;
 
-        //  vypolnyaet polnyy pereschet tochek funktsii
+        { Performs recalculation of all points of function. }
         procedure DoCalc(const Intervals: TPointsSet); override;
-        //  vypolnyaet raschet znacheniya tochki dlya tekuschego znacheniya argumenta
+        { Performs calculation of function value for given value of argument. }
         function CalcValue(ArgValue: Double): Double;
 
     public
@@ -492,9 +494,8 @@ type
         property Expression: string read FExpression write FExpression;
     end;
     
+    { Basic class for building loaders for different types of data files. }
     TDataLoader = class(TComponent)
-    //  bazovyy klass dlya sozdaniya serii zagruzchikov dlya
-    //  kazhdogo tipa zksperimental'nyh faylov dannyh neytronogramm
     protected
         PointsSet: TPointsSet;
         FFileName: string;
@@ -504,20 +505,22 @@ type
 
     public
         procedure LoadDataSet(AFileName: string);
-        //  !!! PointsSet v Reload udalyat' nel'zya,
-        //  t.k. na nego m.b. vneshnie ssylki !!!
         procedure Reload;
         function GetPointsSetCopy: TTitlePointsSet; virtual;
         destructor Destroy; override;
     end;
 
+    { Loads data from ordinary DAT-file consisting from lines having pairs of position and values. }
     TDATFileLoader = class(TDataLoader)
     protected
         procedure LoadDataSetActually; override;
     end;
 
 
-const MIN_VALUE: Double = -1e100;   //  minimal'no vozmozhnoe chislo
+const 
+      { The minimal allowed number. }
+      MIN_VALUE: Double = -1e100;
+      { The maximal allowed number. }
       MAX_VALUE: Double =  1e100;
 
 function MyStrToFloat(Str: string): Double;
@@ -556,7 +559,6 @@ end;
 
 procedure TDataLoader.LoadDataSet(AFileName: string);
 begin
-    //  nedopustimaya oshibka
     Assert(FileExists(AFileName));
 
     CreatePointsSet;
@@ -566,11 +568,11 @@ end;
 
 procedure TDataLoader.Reload;
 begin
+    //  Object PointsSet must be saved because 
+    //  there can be external pointers to it.
     Assert(FFileName <> '');
     Assert(Assigned(PointsSet));
 
-    //  zdes' otsutstvie fayla - dopustimaya oshibka -
-    //  fayl m.b. stert posle pervoy zagruzki
     if not FileExists(FFileName) then
         raise EFileNotExists.Create('File ' + FFileName +
             ' does not exists.');
@@ -601,11 +603,10 @@ begin
         Data.LoadFromFile(FFileName);
         for i := 0 to Data.Count - 1 do
         begin
-            //  pervaya kolonka - X, vtoraya - Y;
-            //  razdelitelem kolonok mozhet byt' lyuboy simvol,
-            //  krome tsifr, tochki i zapyatoy
-            Str := Data.Strings[i] + ' ';   //  dobavlyaetsya terminator dlya
-                                            //  algoritma
+            { The first column - X (argument), the second - Y (value).  
+              Column separator can be any symbol except numbers, point and comma. }
+            Str := Data.Strings[i] + ' ';   { Terminating symbol is added for algorithm. }
+                                            
             BegFound := False;
             Value1Found := False; Value2Found := False;
             FirstDelimiter := False;
@@ -636,37 +637,34 @@ begin
 ExtractValue:
                         if BegFound then
                         begin
-                            //  naydeno znachenie
                             if not Value1Found then
                             begin
+                                //  The first value (argument) is extracted.
                                 Val1 := MyStrToFloat(
                                     Copy(Str, BegIndex, j - BegIndex));
                                 Value1Found := True;
                             end
                             else
                             begin
-                                //  izvlechenie vtorogo znacheniya
+                                //  The second value (function) is extracted.
                                 Val2 := MyStrToFloat(
                                     Copy(Str, BegIndex, j - BegIndex));
                                 Value2Found := True;
-                                //  ostatok stroki ignoriruetsya
+                                //  Rest of the line is ignored.
                                 Break;
                             end;
                             FirstDelimiter := False;
                             BegFound := False;
                         end;
-                        //  ostal'nye propuskayutsya
                     end;
                 end;
             except
-                //  dopustimaya oshibka vybrasyvaemaya v vide isklyucheniya
                 raise EInvalidFileFormat.Create('File ' +
                     FFileName + ' is not valid DAT-file.')
             end;
             if Value2Found then
             begin
-                //  zaschita ot dubley; net osnovaniy predpochest'
-                //  odno iz znacheniy s odinakovym X drugomu
+                //  Duplicates by argument value are ignored.
                 if PointsSet.IndexOfValueX(Val1) = -1 then
                     PointsSet.AddNewPoint(Val1, Val2);
             end;
@@ -698,8 +696,6 @@ end;
 {============================== TPointsSet =================================}
 function TPointsSet.GetPointsCount: LongInt;
 begin
-    //Assert(Assigned(FPoints));    dopuskaetsya...
-    //  dlina daet kolichestvo par - pravil'no!
     Result := Length(FPoints);
 end;
 
@@ -766,7 +762,6 @@ end;
 
 procedure TPointsSet.AddNewPoint(XValue,YValue: Double);
 begin
-    //Assert(Assigned(FPoints));    pervyy raz initsializiruetsya v SetLength
     SetLength(FPoints, Length(FPoints) + 1);
     FPoints[PointsCount - 1][1] := XValue;
     FPoints[PointsCount - 1][2] := YValue;
@@ -776,9 +771,7 @@ procedure TPointsSet.ReplacePoint(
     PrevXValue, PrevYValue, NewXValue, NewYValue: Double);
 var i: LongInt;
 begin
-    //Assert(Assigned(Points)); dopuskaetsya
-
-    // ischem zadannuyu tochku v vybrannom spiske tochek
+    { Search the point with given argument and value in the selected list of points. }
     for i := 0 to PointsCount - 1 do
     begin
         if (Abs(PrevXValue - PointXCoord[i]) <= TINY) and
@@ -789,24 +782,22 @@ begin
             Sort;
             Exit;
         end;
-        //  uslovie nuzhno proveryat', t.k. v kachestve pred. koord.
-        //  m.b. peredany nuli, chto oznachaet, chto delaetsya popytka
-        //  dobavleniya novoy tochki
+        { The condition must be checked because as previous coordinates
+          zeros can be passed what means that new point must be added. }
         if Abs(NewXValue - PointXCoord[i]) <= TINY then
         begin
             if Abs(NewYValue - PointYCoord[i]) <= TINY then
-                //  tochka prosto povtoryaetsya - dvuh odinakovyh
-                //  tochek byt' ne mozhet
+                { Ignores duplicates by argument and value. }
                 Exit
             else
             begin
-                //  tochek s odinakovym X byt' ne mozhet
+                { Replaces value of function for point with given argument. }
                 PointYCoord[i] := NewYValue;
                 Exit;
             end;
         end;
     end;
-    // tochka ne naydena - dobavlyaem novuyu
+    { Point not found - add a new one. }
     AddNewPoint(NewXValue, NewYValue);
     Sort;
 end;

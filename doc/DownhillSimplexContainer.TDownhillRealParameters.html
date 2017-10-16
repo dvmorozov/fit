@@ -20,6 +20,8 @@
 <p class="declaration">
 <code>type TDownhillRealParameters = class(TCBRCComponent, <a class="normal" href="DownhillSimplexContainer.IDownhillRealParameters.html">IDownhillRealParameters</a>)</code></p>
 <h2 class="description">Description</h2>
+<p>
+Container for algorithm parameters.</p>
 <a name="PasDoc-Hierarchy"></a><h2 class="hierarchy">Hierarchy</h2>
 <ul class="hierarchy"><li class="ancestor">TCBRCComponent</li>
 <li class="thisitem">TDownhillRealParameters</li></ul><h2 class="overview">Overview</h2>
@@ -97,24 +99,20 @@
 <table class="summary wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>property <b><a  href="DownhillSimplexContainer.TDownhillRealParameters.html#NumberOfValues">NumberOfValues</a></b>: LongInt    read <a  href="DownhillSimplexContainer.TDownhillRealParameters.html#GetNumberOfValues">GetNumberOfValues</a>;</code></td>
+<td class="itemcode"><code>property <b><a  href="DownhillSimplexContainer.TDownhillRealParameters.html#NumberOfValues">NumberOfValues</a></b>: LongInt read <a  href="DownhillSimplexContainer.TDownhillRealParameters.html#GetNumberOfValues">GetNumberOfValues</a>;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
 <td class="itemcode"><code>property <b><a  href="DownhillSimplexContainer.TDownhillRealParameters.html#Parameter">Parameter</a></b>[index:LongInt]: <a  href="DownhillSimplexContainer.TVariableParameter.html">TVariableParameter</a>
-            
-                read <a  href="DownhillSimplexContainer.TDownhillRealParameters.html#GetParameter">GetParameter</a>           write <a  href="DownhillSimplexContainer.TDownhillRealParameters.html#SetParameter">SetParameter</a>;</code></td>
+			read <a  href="DownhillSimplexContainer.TDownhillRealParameters.html#GetParameter">GetParameter</a> write <a  href="DownhillSimplexContainer.TDownhillRealParameters.html#SetParameter">SetParameter</a>;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>property <b><a  href="DownhillSimplexContainer.TDownhillRealParameters.html#ParametersNumber">ParametersNumber</a></b>: LongInt  read <a  href="DownhillSimplexContainer.TDownhillRealParameters.html#GetParametersNumber">GetParametersNumber</a>;</code></td>
+<td class="itemcode"><code>property <b><a  href="DownhillSimplexContainer.TDownhillRealParameters.html#ParametersNumber">ParametersNumber</a></b>: LongInt read <a  href="DownhillSimplexContainer.TDownhillRealParameters.html#GetParametersNumber">GetParametersNumber</a>;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>property <b><a  href="DownhillSimplexContainer.TDownhillRealParameters.html#ValueIndex">ValueIndex</a></b>: LongInt
-            
-            
-                read <a  href="DownhillSimplexContainer.TDownhillRealParameters.html#GetValueIndex">GetValueIndex</a>          write <a  href="DownhillSimplexContainer.TDownhillRealParameters.html#SetValueIndex">SetValueIndex</a>;</code></td>
+<td class="itemcode"><code>property <b><a  href="DownhillSimplexContainer.TDownhillRealParameters.html#ValueIndex">ValueIndex</a></b>: LongInt read <a  href="DownhillSimplexContainer.TDownhillRealParameters.html#GetValueIndex">GetValueIndex</a> write <a  href="DownhillSimplexContainer.TDownhillRealParameters.html#SetValueIndex">SetValueIndex</a>;</code></td>
 </tr>
 </table>
 <h2 class="description">Description</h2>
@@ -126,7 +124,7 @@
 </tr>
 <tr><td colspan="2">
 <p>
-komponent - nositel' interfeysa</p>
+Pointer to <a class="normal" href="DownhillSimplexContainer.TDownhillRealParameters.html#Parameter">parameter</a> array.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -136,7 +134,7 @@ komponent - nositel' interfeysa</p>
 </tr>
 <tr><td colspan="2">
 <p>
-kazatel' na massiv parametrov</p>
+Total number of parameters in array.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -146,7 +144,7 @@ kazatel' na massiv parametrov</p>
 </tr>
 <tr><td colspan="2">
 <p>
-real'noe chislo parametrov v massive</p>
+Current state of <a class="normal" href="DownhillSimplexContainer.TDownhillRealParameters.html#Parameter">parameter</a> processing.</p>
 </td></tr>
 </table>
 <h3 class="detail">Methods</h3>
@@ -173,7 +171,7 @@ real'noe chislo parametrov v massive</p>
 </tr>
 <tr><td colspan="2">
 <p>
-preobrazuet parametry iz massiva v komponenty vektorov magnitnyh momentov</p>
+Returns actual number of parameters.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -198,9 +196,7 @@ preobrazuet parametry iz massiva v komponenty vektorov magnitnyh momentov</p>
 <td class="itemcode"><a name="GetParametersNumber"></a><code>function <b>GetParametersNumber</b>: LongInt;</code></td>
 </tr>
 <tr><td colspan="2">
-<p>
-vozvraschaet chislo parametrov poluchennoe putem neposredstvennogo perescheta</p>
-</td></tr>
+&nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -216,9 +212,7 @@ vozvraschaet chislo parametrov poluchennoe putem neposredstvennogo perescheta</p
 <td class="itemcode"><a name="CreateParameters"></a><code>procedure <b>CreateParameters</b>; virtual;</code></td>
 </tr>
 <tr><td colspan="2">
-<p>
-tekuschaya faza raboty s parametrami</p>
-</td></tr>
+&nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -226,7 +220,9 @@ tekuschaya faza raboty s parametrami</p>
 <td class="itemcode"><a name="FillParameters"></a><code>procedure <b>FillParameters</b>; virtual; abstract;</code></td>
 </tr>
 <tr><td colspan="2">
-&nbsp;</td></tr>
+<p>
+Initializes parameters.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -243,7 +239,7 @@ tekuschaya faza raboty s parametrami</p>
 </tr>
 <tr><td colspan="2">
 <p>
-generiruet parametry i zapolnyaet imi massiv</p>
+Converts parameters from array to components of vectors of magnetic moments.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -266,29 +262,18 @@ generiruet parametry i zapolnyaet imi massiv</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><a name="NumberOfValues"></a><code>property <b>NumberOfValues</b>: LongInt    read <a  href="DownhillSimplexContainer.TDownhillRealParameters.html#GetNumberOfValues">GetNumberOfValues</a>;</code></td>
+<td class="itemcode"><a name="NumberOfValues"></a><code>property <b>NumberOfValues</b>: LongInt read <a  href="DownhillSimplexContainer.TDownhillRealParameters.html#GetNumberOfValues">GetNumberOfValues</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
-ot <a class="normal" href="DownhillSimplexContainer.IDownhillSimplexParameters.html">IDownhillSimplexParameters</a></p>
+Number of discrete values which the quantity can take.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
 <td class="itemcode"><a name="Parameter"></a><code>property <b>Parameter</b>[index:LongInt]: <a  href="DownhillSimplexContainer.TVariableParameter.html">TVariableParameter</a>
-            
-                read <a  href="DownhillSimplexContainer.TDownhillRealParameters.html#GetParameter">GetParameter</a>           write <a  href="DownhillSimplexContainer.TDownhillRealParameters.html#SetParameter">SetParameter</a>;</code></td>
-</tr>
-<tr><td colspan="2">
-<p>
-chislo parametrov dlya optimizatsii; ot <a class="normal" href="DownhillSimplexContainer.IDownhillSimplexParameters.html">IDownhillSimplexParameters</a></p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><a name="ParametersNumber"></a><code>property <b>ParametersNumber</b>: LongInt  read <a  href="DownhillSimplexContainer.TDownhillRealParameters.html#GetParametersNumber">GetParametersNumber</a>;</code></td>
+			read <a  href="DownhillSimplexContainer.TDownhillRealParameters.html#GetParameter">GetParameter</a> write <a  href="DownhillSimplexContainer.TDownhillRealParameters.html#SetParameter">SetParameter</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -296,14 +281,21 @@ chislo parametrov dlya optimizatsii; ot <a class="normal" href="DownhillSimplexC
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><a name="ValueIndex"></a><code>property <b>ValueIndex</b>: LongInt
-            
-            
-                read <a  href="DownhillSimplexContainer.TDownhillRealParameters.html#GetValueIndex">GetValueIndex</a>          write <a  href="DownhillSimplexContainer.TDownhillRealParameters.html#SetValueIndex">SetValueIndex</a>;</code></td>
+<td class="itemcode"><a name="ParametersNumber"></a><code>property <b>ParametersNumber</b>: LongInt read <a  href="DownhillSimplexContainer.TDownhillRealParameters.html#GetParametersNumber">GetParametersNumber</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
-kolichestvo diskretnyh znacheniy, kotorye mozhet prinimat' velichina</p>
+Number of variable parameters.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><a name="ValueIndex"></a><code>property <b>ValueIndex</b>: LongInt read <a  href="DownhillSimplexContainer.TDownhillRealParameters.html#GetValueIndex">GetValueIndex</a> write <a  href="DownhillSimplexContainer.TDownhillRealParameters.html#SetValueIndex">SetValueIndex</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Index of discrete value selected at this moment.</p>
 </td></tr>
 </table>
 <hr noshade size="1"><span class="appinfo"><em>Generated by <a  href="http://pasdoc.sourceforge.net/">PasDoc 0.14.0</a>. </em>

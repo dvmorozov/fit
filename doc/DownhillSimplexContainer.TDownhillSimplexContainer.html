@@ -20,8 +20,8 @@
 <p class="declaration">
 <code>type TDownhillSimplexContainer = class(<a class="normal" href="AlgorithmContainer.TAlgorithmContainer.html">TAlgorithmContainer</a>, IDownhillSimplexServer)</code></p>
 <h2 class="description">Description</h2>
-<div class="nodescription">no description available, TAlgorithmContainer description follows</div><p>
-Class defines abstract methods to control any type of algorithms.</p>
+<p>
+Container servicing <a class="normal" href="AlgorithmContainer.TAlgorithmContainer.html#Algorithm">algorithm</a>. Container is responsible for limiting values of parameters by cyclical boundary conditions.</p>
 <a name="PasDoc-Hierarchy"></a><h2 class="hierarchy">Hierarchy</h2>
 <ul class="hierarchy"><li class="ancestor">TComponent</li>
 <li class="ancestor"><a class="normal" href="AlgorithmContainer.TAlgorithmContainer.html">TAlgorithmContainer</a></li>
@@ -176,15 +176,11 @@ Class defines abstract methods to control any type of algorithms.</p>
 <table class="summary wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>property <b><a  href="DownhillSimplexContainer.TDownhillSimplexContainer.html#ExitDerivative">ExitDerivative</a></b>: Double
-            
-            
-                read <a  href="DownhillSimplexContainer.TDownhillSimplexContainer.html#FExitDerivative">FExitDerivative</a>        write <a  href="DownhillSimplexContainer.TDownhillSimplexContainer.html#FExitDerivative">FExitDerivative</a>;</code></td>
+<td class="itemcode"><code>property <b><a  href="DownhillSimplexContainer.TDownhillSimplexContainer.html#ExitDerivative">ExitDerivative</a></b>: Double read <a  href="DownhillSimplexContainer.TDownhillSimplexContainer.html#FExitDerivative">FExitDerivative</a> write <a  href="DownhillSimplexContainer.TDownhillSimplexContainer.html#FExitDerivative">FExitDerivative</a>;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>property <b><a  href="DownhillSimplexContainer.TDownhillSimplexContainer.html#FinalTolerance">FinalTolerance</a></b>: Double
-                read <a  href="DownhillSimplexContainer.TDownhillSimplexContainer.html#FFinalTolerance">FFinalTolerance</a>        write <a  href="DownhillSimplexContainer.TDownhillSimplexContainer.html#FFinalTolerance">FFinalTolerance</a>;</code></td>
+<td class="itemcode"><code>property <b><a  href="DownhillSimplexContainer.TDownhillSimplexContainer.html#FinalTolerance">FinalTolerance</a></b>: Double read <a  href="DownhillSimplexContainer.TDownhillSimplexContainer.html#FFinalTolerance">FFinalTolerance</a> write <a  href="DownhillSimplexContainer.TDownhillSimplexContainer.html#FFinalTolerance">FFinalTolerance</a>;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
@@ -197,7 +193,7 @@ Class defines abstract methods to control any type of algorithms.</p>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
 <td class="itemcode"><code>property <b><a  href="DownhillSimplexContainer.TDownhillSimplexContainer.html#OptimizedFunction">OptimizedFunction</a></b>: <a  href="DownhillSimplexContainer.IOptimizedFunction.html">IOptimizedFunction</a>
-                read <a  href="DownhillSimplexContainer.TDownhillSimplexContainer.html#GetIOptimizedFunction">GetIOptimizedFunction</a>  write <a  href="DownhillSimplexContainer.TDownhillSimplexContainer.html#FIOptimizedFunction">FIOptimizedFunction</a>;</code></td>
+                read <a  href="DownhillSimplexContainer.TDownhillSimplexContainer.html#GetIOptimizedFunction">GetIOptimizedFunction</a> write <a  href="DownhillSimplexContainer.TDownhillSimplexContainer.html#FIOptimizedFunction">FIOptimizedFunction</a>;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
@@ -210,13 +206,12 @@ Class defines abstract methods to control any type of algorithms.</p>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>property <b><a  href="DownhillSimplexContainer.TDownhillSimplexContainer.html#RestartDisabled">RestartDisabled</a></b>: Boolean
-                read <a  href="DownhillSimplexContainer.TDownhillSimplexContainer.html#FRestartDisabled">FRestartDisabled</a>       write <a  href="DownhillSimplexContainer.TDownhillSimplexContainer.html#FRestartDisabled">FRestartDisabled</a>;</code></td>
+<td class="itemcode"><code>property <b><a  href="DownhillSimplexContainer.TDownhillSimplexContainer.html#RestartDisabled">RestartDisabled</a></b>: Boolean read <a  href="DownhillSimplexContainer.TDownhillSimplexContainer.html#FRestartDisabled">FRestartDisabled</a> write <a  href="DownhillSimplexContainer.TDownhillSimplexContainer.html#FRestartDisabled">FRestartDisabled</a>;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
 <td class="itemcode"><code>property <b><a  href="DownhillSimplexContainer.TDownhillSimplexContainer.html#UpdatingResults">UpdatingResults</a></b>: <a  href="DownhillSimplexContainer.IUpdatingResults.html">IUpdatingResults</a>
-                read <a  href="DownhillSimplexContainer.TDownhillSimplexContainer.html#GetIUpdatingResults">GetIUpdatingResults</a>    write <a  href="DownhillSimplexContainer.TDownhillSimplexContainer.html#FIUpdatingResults">FIUpdatingResults</a>;</code></td>
+                read <a  href="DownhillSimplexContainer.TDownhillSimplexContainer.html#GetIUpdatingResults">GetIUpdatingResults</a> write <a  href="DownhillSimplexContainer.TDownhillSimplexContainer.html#FIUpdatingResults">FIUpdatingResults</a>;</code></td>
 </tr>
 </table>
 <h2 class="description">Description</h2>
@@ -276,7 +271,7 @@ Class defines abstract methods to control any type of algorithms.</p>
 </tr>
 <tr><td colspan="2">
 <p>
-rol' konteynera svoditsya k obsluzhivaniyu zaprosov algoritma; konteyner sledit za popadaniem znacheniy parametrov v zadannye intervaly (primenyaet tsiklicheskie granichnye usloviya) !!! etot konteyner bol'she ne sozdaet potok !!! massiv interfeysov, kotorye ispol'zuyutsya dlya polucheniya parametrov</p>
+Array of interfaces used for getting parameters.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -301,7 +296,9 @@ rol' konteynera svoditsya k obsluzhivaniyu zaprosov algoritma; konteyner sledit 
 <td class="itemcode"><a name="TotalMinimum"></a><code><b>TotalMinimum</b>: Double;</code></td>
 </tr>
 <tr><td colspan="2">
-&nbsp;</td></tr>
+<p>
+Overall minimum among all optimization cycles.</p>
+</td></tr>
 </table>
 <h3 class="detail">Methods</h3>
 <table class="detail wide_list">
@@ -310,9 +307,7 @@ rol' konteynera svoditsya k obsluzhivaniyu zaprosov algoritma; konteyner sledit 
 <td class="itemcode"><a name="Create"></a><code>constructor <b>Create</b>(AOwner: TComponent); override;</code></td>
 </tr>
 <tr><td colspan="2">
-<p>
-eta peremennaya nuzhna, chtoby opredelyat' obschiy minimum sredi vseh tsiklov optimizatsii</p>
-</td></tr>
+&nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -329,7 +324,7 @@ eta peremennaya nuzhna, chtoby opredelyat' obschiy minimum sredi vseh tsiklov op
 </tr>
 <tr><td colspan="2">
 <p>
-interfeysnyy metod</p>
+Calculates condition of calculation termination.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -354,7 +349,9 @@ interfeysnyy metod</p>
 <td class="itemcode"><a name="GetInitParamLength"></a><code>function <b>GetInitParamLength</b>(Sender: TComponent; ParameterNumber, ParametersCount: LongInt): Double; virtual;</code></td>
 </tr>
 <tr><td colspan="2">
-&nbsp;</td></tr>
+<p>
+Returns initial characteristic length for every <a class="normal" href="DownhillSimplexContainer.TDownhillSimplexContainer.html#Parameter">parameter</a>.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -370,9 +367,7 @@ interfeysnyy metod</p>
 <td class="itemcode"><a name="GetIUpdatingResults"></a><code>function <b>GetIUpdatingResults</b>: <a  href="DownhillSimplexContainer.IUpdatingResults.html">IUpdatingResults</a>;</code></td>
 </tr>
 <tr><td colspan="2">
-<p>
-vozvraschaet priznak neobhodimosti zaversheniya rascheta</p>
-</td></tr>
+&nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -444,7 +439,9 @@ vozvraschaet priznak neobhodimosti zaversheniya rascheta</p>
 <td class="itemcode"><a name="EvaluateDecision"></a><code>procedure <b>EvaluateDecision</b>(Sender: TComponent; Decision: TFloatDecision); virtual;</code></td>
 </tr>
 <tr><td colspan="2">
-&nbsp;</td></tr>
+<p>
+Calculates function value for set of parameters of solution object.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -460,9 +457,7 @@ vozvraschaet priznak neobhodimosti zaversheniya rascheta</p>
 <td class="itemcode"><a name="FillStartDecision"></a><code>procedure <b>FillStartDecision</b>(Sender: TComponent; StartDecision: TFloatDecision); virtual;</code></td>
 </tr>
 <tr><td colspan="2">
-<p>
-vozvraschaet nachal'nuyu harakteristicheskuyu dlinu dlya kazhdogo parametra</p>
-</td></tr>
+&nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -471,7 +466,7 @@ vozvraschaet nachal'nuyu harakteristicheskuyu dlinu dlya kazhdogo parametra</p>
 </tr>
 <tr><td colspan="2">
 <p>
-podgotovka okruzheniya i zapusk algoritma</p>
+Initializes environment and starts <a class="normal" href="AlgorithmContainer.TAlgorithmContainer.html#Algorithm">algorithm</a>.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -497,7 +492,7 @@ podgotovka okruzheniya i zapusk algoritma</p>
 </tr>
 <tr><td colspan="2">
 <p>
-funktsiya bez parametrov, potomu chto peredavalas' v Synchronize</p>
+Methods don't use parameters because are called by Synchronize</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -506,9 +501,7 @@ funktsiya bez parametrov, potomu chto peredavalas' v Synchronize</p>
 <td class="itemcode"><a name="UpdateMainForm"></a><code>procedure <b>UpdateMainForm</b>;</code></td>
 </tr>
 <tr><td colspan="2">
-<p>
-funktsiya bez parametrov, potomu chto peredavalas' v Synchronize</p>
-</td></tr>
+&nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -516,31 +509,27 @@ funktsiya bez parametrov, potomu chto peredavalas' v Synchronize</p>
 <td class="itemcode"><a name="UpdateResults"></a><code>procedure <b>UpdateResults</b>(Sender: TComponent; Decision: TFloatDecision); virtual;</code></td>
 </tr>
 <tr><td colspan="2">
-<p>
-rasschityvaet znachenie funktsii dlya parametrov dannogo resheniya</p>
-</td></tr>
+&nbsp;</td></tr>
 </table>
 <h3 class="detail">Properties</h3>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><a name="ExitDerivative"></a><code>property <b>ExitDerivative</b>: Double
-            
-            
-                read <a  href="DownhillSimplexContainer.TDownhillSimplexContainer.html#FExitDerivative">FExitDerivative</a>        write <a  href="DownhillSimplexContainer.TDownhillSimplexContainer.html#FExitDerivative">FExitDerivative</a>;</code></td>
+<td class="itemcode"><a name="ExitDerivative"></a><code>property <b>ExitDerivative</b>: Double read <a  href="DownhillSimplexContainer.TDownhillSimplexContainer.html#FExitDerivative">FExitDerivative</a> write <a  href="DownhillSimplexContainer.TDownhillSimplexContainer.html#FExitDerivative">FExitDerivative</a>;</code></td>
 </tr>
 <tr><td colspan="2">
-&nbsp;</td></tr>
+<p>
+Stops calculation if minimal value changed less than on this value for optimization cycle.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><a name="FinalTolerance"></a><code>property <b>FinalTolerance</b>: Double
-                read <a  href="DownhillSimplexContainer.TDownhillSimplexContainer.html#FFinalTolerance">FFinalTolerance</a>        write <a  href="DownhillSimplexContainer.TDownhillSimplexContainer.html#FFinalTolerance">FFinalTolerance</a>;</code></td>
+<td class="itemcode"><a name="FinalTolerance"></a><code>property <b>FinalTolerance</b>: Double read <a  href="DownhillSimplexContainer.TDownhillSimplexContainer.html#FFinalTolerance">FFinalTolerance</a> write <a  href="DownhillSimplexContainer.TDownhillSimplexContainer.html#FFinalTolerance">FFinalTolerance</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
-konteyner dolzhen hranit' kopii etih svoystv, potomu chto v techenii protsessa rascheta ob'ekt - algoritm mozhet sozdavat'sya neskol'ko raz</p>
+Container must save copies of these properties because during calculation process <a class="normal" href="AlgorithmContainer.TAlgorithmContainer.html#Algorithm">algorithm</a> object can be created a few times.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -563,7 +552,7 @@ konteyner dolzhen hranit' kopii etih svoystv, potomu chto v techenii protsessa r
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
 <td class="itemcode"><a name="OptimizedFunction"></a><code>property <b>OptimizedFunction</b>: <a  href="DownhillSimplexContainer.IOptimizedFunction.html">IOptimizedFunction</a>
-                read <a  href="DownhillSimplexContainer.TDownhillSimplexContainer.html#GetIOptimizedFunction">GetIOptimizedFunction</a>  write <a  href="DownhillSimplexContainer.TDownhillSimplexContainer.html#FIOptimizedFunction">FIOptimizedFunction</a>;</code></td>
+                read <a  href="DownhillSimplexContainer.TDownhillSimplexContainer.html#GetIOptimizedFunction">GetIOptimizedFunction</a> write <a  href="DownhillSimplexContainer.TDownhillSimplexContainer.html#FIOptimizedFunction">FIOptimizedFunction</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -575,9 +564,7 @@ konteyner dolzhen hranit' kopii etih svoystv, potomu chto v techenii protsessa r
                 read <a  href="DownhillSimplexContainer.TDownhillSimplexContainer.html#GetParameter">GetParameter</a>           write <a  href="DownhillSimplexContainer.TDownhillSimplexContainer.html#SetParameter">SetParameter</a>;</code></td>
 </tr>
 <tr><td colspan="2">
-<p>
-polnoe chislo parametrov dlya optimizatsii</p>
-</td></tr>
+&nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -585,13 +572,14 @@ polnoe chislo parametrov dlya optimizatsii</p>
 <td class="itemcode"><a name="ParametersNumber"></a><code>property <b>ParametersNumber</b>: LongInt  read <a  href="DownhillSimplexContainer.TDownhillSimplexContainer.html#GetParametersNumber">GetParametersNumber</a>;</code></td>
 </tr>
 <tr><td colspan="2">
-&nbsp;</td></tr>
+<p>
+Total number of variable parameters.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><a name="RestartDisabled"></a><code>property <b>RestartDisabled</b>: Boolean
-                read <a  href="DownhillSimplexContainer.TDownhillSimplexContainer.html#FRestartDisabled">FRestartDisabled</a>       write <a  href="DownhillSimplexContainer.TDownhillSimplexContainer.html#FRestartDisabled">FRestartDisabled</a>;</code></td>
+<td class="itemcode"><a name="RestartDisabled"></a><code>property <b>RestartDisabled</b>: Boolean read <a  href="DownhillSimplexContainer.TDownhillSimplexContainer.html#FRestartDisabled">FRestartDisabled</a> write <a  href="DownhillSimplexContainer.TDownhillSimplexContainer.html#FRestartDisabled">FRestartDisabled</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -600,7 +588,7 @@ polnoe chislo parametrov dlya optimizatsii</p>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
 <td class="itemcode"><a name="UpdatingResults"></a><code>property <b>UpdatingResults</b>: <a  href="DownhillSimplexContainer.IUpdatingResults.html">IUpdatingResults</a>
-                read <a  href="DownhillSimplexContainer.TDownhillSimplexContainer.html#GetIUpdatingResults">GetIUpdatingResults</a>    write <a  href="DownhillSimplexContainer.TDownhillSimplexContainer.html#FIUpdatingResults">FIUpdatingResults</a>;</code></td>
+                read <a  href="DownhillSimplexContainer.TDownhillSimplexContainer.html#GetIUpdatingResults">GetIUpdatingResults</a> write <a  href="DownhillSimplexContainer.TDownhillSimplexContainer.html#FIUpdatingResults">FIUpdatingResults</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>

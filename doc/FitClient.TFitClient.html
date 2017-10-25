@@ -21,7 +21,7 @@
 <code>type TFitClient = class(TComponent)</code></p>
 <h2 class="description">Description</h2>
 <p>
-komponent, kot. realizuet vsyu logiku klientskoy chasti programmy; ??? d.b. polnost'yu otdelen ot pol'zovatel'skogo interfeysa</p>
+Implements all client logic of the <a class="normal" href="cgiModules.html#Application">application</a>. Must be completely independent from UI.</p>
 <a name="PasDoc-Hierarchy"></a><h2 class="hierarchy">Hierarchy</h2>
 <ul class="hierarchy"><li class="ancestor">TComponent</li>
 <li class="thisitem">TFitClient</li></ul><h2 class="overview">Overview</h2>
@@ -693,7 +693,7 @@ komponent, kot. realizuet vsyu logiku klientskoy chasti programmy; ??? d.b. poln
 </tr>
 <tr><td colspan="2">
 <p>
-spisok tochek fona, ispol'zuemyy dlya perehoda m-u rezhimami ruchnogo i avtomaticheskogo vybora</p>
+List of <a class="normal" href="background.html">background</a> points which is used for transmission between manual and automatic selection modes.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -711,7 +711,7 @@ spisok tochek fona, ispol'zuemyy dlya perehoda m-u rezhimami ruchnogo i avtomati
 </tr>
 <tr><td colspan="2">
 <p>
-tochki privyazki ekzemplyarov patterna; ispol'zuyutsya tol'ko x-koordinaty tochek</p>
+Positions of <a class="normal" href="pattern.html">pattern</a> specimens. Only X-coordinate is used.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -721,7 +721,7 @@ tochki privyazki ekzemplyarov patterna; ispol'zuyutsya tol'ko x-koordinaty toche
 </tr>
 <tr><td colspan="2">
 <p>
-nabor ob'ektov dlya rascheta krivyh ekzemplyarov patterna; kazhdyy iz ob'ektov soderzhit krivuyu - ekzemplyar patterna</p>
+Containers of calculated <a class="normal" href="pattern.html">pattern</a> specimens. Each object contains <a class="normal" href="data.html">data</a> of specimen curve.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -747,7 +747,7 @@ nabor ob'ektov dlya rascheta krivyh ekzemplyarov patterna; kazhdyy iz ob'ektov s
 </tr>
 <tr><td colspan="2">
 <p>
-funktsiya obratnogo vyzova zaversheniya asinhr. operatsii</p>
+Callback on asynchronous operation finishing.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -773,7 +773,7 @@ funktsiya obratnogo vyzova zaversheniya asinhr. operatsii</p>
 </tr>
 <tr><td colspan="2">
 <p>
-=========== kopii dannyh, vyvedennyh na grafik ===================== !!! kopii dannyh nel'zya ne hranit', potomu chto inache ne obespechit' vozmozhnost' izmeneniya koordinaty X !!! dannye profilya</p>
+All the <a class="normal" href="data.html">data</a> displayed on the chart. They are required to be able control of X-coordinate.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -903,7 +903,7 @@ funktsiya obratnogo vyzova zaversheniya asinhr. operatsii</p>
 </tr>
 <tr><td colspan="2">
 <p>
-=============== uk-li na metody otobrazheniya krivyh =================</p>
+Pointers to methods for curve displaying.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -937,7 +937,7 @@ funktsiya obratnogo vyzova zaversheniya asinhr. operatsii</p>
 </tr>
 <tr><td colspan="2">
 <p>
-v zavisimosti ot etogo priznaka v dal'neyshih operatsiyah ispol'zuyutsya libo dannye vybrannoy oblasti, libo dannye polnogo profilya</p>
+If True then in all operations only <a class="normal" href="data.html">data</a> belonging to selected ared are used otherwise all profile <a class="normal" href="data.html">data</a> are used.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -955,7 +955,7 @@ v zavisimosti ot etogo priznaka v dal'neyshih operatsiyah ispol'zuyutsya libo da
 </tr>
 <tr><td colspan="2">
 <p>
-krivaya, poluchaemaya summoy vseh podgonyaemyh krivyh i sravnivaemaya s eksperimental'noy</p>
+Sum of all model specimens which is compared with experimental <a class="normal" href="data.html">data</a>.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -965,7 +965,7 @@ krivaya, poluchaemaya summoy vseh podgonyaemyh krivyh i sravnivaemaya s eksperim
 </tr>
 <tr><td colspan="2">
 <p>
-pary tochek ogranichivayuschie diapazony rascheta R-Factor'a; !!! nikogda ne dolzhny byt' skryty, chtoby pol'zovatel' videl, v kakom rezhime schitaetsya R-Factor !!!</p>
+List of point pairs which limit interval of R-factor calculation. Always must be displayed in order to show user in which mode R-factor is calculated.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -975,7 +975,7 @@ pary tochek ogranichivayuschie diapazony rascheta R-Factor'a; !!! nikogda ne dol
 </tr>
 <tr><td colspan="2">
 <p>
-uchastok profilya, s kotorym pol'zovatel' rabotaet v dannyy moment</p>
+Region of given profile <a class="normal" href="data.html">data</a> with which user is working at the given moment.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -985,7 +985,7 @@ uchastok profilya, s kotorym pol'zovatel' rabotaet v dannyy moment</p>
 </tr>
 <tr><td colspan="2">
 <p>
-tochki, vybrannye pol'zovatelem</p>
+Set of points selected by user.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -995,7 +995,7 @@ tochki, vybrannye pol'zovatelem</p>
 </tr>
 <tr><td colspan="2">
 <p>
-nabor ob'ektov-parametrov ekzemplyarov patterna</p>
+Containers of parameters of <a class="normal" href="pattern.html">pattern</a> specimens.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1005,7 +1005,7 @@ nabor ob'ektov-parametrov ekzemplyarov patterna</p>
 </tr>
 <tr><td colspan="2">
 <p>
-global'naya peremennaya dlya vyzova <a class="normal" href="FitClient.TFitClient.html#RefreshPointsSet">RefreshPointsSet</a>, <a class="normal" href="FitClient.TFitClient.html#Hide">Hide</a></p>
+Is used in <a class="normal" href="FitClient.TFitClient.html#RefreshPointsSet">RefreshPointsSet</a>, <a class="normal" href="FitClient.TFitClient.html#Hide">Hide</a>.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1040,7 +1040,7 @@ global'naya peremennaya dlya vyzova <a class="normal" href="FitClient.TFitClient
 </tr>
 <tr><td colspan="2">
 <p>
-poluchaet sostoyanie asinhr. operatsii neposredstvenno ot servera</p>
+Gets state of asynchronous operation from the server.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1066,7 +1066,7 @@ poluchaet sostoyanie asinhr. operatsii neposredstvenno ot servera</p>
 </tr>
 <tr><td colspan="2">
 <p>
-vozvraschaet nabor, s kotorym pol'zovatel' rabotaet v dannyy moment, t.e. nabor, v kotoryy dobavlyayutsya ili iz kotorogo udalyayutsya tochki</p>
+Returns a set with which user works at the moment.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1155,9 +1155,7 @@ vozvraschaet nabor, s kotorym pol'zovatel' rabotaet v dannyy moment, t.e. nabor,
 <td class="itemcode"><a name="GetMaxRFactor"></a><code>function <b>GetMaxRFactor</b>: Double;</code></td>
 </tr>
 <tr><td colspan="2">
-<p>
-================= izvlechenie/ustanovka poley servera ===============</p>
-</td></tr>
+&nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -1166,7 +1164,7 @@ vozvraschaet nabor, s kotorym pol'zovatel' rabotaet v dannyy moment, t.e. nabor,
 </tr>
 <tr><td colspan="2">
 <p>
-vozvraschaet polnyy profil' ili vybrannyy v dannyy moment uchastok</p>
+Returns full profile or part of profile selected at the moment.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1183,9 +1181,7 @@ vozvraschaet polnyy profil' ili vybrannyy v dannyy moment uchastok</p>
 <td class="itemcode"><a name="AddPointToActive"></a><code>procedure <b>AddPointToActive</b>(XValue, YValue: Double);</code></td>
 </tr>
 <tr><td colspan="2">
-<p>
-!!! ne ispol'zuetsya pri vvode tochek vruchnuyu, potomu chto trebuet prezhde vhoda v spets. sostoyanie, kot. imeet smysl tol'ko pri vizual'nom vybore tochek !!!</p>
-</td></tr>
+&nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -1218,7 +1214,7 @@ vozvraschaet polnyy profil' ili vybrannyy v dannyy moment uchastok</p>
 </tr>
 <tr><td colspan="2">
 <p>
-!!! vse vyzyvayut <a class="normal" href="FitClient.TFitClient.html#AddPoint">AddPoint</a> !!!</p>
+All call <a class="normal" href="FitClient.TFitClient.html#AddPoint">AddPoint</a> method.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1356,7 +1352,7 @@ vozvraschaet polnyy profil' ili vybrannyy v dannyy moment uchastok</p>
 </tr>
 <tr><td colspan="2">
 <p>
-!!! vypolnyayut tol'ko ochistku spiskov !!!</p>
+Do only cleaning of sets.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1382,7 +1378,7 @@ vozvraschaet polnyy profil' ili vybrannyy v dannyy moment uchastok</p>
 </tr>
 <tr><td colspan="2">
 <p>
-!!! vse vyzyvayut <a class="normal" href="FitClient.TFitClient.html#ReplacePoint">ReplacePoint</a> !!!</p>
+All call <a class="normal" href="FitClient.TFitClient.html#ReplacePoint">ReplacePoint</a> method.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1416,7 +1412,7 @@ vozvraschaet polnyy profil' ili vybrannyy v dannyy moment uchastok</p>
 </tr>
 <tr><td colspan="2">
 <p>
-vypolnyaet ochistku oblasti grafika i perenosit chast' dannyh iz dannyh profilya v spisok dannyh vybrannoy oblasti</p>
+Cleans chart and moves <a class="normal" href="data.html">data</a> from full profile to <a class="normal" href="data.html">data</a> of selected iterval.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1442,7 +1438,7 @@ vypolnyaet ochistku oblasti grafika i perenosit chast' dannyh iz dannyh profilya
 </tr>
 <tr><td colspan="2">
 <p>
-========== funktsii obratnogo vyzova so storony servera =============</p>
+Callbacks from the server.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1452,7 +1448,7 @@ vypolnyaet ochistku oblasti grafika i perenosit chast' dannyh iz dannyh profilya
 </tr>
 <tr><td colspan="2">
 <p>
-================ perehodniki k metodam servera ===================== ne dolzhny vydavat' soobscheniy, poskol'ku eto delo modulya gui, poetomu vybrasyvayut isklyucheniya</p>
+Wrappers for server methods. Mustn't <a class="normal" href="FitClient.TFitClient.html#Create">create</a> messages because this is responsibility of GUI. Instead of this must throw exceptions.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1478,7 +1474,7 @@ vypolnyaet ochistku oblasti grafika i perenosit chast' dannyh iz dannyh profilya
 </tr>
 <tr><td colspan="2">
 <p>
-vyzyvaetsya dlya dobavleniya novoy tochki k zadannomu naboru tochek !!! povtornyy vyzov dlya dannyh koordinat udalyaet tochku iz spiska; pri etom spisok zamenyaetsya na novyy !!!</p>
+Adds new point to the given set. Second call removes point from the set. In last case the set is recreated.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1632,7 +1628,7 @@ vyzyvaetsya dlya dobavleniya novoy tochki k zadannomu naboru tochek !!! povtorny
 </tr>
 <tr><td colspan="2">
 <p>
-========= obolochki dlya vyzova vneshnih metodov otobrazheniya ========== !!! obolochki nuzhny dlya proverki prisoedineniya interfeysnyh metodov; esli takovye ne prisoedineny, to eto oznachaet, chto net sootvetstvuyuschih el-tov GUI !!!</p>
+Wrappers for calls to external displaying methods. They are necessary to check that external interface methods are connected. Opposite means that there aren't corresponding GUI elements.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1642,7 +1638,7 @@ vyzyvaetsya dlya dobavleniya novoy tochki k zadannomu naboru tochek !!! povtorny
 </tr>
 <tr><td colspan="2">
 <p>
-sozdaet spisok vybrannyh tochek i vyzyvaet vstavku sootvetstvuyuschego elementa v CheckListBox</p>
+Creates list of selected points and inserts new item into chart legend (CheckListBox).</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1667,9 +1663,7 @@ sozdaet spisok vybrannyh tochek i vyzyvaet vstavku sootvetstvuyuschego elementa 
 <td class="itemcode"><a name="RemoveDataPoints"></a><code>procedure <b>RemoveDataPoints</b>;</code></td>
 </tr>
 <tr><td colspan="2">
-<p>
-!!! tol'ko ochischaet spisok !!!</p>
-</td></tr>
+&nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -1701,9 +1695,7 @@ sozdaet spisok vybrannyh tochek i vyzyvaet vstavku sootvetstvuyuschego elementa 
 <td class="itemcode"><a name="RemoveSelectedPoints"></a><code>procedure <b>RemoveSelectedPoints</b>;</code></td>
 </tr>
 <tr><td colspan="2">
-<p>
-!!! osvobozhdayut spiski !!!</p>
-</td></tr>
+&nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -1712,7 +1704,7 @@ sozdaet spisok vybrannyh tochek i vyzyvaet vstavku sootvetstvuyuschego elementa 
 </tr>
 <tr><td colspan="2">
 <p>
-zamenyaet tochku i obnovlyaet grafik</p>
+Replaces point and updates chart.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1722,7 +1714,7 @@ zamenyaet tochku i obnovlyaet grafik</p>
 </tr>
 <tr><td colspan="2">
 <p>
-perenosit dannye iz zadannogo spiska v spisok vybrannoy oblasti</p>
+Copies <a class="normal" href="data.html">data</a> from the given point set to the set of selected interval.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1780,7 +1772,7 @@ perenosit dannye iz zadannogo spiska v spisok vybrannoy oblasti</p>
 </tr>
 <tr><td colspan="2">
 <p>
-obnovlyaet vse, chto vozmozhno otobrazhaya sostoyanie dannyh servera</p>
+Updates all the <a class="normal" href="data.html">data</a> and refreshes chart.</p>
 </td></tr>
 </table>
 <h3 class="detail">Properties</h3>
@@ -1831,7 +1823,7 @@ obnovlyaet vse, chto vozmozhno otobrazhaya sostoyanie dannyh servera</p>
 </tr>
 <tr><td colspan="2">
 <p>
-=============== perehodniki k polyam servera ========================</p>
+Getters of server attributes.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1851,7 +1843,7 @@ obnovlyaet vse, chto vozmozhno otobrazhaya sostoyanie dannyh servera</p>
 </tr>
 <tr><td colspan="2">
 <p>
-metody obratnogo vyzova pol'zovatel'skogo interfeysa; vyzyvayutsya iz osnovnogo potoka klientskoy programmy, mogut vybrasyvat' isklyucheniya; dopuskaetsya ravenstvo nil</p>
+Callbacks for updating user interface. They are called from <a class="normal" href="Main.html">main</a> thread of client <a class="normal" href="cgiModules.html#Application">application</a>. Callbacks can throw exceptions. They can be not assigned (nil).</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1861,7 +1853,7 @@ metody obratnogo vyzova pol'zovatel'skogo interfeysa; vyzyvayutsya iz osnovnogo 
 </tr>
 <tr><td colspan="2">
 <p>
-sobytie, vyzyvaemoe pered ochistkoy dannyh neytronogrammy</p>
+Is called before cleaning all diagram <a class="normal" href="data.html">data</a>.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1943,7 +1935,7 @@ sobytie, vyzyvaemoe pered ochistkoy dannyh neytronogrammy</p>
 </tr>
 <tr><td colspan="2">
 <p>
-sobytie, vyzyvaemoe dlya risovaniya dannyh neytronogrammy</p>
+Draws diagram <a class="normal" href="data.html">data</a>.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -2009,7 +2001,7 @@ sobytiya otobrazheniya vyzyvayutsya iz odnoimennyh metodov dlya obespecheniya vo
 </tr>
 <tr><td colspan="2">
 <p>
-sobytie, vyzyvaemoe dlya obnovleniya vseh profiley</p>
+Refreshes all curves.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -2020,7 +2012,7 @@ sobytie, vyzyvaemoe dlya obnovleniya vseh profiley</p>
 </tr>
 <tr><td colspan="2">
 <p>
-sobytie, vyzyvaemoe pri dobavlenii novoy tochki v nabor ili pri izmenenii tochki v nabore</p>
+Refreshes curve in the case of adding new or changing point.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">

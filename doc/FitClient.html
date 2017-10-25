@@ -15,7 +15,13 @@
 <td><a class="section" href="#PasDoc-Description">Description</a></td><td>Uses</td><td><a class="section" href="#PasDoc-Classes">Classes, Interfaces, Objects and Records</a></td><td>Functions and Procedures</td><td><a class="section" href="#PasDoc-Types">Types</a></td><td><a class="section" href="#PasDoc-Constants">Constants</a></td><td>Variables</td></tr></table>
 <a name="PasDoc-Description"></a><h2 class="description">Description</h2>
 <p>
-modul' soderzhit klass, realizuyuschiy logiku klienta zdes' net nichego, chto svyazano s raschetami, i nichego, chto svyazano s otobrazheniem interfeysa pol'zovatelya</p>
+Contains definitions of auxiliary classes used in downhill simplex optimization.</p>
+<p>
+This software is distributed under GPL in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
+
+<p>
+
+<p></p>
 <a name="PasDoc-Uses"></a><h2 class="overview">Overview</h2>
 <a name="PasDoc-Classes"></a><h3 class="cio">Classes, Interfaces, Objects and Records</h3>
 <table class="classestable wide_list">
@@ -25,7 +31,7 @@ modul' soderzhit klass, realizuyuschiy logiku klienta zdes' net nichego, chto sv
 </tr>
 <tr class="list">
 <td class="itemname">Class&nbsp;<a class="bold" href="FitClient.TFitClient.html"><code>TFitClient</code></a></td>
-<td class="itemdesc">komponent, kot.</td>
+<td class="itemdesc">Implements all client logic of the <a class="normal" href="cgiModules.html#Application">application</a>.</td>
 </tr>
 </table>
 <a name="PasDoc-Types"></a><h3 class="summary">Types</h3>
@@ -124,7 +130,7 @@ modul' soderzhit klass, realizuyuschiy logiku klienta zdes' net nichego, chto sv
 <td class="itemcode"><code><b><a  href="FitClient.html#RFactorIntervalsName">RFactorIntervalsName</a></b>: string = 'Spec.app.intervals';</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="FitClient.html#SelectedAreaName">SelectedAreaName</a></b>: string = 'Selected area';</code></td>
+<td class="itemcode"><code><b><a  href="FitClient.html#SelectedAreaName">SelectedAreaName</a></b>: string = 'Selected interval';</code></td>
 </tr>
 <tr class="list">
 <td class="itemcode"><code><b><a  href="FitClient.html#StartName">StartName</a></b>: string = 'Starting Position';</code></td>
@@ -154,15 +160,15 @@ modul' soderzhit klass, realizuyuschiy logiku klienta zdes' net nichego, chto sv
 </tr>
 <tr><td colspan="1">
 <p>
-sostoyaniya vypolneniya dlitel'noy operatsii</p>
+States of processing long operations.</p>
 <h6 class="description_section">Values</h6>
 <ul>
 <li>
-AsyncStart: &nbsp;</li>
+AsyncStart: Before <a class="normal" href="start.html">start</a>.</li>
 <li>
-AsyncWorks: podgonki esche ne bylo</li>
+AsyncWorks: <a class="normal" href="fitting.html">Fitting</a> in progress.</li>
 <li>
-AsyncDone: podgonka delaetsya</li>
+AsyncDone: <a class="normal" href="fitting.html">Fitting</a> is done.</li>
 </ul>
 </td></tr>
 </table>
@@ -178,7 +184,9 @@ AsyncDone: podgonka delaetsya</li>
 <td class="itemcode"><a name="TFillDatasheetTable"></a><code><b>TFillDatasheetTable</b> = procedure( Profile: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>; CurvesList: <a  href="SelfCopied.TSelfCopiedCompList.html">TSelfCopiedCompList</a>; GaussProfile: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>; DeltaProfile: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>; RFactorIntervals: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a> ) of object;</code></td>
 </tr>
 <tr><td colspan="1">
-&nbsp;</td></tr>
+<p>
+Handler to fill <a class="normal" href="data.html">data</a> table.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -192,28 +200,36 @@ AsyncDone: podgonka delaetsya</li>
 <td class="itemcode"><a name="THideBackground"></a><code><b>THideBackground</b> = procedure( Sender: TObject; BackgroundPoints: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>) of object;</code></td>
 </tr>
 <tr><td colspan="1">
-&nbsp;</td></tr>
+<p>
+Handler hiding <a class="normal" href="background.html">background</a> curve.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="itemcode"><a name="THideCurvePositions"></a><code><b>THideCurvePositions</b> = procedure( Sender: TObject; CurvePositions: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>) of object;</code></td>
 </tr>
 <tr><td colspan="1">
-&nbsp;</td></tr>
+<p>
+Handler hiding curve positions.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="itemcode"><a name="THideDataPoints"></a><code><b>THideDataPoints</b> = procedure( Sender: TObject; DataPoints: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>) of object;</code></td>
 </tr>
 <tr><td colspan="1">
-&nbsp;</td></tr>
+<p>
+Handler hiding <a class="normal" href="data.html">data</a> curve.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="itemcode"><a name="THideRFactorIntervals"></a><code><b>THideRFactorIntervals</b> = procedure( Sender: TObject; RFactorIntervals: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>) of object;</code></td>
 </tr>
 <tr><td colspan="1">
-&nbsp;</td></tr>
+<p>
+Handler hiding <a class="normal" href="data.html">data</a> intervals.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -221,7 +237,7 @@ AsyncDone: podgonka delaetsya</li>
 </tr>
 <tr><td colspan="1">
 <p>
-sostoyaniya, sootvet. rezul'tatu otkrytiya fayla dannyh</p>
+Results of <a class="normal" href="data.html">data</a> file opening.</p>
 <h6 class="description_section">Values</h6>
 <ul>
 <li>
@@ -236,21 +252,27 @@ OpenFailure: &nbsp;</li>
 <td class="itemcode"><a name="TPlotBackground"></a><code><b>TPlotBackground</b> = procedure( Sender: TObject; BackgroundPoints: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>) of object;</code></td>
 </tr>
 <tr><td colspan="1">
-&nbsp;</td></tr>
+<p>
+Handler displaying <a class="normal" href="background.html">background</a> curve.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="itemcode"><a name="TPlotCurvePositions"></a><code><b>TPlotCurvePositions</b> = procedure( Sender: TObject; CurvePositions: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>) of object;</code></td>
 </tr>
 <tr><td colspan="1">
-&nbsp;</td></tr>
+<p>
+Handler displaying curve positions.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="itemcode"><a name="TPlotDataPoints"></a><code><b>TPlotDataPoints</b> = procedure( Sender: TObject; DataPoints: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>) of object;</code></td>
 </tr>
 <tr><td colspan="1">
-&nbsp;</td></tr>
+<p>
+Handler displaying <a class="normal" href="data.html">data</a> curve.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -278,7 +300,9 @@ OpenFailure: &nbsp;</li>
 <td class="itemcode"><a name="TPlotRFactorIntervals"></a><code><b>TPlotRFactorIntervals</b> = procedure( Sender: TObject; RFactorIntervals: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>) of object;</code></td>
 </tr>
 <tr><td colspan="1">
-&nbsp;</td></tr>
+<p>
+Handler displaying <a class="normal" href="data.html">data</a> intervals.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -292,7 +316,9 @@ OpenFailure: &nbsp;</li>
 <td class="itemcode"><a name="TPlotSelectedPoints"></a><code><b>TPlotSelectedPoints</b> = procedure( Sender: TObject; SelectedPoints: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>) of object;</code></td>
 </tr>
 <tr><td colspan="1">
-&nbsp;</td></tr>
+<p>
+Handler drawing points selected by user.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -300,7 +326,7 @@ OpenFailure: &nbsp;</li>
 </tr>
 <tr><td colspan="1">
 <p>
-podgonka zavershena sobytiya otobrazhenie dolzhny byt' raznymi, chtoby obespechit' vozmozhnost' otobrazheniya raznymi sposobami komponent, kotoryy budet real'no otobrazhat' krivye dolzhen hranit' u sebya vse ukazateli na otbrazhaemye komponenty, chtoby imet' vozmozhnost' skryt' ih...</p>
+Handler drawing specimen curves. Provides different ways of displaying <a class="normal" href="data.html">data</a>. Component which will actually display the <a class="normal" href="data.html">data</a> must store all pointers to visual components inside its own memory to be able hide them.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -323,7 +349,7 @@ podgonka zavershena sobytiya otobrazhenie dolzhny byt' raznymi, chtoby obespechi
 </tr>
 <tr><td colspan="1">
 <p>
-rezhimy vybora aktivnogo nabora tochek</p>
+Modes of selectiion of active point set.</p>
 <h6 class="description_section">Values</h6>
 <ul>
 <li>
@@ -395,7 +421,7 @@ ModeSelPeakBounds: &nbsp;</li>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="SelectedAreaName"></a><code><b>SelectedAreaName</b>: string = 'Selected area';</code></td>
+<td class="itemcode"><a name="SelectedAreaName"></a><code><b>SelectedAreaName</b>: string = 'Selected interval';</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
@@ -428,6 +454,12 @@ ModeSelPeakBounds: &nbsp;</li>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
+<h2 class="authors">Author</h2>
+<ul class="authors">
+<li>Dmitry Morozov <a  href="mailto:dvmorozov@hotmail.com">dvmorozov@hotmail.com</a>, 
+LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
+Facebook https://www.facebook.com/profile.php?id=100004082021870</li>
+</ul>
 <hr noshade size="1"><span class="appinfo"><em>Generated by <a  href="http://pasdoc.sourceforge.net/">PasDoc 0.14.0</a>. </em>
 </span>
 </td></tr></table></body></html>

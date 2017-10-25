@@ -1,12 +1,14 @@
-//      dvoynoy kosoy chertoy kommentiruyutsya zamechaniya, sohranyaemye vo
-//      vseh versiyah ishodnika; figurnymi skobkami kommentiruyutsya zamechaniya,
-//      sohranyaemye tol'ko v versii ishodnika dlya besplatnogo rasprostraneniya
-{------------------------------------------------------------------------------}
-{       Copyright (C) 1999-2007 D.Morozov (dvmorozov@mail.ru)                  }
-{------------------------------------------------------------------------------}
-//      modul' soderzhit klass, realizuyuschiy logiku klienta
-//      zdes' net nichego, chto svyazano s raschetami, i nichego,
-//      chto svyazano s otobrazheniem interfeysa pol'zovatelya
+{
+This software is distributed under GPL
+in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
+
+@abstract(Contains definitions of auxiliary classes used in downhill simplex optimization.)
+
+@author(Dmitry Morozov dvmorozov@hotmail.com, 
+LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
+Facebook https://www.facebook.com/profile.php?id=100004082021870)
+}
 unit FitClient;
 
 //{$mode objfpc}{$H+}
@@ -18,27 +20,29 @@ uses Classes, DataLoader, SelfCopied, SysUtils, MSCRDataClasses,
     Dialogs, FitClientProxy, SimpMath, CommonTypes;
     
 type
-    //  rezhimy vybora aktivnogo nabora tochek
+	{ Modes of selectiion of active point set. }
     TSelMode = (ModeSelNone, ModeSelAreaLimits, ModeSelCharacteristicPoints,
                 ModeSelGaussianBounds, ModeSelBackground, ModeSelPeakPos,
                 ModeSelPeakBounds);
-    //  sostoyaniya, sootvet. rezul'tatu otkrytiya fayla dannyh
+	{ Results of data file opening. }
     TOpenState = (OpenSuccess, OpenFailure);
-    //  sostoyaniya vypolneniya dlitel'noy operatsii
+	{ States of processing long operations. }
     TAsyncState = (
-        AsyncStart,         //  podgonki esche ne bylo
-        AsyncWorks,         //  podgonka delaetsya
-        AsyncDone           //  podgonka zavershena
+		{ Before start. }
+        AsyncStart,
+		{ Fitting in progress. }
+        AsyncWorks,
+		{ Fitting is done. }
+        AsyncDone
         );
 
-    //  sobytiya otobrazhenie dolzhny byt' raznymi, chtoby obespechit'
-    //  vozmozhnost' otobrazheniya raznymi sposobami
-    //  komponent, kotoryy budet real'no otobrazhat' krivye
-    //  dolzhen hranit' u sebya vse ukazateli na
-    //  otbrazhaemye komponenty, chtoby imet' vozmozhnost' skryt' ih...
+	{ Handler drawing specimen curves. Provides different ways of displaying data. 
+      Component which will actually display the data must store all pointers
+      to visual components inside its own memory to be able hide them. }
     TPlotSpecimens = procedure(Sender: TObject;
         CurvesList: TSelfCopiedCompList;
         SpecimenList: TMSCRSpecimenList) of object;
+	{ Handler to fill data table. }
     TFillDatasheetTable = procedure(
             Profile: TTitlePointsSet;
             CurvesList: TSelfCopiedCompList;
@@ -46,29 +50,34 @@ type
             DeltaProfile: TTitlePointsSet;
             RFactorIntervals: TTitlePointsSet
             ) of object;
+	{ Handler drawing points selected by user. }
     TPlotSelectedPoints = procedure(
         Sender: TObject; SelectedPoints: TTitlePointsSet) of object;
-
+	{ Handler displaying data intervals. }
     TPlotRFactorIntervals = procedure(
         Sender: TObject; RFactorIntervals: TTitlePointsSet) of object;
+	{ Handler hiding data intervals. }
     THideRFactorIntervals = procedure(
         Sender: TObject; RFactorIntervals: TTitlePointsSet) of object;
-
+    { Handler displaying curve positions. }
     TPlotCurvePositions = procedure(
         Sender: TObject; CurvePositions: TTitlePointsSet) of object;
+	{ Handler hiding curve positions. }
     THideCurvePositions = procedure(
         Sender: TObject; CurvePositions: TTitlePointsSet) of object;
-
+	{ Handler displaying background curve. }
     TPlotBackground = procedure(
         Sender: TObject; BackgroundPoints: TTitlePointsSet) of object;
+	{ Handler hiding background curve. }
     THideBackground = procedure(
         Sender: TObject; BackgroundPoints: TTitlePointsSet) of object;
-        
+    { Handler displaying data curve. }
     TPlotDataPoints = procedure(
         Sender: TObject; DataPoints: TTitlePointsSet) of object;
+	{ Handler hiding data curve. }
     THideDataPoints = procedure(
         Sender: TObject; DataPoints: TTitlePointsSet) of object;
-        
+    
     TPlotSelectedArea = procedure(
         Sender: TObject; SelectedArea: TTitlePointsSet) of object;
     TPlotGaussProfile = procedure(
@@ -83,40 +92,30 @@ type
     TAsyncOperationFinished = procedure(Sender: TObject) of object;
     TPlotProc = procedure of object;
 
-    //  komponent, kot. realizuet vsyu logiku klientskoy chasti programmy;
-    //  ??? d.b. polnost'yu otdelen ot pol'zovatel'skogo interfeysa
+	{ Implements all client logic of the application. Must be completely independent from UI. }
     TFitClient = class(TComponent)
     protected
         FFitProxy: TFitClientProxy;
         DataLoader: TDataLoader;
-        //  =========== kopii dannyh, vyvedennyh na grafik =====================
-        //  !!! kopii dannyh nel'zya ne hranit', potomu chto inache
-        //  ne obespechit' vozmozhnost' izmeneniya koordinaty X !!!
-        //  dannye profilya
+		{ All the data displayed on the chart. They are required to be able control of X-coordinate. }
         FNeutronPointsSet: TTitlePointsSet;
-        //  uchastok profilya, s kotorym pol'zovatel' rabotaet v dannyy moment
+		{ Region of given profile data with which user is working at the given moment. }
         SelectedArea: TTitlePointsSet;
-        //  krivaya, poluchaemaya summoy vseh podgonyaemyh
-        //  krivyh i sravnivaemaya s eksperimental'noy
+		{ Sum of all model specimens which is compared with experimental data. }
         GaussProfile: TTitlePointsSet;
         DeltaProfile: TTitlePointsSet;
-        //  tochki, vybrannye pol'zovatelem
+		{ Set of points selected by user. }
         SelectedPoints: TTitlePointsSet;
-        //  spisok tochek fona, ispol'zuemyy dlya perehoda
-        //  m-u rezhimami ruchnogo i avtomaticheskogo vybora
+		{ List of background points which is used for transmission between manual and automatic selection modes. }
         BackgroundPoints: TTitlePointsSet;
-        //  pary tochek ogranichivayuschie diapazony rascheta R-Factor'a;
-        //  !!! nikogda ne dolzhny byt' skryty, chtoby pol'zovatel'
-        //  videl, v kakom rezhime schitaetsya R-Factor !!!
+		{ List of point pairs which limit interval of R-factor calculation. 
+		  Always must be displayed in order to show user in which mode R-factor is calculated. }
         RFactorIntervals: TTitlePointsSet;
-        
-        //  tochki privyazki ekzemplyarov patterna;
-        //  ispol'zuyutsya tol'ko x-koordinaty tochek
+		{ Positions of pattern specimens. Only X-coordinate is used. }
         CurvePositions: TTitlePointsSet;
-        //  nabor ob'ektov dlya rascheta krivyh ekzemplyarov patterna;
-        //  kazhdyy iz ob'ektov soderzhit krivuyu - ekzemplyar patterna
+		{ Containers of calculated pattern specimens. Each object contains data of specimen curve. }
         CurvesList: TSelfCopiedCompList;
-        //  nabor ob'ektov-parametrov ekzemplyarov patterna
+		{ Containers of parameters of pattern specimens. }
         SpecimenList: TMSCRSpecimenList;
 
         WaveLength: Double;
@@ -124,26 +123,25 @@ type
 
     protected
         CurMin: Double;
-        //  v zavisimosti ot etogo priznaka v dal'neyshih operatsiyah
-        //  ispol'zuyutsya libo dannye vybrannoy oblasti, libo dannye
-        //  polnogo profilya
+		{ If True then in all operations only data belonging to selected ared are used
+          otherwise all profile data are used. }
         FSelectedAreaMode: Boolean;
         FSelectionMode: TSelMode;
         FOpenState: TOpenState;
         FAsyncState: TAsyncState;
-        // vyzyvaetsya dlya dobavleniya novoy tochki k zadannomu naboru tochek
-        // !!! povtornyy vyzov dlya dannyh koordinat udalyaet tochku iz spiska;
-        // pri etom spisok zamenyaetsya na novyy !!!
+		{ Adds new point to the given set. Second call removes point from the set. 
+          In last case the set is recreated. }
         procedure AddPoint(var Points: TTitlePointsSet;
             XValue, YValue: Double; Plot: TPlotProc);
-        //  zamenyaet tochku i obnovlyaet grafik
+		{ Replaces point and updates chart. }
         procedure ReplacePoint(Points: TTitlePointsSet;
             PrevXValue, PrevYValue, NewXValue, NewYValue: Double;
             Plot: TPlotProc
             );
 
     protected
-        //  =============== uk-li na metody otobrazheniya krivyh =================
+		{ Pointers to methods for curve displaying. }
+		
         FOnPlotSpecimens: TPlotSpecimens;
         FOnFillDatasheetTable: TFillDatasheetTable;
         FOnPlotSelectedPoints: TPlotSelectedPoints;
@@ -168,18 +166,18 @@ type
         FOnRefreshPointsSet: TRefreshPointsSet;
         FOnClear: TClear;
         FOnHide: THide;
-        //  funktsiya obratnogo vyzova zaversheniya asinhr. operatsii
+		{ Callback on asynchronous operation finishing. }
         FAsyncOperationFinished: TAsyncOperationFinished;
 
-        //  global'naya peremennaya dlya vyzova RefreshPointsSet, Hide
+		{ Is used in RefreshPointsSet, Hide. }
         ToRefresh: TNeutronPointsSet;
-        //  obnovlyaet vse, chto vozmozhno otobrazhaya sostoyanie dannyh servera
+		{ Updates all the data and refreshes chart. }
         procedure UpdateAll;
         procedure HideSpecimens;
-        //  ========= obolochki dlya vyzova vneshnih metodov otobrazheniya ==========
-        //  !!! obolochki nuzhny dlya proverki prisoedineniya interfeysnyh
-        //  metodov; esli takovye ne prisoedineny, to eto oznachaet, chto
-        //  net sootvetstvuyuschih el-tov GUI !!!
+
+		{ Wrappers for calls to external displaying methods. 
+		  They are necessary to check that external interface methods are connected.
+          Opposite means that there aren't corresponding GUI elements. }
         procedure PlotSpecimens;
         procedure PlotSelectedPoints;
 
@@ -205,13 +203,12 @@ type
         procedure Hide;
         procedure FillDatasheetTable;
 
-        //  vozvraschaet polnyy profil' ili vybrannyy v dannyy moment uchastok
+		{ Returns full profile or part of profile selected at the moment. }
         function GetProfilePointsSet: TTitlePointsSet;
 
         procedure SetSelectionMode(ASelectionMode: TSelMode);
         function GetSelectionMode: TSelMode;
 
-        //  ================= izvlechenie/ustanovka poley servera ===============
         function GetMaxRFactor: Double;
         procedure SetMaxRFactor(AMaxRFactor: Double);
         function GetBackFactor: Double;
@@ -221,20 +218,17 @@ type
         function GetCurveType: TCurveType;
         procedure SetCurveType(ACurveType: TCurveType);
 
-        //  sozdaet spisok vybrannyh tochek i vyzyvaet vstavku
-        //  sootvetstvuyuschego elementa v CheckListBox
+		{ Creates list of selected points and inserts new item into chart legend (CheckListBox). }
         procedure RecreateAndShowSelectedPoints(Title: string);
 
         procedure InitDataPoints;
-        //  !!! tol'ko ochischaet spisok !!!
         procedure RemoveDataPoints;
-        //  !!! osvobozhdayut spiski !!!
         procedure RemoveSelectedPoints;
         procedure RemoveSelectedArea;
         procedure RemoveGaussProfile;
         procedure RemoveDeltaProfile;
 
-        //  perenosit dannye iz zadannogo spiska v spisok vybrannoy oblasti
+		{ Copies data from the given point set to the set of selected interval. }
         procedure SelectAreaActual(ANeutronPoints: TNeutronPointsSet;
             StartPointIndex, StopPointIndex: LongInt);
         procedure CopyProfileDataFromLoader;
@@ -249,20 +243,25 @@ type
         function GetSpecialCurveParameters: Curve_parameters;
         procedure SetSpecialCurveParameters(
             ACurveExpr: string;
-            CP: Curve_parameters    //  ravenstvo nil oznachaet
-                                    //  pervonachal'nuyu initsializatsiyu
+			{ Nil means first initialization. }
+            CP: Curve_parameters
             );
 {$ENDIF}
-        //  !!!  vypolnyayut tol'ko ochistku spiskov !!!
+		{ Do only cleaning of sets. }
+		
         procedure RemoveRFactorIntervals;
         procedure RemoveCurvePositions;
         procedure RemoveBackgroundPoints;
-        //  !!! vse vyzyvayut AddPoint !!!
+
+		{ All call AddPoint method. }
+		
         procedure AddPointToSelected(XValue, YValue: Double);
         procedure AddPointToBackground(XValue, YValue: Double);
         procedure AddPointToRFactorIntervals(XValue, YValue: Double);
         procedure AddPointToCurvePositions(XValue, YValue: Double);
-        //  !!! vse vyzyvayut ReplacePoint !!!
+		
+		{ All call ReplacePoint method. }
+		
         procedure ReplacePointInData(
             PrevXValue, PrevYValue, NewXValue, NewYValue: Double);
         procedure ReplacePointInSelected(
@@ -273,16 +272,11 @@ type
             PrevXValue, PrevYValue, NewXValue, NewYValue: Double);
         procedure ReplacePointInCurvePositions(
             PrevXValue, PrevYValue, NewXValue, NewYValue: Double);
-        //  !!! ne ispol'zuetsya pri vvode tochek vruchnuyu, potomu chto
-        //  trebuet prezhde vhoda v spets. sostoyanie, kot. imeet smysl
-        //  tol'ko pri vizual'nom vybore tochek !!!
         procedure AddPointToActive(XValue, YValue: Double);
-        //  vozvraschaet nabor, s kotorym pol'zovatel' rabotaet v dannyy moment,
-        //  t.e. nabor, v kotoryy dobavlyayutsya ili iz kotorogo udalyayutsya tochki
+		{ Returns a set with which user works at the moment. }
         function GetCurrentPointsSet: TTitlePointsSet;
 
-        //  vypolnyaet ochistku oblasti grafika i perenosit chast' dannyh
-        //  iz dannyh profilya v spisok dannyh vybrannoy oblasti
+		{ Cleans chart and moves data from full profile to data of selected iterval. }
         procedure SelectArea(StartPointIndex, StopPointIndex: LongInt);
         procedure ReturnToTotalProfile;
 
@@ -295,16 +289,17 @@ type
         procedure LoadDataSet(FileName: string);
         procedure Reload;
         
-        //  ========== funktsii obratnogo vyzova so storony servera =============
+		{ Callbacks from the server. }
+		
         procedure ShowCurMin(Min: Double);
         procedure Done;
         procedure FindPeakBoundsDone;
         procedure FindBackPointsDone;
         procedure FindPeakPositionsDone;
 
-        //  ================ perehodniki k metodam servera =====================
-        //  ne dolzhny vydavat' soobscheniy, poskol'ku eto
-        //  delo modulya gui, poetomu vybrasyvayut isklyucheniya
+		{ Wrappers for server methods. Mustn't create messages because this
+          is responsibility of GUI. Instead of this must throw exceptions. }
+		
         procedure SmoothProfile;
         procedure SubtractAllBackground(Auto: Boolean);
         procedure DoAllAutomatically;
@@ -315,13 +310,14 @@ type
         procedure FindPeakPositions;
         procedure AllPointsAsPeakPositions;
         procedure StopAsyncOper;
-        //  poluchaet sostoyanie asinhr. operatsii neposredstvenno ot servera
+		{ Gets state of asynchronous operation from the server. }
         function AsyncOper: Boolean;
         function GetCalcTimeStr: string;
         function GetRFactorStr: string;
         procedure CreateSpecimenList;
 
-        //  =============== perehodniki k polyam servera ========================
+		{ Getters of server attributes. }
+		
         property MaxRFactor: Double read GetMaxRFactor write SetMaxRFactor;
         property BackFactor: Double read GetBackFactor write SetBackFactor;
         property CurveThresh: Double read GetCurveThresh write SetCurveThresh;
@@ -347,7 +343,7 @@ type
         property OnHideCurvePositions: THideCurvePositions
             read FOnHideCurvePositions write FOnHideCurvePositions;
 
-        //  sobytie, vyzyvaemoe dlya risovaniya dannyh neytronogrammy
+		{ Draws diagram data. }
         property OnPlotDataPoints: TPlotDataPoints
             read FOnPlotDataPoints write FOnPlotDataPoints;
         property OnHideDataPoints: THideDataPoints
@@ -365,19 +361,17 @@ type
             read FOnPlotGaussProfile write FOnPlotGaussProfile;
         property OnPlotDeltaProfile: TPlotDeltaProfile
             read FOnPlotDeltaProfile write FOnPlotDeltaProfile;
-        //  sobytie, vyzyvaemoe dlya obnovleniya vseh profiley
+		{ Refreshes all curves. }
         property OnRefresh: TRefresh read FOnRefresh write FOnRefresh;
-        //  sobytie, vyzyvaemoe pri dobavlenii novoy tochki v nabor
-        //  ili pri izmenenii tochki v nabore
+		{ Refreshes curve in the case of adding new or changing point. }
         property OnRefreshPointsSet: TRefreshPointsSet
             read FOnRefreshPointsSet write FOnRefreshPointsSet;
-        //  sobytie, vyzyvaemoe pered ochistkoy dannyh neytronogrammy
+		{ Is called before cleaning all diagram data. }
         property OnClear: TClear read FOnClear write FOnClear;
         property OnHide: THide read FOnHide write FOnHide;
-        //  metody obratnogo vyzova pol'zovatel'skogo interfeysa;
-        //  vyzyvayutsya iz osnovnogo potoka klientskoy programmy,
-        //  mogut vybrasyvat' isklyucheniya;
-        //  dopuskaetsya ravenstvo nil
+		
+		{ Callbacks for updating user interface. They are called from main thread of client application.
+          Callbacks can throw exceptions. They can be not assigned (nil). }
         property OnAsyncOperationFinished: TAsyncOperationFinished
             read FAsyncOperationFinished write FAsyncOperationFinished;
 
@@ -396,7 +390,7 @@ const
     RFactorIntervalsName: string = 'Spec.app.intervals';
     BackgroundPointsName: string = 'Background points';
     CurvePositionsName: string = 'Spec.positions';
-    SelectedAreaName: string = 'Selected area';
+    SelectedAreaName: string = 'Selected interval';
     SummarizedName: string = 'Summarized';
     ArgumentName: string = 'Position';
     ProfileName: string = 'Data';
@@ -408,7 +402,7 @@ const
 
 implementation
 
-uses Unit1; // ??? ubrat' svyazi s Form1
+uses Unit1; // TODO: remove references to Form1
 
 {================================ TFitClient ==================================}
 

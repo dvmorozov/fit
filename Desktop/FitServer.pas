@@ -1,29 +1,24 @@
-//      dvoynoy kosoy chertoy kommentiruyutsya zamechaniya, sohranyaemye vo
-//      vseh versiyah ishodnika; figurnymi skobkami kommentiruyutsya zamechaniya,
-//      sohranyaemye tol'ko v versii ishodnika dlya besplatnogo rasprostraneniya
-{------------------------------------------------------------------------------}
-{       Copyright (C) 1999-2007 D.Morozov (dvmorozov@mail.ru)                  }
-{------------------------------------------------------------------------------}
-//      modul' soderzhit klass, realizuyuschiy logiku servera
-//      zdes' net nichego, chto svyazano s pol'zovatel'skim interfeysom;
-//      obrabotka isklyucheniy i preobrazovanie ih v soobscheniya ponimaemye aktorom
-//      dolzhna delat'sya v pogranichnyh ob'ektah; poetomu metody granichnyh
-//      ob'ektov dolzhny nah-sya blizhe k vershine steka, poetomu potok prilozheniya
-//      d. krutit'sya v metode granichnogo ob'ekta;
-//      isklyucheniya delyatsya na dva tipa dlya togo, chtoby mozhno bylo otpravlyat'
-//      klientu dva tipa soobscheniy
-//      !!! Vozniknovenie EAssertionFailed na vyhode metoda d. ponimat'sya
-//      kak nedopustimost' sostoyaniya dlya vyzova metoda, pri etom sostoyanie
-//      servera menyat'sya ne dolzhno !!!
-//      !!! Vozniknovenie lyubogo drugogo isklyucheniya d. interpretirovat'sya
-//      kak fatal'naya oshibka, pri etom sostoyanie servera d. privodit'sya k
-//      iznachal'nomu, kot. bylo posle zapuska !!!
-//      !!! Inogda, kogda metod mozhet vypolnit' svoyu semantiku
-//      EAssertionFailed mozhet pogloschat'sya vnutri metoda !!!
-//      !!! Dlya signalizatsii o nedopustimom sostoyanii luchshe ispol'zovat'
-//      ne EAssertionFailed, a isklyuchenie drugogo tipa, poskol'ku
-//      EAssertionFailed m. vyzyvat'sya iz bibliotek, a v takom sluchae
-//      nel'zya garantirovat' sohranenie sostoyaniya prgrammy !!!
+{
+This software is distributed under GPL
+in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
+
+@abstract(Contains definition of class implementing server logic. Doesn't contain any user interface interaction. 
+Exception handling and converting them into messages understandable for caller should be done in boundary objects. 
+Throwing EAssertionFailed should be considered as inadmissibility of state for calling the method. At that state 
+of the server should be kept. Throwing any other exception should be considered as fatal error. At that state of
+the server should be brought into initial which was just after start. Sometimes when method can execute the action
+accroding to its semantics EAssertionFailed can be catched inside it.)
+
+@author(Dmitry Morozov dvmorozov@hotmail.com, 
+LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
+Facebook https://www.facebook.com/profile.php?id=100004082021870)
+}
+{
+	TODO: Replace EAssertionFailed by an exception of another type
+	because exceptions of this type can be thrown from libraries.
+	In this case keeping the state of application can't be guaranteed.
+}
 
 unit FitServer;
 
@@ -35,8 +30,7 @@ interface
 uses Classes, DataLoader, SelfCheckedComponentList, SysUtils, MSCRDataClasses,
      Dialogs,
 {$IFDEF FIT}
-     // obratnaya svyaz' est' tol'ko v monolitnom prilozhenii
-     FitServerProxy,
+     FitServerProxy,	//	Proxy to client to call it back.
 {$ENDIF}
      SelfCopied, MyExceptions, FitTask, SimpMath,
      MainCalcThread, CommonTypes;

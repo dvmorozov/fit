@@ -1,4 +1,14 @@
+{
+This software is distributed under GPL
+in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
 
+@abstract(Contains definition of stub class implementing callbacks to client.)
+
+@author(Dmitry Morozov dvmorozov@hotmail.com, 
+LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
+Facebook https://www.facebook.com/profile.php?id=100004082021870)
+}
 unit FitClientStub;
 
 //{$mode objfpc}{$H+}
@@ -6,13 +16,12 @@ unit FitClientStub;
 
 interface
 
-uses Classes, SysUtils;//, FitClient;
+uses Classes, SysUtils;
   
 type
     TFitClientStub = class(TObject)
     protected
-        //  zaschita ot circular reference
-        FFitClient: TObject;//TFitClient;
+        FFitClient: TObject;
     public
     
         procedure ShowCurMin(Min: Double);
@@ -21,7 +30,7 @@ type
         procedure FindBackPointsDone;
         procedure FindPeakPositionsDone;
 
-        property FitClient: TObject //TFitClient
+        property FitClient: TObject
             read FFitClient write FFitClient;
     end;
 

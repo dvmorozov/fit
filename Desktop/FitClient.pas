@@ -3,7 +3,7 @@ This software is distributed under GPL
 in the hope that it will be useful, but WITHOUT ANY WARRANTY;
 without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
 
-@abstract(Contains definitions of auxiliary classes used in downhill simplex optimization.)
+@abstract(Contains definitions of classes used in displaying results to user.)
 
 @author(Dmitry Morozov dvmorozov@hotmail.com, 
 LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
@@ -20,29 +20,29 @@ uses Classes, DataLoader, SelfCopied, SysUtils, MSCRDataClasses,
     Dialogs, FitClientProxy, SimpMath, CommonTypes;
     
 type
-	{ Modes of selectiion of active point set. }
+    { Modes of selectiion of active point set. }
     TSelMode = (ModeSelNone, ModeSelAreaLimits, ModeSelCharacteristicPoints,
                 ModeSelGaussianBounds, ModeSelBackground, ModeSelPeakPos,
                 ModeSelPeakBounds);
-	{ Results of data file opening. }
+    { Results of data file opening. }
     TOpenState = (OpenSuccess, OpenFailure);
-	{ States of processing long operations. }
+    { States of processing long operations. }
     TAsyncState = (
-		{ Before start. }
+        { Before start. }
         AsyncStart,
-		{ Fitting in progress. }
+        { Fitting in progress. }
         AsyncWorks,
-		{ Fitting is done. }
+        { Fitting is done. }
         AsyncDone
         );
 
-	{ Handler drawing specimen curves. Provides different ways of displaying data. 
+    { Handler drawing specimen curves. Provides different ways of displaying data. 
       Component which will actually display the data must store all pointers
       to visual components inside its own memory to be able hide them. }
     TPlotSpecimens = procedure(Sender: TObject;
         CurvesList: TSelfCopiedCompList;
         SpecimenList: TMSCRSpecimenList) of object;
-	{ Handler to fill data table. }
+    { Handler to fill data table. }
     TFillDatasheetTable = procedure(
             Profile: TTitlePointsSet;
             CurvesList: TSelfCopiedCompList;
@@ -50,31 +50,31 @@ type
             DeltaProfile: TTitlePointsSet;
             RFactorIntervals: TTitlePointsSet
             ) of object;
-	{ Handler drawing points selected by user. }
+    { Handler drawing points selected by user. }
     TPlotSelectedPoints = procedure(
         Sender: TObject; SelectedPoints: TTitlePointsSet) of object;
-	{ Handler displaying data intervals. }
+    { Handler displaying data intervals. }
     TPlotRFactorIntervals = procedure(
         Sender: TObject; RFactorIntervals: TTitlePointsSet) of object;
-	{ Handler hiding data intervals. }
+    { Handler hiding data intervals. }
     THideRFactorIntervals = procedure(
         Sender: TObject; RFactorIntervals: TTitlePointsSet) of object;
     { Handler displaying curve positions. }
     TPlotCurvePositions = procedure(
         Sender: TObject; CurvePositions: TTitlePointsSet) of object;
-	{ Handler hiding curve positions. }
+    { Handler hiding curve positions. }
     THideCurvePositions = procedure(
         Sender: TObject; CurvePositions: TTitlePointsSet) of object;
-	{ Handler displaying background curve. }
+    { Handler displaying background curve. }
     TPlotBackground = procedure(
         Sender: TObject; BackgroundPoints: TTitlePointsSet) of object;
-	{ Handler hiding background curve. }
+    { Handler hiding background curve. }
     THideBackground = procedure(
         Sender: TObject; BackgroundPoints: TTitlePointsSet) of object;
     { Handler displaying data curve. }
     TPlotDataPoints = procedure(
         Sender: TObject; DataPoints: TTitlePointsSet) of object;
-	{ Handler hiding data curve. }
+    { Handler hiding data curve. }
     THideDataPoints = procedure(
         Sender: TObject; DataPoints: TTitlePointsSet) of object;
     
@@ -92,30 +92,30 @@ type
     TAsyncOperationFinished = procedure(Sender: TObject) of object;
     TPlotProc = procedure of object;
 
-	{ Implements all client logic of the application. Must be completely independent from UI. }
+    { Implements all client logic of the application. Must be completely independent from UI. }
     TFitClient = class(TComponent)
     protected
         FFitProxy: TFitClientProxy;
         DataLoader: TDataLoader;
-		{ All the data displayed on the chart. They are required to be able control of X-coordinate. }
+        { All the data displayed on the chart. They are required to be able control of X-coordinate. }
         FNeutronPointsSet: TTitlePointsSet;
-		{ Region of given profile data with which user is working at the given moment. }
+        { Region of given profile data with which user is working at the given moment. }
         SelectedArea: TTitlePointsSet;
-		{ Sum of all model specimens which is compared with experimental data. }
+        { Sum of all model specimens which is compared with experimental data. }
         GaussProfile: TTitlePointsSet;
         DeltaProfile: TTitlePointsSet;
-		{ Set of points selected by user. }
+        { Set of points selected by user. }
         SelectedPoints: TTitlePointsSet;
-		{ List of background points which is used for transmission between manual and automatic selection modes. }
+        { List of background points which is used for transmission between manual and automatic selection modes. }
         BackgroundPoints: TTitlePointsSet;
-		{ List of point pairs which limit interval of R-factor calculation. 
-		  Always must be displayed in order to show user in which mode R-factor is calculated. }
+        { List of point pairs which limit interval of R-factor calculation. 
+          Always must be displayed in order to show user in which mode R-factor is calculated. }
         RFactorIntervals: TTitlePointsSet;
-		{ Positions of pattern specimens. Only X-coordinate is used. }
+        { Positions of pattern specimens. Only X-coordinate is used. }
         CurvePositions: TTitlePointsSet;
-		{ Containers of calculated pattern specimens. Each object contains data of specimen curve. }
+        { Containers of calculated pattern specimens. Each object contains data of specimen curve. }
         CurvesList: TSelfCopiedCompList;
-		{ Containers of parameters of pattern specimens. }
+        { Containers of parameters of pattern specimens. }
         SpecimenList: TMSCRSpecimenList;
 
         WaveLength: Double;
@@ -123,25 +123,25 @@ type
 
     protected
         CurMin: Double;
-		{ If True then in all operations only data belonging to selected ared are used
+        { If True then in all operations only data belonging to selected ared are used
           otherwise all profile data are used. }
         FSelectedAreaMode: Boolean;
         FSelectionMode: TSelMode;
         FOpenState: TOpenState;
         FAsyncState: TAsyncState;
-		{ Adds new point to the given set. Second call removes point from the set. 
+        { Adds new point to the given set. Second call removes point from the set. 
           In last case the set is recreated. }
         procedure AddPoint(var Points: TTitlePointsSet;
             XValue, YValue: Double; Plot: TPlotProc);
-		{ Replaces point and updates chart. }
+        { Replaces point and updates chart. }
         procedure ReplacePoint(Points: TTitlePointsSet;
             PrevXValue, PrevYValue, NewXValue, NewYValue: Double;
             Plot: TPlotProc
             );
 
     protected
-		{ Pointers to methods for curve displaying. }
-		
+        { Pointers to methods for curve displaying. }
+        
         FOnPlotSpecimens: TPlotSpecimens;
         FOnFillDatasheetTable: TFillDatasheetTable;
         FOnPlotSelectedPoints: TPlotSelectedPoints;
@@ -166,17 +166,17 @@ type
         FOnRefreshPointsSet: TRefreshPointsSet;
         FOnClear: TClear;
         FOnHide: THide;
-		{ Callback on asynchronous operation finishing. }
+        { Callback on asynchronous operation finishing. }
         FAsyncOperationFinished: TAsyncOperationFinished;
 
-		{ Is used in RefreshPointsSet, Hide. }
+        { Is used in RefreshPointsSet, Hide. }
         ToRefresh: TNeutronPointsSet;
-		{ Updates all the data and refreshes chart. }
+        { Updates all the data and refreshes chart. }
         procedure UpdateAll;
         procedure HideSpecimens;
 
-		{ Wrappers for calls to external displaying methods. 
-		  They are necessary to check that external interface methods are connected.
+        { Wrappers for calls to external displaying methods. 
+          They are necessary to check that external interface methods are connected.
           Opposite means that there aren't corresponding GUI elements. }
         procedure PlotSpecimens;
         procedure PlotSelectedPoints;
@@ -203,7 +203,7 @@ type
         procedure Hide;
         procedure FillDatasheetTable;
 
-		{ Returns full profile or part of profile selected at the moment. }
+        { Returns full profile or part of profile selected at the moment. }
         function GetProfilePointsSet: TTitlePointsSet;
 
         procedure SetSelectionMode(ASelectionMode: TSelMode);
@@ -218,7 +218,7 @@ type
         function GetCurveType: TCurveType;
         procedure SetCurveType(ACurveType: TCurveType);
 
-		{ Creates list of selected points and inserts new item into chart legend (CheckListBox). }
+        { Creates list of selected points and inserts new item into chart legend (CheckListBox). }
         procedure RecreateAndShowSelectedPoints(Title: string);
 
         procedure InitDataPoints;
@@ -228,7 +228,7 @@ type
         procedure RemoveGaussProfile;
         procedure RemoveDeltaProfile;
 
-		{ Copies data from the given point set to the set of selected interval. }
+        { Copies data from the given point set to the set of selected interval. }
         procedure SelectAreaActual(ANeutronPoints: TNeutronPointsSet;
             StartPointIndex, StopPointIndex: LongInt);
         procedure CopyProfileDataFromLoader;
@@ -243,25 +243,25 @@ type
         function GetSpecialCurveParameters: Curve_parameters;
         procedure SetSpecialCurveParameters(
             ACurveExpr: string;
-			{ Nil means first initialization. }
+            { Nil means first initialization. }
             CP: Curve_parameters
             );
 {$ENDIF}
-		{ Do only cleaning of sets. }
-		
+        { Do only cleaning of sets. }
+        
         procedure RemoveRFactorIntervals;
         procedure RemoveCurvePositions;
         procedure RemoveBackgroundPoints;
 
-		{ All call AddPoint method. }
-		
+        { All call AddPoint method. }
+        
         procedure AddPointToSelected(XValue, YValue: Double);
         procedure AddPointToBackground(XValue, YValue: Double);
         procedure AddPointToRFactorIntervals(XValue, YValue: Double);
         procedure AddPointToCurvePositions(XValue, YValue: Double);
-		
-		{ All call ReplacePoint method. }
-		
+        
+        { All call ReplacePoint method. }
+        
         procedure ReplacePointInData(
             PrevXValue, PrevYValue, NewXValue, NewYValue: Double);
         procedure ReplacePointInSelected(
@@ -273,10 +273,10 @@ type
         procedure ReplacePointInCurvePositions(
             PrevXValue, PrevYValue, NewXValue, NewYValue: Double);
         procedure AddPointToActive(XValue, YValue: Double);
-		{ Returns a set with which user works at the moment. }
+        { Returns a set with which user works at the moment. }
         function GetCurrentPointsSet: TTitlePointsSet;
 
-		{ Cleans chart and moves data from full profile to data of selected iterval. }
+        { Cleans chart and moves data from full profile to data of selected iterval. }
         procedure SelectArea(StartPointIndex, StopPointIndex: LongInt);
         procedure ReturnToTotalProfile;
 
@@ -289,17 +289,17 @@ type
         procedure LoadDataSet(FileName: string);
         procedure Reload;
         
-		{ Callbacks from the server. }
-		
+        { Callbacks from the server. }
+        
         procedure ShowCurMin(Min: Double);
         procedure Done;
         procedure FindPeakBoundsDone;
         procedure FindBackPointsDone;
         procedure FindPeakPositionsDone;
 
-		{ Wrappers for server methods. Mustn't create messages because this
+        { Wrappers for server methods. Mustn't create messages because this
           is responsibility of GUI. Instead of this must throw exceptions. }
-		
+        
         procedure SmoothProfile;
         procedure SubtractAllBackground(Auto: Boolean);
         procedure DoAllAutomatically;
@@ -310,22 +310,22 @@ type
         procedure FindPeakPositions;
         procedure AllPointsAsPeakPositions;
         procedure StopAsyncOper;
-		{ Gets state of asynchronous operation from the server. }
+        { Gets state of asynchronous operation from the server. }
         function AsyncOper: Boolean;
         function GetCalcTimeStr: string;
         function GetRFactorStr: string;
         procedure CreateSpecimenList;
 
-		{ Getters of server attributes. }
-		
+        { Getters of server attributes. }
+        
         property MaxRFactor: Double read GetMaxRFactor write SetMaxRFactor;
         property BackFactor: Double read GetBackFactor write SetBackFactor;
         property CurveThresh: Double read GetCurveThresh write SetCurveThresh;
         property CurveType: TCurveType read GetCurveType write SetCurveType;
 
-        //  sobytiya otobrazheniya vyzyvayutsya iz odnoimennyh metodov dlya
-        //  obespecheniya vozmozhnosti sinhronizatsii s glavnym potokom programmy
-        //  !!! ukazyvayut na metody TIIViewer !!!
+        { Plotting events are called from methods of the same name for providing
+          synchronization with main application thread. Point to methods of TIIViewer. }
+          
         property OnPlotSpecimens: TPlotSpecimens
             read FOnPlotSpecimens write FOnPlotSpecimens;
         property OnFillDatasheetTable: TFillDatasheetTable
@@ -343,7 +343,8 @@ type
         property OnHideCurvePositions: THideCurvePositions
             read FOnHideCurvePositions write FOnHideCurvePositions;
 
-		{ Draws diagram data. }
+        { Draws diagram data. }
+        
         property OnPlotDataPoints: TPlotDataPoints
             read FOnPlotDataPoints write FOnPlotDataPoints;
         property OnHideDataPoints: THideDataPoints
@@ -361,16 +362,17 @@ type
             read FOnPlotGaussProfile write FOnPlotGaussProfile;
         property OnPlotDeltaProfile: TPlotDeltaProfile
             read FOnPlotDeltaProfile write FOnPlotDeltaProfile;
-		{ Refreshes all curves. }
+        
+        { Refreshes all curves. }
         property OnRefresh: TRefresh read FOnRefresh write FOnRefresh;
-		{ Refreshes curve in the case of adding new or changing point. }
+        { Refreshes curve in the case of adding new or changing point. }
         property OnRefreshPointsSet: TRefreshPointsSet
             read FOnRefreshPointsSet write FOnRefreshPointsSet;
-		{ Is called before cleaning all diagram data. }
+        { Is called before cleaning all diagram data. }
         property OnClear: TClear read FOnClear write FOnClear;
         property OnHide: THide read FOnHide write FOnHide;
-		
-		{ Callbacks for updating user interface. They are called from main thread of client application.
+        
+        { Callbacks for updating user interface. They are called from main thread of client application.
           Callbacks can throw exceptions. They can be not assigned (nil). }
         property OnAsyncOperationFinished: TAsyncOperationFinished
             read FAsyncOperationFinished write FAsyncOperationFinished;

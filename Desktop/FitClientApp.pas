@@ -1,3 +1,14 @@
+{
+This software is distributed under GPL
+in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
+
+@abstract(Contains definition of class representing the application.)
+
+@author(Dmitry Morozov dvmorozov@hotmail.com, 
+LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
+Facebook https://www.facebook.com/profile.php?id=100004082021870)
+}
 unit FitClientApp;
 
 //{$mode objfpc}{$H+}
@@ -8,8 +19,7 @@ interface
 uses Classes, SysUtils, FitClient, FitClientStub, FitClientProxy;
 
 type
-    //  klass-konteyner (agregat), kot. ob'edinyaet
-    //  komponenty klientskoy chasti programmy, krome UI
+	{ Container class (agregate), which integrates all application components except UI. }
     TFitClientApp = class(TObject)
     protected
         FFitProxy: TFitClientProxy;

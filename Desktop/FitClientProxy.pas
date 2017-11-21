@@ -1,3 +1,14 @@
+{
+This software is distributed under GPL
+in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
+
+@abstract(Contains definition of proxy class calling server part by different ways depending on compilation keys.)
+
+@author(Dmitry Morozov dvmorozov@hotmail.com, 
+LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
+Facebook https://www.facebook.com/profile.php?id=100004082021870)
+}
 unit FitClientProxy;
 
 //{$mode objfpc}{$H+}
@@ -9,37 +20,32 @@ uses Classes, SysUtils, MSCRDataClasses, CommonTypes,
     DataLoader, SelfCopied, MyExceptions,
 {$IFNDEF FIT}
     base_service_intf,
-    fit_server_proxy    //  vyzov servera cherez set'
+    fit_server_proxy                //  Calls the server via network.
 {$ELSE}
-    FitServerStub       //  vyzov servera napryamuyu
+    FitServerStub                   //  Calls the server directly.
 {$ENDIF}
     , fit_server
     ;
   
 type
 {$IFNDEF FIT}
-    TFitServerStub = IFitServer;    //  TFitServerStub zamenyaetsya na
-                                    //  TFitServer_Proxy dlya dostupa
-                                    //  cherez set'; net smysla delat'
-                                    //  esche odin klass s interfeysom
-                                    //  kak u TFitServerStub - prosche
-                                    //  razdelit' kod kluchami - v odnom
-                                    //  prilozhenii nikogda ne budet
-                                    //  dvuh variantov koda
+    TFitServerStub = IFitServer;    //  TFitServerStub is substituted by
+                                    //  TFitClientProxy to access the server
+                                    //  via network.
 {$ENDIF}
 
 {$IFDEF FITPRO} {$DEFINE USE_RESULT_PROCESSING} {$ENDIF}
 {$IFDEF FITCGI} {$DEFINE USE_RESULT_PROCESSING} {$ENDIF}
-{$IFDEF FITCLIENTINSERVER} {$DEFINE USE_RESULT_PROCESSING} {$ENDIF}     //  ??? ubrat' iz server'a funkcii klienta
-    //  preobrazuet kody oshibok obratno v isklyucheniya
-    //  dlya obespecheniya tsentralizovannoy obrabotki
-    //  oshibok v kliente;
-    //  vipolnyaet preobrazovanie tipov dannyh;
-    //  interfeys dolzhen polnost'yu povtoryat' interfeys servera
+{$IFDEF FITCLIENTINSERVER} {$DEFINE USE_RESULT_PROCESSING} {$ENDIF}     //  TODO: remove client functions from the server
+    { Converts error codes back into exceptions to provide 
+      centralized error handling in the client. Converts data 
+      to appropriate type. Should impelement the same interface 
+      as the server. }
     TFitClientProxy = class(TObject)
     protected
         FFitStub: TFitServerStub;
-        //  ================= izvlechenie/ustanovka poley servera ===============
+        { Getting / setting server attributes. }
+        
         function GetMaxRFactor: Double;
         procedure SetMaxRFactor(AMaxRFactor: Double);
         function GetBackFactor: Double;
@@ -52,13 +58,13 @@ type
         procedure SetWaveLength(AWaveLength: Double);
         function GetWaveLength: Double;
 {$IFDEF USE_RESULT_PROCESSING}
-        //  !!! vybrasyvaet isklyuchenie, kogda R = nil !!!
+        { Throws an exception when R = nil. }
         function ProcessPointsResult(R: TPointsResult): TTitlePointsSet;
 {$ENDIF}
     public
-        //  metody Get... poluchayut dannye ot servera, sozdayut
-        //  i vozvraschayut NOVYY OB'EKT, ob osvobozhdenii kotorogo
-        //  dolzhen zabotit'sya poluchatel'
+        { GetXXXX methods create and return A NEW OBJECT, 
+          responsibility to free it is put on calling code. }
+        
         procedure SetProfilePointsSet(APointsSet: TTitlePointsSet);
         function GetProfilePointsSet: TTitlePointsSet;
         function GetSelectedArea: TTitlePointsSet;
@@ -75,8 +81,8 @@ type
         function GetSpecialCurveParameters: Curve_parameters;
         procedure SetSpecialCurveParameters(
             ACurveExpr: string;
-            CP: Curve_parameters    //  ravenstvo nil oznachaet
-                                    //  pervonachal'nuyu initsializatsiyu
+            { Nil means initialization. }
+            CP: Curve_parameters
             );
 {$ENDIF}
         procedure AddPointToData(XValue, YValue: Double);
@@ -105,7 +111,8 @@ type
         function GetCalcProfilePointsSet: TTitlePointsSet;
         function GetDeltaProfilePointsSet: TTitlePointsSet;
 
-        //  =============== asinhronnye (dlitel'nye) operatsii ==================
+        { Asynchronous (long) methods. }
+        
         procedure SmoothProfile;
         procedure SubtractAllBackground(Auto: Boolean);
         procedure DoAllAutomatically;
@@ -126,7 +133,8 @@ type
         function GetProfileChunk(const ChunkNum: LongInt): TTitlePointsSet;
         function GetProfileChunkCount: LongInt;
 {$ENDIF}
-        //  ======================= komandy upravleniya =========================
+        { Control methods. }
+        
         procedure StopAsyncOper;
         function AsyncOper: Boolean;
         function GetCalcTimeStr: string;
@@ -134,7 +142,8 @@ type
         function GetAbsRFactorStr: string;
         function GetSqrRFactorStr: string;
 
-        //  ======================= sinhronnye komandy =========================
+        { Synchronous methods. }
+        
         procedure SelectArea(StartPointIndex, StopPointIndex: LongInt);
         procedure ReturnToTotalProfile;
         procedure CreateSpecimenList;

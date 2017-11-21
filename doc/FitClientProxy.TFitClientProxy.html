@@ -21,7 +21,7 @@
 <code>type TFitClientProxy = class(TObject)</code></p>
 <h2 class="description">Description</h2>
 <p>
-<a class="normal" href="FitClientProxy.html#TFitServerStub">TFitServerStub</a> zamenyaetsya na <a class="normal" href="fit_server_proxy.TFitServer_Proxy.html">TFitServer_Proxy</a> dlya dostupa cherez set'; net smysla delat' esche odin klass s interfeysom kak u <a class="normal" href="FitClientProxy.html#TFitServerStub">TFitServerStub</a> - prosche razdelit' kod kluchami - v odnom prilozhenii nikogda ne budet dvuh variantov koda ??? ubrat' iz server'a funkcii klienta preobrazuet kody oshibok obratno v isklyucheniya dlya obespecheniya tsentralizovannoy obrabotki oshibok v kliente; vipolnyaet preobrazovanie tipov dannyh; interfeys dolzhen polnost'yu povtoryat' interfeys servera</p>
+Converts <a class="normal" href="error.html">error</a> codes back into exceptions to provide centralized <a class="normal" href="error.html">error</a> handling in the client. Converts <a class="normal" href="data.html">data</a> to appropriate type. Should impelement the same interface as the server.</p>
 <a name="PasDoc-Hierarchy"></a><h2 class="hierarchy">Hierarchy</h2>
 <ul class="hierarchy"><li class="ancestor">TObject</li>
 <li class="thisitem">TFitClientProxy</li></ul><h2 class="overview">Overview</h2>
@@ -468,7 +468,7 @@
 </tr>
 <tr><td colspan="2">
 <p>
-================= izvlechenie/ustanovka poley servera ===============</p>
+Getting / setting server attributes.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -638,7 +638,7 @@
 </tr>
 <tr><td colspan="2">
 <p>
-======================= sinhronnye komandy =========================</p>
+Synchronous methods.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -664,7 +664,7 @@
 </tr>
 <tr><td colspan="2">
 <p>
-metody Get... poluchayut dannye ot servera, sozdayut i vozvraschayut NOVYY OB'EKT, ob osvobozhdenii kotorogo dolzhen zabotit'sya poluchatel'</p>
+GetXXXX methods create and return A NEW OBJECT, responsibility to free it is put on calling code.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -698,7 +698,7 @@ metody Get... poluchayut dannye ot servera, sozdayut i vozvraschayut NOVYY OB'EK
 </tr>
 <tr><td colspan="2">
 <p>
-=============== asinhronnye (dlitel'nye) operatsii ==================</p>
+Asynchronous (long) methods.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -708,7 +708,7 @@ metody Get... poluchayut dannye ot servera, sozdayut i vozvraschayut NOVYY OB'EK
 </tr>
 <tr><td colspan="2">
 <p>
-======================= komandy upravleniya =========================</p>
+Control methods.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">

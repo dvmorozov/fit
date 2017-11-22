@@ -36,43 +36,36 @@ uses Classes, DataLoader, SelfCheckedComponentList, SysUtils, MSCRDataClasses,
      MainCalcThread, CommonTypes;
 
 type
-    //  Pri variatsii parametrov gaussianov seychas var'iruetsya amplituda
-    //  i polozhenie, shirina prinimaetsya dlya vseh odinakovoy.
+	{ In varying gaussian parameters now amplitude and position are varied,
+      width is taken the same for all instances (specimens). }
+	
     TRecreateServer = procedure of object;
-    //  komponent, kot. realizuet vsyu logiku servera, razbivaet
-    //  zadachu podgonki profilya na podzadachi podgonki uchastkov
-    //  (predvaritel'no uchastki d.b. opredeleny vruchnuyu ili avtomaticheski);
-    //  vse interfeysnye metody d. dopuskat' vozmozhnost' vyzova
-    //  v proizvol'nom sostoyanii - eto ne dolzhno schitat'sya
-    //  nedopustimoy situatsiey, no dolzhen vozvraschat'sya kod oshibki;
-    
-    //  pri reshenii zadach, vozlozhennyh na komponent znanie dliny
-    //  volny ne trebuetsya, poetomu vse komponenty TNeutronPointsSet
-    //  zameneny na TPointsSet; eto sootvetstvuet takzhe abstraktsii
-    //  komponenta ot zadach neytronografii i perehodu k zadacham iz
-    //  proizvol'noy oblasti, v kotoryh dannye imeyut vid profilya;
-    //  !!! nel'zya prosto zamenit' TNeutronPoinstSet na TPointsSet,
-    //  poskol'ku na storone servera vyzyvayutsya metody TFitViewer,
-    //  kotorye trebuyut TTitlePointsSet; krome togo poka na storone
-    //  servera risuyutsya grafiki sleduet ispol'zovat' TNeutronPointsSet,
-    //  kotoryi podderzhivaet pereschet argumenta !!!
-    
-    //  !!! interfeysnye metody vozvraschayut priznak dopustimosti
-    //  sostoyaniya dlya vypolneniya operatsii; ne stoit ispol'zovat'
-    //  EAssertionFailed kak signal o nedopustimom sostoyanii, t.k.
-    //  nel'zya garantirovat', chto eto isklyuchenie ne vozniknet v
-    //  biblioteke, poetomu vozvrat vybrosom EUserException (ispol'zovanie
-    //  isklyucheniya pozvolyaet peredavat' na verhniy uroven' soobschenie);
-    //  takoe povedenie dopustimo tol'ko v klassah, kotorye vypolnyayut
-    //  komandy pol'zovatelya, ostal'nye dolzhny v sluchae nedopustimogo
-    //  sostoyaniya vybrasyvat' EAssertionFailed; granichnyy klass d.
-    //  interpretirovat' takoe isklyuchenie kak fatal'n. oshibku, a
-    //  vozvrat EUserException kak oshibku sostoyaniya !!!
-    //  dannyy klass servera vypolnyaet vsyu rabotu v potoke vyzyvayuschego
-    //  prilozheniya
-    //  !!! d. hranit' vse neobhodimye dannye, v t.ch. vydelennuyu
-    //  oblast', poskol'ku klient mozhet voobsche ne imet' vozm.
-    //  hranit' dannye !!!
+	{ The component which implements all server logic. It divides the task
+	  of profile fitting on a few subtasks of fitting on intervals. 
+	  The intervals should be defined before manually or automatically.  
+	  All interface methods should allow calling in arbitrary state, this
+	  should not be considered as inadmissible situation, but corresponding 
+	  error code should be returned.
+	  In fitting knowledge of wavelength is not required. This is why all
+	  components TNeutronPointsSet were changed on TPointsSet. This also
+	  allows to abstract from tasks of neutron diffraction and to come to
+	  tasks from arbitrary field in which data have form of profile.
+	  It is impossible simply to replace TNeutronPointsSet on TPointsSet
+	  because at the server side methods of TFitViewer are called which
+	  require TTitlePointsSet. Moreover graphics is still implemented at 
+	  server side. This requires usage of TNeutronPointsSet which supports
+	  argument recalculation.
+	  Interface methods results shows is requested operation allowed or not.
+	  Instead of EAssertionFailed the EUserException is used because it is 
+	  impossible to guarantee that exception will not be thrown from library.
+	  This is acceptable only for classes which process user commands. Rest of
+	  the classes should use EAssertionFailed in the case of inadmissible state.
+	  Boundary class shoud interpret such exception as fatal error but 
+	  EUserException as state errors.
+	  This implementation performs all operations in the thread of caller.
+	  It should store all the data necessary for operations including selected 
+	  intervals because client can be unable to store data.
+	}
     TFitServer = class(TComponent)
     protected
 {$IFDEF FIT}

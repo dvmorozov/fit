@@ -111,7 +111,7 @@ type
         { List of point pairs which limit interval of R-factor calculation. 
           Always must be displayed in order to show user in which mode R-factor is calculated. }
         RFactorIntervals: TTitlePointsSet;
-        { Positions of pattern specimens. Only X-coordinate is used. }
+        { Positions of pattern specimens. Only X-coordinates are used. }
         CurvePositions: TTitlePointsSet;
         { Containers of calculated pattern specimens. Each object contains data of specimen curve. }
         CurvesList: TSelfCopiedCompList;

@@ -3,7 +3,7 @@ This software is distributed under GPL
 in the hope that it will be useful, but WITHOUT ANY WARRANTY;
 without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
 
-@abstract(Contains definition of class implementing server logic. Doesn't contain any user interface interaction. 
+@abstract(Contains definition of class implementing server logic. Doesn't contain any user interface interaction.
 Exception handling and converting them into messages understandable for caller should be done in boundary objects. 
 Throwing EAssertionFailed should be considered as inadmissibility of state for calling the method. At that state 
 of the server should be kept. Throwing any other exception should be considered as fatal error. At that state of
@@ -14,11 +14,6 @@ accroding to its semantics EAssertionFailed can be catched inside it.)
 LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
 Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
-{
-	TODO: Replace EAssertionFailed by an exception of another type
-	because exceptions of this type can be thrown from libraries.
-	In this case keeping the state of application can't be guaranteed.
-}
 
 unit FitServer;
 
@@ -26,6 +21,12 @@ unit FitServer;
 {$MODE Delphi}
 
 interface
+
+{
+TODO: Replace EAssertionFailed by an exception of another type
+because exceptions of this type can be thrown from libraries.
+In this case keeping the state of application can't be guaranteed.
+}
 
 uses Classes, DataLoader, SelfCheckedComponentList, SysUtils, MSCRDataClasses,
      Dialogs,
@@ -71,59 +72,55 @@ type
 {$IFDEF FIT}
         FFitProxy: TFitServerProxy;
 {$ENDIF}
-        FWaveLength: Double;  //??? ubrat'
+        FWaveLength: Double;	//	TODO: remove this.
         procedure SetWaveLength(AWaveLength: Double);
 
     protected
         FState: TFitServerState;
-        //  sostoyanie, predshestvovavshee perehodu v AsyncOperation
+        { The state that preceded the transition to AsyncOperation. }
         SavedState: TFitServerState;
-        //  !!! sostoyanie ne dolzhno izmenyat'sya vnutri
-        //  dopolnitel'nogo potoka, poskol'ku unichtozhaet ego !!!
+        { State changing. The state should not change within additional thread, because the change destroys it. }
         procedure SetState(AState: TFitServerState); virtual;
 
     protected
         FBackFactor: Double;
-        //  dannye polnogo eksperimental'nogo profilya
+		{ Data of full experimental profile. }
         ExpProfile: TTitlePointsSet;
-        //  krivaya, poluchaemaya summoy vseh summarnyh krivyh podgonyaemyh uchastkov
-        //  dlya vychisleniya polnogo R-faktora po vsemu profilyu
+        { The curve obtained by the sum of all curves of adjustable intervals 
+		  to calculate the total R-factor along the entire profile. }
         CalcProfile: TTitlePointsSet;
         //  raznost' eksp. i rasschit. profiley
+		{ The curve obtained by calculating difference 
+		  between experimental and calculated profiles. }
         DeltaProfile: TTitlePointsSet;
-        //  uchastok profilya, s kotorym pol'zovatel' rabotaet v dannyy moment
+		{ Part of the whole profile with which user works at the given moment. }
         SelectedArea: TTitlePointsSet;
-        //  spisok tochek fona, ispol'zuemyy dlya perehoda
-        //  m-u rezhimami ruchnogo i avtomaticheskogo vybora
+		{ List of background points used in transition between manual and 
+          automatic modes of selection. }
         BackgroundPoints: TTitlePointsSet;
-        //  pary tochek ogranichivayuschie diapazony rascheta R-Factor'a;
-        //  !!! nikogda ne dolzhny byt' skryty, chtoby pol'zovatel'
-        //  videl, v kakom rezhime schitaetsya R-Factor !!!
+		{ Pairs of points defining intervals of R-factor calculation.
+          Should always be displayed allowing user to see where R-factor is calculated. }
         RFactorIntervals: TTitlePointsSet;
 
-        //  elementy v eti spiski d. dobavlyat'sya sinhronno
-        //  ispol'zuetsya dlya hraneniya i peredachi klientu
-        //  vseh ekzemplyarov patternov sobrannyh iz zadach
+		{ Contains all pattern specimens collected from tasks 
+		  (for example, for separate intervals). 
+		  Items are added synchronously to the list. }
         CurvesList: TSelfCopiedCompList;
-        //  tochki, v kotoryh raspolagayutsya raschetnye krivye;
-        //  ispol'zuyutsya tol'ko x-koordinaty tochek
+		{ Positions of pattern specimens. Only X-coordinates are used. }
         CurvePositions: TTitlePointsSet;
-        //  rezul'tiruyuschiy nabor parametrov ekzemplyarov patternov
-        //  ??? izmenit' tip i udalit' SetWaveLength
-        SpecimenList: TMSCRSpecimenList;
+		{ Containers of parameters of pattern specimens. }
+        SpecimenList: TMSCRSpecimenList;		//	TODO: change type and remove SetWaveLength.
         
-        //  v zavisimosti ot etogo priznaka v dal'neyshih operatsiyah
-        //  ispol'zuyutsya libo dannye vybrannoy oblasti, libo dannye
-        //  polnogo profilya
+		{ Dependent on this flag either data of the selected interval are used
+          or data of the whole profile. }
         FSelectedAreaMode: Boolean;
-        TaskList: TSelfCheckedComponentList;   //  po-umolchaniyu spisok aktivnyy
-        //  parametry pol'zovatel'skoy krivoy;
-        //  ob'ekt sozdaetsya serverom; nuzhen dlya obespecheniya
-        //  vozmozhnosti redaktirovaniya parametrov v kliente
+        TaskList: TSelfCheckedComponentList;   //  By default the list is active.
+		{ Parameters of user defined curve. The object is created by server.
+		  It is necessary to provide parameter editing on the client-side. }
         Params: Curve_parameters;
-        //  vyrazhenie dlya pol'zovatel'skoy krivoy
+		{ The expression for user defined curve. }
         FCurveExpr: string;
-        //  peremennye podderzhivaet vozmozhnost' chteniya ustanovlennogo znacheniya
+		{ Allows to retrieve the value from the client-side. }
         FMaxRFactor: Double;
         procedure SetMaxRFactor(AMaxRFactor: Double);
 
@@ -136,57 +133,61 @@ type
         procedure SetCurveType(ACurveType: TCurveType);
 
     protected
-        FitDone: Boolean;           //  ust. v True, posle pervogo zaversheniya
-                                    //  rascheta
-        //  tekuschee summarnoe znachenie R-faktora po vsem podzadacham
+		{ Is set up to True after finishing first cycle of calculation. }
+        FitDone: Boolean;           
+		{ Current total value of R-factor for all subtasks. }
         CurrentMinimum: Double;
         //  nachal'nyy moment vremeni zapuska dlitel'noy operatsii
+		{ The starting time of continuous operation. }
         StartTime: TDateTime;
 
-        //  vyzyvaetsya dlya dobavleniya novoy tochki k zadannomu naboru tochek
-        //  !!! povtornyy vyzov dlya dannyh koordinat udalyaet tochku iz spiska;
-        //  pri etom spisok zamenyaetsya na novyy !!!
+		{ Adds new point to the given point set. Second call with the same coordinates
+		  removes point from the list. At this the list object is replaced by new one. }
         procedure AddPoint(var Points: TTitlePointsSet; XValue, YValue: Double);
 
-        //  priznak togo, chto tochki privyazki byli naznacheny
-        //  avtomaticheski tak kak eto delaetsya pri polnost'yu
-        //  avtomaticheskoy obrabotke - t.e. v kazhdoy tochke
-        //  otlichnoy ot fona
     protected
+	    { Indicates that specimen positions were assigned automatically. 
+		  That is at each point different from background. }
         SpecPosFoundForAuto: Boolean;
         DoneDisabled: Boolean;
-        //  vyzovy etih metodov vypolnyayutsya v osnovnom potoke prilozheniya
+
+		{ These methods are executed in the separate thread. }
+		
         procedure DoneProc; virtual;
-        //  ============== metody, ispol'zuemye optimizatorom ==================
-        //  vyzyvaetsya algoritmom optimizatsii dlya vyvoda
-        //  informatsii pri dostizhenii ocherednogo minimuma
+
+		{ Methods used by optimization algorithm to update
+		  information in achieving of new minimum. }
         procedure ShowCurMin; virtual;
 
-        //  ============ algoritmy - metody, vyzyvaemye asinhronno =============
-        //  ischet granitsy rascheta R-faktora na osnove dannyh,
-        //  poluchennyh iz FindPeaksInternal
+		{ The algorithm methods. They are executed asynchronously. }
+		
+		{ Calculates boundaries of R-factor intervals based on data obtained from FindPeaksInternal. }
         procedure FindPeakBoundsAlg;
         procedure FindPeakBoundsDoneProcActual;
-        //  ischet tochki fona
+		{ Calculates background points. }
         procedure FindBackPointsAlg;
         procedure FindBackPointsDoneProcActual;
-        //  ischet polozheniya pikov (tochek dlya raspolozheniya krivyh)
+		{ Calculates peak positions which will be taken as specimen positions. }
         procedure FindPeakPositionsAlg;
-        //  выбор всех точек в качестве позиций кривых
+		{ Selects all points as specimen positions. }
         procedure AllPointsAsPeakPositionsAlg;
         procedure FindPeakPositionsDoneProcActual;
 
-        //  ============= perehodniki k sootvet. metodam TFitTask ==============
+		{ Wrappers for corresponding methods of TFitTask. }
+		
         procedure FindGaussesSequentiallyAlg; virtual;
         procedure FindGaussesAlg; virtual;
         procedure FindGaussesAgainAlg; virtual;
         procedure DoAllAutomaticallyAlg;
 
-        //  ============== metody nizkogo urovnya dlya algoritmov ================
+		{ Low-level methods used by algorithms. }
+		
         procedure Smoothing(ANeutronPointsSet: TPointsSet);
-        //  lineyno vychitaet fon na zadannom uchastke nekotorogo nabora tochek
+		{ Linearly subtracts background at the given interval of points. }
         procedure SubtractLinearly(Data: TPointsSet;
             StartIndex: LongInt; EndIndex: LongInt);
+		
+		//	Continue:	
         //  ischet opornye tochki dlya lineynogo otsecheniya fona;
         //  !!! tochki ne uporyadocheny po X !!!
         function FindBackgroundPoints(Data: TPointsSet): TPointsSet;

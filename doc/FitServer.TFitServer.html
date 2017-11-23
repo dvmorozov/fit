@@ -539,7 +539,7 @@ The component which implements all server logic. It divides the task of profile 
 </tr>
 <tr><td colspan="2">
 <p>
-spisok tochek fona, ispol'zuemyy dlya perehoda m-u rezhimami ruchnogo i avtomaticheskogo vybora</p>
+List of <a class="normal" href="background.html">background</a> points used in <a class="normal" href="Math3d.html#Transition">transition</a> between manual and automatic modes of selection.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -549,7 +549,7 @@ spisok tochek fona, ispol'zuemyy dlya perehoda m-u rezhimami ruchnogo i avtomati
 </tr>
 <tr><td colspan="2">
 <p>
-krivaya, poluchaemaya summoy vseh summarnyh krivyh podgonyaemyh uchastkov dlya vychisleniya polnogo R-faktora po vsemu profilyu</p>
+The curve obtained by the sum of all curves of adjustable intervals to calculate the total R-factor along the entire profile.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -559,7 +559,7 @@ krivaya, poluchaemaya summoy vseh summarnyh krivyh podgonyaemyh uchastkov dlya v
 </tr>
 <tr><td colspan="2">
 <p>
-ust. v True, posle pervogo zaversheniya rascheta tekuschee summarnoe znachenie R-faktora po vsem podzadacham</p>
+Current total value of R-factor for all subtasks.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -569,7 +569,7 @@ ust. v True, posle pervogo zaversheniya rascheta tekuschee summarnoe znachenie R
 </tr>
 <tr><td colspan="2">
 <p>
-tochki, v kotoryh raspolagayutsya raschetnye krivye; ispol'zuyutsya tol'ko x-koordinaty tochek</p>
+Positions of <a class="normal" href="pattern.html">pattern</a> specimens. Only X-coordinates are used.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -579,7 +579,7 @@ tochki, v kotoryh raspolagayutsya raschetnye krivye; ispol'zuyutsya tol'ko x-koo
 </tr>
 <tr><td colspan="2">
 <p>
-elementy v eti spiski d. dobavlyat'sya sinhronno ispol'zuetsya dlya hraneniya i peredachi klientu vseh ekzemplyarov patternov sobrannyh iz zadach</p>
+Contains all <a class="normal" href="pattern.html">pattern</a> specimens collected from tasks (for example, for separate intervals). Items are added synchronously to the list.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -589,7 +589,7 @@ elementy v eti spiski d. dobavlyat'sya sinhronno ispol'zuetsya dlya hraneniya i 
 </tr>
 <tr><td colspan="2">
 <p>
-raznost' eksp. i rasschit. profiley</p>
+The curve obtained by calculating difference between experimental and calculated profiles.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -607,7 +607,7 @@ raznost' eksp. i rasschit. profiley</p>
 </tr>
 <tr><td colspan="2">
 <p>
-dannye polnogo eksperimental'nogo profilya</p>
+<a class="normal" href="data.html">Data</a> of full experimental profile.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -625,7 +625,7 @@ dannye polnogo eksperimental'nogo profilya</p>
 </tr>
 <tr><td colspan="2">
 <p>
-vyrazhenie dlya pol'zovatel'skoy krivoy</p>
+The expression for user defined curve.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -650,7 +650,9 @@ vyrazhenie dlya pol'zovatel'skoy krivoy</p>
 <td class="itemcode"><a name="FitDone"></a><code><b>FitDone</b>: Boolean;</code></td>
 </tr>
 <tr><td colspan="2">
-&nbsp;</td></tr>
+<p>
+Is set up to True after finishing first cycle of calculation.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -659,7 +661,7 @@ vyrazhenie dlya pol'zovatel'skoy krivoy</p>
 </tr>
 <tr><td colspan="2">
 <p>
-peremennye podderzhivaet vozmozhnost' chteniya ustanovlennogo znacheniya</p>
+Allows to retrieve the value from the client-side.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -669,7 +671,7 @@ peremennye podderzhivaet vozmozhnost' chteniya ustanovlennogo znacheniya</p>
 </tr>
 <tr><td colspan="2">
 <p>
-v zavisimosti ot etogo priznaka v dal'neyshih operatsiyah ispol'zuyutsya libo dannye vybrannoy oblasti, libo dannye polnogo profilya</p>
+Dependent on this flag either <a class="normal" href="data.html">data</a> of the selected interval are used or <a class="normal" href="data.html">data</a> of the whole profile.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -695,7 +697,7 @@ v zavisimosti ot etogo priznaka v dal'neyshih operatsiyah ispol'zuyutsya libo da
 </tr>
 <tr><td colspan="2">
 <p>
-po-umolchaniyu spisok aktivnyy parametry pol'zovatel'skoy krivoy; ob'ekt sozdaetsya serverom; nuzhen dlya obespecheniya vozmozhnosti redaktirovaniya parametrov v kliente</p>
+Parameters of user defined curve. The object is created by server. It is necessary to provide parameter editing on the client-side.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -705,7 +707,7 @@ po-umolchaniyu spisok aktivnyy parametry pol'zovatel'skoy krivoy; ob'ekt sozdaet
 </tr>
 <tr><td colspan="2">
 <p>
-pary tochek ogranichivayuschie diapazony rascheta R-Factor'a; !!! nikogda ne dolzhny byt' skryty, chtoby pol'zovatel' videl, v kakom rezhime schitaetsya R-Factor !!!</p>
+Pairs of points defining intervals of R-factor calculation. Should always be displayed allowing user to see where R-factor is calculated.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -715,7 +717,7 @@ pary tochek ogranichivayuschie diapazony rascheta R-Factor'a; !!! nikogda ne dol
 </tr>
 <tr><td colspan="2">
 <p>
-sostoyanie, predshestvovavshee perehodu v AsyncOperation</p>
+The <a class="normal" href="FitServer.TFitServer.html#State">state</a> that preceded the <a class="normal" href="Math3d.html#Transition">transition</a> to AsyncOperation.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -725,7 +727,7 @@ sostoyanie, predshestvovavshee perehodu v AsyncOperation</p>
 </tr>
 <tr><td colspan="2">
 <p>
-uchastok profilya, s kotorym pol'zovatel' rabotaet v dannyy moment</p>
+Part of the whole profile with which user works at the given moment.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -735,7 +737,7 @@ uchastok profilya, s kotorym pol'zovatel' rabotaet v dannyy moment</p>
 </tr>
 <tr><td colspan="2">
 <p>
-rezul'tiruyuschiy nabor parametrov ekzemplyarov patternov ??? izmenit' tip i udalit' <a class="normal" href="FitServer.TFitServer.html#SetWaveLength">SetWaveLength</a></p>
+Containers of parameters of <a class="normal" href="pattern.html">pattern</a> specimens.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -745,7 +747,7 @@ rezul'tiruyuschiy nabor parametrov ekzemplyarov patternov ??? izmenit' tip i uda
 </tr>
 <tr><td colspan="2">
 <p>
-priznak togo, chto tochki privyazki byli naznacheny avtomaticheski tak kak eto delaetsya pri polnost'yu avtomaticheskoy obrabotke - t.e. v kazhdoy tochke otlichnoy ot fona</p>
+Indicates that specimen positions were assigned automatically. That is at each point different from <a class="normal" href="background.html">background</a>.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -755,7 +757,7 @@ priznak togo, chto tochki privyazki byli naznacheny avtomaticheski tak kak eto d
 </tr>
 <tr><td colspan="2">
 <p>
-nachal'nyy moment vremeni zapuska dlitel'noy operatsii</p>
+The starting time of continuous operation.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1094,7 +1096,7 @@ interfeysnye metody, menyayuschie sostoyanie d. soobschat' ob etom zagruzka dann
 </tr>
 <tr><td colspan="2">
 <p>
-ischet opornye tochki dlya lineynogo otsecheniya fona; !!! tochki ne uporyadocheny po X !!!</p>
+Continue: ischet opornye tochki dlya lineynogo otsecheniya fona; !!! tochki ne uporyadocheny po X !!!</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1296,7 +1298,7 @@ vychitaet fon lineyno approksimiruya ego; esli Auto = True, to tochki fona vybra
 </tr>
 <tr><td colspan="2">
 <p>
-vyzyvaetsya dlya dobavleniya novoy tochki k zadannomu naboru tochek !!! povtornyy vyzov dlya dannyh koordinat udalyaet tochku iz spiska; pri etom spisok zamenyaetsya na novyy !!!</p>
+Adds new point to the given point set. Second call with the same coordinates removes point from the list. At this the list object is replaced by new one.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1316,7 +1318,7 @@ integriruet krivuyu s zadannymi predelami i dobavlyaet znacheniya v spisok rezul
 </tr>
 <tr><td colspan="2">
 <p>
-выбор всех точек в качестве позиций кривых</p>
+Selects all points as specimen positions.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1392,7 +1394,7 @@ esli intervaly ne byli zadany, to oni generiruyutsya avtomaticheski</p>
 </tr>
 <tr><td colspan="2">
 <p>
-vyzovy etih metodov vypolnyayutsya v osnovnom potoke prilozheniya</p>
+These methods are executed in the separate thread.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1402,7 +1404,7 @@ vyzovy etih metodov vypolnyayutsya v osnovnom potoke prilozheniya</p>
 </tr>
 <tr><td colspan="2">
 <p>
-ischet tochki fona</p>
+Calculates <a class="normal" href="background.html">background</a> points.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1436,7 +1438,7 @@ ischet tochki fona</p>
 </tr>
 <tr><td colspan="2">
 <p>
-============= perehodniki k sootvet. metodam <a class="normal" href="FitTask.TFitTask.html">TFitTask</a> ==============</p>
+Wrappers for corresponding methods of <a class="normal" href="FitTask.TFitTask.html">TFitTask</a>.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1446,7 +1448,7 @@ ischet tochki fona</p>
 </tr>
 <tr><td colspan="2">
 <p>
-============ algoritmy - metody, vyzyvaemye asinhronno ============= ischet granitsy rascheta R-faktora na osnove dannyh, poluchennyh iz <a class="normal" href="FitServer.TFitServer.html#FindPeaksInternal">FindPeaksInternal</a></p>
+Calculates boundaries of R-factor intervals based on <a class="normal" href="data.html">data</a> obtained from <a class="normal" href="FitServer.TFitServer.html#FindPeaksInternal">FindPeaksInternal</a>.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1464,7 +1466,7 @@ ischet tochki fona</p>
 </tr>
 <tr><td colspan="2">
 <p>
-ischet polozheniya pikov (tochek dlya raspolozheniya krivyh)</p>
+Calculates peak positions which will be taken as specimen positions.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1554,7 +1556,7 @@ perenosit dannye iz zadannogo spiska v spisok vybrannoy oblasti</p>
 </tr>
 <tr><td colspan="2">
 <p>
-!!! sostoyanie ne dolzhno izmenyat'sya vnutri dopolnitel'nogo potoka, poskol'ku unichtozhaet ego !!!</p>
+<a class="normal" href="FitServer.TFitServer.html#State">State</a> changing. The <a class="normal" href="FitServer.TFitServer.html#State">state</a> should not change within additional thread, because the change destroys it.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1564,7 +1566,7 @@ perenosit dannye iz zadannogo spiska v spisok vybrannoy oblasti</p>
 </tr>
 <tr><td colspan="2">
 <p>
-??? ubrat'</p>
+TODO: remove this.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1574,7 +1576,7 @@ perenosit dannye iz zadannogo spiska v spisok vybrannoy oblasti</p>
 </tr>
 <tr><td colspan="2">
 <p>
-============== metody, ispol'zuemye optimizatorom ================== vyzyvaetsya algoritmom optimizatsii dlya vyvoda informatsii pri dostizhenii ocherednogo minimuma</p>
+Methods used by optimization algorithm to update information in achieving of new minimum.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1584,7 +1586,7 @@ perenosit dannye iz zadannogo spiska v spisok vybrannoy oblasti</p>
 </tr>
 <tr><td colspan="2">
 <p>
-============== metody nizkogo urovnya dlya algoritmov ================</p>
+Low-level methods used by algorithms.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1594,7 +1596,7 @@ perenosit dannye iz zadannogo spiska v spisok vybrannoy oblasti</p>
 </tr>
 <tr><td colspan="2">
 <p>
-lineyno vychitaet fon na zadannom uchastke nekotorogo nabora tochek</p>
+Linearly subtracts <a class="normal" href="background.html">background</a> at the given interval of points.</p>
 </td></tr>
 </table>
 <h3 class="detail">Properties</h3>

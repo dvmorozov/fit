@@ -95,7 +95,7 @@
 </tr>
 <tr class="list2">
 <td class="itemname"><a class="bold" href="FitServer.html">FitServer</a></td>
-<td class="itemdesc"><p>TODO: Replace EAssertionFailed by an exception of another type because exceptions of this type can be thrown from libraries.</p></td>
+<td class="itemdesc"><p>Contains definition of class implementing server logic. Doesn't contain any user interface interaction. Exception handling and converting them into messages understandable for caller should be done in boundary objects. Throwing EAssertionFailed should be considered as inadmissibility of state for calling the method. At that state of the server should be kept. Throwing any other exception should be considered as fatal <a class="normal" href="error.html">error</a>. At that state of the server should be brought into initial which was just after <a class="normal" href="start.html">start</a>. Sometimes when method can execute the action accroding to its semantics EAssertionFailed can be catched inside it.</p></td>
 </tr>
 <tr class="list">
 <td class="itemname"><a class="bold" href="FitServerApp.html">FitServerApp</a></td>

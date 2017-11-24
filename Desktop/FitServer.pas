@@ -187,9 +187,7 @@ type
         procedure SubtractLinearly(Data: TPointsSet;
             StartIndex: LongInt; EndIndex: LongInt);
 		
-		//	Continue:	
-        //  ischet opornye tochki dlya lineynogo otsecheniya fona;
-        //  !!! tochki ne uporyadocheny po X !!!
+		{ Calculates reference points for linear cut up the background. The points aren't arranged by X. }
         function FindBackgroundPoints(Data: TPointsSet): TPointsSet;
         //  integriruet krivuyu s zadannymi predelami
         //  i dobavlyaet znacheniya v spisok rezul'tatov

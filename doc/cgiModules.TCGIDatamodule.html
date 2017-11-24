@@ -12,7 +12,7 @@
 <a name="TCGIDatamodule"></a><h1 class="cio">Class TCGIDatamodule</h1>
 <table class="sections wide_list">
 <tr>
-<td><a class="section" href="#PasDoc-Description">Description</a></td><td><a class="section" href="#PasDoc-Hierarchy">Hierarchy</a></td><td>Fields</td><td><a class="section" href="#PasDoc-Methods">Methods</a></td><td><a class="section" href="#PasDoc-Properties">Properties</a></td></tr></table>
+<td><a class="section" href="#PasDoc-Description">Description</a></td><td><a class="section" href="#PasDoc-Hierarchy">Hierarchy</a></td><td><a class="section" href="#PasDoc-Fields">Fields</a></td><td><a class="section" href="#PasDoc-Methods">Methods</a></td><td><a class="section" href="#PasDoc-Properties">Properties</a></td></tr></table>
 <a name="PasDoc-Description"></a><h2 class="unit">Unit</h2>
 <p class="unitlink">
 <a  href="cgiModules.html">cgiModules</a></p>
@@ -23,6 +23,13 @@
 <a name="PasDoc-Hierarchy"></a><h2 class="hierarchy">Hierarchy</h2>
 <ul class="hierarchy"><li class="ancestor">TDataModule</li>
 <li class="thisitem">TCGIDatamodule</li></ul><h2 class="overview">Overview</h2>
+<a name="PasDoc-Fields"></a><h3 class="summary">Fields</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code><b><a  href="cgiModules.TCGIDatamodule.html#FOnCGIRequest">FOnCGIRequest</a></b>: TNotifyEvent;</code></td>
+</tr>
+</table>
 <a name="PasDoc-Methods"></a><h3 class="summary">Methods</h3>
 <table class="summary wide_list">
 <tr class="list">
@@ -30,39 +37,47 @@
 <td class="itemcode"><code>function <b><a  href="cgiModules.TCGIDatamodule.html#GetResponse">GetResponse</a></b>: TStream;</code></td>
 </tr>
 <tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>function <b><a  href="cgiModules.TCGIDatamodule.html#GetContentType">GetContentType</a></b>: String;</code></td>
+</tr>
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="cgiModules.TCGIDatamodule.html#AddResponse">AddResponse</a></b>(const Msg : String); virtual;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="cgiModules.TCGIDatamodule.html#AddResponse">AddResponse</a></b>(const Fmt : String; Args : Array of const); virtual;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="cgiModules.TCGIDatamodule.html#AddResponseLn">AddResponseLn</a></b>(const Fmt : String; Args : Array of const); virtual;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="cgiModules.TCGIDatamodule.html#AddResponseLn">AddResponseLn</a></b>(const Msg : String); virtual;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="cgiModules.TCGIDatamodule.html#EmitContentType">EmitContentType</a></b>; virtual;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="cgiModules.TCGIDatamodule.html#HandleRequest">HandleRequest</a></b>; virtual;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="cgiModules.TCGIDatamodule.html#SetContentType">SetContentType</a></b>(const AValue: String);</code></td>
 </tr>
 </table>
 <a name="PasDoc-Properties"></a><h3 class="summary">Properties</h3>
 <table class="summary wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
-<td class="itemcode"><code>property <b><a  href="cgiModules.TCGIDatamodule.html#ContentType">ContentType</a></b> : String Read GetContentType Write SetContentType;</code></td>
+<td class="itemcode"><code>property <b><a  href="cgiModules.TCGIDatamodule.html#ContentType">ContentType</a></b> : String Read <a  href="cgiModules.TCGIDatamodule.html#GetContentType">GetContentType</a> Write <a  href="cgiModules.TCGIDatamodule.html#SetContentType">SetContentType</a>;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
-<td class="itemcode"><code>property <b><a  href="cgiModules.TCGIDatamodule.html#OnCGIRequest">OnCGIRequest</a></b> : TNotifyEvent Read FOnCGIRequest Write FOnCGIRequest;</code></td>
+<td class="itemcode"><code>property <b><a  href="cgiModules.TCGIDatamodule.html#OnCGIRequest">OnCGIRequest</a></b> : TNotifyEvent Read <a  href="cgiModules.TCGIDatamodule.html#FOnCGIRequest">FOnCGIRequest</a> Write <a  href="cgiModules.TCGIDatamodule.html#FOnCGIRequest">FOnCGIRequest</a>;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
@@ -70,11 +85,28 @@
 </tr>
 </table>
 <h2 class="description">Description</h2>
+<h3 class="detail">Fields</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><a name="FOnCGIRequest"></a><code><b>FOnCGIRequest</b>: TNotifyEvent;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
 <h3 class="detail">Methods</h3>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><a name="GetResponse"></a><code>function <b>GetResponse</b>: TStream;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><a name="GetContentType"></a><code>function <b>GetContentType</b>: String;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -127,11 +159,19 @@
 <tr><td colspan="2">
 &nbsp;</td></tr>
 </table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><a name="SetContentType"></a><code>procedure <b>SetContentType</b>(const AValue: String);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
 <h3 class="detail">Properties</h3>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
-<td class="itemcode"><a name="ContentType"></a><code>property <b>ContentType</b> : String Read GetContentType Write SetContentType;</code></td>
+<td class="itemcode"><a name="ContentType"></a><code>property <b>ContentType</b> : String Read <a  href="cgiModules.TCGIDatamodule.html#GetContentType">GetContentType</a> Write <a  href="cgiModules.TCGIDatamodule.html#SetContentType">SetContentType</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -139,7 +179,7 @@
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
-<td class="itemcode"><a name="OnCGIRequest"></a><code>property <b>OnCGIRequest</b> : TNotifyEvent Read FOnCGIRequest Write FOnCGIRequest;</code></td>
+<td class="itemcode"><a name="OnCGIRequest"></a><code>property <b>OnCGIRequest</b> : TNotifyEvent Read <a  href="cgiModules.TCGIDatamodule.html#FOnCGIRequest">FOnCGIRequest</a> Write <a  href="cgiModules.TCGIDatamodule.html#FOnCGIRequest">FOnCGIRequest</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>

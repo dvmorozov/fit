@@ -12,7 +12,7 @@
 <a name="TSpecialCurveParameter"></a><h1 class="cio">Class TSpecialCurveParameter</h1>
 <table class="sections wide_list">
 <tr>
-<td><a class="section" href="#PasDoc-Description">Description</a></td><td><a class="section" href="#PasDoc-Hierarchy">Hierarchy</a></td><td>Fields</td><td><a class="section" href="#PasDoc-Methods">Methods</a></td><td><a class="section" href="#PasDoc-Properties">Properties</a></td></tr></table>
+<td><a class="section" href="#PasDoc-Description">Description</a></td><td><a class="section" href="#PasDoc-Hierarchy">Hierarchy</a></td><td><a class="section" href="#PasDoc-Fields">Fields</a></td><td><a class="section" href="#PasDoc-Methods">Methods</a></td><td><a class="section" href="#PasDoc-Properties">Properties</a></td></tr></table>
 <a name="PasDoc-Description"></a><h2 class="unit">Unit</h2>
 <p class="unitlink">
 <a  href="DataLoader.html">DataLoader</a></p>
@@ -23,6 +23,33 @@
 <a name="PasDoc-Hierarchy"></a><h2 class="hierarchy">Hierarchy</h2>
 <ul class="hierarchy"><li class="ancestor">TCollectionItem</li>
 <li class="thisitem">TSpecialCurveParameter</li></ul><h2 class="overview">Overview</h2>
+<a name="PasDoc-Fields"></a><h3 class="summary">Fields</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code><b><a  href="DataLoader.TSpecialCurveParameter.html#FName">FName</a></b>: string;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code><b><a  href="DataLoader.TSpecialCurveParameter.html#FSavedValue">FSavedValue</a></b>: Double;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code><b><a  href="DataLoader.TSpecialCurveParameter.html#FType">FType</a></b>: <a  href="DataLoader.html#TParameterType">TParameterType</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code><b><a  href="DataLoader.TSpecialCurveParameter.html#FValue">FValue</a></b>: Double;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code><b><a  href="DataLoader.TSpecialCurveParameter.html#FVariationDisabled">FVariationDisabled</a></b>: Boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code><b><a  href="DataLoader.TSpecialCurveParameter.html#FVariationStep">FVariationStep</a></b>: Double;</code></td>
+</tr>
+</table>
 <a name="PasDoc-Methods"></a><h3 class="summary">Methods</h3>
 <table class="summary wide_list">
 <tr class="list">
@@ -30,49 +57,114 @@
 <td class="itemcode"><code>constructor <b><a  href="DataLoader.TSpecialCurveParameter.html#Create">Create</a></b>(Collection: TCollection); override;</code></td>
 </tr>
 <tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>function <b><a  href="DataLoader.TSpecialCurveParameter.html#GetValue_">GetValue_</a></b>: string;</code></td>
+</tr>
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="DataLoader.TSpecialCurveParameter.html#CopyTo">CopyTo</a></b>(const Dest: <a  href="DataLoader.TSpecialCurveParameter.html">TSpecialCurveParameter</a>);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="DataLoader.TSpecialCurveParameter.html#SetValue_">SetValue_</a></b>(AValue: string);</code></td>
 </tr>
 </table>
 <a name="PasDoc-Properties"></a><h3 class="summary">Properties</h3>
 <table class="summary wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
-<td class="itemcode"><code>property <b><a  href="DataLoader.TSpecialCurveParameter.html#Name">Name</a></b>: string read FName write FName;</code></td>
+<td class="itemcode"><code>property <b><a  href="DataLoader.TSpecialCurveParameter.html#Name">Name</a></b>: string read <a  href="DataLoader.TSpecialCurveParameter.html#FName">FName</a> write <a  href="DataLoader.TSpecialCurveParameter.html#FName">FName</a>;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>property <b><a  href="DataLoader.TSpecialCurveParameter.html#SavedValue">SavedValue</a></b>: Double read FSavedValue write FSavedValue;</code></td>
+<td class="itemcode"><code>property <b><a  href="DataLoader.TSpecialCurveParameter.html#SavedValue">SavedValue</a></b>: Double read <a  href="DataLoader.TSpecialCurveParameter.html#FSavedValue">FSavedValue</a> write <a  href="DataLoader.TSpecialCurveParameter.html#FSavedValue">FSavedValue</a>;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
-<td class="itemcode"><code>property <b><a  href="DataLoader.TSpecialCurveParameter.html#Type_">Type_</a></b>: <a  href="DataLoader.html#TParameterType">TParameterType</a> read FType write FType;</code></td>
+<td class="itemcode"><code>property <b><a  href="DataLoader.TSpecialCurveParameter.html#Type_">Type_</a></b>: <a  href="DataLoader.html#TParameterType">TParameterType</a> read <a  href="DataLoader.TSpecialCurveParameter.html#FType">FType</a> write <a  href="DataLoader.TSpecialCurveParameter.html#FType">FType</a>;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>property <b><a  href="DataLoader.TSpecialCurveParameter.html#Value">Value</a></b>: Double read FValue write FValue;</code></td>
+<td class="itemcode"><code>property <b><a  href="DataLoader.TSpecialCurveParameter.html#Value">Value</a></b>: Double read <a  href="DataLoader.TSpecialCurveParameter.html#FValue">FValue</a> write <a  href="DataLoader.TSpecialCurveParameter.html#FValue">FValue</a>;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
-<td class="itemcode"><code>property <b><a  href="DataLoader.TSpecialCurveParameter.html#Value_">Value_</a></b>: string read GetValue_ write SetValue_;</code></td>
+<td class="itemcode"><code>property <b><a  href="DataLoader.TSpecialCurveParameter.html#Value_">Value_</a></b>: string read <a  href="DataLoader.TSpecialCurveParameter.html#GetValue_">GetValue_</a> write <a  href="DataLoader.TSpecialCurveParameter.html#SetValue_">SetValue_</a>;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
 <td class="itemcode"><code>property <b><a  href="DataLoader.TSpecialCurveParameter.html#VariationDisabled">VariationDisabled</a></b>: Boolean
-            read FVariationDisabled write FVariationDisabled;</code></td>
+            read <a  href="DataLoader.TSpecialCurveParameter.html#FVariationDisabled">FVariationDisabled</a> write <a  href="DataLoader.TSpecialCurveParameter.html#FVariationDisabled">FVariationDisabled</a>;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
 <td class="itemcode"><code>property <b><a  href="DataLoader.TSpecialCurveParameter.html#VariationStep">VariationStep</a></b>: Double
-            read FVariationStep write FVariationStep;</code></td>
+            read <a  href="DataLoader.TSpecialCurveParameter.html#FVariationStep">FVariationStep</a> write <a  href="DataLoader.TSpecialCurveParameter.html#FVariationStep">FVariationStep</a>;</code></td>
 </tr>
 </table>
 <h2 class="description">Description</h2>
+<h3 class="detail">Fields</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><a name="FName"></a><code><b>FName</b>: string;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><a name="FSavedValue"></a><code><b>FSavedValue</b>: Double;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><a name="FType"></a><code><b>FType</b>: <a  href="DataLoader.html#TParameterType">TParameterType</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><a name="FValue"></a><code><b>FValue</b>: Double;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><a name="FVariationDisabled"></a><code><b>FVariationDisabled</b>: Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><a name="FVariationStep"></a><code><b>FVariationStep</b>: Double;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
 <h3 class="detail">Methods</h3>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
 <td class="itemcode"><a name="Create"></a><code>constructor <b>Create</b>(Collection: TCollection); override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><a name="GetValue_"></a><code>function <b>GetValue_</b>: string;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -85,11 +177,19 @@
 <tr><td colspan="2">
 &nbsp;</td></tr>
 </table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><a name="SetValue_"></a><code>procedure <b>SetValue_</b>(AValue: string);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
 <h3 class="detail">Properties</h3>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
-<td class="itemcode"><a name="Name"></a><code>property <b>Name</b>: string read FName write FName;</code></td>
+<td class="itemcode"><a name="Name"></a><code>property <b>Name</b>: string read <a  href="DataLoader.TSpecialCurveParameter.html#FName">FName</a> write <a  href="DataLoader.TSpecialCurveParameter.html#FName">FName</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
@@ -99,7 +199,7 @@ Published for XML-serialization.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><a name="SavedValue"></a><code>property <b>SavedValue</b>: Double read FSavedValue write FSavedValue;</code></td>
+<td class="itemcode"><a name="SavedValue"></a><code>property <b>SavedValue</b>: Double read <a  href="DataLoader.TSpecialCurveParameter.html#FSavedValue">FSavedValue</a> write <a  href="DataLoader.TSpecialCurveParameter.html#FSavedValue">FSavedValue</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -107,7 +207,7 @@ Published for XML-serialization.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
-<td class="itemcode"><a name="Type_"></a><code>property <b>Type_</b>: <a  href="DataLoader.html#TParameterType">TParameterType</a> read FType write FType;</code></td>
+<td class="itemcode"><a name="Type_"></a><code>property <b>Type_</b>: <a  href="DataLoader.html#TParameterType">TParameterType</a> read <a  href="DataLoader.TSpecialCurveParameter.html#FType">FType</a> write <a  href="DataLoader.TSpecialCurveParameter.html#FType">FType</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -115,7 +215,7 @@ Published for XML-serialization.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><a name="Value"></a><code>property <b>Value</b>: Double read FValue write FValue;</code></td>
+<td class="itemcode"><a name="Value"></a><code>property <b>Value</b>: Double read <a  href="DataLoader.TSpecialCurveParameter.html#FValue">FValue</a> write <a  href="DataLoader.TSpecialCurveParameter.html#FValue">FValue</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -123,7 +223,7 @@ Published for XML-serialization.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
-<td class="itemcode"><a name="Value_"></a><code>property <b>Value_</b>: string read GetValue_ write SetValue_;</code></td>
+<td class="itemcode"><a name="Value_"></a><code>property <b>Value_</b>: string read <a  href="DataLoader.TSpecialCurveParameter.html#GetValue_">GetValue_</a> write <a  href="DataLoader.TSpecialCurveParameter.html#SetValue_">SetValue_</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
@@ -134,7 +234,7 @@ String because some problem with XML-serialization as Double.</p>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
 <td class="itemcode"><a name="VariationDisabled"></a><code>property <b>VariationDisabled</b>: Boolean
-            read FVariationDisabled write FVariationDisabled;</code></td>
+            read <a  href="DataLoader.TSpecialCurveParameter.html#FVariationDisabled">FVariationDisabled</a> write <a  href="DataLoader.TSpecialCurveParameter.html#FVariationDisabled">FVariationDisabled</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -143,7 +243,7 @@ String because some problem with XML-serialization as Double.</p>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
 <td class="itemcode"><a name="VariationStep"></a><code>property <b>VariationStep</b>: Double
-            read FVariationStep write FVariationStep;</code></td>
+            read <a  href="DataLoader.TSpecialCurveParameter.html#FVariationStep">FVariationStep</a> write <a  href="DataLoader.TSpecialCurveParameter.html#FVariationStep">FVariationStep</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>

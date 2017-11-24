@@ -47,6 +47,30 @@
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>class procedure <b><a  href="SelfSaved.TSelfSavedComponent.html#WriteProperties">WriteProperties</a></b>( const Writer: TWriter; const AnObject: <a  href="SelfSaved.TSelfSavedComponent.html">TSelfSavedComponent</a> ); virtual;</code></td>
 </tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="SelfSaved.TSelfSavedComponent.html#ReadData">ReadData</a></b>(Reader: TReader);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>class procedure <b><a  href="SelfSaved.TSelfSavedComponent.html#ReadInheritChain">ReadInheritChain</a></b>( const Reader: TReader; const AnObject: <a  href="SelfSaved.TSelfSavedComponent.html">TSelfSavedComponent</a> );</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>class procedure <b><a  href="SelfSaved.TSelfSavedComponent.html#ReadPropHeader">ReadPropHeader</a></b>(const Reader: TReader; out PropHeaderRec: <a  href="SelfSaved.TPropHeaderRec.html">TPropHeaderRec</a> );</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="SelfSaved.TSelfSavedComponent.html#WriteData">WriteData</a></b>(Writer: TWriter);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>class procedure <b><a  href="SelfSaved.TSelfSavedComponent.html#WriteInheritChain">WriteInheritChain</a></b>( const Writer: TWriter; const AnObject: <a  href="SelfSaved.TSelfSavedComponent.html">TSelfSavedComponent</a> ); virtual;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>class procedure <b><a  href="SelfSaved.TSelfSavedComponent.html#WritePropHeader">WritePropHeader</a></b>(const Writer: TWriter); virtual;</code></td>
+</tr>
 </table>
 <h2 class="description">Description</h2>
 <h3 class="detail">Methods</h3>
@@ -90,6 +114,60 @@
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><a name="WriteProperties"></a><code>class procedure <b>WriteProperties</b>( const Writer: TWriter; const AnObject: <a  href="SelfSaved.TSelfSavedComponent.html">TSelfSavedComponent</a> ); virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><a name="ReadData"></a><code>procedure <b>ReadData</b>(Reader: TReader);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+компонент, который умеет сохраняться в потоке, позволяя при этом реализовать добавление новых параметров и изменение порядка наследования без потери способности читать существующие файлы; запись (чтение) свойств класса начинаются со свойств класса последнего в цепи наследования функции записи/чтения сделаны классовыми для того, чтобы иметь возможность перемещаться по цепи наследования</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><a name="ReadInheritChain"></a><code>class procedure <b>ReadInheritChain</b>( const Reader: TReader; const AnObject: <a  href="SelfSaved.TSelfSavedComponent.html">TSelfSavedComponent</a> );</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+вызывает ф-ю чтения свойств цепи наследования, читая маркеры начала и конца данных</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><a name="ReadPropHeader"></a><code>class procedure <b>ReadPropHeader</b>(const Reader: TReader; out PropHeaderRec: <a  href="SelfSaved.TPropHeaderRec.html">TPropHeaderRec</a> );</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><a name="WriteData"></a><code>procedure <b>WriteData</b>(Writer: TWriter);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><a name="WriteInheritChain"></a><code>class procedure <b>WriteInheritChain</b>( const Writer: TWriter; const AnObject: <a  href="SelfSaved.TSelfSavedComponent.html">TSelfSavedComponent</a> ); virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+вызывает запись свойств класса, записывая маркеры начала и конца данных</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><a name="WritePropHeader"></a><code>class procedure <b>WritePropHeader</b>(const Writer: TWriter); virtual;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>

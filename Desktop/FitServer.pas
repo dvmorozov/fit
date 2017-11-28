@@ -189,70 +189,70 @@ type
 		
 		{ Calculates reference points for linear cut up the background. The points aren't arranged by X. }
         function FindBackgroundPoints(Data: TPointsSet): TPointsSet;
-        //  integriruet krivuyu s zadannymi predelami
-        //  i dobavlyaet znacheniya v spisok rezul'tatov
+		{ Integrates specimen curve and adds resulting value to the list of results. }
         procedure AddSpecimenToList(Points: TCurvePointsSet;
-            StartPointIndex,            //  indeksy nach. i kon. tochek, ot nih
-            StopPointIndex: LongInt     //  zavisyat granitsy pika v spiske
-                                        //  rezul'tatov
+			{ Indexes of start and end points defining boundaries of the peak. }
+            StartPointIndex,     
+            StopPointIndex: LongInt
             );
-        //  tochki pikov otdelyaet ot tochek fona i pomeschaet v rezul'tat
+		{ Searches for peak boundaries and returns its points. 
+		  Searches among points which do not belong to any other peak. }
         function FindPeaksInternal: TTitlePointsSet;
-        //  zapolnyaet spisok polozheniy pikov dlya avtomaticheskogo poiska
+		{ Fills the list of peak positions for automatic fit. }
         procedure FindPeakPositionsForAutoAlg;
         function Integrate(Points: TPointsSet;
             StartPointIndex, StopPointIndex: LongInt): Double;
         function IntegrateAll(Points: TPointsSet): Double;
-        //  lineyno vychitaet fon v SelectedArea i obnovlyaet SelectedArea
+		{ Linearly subtracts background in the SelectArea and recreates SelectArea. }
         //procedure SubtractBackground;
-        //  !!! vychislyaet faktor rashodimosti CalcProfile i SelectedArea
-        //  summirovaniem po vsem podzadacham !!!
+		{ Calculates the R-factor for CalcProfile and SelectArea by sum for all subtasks. }
         function GetRFactor: Double;
         function GetAbsRFactor: Double;
         function GetSqrRFactor: Double;
-        //  perenosit dannye iz zadannogo spiska v spisok vybrannoy oblasti
+		{ Copies data from given list to the list of selected interval. }
         procedure SelectAreaActual(
             Points: TPointsSet; StartPointIndex, StopPointIndex: LongInt);
         function CreateTaskObject: TFitTask; virtual;
-        //  esli intervaly ne byli zadany, to oni generiruyutsya avtomaticheski
+		{ Creates subtasks for selected intervals. If the intervals were not selected generates them automatically. }
         procedure CreateTasks;
         procedure InitTasks;
 
-        //  ===================== vspomogatel'nye metody =======================
+		{ Auxiliary methods. }
+		
         procedure CreateResultedProfile;
-        //  !!! ne budet pravil'no rabotat', esli oblasti perekryvayutsya !!!
+		{ Calculates profile containing differences between calculated and experimental data. 
+          In the calculation all the specimens are included. Will not work properly if specimen areas are overlapped. }
         procedure CreateDeltaProfile;
         procedure CreateResultedCurvesList;
-        //  tochki privyazki ne dolzhny sobirat'sya iz podzadach,
-        //  tak kak pri etom budut propadat' tochki ne voschedschie
-        //  v podzadachi, a eto mozhet ozadachivat' pol'zovatelya
+		{ Collects resulting set of curve positions. Points should not be collected from subtasks because
+          in this case part of points can be missed. This can confise the user. }
         //procedure CreateResultedCurvePositions;
-        //  probegaet spisok ekzemplyarov patterna i sozdaet
-        //  spisok parametrov ekzemplyarov patterna, dopolnyaya
-        //  vychislyaemymi parametrami
+		{ Iterates through list of pattern specimens and creates
+          common list of parameters of all the specimens complementing
+		  them with calculated parameters. }
         procedure CreateSpecimenListAlg;
-        //  vypolnyaet pereschet dlya vyvoda promezhutochnyh
-        //  rezul'tatov pol'zovatelyu
+		{ Prepares intermediate results for user. }
         procedure GoToReadyForFit;
 
-        //  vypolnyaet proverku vyrazheniya i zapoln. spisok parametrov
+		{ Checks expression and fills list of parameters. }
         procedure CreateParameters(ACurveExpr: string);
 
         function GetAllInitialized: Boolean;
-        //  !!! potok ne sozdaet, prosto sinhronno vypolnyaet
-        //  vyzovy metodov !!!
+		{ Does not really create any thread. Simply calls methods synchronously. }
         procedure RecreateMainCalcThread(
             ACurrentTask: TCurrentTask; ADoneProc: TDoneProc); virtual;
 
     public
         constructor Create(AOwner: TComponent); override;
         destructor Destroy; override;
-        //  interfeysnye metody, menyayuschie sostoyanie d. soobschat' ob etom
-        //  zagruzka dannyh profilya
+
+		{ Interface methods changing state shoud notify about it. }
+		
+		{ Set experimental profile data. }
         function SetProfilePointsSet(APointsSet: TTitlePointsSet): string;
-        //  vygruzka dannyh profilya
+		{ Get experimental profile data. }
         function GetProfilePointsSet: TPointsSet;
-        //  vozvraschaet dannye vybrannoy oblasti
+		{ Get data for the selected interval. }
         function GetSelectedArea: TPointsSet;
         
         function SetBackgroundPointsSet(ABackgroundPoints: TTitlePointsSet): string;
@@ -266,21 +266,21 @@ type
         
         procedure SetSpecialCurveParameters(
             ACurveExpr: string;
-            CP: Curve_parameters    //  ravenstvo nil oznachaet
-                                    //  pervonachal'nuyu initsializatsiyu
-            );
+			{ Equality to Nil means initialization. }
+            CP: Curve_parameters);
         function GetSpecialCurveParameters: Curve_parameters;
         
-        //  !!! server d. podderzhivat' primitivy dobavleniya/zameny tochki,
-        //  chtoby podderzhivat' tonkie klienty, kot. ne mogut hranit' ves'
-        //  nabor dannyh !!!
-        //  !!! vse vyzyvayut AddPoint !!!
+		{ The server should support primitives for adding and updating points
+          to support thin clients which can not store all set of data. }
+		{ All methods call AddPoint. }
+		
         procedure AddPointToData(XValue, YValue: Double);
         procedure AddPointToBackground(XValue, YValue: Double);
         procedure AddPointToRFactorIntervals(XValue, YValue: Double);
         procedure AddPointToCurvePositions(XValue, YValue: Double);
         
-        //  !!! vse vyzyvayut ReplacePoint !!!
+		{ All methods call ReplacePoint. }
+		
         procedure ReplacePointInData(
             PrevXValue, PrevYValue, NewXValue, NewYValue: Double);
         procedure ReplacePointInBackground(
@@ -290,13 +290,14 @@ type
         procedure ReplacePointInCurvePositions(
             PrevXValue, PrevYValue, NewXValue, NewYValue: Double);
 
-        //  vygruzka spiska parametrov krivyh
+		{ Returns list of parameters of all specimens. }
         function GetSpecimenList: TMSCRSpecimenList;
-        //  vygruzka spiska komponentov - naborov tochek krivyh
+		{ Returns list of components containing sets of points. }
         function GetCurvesList: TSelfCopiedCompList;
-        //  eti metody proveryayut dopustimost' sostoyaniya i
-        //  generiruyut isklyuchenie EUserException v sluchae
-        //  nedopustimogo sostoyaniya
+
+		{ These methods check validity of server state and 
+          throw EUserException in the case when state is invalid. }
+		
         function GetSpecimenCount: LongInt;
         function GetSpecimenPoints(SpecIndex: LongInt): TCurvePointsSet;
         function GetSpecimenParameterCount(SpecIndex: LongInt): LongInt;
@@ -308,30 +309,23 @@ type
         function GetCalcProfilePointsSet: TPointsSet;
         function GetDeltaProfilePointsSet: TPointsSet;
 
-        //  =============== asinhronnye (dlitel'nye) operatsii ==================
-        //??? poka vypolnyaetsya sinhronno - peredelat' na asinhronnuyu obrabotku
-        //  vozvraschaet soobschenie ob izmenenii sostoyaniya
+		{ Asynchronous long-term operations. }
+		{ Smoothes experimental data. Returns describing message. 
+		  TODO: so far is executed synchronously. Refactor to asynchronous processing. }
         function SmoothProfile: string;
-        //  vychitaet fon lineyno approksimiruya ego;
-        //  esli Auto = True, to tochki fona vybrannye ranee pol'zovatelem
-        //  (ili avtomaticheski) otbrasyvayutsya i opredelyayutsya zanovo, esli
-        //  False, to ispol'zuyutsya imeyuschiesya tochki;
-        //  metod m.b. kak interfeysnym, tak i vnutrennim
-        //  ??? peredelat' tak, chtoby pri vyzove kak interf.
-        //  pri AsyncOperation vydaval korrektnoe soobschenie
+		{ Subtracts the background by linear approximation. When Auto is True then
+          background points selected before (no matter by which way) are dropped out.
+          TODO: when it is called as interface method should return text message. }
         procedure SubtractAllBackground(Auto: Boolean);
-        //  podgonka krivyh polnost'yu vtomaticheski
+		{ Completely automatic procedure of finding model curves. }
         function DoAllAutomatically: string; virtual;
-        //  podgonka krivyh pri zadannyh dannyh (pervonachal'naya ili povtornaya)
-        //  sootvetstvuet MinimizeDifference
+		{ Performs model fitting (initial or subsequent). Corresponds to MinimizeDifference. }
         function FindGausses: string; virtual;
-        //  podgonka parametrov ekz. patterna bez pervonachal'noy
-        //  initsializatsii intervalov primeneniya
+		{ Performs model fitting without initialization of application intervals. }
         function FindGaussesAgain: string; virtual;
-        //  ischet nabor krivyh opisyvayuschiy profil' s zadannoy tochnost'yu
-        //  posledovatel'no umen'shaya kolichestvo krivyh (poluavtomaticheskaya
-        //  podgonka krivyh po zadannym dannym)
-        //  sootvetstvuet MinimizeNumberOfSpecimens
+		{ Search for model describing experimental data with given accuracy
+          by minimum number of specimens. Sequentially reducing the number of specimens.
+		  Corresponds to MinimizeNumberOfSpecimens. }
         function FindGaussesSequentially: string; virtual;
         //  ischet intervaly primeneniya ekzemplyarov patterna
         function FindPeakBounds: string; virtual;

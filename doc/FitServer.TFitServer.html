@@ -352,7 +352,7 @@ The component which implements all server logic. It divides the task of profile 
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#SetSpecialCurveParameters">SetSpecialCurveParameters</a></b>( ACurveExpr: string; CP: <a  href="DataLoader.Curve_parameters.html">Curve_parameters</a> );</code></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#SetSpecialCurveParameters">SetSpecialCurveParameters</a></b>( ACurveExpr: string; CP: <a  href="DataLoader.Curve_parameters.html">Curve_parameters</a>);</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
@@ -810,7 +810,7 @@ vozvraschaet priznak asinhr. operatsii</p>
 </tr>
 <tr><td colspan="2">
 <p>
-podgonka krivyh polnost'yu vtomaticheski</p>
+Completely automatic procedure of finding model curves.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -830,7 +830,7 @@ zapuskaet poisk tochek fona</p>
 </tr>
 <tr><td colspan="2">
 <p>
-podgonka krivyh pri zadannyh dannyh (pervonachal'naya ili povtornaya) sootvetstvuet MinimizeDifference</p>
+Performs model <a class="normal" href="fitting.html">fitting</a> (initial or subsequent). Corresponds to MinimizeDifference.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -840,7 +840,7 @@ podgonka krivyh pri zadannyh dannyh (pervonachal'naya ili povtornaya) sootvetstv
 </tr>
 <tr><td colspan="2">
 <p>
-podgonka parametrov ekz. patterna bez pervonachal'noy initsializatsii intervalov primeneniya</p>
+Performs model <a class="normal" href="fitting.html">fitting</a> without initialization of <a class="normal" href="cgiModules.html#Application">application</a> intervals.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -850,7 +850,7 @@ podgonka parametrov ekz. patterna bez pervonachal'noy initsializatsii intervalov
 </tr>
 <tr><td colspan="2">
 <p>
-ischet nabor krivyh opisyvayuschiy profil' s zadannoy tochnost'yu posledovatel'no umen'shaya kolichestvo krivyh (poluavtomaticheskaya podgonka krivyh po zadannym dannym) sootvetstvuet MinimizeNumberOfSpecimens</p>
+Search for model describing experimental <a class="normal" href="data.html">data</a> with given accuracy by minimum number of specimens. Sequentially reducing the number of specimens. Corresponds to MinimizeNumberOfSpecimens.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -920,7 +920,7 @@ ischet polozheniya pikov (tochek dlya raspolozheniya krivyh)</p>
 </tr>
 <tr><td colspan="2">
 <p>
-vygruzka spiska komponentov - naborov tochek krivyh</p>
+Returns list of components containing sets of points.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -938,7 +938,7 @@ vygruzka spiska komponentov - naborov tochek krivyh</p>
 </tr>
 <tr><td colspan="2">
 <p>
-vygruzka dannyh profilya</p>
+Get experimental profile <a class="normal" href="data.html">data</a>.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -964,7 +964,7 @@ vygruzka dannyh profilya</p>
 </tr>
 <tr><td colspan="2">
 <p>
-vozvraschaet dannye vybrannoy oblasti</p>
+Get <a class="normal" href="data.html">data</a> for the selected interval.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -982,7 +982,7 @@ vozvraschaet dannye vybrannoy oblasti</p>
 </tr>
 <tr><td colspan="2">
 <p>
-eti metody proveryayut dopustimost' sostoyaniya i generiruyut isklyuchenie EUserException v sluchae nedopustimogo sostoyaniya</p>
+These methods check validity of server <a class="normal" href="FitServer.TFitServer.html#State">state</a> and throw EUserException in the case when <a class="normal" href="FitServer.TFitServer.html#State">state</a> is invalid.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -992,7 +992,7 @@ eti metody proveryayut dopustimost' sostoyaniya i generiruyut isklyuchenie EUser
 </tr>
 <tr><td colspan="2">
 <p>
-vygruzka spiska parametrov krivyh</p>
+Returns list of parameters of all specimens.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1060,7 +1060,7 @@ vygruzka spiska parametrov krivyh</p>
 </tr>
 <tr><td colspan="2">
 <p>
-interfeysnye metody, menyayuschie sostoyanie d. soobschat' ob etom zagruzka dannyh profilya</p>
+Set experimental profile <a class="normal" href="data.html">data</a>.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1078,7 +1078,7 @@ interfeysnye metody, menyayuschie sostoyanie d. soobschat' ob etom zagruzka dann
 </tr>
 <tr><td colspan="2">
 <p>
-=============== asinhronnye (dlitel'nye) operatsii ================== ??? poka vypolnyaetsya sinhronno - peredelat' na asinhronnuyu obrabotku vozvraschaet soobschenie ob izmenenii sostoyaniya</p>
+Smoothes experimental <a class="normal" href="data.html">data</a>. Returns describing message. TODO: so far is executed synchronously. Refactor to asynchronous processing.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1106,7 +1106,7 @@ Calculates reference points for linear cut up the <a class="normal" href="backgr
 </tr>
 <tr><td colspan="2">
 <p>
-tochki pikov otdelyaet ot tochek fona i pomeschaet v rezul'tat</p>
+Searches for peak boundaries and returns its points. Searches among points which do not belong to any other peak.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1132,7 +1132,7 @@ tochki pikov otdelyaet ot tochek fona i pomeschaet v rezul'tat</p>
 </tr>
 <tr><td colspan="2">
 <p>
-lineyno vychitaet fon v <a class="normal" href="FitServer.TFitServer.html#SelectedArea">SelectedArea</a> i obnovlyaet <a class="normal" href="FitServer.TFitServer.html#SelectedArea">SelectedArea</a> procedure SubtractBackground; !!! vychislyaet faktor rashodimosti <a class="normal" href="FitServer.TFitServer.html#CalcProfile">CalcProfile</a> i <a class="normal" href="FitServer.TFitServer.html#SelectedArea">SelectedArea</a> summirovaniem po vsem podzadacham !!!</p>
+Calculates the R-factor for <a class="normal" href="FitServer.TFitServer.html#CalcProfile">CalcProfile</a> and <a class="normal" href="FitServer.TFitServer.html#SelectArea">SelectArea</a> by sum for all subtasks.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1192,7 +1192,7 @@ sinhronnoe preryvanie dlitel'noy operatsii bez vyzova protsedury zaversheniya</p
 </tr>
 <tr><td colspan="2">
 <p>
-!!! server d. podderzhivat' primitivy dobavleniya/zameny tochki, chtoby podderzhivat' tonkie klienty, kot. ne mogut hranit' ves' nabor dannyh !!! !!! vse vyzyvayut <a class="normal" href="FitServer.TFitServer.html#AddPoint">AddPoint</a> !!!</p>
+All methods call <a class="normal" href="FitServer.TFitServer.html#AddPoint">AddPoint</a>.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1244,7 +1244,7 @@ opredelyaet nachal'noe i konechnoe polozhenie dlya kazhdoy krivoy v sootvetstvii
 </tr>
 <tr><td colspan="2">
 <p>
-!!! vse vyzyvayut ReplacePoint !!!</p>
+All methods call ReplacePoint.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1258,7 +1258,7 @@ opredelyaet nachal'noe i konechnoe polozhenie dlya kazhdoy krivoy v sootvetstvii
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><a name="SetSpecialCurveParameters"></a><code>procedure <b>SetSpecialCurveParameters</b>( ACurveExpr: string; CP: <a  href="DataLoader.Curve_parameters.html">Curve_parameters</a> );</code></td>
+<td class="itemcode"><a name="SetSpecialCurveParameters"></a><code>procedure <b>SetSpecialCurveParameters</b>( ACurveExpr: string; CP: <a  href="DataLoader.Curve_parameters.html">Curve_parameters</a>);</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -1288,7 +1288,7 @@ opredelyaet nachal'noe i konechnoe polozhenie dlya kazhdoy krivoy v sootvetstvii
 </tr>
 <tr><td colspan="2">
 <p>
-vychitaet fon lineyno approksimiruya ego; esli Auto = True, to tochki fona vybrannye ranee pol'zovatelem (ili avtomaticheski) otbrasyvayutsya i opredelyayutsya zanovo, esli False, to ispol'zuyutsya imeyuschiesya tochki; metod m.b. kak interfeysnym, tak i vnutrennim ??? peredelat' tak, chtoby pri vyzove kak interf. pri AsyncOperation vydaval korrektnoe soobschenie</p>
+Subtracts the <a class="normal" href="background.html">background</a> by linear approximation. When Auto is True then <a class="normal" href="background.html">background</a> points selected before (no matter by which way) are dropped out. TODO: when it is called as interface method should return text message.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1308,7 +1308,7 @@ Adds new point to the given point set. Second call with the same coordinates rem
 </tr>
 <tr><td colspan="2">
 <p>
-integriruet krivuyu s zadannymi predelami i dobavlyaet znacheniya v spisok rezul'tatov</p>
+Integrates specimen curve and adds resulting value to the list of results.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1328,7 +1328,7 @@ Selects all points as specimen positions.</p>
 </tr>
 <tr><td colspan="2">
 <p>
-!!! ne budet pravil'no rabotat', esli oblasti perekryvayutsya !!!</p>
+Calculates profile containing differences between calculated and experimental <a class="normal" href="data.html">data</a>. In the calculation all the specimens are included. Will not work properly if specimen areas are overlapped.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1338,7 +1338,7 @@ Selects all points as specimen positions.</p>
 </tr>
 <tr><td colspan="2">
 <p>
-vypolnyaet proverku vyrazheniya i zapoln. spisok parametrov</p>
+Checks expression and fills list of parameters.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1356,7 +1356,7 @@ vypolnyaet proverku vyrazheniya i zapoln. spisok parametrov</p>
 </tr>
 <tr><td colspan="2">
 <p>
-===================== vspomogatel'nye metody =======================</p>
+Auxiliary methods.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1366,7 +1366,7 @@ vypolnyaet proverku vyrazheniya i zapoln. spisok parametrov</p>
 </tr>
 <tr><td colspan="2">
 <p>
-tochki privyazki ne dolzhny sobirat'sya iz podzadach, tak kak pri etom budut propadat' tochki ne voschedschie v podzadachi, a eto mozhet ozadachivat' pol'zovatelya procedure CreateResultedCurvePositions; probegaet spisok ekzemplyarov patterna i sozdaet spisok parametrov ekzemplyarov patterna, dopolnyaya vychislyaemymi parametrami</p>
+Iterates through list of <a class="normal" href="pattern.html">pattern</a> specimens and creates common list of parameters of all the specimens complementing them with calculated parameters.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1376,7 +1376,7 @@ tochki privyazki ne dolzhny sobirat'sya iz podzadach, tak kak pri etom budut pro
 </tr>
 <tr><td colspan="2">
 <p>
-esli intervaly ne byli zadany, to oni generiruyutsya avtomaticheski</p>
+Creates subtasks for selected intervals. If the intervals were not selected generates them automatically.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1484,7 +1484,7 @@ Calculates peak positions which will be taken as specimen positions.</p>
 </tr>
 <tr><td colspan="2">
 <p>
-zapolnyaet spisok polozheniy pikov dlya avtomaticheskogo poiska</p>
+Fills the list of peak positions for automatic fit.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1494,7 +1494,7 @@ zapolnyaet spisok polozheniy pikov dlya avtomaticheskogo poiska</p>
 </tr>
 <tr><td colspan="2">
 <p>
-vypolnyaet pereschet dlya vyvoda promezhutochnyh rezul'tatov pol'zovatelyu</p>
+Prepares intermediate results for user.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1512,7 +1512,7 @@ vypolnyaet pereschet dlya vyvoda promezhutochnyh rezul'tatov pol'zovatelyu</p>
 </tr>
 <tr><td colspan="2">
 <p>
-!!! potok ne sozdaet, prosto sinhronno vypolnyaet vyzovy metodov !!!</p>
+Does not really <a class="normal" href="FitServer.TFitServer.html#Create">create</a> any thread. Simply calls methods synchronously.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1522,7 +1522,7 @@ vypolnyaet pereschet dlya vyvoda promezhutochnyh rezul'tatov pol'zovatelyu</p>
 </tr>
 <tr><td colspan="2">
 <p>
-perenosit dannye iz zadannogo spiska v spisok vybrannoy oblasti</p>
+Copies <a class="normal" href="data.html">data</a> from given list to the list of selected interval.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">

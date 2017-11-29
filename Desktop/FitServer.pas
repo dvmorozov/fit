@@ -327,39 +327,41 @@ type
           by minimum number of specimens. Sequentially reducing the number of specimens.
 		  Corresponds to MinimizeNumberOfSpecimens. }
         function FindGaussesSequentially: string; virtual;
-        //  ischet intervaly primeneniya ekzemplyarov patterna
+		{ Searches for intervals of application of pattern specimens. }
         function FindPeakBounds: string; virtual;
-        //  zapuskaet poisk tochek fona
+		{ Searches for background points. }
         function FindBackPoints: string; virtual;
-        //  ischet polozheniya pikov (tochek dlya raspolozheniya krivyh)
+		{ Searches for peak positions (positions of specimens). }
         function FindPeakPositions: string; virtual;
         function AllPointsAsPeakPositions: string; virtual;
-        //  ======================= komandy upravleniya =========================
-        //  asinhronnaya ostanovka dlitel'noy operatsii
-        //  s vyzovom protsedury zaversheniya
+		
+		{ Control operations. }
+
+		{ Stops long-term operation asynchronously. Calls termination procedure. }
         procedure StopAsyncOper; virtual; abstract;
-        //  sinhronnoe preryvanie dlitel'noy operatsii
-        //  bez vyzova protsedury zaversheniya
+		{ Stops long-term operation synchronously without calling termination procedure. }
         procedure AbortAsyncOper; virtual; abstract;
-        //  vozvraschaet priznak asinhr. operatsii
+		{ Returns True in asynchronous operation mode. }
         function AsyncOper: Boolean;
         function GetCalcTimeStr: string;
         function GetRFactorStr: string;
         function GetAbsRFactorStr: string;
         function GetSqrRFactorStr: string;
-        //  ======================= sinhronnye komandy =========================
-        //  perenosit chast' dannyh iz dannyh profilya
-        //  v spisok dannyh vybrannoy oblasti
+        
+		{ Synchronous operations. }
+		
+		{ Transfers part of profile data to the list of selected interval. }
         function SelectArea(StartPointIndex, StopPointIndex: LongInt): string;
         function ReturnToTotalProfile: string;
-        //  opredelyaet nachal'noe i konechnoe polozhenie
-        //  dlya kazhdoy krivoy v sootvetstvii so znacheniem
-        //  poroga, integriruet i perenosit v spisok rezul'tatov
+		{ Defines starting and finishing point for each curve (specimen), 
+          integrates it and puts parameters into resulting list. }
         procedure CreateSpecimenList;
 
         //  polya, ustanovka/chtenie kotoryh ne svyazany s suschestvennoy
         //  dlya aktora (imeyuschey suschestvennye pobochnye effekty) ili
         //  dlitel'noy aktivnost'yu luchshe sdelat' v vide svoystv
+		{ The fields setting and getting of which are not related with sensitive 
+		  for the actor or long-term activity are better implemented by properties.  }
         
         //  maksimal'no dopustimoe znachenie R-faktora
         property MaxRFactor: Double read FMaxRFactor write SetMaxRFactor;

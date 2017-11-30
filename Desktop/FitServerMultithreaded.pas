@@ -1,3 +1,15 @@
+{
+This software is distributed under GPL
+in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
+
+@abstract(Contains definition of multithreaded version of the server component.)
+
+@author(Dmitry Morozov dvmorozov@hotmail.com, 
+LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
+Facebook https://www.facebook.com/profile.php?id=100004082021870)
+}
+
 unit FitServerMultithreaded;
 
 //{$mode objfpc}{$H+}
@@ -9,12 +21,13 @@ uses Classes, SysUtils, FitTask, FitTaskWithThread, FitServerWithThread,
     FitServer, MyExceptions, CommonTypes;
 
 type
-    //  sobstvennyy potok nuzhen dlya zapuska
+    { Executes algorithms in separate threads. }
     TFitServerMultithreaded = class(TFitServerWithThread)
     protected
         function CreateTaskObject: TFitTask; override;
-        //  !!! vypolnyayutsya v sobstvennom potoke,
-        //  ne vyzyvayut inherited !!!
+
+		{ Algorithms are executed in separate threads. }
+		
         procedure FindGaussesSequentiallyAlg; override;
         procedure FindGaussesAlg; override;
         procedure FindGaussesAgainAlg; override;

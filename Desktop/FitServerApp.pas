@@ -1,3 +1,15 @@
+{
+This software is distributed under GPL
+in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
+
+@abstract(Defines the server application class which is basic unit of interaction with client.)
+
+@author(Dmitry Morozov dvmorozov@hotmail.com, 
+LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
+Facebook https://www.facebook.com/profile.php?id=100004082021870)
+}
+
 unit FitServerApp;
 
 //{$mode objfpc}{$H+}
@@ -9,7 +21,7 @@ uses Classes, SysUtils,
 {$IFDEF FIT}
      FitServerProxy,
 {$ELSE}
-     //  sborka servera - mozhno ne ispol'zovat' SERVER
+     //  Server build. Key SERVER is not necessary.
      PointSetViewer,
 {$ENDIF}
      FitServerStub, FitServer,
@@ -19,9 +31,7 @@ uses Classes, SysUtils,
 {$ENDIF}
      Forms;
 type
-    //  klass servernogo prilozheniya;
-    //  v servere etot klass sluzhit osnovnoy edinitsey
-    //  raboty s klientom (eto problema - the problem)
+	{ Class of server application. This class is basic unit of interaction with client. }
     TFitServerApp = class(TComponent)
     protected
 {$IFDEF FIT}

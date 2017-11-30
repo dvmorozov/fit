@@ -357,27 +357,24 @@ type
           integrates it and puts parameters into resulting list. }
         procedure CreateSpecimenList;
 
-        //  polya, ustanovka/chtenie kotoryh ne svyazany s suschestvennoy
-        //  dlya aktora (imeyuschey suschestvennye pobochnye effekty) ili
-        //  dlitel'noy aktivnost'yu luchshe sdelat' v vide svoystv
 		{ The fields setting and getting of which are not related with sensitive 
 		  for the actor or long-term activity are better implemented by properties.  }
         
-        //  maksimal'no dopustimoe znachenie R-faktora
+		{ Maximum allowed value of R-factor. }
         property MaxRFactor: Double read FMaxRFactor write SetMaxRFactor;
-        //  znamenatel' koeffitsienta, vyrazhayuschego otnoshenie
-        //  fona k maksimal'noy intensivnosti
+		{ Denominator of ratio of background to maximal intensity. }
         property BackFactor: Double read FBackFactor write FBackFactor;
-        //  porog dlya opredeleniya granits krivoy; predpolagaetsya, chto fon otsechen;
-        //  granitsy krivoy opredelyayutsya po prevysheniyu zadannogo otkloneniya ot nulya
-        //  etim velichiny zhe porogom isklyuchayutsya krivye slishkom malen'koy
+		{ The threshold for determination of curve (specimen) boundaries. It is supposed
+          that background was cut out. The curve boundaries are defined by exceeding 
+          the threshold by curve function. The same threshold removes instances with
+          too small amplitude. }
         property CurveThresh: Double read FCurveThresh write SetCurveThresh;
         property CurveType: TCurveType read FCurveType write SetCurveType;
         property State: TFitServerState read FState;
         property WaveLength: Double read FWaveLength write SetWaveLength;
         property SelectedAreaMode: Boolean read FSelectedAreaMode;
 {$IFDEF FIT}
-        //  dopuskaetsya ravenstvo nil
+		{ This can be equal to Nil. }
         property FitProxy: TFitServerProxy read FFitProxy write FFitProxy;
 {$ENDIF}
     end;

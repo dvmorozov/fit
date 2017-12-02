@@ -1,3 +1,15 @@
+{
+This software is distributed under GPL
+in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
+
+@abstract(Contains definition of stub class receiving messages from client.)
+
+@author(Dmitry Morozov dvmorozov@hotmail.com, 
+LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
+Facebook https://www.facebook.com/profile.php?id=100004082021870)
+}
+
 unit FitServerStub;
 
 //{$mode objfpc}{$H+}
@@ -9,15 +21,14 @@ uses Classes, SysUtils, FitServer, CommonTypes, DataLoader, SelfCopied,
     MSCRDataClasses, MyExceptions;
 
 type
-    //  poskol'ku cherez set' isklyucheniya peredat' nel'zya,
-    //  to metody stub dlya dostupa k serveru d. vozvraschat'
-    //  kod oshibki, kot. budet preobrazovan i peredan po seti
+    { For transmission through network class converts exceptions into error codes. }
     TFitServerStub = class(TObject)
     protected
         FServer: TFitServer;
         FRecreateServer: procedure of object;
     public
-        //  ================= izvlechenie/ustanovka poley servera ===============
+        { Getting / setting attributes of the server. }
+        
         function GetMaxRFactor: Double;
         procedure SetMaxRFactor(AMaxRFactor: Double);
         function GetBackFactor: Double;
@@ -31,10 +42,9 @@ type
         procedure SetWaveLength(AWaveLength: Double);
         function GetSelectedAreaMode: Boolean;
 
-        //  ================ perehodniki k metodam servera =====================
-        //  !!! ne dolzhny vydavat' isklyucheniy !!!
-        //  vozvraschayut kod zaversheniya: 0-uspeshno, -1-nedopustimoe sostoyanie,
-        //  -2-fatal'naya oshibka
+        { Wrappers to server methods. They should not throw exceptions. 
+          Return codes: 0 - success, -1 - inadmissible state, -2 - fatal error. }
+          
         function SmoothProfile(var ErrMsg: string): LongInt;
         function SubtractAllBackground(
             Auto: Boolean; var ErrMsg: string): LongInt;
@@ -59,9 +69,9 @@ type
         function ReturnToTotalProfile(var ErrMsg: string): LongInt;
         function CreateSpecimenList(var ErrMsg: string): LongInt;
 
-        //  =================== zagruzka dannyh ================================
-        //  !!! metody Set... sozdayut novyy ob'ekt, ob osvobozhdenii kot.
-        //  dolzhen zabotit'sya server !!!
+        { Data setting. Set methods create new objects. The responsibility
+          to free them is put on server. }
+        
         function SetProfilePointsSet(
             APointsSet: TTitlePointsSet; var ErrMsg: string): LongInt;
         function SetBackgroundPointsSet(
@@ -72,8 +82,8 @@ type
             ARFactorIntervals: TPointsSet; var ErrMsg: string): LongInt;
         function SetSpecialCurveParameters(
             ACurveExpr: string;
-            CP: Curve_parameters;   //  ravenstvo nil oznachaet
-                                    //  pervonachal'nuyu initsializatsiyu
+            { Equality to Nil means initialization. }
+            CP: Curve_parameters;
             var ErrMsg: string
             ): LongInt;
             
@@ -95,7 +105,8 @@ type
         function ReplacePointInCurvePositions(PrevXValue, PrevYValue,
             NewXValue, NewYValue: Double; var ErrMsg: string): LongInt;
 
-        //  ===================== vygruzka dannyh ==============================
+        { Data getting. }
+        
         function GetProfilePointsSet(var Points: TPointsSet;
             var ErrMsg: string): LongInt;
         function GetSelectedArea(var Points: TPointsSet;
@@ -108,15 +119,16 @@ type
             var ErrMsg: string): LongInt;
         function GetSpecialCurveParameters(var CP: Curve_parameters; var
             ErrMsg: string): LongInt;
-        //  vygruzka spiska parametrov krivyh
+        { Returns list of curve (specimen) parameters. }
         function GetSpecimenList(var Points: TMSCRSpecimenList;
             var ErrMsg: string): LongInt;
 //{$IFDEF FIT}
-        //  vygruzka spiska komponentov - naborov tochek krivyh
+        { Returns list of components containing points of curves (specimens). }
         function GetCurvesList(var Points: TSelfCopiedCompList;
             var ErrMsg: string): LongInt;
 //{$ELSE}
-        //  uproschennyi sposob dlya peredachi cherez set'
+        { Simplified way of transmission via network. }
+        
         function GetSpecimenCount(
             var Count: LongInt; var ErrMsg: string): LongInt;
         function GetSpecimenPoints(SpecIndex: LongInt;
@@ -134,9 +146,7 @@ type
         function GetDeltaProfilePointsSet(var Points: TPointsSet;
             var ErrMsg: string): LongInt;
 
-        //  =============== perehodniki k polyam servera ========================
-        //  eti svoistva ne ispol'zuyutsya, potomu chto WSDL
-        //  ne podderzhivaet svoistva
+        { Wrappers to server attributes. WSDL does not support properties. }
         //property MaxRFactor: Double read GetMaxRFactor write SetMaxRFactor;
         //property BackFactor: Double read GetBackFactor write SetBackFactor;
         //property CurveThresh: Double read GetCurveThresh write SetCurveThresh;

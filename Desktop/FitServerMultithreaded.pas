@@ -26,8 +26,8 @@ type
     protected
         function CreateTaskObject: TFitTask; override;
 
-		{ Algorithms are executed in separate threads. }
-		
+        { Algorithms are executed in separate threads. }
+        
         procedure FindGaussesSequentiallyAlg; override;
         procedure FindGaussesAlg; override;
         procedure FindGaussesAgainAlg; override;

@@ -1,3 +1,14 @@
+{
+This software is distributed under GPL
+in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
+
+@abstract(Contains definition of proxy class transmitting messages from server back to client.)
+
+@author(Dmitry Morozov dvmorozov@hotmail.com, 
+LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
+Facebook https://www.facebook.com/profile.php?id=100004082021870)
+}
 
 unit FitServerProxy;
 
@@ -19,8 +30,7 @@ type
         procedure FindPeakBoundsDone;
         procedure FindBackPointsDone;
         procedure FindPeakPositionsDone;
-        //  pryamoy ukazatel', poka prilozheniya ne razdeleny;
-        //  ne dopuskaetsya ravenstvo nil
+        { Pointer to the client part receiving messages. }
         property FitStub: TFitClientStub read FFitStub write FFitStub;
     end;
 

@@ -1,3 +1,14 @@
+{
+This software is distributed under GPL
+in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
+
+@abstract(Contains definition of server component performing long-term operation in separate thread.)
+
+@author(Dmitry Morozov dvmorozov@hotmail.com, 
+LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
+Facebook https://www.facebook.com/profile.php?id=100004082021870)
+}
 unit FitServerWithThread;
 
 //{$mode objfpc}{$H+}
@@ -9,21 +20,18 @@ uses Classes, SysUtils, FitServer, CommonTypes, MainCalcThread, MyExceptions,
     FitTask;
 
 type
+	{ The server component performing long-term operation in separate thread. }
     TFitServerWithThread = class(TFitServer)
     protected
-        //  uk-l' na potok vypolnyayuschiy dlitel'nyy metod dannogo komponenta
-        //  dlya vyzova metoda sinhronizatsii s osnovnym potokom programmy;
-        //  !!! esli etot uk-l' ne raven nil, to metody otobrazheniya vyzyvayutsya
-        //  sinhronno, potomu chto poka ne predusmotreno situatsiy kogda metody
-        //  otobrazheniya mogut vyzyvat'sya iz osn. potoka programmy v to vremya
-        //  kak vypolnyaetsya zadacha v dopolnitel'nom potoke; sootvetstvuyuschie
-        //  el-ty menyu d.b. zaprescheny !!!
+		{ Pointer to the thread performing long-term method of the component. 
+          It is used for synchronization with main thread of the application.
+		  If this pointer is not Nil then displaying methods are called synchronously. }
         MainCalcThread: TMainCalcThread;
 
         procedure RecreateMainCalcThread(
             ACurrentTask: TCurrentTask; ADoneProc: TDoneProc); override;
-        //  ozhidaet zaversheniya vypolneniya potoka;
-        //  nel'zya vyzyvat' iz sinhronizovannogo metoda - inache deadlock
+		{ Waits for completion of the thread. Do not call from synchonized method - 
+		  this will result in deadlock. }
         procedure DestroyMainCalcThread;
         
         function CreateTaskObject: TFitTask; override;
@@ -31,12 +39,11 @@ type
     public
         destructor Destroy; override;
         
-        //  ======================= komandy upravleniya =========================
-        //  asinhronnaya ostanovka dlitel'noy operatsii
-        //  s vyzovom protsedury zaversheniya
+		{ Control commands. }
+
+		{ Asynchronous termination of long-term operation with calling termination method. }
         procedure StopAsyncOper; override;
-        //  sinhronnoe preryvanie dlitel'noy operatsii
-        //  bez vyzova protsedury zaversheniya
+		{ Synchronous termination of long-term operation without calling termination method. }
         procedure AbortAsyncOper; override;
     end;
 

@@ -20,8 +20,8 @@
 <p class="declaration">
 <code>type TFitServerWithThread = class(<a class="normal" href="FitServer.TFitServer.html">TFitServer</a>)</code></p>
 <h2 class="description">Description</h2>
-<div class="nodescription">no description available, TFitServer description follows</div><p>
-The component which implements all server logic. It divides the task of profile <a class="normal" href="fitting.html">fitting</a> on a few subtasks of <a class="normal" href="fitting.html">fitting</a> on intervals. The intervals should be defined before manually or automatically. All interface methods should allow calling in arbitrary <a class="normal" href="FitServer.TFitServer.html#State">state</a>, this should not be considered as inadmissible situation, but corresponding <a class="normal" href="error.html">error</a> code should be returned. In <a class="normal" href="fitting.html">fitting</a> knowledge of <a class="normal" href="FitServer.TFitServer.html#WaveLength">wavelength</a> is not required. This is why all components <a class="normal" href="DataLoader.TNeutronPointsSet.html">TNeutronPointsSet</a> were changed on <a class="normal" href="DataLoader.TPointsSet.html">TPointsSet</a>. This also allows to abstract from tasks of neutron diffraction and to come to tasks from arbitrary field in which <a class="normal" href="data.html">data</a> have form of profile. It is impossible simply to replace <a class="normal" href="DataLoader.TNeutronPointsSet.html">TNeutronPointsSet</a> on <a class="normal" href="DataLoader.TPointsSet.html">TPointsSet</a> because at the server side methods of <a class="normal" href="PointSetViewer.TFitViewer.html">TFitViewer</a> are called which require <a class="normal" href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>. Moreover graphics is still implemented at server side. This requires usage of <a class="normal" href="DataLoader.TNeutronPointsSet.html">TNeutronPointsSet</a> which supports argument recalculation. Interface methods results shows is requested operation allowed or not. Instead of EAssertionFailed the EUserException is used because it is impossible to guarantee that exception will not be thrown from library. This is acceptable only for classes which process user commands. Rest of the classes should use EAssertionFailed in the case of inadmissible <a class="normal" href="FitServer.TFitServer.html#State">state</a>. Boundary class shoud interpret such exception as fatal <a class="normal" href="error.html">error</a> but EUserException as <a class="normal" href="FitServer.TFitServer.html#State">state</a> errors. This implementation performs all operations in the thread of caller. It should store all the <a class="normal" href="data.html">data</a> necessary for operations including selected intervals because client can be unable to store <a class="normal" href="data.html">data</a>.</p>
+<p>
+The server component performing long-term operation in separate thread.</p>
 <a name="PasDoc-Hierarchy"></a><h2 class="hierarchy">Hierarchy</h2>
 <ul class="hierarchy"><li class="ancestor">TComponent</li>
 <li class="ancestor"><a class="normal" href="FitServer.TFitServer.html">TFitServer</a></li>
@@ -69,7 +69,7 @@ The component which implements all server logic. It divides the task of profile 
 </tr>
 <tr><td colspan="2">
 <p>
-uk-l' na potok vypolnyayuschiy dlitel'nyy metod dannogo komponenta dlya vyzova metoda sinhronizatsii s osnovnym potokom programmy; !!! esli etot uk-l' ne raven nil, to metody otobrazheniya vyzyvayutsya sinhronno, potomu chto poka ne predusmotreno situatsiy kogda metody otobrazheniya mogut vyzyvat'sya iz osn. potoka programmy v to vremya kak vypolnyaetsya zadacha v dopolnitel'nom potoke; sootvetstvuyuschie el-ty menyu d.b. zaprescheny !!!</p>
+Pointer to the thread performing long-term method of the component. It is used for synchronization with <a class="normal" href="Main.html">main</a> thread of the <a class="normal" href="cgiModules.html#Application">application</a>. If this pointer is not Nil then displaying methods are called synchronously.</p>
 </td></tr>
 </table>
 <h3 class="detail">Methods</h3>
@@ -96,7 +96,7 @@ uk-l' na potok vypolnyayuschiy dlitel'nyy metod dannogo komponenta dlya vyzova m
 </tr>
 <tr><td colspan="2">
 <p>
-sinhronnoe preryvanie dlitel'noy operatsii bez vyzova protsedury zaversheniya</p>
+Synchronous termination of long-term operation without calling termination method.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -106,7 +106,7 @@ sinhronnoe preryvanie dlitel'noy operatsii bez vyzova protsedury zaversheniya</p
 </tr>
 <tr><td colspan="2">
 <p>
-======================= komandy upravleniya ========================= asinhronnaya ostanovka dlitel'noy operatsii s vyzovom protsedury zaversheniya</p>
+Asynchronous termination of long-term operation with calling termination method.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -116,7 +116,7 @@ sinhronnoe preryvanie dlitel'noy operatsii bez vyzova protsedury zaversheniya</p
 </tr>
 <tr><td colspan="2">
 <p>
-ozhidaet zaversheniya vypolneniya potoka; nel'zya vyzyvat' iz sinhronizovannogo metoda - inache deadlock</p>
+Waits for completion of the thread. Do not call from synchonized method - this will result in deadlock.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">

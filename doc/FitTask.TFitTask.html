@@ -21,7 +21,7 @@
 <code>type TFitTask = class(TComponent)</code></p>
 <h2 class="description">Description</h2>
 <p>
-podzadacha podgonki uchastka profilya zadannymi krivymi !!! d.b. naslednikom ot TComponent, chtoby vstavlyat'sya v TComponentList !!!</p>
+Fits profile interval by model curves (specimens). Should be inherited from TComponent to allow inserting into TComponentList.</p>
 <a name="PasDoc-Hierarchy"></a><h2 class="hierarchy">Hierarchy</h2>
 <ul class="hierarchy"><li class="ancestor">TComponent</li>
 <li class="thisitem">TFitTask</li></ul><h2 class="overview">Overview</h2>
@@ -451,7 +451,7 @@ podzadacha podgonki uchastka profilya zadannymi krivymi !!! d.b. naslednikom ot 
 </tr>
 <tr><td colspan="2">
 <p>
-parametry fona</p>
+<a class="normal" href="FitTask.TFitTask.html#Background">Background</a> parameters.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -461,7 +461,7 @@ parametry fona</p>
 </tr>
 <tr><td colspan="2">
 <p>
-priznak togo, chto asinhronnaya operatsiya vypolnyaemaya podzadachey zavershena (analog AsyncOperation); !!! v ob'ektah dannogo klassa vsegda imeet znachenie True, potomu chto klass ne podderzhivaet asinhronnyh operatsiy !!!</p>
+Flag indicating that asynchronous operation executed as subtask was <a class="normal" href="FitTask.TFitTask.html#Terminated">terminated</a>. For this class is always True for now because the class does not support asynchronous operations.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -479,7 +479,7 @@ priznak togo, chto asinhronnaya operatsiya vypolnyaemaya podzadachey zavershena 
 </tr>
 <tr><td colspan="2">
 <p>
-parametry fona</p>
+<a class="normal" href="FitTask.TFitTask.html#Background">Background</a> parameters.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -489,7 +489,7 @@ parametry fona</p>
 </tr>
 <tr><td colspan="2">
 <p>
-tochki fona</p>
+List of <code>background</code> points.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -499,7 +499,7 @@ tochki fona</p>
 </tr>
 <tr><td colspan="2">
 <p>
-priznak togo, chto v dannyy moment var'iruyutsya amplitudy tochek fona</p>
+Flag indicating that amplitudes of <a class="normal" href="FitTask.TFitTask.html#Background">background</a> points are variated at the moment.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -509,7 +509,7 @@ priznak togo, chto v dannyy moment var'iruyutsya amplitudy tochek fona</p>
 </tr>
 <tr><td colspan="2">
 <p>
-indeks tochki fona, amplituda kotoroy varyiruetsya v dannyy moment</p>
+Index of <a class="normal" href="FitTask.TFitTask.html#Background">background</a> point amplitude of which is variated at the moment.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -527,7 +527,7 @@ indeks tochki fona, amplituda kotoroy varyiruetsya v dannyy moment</p>
 </tr>
 <tr><td colspan="2">
 <p>
-parametry fona</p>
+<a class="normal" href="FitTask.TFitTask.html#Background">Background</a> parameters.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -537,7 +537,7 @@ parametry fona</p>
 </tr>
 <tr><td colspan="2">
 <p>
-krivaya, poluchaemaya summoy vseh podgonyayuschih krivyh i fona (!)</p>
+The calculated profile. Every value is calculated as <a class="normal" href="FitTask.TFitTask.html#A">a</a> sum of values of corresponding points of every curve (specimen) and <a class="normal" href="FitTask.TFitTask.html#Background">background</a>.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -547,7 +547,7 @@ krivaya, poluchaemaya summoy vseh podgonyayuschih krivyh i fona (!)</p>
 </tr>
 <tr><td colspan="2">
 <p>
-spisok parametrov ekzemplyarov patterna obschih dlya vseh ekzemplyarov</p>
+List of parameters of <a class="normal" href="pattern.html">pattern</a> instances (specimens) which are common for all the instances.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -557,7 +557,7 @@ spisok parametrov ekzemplyarov patterna obschih dlya vseh ekzemplyarov</p>
 </tr>
 <tr><td colspan="2">
 <p>
-priznak togo, chto v dannyy moment var'iruyutsya obschie parametry krivyh</p>
+Flag indicating that common parameters are variated at the moment.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -567,7 +567,7 @@ priznak togo, chto v dannyy moment var'iruyutsya obschie parametry krivyh</p>
 </tr>
 <tr><td colspan="2">
 <p>
-indeks obschego parametra ekzemplyarov patterna, kotoryi var'iruetsya v dannyi moment</p>
+Index of common parameter which is variated at the moment.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -585,7 +585,7 @@ indeks obschego parametra ekzemplyarov patterna, kotoryi var'iruetsya v dannyi m
 </tr>
 <tr><td colspan="2">
 <p>
-poslednee dostignutoe znachenie minimuma; sohranyaetsya dlya togo, chtoby izbezhat' lishnih vychisleniy i blokirovok v mnogopotochnoy srede</p>
+Current minimum value of R-factor by which maximal acceptable value is set up. Last achived minimum value is stored to avoid redundant computations and locks in multithreaded environment.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -602,9 +602,7 @@ poslednee dostignutoe znachenie minimuma; sohranyaetsya dlya togo, chtoby izbezh
 <td class="itemcode"><a name="CurSqrMin"></a><code><b>CurSqrMin</b>: Double;</code></td>
 </tr>
 <tr><td colspan="2">
-<p>
-tek. minimum faktora rashodimosti, po kotoromu ustanavlivaetsya maksimal'no dopustimoe znachenie</p>
-</td></tr>
+&nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -613,7 +611,7 @@ tek. minimum faktora rashodimosti, po kotoromu ustanavlivaetsya maksimal'no dopu
 </tr>
 <tr><td colspan="2">
 <p>
-indeks ekzemplyara patterna, parametry kot. var'iruyutsya v dannyy moment</p>
+Index of <a class="normal" href="pattern.html">pattern</a> instance (specimen) parameters of which are variated at the moment.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -623,7 +621,7 @@ indeks ekzemplyara patterna, parametry kot. var'iruyutsya v dannyy moment</p>
 </tr>
 <tr><td colspan="2">
 <p>
-tochki, v kotoryh raspolagayutsya raschetnye krivye; ispol'zuyutsya tol'ko x-koordinaty tochek</p>
+Contains positions of curves (specimens). Only X-coordinates are used.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -633,7 +631,7 @@ tochki, v kotoryh raspolagayutsya raschetnye krivye; ispol'zuyutsya tol'ko x-koo
 </tr>
 <tr><td colspan="2">
 <p>
-nabor ob'ektov dlya rascheta podgonyaemyh krivyh; kazhdyy iz ob'ektov soderzhit krivuyu</p>
+Set of curves (specimens) used to model experimental <a class="normal" href="data.html">data</a> inside given interval.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -651,7 +649,7 @@ nabor ob'ektov dlya rascheta podgonyaemyh krivyh; kazhdyy iz ob'ektov soderzhit 
 </tr>
 <tr><td colspan="2">
 <p>
-dannye podgonyaemogo uchastka eksperimental'nogo profilya</p>
+Part of experimental profile corresponding to model interval.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -669,7 +667,7 @@ dannye podgonyaemogo uchastka eksperimental'nogo profilya</p>
 </tr>
 <tr><td colspan="2">
 <p>
-vyrazhenie dlya pol'zovatel'skoy krivoy</p>
+Expression defining user curve type.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -729,7 +727,7 @@ vyrazhenie dlya pol'zovatel'skoy krivoy</p>
 </tr>
 <tr><td colspan="2">
 <p>
-indeks parametra ekzemplyara patterna, kot. var'iruetsya v dannyy moment</p>
+Index of parameter of <a class="normal" href="pattern.html">pattern</a> instance which is variated at the moment.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -739,7 +737,7 @@ indeks parametra ekzemplyara patterna, kot. var'iruetsya v dannyy moment</p>
 </tr>
 <tr><td colspan="2">
 <p>
-parametry pol'zovatel'skoy krivoy; peredayutsya izvne; ob'ekt nuzhen dlya sozdaniya ekzemplyarov spets. krivyh</p>
+Parameters of user defined curve. Parameters are given from the caller. The object is used to construct curve instances.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -757,7 +755,7 @@ parametry pol'zovatel'skoy krivoy; peredayutsya izvne; ob'ekt nuzhen dlya sozdan
 </tr>
 <tr><td colspan="2">
 <p>
-priznak togo, chto nuzhno zavershit' vse vnutrennie tsikly</p>
+Flag signalling to terminate all internal loops.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -767,7 +765,7 @@ priznak togo, chto nuzhno zavershit' vse vnutrennie tsikly</p>
 </tr>
 <tr><td colspan="2">
 <p>
-vklyuchaet ispol'zovanie RangeDefined pri vychislenii R-Factor'<a class="normal" href="FitTask.TFitTask.html#A">a</a>; ispol'zovanie diapazonov vyklyuchaetsya kogda oni ne zadany dlya uskoreniya vychisleniya R-Factor'<a class="normal" href="FitTask.TFitTask.html#A">a</a></p>
+The flag switches on using intervals in calculating R-factors. Using ranges is switched off when they are not given to accelerate computation.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -777,7 +775,7 @@ vklyuchaet ispol'zovanie RangeDefined pri vychislenii R-Factor'<a class="normal"
 </tr>
 <tr><td colspan="2">
 <p>
-parametry fona</p>
+<a class="normal" href="FitTask.TFitTask.html#Background">Background</a> parameters.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -820,7 +818,7 @@ parametry fona</p>
 </tr>
 <tr><td colspan="2">
 <p>
-nuzhno dlya sozdaniya itogovogo polnogo profilya</p>
+Returns final calculated profile.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -838,7 +836,7 @@ nuzhno dlya sozdaniya itogovogo polnogo profilya</p>
 </tr>
 <tr><td colspan="2">
 <p>
-tekuschee minimal'noe dostignutoe znachenie R-faktora (<a class="normal" href="FitTask.TFitTask.html#CurMin">CurMin</a>)</p>
+Returns current minimal achived value of R-factor (<a class="normal" href="FitTask.TFitTask.html#CurMin">CurMin</a>).</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -864,7 +862,7 @@ tekuschee minimal'noe dostignutoe znachenie R-faktora (<a class="normal" href="F
 </tr>
 <tr><td colspan="2">
 <p>
-nuzhno dlya sozdaniya itogovogo polnogo spiska tochek raspolozheniya krivyh</p>
+Returns final list of curve positions.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -874,7 +872,7 @@ nuzhno dlya sozdaniya itogovogo polnogo spiska tochek raspolozheniya krivyh</p>
 </tr>
 <tr><td colspan="2">
 <p>
-nuzhno dlya sozdaniya itogovogo polnogo spiska krivyh</p>
+Returns final set of model curves (<a class="normal" href="pattern.html">pattern</a> instances).</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -884,7 +882,7 @@ nuzhno dlya sozdaniya itogovogo polnogo spiska krivyh</p>
 </tr>
 <tr><td colspan="2">
 <p>
-udalyaet iz spiska vydelennyh tochek tu, v kotoroy ishodnyy profil' imeet maksimal'nuyu proizvodnuyu</p>
+Removes from list of curve positions the point in which experimental profile has maximal derivative.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -894,7 +892,7 @@ udalyaet iz spiska vydelennyh tochek tu, v kotoroy ishodnyy profil' imeet maksim
 </tr>
 <tr><td colspan="2">
 <p>
-udalyaet iz spiska vydelennyh tochek tu, u kotoroy amplituda gaussiana minimal'na</p>
+Deletes from list of curve positions the point in which amplitude of curve is minimal.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -904,7 +902,7 @@ udalyaet iz spiska vydelennyh tochek tu, u kotoroy amplituda gaussiana minimal'n
 </tr>
 <tr><td colspan="2">
 <p>
-udalyaet iz spiska vydelennyh tochek te tochki, dlya kotoryh gaussiany imeyut nulevuyu intensivnost'</p>
+Removes from list of curve positions those points for which calculated curves have zero amplitude.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -914,7 +912,7 @@ udalyaet iz spiska vydelennyh tochek te tochki, dlya kotoryh gaussiany imeyut nu
 </tr>
 <tr><td colspan="2">
 <p>
-vozvraschaet priznak neobhodimosti zavershit' raschet</p>
+Returns flag indicating termination of the calculation.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -932,7 +930,7 @@ vozvraschaet priznak neobhodimosti zavershit' raschet</p>
 </tr>
 <tr><td colspan="2">
 <p>
-============== metody, ispol'zuemye optimizatorom ================== rasschityvaet R-faktor</p>
+Calculates R-factor.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -958,7 +956,7 @@ vozvraschaet priznak neobhodimosti zavershit' raschet</p>
 </tr>
 <tr><td colspan="2">
 <p>
-vozvraschaet faktor rashodimosti ispol'zuemyi dlya optimizatsii</p>
+Calculates R-factor used for <a class="normal" href="FitTask.TFitTask.html#Optimization">optimization</a>.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -992,7 +990,7 @@ vozvraschaet faktor rashodimosti ispol'zuemyi dlya optimizatsii</p>
 </tr>
 <tr><td colspan="2">
 <p>
-vozvraschaet faktor rashodimosti ispol'zuemyi dlya zadaniya maksimal'no dopustimogo znacheniya</p>
+Calculates R-factor used for comparison with maximal acceptable value.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1018,7 +1016,7 @@ vozvraschaet faktor rashodimosti ispol'zuemyi dlya zadaniya maksimal'no dopustim
 </tr>
 <tr><td colspan="2">
 <p>
-======================= komandy upravleniya ========================= sinhronnoe preryvanie dlitel'noy operatsii bez vyzova protsedury zaversheniya</p>
+Synchronously terminates long-term operation without calling termination method.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1028,7 +1026,7 @@ vozvraschaet faktor rashodimosti ispol'zuemyi dlya zadaniya maksimal'no dopustim
 </tr>
 <tr><td colspan="2">
 <p>
-vychislyaet i summiruet vse gaussiany v <a class="normal" href="FitTask.TFitTask.html#CalcProfile">CalcProfile</a>; vychislyaet takzhe tochki fona</p>
+Recalculates all <a class="normal" href="pattern.html">pattern</a> instances and <a class="normal" href="FitTask.TFitTask.html#Background">background</a>. Calculates resulting profile.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1038,7 +1036,7 @@ vychislyaet i summiruet vse gaussiany v <a class="normal" href="FitTask.TFitTask
 </tr>
 <tr><td colspan="2">
 <p>
-====================== dlitel'nye operatsii ========================= podgonka krivyh pri zadannyh dannyh (pervonachal'naya ili povtornaya)</p>
+Fits <a class="normal" href="pattern.html">pattern</a> specimens starting from given parameter set (initially or repeatedly).</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1056,7 +1054,7 @@ vychislyaet i summiruet vse gaussiany v <a class="normal" href="FitTask.TFitTask
 </tr>
 <tr><td colspan="2">
 <p>
-ischet nabor krivyh opisyvayuschiy profil' s zadannoy tochnost'yu posledovatel'no umen'shaya kolichestvo krivyh (poluavtomaticheskaya podgonka krivyh po zadannym dannym)</p>
+Searches set of <a class="normal" href="pattern.html">pattern</a> specimens (curves) <a class="normal" href="fitting.html">fitting</a> exprerimental <a class="normal" href="data.html">data</a> with given accuracy sequentially decreasing number of curves.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1066,7 +1064,7 @@ ischet nabor krivyh opisyvayuschiy profil' s zadannoy tochnost'yu posledovatel'n
 </tr>
 <tr><td colspan="2">
 <p>
-ischet ekzemplyar po hash i zagruzhaet v nego znacheniya parametrov iz tablitsy (tablitsa -&gt; ekzemplyar)</p>
+Searches <a class="normal" href="pattern.html">pattern</a> specimen by hash and sets its parameters from the given list.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1084,7 +1082,7 @@ ischet ekzemplyar po hash i zagruzhaet v nego znacheniya parametrov iz tablitsy 
 </tr>
 <tr><td colspan="2">
 <p>
-zagruzka dannyh profilya</p>
+Sets up experimental profile <a class="normal" href="data.html">data</a>.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1102,7 +1100,7 @@ zagruzka dannyh profilya</p>
 </tr>
 <tr><td colspan="2">
 <p>
-asinhronnaya ostanovka dlitel'noy operatsii s vyzovom protsedury zaversheniya</p>
+Asynchronously terminates long-term operation with calling termination method.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1112,7 +1110,7 @@ asinhronnaya ostanovka dlitel'noy operatsii s vyzovom protsedury zaversheniya</p
 </tr>
 <tr><td colspan="2">
 <p>
-vyzyvaetsya pri povtornom sozdanii krivyh !!! d.b. opublikovan dlya pervonachal'noy initsializatsii pered pervonachal'nym raschetom faktora rashodimosti po vsemu profilyu !!!</p>
+Recreates <a class="normal" href="pattern.html">pattern</a> instances (curves). It should be public for initial calculation of R-factor for overall profile.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1146,7 +1144,7 @@ vyzyvaetsya pri povtornom sozdanii krivyh !!! d.b. opublikovan dlya pervonachal'
 </tr>
 <tr><td colspan="2">
 <p>
-tol'ko summiruet vse gaussiany v <a class="normal" href="FitTask.TFitTask.html#CalcProfile">CalcProfile</a></p>
+Sums all <a class="normal" href="pattern.html">pattern</a> instances and <a class="normal" href="FitTask.TFitTask.html#Background">background</a> into single calculated profile.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1156,7 +1154,7 @@ tol'ko summiruet vse gaussiany v <a class="normal" href="FitTask.TFitTask.html#C
 </tr>
 <tr><td colspan="2">
 <p>
-vychislyaet hash nachal'nyh znacheniy parametrov ekzemplyara patterna</p>
+Calculates hash of initial values of parameters of <a class="normal" href="pattern.html">pattern</a> instance.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1182,7 +1180,7 @@ vychislyaet hash nachal'nyh znacheniy parametrov ekzemplyara patterna</p>
 </tr>
 <tr><td colspan="2">
 <p>
-vyzyvaetsya pri pervonachal'nom sozdanii krivyh vypolnyaetsya bolee optimal'no, chem Update... procedure CreateCurves; ===================== vspomogatel'nye metody ======================= udalyaet tochku s zadannym X iz zadannogo spiska</p>
+Deletes poins with given X from the list passed via parameter.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1192,7 +1190,7 @@ vyzyvaetsya pri pervonachal'nom sozdanii krivyh vypolnyaetsya bolee optimal'no, 
 </tr>
 <tr><td colspan="2">
 <p>
-delit vse shagi na 2</p>
+Divides all <a class="normal" href="FitTask.TFitTask.html#Optimization">optimization</a> steps by 2.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1210,7 +1208,7 @@ delit vse shagi na 2</p>
 </tr>
 <tr><td colspan="2">
 <p>
-============ algoritmy - metody, vyzyvaemye asinhronno ============= ischet nabor krivyh opisyvayuschiy profil' s zadannoy tochnost'yu posledovatel'no umen'shaya kolichestvo krivyh</p>
+Searches for set of curves <a class="normal" href="fitting.html">fitting</a> experimental profile with given accuracy sequentially decreasing number of curves.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1228,7 +1226,7 @@ delit vse shagi na 2</p>
 </tr>
 <tr><td colspan="2">
 <p>
-vypolnyaet tsikl podgonki parametrov krivyh</p>
+Executes cycle of <a class="normal" href="fitting.html">fitting</a> of parameters of curves.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1286,7 +1284,7 @@ vypolnyaet tsikl podgonki parametrov krivyh</p>
 </tr>
 <tr><td colspan="2">
 <p>
-============== metody nizkogo urovnya dlya algoritmov ================</p>
+Low-level methods of algorithms.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1305,7 +1303,7 @@ vypolnyaet tsikl podgonki parametrov krivyh</p>
 </tr>
 <tr><td colspan="2">
 <p>
-peremennye hranyat indeksy nachala i kontsa oblasti podzadachi dlya bystrogo vosstanovleniya polnogo summarnogo profilya</p>
+Attributes store indexes of begin and end of the task interval for optimal rebuilding overall resulting profile.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1363,7 +1361,7 @@ peremennye hranyat indeksy nachala i kontsa oblasti podzadachi dlya bystrogo vos
 </tr>
 <tr><td colspan="2">
 <p>
-vyzyvaetsya algoritmom optimizatsii dlya vyvoda informatsii pri dostizhenii ocherednogo minimuma</p>
+Callback to update information at achieving new minimum.</p>
 </td></tr>
 </table>
 <hr noshade size="1"><span class="appinfo"><em>Generated by <a  href="http://pasdoc.sourceforge.net/">PasDoc 0.14.0</a>. </em>

@@ -20,18 +20,18 @@ uses Classes, SysUtils, FitServer, CommonTypes, MainCalcThread, MyExceptions,
     FitTask;
 
 type
-	{ The server component performing long-term operation in separate thread. }
+    { The server component performing long-term operation in separate thread. }
     TFitServerWithThread = class(TFitServer)
     protected
-		{ Pointer to the thread performing long-term method of the component. 
+        { Pointer to the thread performing long-term method of the component. 
           It is used for synchronization with main thread of the application.
-		  If this pointer is not Nil then displaying methods are called synchronously. }
+          If this pointer is not Nil then displaying methods are called synchronously. }
         MainCalcThread: TMainCalcThread;
 
         procedure RecreateMainCalcThread(
             ACurrentTask: TCurrentTask; ADoneProc: TDoneProc); override;
-		{ Waits for completion of the thread. Do not call from synchonized method - 
-		  this will result in deadlock. }
+        { Waits for completion of the thread. Do not call from synchonized method - 
+          this will result in deadlock. }
         procedure DestroyMainCalcThread;
         
         function CreateTaskObject: TFitTask; override;
@@ -39,11 +39,11 @@ type
     public
         destructor Destroy; override;
         
-		{ Control commands. }
+        { Control commands. }
 
-		{ Asynchronous termination of long-term operation with calling termination method. }
+        { Asynchronous termination of long-term operation with calling termination method. }
         procedure StopAsyncOper; override;
-		{ Synchronous termination of long-term operation without calling termination method. }
+        { Synchronous termination of long-term operation without calling termination method. }
         procedure AbortAsyncOper; override;
     end;
 

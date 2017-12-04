@@ -1,3 +1,14 @@
+{
+This software is distributed under GPL
+in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
+
+@abstract(Contains definition of class representing single optimization task.)
+
+@author(Dmitry Morozov dvmorozov@hotmail.com, 
+LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
+Facebook https://www.facebook.com/profile.php?id=100004082021870)
+}
 unit FitTask;
 
 //{$mode objfpc}{$H+}
@@ -9,9 +20,8 @@ uses Classes, SysUtils, DataLoader, SelfCopied, Minimizer, Minimizer_S,
      Minimizer_DS, MainCalcThread, CommonTypes, MSCRDataClasses;
   
 type
-    //  podzadacha podgonki uchastka profilya zadannymi krivymi
-    //  !!! d.b. naslednikom ot TComponent, chtoby vstavlyat'sya
-    //  v TComponentList !!!
+    { Fits profile interval by model curves (specimens). 
+      Should be inherited from TComponent to allow inserting into TComponentList. }
     TFitTask = class(TComponent)
     protected
         FBegIndex: LongInt;
@@ -19,57 +29,50 @@ type
 
         FMaxRFactor: Double;
         FCurveType: TCurveType;
-        //  vyrazhenie dlya pol'zovatel'skoy krivoy
+        { Expression defining user curve type. }
         FCurveExpr: string;
-        //  parametry pol'zovatel'skoy krivoy;
-        //  peredayutsya izvne; ob'ekt nuzhen dlya
-        //  sozdaniya ekzemplyarov spets. krivyh
+        { Parameters of user defined curve. Parameters are given from the caller. 
+          The object is used to construct curve instances. }
         Params: Curve_parameters;
-        //  dannye podgonyaemogo uchastka eksperimental'nogo profilya
+        { Part of experimental profile corresponding to model interval. }
         ExpProfile: TPointsSet;
-        //  tochki fona
+        { List of background points. }
         Background: TPointsSet;
         SavedBackground: TPointsSet;
         BackgroundWasSaved: Boolean;
-        //  krivaya, poluchaemaya summoy vseh podgonyayuschih krivyh i fona (!)
+        { The calculated profile. Every value is calculated as a sum of values 
+          of corresponding points of every curve (specimen) and background. }
         CalcProfile: TPointsSet;
-        //  tochki, v kotoryh raspolagayutsya raschetnye krivye;
-        //  ispol'zuyutsya tol'ko x-koordinaty tochek
+        { Contains positions of curves (specimens). Only X-coordinates are used. }
         CurvePositions: TPointsSet;
-        //  nabor ob'ektov dlya rascheta podgonyaemyh krivyh;
-        //  kazhdyy iz ob'ektov soderzhit krivuyu
+        { Set of curves (specimens) used to model experimental data inside given interval. }
         CurvesList: TSelfCopiedCompList;
-        //  vklyuchaet ispol'zovanie RangeDefined pri vychislenii R-Factor'a;
-        //  ispol'zovanie diapazonov vyklyuchaetsya kogda oni ne zadany dlya
-        //  uskoreniya vychisleniya R-Factor'a
+        { The flag switches on using intervals in calculating R-factors.
+          Using ranges is switched off when they are not given to accelerate computation. }
         UseCurveRanges: Boolean;
-        //  spisok parametrov ekzemplyarov patterna obschih dlya vseh ekzemplyarov
+        { List of parameters of pattern instances (specimens) which are common for all the instances. }
         CommonSpecimenParams: Curve_parameters;
-        //  parametry fona
+        { Background parameters. }
         A, B, C, x0: Double;
         
         //  ======================= dannye dlya optimizatora ====================
         Minimizer: TMinimizer;
 
         AStep, x0Step: Double;
-        //  indeks ekzemplyara patterna, parametry kot. var'iruyutsya v dannyy moment
+        { Index of pattern instance (specimen) parameters of which are variated at the moment. }
         CurveNum: LongInt;
-        //  indeks parametra ekzemplyara patterna, kot. var'iruetsya v dannyy moment
+        { Index of parameter of pattern instance which is variated at the moment. }
         ParamNum: LongInt;
         EOC: Boolean;
-        //  priznak togo, chto nuzhno zavershit' vse vnutrennie tsikly
+        { Flag signalling to terminate all internal loops. }
         Terminated: Boolean;
-        //  indeks obschego parametra ekzemplyarov patterna,
-        //  kotoryi var'iruetsya v dannyi moment
+        { Index of common parameter which is variated at the moment. }
         CommonVaryingIndex: LongInt;
-        //  indeks tochki fona, amplituda kotoroy varyiruetsya
-        //  v dannyy moment
+        { Index of background point amplitude of which is variated at the moment. }
         BackgroundVaryingIndex: LongInt;
-        //  priznak togo, chto v dannyy moment
-        //  var'iruyutsya obschie parametry krivyh
+        { Flag indicating that common parameters are variated at the moment. }
         CommonVaryingFlag: Boolean;
-        //  priznak togo, chto v dannyy moment
-        //  var'iruyutsya amplitudy tochek fona
+        { Flag indicating that amplitudes of background points are variated at the moment. }
         BackgroundVaryingFlag: Boolean;
 
         FShowCurMin: TShowCurMin;
@@ -77,8 +80,9 @@ type
         function GetProfileIntegral: Double;
         function GetCalcProfileIntegral: Double;
 
-        //  ============== metody, ispol'zuemye optimizatorom ==================
-        //  rasschityvaet R-faktor
+        { Methods which are used by the optimizer. }
+        
+        { Calculates R-factor. }
         function Func: Double;
         procedure CalcFunc;
         function GetStep: Double;
@@ -88,31 +92,26 @@ type
         function GetParam: Double;
         procedure SetParam(NewParamValue: Double);
         function EndOfCycle: Boolean;
-        //  delit vse shagi na 2
+        { Divides all optimization steps by 2. }
         procedure DivideStepsBy2;
         procedure MultipleSteps(Factor: Double);
-        //  vozvraschaet priznak neobhodimosti zavershit' raschet
+        { Returns flag indicating termination of the calculation. }
         function EndOfCalculation: Boolean;
-        //  vozvraschaet faktor rashodimosti ispol'zuemyi dlya optimizatsii
+        { Calculates R-factor used for optimization. }
         function GetOptimizingRFactor: Double;
-        //  vozvraschaet faktor rashodimosti ispol'zuemyi dlya zadaniya
-        //  maksimal'no dopustimogo znacheniya
+        { Calculates R-factor used for comparison with maximal acceptable value. }
         function GetRFactor: Double;
-        //  poslednee dostignutoe znachenie minimuma; sohranyaetsya
-        //  dlya togo, chtoby izbezhat' lishnih vychisleniy i blokirovok
-        //  v mnogopotochnoy srede
 
     protected
-        CurMin: Double;     //  tek. minimum faktora rashodimosti,
-                            //  po kotoromu ustanavlivaetsya maksimal'no
-                            //  dopustimoe znachenie
+        { Current minimum value of R-factor by which maximal acceptable value is set up. 
+          Last achived minimum value is stored to avoid redundant computations and locks
+          in multithreaded environment. }
+        CurMin: Double;
         CurSqrMin: Double;
         CurAbsMin: Double;
         CurMinInitialized: Boolean;
-        //  priznak togo, chto asinhronnaya operatsiya
-        //  vypolnyaemaya podzadachey zavershena (analog AsyncOperation);
-        //  !!! v ob'ektah dannogo klassa vsegda imeet znachenie True,
-        //  potomu chto klass ne podderzhivaet asinhronnyh operatsiy !!!
+        { Flag indicating that asynchronous operation executed as subtask was terminated. 
+          For this class is always True for now because the class does not support asynchronous operations. }
         AllDone: Boolean;
 
     protected
@@ -122,40 +121,42 @@ type
         function GetSqrRFactor: Double;
         function GetAbsRFactor: Double;
 
-        //  ============ algoritmy - metody, vyzyvaemye asinhronno =============
-        //  ischet nabor krivyh opisyvayuschiy profil' s zadannoy tochnost'yu
-        //  posledovatel'no umen'shaya kolichestvo krivyh
+        { Algorithms are methods executed asynchronously. }
+        
+        { Searches for set of curves fitting experimental profile with given accuracy
+          sequentially decreasing number of curves. }
         procedure FindGaussesSequentiallyAlg;
-         //  vypolnyaet tsikl podgonki parametrov krivyh
+        { Executes cycle of fitting of parameters of curves. }
         procedure Optimization;
 
-        //  ============== metody nizkogo urovnya dlya algoritmov ================
+        { Low-level methods of algorithms. }
+        
         procedure StoreCurveParams;
         procedure RestoreCurveParams;
-        //  tol'ko summiruet vse gaussiany v CalcProfile
+        { Sums all pattern instances and background into single calculated profile. }
         procedure CalcGaussSum;
         procedure AddCurveToProfile(PS: TPointsSet);
         procedure SubbCurveFromProfile(PS: TPointsSet);
-        //  udalyaet iz spiska vydelennyh tochek te tochki,
-        //  dlya kotoryh gaussiany imeyut nulevuyu intensivnost'
+        { Removes from list of curve positions those points
+          for which calculated curves have zero amplitude. }
         function DeleteZeros: Boolean;
-        //  udalyaet iz spiska vydelennyh tochek tu,
-        //  u kotoroy amplituda gaussiana minimal'na
+        { Deletes from list of curve positions the point
+          in which amplitude of curve is minimal. }
         function DeleteMin(var Deleted: TCurvePointsSet): Boolean;
-        //  udalyaet iz spiska vydelennyh tochek tu, v kotoroy
-        //  ishodnyy profil' imeet maksimal'nuyu proizvodnuyu
+        { Removes from list of curve positions the point
+          in which experimental profile has maximal derivative.  }
         function DeleteMaxDerivative(var Deleted: TCurvePointsSet): Boolean;
-        //  vyzyvaetsya pri pervonachal'nom sozdanii krivyh
-        //  vypolnyaetsya bolee optimal'no, chem Update...
+        { The method is called for initial creation of curves. 
+          It is executed more effectively than Update. }
         //procedure CreateCurves;
 
-        //  ===================== vspomogatel'nye metody =======================
-        //  udalyaet tochku s zadannym X iz zadannogo spiska
+        { Auxiliary methods. }
+        { Deletes poins with given X from the list passed via parameter. }
         procedure DeletePoint(var Points: TPointsSet; XValue: Double);
         procedure AddPointToCurvePositions(XValue: Double);
         procedure CreateMinimizer;
         procedure CreateDHSMinimizer;
-        //  vychislyaet hash nachal'nyh znacheniy parametrov ekzemplyara patterna
+        { Calculates hash of initial values of parameters of pattern instance. }
         procedure CalcInitHash(Specimen: TCurvePointsSet);
         function GetPatternSpecimen: TCurvePointsSet;
 
@@ -163,16 +164,16 @@ type
         constructor Create(AOwner: TComponent); override;
         destructor Destroy; override;
 
-        //  zagruzka dannyh profilya
+        { Sets up experimental profile data. }
         procedure SetProfilePointsSet(APointsSet: TPointsSet);
         procedure SetCurvePositions(ACurvePositions: TPointsSet);
-        //  nuzhno dlya sozdaniya itogovogo polnogo spiska tochek raspolozheniya krivyh
+        { Returns final list of curve positions. }
         function GetCurvePositions: TPointsSet;
-        //  nuzhno dlya sozdaniya itogovogo polnogo spiska krivyh
+        { Returns final set of model curves (pattern instances). }
         function GetCurvesList: TSelfCopiedCompList;
-        //  nuzhno dlya sozdaniya itogovogo polnogo profilya
+        { Returns final calculated profile. }
         function GetCalcProfile: TPointsSet;
-        //  tekuschee minimal'noe dostignutoe znachenie R-faktora (CurMin)
+        { Returns current minimal achived value of R-factor (CurMin). }
         function GetCurMin: Double; virtual;
         function GetCurAbsMin: Double; virtual;
         function GetCurSqrMin: Double; virtual;
@@ -181,50 +182,47 @@ type
         
         procedure SetSpecialCurve(
             ACurveExpr: string; AParams: Curve_parameters);
-        //  vyzyvaetsya pri povtornom sozdanii krivyh
-        //  !!! d.b. opublikovan dlya pervonachal'noy initsializatsii pered
-        //  pervonachal'nym raschetom faktora rashodimosti po vsemu profilyu !!!
+        { Recreates pattern instances (curves). It should be public
+          for initial calculation of R-factor for overall profile. }
         procedure UpdateCurves(SpecimenParameters: TMSCRSpecimenList);
-        //  ischet ekzemplyar po hash i zagruzhaet v nego znacheniya
-        //  parametrov iz tablitsy (tablitsa -> ekzemplyar)
+        { Searches pattern specimen by hash and sets its parameters 
+          from the given list. }
         procedure SearchSpecimenAndInit(
             SpecimenParameters: TMSCRSpecimenList; Specimen: TCurvePointsSet);
-        //  vychislyaet i summiruet vse gaussiany v CalcProfile;
-        //  vychislyaet takzhe tochki fona
+        { Recalculates all pattern instances and background. 
+          Calculates resulting profile. }
         procedure CalculateProfile;
 
-        //  ======================= komandy upravleniya =========================
-        //  sinhronnoe preryvanie dlitel'noy operatsii
-        //  bez vyzova protsedury zaversheniya
+        { Control methods. }
+        
+        { Synchronously terminates long-term operation without calling termination method. }
         procedure AbortAsyncOper; virtual; abstract;
-        //  asinhronnaya ostanovka dlitel'noy operatsii
-        //  s vyzovom protsedury zaversheniya
+        { Asynchronously terminates long-term operation with calling termination method. }
         procedure StopAsyncOper; virtual; abstract;
 
-        //  ====================== dlitel'nye operatsii =========================
-        //  podgonka krivyh pri zadannyh dannyh (pervonachal'naya ili povtornaya)
+        { Long-term methods. }
+
+        { Fits pattern specimens starting from given parameter set (initially or repeatedly). }
         procedure FindGausses; virtual;
         procedure FindGaussesAgain; virtual;
-        //  ischet nabor krivyh opisyvayuschiy profil' s zadannoy tochnost'yu
-        //  posledovatel'no umen'shaya kolichestvo krivyh (poluavtomaticheskaya
-        //  podgonka krivyh po zadannym dannym)
+        { Searches set of pattern specimens (curves) fitting exprerimental data with given accuracy
+          sequentially decreasing number of curves. }
         procedure FindGaussesSequentially; virtual;
 
         property MaxRFactor: Double write FMaxRFactor;
         property CurveType: TCurveType write FCurveType;
-        //  vyzyvaetsya algoritmom optimizatsii dlya vyvoda
-        //  informatsii pri dostizhenii ocherednogo minimuma
+        { Callback to update information at achieving new minimum. }
         property ShowCurMinExternal: TShowCurMin read FShowCurMin write FShowCurMin;
         property DoneProcExternal: TDoneProc read FDoneProc write FDoneProc;
-        //  peremennye hranyat indeksy nachala i kontsa oblasti podzadachi
-        //  dlya bystrogo vosstanovleniya polnogo summarnogo profilya
+        { Attributes store indexes of begin and end of the task interval 
+          for optimal rebuilding overall resulting profile. }
         property BegIndex: LongInt read FBegIndex write FBegIndex;
         property EndIndex: LongInt read FEndIndex write FEndIndex;
         property ProfileIntegral: Double read GetProfileIntegral;
         property CalcProfileIntegral: Double read GetCalcProfileIntegral;
     end;
 
-    //  perehodnik k OpenCL realizatsii klassa
+    { The wrapper for future OpenCL implementation. }
     TOpenCLFitTask = class(TComponent)
     public
     end;

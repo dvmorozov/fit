@@ -1,3 +1,14 @@
+{
+This software is distributed under GPL
+in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
+
+@abstract(Contains definition of class executing optimization task in separate thread.)
+
+@author(Dmitry Morozov dvmorozov@hotmail.com, 
+LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
+Facebook https://www.facebook.com/profile.php?id=100004082021870)
+}
 unit FitTaskWithThread;
 
 //{$mode objfpc}{$H+}
@@ -8,12 +19,12 @@ interface
 uses Classes, SysUtils, FitTask, MainCalcThread;
 
 type
-    //  klass dlya asynhronnogo resheniya zadachi
+	{ Executes task solution in separate thread. }
     TFitTaskWithThread = class(TFitTask)
     protected
         MainCalcThread: TMainCalcThread;
-        CS: TRTLCriticalSection;    //  vmesto TCriticalSection;
-        FDoneDisabled: Boolean;     //  zapreschaet vyzov DoneProc
+        CS: TRTLCriticalSection;    //  Use instead of TCriticalSection.
+        FDoneDisabled: Boolean;     //  Suppresses calling DoneProc.
         
         procedure RecreateMainCalcThread(
             ACurrentTask: TCurrentTask; ADoneProc: TDoneProc);
@@ -21,7 +32,9 @@ type
         procedure ShowCurMin; override;
         function GetCurMinInitialized: Boolean; override;
         procedure DoneProc; override;
-        //  !!! dlya raboty v mnogopotochnoy srede trebuetsya sinhronizatsiya !!!
+		
+		{ Methods implement synchronization to work in multithreading environment. }
+		
         function GetCurMin: Double; override;
         function GetCurAbsMin: Double; override;
         function GetCurSqrMin: Double; override;
@@ -30,23 +43,21 @@ type
     public
         constructor Create(AOwner: TComponent); override;
         destructor Destroy; override;
-        //  sinhronnoe preryvanie dlitel'noy operatsii
-        //  bez vyzova protsedury zaversheniya
+		{ Synchronous termination of long-term operation without call of termination procedure. }
         procedure AbortAsyncOper; override;
-        //  asinhronnaya ostanovka dlitel'noy operatsii
-        //  s vyzovom protsedury zaversheniya
+		{ Asynchronous termination of long-term operation with call of termination procedure. }
         procedure StopAsyncOper; override;
         //  ozhidaet zaversheniya vypolneniya potoka
         procedure DestroyMainCalcThread;
-        //  =============== asinhronnye (dlitel'nye) operatsii ==================
-        //  podgonka krivyh pri zadannyh dannyh (pervonachal'naya ili povtornaya)
+
+		{ Asynchronous long-term operations. }
+		
+        { Fits pattern specimens starting from given parameter set (initially or repeatedly). }
         procedure FindGausses; override;
         procedure FindGaussesAgain; override;
-        //  ischet nabor krivyh opisyvayuschiy profil' s zadannoy tochnost'yu
-        //  posledovatel'no umen'shaya kolichestvo krivyh (poluavtomaticheskaya
-        //  podgonka krivyh po zadannym dannym)
+        { Searches set of pattern specimens (curves) fitting exprerimental data with given accuracy
+          sequentially decreasing number of curves. }
         procedure FindGaussesSequentially; override;
-        //  !!! opublikovano dlya bolee optimal'noy realizatsii ostanovki !!!
         property DoneDisabled: Boolean read FDoneDisabled write FDoneDisabled;
     end;
 

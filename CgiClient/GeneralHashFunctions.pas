@@ -1,3 +1,12 @@
+{
+@abstract(General purpose hash function algorithms library.)
+
+@author(Arash Partow - 2002)
+}
+unit GeneralHashfunctions;
+
+interface
+
 (**************************************************************************)
 (*                                                                        *)
 (*          General Purpose Hash Function Algorithms Library              *)
@@ -13,12 +22,6 @@
 (* http://www.opensource.org/licenses/cpl.php                             *)
 (*                                                                        *)
 (**************************************************************************)
-
-
-unit GeneralHashfunctions;
-
-interface
-
 
 type THashfunction = function(const key : String) : Cardinal;
 

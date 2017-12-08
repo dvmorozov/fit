@@ -15,7 +15,13 @@
 <td><a class="section" href="#PasDoc-Description">Description</a></td><td><a class="section" href="#PasDoc-Uses">Uses</a></td><td>Classes, Interfaces, Objects and Records</td><td><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></td><td><a class="section" href="#PasDoc-Types">Types</a></td><td>Constants</td><td><a class="section" href="#PasDoc-Variables">Variables</a></td></tr></table>
 <a name="PasDoc-Description"></a><h2 class="description">Description</h2>
 <p>
-&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</p>
+Contains definitions of 3D primitive functions.</p>
+<p>
+This software is distributed under GPL in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
+
+<p>
+
+<p></p>
 <a name="PasDoc-Uses"></a><h2 class="uses">Uses</h2>
 <ul class="useslist"><li>SimpMath</li></ul><h2 class="overview">Overview</h2>
 <a name="PasDoc-FuncsProcs"></a><h3 class="summary">Functions and Procedures</h3>
@@ -147,7 +153,7 @@
 </tr>
 <tr><td colspan="1">
 <p>
-vozvraschaet matritsu perenosa</p>
+Returns <a class="normal" href="Math3d.html#Dilatation">dilatation</a> matrix.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -156,7 +162,7 @@ vozvraschaet matritsu perenosa</p>
 </tr>
 <tr><td colspan="1">
 <p>
-vozvraschaet matritsu rastyazheniya / szhatiya</p>
+Returns rotation matrix around X-axis. The angle is given in radians.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -164,14 +170,18 @@ vozvraschaet matritsu rastyazheniya / szhatiya</p>
 <td class="itemcode"><a name="GetMatrixRotY"></a><code>procedure <b>GetMatrixRotY</b>(Angle: Double; var Matr: <a  href="Math3d.html#TMatrix">TMatrix</a>);</code></td>
 </tr>
 <tr><td colspan="1">
-&nbsp;</td></tr>
+<p>
+Returns rotation matrix around Y-axis. The angle is given in radians.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="itemcode"><a name="GetMatrixRotZ"></a><code>procedure <b>GetMatrixRotZ</b>(Angle: Double; var Matr: <a  href="Math3d.html#TMatrix">TMatrix</a>);</code></td>
 </tr>
 <tr><td colspan="1">
-&nbsp;</td></tr>
+<p>
+Returns rotation matrix around Z-axis. The angle is given in radians.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -179,7 +189,7 @@ vozvraschaet matritsu rastyazheniya / szhatiya</p>
 </tr>
 <tr><td colspan="1">
 <p>
-??? what is it ???</p>
+Returns <a class="normal" href="Math3d.html#Translation">translation</a> matrix.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -188,7 +198,7 @@ vozvraschaet matritsu rastyazheniya / szhatiya</p>
 </tr>
 <tr><td colspan="1">
 <p>
-vozvraschaet obratnuyu matritsu</p>
+Returns transformation matrix.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -197,7 +207,7 @@ vozvraschaet obratnuyu matritsu</p>
 </tr>
 <tr><td colspan="1">
 <p>
-vozvraschaet edinichnuyu matritsu</p>
+Returns inverse matrix.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -205,7 +215,9 @@ vozvraschaet edinichnuyu matritsu</p>
 <td class="itemcode"><a name="GetUnitMatrix"></a><code>procedure <b>GetUnitMatrix</b>(var Matr: <a  href="Math3d.html#TMatrix">TMatrix</a>);</code></td>
 </tr>
 <tr><td colspan="1">
-&nbsp;</td></tr>
+<p>
+Returns unitary matrix.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -219,16 +231,16 @@ vozvraschaet edinichnuyu matritsu</p>
 <td class="itemcode"><a name="Mul3DMatrix"></a><code>procedure <b>Mul3DMatrix</b>(var A, B: <a  href="Math3d.html#TMatrix">TMatrix</a>; var Matr: <a  href="Math3d.html#TMatrix">TMatrix</a>);</code></td>
 </tr>
 <tr><td colspan="1">
-&nbsp;</td></tr>
+<p>
+Returns product of matrices. Result is placed into Matr parameter. As result container any of the original variables can be given.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="itemcode"><a name="MulVectMatr"></a><code>procedure <b>MulVectMatr</b>(Matr: <a  href="Math3d.html#TMatrix">TMatrix</a>; var Vector: <a  href="Math3d.html#T3Vector">T3Vector</a>);</code></td>
 </tr>
 <tr><td colspan="1">
-<p>
-ugly zadayutsya v radianah</p>
-</td></tr>
+&nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -242,9 +254,7 @@ ugly zadayutsya v radianah</p>
 <td class="itemcode"><a name="Rad"></a><code>function <b>Rad</b>(Angle: Double): Double;</code></td>
 </tr>
 <tr><td colspan="1">
-<p>
-rezul'tat umnozheniya matrits A, B pomeschaetsya v Matr; v kachestve matritsy, poluchayuschey rezul'tat mozhno ukazyvat' odnu iz ishodnyh matrits</p>
-</td></tr>
+&nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -395,6 +405,12 @@ rezul'tat umnozheniya matrits A, B pomeschaetsya v Matr; v kachestve matritsy, p
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
+<h2 class="authors">Author</h2>
+<ul class="authors">
+<li>Dmitry Morozov <a  href="mailto:dvmorozov@hotmail.com">dvmorozov@hotmail.com</a>, 
+LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
+Facebook https://www.facebook.com/profile.php?id=100004082021870</li>
+</ul>
 <hr noshade size="1"><span class="appinfo"><em>Generated by <a  href="http://pasdoc.sourceforge.net/">PasDoc 0.14.0</a>. </em>
 </span>
 </td></tr></table></body></html>

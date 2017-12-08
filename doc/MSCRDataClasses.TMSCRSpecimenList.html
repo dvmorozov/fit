@@ -21,7 +21,7 @@
 <code>type TMSCRSpecimenList = class(<a class="normal" href="DataClasses.TSpecimenList.html">TSpecimenList</a>)</code></p>
 <h2 class="description">Description</h2>
 <p>
-pozvolyaet vvodit'/vyvodit' ugly v razlichnyh predstavleniyah; pri zagruzke dannyh iz Grid'a proveryaet korrektnost' i dobavlyaet v spisok tol'ko te dannye, dlya kot. sootvetstvuyuschie stroki sovershenno korrektny</p>
+Defines container for curve instances (specimens). Allows to input/output angles in different representations. In copying <a class="normal" href="data.html">data</a> from grid verifies them and adds to the list only <a class="normal" href="data.html">data</a> for which corresponding rows are correct.</p>
 <a name="PasDoc-Hierarchy"></a><h2 class="hierarchy">Hierarchy</h2>
 <ul class="hierarchy"><li class="ancestor">TSelfCheckedComponentList</li>
 <li class="ancestor"><a class="normal" href="SelfCopied.TSelfCopiedCompList.html">TSelfCopiedCompList</a></li>
@@ -67,7 +67,9 @@ pozvolyaet vvodit'/vyvodit' ugly v razlichnyh predstavleniyah; pri zagruzke dann
 <td class="itemcode"><a name="Lambda"></a><code><b>Lambda</b>: Double;</code></td>
 </tr>
 <tr><td colspan="2">
-&nbsp;</td></tr>
+<p>
+Vawelength at which neutronogram was recorded.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -76,7 +78,7 @@ pozvolyaet vvodit'/vyvodit' ugly v razlichnyh predstavleniyah; pri zagruzke dann
 </tr>
 <tr><td colspan="2">
 <p>
-dlina volny pri kotoroy byla snyata neytronogramma</p>
+It is supposed that <a class="normal" href="data.html">data</a> are given in 2 * Theta format.</p>
 </td></tr>
 </table>
 <h3 class="detail">Methods</h3>
@@ -86,9 +88,7 @@ dlina volny pri kotoroy byla snyata neytronogramma</p>
 <td class="itemcode"><a name="GetCopy"></a><code>function <b>GetCopy</b>: TObject; override;</code></td>
 </tr>
 <tr><td colspan="2">
-<p>
-predpolagaetsya, chto dannye zadany v formate 2 * Theta</p>
-</td></tr>
+&nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">

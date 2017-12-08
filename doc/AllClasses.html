@@ -104,7 +104,7 @@
 <tr class="list2">
 <td class="itemname"><a class="bold" href="Minimizer.IMinimizer.html">IMinimizer</a></td>
 <td class="itemunit"><a class="bold" href="Minimizer.html">Minimizer</a></td>
-<td class="itemdesc"><p>&nbsp;</p></td>
+<td class="itemdesc"><p>Defines interface of <a class="normal" href="data.html">data</a> provider for optimization algorithm.</p></td>
 </tr>
 <tr class="list">
 <td class="itemname"><a class="bold" href="DownhillSimplexContainer.IOptimizedFunction.html">IOptimizedFunction</a></td>
@@ -124,7 +124,7 @@
 <tr class="list2">
 <td class="itemname"><a class="bold" href="MSCRDataClasses.Parameters_list.html">Parameters_list</a></td>
 <td class="itemunit"><a class="bold" href="MSCRDataClasses.html">MSCRDataClasses</a></td>
-<td class="itemdesc"><p>spisok parametrov krivyh, sohranyaemyy v XML-potoke</p></td>
+<td class="itemdesc"><p>Container of curve <a class="normal" href="MSCRDataClasses.Parameters_list.html#Parameters">parameters</a> (specimens) which is stored in XML-stream.</p></td>
 </tr>
 <tr class="list">
 <td class="itemname"><a class="bold" href="Settings.Project_v1.html">Project_v1</a></td>
@@ -209,7 +209,7 @@
 <tr class="list">
 <td class="itemname"><a class="bold" href="Minimizer_DS.TDownhillSimplexMinimizer.html">TDownhillSimplexMinimizer</a></td>
 <td class="itemunit"><a class="bold" href="Minimizer_DS.html">Minimizer_DS</a></td>
-<td class="itemdesc"><p>perehodnik dlya podklyucheniya algoritma k dannoy programme</p></td>
+<td class="itemdesc"><p>Implements downhill simplex algorithm.</p></td>
 </tr>
 <tr class="list2">
 <td class="itemname"><a class="bold" href="Settings.TFindContainer.html">TFindContainer</a></td>
@@ -344,7 +344,7 @@
 <tr class="list2">
 <td class="itemname"><a class="bold" href="Minimizer.TIntMinimizer.html">TIntMinimizer</a></td>
 <td class="itemunit"><a class="bold" href="Minimizer.html">Minimizer</a></td>
-<td class="itemdesc"><p>&nbsp;</p></td>
+<td class="itemdesc"><p>Defines component implementing <a class="normal" href="Minimizer.IMinimizer.html">IMinimizer</a> interface (providing <a class="normal" href="data.html">data</a> for optimization algorithm).</p></td>
 </tr>
 <tr class="list">
 <td class="itemname"><a class="bold" href="fit_server.TIntResult.html">TIntResult</a></td>
@@ -369,7 +369,7 @@
 <tr class="list">
 <td class="itemname"><a class="bold" href="Minimizer.TMinimizer.html">TMinimizer</a></td>
 <td class="itemunit"><a class="bold" href="Minimizer.html">Minimizer</a></td>
-<td class="itemdesc"><p>realizuet intenrfeys dlya minimizatsii lyubyh funktsiy</p></td>
+<td class="itemdesc"><p>Implements interface for optimization of any function.</p></td>
 </tr>
 <tr class="list2">
 <td class="itemname"><a class="bold" href="cgiModules.TModuledCGIApplication.html">TModuledCGIApplication</a></td>
@@ -379,7 +379,7 @@
 <tr class="list">
 <td class="itemname"><a class="bold" href="MSCRDataClasses.TMSCRSpecimenList.html">TMSCRSpecimenList</a></td>
 <td class="itemunit"><a class="bold" href="MSCRDataClasses.html">MSCRDataClasses</a></td>
-<td class="itemdesc"><p>pozvolyaet vvodit'/vyvodit' ugly v razlichnyh predstavleniyah; pri zagruzke dannyh iz Grid'a proveryaet korrektnost' i dobavlyaet v spisok tol'ko te dannye, dlya kot.</p></td>
+<td class="itemdesc"><p>Defines container for curve instances (specimens).</p></td>
 </tr>
 <tr class="list2">
 <td class="itemname"><a class="bold" href="fit_server.TNamedPointsResult.html">TNamedPointsResult</a></td>
@@ -474,17 +474,17 @@
 <tr class="list2">
 <td class="itemname"><a class="bold" href="Minimizer_S.TSimpleMinimizer.html">TSimpleMinimizer</a></td>
 <td class="itemunit"><a class="bold" href="Minimizer_S.html">Minimizer_S</a></td>
-<td class="itemdesc"><p>realizuet prostoy algoritm pokoordinatnogo spuska</p></td>
+<td class="itemdesc"><p>Implements simple downhill simplex algorithm.</p></td>
 </tr>
 <tr class="list">
 <td class="itemname"><a class="bold" href="Minimizer_S.TSimpleMinimizer2.html">TSimpleMinimizer2</a></td>
 <td class="itemunit"><a class="bold" href="Minimizer_S.html">Minimizer_S</a></td>
-<td class="itemdesc"><p>realizuet prostoy algoritm pokoordinatnogo spuska, dlya kazhdoy peremennoy vvoditsya svoy shag</p></td>
+<td class="itemdesc"><p>Implements simple downhill simplex algorithm having different steps for every parameter.</p></td>
 </tr>
 <tr class="list2">
 <td class="itemname"><a class="bold" href="Minimizer_S.TSimpleMinimizer3.html">TSimpleMinimizer3</a></td>
 <td class="itemunit"><a class="bold" href="Minimizer_S.html">Minimizer_S</a></td>
-<td class="itemdesc"><p>mozhet uvelichivat' shag optimizatsii !!! seychas ispol'zuetsya etot !!!</p></td>
+<td class="itemdesc"><p>Implements simple downhill simplex algorithm able to increase step size.</p></td>
 </tr>
 <tr class="list">
 <td class="itemname"><a class="bold" href="DataLoader.TSpecialCurveParameter.html">TSpecialCurveParameter</a></td>

@@ -1,3 +1,14 @@
+{
+This software is distributed under GPL
+in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
+
+@abstract(Contains definitions of auxiliary data containers.)
+
+@author(Dmitry Morozov dvmorozov@hotmail.com, 
+LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
+Facebook https://www.facebook.com/profile.php?id=100004082021870)
+}
 unit MSCRDataClasses;
 
 {$MODE Delphi}
@@ -8,7 +19,7 @@ uses Classes, SelfCheckedComponentList, Grids, SysUtils, NumericGrid, SimpMath,
      Tools, TableComp, DataClasses, DataLoader;
 
 const
-    //  konstanty rezhima otobrazheniya
+	{ Display mode constants. }
     XCM_2T    = 0; 
     XCM_T     = 1; 
     XCM_SINTL = 2; 
@@ -18,10 +29,10 @@ const
     FinishPosName: string = 'Finish Pos.';
 
 type
-    //  pozvolyaet vvodit'/vyvodit' ugly v razlichnyh predstavleniyah;
-    //  pri zagruzke dannyh iz Grid'a proveryaet korrektnost' i
-    //  dobavlyaet v spisok tol'ko te dannye, dlya kot. sootvetstvuyuschie
-    //  stroki sovershenno korrektny
+	{ Defines container for curve instances (specimens). 
+	  Allows to input/output angles in different representations. 
+	  In copying data from grid verifies them and adds to the list 
+	  only data for which corresponding rows are correct. }
     TMSCRSpecimenList = class(TSpecimenList)
     protected
         function RecalcParamValue(P: TSpecialCurveParameter): Double; override;
@@ -29,14 +40,16 @@ type
             P: TSpecialCurveParameter; NewValue: Double); override;
         
     public
-        Lambda: Double;   //  dlina volny pri kotoroy byla snyata neytronogramma
-        ViewMode: LongInt;//  predpolagaetsya,  chto dannye zadany v formate 2 * Theta
+		{ Vawelength at which neutronogram was recorded. }
+        Lambda: Double;
+		{ It is supposed that data are given in 2 * Theta format. }
+        ViewMode: LongInt;
       
         function GetCopy: TObject; override;
         procedure CopyParameters(const Dest: TObject); override;
     end; 
     
-    //  spisok parametrov krivyh, sohranyaemyy v XML-potoke
+	{ Container of curve parameters (specimens) which is stored in XML-stream. }
     Parameters_list = class(TComponent)
     private
         FParameters: TMSCRSpecimenList;

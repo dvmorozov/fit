@@ -1,41 +1,44 @@
-//      dvoynoy kosoy chertoy kommentiruyutsya zamechaniya, sohranyaemye vo
-//      vseh versiyah ishodnika; figurnymi skobkami kommentiruyutsya zamechaniya,
-//      sohranyaemye tol'ko v versii ishodnika dlya besplatnogo rasprostraneniya
-{------------------------------------------------------------------------------}
-{       Copyright (C) 1999-2007 D.Morozov (dvmorozov@mail.ru)                  }
-{------------------------------------------------------------------------------}
+{
+This software is distributed under GPL
+in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
+
+@abstract(Contains definitions of classes implementing optimization algorithms.)
+
+@author(Dmitry Morozov dvmorozov@hotmail.com, 
+LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
+Facebook https://www.facebook.com/profile.php?id=100004082021870)
+}
 unit Minimizer_S;
 
 {$MODE Delphi}
 
 interface
 
-uses Minimizer, MSCRDataClasses, SelfCheckedComponentList, Classes, SysUtils (* ??? *)(*, Windows  ??? *);
+uses Minimizer, MSCRDataClasses, SelfCheckedComponentList, Classes, SysUtils;
 
 type
-    //  realizuet prostoy algoritm pokoordinatnogo spuska
+    { Implements simple downhill simplex algorithm. }
     TSimpleMinimizer = class(TMinimizer)
     public
         procedure Minimize(var ErrorCode: LongInt); override;
     end;
 
-    //  realizuet prostoy algoritm pokoordinatnogo spuska,
-    //  dlya kazhdoy peremennoy vvoditsya svoy shag
+    { Implements simple downhill simplex algorithm having different steps for every parameter. }
     TSimpleMinimizer2 = class(TMinimizer)
     public
-        // delit vse shagi na 2
+        { Divides all steps by 2. }
         DivideStepsBy2: procedure of object;
-        // vozvraschaet priznak neobhodimosti zavershit' raschet
+        { Returns flag terminating calculation. }
         EndOfCalculation: function: Boolean of object;
         procedure Minimize(var ErrorCode: LongInt); override;
     end;
 
-    //  mozhet uvelichivat' shag optimizatsii
-    //  !!! seychas ispol'zuetsya etot !!!
+    { Implements simple downhill simplex algorithm able to increase step size. Now this variant is used. }
     TSimpleMinimizer3 = class(TMinimizer)
     public
         MultipleSteps: procedure(Factor: Double) of object;
-        // vozvraschaet priznak neobhodimosti zavershit' raschet
+        { Returns flag terminating calculation. }
         EndOfCalculation: function: Boolean of object;
         procedure Minimize(var ErrorCode: LongInt); override;
     end;

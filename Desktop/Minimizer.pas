@@ -1,9 +1,14 @@
-//      dvoynoy kosoy chertoy kommentiruyutsya zamechaniya, sohranyaemye vo
-//      vseh versiyah ishodnika; figurnymi skobkami kommentiruyutsya zamechaniya,
-//      sohranyaemye tol'ko v versii ishodnika dlya besplatnogo rasprostraneniya
-{------------------------------------------------------------------------------}
-{       Copyright (C) 1999-2007 D.Morozov (dvmorozov@mail.ru)                  }
-{------------------------------------------------------------------------------}
+{
+This software is distributed under GPL
+in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
+
+@abstract(Contains definitions of base classes for optimization algorithms.)
+
+@author(Dmitry Morozov dvmorozov@hotmail.com, 
+LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
+Facebook https://www.facebook.com/profile.php?id=100004082021870)
+}
 unit Minimizer;
 
 {$MODE Delphi}
@@ -24,18 +29,33 @@ type
     TEndOfCycle = function: Boolean of object;
     TShowCurMin = procedure of object;
 
+    { Defines interface of data provider for optimization algorithm. }
     IMinimizer = interface(IUnknown)
+        { Returns result of function computation. }
         function  Func: Double;
+        { Calculates function value. }
         procedure CalcFunc;
+        { Returns current step value. }
         function  GetStep: Double;
+        { Set new step value. }
         procedure SetStep(NewStepValue: Double);
+        { Selects next variable parameter. 
+          Changes internal state of provider in such way to allow
+          other methods to have access to parameter data. }
         procedure SetNextParam;
+        { Selects the first variable parameter. }
         procedure SetFirstParam;
+        { Returns value of selected parameter. }
         function  GetParam: Double;
+        { Sets value of selected parameter. }
         procedure SetParam(NewParamValue: Double);
+        { Returns flag indicating end of calculation cycle (when the 
+          last parameter has been varied and corresponding function 
+          values were evaluated. }
         function  EndOfCycle: Boolean;
     end;
 
+    { Defines component implementing IMinimizer interface (providing data for optimization algorithm). }
     TIntMinimizer = class(TComponent, IMinimizer)
         function  Func: Double; virtual; abstract;
         procedure CalcFunc; virtual; abstract;
@@ -48,7 +68,7 @@ type
         function  EndOfCycle: Boolean; virtual; abstract;
     end;
 
-    // realizuet intenrfeys dlya minimizatsii lyubyh funktsiy
+    { Implements interface for optimization of any function. }
     TMinimizer = class(TComponent)
     private
         FOnFunc: TFunc;

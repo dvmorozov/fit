@@ -1,9 +1,14 @@
-//      dvoynoy kosoy chertoy kommentiruyutsya zamechaniya, sohranyaemye vo
-//      vseh versiyah ishodnika; figurnymi skobkami kommentiruyutsya zamechaniya,
-//      sohranyaemye tol'ko v versii ishodnika dlya besplatnogo rasprostraneniya
-{------------------------------------------------------------------------------}
-{       Copyright (C) 1999-2007 D.Morozov (dvmorozov@mail.ru)                  }
-{------------------------------------------------------------------------------}
+{
+This software is distributed under GPL
+in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
+
+@abstract(Contains definition of downhill simplex algorithm.)
+
+@author(Dmitry Morozov dvmorozov@hotmail.com, 
+LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
+Facebook https://www.facebook.com/profile.php?id=100004082021870)
+}
 unit Minimizer_DS;
 
 {$MODE Delphi}
@@ -11,11 +16,10 @@ unit Minimizer_DS;
 interface
 
 uses Minimizer, MSCRDataClasses, SelfCheckedComponentList, Classes,
-    DownhillSimplexContainer, Tools, Algorithm, DownhillSimplexAlgorithm(*,
-    Windows  ??? *);
+    DownhillSimplexContainer, Tools, Algorithm, DownhillSimplexAlgorithm;
 
 type
-    // perehodnik dlya podklyucheniya algoritma k dannoy programme
+	{ Implements downhill simplex algorithm. }
     TDownhillSimplexMinimizer = class(TMinimizer,
         IOptimizedFunction, IDownhillRealParameters, IUpdatingResults)
     private

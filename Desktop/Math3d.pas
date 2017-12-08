@@ -1,9 +1,14 @@
-//      dvoynoy kosoy chertoy kommentiruyutsya zamechaniya, sohranyaemye vo
-//      vseh versiyah ishodnika; figurnymi skobkami kommentiruyutsya zamechaniya,
-//      sohranyaemye tol'ko v versii ishodnika dlya besplatnogo rasprostraneniya
-{------------------------------------------------------------------------------}
-{       Copyright (C) 1999-2007 D.Morozov (dvmorozov@mail.ru)                  }
-{------------------------------------------------------------------------------}
+{
+This software is distributed under GPL
+in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
+
+@abstract(Contains definitions of 3D primitive functions.)
+
+@author(Dmitry Morozov dvmorozov@hotmail.com, 
+LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
+Facebook https://www.facebook.com/profile.php?id=100004082021870)
+}
 unit Math3d;
 
 {$MODE Delphi}
@@ -32,33 +37,32 @@ procedure Transition(Al, Bt, Gm: Double);
 procedure Pro(A, B, C: Double);
 
 procedure GetZerosMatrix(var Matr: TMatrix);
+{ Returns unitary matrix. }
 procedure GetUnitMatrix(var Matr: TMatrix);
-(*vozvraschaet edinichnuyu matritsu*)
+{ Returns inverse matrix. }
 procedure GetReverseMatrix(var Matr: TMatrix);
-(*vozvraschaet obratnuyu matritsu*)
-
+{ Returns transformation matrix. }
 procedure GetMatrixTransition(Al, Bt, Gm: Double; var Matr: TMatrix);
-(*??? what is it ???*)
+{ Returns translation matrix. }
 procedure GetMatrixTrans(A, B, C: Double; var Matr: TMatrix);
-(*vozvraschaet matritsu perenosa*)
+{ Returns dilatation matrix. }
 procedure GetMatrixDilat(A, B, C: Double; var Matr: TMatrix);
-(*vozvraschaet matritsu rastyazheniya / szhatiya*)
-
+{ Returns rotation matrix around X-axis. The angle is given in radians. }
 procedure GetMatrixRotX(Angle: Double; var Matr: TMatrix);
+{ Returns rotation matrix around Y-axis. The angle is given in radians. }
 procedure GetMatrixRotY(Angle: Double; var Matr: TMatrix);
+{ Returns rotation matrix around Z-axis. The angle is given in radians. }
 procedure GetMatrixRotZ(Angle: Double; var Matr: TMatrix);
-(*ugly zadayutsya v radianah*)
 
 procedure MulVectMatr(Matr: TMatrix; var Vector: T3Vector);
+{ Returns product of matrices. Result is placed into Matr parameter.
+  As result container any of the original variables can be given. }
 procedure Mul3DMatrix(var A, B: TMatrix; var Matr: TMatrix);
-(*rezul'tat umnozheniya matrits A, B pomeschaetsya v Matr; v kachestve
-matritsy, poluchayuschey rezul'tat mozhno ukazyvat' odnu iz ishodnyh matrits*)
 
 function Rad(Angle: Double): Double;
 
 var TempMatr2, TempRotMatr: TMatrix;
     RotXMatr, RotYMatr, RotZMatr, DilatMatr, TempMatr: TMatrix;
-(*for compatibility with Structure Player...*)
 
 implementation
 

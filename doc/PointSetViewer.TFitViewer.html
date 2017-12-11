@@ -20,6 +20,8 @@
 <p class="declaration">
 <code>type TFitViewer = class(TComponent)</code></p>
 <h2 class="description">Description</h2>
+<p>
+Component which can show client <a class="normal" href="data.html">data</a> by means of UI components. Supports correspondence between series of Chart and items of CheckListBox. On turning off CheckListBox item serie can be only hidden but not deleted because there is no direct connection between items of CheckListBox and items of <a class="normal" href="PointSetViewer.TFitViewer.html#PointsSetList">PointsSetList</a>.</p>
 <a name="PasDoc-Hierarchy"></a><h2 class="hierarchy">Hierarchy</h2>
 <ul class="hierarchy"><li class="ancestor">TComponent</li>
 <li class="thisitem">TFitViewer</li></ul><h2 class="overview">Overview</h2>
@@ -284,9 +286,7 @@
 <td class="itemcode"><a name="FitClient"></a><code><b>FitClient</b>: <a  href="FitClient.TFitClient.html">TFitClient</a>;</code></td>
 </tr>
 <tr><td colspan="2">
-<p>
-komponent, kotoryy umeet otobrazhat' dannye klienta v komponentah pol'zovatel'skogo interfeysa podderzhivaet soglasovannost' m-u seriyami v Chart i elementami v CheckListBox; !!! pri vyklyuchenii el-ta v CheckListBox seriyu mozhno tol'ko skryt', no nel'zya udalit', potomu chto net pryamoy svyazi m-u el-tami v CheckListBox i el-tami spiska <a class="normal" href="PointSetViewer.TFitViewer.html#PointsSetList">PointsSetList</a> !!!</p>
-</td></tr>
+&nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -335,7 +335,7 @@ komponent, kotoryy umeet otobrazhat' dannye klienta v komponentah pol'zovatel'sk
 </tr>
 <tr><td colspan="2">
 <p>
-nabor spiskov dannyh, kazhdomu iz kotoryh sopostavlyaetsya seriya; !!! spisok passivnyy - soderzhit ukazateli na vneshnie dannye !!!</p>
+List of <a class="normal" href="data.html">data</a> sets for each item of which chart serie is related. The list is passive, it contains pointers to external <a class="normal" href="data.html">data</a>.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -353,9 +353,7 @@ nabor spiskov dannyh, kazhdomu iz kotoryh sopostavlyaetsya seriya; !!! spisok pa
 <td class="itemcode"><a name="Create"></a><code>constructor <b>Create</b>(AOwner: TComponent); override;</code></td>
 </tr>
 <tr><td colspan="2">
-<p>
-sredi vseh prisoedinennyh krivyh</p>
-</td></tr>
+&nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -372,7 +370,7 @@ sredi vseh prisoedinennyh krivyh</p>
 </tr>
 <tr><td colspan="2">
 <p>
-vozvraschaet nomer pervoy vidimoy krivoy v spiske krivyh; !!! eta funktsiya deystvitel'no daet nomer aktivnoy krivoy kogda v Chart'e vidna vsego lish' odna krivaya - eto nuzhno kontrolirovat' otdel'no !!! ??? proverit' esche raz ispol'zovanie - mozhet byt' mozhno sdelat' bolee stroyno</p>
+Returns number of the first visible curve from curve list. This function actually gives the number of active curve when only single curve is visible in the chart. This should be checked separately.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -390,7 +388,7 @@ vozvraschaet nomer pervoy vidimoy krivoy v spiske krivyh; !!! eta funktsiya deys
 </tr>
 <tr><td colspan="2">
 <p>
-nuzhno sdelat' zaschitu</p>
+Return boundary values among all curves.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -399,9 +397,7 @@ nuzhno sdelat' zaschitu</p>
 <td class="itemcode"><a name="GetMaxY"></a><code>function <b>GetMaxY</b>: Double;</code></td>
 </tr>
 <tr><td colspan="2">
-<p>
-sredi vseh prisoedinennyh krivyh</p>
-</td></tr>
+&nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -409,9 +405,7 @@ sredi vseh prisoedinennyh krivyh</p>
 <td class="itemcode"><a name="GetMinX"></a><code>function <b>GetMinX</b>: Double;</code></td>
 </tr>
 <tr><td colspan="2">
-<p>
-sredi vseh prisoedinennyh krivyh</p>
-</td></tr>
+&nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -419,9 +413,7 @@ sredi vseh prisoedinennyh krivyh</p>
 <td class="itemcode"><a name="GetMinY"></a><code>function <b>GetMinY</b>: Double;</code></td>
 </tr>
 <tr><td colspan="2">
-<p>
-sredi vseh prisoedinennyh krivyh</p>
-</td></tr>
+&nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -438,7 +430,7 @@ sredi vseh prisoedinennyh krivyh</p>
 </tr>
 <tr><td colspan="2">
 <p>
-vazvraschaet maks. kol-vo krivyh v kakom-libo intervale</p>
+Returns maximum number of curves in one of given R-factor intervals.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -448,7 +440,7 @@ vazvraschaet maks. kol-vo krivyh v kakom-libo intervale</p>
 </tr>
 <tr><td colspan="2">
 <p>
-vozvraschaet polnoe chislo tochek profilya, vhodyaschih vo vse intervaly</p>
+Returns total number of profile points belonging to any of intervals.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -473,9 +465,7 @@ vozvraschaet polnoe chislo tochek profilya, vhodyaschih vo vse intervaly</p>
 <td class="itemcode"><a name="GetMinMax"></a><code>procedure <b>GetMinMax</b>(var AMinX, AMaxX, AMinY, AMaxY: Double);</code></td>
 </tr>
 <tr><td colspan="2">
-<p>
-sredi vseh prisoedinennyh krivyh</p>
-</td></tr>
+&nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -484,7 +474,7 @@ sredi vseh prisoedinennyh krivyh</p>
 </tr>
 <tr><td colspan="2">
 <p>
-ochischaet vse serii i zapolnyaet ih zanovo ne izmenyaya iz parametrov</p>
+Clears all series and fills them again saving parameter values.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -614,7 +604,7 @@ ochischaet vse serii i zapolnyaet ih zanovo ne izmenyaya iz parametrov</p>
 </tr>
 <tr><td colspan="2">
 <p>
-skryvaet nabor tochek i udalyaet sootvetstvuyuschiy element iz CheckBox;</p>
+Hides given point set and removes corresponding item from CheckBox.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -623,9 +613,7 @@ skryvaet nabor tochek i udalyaet sootvetstvuyuschiy element iz CheckBox;</p>
 <td class="itemcode"><a name="HideBackground"></a><code>procedure <b>HideBackground</b>( Sender: TObject; BackgroundPoints: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
 </tr>
 <tr><td colspan="2">
-<p>
-chtoby vklyuchit' ochistku tablitsy</p>
-</td></tr>
+&nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -641,9 +629,7 @@ chtoby vklyuchit' ochistku tablitsy</p>
 <td class="itemcode"><a name="HideDataPoints"></a><code>procedure <b>HideDataPoints</b>( Sender: TObject; DataPoints: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
 </tr>
 <tr><td colspan="2">
-<p>
-chtoby vklyuchit' ochistku tablitsy</p>
-</td></tr>
+&nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -700,7 +686,7 @@ chtoby vklyuchit' ochistku tablitsy</p>
 </tr>
 <tr><td colspan="2">
 <p>
-ochischaet seriyu i zapolnyaet ee zanovo</p>
+Clears serie set and fills it again.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -726,7 +712,7 @@ ochischaet seriyu i zapolnyaet ee zanovo</p>
 </tr>
 <tr><td colspan="2">
 <p>
-eti metody realizuyut razlichnye sposoby otobrazheniya bez privyazki k konkretnym dannym</p>
+Methods implement different ways of drawing not related with <a class="normal" href="data.html">data</a>.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -752,7 +738,7 @@ eti metody realizuyut razlichnye sposoby otobrazheniya bez privyazki k konkretny
 </tr>
 <tr><td colspan="2">
 <p>
-ne ochischaet seriyu, a obnovlyaet tol'ko intensivnosti</p>
+Does not <a class="normal" href="PointSetViewer.TFitViewer.html#Clear">clear</a> series but only refreshes intencities.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -761,9 +747,7 @@ ne ochischaet seriyu, a obnovlyaet tol'ko intensivnosti</p>
 <td class="itemcode"><a name="SetXCoordMode"></a><code>procedure <b>SetXCoordMode</b>(AMode: LongInt);</code></td>
 </tr>
 <tr><td colspan="2">
-<p>
-obschiy tip formy</p>
-</td></tr>
+&nbsp;</td></tr>
 </table>
 <h3 class="detail">Properties</h3>
 <table class="detail wide_list">

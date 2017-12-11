@@ -1,9 +1,14 @@
-//      dvoynoy kosoy chertoy kommentiruyutsya zamechaniya, sohranyaemye vo
-//      vseh versiyah ishodnika; figurnymi skobkami kommentiruyutsya zamechaniya,
-//      sohranyaemye tol'ko v versii ishodnika dlya besplatnogo rasprostraneniya
-{------------------------------------------------------------------------------}
-{       Copyright (C) 1999-2007 D.Morozov (dvmorozov@mail.ru)                  }
-{------------------------------------------------------------------------------}
+{
+This software is distributed under GPL
+in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
+
+@abstract(Contains definitions of thread containers.)
+
+@author(Dmitry Morozov dvmorozov@hotmail.com, 
+LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
+Facebook https://www.facebook.com/profile.php?id=100004082021870)
+}
 unit Runner;
 
 {$MODE Delphi}
@@ -17,16 +22,15 @@ type
     TEndRunningProcedure = procedure of object;
 
     TRunningThread = class(TThread)
-        //  !!! esli protsess byl prekraschen s pomosch'yu unichtozheniya
-        //  komponenta, to protsedura zaversheniya ne vyzyvaetsya !!!
+    { If process was terminated by means of object destruction then termination procedure is not called. }
     public
         RunningProcedure: TRunningProcedure;
         EndRunningProcedure: TEndRunningProcedure;
         procedure Execute; override;
     end;
-    
+
+    { Class-container for TRunningThread. }
     TRunner = class(TComponent)
-        //  komponent - konteyner dlya TRunningThread
     protected
         FOnRunningProcedure: TRunningProcedure;
         FOnEndRunningProcedure: TEndRunningProcedure;

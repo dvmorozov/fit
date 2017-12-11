@@ -1,9 +1,14 @@
-//      dvoynoy kosoy chertoy kommentiruyutsya zamechaniya, sohranyaemye vo
-//      vseh versiyah ishodnika; figurnymi skobkami kommentiruyutsya zamechaniya,
-//      sohranyaemye tol'ko v versii ishodnika dlya besplatnogo rasprostraneniya
-{------------------------------------------------------------------------------}
-{       Copyright (C) 1999-2007 D.Morozov (dvmorozov@mail.ru)                  }
-{------------------------------------------------------------------------------}
+{
+This software is distributed under GPL
+in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
+
+@abstract(Contains definition of component which can draw client data in UI.)
+
+@author(Dmitry Morozov dvmorozov@hotmail.com, 
+LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
+Facebook https://www.facebook.com/profile.php?id=100004082021870)
+}
 unit PointSetViewer;
 
 {$MODE Delphi}
@@ -12,8 +17,6 @@ interface
 
 uses DataLoader, Classes, SysUtils, Graphics, SelfCopied, CheckLst,
 {$IFNDEF SERVER}
-    // ??? nuzhno perenesti vsyu ustanovku svyazi mezhdu
-    // TFitClient i TFitViewer v TFitClient ???
     FitClient,
 {$ENDIF}
     tagraph, Forms, SelfCheckedComponentList, MSCRDataClasses;
@@ -24,21 +27,17 @@ uses DataLoader, Classes, SysUtils, Graphics, SelfCopied, CheckLst,
 {$ENDIF}
 
 const
-    //konstanty rezhima otobrazheniya
+    { Display mode constants. }
     XCM_2T    = 0;
     XCM_T     = 1;
     XCM_SINTL = 2;
 
 type
+	{ Component which can show client data by means of UI components.
+	  Supports correspondence between series of Chart and items of CheckListBox.
+      On turning off CheckListBox item serie can be only hidden but not deleted
+      because there is no direct connection between items of CheckListBox and items of PointsSetList. }
     TFitViewer = class(TComponent)
-    //  komponent, kotoryy umeet otobrazhat' dannye klienta
-    //  v komponentah pol'zovatel'skogo interfeysa
-    //  podderzhivaet soglasovannost' m-u seriyami v Chart i
-    //  elementami v CheckListBox;
-    //  !!! pri vyklyuchenii el-ta v CheckListBox seriyu mozhno
-    //  tol'ko skryt', no nel'zya udalit', potomu chto net
-    //  pryamoy svyazi m-u el-tami v CheckListBox i
-    //  el-tami spiska PointsSetList !!!
     protected
 {$IFNDEF SERVER}
         FitClient: TFitClient;
@@ -46,12 +45,12 @@ type
         FXCoordMode: LongInt;
         MaxX, MinX, MaxY, MinY: Double;
         ViewMarkers: Boolean;
-        FForm: TForm;       //  obschiy tip formy
+        FForm: TForm;
 
         procedure SetXCoordMode(AMode: LongInt);
         
-        //  nabor spiskov dannyh, kazhdomu iz kotoryh sopostavlyaetsya seriya;
-        //  !!! spisok passivnyy - soderzhit ukazateli na vneshnie dannye !!!
+		{ List of data sets for each item of which chart serie is related. 
+		The list is passive, it contains pointers to external data. }
 
     protected
         PointsSetList: TSelfCheckedComponentList;
@@ -64,13 +63,12 @@ type
             RFactorIntervals: TTitlePointsSet
             );
 {$ENDIF}
-        //  vazvraschaet maks. kol-vo krivyh v kakom-libo intervale
+		{ Returns maximum number of curves in one of given R-factor intervals. }
         function GetMaxCurveNum(
             CurvesList: TSelfCopiedCompList;
             RFactorIntervals: TTitlePointsSet
             ): LongInt;
-        //  vozvraschaet polnoe chislo tochek profilya,
-        //  vhodyaschih vo vse intervaly
+		{ Returns total number of profile points belonging to any of intervals. }
         function GetPointsNumInIntervals(
             Profile: TTitlePointsSet;
             RFactorIntervals: TTitlePointsSet
@@ -90,8 +88,9 @@ type
         procedure ClearDatasheetTable;
 {$ENDIF}
         function ValToStr(Value: Double): string;
-        //  eti metody realizuyut razlichnye sposoby
-        //  otobrazheniya bez privyazki k konkretnym dannym
+
+		{ Methods implement different ways of drawing not related with data. }
+		
         procedure PlotSelectedPoints(
             Sender: TObject; SelectedPoints: TTitlePointsSet);
 
@@ -100,22 +99,21 @@ type
         procedure HideCurvePositions(
             Sender: TObject; CurvePositions: TTitlePointsSet);
 
-        //  chtoby vklyuchit' ochistku tablitsy
         procedure HideDataPoints(
             Sender: TObject; DataPoints: TTitlePointsSet);
 
-        //  chtoby vklyuchit' ochistku tablitsy
         procedure HideBackground(
             Sender: TObject; BackgroundPoints: TTitlePointsSet);
 
         procedure Refresh(Sender: TObject);
-        //  ne ochischaet seriyu, a obnovlyaet tol'ko intensivnosti
+
+		{ Does not clear series but only refreshes intencities. }
         procedure RefreshPointsSet(
             Sender: TObject; PointsSet: TNeutronPointsSet);
-        //  skryvaet nabor tochek i udalyaet sootvetstvuyuschiy element iz CheckBox;
+		{ Hides given point set and removes corresponding item from CheckBox. }
         procedure Hide(Sender: TObject; PointsSet: TNeutronPointsSet);
 
-        //  ochischaet seriyu i zapolnyaet ee zanovo
+		{ Clears serie set and fills it again. }
         procedure PlotPointsSet(SA: TNeutronPointsSet);
 
     public
@@ -148,25 +146,24 @@ type
         procedure SetViewMarkers(AViewMarkers: Boolean);
         procedure ViewAllMarkers;
         procedure Clear(Sender: TObject);
-        //  ochischaet vse serii i zapolnyaet ih zanovo
-        //  ne izmenyaya iz parametrov
+		{ Clears all series and fills them again saving parameter values. }
         procedure Plot;
-        //  vozvraschaet nomer pervoy vidimoy krivoy v spiske krivyh;
-        //  !!! eta funktsiya deystvitel'no daet nomer aktivnoy krivoy
-        //  kogda v Chart'e vidna vsego lish' odna krivaya - eto nuzhno
-        //  kontrolirovat' otdel'no !!!
-        //  ??? proverit' esche raz ispol'zovanie - mozhet byt' mozhno
-        //  sdelat' bolee stroyno
+		{ Returns number of the first visible curve from curve list. 
+          This function actually gives the number of active curve
+          when only single curve is visible in the chart. This should
+          be checked separately. }
         function GetActiveCurve: LongInt;
         function GetActivePointsSet: TNeutronPointsSet;
         function GetPointsSet(ActiveNumber: LongInt): TNeutronPointsSet;
-        //  nuzhno sdelat' zaschitu
-        function GetMaxX: Double;   //  sredi vseh prisoedinennyh krivyh
-        function GetMinX: Double;   //  sredi vseh prisoedinennyh krivyh
-        function GetMaxY: Double;   //  sredi vseh prisoedinennyh krivyh
-        function GetMinY: Double;   //  sredi vseh prisoedinennyh krivyh
+
+		{ Return boundary values among all curves. }
+		
+        function GetMaxX: Double;
+        function GetMinX: Double;
+        function GetMaxY: Double;
+        function GetMinY: Double;
         procedure GetMinMax(var AMinX, AMaxX, AMinY, AMaxY: Double);
-                                    //  sredi vseh prisoedinennyh krivyh
+
         constructor Create(AOwner: TComponent); override;
         destructor Destroy; override;
         

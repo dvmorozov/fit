@@ -20,6 +20,8 @@
 <p class="declaration">
 <code>type TSelfCopiedCompList = class(TSelfCheckedComponentList, <a class="normal" href="SelfCopied.ISelfCopied.html">ISelfCopied</a>)</code></p>
 <h2 class="description">Description</h2>
+<p>
+List of self copied components. By default is always active, so copy of list is also active. Caller should make the list inactive by itself if necessary.</p>
 <a name="PasDoc-Hierarchy"></a><h2 class="hierarchy">Hierarchy</h2>
 <ul class="hierarchy"><li class="ancestor">TSelfCheckedComponentList</li>
 <li class="thisitem">TSelfCopiedCompList</li></ul><h2 class="overview">Overview</h2>
@@ -70,9 +72,7 @@
 <td class="itemcode"><a name="GetCopy"></a><code>function <b>GetCopy</b>: TObject; virtual;</code></td>
 </tr>
 <tr><td colspan="2">
-<p>
-!!! по умолчанию список всегда активен, поэтому копи€ списка всегда находтс€ в активном состо€нии; при необходимости объект, которому нужна копи€ должен сам сделать список неактивным !!!</p>
-</td></tr>
+&nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -88,7 +88,9 @@
 <td class="itemcode"><a name="GetSharedCopy"></a><code>function <b>GetSharedCopy</b>: TObject; virtual;</code></td>
 </tr>
 <tr><td colspan="2">
-&nbsp;</td></tr>
+<p>
+Returns copy of list which owns its items.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -96,9 +98,7 @@
 <td class="itemcode"><a name="CopyParameters"></a><code>procedure <b>CopyParameters</b>(const Dest: TObject); virtual;</code></td>
 </tr>
 <tr><td colspan="2">
-<p>
-возвращает копию списка, элементы которого €вл€ютс€ собственными элементами</p>
-</td></tr>
+&nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">

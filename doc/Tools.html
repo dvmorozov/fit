@@ -15,9 +15,13 @@
 <td><a class="section" href="#PasDoc-Description">Description</a></td><td><a class="section" href="#PasDoc-Uses">Uses</a></td><td><a class="section" href="#PasDoc-Classes">Classes, Interfaces, Objects and Records</a></td><td><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></td><td><a class="section" href="#PasDoc-Types">Types</a></td><td><a class="section" href="#PasDoc-Constants">Constants</a></td><td>Variables</td></tr></table>
 <a name="PasDoc-Description"></a><h2 class="description">Description</h2>
 <p>
-&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash; This software is distributed under GPL (see gpl.txt for details) in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
+Contains definition of auxiliary functions.</p>
+<p>
+This software is distributed under GPL in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
 
-<p>Copyright (C) 1999-2008 D.Morozov (dvmorozov@mail.ru) &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</p>
+<p>
+
+<p></p>
 <a name="PasDoc-Uses"></a><h2 class="uses">Uses</h2>
 <ul class="useslist"><li>CBRCComponent</li><li>Classes</li><li>MyExceptions</li><li>SimpMath</li><li>SysUtils</li></ul><h2 class="overview">Overview</h2>
 <a name="PasDoc-Classes"></a><h3 class="cio">Classes, Interfaces, Objects and Records</h3>
@@ -137,49 +141,63 @@
 <td class="itemcode"><a name="AddItemLongArr"></a><code>procedure <b>AddItemLongArr</b>( var Arr: <a  href="Tools.html#TLongArray">TLongArray</a>; const Item: LongInt );</code></td>
 </tr>
 <tr><td colspan="1">
-&nbsp;</td></tr>
+<p>
+Adds item to array.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="itemcode"><a name="AddVectorToArray"></a><code>procedure <b>AddVectorToArray</b>( var Arr: <a  href="Tools.html#TVector3Array">TVector3Array</a>; const Vector: TDoubleVector3 );</code></td>
 </tr>
 <tr><td colspan="1">
-&nbsp;</td></tr>
+<p>
+Adds vector to the end of vector array.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="itemcode"><a name="CalculateExpr"></a><code>function <b>CalculateExpr</b>(var Expression: string; var ErrorCode: LongInt; const ParamRequest: <a  href="Tools.html#FParamRequest">FParamRequest</a>): Double;</code></td>
 </tr>
 <tr><td colspan="1">
-&nbsp;</td></tr>
+<p>
+Calculates expression passed via Expression parameter.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="itemcode"><a name="CalculateSimpExpr"></a><code>function <b>CalculateSimpExpr</b>(var Expression: string; var ErrorCode: LongInt; const ParamRequest: <a  href="Tools.html#FParamRequest">FParamRequest</a>): Double;</code></td>
 </tr>
 <tr><td colspan="1">
-&nbsp;</td></tr>
+<p>
+Calculates expression passed via Expression parameter.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="itemcode"><a name="CheckArrItemIndex"></a><code>procedure <b>CheckArrItemIndex</b>(const MinIndex, MaxIndex, Index: LongInt);</code></td>
 </tr>
 <tr><td colspan="1">
-&nbsp;</td></tr>
+<p>
+Checks if index of item is valid. Otherwise throws an exception.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="itemcode"><a name="DeleteItemLongArr"></a><code>procedure <b>DeleteItemLongArr</b>( var Arr: <a  href="Tools.html#TLongArray">TLongArray</a>; const Index: LongInt );</code></td>
 </tr>
 <tr><td colspan="1">
-&nbsp;</td></tr>
+<p>
+Deletes item from array.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="itemcode"><a name="DeleteVectorFromArray"></a><code>procedure <b>DeleteVectorFromArray</b>( var Arr: <a  href="Tools.html#TVector3Array">TVector3Array</a>; const Index: LongInt );</code></td>
 </tr>
 <tr><td colspan="1">
-&nbsp;</td></tr>
+<p>
+Deletes vector with given position from array.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -187,7 +205,7 @@
 </tr>
 <tr><td colspan="1">
 <p>
-!!! маска должна соответствовать формату Str в <a class="normal" href="Tools.html#StringAsDoubleVector3">StringAsDoubleVector3</a> !!!</p>
+Converts vector to string. Result has format of <a class="normal" href="Tools.html#DoubleVector3EditMask">DoubleVector3EditMask</a>.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -195,28 +213,36 @@
 <td class="itemcode"><a name="GetCharPosition"></a><code>function <b>GetCharPosition</b>(St: string; Ch: Char; Direction: ShortInt; StartIndex: LongInt): LongInt;</code></td>
 </tr>
 <tr><td colspan="1">
-&nbsp;</td></tr>
+<p>
+Searches char in string. Returns -1 if char not found.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="itemcode"><a name="GetCharSetPosition"></a><code>function <b>GetCharSetPosition</b>(St: string; ChSet: <a  href="Tools.html#TCharSet">TCharSet</a>; Direction: ShortInt; StartIndex: LongInt; var Ch: Char): LongInt;</code></td>
 </tr>
 <tr><td colspan="1">
-&nbsp;</td></tr>
+<p>
+Searches chars from the given set in string. Direction = 1 means moving to the right, Direction = -1 means moving to the left. Returns -1 in the case of <a class="normal" href="error.html">error</a>.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="itemcode"><a name="GetCmdLineParameters"></a><code>function <b>GetCmdLineParameters</b>: string;</code></td>
 </tr>
 <tr><td colspan="1">
-&nbsp;</td></tr>
+<p>
+Returns substring of command line string excluding path to executable enclosed in quotation marks.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="itemcode"><a name="GetPosInArrays"></a><code>procedure <b>GetPosInArrays</b>( const ArraysLengths: array of LongInt; const Index: LongInt; var ArrayNumber: LongInt; var ArrayIndex: LongInt );</code></td>
 </tr>
 <tr><td colspan="1">
-&nbsp;</td></tr>
+<p>
+Returns index of array and index of item in this array by through index of element among all arrays.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -224,7 +250,7 @@
 </tr>
 <tr><td colspan="1">
 <p>
-возвращает подстроку параметров из командной строки программы обрамленную символами &quot;&quot;, если командная строка не содержит других параметров кроме пути к программе, то возвращается пустая строка</p>
+Returns random negative or positive value.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -232,14 +258,18 @@
 <td class="itemcode"><a name="InsertItemLongArr"></a><code>procedure <b>InsertItemLongArr</b>( var Arr: <a  href="Tools.html#TLongArray">TLongArray</a>; const Index: LongInt; const Item: LongInt );</code></td>
 </tr>
 <tr><td colspan="1">
-&nbsp;</td></tr>
+<p>
+Inserts item into array.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="itemcode"><a name="InsertVectorIntoArray"></a><code>procedure <b>InsertVectorIntoArray</b>( var Arr: <a  href="Tools.html#TVector3Array">TVector3Array</a>; const Index: LongInt; const Vector: TDoubleVector3 );</code></td>
 </tr>
 <tr><td colspan="1">
-&nbsp;</td></tr>
+<p>
+Inserts vector into the given position Index.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -253,9 +283,7 @@
 <td class="itemcode"><a name="StringAsDoubleVector3"></a><code>function <b>StringAsDoubleVector3</b>(const Str: string): TDoubleVector3;</code></td>
 </tr>
 <tr><td colspan="1">
-<p>
-!!! возврат должен соответствовать маске !!!</p>
-</td></tr>
+&nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -269,14 +297,18 @@
 <td class="itemcode"><a name="StrToVector3"></a><code>function <b>StrToVector3</b>(const St: string): TDoubleVector3;</code></td>
 </tr>
 <tr><td colspan="1">
-&nbsp;</td></tr>
+<p>
+Converts string having format (*.*,*.*,*.*) to vector.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="itemcode"><a name="UtilizeObject"></a><code>procedure <b>UtilizeObject</b>(PtrToObject: TObject);</code></td>
 </tr>
 <tr><td colspan="1">
-&nbsp;</td></tr>
+<p>
+Destructs objects performing additional actions. To the moment it is only checking that type is TCBRCComponent and calling its method Free. All <a class="normal" href="cgiModules.html#Application">application</a> objects should be destroyed by this function.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -284,7 +316,7 @@
 </tr>
 <tr><td colspan="1">
 <p>
-преобразует строку в формате (*.*,*.*,*.*) в вектор</p>
+Converts vector to string having format (*.*,*.*,*.*).</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -293,7 +325,7 @@
 </tr>
 <tr><td colspan="1">
 <p>
-преобразует вектор в строку в формате (*.*,*.*,*.*)</p>
+Converts given number to number with given accuracy.</p>
 </td></tr>
 </table>
 <h3 class="detail">Types</h3>
@@ -302,16 +334,16 @@
 <td class="itemcode"><a name="FParamRequest"></a><code><b>FParamRequest</b> = function(Param: string): Double of object;</code></td>
 </tr>
 <tr><td colspan="1">
-&nbsp;</td></tr>
+<p>
+Returns value of parameter with given name.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="itemcode"><a name="TCharSet"></a><code><b>TCharSet</b> = set of Char;</code></td>
 </tr>
 <tr><td colspan="1">
-<p>
-возвращает значение для параметра Param</p>
-</td></tr>
+&nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -348,7 +380,7 @@
 </tr>
 <tr><td colspan="1">
 <p>
-константы ошибок для процедуры расчета строки</p>
+<a class="normal" href="error.html">Error</a> constants of the procedure evaluating user defined expression.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -357,9 +389,15 @@
 </tr>
 <tr><td colspan="1">
 <p>
-проверяет допустимость индекса некоторого элемента, в случае недопустимости вызывается исключение функции преобразования вектора в строку и обратно</p>
+Mask defining format of the string passed to <a class="normal" href="Tools.html#StringAsDoubleVector3">StringAsDoubleVector3</a>.</p>
 </td></tr>
 </table>
+<h2 class="authors">Author</h2>
+<ul class="authors">
+<li>Dmitry Morozov <a  href="mailto:dvmorozov@hotmail.com">dvmorozov@hotmail.com</a>, 
+LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
+Facebook https://www.facebook.com/profile.php?id=100004082021870</li>
+</ul>
 <hr noshade size="1"><span class="appinfo"><em>Generated by <a  href="http://pasdoc.sourceforge.net/">PasDoc 0.14.0</a>. </em>
 </span>
 </td></tr></table></body></html>

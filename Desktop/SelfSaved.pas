@@ -1,13 +1,14 @@
-//      двойной косой чертой комментируются замечания, сохраняемые во
-//      всех версиях исходника; фигурными скобками комментируются замечания,
-//      сохраняемые только в версии исходника для бесплатного распространения
-{------------------------------------------------------------------------------
-    This software is distributed under GPL (see gpl.txt for details)
-    in the hope that it will be useful, but WITHOUT ANY WARRANTY;
-    without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
+{
+This software is distributed under GPL
+in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
 
-    Copyright (C) 1999-2008 D.Morozov (dvmorozov@mail.ru)
-------------------------------------------------------------------------------}
+@abstract(Contains definition of component which can serialize itself.)
+
+@author(Dmitry Morozov dvmorozov@hotmail.com, 
+LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
+Facebook https://www.facebook.com/profile.php?id=100004082021870)
+}
 unit SelfSaved;
 
 {$MODE Delphi}
@@ -17,64 +18,62 @@ interface
 uses Classes, ClassInheritIDs;
 
 type
+    { Attribute descriptor for storing in file. }
     TPropHeaderRec = record
-        //  запись, характеризующая свойства класса в файле
-        ClassInheritID: Byte;           //  уникальный идентификатор класса
-                                        //  в цепи наследования
-        PropVersionNum: Byte            //  номер версии свойств класса
+        { Unique class identifier in the inheritance chain. }
+        ClassInheritID: Byte;           
+        { Version number of class attribute. }
+        PropVersionNum: Byte;
     end;
 
+    { Component which can serialize itself into stream allowing 
+      adding new attributes and changing order of inheritance without
+      loosing ability to read existing files (backward compatibility).
+      Writing (reading) class attributes starts from attributes of 
+      the class which is last in the inheritance chain. 
+      Reading / writing operations are implemented as class operations
+      to provide possibility of moving by inheritance chain. }
     TSelfSavedComponent = class(TComponent)
-        //  компонент, который умеет сохраняться в потоке, позволяя
-        //  при этом реализовать добавление новых параметров и
-        //  изменение порядка наследования без потери способности
-        //  читать существующие файлы; запись (чтение) свойств класса
-        //  начинаются со свойств класса последнего в цепи наследования
-        //  функции записи/чтения сделаны классовыми для того, чтобы
-        //  иметь возможность перемещаться по цепи наследования
     private
+        { Calls the method of reading attributes of inheritance chain 
+          based on results of reading starting and ending markers. }
         procedure ReadData(Reader: TReader);
-            //  вызывает ф-ю чтения свойств цепи наследования, читая
-            //  маркеры начала и конца данных
+        { Sequentially reads attribute descriptors from the file and
+          searches class in the inheritance chain which is responsible
+          for reading these data. }
         class procedure ReadInheritChain(
-            //  последовательно читает заголовки свойств из файла и
-            //  ищет в цепи наследования класс, который отвечает за
-            //  чтение этих данных
             const Reader: TReader;
+            { The object attributes of which are read. }
             const AnObject: TSelfSavedComponent
-                //  объект, свойства которого нужно записать
             );
+        { Reads attributes of class. }
         class procedure ReadPropHeader(const Reader: TReader;
-            //  читает параметры, характеризующие сохраненные свойства класса
             out PropHeaderRec: TPropHeaderRec
             );
-
+        { Writes class attributes and markers of start and end of data. }
         procedure WriteData(Writer: TWriter);
-            //  вызывает запись свойств класса, записывая
-            //  маркеры начала и конца данных
+        { Writes attributes of all inheritance chain up to TSelfSavedComponent 
+          class sequentially moving by the chain. }
         class procedure WriteInheritChain(
-            //  записывает свойства всей цепи наследования до класса
-            //  TSelfSavedComponent, последовательно перемещаясь по цепи
             const Writer: TWriter;
+            { Object attributes of which are written. }
             const AnObject: TSelfSavedComponent
-                //  объект, свойства которого нужно записать
             ); virtual;
+        { Writes attribute descriptor. }
         class procedure WritePropHeader(const Writer: TWriter); virtual;
-            //  записывет параметры, характеризующие сохраненные свойства класса
 
     protected
+        { Checks if the class suppors given inheritance ID. }
         class function IsClassInheritIDValid(
-            //  проверяет, поддерживает ли класс данный ID
-            const ClassInheritID: Byte      //  уникальный идентификатор класса
-                                            //  в цепи наследования
+            { Unique class id in the inheritance chain. }
+            const ClassInheritID: Byte
             ): Boolean; virtual;
+        { Returns attribute descriptor for given class. }
         class function GetPropHeaderRec: TPropHeaderRec; virtual;
-            //  возвращает запись заголовка свойств класса
         class procedure ReadProperties(
-            //  выполняет чтение свойств класса из файла (здесь ничего не делает)
-            //  если номер версии свойств в файле меньше, чем текущий,
-            //  то выполняется алгоритм правильной инициализации свойств
-            //  класса, значения которых нельзя прочитать из файла
+            { Reads class attributes from file (for this class does nothing). If number 
+              of version in file is less than the current then proper initialization 
+              algorithm is executed for values which can not be read from the file. }
             const Reader: TReader;
             const PropHeaderRec: TPropHeaderRec;
                 //  запись заголовка свойств, прочитанная из файла

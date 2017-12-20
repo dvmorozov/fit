@@ -1,13 +1,14 @@
-//      двойной косой чертой комментируютс€ замечани€, сохран€емые во
-//      всех верси€х исходника; фигурными скобками комментируютс€ замечани€,
-//      сохран€емые только в версии исходника дл€ бесплатного распространени€
-{------------------------------------------------------------------------------
-    This software is distributed under GPL (see gpl.txt for details)
-    in the hope that it will be useful, but WITHOUT ANY WARRANTY;
-    without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
+{
+This software is distributed under GPL
+in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
 
-    Copyright (C) 1999-2008 D.Morozov (dvmorozov@mail.ru)
-------------------------------------------------------------------------------}
+@abstract(Contains definitions of interface and class for component which can copy itself.)
+
+@author(Dmitry Morozov dvmorozov@hotmail.com, 
+LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
+Facebook https://www.facebook.com/profile.php?id=100004082021870)
+}
 unit SelfCopied;
 
 {$MODE Delphi}
@@ -18,16 +19,14 @@ uses
     Classes, SelfCheckedComponentList, SysUtils, CBRCComponent, MyExceptions;
 
 type
+	{ The interface of component which can copy itself. }
     ISelfCopied = interface
         ['{DF1ABB41-F255-11D4-968F-C7AD39AA7469}']
+		{ Returns only copy of the object itself without copies of associated objects. }
         function GetCopy: TObject;
-            //  возвращает только собственно копию объекта,
-            //  без копий ассоциированных объектов
         procedure CopyParameters(const Dest: TObject);
 
-            //  задание специальных режимов копировани€; введение
-            //  спец. режимов копировани€ вызываетс€ необходимостью
-            //  вложенности ф-й копировани€
+		{ Sets special copying modes. This is caused by necessity of nested calls. }
         procedure SetSelfCopyingMode(const AMode: LongInt);
         function GetSelfCopyingMode: LongInt;
     end;
@@ -35,6 +34,7 @@ type
 const SelfCopiedGUID: TGUID = '{DF1ABB41-F255-11D4-968F-C7AD39AA7469}';
 
 type
+	{ The component implementing self copying interface. }
     TSelfCopiedComponent = class(TCBRCComponent, ISelfCopied)
     public
         function GetCopy: TObject; virtual;
@@ -46,15 +46,14 @@ type
 
     ESelfCopiedCompList = class(Exception);
 
+	{ List of self copied components. By default is always active, so copy of 
+      list is also active. Caller should make the list inactive by itself if 
+	  necessary. }
     TSelfCopiedCompList = class(TSelfCheckedComponentList, ISelfCopied)
-        //  !!! по умолчанию список всегда активен, поэтому копи€ списка
-        //  всегда находтс€ в активном состо€нии; при необходимости объект,
-        //  которому нужна копи€ должен сам сделать список неактивным !!!
     public
         function GetCopy: TObject; virtual;
+		{ Returns copy of list which owns its items. }
         function GetSharedCopy: TObject; virtual;
-            //  возвращает копию списка, элементы которого
-            //  €вл€ютс€ собственными элементами
         procedure CopyParameters(const Dest: TObject); virtual;
 
         procedure SetSelfCopyingMode(const AMode: LongInt); virtual; abstract;

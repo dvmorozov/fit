@@ -1,13 +1,14 @@
-//      двойной косой чертой комментируются замечания, сохраняемые во
-//      всех версиях исходника; фигурными скобками комментируются замечания,
-//      сохраняемые только в версии исходника для бесплатного распространения
-{------------------------------------------------------------------------------
-    This software is distributed under GPL (see gpl.txt for details)
-    in the hope that it will be useful, but WITHOUT ANY WARRANTY;
-    without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
+{
+This software is distributed under GPL
+in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
 
-    Copyright (C) 1999-2008 D.Morozov (dvmorozov@mail.ru)
-------------------------------------------------------------------------------}
+@abstract(Contains definition of auxiliary functions.)
+
+@author(Dmitry Morozov dvmorozov@hotmail.com, 
+LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
+Facebook https://www.facebook.com/profile.php?id=100004082021870)
+}
 unit Tools;
 
 {$MODE Delphi}
@@ -17,30 +18,32 @@ interface
 uses SysUtils, Classes, SimpMath, CBRCComponent, MyExceptions;
 
 type
+	{ Returns value of parameter with given name. }
     FParamRequest = function(Param: string): Double of object;
-        //  возвращает значение для параметра Param
+
     TCharSet = set of Char;
     TVector3Array = array of TDoubleVector3;
 
     ETools = class(Exception);
 
 const
-    //  константы ошибок для процедуры расчета строки
+	{ Error constants of the procedure evaluating user defined expression. }
     CALC_NO_ERRORS          : LongInt = 0;
     CALC_INVALID_PARAMETER  : LongInt = 1;
     CALC_INVALID_EXPRESSION : LongInt = 2;
 
+{ Adds vector to the end of vector array. }
 procedure AddVectorToArray(
-    //  добавляет вектор к концу массива векторов
     var Arr: TVector3Array;
     const Vector: TDoubleVector3
     );
+{ Inserts vector into the given position Index. }
 procedure InsertVectorIntoArray(
-    //  вставляет вектор в массив в позицию Index
     var Arr: TVector3Array;
     const Index: LongInt;
     const Vector: TDoubleVector3
     );
+{ Deletes vector with given position from array. }	
 procedure DeleteVectorFromArray(
     var Arr: TVector3Array;
     const Index: LongInt
@@ -49,82 +52,88 @@ procedure DeleteVectorFromArray(
 type
     TLongArray = array of LongInt;
 
+{ Deletes item from array. }		
 procedure DeleteItemLongArr(
     var Arr: TLongArray;
     const Index: LongInt
     );
+{ Inserts item into array. }
 procedure InsertItemLongArr(
     var Arr: TLongArray;
     const Index: LongInt;
-    const Item: LongInt     //  вставляемое значение
+    const Item: LongInt
     );
+{ Adds item to array. }	
 procedure AddItemLongArr(
     var Arr: TLongArray;
     const Item: LongInt
     );
-
+{ Checks if index of item is valid. Otherwise throws an exception. }
 procedure CheckArrItemIndex(const MinIndex, MaxIndex, Index: LongInt);
-    //  проверяет допустимость индекса некоторого элемента,
-    //  в случае недопустимости вызывается исключение
 
-//  функции преобразования вектора в строку и обратно
+{ Functions converting vector to string and back. }
+
+{ Mask defining format of the string passed to StringAsDoubleVector3. }
 const DoubleVector3EditMask = '!\(0\.0999\,\ 0\.0999\,\ 0\.0999\);1;';
-//  !!! маска должна соответствовать формату Str в StringAsDoubleVector3 !!!
 
+{ Converts vector to string. Result has format of DoubleVector3EditMask. }
 function DoubleVector3AsString(const Vect: TDoubleVector3;
-    FixedMode: Boolean; //  True - фиксированное число знаков после запятой
+	{ True means that number of digits after decimal separator is fixed. }
+    FixedMode: Boolean;
     Precision, Digits: LongInt): string;
-        //  !!! возврат должен соответствовать маске !!!
+
 function StringAsDoubleVector3(const Str: string): TDoubleVector3;
 
 function StrToFloatDef(St: string; DefVal: Extended): Extended;
+{ Converts string having format (*.*,*.*,*.*) to vector. }
 function StrToVector3(const St: string): TDoubleVector3;
-    //  преобразует строку в формате (*.*,*.*,*.*) в вектор
+{ Converts vector to string having format (*.*,*.*,*.*). }
 function Vector3ToStr(const Vector: TDoubleVector3): string;
-    //  преобразует вектор в строку в формате (*.*,*.*,*.*)
-
+{ Converts given number to number with given accuracy. }
 function WithGivenAccuracy(
-    Value: Double;      //  число для преобразования
-    Decimals: LongInt   //  требуемое число знаков после запятой
+	{ The number to convert. }
+    Value: Double;
+	{ Required number of decimal digits after decimal separator. }
+    Decimals: LongInt
     ): Double;
+{ Returns substring of command line string excluding path to executable 
+  enclosed in quotation marks. }
 function GetCmdLineParameters: string;
-    //  возвращает подстроку параметров из командной строки программы
-    //  обрамленную символами "", если командная строка не содержит других
-    //  параметров кроме пути к программе, то возвращается пустая строка 
+{ Returns random negative or positive value. }
 function GetRandomWithSign: Double;
-
+{ Calculates expression passed via Expression parameter. }
 function CalculateSimpExpr(var Expression: string; var ErrorCode: LongInt;
     const ParamRequest: FParamRequest): Double;
+{ Calculates expression passed via Expression parameter. }
 function CalculateExpr(var Expression: string; var ErrorCode: LongInt;
-    //  вычисляет значение выражения переданного в строке Expression
     const ParamRequest: FParamRequest): Double;
-
-
+{ Searches char in string. Returns -1 if char not found. }
 function GetCharPosition(St: string; Ch: Char;
-    //  возарщает -1 если символ не обнаружен
     Direction: ShortInt; StartIndex: LongInt): LongInt;
+{ Searches chars from the given set in string. 
+  Direction = 1 means moving to the right,
+  Direction = -1 means moving to the left. 
+  Returns -1 in the case of error. }
 function GetCharSetPosition(St: string; ChSet: TCharSet;
-    Direction: ShortInt;    //  Direction = 1 - движение по строке вправо
-                            //  Direction = -1 - движение по строке влево;
-                            //  возвращает -1 - ошибка
+    Direction: ShortInt;
     StartIndex: LongInt; var Ch: Char): LongInt;
-
+{ Returns index of array and index of item in this array by through index of element among all arrays. }
 procedure GetPosInArrays(
-    //  возвращает номер массива и индекс элемента в этом массиве по
-    //  сквозному индексу элемента среди всех массивов
-    const ArraysLengths: array of LongInt;  //  массив длин массивов
-    const Index: LongInt;                   //  "сквозной" индекс элемента
-    var ArrayNumber: LongInt;               //  номер массива, содержащего
-                                            //  нужный элемент
-    var ArrayIndex: LongInt                 //  индекс элемента в этом массиве
+	{ Array containing lengths of item arrays. }
+    const ArraysLengths: array of LongInt;
+	{ Throug index of item in arrays. }
+    const Index: LongInt;
+	{ Index of array containing required item. }
+    var ArrayNumber: LongInt;
+	{ Index of item in this array. }
+    var ArrayIndex: LongInt
     );
 
 function ReadComponentByReader(const Reader: TReader): TComponent;
+{ Destructs objects performing additional actions. To the moment it is only checking that
+  type is TCBRCComponent and calling its method Free. All application objects should be
+  destroyed by this function. }
 procedure UtilizeObject(PtrToObject: TObject);
-    //  функция уничтожения объектов - выполняет дополнительные
-    //  действия, связанные с уничтожением объектов; пока только
-    //  проверка на тип TCBRCComponent и вызов его метода Free
-    //  с помощью этой функции нужно уничтожать все объекты программы
 
 implementation
 

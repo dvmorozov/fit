@@ -1,5 +1,16 @@
-//  imena klassov zadany v nestandartnoy forme potomu,
-//  chto oni vyvodyatsya v fayl nastroek
+{
+This software is distributed under GPL
+in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
+
+@abstract(Contains definition of settings containers. 
+Names of classes have non standard form because they 
+are serialized into setting file.)
+
+@author(Dmitry Morozov dvmorozov@hotmail.com, 
+LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
+Facebook https://www.facebook.com/profile.php?id=100004082021870)
+}
 unit Settings;
 
 //{$mode objfpc}{$H+}
@@ -12,7 +23,7 @@ uses
     DataLoader, SelfCheckedComponentList;
 
 type
-    //  klass, sohranyayuschiy svoystva matematicheskogo vyrazheniya
+    { Contains and serializes attributes of mathematical expression. }
     Curve_type = class(TComponent)
     private
         FName: string;
@@ -28,30 +39,28 @@ type
         procedure SetParams(AParams: TCollection);
 
     public
-        FileName: string;       //  imya fayla, hranyaschego dannye krivoy
-
+        { File name to serialize / deserialize data. }
+        FileName: string;
         
         constructor Create(AOwner: TComponent); override;
         destructor Destroy; override;
-        //  !!! chtenie sohranennogo cherez DefineProperties
-        //  komponenta ne rabotalo => sv-vo Params !!!
+
         procedure DefineProperties(Filer: TFiler); override;
-        //  !!! vozvraschaet ssylku, ustanavlivaet znachenie !!!
         property Parameters: Curve_parameters
             read FParameters write SetParameters;
 
     published
-        //  !!! dlya sohraneniya v XML-potoke !!!
+        { Published properties are used in XML-serializing. }
+    
         property Name: string read FName write FName;
         property Expression: string read FExpression write FExpression;
-        //  tak somponent ne zapisyvaetsya v XML-potok -
-        //  nuzhno ispol'zovat' DefineProperties
+        //  By this way component is not written into XML-stream, we need to use DefineProperties.
         //property Params: Curve_parameters read FParams write FParams;
+        { Expression parameters. }
         property Params: TCollection read GetParams write SetParams;
     end;
     
-    //  konteyner, a ne naslednik ot TCollection potomu,
-    //  chto mogut byt' i drugie sohranyaemye parametry
+    { Contains and serializes application settings. }
     Settings_v1 = class(TComponent)
     private
         FCurveTypes: TSelfCheckedComponentList;
@@ -63,13 +72,13 @@ type
     public
         constructor Create(Owner: TComponent); override;
         destructor Destroy; override;
-        //  !!! ne rabotaet s XML-potokami !!!
+        { Does not work with XML-streams. }
         procedure DefineProperties(Filer: TFiler); override;
 
         property Curve_types: TSelfCheckedComponentList read FCurveTypes write FCurveTypes;
         
     published
-        //  !!! bez etogo pri chtenii voznikaet isklyuchenie !!!
+        { Dummy property. Prevents exceptions in reading. }
         property Reserved: LongInt read FReserved write FReserved;
     end;
   
@@ -81,10 +90,11 @@ function CreateXMLReader(ADoc: TDOMDocument; const Path: string;
 procedure WriteComponentToXMLConfig(XMLConfig: TXMLConfig; const Path: string;
     AComponent: TComponent);
 procedure ReadComponentFromXMLConfig(XMLConfig: TXMLConfig; const Path: string;
-    var RootComponent: TComponent;  //  [in, out] - kornevoy komponent,
-                                    //  kotoryy chitaetsya iz potoka
+    { Root component which are read from stream [in, out]. }
+    var RootComponent: TComponent;
     OnFindComponentClass: TFindComponentClassEvent;
-    TheOwner: TComponent            //  vladelets novogo kornevogo komponenta
+    { Owner of newly created component. }
+    TheOwner: TComponent
     );
 
 implementation

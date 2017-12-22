@@ -1,13 +1,14 @@
-//      двойной косой чертой комментируются замечания, сохраняемые во
-//      всех версиях исходника; фигурными скобками комментируются замечания,
-//      сохраняемые только в версии исходника для бесплатного распространения
-{------------------------------------------------------------------------------
-    This software is distributed under GPL (see gpl.txt for details)
-    in the hope that it will be useful, but WITHOUT ANY WARRANTY;
-    without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
+{
+This software is distributed under GPL
+in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
 
-    Copyright (C) 1999-2008 D.Morozov (dvmorozov@mail.ru)
-------------------------------------------------------------------------------}
+@abstract(Contains definition of visual component which can display data in grid.)
+
+@author(Dmitry Morozov dvmorozov@hotmail.com, 
+LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
+Facebook https://www.facebook.com/profile.php?id=100004082021870)
+}
 unit TableComp;
 
 {$MODE Delphi}
@@ -21,40 +22,36 @@ uses
 type
     ETableCompList = class(Exception);
 
+	{ Component list which can display component properties in grid.
+	  Class implements functions of saving/reading table properties,
+      but does not bind grid positions with list items. If number of 
+      columns returned by GetColCount is changed then corresponding
+	  changes in SetCaption, SetColOptions, SetColFunc, SetRowContents, 
+	  GetRowContents should be done. }
     TTableCompList = class(TSelfCopiedCompList, IGridDataSource)
-        //  абстрактный список компонентов, который умеет отображать
-        //  свойства компонентов в таблице; класс реализует функции
-        //  сохранения/чтения свойств таблицы, но никак не связывает
-        //  расположение данных в таблице с элементами списка
-
-        //  !!! при изменении количества колонок, возвращаемое GetColCount
-        //  нужно обязательно провести соответсвующие изменения в SetCaption,
-        //  SetColOptions, SetColFunc, SetRowContents, GetRowContents !!!
     protected
         FCaption: string;
 
+		{ Arrays are deleted from the destructor. Therefore deleting
+          array items should be disabled during deleting the whole object. }
         SavedColWidths: TLongArray;
         SavedRowHeights: TLongArray;
-            //  массивы удаляются в деструкторе, поэтому удаление
-            //  элементов массива в момент удаления всего обекта
-            //  должно быть запрещено
-        AreColWidthsReady: Boolean;     //  признак того, что массив уже
-        AreRowHeightsReady: Boolean;    //  инициализирован
+		{ Indicates that array is already initialized. }
+        AreColWidthsReady: Boolean;
+        AreRowHeightsReady: Boolean;
 
-            //  сохраненные свойства таблицы
+		{ Saved table properties. }
         FSavedCol, FSavedRow, FSavedLeftCol, FSavedTopRow: LongInt;
         FSavedSelection: TGridRect;
 
+		{ Indicates that grid parameters were saved. It is set up in GridRelease. }
         SettingsSaved: Boolean;
-            //  признак того, что параметры таблицы были
-            //  сохранены - устанавливается в GridRelease
         HeightsSaved, WidthsSaved: Boolean;
 
+		{ Indicates that the object is destroyed. } 
         Destroying: Boolean;
-            //  объект находится в состоянии удаления
 
-        //  проверяют допустимость значений индекса колонки (строки),
-        //  в случае недопустимости возбуждается исключение
+		{ Checks that column (row) index is valid. Otherwise throws an exception. }
         procedure CheckColIndex(const Index: LongInt);
         procedure CheckRowIndex(const Index: LongInt);
 

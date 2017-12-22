@@ -1,9 +1,14 @@
-//      dvoynoy kosoy chertoy kommentiruyutsya zamechaniya, sohranyaemye vo
-//      vseh versiyah ishodnika; figurnymi skobkami kommentiruyutsya zamechaniya,
-//      sohranyaemye tol'ko v versii ishodnika dlya besplatnogo rasprostraneniya
-{------------------------------------------------------------------------------}
-{       Copyright (C) 1999-2007 D.Morozov (dvmorozov@mail.ru)                  }
-{------------------------------------------------------------------------------}
+{
+This software is distributed under GPL
+in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
+
+@abstract(Contains definition of TFormMain.)
+
+@author(Dmitry Morozov dvmorozov@hotmail.com, 
+LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
+Facebook https://www.facebook.com/profile.php?id=100004082021870)
+}
 unit Unit1;
 
 {$MODE Delphi}
@@ -22,15 +27,18 @@ uses
 {$ENDIF}
     ,ColorBox;
 type
-
-    //  sostoyaniya okna tablitsy rezul'tatov
+	{ States of results grid window. }
     TResState = (
-        GridInvisible,      //  okno tablitsy ne vidno
-        GridSelEmpty,       //  okno vidno, no oblast' vydeleniya pusta
-        GridSelNonEmpty,    //  vydeleno neskol'ko strok tablitsy
-        GridSelAll          //  vydelena vsya tablitsa
+		{ Window is invisible. }
+        GridInvisible,
+		{ Window is visible but selection area is empty. }
+        GridSelEmpty,
+		{ A few rows are selected. }
+        GridSelNonEmpty,
+		{ Whole table is selected. }
+        GridSelAll
         );
-    //  sostoyaniya, sootvet. rezhimu vyvoda grafika
+	{ States of graph output. }
     TViewState = (GraphEmpty, GraphNotEmpty);
 
   { TFormMain }
@@ -325,58 +333,59 @@ type
     procedure SetWavelengthClick(Sender: TObject);
 
   protected
-    //  pervonachal'nye znacheniya, poluchennye
-    //  srazu posle zagruzki fayla
+	{ Initial values set up just after file loading. }
     InitXGraphMax, InitXGraphMin, InitYGraphMax, InitYGraphMin: Double;
-    //  ispol'zuyutsya dlya otdeleniya klikov ot vydeleniya oblasti
+
+	{ These variables are used for separating clicks from area selection. }
     DownX, DownY, UpX, UpY: Integer;
-    Settings: Settings_v1;      //  nastroyki programmy - nuzhno proveryat' tip
-    //  sohranennoe soderzhimoe redaktiruemyh yacheek
+	{ Application settings. Type should be checked. }
+    Settings: Settings_v1;
+
+	{ Saved content of edited cells. }
     SavedPos, SavedAmp: string;
-    EditDone: Boolean;          //  flag zaschischaet ot povtornogo vhoda v
-                                //  obrabotku zaversheniya redaktirovaniya
-    FHandleEditHint: Boolean;   //  flag zapuskaet vyvod soobscheniya
+	{ Protects from reentrance into editing finalization. }
+    EditDone: Boolean;
+	{ Indicates that hint message should be displayed. }
+    FHandleEditHint: Boolean;
     procedure SetHandleEditHint(EditHint: Boolean);
     procedure ResetCurveMenuCheckedBits;
 
   protected
+	{ The object created event EditDone. }
     SenderEditHint: TNumericGrid;
-                                //  ob'ekt, sozdavshiy sobytie EditDone
+
     HintMessage: string;
     DrawReticule: Boolean;
     
-    //  metod obratnogo vyzova iz ob'ekta-klienta rascheta
+	{ Callback for calculating object. }
     procedure AsyncOperationFinished(Sender: TObject);
-    //  perehodnik
+	{ Wrapper. }
     procedure SubtractAllBackground(Auto: Boolean);
     
     procedure SetSelectionMode(ASelectionMode: TSelMode);
     procedure SetResState(State: TResState);
     procedure SetAsyncState(State: TAsyncState);
-    //  ustananvlivaet sostoyaniya el-tov upravleniya,
-    //  sootvetstvuyuschie sostoyaniyu otkrytiya fayla
+	{ Sets states of controls according to state of file. }
     procedure SetOpenState(State: TOpenState);
-    //  ustanavlivaet sostoyanie el-tov upravleniya, kot.
-    //  otvechayut za izmenenie rezhima otobrazheniya grafika
+	{ Sets states of controls responsible for changing chart display mode. }
     procedure SetViewState(State: TViewState);
     procedure UpdateBarsPos;
-    //  !!! sobytie OnClick Chart'a voznikaet mezhdu MouseUp i MouseDown,
-    //  poetomu nel'zya vstavlyat' vyzov v obrabotchik OnClick  !!!
+	{ The event OnClick of Chart arises between MouseUp and MouseDown.
+      That is why OnClick is not used. }
     procedure OnChartClick;
-    //  delaet popytku chteniya ob'ekta pol'zovatel'skih nastroek,
-    //  esli prochitat' ne udaetsya, to sozdaet novyy ob'ekt
+	{ Tries read the user settings object. In the case of failure creates new object. }
     procedure ReadSettings;
     procedure WriteSettings;
-    //  ischet fayly s parametrami pol'zovatel'skih krivyh i zagruzhaet ih
+	{ Searches files containing parameters of user defined curves and loads them. }
     procedure ReadCurves;
     procedure WriteCurve(ct: Curve_type);
     procedure DeleteCurve(ct: Curve_type);
-    //  sozdanie edinstvennogo punkta menyu
+	{ Creates single menu item. }
     procedure CreateCurveMenuItem(Pos: LongInt; ct: Curve_type;
         ParentMenu: TMenuItem; OnClick: TNotifyEvent);
-    //  sozdanie vseh punktov menyu, sootvetstvuyuschih pol'zovatel'skim krivym
+	{ Creates all menu items corresponding to user defined curves. }
     procedure AddCurveMenuItems;
-    //  dobavlenie punkta menyu, sootvetstvuyuschego pol'zovatel'skoy krivoy
+	{ Adds menu item corresponding to user defined curve. }
     procedure AddCurveMenuItem(ct: Curve_type);
     function GetConfigFileName: string;
     procedure OnFindComponentClass(Reader: TReader;
@@ -390,27 +399,24 @@ type
 
   public
     IIViewer: TFitViewer;
-    //  indeks krivoy, na kotoroy byl sdelan pervyy klik
-    //  ispol'zuemyy v teh sluchayah, kogda dopuskaetsya
-    //  vybor tochek tol'ko odnoy krivoy
+	{ Index of curve on which the first click was. It is used in the cases when points of only one curve can be selected. }
     ActiveNumber: LongInt;
-    //  !!! ssylka d.b. passivnoy i proveryat'sya na nil !!!
-    //  ustanavlivaetsya v TFitViewer
+	{ Collection should be passive. Object is set from TFitViewer and is checked on Nil. }
     SpecimenList: TMSCRSpecimenList;
-    //  priznaki izmeneniya dannyh v tablitsah
+	{ Indicates that data in tables were changed. }
     ModifiedParameters: Boolean;
     ModifiedDatasheet: Boolean;
-    //  sohranennyy indeks serii, tochka kotoroy vybrana v dannyy moment
+	{ Index of a serie point of which is selected at the moment. }
     CurSerieIndex: LongInt;
-    //  sohranennyy indeks vybrannogo znacheniya
+	{ Index of selected value. }
     ValueIndex: LongInt;
 
     procedure CheckListBoxChanged;
-    //  sohranenie tabl. parametrov krivyh kak tekstovogo fayla
+	{ Saving curve parameters into text file. }
     function SaveTableAsText(GridData: TNumericGrid): Boolean;
-    //  sohranenie tabl. parametrov krivyh kak XML fayla
+	{ Saving curve parameters into XML file. }
     procedure SaveTable;
-    //  zagruzka parametrov krivyh iz XML fayla
+	{ Loading curve parameters from XML file. }
     procedure LoadTable;
 
     procedure ShowHint(const Hint: string);

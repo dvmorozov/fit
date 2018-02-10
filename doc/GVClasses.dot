@@ -65,14 +65,16 @@ DiGraph Classes {
   TAsymPseudoVoigtPointsSet [href="DataLoader.TAsymPseudoVoigtPointsSet.html"]
   TSpecialPointsSet -> TCurvePointsSet
   TSpecialPointsSet [href="DataLoader.TSpecialPointsSet.html"]
-  TModuledCGIApplication -> TCGIApplication
-  TModuledCGIApplication [href="cgiModules.TModuledCGIApplication.html"]
   TAboutBox -> TForm
   TAboutBox [href="Unit12.TAboutBox.html"]
+  TCreateSpecialCurveDlg -> TForm
+  TCreateSpecialCurveDlg [href="Unit2.TCreateSpecialCurveDlg.html"]
   TForm1 -> TForm
   TForm1 [href="FormServer.TForm1.html"]
   TFormHint -> TForm
   TFormHint [href="Unit6.TFormHint.html"]
+  TFormMain -> TForm
+  TFormMain [href="Unit1.TFormMain.html"]
   TInputBackFactorDlg -> TForm
   TInputBackFactorDlg [href="Unit5.TInputBackFactorDlg.html"]
   TInputMaxRFactorDlg -> TForm
@@ -84,8 +86,6 @@ DiGraph Classes {
   TFitServer_ServiceBinderFactory -> TInterfacedObject
   TFitServer_ServiceBinderFactory [href="fit_server_binder.TFitServer_ServiceBinderFactory.html"]
   Exception -> TObject
-  ECGIAppException -> Exception
-  ECGIAppException [href="cgiModules.ECGIAppException.html"]
   EColCompList -> Exception
   EColCompList [href="TableComp.EColCompList.html"]
   EDownhillRealParameters -> Exception
@@ -110,8 +110,6 @@ DiGraph Classes {
   TCombEnumerator [href="CombEnumerator.TCombEnumerator.html"]
   TCombSelector -> TCombEnumerator
   TCombSelector [href="CombEnumerator.TCombSelector.html"]
-  TFindContainer -> TObject
-  TFindContainer [href="Settings.TFindContainer.html"]
   TFitClientApp -> TObject
   TFitClientApp [href="FitClientApp.TFitClientApp.html"]
   TFitClientProxy -> TObject
@@ -127,12 +125,12 @@ DiGraph Classes {
   TSpecialCurveParameter -> TCollectionItem
   TSpecialCurveParameter [href="DataLoader.TSpecialCurveParameter.html"]
   TComponent -> TPersistent
-  File_v1 -> TComponent
-  File_v1 [href="Settings.File_v1.html"]
+  Curve_type -> TComponent
+  Curve_type [href="Settings.Curve_type.html"]
   Parameters_list -> TComponent
   Parameters_list [href="MSCRDataClasses.Parameters_list.html"]
-  Project_v1 -> TComponent
-  Project_v1 [href="Settings.Project_v1.html"]
+  Settings_v1 -> TComponent
+  Settings_v1 [href="Settings.Settings_v1.html"]
   TAlgorithmContainer -> TComponent
   TAlgorithmContainer [href="AlgorithmContainer.TAlgorithmContainer.html"]
   TDownhillSimplexContainer -> TAlgorithmContainer
@@ -143,11 +141,6 @@ DiGraph Classes {
   TDataLoader [href="DataLoader.TDataLoader.html"]
   TDATFileLoader -> TDataLoader
   TDATFileLoader [href="DataLoader.TDATFileLoader.html"]
-  TDataModule -> TComponent
-  TCGIDatamodule -> TDataModule
-  TCGIDatamodule [href="cgiModules.TCGIDatamodule.html"]
-  TCGIDatamodule2 -> TCGIDatamodule
-  TCGIDatamodule2 [href="Unit2.TCGIDatamodule2.html"]
   TFitClient -> TComponent
   TFitClient [href="FitClient.TFitClient.html"]
   TFitServer -> TComponent

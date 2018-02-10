@@ -1,8 +1,9 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <title>Fit: Math3d</title>
-<meta name="generator" content="PasDoc 0.14.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <link rel="StyleSheet" type="text/css" href="pasdoc.css">
 </head>
@@ -10,10 +11,9 @@
 <table class="container"><tr><td class="navigation">
 <h2>Fit</h2><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p><p><a href="GVClasses.png" class="navigation">Classes hierarchy graph</a></p></td><td class="content">
 <h1 class="unit">Unit Math3d</h1>
-<table class="sections wide_list">
-<tr>
-<td><a class="section" href="#PasDoc-Description">Description</a></td><td><a class="section" href="#PasDoc-Uses">Uses</a></td><td>Classes, Interfaces, Objects and Records</td><td><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></td><td><a class="section" href="#PasDoc-Types">Types</a></td><td>Constants</td><td><a class="section" href="#PasDoc-Variables">Variables</a></td></tr></table>
-<a name="PasDoc-Description"></a><h2 class="description">Description</h2>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Uses">Uses</a></div><div class="one_section">Classes, Interfaces, Objects and Records</div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section"><a class="section" href="#PasDoc-Types">Types</a></div><div class="one_section">Constants</div><div class="one_section"><a class="section" href="#PasDoc-Variables">Variables</a></div></div>
+<span id="PasDoc-Description"></span><h2 class="description">Description</h2>
 <p>
 Contains definitions of 3D primitive functions.</p>
 <p>
@@ -22,9 +22,9 @@ This software is distributed under GPL in the hope that it will be useful, but W
 <p>
 
 <p></p>
-<a name="PasDoc-Uses"></a><h2 class="uses">Uses</h2>
+<span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
 <ul class="useslist"><li>SimpMath</li></ul><h2 class="overview">Overview</h2>
-<a name="PasDoc-FuncsProcs"></a><h3 class="summary">Functions and Procedures</h3>
+<span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
 <table class="summary wide_list">
 <tr class="list">
 <td class="itemcode"><code>procedure <b><a  href="Math3d.html#Dilatation">Dilatation</a></b>(A, B, C: Double);</code></td>
@@ -102,7 +102,7 @@ This software is distributed under GPL in the hope that it will be useful, but W
 <td class="itemcode"><code>procedure <b><a  href="Math3d.html#Translation">Translation</a></b>(A, B, C: Double);</code></td>
 </tr>
 </table>
-<a name="PasDoc-Types"></a><h3 class="summary">Types</h3>
+<span id="PasDoc-Types"></span><h3 class="summary">Types</h3>
 <table class="summary wide_list">
 <tr class="list">
 <td class="itemcode"><code><b><a  href="Math3d.html#T3Vector">T3Vector</a></b> = TDoubleVector3;</code></td>
@@ -114,7 +114,7 @@ This software is distributed under GPL in the hope that it will be useful, but W
 <td class="itemcode"><code><b><a  href="Math3d.html#TMatrix">TMatrix</a></b> = array[1..4, 1..4] of Double;</code></td>
 </tr>
 </table>
-<a name="PasDoc-Variables"></a><h3 class="summary">Variables</h3>
+<span id="PasDoc-Variables"></span><h3 class="summary">Variables</h3>
 <table class="summary wide_list">
 <tr class="list">
 <td class="itemcode"><code><b><a  href="Math3d.html#DilatMatr">DilatMatr</a></b>: <a  href="Math3d.html#TMatrix">TMatrix</a>;</code></td>
@@ -142,14 +142,14 @@ This software is distributed under GPL in the hope that it will be useful, but W
 <h3 class="detail">Functions and Procedures</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="Dilatation"></a><code>procedure <b>Dilatation</b>(A, B, C: Double);</code></td>
+<td class="itemcode"><span id="Dilatation"></span><code>procedure <b>Dilatation</b>(A, B, C: Double);</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="GetMatrixDilat"></a><code>procedure <b>GetMatrixDilat</b>(A, B, C: Double; var Matr: <a  href="Math3d.html#TMatrix">TMatrix</a>);</code></td>
+<td class="itemcode"><span id="GetMatrixDilat"></span><code>procedure <b>GetMatrixDilat</b>(A, B, C: Double; var Matr: <a  href="Math3d.html#TMatrix">TMatrix</a>);</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -158,7 +158,7 @@ Returns <a class="normal" href="Math3d.html#Dilatation">dilatation</a> matrix.</
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="GetMatrixRotX"></a><code>procedure <b>GetMatrixRotX</b>(Angle: Double; var Matr: <a  href="Math3d.html#TMatrix">TMatrix</a>);</code></td>
+<td class="itemcode"><span id="GetMatrixRotX"></span><code>procedure <b>GetMatrixRotX</b>(Angle: Double; var Matr: <a  href="Math3d.html#TMatrix">TMatrix</a>);</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -167,7 +167,7 @@ Returns rotation matrix around X-axis. The angle is given in radians.</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="GetMatrixRotY"></a><code>procedure <b>GetMatrixRotY</b>(Angle: Double; var Matr: <a  href="Math3d.html#TMatrix">TMatrix</a>);</code></td>
+<td class="itemcode"><span id="GetMatrixRotY"></span><code>procedure <b>GetMatrixRotY</b>(Angle: Double; var Matr: <a  href="Math3d.html#TMatrix">TMatrix</a>);</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -176,7 +176,7 @@ Returns rotation matrix around Y-axis. The angle is given in radians.</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="GetMatrixRotZ"></a><code>procedure <b>GetMatrixRotZ</b>(Angle: Double; var Matr: <a  href="Math3d.html#TMatrix">TMatrix</a>);</code></td>
+<td class="itemcode"><span id="GetMatrixRotZ"></span><code>procedure <b>GetMatrixRotZ</b>(Angle: Double; var Matr: <a  href="Math3d.html#TMatrix">TMatrix</a>);</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -185,7 +185,7 @@ Returns rotation matrix around Z-axis. The angle is given in radians.</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="GetMatrixTrans"></a><code>procedure <b>GetMatrixTrans</b>(A, B, C: Double; var Matr: <a  href="Math3d.html#TMatrix">TMatrix</a>);</code></td>
+<td class="itemcode"><span id="GetMatrixTrans"></span><code>procedure <b>GetMatrixTrans</b>(A, B, C: Double; var Matr: <a  href="Math3d.html#TMatrix">TMatrix</a>);</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -194,7 +194,7 @@ Returns <a class="normal" href="Math3d.html#Translation">translation</a> matrix.
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="GetMatrixTransition"></a><code>procedure <b>GetMatrixTransition</b>(Al, Bt, Gm: Double; var Matr: <a  href="Math3d.html#TMatrix">TMatrix</a>);</code></td>
+<td class="itemcode"><span id="GetMatrixTransition"></span><code>procedure <b>GetMatrixTransition</b>(Al, Bt, Gm: Double; var Matr: <a  href="Math3d.html#TMatrix">TMatrix</a>);</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -203,7 +203,7 @@ Returns transformation matrix.</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="GetReverseMatrix"></a><code>procedure <b>GetReverseMatrix</b>(var Matr: <a  href="Math3d.html#TMatrix">TMatrix</a>);</code></td>
+<td class="itemcode"><span id="GetReverseMatrix"></span><code>procedure <b>GetReverseMatrix</b>(var Matr: <a  href="Math3d.html#TMatrix">TMatrix</a>);</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -212,7 +212,7 @@ Returns inverse matrix.</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="GetUnitMatrix"></a><code>procedure <b>GetUnitMatrix</b>(var Matr: <a  href="Math3d.html#TMatrix">TMatrix</a>);</code></td>
+<td class="itemcode"><span id="GetUnitMatrix"></span><code>procedure <b>GetUnitMatrix</b>(var Matr: <a  href="Math3d.html#TMatrix">TMatrix</a>);</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -221,14 +221,14 @@ Returns unitary matrix.</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="GetZerosMatrix"></a><code>procedure <b>GetZerosMatrix</b>(var Matr: <a  href="Math3d.html#TMatrix">TMatrix</a>);</code></td>
+<td class="itemcode"><span id="GetZerosMatrix"></span><code>procedure <b>GetZerosMatrix</b>(var Matr: <a  href="Math3d.html#TMatrix">TMatrix</a>);</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="Mul3DMatrix"></a><code>procedure <b>Mul3DMatrix</b>(var A, B: <a  href="Math3d.html#TMatrix">TMatrix</a>; var Matr: <a  href="Math3d.html#TMatrix">TMatrix</a>);</code></td>
+<td class="itemcode"><span id="Mul3DMatrix"></span><code>procedure <b>Mul3DMatrix</b>(var A, B: <a  href="Math3d.html#TMatrix">TMatrix</a>; var Matr: <a  href="Math3d.html#TMatrix">TMatrix</a>);</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -237,98 +237,98 @@ Returns product of matrices. Result is placed into Matr parameter. As result con
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="MulVectMatr"></a><code>procedure <b>MulVectMatr</b>(Matr: <a  href="Math3d.html#TMatrix">TMatrix</a>; var Vector: <a  href="Math3d.html#T3Vector">T3Vector</a>);</code></td>
+<td class="itemcode"><span id="MulVectMatr"></span><code>procedure <b>MulVectMatr</b>(Matr: <a  href="Math3d.html#TMatrix">TMatrix</a>; var Vector: <a  href="Math3d.html#T3Vector">T3Vector</a>);</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="Pro"></a><code>procedure <b>Pro</b>(A, B, C: Double);</code></td>
+<td class="itemcode"><span id="Pro"></span><code>procedure <b>Pro</b>(A, B, C: Double);</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="Rad"></a><code>function <b>Rad</b>(Angle: Double): Double;</code></td>
+<td class="itemcode"><span id="Rad"></span><code>function <b>Rad</b>(Angle: Double): Double;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="ReflectionXY"></a><code>procedure <b>ReflectionXY</b>;</code></td>
+<td class="itemcode"><span id="ReflectionXY"></span><code>procedure <b>ReflectionXY</b>;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="ReflectionYZ"></a><code>procedure <b>ReflectionYZ</b>;</code></td>
+<td class="itemcode"><span id="ReflectionYZ"></span><code>procedure <b>ReflectionYZ</b>;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="ReflectionZX"></a><code>procedure <b>ReflectionZX</b>;</code></td>
+<td class="itemcode"><span id="ReflectionZX"></span><code>procedure <b>ReflectionZX</b>;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="RotationX"></a><code>procedure <b>RotationX</b>(Angle: Double);</code></td>
+<td class="itemcode"><span id="RotationX"></span><code>procedure <b>RotationX</b>(Angle: Double);</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="RotationX2"></a><code>procedure <b>RotationX2</b>(Angle: Double);</code></td>
+<td class="itemcode"><span id="RotationX2"></span><code>procedure <b>RotationX2</b>(Angle: Double);</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="RotationY"></a><code>procedure <b>RotationY</b>(Angle: Double);</code></td>
+<td class="itemcode"><span id="RotationY"></span><code>procedure <b>RotationY</b>(Angle: Double);</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="RotationY2"></a><code>procedure <b>RotationY2</b>(Angle: Double);</code></td>
+<td class="itemcode"><span id="RotationY2"></span><code>procedure <b>RotationY2</b>(Angle: Double);</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="RotationZ"></a><code>procedure <b>RotationZ</b>(Angle: Double);</code></td>
+<td class="itemcode"><span id="RotationZ"></span><code>procedure <b>RotationZ</b>(Angle: Double);</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="StandardVectTrans"></a><code>procedure <b>StandardVectTrans</b>(var Vector: <a  href="Math3d.html#T3Vector">T3Vector</a>);</code></td>
+<td class="itemcode"><span id="StandardVectTrans"></span><code>procedure <b>StandardVectTrans</b>(var Vector: <a  href="Math3d.html#T3Vector">T3Vector</a>);</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="Transition"></a><code>procedure <b>Transition</b>(Al, Bt, Gm: Double);</code></td>
+<td class="itemcode"><span id="Transition"></span><code>procedure <b>Transition</b>(Al, Bt, Gm: Double);</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="Translation"></a><code>procedure <b>Translation</b>(A, B, C: Double);</code></td>
+<td class="itemcode"><span id="Translation"></span><code>procedure <b>Translation</b>(A, B, C: Double);</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
@@ -336,21 +336,21 @@ Returns product of matrices. Result is placed into Matr parameter. As result con
 <h3 class="detail">Types</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="T3Vector"></a><code><b>T3Vector</b> = TDoubleVector3;</code></td>
+<td class="itemcode"><span id="T3Vector"></span><code><b>T3Vector</b> = TDoubleVector3;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="T4Vector"></a><code><b>T4Vector</b> = array[1..4] of Double;</code></td>
+<td class="itemcode"><span id="T4Vector"></span><code><b>T4Vector</b> = array[1..4] of Double;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="TMatrix"></a><code><b>TMatrix</b> = array[1..4, 1..4] of Double;</code></td>
+<td class="itemcode"><span id="TMatrix"></span><code><b>TMatrix</b> = array[1..4, 1..4] of Double;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
@@ -358,49 +358,49 @@ Returns product of matrices. Result is placed into Matr parameter. As result con
 <h3 class="detail">Variables</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="DilatMatr"></a><code><b>DilatMatr</b>: <a  href="Math3d.html#TMatrix">TMatrix</a>;</code></td>
+<td class="itemcode"><span id="DilatMatr"></span><code><b>DilatMatr</b>: <a  href="Math3d.html#TMatrix">TMatrix</a>;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="RotXMatr"></a><code><b>RotXMatr</b>: <a  href="Math3d.html#TMatrix">TMatrix</a>;</code></td>
+<td class="itemcode"><span id="RotXMatr"></span><code><b>RotXMatr</b>: <a  href="Math3d.html#TMatrix">TMatrix</a>;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="RotYMatr"></a><code><b>RotYMatr</b>: <a  href="Math3d.html#TMatrix">TMatrix</a>;</code></td>
+<td class="itemcode"><span id="RotYMatr"></span><code><b>RotYMatr</b>: <a  href="Math3d.html#TMatrix">TMatrix</a>;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="RotZMatr"></a><code><b>RotZMatr</b>: <a  href="Math3d.html#TMatrix">TMatrix</a>;</code></td>
+<td class="itemcode"><span id="RotZMatr"></span><code><b>RotZMatr</b>: <a  href="Math3d.html#TMatrix">TMatrix</a>;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="TempMatr"></a><code><b>TempMatr</b>: <a  href="Math3d.html#TMatrix">TMatrix</a>;</code></td>
+<td class="itemcode"><span id="TempMatr"></span><code><b>TempMatr</b>: <a  href="Math3d.html#TMatrix">TMatrix</a>;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="TempMatr2"></a><code><b>TempMatr2</b>: <a  href="Math3d.html#TMatrix">TMatrix</a>;</code></td>
+<td class="itemcode"><span id="TempMatr2"></span><code><b>TempMatr2</b>: <a  href="Math3d.html#TMatrix">TMatrix</a>;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="TempRotMatr"></a><code><b>TempRotMatr</b>: <a  href="Math3d.html#TMatrix">TMatrix</a>;</code></td>
+<td class="itemcode"><span id="TempRotMatr"></span><code><b>TempRotMatr</b>: <a  href="Math3d.html#TMatrix">TMatrix</a>;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
@@ -411,6 +411,6 @@ Returns product of matrices. Result is placed into Matr parameter. As result con
 LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
 Facebook https://www.facebook.com/profile.php?id=100004082021870</li>
 </ul>
-<hr noshade size="1"><span class="appinfo"><em>Generated by <a  href="http://pasdoc.sourceforge.net/">PasDoc 0.14.0</a>. </em>
+<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
 </span>
 </td></tr></table></body></html>

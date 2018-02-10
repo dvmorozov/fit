@@ -1,8 +1,9 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <title>Fit: FitClient</title>
-<meta name="generator" content="PasDoc 0.14.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <link rel="StyleSheet" type="text/css" href="pasdoc.css">
 </head>
@@ -10,21 +11,20 @@
 <table class="container"><tr><td class="navigation">
 <h2>Fit</h2><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p><p><a href="GVClasses.png" class="navigation">Classes hierarchy graph</a></p></td><td class="content">
 <h1 class="unit">Unit FitClient</h1>
-<table class="sections wide_list">
-<tr>
-<td><a class="section" href="#PasDoc-Description">Description</a></td><td><a class="section" href="#PasDoc-Uses">Uses</a></td><td><a class="section" href="#PasDoc-Classes">Classes, Interfaces, Objects and Records</a></td><td>Functions and Procedures</td><td><a class="section" href="#PasDoc-Types">Types</a></td><td><a class="section" href="#PasDoc-Constants">Constants</a></td><td>Variables</td></tr></table>
-<a name="PasDoc-Description"></a><h2 class="description">Description</h2>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Uses">Uses</a></div><div class="one_section"><a class="section" href="#PasDoc-Classes">Classes, Interfaces, Objects and Records</a></div><div class="one_section">Functions and Procedures</div><div class="one_section"><a class="section" href="#PasDoc-Types">Types</a></div><div class="one_section"><a class="section" href="#PasDoc-Constants">Constants</a></div><div class="one_section">Variables</div></div>
+<span id="PasDoc-Description"></span><h2 class="description">Description</h2>
 <p>
-Contains definitions of classes used in displaying results to user.</p>
+Contains definitions of classes used in displaying results to <a class="normal" href="Main.html#User">user</a>.</p>
 <p>
 This software is distributed under GPL in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
 
 <p>
 
 <p></p>
-<a name="PasDoc-Uses"></a><h2 class="uses">Uses</h2>
+<span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
 <ul class="useslist"><li>Classes</li><li><a  href="CommonTypes.html">CommonTypes</a></li><li><a  href="DataLoader.html">DataLoader</a></li><li>Dialogs</li><li><a  href="FitClientProxy.html">FitClientProxy</a></li><li><a  href="MSCRDataClasses.html">MSCRDataClasses</a></li><li><a  href="SelfCopied.html">SelfCopied</a></li><li>SimpMath</li><li>SysUtils</li></ul><h2 class="overview">Overview</h2>
-<a name="PasDoc-Classes"></a><h3 class="cio">Classes, Interfaces, Objects and Records</h3>
+<span id="PasDoc-Classes"></span><h3 class="cio">Classes, Interfaces, Objects and Records</h3>
 <table class="classestable wide_list">
 <tr class="listheader">
 <th class="itemname">Name</th>
@@ -32,10 +32,10 @@ This software is distributed under GPL in the hope that it will be useful, but W
 </tr>
 <tr class="list">
 <td class="itemname">Class&nbsp;<a class="bold" href="FitClient.TFitClient.html"><code>TFitClient</code></a></td>
-<td class="itemdesc">Implements all client logic of the <a class="normal" href="cgiModules.html#Application">application</a>.</td>
+<td class="itemdesc">Implements all client logic of the application.</td>
 </tr>
 </table>
-<a name="PasDoc-Types"></a><h3 class="summary">Types</h3>
+<span id="PasDoc-Types"></span><h3 class="summary">Types</h3>
 <table class="summary wide_list">
 <tr class="list">
 <td class="itemcode"><code><b><a  href="FitClient.html#TAsyncOperationFinished">TAsyncOperationFinished</a></b> = procedure(Sender: TObject) of object;</code></td>
@@ -107,7 +107,7 @@ This software is distributed under GPL in the hope that it will be useful, but W
 <td class="itemcode"><code><b><a  href="FitClient.html#TSelMode">TSelMode</a></b> = (...);</code></td>
 </tr>
 </table>
-<a name="PasDoc-Constants"></a><h3 class="summary">Constants</h3>
+<span id="PasDoc-Constants"></span><h3 class="summary">Constants</h3>
 <table class="summary wide_list">
 <tr class="list">
 <td class="itemcode"><code><b><a  href="FitClient.html#ArgumentName">ArgumentName</a></b>: string = 'Position';</code></td>
@@ -150,14 +150,14 @@ This software is distributed under GPL in the hope that it will be useful, but W
 <h3 class="detail">Types</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="TAsyncOperationFinished"></a><code><b>TAsyncOperationFinished</b> = procedure(Sender: TObject) of object;</code></td>
+<td class="itemcode"><span id="TAsyncOperationFinished"></span><code><b>TAsyncOperationFinished</b> = procedure(Sender: TObject) of object;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="TAsyncState"></a><code><b>TAsyncState</b> = (...);</code></td>
+<td class="itemcode"><span id="TAsyncState"></span><code><b>TAsyncState</b> = (...);</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -165,49 +165,49 @@ States of processing long operations.</p>
 <h6 class="description_section">Values</h6>
 <ul>
 <li>
-AsyncStart: Before <a class="normal" href="start.html">start</a>.</li>
+<span id="AsyncStart">AsyncStart</span>: Before start.</li>
 <li>
-AsyncWorks: <a class="normal" href="fitting.html">Fitting</a> in progress.</li>
+<span id="AsyncWorks">AsyncWorks</span>: Fitting in progress.</li>
 <li>
-AsyncDone: <a class="normal" href="fitting.html">Fitting</a> is done.</li>
+<span id="AsyncDone">AsyncDone</span>: Fitting is done.</li>
 </ul>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="TClear"></a><code><b>TClear</b> = procedure(Sender: TObject) of object;</code></td>
+<td class="itemcode"><span id="TClear"></span><code><b>TClear</b> = procedure(Sender: TObject) of object;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="TFillDatasheetTable"></a><code><b>TFillDatasheetTable</b> = procedure( Profile: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>; CurvesList: <a  href="SelfCopied.TSelfCopiedCompList.html">TSelfCopiedCompList</a>; GaussProfile: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>; DeltaProfile: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>; RFactorIntervals: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a> ) of object;</code></td>
+<td class="itemcode"><span id="TFillDatasheetTable"></span><code><b>TFillDatasheetTable</b> = procedure( Profile: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>; CurvesList: <a  href="SelfCopied.TSelfCopiedCompList.html">TSelfCopiedCompList</a>; GaussProfile: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>; DeltaProfile: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>; RFactorIntervals: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a> ) of object;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
-Handler to fill <a class="normal" href="data.html">data</a> table.</p>
+Handler to fill data table.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="THide"></a><code><b>THide</b> = procedure(Sender: TObject; PointsSet: <a  href="DataLoader.TNeutronPointsSet.html">TNeutronPointsSet</a>) of object;</code></td>
+<td class="itemcode"><span id="THide"></span><code><b>THide</b> = procedure(Sender: TObject; PointsSet: <a  href="DataLoader.TNeutronPointsSet.html">TNeutronPointsSet</a>) of object;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="THideBackground"></a><code><b>THideBackground</b> = procedure( Sender: TObject; BackgroundPoints: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>) of object;</code></td>
+<td class="itemcode"><span id="THideBackground"></span><code><b>THideBackground</b> = procedure( Sender: TObject; BackgroundPoints: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>) of object;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
-Handler hiding <a class="normal" href="background.html">background</a> curve.</p>
+Handler hiding background curve.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="THideCurvePositions"></a><code><b>THideCurvePositions</b> = procedure( Sender: TObject; CurvePositions: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>) of object;</code></td>
+<td class="itemcode"><span id="THideCurvePositions"></span><code><b>THideCurvePositions</b> = procedure( Sender: TObject; CurvePositions: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>) of object;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -216,50 +216,50 @@ Handler hiding curve positions.</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="THideDataPoints"></a><code><b>THideDataPoints</b> = procedure( Sender: TObject; DataPoints: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>) of object;</code></td>
+<td class="itemcode"><span id="THideDataPoints"></span><code><b>THideDataPoints</b> = procedure( Sender: TObject; DataPoints: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>) of object;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
-Handler hiding <a class="normal" href="data.html">data</a> curve.</p>
+Handler hiding data curve.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="THideRFactorIntervals"></a><code><b>THideRFactorIntervals</b> = procedure( Sender: TObject; RFactorIntervals: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>) of object;</code></td>
+<td class="itemcode"><span id="THideRFactorIntervals"></span><code><b>THideRFactorIntervals</b> = procedure( Sender: TObject; RFactorIntervals: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>) of object;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
-Handler hiding <a class="normal" href="data.html">data</a> intervals.</p>
+Handler hiding data intervals.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="TOpenState"></a><code><b>TOpenState</b> = (...);</code></td>
+<td class="itemcode"><span id="TOpenState"></span><code><b>TOpenState</b> = (...);</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
-Results of <a class="normal" href="data.html">data</a> file opening.</p>
+Results of data file opening.</p>
 <h6 class="description_section">Values</h6>
 <ul>
 <li>
-OpenSuccess: &nbsp;</li>
+<span id="OpenSuccess">OpenSuccess</span></li>
 <li>
-OpenFailure: &nbsp;</li>
+<span id="OpenFailure">OpenFailure</span></li>
 </ul>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="TPlotBackground"></a><code><b>TPlotBackground</b> = procedure( Sender: TObject; BackgroundPoints: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>) of object;</code></td>
+<td class="itemcode"><span id="TPlotBackground"></span><code><b>TPlotBackground</b> = procedure( Sender: TObject; BackgroundPoints: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>) of object;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
-Handler displaying <a class="normal" href="background.html">background</a> curve.</p>
+Handler displaying background curve.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="TPlotCurvePositions"></a><code><b>TPlotCurvePositions</b> = procedure( Sender: TObject; CurvePositions: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>) of object;</code></td>
+<td class="itemcode"><span id="TPlotCurvePositions"></span><code><b>TPlotCurvePositions</b> = procedure( Sender: TObject; CurvePositions: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>) of object;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -268,85 +268,85 @@ Handler displaying curve positions.</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="TPlotDataPoints"></a><code><b>TPlotDataPoints</b> = procedure( Sender: TObject; DataPoints: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>) of object;</code></td>
+<td class="itemcode"><span id="TPlotDataPoints"></span><code><b>TPlotDataPoints</b> = procedure( Sender: TObject; DataPoints: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>) of object;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
-Handler displaying <a class="normal" href="data.html">data</a> curve.</p>
+Handler displaying data curve.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="TPlotDeltaProfile"></a><code><b>TPlotDeltaProfile</b> = procedure( Sender: TObject; DeltaProfile: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>) of object;</code></td>
+<td class="itemcode"><span id="TPlotDeltaProfile"></span><code><b>TPlotDeltaProfile</b> = procedure( Sender: TObject; DeltaProfile: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>) of object;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="TPlotGaussProfile"></a><code><b>TPlotGaussProfile</b> = procedure( Sender: TObject; GaussProfile: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>) of object;</code></td>
+<td class="itemcode"><span id="TPlotGaussProfile"></span><code><b>TPlotGaussProfile</b> = procedure( Sender: TObject; GaussProfile: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>) of object;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="TPlotProc"></a><code><b>TPlotProc</b> = procedure of object;</code></td>
+<td class="itemcode"><span id="TPlotProc"></span><code><b>TPlotProc</b> = procedure of object;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="TPlotRFactorIntervals"></a><code><b>TPlotRFactorIntervals</b> = procedure( Sender: TObject; RFactorIntervals: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>) of object;</code></td>
+<td class="itemcode"><span id="TPlotRFactorIntervals"></span><code><b>TPlotRFactorIntervals</b> = procedure( Sender: TObject; RFactorIntervals: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>) of object;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
-Handler displaying <a class="normal" href="data.html">data</a> intervals.</p>
+Handler displaying data intervals.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="TPlotSelectedArea"></a><code><b>TPlotSelectedArea</b> = procedure( Sender: TObject; SelectedArea: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>) of object;</code></td>
+<td class="itemcode"><span id="TPlotSelectedArea"></span><code><b>TPlotSelectedArea</b> = procedure( Sender: TObject; SelectedArea: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>) of object;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="TPlotSelectedPoints"></a><code><b>TPlotSelectedPoints</b> = procedure( Sender: TObject; SelectedPoints: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>) of object;</code></td>
+<td class="itemcode"><span id="TPlotSelectedPoints"></span><code><b>TPlotSelectedPoints</b> = procedure( Sender: TObject; SelectedPoints: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>) of object;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
-Handler drawing points selected by user.</p>
+Handler drawing points selected by <a class="normal" href="Main.html#User">user</a>.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="TPlotSpecimens"></a><code><b>TPlotSpecimens</b> = procedure(Sender: TObject; CurvesList: <a  href="SelfCopied.TSelfCopiedCompList.html">TSelfCopiedCompList</a>; SpecimenList: <a  href="MSCRDataClasses.TMSCRSpecimenList.html">TMSCRSpecimenList</a>) of object;</code></td>
+<td class="itemcode"><span id="TPlotSpecimens"></span><code><b>TPlotSpecimens</b> = procedure(Sender: TObject; CurvesList: <a  href="SelfCopied.TSelfCopiedCompList.html">TSelfCopiedCompList</a>; SpecimenList: <a  href="MSCRDataClasses.TMSCRSpecimenList.html">TMSCRSpecimenList</a>) of object;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
-Handler drawing specimen curves. Provides different ways of displaying <a class="normal" href="data.html">data</a>. Component which will actually display the <a class="normal" href="data.html">data</a> must store all pointers to visual components inside its own memory to be able hide them.</p>
+Handler drawing specimen curves. Provides different ways of displaying data. Component which will actually display the data must store all pointers to visual components inside its own memory to be able hide them.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="TRefresh"></a><code><b>TRefresh</b> = procedure(Sender: TObject) of object;</code></td>
+<td class="itemcode"><span id="TRefresh"></span><code><b>TRefresh</b> = procedure(Sender: TObject) of object;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="TRefreshPointsSet"></a><code><b>TRefreshPointsSet</b> = procedure( Sender: TObject; PointsSet: <a  href="DataLoader.TNeutronPointsSet.html">TNeutronPointsSet</a>) of object;</code></td>
+<td class="itemcode"><span id="TRefreshPointsSet"></span><code><b>TRefreshPointsSet</b> = procedure( Sender: TObject; PointsSet: <a  href="DataLoader.TNeutronPointsSet.html">TNeutronPointsSet</a>) of object;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="TSelMode"></a><code><b>TSelMode</b> = (...);</code></td>
+<td class="itemcode"><span id="TSelMode"></span><code><b>TSelMode</b> = (...);</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -354,103 +354,103 @@ Modes of selectiion of active point set.</p>
 <h6 class="description_section">Values</h6>
 <ul>
 <li>
-ModeSelNone: &nbsp;</li>
+<span id="ModeSelNone">ModeSelNone</span></li>
 <li>
-ModeSelAreaLimits: &nbsp;</li>
+<span id="ModeSelAreaLimits">ModeSelAreaLimits</span></li>
 <li>
-ModeSelCharacteristicPoints: &nbsp;</li>
+<span id="ModeSelCharacteristicPoints">ModeSelCharacteristicPoints</span></li>
 <li>
-ModeSelGaussianBounds: &nbsp;</li>
+<span id="ModeSelGaussianBounds">ModeSelGaussianBounds</span></li>
 <li>
-ModeSelBackground: &nbsp;</li>
+<span id="ModeSelBackground">ModeSelBackground</span></li>
 <li>
-ModeSelPeakPos: &nbsp;</li>
+<span id="ModeSelPeakPos">ModeSelPeakPos</span></li>
 <li>
-ModeSelPeakBounds: &nbsp;</li>
+<span id="ModeSelPeakBounds">ModeSelPeakBounds</span></li>
 </ul>
 </td></tr>
 </table>
 <h3 class="detail">Constants</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="ArgumentName"></a><code><b>ArgumentName</b>: string = 'Position';</code></td>
+<td class="itemcode"><span id="ArgumentName"></span><code><b>ArgumentName</b>: string = 'Position';</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="BackgroundPointsName"></a><code><b>BackgroundPointsName</b>: string = 'Background points';</code></td>
+<td class="itemcode"><span id="BackgroundPointsName"></span><code><b>BackgroundPointsName</b>: string = 'Background points';</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="CurvePositionsName"></a><code><b>CurvePositionsName</b>: string = 'Spec.positions';</code></td>
+<td class="itemcode"><span id="CurvePositionsName"></span><code><b>CurvePositionsName</b>: string = 'Spec.positions';</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="DeltaName"></a><code><b>DeltaName</b>: string = 'Difference';</code></td>
+<td class="itemcode"><span id="DeltaName"></span><code><b>DeltaName</b>: string = 'Difference';</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="NumberName"></a><code><b>NumberName</b>: string = 'Number';</code></td>
+<td class="itemcode"><span id="NumberName"></span><code><b>NumberName</b>: string = 'Number';</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="ProfileName"></a><code><b>ProfileName</b>: string = 'Data';</code></td>
+<td class="itemcode"><span id="ProfileName"></span><code><b>ProfileName</b>: string = 'Data';</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="RFactorIntervalsName"></a><code><b>RFactorIntervalsName</b>: string = 'Spec.app.intervals';</code></td>
+<td class="itemcode"><span id="RFactorIntervalsName"></span><code><b>RFactorIntervalsName</b>: string = 'Spec.app.intervals';</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="SelectedAreaName"></a><code><b>SelectedAreaName</b>: string = 'Selected interval';</code></td>
+<td class="itemcode"><span id="SelectedAreaName"></span><code><b>SelectedAreaName</b>: string = 'Selected interval';</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="StartName"></a><code><b>StartName</b>: string = 'Starting Position';</code></td>
+<td class="itemcode"><span id="StartName"></span><code><b>StartName</b>: string = 'Starting Position';</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="StopName"></a><code><b>StopName</b>: string = 'Final Position';</code></td>
+<td class="itemcode"><span id="StopName"></span><code><b>StopName</b>: string = 'Final Position';</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="SummarizedName"></a><code><b>SummarizedName</b>: string = 'Summarized';</code></td>
+<td class="itemcode"><span id="SummarizedName"></span><code><b>SummarizedName</b>: string = 'Summarized';</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="ValueName"></a><code><b>ValueName</b>: string = 'Amplitude';</code></td>
+<td class="itemcode"><span id="ValueName"></span><code><b>ValueName</b>: string = 'Amplitude';</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
@@ -461,6 +461,6 @@ ModeSelPeakBounds: &nbsp;</li>
 LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
 Facebook https://www.facebook.com/profile.php?id=100004082021870</li>
 </ul>
-<hr noshade size="1"><span class="appinfo"><em>Generated by <a  href="http://pasdoc.sourceforge.net/">PasDoc 0.14.0</a>. </em>
+<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
 </span>
 </td></tr></table></body></html>

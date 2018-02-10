@@ -1,19 +1,19 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <title>Fit: SelfCopied: Class TSelfCopiedCompList</title>
-<meta name="generator" content="PasDoc 0.14.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <link rel="StyleSheet" type="text/css" href="pasdoc.css">
 </head>
 <body>
 <table class="container"><tr><td class="navigation">
 <h2>Fit</h2><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p><p><a href="GVClasses.png" class="navigation">Classes hierarchy graph</a></p></td><td class="content">
-<a name="TSelfCopiedCompList"></a><h1 class="cio">Class TSelfCopiedCompList</h1>
-<table class="sections wide_list">
-<tr>
-<td><a class="section" href="#PasDoc-Description">Description</a></td><td><a class="section" href="#PasDoc-Hierarchy">Hierarchy</a></td><td>Fields</td><td><a class="section" href="#PasDoc-Methods">Methods</a></td><td>Properties</td></tr></table>
-<a name="PasDoc-Description"></a><h2 class="unit">Unit</h2>
+<span id="TSelfCopiedCompList"></span><h1 class="cio">Class TSelfCopiedCompList</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Hierarchy">Hierarchy</a></div><div class="one_section">Fields</div><div class="one_section"><a class="section" href="#PasDoc-Methods">Methods</a></div><div class="one_section">Properties</div></div>
+<span id="PasDoc-Description"></span><h2 class="unit">Unit</h2>
 <p class="unitlink">
 <a  href="SelfCopied.html">SelfCopied</a></p>
 <h2 class="declaration">Declaration</h2>
@@ -22,10 +22,10 @@
 <h2 class="description">Description</h2>
 <p>
 List of self copied components. By default is always active, so copy of list is also active. Caller should make the list inactive by itself if necessary.</p>
-<a name="PasDoc-Hierarchy"></a><h2 class="hierarchy">Hierarchy</h2>
+<span id="PasDoc-Hierarchy"></span><h2 class="hierarchy">Hierarchy</h2>
 <ul class="hierarchy"><li class="ancestor">TSelfCheckedComponentList</li>
 <li class="thisitem">TSelfCopiedCompList</li></ul><h2 class="overview">Overview</h2>
-<a name="PasDoc-Methods"></a><h3 class="summary">Methods</h3>
+<span id="PasDoc-Methods"></span><h3 class="summary">Methods</h3>
 <table class="summary wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
@@ -61,7 +61,7 @@ List of self copied components. By default is always active, so copy of list is 
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><a name="Add"></a><code>function <b>Add</b>(Item: TComponent): Integer; override;</code></td>
+<td class="itemcode"><span id="Add"></span><code>function <b>Add</b>(Item: TComponent): Integer; override;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -69,7 +69,7 @@ List of self copied components. By default is always active, so copy of list is 
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><a name="GetCopy"></a><code>function <b>GetCopy</b>: TObject; virtual;</code></td>
+<td class="itemcode"><span id="GetCopy"></span><code>function <b>GetCopy</b>: TObject; virtual;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -77,7 +77,7 @@ List of self copied components. By default is always active, so copy of list is 
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><a name="GetSelfCopyingMode"></a><code>function <b>GetSelfCopyingMode</b>: LongInt; virtual; abstract;</code></td>
+<td class="itemcode"><span id="GetSelfCopyingMode"></span><code>function <b>GetSelfCopyingMode</b>: LongInt; virtual; abstract;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -85,7 +85,7 @@ List of self copied components. By default is always active, so copy of list is 
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><a name="GetSharedCopy"></a><code>function <b>GetSharedCopy</b>: TObject; virtual;</code></td>
+<td class="itemcode"><span id="GetSharedCopy"></span><code>function <b>GetSharedCopy</b>: TObject; virtual;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
@@ -95,7 +95,7 @@ Returns copy of list which owns its items.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><a name="CopyParameters"></a><code>procedure <b>CopyParameters</b>(const Dest: TObject); virtual;</code></td>
+<td class="itemcode"><span id="CopyParameters"></span><code>procedure <b>CopyParameters</b>(const Dest: TObject); virtual;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -103,7 +103,7 @@ Returns copy of list which owns its items.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><a name="Insert"></a><code>procedure <b>Insert</b>(Index: Integer; Item: TComponent); override;</code></td>
+<td class="itemcode"><span id="Insert"></span><code>procedure <b>Insert</b>(Index: Integer; Item: TComponent); override;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -111,11 +111,11 @@ Returns copy of list which owns its items.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><a name="SetSelfCopyingMode"></a><code>procedure <b>SetSelfCopyingMode</b>(const AMode: LongInt); virtual; abstract;</code></td>
+<td class="itemcode"><span id="SetSelfCopyingMode"></span><code>procedure <b>SetSelfCopyingMode</b>(const AMode: LongInt); virtual; abstract;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
 </table>
-<hr noshade size="1"><span class="appinfo"><em>Generated by <a  href="http://pasdoc.sourceforge.net/">PasDoc 0.14.0</a>. </em>
+<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
 </span>
 </td></tr></table></body></html>

@@ -1,19 +1,19 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <title>Fit: SelfSaved: Class TSelfSavedComponent</title>
-<meta name="generator" content="PasDoc 0.14.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <link rel="StyleSheet" type="text/css" href="pasdoc.css">
 </head>
 <body>
 <table class="container"><tr><td class="navigation">
 <h2>Fit</h2><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p><p><a href="GVClasses.png" class="navigation">Classes hierarchy graph</a></p></td><td class="content">
-<a name="TSelfSavedComponent"></a><h1 class="cio">Class TSelfSavedComponent</h1>
-<table class="sections wide_list">
-<tr>
-<td><a class="section" href="#PasDoc-Description">Description</a></td><td><a class="section" href="#PasDoc-Hierarchy">Hierarchy</a></td><td>Fields</td><td><a class="section" href="#PasDoc-Methods">Methods</a></td><td>Properties</td></tr></table>
-<a name="PasDoc-Description"></a><h2 class="unit">Unit</h2>
+<span id="TSelfSavedComponent"></span><h1 class="cio">Class TSelfSavedComponent</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Hierarchy">Hierarchy</a></div><div class="one_section">Fields</div><div class="one_section"><a class="section" href="#PasDoc-Methods">Methods</a></div><div class="one_section">Properties</div></div>
+<span id="PasDoc-Description"></span><h2 class="unit">Unit</h2>
 <p class="unitlink">
 <a  href="SelfSaved.html">SelfSaved</a></p>
 <h2 class="declaration">Declaration</h2>
@@ -22,10 +22,10 @@
 <h2 class="description">Description</h2>
 <p>
 Component which can serialize itself into stream allowing adding new attributes and changing order of inheritance without loosing ability to read existing files (backward compatibility). Writing (reading) class attributes starts from attributes of the class which is last in the inheritance chain. Reading / writing operations are implemented as class operations to provide possibility of moving by inheritance chain.</p>
-<a name="PasDoc-Hierarchy"></a><h2 class="hierarchy">Hierarchy</h2>
+<span id="PasDoc-Hierarchy"></span><h2 class="hierarchy">Hierarchy</h2>
 <ul class="hierarchy"><li class="ancestor">TComponent</li>
 <li class="thisitem">TSelfSavedComponent</li></ul><h2 class="overview">Overview</h2>
-<a name="PasDoc-Methods"></a><h3 class="summary">Methods</h3>
+<span id="PasDoc-Methods"></span><h3 class="summary">Methods</h3>
 <table class="summary wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
@@ -77,7 +77,7 @@ Component which can serialize itself into stream allowing adding new attributes 
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><a name="GetPropHeaderRec"></a><code>class function <b>GetPropHeaderRec</b>: <a  href="SelfSaved.TPropHeaderRec.html">TPropHeaderRec</a>; virtual;</code></td>
+<td class="itemcode"><span id="GetPropHeaderRec"></span><code>class function <b>GetPropHeaderRec</b>: <a  href="SelfSaved.TPropHeaderRec.html">TPropHeaderRec</a>; virtual;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
@@ -87,7 +87,7 @@ Returns attribute descriptor for given class.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><a name="IsClassInheritIDValid"></a><code>class function <b>IsClassInheritIDValid</b>( const ClassInheritID: Byte ): Boolean; virtual;</code></td>
+<td class="itemcode"><span id="IsClassInheritIDValid"></span><code>class function <b>IsClassInheritIDValid</b>( const ClassInheritID: Byte ): Boolean; virtual;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
@@ -97,7 +97,7 @@ Checks if the class suppors given inheritance ID.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><a name="DefineProperties"></a><code>procedure <b>DefineProperties</b>(Filer: TFiler); override;</code></td>
+<td class="itemcode"><span id="DefineProperties"></span><code>procedure <b>DefineProperties</b>(Filer: TFiler); override;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -105,7 +105,7 @@ Checks if the class suppors given inheritance ID.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><a name="ReadProperties"></a><code>class procedure <b>ReadProperties</b>( const Reader: TReader; const PropHeaderRec: <a  href="SelfSaved.TPropHeaderRec.html">TPropHeaderRec</a>; const AnObject: <a  href="SelfSaved.TSelfSavedComponent.html">TSelfSavedComponent</a> ); virtual;</code></td>
+<td class="itemcode"><span id="ReadProperties"></span><code>class procedure <b>ReadProperties</b>( const Reader: TReader; const PropHeaderRec: <a  href="SelfSaved.TPropHeaderRec.html">TPropHeaderRec</a>; const AnObject: <a  href="SelfSaved.TSelfSavedComponent.html">TSelfSavedComponent</a> ); virtual;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -113,7 +113,7 @@ Checks if the class suppors given inheritance ID.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><a name="WriteProperties"></a><code>class procedure <b>WriteProperties</b>( const Writer: TWriter; const AnObject: <a  href="SelfSaved.TSelfSavedComponent.html">TSelfSavedComponent</a> ); virtual;</code></td>
+<td class="itemcode"><span id="WriteProperties"></span><code>class procedure <b>WriteProperties</b>( const Writer: TWriter; const AnObject: <a  href="SelfSaved.TSelfSavedComponent.html">TSelfSavedComponent</a> ); virtual;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -121,7 +121,7 @@ Checks if the class suppors given inheritance ID.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
-<td class="itemcode"><a name="ReadData"></a><code>procedure <b>ReadData</b>(Reader: TReader);</code></td>
+<td class="itemcode"><span id="ReadData"></span><code>procedure <b>ReadData</b>(Reader: TReader);</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
@@ -131,17 +131,17 @@ Calls the method of reading attributes of inheritance chain based on results of 
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
-<td class="itemcode"><a name="ReadInheritChain"></a><code>class procedure <b>ReadInheritChain</b>( const Reader: TReader; const AnObject: <a  href="SelfSaved.TSelfSavedComponent.html">TSelfSavedComponent</a> );</code></td>
+<td class="itemcode"><span id="ReadInheritChain"></span><code>class procedure <b>ReadInheritChain</b>( const Reader: TReader; const AnObject: <a  href="SelfSaved.TSelfSavedComponent.html">TSelfSavedComponent</a> );</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
-Sequentially reads attribute descriptors from the file and searches class in the inheritance chain which is responsible for reading these <a class="normal" href="data.html">data</a>.</p>
+Sequentially reads attribute descriptors from the file and searches class in the inheritance chain which is responsible for reading these data.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
-<td class="itemcode"><a name="ReadPropHeader"></a><code>class procedure <b>ReadPropHeader</b>(const Reader: TReader; out PropHeaderRec: <a  href="SelfSaved.TPropHeaderRec.html">TPropHeaderRec</a> );</code></td>
+<td class="itemcode"><span id="ReadPropHeader"></span><code>class procedure <b>ReadPropHeader</b>(const Reader: TReader; out PropHeaderRec: <a  href="SelfSaved.TPropHeaderRec.html">TPropHeaderRec</a> );</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
@@ -151,17 +151,17 @@ Reads attributes of class.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
-<td class="itemcode"><a name="WriteData"></a><code>procedure <b>WriteData</b>(Writer: TWriter);</code></td>
+<td class="itemcode"><span id="WriteData"></span><code>procedure <b>WriteData</b>(Writer: TWriter);</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
-Writes class attributes and markers of <a class="normal" href="start.html">start</a> and end of <a class="normal" href="data.html">data</a>.</p>
+Writes class attributes and markers of start and end of data.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
-<td class="itemcode"><a name="WriteInheritChain"></a><code>class procedure <b>WriteInheritChain</b>( const Writer: TWriter; const AnObject: <a  href="SelfSaved.TSelfSavedComponent.html">TSelfSavedComponent</a> ); virtual;</code></td>
+<td class="itemcode"><span id="WriteInheritChain"></span><code>class procedure <b>WriteInheritChain</b>( const Writer: TWriter; const AnObject: <a  href="SelfSaved.TSelfSavedComponent.html">TSelfSavedComponent</a> ); virtual;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
@@ -171,13 +171,13 @@ Writes attributes of all inheritance chain up to <a class="normal" href="SelfSav
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
-<td class="itemcode"><a name="WritePropHeader"></a><code>class procedure <b>WritePropHeader</b>(const Writer: TWriter); virtual;</code></td>
+<td class="itemcode"><span id="WritePropHeader"></span><code>class procedure <b>WritePropHeader</b>(const Writer: TWriter); virtual;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
 Writes attribute descriptor.</p>
 </td></tr>
 </table>
-<hr noshade size="1"><span class="appinfo"><em>Generated by <a  href="http://pasdoc.sourceforge.net/">PasDoc 0.14.0</a>. </em>
+<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
 </span>
 </td></tr></table></body></html>

@@ -1,8 +1,9 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <title>Fit: All Units</title>
-<meta name="generator" content="PasDoc 0.14.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <link rel="StyleSheet" type="text/css" href="pasdoc.css">
 </head>
@@ -20,34 +21,16 @@
 <td class="itemdesc"><p>Contains definitions of auxiliary classes used to control algorithm execution.</p></td>
 </tr>
 <tr class="list2">
-<td class="itemname"><a class="bold" href="background.html">background</a></td>
-<td class="itemdesc"><p>&nbsp;</p></td>
-</tr>
-<tr class="list">
-<td class="itemname"><a class="bold" href="background_more.html">background_more</a></td>
-<td class="itemdesc"><p>&nbsp;</p></td>
-</tr>
-<tr class="list2">
-<td class="itemname"><a class="bold" href="cgiModules.html">cgiModules</a></td>
-<td class="itemdesc"><p>Copyright (C) 2003 Michael Van Canneyt
-
-<p>***************************************************************************** * * * See the file COPYING.modifiedLGPL, included in this distribution, * * for details about the copyright.</p></td>
-</tr>
-<tr class="list">
 <td class="itemname"><a class="bold" href="ClassInheritIDs.html">ClassInheritIDs</a></td>
-<td class="itemdesc"><p>Contains definitions of constant identifiers of classes. These constants are used in <a class="normal" href="data.html">data</a> serialization.</p></td>
+<td class="itemdesc"><p>Contains definitions of constant identifiers of classes. These constants are used in data serialization.</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="CombEnumerator.html">CombEnumerator</a></td>
 <td class="itemdesc"><p>Contains definitions of classes used to iterate through set of possible task solution.</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="CommonTypes.html">CommonTypes</a></td>
 <td class="itemdesc"><p>Contains definitions of enumerable constants.</p></td>
-</tr>
-<tr class="list2">
-<td class="itemname"><a class="bold" href="data.html">data</a></td>
-<td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
 <tr class="list">
 <td class="itemname"><a class="bold" href="DataClasses.html">DataClasses</a></td>
@@ -55,35 +38,19 @@
 </tr>
 <tr class="list2">
 <td class="itemname"><a class="bold" href="DataLoader.html">DataLoader</a></td>
-<td class="itemdesc"><p>Contains definitions of classes used in <a class="normal" href="data.html">data</a> loading.</p></td>
+<td class="itemdesc"><p>Contains definitions of classes used in data loading.</p></td>
 </tr>
 <tr class="list">
 <td class="itemname"><a class="bold" href="DownhillSimplexContainer.html">DownhillSimplexContainer</a></td>
 <td class="itemdesc"><p>Contains definitions of auxiliary classes used in downhill simplex optimization.</p></td>
 </tr>
 <tr class="list2">
-<td class="itemname"><a class="bold" href="error.html">error</a></td>
-<td class="itemdesc"><p>&nbsp;</p></td>
-</tr>
-<tr class="list">
-<td class="itemname"><a class="bold" href="evaluation.html">evaluation</a></td>
-<td class="itemdesc"><p>&nbsp;</p></td>
-</tr>
-<tr class="list2">
-<td class="itemname"><a class="bold" href="file_results.html">file_results</a></td>
-<td class="itemdesc"><p>&nbsp;</p></td>
-</tr>
-<tr class="list">
-<td class="itemname"><a class="bold" href="file_results_empty.html">file_results_empty</a></td>
-<td class="itemdesc"><p>&nbsp;</p></td>
-</tr>
-<tr class="list2">
 <td class="itemname"><a class="bold" href="FitClient.html">FitClient</a></td>
-<td class="itemdesc"><p>Contains definitions of classes used in displaying results to user.</p></td>
+<td class="itemdesc"><p>Contains definitions of classes used in displaying results to <a class="normal" href="Main.html#User">user</a>.</p></td>
 </tr>
 <tr class="list">
 <td class="itemname"><a class="bold" href="FitClientApp.html">FitClientApp</a></td>
-<td class="itemdesc"><p>Contains definition of class representing the <a class="normal" href="cgiModules.html#Application">application</a>.</p></td>
+<td class="itemdesc"><p>Contains definition of class representing the application.</p></td>
 </tr>
 <tr class="list2">
 <td class="itemname"><a class="bold" href="FitClientProxy.html">FitClientProxy</a></td>
@@ -95,11 +62,11 @@
 </tr>
 <tr class="list2">
 <td class="itemname"><a class="bold" href="FitServer.html">FitServer</a></td>
-<td class="itemdesc"><p>Contains definition of class implementing server logic. Doesn't contain any user interface interaction. Exception handling and converting them into messages understandable for caller should be done in boundary objects. Throwing EAssertionFailed should be considered as inadmissibility of state for calling the method. At that state of the server should be kept. Throwing any other exception should be considered as fatal <a class="normal" href="error.html">error</a>. At that state of the server should be brought into initial which was just after <a class="normal" href="start.html">start</a>. Sometimes when method can execute the action accroding to its semantics EAssertionFailed can be catched inside it.</p></td>
+<td class="itemdesc"><p>Contains definition of class implementing server logic. Doesn't contain any <a class="normal" href="Main.html#User">user</a> interface interaction. Exception handling and converting them into messages understandable for caller should be done in boundary objects. Throwing EAssertionFailed should be considered as inadmissibility of state for calling the method. At that state of the server should be kept. Throwing any other exception should be considered as <a class="normal" href="Main.html#Fatal">fatal</a> error. At that state of the server should be brought into initial which was just after start. Sometimes when method can execute the action accroding to its semantics EAssertionFailed can be catched inside it.</p></td>
 </tr>
 <tr class="list">
 <td class="itemname"><a class="bold" href="FitServerApp.html">FitServerApp</a></td>
-<td class="itemdesc"><p>Defines the server <a class="normal" href="cgiModules.html#Application">application</a> class which is basic unit of interaction with client.</p></td>
+<td class="itemdesc"><p>Defines the server application class which is basic unit of interaction with client.</p></td>
 </tr>
 <tr class="list2">
 <td class="itemname"><a class="bold" href="FitServerMultithreaded.html">FitServerMultithreaded</a></td>
@@ -126,56 +93,32 @@
 <td class="itemdesc"><p>Contains definition of class executing optimization task in separate thread.</p></td>
 </tr>
 <tr class="list2">
-<td class="itemname"><a class="bold" href="fitting.html">fitting</a></td>
-<td class="itemdesc"><p>&nbsp;</p></td>
-</tr>
-<tr class="list">
-<td class="itemname"><a class="bold" href="fitting_process.html">fitting_process</a></td>
-<td class="itemdesc"><p>&nbsp;</p></td>
-</tr>
-<tr class="list2">
-<td class="itemname"><a class="bold" href="fitting_progress.html">fitting_progress</a></td>
-<td class="itemdesc"><p>&nbsp;</p></td>
-</tr>
-<tr class="list">
 <td class="itemname"><a class="bold" href="fit_server.html">fit_server</a></td>
 <td class="itemdesc"><p>This unit has been produced by ws_helper.</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="fit_server_binder.html">fit_server_binder</a></td>
 <td class="itemdesc"><p>This unit has been produced by ws_helper.</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="fit_server_imp.html">fit_server_imp</a></td>
 <td class="itemdesc"><p>This unit has been produced by ws_helper.</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="fit_server_proxy.html">fit_server_proxy</a></td>
 <td class="itemdesc"><p>This unit has been produced by ws_helper.</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="FormServer.html">FormServer</a></td>
 <td class="itemdesc"><p>Contains hidden form used to render charts on the server.</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="GeneralHashfunctions.html">GeneralHashfunctions</a></td>
 <td class="itemdesc"><p>General purpose hash function algorithms library.</p></td>
 </tr>
-<tr class="list">
-<td class="itemname"><a class="bold" href="gen_back_progress.html">gen_back_progress</a></td>
-<td class="itemdesc"><p>&nbsp;</p></td>
-</tr>
-<tr class="list2">
-<td class="itemname"><a class="bold" href="gen_spec_int_progress.html">gen_spec_int_progress</a></td>
-<td class="itemdesc"><p>&nbsp;</p></td>
-</tr>
-<tr class="list">
-<td class="itemname"><a class="bold" href="gen_spec_pos_progress.html">gen_spec_pos_progress</a></td>
-<td class="itemdesc"><p>&nbsp;</p></td>
-</tr>
 <tr class="list2">
 <td class="itemname"><a class="bold" href="Main.html">Main</a></td>
-<td class="itemdesc"><p>Contains entry point of the <a class="normal" href="cgiModules.html#Application">application</a>.</p></td>
+<td class="itemdesc"><p>Contains entry point of the application.</p></td>
 </tr>
 <tr class="list">
 <td class="itemname"><a class="bold" href="MainCalcProcess.html">MainCalcProcess</a></td>
@@ -203,47 +146,15 @@
 </tr>
 <tr class="list">
 <td class="itemname"><a class="bold" href="MSCRDataClasses.html">MSCRDataClasses</a></td>
-<td class="itemdesc"><p>Contains definitions of auxiliary <a class="normal" href="data.html">data</a> containers.</p></td>
+<td class="itemdesc"><p>Contains definitions of auxiliary data containers.</p></td>
 </tr>
 <tr class="list2">
 <td class="itemname"><a class="bold" href="ObjSavingStringList.html">ObjSavingStringList</a></td>
 <td class="itemdesc"><p>Contains definition of class mapping strings with objects.</p></td>
 </tr>
 <tr class="list">
-<td class="itemname"><a class="bold" href="pattern.html">pattern</a></td>
-<td class="itemdesc"><p>&nbsp;</p></td>
-</tr>
-<tr class="list2">
-<td class="itemname"><a class="bold" href="pattern_more.html">pattern_more</a></td>
-<td class="itemdesc"><p>&nbsp;</p></td>
-</tr>
-<tr class="list">
 <td class="itemname"><a class="bold" href="PointSetViewer.html">PointSetViewer</a></td>
-<td class="itemdesc"><p>Contains definition of component which can draw client <a class="normal" href="data.html">data</a> in UI.</p></td>
-</tr>
-<tr class="list2">
-<td class="itemname"><a class="bold" href="projects.html">projects</a></td>
-<td class="itemdesc"><p>&nbsp;</p></td>
-</tr>
-<tr class="list">
-<td class="itemname"><a class="bold" href="projects_empty.html">projects_empty</a></td>
-<td class="itemdesc"><p>&nbsp;</p></td>
-</tr>
-<tr class="list2">
-<td class="itemname"><a class="bold" href="project_files.html">project_files</a></td>
-<td class="itemdesc"><p>&nbsp;</p></td>
-</tr>
-<tr class="list">
-<td class="itemname"><a class="bold" href="project_files_empty.html">project_files_empty</a></td>
-<td class="itemdesc"><p>&nbsp;</p></td>
-</tr>
-<tr class="list2">
-<td class="itemname"><a class="bold" href="registration.html">registration</a></td>
-<td class="itemdesc"><p>&nbsp;</p></td>
-</tr>
-<tr class="list">
-<td class="itemname"><a class="bold" href="registration_free.html">registration_free</a></td>
-<td class="itemdesc"><p>&nbsp;</p></td>
+<td class="itemdesc"><p>Contains definition of component which can draw client data in UI.</p></td>
 </tr>
 <tr class="list2">
 <td class="itemname"><a class="bold" href="Runner.html">Runner</a></td>
@@ -259,69 +170,49 @@
 </tr>
 <tr class="list">
 <td class="itemname"><a class="bold" href="Settings.html">Settings</a></td>
-<td class="itemdesc"><p>&nbsp;</p></td>
+<td class="itemdesc"><p>Contains definition of <code>settings</code> containers. Names of classes have non standard form because they are serialized into setting file.</p></td>
 </tr>
 <tr class="list2">
-<td class="itemname"><a class="bold" href="specimen_intervals.html">specimen_intervals</a></td>
-<td class="itemdesc"><p>&nbsp;</p></td>
-</tr>
-<tr class="list">
-<td class="itemname"><a class="bold" href="specimen_parameters.html">specimen_parameters</a></td>
-<td class="itemdesc"><p>&nbsp;</p></td>
-</tr>
-<tr class="list2">
-<td class="itemname"><a class="bold" href="specimen_parameters_file.html">specimen_parameters_file</a></td>
-<td class="itemdesc"><p>&nbsp;</p></td>
-</tr>
-<tr class="list">
-<td class="itemname"><a class="bold" href="specimen_positions.html">specimen_positions</a></td>
-<td class="itemdesc"><p>&nbsp;</p></td>
-</tr>
-<tr class="list2">
-<td class="itemname"><a class="bold" href="start.html">start</a></td>
-<td class="itemdesc"><p>&nbsp;</p></td>
-</tr>
-<tr class="list">
 <td class="itemname"><a class="bold" href="TableComp.html">TableComp</a></td>
-<td class="itemdesc"><p>Contains definition of visual component which can display <a class="normal" href="data.html">data</a> in grid.</p></td>
+<td class="itemdesc"><p>Contains definition of visual component which can display data in grid.</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="Tools.html">Tools</a></td>
 <td class="itemdesc"><p>Contains definition of auxiliary functions.</p></td>
 </tr>
-<tr class="list">
-<td class="itemname"><a class="bold" href="Unit1.html">Unit1</a></td>
-<td class="itemdesc"><p>&nbsp;</p></td>
-</tr>
 <tr class="list2">
+<td class="itemname"><a class="bold" href="Unit1.html">Unit1</a></td>
+<td class="itemdesc"><p>Contains definition of <a class="normal" href="Unit1.TFormMain.html">TFormMain</a>.</p></td>
+</tr>
+<tr class="list">
 <td class="itemname"><a class="bold" href="Unit12.html">Unit12</a></td>
 <td class="itemdesc"><p>Contains definition of <a class="normal" href="Unit12.TAboutBox.html">TAboutBox</a>.</p></td>
 </tr>
-<tr class="list">
-<td class="itemname"><a class="bold" href="Unit2.html">Unit2</a></td>
-<td class="itemdesc"><p>&nbsp;</p></td>
-</tr>
 <tr class="list2">
+<td class="itemname"><a class="bold" href="Unit2.html">Unit2</a></td>
+<td class="itemdesc"><p>Contains definition of <a class="normal" href="Unit2.TCreateSpecialCurveDlg.html">TCreateSpecialCurveDlg</a>.</p></td>
+</tr>
+<tr class="list">
 <td class="itemname"><a class="bold" href="Unit3.html">Unit3</a></td>
 <td class="itemdesc"><p>Contains definition of <a class="normal" href="Unit3.TInputWavelengthDlg.html">TInputWavelengthDlg</a>.</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="Unit4.html">Unit4</a></td>
 <td class="itemdesc"><p>Contains definition of <a class="normal" href="Unit4.TInputMaxRFactorDlg.html">TInputMaxRFactorDlg</a>.</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="Unit5.html">Unit5</a></td>
 <td class="itemdesc"><p>Contains definition of <a class="normal" href="Unit5.TInputBackFactorDlg.html">TInputBackFactorDlg</a>.</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="Unit6.html">Unit6</a></td>
 <td class="itemdesc"><p>Contains definition of <a class="normal" href="Unit6.TFormHint.html">TFormHint</a>.</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="Unit7.html">Unit7</a></td>
 <td class="itemdesc"><p>Contains definition of <a class="normal" href="Unit7.TSpecialCurvePropDlg.html">TSpecialCurvePropDlg</a>.</p></td>
 </tr>
 </table>
-<hr noshade size="1"><span class="appinfo"><em>Generated by <a  href="http://pasdoc.sourceforge.net/">PasDoc 0.14.0</a>. </em>
+<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
 </span>
 </td></tr></table></body></html>

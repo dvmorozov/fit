@@ -1,8 +1,9 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <title>Fit: Main</title>
-<meta name="generator" content="PasDoc 0.14.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <link rel="StyleSheet" type="text/css" href="pasdoc.css">
 </head>
@@ -10,21 +11,20 @@
 <table class="container"><tr><td class="navigation">
 <h2>Fit</h2><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p><p><a href="GVClasses.png" class="navigation">Classes hierarchy graph</a></p></td><td class="content">
 <h1 class="unit">Unit Main</h1>
-<table class="sections wide_list">
-<tr>
-<td><a class="section" href="#PasDoc-Description">Description</a></td><td><a class="section" href="#PasDoc-Uses">Uses</a></td><td>Classes, Interfaces, Objects and Records</td><td><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></td><td><a class="section" href="#PasDoc-Types">Types</a></td><td><a class="section" href="#PasDoc-Constants">Constants</a></td><td>Variables</td></tr></table>
-<a name="PasDoc-Description"></a><h2 class="description">Description</h2>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Uses">Uses</a></div><div class="one_section">Classes, Interfaces, Objects and Records</div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section"><a class="section" href="#PasDoc-Types">Types</a></div><div class="one_section"><a class="section" href="#PasDoc-Constants">Constants</a></div><div class="one_section">Variables</div></div>
+<span id="PasDoc-Description"></span><h2 class="description">Description</h2>
 <p>
-Contains entry point of the <a class="normal" href="cgiModules.html#Application">application</a>.</p>
+Contains entry point of the application.</p>
 <p>
 This software is distributed under GPL in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
 
 <p>
 
 <p></p>
-<a name="PasDoc-Uses"></a><h2 class="uses">Uses</h2>
+<span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
 <ul class="useslist"><li>base_service_intf</li><li>binary_formatter</li><li>Classes</li><li><a  href="DataLoader.html">DataLoader</a></li><li><a  href="fit_server_proxy.html">fit_server_proxy</a></li><li>Forms</li><li>soap_formatter</li><li>synapse_http_protocol</li><li>synapse_tcp_protocol</li><li>SysUtils</li></ul><h2 class="overview">Overview</h2>
-<a name="PasDoc-FuncsProcs"></a><h3 class="summary">Functions and Procedures</h3>
+<span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
 <table class="summary wide_list">
 <tr class="list">
 <td class="itemcode"><code>function <b><a  href="Main.html#CreateErrorMessage">CreateErrorMessage</a></b>(Msg: string): string;</code></td>
@@ -42,13 +42,13 @@ This software is distributed under GPL in the hope that it will be useful, but W
 <td class="itemcode"><code>procedure <b><a  href="Main.html#WriteLog">WriteLog</a></b>(Msg: string; MsgType: <a  href="Main.html#TMsgType">TMsgType</a>);</code></td>
 </tr>
 </table>
-<a name="PasDoc-Types"></a><h3 class="summary">Types</h3>
+<span id="PasDoc-Types"></span><h3 class="summary">Types</h3>
 <table class="summary wide_list">
 <tr class="list">
 <td class="itemcode"><code><b><a  href="Main.html#TMsgType">TMsgType</a></b> = (...);</code></td>
 </tr>
 </table>
-<a name="PasDoc-Constants"></a><h3 class="summary">Constants</h3>
+<span id="PasDoc-Constants"></span><h3 class="summary">Constants</h3>
 <table class="summary wide_list">
 <tr class="list">
 <td class="itemcode"><code><b><a  href="Main.html#ExternalIP">ExternalIP</a></b>: string = 'ec2-107-22-106-211.compute-1.amazonaws.com';</code></td>
@@ -73,7 +73,7 @@ This software is distributed under GPL in the hope that it will be useful, but W
 <h3 class="detail">Functions and Procedures</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="CreateErrorMessage"></a><code>function <b>CreateErrorMessage</b>(Msg: string): string;</code></td>
+<td class="itemcode"><span id="CreateErrorMessage"></span><code>function <b>CreateErrorMessage</b>(Msg: string): string;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -82,21 +82,21 @@ dopolnyaet soobschenie kodom oschibki</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="GetConfigDir"></a><code>function <b>GetConfigDir</b>: string;</code></td>
+<td class="itemcode"><span id="GetConfigDir"></span><code>function <b>GetConfigDir</b>: string;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="GetSeqErrorCode"></a><code>function <b>GetSeqErrorCode</b>(): LongInt;</code></td>
+<td class="itemcode"><span id="GetSeqErrorCode"></span><code>function <b>GetSeqErrorCode</b>(): LongInt;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="GetUserDir"></a><code>function <b>GetUserDir</b>: string;</code></td>
+<td class="itemcode"><span id="GetUserDir"></span><code>function <b>GetUserDir</b>: string;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -105,7 +105,7 @@ dopolnyaet soobschenie kodom oschibki</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="WriteLog"></a><code>procedure <b>WriteLog</b>(Msg: string; MsgType: <a  href="Main.html#TMsgType">TMsgType</a>);</code></td>
+<td class="itemcode"><span id="WriteLog"></span><code>procedure <b>WriteLog</b>(Msg: string; MsgType: <a  href="Main.html#TMsgType">TMsgType</a>);</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
@@ -113,26 +113,26 @@ dopolnyaet soobschenie kodom oschibki</p>
 <h3 class="detail">Types</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="TMsgType"></a><code><b>TMsgType</b> = (...);</code></td>
+<td class="itemcode"><span id="TMsgType"></span><code><b>TMsgType</b> = (...);</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;<h6 class="description_section">Values</h6>
 <ul>
 <li>
-Fatal: &nbsp;</li>
+<span id="Fatal">Fatal</span></li>
 <li>
-Surprising: &nbsp;</li>
+<span id="Surprising">Surprising</span></li>
 <li>
-Notification_: &nbsp;</li>
+<span id="Notification_">Notification_</span></li>
 <li>
-User: &nbsp;</li>
+<span id="User">User</span></li>
 </ul>
 </td></tr>
 </table>
 <h3 class="detail">Constants</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="ExternalIP"></a><code><b>ExternalIP</b>: string = 'ec2-107-22-106-211.compute-1.amazonaws.com';</code></td>
+<td class="itemcode"><span id="ExternalIP"></span><code><b>ExternalIP</b>: string = 'ec2-107-22-106-211.compute-1.amazonaws.com';</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -141,14 +141,14 @@ IP dlya svyazi brauzera s CGI-klientom; eti dannye vstavlyayutsya v ishodyaschie
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="InternalError"></a><code><b>InternalError</b>: string = 'Internal service error. Error code: ';</code></td>
+<td class="itemcode"><span id="InternalError"></span><code><b>InternalError</b>: string = 'Internal service error. Error code: ';</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="InternalIP"></a><code><b>InternalIP</b>: string = '127.0.0.1';</code></td>
+<td class="itemcode"><span id="InternalIP"></span><code><b>InternalIP</b>: string = '127.0.0.1';</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -157,21 +157,21 @@ IP dlya svyazi CGI-klienta s serverom prilozheniya <code>InternalIP</code>: stri
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="InternalPort"></a><code><b>InternalPort</b>: string = '1234';</code></td>
+<td class="itemcode"><span id="InternalPort"></span><code><b>InternalPort</b>: string = '1234';</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="Slash"></a><code><b>Slash</b>: string = '/';</code></td>
+<td class="itemcode"><span id="Slash"></span><code><b>Slash</b>: string = '/';</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="StrErrorID"></a><code><b>StrErrorID</b>: string = ' Error identifier: ';</code></td>
+<td class="itemcode"><span id="StrErrorID"></span><code><b>StrErrorID</b>: string = ' Error identifier: ';</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
@@ -182,6 +182,6 @@ IP dlya svyazi CGI-klienta s serverom prilozheniya <code>InternalIP</code>: stri
 LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
 Facebook https://www.facebook.com/profile.php?id=100004082021870</li>
 </ul>
-<hr noshade size="1"><span class="appinfo"><em>Generated by <a  href="http://pasdoc.sourceforge.net/">PasDoc 0.14.0</a>. </em>
+<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
 </span>
 </td></tr></table></body></html>

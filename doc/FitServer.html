@@ -1,8 +1,9 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <title>Fit: FitServer</title>
-<meta name="generator" content="PasDoc 0.14.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <link rel="StyleSheet" type="text/css" href="pasdoc.css">
 </head>
@@ -10,21 +11,20 @@
 <table class="container"><tr><td class="navigation">
 <h2>Fit</h2><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p><p><a href="GVClasses.png" class="navigation">Classes hierarchy graph</a></p></td><td class="content">
 <h1 class="unit">Unit FitServer</h1>
-<table class="sections wide_list">
-<tr>
-<td><a class="section" href="#PasDoc-Description">Description</a></td><td><a class="section" href="#PasDoc-Uses">Uses</a></td><td><a class="section" href="#PasDoc-Classes">Classes, Interfaces, Objects and Records</a></td><td>Functions and Procedures</td><td><a class="section" href="#PasDoc-Types">Types</a></td><td><a class="section" href="#PasDoc-Constants">Constants</a></td><td>Variables</td></tr></table>
-<a name="PasDoc-Description"></a><h2 class="description">Description</h2>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Uses">Uses</a></div><div class="one_section"><a class="section" href="#PasDoc-Classes">Classes, Interfaces, Objects and Records</a></div><div class="one_section">Functions and Procedures</div><div class="one_section"><a class="section" href="#PasDoc-Types">Types</a></div><div class="one_section"><a class="section" href="#PasDoc-Constants">Constants</a></div><div class="one_section">Variables</div></div>
+<span id="PasDoc-Description"></span><h2 class="description">Description</h2>
 <p>
-Contains definition of class implementing server logic. Doesn't contain any user interface interaction. Exception handling and converting them into messages understandable for caller should be done in boundary objects. Throwing EAssertionFailed should be considered as inadmissibility of state for calling the method. At that state of the server should be kept. Throwing any other exception should be considered as fatal <a class="normal" href="error.html">error</a>. At that state of the server should be brought into initial which was just after <a class="normal" href="start.html">start</a>. Sometimes when method can execute the action accroding to its semantics EAssertionFailed can be catched inside it.</p>
+Contains definition of class implementing server logic. Doesn't contain any <a class="normal" href="Main.html#User">user</a> interface interaction. Exception handling and converting them into messages understandable for caller should be done in boundary objects. Throwing EAssertionFailed should be considered as inadmissibility of state for calling the method. At that state of the server should be kept. Throwing any other exception should be considered as <a class="normal" href="Main.html#Fatal">fatal</a> error. At that state of the server should be brought into initial which was just after start. Sometimes when method can execute the action accroding to its semantics EAssertionFailed can be catched inside it.</p>
 <p>
 This software is distributed under GPL in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
 
 <p>
 
 <p></p>
-<a name="PasDoc-Uses"></a><h2 class="uses">Uses</h2>
+<span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
 <ul class="useslist"><li>Classes</li><li><a  href="CommonTypes.html">CommonTypes</a></li><li><a  href="DataLoader.html">DataLoader</a></li><li>Dialogs</li><li><a  href="FitTask.html">FitTask</a></li><li><a  href="MainCalcThread.html">MainCalcThread</a></li><li><a  href="MSCRDataClasses.html">MSCRDataClasses</a></li><li>MyExceptions</li><li>SelfCheckedComponentList</li><li><a  href="SelfCopied.html">SelfCopied</a></li><li>SimpMath</li><li>SysUtils</li></ul><h2 class="overview">Overview</h2>
-<a name="PasDoc-Classes"></a><h3 class="cio">Classes, Interfaces, Objects and Records</h3>
+<span id="PasDoc-Classes"></span><h3 class="cio">Classes, Interfaces, Objects and Records</h3>
 <table class="classestable wide_list">
 <tr class="listheader">
 <th class="itemname">Name</th>
@@ -35,13 +35,13 @@ This software is distributed under GPL in the hope that it will be useful, but W
 <td class="itemdesc">The component which implements all server logic.</td>
 </tr>
 </table>
-<a name="PasDoc-Types"></a><h3 class="summary">Types</h3>
+<span id="PasDoc-Types"></span><h3 class="summary">Types</h3>
 <table class="summary wide_list">
 <tr class="list">
 <td class="itemcode"><code><b><a  href="FitServer.html#TRecreateServer">TRecreateServer</a></b> = procedure of object;</code></td>
 </tr>
 </table>
-<a name="PasDoc-Constants"></a><h3 class="summary">Constants</h3>
+<span id="PasDoc-Constants"></span><h3 class="summary">Constants</h3>
 <table class="summary wide_list">
 <tr class="list">
 <td class="itemcode"><code><b><a  href="FitServer.html#BackPointsNum">BackPointsNum</a></b>: string = 'The number of background points should not be less then 2.';</code></td>
@@ -115,38 +115,38 @@ This software is distributed under GPL in the hope that it will be useful, but W
 <h3 class="detail">Types</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="TRecreateServer"></a><code><b>TRecreateServer</b> = procedure of object;</code></td>
+<td class="itemcode"><span id="TRecreateServer"></span><code><b>TRecreateServer</b> = procedure of object;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
-In varying gaussian parameters now amplitude and position are varied, width is taken the same for all instances (specimens).</p>
+In varying <a class="normal" href="CommonTypes.html#Gaussian">gaussian</a> parameters now amplitude and position are varied, width is taken the same for all instances (specimens).</p>
 </td></tr>
 </table>
 <h3 class="detail">Constants</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="BackPointsNum"></a><code><b>BackPointsNum</b>: string = 'The number of background points should not be less then 2.';</code></td>
+<td class="itemcode"><span id="BackPointsNum"></span><code><b>BackPointsNum</b>: string = 'The number of background points should not be less then 2.';</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="BackRemoving"></a><code><b>BackRemoving</b>: string = 'Now background points should be defined.';</code></td>
+<td class="itemcode"><span id="BackRemoving"></span><code><b>BackRemoving</b>: string = 'Now background points should be defined.';</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="CalcAborted"></a><code><b>CalcAborted</b>: string = 'Calculation aborted.';</code></td>
+<td class="itemcode"><span id="CalcAborted"></span><code><b>CalcAborted</b>: string = 'Calculation aborted.';</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="CalcNotStarted"></a><code><b>CalcNotStarted</b>: string = 'The calculation not started.';</code></td>
+<td class="itemcode"><span id="CalcNotStarted"></span><code><b>CalcNotStarted</b>: string = 'The calculation not started.';</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -155,28 +155,28 @@ Raschet ne byl zapuschen</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="CRLF"></a><code><b>CRLF</b>: string = #13#10;</code></td>
+<td class="itemcode"><span id="CRLF"></span><code><b>CRLF</b>: string = #13#10;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="DataMustBeSet"></a><code><b>DataMustBeSet</b>: string = 'Define data before.';</code></td>
+<td class="itemcode"><span id="DataMustBeSet"></span><code><b>DataMustBeSet</b>: string = 'Define data before.';</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="EntireAlready"></a><code><b>EntireAlready</b>: string = 'Entire dataset already selected.';</code></td>
+<td class="itemcode"><span id="EntireAlready"></span><code><b>EntireAlready</b>: string = 'Entire dataset already selected.';</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="InadmissibleData"></a><code><b>InadmissibleData</b>: string =
+<td class="itemcode"><span id="InadmissibleData"></span><code><b>InadmissibleData</b>: string =
         'Inadmissible data for this operation.';</code></td>
 </tr>
 <tr><td colspan="1">
@@ -184,14 +184,14 @@ Raschet ne byl zapuschen</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="InadmissibleParameterIndex"></a><code><b>InadmissibleParameterIndex</b>: string = 'Inadmissible parameter index.';</code></td>
+<td class="itemcode"><span id="InadmissibleParameterIndex"></span><code><b>InadmissibleParameterIndex</b>: string = 'Inadmissible parameter index.';</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="InadmissibleServerState"></a><code><b>InadmissibleServerState</b>: string =
+<td class="itemcode"><span id="InadmissibleServerState"></span><code><b>InadmissibleServerState</b>: string =
         'Inadmissible state for this operation.';</code></td>
 </tr>
 <tr><td colspan="1">
@@ -199,21 +199,21 @@ Raschet ne byl zapuschen</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="InadmissibleSpecimenIndex"></a><code><b>InadmissibleSpecimenIndex</b>: string = 'Inadmissible specimen index.';</code></td>
+<td class="itemcode"><span id="InadmissibleSpecimenIndex"></span><code><b>InadmissibleSpecimenIndex</b>: string = 'Inadmissible specimen index.';</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="IsProfileWaiting"></a><code><b>IsProfileWaiting</b>: string = 'Now the program waits data.';</code></td>
+<td class="itemcode"><span id="IsProfileWaiting"></span><code><b>IsProfileWaiting</b>: string = 'Now the program waits data.';</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="IsReadyForAutoFit"></a><code><b>IsReadyForAutoFit</b>: string = 'Now the program is ready for fitting with automatically selected conditions.';</code></td>
+<td class="itemcode"><span id="IsReadyForAutoFit"></span><code><b>IsReadyForAutoFit</b>: string = 'Now the program is ready for fitting with automatically selected conditions.';</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -222,7 +222,7 @@ dannaya stroka dolzhna poyavlyat'sya kogda nekotorye dannye esche ne zadany pol'
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="IsReadyForFit"></a><code><b>IsReadyForFit</b>: string = 'Now the program is ready for fitting with selected conditions.';</code></td>
+<td class="itemcode"><span id="IsReadyForFit"></span><code><b>IsReadyForFit</b>: string = 'Now the program is ready for fitting with selected conditions.';</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -231,14 +231,14 @@ dannaya stroka dolzhna poyavlyat'sya kogda vse neobhodimye dlya rascheta dannye 
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="NotAllData"></a><code><b>NotAllData</b>: string = 'Not all necessary data has been defined for the calculation.';</code></td>
+<td class="itemcode"><span id="NotAllData"></span><code><b>NotAllData</b>: string = 'Not all necessary data has been defined for the calculation.';</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="NowCalculation"></a><code><b>NowCalculation</b>: string =
+<td class="itemcode"><span id="NowCalculation"></span><code><b>NowCalculation</b>: string =
         
         'Now Calculation is executing.';</code></td>
 </tr>
@@ -247,14 +247,14 @@ dannaya stroka dolzhna poyavlyat'sya kogda vse neobhodimye dlya rascheta dannye 
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="RangeAlready"></a><code><b>RangeAlready</b>: string = 'Range of data already selected.';</code></td>
+<td class="itemcode"><span id="RangeAlready"></span><code><b>RangeAlready</b>: string = 'Range of data already selected.';</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="RFactorStillNotCalculated"></a><code><b>RFactorStillNotCalculated</b>: string = 'Not calculated';</code></td>
+<td class="itemcode"><span id="RFactorStillNotCalculated"></span><code><b>RFactorStillNotCalculated</b>: string = 'Not calculated';</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -263,21 +263,21 @@ dannaya stroka dolzhna poyavlyat'sya kogda vse neobhodimye dlya rascheta dannye 
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="SpecimenListNotReady"></a><code><b>SpecimenListNotReady</b>: string = 'Specimen list not ready.';</code></td>
+<td class="itemcode"><span id="SpecimenListNotReady"></span><code><b>SpecimenListNotReady</b>: string = 'Specimen list not ready.';</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="SpecimenParameterListNotReady"></a><code><b>SpecimenParameterListNotReady</b>: string = 'Specimen parameter list not ready.';</code></td>
+<td class="itemcode"><span id="SpecimenParameterListNotReady"></span><code><b>SpecimenParameterListNotReady</b>: string = 'Specimen parameter list not ready.';</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><a name="StillNotDone"></a><code><b>StillNotDone</b>: string = 'The calculation still not accomplished.';</code></td>
+<td class="itemcode"><span id="StillNotDone"></span><code><b>StillNotDone</b>: string = 'The calculation still not accomplished.';</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -290,6 +290,6 @@ Tekst d.b. primerno takoy: Ne vse neobhodimye dlya rascheta dannye opredeleny. V
 LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
 Facebook https://www.facebook.com/profile.php?id=100004082021870</li>
 </ul>
-<hr noshade size="1"><span class="appinfo"><em>Generated by <a  href="http://pasdoc.sourceforge.net/">PasDoc 0.14.0</a>. </em>
+<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
 </span>
 </td></tr></table></body></html>

@@ -1,0 +1,200 @@
+<?xml version="1.0"?>
+<CONFIG>
+  <ProjectOptions>
+    <PathDelim Value="\"/>
+    <Version Value="5"/>
+    <General>
+      <Flags>
+        <MainUnitHasUsesSectionForAllUnits Value="False"/>
+        <MainUnitHasCreateFormStatements Value="False"/>
+        <MainUnitHasTitleStatement Value="False"/>
+      </Flags>
+      <MainUnit Value="0"/>
+      <IconPath Value="./"/>
+      <TargetFileExt Value=".exe"/>
+      <ActiveEditorIndexAtStart Value="0"/>
+    </General>
+    <VersionInfo>
+      <ProjectVersion Value=""/>
+      <Language Value=""/>
+      <CharSet Value=""/>
+    </VersionInfo>
+    <PublishOptions>
+      <Version Value="2"/>
+      <IgnoreBinaries Value="False"/>
+      <IncludeFileFilter Value="*.(pas|pp|inc|lfm|lpr|lrs|lpi|lpk|sh|xml)"/>
+      <ExcludeFileFilter Value="*.(bak|ppu|ppw|o|so);*~;backup"/>
+    </PublishOptions>
+    <RunParams>
+      <local>
+        <FormatVersion Value="1"/>
+        <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
+      </local>
+    </RunParams>
+    <Units Count="5">
+      <Unit0>
+        <Filename Value="readbuffer_sample.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="readbuffer_sample"/>
+        <CursorPos X="1" Y="27"/>
+        <TopLine Value="6"/>
+        <EditorIndex Value="0"/>
+        <UsageCount Value="25"/>
+        <Loaded Value="True"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="user_service_intf.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="user_service_intf"/>
+        <CursorPos X="1" Y="27"/>
+        <TopLine Value="23"/>
+        <EditorIndex Value="2"/>
+        <UsageCount Value="25"/>
+        <Loaded Value="True"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="user_service_intf_proxy.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="user_service_intf_proxy"/>
+        <CursorPos X="71" Y="12"/>
+        <TopLine Value="10"/>
+        <EditorIndex Value="4"/>
+        <UsageCount Value="25"/>
+        <Loaded Value="True"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="..\..\base_service_intf.pas"/>
+        <UnitName Value="base_service_intf"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="3"/>
+        <UsageCount Value="12"/>
+        <Loaded Value="True"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="..\..\synapse_tcp_protocol.pas"/>
+        <UnitName Value="synapse_tcp_protocol"/>
+        <CursorPos X="12" Y="29"/>
+        <TopLine Value="16"/>
+        <EditorIndex Value="1"/>
+        <UsageCount Value="12"/>
+        <Loaded Value="True"/>
+      </Unit4>
+    </Units>
+    <JumpHistory Count="16" HistoryIndex="15">
+      <Position1>
+        <Filename Value="user_service_intf_proxy.pas"/>
+        <Caret Line="12" Column="71" TopLine="10"/>
+      </Position1>
+      <Position2>
+        <Filename Value="user_service_intf.pas"/>
+        <Caret Line="27" Column="25" TopLine="17"/>
+      </Position2>
+      <Position3>
+        <Filename Value="user_service_intf.pas"/>
+        <Caret Line="29" Column="21" TopLine="14"/>
+      </Position3>
+      <Position4>
+        <Filename Value="user_service_intf.pas"/>
+        <Caret Line="299" Column="8" TopLine="270"/>
+      </Position4>
+      <Position5>
+        <Filename Value="user_service_intf.pas"/>
+        <Caret Line="50" Column="38" TopLine="35"/>
+      </Position5>
+      <Position6>
+        <Filename Value="..\..\base_service_intf.pas"/>
+        <Caret Line="317" Column="40" TopLine="301"/>
+      </Position6>
+      <Position7>
+        <Filename Value="..\..\base_service_intf.pas"/>
+        <Caret Line="304" Column="40" TopLine="288"/>
+      </Position7>
+      <Position8>
+        <Filename Value="user_service_intf.pas"/>
+        <Caret Line="52" Column="3" TopLine="50"/>
+      </Position8>
+      <Position9>
+        <Filename Value="..\..\synapse_tcp_protocol.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
+      </Position9>
+      <Position10>
+        <Filename Value="..\..\synapse_tcp_protocol.pas"/>
+        <Caret Line="29" Column="12" TopLine="13"/>
+      </Position10>
+      <Position11>
+        <Filename Value="readbuffer_sample.pas"/>
+        <Caret Line="269" Column="1" TopLine="237"/>
+      </Position11>
+      <Position12>
+        <Filename Value="readbuffer_sample.pas"/>
+        <Caret Line="27" Column="44" TopLine="14"/>
+      </Position12>
+      <Position13>
+        <Filename Value="..\..\base_service_intf.pas"/>
+        <Caret Line="4431" Column="1" TopLine="4386"/>
+      </Position13>
+      <Position14>
+        <Filename Value="user_service_intf.pas"/>
+        <Caret Line="273" Column="1" TopLine="267"/>
+      </Position14>
+      <Position15>
+        <Filename Value="readbuffer_sample.pas"/>
+        <Caret Line="58" Column="18" TopLine="46"/>
+      </Position15>
+      <Position16>
+        <Filename Value="readbuffer_sample.pas"/>
+        <Caret Line="46" Column="11" TopLine="22"/>
+      </Position16>
+    </JumpHistory>
+  </ProjectOptions>
+  <CompilerOptions>
+    <Version Value="5"/>
+    <PathDelim Value="\"/>
+    <SearchPaths>
+      <OtherUnitFiles Value="..\;..\..\;$(LazarusDir)\others_package\synapse\"/>
+    </SearchPaths>
+    <CodeGeneration>
+      <Generate Value="Faster"/>
+    </CodeGeneration>
+    <Other>
+      <CompilerPath Value="$(CompPath)"/>
+    </Other>
+  </CompilerOptions>
+  <Debugging>
+    <BreakPoints Count="4">
+      <Item1>
+        <Source Value="D:\lazarusClean\fpcsrc\rtl\inc\getopts.pp"/>
+        <Line Value="230"/>
+      </Item1>
+      <Item2>
+        <Source Value="D:\lazarusClean\fpcsrc\rtl\inc\getopts.pp"/>
+        <Line Value="193"/>
+      </Item2>
+      <Item3>
+        <Source Value="D:\lazarusClean\fpcsrc\rtl\inc\getopts.pp"/>
+        <Line Value="198"/>
+      </Item3>
+      <Item4>
+        <Source Value="..\..\ws_helper\wsdl2pas_imp.pas"/>
+        <Line Value="606"/>
+      </Item4>
+    </BreakPoints>
+    <Watches Count="2">
+      <Item1>
+        <Expression Value="locStrFilter"/>
+      </Item1>
+      <Item2>
+        <Expression Value="i"/>
+      </Item2>
+    </Watches>
+    <Exceptions Count="2">
+      <Item1>
+        <Name Value="ECodetoolError"/>
+      </Item1>
+      <Item2>
+        <Name Value="EFOpenError"/>
+      </Item2>
+    </Exceptions>
+  </Debugging>
+</CONFIG>

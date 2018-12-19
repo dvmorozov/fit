@@ -1,0 +1,30 @@
+{ Ceci est un fichier ressource généré automatiquement par Lazarus }
+
+LazarusResources.Add('TfTypeAliasEdit','FORMDATA',[
+  'TPF0'#15'TfTypeAliasEdit'#14'fTypeAliasEdit'#4'Left'#3#181#2#6'Height'#3','#1
+  +#3'Top'#3#186#0#5'Width'#3#144#1#18'HorzScrollBar.Page'#3#143#1#18'VertScrol'
+  +'lBar.Page'#3'+'#1#13'ActiveControl'#7#7'Button1'#11'BorderStyle'#7#13'bsSiz'
+  +'eToolWin'#7'Caption'#6#14'fTypeAliasEdit'#8'Position'#7#14'poScreenCenter'#0
+  +#6'TPanel'#6'Panel1'#6'Height'#2'2'#3'Top'#3#250#0#5'Width'#3#144#1#5'Align'
+  +#7#8'alBottom'#8'TabOrder'#2#0#0#7'TButton'#7'Button1'#4'Left'#3#232#0#6'Hei'
+  +'ght'#2#25#3'Top'#2#14#5'Width'#2'K'#6'Action'#7#5'actOK'#7'Anchors'#11#5'ak'
+  +'Top'#7'akRight'#0#25'BorderSpacing.InnerBorder'#2#4#8'TabOrder'#2#0#0#0#7'T'
+  +'Button'#7'Button2'#4'Left'#3'8'#1#6'Height'#2#25#3'Top'#2#14#5'Width'#2'K'#7
+  +'Anchors'#11#5'akTop'#7'akRight'#0#25'BorderSpacing.InnerBorder'#2#4#6'Cance'
+  +'l'#9#7'Caption'#6#6'Cancel'#8'TabOrder'#2#1#0#0#0#12'TPageControl'#12'PageC'
+  +'ontrol1'#6'Height'#3#250#0#5'Width'#3#144#1#10'ActivePage'#7#9'TabSheet1'#5
+  +'Align'#7#8'alClient'#8'TabIndex'#2#0#8'TabOrder'#2#1#0#9'TTabSheet'#9'TabSh'
+  +'eet1'#7'Caption'#6#10'Type Alias'#0#6'TLabel'#6'Label1'#4'Left'#2#20#6'Heig'
+  +'ht'#2#14#3'Top'#2#26#5'Width'#2#28#7'Caption'#6#4'Name'#5'Color'#7#6'clNone'
+  +#11'ParentColor'#8#0#0#6'TLabel'#6'Label2'#4'Left'#2#20#6'Height'#2#14#3'Top'
+  +#2'r'#5'Width'#2'3'#7'Caption'#6#9'Base Type'#5'Color'#7#6'clNone'#11'Parent'
+  +'Color'#8#0#0#5'TEdit'#7'edtName'#4'Left'#2#20#6'Height'#2#23#3'Top'#2'*'#5
+  +'Width'#3'`'#1#7'Anchors'#11#5'akTop'#6'akLeft'#7'akRight'#0#8'TabOrder'#2#0
+  +#0#0#9'TComboBox'#11'edtBaseType'#4'Left'#2#20#6'Height'#2#21#3'Top'#3#130#0
+  +#5'Width'#3'`'#1#7'Anchors'#11#5'akTop'#6'akLeft'#7'akRight'#0#16'AutoComple'
+  +'teText'#11#22'cbactEndOfLineComplete'#20'cbactSearchAscending'#0#10'ItemHei'
+  +'ght'#2#13#9'MaxLength'#2#0#5'Style'#7#14'csDropDownList'#8'TabOrder'#2#1#0#0
+  +#0#0#11'TActionList'#2'AL'#4'left'#3#147#0#3'top'#2'x'#0#7'TAction'#5'actOK'
+  +#7'Caption'#6#2'OK'#18'DisableIfNoHandler'#9#9'OnExecute'#7#12'actOKExecute'
+  +#8'OnUpdate'#7#11'actOKUpdate'#0#0#0#0
+]);

@@ -1,0 +1,120 @@
+object fMain: TfMain
+  Left = 339
+  Height = 471
+  Top = 181
+  Width = 476
+  HorzScrollBar.Page = 475
+  VertScrollBar.Page = 470
+  ActiveControl = edtAccessID
+  Caption = 'WST Amazon - Sample'
+  Position = poDesktopCenter
+  object Label1: TLabel
+    Left = 16
+    Height = 18
+    Top = 24
+    Width = 69
+    Caption = 'Access Key'
+    Color = clNone
+    ParentColor = False
+  end
+  object Bevel1: TBevel
+    Left = 16
+    Height = 8
+    Top = 64
+    Width = 451
+    Anchors = [akTop, akLeft, akRight]
+    Shape = bsBottomLine
+  end
+  object Label2: TLabel
+    Left = 16
+    Height = 18
+    Top = 91
+    Width = 82
+    Caption = 'Search Index'
+    Color = clNone
+    ParentColor = False
+  end
+  object Label3: TLabel
+    Left = 16
+    Height = 18
+    Top = 142
+    Width = 82
+    Caption = 'Manufacturer'
+    Color = clNone
+    ParentColor = False
+  end
+  object Label4: TLabel
+    Left = 16
+    Height = 18
+    Top = 188
+    Width = 65
+    Caption = 'Key words'
+    Color = clNone
+    ParentColor = False
+  end
+  object Bevel2: TBevel
+    Left = 16
+    Height = 8
+    Top = 216
+    Width = 450
+    Anchors = [akTop, akLeft, akRight]
+    Shape = bsBottomLine
+  end
+  object edtAccessID: TEdit
+    Left = 118
+    Height = 23
+    Top = 24
+    Width = 202
+    TabOrder = 0
+  end
+  object edtSearchIndex: TEdit
+    Left = 127
+    Height = 23
+    Top = 91
+    Width = 338
+    Anchors = [akTop, akLeft, akRight]
+    TabOrder = 1
+    Text = 'All'
+  end
+  object edtManufacturer: TEdit
+    Left = 127
+    Height = 23
+    Top = 142
+    Width = 338
+    Anchors = [akTop, akLeft, akRight]
+    TabOrder = 2
+  end
+  object mmoRes: TMemo
+    Left = 16
+    Height = 210
+    Top = 248
+    Width = 449
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    Lines.Strings = (
+      'Memo1'
+    )
+    ScrollBars = ssAutoBoth
+    TabOrder = 3
+    WordWrap = False
+  end
+  object btnSearch: TButton
+    Left = 390
+    Height = 25
+    Top = 24
+    Width = 75
+    Anchors = [akTop, akRight]
+    BorderSpacing.InnerBorder = 4
+    Caption = 'Search'
+    OnClick = btnSearchClick
+    TabOrder = 4
+  end
+  object edtKeywords: TEdit
+    Left = 127
+    Height = 23
+    Top = 188
+    Width = 338
+    Anchors = [akTop, akLeft, akRight]
+    TabOrder = 5
+    Text = 'Harry Potter'
+  end
+end

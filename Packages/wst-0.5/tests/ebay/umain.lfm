@@ -1,0 +1,125 @@
+object Form1: TForm1
+  Left = 301
+  Height = 388
+  Top = 159
+  Width = 400
+  HorzScrollBar.Page = 399
+  VertScrollBar.Page = 387
+  ActiveControl = Button1
+  Caption = 'Form1'
+  ClientHeight = 388
+  ClientWidth = 400
+  OnCreate = FormCreate
+  object Panel1: TPanel
+    Height = 184
+    Width = 400
+    Align = alTop
+    ClientHeight = 184
+    ClientWidth = 400
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 16
+      Height = 14
+      Top = 53
+      Width = 77
+      Caption = 'eBayAuthToken'
+      Color = clNone
+      ParentColor = False
+    end
+    object Label2: TLabel
+      Left = 16
+      Height = 14
+      Top = 79
+      Width = 30
+      Caption = 'AppId'
+      Color = clNone
+      ParentColor = False
+    end
+    object Label3: TLabel
+      Left = 16
+      Height = 14
+      Top = 111
+      Width = 30
+      Caption = 'DevId'
+      Color = clNone
+      ParentColor = False
+    end
+    object Label4: TLabel
+      Left = 16
+      Height = 14
+      Top = 144
+      Width = 45
+      Caption = 'AuthCert'
+      Color = clNone
+      ParentColor = False
+    end
+    object Bevel1: TBevel
+      Left = 10
+      Height = 170
+      Top = 4
+      Width = 380
+      Anchors = [akTop, akLeft, akRight]
+    end
+    object Button1: TButton
+      Left = 288
+      Height = 25
+      Top = 8
+      Width = 99
+      BorderSpacing.InnerBorder = 4
+      Caption = 'GetCategories'
+      OnClick = Button1Click
+      TabOrder = 0
+      Visible = False
+    end
+    object Button3: TButton
+      Left = 16
+      Height = 25
+      Top = 8
+      Width = 136
+      BorderSpacing.InnerBorder = 4
+      Caption = 'GetPopularKeywords'
+      OnClick = Button3Click
+      TabOrder = 1
+    end
+    object edteBayAuthToken: TEdit
+      Left = 96
+      Height = 23
+      Top = 48
+      Width = 288
+      Anchors = [akTop, akLeft, akRight]
+      TabOrder = 2
+    end
+    object edtAppId: TEdit
+      Left = 96
+      Height = 23
+      Top = 77
+      Width = 288
+      Anchors = [akTop, akLeft, akRight]
+      TabOrder = 3
+    end
+    object edtDevId: TEdit
+      Left = 96
+      Height = 23
+      Top = 108
+      Width = 288
+      Anchors = [akTop, akLeft, akRight]
+      TabOrder = 4
+    end
+    object edtAuthCert: TEdit
+      Left = 96
+      Height = 23
+      Top = 136
+      Width = 288
+      Anchors = [akTop, akLeft, akRight]
+      TabOrder = 5
+    end
+  end
+  object trvOut: TTreeView
+    Height = 204
+    Top = 184
+    Width = 400
+    Align = alClient
+    DefaultItemHeight = 15
+    TabOrder = 1
+  end
+end

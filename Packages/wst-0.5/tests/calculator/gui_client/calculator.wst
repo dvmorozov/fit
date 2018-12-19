@@ -1,0 +1,13 @@
+  GetWSTResourceManager().AddResource('CALCULATOR',
+    #0#0#0#20'WST_METADATA_0.2.2.0'#0#0#0#10'calculator'#1#0#0#0#11'ICalculator'#4
+    +#0#0#0#6'AddInt'#3#0#0#0#1'A'#0#0#0#7'Integer'#0#0#0#0#0#0#0#1#0#0#0#1'B'#0#0
+    +#0#7'Integer'#0#0#0#0#0#0#0#1#0#0#0#6'result'#0#0#0#17'TBinaryArgsResult'#0#0
+    +#0#0#0#0#0#3#0#0#0#6'DivInt'#3#0#0#0#1'A'#0#0#0#7'Integer'#0#0#0#0#0#0#0#1#0
+    +#0#0#1'B'#0#0#0#7'Integer'#0#0#0#0#0#0#0#1#0#0#0#6'result'#0#0#0#7'Integer'#0
+    +#0#0#0#0#0#0#3#0#0#0#15'DoAllOperations'#3#0#0#0#1'A'#0#0#0#7'Integer'#0#0#0
+    +#0#0#0#0#1#0#0#0#1'B'#0#0#0#7'Integer'#0#0#0#0#0#0#0#1#0#0#0#6'result'#0#0#0
+    +#22'TBinaryArgsResultArray'#0#0#0#0#0#0#0#3#0#0#0#11'DoOperation'#4#0#0#0#1'A'
+    +#0#0#0#7'Integer'#0#0#0#0#0#0#0#1#0#0#0#1'B'#0#0#0#7'Integer'#0#0#0#0#0#0#0#1
+    +#0#0#0#10'AOperation'#0#0#0#8'TCalc_Op'#0#0#0#0#0#0#0#1#0#0#0#6'result'#0#0#0
+    +#17'TBinaryArgsResult'#0#0#0#0#0#0#0#3''
+  );

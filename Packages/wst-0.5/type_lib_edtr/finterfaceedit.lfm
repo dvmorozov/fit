@@ -1,0 +1,10 @@
+object fInterfaceEdit: TfInterfaceEdit
+  Left = 275
+  Height = 361
+  Top = 286
+  Width = 480
+  HorzScrollBar.Page = 479
+  VertScrollBar.Page = 360
+  Caption = 'fInterfaceEdit'
+  Position = poDesktopCenter
+end

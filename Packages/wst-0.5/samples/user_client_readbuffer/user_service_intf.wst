@@ -1,0 +1,9 @@
+  GetWSTResourceManager().AddResource('USER_SERVICE_INTF',
+    #0#0#0#20'WST_METADATA_0.2.2.0'#0#0#0#17'user_service_intf'#1#0#0#0#11'UserS'
+    +'ervice'#5#0#0#0#7'GetList'#1#0#0#0#6'result'#0#0#0#10'TUserArray'#0#0#0#0#0
+    +#0#0#3#0#0#0#3'Add'#1#0#0#0#5'AUser'#0#0#0#5'TUser'#0#0#0#0#0#0#0#1#0#0#0#6'U'
+    +'pdate'#1#0#0#0#5'AUser'#0#0#0#5'TUser'#0#0#0#0#0#0#0#1#0#0#0#4'Find'#2#0#0#0
+    +#5'AName'#0#0#0#6'string'#0#0#0#0#0#0#0#1#0#0#0#6'result'#0#0#0#5'TUser'#0#0
+    +#0#0#0#0#0#3#0#0#0#6'Delete'#2#0#0#0#5'AName'#0#0#0#6'string'#0#0#0#0#0#0#0#1
+    +#0#0#0#6'result'#0#0#0#7'boolean'#0#0#0#0#0#0#0#3''
+  );

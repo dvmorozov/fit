@@ -1,0 +1,6 @@
+  GetWSTResourceManager().AddResource('SDMTABULARSERVICE',
+    #0#0#0#20'WST_METADATA_0.2.2.0'#0#0#0#17'SDMTabularService'#1#0#0#0#21'SDMTa'
+    +'bularServiceSoap'#1#0#0#0#8'RunQuery'#2#0#0#0#8'RunQuery'#0#0#0#8'RunQuery'#0
+    +#0#0#0#0#0#0#1#0#0#0#16'RunQueryResponse'#0#0#0#16'RunQueryResponse'#0#0#0#0
+    +#0#0#0#3''
+  );

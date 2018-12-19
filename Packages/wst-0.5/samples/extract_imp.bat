@@ -1,0 +1,1 @@
+..\..\wst\ws_helper\ws_helper -i -o. "user_service_intf.wsdl" >extract_imp.res.txt

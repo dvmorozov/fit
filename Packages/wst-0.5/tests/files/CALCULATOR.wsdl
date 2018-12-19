@@ -1,0 +1,147 @@
+<?xml version="1.0"?>
+<definitions name="calculator" targetNamespace="urn:CALCULATOR" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:CALCULATOR" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:CALCULATOR">
+      <xsd:simpleType name="TCalc_Op">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="coAdd"/>
+          <xsd:enumeration value="coSub"/>
+          <xsd:enumeration value="coMul"/>
+          <xsd:enumeration value="coDiv"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:element name="TBinaryArgsResult">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Arg_A" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="Arg_B" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="Arg_R" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="Arg_OP" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="Arg_OpEnum" type="tns:TCalc_Op" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="Comment" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="TBinaryArgsResultArray">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="item" type="tns:TBinaryArgsResult" minOccurs="0" maxOccurs="unbounded"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="CalcHeader">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Login" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="Password" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="WantedPrecision" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+          </xsd:sequence>
+          <xsd:attribute name="mustUnderstand" type="xsd:int" attribute="optional"/>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="CalcResultHeader">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Login" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="Password" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="WantedPrecision" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="TimeStamp" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="SessionID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+          </xsd:sequence>
+          <xsd:attribute name="mustUnderstand" type="xsd:int" attribute="optional"/>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </types>
+  <message name="AddInt">
+    <part name="A" type="xsd:int"/>
+    <part name="B" type="xsd:int"/>
+  </message>
+  <message name="AddIntResponse">
+    <part name="result" type="tns:TBinaryArgsResult"/>
+  </message>
+  <message name="DivInt">
+    <part name="A" type="xsd:int"/>
+    <part name="B" type="xsd:int"/>
+  </message>
+  <message name="DivIntResponse">
+    <part name="result" type="xsd:int"/>
+  </message>
+  <message name="DoAllOperations">
+    <part name="A" type="xsd:int"/>
+    <part name="B" type="xsd:int"/>
+  </message>
+  <message name="DoAllOperationsResponse">
+    <part name="result" type="tns:TBinaryArgsResultArray"/>
+  </message>
+  <message name="DoOperation">
+    <part name="A" type="xsd:int"/>
+    <part name="B" type="xsd:int"/>
+    <part name="AOperation" type="tns:TCalc_Op"/>
+  </message>
+  <message name="DoOperationResponse">
+    <part name="result" type="tns:TBinaryArgsResult"/>
+  </message>
+  <portType name="ICalculator">
+    <operation name="AddInt">
+      <input message="tns:AddInt"/>
+      <output message="tns:AddIntResponse"/>
+    </operation>
+    <operation name="DivInt">
+      <input message="tns:DivInt"/>
+      <output message="tns:DivIntResponse"/>
+    </operation>
+    <operation name="DoAllOperations">
+      <input message="tns:DoAllOperations"/>
+      <output message="tns:DoAllOperationsResponse"/>
+    </operation>
+    <operation name="DoOperation">
+      <input message="tns:DoOperation"/>
+      <output message="tns:DoOperationResponse"/>
+    </operation>
+  </portType>
+  <binding name="ICalculatorBinding" type="tns:ICalculator">
+    <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <soap:operation soapAction="urn:CALCULATOR/ICalculatorAddInt"/>
+    <operation name="AddInt">
+      <input>
+        <soap:body use="encoded" namespace="urn:CALCULATOR" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:CALCULATOR" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </output>
+    </operation>
+    <soap:operation soapAction="urn:CALCULATOR/ICalculatorDivInt"/>
+    <operation name="DivInt">
+      <input>
+        <soap:body use="encoded" namespace="urn:CALCULATOR" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:CALCULATOR" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </output>
+    </operation>
+    <soap:operation soapAction="urn:CALCULATOR/ICalculatorDoAllOperations"/>
+    <operation name="DoAllOperations">
+      <input>
+        <soap:body use="encoded" namespace="urn:CALCULATOR" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:CALCULATOR" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </output>
+    </operation>
+    <soap:operation soapAction="urn:CALCULATOR/ICalculatorDoOperation"/>
+    <operation name="DoOperation">
+      <input>
+        <soap:body use="encoded" namespace="urn:CALCULATOR" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:CALCULATOR" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="ICalculator">
+    <port name="ICalculatorPort" binding="tns:ICalculatorBinding">
+      <soap:address location="http://127.0.0.1:8000/services/ICalculator"/>
+    </port>
+  </service>
+</definitions>

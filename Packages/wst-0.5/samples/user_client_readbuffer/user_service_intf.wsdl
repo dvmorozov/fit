@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<definitions name="urn:UserService" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="urn:UserService" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="urn:UserService">
+  <types>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:UserService">
+      <xsd:complexType name="TUserArray">
+        <xsd:sequence><xsd:element name="item" type="tns:TUser" maxOccurs="unbounded" minOccurs="0"/></xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="TUser">
+        <xsd:sequence>
+          <xsd:element name="Category" type="tns:TUserCategory" maxOccurs="1" minOccurs="1"/>
+          <xsd:element name="UserName" type="xsd:string" maxOccurs="1" minOccurs="1"/>
+          <xsd:element name="eMail" type="xsd:string" maxOccurs="1" minOccurs="1"/>
+          <xsd:element name="Preferences" type="xsd:string" maxOccurs="1" minOccurs="1"/>
+          <xsd:element name="Note" type="xsd:string" maxOccurs="1" minOccurs="1"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="TUserCategory">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="Normal"/>
+          <xsd:enumeration value="Admin"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:schema>
+  </types>
+  <message name="GetList"/>
+  <message name="GetListResponse"><part name="result" type="tns:TUserArray"/></message>
+  <message name="Add"><part name="AUser" type="tns:TUser"/></message>
+  <message name="AddResponse"/>
+  <message name="Update"><part name="AUser" type="tns:TUser"/></message>
+  <message name="UpdateResponse"/>
+  <message name="Find"><part name="AName" type="xsd:string"/></message>
+  <message name="FindResponse"><part name="result" type="tns:TUser"/></message>
+  <message name="Delete"><part name="AName" type="xsd:string"/></message>
+  <message name="DeleteResponse"><part name="result" type="xsd:boolean"/></message>
+  <portType name="UserService">
+    <document><GUID value="{F49D8FA4-9BBC-4321-9869-5BA745070ABC}"/></document>
+    <operation name="GetList">
+      <input message="tns:GetList"/>
+      <output message="tns:GetListResponse"/>
+    </operation>
+    <operation name="Add">
+      <input message="tns:Add"/>
+      <output message="tns:AddResponse"/>
+    </operation>
+    <operation name="Update">
+      <input message="tns:Update"/>
+      <output message="tns:UpdateResponse"/>
+    </operation>
+    <operation name="Find">
+      <input message="tns:Find"/>
+      <output message="tns:FindResponse"/>
+    </operation>
+    <operation name="Delete">
+      <input message="tns:Delete"/>
+      <output message="tns:DeleteResponse"/>
+    </operation>
+  </portType>
+  <binding name="UserServiceBinding" type="tns:UserService">
+    <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="GetList">
+      <soap:operation soapAction="urn:UserService/UserServiceGetList"/>
+      <input><soap:body use="literal" namespace="urn:UserService"/></input>
+      <output><soap:body use="literal" namespace="urn:UserService"/></output>
+    </operation>
+    <operation name="Add">
+      <soap:operation soapAction="urn:UserService/UserServiceAdd"/>
+      <input><soap:body use="literal" namespace="urn:UserService"/></input>
+      <output><soap:body use="literal" namespace="urn:UserService"/></output>
+    </operation>
+    <operation name="Update">
+      <soap:operation soapAction="urn:UserService/UserServiceUpdate"/>
+      <input><soap:body use="literal" namespace="urn:UserService"/></input>
+      <output><soap:body use="literal" namespace="urn:UserService"/></output>
+    </operation>
+    <operation name="Find">
+      <soap:operation soapAction="urn:UserService/UserServiceFind"/>
+      <input><soap:body use="literal" namespace="urn:UserService"/></input>
+      <output><soap:body use="literal" namespace="urn:UserService"/></output>
+    </operation>
+    <operation name="Delete">
+      <soap:operation soapAction="urn:UserService/UserServiceDelete"/>
+      <input><soap:body use="literal" namespace="urn:UserService"/></input>
+      <output><soap:body use="literal" namespace="urn:UserService"/></output>
+    </operation>
+  </binding>
+  <service name="UserService">
+    <port name="UserServicePort" binding="tns:UserServiceBinding"><soap:address location="http://127.0.0.1:8000/services/UserService"/></port>
+  </service>
+</definitions>

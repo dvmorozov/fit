@@ -1,0 +1,641 @@
+<?xml version="1.0"?>
+<CONFIG>
+  <ProjectOptions>
+    <PathDelim Value="/"/>
+    <Version Value="5"/>
+    <General>
+      <Flags>
+        <MainUnitHasUsesSectionForAllUnits Value="False"/>
+        <MainUnitHasCreateFormStatements Value="False"/>
+        <MainUnitHasTitleStatement Value="False"/>
+      </Flags>
+      <MainUnit Value="0"/>
+      <IconPath Value="./"/>
+      <TargetFileExt Value=".exe"/>
+      <ActiveEditorIndexAtStart Value="1"/>
+    </General>
+    <VersionInfo>
+      <ProjectVersion Value=""/>
+    </VersionInfo>
+    <PublishOptions>
+      <Version Value="2"/>
+      <IgnoreBinaries Value="False"/>
+      <IncludeFileFilter Value="*.(pas|pp|inc|lfm|lpr|lrs|lpi|lpk|sh|xml)"/>
+      <ExcludeFileFilter Value="*.(bak|ppu|ppw|o|so);*~;backup"/>
+    </PublishOptions>
+    <RunParams>
+      <local>
+        <FormatVersion Value="1"/>
+        <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
+      </local>
+    </RunParams>
+    <RequiredPackages Count="1">
+      <Item1>
+        <PackageName Value="indylaz"/>
+      </Item1>
+    </RequiredPackages>
+    <Units Count="72">
+      <Unit0>
+        <Filename Value="http_server.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="http_server"/>
+        <CursorPos X="38" Y="7"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="0"/>
+        <UsageCount Value="132"/>
+        <Loaded Value="True"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="app_object.pas"/>
+        <UnitName Value="app_object"/>
+        <CursorPos X="42" Y="214"/>
+        <TopLine Value="200"/>
+        <UsageCount Value="30"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="../../base_service_intf.pas"/>
+        <UnitName Value="base_service_intf"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="8"/>
+        <UsageCount Value="63"/>
+        <Loaded Value="True"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="../../metadata_wsdl.pas"/>
+        <UnitName Value="metadata_wsdl"/>
+        <CursorPos X="80" Y="80"/>
+        <TopLine Value="66"/>
+        <EditorIndex Value="9"/>
+        <UsageCount Value="64"/>
+        <Loaded Value="True"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="../../metadata_service_imp.pas"/>
+        <UnitName Value="metadata_service_imp"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="31"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="../user_service_intf_imp.pas"/>
+        <UnitName Value="user_service_intf_imp"/>
+        <CursorPos X="60" Y="51"/>
+        <TopLine Value="32"/>
+        <EditorIndex Value="6"/>
+        <UsageCount Value="61"/>
+        <Loaded Value="True"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="../user_service_intf_binder.pas"/>
+        <UnitName Value="user_service_intf_binder"/>
+        <CursorPos X="37" Y="247"/>
+        <TopLine Value="224"/>
+        <EditorIndex Value="4"/>
+        <UsageCount Value="47"/>
+        <Loaded Value="True"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="../user_service_intf.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="user_service_intf"/>
+        <CursorPos X="7" Y="3"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="7"/>
+        <UsageCount Value="83"/>
+        <Loaded Value="True"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="../../metadata_repository.pas"/>
+        <UnitName Value="metadata_repository"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="7"/>
+        <EditorIndex Value="10"/>
+        <UsageCount Value="64"/>
+        <Loaded Value="True"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="../../semaphore.pas"/>
+        <UnitName Value="semaphore"/>
+        <CursorPos X="1" Y="140"/>
+        <TopLine Value="113"/>
+        <UsageCount Value="25"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="../../server_service_intf.pas"/>
+        <UnitName Value="server_service_intf"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="5"/>
+        <UsageCount Value="63"/>
+        <Loaded Value="True"/>
+      </Unit10>
+      <Unit11>
+        <Filename Value="../../server_service_soap.pas"/>
+        <UnitName Value="server_service_soap"/>
+        <CursorPos X="17" Y="22"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="39"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="../../base_soap_formatter.pas"/>
+        <UnitName Value="base_soap_formatter"/>
+        <CursorPos X="36" Y="1576"/>
+        <TopLine Value="1586"/>
+        <UsageCount Value="40"/>
+      </Unit12>
+      <Unit13>
+        <Filename Value="../../server_service_imputils.pas"/>
+        <UnitName Value="server_service_imputils"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="34"/>
+      </Unit13>
+      <Unit14>
+        <Filename Value="../../../../../../lazarus_23_215/others_package/indy/indy-10.2.0.1/fpc/Protocols/IdCustomHTTPServer.pas"/>
+        <UnitName Value="IdCustomHTTPServer"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="1"/>
+      </Unit14>
+      <Unit15>
+        <Filename Value="../../../../../../lazarus23_213/fpc/2.1.3/source/rtl/i386/i386.inc"/>
+        <CursorPos X="49" Y="1252"/>
+        <TopLine Value="1231"/>
+        <UsageCount Value="1"/>
+      </Unit15>
+      <Unit16>
+        <Filename Value="../../wst.inc"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="10"/>
+      </Unit16>
+      <Unit17>
+        <Filename Value="../../xmlrpc_formatter.pas"/>
+        <UnitName Value="xmlrpc_formatter"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="28"/>
+        <UsageCount Value="1"/>
+      </Unit17>
+      <Unit18>
+        <Filename Value="../../server_service_xmlrpc.pas"/>
+        <UnitName Value="server_service_xmlrpc"/>
+        <CursorPos X="21" Y="22"/>
+        <TopLine Value="7"/>
+        <UsageCount Value="37"/>
+      </Unit18>
+      <Unit19>
+        <Filename Value="../../server_binary_formatter.pas"/>
+        <UnitName Value="server_binary_formatter"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="35"/>
+      </Unit19>
+      <Unit20>
+        <Filename Value="../../base_xmlrpc_formatter.pas"/>
+        <UnitName Value="base_xmlrpc_formatter"/>
+        <CursorPos X="3" Y="985"/>
+        <TopLine Value="974"/>
+        <UsageCount Value="35"/>
+      </Unit20>
+      <Unit21>
+        <Filename Value="../../../../../../lazarus23_213/others_package/indy/indy-10.2.0.1/fpc/Core/IdSocketHandle.pas"/>
+        <UnitName Value="IdSocketHandle"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="1"/>
+      </Unit21>
+      <Unit22>
+        <Filename Value="../../../../../../lazarus_23_215XX/others_package/indy/indy-10.2.0.1/lazarus/IdAboutVCL.pas"/>
+        <UnitName Value="IdAboutVCL"/>
+        <CursorPos X="19" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="2"/>
+      </Unit22>
+      <Unit23>
+        <Filename Value="../../../../../../lazarus_23_215XX/others_package/indy/indy-10.2.0.1/fpc/System/IdGlobal.pas"/>
+        <UnitName Value="IdGlobal"/>
+        <CursorPos X="14" Y="510"/>
+        <TopLine Value="497"/>
+        <UsageCount Value="13"/>
+      </Unit23>
+      <Unit24>
+        <Filename Value="../../../../../../lazarus_23_215XX/fpc/source/rtl/inc/systemh.inc"/>
+        <CursorPos X="21" Y="208"/>
+        <TopLine Value="193"/>
+        <UsageCount Value="44"/>
+      </Unit24>
+      <Unit25>
+        <Filename Value="../../../../../../lazarus_23_215XX/fpc/source/rtl/inc/innr.inc"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="42"/>
+        <UsageCount Value="2"/>
+      </Unit25>
+      <Unit26>
+        <Filename Value="../../../../../../lazarus_23_215XX/fpc/source/rtl/i386/fastmove.inc"/>
+        <CursorPos X="11" Y="835"/>
+        <TopLine Value="821"/>
+        <UsageCount Value="3"/>
+      </Unit26>
+      <Unit27>
+        <Filename Value="../../../../../../lazarus_23_215XX/fpc/source/rtl/inc/system.inc"/>
+        <CursorPos X="11" Y="306"/>
+        <TopLine Value="285"/>
+        <UsageCount Value="36"/>
+      </Unit27>
+      <Unit28>
+        <Filename Value="../../../../../../lazarus_23_215XX/fpc/source/rtl/inc/generic.inc"/>
+        <CursorPos X="5" Y="1289"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="9"/>
+      </Unit28>
+      <Unit29>
+        <Filename Value="../../../../../../lazarus_23_215XX/fpc/source/rtl/inc/system.fpd"/>
+        <CursorPos X="22" Y="17"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="2"/>
+      </Unit29>
+      <Unit30>
+        <Filename Value="../../wst_fpc_xml.pas"/>
+        <UnitName Value="wst_fpc_xml"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="35"/>
+      </Unit30>
+      <Unit31>
+        <Filename Value="../../../../../../lazarus_23_215XX/fpc/source/rtl/objpas/sysutils/sysstrh.inc"/>
+        <CursorPos X="11" Y="66"/>
+        <TopLine Value="52"/>
+        <UsageCount Value="35"/>
+      </Unit31>
+      <Unit32>
+        <Filename Value="../../../../../../lazarus_23_215XX/fpc/source/rtl/objpas/sysutils/sysstr.inc"/>
+        <CursorPos X="6" Y="44"/>
+        <TopLine Value="30"/>
+        <UsageCount Value="2"/>
+      </Unit32>
+      <Unit33>
+        <Filename Value="../../../../../../lazarus_23_215XX/fpc/source/rtl/win/sysosh.inc"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="51"/>
+        <UsageCount Value="2"/>
+      </Unit33>
+      <Unit34>
+        <Filename Value="../../../../../../lazarus_23_215XX/fpc/source/rtl/inc/objpash.inc"/>
+        <CursorPos X="25" Y="216"/>
+        <TopLine Value="203"/>
+        <UsageCount Value="7"/>
+      </Unit34>
+      <Unit35>
+        <Filename Value="../../../../../../lazarus_23_215XX/fpc/source/rtl/inc/varianth.inc"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="2"/>
+      </Unit35>
+      <Unit36>
+        <Filename Value="../../../../../../lazarus_23_215XX/fpc/source/rtl/inc/rtti.inc"/>
+        <CursorPos X="59" Y="101"/>
+        <TopLine Value="101"/>
+        <UsageCount Value="51"/>
+      </Unit36>
+      <Unit37>
+        <Filename Value="../../metadata_service.pas"/>
+        <UnitName Value="metadata_service"/>
+        <CursorPos X="26" Y="13"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="31"/>
+      </Unit37>
+      <Unit38>
+        <Filename Value="../../wst_rtti_filter/cursor_intf.pas"/>
+        <UnitName Value="cursor_intf"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="20"/>
+      </Unit38>
+      <Unit39>
+        <Filename Value="../user_service_intf.wst"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="3"/>
+        <SyntaxHighlighter Value="None"/>
+      </Unit39>
+      <Unit40>
+        <Filename Value="../../../../../../lazarus_23_215XX/fpc/source/packages/fcl-xml/src/dom.pp"/>
+        <UnitName Value="DOM"/>
+        <CursorPos X="42" Y="228"/>
+        <TopLine Value="215"/>
+        <UsageCount Value="11"/>
+      </Unit40>
+      <Unit41>
+        <Filename Value="../../../../../../lazarus_23_215XX/fpc/source/rtl/objpas/typinfo.pp"/>
+        <UnitName Value="typinfo"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="115"/>
+        <UsageCount Value="45"/>
+      </Unit41>
+      <Unit42>
+        <Filename Value="../user_service_intf_proxy.pas"/>
+        <UnitName Value="user_service_intf_proxy"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="28"/>
+      </Unit42>
+      <Unit43>
+        <Filename Value="../../../../../../lazarus_23_215XX/others_package/indy/indy-10.2.0.1/fpc/Protocols/IdCustomHTTPServer.pas"/>
+        <UnitName Value="IdCustomHTTPServer"/>
+        <CursorPos X="14" Y="252"/>
+        <TopLine Value="239"/>
+        <UsageCount Value="5"/>
+      </Unit43>
+      <Unit44>
+        <Filename Value="../../type_lib_edtr/uabout.pas"/>
+        <ComponentName Value="fAbout"/>
+        <HasResources Value="True"/>
+        <ResourceFilename Value="../../type_lib_edtr/uabout.lrs"/>
+        <UnitName Value="uabout"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="5"/>
+      </Unit44>
+      <Unit45>
+        <Filename Value="../../type_lib_edtr/uwsttypelibraryedit.pas"/>
+        <ComponentName Value="fWstTypeLibraryEdit"/>
+        <HasResources Value="True"/>
+        <UnitName Value="uwsttypelibraryedit"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="4"/>
+      </Unit45>
+      <Unit46>
+        <Filename Value="../../ide/lazarus/wstimportdlg.pas"/>
+        <ComponentName Value="formImport"/>
+        <HasResources Value="True"/>
+        <ResourceFilename Value="../../ide/lazarus/wstimportdlg.lrs"/>
+        <UnitName Value="wstimportdlg"/>
+        <CursorPos X="27" Y="7"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="5"/>
+      </Unit46>
+      <Unit47>
+        <Filename Value="../../indy_http_server.pas"/>
+        <UnitName Value="indy_http_server"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="2"/>
+        <UsageCount Value="38"/>
+        <Loaded Value="True"/>
+      </Unit47>
+      <Unit48>
+        <Filename Value="../../server_listener.pas"/>
+        <UnitName Value="server_listener"/>
+        <CursorPos X="28" Y="33"/>
+        <TopLine Value="26"/>
+        <UsageCount Value="20"/>
+      </Unit48>
+      <Unit49>
+        <Filename Value="../../../../../../lazarus_23_215XX/fpc/source/rtl/inc/aliases.inc"/>
+        <CursorPos X="84" Y="14"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="10"/>
+      </Unit49>
+      <Unit50>
+        <Filename Value="../../../../../../lazarus_23_215XX/fpc/source/rtl/inc/variant.inc"/>
+        <CursorPos X="11" Y="24"/>
+        <TopLine Value="29"/>
+        <UsageCount Value="10"/>
+      </Unit50>
+      <Unit51>
+        <Filename Value="../../../../../../lazarus_23_215XX/fpc/source/rtl/objpas/sysutils/osutilsh.inc"/>
+        <CursorPos X="53" Y="37"/>
+        <TopLine Value="30"/>
+        <UsageCount Value="13"/>
+      </Unit51>
+      <Unit52>
+        <Filename Value="../../../../../../lazarus_23_215XX/fpc/source/rtl/win/sysutils.pp"/>
+        <UnitName Value="sysutils"/>
+        <CursorPos X="45" Y="1084"/>
+        <TopLine Value="1076"/>
+        <UsageCount Value="13"/>
+      </Unit52>
+      <Unit53>
+        <Filename Value="../../config_objects.pas"/>
+        <UnitName Value="config_objects"/>
+        <CursorPos X="74" Y="99"/>
+        <TopLine Value="85"/>
+        <EditorIndex Value="1"/>
+        <UsageCount Value="27"/>
+        <Loaded Value="True"/>
+      </Unit53>
+      <Unit54>
+        <Filename Value="../../wst_delphi.inc"/>
+        <CursorPos X="22" Y="5"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="7"/>
+      </Unit54>
+      <Unit55>
+        <Filename Value="../../indy_tcp_server.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="indy_tcp_server"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="3"/>
+        <UsageCount Value="31"/>
+        <Loaded Value="True"/>
+      </Unit55>
+      <Unit56>
+        <Filename Value="../../../../../../lazarus_23_215XX/others_package/indy/indy-10.2.0.1/fpc/Core/IdTCPServer.pas"/>
+        <UnitName Value="IdTCPServer"/>
+        <CursorPos X="38" Y="32"/>
+        <TopLine Value="19"/>
+        <UsageCount Value="10"/>
+      </Unit56>
+      <Unit57>
+        <Filename Value="../../../../../../lazarus_23_215XX/others_package/indy/indy-10.2.0.1/fpc/Core/IdCustomTCPServer.pas"/>
+        <UnitName Value="IdCustomTCPServer"/>
+        <CursorPos X="74" Y="260"/>
+        <TopLine Value="238"/>
+        <UsageCount Value="14"/>
+      </Unit57>
+      <Unit58>
+        <Filename Value="../../../../../../lazarus_23_215XX/others_package/indy/indy-10.2.0.1/fpc/System/IdSys.pas"/>
+        <UnitName Value="IdSys"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="13"/>
+      </Unit58>
+      <Unit59>
+        <Filename Value="../../../../../../lazarus_23_215XX/others_package/indy/indy-10.2.0.1/fpc/Core/IdThread.pas"/>
+        <UnitName Value="IdThread"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="9"/>
+      </Unit59>
+      <Unit60>
+        <Filename Value="../../../../../../lazarus_23_215XX/others_package/indy/indy-10.2.0.1/fpc/Core/IdYarn.pas"/>
+        <UnitName Value="IdYarn"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="21"/>
+        <UsageCount Value="9"/>
+      </Unit60>
+      <Unit61>
+        <Filename Value="../../../../../../lazarus_23_215XX/others_package/indy/indy-10.2.0.1/fpc/Core/IdTask.pas"/>
+        <UnitName Value="IdTask"/>
+        <CursorPos X="6" Y="32"/>
+        <TopLine Value="19"/>
+        <UsageCount Value="13"/>
+      </Unit61>
+      <Unit62>
+        <Filename Value="../../../../../../lazarus_23_215XX/others_package/indy/indy-10.2.0.1/fpc/Core/IdIOHandler.pas"/>
+        <UnitName Value="IdIOHandler"/>
+        <CursorPos X="3" Y="906"/>
+        <TopLine Value="902"/>
+        <UsageCount Value="10"/>
+      </Unit62>
+      <Unit63>
+        <Filename Value="../../../../../../lazarus_23_215XX/others_package/indy/indy-10.2.0.1/fpc/Core/IdBuffer.pas"/>
+        <UnitName Value="IdBuffer"/>
+        <CursorPos X="17" Y="432"/>
+        <TopLine Value="427"/>
+        <UsageCount Value="13"/>
+      </Unit63>
+      <Unit64>
+        <Filename Value="../../../../../../lazarus_23_215XX/others_package/indy/indy-10.2.0.1/fpc/Core/IdTCPConnection.pas"/>
+        <UnitName Value="IdTCPConnection"/>
+        <CursorPos X="15" Y="357"/>
+        <TopLine Value="340"/>
+        <UsageCount Value="13"/>
+      </Unit64>
+      <Unit65>
+        <Filename Value="../../../../../../lazarus_23_215XX/others_package/indy/indy-10.2.0.1/fpc/Core/IdIOHandlerSocket.pas"/>
+        <UnitName Value="IdIOHandlerSocket"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="13"/>
+      </Unit65>
+      <Unit66>
+        <Filename Value="../../../../../../lazarus_23_215XX/others_package/indy/indy-10.2.0.1/fpc/Core/IdIOHandlerStack.pas"/>
+        <UnitName Value="IdIOHandlerStack"/>
+        <CursorPos X="3" Y="400"/>
+        <TopLine Value="438"/>
+        <UsageCount Value="13"/>
+      </Unit66>
+      <Unit67>
+        <Filename Value="../../../../../../lazarus_23_215XX/others_package/indy/indy-10.2.0.1/fpc/Core/IdExceptionCore.pas"/>
+        <UnitName Value="IdExceptionCore"/>
+        <CursorPos X="33" Y="108"/>
+        <TopLine Value="95"/>
+        <UsageCount Value="13"/>
+      </Unit67>
+      <Unit68>
+        <Filename Value="../../../../../../lazarus_23_215XX/others_package/indy/indy-10.2.0.1/fpc/System/IdException.pas"/>
+        <UnitName Value="IdException"/>
+        <CursorPos X="3" Y="183"/>
+        <TopLine Value="160"/>
+        <UsageCount Value="9"/>
+      </Unit68>
+      <Unit69>
+        <Filename Value="../../../../../../lazarus_23_215XX/others_package/indy/indy-10.2.0.1/fpc/System/IdObjs.pas"/>
+        <UnitName Value="IdObjs"/>
+        <CursorPos X="3" Y="94"/>
+        <TopLine Value="78"/>
+        <UsageCount Value="13"/>
+      </Unit69>
+      <Unit70>
+        <Filename Value="../../../../../../lazarus_23_215XX/others_package/indy/indy-10.2.0.1/fpc/Core/IdSocketHandle.pas"/>
+        <UnitName Value="IdSocketHandle"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="13"/>
+      </Unit70>
+      <Unit71>
+        <Filename Value="../../../../../../lazarus_23_215XX/others_package/indy/indy-10.2.0.1/fpc/System/IdStack.pas"/>
+        <UnitName Value="IdStack"/>
+        <CursorPos X="14" Y="200"/>
+        <TopLine Value="176"/>
+        <UsageCount Value="13"/>
+      </Unit71>
+    </Units>
+    <JumpHistory Count="3" HistoryIndex="2">
+      <Position1>
+        <Filename Value="http_server.pas"/>
+        <Caret Line="12" Column="56" TopLine="1"/>
+      </Position1>
+      <Position2>
+        <Filename Value="../user_service_intf_imp.pas"/>
+        <Caret Line="51" Column="60" TopLine="32"/>
+      </Position2>
+      <Position3>
+        <Filename Value="../../config_objects.pas"/>
+        <Caret Line="99" Column="60" TopLine="76"/>
+      </Position3>
+    </JumpHistory>
+  </ProjectOptions>
+  <CompilerOptions>
+    <Version Value="5"/>
+    <Target>
+      <Filename Value="http_server"/>
+    </Target>
+    <SearchPaths>
+      <IncludeFiles Value="../../;$(LazarusDir)/others_package/indy/indy-10.2.0.1/fpc/Inc/"/>
+      <OtherUnitFiles Value="../;../../;../../wst_rtti_filter/;$(LazarusDir)/others_package/indy/indy-10.2.0.1/fpc/Core/;$(LazarusDir)/others_package/indy/indy-10.2.0.1/fpc/Protocols/;$(LazarusDir)/others_package/indy/indy-10.2.0.1/fpc/System/;$(LazarusDir)/others_package/indy/indy-10.2.0.1/fpc/Inc/"/>
+      <UnitOutputDirectory Value="obj"/>
+      <SrcPath Value="$(LazarusDir)/others_package/indy/indy-10.2.0.1/fpc/Core/;$(LazarusDir)/others_package/indy/indy-10.2.0.1/fpc/Protocols/;$(LazarusDir)/others_package/indy/indy-10.2.0.1/fpc/System/;$(LazarusDir)/others_package/indy/indy-10.2.0.1/fpc/Inc/"/>
+    </SearchPaths>
+    <Parsing>
+      <SyntaxOptions>
+        <IncludeAssertionCode Value="True"/>
+      </SyntaxOptions>
+    </Parsing>
+    <CodeGeneration>
+      <Generate Value="Faster"/>
+    </CodeGeneration>
+    <Linking>
+      <Debugging>
+        <UseLineInfoUnit Value="False"/>
+      </Debugging>
+      <LinkSmart Value="True"/>
+    </Linking>
+    <Other>
+      <CustomOptions Value="-dINDY_10
+-dUseCThreads
+"/>
+      <CompilerPath Value="$(CompPath)"/>
+    </Other>
+  </CompilerOptions>
+  <Debugging>
+    <BreakPoints Count="4">
+      <Item1>
+        <Source Value="D:/lazarusClean/fpcsrc/rtl/inc/getopts.pp"/>
+        <Line Value="230"/>
+      </Item1>
+      <Item2>
+        <Source Value="D:/lazarusClean/fpcsrc/rtl/inc/getopts.pp"/>
+        <Line Value="193"/>
+      </Item2>
+      <Item3>
+        <Source Value="D:/lazarusClean/fpcsrc/rtl/inc/getopts.pp"/>
+        <Line Value="198"/>
+      </Item3>
+      <Item4>
+        <Source Value="../../ws_helper/wsdl2pas_imp.pas"/>
+        <Line Value="606"/>
+      </Item4>
+    </BreakPoints>
+    <Watches Count="2">
+      <Item1>
+        <Expression Value="locStrFilter"/>
+      </Item1>
+      <Item2>
+        <Expression Value="i"/>
+      </Item2>
+    </Watches>
+    <Exceptions Count="2">
+      <Item1>
+        <Name Value="ECodetoolError"/>
+      </Item1>
+      <Item2>
+        <Name Value="EFOpenError"/>
+      </Item2>
+    </Exceptions>
+  </Debugging>
+</CONFIG>

@@ -1,0 +1,124 @@
+object fMain: TfMain
+  Left = 379
+  Height = 382
+  Top = 283
+  Width = 651
+  HorzScrollBar.Page = 650
+  VertScrollBar.Page = 381
+  ActiveControl = Grid
+  Caption = 'fMain'
+  ClientHeight = 382
+  ClientWidth = 651
+  Position = poMainFormCenter
+  object Panel1: TPanel
+    Height = 182
+    Top = 200
+    Width = 651
+    Align = alClient
+    BevelInner = bvLowered
+    Caption = 'Panel1'
+    ClientHeight = 182
+    ClientWidth = 651
+    TabOrder = 0
+    object Grid: TTIGrid
+      Left = 2
+      Height = 178
+      Top = 2
+      Width = 647
+      Align = alClient
+      AutoFillColumns = True
+      BorderSpacing.CellAlignHorizontal = ccaRightBottom
+      BorderStyle = bsNone
+      Filter = [tkInteger, tkChar, tkEnumeration, tkFloat, tkSString, tkLString, tkAString, tkWString, tkVariant, tkWChar, tkBool, tkInt64, tkQWord]
+      FixedColor = clBtnFace
+      Flat = True
+      OnGetObject = GridGetObject
+      OnGetObjectCount = GridGetObjectCount
+      OnGetObjectName = GridGetObjectName
+      Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goDrawFocusSelected, goColSizing, goRowMoving, goColMoving, goColSpanning, goDblClickAutoSize, goFixedRowNumbering, goScrollKeepVisible]
+      ParentColor = False
+      PropertyOrder.Strings = (
+        'Name'
+        'Category'
+        'Preferences'
+        'eMail'
+      )
+      TabOrder = 0
+      TabStop = True
+    end
+  end
+  object GroupBox1: TGroupBox
+    Height = 200
+    Width = 651
+    Align = alTop
+    ClientHeight = 178
+    ClientWidth = 647
+    TabOrder = 1
+    object btnSearch: TButton
+      Left = 500
+      Height = 35
+      Top = -1
+      Width = 131
+      Action = actSearch
+      Anchors = [akTop, akRight]
+      BorderSpacing.InnerBorder = 4
+      TabOrder = 0
+    end
+    object btnAdd: TButton
+      Left = 500
+      Height = 35
+      Top = 42
+      Width = 131
+      Action = actNew
+      Anchors = [akTop, akRight]
+      BorderSpacing.InnerBorder = 4
+      TabOrder = 1
+    end
+    object btnAdd1: TButton
+      Left = 500
+      Height = 35
+      Top = 87
+      Width = 131
+      Action = actUpdate
+      Anchors = [akTop, akRight]
+      BorderSpacing.InnerBorder = 4
+      TabOrder = 2
+    end
+    object btnAdd2: TButton
+      Left = 500
+      Height = 35
+      Top = 132
+      Width = 131
+      Action = actDelete
+      Anchors = [akTop, akRight]
+      BorderSpacing.InnerBorder = 4
+      TabOrder = 3
+    end
+  end
+  object AL: TActionList
+    left = 99
+    top = 56
+    object actNew: TAction
+      Caption = 'Create User'
+      DisableIfNoHandler = True
+      OnExecute = actNewExecute
+    end
+    object actUpdate: TAction
+      Caption = 'Update User'
+      DisableIfNoHandler = True
+      OnExecute = actUpdateExecute
+      OnUpdate = actUpdateUpdate
+    end
+    object actDelete: TAction
+      Caption = 'Delete'
+      DisableIfNoHandler = True
+      OnExecute = actDeleteExecute
+      OnUpdate = actUpdateUpdate
+    end
+    object actSearch: TAction
+      Caption = 'Get List'
+      DisableIfNoHandler = True
+      OnExecute = actSearchExecute
+    end
+  end
+end

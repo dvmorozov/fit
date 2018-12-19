@@ -1,0 +1,214 @@
+<?xml version="1.0"?>
+<definitions name="metadata_service" targetNamespace="urn:wst_base" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:wst_base" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:wst_base">
+      <xsd:simpleType name="TOperationParamFlag">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="opfNone"/>
+          <xsd:enumeration value="opfIn"/>
+          <xsd:enumeration value="opfVar"/>
+          <xsd:enumeration value="opfOut"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:element name="TWSTMtdOperationParam">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Name" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="TypeName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="Modifier" type="tns:TOperationParamFlag" minOccurs="1" maxOccurs="1"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="TWSTMtdOperationParamArray">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="item" type="tns:TWSTMtdOperationParam" minOccurs="0" maxOccurs="unbounded"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="TWSTMtdServiceOperation">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Name" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="Params" type="tns:TWSTMtdOperationParamArray" minOccurs="1" maxOccurs="1"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="TWSTMtdServiceOperationArray">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="item" type="tns:TWSTMtdServiceOperation" minOccurs="0" maxOccurs="unbounded"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="TWSTMtdService">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Name" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="Operations" type="tns:TWSTMtdServiceOperationArray" minOccurs="1" maxOccurs="1"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="TWSTMtdServiceArray">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="item" type="tns:TWSTMtdService" minOccurs="0" maxOccurs="unbounded"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="TWSTMtdRepository">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Name" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="NameSpace" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="Services" type="tns:TWSTMtdServiceArray" minOccurs="1" maxOccurs="1"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="TArrayOfStringRemotable">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="item" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="TArrayOfBooleanRemotable">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="item" type="xsd:boolean" minOccurs="0" maxOccurs="unbounded"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="TArrayOfInt8URemotable">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="item" type="xsd:unsignedByte" minOccurs="0" maxOccurs="unbounded"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="TArrayOfInt8SRemotable">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="item" type="xsd:byte" minOccurs="0" maxOccurs="unbounded"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="TArrayOfInt16URemotable">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="item" type="xsd:unsignedShort" minOccurs="0" maxOccurs="unbounded"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="TArrayOfInt16SRemotable">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="item" type="xsd:short" minOccurs="0" maxOccurs="unbounded"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="TArrayOfInt32URemotable">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="item" type="xsd:unsignedInt" minOccurs="0" maxOccurs="unbounded"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="TArrayOfInt32SRemotable">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="item" type="xsd:int" minOccurs="0" maxOccurs="unbounded"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="TArrayOfInt64URemotable">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="item" type="xsd:int" minOccurs="0" maxOccurs="unbounded"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="TArrayOfInt64SRemotable">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="item" type="xsd:long" minOccurs="0" maxOccurs="unbounded"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="TArrayOfFloatSingleRemotable">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="item" type="xsd:float" minOccurs="0" maxOccurs="unbounded"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="TArrayOfFloatDoubleRemotable">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="item" type="xsd:double" minOccurs="0" maxOccurs="unbounded"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="TArrayOfFloatExtendedRemotable">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="item" type="xsd:double" minOccurs="0" maxOccurs="unbounded"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="TArrayOfFloatCurrencyRemotable">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="item" type="xsd:float" minOccurs="0" maxOccurs="unbounded"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </types>
+  <message name="GetRepositoryList"/>
+  <message name="GetRepositoryListResponse">
+    <part name="result" type="tns:TArrayOfStringRemotable"/>
+  </message>
+  <message name="GetRepositoryInfo">
+    <part name="AName" type="xsd:string"/>
+  </message>
+  <message name="GetRepositoryInfoResponse">
+    <part name="result" type="tns:TWSTMtdRepository"/>
+  </message>
+  <portType name="IWSTMetadataService">
+    <operation name="GetRepositoryList">
+      <input message="tns:GetRepositoryList"/>
+      <output message="tns:GetRepositoryListResponse"/>
+    </operation>
+    <operation name="GetRepositoryInfo">
+      <input message="tns:GetRepositoryInfo"/>
+      <output message="tns:GetRepositoryInfoResponse"/>
+    </operation>
+  </portType>
+  <binding name="IWSTMetadataServiceBinding" type="tns:IWSTMetadataService">
+    <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <soap:operation soapAction="urn:wst_base/IWSTMetadataServiceGetRepositoryList"/>
+    <operation name="GetRepositoryList">
+      <input>
+        <soap:body use="encoded" namespace="urn:wst_base" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:wst_base" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </output>
+    </operation>
+    <soap:operation soapAction="urn:wst_base/IWSTMetadataServiceGetRepositoryInfo"/>
+    <operation name="GetRepositoryInfo">
+      <input>
+        <soap:body use="encoded" namespace="urn:wst_base" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:wst_base" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="IWSTMetadataService">
+    <port name="IWSTMetadataServicePort" binding="tns:IWSTMetadataServiceBinding">
+      <soap:address location="http://127.0.0.1:8000/services/IWSTMetadataService"/>
+    </port>
+  </service>
+</definitions>

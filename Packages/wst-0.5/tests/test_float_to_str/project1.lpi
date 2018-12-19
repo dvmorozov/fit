@@ -1,0 +1,171 @@
+<?xml version="1.0"?>
+<CONFIG>
+  <ProjectOptions>
+    <PathDelim Value="\"/>
+    <Version Value="5"/>
+    <General>
+      <MainUnit Value="0"/>
+      <IconPath Value="./"/>
+      <TargetFileExt Value=".exe"/>
+      <ActiveEditorIndexAtStart Value="0"/>
+    </General>
+    <LazDoc Paths=""/>
+    <PublishOptions>
+      <Version Value="2"/>
+      <IgnoreBinaries Value="False"/>
+      <IncludeFileFilter Value="*.(pas|pp|inc|lfm|lpr|lrs|lpi|lpk|sh|xml)"/>
+      <ExcludeFileFilter Value="*.(bak|ppu|ppw|o|so);*~;backup"/>
+    </PublishOptions>
+    <RunParams>
+      <local>
+        <FormatVersion Value="1"/>
+        <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
+      </local>
+    </RunParams>
+    <RequiredPackages Count="1">
+      <Item1>
+        <PackageName Value="LCL"/>
+      </Item1>
+    </RequiredPackages>
+    <Units Count="5">
+      <Unit0>
+        <Filename Value="project1.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="project1"/>
+        <UsageCount Value="20"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="unit1.pas"/>
+        <ComponentName Value="Form1"/>
+        <IsPartOfProject Value="True"/>
+        <ResourceFilename Value="unit1.lrs"/>
+        <UnitName Value="Unit1"/>
+        <CursorPos X="75" Y="45"/>
+        <TopLine Value="34"/>
+        <EditorIndex Value="0"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="D:\lazarusClean\fpcsrc\rtl\objpas\sysutils\sysstrh.inc"/>
+        <CursorPos X="10" Y="164"/>
+        <TopLine Value="100"/>
+        <EditorIndex Value="1"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="D:\lazarusClean\fpcsrc\rtl\objpas\sysutils\sysstr.inc"/>
+        <CursorPos X="42" Y="1764"/>
+        <TopLine Value="1797"/>
+        <EditorIndex Value="2"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="D:\lazarusClean\fpcsrc\rtl\objpas\sysutils\sysinth.inc"/>
+        <CursorPos X="3" Y="95"/>
+        <TopLine Value="76"/>
+        <EditorIndex Value="3"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit4>
+    </Units>
+    <JumpHistory Count="7" HistoryIndex="6">
+      <Position1>
+        <Filename Value="D:\lazarusClean\fpcsrc\rtl\objpas\sysutils\sysstrh.inc"/>
+        <Caret Line="130" Column="49" TopLine="120"/>
+      </Position1>
+      <Position2>
+        <Filename Value="D:\lazarusClean\fpcsrc\rtl\objpas\sysutils\sysstrh.inc"/>
+        <Caret Line="107" Column="10" TopLine="107"/>
+      </Position2>
+      <Position3>
+        <Filename Value="D:\lazarusClean\fpcsrc\rtl\objpas\sysutils\sysstrh.inc"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
+      </Position3>
+      <Position4>
+        <Filename Value="D:\lazarusClean\fpcsrc\rtl\objpas\sysutils\sysstr.inc"/>
+        <Caret Line="1923" Column="13" TopLine="1917"/>
+      </Position4>
+      <Position5>
+        <Filename Value="D:\lazarusClean\fpcsrc\rtl\objpas\sysutils\sysstr.inc"/>
+        <Caret Line="1923" Column="16" TopLine="1917"/>
+      </Position5>
+      <Position6>
+        <Filename Value="D:\lazarusClean\fpcsrc\rtl\objpas\sysutils\sysstr.inc"/>
+        <Caret Line="1770" Column="42" TopLine="1737"/>
+      </Position6>
+      <Position7>
+        <Filename Value="D:\lazarusClean\fpcsrc\rtl\objpas\sysutils\sysstr.inc"/>
+        <Caret Line="1764" Column="42" TopLine="1737"/>
+      </Position7>
+    </JumpHistory>
+  </ProjectOptions>
+  <CompilerOptions>
+    <Version Value="5"/>
+    <PathDelim Value="\"/>
+    <SearchPaths>
+      <SrcPath Value="$(LazarusDir)\lcl\;$(LazarusDir)\lcl\interfaces\$(LCLWidgetType)\"/>
+    </SearchPaths>
+    <CodeGeneration>
+      <Generate Value="Faster"/>
+    </CodeGeneration>
+    <Linking>
+      <Options>
+        <Win32>
+          <GraphicApplication Value="True"/>
+        </Win32>
+      </Options>
+    </Linking>
+    <Other>
+      <CustomOptions Value="-Xi"/>
+      <CompilerPath Value="$(CompPath)"/>
+    </Other>
+  </CompilerOptions>
+  <Debugging>
+    <BreakPoints Count="9">
+      <Item1>
+        <Source Value="..\google_api\home\inoussa\Projets\Laz\tests\soap\test_soap.pas"/>
+        <Line Value="15"/>
+      </Item1>
+      <Item2>
+        <Source Value="..\google_api\home\inoussa\Projets\Laz\tests\soap\test_soap.pas"/>
+        <Line Value="16"/>
+      </Item2>
+      <Item3>
+        <Source Value="..\google_api\home\inoussa\Projets\Laz\tests\soap\test_soap.pas"/>
+        <Line Value="18"/>
+      </Item3>
+      <Item4>
+        <Source Value="..\google_api\home\inoussa\Projets\Laz\tests\soap\googleintfimpunit.pas"/>
+        <Line Value="63"/>
+      </Item4>
+      <Item5>
+        <Source Value="..\google_api\home\inoussa\Projets\Laz\v0.2\indy_http_protocol.pas"/>
+        <Line Value="69"/>
+      </Item5>
+      <Item6>
+        <Source Value="..\google_api\home\inoussa\Projets\Laz\v0.2\service_intf.pas"/>
+        <Line Value="567"/>
+      </Item6>
+      <Item7>
+        <Source Value="..\google_api\home\inoussa\Projets\Laz\v0.2\imp_utils.pas"/>
+        <Line Value="83"/>
+      </Item7>
+      <Item8>
+        <Source Value="..\..\base_service_intf.pas"/>
+        <Line Value="505"/>
+      </Item8>
+      <Item9>
+        <Source Value="..\..\base_binary_formatter.pas"/>
+        <Line Value="928"/>
+      </Item9>
+    </BreakPoints>
+    <Watches Count="1">
+      <Item1>
+        <Expression Value="ASource.Memory^"/>
+      </Item1>
+    </Watches>
+  </Debugging>
+</CONFIG>

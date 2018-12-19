@@ -1,0 +1,1 @@
+C:\Programmes\lazarus\wst\ws_helper\ws_helper -uA -i -p -b -a"C:\Programmes\lazarus\wst\tests\files" "C:\Programmes\lazarus\utils\eBayLast\eBayWSDL.WSDL" >test_res_eBayWSDL.txt

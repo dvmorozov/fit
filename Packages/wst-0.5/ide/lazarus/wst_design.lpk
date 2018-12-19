@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<CONFIG>
+  <Package Version="2">
+    <PathDelim Value="\"/>
+    <Name Value="wst_design"/>
+    <Author Value="Inoussa OUEDRAOGO"/>
+    <CompilerOptions>
+      <Version Value="5"/>
+      <PathDelim Value="\"/>
+      <SearchPaths>
+        <IncludeFiles Value="..\..\;..\..\ws_helper\;..\..\wst_rtti_filter\;..\..\type_lib_edtr\"/>
+        <OtherUnitFiles Value="..\..\;..\..\ws_helper\;..\..\wst_rtti_filter\;..\..\type_lib_edtr\"/>
+        <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
+      </SearchPaths>
+      <Parsing>
+        <SyntaxOptions>
+          <UseAnsiStrings Value="True"/>
+        </SyntaxOptions>
+      </Parsing>
+      <CodeGeneration>
+        <Generate Value="Faster"/>
+      </CodeGeneration>
+      <Other>
+        <CompilerPath Value="$(CompPath)"/>
+      </Other>
+    </CompilerOptions>
+    <Description Value="Web Services Toolkit Lazarus IDE design time package"/>
+    <Version Minor="1"/>
+    <Files Count="10">
+      <Item1>
+        <Filename Value="wstimportdlg.lfm"/>
+        <Type Value="LFM"/>
+      </Item1>
+      <Item2>
+        <Filename Value="wstimportdlg.lrs"/>
+        <Type Value="LRS"/>
+      </Item2>
+      <Item3>
+        <Filename Value="wstimportdlg.pas"/>
+        <UnitName Value="wstimportdlg"/>
+      </Item3>
+      <Item4>
+        <Filename Value="wst_register.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="wst_register"/>
+      </Item4>
+      <Item5>
+        <Filename Value="..\..\type_lib_edtr\uwsttypelibraryedit.lfm"/>
+        <Type Value="LFM"/>
+      </Item5>
+      <Item6>
+        <Filename Value="..\..\type_lib_edtr\uwsttypelibraryedit.lrs"/>
+        <Type Value="LRS"/>
+      </Item6>
+      <Item7>
+        <Filename Value="..\..\type_lib_edtr\uwsttypelibraryedit.pas"/>
+        <UnitName Value="uwsttypelibraryedit"/>
+      </Item7>
+      <Item8>
+        <Filename Value="..\..\type_lib_edtr\uabout.lfm"/>
+        <Type Value="LFM"/>
+      </Item8>
+      <Item9>
+        <Filename Value="..\..\type_lib_edtr\uabout.lrs"/>
+        <Type Value="LRS"/>
+      </Item9>
+      <Item10>
+        <Filename Value="..\..\type_lib_edtr\uabout.pas"/>
+        <UnitName Value="uabout"/>
+      </Item10>
+    </Files>
+    <Type Value="DesignTime"/>
+    <RequiredPkgs Count="4">
+      <Item1>
+        <PackageName Value="SynEdit"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="LCL"/>
+      </Item2>
+      <Item3>
+        <PackageName Value="IDEIntf"/>
+      </Item3>
+      <Item4>
+        <PackageName Value="FCL"/>
+        <MinVersion Major="1" Valid="True"/>
+      </Item4>
+    </RequiredPkgs>
+    <UsageOptions>
+      <UnitPath Value="$(PkgOutDir)\"/>
+    </UsageOptions>
+    <PublishOptions>
+      <Version Value="2"/>
+      <IgnoreBinaries Value="False"/>
+    </PublishOptions>
+  </Package>
+</CONFIG>

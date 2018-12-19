@@ -1,0 +1,7 @@
+  GetWSTResourceManager().AddResource('METADATA_SERVICE',
+    #0#0#0#20'WST_METADATA_0.2.2.0'#0#0#0#16'metadata_service'#1#0#0#0#19'IWSTMe'
+    +'tadataService'#2#0#0#0#17'GetRepositoryList'#1#0#0#0#6'result'#0#0#0#23'TAr'
+    +'rayOfStringRemotable'#0#0#0#0#0#0#0#3#0#0#0#17'GetRepositoryInfo'#2#0#0#0#5
+    +'AName'#0#0#0#6'string'#0#0#0#0#0#0#0#1#0#0#0#6'result'#0#0#0#17'TWSTMtdRepo'
+    +'sitory'#0#0#0#0#0#0#0#3''
+  );

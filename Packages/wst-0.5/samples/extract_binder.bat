@@ -1,0 +1,1 @@
+..\..\wst\ws_helper\ws_helper -b -o. "user_service_intf.wsdl" >extract_bind.res.txt

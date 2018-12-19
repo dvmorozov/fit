@@ -1,0 +1,44 @@
+{ Ceci est un fichier ressource généré automatiquement par Lazarus }
+
+LazarusResources.Add('TfMain','FORMDATA',[
+  'TPF0'#6'TfMain'#5'fMain'#4'Left'#3'{'#1#6'Height'#3'~'#1#3'Top'#3#27#1#5'Wid'
+  +'th'#3#139#2#18'HorzScrollBar.Page'#3#138#2#18'VertScrollBar.Page'#3'}'#1#13
+  +'ActiveControl'#7#4'Grid'#7'Caption'#6#5'fMain'#12'ClientHeight'#3'~'#1#11'C'
+  +'lientWidth'#3#139#2#8'Position'#7#16'poMainFormCenter'#0#6'TPanel'#6'Panel1'
+  +#6'Height'#3#182#0#3'Top'#3#200#0#5'Width'#3#139#2#5'Align'#7#8'alClient'#10
+  +'BevelInner'#7#9'bvLowered'#7'Caption'#6#6'Panel1'#12'ClientHeight'#3#182#0
+  +#11'ClientWidth'#3#139#2#8'TabOrder'#2#0#0#7'TTIGrid'#4'Grid'#4'Left'#2#2#6
+  +'Height'#3#178#0#3'Top'#2#2#5'Width'#3#135#2#5'Align'#7#8'alClient'#15'AutoF'
+  +'illColumns'#9'!BorderSpacing.CellAlignHorizontal'#7#14'ccaRightBottom'#11'B'
+  +'orderStyle'#7#6'bsNone'#6'Filter'#11#9'tkInteger'#6'tkChar'#13'tkEnumeratio'
+  +'n'#7'tkFloat'#9'tkSString'#9'tkLString'#9'tkAString'#9'tkWString'#9'tkVaria'
+  +'nt'#7'tkWChar'#6'tkBool'#7'tkInt64'#7'tkQWord'#0#10'FixedColor'#7#9'clBtnFa'
+  +'ce'#4'Flat'#9#11'OnGetObject'#7#13'GridGetObject'#16'OnGetObjectCount'#7#18
+  +'GridGetObjectCount'#15'OnGetObjectName'#7#17'GridGetObjectName'#7'Options'
+  +#11#15'goFixedVertLine'#15'goFixedHorzLine'#10'goVertLine'#10'goHorzLine'#13
+  +'goRangeSelect'#19'goDrawFocusSelected'#11'goColSizing'#11'goRowMoving'#11'g'
+  +'oColMoving'#13'goColSpanning'#18'goDblClickAutoSize'#19'goFixedRowNumbering'
+  +#19'goScrollKeepVisible'#0#11'ParentColor'#8#21'PropertyOrder.Strings'#1#6#4
+  +'Name'#6#8'Category'#6#11'Preferences'#6#5'eMail'#0#8'TabOrder'#2#0#7'TabSto'
+  +'p'#9#0#0#0#9'TGroupBox'#9'GroupBox1'#6'Height'#3#200#0#5'Width'#3#139#2#5'A'
+  +'lign'#7#5'alTop'#12'ClientHeight'#3#178#0#11'ClientWidth'#3#135#2#8'TabOrde'
+  +'r'#2#1#0#7'TButton'#9'btnSearch'#4'Left'#3#244#1#6'Height'#2'#'#3'Top'#2#255
+  +#5'Width'#3#131#0#6'Action'#7#9'actSearch'#7'Anchors'#11#5'akTop'#7'akRight'
+  +#0#25'BorderSpacing.InnerBorder'#2#4#8'TabOrder'#2#0#0#0#7'TButton'#6'btnAdd'
+  +#4'Left'#3#244#1#6'Height'#2'#'#3'Top'#2'*'#5'Width'#3#131#0#6'Action'#7#6'a'
+  +'ctNew'#7'Anchors'#11#5'akTop'#7'akRight'#0#25'BorderSpacing.InnerBorder'#2#4
+  +#8'TabOrder'#2#1#0#0#7'TButton'#7'btnAdd1'#4'Left'#3#244#1#6'Height'#2'#'#3
+  +'Top'#2'W'#5'Width'#3#131#0#6'Action'#7#9'actUpdate'#7'Anchors'#11#5'akTop'#7
+  +'akRight'#0#25'BorderSpacing.InnerBorder'#2#4#8'TabOrder'#2#2#0#0#7'TButton'
+  +#7'btnAdd2'#4'Left'#3#244#1#6'Height'#2'#'#3'Top'#3#132#0#5'Width'#3#131#0#6
+  +'Action'#7#9'actDelete'#7'Anchors'#11#5'akTop'#7'akRight'#0#25'BorderSpacing'
+  +'.InnerBorder'#2#4#8'TabOrder'#2#3#0#0#0#11'TActionList'#2'AL'#4'left'#2'c'#3
+  +'top'#2'8'#0#7'TAction'#6'actNew'#7'Caption'#6#11'Create User'#18'DisableIfN'
+  +'oHandler'#9#9'OnExecute'#7#13'actNewExecute'#0#0#7'TAction'#9'actUpdate'#7
+  +'Caption'#6#11'Update User'#18'DisableIfNoHandler'#9#9'OnExecute'#7#16'actUp'
+  +'dateExecute'#8'OnUpdate'#7#15'actUpdateUpdate'#0#0#7'TAction'#9'actDelete'#7
+  +'Caption'#6#6'Delete'#18'DisableIfNoHandler'#9#9'OnExecute'#7#16'actDeleteEx'
+  +'ecute'#8'OnUpdate'#7#15'actUpdateUpdate'#0#0#7'TAction'#9'actSearch'#7'Capt'
+  +'ion'#6#8'Get List'#18'DisableIfNoHandler'#9#9'OnExecute'#7#16'actSearchExec'
+  +'ute'#0#0#0#0
+]);

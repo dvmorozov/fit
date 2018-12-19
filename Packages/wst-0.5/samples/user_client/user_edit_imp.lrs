@@ -1,0 +1,34 @@
+{ Ceci est un fichier ressource généré automatiquement par Lazarus }
+
+LazarusResources.Add('TfUserEdit','FORMDATA',[
+  'TPF0'#10'TfUserEdit'#9'fUserEdit'#4'Left'#3#139#1#6'Height'#3#241#0#3'Top'#3
+  +#199#0#5'Width'#3#144#1#18'HorzScrollBar.Page'#3#143#1#18'VertScrollBar.Page'
+  +#3#240#0#13'ActiveControl'#7#5'btnOk'#11'BorderIcons'#11#12'biSystemMenu'#0
+  +#11'BorderStyle'#7#8'bsDialog'#7'Caption'#6#9'User Edit'#12'ClientHeight'#3
+  +#241#0#11'ClientWidth'#3#144#1#8'Position'#7#16'poMainFormCenter'#0#6'TPanel'
+  +#6'Panel1'#6'Height'#2'2'#3'Top'#3#191#0#5'Width'#3#144#1#5'Align'#7#8'alBot'
+  +'tom'#12'ClientHeight'#2'2'#11'ClientWidth'#3#144#1#8'TabOrder'#2#0#0#7'TBut'
+  +'ton'#5'btnOk'#4'Left'#3#224#0#6'Height'#2'#'#3'Top'#2#6#5'Width'#2'K'#25'Bo'
+  +'rderSpacing.InnerBorder'#2#4#7'Caption'#6#2'OK'#7'Default'#9#11'ModalResult'
+  +#2#1#8'TabOrder'#2#0#0#0#7'TButton'#7'Button2'#4'Left'#3'8'#1#6'Height'#2'#'
+  +#3'Top'#2#6#5'Width'#2'K'#25'BorderSpacing.InnerBorder'#2#4#6'Cancel'#9#7'Ca'
+  +'ption'#6#6'Cancel'#11'ModalResult'#2#2#8'TabOrder'#2#1#0#0#0#6'TPanel'#6'Pa'
+  +'nel2'#6'Height'#3#191#0#5'Width'#3#144#1#5'Align'#7#8'alClient'#12'ClientHe'
+  +'ight'#3#191#0#11'ClientWidth'#3#144#1#8'TabOrder'#2#1#0#6'TLabel'#6'Label1'
+  +#4'Left'#2#16#6'Height'#2#18#3'Top'#2#18#5'Width'#2'$'#7'Caption'#6#4'Name'#5
+  +'Color'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#6'Label2'#4'Left'#2#16#6
+  +'Height'#2#18#3'Top'#2'5'#5'Width'#2'"'#7'Caption'#6#6'e-Mail'#5'Color'#7#6
+  +'clNone'#11'ParentColor'#8#0#0#6'TLabel'#6'Label3'#4'Left'#2#16#6'Height'#2
+  +#18#3'Top'#2'X'#5'Width'#2':'#7'Caption'#6#8'Category'#5'Color'#7#6'clNone'
+  +#11'ParentColor'#8#0#0#6'TLabel'#6'Label4'#4'Left'#2#17#6'Height'#2#18#3'Top'
+  +#2'x'#5'Width'#2'H'#7'Caption'#6#11'Preferences'#5'Color'#7#6'clNone'#11'Par'
+  +'entColor'#8#0#0#7'TTIEdit'#7'edtName'#4'Left'#2'P'#6'Height'#2#23#3'Top'#2
+  +#16#5'Width'#3'0'#1#19'Link.TIPropertyName'#6#8'UserName'#8'TabOrder'#2#0#0#0
+  +#7'TTIEdit'#8'edteMail'#4'Left'#2'P'#6'Height'#2#23#3'Top'#2'5'#5'Width'#3'0'
+  +#1#19'Link.TIPropertyName'#6#5'eMail'#8'TabOrder'#2#1#0#0#11'TTIComboBox'#11
+  +'edtCategory'#4'Left'#2'P'#6'Height'#2#24#3'Top'#2'X'#5'Width'#3#160#0#19'Li'
+  +'nk.TIPropertyName'#6#8'Category'#9'MaxLength'#2#0#5'Style'#7#14'csDropDownL'
+  +'ist'#8'TabOrder'#2#2#0#0#7'TTIEdit'#14'edtPreferences'#4'Left'#2#17#6'Heigh'
+  +'t'#2#23#3'Top'#3#146#0#5'Width'#3'p'#1#19'Link.TIPropertyName'#6#11'Prefere'
+  +'nces'#8'TabOrder'#2#3#0#0#0#0
+]);

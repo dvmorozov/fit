@@ -1,0 +1,152 @@
+object fMain: TfMain
+  Left = 175
+  Height = 311
+  Top = 233
+  Width = 574
+  HorzScrollBar.Page = 573
+  VertScrollBar.Page = 310
+  ActiveControl = edtAddress
+  Caption = 'WST Metadata Browser'
+  object pnlHead: TPanel
+    Height = 82
+    Width = 574
+    Align = alTop
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 14
+      Height = 18
+      Top = 12
+      Width = 26
+      Caption = 'URL'
+      Color = clNone
+      ParentColor = False
+    end
+    object Label3: TLabel
+      Left = 11
+      Height = 18
+      Top = 46
+      Width = 45
+      Caption = 'Format'
+      Color = clNone
+      ParentColor = False
+    end
+    object edtAddress: TEdit
+      Left = 88
+      Height = 23
+      Top = 12
+      Width = 480
+      Anchors = [akTop, akLeft, akRight]
+      Font.CharSet = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Pitch = fpVariable
+      TabOrder = 0
+      Text = 'http://127.0.0.1:8000/wst/services/IWSTMetadataService'
+    end
+    object btnGetRepList: TButton
+      Left = 477
+      Height = 25
+      Top = 40
+      Width = 91
+      Action = actGetRepositoryList
+      Anchors = [akTop, akRight]
+      BorderSpacing.InnerBorder = 4
+      TabOrder = 2
+    end
+    object edtFormat: TRadioGroup
+      Left = 88
+      Height = 37
+      Top = 35
+      Width = 280
+      AutoFill = True
+      Caption = ' &Format '
+      ChildSizing.LeftRightSpacing = 6
+      ChildSizing.TopBottomSpacing = 6
+      ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+      ChildSizing.EnlargeVertical = crsHomogenousChildResize
+      ChildSizing.ShrinkHorizontal = crsScaleChilds
+      ChildSizing.ShrinkVertical = crsScaleChilds
+      ChildSizing.Layout = cclLeftToRightThenTopToBottom
+      ChildSizing.ControlsPerLine = 2
+      Columns = 2
+      ItemIndex = 0
+      Items.Strings = (
+        '&SOAP'
+        '&binary'
+      )
+      TabOrder = 1
+    end
+  end
+  object pnlClient: TPanel
+    Height = 229
+    Top = 82
+    Width = 574
+    Align = alClient
+    BevelInner = bvRaised
+    BevelOuter = bvLowered
+    TabOrder = 1
+    object Label2: TLabel
+      Left = 14
+      Height = 18
+      Top = 14
+      Width = 67
+      Caption = 'Repository'
+      Color = clNone
+      ParentColor = False
+    end
+    object edtRepositoryList: TComboBox
+      Left = 112
+      Height = 24
+      Top = 7
+      Width = 344
+      Anchors = [akTop, akLeft, akRight]
+      AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
+      MaxLength = 0
+      TabOrder = 0
+      Text = 'edtRepositoryList'
+    end
+    object tvwMetadata: TTreeView
+      Left = 11
+      Height = 176
+      Top = 38
+      Width = 555
+      Anchors = [akTop, akLeft, akRight, akBottom]
+      DefaultItemHeight = 18
+      Font.CharSet = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Pitch = fpFixed
+      ReadOnly = True
+      TabOrder = 1
+      Options = [tvoAutoItemHeight, tvoHideSelection, tvoKeepCollapsedNodes, tvoReadOnly, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoShowSeparators, tvoToolTips]
+      TreeLineColor = clNavy
+    end
+    object Button1: TButton
+      Left = 477
+      Height = 25
+      Top = 6
+      Width = 91
+      Action = actGetRepository
+      Anchors = [akTop, akRight]
+      BorderSpacing.InnerBorder = 4
+      TabOrder = 2
+    end
+  end
+  object AL: TActionList
+    left = 72
+    top = 464
+    object actGetRepositoryList: TAction
+      Caption = 'Get Rep. List'
+      DisableIfNoHandler = True
+      OnExecute = actGetRepositoryListExecute
+    end
+    object actGetRepository: TAction
+      Caption = 'Get Repository'
+      DisableIfNoHandler = True
+      OnExecute = actGetRepositoryExecute
+      OnUpdate = actGetRepositoryUpdate
+    end
+  end
+end

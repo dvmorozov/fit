@@ -1,0 +1,279 @@
+<?xml version="1.0"?>
+<CONFIG>
+  <ProjectOptions>
+    <PathDelim Value="\"/>
+    <Version Value="5"/>
+    <General>
+      <MainUnit Value="0"/>
+      <IconPath Value="./"/>
+      <TargetFileExt Value=".exe"/>
+      <ActiveEditorIndexAtStart Value="3"/>
+    </General>
+    <VersionInfo>
+      <ProjectVersion Value=""/>
+      <Language Value=""/>
+      <CharSet Value=""/>
+    </VersionInfo>
+    <PublishOptions>
+      <Version Value="2"/>
+      <IgnoreBinaries Value="False"/>
+      <IncludeFileFilter Value="*.(pas|pp|inc|lfm|lpr|lrs|lpi|lpk|sh|xml)"/>
+      <ExcludeFileFilter Value="*.(bak|ppu|ppw|o|so);*~;backup"/>
+    </PublishOptions>
+    <RunParams>
+      <local>
+        <FormatVersion Value="1"/>
+        <HostApplicationFilename Value="C:\Programmes\lazarus\wst\tests\metadata_browser\metadata_browser.exe"/>
+        <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
+      </local>
+    </RunParams>
+    <RequiredPackages Count="1">
+      <Item1>
+        <PackageName Value="LCL"/>
+      </Item1>
+    </RequiredPackages>
+    <Units Count="17">
+      <Unit0>
+        <Filename Value="lib_server.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="lib_server"/>
+        <CursorPos X="88" Y="6"/>
+        <TopLine Value="2"/>
+        <EditorIndex Value="0"/>
+        <UsageCount Value="30"/>
+        <Loaded Value="True"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="..\tcp_server\server_unit.pas"/>
+        <UnitName Value="server_unit"/>
+        <CursorPos X="36" Y="6"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="13"/>
+        <ReadOnly Value="True"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="library_server_intf.pas"/>
+        <UnitName Value="library_server_intf"/>
+        <CursorPos X="45" Y="14"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="28"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="..\..\..\..\..\lazarusClean\fpc\2.0.4\source\rtl\win32\classes.pp"/>
+        <UnitName Value="Classes"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="10"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="..\..\..\..\..\lazarusClean\fpc\2.0.4\source\rtl\objpas\classes\classes.inc"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="28"/>
+        <UsageCount Value="9"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="..\..\..\..\..\lazarusClean\fpc\2.0.4\source\rtl\objpas\classes\classesh.inc"/>
+        <CursorPos X="10" Y="699"/>
+        <TopLine Value="672"/>
+        <UsageCount Value="10"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="..\..\server_service_intf.pas"/>
+        <UnitName Value="server_service_intf"/>
+        <CursorPos X="34" Y="202"/>
+        <TopLine Value="202"/>
+        <EditorIndex Value="4"/>
+        <UsageCount Value="14"/>
+        <Loaded Value="True"/>
+        <ReadOnly Value="True"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="..\..\base_service_intf.pas"/>
+        <UnitName Value="base_service_intf"/>
+        <CursorPos X="23" Y="13"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="5"/>
+        <UsageCount Value="14"/>
+        <Loaded Value="True"/>
+        <ReadOnly Value="True"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="..\..\synapse_http_protocol.pas"/>
+        <UnitName Value="synapse_http_protocol"/>
+        <CursorPos X="45" Y="6"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="12"/>
+        <ReadOnly Value="True"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="..\..\..\..\..\lazarusClean\fpc\2.0.4\source\rtl\objpas\classes\streams.inc"/>
+        <CursorPos X="3" Y="611"/>
+        <TopLine Value="606"/>
+        <UsageCount Value="10"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="..\..\service_intf.pas"/>
+        <UnitName Value="service_intf"/>
+        <CursorPos X="70" Y="140"/>
+        <TopLine Value="136"/>
+        <UsageCount Value="12"/>
+        <ReadOnly Value="True"/>
+      </Unit10>
+      <Unit11>
+        <Filename Value="library_base_intf.pas"/>
+        <UnitName Value="library_base_intf"/>
+        <CursorPos X="2" Y="12"/>
+        <TopLine Value="4"/>
+        <UsageCount Value="20"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="..\..\library_base_intf.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="library_base_intf"/>
+        <CursorPos X="11" Y="56"/>
+        <TopLine Value="37"/>
+        <EditorIndex Value="1"/>
+        <UsageCount Value="27"/>
+        <Loaded Value="True"/>
+      </Unit12>
+      <Unit13>
+        <Filename Value="..\..\metadata_repository.pas"/>
+        <UnitName Value="metadata_repository"/>
+        <CursorPos X="55" Y="102"/>
+        <TopLine Value="49"/>
+        <UsageCount Value="10"/>
+      </Unit13>
+      <Unit14>
+        <Filename Value="..\..\binary_streamer.pas"/>
+        <UnitName Value="binary_streamer"/>
+        <CursorPos X="24" Y="74"/>
+        <TopLine Value="67"/>
+        <EditorIndex Value="2"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
+      </Unit14>
+      <Unit15>
+        <Filename Value="..\..\library_server_intf.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="library_server_intf"/>
+        <CursorPos X="35" Y="103"/>
+        <TopLine Value="93"/>
+        <EditorIndex Value="3"/>
+        <UsageCount Value="21"/>
+        <Loaded Value="True"/>
+      </Unit15>
+      <Unit16>
+        <Filename Value="..\calculator\srv\calculator_imp.pas"/>
+        <UnitName Value="calculator_imp"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="10"/>
+      </Unit16>
+    </Units>
+    <JumpHistory Count="13" HistoryIndex="12">
+      <Position1>
+        <Filename Value="..\..\binary_streamer.pas"/>
+        <Caret Line="89" Column="27" TopLine="67"/>
+      </Position1>
+      <Position2>
+        <Filename Value="..\..\library_server_intf.pas"/>
+        <Caret Line="107" Column="20" TopLine="67"/>
+      </Position2>
+      <Position3>
+        <Filename Value="..\..\library_server_intf.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
+      </Position3>
+      <Position4>
+        <Filename Value="..\..\library_server_intf.pas"/>
+        <Caret Line="58" Column="22" TopLine="34"/>
+      </Position4>
+      <Position5>
+        <Filename Value="..\..\library_server_intf.pas"/>
+        <Caret Line="64" Column="14" TopLine="40"/>
+      </Position5>
+      <Position6>
+        <Filename Value="..\..\library_server_intf.pas"/>
+        <Caret Line="71" Column="20" TopLine="47"/>
+      </Position6>
+      <Position7>
+        <Filename Value="..\..\library_server_intf.pas"/>
+        <Caret Line="107" Column="20" TopLine="79"/>
+      </Position7>
+      <Position8>
+        <Filename Value="..\..\library_server_intf.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
+      </Position8>
+      <Position9>
+        <Filename Value="..\..\library_server_intf.pas"/>
+        <Caret Line="58" Column="13" TopLine="34"/>
+      </Position9>
+      <Position10>
+        <Filename Value="..\..\library_server_intf.pas"/>
+        <Caret Line="64" Column="1" TopLine="40"/>
+      </Position10>
+      <Position11>
+        <Filename Value="..\..\library_server_intf.pas"/>
+        <Caret Line="70" Column="1" TopLine="46"/>
+      </Position11>
+      <Position12>
+        <Filename Value="..\..\library_server_intf.pas"/>
+        <Caret Line="73" Column="13" TopLine="64"/>
+      </Position12>
+      <Position13>
+        <Filename Value="lib_server.lpr"/>
+        <Caret Line="25" Column="3" TopLine="13"/>
+      </Position13>
+    </JumpHistory>
+  </ProjectOptions>
+  <CompilerOptions>
+    <Version Value="5"/>
+    <PathDelim Value="\"/>
+    <SearchPaths>
+      <OtherUnitFiles Value="..\calculator\;..\calculator\srv\;..\..\"/>
+      <UnitOutputDirectory Value="obj"/>
+    </SearchPaths>
+    <CodeGeneration>
+      <Generate Value="Faster"/>
+    </CodeGeneration>
+    <Linking>
+      <Debugging>
+        <GenerateDebugInfo Value="True"/>
+      </Debugging>
+      <Options>
+        <ExecutableType Value="Library"/>
+      </Options>
+    </Linking>
+    <Other>
+      <CompilerPath Value="$(CompPath)"/>
+    </Other>
+  </CompilerOptions>
+  <Debugging>
+    <BreakPoints Count="5">
+      <Item1>
+        <Source Value="..\..\home\inoussa\Projets\Laz\tests\soap\test_soap.pas"/>
+        <Line Value="15"/>
+      </Item1>
+      <Item2>
+        <Source Value="..\..\home\inoussa\Projets\Laz\tests\soap\test_soap.pas"/>
+        <Line Value="16"/>
+      </Item2>
+      <Item3>
+        <Source Value="..\..\home\inoussa\Projets\Laz\tests\soap\test_soap.pas"/>
+        <Line Value="18"/>
+      </Item3>
+      <Item4>
+        <Source Value="..\..\home\inoussa\Projets\Laz\tests\soap\googleintfimpunit.pas"/>
+        <Line Value="63"/>
+      </Item4>
+      <Item5>
+        <Source Value="..\..\basic_binder.pas"/>
+        <Line Value="62"/>
+      </Item5>
+    </BreakPoints>
+    <Watches Count="1">
+      <Item1>
+        <Expression Value="ASource.Memory^"/>
+      </Item1>
+    </Watches>
+  </Debugging>
+</CONFIG>

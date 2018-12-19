@@ -1,0 +1,23 @@
+{ Ceci est un fichier ressource généré automatiquement par Lazarus }
+
+LazarusResources.Add('TfMain','FORMDATA',[
+  'TPF0'#6'TfMain'#5'fMain'#4'Left'#3'"'#1#6'Height'#3','#1#3'Top'#3#180#0#5'Wi'
+  +'dth'#3#144#1#18'HorzScrollBar.Page'#3#143#1#18'VertScrollBar.Page'#3'+'#1#13
+  +'ActiveControl'#7#7'Button1'#7'Caption'#6#21'Simple TCP App Server'#8'OnCrea'
+  +'te'#7#10'FormCreate'#0#6'TLabel'#6'Label1'#4'Left'#2#16#6'Height'#2#18#3'To'
+  +'p'#2'H'#5'Width'#2#24#7'Caption'#6#3'Log'#5'Color'#7#6'clNone'#11'ParentCol'
+  +'or'#8#0#0#7'TButton'#7'Button1'#4'Left'#2#16#6'Height'#2#25#3'Top'#2#8#5'Wi'
+  +'dth'#2'h'#6'Action'#7#8'actStart'#8'TabOrder'#2#0#0#0#5'TMemo'#6'mmoLog'#4
+  +'Left'#2#8#6'Height'#3#192#0#3'Top'#2'`'#5'Width'#3#128#1#7'Anchors'#11#5'ak'
+  +'Top'#6'akLeft'#7'akRight'#8'akBottom'#0#8'ReadOnly'#9#10'ScrollBars'#7#10's'
+  +'sAutoBoth'#8'TabOrder'#2#1#0#0#7'TButton'#7'Button2'#4'Left'#2#16#6'Height'
+  +#2#25#3'Top'#2'('#5'Width'#2'h'#6'Action'#7#7'actStop'#8'TabOrder'#2#2#0#0#5
+  +'TEdit'#7'edtPort'#4'Left'#3#128#0#6'Height'#2#23#3'Top'#2#10#5'Width'#2'P'#8
+  +'TabOrder'#2#3#4'Text'#6#4'1234'#0#0#11'TActionList'#2'AL'#4'left'#3#152#0#3
+  +'top'#2' '#0#7'TAction'#8'actStart'#7'Caption'#6#13'Start( Port=)'#18'Disabl'
+  +'eIfNoHandler'#9#9'OnExecute'#7#15'actStartExecute'#8'OnUpdate'#7#14'actStar'
+  +'tUpdate'#0#0#7'TAction'#7'actStop'#7'Caption'#6#4'Stop'#18'DisableIfNoHandl'
+  +'er'#9#9'OnExecute'#7#14'actStopExecute'#8'OnUpdate'#7#13'actStopUpdate'#0#0
+  +#7'TAction'#11'actClearLog'#7'Caption'#6#9'Clear Log'#18'DisableIfNoHandler'
+  +#9#9'OnExecute'#7#18'actClearLogExecute'#0#0#0#0
+]);

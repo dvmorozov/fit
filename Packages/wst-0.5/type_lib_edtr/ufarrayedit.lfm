@@ -1,0 +1,126 @@
+object fArrayEdit: TfArrayEdit
+  Left = 327
+  Height = 361
+  Top = 131
+  Width = 392
+  HorzScrollBar.Page = 391
+  VertScrollBar.Page = 360
+  ActiveControl = Button1
+  BorderStyle = bsSizeToolWin
+  Caption = 'fArrayEdit'
+  Position = poMainFormCenter
+  object Panel1: TPanel
+    Height = 50
+    Top = 311
+    Width = 392
+    Align = alBottom
+    TabOrder = 0
+    object Button1: TButton
+      Left = 216
+      Height = 25
+      Top = 9
+      Width = 75
+      Action = actOK
+      Anchors = [akTop, akRight]
+      BorderSpacing.InnerBorder = 4
+      TabOrder = 0
+    end
+    object Button2: TButton
+      Left = 304
+      Height = 25
+      Top = 9
+      Width = 75
+      Anchors = [akTop, akRight]
+      BorderSpacing.InnerBorder = 4
+      Cancel = True
+      Caption = 'Cancel'
+      ModalResult = 2
+      TabOrder = 1
+    end
+  end
+  object PageControl1: TPageControl
+    Height = 311
+    Width = 392
+    ActivePage = TabSheet1
+    Align = alClient
+    TabIndex = 0
+    TabOrder = 1
+    object TabSheet1: TTabSheet
+      Caption = 'Array definition'
+      object Label1: TLabel
+        Left = 19
+        Height = 14
+        Top = 21
+        Width = 28
+        Caption = 'Name'
+        Color = clNone
+        ParentColor = False
+      end
+      object Label2: TLabel
+        Left = 19
+        Height = 14
+        Top = 102
+        Width = 66
+        Caption = 'Element Type'
+        Color = clNone
+        ParentColor = False
+      end
+      object Label3: TLabel
+        Left = 19
+        Height = 14
+        Top = 170
+        Width = 69
+        Caption = 'Element Name'
+        Color = clNone
+        ParentColor = False
+      end
+      object edtName: TEdit
+        Left = 20
+        Height = 23
+        Top = 42
+        Width = 345
+        Anchors = [akTop, akLeft, akRight]
+        TabOrder = 0
+      end
+      object edtElementType: TComboBox
+        Left = 19
+        Height = 21
+        Top = 122
+        Width = 345
+        Anchors = [akTop, akLeft, akRight]
+        AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
+        ItemHeight = 13
+        MaxLength = 0
+        Style = csDropDownList
+        TabOrder = 1
+      end
+      object edtEmbedded: TCheckBox
+        Left = 19
+        Height = 13
+        Top = 242
+        Width = 71
+        Caption = 'Embedded'
+        TabOrder = 2
+      end
+      object edtElementName: TEdit
+        Left = 19
+        Height = 23
+        Top = 186
+        Width = 345
+        Anchors = [akTop, akLeft, akRight]
+        TabOrder = 3
+        Text = 'Item'
+      end
+    end
+  end
+  object AL: TActionList
+    left = 215
+    top = 185
+    object actOK: TAction
+      Caption = 'OK'
+      DisableIfNoHandler = True
+      OnExecute = actOKExecute
+      OnUpdate = actOKUpdate
+    end
+  end
+end

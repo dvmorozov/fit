@@ -1,0 +1,103 @@
+object fEnumEdit: TfEnumEdit
+  Left = 373
+  Height = 368
+  Top = 215
+  Width = 400
+  HorzScrollBar.Page = 399
+  VertScrollBar.Page = 367
+  ActiveControl = edtName
+  BorderStyle = bsSizeToolWin
+  Caption = 'fEnumEdit'
+  ClientHeight = 368
+  ClientWidth = 400
+  Position = poMainFormCenter
+  object PC: TPageControl
+    Height = 318
+    Width = 400
+    ActivePage = TabSheet1
+    Align = alClient
+    TabIndex = 0
+    TabOrder = 0
+    object TabSheet1: TTabSheet
+      Caption = 'Enumeration'
+      ClientHeight = 292
+      ClientWidth = 392
+      object Label1: TLabel
+        Left = 4
+        Height = 14
+        Top = 18
+        Width = 28
+        Caption = 'Name'
+        ParentColor = False
+      end
+      object edtName: TEdit
+        Left = 68
+        Height = 23
+        Top = 18
+        Width = 312
+        Anchors = [akTop, akLeft, akRight]
+        TabOrder = 0
+      end
+      object GroupBox1: TGroupBox
+        Left = 4
+        Height = 231
+        Top = 51
+        Width = 377
+        Anchors = [akTop, akLeft, akRight, akBottom]
+        Caption = '  Items  '
+        ClientHeight = 213
+        ClientWidth = 373
+        TabOrder = 1
+        object edtItems: TMemo
+          Height = 213
+          Width = 373
+          Align = alClient
+          ScrollBars = ssBoth
+          TabOrder = 0
+        end
+      end
+    end
+  end
+  object Panel1: TPanel
+    Height = 50
+    Top = 318
+    Width = 400
+    Align = alBottom
+    ClientHeight = 50
+    ClientWidth = 400
+    TabOrder = 1
+    object Button1: TButton
+      Left = 312
+      Height = 25
+      Top = 10
+      Width = 75
+      Anchors = [akTop, akRight]
+      BorderSpacing.InnerBorder = 4
+      Cancel = True
+      Caption = 'Cancel'
+      ModalResult = 2
+      TabOrder = 0
+    end
+    object Button2: TButton
+      Left = 222
+      Height = 25
+      Top = 10
+      Width = 75
+      Action = actOK
+      Anchors = [akTop, akRight]
+      BorderSpacing.InnerBorder = 4
+      Default = True
+      TabOrder = 1
+    end
+  end
+  object ActionList1: TActionList
+    left = 248
+    top = 120
+    object actOK: TAction
+      Caption = 'OK'
+      DisableIfNoHandler = True
+      OnExecute = actOKExecute
+      OnUpdate = actOKUpdate
+    end
+  end
+end

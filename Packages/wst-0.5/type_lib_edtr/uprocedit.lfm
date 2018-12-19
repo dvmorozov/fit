@@ -1,0 +1,193 @@
+object fProcEdit: TfProcEdit
+  Left = 290
+  Height = 543
+  Top = 118
+  Width = 522
+  HorzScrollBar.Page = 521
+  VertScrollBar.Page = 542
+  ActiveControl = edtName
+  BorderStyle = bsSizeToolWin
+  Caption = 'fProcEdit'
+  ClientHeight = 543
+  ClientWidth = 522
+  Position = poMainFormCenter
+  object PageControl1: TPageControl
+    Height = 493
+    Width = 522
+    ActivePage = TabSheet1
+    Align = alClient
+    TabIndex = 0
+    TabOrder = 0
+    object TabSheet1: TTabSheet
+      Caption = '&Operation'
+      ClientHeight = 467
+      ClientWidth = 514
+      object Label1: TLabel
+        Left = 12
+        Height = 14
+        Top = 26
+        Width = 28
+        Caption = 'Name'
+        ParentColor = False
+      end
+      object edtName: TEdit
+        Left = 112
+        Height = 23
+        Top = 26
+        Width = 388
+        Anchors = [akTop, akLeft, akRight]
+        TabOrder = 0
+        Text = 'edtName'
+      end
+      object GroupBox1: TGroupBox
+        Left = 11
+        Height = 304
+        Top = 114
+        Width = 489
+        Anchors = [akTop, akLeft, akRight, akBottom]
+        Caption = '  Parametters  '
+        ClientHeight = 286
+        ClientWidth = 485
+        TabOrder = 3
+        object edtParams: TListView
+          Height = 286
+          Width = 485
+          Align = alClient
+          Columns = <          
+            item
+              Caption = 'Name'
+              Width = 180
+            end          
+            item
+              Caption = 'Type'
+              Width = 190
+            end          
+            item
+              Caption = 'Modifier'
+              Width = 60
+            end          
+            item
+            end>
+          RowSelect = True
+          TabOrder = 0
+          ViewStyle = vsReport
+        end
+      end
+      object edtFunction: TCheckBox
+        Left = 12
+        Height = 13
+        Top = 74
+        Width = 96
+        Caption = 'Function returns'
+        OnClick = edtFunctionClick
+        OnEditingDone = edtFunctionEditingDone
+        TabOrder = 1
+      end
+      object edtResultType: TComboBox
+        Left = 112
+        Height = 21
+        Top = 74
+        Width = 388
+        Anchors = [akTop, akLeft, akRight]
+        AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
+        ItemHeight = 13
+        MaxLength = 0
+        Style = csDropDownList
+        TabOrder = 2
+      end
+      object Button3: TButton
+        Left = 12
+        Height = 25
+        Top = 429
+        Width = 108
+        Action = actNewArg
+        Anchors = [akLeft, akBottom]
+        BorderSpacing.InnerBorder = 4
+        TabOrder = 4
+      end
+      object Button4: TButton
+        Left = 132
+        Height = 25
+        Top = 429
+        Width = 108
+        Action = actUpdateArgument
+        Anchors = [akLeft, akBottom]
+        BorderSpacing.InnerBorder = 4
+        TabOrder = 5
+      end
+      object Button5: TButton
+        Left = 248
+        Height = 25
+        Top = 429
+        Width = 108
+        Action = actDeleteArgument
+        Anchors = [akLeft, akBottom]
+        BorderSpacing.InnerBorder = 4
+        TabOrder = 6
+      end
+    end
+  end
+  object Panel1: TPanel
+    Height = 50
+    Top = 493
+    Width = 522
+    Align = alBottom
+    ClientHeight = 50
+    ClientWidth = 522
+    TabOrder = 1
+    object Button1: TButton
+      Left = 344
+      Height = 25
+      Top = 11
+      Width = 75
+      Action = actOk
+      Anchors = [akTop, akRight]
+      BorderSpacing.InnerBorder = 4
+      Default = True
+      TabOrder = 0
+    end
+    object Button2: TButton
+      Left = 432
+      Height = 25
+      Top = 11
+      Width = 75
+      Anchors = [akTop, akRight]
+      BorderSpacing.InnerBorder = 4
+      Cancel = True
+      Caption = 'Cancel'
+      ModalResult = 2
+      TabOrder = 1
+    end
+  end
+  object AL: TActionList
+    left = 198
+    top = 241
+    object actOk: TAction
+      Caption = 'OK'
+      DisableIfNoHandler = True
+      OnExecute = actOkExecute
+      OnUpdate = actOkUpdate
+    end
+    object actNewArg: TAction
+      Caption = 'New Argument'
+      DisableIfNoHandler = True
+      OnExecute = actNewArgExecute
+    end
+    object actUpdateArgument: TAction
+      Caption = 'Edit Argument'
+      DisableIfNoHandler = True
+      OnExecute = actUpdateArgumentExecute
+      OnUpdate = actUpdateArgumentUpdate
+    end
+    object actDeleteArgument: TAction
+      Caption = 'Delete Argument'
+      DisableIfNoHandler = True
+      OnExecute = actDeleteArgumentExecute
+      OnUpdate = actUpdateArgumentUpdate
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    left = 83
+    top = 217
+  end
+end

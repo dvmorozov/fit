@@ -1,0 +1,1 @@
+wst_test_suite.exe >res.txt

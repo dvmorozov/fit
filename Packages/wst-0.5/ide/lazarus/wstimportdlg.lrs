@@ -1,0 +1,65 @@
+{ Ceci est un fichier ressource généré automatiquement par Lazarus }
+
+LazarusResources.Add('TformImport','FORMDATA',[
+  'TPF0'#11'TformImport'#10'formImport'#4'Left'#3#175#1#6'Height'#3#26#2#3'Top'
+  +#3#153#0#5'Width'#3#14#2#18'HorzScrollBar.Page'#3#13#2#18'VertScrollBar.Page'
+  +#3#25#2#13'ActiveControl'#7#7'Button1'#11'BorderStyle'#7#13'bsSizeToolWin'#7
+  +'Caption'#6#13'WSDL Importer'#12'ClientHeight'#3#26#2#11'ClientWidth'#3#14#2
+  +#0#6'TPanel'#6'Panel2'#6'Height'#3#234#1#5'Width'#3#14#2#5'Align'#7#8'alClie'
+  +'nt'#12'ClientHeight'#3#234#1#11'ClientWidth'#3#14#2#8'TabOrder'#2#1#0#9'TGr'
+  +'oupBox'#9'GroupBox1'#4'Left'#2#8#6'Height'#3#168#0#3'Top'#2#8#5'Width'#3#250
+  +#1#7'Anchors'#11#5'akTop'#6'akLeft'#7'akRight'#0#12'ClientHeight'#3#150#0#11
+  +'ClientWidth'#3#246#1#8'TabOrder'#2#0#0#6'TLabel'#6'Label1'#4'Left'#2#9#6'He'
+  +'ight'#2#14#3'Top'#2#4#5'Width'#3#186#0#7'Caption'#6'&Web Services Descripti'
+  +'on File ( WSDL )'#11'ParentColor'#8#0#0#6'TLabel'#6'Label2'#4'Left'#2#9#6'H'
+  +'eight'#2#14#3'Top'#2'E'#5'Width'#2'Q'#7'Caption'#6#16'Output directory'#11
+  +'ParentColor'#8#0#0#5'TEdit'#12'edtInputFile'#4'Left'#2#9#6'Height'#2#23#3'T'
+  +'op'#2#31#5'Width'#3#148#1#7'Anchors'#11#5'akTop'#6'akLeft'#7'akRight'#0#8'T'
+  +'abOrder'#2#0#0#0#7'TButton'#7'Button2'#4'Left'#3#175#1#6'Height'#2#25#3'Top'
+  +#2#31#5'Width'#2'('#6'Action'#7#11'actOpenFile'#7'Anchors'#11#5'akTop'#7'akR'
+  +'ight'#0#25'BorderSpacing.InnerBorder'#2#4#8'TabOrder'#2#1#0#0#5'TEdit'#12'e'
+  +'dtOutputDir'#4'Left'#2#9#6'Height'#2#23#3'Top'#2'X'#5'Width'#3#148#1#7'Anch'
+  +'ors'#11#5'akTop'#6'akLeft'#7'akRight'#0#8'TabOrder'#2#2#0#0#7'TButton'#7'Bu'
+  +'tton3'#4'Left'#3#175#1#6'Height'#2#25#3'Top'#2'X'#5'Width'#2'('#6'Action'#7
+  +#10'actOpenDir'#7'Anchors'#11#5'akTop'#7'akRight'#0#25'BorderSpacing.InnerBo'
+  +'rder'#2#4#8'TabOrder'#2#3#0#0#9'TCheckBox'#15'edtAddToProject'#4'Left'#2#9#6
+  +'Height'#2#13#3'Top'#3#128#0#5'Width'#3#176#0#7'Caption'#6'"Add the generate'
+  +'d files to project'#8'TabOrder'#2#4#0#0#0#9'TGroupBox'#9'GroupBox2'#4'Left'
+  +#2#8#6'Height'#3#162#0#3'Top'#3'@'#1#5'Width'#3#250#1#7'Anchors'#11#5'akTop'
+  +#6'akLeft'#7'akRight'#8'akBottom'#0#7'Caption'#6#12'  Messages  '#12'ClientH'
+  +'eight'#3#144#0#11'ClientWidth'#3#246#1#8'TabOrder'#2#2#0#5'TMemo'#6'mmoLog'
+  +#6'Height'#3#144#0#5'Width'#3#246#1#5'Align'#7#8'alClient'#8'ReadOnly'#9#10
+  +'ScrollBars'#7#6'ssBoth'#8'TabOrder'#2#0#0#0#0#9'TGroupBox'#9'GroupBox3'#4'L'
+  +'eft'#2#8#6'Height'#2'x'#3'Top'#3#184#0#5'Width'#3#250#1#7'Anchors'#11#5'akT'
+  +'op'#6'akLeft'#7'akRight'#0#7'Caption'#6#11'  Options  '#12'ClientHeight'#2
+  +'f'#11'ClientWidth'#3#246#1#8'TabOrder'#2#1#0#9'TCheckBox'#13'edtOptionIntf'
+  +#4'Left'#2#9#6'Height'#2#13#3'Top'#2#8#5'Width'#2'N'#7'Caption'#6#14'Interfa'
+  +'ce file'#7'Checked'#9#7'OnClick'#7#18'edtOptionIntfClick'#5'State'#7#9'cbCh'
+  +'ecked'#8'TabOrder'#2#0#0#0#9'TCheckBox'#14'edtOptionProxy'#4'Left'#2#9#6'He'
+  +'ight'#2#13#3'Top'#2'8'#5'Width'#2'>'#7'Caption'#6#10'Proxy file'#7'Checked'
+  +#9#5'State'#7#9'cbChecked'#8'TabOrder'#2#2#0#0#9'TCheckBox'#15'edtOptionBind'
+  +'er'#4'Left'#3'&'#1#6'Height'#2#13#3'Top'#2#8#5'Width'#2'i'#7'Caption'#6#19
+  +'Service Binder file'#8'TabOrder'#2#3#0#0#9'TCheckBox'#12'edtOptionImp'#4'Le'
+  +'ft'#3'&'#1#6'Height'#2#13#3'Top'#2'8'#5'Width'#3#152#0#7'Caption'#6#28'Impl'
+  +'ementation Skeleton file'#8'TabOrder'#2#4#0#0#9'TCheckBox'#16'edtOptionIntf'
+  +'ALL'#4'Left'#2#30#6'Height'#2#13#3'Top'#2' '#5'Width'#2'X'#7'Caption'#6#15
+  +'Parse all types'#7'OnClick'#7#21'edtOptionIntfALLClick'#8'TabOrder'#2#1#0#0
+  +#0#0#6'TPanel'#6'Panel1'#6'Height'#2'0'#3'Top'#3#234#1#5'Width'#3#14#2#5'Ali'
+  +'gn'#7#8'alBottom'#12'ClientHeight'#2'0'#11'ClientWidth'#3#14#2#8'TabOrder'#2
+  +#0#0#7'TButton'#7'Button1'#4'Left'#3'_'#1#6'Height'#2#25#3'Top'#2#8#5'Width'
+  +#2'K'#6'Action'#7#5'actOK'#7'Anchors'#11#5'akTop'#7'akRight'#0#25'BorderSpac'
+  +'ing.InnerBorder'#2#4#7'Default'#9#8'TabOrder'#2#0#0#0#7'TButton'#7'Button4'
+  +#4'Left'#3#183#1#6'Height'#2#25#3'Top'#2#8#5'Width'#2'K'#7'Anchors'#11#5'akT'
+  +'op'#7'akRight'#0#25'BorderSpacing.InnerBorder'#2#4#6'Cancel'#9#7'Caption'#6
+  +#6'Cancel'#11'ModalResult'#2#2#8'TabOrder'#2#1#0#0#0#11'TActionList'#2'AL'#4
+  +'left'#2'h'#3'top'#3'H'#1#0#7'TAction'#5'actOK'#7'Caption'#6#2'OK'#18'Disabl'
+  +'eIfNoHandler'#9#9'OnExecute'#7#12'actOKExecute'#8'OnUpdate'#7#11'actOKUpdat'
+  +'e'#0#0#7'TAction'#11'actOpenFile'#7'Caption'#6#3'...'#18'DisableIfNoHandler'
+  +#9#9'OnExecute'#7#18'actOpenFileExecute'#0#0#7'TAction'#10'actOpenDir'#7'Cap'
+  +'tion'#6#3'...'#18'DisableIfNoHandler'#9#9'OnExecute'#7#17'actOpenDirExecute'
+  +#0#0#0#11'TOpenDialog'#2'OD'#5'Title'#6#26'Ouvrir un fichier existant'#6'Fil'
+  +'ter'#6#28'WSDL Files ( *.wsdl )|*.wsdl'#11'FilterIndex'#2#0#7'Options'#11#15
+  +'ofFileMustExist'#14'ofEnableSizing'#12'ofViewDetail'#0#4'left'#3#16#1#3'top'
+  +#2' '#0#0#22'TSelectDirectoryDialog'#3'SDD'#5'Title'#6#21'Choisir un r'#233
+  +'pertoire'#11'FilterIndex'#2#0#4'left'#3#224#0#3'top'#3#176#0#0#0#0
+]);

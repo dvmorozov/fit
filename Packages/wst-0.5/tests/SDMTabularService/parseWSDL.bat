@@ -1,0 +1,1 @@
+..\..\ws_helper\ws_helper.exe -uA -p -o. SDMTabularService.wsdl >parsing.res.txt

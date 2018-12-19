@@ -1,0 +1,203 @@
+object fClassEdit: TfClassEdit
+  Left = 358
+  Height = 547
+  Top = 113
+  Width = 518
+  HorzScrollBar.Page = 517
+  VertScrollBar.Page = 546
+  ActiveControl = Button1
+  BorderStyle = bsSizeToolWin
+  Caption = 'fClassEdit'
+  ClientHeight = 547
+  ClientWidth = 518
+  Position = poDesktopCenter
+  object Panel1: TPanel
+    Height = 50
+    Top = 497
+    Width = 518
+    Align = alBottom
+    ClientHeight = 50
+    ClientWidth = 518
+    TabOrder = 0
+    object Button1: TButton
+      Left = 430
+      Height = 25
+      Top = 10
+      Width = 75
+      Anchors = [akTop, akRight]
+      BorderSpacing.InnerBorder = 4
+      Cancel = True
+      Caption = 'Cancel'
+      ModalResult = 2
+      TabOrder = 0
+    end
+    object Button2: TButton
+      Left = 340
+      Height = 25
+      Top = 10
+      Width = 75
+      Action = actOK
+      Anchors = [akTop, akRight]
+      BorderSpacing.InnerBorder = 4
+      Default = True
+      TabOrder = 1
+    end
+  end
+  object PC: TPageControl
+    Height = 497
+    Width = 518
+    ActivePage = TabSheet1
+    Align = alClient
+    TabIndex = 0
+    TabOrder = 1
+    object TabSheet1: TTabSheet
+      Caption = 'Compound Object'
+      ClientHeight = 471
+      ClientWidth = 510
+      object Label1: TLabel
+        Left = 4
+        Height = 14
+        Top = 18
+        Width = 28
+        Caption = 'Name'
+        ParentColor = False
+      end
+      object Label2: TLabel
+        Left = 4
+        Height = 14
+        Top = 59
+        Width = 67
+        Caption = 'Inheritts from'
+        ParentColor = False
+      end
+      object edtName: TEdit
+        Left = 92
+        Height = 23
+        Top = 18
+        Width = 406
+        Anchors = [akTop, akLeft, akRight]
+        TabOrder = 0
+      end
+      object GroupBox1: TGroupBox
+        Left = 4
+        Height = 312
+        Top = 98
+        Width = 495
+        Anchors = [akTop, akLeft, akRight, akBottom]
+        Caption = '  Properties  '
+        ClientHeight = 294
+        ClientWidth = 491
+        TabOrder = 1
+        object edtProp: TListView
+          Height = 294
+          Width = 491
+          Align = alClient
+          BorderWidth = 2
+          Columns = <          
+            item
+              AutoSize = True
+              Caption = 'Name'
+              Width = 210
+            end          
+            item
+              Caption = 'Type'
+              Width = 200
+            end          
+            item
+              Caption = 'Attrbute'
+            end>
+          PopupMenu = PopupMenu1
+          RowSelect = True
+          TabOrder = 0
+          ViewStyle = vsReport
+          OnDblClick = edtPropDblClick
+        end
+      end
+      object Button3: TButton
+        Left = 4
+        Height = 25
+        Top = 421
+        Width = 100
+        Action = actPropAdd
+        Anchors = [akLeft, akBottom]
+        BorderSpacing.InnerBorder = 4
+        TabOrder = 2
+      end
+      object Button4: TButton
+        Left = 116
+        Height = 25
+        Top = 421
+        Width = 100
+        Action = actPropEdit
+        Anchors = [akLeft, akBottom]
+        BorderSpacing.InnerBorder = 4
+        TabOrder = 3
+      end
+      object Button5: TButton
+        Left = 228
+        Height = 25
+        Top = 421
+        Width = 100
+        Action = actPropDelete
+        Anchors = [akLeft, akBottom]
+        BorderSpacing.InnerBorder = 4
+        TabOrder = 4
+      end
+      object edtParent: TComboBox
+        Left = 92
+        Height = 21
+        Top = 58
+        Width = 406
+        Anchors = [akTop, akLeft, akRight]
+        AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
+        ItemHeight = 13
+        MaxLength = 0
+        Style = csDropDownList
+        TabOrder = 5
+      end
+    end
+  end
+  object ActionList1: TActionList
+    left = 232
+    top = 200
+    object actOK: TAction
+      Caption = 'OK'
+      DisableIfNoHandler = True
+      OnExecute = actOKExecute
+      OnUpdate = actOKUpdate
+    end
+    object actPropAdd: TAction
+      Caption = 'New Property'
+      DisableIfNoHandler = True
+      OnExecute = actPropAddExecute
+    end
+    object actPropEdit: TAction
+      Caption = 'Edit Property'
+      DisableIfNoHandler = True
+      OnExecute = actPropEditExecute
+      OnUpdate = actPropEditUpdate
+    end
+    object actPropDelete: TAction
+      Caption = 'Delete Property'
+      DisableIfNoHandler = True
+      OnExecute = actPropDeleteExecute
+      OnUpdate = actPropEditUpdate
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    left = 105
+    top = 186
+    object MenuItem1: TMenuItem
+      Action = actPropAdd
+      OnClick = actPropAddExecute
+    end
+    object MenuItem2: TMenuItem
+      Action = actPropEdit
+      OnClick = actPropEditExecute
+    end
+    object MenuItem3: TMenuItem
+      Action = actPropDelete
+      OnClick = actPropDeleteExecute
+    end
+  end
+end

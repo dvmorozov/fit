@@ -1,0 +1,99 @@
+object fTypeAliasEdit: TfTypeAliasEdit
+  Left = 693
+  Height = 300
+  Top = 186
+  Width = 400
+  HorzScrollBar.Page = 399
+  VertScrollBar.Page = 299
+  ActiveControl = Button1
+  BorderStyle = bsSizeToolWin
+  Caption = 'fTypeAliasEdit'
+  Position = poScreenCenter
+  object Panel1: TPanel
+    Height = 50
+    Top = 250
+    Width = 400
+    Align = alBottom
+    TabOrder = 0
+    object Button1: TButton
+      Left = 232
+      Height = 25
+      Top = 14
+      Width = 75
+      Action = actOK
+      Anchors = [akTop, akRight]
+      BorderSpacing.InnerBorder = 4
+      TabOrder = 0
+    end
+    object Button2: TButton
+      Left = 312
+      Height = 25
+      Top = 14
+      Width = 75
+      Anchors = [akTop, akRight]
+      BorderSpacing.InnerBorder = 4
+      Cancel = True
+      Caption = 'Cancel'
+      TabOrder = 1
+    end
+  end
+  object PageControl1: TPageControl
+    Height = 250
+    Width = 400
+    ActivePage = TabSheet1
+    Align = alClient
+    TabIndex = 0
+    TabOrder = 1
+    object TabSheet1: TTabSheet
+      Caption = 'Type Alias'
+      object Label1: TLabel
+        Left = 20
+        Height = 14
+        Top = 26
+        Width = 28
+        Caption = 'Name'
+        Color = clNone
+        ParentColor = False
+      end
+      object Label2: TLabel
+        Left = 20
+        Height = 14
+        Top = 114
+        Width = 51
+        Caption = 'Base Type'
+        Color = clNone
+        ParentColor = False
+      end
+      object edtName: TEdit
+        Left = 20
+        Height = 23
+        Top = 42
+        Width = 352
+        Anchors = [akTop, akLeft, akRight]
+        TabOrder = 0
+      end
+      object edtBaseType: TComboBox
+        Left = 20
+        Height = 21
+        Top = 130
+        Width = 352
+        Anchors = [akTop, akLeft, akRight]
+        AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
+        ItemHeight = 13
+        MaxLength = 0
+        Style = csDropDownList
+        TabOrder = 1
+      end
+    end
+  end
+  object AL: TActionList
+    left = 147
+    top = 120
+    object actOK: TAction
+      Caption = 'OK'
+      DisableIfNoHandler = True
+      OnExecute = actOKExecute
+      OnUpdate = actOKUpdate
+    end
+  end
+end

@@ -1,0 +1,8 @@
+{ Ceci est un fichier ressource généré automatiquement par Lazarus }
+
+LazarusResources.Add('TfInterfaceEdit','FORMDATA',[
+  'TPF0'#15'TfInterfaceEdit'#14'fInterfaceEdit'#4'Left'#3#19#1#6'Height'#3'i'#1
+  +#3'Top'#3#30#1#5'Width'#3#224#1#18'HorzScrollBar.Page'#3#223#1#18'VertScroll'
+  +'Bar.Page'#3'h'#1#7'Caption'#6#14'fInterfaceEdit'#8'Position'#7#15'poDesktop'
+  +'Center'#0#0
+]);

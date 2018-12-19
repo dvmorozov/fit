@@ -1,0 +1,418 @@
+<?xml version="1.0"?>
+<CONFIG>
+  <ProjectOptions>
+    <PathDelim Value="\"/>
+    <Version Value="5"/>
+    <General>
+      <MainUnit Value="0"/>
+      <IconPath Value="./"/>
+      <TargetFileExt Value=".exe"/>
+      <ActiveEditorIndexAtStart Value="2"/>
+    </General>
+    <VersionInfo>
+      <ProjectVersion Value=""/>
+    </VersionInfo>
+    <PublishOptions>
+      <Version Value="2"/>
+      <IgnoreBinaries Value="False"/>
+      <IncludeFileFilter Value="*.(pas|pp|inc|lfm|lpr|lrs|lpi|lpk|sh|xml)"/>
+      <ExcludeFileFilter Value="*.(bak|ppu|ppw|o|so);*~;backup"/>
+    </PublishOptions>
+    <RunParams>
+      <local>
+        <FormatVersion Value="1"/>
+        <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
+      </local>
+    </RunParams>
+    <RequiredPackages Count="1">
+      <Item1>
+        <PackageName Value="LCL"/>
+      </Item1>
+    </RequiredPackages>
+    <Units Count="40">
+      <Unit0>
+        <Filename Value="test_import.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="test_import"/>
+        <CursorPos X="1" Y="17"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="73"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="..\wstimportdlg.pas"/>
+        <ComponentName Value="formImport"/>
+        <IsPartOfProject Value="True"/>
+        <ResourceFilename Value="..\wstimportdlg.lrs"/>
+        <UnitName Value="wstimportdlg"/>
+        <CursorPos X="1" Y="5"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="0"/>
+        <UsageCount Value="73"/>
+        <Loaded Value="True"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="..\..\..\..\..\..\..\lazarus_23_215\lcl\interfaces\win32\interfaces.pp"/>
+        <UnitName Value="Interfaces"/>
+        <CursorPos X="41" Y="11"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="7"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="..\..\..\ws_helper\command_line_parser.pas"/>
+        <UnitName Value="command_line_parser"/>
+        <CursorPos X="1" Y="31"/>
+        <TopLine Value="16"/>
+        <UsageCount Value="7"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="..\..\..\ws_helper\pscanner.pp"/>
+        <UnitName Value="PScanner"/>
+        <CursorPos X="12" Y="76"/>
+        <TopLine Value="323"/>
+        <UsageCount Value="14"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="..\..\..\ws_helper\pascal_parser_intf.pas"/>
+        <UnitName Value="pascal_parser_intf"/>
+        <CursorPos X="1" Y="390"/>
+        <TopLine Value="375"/>
+        <EditorIndex Value="8"/>
+        <UsageCount Value="35"/>
+        <Loaded Value="True"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="..\..\..\..\..\..\..\lazarus_23_215\fpc\2.1.5\source\rtl\win32\classes.pp"/>
+        <UnitName Value="Classes"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="7"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="..\..\..\ws_helper\wsdl2pas_imp.pas"/>
+        <UnitName Value="wsdl2pas_imp"/>
+        <CursorPos X="18" Y="747"/>
+        <TopLine Value="736"/>
+        <EditorIndex Value="7"/>
+        <UsageCount Value="36"/>
+        <Loaded Value="True"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="..\..\..\ws_helper\logger_intf.pas"/>
+        <UnitName Value="logger_intf"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="7"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="..\..\..\ws_helper\source_utils.pas"/>
+        <UnitName Value="source_utils"/>
+        <CursorPos X="14" Y="311"/>
+        <TopLine Value="291"/>
+        <EditorIndex Value="9"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="..\..\..\ws_helper\generator.pas"/>
+        <UnitName Value="generator"/>
+        <CursorPos X="31" Y="1645"/>
+        <TopLine Value="1633"/>
+        <EditorIndex Value="6"/>
+        <UsageCount Value="36"/>
+        <Loaded Value="True"/>
+      </Unit10>
+      <Unit11>
+        <Filename Value="..\..\..\ws_helper\metadata_generator.pas"/>
+        <UnitName Value="metadata_generator"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="5"/>
+        <UsageCount Value="36"/>
+        <Loaded Value="True"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="..\..\..\binary_streamer.pas"/>
+        <UnitName Value="binary_streamer"/>
+        <CursorPos X="23" Y="21"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="7"/>
+      </Unit12>
+      <Unit13>
+        <Filename Value="..\..\..\ws_helper\wst_resources_utils.pas"/>
+        <UnitName Value="wst_resources_utils"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="2"/>
+        <UsageCount Value="36"/>
+        <Loaded Value="True"/>
+      </Unit13>
+      <Unit14>
+        <Filename Value="..\..\..\wst_rtti_filter\cursor_intf.pas"/>
+        <UnitName Value="cursor_intf"/>
+        <CursorPos X="2" Y="13"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="4"/>
+        <UsageCount Value="16"/>
+        <Loaded Value="True"/>
+      </Unit14>
+      <Unit15>
+        <Filename Value="..\..\..\wst_rtti_filter\dom_cursors.pas"/>
+        <UnitName Value="dom_cursors"/>
+        <CursorPos X="1" Y="227"/>
+        <TopLine Value="205"/>
+        <UsageCount Value="16"/>
+      </Unit15>
+      <Unit16>
+        <Filename Value="..\..\..\ws_helper\parserutils.pas"/>
+        <UnitName Value="parserutils"/>
+        <CursorPos X="9" Y="91"/>
+        <TopLine Value="39"/>
+        <UsageCount Value="11"/>
+      </Unit16>
+      <Unit17>
+        <Filename Value="..\..\..\wst_rtti_filter\rtti_filters.pas"/>
+        <UnitName Value="rtti_filters"/>
+        <CursorPos X="1" Y="565"/>
+        <TopLine Value="543"/>
+        <UsageCount Value="11"/>
+      </Unit17>
+      <Unit18>
+        <Filename Value="..\..\..\wst.inc"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="7"/>
+      </Unit18>
+      <Unit19>
+        <Filename Value="..\..\..\wst_delphi.inc"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="7"/>
+      </Unit19>
+      <Unit20>
+        <Filename Value="..\..\..\ws_helper\pastree.pp"/>
+        <UnitName Value="PasTree"/>
+        <CursorPos X="3" Y="663"/>
+        <TopLine Value="659"/>
+        <UsageCount Value="16"/>
+      </Unit20>
+      <Unit21>
+        <Filename Value="uform2.pas"/>
+        <ComponentName Value="Form2"/>
+        <IsPartOfProject Value="True"/>
+        <ResourceFilename Value="uform2.lrs"/>
+        <UnitName Value="uform2"/>
+        <CursorPos X="45" Y="28"/>
+        <TopLine Value="19"/>
+        <EditorIndex Value="3"/>
+        <UsageCount Value="73"/>
+        <Loaded Value="True"/>
+      </Unit21>
+      <Unit22>
+        <Filename Value="..\..\..\..\..\..\..\lazarus_23_215\fpc\2.1.5\source\rtl\inc\heaptrc.pp"/>
+        <UnitName Value="heaptrc"/>
+        <CursorPos X="29" Y="46"/>
+        <TopLine Value="34"/>
+        <UsageCount Value="7"/>
+      </Unit22>
+      <Unit23>
+        <Filename Value="..\..\..\..\..\..\..\lazarus_23_215\fpc\2.1.5\source\rtl\inc\objpash.inc"/>
+        <CursorPos X="22" Y="149"/>
+        <TopLine Value="135"/>
+        <UsageCount Value="7"/>
+      </Unit23>
+      <Unit24>
+        <Filename Value="..\..\..\..\..\..\..\lazarus_23_215\fpc\2.1.5\source\packages\fcl-base\src\inc\contnrs.pp"/>
+        <UnitName Value="contnrs"/>
+        <CursorPos X="15" Y="125"/>
+        <TopLine Value="111"/>
+        <UsageCount Value="7"/>
+      </Unit24>
+      <Unit25>
+        <Filename Value="..\..\..\..\..\..\..\lazarus_23_215\fpc\2.1.5\source\rtl\objpas\sysutils\sysutils.inc"/>
+        <CursorPos X="1" Y="109"/>
+        <TopLine Value="95"/>
+        <UsageCount Value="7"/>
+      </Unit25>
+      <Unit26>
+        <Filename Value="..\..\..\..\..\..\..\lazarus_23_215\fpc\2.1.5\source\rtl\inc\objpas.inc"/>
+        <CursorPos X="66" Y="85"/>
+        <TopLine Value="58"/>
+        <UsageCount Value="11"/>
+      </Unit26>
+      <Unit27>
+        <Filename Value="..\..\..\..\..\..\..\lazarus_23_215\fpc\2.1.5\source\rtl\inc\wstrings.inc"/>
+        <CursorPos X="1" Y="188"/>
+        <TopLine Value="174"/>
+        <UsageCount Value="7"/>
+      </Unit27>
+      <Unit28>
+        <Filename Value="..\..\..\..\..\..\..\lazarus_23_215\fpc\2.1.5\source\rtl\objpas\classes\lists.inc"/>
+        <CursorPos X="1" Y="388"/>
+        <TopLine Value="374"/>
+        <UsageCount Value="7"/>
+      </Unit28>
+      <Unit29>
+        <Filename Value="..\..\..\..\..\..\..\lazarus_23_215\fpc\2.1.5\source\rtl\inc\heap.inc"/>
+        <CursorPos X="1" Y="607"/>
+        <TopLine Value="595"/>
+        <UsageCount Value="11"/>
+      </Unit29>
+      <Unit30>
+        <Filename Value="..\..\..\ws_helper\pparser.pp"/>
+        <UnitName Value="PParser"/>
+        <CursorPos X="22" Y="49"/>
+        <TopLine Value="32"/>
+        <UsageCount Value="15"/>
+      </Unit30>
+      <Unit31>
+        <Filename Value="..\..\..\..\..\..\..\lazarus2204\lcl\include\screen.inc"/>
+        <CursorPos X="1" Y="471"/>
+        <TopLine Value="457"/>
+        <UsageCount Value="7"/>
+      </Unit31>
+      <Unit32>
+        <Filename Value="..\wst_register.pas"/>
+        <UnitName Value="wst_register"/>
+        <CursorPos X="14" Y="6"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="1"/>
+        <UsageCount Value="30"/>
+        <Loaded Value="True"/>
+      </Unit32>
+      <Unit33>
+        <Filename Value="..\..\..\..\..\..\..\lazarus_23_215XX\lcl\graphics.pp"/>
+        <UnitName Value="Graphics"/>
+        <CursorPos X="15" Y="36"/>
+        <TopLine Value="26"/>
+        <UsageCount Value="8"/>
+      </Unit33>
+      <Unit34>
+        <Filename Value="..\..\..\..\..\..\..\lazarus_23_215XX\fpc\source\rtl\inc\heaptrc.pp"/>
+        <UnitName Value="heaptrc"/>
+        <CursorPos X="8" Y="115"/>
+        <TopLine Value="109"/>
+        <UsageCount Value="8"/>
+      </Unit34>
+      <Unit35>
+        <Filename Value="..\..\..\..\..\..\..\lazarus2204\lcl\interfaces\win32\win32memostrings.inc"/>
+        <CursorPos X="1" Y="74"/>
+        <TopLine Value="60"/>
+        <UsageCount Value="8"/>
+      </Unit35>
+      <Unit36>
+        <Filename Value="..\..\..\..\..\..\..\lazarus_23_215XX\fpc\source\rtl\objpas\classes\classesh.inc"/>
+        <CursorPos X="14" Y="242"/>
+        <TopLine Value="220"/>
+        <UsageCount Value="8"/>
+      </Unit36>
+      <Unit37>
+        <Filename Value="..\..\..\..\..\..\..\lazarus_23_215XX\fpc\source\rtl\objpas\sysutils\sysutilh.inc"/>
+        <CursorPos X="13" Y="233"/>
+        <TopLine Value="196"/>
+        <UsageCount Value="8"/>
+      </Unit37>
+      <Unit38>
+        <Filename Value="..\..\..\..\..\..\..\lazarus_23_215XX\lcl\include\screen.inc"/>
+        <CursorPos X="1" Y="480"/>
+        <TopLine Value="465"/>
+        <UsageCount Value="10"/>
+      </Unit38>
+      <Unit39>
+        <Filename Value="..\..\..\service_intf.pas"/>
+        <UnitName Value="service_intf"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="10"/>
+      </Unit39>
+    </Units>
+    <JumpHistory Count="5" HistoryIndex="4">
+      <Position1>
+        <Filename Value="..\..\..\wst_rtti_filter\cursor_intf.pas"/>
+        <Caret Line="99" Column="1" TopLine="77"/>
+      </Position1>
+      <Position2>
+        <Filename Value="..\..\..\ws_helper\wst_resources_utils.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
+      </Position2>
+      <Position3>
+        <Filename Value="..\wstimportdlg.pas"/>
+        <Caret Line="256" Column="22" TopLine="233"/>
+      </Position3>
+      <Position4>
+        <Filename Value="..\wstimportdlg.pas"/>
+        <Caret Line="12" Column="31" TopLine="54"/>
+      </Position4>
+      <Position5>
+        <Filename Value="..\..\..\ws_helper\wst_resources_utils.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
+      </Position5>
+    </JumpHistory>
+  </ProjectOptions>
+  <CompilerOptions>
+    <Version Value="5"/>
+    <PathDelim Value="\"/>
+    <SearchPaths>
+      <IncludeFiles Value="..\..\..\"/>
+      <OtherUnitFiles Value="..\;..\..\..\;..\..\..\ws_helper\;..\..\..\wst_rtti_filter\"/>
+      <UnitOutputDirectory Value="obj"/>
+    </SearchPaths>
+    <Parsing>
+      <SyntaxOptions>
+        <IncludeAssertionCode Value="True"/>
+        <UseAnsiStrings Value="True"/>
+      </SyntaxOptions>
+    </Parsing>
+    <CodeGeneration>
+      <SmartLinkUnit Value="True"/>
+      <Generate Value="Faster"/>
+      <Optimizations>
+        <OptimizationLevel Value="2"/>
+      </Optimizations>
+    </CodeGeneration>
+    <Linking>
+      <Debugging>
+        <UseLineInfoUnit Value="False"/>
+      </Debugging>
+      <LinkSmart Value="True"/>
+      <Options>
+        <Win32>
+          <GraphicApplication Value="True"/>
+        </Win32>
+      </Options>
+    </Linking>
+    <Other>
+      <CompilerPath Value="$(CompPath)"/>
+    </Other>
+  </CompilerOptions>
+  <Debugging>
+    <BreakPoints Count="2">
+      <Item1>
+        <Source Value="..\..\..\ws_helper\wsdl2pas_imp.pas"/>
+        <Line Value="1359"/>
+      </Item1>
+      <Item2>
+        <Source Value="..\..\..\ws_helper\source_utils.pas"/>
+        <Line Value="207"/>
+      </Item2>
+    </BreakPoints>
+    <Watches Count="3">
+      <Item1>
+        <Expression Value="FName"/>
+      </Item1>
+      <Item2>
+        <Expression Value="FRefCount"/>
+      </Item2>
+      <Item3>
+        <Expression Value="Self"/>
+      </Item3>
+    </Watches>
+    <Exceptions Count="2">
+      <Item1>
+        <Name Value="ECodetoolError"/>
+      </Item1>
+      <Item2>
+        <Name Value="EFOpenError"/>
+      </Item2>
+    </Exceptions>
+  </Debugging>
+</CONFIG>

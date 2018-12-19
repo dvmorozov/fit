@@ -1,0 +1,1 @@
+C:\Programmes\lazarus\wst\ws_helper\ws_helper -u -i -p -b -a"C:\Programmes\lazarus\wst\tests\files" "C:\Programmes\lazarus\wst\tests\files\metadata_service.wsdl" >test_res_metadata_service.txt

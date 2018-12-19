@@ -1,0 +1,266 @@
+<?xml version="1.0"?>
+<CONFIG>
+  <ProjectOptions>
+    <PathDelim Value="\"/>
+    <Version Value="5"/>
+    <General>
+      <MainUnit Value="0"/>
+      <IconPath Value="./"/>
+      <TargetFileExt Value=".exe"/>
+      <ActiveEditorIndexAtStart Value="0"/>
+    </General>
+    <PublishOptions>
+      <Version Value="2"/>
+      <IgnoreBinaries Value="False"/>
+      <IncludeFileFilter Value="*.(pas|pp|inc|lfm|lpr|lrs|lpi|lpk|sh|xml)"/>
+      <ExcludeFileFilter Value="*.(bak|ppu|ppw|o|so);*~;backup"/>
+    </PublishOptions>
+    <RunParams>
+      <local>
+        <FormatVersion Value="1"/>
+        <CommandLineParams Value="-a"/>
+        <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
+      </local>
+    </RunParams>
+    <RequiredPackages Count="1">
+      <Item1>
+        <PackageName Value="FCL"/>
+      </Item1>
+    </RequiredPackages>
+    <Units Count="22">
+      <Unit0>
+        <Filename Value="rtti_filters_tests.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="rtti_filters_tests"/>
+        <CursorPos X="9" Y="15"/>
+        <TopLine Value="49"/>
+        <UsageCount Value="67"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="tests.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="tests"/>
+        <CursorPos X="41" Y="861"/>
+        <TopLine Value="873"/>
+        <EditorIndex Value="0"/>
+        <UsageCount Value="67"/>
+        <Loaded Value="True"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="rtti_filters.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="rtti_filters"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="1"/>
+        <UsageCount Value="67"/>
+        <Loaded Value="True"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="cursor_intf.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="cursor_intf"/>
+        <CursorPos X="31" Y="19"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="2"/>
+        <UsageCount Value="67"/>
+        <Loaded Value="True"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="D:\Lazarus\fpcsrc\rtl\objpas\typinfo.pp"/>
+        <UnitName Value="typinfo"/>
+        <CursorPos X="67" Y="40"/>
+        <TopLine Value="27"/>
+        <UsageCount Value="9"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="D:\Lazarus\fpcsrc\rtl\inc\objpash.inc"/>
+        <CursorPos X="23" Y="138"/>
+        <TopLine Value="128"/>
+        <UsageCount Value="6"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="D:\Lazarus\fpcsrc\fcl\fpcunit\DUnitCompatibleInterface.inc"/>
+        <CursorPos X="13" Y="134"/>
+        <TopLine Value="119"/>
+        <UsageCount Value="8"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="D:\Lazarus\fpcsrc\fcl\fpcunit\testregistry.pp"/>
+        <UnitName Value="testregistry"/>
+        <CursorPos X="11" Y="29"/>
+        <TopLine Value="19"/>
+        <UsageCount Value="5"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="D:\Lazarus\fpcsrc\fcl\fpcunit\fpcunit.pp"/>
+        <UnitName Value="fpcunit"/>
+        <CursorPos X="3" Y="542"/>
+        <TopLine Value="540"/>
+        <UsageCount Value="8"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="D:\Lazarus\fpcsrc\fcl\inc\contnrs.pp"/>
+        <UnitName Value="contnrs"/>
+        <CursorPos X="26" Y="72"/>
+        <TopLine Value="66"/>
+        <UsageCount Value="8"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="std_cursors.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="std_cursors"/>
+        <CursorPos X="54" Y="68"/>
+        <TopLine Value="50"/>
+        <EditorIndex Value="3"/>
+        <UsageCount Value="48"/>
+        <Loaded Value="True"/>
+      </Unit10>
+      <Unit11>
+        <Filename Value="D:\Lazarus\fpcsrc\rtl\objpas\classes\classesh.inc"/>
+        <CursorPos X="3" Y="186"/>
+        <TopLine Value="204"/>
+        <UsageCount Value="8"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="D:\Lazarus\fpcsrc\rtl\objpas\classes\lists.inc"/>
+        <CursorPos X="3" Y="355"/>
+        <TopLine Value="353"/>
+        <UsageCount Value="8"/>
+      </Unit12>
+      <Unit13>
+        <Filename Value="test_std_cursors.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="test_std_cursors"/>
+        <CursorPos X="48" Y="202"/>
+        <TopLine Value="190"/>
+        <EditorIndex Value="5"/>
+        <UsageCount Value="48"/>
+        <Loaded Value="True"/>
+      </Unit13>
+      <Unit14>
+        <Filename Value="..\..\..\..\lazarusClean\fpc\2.0.4\source\rtl\objpas\typinfo.pp"/>
+        <UnitName Value="typinfo"/>
+        <CursorPos X="26" Y="68"/>
+        <TopLine Value="54"/>
+        <UsageCount Value="15"/>
+      </Unit14>
+      <Unit15>
+        <Filename Value="..\..\..\..\lazarusClean\fpc\2.0.4\source\rtl\objpas\sysutils\sysstrh.inc"/>
+        <CursorPos X="10" Y="80"/>
+        <TopLine Value="67"/>
+        <UsageCount Value="8"/>
+      </Unit15>
+      <Unit16>
+        <Filename Value="..\..\..\..\lazarusClean\fpc\2.0.4\source\rtl\objpas\sysutils\sysstr.inc"/>
+        <CursorPos X="53" Y="453"/>
+        <TopLine Value="451"/>
+        <UsageCount Value="8"/>
+      </Unit16>
+      <Unit17>
+        <Filename Value="..\..\..\..\lazarusClean\fpc\2.0.4\source\rtl\inc\wstringh.inc"/>
+        <CursorPos X="5" Y="67"/>
+        <TopLine Value="53"/>
+        <UsageCount Value="8"/>
+      </Unit17>
+      <Unit18>
+        <Filename Value="dom_cursors.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="dom_cursors"/>
+        <CursorPos X="46" Y="168"/>
+        <TopLine Value="120"/>
+        <EditorIndex Value="4"/>
+        <UsageCount Value="39"/>
+        <Loaded Value="True"/>
+      </Unit18>
+      <Unit19>
+        <Filename Value="..\..\..\..\lazarusClean\fpc\2.0.4\source\fcl\xml\dom.pp"/>
+        <UnitName Value="DOM"/>
+        <CursorPos X="15" Y="426"/>
+        <TopLine Value="412"/>
+        <UsageCount Value="13"/>
+      </Unit19>
+      <Unit20>
+        <Filename Value="..\..\..\..\lazarusClean\fpc\2.0.4\source\rtl\objpas\classes\classesh.inc"/>
+        <CursorPos X="14" Y="1168"/>
+        <TopLine Value="1154"/>
+        <UsageCount Value="13"/>
+      </Unit20>
+      <Unit21>
+        <Filename Value="..\..\..\..\lazarusClean\fpc\2.0.4\source\rtl\objpas\classes\parser.inc"/>
+        <CursorPos X="3" Y="303"/>
+        <TopLine Value="297"/>
+        <UsageCount Value="13"/>
+      </Unit21>
+    </Units>
+    <JumpHistory Count="0" HistoryIndex="-1"/>
+  </ProjectOptions>
+  <CompilerOptions>
+    <Version Value="5"/>
+    <PathDelim Value="\"/>
+    <Target>
+      <Filename Value="rtti_filters_tests.exe"/>
+    </Target>
+    <SearchPaths>
+      <UnitOutputDirectory Value="obj"/>
+    </SearchPaths>
+    <Parsing>
+      <SyntaxOptions>
+        <IncludeAssertionCode Value="True"/>
+      </SyntaxOptions>
+    </Parsing>
+    <CodeGeneration>
+      <Generate Value="Faster"/>
+    </CodeGeneration>
+    <Other>
+      <CustomOptions Value="-Xi
+"/>
+      <CompilerPath Value="$(CompPath)"/>
+    </Other>
+  </CompilerOptions>
+  <Debugging>
+    <BreakPoints Count="9">
+      <Item1>
+        <Source Value="..\v0.3\tests\google_api\home\inoussa\Projets\Laz\tests\soap\test_soap.pas"/>
+        <Line Value="15"/>
+      </Item1>
+      <Item2>
+        <Source Value="..\v0.3\tests\google_api\home\inoussa\Projets\Laz\tests\soap\test_soap.pas"/>
+        <Line Value="16"/>
+      </Item2>
+      <Item3>
+        <Source Value="..\v0.3\tests\google_api\home\inoussa\Projets\Laz\tests\soap\test_soap.pas"/>
+        <Line Value="18"/>
+      </Item3>
+      <Item4>
+        <Source Value="..\v0.3\tests\google_api\home\inoussa\Projets\Laz\tests\soap\googleintfimpunit.pas"/>
+        <Line Value="63"/>
+      </Item4>
+      <Item5>
+        <Source Value="..\v0.3\tests\google_api\home\inoussa\Projets\Laz\v0.2\indy_http_protocol.pas"/>
+        <Line Value="69"/>
+      </Item5>
+      <Item6>
+        <Source Value="..\v0.3\tests\google_api\home\inoussa\Projets\Laz\v0.2\service_intf.pas"/>
+        <Line Value="567"/>
+      </Item6>
+      <Item7>
+        <Source Value="..\v0.3\tests\google_api\home\inoussa\Projets\Laz\v0.2\imp_utils.pas"/>
+        <Line Value="83"/>
+      </Item7>
+      <Item8>
+        <Source Value="tests.pas"/>
+        <Line Value="830"/>
+      </Item8>
+      <Item9>
+        <Source Value="tests.pas"/>
+        <Line Value="919"/>
+      </Item9>
+    </BreakPoints>
+    <Watches Count="1">
+      <Item1>
+        <Expression Value="ASource.Memory^"/>
+      </Item1>
+    </Watches>
+  </Debugging>
+</CONFIG>

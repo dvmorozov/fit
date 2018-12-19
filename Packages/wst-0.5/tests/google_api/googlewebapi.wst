@@ -1,0 +1,13 @@
+  GetWSTResourceManager().AddResource('GOOGLEWEBAPI',
+    #0#0#0#20'WST_METADATA_0.2.2.0'#0#0#0#12'googlewebapi'#1#0#0#0#13'IGoogleSea'
+    +'rch'#2#0#0#0#20'doSpellingSuggestion'#3#0#0#0#3'key'#0#0#0#6'string'#0#0#0#0
+    +#0#0#0#1#0#0#0#6'phrase'#0#0#0#6'string'#0#0#0#0#0#0#0#1#0#0#0#6'result'#0#0
+    +#0#6'string'#0#0#0#0#0#0#0#3#0#0#0#14'doGoogleSearch'#11#0#0#0#3'key'#0#0#0#6
+    +'string'#0#0#0#0#0#0#0#1#0#0#0#1'q'#0#0#0#6'string'#0#0#0#0#0#0#0#1#0#0#0#5's'
+    +'tart'#0#0#0#7'Integer'#0#0#0#0#0#0#0#1#0#0#0#10'maxResults'#0#0#0#7'Integer'
+    +#0#0#0#0#0#0#0#1#0#0#0#6'filter'#0#0#0#7'Boolean'#0#0#0#0#0#0#0#1#0#0#0#8're'
+    +'strict'#0#0#0#6'string'#0#0#0#0#0#0#0#1#0#0#0#10'safeSearch'#0#0#0#7'Boolea'
+    +'n'#0#0#0#0#0#0#0#1#0#0#0#2'lr'#0#0#0#6'string'#0#0#0#0#0#0#0#1#0#0#0#2'ie'#0
+    +#0#0#6'string'#0#0#0#0#0#0#0#1#0#0#0#2'oe'#0#0#0#6'string'#0#0#0#0#0#0#0#1#0
+    +#0#0#6'result'#0#0#0#19'TGoogleSearchResult'#0#0#0#0#0#0#0#3''
+  );

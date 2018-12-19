@@ -1,0 +1,9 @@
+  GetWSTResourceManager().AddResource('EBAY',
+    #0#0#0#20'WST_METADATA_0.2.2.0'#0#0#0#4'ebay'#1#0#0#0#24'IeBayAPIInterfaceSe'
+    +'rvice'#2#0#0#0#13'GetCategories'#2#0#0#0#20'GetCategoriesRequest'#0#0#0#25'T'
+    +'GetCategoriesRequestType'#0#0#0#0#0#0#0#1#0#0#0#21'GetCategoriesResponse'#0
+    +#0#0#26'TGetCategoriesResponseType'#0#0#0#0#0#0#0#3#0#0#0#18'GetPopularKeywo'
+    +'rds'#2#0#0#0#25'GetPopularKeywordsRequest'#0#0#0#30'TGetPopularKeywordsRequ'
+    +'estType'#0#0#0#0#0#0#0#1#0#0#0#26'GetPopularKeywordsResponse'#0#0#0#31'TGet'
+    +'PopularKeywordsResponseType'#0#0#0#0#0#0#0#3''
+  );

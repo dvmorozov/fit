@@ -1,0 +1,1 @@
+..\..\wst\ws_helper\ws_helper -p -o. "user_service_intf.wsdl" >extract_proxy.res.txt

@@ -1,0 +1,395 @@
+<?xml version="1.0"?>
+<CONFIG>
+  <ProjectOptions>
+    <PathDelim Value="\"/>
+    <Version Value="5"/>
+    <General>
+      <MainUnit Value="0"/>
+      <IconPath Value="./"/>
+      <TargetFileExt Value=".exe"/>
+      <ActiveEditorIndexAtStart Value="5"/>
+    </General>
+    <VersionInfo>
+      <ProjectVersion Value=""/>
+      <Language Value=""/>
+      <CharSet Value=""/>
+    </VersionInfo>
+    <PublishOptions>
+      <Version Value="2"/>
+      <IgnoreBinaries Value="False"/>
+      <IncludeFileFilter Value="*.(pas|pp|inc|lfm|lpr|lrs|lpi|lpk|sh|xml)"/>
+      <ExcludeFileFilter Value="*.(bak|ppu|ppw|o|so);*~;backup"/>
+    </PublishOptions>
+    <RunParams>
+      <local>
+        <FormatVersion Value="1"/>
+        <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
+      </local>
+    </RunParams>
+    <RequiredPackages Count="1">
+      <Item1>
+        <PackageName Value="LCL"/>
+      </Item1>
+    </RequiredPackages>
+    <Units Count="24">
+      <Unit0>
+        <Filename Value="amazon.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="amazon"/>
+        <CursorPos X="1" Y="17"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="107"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="umain.pas"/>
+        <ComponentName Value="fMain"/>
+        <IsPartOfProject Value="True"/>
+        <ResourceFilename Value="umain.lrs"/>
+        <UnitName Value="umain"/>
+        <CursorPos X="3" Y="9"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="0"/>
+        <UsageCount Value="107"/>
+        <Loaded Value="True"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="..\files\free\AWSECommerceService.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="AWSECommerceService"/>
+        <CursorPos X="3" Y="19328"/>
+        <TopLine Value="19324"/>
+        <UsageCount Value="107"/>
+        <Bookmarks Count="2">
+          <Item0 X="5" Y="3387" ID="1"/>
+          <Item1 X="12" Y="2429" ID="2"/>
+        </Bookmarks>
+      </Unit2>
+      <Unit3>
+        <Filename Value="..\..\base_service_intf.pas"/>
+        <UnitName Value="base_service_intf"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="5"/>
+        <UsageCount Value="48"/>
+        <Loaded Value="True"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="..\..\service_intf.pas"/>
+        <UnitName Value="service_intf"/>
+        <CursorPos X="1" Y="253"/>
+        <TopLine Value="238"/>
+        <EditorIndex Value="2"/>
+        <UsageCount Value="45"/>
+        <Bookmarks Count="1">
+          <Item0 X="41" Y="178" ID="3"/>
+        </Bookmarks>
+        <Loaded Value="True"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="..\..\metadata_repository.pas"/>
+        <UnitName Value="metadata_repository"/>
+        <CursorPos X="78" Y="117"/>
+        <TopLine Value="148"/>
+        <EditorIndex Value="7"/>
+        <UsageCount Value="22"/>
+        <Loaded Value="True"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="..\..\wst_resources_imp.pas"/>
+        <UnitName Value="wst_resources_imp"/>
+        <CursorPos X="3" Y="182"/>
+        <TopLine Value="183"/>
+        <UsageCount Value="5"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="..\files\free\AWSECommerceService_proxy.pas"/>
+        <UnitName Value="AWSECommerceService_proxy"/>
+        <CursorPos X="1" Y="86"/>
+        <TopLine Value="84"/>
+        <UsageCount Value="39"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="..\..\soap_formatter.pas"/>
+        <UnitName Value="soap_formatter"/>
+        <CursorPos X="10" Y="254"/>
+        <TopLine Value="221"/>
+        <UsageCount Value="36"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="..\..\synapse_http_protocol.pas"/>
+        <UnitName Value="synapse_http_protocol"/>
+        <CursorPos X="1" Y="151"/>
+        <TopLine Value="140"/>
+        <EditorIndex Value="3"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="..\..\imp_utils.pas"/>
+        <UnitName Value="imp_utils"/>
+        <CursorPos X="1" Y="86"/>
+        <TopLine Value="74"/>
+        <EditorIndex Value="4"/>
+        <UsageCount Value="39"/>
+        <Loaded Value="True"/>
+      </Unit10>
+      <Unit11>
+        <Filename Value="..\..\base_soap_formatter.pas"/>
+        <UnitName Value="base_soap_formatter"/>
+        <CursorPos X="1" Y="1659"/>
+        <TopLine Value="1647"/>
+        <EditorIndex Value="6"/>
+        <UsageCount Value="40"/>
+        <Loaded Value="True"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="..\..\..\..\..\lazarusClean\fpc\2.0.4\source\rtl\objpas\typinfo.pp"/>
+        <UnitName Value="typinfo"/>
+        <CursorPos X="3" Y="925"/>
+        <TopLine Value="921"/>
+        <UsageCount Value="6"/>
+      </Unit12>
+      <Unit13>
+        <Filename Value="..\..\ics_http_protocol.pas"/>
+        <UnitName Value="ics_http_protocol"/>
+        <CursorPos X="1" Y="183"/>
+        <TopLine Value="161"/>
+        <UsageCount Value="13"/>
+      </Unit13>
+      <Unit14>
+        <Filename Value="..\..\..\..\..\lazarusClean\fpc\2.0.4\source\fcl\xml\dom.pp"/>
+        <UnitName Value="DOM"/>
+        <CursorPos X="15" Y="269"/>
+        <TopLine Value="256"/>
+        <UsageCount Value="6"/>
+      </Unit14>
+      <Unit15>
+        <Filename Value="..\..\..\..\..\lazarusClean\others_package\ics\latest_distr\Delphi\Vc32\HttpProt.pas"/>
+        <UnitName Value="HttpProt"/>
+        <CursorPos X="1" Y="2555"/>
+        <TopLine Value="2544"/>
+        <UsageCount Value="6"/>
+      </Unit15>
+      <Unit16>
+        <Filename Value="..\..\..\..\..\lazarusClean\fpc\2.0.4\source\rtl\objpas\sysutils\sysstrh.inc"/>
+        <CursorPos X="10" Y="112"/>
+        <TopLine Value="91"/>
+        <UsageCount Value="7"/>
+      </Unit16>
+      <Unit17>
+        <Filename Value="..\..\..\..\..\lazarus211\fpc\2.1.1\source\packages\fcl-xml\src\dom.pp"/>
+        <UnitName Value="DOM"/>
+        <CursorPos X="17" Y="302"/>
+        <TopLine Value="289"/>
+        <UsageCount Value="8"/>
+      </Unit17>
+      <Unit18>
+        <Filename Value="..\..\..\..\..\lazarus211\fpc\2.1.1\source\rtl\i386\i386.inc"/>
+        <CursorPos X="3" Y="1284"/>
+        <TopLine Value="1270"/>
+        <UsageCount Value="9"/>
+      </Unit18>
+      <Unit19>
+        <Filename Value="..\..\..\..\..\lazarus211\fpc\2.1.1\source\rtl\inc\except.inc"/>
+        <CursorPos X="1" Y="223"/>
+        <TopLine Value="210"/>
+        <UsageCount Value="9"/>
+      </Unit19>
+      <Unit20>
+        <Filename Value="..\..\..\..\..\lazarus211\fpc\2.1.1\source\rtl\objpas\typinfo.pp"/>
+        <UnitName Value="typinfo"/>
+        <CursorPos X="68" Y="116"/>
+        <TopLine Value="115"/>
+        <UsageCount Value="8"/>
+      </Unit20>
+      <Unit21>
+        <Filename Value="..\..\..\..\..\lazarus211\fpc\2.1.1\source\rtl\inc\objpas.inc"/>
+        <CursorPos X="1" Y="58"/>
+        <TopLine Value="45"/>
+        <UsageCount Value="9"/>
+      </Unit21>
+      <Unit22>
+        <Filename Value="..\..\..\..\..\lazarus211\fpc\2.1.1\source\rtl\i386\setjump.inc"/>
+        <CursorPos X="3" Y="36"/>
+        <TopLine Value="20"/>
+        <UsageCount Value="9"/>
+      </Unit22>
+      <Unit23>
+        <Filename Value="..\files\AWSECommerceService.pas"/>
+        <UnitName Value="AWSECommerceService"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="186"/>
+        <EditorIndex Value="1"/>
+        <UsageCount Value="13"/>
+        <Loaded Value="True"/>
+      </Unit23>
+    </Units>
+    <JumpHistory Count="18" HistoryIndex="17">
+      <Position1>
+        <Filename Value="umain.pas"/>
+        <Caret Line="60" Column="34" TopLine="50"/>
+      </Position1>
+      <Position2>
+        <Filename Value="umain.pas"/>
+        <Caret Line="9" Column="3" TopLine="1"/>
+      </Position2>
+      <Position3>
+        <Filename Value="..\files\AWSECommerceService.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
+      </Position3>
+      <Position4>
+        <Filename Value="..\files\AWSECommerceService.pas"/>
+        <Caret Line="2760" Column="44" TopLine="2748"/>
+      </Position4>
+      <Position5>
+        <Filename Value="..\files\AWSECommerceService.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
+      </Position5>
+      <Position6>
+        <Filename Value="..\files\AWSECommerceService.pas"/>
+        <Caret Line="2760" Column="44" TopLine="2748"/>
+      </Position6>
+      <Position7>
+        <Filename Value="..\files\AWSECommerceService.pas"/>
+        <Caret Line="2777" Column="52" TopLine="2755"/>
+      </Position7>
+      <Position8>
+        <Filename Value="..\files\AWSECommerceService.pas"/>
+        <Caret Line="11628" Column="43" TopLine="11606"/>
+      </Position8>
+      <Position9>
+        <Filename Value="..\files\AWSECommerceService.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
+      </Position9>
+      <Position10>
+        <Filename Value="..\files\AWSECommerceService.pas"/>
+        <Caret Line="201" Column="18" TopLine="179"/>
+      </Position10>
+      <Position11>
+        <Filename Value="..\files\AWSECommerceService.pas"/>
+        <Caret Line="2760" Column="39" TopLine="2738"/>
+      </Position11>
+      <Position12>
+        <Filename Value="..\files\AWSECommerceService.pas"/>
+        <Caret Line="1" Column="1" TopLine="186"/>
+      </Position12>
+      <Position13>
+        <Filename Value="..\..\imp_utils.pas"/>
+        <Caret Line="87" Column="25" TopLine="64"/>
+      </Position13>
+      <Position14>
+        <Filename Value="..\..\service_intf.pas"/>
+        <Caret Line="576" Column="1" TopLine="551"/>
+      </Position14>
+      <Position15>
+        <Filename Value="..\..\imp_utils.pas"/>
+        <Caret Line="88" Column="56" TopLine="64"/>
+      </Position15>
+      <Position16>
+        <Filename Value="..\..\imp_utils.pas"/>
+        <Caret Line="86" Column="1" TopLine="74"/>
+      </Position16>
+      <Position17>
+        <Filename Value="..\..\service_intf.pas"/>
+        <Caret Line="253" Column="1" TopLine="238"/>
+      </Position17>
+      <Position18>
+        <Filename Value="..\..\base_service_intf.pas"/>
+        <Caret Line="1699" Column="1" TopLine="1686"/>
+      </Position18>
+    </JumpHistory>
+  </ProjectOptions>
+  <CompilerOptions>
+    <Version Value="5"/>
+    <PathDelim Value="\"/>
+    <SearchPaths>
+      <OtherUnitFiles Value="..\files\;$(LazarusDir)\others_package\synapse\;..\..\;$(LazarusDir)\others_package\ics\latest_distr\Delphi\Vc32\"/>
+      <SrcPath Value="$(LazarusDir)\lcl\;$(LazarusDir)\lcl\interfaces\$(LCLWidgetType)\;$(LazarusDir)\others_package\synapse\"/>
+    </SearchPaths>
+    <CodeGeneration>
+      <Generate Value="Faster"/>
+    </CodeGeneration>
+    <Linking>
+      <Options>
+        <Win32>
+          <GraphicApplication Value="True"/>
+        </Win32>
+      </Options>
+    </Linking>
+    <Other>
+      <CompilerPath Value="$(CompPath)"/>
+    </Other>
+  </CompilerOptions>
+  <Debugging>
+    <BreakPoints Count="15">
+      <Item1>
+        <Source Value="..\google_api\home\inoussa\Projets\Laz\tests\soap\test_soap.pas"/>
+        <Line Value="15"/>
+      </Item1>
+      <Item2>
+        <Source Value="..\google_api\home\inoussa\Projets\Laz\tests\soap\test_soap.pas"/>
+        <Line Value="16"/>
+      </Item2>
+      <Item3>
+        <Source Value="..\google_api\home\inoussa\Projets\Laz\tests\soap\test_soap.pas"/>
+        <Line Value="18"/>
+      </Item3>
+      <Item4>
+        <Source Value="..\google_api\home\inoussa\Projets\Laz\tests\soap\googleintfimpunit.pas"/>
+        <Line Value="63"/>
+      </Item4>
+      <Item5>
+        <Source Value="..\google_api\home\inoussa\Projets\Laz\v0.2\indy_http_protocol.pas"/>
+        <Line Value="69"/>
+      </Item5>
+      <Item6>
+        <Source Value="..\google_api\home\inoussa\Projets\Laz\v0.2\service_intf.pas"/>
+        <Line Value="567"/>
+      </Item6>
+      <Item7>
+        <Source Value="..\google_api\home\inoussa\Projets\Laz\v0.2\imp_utils.pas"/>
+        <Line Value="83"/>
+      </Item7>
+      <Item8>
+        <Source Value="..\test_suite\testformatter_unit.pas"/>
+        <Line Value="572"/>
+      </Item8>
+      <Item9>
+        <Source Value="..\test_suite\testformatter_unit.pas"/>
+        <Line Value="587"/>
+      </Item9>
+      <Item10>
+        <Source Value="..\test_suite\testformatter_unit.pas"/>
+        <Line Value="588"/>
+      </Item10>
+      <Item11>
+        <Source Value="..\test_suite\testformatter_unit.pas"/>
+        <Line Value="571"/>
+      </Item11>
+      <Item12>
+        <Source Value="..\test_suite\testformatter_unit.pas"/>
+        <Line Value="570"/>
+      </Item12>
+      <Item13>
+        <Source Value="..\test_suite\testformatter_unit.pas"/>
+        <Line Value="568"/>
+      </Item13>
+      <Item14>
+        <Source Value="..\test_suite\testformatter_unit.pas"/>
+        <Line Value="909"/>
+      </Item14>
+      <Item15>
+        <Source Value="..\..\base_service_intf.pas"/>
+        <Line Value="3662"/>
+      </Item15>
+    </BreakPoints>
+    <Watches Count="2">
+      <Item1>
+        <Expression Value="FScopeObject.Name"/>
+      </Item1>
+      <Item2>
+        <Expression Value="AOwner^.DataType"/>
+      </Item2>
+    </Watches>
+  </Debugging>
+</CONFIG>

@@ -1,0 +1,136 @@
+object frmSaveOptions: TfrmSaveOptions
+  Left = 775
+  Height = 292
+  Top = 93
+  Width = 402
+  HorzScrollBar.Page = 401
+  VertScrollBar.Page = 291
+  ActiveControl = edtInterface
+  BorderStyle = bsSizeToolWin
+  Caption = 'Export file options ...'
+  Position = poMainFormCenter
+  object Panel1: TPanel
+    Height = 50
+    Top = 242
+    Width = 402
+    Align = alBottom
+    TabOrder = 0
+    object Button1: TButton
+      Left = 312
+      Height = 25
+      Top = 14
+      Width = 75
+      Anchors = [akTop, akRight]
+      BorderSpacing.InnerBorder = 4
+      Cancel = True
+      Caption = 'Cancel'
+      ModalResult = 2
+      TabOrder = 0
+    end
+    object Button2: TButton
+      Left = 224
+      Height = 25
+      Top = 14
+      Width = 75
+      Action = actOK
+      Anchors = [akTop, akRight]
+      BorderSpacing.InnerBorder = 4
+      Default = True
+      TabOrder = 1
+    end
+  end
+  object Panel2: TPanel
+    Height = 242
+    Width = 402
+    Align = alClient
+    TabOrder = 1
+    object Label1: TLabel
+      Left = 16
+      Height = 14
+      Top = 16
+      Width = 81
+      Caption = 'Output directory'
+      Color = clNone
+      ParentColor = False
+    end
+    object GroupBox1: TGroupBox
+      Left = 16
+      Height = 134
+      Top = 80
+      Width = 369
+      Anchors = [akTop, akLeft, akRight, akBottom]
+      Caption = '  File type  '
+      TabOrder = 0
+      object edtInterface: TCheckBox
+        Left = 14
+        Height = 13
+        Top = 16
+        Width = 62
+        Caption = 'Interface'
+        TabOrder = 0
+      end
+      object edtProxy: TCheckBox
+        Left = 14
+        Height = 13
+        Top = 72
+        Width = 46
+        Anchors = [akLeft, akBottom]
+        Caption = 'Proxy'
+        TabOrder = 1
+      end
+      object edtImplementation: TCheckBox
+        Left = 245
+        Height = 13
+        Top = 14
+        Width = 91
+        Anchors = [akTop, akRight]
+        Caption = 'Implementation'
+        TabOrder = 2
+      end
+      object edtBinder: TCheckBox
+        Left = 245
+        Height = 13
+        Top = 72
+        Width = 50
+        Anchors = [akRight, akBottom]
+        Caption = 'Binder'
+        TabOrder = 3
+      end
+    end
+    object edtOutputDir: TEdit
+      Left = 16
+      Height = 23
+      Top = 38
+      Width = 336
+      Anchors = [akTop, akLeft, akRight]
+      TabOrder = 1
+    end
+    object btnSelectDir: TButton
+      Left = 362
+      Height = 25
+      Top = 36
+      Width = 25
+      Anchors = [akTop, akRight]
+      BorderSpacing.InnerBorder = 4
+      Caption = '...'
+      OnClick = btnSelectDirClick
+      TabOrder = 2
+    end
+  end
+  object AL: TActionList
+    left = 144
+    top = 160
+    object actOK: TAction
+      Caption = 'OK'
+      DisableIfNoHandler = True
+      OnExecute = actOKExecute
+      OnUpdate = actOKUpdate
+    end
+  end
+  object SD: TSelectDirectoryDialog
+    Title = 'Choisir un répertoire'
+    FilterIndex = 0
+    left = 101
+    top = 142
+  end
+end

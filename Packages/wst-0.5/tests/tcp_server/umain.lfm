@@ -1,0 +1,75 @@
+object fMain: TfMain
+  Left = 290
+  Height = 300
+  Top = 180
+  Width = 400
+  HorzScrollBar.Page = 399
+  VertScrollBar.Page = 299
+  ActiveControl = Button1
+  Caption = 'Simple TCP App Server'
+  OnCreate = FormCreate
+  object Label1: TLabel
+    Left = 16
+    Height = 18
+    Top = 72
+    Width = 24
+    Caption = 'Log'
+    Color = clNone
+    ParentColor = False
+  end
+  object Button1: TButton
+    Left = 16
+    Height = 25
+    Top = 8
+    Width = 104
+    Action = actStart
+    TabOrder = 0
+  end
+  object mmoLog: TMemo
+    Left = 8
+    Height = 192
+    Top = 96
+    Width = 384
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    ReadOnly = True
+    ScrollBars = ssAutoBoth
+    TabOrder = 1
+  end
+  object Button2: TButton
+    Left = 16
+    Height = 25
+    Top = 40
+    Width = 104
+    Action = actStop
+    TabOrder = 2
+  end
+  object edtPort: TEdit
+    Left = 128
+    Height = 23
+    Top = 10
+    Width = 80
+    TabOrder = 3
+    Text = '1234'
+  end
+  object AL: TActionList
+    left = 152
+    top = 32
+    object actStart: TAction
+      Caption = 'Start( Port=)'
+      DisableIfNoHandler = True
+      OnExecute = actStartExecute
+      OnUpdate = actStartUpdate
+    end
+    object actStop: TAction
+      Caption = 'Stop'
+      DisableIfNoHandler = True
+      OnExecute = actStopExecute
+      OnUpdate = actStopUpdate
+    end
+    object actClearLog: TAction
+      Caption = 'Clear Log'
+      DisableIfNoHandler = True
+      OnExecute = actClearLogExecute
+    end
+  end
+end

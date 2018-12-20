@@ -18,3 +18,5 @@ Curve fitting application
 [fitgrids](https://github.com/dvmorozov/fitgrids.git)
 
 [fitminimizers](https://github.com/dvmorozov/fitminimizers.git)
+
+Install components into Lazarus, set up included directories into project properties and rebuild the project.

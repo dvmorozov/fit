@@ -13,7 +13,7 @@
     </General>
     <VersionInfo>
       <AutoIncrementBuild Value="True"/>
-      <BuildNr Value="1051"/>
+      <BuildNr Value="1052"/>
       <StringTable ProductVersion="0.0.0.1001"/>
     </VersionInfo>
     <BuildModes Count="2">
@@ -121,7 +121,8 @@
         <ComponentName Value="FormMain"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="-1"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="2"/>
         <WindowIndex Value="1"/>
         <TopLine Value="639"/>
         <CursorPos X="38" Y="659"/>
@@ -129,6 +130,8 @@
         <Bookmarks Count="1">
           <Item0 Y="476"/>
         </Bookmarks>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit1>
       <Unit2>
@@ -144,7 +147,7 @@
       <Unit3>
         <Filename Value="PointSetViewer.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="7"/>
         <WindowIndex Value="1"/>
         <TopLine Value="291"/>
         <CursorPos X="53" Y="295"/>
@@ -294,7 +297,7 @@
       </Unit18>
       <Unit19>
         <Filename Value="SelfCopied.pas"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="3"/>
         <WindowIndex Value="1"/>
         <TopLine Value="34"/>
         <CursorPos X="19" Y="43"/>
@@ -411,7 +414,6 @@
       <Unit33>
         <Filename Value="FitServer.pas"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <WindowIndex Value="1"/>
         <TopLine Value="2181"/>
@@ -423,7 +425,7 @@
       <Unit34>
         <Filename Value="FitClient.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="7"/>
+        <EditorIndex Value="8"/>
         <WindowIndex Value="1"/>
         <TopLine Value="657"/>
         <CursorPos X="41" Y="667"/>
@@ -444,7 +446,7 @@
       <Unit36>
         <Filename Value="FitClientStub.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="9"/>
+        <EditorIndex Value="10"/>
         <WindowIndex Value="1"/>
         <TopLine Value="24"/>
         <CursorPos Y="41"/>
@@ -455,7 +457,7 @@
       <Unit37>
         <Filename Value="FitServerStub.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="10"/>
+        <EditorIndex Value="11"/>
         <WindowIndex Value="1"/>
         <TopLine Value="403"/>
         <CursorPos X="33" Y="411"/>
@@ -466,7 +468,7 @@
       <Unit38>
         <Filename Value="FitServerProxy.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="5"/>
         <WindowIndex Value="1"/>
         <TopLine Value="20"/>
         <CursorPos X="13" Y="37"/>
@@ -477,7 +479,7 @@
       <Unit39>
         <Filename Value="FitClientProxy.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="11"/>
+        <EditorIndex Value="12"/>
         <WindowIndex Value="1"/>
         <TopLine Value="1154"/>
         <CursorPos X="41" Y="1169"/>
@@ -513,7 +515,7 @@
       <Unit43>
         <Filename Value="FitTaskWithThread.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="8"/>
+        <EditorIndex Value="9"/>
         <WindowIndex Value="1"/>
         <TopLine Value="91"/>
         <CursorPos X="5" Y="104"/>
@@ -524,7 +526,7 @@
       <Unit44>
         <Filename Value="FitTask.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="6"/>
         <WindowIndex Value="1"/>
         <TopLine Value="1560"/>
         <CursorPos X="37" Y="1575"/>
@@ -757,11 +759,11 @@
       </Unit72>
       <Unit73>
         <Filename Value="fit_server.pas"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="4"/>
         <WindowIndex Value="1"/>
         <TopLine Value="2"/>
         <CursorPos X="34" Y="11"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="12"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit73>
@@ -885,7 +887,7 @@
       <Define3 Value="WINDOWS"/>
       <Define4 Value="Lazarus"/>
     </OtherDefines>
-    <JumpHistory Count="30" HistoryIndex="29">
+    <JumpHistory Count="29" HistoryIndex="28">
       <Position1>
         <Filename Value="FitServer.pas"/>
         <Caret Line="1616" Column="30" TopLine="1608"/>
@@ -968,44 +970,40 @@
       </Position20>
       <Position21>
         <Filename Value="FitTask.pas"/>
-        <Caret Line="235" Column="20" TopLine="244"/>
+        <Caret Line="1198" Column="25" TopLine="1182"/>
       </Position21>
       <Position22>
         <Filename Value="FitTask.pas"/>
-        <Caret Line="1198" Column="25" TopLine="1182"/>
+        <Caret Line="1228" Column="29" TopLine="1212"/>
       </Position22>
       <Position23>
         <Filename Value="FitTask.pas"/>
-        <Caret Line="1228" Column="29" TopLine="1212"/>
+        <Caret Line="1242" Column="32" TopLine="1238"/>
       </Position23>
       <Position24>
         <Filename Value="FitTask.pas"/>
-        <Caret Line="1242" Column="32" TopLine="1238"/>
+        <Caret Line="1249" Column="22" TopLine="1238"/>
       </Position24>
       <Position25>
         <Filename Value="FitTask.pas"/>
-        <Caret Line="1249" Column="22" TopLine="1238"/>
+        <Caret Line="1254" Column="56" TopLine="1238"/>
       </Position25>
       <Position26>
         <Filename Value="FitTask.pas"/>
-        <Caret Line="1254" Column="56" TopLine="1238"/>
+        <Caret Line="1275" Column="48" TopLine="1260"/>
       </Position26>
       <Position27>
         <Filename Value="FitTask.pas"/>
-        <Caret Line="1275" Column="48" TopLine="1260"/>
+        <Caret Line="1484" Column="29" TopLine="1469"/>
       </Position27>
       <Position28>
         <Filename Value="FitTask.pas"/>
-        <Caret Line="1484" Column="29" TopLine="1469"/>
+        <Caret Line="1522" Column="37" TopLine="1507"/>
       </Position28>
       <Position29>
         <Filename Value="FitTask.pas"/>
-        <Caret Line="1522" Column="37" TopLine="1507"/>
-      </Position29>
-      <Position30>
-        <Filename Value="FitTask.pas"/>
         <Caret Line="1575" Column="37" TopLine="1560"/>
-      </Position30>
+      </Position29>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

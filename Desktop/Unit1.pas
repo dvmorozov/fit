@@ -25,7 +25,7 @@ uses
 {$IFDEF WINDOWS}
     ,Windows, CommCtrl
 {$ENDIF}
-    ,ColorBox;
+    ,ColorBox, Buttons;
 type
 	{ States of results grid window. }
     TResState = (
@@ -85,15 +85,12 @@ type
     ActionQuit: TAction;
     ActionList1: TActionList;
     ApplicationProperties1: TApplicationProperties;
-    ButAddSelectedDataPoint2: TButton;
     ButAddSelectedDataPointToPositions: TButton;
     ButAddSelectedPointToIntervals: TButton;
-    ButBackAuto2: TButton;
     ButBackAuto3: TButton;
     ButCopy2: TButton;
     ButCopy3: TButton;
     ButCopy4: TButton;
-    ButRemoveBack2: TButton;
     ButRemoveBack3: TButton;
     ButRemoveRFactorIntervals1: TButton;
     ButRFactorIntervalsAuto1: TButton;
@@ -102,7 +99,6 @@ type
     ButSaveAsText2: TButton;
     ButSaveAsText3: TButton;
     ButSaveAsText4: TButton;
-    ButSubtractBackSelected1: TButton;
     ButZoomIn: TButton;
     ButZoomOut: TButton;
     CheckListBoxLegend: TCheckListBox;
@@ -144,7 +140,6 @@ type
     PanelIntervals: TPanel;
     PanelDatasheet: TPanel;
     PanelSpecPositions: TPanel;
-    Panel7: TPanel;
     Panel8: TPanel;
     Panel9: TPanel;
     PanelBackground: TPanel;
@@ -188,6 +183,10 @@ type
     TimerAsync: TTimer;
     TimerBalloonHide: TTimer;
     TimerBalloonShow: TTimer;
+    ToolBar1: TToolBar;
+    ToolButton1: TToolButton;
+    ToolButton2: TToolButton;
+    ToolButton3: TToolButton;
     ToolButton4: TToolButton;
     UseRule: TMenuItem;
     SinThetaLambda: TMenuItem;

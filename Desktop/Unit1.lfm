@@ -1,13 +1,13 @@
 object FormMain: TFormMain
-  Left = 244
-  Height = 758
-  Top = 199
+  Left = 584
+  Height = 762
+  Top = 174
   Width = 1278
   HorzScrollBar.Page = 1191
   VertScrollBar.Page = 502
   ActiveControl = PanelTop
   Caption = 'FormMain'
-  ClientHeight = 733
+  ClientHeight = 737
   ClientWidth = 1278
   DesignTimePPI = 120
   Font.Height = -11
@@ -22,7 +22,7 @@ object FormMain: TFormMain
   object StatusBar: TStatusBar
     Left = 0
     Height = 28
-    Top = 705
+    Top = 709
     Width = 1278
     Panels = <    
       item
@@ -39,11 +39,11 @@ object FormMain: TFormMain
   object PageControl1: TPageControl
     Left = 0
     Height = 144
-    Top = 561
+    Top = 565
     Width = 1278
-    ActivePage = TabSheetIntervals
+    ActivePage = TabSheetSpecPositions
     Align = alBottom
-    TabIndex = 1
+    TabIndex = 2
     TabOrder = 4
     object TabSheetBackground: TTabSheet
       Caption = 'Background Points'
@@ -210,18 +210,18 @@ object FormMain: TFormMain
         Left = 0
         Height = 115
         Top = 0
-        Width = 830
+        Width = 1270
         Align = alClient
         BevelOuter = bvNone
         ClientHeight = 115
-        ClientWidth = 830
+        ClientWidth = 1270
         ParentColor = False
         TabOrder = 0
         object GridSpecPositions: TNumericGrid
-          Left = 0
+          Left = 30
           Height = 115
           Top = 0
-          Width = 830
+          Width = 1240
           Align = alClient
           AutoEdit = False
           Color = clBtnFace
@@ -250,54 +250,28 @@ object FormMain: TFormMain
           Width = 5
           TabOrder = 1
         end
-      end
-      object Panel9: TPanel
-        Left = 834
-        Height = 115
-        Top = 0
-        Width = 436
-        Align = alRight
-        BevelOuter = bvNone
-        BorderStyle = bsSingle
-        ClientHeight = 111
-        ClientWidth = 432
-        ParentColor = False
-        TabOrder = 1
-        object ButBackAuto3: TButton
-          Left = 8
-          Height = 23
-          Top = 8
-          Width = 135
-          Action = ActionSelSpecPosAuto
-          TabOrder = 0
-        end
-        object ButAddSelectedDataPointToPositions: TButton
-          Left = 147
-          Height = 23
-          Top = 8
-          Width = 194
-          Caption = 'Add / Remove Selected Data Point'
-          OnClick = ButAddSelectedDataPointToPositionsClick
-          TabOrder = 1
-        end
-        object ButRemoveBack3: TButton
-          Left = 345
-          Height = 23
-          Top = 8
-          Width = 80
-          Action = ActionRemoveSpecPos
+        object ToolBar3: TToolBar
+          Left = 0
+          Height = 115
+          Top = 0
+          Width = 30
+          Align = alLeft
+          AutoSize = True
+          Caption = 'ToolBar3'
+          Flat = False
+          Images = ImageList2
           TabOrder = 2
+          object ToolButton6: TToolButton
+            Left = 1
+            Top = 2
+            Action = ActionSelSpecPosAuto
+          end
+          object ToolButton8: TToolButton
+            Left = 1
+            Top = 30
+            Action = ActionRemoveSpecPos
+          end
         end
-      end
-      object SplitterLeft3: TSplitter
-        Left = 830
-        Height = 115
-        Top = 0
-        Width = 4
-        Align = alRight
-        Color = clGrayText
-        ParentColor = False
-        ResizeAnchor = akRight
       end
     end
     object TabSheetParameters: TTabSheet
@@ -487,7 +461,7 @@ object FormMain: TFormMain
     Cursor = crVSplit
     Left = 0
     Height = 8
-    Top = 553
+    Top = 557
     Width = 1278
     Align = alBottom
     Beveled = True
@@ -497,7 +471,7 @@ object FormMain: TFormMain
   end
   object SplitterLeftChart: TSplitter
     Left = 164
-    Height = 518
+    Height = 522
     Top = 35
     Width = 5
     Beveled = True
@@ -506,24 +480,24 @@ object FormMain: TFormMain
   end
   object PanelRight: TPanel
     Left = 1116
-    Height = 518
+    Height = 522
     Top = 35
     Width = 162
     Align = alRight
     BevelOuter = bvNone
-    ClientHeight = 518
+    ClientHeight = 522
     ClientWidth = 162
     ParentColor = False
     TabOrder = 3
     TabStop = True
     object Panel2: TPanel
       Left = 0
-      Height = 518
+      Height = 522
       Top = 0
       Width = 162
       Align = alClient
       BevelOuter = bvNone
-      ClientHeight = 518
+      ClientHeight = 522
       ClientWidth = 162
       TabOrder = 0
       TabStop = True
@@ -538,7 +512,7 @@ object FormMain: TFormMain
       object Label1: TLabel
         Left = 8
         Height = 14
-        Top = 446
+        Top = 450
         Width = 48
         Anchors = [akLeft, akBottom]
         AutoSize = False
@@ -548,7 +522,7 @@ object FormMain: TFormMain
       object LabelAngle: TLabel
         Left = 58
         Height = 16
-        Top = 446
+        Top = 450
         Width = 96
         Anchors = [akLeft, akBottom]
         AutoSize = False
@@ -557,7 +531,7 @@ object FormMain: TFormMain
       object Label2: TLabel
         Left = 8
         Height = 14
-        Top = 466
+        Top = 470
         Width = 48
         Anchors = [akLeft, akBottom]
         AutoSize = False
@@ -567,7 +541,7 @@ object FormMain: TFormMain
       object LabelIntensity: TLabel
         Left = 58
         Height = 16
-        Top = 466
+        Top = 470
         Width = 96
         Anchors = [akLeft, akBottom]
         AutoSize = False
@@ -576,7 +550,7 @@ object FormMain: TFormMain
       object Label3: TLabel
         Left = 8
         Height = 14
-        Top = 486
+        Top = 490
         Width = 48
         Anchors = [akLeft, akBottom]
         AutoSize = False
@@ -586,7 +560,7 @@ object FormMain: TFormMain
       object LabelMin: TLabel
         Left = 58
         Height = 16
-        Top = 486
+        Top = 490
         Width = 96
         Anchors = [akLeft, akBottom]
         AutoSize = False
@@ -595,7 +569,7 @@ object FormMain: TFormMain
       object Label6: TLabel
         Left = 8
         Height = 16
-        Top = 428
+        Top = 432
         Width = 21
         Anchors = [akLeft, akBottom]
         Caption = 'Info'
@@ -603,7 +577,7 @@ object FormMain: TFormMain
       end
       object CheckListBoxLegend: TCheckListBox
         Left = 8
-        Height = 405
+        Height = 409
         Top = 18
         Width = 146
         Anchors = [akTop, akLeft, akRight, akBottom]
@@ -619,7 +593,7 @@ object FormMain: TFormMain
   end
   object SplitterChartRight: TSplitter
     Left = 1111
-    Height = 518
+    Height = 522
     Top = 35
     Width = 5
     Align = alRight
@@ -630,19 +604,19 @@ object FormMain: TFormMain
   end
   object PanelChart: TPanel
     Left = 169
-    Height = 518
+    Height = 522
     Top = 35
     Width = 942
     Align = alClient
     BevelOuter = bvNone
-    ClientHeight = 518
+    ClientHeight = 522
     ClientWidth = 942
     ParentColor = False
     TabOrder = 2
     TabStop = True
     object Chart: TTAChart
       Left = 16
-      Height = 480
+      Height = 484
       Top = 0
       Width = 911
       AutoUpdateXMin = True
@@ -671,7 +645,7 @@ object FormMain: TFormMain
     object ScrollBarX: TScrollBar
       Left = 7
       Height = 15
-      Top = 495
+      Top = 499
       Width = 911
       Anchors = [akLeft, akRight, akBottom]
       PageSize = 0
@@ -680,7 +654,7 @@ object FormMain: TFormMain
     end
     object ScrollBarY: TScrollBar
       Left = 923
-      Height = 487
+      Height = 491
       Top = 7
       Width = 15
       Anchors = [akTop, akRight, akBottom]
@@ -699,12 +673,12 @@ object FormMain: TFormMain
   end
   object PanelLeft: TPanel
     Left = 0
-    Height = 518
+    Height = 522
     Top = 35
     Width = 164
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 518
+    ClientHeight = 522
     ClientWidth = 164
     ParentColor = False
     TabOrder = 1
@@ -719,7 +693,7 @@ object FormMain: TFormMain
     end
     object GridData: TNumericGrid
       Left = 8
-      Height = 492
+      Height = 496
       Top = 18
       Width = 160
       Anchors = [akTop, akLeft, akRight, akBottom]
@@ -2308,6 +2282,7 @@ object FormMain: TFormMain
     object ActionSelSpecPosAuto: TAction
       Category = 'Model'
       Caption = 'Generate Automatically'
+      ImageIndex = 11
       OnExecute = ActionSelSpecPosAutoExecute
     end
     object ActionSelSpecPosVis: TAction
@@ -2318,6 +2293,7 @@ object FormMain: TFormMain
     object ActionRemoveSpecPos: TAction
       Category = 'Model'
       Caption = 'Remove All'
+      ImageIndex = 14
       OnExecute = ActionRemoveSpecPosExecute
     end
     object ActionSelCurveBounds: TAction

@@ -85,12 +85,9 @@ type
     ActionQuit: TAction;
     ActionList1: TActionList;
     ApplicationProperties1: TApplicationProperties;
-    ButAddSelectedDataPointToPositions: TButton;
-    ButBackAuto3: TButton;
     ButCopy2: TButton;
     ButCopy3: TButton;
     ButCopy4: TButton;
-    ButRemoveBack3: TButton;
     ButImport: TButton;
     ButDoAllAuto: TButton;
     ButSaveAsText2: TButton;
@@ -137,7 +134,6 @@ type
     PanelIntervals: TPanel;
     PanelDatasheet: TPanel;
     PanelSpecPositions: TPanel;
-    Panel9: TPanel;
     PanelBackground: TPanel;
     SelArea: TMenuItem;
     MenuItem18: TMenuItem;
@@ -163,7 +159,6 @@ type
     ScrollBarX: TScrollBar;
     ScrollBarY: TScrollBar;
     SplitterChartRight: TSplitter;
-    SplitterLeft3: TSplitter;
     SplitterLeft4: TSplitter;
     SplitterLeft5: TSplitter;
     SplitterLeftChart: TSplitter;
@@ -179,12 +174,15 @@ type
     TimerBalloonShow: TTimer;
     ToolBar1: TToolBar;
     ToolBar2: TToolBar;
+    ToolBar3: TToolBar;
     ToolButton1: TToolButton;
     ToolButton2: TToolButton;
     ToolButton3: TToolButton;
     ToolButton4: TToolButton;
     ToolButton5: TToolButton;
+    ToolButton6: TToolButton;
     ToolButton7: TToolButton;
+    ToolButton8: TToolButton;
     UseRule: TMenuItem;
     SinThetaLambda: TMenuItem;
     N2Theta: TMenuItem;

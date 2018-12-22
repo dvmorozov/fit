@@ -1,7 +1,7 @@
 object FormMain: TFormMain
-  Left = 584
+  Left = 562
   Height = 762
-  Top = 174
+  Top = 171
   Width = 1278
   HorzScrollBar.Page = 1191
   VertScrollBar.Page = 502
@@ -41,9 +41,9 @@ object FormMain: TFormMain
     Height = 144
     Top = 565
     Width = 1278
-    ActivePage = TabSheetSpecPositions
+    ActivePage = TabSheetBackground
     Align = alBottom
-    TabIndex = 2
+    TabIndex = 0
     TabOrder = 4
     object TabSheetBackground: TTabSheet
       Caption = 'Background Points'
@@ -283,18 +283,18 @@ object FormMain: TFormMain
         Left = 0
         Height = 115
         Top = 0
-        Width = 1034
+        Width = 1270
         Align = alClient
         BevelOuter = bvNone
         ClientHeight = 115
-        ClientWidth = 1034
+        ClientWidth = 1270
         ParentColor = False
         TabOrder = 0
         object GridParameters: TNumericGrid
-          Left = 0
+          Left = 30
           Height = 115
           Top = 0
-          Width = 1034
+          Width = 1240
           Align = alClient
           AutoEdit = False
           Color = clBtnFace
@@ -323,46 +323,28 @@ object FormMain: TFormMain
           Width = 5
           TabOrder = 1
         end
-      end
-      object Panel10: TPanel
-        Left = 1038
-        Height = 115
-        Top = 0
-        Width = 232
-        Align = alRight
-        BevelOuter = bvNone
-        BorderStyle = bsSingle
-        ClientHeight = 111
-        ClientWidth = 228
-        ParentColor = False
-        TabOrder = 1
-        object ButSaveAsText3: TButton
-          Left = 8
-          Height = 23
-          Top = 8
-          Width = 99
-          Action = ActionSaveAsText
-          TabOrder = 0
+        object ToolBar4: TToolBar
+          Left = 0
+          Height = 115
+          Top = 0
+          Width = 30
+          Align = alLeft
+          AutoSize = True
+          Caption = 'ToolBar4'
+          Flat = False
+          Images = ImageList2
+          TabOrder = 2
+          object ToolButton9: TToolButton
+            Left = 1
+            Top = 2
+            Action = ActionSaveAsText
+          end
+          object ToolButton10: TToolButton
+            Left = 1
+            Top = 30
+            Action = ActionCopy
+          end
         end
-        object ButCopy3: TButton
-          Left = 111
-          Height = 23
-          Top = 8
-          Width = 109
-          Action = ActionCopy
-          ParentBidiMode = False
-          TabOrder = 1
-        end
-      end
-      object SplitterLeft4: TSplitter
-        Left = 1034
-        Height = 115
-        Top = 0
-        Width = 4
-        Align = alRight
-        Color = clGrayText
-        ParentColor = False
-        ResizeAnchor = akRight
       end
     end
     object TabSheetDatasheet: TTabSheet
@@ -374,18 +356,18 @@ object FormMain: TFormMain
         Left = 0
         Height = 115
         Top = 0
-        Width = 1034
+        Width = 1270
         Align = alClient
         BevelOuter = bvNone
         ClientHeight = 115
-        ClientWidth = 1034
+        ClientWidth = 1270
         ParentColor = False
         TabOrder = 0
         object GridDatasheet: TNumericGrid
-          Left = 0
+          Left = 30
           Height = 115
           Top = 0
-          Width = 1034
+          Width = 1240
           Align = alClient
           AutoEdit = False
           Color = clBtnFace
@@ -414,46 +396,28 @@ object FormMain: TFormMain
           Width = 5
           TabOrder = 1
         end
-      end
-      object Panel11: TPanel
-        Left = 1038
-        Height = 115
-        Top = 0
-        Width = 232
-        Align = alRight
-        BevelOuter = bvNone
-        BorderStyle = bsSingle
-        ClientHeight = 111
-        ClientWidth = 228
-        ParentColor = False
-        TabOrder = 1
-        object ButSaveAsText2: TButton
-          Left = 8
-          Height = 23
-          Top = 8
-          Width = 99
-          Action = ActionSaveAsText
-          TabOrder = 0
+        object ToolBar5: TToolBar
+          Left = 0
+          Height = 115
+          Top = 0
+          Width = 30
+          Align = alLeft
+          AutoSize = True
+          Caption = 'ToolBar5'
+          Flat = False
+          Images = ImageList2
+          TabOrder = 2
+          object ToolButton11: TToolButton
+            Left = 1
+            Top = 2
+            Action = ActionSaveAsText
+          end
+          object ToolButton12: TToolButton
+            Left = 1
+            Top = 30
+            Action = ActionCopy
+          end
         end
-        object ButCopy2: TButton
-          Left = 111
-          Height = 23
-          Top = 8
-          Width = 109
-          Action = ActionCopy
-          ParentBidiMode = False
-          TabOrder = 1
-        end
-      end
-      object SplitterLeft5: TSplitter
-        Left = 1034
-        Height = 115
-        Top = 0
-        Width = 4
-        Align = alRight
-        Color = clGrayText
-        ParentColor = False
-        ResizeAnchor = akRight
       end
     end
   end
@@ -615,10 +579,10 @@ object FormMain: TFormMain
     TabOrder = 2
     TabStop = True
     object Chart: TTAChart
-      Left = 16
-      Height = 484
+      Left = 0
+      Height = 499
       Top = 0
-      Width = 911
+      Width = 919
       AutoUpdateXMin = True
       AutoUpdateXMax = True
       AutoUpdateYMin = True
@@ -636,28 +600,28 @@ object FormMain: TFormMain
       ShowVerticalReticule = False
       ShowReticule = True
       OnDrawReticule = ChartDrawReticule
+      Align = alClient
       ParentShowHint = False
       ShowHint = True
-      Anchors = [akTop, akLeft, akRight, akBottom]
       OnMouseDown = ChartMouseDown
       OnMouseUp = ChartMouseUp
     end
     object ScrollBarX: TScrollBar
-      Left = 7
-      Height = 15
+      Left = 0
+      Height = 23
       Top = 499
-      Width = 911
-      Anchors = [akLeft, akRight, akBottom]
+      Width = 942
+      Align = alBottom
       PageSize = 0
       TabOrder = 1
       OnChange = ScrollBarXChange
     end
     object ScrollBarY: TScrollBar
-      Left = 923
-      Height = 491
-      Top = 7
-      Width = 15
-      Anchors = [akTop, akRight, akBottom]
+      Left = 919
+      Height = 499
+      Top = 0
+      Width = 23
+      Align = alRight
       Kind = sbVertical
       PageSize = 0
       TabOrder = 2
@@ -692,11 +656,11 @@ object FormMain: TFormMain
       ParentColor = False
     end
     object GridData: TNumericGrid
-      Left = 8
-      Height = 496
-      Top = 18
-      Width = 160
-      Anchors = [akTop, akLeft, akRight, akBottom]
+      Left = 0
+      Height = 522
+      Top = 0
+      Width = 164
+      Align = alClient
       BorderStyle = bsNone
       Color = clBtnFace
       ColCount = 2
@@ -1083,43 +1047,6 @@ object FormMain: TFormMain
       end
       object SaveAsText: TMenuItem
         Action = ActionSaveAsText
-        Bitmap.Data = {
-          36040000424D3604000000000000360000002800000010000000100000000100
-          2000000000000004000064000000640000000000000000000000C1761B00C275
-          19FFBD6B13FFB96504FFB96504FFB96504FFBA6504FFBA6504FFBA6504FFBA65
-          04FFBA6504FFBA6504FFBA6504FFBC690AFFB96A15FFC3791FFFD5933DFFEFB7
-          36FFCDC6C0FFE9F8FFFFDBE5F6FFDBE8F8FFDBE8F8FFDBE8F9FFDBE8F8FFDAE7
-          F8FFDBE7F8FFD8E4F5FFE9F6FFFFCDC6C0FFEAA714FFC0761DFFCD9551FFE8AE
-          3CFFDCD7D4FFECE8E9FFADA0A2FFA79B9EFF9E9395FF94898CFF8A8185FF8379
-          7CFF7B7276FF685F64FFECE8E9FFDCD7D4FFE59E20FFC77B25FFD09653FFEAB4
-          47FFDCD7D4FFEFF0EFFFDFDEDCFFE1E0DFFFE0DFDEFFDFE0DDFFE0DFDDFFDFDE
-          DDFFDFE0DEFFDBD9D9FFEDEDEDFFDCD7D4FFE7A62BFFC9802BFFD49B58FFEBB9
-          50FFDCD7D4FFECE8E9FFA99D9FFFA4999EFF9A9194FF92888BFF897F85FF8279
-          7CFF7A7177FF655C62FFECE8E9FFDCD7D4FFE8AC37FFCC8531FFD69E5BFFEDBD
-          5AFFDCD7D4FFFFFFFFFFFFFEFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFDCD7D4FFEAB340FFD08B34FFD9A45EFFF0C2
-          63FFDCD7D4FFECE8E9FFA99D9FFFA4999EFF9A9194FF92888BFF897F85FF8279
-          7CFF7A7177FF655C62FFECE8E9FFDCD7D4FFEDB749FFD2903AFFD8A35CFFF0C6
-          6DFFDCD7D4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFDCD7D4FFEEBD54FFD7963EFFDEAC69FFF9D2
-          81FFC1975CFF9A7B60FF95775EFF97795DFF97795DFF97795DFF97795DFF9779
-          5CFF97795CFF95775EFF9A7A5EFFC19A64FFF7CA6BFFD99B44FFDDAB67FFF6D5
-          8BFFFFD056FFC0A887FFC8C5C9FFCEC6BFFFCDC6C0FFCDC6C0FFCDC6BFFFD6D0
-          CAFFD6D3D0FFCFCED4FFC0A888FFFFD25DFFF3CC75FFDCA148FFDCA966FFF6D9
-          93FFFBC85DFFC2B4A2FFD7DEEBFFDDDDDDFFDCDDDEFFDCDBDDFFE7E8EAFFC8BA
-          A7FFA29692FFC2B4A2FFC6BCA9FFFBCB63FFF3D07EFFE0A74CFFE5B973FFF6DA
-          97FFFBCC62FFC8BAA7FFDDE0E9FFE1DFDDFFE0DFDEFFDFDDDCFFEFF3F9FF9F88
-          6FFFE5AF47FF9E9189FFC7BDB2FFFDCF6AFFF5D484FFE3AC51FFE9BC75FFF8DD
-          9EFFFDCF69FFCEC0AFFFE3E7EFFFE7E5E3FFE6E5E4FFE5E4E2FFF1F6FFFFBAA3
-          86FFFFE873FFB5AB9EFFCAC0B8FFFFD26EFFF9DA8EFFE7B25BFFEAC079FFF8E0
-          9BFFFBD165FFD3C4AFFFEAEEF6FFECEBE8FFECEBE9FFEBE9E6FFFBFFFFFFA28E
-          78FFDEAF4FFFA89C95FFD1C7B9FFFFDA78FFF5D889FFE2A442FFECC47EFFFEF4
-          D5FFFFE290FFDCD7D4FFF5FFFFFFF6FEFFFFF6FEFFFFF6FDFFFFFFFFFFFFDFDD
-          DCFFC8BAA7FFDFDDDCFFE5E4E2FFFFDE88FFE4AA45FFDD973419ECC681FFF0CA
-          82FFF4CA7DFFE8C788FFEFCF94FFEED192F1EDCF92FFEED092FFEED093FFF2D3
-          96FFF7D79BFFF6D69BFFE6C48AFFEBB552FFE19E351100000000
-        }
-        ImageIndex = 0
         OnClick = ActionSaveAsTextExecute
       end
     end
@@ -1233,43 +1160,6 @@ object FormMain: TFormMain
       Caption = '&Edit'
       object Copy: TMenuItem
         Action = ActionCopy
-        Bitmap.Data = {
-          36040000424D3604000000000000360000002800000010000000100000000100
-          2000000000000004000064000000640000000000000000000000000000000000
-          00000000000000000000000000000000000079480AFD99753DFF936E36FF936E
-          36FF936E36FF956E37FF936E37FF936E37FF9B783FFF653300FF000000000000
-          000000000000000000000000000000000000C3AF8FFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA98953FF000000000000
-          000000000000000000000000000000000000C3AF8FFFFFFFFFFFEFEBE1FFF1EC
-          E4FFF1ECE8FFF1EDE2FFEEEADDFFEDE8DFFFFFFFFFFF9A753DFF000000000000
-          000000000000000000000000000000000000C6B290FFFFFFFFFFF2EFE7FFF3F0
-          EAFFF3F0EAFFF3F0EAFFF7F1EDFFF3F1EAFFFFFFFFFF9A753DFF8E6529FDB698
-          70FFB09267FFB09267FFB09369FFA68252FFC1AC8AFFFFFFFFFFF2EFE7FFF3F0
-          EAFFF3F2EBFFF6F2ECFFFAF3F1FFF9F2EDFFFFFFFFFF9A753DFFCBB899FFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFBAA27BFFFFFFFFFFF2EEE6FFF2ED
-          E8FFF6EFECFFF9F8F1FFFBFBF6FFF5EFE9FFFFFFFFFF9C7742FFC4AF8EFFFFFF
-          FFFFEFEAE3FFF1ECE7FFF2F0E9FFEDEADDFFBFA984FFFFFFFFFFF6F3EAFFFAF7
-          F3FFF9F8F8FFF9FBFAFFF7F5F2FFEBE3D9FFF6F6F4FF9A733AFFC4AF8CFFFFFF
-          FFFFF2EDE7FFF3F0EAFFF3F2ECFFF3EDE7FFC2AD8FFFFFFFFFFFF8FAF5FFF9F9
-          FBFFFBFBFDFFF8F7F1FFEEEDE6FFE4DBD3FFE8DFD4FF926C2FFFC4AF8CFFFFFF
-          FFFFF2EDE7FFF3F0E8FFF7F3EDFFF6F1EBFFC7B292FFFFFFFFFFF8F8F8FFF9FB
-          FBFFF9FAF3FFF1EEE3FFDED2C3FFC7B095FFC9B493FF8C6324FFC2AD8AFFFFFF
-          FFFFF3EBE6FFF6F0EBFFF9F4F3FFFAF9F1FFC8B599FFFFFFFFFFF8FAFBFFF9FA
-          F6FFF2ECE2FFE4D9CAFFD0BFA7FFECE3DCFFB5966BFF815309FFC7B699EFFFFF
-          FFFFF7F7EEFFFBF9F9FFFBFBFDFFF6F6F2FFC9B99DFFFFFFFFFFFAFAF7FFF2ED
-          E5FFE3D9D0FFD1BDA2FFC5AE90FFEAE6E1FFB89E73FF00000000CAB99CEFFFFF
-          FFFFF8F8F7FFF9F9FFFFFCFDFCFFEFEBDFFFC9B798FFFFFFFFFFF9F8F6FFEAE0
-          D5FFD6CBB5FFC7AF8BFF9B783AFF9F7F4CFF0000000000000000CEBEA2EFFFFF
-          FFFFF8F8FAFFFAFAF7FFFBFAF3FFC9B499FFC5B090FFC0A584FFC0A584FFC0A5
-          84FFB79B70FFA78954FF8A6220FF000000000000000000000000D1BFA6FFFFFF
-          FFFFF9FBF9FFF2EEEAFFEBE3DAFFCAB598FFF1EAE5FFB6996CFF9C773BFF0000
-          0000000000000000000000000000000000000000000000000000D4C9B3FFFFFF
-          FFFFFCFAF5FFEDE6DCFFDCD0C1FFC0A780FFA98C59FF926929FF000000000000
-          0000000000000000000000000000000000000000000000000000C6B293FFE9E2
-          D7F4D6C6B3FFC9BA9CFFBCA37CFFA3854EFA926C2BFF00000000000000000000
-          0000000000000000000000000000000000000000000000000000
-        }
-        ImageIndex = 1
         OnClick = ActionCopyExecute
       end
       object Delete: TMenuItem
@@ -1660,7 +1550,7 @@ object FormMain: TFormMain
     left = 584
     top = 80
     Bitmap = {
-      4C690F0000001000000010000000ECC681FFF0CA82FFF4CA7DFFE8C788FFEFCF
+      4C69100000001000000010000000ECC681FFF0CA82FFF4CA7DFFE8C788FFEFCF
       94FFEED192F1EDCF92FFEED092FFEED093FFF2D396FFF7D79BFFF6D69BFFE6C4
       8AFFEBB552FFE19E351100000000ECC47EFFFEF4D5FFFFE290FFDCD7D4FFF5FF
       FFFFF6FEFFFFF6FEFFFFF6FDFFFFFFFFFFFFDFDDDCFFC8BAA7FFDFDDDCFFE5E4
@@ -2140,7 +2030,39 @@ object FormMain: TFormMain
       575C000000000000000000000000000000000000000000000000000000000504
       809D110CFCFF04036585000000000000000005068B210504856D0404753A0000
       0000000000000000000000000000000000000000000000000000000000000303
-      5C010B09B6E60403778300000000
+      5C010B09B6E6040377830000000000000000000000000000000000000000EEA4
+      2AFFF1BC5AFFEDAC38FFE9A231FFE3982EFFDE9128FFDC8C25FFCA6713FF0000
+      000000000000000000000000000000000000000000000000000000000000EEB1
+      44FFFFFFFAFFFFF49DFFFFF08EFFFFEB83FFFFE676FFFFE767FFC45E06FF0000
+      000000000000000000000000000000000000000000000000000000000000EDAB
+      3EFFFFFFE3FFFEE789FFFDE17AFFFBDA6FFFFAD063FFFFD555FFC45E07FF0000
+      000000000000000000000000000000000000000000000000000000000000ECAA
+      3DFFFFFFE0FFFEE380FFFCDC72FFF9D365FFF8CD56FFFDCD47FFC55F08FF0000
+      000000000000000000000000000000000000000000000000000000000000EBA8
+      3CFFFFFEDDFFFDE07AFFFBD769FFF9CF5CFFF7CA4DFFFCC63EFFC56009FF0000
+      000000000000000000000000000000000000000000000000000000000000EAA8
+      3DFFFFFCD8FFFBDC71FFF9D260FFF7C952FFF6C443FFF8BC33FFC5600AFF0000
+      000000000000000000000000000000000000000000000000000000000000E8A0
+      37FFFFFDD9FFFBD769FFF8CB55FFF6C749FFF4BD39FFF5B427FFC5610BFF0000
+      0000000000000000000000000000DA8A26FFF8BE33FFF3B83BFFECA01AFFE7A3
+      3BFFFFF7C7FFFAD261FFF7C84EFFF5BF40FFF2B32FFFF3AB1CFFCA6709FFBE51
+      00FFBE5100FFBF5400FFC05500FFC15708FFE4A541FFFFFEC8FFFFFBC8FFFDDE
+      67FFFBD463FFF7CD55FFF5C547FFF3B635FFEFA824FFED9F12FFE99300FFE691
+      01FFF4BA23FFD47A0BFFC05500FF00000000C15505FFE5A63FFFFFFCCCFFFDE9
+      A2FFF8C947FFF6C951FFF4BD3CFFF1B02CFFEEA41AFFE99505FFE18B00FFF0AD
+      15FFD57708FFC05500FF000000000000000000000000C15605FFE5A540FFFFF3
+      B1FFF7D474FFF5BD36FFF3B534FFEFA921FFEC9C0EFFE48C00FFF0A90EFFD476
+      08FFC9681AFF0000000000000000000000000000000000000000C15707FFE59F
+      2EFFFEE68CFFF2BD38FFEFA71BFFEDA418FFE68F02FFED9E02FFD0730AFFC968
+      19FF00000000000000000000000000000000000000000000000000000000C258
+      09FFE3931FFFFCDC6EFFF2B62BFFE68A00FFEF9B00FFCE720CFFC96818FF0000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000C45D0DFFDE922CFFF5D675FFF6BF29FFD27C16FFC96817FF000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000C45D0BFFDD963BFFEDBD65FFC76312FF00000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000C5600DFFC96511FF0000000000000000000000000000
+      0000000000000000000000000000
     }
   end
   object SaveDialog1: TSaveDialog
@@ -2227,7 +2149,7 @@ object FormMain: TFormMain
       Category = 'Data'
       Caption = 'By Selected Points'
       Hint = 'Subtract by selected points'
-      ImageIndex = 13
+      ImageIndex = 15
       OnExecute = ActionRmBackSelectedExecute
     end
     object ActionSelAreaLimits: TAction
@@ -2305,6 +2227,7 @@ object FormMain: TFormMain
       Category = 'Model'
       Caption = 'Save as Text File...'
       Hint = 'Save model parameters as text file'
+      ImageIndex = 0
       OnExecute = ActionSaveAsTextExecute
     end
     object ActionDoAllAuto: TAction
@@ -2335,6 +2258,7 @@ object FormMain: TFormMain
     object ActionCopy: TAction
       Category = 'Edit'
       Caption = 'Copy to Clipboard'
+      ImageIndex = 1
       OnExecute = ActionCopyExecute
     end
     object ActionDelete: TAction

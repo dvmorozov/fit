@@ -85,13 +85,9 @@ type
     ActionQuit: TAction;
     ActionList1: TActionList;
     ApplicationProperties1: TApplicationProperties;
-    ButCopy2: TButton;
-    ButCopy3: TButton;
     ButCopy4: TButton;
     ButImport: TButton;
     ButDoAllAuto: TButton;
-    ButSaveAsText2: TButton;
-    ButSaveAsText3: TButton;
     ButSaveAsText4: TButton;
     ButZoomIn: TButton;
     ButZoomOut: TButton;
@@ -128,8 +124,6 @@ type
     MenuItem14: TMenuItem;
     BackPoints: TMenuItem;
     MenuItem3: TMenuItem;
-    Panel10: TPanel;
-    Panel11: TPanel;
     PanelParameters: TPanel;
     PanelIntervals: TPanel;
     PanelDatasheet: TPanel;
@@ -159,8 +153,6 @@ type
     ScrollBarX: TScrollBar;
     ScrollBarY: TScrollBar;
     SplitterChartRight: TSplitter;
-    SplitterLeft4: TSplitter;
-    SplitterLeft5: TSplitter;
     SplitterLeftChart: TSplitter;
     SplitterBottom: TSplitter;
     TabSheetSpecPositions: TTabSheet;
@@ -175,7 +167,12 @@ type
     ToolBar1: TToolBar;
     ToolBar2: TToolBar;
     ToolBar3: TToolBar;
+    ToolBar4: TToolBar;
+    ToolBar5: TToolBar;
     ToolButton1: TToolButton;
+    ToolButton10: TToolButton;
+    ToolButton11: TToolButton;
+    ToolButton12: TToolButton;
     ToolButton2: TToolButton;
     ToolButton3: TToolButton;
     ToolButton4: TToolButton;
@@ -183,6 +180,7 @@ type
     ToolButton6: TToolButton;
     ToolButton7: TToolButton;
     ToolButton8: TToolButton;
+    ToolButton9: TToolButton;
     UseRule: TMenuItem;
     SinThetaLambda: TMenuItem;
     N2Theta: TMenuItem;

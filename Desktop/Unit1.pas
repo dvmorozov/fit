@@ -86,11 +86,7 @@ type
     ActionList1: TActionList;
     ApplicationProperties1: TApplicationProperties;
     ButCopy4: TButton;
-    ButImport: TButton;
-    ButDoAllAuto: TButton;
     ButSaveAsText4: TButton;
-    ButZoomIn: TButton;
-    ButZoomOut: TButton;
     CheckListBoxLegend: TCheckListBox;
     EditBalloonChart: TEdit;
     EditBalloonGridSpecPositions: TEdit;
@@ -169,10 +165,15 @@ type
     ToolBar3: TToolBar;
     ToolBar4: TToolBar;
     ToolBar5: TToolBar;
+    ToolBar6: TToolBar;
     ToolButton1: TToolButton;
     ToolButton10: TToolButton;
     ToolButton11: TToolButton;
     ToolButton12: TToolButton;
+    ToolButton13: TToolButton;
+    ToolButton14: TToolButton;
+    ToolButton15: TToolButton;
+    ToolButton16: TToolButton;
     ToolButton2: TToolButton;
     ToolButton3: TToolButton;
     ToolButton4: TToolButton;

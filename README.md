@@ -20,3 +20,9 @@ Curve fitting application
 [fitminimizers](https://github.com/dvmorozov/fitminimizers.git)
 
 Install components into Lazarus, set up included directories in project properties and rebuild the project.
+
+## More info
+
+[fit on GitHub](https://dvmorozov.github.io/fit/)
+
+[Documentation](https://dvmorozov.github.io/fit/doc/index.html)

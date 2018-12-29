@@ -2037,9 +2037,10 @@ begin
     //??? mozhno optimizirovat' razbiv na nesk. funktsiy
     //  i vyzyvaya FindPeaksInternal tol'ko odin raz
 
-    //  сохраняется пользовательский выбор точек расположения кривых, если задан;
+    //  set of curve positions selected by user is saved if given
     //  https://action.mindjet.com/task/14588987
-    if CurvePositions.PointsCount <> 0 then
+    //  https://github.com/dvmorozov/fit/issues/12
+    if CurvePositions.PointsCount = 0 then
        FindPeakPositionsForAutoAlg;
 
     FindPeakBoundsAlg;

@@ -27,8 +27,8 @@ Install components into Lazarus, add included directories in project properties 
 
 ### Install Lazarus 0.9.24
 
-Unfortunately wst-0.5 can not be build without modifications with latest versions of Lazarus.
-It is recommended using version 0.9.24.
+Unfortunately wst-0.5 can not be built without modifications with latest versions of Lazarus.
+It is recommended to use version 0.9.24.
 
 [Lazarus 0.9.24](https://sourceforge.net/projects/lazarus/files/Lazarus%20Windows%2032%20bits/Old%20releases/Lazarus%200.9.24/Lazarus-0.9.24-fpc-2.2.0-20071114-win32.exe/download)
 

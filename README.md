@@ -7,7 +7,7 @@ Curve fitting application
 
 [Lazarus](https://www.lazarus-ide.org/index.php?page=downloads)
 
-Latest built was with
+Latest built was done with
 
 [Lazarus 1.8.4](https://sourceforge.net/projects/lazarus/files/Lazarus%20Windows%2064%20bits/Lazarus%201.8.4/lazarus-1.8.4-fpc-3.0.4-win64.exe/download)
 
@@ -17,9 +17,9 @@ Latest built was with
 
 ### Checkout componenents from GitHub
 
-[fitgrids](https://github.com/dvmorozov/fitgrids/tree/master)
+[fitgrids/master](https://github.com/dvmorozov/fitgrids/tree/master)
 
-[fitminimizers](https://github.com/dvmorozov/fitminimizers/tree/master)
+[fitminimizers/master](https://github.com/dvmorozov/fitminimizers/tree/master)
 
 Install components into Lazarus, add included directories in project properties and rebuild the project.
 
@@ -34,9 +34,9 @@ It is recommended to use version 0.9.24.
 
 ### Checkout componenents from GitHub
 
-[fitgrids](https://github.com/dvmorozov/fitgrids/tree/lazarus-0-9-24)
+[fitgrids/lazarus-0-9-24](https://github.com/dvmorozov/fitgrids/tree/lazarus-0-9-24)
 
-[fitminimizers](https://github.com/dvmorozov/fitminimizers/tree/lazarus-0-9-24)
+[fitminimizers/lazarus-0-9-24](https://github.com/dvmorozov/fitminimizers/tree/lazarus-0-9-24)
 
 ### Include files
 

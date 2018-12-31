@@ -124,7 +124,7 @@ const
     InternalPort: string = '1234';
     //  IP dlya svyazi brauzera s CGI-klientom;
     //  eti dannye vstavlyayutsya v ishodyaschie stranitsy
-    ExternalIP: string = 'https://ec2-54-158-234-101.compute-1.amazonaws.com/';
+    ExternalIP: string = 'ec2-54-158-234-101.compute-1.amazonaws.com';
 {$ENDIF}
 
 implementation

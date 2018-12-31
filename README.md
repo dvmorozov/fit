@@ -17,9 +17,9 @@ Latest built was with
 
 ### Checkout componenents from GitHub
 
-[fitgrids](https://github.com/dvmorozov/fitgrids.git)
+[fitgrids](https://github.com/dvmorozov/fitgrids/tree/master)
 
-[fitminimizers](https://github.com/dvmorozov/fitminimizers.git)
+[fitminimizers](https://github.com/dvmorozov/fitminimizers/tree/master)
 
 Install components into Lazarus, add included directories in project properties and rebuild the project.
 
@@ -32,11 +32,17 @@ It is recommended to use version 0.9.24.
 
 [Lazarus 0.9.24](https://sourceforge.net/projects/lazarus/files/Lazarus%20Windows%2032%20bits/Old%20releases/Lazarus%200.9.24/Lazarus-0.9.24-fpc-2.2.0-20071114-win32.exe/download)
 
+### Checkout componenents from GitHub
+
+[fitgrids](https://github.com/dvmorozov/fitgrids/tree/lazarus-0-9-24)
+
+[fitminimizers](https://github.com/dvmorozov/fitminimizers/tree/lazarus-0-9-24)
+
 ### Include files
 
 [wst-0.5](https://osdn.net/projects/sfnet_lazarus-ccr/downloads/Web%20Service%20Toolkit/Web%20Service%20Toolkit%200.5/wst-0.5.zip/)
 
-[wst](https://sourceforge.net/projects/lazarus-ccr/files/Web%20Service%20Toolkit/)
+Add included directories in project properties and rebuild the project.
 
 ## More info
 

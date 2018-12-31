@@ -13,6 +13,8 @@ Curve fitting application
 
 [wst-0.5](https://osdn.net/projects/sfnet_lazarus-ccr/downloads/Web%20Service%20Toolkit/Web%20Service%20Toolkit%200.5/wst-0.5.zip/)
 
+[wst](https://sourceforge.net/projects/lazarus-ccr/files/Web%20Service%20Toolkit/)
+
 ### Checkout componenents from GitHub
 
 [fitgrids](https://github.com/dvmorozov/fitgrids.git)

@@ -5,7 +5,7 @@ Curve fitting application
 
 ### Install latest version of Lazarus
 
-[Lazarus](https://sourceforge.net/projects/lazarus-ccr/files/latest/download)
+[Lazarus](https://www.lazarus-ide.org/index.php?page=downloads)
 
 Latest built was with
 

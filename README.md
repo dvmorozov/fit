@@ -7,7 +7,7 @@ Curve fitting application.
 
 ## Web application
 
-[FitEasily](https://dvmorozov.github.io/fit/doc/fiteasily.html)
+[FitEasily](https://dvmorozov.github.io/fit/fiteasily.html)
 
 ## More info
 

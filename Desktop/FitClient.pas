@@ -292,6 +292,7 @@ type
         { Callbacks from the server. }
         
         procedure ShowCurMin(Min: Double);
+        procedure ShowProfile();
         procedure Done;
         procedure FindPeakBoundsDone;
         procedure FindBackPointsDone;
@@ -607,8 +608,32 @@ procedure TFitClient.ShowCurMin(Min: Double);
 begin
     CurMin := Min;  //  prosto zapominaem zdes' znachenie
     FormMain.ShowTime;
-    //???
     UpdateAll;
+end;
+
+procedure TFitClient.ShowProfile();
+begin
+    if FSelectedAreaMode then
+    begin
+        //  dannye udalyayutsya dlya ucheta vozmozhnyh izmeneniy,
+        //  naprimer udaleniya fona
+        RemoveSelectedArea;
+        SelectedArea := FitProxy.GetSelectedArea;
+        //??? kak zdes' obrabatyvat' isklyucheniya
+        SelectedArea.Lambda := WaveLength;
+        SelectedArea.Title := SelectedAreaName;
+        PlotSelectedArea;
+    end
+    else
+    begin
+        //  dannye udalyayutsya dlya ucheta vozmozhnyh izmeneniy,
+        //  naprimer udaleniya fona
+        RemoveDataPoints;
+        NeutronPointsSet.Free; NeutronPointsSet := nil;
+        NeutronPointsSet := FitProxy.GetProfilePointsSet;
+        InitDataPoints;
+        PlotDataPoints;
+    end;
 end;
 
 function TFitClient.GetProfilePointsSet: TTitlePointsSet;
@@ -677,28 +702,7 @@ begin
     //  zdes' eto nedopustimye sostoyaniya
     Assert(Assigned(FitProxy));
 
-    if FSelectedAreaMode then
-    begin
-        //  dannye udalyayutsya dlya ucheta vozmozhnyh izmeneniy,
-        //  naprimer udaleniya fona
-        RemoveSelectedArea;
-        SelectedArea := FitProxy.GetSelectedArea;
-        //??? kak zdes' obrabatyvat' isklyucheniya
-        SelectedArea.Lambda := WaveLength;
-        SelectedArea.Title := SelectedAreaName;
-        PlotSelectedArea;
-    end
-    else
-    begin
-        //  dannye udalyayutsya dlya ucheta vozmozhnyh izmeneniy,
-        //  naprimer udaleniya fona
-        RemoveDataPoints;
-        NeutronPointsSet.Free; NeutronPointsSet := nil;
-        NeutronPointsSet := FitProxy.GetProfilePointsSet;
-        InitDataPoints;
-        PlotDataPoints;
-    end;
-
+    ShowProfile;
     UpdateAll;
     FAsyncState := AsyncDone;
 

@@ -22,9 +22,10 @@ type
     TFitClientStub = class(TObject)
     protected
         FFitClient: TObject;
+
     public
-    
         procedure ShowCurMin(Min: Double);
+        procedure ShowProfile();
         procedure Done;
         procedure FindPeakBoundsDone;
         procedure FindBackPointsDone;
@@ -42,6 +43,12 @@ procedure TFitClientStub.ShowCurMin(Min: Double);
 begin
     Assert(Assigned(FitClient));
     TFitClient(FitClient).ShowCurMin(Min);
+end;
+
+procedure TFitClientStub.ShowProfile();
+begin
+    Assert(Assigned(FitClient));
+    TFitClient(FitClient).ShowProfile();
 end;
 
 procedure TFitClientStub.Done;

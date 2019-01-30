@@ -158,6 +158,8 @@ type
 		{ Methods used by optimization algorithm to update
 		  information in achieving of new minimum. }
         procedure ShowCurMin; virtual;
+                { Updates profile data after background subtraction }
+        procedure ShowProfile; virtual;
 
 		{ The algorithm methods. They are executed asynchronously. }
 		
@@ -1667,6 +1669,16 @@ begin
     end;
 end;
 
+procedure TFitServer.ShowProfile;
+begin
+{$IFDEF FIT}
+      if Assigned(FitProxy) then
+      begin
+          FitProxy.ShowProfile();
+      end;
+{$ENDIF}
+end;
+
 function TFitServer.GetAllInitialized: Boolean;
 var i: LongInt;
     FT: TFitTask;
@@ -2033,6 +2045,7 @@ begin
     begin
         //  pri povtornyh zapuskah fon ne udalyaetsya
         SubtractAllBackground(True);
+        ShowProfile();
     end;
     //??? mozhno optimizirovat' razbiv na nesk. funktsiy
     //  i vyzyvaya FindPeaksInternal tol'ko odin raz

@@ -1,4 +1,6 @@
 DiGraph Classes {
+  IClientCallback -> IInterface
+  IClientCallback [href="ClientCallback.IClientCallback.html"]
   IDiscretValue -> IInterface
   IDiscretValue [href="CombEnumerator.IDiscretValue.html"]
   IDownhillSimplexParameters -> IDiscretValue
@@ -39,6 +41,18 @@ DiGraph Classes {
   TFitServer_ServiceImp [href="fit_server_imp.TFitServer_ServiceImp.html"]
   TDownhillRealParameters -> TCBRCComponent
   TDownhillRealParameters [href="DownhillSimplexContainer.TDownhillRealParameters.html"]
+  TFitClient -> TCBRCComponent
+  TFitClient [href="FitClient.TFitClient.html"]
+  TFitClientStub -> TCBRCComponent
+  TFitClientStub [href="FitClientStub.TFitClientStub.html"]
+  TFitServer -> TCBRCComponent
+  TFitServer [href="FitServer.TFitServer.html"]
+  TFitServerWithThread -> TFitServer
+  TFitServerWithThread [href="FitServerWithThread.TFitServerWithThread.html"]
+  TFitServerMultithreaded -> TFitServerWithThread
+  TFitServerMultithreaded [href="FitServerMultithreaded.TFitServerMultithreaded.html"]
+  TFitServerProxy -> TCBRCComponent
+  TFitServerProxy [href="FitServerProxy.TFitServerProxy.html"]
   TSelfCopiedComponent -> TCBRCComponent
   TSelfCopiedComponent [href="SelfCopied.TSelfCopiedComponent.html"]
   Curve_parameters -> TSelfCopiedComponent
@@ -114,10 +128,6 @@ DiGraph Classes {
   TFitClientApp [href="FitClientApp.TFitClientApp.html"]
   TFitClientProxy -> TObject
   TFitClientProxy [href="FitClientProxy.TFitClientProxy.html"]
-  TFitClientStub -> TObject
-  TFitClientStub [href="FitClientStub.TFitClientStub.html"]
-  TFitServerProxy -> TObject
-  TFitServerProxy [href="FitServerProxy.TFitServerProxy.html"]
   TFitServerStub -> TObject
   TFitServerStub [href="FitServerStub.TFitServerStub.html"]
   TPersistent -> TObject
@@ -141,14 +151,6 @@ DiGraph Classes {
   TDataLoader [href="DataLoader.TDataLoader.html"]
   TDATFileLoader -> TDataLoader
   TDATFileLoader [href="DataLoader.TDATFileLoader.html"]
-  TFitClient -> TComponent
-  TFitClient [href="FitClient.TFitClient.html"]
-  TFitServer -> TComponent
-  TFitServer [href="FitServer.TFitServer.html"]
-  TFitServerWithThread -> TFitServer
-  TFitServerWithThread [href="FitServerWithThread.TFitServerWithThread.html"]
-  TFitServerMultithreaded -> TFitServerWithThread
-  TFitServerMultithreaded [href="FitServerMultithreaded.TFitServerMultithreaded.html"]
   TFitServerApp -> TComponent
   TFitServerApp [href="FitServerApp.TFitServerApp.html"]
   TFitTask -> TComponent

@@ -18,12 +18,12 @@
 <a  href="FitClient.html">FitClient</a></p>
 <h2 class="declaration">Declaration</h2>
 <p class="declaration">
-<code>type TFitClient = class(TComponent)</code></p>
+<code>type TFitClient = class(TCBRCComponent, <a class="normal" href="ClientCallback.IClientCallback.html">IClientCallback</a>)</code></p>
 <h2 class="description">Description</h2>
 <p>
 Implements all client logic of the application. Must be completely independent from UI.</p>
 <span id="PasDoc-Hierarchy"></span><h2 class="hierarchy">Hierarchy</h2>
-<ul class="hierarchy"><li class="ancestor">TComponent</li>
+<ul class="hierarchy"><li class="ancestor">TCBRCComponent</li>
 <li class="thisitem">TFitClient</li></ul><h2 class="overview">Overview</h2>
 <span id="PasDoc-Fields"></span><h3 class="summary">Fields</h3>
 <table class="summary wide_list">
@@ -388,161 +388,165 @@ Implements all client logic of the application. Must be completely independent f
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#SmoothProfile">SmoothProfile</a></b>;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#ShowProfile">ShowProfile</a></b>();</code></td>
 </tr>
 <tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#SmoothProfile">SmoothProfile</a></b>;</code></td>
+</tr>
+<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#StopAsyncOper">StopAsyncOper</a></b>;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#SubtractAllBackground">SubtractAllBackground</a></b>(Auto: Boolean);</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#AddPoint">AddPoint</a></b>(var Points: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>; XValue, YValue: Double; Plot: <a  href="FitClient.html#TPlotProc">TPlotProc</a>);</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#Clear">Clear</a></b>;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#CopyProfileDataFromLoader">CopyProfileDataFromLoader</a></b>;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#FillDatasheetTable">FillDatasheetTable</a></b>;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#Hide">Hide</a></b>;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#HideBackground">HideBackground</a></b>;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#HideCurvePositions">HideCurvePositions</a></b>;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#HideDataPoints">HideDataPoints</a></b>;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#HideRFactorIntervals">HideRFactorIntervals</a></b>;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#HideSpecimens">HideSpecimens</a></b>;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#InitDataPoints">InitDataPoints</a></b>;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#PlotBackground">PlotBackground</a></b>;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#PlotCurvePositions">PlotCurvePositions</a></b>;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#PlotDataPoints">PlotDataPoints</a></b>;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#PlotDeltaProfile">PlotDeltaProfile</a></b>;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#PlotGaussProfile">PlotGaussProfile</a></b>;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#PlotRFactorIntervals">PlotRFactorIntervals</a></b>;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#PlotSelectedArea">PlotSelectedArea</a></b>;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#PlotSelectedPoints">PlotSelectedPoints</a></b>;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#PlotSpecimens">PlotSpecimens</a></b>;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#RecreateAndShowSelectedPoints">RecreateAndShowSelectedPoints</a></b>(Title: string);</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#Refresh">Refresh</a></b>;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#RefreshPointsSet">RefreshPointsSet</a></b>;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#RemoveDataPoints">RemoveDataPoints</a></b>;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#RemoveDeltaProfile">RemoveDeltaProfile</a></b>;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#RemoveGaussProfile">RemoveGaussProfile</a></b>;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#RemoveSelectedArea">RemoveSelectedArea</a></b>;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#RemoveSelectedPoints">RemoveSelectedPoints</a></b>;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#ReplacePoint">ReplacePoint</a></b>(Points: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>; PrevXValue, PrevYValue, NewXValue, NewYValue: Double; Plot: <a  href="FitClient.html#TPlotProc">TPlotProc</a> );</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#SelectAreaActual">SelectAreaActual</a></b>(ANeutronPoints: <a  href="DataLoader.TNeutronPointsSet.html">TNeutronPointsSet</a>; StartPointIndex, StopPointIndex: LongInt);</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#SetBackFactor">SetBackFactor</a></b>(ABackFactor: Double);</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#SetCurvesListLambda">SetCurvesListLambda</a></b>;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#SetCurveThresh">SetCurveThresh</a></b>(ACurveThresh: Double);</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#SetCurveType">SetCurveType</a></b>(ACurveType: <a  href="CommonTypes.html#TCurveType">TCurveType</a>);</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#SetMaxRFactor">SetMaxRFactor</a></b>(AMaxRFactor: Double);</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#SetSelectionMode">SetSelectionMode</a></b>(ASelectionMode: <a  href="FitClient.html#TSelMode">TSelMode</a>);</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#UpdateAll">UpdateAll</a></b>;</code></td>
 </tr>
@@ -1440,6 +1444,14 @@ Cleans chart and moves data from full profile to data of selected iterval.</p>
 <p>
 Callbacks from the server.</p>
 </td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="ShowProfile"></span><code>procedure <b>ShowProfile</b>();</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">

@@ -18,10 +18,10 @@
 <a  href="FitServerProxy.html">FitServerProxy</a></p>
 <h2 class="declaration">Declaration</h2>
 <p class="declaration">
-<code>type TFitServerProxy = class(TObject)</code></p>
+<code>type TFitServerProxy = class(TCBRCComponent, <a class="normal" href="ClientCallback.IClientCallback.html">IClientCallback</a>)</code></p>
 <h2 class="description">Description</h2>
 <span id="PasDoc-Hierarchy"></span><h2 class="hierarchy">Hierarchy</h2>
-<ul class="hierarchy"><li class="ancestor">TObject</li>
+<ul class="hierarchy"><li class="ancestor">TCBRCComponent</li>
 <li class="thisitem">TFitServerProxy</li></ul><h2 class="overview">Overview</h2>
 <span id="PasDoc-Fields"></span><h3 class="summary">Fields</h3>
 <table class="summary wide_list">
@@ -51,6 +51,10 @@
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitServerProxy.TFitServerProxy.html#ShowCurMin">ShowCurMin</a></b>(Min: Double);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServerProxy.TFitServerProxy.html#ShowProfile">ShowProfile</a></b>();</code></td>
 </tr>
 </table>
 <span id="PasDoc-Properties"></span><h3 class="summary">Properties</h3>
@@ -107,6 +111,14 @@
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
 <td class="itemcode"><span id="ShowCurMin"></span><code>procedure <b>ShowCurMin</b>(Min: Double);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="ShowProfile"></span><code>procedure <b>ShowProfile</b>();</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>

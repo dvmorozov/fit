@@ -5,6 +5,9 @@ DiGraph Uses {
   "AlgorithmContainer" -> "Tools"
   "AlgorithmContainer" [href="AlgorithmContainer.html"]
   "ClassInheritIDs" [href="ClassInheritIDs.html"]
+  "ClientCallback" -> "Classes"
+  "ClientCallback" -> "SysUtils"
+  "ClientCallback" [href="ClientCallback.html"]
   "CombEnumerator" -> "SysUtils"
   "CombEnumerator" [href="CombEnumerator.html"]
   "CommonTypes" -> "Classes"
@@ -41,7 +44,9 @@ DiGraph Uses {
   "DownhillSimplexContainer" -> "SysUtils"
   "DownhillSimplexContainer" -> "Tools"
   "DownhillSimplexContainer" [href="DownhillSimplexContainer.html"]
+  "FitClient" -> "CBRCComponent"
   "FitClient" -> "Classes"
+  "FitClient" -> "ClientCallback"
   "FitClient" -> "CommonTypes"
   "FitClient" -> "DataLoader"
   "FitClient" -> "Dialogs"
@@ -68,10 +73,14 @@ DiGraph Uses {
   "FitClientProxy" -> "SelfCopied"
   "FitClientProxy" -> "SysUtils"
   "FitClientProxy" [href="FitClientProxy.html"]
+  "FitClientStub" -> "CBRCComponent"
   "FitClientStub" -> "Classes"
+  "FitClientStub" -> "ClientCallback"
   "FitClientStub" -> "SysUtils"
   "FitClientStub" [href="FitClientStub.html"]
+  "FitServer" -> "CBRCComponent"
   "FitServer" -> "Classes"
+  "FitServer" -> "ClientCallback"
   "FitServer" -> "CommonTypes"
   "FitServer" -> "DataLoader"
   "FitServer" -> "Dialogs"
@@ -101,7 +110,9 @@ DiGraph Uses {
   "FitServerMultithreaded" -> "MyExceptions"
   "FitServerMultithreaded" -> "SysUtils"
   "FitServerMultithreaded" [href="FitServerMultithreaded.html"]
+  "FitServerProxy" -> "CBRCComponent"
   "FitServerProxy" -> "Classes"
+  "FitServerProxy" -> "ClientCallback"
   "FitServerProxy" -> "FitClientStub"
   "FitServerProxy" -> "MyExceptions"
   "FitServerProxy" -> "SysUtils"
@@ -284,6 +295,7 @@ DiGraph Uses {
   "Tools" -> "SysUtils"
   "Tools" [href="Tools.html"]
   "Unit1" -> "ActnList"
+  "Unit1" -> "Buttons"
   "Unit1" -> "CheckLst"
   "Unit1" -> "Classes"
   "Unit1" -> "ColorBox"

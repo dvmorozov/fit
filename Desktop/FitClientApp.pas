@@ -42,7 +42,7 @@ constructor TFitClientApp.Create;
 begin
     inherited;
     FFitProxy := TFitClientProxy.Create;
-    FFitStub := TFitClientStub.Create;
+    FFitStub := TFitClientStub.Create(nil);
     FFitClient := TFitClient.Create(nil);
 
     FFitClient.FitProxy := FFitProxy;

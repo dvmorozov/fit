@@ -70,7 +70,7 @@ begin
     //  raskommentirovat' pri rabote servera otdel'noy programmoy
     //Application.OnException := OnException;
 {$IFDEF FIT}
-    FFitProxy := TFitServerProxy.Create;
+    FFitProxy := TFitServerProxy.Create(nil);
 {$ELSE}
     FForm := TForm1.Create(nil);
     FViewer := TFitViewer.Create(nil);

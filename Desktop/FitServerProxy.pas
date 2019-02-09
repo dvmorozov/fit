@@ -17,15 +17,17 @@ unit FitServerProxy;
 
 interface
 
-uses Classes, SysUtils, FitClientStub, MyExceptions;
+uses Classes, SysUtils, FitClientStub, MyExceptions, ClientCallback,
+     CBRCComponent;
 
 type
-    TFitServerProxy = class(TObject)
+    TFitServerProxy = class(TCBRCComponent, IClientCallback)
     protected
         FFitStub: TFitClientStub;
 
     public
         procedure ShowCurMin(Min: Double);
+        procedure ShowProfile();
         procedure Done;
         procedure FindPeakBoundsDone;
         procedure FindBackPointsDone;
@@ -45,6 +47,17 @@ begin
         else raise;
     end;
     FitStub.ShowCurMin(Min);
+end;
+
+procedure TFitServerProxy.ShowProfile();
+begin
+    try
+        Assert(Assigned(FitStub));
+    except
+        on E: EAssertionFailed do raise EUserException.Create(E.Message)
+        else raise;
+    end;
+    FitStub.ShowProfile();
 end;
 
 procedure TFitServerProxy.Done;

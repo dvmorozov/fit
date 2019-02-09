@@ -23,11 +23,11 @@ type
     ETableCompList = class(Exception);
 
 	{ Component list which can display component properties in grid.
-	  Class implements functions of saving/reading table properties,
-      but does not bind grid positions with list items. If number of 
-      columns returned by GetColCount is changed then corresponding
-	  changes in SetCaption, SetColOptions, SetColFunc, SetRowContents, 
-	  GetRowContents should be done. }
+          Class implements functions of saving/reading table properties,
+          but does not bind grid positions with list items. If number of
+          columns returned by GetColCount is changed then corresponding
+          changes in SetCaption, SetColOptions, SetColFunc, SetRowContents,
+          GetRowContents should be done. }
     TTableCompList = class(TSelfCopiedCompList, IGridDataSource)
     protected
         FCaption: string;

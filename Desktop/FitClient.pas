@@ -17,7 +17,8 @@ unit FitClient;
 interface
 
 uses Classes, DataLoader, SelfCopied, SysUtils, MSCRDataClasses,
-    Dialogs, FitClientProxy, SimpMath, CommonTypes;
+    Dialogs, FitClientProxy, SimpMath, CommonTypes, ClientCallback,
+    CBRCComponent;
     
 type
     { Modes of selectiion of active point set. }
@@ -93,7 +94,7 @@ type
     TPlotProc = procedure of object;
 
     { Implements all client logic of the application. Must be completely independent from UI. }
-    TFitClient = class(TComponent)
+    TFitClient = class(TCBRCComponent, IClientCallback)
     protected
         FFitProxy: TFitClientProxy;
         DataLoader: TDataLoader;

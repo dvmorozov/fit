@@ -4,14 +4,14 @@ in the hope that it will be useful, but WITHOUT ANY WARRANTY;
 without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
 
 @abstract(Contains definition of class implementing server logic. Doesn't contain any user interface interaction.
-Exception handling and converting them into messages understandable for caller should be done in boundary objects. 
-Throwing EAssertionFailed should be considered as inadmissibility of state for calling the method. At that state 
+Exception handling and converting them into messages understandable for caller should be done in boundary objects.
+Throwing EAssertionFailed should be considered as inadmissibility of state for calling the method. At that state
 of the server should be kept. Throwing any other exception should be considered as fatal error. At that state of
 the server should be brought into initial which was just after start. Sometimes when method can execute the action
 accroding to its semantics EAssertionFailed can be catched inside it.)
 
-@author(Dmitry Morozov dvmorozov@hotmail.com, 
-LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
+@author(Dmitry Morozov dvmorozov@hotmail.com,
+LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794,
 Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 
@@ -31,48 +31,49 @@ In this case keeping the state of application can't be guaranteed.
 uses Classes, DataLoader, SelfCheckedComponentList, SysUtils, MSCRDataClasses,
      Dialogs,
 {$IFDEF FIT}
-     FitServerProxy,	//	Proxy to client to call it back.
+     FitServerProxy,    //      Proxy to client to call it back.
 {$ENDIF}
      SelfCopied, MyExceptions, FitTask, SimpMath,
-     MainCalcThread, CommonTypes;
+     MainCalcThread, CommonTypes, ClientCallback,
+     CBRCComponent;
 
 type
-	{ In varying gaussian parameters now amplitude and position are varied,
-      width is taken the same for all instances (specimens). }
-	
+        { In varying gaussian parameters now amplitude and position are varied,
+          width is taken the same for all instances (specimens). }
+
     TRecreateServer = procedure of object;
-	{ The component which implements all server logic. It divides the task
-	  of profile fitting on a few subtasks of fitting on intervals. 
-	  The intervals should be defined before manually or automatically.  
-	  All interface methods should allow calling in arbitrary state, this
-	  should not be considered as inadmissible situation, but corresponding 
-	  error code should be returned.
-	  In fitting knowledge of wavelength is not required. This is why all
-	  components TNeutronPointsSet were changed on TPointsSet. This also
-	  allows to abstract from tasks of neutron diffraction and to come to
-	  tasks from arbitrary field in which data have form of profile.
-	  It is impossible simply to replace TNeutronPointsSet on TPointsSet
-	  because at the server side methods of TFitViewer are called which
-	  require TTitlePointsSet. Moreover graphics is still implemented at 
-	  server side. This requires usage of TNeutronPointsSet which supports
-	  argument recalculation.
-	  Interface methods results shows is requested operation allowed or not.
-	  Instead of EAssertionFailed the EUserException is used because it is 
-	  impossible to guarantee that exception will not be thrown from library.
-	  This is acceptable only for classes which process user commands. Rest of
-	  the classes should use EAssertionFailed in the case of inadmissible state.
-	  Boundary class shoud interpret such exception as fatal error but 
-	  EUserException as state errors.
-	  This implementation performs all operations in the thread of caller.
-	  It should store all the data necessary for operations including selected 
-	  intervals because client can be unable to store data.
-	}
-    TFitServer = class(TComponent)
+        { The component which implements all server logic. It divides the task
+          of profile fitting on a few subtasks of fitting on intervals.
+          The intervals should be defined before manually or automatically.
+          All interface methods should allow calling in arbitrary state, this
+          should not be considered as inadmissible situation, but corresponding
+          error code should be returned.
+          In fitting knowledge of wavelength is not required. This is why all
+          components TNeutronPointsSet were changed on TPointsSet. This also
+          allows to abstract from tasks of neutron diffraction and to come to
+          tasks from arbitrary field in which data have form of profile.
+          It is impossible simply to replace TNeutronPointsSet on TPointsSet
+          because at the server side methods of TFitViewer are called which
+          require TTitlePointsSet. Moreover graphics is still implemented at
+          server side. This requires usage of TNeutronPointsSet which supports
+          argument recalculation.
+          Interface methods results shows is requested operation allowed or not.
+          Instead of EAssertionFailed the EUserException is used because it is
+          impossible to guarantee that exception will not be thrown from library.
+          This is acceptable only for classes which process user commands. Rest of
+          the classes should use EAssertionFailed in the case of inadmissible state.
+          Boundary class shoud interpret such exception as fatal error but
+          EUserException as state errors.
+          This implementation performs all operations in the thread of caller.
+          It should store all the data necessary for operations including selected
+          intervals because client can be unable to store data.
+        }
+    TFitServer = class(TCBRCComponent, IClientCallback)
     protected
 {$IFDEF FIT}
         FFitProxy: TFitServerProxy;
 {$ENDIF}
-        FWaveLength: Double;	//	TODO: remove this.
+        FWaveLength: Double;    //      TODO: remove this.
         procedure SetWaveLength(AWaveLength: Double);
 
     protected
@@ -84,43 +85,46 @@ type
 
     protected
         FBackFactor: Double;
-		{ Data of full experimental profile. }
+                { Data of full experimental profile. }
         ExpProfile: TTitlePointsSet;
-        { The curve obtained by the sum of all curves of adjustable intervals 
-		  to calculate the total R-factor along the entire profile. }
+                { The curve obtained by the sum of all curves of adjustable intervals
+                  to calculate the total R-factor along the entire profile. }
         CalcProfile: TTitlePointsSet;
-        //  raznost' eksp. i rasschit. profiley
-		{ The curve obtained by calculating difference 
-		  between experimental and calculated profiles. }
+                { The curve obtained by calculating difference
+                  between experimental and calculated profiles. }
         DeltaProfile: TTitlePointsSet;
-		{ Part of the whole profile with which user works at the given moment. }
+                { Part of the whole profile with which user works at the given moment. }
         SelectedArea: TTitlePointsSet;
-		{ List of background points used in transition between manual and 
-          automatic modes of selection. }
+                { List of background points used in transition between manual and
+                  automatic modes of selection. }
         BackgroundPoints: TTitlePointsSet;
-		{ Pairs of points defining intervals of R-factor calculation.
-          Should always be displayed allowing user to see where R-factor is calculated. }
+                { Pairs of points defining intervals of R-factor calculation.
+                  Should always be displayed allowing user to see where R-factor
+                  is calculated. }
         RFactorIntervals: TTitlePointsSet;
 
-		{ Contains all pattern specimens collected from tasks 
-		  (for example, for separate intervals). 
-		  Items are added synchronously to the list. }
+                { Contains all pattern specimens collected from tasks
+                  (for example, for separate intervals).
+                  Items are added synchronously to the list. }
         CurvesList: TSelfCopiedCompList;
-		{ Positions of pattern specimens. Only X-coordinates are used. }
+                { Positions of pattern specimens. Only X-coordinates are used. }
         CurvePositions: TTitlePointsSet;
-		{ Containers of parameters of pattern specimens. }
-        SpecimenList: TMSCRSpecimenList;		//	TODO: change type and remove SetWaveLength.
-        
-		{ Dependent on this flag either data of the selected interval are used
-          or data of the whole profile. }
+                { Containers of parameters of pattern specimens.
+                  TODO: change type and remove SetWaveLength. }
+        SpecimenList: TMSCRSpecimenList;
+
+                { Dependent on this flag either data of the selected interval are used
+                  or data of the whole profile. }
         FSelectedAreaMode: Boolean;
-        TaskList: TSelfCheckedComponentList;   //  By default the list is active.
-		{ Parameters of user defined curve. The object is created by server.
-		  It is necessary to provide parameter editing on the client-side. }
+                { List of subtasks for fitting parts of profile on intervals.
+                  By default is active. }
+        TaskList: TSelfCheckedComponentList;
+                { Parameters of user defined curve. The object is created by server.
+                  It is necessary to provide parameter editing on the client-side. }
         Params: Curve_parameters;
-		{ The expression for user defined curve. }
+                { The expression for user defined curve. }
         FCurveExpr: string;
-		{ Allows to retrieve the value from the client-side. }
+                { Allows to retrieve the value from the client-side. }
         FMaxRFactor: Double;
         procedure SetMaxRFactor(AMaxRFactor: Double);
 
@@ -133,114 +137,124 @@ type
         procedure SetCurveType(ACurveType: TCurveType);
 
     protected
-		{ Is set up to True after finishing first cycle of calculation. }
-        FitDone: Boolean;           
-		{ Current total value of R-factor for all subtasks. }
+                { Is set up to True after finishing first cycle of calculation. }
+        FitDone: Boolean;
+                { Current total value of R-factor for all subtasks. }
         CurrentMinimum: Double;
-        //  nachal'nyy moment vremeni zapuska dlitel'noy operatsii
-		{ The starting time of continuous operation. }
+                { The starting time of continuous operation. }
         StartTime: TDateTime;
-
-		{ Adds new point to the given point set. Second call with the same coordinates
-		  removes point from the list. At this the list object is replaced by new one. }
+                { Adds new point to the given point set. Second call with the same coordinates
+                  removes point from the list. At this the list object is replaced by new one. }
         procedure AddPoint(var Points: TTitlePointsSet; XValue, YValue: Double);
 
     protected
-	    { Indicates that specimen positions were assigned automatically. 
-		  That is at each point different from background. }
+                { Indicates that specimen positions were assigned automatically.
+                  That is at each point different from background. }
         SpecPosFoundForAuto: Boolean;
         DoneDisabled: Boolean;
 
-		{ These methods are executed in the separate thread. }
-		
+                { These methods are executed in the separate thread. }
+
         procedure DoneProc; virtual;
 
-		{ Methods used by optimization algorithm to update
-		  information in achieving of new minimum. }
-        procedure ShowCurMin; virtual;
-                { Updates profile data after background subtraction }
-        procedure ShowProfile; virtual;
+                { Methods used by optimization algorithm to update
+                  information in achieving of new minimum.
+                  Calls IClientCallback's ShowCurMin method. }
+        procedure ShowCurMinInternal; virtual;
 
-		{ The algorithm methods. They are executed asynchronously. }
-		
-		{ Calculates boundaries of R-factor intervals based on data obtained from FindPeaksInternal. }
+                { IClientCallback }
+
+                { Updates profile data after background subtraction. }
+        procedure ShowProfile; virtual;
+                { Updates current minimum value. }
+        procedure ShowCurMin(Min: Double); virtual;
+                { TODO: implement. }
+        procedure Done; virtual;
+                { TODO: implement. }
+        procedure FindPeakBoundsDone; virtual;
+                { TODO: implement. }
+        procedure FindBackPointsDone; virtual;
+                { TODO: implement. }
+        procedure FindPeakPositionsDone; virtual;
+
+                { The algorithm methods. They are executed asynchronously. }
+
+                { Calculates boundaries of R-factor intervals based on data obtained from FindPeaksInternal. }
         procedure FindPeakBoundsAlg;
         procedure FindPeakBoundsDoneProcActual;
-		{ Calculates background points. }
+                { Calculates background points. }
         procedure FindBackPointsAlg;
         procedure FindBackPointsDoneProcActual;
-		{ Calculates peak positions which will be taken as specimen positions. }
+                { Calculates peak positions which will be taken as specimen positions. }
         procedure FindPeakPositionsAlg;
-		{ Selects all points as specimen positions. }
+                { Selects all points as specimen positions. }
         procedure AllPointsAsPeakPositionsAlg;
         procedure FindPeakPositionsDoneProcActual;
 
-		{ Wrappers for corresponding methods of TFitTask. }
-		
+                { Wrappers for corresponding methods of TFitTask. }
+
         procedure FindGaussesSequentiallyAlg; virtual;
         procedure FindGaussesAlg; virtual;
         procedure FindGaussesAgainAlg; virtual;
         procedure DoAllAutomaticallyAlg;
 
-		{ Low-level methods used by algorithms. }
-		
+                { Low-level methods used by algorithms. }
+
         procedure Smoothing(ANeutronPointsSet: TPointsSet);
-		{ Linearly subtracts background at the given interval of points. }
+                { Linearly subtracts background at the given interval of points. }
         procedure SubtractLinearly(Data: TPointsSet;
             StartIndex: LongInt; EndIndex: LongInt);
-		
-		{ Calculates reference points for linear cut up the background. The points aren't arranged by X. }
+
+                { Calculates reference points for linear cut up the background. The points aren't arranged by X. }
         function FindBackgroundPoints(Data: TPointsSet): TPointsSet;
-		{ Integrates specimen curve and adds resulting value to the list of results. }
+                { Integrates specimen curve and adds resulting value to the list of results. }
         procedure AddSpecimenToList(Points: TCurvePointsSet;
-			{ Indexes of start and end points defining boundaries of the peak. }
-            StartPointIndex,     
-            StopPointIndex: LongInt
-            );
-		{ Searches for peak boundaries and returns its points. 
-		  Searches among points which do not belong to any other peak. }
+                { Indexes of start and end points defining boundaries of the peak. }
+                  StartPointIndex,
+                  StopPointIndex: LongInt
+                 );
+                { Searches for peak boundaries and returns its points.
+                  Searches among points which do not belong to any other peak. }
         function FindPeaksInternal: TTitlePointsSet;
-		{ Fills the list of peak positions for automatic fit. }
+                { Fills the list of peak positions for automatic fit. }
         procedure FindPeakPositionsForAutoAlg;
         function Integrate(Points: TPointsSet;
             StartPointIndex, StopPointIndex: LongInt): Double;
         function IntegrateAll(Points: TPointsSet): Double;
-		{ Linearly subtracts background in the SelectArea and recreates SelectArea. }
-        //procedure SubtractBackground;
-		{ Calculates the R-factor for CalcProfile and SelectArea by sum for all subtasks. }
+                { Calculates the R-factor for CalcProfile and SelectArea by sum for all subtasks. }
         function GetRFactor: Double;
         function GetAbsRFactor: Double;
         function GetSqrRFactor: Double;
-		{ Copies data from given list to the list of selected interval. }
+                { Copies data from given list to the list of selected interval. }
         procedure SelectAreaActual(
             Points: TPointsSet; StartPointIndex, StopPointIndex: LongInt);
         function CreateTaskObject: TFitTask; virtual;
-		{ Creates subtasks for selected intervals. If the intervals were not selected generates them automatically. }
+                { Creates subtasks for selected intervals. If the intervals were not selected generates them automatically. }
         procedure CreateTasks;
         procedure InitTasks;
 
-		{ Auxiliary methods. }
-		
+                { Auxiliary methods. }
+
         procedure CreateResultedProfile;
-		{ Calculates profile containing differences between calculated and experimental data. 
+                { Calculates profile containing differences between calculated and experimental data.
           In the calculation all the specimens are included. Will not work properly if specimen areas are overlapped. }
         procedure CreateDeltaProfile;
         procedure CreateResultedCurvesList;
-		{ Collects resulting set of curve positions. Points should not be collected from subtasks because
-          in this case part of points can be missed. This can confise the user. }
+                { Collects resulting set of curve positions. Points should not be collected from subtasks because
+                  in this case part of points can be missed. This can confise the user. }
         //procedure CreateResultedCurvePositions;
-		{ Iterates through list of pattern specimens and creates
+                { Iterates through list of pattern specimens and creates
           common list of parameters of all the specimens complementing
-		  them with calculated parameters. }
+                  them with calculated parameters. }
         procedure CreateSpecimenListAlg;
-		{ Prepares intermediate results for user. }
+                { Prepares intermediate results for user. }
         procedure GoToReadyForFit;
 
-		{ Checks expression and fills list of parameters. }
+                { Checks expression and fills list of parameters. }
         procedure CreateParameters(ACurveExpr: string);
 
         function GetAllInitialized: Boolean;
-		{ Does not really create any thread. Simply calls methods synchronously. }
+                { Does not really create any thread. Simply calls methods synchronously. }
         procedure RecreateMainCalcThread(
             ACurrentTask: TCurrentTask; ADoneProc: TDoneProc); virtual;
 
@@ -248,41 +262,41 @@ type
         constructor Create(AOwner: TComponent); override;
         destructor Destroy; override;
 
-		{ Interface methods changing state shoud notify about it. }
-		
-		{ Set experimental profile data. }
+                { Interface methods changing state shoud notify about it. }
+
+                { Set experimental profile data. }
         function SetProfilePointsSet(APointsSet: TTitlePointsSet): string;
-		{ Get experimental profile data. }
+                { Get experimental profile data. }
         function GetProfilePointsSet: TPointsSet;
-		{ Get data for the selected interval. }
+                { Get data for the selected interval. }
         function GetSelectedArea: TPointsSet;
-        
+
         function SetBackgroundPointsSet(ABackgroundPoints: TTitlePointsSet): string;
         function GetBackgroundPoints: TPointsSet;
-        
+
         function SetCurvePositions(ACurvePositions: TPointsSet): string;
         function GetCurvePositions: TPointsSet;
 
         function SetRFactorIntervals(ARFactorIntervals: TPointsSet): string;
         function GetRFactorIntervals: TPointsSet;
-        
+
         procedure SetSpecialCurveParameters(
             ACurveExpr: string;
-			{ Equality to Nil means initialization. }
+                        { Equality to Nil means initialization. }
             CP: Curve_parameters);
         function GetSpecialCurveParameters: Curve_parameters;
-        
-		{ The server should support primitives for adding and updating points
+
+                { The server should support primitives for adding and updating points
           to support thin clients which can not store all set of data. }
-		{ All methods call AddPoint. }
-		
+                { All methods call AddPoint. }
+
         procedure AddPointToData(XValue, YValue: Double);
         procedure AddPointToBackground(XValue, YValue: Double);
         procedure AddPointToRFactorIntervals(XValue, YValue: Double);
         procedure AddPointToCurvePositions(XValue, YValue: Double);
-        
-		{ All methods call ReplacePoint. }
-		
+
+                { All methods call ReplacePoint. }
+
         procedure ReplacePointInData(
             PrevXValue, PrevYValue, NewXValue, NewYValue: Double);
         procedure ReplacePointInBackground(
@@ -292,14 +306,14 @@ type
         procedure ReplacePointInCurvePositions(
             PrevXValue, PrevYValue, NewXValue, NewYValue: Double);
 
-		{ Returns list of parameters of all specimens. }
+                { Returns list of parameters of all specimens. }
         function GetSpecimenList: TMSCRSpecimenList;
-		{ Returns list of components containing sets of points. }
+                { Returns list of components containing sets of points. }
         function GetCurvesList: TSelfCopiedCompList;
 
-		{ These methods check validity of server state and 
+                { These methods check validity of server state and
           throw EUserException in the case when state is invalid. }
-		
+
         function GetSpecimenCount: LongInt;
         function GetSpecimenPoints(SpecIndex: LongInt): TCurvePointsSet;
         function GetSpecimenParameterCount(SpecIndex: LongInt): LongInt;
@@ -311,72 +325,75 @@ type
         function GetCalcProfilePointsSet: TPointsSet;
         function GetDeltaProfilePointsSet: TPointsSet;
 
-		{ Asynchronous long-term operations. }
-		{ Smoothes experimental data. Returns describing message. 
-		  TODO: so far is executed synchronously. Refactor to asynchronous processing. }
+                { Asynchronous long-term operations. }
+                { Smoothes experimental data. Returns describing message.
+                  TODO: so far is executed synchronously. Refactor to asynchronous processing. }
         function SmoothProfile: string;
-		{ Subtracts the background by linear approximation. When Auto is True then
-          background points selected before (no matter by which way) are dropped out.
-          TODO: when it is called as interface method should return text message. }
+                { Linearly subtracts background in the SelectArea and recreates SelectArea.
+                  TODO: unify with SubtractAllBackground. }
+        procedure SubtractBackground;
+                { Subtracts the background by linear approximation. When Auto is True then
+                  background points selected before (no matter by which way) are dropped out.
+                  TODO: when it is called as interface method should return text message. }
         procedure SubtractAllBackground(Auto: Boolean);
-		{ Completely automatic procedure of finding model curves. }
+                { Completely automatic procedure of finding model curves. }
         function DoAllAutomatically: string; virtual;
-		{ Performs model fitting (initial or subsequent). Corresponds to MinimizeDifference. }
+                { Performs model fitting (initial or subsequent). Corresponds to MinimizeDifference. }
         function FindGausses: string; virtual;
-		{ Performs model fitting without initialization of application intervals. }
+                { Performs model fitting without initialization of application intervals. }
         function FindGaussesAgain: string; virtual;
-		{ Search for model describing experimental data with given accuracy
-          by minimum number of specimens. Sequentially reducing the number of specimens.
-		  Corresponds to MinimizeNumberOfSpecimens. }
+                { Search for model describing experimental data with given accuracy
+                  by minimum number of specimens. Sequentially reducing the number of specimens.
+                  Corresponds to MinimizeNumberOfSpecimens. }
         function FindGaussesSequentially: string; virtual;
-		{ Searches for intervals of application of pattern specimens. }
+                { Searches for intervals of application of pattern specimens. }
         function FindPeakBounds: string; virtual;
-		{ Searches for background points. }
+                { Searches for background points. }
         function FindBackPoints: string; virtual;
-		{ Searches for peak positions (positions of specimens). }
+                { Searches for peak positions (positions of specimens). }
         function FindPeakPositions: string; virtual;
         function AllPointsAsPeakPositions: string; virtual;
-		
-		{ Control operations. }
 
-		{ Stops long-term operation asynchronously. Calls termination procedure. }
+                { Control operations. }
+
+                { Stops long-term operation asynchronously. Calls termination procedure. }
         procedure StopAsyncOper; virtual; abstract;
-		{ Stops long-term operation synchronously without calling termination procedure. }
+                { Stops long-term operation synchronously without calling termination procedure. }
         procedure AbortAsyncOper; virtual; abstract;
-		{ Returns True in asynchronous operation mode. }
+                { Returns True in asynchronous operation mode. }
         function AsyncOper: Boolean;
         function GetCalcTimeStr: string;
         function GetRFactorStr: string;
         function GetAbsRFactorStr: string;
         function GetSqrRFactorStr: string;
-        
-		{ Synchronous operations. }
-		
-		{ Transfers part of profile data to the list of selected interval. }
+
+                { Synchronous operations. }
+
+                { Transfers part of profile data to the list of selected interval. }
         function SelectArea(StartPointIndex, StopPointIndex: LongInt): string;
         function ReturnToTotalProfile: string;
-		{ Defines starting and finishing point for each curve (specimen), 
-          integrates it and puts parameters into resulting list. }
+                { Defines starting and finishing point for each curve (specimen),
+                  integrates it and puts parameters into resulting list. }
         procedure CreateSpecimenList;
 
-		{ The fields setting and getting of which are not related with sensitive 
-		  for the actor or long-term activity are better implemented by properties.  }
-        
-		{ Maximum allowed value of R-factor. }
+                { The fields setting and getting of which are not related with sensitive
+                  for the actor or long-term activity are better implemented by properties.  }
+
+                { Maximum allowed value of R-factor. }
         property MaxRFactor: Double read FMaxRFactor write SetMaxRFactor;
-		{ Denominator of ratio of background to maximal intensity. }
+                { Denominator of ratio of background to maximal intensity. }
         property BackFactor: Double read FBackFactor write FBackFactor;
-		{ The threshold for determination of curve (specimen) boundaries. It is supposed
-          that background was cut out. The curve boundaries are defined by exceeding 
-          the threshold by curve function. The same threshold removes instances with
-          too small amplitude. }
+                { The threshold for determination of curve (specimen) boundaries. It is supposed
+                  that background was cut out. The curve boundaries are defined by exceeding
+                  the threshold by curve function. The same threshold removes instances with
+                  too small amplitude. }
         property CurveThresh: Double read FCurveThresh write SetCurveThresh;
         property CurveType: TCurveType read FCurveType write SetCurveType;
         property State: TFitServerState read FState;
         property WaveLength: Double read FWaveLength write SetWaveLength;
         property SelectedAreaMode: Boolean read FSelectedAreaMode;
 {$IFDEF FIT}
-		{ This can be equal to Nil. }
+                { This can be equal to Nil. }
         property FitProxy: TFitServerProxy read FFitProxy write FFitProxy;
 {$ENDIF}
     end;
@@ -430,11 +447,11 @@ begin
 
     try
         Assert(Assigned(APointsSet));   //  kriticheskaya oshibka
-        
+
         ExpProfile.Free; ExpProfile := APointsSet;
         if ExpProfile.PointsCount = 0 then
             raise EUserException.Create(InadmissibleData);
-            
+
         SetState(BackNotRemoved);
         if Result = '' then Result := BackRemoving
         else Result := Result + ' ' + BackRemoving;
@@ -457,7 +474,7 @@ begin
     try
         Assert(Assigned(ABackgroundPoints));    //  kriticheskaya oshibka
         Assert(Assigned(ExpProfile));
-        
+
         BackgroundPoints.Free; BackgroundPoints := ABackgroundPoints;
 
         if ExpProfile.PointsCount > 2 then
@@ -493,7 +510,7 @@ begin
     try
         Assert(Assigned(ACurvePositions));
         Assert(Assigned(SpecimenList));
-    
+
         CurvePositions.Clear;
         SpecimenList.Clear;
 
@@ -503,7 +520,7 @@ begin
                 ACurvePositions.PointYCoord[i]
                 );
         ACurvePositions.Free;
-        
+
         if ExpProfile.PointsCount > 2 then GoToReadyForFit
         else SetState(ProfileWaiting);
 
@@ -537,20 +554,20 @@ begin
     try
         Assert(Assigned(ARFactorIntervals));
         Assert(Assigned(SpecimenList));
-        
+
         RFactorIntervals.Clear;
         SpecimenList.Clear;
-        
+
         for i := 0 to ARFactorIntervals.PointsCount - 1 do
             AddPoint(RFactorIntervals,
                 ARFactorIntervals.PointXCoord[i],
                 ARFactorIntervals.PointYCoord[i]
                 );
         ARFactorIntervals.Free;
-        
+
         if ExpProfile.PointsCount > 2 then GoToReadyForFit
         else SetState(ProfileWaiting);
-        
+
         Msg := '';
         if State = ProfileWaiting then Msg := IsProfileWaiting
         else
@@ -573,7 +590,7 @@ end;
 destructor TFitServer.Destroy;
 begin
     SetState(ProfileWaiting);
-    
+
     BackgroundPoints.Free;
     RFactorIntervals.Free;
     CurvePositions.Free;
@@ -585,7 +602,7 @@ end;
 constructor TFitServer.Create(AOwner: TComponent);
 begin
     inherited;
-    
+
     Params := Curve_parameters.Create(nil);
 
     FMaxRFactor := 0.0001;  //  0.01%
@@ -643,7 +660,7 @@ begin
         else Data := ExpProfile;
         Assert(Assigned(Data));
         Data.Sort;
-        
+
         if not Auto then
         begin
             //  dlya podderzhki vyzova cherez web-interfeys
@@ -656,7 +673,7 @@ begin
             //  zaschischaet resursy Background ot poteri
             Assert(Assigned(Background));
             Background.Sort;
-            
+
             StartIndex := Data.IndexOfValueX(Background.PointXCoord[0]);
             Assert(StartIndex <> -1);
 
@@ -1162,7 +1179,7 @@ begin
     if State = ProfileWaiting then
         raise EUserException.Create(InadmissibleServerState + CRLF +
             DataMustBeSet);
-            
+
     StartTime := Now;
     RecreateMainCalcThread(FindPeakBoundsAlg, FindPeakBoundsDoneProcActual);
 end;
@@ -1349,7 +1366,7 @@ begin
         raise EUserException.Create(SpecimenParameterListNotReady);
     if (SpecIndex < 0) or (SpecIndex >= SpecParamList.Count) then
         raise EUserException.Create(InadmissibleSpecimenIndex);
-        
+
     CP := Curve_parameters(SpecParamList.Items[SpecIndex]);
     Result := CP.Params.Count;
 end;
@@ -1365,7 +1382,7 @@ begin
         raise EUserException.Create(SpecimenParameterListNotReady);
     if (SpecIndex < 0) or (SpecIndex >= SpecParamList.Count) then
         raise EUserException.Create(InadmissibleSpecimenIndex);
-        
+
     CP := Curve_parameters(SpecParamList.Items[SpecIndex]);
     if (ParamIndex < 0) or (ParamIndex >= CP.Params.Count) then
         raise EUserException.Create(InadmissibleParameterIndex);
@@ -1424,7 +1441,7 @@ begin
         end;
     end;
 end;
-(*
+
 procedure TFitServer.SubtractBackground;
 var SA: TPointsSet;
 begin
@@ -1434,7 +1451,7 @@ begin
 
     SubtractLinearly(SA, 0, SA.PointsCount - 1);
 end;
-*)
+
 procedure TFitServer.SelectAreaActual(
     Points: TPointsSet; StartPointIndex, StopPointIndex: LongInt);
 var i: LongInt;
@@ -1444,7 +1461,7 @@ begin
     Assert(Points.PointsCount <> 0);
     Assert((StartPointIndex >= 0) and (StopPointIndex < Points.PointsCount));
     Assert(Points <> SelectedArea);
-    
+
     SelectedArea.Free; SelectedArea := nil;
     SelectedArea := TTitlePointsSet.Create(nil);
     for i := StartPointIndex to StopPointIndex do
@@ -1525,11 +1542,11 @@ begin
         P := TSpecialCurveParameter(NC.Params.Add);
         P.Name := StartPosName; P.Value := Points.PointXCoord[StartPointIndex];
         P.Type_ := Calculated;
-        
+
         P := TSpecialCurveParameter(NC.Params.Add);
         P.Name := FinishPosName; P.Value := Points.PointXCoord[StopPointIndex];
         P.Type_ := Calculated;
-        
+
         P := TSpecialCurveParameter(NC.Params.Add);
         P.Name := 'Integral'; P.Value := Integral;
         P.Type_ := Calculated;
@@ -1602,7 +1619,7 @@ begin
     try
         Assert(Assigned(TaskList));
 
-        ShowCurMin;
+        ShowCurMinInternal;
 
         AllDone := True;
         for i := 0 to TaskList.Count - 1 do
@@ -1651,7 +1668,7 @@ begin
     end;
 end;
 
-procedure TFitServer.ShowCurMin;
+procedure TFitServer.ShowCurMinInternal;
 begin
     if GetAllInitialized then
     begin
@@ -1659,24 +1676,49 @@ begin
         //  vyzyvaetsya v osnovnom potoke servera,
         //  t.e. v tom zhe potoke, chto i ServerStub,
         //  poetomu mozhno ispuskat' te zhe isklyucheniya
-{$IFDEF FIT}
-        if Assigned(FitProxy) then
-        begin
-            CreateResultedCurvesList();
-            FitProxy.ShowCurMin(CurrentMinimum);
-        end;
-{$ENDIF}
+        ShowCurMin(CurrentMinimum);
     end;
 end;
 
 procedure TFitServer.ShowProfile;
 begin
-{$IFDEF FIT}
+    {$IFDEF FIT}
       if Assigned(FitProxy) then
       begin
           FitProxy.ShowProfile();
       end;
-{$ENDIF}
+    {$ENDIF}
+end;
+
+procedure TFitServer.ShowCurMin(Min: Double);
+begin
+    {$IFDEF FIT}
+      if Assigned(FitProxy) then
+      begin
+          CreateResultedCurvesList();
+          FitProxy.ShowCurMin(CurrentMinimum);
+      end;
+    {$ENDIF}
+end;
+
+procedure TFitServer.Done;
+begin
+
+end;
+
+procedure TFitServer.FindPeakBoundsDone;
+begin
+
+end;
+
+procedure TFitServer.FindBackPointsDone;
+begin
+
+end;
+
+procedure TFitServer.FindPeakPositionsDone;
+begin
+
 end;
 
 function TFitServer.GetAllInitialized: Boolean;
@@ -1779,7 +1821,7 @@ begin
     if State <> ReadyForFit then
         raise EUserException.Create(
             InadmissibleServerState + CRLF + NotAllData);
-            
+
     RecreateMainCalcThread(FindGaussesAgainAlg, DoneProc);
 end;
 
@@ -1805,7 +1847,7 @@ begin
     end;
     if CurvePositions.PointsCount = 0 then FindPeakPositionsForAutoAlg;
     SetState(ReadyForFit);
-    
+
     RecreateMainCalcThread(FindGaussesAlg, DoneProc);
 end;
 
@@ -1937,7 +1979,7 @@ begin
     Assert(Assigned(TaskList));
     CurvesList.Free; CurvesList := nil;
     CurvesList := TSelfCopiedCompList.Create(nil);
-    
+
     for i := 0 to TaskList.Count - 1 do
     begin
         FT := TFitTask(TaskList.Items[i]);
@@ -1990,7 +2032,7 @@ begin
             CurvePositions.Clear;
             SpecimenList.Clear;
             CurvesList.Clear;
-            
+
             SelectedArea.Free; SelectedArea := nil;
             CalcProfile.Free; CalcProfile := nil;
             DeltaProfile.Free; DeltaProfile := nil;
@@ -2102,17 +2144,17 @@ begin
     //  eto proshe, chem zhestko ogranichivat', delat' proverki i
     //  vyvodit' soobscheniya
     //Assert(RFactorIntervals.PointsCount mod 2 = 0);
-    
+
     if FSelectedAreaMode then Data := SelectedArea
     else Data := ExpProfile;
     Assert(Assigned(Data));
     Data.Sort;
-    
+
     RFactorIntervals.Sort;      //  !!! tochki, ogranichivayuschie intervaly m.b.
                                 //  peredany izvne, poetomu sortirovka ne
                                 //  pomeshaet !!!
     CurvePositions.Sort;        //  !!! to zhe samoe !!!
-    
+
     TaskList.Free; TaskList := nil;
     TaskList := TSelfCheckedComponentList.Create(nil);
 
@@ -2223,7 +2265,7 @@ begin
                 TF.CurveType := CurveType;
                 if CurveType = Special then
                     TF.SetSpecialCurve(FCurveExpr, Curve_parameters(Params.GetCopy));
-                TF.ShowCurMinExternal := ShowCurMin;
+                TF.ShowCurMinExternal := ShowCurMinInternal;
                 TF.DoneProcExternal := DoneProc;
 
                 TaskList.Add(TF);
@@ -2283,7 +2325,7 @@ begin
                 end;
             end;
         end;
-        
+
         if StartPointIndex <> -1 then
         begin
             //  krivye so slishkom maloy intensivnost'yu ne vklyuchayutsya v spisok
@@ -2448,7 +2490,7 @@ begin
 (*  ???
     Assert(Assigned(Params));
     Assert(Assigned(Params.Params));
-    
+
     if Length(ACurveExpr) = 0 then
         //  eto dopustimaya fatal'naya oshibka pol'zovatelya
         raise EUserException.Create('Inadmissible or invalid expression.');
@@ -2461,7 +2503,7 @@ begin
     begin
         //  pervonachal'noe zapolnenie parametrov
         Params.Params.Clear;
-        
+
         Symbols := GetSymbols;
         Saved := Symbols;
         try
@@ -2478,7 +2520,7 @@ begin
                     P.Type_ := InvariablePosition
                 else
                     P.Type_ := Variable;
-                    
+
                 Symbols := Symbols + Length(Symbols) + 1;
                 Inc(Index);
             end;
@@ -2536,7 +2578,7 @@ begin
 
     Assert(Assigned(ExpProfile));
     AddPoint(ExpProfile, XValue, YValue);   //  dobavlyaet i udalyaet tochki
-    
+
     if ExpProfile.PointsCount = 0 then SetState(ProfileWaiting)
     else SetState(BackNotRemoved);
 end;
@@ -2558,7 +2600,7 @@ procedure TFitServer.GoToReadyForFit;
 begin
     if State = ProfileWaiting then Exit;
     SetState(ReadyForAutoFit);      //  !!! udalyaet podzadachi !!!
-    
+
     if  //  proverka nuzhna, t.k. imenno takomy
         //  sochetaniyu sootvetstvuet gotovnost'
         //  k podgonke s parametrami pol'zovatelya

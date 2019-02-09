@@ -17,10 +17,11 @@ unit FitServerProxy;
 
 interface
 
-uses Classes, SysUtils, FitClientStub, MyExceptions;
+uses Classes, SysUtils, FitClientStub, MyExceptions, ClientCallback,
+     CBRCComponent;
 
 type
-    TFitServerProxy = class(TObject)
+    TFitServerProxy = class(TCBRCComponent, IClientCallback)
     protected
         FFitStub: TFitClientStub;
 

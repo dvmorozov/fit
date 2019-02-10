@@ -34,7 +34,7 @@ uses Classes, DataLoader, SelfCheckedComponentList, SysUtils, MSCRDataClasses,
      FitServerProxy,    //      Proxy to client to call it back.
 {$ENDIF}
      SelfCopied, MyExceptions, FitTask, SimpMath,
-     MainCalcThread, CommonTypes, ClientCallback,
+     MainCalcThread, CommonTypes, IntClientCallback,
      CBRCComponent;
 
 type

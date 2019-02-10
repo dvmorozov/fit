@@ -1,4 +1,4 @@
-unit ClientCallback;
+unit IntClientCallback;
 
 {$mode delphi}
 

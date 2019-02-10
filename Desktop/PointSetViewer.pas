@@ -22,8 +22,8 @@ uses DataLoader, Classes, SysUtils, Graphics, SelfCopied, CheckLst,
     tagraph, Forms, SelfCheckedComponentList, MSCRDataClasses;
 
 {$IFNDEF SERVER}
-{$DEFINE USE_LEGEND}
-{$DEFINE USE_GRIDS}
+//{$DEFINE USE_LEGEND}
+//{$DEFINE USE_GRIDS}
 {$ENDIF}
 
 const
@@ -33,10 +33,11 @@ const
     XCM_SINTL = 2;
 
 type
-	{ Component which can show client data by means of UI components.
-	  Supports correspondence between series of Chart and items of CheckListBox.
+    { Component displaying client data by means of UI components.
+      Supports correspondence between series of Chart and items of CheckListBox.
       On turning off CheckListBox item serie can be only hidden but not deleted
-      because there is no direct connection between items of CheckListBox and items of PointsSetList. }
+      because there is no direct connection between items of CheckListBox and
+      items of PointsSetList. }
     TFitViewer = class(TComponent)
     protected
 {$IFNDEF SERVER}
@@ -209,7 +210,9 @@ begin
     FitClient.OnRefreshPointsSet := RefreshPointsSet;
     FitClient.OnClear := Clear;
     FitClient.OnHide := Hide;
+{$IFDEF USE_GRIDS}
     FitClient.OnFillDatasheetTable := FillDatasheetTable;
+{$ENDIF}
 end;
 {$ENDIF}
 const

@@ -17,7 +17,7 @@ interface
 
 uses DataLoader, Classes, SysUtils, Graphics, SelfCopied, CheckLst,
 {$IFNDEF SERVER}
-    FitClient,
+    FitClient, IntFitViewer,
 {$ENDIF}
     tagraph, Forms, SelfCheckedComponentList, MSCRDataClasses;
 
@@ -38,7 +38,7 @@ type
       On turning off CheckListBox item serie can be only hidden but not deleted
       because there is no direct connection between items of CheckListBox and
       items of PointsSetList. }
-    TFitViewer = class(TComponent)
+    TFitViewer = class(TComponent, IFitViewer)
     protected
 {$IFNDEF SERVER}
         FitClient: TFitClient;
@@ -187,32 +187,7 @@ uses Main,
 procedure TFitViewer.SetFitClient(AFitClient: TFitClient);
 begin
     FitClient := AFitClient;
-    FitClient.OnPlotSpecimens := PlotSpecimens;
-    FitClient.OnPlotSelectedPoints := PlotSelectedPoints;
-
-    FitClient.OnPlotRFactorIntervals := PlotRFactorIntervals;
-    FitClient.OnHideRFactorIntervals := HideRFactorIntervals;
-    
-    FitClient.OnPlotCurvePositions := PlotCurvePositions;
-    FitClient.OnHideCurvePositions := HideCurvePositions;
-
-    FitClient.OnPlotDataPoints := PlotDataPoints;
-    FitClient.OnHideDataPoints := HideDataPoints;
-
-    FitClient.OnPlotSelectedArea := PlotSelectedArea;
-
-    FitClient.OnPlotBackground := PlotBackground;
-    FitClient.OnHideBackground := HideBackground;
-
-    FitClient.OnPlotGaussProfile := PlotGaussProfile;
-    FitClient.OnPlotDeltaProfile := PlotDeltaProfile;
-    FitClient.OnRefresh := Refresh;
-    FitClient.OnRefreshPointsSet := RefreshPointsSet;
-    FitClient.OnClear := Clear;
-    FitClient.OnHide := Hide;
-{$IFDEF USE_GRIDS}
-    FitClient.OnFillDatasheetTable := FillDatasheetTable;
-{$ENDIF}
+    FitClient.FitViewer := Self;
 end;
 {$ENDIF}
 const

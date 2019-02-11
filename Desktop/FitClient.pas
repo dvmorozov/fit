@@ -17,8 +17,8 @@ unit FitClient;
 interface
 
 uses Classes, DataLoader, SelfCopied, SysUtils, MSCRDataClasses,
-    Dialogs, FitClientProxy, SimpMath, CommonTypes, IntClientCallback,
-    CBRCComponent;
+    Dialogs, FitClientProxy, CommonTypes, CBRCComponent,
+    IntClientCallback, IntFitViewer;
     
 type
     { Modes of selectiion of active point set. }
@@ -37,12 +37,6 @@ type
         AsyncDone
         );
 
-    { Handler drawing specimen curves. Provides different ways of displaying data. 
-      Component which will actually display the data must store all pointers
-      to visual components inside its own memory to be able hide them. }
-    TPlotSpecimens = procedure(Sender: TObject;
-        CurvesList: TSelfCopiedCompList;
-        SpecimenList: TMSCRSpecimenList) of object;
     { Handler to fill data table. }
     TFillDatasheetTable = procedure(
             Profile: TTitlePointsSet;
@@ -142,36 +136,13 @@ type
 
     protected
         { Pointers to methods for curve displaying. }
-        
-        FOnPlotSpecimens: TPlotSpecimens;
-        FOnFillDatasheetTable: TFillDatasheetTable;
-        FOnPlotSelectedPoints: TPlotSelectedPoints;
 
-        FOnPlotRFactorIntervals: TPlotRFactorIntervals;
-        FOnHideRFactorIntervals: THideRFactorIntervals;
-
-        FOnPlotCurvePositions: TPlotCurvePositions;
-        FOnHideCurvePositions: THideCurvePositions;
-
-        FOnPlotDataPoints: TPlotDataPoints;
-        FOnHideDataPoints: THideDataPoints;
-
-        FOnPlotSelectedArea: TPlotSelectedArea;
-
-        FOnPlotBackground: TPlotBackground;
-        FOnHideBackground: THideBackground;
-
-        FOnPlotGaussProfile: TPlotGaussProfile;
-        FOnPlotDeltaProfile: TPlotDeltaProfile;
-        FOnRefresh: TRefresh;
-        FOnRefreshPointsSet: TRefreshPointsSet;
-        FOnClear: TClear;
-        FOnHide: THide;
         { Callback on asynchronous operation finishing. }
         FAsyncOperationFinished: TAsyncOperationFinished;
 
         { Is used in RefreshPointsSet, Hide. }
         ToRefresh: TNeutronPointsSet;
+
         { Updates all the data and refreshes chart. }
         procedure UpdateAll;
         procedure HideSpecimens;
@@ -202,7 +173,9 @@ type
         procedure RefreshPointsSet;
         procedure Clear;
         procedure Hide;
+        {$IFDEF USE_GRIDS}
         procedure FillDatasheetTable;
+        {$ENDIF}
 
         { Returns full profile or part of profile selected at the moment. }
         function GetProfilePointsSet: TTitlePointsSet;
@@ -233,7 +206,10 @@ type
         procedure SelectAreaActual(ANeutronPoints: TNeutronPointsSet;
             StartPointIndex, StopPointIndex: LongInt);
         procedure CopyProfileDataFromLoader;
+
     public
+        FitViewer: IFitViewer;
+
         function GetSpecimenList: TMSCRSpecimenList;
 
         function GetBackgroundPoints: TNeutronPointsSet;
@@ -327,53 +303,7 @@ type
 
         { Plotting events are called from methods of the same name for providing
           synchronization with main application thread. Point to methods of TIIViewer. }
-          
-        property OnPlotSpecimens: TPlotSpecimens
-            read FOnPlotSpecimens write FOnPlotSpecimens;
-        property OnFillDatasheetTable: TFillDatasheetTable
-            read FOnFillDatasheetTable write FOnFillDatasheetTable;
-        property OnPlotSelectedPoints: TPlotSelectedPoints
-            read FOnPlotSelectedPoints write FOnPlotSelectedPoints;
 
-        property OnPlotRFactorIntervals: TPlotRFactorIntervals
-            read FOnPlotRFactorIntervals write FOnPlotRFactorIntervals;
-        property OnHideRFactorIntervals: THideRFactorIntervals
-            read FOnHideRFactorIntervals write FOnHideRFactorIntervals;
-
-        property OnPlotCurvePositions: TPlotCurvePositions
-            read FOnPlotCurvePositions write FOnPlotCurvePositions;
-        property OnHideCurvePositions: THideCurvePositions
-            read FOnHideCurvePositions write FOnHideCurvePositions;
-
-        { Draws diagram data. }
-        
-        property OnPlotDataPoints: TPlotDataPoints
-            read FOnPlotDataPoints write FOnPlotDataPoints;
-        property OnHideDataPoints: THideDataPoints
-            read FOnHideDataPoints write FOnHideDataPoints;
-
-        property OnPlotSelectedArea: TPlotSelectedArea
-            read FOnPlotSelectedArea write FOnPlotSelectedArea;
-
-        property OnPlotBackground: TPlotBackground
-            read FOnPlotBackground write FOnPlotBackground;
-        property OnHideBackground: THideBackground
-            read FOnHideBackground write FOnHideBackground;
-
-        property OnPlotGaussProfile: TPlotGaussProfile
-            read FOnPlotGaussProfile write FOnPlotGaussProfile;
-        property OnPlotDeltaProfile: TPlotDeltaProfile
-            read FOnPlotDeltaProfile write FOnPlotDeltaProfile;
-        
-        { Refreshes all curves. }
-        property OnRefresh: TRefresh read FOnRefresh write FOnRefresh;
-        { Refreshes curve in the case of adding new or changing point. }
-        property OnRefreshPointsSet: TRefreshPointsSet
-            read FOnRefreshPointsSet write FOnRefreshPointsSet;
-        { Is called before cleaning all diagram data. }
-        property OnClear: TClear read FOnClear write FOnClear;
-        property OnHide: THide read FOnHide write FOnHide;
-        
         { Callbacks for updating user interface. They are called from main thread of client application.
           Callbacks can throw exceptions. They can be not assigned (nil). }
         property OnAsyncOperationFinished: TAsyncOperationFinished
@@ -695,7 +625,9 @@ begin
         SpecimenList.Lambda := WaveLength;
 
     PlotSpecimens;
+    {$IFDEF USE_GRIDS}
     FillDatasheetTable;
+    {$ENDIF}
 end;
 
 procedure TFitClient.Done;
@@ -864,8 +796,8 @@ end;
 
 procedure TFitClient.PlotSpecimens;
 begin
-    if Assigned(OnPlotSpecimens) then
-        OnPlotSpecimens(Self, CurvesList, SpecimenList);
+    if Assigned(FitViewer) then
+        FitViewer.PlotSpecimens(Self, CurvesList, SpecimenList);
 end;
 
 procedure TFitClient.HideSpecimens;
@@ -881,105 +813,107 @@ end;
 
 procedure TFitClient.PlotSelectedPoints;
 begin
-    if Assigned(OnPlotSelectedPoints) then
-        OnPlotSelectedPoints(Self, SelectedPoints);
+    if Assigned(FitViewer) then
+        FitViewer.PlotSelectedPoints(Self, SelectedPoints);
 end;
 
 procedure TFitClient.PlotRFactorIntervals;
 begin
-    if Assigned(OnPlotRFactorIntervals) then
-        OnPlotRFactorIntervals(Self, RFactorIntervals);
+    if Assigned(FitViewer) then
+        FitViewer.PlotRFactorIntervals(Self, RFactorIntervals);
 end;
 
 procedure TFitClient.HideRFactorIntervals;
 begin
-    if Assigned(OnHideRFactorIntervals) then
-        OnHideRFactorIntervals(Self, RFactorIntervals);
+    if Assigned(FitViewer) then
+        FitViewer.HideRFactorIntervals(Self, RFactorIntervals);
 end;
 
 procedure TFitClient.PlotCurvePositions;
 begin
-    if Assigned(OnPlotCurvePositions) then
-        OnPlotCurvePositions(Self, CurvePositions);
+    if Assigned(FitViewer) then
+        FitViewer.PlotCurvePositions(Self, CurvePositions);
 end;
 
 procedure TFitClient.HideCurvePositions;
 begin
-    if Assigned(OnHideCurvePositions) then
-        OnHideCurvePositions(Self, CurvePositions);
+    if Assigned(FitViewer) then
+        FitViewer.HideCurvePositions(Self, CurvePositions);
 end;
 
+{$IFDEF USE_GRIDS}
 procedure TFitClient.FillDatasheetTable;
 begin
-    if Assigned(OnFillDatasheetTable) then
-        OnFillDatasheetTable(GetProfilePointsSet, CurvesList,
+    if Assigned(FitViewer) then
+        FitViewer.FillDatasheetTable(GetProfilePointsSet, CurvesList,
             GaussProfile, DeltaProfile, RFactorIntervals);
 end;
+{$ENDIF}
 
 procedure TFitClient.PlotDataPoints;
 begin
-    if Assigned(OnPlotDataPoints) then
-        OnPlotDataPoints(Self, NeutronPointsSet);
+    if Assigned(FitViewer) then
+        FitViewer.PlotDataPoints(Self, NeutronPointsSet);
 end;
 
 procedure TFitClient.HideDataPoints;
 begin
-    if Assigned(OnHideDataPoints) then
-        OnHideDataPoints(Self, NeutronPointsSet);
+    if Assigned(FitViewer) then
+        FitViewer.HideDataPoints(Self, NeutronPointsSet);
 end;
 
 procedure TFitClient.PlotSelectedArea;
 begin
-    if Assigned(OnPlotSelectedArea) then
-        OnPlotSelectedArea(Self, SelectedArea);
+    if Assigned(FitViewer) then
+        FitViewer.PlotSelectedArea(Self, SelectedArea);
 end;
 
 procedure TFitClient.PlotBackground;
 begin
-    if Assigned(OnPlotBackground) then
-        OnPlotBackground(Self, BackgroundPoints);
+    if Assigned(FitViewer) then
+        FitViewer.PlotBackground(Self, BackgroundPoints);
 end;
 
 procedure TFitClient.HideBackground;
 begin
-    if Assigned(OnHideBackground) then
-        OnHideBackground(Self, BackgroundPoints);
+    if Assigned(FitViewer) then
+        FitViewer.HideBackground(Self, BackgroundPoints);
 end;
 
 procedure TFitClient.PlotGaussProfile;
 begin
-    if Assigned(OnPlotGaussProfile) then
-        OnPlotGaussProfile(Self, GaussProfile);
+    if Assigned(FitViewer) then
+        FitViewer.PlotGaussProfile(Self, GaussProfile);
 end;
 
 procedure TFitClient.PlotDeltaProfile;
 begin
-    if Assigned(OnPlotDeltaProfile) then
-        OnPlotDeltaProfile(Self, DeltaProfile);
+    if Assigned(FitViewer) then
+        FitViewer.PlotDeltaProfile(Self, DeltaProfile);
 end;
 
 procedure TFitClient.Refresh;
 begin
-    if Assigned(OnRefresh) then OnRefresh(Self);
+    if Assigned(FitViewer) then FitViewer.Refresh(Self);
 end;
 
 procedure TFitClient.RefreshPointsSet;
 begin
     Assert(Assigned(ToRefresh));
 
-    if Assigned(OnRefreshPointsSet) then
-        OnRefreshPointsSet(Self, ToRefresh);
+    if Assigned(FitViewer) then
+        FitViewer.RefreshPointsSet(Self, ToRefresh);
     ToRefresh := nil;
 end;
 
 procedure TFitClient.Clear;
 begin
-    if Assigned(OnClear) then OnClear(Self);
+    if Assigned(FitViewer) then FitViewer.Clear(Self);
 end;
 
 procedure TFitClient.Hide;
 begin
-    if Assigned(OnHide) then OnHide(Self, ToRefresh);
+    if Assigned(FitViewer) then FitViewer.Hide(Self, ToRefresh);
     ToRefresh := nil;
 end;
 

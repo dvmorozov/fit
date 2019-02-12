@@ -49,10 +49,11 @@ type
                 Sender: TObject; PointsSet: TNeutronPointsSet);
         { Is called before cleaning all diagram data. }
         procedure Clear(Sender: TObject);
+	{ Hides given point set and removes corresponding item from CheckBox. }
         procedure Hide(Sender: TObject; PointsSet: TNeutronPointsSet);
         {$IFDEF USE_GRIDS}
         { Handler to fill data table. }
-        procedure TFitViewer.FillDatasheetTable(
+        procedure FillDatasheetTable(
             Profile: TTitlePointsSet;
             CurvesList: TSelfCopiedCompList;
             GaussProfile: TTitlePointsSet;
@@ -60,6 +61,8 @@ type
             RFactorIntervals: TTitlePointsSet
             );
         {$ENDIF}
+        procedure SetUpdateGrids(Update: Boolean);
+        procedure SetUpdateLegends(Update: Boolean);
     end;
 
 implementation

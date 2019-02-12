@@ -47,29 +47,21 @@ type
         MaxX, MinX, MaxY, MinY: Double;
         ViewMarkers: Boolean;
         FForm: TForm;
+        FUpdateGrids: Boolean;
+        FUpdateLegends: Boolean;
 
         procedure SetXCoordMode(AMode: LongInt);
-        
-		{ List of data sets for each item of which chart serie is related. 
-		The list is passive, it contains pointers to external data. }
 
     protected
+	{ List of data sets for each item of which chart serie is related.
+	  The list is passive, it contains pointers to external data. }
         PointsSetList: TSelfCheckedComponentList;
-{$IFDEF USE_GRIDS}
-        procedure FillDatasheetTable(
-            Profile: TTitlePointsSet;
-            CurvesList: TSelfCopiedCompList;
-            GaussProfile: TTitlePointsSet;
-            DeltaProfile: TTitlePointsSet;
-            RFactorIntervals: TTitlePointsSet
-            );
-{$ENDIF}
-		{ Returns maximum number of curves in one of given R-factor intervals. }
+	{ Returns maximum number of curves in one of given R-factor intervals. }
         function GetMaxCurveNum(
             CurvesList: TSelfCopiedCompList;
             RFactorIntervals: TTitlePointsSet
             ): LongInt;
-		{ Returns total number of profile points belonging to any of intervals. }
+	{ Returns total number of profile points belonging to any of intervals. }
         function GetPointsNumInIntervals(
             Profile: TTitlePointsSet;
             RFactorIntervals: TTitlePointsSet
@@ -89,32 +81,7 @@ type
         procedure ClearDatasheetTable;
 {$ENDIF}
         function ValToStr(Value: Double): string;
-
-		{ Methods implement different ways of drawing not related with data. }
-		
-        procedure PlotSelectedPoints(
-            Sender: TObject; SelectedPoints: TTitlePointsSet);
-
-        procedure HideRFactorIntervals(
-            Sender: TObject; RFactorIntervals: TTitlePointsSet);
-        procedure HideCurvePositions(
-            Sender: TObject; CurvePositions: TTitlePointsSet);
-
-        procedure HideDataPoints(
-            Sender: TObject; DataPoints: TTitlePointsSet);
-
-        procedure HideBackground(
-            Sender: TObject; BackgroundPoints: TTitlePointsSet);
-
-        procedure Refresh(Sender: TObject);
-
-		{ Does not clear series but only refreshes intencities. }
-        procedure RefreshPointsSet(
-            Sender: TObject; PointsSet: TNeutronPointsSet);
-		{ Hides given point set and removes corresponding item from CheckBox. }
-        procedure Hide(Sender: TObject; PointsSet: TNeutronPointsSet);
-
-		{ Clears serie set and fills it again. }
+        { Clears serie set and fills it again. }
         procedure PlotPointsSet(SA: TNeutronPointsSet);
 
     public
@@ -124,6 +91,9 @@ type
 {$ELSE}
         procedure Paint;
 {$ENDIF}
+    public
+        { Implementation of IFitViewer. }
+
         procedure PlotBackground(
             Sender: TObject; BackgroundPoints: TTitlePointsSet);
         procedure PlotDataPoints(
@@ -142,14 +112,42 @@ type
             Sender: TObject; GaussProfile: TTitlePointsSet);
         procedure PlotDeltaProfile(
             Sender: TObject; DeltaProfile: TTitlePointsSet);
-            
-    public
+        procedure PlotSelectedPoints(
+            Sender: TObject; SelectedPoints: TTitlePointsSet);
+
+        procedure HideRFactorIntervals(
+            Sender: TObject; RFactorIntervals: TTitlePointsSet);
+        procedure HideCurvePositions(
+            Sender: TObject; CurvePositions: TTitlePointsSet);
+        procedure HideDataPoints(
+            Sender: TObject; DataPoints: TTitlePointsSet);
+        procedure HideBackground(
+            Sender: TObject; BackgroundPoints: TTitlePointsSet);
+
+        procedure Refresh(Sender: TObject);
+	{ Does not clear series but only refreshes intencities. }
+        procedure RefreshPointsSet(
+            Sender: TObject; PointsSet: TNeutronPointsSet);
+
+        procedure Clear(Sender: TObject);
+        procedure Hide(Sender: TObject; PointsSet: TNeutronPointsSet);
+
+        procedure SetUpdateGrids(Update: Boolean);
+        procedure SetUpdateLegends(Update: Boolean);
+{$IFDEF USE_GRIDS}
+        procedure FillDatasheetTable(
+            Profile: TTitlePointsSet;
+            CurvesList: TSelfCopiedCompList;
+            GaussProfile: TTitlePointsSet;
+            DeltaProfile: TTitlePointsSet;
+            RFactorIntervals: TTitlePointsSet
+            );
+{$ENDIF}
         procedure SetViewMarkers(AViewMarkers: Boolean);
         procedure ViewAllMarkers;
-        procedure Clear(Sender: TObject);
-		{ Clears all series and fills them again saving parameter values. }
+	{ Clears all series and fills them again saving parameter values. }
         procedure Plot;
-		{ Returns number of the first visible curve from curve list. 
+	{ Returns number of the first visible curve from curve list.
           This function actually gives the number of active curve
           when only single curve is visible in the chart. This should
           be checked separately. }
@@ -157,7 +155,7 @@ type
         function GetActivePointsSet: TNeutronPointsSet;
         function GetPointsSet(ActiveNumber: LongInt): TNeutronPointsSet;
 
-		{ Return boundary values among all curves. }
+	{ Return boundary values among all curves. }
 		
         function GetMaxX: Double;
         function GetMinX: Double;
@@ -628,6 +626,16 @@ begin
     FillDataTable(DataPoints);
 {$ENDIF}
     PlotPointsSet(DataPoints);
+end;
+
+procedure TFitViewer.SetUpdateGrids(Update: Boolean);
+begin
+    FUpdateGrids := Update;
+end;
+
+procedure TFitViewer.SetUpdateLegends(Update: Boolean);
+begin
+    FUpdateLegends := Update;
 end;
 
 constructor TFitViewer.Create(AOwner: TComponent);

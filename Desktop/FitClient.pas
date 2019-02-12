@@ -173,9 +173,9 @@ type
         procedure RefreshPointsSet;
         procedure Clear;
         procedure Hide;
-        {$IFDEF USE_GRIDS}
+{$IFDEF USE_GRIDS}
         procedure FillDatasheetTable;
-        {$ENDIF}
+{$ENDIF}
 
         { Returns full profile or part of profile selected at the moment. }
         function GetProfilePointsSet: TTitlePointsSet;
@@ -625,9 +625,10 @@ begin
         SpecimenList.Lambda := WaveLength;
 
     PlotSpecimens;
-    {$IFDEF USE_GRIDS}
-    FillDatasheetTable;
-    {$ENDIF}
+{$IFDEF USE_GRIDS}
+    if FUpdateGrids then
+        FillDatasheetTable;
+{$ENDIF}
 end;
 
 procedure TFitClient.Done;

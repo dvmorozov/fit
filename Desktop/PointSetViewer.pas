@@ -48,7 +48,9 @@ type
         MaxX, MinX, MaxY, MinY: Double;
         ViewMarkers: Boolean;
         FForm: TForm;
+        { Enables updating grids. By default is true. }
         FUpdateGrids: Boolean;
+        { Enables updating legend. By default is true. }
         FUpdateLegends: Boolean;
 
         procedure SetXCoordMode(AMode: LongInt);
@@ -683,6 +685,8 @@ begin
     PointsSetList := TSelfCheckedComponentList.Create(nil);
     PointsSetList.SetState(cfPassive);
     FXCoordMode := 0;
+    FUpdateGrids := true;
+    FUpdateLegends := true;
 end;
 
 destructor TFitViewer.Destroy;

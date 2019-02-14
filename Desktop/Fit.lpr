@@ -32,7 +32,7 @@ uses
 {$else}
   ,TA_LINUX
 {$endif}
-  , Main, CommonTypes, GeneralHashFunctions;
+  , Main, CommonTypes, TableComp, ClassInheritIDs, GeneralHashFunctions;
 
 {$R manifest.res}
 

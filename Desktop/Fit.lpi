@@ -136,7 +136,7 @@
       <Unit2>
         <Filename Value="DataLoader.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="7"/>
+        <EditorIndex Value="10"/>
         <WindowIndex Value="1"/>
         <TopLine Value="78"/>
         <CursorPos X="5" Y="93"/>
@@ -147,11 +147,10 @@
       <Unit3>
         <Filename Value="PointSetViewer.pas"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="5"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="660"/>
-        <CursorPos X="28" Y="689"/>
+        <TopLine Value="661"/>
+        <CursorPos X="24" Y="664"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -276,9 +275,10 @@
       </Unit15>
       <Unit16>
         <Filename Value="ClassInheritIDs.pas"/>
+        <IsPartOfProject Value="True"/>
         <TopLine Value="154"/>
         <CursorPos X="17" Y="163"/>
-        <UsageCount Value="23"/>
+        <UsageCount Value="24"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit16>
       <Unit17>
@@ -298,7 +298,7 @@
       </Unit18>
       <Unit19>
         <Filename Value="SelfCopied.pas"/>
-        <EditorIndex Value="9"/>
+        <EditorIndex Value="12"/>
         <WindowIndex Value="1"/>
         <TopLine Value="29"/>
         <CursorPos X="18" Y="44"/>
@@ -400,11 +400,13 @@
       </Unit30>
       <Unit31>
         <Filename Value="TableComp.pas"/>
-        <EditorIndex Value="-1"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="6"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="419"/>
+        <TopLine Value="382"/>
         <CursorPos Y="450"/>
-        <UsageCount Value="86"/>
+        <UsageCount Value="87"/>
+        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit31>
       <Unit32>
@@ -425,7 +427,7 @@
       <Unit34>
         <Filename Value="FitClient.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="8"/>
+        <EditorIndex Value="11"/>
         <WindowIndex Value="1"/>
         <TopLine Value="828"/>
         <CursorPos X="9" Y="844"/>
@@ -446,7 +448,7 @@
       <Unit36>
         <Filename Value="FitClientStub.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="11"/>
+        <EditorIndex Value="14"/>
         <WindowIndex Value="1"/>
         <TopLine Value="7"/>
         <CursorPos X="28" Y="19"/>
@@ -457,7 +459,7 @@
       <Unit37>
         <Filename Value="FitServerStub.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="12"/>
+        <EditorIndex Value="15"/>
         <WindowIndex Value="1"/>
         <TopLine Value="1092"/>
         <CursorPos X="25" Y="1102"/>
@@ -479,7 +481,7 @@
       <Unit39>
         <Filename Value="FitClientProxy.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="13"/>
+        <EditorIndex Value="16"/>
         <WindowIndex Value="1"/>
         <TopLine Value="27"/>
         <CursorPos X="27" Y="360"/>
@@ -499,7 +501,10 @@
       <Unit41>
         <Filename Value="FitServerApp.pas"/>
         <IsPartOfProject Value="True"/>
+        <EditorIndex Value="7"/>
+        <WindowIndex Value="1"/>
         <UsageCount Value="200"/>
+        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit41>
       <Unit42>
@@ -569,10 +574,12 @@
         <ComponentName Value="SpecialCurvePropDlg"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="-1"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="8"/>
         <WindowIndex Value="1"/>
         <CursorPos X="39"/>
         <UsageCount Value="203"/>
+        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit48>
       <Unit49>
@@ -850,10 +857,10 @@
         <Filename Value="intclientcallback.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="IntClientCallback"/>
-        <EditorIndex Value="10"/>
+        <EditorIndex Value="13"/>
         <WindowIndex Value="1"/>
         <CursorPos X="47" Y="24"/>
-        <UsageCount Value="62"/>
+        <UsageCount Value="63"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit84>
@@ -861,11 +868,11 @@
         <Filename Value="intfitviewer.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="IntFitViewer"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="9"/>
         <WindowIndex Value="1"/>
         <TopLine Value="42"/>
         <CursorPos X="9" Y="65"/>
-        <UsageCount Value="62"/>
+        <UsageCount Value="63"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit85>

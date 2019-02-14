@@ -1,12 +1,14 @@
 DiGraph Classes {
   IClientCallback -> IInterface
-  IClientCallback [href="ClientCallback.IClientCallback.html"]
+  IClientCallback [href="IntClientCallback.IClientCallback.html"]
   IDiscretValue -> IInterface
   IDiscretValue [href="CombEnumerator.IDiscretValue.html"]
   IDownhillSimplexParameters -> IDiscretValue
   IDownhillSimplexParameters [href="DownhillSimplexContainer.IDownhillSimplexParameters.html"]
   IDownhillRealParameters -> IDownhillSimplexParameters
   IDownhillRealParameters [href="DownhillSimplexContainer.IDownhillRealParameters.html"]
+  IFitViewer -> IInterface
+  IFitViewer [href="IntFitViewer.IFitViewer.html"]
   IOptimizedFunction -> IInterface
   IOptimizedFunction [href="DownhillSimplexContainer.IOptimizedFunction.html"]
   ISelfCopied -> IInterface

@@ -18,7 +18,7 @@
 <a  href="FitClient.html">FitClient</a></p>
 <h2 class="declaration">Declaration</h2>
 <p class="declaration">
-<code>type TFitClient = class(TCBRCComponent, <a class="normal" href="ClientCallback.IClientCallback.html">IClientCallback</a>)</code></p>
+<code>type TFitClient = class(TCBRCComponent, <a class="normal" href="IntClientCallback.IClientCallback.html">IClientCallback</a>)</code></p>
 <h2 class="description">Description</h2>
 <p>
 Implements all client logic of the application. Must be completely independent from UI.</p>
@@ -64,118 +64,50 @@ Implements all client logic of the application. Must be completely independent f
 <td class="itemcode"><code><b><a  href="FitClient.TFitClient.html#FFitProxy">FFitProxy</a></b>: <a  href="FitClientProxy.TFitClientProxy.html">TFitClientProxy</a>;</code></td>
 </tr>
 <tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code><b><a  href="FitClient.TFitClient.html#FitViewer">FitViewer</a></b>: <a  href="IntFitViewer.IFitViewer.html">IFitViewer</a>;</code></td>
+</tr>
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code><b><a  href="FitClient.TFitClient.html#FNeutronPointsSet">FNeutronPointsSet</a></b>: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>;</code></td>
 </tr>
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code><b><a  href="FitClient.TFitClient.html#FOnClear">FOnClear</a></b>: <a  href="FitClient.html#TClear">TClear</a>;</code></td>
-</tr>
 <tr class="list2">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code><b><a  href="FitClient.TFitClient.html#FOnFillDatasheetTable">FOnFillDatasheetTable</a></b>: <a  href="FitClient.html#TFillDatasheetTable">TFillDatasheetTable</a>;</code></td>
-</tr>
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code><b><a  href="FitClient.TFitClient.html#FOnHide">FOnHide</a></b>: <a  href="FitClient.html#THide">THide</a>;</code></td>
-</tr>
-<tr class="list2">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code><b><a  href="FitClient.TFitClient.html#FOnHideBackground">FOnHideBackground</a></b>: <a  href="FitClient.html#THideBackground">THideBackground</a>;</code></td>
-</tr>
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code><b><a  href="FitClient.TFitClient.html#FOnHideCurvePositions">FOnHideCurvePositions</a></b>: <a  href="FitClient.html#THideCurvePositions">THideCurvePositions</a>;</code></td>
-</tr>
-<tr class="list2">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code><b><a  href="FitClient.TFitClient.html#FOnHideDataPoints">FOnHideDataPoints</a></b>: <a  href="FitClient.html#THideDataPoints">THideDataPoints</a>;</code></td>
-</tr>
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code><b><a  href="FitClient.TFitClient.html#FOnHideRFactorIntervals">FOnHideRFactorIntervals</a></b>: <a  href="FitClient.html#THideRFactorIntervals">THideRFactorIntervals</a>;</code></td>
-</tr>
-<tr class="list2">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code><b><a  href="FitClient.TFitClient.html#FOnPlotBackground">FOnPlotBackground</a></b>: <a  href="FitClient.html#TPlotBackground">TPlotBackground</a>;</code></td>
-</tr>
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code><b><a  href="FitClient.TFitClient.html#FOnPlotCurvePositions">FOnPlotCurvePositions</a></b>: <a  href="FitClient.html#TPlotCurvePositions">TPlotCurvePositions</a>;</code></td>
-</tr>
-<tr class="list2">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code><b><a  href="FitClient.TFitClient.html#FOnPlotDataPoints">FOnPlotDataPoints</a></b>: <a  href="FitClient.html#TPlotDataPoints">TPlotDataPoints</a>;</code></td>
-</tr>
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code><b><a  href="FitClient.TFitClient.html#FOnPlotDeltaProfile">FOnPlotDeltaProfile</a></b>: <a  href="FitClient.html#TPlotDeltaProfile">TPlotDeltaProfile</a>;</code></td>
-</tr>
-<tr class="list2">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code><b><a  href="FitClient.TFitClient.html#FOnPlotGaussProfile">FOnPlotGaussProfile</a></b>: <a  href="FitClient.html#TPlotGaussProfile">TPlotGaussProfile</a>;</code></td>
-</tr>
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code><b><a  href="FitClient.TFitClient.html#FOnPlotRFactorIntervals">FOnPlotRFactorIntervals</a></b>: <a  href="FitClient.html#TPlotRFactorIntervals">TPlotRFactorIntervals</a>;</code></td>
-</tr>
-<tr class="list2">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code><b><a  href="FitClient.TFitClient.html#FOnPlotSelectedArea">FOnPlotSelectedArea</a></b>: <a  href="FitClient.html#TPlotSelectedArea">TPlotSelectedArea</a>;</code></td>
-</tr>
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code><b><a  href="FitClient.TFitClient.html#FOnPlotSelectedPoints">FOnPlotSelectedPoints</a></b>: <a  href="FitClient.html#TPlotSelectedPoints">TPlotSelectedPoints</a>;</code></td>
-</tr>
-<tr class="list2">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code><b><a  href="FitClient.TFitClient.html#FOnPlotSpecimens">FOnPlotSpecimens</a></b>: <a  href="FitClient.html#TPlotSpecimens">TPlotSpecimens</a>;</code></td>
-</tr>
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code><b><a  href="FitClient.TFitClient.html#FOnRefresh">FOnRefresh</a></b>: <a  href="FitClient.html#TRefresh">TRefresh</a>;</code></td>
-</tr>
-<tr class="list2">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code><b><a  href="FitClient.TFitClient.html#FOnRefreshPointsSet">FOnRefreshPointsSet</a></b>: <a  href="FitClient.html#TRefreshPointsSet">TRefreshPointsSet</a>;</code></td>
-</tr>
-<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code><b><a  href="FitClient.TFitClient.html#FOpenState">FOpenState</a></b>: <a  href="FitClient.html#TOpenState">TOpenState</a>;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code><b><a  href="FitClient.TFitClient.html#FSelectedAreaMode">FSelectedAreaMode</a></b>: Boolean;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code><b><a  href="FitClient.TFitClient.html#FSelectionMode">FSelectionMode</a></b>: <a  href="FitClient.html#TSelMode">TSelMode</a>;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code><b><a  href="FitClient.TFitClient.html#GaussProfile">GaussProfile</a></b>: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code><b><a  href="FitClient.TFitClient.html#RFactorIntervals">RFactorIntervals</a></b>: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code><b><a  href="FitClient.TFitClient.html#SelectedArea">SelectedArea</a></b>: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code><b><a  href="FitClient.TFitClient.html#SelectedPoints">SelectedPoints</a></b>: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code><b><a  href="FitClient.TFitClient.html#SpecimenList">SpecimenList</a></b>: <a  href="MSCRDataClasses.TMSCRSpecimenList.html">TMSCRSpecimenList</a>;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code><b><a  href="FitClient.TFitClient.html#ToRefresh">ToRefresh</a></b>: <a  href="DataLoader.TNeutronPointsSet.html">TNeutronPointsSet</a>;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code><b><a  href="FitClient.TFitClient.html#WaveLength">WaveLength</a></b>: Double;</code></td>
 </tr>
@@ -416,137 +348,133 @@ Implements all client logic of the application. Must be completely independent f
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#FillDatasheetTable">FillDatasheetTable</a></b>;</code></td>
-</tr>
-<tr class="list2">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#Hide">Hide</a></b>;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#HideBackground">HideBackground</a></b>;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#HideCurvePositions">HideCurvePositions</a></b>;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#HideDataPoints">HideDataPoints</a></b>;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#HideRFactorIntervals">HideRFactorIntervals</a></b>;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#HideSpecimens">HideSpecimens</a></b>;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#InitDataPoints">InitDataPoints</a></b>;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#PlotBackground">PlotBackground</a></b>;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#PlotCurvePositions">PlotCurvePositions</a></b>;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#PlotDataPoints">PlotDataPoints</a></b>;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#PlotDeltaProfile">PlotDeltaProfile</a></b>;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#PlotGaussProfile">PlotGaussProfile</a></b>;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#PlotRFactorIntervals">PlotRFactorIntervals</a></b>;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#PlotSelectedArea">PlotSelectedArea</a></b>;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#PlotSelectedPoints">PlotSelectedPoints</a></b>;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#PlotSpecimens">PlotSpecimens</a></b>;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#RecreateAndShowSelectedPoints">RecreateAndShowSelectedPoints</a></b>(Title: string);</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#Refresh">Refresh</a></b>;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#RefreshPointsSet">RefreshPointsSet</a></b>;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#RemoveDataPoints">RemoveDataPoints</a></b>;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#RemoveDeltaProfile">RemoveDeltaProfile</a></b>;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#RemoveGaussProfile">RemoveGaussProfile</a></b>;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#RemoveSelectedArea">RemoveSelectedArea</a></b>;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#RemoveSelectedPoints">RemoveSelectedPoints</a></b>;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#ReplacePoint">ReplacePoint</a></b>(Points: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>; PrevXValue, PrevYValue, NewXValue, NewYValue: Double; Plot: <a  href="FitClient.html#TPlotProc">TPlotProc</a> );</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#SelectAreaActual">SelectAreaActual</a></b>(ANeutronPoints: <a  href="DataLoader.TNeutronPointsSet.html">TNeutronPointsSet</a>; StartPointIndex, StopPointIndex: LongInt);</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#SetBackFactor">SetBackFactor</a></b>(ABackFactor: Double);</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#SetCurvesListLambda">SetCurvesListLambda</a></b>;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#SetCurveThresh">SetCurveThresh</a></b>(ACurveThresh: Double);</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#SetCurveType">SetCurveType</a></b>(ACurveType: <a  href="CommonTypes.html#TCurveType">TCurveType</a>);</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#SetMaxRFactor">SetMaxRFactor</a></b>(AMaxRFactor: Double);</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#SetSelectionMode">SetSelectionMode</a></b>(ASelectionMode: <a  href="FitClient.html#TSelMode">TSelMode</a>);</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="FitClient.TFitClient.html#UpdateAll">UpdateAll</a></b>;</code></td>
 </tr>
@@ -586,93 +514,6 @@ Implements all client logic of the application. Must be completely independent f
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
 <td class="itemcode"><code>property <b><a  href="FitClient.TFitClient.html#OnAsyncOperationFinished">OnAsyncOperationFinished</a></b>: <a  href="FitClient.html#TAsyncOperationFinished">TAsyncOperationFinished</a>
             read <a  href="FitClient.TFitClient.html#FAsyncOperationFinished">FAsyncOperationFinished</a> write <a  href="FitClient.TFitClient.html#FAsyncOperationFinished">FAsyncOperationFinished</a>;</code></td>
-</tr>
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>property <b><a  href="FitClient.TFitClient.html#OnClear">OnClear</a></b>: <a  href="FitClient.html#TClear">TClear</a> read <a  href="FitClient.TFitClient.html#FOnClear">FOnClear</a> write <a  href="FitClient.TFitClient.html#FOnClear">FOnClear</a>;</code></td>
-</tr>
-<tr class="list2">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>property <b><a  href="FitClient.TFitClient.html#OnFillDatasheetTable">OnFillDatasheetTable</a></b>: <a  href="FitClient.html#TFillDatasheetTable">TFillDatasheetTable</a>
-            read <a  href="FitClient.TFitClient.html#FOnFillDatasheetTable">FOnFillDatasheetTable</a> write <a  href="FitClient.TFitClient.html#FOnFillDatasheetTable">FOnFillDatasheetTable</a>;</code></td>
-</tr>
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>property <b><a  href="FitClient.TFitClient.html#OnHide">OnHide</a></b>: <a  href="FitClient.html#THide">THide</a> read <a  href="FitClient.TFitClient.html#FOnHide">FOnHide</a> write <a  href="FitClient.TFitClient.html#FOnHide">FOnHide</a>;</code></td>
-</tr>
-<tr class="list2">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>property <b><a  href="FitClient.TFitClient.html#OnHideBackground">OnHideBackground</a></b>: <a  href="FitClient.html#THideBackground">THideBackground</a>
-            read <a  href="FitClient.TFitClient.html#FOnHideBackground">FOnHideBackground</a> write <a  href="FitClient.TFitClient.html#FOnHideBackground">FOnHideBackground</a>;</code></td>
-</tr>
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>property <b><a  href="FitClient.TFitClient.html#OnHideCurvePositions">OnHideCurvePositions</a></b>: <a  href="FitClient.html#THideCurvePositions">THideCurvePositions</a>
-            read <a  href="FitClient.TFitClient.html#FOnHideCurvePositions">FOnHideCurvePositions</a> write <a  href="FitClient.TFitClient.html#FOnHideCurvePositions">FOnHideCurvePositions</a>;</code></td>
-</tr>
-<tr class="list2">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>property <b><a  href="FitClient.TFitClient.html#OnHideDataPoints">OnHideDataPoints</a></b>: <a  href="FitClient.html#THideDataPoints">THideDataPoints</a>
-            read <a  href="FitClient.TFitClient.html#FOnHideDataPoints">FOnHideDataPoints</a> write <a  href="FitClient.TFitClient.html#FOnHideDataPoints">FOnHideDataPoints</a>;</code></td>
-</tr>
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>property <b><a  href="FitClient.TFitClient.html#OnHideRFactorIntervals">OnHideRFactorIntervals</a></b>: <a  href="FitClient.html#THideRFactorIntervals">THideRFactorIntervals</a>
-            read <a  href="FitClient.TFitClient.html#FOnHideRFactorIntervals">FOnHideRFactorIntervals</a> write <a  href="FitClient.TFitClient.html#FOnHideRFactorIntervals">FOnHideRFactorIntervals</a>;</code></td>
-</tr>
-<tr class="list2">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>property <b><a  href="FitClient.TFitClient.html#OnPlotBackground">OnPlotBackground</a></b>: <a  href="FitClient.html#TPlotBackground">TPlotBackground</a>
-            read <a  href="FitClient.TFitClient.html#FOnPlotBackground">FOnPlotBackground</a> write <a  href="FitClient.TFitClient.html#FOnPlotBackground">FOnPlotBackground</a>;</code></td>
-</tr>
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>property <b><a  href="FitClient.TFitClient.html#OnPlotCurvePositions">OnPlotCurvePositions</a></b>: <a  href="FitClient.html#TPlotCurvePositions">TPlotCurvePositions</a>
-            read <a  href="FitClient.TFitClient.html#FOnPlotCurvePositions">FOnPlotCurvePositions</a> write <a  href="FitClient.TFitClient.html#FOnPlotCurvePositions">FOnPlotCurvePositions</a>;</code></td>
-</tr>
-<tr class="list2">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>property <b><a  href="FitClient.TFitClient.html#OnPlotDataPoints">OnPlotDataPoints</a></b>: <a  href="FitClient.html#TPlotDataPoints">TPlotDataPoints</a>
-            read <a  href="FitClient.TFitClient.html#FOnPlotDataPoints">FOnPlotDataPoints</a> write <a  href="FitClient.TFitClient.html#FOnPlotDataPoints">FOnPlotDataPoints</a>;</code></td>
-</tr>
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>property <b><a  href="FitClient.TFitClient.html#OnPlotDeltaProfile">OnPlotDeltaProfile</a></b>: <a  href="FitClient.html#TPlotDeltaProfile">TPlotDeltaProfile</a>
-            read <a  href="FitClient.TFitClient.html#FOnPlotDeltaProfile">FOnPlotDeltaProfile</a> write <a  href="FitClient.TFitClient.html#FOnPlotDeltaProfile">FOnPlotDeltaProfile</a>;</code></td>
-</tr>
-<tr class="list2">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>property <b><a  href="FitClient.TFitClient.html#OnPlotGaussProfile">OnPlotGaussProfile</a></b>: <a  href="FitClient.html#TPlotGaussProfile">TPlotGaussProfile</a>
-            read <a  href="FitClient.TFitClient.html#FOnPlotGaussProfile">FOnPlotGaussProfile</a> write <a  href="FitClient.TFitClient.html#FOnPlotGaussProfile">FOnPlotGaussProfile</a>;</code></td>
-</tr>
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>property <b><a  href="FitClient.TFitClient.html#OnPlotRFactorIntervals">OnPlotRFactorIntervals</a></b>: <a  href="FitClient.html#TPlotRFactorIntervals">TPlotRFactorIntervals</a>
-            read <a  href="FitClient.TFitClient.html#FOnPlotRFactorIntervals">FOnPlotRFactorIntervals</a> write <a  href="FitClient.TFitClient.html#FOnPlotRFactorIntervals">FOnPlotRFactorIntervals</a>;</code></td>
-</tr>
-<tr class="list2">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>property <b><a  href="FitClient.TFitClient.html#OnPlotSelectedArea">OnPlotSelectedArea</a></b>: <a  href="FitClient.html#TPlotSelectedArea">TPlotSelectedArea</a>
-            read <a  href="FitClient.TFitClient.html#FOnPlotSelectedArea">FOnPlotSelectedArea</a> write <a  href="FitClient.TFitClient.html#FOnPlotSelectedArea">FOnPlotSelectedArea</a>;</code></td>
-</tr>
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>property <b><a  href="FitClient.TFitClient.html#OnPlotSelectedPoints">OnPlotSelectedPoints</a></b>: <a  href="FitClient.html#TPlotSelectedPoints">TPlotSelectedPoints</a>
-            read <a  href="FitClient.TFitClient.html#FOnPlotSelectedPoints">FOnPlotSelectedPoints</a> write <a  href="FitClient.TFitClient.html#FOnPlotSelectedPoints">FOnPlotSelectedPoints</a>;</code></td>
-</tr>
-<tr class="list2">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>property <b><a  href="FitClient.TFitClient.html#OnPlotSpecimens">OnPlotSpecimens</a></b>: <a  href="FitClient.html#TPlotSpecimens">TPlotSpecimens</a>
-            read <a  href="FitClient.TFitClient.html#FOnPlotSpecimens">FOnPlotSpecimens</a> write <a  href="FitClient.TFitClient.html#FOnPlotSpecimens">FOnPlotSpecimens</a>;</code></td>
-</tr>
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>property <b><a  href="FitClient.TFitClient.html#OnRefresh">OnRefresh</a></b>: <a  href="FitClient.html#TRefresh">TRefresh</a> read <a  href="FitClient.TFitClient.html#FOnRefresh">FOnRefresh</a> write <a  href="FitClient.TFitClient.html#FOnRefresh">FOnRefresh</a>;</code></td>
-</tr>
-<tr class="list2">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>property <b><a  href="FitClient.TFitClient.html#OnRefreshPointsSet">OnRefreshPointsSet</a></b>: <a  href="FitClient.html#TRefreshPointsSet">TRefreshPointsSet</a>
-            read <a  href="FitClient.TFitClient.html#FOnRefreshPointsSet">FOnRefreshPointsSet</a> write <a  href="FitClient.TFitClient.html#FOnRefreshPointsSet">FOnRefreshPointsSet</a>;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
@@ -772,6 +613,14 @@ Callback on asynchronous operation finishing.</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="FitViewer"></span><code><b>FitViewer</b>: <a  href="IntFitViewer.IFitViewer.html">IFitViewer</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><span id="FNeutronPointsSet"></span><code><b>FNeutronPointsSet</b>: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>;</code></td>
 </tr>
@@ -779,152 +628,6 @@ Callback on asynchronous operation finishing.</p>
 <p>
 All the data displayed on the chart. They are required to be able control of X-coordinate.</p>
 </td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="FOnClear"></span><code><b>FOnClear</b>: <a  href="FitClient.html#TClear">TClear</a>;</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="FOnFillDatasheetTable"></span><code><b>FOnFillDatasheetTable</b>: <a  href="FitClient.html#TFillDatasheetTable">TFillDatasheetTable</a>;</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="FOnHide"></span><code><b>FOnHide</b>: <a  href="FitClient.html#THide">THide</a>;</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="FOnHideBackground"></span><code><b>FOnHideBackground</b>: <a  href="FitClient.html#THideBackground">THideBackground</a>;</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="FOnHideCurvePositions"></span><code><b>FOnHideCurvePositions</b>: <a  href="FitClient.html#THideCurvePositions">THideCurvePositions</a>;</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="FOnHideDataPoints"></span><code><b>FOnHideDataPoints</b>: <a  href="FitClient.html#THideDataPoints">THideDataPoints</a>;</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="FOnHideRFactorIntervals"></span><code><b>FOnHideRFactorIntervals</b>: <a  href="FitClient.html#THideRFactorIntervals">THideRFactorIntervals</a>;</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="FOnPlotBackground"></span><code><b>FOnPlotBackground</b>: <a  href="FitClient.html#TPlotBackground">TPlotBackground</a>;</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="FOnPlotCurvePositions"></span><code><b>FOnPlotCurvePositions</b>: <a  href="FitClient.html#TPlotCurvePositions">TPlotCurvePositions</a>;</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="FOnPlotDataPoints"></span><code><b>FOnPlotDataPoints</b>: <a  href="FitClient.html#TPlotDataPoints">TPlotDataPoints</a>;</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="FOnPlotDeltaProfile"></span><code><b>FOnPlotDeltaProfile</b>: <a  href="FitClient.html#TPlotDeltaProfile">TPlotDeltaProfile</a>;</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="FOnPlotGaussProfile"></span><code><b>FOnPlotGaussProfile</b>: <a  href="FitClient.html#TPlotGaussProfile">TPlotGaussProfile</a>;</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="FOnPlotRFactorIntervals"></span><code><b>FOnPlotRFactorIntervals</b>: <a  href="FitClient.html#TPlotRFactorIntervals">TPlotRFactorIntervals</a>;</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="FOnPlotSelectedArea"></span><code><b>FOnPlotSelectedArea</b>: <a  href="FitClient.html#TPlotSelectedArea">TPlotSelectedArea</a>;</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="FOnPlotSelectedPoints"></span><code><b>FOnPlotSelectedPoints</b>: <a  href="FitClient.html#TPlotSelectedPoints">TPlotSelectedPoints</a>;</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="FOnPlotSpecimens"></span><code><b>FOnPlotSpecimens</b>: <a  href="FitClient.html#TPlotSpecimens">TPlotSpecimens</a>;</code></td>
-</tr>
-<tr><td colspan="2">
-<p>
-Pointers to methods for curve displaying.</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="FOnRefresh"></span><code><b>FOnRefresh</b>: <a  href="FitClient.html#TRefresh">TRefresh</a>;</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="FOnRefreshPointsSet"></span><code><b>FOnRefreshPointsSet</b>: <a  href="FitClient.html#TRefreshPointsSet">TRefreshPointsSet</a>;</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -1508,14 +1211,6 @@ Adds new point to the given set. Second call removes point from the set. In last
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="FillDatasheetTable"></span><code>procedure <b>FillDatasheetTable</b>;</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><span id="Hide"></span><code>procedure <b>Hide</b>;</code></td>
 </tr>
 <tr><td colspan="2">
@@ -1856,175 +1551,6 @@ Getters of server attributes.</p>
 <tr><td colspan="2">
 <p>
 Callbacks for updating <a class="normal" href="Main.html#User">user</a> interface. They are called from <a class="normal" href="Main.html">main</a> thread of client application. Callbacks can throw exceptions. They can be not assigned (nil).</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="OnClear"></span><code>property <b>OnClear</b>: <a  href="FitClient.html#TClear">TClear</a> read <a  href="FitClient.TFitClient.html#FOnClear">FOnClear</a> write <a  href="FitClient.TFitClient.html#FOnClear">FOnClear</a>;</code></td>
-</tr>
-<tr><td colspan="2">
-<p>
-Is called before cleaning all diagram data.</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="OnFillDatasheetTable"></span><code>property <b>OnFillDatasheetTable</b>: <a  href="FitClient.html#TFillDatasheetTable">TFillDatasheetTable</a>
-            read <a  href="FitClient.TFitClient.html#FOnFillDatasheetTable">FOnFillDatasheetTable</a> write <a  href="FitClient.TFitClient.html#FOnFillDatasheetTable">FOnFillDatasheetTable</a>;</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="OnHide"></span><code>property <b>OnHide</b>: <a  href="FitClient.html#THide">THide</a> read <a  href="FitClient.TFitClient.html#FOnHide">FOnHide</a> write <a  href="FitClient.TFitClient.html#FOnHide">FOnHide</a>;</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="OnHideBackground"></span><code>property <b>OnHideBackground</b>: <a  href="FitClient.html#THideBackground">THideBackground</a>
-            read <a  href="FitClient.TFitClient.html#FOnHideBackground">FOnHideBackground</a> write <a  href="FitClient.TFitClient.html#FOnHideBackground">FOnHideBackground</a>;</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="OnHideCurvePositions"></span><code>property <b>OnHideCurvePositions</b>: <a  href="FitClient.html#THideCurvePositions">THideCurvePositions</a>
-            read <a  href="FitClient.TFitClient.html#FOnHideCurvePositions">FOnHideCurvePositions</a> write <a  href="FitClient.TFitClient.html#FOnHideCurvePositions">FOnHideCurvePositions</a>;</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="OnHideDataPoints"></span><code>property <b>OnHideDataPoints</b>: <a  href="FitClient.html#THideDataPoints">THideDataPoints</a>
-            read <a  href="FitClient.TFitClient.html#FOnHideDataPoints">FOnHideDataPoints</a> write <a  href="FitClient.TFitClient.html#FOnHideDataPoints">FOnHideDataPoints</a>;</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="OnHideRFactorIntervals"></span><code>property <b>OnHideRFactorIntervals</b>: <a  href="FitClient.html#THideRFactorIntervals">THideRFactorIntervals</a>
-            read <a  href="FitClient.TFitClient.html#FOnHideRFactorIntervals">FOnHideRFactorIntervals</a> write <a  href="FitClient.TFitClient.html#FOnHideRFactorIntervals">FOnHideRFactorIntervals</a>;</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="OnPlotBackground"></span><code>property <b>OnPlotBackground</b>: <a  href="FitClient.html#TPlotBackground">TPlotBackground</a>
-            read <a  href="FitClient.TFitClient.html#FOnPlotBackground">FOnPlotBackground</a> write <a  href="FitClient.TFitClient.html#FOnPlotBackground">FOnPlotBackground</a>;</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="OnPlotCurvePositions"></span><code>property <b>OnPlotCurvePositions</b>: <a  href="FitClient.html#TPlotCurvePositions">TPlotCurvePositions</a>
-            read <a  href="FitClient.TFitClient.html#FOnPlotCurvePositions">FOnPlotCurvePositions</a> write <a  href="FitClient.TFitClient.html#FOnPlotCurvePositions">FOnPlotCurvePositions</a>;</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="OnPlotDataPoints"></span><code>property <b>OnPlotDataPoints</b>: <a  href="FitClient.html#TPlotDataPoints">TPlotDataPoints</a>
-            read <a  href="FitClient.TFitClient.html#FOnPlotDataPoints">FOnPlotDataPoints</a> write <a  href="FitClient.TFitClient.html#FOnPlotDataPoints">FOnPlotDataPoints</a>;</code></td>
-</tr>
-<tr><td colspan="2">
-<p>
-Draws diagram data.</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="OnPlotDeltaProfile"></span><code>property <b>OnPlotDeltaProfile</b>: <a  href="FitClient.html#TPlotDeltaProfile">TPlotDeltaProfile</a>
-            read <a  href="FitClient.TFitClient.html#FOnPlotDeltaProfile">FOnPlotDeltaProfile</a> write <a  href="FitClient.TFitClient.html#FOnPlotDeltaProfile">FOnPlotDeltaProfile</a>;</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="OnPlotGaussProfile"></span><code>property <b>OnPlotGaussProfile</b>: <a  href="FitClient.html#TPlotGaussProfile">TPlotGaussProfile</a>
-            read <a  href="FitClient.TFitClient.html#FOnPlotGaussProfile">FOnPlotGaussProfile</a> write <a  href="FitClient.TFitClient.html#FOnPlotGaussProfile">FOnPlotGaussProfile</a>;</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="OnPlotRFactorIntervals"></span><code>property <b>OnPlotRFactorIntervals</b>: <a  href="FitClient.html#TPlotRFactorIntervals">TPlotRFactorIntervals</a>
-            read <a  href="FitClient.TFitClient.html#FOnPlotRFactorIntervals">FOnPlotRFactorIntervals</a> write <a  href="FitClient.TFitClient.html#FOnPlotRFactorIntervals">FOnPlotRFactorIntervals</a>;</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="OnPlotSelectedArea"></span><code>property <b>OnPlotSelectedArea</b>: <a  href="FitClient.html#TPlotSelectedArea">TPlotSelectedArea</a>
-            read <a  href="FitClient.TFitClient.html#FOnPlotSelectedArea">FOnPlotSelectedArea</a> write <a  href="FitClient.TFitClient.html#FOnPlotSelectedArea">FOnPlotSelectedArea</a>;</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="OnPlotSelectedPoints"></span><code>property <b>OnPlotSelectedPoints</b>: <a  href="FitClient.html#TPlotSelectedPoints">TPlotSelectedPoints</a>
-            read <a  href="FitClient.TFitClient.html#FOnPlotSelectedPoints">FOnPlotSelectedPoints</a> write <a  href="FitClient.TFitClient.html#FOnPlotSelectedPoints">FOnPlotSelectedPoints</a>;</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="OnPlotSpecimens"></span><code>property <b>OnPlotSpecimens</b>: <a  href="FitClient.html#TPlotSpecimens">TPlotSpecimens</a>
-            read <a  href="FitClient.TFitClient.html#FOnPlotSpecimens">FOnPlotSpecimens</a> write <a  href="FitClient.TFitClient.html#FOnPlotSpecimens">FOnPlotSpecimens</a>;</code></td>
-</tr>
-<tr><td colspan="2">
-<p>
-Plotting events are called from methods of the same name for providing synchronization with <a class="normal" href="Main.html">main</a> application thread. Point to methods of TIIViewer.</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="OnRefresh"></span><code>property <b>OnRefresh</b>: <a  href="FitClient.html#TRefresh">TRefresh</a> read <a  href="FitClient.TFitClient.html#FOnRefresh">FOnRefresh</a> write <a  href="FitClient.TFitClient.html#FOnRefresh">FOnRefresh</a>;</code></td>
-</tr>
-<tr><td colspan="2">
-<p>
-Refreshes all curves.</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="OnRefreshPointsSet"></span><code>property <b>OnRefreshPointsSet</b>: <a  href="FitClient.html#TRefreshPointsSet">TRefreshPointsSet</a>
-            read <a  href="FitClient.TFitClient.html#FOnRefreshPointsSet">FOnRefreshPointsSet</a> write <a  href="FitClient.TFitClient.html#FOnRefreshPointsSet">FOnRefreshPointsSet</a>;</code></td>
-</tr>
-<tr><td colspan="2">
-<p>
-Refreshes curve in the case of adding new or changing point.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">

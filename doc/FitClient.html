@@ -23,7 +23,7 @@ This software is distributed under GPL in the hope that it will be useful, but W
 
 <p></p>
 <span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
-<ul class="useslist"><li>CBRCComponent</li><li>Classes</li><li><a  href="ClientCallback.html">ClientCallback</a></li><li><a  href="CommonTypes.html">CommonTypes</a></li><li><a  href="DataLoader.html">DataLoader</a></li><li>Dialogs</li><li><a  href="FitClientProxy.html">FitClientProxy</a></li><li><a  href="MSCRDataClasses.html">MSCRDataClasses</a></li><li><a  href="SelfCopied.html">SelfCopied</a></li><li>SimpMath</li><li>SysUtils</li></ul><h2 class="overview">Overview</h2>
+<ul class="useslist"><li>CBRCComponent</li><li>Classes</li><li><a  href="CommonTypes.html">CommonTypes</a></li><li><a  href="DataLoader.html">DataLoader</a></li><li>Dialogs</li><li><a  href="FitClientProxy.html">FitClientProxy</a></li><li><a  href="IntClientCallback.html">IntClientCallback</a></li><li><a  href="IntFitViewer.html">IntFitViewer</a></li><li><a  href="MSCRDataClasses.html">MSCRDataClasses</a></li><li><a  href="SelfCopied.html">SelfCopied</a></li><li>SysUtils</li></ul><h2 class="overview">Overview</h2>
 <span id="PasDoc-Classes"></span><h3 class="cio">Classes, Interfaces, Objects and Records</h3>
 <table class="classestable wide_list">
 <tr class="listheader">
@@ -95,15 +95,12 @@ This software is distributed under GPL in the hope that it will be useful, but W
 <td class="itemcode"><code><b><a  href="FitClient.html#TPlotSelectedPoints">TPlotSelectedPoints</a></b> = procedure( Sender: TObject; SelectedPoints: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>) of object;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="FitClient.html#TPlotSpecimens">TPlotSpecimens</a></b> = procedure(Sender: TObject; CurvesList: <a  href="SelfCopied.TSelfCopiedCompList.html">TSelfCopiedCompList</a>; SpecimenList: <a  href="MSCRDataClasses.TMSCRSpecimenList.html">TMSCRSpecimenList</a>) of object;</code></td>
-</tr>
-<tr class="list">
 <td class="itemcode"><code><b><a  href="FitClient.html#TRefresh">TRefresh</a></b> = procedure(Sender: TObject) of object;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code><b><a  href="FitClient.html#TRefreshPointsSet">TRefreshPointsSet</a></b> = procedure( Sender: TObject; PointsSet: <a  href="DataLoader.TNeutronPointsSet.html">TNeutronPointsSet</a>) of object;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code><b><a  href="FitClient.html#TSelMode">TSelMode</a></b> = (...);</code></td>
 </tr>
 </table>
@@ -319,15 +316,6 @@ Handler displaying data intervals.</p>
 <tr><td colspan="1">
 <p>
 Handler drawing points selected by <a class="normal" href="Main.html#User">user</a>.</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="TPlotSpecimens"></span><code><b>TPlotSpecimens</b> = procedure(Sender: TObject; CurvesList: <a  href="SelfCopied.TSelfCopiedCompList.html">TSelfCopiedCompList</a>; SpecimenList: <a  href="MSCRDataClasses.TMSCRSpecimenList.html">TMSCRSpecimenList</a>) of object;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Handler drawing specimen curves. Provides different ways of displaying data. Component which will actually display the data must store all pointers to visual components inside its own memory to be able hide them.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">

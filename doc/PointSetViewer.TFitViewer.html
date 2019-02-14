@@ -18,10 +18,10 @@
 <a  href="PointSetViewer.html">PointSetViewer</a></p>
 <h2 class="declaration">Declaration</h2>
 <p class="declaration">
-<code>type TFitViewer = class(TComponent)</code></p>
+<code>type TFitViewer = class(TComponent, <a class="normal" href="IntFitViewer.IFitViewer.html">IFitViewer</a>)</code></p>
 <h2 class="description">Description</h2>
 <p>
-Component which can show client data by means of UI components. Supports correspondence between series of Chart and items of CheckListBox. On turning off CheckListBox item serie can be only hidden but not deleted because there is no direct connection between items of CheckListBox and items of <a class="normal" href="PointSetViewer.TFitViewer.html#PointsSetList">PointsSetList</a>.</p>
+Component displaying client data by means of UI components. Supports correspondence between series of Chart and items of CheckListBox. On turning off CheckListBox item serie can be only hidden but not deleted because there is no direct connection between items of CheckListBox and items of <a class="normal" href="PointSetViewer.TFitViewer.html#PointsSetList">PointsSetList</a>.</p>
 <span id="PasDoc-Hierarchy"></span><h2 class="hierarchy">Hierarchy</h2>
 <ul class="hierarchy"><li class="ancestor">TComponent</li>
 <li class="thisitem">TFitViewer</li></ul><h2 class="overview">Overview</h2>
@@ -34,6 +34,14 @@ Component which can show client data by means of UI components. Supports corresp
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code><b><a  href="PointSetViewer.TFitViewer.html#FitClient">FitClient</a></b>: <a  href="FitClient.TFitClient.html">TFitClient</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="PointSetViewer.TFitViewer.html#FUpdateGrids">FUpdateGrids</a></b>: Boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="PointSetViewer.TFitViewer.html#FUpdateLegends">FUpdateLegends</a></b>: Boolean;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
@@ -120,7 +128,31 @@ Component which can show client data by means of UI components. Supports corresp
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="PointSetViewer.TFitViewer.html#FillDatasheetTable">FillDatasheetTable</a></b>( Profile: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>; CurvesList: <a  href="SelfCopied.TSelfCopiedCompList.html">TSelfCopiedCompList</a>; GaussProfile: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>; DeltaProfile: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>; RFactorIntervals: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a> );</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="PointSetViewer.TFitViewer.html#GetMinMax">GetMinMax</a></b>(var AMinX, AMaxX, AMinY, AMaxY: Double);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="PointSetViewer.TFitViewer.html#Hide">Hide</a></b>(Sender: TObject; PointsSet: <a  href="DataLoader.TNeutronPointsSet.html">TNeutronPointsSet</a>);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="PointSetViewer.TFitViewer.html#HideBackground">HideBackground</a></b>( Sender: TObject; BackgroundPoints: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="PointSetViewer.TFitViewer.html#HideCurvePositions">HideCurvePositions</a></b>( Sender: TObject; CurvePositions: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="PointSetViewer.TFitViewer.html#HideDataPoints">HideDataPoints</a></b>( Sender: TObject; DataPoints: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="PointSetViewer.TFitViewer.html#HideRFactorIntervals">HideRFactorIntervals</a></b>( Sender: TObject; RFactorIntervals: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
@@ -128,47 +160,95 @@ Component which can show client data by means of UI components. Supports corresp
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="PointSetViewer.TFitViewer.html#SetFitClient">SetFitClient</a></b>(AFitClient: <a  href="FitClient.TFitClient.html">TFitClient</a>);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="PointSetViewer.TFitViewer.html#PlotBackground">PlotBackground</a></b>( Sender: TObject; BackgroundPoints: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
 </tr>
 <tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="PointSetViewer.TFitViewer.html#PlotCurvePositions">PlotCurvePositions</a></b>( Sender: TObject; CurvePositions: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="PointSetViewer.TFitViewer.html#PlotDataPoints">PlotDataPoints</a></b>( Sender: TObject; DataPoints: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="PointSetViewer.TFitViewer.html#PlotDeltaProfile">PlotDeltaProfile</a></b>( Sender: TObject; DeltaProfile: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="PointSetViewer.TFitViewer.html#PlotGaussProfile">PlotGaussProfile</a></b>( Sender: TObject; GaussProfile: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="PointSetViewer.TFitViewer.html#PlotRFactorIntervals">PlotRFactorIntervals</a></b>( Sender: TObject; RFactorIntervals: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="PointSetViewer.TFitViewer.html#PlotSelectedArea">PlotSelectedArea</a></b>( Sender: TObject; SelectedArea: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="PointSetViewer.TFitViewer.html#PlotSelectedPoints">PlotSelectedPoints</a></b>( Sender: TObject; SelectedPoints: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="PointSetViewer.TFitViewer.html#PlotSpecimens">PlotSpecimens</a></b>( Sender: TObject; CurvePointsSetList: <a  href="SelfCopied.TSelfCopiedCompList.html">TSelfCopiedCompList</a>; SpecimenList: <a  href="MSCRDataClasses.TMSCRSpecimenList.html">TMSCRSpecimenList</a>);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="PointSetViewer.TFitViewer.html#Refresh">Refresh</a></b>(Sender: TObject);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="PointSetViewer.TFitViewer.html#RefreshPointsSet">RefreshPointsSet</a></b>( Sender: TObject; PointsSet: <a  href="DataLoader.TNeutronPointsSet.html">TNeutronPointsSet</a>);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="PointSetViewer.TFitViewer.html#SetFitClient">SetFitClient</a></b>(AFitClient: <a  href="FitClient.TFitClient.html">TFitClient</a>);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="PointSetViewer.TFitViewer.html#SetUpdateGrids">SetUpdateGrids</a></b>(Update: Boolean);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="PointSetViewer.TFitViewer.html#SetUpdateLegends">SetUpdateLegends</a></b>(Update: Boolean);</code></td>
+</tr>
+<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="PointSetViewer.TFitViewer.html#SetViewMarkers">SetViewMarkers</a></b>(AViewMarkers: Boolean);</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="PointSetViewer.TFitViewer.html#ViewAllMarkers">ViewAllMarkers</a></b>;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="PointSetViewer.TFitViewer.html#ClearBackgroundTable">ClearBackgroundTable</a></b>;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="PointSetViewer.TFitViewer.html#ClearDatasheetTable">ClearDatasheetTable</a></b>;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="PointSetViewer.TFitViewer.html#ClearDataTable">ClearDataTable</a></b>;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="PointSetViewer.TFitViewer.html#ClearIntervalsTable">ClearIntervalsTable</a></b>;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="PointSetViewer.TFitViewer.html#ClearPositionsTable">ClearPositionsTable</a></b>;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="PointSetViewer.TFitViewer.html#ClearSpecimenTable">ClearSpecimenTable</a></b>;</code></td>
 </tr>
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="PointSetViewer.TFitViewer.html#FillBackgroundTable">FillBackgroundTable</a></b>(BackgroundPoints: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
-</tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="PointSetViewer.TFitViewer.html#FillDatasheetTable">FillDatasheetTable</a></b>( Profile: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>; CurvesList: <a  href="SelfCopied.TSelfCopiedCompList.html">TSelfCopiedCompList</a>; GaussProfile: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>; DeltaProfile: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>; RFactorIntervals: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a> );</code></td>
+<td class="itemcode"><code>procedure <b><a  href="PointSetViewer.TFitViewer.html#FillBackgroundTable">FillBackgroundTable</a></b>(BackgroundPoints: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
@@ -188,71 +268,7 @@ Component which can show client data by means of UI components. Supports corresp
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="PointSetViewer.TFitViewer.html#Hide">Hide</a></b>(Sender: TObject; PointsSet: <a  href="DataLoader.TNeutronPointsSet.html">TNeutronPointsSet</a>);</code></td>
-</tr>
-<tr class="list2">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="PointSetViewer.TFitViewer.html#HideBackground">HideBackground</a></b>( Sender: TObject; BackgroundPoints: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
-</tr>
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="PointSetViewer.TFitViewer.html#HideCurvePositions">HideCurvePositions</a></b>( Sender: TObject; CurvePositions: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
-</tr>
-<tr class="list2">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="PointSetViewer.TFitViewer.html#HideDataPoints">HideDataPoints</a></b>( Sender: TObject; DataPoints: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
-</tr>
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="PointSetViewer.TFitViewer.html#HideRFactorIntervals">HideRFactorIntervals</a></b>( Sender: TObject; RFactorIntervals: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
-</tr>
-<tr class="list2">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="PointSetViewer.TFitViewer.html#PlotBackground">PlotBackground</a></b>( Sender: TObject; BackgroundPoints: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
-</tr>
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="PointSetViewer.TFitViewer.html#PlotCurvePositions">PlotCurvePositions</a></b>( Sender: TObject; CurvePositions: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
-</tr>
-<tr class="list2">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="PointSetViewer.TFitViewer.html#PlotDataPoints">PlotDataPoints</a></b>( Sender: TObject; DataPoints: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
-</tr>
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="PointSetViewer.TFitViewer.html#PlotDeltaProfile">PlotDeltaProfile</a></b>( Sender: TObject; DeltaProfile: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
-</tr>
-<tr class="list2">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="PointSetViewer.TFitViewer.html#PlotGaussProfile">PlotGaussProfile</a></b>( Sender: TObject; GaussProfile: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
-</tr>
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="PointSetViewer.TFitViewer.html#PlotPointsSet">PlotPointsSet</a></b>(SA: <a  href="DataLoader.TNeutronPointsSet.html">TNeutronPointsSet</a>);</code></td>
-</tr>
-<tr class="list2">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="PointSetViewer.TFitViewer.html#PlotRFactorIntervals">PlotRFactorIntervals</a></b>( Sender: TObject; RFactorIntervals: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
-</tr>
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="PointSetViewer.TFitViewer.html#PlotSelectedArea">PlotSelectedArea</a></b>( Sender: TObject; SelectedArea: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
-</tr>
-<tr class="list2">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="PointSetViewer.TFitViewer.html#PlotSelectedPoints">PlotSelectedPoints</a></b>( Sender: TObject; SelectedPoints: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
-</tr>
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="PointSetViewer.TFitViewer.html#PlotSpecimens">PlotSpecimens</a></b>( Sender: TObject; CurvePointsSetList: <a  href="SelfCopied.TSelfCopiedCompList.html">TSelfCopiedCompList</a>; SpecimenList: <a  href="MSCRDataClasses.TMSCRSpecimenList.html">TMSCRSpecimenList</a>);</code></td>
-</tr>
-<tr class="list2">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="PointSetViewer.TFitViewer.html#Refresh">Refresh</a></b>(Sender: TObject);</code></td>
-</tr>
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="PointSetViewer.TFitViewer.html#RefreshPointsSet">RefreshPointsSet</a></b>( Sender: TObject; PointsSet: <a  href="DataLoader.TNeutronPointsSet.html">TNeutronPointsSet</a>);</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
@@ -287,6 +303,26 @@ Component which can show client data by means of UI components. Supports corresp
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FUpdateGrids"></span><code><b>FUpdateGrids</b>: Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Enables updating grids. By default is true.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FUpdateLegends"></span><code><b>FUpdateLegends</b>: Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Enables updating legend. By default is true.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -462,7 +498,55 @@ Returns total number of profile points belonging to any of intervals.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="FillDatasheetTable"></span><code>procedure <b>FillDatasheetTable</b>( Profile: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>; CurvesList: <a  href="SelfCopied.TSelfCopiedCompList.html">TSelfCopiedCompList</a>; GaussProfile: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>; DeltaProfile: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>; RFactorIntervals: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a> );</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
 <td class="itemcode"><span id="GetMinMax"></span><code>procedure <b>GetMinMax</b>(var AMinX, AMaxX, AMinY, AMaxY: Double);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Hide"></span><code>procedure <b>Hide</b>(Sender: TObject; PointsSet: <a  href="DataLoader.TNeutronPointsSet.html">TNeutronPointsSet</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="HideBackground"></span><code>procedure <b>HideBackground</b>( Sender: TObject; BackgroundPoints: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="HideCurvePositions"></span><code>procedure <b>HideCurvePositions</b>( Sender: TObject; CurvePositions: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="HideDataPoints"></span><code>procedure <b>HideDataPoints</b>( Sender: TObject; DataPoints: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="HideRFactorIntervals"></span><code>procedure <b>HideRFactorIntervals</b>( Sender: TObject; RFactorIntervals: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -480,7 +564,115 @@ Clears all series and fills them again saving parameter values.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="PlotBackground"></span><code>procedure <b>PlotBackground</b>( Sender: TObject; BackgroundPoints: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Implementation of <a class="normal" href="IntFitViewer.IFitViewer.html">IFitViewer</a>.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="PlotCurvePositions"></span><code>procedure <b>PlotCurvePositions</b>( Sender: TObject; CurvePositions: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="PlotDataPoints"></span><code>procedure <b>PlotDataPoints</b>( Sender: TObject; DataPoints: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="PlotDeltaProfile"></span><code>procedure <b>PlotDeltaProfile</b>( Sender: TObject; DeltaProfile: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="PlotGaussProfile"></span><code>procedure <b>PlotGaussProfile</b>( Sender: TObject; GaussProfile: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="PlotRFactorIntervals"></span><code>procedure <b>PlotRFactorIntervals</b>( Sender: TObject; RFactorIntervals: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="PlotSelectedArea"></span><code>procedure <b>PlotSelectedArea</b>( Sender: TObject; SelectedArea: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="PlotSelectedPoints"></span><code>procedure <b>PlotSelectedPoints</b>( Sender: TObject; SelectedPoints: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="PlotSpecimens"></span><code>procedure <b>PlotSpecimens</b>( Sender: TObject; CurvePointsSetList: <a  href="SelfCopied.TSelfCopiedCompList.html">TSelfCopiedCompList</a>; SpecimenList: <a  href="MSCRDataClasses.TMSCRSpecimenList.html">TMSCRSpecimenList</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Refresh"></span><code>procedure <b>Refresh</b>(Sender: TObject);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="RefreshPointsSet"></span><code>procedure <b>RefreshPointsSet</b>( Sender: TObject; PointsSet: <a  href="DataLoader.TNeutronPointsSet.html">TNeutronPointsSet</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Does not <a class="normal" href="PointSetViewer.TFitViewer.html#Clear">clear</a> series but only refreshes intencities.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
 <td class="itemcode"><span id="SetFitClient"></span><code>procedure <b>SetFitClient</b>(AFitClient: <a  href="FitClient.TFitClient.html">TFitClient</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetUpdateGrids"></span><code>procedure <b>SetUpdateGrids</b>(Update: Boolean);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetUpdateLegends"></span><code>procedure <b>SetUpdateLegends</b>(Update: Boolean);</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -560,14 +752,6 @@ Clears all series and fills them again saving parameter values.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="FillDatasheetTable"></span><code>procedure <b>FillDatasheetTable</b>( Profile: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>; CurvesList: <a  href="SelfCopied.TSelfCopiedCompList.html">TSelfCopiedCompList</a>; GaussProfile: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>; DeltaProfile: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>; RFactorIntervals: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a> );</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><span id="FillDataTable"></span><code>procedure <b>FillDataTable</b>(Profile: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
 </tr>
 <tr><td colspan="2">
@@ -600,145 +784,11 @@ Clears all series and fills them again saving parameter values.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="Hide"></span><code>procedure <b>Hide</b>(Sender: TObject; PointsSet: <a  href="DataLoader.TNeutronPointsSet.html">TNeutronPointsSet</a>);</code></td>
-</tr>
-<tr><td colspan="2">
-<p>
-Hides given point set and removes corresponding item from CheckBox.</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="HideBackground"></span><code>procedure <b>HideBackground</b>( Sender: TObject; BackgroundPoints: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="HideCurvePositions"></span><code>procedure <b>HideCurvePositions</b>( Sender: TObject; CurvePositions: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="HideDataPoints"></span><code>procedure <b>HideDataPoints</b>( Sender: TObject; DataPoints: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="HideRFactorIntervals"></span><code>procedure <b>HideRFactorIntervals</b>( Sender: TObject; RFactorIntervals: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="PlotBackground"></span><code>procedure <b>PlotBackground</b>( Sender: TObject; BackgroundPoints: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="PlotCurvePositions"></span><code>procedure <b>PlotCurvePositions</b>( Sender: TObject; CurvePositions: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="PlotDataPoints"></span><code>procedure <b>PlotDataPoints</b>( Sender: TObject; DataPoints: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="PlotDeltaProfile"></span><code>procedure <b>PlotDeltaProfile</b>( Sender: TObject; DeltaProfile: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="PlotGaussProfile"></span><code>procedure <b>PlotGaussProfile</b>( Sender: TObject; GaussProfile: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><span id="PlotPointsSet"></span><code>procedure <b>PlotPointsSet</b>(SA: <a  href="DataLoader.TNeutronPointsSet.html">TNeutronPointsSet</a>);</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
 Clears serie set and fills it again.</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="PlotRFactorIntervals"></span><code>procedure <b>PlotRFactorIntervals</b>( Sender: TObject; RFactorIntervals: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="PlotSelectedArea"></span><code>procedure <b>PlotSelectedArea</b>( Sender: TObject; SelectedArea: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="PlotSelectedPoints"></span><code>procedure <b>PlotSelectedPoints</b>( Sender: TObject; SelectedPoints: <a  href="DataLoader.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
-</tr>
-<tr><td colspan="2">
-<p>
-Methods implement different ways of drawing not related with data.</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="PlotSpecimens"></span><code>procedure <b>PlotSpecimens</b>( Sender: TObject; CurvePointsSetList: <a  href="SelfCopied.TSelfCopiedCompList.html">TSelfCopiedCompList</a>; SpecimenList: <a  href="MSCRDataClasses.TMSCRSpecimenList.html">TMSCRSpecimenList</a>);</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="Refresh"></span><code>procedure <b>Refresh</b>(Sender: TObject);</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="RefreshPointsSet"></span><code>procedure <b>RefreshPointsSet</b>( Sender: TObject; PointsSet: <a  href="DataLoader.TNeutronPointsSet.html">TNeutronPointsSet</a>);</code></td>
-</tr>
-<tr><td colspan="2">
-<p>
-Does not <a class="normal" href="PointSetViewer.TFitViewer.html#Clear">clear</a> series but only refreshes intencities.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">

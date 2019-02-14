@@ -5,9 +5,6 @@ DiGraph Uses {
   "AlgorithmContainer" -> "Tools"
   "AlgorithmContainer" [href="AlgorithmContainer.html"]
   "ClassInheritIDs" [href="ClassInheritIDs.html"]
-  "ClientCallback" -> "Classes"
-  "ClientCallback" -> "SysUtils"
-  "ClientCallback" [href="ClientCallback.html"]
   "CombEnumerator" -> "SysUtils"
   "CombEnumerator" [href="CombEnumerator.html"]
   "CommonTypes" -> "Classes"
@@ -46,14 +43,14 @@ DiGraph Uses {
   "DownhillSimplexContainer" [href="DownhillSimplexContainer.html"]
   "FitClient" -> "CBRCComponent"
   "FitClient" -> "Classes"
-  "FitClient" -> "ClientCallback"
   "FitClient" -> "CommonTypes"
   "FitClient" -> "DataLoader"
   "FitClient" -> "Dialogs"
   "FitClient" -> "FitClientProxy"
+  "FitClient" -> "IntClientCallback"
+  "FitClient" -> "IntFitViewer"
   "FitClient" -> "MSCRDataClasses"
   "FitClient" -> "SelfCopied"
-  "FitClient" -> "SimpMath"
   "FitClient" -> "SysUtils"
   "FitClient" [href="FitClient.html"]
   "FitClientApp" -> "Classes"
@@ -75,16 +72,16 @@ DiGraph Uses {
   "FitClientProxy" [href="FitClientProxy.html"]
   "FitClientStub" -> "CBRCComponent"
   "FitClientStub" -> "Classes"
-  "FitClientStub" -> "ClientCallback"
+  "FitClientStub" -> "IntClientCallback"
   "FitClientStub" -> "SysUtils"
   "FitClientStub" [href="FitClientStub.html"]
   "FitServer" -> "CBRCComponent"
   "FitServer" -> "Classes"
-  "FitServer" -> "ClientCallback"
   "FitServer" -> "CommonTypes"
   "FitServer" -> "DataLoader"
   "FitServer" -> "Dialogs"
   "FitServer" -> "FitTask"
+  "FitServer" -> "IntClientCallback"
   "FitServer" -> "MainCalcThread"
   "FitServer" -> "MSCRDataClasses"
   "FitServer" -> "MyExceptions"
@@ -112,8 +109,8 @@ DiGraph Uses {
   "FitServerMultithreaded" [href="FitServerMultithreaded.html"]
   "FitServerProxy" -> "CBRCComponent"
   "FitServerProxy" -> "Classes"
-  "FitServerProxy" -> "ClientCallback"
   "FitServerProxy" -> "FitClientStub"
+  "FitServerProxy" -> "IntClientCallback"
   "FitServerProxy" -> "MyExceptions"
   "FitServerProxy" -> "SysUtils"
   "FitServerProxy" [href="FitServerProxy.html"]
@@ -192,6 +189,16 @@ DiGraph Uses {
   "FormServer" -> "TAGraph"
   "FormServer" [href="FormServer.html"]
   "GeneralHashfunctions" [href="GeneralHashfunctions.html"]
+  "IntClientCallback" -> "Classes"
+  "IntClientCallback" -> "SysUtils"
+  "IntClientCallback" [href="IntClientCallback.html"]
+  "IntFitViewer" -> "Classes"
+  "IntFitViewer" -> "DataLoader"
+  "IntFitViewer" -> "MSCRDataClasses"
+  "IntFitViewer" -> "SelfCheckedComponentList"
+  "IntFitViewer" -> "SelfCopied"
+  "IntFitViewer" -> "SysUtils"
+  "IntFitViewer" [href="IntFitViewer.html"]
   "Main" -> "base_service_intf"
   "Main" -> "binary_formatter"
   "Main" -> "Classes"
@@ -250,6 +257,7 @@ DiGraph Uses {
   "PointSetViewer" -> "FitClient"
   "PointSetViewer" -> "Forms"
   "PointSetViewer" -> "Graphics"
+  "PointSetViewer" -> "IntFitViewer"
   "PointSetViewer" -> "MSCRDataClasses"
   "PointSetViewer" -> "SelfCheckedComponentList"
   "PointSetViewer" -> "SelfCopied"

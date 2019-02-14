@@ -1,3 +1,15 @@
+{
+This software is distributed under GPL
+in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
+
+@abstract(Contains interface defining callback methods to notify client adout
+computation progress.)
+
+@author(Dmitry Morozov dvmorozov@hotmail.com,
+LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794,
+Facebook https://www.facebook.com/profile.php?id=100004082021870)
+}
 unit IntClientCallback;
 
 {$mode delphi}
@@ -7,8 +19,8 @@ interface
 uses
   Classes, SysUtils;
 
-{ Defines callback functions called from server to client. }
 type
+    { Defines callback functions called from server to client. }
     IClientCallback = interface
         procedure ShowCurMin(Min: Double);
         procedure ShowProfile();

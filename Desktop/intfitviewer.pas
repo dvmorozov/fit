@@ -1,3 +1,14 @@
+{
+This software is distributed under GPL
+in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
+
+@abstract(Contains interface defining methods to display data in chart and grids.)
+
+@author(Dmitry Morozov dvmorozov@hotmail.com,
+LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794,
+Facebook https://www.facebook.com/profile.php?id=100004082021870)
+}
 unit IntFitViewer;
 
 {$mode delphi}
@@ -9,6 +20,9 @@ uses
   DataLoader;
 
 type
+    { Defines interface allowing to display data in chart and grids.
+      Drawing methods for grids and chart legend are optional, can be
+      included by conditional compilation. }
     IFitViewer = interface
         { Draws diagram data. }
 

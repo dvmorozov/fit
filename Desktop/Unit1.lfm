@@ -575,6 +575,7 @@ object FormMain: TFormMain
     BevelOuter = bvNone
     ClientHeight = 525
     ClientWidth = 942
+    Color = clWindow
     ParentColor = False
     TabOrder = 2
     TabStop = True
@@ -601,8 +602,6 @@ object FormMain: TFormMain
       ShowReticule = True
       OnDrawReticule = ChartDrawReticule
       Align = alClient
-      Color = clWindow
-      ParentColor = False
       ParentShowHint = False
       ShowHint = True
       OnMouseDown = ChartMouseDown

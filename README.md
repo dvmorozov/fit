@@ -13,6 +13,12 @@ Curve fitting application.
 
 [Documentation](https://dvmorozov.github.io/fit/doc/index.html)
 
+## Related projects
+
+[fitminimizers](https://dvmorozov.github.io/fitminimizers/)
+
+[fitgrids](https://dvmorozov.github.io/fitgrids/)
+
 {% include contacts.html %}
 
 {% include google_ads.html %}

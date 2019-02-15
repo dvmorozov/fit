@@ -166,7 +166,8 @@ type
 
                 { Updates profile data after background subtraction. }
         procedure ShowProfile; virtual;
-                { Updates current minimum value. }
+                { Regenerates resulting list of curves, recalculates
+                  resulting profile and updates current minimum value. }
         procedure ShowCurMin(Min: Double); virtual;
                 { TODO: implement. }
         procedure Done; virtual;
@@ -1695,6 +1696,7 @@ begin
     {$IFDEF FIT}
       if Assigned(FitProxy) then
       begin
+          CreateResultedProfile();
           CreateResultedCurvesList();
           FitProxy.ShowCurMin(CurrentMinimum);
       end;

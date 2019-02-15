@@ -575,6 +575,7 @@ object FormMain: TFormMain
     BevelOuter = bvNone
     ClientHeight = 525
     ClientWidth = 942
+    Color = clWindow
     ParentColor = False
     TabOrder = 2
     TabStop = True

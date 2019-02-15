@@ -1876,7 +1876,7 @@ begin
 inherited Create(AOwner);
 
 Bitmap:=TBitmap.Create;                     //  DM 20/11/08
-Bitmap.Width:=600;                          (* первонач. инициал. *)
+Bitmap.Width:=600;                          // initialization
 Bitmap.Height:=450;
 
 Width:=600;
@@ -1894,7 +1894,7 @@ FAutoUpdateXMax:=True;
 FAutoUpdateYMin:=True;
 FAutoUpdateYMax:=True;
 
-(*при этом сбрасывается ParentColor*)
+// causes resetting ParentColor ParentColor
 //Color:=clBtnFace;                         //  DM 20/11/07
 AxisColor:=clBlack;
 

@@ -601,6 +601,8 @@ object FormMain: TFormMain
       ShowReticule = True
       OnDrawReticule = ChartDrawReticule
       Align = alClient
+      Color = clWindow
+      ParentColor = False
       ParentShowHint = False
       ShowHint = True
       OnMouseDown = ChartMouseDown

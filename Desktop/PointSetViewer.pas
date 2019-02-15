@@ -17,11 +17,12 @@ interface
 
 uses DataLoader, Classes, SysUtils, Graphics, SelfCopied, CheckLst,
 {$IFNDEF SERVER}
-    FitClient,
+    FitClient, IntFitViewer,
 {$ENDIF}
     tagraph, Forms, SelfCheckedComponentList, MSCRDataClasses;
 
 {$IFNDEF SERVER}
+// Switch on updating legend and grids.
 {$DEFINE USE_LEGEND}
 {$DEFINE USE_GRIDS}
 {$ENDIF}
@@ -33,11 +34,12 @@ const
     XCM_SINTL = 2;
 
 type
-	{ Component which can show client data by means of UI components.
-	  Supports correspondence between series of Chart and items of CheckListBox.
+    { Component displaying client data by means of UI components.
+      Supports correspondence between series of Chart and items of CheckListBox.
       On turning off CheckListBox item serie can be only hidden but not deleted
-      because there is no direct connection between items of CheckListBox and items of PointsSetList. }
-    TFitViewer = class(TComponent)
+      because there is no direct connection between items of CheckListBox and
+      items of PointsSetList. }
+    TFitViewer = class(TComponent, IFitViewer)
     protected
 {$IFNDEF SERVER}
         FitClient: TFitClient;
@@ -46,29 +48,23 @@ type
         MaxX, MinX, MaxY, MinY: Double;
         ViewMarkers: Boolean;
         FForm: TForm;
+        { Enables updating grids. By default is true. }
+        FUpdateGrids: Boolean;
+        { Enables updating legend. By default is true. }
+        FUpdateLegends: Boolean;
 
         procedure SetXCoordMode(AMode: LongInt);
-        
-		{ List of data sets for each item of which chart serie is related. 
-		The list is passive, it contains pointers to external data. }
 
     protected
+	{ List of data sets for each item of which chart serie is related.
+	  The list is passive, it contains pointers to external data. }
         PointsSetList: TSelfCheckedComponentList;
-{$IFDEF USE_GRIDS}
-        procedure FillDatasheetTable(
-            Profile: TTitlePointsSet;
-            CurvesList: TSelfCopiedCompList;
-            GaussProfile: TTitlePointsSet;
-            DeltaProfile: TTitlePointsSet;
-            RFactorIntervals: TTitlePointsSet
-            );
-{$ENDIF}
-		{ Returns maximum number of curves in one of given R-factor intervals. }
+	{ Returns maximum number of curves in one of given R-factor intervals. }
         function GetMaxCurveNum(
             CurvesList: TSelfCopiedCompList;
             RFactorIntervals: TTitlePointsSet
             ): LongInt;
-		{ Returns total number of profile points belonging to any of intervals. }
+	{ Returns total number of profile points belonging to any of intervals. }
         function GetPointsNumInIntervals(
             Profile: TTitlePointsSet;
             RFactorIntervals: TTitlePointsSet
@@ -88,32 +84,7 @@ type
         procedure ClearDatasheetTable;
 {$ENDIF}
         function ValToStr(Value: Double): string;
-
-		{ Methods implement different ways of drawing not related with data. }
-		
-        procedure PlotSelectedPoints(
-            Sender: TObject; SelectedPoints: TTitlePointsSet);
-
-        procedure HideRFactorIntervals(
-            Sender: TObject; RFactorIntervals: TTitlePointsSet);
-        procedure HideCurvePositions(
-            Sender: TObject; CurvePositions: TTitlePointsSet);
-
-        procedure HideDataPoints(
-            Sender: TObject; DataPoints: TTitlePointsSet);
-
-        procedure HideBackground(
-            Sender: TObject; BackgroundPoints: TTitlePointsSet);
-
-        procedure Refresh(Sender: TObject);
-
-		{ Does not clear series but only refreshes intencities. }
-        procedure RefreshPointsSet(
-            Sender: TObject; PointsSet: TNeutronPointsSet);
-		{ Hides given point set and removes corresponding item from CheckBox. }
-        procedure Hide(Sender: TObject; PointsSet: TNeutronPointsSet);
-
-		{ Clears serie set and fills it again. }
+        { Clears serie set and fills it again. }
         procedure PlotPointsSet(SA: TNeutronPointsSet);
 
     public
@@ -123,6 +94,9 @@ type
 {$ELSE}
         procedure Paint;
 {$ENDIF}
+    public
+        { Implementation of IFitViewer. }
+
         procedure PlotBackground(
             Sender: TObject; BackgroundPoints: TTitlePointsSet);
         procedure PlotDataPoints(
@@ -141,14 +115,42 @@ type
             Sender: TObject; GaussProfile: TTitlePointsSet);
         procedure PlotDeltaProfile(
             Sender: TObject; DeltaProfile: TTitlePointsSet);
-            
-    public
+        procedure PlotSelectedPoints(
+            Sender: TObject; SelectedPoints: TTitlePointsSet);
+
+        procedure HideRFactorIntervals(
+            Sender: TObject; RFactorIntervals: TTitlePointsSet);
+        procedure HideCurvePositions(
+            Sender: TObject; CurvePositions: TTitlePointsSet);
+        procedure HideDataPoints(
+            Sender: TObject; DataPoints: TTitlePointsSet);
+        procedure HideBackground(
+            Sender: TObject; BackgroundPoints: TTitlePointsSet);
+
+        procedure Refresh(Sender: TObject);
+	{ Does not clear series but only refreshes intencities. }
+        procedure RefreshPointsSet(
+            Sender: TObject; PointsSet: TNeutronPointsSet);
+
+        procedure Clear(Sender: TObject);
+        procedure Hide(Sender: TObject; PointsSet: TNeutronPointsSet);
+
+        procedure SetUpdateGrids(Update: Boolean);
+        procedure SetUpdateLegends(Update: Boolean);
+{$IFDEF USE_GRIDS}
+        procedure FillDatasheetTable(
+            Profile: TTitlePointsSet;
+            CurvesList: TSelfCopiedCompList;
+            GaussProfile: TTitlePointsSet;
+            DeltaProfile: TTitlePointsSet;
+            RFactorIntervals: TTitlePointsSet
+            );
+{$ENDIF}
         procedure SetViewMarkers(AViewMarkers: Boolean);
         procedure ViewAllMarkers;
-        procedure Clear(Sender: TObject);
-		{ Clears all series and fills them again saving parameter values. }
+	{ Clears all series and fills them again saving parameter values. }
         procedure Plot;
-		{ Returns number of the first visible curve from curve list. 
+	{ Returns number of the first visible curve from curve list.
           This function actually gives the number of active curve
           when only single curve is visible in the chart. This should
           be checked separately. }
@@ -156,7 +158,7 @@ type
         function GetActivePointsSet: TNeutronPointsSet;
         function GetPointsSet(ActiveNumber: LongInt): TNeutronPointsSet;
 
-		{ Return boundary values among all curves. }
+	{ Return boundary values among all curves. }
 		
         function GetMaxX: Double;
         function GetMinX: Double;
@@ -186,30 +188,7 @@ uses Main,
 procedure TFitViewer.SetFitClient(AFitClient: TFitClient);
 begin
     FitClient := AFitClient;
-    FitClient.OnPlotSpecimens := PlotSpecimens;
-    FitClient.OnPlotSelectedPoints := PlotSelectedPoints;
-
-    FitClient.OnPlotRFactorIntervals := PlotRFactorIntervals;
-    FitClient.OnHideRFactorIntervals := HideRFactorIntervals;
-    
-    FitClient.OnPlotCurvePositions := PlotCurvePositions;
-    FitClient.OnHideCurvePositions := HideCurvePositions;
-
-    FitClient.OnPlotDataPoints := PlotDataPoints;
-    FitClient.OnHideDataPoints := HideDataPoints;
-
-    FitClient.OnPlotSelectedArea := PlotSelectedArea;
-
-    FitClient.OnPlotBackground := PlotBackground;
-    FitClient.OnHideBackground := HideBackground;
-
-    FitClient.OnPlotGaussProfile := PlotGaussProfile;
-    FitClient.OnPlotDeltaProfile := PlotDeltaProfile;
-    FitClient.OnRefresh := Refresh;
-    FitClient.OnRefreshPointsSet := RefreshPointsSet;
-    FitClient.OnClear := Clear;
-    FitClient.OnHide := Hide;
-    FitClient.OnFillDatasheetTable := FillDatasheetTable;
+    FitClient.FitViewer := Self;
 end;
 {$ENDIF}
 const
@@ -273,14 +252,18 @@ begin
 
         TFormMain(Form).Chart.AddSerie(LS);
 {$IFDEF USE_LEGEND}
-        TFormMain(Form).CheckListBoxLegend.Items.AddObject('Selected area', LS);
-        TFormMain(Form).CheckListBoxLegend.Checked[
-            TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(LS)] := True;
+        if FUpdateLegends then
+        begin
+            TFormMain(Form).CheckListBoxLegend.Items.AddObject('Selected area', LS);
+            TFormMain(Form).CheckListBoxLegend.Checked[
+                TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(LS)] := True;
+        end;
 {$ENDIF}
     end;
     SelectedArea.Sort;
 {$IFDEF USE_GRIDS}
-    FillDataTable(SelectedArea);
+    if FUpdateGrids then
+        FillDataTable(SelectedArea);
 {$ENDIF}
     PlotPointsSet(SelectedArea);
 end;
@@ -293,7 +276,8 @@ var LS: TTASerie;
     j: LongInt;
 begin
 {$IFDEF USE_GRIDS}
-    FillSpecimenTable(SpecimenList);
+    if FUpdateGrids then
+        FillSpecimenTable(SpecimenList);
 {$ENDIF}
     //Assert(Assigned(CurvePointsSetList));
     if not Assigned(CurvePointsSetList) then Exit;
@@ -311,9 +295,12 @@ begin
 
             LS.Title := SA.GetName + ' ' + IntToStr(j+1);
 {$IFDEF USE_LEGEND}
-            TFormMain(Form).CheckListBoxLegend.Items.AddObject(LS.Title, LS);
-            TFormMain(Form).CheckListBoxLegend.Checked[
-                TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(LS)] := True;
+            if FUpdateLegends then
+            begin
+                TFormMain(Form).CheckListBoxLegend.Items.AddObject(LS.Title, LS);
+                TFormMain(Form).CheckListBoxLegend.Checked[
+                    TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(LS)] := True;
+            end;
 {$ENDIF}
             if j + 1 <= 16 then LS.SeriesColor := ColorPalette[j + 1]
             else LS.SeriesColor := ColorPalette[(j + 1) mod 16];
@@ -327,16 +314,20 @@ begin
     while TFormMain(Form).Chart.SeriesCount <> 0 do
         TFormMain(Form).Chart.DeleteSerie(TFormMain(Form).Chart.GetSerie(0));
 {$IFDEF USE_LEGEND}
-    TFormMain(Form).CheckListBoxLegend.Items.Clear;
+    if FUpdateLegends then
+        TFormMain(Form).CheckListBoxLegend.Items.Clear;
 {$ENDIF}
     if Assigned(PointsSetList) then PointsSetList.Clear;
 {$IFDEF USE_GRIDS}
-    ClearDataTable;
-    ClearBackgroundTable;
-    ClearPositionsTable;
-    ClearIntervalsTable;
-    ClearSpecimenTable;
-    ClearDatasheetTable;
+    if FUpdateGrids then
+    begin
+        ClearDataTable;
+        ClearBackgroundTable;
+        ClearPositionsTable;
+        ClearIntervalsTable;
+        ClearSpecimenTable;
+        ClearDatasheetTable;
+    end;
 {$ENDIF}
 end;
 
@@ -351,7 +342,8 @@ begin
     if Index <> -1 then
     begin
 {$IFDEF USE_LEGEND}
-        TFormMain(Form).CheckListBoxLegend.Items.Delete(Index);
+        if FUpdateLegends then
+            TFormMain(Form).CheckListBoxLegend.Items.Delete(Index);
 {$ENDIF}
         if Index < TFormMain(Form).Chart.SeriesCount then
             TFormMain(Form).Chart.DeleteSerie(TFormMain(Form).Chart.GetSerie(Index));
@@ -398,7 +390,8 @@ procedure TFitViewer.HideRFactorIntervals(
 begin
     Hide(Sender, RFactorIntervals);
 {$IFDEF USE_GRIDS}
-    ClearIntervalsTable;
+    if FUpdateGrids then
+        ClearIntervalsTable;
 {$ENDIF}
 end;
 
@@ -425,15 +418,19 @@ begin
         TFormMain(Form).Chart.AddSerie(LS);
         PointsSetList.Add(RFactorIntervals);
 {$IFDEF USE_LEGEND}
-        TFormMain(Form).CheckListBoxLegend.Items.AddObject(LS.Title, LS);
-        TFormMain(Form).CheckListBoxLegend.Checked[
-            TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(LS)] := True;
+        if FUpdateLegends then
+        begin
+            TFormMain(Form).CheckListBoxLegend.Items.AddObject(LS.Title, LS);
+            TFormMain(Form).CheckListBoxLegend.Checked[
+                TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(LS)] := True;
+        end;
 {$ENDIF}
     end;
     //  !!! pri ispol'zovanii psVertLineXX trebuetsya sortirovka !!!
     RFactorIntervals.Sort;
 {$IFDEF USE_GRIDS}
-    FillIntervalsTable(RFactorIntervals);
+    if FUpdateGrids then
+        FillIntervalsTable(RFactorIntervals);
 {$ENDIF}
     PlotPointsSet(RFactorIntervals);
 end;
@@ -470,16 +467,20 @@ begin
         TFormMain(Form).Chart.AddSerie(LS);
         PointsSetList.Add(CurvePositions);
 {$IFDEF USE_LEGEND}
-        TFormMain(Form).CheckListBoxLegend.Items.AddObject(LS.Title, LS);
-        TFormMain(Form).CheckListBoxLegend.Checked[
-            TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(LS)] := True;
+        if FUpdateLegends then
+        begin
+            TFormMain(Form).CheckListBoxLegend.Items.AddObject(LS.Title, LS);
+            TFormMain(Form).CheckListBoxLegend.Checked[
+                TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(LS)] := True;
+        end;
 {$ENDIF}
     end;
     //  !!! pri ispol'zovanii psVertLineXX trebuetsya sortirovka !!!
     //  !!! dlya vyvoda tablitsy trebuetsya sortirovka !!!
     CurvePositions.Sort;
 {$IFDEF USE_GRIDS}
-    FillPositionsTable(CurvePositions);
+    if FUpdateGrids then
+        FillPositionsTable(CurvePositions);
 {$ENDIF}
     PlotPointsSet(CurvePositions);
 end;
@@ -507,9 +508,12 @@ begin
         TFormMain(Form).Chart.AddSerie(LS);
         PointsSetList.Add(SelectedPoints);
 {$IFDEF USE_LEGEND}
-        TFormMain(Form).CheckListBoxLegend.Items.AddObject(LS.Title, LS);
-        TFormMain(Form).CheckListBoxLegend.Checked[
-            TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(LS)] := True;
+        if FUpdateLegends then
+        begin
+            TFormMain(Form).CheckListBoxLegend.Items.AddObject(LS.Title, LS);
+            TFormMain(Form).CheckListBoxLegend.Checked[
+                TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(LS)] := True;
+        end;
 {$ENDIF}
     end;
     //  !!! pri ispol'zovanii psVertLineXX trebuetsya sortirovka !!!
@@ -535,9 +539,12 @@ begin
     TFormMain(Form).Chart.AddSerie(LS);
     PointsSetList.Add(GaussProfile);
 {$IFDEF USE_LEGEND}
-    TFormMain(Form).CheckListBoxLegend.Items.AddObject(LS.Title, LS);
-    TFormMain(Form).CheckListBoxLegend.Checked[
-        TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(LS)] := True;
+    if FUpdateLegends then
+    begin
+        TFormMain(Form).CheckListBoxLegend.Items.AddObject(LS.Title, LS);
+        TFormMain(Form).CheckListBoxLegend.Checked[
+            TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(LS)] := True;
+    end;
 {$ENDIF}
     Plot; //??? sdelat' optimal'no - bez polnogo perestroeniya
 end;
@@ -572,7 +579,8 @@ procedure TFitViewer.HideDataPoints(
 begin
     Hide(Sender, DataPoints);
 {$IFDEF USE_GRIDS}
-    ClearDataTable;
+    if FUpdateGrids then
+        ClearDataTable;
 {$ENDIF}
 end;
 
@@ -581,7 +589,8 @@ procedure TFitViewer.HideBackground(
 begin
     Hide(Sender, BackgroundPoints);
 {$IFDEF USE_GRIDS}
-    ClearBackgroundTable;
+    if FUpdateGrids then
+        ClearBackgroundTable;
 {$ENDIF}
 end;
 
@@ -608,14 +617,18 @@ begin
         TFormMain(Form).Chart.AddSerie(LS);
         PointsSetList.Add(BackgroundPoints);
 {$IFDEF USE_LEGEND}
-        TFormMain(Form).CheckListBoxLegend.Items.AddObject(LS.Title, LS);
-        TFormMain(Form).CheckListBoxLegend.Checked[
-            TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(LS)] := True;
+        if FUpdateLegends then
+        begin
+            TFormMain(Form).CheckListBoxLegend.Items.AddObject(LS.Title, LS);
+            TFormMain(Form).CheckListBoxLegend.Checked[
+                TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(LS)] := True;
+        end;
 {$ENDIF}
     end;
     BackgroundPoints.Sort;
 {$IFDEF USE_GRIDS}
-    FillBackgroundTable(BackgroundPoints);
+    if FUpdateGrids then
+        FillBackgroundTable(BackgroundPoints);
 {$ENDIF}
     PlotPointsSet(BackgroundPoints);
 end;
@@ -640,16 +653,30 @@ begin
         TFormMain(Form).Chart.AddSerie(LS);
         PointsSetList.Add(DataPoints);
 {$IFDEF USE_LEGEND}
-        TFormMain(Form).CheckListBoxLegend.Items.AddObject(LS.Title, LS);
-        TFormMain(Form).CheckListBoxLegend.Checked[
-            TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(LS)] := True;
+        if FUpdateLegends then
+        begin
+            TFormMain(Form).CheckListBoxLegend.Items.AddObject(LS.Title, LS);
+            TFormMain(Form).CheckListBoxLegend.Checked[
+                TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(LS)] := True;
+        end;
 {$ENDIF}
     end;
     DataPoints.Sort;
 {$IFDEF USE_GRIDS}
-    FillDataTable(DataPoints);
+    if FUpdateGrids then
+        FillDataTable(DataPoints);
 {$ENDIF}
     PlotPointsSet(DataPoints);
+end;
+
+procedure TFitViewer.SetUpdateGrids(Update: Boolean);
+begin
+    FUpdateGrids := Update;
+end;
+
+procedure TFitViewer.SetUpdateLegends(Update: Boolean);
+begin
+    FUpdateLegends := Update;
 end;
 
 constructor TFitViewer.Create(AOwner: TComponent);
@@ -658,6 +685,8 @@ begin
     PointsSetList := TSelfCheckedComponentList.Create(nil);
     PointsSetList.SetState(cfPassive);
     FXCoordMode := 0;
+    FUpdateGrids := true;
+    FUpdateLegends := true;
 end;
 
 destructor TFitViewer.Destroy;
@@ -791,6 +820,7 @@ begin
         end;
     end;
 end;
+
 {$IFDEF USE_GRIDS}
 procedure TFitViewer.ClearIntervalsTable;
 begin

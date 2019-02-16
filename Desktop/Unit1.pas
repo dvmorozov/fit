@@ -414,6 +414,7 @@ type
 
     procedure ShowHint(const Hint: string);
     procedure ShowTime;
+    procedure ShowRFactor;
 
     procedure LoadDataFile(FileName: string);
     
@@ -2419,14 +2420,19 @@ begin
     end;
 end;
 
+procedure TFormMain.ShowRFactor;
+begin
+    LabelMin.Caption := FitClientApp_.FitClient.GetRFactorStr;
+end;
+
 procedure TFormMain.ShowHint(const Hint: string);
 begin
-    if csDestroying in ComponentState then Exit;    //  !!! bez etogo inogda
-                                                    //  voznikalo iskl. pri
-                                                    //  zakrytii !!!
+    if csDestroying in ComponentState then Exit;    //  Otherwise sometimes
+                                                    //  exception is thrown.
     StatusBar.Panels[1].Text := Hint;
     if Hint = HintDone then
-        LabelMin.Caption := FitClientApp_.FitClient.GetRFactorStr;
+        // Displays latest R-factor value.
+        ShowRFactor;
 end;
 
 procedure TFormMain.OnFindComponentClass(Reader: TReader;

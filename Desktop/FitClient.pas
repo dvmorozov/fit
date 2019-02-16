@@ -539,10 +539,11 @@ procedure TFitClient.ShowCurMin(Min: Double);
 begin
     CurMin := Min;  //  prosto zapominaem zdes' znachenie
     FormMain.ShowTime;
+    FormMain.ShowRFactor;
     UpdateAll;
 end;
 
-procedure TFitClient.ShowProfile();
+procedure TFitClient.ShowProfile;
 begin
     if FSelectedAreaMode then
     begin

@@ -3,15 +3,17 @@ Curve fitting application.
 
 ## Desktop application
 
-![Fitting results](https://dvmorozov.github.io/fit/assets/images/2018-12-23_13h17_55.png)
+![Fitting results](assets/images/2018-12-23_13h17_55.png)
 
 ## Web application
 
-[FitEasily](https://dvmorozov.github.io/fit/fiteasily.html)
+[FitEasily](fiteasily.html)
 
 ## More info
 
-[Documentation](https://dvmorozov.github.io/fit/doc/index.html)
+[Documentation](doc/index.html)
+
+[Class diagram](doc/GVClasses.png)
 
 ## Related projects
 

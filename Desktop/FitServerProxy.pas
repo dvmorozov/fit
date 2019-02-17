@@ -27,7 +27,7 @@ type
 
     public
         procedure ShowCurMin(Min: Double);
-        procedure ShowProfile();
+        procedure ShowProfile;
         procedure Done;
         procedure FindPeakBoundsDone;
         procedure FindBackPointsDone;
@@ -49,7 +49,7 @@ begin
     FitStub.ShowCurMin(Min);
 end;
 
-procedure TFitServerProxy.ShowProfile();
+procedure TFitServerProxy.ShowProfile;
 begin
     try
         Assert(Assigned(FitStub));
@@ -57,7 +57,7 @@ begin
         on E: EAssertionFailed do raise EUserException.Create(E.Message)
         else raise;
     end;
-    FitStub.ShowProfile();
+    FitStub.ShowProfile;
 end;
 
 procedure TFitServerProxy.Done;

@@ -269,7 +269,7 @@ type
         { Callbacks from the server. }
         
         procedure ShowCurMin(Min: Double);
-        procedure ShowProfile();
+        procedure ShowProfile;
         procedure Done;
         procedure FindPeakBoundsDone;
         procedure FindBackPointsDone;

@@ -1686,7 +1686,7 @@ begin
     {$IFDEF FIT}
       if Assigned(FitProxy) then
       begin
-          FitProxy.ShowProfile();
+          FitProxy.ShowProfile;
       end;
     {$ENDIF}
 end;
@@ -1696,8 +1696,8 @@ begin
     {$IFDEF FIT}
       if Assigned(FitProxy) then
       begin
-          CreateResultedProfile();
-          CreateResultedCurvesList();
+          CreateResultedProfile;
+          CreateResultedCurvesList;
           FitProxy.ShowCurMin(CurrentMinimum);
       end;
     {$ENDIF}
@@ -2089,7 +2089,7 @@ begin
     begin
         //  pri povtornyh zapuskah fon ne udalyaetsya
         SubtractAllBackground(True);
-        ShowProfile();
+        ShowProfile;
     end;
     //??? mozhno optimizirovat' razbiv na nesk. funktsiy
     //  i vyzyvaya FindPeaksInternal tol'ko odin raz
@@ -2169,7 +2169,7 @@ begin
         ne ochen' horosho, t.k. posle vyzova avtomaticheskoy
         generatsii intervalov rezul'tat ob'edinyaetsya s dannym,
         pri etom mogut voznikat' lishnie tochki
-        TF := CreateTaskObject();
+        TF := CreateTaskObject;
         try
             BegIndex := 0;
             EndIndex := Data.PointsCount - 1;
@@ -2225,7 +2225,7 @@ begin
             //  nuzhno korrektno obrabatyvat' takuyu situatsiyu;
             //  dlya nezakrytogo intervala podzadacha ne sozdayetsya
             if j + 1 > RFactorIntervals.PointsCount - 1 then Break;
-            TF := CreateTaskObject();
+            TF := CreateTaskObject;
             try
                 BegIndex := Data.IndexOfValueX(RFactorIntervals.PointXCoord[j]);
                 EndIndex := Data.IndexOfValueX(RFactorIntervals.PointXCoord[j + 1]);

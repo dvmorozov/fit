@@ -23,7 +23,7 @@ type
     { Defines callback functions called from server to client. }
     IClientCallback = interface
         procedure ShowCurMin(Min: Double);
-        procedure ShowProfile();
+        procedure ShowProfile;
         procedure Done;
         procedure FindPeakBoundsDone;
         procedure FindBackPointsDone;

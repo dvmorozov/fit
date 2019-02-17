@@ -34,7 +34,7 @@ const
     XCM_SINTL = 2;
 
 type
-    { Component displaying client data by means of UI components.
+    { Component responsible for displaying client data by means of UI components.
       Supports correspondence between series of Chart and items of CheckListBox.
       On turning off CheckListBox item serie can be only hidden but not deleted
       because there is no direct connection between items of CheckListBox and

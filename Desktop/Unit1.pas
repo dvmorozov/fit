@@ -452,8 +452,7 @@ const
     HintMain:           string =
         'Drag mouse from top-left to bottom-right to zoom';
     HintWait:           string = 'Calculation started. Please wait';
-    HintDone:           string = 'Calculation done';
-    
+
     MenuDelCustCapt:    string = 'Delete Special';
     
 implementation

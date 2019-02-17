@@ -146,6 +146,10 @@ type
             RFactorIntervals: TTitlePointsSet
             );
 {$ENDIF}
+        procedure ShowTime;
+        procedure ShowRFactor;
+        procedure ShowHint(Hint: string);
+
         procedure SetViewMarkers(AViewMarkers: Boolean);
         procedure ViewAllMarkers;
 	{ Clears all series and fills them again saving parameter values. }
@@ -677,6 +681,21 @@ end;
 procedure TFitViewer.SetUpdateLegends(Update: Boolean);
 begin
     FUpdateLegends := Update;
+end;
+
+procedure TFitViewer.ShowTime;
+begin
+    TFormMain(Form).ShowTime;
+end;
+
+procedure TFitViewer.ShowRFactor;
+begin
+    TFormMain(Form).ShowRFactor;
+end;
+
+procedure TFitViewer.ShowHint(Hint: string);
+begin
+    TFormMain(Form).ShowHint(Hint);
 end;
 
 constructor TFitViewer.Create(AOwner: TComponent);

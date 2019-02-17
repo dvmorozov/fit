@@ -321,22 +321,21 @@ type
     end;
     
 const
-    RFactorIntervalsName: string = 'Spec.app.intervals';
-    BackgroundPointsName: string = 'Background points';
-    CurvePositionsName: string = 'Spec.positions';
-    SelectedAreaName: string = 'Selected interval';
-    SummarizedName: string = 'Summarized';
-    ArgumentName: string = 'Position';
-    ProfileName: string = 'Data';
-    NumberName: string = 'Number';
-    ValueName: string = 'Amplitude';
-    DeltaName: string = 'Difference';
-    StartName: string = 'Starting Position';
-    StopName: string = 'Final Position';
+    RFactorIntervalsName:       string = 'Spec.app.intervals';
+    BackgroundPointsName:       string = 'Background points';
+    CurvePositionsName:         string = 'Spec.positions';
+    SelectedAreaName:           string = 'Selected interval';
+    SummarizedName:             string = 'Summarized';
+    ArgumentName:               string = 'Position';
+    ProfileName:                string = 'Data';
+    NumberName:                 string = 'Number';
+    ValueName:                  string = 'Amplitude';
+    DeltaName:                  string = 'Difference';
+    StartName:                  string = 'Starting Position';
+    StopName:                   string = 'Final Position';
+    HintDone:                   string = 'Calculation done';
 
 implementation
-
-uses Unit1; // TODO: remove references to Form1
 
 {================================ TFitClient ==================================}
 
@@ -537,9 +536,14 @@ end;
 
 procedure TFitClient.ShowCurMin(Min: Double);
 begin
-    CurMin := Min;  //  prosto zapominaem zdes' znachenie
-    FormMain.ShowTime;
-    FormMain.ShowRFactor;
+    //  Stores current minimum value.
+    CurMin := Min;
+    //  Updates UI.
+    if Assigned(FitViewer) then
+    begin
+        FitViewer.ShowTime;
+        FitViewer.ShowRFactor;
+    end;
     UpdateAll;
 end;
 
@@ -634,16 +638,16 @@ end;
 
 procedure TFitClient.Done;
 begin
-    //  zdes' eto nedopustimye sostoyaniya
     Assert(Assigned(FitProxy));
 
     ShowProfile;
     UpdateAll;
     FAsyncState := AsyncDone;
 
-    //  vyzyvaetsya metod glavnoy formy
+    //  Updates UI.
     if Assigned(OnAsyncOperationFinished) then OnAsyncOperationFinished(Self);
-    FormMain.ShowHint(HintDone);
+    if Assigned(FitViewer) then
+        FitViewer.ShowHint(HintDone);
 end;
 
 procedure TFitClient.FindPeakBoundsDone;

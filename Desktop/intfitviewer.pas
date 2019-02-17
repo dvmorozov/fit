@@ -79,6 +79,9 @@ type
 {$IFDEF USE_LEGEND}
         procedure SetUpdateLegends(Update: Boolean);
 {$ENDIF}
+        procedure ShowTime;
+        procedure ShowRFactor;
+        procedure ShowHint(Hint: string);
     end;
 
 implementation

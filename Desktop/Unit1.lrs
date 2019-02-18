@@ -1479,6 +1479,9 @@ LazarusResources.Add('TFormMain','FORMDATA',[
   +'tegory'#6#5'Model'#7'Caption'#6#10'Lorentzian'#9'OnExecute'#7#31'ActionSelC'
   +'urveLorentzianExecute'#0#0#7'TAction'#28'ActionSelSpecPosAtEveryPoint'#8'Ca'
   +'tegory'#6#5'Model'#7'Caption'#6#14'At Every Point'#9'OnExecute'#7'#ActionSe'
-  +'lSpecPosAtEveryPointExecute'#0#0#0#6'TTimer'#10'TimerAsync'#7'Enabled'#8#8
-  +'Interval'#3#208#7#7'OnTimer'#7#15'TimerAsyncTimer'#4'left'#3#176#2#0#0#0
+  +'lSpecPosAtEveryPointExecute'#0#0#7'TAction'#19'ActionAnimationMode'#8'Categ'
+  +'ory'#6#4'View'#7'Caption'#6#14'Animation Mode'#9'OnExecute'#7#26'ActionAnim'
+  +'ationModeExecute'#8'OnUpdate'#7#25'ActionAnimationModeUpdate'#0#0#0#6'TTime'
+  +'r'#10'TimerAsync'#7'Enabled'#8#8'Interval'#3#208#7#7'OnTimer'#7#15'TimerAsy'
+  +'ncTimer'#4'left'#3#176#2#0#0#0
 ]);

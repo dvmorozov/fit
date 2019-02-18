@@ -44,6 +44,7 @@ type
   { TFormMain }
 
   TFormMain = class(TForm)
+    ActionAnimationMode: TAction;
     ActionSelSpecPosAtEveryPoint: TAction;
     ActionSelCurveLorentzian: TAction;
     ActionSelCurveGaussian: TAction;
@@ -243,6 +244,8 @@ type
     Separator1: TMenuItem;
     SelectAll: TMenuItem;
     procedure ActionAboutExecute(Sender: TObject);
+    procedure ActionAnimationModeExecute(Sender: TObject);
+    procedure ActionAnimationModeUpdate(Sender: TObject);
     procedure ActionCopyExecute(Sender: TObject);
     procedure ActionCreateSpecialCurveExecute(Sender: TObject);
     procedure ActionDeleteExecute(Sender: TObject);
@@ -391,7 +394,7 @@ type
     procedure DoEditHint;
 
   public
-    IIViewer: TFitViewer;
+    FitViewer: TFitViewer;
 	{ Index of curve on which the first click was. It is used in the cases when points of only one curve can be selected. }
     ActiveNumber: LongInt;
 	{ Collection should be passive. Object is set from TFitViewer and is checked on Nil. }
@@ -753,6 +756,16 @@ begin
     AboutBox.ShowModal;
 end;
 
+procedure TFormMain.ActionAnimationModeExecute(Sender: TObject);
+begin
+    FitViewer.SetAnimationMode(not FitViewer.GetAnimationMode);
+end;
+
+procedure TFormMain.ActionAnimationModeUpdate(Sender: TObject);
+begin
+    ActionAnimationMode.Checked := FitViewer.GetAnimationMode;
+end;
+
 procedure TFormMain.ActionDoAllAutoExecute(Sender: TObject);
 begin
     Assert(Assigned(FitClientApp_));
@@ -866,7 +879,7 @@ begin
     end;
 
     NP := FitClientApp_.FitClient.NeutronPointsSet;
-        //IIViewer.GetPointsSet(ActiveNumber);
+        //FitViewer.GetPointsSet(ActiveNumber);
     SP.Sort;
 
     ShowHint(HintMain);
@@ -888,7 +901,7 @@ procedure TFormMain.ActionSelAreaLimitsExecute(Sender: TObject);
 begin
     if not SelAreaLimits.Checked then
     begin
-        ActiveNumber := IIViewer.GetActiveCurve;
+        ActiveNumber := FitViewer.GetActiveCurve;
         FitClientApp_.FitClient.SelectionMode := ModeSelAreaLimits;
         ShowHint(HintFirstStart);
     end
@@ -903,7 +916,7 @@ begin
     //  perehodim v rezhim vvoda tochek fona
     if not Back.Checked then
     begin
-        ActiveNumber := IIViewer.GetActiveCurve;
+        ActiveNumber := FitViewer.GetActiveCurve;
         FitClientApp_.FitClient.SelectionMode := ModeSelBackground;
         ShowHint(HintFirst);
     end;
@@ -916,7 +929,7 @@ procedure TFormMain.ActionSelBackVisExecute(Sender: TObject);
 begin
     if not Back.Checked then
     begin
-        ActiveNumber := IIViewer.GetActiveCurve;
+        ActiveNumber := FitViewer.GetActiveCurve;
         FitClientApp_.FitClient.SelectionMode := ModeSelBackground;
         ShowHint(HintFirst);
     end
@@ -928,7 +941,7 @@ procedure TFormMain.ActionSelCharacteristicPointsExecute(Sender: TObject);
 begin
     if not SelCharacteristicPoints.Checked then
     begin
-        ActiveNumber := IIViewer.GetActiveCurve;
+        ActiveNumber := FitViewer.GetActiveCurve;
         FitClientApp_.FitClient.SelectionMode := ModeSelCharacteristicPoints;
         ShowHint(HintFirstStart);
     end
@@ -941,8 +954,8 @@ var PS: TNeutronPointsSet;
 begin
     if not SelCurveBounds.Checked then
     begin
-        ActiveNumber := IIViewer.GetActiveCurve;
-        PS := IIViewer.GetActivePointsSet;
+        ActiveNumber := FitViewer.GetActiveCurve;
+        PS := FitViewer.GetActivePointsSet;
         if not (PS is TCurvePointsSet) then
         begin
             MessageDlg('This operation allowed only with pattern specimens...',
@@ -1013,7 +1026,7 @@ begin
     //  perehodim v rezhim vybora intervalov rascheta R-faktora
     if not RFactorIntervals.Checked then
     begin
-        ActiveNumber := IIViewer.GetActiveCurve;
+        ActiveNumber := FitViewer.GetActiveCurve;
         FitClientApp_.FitClient.SelectionMode := ModeSelPeakBounds;
         ShowHint(HintFirst);
     end;
@@ -1026,7 +1039,7 @@ procedure TFormMain.ActionSelRFactorIntervalsVisExecute(Sender: TObject);
 begin
     if not RFactorIntervals.Checked then
     begin
-        ActiveNumber := IIViewer.GetActiveCurve;
+        ActiveNumber := FitViewer.GetActiveCurve;
         FitClientApp_.FitClient.SelectionMode := ModeSelPeakBounds;
         ShowHint(HintFirst);
     end
@@ -1038,7 +1051,7 @@ procedure TFormMain.ActionSelSpecPosVisExecute(Sender: TObject);
 begin
     if not PeakPos.Checked then
     begin
-        ActiveNumber := IIViewer.GetActiveCurve;
+        ActiveNumber := FitViewer.GetActiveCurve;
         FitClientApp_.FitClient.SelectionMode := ModeSelPeakPos;
         ShowHint(HintFirst);
     end
@@ -1075,7 +1088,7 @@ end;
 procedure TFormMain.ActionViewMarkersExecute(Sender: TObject);
 begin
     ViewMarkers.Checked := not ViewMarkers.Checked;
-    IIViewer.SetViewMarkers(ViewMarkers.Checked);
+    FitViewer.SetViewMarkers(ViewMarkers.Checked);
 end;
 
 procedure TFormMain.ActionZoomInExecute(Sender: TObject);
@@ -1179,7 +1192,7 @@ begin
     //AddDummyCurve;
     WriteSettings;
     Settings.Free;
-    IIViewer.Free;
+    FitViewer.Free;
 end;
 
 procedure TFormMain.GridDataEditingDone(Sender: TObject);
@@ -1309,11 +1322,11 @@ begin
     Application.OnException := OnException;
     Caption := ApplicationProperties1.Title;
 
-    IIViewer := TFitViewer.Create(nil);
-    IIViewer.Form := Self;
-    IIViewer.SetFitClient(FitClientApp_.FitClient);
-    IIViewer.SetViewMarkers(ViewMarkers.Checked);
-    IIViewer.Clear(Self);
+    FitViewer := TFitViewer.Create(nil);
+    FitViewer.Form := Self;
+    FitViewer.SetFitClient(FitClientApp_.FitClient);
+    FitViewer.SetViewMarkers(ViewMarkers.Checked);
+    FitViewer.Clear(Self);
   
     ActiveNumber := -1;
 
@@ -1483,7 +1496,7 @@ var XValue, YValue: Double;
 {$endif}
 begin
     Assert(Assigned(FitClientApp_));
-    Assert(Assigned(IIViewer));
+    Assert(Assigned(FitViewer));
     try
         //  !!! esli m-u dvumya klikami ne bylo dvizheniya myshi i
         //  ChartDrawReticule ne vyzyvalas', to CurSerieIndex i ValueIndex
@@ -1503,7 +1516,7 @@ begin
             //  dobavlyayutsya v vybrannuyu seriyu, ili na vybrannoy serii, iz
             //  kotoroy pri etom tochka udalyaetsya
             if (CurSerieIndex = ActiveNumber) or
-               (IIViewer.GetPointsSet(CurSerieIndex) =
+               (FitViewer.GetPointsSet(CurSerieIndex) =
                 FitClientApp_.FitClient.GetCurrentPointsSet) then
             begin
                 case FitClientApp_.FitClient.SelectionMode of
@@ -1574,7 +1587,7 @@ begin
                     end;
                 end;
 
-                NS := IIViewer.GetPointsSet(CurSerieIndex);
+                NS := FitViewer.GetPointsSet(CurSerieIndex);
 
                 XValue := NS.PointXCoord[ValueIndex];
                 YValue := NS.PointYCoord[ValueIndex];
@@ -1855,7 +1868,7 @@ begin
                 InputWavelengthDlg.WavelengthValueEdit.Text));
             Screen.Cursor := crDefault;
             DecimalSeparator := SaveDecimalSeparator;
-            IIViewer.XCoordMode := XCM_SINTL;
+            FitViewer.XCoordMode := XCM_SINTL;
             if Assigned(SpecimenList) then
             begin
                 SpecimenList.ViewMode := XCM_SINTL;
@@ -1871,7 +1884,7 @@ begin
     end{if FitClientApp_.FitClient.GetWaveLength = 0 then...}
     else
     begin
-        IIViewer.XCoordMode := XCM_SINTL;
+        FitViewer.XCoordMode := XCM_SINTL;
         if Assigned(SpecimenList) then
         begin
             SpecimenList.ViewMode := XCM_SINTL;
@@ -1888,7 +1901,7 @@ end;
 
 procedure TFormMain.ThetaClick(Sender: TObject);
 begin
-    IIViewer.XCoordMode := XCM_T;
+    FitViewer.XCoordMode := XCM_T;
     if Assigned(SpecimenList) then
     begin
         SpecimenList.ViewMode := XCM_T;
@@ -1904,7 +1917,7 @@ end;
 
 procedure TFormMain.N2ThetaClick(Sender: TObject);
 begin
-    IIViewer.XCoordMode := XCM_2T;
+    FitViewer.XCoordMode := XCM_2T;
     if Assigned(SpecimenList) then
     begin
         SpecimenList.ViewMode := XCM_2T;
@@ -2071,7 +2084,7 @@ begin
     if InputWavelengthDlg.ShowModal = mrOk then
     begin
         FitClientApp_.FitClient.SetWaveLength(InputWavelengthDlg.Value);
-        IIViewer.XCoordMode := XCM_SINTL;
+        FitViewer.XCoordMode := XCM_SINTL;
         if Assigned(SpecimenList) then
         begin
             SpecimenList.ViewMode := XCM_SINTL;

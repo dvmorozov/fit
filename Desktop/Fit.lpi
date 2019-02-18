@@ -13,7 +13,7 @@
     </General>
     <VersionInfo>
       <AutoIncrementBuild Value="True"/>
-      <BuildNr Value="1080"/>
+      <BuildNr Value="1081"/>
       <StringTable ProductVersion="0.0.0.1001"/>
     </VersionInfo>
     <BuildModes Count="2">
@@ -121,15 +121,17 @@
         <ComponentName Value="FormMain"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="5"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="422"/>
-        <CursorPos Y="455"/>
+        <TopLine Value="383"/>
+        <CursorPos X="5" Y="397"/>
         <UsageCount Value="200"/>
         <Bookmarks Count="1">
-          <Item0 Y="469"/>
+          <Item0 Y="472"/>
         </Bookmarks>
         <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit1>
       <Unit2>
@@ -274,7 +276,7 @@
         <IsPartOfProject Value="True"/>
         <TopLine Value="154"/>
         <CursorPos X="17" Y="163"/>
-        <UsageCount Value="80"/>
+        <UsageCount Value="81"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit16>
       <Unit17>
@@ -400,7 +402,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="381"/>
         <CursorPos Y="450"/>
-        <UsageCount Value="143"/>
+        <UsageCount Value="144"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit31>
       <Unit32>
@@ -423,7 +425,7 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="4"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="312"/>
+        <TopLine Value="194"/>
         <CursorPos Y="336"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
@@ -840,7 +842,7 @@
         <EditorIndex Value="6"/>
         <WindowIndex Value="1"/>
         <CursorPos X="30" Y="26"/>
-        <UsageCount Value="119"/>
+        <UsageCount Value="120"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit83>
@@ -852,19 +854,18 @@
         <WindowIndex Value="1"/>
         <TopLine Value="69"/>
         <CursorPos X="43" Y="92"/>
-        <UsageCount Value="119"/>
+        <UsageCount Value="120"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit84>
       <Unit85>
         <Filename Value="FitViewer.pas"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="709"/>
-        <CursorPos X="46" Y="729"/>
-        <UsageCount Value="35"/>
+        <TopLine Value="161"/>
+        <CursorPos X="43" Y="174"/>
+        <UsageCount Value="36"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit85>
@@ -876,127 +877,115 @@
       <Define3 Value="WINDOWS"/>
       <Define4 Value="Lazarus"/>
     </OtherDefines>
-    <JumpHistory Count="30" HistoryIndex="29">
+    <JumpHistory Count="27" HistoryIndex="26">
       <Position1>
-        <Filename Value="FitServerProxy.pas"/>
-        <Caret Line="60" Column="13" TopLine="35"/>
+        <Filename Value="FitClient.pas"/>
+        <Caret Line="644" Column="5" TopLine="628"/>
       </Position1>
       <Position2>
         <Filename Value="FitClient.pas"/>
-        <Caret Line="541" Column="11" TopLine="519"/>
+        <Caret Line="996" Column="5" TopLine="981"/>
       </Position2>
       <Position3>
-        <Filename Value="Unit1.pas"/>
-        <Caret Line="426" Column="5" TopLine="405"/>
+        <Filename Value="FitClient.pas"/>
+        <Caret Line="1006" Column="5" TopLine="981"/>
       </Position3>
       <Position4>
-        <Filename Value="FitViewer.pas"/>
-        <Caret Line="12" Column="20"/>
+        <Filename Value="FitClient.pas"/>
+        <Caret Line="545" Column="15" TopLine="527"/>
       </Position4>
       <Position5>
         <Filename Value="FitClient.pas"/>
-        <Caret Line="542" Column="25" TopLine="519"/>
+        <Caret Line="338" TopLine="332"/>
       </Position5>
       <Position6>
-        <Filename Value="Unit1.pas"/>
-        <Caret Line="21" Column="47" TopLine="6"/>
+        <Filename Value="FitClient.pas"/>
+        <Caret Line="543" Column="15" TopLine="527"/>
       </Position6>
       <Position7>
-        <Filename Value="Unit1.pas"/>
-        <Caret Line="317" Column="27" TopLine="303"/>
+        <Filename Value="FitClient.pas"/>
+        <Caret Line="544" Column="18" TopLine="525"/>
       </Position7>
       <Position8>
-        <Filename Value="FitViewer.pas"/>
-        <Caret Line="138" Column="19" TopLine="133"/>
+        <Filename Value="Unit1.pas"/>
+        <Caret Line="426" Column="30" TopLine="409"/>
       </Position8>
       <Position9>
-        <Filename Value="FitClient.pas"/>
-        <Caret Line="546" Column="5" TopLine="540"/>
+        <Filename Value="Unit1.pas"/>
+        <Caret Line="589" Column="5" TopLine="574"/>
       </Position9>
       <Position10>
         <Filename Value="FitClient.pas"/>
-        <Caret Line="644" Column="5" TopLine="628"/>
+        <Caret Line="649" Column="22" TopLine="634"/>
       </Position10>
       <Position11>
         <Filename Value="FitClient.pas"/>
-        <Caret Line="996" Column="5" TopLine="981"/>
+        <Caret Line="646" Column="20" TopLine="642"/>
       </Position11>
       <Position12>
         <Filename Value="FitClient.pas"/>
-        <Caret Line="1006" Column="5" TopLine="981"/>
+        <Caret Line="649" Column="30" TopLine="633"/>
       </Position12>
       <Position13>
-        <Filename Value="FitClient.pas"/>
-        <Caret Line="545" Column="15" TopLine="527"/>
-      </Position13>
-      <Position14>
-        <Filename Value="FitClient.pas"/>
-        <Caret Line="338" TopLine="332"/>
-      </Position14>
-      <Position15>
-        <Filename Value="FitClient.pas"/>
-        <Caret Line="543" Column="15" TopLine="527"/>
-      </Position15>
-      <Position16>
-        <Filename Value="FitClient.pas"/>
-        <Caret Line="544" Column="18" TopLine="525"/>
-      </Position16>
-      <Position17>
-        <Filename Value="Unit1.pas"/>
-        <Caret Line="426" Column="30" TopLine="409"/>
-      </Position17>
-      <Position18>
-        <Filename Value="Unit1.pas"/>
-        <Caret Line="589" Column="5" TopLine="574"/>
-      </Position18>
-      <Position19>
-        <Filename Value="FitClient.pas"/>
-        <Caret Line="649" Column="22" TopLine="634"/>
-      </Position19>
-      <Position20>
-        <Filename Value="FitClient.pas"/>
-        <Caret Line="646" Column="20" TopLine="642"/>
-      </Position20>
-      <Position21>
-        <Filename Value="FitClient.pas"/>
-        <Caret Line="649" Column="30" TopLine="633"/>
-      </Position21>
-      <Position22>
         <Filename Value="Unit1.pas"/>
         <Caret Line="781" Column="5" TopLine="766"/>
-      </Position22>
-      <Position23>
+      </Position13>
+      <Position14>
         <Filename Value="FitViewer.pas"/>
         <Caret Line="686" Column="19" TopLine="680"/>
-      </Position23>
-      <Position24>
+      </Position14>
+      <Position15>
         <Filename Value="intfitviewer.pas"/>
         <Caret Line="85" Column="9" TopLine="26"/>
-      </Position24>
-      <Position25>
+      </Position15>
+      <Position16>
         <Filename Value="FitViewer.pas"/>
         <Caret Line="170" Column="19" TopLine="152"/>
-      </Position25>
-      <Position26>
+      </Position16>
+      <Position17>
         <Filename Value="FitViewer.pas"/>
         <Caret Line="722" Column="30" TopLine="701"/>
-      </Position26>
-      <Position27>
+      </Position17>
+      <Position18>
         <Filename Value="intfitviewer.pas"/>
         <Caret Line="90" Column="35" TopLine="66"/>
-      </Position27>
-      <Position28>
+      </Position18>
+      <Position19>
         <Filename Value="FitViewer.pas"/>
         <Caret Line="170" Column="40" TopLine="159"/>
-      </Position28>
-      <Position29>
+      </Position19>
+      <Position20>
         <Filename Value="FitViewer.pas"/>
         <Caret Line="172" Column="19" TopLine="159"/>
-      </Position29>
-      <Position30>
+      </Position20>
+      <Position21>
         <Filename Value="FitViewer.pas"/>
         <Caret Line="731" Column="30" TopLine="709"/>
-      </Position30>
+      </Position21>
+      <Position22>
+        <Filename Value="FitViewer.pas"/>
+        <Caret Line="729" Column="46" TopLine="709"/>
+      </Position22>
+      <Position23>
+        <Filename Value="Unit1.pas"/>
+        <Caret Line="455" TopLine="422"/>
+      </Position23>
+      <Position24>
+        <Filename Value="Unit1.pas"/>
+        <Caret Line="457" TopLine="427"/>
+      </Position24>
+      <Position25>
+        <Filename Value="Unit1.pas"/>
+        <Caret Line="761" Column="36" TopLine="749"/>
+      </Position25>
+      <Position26>
+        <Filename Value="Unit1.pas"/>
+        <Caret Line="766" Column="39" TopLine="746"/>
+      </Position26>
+      <Position27>
+        <Filename Value="Unit1.pas"/>
+        <Caret Line="761" Column="8" TopLine="746"/>
+      </Position27>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

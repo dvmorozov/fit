@@ -2169,6 +2169,12 @@ object FormMain: TFormMain
       Caption = 'At Every Point'
       OnExecute = ActionSelSpecPosAtEveryPointExecute
     end
+    object ActionAnimationMode: TAction
+      Category = 'View'
+      Caption = 'Animation Mode'
+      OnExecute = ActionAnimationModeExecute
+      OnUpdate = ActionAnimationModeUpdate
+    end
   end
   object TimerAsync: TTimer
     Enabled = False

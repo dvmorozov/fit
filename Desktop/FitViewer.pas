@@ -52,6 +52,9 @@ type
         FUpdateGrids: Boolean;
         { Enables updating legend. By default is true. }
         FUpdateLegends: Boolean;
+        { Enables animation mode in which UI is updated on every
+          computation cycle not only on finishing. By default is false. }
+        FAnimationMode: Boolean;
 
         procedure SetXCoordMode(AMode: LongInt);
 
@@ -95,49 +98,62 @@ type
         procedure Paint;
 {$ENDIF}
     public
-        { Implementation of IFitViewer. }
-
+        { Method of IFitViewer interface. }
         procedure PlotBackground(
             Sender: TObject; BackgroundPoints: TTitlePointsSet);
+        { Method of IFitViewer interface. }
         procedure PlotDataPoints(
             Sender: TObject; DataPoints: TTitlePointsSet);
+        { Method of IFitViewer interface. }
         procedure PlotSelectedArea(
             Sender: TObject; SelectedArea: TTitlePointsSet);
+        { Method of IFitViewer interface. }
         procedure PlotSpecimens(
             Sender: TObject;
             CurvePointsSetList: TSelfCopiedCompList;
             SpecimenList: TMSCRSpecimenList);
+        { Method of IFitViewer interface. }
         procedure PlotRFactorIntervals(
             Sender: TObject; RFactorIntervals: TTitlePointsSet);
+        { Method of IFitViewer interface. }
         procedure PlotCurvePositions(
             Sender: TObject; CurvePositions: TTitlePointsSet);
+        { Method of IFitViewer interface. }
         procedure PlotGaussProfile(
             Sender: TObject; GaussProfile: TTitlePointsSet);
+        { Method of IFitViewer interface. }
         procedure PlotDeltaProfile(
             Sender: TObject; DeltaProfile: TTitlePointsSet);
+        { Method of IFitViewer interface. }
         procedure PlotSelectedPoints(
             Sender: TObject; SelectedPoints: TTitlePointsSet);
-
+        { Method of IFitViewer interface. }
         procedure HideRFactorIntervals(
             Sender: TObject; RFactorIntervals: TTitlePointsSet);
+        { Method of IFitViewer interface. }
         procedure HideCurvePositions(
             Sender: TObject; CurvePositions: TTitlePointsSet);
+        { Method of IFitViewer interface. }
         procedure HideDataPoints(
             Sender: TObject; DataPoints: TTitlePointsSet);
+        { Method of IFitViewer interface. }
         procedure HideBackground(
             Sender: TObject; BackgroundPoints: TTitlePointsSet);
-
+        { Method of IFitViewer interface. }
         procedure Refresh(Sender: TObject);
 	{ Does not clear series but only refreshes intencities. }
         procedure RefreshPointsSet(
             Sender: TObject; PointsSet: TNeutronPointsSet);
-
+        { Method of IFitViewer interface. }
         procedure Clear(Sender: TObject);
+        { Method of IFitViewer interface. }
         procedure Hide(Sender: TObject; PointsSet: TNeutronPointsSet);
-
+        { Method of IFitViewer interface. }
         procedure SetUpdateGrids(Update: Boolean);
+        { Method of IFitViewer interface. }
         procedure SetUpdateLegends(Update: Boolean);
 {$IFDEF USE_GRIDS}
+        { Method of IFitViewer interface. }
         procedure FillDatasheetTable(
             Profile: TTitlePointsSet;
             CurvesList: TSelfCopiedCompList;
@@ -146,9 +162,14 @@ type
             RFactorIntervals: TTitlePointsSet
             );
 {$ENDIF}
+        { Method of IFitViewer interface. }
         procedure ShowTime;
+        { Method of IFitViewer interface. }
         procedure ShowRFactor;
+        { Method of IFitViewer interface. }
         procedure ShowHint(Hint: string);
+        { Method of IFitViewer interface. }
+        procedure SetAnimationMode(On: Boolean);
 
         procedure SetViewMarkers(AViewMarkers: Boolean);
         procedure ViewAllMarkers;
@@ -696,6 +717,11 @@ end;
 procedure TFitViewer.ShowHint(Hint: string);
 begin
     TFormMain(Form).ShowHint(Hint);
+end;
+
+procedure TFitViewer.SetAnimationMode(On: Boolean);
+begin
+    FAnimationMode := On;
 end;
 
 constructor TFitViewer.Create(AOwner: TComponent);

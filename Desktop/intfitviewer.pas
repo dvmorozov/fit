@@ -82,6 +82,9 @@ type
         procedure ShowTime;
         procedure ShowRFactor;
         procedure ShowHint(Hint: string);
+        { Turns on/off animation mode in which UI is updated on every
+          computation cycle not only on finishing. }
+        procedure SetAnimationMode(On: Boolean);
     end;
 
 implementation

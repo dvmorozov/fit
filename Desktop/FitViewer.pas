@@ -724,6 +724,16 @@ end;
 procedure TFitViewer.SetAnimationMode(On: Boolean);
 begin
     FAnimationMode := On;
+    if On then
+    begin
+        FUpdateGrids := False;
+        FUpdateLegends := False;
+    end
+    else
+    begin
+        FUpdateGrids := True;
+        FUpdateLegends := True;
+    end
 end;
 
 function TFitViewer.GetAnimationMode: Boolean;

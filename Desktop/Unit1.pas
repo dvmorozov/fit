@@ -121,6 +121,7 @@ type
     MenuItem14: TMenuItem;
     BackPoints: TMenuItem;
     MenuItem3: TMenuItem;
+    MenuItem5: TMenuItem;
     PanelParameters: TPanel;
     PanelIntervals: TPanel;
     PanelDatasheet: TPanel;

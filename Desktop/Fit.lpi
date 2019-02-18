@@ -13,7 +13,7 @@
     </General>
     <VersionInfo>
       <AutoIncrementBuild Value="True"/>
-      <BuildNr Value="1081"/>
+      <BuildNr Value="1082"/>
       <StringTable ProductVersion="0.0.0.1001"/>
     </VersionInfo>
     <BuildModes Count="2">
@@ -124,11 +124,11 @@
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="5"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="383"/>
-        <CursorPos X="5" Y="397"/>
+        <TopLine Value="398"/>
+        <CursorPos X="5" Y="398"/>
         <UsageCount Value="200"/>
         <Bookmarks Count="1">
-          <Item0 Y="472"/>
+          <Item0 Y="473"/>
         </Bookmarks>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -877,7 +877,7 @@
       <Define3 Value="WINDOWS"/>
       <Define4 Value="Lazarus"/>
     </OtherDefines>
-    <JumpHistory Count="27" HistoryIndex="26">
+    <JumpHistory Count="29" HistoryIndex="28">
       <Position1>
         <Filename Value="FitClient.pas"/>
         <Caret Line="644" Column="5" TopLine="628"/>
@@ -986,6 +986,14 @@
         <Filename Value="Unit1.pas"/>
         <Caret Line="761" Column="8" TopLine="746"/>
       </Position27>
+      <Position28>
+        <Filename Value="Unit1.pas"/>
+        <Caret Line="397" Column="5" TopLine="383"/>
+      </Position28>
+      <Position29>
+        <Filename Value="Unit1.pas"/>
+        <Caret Line="399" Column="5" TopLine="385"/>
+      </Position29>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

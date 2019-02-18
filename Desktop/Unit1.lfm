@@ -1156,6 +1156,9 @@ object FormMain: TFormMain
         Action = ActionViewMarkers
         OnClick = ActionViewMarkersExecute
       end
+      object MenuItem5: TMenuItem
+        Action = ActionAnimationMode
+      end
     end
     object Help1: TMenuItem
       Caption = '&Help'

@@ -170,6 +170,8 @@ type
         procedure ShowHint(Hint: string);
         { Method of IFitViewer interface. }
         procedure SetAnimationMode(On: Boolean);
+        { Method of IFitViewer interface. }
+        function GetAnimationMode: Boolean;
 
         procedure SetViewMarkers(AViewMarkers: Boolean);
         procedure ViewAllMarkers;
@@ -722,6 +724,11 @@ end;
 procedure TFitViewer.SetAnimationMode(On: Boolean);
 begin
     FAnimationMode := On;
+end;
+
+function TFitViewer.GetAnimationMode: Boolean;
+begin
+    Result := FAnimationMode;
 end;
 
 constructor TFitViewer.Create(AOwner: TComponent);

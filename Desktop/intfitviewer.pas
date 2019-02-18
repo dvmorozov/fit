@@ -79,12 +79,17 @@ type
 {$IFDEF USE_LEGEND}
         procedure SetUpdateLegends(Update: Boolean);
 {$ENDIF}
+        { Displays computation time. }
         procedure ShowTime;
+        { Displays latest not necessarily best R-factor value. }
         procedure ShowRFactor;
+        { Displays hint about progress. }
         procedure ShowHint(Hint: string);
-        { Turns on/off animation mode in which UI is updated on every
-          computation cycle not only on finishing. }
+        { Turns on/off animation mode in which UI is updated
+          on every computation cycle not only on finishing. }
         procedure SetAnimationMode(On: Boolean);
+        { Returns status of current animation mode. }
+        function GetAnimationMode: Boolean;
     end;
 
 implementation

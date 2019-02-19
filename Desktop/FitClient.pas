@@ -543,8 +543,9 @@ begin
     begin
         FitViewer.ShowTime;
         FitViewer.ShowRFactor;
+        if FitViewer.GetAnimationMode then
+            UpdateAll;
     end;
-    UpdateAll;
 end;
 
 procedure TFitClient.ShowProfile;

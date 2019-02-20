@@ -10,7 +10,6 @@ uses
   Forms,
   Variants,     //  требуется для правильного выполнения
   Unit1 in 'Unit1.pas' {Form1},
-  DataLoader in 'DataLoader.pas',
   Math3d in '..\..\Library\Math\Math3d.pas',
   DownhillSimplexContainer in '..\..\Library\Algorithms\DownhillSimplexContainer.pas',
   AlgorithmContainer in '..\..\Library\Algorithms\AlgorithmContainer.pas',

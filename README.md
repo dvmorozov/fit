@@ -1,6 +1,10 @@
 # fit
 Curve fitting application.
 
+## Look how fully automated fitting works
+
+{% include video_fully_automated_fitting.html %}
+
 ## Desktop application
 
 ![Fitting results](assets/images/2018-12-23_13h17_55.png)

@@ -15,14 +15,14 @@ unit DataLoader;
 
 interface
 
-uses Classes, SysUtils, SimpMath, SelfCopied, PointsSets;
+uses Classes, SysUtils, SimpMath, SelfCopied, PointsSets, IntDataLoader;
 
 type
     EFileNotExists = class(Exception);
     EInvalidFileFormat = class(Exception);
 
     { Basic class for building loaders for different types of data files. }
-    TDataLoader = class(TComponent)
+    TDataLoader = class(TComponent, IDataLoader)
     protected
         PointsSet: TPointsSet;
         FFileName: string;
@@ -37,12 +37,12 @@ type
         destructor Destroy; override;
     end;
 
-    { Loads data from ordinary DAT-file consisting from lines having pairs of position and values. }
+    { Loads data from ordinary DAT-file consisting from lines having pairs
+      of position and values. }
     TDATFileLoader = class(TDataLoader)
     protected
         procedure LoadDataSetActually; override;
     end;
-
 
 const 
       { The minimal allowed number. }

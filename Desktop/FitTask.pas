@@ -16,7 +16,7 @@ unit FitTask;
 
 interface
 
-uses Classes, SysUtils, DataLoader, SelfCopied, Minimizer, Minimizer_S,
+uses Classes, SysUtils, PointsSets, SelfCopied, Minimizer, Minimizer_S,
      Minimizer_DS, MainCalcThread, CommonTypes, MSCRDataClasses;
   
 type

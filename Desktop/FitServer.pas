@@ -28,7 +28,7 @@ because exceptions of this type can be thrown from libraries.
 In this case keeping the state of application can't be guaranteed.
 }
 
-uses Classes, DataLoader, SelfCheckedComponentList, SysUtils, MSCRDataClasses,
+uses Classes, PointsSets, SelfCheckedComponentList, SysUtils, MSCRDataClasses,
      Dialogs,
 {$IFDEF FIT}
      FitServerProxy,    //      Proxy to client to call it back.

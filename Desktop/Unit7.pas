@@ -17,7 +17,11 @@ interface
 
 uses
   Classes, SysUtils, LResources, Forms, Controls, Graphics, Dialogs, ExtCtrls,
-  StdCtrls, CheckLst, Settings, DataLoader(*, Windows  ???? ubrat'*);
+  StdCtrls, CheckLst, Settings, PointsSets
+{$IFDEF WINDOWS}
+  , Windows
+{$ENDIF}
+  ;
 
 type
 

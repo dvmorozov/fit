@@ -18,7 +18,7 @@ interface
 
 uses
     LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-    ExtCtrls, StdCtrls, Menus, DataLoader, FitViewer, ComCtrls,
+    ExtCtrls, StdCtrls, Menus, PointsSets, FitViewer, ComCtrls,
     FitClient, SelfCheckedComponentList, NumericGrid, CheckLst, MSCRDataClasses,
     LResources, tagraph, ActnList, FitTask, Settings, Laz_XMLCfg,
     MyExceptions, Grids, CommonTypes, Main

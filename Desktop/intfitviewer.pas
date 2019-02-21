@@ -17,7 +17,7 @@ interface
 
 uses
   Classes, SysUtils, SelfCheckedComponentList, MSCRDataClasses, SelfCopied,
-  DataLoader;
+  PointsSets;
 
 type
     { Defines interface allowing to display data in chart and grids.

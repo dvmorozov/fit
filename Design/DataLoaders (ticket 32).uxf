@@ -90,7 +90,7 @@ GetPointsSetCopy: TTitlePointsSet </panel_attributes>
       <w>120</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>TCSVFileLoader
+    <panel_attributes>/TCSVFileLoader/
 lt=.</panel_attributes>
     <additional_attributes/>
   </element>
@@ -209,7 +209,7 @@ injectors</panel_attributes>
       <w>210</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>ExtensionDataLoaderInjector</panel_attributes>
+    <panel_attributes>TExtensionDataLoaderInjector</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -242,7 +242,7 @@ injectors</panel_attributes>
       <w>210</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>ConfigurableDataLoaderInjector
+    <panel_attributes>TConfigurableDataLoaderInjector
 lt=.</panel_attributes>
     <additional_attributes/>
   </element>

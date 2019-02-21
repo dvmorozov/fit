@@ -1,6 +1,8 @@
 DiGraph Classes {
   IClientCallback -> IInterface
-  IClientCallback [href="IntClientCallback.IClientCallback.html"]
+  IClientCallback [href="ClientCallback.IClientCallback.html"]
+  IDataLoader -> IInterface
+  IDataLoader [href="IntDataLoader.IDataLoader.html"]
   IDiscretValue -> IInterface
   IDiscretValue [href="CombEnumerator.IDiscretValue.html"]
   IDownhillSimplexParameters -> IDiscretValue
@@ -58,29 +60,29 @@ DiGraph Classes {
   TSelfCopiedComponent -> TCBRCComponent
   TSelfCopiedComponent [href="SelfCopied.TSelfCopiedComponent.html"]
   Curve_parameters -> TSelfCopiedComponent
-  Curve_parameters [href="DataLoader.Curve_parameters.html"]
+  Curve_parameters [href="PointsSets.Curve_parameters.html"]
   TPointsSet -> TSelfCopiedComponent
-  TPointsSet [href="DataLoader.TPointsSet.html"]
+  TPointsSet [href="PointsSets.TPointsSet.html"]
   TNeutronPointsSet -> TPointsSet
-  TNeutronPointsSet [href="DataLoader.TNeutronPointsSet.html"]
+  TNeutronPointsSet [href="PointsSets.TNeutronPointsSet.html"]
   TTitlePointsSet -> TNeutronPointsSet
-  TTitlePointsSet [href="DataLoader.TTitlePointsSet.html"]
+  TTitlePointsSet [href="PointsSets.TTitlePointsSet.html"]
   TCurvePointsSet -> TTitlePointsSet
-  TCurvePointsSet [href="DataLoader.TCurvePointsSet.html"]
+  TCurvePointsSet [href="PointsSets.TCurvePointsSet.html"]
   T2BranchesPseudoVoigtPointsSet -> TCurvePointsSet
-  T2BranchesPseudoVoigtPointsSet [href="DataLoader.T2BranchesPseudoVoigtPointsSet.html"]
+  T2BranchesPseudoVoigtPointsSet [href="PointsSets.T2BranchesPseudoVoigtPointsSet.html"]
   TGaussPointsSet -> TCurvePointsSet
-  TGaussPointsSet [href="DataLoader.TGaussPointsSet.html"]
+  TGaussPointsSet [href="PointsSets.TGaussPointsSet.html"]
   TLorentzPointsSet -> TGaussPointsSet
-  TLorentzPointsSet [href="DataLoader.TLorentzPointsSet.html"]
+  TLorentzPointsSet [href="PointsSets.TLorentzPointsSet.html"]
   TNamedPointsSet -> TCurvePointsSet
-  TNamedPointsSet [href="DataLoader.TNamedPointsSet.html"]
+  TNamedPointsSet [href="PointsSets.TNamedPointsSet.html"]
   TPseudoVoigtPointsSet -> TCurvePointsSet
-  TPseudoVoigtPointsSet [href="DataLoader.TPseudoVoigtPointsSet.html"]
+  TPseudoVoigtPointsSet [href="PointsSets.TPseudoVoigtPointsSet.html"]
   TAsymPseudoVoigtPointsSet -> TPseudoVoigtPointsSet
-  TAsymPseudoVoigtPointsSet [href="DataLoader.TAsymPseudoVoigtPointsSet.html"]
+  TAsymPseudoVoigtPointsSet [href="PointsSets.TAsymPseudoVoigtPointsSet.html"]
   TSpecialPointsSet -> TCurvePointsSet
-  TSpecialPointsSet [href="DataLoader.TSpecialPointsSet.html"]
+  TSpecialPointsSet [href="PointsSets.TSpecialPointsSet.html"]
   TAboutBox -> TForm
   TAboutBox [href="Unit12.TAboutBox.html"]
   TCreateSpecialCurveDlg -> TForm
@@ -121,7 +123,7 @@ DiGraph Classes {
   ETools -> Exception
   ETools [href="Tools.ETools.html"]
   EWavelengthIsNotSpecified -> Exception
-  EWavelengthIsNotSpecified [href="DataLoader.EWavelengthIsNotSpecified.html"]
+  EWavelengthIsNotSpecified [href="PointsSets.EWavelengthIsNotSpecified.html"]
   TCombEnumerator -> TObject
   TCombEnumerator [href="CombEnumerator.TCombEnumerator.html"]
   TCombSelector -> TCombEnumerator
@@ -135,7 +137,7 @@ DiGraph Classes {
   TPersistent -> TObject
   TCollectionItem -> TPersistent
   TSpecialCurveParameter -> TCollectionItem
-  TSpecialCurveParameter [href="DataLoader.TSpecialCurveParameter.html"]
+  TSpecialCurveParameter [href="PointsSets.TSpecialCurveParameter.html"]
   TComponent -> TPersistent
   Curve_type -> TComponent
   Curve_type [href="Settings.Curve_type.html"]
@@ -159,8 +161,6 @@ DiGraph Classes {
   TFitTask [href="FitTask.TFitTask.html"]
   TFitTaskWithThread -> TFitTask
   TFitTaskWithThread [href="FitTaskWithThread.TFitTaskWithThread.html"]
-  TFitViewer -> TComponent
-  TFitViewer [href="PointSetViewer.TFitViewer.html"]
   TIntMinimizer -> TComponent
   TIntMinimizer [href="Minimizer.TIntMinimizer.html"]
   TMinimizer -> TComponent
@@ -185,7 +185,7 @@ DiGraph Classes {
   TRunningThread -> TThread
   TRunningThread [href="Runner.TRunningThread.html"]
   ValuePair -> TObject
-  ValuePair [href="DataLoader.ValuePair.html"]
+  ValuePair [href="PointsSets.ValuePair.html"]
   TSelfCopiedCompList -> TSelfCheckedComponentList
   TSelfCopiedCompList [href="SelfCopied.TSelfCopiedCompList.html"]
   TObjSavingStringList -> TSelfCopiedCompList

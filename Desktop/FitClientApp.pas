@@ -16,15 +16,16 @@ unit FitClientApp;
 
 interface
 
-uses Classes, SysUtils, FitClient, FitClientStub, FitClientProxy;
+uses Classes, SysUtils, FitClient, FitClientStub, FitClientProxy, DataLoader;
 
 type
 	{ Container class (agregate), which integrates all application components except UI. }
     TFitClientApp = class(TObject)
-    protected
+    private
         FFitProxy: TFitClientProxy;
         FFitStub: TFitClientStub;
         FFitClient: TFitClient;
+        FDataLoader: TDATFileLoader;
 
     public
         constructor Create;
@@ -43,7 +44,8 @@ begin
     inherited;
     FFitProxy := TFitClientProxy.Create;
     FFitStub := TFitClientStub.Create(nil);
-    FFitClient := TFitClient.Create(nil);
+    FDataLoader := TDATFileLoader.Create(nil);
+    FFitClient := TFitClient.Create(nil, FDataLoader);
 
     FFitClient.FitProxy := FFitProxy;
     FFitStub.FitClient := FFitClient;
@@ -54,6 +56,7 @@ begin
     FFitClient.Free;
     FFitStub.Free;
     FFitProxy.Free;
+    FDataLoader.Free;
 end;
 
 end.

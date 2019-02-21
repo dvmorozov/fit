@@ -16,9 +16,9 @@ unit FitClient;
 
 interface
 
-uses Classes, PointsSets, DataLoader, SelfCopied, SysUtils, MSCRDataClasses,
+uses Classes, PointsSets, SelfCopied, SysUtils, MSCRDataClasses,
     Dialogs, FitClientProxy, CommonTypes, CBRCComponent,
-    IntClientCallback, IntFitViewer;
+    IntClientCallback, IntFitViewer, IntDataLoader;
     
 type
     { Modes of selectiion of active point set. }
@@ -91,7 +91,7 @@ type
     TFitClient = class(TCBRCComponent, IClientCallback)
     protected
         FFitProxy: TFitClientProxy;
-        DataLoader: TDataLoader;
+        FDataLoader: IDataLoader;
         { All the data displayed on the chart. They are required to be able control of X-coordinate. }
         FNeutronPointsSet: TTitlePointsSet;
         { Region of given profile data with which user is working at the given moment. }
@@ -260,7 +260,7 @@ type
         procedure SetWaveLength(AWaveLength: Double);
         function GetWaveLength: Double;
 
-        constructor Create(AOwner: TComponent); override;
+        constructor Create(AOwner: TComponent; ADataLoader: IDataLoader);
         destructor Destroy; override;
 
         procedure LoadDataSet(FileName: string);
@@ -318,6 +318,7 @@ type
         property FitProxy: TFitClientProxy read FFitProxy write FFitProxy;
         property NeutronPointsSet: TTitlePointsSet
             read FNeutronPointsSet write FNeutronPointsSet;
+        property DataLoader: IDataLoader read FDataLoader;
     end;
     
 const
@@ -350,14 +351,13 @@ begin
     SelectedPoints.Free;
     NeutronPointsSet.Free;
     RFactorIntervals.Free;
-    DataLoader.Free;
     inherited Destroy;
 end;
 
-constructor TFitClient.Create(AOwner: TComponent);
+constructor TFitClient.Create(AOwner: TComponent; ADataLoader: IDataLoader);
 begin
     inherited Create(AOwner);
-    DataLoader := TDATFileLoader.Create(nil);
+    FDataLoader := ADataLoader;
     FSelectionMode := ModeSelNone;
     FOpenState := OpenFailure;
     FAsyncState := AsyncStart;

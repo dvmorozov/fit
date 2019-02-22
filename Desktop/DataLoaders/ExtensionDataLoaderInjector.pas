@@ -15,7 +15,7 @@ unit ExtensionDataLoaderInjector;
 
 interface
 
-uses Classes, SysUtils, DataLoader, DATFileLoader, CBRCComponent,
+uses Classes, SysUtils, DataLoader, DATFileLoader, CSVFileLoader, CBRCComponent,
   IntDataLoader, IntDataLoaderInjector;
 
 type
@@ -33,10 +33,25 @@ implementation
 
 function TExtensionDataLoaderInjector.CreateDataLoader(
   AFileName: string): IDataLoader;
+var Ext: string;
 begin
     if FDataLoader <> nil then
         FDataLoader.Free;
-    FDataLoader := TDATFileLoader.Create(nil);
+
+    Ext := UpperCase(ExtractFileExt(AFileName));
+
+    if Ext = '.DAT' then
+    begin
+        FDataLoader := TDATFileLoader.Create(nil);
+    end
+    else
+    if Ext = '.CSV' then
+    begin
+        FDataLoader := TCSVFileLoader.Create(nil);
+    end
+    else
+        raise EInvalidFileType.Create('Invalid file extension.');
+
     Result := FDataLoader;
 end;
 

@@ -645,8 +645,7 @@ begin
         InitialDir := ExtractFilePath(Application.ExeName);
         if Execute then
         begin
-            if FileExists(FileName) and
-                (UpperCase(ExtractFileExt(FileName)) = '.DAT') then
+            if FileExists(FileName) then
             begin
                 LoadDataFile(FileName);
             end;

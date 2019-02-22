@@ -19,6 +19,7 @@ uses Classes, SysUtils, SimpMath, SelfCopied, PointsSets, IntDataLoader;
 
 type
     EFileNotExists = class(Exception);
+    EInvalidFileType = class(Exception);
     EInvalidFileFormat = class(Exception);
 
     { Basic class for building loaders for different types of data files. }

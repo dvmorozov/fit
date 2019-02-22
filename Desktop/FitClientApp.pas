@@ -16,16 +16,18 @@ unit FitClientApp;
 
 interface
 
-uses Classes, SysUtils, FitClient, FitClientStub, FitClientProxy, DataLoader;
+uses Classes, SysUtils, FitClient, FitClientStub, FitClientProxy,
+  ExtensionDataLoaderInjector, DataLoader;
 
 type
-	{ Container class (agregate), which integrates all application components except UI. }
+    { Container class (agregate), which integrates all application
+      components except UI. }
     TFitClientApp = class(TObject)
     private
         FFitProxy: TFitClientProxy;
         FFitStub: TFitClientStub;
         FFitClient: TFitClient;
-        FDataLoader: TDATFileLoader;
+        FDataLoaderInjector: TExtensionDataLoaderInjector;
 
     public
         constructor Create;
@@ -39,13 +41,14 @@ type
 implementation
 
 {============================== TFitClientApp =================================}
+
 constructor TFitClientApp.Create;
 begin
     inherited;
     FFitProxy := TFitClientProxy.Create;
     FFitStub := TFitClientStub.Create(nil);
-    FDataLoader := TDATFileLoader.Create(nil);
-    FFitClient := TFitClient.Create(nil, FDataLoader);
+    FDataLoaderInjector := TExtensionDataLoaderInjector.Create(nil);
+    FFitClient := TFitClient.Create(nil, FDataLoaderInjector);
 
     FFitClient.FitProxy := FFitProxy;
     FFitStub.FitClient := FFitClient;
@@ -56,7 +59,7 @@ begin
     FFitClient.Free;
     FFitStub.Free;
     FFitProxy.Free;
-    FDataLoader.Free;
+    FDataLoaderInjector.Free;
 end;
 
 end.

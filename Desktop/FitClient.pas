@@ -18,7 +18,7 @@ interface
 
 uses Classes, PointsSets, SelfCopied, SysUtils, MSCRDataClasses,
     Dialogs, FitClientProxy, CommonTypes, CBRCComponent,
-    IntClientCallback, IntFitViewer, IntDataLoader;
+    IntClientCallback, IntFitViewer, IntDataLoader, IntDataLoaderInjector;
     
 type
     { Modes of selectiion of active point set. }
@@ -92,6 +92,7 @@ type
     protected
         FFitProxy: TFitClientProxy;
         FDataLoader: IDataLoader;
+        FDataLoaderInjector: IDataLoaderInjector;
         { All the data displayed on the chart. They are required to be able control of X-coordinate. }
         FNeutronPointsSet: TTitlePointsSet;
         { Region of given profile data with which user is working at the given moment. }
@@ -260,7 +261,8 @@ type
         procedure SetWaveLength(AWaveLength: Double);
         function GetWaveLength: Double;
 
-        constructor Create(AOwner: TComponent; ADataLoader: IDataLoader);
+        constructor Create(AOwner: TComponent;
+            ADataLoaderInjector: IDataLoaderInjector);
         destructor Destroy; override;
 
         procedure LoadDataSet(FileName: string);
@@ -318,7 +320,6 @@ type
         property FitProxy: TFitClientProxy read FFitProxy write FFitProxy;
         property NeutronPointsSet: TTitlePointsSet
             read FNeutronPointsSet write FNeutronPointsSet;
-        property DataLoader: IDataLoader read FDataLoader;
     end;
     
 const
@@ -354,10 +355,11 @@ begin
     inherited Destroy;
 end;
 
-constructor TFitClient.Create(AOwner: TComponent; ADataLoader: IDataLoader);
+constructor TFitClient.Create(AOwner: TComponent;
+    ADataLoaderInjector: IDataLoaderInjector);
 begin
     inherited Create(AOwner);
-    FDataLoader := ADataLoader;
+    FDataLoaderInjector := ADataLoaderInjector;
     FSelectionMode := ModeSelNone;
     FOpenState := OpenFailure;
     FAsyncState := AsyncStart;
@@ -1080,21 +1082,20 @@ end;
 
 procedure TFitClient.CopyProfileDataFromLoader;
 begin
-    Assert(Assigned(DataLoader));
+    Assert(Assigned(FDataLoader));
 
     RemoveDataPoints;
     NeutronPointsSet.Free; NeutronPointsSet := nil;
-    NeutronPointsSet := DataLoader.GetPointsSetCopy;
+    NeutronPointsSet := FDataLoader.GetPointsSetCopy;
     InitDataPoints;
 end;
 
 procedure TFitClient.LoadDataSet(FileName: string);
 begin
-    //  zdes' eto nedopustimye sostoyaniya
-    Assert(Assigned(DataLoader));
     Assert(Assigned(FitProxy));
 
-    DataLoader.LoadDataSet(FileName);
+    FDataLoader := FDataLoaderInjector.CreateDataLoader(FileName);
+    FDataLoader.LoadDataSet(FileName);
     CopyProfileDataFromLoader;
     Clear;
     PlotDataPoints;
@@ -1108,10 +1109,10 @@ end;
 procedure TFitClient.Reload;
 begin
     //  zdes' eto nedopustimye sostoyaniya
-    Assert(Assigned(DataLoader));
+    Assert(Assigned(FDataLoader));
     Assert(Assigned(FitProxy));
 
-    DataLoader.Reload;
+    FDataLoader.Reload;
     CopyProfileDataFromLoader;
     Clear;
     PlotDataPoints;

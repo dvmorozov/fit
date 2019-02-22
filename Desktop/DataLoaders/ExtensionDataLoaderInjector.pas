@@ -15,8 +15,8 @@ unit ExtensionDataLoaderInjector;
 
 interface
 
-uses Classes, SysUtils, DataLoader, IntDataLoader, IntDataLoaderInjector,
-  CBRCComponent;
+uses Classes, SysUtils, DataLoader, DATFileLoader, CBRCComponent,
+  IntDataLoader, IntDataLoaderInjector;
 
 type
     { Implementation of data loader injector based on file extension. }

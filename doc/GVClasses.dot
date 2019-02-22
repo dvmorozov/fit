@@ -3,6 +3,8 @@ DiGraph Classes {
   IClientCallback [href="ClientCallback.IClientCallback.html"]
   IDataLoader -> IInterface
   IDataLoader [href="IntDataLoader.IDataLoader.html"]
+  IDataLoaderInjector -> IInterface
+  IDataLoaderInjector [href="IntDataLoaderInjector.IDataLoaderInjector.html"]
   IDiscretValue -> IInterface
   IDiscretValue [href="CombEnumerator.IDiscretValue.html"]
   IDownhillSimplexParameters -> IDiscretValue
@@ -45,6 +47,8 @@ DiGraph Classes {
   TFitServer_ServiceImp [href="fit_server_imp.TFitServer_ServiceImp.html"]
   TDownhillRealParameters -> TCBRCComponent
   TDownhillRealParameters [href="DownhillSimplexContainer.TDownhillRealParameters.html"]
+  TExtensionDataLoaderInjector -> TCBRCComponent
+  TExtensionDataLoaderInjector [href="ExtensionDataLoaderInjector.TExtensionDataLoaderInjector.html"]
   TFitClient -> TCBRCComponent
   TFitClient [href="FitClient.TFitClient.html"]
   TFitClientStub -> TCBRCComponent
@@ -114,6 +118,8 @@ DiGraph Classes {
   EFileNotExists [href="DataLoader.EFileNotExists.html"]
   EInvalidFileFormat -> Exception
   EInvalidFileFormat [href="DataLoader.EInvalidFileFormat.html"]
+  EInvalidFileType -> Exception
+  EInvalidFileType [href="DataLoader.EInvalidFileType.html"]
   ERowCompList -> Exception
   ERowCompList [href="TableComp.ERowCompList.html"]
   ESelfCopiedCompList -> Exception
@@ -153,8 +159,10 @@ DiGraph Classes {
   TRunningAlgorithmContainer [href="AlgorithmContainer.TRunningAlgorithmContainer.html"]
   TDataLoader -> TComponent
   TDataLoader [href="DataLoader.TDataLoader.html"]
+  TCSVFileLoader -> TDataLoader
+  TCSVFileLoader [href="CSVFileLoader.TCSVFileLoader.html"]
   TDATFileLoader -> TDataLoader
-  TDATFileLoader [href="DataLoader.TDATFileLoader.html"]
+  TDATFileLoader [href="DATFileLoader.TDATFileLoader.html"]
   TFitServerApp -> TComponent
   TFitServerApp [href="FitServerApp.TFitServerApp.html"]
   TFitTask -> TComponent

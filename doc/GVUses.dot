@@ -13,6 +13,10 @@ DiGraph Uses {
   "CommonTypes" -> "Classes"
   "CommonTypes" -> "SysUtils"
   "CommonTypes" [href="CommonTypes.html"]
+  "CSVFileLoader" -> "Classes"
+  "CSVFileLoader" -> "DataLoader"
+  "CSVFileLoader" -> "SysUtils"
+  "CSVFileLoader" [href="CSVFileLoader.html"]
   "DataClasses" -> "Classes"
   "DataClasses" -> "DownhillSimplexContainer"
   "DataClasses" -> "Graphics"
@@ -35,6 +39,10 @@ DiGraph Uses {
   "DataLoader" -> "SimpMath"
   "DataLoader" -> "SysUtils"
   "DataLoader" [href="DataLoader.html"]
+  "DATFileLoader" -> "Classes"
+  "DATFileLoader" -> "DataLoader"
+  "DATFileLoader" -> "SysUtils"
+  "DATFileLoader" [href="DATFileLoader.html"]
   "DownhillSimplexContainer" -> "AlgorithmContainer"
   "DownhillSimplexContainer" -> "CBRCComponent"
   "DownhillSimplexContainer" -> "Classes"
@@ -46,13 +54,23 @@ DiGraph Uses {
   "DownhillSimplexContainer" -> "SysUtils"
   "DownhillSimplexContainer" -> "Tools"
   "DownhillSimplexContainer" [href="DownhillSimplexContainer.html"]
+  "ExtensionDataLoaderInjector" -> "CBRCComponent"
+  "ExtensionDataLoaderInjector" -> "Classes"
+  "ExtensionDataLoaderInjector" -> "CSVFileLoader"
+  "ExtensionDataLoaderInjector" -> "DataLoader"
+  "ExtensionDataLoaderInjector" -> "DATFileLoader"
+  "ExtensionDataLoaderInjector" -> "IntDataLoader"
+  "ExtensionDataLoaderInjector" -> "IntDataLoaderInjector"
+  "ExtensionDataLoaderInjector" -> "SysUtils"
+  "ExtensionDataLoaderInjector" [href="ExtensionDataLoaderInjector.html"]
   "FitClient" -> "CBRCComponent"
   "FitClient" -> "Classes"
   "FitClient" -> "CommonTypes"
-  "FitClient" -> "DataLoader"
   "FitClient" -> "Dialogs"
   "FitClient" -> "FitClientProxy"
   "FitClient" -> "IntClientCallback"
+  "FitClient" -> "IntDataLoader"
+  "FitClient" -> "IntDataLoaderInjector"
   "FitClient" -> "IntFitViewer"
   "FitClient" -> "MSCRDataClasses"
   "FitClient" -> "PointsSets"
@@ -60,6 +78,8 @@ DiGraph Uses {
   "FitClient" -> "SysUtils"
   "FitClient" [href="FitClient.html"]
   "FitClientApp" -> "Classes"
+  "FitClientApp" -> "DataLoader"
+  "FitClientApp" -> "ExtensionDataLoaderInjector"
   "FitClientApp" -> "FitClient"
   "FitClientApp" -> "FitClientProxy"
   "FitClientApp" -> "FitClientStub"
@@ -202,6 +222,10 @@ DiGraph Uses {
   "IntDataLoader" -> "PointsSets"
   "IntDataLoader" -> "SysUtils"
   "IntDataLoader" [href="IntDataLoader.html"]
+  "IntDataLoaderInjector" -> "Classes"
+  "IntDataLoaderInjector" -> "IntDataLoader"
+  "IntDataLoaderInjector" -> "SysUtils"
+  "IntDataLoaderInjector" [href="IntDataLoaderInjector.html"]
   "IntFitViewer" -> "Classes"
   "IntFitViewer" -> "MSCRDataClasses"
   "IntFitViewer" -> "PointsSets"

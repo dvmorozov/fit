@@ -5,6 +5,10 @@ Curve fitting application.
 
 {% include video_fully_automated_fitting.html %}
 
+## Extendable architecture
+
+[How to extend data loaders](how-to-extend-data-loaders)
+
 ## Desktop application
 
 ![Fitting results](assets/images/2018-12-23_13h17_55.png)

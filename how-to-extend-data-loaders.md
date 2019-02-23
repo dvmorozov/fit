@@ -4,7 +4,7 @@ The architecture is based on the dependency inversion principle and uses depende
 
 ![Diagram](assets/images/ExtendingDataLoaders.png)
 
-# Step-by-step instructions
+## Step-by-step instructions
 
 1. New class loading data from file should implement IDataLoader interface. If it is inherited from TDataLoader only abstract method LoadDataSetActually should be implemented.
 

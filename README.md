@@ -12,6 +12,8 @@ Fully automatical mode is available.
 
 [How to add new data loader](how-to-extend-data-loaders)
 
+To open and modify diagram files use my favorite [UMLet](https://www.umlet.com/).
+
 ## Desktop application
 
 ![Fitting results](assets/images/2018-12-23_13h17_55.png)

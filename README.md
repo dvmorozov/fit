@@ -1,5 +1,6 @@
-# fit
-Curve fitting application
+## fit
+
+The curve fitting application. It allows to model data by set of curves of selected type.
 
 ## How to build desktop application
 
@@ -15,7 +16,7 @@ Latest built was done with
 
 [Ararat Synapse](http://www.ararat.cz/synapse/doku.php/download)
 
-### Checkout componenents from GitHub
+### Checkout components from GitHub
 
 [fitgrids/master](https://github.com/dvmorozov/fitgrids/tree/master)
 
@@ -32,7 +33,7 @@ It is recommended to use version 0.9.24.
 
 [Lazarus 0.9.24](https://sourceforge.net/projects/lazarus/files/Lazarus%20Windows%2032%20bits/Old%20releases/Lazarus%200.9.24/Lazarus-0.9.24-fpc-2.2.0-20071114-win32.exe/download)
 
-### Checkout componenents from GitHub
+### Checkout components from GitHub
 
 [fitgrids/lazarus-0-9-24](https://github.com/dvmorozov/fitgrids/tree/lazarus-0-9-24)
 
@@ -49,3 +50,7 @@ Add included directories in project properties and rebuild the project.
 [fit on GitHub](https://dvmorozov.github.io/fit/)
 
 [Documentation](https://dvmorozov.github.io/fit/doc/index.html)
+
+## UML files
+
+To open and modify diagram files use my favourite [UMLet](https://www.umlet.com/). 

@@ -1,4 +1,4 @@
-## fit
+# fit
 
 The curve fitting application. It allows to model data by set of curves of selected type.
 

@@ -12,7 +12,7 @@ Fully automatical mode is available.
 
 [How to add new data loader](how-to-extend-data-loaders)
 
-To open and modify diagram files use my favorite [UMLet](https://www.umlet.com/).
+To open and modify diagram files use my favourite [UMLet](https://www.umlet.com/).
 
 ## Desktop application
 

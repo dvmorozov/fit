@@ -1,13 +1,14 @@
-# fit
-Curve fitting application.
+## fit
+> The curve fitting application. It allows to model data by set of curves of selected type.
+> Fully automatical mode is available.
 
 ## Look how fully automated fitting works
 
 {% include video_fully_automated_fitting.html %}
 
-## Extendable architecture
+## Open architecture
 
-[How to extend data loaders](how-to-extend-data-loaders)
+[How to add new data loader](how-to-extend-data-loaders)
 
 ## Desktop application
 

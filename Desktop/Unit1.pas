@@ -18,10 +18,10 @@ interface
 
 uses
     LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-    ExtCtrls, StdCtrls, Menus, PointsSets, FitViewer, ComCtrls,
+    ExtCtrls, StdCtrls, Menus, PointsSet, FitViewer, ComCtrls,
     FitClient, SelfCheckedComponentList, NumericGrid, CheckLst, MSCRDataClasses,
     LResources, tagraph, ActnList, FitTask, Settings, Laz_XMLCfg,
-    MyExceptions, Grids, CommonTypes, Main
+    MyExceptions, Grids, CommonTypes, Main, NeutronPointsSet, CurvePointsSet
 {$IFDEF WINDOWS}
     ,Windows, CommCtrl
 {$ENDIF}

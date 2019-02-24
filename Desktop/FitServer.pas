@@ -28,8 +28,8 @@ because exceptions of this type can be thrown from libraries.
 In this case keeping the state of application can't be guaranteed.
 }
 
-uses Classes, PointsSets, SelfCheckedComponentList, SysUtils, MSCRDataClasses,
-     Dialogs,
+uses Classes, TitlePointsSet, SelfCheckedComponentList, SysUtils, MSCRDataClasses,
+     Dialogs, CurvePointsSet, PointsSet,
 {$IFDEF FIT}
      FitServerProxy,    //      Proxy to client to call it back.
 {$ENDIF}

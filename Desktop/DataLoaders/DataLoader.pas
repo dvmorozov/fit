@@ -15,7 +15,8 @@ unit DataLoader;
 
 interface
 
-uses Classes, SysUtils, SimpMath, SelfCopied, PointsSets, IntDataLoader;
+uses Classes, SysUtils, SimpMath, SelfCopied, PointsSet, TitlePointsSet,
+  NeutronPointsSet, IntDataLoader;
 
 type
     EFileNotExists = class(Exception);

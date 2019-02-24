@@ -15,7 +15,8 @@ unit FitViewer;
 
 interface
 
-uses PointsSets, Classes, SysUtils, Graphics, SelfCopied, CheckLst,
+uses PointsSet, Classes, SysUtils, Graphics, SelfCopied, CheckLst,
+    TitlePointsSet, NeutronPointsSet, CurvePointsSet, DataLoader,
 {$IFNDEF SERVER}
     FitClient, IntFitViewer,
 {$ENDIF}

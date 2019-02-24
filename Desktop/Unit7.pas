@@ -17,7 +17,7 @@ interface
 
 uses
   Classes, SysUtils, LResources, Forms, Controls, Graphics, Dialogs, ExtCtrls,
-  StdCtrls, CheckLst, Settings, PointsSets
+  StdCtrls, CheckLst, Settings, PointsSet, CurvePointsSet
 {$IFDEF WINDOWS}
   , Windows
 {$ENDIF}

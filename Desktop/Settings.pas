@@ -20,7 +20,7 @@ interface
 
 uses
     Classes, SysUtils, LCLProc, Laz_XMLStreaming, Laz_DOM, Laz_XMLCfg, TypInfo,
-    PointsSets, SelfCheckedComponentList;
+    PointsSet, CurvePointsSet, SelfCheckedComponentList;
 
 type
     { Contains and serializes attributes of mathematical expression. }

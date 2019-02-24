@@ -16,7 +16,7 @@ unit MSCRDataClasses;
 interface
 
 uses Classes, SelfCheckedComponentList, Grids, SysUtils, NumericGrid, SimpMath,
-     Tools, TableComp, DataClasses, PointsSets;
+     Tools, TableComp, DataClasses, CurvePointsSet;
 
 const
 	{ Display mode constants. }

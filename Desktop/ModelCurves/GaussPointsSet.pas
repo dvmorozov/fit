@@ -15,11 +15,11 @@ unit GaussPointsSet;
 
 interface
 
-uses Classes, SysUtils, PointsSet, CurvePointsSet, SimpMath;
+uses Classes, SysUtils, PointsSet, CurvePointsSet, NamedPointsSet, SimpMath;
 
 type
     { Curve having Gauss form. }
-    TGaussPointsSet = class(TCurvePointsSet)
+    TGaussPointsSet = class(TNamedPointsSet)
     protected
         { Performs recalculation of all points of function. }
         procedure DoCalc(const Intervals: TPointsSet); override;

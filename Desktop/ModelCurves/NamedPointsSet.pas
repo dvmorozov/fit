@@ -27,6 +27,7 @@ type
         
     public
         function GetName: string; override;
+        { The method is used in deserializing objects received from server. }
         procedure SetName(AName: string);
     end;
 

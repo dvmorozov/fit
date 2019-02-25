@@ -15,12 +15,12 @@ unit TwoBranchesPseudoVoigtPointsSet;
 
 interface
 
-uses Classes, SysUtils, PointsSet, CurvePointsSet, SimpMath;
+uses Classes, SysUtils, PointsSet, NamedPointsSet, CurvePointsSet, SimpMath;
 
 type
     { Pseudo-Voigt curve having different form parameters for
       the right and left branches. }
-    T2BranchesPseudoVoigtPointsSet = class(TCurvePointsSet)
+    T2BranchesPseudoVoigtPointsSet = class(TNamedPointsSet)
     protected
         SigmaRightP: TSpecialCurveParameter;
         SigmaRightIndex: LongInt;

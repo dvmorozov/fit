@@ -15,11 +15,11 @@ unit PseudoVoigtPointsSet;
 
 interface
 
-uses Classes, SysUtils, CurvePointsSet, PointsSet, SimpMath;
+uses Classes, SysUtils, CurvePointsSet, PointsSet, NamedPointsSet, SimpMath;
 
 type
     { Function having Pseudo-Voigt form. }
-    TPseudoVoigtPointsSet = class(TCurvePointsSet)
+    TPseudoVoigtPointsSet = class(TNamedPointsSet)
     protected
         { Relative weights of gaussian and lorentzian. }
         EtaP: TSpecialCurveParameter;

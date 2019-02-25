@@ -15,7 +15,7 @@ unit SpecialPointsSet;
 
 interface
 
-uses Classes, SysUtils, PointsSet, CurvePointsSet;
+uses Classes, SysUtils, PointsSet, CurvePointsSet, NamedPointsSet;
 
 type
     PDouble = ^Double;
@@ -31,7 +31,7 @@ type
     *)
 
     { Container for points of user curve given as expression. }
-    TSpecialPointsSet = class(TCurvePointsSet)
+    TSpecialPointsSet = class(TNamedPointsSet)
     protected
         { Expression given in general text form. }
         FExpression: string;

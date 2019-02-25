@@ -4,7 +4,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>590</x>
+      <x>730</x>
       <y>0</y>
       <w>180</w>
       <h>30</h>
@@ -15,7 +15,7 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>670</x>
+      <x>810</x>
       <y>20</y>
       <w>30</w>
       <h>100</h>
@@ -26,7 +26,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>590</x>
+      <x>730</x>
       <y>100</y>
       <w>180</w>
       <h>30</h>
@@ -37,7 +37,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>590</x>
+      <x>730</x>
       <y>200</y>
       <w>180</w>
       <h>30</h>
@@ -48,7 +48,7 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>670</x>
+      <x>810</x>
       <y>120</y>
       <w>30</w>
       <h>100</h>
@@ -59,7 +59,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>590</x>
+      <x>730</x>
       <y>300</y>
       <w>180</w>
       <h>30</h>
@@ -70,7 +70,7 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>670</x>
+      <x>810</x>
       <y>220</y>
       <w>30</w>
       <h>100</h>
@@ -81,8 +81,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>360</x>
-      <y>510</y>
+      <x>500</x>
+      <y>580</y>
       <w>180</w>
       <h>30</h>
     </coordinates>
@@ -92,19 +92,19 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>440</x>
-      <y>420</y>
+      <x>580</x>
+      <y>490</y>
       <w>220</w>
       <h>110</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>200.0;10.0;200.0;70.0;10.0;70.0;10.0;90.0</additional_attributes>
+    <additional_attributes>200.0;10.0;200.0;60.0;10.0;60.0;10.0;90.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>80</x>
-      <y>510</y>
+      <x>220</x>
+      <y>580</y>
       <w>230</w>
       <h>30</h>
     </coordinates>
@@ -114,8 +114,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>670</x>
-      <y>420</y>
+      <x>810</x>
+      <y>490</y>
       <w>30</w>
       <h>110</h>
     </coordinates>
@@ -125,8 +125,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>590</x>
-      <y>510</y>
+      <x>730</x>
+      <y>580</y>
       <w>180</w>
       <h>30</h>
     </coordinates>
@@ -136,8 +136,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>590</x>
-      <y>610</y>
+      <x>730</x>
+      <y>680</y>
       <w>180</w>
       <h>30</h>
     </coordinates>
@@ -147,8 +147,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>670</x>
-      <y>530</y>
+      <x>810</x>
+      <y>600</y>
       <w>30</w>
       <h>100</h>
     </coordinates>
@@ -158,30 +158,37 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>190</x>
-      <y>420</y>
+      <x>330</x>
+      <y>490</y>
       <w>450</w>
       <h>110</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>430.0;10.0;430.0;50.0;10.0;50.0;10.0;90.0</additional_attributes>
+    <additional_attributes>430.0;10.0;430.0;40.0;10.0;40.0;10.0;90.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>590</x>
+      <x>680</x>
       <y>400</y>
-      <w>180</w>
-      <h>30</h>
+      <w>280</w>
+      <h>100</h>
     </coordinates>
-    <panel_attributes>TNamedPointsSet</panel_attributes>
+    <panel_attributes>TNamedPointsSet
+--
+_-FId: TCurveTypeId_
+_-FName: string_
+--
+_+SetCurveTypeId(TypeId: TCurveTypeId)_
+_+GetName: string_
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1050</x>
-      <y>510</y>
+      <x>1190</x>
+      <y>580</y>
       <w>230</w>
       <h>30</h>
     </coordinates>
@@ -191,19 +198,19 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>730</x>
-      <y>420</y>
+      <x>870</x>
+      <y>490</y>
       <w>460</w>
       <h>110</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;50.0;440.0;50.0;440.0;90.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0;440.0;40.0;440.0;90.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1050</x>
-      <y>610</y>
+      <x>1190</x>
+      <y>680</y>
       <w>230</w>
       <h>30</h>
     </coordinates>
@@ -213,8 +220,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1160</x>
-      <y>530</y>
+      <x>1300</x>
+      <y>600</y>
       <w>30</w>
       <h>100</h>
     </coordinates>
@@ -224,30 +231,32 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>590</x>
-      <y>720</y>
+      <x>730</x>
+      <y>790</y>
       <w>180</w>
-      <h>30</h>
+      <h>50</h>
     </coordinates>
-    <panel_attributes>TCurveTypesSingleton</panel_attributes>
+    <panel_attributes>TCurveTypesSingleton
+--
+_+RegisterCurveType_</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>730</x>
-      <y>530</y>
-      <w>110</w>
+      <x>870</x>
+      <y>600</y>
+      <w>80</w>
       <h>210</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;50.0;90.0;50.0;90.0;140.0;10.0;140.0;10.0;190.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0;60.0;60.0;60.0;130.0;10.0;130.0;10.0;190.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>670</x>
-      <y>630</y>
+      <x>810</x>
+      <y>700</y>
       <w>30</w>
       <h>110</h>
     </coordinates>
@@ -257,52 +266,52 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>440</x>
-      <y>530</y>
+      <x>580</x>
+      <y>600</y>
       <w>200</w>
       <h>210</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;140.0;180.0;140.0;180.0;190.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;150.0;180.0;150.0;180.0;190.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>750</x>
-      <y>530</y>
-      <w>410</w>
-      <h>210</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>390.0;10.0;390.0;50.0;90.0;50.0;90.0;160.0;10.0;160.0;10.0;190.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>760</x>
-      <y>630</y>
-      <w>430</w>
-      <h>120</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>410.0;10.0;410.0;100.0;10.0;100.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>190</x>
-      <y>530</y>
-      <w>420</w>
+      <x>900</x>
+      <y>600</y>
+      <w>400</w>
       <h>220</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;200.0;400.0;200.0</additional_attributes>
+    <additional_attributes>380.0;10.0;380.0;50.0;80.0;50.0;80.0;200.0;10.0;200.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>900</x>
+      <y>700</y>
+      <w>430</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>410.0;10.0;410.0;120.0;10.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>330</x>
+      <y>600</y>
+      <w>420</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;220.0;400.0;220.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1080</x>
-      <y>980</y>
+      <x>140</x>
+      <y>1440</y>
       <w>180</w>
       <h>30</h>
     </coordinates>
@@ -312,8 +321,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>820</x>
-      <y>870</y>
+      <x>960</x>
+      <y>1330</y>
       <w>180</w>
       <h>30</h>
     </coordinates>
@@ -323,8 +332,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1080</x>
-      <y>870</y>
+      <x>370</x>
+      <y>1440</y>
       <w>180</w>
       <h>30</h>
     </coordinates>
@@ -334,8 +343,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>360</x>
-      <y>870</y>
+      <x>490</x>
+      <y>1330</y>
       <w>180</w>
       <h>30</h>
     </coordinates>
@@ -345,8 +354,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>110</x>
-      <y>870</y>
+      <x>250</x>
+      <y>1330</y>
       <w>180</w>
       <h>30</h>
     </coordinates>
@@ -356,142 +365,284 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>750</x>
-      <y>740</y>
-      <w>440</w>
-      <h>150</h>
+      <x>350</x>
+      <y>1080</y>
+      <w>120</w>
+      <h>380</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>420.0;130.0;420.0;30.0;10.0;30.0;10.0;10.0</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>100.0;360.0;100.0;160.0;10.0;160.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>190</x>
-      <y>740</y>
-      <w>430</w>
-      <h>150</h>
+      <x>330</x>
+      <y>1080</y>
+      <w>30</w>
+      <h>270</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;130.0;10.0;30.0;410.0;30.0;410.0;10.0</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;250.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>440</x>
-      <y>740</y>
+      <x>570</x>
+      <y>1230</y>
+      <w>240</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;&gt;</panel_attributes>
+    <additional_attributes>220.0;10.0;220.0;50.0;10.0;50.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>820</x>
+      <y>1230</y>
+      <w>250</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0;230.0;50.0;230.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>140</x>
+      <y>1010</y>
+      <w>400</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>ICurveFactory
+--
+CreatePointsSet(TypeId: TCurveTypeId): TNamedPointsSet</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>330</x>
+      <y>830</y>
+      <w>450</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;190.0;10.0;50.0;430.0;50.0;430.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>960</x>
+      <y>1010</y>
+      <w>180</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>ICurveTypeIterator
+--
+First
+Next
+End: Boolean
+GetTypeName: string
+GetTypeId: TCurveTypeId</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>650</x>
+      <y>830</y>
+      <w>150</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;190.0;10.0;70.0;130.0;70.0;130.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>540</x>
+      <y>1010</y>
+      <w>240</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>ICurveTypeSelector
+--
+SelectType(TypeId: TCurveTypeId)
+GetSelectedType: TCurveTypeId</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>870</x>
+      <y>830</y>
       <w>200</w>
-      <h>150</h>
+      <h>210</h>
     </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>180.0;10.0;180.0;50.0;10.0;50.0;10.0;130.0</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>180.0;190.0;180.0;70.0;10.0;70.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>710</x>
-      <y>740</y>
-      <w>480</w>
+      <x>220</x>
+      <y>1090</y>
+      <w>470</w>
+      <h>370</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;350.0;10.0;170.0;450.0;170.0;450.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>720</x>
+      <y>1210</y>
+      <w>180</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>TCurveTypeId</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>960</x>
+      <y>1210</y>
+      <w>180</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>TFitClientApp</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1040</x>
+      <y>1130</y>
+      <w>30</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>370</x>
+      <y>1090</y>
+      <w>280</w>
       <h>260</h>
     </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;200.0;460.0;200.0;460.0;240.0</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;240.0;10.0;80.0;260.0;80.0;260.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>730</x>
-      <y>740</y>
-      <w>200</w>
-      <h>150</h>
+      <x>460</x>
+      <y>1090</y>
+      <w>210</w>
+      <h>370</h>
     </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;50.0;180.0;50.0;180.0;130.0</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;350.0;10.0;150.0;190.0;150.0;190.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>670</x>
+      <x>680</x>
+      <y>1090</y>
+      <w>370</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>350.0;120.0;350.0;80.0;10.0;80.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>700</x>
+      <y>490</y>
+      <w>130</w>
+      <h>320</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=1
+m2=n</panel_attributes>
+    <additional_attributes>80.0;300.0;80.0;240.0;10.0;240.0;10.0;80.0;100.0;80.0;100.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>740</x>
+      <y>1330</y>
+      <w>140</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Serializable curve
+type identifier.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>800</x>
+      <y>1230</y>
+      <w>30</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>820</x>
+      <y>490</y>
+      <w>160</w>
+      <h>740</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>40.0;10.0;40.0;60.0;140.0;60.0;140.0;390.0;10.0;390.0;10.0;720.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1070</x>
+      <y>840</y>
+      <w>140</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>RegisterCurveType
+should assign
+unuque identifier
+to every curve type.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>890</x>
+      <y>830</y>
+      <w>200</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;30.0;180.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>810</x>
       <y>320</y>
       <w>30</w>
       <h>100</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLInterface</id>
-    <coordinates>
-      <x>70</x>
-      <y>1060</y>
-      <w>260</w>
-      <h>90</h>
-    </coordinates>
-    <panel_attributes>ICurveFactory
---
-CreatePointsSet(): TNamedPointsSet</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>190</x>
-      <y>740</y>
-      <w>470</w>
-      <h>350</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;330.0;10.0;200.0;450.0;200.0;450.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLInterface</id>
-    <coordinates>
-      <x>380</x>
-      <y>1060</y>
-      <w>140</w>
-      <h>140</h>
-    </coordinates>
-    <panel_attributes>ICurveTypeIterator
---
-First()
-Next()
-End(): Boolean
-GetName(): string</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>440</x>
-      <y>740</y>
-      <w>240</w>
-      <h>350</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;330.0;10.0;220.0;220.0;220.0;220.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLInterface</id>
-    <coordinates>
-      <x>820</x>
-      <y>1060</y>
-      <w>180</w>
-      <h>90</h>
-    </coordinates>
-    <panel_attributes>ICurveTypeSelector
---
-SelectType(Name: string)</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>690</x>
-      <y>740</y>
-      <w>240</w>
-      <h>350</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>220.0;330.0;220.0;220.0;10.0;220.0;10.0;10.0</additional_attributes>
   </element>
 </diagram>

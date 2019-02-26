@@ -20,13 +20,25 @@ uses Classes, SysUtils, NamedPointsSet, IntCurveFactory, IntCurveTypeSelector,
 
 type
     { Class-singleton containing information about curve types. }
-    TCurveTypesSingleton = class
+    TCurveTypesSingleton = class(
+        ICurveFactory, ICurveTypeIterator, ICurveTypeSelector)
     private
         FCurveTypesSingleton: TCurveTypesSingleton;
         constructor Init;
 
     public
         class function Create: TCurveTypesSingleton;
+        { Implementation of ICurveFactory. }
+        function CreatePointsSet(TypeId: TCurveTypeId): TNamedPointsSet;
+        { Implementation of ICurveTypeIterator. }
+        procedure FirstType;
+        procedure NextType;
+        function EndType: Boolean;
+        function GetTypeName: string;
+        function GetTypeId: TCurveTypeId;
+        { Implementation of ICurveTypeSelector. }
+        procedure SelectType(TypeId: TCurveTypeId);
+        function GetSelectedType: TCurveTypeId;
     end;
 
 implementation
@@ -43,6 +55,46 @@ begin
     if CurveTypesSingleton = nil then
       CurveTypesSingleton := TCurveTypesSingleton.Init;
     Result := CurveTypesSingleton;
+end;
+
+function TCurveTypesSingleton.CreatePointsSet(TypeId: TCurveTypeId): TNamedPointsSet;
+begin
+    raise ENotImplemented.Create('TCurveTypesSingleton.CreatePointsSet not implemented.');
+end;
+
+procedure TCurveTypesSingleton.FirstType;
+begin
+    raise ENotImplemented.Create('TCurveTypesSingleton.FirstType not implemented.');
+end;
+
+procedure TCurveTypesSingleton.NextType;
+begin
+    raise ENotImplemented.Create('TCurveTypesSingleton.NextType not implemented.');
+end;
+
+function TCurveTypesSingleton.EndType: Boolean;
+begin
+    raise ENotImplemented.Create('TCurveTypesSingleton.EndType not implemented.');
+end;
+
+function TCurveTypesSingleton.GetTypeName: string;
+begin
+    raise ENotImplemented.Create('TCurveTypesSingleton.GetTypeName not implemented.');
+end;
+
+function TCurveTypesSingleton.GetTypeId: TCurveTypeId;
+begin
+    raise ENotImplemented.Create('TCurveTypesSingleton.GetTypeId not implemented.');
+end;
+
+procedure TCurveTypesSingleton.SelectType(TypeId: TCurveTypeId);
+begin
+    raise ENotImplemented.Create('TCurveTypesSingleton.SelectType not implemented.');
+end;
+
+function TCurveTypesSingleton.GetSelectedType: TCurveTypeId;
+begin
+    raise ENotImplemented.Create('TCurveTypesSingleton.GetSelectedType not implemented.');
 end;
 
 end.

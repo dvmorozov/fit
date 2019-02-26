@@ -13,7 +13,7 @@
     </General>
     <VersionInfo>
       <AutoIncrementBuild Value="True"/>
-      <BuildNr Value="1097"/>
+      <BuildNr Value="1098"/>
       <StringTable ProductVersion="0.0.0.1001"/>
     </VersionInfo>
     <BuildModes Count="2">
@@ -821,7 +821,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="4"/>
         <CursorPos Y="32"/>
-        <UsageCount Value="185"/>
+        <UsageCount Value="186"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit77>
@@ -832,7 +832,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="12"/>
         <CursorPos X="9" Y="37"/>
-        <UsageCount Value="182"/>
+        <UsageCount Value="183"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit78>
@@ -850,7 +850,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="11"/>
         <CursorPos X="35" Y="69"/>
-        <UsageCount Value="180"/>
+        <UsageCount Value="181"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit80>
@@ -861,7 +861,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="12"/>
         <CursorPos X="30" Y="23"/>
-        <UsageCount Value="180"/>
+        <UsageCount Value="181"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit81>
@@ -872,8 +872,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="77"/>
         <CursorPos X="5" Y="92"/>
-        <FoldState Value=" T8j64Z021C"/>
-        <UsageCount Value="180"/>
+        <UsageCount Value="181"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit82>
@@ -883,7 +882,7 @@
         <EditorIndex Value="17"/>
         <WindowIndex Value="1"/>
         <CursorPos X="52" Y="18"/>
-        <UsageCount Value="180"/>
+        <UsageCount Value="181"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit83>
@@ -893,7 +892,7 @@
         <EditorIndex Value="18"/>
         <WindowIndex Value="1"/>
         <CursorPos X="60" Y="18"/>
-        <UsageCount Value="161"/>
+        <UsageCount Value="162"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit84>
@@ -904,7 +903,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="17"/>
         <CursorPos X="23" Y="32"/>
-        <UsageCount Value="161"/>
+        <UsageCount Value="162"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit85>
@@ -914,7 +913,7 @@
         <EditorIndex Value="29"/>
         <WindowIndex Value="1"/>
         <CursorPos Y="14"/>
-        <UsageCount Value="160"/>
+        <UsageCount Value="161"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit86>
@@ -925,7 +924,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="3"/>
         <CursorPos X="68" Y="18"/>
-        <UsageCount Value="160"/>
+        <UsageCount Value="161"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit87>
@@ -936,7 +935,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="8"/>
         <CursorPos X="35" Y="18"/>
-        <UsageCount Value="160"/>
+        <UsageCount Value="161"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit88>
@@ -947,7 +946,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="3"/>
         <CursorPos X="31" Y="18"/>
-        <UsageCount Value="160"/>
+        <UsageCount Value="161"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit89>
@@ -958,7 +957,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="10"/>
         <CursorPos X="59" Y="23"/>
-        <UsageCount Value="160"/>
+        <UsageCount Value="161"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit90>
@@ -999,8 +998,8 @@
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="21"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="18"/>
-        <CursorPos X="34" Y="23"/>
+        <TopLine Value="72"/>
+        <CursorPos X="71" Y="97"/>
         <UsageCount Value="37"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>

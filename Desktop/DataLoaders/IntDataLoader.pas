@@ -3,7 +3,7 @@ This software is distributed under GPL
 in the hope that it will be useful, but WITHOUT ANY WARRANTY;
 without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
 
-@abstract(Contains definitions of interfaces for data loading.)
+@abstract(Contains definition of interface for data loading.)
 
 @author(Dmitry Morozov dvmorozov@hotmail.com, 
 LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 

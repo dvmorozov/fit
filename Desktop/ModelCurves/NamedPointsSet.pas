@@ -18,6 +18,7 @@ interface
 uses Classes, SysUtils, CurvePointsSet;
 
 type
+    TCurveTypeId = TGuid;
     { Base curve class allowing setting up type name. Type name distinguishes
       this curve from all other curve types, as opposite to the 'Title' attributes
       which is used to distinguish separate curve instances. }

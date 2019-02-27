@@ -16,7 +16,8 @@ unit FitViewer;
 interface
 
 uses PointsSet, Classes, SysUtils, Graphics, SelfCopied, CheckLst,
-    TitlePointsSet, NeutronPointsSet, CurvePointsSet, DataLoader,
+    TitlePointsSet, NeutronPointsSet, CurvePointsSet, NamedPointsSet,
+    DataLoader,
 {$IFNDEF SERVER}
     FitClient, IntFitViewer,
 {$ENDIF}
@@ -300,7 +301,7 @@ procedure TFitViewer.PlotSpecimens(
     Sender: TObject; CurvePointsSetList: TSelfCopiedCompList;
     SpecimenList: TMSCRSpecimenList);
 var LS: TTASerie;
-    SA: TCurvePointsSet;
+    SA: TNamedPointsSet;
     j: LongInt;
 begin
 {$IFDEF USE_GRIDS}
@@ -312,7 +313,7 @@ begin
     
     for j := 0 to CurvePointsSetList.Count - 1 do
     begin
-        SA := TCurvePointsSet(CurvePointsSetList.Items[j]);
+        SA := TNamedPointsSet(CurvePointsSetList.Items[j]);
         if PointsSetList.IndexOf(SA) = -1 then
         begin
             LS := TTASerie.Create(nil);
@@ -321,7 +322,7 @@ begin
             TFormMain(Form).Chart.AddSerie(LS);
             PointsSetList.Add(SA);
 
-            LS.Title := SA.GetName + ' ' + IntToStr(j+1);
+            LS.Title := SA.GetTypeName + ' ' + IntToStr(j+1);
 {$IFDEF USE_LEGEND}
             if FUpdateLegends then
             begin

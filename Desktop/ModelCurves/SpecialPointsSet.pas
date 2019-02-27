@@ -44,7 +44,7 @@ type
 
     public
         procedure CopyParameters(const Dest: TObject); override;
-        function GetName: string; override;
+        function GetTypeName: string; override;
         procedure SetName(AName: string);
         
         property Expression: string read FExpression write FExpression;
@@ -85,7 +85,7 @@ begin
         bez ispol'zovaniya...*)
 end;
 
-function TSpecialPointsSet.GetName: string;
+function TSpecialPointsSet.GetTypeName: string;
 begin
     Result := FName;
 end;

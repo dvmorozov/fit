@@ -49,7 +49,7 @@ type
         
     public
         constructor Create(AOwner: TComponent); override;
-        function GetName: string; override;
+        function GetTypeName: string; override;
 
         function HasDeltaSigma: Boolean;
 
@@ -113,7 +113,7 @@ begin
     if Assigned(DeltaSigmaP) then Result := True else Result := False;
 end;
 
-function TAsymPseudoVoigtPointsSet.GetName: string;
+function TAsymPseudoVoigtPointsSet.GetTypeName: string;
 begin
     Result := 'Asym. Pseudo-Voigt';
 end;

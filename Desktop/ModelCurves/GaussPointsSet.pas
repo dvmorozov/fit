@@ -26,7 +26,7 @@ type
 
     public
         constructor Create(AOwner: TComponent); override;
-        function GetName: string; override;
+        function GetTypeName: string; override;
     end;
 
     ValuePair = class(TObject)
@@ -58,7 +58,7 @@ begin
     InitLinks;
 end;
 
-function TGaussPointsSet.GetName: string;
+function TGaussPointsSet.GetTypeName: string;
 begin
     Result := 'Gaussian';
 end;

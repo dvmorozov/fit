@@ -29,7 +29,7 @@ In this case keeping the state of application can't be guaranteed.
 }
 
 uses Classes, TitlePointsSet, SelfCheckedComponentList, SysUtils, MSCRDataClasses,
-     Dialogs, CurvePointsSet, PointsSet,
+     Dialogs, CurvePointsSet, NamedPointsSet, PointsSet,
 {$IFDEF FIT}
      FitServerProxy,    //      Proxy to client to call it back.
 {$ENDIF}
@@ -316,7 +316,7 @@ type
           throw EUserException in the case when state is invalid. }
 
         function GetSpecimenCount: LongInt;
-        function GetSpecimenPoints(SpecIndex: LongInt): TCurvePointsSet;
+        function GetSpecimenPoints(SpecIndex: LongInt): TNamedPointsSet;
         function GetSpecimenParameterCount(SpecIndex: LongInt): LongInt;
         procedure GetSpecimenParameter(SpecIndex: LongInt; ParamIndex: LongInt;
             var Name: string; var Value: Double; var Type_: LongInt);
@@ -1349,13 +1349,13 @@ begin
     Result := SpecList.Count;
 end;
 
-function TFitServer.GetSpecimenPoints(SpecIndex: LongInt): TCurvePointsSet;
+function TFitServer.GetSpecimenPoints(SpecIndex: LongInt): TNamedPointsSet;
 var Count: LongInt;
 begin
     Count := GetSpecimenCount;
     if (SpecIndex < 0) or (SpecIndex >= Count) then
         raise EUserException.Create(InadmissibleSpecimenIndex);
-    Result := TCurvePointsSet(GetCurvesList.Items[SpecIndex]);
+    Result := TNamedPointsSet(GetCurvesList.Items[SpecIndex]);
 end;
 
 function TFitServer.GetSpecimenParameterCount(SpecIndex: LongInt): LongInt;

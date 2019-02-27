@@ -23,20 +23,24 @@ type
       this curve from all other curve types, as opposite to the 'Title' attributes
       which is used to distinguish separate curve instances. }
     TNamedPointsSet = class(TCurvePointsSet)
-    protected
+    private
+        { The attribute should not be used in descendants. }
         FName: string;
         
     public
-        function GetName: string; override;
+        { Returns name of the curve type. It's better to use function
+          instead of property because property assumes storing data
+          in object, but storing any data is not necessary in this case. }
+        function GetTypeName: string; virtual;
         { The method is used in deserializing objects received from server. }
-        procedure SetName(AName: string);
+        procedure SetName(AName: string); virtual;
     end;
 
 implementation
 
 {============================ TNamedPointsSet =================================}
 
-function TNamedPointsSet.GetName: string;
+function TNamedPointsSet.GetTypeName: string;
 begin
     Result := FName;
 end;

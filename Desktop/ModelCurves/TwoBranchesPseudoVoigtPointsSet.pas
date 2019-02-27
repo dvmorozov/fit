@@ -58,7 +58,7 @@ type
         
     public
         constructor Create(AOwner: TComponent); override;
-        function GetName: string; override;
+        function GetTypeName: string; override;
 
         function HasSigmaRight: Boolean;
         function HasEtaRight: Boolean;
@@ -203,7 +203,7 @@ begin
     if Assigned(SigmaRightP) then Result := True else Result := False;
 end;
 
-function T2BranchesPseudoVoigtPointsSet.GetName: string;
+function T2BranchesPseudoVoigtPointsSet.GetTypeName: string;
 begin
     Result := '2 br. Pseudo-Voigt';
 end;

@@ -48,7 +48,7 @@ type
 
     public
         constructor Create(AOwner: TComponent); override;
-        function GetName: string; override;
+        function GetTypeName: string; override;
         
         function HasEta: Boolean;
         
@@ -131,7 +131,7 @@ begin
     if Assigned(EtaP) then Result := True else Result := False;
 end;
 
-function TPseudoVoigtPointsSet.GetName: string;
+function TPseudoVoigtPointsSet.GetTypeName: string;
 begin
     Result := 'Pseudo-Voigt';
 end;

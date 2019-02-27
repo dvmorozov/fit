@@ -176,10 +176,6 @@ type
         constructor Create(AOwner: TComponent); override;
         destructor Destroy; override;
         procedure SetParameters(AParams: Curve_parameters);
-        { Returns name of the curve. It's better to use function
-          instead of property because property assumes storing data
-          in object, but storing any data is not necessary in this case. }
-        function GetName: string; virtual; abstract;
         { Set of pairs of indexes of X-coordinates forming intervals in
           which functions should be calcuated (boundaries are included). 
           Equity to nil designates that functions should be calculated 

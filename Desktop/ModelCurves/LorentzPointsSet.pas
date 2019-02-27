@@ -24,14 +24,14 @@ type
         procedure DoCalc(const Intervals: TPointsSet); override;
         
     public
-        function GetName: string; override;
+        function GetTypeName: string; override;
     end;
 
 implementation
 
 {========================== TLorentzPointsSet =================================}
 
-function TLorentzPointsSet.GetName: string;
+function TLorentzPointsSet.GetTypeName: string;
 begin
     Result := 'Lorentzian';
 end;

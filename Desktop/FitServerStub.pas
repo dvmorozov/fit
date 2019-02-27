@@ -18,7 +18,8 @@ unit FitServerStub;
 interface
 
 uses Classes, SysUtils, FitServer, CommonTypes, PointsSet, SelfCopied,
-    MSCRDataClasses, MyExceptions, TitlePointsSet, CurvePointsSet;
+    MSCRDataClasses, MyExceptions, TitlePointsSet, CurvePointsSet,
+    NamedPointsSet;
 
 type
     { For transmission through network class converts exceptions into error codes. }
@@ -1443,7 +1444,7 @@ end;
 
 function TFitServerStub.GetSpecimenPoints(SpecIndex: LongInt;
     var Points: TPointsSet; var Name: string; var ErrMsg: string): LongInt;
-var CPS: TCurvePointsSet;
+var CPS: TNamedPointsSet;
 begin
     try
         Result := -2;
@@ -1457,7 +1458,7 @@ begin
     try
         Result := 0; ErrMsg := '';
         CPS := Server.GetSpecimenPoints(SpecIndex);
-        Points := CPS; Name := CPS.GetName; Result := 0;
+        Points := CPS; Name := CPS.GetTypeName; Result := 0;
     except
         on E: EUserException do
         begin

@@ -33,7 +33,7 @@ type
           in object, but storing any data is not necessary in this case. }
         function GetTypeName: string; virtual;
         { The method is used in deserializing objects received from server. }
-        procedure SetName(AName: string); virtual;
+        procedure SetTypeName(AName: string); virtual;
     end;
 
 implementation
@@ -45,7 +45,7 @@ begin
     Result := FName;
 end;
 
-procedure TNamedPointsSet.SetName(AName: string);
+procedure TNamedPointsSet.SetTypeName(AName: string);
 begin
     FName := AName;
 end;

@@ -897,7 +897,7 @@ begin
 
                 Points := CreateNamedPointsSet(R._Result);
                 Result.Add(Points);
-                Points.SetName(R.Name);
+                Points.SetTypeName(R.Name);
             finally
                 R.Free;
             end;

@@ -13,7 +13,7 @@
     </General>
     <VersionInfo>
       <AutoIncrementBuild Value="True"/>
-      <BuildNr Value="1099"/>
+      <BuildNr Value="1100"/>
       <StringTable ProductVersion="0.0.0.1001"/>
     </VersionInfo>
     <BuildModes Count="2">
@@ -480,8 +480,8 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="4"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="922"/>
-        <CursorPos X="5" Y="936"/>
+        <TopLine Value="885"/>
+        <CursorPos X="35" Y="900"/>
         <UsageCount Value="202"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -754,7 +754,6 @@
       <Unit71>
         <Filename Value="FitViewer.pas"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="23"/>
         <WindowIndex Value="1"/>
         <TopLine Value="302"/>
@@ -904,8 +903,8 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="20"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="17"/>
-        <CursorPos X="18" Y="30"/>
+        <TopLine Value="10"/>
+        <CursorPos X="5" Y="25"/>
         <UsageCount Value="197"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -934,10 +933,11 @@
       <Unit88>
         <Filename Value="ModelCurves\SpecialPointsSet.pas"/>
         <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="32"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="73"/>
-        <CursorPos X="44" Y="87"/>
+        <TopLine Value="65"/>
+        <CursorPos Y="85"/>
         <UsageCount Value="196"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -1033,124 +1033,124 @@
     </OtherDefines>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="ModelCurves\CurvePointsSet.pas"/>
-        <Caret Line="179" TopLine="168"/>
+        <Filename Value="ModelCurves\PseudoVoigtPointsSet.pas"/>
+        <Caret Line="18" Column="68" TopLine="3"/>
       </Position1>
       <Position2>
-        <Filename Value="ModelCurves\CurvePointsSet.pas"/>
-        <Caret Line="183" Column="36" TopLine="168"/>
+        <Filename Value="ModelCurves\PseudoVoigtPointsSet.pas"/>
+        <Caret Line="51" Column="29" TopLine="37"/>
       </Position2>
       <Position3>
-        <Filename Value="ModelCurves\GaussPointsSet.pas"/>
-        <Caret Line="29" Column="29" TopLine="14"/>
+        <Filename Value="ModelCurves\SpecialPointsSet.pas"/>
+        <Caret Line="18" Column="35" TopLine="8"/>
       </Position3>
       <Position4>
-        <Filename Value="ModelCurves\LorentzPointsSet.pas"/>
-        <Caret Line="18" Column="60"/>
+        <Filename Value="ModelCurves\SpecialPointsSet.pas"/>
+        <Caret Line="47" Column="29" TopLine="32"/>
       </Position4>
       <Position5>
-        <Filename Value="ModelCurves\LorentzPointsSet.pas"/>
-        <Caret Line="27" Column="29" TopLine="2"/>
+        <Filename Value="ModelCurves\SpecialPointsSet.pas"/>
+        <Caret Line="88" Column="39" TopLine="73"/>
       </Position5>
       <Position6>
-        <Filename Value="ModelCurves\LorentzPointsSet.pas"/>
-        <Caret Line="34" Column="39" TopLine="19"/>
+        <Filename Value="ModelCurves\TwoBranchesPseudoVoigtPointsSet.pas"/>
+        <Caret Line="23" Column="59" TopLine="10"/>
       </Position6>
       <Position7>
-        <Filename Value="ModelCurves\NamedPointsSet.pas"/>
-        <Caret Line="34" Column="29" TopLine="17"/>
+        <Filename Value="ModelCurves\TwoBranchesPseudoVoigtPointsSet.pas"/>
+        <Caret Line="61" Column="29" TopLine="47"/>
       </Position7>
       <Position8>
-        <Filename Value="ModelCurves\NamedPointsSet.pas"/>
-        <Caret Line="39" Column="26" TopLine="17"/>
+        <Filename Value="ModelCurves\IntCurveFactory.pas"/>
+        <Caret Line="22" Column="18"/>
       </Position8>
       <Position9>
         <Filename Value="ModelCurves\NamedPointsSet.pas"/>
-        <Caret Line="30" Column="37" TopLine="17"/>
+        <Caret Line="43" Column="37" TopLine="17"/>
       </Position9>
       <Position10>
-        <Filename Value="ModelCurves\PseudoVoigtPointsSet.pas"/>
-        <Caret Line="18" Column="68" TopLine="3"/>
-      </Position10>
-      <Position11>
-        <Filename Value="ModelCurves\PseudoVoigtPointsSet.pas"/>
-        <Caret Line="51" Column="29" TopLine="37"/>
-      </Position11>
-      <Position12>
-        <Filename Value="ModelCurves\SpecialPointsSet.pas"/>
-        <Caret Line="18" Column="35" TopLine="8"/>
-      </Position12>
-      <Position13>
-        <Filename Value="ModelCurves\SpecialPointsSet.pas"/>
-        <Caret Line="47" Column="29" TopLine="32"/>
-      </Position13>
-      <Position14>
-        <Filename Value="ModelCurves\SpecialPointsSet.pas"/>
-        <Caret Line="88" Column="39" TopLine="73"/>
-      </Position14>
-      <Position15>
-        <Filename Value="ModelCurves\TwoBranchesPseudoVoigtPointsSet.pas"/>
-        <Caret Line="23" Column="59" TopLine="10"/>
-      </Position15>
-      <Position16>
-        <Filename Value="ModelCurves\TwoBranchesPseudoVoigtPointsSet.pas"/>
-        <Caret Line="61" Column="29" TopLine="47"/>
-      </Position16>
-      <Position17>
-        <Filename Value="ModelCurves\IntCurveFactory.pas"/>
-        <Caret Line="22" Column="18"/>
-      </Position17>
-      <Position18>
-        <Filename Value="ModelCurves\NamedPointsSet.pas"/>
-        <Caret Line="43" Column="37" TopLine="17"/>
-      </Position18>
-      <Position19>
         <Filename Value="ModelCurves\CurvePointsSet.pas"/>
         <Caret Line="179" Column="42" TopLine="168"/>
-      </Position19>
-      <Position20>
+      </Position10>
+      <Position11>
         <Filename Value="FitClientProxy.pas"/>
         <Caret Line="936" Column="5" TopLine="922"/>
-      </Position20>
-      <Position21>
+      </Position11>
+      <Position12>
         <Filename Value="FitServerStub.pas"/>
         <Caret Line="1459" Column="34" TopLine="1446"/>
-      </Position21>
-      <Position22>
+      </Position12>
+      <Position13>
         <Filename Value="FitServer.pas"/>
         <Caret Line="32" Column="20" TopLine="15"/>
-      </Position22>
-      <Position23>
+      </Position13>
+      <Position14>
         <Filename Value="FitServer.pas"/>
         <Caret Line="31" Column="31" TopLine="26"/>
-      </Position23>
-      <Position24>
+      </Position14>
+      <Position15>
         <Filename Value="FitServerStub.pas"/>
         <Caret Line="1446" Column="16" TopLine="1444"/>
-      </Position24>
-      <Position25>
+      </Position15>
+      <Position16>
         <Filename Value="FitServerStub.pas"/>
         <Caret Line="21" Column="57"/>
-      </Position25>
-      <Position26>
+      </Position16>
+      <Position17>
         <Filename Value="FitServerStub.pas"/>
         <Caret Line="22" Column="5"/>
-      </Position26>
-      <Position27>
+      </Position17>
+      <Position18>
         <Filename Value="FitServer.pas"/>
         <Caret Line="1352" Column="66" TopLine="1337"/>
-      </Position27>
-      <Position28>
+      </Position18>
+      <Position19>
         <Filename Value="FitServer.pas"/>
         <Caret Line="1358" Column="21" TopLine="1343"/>
-      </Position28>
-      <Position29>
+      </Position19>
+      <Position20>
         <Filename Value="FitViewer.pas"/>
         <Caret Line="303" Column="15" TopLine="298"/>
-      </Position29>
-      <Position30>
+      </Position20>
+      <Position21>
         <Filename Value="FitViewer.pas"/>
         <Caret Line="20" Column="5" TopLine="8"/>
+      </Position21>
+      <Position22>
+        <Filename Value="FitClientProxy.pas"/>
+        <Caret Line="936" Column="5" TopLine="922"/>
+      </Position22>
+      <Position23>
+        <Filename Value="ModelCurves\NamedPointsSet.pas"/>
+        <Caret Line="36" Column="30" TopLine="17"/>
+      </Position23>
+      <Position24>
+        <Filename Value="ModelCurves\NamedPointsSet.pas"/>
+        <Caret Line="27" Column="36" TopLine="17"/>
+      </Position24>
+      <Position25>
+        <Filename Value="ModelCurves\SpecialPointsSet.pas"/>
+        <Caret Line="87" Column="44" TopLine="73"/>
+      </Position25>
+      <Position26>
+        <Filename Value="ModelCurves\SpecialPointsSet.pas"/>
+        <Caret Line="48" Column="56" TopLine="33"/>
+      </Position26>
+      <Position27>
+        <Filename Value="ModelCurves\SpecialPointsSet.pas"/>
+        <Caret Line="88" Column="19" TopLine="78"/>
+      </Position27>
+      <Position28>
+        <Filename Value="ModelCurves\SpecialPointsSet.pas"/>
+        <Caret Line="34" Column="36" TopLine="19"/>
+      </Position28>
+      <Position29>
+        <Filename Value="ModelCurves\SpecialPointsSet.pas"/>
+        <Caret Line="46" Column="7" TopLine="19"/>
+      </Position29>
+      <Position30>
+        <Filename Value="ModelCurves\SpecialPointsSet.pas"/>
+        <Caret Line="48" Column="19" TopLine="23"/>
       </Position30>
     </JumpHistory>
   </ProjectOptions>

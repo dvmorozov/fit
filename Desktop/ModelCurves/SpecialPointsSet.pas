@@ -35,7 +35,6 @@ type
     protected
         { Expression given in general text form. }
         FExpression: string;
-        FName: string;
 
         { Performs recalculation of all points of function. }
         procedure DoCalc(const Intervals: TPointsSet); override;
@@ -44,8 +43,6 @@ type
 
     public
         procedure CopyParameters(const Dest: TObject); override;
-        function GetTypeName: string; override;
-        procedure SetName(AName: string);
         
         property Expression: string read FExpression write FExpression;
     end;
@@ -83,16 +80,6 @@ begin
         raise Exception.Create('Inadmissible or invalid expression');
 
         bez ispol'zovaniya...*)
-end;
-
-function TSpecialPointsSet.GetTypeName: string;
-begin
-    Result := FName;
-end;
-
-procedure TSpecialPointsSet.SetName(AName: string);
-begin
-    FName := AName;
 end;
 
 procedure TSpecialPointsSet.DoCalc(const Intervals: TPointsSet);

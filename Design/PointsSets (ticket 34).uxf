@@ -180,9 +180,9 @@ _-FId: TCurveTypeId_
 _-FTypeName: string_
 --
 _+GetCurveTypeId: TCurveTypeId_
-_+SetCurveTypeId(TypeId: TCurveTypeId)_
+_-SetCurveTypeId(TypeId: TCurveTypeId)_
 _+GetTypeName: string_
-_+SetTypeName(TypeName: string)_
+_-SetTypeName(TypeName: string)_
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -646,5 +646,31 @@ to every curve type.</panel_attributes>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1040</x>
+      <y>440</y>
+      <w>140</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>Get and set
+methods are
+protected and
+are used now only
+in deserialization.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>920</x>
+      <y>470</y>
+      <w>140</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;120.0;10.0</additional_attributes>
   </element>
 </diagram>

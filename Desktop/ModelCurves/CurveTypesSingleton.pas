@@ -23,7 +23,7 @@ type
     TCurveTypesSingleton = class(
         ICurveFactory, ICurveTypeIterator, ICurveTypeSelector)
     private
-        FCurveTypesSingleton: TCurveTypesSingleton;
+        class FCurveTypesSingleton: TCurveTypesSingleton;
         constructor Init;
 
     public
@@ -43,8 +43,6 @@ type
 
 implementation
 
-var CurveTypesSingleton : TCurveTypesSingleton = nil;
-
 constructor TCurveTypesSingleton.Init;
 begin
     inherited Create;
@@ -52,9 +50,9 @@ end;
 
 class function TCurveTypesSingleton.Create: TCurveTypesSingleton;
 begin
-    if CurveTypesSingleton = nil then
-      CurveTypesSingleton := TCurveTypesSingleton.Init;
-    Result := CurveTypesSingleton;
+    if FCurveTypesSingleton = nil then
+      FCurveTypesSingleton := TCurveTypesSingleton.Init;
+    Result := FCurveTypesSingleton;
 end;
 
 function TCurveTypesSingleton.CreatePointsSet(TypeId: TCurveTypeId): TNamedPointsSet;

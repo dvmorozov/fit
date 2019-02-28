@@ -15,25 +15,33 @@ unit LorentzPointsSet;
 
 interface
 
-uses Classes, SysUtils, PointsSet, GaussPointsSet, SimpMath;
+uses Classes, SysUtils, PointsSet, NamedPointsSet, GaussPointsSet, SimpMath;
 
 type
     { Curve class having Lorentz form. }
     TLorentzPointsSet = class(TGaussPointsSet)
     protected
         procedure DoCalc(const Intervals: TPointsSet); override;
-        
+
     public
-        function GetTypeName: string; override;
+        { Replaces method defined in TNamedPointsSet. }
+        class function GetTypeName: string;
+        { Replaces method defined in TNamedPointsSet. }
+        class function GetCurveTypeId: TCurveTypeId;
     end;
 
 implementation
 
 {========================== TLorentzPointsSet =================================}
 
-function TLorentzPointsSet.GetTypeName: string;
+class function TLorentzPointsSet.GetTypeName: string;
 begin
     Result := 'Lorentzian';
+end;
+
+class function TLorentzPointsSet.GetCurveTypeId: TCurveTypeId;
+begin
+    Result := StringToGUID('7ca6fdaf-95b7-4d84-bcba-130c828407cc');
 end;
 
 procedure TLorentzPointsSet.DoCalc(const Intervals: TPointsSet);

@@ -48,8 +48,11 @@ type
 
     public
         constructor Create(AOwner: TComponent); override;
-        function GetTypeName: string; override;
-        
+        { Replaces method defined in TNamedPointsSet. }
+        class function GetTypeName: string;
+        { Replaces method defined in TNamedPointsSet. }
+        class function GetCurveTypeId: TCurveTypeId;
+
         function HasEta: Boolean;
         
         property Eta: Double read GetEta write SetEta;
@@ -131,9 +134,14 @@ begin
     if Assigned(EtaP) then Result := True else Result := False;
 end;
 
-function TPseudoVoigtPointsSet.GetTypeName: string;
+class function TPseudoVoigtPointsSet.GetTypeName: string;
 begin
     Result := 'Pseudo-Voigt';
+end;
+
+class function TPseudoVoigtPointsSet.GetCurveTypeId: TCurveTypeId;
+begin
+    Result := StringToGUID('9f27dc7c-970f-4dac-88cd-f5fb3400d38d');
 end;
 
 function TPseudoVoigtPointsSet.GetParamByName(Name: string): Double;

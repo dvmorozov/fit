@@ -26,7 +26,10 @@ type
 
     public
         constructor Create(AOwner: TComponent); override;
-        function GetTypeName: string; override;
+        { Replaces method defined in TNamedPointsSet. }
+        class function GetTypeName: string;
+        { Replaces method defined in TNamedPointsSet. }
+        class function GetCurveTypeId: TCurveTypeId;
     end;
 
     ValuePair = class(TObject)
@@ -58,9 +61,14 @@ begin
     InitLinks;
 end;
 
-function TGaussPointsSet.GetTypeName: string;
+class function TGaussPointsSet.GetTypeName: string;
 begin
     Result := 'Gaussian';
+end;
+
+class function TGaussPointsSet.GetCurveTypeId: TCurveTypeId;
+begin
+    Result := StringToGUID('2413150b-7ee8-4b32-8be6-c654825bf9cb');
 end;
 
 procedure TGaussPointsSet.DoCalc(const Intervals: TPointsSet);

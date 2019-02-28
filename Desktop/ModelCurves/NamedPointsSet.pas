@@ -26,14 +26,20 @@ type
     private
         { The attribute should not be used in descendants. }
         FName: string;
+        FCurveTypeId: TCurveTypeId;
         
     public
-        { Returns name of the curve type. It's better to use function
+        { Returns unique identifier of curve type. }
+        function GetCurveTypeId: TCurveTypeId;
+        { Sets unique identifier of curve type. }
+        procedure SetCurveTypeId(CurveTypeId: TCurveTypeId);
+        { Returns name of curve type. It's better to use function
           instead of property because property assumes storing data
           in object, but storing any data is not necessary in this case. }
         function GetTypeName: string; virtual;
-        { The method is used in deserializing objects received from server. }
-        procedure SetTypeName(AName: string); virtual;
+        { Sets name of curve type. The method is used in deserializing
+          objects received from server. }
+        procedure SetTypeName(Name: string); virtual;
     end;
 
 implementation
@@ -45,9 +51,19 @@ begin
     Result := FName;
 end;
 
-procedure TNamedPointsSet.SetTypeName(AName: string);
+procedure TNamedPointsSet.SetTypeName(Name: string);
 begin
-    FName := AName;
+    FName := Name;
+end;
+
+function TNamedPointsSet.GetCurveTypeId: TCurveTypeId;
+begin
+    Result := FCurveTypeId;
+end;
+
+procedure TNamedPointsSet.SetCurveTypeId(CurveTypeId: TCurveTypeId);
+begin
+    FCurveTypeId := CurveTypeId;
 end;
 
 end.

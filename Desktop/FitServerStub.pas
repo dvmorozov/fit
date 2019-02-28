@@ -36,8 +36,8 @@ type
         procedure SetBackFactor(ABackFactor: Double);
         function GetCurveThresh: Double;
         procedure SetCurveThresh(ACurveThresh: Double);
-        function GetCurveType: TCurveType;
-        procedure SetCurveType(ACurveType: TCurveType);
+        function GetCurveType: TCurveTypeId;
+        procedure SetCurveType(ACurveType: TCurveTypeId);
         function GetState: TFitServerState;
         function GetWaveLength: Double;
         procedure SetWaveLength(AWaveLength: Double);
@@ -151,7 +151,7 @@ type
         //property MaxRFactor: Double read GetMaxRFactor write SetMaxRFactor;
         //property BackFactor: Double read GetBackFactor write SetBackFactor;
         //property CurveThresh: Double read GetCurveThresh write SetCurveThresh;
-        //property CurveType: TCurveType read GetCurveType write SetCurveType;
+        //property CurveTypeId: TCurveTypeId read GetCurveType write SetCurveType;
         //property State: TFitServerState read GetState;
         //property WaveLength: Double read GetWaveLength write SetWaveLength;
 
@@ -892,19 +892,10 @@ begin
     end;
 end;
 
-function TFitServerStub.GetCurveType: TCurveType;
+function TFitServerStub.GetCurveType: TCurveTypeId;
 begin
     try
-        Result := Gaussian;
-        Assert(Assigned(RecreateServer));
-    except
-        on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
-    end;
-
-    try
-        Result := Server.CurveType;
+        Result := Server.CurveTypeId;
     except
         on E: Exception do
         begin
@@ -914,7 +905,7 @@ begin
     end;
 end;
 
-procedure TFitServerStub.SetCurveType(ACurveType: TCurveType);
+procedure TFitServerStub.SetCurveType(ACurveType: TCurveTypeId);
 begin
     try
         Assert(Assigned(RecreateServer));
@@ -925,7 +916,7 @@ begin
     end;
 
     try
-        Server.CurveType := ACurveType;
+        Server.CurveTypeId := ACurveType;
     except
         on E: Exception do
         begin

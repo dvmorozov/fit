@@ -213,7 +213,7 @@ end;
 
 class function T2BranchesPseudoVoigtPointsSet.GetCurveTypeId: TCurveTypeId;
 begin
-    Result := StringToGUID('6de06c1b-e51a-48c6-b036-c81a841ec468');
+    Result := StringToGUID('{6de06c1b-e51a-48c6-b036-c81a841ec468}');
 end;
 
 procedure T2BranchesPseudoVoigtPointsSet.SetParamByName(

@@ -1540,12 +1540,12 @@ var
   callCtx : ICallContext;
   strPrmName : string;
   procName,trgName : string;
-  CurveType : integer;
+  CurveTypeId : integer;
   ProblemID : integer;
 begin
   callCtx := AContext;
   
-  strPrmName := 'CurveType';  AFormatter.Get(TypeInfo(integer),strPrmName,CurveType);
+  strPrmName := 'CurveTypeId';  AFormatter.Get(TypeInfo(integer),strPrmName,CurveTypeId);
   strPrmName := 'ProblemID';  AFormatter.Get(TypeInfo(integer),strPrmName,ProblemID);
   
   tmpObj := Self.GetFactory().CreateInstance() as IFitServer;
@@ -1555,7 +1555,7 @@ begin
   if hasObjCntrl then
     objCntrl.Activate();
   try
-    tmpObj.SetCurveType(CurveType,ProblemID);
+    tmpObj.SetCurveType(CurveTypeId,ProblemID);
     
     procName := AFormatter.GetCallProcedureName();
     trgName := AFormatter.GetCallTarget();

@@ -28,7 +28,7 @@ type
 
     public
         class function Create: TCurveTypesSingleton;
-        procedure RegitsterCurveType(CurveType: TNamedPointsSet);
+        procedure RegitsterCurveType(CurveTypeId: TNamedPointsSet);
         { Implementation of ICurveFactory. }
         function CreatePointsSet(TypeId: TCurveTypeId): TNamedPointsSet;
         { Implementation of ICurveTypeIterator. }
@@ -61,7 +61,7 @@ begin
     raise ENotImplemented.Create('TCurveTypesSingleton.CreatePointsSet not implemented.');
 end;
 
-procedure TCurveTypesSingleton.RegitsterCurveType(CurveType: TNamedPointsSet);
+procedure TCurveTypesSingleton.RegitsterCurveType(CurveTypeId: TNamedPointsSet);
 begin
     raise ENotImplemented.Create('TCurveTypesSingleton.RegitsterCurveType not implemented.');
 end;

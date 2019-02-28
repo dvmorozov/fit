@@ -133,7 +133,7 @@ Type
       const  ProblemID : integer
     ):integer;
     procedure SetCurveType(
-      const  CurveType : integer; 
+      const  CurveTypeId : integer; 
       const  ProblemID : integer
     );
     function GetWaveLength(
@@ -1098,7 +1098,7 @@ Begin
 End;
 
 procedure TFitServer_Proxy.SetCurveType(
-  const  CurveType : integer; 
+  const  CurveTypeId : integer; 
   const  ProblemID : integer
 );
 Var
@@ -1108,7 +1108,7 @@ Begin
   locSerializer := GetSerializer();
   Try
     locSerializer.BeginCall('SetCurveType', GetTarget(),(Self as ICallContext));
-      locSerializer.Put('CurveType', TypeInfo(integer), CurveType);
+      locSerializer.Put('CurveTypeId', TypeInfo(integer), CurveTypeId);
       locSerializer.Put('ProblemID', TypeInfo(integer), ProblemID);
     locSerializer.EndCall();
 

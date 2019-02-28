@@ -141,7 +141,7 @@ end;
 
 class function TPseudoVoigtPointsSet.GetCurveTypeId: TCurveTypeId;
 begin
-    Result := StringToGUID('9f27dc7c-970f-4dac-88cd-f5fb3400d38d');
+    Result := StringToGUID('{9f27dc7c-970f-4dac-88cd-f5fb3400d38d}');
 end;
 
 function TPseudoVoigtPointsSet.GetParamByName(Name: string): Double;

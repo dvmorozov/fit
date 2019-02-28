@@ -68,7 +68,7 @@ end;
 
 class function TGaussPointsSet.GetCurveTypeId: TCurveTypeId;
 begin
-    Result := StringToGUID('2413150b-7ee8-4b32-8be6-c654825bf9cb');
+    Result := StringToGUID('{ff4e399c-c33c-482e-84d7-952700bcd4ae}');
 end;
 
 procedure TGaussPointsSet.DoCalc(const Intervals: TPointsSet);

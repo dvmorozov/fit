@@ -41,7 +41,7 @@ end;
 
 class function TLorentzPointsSet.GetCurveTypeId: TCurveTypeId;
 begin
-    Result := StringToGUID('7ca6fdaf-95b7-4d84-bcba-130c828407cc');
+    Result := StringToGUID('{7ca6fdaf-95b7-4d84-bcba-130c828407cc}');
 end;
 
 procedure TLorentzPointsSet.DoCalc(const Intervals: TPointsSet);

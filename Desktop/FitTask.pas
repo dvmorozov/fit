@@ -19,7 +19,8 @@ interface
 uses Classes, SysUtils, PointsSet, CurvePointsSet, SelfCopied, Minimizer,
     Minimizer_S, Minimizer_DS, MainCalcThread, CommonTypes, MSCRDataClasses,
     LorentzPointsSet, GaussPointsSet, TwoBranchesPseudoVoigtPointsSet,
-    AsymPseudoVoigtPointsSet, SpecialPointsSet;
+    AsymPseudoVoigtPointsSet, SpecialPointsSet, NamedPointsSet,
+    PseudoVoigtPointsSet;
   
 type
     { Fits profile interval by model curves (specimens). 
@@ -30,7 +31,7 @@ type
         FEndIndex: LongInt;
 
         FMaxRFactor: Double;
-        FCurveType: TCurveType;
+        FCurveTypeId: TCurveTypeId;
         { Expression defining user curve type. }
         FCurveExpr: string;
         { Parameters of user defined curve. Parameters are given from the caller. 
@@ -212,7 +213,7 @@ type
         procedure FindGaussesSequentially; virtual;
 
         property MaxRFactor: Double write FMaxRFactor;
-        property CurveType: TCurveType write FCurveType;
+        property CurveTypeId: TCurveTypeId write FCurveTypeId;
         { Callback to update information at achieving new minimum. }
         property ShowCurMinExternal: TShowCurMin read FShowCurMin write FShowCurMin;
         property DoneProcExternal: TDoneProc read FDoneProc write FDoneProc;
@@ -791,7 +792,8 @@ begin
     CommonSpecimenParams.Params.Clear;  //  Curve_parameters sozdaet v konstruktore
                                         //  odin parametr - nuzhno ego udalit'
     FMaxRFactor := 0.01;
-    FCurveType := Gaussian;
+    //  Sets default curve type
+    FCurveTypeId := TGaussPointsSet.GetCurveTypeId;
     AllDone := True;
     
     AStep := 100{10};                   //  shag amplitudy dolzhen nastraivat'sya,
@@ -1301,27 +1303,27 @@ function TFitTask.GetPatternSpecimen: TCurvePointsSet;
 var i: LongInt;
     P: TSpecialCurveParameter;
 begin
-    if FCurveType = Lorentzian then
+    if GUIDToString(FCurveTypeId) = GUIDToString(TLorentzPointsSet.GetCurveTypeId) then
     begin
         Result := TLorentzPointsSet.Create(nil);
     end
     else
-    if FCurveType = Gaussian then
+    if GUIDToString(FCurveTypeId) = GUIDToString(TGaussPointsSet.GetCurveTypeId) then
         Result := TGaussPointsSet.Create(nil)
     else
-    if FCurveType = PseudoVoigtian then
+    if GUIDToString(FCurveTypeId) = GUIDToString(TPseudoVoigtPointsSet.GetCurveTypeId) then
     begin
         Result := T2BranchesPseudoVoigtPointsSet.Create(nil);
         // vremenno, dlya proverki algoritma...
         //??? Result := TPseudoVoigtPointsSet.Create(nil)
     end
     else
-    if FCurveType = AsymPseudoVoigtian then
+    if GUIDToString(FCurveTypeId) = GUIDToString(TAsymPseudoVoigtPointsSet.GetCurveTypeId) then
     begin
         Result := TAsymPseudoVoigtPointsSet.Create(nil)
     end
     else
-    if FCurveType = Special then
+    if GUIDToString(FCurveTypeId) = GUIDToString(TSpecialPointsSet.GetCurveTypeId) then
     begin
         Result := TSpecialPointsSet.Create(nil);
         TSpecialPointsSet(Result).Expression := FCurveExpr;
@@ -1329,7 +1331,7 @@ begin
             Curve_parameters(Params.GetCopy));
     end
     else
-    if FCurveType = TwoBranchesPseudoVoigtian then
+    if GUIDToString(FCurveTypeId) = GUIDToString(T2BranchesPseudoVoigtPointsSet.GetCurveTypeId) then
     begin
         //  ...i po-umolchaniyu
         Result := T2BranchesPseudoVoigtPointsSet.Create(nil);
@@ -1499,7 +1501,7 @@ begin
             //  teper' sozdaetsya ekzemplyar tol'ko
             //  pol'zovatel'skoy krivoy, kotoraya ne
             //  imeet parametra polozheniya
-            if FCurveType = Special then
+            if GUIDToString(FCurveTypeId) = GUIDToString(TSpecialPointsSet.GetCurveTypeId) then
             begin
                 GP := GetPatternSpecimen;
 

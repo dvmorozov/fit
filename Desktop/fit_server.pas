@@ -244,7 +244,7 @@ type
       const  ProblemID : integer
     ):integer;
     procedure SetCurveType(
-      const  CurveType : integer; 
+      const  CurveTypeId : integer; 
       const  ProblemID : integer
     );
     function GetWaveLength(

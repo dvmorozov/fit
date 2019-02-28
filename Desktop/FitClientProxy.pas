@@ -52,8 +52,8 @@ type
         procedure SetBackFactor(ABackFactor: Double);
         function GetCurveThresh: Double;
         procedure SetCurveThresh(ACurveThresh: Double);
-        function GetCurveType: TCurveType;
-        procedure SetCurveType(ACurveType: TCurveType);
+        function GetCurveType: TCurveTypeId;
+        procedure SetCurveType(ACurveType: TCurveTypeId);
         function GetState: TFitServerState;
         procedure SetWaveLength(AWaveLength: Double);
         function GetWaveLength: Double;
@@ -151,7 +151,7 @@ type
         property MaxRFactor: Double read GetMaxRFactor write SetMaxRFactor;
         property BackFactor: Double read GetBackFactor write SetBackFactor;
         property CurveThresh: Double read GetCurveThresh write SetCurveThresh;
-        property CurveType: TCurveType read GetCurveType write SetCurveType;
+        property CurveTypeId: TCurveTypeId read GetCurveType write SetCurveType;
         property State: TFitServerState read GetState;
         property WaveLength: Double read GetWaveLength write SetWaveLength;
 
@@ -225,17 +225,17 @@ begin
 {$ENDIF}
 end;
 
-function TFitClientProxy.GetCurveType: TCurveType;
+function TFitClientProxy.GetCurveType: TCurveTypeId;
 begin
     Assert(Assigned(FitStub));
 {$IFNDEF FIT}
-    Result := TCurveType(FitStub.GetCurveType(ProblemID));
+    Result := TCurveTypeId(FitStub.GetCurveType(ProblemID));
 {$ELSE}
-    Result := TCurveType(FitStub.GetCurveType);
+    Result := TCurveTypeId(FitStub.GetCurveType);
 {$ENDIF}
 end;
 
-procedure TFitClientProxy.SetCurveType(ACurveType: TCurveType);
+procedure TFitClientProxy.SetCurveType(ACurveType: TCurveTypeId);
 begin
     Assert(Assigned(FitStub));
 {$IFNDEF FIT}

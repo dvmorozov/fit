@@ -18,15 +18,6 @@ interface
 uses Classes, SysUtils;
 
 type
-    TCurveType = (
-        Gaussian,
-        Lorentzian,
-        Special,
-        PseudoVoigtian,
-        AsymPseudoVoigtian,
-        TwoBranchesPseudoVoigtian
-        );
-        
     { Server states. Sequence of states is designated by numbers. }
     TFitServerState = (
         { waiting of loading profile data (1) }

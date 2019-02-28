@@ -21,7 +21,8 @@ uses
     ExtCtrls, StdCtrls, Menus, PointsSet, FitViewer, ComCtrls,
     FitClient, SelfCheckedComponentList, NumericGrid, CheckLst, MSCRDataClasses,
     LResources, tagraph, ActnList, FitTask, Settings, Laz_XMLCfg,
-    MyExceptions, Grids, CommonTypes, Main, NeutronPointsSet, CurvePointsSet
+    MyExceptions, Grids, CommonTypes, Main, NeutronPointsSet, CurvePointsSet,
+    SpecialPointsSet, GaussPointsSet, LorentzPointsSet
 {$IFDEF WINDOWS}
     ,Windows, CommCtrl
 {$ENDIF}
@@ -980,14 +981,14 @@ end;
 
 procedure TFormMain.ActionSelCurveGaussianExecute(Sender: TObject);
 begin
-    FitClientApp_.FitClient.CurveType := Gaussian;
+    FitClientApp_.FitClient.CurveTypeId := TGaussPointsSet.GetCurveTypeId;
     ResetCurveMenuCheckedBits;
     ActionSelCurveGaussian.Tag := ActionSelCurveGaussian.Tag or 2;
 end;
 
 procedure TFormMain.ActionSelCurveLorentzianExecute(Sender: TObject);
 begin
-    FitClientApp_.FitClient.CurveType := Lorentzian;
+    FitClientApp_.FitClient.CurveTypeId := TLorentzPointsSet.GetCurveTypeId;
     ResetCurveMenuCheckedBits;
     ActionSelCurveLorentzian.Tag := ActionSelCurveLorentzian.Tag or 2;
 end;
@@ -2535,7 +2536,7 @@ begin
         begin
             FitClientApp_.FitClient.SetSpecialCurveParameters(
                 ct.Expression, ct.Parameters);
-            FitClientApp_.FitClient.CurveType := Special;
+            FitClientApp_.FitClient.CurveTypeId := TSpecialPointsSet.GetCurveTypeId;
             Break;
         end;
     end;

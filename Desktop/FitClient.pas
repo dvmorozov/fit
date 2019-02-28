@@ -18,8 +18,8 @@ interface
 
 uses Classes, PointsSet, TitlePointsSet, SelfCopied, SysUtils, MSCRDataClasses,
     Dialogs, FitClientProxy, CommonTypes, CBRCComponent, NeutronPointsSet,
-    CurvePointsSet, IntClientCallback, IntFitViewer, IntDataLoader,
-    IntDataLoaderInjector;
+    CurvePointsSet, NamedPointsSet, IntClientCallback, IntFitViewer,
+    IntDataLoader, IntDataLoaderInjector;
     
 type
     { Modes of selectiion of active point set. }
@@ -191,8 +191,8 @@ type
         procedure SetBackFactor(ABackFactor: Double);
         function GetCurveThresh: Double;
         procedure SetCurveThresh(ACurveThresh: Double);
-        function GetCurveType: TCurveType;
-        procedure SetCurveType(ACurveType: TCurveType);
+        function GetCurveType: TCurveTypeId;
+        procedure SetCurveType(ACurveType: TCurveTypeId);
 
         { Creates list of selected points and inserts new item into chart legend (CheckListBox). }
         procedure RecreateAndShowSelectedPoints(Title: string);
@@ -302,7 +302,7 @@ type
         property MaxRFactor: Double read GetMaxRFactor write SetMaxRFactor;
         property BackFactor: Double read GetBackFactor write SetBackFactor;
         property CurveThresh: Double read GetCurveThresh write SetCurveThresh;
-        property CurveType: TCurveType read GetCurveType write SetCurveType;
+        property CurveTypeId: TCurveTypeId read GetCurveType write SetCurveType;
 
         { Plotting events are called from methods of the same name for providing
           synchronization with main application thread. Point to methods of TIIViewer. }
@@ -1286,16 +1286,16 @@ begin
     FitProxy.CurveThresh := ACurveThresh;
 end;
 
-function TFitClient.GetCurveType: TCurveType;
+function TFitClient.GetCurveType: TCurveTypeId;
 begin
     Assert(Assigned(FitProxy));
-    Result := FitProxy.CurveType;
+    Result := FitProxy.CurveTypeId;
 end;
 
-procedure TFitClient.SetCurveType(ACurveType: TCurveType);
+procedure TFitClient.SetCurveType(ACurveType: TCurveTypeId);
 begin
     Assert(Assigned(FitProxy));
-    FitProxy.CurveType := ACurveType;
+    FitProxy.CurveTypeId := ACurveType;
 end;
 
 {$IFNDEF EXCLUDE_SOMETHING}

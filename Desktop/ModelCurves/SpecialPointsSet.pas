@@ -43,13 +43,27 @@ type
 
     public
         procedure CopyParameters(const Dest: TObject); override;
-        
+        { Replaces method defined in TNamedPointsSet. }
+        class function GetTypeName: string;
+        { Replaces method defined in TNamedPointsSet. }
+        class function GetCurveTypeId: TCurveTypeId;
+
         property Expression: string read FExpression write FExpression;
     end;
     
 implementation
 
 {=========================== TSpecialPointsSet ================================}
+
+class function TSpecialPointsSet.GetTypeName: string;
+begin
+    Result := 'User defined';
+end;
+
+class function TSpecialPointsSet.GetCurveTypeId: TCurveTypeId;
+begin
+    Result := StringToGUID('{d8cafce5-8b03-4cce-9e93-ea28acb8e7ca}');
+end;
 
 function TSpecialPointsSet.CalcValue(ArgValue: Double): Double;
 var P: TSpecialCurveParameter;

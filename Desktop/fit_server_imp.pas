@@ -144,7 +144,7 @@ Type
       const  ProblemID : integer
     ):integer;
     procedure SetCurveType(
-      const  CurveType : integer; 
+      const  CurveTypeId : integer; 
       const  ProblemID : integer
     );
     function GetWaveLength(
@@ -2562,7 +2562,7 @@ Begin
 End;
 
 procedure TFitServer_ServiceImp.SetCurveType(
-  const  CurveType : integer; 
+  const  CurveTypeId : integer; 
   const  ProblemID : integer
 );
 var Problem: TFitServerApp;
@@ -2580,7 +2580,7 @@ Begin
             LeaveCriticalsection(CS);
         end;
         Problem := TFitServerApp(ProblemID);
-        Problem.FitStub.SetCurveType(TCurveType(CurveType));
+        Problem.FitStub.SetCurveType(TCurveTypeId(CurveTypeId));
     except
         //  kod oschibki ne predusmotren
         on E: EUserException do

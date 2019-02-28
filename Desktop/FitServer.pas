@@ -29,7 +29,8 @@ In this case keeping the state of application can't be guaranteed.
 }
 
 uses Classes, TitlePointsSet, SelfCheckedComponentList, SysUtils, MSCRDataClasses,
-     Dialogs, CurvePointsSet, NamedPointsSet, PointsSet,
+     Dialogs, CurvePointsSet, NamedPointsSet, PointsSet, GaussPointsSet,
+     SpecialPointsSet,
 {$IFDEF FIT}
      FitServerProxy,    //      Proxy to client to call it back.
 {$ENDIF}
@@ -133,8 +134,8 @@ type
         procedure SetCurveThresh(ACurveThresh: Double);
 
     protected
-        FCurveType: TCurveType;
-        procedure SetCurveType(ACurveType: TCurveType);
+        FCurveTypeId: TCurveTypeId;
+        procedure SetCurveType(ACurveTypeId: TCurveTypeId);
 
     protected
                 { Is set up to True after finishing first cycle of calculation. }
@@ -389,7 +390,7 @@ type
                   the threshold by curve function. The same threshold removes instances with
                   too small amplitude. }
         property CurveThresh: Double read FCurveThresh write SetCurveThresh;
-        property CurveType: TCurveType read FCurveType write SetCurveType;
+        property CurveTypeId: TCurveTypeId read FCurveTypeId write SetCurveType;
         property State: TFitServerState read FState;
         property WaveLength: Double read FWaveLength write SetWaveLength;
         property SelectedAreaMode: Boolean read FSelectedAreaMode;
@@ -609,7 +610,8 @@ begin
     FMaxRFactor := 0.0001;  //  0.01%
     FBackFactor := 30;
     FCurveThresh := 0;
-    FCurveType := Gaussian;
+    //  Sets default curve type.
+    FCurveTypeId := TGaussPointsSet.GetCurveTypeId;
     //  chtoby mozhno bylo dobavlyat' tochki tablichno bez vhoda
     //  v spets. rezhim
     ExpProfile := TTitlePointsSet.Create(nil);
@@ -2198,8 +2200,8 @@ begin
             end;
             //  ustanovka dop. parametrov
             TF.MaxRFactor := MaxRFactor;
-            TF.CurveType := CurveType;
-            if CurveType = Special then
+            TF.CurveTypeId := CurveTypeId;
+            if CurveTypeId = Special then
                 TF.SetSpecialCurve(FCurveExpr, Curve_parameters(Params.GetCopy));
             TF.ShowCurMinExternal := ShowCurMin;
             TF.DoneProcExternal := DoneProc;
@@ -2264,8 +2266,8 @@ begin
                 end;
                 //  ustanovka dop. parametrov
                 TF.MaxRFactor := MaxRFactor;
-                TF.CurveType := CurveType;
-                if CurveType = Special then
+                TF.CurveTypeId := CurveTypeId;
+                if GUIDToString(CurveTypeId) = GUIDToString(TSpecialPointsSet.GetCurveTypeId) then
                     TF.SetSpecialCurve(FCurveExpr, Curve_parameters(Params.GetCopy));
                 TF.ShowCurMinExternal := ShowCurMinInternal;
                 TF.DoneProcExternal := DoneProc;
@@ -2369,16 +2371,16 @@ begin
     FCurveThresh := ACurveThresh;
 end;
 
-procedure TFitServer.SetCurveType(ACurveType: TCurveType);
+procedure TFitServer.SetCurveType(ACurveTypeId: TCurveTypeId);
 var i: LongInt;
     FT: TFitTask;
 begin
-    FCurveType := ACurveType;
+    FCurveTypeId := ACurveTypeId;
     if Assigned(TaskList) then
         for i := 0 to TaskList.Count - 1 do
         begin
             FT := TFitTask(TaskList.Items[i]);
-            FT.CurveType := ACurveType;
+            FT.CurveTypeId := ACurveTypeId;
         end;
 end;
 

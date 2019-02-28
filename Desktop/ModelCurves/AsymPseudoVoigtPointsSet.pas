@@ -123,7 +123,7 @@ end;
 
 class function TAsymPseudoVoigtPointsSet.GetCurveTypeId: TCurveTypeId;
 begin
-    Result := StringToGUID('74a6ec30-a019-475d-99a3-b62c4ab03a6c');
+    Result := StringToGUID('{74a6ec30-a019-475d-99a3-b62c4ab03a6c}');
 end;
 
 procedure TAsymPseudoVoigtPointsSet.SetParamByName(Name: string; Value: Double);

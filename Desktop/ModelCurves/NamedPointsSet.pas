@@ -27,19 +27,21 @@ type
         { The attribute should not be used in descendants. }
         FName: string;
         FCurveTypeId: TCurveTypeId;
-        
+
+    protected
+        { Sets unique identifier of curve type. }
+        procedure SetCurveTypeId(CurveTypeId: TCurveTypeId); virtual;
+        { Sets name of curve type. The method is used in deserializing
+          objects received from server. }
+        procedure SetTypeName(Name: string); virtual;
+
     public
         { Returns unique identifier of curve type. }
-        function GetCurveTypeId: TCurveTypeId;
-        { Sets unique identifier of curve type. }
-        procedure SetCurveTypeId(CurveTypeId: TCurveTypeId);
+        function GetCurveTypeId: TCurveTypeId; virtual;
         { Returns name of curve type. It's better to use function
           instead of property because property assumes storing data
           in object, but storing any data is not necessary in this case. }
         function GetTypeName: string; virtual;
-        { Sets name of curve type. The method is used in deserializing
-          objects received from server. }
-        procedure SetTypeName(Name: string); virtual;
     end;
 
 implementation

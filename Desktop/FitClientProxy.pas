@@ -17,7 +17,7 @@ unit FitClientProxy;
 interface
 
 uses Classes, SysUtils, MSCRDataClasses, CommonTypes, PointsSet, SelfCopied,
-    MyExceptions, TitlePointsSet, CurvePointsSet,
+    MyExceptions, TitlePointsSet, CurvePointsSet, NamedPointsSet,
 {$IFNDEF FIT}
     base_service_intf,
     fit_server_proxy                //  Calls the server via network.

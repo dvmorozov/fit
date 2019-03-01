@@ -242,7 +242,7 @@ bg=green
     </coordinates>
     <panel_attributes>TCurveTypesSingleton
 --
-_+RegisterCurveType(S: TNamedPointsSet)_</panel_attributes>
+_+RegisterCurveType(CurveClass: TCurveClass)_</panel_attributes>
     <additional_attributes/>
   </element>
   <element>

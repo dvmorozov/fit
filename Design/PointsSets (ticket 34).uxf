@@ -87,7 +87,7 @@
       <h>30</h>
     </coordinates>
     <panel_attributes>TSpecialPointsSet
-bg=green</panel_attributes>
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -184,7 +184,6 @@ _+GetCurveTypeId: TCurveTypeId_
 _-SetCurveTypeId(CurveTypeId: TCurveTypeId)_
 _+GetTypeName: string_
 _-SetTypeName(TypeName: string)_
-bg=green
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -674,40 +673,5 @@ in deserialization.</panel_attributes>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>10.0;10.0;100.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>390</x>
-      <y>440</y>
-      <w>140</w>
-      <h>70</h>
-    </coordinates>
-    <panel_attributes>These classes
-have configurable
-type name and id.</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>520</x>
-      <y>470</y>
-      <w>120</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>10.0;10.0;100.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>480</x>
-      <y>500</y>
-      <w>30</w>
-      <h>160</h>
-    </coordinates>
-    <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;140.0</additional_attributes>
   </element>
 </diagram>

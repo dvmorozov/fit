@@ -15,7 +15,8 @@ unit TwoBranchesPseudoVoigtPointsSet;
 
 interface
 
-uses Classes, SysUtils, PointsSet, NamedPointsSet, CurvePointsSet, SimpMath;
+uses Classes, SysUtils, PointsSet, NamedPointsSet, CurvePointsSet,
+    CurveTypesSingleton, SimpMath;
 
 type
     { Pseudo-Voigt curve having different form parameters for
@@ -357,6 +358,10 @@ begin
     end;
 end;
 
+var CTS: TCurveTypesSingleton;
+
+initialization
+    CTS.RegisterCurveType(T2BranchesPseudoVoigtPointsSet);
 end.
 
 

@@ -15,20 +15,22 @@ unit CurveTypesSingleton;
 
 interface
 
-uses Classes, SysUtils, NamedPointsSet, IntCurveFactory, IntCurveTypeSelector,
-  IntCurveTypeIterator;
+uses Classes, SysUtils, NamedPointsSet, CBRCComponent,
+  IntCurveFactory, IntCurveTypeSelector, IntCurveTypeIterator;
 
 type
+    TCurveClass = class of TNamedPointsSet;
+
     { Class-singleton containing information about curve types. }
-    TCurveTypesSingleton = class(
+    TCurveTypesSingleton = class(TCBRCComponent,
         ICurveFactory, ICurveTypeIterator, ICurveTypeSelector)
     private
-        class FCurveTypesSingleton: TCurveTypesSingleton;
+        class var FCurveTypesSingleton: TCurveTypesSingleton;
         constructor Init;
 
     public
         class function Create: TCurveTypesSingleton;
-        procedure RegitsterCurveType(CurveTypeId: TNamedPointsSet);
+        procedure RegisterCurveType(CurveTypeId: TCurveClass);
         { Implementation of ICurveFactory. }
         function CreatePointsSet(TypeId: TCurveTypeId): TNamedPointsSet;
         { Implementation of ICurveTypeIterator. }
@@ -46,7 +48,7 @@ implementation
 
 constructor TCurveTypesSingleton.Init;
 begin
-    inherited Create;
+    inherited Create(nil);
 end;
 
 class function TCurveTypesSingleton.Create: TCurveTypesSingleton;
@@ -61,7 +63,7 @@ begin
     raise ENotImplemented.Create('TCurveTypesSingleton.CreatePointsSet not implemented.');
 end;
 
-procedure TCurveTypesSingleton.RegitsterCurveType(CurveTypeId: TNamedPointsSet);
+procedure TCurveTypesSingleton.RegisterCurveType(CurveTypeId: TCurveClass);
 begin
     raise ENotImplemented.Create('TCurveTypesSingleton.RegitsterCurveType not implemented.');
 end;

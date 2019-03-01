@@ -981,14 +981,14 @@ end;
 
 procedure TFormMain.ActionSelCurveGaussianExecute(Sender: TObject);
 begin
-    FitClientApp_.FitClient.CurveTypeId := TGaussPointsSet.GetCurveTypeId;
+    FitClientApp_.FitClient.CurveTypeId := TGaussPointsSet.GetCurveTypeId_;
     ResetCurveMenuCheckedBits;
     ActionSelCurveGaussian.Tag := ActionSelCurveGaussian.Tag or 2;
 end;
 
 procedure TFormMain.ActionSelCurveLorentzianExecute(Sender: TObject);
 begin
-    FitClientApp_.FitClient.CurveTypeId := TLorentzPointsSet.GetCurveTypeId;
+    FitClientApp_.FitClient.CurveTypeId := TLorentzPointsSet.GetCurveTypeId_;
     ResetCurveMenuCheckedBits;
     ActionSelCurveLorentzian.Tag := ActionSelCurveLorentzian.Tag or 2;
 end;
@@ -2536,7 +2536,8 @@ begin
         begin
             FitClientApp_.FitClient.SetSpecialCurveParameters(
                 ct.Expression, ct.Parameters);
-            FitClientApp_.FitClient.CurveTypeId := TSpecialPointsSet.GetCurveTypeId;
+            FitClientApp_.FitClient.CurveTypeId :=
+                TSpecialPointsSet.GetCurveTypeId_;
             Break;
         end;
     end;

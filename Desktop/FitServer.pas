@@ -611,7 +611,8 @@ begin
     FBackFactor := 30;
     FCurveThresh := 0;
     //  Sets default curve type.
-    FCurveTypeId := TGaussPointsSet.GetCurveTypeId;
+    FCurveTypeId := TGaussPointsSet.GetCurveTypeId_;
+
     //  chtoby mozhno bylo dobavlyat' tochki tablichno bez vhoda
     //  v spets. rezhim
     ExpProfile := TTitlePointsSet.Create(nil);
@@ -2267,7 +2268,8 @@ begin
                 //  ustanovka dop. parametrov
                 TF.MaxRFactor := MaxRFactor;
                 TF.CurveTypeId := CurveTypeId;
-                if GUIDToString(CurveTypeId) = GUIDToString(TSpecialPointsSet.GetCurveTypeId) then
+                if GUIDToString(CurveTypeId) =
+                    GUIDToString(TSpecialPointsSet.GetCurveTypeId_) then
                     TF.SetSpecialCurve(FCurveExpr, Curve_parameters(Params.GetCopy));
                 TF.ShowCurMinExternal := ShowCurMinInternal;
                 TF.DoneProcExternal := DoneProc;

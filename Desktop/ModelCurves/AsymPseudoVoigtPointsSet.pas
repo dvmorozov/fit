@@ -49,10 +49,10 @@ type
         
     public
         constructor Create(AOwner: TComponent); override;
-        { Replaces method defined in TNamedPointsSet. }
-        class function GetTypeName: string;
-        { Replaces method defined in TNamedPointsSet. }
-        class function GetCurveTypeId: TCurveTypeId;
+        { Overrides method defined in TNamedPointsSet. }
+        function GetTypeName: string; override;
+        { Overrides method defined in TNamedPointsSet. }
+        function GetCurveTypeId: TCurveTypeId; override;
 
         function HasDeltaSigma: Boolean;
 
@@ -116,12 +116,12 @@ begin
     if Assigned(DeltaSigmaP) then Result := True else Result := False;
 end;
 
-class function TAsymPseudoVoigtPointsSet.GetTypeName: string;
+function TAsymPseudoVoigtPointsSet.GetTypeName: string;
 begin
     Result := 'Asym. Pseudo-Voigt';
 end;
 
-class function TAsymPseudoVoigtPointsSet.GetCurveTypeId: TCurveTypeId;
+function TAsymPseudoVoigtPointsSet.GetCurveTypeId: TCurveTypeId;
 begin
     Result := StringToGUID('{74a6ec30-a019-475d-99a3-b62c4ab03a6c}');
 end;

@@ -15,7 +15,8 @@ unit SpecialPointsSet;
 
 interface
 
-uses Classes, SysUtils, PointsSet, CurvePointsSet, NamedPointsSet;
+uses Classes, SysUtils, PointsSet, CurvePointsSet, NamedPointsSet,
+  CurveTypesSingleton;
 
 type
     PDouble = ^Double;
@@ -43,10 +44,11 @@ type
 
     public
         procedure CopyParameters(const Dest: TObject); override;
-        { Replaces method defined in TNamedPointsSet. }
-        class function GetTypeName: string;
-        { Replaces method defined in TNamedPointsSet. }
-        class function GetCurveTypeId: TCurveTypeId;
+        { Overrides method defined in TNamedPointsSet. }
+        function GetTypeName: string; override;
+        { Overrides method defined in TNamedPointsSet. }
+        function GetCurveTypeId: TCurveTypeId; override;
+        class function GetCurveTypeId_: TCurveTypeId;
 
         property Expression: string read FExpression write FExpression;
     end;
@@ -55,14 +57,25 @@ implementation
 
 {=========================== TSpecialPointsSet ================================}
 
-class function TSpecialPointsSet.GetTypeName: string;
+function TSpecialPointsSet.GetTypeName: string;
 begin
     Result := 'User defined';
 end;
 
-class function TSpecialPointsSet.GetCurveTypeId: TCurveTypeId;
+function TSpecialPointsSet.GetCurveTypeId: TCurveTypeId;
 begin
     Result := StringToGUID('{d8cafce5-8b03-4cce-9e93-ea28acb8e7ca}');
+end;
+
+class function TSpecialPointsSet.GetCurveTypeId_: TCurveTypeId;
+var Curve: TSpecialPointsSet;
+begin
+    try
+        Curve := TSpecialPointsSet.Create(nil);
+        Result := Curve.GetCurveTypeId;
+    finally
+        Curve.Free;
+    end;
 end;
 
 function TSpecialPointsSet.CalcValue(ArgValue: Double): Double;
@@ -124,5 +137,10 @@ begin
     TSpecialPointsSet(Dest).Expression := Expression;
 end;
 
+var CTS: TCurveTypesSingleton;
+
+initialization
+    CTS := TCurveTypesSingleton.Create;
+    CTS.RegisterCurveType(TSpecialPointsSet);
 end.
 

@@ -24,24 +24,36 @@ type
         procedure DoCalc(const Intervals: TPointsSet); override;
 
     public
-        { Replaces method defined in TNamedPointsSet. }
-        class function GetTypeName: string;
-        { Replaces method defined in TNamedPointsSet. }
-        class function GetCurveTypeId: TCurveTypeId;
+        { Overrides method defined in TNamedPointsSet. }
+        function GetTypeName: string; override;
+        { Overrides method defined in TNamedPointsSet. }
+        function GetCurveTypeId: TCurveTypeId; override;
+        class function GetCurveTypeId_: TCurveTypeId;
     end;
 
 implementation
 
 {========================== TLorentzPointsSet =================================}
 
-class function TLorentzPointsSet.GetTypeName: string;
+function TLorentzPointsSet.GetTypeName: string;
 begin
     Result := 'Lorentzian';
 end;
 
-class function TLorentzPointsSet.GetCurveTypeId: TCurveTypeId;
+function TLorentzPointsSet.GetCurveTypeId: TCurveTypeId;
 begin
     Result := StringToGUID('{7ca6fdaf-95b7-4d84-bcba-130c828407cc}');
+end;
+
+class function TLorentzPointsSet.GetCurveTypeId_: TCurveTypeId;
+var Curve: TLorentzPointsSet;
+begin
+    try
+        Curve := TLorentzPointsSet.Create(nil);
+        Result := Curve.GetCurveTypeId;
+    finally
+        Curve.Free;
+    end;
 end;
 
 procedure TLorentzPointsSet.DoCalc(const Intervals: TPointsSet);

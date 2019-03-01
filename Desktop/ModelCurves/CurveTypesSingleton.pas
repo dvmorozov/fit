@@ -19,18 +19,29 @@ uses Classes, SysUtils, NamedPointsSet, CBRCComponent,
   IntCurveFactory, IntCurveTypeSelector, IntCurveTypeIterator;
 
 type
+    { Class-reference type for base curve type. }
     TCurveClass = class of TNamedPointsSet;
+
+    { Class containing information about curve types. }
+    TCurveType = class
+    public
+        TypeName: string;
+        CurveClass: TCurveClass;
+        CurveTypeId: TCurveTypeId;
+    end;
 
     { Class-singleton containing information about curve types. }
     TCurveTypesSingleton = class(TCBRCComponent,
         ICurveFactory, ICurveTypeIterator, ICurveTypeSelector)
     private
+        FCurveTypes: TList;
+
         class var FCurveTypesSingleton: TCurveTypesSingleton;
         constructor Init;
 
     public
         class function Create: TCurveTypesSingleton;
-        procedure RegisterCurveType(CurveTypeId: TCurveClass);
+        procedure RegisterCurveType(CurveClass: TCurveClass);
         { Implementation of ICurveFactory. }
         function CreatePointsSet(TypeId: TCurveTypeId): TNamedPointsSet;
         { Implementation of ICurveTypeIterator. }
@@ -49,6 +60,7 @@ implementation
 constructor TCurveTypesSingleton.Init;
 begin
     inherited Create(nil);
+    FCurveTypes := TList.Create;
 end;
 
 class function TCurveTypesSingleton.Create: TCurveTypesSingleton;
@@ -63,9 +75,21 @@ begin
     raise ENotImplemented.Create('TCurveTypesSingleton.CreatePointsSet not implemented.');
 end;
 
-procedure TCurveTypesSingleton.RegisterCurveType(CurveTypeId: TCurveClass);
+procedure TCurveTypesSingleton.RegisterCurveType(CurveClass: TCurveClass);
+var CurveType: TCurveType;
+    Curve: TNamedPointsSet;
 begin
-    raise ENotImplemented.Create('TCurveTypesSingleton.RegitsterCurveType not implemented.');
+    CurveType := TCurveType.Create;
+    CurveType.CurveClass := CurveClass;
+    //  Instantiates curve object to call its methods.
+    Curve := CurveClass.Create(nil);
+    try
+        CurveType.TypeName := Curve.GetTypeName;
+        CurveType.CurveTypeId := Curve.GetCurveTypeId;
+    finally
+      Curve.Free;
+    end;
+    FCurveTypes.Add(CurveType);
 end;
 
 procedure TCurveTypesSingleton.FirstType;

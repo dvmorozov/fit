@@ -59,10 +59,11 @@ type
         
     public
         constructor Create(AOwner: TComponent); override;
-        { Replaces method defined in TNamedPointsSet. }
-        class function GetTypeName: string;
-        { Replaces method defined in TNamedPointsSet. }
-        class function GetCurveTypeId: TCurveTypeId;
+        { Overrides method defined in TNamedPointsSet. }
+        function GetTypeName: string; override;
+        { Overrides method defined in TNamedPointsSet. }
+        function GetCurveTypeId: TCurveTypeId; override;
+        class function GetCurveTypeId_: TCurveTypeId;
 
         function HasSigmaRight: Boolean;
         function HasEtaRight: Boolean;
@@ -207,14 +208,25 @@ begin
     if Assigned(SigmaRightP) then Result := True else Result := False;
 end;
 
-class function T2BranchesPseudoVoigtPointsSet.GetTypeName: string;
+function T2BranchesPseudoVoigtPointsSet.GetTypeName: string;
 begin
     Result := '2 br. Pseudo-Voigt';
 end;
 
-class function T2BranchesPseudoVoigtPointsSet.GetCurveTypeId: TCurveTypeId;
+function T2BranchesPseudoVoigtPointsSet.GetCurveTypeId: TCurveTypeId;
 begin
     Result := StringToGUID('{6de06c1b-e51a-48c6-b036-c81a841ec468}');
+end;
+
+class function T2BranchesPseudoVoigtPointsSet.GetCurveTypeId_: TCurveTypeId;
+var Curve: T2BranchesPseudoVoigtPointsSet;
+begin
+    try
+        Curve := T2BranchesPseudoVoigtPointsSet.Create(nil);
+        Result := Curve.GetCurveTypeId;
+    finally
+        Curve.Free;
+    end;
 end;
 
 procedure T2BranchesPseudoVoigtPointsSet.SetParamByName(
@@ -361,6 +373,7 @@ end;
 var CTS: TCurveTypesSingleton;
 
 initialization
+    CTS := TCurveTypesSingleton.Create;
     CTS.RegisterCurveType(T2BranchesPseudoVoigtPointsSet);
 end.
 

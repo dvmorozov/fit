@@ -149,17 +149,23 @@ begin
     begin
         Result := FSelectedType.CurveTypeId;
     end
-        else raise EListError.Create(CurveTypeMustBeSelected);end;
+        else raise EListError.Create(CurveTypeMustBeSelected);
+end;
 
 procedure TCurveTypesSingleton.SelectType(TypeId: TCurveTypeId);
 begin
-
-    raise ENotImplemented.Create('TCurveTypesSingleton.SelectType not implemented.');
+    FirstType;
+    while not EndType do
+    begin
+        if GUIDToString(FSelectedType.CurveTypeId) =
+            GUIDToString(TypeId) then Break;
+        NextType;
+    end;
 end;
 
 function TCurveTypesSingleton.GetSelectedType: TCurveTypeId;
 begin
-    raise ENotImplemented.Create('TCurveTypesSingleton.GetSelectedType not implemented.');
+    Result := GetTypeId;
 end;
 
 end.

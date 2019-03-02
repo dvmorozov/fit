@@ -25,7 +25,7 @@ type
     { Class containing information about curve types. }
     TCurveType = class
     public
-        TypeName: string;
+        CurveTypeName: string;
         CurveClass: TCurveClass;
         CurveTypeId: TCurveTypeId;
     end;
@@ -58,6 +58,10 @@ type
 
 implementation
 
+const
+  CurveTypeMustBeSelected: string = 'Curve type must be previously selected.';
+  NoItemsInTheList: string = 'No more items in the list.';
+
 constructor TCurveTypesSingleton.Init;
 begin
     inherited Create(nil);
@@ -85,7 +89,7 @@ begin
     //  Instantiates curve object to call its methods.
     Curve := CurveClass.Create(nil);
     try
-        CurveType.TypeName := Curve.GetTypeName;
+        CurveType.CurveTypeName := Curve.GetTypeName;
         CurveType.CurveTypeId := Curve.GetCurveTypeId;
     finally
       Curve.Free;
@@ -112,10 +116,10 @@ begin
             FSelectedType := FCurveTypes[ItemIndex + 1];
         end
         else
-            raise EListError.Create('No more items in the list.');
+            raise EListError.Create(NoItemsInTheList);
     end
     else
-        raise EListError.Create('Curve type must be previously selected.');
+        raise EListError.Create(CurveTypeMustBeSelected);
 end;
 
 function TCurveTypesSingleton.EndType: Boolean;
@@ -132,16 +136,24 @@ end;
 
 function TCurveTypesSingleton.GetTypeName: string;
 begin
-    raise ENotImplemented.Create('TCurveTypesSingleton.GetTypeName not implemented.');
+    if FSelectedType <> nil then
+    begin
+        Result := FSelectedType.CurveTypeName;
+    end
+        else raise EListError.Create(CurveTypeMustBeSelected);
 end;
 
 function TCurveTypesSingleton.GetTypeId: TCurveTypeId;
 begin
-    raise ENotImplemented.Create('TCurveTypesSingleton.GetTypeId not implemented.');
-end;
+    if FSelectedType <> nil then
+    begin
+        Result := FSelectedType.CurveTypeId;
+    end
+        else raise EListError.Create(CurveTypeMustBeSelected);end;
 
 procedure TCurveTypesSingleton.SelectType(TypeId: TCurveTypeId);
 begin
+
     raise ENotImplemented.Create('TCurveTypesSingleton.SelectType not implemented.');
 end;
 

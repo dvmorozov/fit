@@ -13,7 +13,7 @@
     </General>
     <VersionInfo>
       <AutoIncrementBuild Value="True"/>
-      <BuildNr Value="1116"/>
+      <BuildNr Value="1117"/>
       <StringTable ProductVersion="0.0.0.1001"/>
     </VersionInfo>
     <BuildModes Count="2">
@@ -927,8 +927,8 @@
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="7"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="87"/>
-        <CursorPos X="56" Y="112"/>
+        <TopLine Value="105"/>
+        <CursorPos X="53" Y="119"/>
         <UsageCount Value="213"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -947,7 +947,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="23"/>
         <CursorPos X="9" Y="37"/>
-        <UsageCount Value="13"/>
+        <UsageCount Value="12"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit90>
       <Unit91>
@@ -965,7 +965,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="21"/>
         <CursorPos X="45" Y="36"/>
-        <UsageCount Value="43"/>
+        <UsageCount Value="42"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit92>
       <Unit93>
@@ -974,7 +974,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="4"/>
         <CursorPos X="5" Y="19"/>
-        <UsageCount Value="43"/>
+        <UsageCount Value="42"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit93>
       <Unit94>
@@ -1003,7 +1003,7 @@
       <Define3 Value="WINDOWS"/>
       <Define4 Value="Lazarus"/>
     </OtherDefines>
-    <JumpHistory Count="25" HistoryIndex="24">
+    <JumpHistory Count="28" HistoryIndex="27">
       <Position1>
         <Filename Value="ModelCurves\NamedPointsSet.pas"/>
         <Caret Line="44" Column="9" TopLine="19"/>
@@ -1104,6 +1104,18 @@
         <Filename Value="ModelCurves\CurveTypesSingleton.pas"/>
         <Caret Line="108" Column="23" TopLine="87"/>
       </Position25>
+      <Position26>
+        <Filename Value="ModelCurves\CurveTypesSingleton.pas"/>
+        <Caret Line="112" Column="56" TopLine="87"/>
+      </Position26>
+      <Position27>
+        <Filename Value="ModelCurves\CurveTypesSingleton.pas"/>
+        <Caret Line="99" Column="43" TopLine="85"/>
+      </Position27>
+      <Position28>
+        <Filename Value="ModelCurves\CurveTypesSingleton.pas"/>
+        <Caret Line="140" Column="32" TopLine="117"/>
+      </Position28>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

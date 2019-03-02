@@ -35,6 +35,7 @@ type
         ICurveFactory, ICurveTypeIterator, ICurveTypeSelector)
     private
         FCurveTypes: TList;
+        FSelectedType: TCurveType;
 
         class var FCurveTypesSingleton: TCurveTypesSingleton;
         constructor Init;
@@ -94,17 +95,39 @@ end;
 
 procedure TCurveTypesSingleton.FirstType;
 begin
-    raise ENotImplemented.Create('TCurveTypesSingleton.FirstType not implemented.');
+    if FCurveTypes.Count <> 0 then
+        FSelectedType := FCurveTypes.First
+    else
+        FSelectedType := nil;
 end;
 
 procedure TCurveTypesSingleton.NextType;
+var ItemIndex: Integer;
 begin
-    raise ENotImplemented.Create('TCurveTypesSingleton.NextType not implemented.');
+    if FSelectedType <> nil then
+    begin
+        ItemIndex := FCurveTypes.IndexOf(FSelectedType);
+        if ItemIndex < FCurveTypes.Count - 1 then
+        begin
+            FSelectedType := FCurveTypes[ItemIndex + 1];
+        end
+        else
+            raise EListError.Create('No more items in the list.');
+    end
+    else
+        raise EListError.Create('Curve type must be previously selected.');
 end;
 
 function TCurveTypesSingleton.EndType: Boolean;
 begin
-    raise ENotImplemented.Create('TCurveTypesSingleton.EndType not implemented.');
+    if FSelectedType <> nil then
+    begin
+        if FCurveTypes.IndexOf(FSelectedType) = FCurveTypes.Count - 1 then
+            Result := True
+        else
+            Result := False;
+    end;
+    Result := False;
 end;
 
 function TCurveTypesSingleton.GetTypeName: string;

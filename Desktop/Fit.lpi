@@ -927,8 +927,8 @@
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="7"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="72"/>
-        <CursorPos Y="92"/>
+        <TopLine Value="87"/>
+        <CursorPos X="56" Y="112"/>
         <UsageCount Value="213"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -937,8 +937,8 @@
         <Filename Value="C:\lazarus\fpc\3.0.4\source\rtl\objpas\classes\classesh.inc"/>
         <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="467"/>
-        <CursorPos X="3" Y="482"/>
+        <TopLine Value="131"/>
+        <CursorPos X="13" Y="139"/>
         <UsageCount Value="37"/>
       </Unit89>
       <Unit90>
@@ -1003,7 +1003,7 @@
       <Define3 Value="WINDOWS"/>
       <Define4 Value="Lazarus"/>
     </OtherDefines>
-    <JumpHistory Count="24" HistoryIndex="23">
+    <JumpHistory Count="25" HistoryIndex="24">
       <Position1>
         <Filename Value="ModelCurves\NamedPointsSet.pas"/>
         <Caret Line="44" Column="9" TopLine="19"/>
@@ -1100,6 +1100,10 @@
         <Filename Value="ModelCurves\PseudoVoigtPointsSet.pas"/>
         <Caret Line="147" TopLine="126"/>
       </Position24>
+      <Position25>
+        <Filename Value="ModelCurves\CurveTypesSingleton.pas"/>
+        <Caret Line="108" Column="23" TopLine="87"/>
+      </Position25>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
@@ -1139,7 +1143,7 @@
     </Other>
   </CompilerOptions>
   <Debugging>
-    <BreakPoints Count="3">
+    <BreakPoints Count="2">
       <Item1>
         <Kind Value="bpkSource"/>
         <WatchScope Value="wpsLocal"/>
@@ -1154,13 +1158,6 @@
         <Source Value="FitTask.pas"/>
         <Line Value="1689"/>
       </Item2>
-      <Item3>
-        <Kind Value="bpkSource"/>
-        <WatchScope Value="wpsLocal"/>
-        <WatchKind Value="wpkWrite"/>
-        <Source Value="ModelCurves\CurveTypesSingleton.pas"/>
-        <Line Value="92"/>
-      </Item3>
     </BreakPoints>
     <Watches Count="1">
       <Item1>

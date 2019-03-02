@@ -15,7 +15,8 @@ unit PseudoVoigtPointsSet;
 
 interface
 
-uses Classes, SysUtils, CurvePointsSet, PointsSet, NamedPointsSet, SimpMath;
+uses Classes, SysUtils, CurvePointsSet, PointsSet, NamedPointsSet,
+  CurveTypesSingleton, SimpMath;
 
 type
     { Function having Pseudo-Voigt form. }
@@ -219,5 +220,10 @@ begin
     else inherited;
 end;
 
+var CTS: TCurveTypesSingleton;
+
+initialization
+    CTS := TCurveTypesSingleton.Create;
+    CTS.RegisterCurveType(TPseudoVoigtPointsSet);
 end.
 

@@ -16,7 +16,7 @@ unit AsymPseudoVoigtPointsSet;
 interface
 
 uses Classes, SysUtils, PointsSet, NamedPointsSet, PseudoVoigtPointsSet,
-  CurvePointsSet, SimpMath;
+  CurvePointsSet, CurveTypesSingleton, SimpMath;
 
 type
     { Curve having asymmetrical Pseudo-Voigt form. }
@@ -188,4 +188,9 @@ begin
     else inherited;
 end;
 
+var CTS: TCurveTypesSingleton;
+
+initialization
+    CTS := TCurveTypesSingleton.Create;
+    CTS.RegisterCurveType(TAsymPseudoVoigtPointsSet);
 end.

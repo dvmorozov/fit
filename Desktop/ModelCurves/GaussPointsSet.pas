@@ -15,7 +15,8 @@ unit GaussPointsSet;
 
 interface
 
-uses Classes, SysUtils, PointsSet, CurvePointsSet, NamedPointsSet, SimpMath;
+uses Classes, SysUtils, PointsSet, CurvePointsSet, NamedPointsSet,
+  CurveTypesSingleton, SimpMath;
 
 type
     { Curve having Gauss form. }
@@ -157,6 +158,11 @@ begin
       else Result := 0;
 end;
 
+var CTS: TCurveTypesSingleton;
+
+initialization
+    CTS := TCurveTypesSingleton.Create;
+    CTS.RegisterCurveType(TGaussPointsSet);
 end.
 
 

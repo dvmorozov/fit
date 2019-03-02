@@ -15,7 +15,8 @@ unit LorentzPointsSet;
 
 interface
 
-uses Classes, SysUtils, PointsSet, NamedPointsSet, GaussPointsSet, SimpMath;
+uses Classes, SysUtils, PointsSet, NamedPointsSet, GaussPointsSet,
+  CurveTypesSingleton, SimpMath;
 
 type
     { Curve class having Lorentz form. }
@@ -121,4 +122,9 @@ begin
     end;
 end;
 
+var CTS: TCurveTypesSingleton;
+
+initialization
+    CTS := TCurveTypesSingleton.Create;
+    CTS.RegisterCurveType(TLorentzPointsSet);
 end.

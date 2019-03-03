@@ -130,8 +130,14 @@ begin
             Result := True
         else
             Result := False;
+    end
+    else
+    begin
+        if FCurveTypes.Count = 0 then
+            Result := True
+        else
+            Result := False;
     end;
-    Result := False;
 end;
 
 function TCurveTypesSingleton.GetTypeName: string;

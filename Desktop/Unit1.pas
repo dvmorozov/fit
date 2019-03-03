@@ -22,7 +22,7 @@ uses
     FitClient, SelfCheckedComponentList, NumericGrid, CheckLst, MSCRDataClasses,
     LResources, tagraph, ActnList, FitTask, Settings, Laz_XMLCfg,
     MyExceptions, Grids, CommonTypes, Main, NeutronPointsSet, CurvePointsSet,
-    SpecialPointsSet, GaussPointsSet, LorentzPointsSet
+    SpecialPointsSet, GaussPointsSet, LorentzPointsSet, CurveTypesSingleton
 {$IFDEF WINDOWS}
     ,Windows, CommCtrl
 {$ENDIF}
@@ -45,6 +45,7 @@ type
   { TFormMain }
 
   TFormMain = class(TForm)
+    ActionPatternType: TAction;
     ActionAnimationMode: TAction;
     ActionSelSpecPosAtEveryPoint: TAction;
     ActionSelCurveLorentzian: TAction;
@@ -255,6 +256,7 @@ type
     procedure ActionFitMinDifferenceExecute(Sender: TObject);
     procedure ActionFitMinNumberOfSpecExecute(Sender: TObject);
     procedure ActionImportExecute(Sender: TObject);
+    procedure ActionPatternTypeUpdate(Sender: TObject);
     procedure ActionQuitExecute(Sender: TObject);
     procedure ActionReloadExecute(Sender: TObject);
     procedure ActionRemoveBackExecute(Sender: TObject);
@@ -293,7 +295,6 @@ type
     procedure CheckListBoxLegendDrawItem(Control: TWinControl; Index: Integer;
       ARect: TRect; State: TOwnerDrawState);
     procedure CheckStateTimerTimer(Sender: TObject);
-    procedure FittingClick(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure GridDataEditingDone(Sender: TObject);
     procedure GridDataSelectEditor(Sender: TObject; aCol, aRow: Integer;
@@ -583,11 +584,6 @@ begin
     SetOpenState(FitClientApp_.FitClient.OpenState);
 end;
 
-procedure TFormMain.FittingClick(Sender: TObject);
-begin
-
-end;
-
 procedure TFormMain.ApplicationProperties1Hint(Sender: TObject);
 begin
     ShowHint(Application.Hint);
@@ -652,6 +648,31 @@ begin
             end;
         end;
     end;{with OpenDialog do...}
+end;
+
+procedure TFormMain.ActionPatternTypeUpdate(Sender: TObject);
+var CTS: TCurveTypesSingleton;
+    MenuItem: TMenuItem;
+    Index: Integer;
+begin
+    CTS := TCurveTypesSingleton.Create;
+    SelCurveType.Clear;
+    //  Creates menu items for curve types.
+    //  The list must contain at least one item.
+    CTS.FirstType;
+    while True do
+    begin
+        MenuItem := TMenuItem.Create(SelCurveType);
+        MenuItem.Caption := CTS.GetTypeName;
+        MenuItem.Name := 'CurveType' + IntToStr(Index);
+        Inc(Index);
+        MenuItem.OnClick := OnSpecialCurveClick;
+        SelCurveType.Add(MenuItem);
+        //  The last item should be processed as well.
+        if CTS.EndType then Break
+        else
+            CTS.NextType;
+    end;
 end;
 
 procedure TFormMain.ActionCreateSpecialCurveExecute(Sender: TObject);

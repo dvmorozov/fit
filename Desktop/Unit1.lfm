@@ -934,7 +934,7 @@ object FormMain: TFormMain
       Caption = '&Model'
       OnClick = ModelClick
       object SelCurveType: TMenuItem
-        Caption = 'Pattern Type'
+        Action = ActionPatternType
         object SelCurveGaussian: TMenuItem
           Action = ActionSelCurveGaussian
           Checked = True
@@ -1014,7 +1014,6 @@ object FormMain: TFormMain
     end
     object Fitting: TMenuItem
       Caption = '&Fitting'
-      OnClick = FittingClick
       object DoAllAuto: TMenuItem
         Action = ActionDoAllAuto
         ImageIndex = 6
@@ -2177,6 +2176,12 @@ object FormMain: TFormMain
       Caption = 'Animation Mode'
       OnExecute = ActionAnimationModeExecute
       OnUpdate = ActionAnimationModeUpdate
+    end
+    object ActionPatternType: TAction
+      Category = 'Model'
+      Caption = 'Pattern Type'
+      DisableIfNoHandler = False
+      OnUpdate = ActionPatternTypeUpdate
     end
   end
   object TimerAsync: TTimer

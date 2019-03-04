@@ -665,6 +665,7 @@ begin
         MenuItem := TMenuItem.Create(SelCurveType);
         MenuItem.Caption := CTS.GetTypeName;
         MenuItem.Name := 'CurveType' + IntToStr(Index);
+        MenuItem.Tag := CTS.GetTypeTag;
         Inc(Index);
         MenuItem.OnClick := OnSpecialCurveClick;
         SelCurveType.Add(MenuItem);

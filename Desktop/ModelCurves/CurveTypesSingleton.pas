@@ -16,7 +16,7 @@ unit CurveTypesSingleton;
 interface
 
 uses Classes, SysUtils, NamedPointsSet, CBRCComponent,
-  IntCurveFactory, IntCurveTypeSelector, IntCurveTypeIterator;
+  IntCurveFactory, IntCurveTypeSelector, IntCurveTypeIterator, crc;
 
 type
     { Class-reference type for base curve type. }
@@ -51,6 +51,7 @@ type
         function EndType: Boolean;
         function GetTypeName: string;
         function GetTypeId: TCurveTypeId;
+        function GetTypeTag: Integer;
         { Implementation of ICurveTypeSelector. }
         procedure SelectType(TypeId: TCurveTypeId);
         function GetSelectedType: TCurveTypeId;
@@ -156,6 +157,13 @@ begin
         Result := FSelectedType.CurveTypeId;
     end
         else raise EListError.Create(CurveTypeMustBeSelected);
+end;
+
+function TCurveTypesSingleton.GetTypeTag: Integer;
+var CurveTypeId: TCurveTypeId;
+begin
+    CurveTypeId := GetTypeId;
+    Result := crc64(0, @CurveTypeId, SizeOf(CurveTypeId));
 end;
 
 procedure TCurveTypesSingleton.SelectType(TypeId: TCurveTypeId);

@@ -938,7 +938,7 @@ object FormMain: TFormMain
         object SelCurveGaussian: TMenuItem
           Action = ActionSelCurveGaussian
           Checked = True
-          OnClick = ActionSelCurveGaussianExecute
+          OnClick = ActionSelCurveExecute
         end
         object SelCurveLorentzian: TMenuItem
           Action = ActionSelCurveLorentzian
@@ -2159,7 +2159,7 @@ object FormMain: TFormMain
     object ActionSelCurveGaussian: TAction
       Category = 'Model'
       Caption = 'Gaussian'
-      OnExecute = ActionSelCurveGaussianExecute
+      OnExecute = ActionSelCurveExecute
     end
     object ActionSelCurveLorentzian: TAction
       Category = 'Model'

@@ -271,7 +271,7 @@ type
     procedure ActionSelBackVisExecute(Sender: TObject);
     procedure ActionSelCharacteristicPointsExecute(Sender: TObject);
     procedure ActionSelCurveBoundsExecute(Sender: TObject);
-    procedure ActionSelCurveGaussianExecute(Sender: TObject);
+    procedure ActionSelCurveExecute(Sender: TObject);
     procedure ActionSelCurveLorentzianExecute(Sender: TObject);
     procedure ActionSelectAllExecute(Sender: TObject);
     procedure ActionSelEntireProfExecute(Sender: TObject);
@@ -1000,7 +1000,7 @@ begin
     ActionSelCurveGaussian.Tag := ActionSelCurveGaussian.Tag and $FFFFFFFD;
 end;
 
-procedure TFormMain.ActionSelCurveGaussianExecute(Sender: TObject);
+procedure TFormMain.ActionSelCurveExecute(Sender: TObject);
 begin
     FitClientApp_.FitClient.CurveTypeId := TGaussPointsSet.GetCurveTypeId_;
     ResetCurveMenuCheckedBits;

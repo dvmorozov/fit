@@ -163,8 +163,7 @@ begin
     FirstType;
     while not EndType do
     begin
-        if GUIDToString(FSelectedType.CurveTypeId) =
-            GUIDToString(TypeId) then Break;
+        if IsEqualGUID(FSelectedType.CurveTypeId, TypeId) then Break;
         NextType;
     end;
 end;

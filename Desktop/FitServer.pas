@@ -2268,8 +2268,7 @@ begin
                 //  ustanovka dop. parametrov
                 TF.MaxRFactor := MaxRFactor;
                 TF.CurveTypeId := CurveTypeId;
-                if GUIDToString(CurveTypeId) =
-                    GUIDToString(TSpecialPointsSet.GetCurveTypeId_) then
+                if IsEqualGUID(CurveTypeId, TSpecialPointsSet.GetCurveTypeId_) then
                     TF.SetSpecialCurve(FCurveExpr, Curve_parameters(Params.GetCopy));
                 TF.ShowCurMinExternal := ShowCurMinInternal;
                 TF.DoneProcExternal := DoneProc;

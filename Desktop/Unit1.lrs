@@ -339,39 +339,39 @@ LazarusResources.Add('TFormMain','FORMDATA',[
   +#2#10#7'OnClick'#7#17'ActionQuitExecute'#0#0#0#9'TMenuItem'#5'Model'#7'Capti'
   +'on'#6#6'&Model'#7'OnClick'#7#10'ModelClick'#0#9'TMenuItem'#12'SelCurveType'
   +#6'Action'#7#17'ActionPatternType'#0#9'TMenuItem'#16'SelCurveGaussian'#6'Act'
-  +'ion'#7#22'ActionSelCurveGaussian'#7'Checked'#9#7'OnClick'#7#29'ActionSelCur'
-  +'veGaussianExecute'#0#0#9'TMenuItem'#18'SelCurveLorentzian'#6'Action'#7#24'A'
-  +'ctionSelCurveLorentzian'#7'OnClick'#7#31'ActionSelCurveLorentzianExecute'#0
-  +#0#9'TMenuItem'#10'MenuItem13'#7'Caption'#6#1' '#0#0#9'TMenuItem'#18'CreateS'
-  +'pecialCurve'#6'Action'#7#24'ActionCreateSpecialCurve'#7'OnClick'#7#31'Actio'
-  +'nCreateSpecialCurveExecute'#0#0#0#9'TMenuItem'#16'RFactorIntervals'#7'Capti'
-  +'on'#6#30'Specimen Application Intervals'#0#9'TMenuItem'#23'SelRFactorInterv'
-  +'alsAuto'#6'Action'#7#29'ActionSelRFactorIntervalsAuto'#7'OnClick'#7'$Action'
-  +'SelRFactorIntervalsAutoExecute'#0#0#9'TMenuItem'#22'SelRFactorIntervalsVis'
-  +#6'Action'#7#28'ActionSelRFactorIntervalsVis'#7'OnClick'#7'#ActionSelRFactor'
-  +'IntervalsVisExecute'#0#0#9'TMenuItem'#10'MenuItem20'#7'Caption'#6#1' '#7'En'
-  +'abled'#8#0#0#9'TMenuItem'#22'RemoveRFactorIntervals'#6'Action'#7#28'ActionR'
-  +'emoveRFactorIntervals'#7'OnClick'#7'#ActionRemoveRFactorIntervalsExecute'#0
-  +#0#0#9'TMenuItem'#7'PeakPos'#7'Caption'#6#18'Specimen Positions'#7'OnClick'#7
-  +#12'PeakPosClick'#0#9'TMenuItem'#14'SelSpecPosAuto'#6'Action'#7#20'ActionSel'
-  +'SpecPosAuto'#9'AutoCheck'#9#7'OnClick'#7#27'ActionSelSpecPosAutoExecute'#0#0
-  +#9'TMenuItem'#9'MenuItem3'#6'Action'#7#28'ActionSelSpecPosAtEveryPoint'#0#0#9
-  +'TMenuItem'#13'SelSpecPosVis'#6'Action'#7#19'ActionSelSpecPosVis'#7'OnClick'
-  +#7#26'ActionSelSpecPosVisExecute'#0#0#9'TMenuItem'#10'MenuItem19'#7'Caption'
-  +#6#1' '#7'Enabled'#8#0#0#9'TMenuItem'#13'RemoveSpecPos'#6'Action'#7#19'Actio'
-  +'nRemoveSpecPos'#7'OnClick'#7#26'ActionRemoveSpecPosExecute'#0#0#0#9'TMenuIt'
-  +'em'#10'MenuItem16'#7'Caption'#6#1' '#7'Enabled'#8#0#0#9'TMenuItem'#14'SelCu'
-  +'rveBounds'#6'Action'#7#20'ActionSelCurveBounds'#7'OnClick'#7#27'ActionSelCu'
-  +'rveBoundsExecute'#0#0#9'TMenuItem'#9'MenuItem2'#7'Caption'#6#1' '#7'Enabled'
-  +#8#0#0#9'TMenuItem'#10'SaveAsText'#6'Action'#7#16'ActionSaveAsText'#7'OnClic'
-  +'k'#7#23'ActionSaveAsTextExecute'#0#0#0#9'TMenuItem'#7'Fitting'#7'Caption'#6
-  +#8'&Fitting'#0#9'TMenuItem'#9'DoAllAuto'#6'Action'#7#15'ActionDoAllAuto'#10
-  +'ImageIndex'#2#6#7'OnClick'#7#22'ActionDoAllAutoExecute'#0#0#9'TMenuItem'#9
-  +'MenuItem4'#7'Caption'#6#1' '#7'Enabled'#8#0#0#9'TMenuItem'#18'FitMinNumberO'
-  +'fSpec'#6'Action'#7#24'ActionFitMinNumberOfSpec'#7'OnClick'#7#31'ActionFitMi'
-  +'nNumberOfSpecExecute'#0#0#9'TMenuItem'#16'FitMinDifference'#6'Action'#7#22
-  +'ActionFitMinDifference'#7'OnClick'#7#29'ActionFitMinDifferenceExecute'#0#0#9
-  +'TMenuItem'#11'StopFitting'#6'Action'#7#17'ActionStopFitting'#11'Bitmap.Data'
+  +'ion'#7#22'ActionSelCurveGaussian'#7'Checked'#9#7'OnClick'#7#21'ActionSelCur'
+  +'veExecute'#0#0#9'TMenuItem'#18'SelCurveLorentzian'#6'Action'#7#24'ActionSel'
+  +'CurveLorentzian'#7'OnClick'#7#31'ActionSelCurveLorentzianExecute'#0#0#9'TMe'
+  +'nuItem'#10'MenuItem13'#7'Caption'#6#1' '#0#0#9'TMenuItem'#18'CreateSpecialC'
+  +'urve'#6'Action'#7#24'ActionCreateSpecialCurve'#7'OnClick'#7#31'ActionCreate'
+  +'SpecialCurveExecute'#0#0#0#9'TMenuItem'#16'RFactorIntervals'#7'Caption'#6#30
+  +'Specimen Application Intervals'#0#9'TMenuItem'#23'SelRFactorIntervalsAuto'#6
+  +'Action'#7#29'ActionSelRFactorIntervalsAuto'#7'OnClick'#7'$ActionSelRFactorI'
+  +'ntervalsAutoExecute'#0#0#9'TMenuItem'#22'SelRFactorIntervalsVis'#6'Action'#7
+  +#28'ActionSelRFactorIntervalsVis'#7'OnClick'#7'#ActionSelRFactorIntervalsVis'
+  +'Execute'#0#0#9'TMenuItem'#10'MenuItem20'#7'Caption'#6#1' '#7'Enabled'#8#0#0
+  +#9'TMenuItem'#22'RemoveRFactorIntervals'#6'Action'#7#28'ActionRemoveRFactorI'
+  +'ntervals'#7'OnClick'#7'#ActionRemoveRFactorIntervalsExecute'#0#0#0#9'TMenuI'
+  +'tem'#7'PeakPos'#7'Caption'#6#18'Specimen Positions'#7'OnClick'#7#12'PeakPos'
+  +'Click'#0#9'TMenuItem'#14'SelSpecPosAuto'#6'Action'#7#20'ActionSelSpecPosAut'
+  +'o'#9'AutoCheck'#9#7'OnClick'#7#27'ActionSelSpecPosAutoExecute'#0#0#9'TMenuI'
+  +'tem'#9'MenuItem3'#6'Action'#7#28'ActionSelSpecPosAtEveryPoint'#0#0#9'TMenuI'
+  +'tem'#13'SelSpecPosVis'#6'Action'#7#19'ActionSelSpecPosVis'#7'OnClick'#7#26
+  +'ActionSelSpecPosVisExecute'#0#0#9'TMenuItem'#10'MenuItem19'#7'Caption'#6#1
+  +' '#7'Enabled'#8#0#0#9'TMenuItem'#13'RemoveSpecPos'#6'Action'#7#19'ActionRem'
+  +'oveSpecPos'#7'OnClick'#7#26'ActionRemoveSpecPosExecute'#0#0#0#9'TMenuItem'
+  +#10'MenuItem16'#7'Caption'#6#1' '#7'Enabled'#8#0#0#9'TMenuItem'#14'SelCurveB'
+  +'ounds'#6'Action'#7#20'ActionSelCurveBounds'#7'OnClick'#7#27'ActionSelCurveB'
+  +'oundsExecute'#0#0#9'TMenuItem'#9'MenuItem2'#7'Caption'#6#1' '#7'Enabled'#8#0
+  +#0#9'TMenuItem'#10'SaveAsText'#6'Action'#7#16'ActionSaveAsText'#7'OnClick'#7
+  +#23'ActionSaveAsTextExecute'#0#0#0#9'TMenuItem'#7'Fitting'#7'Caption'#6#8'&F'
+  +'itting'#0#9'TMenuItem'#9'DoAllAuto'#6'Action'#7#15'ActionDoAllAuto'#10'Imag'
+  +'eIndex'#2#6#7'OnClick'#7#22'ActionDoAllAutoExecute'#0#0#9'TMenuItem'#9'Menu'
+  +'Item4'#7'Caption'#6#1' '#7'Enabled'#8#0#0#9'TMenuItem'#18'FitMinNumberOfSpe'
+  +'c'#6'Action'#7#24'ActionFitMinNumberOfSpec'#7'OnClick'#7#31'ActionFitMinNum'
+  +'berOfSpecExecute'#0#0#9'TMenuItem'#16'FitMinDifference'#6'Action'#7#22'Acti'
+  +'onFitMinDifference'#7'OnClick'#7#29'ActionFitMinDifferenceExecute'#0#0#9'TM'
+  +'enuItem'#11'StopFitting'#6'Action'#7#17'ActionStopFitting'#11'Bitmap.Data'
   +#10':'#4#0#0'6'#4#0#0'BM6'#4#0#0#0#0#0#0'6'#0#0#0'('#0#0#0#16#0#0#0#16#0#0#0
   +#1#0' '#0#0#0#0#0#0#4#0#0'd'#0#0#0'd'#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#223#156'4L'#231#171'F'#157#233#180'Q'#233#236#184'X'#244#236
@@ -1474,16 +1474,16 @@ LazarusResources.Add('TFormMain','FORMDATA',[
   +'TAction'#14'ActionGlossary'#8'Category'#6#4'Help'#7'Caption'#6#8'Glossary'#0
   +#0#7'TAction'#11'ActionAbout'#8'Category'#6#4'Help'#7'Caption'#6#9'&About...'
   ,#9'OnExecute'#7#18'ActionAboutExecute'#0#0#7'TAction'#22'ActionSelCurveGauss'
-  +'ian'#8'Category'#6#5'Model'#7'Caption'#6#8'Gaussian'#9'OnExecute'#7#29'Acti'
-  +'onSelCurveGaussianExecute'#0#0#7'TAction'#24'ActionSelCurveLorentzian'#8'Ca'
-  +'tegory'#6#5'Model'#7'Caption'#6#10'Lorentzian'#9'OnExecute'#7#31'ActionSelC'
-  +'urveLorentzianExecute'#0#0#7'TAction'#28'ActionSelSpecPosAtEveryPoint'#8'Ca'
-  +'tegory'#6#5'Model'#7'Caption'#6#14'At Every Point'#9'OnExecute'#7'#ActionSe'
-  +'lSpecPosAtEveryPointExecute'#0#0#7'TAction'#19'ActionAnimationMode'#8'Categ'
-  +'ory'#6#4'View'#7'Caption'#6#14'Animation Mode'#9'OnExecute'#7#26'ActionAnim'
-  +'ationModeExecute'#8'OnUpdate'#7#25'ActionAnimationModeUpdate'#0#0#7'TAction'
-  +#17'ActionPatternType'#8'Category'#6#5'Model'#7'Caption'#6#12'Pattern Type'
-  +#18'DisableIfNoHandler'#8#8'OnUpdate'#7#23'ActionPatternTypeUpdate'#0#0#0#6
-  +'TTimer'#10'TimerAsync'#7'Enabled'#8#8'Interval'#3#208#7#7'OnTimer'#7#15'Tim'
-  +'erAsyncTimer'#4'left'#3#176#2#0#0#0
+  +'ian'#8'Category'#6#5'Model'#7'Caption'#6#8'Gaussian'#9'OnExecute'#7#21'Acti'
+  +'onSelCurveExecute'#0#0#7'TAction'#24'ActionSelCurveLorentzian'#8'Category'#6
+  +#5'Model'#7'Caption'#6#10'Lorentzian'#9'OnExecute'#7#31'ActionSelCurveLorent'
+  +'zianExecute'#0#0#7'TAction'#28'ActionSelSpecPosAtEveryPoint'#8'Category'#6#5
+  +'Model'#7'Caption'#6#14'At Every Point'#9'OnExecute'#7'#ActionSelSpecPosAtEv'
+  +'eryPointExecute'#0#0#7'TAction'#19'ActionAnimationMode'#8'Category'#6#4'Vie'
+  +'w'#7'Caption'#6#14'Animation Mode'#9'OnExecute'#7#26'ActionAnimationModeExe'
+  +'cute'#8'OnUpdate'#7#25'ActionAnimationModeUpdate'#0#0#7'TAction'#17'ActionP'
+  +'atternType'#8'Category'#6#5'Model'#7'Caption'#6#12'Pattern Type'#18'Disable'
+  +'IfNoHandler'#8#8'OnUpdate'#7#23'ActionPatternTypeUpdate'#0#0#0#6'TTimer'#10
+  +'TimerAsync'#7'Enabled'#8#8'Interval'#3#208#7#7'OnTimer'#7#15'TimerAsyncTime'
+  +'r'#4'left'#3#176#2#0#0#0
 ]);

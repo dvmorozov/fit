@@ -1303,32 +1303,27 @@ function TFitTask.GetPatternSpecimen: TCurvePointsSet;
 var i: LongInt;
     P: TSpecialCurveParameter;
 begin
-    if GUIDToString(FCurveTypeId) =
-        GUIDToString(TLorentzPointsSet.GetCurveTypeId_) then
+    if IsEqualGUID(FCurveTypeId, TLorentzPointsSet.GetCurveTypeId_) then
     begin
         Result := TLorentzPointsSet.Create(nil);
     end
     else
-    if GUIDToString(FCurveTypeId) =
-        GUIDToString(TGaussPointsSet.GetCurveTypeId_) then
+    if IsEqualGUID(FCurveTypeId, TGaussPointsSet.GetCurveTypeId_) then
         Result := TGaussPointsSet.Create(nil)
     else
-    if GUIDToString(FCurveTypeId) =
-        GUIDToString(TPseudoVoigtPointsSet.GetCurveTypeId_) then
+    if IsEqualGUID(FCurveTypeId, TPseudoVoigtPointsSet.GetCurveTypeId_) then
     begin
         Result := T2BranchesPseudoVoigtPointsSet.Create(nil);
         // vremenno, dlya proverki algoritma...
         //??? Result := TPseudoVoigtPointsSet.Create(nil)
     end
     else
-    if GUIDToString(FCurveTypeId) =
-        GUIDToString(TAsymPseudoVoigtPointsSet.GetCurveTypeId_) then
+    if IsEqualGUID(FCurveTypeId, TAsymPseudoVoigtPointsSet.GetCurveTypeId_) then
     begin
         Result := TAsymPseudoVoigtPointsSet.Create(nil)
     end
     else
-    if GUIDToString(FCurveTypeId) =
-        GUIDToString(TSpecialPointsSet.GetCurveTypeId_) then
+    if IsEqualGUID(FCurveTypeId, TSpecialPointsSet.GetCurveTypeId_) then
     begin
         Result := TSpecialPointsSet.Create(nil);
         TSpecialPointsSet(Result).Expression := FCurveExpr;
@@ -1336,8 +1331,7 @@ begin
             Curve_parameters(Params.GetCopy));
     end
     else
-    if GUIDToString(FCurveTypeId) =
-        GUIDToString(T2BranchesPseudoVoigtPointsSet.GetCurveTypeId_) then
+    if IsEqualGUID(FCurveTypeId, T2BranchesPseudoVoigtPointsSet.GetCurveTypeId_) then
     begin
         //  By default.
         Result := T2BranchesPseudoVoigtPointsSet.Create(nil);
@@ -1507,8 +1501,7 @@ begin
             //  teper' sozdaetsya ekzemplyar tol'ko
             //  pol'zovatel'skoy krivoy, kotoraya ne
             //  imeet parametra polozheniya
-            if GUIDToString(FCurveTypeId) =
-                GUIDToString(TSpecialPointsSet.GetCurveTypeId_) then
+            if IsEqualGUID(FCurveTypeId, TSpecialPointsSet.GetCurveTypeId_) then
             begin
                 GP := GetPatternSpecimen;
 

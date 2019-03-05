@@ -43,18 +43,12 @@ end;
 
 function TLorentzPointsSet.GetCurveTypeId: TCurveTypeId;
 begin
-    Result := StringToGUID('{7ca6fdaf-95b7-4d84-bcba-130c828407cc}');
+    Result := GetCurveTypeId_;
 end;
 
 class function TLorentzPointsSet.GetCurveTypeId_: TCurveTypeId;
-var Curve: TLorentzPointsSet;
 begin
-    try
-        Curve := TLorentzPointsSet.Create(nil);
-        Result := Curve.GetCurveTypeId;
-    finally
-        Curve.Free;
-    end;
+    Result := StringToGUID('{7ca6fdaf-95b7-4d84-bcba-130c828407cc}');
 end;
 
 procedure TLorentzPointsSet.DoCalc(const Intervals: TPointsSet);

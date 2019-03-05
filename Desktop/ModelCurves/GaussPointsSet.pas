@@ -70,18 +70,12 @@ end;
 
 function TGaussPointsSet.GetCurveTypeId: TCurveTypeId;
 begin
-    Result := StringToGUID('{ff4e399c-c33c-482e-84d7-952700bcd4ae}');
+    Result := GetCurveTypeId_;
 end;
 
 class function TGaussPointsSet.GetCurveTypeId_: TCurveTypeId;
-var Curve: TGaussPointsSet;
 begin
-    try
-        Curve := TGaussPointsSet.Create(nil);
-        Result := Curve.GetCurveTypeId;
-    finally
-        Curve.Free;
-    end;
+    Result := StringToGUID('{ff4e399c-c33c-482e-84d7-952700bcd4ae}');
 end;
 
 procedure TGaussPointsSet.DoCalc(const Intervals: TPointsSet);

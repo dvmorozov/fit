@@ -64,18 +64,12 @@ end;
 
 function TSpecialPointsSet.GetCurveTypeId: TCurveTypeId;
 begin
-    Result := StringToGUID('{d8cafce5-8b03-4cce-9e93-ea28acb8e7ca}');
+    Result := GetCurveTypeId_;
 end;
 
 class function TSpecialPointsSet.GetCurveTypeId_: TCurveTypeId;
-var Curve: TSpecialPointsSet;
 begin
-    try
-        Curve := TSpecialPointsSet.Create(nil);
-        Result := Curve.GetCurveTypeId;
-    finally
-        Curve.Free;
-    end;
+    Result := StringToGUID('{d8cafce5-8b03-4cce-9e93-ea28acb8e7ca}');
 end;
 
 function TSpecialPointsSet.CalcValue(ArgValue: Double): Double;

@@ -215,18 +215,12 @@ end;
 
 function T2BranchesPseudoVoigtPointsSet.GetCurveTypeId: TCurveTypeId;
 begin
-    Result := StringToGUID('{6de06c1b-e51a-48c6-b036-c81a841ec468}');
+    Result := GetCurveTypeId_;
 end;
 
 class function T2BranchesPseudoVoigtPointsSet.GetCurveTypeId_: TCurveTypeId;
-var Curve: T2BranchesPseudoVoigtPointsSet;
 begin
-    try
-        Curve := T2BranchesPseudoVoigtPointsSet.Create(nil);
-        Result := Curve.GetCurveTypeId;
-    finally
-        Curve.Free;
-    end;
+    Result := StringToGUID('{6de06c1b-e51a-48c6-b036-c81a841ec468}');
 end;
 
 procedure T2BranchesPseudoVoigtPointsSet.SetParamByName(

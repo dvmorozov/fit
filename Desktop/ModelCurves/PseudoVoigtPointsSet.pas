@@ -143,18 +143,12 @@ end;
 
 function TPseudoVoigtPointsSet.GetCurveTypeId: TCurveTypeId;
 begin
-    Result := StringToGUID('{9f27dc7c-970f-4dac-88cd-f5fb3400d38d}');
+    Result := GetCurveTypeId_;
 end;
 
 class function TPseudoVoigtPointsSet.GetCurveTypeId_: TCurveTypeId;
-var Curve: TPseudoVoigtPointsSet;
 begin
-    try
-        Curve := TPseudoVoigtPointsSet.Create(nil);
-        Result := Curve.GetCurveTypeId;
-    finally
-        Curve.Free;
-    end;
+    Result := StringToGUID('{9f27dc7c-970f-4dac-88cd-f5fb3400d38d}');
 end;
 
 function TPseudoVoigtPointsSet.GetParamByName(Name: string): Double;

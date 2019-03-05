@@ -53,6 +53,7 @@ type
         function GetTypeName: string; override;
         { Overrides method defined in TNamedPointsSet. }
         function GetCurveTypeId: TCurveTypeId; override;
+        class function GetCurveTypeId_: TCurveTypeId;
 
         function HasDeltaSigma: Boolean;
 
@@ -121,9 +122,14 @@ begin
     Result := 'Asym. Pseudo-Voigt';
 end;
 
-function TAsymPseudoVoigtPointsSet.GetCurveTypeId: TCurveTypeId;
+class function TAsymPseudoVoigtPointsSet.GetCurveTypeId_: TCurveTypeId;
 begin
     Result := StringToGUID('{74a6ec30-a019-475d-99a3-b62c4ab03a6c}');
+end;
+
+function TAsymPseudoVoigtPointsSet.GetCurveTypeId: TCurveTypeId;
+begin
+    Result := GetCurveTypeId_;
 end;
 
 procedure TAsymPseudoVoigtPointsSet.SetParamByName(Name: string; Value: Double);

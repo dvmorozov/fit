@@ -322,7 +322,7 @@ begin
             TFormMain(Form).Chart.AddSerie(LS);
             PointsSetList.Add(SA);
 
-            LS.Title := SA.GetTypeName + ' ' + IntToStr(j+1);
+            LS.Title := SA.GetCurveTypeName + ' ' + IntToStr(j+1);
 {$IFDEF USE_LEGEND}
             if FUpdateLegends then
             begin

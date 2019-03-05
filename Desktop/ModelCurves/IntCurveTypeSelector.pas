@@ -20,8 +20,8 @@ uses Classes, SysUtils, NamedPointsSet;
 type
     { Interface defining basic operation for selecting curve type. }
     ICurveTypeSelector = interface
-        procedure SelectType(TypeId: TCurveTypeId);
-        function GetSelectedType: TCurveTypeId;
+        procedure SelectCurveType(TypeId: TCurveTypeId);
+        function GetSelectedCurveType: TCurveTypeId;
     end;
 
 implementation

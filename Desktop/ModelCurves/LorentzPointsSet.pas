@@ -26,7 +26,7 @@ type
 
     public
         { Overrides method defined in TNamedPointsSet. }
-        function GetTypeName: string; override;
+        function GetCurveTypeName: string; override;
         { Overrides method defined in TNamedPointsSet. }
         function GetCurveTypeId: TCurveTypeId; override;
         class function GetCurveTypeId_: TCurveTypeId;
@@ -36,7 +36,7 @@ implementation
 
 {========================== TLorentzPointsSet =================================}
 
-function TLorentzPointsSet.GetTypeName: string;
+function TLorentzPointsSet.GetCurveTypeName: string;
 begin
     Result := 'Lorentzian';
 end;

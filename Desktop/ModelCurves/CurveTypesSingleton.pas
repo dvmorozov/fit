@@ -28,6 +28,7 @@ type
         CurveTypeName: string;
         CurveClass: TCurveClass;
         CurveTypeId: TCurveTypeId;
+        CurveTypeTag: Integer;
     end;
 
     { Class-singleton containing information about curve types. }
@@ -46,15 +47,15 @@ type
         { Implementation of ICurveFactory. }
         function CreatePointsSet(TypeId: TCurveTypeId): TNamedPointsSet;
         { Implementation of ICurveTypeIterator. }
-        procedure FirstType;
-        procedure NextType;
-        function EndType: Boolean;
-        function GetTypeName: string;
-        function GetTypeId: TCurveTypeId;
-        function GetTypeTag: Integer;
+        procedure FirstCurveType;
+        procedure NextCurveType;
+        function EndCurveType: Boolean;
+        function GetCurveTypeName: string;
+        function GetCurveTypeId: TCurveTypeId;
+        function GetCurveTypeTag: Integer;
         { Implementation of ICurveTypeSelector. }
-        procedure SelectType(TypeId: TCurveTypeId);
-        function GetSelectedType: TCurveTypeId;
+        procedure SelectCurveType(TypeId: TCurveTypeId);
+        function GetSelectedCurveType: TCurveTypeId;
     end;
 
 implementation
@@ -90,7 +91,7 @@ begin
     //  Instantiates curve object to call its methods.
     Curve := CurveClass.Create(nil);
     try
-        CurveType.CurveTypeName := Curve.GetTypeName;
+        CurveType.CurveTypeName := Curve.GetCurveTypeName;
         CurveType.CurveTypeId := Curve.GetCurveTypeId;
     finally
       Curve.Free;
@@ -98,7 +99,7 @@ begin
     FCurveTypes.Add(CurveType);
 end;
 
-procedure TCurveTypesSingleton.FirstType;
+procedure TCurveTypesSingleton.FirstCurveType;
 begin
     if FCurveTypes.Count <> 0 then
         FSelectedType := FCurveTypes.First
@@ -106,7 +107,7 @@ begin
         FSelectedType := nil;
 end;
 
-procedure TCurveTypesSingleton.NextType;
+procedure TCurveTypesSingleton.NextCurveType;
 var ItemIndex: Integer;
 begin
     if FSelectedType <> nil then
@@ -123,7 +124,7 @@ begin
         raise EListError.Create(CurveTypeMustBeSelected);
 end;
 
-function TCurveTypesSingleton.EndType: Boolean;
+function TCurveTypesSingleton.EndCurveType: Boolean;
 begin
     if FSelectedType <> nil then
     begin
@@ -141,7 +142,7 @@ begin
     end;
 end;
 
-function TCurveTypesSingleton.GetTypeName: string;
+function TCurveTypesSingleton.GetCurveTypeName: string;
 begin
     if FSelectedType <> nil then
     begin
@@ -150,7 +151,7 @@ begin
         else raise EListError.Create(CurveTypeMustBeSelected);
 end;
 
-function TCurveTypesSingleton.GetTypeId: TCurveTypeId;
+function TCurveTypesSingleton.GetCurveTypeId: TCurveTypeId;
 begin
     if FSelectedType <> nil then
     begin
@@ -159,26 +160,26 @@ begin
         else raise EListError.Create(CurveTypeMustBeSelected);
 end;
 
-function TCurveTypesSingleton.GetTypeTag: Integer;
+function TCurveTypesSingleton.GetCurveTypeTag: Integer;
 var CurveTypeId: TCurveTypeId;
 begin
-    CurveTypeId := GetTypeId;
+    CurveTypeId := GetCurveTypeId;
     Result := crc64(0, @CurveTypeId, SizeOf(CurveTypeId));
 end;
 
-procedure TCurveTypesSingleton.SelectType(TypeId: TCurveTypeId);
+procedure TCurveTypesSingleton.SelectCurveType(TypeId: TCurveTypeId);
 begin
-    FirstType;
-    while not EndType do
+    FirstCurveType;
+    while not EndCurveType do
     begin
         if IsEqualGUID(FSelectedType.CurveTypeId, TypeId) then Break;
-        NextType;
+        NextCurveType;
     end;
 end;
 
-function TCurveTypesSingleton.GetSelectedType: TCurveTypeId;
+function TCurveTypesSingleton.GetSelectedCurveType: TCurveTypeId;
 begin
-    Result := GetTypeId;
+    Result := GetCurveTypeId;
 end;
 
 end.

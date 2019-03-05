@@ -33,7 +33,7 @@ type
         procedure SetCurveTypeId(CurveTypeId: TCurveTypeId); virtual;
         { Sets name of curve type. The method is used in deserializing
           objects received from server. }
-        procedure SetTypeName(Name: string); virtual;
+        procedure SetCurveTypeName(Name: string); virtual;
 
     public
         { Returns unique identifier of curve type. }
@@ -41,19 +41,20 @@ type
         { Returns name of curve type. It's better to use function
           instead of property because property assumes storing data
           in object, but storing any data is not necessary in this case. }
-        function GetTypeName: string; virtual;
+        function GetCurveTypeName: string; virtual;
+        //function GetCurveTypeTag
     end;
 
 implementation
 
 {============================ TNamedPointsSet =================================}
 
-function TNamedPointsSet.GetTypeName: string;
+function TNamedPointsSet.GetCurveTypeName: string;
 begin
     Result := FName;
 end;
 
-procedure TNamedPointsSet.SetTypeName(Name: string);
+procedure TNamedPointsSet.SetCurveTypeName(Name: string);
 begin
     FName := Name;
 end;

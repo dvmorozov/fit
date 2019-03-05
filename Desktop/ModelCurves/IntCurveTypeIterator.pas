@@ -20,11 +20,11 @@ uses Classes, SysUtils, NamedPointsSet;
 type
     { Interface defining basic operation for iterating through curve types. }
     ICurveTypeIterator = interface
-        procedure FirstType;
-        procedure NextType;
-        function EndType: Boolean;
-        function GetTypeName: string;
-        function GetTypeId: TCurveTypeId;
+        procedure FirstCurveType;
+        procedure NextCurveType;
+        function EndCurveType: Boolean;
+        function GetCurveTypeName: string;
+        function GetCurveTypeId: TCurveTypeId;
     end;
 
 implementation

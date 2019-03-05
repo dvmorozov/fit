@@ -1449,7 +1449,7 @@ begin
     try
         Result := 0; ErrMsg := '';
         CPS := Server.GetSpecimenPoints(SpecIndex);
-        Points := CPS; Name := CPS.GetTypeName; Result := 0;
+        Points := CPS; Name := CPS.GetCurveTypeName; Result := 0;
     except
         on E: EUserException do
         begin

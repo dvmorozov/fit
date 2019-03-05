@@ -50,7 +50,7 @@ type
     public
         constructor Create(AOwner: TComponent); override;
         { Overrides method defined in TNamedPointsSet. }
-        function GetTypeName: string; override;
+        function GetCurveTypeName: string; override;
         { Overrides method defined in TNamedPointsSet. }
         function GetCurveTypeId: TCurveTypeId; override;
         class function GetCurveTypeId_: TCurveTypeId;
@@ -136,7 +136,7 @@ begin
     if Assigned(EtaP) then Result := True else Result := False;
 end;
 
-function TPseudoVoigtPointsSet.GetTypeName: string;
+function TPseudoVoigtPointsSet.GetCurveTypeName: string;
 begin
     Result := 'Pseudo-Voigt';
 end;

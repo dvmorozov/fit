@@ -659,20 +659,20 @@ begin
     SelCurveType.Clear;
     //  Creates menu items for curve types.
     //  The list must contain at least one item.
-    CTS.FirstType;
+    CTS.FirstCurveType;
     while True do
     begin
         MenuItem := TMenuItem.Create(SelCurveType);
-        MenuItem.Caption := CTS.GetTypeName;
+        MenuItem.Caption := CTS.GetCurveTypeName;
         MenuItem.Name := 'CurveType' + IntToStr(Index);
-        MenuItem.Tag := CTS.GetTypeTag;
+        MenuItem.Tag := CTS.GetCurveTypeTag;
         Inc(Index);
-        MenuItem.OnClick := OnSpecialCurveClick;
+        MenuItem.Action := ActionSelCurveGaussian;
         SelCurveType.Add(MenuItem);
         //  The last item should be processed as well.
-        if CTS.EndType then Break
+        if CTS.EndCurveType then Break
         else
-            CTS.NextType;
+            CTS.NextCurveType;
     end;
 end;
 
@@ -1003,9 +1003,31 @@ end;
 
 procedure TFormMain.ActionSelCurveExecute(Sender: TObject);
 begin
-    FitClientApp_.FitClient.CurveTypeId := TGaussPointsSet.GetCurveTypeId_;
-    ResetCurveMenuCheckedBits;
-    ActionSelCurveGaussian.Tag := ActionSelCurveGaussian.Tag or 2;
+    {
+    if TMenuItem(Sender).Tag = TGaussPointsSet.Tag then
+        FitClientApp_.FitClient.CurveTypeId := TGaussPointsSet.GetCurveTypeId_;
+    else
+    if TMenuItem(Sender).Tag = TLorentzPointsSet.Tag then
+        FitClientApp_.FitClient.CurveTypeId := TLorentzPointsSet.GetCurveTypeId_;
+    else
+    if TMenuItem(Sender).Tag = TPseudoVoigtPointsSet.Tag then
+        FitClientApp_.FitClient.CurveTypeId := TPseudoVoigtPointsSet.GetCurveTypeId_;
+    else
+    if TMenuItem(Sender).Tag = TAsymPseudoVoigtPointsSet.Tag then
+        FitClientApp_.FitClient.CurveTypeId := TAsymPseudoVoigtPointsSet.GetCurveTypeId_;
+    else
+    if TMenuItem(Sender).Tag = T2BranchesPseudoVoigtPointsSet.Tag then
+        FitClientApp_.FitClient.CurveTypeId := T2BranchesPseudoVoigtPointsSet.GetCurveTypeId_;
+    else
+    if TMenuItem(Sender).Tag = TSpecialPointsSet.Tag then
+    begin
+        ActionCreateSpecialCurveExecute(Sender);
+        Exit;
+    end;
+    }
+
+    //ResetCurveMenuCheckedBits;
+    //ActionSelCurveGaussian.Tag := ActionSelCurveGaussian.Tag or 2;
 end;
 
 procedure TFormMain.ActionSelCurveLorentzianExecute(Sender: TObject);

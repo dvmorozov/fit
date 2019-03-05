@@ -45,7 +45,7 @@ type
     public
         procedure CopyParameters(const Dest: TObject); override;
         { Overrides method defined in TNamedPointsSet. }
-        function GetTypeName: string; override;
+        function GetCurveTypeName: string; override;
         { Overrides method defined in TNamedPointsSet. }
         function GetCurveTypeId: TCurveTypeId; override;
         class function GetCurveTypeId_: TCurveTypeId;
@@ -57,7 +57,7 @@ implementation
 
 {=========================== TSpecialPointsSet ================================}
 
-function TSpecialPointsSet.GetTypeName: string;
+function TSpecialPointsSet.GetCurveTypeName: string;
 begin
     Result := 'User defined';
 end;

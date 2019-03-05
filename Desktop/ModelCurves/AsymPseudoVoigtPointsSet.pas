@@ -50,7 +50,7 @@ type
     public
         constructor Create(AOwner: TComponent); override;
         { Overrides method defined in TNamedPointsSet. }
-        function GetTypeName: string; override;
+        function GetCurveTypeName: string; override;
         { Overrides method defined in TNamedPointsSet. }
         function GetCurveTypeId: TCurveTypeId; override;
         class function GetCurveTypeId_: TCurveTypeId;
@@ -117,7 +117,7 @@ begin
     if Assigned(DeltaSigmaP) then Result := True else Result := False;
 end;
 
-function TAsymPseudoVoigtPointsSet.GetTypeName: string;
+function TAsymPseudoVoigtPointsSet.GetCurveTypeName: string;
 begin
     Result := 'Asym. Pseudo-Voigt';
 end;

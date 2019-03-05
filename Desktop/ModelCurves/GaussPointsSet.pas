@@ -28,7 +28,7 @@ type
     public
         constructor Create(AOwner: TComponent); override;
         { Overrides method defined in TNamedPointsSet. }
-        function GetTypeName: string; override;
+        function GetCurveTypeName: string; override;
         { Overrides method defined in TNamedPointsSet. }
         function GetCurveTypeId: TCurveTypeId; override;
         class function GetCurveTypeId_: TCurveTypeId;
@@ -63,7 +63,7 @@ begin
     InitLinks;
 end;
 
-function TGaussPointsSet.GetTypeName: string;
+function TGaussPointsSet.GetCurveTypeName: string;
 begin
     Result := 'Gaussian';
 end;

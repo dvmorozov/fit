@@ -94,12 +94,12 @@
     <id>Relation</id>
     <coordinates>
       <x>440</x>
-      <y>530</y>
+      <y>540</y>
       <w>220</w>
-      <h>130</h>
+      <h>120</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>200.0;10.0;200.0;80.0;10.0;80.0;10.0;110.0</additional_attributes>
+    <additional_attributes>200.0;10.0;200.0;70.0;10.0;70.0;10.0;100.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -116,12 +116,12 @@
     <id>Relation</id>
     <coordinates>
       <x>670</x>
-      <y>530</y>
+      <y>540</y>
       <w>30</w>
-      <h>130</h>
+      <h>120</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;110.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -160,12 +160,12 @@
     <id>Relation</id>
     <coordinates>
       <x>190</x>
-      <y>530</y>
+      <y>540</y>
       <w>450</w>
-      <h>130</h>
+      <h>120</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>430.0;10.0;430.0;60.0;10.0;60.0;10.0;110.0</additional_attributes>
+    <additional_attributes>430.0;10.0;430.0;50.0;10.0;50.0;10.0;100.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -173,17 +173,18 @@
       <x>520</x>
       <y>400</y>
       <w>320</w>
-      <h>140</h>
+      <h>150</h>
     </coordinates>
     <panel_attributes>TNamedPointsSet
 --
-_-FCurveTypeId: TCurveTypeId_
-_-FTypeName: string_
+-FCurveTypeId: TCurveTypeId
+-FCurveTypeName: string
 --
-_+GetCurveTypeId: TCurveTypeId_
-_-SetCurveTypeId(CurveTypeId: TCurveTypeId)_
-_+GetTypeName: string_
-_-SetTypeName(TypeName: string)_
++GetCurveTypeId: TCurveTypeId
+-SetCurveTypeId(CurveTypeId: TCurveTypeId)
++GetTypeName: string
+-SetTypeName(TypeName: string)
++GetTypeTag: Integer
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -202,12 +203,12 @@ _-SetTypeName(TypeName: string)_
     <id>Relation</id>
     <coordinates>
       <x>730</x>
-      <y>530</y>
+      <y>540</y>
       <w>460</w>
-      <h>130</h>
+      <h>120</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;60.0;440.0;60.0;440.0;110.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0;440.0;50.0;440.0;100.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -568,14 +569,14 @@ GetSelectedType: TCurveTypeId</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>560</x>
-      <y>530</y>
+      <y>540</y>
       <w>130</w>
-      <h>340</h>
+      <h>330</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-
 m1=1
 m2=n</panel_attributes>
-    <additional_attributes>80.0;320.0;80.0;260.0;10.0;260.0;10.0;100.0;100.0;100.0;100.0;10.0</additional_attributes>
+    <additional_attributes>80.0;310.0;80.0;250.0;10.0;250.0;10.0;90.0;100.0;90.0;100.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
@@ -604,14 +605,14 @@ type identifier.</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>680</x>
-      <y>530</y>
+      <y>540</y>
       <w>200</w>
-      <h>760</h>
+      <h>750</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=1
 m2=1</panel_attributes>
-    <additional_attributes>40.0;10.0;40.0;80.0;180.0;80.0;180.0;410.0;10.0;410.0;10.0;740.0</additional_attributes>
+    <additional_attributes>40.0;10.0;40.0;70.0;180.0;70.0;180.0;400.0;10.0;400.0;10.0;730.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>

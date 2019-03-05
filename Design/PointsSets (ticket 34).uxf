@@ -182,9 +182,9 @@
 --
 +GetCurveTypeId: TCurveTypeId
 -SetCurveTypeId(CurveTypeId: TCurveTypeId)
-+GetTypeName: string
--SetTypeName(TypeName: string)
-+GetTypeTag: Integer
++GetCurveTypeName: string
+-SetCurveTypeName(TypeName: string)
++GetCurveTypeTag: Integer
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -437,19 +437,19 @@ CreatePointsSet(TypeId: TCurveTypeId): TNamedPointsSet</panel_attributes>
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>820</x>
+      <x>800</x>
       <y>1070</y>
-      <w>180</w>
+      <w>220</w>
       <h>170</h>
     </coordinates>
     <panel_attributes>ICurveTypeIterator
 --
-FirstType
-NextType
-EndType: Boolean
-GetTypeName: string
-GetTypeId: TCurveTypeId
-GetTypeTag: Integer</panel_attributes>
+FirstCurveType
+NextCurveType
+EndCurveType: Boolean
+GetCurveTypeName: string
+GetCurveTypeId: TCurveTypeId
+GetCurveTypeTag: Integer</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -466,15 +466,15 @@ GetTypeTag: Integer</panel_attributes>
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>400</x>
+      <x>380</x>
       <y>1070</y>
-      <w>240</w>
+      <w>280</w>
       <h>100</h>
     </coordinates>
     <panel_attributes>ICurveTypeSelector
 --
-SelectType(TypeId: TCurveTypeId)
-GetSelectedType: TCurveTypeId</panel_attributes>
+SelectCurveType(TypeId: TCurveTypeId)
+GetSelectedCurveType: TCurveTypeId</panel_attributes>
     <additional_attributes/>
   </element>
   <element>

@@ -52,7 +52,7 @@ type
         function EndCurveType: Boolean;
         function GetCurveTypeName: string;
         function GetCurveTypeId: TCurveTypeId;
-        function GetCurveTypeTag: Integer;
+        function GetCurveTypeTag(CurveTypeId: TCurveTypeId): Integer;
         { Implementation of ICurveTypeSelector. }
         procedure SelectCurveType(TypeId: TCurveTypeId);
         function GetSelectedCurveType: TCurveTypeId;
@@ -160,10 +160,8 @@ begin
         else raise EListError.Create(CurveTypeMustBeSelected);
 end;
 
-function TCurveTypesSingleton.GetCurveTypeTag: Integer;
-var CurveTypeId: TCurveTypeId;
+function TCurveTypesSingleton.GetCurveTypeTag(CurveTypeId: TCurveTypeId): Integer;
 begin
-    CurveTypeId := GetCurveTypeId;
     Result := crc64(0, @CurveTypeId, SizeOf(CurveTypeId));
 end;
 

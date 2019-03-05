@@ -22,11 +22,12 @@ uses
     FitClient, SelfCheckedComponentList, NumericGrid, CheckLst, MSCRDataClasses,
     LResources, tagraph, ActnList, FitTask, Settings, Laz_XMLCfg,
     MyExceptions, Grids, CommonTypes, Main, NeutronPointsSet, CurvePointsSet,
-    SpecialPointsSet, GaussPointsSet, LorentzPointsSet, CurveTypesSingleton
+    SpecialPointsSet, GaussPointsSet, LorentzPointsSet, CurveTypesSingleton,
+    PseudoVoigtPointsSet, AsymPseudoVoigtPointsSet, TwoBranchesPseudoVoigtPointsSet,
 {$IFDEF WINDOWS}
-    ,Windows, CommCtrl
+    Windows, CommCtrl,
 {$ENDIF}
-    ,ColorBox, Buttons;
+    ColorBox, Buttons;
 type
 	{ States of results grid window. }
     TResState = (
@@ -663,11 +664,13 @@ begin
     while True do
     begin
         MenuItem := TMenuItem.Create(SelCurveType);
-        MenuItem.Caption := CTS.GetCurveTypeName;
         MenuItem.Name := 'CurveType' + IntToStr(Index);
-        MenuItem.Tag := CTS.GetCurveTypeTag;
+        MenuItem.Tag := CTS.GetCurveTypeTag(CTS.GetCurveTypeId);
         Inc(Index);
-        MenuItem.Action := ActionSelCurveGaussian;
+        //MenuItem.Action := ActionSelCurveGaussian;
+        MenuItem.OnClick := ActionSelCurveExecute;
+        //  Caption must be set after action to overwrite action attribute.
+        MenuItem.Caption := CTS.GetCurveTypeName;
         SelCurveType.Add(MenuItem);
         //  The last item should be processed as well.
         if CTS.EndCurveType then Break
@@ -1002,29 +1005,35 @@ begin
 end;
 
 procedure TFormMain.ActionSelCurveExecute(Sender: TObject);
+var CTS: TCurveTypesSingleton;
 begin
-    {
-    if TMenuItem(Sender).Tag = TGaussPointsSet.Tag then
-        FitClientApp_.FitClient.CurveTypeId := TGaussPointsSet.GetCurveTypeId_;
+    CTS := TCurveTypesSingleton.Create;
+    if TMenuItem(Sender).Tag =
+        CTS.GetCurveTypeTag(TGaussPointsSet.GetCurveTypeId_) then
+        FitClientApp_.FitClient.CurveTypeId := TGaussPointsSet.GetCurveTypeId_
     else
-    if TMenuItem(Sender).Tag = TLorentzPointsSet.Tag then
-        FitClientApp_.FitClient.CurveTypeId := TLorentzPointsSet.GetCurveTypeId_;
+    if TMenuItem(Sender).Tag =
+        CTS.GetCurveTypeTag(TLorentzPointsSet.GetCurveTypeId_) then
+        FitClientApp_.FitClient.CurveTypeId := TLorentzPointsSet.GetCurveTypeId_
     else
-    if TMenuItem(Sender).Tag = TPseudoVoigtPointsSet.Tag then
-        FitClientApp_.FitClient.CurveTypeId := TPseudoVoigtPointsSet.GetCurveTypeId_;
+    if TMenuItem(Sender).Tag =
+        CTS.GetCurveTypeTag(TPseudoVoigtPointsSet.GetCurveTypeId_) then
+        FitClientApp_.FitClient.CurveTypeId := TPseudoVoigtPointsSet.GetCurveTypeId_
     else
-    if TMenuItem(Sender).Tag = TAsymPseudoVoigtPointsSet.Tag then
-        FitClientApp_.FitClient.CurveTypeId := TAsymPseudoVoigtPointsSet.GetCurveTypeId_;
+    if TMenuItem(Sender).Tag =
+        CTS.GetCurveTypeTag(TAsymPseudoVoigtPointsSet.GetCurveTypeId_) then
+        FitClientApp_.FitClient.CurveTypeId := TAsymPseudoVoigtPointsSet.GetCurveTypeId_
     else
-    if TMenuItem(Sender).Tag = T2BranchesPseudoVoigtPointsSet.Tag then
-        FitClientApp_.FitClient.CurveTypeId := T2BranchesPseudoVoigtPointsSet.GetCurveTypeId_;
+    if TMenuItem(Sender).Tag =
+        CTS.GetCurveTypeTag(T2BranchesPseudoVoigtPointsSet.GetCurveTypeId_) then
+        FitClientApp_.FitClient.CurveTypeId := T2BranchesPseudoVoigtPointsSet.GetCurveTypeId_
     else
-    if TMenuItem(Sender).Tag = TSpecialPointsSet.Tag then
+    if TMenuItem(Sender).Tag =
+        CTS.GetCurveTypeTag(TSpecialPointsSet.GetCurveTypeId_) then
     begin
         ActionCreateSpecialCurveExecute(Sender);
         Exit;
     end;
-    }
 
     //ResetCurveMenuCheckedBits;
     //ActionSelCurveGaussian.Tag := ActionSelCurveGaussian.Tag or 2;

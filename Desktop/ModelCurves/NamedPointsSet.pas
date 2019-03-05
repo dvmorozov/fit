@@ -42,7 +42,6 @@ type
           instead of property because property assumes storing data
           in object, but storing any data is not necessary in this case. }
         function GetCurveTypeName: string; virtual;
-        //function GetCurveTypeTag
     end;
 
 implementation

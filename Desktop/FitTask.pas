@@ -19,7 +19,7 @@ interface
 uses Classes, SysUtils, PointsSet, CurvePointsSet, SelfCopied, Minimizer,
     Minimizer_S, Minimizer_DS, MainCalcThread, CommonTypes, MSCRDataClasses,
     LorentzPointsSet, GaussPointsSet, TwoBranchesPseudoVoigtPointsSet,
-    AsymPseudoVoigtPointsSet, SpecialPointsSet, NamedPointsSet,
+    AsymPseudoVoigtPointsSet, UserPointsSet, NamedPointsSet,
     PseudoVoigtPointsSet;
   
 type
@@ -1182,10 +1182,10 @@ begin
             for j := 0 to SA.PointsCount - 1 do
                 GP.AddNewPoint(SA.PointXCoord[j], 0);
 
-            if GP is TSpecialPointsSet then
+            if GP is TUserPointsSet then
             begin
-                TSpecialPointsSet(GP).Expression := FCurveExpr;
-                TSpecialPointsSet(GP).SetParameters(
+                TUserPointsSet(GP).Expression := FCurveExpr;
+                TUserPointsSet(GP).SetParameters(
                     Curve_parameters(Params.GetCopy));
             end;
             //  amplituda i tochka privyazki ustanavlivayutsya po
@@ -1323,11 +1323,11 @@ begin
         Result := TAsymPseudoVoigtPointsSet.Create(nil)
     end
     else
-    if IsEqualGUID(FCurveTypeId, TSpecialPointsSet.GetCurveTypeId_) then
+    if IsEqualGUID(FCurveTypeId, TUserPointsSet.GetCurveTypeId_) then
     begin
-        Result := TSpecialPointsSet.Create(nil);
-        TSpecialPointsSet(Result).Expression := FCurveExpr;
-        TSpecialPointsSet(Result).SetParameters(
+        Result := TUserPointsSet.Create(nil);
+        TUserPointsSet(Result).Expression := FCurveExpr;
+        TUserPointsSet(Result).SetParameters(
             Curve_parameters(Params.GetCopy));
     end
     else
@@ -1501,13 +1501,13 @@ begin
             //  teper' sozdaetsya ekzemplyar tol'ko
             //  pol'zovatel'skoy krivoy, kotoraya ne
             //  imeet parametra polozheniya
-            if IsEqualGUID(FCurveTypeId, TSpecialPointsSet.GetCurveTypeId_) then
+            if IsEqualGUID(FCurveTypeId, TUserPointsSet.GetCurveTypeId_) then
             begin
                 GP := GetPatternSpecimen;
 
                 try
-                    TSpecialPointsSet(GP).Expression := FCurveExpr;
-                    TSpecialPointsSet(GP).SetParameters(
+                    TUserPointsSet(GP).Expression := FCurveExpr;
+                    TUserPointsSet(GP).SetParameters(
                         Curve_parameters(Params.GetCopy));
 
                     if not GP.Hasx0 then

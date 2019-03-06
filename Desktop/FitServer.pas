@@ -30,7 +30,7 @@ In this case keeping the state of application can't be guaranteed.
 
 uses Classes, TitlePointsSet, SelfCheckedComponentList, SysUtils, MSCRDataClasses,
      Dialogs, CurvePointsSet, NamedPointsSet, PointsSet, GaussPointsSet,
-     SpecialPointsSet,
+     UserPointsSet,
 {$IFDEF FIT}
      FitServerProxy,    //      Proxy to client to call it back.
 {$ENDIF}
@@ -2268,7 +2268,7 @@ begin
                 //  ustanovka dop. parametrov
                 TF.MaxRFactor := MaxRFactor;
                 TF.CurveTypeId := CurveTypeId;
-                if IsEqualGUID(CurveTypeId, TSpecialPointsSet.GetCurveTypeId_) then
+                if IsEqualGUID(CurveTypeId, TUserPointsSet.GetCurveTypeId_) then
                     TF.SetSpecialCurve(FCurveExpr, Curve_parameters(Params.GetCopy));
                 TF.ShowCurMinExternal := ShowCurMinInternal;
                 TF.DoneProcExternal := DoneProc;

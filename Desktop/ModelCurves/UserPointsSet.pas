@@ -9,7 +9,7 @@ without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
 LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
 Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
-unit SpecialPointsSet;
+unit UserPointsSet;
 
 {$MODE Delphi}
 
@@ -32,7 +32,7 @@ type
     *)
 
     { Container for points of user curve given as expression. }
-    TSpecialPointsSet = class(TNamedPointsSet)
+    TUserPointsSet = class(TNamedPointsSet)
     protected
         { Expression given in general text form. }
         FExpression: string;
@@ -55,24 +55,24 @@ type
     
 implementation
 
-{=========================== TSpecialPointsSet ================================}
+{=========================== TUserPointsSet ================================}
 
-function TSpecialPointsSet.GetCurveTypeName: string;
+function TUserPointsSet.GetCurveTypeName: string;
 begin
     Result := 'User defined';
 end;
 
-function TSpecialPointsSet.GetCurveTypeId: TCurveTypeId;
+function TUserPointsSet.GetCurveTypeId: TCurveTypeId;
 begin
     Result := GetCurveTypeId_;
 end;
 
-class function TSpecialPointsSet.GetCurveTypeId_: TCurveTypeId;
+class function TUserPointsSet.GetCurveTypeId_: TCurveTypeId;
 begin
     Result := StringToGUID('{d8cafce5-8b03-4cce-9e93-ea28acb8e7ca}');
 end;
 
-function TSpecialPointsSet.CalcValue(ArgValue: Double): Double;
+function TUserPointsSet.CalcValue(ArgValue: Double): Double;
 var P: TSpecialCurveParameter;
     Prs: string;
     i: LongInt;
@@ -103,7 +103,7 @@ begin
         bez ispol'zovaniya...*)
 end;
 
-procedure TSpecialPointsSet.DoCalc(const Intervals: TPointsSet);
+procedure TUserPointsSet.DoCalc(const Intervals: TPointsSet);
 var i, j: LongInt;
 begin
     if Assigned(Intervals) then
@@ -125,16 +125,16 @@ begin
     end;
 end;
 
-procedure TSpecialPointsSet.CopyParameters(const Dest: TObject);
+procedure TUserPointsSet.CopyParameters(const Dest: TObject);
 begin
     inherited;
-    TSpecialPointsSet(Dest).Expression := Expression;
+    TUserPointsSet(Dest).Expression := Expression;
 end;
 
 var CTS: TCurveTypesSingleton;
 
 initialization
     CTS := TCurveTypesSingleton.Create;
-    CTS.RegisterCurveType(TSpecialPointsSet);
+    CTS.RegisterCurveType(TUserPointsSet);
 end.
 

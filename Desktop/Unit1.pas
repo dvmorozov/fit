@@ -22,7 +22,7 @@ uses
     FitClient, SelfCheckedComponentList, NumericGrid, CheckLst, MSCRDataClasses,
     LResources, tagraph, ActnList, FitTask, Settings, Laz_XMLCfg,
     MyExceptions, Grids, CommonTypes, Main, NeutronPointsSet, CurvePointsSet,
-    SpecialPointsSet, GaussPointsSet, LorentzPointsSet, CurveTypesSingleton,
+    UserPointsSet, GaussPointsSet, LorentzPointsSet, CurveTypesSingleton,
     PseudoVoigtPointsSet, AsymPseudoVoigtPointsSet,
     TwoBranchesPseudoVoigtPointsSet, NamedPointsSet,
 {$IFDEF WINDOWS}
@@ -1034,9 +1034,9 @@ begin
     end
     else
     if TMenuItem(Sender).Tag =
-        CTS.GetCurveTypeTag(TSpecialPointsSet.GetCurveTypeId_) then
+        CTS.GetCurveTypeTag(TUserPointsSet.GetCurveTypeId_) then
     begin
-        CTS.SelectCurveType(TSpecialPointsSet.GetCurveTypeId_);
+        CTS.SelectCurveType(TUserPointsSet.GetCurveTypeId_);
         ActionCreateSpecialCurveExecute(Sender);
         Exit;
     end;
@@ -2576,7 +2576,7 @@ begin
             FitClientApp_.FitClient.SetSpecialCurveParameters(
                 ct.Expression, ct.Parameters);
             FitClientApp_.FitClient.CurveTypeId :=
-                TSpecialPointsSet.GetCurveTypeId_;
+                TUserPointsSet.GetCurveTypeId_;
             Break;
         end;
     end;

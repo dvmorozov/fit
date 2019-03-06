@@ -18,7 +18,7 @@ interface
 uses
     Classes, SelfCheckedComponentList, Grids, SysUtils, NumericGrid, SimpMath,
     Math3d, Tools, TableComp, DownhillSimplexContainer, SelfCopied,
-    ObjSavingStringList, Graphics, PointsSet, SpecialPointsSet, CurvePointsSet;
+    ObjSavingStringList, Graphics, PointsSet, UserPointsSet, CurvePointsSet;
 
 type
 	{ Set of pattern instances forming the calculated profile in sum. }

@@ -23,7 +23,8 @@ uses
     LResources, tagraph, ActnList, FitTask, Settings, Laz_XMLCfg,
     MyExceptions, Grids, CommonTypes, Main, NeutronPointsSet, CurvePointsSet,
     SpecialPointsSet, GaussPointsSet, LorentzPointsSet, CurveTypesSingleton,
-    PseudoVoigtPointsSet, AsymPseudoVoigtPointsSet, TwoBranchesPseudoVoigtPointsSet,
+    PseudoVoigtPointsSet, AsymPseudoVoigtPointsSet,
+    TwoBranchesPseudoVoigtPointsSet, NamedPointsSet,
 {$IFDEF WINDOWS}
     Windows, CommCtrl,
 {$ENDIF}
@@ -647,8 +648,11 @@ procedure TFormMain.ActionPatternTypeUpdate(Sender: TObject);
 var CTS: TCurveTypesSingleton;
     MenuItem: TMenuItem;
     Index: Integer;
+    SelectedCurveTypeId: TCurveTypeId;
 begin
     CTS := TCurveTypesSingleton.Create;
+    SelectedCurveTypeId := CTS.GetSelectedCurveType;
+    //  Clears menu.
     SelCurveType.Clear;
     //  Creates menu items for curve types.
     //  The list must contain at least one item.
@@ -662,6 +666,10 @@ begin
         MenuItem.OnClick := ActionSelCurveExecute;
         //  Caption must be set after action to overwrite action attribute.
         MenuItem.Caption := CTS.GetCurveTypeName;
+        //  Sets checked state.
+        if IsEqualGUID(SelectedCurveTypeId, CTS.GetCurveTypeId) then
+            MenuItem.Checked := True;
+
         SelCurveType.Add(MenuItem);
         //  The last item should be processed as well.
         if CTS.EndCurveType then Break
@@ -992,27 +1000,43 @@ begin
     CTS := TCurveTypesSingleton.Create;
     if TMenuItem(Sender).Tag =
         CTS.GetCurveTypeTag(TGaussPointsSet.GetCurveTypeId_) then
-        FitClientApp_.FitClient.CurveTypeId := TGaussPointsSet.GetCurveTypeId_
+    begin
+        FitClientApp_.FitClient.CurveTypeId := TGaussPointsSet.GetCurveTypeId_;
+        CTS.SelectCurveType(TGaussPointsSet.GetCurveTypeId_);
+    end
     else
     if TMenuItem(Sender).Tag =
         CTS.GetCurveTypeTag(TLorentzPointsSet.GetCurveTypeId_) then
-        FitClientApp_.FitClient.CurveTypeId := TLorentzPointsSet.GetCurveTypeId_
+    begin
+        FitClientApp_.FitClient.CurveTypeId := TLorentzPointsSet.GetCurveTypeId_;
+        CTS.SelectCurveType(TLorentzPointsSet.GetCurveTypeId_);
+    end
     else
     if TMenuItem(Sender).Tag =
         CTS.GetCurveTypeTag(TPseudoVoigtPointsSet.GetCurveTypeId_) then
-        FitClientApp_.FitClient.CurveTypeId := TPseudoVoigtPointsSet.GetCurveTypeId_
+    begin
+        FitClientApp_.FitClient.CurveTypeId := TPseudoVoigtPointsSet.GetCurveTypeId_;
+        CTS.SelectCurveType(TPseudoVoigtPointsSet.GetCurveTypeId_);
+    end
     else
     if TMenuItem(Sender).Tag =
         CTS.GetCurveTypeTag(TAsymPseudoVoigtPointsSet.GetCurveTypeId_) then
-        FitClientApp_.FitClient.CurveTypeId := TAsymPseudoVoigtPointsSet.GetCurveTypeId_
+    begin
+        FitClientApp_.FitClient.CurveTypeId := TAsymPseudoVoigtPointsSet.GetCurveTypeId_;
+        CTS.SelectCurveType(TAsymPseudoVoigtPointsSet.GetCurveTypeId_);
+    end
     else
     if TMenuItem(Sender).Tag =
         CTS.GetCurveTypeTag(T2BranchesPseudoVoigtPointsSet.GetCurveTypeId_) then
-        FitClientApp_.FitClient.CurveTypeId := T2BranchesPseudoVoigtPointsSet.GetCurveTypeId_
+    begin
+        FitClientApp_.FitClient.CurveTypeId := T2BranchesPseudoVoigtPointsSet.GetCurveTypeId_;
+        CTS.SelectCurveType(T2BranchesPseudoVoigtPointsSet.GetCurveTypeId_);
+    end
     else
     if TMenuItem(Sender).Tag =
         CTS.GetCurveTypeTag(TSpecialPointsSet.GetCurveTypeId_) then
     begin
+        CTS.SelectCurveType(TSpecialPointsSet.GetCurveTypeId_);
         ActionCreateSpecialCurveExecute(Sender);
         Exit;
     end;

@@ -1,7 +1,7 @@
 object FormMain: TFormMain
-  Left = 586
+  Left = 436
   Height = 762
-  Top = 93
+  Top = 129
   Width = 1278
   HorzScrollBar.Page = 1191
   VertScrollBar.Page = 502
@@ -935,22 +935,6 @@ object FormMain: TFormMain
       OnClick = ModelClick
       object SelCurveType: TMenuItem
         Action = ActionPatternType
-        object SelCurveGaussian: TMenuItem
-          Action = ActionSelCurveGaussian
-          Checked = True
-          OnClick = ActionSelCurveExecute
-        end
-        object SelCurveLorentzian: TMenuItem
-          Action = ActionSelCurveLorentzian
-          OnClick = ActionSelCurveLorentzianExecute
-        end
-        object MenuItem13: TMenuItem
-          Caption = ' '
-        end
-        object CreateSpecialCurve: TMenuItem
-          Action = ActionCreateSpecialCurve
-          OnClick = ActionCreateSpecialCurveExecute
-        end
       end
       object RFactorIntervals: TMenuItem
         Caption = 'Specimen Application Intervals'
@@ -2034,11 +2018,6 @@ object FormMain: TFormMain
       ImageIndex = 4
       OnExecute = ActionImportExecute
     end
-    object ActionCreateSpecialCurve: TAction
-      Category = 'Model'
-      Caption = 'Create Pattern...'
-      OnExecute = ActionCreateSpecialCurveExecute
-    end
     object ActionSelRFactorIntervalsAuto: TAction
       Category = 'Model'
       Caption = 'Generate Automatically'
@@ -2155,16 +2134,6 @@ object FormMain: TFormMain
       Category = 'Help'
       Caption = '&About...'
       OnExecute = ActionAboutExecute
-    end
-    object ActionSelCurveGaussian: TAction
-      Category = 'Model'
-      Caption = 'Gaussian'
-      OnExecute = ActionSelCurveExecute
-    end
-    object ActionSelCurveLorentzian: TAction
-      Category = 'Model'
-      Caption = 'Lorentzian'
-      OnExecute = ActionSelCurveLorentzianExecute
     end
     object ActionSelSpecPosAtEveryPoint: TAction
       Category = 'Model'

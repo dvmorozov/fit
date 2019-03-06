@@ -49,8 +49,6 @@ type
     ActionPatternType: TAction;
     ActionAnimationMode: TAction;
     ActionSelSpecPosAtEveryPoint: TAction;
-    ActionSelCurveLorentzian: TAction;
-    ActionSelCurveGaussian: TAction;
     ActionAbout: TAction;
     ActionGlossary: TAction;
     ActionViewMarkers: TAction;
@@ -72,7 +70,6 @@ type
     ActionRemoveRFactorIntervals: TAction;
     ActionSelRFactorIntervalsVis: TAction;
     ActionSelRFactorIntervalsAuto: TAction;
-    ActionCreateSpecialCurve: TAction;
     ActionImport: TAction;
     ActionReload: TAction;
     ActionSelEntireProf: TAction;
@@ -208,11 +205,8 @@ type
     SelCurveBounds: TMenuItem;
     MenuItem2: TMenuItem;
     SelCurveLorentzian: TMenuItem;
-    MenuItem13: TMenuItem;
-    CreateSpecialCurve: TMenuItem;
     SaveAsText: TMenuItem;
     MenuItem16: TMenuItem;
-    SelCurveGaussian: TMenuItem;
     MenuItem11: TMenuItem;
     MenuItem8: TMenuItem;
     SelCurveType: TMenuItem;
@@ -273,7 +267,6 @@ type
     procedure ActionSelCharacteristicPointsExecute(Sender: TObject);
     procedure ActionSelCurveBoundsExecute(Sender: TObject);
     procedure ActionSelCurveExecute(Sender: TObject);
-    procedure ActionSelCurveLorentzianExecute(Sender: TObject);
     procedure ActionSelectAllExecute(Sender: TObject);
     procedure ActionSelEntireProfExecute(Sender: TObject);
     procedure ActionSelSpecPosAtEveryPointExecute(Sender: TObject);
@@ -348,7 +341,6 @@ type
 	{ Indicates that hint message should be displayed. }
     FHandleEditHint: Boolean;
     procedure SetHandleEditHint(EditHint: Boolean);
-    procedure ResetCurveMenuCheckedBits;
 
   protected
 	{ The object created event EditDone. }
@@ -667,7 +659,6 @@ begin
         MenuItem.Name := 'CurveType' + IntToStr(Index);
         MenuItem.Tag := CTS.GetCurveTypeTag(CTS.GetCurveTypeId);
         Inc(Index);
-        //MenuItem.Action := ActionSelCurveGaussian;
         MenuItem.OnClick := ActionSelCurveExecute;
         //  Caption must be set after action to overwrite action attribute.
         MenuItem.Caption := CTS.GetCurveTypeName;
@@ -995,15 +986,6 @@ begin
         FitClientApp_.FitClient.SelectionMode := ModeSelNone;
 end;
 
-(*
-  —брасывает флаги выбора элементов меню в общем поле.
-*)
-procedure TFormMain.ResetCurveMenuCheckedBits;
-begin
-    ActionSelCurveLorentzian.Tag := ActionSelCurveLorentzian.Tag and $FFFFFFFD;
-    ActionSelCurveGaussian.Tag := ActionSelCurveGaussian.Tag and $FFFFFFFD;
-end;
-
 procedure TFormMain.ActionSelCurveExecute(Sender: TObject);
 var CTS: TCurveTypesSingleton;
 begin
@@ -1034,16 +1016,6 @@ begin
         ActionCreateSpecialCurveExecute(Sender);
         Exit;
     end;
-
-    //ResetCurveMenuCheckedBits;
-    //ActionSelCurveGaussian.Tag := ActionSelCurveGaussian.Tag or 2;
-end;
-
-procedure TFormMain.ActionSelCurveLorentzianExecute(Sender: TObject);
-begin
-    FitClientApp_.FitClient.CurveTypeId := TLorentzPointsSet.GetCurveTypeId_;
-    ResetCurveMenuCheckedBits;
-    ActionSelCurveLorentzian.Tag := ActionSelCurveLorentzian.Tag or 2;
 end;
 
 procedure TFormMain.ActionSelectAllExecute(Sender: TObject);
@@ -2448,16 +2420,6 @@ begin
         ActionSelCharacteristicPoints.Checked := False;
     if (ActionSelCharacteristicPoints.Tag and 2) = 2 then
         ActionSelCharacteristicPoints.Checked := True;
-
-    if (ActionSelCurveGaussian.Tag and 2) = 0 then
-        ActionSelCurveGaussian.Checked := False;
-    if (ActionSelCurveGaussian.Tag and 2) = 2 then
-        ActionSelCurveGaussian.Checked := True;
-
-    if (ActionSelCurveLorentzian.Tag and 2) = 0 then
-        ActionSelCurveLorentzian.Checked := False;
-    if (ActionSelCurveLorentzian.Tag and 2) = 2 then
-        ActionSelCurveLorentzian.Checked := True;
 
     if (ActionSelCurveBounds.Tag and 1) = 0 then
         ActionSelCurveBounds.Enabled := False;

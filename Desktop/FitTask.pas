@@ -16,11 +16,11 @@ unit FitTask;
 
 interface
 
-uses Classes, SysUtils, PointsSet, CurvePointsSet, SelfCopied, Minimizer,
-    Minimizer_S, Minimizer_DS, MainCalcThread, CommonTypes, MSCRDataClasses,
-    LorentzPointsSet, GaussPointsSet, TwoBranchesPseudoVoigtPointsSet,
-    AsymPseudoVoigtPointsSet, UserPointsSet, NamedPointsSet,
-    PseudoVoigtPointsSet;
+uses Classes, SysUtils, PointsSet, CurvePointsSet, SelfCopied,
+    Minimizer, Minimizer_S, Minimizer_DS, MainCalcThread, CommonTypes,
+    MSCRDataClasses, IntPointsSet, LorentzPointsSet, GaussPointsSet,
+    TwoBranchesPseudoVoigtPointsSet, AsymPseudoVoigtPointsSet, UserPointsSet,
+    NamedPointsSet, PseudoVoigtPointsSet;
   
 type
     { Fits profile interval by model curves (specimens). 

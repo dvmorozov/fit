@@ -15,8 +15,8 @@ unit AsymPseudoVoigtPointsSet;
 
 interface
 
-uses Classes, SysUtils, PointsSet, NamedPointsSet, PseudoVoigtPointsSet,
-  CurvePointsSet, CurveTypesSingleton, SimpMath;
+uses Classes, SysUtils, IntPointsSet, PointsSet, NamedPointsSet,
+  PseudoVoigtPointsSet, CurvePointsSet, CurveTypesSingleton, SimpMath;
 
 type
     { Curve having asymmetrical Pseudo-Voigt form. }

@@ -15,7 +15,7 @@ unit LorentzPointsSet;
 
 interface
 
-uses Classes, SysUtils, PointsSet, NamedPointsSet, GaussPointsSet,
+uses Classes, SysUtils, IntPointsSet, PointsSet, NamedPointsSet, GaussPointsSet,
   CurveTypesSingleton, SimpMath;
 
 type

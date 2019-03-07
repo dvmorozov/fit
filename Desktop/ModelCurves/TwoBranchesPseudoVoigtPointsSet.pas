@@ -15,7 +15,7 @@ unit TwoBranchesPseudoVoigtPointsSet;
 
 interface
 
-uses Classes, SysUtils, PointsSet, NamedPointsSet, CurvePointsSet,
+uses Classes, SysUtils, IntPointsSet, PointsSet, NamedPointsSet, CurvePointsSet,
     CurveTypesSingleton, SimpMath;
 
 type

@@ -18,8 +18,8 @@ interface
 
 uses Classes, PointsSet, TitlePointsSet, SelfCopied, SysUtils, MSCRDataClasses,
     Dialogs, FitClientProxy, CommonTypes, CBRCComponent, NeutronPointsSet,
-    CurvePointsSet, NamedPointsSet, IntClientCallback, IntFitViewer,
-    IntDataLoader, IntDataLoaderInjector;
+    IntPointsSet, CurvePointsSet, NamedPointsSet, IntClientCallback,
+    IntFitViewer, IntDataLoader, IntDataLoaderInjector;
     
 type
     { Modes of selectiion of active point set. }

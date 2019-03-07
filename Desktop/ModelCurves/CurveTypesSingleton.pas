@@ -15,7 +15,7 @@ unit CurveTypesSingleton;
 
 interface
 
-uses Classes, SysUtils, NamedPointsSet, CBRCComponent,
+uses Classes, SysUtils, NamedPointsSet, CBRCComponent, IntPointsSet,
   IntCurveFactory, IntCurveTypeSelector, IntCurveTypeIterator, crc;
 
 type

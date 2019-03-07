@@ -15,7 +15,7 @@ unit IntCurveTypeIterator;
 
 interface
 
-uses Classes, SysUtils, NamedPointsSet;
+uses Classes, SysUtils, IntPointsSet, NamedPointsSet;
 
 type
     { Interface defining basic operation for iterating through curve types. }

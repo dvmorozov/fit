@@ -15,7 +15,7 @@ unit GaussPointsSet;
 
 interface
 
-uses Classes, SysUtils, PointsSet, CurvePointsSet, NamedPointsSet,
+uses Classes, SysUtils, IntPointsSet, PointsSet, CurvePointsSet, NamedPointsSet,
   CurveTypesSingleton, SimpMath;
 
 type

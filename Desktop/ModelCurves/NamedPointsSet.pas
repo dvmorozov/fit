@@ -15,27 +15,24 @@ unit NamedPointsSet;
 
 interface
 
-uses Classes, SysUtils, CurvePointsSet;
+uses Classes, SysUtils, CurvePointsSet, IntPointsSet;
 
 type
-    TCurveTypeId = TGuid;
     { Base curve class allowing setting up type name. Type name distinguishes
       this curve from all other curve types, as opposite to the 'Title' attributes
       which is used to distinguish separate curve instances. }
-    TNamedPointsSet = class(TCurvePointsSet)
+    TNamedPointsSet = class(TCurvePointsSet, IPointsSet)
     private
         { The attribute should not be used in descendants. }
         FName: string;
         FCurveTypeId: TCurveTypeId;
 
-    protected
+    public
         { Sets unique identifier of curve type. }
         procedure SetCurveTypeId(CurveTypeId: TCurveTypeId); virtual;
         { Sets name of curve type. The method is used in deserializing
           objects received from server. }
         procedure SetCurveTypeName(Name: string); virtual;
-
-    public
         { Returns unique identifier of curve type. }
         function GetCurveTypeId: TCurveTypeId; virtual;
         { Returns name of curve type. It's better to use function

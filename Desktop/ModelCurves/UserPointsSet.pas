@@ -16,7 +16,7 @@ unit UserPointsSet;
 interface
 
 uses Classes, SysUtils, PointsSet, CurvePointsSet, NamedPointsSet,
-  CurveTypesSingleton;
+  CurveTypesSingleton, IntPointsSet;
 
 type
     PDouble = ^Double;

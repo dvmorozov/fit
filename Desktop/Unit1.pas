@@ -21,10 +21,10 @@ uses
     ExtCtrls, StdCtrls, Menus, PointsSet, FitViewer, ComCtrls,
     FitClient, SelfCheckedComponentList, NumericGrid, CheckLst, MSCRDataClasses,
     LResources, tagraph, ActnList, FitTask, Settings, Laz_XMLCfg,
-    MyExceptions, Grids, CommonTypes, Main, NeutronPointsSet, CurvePointsSet,
-    UserPointsSet, GaussPointsSet, LorentzPointsSet, CurveTypesSingleton,
-    PseudoVoigtPointsSet, AsymPseudoVoigtPointsSet,
-    TwoBranchesPseudoVoigtPointsSet, NamedPointsSet,
+    MyExceptions, Grids, CommonTypes, Main, NeutronPointsSet, IntFitViewer,
+    IntPointsSet, CurvePointsSet, UserPointsSet, GaussPointsSet,
+    PseudoVoigtPointsSet, AsymPseudoVoigtPointsSet, LorentzPointsSet,
+    TwoBranchesPseudoVoigtPointsSet, NamedPointsSet, CurveTypesSingleton,
 {$IFDEF WINDOWS}
     Windows, CommCtrl,
 {$ENDIF}

@@ -12,6 +12,8 @@ Fully automatical mode is available.
 
 [How to add new data loader](how-to-extend-data-loaders)
 
+[How to extend curve types](how-to-extend-curve-types)
+
 To open and modify diagram files use my favourite [UMLet](https://www.umlet.com/).
 
 ## Desktop application

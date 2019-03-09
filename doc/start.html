@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Fit: start</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<table class="container"><tr><td class="navigation">
+<h2>Fit</h2><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p><p><a href="GVClasses.png" class="navigation">Classes hierarchy graph</a></p></td><td class="content">
+<h1 class="unit">Unit start</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Uses">Uses</a></div><div class="one_section">Classes, Interfaces, Objects and Records</div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section">Types</div><div class="one_section"><a class="section" href="#PasDoc-Constants">Constants</a></div><div class="one_section">Variables</div></div>
+<span id="PasDoc-Description"></span><h2 class="description">Description</h2>
+&nbsp;<span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
+<ul class="useslist"><li><a  href="cgiModules.html">cgiModules</a></li><li>Classes</li><li>SysUtils</li></ul><h2 class="overview">Overview</h2>
+<span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code>function <b><a  href="start.html#PrepareTemplate_start">PrepareTemplate_start</a></b>: string;</code></td>
+</tr>
+</table>
+<span id="PasDoc-Constants"></span><h3 class="summary">Constants</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><b><a  href="start.html#CaptStartAbout">CaptStartAbout</a></b>: string = 'About';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="start.html#HintStartAbout">HintStartAbout</a></b>: string =
+        
+        'This applicaton is intended for determination of parameters of  '      +
+        'models approximately coinciding with some kinds of experimental data. '+
+        'The goal was to create convenient tool and fulfil some ideas about '   +
+        'improving effectiveness and quality of solution.'                      +
+        
+        
+        
+        
+        
+        '&lt;BR&gt;&lt;BR&gt;'                                                              +
+        'The application has following features:'                               +
+        '&lt;UL type=disc&gt;&lt;LI&gt;The model is represented in the form of collection ' +
+        'of instances of some base pattern found in the experimental data.'     +
+        '&lt;LI&gt;The base pattern can be selected from a few forms: gaussian, '     +
+        'lorentzian, pseudo-voigt.'                                             +
+        '&lt;LI&gt;Optionally the baseline can be removed.'                           +
+        '&lt;LI&gt;Some of instances are automatically excluded from the model'       +
+        'based on theirs parameters.'                                           +
+        '&lt;LI&gt;Fitting results are stored together with experimental data '       +
+        'in form of projects.'                                                  +
+        '&lt;/UL&gt;'                                                                 +
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        'The application is best suited for fitting data looking like a set '   +
+        'of peaks, although may be used for modelling other kinds of data. '    +
+        
+        
+        
+        
+        
+
+        '&lt;BR&gt;&lt;BR&gt;'                                                              +
+        'The online vesion of the application gives you following advantages: ' +
+        
+        
+
+        '&lt;UL type=disc&gt;&lt;LI&gt;'                                                    +
+        'Accessibility of data and results from any kind of computer or mobile device.' +
+        
+
+        '&lt;LI&gt;'                                                                  +
+        'No installation. '                                                     +
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        '&lt;LI&gt;'                                                                  +
+        'You are always use up to date version of the application. '            +
+        
+        
+
+        
+        
+        
+        '&lt;LI&gt;'                                                                  +
+        'But there are traditional desktop version of the application '         +
+        'available for &lt;a href=&quot;https://ServerName/fit/Fit-i386-win32.zip&quot;&gt;Windows&lt;/a&gt; ' +
+        'and &lt;a href=&quot;https://ServerName/fit/Fit-i386-linux.zip&quot;&gt;Linux&lt;/a&gt;.'     +
+
+        '&lt;/UL&gt;'                                                                 +
+        'Working with the service consists from sequence of stages:'            +
+        
+        
+        '&lt;OL&gt;&lt;LI&gt;'                                                              +
+        'Input or import of experimental data.'                                 +
+        
+        
+        '&lt;LI&gt;'                                                                  +
+        'Removing '                                                             +
+        '&lt;A HREF=&quot;#&quot; Title=&quot;Part of experimental data that can not be taken into account by the model.&quot;&gt;' +
+        'baseline&lt;/A&gt; if this is necessary.'                                  +
+        
+        
+        
+
+        '&lt;LI&gt;'                                                                  +
+        'Selection of '                                                         +
+        '&lt;A HREF=&quot;#&quot; Title=&quot;Parametrized curve that in the best way coincides with the motif contained in the experimental data.&quot;&gt;' +
+        'pattern&lt;/A&gt; for '                                                      +
+        '&lt;A HREF=&quot;#&quot; Title=&quot;Set of parametrized pattern instances which in adding form a curve approximating the experimental data in the best way.&quot;&gt;' +
+        'model&lt;/A&gt; creation.'                                                   +
+        
+        
+        
+        
+        
+
+        '&lt;LI&gt;'                                                                  +
+        'Selection of '                                                         +
+        '&lt;A HREF=&quot;#&quot; Title=&quot;Initial value of position parameter of the pattern instance.&quot;&gt;' +
+        'instance positions&lt;/A&gt; of selected pattern, if the pattern has '       +
+        '&lt;A HREF=&quot;#&quot; Title=&quot;One of pattern parameters that can be used as origin for the pattern curve. ' +
+        'This may be the position of exremal or inflection point of the pattern curve.&quot;&gt;' +
+        'position parameter&lt;/A&gt;. For data that looks like set of peaks '        +
+        'this job could be done automatically, after than '                     +
+        'could be corrected manually.'                                          +
+        
+        
+        
+        
+        
+        
+        
+
+        '&lt;LI&gt;'                                                                  +
+        'Selection of '                                                         +
+        '&lt;A HREF=&quot;#&quot; Title=&quot;Interval of data arguments for which pattern instance, resulting curve, difference curve values' +
+        'are calculated. At least one pattern instance will be created for every pattern application interval.&quot;&gt;' +
+        'instance application intervals&lt;/A&gt;. For data that looks like set of '  +
+        'peaks this job could be done automatically, after than '               +
+        'could be corrected manually.'                                          +
+        
+        
+        
+        
+        
+
+        '&lt;LI&gt;'                                                                  +
+        'Fitting of free parameters of the model to achieve one from '          +
+        'following goals:'                                                      +
+        
+        
+
+        '&lt;UL type=disc&gt;'                                                        +
+        '&lt;LI&gt;'                                                                  +
+        'Minimize total difference between experimental and calculated data.'   +
+        
+        
+        '&lt;LI&gt;'                                                                  +
+        'Minimize number of pattern instances by the condition that the '       +
+        'difference between experimental and calculated data in the instance '  +
+        'application interval does not exceed the given value.'                 +
+        
+        
+
+        '&lt;/UL&gt;&lt;/OL&gt;'                                                            +
+        'In the cases when the data looks like set of peaks all the job ('      +
+        'baseline removing, model creation and fitting) '                       +
+        'can be done fully automatically.';</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Functions and Procedures</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="PrepareTemplate_start"></span><code>function <b>PrepareTemplate_start</b>: string;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<h3 class="detail">Constants</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="CaptStartAbout"></span><code><b>CaptStartAbout</b>: string = 'About';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="HintStartAbout"></span><code><b>HintStartAbout</b>: string =
+        
+        'This applicaton is intended for determination of parameters of  '      +
+        'models approximately coinciding with some kinds of experimental data. '+
+        'The goal was to create convenient tool and fulfil some ideas about '   +
+        'improving effectiveness and quality of solution.'                      +
+        
+        
+        
+        
+        
+        '&lt;BR&gt;&lt;BR&gt;'                                                              +
+        'The application has following features:'                               +
+        '&lt;UL type=disc&gt;&lt;LI&gt;The model is represented in the form of collection ' +
+        'of instances of some base pattern found in the experimental data.'     +
+        '&lt;LI&gt;The base pattern can be selected from a few forms: gaussian, '     +
+        'lorentzian, pseudo-voigt.'                                             +
+        '&lt;LI&gt;Optionally the baseline can be removed.'                           +
+        '&lt;LI&gt;Some of instances are automatically excluded from the model'       +
+        'based on theirs parameters.'                                           +
+        '&lt;LI&gt;Fitting results are stored together with experimental data '       +
+        'in form of projects.'                                                  +
+        '&lt;/UL&gt;'                                                                 +
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        'The application is best suited for fitting data looking like a set '   +
+        'of peaks, although may be used for modelling other kinds of data. '    +
+        
+        
+        
+        
+        
+
+        '&lt;BR&gt;&lt;BR&gt;'                                                              +
+        'The online vesion of the application gives you following advantages: ' +
+        
+        
+
+        '&lt;UL type=disc&gt;&lt;LI&gt;'                                                    +
+        'Accessibility of data and results from any kind of computer or mobile device.' +
+        
+
+        '&lt;LI&gt;'                                                                  +
+        'No installation. '                                                     +
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        '&lt;LI&gt;'                                                                  +
+        'You are always use up to date version of the application. '            +
+        
+        
+
+        
+        
+        
+        '&lt;LI&gt;'                                                                  +
+        'But there are traditional desktop version of the application '         +
+        'available for &lt;a href=&quot;https://ServerName/fit/Fit-i386-win32.zip&quot;&gt;Windows&lt;/a&gt; ' +
+        'and &lt;a href=&quot;https://ServerName/fit/Fit-i386-linux.zip&quot;&gt;Linux&lt;/a&gt;.'     +
+
+        '&lt;/UL&gt;'                                                                 +
+        'Working with the service consists from sequence of stages:'            +
+        
+        
+        '&lt;OL&gt;&lt;LI&gt;'                                                              +
+        'Input or import of experimental data.'                                 +
+        
+        
+        '&lt;LI&gt;'                                                                  +
+        'Removing '                                                             +
+        '&lt;A HREF=&quot;#&quot; Title=&quot;Part of experimental data that can not be taken into account by the model.&quot;&gt;' +
+        'baseline&lt;/A&gt; if this is necessary.'                                  +
+        
+        
+        
+
+        '&lt;LI&gt;'                                                                  +
+        'Selection of '                                                         +
+        '&lt;A HREF=&quot;#&quot; Title=&quot;Parametrized curve that in the best way coincides with the motif contained in the experimental data.&quot;&gt;' +
+        'pattern&lt;/A&gt; for '                                                      +
+        '&lt;A HREF=&quot;#&quot; Title=&quot;Set of parametrized pattern instances which in adding form a curve approximating the experimental data in the best way.&quot;&gt;' +
+        'model&lt;/A&gt; creation.'                                                   +
+        
+        
+        
+        
+        
+
+        '&lt;LI&gt;'                                                                  +
+        'Selection of '                                                         +
+        '&lt;A HREF=&quot;#&quot; Title=&quot;Initial value of position parameter of the pattern instance.&quot;&gt;' +
+        'instance positions&lt;/A&gt; of selected pattern, if the pattern has '       +
+        '&lt;A HREF=&quot;#&quot; Title=&quot;One of pattern parameters that can be used as origin for the pattern curve. ' +
+        'This may be the position of exremal or inflection point of the pattern curve.&quot;&gt;' +
+        'position parameter&lt;/A&gt;. For data that looks like set of peaks '        +
+        'this job could be done automatically, after than '                     +
+        'could be corrected manually.'                                          +
+        
+        
+        
+        
+        
+        
+        
+
+        '&lt;LI&gt;'                                                                  +
+        'Selection of '                                                         +
+        '&lt;A HREF=&quot;#&quot; Title=&quot;Interval of data arguments for which pattern instance, resulting curve, difference curve values' +
+        'are calculated. At least one pattern instance will be created for every pattern application interval.&quot;&gt;' +
+        'instance application intervals&lt;/A&gt;. For data that looks like set of '  +
+        'peaks this job could be done automatically, after than '               +
+        'could be corrected manually.'                                          +
+        
+        
+        
+        
+        
+
+        '&lt;LI&gt;'                                                                  +
+        'Fitting of free parameters of the model to achieve one from '          +
+        'following goals:'                                                      +
+        
+        
+
+        '&lt;UL type=disc&gt;'                                                        +
+        '&lt;LI&gt;'                                                                  +
+        'Minimize total difference between experimental and calculated data.'   +
+        
+        
+        '&lt;LI&gt;'                                                                  +
+        'Minimize number of pattern instances by the condition that the '       +
+        'difference between experimental and calculated data in the instance '  +
+        'application interval does not exceed the given value.'                 +
+        
+        
+
+        '&lt;/UL&gt;&lt;/OL&gt;'                                                            +
+        'In the cases when the data looks like set of peaks all the job ('      +
+        'baseline removing, model creation and fitting) '                       +
+        'can be done fully automatically.';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+'О программе';</p>
+</td></tr>
+</table>
+<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+</span>
+</td></tr></table></body></html>

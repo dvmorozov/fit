@@ -1,0 +1,1767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Fit: FitServer: Class TFitServer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<table class="container"><tr><td class="navigation">
+<h2>Fit</h2><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p><p><a href="GVClasses.png" class="navigation">Classes hierarchy graph</a></p></td><td class="content">
+<span id="TFitServer"></span><h1 class="cio">Class TFitServer</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Hierarchy">Hierarchy</a></div><div class="one_section"><a class="section" href="#PasDoc-Fields">Fields</a></div><div class="one_section"><a class="section" href="#PasDoc-Methods">Methods</a></div><div class="one_section"><a class="section" href="#PasDoc-Properties">Properties</a></div></div>
+<span id="PasDoc-Description"></span><h2 class="unit">Unit</h2>
+<p class="unitlink">
+<a  href="FitServer.html">FitServer</a></p>
+<h2 class="declaration">Declaration</h2>
+<p class="declaration">
+<code>type TFitServer = class(TCBRCComponent, <a class="normal" href="IntClientCallback.IClientCallback.html">IClientCallback</a>)</code></p>
+<h2 class="description">Description</h2>
+<p>
+The component which implements all server logic. It divides the task of profile fitting on a few subtasks of fitting on intervals. The intervals should be defined before manually or automatically. All interface methods should allow calling in arbitrary <a class="normal" href="FitServer.TFitServer.html#State">state</a>, this should not be considered as inadmissible situation, but corresponding error code should be returned. In fitting knowledge of <a class="normal" href="FitServer.TFitServer.html#WaveLength">wavelength</a> is not required. This is why all components <a class="normal" href="NeutronPointsSet.TNeutronPointsSet.html">TNeutronPointsSet</a> were changed on <a class="normal" href="PointsSet.TPointsSet.html">TPointsSet</a>. This also allows to abstract from tasks of neutron diffraction and to come to tasks from arbitrary field in which data have form of profile. It is impossible simply to replace <a class="normal" href="NeutronPointsSet.TNeutronPointsSet.html">TNeutronPointsSet</a> on <a class="normal" href="PointsSet.TPointsSet.html">TPointsSet</a> because at the server side methods of TFitViewer are called which require <a class="normal" href="TitlePointsSet.TTitlePointsSet.html">TTitlePointsSet</a>. Moreover graphics is still implemented at server side. This requires usage of <a class="normal" href="NeutronPointsSet.TNeutronPointsSet.html">TNeutronPointsSet</a> which supports <a class="normal" href="CurvePointsSet.html#Argument">argument</a> recalculation. Interface methods results shows is requested operation allowed or not. Instead of EAssertionFailed the EUserException is used because it is impossible to guarantee that exception will not be thrown from library. This is acceptable only for classes which process <a class="normal" href="Main.html#User">user</a> commands. Rest of the classes should use EAssertionFailed in the case of inadmissible <a class="normal" href="FitServer.TFitServer.html#State">state</a>. Boundary class shoud interpret such exception as <a class="normal" href="Main.html#Fatal">fatal</a> error but EUserException as <a class="normal" href="FitServer.TFitServer.html#State">state</a> errors. This implementation performs all operations in the thread of caller. It should store all the data necessary for operations including selected intervals because client can be unable to store data.</p>
+<span id="PasDoc-Hierarchy"></span><h2 class="hierarchy">Hierarchy</h2>
+<ul class="hierarchy"><li class="ancestor">TCBRCComponent</li>
+<li class="thisitem">TFitServer</li></ul><h2 class="overview">Overview</h2>
+<span id="PasDoc-Fields"></span><h3 class="summary">Fields</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="FitServer.TFitServer.html#BackgroundPoints">BackgroundPoints</a></b>: <a  href="TitlePointsSet.TTitlePointsSet.html">TTitlePointsSet</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="FitServer.TFitServer.html#CalcProfile">CalcProfile</a></b>: <a  href="TitlePointsSet.TTitlePointsSet.html">TTitlePointsSet</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="FitServer.TFitServer.html#CurrentMinimum">CurrentMinimum</a></b>: Double;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="FitServer.TFitServer.html#CurvePositions">CurvePositions</a></b>: <a  href="TitlePointsSet.TTitlePointsSet.html">TTitlePointsSet</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="FitServer.TFitServer.html#CurvesList">CurvesList</a></b>: <a  href="SelfCopied.TSelfCopiedCompList.html">TSelfCopiedCompList</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="FitServer.TFitServer.html#DeltaProfile">DeltaProfile</a></b>: <a  href="TitlePointsSet.TTitlePointsSet.html">TTitlePointsSet</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="FitServer.TFitServer.html#DoneDisabled">DoneDisabled</a></b>: Boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="FitServer.TFitServer.html#ExpProfile">ExpProfile</a></b>: <a  href="TitlePointsSet.TTitlePointsSet.html">TTitlePointsSet</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="FitServer.TFitServer.html#FBackFactor">FBackFactor</a></b>: Double;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="FitServer.TFitServer.html#FCurveExpr">FCurveExpr</a></b>: string;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="FitServer.TFitServer.html#FCurveThresh">FCurveThresh</a></b>: Double;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="FitServer.TFitServer.html#FCurveTypeId">FCurveTypeId</a></b>: <a  href="IntPointsSet.html#TCurveTypeId">TCurveTypeId</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="FitServer.TFitServer.html#FitDone">FitDone</a></b>: Boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="FitServer.TFitServer.html#FMaxRFactor">FMaxRFactor</a></b>: Double;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="FitServer.TFitServer.html#FSelectedAreaMode">FSelectedAreaMode</a></b>: Boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="FitServer.TFitServer.html#FState">FState</a></b>: <a  href="CommonTypes.html#TFitServerState">TFitServerState</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="FitServer.TFitServer.html#FWaveLength">FWaveLength</a></b>: Double;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="FitServer.TFitServer.html#Params">Params</a></b>: <a  href="CurvePointsSet.Curve_parameters.html">Curve_parameters</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="FitServer.TFitServer.html#RFactorIntervals">RFactorIntervals</a></b>: <a  href="TitlePointsSet.TTitlePointsSet.html">TTitlePointsSet</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="FitServer.TFitServer.html#SavedState">SavedState</a></b>: <a  href="CommonTypes.html#TFitServerState">TFitServerState</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="FitServer.TFitServer.html#SelectedArea">SelectedArea</a></b>: <a  href="TitlePointsSet.TTitlePointsSet.html">TTitlePointsSet</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="FitServer.TFitServer.html#SpecimenList">SpecimenList</a></b>: <a  href="MSCRDataClasses.TMSCRSpecimenList.html">TMSCRSpecimenList</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="FitServer.TFitServer.html#SpecPosFoundForAuto">SpecPosFoundForAuto</a></b>: Boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="FitServer.TFitServer.html#StartTime">StartTime</a></b>: TDateTime;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="FitServer.TFitServer.html#TaskList">TaskList</a></b>: TSelfCheckedComponentList;</code></td>
+</tr>
+</table>
+<span id="PasDoc-Methods"></span><h3 class="summary">Methods</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>constructor <b><a  href="FitServer.TFitServer.html#Create">Create</a></b>(AOwner: TComponent); override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>destructor <b><a  href="FitServer.TFitServer.html#Destroy">Destroy</a></b>; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="FitServer.TFitServer.html#AllPointsAsPeakPositions">AllPointsAsPeakPositions</a></b>: string; virtual;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="FitServer.TFitServer.html#AsyncOper">AsyncOper</a></b>: Boolean;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="FitServer.TFitServer.html#DoAllAutomatically">DoAllAutomatically</a></b>: string; virtual;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="FitServer.TFitServer.html#FindBackPoints">FindBackPoints</a></b>: string; virtual;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="FitServer.TFitServer.html#FindGausses">FindGausses</a></b>: string; virtual;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="FitServer.TFitServer.html#FindGaussesAgain">FindGaussesAgain</a></b>: string; virtual;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="FitServer.TFitServer.html#FindGaussesSequentially">FindGaussesSequentially</a></b>: string; virtual;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="FitServer.TFitServer.html#FindPeakBounds">FindPeakBounds</a></b>: string; virtual;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="FitServer.TFitServer.html#FindPeakPositions">FindPeakPositions</a></b>: string; virtual;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="FitServer.TFitServer.html#GetAbsRFactorStr">GetAbsRFactorStr</a></b>: string;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="FitServer.TFitServer.html#GetBackgroundPoints">GetBackgroundPoints</a></b>: <a  href="PointsSet.TPointsSet.html">TPointsSet</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="FitServer.TFitServer.html#GetCalcProfilePointsSet">GetCalcProfilePointsSet</a></b>: <a  href="PointsSet.TPointsSet.html">TPointsSet</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="FitServer.TFitServer.html#GetCalcTimeStr">GetCalcTimeStr</a></b>: string;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="FitServer.TFitServer.html#GetCurvePositions">GetCurvePositions</a></b>: <a  href="PointsSet.TPointsSet.html">TPointsSet</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="FitServer.TFitServer.html#GetCurvesList">GetCurvesList</a></b>: <a  href="SelfCopied.TSelfCopiedCompList.html">TSelfCopiedCompList</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="FitServer.TFitServer.html#GetDeltaProfilePointsSet">GetDeltaProfilePointsSet</a></b>: <a  href="PointsSet.TPointsSet.html">TPointsSet</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="FitServer.TFitServer.html#GetProfilePointsSet">GetProfilePointsSet</a></b>: <a  href="PointsSet.TPointsSet.html">TPointsSet</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="FitServer.TFitServer.html#GetRFactorIntervals">GetRFactorIntervals</a></b>: <a  href="PointsSet.TPointsSet.html">TPointsSet</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="FitServer.TFitServer.html#GetRFactorStr">GetRFactorStr</a></b>: string;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="FitServer.TFitServer.html#GetSelectedArea">GetSelectedArea</a></b>: <a  href="PointsSet.TPointsSet.html">TPointsSet</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="FitServer.TFitServer.html#GetSpecialCurveParameters">GetSpecialCurveParameters</a></b>: <a  href="CurvePointsSet.Curve_parameters.html">Curve_parameters</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="FitServer.TFitServer.html#GetSpecimenCount">GetSpecimenCount</a></b>: LongInt;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="FitServer.TFitServer.html#GetSpecimenList">GetSpecimenList</a></b>: <a  href="MSCRDataClasses.TMSCRSpecimenList.html">TMSCRSpecimenList</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="FitServer.TFitServer.html#GetSpecimenParameterCount">GetSpecimenParameterCount</a></b>(SpecIndex: LongInt): LongInt;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="FitServer.TFitServer.html#GetSpecimenPoints">GetSpecimenPoints</a></b>(SpecIndex: LongInt): <a  href="NamedPointsSet.TNamedPointsSet.html">TNamedPointsSet</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="FitServer.TFitServer.html#GetSqrRFactorStr">GetSqrRFactorStr</a></b>: string;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="FitServer.TFitServer.html#ReturnToTotalProfile">ReturnToTotalProfile</a></b>: string;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="FitServer.TFitServer.html#SelectArea">SelectArea</a></b>(StartPointIndex, StopPointIndex: LongInt): string;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="FitServer.TFitServer.html#SetBackgroundPointsSet">SetBackgroundPointsSet</a></b>(ABackgroundPoints: <a  href="TitlePointsSet.TTitlePointsSet.html">TTitlePointsSet</a>): string;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="FitServer.TFitServer.html#SetCurvePositions">SetCurvePositions</a></b>(ACurvePositions: <a  href="PointsSet.TPointsSet.html">TPointsSet</a>): string;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="FitServer.TFitServer.html#SetProfilePointsSet">SetProfilePointsSet</a></b>(APointsSet: <a  href="TitlePointsSet.TTitlePointsSet.html">TTitlePointsSet</a>): string;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="FitServer.TFitServer.html#SetRFactorIntervals">SetRFactorIntervals</a></b>(ARFactorIntervals: <a  href="PointsSet.TPointsSet.html">TPointsSet</a>): string;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="FitServer.TFitServer.html#SmoothProfile">SmoothProfile</a></b>: string;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>function <b><a  href="FitServer.TFitServer.html#CreateTaskObject">CreateTaskObject</a></b>: <a  href="FitTask.TFitTask.html">TFitTask</a>; virtual;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>function <b><a  href="FitServer.TFitServer.html#FindBackgroundPoints">FindBackgroundPoints</a></b>(Data: <a  href="PointsSet.TPointsSet.html">TPointsSet</a>): <a  href="PointsSet.TPointsSet.html">TPointsSet</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>function <b><a  href="FitServer.TFitServer.html#FindPeaksInternal">FindPeaksInternal</a></b>: <a  href="TitlePointsSet.TTitlePointsSet.html">TTitlePointsSet</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>function <b><a  href="FitServer.TFitServer.html#GetAbsRFactor">GetAbsRFactor</a></b>: Double;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>function <b><a  href="FitServer.TFitServer.html#GetAllInitialized">GetAllInitialized</a></b>: Boolean;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>function <b><a  href="FitServer.TFitServer.html#GetRFactor">GetRFactor</a></b>: Double;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>function <b><a  href="FitServer.TFitServer.html#GetSqrRFactor">GetSqrRFactor</a></b>: Double;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>function <b><a  href="FitServer.TFitServer.html#Integrate">Integrate</a></b>(Points: <a  href="PointsSet.TPointsSet.html">TPointsSet</a>; StartPointIndex, StopPointIndex: LongInt): Double;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>function <b><a  href="FitServer.TFitServer.html#IntegrateAll">IntegrateAll</a></b>(Points: <a  href="PointsSet.TPointsSet.html">TPointsSet</a>): Double;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#AbortAsyncOper">AbortAsyncOper</a></b>; virtual; abstract;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#AddPointToBackground">AddPointToBackground</a></b>(XValue, YValue: Double);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#AddPointToCurvePositions">AddPointToCurvePositions</a></b>(XValue, YValue: Double);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#AddPointToData">AddPointToData</a></b>(XValue, YValue: Double);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#AddPointToRFactorIntervals">AddPointToRFactorIntervals</a></b>(XValue, YValue: Double);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#CreateSpecimenList">CreateSpecimenList</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#GetSpecimenParameter">GetSpecimenParameter</a></b>(SpecIndex: LongInt; ParamIndex: LongInt; var Name: string; var Value: Double; var Type_: LongInt);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#ReplacePointInBackground">ReplacePointInBackground</a></b>( PrevXValue, PrevYValue, NewXValue, NewYValue: Double);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#ReplacePointInCurvePositions">ReplacePointInCurvePositions</a></b>( PrevXValue, PrevYValue, NewXValue, NewYValue: Double);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#ReplacePointInData">ReplacePointInData</a></b>( PrevXValue, PrevYValue, NewXValue, NewYValue: Double);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#ReplacePointInRFactorIntervals">ReplacePointInRFactorIntervals</a></b>( PrevXValue, PrevYValue, NewXValue, NewYValue: Double);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#SetSpecialCurveParameters">SetSpecialCurveParameters</a></b>( ACurveExpr: string; CP: <a  href="CurvePointsSet.Curve_parameters.html">Curve_parameters</a>);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#SetSpecimenParameter">SetSpecimenParameter</a></b>(SpecIndex: LongInt; ParamIndex: LongInt; Value: Double);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#StopAsyncOper">StopAsyncOper</a></b>; virtual; abstract;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#SubtractAllBackground">SubtractAllBackground</a></b>(Auto: Boolean);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#SubtractBackground">SubtractBackground</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#AddPoint">AddPoint</a></b>(var Points: <a  href="TitlePointsSet.TTitlePointsSet.html">TTitlePointsSet</a>; XValue, YValue: Double);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#AddSpecimenToList">AddSpecimenToList</a></b>(Points: <a  href="CurvePointsSet.TCurvePointsSet.html">TCurvePointsSet</a>; StartPointIndex, StopPointIndex: LongInt );</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#AllPointsAsPeakPositionsAlg">AllPointsAsPeakPositionsAlg</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#CreateDeltaProfile">CreateDeltaProfile</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#CreateParameters">CreateParameters</a></b>(ACurveExpr: string);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#CreateResultedCurvesList">CreateResultedCurvesList</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#CreateResultedProfile">CreateResultedProfile</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#CreateSpecimenListAlg">CreateSpecimenListAlg</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#CreateTasks">CreateTasks</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#DoAllAutomaticallyAlg">DoAllAutomaticallyAlg</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#Done">Done</a></b>; virtual;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#DoneProc">DoneProc</a></b>; virtual;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#FindBackPointsAlg">FindBackPointsAlg</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#FindBackPointsDone">FindBackPointsDone</a></b>; virtual;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#FindBackPointsDoneProcActual">FindBackPointsDoneProcActual</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#FindGaussesAgainAlg">FindGaussesAgainAlg</a></b>; virtual;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#FindGaussesAlg">FindGaussesAlg</a></b>; virtual;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#FindGaussesSequentiallyAlg">FindGaussesSequentiallyAlg</a></b>; virtual;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#FindPeakBoundsAlg">FindPeakBoundsAlg</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#FindPeakBoundsDone">FindPeakBoundsDone</a></b>; virtual;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#FindPeakBoundsDoneProcActual">FindPeakBoundsDoneProcActual</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#FindPeakPositionsAlg">FindPeakPositionsAlg</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#FindPeakPositionsDone">FindPeakPositionsDone</a></b>; virtual;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#FindPeakPositionsDoneProcActual">FindPeakPositionsDoneProcActual</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#FindPeakPositionsForAutoAlg">FindPeakPositionsForAutoAlg</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#GoToReadyForFit">GoToReadyForFit</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#InitTasks">InitTasks</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#RecreateMainCalcThread">RecreateMainCalcThread</a></b>( ACurrentTask: <a  href="MainCalcThread.html#TCurrentTask">TCurrentTask</a>; ADoneProc: <a  href="MainCalcThread.html#TDoneProc">TDoneProc</a>); virtual;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#SelectAreaActual">SelectAreaActual</a></b>( Points: <a  href="PointsSet.TPointsSet.html">TPointsSet</a>; StartPointIndex, StopPointIndex: LongInt);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#SetCurveThresh">SetCurveThresh</a></b>(ACurveThresh: Double);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#SetCurveType">SetCurveType</a></b>(ACurveTypeId: <a  href="IntPointsSet.html#TCurveTypeId">TCurveTypeId</a>);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#SetMaxRFactor">SetMaxRFactor</a></b>(AMaxRFactor: Double);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#SetState">SetState</a></b>(AState: <a  href="CommonTypes.html#TFitServerState">TFitServerState</a>); virtual;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#SetWaveLength">SetWaveLength</a></b>(AWaveLength: Double);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#ShowCurMin">ShowCurMin</a></b>(Min: Double); virtual;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#ShowCurMinInternal">ShowCurMinInternal</a></b>; virtual;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#ShowProfile">ShowProfile</a></b>; virtual;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#Smoothing">Smoothing</a></b>(ANeutronPointsSet: <a  href="PointsSet.TPointsSet.html">TPointsSet</a>);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="FitServer.TFitServer.html#SubtractLinearly">SubtractLinearly</a></b>(Data: <a  href="PointsSet.TPointsSet.html">TPointsSet</a>; StartIndex: LongInt; EndIndex: LongInt);</code></td>
+</tr>
+</table>
+<span id="PasDoc-Properties"></span><h3 class="summary">Properties</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="FitServer.TFitServer.html#BackFactor">BackFactor</a></b>: Double read <a  href="FitServer.TFitServer.html#FBackFactor">FBackFactor</a> write <a  href="FitServer.TFitServer.html#FBackFactor">FBackFactor</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="FitServer.TFitServer.html#CurveThresh">CurveThresh</a></b>: Double read <a  href="FitServer.TFitServer.html#FCurveThresh">FCurveThresh</a> write <a  href="FitServer.TFitServer.html#SetCurveThresh">SetCurveThresh</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="FitServer.TFitServer.html#CurveTypeId">CurveTypeId</a></b>: <a  href="IntPointsSet.html#TCurveTypeId">TCurveTypeId</a> read <a  href="FitServer.TFitServer.html#FCurveTypeId">FCurveTypeId</a> write <a  href="FitServer.TFitServer.html#SetCurveType">SetCurveType</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="FitServer.TFitServer.html#MaxRFactor">MaxRFactor</a></b>: Double read <a  href="FitServer.TFitServer.html#FMaxRFactor">FMaxRFactor</a> write <a  href="FitServer.TFitServer.html#SetMaxRFactor">SetMaxRFactor</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="FitServer.TFitServer.html#SelectedAreaMode">SelectedAreaMode</a></b>: Boolean read <a  href="FitServer.TFitServer.html#FSelectedAreaMode">FSelectedAreaMode</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="FitServer.TFitServer.html#State">State</a></b>: <a  href="CommonTypes.html#TFitServerState">TFitServerState</a> read <a  href="FitServer.TFitServer.html#FState">FState</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="FitServer.TFitServer.html#WaveLength">WaveLength</a></b>: Double read <a  href="FitServer.TFitServer.html#FWaveLength">FWaveLength</a> write <a  href="FitServer.TFitServer.html#SetWaveLength">SetWaveLength</a>;</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Fields</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="BackgroundPoints"></span><code><b>BackgroundPoints</b>: <a  href="TitlePointsSet.TTitlePointsSet.html">TTitlePointsSet</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+List of background points used in <a class="normal" href="Math3d.html#Transition">transition</a> between manual and automatic modes of selection.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="CalcProfile"></span><code><b>CalcProfile</b>: <a  href="TitlePointsSet.TTitlePointsSet.html">TTitlePointsSet</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+The curve obtained by the sum of all curves of adjustable intervals to calculate the total R-factor along the entire profile.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="CurrentMinimum"></span><code><b>CurrentMinimum</b>: Double;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Current total value of R-factor for all subtasks.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="CurvePositions"></span><code><b>CurvePositions</b>: <a  href="TitlePointsSet.TTitlePointsSet.html">TTitlePointsSet</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Positions of pattern specimens. Only X-coordinates are used.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="CurvesList"></span><code><b>CurvesList</b>: <a  href="SelfCopied.TSelfCopiedCompList.html">TSelfCopiedCompList</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Contains all pattern specimens collected from tasks (for example, for separate intervals). Items are added synchronously to the list.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="DeltaProfile"></span><code><b>DeltaProfile</b>: <a  href="TitlePointsSet.TTitlePointsSet.html">TTitlePointsSet</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+The curve obtained by calculating difference between experimental and <a class="normal" href="CurvePointsSet.html#Calculated">calculated</a> profiles.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="DoneDisabled"></span><code><b>DoneDisabled</b>: Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="ExpProfile"></span><code><b>ExpProfile</b>: <a  href="TitlePointsSet.TTitlePointsSet.html">TTitlePointsSet</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Data of full experimental profile.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FBackFactor"></span><code><b>FBackFactor</b>: Double;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FCurveExpr"></span><code><b>FCurveExpr</b>: string;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+The expression for <a class="normal" href="Main.html#User">user</a> defined curve.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FCurveThresh"></span><code><b>FCurveThresh</b>: Double;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FCurveTypeId"></span><code><b>FCurveTypeId</b>: <a  href="IntPointsSet.html#TCurveTypeId">TCurveTypeId</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FitDone"></span><code><b>FitDone</b>: Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Is set up to True after finishing first cycle of calculation.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FMaxRFactor"></span><code><b>FMaxRFactor</b>: Double;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Allows to retrieve the value from the client-side.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FSelectedAreaMode"></span><code><b>FSelectedAreaMode</b>: Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Dependent on this flag either data of the selected interval are used or data of the whole profile.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FState"></span><code><b>FState</b>: <a  href="CommonTypes.html#TFitServerState">TFitServerState</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FWaveLength"></span><code><b>FWaveLength</b>: Double;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="Params"></span><code><b>Params</b>: <a  href="CurvePointsSet.Curve_parameters.html">Curve_parameters</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Parameters of <a class="normal" href="Main.html#User">user</a> defined curve. The object is created by server. It is necessary to provide parameter editing on the client-side.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="RFactorIntervals"></span><code><b>RFactorIntervals</b>: <a  href="TitlePointsSet.TTitlePointsSet.html">TTitlePointsSet</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Pairs of points defining intervals of R-factor calculation. Should always be displayed allowing <a class="normal" href="Main.html#User">user</a> to see where R-factor is <a class="normal" href="CurvePointsSet.html#Calculated">calculated</a>.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="SavedState"></span><code><b>SavedState</b>: <a  href="CommonTypes.html#TFitServerState">TFitServerState</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+The <a class="normal" href="FitServer.TFitServer.html#State">state</a> that preceded the <a class="normal" href="Math3d.html#Transition">transition</a> to <a class="normal" href="CommonTypes.html#AsyncOperation">AsyncOperation</a>.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="SelectedArea"></span><code><b>SelectedArea</b>: <a  href="TitlePointsSet.TTitlePointsSet.html">TTitlePointsSet</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Part of the whole profile with which <a class="normal" href="Main.html#User">user</a> works at the given moment.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="SpecimenList"></span><code><b>SpecimenList</b>: <a  href="MSCRDataClasses.TMSCRSpecimenList.html">TMSCRSpecimenList</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Containers of parameters of pattern specimens. TODO: change type and remove <a class="normal" href="FitServer.TFitServer.html#SetWaveLength">SetWaveLength</a>.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="SpecPosFoundForAuto"></span><code><b>SpecPosFoundForAuto</b>: Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Indicates that specimen positions were assigned automatically. That is at each point different from background.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="StartTime"></span><code><b>StartTime</b>: TDateTime;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+The starting time of continuous operation.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="TaskList"></span><code><b>TaskList</b>: TSelfCheckedComponentList;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+List of subtasks for fitting parts of profile on intervals. By default is active.</p>
+</td></tr>
+</table>
+<h3 class="detail">Methods</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Create"></span><code>constructor <b>Create</b>(AOwner: TComponent); override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Destroy"></span><code>destructor <b>Destroy</b>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="AllPointsAsPeakPositions"></span><code>function <b>AllPointsAsPeakPositions</b>: string; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="AsyncOper"></span><code>function <b>AsyncOper</b>: Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Returns True in asynchronous operation mode.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="DoAllAutomatically"></span><code>function <b>DoAllAutomatically</b>: string; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Completely automatic procedure of finding model curves.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="FindBackPoints"></span><code>function <b>FindBackPoints</b>: string; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Searches for background points.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="FindGausses"></span><code>function <b>FindGausses</b>: string; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Performs model fitting (initial or subsequent). Corresponds to MinimizeDifference.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="FindGaussesAgain"></span><code>function <b>FindGaussesAgain</b>: string; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Performs model fitting without initialization of application intervals.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="FindGaussesSequentially"></span><code>function <b>FindGaussesSequentially</b>: string; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Search for model describing experimental data with given accuracy by minimum number of specimens. Sequentially reducing the number of specimens. Corresponds to MinimizeNumberOfSpecimens.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="FindPeakBounds"></span><code>function <b>FindPeakBounds</b>: string; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Searches for intervals of application of pattern specimens.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="FindPeakPositions"></span><code>function <b>FindPeakPositions</b>: string; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Searches for peak positions (positions of specimens).</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetAbsRFactorStr"></span><code>function <b>GetAbsRFactorStr</b>: string;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetBackgroundPoints"></span><code>function <b>GetBackgroundPoints</b>: <a  href="PointsSet.TPointsSet.html">TPointsSet</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetCalcProfilePointsSet"></span><code>function <b>GetCalcProfilePointsSet</b>: <a  href="PointsSet.TPointsSet.html">TPointsSet</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetCalcTimeStr"></span><code>function <b>GetCalcTimeStr</b>: string;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetCurvePositions"></span><code>function <b>GetCurvePositions</b>: <a  href="PointsSet.TPointsSet.html">TPointsSet</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetCurvesList"></span><code>function <b>GetCurvesList</b>: <a  href="SelfCopied.TSelfCopiedCompList.html">TSelfCopiedCompList</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Returns list of components containing sets of points.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetDeltaProfilePointsSet"></span><code>function <b>GetDeltaProfilePointsSet</b>: <a  href="PointsSet.TPointsSet.html">TPointsSet</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetProfilePointsSet"></span><code>function <b>GetProfilePointsSet</b>: <a  href="PointsSet.TPointsSet.html">TPointsSet</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Get experimental profile data.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetRFactorIntervals"></span><code>function <b>GetRFactorIntervals</b>: <a  href="PointsSet.TPointsSet.html">TPointsSet</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetRFactorStr"></span><code>function <b>GetRFactorStr</b>: string;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetSelectedArea"></span><code>function <b>GetSelectedArea</b>: <a  href="PointsSet.TPointsSet.html">TPointsSet</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Get data for the selected interval.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetSpecialCurveParameters"></span><code>function <b>GetSpecialCurveParameters</b>: <a  href="CurvePointsSet.Curve_parameters.html">Curve_parameters</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetSpecimenCount"></span><code>function <b>GetSpecimenCount</b>: LongInt;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+These methods check validity of server <a class="normal" href="FitServer.TFitServer.html#State">state</a> and throw EUserException in the case when <a class="normal" href="FitServer.TFitServer.html#State">state</a> is invalid.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetSpecimenList"></span><code>function <b>GetSpecimenList</b>: <a  href="MSCRDataClasses.TMSCRSpecimenList.html">TMSCRSpecimenList</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Returns list of parameters of all specimens.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetSpecimenParameterCount"></span><code>function <b>GetSpecimenParameterCount</b>(SpecIndex: LongInt): LongInt;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetSpecimenPoints"></span><code>function <b>GetSpecimenPoints</b>(SpecIndex: LongInt): <a  href="NamedPointsSet.TNamedPointsSet.html">TNamedPointsSet</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetSqrRFactorStr"></span><code>function <b>GetSqrRFactorStr</b>: string;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="ReturnToTotalProfile"></span><code>function <b>ReturnToTotalProfile</b>: string;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SelectArea"></span><code>function <b>SelectArea</b>(StartPointIndex, StopPointIndex: LongInt): string;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Transfers part of profile data to the list of selected interval.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetBackgroundPointsSet"></span><code>function <b>SetBackgroundPointsSet</b>(ABackgroundPoints: <a  href="TitlePointsSet.TTitlePointsSet.html">TTitlePointsSet</a>): string;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetCurvePositions"></span><code>function <b>SetCurvePositions</b>(ACurvePositions: <a  href="PointsSet.TPointsSet.html">TPointsSet</a>): string;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetProfilePointsSet"></span><code>function <b>SetProfilePointsSet</b>(APointsSet: <a  href="TitlePointsSet.TTitlePointsSet.html">TTitlePointsSet</a>): string;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Set experimental profile data.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetRFactorIntervals"></span><code>function <b>SetRFactorIntervals</b>(ARFactorIntervals: <a  href="PointsSet.TPointsSet.html">TPointsSet</a>): string;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SmoothProfile"></span><code>function <b>SmoothProfile</b>: string;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Smoothes experimental data. Returns describing message. TODO: so far is executed synchronously. Refactor to asynchronous processing.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="CreateTaskObject"></span><code>function <b>CreateTaskObject</b>: <a  href="FitTask.TFitTask.html">TFitTask</a>; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FindBackgroundPoints"></span><code>function <b>FindBackgroundPoints</b>(Data: <a  href="PointsSet.TPointsSet.html">TPointsSet</a>): <a  href="PointsSet.TPointsSet.html">TPointsSet</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Calculates reference points for linear cut up the background. The points aren't arranged by X.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FindPeaksInternal"></span><code>function <b>FindPeaksInternal</b>: <a  href="TitlePointsSet.TTitlePointsSet.html">TTitlePointsSet</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Searches for peak boundaries and returns its points. Searches among points which do not belong to any other peak.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="GetAbsRFactor"></span><code>function <b>GetAbsRFactor</b>: Double;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="GetAllInitialized"></span><code>function <b>GetAllInitialized</b>: Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="GetRFactor"></span><code>function <b>GetRFactor</b>: Double;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Calculates the R-factor for <a class="normal" href="FitServer.TFitServer.html#CalcProfile">CalcProfile</a> and <a class="normal" href="FitServer.TFitServer.html#SelectArea">SelectArea</a> by sum for all subtasks.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="GetSqrRFactor"></span><code>function <b>GetSqrRFactor</b>: Double;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="Integrate"></span><code>function <b>Integrate</b>(Points: <a  href="PointsSet.TPointsSet.html">TPointsSet</a>; StartPointIndex, StopPointIndex: LongInt): Double;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="IntegrateAll"></span><code>function <b>IntegrateAll</b>(Points: <a  href="PointsSet.TPointsSet.html">TPointsSet</a>): Double;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="AbortAsyncOper"></span><code>procedure <b>AbortAsyncOper</b>; virtual; abstract;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Stops long-term operation synchronously without calling termination procedure.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="AddPointToBackground"></span><code>procedure <b>AddPointToBackground</b>(XValue, YValue: Double);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="AddPointToCurvePositions"></span><code>procedure <b>AddPointToCurvePositions</b>(XValue, YValue: Double);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="AddPointToData"></span><code>procedure <b>AddPointToData</b>(XValue, YValue: Double);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+All methods call <a class="normal" href="FitServer.TFitServer.html#AddPoint">AddPoint</a>.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="AddPointToRFactorIntervals"></span><code>procedure <b>AddPointToRFactorIntervals</b>(XValue, YValue: Double);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="CreateSpecimenList"></span><code>procedure <b>CreateSpecimenList</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Defines starting and finishing point for each curve (specimen), integrates it and puts parameters into resulting list.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetSpecimenParameter"></span><code>procedure <b>GetSpecimenParameter</b>(SpecIndex: LongInt; ParamIndex: LongInt; var Name: string; var Value: Double; var Type_: LongInt);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="ReplacePointInBackground"></span><code>procedure <b>ReplacePointInBackground</b>( PrevXValue, PrevYValue, NewXValue, NewYValue: Double);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="ReplacePointInCurvePositions"></span><code>procedure <b>ReplacePointInCurvePositions</b>( PrevXValue, PrevYValue, NewXValue, NewYValue: Double);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="ReplacePointInData"></span><code>procedure <b>ReplacePointInData</b>( PrevXValue, PrevYValue, NewXValue, NewYValue: Double);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+All methods call ReplacePoint.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="ReplacePointInRFactorIntervals"></span><code>procedure <b>ReplacePointInRFactorIntervals</b>( PrevXValue, PrevYValue, NewXValue, NewYValue: Double);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetSpecialCurveParameters"></span><code>procedure <b>SetSpecialCurveParameters</b>( ACurveExpr: string; CP: <a  href="CurvePointsSet.Curve_parameters.html">Curve_parameters</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetSpecimenParameter"></span><code>procedure <b>SetSpecimenParameter</b>(SpecIndex: LongInt; ParamIndex: LongInt; Value: Double);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="StopAsyncOper"></span><code>procedure <b>StopAsyncOper</b>; virtual; abstract;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Stops long-term operation asynchronously. Calls termination procedure.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SubtractAllBackground"></span><code>procedure <b>SubtractAllBackground</b>(Auto: Boolean);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Subtracts the background by linear approximation. When Auto is True then background points selected before (no matter by which way) are dropped out. TODO: when it is called as interface method should return text message.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SubtractBackground"></span><code>procedure <b>SubtractBackground</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Linearly subtracts background in the <a class="normal" href="FitServer.TFitServer.html#SelectArea">SelectArea</a> and recreates <a class="normal" href="FitServer.TFitServer.html#SelectArea">SelectArea</a>. TODO: unify with <a class="normal" href="FitServer.TFitServer.html#SubtractAllBackground">SubtractAllBackground</a>.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="AddPoint"></span><code>procedure <b>AddPoint</b>(var Points: <a  href="TitlePointsSet.TTitlePointsSet.html">TTitlePointsSet</a>; XValue, YValue: Double);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Adds new point to the given point set. Second call with the same coordinates removes point from the list. At this the list object is replaced by new one.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="AddSpecimenToList"></span><code>procedure <b>AddSpecimenToList</b>(Points: <a  href="CurvePointsSet.TCurvePointsSet.html">TCurvePointsSet</a>; StartPointIndex, StopPointIndex: LongInt );</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Integrates specimen curve and adds resulting value to the list of results.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="AllPointsAsPeakPositionsAlg"></span><code>procedure <b>AllPointsAsPeakPositionsAlg</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Selects all points as specimen positions.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="CreateDeltaProfile"></span><code>procedure <b>CreateDeltaProfile</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Calculates profile containing differences between <a class="normal" href="CurvePointsSet.html#Calculated">calculated</a> and experimental data. In the calculation all the specimens are included. Will not work properly if specimen areas are overlapped.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="CreateParameters"></span><code>procedure <b>CreateParameters</b>(ACurveExpr: string);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Checks expression and fills list of parameters.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="CreateResultedCurvesList"></span><code>procedure <b>CreateResultedCurvesList</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="CreateResultedProfile"></span><code>procedure <b>CreateResultedProfile</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Auxiliary methods.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="CreateSpecimenListAlg"></span><code>procedure <b>CreateSpecimenListAlg</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Iterates through list of pattern specimens and creates common list of parameters of all the specimens complementing them with <a class="normal" href="CurvePointsSet.html#Calculated">calculated</a> parameters.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="CreateTasks"></span><code>procedure <b>CreateTasks</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Creates subtasks for selected intervals. If the intervals were not selected generates them automatically.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="DoAllAutomaticallyAlg"></span><code>procedure <b>DoAllAutomaticallyAlg</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="Done"></span><code>procedure <b>Done</b>; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+TODO: implement.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="DoneProc"></span><code>procedure <b>DoneProc</b>; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+These methods are executed in the separate thread.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FindBackPointsAlg"></span><code>procedure <b>FindBackPointsAlg</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Calculates background points.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FindBackPointsDone"></span><code>procedure <b>FindBackPointsDone</b>; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+TODO: implement.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FindBackPointsDoneProcActual"></span><code>procedure <b>FindBackPointsDoneProcActual</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FindGaussesAgainAlg"></span><code>procedure <b>FindGaussesAgainAlg</b>; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FindGaussesAlg"></span><code>procedure <b>FindGaussesAlg</b>; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FindGaussesSequentiallyAlg"></span><code>procedure <b>FindGaussesSequentiallyAlg</b>; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Wrappers for corresponding methods of <a class="normal" href="FitTask.TFitTask.html">TFitTask</a>.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FindPeakBoundsAlg"></span><code>procedure <b>FindPeakBoundsAlg</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Calculates boundaries of R-factor intervals based on data obtained from <a class="normal" href="FitServer.TFitServer.html#FindPeaksInternal">FindPeaksInternal</a>.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FindPeakBoundsDone"></span><code>procedure <b>FindPeakBoundsDone</b>; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+TODO: implement.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FindPeakBoundsDoneProcActual"></span><code>procedure <b>FindPeakBoundsDoneProcActual</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FindPeakPositionsAlg"></span><code>procedure <b>FindPeakPositionsAlg</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Calculates peak positions which will be taken as specimen positions.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FindPeakPositionsDone"></span><code>procedure <b>FindPeakPositionsDone</b>; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+TODO: implement.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FindPeakPositionsDoneProcActual"></span><code>procedure <b>FindPeakPositionsDoneProcActual</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FindPeakPositionsForAutoAlg"></span><code>procedure <b>FindPeakPositionsForAutoAlg</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Fills the list of peak positions for automatic fit.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="GoToReadyForFit"></span><code>procedure <b>GoToReadyForFit</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Prepares intermediate results for <a class="normal" href="Main.html#User">user</a>.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="InitTasks"></span><code>procedure <b>InitTasks</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="RecreateMainCalcThread"></span><code>procedure <b>RecreateMainCalcThread</b>( ACurrentTask: <a  href="MainCalcThread.html#TCurrentTask">TCurrentTask</a>; ADoneProc: <a  href="MainCalcThread.html#TDoneProc">TDoneProc</a>); virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Does not really <a class="normal" href="FitServer.TFitServer.html#Create">create</a> any thread. Simply calls methods synchronously.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="SelectAreaActual"></span><code>procedure <b>SelectAreaActual</b>( Points: <a  href="PointsSet.TPointsSet.html">TPointsSet</a>; StartPointIndex, StopPointIndex: LongInt);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Copies data from given list to the list of selected interval.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="SetCurveThresh"></span><code>procedure <b>SetCurveThresh</b>(ACurveThresh: Double);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="SetCurveType"></span><code>procedure <b>SetCurveType</b>(ACurveTypeId: <a  href="IntPointsSet.html#TCurveTypeId">TCurveTypeId</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="SetMaxRFactor"></span><code>procedure <b>SetMaxRFactor</b>(AMaxRFactor: Double);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="SetState"></span><code>procedure <b>SetState</b>(AState: <a  href="CommonTypes.html#TFitServerState">TFitServerState</a>); virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+<a class="normal" href="FitServer.TFitServer.html#State">State</a> changing. The <a class="normal" href="FitServer.TFitServer.html#State">state</a> should not change within additional thread, because the change destroys it.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="SetWaveLength"></span><code>procedure <b>SetWaveLength</b>(AWaveLength: Double);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+TODO: remove this.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="ShowCurMin"></span><code>procedure <b>ShowCurMin</b>(Min: Double); virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Regenerates resulting list of curves, recalculates resulting profile and updates current minimum value.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="ShowCurMinInternal"></span><code>procedure <b>ShowCurMinInternal</b>; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Methods used by optimization algorithm to update information in achieving of new minimum. Calls <a class="normal" href="IntClientCallback.IClientCallback.html">IClientCallback</a>'s <a class="normal" href="FitServer.TFitServer.html#ShowCurMin">ShowCurMin</a> method.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="ShowProfile"></span><code>procedure <b>ShowProfile</b>; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Updates profile data after background subtraction.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="Smoothing"></span><code>procedure <b>Smoothing</b>(ANeutronPointsSet: <a  href="PointsSet.TPointsSet.html">TPointsSet</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Low-level methods used by algorithms.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="SubtractLinearly"></span><code>procedure <b>SubtractLinearly</b>(Data: <a  href="PointsSet.TPointsSet.html">TPointsSet</a>; StartIndex: LongInt; EndIndex: LongInt);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Linearly subtracts background at the given interval of points.</p>
+</td></tr>
+</table>
+<h3 class="detail">Properties</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="BackFactor"></span><code>property <b>BackFactor</b>: Double read <a  href="FitServer.TFitServer.html#FBackFactor">FBackFactor</a> write <a  href="FitServer.TFitServer.html#FBackFactor">FBackFactor</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Denominator of ratio of background to maximal intensity.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="CurveThresh"></span><code>property <b>CurveThresh</b>: Double read <a  href="FitServer.TFitServer.html#FCurveThresh">FCurveThresh</a> write <a  href="FitServer.TFitServer.html#SetCurveThresh">SetCurveThresh</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+The threshold for determination of curve (specimen) boundaries. It is supposed that background was cut out. The curve boundaries are defined by exceeding the threshold by curve function. The same threshold removes instances with too small amplitude.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="CurveTypeId"></span><code>property <b>CurveTypeId</b>: <a  href="IntPointsSet.html#TCurveTypeId">TCurveTypeId</a> read <a  href="FitServer.TFitServer.html#FCurveTypeId">FCurveTypeId</a> write <a  href="FitServer.TFitServer.html#SetCurveType">SetCurveType</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="MaxRFactor"></span><code>property <b>MaxRFactor</b>: Double read <a  href="FitServer.TFitServer.html#FMaxRFactor">FMaxRFactor</a> write <a  href="FitServer.TFitServer.html#SetMaxRFactor">SetMaxRFactor</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Maximum allowed value of R-factor.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SelectedAreaMode"></span><code>property <b>SelectedAreaMode</b>: Boolean read <a  href="FitServer.TFitServer.html#FSelectedAreaMode">FSelectedAreaMode</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="State"></span><code>property <b>State</b>: <a  href="CommonTypes.html#TFitServerState">TFitServerState</a> read <a  href="FitServer.TFitServer.html#FState">FState</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="WaveLength"></span><code>property <b>WaveLength</b>: Double read <a  href="FitServer.TFitServer.html#FWaveLength">FWaveLength</a> write <a  href="FitServer.TFitServer.html#SetWaveLength">SetWaveLength</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+</span>
+</td></tr></table></body></html>

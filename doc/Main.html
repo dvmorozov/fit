@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Fit: Main</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<table class="container"><tr><td class="navigation">
+<h2>Fit</h2><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p><p><a href="GVClasses.png" class="navigation">Classes hierarchy graph</a></p></td><td class="content">
+<h1 class="unit">Unit Main</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Uses">Uses</a></div><div class="one_section">Classes, Interfaces, Objects and Records</div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section"><a class="section" href="#PasDoc-Types">Types</a></div><div class="one_section"><a class="section" href="#PasDoc-Constants">Constants</a></div><div class="one_section">Variables</div></div>
+<span id="PasDoc-Description"></span><h2 class="description">Description</h2>
+<p>
+Contains entry point of the application.</p>
+<p>
+This software is distributed under GPL in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
+
+<p>
+
+<p></p>
+<span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
+<ul class="useslist"><li>base_service_intf</li><li>binary_formatter</li><li>Classes</li><li><a  href="DataLoader.html">DataLoader</a></li><li><a  href="fit_server_proxy.html">fit_server_proxy</a></li><li>Forms</li><li>soap_formatter</li><li>synapse_http_protocol</li><li>synapse_tcp_protocol</li><li>SysUtils</li></ul><h2 class="overview">Overview</h2>
+<span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code>function <b><a  href="Main.html#CreateErrorMessage">CreateErrorMessage</a></b>(Msg: string): string;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a  href="Main.html#GetConfigDir">GetConfigDir</a></b>: string;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a  href="Main.html#GetSeqErrorCode">GetSeqErrorCode</a></b>(): LongInt;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a  href="Main.html#GetUserDir">GetUserDir</a></b>: string;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="Main.html#WriteLog">WriteLog</a></b>(Msg: string; MsgType: <a  href="Main.html#TMsgType">TMsgType</a>);</code></td>
+</tr>
+</table>
+<span id="PasDoc-Types"></span><h3 class="summary">Types</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><b><a  href="Main.html#TMsgType">TMsgType</a></b> = (...);</code></td>
+</tr>
+</table>
+<span id="PasDoc-Constants"></span><h3 class="summary">Constants</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><b><a  href="Main.html#ExternalIP">ExternalIP</a></b>: string = 'ec2-54-158-234-101.compute-1.amazonaws.com';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="Main.html#InternalError">InternalError</a></b>: string = 'Internal service error. Error code: ';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="Main.html#InternalIP">InternalIP</a></b>: string = '127.0.0.1';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="Main.html#InternalPort">InternalPort</a></b>: string = '1234';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="Main.html#Slash">Slash</a></b>: string = '/';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="Main.html#StrErrorID">StrErrorID</a></b>: string = ' Error identifier: ';</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Functions and Procedures</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="CreateErrorMessage"></span><code>function <b>CreateErrorMessage</b>(Msg: string): string;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+dopolnyaet soobschenie kodom oschibki</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="GetConfigDir"></span><code>function <b>GetConfigDir</b>: string;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="GetSeqErrorCode"></span><code>function <b>GetSeqErrorCode</b>(): LongInt;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="GetUserDir"></span><code>function <b>GetUserDir</b>: string;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+{$IFDEF FITPRO} trebuetsya dlya cgifit {$ENDIF} peremennye vyneseny v otdel'nyi modul', dlya togo chtoby k nim mozhno bylo by poluchit' dostup iz drugih modulei FITCGI <a class="normal" href="FitClient.html">FITCLIENT</a> funkcii dlya opredeleniya mestopolozheniya ??? f-i d. rabotat' v mnogopotochnom okruzhenii</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="WriteLog"></span><code>procedure <b>WriteLog</b>(Msg: string; MsgType: <a  href="Main.html#TMsgType">TMsgType</a>);</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<h3 class="detail">Types</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="TMsgType"></span><code><b>TMsgType</b> = (...);</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;<h6 class="description_section">Values</h6>
+<ul>
+<li>
+<span id="Fatal">Fatal</span></li>
+<li>
+<span id="Surprising">Surprising</span></li>
+<li>
+<span id="Notification_">Notification_</span></li>
+<li>
+<span id="User">User</span></li>
+</ul>
+</td></tr>
+</table>
+<h3 class="detail">Constants</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="ExternalIP"></span><code><b>ExternalIP</b>: string = 'ec2-54-158-234-101.compute-1.amazonaws.com';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+IP dlya svyazi brauzera s CGI-klientom; eti dannye vstavlyayutsya v ishodyaschie stranitsy</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="InternalError"></span><code><b>InternalError</b>: string = 'Internal service error. Error code: ';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="InternalIP"></span><code><b>InternalIP</b>: string = '127.0.0.1';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+IP dlya svyazi CGI-klienta s serverom prilozheniya <code>InternalIP</code>: string = '192.168.0.190'; CGI-klient i server rabotayut na odnom kompyutere</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="InternalPort"></span><code><b>InternalPort</b>: string = '1234';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="Slash"></span><code><b>Slash</b>: string = '/';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="StrErrorID"></span><code><b>StrErrorID</b>: string = ' Error identifier: ';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<h2 class="authors">Author</h2>
+<ul class="authors">
+<li>Dmitry Morozov <a  href="mailto:dvmorozov@hotmail.com">dvmorozov@hotmail.com</a>, 
+LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
+Facebook https://www.facebook.com/profile.php?id=100004082021870</li>
+</ul>
+<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+</span>
+</td></tr></table></body></html>

@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Fit: fit_server: Interface IFitServer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<table class="container"><tr><td class="navigation">
+<h2>Fit</h2><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p><p><a href="GVClasses.png" class="navigation">Classes hierarchy graph</a></p></td><td class="content">
+<span id="IFitServer"></span><h1 class="cio">Interface IFitServer</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Hierarchy">Hierarchy</a></div><div class="one_section">Fields</div><div class="one_section"><a class="section" href="#PasDoc-Methods">Methods</a></div><div class="one_section">Properties</div></div>
+<span id="PasDoc-Description"></span><h2 class="unit">Unit</h2>
+<p class="unitlink">
+<a  href="fit_server.html">fit_server</a></p>
+<h2 class="declaration">Declaration</h2>
+<p class="declaration">
+<code>type IFitServer = interface(IInvokable)</code></p>
+<h2 class="description">Description</h2>
+<h6 class="description_section">Attributes</h6>
+<dl class="attributes">
+  <dt>GUID['{8935335B-96A6-4B32-A1E6-65BE9A4B3AAF}']</dt>
+  <dd></dd>
+</dl>
+<span id="PasDoc-Hierarchy"></span><h2 class="hierarchy">Hierarchy</h2>
+<ul class="hierarchy"><li class="ancestor">IInvokable</li>
+<li class="thisitem">IFitServer</li></ul><h2 class="overview">Overview</h2>
+<span id="PasDoc-Methods"></span><h3 class="summary">Methods</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_server.IFitServer.html#AddPointToBackground">AddPointToBackground</a></b>( const XValue : Double; const YValue : Double; const ProblemID : integer ):<a  href="fit_server.TResult.html">TResult</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_server.IFitServer.html#AddPointToData">AddPointToData</a></b>( const XValue : Double; const YValue : Double; const ProblemID : integer ):<a  href="fit_server.TResult.html">TResult</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_server.IFitServer.html#AddPointToSpecimenIntervals">AddPointToSpecimenIntervals</a></b>( const XValue : Double; const YValue : Double; const ProblemID : integer ):<a  href="fit_server.TResult.html">TResult</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_server.IFitServer.html#AddPointToSpecimenPositions">AddPointToSpecimenPositions</a></b>( const XValue : Double; const YValue : Double; const ProblemID : integer ):<a  href="fit_server.TResult.html">TResult</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_server.IFitServer.html#AsyncOper">AsyncOper</a></b>( const ProblemID : integer ):<a  href="fit_server.TBoolResult.html">TBoolResult</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_server.IFitServer.html#CreateProblem">CreateProblem</a></b>():integer;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_server.IFitServer.html#CreateSpecimenList">CreateSpecimenList</a></b>( const ProblemID : integer ):<a  href="fit_server.TResult.html">TResult</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_server.IFitServer.html#DoAllAutomatically">DoAllAutomatically</a></b>( const ProblemID : integer ):<a  href="fit_server.TResult.html">TResult</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_server.IFitServer.html#FindBackPoints">FindBackPoints</a></b>( const ProblemID : integer ):<a  href="fit_server.TResult.html">TResult</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_server.IFitServer.html#FindSpecimenIntervals">FindSpecimenIntervals</a></b>( const ProblemID : integer ):<a  href="fit_server.TResult.html">TResult</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_server.IFitServer.html#FindSpecimenPositions">FindSpecimenPositions</a></b>( const ProblemID : integer ):<a  href="fit_server.TResult.html">TResult</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_server.IFitServer.html#GetAbsRFactorStr">GetAbsRFactorStr</a></b>( const ProblemID : integer ):<a  href="fit_server.TStringResult.html">TStringResult</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_server.IFitServer.html#GetBackFactor">GetBackFactor</a></b>( const ProblemID : integer ):Double;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_server.IFitServer.html#GetBackgroundPoints">GetBackgroundPoints</a></b>( const ProblemID : integer ):<a  href="fit_server.TPointsResult.html">TPointsResult</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_server.IFitServer.html#GetCalcProfilePointsSet">GetCalcProfilePointsSet</a></b>( const ProblemID : integer ):<a  href="fit_server.TPointsResult.html">TPointsResult</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_server.IFitServer.html#GetCalcTimeStr">GetCalcTimeStr</a></b>( const ProblemID : integer ):<a  href="fit_server.TStringResult.html">TStringResult</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_server.IFitServer.html#GetCurveThresh">GetCurveThresh</a></b>( const ProblemID : integer ):Double;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_server.IFitServer.html#GetCurveType">GetCurveType</a></b>( const ProblemID : integer ):integer;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_server.IFitServer.html#GetDeltaProfilePointsSet">GetDeltaProfilePointsSet</a></b>( const ProblemID : integer ):<a  href="fit_server.TPointsResult.html">TPointsResult</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_server.IFitServer.html#GetGraph">GetGraph</a></b>( const Width : integer; const Height : integer; const ProblemID : integer ):<a  href="fit_server.TPictureResult.html">TPictureResult</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_server.IFitServer.html#GetMaxRFactor">GetMaxRFactor</a></b>( const ProblemID : integer ):Double;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_server.IFitServer.html#GetProfileChunk">GetProfileChunk</a></b>( const ProblemID : integer; const ChunkNum : integer ):<a  href="fit_server.TPointsResult.html">TPointsResult</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_server.IFitServer.html#GetProfileChunkCount">GetProfileChunkCount</a></b>( const ProblemID : integer ):<a  href="fit_server.TIntResult.html">TIntResult</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_server.IFitServer.html#GetProfilePointsSet">GetProfilePointsSet</a></b>( const ProblemID : integer ):<a  href="fit_server.TPointsResult.html">TPointsResult</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_server.IFitServer.html#GetRFactorStr">GetRFactorStr</a></b>( const ProblemID : integer ):<a  href="fit_server.TStringResult.html">TStringResult</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_server.IFitServer.html#GetSelectedArea">GetSelectedArea</a></b>( const ProblemID : integer ):<a  href="fit_server.TPointsResult.html">TPointsResult</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_server.IFitServer.html#GetSpecimenCount">GetSpecimenCount</a></b>( const ProblemID : integer ):<a  href="fit_server.TIntResult.html">TIntResult</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_server.IFitServer.html#GetSpecimenIntervals">GetSpecimenIntervals</a></b>( const ProblemID : integer ):<a  href="fit_server.TPointsResult.html">TPointsResult</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_server.IFitServer.html#GetSpecimenParameter">GetSpecimenParameter</a></b>( const ProblemID : integer; const SpecIndex : integer; const ParamIndex : integer ):<a  href="fit_server.TSpecParamResult.html">TSpecParamResult</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_server.IFitServer.html#GetSpecimenParameterCount">GetSpecimenParameterCount</a></b>( const ProblemID : integer; const SpecIndex : integer ):<a  href="fit_server.TIntResult.html">TIntResult</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_server.IFitServer.html#GetSpecimenPoints">GetSpecimenPoints</a></b>( const SpecIndex : integer; const ProblemID : integer ):<a  href="fit_server.TNamedPointsResult.html">TNamedPointsResult</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_server.IFitServer.html#GetSpecimenPositions">GetSpecimenPositions</a></b>( const ProblemID : integer ):<a  href="fit_server.TPointsResult.html">TPointsResult</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_server.IFitServer.html#GetSqrRFactorStr">GetSqrRFactorStr</a></b>( const ProblemID : integer ):<a  href="fit_server.TStringResult.html">TStringResult</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_server.IFitServer.html#GetState">GetState</a></b>( const ProblemID : integer ):integer;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_server.IFitServer.html#GetWaveLength">GetWaveLength</a></b>( const ProblemID : integer ):Double;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_server.IFitServer.html#MinimizeDifference">MinimizeDifference</a></b>( const ProblemID : integer ):<a  href="fit_server.TResult.html">TResult</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_server.IFitServer.html#MinimizeNumberOfSpecimens">MinimizeNumberOfSpecimens</a></b>( const ProblemID : integer ):<a  href="fit_server.TResult.html">TResult</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_server.IFitServer.html#ReplacePointInBackground">ReplacePointInBackground</a></b>( const PrevXValue : Double; const PrevYValue : Double; const NewXValue : Double; const NewYValue : Double; const ProblemID : integer ):<a  href="fit_server.TResult.html">TResult</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_server.IFitServer.html#ReplacePointInProfile">ReplacePointInProfile</a></b>( const PrevXValue : Double; const PrevYValue : Double; const NewXValue : Double; const NewYValue : Double; const ProblemID : integer ):<a  href="fit_server.TResult.html">TResult</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_server.IFitServer.html#ReplacePointInSpecimenIntervals">ReplacePointInSpecimenIntervals</a></b>( const PrevXValue : Double; const PrevYValue : Double; const NewXValue : Double; const NewYValue : Double; const ProblemID : integer ):<a  href="fit_server.TResult.html">TResult</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_server.IFitServer.html#ReplacePointInSpecimenPositions">ReplacePointInSpecimenPositions</a></b>( const PrevXValue : Double; const PrevYValue : Double; const NewXValue : Double; const NewYValue : Double; const ProblemID : integer ):<a  href="fit_server.TResult.html">TResult</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_server.IFitServer.html#ReturnToTotalProfile">ReturnToTotalProfile</a></b>( const ProblemID : integer ):<a  href="fit_server.TResult.html">TResult</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_server.IFitServer.html#SelectArea">SelectArea</a></b>( const StartPointIndex : integer; const StopPointIndex : integer; const ProblemID : integer ):<a  href="fit_server.TResult.html">TResult</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_server.IFitServer.html#SetBackgroundPointsSet">SetBackgroundPointsSet</a></b>( const BackgroundPoints : TArrayOfFloatDoubleRemotable; const ProblemID : integer ):<a  href="fit_server.TResult.html">TResult</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_server.IFitServer.html#SetProfilePointsSet">SetProfilePointsSet</a></b>( const PointsSet : TArrayOfFloatDoubleRemotable; const ProblemID : integer ):<a  href="fit_server.TResult.html">TResult</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_server.IFitServer.html#SetSpecimenIntervals">SetSpecimenIntervals</a></b>( const SpecimenIntervals : TArrayOfFloatDoubleRemotable; const ProblemID : integer ):<a  href="fit_server.TResult.html">TResult</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_server.IFitServer.html#SetSpecimenParameter">SetSpecimenParameter</a></b>( const ProblemID : integer; const SpecIndex : integer; const ParamIndex : integer; const Value : Double ):<a  href="fit_server.TResult.html">TResult</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_server.IFitServer.html#SetSpecimenPositions">SetSpecimenPositions</a></b>( const SpecimenPositions : TArrayOfFloatDoubleRemotable; const ProblemID : integer ):<a  href="fit_server.TResult.html">TResult</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_server.IFitServer.html#SmoothProfile">SmoothProfile</a></b>( const ProblemID : integer ):<a  href="fit_server.TResult.html">TResult</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_server.IFitServer.html#StopAsyncOper">StopAsyncOper</a></b>( const ProblemID : integer ):<a  href="fit_server.TResult.html">TResult</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_server.IFitServer.html#SubtractAllBackground">SubtractAllBackground</a></b>( const Auto : boolean; const ProblemID : integer ):<a  href="fit_server.TResult.html">TResult</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server.IFitServer.html#DiscardProblem">DiscardProblem</a></b>( const ProblemID : integer );</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server.IFitServer.html#SetBackFactor">SetBackFactor</a></b>( const BackFactor : Double; const ProblemID : integer );</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server.IFitServer.html#SetCurveThresh">SetCurveThresh</a></b>( const CurveThresh : Double; const ProblemID : integer );</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server.IFitServer.html#SetCurveType">SetCurveType</a></b>( const CurveTypeId : integer; const ProblemID : integer );</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server.IFitServer.html#SetMaxRFactor">SetMaxRFactor</a></b>( const MaxRFactor : Double; const ProblemID : integer );</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_server.IFitServer.html#SetWaveLength">SetWaveLength</a></b>( const WaveLength : Double; const ProblemID : integer );</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Methods</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="AddPointToBackground"></span><code>function <b>AddPointToBackground</b>( const XValue : Double; const YValue : Double; const ProblemID : integer ):<a  href="fit_server.TResult.html">TResult</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="AddPointToData"></span><code>function <b>AddPointToData</b>( const XValue : Double; const YValue : Double; const ProblemID : integer ):<a  href="fit_server.TResult.html">TResult</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="AddPointToSpecimenIntervals"></span><code>function <b>AddPointToSpecimenIntervals</b>( const XValue : Double; const YValue : Double; const ProblemID : integer ):<a  href="fit_server.TResult.html">TResult</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="AddPointToSpecimenPositions"></span><code>function <b>AddPointToSpecimenPositions</b>( const XValue : Double; const YValue : Double; const ProblemID : integer ):<a  href="fit_server.TResult.html">TResult</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="AsyncOper"></span><code>function <b>AsyncOper</b>( const ProblemID : integer ):<a  href="fit_server.TBoolResult.html">TBoolResult</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="CreateProblem"></span><code>function <b>CreateProblem</b>():integer;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="CreateSpecimenList"></span><code>function <b>CreateSpecimenList</b>( const ProblemID : integer ):<a  href="fit_server.TResult.html">TResult</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="DoAllAutomatically"></span><code>function <b>DoAllAutomatically</b>( const ProblemID : integer ):<a  href="fit_server.TResult.html">TResult</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="FindBackPoints"></span><code>function <b>FindBackPoints</b>( const ProblemID : integer ):<a  href="fit_server.TResult.html">TResult</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="FindSpecimenIntervals"></span><code>function <b>FindSpecimenIntervals</b>( const ProblemID : integer ):<a  href="fit_server.TResult.html">TResult</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="FindSpecimenPositions"></span><code>function <b>FindSpecimenPositions</b>( const ProblemID : integer ):<a  href="fit_server.TResult.html">TResult</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetAbsRFactorStr"></span><code>function <b>GetAbsRFactorStr</b>( const ProblemID : integer ):<a  href="fit_server.TStringResult.html">TStringResult</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetBackFactor"></span><code>function <b>GetBackFactor</b>( const ProblemID : integer ):Double;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetBackgroundPoints"></span><code>function <b>GetBackgroundPoints</b>( const ProblemID : integer ):<a  href="fit_server.TPointsResult.html">TPointsResult</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetCalcProfilePointsSet"></span><code>function <b>GetCalcProfilePointsSet</b>( const ProblemID : integer ):<a  href="fit_server.TPointsResult.html">TPointsResult</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetCalcTimeStr"></span><code>function <b>GetCalcTimeStr</b>( const ProblemID : integer ):<a  href="fit_server.TStringResult.html">TStringResult</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetCurveThresh"></span><code>function <b>GetCurveThresh</b>( const ProblemID : integer ):Double;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetCurveType"></span><code>function <b>GetCurveType</b>( const ProblemID : integer ):integer;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetDeltaProfilePointsSet"></span><code>function <b>GetDeltaProfilePointsSet</b>( const ProblemID : integer ):<a  href="fit_server.TPointsResult.html">TPointsResult</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetGraph"></span><code>function <b>GetGraph</b>( const Width : integer; const Height : integer; const ProblemID : integer ):<a  href="fit_server.TPictureResult.html">TPictureResult</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetMaxRFactor"></span><code>function <b>GetMaxRFactor</b>( const ProblemID : integer ):Double;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetProfileChunk"></span><code>function <b>GetProfileChunk</b>( const ProblemID : integer; const ChunkNum : integer ):<a  href="fit_server.TPointsResult.html">TPointsResult</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetProfileChunkCount"></span><code>function <b>GetProfileChunkCount</b>( const ProblemID : integer ):<a  href="fit_server.TIntResult.html">TIntResult</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetProfilePointsSet"></span><code>function <b>GetProfilePointsSet</b>( const ProblemID : integer ):<a  href="fit_server.TPointsResult.html">TPointsResult</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetRFactorStr"></span><code>function <b>GetRFactorStr</b>( const ProblemID : integer ):<a  href="fit_server.TStringResult.html">TStringResult</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetSelectedArea"></span><code>function <b>GetSelectedArea</b>( const ProblemID : integer ):<a  href="fit_server.TPointsResult.html">TPointsResult</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetSpecimenCount"></span><code>function <b>GetSpecimenCount</b>( const ProblemID : integer ):<a  href="fit_server.TIntResult.html">TIntResult</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetSpecimenIntervals"></span><code>function <b>GetSpecimenIntervals</b>( const ProblemID : integer ):<a  href="fit_server.TPointsResult.html">TPointsResult</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetSpecimenParameter"></span><code>function <b>GetSpecimenParameter</b>( const ProblemID : integer; const SpecIndex : integer; const ParamIndex : integer ):<a  href="fit_server.TSpecParamResult.html">TSpecParamResult</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetSpecimenParameterCount"></span><code>function <b>GetSpecimenParameterCount</b>( const ProblemID : integer; const SpecIndex : integer ):<a  href="fit_server.TIntResult.html">TIntResult</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetSpecimenPoints"></span><code>function <b>GetSpecimenPoints</b>( const SpecIndex : integer; const ProblemID : integer ):<a  href="fit_server.TNamedPointsResult.html">TNamedPointsResult</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetSpecimenPositions"></span><code>function <b>GetSpecimenPositions</b>( const ProblemID : integer ):<a  href="fit_server.TPointsResult.html">TPointsResult</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetSqrRFactorStr"></span><code>function <b>GetSqrRFactorStr</b>( const ProblemID : integer ):<a  href="fit_server.TStringResult.html">TStringResult</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetState"></span><code>function <b>GetState</b>( const ProblemID : integer ):integer;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetWaveLength"></span><code>function <b>GetWaveLength</b>( const ProblemID : integer ):Double;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="MinimizeDifference"></span><code>function <b>MinimizeDifference</b>( const ProblemID : integer ):<a  href="fit_server.TResult.html">TResult</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="MinimizeNumberOfSpecimens"></span><code>function <b>MinimizeNumberOfSpecimens</b>( const ProblemID : integer ):<a  href="fit_server.TResult.html">TResult</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="ReplacePointInBackground"></span><code>function <b>ReplacePointInBackground</b>( const PrevXValue : Double; const PrevYValue : Double; const NewXValue : Double; const NewYValue : Double; const ProblemID : integer ):<a  href="fit_server.TResult.html">TResult</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="ReplacePointInProfile"></span><code>function <b>ReplacePointInProfile</b>( const PrevXValue : Double; const PrevYValue : Double; const NewXValue : Double; const NewYValue : Double; const ProblemID : integer ):<a  href="fit_server.TResult.html">TResult</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="ReplacePointInSpecimenIntervals"></span><code>function <b>ReplacePointInSpecimenIntervals</b>( const PrevXValue : Double; const PrevYValue : Double; const NewXValue : Double; const NewYValue : Double; const ProblemID : integer ):<a  href="fit_server.TResult.html">TResult</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="ReplacePointInSpecimenPositions"></span><code>function <b>ReplacePointInSpecimenPositions</b>( const PrevXValue : Double; const PrevYValue : Double; const NewXValue : Double; const NewYValue : Double; const ProblemID : integer ):<a  href="fit_server.TResult.html">TResult</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="ReturnToTotalProfile"></span><code>function <b>ReturnToTotalProfile</b>( const ProblemID : integer ):<a  href="fit_server.TResult.html">TResult</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SelectArea"></span><code>function <b>SelectArea</b>( const StartPointIndex : integer; const StopPointIndex : integer; const ProblemID : integer ):<a  href="fit_server.TResult.html">TResult</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetBackgroundPointsSet"></span><code>function <b>SetBackgroundPointsSet</b>( const BackgroundPoints : TArrayOfFloatDoubleRemotable; const ProblemID : integer ):<a  href="fit_server.TResult.html">TResult</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetProfilePointsSet"></span><code>function <b>SetProfilePointsSet</b>( const PointsSet : TArrayOfFloatDoubleRemotable; const ProblemID : integer ):<a  href="fit_server.TResult.html">TResult</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetSpecimenIntervals"></span><code>function <b>SetSpecimenIntervals</b>( const SpecimenIntervals : TArrayOfFloatDoubleRemotable; const ProblemID : integer ):<a  href="fit_server.TResult.html">TResult</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetSpecimenParameter"></span><code>function <b>SetSpecimenParameter</b>( const ProblemID : integer; const SpecIndex : integer; const ParamIndex : integer; const Value : Double ):<a  href="fit_server.TResult.html">TResult</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetSpecimenPositions"></span><code>function <b>SetSpecimenPositions</b>( const SpecimenPositions : TArrayOfFloatDoubleRemotable; const ProblemID : integer ):<a  href="fit_server.TResult.html">TResult</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SmoothProfile"></span><code>function <b>SmoothProfile</b>( const ProblemID : integer ):<a  href="fit_server.TResult.html">TResult</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="StopAsyncOper"></span><code>function <b>StopAsyncOper</b>( const ProblemID : integer ):<a  href="fit_server.TResult.html">TResult</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SubtractAllBackground"></span><code>function <b>SubtractAllBackground</b>( const Auto : boolean; const ProblemID : integer ):<a  href="fit_server.TResult.html">TResult</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="DiscardProblem"></span><code>procedure <b>DiscardProblem</b>( const ProblemID : integer );</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetBackFactor"></span><code>procedure <b>SetBackFactor</b>( const BackFactor : Double; const ProblemID : integer );</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetCurveThresh"></span><code>procedure <b>SetCurveThresh</b>( const CurveThresh : Double; const ProblemID : integer );</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetCurveType"></span><code>procedure <b>SetCurveType</b>( const CurveTypeId : integer; const ProblemID : integer );</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetMaxRFactor"></span><code>procedure <b>SetMaxRFactor</b>( const MaxRFactor : Double; const ProblemID : integer );</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetWaveLength"></span><code>procedure <b>SetWaveLength</b>( const WaveLength : Double; const ProblemID : integer );</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+</span>
+</td></tr></table></body></html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Fit: AsymPseudoVoigtPointsSet: Class TAsymPseudoVoigtPointsSet</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<table class="container"><tr><td class="navigation">
+<h2>Fit</h2><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p><p><a href="GVClasses.png" class="navigation">Classes hierarchy graph</a></p></td><td class="content">
+<span id="TAsymPseudoVoigtPointsSet"></span><h1 class="cio">Class TAsymPseudoVoigtPointsSet</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Hierarchy">Hierarchy</a></div><div class="one_section"><a class="section" href="#PasDoc-Fields">Fields</a></div><div class="one_section"><a class="section" href="#PasDoc-Methods">Methods</a></div><div class="one_section"><a class="section" href="#PasDoc-Properties">Properties</a></div></div>
+<span id="PasDoc-Description"></span><h2 class="unit">Unit</h2>
+<p class="unitlink">
+<a  href="AsymPseudoVoigtPointsSet.html">AsymPseudoVoigtPointsSet</a></p>
+<h2 class="declaration">Declaration</h2>
+<p class="declaration">
+<code>type TAsymPseudoVoigtPointsSet = class(<a class="normal" href="PseudoVoigtPointsSet.TPseudoVoigtPointsSet.html">TPseudoVoigtPointsSet</a>)</code></p>
+<h2 class="description">Description</h2>
+<p>
+Curve having asymmetrical Pseudo-Voigt form.</p>
+<span id="PasDoc-Hierarchy"></span><h2 class="hierarchy">Hierarchy</h2>
+<ul class="hierarchy"><li class="ancestor">TCBRCComponent</li>
+<li class="ancestor"><a class="normal" href="SelfCopied.TSelfCopiedComponent.html">TSelfCopiedComponent</a></li>
+<li class="ancestor"><a class="normal" href="PointsSet.TPointsSet.html">TPointsSet</a></li>
+<li class="ancestor"><a class="normal" href="NeutronPointsSet.TNeutronPointsSet.html">TNeutronPointsSet</a></li>
+<li class="ancestor"><a class="normal" href="TitlePointsSet.TTitlePointsSet.html">TTitlePointsSet</a></li>
+<li class="ancestor"><a class="normal" href="CurvePointsSet.TCurvePointsSet.html">TCurvePointsSet</a></li>
+<li class="ancestor"><a class="normal" href="NamedPointsSet.TNamedPointsSet.html">TNamedPointsSet</a></li>
+<li class="ancestor"><a class="normal" href="PseudoVoigtPointsSet.TPseudoVoigtPointsSet.html">TPseudoVoigtPointsSet</a></li>
+<li class="thisitem">TAsymPseudoVoigtPointsSet</li></ul><h2 class="overview">Overview</h2>
+<span id="PasDoc-Fields"></span><h3 class="summary">Fields</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="AsymPseudoVoigtPointsSet.TAsymPseudoVoigtPointsSet.html#DeltaSigmaIndex">DeltaSigmaIndex</a></b>: LongInt;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="AsymPseudoVoigtPointsSet.TAsymPseudoVoigtPointsSet.html#DeltaSigmaP">DeltaSigmaP</a></b>: <a  href="CurvePointsSet.TSpecialCurveParameter.html">TSpecialCurveParameter</a>;</code></td>
+</tr>
+</table>
+<span id="PasDoc-Methods"></span><h3 class="summary">Methods</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>constructor <b><a  href="AsymPseudoVoigtPointsSet.TAsymPseudoVoigtPointsSet.html#Create">Create</a></b>(AOwner: TComponent); override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="AsymPseudoVoigtPointsSet.TAsymPseudoVoigtPointsSet.html#GetCurveTypeId">GetCurveTypeId</a></b>: <a  href="IntPointsSet.html#TCurveTypeId">TCurveTypeId</a>; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>class function <b><a  href="AsymPseudoVoigtPointsSet.TAsymPseudoVoigtPointsSet.html#GetCurveTypeId_">GetCurveTypeId_</a></b>: <a  href="IntPointsSet.html#TCurveTypeId">TCurveTypeId</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="AsymPseudoVoigtPointsSet.TAsymPseudoVoigtPointsSet.html#GetCurveTypeName">GetCurveTypeName</a></b>: string; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="AsymPseudoVoigtPointsSet.TAsymPseudoVoigtPointsSet.html#HasDeltaSigma">HasDeltaSigma</a></b>: Boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>function <b><a  href="AsymPseudoVoigtPointsSet.TAsymPseudoVoigtPointsSet.html#GetDeltaSigma">GetDeltaSigma</a></b>: Double;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>function <b><a  href="AsymPseudoVoigtPointsSet.TAsymPseudoVoigtPointsSet.html#GetParam">GetParam</a></b>(Index: LongInt): Double; override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>function <b><a  href="AsymPseudoVoigtPointsSet.TAsymPseudoVoigtPointsSet.html#GetParamByName">GetParamByName</a></b>(Name: string): Double; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="AsymPseudoVoigtPointsSet.TAsymPseudoVoigtPointsSet.html#DoCalc">DoCalc</a></b>(const Intervals: <a  href="PointsSet.TPointsSet.html">TPointsSet</a>); override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="AsymPseudoVoigtPointsSet.TAsymPseudoVoigtPointsSet.html#SetDeltaSigma">SetDeltaSigma</a></b>(Value: Double);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="AsymPseudoVoigtPointsSet.TAsymPseudoVoigtPointsSet.html#SetParam">SetParam</a></b>(Index: LongInt; Value: Double); override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="AsymPseudoVoigtPointsSet.TAsymPseudoVoigtPointsSet.html#SetParamByName">SetParamByName</a></b>(Name: string; Value: Double); override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="AsymPseudoVoigtPointsSet.TAsymPseudoVoigtPointsSet.html#SetSpecParamPtr">SetSpecParamPtr</a></b>(P: <a  href="CurvePointsSet.TSpecialCurveParameter.html">TSpecialCurveParameter</a>); override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="AsymPseudoVoigtPointsSet.TAsymPseudoVoigtPointsSet.html#SetSpecParamVarIndex">SetSpecParamVarIndex</a></b>(P: <a  href="CurvePointsSet.TSpecialCurveParameter.html">TSpecialCurveParameter</a>; Index: LongInt); override;</code></td>
+</tr>
+</table>
+<span id="PasDoc-Properties"></span><h3 class="summary">Properties</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="AsymPseudoVoigtPointsSet.TAsymPseudoVoigtPointsSet.html#DeltaSigma">DeltaSigma</a></b>: Double read <a  href="AsymPseudoVoigtPointsSet.TAsymPseudoVoigtPointsSet.html#GetDeltaSigma">GetDeltaSigma</a> write <a  href="AsymPseudoVoigtPointsSet.TAsymPseudoVoigtPointsSet.html#SetDeltaSigma">SetDeltaSigma</a>;</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Fields</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="DeltaSigmaIndex"></span><code><b>DeltaSigmaIndex</b>: LongInt;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="DeltaSigmaP"></span><code><b>DeltaSigmaP</b>: <a  href="CurvePointsSet.TSpecialCurveParameter.html">TSpecialCurveParameter</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Difference of half-widths of left and right sides of the curve.</p>
+</td></tr>
+</table>
+<h3 class="detail">Methods</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Create"></span><code>constructor <b>Create</b>(AOwner: TComponent); override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetCurveTypeId"></span><code>function <b>GetCurveTypeId</b>: <a  href="IntPointsSet.html#TCurveTypeId">TCurveTypeId</a>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Overrides method defined in <a class="normal" href="NamedPointsSet.TNamedPointsSet.html">TNamedPointsSet</a>.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetCurveTypeId_"></span><code>class function <b>GetCurveTypeId_</b>: <a  href="IntPointsSet.html#TCurveTypeId">TCurveTypeId</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetCurveTypeName"></span><code>function <b>GetCurveTypeName</b>: string; override;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Overrides method defined in <a class="normal" href="NamedPointsSet.TNamedPointsSet.html">TNamedPointsSet</a>.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="HasDeltaSigma"></span><code>function <b>HasDeltaSigma</b>: Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="GetDeltaSigma"></span><code>function <b>GetDeltaSigma</b>: Double;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="GetParam"></span><code>function <b>GetParam</b>(Index: LongInt): Double; override;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Returns parameter with given index.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="GetParamByName"></span><code>function <b>GetParamByName</b>(Name: string): Double; override;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Returns parameter with given name.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="DoCalc"></span><code>procedure <b>DoCalc</b>(const Intervals: <a  href="PointsSet.TPointsSet.html">TPointsSet</a>); override;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Performs recalculation of all <a class="normal" href="PointsSet.TPointsSet.html#Points">points</a> of function.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="SetDeltaSigma"></span><code>procedure <b>SetDeltaSigma</b>(Value: Double);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="SetParam"></span><code>procedure <b>SetParam</b>(Index: LongInt; Value: Double); override;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Sets up <a class="normal" href="CurvePointsSet.html#Variable">variable</a> paremeter with given index.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="SetParamByName"></span><code>procedure <b>SetParamByName</b>(Name: string; Value: Double); override;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Sets up parameter with given name.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="SetSpecParamPtr"></span><code>procedure <b>SetSpecParamPtr</b>(P: <a  href="CurvePointsSet.TSpecialCurveParameter.html">TSpecialCurveParameter</a>); override;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Sets up pointers to parameters with predefined semantics.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="SetSpecParamVarIndex"></span><code>procedure <b>SetSpecParamVarIndex</b>(P: <a  href="CurvePointsSet.TSpecialCurveParameter.html">TSpecialCurveParameter</a>; Index: LongInt); override;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Sets up indexes of parameters with predefined semantics.</p>
+</td></tr>
+</table>
+<h3 class="detail">Properties</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="DeltaSigma"></span><code>property <b>DeltaSigma</b>: Double read <a  href="AsymPseudoVoigtPointsSet.TAsymPseudoVoigtPointsSet.html#GetDeltaSigma">GetDeltaSigma</a> write <a  href="AsymPseudoVoigtPointsSet.TAsymPseudoVoigtPointsSet.html#SetDeltaSigma">SetDeltaSigma</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+</span>
+</td></tr></table></body></html>

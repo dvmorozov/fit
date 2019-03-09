@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Fit: Unit2: Class TCGIDatamodule2</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<table class="container"><tr><td class="navigation">
+<h2>Fit</h2><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p><p><a href="GVClasses.png" class="navigation">Classes hierarchy graph</a></p></td><td class="content">
+<span id="TCGIDatamodule2"></span><h1 class="cio">Class TCGIDatamodule2</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Hierarchy">Hierarchy</a></div><div class="one_section">Fields</div><div class="one_section"><a class="section" href="#PasDoc-Methods">Methods</a></div><div class="one_section">Properties</div></div>
+<span id="PasDoc-Description"></span><h2 class="unit">Unit</h2>
+<p class="unitlink">
+<a  href="Unit2.html">Unit2</a></p>
+<h2 class="declaration">Declaration</h2>
+<p class="declaration">
+<code>type TCGIDatamodule2 = class(<a class="normal" href="cgiModules.TCGIDatamodule.html">TCGIDatamodule</a>)</code></p>
+<h2 class="description">Description</h2>
+<p>
+<code>TCGIDatamodule2</code></p>
+<span id="PasDoc-Hierarchy"></span><h2 class="hierarchy">Hierarchy</h2>
+<ul class="hierarchy"><li class="ancestor">TDataModule</li>
+<li class="ancestor"><a class="normal" href="cgiModules.TCGIDatamodule.html">TCGIDatamodule</a></li>
+<li class="thisitem">TCGIDatamodule2</li></ul><h2 class="overview">Overview</h2>
+<span id="PasDoc-Methods"></span><h3 class="summary">Methods</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>function <b><a  href="Unit2.TCGIDatamodule2.html#ExtractTemplate">ExtractTemplate</a></b>( var From: string; MarkerBegin: string; MarkerEnd: string; var Position: LongInt): string;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>function <b><a  href="Unit2.TCGIDatamodule2.html#FillTemplateBySpecParameters">FillTemplateBySpecParameters</a></b>(Page: string): string;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>function <b><a  href="Unit2.TCGIDatamodule2.html#GetChunkNumbers">GetChunkNumbers</a></b>(CurChunkNum: LongInt; ChunkCount: LongInt): TStringList;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>function <b><a  href="Unit2.TCGIDatamodule2.html#GetGraphURL">GetGraphURL</a></b>: string;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>function <b><a  href="Unit2.TCGIDatamodule2.html#GetNewFileIndex">GetNewFileIndex</a></b>( const UserName: string; const ProjectName: string): LongInt;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>function <b><a  href="Unit2.TCGIDatamodule2.html#GetNewProjectIndex">GetNewProjectIndex</a></b>: LongInt;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>function <b><a  href="Unit2.TCGIDatamodule2.html#GetProjectFileResults">GetProjectFileResults</a></b>(const ProjectName: string; FileName: string; out Files: TStringList): TStringList;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>function <b><a  href="Unit2.TCGIDatamodule2.html#GetProjectName">GetProjectName</a></b>(ProjectFileName: string): string;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>function <b><a  href="Unit2.TCGIDatamodule2.html#GetUserName">GetUserName</a></b>: Boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>function <b><a  href="Unit2.TCGIDatamodule2.html#GetUserProjectFiles">GetUserProjectFiles</a></b>(const ProjectName: string; out Files: TStringList): TStringList;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>function <b><a  href="Unit2.TCGIDatamodule2.html#GetUserProjects">GetUserProjects</a></b>( const UserName: string; out ProjectFiles: TStringList): TStringList;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>function <b><a  href="Unit2.TCGIDatamodule2.html#InsertChunkLinks">InsertChunkLinks</a></b>( TmplIn: string; ChunkNum: LongInt; Data: <a  href="DataLoader.TPointsSet.html">TPointsSet</a>): string;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>function <b><a  href="Unit2.TCGIDatamodule2.html#InsertDataByTemplate">InsertDataByTemplate</a></b>( ChunkNum: LongInt; Data: <a  href="DataLoader.TPointsSet.html">TPointsSet</a>; ProjectName: string; FileName: string): string;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>function <b><a  href="Unit2.TCGIDatamodule2.html#InsertDataWithTagByIntervals">InsertDataWithTagByIntervals</a></b>( Page: string; Data: <a  href="DataLoader.TPointsSet.html">TPointsSet</a>; SpecIntervals: <a  href="DataLoader.TPointsSet.html">TPointsSet</a>): string;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>function <b><a  href="Unit2.TCGIDatamodule2.html#InsertDataWithTagByTemplate">InsertDataWithTagByTemplate</a></b>( Page: string; Data: <a  href="DataLoader.TPointsSet.html">TPointsSet</a>; Selected: <a  href="DataLoader.TPointsSet.html">TPointsSet</a>): string;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>function <b><a  href="Unit2.TCGIDatamodule2.html#InsertKey">InsertKey</a></b>(Template: string; Key: string): string;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>function <b><a  href="Unit2.TCGIDatamodule2.html#InsertNamesByTemplate">InsertNamesByTemplate</a></b>( TemplateIn: string; Names: TStringList; Files: TStringList): string;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>function <b><a  href="Unit2.TCGIDatamodule2.html#NameToGreekSymbol">NameToGreekSymbol</a></b>(Name_: string): string;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#CGIDatamodule2CGIRequest">CGIDatamodule2CGIRequest</a></b>(Sender: TObject);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#AddPointToProfile">AddPointToProfile</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#BackMore">BackMore</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#CreatePatternActually">CreatePatternActually</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#CreateProject">CreateProject</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#DeleteBackground">DeleteBackground</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#DeleteData">DeleteData</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#DeleteFileResult">DeleteFileResult</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#DeletePattern">DeletePattern</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#DeleteProblem">DeleteProblem</a></b>(ProblemID: LongInt);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#DeleteProject">DeleteProject</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#DoAllAutomatically">DoAllAutomatically</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#DoPatternAction">DoPatternAction</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#DoRegister">DoRegister</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#EditPattern">EditPattern</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#GenerateBackPoints">GenerateBackPoints</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#GenerateSpecimenIntervals">GenerateSpecimenIntervals</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#GenerateSpecimenPositions">GenerateSpecimenPositions</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#GetDataNames">GetDataNames</a></b>(ProblemID: LongInt; var UserName: string; var ProjectName: string; var FileName: string);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#GetFileProperties">GetFileProperties</a></b>( ProjectFileName: string; FileName: string; out UserFileName: string; out FileDescription: string);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#GetFileResults">GetFileResults</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#GetFileResultsActually">GetFileResultsActually</a></b>(ProjectName: string; FileName: string);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#GetGraph">GetGraph</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#GetProjectProperties">GetProjectProperties</a></b>(ProjectFileName: string; out ProjectName: string; out ProjectDescription: string);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#GetSavedGraph">GetSavedGraph</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#GoToBackground">GoToBackground</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#GoToChunkData">GoToChunkData</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#GoToEvaluation">GoToEvaluation</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#GoToFirstData">GoToFirstData</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#GoToFitting">GoToFitting</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#GoToLastData">GoToLastData</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#GoToNextData">GoToNextData</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#GoToPattern">GoToPattern</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#GoToPatternMore">GoToPatternMore</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#GoToPrevData">GoToPrevData</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#GoToProjects">GoToProjects</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#GoToProjectsActual">GoToProjectsActual</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#GoToRegistration">GoToRegistration</a></b>(const Hint: string);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#GoToSpecimenIntervals">GoToSpecimenIntervals</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#GoToSpecimenParameters">GoToSpecimenParameters</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#GoToSpecimenPositions">GoToSpecimenPositions</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#GoToStartPage">GoToStartPage</a></b>(Capt: string; Hint: string);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#HandleCommand">HandleCommand</a></b>(Command: string);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#LogIn">LogIn</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#LogOut">LogOut</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#MinimizeDifference">MinimizeDifference</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#MinimizeNumberOfSpecimens">MinimizeNumberOfSpecimens</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#OpenData">OpenData</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#OpenFileResult">OpenFileResult</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#OpenProject">OpenProject</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#OpenProjectActual">OpenProjectActual</a></b>(ProjectFileName: string);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#Refresh">Refresh</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#RefreshBackProgress">RefreshBackProgress</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#RefreshSpecIntProgress">RefreshSpecIntProgress</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#RefreshSpecPosProgress">RefreshSpecPosProgress</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#SaveData">SaveData</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#SaveSpecParameters">SaveSpecParameters</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#SelectBackPoint">SelectBackPoint</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#SelectBoundPoint">SelectBoundPoint</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#SelectSpecimenPosition">SelectSpecimenPosition</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#StartEvaluation">StartEvaluation</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#StopBackGenProcess">StopBackGenProcess</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#StopFitting">StopFitting</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#StopSpecIntGenProcess">StopSpecIntGenProcess</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#StopSpecPosGenProcess">StopSpecPosGenProcess</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#UpdatePattern">UpdatePattern</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#UpdateSpecimen">UpdateSpecimen</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#UpdateSpecimenParameters">UpdateSpecimenParameters</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#UploadData">UploadData</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#WriteKeyToFile">WriteKeyToFile</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="Unit2.TCGIDatamodule2.html#WriteProblemFile">WriteProblemFile</a></b>( ProjectName: string; FileName: string; ProblemID: LongInt);</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Methods</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="ExtractTemplate"></span><code>function <b>ExtractTemplate</b>( var From: string; MarkerBegin: string; MarkerEnd: string; var Position: LongInt): string;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="FillTemplateBySpecParameters"></span><code>function <b>FillTemplateBySpecParameters</b>(Page: string): string;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="GetChunkNumbers"></span><code>function <b>GetChunkNumbers</b>(CurChunkNum: LongInt; ChunkCount: LongInt): TStringList;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+vozvraschaet nabor strok s nomerami kuskov dlya vstavki ssylok v stranitsu</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="GetGraphURL"></span><code>function <b>GetGraphURL</b>: string;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="GetNewFileIndex"></span><code>function <b>GetNewFileIndex</b>( const UserName: string; const ProjectName: string): LongInt;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+poluchenie indeksa dlya sozdaniya imeni novogo faila</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="GetNewProjectIndex"></span><code>function <b>GetNewProjectIndex</b>: LongInt;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+poluchenie indeksa dlya sozdaniya imeni novogo projekta</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="GetProjectFileResults"></span><code>function <b>GetProjectFileResults</b>(const ProjectName: string; FileName: string; out Files: TStringList): TStringList;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+vozvraschaet spisok imen rezul'tatov, cherez Files peredaet nazvaniya sootvetstvuyuschih failov</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="GetProjectName"></span><code>function <b>GetProjectName</b>(ProjectFileName: string): string;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="GetUserName"></span><code>function <b>GetUserName</b>: Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+izvlekaet imya pol'zovatelya po kluchu; vozvraschaet False kogda kluch prosrochen (chto yavlyaetsya dopustimym sostoyaniem)</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="GetUserProjectFiles"></span><code>function <b>GetUserProjectFiles</b>(const ProjectName: string; out Files: TStringList): TStringList;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+izvlekaet spisok failov proekta</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="GetUserProjects"></span><code>function <b>GetUserProjects</b>( const UserName: string; out ProjectFiles: TStringList): TStringList;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+izvlekaet spisok projectov pol'zovatelya</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="InsertChunkLinks"></span><code>function <b>InsertChunkLinks</b>( TmplIn: string; ChunkNum: LongInt; Data: <a  href="DataLoader.TPointsSet.html">TPointsSet</a>): string;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="InsertDataByTemplate"></span><code>function <b>InsertDataByTemplate</b>( ChunkNum: LongInt; Data: <a  href="DataLoader.TPointsSet.html">TPointsSet</a>; ProjectName: string; FileName: string): string;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="InsertDataWithTagByIntervals"></span><code>function <b>InsertDataWithTagByIntervals</b>( Page: string; Data: <a  href="DataLoader.TPointsSet.html">TPointsSet</a>; SpecIntervals: <a  href="DataLoader.TPointsSet.html">TPointsSet</a>): string;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+<a class="normal" href="CommonTypes.html#Special">special</a>'niy variant vstavki dannyh dlya granits intervalov</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="InsertDataWithTagByTemplate"></span><code>function <b>InsertDataWithTagByTemplate</b>( Page: string; Data: <a  href="DataLoader.TPointsSet.html">TPointsSet</a>; Selected: <a  href="DataLoader.TPointsSet.html">TPointsSet</a>): string;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="InsertKey"></span><code>function <b>InsertKey</b>(Template: string; Key: string): string;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="InsertNamesByTemplate"></span><code>function <b>InsertNamesByTemplate</b>( TemplateIn: string; Names: TStringList; Files: TStringList): string;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="NameToGreekSymbol"></span><code>function <b>NameToGreekSymbol</b>(Name_: string): string;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+vozvraschaet html-kod grecheskogo simvola, sootvetstvuyuschego dannomu imeni (ili samo imya, esli sootvetstvie ne naydeno)</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="CGIDatamodule2CGIRequest"></span><code>procedure <b>CGIDatamodule2CGIRequest</b>(Sender: TObject);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+public declarations</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="AddPointToProfile"></span><code>procedure <b>AddPointToProfile</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="BackMore"></span><code>procedure <b>BackMore</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="CreatePatternActually"></span><code>procedure <b>CreatePatternActually</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="CreateProject"></span><code>procedure <b>CreateProject</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="DeleteBackground"></span><code>procedure <b>DeleteBackground</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="DeleteData"></span><code>procedure <b>DeleteData</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="DeleteFileResult"></span><code>procedure <b>DeleteFileResult</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="DeletePattern"></span><code>procedure <b>DeletePattern</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="DeleteProblem"></span><code>procedure <b>DeleteProblem</b>(ProblemID: LongInt);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="DeleteProject"></span><code>procedure <b>DeleteProject</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="DoAllAutomatically"></span><code>procedure <b>DoAllAutomatically</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="DoPatternAction"></span><code>procedure <b>DoPatternAction</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="DoRegister"></span><code>procedure <b>DoRegister</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="EditPattern"></span><code>procedure <b>EditPattern</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+perehod k oknu redaktirovaniya patterna</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="GenerateBackPoints"></span><code>procedure <b>GenerateBackPoints</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="GenerateSpecimenIntervals"></span><code>procedure <b>GenerateSpecimenIntervals</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="GenerateSpecimenPositions"></span><code>procedure <b>GenerateSpecimenPositions</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="GetDataNames"></span><code>procedure <b>GetDataNames</b>(ProblemID: LongInt; var UserName: string; var ProjectName: string; var FileName: string);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="GetFileProperties"></span><code>procedure <b>GetFileProperties</b>( ProjectFileName: string; FileName: string; out UserFileName: string; out FileDescription: string);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="GetFileResults"></span><code>procedure <b>GetFileResults</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="GetFileResultsActually"></span><code>procedure <b>GetFileResultsActually</b>(ProjectName: string; FileName: string);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="GetGraph"></span><code>procedure <b>GetGraph</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="GetProjectProperties"></span><code>procedure <b>GetProjectProperties</b>(ProjectFileName: string; out ProjectName: string; out ProjectDescription: string);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="GetSavedGraph"></span><code>procedure <b>GetSavedGraph</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="GoToBackground"></span><code>procedure <b>GoToBackground</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+!!! d. ispol'zovat' cur_chunk_num, poskol'ku vysyvaetsya vo vseh sluchayah !!!</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="GoToChunkData"></span><code>procedure <b>GoToChunkData</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+obrabotka klikov na ssylki na kuski</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="GoToEvaluation"></span><code>procedure <b>GoToEvaluation</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="GoToFirstData"></span><code>procedure <b>GoToFirstData</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="GoToFitting"></span><code>procedure <b>GoToFitting</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="GoToLastData"></span><code>procedure <b>GoToLastData</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="GoToNextData"></span><code>procedure <b>GoToNextData</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="GoToPattern"></span><code>procedure <b>GoToPattern</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="GoToPatternMore"></span><code>procedure <b>GoToPatternMore</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+perehod k oknu sozdaniya patterna</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="GoToPrevData"></span><code>procedure <b>GoToPrevData</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="GoToProjects"></span><code>procedure <b>GoToProjects</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="GoToProjectsActual"></span><code>procedure <b>GoToProjectsActual</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="GoToRegistration"></span><code>procedure <b>GoToRegistration</b>(const Hint: string);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="GoToSpecimenIntervals"></span><code>procedure <b>GoToSpecimenIntervals</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="GoToSpecimenParameters"></span><code>procedure <b>GoToSpecimenParameters</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="GoToSpecimenPositions"></span><code>procedure <b>GoToSpecimenPositions</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+perehod k oknu vybora tochek privyazki patterna</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="GoToStartPage"></span><code>procedure <b>GoToStartPage</b>(Capt: string; Hint: string);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="HandleCommand"></span><code>procedure <b>HandleCommand</b>(Command: string);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+private declarations</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="LogIn"></span><code>procedure <b>LogIn</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="LogOut"></span><code>procedure <b>LogOut</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="MinimizeDifference"></span><code>procedure <b>MinimizeDifference</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="MinimizeNumberOfSpecimens"></span><code>procedure <b>MinimizeNumberOfSpecimens</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="OpenData"></span><code>procedure <b>OpenData</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="OpenFileResult"></span><code>procedure <b>OpenFileResult</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="OpenProject"></span><code>procedure <b>OpenProject</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="OpenProjectActual"></span><code>procedure <b>OpenProjectActual</b>(ProjectFileName: string);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+vyvodit stranitsu projecta bez predvaritel'noy proverki</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="Refresh"></span><code>procedure <b>Refresh</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="RefreshBackProgress"></span><code>procedure <b>RefreshBackProgress</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="RefreshSpecIntProgress"></span><code>procedure <b>RefreshSpecIntProgress</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="RefreshSpecPosProgress"></span><code>procedure <b>RefreshSpecPosProgress</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="SaveData"></span><code>procedure <b>SaveData</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="SaveSpecParameters"></span><code>procedure <b>SaveSpecParameters</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="SelectBackPoint"></span><code>procedure <b>SelectBackPoint</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="SelectBoundPoint"></span><code>procedure <b>SelectBoundPoint</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+vybor tochki granitsy intervala primeneniya ekz. patternov</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="SelectSpecimenPosition"></span><code>procedure <b>SelectSpecimenPosition</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="StartEvaluation"></span><code>procedure <b>StartEvaluation</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="StopBackGenProcess"></span><code>procedure <b>StopBackGenProcess</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="StopFitting"></span><code>procedure <b>StopFitting</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="StopSpecIntGenProcess"></span><code>procedure <b>StopSpecIntGenProcess</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="StopSpecPosGenProcess"></span><code>procedure <b>StopSpecPosGenProcess</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="UpdatePattern"></span><code>procedure <b>UpdatePattern</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+izmenenie parametrov patterna</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="UpdateSpecimen"></span><code>procedure <b>UpdateSpecimen</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="UpdateSpecimenParameters"></span><code>procedure <b>UpdateSpecimenParameters</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="UploadData"></span><code>procedure <b>UploadData</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="WriteKeyToFile"></span><code>procedure <b>WriteKeyToFile</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+obnovleniye vremennoy metki klyucha</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="WriteProblemFile"></span><code>procedure <b>WriteProblemFile</b>( ProjectName: string; FileName: string; ProblemID: LongInt);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+</span>
+</td></tr></table></body></html>

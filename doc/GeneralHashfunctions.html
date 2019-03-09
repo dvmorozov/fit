@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Fit: GeneralHashfunctions</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<table class="container"><tr><td class="navigation">
+<h2>Fit</h2><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p><p><a href="GVClasses.png" class="navigation">Classes hierarchy graph</a></p></td><td class="content">
+<h1 class="unit">Unit GeneralHashfunctions</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section">Uses</div><div class="one_section">Classes, Interfaces, Objects and Records</div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section"><a class="section" href="#PasDoc-Types">Types</a></div><div class="one_section">Constants</div><div class="one_section">Variables</div></div>
+<span id="PasDoc-Description"></span><h2 class="description">Description</h2>
+<p>
+General purpose hash function algorithms library.</p>
+<p>
+
+
+<p></p>
+<span id="PasDoc-Uses"></span><h2 class="overview">Overview</h2>
+<span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code>function <b><a  href="GeneralHashfunctions.html#APHash">APHash</a></b> (const Str : String) : Cardinal;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a  href="GeneralHashfunctions.html#BKDRHash">BKDRHash</a></b> (const Str : String) : Cardinal;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a  href="GeneralHashfunctions.html#DEKHash">DEKHash</a></b> (const Str : String) : Cardinal;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a  href="GeneralHashfunctions.html#DJBHash">DJBHash</a></b> (const Str : String) : Cardinal;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a  href="GeneralHashfunctions.html#ELFHash">ELFHash</a></b> (const Str : String) : Cardinal;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a  href="GeneralHashfunctions.html#FNVHash">FNVHash</a></b> (const Str : String) : Cardinal;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a  href="GeneralHashfunctions.html#JSHash">JSHash</a></b> (const Str : String) : Cardinal;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a  href="GeneralHashfunctions.html#PJWHash">PJWHash</a></b> (const Str : String) : Cardinal;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a  href="GeneralHashfunctions.html#RSHash">RSHash</a></b> (const Str : String) : Cardinal;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a  href="GeneralHashfunctions.html#SDBMHash">SDBMHash</a></b> (const Str : String) : Cardinal;</code></td>
+</tr>
+</table>
+<span id="PasDoc-Types"></span><h3 class="summary">Types</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><b><a  href="GeneralHashfunctions.html#THashfunction">THashfunction</a></b> = function(const key : String) : Cardinal;</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Functions and Procedures</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="APHash"></span><code>function <b>APHash</b> (const Str : String) : Cardinal;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="BKDRHash"></span><code>function <b>BKDRHash</b> (const Str : String) : Cardinal;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="DEKHash"></span><code>function <b>DEKHash</b> (const Str : String) : Cardinal;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="DJBHash"></span><code>function <b>DJBHash</b> (const Str : String) : Cardinal;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="ELFHash"></span><code>function <b>ELFHash</b> (const Str : String) : Cardinal;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="FNVHash"></span><code>function <b>FNVHash</b> (const Str : String) : Cardinal;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+function HRHash (const Str : String) : Cardinal;</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="JSHash"></span><code>function <b>JSHash</b> (const Str : String) : Cardinal;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="PJWHash"></span><code>function <b>PJWHash</b> (const Str : String) : Cardinal;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="RSHash"></span><code>function <b>RSHash</b> (const Str : String) : Cardinal;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="SDBMHash"></span><code>function <b>SDBMHash</b> (const Str : String) : Cardinal;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<h3 class="detail">Types</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="THashfunction"></span><code><b>THashfunction</b> = function(const key : String) : Cardinal;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+************************************************************************</p>
+</td></tr>
+</table>
+<h2 class="authors">Author</h2>
+<ul class="authors">
+<li>Arash Partow - 2002</li>
+</ul>
+<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+</span>
+</td></tr></table></body></html>

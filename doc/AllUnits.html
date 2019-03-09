@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Fit: All Units</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<table class="container"><tr><td class="navigation">
+<h2>Fit</h2><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p><p><a href="GVClasses.png" class="navigation">Classes hierarchy graph</a></p></td><td class="content">
+<h1 class="allitems">All Units</h1>
+<table class="unitstable wide_list">
+<tr class="listheader">
+<th class="itemname">Name</th>
+<th class="itemdesc">Description</th>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="AlgorithmContainer.html">AlgorithmContainer</a></td>
+<td class="itemdesc"><p>Contains definitions of auxiliary classes used to control algorithm execution.</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="AsymPseudoVoigtPointsSet.html">AsymPseudoVoigtPointsSet</a></td>
+<td class="itemdesc"><p>Contains definitions of class of curve having asymmetrical Pseudo-Voigt form.</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="ClassInheritIDs.html">ClassInheritIDs</a></td>
+<td class="itemdesc"><p>Contains definitions of constant identifiers of classes. These constants are used in data serialization.</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="ClientCallback.html">ClientCallback</a></td>
+<td class="itemdesc"><p>&nbsp;</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="CombEnumerator.html">CombEnumerator</a></td>
+<td class="itemdesc"><p>Contains definitions of classes used to iterate through set of possible task solution.</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="CommonTypes.html">CommonTypes</a></td>
+<td class="itemdesc"><p>Contains definitions of enumerable constants.</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="CSVFileLoader.html">CSVFileLoader</a></td>
+<td class="itemdesc"><p>Contains implementation of class loading data from CSV-files.</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="CurvePointsSet.html">CurvePointsSet</a></td>
+<td class="itemdesc"><p>Contains definitions of generic container for point set of all calcuated curves.</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="CurveTypesSingleton.html">CurveTypesSingleton</a></td>
+<td class="itemdesc"><p>Contains definition of interface for creating curve instances.</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="DataClasses.html">DataClasses</a></td>
+<td class="itemdesc"><p>Contains definitions of container classes.</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="DataLoader.html">DataLoader</a></td>
+<td class="itemdesc"><p>Contains definitions of classes used in data loading.</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="DATFileLoader.html">DATFileLoader</a></td>
+<td class="itemdesc"><p>Contains implementation of class loading data from DAT-files.</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="DownhillSimplexContainer.html">DownhillSimplexContainer</a></td>
+<td class="itemdesc"><p>Contains definitions of auxiliary classes used in downhill simplex optimization.</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="ExtensionDataLoaderInjector.html">ExtensionDataLoaderInjector</a></td>
+<td class="itemdesc"><p>Contains implementation of data loader injector based on file extension.</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="FitClient.html">FitClient</a></td>
+<td class="itemdesc"><p>Contains definitions of classes used in displaying results to <a class="normal" href="Main.html#User">user</a>.</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="FitClientApp.html">FitClientApp</a></td>
+<td class="itemdesc"><p>Contains definition of class representing the application.</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="FitClientProxy.html">FitClientProxy</a></td>
+<td class="itemdesc"><p>Contains definition of proxy class calling server part by different ways depending on compilation keys.</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="FitClientStub.html">FitClientStub</a></td>
+<td class="itemdesc"><p>Contains definition of stub class implementing callbacks to client.</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="FitServer.html">FitServer</a></td>
+<td class="itemdesc"><p>Contains definition of class implementing server logic. Doesn't contain any <a class="normal" href="Main.html#User">user</a> interface interaction. Exception handling and converting them into messages understandable for caller should be done in boundary objects. Throwing EAssertionFailed should be considered as inadmissibility of state for calling the method. At that state of the server should be kept. Throwing any other exception should be considered as <a class="normal" href="Main.html#Fatal">fatal</a> error. At that state of the server should be brought into initial which was just after start. Sometimes when method can execute the action accroding to its semantics EAssertionFailed can be catched inside it.</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="FitServerApp.html">FitServerApp</a></td>
+<td class="itemdesc"><p>Defines the server application class which is basic unit of interaction with client.</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="FitServerMultithreaded.html">FitServerMultithreaded</a></td>
+<td class="itemdesc"><p>Contains definition of multithreaded version of the server component.</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="FitServerProxy.html">FitServerProxy</a></td>
+<td class="itemdesc"><p>Contains definition of proxy class transmitting messages from server back to client.</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="FitServerStub.html">FitServerStub</a></td>
+<td class="itemdesc"><p>Contains definition of stub class receiving messages from client.</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="FitServerWithThread.html">FitServerWithThread</a></td>
+<td class="itemdesc"><p>Contains definition of server component performing long-term operation in separate thread.</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="FitTask.html">FitTask</a></td>
+<td class="itemdesc"><p>Contains definition of class representing single optimization task.</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="FitTaskWithThread.html">FitTaskWithThread</a></td>
+<td class="itemdesc"><p>Contains definition of class executing optimization task in separate thread.</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="fit_server.html">fit_server</a></td>
+<td class="itemdesc"><p>This unit has been produced by ws_helper.</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="fit_server_binder.html">fit_server_binder</a></td>
+<td class="itemdesc"><p>This unit has been produced by ws_helper.</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="fit_server_imp.html">fit_server_imp</a></td>
+<td class="itemdesc"><p>This unit has been produced by ws_helper.</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="fit_server_proxy.html">fit_server_proxy</a></td>
+<td class="itemdesc"><p>This unit has been produced by ws_helper.</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="FormServer.html">FormServer</a></td>
+<td class="itemdesc"><p>Contains hidden form used to render charts on the server.</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="GaussPointsSet.html">GaussPointsSet</a></td>
+<td class="itemdesc"><p>Contains definitions of class of curve having Gauss form.</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="GeneralHashfunctions.html">GeneralHashfunctions</a></td>
+<td class="itemdesc"><p>General purpose hash function algorithms library.</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="IntClientCallback.html">IntClientCallback</a></td>
+<td class="itemdesc"><p>Contains interface defining callback methods to notify client adout computation progress.</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="IntCurveFactory.html">IntCurveFactory</a></td>
+<td class="itemdesc"><p>Contains definition of interface for creating curve instances.</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="IntCurveTypeIterator.html">IntCurveTypeIterator</a></td>
+<td class="itemdesc"><p>Contains definition of interface for iterating through curve types.</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="IntCurveTypeSelector.html">IntCurveTypeSelector</a></td>
+<td class="itemdesc"><p>Contains definition of interface for selecting curve type.</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="IntDataLoader.html">IntDataLoader</a></td>
+<td class="itemdesc"><p>Contains definition of interface for data loading.</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="IntDataLoaderInjector.html">IntDataLoaderInjector</a></td>
+<td class="itemdesc"><p>Contains definition of interface for data loader injector.</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="IntFitViewer.html">IntFitViewer</a></td>
+<td class="itemdesc"><p>Contains interface defining methods to display data in chart and grids.</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="IntPointsSet.html">IntPointsSet</a></td>
+<td class="itemdesc"><p>Contains definition of interface for creating curve type.</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="LorentzPointsSet.html">LorentzPointsSet</a></td>
+<td class="itemdesc"><p>Contains definitions of class of curve having Lorentz form.</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="Main.html">Main</a></td>
+<td class="itemdesc"><p>Contains entry point of the application.</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="MainCalcProcess.html">MainCalcProcess</a></td>
+<td class="itemdesc"><p>Contains definition of container class for callback methods.</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="MainCalcThread.html">MainCalcThread</a></td>
+<td class="itemdesc"><p>Contains definition of container class for callback methods.</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="Math3d.html">Math3d</a></td>
+<td class="itemdesc"><p>Contains definitions of 3D primitive functions.</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="Minimizer.html">Minimizer</a></td>
+<td class="itemdesc"><p>Contains definitions of base classes for optimization algorithms.</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="Minimizer_DS.html">Minimizer_DS</a></td>
+<td class="itemdesc"><p>Contains definition of downhill simplex algorithm.</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="Minimizer_S.html">Minimizer_S</a></td>
+<td class="itemdesc"><p>Contains definitions of classes implementing optimization algorithms.</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="MSCRDataClasses.html">MSCRDataClasses</a></td>
+<td class="itemdesc"><p>Contains definitions of auxiliary data containers.</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="NamedPointsSet.html">NamedPointsSet</a></td>
+<td class="itemdesc"><p>Contains definitions of base curve class allowing setting up type name.</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="NeutronPointsSet.html">NeutronPointsSet</a></td>
+<td class="itemdesc"><p>Contains definitions of class for point set of experimental neutronogram.</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="ObjSavingStringList.html">ObjSavingStringList</a></td>
+<td class="itemdesc"><p>Contains definition of class mapping strings with objects.</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="PointsSet.html">PointsSet</a></td>
+<td class="itemdesc"><p>Contains definitions of generic points set.</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="PseudoVoigtPointsSet.html">PseudoVoigtPointsSet</a></td>
+<td class="itemdesc"><p>Contains definitions of class of curve having Pseudo-Voigt form.</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="Runner.html">Runner</a></td>
+<td class="itemdesc"><p>Contains definitions of thread containers.</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="SelfCopied.html">SelfCopied</a></td>
+<td class="itemdesc"><p>Contains definitions of interface and class for component which can copy itself.</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="SelfSaved.html">SelfSaved</a></td>
+<td class="itemdesc"><p>Contains definition of component which can serialize itself.</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="Settings.html">Settings</a></td>
+<td class="itemdesc"><p>Contains definition of <code>settings</code> containers. Names of classes have non standard form because they are serialized into setting file.</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="TableComp.html">TableComp</a></td>
+<td class="itemdesc"><p>Contains definition of visual component which can display data in grid.</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="TitlePointsSet.html">TitlePointsSet</a></td>
+<td class="itemdesc"><p>Contains definitions of class representing point set having title.</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="Tools.html">Tools</a></td>
+<td class="itemdesc"><p>Contains definition of auxiliary functions.</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="TwoBranchesPseudoVoigtPointsSet.html">TwoBranchesPseudoVoigtPointsSet</a></td>
+<td class="itemdesc"><p>Contains definitions of class-container of Pseudo-Voigt curve having different form parameters for the right and left branches.</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="Unit1.html">Unit1</a></td>
+<td class="itemdesc"><p>Contains definition of <a class="normal" href="Unit1.TFormMain.html">TFormMain</a>.</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="Unit12.html">Unit12</a></td>
+<td class="itemdesc"><p>Contains definition of <a class="normal" href="Unit12.TAboutBox.html">TAboutBox</a>.</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="Unit2.html">Unit2</a></td>
+<td class="itemdesc"><p>Contains definition of <a class="normal" href="Unit2.TCreateSpecialCurveDlg.html">TCreateSpecialCurveDlg</a>.</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="Unit3.html">Unit3</a></td>
+<td class="itemdesc"><p>Contains definition of <a class="normal" href="Unit3.TInputWavelengthDlg.html">TInputWavelengthDlg</a>.</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="Unit4.html">Unit4</a></td>
+<td class="itemdesc"><p>Contains definition of <a class="normal" href="Unit4.TInputMaxRFactorDlg.html">TInputMaxRFactorDlg</a>.</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="Unit5.html">Unit5</a></td>
+<td class="itemdesc"><p>Contains definition of <a class="normal" href="Unit5.TInputBackFactorDlg.html">TInputBackFactorDlg</a>.</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="Unit6.html">Unit6</a></td>
+<td class="itemdesc"><p>Contains definition of <a class="normal" href="Unit6.TFormHint.html">TFormHint</a>.</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="Unit7.html">Unit7</a></td>
+<td class="itemdesc"><p>Contains definition of <a class="normal" href="Unit7.TSpecialCurvePropDlg.html">TSpecialCurvePropDlg</a>.</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="UserPointsSet.html">UserPointsSet</a></td>
+<td class="itemdesc"><p>Contains definitions of class for <a class="normal" href="Main.html#User">user</a> curve given as expression.</p></td>
+</tr>
+</table>
+<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+</span>
+</td></tr></table></body></html>

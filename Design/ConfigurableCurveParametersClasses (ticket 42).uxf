@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>560</x>
+      <y>70</y>
+      <w>260</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>IPointsSet
+--
+HasConfigurationParameters: Boolean
+ShowConfigurationDialog: Boolean
+HasDefaults: Boolean
+SetDefaults
+SaveConfiguration(Storage: IStorate)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>280</x>
+      <y>70</y>
+      <w>80</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>IStorage
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>550</x>
+      <y>290</y>
+      <w>270</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>TNamedPointsSet
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>680</x>
+      <y>200</y>
+      <w>30</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>320</x>
+      <y>80</y>
+      <w>380</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>360.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+</diagram>

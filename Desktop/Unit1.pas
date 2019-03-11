@@ -457,7 +457,7 @@ const
     
 implementation
 
-uses Unit2, Unit3, Unit4, Unit5, Unit7, Unit12;
+uses CreateSpecialCurveDialog, Unit3, Unit4, Unit5, SpecialCurvePropDialog, Unit12;
 (*
 function OFNHookProc(
     Wnd: HWnd; Msg: UINT; WParam: WPARAM; LParam: LPARAM): UINT; stdcall;

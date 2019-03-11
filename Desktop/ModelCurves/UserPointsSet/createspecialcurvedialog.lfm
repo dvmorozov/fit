@@ -11,7 +11,9 @@ object CreateSpecialCurveDlg: TCreateSpecialCurveDlg
   Caption = 'Special Curve'
   ClientHeight = 311
   ClientWidth = 391
+  DesignTimePPI = 120
   Position = poMainFormCenter
+  LCLVersion = '1.8.4.0'
   object Bevel1: TBevel
     Left = 8
     Height = 249
@@ -64,7 +66,7 @@ object CreateSpecialCurveDlg: TCreateSpecialCurveDlg
   end
   object EditExpression: TEdit
     Left = 96
-    Height = 21
+    Height = 28
     Top = 61
     Width = 274
     OnKeyPress = EditExpressionKeyPress
@@ -432,7 +434,7 @@ object CreateSpecialCurveDlg: TCreateSpecialCurveDlg
   end
   object EditCurveName: TEdit
     Left = 96
-    Height = 21
+    Height = 28
     Top = 24
     Width = 274
     OnKeyPress = EditExpressionKeyPress

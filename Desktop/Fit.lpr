@@ -22,7 +22,7 @@ uses
   Unit5, Unit4, CombEnumerator, FitServer, MainCalcThread, FitClient, FitClientStub,
   FitServerStub, FitServerProxy, FitClientApp, FitServerApp,
   DataClasses, FitServerWithThread, FitTask, 
-  FitServerMultithreaded, Unit2, Settings, Unit7, TurboPowerIPro,
+  FitServerMultithreaded, Settings, SpecialCurvePropDialog, TurboPowerIPro,
   FitGrids, SelfCheckedComponentList,
   FitTaskWithThread, StrUtils
 {$ifdef windows}
@@ -30,7 +30,7 @@ uses
 {$else}
   ,TA_LINUX
 {$endif}
-  , Main, CommonTypes, TableComp, ClassInheritIDs, GeneralHashFunctions;
+  , Main, CommonTypes, TableComp, ClassInheritIDs, GeneralHashFunctions, CreateSpecialCurveDialog;
 
 {$R manifest.res}
 
@@ -74,8 +74,7 @@ begin
   Application.CreateForm(TInputWavelengthDlg, InputWavelengthDlg);
   Application.CreateForm(TInputBackFactorDlg, InputBackFactorDlg);
   Application.CreateForm(TInputMaxRFactorDlg, InputMaxRFactorDlg);
-  Application.CreateForm(TCreateSpecialCurveDlg, CreateSpecialCurveDlg);
-  Application.CreateForm(TSpecialCurvePropDlg, SpecialCurvePropDlg);
+  Application.CreateForm(TSpecialCurvePropDialog, SpecialCurvePropDlg);
 
   InFile := CmdLineParamFound('INFILE');
   if InFile <> '' then

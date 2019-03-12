@@ -32,6 +32,17 @@ type
           instead of property because property assumes storing data
           in object, but storing any data is not necessary in this case. }
         function GetCurveTypeName: string;
+        { Returns true if curve type has parameters which should be configured
+          by user, otherwise returns false. }
+        function HasConfigurableParameters: Boolean;
+        { Displays dialog for set up user configurable parameters. Returns true
+          if dialog was confirmed and false if it was cancelled. }
+        function ShowConfigurationDialog: Boolean;
+        { Returns true if user configurable parameters have default values,
+          otherwise returns false. }
+        function HasDefaults: Boolean;
+        { Sets up default values for user configurable parameters. }
+        procedure SetDefaults;
     end;
 
 implementation

@@ -9,7 +9,7 @@ without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
 LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
 Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
-unit CreateSpecialCurveDialog;
+unit CreateUserPointsSetDialog;
 
 {$MODE Delphi}
 //{$mode objfpc}{$H+}
@@ -25,9 +25,9 @@ uses
 
 type
 
-  { TCreateSpecialCurveDialog }
+  { TCreateUserPointsSetDialog }
 
-  TCreateSpecialCurveDialog = class(TForm)
+  TCreateUserPointsSetDialog = class(TForm)
     Bevel1: TBevel;
     ButtonSin: TButton;
     ButtonTh: TButton;
@@ -125,13 +125,13 @@ type
   end; 
 
 var
-  CreateSpecialCurveDlg: TCreateSpecialCurveDialog;
+  CreateSpecialCurveDlg: TCreateUserPointsSetDialog;
 
 implementation
 
-{ TCreateSpecialCurveDialog }
+{ TCreateUserPointsSetDialog }
 
-procedure TCreateSpecialCurveDialog.InsertFunc(FuncName: string);
+procedure TCreateUserPointsSetDialog.InsertFunc(FuncName: string);
 var Str: string;
     Temp: LongInt;
 begin
@@ -154,7 +154,7 @@ begin
     end;
 end;
 
-procedure TCreateSpecialCurveDialog.InsertSymbol(Symbol: string);
+procedure TCreateUserPointsSetDialog.InsertSymbol(Symbol: string);
 var Str: string;
     Temp: LongInt;
 begin
@@ -174,207 +174,207 @@ begin
     end;
 end;
 
-procedure TCreateSpecialCurveDialog.ButtonSinClick(Sender: TObject);
+procedure TCreateUserPointsSetDialog.ButtonSinClick(Sender: TObject);
 begin
     InsertFunc('Sin');
 end;
 
-procedure TCreateSpecialCurveDialog.ButtonSqrtClick(Sender: TObject);
+procedure TCreateUserPointsSetDialog.ButtonSqrtClick(Sender: TObject);
 begin
     InsertFunc('Sqrt');
 end;
 
-procedure TCreateSpecialCurveDialog.ButtonTgClick(Sender: TObject);
+procedure TCreateUserPointsSetDialog.ButtonTgClick(Sender: TObject);
 begin
     InsertFunc('Tg');
 end;
 
-procedure TCreateSpecialCurveDialog.ButtonThClick(Sender: TObject);
+procedure TCreateUserPointsSetDialog.ButtonThClick(Sender: TObject);
 begin
     InsertFunc('Th');
 end;
 
-procedure TCreateSpecialCurveDialog.ButtonCosClick(Sender: TObject);
+procedure TCreateUserPointsSetDialog.ButtonCosClick(Sender: TObject);
 begin
     InsertFunc('Cos');
 end;
 
-procedure TCreateSpecialCurveDialog.ButtonCschClick(Sender: TObject);
+procedure TCreateUserPointsSetDialog.ButtonCschClick(Sender: TObject);
 begin
     InsertFunc('Csch');
 end;
 
-procedure TCreateSpecialCurveDialog.ButtonChClick(Sender: TObject);
+procedure TCreateUserPointsSetDialog.ButtonChClick(Sender: TObject);
 begin
     InsertFunc('Ch');
 end;
 
-procedure TCreateSpecialCurveDialog.ButtonArcsinClick(Sender: TObject);
+procedure TCreateUserPointsSetDialog.ButtonArcsinClick(Sender: TObject);
 begin
     InsertFunc('Arcsin');
 end;
 
-procedure TCreateSpecialCurveDialog.ButtonArctgClick(Sender: TObject);
+procedure TCreateUserPointsSetDialog.ButtonArctgClick(Sender: TObject);
 begin
     InsertFunc('Arctg');
 end;
 
-procedure TCreateSpecialCurveDialog.ButtonArcthClick(Sender: TObject);
+procedure TCreateUserPointsSetDialog.ButtonArcthClick(Sender: TObject);
 begin
     InsertFunc('Arcth');
 end;
 
-procedure TCreateSpecialCurveDialog.ButtonArshClick(Sender: TObject);
+procedure TCreateUserPointsSetDialog.ButtonArshClick(Sender: TObject);
 begin
     InsertFunc('Arsh');
 end;
 
-procedure TCreateSpecialCurveDialog.ButtonArthClick(Sender: TObject);
+procedure TCreateUserPointsSetDialog.ButtonArthClick(Sender: TObject);
 begin
     InsertFunc('Arth');
 end;
 
-procedure TCreateSpecialCurveDialog.ButtonBracketsClick(Sender: TObject);
+procedure TCreateUserPointsSetDialog.ButtonBracketsClick(Sender: TObject);
 begin
     InsertFunc('');
 end;
 
-procedure TCreateSpecialCurveDialog.ButtonArccosClick(Sender: TObject);
+procedure TCreateUserPointsSetDialog.ButtonArccosClick(Sender: TObject);
 begin
     InsertFunc('Arccos');
 end;
 
-procedure TCreateSpecialCurveDialog.ButtonAbsClick(Sender: TObject);
+procedure TCreateUserPointsSetDialog.ButtonAbsClick(Sender: TObject);
 begin
     InsertFunc('Abs');
 end;
 
-procedure TCreateSpecialCurveDialog.Button7Click(Sender: TObject);
+procedure TCreateUserPointsSetDialog.Button7Click(Sender: TObject);
 begin
     InsertSymbol('7');
 end;
 
-procedure TCreateSpecialCurveDialog.Button4Click(Sender: TObject);
+procedure TCreateUserPointsSetDialog.Button4Click(Sender: TObject);
 begin
     InsertSymbol('4');
 end;
 
-procedure TCreateSpecialCurveDialog.Button1Click(Sender: TObject);
+procedure TCreateUserPointsSetDialog.Button1Click(Sender: TObject);
 begin
     InsertSymbol('1');
 end;
 
-procedure TCreateSpecialCurveDialog.Button0Click(Sender: TObject);
+procedure TCreateUserPointsSetDialog.Button0Click(Sender: TObject);
 begin
     InsertSymbol('0');
 end;
 
-procedure TCreateSpecialCurveDialog.Button2Click(Sender: TObject);
+procedure TCreateUserPointsSetDialog.Button2Click(Sender: TObject);
 begin
     InsertSymbol('2');
 end;
 
-procedure TCreateSpecialCurveDialog.Button3Click(Sender: TObject);
+procedure TCreateUserPointsSetDialog.Button3Click(Sender: TObject);
 begin
     InsertSymbol('3');
 end;
 
-procedure TCreateSpecialCurveDialog.Button5Click(Sender: TObject);
+procedure TCreateUserPointsSetDialog.Button5Click(Sender: TObject);
 begin
     InsertSymbol('5');
 end;
 
-procedure TCreateSpecialCurveDialog.Button6Click(Sender: TObject);
+procedure TCreateUserPointsSetDialog.Button6Click(Sender: TObject);
 begin
     InsertSymbol('6');
 end;
 
-procedure TCreateSpecialCurveDialog.Button8Click(Sender: TObject);
+procedure TCreateUserPointsSetDialog.Button8Click(Sender: TObject);
 begin
     InsertSymbol('8');
 end;
 
-procedure TCreateSpecialCurveDialog.Button9Click(Sender: TObject);
+procedure TCreateUserPointsSetDialog.Button9Click(Sender: TObject);
 begin
     InsertSymbol('9');
 end;
 
-procedure TCreateSpecialCurveDialog.ButtonArcctgClick(Sender: TObject);
+procedure TCreateUserPointsSetDialog.ButtonArcctgClick(Sender: TObject);
 begin
     InsertFunc('Arcctg');
 end;
 
-procedure TCreateSpecialCurveDialog.ButtonArchClick(Sender: TObject);
+procedure TCreateUserPointsSetDialog.ButtonArchClick(Sender: TObject);
 begin
     InsertFunc('Arch');
 end;
 
-procedure TCreateSpecialCurveDialog.ButtonCtgClick(Sender: TObject);
+procedure TCreateUserPointsSetDialog.ButtonCtgClick(Sender: TObject);
 begin
     InsertFunc('Ctg');
 end;
 
-procedure TCreateSpecialCurveDialog.ButtonCthClick(Sender: TObject);
+procedure TCreateUserPointsSetDialog.ButtonCthClick(Sender: TObject);
 begin
     InsertFunc('Cth');
 end;
 
-procedure TCreateSpecialCurveDialog.ButtonDecimalClick(Sender: TObject);
+procedure TCreateUserPointsSetDialog.ButtonDecimalClick(Sender: TObject);
 begin
     InsertSymbol('.');
 end;
 
-procedure TCreateSpecialCurveDialog.ButtonDivClick(Sender: TObject);
+procedure TCreateUserPointsSetDialog.ButtonDivClick(Sender: TObject);
 begin
     InsertSymbol('/');
 end;
 
-procedure TCreateSpecialCurveDialog.ButtonExpClick(Sender: TObject);
+procedure TCreateUserPointsSetDialog.ButtonExpClick(Sender: TObject);
 begin
     InsertFunc('Exp');
 end;
 
-procedure TCreateSpecialCurveDialog.ButtonLnClick(Sender: TObject);
+procedure TCreateUserPointsSetDialog.ButtonLnClick(Sender: TObject);
 begin
     InsertFunc('Ln');
 end;
 
-procedure TCreateSpecialCurveDialog.ButtonLogClick(Sender: TObject);
+procedure TCreateUserPointsSetDialog.ButtonLogClick(Sender: TObject);
 begin
     InsertFunc('Log');
 end;
 
-procedure TCreateSpecialCurveDialog.ButtonMinusClick(Sender: TObject);
+procedure TCreateUserPointsSetDialog.ButtonMinusClick(Sender: TObject);
 begin
     InsertSymbol('-');
 end;
 
-procedure TCreateSpecialCurveDialog.ButtonMulClick(Sender: TObject);
+procedure TCreateUserPointsSetDialog.ButtonMulClick(Sender: TObject);
 begin
     InsertSymbol('*');
 end;
 
-procedure TCreateSpecialCurveDialog.ButtonPlusClick(Sender: TObject);
+procedure TCreateUserPointsSetDialog.ButtonPlusClick(Sender: TObject);
 begin
     InsertSymbol('+');
 end;
 
-procedure TCreateSpecialCurveDialog.ButtonPowerClick(Sender: TObject);
+procedure TCreateUserPointsSetDialog.ButtonPowerClick(Sender: TObject);
 begin
     InsertSymbol('^');
 end;
 
-procedure TCreateSpecialCurveDialog.ButtonSchClick(Sender: TObject);
+procedure TCreateUserPointsSetDialog.ButtonSchClick(Sender: TObject);
 begin
     InsertFunc('Sch');
 end;
 
-procedure TCreateSpecialCurveDialog.ButtonShClick(Sender: TObject);
+procedure TCreateUserPointsSetDialog.ButtonShClick(Sender: TObject);
 begin
     InsertFunc('Sh');
 end;
 
-procedure TCreateSpecialCurveDialog.EditExpressionKeyPress(Sender: TObject;
+procedure TCreateUserPointsSetDialog.EditExpressionKeyPress(Sender: TObject;
   var Key: char);
 begin
     //  desyatichnyy razdelitel'
@@ -382,7 +382,7 @@ begin
 end;
 
 initialization
-  {$I createspecialcurvedialog.lrs}
+  {$I createuserpointssetdialog.lrs}
 end.
 
 

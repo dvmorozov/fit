@@ -457,7 +457,7 @@ const
     
 implementation
 
-uses CreateSpecialCurveDialog, Unit3, Unit4, Unit5, SpecialCurvePropDialog, Unit12;
+uses CreateUserPointsSetDialog, Unit3, Unit4, Unit5, UserPointsSetPropDialog, Unit12;
 (*
 function OFNHookProc(
     Wnd: HWnd; Msg: UINT; WParam: WPARAM; LParam: LPARAM): UINT; stdcall;
@@ -728,8 +728,8 @@ dlg1:
     end;
 
 dlg2:
-    SpecialCurvePropDlg.ct := ct;
-    case SpecialCurvePropDlg.ShowModal of
+    UserPointsSetPropDlg.ct := ct;
+    case UserPointsSetPropDlg.ShowModal of
         mrOk:
             begin
                 //  perezapisyvaetsya dlya sohraneniya

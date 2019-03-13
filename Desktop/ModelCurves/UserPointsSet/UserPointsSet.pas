@@ -49,6 +49,17 @@ type
         { Overrides method defined in TNamedPointsSet. }
         function GetCurveTypeId: TCurveTypeId; override;
         class function GetCurveTypeId_: TCurveTypeId;
+        { Returns true if curve type has parameters which should be configured
+          by user, otherwise returns false. }
+        function HasConfigurableParameters: Boolean; override;
+        { Displays dialog for set up user configurable parameters. Returns true
+          if dialog was confirmed and false if it was cancelled. }
+        function ShowConfigurationDialog: Boolean; override;
+        { Returns true if user configurable parameters have default values,
+          otherwise returns false. }
+        function HasDefaults: Boolean; override;
+        { Sets up default values for user configurable parameters. }
+        procedure SetDefaults; override;
 
         property Expression: string read FExpression write FExpression;
     end;
@@ -70,6 +81,26 @@ end;
 class function TUserPointsSet.GetCurveTypeId_: TCurveTypeId;
 begin
     Result := StringToGUID('{d8cafce5-8b03-4cce-9e93-ea28acb8e7ca}');
+end;
+
+function TUserPointsSet.HasConfigurableParameters: Boolean;
+begin
+    Result := True;
+end;
+
+function TUserPointsSet.ShowConfigurationDialog: Boolean;
+begin
+
+end;
+
+function TUserPointsSet.HasDefaults: Boolean;
+begin
+    Result := False;
+end;
+
+procedure TUserPointsSet.SetDefaults;
+begin
+    //  Do nothing.
 end;
 
 function TUserPointsSet.CalcValue(ArgValue: Double): Double;

@@ -41,15 +41,15 @@ type
         function GetCurveTypeName: string; virtual;
         { Returns true if curve type has parameters which should be configured
           by user, otherwise returns false. }
-        function HasConfigurableParameters: Boolean;
+        function HasConfigurableParameters: Boolean; virtual;
         { Displays dialog for set up user configurable parameters. Returns true
           if dialog was confirmed and false if it was cancelled. }
-        function ShowConfigurationDialog: Boolean;
+        function ShowConfigurationDialog: Boolean; virtual;
         { Returns true if user configurable parameters have default values,
           otherwise returns false. }
-        function HasDefaults: Boolean;
+        function HasDefaults: Boolean; virtual;
         { Sets up default values for user configurable parameters. }
-        procedure SetDefaults;
+        procedure SetDefaults; virtual;
     end;
 
 implementation

@@ -75,7 +75,8 @@ type
         { Does not work with XML-streams. }
         procedure DefineProperties(Filer: TFiler); override;
 
-        property Curve_types: TSelfCheckedComponentList read FCurveTypes write FCurveTypes;
+        property Curve_types: TSelfCheckedComponentList
+            read FCurveTypes write FCurveTypes;
         
     published
         { Dummy property. Prevents exceptions in reading. }

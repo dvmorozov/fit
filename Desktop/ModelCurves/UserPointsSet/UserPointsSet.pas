@@ -66,6 +66,9 @@ type
     
 implementation
 
+uses CreateUserPointsSetDialog, UserPointsSetPropDialog, Settings, Controls,
+  Main, MyExceptions, Dialogs, Unit1;
+
 {=========================== TUserPointsSet ================================}
 
 function TUserPointsSet.GetCurveTypeName: string;
@@ -89,8 +92,74 @@ begin
 end;
 
 function TUserPointsSet.ShowConfigurationDialog: Boolean;
+var ct: Curve_type;
+    Success: Boolean;
+label dlg1, dlg2;
 begin
+    Result := True; //???
+{$IFNDEF EXCLUDE_SOMETHING}
+    //  mashina sostoyaniy
+dlg1:
+    ct := nil;
+    CreateSpecialCurveDlg.ActiveControl := CreateSpecialCurveDlg.EditExpression;
+    case CreateSpecialCurveDlg.ShowModal of
+        mrOk:
+            begin
+                Success := False;
 
+                try
+                    //  pervonach. razbor
+                    FitClientApp_.FitClient.SetSpecialCurveParameters(
+                        CreateSpecialCurveDlg.EditExpression.Text, nil);
+                    Success := True;
+                except
+                    on E: EUserException do
+                        begin
+                            MessageDlg(E.Message, mtError, [mbOk], 0);
+                        end;
+                    else raise;
+                end;
+
+                if Success then
+                begin
+                    ct := Curve_type.Create(nil);
+                    ct.Name := CreateSpecialCurveDlg.EditCurveName.Text;
+                    ct.Expression := CreateSpecialCurveDlg.EditExpression.Text;
+                    FormMain.Settings.Curve_types.Add(ct);
+                    ct.Parameters :=
+                        FitClientApp_.FitClient.GetSpecialCurveParameters;
+                    FormMain.WriteCurve(ct);
+
+                    //DeleteDummyCurve;
+                    //  dobavlyaem vo vse menyu novyy element
+                    FormMain.AddCurveMenuItem(ct);
+
+                    goto dlg2;
+                end
+                else goto dlg1;
+            end;
+    else Exit;
+    end;
+
+dlg2:
+    UserPointsSetPropDlg.ct := ct;
+    case UserPointsSetPropDlg.ShowModal of
+        mrOk:
+            begin
+                //  perezapisyvaetsya dlya sohraneniya
+                //  sdelannyh ustanovok parametrov
+                DeleteFile(PChar(ct.FileName));
+                FormMain.WriteCurve(ct);
+            end;
+        mrRetry:
+            begin
+                //  pri vozvrate udalyaem
+                FormMain.DeleteCurve(ct);
+                goto dlg1;
+            end;
+    else Exit;
+    end;
+{$ENDIF}
 end;
 
 function TUserPointsSet.HasDefaults: Boolean;

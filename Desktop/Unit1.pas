@@ -246,7 +246,6 @@ type
     procedure ActionAnimationModeExecute(Sender: TObject);
     procedure ActionAnimationModeUpdate(Sender: TObject);
     procedure ActionCopyExecute(Sender: TObject);
-    procedure ActionCreateSpecialCurveExecute(Sender: TObject);
     procedure ActionDeleteExecute(Sender: TObject);
     procedure ActionDoAllAutoExecute(Sender: TObject);
     procedure ActionFitMinDifferenceExecute(Sender: TObject);
@@ -332,8 +331,6 @@ type
 
 	{ These variables are used for separating clicks from area selection. }
     DownX, DownY, UpX, UpY: Integer;
-	{ Application settings. Type should be checked. }
-    Settings: Settings_v1;
 
 	{ Saved content of edited cells. }
     SavedPos, SavedAmp: string;
@@ -366,20 +363,6 @@ type
 	{ The event OnClick of Chart arises between MouseUp and MouseDown.
       That is why OnClick is not used. }
     procedure OnChartClick;
-	{ Tries read the user settings object. In the case of failure creates new object. }
-    procedure ReadSettings;
-    procedure WriteSettings;
-	{ Searches files containing parameters of user defined curves and loads them. }
-    procedure ReadCurves;
-    procedure WriteCurve(ct: Curve_type);
-    procedure DeleteCurve(ct: Curve_type);
-	{ Creates single menu item. }
-    procedure CreateCurveMenuItem(Pos: LongInt; ct: Curve_type;
-        ParentMenu: TMenuItem; OnClick: TNotifyEvent);
-	{ Creates all menu items corresponding to user defined curves. }
-    procedure AddCurveMenuItems;
-	{ Adds menu item corresponding to user defined curve. }
-    procedure AddCurveMenuItem(ct: Curve_type);
     function GetConfigFileName: string;
     procedure OnFindComponentClass(Reader: TReader;
         const ClassName: string; var ComponentClass: TComponentClass);
@@ -391,6 +374,9 @@ type
     procedure DoEditHint;
 
   public
+    { Application settings. Type should be checked. }
+    Settings: Settings_v1;
+
     FitViewer: TFitViewer;
 	{ Index of curve on which the first click was. It is used in the cases when points of only one curve can be selected. }
     ActiveNumber: LongInt;
@@ -403,6 +389,21 @@ type
     CurSerieIndex: LongInt;
 	{ Index of selected value. }
     ValueIndex: LongInt;
+
+    { Tries read the user settings object. In the case of failure creates new object. }
+    procedure ReadSettings;
+    procedure WriteSettings;
+    { Searches files containing parameters of user defined curves and loads them. }
+    procedure ReadCurves;
+    procedure WriteCurve(ct: Curve_type);
+    procedure DeleteCurve(ct: Curve_type);
+    { Creates single menu item. }
+    procedure CreateCurveMenuItem(Pos: LongInt; ct: Curve_type;
+    ParentMenu: TMenuItem; OnClick: TNotifyEvent);
+    { Creates all menu items corresponding to user defined curves. }
+    procedure AddCurveMenuItems;
+    { Adds menu item corresponding to user defined curve. }
+    procedure AddCurveMenuItem(ct: Curve_type);
 
     procedure CheckListBoxChanged;
 	{ Saving curve parameters into text file. }
@@ -457,7 +458,7 @@ const
     
 implementation
 
-uses CreateUserPointsSetDialog, Unit3, Unit4, Unit5, UserPointsSetPropDialog, Unit12;
+uses Unit3, Unit4, Unit5, Unit12;
 (*
 function OFNHookProc(
     Wnd: HWnd; Msg: UINT; WParam: WPARAM; LParam: LPARAM): UINT; stdcall;
@@ -676,76 +677,6 @@ begin
         else
             CTS.NextCurveType;
     end;
-end;
-
-procedure TFormMain.ActionCreateSpecialCurveExecute(Sender: TObject);
-var ct: Curve_type;
-    Success: Boolean;
-label dlg1, dlg2;
-begin
-{$IFNDEF EXCLUDE_SOMETHING}
-    //  mashina sostoyaniy
-dlg1:
-    ct := nil;
-    CreateSpecialCurveDlg.ActiveControl := CreateSpecialCurveDlg.EditExpression;
-    case CreateSpecialCurveDlg.ShowModal of
-        mrOk:
-            begin
-                Success := False;
-
-                try
-                    //  pervonach. razbor
-                    FitClientApp_.FitClient.SetSpecialCurveParameters(
-                        CreateSpecialCurveDlg.EditExpression.Text, nil);
-                    Success := True;
-                except
-                    on E: EUserException do
-                        begin
-                            MessageDlg(E.Message, mtError, [mbOk], 0);
-                        end;
-                    else raise;
-                end;
-
-                if Success then
-                begin
-                    ct := Curve_type.Create(nil);
-                    ct.Name := CreateSpecialCurveDlg.EditCurveName.Text;
-                    ct.Expression := CreateSpecialCurveDlg.EditExpression.Text;
-                    Settings.Curve_types.Add(ct);
-                    ct.Parameters :=
-                        FitClientApp_.FitClient.GetSpecialCurveParameters;
-                    WriteCurve(ct);
-
-                    //DeleteDummyCurve;
-                    //  dobavlyaem vo vse menyu novyy element
-                    AddCurveMenuItem(ct);
-
-                    goto dlg2;
-                end
-                else goto dlg1;
-            end;
-    else Exit;
-    end;
-
-dlg2:
-    UserPointsSetPropDlg.ct := ct;
-    case UserPointsSetPropDlg.ShowModal of
-        mrOk:
-            begin
-                //  perezapisyvaetsya dlya sohraneniya
-                //  sdelannyh ustanovok parametrov
-                DeleteFile(PChar(ct.FileName));
-                WriteCurve(ct);
-            end;
-        mrRetry:
-            begin
-                //  pri vozvrate udalyaem
-                DeleteCurve(ct);
-                goto dlg1;
-            end;
-    else Exit;
-    end;
-{$ENDIF}
 end;
 
 procedure TFormMain.ActionDeleteExecute(Sender: TObject);
@@ -996,6 +927,7 @@ end;
 
 procedure TFormMain.ActionSelCurveExecute(Sender: TObject);
 var CTS: TCurveTypesSingleton;
+    UPS: TUserPointsSet;
 begin
     CTS := TCurveTypesSingleton.Create;
     if TMenuItem(Sender).Tag =
@@ -1037,7 +969,15 @@ begin
         CTS.GetCurveTypeTag(TUserPointsSet.GetCurveTypeId_) then
     begin
         CTS.SelectCurveType(TUserPointsSet.GetCurveTypeId_);
-        ActionCreateSpecialCurveExecute(Sender);
+        UPS := TUserPointsSet.Create(nil);
+        try
+            if UPS.HasConfigurableParameters then
+            begin
+                UPS.ShowConfigurationDialog;
+            end;
+        finally
+            UPS.Destroy;
+        end;
         Exit;
     end;
 end;

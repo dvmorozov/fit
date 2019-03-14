@@ -11,11 +11,11 @@
     </coordinates>
     <panel_attributes>IPointsSet
 --
-HasConfigurationParameters: Boolean
-ShowConfigurationDialog: Boolean
-HasDefaults: Boolean
-SetDefaults
-SaveConfiguration(Storage: IStorate)</panel_attributes>
+_HasConfigurationParameters: Boolean_
+_ShowConfigurationDialog: Boolean_
+_HasDefaults: Boolean_
+_SetDefaults_
+_SaveConfiguration(Storage: IStorate)_</panel_attributes>
     <additional_attributes/>
   </element>
   <element>

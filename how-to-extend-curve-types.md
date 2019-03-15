@@ -4,7 +4,7 @@ The architecture is based on the dependency inversion principle.
 
 ![Curve types hierarchy](assets/images/PointsSetsHierarchy.png)
 
-Each curve type should be defined in separate module and should implement defined interface. Curve class should register itself in the application by calling defined method of container class. Container class is responsible for keeping and providing to the application information about which curve types are available. It is responsible also for creating instances of curve clases. Container is a singleton. To add/exclude curve type to/from the application it is enough to add/exclude curve module to/from the project.
+Each curve type should be defined in separate module and should implement interface IPointsSet. Curve class should register itself in the application by creating instance of singleton TCurveTypesSingleton and calling its method RegisterCurveType. Singleton is responsible for keeping and providing to the application information about which curve types are available. It is responsible also for creating instances of curve clases. To add/exclude curve type to/from the application it is enough to add/exclude curve module to/from Lazarus project.
 
 ![Diagram](assets/images/ExtendingPointsSets.png)
 

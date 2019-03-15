@@ -16,7 +16,7 @@ unit UserPointsSet;
 interface
 
 uses Classes, SysUtils, PointsSet, CurvePointsSet, NamedPointsSet,
-  CurveTypesSingleton, IntPointsSet;
+  CurveTypesSingleton, IntPointsSet, ConfigurablePointsSet;
 
 type
     PDouble = ^Double;
@@ -49,25 +49,15 @@ type
         { Overrides method defined in TNamedPointsSet. }
         function GetCurveTypeId: TCurveTypeId; override;
         class function GetCurveTypeId_: TCurveTypeId;
-        { Returns true if curve type has parameters which should be configured
-          by user, otherwise returns false. }
-        function HasConfigurableParameters: Boolean; override;
-        { Displays dialog for set up user configurable parameters. Returns true
-          if dialog was confirmed and false if it was cancelled. }
-        function ShowConfigurationDialog: Boolean; override;
-        { Returns true if user configurable parameters have default values,
-          otherwise returns false. }
-        function HasDefaults: Boolean; override;
-        { Sets up default values for user configurable parameters. }
-        procedure SetDefaults; override;
+
+        class function GetConfigurablePointsSet: TConfigurablePointsSetClass;
 
         property Expression: string read FExpression write FExpression;
     end;
     
 implementation
 
-uses CreateUserPointsSetDialog, UserPointsSetPropDialog, Settings, Controls,
-  Main, MyExceptions, Dialogs, Unit1;
+uses ConfigurableUserPointsSet;
 
 {=========================== TUserPointsSet ================================}
 
@@ -84,92 +74,6 @@ end;
 class function TUserPointsSet.GetCurveTypeId_: TCurveTypeId;
 begin
     Result := StringToGUID('{d8cafce5-8b03-4cce-9e93-ea28acb8e7ca}');
-end;
-
-function TUserPointsSet.HasConfigurableParameters: Boolean;
-begin
-    Result := True;
-end;
-
-function TUserPointsSet.ShowConfigurationDialog: Boolean;
-var ct: Curve_type;
-    Success: Boolean;
-label dlg1, dlg2;
-begin
-    Result := True; //???
-{$IFNDEF EXCLUDE_SOMETHING}
-    //  mashina sostoyaniy
-dlg1:
-    ct := nil;
-    CreateSpecialCurveDlg.ActiveControl := CreateSpecialCurveDlg.EditExpression;
-    case CreateSpecialCurveDlg.ShowModal of
-        mrOk:
-            begin
-                Success := False;
-
-                try
-                    //  pervonach. razbor
-                    FitClientApp_.FitClient.SetSpecialCurveParameters(
-                        CreateSpecialCurveDlg.EditExpression.Text, nil);
-                    Success := True;
-                except
-                    on E: EUserException do
-                        begin
-                            MessageDlg(E.Message, mtError, [mbOk], 0);
-                        end;
-                    else raise;
-                end;
-
-                if Success then
-                begin
-                    ct := Curve_type.Create(nil);
-                    ct.Name := CreateSpecialCurveDlg.EditCurveName.Text;
-                    ct.Expression := CreateSpecialCurveDlg.EditExpression.Text;
-                    FormMain.Settings.Curve_types.Add(ct);
-                    ct.Parameters :=
-                        FitClientApp_.FitClient.GetSpecialCurveParameters;
-                    FormMain.WriteCurve(ct);
-
-                    //DeleteDummyCurve;
-                    //  dobavlyaem vo vse menyu novyy element
-                    FormMain.AddCurveMenuItem(ct);
-
-                    goto dlg2;
-                end
-                else goto dlg1;
-            end;
-    else Exit;
-    end;
-
-dlg2:
-    UserPointsSetPropDlg.ct := ct;
-    case UserPointsSetPropDlg.ShowModal of
-        mrOk:
-            begin
-                //  perezapisyvaetsya dlya sohraneniya
-                //  sdelannyh ustanovok parametrov
-                DeleteFile(PChar(ct.FileName));
-                FormMain.WriteCurve(ct);
-            end;
-        mrRetry:
-            begin
-                //  pri vozvrate udalyaem
-                FormMain.DeleteCurve(ct);
-                goto dlg1;
-            end;
-    else Exit;
-    end;
-{$ENDIF}
-end;
-
-function TUserPointsSet.HasDefaults: Boolean;
-begin
-    Result := False;
-end;
-
-procedure TUserPointsSet.SetDefaults;
-begin
-    //  Do nothing.
 end;
 
 function TUserPointsSet.CalcValue(ArgValue: Double): Double;
@@ -229,6 +133,11 @@ procedure TUserPointsSet.CopyParameters(const Dest: TObject);
 begin
     inherited;
     TUserPointsSet(Dest).Expression := Expression;
+end;
+
+class function TUserPointsSet.GetConfigurablePointsSet: TConfigurablePointsSetClass;
+begin
+    Result := TConfigurableUserPointsSet;
 end;
 
 var CTS: TCurveTypesSingleton;

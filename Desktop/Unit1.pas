@@ -927,7 +927,6 @@ end;
 
 procedure TFormMain.ActionSelCurveExecute(Sender: TObject);
 var CTS: TCurveTypesSingleton;
-    UPS: TUserPointsSet;
 begin
     CTS := TCurveTypesSingleton.Create;
     if TMenuItem(Sender).Tag =
@@ -969,16 +968,10 @@ begin
         CTS.GetCurveTypeTag(TUserPointsSet.GetCurveTypeId_) then
     begin
         CTS.SelectCurveType(TUserPointsSet.GetCurveTypeId_);
-        UPS := TUserPointsSet.Create(nil);
-        try
-            if UPS.HasConfigurableParameters then
-            begin
-                UPS.ShowConfigurationDialog;
-            end;
-        finally
-            UPS.Destroy;
+        if TUserPointsSet.GetConfigurablePointsSet.HasConfigurableParameters then
+        begin
+            TUserPointsSet.GetConfigurablePointsSet.ShowConfigurationDialog;
         end;
-        Exit;
     end;
 end;
 

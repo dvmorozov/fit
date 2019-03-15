@@ -39,17 +39,6 @@ type
           instead of property because property assumes storing data
           in object, but storing any data is not necessary in this case. }
         function GetCurveTypeName: string; virtual;
-        { Returns true if curve type has parameters which should be configured
-          by user, otherwise returns false. }
-        function HasConfigurableParameters: Boolean; virtual;
-        { Displays dialog for set up user configurable parameters. Returns true
-          if dialog was confirmed and false if it was cancelled. }
-        function ShowConfigurationDialog: Boolean; virtual;
-        { Returns true if user configurable parameters have default values,
-          otherwise returns false. }
-        function HasDefaults: Boolean; virtual;
-        { Sets up default values for user configurable parameters. }
-        procedure SetDefaults; virtual;
     end;
 
 implementation
@@ -74,26 +63,6 @@ end;
 procedure TNamedPointsSet.SetCurveTypeId(CurveTypeId: TCurveTypeId);
 begin
     FCurveTypeId := CurveTypeId;
-end;
-
-function TNamedPointsSet.HasConfigurableParameters: Boolean;
-begin
-    Result := False;
-end;
-
-function TNamedPointsSet.ShowConfigurationDialog: Boolean;
-begin
-    Result := False;
-end;
-
-function TNamedPointsSet.HasDefaults: Boolean;
-begin
-    Result := False;
-end;
-
-procedure TNamedPointsSet.SetDefaults;
-begin
-
 end;
 
 end.

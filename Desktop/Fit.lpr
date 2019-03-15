@@ -30,7 +30,8 @@ uses
 {$else}
   ,TA_LINUX
 {$endif}
-  , Main, CommonTypes, TableComp, ClassInheritIDs, GeneralHashFunctions, CreateUserPointsSetDialog;
+  , Main, CommonTypes, TableComp, ClassInheritIDs, GeneralHashFunctions,
+  CreateUserPointsSetDialog, ConfigurablePointsSet, ConfigurableUserPointsSet;
 
 {$R manifest.res}
 

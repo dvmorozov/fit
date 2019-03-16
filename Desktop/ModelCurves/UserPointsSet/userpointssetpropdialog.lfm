@@ -1,4 +1,4 @@
-object SpecialCurvePropDlg: TSpecialCurvePropDlg
+object UserPointsSetPropDlg: TUserPointsSetPropDlg
   Left = 560
   Height = 306
   Top = 167
@@ -8,11 +8,13 @@ object SpecialCurvePropDlg: TSpecialCurvePropDlg
   ActiveControl = BtnDone
   BorderIcons = [biSystemMenu]
   BorderStyle = bsDialog
-  Caption = 'Special Curve Properties'
+  Caption = 'Set Curve Type Properties'
   ClientHeight = 306
   ClientWidth = 392
+  DesignTimePPI = 120
   OnActivate = FormActivate
   Position = poMainFormCenter
+  LCLVersion = '1.8.4.0'
   object Bevel1: TBevel
     Left = 8
     Height = 244
@@ -32,7 +34,7 @@ object SpecialCurvePropDlg: TSpecialCurvePropDlg
   end
   object Label1: TLabel
     Left = 22
-    Height = 35
+    Height = 43
     Top = 111
     Width = 68
     AutoSize = False
@@ -102,10 +104,10 @@ object SpecialCurvePropDlg: TSpecialCurvePropDlg
   end
   object ComboArgument: TComboBox
     Left = 96
-    Height = 21
+    Height = 28
     Top = 53
     Width = 274
-    AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
+    ItemHeight = 20
     Items.Strings = (
       'item1'
       'item2'
@@ -122,15 +124,15 @@ object SpecialCurvePropDlg: TSpecialCurvePropDlg
     Height = 89
     Top = 112
     Width = 274
+    ItemHeight = 0
     OnClick = CheckListFixedClick
     OnClickCheck = CheckListFixedClickCheck
     Sorted = True
     TabOrder = 2
-    TopIndex = -1
   end
   object EditExpression: TEdit
     Left = 96
-    Height = 21
+    Height = 28
     Top = 24
     Width = 274
     Color = clBtnFace
@@ -139,7 +141,7 @@ object SpecialCurvePropDlg: TSpecialCurvePropDlg
   end
   object EditInitValue: TEdit
     Left = 96
-    Height = 21
+    Height = 28
     Top = 208
     Width = 195
     TabOrder = 3
@@ -157,10 +159,10 @@ object SpecialCurvePropDlg: TSpecialCurvePropDlg
   end
   object ComboPosition: TComboBox
     Left = 96
-    Height = 21
+    Height = 28
     Top = 82
     Width = 274
-    AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
+    ItemHeight = 20
     Items.Strings = (
       'item1'
       'item2'

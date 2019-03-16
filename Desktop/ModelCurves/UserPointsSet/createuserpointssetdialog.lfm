@@ -1,4 +1,4 @@
-object CreateSpecialCurveDlg: TCreateSpecialCurveDlg
+object CreateUserPointsSetDlg: TCreateUserPointsSetDlg
   Left = 146
   Height = 311
   Top = 162
@@ -8,7 +8,7 @@ object CreateSpecialCurveDlg: TCreateSpecialCurveDlg
   ActiveControl = BtnCancel
   BorderIcons = [biSystemMenu]
   BorderStyle = bsDialog
-  Caption = 'Special Curve'
+  Caption = 'Create New Curve Type'
   ClientHeight = 311
   ClientWidth = 391
   DesignTimePPI = 120

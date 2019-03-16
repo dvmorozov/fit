@@ -75,6 +75,7 @@ begin
   Application.CreateForm(TInputWavelengthDlg, InputWavelengthDlg);
   Application.CreateForm(TInputBackFactorDlg, InputBackFactorDlg);
   Application.CreateForm(TInputMaxRFactorDlg, InputMaxRFactorDlg);
+  Application.CreateForm(TCreateUserPointsSetDialog, CreateUserPointsSetDlg);
   Application.CreateForm(TUserPointsSetPropDialog, UserPointsSetPropDlg);
 
   InFile := CmdLineParamFound('INFILE');

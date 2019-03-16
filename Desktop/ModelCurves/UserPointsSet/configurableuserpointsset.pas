@@ -38,21 +38,20 @@ var ct: Curve_type;
     Success: Boolean;
 label dlg1, dlg2;
 begin
-    Result := True; //???
 {$IFNDEF EXCLUDE_SOMETHING}
-    //  mashina sostoyaniy
+    //  State machine.
 dlg1:
     ct := nil;
-    CreateSpecialCurveDlg.ActiveControl := CreateSpecialCurveDlg.EditExpression;
-    case CreateSpecialCurveDlg.ShowModal of
+    CreateUserPointsSetDlg.ActiveControl := CreateUserPointsSetDlg.EditExpression;
+    case CreateUserPointsSetDlg.ShowModal of
         mrOk:
             begin
                 Success := False;
 
                 try
-                    //  pervonach. razbor
+                    //  Initial parsing.
                     FitClientApp_.FitClient.SetSpecialCurveParameters(
-                        CreateSpecialCurveDlg.EditExpression.Text, nil);
+                        CreateUserPointsSetDlg.EditExpression.Text, nil);
                     Success := True;
                 except
                     on E: EUserException do
@@ -65,15 +64,15 @@ dlg1:
                 if Success then
                 begin
                     ct := Curve_type.Create(nil);
-                    ct.Name := CreateSpecialCurveDlg.EditCurveName.Text;
-                    ct.Expression := CreateSpecialCurveDlg.EditExpression.Text;
+                    ct.Name := CreateUserPointsSetDlg.EditCurveName.Text;
+                    ct.Expression := CreateUserPointsSetDlg.EditExpression.Text;
                     FormMain.Settings.Curve_types.Add(ct);
                     ct.Parameters :=
                         FitClientApp_.FitClient.GetSpecialCurveParameters;
                     FormMain.WriteCurve(ct);
 
-                    //DeleteDummyCurve;
-                    //  dobavlyaem vo vse menyu novyy element
+                    //FormMain.DeleteDummyCurve;
+                    //  Adds new menu item.
                     FormMain.AddCurveMenuItem(ct);
 
                     goto dlg2;
@@ -88,20 +87,20 @@ dlg2:
     case UserPointsSetPropDlg.ShowModal of
         mrOk:
             begin
-                //  perezapisyvaetsya dlya sohraneniya
-                //  sdelannyh ustanovok parametrov
+                //  Rewrites selected settings.
                 DeleteFile(PChar(ct.FileName));
                 FormMain.WriteCurve(ct);
             end;
         mrRetry:
             begin
-                //  pri vozvrate udalyaem
+                //  Deletes curve on retry.
                 FormMain.DeleteCurve(ct);
                 goto dlg1;
             end;
     else Exit;
     end;
 {$ENDIF}
+    Result := Success;
 end;
 
 class function TConfigurableUserPointsSet.HasDefaults: Boolean;

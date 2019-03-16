@@ -125,7 +125,7 @@ type
   end; 
 
 var
-  CreateSpecialCurveDlg: TCreateUserPointsSetDialog;
+  CreateUserPointsSetDlg: TCreateUserPointsSetDialog;
 
 implementation
 

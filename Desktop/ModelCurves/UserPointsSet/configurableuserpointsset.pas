@@ -25,8 +25,10 @@ type
 
 implementation
 
-uses CreateUserPointsSetDialog, UserPointsSetPropDialog, Settings, Controls,
-  Main, MyExceptions, Dialogs, Unit1;
+uses
+  CreateUserPointsSetDialog,
+  UserPointsSetPropDialog,
+  Settings, Controls, Main, MyExceptions, Dialogs, Unit1;
 
 class function TConfigurableUserPointsSet.HasConfigurableParameters: Boolean;
 begin

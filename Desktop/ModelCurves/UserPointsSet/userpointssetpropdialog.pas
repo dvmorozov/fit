@@ -3,7 +3,7 @@ This software is distributed under GPL
 in the hope that it will be useful, but WITHOUT ANY WARRANTY;
 without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
 
-@abstract(Contains definition of TUserPointsSetPropDialog.)
+@abstract(Contains definition of TUserPointsSetPropDlg.)
 
 @author(Dmitry Morozov dvmorozov@hotmail.com, 
 LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
@@ -26,9 +26,9 @@ uses
 
 type
 
-  { TUserPointsSetPropDialog }
+  { TUserPointsSetPropDlg }
 
-  TUserPointsSetPropDialog = class(TForm)
+  TUserPointsSetPropDlg = class(TForm)
     Bevel1: TBevel;
     BtnApply: TButton;
     BtnDone: TButton;
@@ -64,15 +64,15 @@ type
   end; 
 
 var
-  UserPointsSetPropDlg: TUserPointsSetPropDialog;
+  UserPointsSetPropDlg: TUserPointsSetPropDlg;
 
 implementation
 
 uses Unit4;
 
-{ TUserPointsSetPropDialog }
+{ TUserPointsSetPropDlg }
 
-procedure TUserPointsSetPropDialog.ComboPositionChange(Sender: TObject);
+procedure TUserPointsSetPropDlg.ComboPositionChange(Sender: TObject);
 var P: TSpecialCurveParameter;
     i: LongInt;
 begin
@@ -90,7 +90,7 @@ begin
     FillCheckListFixed;
 end;
 
-procedure TUserPointsSetPropDialog.ComboArgumentChange(Sender: TObject);
+procedure TUserPointsSetPropDlg.ComboArgumentChange(Sender: TObject);
 var P: TSpecialCurveParameter;
     i: LongInt;
 begin
@@ -108,7 +108,7 @@ begin
     FillCheckListFixed;
 end;
 
-procedure TUserPointsSetPropDialog.UpdateCheck;
+procedure TUserPointsSetPropDlg.UpdateCheck;
 var P: TSpecialCurveParameter;
 begin
     P := TSpecialCurveParameter(
@@ -125,7 +125,7 @@ begin
     end;
 end;
 
-procedure TUserPointsSetPropDialog.CheckListFixedClick(Sender: TObject);
+procedure TUserPointsSetPropDlg.CheckListFixedClick(Sender: TObject);
 var P: TSpecialCurveParameter;
 begin
     P := TSpecialCurveParameter(
@@ -135,14 +135,14 @@ begin
     if ClickCheck then begin UpdateCheck; ClickCheck := False; end;
 end;
 
-procedure TUserPointsSetPropDialog.CheckListFixedClickCheck(Sender: TObject);
+procedure TUserPointsSetPropDlg.CheckListFixedClickCheck(Sender: TObject);
 var P: TSpecialCurveParameter;
 begin
     if CheckListFixed.ItemIndex <> -1 then UpdateCheck
     else ClickCheck := True;
 end;
 
-procedure TUserPointsSetPropDialog.BtnApplyClick(Sender: TObject);
+procedure TUserPointsSetPropDlg.BtnApplyClick(Sender: TObject);
 var P: TSpecialCurveParameter;
 begin
     if CheckListFixed.ItemIndex <> -1 then
@@ -165,7 +165,7 @@ begin
     end;
 end;
 
-procedure TUserPointsSetPropDialog.FormActivate(Sender: TObject);
+procedure TUserPointsSetPropDlg.FormActivate(Sender: TObject);
 begin
     Assert(Assigned(ct));
     EditExpression.Text := ct.Expression;
@@ -174,7 +174,7 @@ begin
     FillCheckListFixed;
 end;
 
-procedure TUserPointsSetPropDialog.FillComboArgument;
+procedure TUserPointsSetPropDlg.FillComboArgument;
 var i: LongInt;
     P: TSpecialCurveParameter;
     //  !!! nel'zya isp. indeks potomu, chto real'nyy indeks dannogo
@@ -193,7 +193,7 @@ begin
     ComboArgument.ItemIndex := ComboArgument.Items.IndexOf(ArgName);
 end;
 
-procedure TUserPointsSetPropDialog.FillComboPosition;
+procedure TUserPointsSetPropDlg.FillComboPosition;
 var i: LongInt;
     P: TSpecialCurveParameter;
     PosName: string;
@@ -215,7 +215,7 @@ begin
 end;
 
 //  vyvodit vse parametry, krome argumenta
-procedure TUserPointsSetPropDialog.FillCheckListFixed;
+procedure TUserPointsSetPropDlg.FillCheckListFixed;
 var i, Index: LongInt;
     P: TSpecialCurveParameter;
 begin

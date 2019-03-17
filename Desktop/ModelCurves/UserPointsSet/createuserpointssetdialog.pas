@@ -3,7 +3,7 @@ This software is distributed under GPL
 in the hope that it will be useful, but WITHOUT ANY WARRANTY;
 without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
 
-@abstract(Contains definition of TCreateUserPointsSetDialog.)
+@abstract(Contains definition of TCreateUserPointsSetDlg.)
 
 @author(Dmitry Morozov dvmorozov@hotmail.com, 
 LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
@@ -21,9 +21,9 @@ uses
 
 type
 
-  { TCreateUserPointsSetDialog }
+  { TCreateUserPointsSetDlg }
 
-  TCreateUserPointsSetDialog = class(TForm)
+  TCreateUserPointsSetDlg = class(TForm)
     Bevel1: TBevel;
     ButtonSin: TButton;
     ButtonTh: TButton;
@@ -121,13 +121,13 @@ type
   end; 
 
 var
-  CreateUserPointsSetDlg: TCreateUserPointsSetDialog;
+  CreateUserPointsSetDlg: TCreateUserPointsSetDlg;
 
 implementation
 
-{ TCreateUserPointsSetDialog }
+{ TCreateUserPointsSetDlg }
 
-procedure TCreateUserPointsSetDialog.InsertFunc(FuncName: string);
+procedure TCreateUserPointsSetDlg.InsertFunc(FuncName: string);
 var Str: string;
     Temp: LongInt;
 begin
@@ -150,7 +150,7 @@ begin
     end;
 end;
 
-procedure TCreateUserPointsSetDialog.InsertSymbol(Symbol: string);
+procedure TCreateUserPointsSetDlg.InsertSymbol(Symbol: string);
 var Str: string;
     Temp: LongInt;
 begin
@@ -170,207 +170,207 @@ begin
     end;
 end;
 
-procedure TCreateUserPointsSetDialog.ButtonSinClick(Sender: TObject);
+procedure TCreateUserPointsSetDlg.ButtonSinClick(Sender: TObject);
 begin
     InsertFunc('Sin');
 end;
 
-procedure TCreateUserPointsSetDialog.ButtonSqrtClick(Sender: TObject);
+procedure TCreateUserPointsSetDlg.ButtonSqrtClick(Sender: TObject);
 begin
     InsertFunc('Sqrt');
 end;
 
-procedure TCreateUserPointsSetDialog.ButtonTgClick(Sender: TObject);
+procedure TCreateUserPointsSetDlg.ButtonTgClick(Sender: TObject);
 begin
     InsertFunc('Tg');
 end;
 
-procedure TCreateUserPointsSetDialog.ButtonThClick(Sender: TObject);
+procedure TCreateUserPointsSetDlg.ButtonThClick(Sender: TObject);
 begin
     InsertFunc('Th');
 end;
 
-procedure TCreateUserPointsSetDialog.ButtonCosClick(Sender: TObject);
+procedure TCreateUserPointsSetDlg.ButtonCosClick(Sender: TObject);
 begin
     InsertFunc('Cos');
 end;
 
-procedure TCreateUserPointsSetDialog.ButtonCschClick(Sender: TObject);
+procedure TCreateUserPointsSetDlg.ButtonCschClick(Sender: TObject);
 begin
     InsertFunc('Csch');
 end;
 
-procedure TCreateUserPointsSetDialog.ButtonChClick(Sender: TObject);
+procedure TCreateUserPointsSetDlg.ButtonChClick(Sender: TObject);
 begin
     InsertFunc('Ch');
 end;
 
-procedure TCreateUserPointsSetDialog.ButtonArcsinClick(Sender: TObject);
+procedure TCreateUserPointsSetDlg.ButtonArcsinClick(Sender: TObject);
 begin
     InsertFunc('Arcsin');
 end;
 
-procedure TCreateUserPointsSetDialog.ButtonArctgClick(Sender: TObject);
+procedure TCreateUserPointsSetDlg.ButtonArctgClick(Sender: TObject);
 begin
     InsertFunc('Arctg');
 end;
 
-procedure TCreateUserPointsSetDialog.ButtonArcthClick(Sender: TObject);
+procedure TCreateUserPointsSetDlg.ButtonArcthClick(Sender: TObject);
 begin
     InsertFunc('Arcth');
 end;
 
-procedure TCreateUserPointsSetDialog.ButtonArshClick(Sender: TObject);
+procedure TCreateUserPointsSetDlg.ButtonArshClick(Sender: TObject);
 begin
     InsertFunc('Arsh');
 end;
 
-procedure TCreateUserPointsSetDialog.ButtonArthClick(Sender: TObject);
+procedure TCreateUserPointsSetDlg.ButtonArthClick(Sender: TObject);
 begin
     InsertFunc('Arth');
 end;
 
-procedure TCreateUserPointsSetDialog.ButtonBracketsClick(Sender: TObject);
+procedure TCreateUserPointsSetDlg.ButtonBracketsClick(Sender: TObject);
 begin
     InsertFunc('');
 end;
 
-procedure TCreateUserPointsSetDialog.ButtonArccosClick(Sender: TObject);
+procedure TCreateUserPointsSetDlg.ButtonArccosClick(Sender: TObject);
 begin
     InsertFunc('Arccos');
 end;
 
-procedure TCreateUserPointsSetDialog.ButtonAbsClick(Sender: TObject);
+procedure TCreateUserPointsSetDlg.ButtonAbsClick(Sender: TObject);
 begin
     InsertFunc('Abs');
 end;
 
-procedure TCreateUserPointsSetDialog.Button7Click(Sender: TObject);
+procedure TCreateUserPointsSetDlg.Button7Click(Sender: TObject);
 begin
     InsertSymbol('7');
 end;
 
-procedure TCreateUserPointsSetDialog.Button4Click(Sender: TObject);
+procedure TCreateUserPointsSetDlg.Button4Click(Sender: TObject);
 begin
     InsertSymbol('4');
 end;
 
-procedure TCreateUserPointsSetDialog.Button1Click(Sender: TObject);
+procedure TCreateUserPointsSetDlg.Button1Click(Sender: TObject);
 begin
     InsertSymbol('1');
 end;
 
-procedure TCreateUserPointsSetDialog.Button0Click(Sender: TObject);
+procedure TCreateUserPointsSetDlg.Button0Click(Sender: TObject);
 begin
     InsertSymbol('0');
 end;
 
-procedure TCreateUserPointsSetDialog.Button2Click(Sender: TObject);
+procedure TCreateUserPointsSetDlg.Button2Click(Sender: TObject);
 begin
     InsertSymbol('2');
 end;
 
-procedure TCreateUserPointsSetDialog.Button3Click(Sender: TObject);
+procedure TCreateUserPointsSetDlg.Button3Click(Sender: TObject);
 begin
     InsertSymbol('3');
 end;
 
-procedure TCreateUserPointsSetDialog.Button5Click(Sender: TObject);
+procedure TCreateUserPointsSetDlg.Button5Click(Sender: TObject);
 begin
     InsertSymbol('5');
 end;
 
-procedure TCreateUserPointsSetDialog.Button6Click(Sender: TObject);
+procedure TCreateUserPointsSetDlg.Button6Click(Sender: TObject);
 begin
     InsertSymbol('6');
 end;
 
-procedure TCreateUserPointsSetDialog.Button8Click(Sender: TObject);
+procedure TCreateUserPointsSetDlg.Button8Click(Sender: TObject);
 begin
     InsertSymbol('8');
 end;
 
-procedure TCreateUserPointsSetDialog.Button9Click(Sender: TObject);
+procedure TCreateUserPointsSetDlg.Button9Click(Sender: TObject);
 begin
     InsertSymbol('9');
 end;
 
-procedure TCreateUserPointsSetDialog.ButtonArcctgClick(Sender: TObject);
+procedure TCreateUserPointsSetDlg.ButtonArcctgClick(Sender: TObject);
 begin
     InsertFunc('Arcctg');
 end;
 
-procedure TCreateUserPointsSetDialog.ButtonArchClick(Sender: TObject);
+procedure TCreateUserPointsSetDlg.ButtonArchClick(Sender: TObject);
 begin
     InsertFunc('Arch');
 end;
 
-procedure TCreateUserPointsSetDialog.ButtonCtgClick(Sender: TObject);
+procedure TCreateUserPointsSetDlg.ButtonCtgClick(Sender: TObject);
 begin
     InsertFunc('Ctg');
 end;
 
-procedure TCreateUserPointsSetDialog.ButtonCthClick(Sender: TObject);
+procedure TCreateUserPointsSetDlg.ButtonCthClick(Sender: TObject);
 begin
     InsertFunc('Cth');
 end;
 
-procedure TCreateUserPointsSetDialog.ButtonDecimalClick(Sender: TObject);
+procedure TCreateUserPointsSetDlg.ButtonDecimalClick(Sender: TObject);
 begin
     InsertSymbol('.');
 end;
 
-procedure TCreateUserPointsSetDialog.ButtonDivClick(Sender: TObject);
+procedure TCreateUserPointsSetDlg.ButtonDivClick(Sender: TObject);
 begin
     InsertSymbol('/');
 end;
 
-procedure TCreateUserPointsSetDialog.ButtonExpClick(Sender: TObject);
+procedure TCreateUserPointsSetDlg.ButtonExpClick(Sender: TObject);
 begin
     InsertFunc('Exp');
 end;
 
-procedure TCreateUserPointsSetDialog.ButtonLnClick(Sender: TObject);
+procedure TCreateUserPointsSetDlg.ButtonLnClick(Sender: TObject);
 begin
     InsertFunc('Ln');
 end;
 
-procedure TCreateUserPointsSetDialog.ButtonLogClick(Sender: TObject);
+procedure TCreateUserPointsSetDlg.ButtonLogClick(Sender: TObject);
 begin
     InsertFunc('Log');
 end;
 
-procedure TCreateUserPointsSetDialog.ButtonMinusClick(Sender: TObject);
+procedure TCreateUserPointsSetDlg.ButtonMinusClick(Sender: TObject);
 begin
     InsertSymbol('-');
 end;
 
-procedure TCreateUserPointsSetDialog.ButtonMulClick(Sender: TObject);
+procedure TCreateUserPointsSetDlg.ButtonMulClick(Sender: TObject);
 begin
     InsertSymbol('*');
 end;
 
-procedure TCreateUserPointsSetDialog.ButtonPlusClick(Sender: TObject);
+procedure TCreateUserPointsSetDlg.ButtonPlusClick(Sender: TObject);
 begin
     InsertSymbol('+');
 end;
 
-procedure TCreateUserPointsSetDialog.ButtonPowerClick(Sender: TObject);
+procedure TCreateUserPointsSetDlg.ButtonPowerClick(Sender: TObject);
 begin
     InsertSymbol('^');
 end;
 
-procedure TCreateUserPointsSetDialog.ButtonSchClick(Sender: TObject);
+procedure TCreateUserPointsSetDlg.ButtonSchClick(Sender: TObject);
 begin
     InsertFunc('Sch');
 end;
 
-procedure TCreateUserPointsSetDialog.ButtonShClick(Sender: TObject);
+procedure TCreateUserPointsSetDlg.ButtonShClick(Sender: TObject);
 begin
     InsertFunc('Sh');
 end;
 
-procedure TCreateUserPointsSetDialog.EditExpressionKeyPress(Sender: TObject;
+procedure TCreateUserPointsSetDlg.EditExpressionKeyPress(Sender: TObject;
   var Key: char);
 begin
     //  desyatichnyy razdelitel'

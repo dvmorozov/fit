@@ -4,11 +4,11 @@ program Fit;
 
 uses
 {$ifdef unix}
-  cthreads,     //  neobhodimo dlya linux
+  cthreads,
 {$endif}
   Interfaces,   //  LCL widgetset
   Forms,
-  Variants,     //  требуется для правильного выполнения
+  Variants,
   Unit1 in 'Unit1.pas' {Form1},
   Math3d in '..\..\Library\Math\Math3d.pas',
   DownhillSimplexContainer in '..\..\Library\Algorithms\DownhillSimplexContainer.pas',
@@ -22,7 +22,7 @@ uses
   Unit5, Unit4, CombEnumerator, FitServer, MainCalcThread, FitClient, FitClientStub,
   FitServerStub, FitServerProxy, FitClientApp, FitServerApp,
   DataClasses, FitServerWithThread, FitTask, 
-  FitServerMultithreaded, Settings, UserPointsSetPropDialog, TurboPowerIPro,
+  FitServerMultithreaded, Settings, TurboPowerIPro,
   FitGrids, SelfCheckedComponentList,
   FitTaskWithThread, StrUtils
 {$ifdef windows}
@@ -31,7 +31,8 @@ uses
   ,TA_LINUX
 {$endif}
   , Main, CommonTypes, TableComp, ClassInheritIDs, GeneralHashFunctions,
-  CreateUserPointsSetDialog, ConfigurablePointsSet, ConfigurableUserPointsSet;
+  CreateUserPointsSetDialog, UserPointsSetPropDialog,
+  ConfigurablePointsSet, ConfigurableUserPointsSet;
 
 {$R manifest.res}
 
@@ -75,8 +76,8 @@ begin
   Application.CreateForm(TInputWavelengthDlg, InputWavelengthDlg);
   Application.CreateForm(TInputBackFactorDlg, InputBackFactorDlg);
   Application.CreateForm(TInputMaxRFactorDlg, InputMaxRFactorDlg);
-  Application.CreateForm(TCreateUserPointsSetDialog, CreateUserPointsSetDlg);
-  Application.CreateForm(TUserPointsSetPropDialog, UserPointsSetPropDlg);
+  Application.CreateForm(TCreateUserPointsSetDlg, CreateUserPointsSetDlg);
+  Application.CreateForm(TUserPointsSetPropDlg, UserPointsSetPropDlg);
 
   InFile := CmdLineParamFound('INFILE');
   if InFile <> '' then

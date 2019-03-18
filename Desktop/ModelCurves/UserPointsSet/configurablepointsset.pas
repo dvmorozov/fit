@@ -10,6 +10,7 @@ uses
 type
   TConfigurablePointsSetClass = class of TConfigurablePointsSet;
 
+  { Defines methods for configuring user defined parameters of curve type. }
   TConfigurablePointsSet = class
   public
       { Returns true if curve type has parameters which should be configured

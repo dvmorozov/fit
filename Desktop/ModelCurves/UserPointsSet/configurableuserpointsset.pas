@@ -8,6 +8,7 @@ uses
   Classes, SysUtils, ConfigurablePointsSet;
 
 type
+  { Special implementation used by TUserPointsSet. }
   TConfigurableUserPointsSet = class(TConfigurablePointsSet)
   public
       { Returns true if curve type has parameters which should be configured
@@ -26,8 +27,7 @@ type
 implementation
 
 uses
-  CreateUserPointsSetDialog,
-  UserPointsSetPropDialog,
+  CreateUserPointsSetDialog, UserPointsSetPropDialog,
   Settings, Controls, Main, MyExceptions, Dialogs, Unit1;
 
 class function TConfigurableUserPointsSet.HasConfigurableParameters: Boolean;

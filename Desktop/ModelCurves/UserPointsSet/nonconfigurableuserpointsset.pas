@@ -8,6 +8,8 @@ uses
   Classes, SysUtils, ConfigurablePointsSet;
 
 type
+  { Should be used by all curve types which
+    don't have user configurable parameters. }
   TNonConfigurableUserPointsSet = class
   public
       { Returns true if curve type has parameters which should be configured

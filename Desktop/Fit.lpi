@@ -124,8 +124,8 @@
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="21"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="2570"/>
-        <CursorPos X="26" Y="2402"/>
+        <TopLine Value="956"/>
+        <CursorPos X="52" Y="973"/>
         <UsageCount Value="200"/>
         <Bookmarks Count="1">
           <Item0 Y="470"/>
@@ -774,10 +774,11 @@
       <Unit69>
         <Filename Value="ModelCurves\NamedPointsSet.pas"/>
         <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="8"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="8"/>
-        <CursorPos X="54" Y="24"/>
+        <TopLine Value="47"/>
+        <CursorPos X="31" Y="75"/>
         <UsageCount Value="240"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -915,11 +916,10 @@
       <Unit83>
         <Filename Value="ModelCurves\UserPointsSet\UserPointsSet.pas"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="12"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="19"/>
-        <CursorPos X="5" Y="35"/>
+        <TopLine Value="112"/>
+        <CursorPos X="42" Y="141"/>
         <UsageCount Value="207"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -950,7 +950,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="173"/>
         <CursorPos X="32" Y="218"/>
-        <UsageCount Value="193"/>
+        <UsageCount Value="194"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit85>
@@ -961,7 +961,7 @@
         <EditorIndex Value="23"/>
         <WindowIndex Value="1"/>
         <CursorPos X="63" Y="13"/>
-        <UsageCount Value="147"/>
+        <UsageCount Value="148"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit86>
@@ -973,18 +973,19 @@
         <WindowIndex Value="1"/>
         <TopLine Value="6"/>
         <CursorPos X="50" Y="11"/>
-        <UsageCount Value="94"/>
+        <UsageCount Value="95"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit87>
       <Unit88>
-        <Filename Value="ModelCurves\UserPointsSet\nonconfigurableuserpointsset.pas"/>
+        <Filename Value="ModelCurves\UserPointsSet\nonconfigurablepointsset.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="NonConfigurableUserPointsSet"/>
+        <UnitName Value="NonConfigurablePointsSet"/>
         <EditorIndex Value="22"/>
         <WindowIndex Value="1"/>
-        <CursorPos X="5" Y="12"/>
-        <UsageCount Value="94"/>
+        <TopLine Value="18"/>
+        <CursorPos X="17" Y="42"/>
+        <UsageCount Value="95"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit88>
@@ -998,124 +999,124 @@
     </OtherDefines>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="ModelCurves\UserPointsSet\configurableuserpointsset.pas"/>
-        <Caret Line="11" Column="61"/>
+        <Filename Value="C:\lazarus\lcl\menus.pp"/>
+        <Caret Line="506" Column="49" TopLine="493"/>
       </Position1>
       <Position2>
-        <Filename Value="Unit1.pas"/>
-        <Caret Line="973" Column="53" TopLine="955"/>
+        <Filename Value="Fit.lpr"/>
+        <Caret Line="79" Column="72" TopLine="55"/>
       </Position2>
       <Position3>
-        <Filename Value="ModelCurves\UserPointsSet\UserPointsSet.pas"/>
-        <Caret Line="136" Column="30" TopLine="115"/>
+        <Filename Value="ModelCurves\UserPointsSet\configurableuserpointsset.pas"/>
+        <Caret Line="46" TopLine="20"/>
       </Position3>
       <Position4>
-        <Filename Value="ModelCurves\UserPointsSet\UserPointsSet.pas"/>
-        <Caret Line="53" Column="78" TopLine="28"/>
+        <Filename Value="ModelCurves\UserPointsSet\configurableuserpointsset.pas"/>
+        <Caret Line="28" Column="6" TopLine="20"/>
       </Position4>
       <Position5>
-        <Filename Value="ModelCurves\UserPointsSet\UserPointsSet.pas"/>
-        <Caret Line="138" Column="7" TopLine="117"/>
+        <Filename Value="ModelCurves\UserPointsSet\configurableuserpointsset.pas"/>
+        <Caret Line="31" Column="23"/>
       </Position5>
       <Position6>
-        <Filename Value="ModelCurves\UserPointsSet\UserPointsSet.pas"/>
-        <Caret Line="19" Column="50" TopLine="4"/>
+        <Filename Value="ModelCurves\UserPointsSet\configurableuserpointsset.pas"/>
+        <Caret Line="47" Column="5" TopLine="31"/>
       </Position6>
       <Position7>
-        <Filename Value="ModelCurves\UserPointsSet\UserPointsSet.pas"/>
-        <Caret Line="139" Column="15" TopLine="117"/>
+        <Filename Value="Fit.lpr"/>
+        <Caret Line="36" TopLine="24"/>
       </Position7>
       <Position8>
-        <Filename Value="ModelCurves\UserPointsSet\configurableuserpointsset.pas"/>
-        <Caret Line="55" Column="25" TopLine="40"/>
+        <Filename Value="ModelCurves\UserPointsSet\userpointssetpropdialog.pas"/>
+        <Caret Line="31" Column="27"/>
       </Position8>
       <Position9>
-        <Filename Value="ModelCurves\UserPointsSet\configurableuserpointsset.pas"/>
-        <Caret Line="46" Column="26" TopLine="29"/>
+        <Filename Value="ModelCurves\UserPointsSet\userpointssetpropdialog.pas"/>
+        <Caret Line="218" Column="32" TopLine="191"/>
       </Position9>
       <Position10>
-        <Filename Value="ModelCurves\UserPointsSet\configurableuserpointsset.pas"/>
-        <Caret Line="50" Column="21" TopLine="43"/>
+        <Filename Value="Fit.lpr"/>
+        <Caret Line="80" Column="44" TopLine="58"/>
       </Position10>
       <Position11>
-        <Filename Value="ModelCurves\UserPointsSet\configurableuserpointsset.pas"/>
-        <Caret Line="50" Column="21" TopLine="43"/>
+        <Filename Value="ModelCurves\UserPointsSet\UserPointsSet.pas"/>
+        <Caret Line="139" Column="15" TopLine="43"/>
       </Position11>
       <Position12>
         <Filename Value="ModelCurves\UserPointsSet\configurableuserpointsset.pas"/>
-        <Caret Line="38" Column="12" TopLine="32"/>
+        <Caret Line="11" Column="29" TopLine="7"/>
       </Position12>
       <Position13>
         <Filename Value="ModelCurves\UserPointsSet\configurableuserpointsset.pas"/>
-        <Caret Line="50" Column="24" TopLine="32"/>
+        <Caret Line="33" Column="16" TopLine="7"/>
       </Position13>
       <Position14>
-        <Filename Value="ModelCurves\UserPointsSet\configurableuserpointsset.pas"/>
-        <Caret Line="56" Column="28" TopLine="32"/>
+        <Filename Value="ModelCurves\UserPointsSet\UserPointsSet.pas"/>
+        <Caret Line="140" Column="15" TopLine="117"/>
       </Position14>
       <Position15>
-        <Filename Value="C:\lazarus\lcl\menus.pp"/>
-        <Caret Line="506" Column="49" TopLine="493"/>
+        <Filename Value="ModelCurves\UserPointsSet\configurableuserpointsset.pas"/>
+        <Caret Line="11" Column="3" TopLine="5"/>
       </Position15>
       <Position16>
-        <Filename Value="Fit.lpr"/>
-        <Caret Line="79" Column="72" TopLine="55"/>
+        <Filename Value="ModelCurves\UserPointsSet\UserPointsSet.pas"/>
+        <Caret Line="140" Column="15" TopLine="117"/>
       </Position16>
       <Position17>
-        <Filename Value="ModelCurves\UserPointsSet\configurableuserpointsset.pas"/>
-        <Caret Line="46" TopLine="20"/>
+        <Filename Value="Unit1.pas"/>
+        <Caret Line="2402" Column="26" TopLine="2570"/>
       </Position17>
       <Position18>
-        <Filename Value="ModelCurves\UserPointsSet\configurableuserpointsset.pas"/>
-        <Caret Line="28" Column="6" TopLine="20"/>
+        <Filename Value="ModelCurves\UserPointsSet\UserPointsSet.pas"/>
+        <Caret Line="138" Column="55" TopLine="117"/>
       </Position18>
       <Position19>
-        <Filename Value="ModelCurves\UserPointsSet\configurableuserpointsset.pas"/>
-        <Caret Line="31" Column="23"/>
+        <Filename Value="ModelCurves\UserPointsSet\UserPointsSet.pas"/>
+        <Caret Line="35" Column="34" TopLine="31"/>
       </Position19>
       <Position20>
-        <Filename Value="ModelCurves\UserPointsSet\configurableuserpointsset.pas"/>
-        <Caret Line="47" Column="5" TopLine="31"/>
+        <Filename Value="ModelCurves\UserPointsSet\UserPointsSet.pas"/>
+        <Caret Line="138" Column="46" TopLine="117"/>
       </Position20>
       <Position21>
-        <Filename Value="Fit.lpr"/>
-        <Caret Line="36" TopLine="24"/>
+        <Filename Value="ModelCurves\UserPointsSet\UserPointsSet.pas"/>
+        <Caret Line="54" TopLine="38"/>
       </Position21>
       <Position22>
-        <Filename Value="ModelCurves\UserPointsSet\userpointssetpropdialog.pas"/>
-        <Caret Line="31" Column="27"/>
+        <Filename Value="ModelCurves\UserPointsSet\UserPointsSet.pas"/>
+        <Caret Line="47" Column="40" TopLine="38"/>
       </Position22>
       <Position23>
-        <Filename Value="ModelCurves\UserPointsSet\userpointssetpropdialog.pas"/>
-        <Caret Line="218" Column="32" TopLine="191"/>
+        <Filename Value="ModelCurves\NamedPointsSet.pas"/>
+        <Caret Line="45" TopLine="23"/>
       </Position23>
       <Position24>
-        <Filename Value="Fit.lpr"/>
-        <Caret Line="80" Column="44" TopLine="58"/>
+        <Filename Value="ModelCurves\UserPointsSet\UserPointsSet.pas"/>
+        <Caret Line="47" Column="40" TopLine="38"/>
       </Position24>
       <Position25>
         <Filename Value="ModelCurves\UserPointsSet\UserPointsSet.pas"/>
-        <Caret Line="139" Column="15" TopLine="43"/>
+        <Caret Line="53" Column="31" TopLine="38"/>
       </Position25>
       <Position26>
-        <Filename Value="ModelCurves\UserPointsSet\configurableuserpointsset.pas"/>
-        <Caret Line="11" Column="29" TopLine="7"/>
+        <Filename Value="ModelCurves\NamedPointsSet.pas"/>
+        <Caret Line="49" Column="35" TopLine="24"/>
       </Position26>
       <Position27>
-        <Filename Value="ModelCurves\UserPointsSet\configurableuserpointsset.pas"/>
-        <Caret Line="33" Column="16" TopLine="7"/>
+        <Filename Value="ModelCurves\NamedPointsSet.pas"/>
+        <Caret Line="49" Column="21" TopLine="44"/>
       </Position27>
       <Position28>
-        <Filename Value="ModelCurves\UserPointsSet\UserPointsSet.pas"/>
-        <Caret Line="140" Column="15" TopLine="117"/>
+        <Filename Value="ModelCurves\NamedPointsSet.pas"/>
+        <Caret Line="75" Column="29" TopLine="47"/>
       </Position28>
       <Position29>
-        <Filename Value="ModelCurves\UserPointsSet\configurableuserpointsset.pas"/>
-        <Caret Line="11" Column="3" TopLine="5"/>
+        <Filename Value="ModelCurves\UserPointsSet\nonconfigurablepointsset.pas"/>
+        <Caret Line="13" Column="32"/>
       </Position29>
       <Position30>
-        <Filename Value="ModelCurves\UserPointsSet\UserPointsSet.pas"/>
-        <Caret Line="140" Column="15" TopLine="117"/>
+        <Filename Value="ModelCurves\UserPointsSet\nonconfigurablepointsset.pas"/>
+        <Caret Line="42" Column="17" TopLine="18"/>
       </Position30>
     </JumpHistory>
   </ProjectOptions>

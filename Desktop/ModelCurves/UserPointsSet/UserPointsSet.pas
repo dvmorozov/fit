@@ -50,7 +50,8 @@ type
         function GetCurveTypeId: TCurveTypeId; override;
         class function GetCurveTypeId_: TCurveTypeId;
 
-        class function GetConfigurablePointsSet: TConfigurablePointsSetClass;
+        class function GetConfigurablePointsSet:
+            TConfigurablePointsSetClass; override;
 
         property Expression: string read FExpression write FExpression;
     end;

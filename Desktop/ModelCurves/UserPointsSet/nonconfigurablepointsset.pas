@@ -1,4 +1,4 @@
-unit NonConfigurableUserPointsSet;
+unit NonConfigurablePointsSet;
 
 {$mode delphi}
 
@@ -10,7 +10,7 @@ uses
 type
   { Should be used by all curve types which
     don't have user configurable parameters. }
-  TNonConfigurableUserPointsSet = class
+  TNonConfigurablePointsSet = class(TConfigurablePointsSet)
   public
       { Returns true if curve type has parameters which should be configured
         by user, otherwise returns false. }
@@ -27,22 +27,22 @@ type
 
 implementation
 
-class function TNonConfigurableUserPointsSet.HasConfigurableParameters: Boolean;
+class function TNonConfigurablePointsSet.HasConfigurableParameters: Boolean;
 begin
     Result := False;
 end;
 
-class function TNonConfigurableUserPointsSet.ShowConfigurationDialog: Boolean;
+class function TNonConfigurablePointsSet.ShowConfigurationDialog: Boolean;
 begin
     Result := False;
 end;
 
-class function TNonConfigurableUserPointsSet.HasDefaults: Boolean;
+class function TNonConfigurablePointsSet.HasDefaults: Boolean;
 begin
     Result := False;
 end;
 
-class procedure TNonConfigurableUserPointsSet.SetDefaults;
+class procedure TNonConfigurablePointsSet.SetDefaults;
 begin
 
 end;

@@ -15,7 +15,7 @@ unit NamedPointsSet;
 
 interface
 
-uses Classes, SysUtils, CurvePointsSet, IntPointsSet;
+uses Classes, SysUtils, CurvePointsSet, IntPointsSet, ConfigurablePointsSet;
 
 type
     { Base curve class allowing setting up type name. Type name distinguishes
@@ -39,9 +39,14 @@ type
           instead of property because property assumes storing data
           in object, but storing any data is not necessary in this case. }
         function GetCurveTypeName: string; virtual;
+
+        class function GetConfigurablePointsSet:
+            TConfigurablePointsSetClass; virtual;
     end;
 
 implementation
+
+uses NonConfigurablePointsSet;
 
 {============================ TNamedPointsSet =================================}
 
@@ -63,6 +68,11 @@ end;
 procedure TNamedPointsSet.SetCurveTypeId(CurveTypeId: TCurveTypeId);
 begin
     FCurveTypeId := CurveTypeId;
+end;
+
+class function TNamedPointsSet.GetConfigurablePointsSet: TConfigurablePointsSetClass;
+begin
+    Result := TNonConfigurablePointsSet;
 end;
 
 end.

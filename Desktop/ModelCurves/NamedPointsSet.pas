@@ -18,6 +18,7 @@ interface
 uses Classes, SysUtils, CurvePointsSet, IntPointsSet, ConfigurablePointsSet;
 
 type
+    TNamedPointsSetClass = class of TNamedPointsSet;
     { Base curve class allowing setting up type name. Type name distinguishes
       this curve from all other curve types, as opposite to the 'Title' attributes
       which is used to distinguish separate curve instances. }
@@ -39,6 +40,7 @@ type
           instead of property because property assumes storing data
           in object, but storing any data is not necessary in this case. }
         function GetCurveTypeName: string; virtual;
+        class function GetCurveTypeId_: TCurveTypeId; virtual; abstract;
 
         class function GetConfigurablePointsSet:
             TConfigurablePointsSetClass; virtual;

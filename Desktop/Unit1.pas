@@ -927,51 +927,30 @@ end;
 
 procedure TFormMain.ActionSelCurveExecute(Sender: TObject);
 var CTS: TCurveTypesSingleton;
+    NamedPointsSetClasses: array[1..6] of TNamedPointsSetClass = (
+        TGaussPointsSet, TLorentzPointsSet,
+        TPseudoVoigtPointsSet, TAsymPseudoVoigtPointsSet,
+        T2BranchesPseudoVoigtPointsSet, TUserPointsSet);
+    i: Integer;
+    NamedPointsSetClass: TNamedPointsSetClass;
 begin
     CTS := TCurveTypesSingleton.Create;
-    if TMenuItem(Sender).Tag =
-        CTS.GetCurveTypeTag(TGaussPointsSet.GetCurveTypeId_) then
+    for i := 1 to 6 do
     begin
-        FitClientApp_.FitClient.CurveTypeId := TGaussPointsSet.GetCurveTypeId_;
-        CTS.SelectCurveType(TGaussPointsSet.GetCurveTypeId_);
-    end
-    else
-    if TMenuItem(Sender).Tag =
-        CTS.GetCurveTypeTag(TLorentzPointsSet.GetCurveTypeId_) then
-    begin
-        FitClientApp_.FitClient.CurveTypeId := TLorentzPointsSet.GetCurveTypeId_;
-        CTS.SelectCurveType(TLorentzPointsSet.GetCurveTypeId_);
-    end
-    else
-    if TMenuItem(Sender).Tag =
-        CTS.GetCurveTypeTag(TPseudoVoigtPointsSet.GetCurveTypeId_) then
-    begin
-        FitClientApp_.FitClient.CurveTypeId := TPseudoVoigtPointsSet.GetCurveTypeId_;
-        CTS.SelectCurveType(TPseudoVoigtPointsSet.GetCurveTypeId_);
-    end
-    else
-    if TMenuItem(Sender).Tag =
-        CTS.GetCurveTypeTag(TAsymPseudoVoigtPointsSet.GetCurveTypeId_) then
-    begin
-        FitClientApp_.FitClient.CurveTypeId := TAsymPseudoVoigtPointsSet.GetCurveTypeId_;
-        CTS.SelectCurveType(TAsymPseudoVoigtPointsSet.GetCurveTypeId_);
-    end
-    else
-    if TMenuItem(Sender).Tag =
-        CTS.GetCurveTypeTag(T2BranchesPseudoVoigtPointsSet.GetCurveTypeId_) then
-    begin
-        FitClientApp_.FitClient.CurveTypeId := T2BranchesPseudoVoigtPointsSet.GetCurveTypeId_;
-        CTS.SelectCurveType(T2BranchesPseudoVoigtPointsSet.GetCurveTypeId_);
-    end
-    else
-    if TMenuItem(Sender).Tag =
-        CTS.GetCurveTypeTag(TUserPointsSet.GetCurveTypeId_) then
-    begin
-        CTS.SelectCurveType(TUserPointsSet.GetCurveTypeId_);
-        if TUserPointsSet.GetConfigurablePointsSet.HasConfigurableParameters then
+        NamedPointsSetClass := NamedPointsSetClasses[i];
+        if TMenuItem(Sender).Tag =
+            CTS.GetCurveTypeTag(NamedPointsSetClass.GetCurveTypeId_) then
         begin
-            TUserPointsSet.GetConfigurablePointsSet.ShowConfigurationDialog;
-        end;
+            FitClientApp_.FitClient.CurveTypeId := NamedPointsSetClass.GetCurveTypeId_;
+            CTS.SelectCurveType(NamedPointsSetClass.GetCurveTypeId_);
+
+            if NamedPointsSetClass.GetConfigurablePointsSet.HasConfigurableParameters then
+            begin
+                NamedPointsSetClass.GetConfigurablePointsSet.ShowConfigurationDialog;
+            end;
+
+            Break;
+        end
     end;
 end;
 

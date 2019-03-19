@@ -37,24 +37,22 @@ end;
 
 class function TConfigurableUserPointsSet.ShowConfigurationDialog: Boolean;
 var ct: Curve_type;
-    Success: Boolean;
 label dlg1, dlg2;
 begin
 {$IFNDEF EXCLUDE_SOMETHING}
     //  State machine.
 dlg1:
+    Result := False;
     ct := nil;
     CreateUserPointsSetDlg.ActiveControl := CreateUserPointsSetDlg.EditExpression;
     case CreateUserPointsSetDlg.ShowModal of
         mrOk:
             begin
-                Success := False;
-
                 try
                     //  Initial parsing.
                     FitClientApp_.FitClient.SetSpecialCurveParameters(
                         CreateUserPointsSetDlg.EditExpression.Text, nil);
-                    Success := True;
+                    Result := True;
                 except
                     on E: EUserException do
                         begin
@@ -63,7 +61,7 @@ dlg1:
                     else raise;
                 end;
 
-                if Success then
+                if Result then
                 begin
                     ct := Curve_type.Create(nil);
                     ct.Name := CreateUserPointsSetDlg.EditCurveName.Text;
@@ -93,6 +91,7 @@ dlg2:
                 DeleteFile(PChar(ct.FileName));
                 FormMain.WriteCurve(ct);
             end;
+
         mrRetry:
             begin
                 //  Deletes curve on retry.
@@ -102,7 +101,6 @@ dlg2:
     else Exit;
     end;
 {$ENDIF}
-    Result := Success;
 end;
 
 class function TConfigurableUserPointsSet.HasDefaults: Boolean;

@@ -941,13 +941,28 @@ begin
         if TMenuItem(Sender).Tag =
             CTS.GetCurveTypeTag(NamedPointsSetClass.GetCurveTypeId_) then
         begin
+            if NamedPointsSetClass.GetConfigurablePointsSet.HasConfigurableParameters then
+                if not NamedPointsSetClass.GetConfigurablePointsSet.ShowConfigurationDialog then
+                begin
+                    //  Tries to apply default values of parameters.
+                    if NamedPointsSetClass.GetConfigurablePointsSet.HasDefaults then
+                        NamedPointsSetClass.GetConfigurablePointsSet.SetDefaults
+                    else
+                    begin
+                        //  Configuration failed.
+                        MessageDlg('Warning', 'Parameters must be configured',
+                            mtWarning, [mbOK], '');
+                        Break;
+                    end;
+                end
+                else
+                begin
+                    //  Save configuration data.
+                end;
+
+            //  Curve type can be selected only after successful configuration.
             FitClientApp_.FitClient.CurveTypeId := NamedPointsSetClass.GetCurveTypeId_;
             CTS.SelectCurveType(NamedPointsSetClass.GetCurveTypeId_);
-
-            if NamedPointsSetClass.GetConfigurablePointsSet.HasConfigurableParameters then
-            begin
-                NamedPointsSetClass.GetConfigurablePointsSet.ShowConfigurationDialog;
-            end;
 
             Break;
         end

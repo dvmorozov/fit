@@ -2,19 +2,6 @@
 <diagram program="umlet" version="14.3.0">
   <zoom_level>10</zoom_level>
   <element>
-    <id>UMLInterface</id>
-    <coordinates>
-      <x>160</x>
-      <y>170</y>
-      <w>80</w>
-      <h>90</h>
-    </coordinates>
-    <panel_attributes>IStorage
---
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
     <id>UMLClass</id>
     <coordinates>
       <x>330</x>
@@ -33,23 +20,12 @@
     <id>Relation</id>
     <coordinates>
       <x>530</x>
-      <y>500</y>
+      <y>480</y>
       <w>30</w>
-      <h>80</h>
+      <h>100</h>
     </coordinates>
     <panel_attributes>lt=-&gt;&gt;&gt;&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>190</x>
-      <y>190</y>
-      <w>420</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>400.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
@@ -102,9 +78,9 @@ _SaveConfiguration(Storage: IStorate)_</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>410</x>
-      <y>390</y>
+      <y>410</y>
       <w>260</w>
-      <h>120</h>
+      <h>80</h>
     </coordinates>
     <panel_attributes>TNonConfigurablePointsSet
 --
@@ -117,10 +93,10 @@ _SaveConfiguration(Storage: IStorate)_</panel_attributes>
       <x>530</x>
       <y>250</y>
       <w>140</w>
-      <h>160</h>
+      <h>180</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>120.0;10.0;120.0;100.0;10.0;100.0;10.0;140.0</additional_attributes>
+    <additional_attributes>120.0;10.0;120.0;100.0;10.0;100.0;10.0;160.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -137,9 +113,9 @@ _SaveConfiguration(Storage: IStorate)_</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>800</x>
-      <y>390</y>
+      <y>410</y>
       <w>260</w>
-      <h>120</h>
+      <h>80</h>
     </coordinates>
     <panel_attributes>TConfigurableUserPointsSet
 --
@@ -152,21 +128,21 @@ _SaveConfiguration(Storage: IStorate)_</panel_attributes>
       <x>710</x>
       <y>250</y>
       <w>240</w>
-      <h>160</h>
+      <h>180</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;100.0;220.0;100.0;220.0;140.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0;220.0;100.0;220.0;160.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>920</x>
-      <y>500</y>
+      <y>480</y>
       <w>30</w>
-      <h>290</h>
+      <h>310</h>
     </coordinates>
     <panel_attributes>lt=-&gt;&gt;&gt;&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;270.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;290.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -194,7 +170,7 @@ _SaveConfiguration(Storage: IStorate)_</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1200</x>
-      <y>390</y>
+      <y>410</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
@@ -205,7 +181,7 @@ _SaveConfiguration(Storage: IStorate)_</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>1050</x>
-      <y>390</y>
+      <y>410</y>
       <w>170</w>
       <h>30</h>
     </coordinates>
@@ -218,10 +194,10 @@ _SaveConfiguration(Storage: IStorate)_</panel_attributes>
       <x>780</x>
       <y>250</y>
       <w>490</w>
-      <h>160</h>
+      <h>180</h>
     </coordinates>
     <panel_attributes>lt=-&gt;&gt;&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;60.0;470.0;60.0;470.0;140.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0;470.0;60.0;470.0;160.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>

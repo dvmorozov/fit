@@ -66,9 +66,11 @@ dlg1:
                     ct := Curve_type.Create(nil);
                     ct.Name := CreateUserPointsSetDlg.EditCurveName.Text;
                     ct.Expression := CreateUserPointsSetDlg.EditExpression.Text;
-                    FormMain.Settings.Curve_types.Add(ct);
                     ct.Parameters :=
                         FitClientApp_.FitClient.GetSpecialCurveParameters;
+
+                    //  Saving curve parameters.
+                    FormMain.Settings.Curve_types.Add(ct);
                     FormMain.WriteCurve(ct);
 
                     //FormMain.DeleteDummyCurve;

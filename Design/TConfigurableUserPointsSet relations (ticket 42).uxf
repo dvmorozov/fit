@@ -197,13 +197,17 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>750</x>
-      <y>210</y>
-      <w>70</w>
-      <h>30</h>
+      <x>700</x>
+      <y>200</y>
+      <w>170</w>
+      <h>80</h>
     </coordinates>
-    <panel_attributes>lt=()-[v]</panel_attributes>
-    <additional_attributes>10.0;10.0;50.0;10.0</additional_attributes>
+    <panel_attributes>lt=()-[v]
+
+
+
+ICurveTypeParameters</panel_attributes>
+    <additional_attributes>60.0;20.0;100.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -221,10 +225,11 @@
     <coordinates>
       <x>590</x>
       <y>120</y>
-      <w>30</w>
+      <w>200</w>
       <h>60</h>
     </coordinates>
-    <panel_attributes>lt=()-[v]</panel_attributes>
+    <panel_attributes>lt=()-[v]
+   ICreateUserPointsSetDlg</panel_attributes>
     <additional_attributes>10.0;40.0;10.0;10.0</additional_attributes>
   </element>
   <element>
@@ -241,13 +246,17 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>390</x>
-      <y>210</y>
-      <w>70</w>
-      <h>30</h>
+      <x>360</x>
+      <y>200</y>
+      <w>130</w>
+      <h>80</h>
     </coordinates>
-    <panel_attributes>lt=()-[v]</panel_attributes>
-    <additional_attributes>50.0;10.0;10.0;10.0</additional_attributes>
+    <panel_attributes>lt=()-[v]
+
+
+
+IExpressionParser</panel_attributes>
+    <additional_attributes>80.0;20.0;40.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -276,10 +285,11 @@
     <coordinates>
       <x>590</x>
       <y>280</y>
-      <w>30</w>
+      <w>160</w>
       <h>60</h>
     </coordinates>
-    <panel_attributes>lt=()-[v]</panel_attributes>
+    <panel_attributes>lt=()-[v]
+   ICurveTypeStorage</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
   </element>
   <element>

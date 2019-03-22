@@ -15,12 +15,12 @@ unit IntExpressionParser;
 
 interface
 
-uses Classes, SysUtils, Settings;
+uses Classes, SysUtils, Settings, CurvePointsSet;
 
 type
     { Interface defining basic operation for parsing curve expression. }
     IExpressionParser = interface
-        function ParseExpression(Expression: string): Curve_type;
+        function ParseExpression(Expression: string): Curve_parameters;
     end;
 
 implementation

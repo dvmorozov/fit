@@ -27,8 +27,8 @@ type
 implementation
 
 uses
-  CreateUserPointsSetDialog, UserPointsSetPropDialog,
-  Settings, Controls, Main, MyExceptions, Dialogs, Unit1;
+  CreateUserPointsSetDialog, UserPointsSetPropDialog, ExpressionParserAdapter,
+  Settings, Controls, Main, Dialogs, Unit1;
 
 class function TConfigurableUserPointsSet.HasConfigurableParameters: Boolean;
 begin
@@ -37,10 +37,11 @@ end;
 
 class function TConfigurableUserPointsSet.ShowConfigurationDialog: Boolean;
 var ct: Curve_type;
+    epa: TExpressionParserAdapter;
 label dlg1, dlg2;
 begin
+    epa := TExpressionParserAdapter.Create;
 {$IFNDEF EXCLUDE_SOMETHING}
-    //  State machine.
 dlg1:
     Result := False;
     ct := nil;
@@ -48,40 +49,23 @@ dlg1:
     case CreateUserPointsSetDlg.ShowModal of
         mrOk:
             begin
-                try
-                    //  Initial parsing.
-                    FitClientApp_.FitClient.SetSpecialCurveParameters(
-                        CreateUserPointsSetDlg.EditExpression.Text, nil);
-                    Result := True;
-                except
-                    on E: EUserException do
-                        begin
-                            MessageDlg(E.Message, mtError, [mbOk], 0);
-                        end;
-                    else raise;
-                end;
+                ct := Curve_type.Create(nil);
+                ct.Name := CreateUserPointsSetDlg.EditCurveName.Text;
+                ct.Expression := CreateUserPointsSetDlg.EditExpression.Text;
+                ct.Parameters := epa.ParseExpression(
+                    CreateUserPointsSetDlg.EditExpression.Text);
 
-                if Result then
-                begin
-                    ct := Curve_type.Create(nil);
-                    ct.Name := CreateUserPointsSetDlg.EditCurveName.Text;
-                    ct.Expression := CreateUserPointsSetDlg.EditExpression.Text;
-                    ct.Parameters :=
-                        FitClientApp_.FitClient.GetSpecialCurveParameters;
+                //  Saving curve parameters.
+                FormMain.Settings.Curve_types.Add(ct);
+                FormMain.WriteCurve(ct);
 
-                    //  Saving curve parameters.
-                    FormMain.Settings.Curve_types.Add(ct);
-                    FormMain.WriteCurve(ct);
+                //FormMain.DeleteDummyCurve;
+                //  Adds new menu item.
+                FormMain.AddCurveMenuItem(ct);
 
-                    //FormMain.DeleteDummyCurve;
-                    //  Adds new menu item.
-                    FormMain.AddCurveMenuItem(ct);
-
-                    goto dlg2;
-                end
-                else goto dlg1;
+                goto dlg2;
             end;
-    else Exit;
+        else Exit;
     end;
 
 dlg2:

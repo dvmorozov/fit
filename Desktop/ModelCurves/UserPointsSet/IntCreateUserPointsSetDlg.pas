@@ -18,10 +18,10 @@ interface
 uses Classes, SysUtils, Settings;
 
 type
-    { Interface defining basic operation for creating user
+    { Interface defining basic operations for creating user
       dialog for configuring parameters of custom curve type. }
     ICreateUserPointsSetDlg = interface
-        procedure ShowModal;
+        function ShowModal: Integer;
         function GetExpression: string;
         function GetName: string;
     end;

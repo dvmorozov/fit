@@ -27,8 +27,8 @@ type
 implementation
 
 uses
-  CreateUserPointsSetDialog, UserPointsSetPropDialog, ExpressionParserAdapter,
-  Settings, Controls, Main, Dialogs, Unit1;
+  UserPointsSetPropDialog, ExpressionParserAdapter,
+  CreateUserPointsSetDlgAdapter, Settings, Controls, Main, Dialogs, Unit1;
 
 class function TConfigurableUserPointsSet.HasConfigurableParameters: Boolean;
 begin
@@ -38,22 +38,23 @@ end;
 class function TConfigurableUserPointsSet.ShowConfigurationDialog: Boolean;
 var ct: Curve_type;
     epa: TExpressionParserAdapter;
+    da: TCreateUserPointsSetDlgAdapter;
+
 label dlg1, dlg2;
 begin
     epa := TExpressionParserAdapter.Create;
+    da := TCreateUserPointsSetDlgAdapter.Create;
 {$IFNDEF EXCLUDE_SOMETHING}
 dlg1:
     Result := False;
     ct := nil;
-    CreateUserPointsSetDlg.ActiveControl := CreateUserPointsSetDlg.EditExpression;
-    case CreateUserPointsSetDlg.ShowModal of
+    case da.ShowModal of
         mrOk:
             begin
                 ct := Curve_type.Create(nil);
-                ct.Name := CreateUserPointsSetDlg.EditCurveName.Text;
-                ct.Expression := CreateUserPointsSetDlg.EditExpression.Text;
-                ct.Parameters := epa.ParseExpression(
-                    CreateUserPointsSetDlg.EditExpression.Text);
+                ct.Name := da.GetName;
+                ct.Expression := da.GetExpression;
+                ct.Parameters := epa.ParseExpression(ct.Expression);
 
                 //  Saving curve parameters.
                 FormMain.Settings.Curve_types.Add(ct);

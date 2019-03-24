@@ -31,7 +31,7 @@
       <w>220</w>
       <h>40</h>
     </coordinates>
-    <panel_attributes>TCurveTypeParametersAdapter</panel_attributes>
+    <panel_attributes>TCurveTypeParametersFactory</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -48,16 +48,16 @@
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>620</x>
+      <x>600</x>
       <y>570</y>
-      <w>320</w>
+      <w>360</w>
       <h>120</h>
     </coordinates>
-    <panel_attributes>ICurveTypeParameters
+    <panel_attributes>ICurveTypeParametersFactory
 --
-SetExpression(Expression: string)
-SetName(Name: string)
-SetParameters(Parameters: Curve_parameters)</panel_attributes>
+CreateUserCurveType(Name: string, Expression: string, 
+Parameters: Curve_parameters): Curve_type
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -114,12 +114,12 @@ GetName: string</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>770</x>
-      <y>670</y>
+      <y>650</y>
       <w>30</w>
-      <h>100</h>
+      <h>120</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>

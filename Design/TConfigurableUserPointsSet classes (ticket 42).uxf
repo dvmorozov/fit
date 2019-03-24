@@ -5,7 +5,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>280</x>
-      <y>250</y>
+      <y>260</y>
       <w>220</w>
       <h>40</h>
     </coordinates>
@@ -16,7 +16,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>670</x>
-      <y>250</y>
+      <y>260</y>
       <w>220</w>
       <h>40</h>
     </coordinates>
@@ -27,7 +27,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>670</x>
-      <y>750</y>
+      <y>760</y>
       <w>220</w>
       <h>40</h>
     </coordinates>
@@ -38,7 +38,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>280</x>
-      <y>750</y>
+      <y>760</y>
       <w>220</w>
       <h>40</h>
     </coordinates>
@@ -49,7 +49,7 @@
     <id>UMLInterface</id>
     <coordinates>
       <x>600</x>
-      <y>570</y>
+      <y>580</y>
       <w>360</w>
       <h>120</h>
     </coordinates>
@@ -64,7 +64,7 @@ Parameters: Curve_parameters): Curve_type
     <id>Relation</id>
     <coordinates>
       <x>380</x>
-      <y>280</y>
+      <y>290</y>
       <w>30</w>
       <h>130</h>
     </coordinates>
@@ -75,7 +75,7 @@ Parameters: Curve_parameters): Curve_type
     <id>Relation</id>
     <coordinates>
       <x>770</x>
-      <y>280</y>
+      <y>290</y>
       <w>30</w>
       <h>130</h>
     </coordinates>
@@ -86,7 +86,7 @@ Parameters: Curve_parameters): Curve_type
     <id>UMLInterface</id>
     <coordinates>
       <x>230</x>
-      <y>380</y>
+      <y>390</y>
       <w>320</w>
       <h>90</h>
     </coordinates>
@@ -99,7 +99,7 @@ ParseExpression(Expression: string): Curve_type</panel_attributes>
     <id>UMLInterface</id>
     <coordinates>
       <x>690</x>
-      <y>380</y>
+      <y>390</y>
       <w>180</w>
       <h>120</h>
     </coordinates>
@@ -114,7 +114,7 @@ GetName: string</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>770</x>
-      <y>650</y>
+      <y>660</y>
       <w>30</w>
       <h>120</h>
     </coordinates>
@@ -125,7 +125,7 @@ GetName: string</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>380</x>
-      <y>640</y>
+      <y>650</y>
       <w>30</w>
       <h>130</h>
     </coordinates>
@@ -136,7 +136,7 @@ GetName: string</panel_attributes>
     <id>UMLInterface</id>
     <coordinates>
       <x>250</x>
-      <y>570</y>
+      <y>580</y>
       <w>280</w>
       <h>100</h>
     </coordinates>
@@ -150,7 +150,7 @@ AddCurveType(CurveType: Curve_type)
     <id>UMLClass</id>
     <coordinates>
       <x>280</x>
-      <y>890</y>
+      <y>900</y>
       <w>220</w>
       <h>40</h>
     </coordinates>
@@ -161,7 +161,7 @@ AddCurveType(CurveType: Curve_type)
     <id>Relation</id>
     <coordinates>
       <x>380</x>
-      <y>780</y>
+      <y>790</y>
       <w>30</w>
       <h>130</h>
     </coordinates>
@@ -172,7 +172,7 @@ AddCurveType(CurveType: Curve_type)
     <id>UMLClass</id>
     <coordinates>
       <x>670</x>
-      <y>890</y>
+      <y>900</y>
       <w>220</w>
       <h>40</h>
     </coordinates>
@@ -183,7 +183,7 @@ AddCurveType(CurveType: Curve_type)
     <id>Relation</id>
     <coordinates>
       <x>770</x>
-      <y>780</y>
+      <y>790</y>
       <w>30</w>
       <h>130</h>
     </coordinates>
@@ -194,7 +194,7 @@ AddCurveType(CurveType: Curve_type)
     <id>UMLClass</id>
     <coordinates>
       <x>670</x>
-      <y>110</y>
+      <y>120</y>
       <w>220</w>
       <h>40</h>
     </coordinates>
@@ -205,7 +205,7 @@ AddCurveType(CurveType: Curve_type)
     <id>Relation</id>
     <coordinates>
       <x>770</x>
-      <y>140</y>
+      <y>150</y>
       <w>30</w>
       <h>130</h>
     </coordinates>
@@ -216,7 +216,7 @@ AddCurveType(CurveType: Curve_type)
     <id>UMLClass</id>
     <coordinates>
       <x>280</x>
-      <y>110</y>
+      <y>120</y>
       <w>220</w>
       <h>40</h>
     </coordinates>
@@ -227,7 +227,7 @@ AddCurveType(CurveType: Curve_type)
     <id>Relation</id>
     <coordinates>
       <x>380</x>
-      <y>140</y>
+      <y>150</y>
       <w>30</w>
       <h>130</h>
     </coordinates>

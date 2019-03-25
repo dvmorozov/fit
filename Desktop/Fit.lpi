@@ -13,7 +13,7 @@
     </General>
     <VersionInfo>
       <AutoIncrementBuild Value="True"/>
-      <BuildNr Value="1135"/>
+      <BuildNr Value="1136"/>
       <StringTable ProductVersion="0.0.0.1001"/>
     </VersionInfo>
     <BuildModes Count="2">
@@ -104,7 +104,7 @@
         <MinVersion Major="1" Valid="True"/>
       </Item7>
     </RequiredPackages>
-    <Units Count="96">
+    <Units Count="97">
       <Unit0>
         <Filename Value="Fit.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -938,8 +938,8 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="ConfigurableUserPointsSet"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="44"/>
-        <CursorPos Y="58"/>
+        <TopLine Value="50"/>
+        <CursorPos Y="63"/>
         <UsageCount Value="215"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -958,10 +958,10 @@
       <Unit89>
         <Filename Value="ModelCurves\UserPointsSet\IntExpressionParser.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="3"/>
         <WindowIndex Value="1"/>
         <CursorPos X="35" Y="18"/>
-        <UsageCount Value="130"/>
+        <UsageCount Value="132"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit89>
@@ -969,19 +969,20 @@
         <Filename Value="ModelCurves\UserPointsSet\intcurvetypeparametersfactory.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="IntCurveTypeParametersFactory"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <CursorPos X="49" Y="18"/>
-        <UsageCount Value="127"/>
-        <Loaded Value="True"/>
+        <UsageCount Value="129"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit90>
       <Unit91>
         <Filename Value="ModelCurves\UserPointsSet\IntCurveTypeStorage.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="-1"/>
+        <EditorIndex Value="4"/>
         <WindowIndex Value="1"/>
-        <UsageCount Value="127"/>
+        <CursorPos X="88"/>
+        <UsageCount Value="129"/>
+        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit91>
       <Unit92>
@@ -990,7 +991,7 @@
         <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <CursorPos X="31" Y="12"/>
-        <UsageCount Value="127"/>
+        <UsageCount Value="129"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit92>
       <Unit93>
@@ -998,9 +999,9 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="36"/>
-        <CursorPos X="9" Y="30"/>
-        <UsageCount Value="124"/>
+        <TopLine Value="4"/>
+        <CursorPos X="43" Y="52"/>
+        <UsageCount Value="126"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit93>
       <Unit94>
@@ -1010,7 +1011,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="5"/>
         <CursorPos X="25" Y="18"/>
-        <UsageCount Value="75"/>
+        <UsageCount Value="77"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit94>
@@ -1018,15 +1019,25 @@
         <Filename Value="ModelCurves\UserPointsSet\curvetypeparametersfactory.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="CurveTypeParametersFactory"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="10"/>
+        <CursorPos X="37" Y="50"/>
+        <UsageCount Value="74"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit95>
+      <Unit96>
+        <Filename Value="ModelCurves\UserPointsSet\CurveTypeStorageAdapter.pas"/>
+        <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="5"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="29"/>
-        <CursorPos X="37" Y="50"/>
-        <UsageCount Value="72"/>
+        <TopLine Value="14"/>
+        <CursorPos X="29" Y="24"/>
+        <UsageCount Value="22"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
-      </Unit95>
+      </Unit96>
     </Units>
     <OtherDefines Count="5">
       <Define0 Value="FIT"/>
@@ -1035,7 +1046,7 @@
       <Define3 Value="WINDOWS"/>
       <Define4 Value="Lazarus"/>
     </OtherDefines>
-    <JumpHistory Count="25" HistoryIndex="24">
+    <JumpHistory Count="24" HistoryIndex="23">
       <Position1>
         <Filename Value="ModelCurves\UserPointsSet\configurableuserpointsset.pas"/>
         <Caret Line="69" Column="46" TopLine="56"/>
@@ -1113,29 +1124,25 @@
         <Caret Line="58" TopLine="44"/>
       </Position19>
       <Position20>
-        <Filename Value="ModelCurves\UserPointsSet\intcurvetypeparametersfactory.pas"/>
-        <Caret Line="23" Column="51"/>
+        <Filename Value="ModelCurves\UserPointsSet\CurveTypeStorageAdapter.pas"/>
+        <Caret Line="37" Column="11" TopLine="15"/>
       </Position20>
       <Position21>
-        <Filename Value="ModelCurves\UserPointsSet\intcurvetypeparametersfactory.pas"/>
-        <Caret Line="24" Column="32"/>
+        <Filename Value="ModelCurves\UserPointsSet\CurveTypeStorageAdapter.pas"/>
+        <Caret Line="18" Column="69" TopLine="8"/>
       </Position21>
       <Position22>
-        <Filename Value="ModelCurves\UserPointsSet\intcurvetypeparametersfactory.pas"/>
-        <Caret Line="18" Column="49"/>
+        <Filename Value="ModelCurves\UserPointsSet\CurveTypeStorageAdapter.pas"/>
+        <Caret Line="37" Column="11" TopLine="32"/>
       </Position22>
       <Position23>
-        <Filename Value="ModelCurves\UserPointsSet\curvetypeparametersfactory.pas"/>
-        <Caret Line="23" Column="9" TopLine="6"/>
+        <Filename Value="ModelCurves\UserPointsSet\CurveTypeStorageAdapter.pas"/>
+        <Caret Line="59" Column="40" TopLine="32"/>
       </Position23>
       <Position24>
-        <Filename Value="ModelCurves\UserPointsSet\curvetypeparametersfactory.pas"/>
-        <Caret Line="32" Column="32" TopLine="15"/>
+        <Filename Value="ModelCurves\UserPointsSet\CurveTypeStorageAdapter.pas"/>
+        <Caret Line="27" Column="9" TopLine="11"/>
       </Position24>
-      <Position25>
-        <Filename Value="ModelCurves\UserPointsSet\curvetypeparametersfactory.pas"/>
-        <Caret Line="19" Column="19" TopLine="16"/>
-      </Position25>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

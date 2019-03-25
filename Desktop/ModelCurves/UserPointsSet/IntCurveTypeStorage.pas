@@ -20,9 +20,7 @@ uses Classes, SysUtils, Settings;
 type
     { Interface defining basic operation for storing parameters of custom curve type. }
     ICurveTypeStorage = interface
-        procedure ShowModal;
-        function GetExpression: string;
-        function GetName: string;
+        procedure AddCurveType(CurveType: Curve_type);
     end;
 
 implementation

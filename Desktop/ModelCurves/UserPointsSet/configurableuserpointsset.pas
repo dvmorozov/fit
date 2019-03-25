@@ -28,7 +28,8 @@ implementation
 
 uses
   UserPointsSetPropDialog, ExpressionParserAdapter, CurveTypeParametersFactory,
-  CreateUserPointsSetDlgAdapter, Settings, Controls, Main, Dialogs, Unit1;
+  CreateUserPointsSetDlgAdapter, CurveTypeStorageAdapter, Settings,
+  Controls, Main, Dialogs, Unit1;
 
 class function TConfigurableUserPointsSet.HasConfigurableParameters: Boolean;
 begin
@@ -37,15 +38,17 @@ end;
 
 class function TConfigurableUserPointsSet.ShowConfigurationDialog: Boolean;
 var ct: Curve_type;
-    epa: TExpressionParserAdapter;
+    ep: TExpressionParserAdapter;
     da: TCreateUserPointsSetDlgAdapter;
     cf: TCurveTypeParametersFactory;
+    ca: TCurveTypeStorageAdapter;
 
 label dlg1, dlg2;
 begin
-    epa := TExpressionParserAdapter.Create;
+    ep := TExpressionParserAdapter.Create;
     da := TCreateUserPointsSetDlgAdapter.Create;
     cf := TCurveTypeParametersFactory.Create;
+    ca := TCurveTypeStorageAdapter.Create;
 {$IFNDEF EXCLUDE_SOMETHING}
 dlg1:
     Result := False;
@@ -54,16 +57,9 @@ dlg1:
         mrOk:
             begin
                 ct := cf.CreateUserCurveType(da.GetName, da.GetExpression,
-                    epa.ParseExpression(ct.Expression));
+                    ep.ParseExpression(ct.Expression));
 
-                //  Saving curve parameters.
-                FormMain.Settings.Curve_types.Add(ct);
-                FormMain.WriteCurve(ct);
-
-                //FormMain.DeleteDummyCurve;
-                //  Adds new menu item.
-                FormMain.AddCurveMenuItem(ct);
-
+                ca.AddCurveType(ct);
                 goto dlg2;
             end;
         else Exit;

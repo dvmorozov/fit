@@ -30,6 +30,8 @@ type
         class function Create: TCurveTypeStorageAdapter;
 
         procedure AddCurveType(CurveType: Curve_type);
+        procedure UpdateCurveType(CurveType: Curve_type);
+        procedure DeleteCurveType(CurveType: Curve_type);
     end;
 
 implementation
@@ -57,6 +59,17 @@ begin
     //FormMain.DeleteDummyCurve;
     //  Adds new menu item.
     FormMain.AddCurveMenuItem(CurveType);
+end;
+
+procedure TCurveTypeStorageAdapter.UpdateCurveType(CurveType: Curve_type);
+begin
+    DeleteFile(PChar(CurveType.FileName));
+    FormMain.WriteCurve(CurveType);
+end;
+
+procedure TCurveTypeStorageAdapter.DeleteCurveType(CurveType: Curve_type);
+begin
+    FormMain.DeleteCurve(CurveType);
 end;
 
 end.

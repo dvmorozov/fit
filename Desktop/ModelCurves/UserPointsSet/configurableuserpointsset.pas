@@ -71,14 +71,13 @@ dlg2:
         mrOk:
             begin
                 //  Rewrites selected settings.
-                DeleteFile(PChar(ct.FileName));
-                FormMain.WriteCurve(ct);
+                ca.UpdateCurveType(ct);
             end;
 
         mrRetry:
             begin
                 //  Deletes curve on retry.
-                FormMain.DeleteCurve(ct);
+                ca.DeleteCurveType(ct);
                 goto dlg1;
             end;
     else Exit;

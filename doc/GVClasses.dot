@@ -1,12 +1,18 @@
 DiGraph Classes {
   IClientCallback -> IInterface
   IClientCallback [href="ClientCallback.IClientCallback.html"]
+  ICreateUserPointsSetDlg -> IInterface
+  ICreateUserPointsSetDlg [href="IntCreateUserPointsSetDlg.ICreateUserPointsSetDlg.html"]
   ICurveFactory -> IInterface
   ICurveFactory [href="IntCurveFactory.ICurveFactory.html"]
   ICurveTypeIterator -> IInterface
   ICurveTypeIterator [href="IntCurveTypeIterator.ICurveTypeIterator.html"]
+  ICurveTypeParametersFactory -> IInterface
+  ICurveTypeParametersFactory [href="IntCurveTypeParametersFactory.ICurveTypeParametersFactory.html"]
   ICurveTypeSelector -> IInterface
   ICurveTypeSelector [href="IntCurveTypeSelector.ICurveTypeSelector.html"]
+  ICurveTypeStorage -> IInterface
+  ICurveTypeStorage [href="IntCurveTypeStorage.ICurveTypeStorage.html"]
   IDataLoader -> IInterface
   IDataLoader [href="IntDataLoader.IDataLoader.html"]
   IDataLoaderInjector -> IInterface
@@ -17,6 +23,8 @@ DiGraph Classes {
   IDownhillSimplexParameters [href="DownhillSimplexContainer.IDownhillSimplexParameters.html"]
   IDownhillRealParameters -> IDownhillSimplexParameters
   IDownhillRealParameters [href="DownhillSimplexContainer.IDownhillRealParameters.html"]
+  IExpressionParser -> IInterface
+  IExpressionParser [href="IntExpressionParser.IExpressionParser.html"]
   IFitViewer -> IInterface
   IFitViewer [href="IntFitViewer.IFitViewer.html"]
   IOptimizedFunction -> IInterface
@@ -53,10 +61,18 @@ DiGraph Classes {
   TFitServer_ServiceBinder [href="fit_server_binder.TFitServer_ServiceBinder.html"]
   TFitServer_ServiceImp -> TBaseServiceImplementation
   TFitServer_ServiceImp [href="fit_server_imp.TFitServer_ServiceImp.html"]
+  TCreateUserPointsSetDlgAdapter -> TCBRCComponent
+  TCreateUserPointsSetDlgAdapter [href="CreateUserPointsSetDlgAdapter.TCreateUserPointsSetDlgAdapter.html"]
+  TCurveTypeParametersFactory -> TCBRCComponent
+  TCurveTypeParametersFactory [href="CurveTypeParametersFactory.TCurveTypeParametersFactory.html"]
   TCurveTypesSingleton -> TCBRCComponent
   TCurveTypesSingleton [href="CurveTypesSingleton.TCurveTypesSingleton.html"]
+  TCurveTypeStorageAdapter -> TCBRCComponent
+  TCurveTypeStorageAdapter [href="CurveTypeStorageAdapter.TCurveTypeStorageAdapter.html"]
   TDownhillRealParameters -> TCBRCComponent
   TDownhillRealParameters [href="DownhillSimplexContainer.TDownhillRealParameters.html"]
+  TExpressionParserAdapter -> TCBRCComponent
+  TExpressionParserAdapter [href="ExpressionParserAdapter.TExpressionParserAdapter.html"]
   TExtensionDataLoaderInjector -> TCBRCComponent
   TExtensionDataLoaderInjector [href="ExtensionDataLoaderInjector.TExtensionDataLoaderInjector.html"]
   TFitClient -> TCBRCComponent
@@ -99,8 +115,8 @@ DiGraph Classes {
   TUserPointsSet [href="UserPointsSet.TUserPointsSet.html"]
   TAboutBox -> TForm
   TAboutBox [href="Unit12.TAboutBox.html"]
-  TCreateSpecialCurveDlg -> TForm
-  TCreateSpecialCurveDlg [href="Unit2.TCreateSpecialCurveDlg.html"]
+  TCreateUserPointsSetDlg -> TForm
+  TCreateUserPointsSetDlg [href="CreateUserPointsSetDialog.TCreateUserPointsSetDlg.html"]
   TForm1 -> TForm
   TForm1 [href="FormServer.TForm1.html"]
   TFormHint -> TForm
@@ -113,8 +129,8 @@ DiGraph Classes {
   TInputMaxRFactorDlg [href="Unit4.TInputMaxRFactorDlg.html"]
   TInputWavelengthDlg -> TForm
   TInputWavelengthDlg [href="Unit3.TInputWavelengthDlg.html"]
-  TSpecialCurvePropDlg -> TForm
-  TSpecialCurvePropDlg [href="Unit7.TSpecialCurvePropDlg.html"]
+  TUserPointsSetPropDlg -> TForm
+  TUserPointsSetPropDlg [href="UserPointsSetPropDialog.TUserPointsSetPropDlg.html"]
   TFitServer_ServiceBinderFactory -> TInterfacedObject
   TFitServer_ServiceBinderFactory [href="fit_server_binder.TFitServer_ServiceBinderFactory.html"]
   Exception -> TObject
@@ -144,6 +160,12 @@ DiGraph Classes {
   TCombEnumerator [href="CombEnumerator.TCombEnumerator.html"]
   TCombSelector -> TCombEnumerator
   TCombSelector [href="CombEnumerator.TCombSelector.html"]
+  TConfigurablePointsSet -> TObject
+  TConfigurablePointsSet [href="ConfigurablePointsSet.TConfigurablePointsSet.html"]
+  TConfigurableUserPointsSet -> TConfigurablePointsSet
+  TConfigurableUserPointsSet [href="ConfigurableUserPointsSet.TConfigurableUserPointsSet.html"]
+  TNonConfigurablePointsSet -> TConfigurablePointsSet
+  TNonConfigurablePointsSet [href="NonConfigurablePointsSet.TNonConfigurablePointsSet.html"]
   TCurveType -> TObject
   TCurveType [href="CurveTypesSingleton.TCurveType.html"]
   TFitClientApp -> TObject
@@ -181,6 +203,8 @@ DiGraph Classes {
   TFitTask [href="FitTask.TFitTask.html"]
   TFitTaskWithThread -> TFitTask
   TFitTaskWithThread [href="FitTaskWithThread.TFitTaskWithThread.html"]
+  TFitViewer -> TComponent
+  TFitViewer [href="FitViewer.TFitViewer.html"]
   TIntMinimizer -> TComponent
   TIntMinimizer [href="Minimizer.TIntMinimizer.html"]
   TMinimizer -> TComponent

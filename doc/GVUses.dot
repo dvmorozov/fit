@@ -23,6 +23,25 @@ DiGraph Uses {
   "CommonTypes" -> "Classes"
   "CommonTypes" -> "SysUtils"
   "CommonTypes" [href="CommonTypes.html"]
+  "ConfigurablePointsSet" -> "Classes"
+  "ConfigurablePointsSet" -> "SysUtils"
+  "ConfigurablePointsSet" [href="ConfigurablePointsSet.html"]
+  "ConfigurableUserPointsSet" -> "Classes"
+  "ConfigurableUserPointsSet" -> "ConfigurablePointsSet"
+  "ConfigurableUserPointsSet" -> "SysUtils"
+  "ConfigurableUserPointsSet" [href="ConfigurableUserPointsSet.html"]
+  "CreateUserPointsSetDialog" -> "Classes"
+  "CreateUserPointsSetDialog" -> "ExtCtrls"
+  "CreateUserPointsSetDialog" -> "Forms"
+  "CreateUserPointsSetDialog" -> "LCLIntf"
+  "CreateUserPointsSetDialog" -> "LResources"
+  "CreateUserPointsSetDialog" -> "StdCtrls"
+  "CreateUserPointsSetDialog" [href="CreateUserPointsSetDialog.html"]
+  "CreateUserPointsSetDlgAdapter" -> "CBRCComponent"
+  "CreateUserPointsSetDlgAdapter" -> "Classes"
+  "CreateUserPointsSetDlgAdapter" -> "IntCreateUserPointsSetDlg"
+  "CreateUserPointsSetDlgAdapter" -> "SysUtils"
+  "CreateUserPointsSetDlgAdapter" [href="CreateUserPointsSetDlgAdapter.html"]
   "CSVFileLoader" -> "Classes"
   "CSVFileLoader" -> "DataLoader"
   "CSVFileLoader" -> "SysUtils"
@@ -35,6 +54,13 @@ DiGraph Uses {
   "CurvePointsSet" -> "SysUtils"
   "CurvePointsSet" -> "TitlePointsSet"
   "CurvePointsSet" [href="CurvePointsSet.html"]
+  "CurveTypeParametersFactory" -> "CBRCComponent"
+  "CurveTypeParametersFactory" -> "Classes"
+  "CurveTypeParametersFactory" -> "CurvePointsSet"
+  "CurveTypeParametersFactory" -> "IntCurveTypeParametersFactory"
+  "CurveTypeParametersFactory" -> "Settings"
+  "CurveTypeParametersFactory" -> "SysUtils"
+  "CurveTypeParametersFactory" [href="CurveTypeParametersFactory.html"]
   "CurveTypesSingleton" -> "CBRCComponent"
   "CurveTypesSingleton" -> "Classes"
   "CurveTypesSingleton" -> "crc"
@@ -45,6 +71,12 @@ DiGraph Uses {
   "CurveTypesSingleton" -> "NamedPointsSet"
   "CurveTypesSingleton" -> "SysUtils"
   "CurveTypesSingleton" [href="CurveTypesSingleton.html"]
+  "CurveTypeStorageAdapter" -> "CBRCComponent"
+  "CurveTypeStorageAdapter" -> "Classes"
+  "CurveTypeStorageAdapter" -> "IntCurveTypeStorage"
+  "CurveTypeStorageAdapter" -> "Settings"
+  "CurveTypeStorageAdapter" -> "SysUtils"
+  "CurveTypeStorageAdapter" [href="CurveTypeStorageAdapter.html"]
   "DataClasses" -> "Classes"
   "DataClasses" -> "CurvePointsSet"
   "DataClasses" -> "DownhillSimplexContainer"
@@ -86,6 +118,13 @@ DiGraph Uses {
   "DownhillSimplexContainer" -> "SysUtils"
   "DownhillSimplexContainer" -> "Tools"
   "DownhillSimplexContainer" [href="DownhillSimplexContainer.html"]
+  "ExpressionParserAdapter" -> "CBRCComponent"
+  "ExpressionParserAdapter" -> "Classes"
+  "ExpressionParserAdapter" -> "CurvePointsSet"
+  "ExpressionParserAdapter" -> "IntExpressionParser"
+  "ExpressionParserAdapter" -> "Settings"
+  "ExpressionParserAdapter" -> "SysUtils"
+  "ExpressionParserAdapter" [href="ExpressionParserAdapter.html"]
   "ExtensionDataLoaderInjector" -> "CBRCComponent"
   "ExtensionDataLoaderInjector" -> "Classes"
   "ExtensionDataLoaderInjector" -> "CSVFileLoader"
@@ -233,6 +272,24 @@ DiGraph Uses {
   "FitTaskWithThread" -> "MainCalcThread"
   "FitTaskWithThread" -> "SysUtils"
   "FitTaskWithThread" [href="FitTaskWithThread.html"]
+  "FitViewer" -> "CheckLst"
+  "FitViewer" -> "Classes"
+  "FitViewer" -> "CurvePointsSet"
+  "FitViewer" -> "DataLoader"
+  "FitViewer" -> "FitClient"
+  "FitViewer" -> "Forms"
+  "FitViewer" -> "Graphics"
+  "FitViewer" -> "IntFitViewer"
+  "FitViewer" -> "MSCRDataClasses"
+  "FitViewer" -> "NamedPointsSet"
+  "FitViewer" -> "NeutronPointsSet"
+  "FitViewer" -> "PointsSet"
+  "FitViewer" -> "SelfCheckedComponentList"
+  "FitViewer" -> "SelfCopied"
+  "FitViewer" -> "SysUtils"
+  "FitViewer" -> "tagraph"
+  "FitViewer" -> "TitlePointsSet"
+  "FitViewer" [href="FitViewer.html"]
   "fit_server" -> "base_service_intf"
   "fit_server" -> "Classes"
   "fit_server" -> "service_intf"
@@ -283,10 +340,13 @@ DiGraph Uses {
   "GaussPointsSet" -> "SimpMath"
   "GaussPointsSet" -> "SysUtils"
   "GaussPointsSet" [href="GaussPointsSet.html"]
-  "GeneralHashfunctions" [href="GeneralHashfunctions.html"]
   "IntClientCallback" -> "Classes"
   "IntClientCallback" -> "SysUtils"
   "IntClientCallback" [href="IntClientCallback.html"]
+  "IntCreateUserPointsSetDlg" -> "Classes"
+  "IntCreateUserPointsSetDlg" -> "Settings"
+  "IntCreateUserPointsSetDlg" -> "SysUtils"
+  "IntCreateUserPointsSetDlg" [href="IntCreateUserPointsSetDlg.html"]
   "IntCurveFactory" -> "Classes"
   "IntCurveFactory" -> "IntPointsSet"
   "IntCurveFactory" -> "NamedPointsSet"
@@ -297,11 +357,20 @@ DiGraph Uses {
   "IntCurveTypeIterator" -> "NamedPointsSet"
   "IntCurveTypeIterator" -> "SysUtils"
   "IntCurveTypeIterator" [href="IntCurveTypeIterator.html"]
+  "IntCurveTypeParametersFactory" -> "Classes"
+  "IntCurveTypeParametersFactory" -> "CurvePointsSet"
+  "IntCurveTypeParametersFactory" -> "Settings"
+  "IntCurveTypeParametersFactory" -> "SysUtils"
+  "IntCurveTypeParametersFactory" [href="IntCurveTypeParametersFactory.html"]
   "IntCurveTypeSelector" -> "Classes"
   "IntCurveTypeSelector" -> "IntPointsSet"
   "IntCurveTypeSelector" -> "NamedPointsSet"
   "IntCurveTypeSelector" -> "SysUtils"
   "IntCurveTypeSelector" [href="IntCurveTypeSelector.html"]
+  "IntCurveTypeStorage" -> "Classes"
+  "IntCurveTypeStorage" -> "Settings"
+  "IntCurveTypeStorage" -> "SysUtils"
+  "IntCurveTypeStorage" [href="IntCurveTypeStorage.html"]
   "IntDataLoader" -> "Classes"
   "IntDataLoader" -> "SysUtils"
   "IntDataLoader" -> "TitlePointsSet"
@@ -310,6 +379,11 @@ DiGraph Uses {
   "IntDataLoaderInjector" -> "IntDataLoader"
   "IntDataLoaderInjector" -> "SysUtils"
   "IntDataLoaderInjector" [href="IntDataLoaderInjector.html"]
+  "IntExpressionParser" -> "Classes"
+  "IntExpressionParser" -> "CurvePointsSet"
+  "IntExpressionParser" -> "Settings"
+  "IntExpressionParser" -> "SysUtils"
+  "IntExpressionParser" [href="IntExpressionParser.html"]
   "IntFitViewer" -> "Classes"
   "IntFitViewer" -> "CurvePointsSet"
   "IntFitViewer" -> "MSCRDataClasses"
@@ -380,6 +454,7 @@ DiGraph Uses {
   "MSCRDataClasses" -> "Tools"
   "MSCRDataClasses" [href="MSCRDataClasses.html"]
   "NamedPointsSet" -> "Classes"
+  "NamedPointsSet" -> "ConfigurablePointsSet"
   "NamedPointsSet" -> "CurvePointsSet"
   "NamedPointsSet" -> "IntPointsSet"
   "NamedPointsSet" -> "SysUtils"
@@ -388,6 +463,10 @@ DiGraph Uses {
   "NeutronPointsSet" -> "PointsSet"
   "NeutronPointsSet" -> "SysUtils"
   "NeutronPointsSet" [href="NeutronPointsSet.html"]
+  "NonConfigurablePointsSet" -> "Classes"
+  "NonConfigurablePointsSet" -> "ConfigurablePointsSet"
+  "NonConfigurablePointsSet" -> "SysUtils"
+  "NonConfigurablePointsSet" [href="NonConfigurablePointsSet.html"]
   "ObjSavingStringList" -> "Classes"
   "ObjSavingStringList" -> "SelfCheckedComponentList"
   "ObjSavingStringList" -> "SelfCopied"
@@ -514,16 +593,6 @@ DiGraph Uses {
   "Unit12" -> "StdCtrls"
   "Unit12" -> "SysUtils"
   "Unit12" [href="Unit12.html"]
-  "Unit2" -> "Classes"
-  "Unit2" -> "Controls"
-  "Unit2" -> "Dialogs"
-  "Unit2" -> "ExtCtrls"
-  "Unit2" -> "Forms"
-  "Unit2" -> "Graphics"
-  "Unit2" -> "LResources"
-  "Unit2" -> "StdCtrls"
-  "Unit2" -> "SysUtils"
-  "Unit2" [href="Unit2.html"]
   "Unit3" -> "Buttons"
   "Unit3" -> "Classes"
   "Unit3" -> "Controls"
@@ -570,21 +639,8 @@ DiGraph Uses {
   "Unit6" -> "StdCtrls"
   "Unit6" -> "SysUtils"
   "Unit6" [href="Unit6.html"]
-  "Unit7" -> "CheckLst"
-  "Unit7" -> "Classes"
-  "Unit7" -> "Controls"
-  "Unit7" -> "CurvePointsSet"
-  "Unit7" -> "Dialogs"
-  "Unit7" -> "ExtCtrls"
-  "Unit7" -> "Forms"
-  "Unit7" -> "Graphics"
-  "Unit7" -> "LResources"
-  "Unit7" -> "PointsSet"
-  "Unit7" -> "Settings"
-  "Unit7" -> "StdCtrls"
-  "Unit7" -> "SysUtils"
-  "Unit7" [href="Unit7.html"]
   "UserPointsSet" -> "Classes"
+  "UserPointsSet" -> "ConfigurablePointsSet"
   "UserPointsSet" -> "CurvePointsSet"
   "UserPointsSet" -> "CurveTypesSingleton"
   "UserPointsSet" -> "IntPointsSet"
@@ -592,4 +648,18 @@ DiGraph Uses {
   "UserPointsSet" -> "PointsSet"
   "UserPointsSet" -> "SysUtils"
   "UserPointsSet" [href="UserPointsSet.html"]
+  "UserPointsSetPropDialog" -> "CheckLst"
+  "UserPointsSetPropDialog" -> "Classes"
+  "UserPointsSetPropDialog" -> "Controls"
+  "UserPointsSetPropDialog" -> "CurvePointsSet"
+  "UserPointsSetPropDialog" -> "Dialogs"
+  "UserPointsSetPropDialog" -> "ExtCtrls"
+  "UserPointsSetPropDialog" -> "Forms"
+  "UserPointsSetPropDialog" -> "Graphics"
+  "UserPointsSetPropDialog" -> "LResources"
+  "UserPointsSetPropDialog" -> "PointsSet"
+  "UserPointsSetPropDialog" -> "Settings"
+  "UserPointsSetPropDialog" -> "StdCtrls"
+  "UserPointsSetPropDialog" -> "SysUtils"
+  "UserPointsSetPropDialog" [href="UserPointsSetPropDialog.html"]
 }

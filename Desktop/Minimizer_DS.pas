@@ -15,8 +15,8 @@ unit Minimizer_DS;
 
 interface
 
-uses Minimizer, MSCRDataClasses, SelfCheckedComponentList, Classes,
-    DownhillSimplexContainer, Tools, Algorithm, DownhillSimplexAlgorithm;
+uses Minimizer, SelfCheckedComponentList, Classes,
+    DownhillSimplexContainer, Tools, DownhillSimplexAlgorithm;
 
 type
 	{ Implements downhill simplex algorithm. }

@@ -16,15 +16,14 @@ unit FitClientProxy;
 
 interface
 
-uses Classes, SysUtils, MSCRDataClasses, CommonTypes, PointsSet, SelfCopied,
-    MyExceptions, IntPointsSet, TitlePointsSet, CurvePointsSet, NamedPointsSet,
+uses SysUtils, MSCRDataClasses, CommonTypes, PointsSet, SelfCopied,
+    MyExceptions, IntPointsSet, TitlePointsSet, CurvePointsSet,
 {$IFNDEF FIT}
     base_service_intf,
     fit_server_proxy                //  Calls the server via network.
 {$ELSE}
     FitServerStub                   //  Calls the server directly.
 {$ENDIF}
-    , fit_server
     ;
   
 type
@@ -160,7 +159,6 @@ type
 
 implementation
 
-uses Main;
 
 const OutOfServerResources: string = 'Out of server resources.';
 

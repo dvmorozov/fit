@@ -17,7 +17,7 @@ interface
 
 uses
     Classes, DownhillSimplexAlgorithm, AlgorithmContainer, Decisions, SysUtils,
-    SimpMath, CombEnumerator, CBRCComponent, Tools, MyExceptions;
+    SimpMath, CombEnumerator, CBRCComponent, Tools;
 
 const
 	{ Possible states of parameters in TDownhillRealParameters. }

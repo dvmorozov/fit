@@ -16,8 +16,8 @@ unit IntFitViewer;
 interface
 
 uses
-  Classes, SysUtils, SelfCheckedComponentList, MSCRDataClasses, SelfCopied,
-  PointsSet, CurvePointsSet, TitlePointsSet, NeutronPointsSet;
+  MSCRDataClasses, SelfCopied,
+  PointsSet, TitlePointsSet, NeutronPointsSet;
 
 type
     { Defines interface allowing to display data in chart and grids.

@@ -4,8 +4,6 @@ unit ConfigurablePointsSet;
 
 interface
 
-uses
-  Classes, SysUtils;
 
 type
   TConfigurablePointsSetClass = class of TConfigurablePointsSet;

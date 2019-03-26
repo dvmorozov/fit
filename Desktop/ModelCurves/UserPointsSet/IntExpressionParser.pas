@@ -15,7 +15,7 @@ unit IntExpressionParser;
 
 interface
 
-uses Classes, SysUtils, Settings, CurvePointsSet;
+uses CurvePointsSet;
 
 type
     { Interface defining basic operation for parsing curve expression. }

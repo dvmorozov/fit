@@ -15,7 +15,7 @@ unit AsymPseudoVoigtPointsSet;
 
 interface
 
-uses Classes, SysUtils, IntPointsSet, PointsSet, NamedPointsSet,
+uses Classes, SysUtils, IntPointsSet, PointsSet,
   PseudoVoigtPointsSet, CurvePointsSet, CurveTypesSingleton, SimpMath;
 
 type

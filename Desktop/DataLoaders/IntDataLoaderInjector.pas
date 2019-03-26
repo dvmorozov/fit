@@ -15,7 +15,7 @@ unit IntDataLoaderInjector;
 
 interface
 
-uses Classes, SysUtils, IntDataLoader;
+uses IntDataLoader;
 
 type
     { Interface defining basic operation for creating data loader. }

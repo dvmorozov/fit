@@ -15,7 +15,7 @@ unit NamedPointsSet;
 
 interface
 
-uses Classes, SysUtils, CurvePointsSet, IntPointsSet, ConfigurablePointsSet;
+uses CurvePointsSet, IntPointsSet, ConfigurablePointsSet;
 
 type
     TNamedPointsSetClass = class of TNamedPointsSet;

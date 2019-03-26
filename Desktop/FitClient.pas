@@ -17,8 +17,8 @@ unit FitClient;
 interface
 
 uses Classes, PointsSet, TitlePointsSet, SelfCopied, SysUtils, MSCRDataClasses,
-    Dialogs, FitClientProxy, CommonTypes, CBRCComponent, NeutronPointsSet,
-    IntPointsSet, CurvePointsSet, NamedPointsSet, IntClientCallback,
+    FitClientProxy, CBRCComponent, NeutronPointsSet,
+    IntPointsSet, CurvePointsSet, IntClientCallback,
     IntFitViewer, IntDataLoader, IntDataLoaderInjector;
     
 type

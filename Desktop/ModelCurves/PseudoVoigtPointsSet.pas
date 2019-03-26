@@ -62,7 +62,6 @@ type
 
 implementation
 
-uses Main;
 
 {======================== TPseudoVoigtPointsSet ===============================}
 

@@ -5,7 +5,7 @@ unit NonConfigurablePointsSet;
 interface
 
 uses
-  Classes, SysUtils, ConfigurablePointsSet;
+  SysUtils, ConfigurablePointsSet;
 
 type
   { Should be used by all curve types which

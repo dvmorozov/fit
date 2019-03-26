@@ -16,9 +16,6 @@ unit IntClientCallback;
 
 interface
 
-uses
-  Classes, SysUtils;
-
 type
     { Defines callback functions called from server to client. }
     IClientCallback = interface

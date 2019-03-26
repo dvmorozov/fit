@@ -15,7 +15,7 @@ unit UserPointsSet;
 
 interface
 
-uses Classes, SysUtils, PointsSet, CurvePointsSet, NamedPointsSet,
+uses SysUtils, PointsSet, CurvePointsSet, NamedPointsSet,
   CurveTypesSingleton, IntPointsSet, ConfigurablePointsSet;
 
 type

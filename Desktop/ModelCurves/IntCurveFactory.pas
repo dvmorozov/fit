@@ -15,7 +15,7 @@ unit IntCurveFactory;
 
 interface
 
-uses Classes, SysUtils, IntPointsSet, NamedPointsSet;
+uses IntPointsSet, NamedPointsSet;
 
 type
     { Interface defining basic operation for creating curve instances. }

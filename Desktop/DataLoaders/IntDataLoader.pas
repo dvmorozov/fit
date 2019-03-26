@@ -15,7 +15,7 @@ unit IntDataLoader;
 
 interface
 
-uses Classes, SysUtils, TitlePointsSet;
+uses TitlePointsSet;
 
 type
     { Interface defining basic operation for data loading. }

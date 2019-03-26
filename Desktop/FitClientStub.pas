@@ -16,7 +16,7 @@ unit FitClientStub;
 
 interface
 
-uses Classes, SysUtils, IntClientCallback, CBRCComponent;
+uses IntClientCallback, CBRCComponent;
   
 type
     TFitClientStub = class(TCBRCComponent, IClientCallback)

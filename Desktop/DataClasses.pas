@@ -16,9 +16,9 @@ unit DataClasses;
 interface
 
 uses
-    Classes, SelfCheckedComponentList, Grids, SysUtils, NumericGrid, SimpMath,
-    Math3d, Tools, TableComp, DownhillSimplexContainer, SelfCopied,
-    ObjSavingStringList, Graphics, PointsSet, UserPointsSet, CurvePointsSet;
+    Classes, Grids, SysUtils, NumericGrid,
+    Tools, TableComp,
+    CurvePointsSet;
 
 type
 	{ Set of pattern instances forming the calculated profile in sum. }

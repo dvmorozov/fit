@@ -15,8 +15,6 @@ unit IntPointsSet;
 
 interface
 
-uses Classes, SysUtils;
-
 type
     TCurveTypeId = TGuid;
     { Interface defining basic operation for creating curve type. }

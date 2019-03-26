@@ -15,7 +15,7 @@ unit CurveTypeStorageAdapter;
 
 interface
 
-uses Classes, SysUtils, Settings, CBRCComponent, IntCurveTypeStorage;
+uses SysUtils, Settings, CBRCComponent, IntCurveTypeStorage;
 
 type
     { Class-adapter implementing basic operation for 
@@ -36,7 +36,7 @@ type
 
 implementation
 
-Uses Unit1;
+uses Unit1;
 
 constructor TCurveTypeStorageAdapter.Init;
 begin

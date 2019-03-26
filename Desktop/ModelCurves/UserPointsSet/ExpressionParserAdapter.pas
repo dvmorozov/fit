@@ -15,7 +15,7 @@ unit ExpressionParserAdapter;
 
 interface
 
-uses Classes, SysUtils, Settings, IntExpressionParser, CurvePointsSet,
+uses SysUtils, IntExpressionParser, CurvePointsSet,
   CBRCComponent;
 
 type

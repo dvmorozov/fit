@@ -16,8 +16,8 @@ unit Unit12;
 
 interface
 
-uses LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, StdCtrls,
-  Buttons, ExtCtrls, LResources;
+uses Forms, StdCtrls,
+  ExtCtrls, LResources;
 
 type
 

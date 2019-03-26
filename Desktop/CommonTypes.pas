@@ -15,7 +15,6 @@ unit CommonTypes;
 
 interface
 
-uses Classes, SysUtils;
 
 type
     { Server states. Sequence of states is designated by numbers. }

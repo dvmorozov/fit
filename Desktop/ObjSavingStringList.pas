@@ -16,7 +16,7 @@ unit ObjSavingStringList;
 interface
 
 uses
-    SelfCheckedComponentList, SelfCopied, SysUtils, Classes;
+    SelfCopied, SysUtils, Classes;
 
 type
 	{ List of components which for each object relates string identifier. }

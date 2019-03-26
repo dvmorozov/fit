@@ -17,7 +17,7 @@ unit FitServerProxy;
 
 interface
 
-uses Classes, SysUtils, FitClientStub, MyExceptions, IntClientCallback,
+uses SysUtils, FitClientStub, MyExceptions, IntClientCallback,
      CBRCComponent;
 
 type

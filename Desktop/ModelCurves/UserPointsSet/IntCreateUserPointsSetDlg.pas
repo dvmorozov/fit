@@ -15,8 +15,6 @@ unit IntCreateUserPointsSetDlg;
 
 interface
 
-uses Classes, SysUtils, Settings;
-
 type
     { Interface defining basic operations for creating user
       dialog for configuring parameters of custom curve type. }

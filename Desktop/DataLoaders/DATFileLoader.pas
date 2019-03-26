@@ -27,7 +27,6 @@ type
 
 implementation
 
-uses Main;
 
 {============================== TDATFileLoader ================================}
 

@@ -15,7 +15,7 @@ unit DataLoader;
 
 interface
 
-uses Classes, SysUtils, SimpMath, SelfCopied, PointsSet, TitlePointsSet,
+uses Classes, SysUtils, PointsSet, TitlePointsSet,
   NeutronPointsSet, IntDataLoader;
 
 type
@@ -49,7 +49,6 @@ function MyStrToFloat(Str: string): Double;
 
 implementation
 
-uses Main;
 
 function MyStrToFloat(Str: string): Double;
 var i: LongInt;

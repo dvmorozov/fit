@@ -15,8 +15,8 @@ unit Unit4;
 
 interface
 
-uses LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, StdCtrls,
-  Buttons, ExtCtrls, Dialogs, LResources
+uses SysUtils, Forms, Controls, StdCtrls,
+  ExtCtrls, LResources
 {$ifdef windows}
   ,Windows, CommCtrl
 {$endif}

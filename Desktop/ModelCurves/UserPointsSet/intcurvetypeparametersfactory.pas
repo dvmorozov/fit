@@ -15,7 +15,7 @@ unit IntCurveTypeParametersFactory;
 
 interface
 
-uses Classes, SysUtils, Settings, CurvePointsSet;
+uses CurvePointsSet, Settings;
 
 type
     { Interface defining operation for creating custom curve type object. }

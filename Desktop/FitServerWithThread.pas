@@ -16,7 +16,7 @@ unit FitServerWithThread;
 
 interface
 
-uses Classes, SysUtils, FitServer, CommonTypes, MainCalcThread, MyExceptions,
+uses SysUtils, FitServer, CommonTypes, MainCalcThread, MyExceptions,
     FitTask;
 
 type

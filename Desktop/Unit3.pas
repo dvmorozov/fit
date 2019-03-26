@@ -15,8 +15,8 @@ unit Unit3;
 
 interface
 
-uses LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, StdCtrls,
-  Buttons, ExtCtrls, Dialogs, LResources;
+uses SysUtils, Forms, Controls, StdCtrls,
+  ExtCtrls, LResources;
 
 type
 

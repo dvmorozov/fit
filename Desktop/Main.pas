@@ -21,7 +21,7 @@ unit Main;
 
 interface
 
-uses Classes, SysUtils, Forms
+uses SysUtils, Forms
 {$IFDEF WINDOWS}
     , windows, shfolder
 {$ENDIF}
@@ -29,7 +29,7 @@ uses Classes, SysUtils, Forms
     , FitClientApp
 {$ENDIF}
 {$IFDEF FITSERVER}
-    , FitServerApp, DataLoader
+    , FitServerApp
     {$IFNDEF FIT}
         {$IFNDEF FITP2P}
             , base_service_intf

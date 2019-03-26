@@ -17,7 +17,7 @@ unit FitServerMultithreaded;
 
 interface
 
-uses Classes, SysUtils, FitTask, FitTaskWithThread, FitServerWithThread,
+uses SysUtils, FitTask, FitTaskWithThread, FitServerWithThread,
     FitServer, MyExceptions, CommonTypes;
 
 type

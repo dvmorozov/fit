@@ -17,12 +17,8 @@ unit UserPointsSetPropDialog;
 interface
 
 uses
-  Classes, SysUtils, LResources, Forms, Controls, Graphics, Dialogs, ExtCtrls,
-  StdCtrls, CheckLst, Settings, PointsSet, CurvePointsSet
-{$IFDEF WINDOWS}
-  , Windows
-{$ENDIF}
-  ;
+  SysUtils, LResources, Forms, ExtCtrls,
+  StdCtrls, CheckLst, CurvePointsSet, Settings;
 
 type
 

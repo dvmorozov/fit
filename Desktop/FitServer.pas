@@ -29,7 +29,7 @@ In this case keeping the state of application can't be guaranteed.
 }
 
 uses Classes, TitlePointsSet, SelfCheckedComponentList, SysUtils, MSCRDataClasses,
-     Dialogs, CurvePointsSet, NamedPointsSet, PointsSet, GaussPointsSet,
+     CurvePointsSet, NamedPointsSet, PointsSet, GaussPointsSet,
      UserPointsSet, IntPointsSet,
 {$IFDEF FIT}
      FitServerProxy,    //      Proxy to client to call it back.

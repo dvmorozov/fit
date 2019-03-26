@@ -25,11 +25,7 @@ uses Classes, SysUtils,
      PointSetViewer,
 {$ENDIF}
      FitServerStub, FitServer,
-     (* FitServerWithThread, *) FitServerMultithreaded,
-{$IFDEF SERVER}
-     FormServer,
-{$ENDIF}
-     Forms;
+     (* FitServerWithThread, *) FitServerMultithreaded;
 type
 	{ Class of server application. This class is basic unit of interaction with client. }
     TFitServerApp = class(TComponent)

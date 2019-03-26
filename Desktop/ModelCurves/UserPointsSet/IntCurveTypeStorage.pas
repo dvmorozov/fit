@@ -15,7 +15,7 @@ unit IntCurveTypeStorage;
 
 interface
 
-uses Classes, SysUtils, Settings;
+uses Settings;
 
 type
     { Interface defining basic operation for storing parameters of custom curve type. }

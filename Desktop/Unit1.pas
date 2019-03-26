@@ -19,16 +19,15 @@ interface
 uses
     LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
     ExtCtrls, StdCtrls, Menus, PointsSet, FitViewer, ComCtrls,
-    FitClient, SelfCheckedComponentList, NumericGrid, CheckLst, MSCRDataClasses,
-    LResources, tagraph, ActnList, FitTask, Settings, Laz_XMLCfg,
-    MyExceptions, Grids, CommonTypes, Main, NeutronPointsSet, IntFitViewer,
+    FitClient, NumericGrid, CheckLst, MSCRDataClasses,
+    LResources, tagraph, ActnList, Settings, Laz_XMLCfg,
+    MyExceptions, CommonTypes, Main, NeutronPointsSet,
     IntPointsSet, CurvePointsSet, UserPointsSet, GaussPointsSet,
     PseudoVoigtPointsSet, AsymPseudoVoigtPointsSet, LorentzPointsSet,
     TwoBranchesPseudoVoigtPointsSet, NamedPointsSet, CurveTypesSingleton,
 {$IFDEF WINDOWS}
-    Windows, CommCtrl,
+    Windows;
 {$ENDIF}
-    ColorBox, Buttons;
 type
 	{ States of results grid window. }
     TResState = (

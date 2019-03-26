@@ -121,8 +121,6 @@ DiGraph Classes {
   TForm1 [href="FormServer.TForm1.html"]
   TFormHint -> TForm
   TFormHint [href="Unit6.TFormHint.html"]
-  TFormMain -> TForm
-  TFormMain [href="Unit1.TFormMain.html"]
   TInputBackFactorDlg -> TForm
   TInputBackFactorDlg [href="Unit5.TInputBackFactorDlg.html"]
   TInputMaxRFactorDlg -> TForm

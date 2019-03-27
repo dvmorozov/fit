@@ -86,6 +86,17 @@ begin
     raise ENotImplemented.Create('TCurveTypesSingleton.CreatePointsSet not implemented.');
 end;
 
+function SortAlphabetically(Item1, Item2: Pointer): Integer;
+begin
+    if TCurveType(Item1).CurveTypeName < TCurveType(Item2).CurveTypeName then
+        Result := -1
+    else
+        if TCurveType(Item1).CurveTypeName > TCurveType(Item2).CurveTypeName then
+            Result := 1
+        else
+            Result := 0;
+end;
+
 procedure TCurveTypesSingleton.RegisterCurveType(CurveClass: TCurveClass);
 var CurveType: TCurveType;
     Curve: TNamedPointsSet;
@@ -98,9 +109,10 @@ begin
         CurveType.CurveTypeName := Curve.GetCurveTypeName;
         CurveType.CurveTypeId := Curve.GetCurveTypeId;
     finally
-      Curve.Free;
+        Curve.Free;
     end;
     FCurveTypes.Add(CurveType);
+    FCurveTypes.Sort(@SortAlphabetically);
 end;
 
 procedure TCurveTypesSingleton.FirstCurveType;

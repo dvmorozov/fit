@@ -36,7 +36,7 @@ type
 
 implementation
 
-uses Unit1;
+uses mainform;
 
 constructor TCurveTypeStorageAdapter.Init;
 begin

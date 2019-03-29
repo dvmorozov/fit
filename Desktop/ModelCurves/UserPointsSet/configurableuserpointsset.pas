@@ -29,7 +29,7 @@ implementation
 uses
   UserPointsSetPropDialog, ExpressionParserAdapter, CurveTypeParametersFactory,
   CreateUserPointsSetDlgAdapter, CurveTypeStorageAdapter, Settings,
-  Controls, Main, Dialogs, Unit1;
+  Controls, Main, Dialogs, mainform;
 
 class function TConfigurableUserPointsSet.HasConfigurableParameters: Boolean;
 begin

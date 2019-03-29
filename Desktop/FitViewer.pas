@@ -206,7 +206,7 @@ implementation
 
 uses
 {$IFNDEF SERVER}
-    Unit1
+    mainform
 {$ELSE}
     FormServer
 {$ENDIF}

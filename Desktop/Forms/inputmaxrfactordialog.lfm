@@ -11,10 +11,12 @@ object InputMaxRFactorDlg: TInputMaxRFactorDlg
   Caption = 'Max Acceptable Difference'
   ClientHeight = 135
   ClientWidth = 313
+  DesignTimePPI = 120
   OnActivate = FormActivate
   OnCloseQuery = FormCloseQuery
   ParentFont = True
   Position = poMainFormCenter
+  LCLVersion = '1.8.4.0'
   object Bevel1: TBevel
     Left = 8
     Height = 73
@@ -56,7 +58,7 @@ object InputMaxRFactorDlg: TInputMaxRFactorDlg
   end
   object RFactorValueEdit: TEdit
     Left = 168
-    Height = 21
+    Height = 28
     Top = 32
     Width = 121
     TabOrder = 2

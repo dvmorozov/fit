@@ -10,15 +10,16 @@ uses
 {$ENDIF}
   Interfaces,   //  LCL widgetset
   Forms,
-  Variants,     //  требуется для правильного выполнения
-  Unit1 in 'Unit1.pas' {Form1},
+  Variants,
+  MainForm,
   DataLoader in 'DataLoader.pas',
   PointSetViewer in 'PointSetViewer.pas',
   ObjSavingStringList in '..\..\Library\Common\ObjSavingStringList.pas',
-  Unit12 in 'Unit12.pas' {AboutBox},
+  AboutBoxDialog,
   MSCRDataClasses in 'MSCRDataClasses.pas', Minimizer_DS, Unit3,
-  Unit5, Unit4, FitServer, FitClient, FitClientApp,
-  DataClasses, FitTask, Unit2, Settings, Unit7, TurboPowerIPro,
+  InputWavelengthDialog, InputBackFactorDialog, InputMaxRFactorDialog,
+  FitServer, FitClient, FitClientApp,
+  DataClasses, FitTask, Settings, TurboPowerIPro,
   FitGrids, Tools, CBRCComponent, ClassInheritIDs, ComponentList,
   MyExceptions, NumericGrid, SelfCopied, SelfSaved, SimpMath, TableComp,
   TAGraph
@@ -36,7 +37,9 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
 {$ENDIF}
-  Main;
+  Main,
+  CreateUserPointsSetDialog, UserPointsSetPropDialog,
+  ConfigurablePointsSet, ConfigurableUserPointsSet;
 
 {$R manifest.res}
 
@@ -44,13 +47,6 @@ uses
 
 begin
   Application.Initialize;
-  Application.CreateForm(TForm1, Form1);
   Form1.ApplicationProperties1.Title := 'FitPro';
-  Application.CreateForm(TAboutBox, AboutBox);
-  Application.CreateForm(TInputWavelengthDlg, InputWavelengthDlg);
-  Application.CreateForm(TInputBackFactorDlg, InputBackFactorDlg);
-  Application.CreateForm(TInputMaxRFactorDlg, InputMaxRFactorDlg);
-  Application.CreateForm(TCreateSpecialCurveDlg, CreateSpecialCurveDlg);
-  Application.CreateForm(TSpecialCurvePropDlg, SpecialCurvePropDlg);
   Application.Run;
 end.

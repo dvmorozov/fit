@@ -1,6 +1,20 @@
-## fit
+# fit
 
 The curve fitting application. It allows to model data by set of curves of selected type.
+
+## Projects
+
+- Fit - builds ready-to-use desktop application containing client and server part in single executable.
+- FitPro - builds client desktop application. The application should be configured to access server. 
+Server side should be compiled and installed separately. It is supposed but it is not required that
+backend is installed on dedicated machine.
+- FitServer - builds computing backend.
+
+All applications are built from the same code base by following compilation keys:
+- FIT - controls building of monolithic desktop application. Is mutually exclusive with FITPRO.
+- FITPRO - incorporates parts responsible for network communications.
+- FITSERVER - incorporates backend code.
+- FITCLIENT - incorporates client code.
 
 ## How to build desktop application
 

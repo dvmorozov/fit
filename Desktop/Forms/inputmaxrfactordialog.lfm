@@ -1,16 +1,16 @@
 object InputMaxRFactorDlg: TInputMaxRFactorDlg
   Left = 318
-  Height = 135
+  Height = 130
   Top = 191
-  Width = 313
+  Width = 415
   HorzScrollBar.Page = 312
   VertScrollBar.Page = 134
   ActiveControl = OKBtn
   BorderIcons = [biSystemMenu]
   BorderStyle = bsDialog
   Caption = 'Max Acceptable Difference'
-  ClientHeight = 135
-  ClientWidth = 313
+  ClientHeight = 130
+  ClientWidth = 415
   DesignTimePPI = 120
   OnActivate = FormActivate
   OnCloseQuery = FormCloseQuery
@@ -19,26 +19,29 @@ object InputMaxRFactorDlg: TInputMaxRFactorDlg
   LCLVersion = '1.8.4.0'
   object Bevel1: TBevel
     Left = 8
-    Height = 73
+    Height = 68
     Top = 8
-    Width = 297
+    Width = 399
+    Anchors = [akTop, akLeft, akRight, akBottom]
     Shape = bsFrame
   end
   object Label1: TLabel
     Left = 24
-    Height = 32
-    Top = 24
-    Width = 136
+    Height = 24
+    Top = 32
+    Width = 246
+    Anchors = [akTop, akLeft, akRight]
     AutoSize = False
     Caption = 'Max acceptable difference (percent):'
     ParentColor = False
     WordWrap = True
   end
   object OKBtn: TButton
-    Left = 136
+    Left = 238
     Height = 25
-    Top = 96
+    Top = 91
     Width = 75
+    Anchors = [akRight, akBottom]
     BorderSpacing.InnerBorder = 4
     Caption = 'OK'
     Default = True
@@ -46,10 +49,11 @@ object InputMaxRFactorDlg: TInputMaxRFactorDlg
     TabOrder = 0
   end
   object CancelBtn: TButton
-    Left = 214
+    Left = 316
     Height = 25
-    Top = 96
+    Top = 91
     Width = 75
+    Anchors = [akRight, akBottom]
     BorderSpacing.InnerBorder = 4
     Cancel = True
     Caption = 'Cancel'
@@ -57,10 +61,11 @@ object InputMaxRFactorDlg: TInputMaxRFactorDlg
     TabOrder = 1
   end
   object RFactorValueEdit: TEdit
-    Left = 168
+    Left = 272
     Height = 28
-    Top = 32
+    Top = 28
     Width = 121
+    Anchors = [akTop, akRight]
     TabOrder = 2
   end
 end

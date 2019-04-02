@@ -2,7 +2,7 @@ object CreateUserPointsSetDlg: TCreateUserPointsSetDlg
   Left = 146
   Height = 311
   Top = 162
-  Width = 391
+  Width = 390
   HorzScrollBar.Page = 390
   VertScrollBar.Page = 310
   ActiveControl = BtnCancel
@@ -10,7 +10,7 @@ object CreateUserPointsSetDlg: TCreateUserPointsSetDlg
   BorderStyle = bsDialog
   Caption = 'Create New Curve Type'
   ClientHeight = 311
-  ClientWidth = 391
+  ClientWidth = 390
   DesignTimePPI = 120
   Position = poMainFormCenter
   LCLVersion = '1.8.4.0'
@@ -18,45 +18,47 @@ object CreateUserPointsSetDlg: TCreateUserPointsSetDlg
     Left = 8
     Height = 249
     Top = 8
-    Width = 375
+    Width = 374
     Anchors = [akTop, akLeft, akRight, akBottom]
     Shape = bsFrame
   end
   object Label1: TLabel
-    Left = 22
-    Height = 18
-    Top = 61
-    Width = 68
+    Left = 24
+    Height = 22
+    Top = 64
+    Width = 82
+    Anchors = [akTop, akLeft, akRight]
     AutoSize = False
     Caption = 'Expression:'
     ParentColor = False
   end
   object Label2: TLabel
-    Left = 22
-    Height = 18
-    Top = 24
-    Width = 68
+    Left = 24
+    Height = 24
+    Top = 28
+    Width = 80
+    Anchors = [akTop, akLeft, akRight]
     AutoSize = False
     Caption = 'Name:'
     ParentColor = False
   end
   object BtnCancel: TButton
-    Left = 295
+    Left = 294
     Height = 25
     Top = 272
     Width = 75
-    Anchors = [akLeft, akBottom]
+    Anchors = [akRight, akBottom]
     BorderSpacing.InnerBorder = 4
     Caption = 'Cancel'
     ModalResult = 2
     TabOrder = 41
   end
   object BtnContinue: TButton
-    Left = 200
+    Left = 185
     Height = 25
     Top = 272
-    Width = 91
-    Anchors = [akLeft, akBottom]
+    Width = 105
+    Anchors = [akRight, akBottom]
     BorderSpacing.InnerBorder = 4
     Cancel = True
     Caption = 'Contunue >>'
@@ -65,10 +67,11 @@ object CreateUserPointsSetDlg: TCreateUserPointsSetDlg
     TabOrder = 42
   end
   object EditExpression: TEdit
-    Left = 96
+    Left = 104
     Height = 28
     Top = 61
-    Width = 274
+    Width = 265
+    Anchors = [akTop, akLeft, akRight]
     OnKeyPress = EditExpressionKeyPress
     TabOrder = 0
   end
@@ -433,10 +436,11 @@ object CreateUserPointsSetDlg: TCreateUserPointsSetDlg
     TabOrder = 20
   end
   object EditCurveName: TEdit
-    Left = 96
+    Left = 104
     Height = 28
     Top = 24
-    Width = 274
+    Width = 265
+    Anchors = [akTop, akLeft, akRight]
     OnKeyPress = EditExpressionKeyPress
     TabOrder = 43
   end

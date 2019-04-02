@@ -2,7 +2,7 @@ object UserPointsSetPropDlg: TUserPointsSetPropDlg
   Left = 560
   Height = 306
   Top = 167
-  Width = 392
+  Width = 456
   HorzScrollBar.Page = 391
   VertScrollBar.Page = 305
   ActiveControl = BtnDone
@@ -10,7 +10,7 @@ object UserPointsSetPropDlg: TUserPointsSetPropDlg
   BorderStyle = bsDialog
   Caption = 'Set Curve Type Properties'
   ClientHeight = 306
-  ClientWidth = 392
+  ClientWidth = 456
   DesignTimePPI = 120
   OnActivate = FormActivate
   Position = poMainFormCenter
@@ -19,15 +19,16 @@ object UserPointsSetPropDlg: TUserPointsSetPropDlg
     Left = 8
     Height = 244
     Top = 8
-    Width = 376
+    Width = 440
     Anchors = [akTop, akLeft, akRight, akBottom]
     Shape = bsFrame
   end
   object Label2: TLabel
     Left = 22
-    Height = 18
-    Top = 53
-    Width = 68
+    Height = 25
+    Top = 56
+    Width = 137
+    Anchors = [akTop, akLeft, akRight]
     AutoSize = False
     Caption = 'Argument:'
     ParentColor = False
@@ -36,44 +37,48 @@ object UserPointsSetPropDlg: TUserPointsSetPropDlg
     Left = 22
     Height = 43
     Top = 111
-    Width = 68
+    Width = 139
+    Anchors = [akTop, akLeft, akRight]
     AutoSize = False
-    Caption = 'Fixed'#13#10'parameters:'
+    Caption = 'Fixed parameters:'
     ParentColor = False
   end
   object Label3: TLabel
     Left = 22
-    Height = 35
-    Top = 208
-    Width = 68
+    Height = 24
+    Top = 212
+    Width = 137
+    Anchors = [akTop, akLeft, akRight]
     AutoSize = False
     Caption = 'Initial value:'
     ParentColor = False
   end
   object Label4: TLabel
     Left = 22
-    Height = 18
-    Top = 24
-    Width = 68
+    Height = 26
+    Top = 26
+    Width = 137
+    Anchors = [akTop, akLeft, akRight]
     AutoSize = False
     Caption = 'Expression:'
     ParentColor = False
   end
   object Label5: TLabel
     Left = 22
-    Height = 26
+    Height = 28
     Top = 82
-    Width = 68
+    Width = 137
+    Anchors = [akTop, akLeft, akRight]
     AutoSize = False
-    Caption = 'Position'#13#10'parameter:'
+    Caption = 'Position parameter:'
     ParentColor = False
   end
   object BtnDone: TButton
-    Left = 216
+    Left = 280
     Height = 25
     Top = 267
     Width = 75
-    Anchors = [akLeft, akBottom]
+    Anchors = [akRight, akBottom]
     BorderSpacing.InnerBorder = 4
     Caption = 'Done'
     Default = True
@@ -81,32 +86,33 @@ object UserPointsSetPropDlg: TUserPointsSetPropDlg
     TabOrder = 6
   end
   object BtnCancel: TButton
-    Left = 295
+    Left = 359
     Height = 25
     Top = 267
     Width = 75
-    Anchors = [akLeft, akBottom]
+    Anchors = [akRight, akBottom]
     BorderSpacing.InnerBorder = 4
     Caption = 'Cancel'
     ModalResult = 2
     TabOrder = 7
   end
   object BtnBacktrack: TButton
-    Left = 120
+    Left = 168
     Height = 25
     Top = 267
-    Width = 93
-    Anchors = [akLeft, akBottom]
+    Width = 109
+    Anchors = [akRight, akBottom]
     BorderSpacing.InnerBorder = 4
     Caption = '<< Backtrack'
     ModalResult = 4
     TabOrder = 5
   end
   object ComboArgument: TComboBox
-    Left = 96
+    Left = 160
     Height = 28
     Top = 53
     Width = 274
+    Anchors = [akTop, akRight]
     ItemHeight = 20
     Items.Strings = (
       'item1'
@@ -120,10 +126,11 @@ object UserPointsSetPropDlg: TUserPointsSetPropDlg
     TabOrder = 0
   end
   object CheckListFixed: TCheckListBox
-    Left = 96
+    Left = 160
     Height = 89
     Top = 112
     Width = 274
+    Anchors = [akTop, akRight]
     ItemHeight = 0
     OnClick = CheckListFixedClick
     OnClickCheck = CheckListFixedClickCheck
@@ -131,37 +138,40 @@ object UserPointsSetPropDlg: TUserPointsSetPropDlg
     TabOrder = 2
   end
   object EditExpression: TEdit
-    Left = 96
+    Left = 160
     Height = 28
     Top = 24
     Width = 274
+    Anchors = [akTop, akRight]
     Color = clBtnFace
     ReadOnly = True
     TabOrder = 8
   end
   object EditInitValue: TEdit
-    Left = 96
+    Left = 160
     Height = 28
     Top = 208
     Width = 195
+    Anchors = [akTop, akRight]
     TabOrder = 3
   end
   object BtnApply: TButton
-    Left = 295
+    Left = 359
     Height = 25
     Top = 208
     Width = 75
-    Anchors = [akLeft, akBottom]
+    Anchors = [akRight, akBottom]
     BorderSpacing.InnerBorder = 4
     Caption = 'Apply'
     OnClick = BtnApplyClick
     TabOrder = 4
   end
   object ComboPosition: TComboBox
-    Left = 96
+    Left = 160
     Height = 28
     Top = 82
     Width = 274
+    Anchors = [akTop, akRight]
     ItemHeight = 20
     Items.Strings = (
       'item1'

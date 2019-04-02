@@ -1,53 +1,54 @@
 { This is an automatically generated lazarus resource file }
 
 LazarusResources.Add('TAboutBox','FORMDATA',[
-  'TPF0'#9'TAboutBox'#8'AboutBox'#4'Left'#3''''#1#6'Height'#3#247#0#3'Top'#3'N'
+  'TPF0'#9'TAboutBox'#8'AboutBox'#4'Left'#3''''#1#6'Height'#3#240#0#3'Top'#3'N'
   +#1#5'Width'#3'l'#1#18'HorzScrollBar.Page'#3'o'#1#18'VertScrollBar.Page'#3#250
   +#0#13'ActiveControl'#7#8'OKButton'#11'BorderStyle'#7#8'bsDialog'#7'Caption'#6
-  +#9'About Fit'#12'ClientHeight'#3#247#0#11'ClientWidth'#3'l'#1#13'DesignTimeP'
+  +#9'About Fit'#12'ClientHeight'#3#240#0#11'ClientWidth'#3'l'#1#13'DesignTimeP'
   +'PI'#2'x'#11'Font.Height'#2#245#9'Font.Name'#6#13'MS Sans Serif'#6'OnShow'#7
   +#8'FormShow'#8'Position'#7#16'poMainFormCenter'#10'LCLVersion'#6#7'1.8.4.0'#0
-  +#6'TPanel'#6'Panel1'#4'Left'#2#8#6'Height'#3#201#0#3'Top'#2#8#5'Width'#3'a'#1
-  +#10'BevelInner'#7#9'bvLowered'#10'BevelOuter'#7#6'bvNone'#12'ClientHeight'#3
-  +#201#0#11'ClientWidth'#3'a'#1#8'TabOrder'#2#0#0#11'TStaticText'#11'StaticTex'
-  +'t3'#4'Left'#2#1#6'Height'#2#23#3'Top'#2'D'#5'Width'#3'_'#1#5'Align'#7#5'alT'
-  +'op'#9'Alignment'#7#8'taCenter'#7'Caption'#6#10'written by'#12'Font.CharSet'
-  +#7#18'EASTEUROPE_CHARSET'#10'Font.Color'#7#7'clBlack'#11'Font.Height'#2#240#9
-  +'Font.Name'#6#11'Courier New'#10'Font.Style'#11#6'fsBold'#8'fsItalic'#0#10'P'
-  +'arentFont'#8#8'TabOrder'#2#0#0#0#11'TStaticText'#11'StaticText4'#4'Left'#2#1
-  +#6'Height'#2#23#3'Top'#2'['#5'Width'#3'_'#1#5'Align'#7#5'alTop'#9'Alignment'
-  +#7#8'taCenter'#7'Caption'#6#11'D.V.Morozov'#12'Font.CharSet'#7#18'EASTEUROPE'
-  +'_CHARSET'#10'Font.Color'#7#7'clBlack'#11'Font.Height'#2#240#9'Font.Name'#6
+  +#6'TPanel'#6'Panel1'#4'Left'#2#8#6'Height'#3#185#0#3'Top'#2#8#5'Width'#3'a'#1
+  +#7'Anchors'#11#5'akTop'#6'akLeft'#7'akRight'#8'akBottom'#0#10'BevelInner'#7#9
+  +'bvLowered'#10'BevelOuter'#7#6'bvNone'#12'ClientHeight'#3#185#0#11'ClientWid'
+  +'th'#3'a'#1#8'TabOrder'#2#0#0#11'TStaticText'#11'StaticText3'#4'Left'#2#1#6
+  +'Height'#2#23#3'Top'#2'D'#5'Width'#3'_'#1#5'Align'#7#5'alTop'#9'Alignment'#7
+  +#8'taCenter'#7'Caption'#6#10'written by'#12'Font.CharSet'#7#18'EASTEUROPE_CH'
+  +'ARSET'#10'Font.Color'#7#7'clBlack'#11'Font.Height'#2#240#9'Font.Name'#6#11
+  +'Courier New'#10'Font.Style'#11#6'fsBold'#8'fsItalic'#0#10'ParentFont'#8#8'T'
+  +'abOrder'#2#0#0#0#11'TStaticText'#11'StaticText4'#4'Left'#2#1#6'Height'#2#23
+  +#3'Top'#2'['#5'Width'#3'_'#1#5'Align'#7#5'alTop'#9'Alignment'#7#8'taCenter'#7
+  +'Caption'#6#11'D.V.Morozov'#12'Font.CharSet'#7#18'EASTEUROPE_CHARSET'#10'Fon'
+  +'t.Color'#7#7'clBlack'#11'Font.Height'#2#240#9'Font.Name'#6#11'Courier New'
+  +#10'Font.Style'#11#6'fsBold'#8'fsItalic'#0#10'ParentFont'#8#8'TabOrder'#2#1#0
+  +#0#11'TStaticText'#11'StaticText8'#4'Left'#2#1#6'Height'#2#20#3'Top'#3#136#0
+  +#5'Width'#3'_'#1#5'Align'#7#5'alTop'#9'Alignment'#7#8'taCenter'#7'Caption'#6
+  +#9'2000-2008'#12'Font.CharSet'#7#18'EASTEUROPE_CHARSET'#10'Font.Color'#7#7'c'
+  +'lBlack'#11'Font.Height'#2#243#9'Font.Name'#6#11'Courier New'#10'ParentFont'
+  +#8#8'TabOrder'#2#2#0#0#11'TStaticText'#15'StaticTextTitle'#4'Left'#2#1#6'Hei'
+  +'ght'#2#22#3'Top'#2#23#5'Width'#3'_'#1#5'Align'#7#5'alTop'#9'Alignment'#7#8
+  +'taCenter'#7'Caption'#6#3'Fit'#12'Font.CharSet'#7#18'EASTEUROPE_CHARSET'#10
+  +'Font.Color'#7#7'clBlack'#11'Font.Height'#2#240#9'Font.Name'#6#11'Courier Ne'
+  +'w'#10'Font.Style'#11#6'fsBold'#0#10'ParentFont'#8#8'TabOrder'#2#3#0#0#11'TS'
+  +'taticText'#12'StaticText11'#4'Left'#2#1#6'Height'#2#23#3'Top'#2'-'#5'Width'
+  +#3'_'#1#5'Align'#7#5'alTop'#9'Alignment'#7#8'taCenter'#7'Caption'#6#11'versi'
+  +'on 1.0'#12'Font.CharSet'#7#18'EASTEUROPE_CHARSET'#10'Font.Color'#7#7'clBlac'
+  +'k'#11'Font.Height'#2#240#9'Font.Name'#6#11'Courier New'#10'Font.Style'#11#6
+  +'fsBold'#8'fsItalic'#0#10'ParentFont'#8#8'TabOrder'#2#4#0#0#11'TStaticText'
+  +#11'StaticText1'#4'Left'#2#1#6'Height'#2#22#3'Top'#2'r'#5'Width'#3'_'#1#5'Al'
+  +'ign'#7#5'alTop'#9'Alignment'#7#8'taCenter'#12'Font.CharSet'#7#15'RUSSIAN_CH'
+  +'ARSET'#10'Font.Color'#7#7'clBlack'#11'Font.Height'#2#241#9'Font.Name'#6#11
+  +'Courier New'#10'Font.Style'#11#6'fsBold'#8'fsItalic'#0#10'ParentFont'#8#8'T'
+  +'abOrder'#2#5#0#0#11'TStaticText'#11'StaticText9'#4'Left'#2#1#6'Height'#2#22
+  +#3'Top'#3#156#0#5'Width'#3'_'#1#5'Align'#7#5'alTop'#9'Alignment'#7#8'taCente'
+  +'r'#7'Caption'#6#25'e-mail: dvmorozov@mail.ru'#12'Font.CharSet'#7#15'RUSSIAN'
+  +'_CHARSET'#10'Font.Color'#7#7'clBlack'#11'Font.Height'#2#241#9'Font.Name'#6
   +#11'Courier New'#10'Font.Style'#11#6'fsBold'#8'fsItalic'#0#10'ParentFont'#8#8
-  +'TabOrder'#2#1#0#0#11'TStaticText'#11'StaticText8'#4'Left'#2#1#6'Height'#2#20
-  +#3'Top'#3#136#0#5'Width'#3'_'#1#5'Align'#7#5'alTop'#9'Alignment'#7#8'taCente'
-  +'r'#7'Caption'#6#9'2000-2008'#12'Font.CharSet'#7#18'EASTEUROPE_CHARSET'#10'F'
-  +'ont.Color'#7#7'clBlack'#11'Font.Height'#2#243#9'Font.Name'#6#11'Courier New'
-  +#10'ParentFont'#8#8'TabOrder'#2#2#0#0#11'TStaticText'#15'StaticTextTitle'#4
-  +'Left'#2#1#6'Height'#2#22#3'Top'#2#23#5'Width'#3'_'#1#5'Align'#7#5'alTop'#9
-  +'Alignment'#7#8'taCenter'#7'Caption'#6#3'Fit'#12'Font.CharSet'#7#18'EASTEURO'
-  +'PE_CHARSET'#10'Font.Color'#7#7'clBlack'#11'Font.Height'#2#240#9'Font.Name'#6
-  +#11'Courier New'#10'Font.Style'#11#6'fsBold'#0#10'ParentFont'#8#8'TabOrder'#2
-  +#3#0#0#11'TStaticText'#12'StaticText11'#4'Left'#2#1#6'Height'#2#23#3'Top'#2
-  +'-'#5'Width'#3'_'#1#5'Align'#7#5'alTop'#9'Alignment'#7#8'taCenter'#7'Caption'
-  +#6#11'version 1.0'#12'Font.CharSet'#7#18'EASTEUROPE_CHARSET'#10'Font.Color'#7
-  +#7'clBlack'#11'Font.Height'#2#240#9'Font.Name'#6#11'Courier New'#10'Font.Sty'
-  +'le'#11#6'fsBold'#8'fsItalic'#0#10'ParentFont'#8#8'TabOrder'#2#4#0#0#11'TSta'
-  +'ticText'#11'StaticText1'#4'Left'#2#1#6'Height'#2#22#3'Top'#2'r'#5'Width'#3
-  +'_'#1#5'Align'#7#5'alTop'#9'Alignment'#7#8'taCenter'#12'Font.CharSet'#7#15'R'
-  +'USSIAN_CHARSET'#10'Font.Color'#7#7'clBlack'#11'Font.Height'#2#241#9'Font.Na'
-  +'me'#6#11'Courier New'#10'Font.Style'#11#6'fsBold'#8'fsItalic'#0#10'ParentFo'
-  +'nt'#8#8'TabOrder'#2#5#0#0#11'TStaticText'#11'StaticText9'#4'Left'#2#1#6'Hei'
-  +'ght'#2#22#3'Top'#3#156#0#5'Width'#3'_'#1#5'Align'#7#5'alTop'#9'Alignment'#7
-  +#8'taCenter'#7'Caption'#6#25'e-mail: dvmorozov@mail.ru'#12'Font.CharSet'#7#15
-  +'RUSSIAN_CHARSET'#10'Font.Color'#7#7'clBlack'#11'Font.Height'#2#241#9'Font.N'
-  +'ame'#6#11'Courier New'#10'Font.Style'#11#6'fsBold'#8'fsItalic'#0#10'ParentF'
-  +'ont'#8#8'TabOrder'#2#6#0#0#11'TStaticText'#11'StaticText2'#4'Left'#2#1#6'He'
-  +'ight'#2#22#3'Top'#2#1#5'Width'#3'_'#1#5'Align'#7#5'alTop'#9'Alignment'#7#8
-  +'taCenter'#12'Font.CharSet'#7#15'RUSSIAN_CHARSET'#10'Font.Color'#7#7'clBlack'
-  +#11'Font.Height'#2#241#9'Font.Name'#6#11'Courier New'#10'Font.Style'#11#6'fs'
-  +'Bold'#8'fsItalic'#0#10'ParentFont'#8#8'TabOrder'#2#7#0#0#0#7'TButton'#8'OKB'
-  +'utton'#4'Left'#3#146#0#6'Height'#2#25#3'Top'#3#220#0#5'Width'#2'K'#25'Borde'
-  +'rSpacing.InnerBorder'#2#4#7'Caption'#6#2'OK'#7'Default'#9#11'ModalResult'#2
-  +#1#8'TabOrder'#2#1#0#0#0
+  +'TabOrder'#2#6#0#0#11'TStaticText'#11'StaticText2'#4'Left'#2#1#6'Height'#2#22
+  +#3'Top'#2#1#5'Width'#3'_'#1#5'Align'#7#5'alTop'#9'Alignment'#7#8'taCenter'#12
+  +'Font.CharSet'#7#15'RUSSIAN_CHARSET'#10'Font.Color'#7#7'clBlack'#11'Font.Hei'
+  +'ght'#2#241#9'Font.Name'#6#11'Courier New'#10'Font.Style'#11#6'fsBold'#8'fsI'
+  +'talic'#0#10'ParentFont'#8#8'TabOrder'#2#7#0#0#0#7'TButton'#8'OKButton'#4'Le'
+  +'ft'#3#146#0#6'Height'#2#25#3'Top'#3#204#0#5'Width'#2'K'#7'Anchors'#11#8'akB'
+  +'ottom'#0#25'BorderSpacing.InnerBorder'#2#4#7'Caption'#6#2'OK'#7'Default'#9
+  +#11'ModalResult'#2#1#8'TabOrder'#2#1#0#0#0
 ]);

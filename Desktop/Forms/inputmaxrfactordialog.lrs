@@ -2,21 +2,24 @@
 
 LazarusResources.Add('TInputMaxRFactorDlg','FORMDATA',[
   'TPF0'#19'TInputMaxRFactorDlg'#18'InputMaxRFactorDlg'#4'Left'#3'>'#1#6'Height'
-  +#3#135#0#3'Top'#3#191#0#5'Width'#3'9'#1#18'HorzScrollBar.Page'#3'8'#1#18'Ver'
-  +'tScrollBar.Page'#3#134#0#13'ActiveControl'#7#5'OKBtn'#11'BorderIcons'#11#12
+  +#3#130#0#3'Top'#3#191#0#5'Width'#3#159#1#18'HorzScrollBar.Page'#3'8'#1#18'Ve'
+  +'rtScrollBar.Page'#3#134#0#13'ActiveControl'#7#5'OKBtn'#11'BorderIcons'#11#12
   +'biSystemMenu'#0#11'BorderStyle'#7#8'bsDialog'#7'Caption'#6#25'Max Acceptabl'
-  +'e Difference'#12'ClientHeight'#3#135#0#11'ClientWidth'#3'9'#1#13'DesignTime'
-  +'PPI'#2'x'#10'OnActivate'#7#12'FormActivate'#12'OnCloseQuery'#7#14'FormClose'
-  +'Query'#10'ParentFont'#9#8'Position'#7#16'poMainFormCenter'#10'LCLVersion'#6
-  +#7'1.8.4.0'#0#6'TBevel'#6'Bevel1'#4'Left'#2#8#6'Height'#2'I'#3'Top'#2#8#5'Wi'
-  +'dth'#3')'#1#5'Shape'#7#7'bsFrame'#0#0#6'TLabel'#6'Label1'#4'Left'#2#24#6'He'
-  +'ight'#2' '#3'Top'#2#24#5'Width'#3#136#0#8'AutoSize'#8#7'Caption'#6'$Max acc'
-  +'eptable difference (percent):'#11'ParentColor'#8#8'WordWrap'#9#0#0#7'TButto'
-  +'n'#5'OKBtn'#4'Left'#3#136#0#6'Height'#2#25#3'Top'#2'`'#5'Width'#2'K'#25'Bor'
-  +'derSpacing.InnerBorder'#2#4#7'Caption'#6#2'OK'#7'Default'#9#11'ModalResult'
-  +#2#1#8'TabOrder'#2#0#0#0#7'TButton'#9'CancelBtn'#4'Left'#3#214#0#6'Height'#2
-  +#25#3'Top'#2'`'#5'Width'#2'K'#25'BorderSpacing.InnerBorder'#2#4#6'Cancel'#9#7
-  +'Caption'#6#6'Cancel'#11'ModalResult'#2#2#8'TabOrder'#2#1#0#0#5'TEdit'#16'RF'
-  +'actorValueEdit'#4'Left'#3#168#0#6'Height'#2#28#3'Top'#2' '#5'Width'#2'y'#8
-  +'TabOrder'#2#2#0#0#0
+  +'e Difference'#12'ClientHeight'#3#130#0#11'ClientWidth'#3#159#1#13'DesignTim'
+  +'ePPI'#2'x'#10'OnActivate'#7#12'FormActivate'#12'OnCloseQuery'#7#14'FormClos'
+  +'eQuery'#10'ParentFont'#9#8'Position'#7#16'poMainFormCenter'#10'LCLVersion'#6
+  +#7'1.8.4.0'#0#6'TBevel'#6'Bevel1'#4'Left'#2#8#6'Height'#2'D'#3'Top'#2#8#5'Wi'
+  +'dth'#3#143#1#7'Anchors'#11#5'akTop'#6'akLeft'#7'akRight'#8'akBottom'#0#5'Sh'
+  +'ape'#7#7'bsFrame'#0#0#6'TLabel'#6'Label1'#4'Left'#2#24#6'Height'#2#24#3'Top'
+  +#2' '#5'Width'#3#246#0#7'Anchors'#11#5'akTop'#6'akLeft'#7'akRight'#0#8'AutoS'
+  +'ize'#8#7'Caption'#6'$Max acceptable difference (percent):'#11'ParentColor'#8
+  +#8'WordWrap'#9#0#0#7'TButton'#5'OKBtn'#4'Left'#3#238#0#6'Height'#2#25#3'Top'
+  +#2'['#5'Width'#2'K'#7'Anchors'#11#7'akRight'#8'akBottom'#0#25'BorderSpacing.'
+  +'InnerBorder'#2#4#7'Caption'#6#2'OK'#7'Default'#9#11'ModalResult'#2#1#8'TabO'
+  +'rder'#2#0#0#0#7'TButton'#9'CancelBtn'#4'Left'#3'<'#1#6'Height'#2#25#3'Top'#2
+  +'['#5'Width'#2'K'#7'Anchors'#11#7'akRight'#8'akBottom'#0#25'BorderSpacing.In'
+  +'nerBorder'#2#4#6'Cancel'#9#7'Caption'#6#6'Cancel'#11'ModalResult'#2#2#8'Tab'
+  +'Order'#2#1#0#0#5'TEdit'#16'RFactorValueEdit'#4'Left'#3#16#1#6'Height'#2#28#3
+  +'Top'#2#28#5'Width'#2'y'#7'Anchors'#11#5'akTop'#7'akRight'#0#8'TabOrder'#2#2
+  +#0#0#0
 ]);

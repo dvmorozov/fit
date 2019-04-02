@@ -1,16 +1,16 @@
 object InputBackFactorDlg: TInputBackFactorDlg
   Left = 317
-  Height = 139
+  Height = 135
   Top = 363
-  Width = 313
+  Width = 365
   HorzScrollBar.Page = 312
   VertScrollBar.Page = 134
   ActiveControl = OKBtn
   BorderIcons = [biSystemMenu]
   BorderStyle = bsDialog
   Caption = 'Background Factor'
-  ClientHeight = 139
-  ClientWidth = 313
+  ClientHeight = 135
+  ClientWidth = 365
   DesignTimePPI = 120
   OnActivate = FormActivate
   OnCloseQuery = FormCloseQuery
@@ -21,24 +21,27 @@ object InputBackFactorDlg: TInputBackFactorDlg
     Left = 8
     Height = 73
     Top = 8
-    Width = 297
+    Width = 349
+    Anchors = [akTop, akLeft, akRight, akBottom]
     Shape = bsFrame
   end
   object Label1: TLabel
-    Left = 35
-    Height = 29
-    Top = 24
-    Width = 125
+    Left = 24
+    Height = 25
+    Top = 35
+    Width = 195
+    Anchors = [akTop, akLeft, akRight]
     AutoSize = False
     Caption = 'Background factor value 1 / :'
     ParentColor = False
     WordWrap = True
   end
   object OKBtn: TButton
-    Left = 136
+    Left = 188
     Height = 25
     Top = 96
     Width = 75
+    Anchors = [akRight, akBottom]
     BorderSpacing.InnerBorder = 4
     Caption = 'OK'
     Default = True
@@ -46,10 +49,11 @@ object InputBackFactorDlg: TInputBackFactorDlg
     TabOrder = 0
   end
   object CancelBtn: TButton
-    Left = 214
+    Left = 266
     Height = 25
     Top = 96
     Width = 75
+    Anchors = [akRight, akBottom]
     BorderSpacing.InnerBorder = 4
     Cancel = True
     Caption = 'Cancel'
@@ -57,10 +61,11 @@ object InputBackFactorDlg: TInputBackFactorDlg
     TabOrder = 1
   end
   object ValueEdit: TEdit
-    Left = 168
+    Left = 220
     Height = 28
     Top = 32
     Width = 121
+    Anchors = [akTop, akRight]
     TabOrder = 2
   end
 end

@@ -1,6 +1,6 @@
 object AboutBox: TAboutBox
   Left = 295
-  Height = 247
+  Height = 240
   Top = 334
   Width = 364
   HorzScrollBar.Page = 367
@@ -8,7 +8,7 @@ object AboutBox: TAboutBox
   ActiveControl = OKButton
   BorderStyle = bsDialog
   Caption = 'About Fit'
-  ClientHeight = 247
+  ClientHeight = 240
   ClientWidth = 364
   DesignTimePPI = 120
   Font.Height = -11
@@ -18,12 +18,13 @@ object AboutBox: TAboutBox
   LCLVersion = '1.8.4.0'
   object Panel1: TPanel
     Left = 8
-    Height = 201
+    Height = 185
     Top = 8
     Width = 353
+    Anchors = [akTop, akLeft, akRight, akBottom]
     BevelInner = bvLowered
     BevelOuter = bvNone
-    ClientHeight = 201
+    ClientHeight = 185
     ClientWidth = 353
     TabOrder = 0
     object StaticText3: TStaticText
@@ -155,8 +156,9 @@ object AboutBox: TAboutBox
   object OKButton: TButton
     Left = 146
     Height = 25
-    Top = 220
+    Top = 204
     Width = 75
+    Anchors = [akBottom]
     BorderSpacing.InnerBorder = 4
     Caption = 'OK'
     Default = True

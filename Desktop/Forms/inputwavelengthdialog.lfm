@@ -1,8 +1,8 @@
 object InputWavelengthDlg: TInputWavelengthDlg
-  Left = 72
+  Left = 350
   Height = 135
-  Top = 338
-  Width = 313
+  Top = 248
+  Width = 336
   HorzScrollBar.Page = 312
   VertScrollBar.Page = 134
   ActiveControl = OKBtn
@@ -10,7 +10,7 @@ object InputWavelengthDlg: TInputWavelengthDlg
   BorderStyle = bsDialog
   Caption = 'Wavelength'
   ClientHeight = 135
-  ClientWidth = 313
+  ClientWidth = 336
   DesignTimePPI = 120
   OnActivate = FormActivate
   OnCloseQuery = FormCloseQuery
@@ -21,23 +21,26 @@ object InputWavelengthDlg: TInputWavelengthDlg
     Left = 8
     Height = 73
     Top = 8
-    Width = 297
+    Width = 320
+    Anchors = [akLeft, akRight, akBottom]
     Shape = bsFrame
   end
   object Label1: TLabel
-    Left = 35
-    Height = 18
+    Left = 24
+    Height = 25
     Top = 35
-    Width = 125
+    Width = 159
+    Anchors = [akTop, akLeft, akRight]
     AutoSize = False
     Caption = 'Wavelength (angstrom):'
     ParentColor = False
   end
   object OKBtn: TButton
-    Left = 136
+    Left = 159
     Height = 25
     Top = 96
     Width = 75
+    Anchors = [akRight, akBottom]
     BorderSpacing.InnerBorder = 4
     Caption = 'OK'
     Default = True
@@ -45,10 +48,11 @@ object InputWavelengthDlg: TInputWavelengthDlg
     TabOrder = 0
   end
   object CancelBtn: TButton
-    Left = 214
+    Left = 237
     Height = 25
     Top = 96
     Width = 75
+    Anchors = [akRight, akBottom]
     BorderSpacing.InnerBorder = 4
     Cancel = True
     Caption = 'Cancel'
@@ -56,10 +60,11 @@ object InputWavelengthDlg: TInputWavelengthDlg
     TabOrder = 1
   end
   object WavelengthValueEdit: TEdit
-    Left = 168
+    Left = 191
     Height = 28
     Top = 32
     Width = 121
+    Anchors = [akRight, akBottom]
     TabOrder = 2
   end
 end

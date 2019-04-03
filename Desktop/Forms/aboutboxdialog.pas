@@ -17,7 +17,7 @@ unit AboutBoxDialog;
 interface
 
 uses Forms, StdCtrls,
-  ExtCtrls, LResources;
+  ExtCtrls, LResources, Classes;
 
 type
 
@@ -26,15 +26,15 @@ type
   TAboutBox = class(TForm)
     Panel1: TPanel;
     OKButton: TButton;
+    StaticText1: TStaticText;
     StaticText3: TStaticText;
     StaticText4: TStaticText;
-    StaticText8: TStaticText;
     StaticTextTitle: TStaticText;
     StaticText11: TStaticText;
-    StaticText1: TStaticText;
-    StaticText9: TStaticText;
+    StaticTextGitHub: TStaticText;
     StaticText2: TStaticText;
     procedure FormShow(Sender: TObject);
+    procedure StaticTextGitHubClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -46,7 +46,7 @@ var
 
 implementation
 
-uses mainform;
+uses MainForm, LCLIntf;
 
 { TAboutBox }
 
@@ -55,6 +55,12 @@ begin
     Caption := FormMain.ApplicationProperties1.Title;
     StaticTextTitle.Caption := FormMain.ApplicationProperties1.Title;
 end;
+
+procedure TAboutBox.StaticTextGitHubClick(Sender: TObject);
+begin
+    OpenURL('https://github.com/dvmorozov/');
+end;
+
 
 initialization
   {$I aboutboxdialog.lrs}

@@ -121,7 +121,6 @@
         <ComponentName Value="FormMain"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="16"/>
         <WindowIndex Value="1"/>
         <TopLine Value="2046"/>
@@ -175,12 +174,14 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="AboutBoxDialog"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="5"/>
-        <CursorPos X="11" Y="45"/>
+        <TopLine Value="20"/>
+        <CursorPos Y="37"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit5>
       <Unit6>
@@ -973,7 +974,7 @@
         <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <CursorPos X="6" Y="18"/>
-        <UsageCount Value="179"/>
+        <UsageCount Value="180"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit89>
       <Unit90>
@@ -983,7 +984,7 @@
         <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <CursorPos X="30" Y="18"/>
-        <UsageCount Value="176"/>
+        <UsageCount Value="177"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit90>
       <Unit91>
@@ -992,7 +993,7 @@
         <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <CursorPos X="15" Y="18"/>
-        <UsageCount Value="176"/>
+        <UsageCount Value="177"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit91>
       <Unit92>
@@ -1001,7 +1002,7 @@
         <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <CursorPos Y="17"/>
-        <UsageCount Value="176"/>
+        <UsageCount Value="177"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit92>
       <Unit93>
@@ -1011,7 +1012,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="4"/>
         <CursorPos X="43" Y="52"/>
-        <UsageCount Value="173"/>
+        <UsageCount Value="174"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit93>
       <Unit94>
@@ -1021,7 +1022,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="5"/>
         <CursorPos X="25" Y="18"/>
-        <UsageCount Value="124"/>
+        <UsageCount Value="125"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit94>
@@ -1033,7 +1034,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="14"/>
         <CursorPos X="37" Y="29"/>
-        <UsageCount Value="121"/>
+        <UsageCount Value="122"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit95>
@@ -1044,7 +1045,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="45"/>
         <CursorPos X="13" Y="72"/>
-        <UsageCount Value="69"/>
+        <UsageCount Value="70"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit96>
@@ -1056,123 +1057,127 @@
       <Define3 Value="WINDOWS"/>
       <Define4 Value="Lazarus"/>
     </OtherDefines>
-    <JumpHistory Count="29" HistoryIndex="28">
+    <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="ModelCurves\CurveTypesSingleton.pas"/>
-        <Caret Line="100" Column="23" TopLine="83"/>
+        <Filename Value="ModelCurves\UserPointsSet\CurveTypeStorageAdapter.pas"/>
+        <Caret Line="56" Column="12" TopLine="40"/>
       </Position1>
       <Position2>
-        <Filename Value="ModelCurves\CurveTypesSingleton.pas"/>
-        <Caret Line="94" TopLine="72"/>
+        <Filename Value="FitViewer.pas"/>
+        <Caret Line="250" Column="27" TopLine="232"/>
       </Position2>
       <Position3>
-        <Filename Value="ModelCurves\CurveTypesSingleton.pas"/>
-        <Caret Line="96" Column="24" TopLine="72"/>
+        <Filename Value="Forms\inputwavelengthdialog.pas"/>
+        <Caret Line="12" Column="27"/>
       </Position3>
       <Position4>
-        <Filename Value="ModelCurves\CurveTypesSingleton.pas"/>
-        <Caret Line="97" Column="57" TopLine="77"/>
+        <Filename Value="Forms\aboutboxdialog.pas"/>
+        <Caret Line="56" Column="40" TopLine="32"/>
       </Position4>
       <Position5>
-        <Filename Value="ModelCurves\CurveTypesSingleton.pas"/>
-        <Caret Line="117" Column="22" TopLine="101"/>
+        <Filename Value="Forms\mainform.pas"/>
+        <Caret Line="41" Column="59" TopLine="28"/>
       </Position5>
       <Position6>
-        <Filename Value="ModelCurves\CurveTypesSingleton.pas"/>
-        <Caret Line="118" Column="25" TopLine="101"/>
+        <Filename Value="Forms\mainform.pas"/>
+        <Caret Line="1048" Column="29" TopLine="1032"/>
       </Position6>
       <Position7>
-        <Filename Value="ModelCurves\CurveTypesSingleton.pas"/>
-        <Caret Line="45" Column="9" TopLine="29"/>
+        <Filename Value="Forms\mainform.pas"/>
+        <Caret Line="711" Column="13" TopLine="695"/>
       </Position7>
       <Position8>
-        <Filename Value="ModelCurves\CurveTypesSingleton.pas"/>
-        <Caret Line="91" Column="10" TopLine="77"/>
+        <Filename Value="Forms\inputwavelengthdialog.pas"/>
+        <Caret Line="12" Column="27"/>
       </Position8>
       <Position9>
         <Filename Value="ModelCurves\UserPointsSet\userpointssetpropdialog.pas"/>
         <Caret Line="17" Column="28" TopLine="7"/>
       </Position9>
       <Position10>
-        <Filename Value="ModelCurves\UserPointsSet\CurveTypeStorageAdapter.pas"/>
-        <Caret Line="56" Column="12" TopLine="40"/>
+        <Filename Value="Forms\mainform.pas"/>
+        <Caret Line="1040" Column="26" TopLine="1024"/>
       </Position10>
       <Position11>
-        <Filename Value="FitViewer.pas"/>
-        <Caret Line="250" Column="27" TopLine="232"/>
+        <Filename Value="Fit.lpr"/>
+        <Caret Line="75" Column="45" TopLine="57"/>
       </Position11>
       <Position12>
-        <Filename Value="Forms\inputwavelengthdialog.pas"/>
-        <Caret Line="12" Column="27"/>
+        <Filename Value="Forms\mainform.pas"/>
+        <Caret Line="1042" Column="64" TopLine="1036"/>
       </Position12>
       <Position13>
-        <Filename Value="Forms\aboutboxdialog.pas"/>
-        <Caret Line="56" Column="40" TopLine="32"/>
+        <Filename Value="Forms\mainform.pas"/>
+        <Caret Line="1838" Column="29" TopLine="1822"/>
       </Position13>
       <Position14>
         <Filename Value="Forms\mainform.pas"/>
-        <Caret Line="41" Column="59" TopLine="28"/>
+        <Caret Line="1844" Column="34" TopLine="1828"/>
       </Position14>
       <Position15>
         <Filename Value="Forms\mainform.pas"/>
-        <Caret Line="1048" Column="29" TopLine="1032"/>
+        <Caret Line="2060" Column="25" TopLine="2044"/>
       </Position15>
       <Position16>
         <Filename Value="Forms\mainform.pas"/>
-        <Caret Line="711" Column="13" TopLine="695"/>
+        <Caret Line="2062" Column="64" TopLine="2046"/>
       </Position16>
       <Position17>
-        <Filename Value="Forms\inputwavelengthdialog.pas"/>
-        <Caret Line="12" Column="27"/>
+        <Filename Value="ModelCurves\UserPointsSet\CurveTypeStorageAdapter.pas"/>
+        <Caret Line="57" Column="13" TopLine="40"/>
       </Position17>
       <Position18>
-        <Filename Value="ModelCurves\UserPointsSet\userpointssetpropdialog.pas"/>
-        <Caret Line="17" Column="28" TopLine="7"/>
+        <Filename Value="ModelCurves\UserPointsSet\CurveTypeStorageAdapter.pas"/>
+        <Caret Line="72" Column="13" TopLine="45"/>
       </Position18>
       <Position19>
-        <Filename Value="Forms\mainform.pas"/>
-        <Caret Line="1040" Column="26" TopLine="1024"/>
+        <Filename Value="Fit.lpr"/>
+        <Caret Line="73" Column="45" TopLine="57"/>
       </Position19>
       <Position20>
         <Filename Value="Fit.lpr"/>
-        <Caret Line="75" Column="45" TopLine="57"/>
+        <Caret Line="74" Column="11" TopLine="57"/>
       </Position20>
       <Position21>
-        <Filename Value="Forms\mainform.pas"/>
-        <Caret Line="1042" Column="64" TopLine="1036"/>
+        <Filename Value="Forms\aboutboxdialog.pas"/>
+        <Caret Line="45" Column="11" TopLine="5"/>
       </Position21>
       <Position22>
-        <Filename Value="Forms\mainform.pas"/>
-        <Caret Line="1838" Column="29" TopLine="1822"/>
+        <Filename Value="Forms\aboutboxdialog.pas"/>
+        <Caret Line="44" Column="11" TopLine="12"/>
       </Position22>
       <Position23>
-        <Filename Value="Forms\mainform.pas"/>
-        <Caret Line="1844" Column="34" TopLine="1828"/>
+        <Filename Value="Forms\aboutboxdialog.pas"/>
+        <Caret Line="43" Column="11" TopLine="12"/>
       </Position23>
       <Position24>
-        <Filename Value="Forms\mainform.pas"/>
-        <Caret Line="2060" Column="25" TopLine="2044"/>
+        <Filename Value="Forms\aboutboxdialog.pas"/>
+        <Caret Line="45" Column="11" TopLine="13"/>
       </Position24>
       <Position25>
-        <Filename Value="Forms\mainform.pas"/>
-        <Caret Line="2062" Column="64" TopLine="2046"/>
+        <Filename Value="Forms\aboutboxdialog.pas"/>
+        <Caret Line="59" TopLine="33"/>
       </Position25>
       <Position26>
-        <Filename Value="ModelCurves\UserPointsSet\CurveTypeStorageAdapter.pas"/>
-        <Caret Line="57" Column="13" TopLine="40"/>
+        <Filename Value="Forms\aboutboxdialog.pas"/>
+        <Caret Line="60" TopLine="33"/>
       </Position26>
       <Position27>
-        <Filename Value="ModelCurves\UserPointsSet\CurveTypeStorageAdapter.pas"/>
-        <Caret Line="72" Column="13" TopLine="45"/>
+        <Filename Value="Forms\aboutboxdialog.pas"/>
+        <Caret Line="59" TopLine="33"/>
       </Position27>
       <Position28>
-        <Filename Value="Fit.lpr"/>
-        <Caret Line="73" Column="45" TopLine="57"/>
+        <Filename Value="Forms\aboutboxdialog.pas"/>
+        <Caret Line="71" TopLine="39"/>
       </Position28>
       <Position29>
-        <Filename Value="Fit.lpr"/>
-        <Caret Line="74" Column="11" TopLine="57"/>
+        <Filename Value="Forms\aboutboxdialog.pas"/>
+        <Caret Line="69" TopLine="45"/>
       </Position29>
+      <Position30>
+        <Filename Value="Forms\aboutboxdialog.pas"/>
+        <Caret Line="68" TopLine="44"/>
+      </Position30>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

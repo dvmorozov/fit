@@ -7,7 +7,7 @@ object AboutBox: TAboutBox
   VertScrollBar.Page = 250
   ActiveControl = OKButton
   BorderStyle = bsDialog
-  Caption = 'About Fit'
+  Caption = 'About'
   ClientHeight = 240
   ClientWidth = 364
   DesignTimePPI = 120
@@ -39,7 +39,7 @@ object AboutBox: TAboutBox
       Font.Color = clBlack
       Font.Height = -16
       Font.Name = 'Courier New'
-      Font.Style = [fsBold, fsItalic]
+      Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 0
     end
@@ -55,24 +55,9 @@ object AboutBox: TAboutBox
       Font.Color = clBlack
       Font.Height = -16
       Font.Name = 'Courier New'
-      Font.Style = [fsBold, fsItalic]
+      Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 1
-    end
-    object StaticText8: TStaticText
-      Left = 1
-      Height = 20
-      Top = 136
-      Width = 351
-      Align = alTop
-      Alignment = taCenter
-      Caption = '2000-2008'
-      Font.CharSet = EASTEUROPE_CHARSET
-      Font.Color = clBlack
-      Font.Height = -13
-      Font.Name = 'Courier New'
-      ParentFont = False
-      TabOrder = 2
     end
     object StaticTextTitle: TStaticText
       Left = 1
@@ -88,7 +73,7 @@ object AboutBox: TAboutBox
       Font.Name = 'Courier New'
       Font.Style = [fsBold]
       ParentFont = False
-      TabOrder = 3
+      TabOrder = 2
     end
     object StaticText11: TStaticText
       Left = 1
@@ -97,45 +82,33 @@ object AboutBox: TAboutBox
       Width = 351
       Align = alTop
       Alignment = taCenter
-      Caption = 'version 1.0'
+      Caption = 'version 1.1'
       Font.CharSet = EASTEUROPE_CHARSET
       Font.Color = clBlack
       Font.Height = -16
       Font.Name = 'Courier New'
-      Font.Style = [fsBold, fsItalic]
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 3
+    end
+    object StaticTextGitHub: TStaticText
+      Cursor = crHandPoint
+      Left = 1
+      Height = 22
+      Top = 136
+      Width = 351
+      Align = alTop
+      Alignment = taCenter
+      Caption = 'GitHub'
+      DragCursor = crDefault
+      Font.CharSet = RUSSIAN_CHARSET
+      Font.Color = clNavy
+      Font.Height = -15
+      Font.Name = 'Courier New'
+      Font.Style = [fsUnderline]
+      OnClick = StaticTextGitHubClick
       ParentFont = False
       TabOrder = 4
-    end
-    object StaticText1: TStaticText
-      Left = 1
-      Height = 22
-      Top = 114
-      Width = 351
-      Align = alTop
-      Alignment = taCenter
-      Font.CharSet = RUSSIAN_CHARSET
-      Font.Color = clBlack
-      Font.Height = -15
-      Font.Name = 'Courier New'
-      Font.Style = [fsBold, fsItalic]
-      ParentFont = False
-      TabOrder = 5
-    end
-    object StaticText9: TStaticText
-      Left = 1
-      Height = 22
-      Top = 156
-      Width = 351
-      Align = alTop
-      Alignment = taCenter
-      Caption = 'e-mail: dvmorozov@mail.ru'
-      Font.CharSet = RUSSIAN_CHARSET
-      Font.Color = clBlack
-      Font.Height = -15
-      Font.Name = 'Courier New'
-      Font.Style = [fsBold, fsItalic]
-      ParentFont = False
-      TabOrder = 6
     end
     object StaticText2: TStaticText
       Left = 1
@@ -150,7 +123,22 @@ object AboutBox: TAboutBox
       Font.Name = 'Courier New'
       Font.Style = [fsBold, fsItalic]
       ParentFont = False
-      TabOrder = 7
+      TabOrder = 5
+    end
+    object StaticText1: TStaticText
+      Left = 1
+      Height = 22
+      Top = 114
+      Width = 351
+      Align = alTop
+      Alignment = taCenter
+      Font.CharSet = RUSSIAN_CHARSET
+      Font.Color = clBlack
+      Font.Height = -15
+      Font.Name = 'Courier New'
+      Font.Style = [fsBold, fsItalic]
+      ParentFont = False
+      TabOrder = 6
     end
   end
   object OKButton: TButton

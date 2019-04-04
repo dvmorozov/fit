@@ -9,7 +9,7 @@
       <TargetFileExt Value=".exe"/>
       <Title Value="FitServer"/>
       <UseXPManifest Value="True"/>
-      <ActiveEditorIndexAtStart Value="8"/>
+      <ActiveEditorIndexAtStart Value="12"/>
     </General>
     <VersionInfo>
       <ProjectVersion Value=""/>
@@ -51,7 +51,7 @@
         <MinVersion Major="1" Valid="True"/>
       </Item6>
     </RequiredPackages>
-    <Units Count="79">
+    <Units Count="84">
       <Unit0>
         <Filename Value="FitServer_.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -81,9 +81,7 @@
         <UnitName Value="DataLoader"/>
         <CursorPos X="5" Y="179"/>
         <TopLine Value="163"/>
-        <EditorIndex Value="7"/>
         <UsageCount Value="200"/>
-        <Loaded Value="True"/>
       </Unit2>
       <Unit3>
         <Filename Value="PointSetViewer.pas"/>
@@ -91,9 +89,7 @@
         <UnitName Value="PointSetViewer"/>
         <CursorPos X="51" Y="19"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="9"/>
         <UsageCount Value="200"/>
-        <Loaded Value="True"/>
       </Unit3>
       <Unit4>
         <Filename Value="IntegralInt.pas"/>
@@ -309,9 +305,7 @@
         <UnitName Value="ComponentList"/>
         <CursorPos X="19" Y="45"/>
         <TopLine Value="27"/>
-        <EditorIndex Value="11"/>
         <UsageCount Value="137"/>
-        <Loaded Value="True"/>
       </Unit30>
       <Unit31>
         <Filename Value="Runner.pas"/>
@@ -404,7 +398,7 @@
         <UnitName Value="FitServerApp"/>
         <CursorPos X="15" Y="65"/>
         <TopLine Value="44"/>
-        <EditorIndex Value="18"/>
+        <EditorIndex Value="16"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit42>
@@ -422,7 +416,7 @@
         <UnitName Value="FitTaskWithThread"/>
         <CursorPos X="64" Y="129"/>
         <TopLine Value="122"/>
-        <EditorIndex Value="13"/>
+        <EditorIndex Value="14"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit44>
@@ -432,7 +426,7 @@
         <UnitName Value="FitTask"/>
         <CursorPos X="59" Y="10"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="12"/>
+        <EditorIndex Value="13"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit45>
@@ -522,9 +516,7 @@
         <UnitName Value="MyExceptions"/>
         <CursorPos X="15" Y="20"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="17"/>
         <UsageCount Value="201"/>
-        <Loaded Value="True"/>
       </Unit56>
       <Unit57>
         <Filename Value="Packages\FitGrids\NumericGrid.pas"/>
@@ -540,9 +532,7 @@
         <UnitName Value="SelfCopied"/>
         <CursorPos X="5" Y="133"/>
         <TopLine Value="105"/>
-        <EditorIndex Value="16"/>
         <UsageCount Value="201"/>
-        <Loaded Value="True"/>
       </Unit58>
       <Unit59>
         <Filename Value="Packages\FitGrids\SelfSaved.pas"/>
@@ -557,9 +547,7 @@
         <UnitName Value="SimpMath"/>
         <CursorPos X="66" Y="919"/>
         <TopLine Value="914"/>
-        <EditorIndex Value="19"/>
         <UsageCount Value="201"/>
-        <Loaded Value="True"/>
       </Unit60>
       <Unit61>
         <Filename Value="Packages\FitGrids\TableComp.pas"/>
@@ -574,9 +562,7 @@
         <UnitName Value="TAGraph"/>
         <CursorPos X="100" Y="389"/>
         <TopLine Value="382"/>
-        <EditorIndex Value="14"/>
         <UsageCount Value="201"/>
-        <Loaded Value="True"/>
       </Unit62>
       <Unit63>
         <Filename Value="fit_server_imp.pas"/>
@@ -631,12 +617,12 @@
         <UnitName Value="Main"/>
         <CursorPos X="32" Y="9"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="8"/>
+        <EditorIndex Value="7"/>
         <UsageCount Value="206"/>
         <Loaded Value="True"/>
       </Unit69>
       <Unit70>
-        <Filename Value="..\..\..\..\..\lazarus_lib\wst-0.5\base_service_intf.pas"/>
+        <Filename Value="..\..\..\lazarus_lib\wst-0.5\base_service_intf.pas"/>
         <UnitName Value="base_service_intf"/>
         <CursorPos X="44" Y="332"/>
         <TopLine Value="317"/>
@@ -672,46 +658,105 @@
         <UsageCount Value="207"/>
       </Unit73>
       <Unit74>
-        <Filename Value="..\..\..\..\..\lazarus\fpc\2.2.0\source\rtl\inc\mathh.inc"/>
+        <Filename Value="..\..\..\lazarus\fpc\2.2.0\source\rtl\inc\mathh.inc"/>
         <CursorPos X="14" Y="64"/>
         <TopLine Value="43"/>
         <UsageCount Value="4"/>
       </Unit74>
       <Unit75>
-        <Filename Value="..\..\..\..\..\lazarus\fpc\2.2.0\source\rtl\inc\systemh.inc"/>
+        <Filename Value="..\..\..\lazarus\fpc\2.2.0\source\rtl\inc\systemh.inc"/>
         <CursorPos X="3" Y="339"/>
         <TopLine Value="318"/>
         <UsageCount Value="52"/>
       </Unit75>
       <Unit76>
-        <Filename Value="..\..\..\..\..\lazarus\lcl\graphics.pp"/>
+        <Filename Value="..\..\..\lazarus\lcl\graphics.pp"/>
         <UnitName Value="Graphics"/>
         <CursorPos X="15" Y="961"/>
         <TopLine Value="945"/>
         <UsageCount Value="1"/>
       </Unit76>
       <Unit77>
-        <Filename Value="..\..\..\..\..\lazarus\lcl\controls.pp"/>
+        <Filename Value="..\..\..\lazarus\lcl\controls.pp"/>
         <UnitName Value="Controls"/>
         <CursorPos X="40" Y="935"/>
         <TopLine Value="824"/>
         <UsageCount Value="41"/>
       </Unit77>
       <Unit78>
-        <Filename Value="C:\lazarus_lib\synapse\synapse\source\lib\blcksock.pas"/>
+        <Filename Value="..\..\..\lazarus_lib\synapse\synapse\source\lib\blcksock.pas"/>
         <UnitName Value="blcksock"/>
         <CursorPos X="48" Y="4149"/>
         <TopLine Value="4126"/>
-        <EditorIndex Value="10"/>
         <UsageCount Value="22"/>
-        <Loaded Value="True"/>
       </Unit78>
+      <Unit79>
+        <Filename Value="..\..\fitgrids\NumericGrid.pas"/>
+        <UnitName Value="NumericGrid"/>
+        <CursorPos X="9" Y="150"/>
+        <TopLine Value="128"/>
+        <EditorIndex Value="8"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit79>
+      <Unit80>
+        <Filename Value="..\..\..\lazarus-0.9.24\lcl\interfaces\win32\interfaces.pp"/>
+        <UnitName Value="Interfaces"/>
+        <CursorPos X="24" Y="45"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="9"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit80>
+      <Unit81>
+        <Filename Value="DataLoaders\DataLoader.pas"/>
+        <UnitName Value="DataLoader"/>
+        <CursorPos X="34" Y="19"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="10"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit81>
+      <Unit82>
+        <Filename Value="ModelCurves\PointsSet.pas"/>
+        <UnitName Value="PointsSet"/>
+        <CursorPos X="22" Y="16"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="11"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit82>
+      <Unit83>
+        <Filename Value="..\..\fitminimizers\CBRCComponent.pas"/>
+        <UnitName Value="CBRCComponent"/>
+        <CursorPos X="40" Y="40"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="12"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit83>
     </Units>
-    <JumpHistory Count="1" HistoryIndex="0">
+    <JumpHistory Count="5" HistoryIndex="4">
       <Position1>
-        <Filename Value="C:\lazarus_lib\synapse\synapse\source\lib\blcksock.pas"/>
+        <Filename Value="..\..\..\lazarus-0.9.24\lcl\interfaces\win32\interfaces.pp"/>
         <Caret Line="1" Column="1" TopLine="1"/>
       </Position1>
+      <Position2>
+        <Filename Value="DataLoaders\DataLoader.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
+      </Position2>
+      <Position3>
+        <Filename Value="ModelCurves\PointsSet.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
+      </Position3>
+      <Position4>
+        <Filename Value="..\..\fitminimizers\CBRCComponent.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
+      </Position4>
+      <Position5>
+        <Filename Value="..\..\fitminimizers\CBRCComponent.pas"/>
+        <Caret Line="63" Column="1" TopLine="20"/>
+      </Position5>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
@@ -721,10 +766,9 @@
       <Filename Value="o\$(TargetCPU)-$(TargetOS)\FitServer.exe"/>
     </Target>
     <SearchPaths>
-      <IncludeFiles Value="$(LazarusDir)\fpc\2.0.4\source\rtl\win32\wininc\;C:\lazarus_lib\wst-0.5\;$(LazarusDir)\lcl\interfaces\win32\;$(LazarusDir)\fpc\2.0.4\source\rtl\win32\;$(LazarusDir)\lcl\include\;$(LazarusDir)\fpc\2.2.0\source\rtl\inc\"/>
-      <OtherUnitFiles Value="D:\Projects\My\FitEasily\Lazarus\Repository\NewVCL\;Packages\TAGraph\Component\;$(LazarusDir)\components\jpeg\;$(LazarusDir)\components\images\;C:\lazarus_lib\synapse\synapse\source\lib\;C:\lazarus_lib\wst-0.5\;$(LazarusDir)\components\codetools\units\i386-win32\;Packages\FitGrids\"/>
+      <IncludeFiles Value="C:\Others\fit\Packages\wst-0.5\;$(LazarusDir)\lcl\interfaces\win32\;$(LazarusDir)\fpc\2.2.0\source\rtl\win32\;$(LazarusDir)\lcl\include\;$(LazarusDir)\fpc\2.2.0\source\rtl\inc\"/>
+      <OtherUnitFiles Value="C:\Others\fit\Packages\TAGraph\Component\;C:\Others\fitminimizers\;DataLoaders\;ModelCurves\;$(LazarusDir)\components\jpeg\;$(LazarusDir)\components\images\;C:\Others\fit\Packages\wst-0.5\;C:\Others\fit\Packages\synapse40\source\lib\;$(LazarusDir)\components\codetools\units\i386-win32\"/>
       <UnitOutputDirectory Value="o\FitServer\$(TargetCPU)-$(TargetOS)"/>
-      <SrcPath Value="C:\lazarus_lib\wst-0.5\"/>
     </SearchPaths>
     <Parsing>
       <SyntaxOptions>

@@ -15,6 +15,7 @@ All applications are built from the same code base by following compilation keys
 - FITPRO - incorporates parts responsible for network communications.
 - FITSERVER - incorporates backend code.
 - FITCLIENT - incorporates client code.
+- SERVER - controls building of server application.
 
 ## How to build desktop application
 

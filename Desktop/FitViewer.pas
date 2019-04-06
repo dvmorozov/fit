@@ -41,7 +41,11 @@ type
       On turning off CheckListBox item serie can be only hidden but not deleted
       because there is no direct connection between items of CheckListBox and
       items of PointsSetList. }
-    TFitViewer = class(TComponent, IFitViewer)
+    TFitViewer = class(TComponent
+{$IFNDEF SERVER}
+     , IFitViewer
+{$ENDIF}
+     )
     protected
 {$IFNDEF SERVER}
         FitClient: TFitClient;
@@ -164,6 +168,7 @@ type
             RFactorIntervals: TTitlePointsSet
             );
 {$ENDIF}
+{$IFNDEF SERVER}
         { Method of IFitViewer interface. }
         procedure ShowTime;
         { Method of IFitViewer interface. }
@@ -174,6 +179,7 @@ type
         procedure SetAnimationMode(On: Boolean);
         { Method of IFitViewer interface. }
         function GetAnimationMode: Boolean;
+{$ENDIF}
 
         procedure SetViewMarkers(AViewMarkers: Boolean);
         procedure ViewAllMarkers;
@@ -708,6 +714,7 @@ begin
     FUpdateLegends := Update;
 end;
 
+{$IFNDEF SERVER}
 procedure TFitViewer.ShowTime;
 begin
     TFormMain(Form).ShowTime;
@@ -742,6 +749,7 @@ function TFitViewer.GetAnimationMode: Boolean;
 begin
     Result := FAnimationMode;
 end;
+{$ENDIF}
 
 constructor TFitViewer.Create(AOwner: TComponent);
 begin

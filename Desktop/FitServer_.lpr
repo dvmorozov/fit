@@ -13,7 +13,7 @@ uses
   Forms,
   Variants,
   DataLoader in 'DataLoader.pas',
-  PointSetViewer in 'PointSetViewer.pas',
+  FitViewer,
   Math3d in '..\..\Library\Math\Math3d.pas',
   DownhillSimplexContainer in '..\..\Library\Algorithms\DownhillSimplexContainer.pas',
   DownhillSimplexAlgorithm in '..\..\Library\Algorithms\DownhillSimplexAlgorithm.pas',

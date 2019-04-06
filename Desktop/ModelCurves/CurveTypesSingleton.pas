@@ -21,6 +21,9 @@ uses Classes, SysUtils, NamedPointsSet, CBRCComponent, IntPointsSet,
 type
     { Class-reference type for base curve type. }
     TCurveClass = class of TNamedPointsSet;
+    { ENotImplementd isn't supported by Lazarus 0.9.24. It is used
+      for building server part using wst-0.5. }
+    ENotImplemented = class(Exception);
 
     { Class containing information about curve types. }
     TCurveType = class
@@ -41,7 +44,6 @@ type
         { Curve type selected by user. }
         FSelectedCurveType: TCurveType;
 
-        class var FCurveTypesSingleton: TCurveTypesSingleton;
         constructor Init;
 
     public
@@ -63,6 +65,9 @@ type
     end;
 
 implementation
+
+{ Class members aren't supported by Lazarus 0.9.24, global variable are used instead. }
+var FCurveTypesSingleton: TCurveTypesSingleton;
 
 const
   CurveTypeMustBeSelected: string = 'Curve type must be previously selected.';
@@ -178,7 +183,8 @@ end;
 
 function TCurveTypesSingleton.GetCurveTypeTag(CurveTypeId: TCurveTypeId): Integer;
 begin
-    Result := crc64(0, @CurveTypeId, SizeOf(CurveTypeId));
+    { crc32 is used for compatibility with Lazarus 0.9.24. }
+    Result := crc32(0, @CurveTypeId, SizeOf(CurveTypeId));
 end;
 
 procedure TCurveTypesSingleton.SelectCurveType(TypeId: TCurveTypeId);

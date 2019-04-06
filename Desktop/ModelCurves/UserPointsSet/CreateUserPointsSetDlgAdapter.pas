@@ -22,7 +22,6 @@ type
       dialog for configuring parameters of custom curve type. }
     TCreateUserPointsSetDlgAdapter = class(TCBRCComponent, ICreateUserPointsSetDlg)
     private
-        class var FCreateUserPointsSetDlgAdapter: TCreateUserPointsSetDlgAdapter;
         constructor Init;
 
     public
@@ -36,6 +35,9 @@ type
 implementation
 
 uses CreateUserPointsSetDialog;
+
+{ Class members aren't supported by Lazarus 0.9.24, global variable are used instead. }
+var FCreateUserPointsSetDlgAdapter: TCreateUserPointsSetDlgAdapter;
 
 constructor TCreateUserPointsSetDlgAdapter.Init;
 begin

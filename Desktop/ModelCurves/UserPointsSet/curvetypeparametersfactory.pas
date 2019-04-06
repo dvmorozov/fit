@@ -23,7 +23,6 @@ type
     TCurveTypeParametersFactory = class(TCBRCComponent,
         ICurveTypeParametersFactory)
     private
-        class var FCurveTypeParametersFactory: TCurveTypeParametersFactory;
         constructor Init;
 
     public
@@ -34,6 +33,9 @@ type
     end;
 
 implementation
+
+{ Class members aren't supported by Lazarus 0.9.24, global variable are used instead. }
+var FCurveTypeParametersFactory: TCurveTypeParametersFactory;
 
 constructor TCurveTypeParametersFactory.Init;
 begin

@@ -14,9 +14,11 @@ type
       { Returns true if curve type has parameters which should be configured
         by user, otherwise returns false. }
       class function HasConfigurableParameters: Boolean; override;
+{$IFNDEF SERVER}
       { Displays dialog for set up user configurable parameters. Returns true
         if dialog was confirmed and false if it was cancelled. }
       class function ShowConfigurationDialog: Boolean; override;
+{$ENDIF}
       { Returns true if user configurable parameters have default values,
         otherwise returns false. }
       class function HasDefaults: Boolean; override;
@@ -27,15 +29,21 @@ type
 implementation
 
 uses
-  UserPointsSetPropDialog, ExpressionParserAdapter, CurveTypeParametersFactory,
-  CreateUserPointsSetDlgAdapter, CurveTypeStorageAdapter, Settings,
-  Controls, Main, Dialogs, mainform;
+{$IFNDEF SERVER}
+  UserPointsSetPropDialog, ExpressionParserAdapter, CurveTypeStorageAdapter,
+  MainForm,
+{$ELSE}
+  FormServer,
+{$ENDIF}
+  CurveTypeParametersFactory, CreateUserPointsSetDlgAdapter, Settings,
+  Controls, Main, Dialogs;
 
 class function TConfigurableUserPointsSet.HasConfigurableParameters: Boolean;
 begin
     Result := True;
 end;
 
+{$IFNDEF SERVER}
 class function TConfigurableUserPointsSet.ShowConfigurationDialog: Boolean;
 var ct: Curve_type;
     ep: TExpressionParserAdapter;
@@ -84,6 +92,7 @@ dlg2:
     end;
 {$ENDIF}
 end;
+{$ENDIF}
 
 class function TConfigurableUserPointsSet.HasDefaults: Boolean;
 begin

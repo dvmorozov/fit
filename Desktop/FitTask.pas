@@ -232,7 +232,7 @@ type
 
 implementation
 
-uses Main, SimpMath, GeneralHashfunctions;
+uses Main, SimpMath, GeneralHashFunctions;
 
 {================================== TFitTask ==================================}
 

@@ -8,7 +8,7 @@ unit fit_server;
 {$IFDEF FPC} {$mode objfpc}{$H+} {$ENDIF}
 interface
 
-uses SysUtils, Classes, TypInfo, base_service_intf, service_intf;
+uses SysUtils, Classes, TypInfo, base_service_intf, service_intf, IntPointsSet;
 
 const
   sNAME_SPACE = 'FitServer';
@@ -242,9 +242,9 @@ type
     );
     function GetCurveType(
       const  ProblemID : integer
-    ):integer;
+    ):TCurveTypeId;
     procedure SetCurveType(
-      const  CurveTypeId : integer; 
+      const  CurveTypeId : TCurveTypeId;
       const  ProblemID : integer
     );
     function GetWaveLength(
@@ -1626,4 +1626,4 @@ initialization
   GetTypeRegistry().ItemByTypeInfo[TypeInfo(TPictureResult)].RegisterExternalPropertyName('_Result','Result');
   GetTypeRegistry().ItemByTypeInfo[TypeInfo(TStringResult)].RegisterExternalPropertyName('_Result','Result');
 
-End.
+End.

@@ -8,9 +8,10 @@ Unit fit_server_imp;
 {$IFDEF FPC} {$mode objfpc}{$H+} {$ENDIF}
 Interface
 
-Uses SysUtils, Classes, FitServerApp, ComponentList, CommonTypes,
+Uses SysUtils, Classes, FitServerApp, CommonTypes, ComponentList,
     DataLoader, MyExceptions, base_service_intf, server_service_intf,
-    server_service_imputils, fit_server;
+    server_service_imputils, fit_server, TitlePointsSet, PointsSet,
+    IntPointsSet;
 
 Type
   //  metody etogo klassa vyzyvayutsya vneschnimi klientami,
@@ -21,7 +22,7 @@ Type
   //  utechki pamyati;
   //  dannye ne mogut byt' svyazany s ekzemplyarom dannogo klassa,
   //  tak kak dlya kazhdogo vyzova sozayetsya novyi ekzemplyar klassa!
-  TFitServer_ServiceImp=class(TBaseServiceImplementation,IFitServer)
+  TFitServer_ServiceImp=class(TBaseServiceImplementation, IFitServer)
   Protected
     function SmoothProfile(
       const  ProblemID : integer
@@ -142,9 +143,9 @@ Type
     );
     function GetCurveType(
       const  ProblemID : integer
-    ):integer;
+    ):TCurveTypeId;
     procedure SetCurveType(
-      const  CurveTypeId : integer; 
+      const  CurveTypeId : TCurveTypeId;
       const  ProblemID : integer
     );
     function GetWaveLength(
@@ -2529,11 +2530,11 @@ End;
 
 function TFitServer_ServiceImp.GetCurveType(
   const  ProblemID : integer
-):integer;
+):TCurveTypeId;
 var Problem: TFitServerApp;
     EC: LongInt;
 Begin
-    Result := 0;
+    Result := StringToGuid('{00000000-0000-0000-0000-000000000000}');
     try
         Assert(Assigned(ProblemList));
 
@@ -2546,7 +2547,7 @@ Begin
             LeaveCriticalsection(CS);
         end;
         Problem := TFitServerApp(ProblemID);
-        Result := integer(Problem.FitStub.GetCurveType);
+        Result := Problem.FitStub.GetCurveType;
     except
         //  kod oschibki ne predusmotren
         on E: EUserException do
@@ -2562,7 +2563,7 @@ Begin
 End;
 
 procedure TFitServer_ServiceImp.SetCurveType(
-  const  CurveTypeId : integer; 
+  const  CurveTypeId : TCurveTypeId;
   const  ProblemID : integer
 );
 var Problem: TFitServerApp;
@@ -2580,7 +2581,7 @@ Begin
             LeaveCriticalsection(CS);
         end;
         Problem := TFitServerApp(ProblemID);
-        Problem.FitStub.SetCurveType(TCurveTypeId(CurveTypeId));
+        Problem.FitStub.SetCurveType(CurveTypeId);
     except
         //  kod oschibki ne predusmotren
         on E: EUserException do

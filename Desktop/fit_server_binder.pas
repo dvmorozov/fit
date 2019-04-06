@@ -8,7 +8,8 @@ unit fit_server_binder;
 {$IFDEF FPC} {$mode objfpc}{$H+} {$ENDIF}
 interface
 
-uses SysUtils, Classes, base_service_intf, server_service_intf, fit_server;
+uses SysUtils, Classes, base_service_intf, server_service_intf, fit_server,
+  IntPointsSet;
 
 type
 
@@ -1501,7 +1502,7 @@ var
   strPrmName : string;
   procName,trgName : string;
   ProblemID : integer;
-  returnVal : integer;
+  returnVal : TCurveTypeId;
 begin
   callCtx := AContext;
   
@@ -1540,7 +1541,7 @@ var
   callCtx : ICallContext;
   strPrmName : string;
   procName,trgName : string;
-  CurveTypeId : integer;
+  CurveTypeId : TCurveTypeId;
   ProblemID : integer;
 begin
   callCtx := AContext;

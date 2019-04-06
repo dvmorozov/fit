@@ -22,9 +22,9 @@ uses Classes, SysUtils,
      FitServerProxy,
 {$ELSE}
      //  Server build. Key SERVER is not necessary.
-     PointSetViewer,
+     FitViewer,
 {$ENDIF}
-     FitServerStub, FitServer,
+     FitServerStub, FitServer, FormServer,
      (* FitServerWithThread, *) FitServerMultithreaded;
 type
 	{ Class of server application. This class is basic unit of interaction with client. }
@@ -34,7 +34,7 @@ type
         FFitProxy: TFitServerProxy;
 {$ELSE}
         FViewer: TFitViewer;
-        FForm: TForm1;
+        FForm: TFormMain;
 {$ENDIF}
         FFitStub: TFitServerStub;
         FFitServer: TFitServer;
@@ -50,7 +50,7 @@ type
         property FitProxy: TFitServerProxy read FFitProxy;
 {$ELSE}
         property Viewer: TFitViewer read FViewer;
-        property Form: TForm1 read FForm;
+        property Form: TFormMain read FForm;
 {$ENDIF}
         property FitStub: TFitServerStub read FFitStub;
     end;
@@ -68,7 +68,7 @@ begin
 {$IFDEF FIT}
     FFitProxy := TFitServerProxy.Create(nil);
 {$ELSE}
-    FForm := TForm1.Create(nil);
+    FForm := TFormMain.Create(nil);
     FViewer := TFitViewer.Create(nil);
     FViewer.Form := FForm;
 {$ENDIF}

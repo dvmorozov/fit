@@ -21,9 +21,9 @@ uses
 
 type
 
-  { TForm1 }
+  { TFormMain }
 
-  TForm1 = class(TForm)
+  TFormMain = class(TForm)
     ApplicationProperties1: TApplicationProperties;
     Chart: TTAChart;
     Panel1: TPanel;
@@ -34,7 +34,7 @@ type
   end; 
 
 var
-  Form1: TForm1; 
+  FormMain: TFormMain;
 
 implementation
 

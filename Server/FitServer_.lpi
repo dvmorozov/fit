@@ -9,7 +9,7 @@
       <TargetFileExt Value=".exe"/>
       <Title Value="FitServer"/>
       <UseXPManifest Value="True"/>
-      <ActiveEditorIndexAtStart Value="6"/>
+      <ActiveEditorIndexAtStart Value="0"/>
     </General>
     <VersionInfo>
       <ProjectVersion Value=""/>
@@ -51,13 +51,13 @@
         <MinVersion Major="1" Valid="True"/>
       </Item6>
     </RequiredPackages>
-    <Units Count="89">
+    <Units Count="90">
       <Unit0>
         <Filename Value="FitServer_.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="FitServer_"/>
-        <CursorPos X="1" Y="1"/>
-        <TopLine Value="1"/>
+        <CursorPos X="34" Y="52"/>
+        <TopLine Value="17"/>
         <EditorIndex Value="8"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
@@ -194,7 +194,7 @@
         <CursorPos X="24" Y="53"/>
         <TopLine Value="35"/>
         <EditorIndex Value="18"/>
-        <UsageCount Value="81"/>
+        <UsageCount Value="82"/>
         <Loaded Value="True"/>
       </Unit16>
       <Unit17>
@@ -324,8 +324,7 @@
         <UsageCount Value="123"/>
       </Unit32>
       <Unit33>
-        <Filename Value="FitServer.pas"/>
-        <IsPartOfProject Value="True"/>
+        <Filename Value="..\Common\FitServer.pas"/>
         <UnitName Value="FitServer"/>
         <CursorPos X="123" Y="73"/>
         <TopLine Value="64"/>
@@ -604,7 +603,7 @@
         <CursorPos X="9" Y="16"/>
         <TopLine Value="1"/>
         <EditorIndex Value="4"/>
-        <UsageCount Value="64"/>
+        <UsageCount Value="65"/>
         <Loaded Value="True"/>
       </Unit66>
       <Unit67>
@@ -659,7 +658,7 @@
         <CursorPos X="9" Y="150"/>
         <TopLine Value="128"/>
         <EditorIndex Value="19"/>
-        <UsageCount Value="30"/>
+        <UsageCount Value="31"/>
         <Loaded Value="True"/>
       </Unit73>
       <Unit74>
@@ -668,7 +667,7 @@
         <CursorPos X="24" Y="45"/>
         <TopLine Value="1"/>
         <EditorIndex Value="20"/>
-        <UsageCount Value="30"/>
+        <UsageCount Value="31"/>
         <Loaded Value="True"/>
       </Unit74>
       <Unit75>
@@ -677,7 +676,7 @@
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
         <EditorIndex Value="21"/>
-        <UsageCount Value="30"/>
+        <UsageCount Value="31"/>
         <Loaded Value="True"/>
       </Unit75>
       <Unit76>
@@ -686,7 +685,7 @@
         <CursorPos X="22" Y="16"/>
         <TopLine Value="1"/>
         <EditorIndex Value="22"/>
-        <UsageCount Value="30"/>
+        <UsageCount Value="31"/>
         <Loaded Value="True"/>
       </Unit76>
       <Unit77>
@@ -695,7 +694,7 @@
         <CursorPos X="40" Y="40"/>
         <TopLine Value="1"/>
         <EditorIndex Value="23"/>
-        <UsageCount Value="30"/>
+        <UsageCount Value="31"/>
         <Loaded Value="True"/>
       </Unit77>
       <Unit78>
@@ -704,7 +703,7 @@
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
         <EditorIndex Value="24"/>
-        <UsageCount Value="30"/>
+        <UsageCount Value="31"/>
         <Loaded Value="True"/>
       </Unit78>
       <Unit79>
@@ -713,7 +712,7 @@
         <CursorPos X="17" Y="19"/>
         <TopLine Value="1"/>
         <EditorIndex Value="9"/>
-        <UsageCount Value="30"/>
+        <UsageCount Value="31"/>
         <Loaded Value="True"/>
       </Unit79>
       <Unit80>
@@ -722,7 +721,7 @@
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
         <EditorIndex Value="10"/>
-        <UsageCount Value="30"/>
+        <UsageCount Value="31"/>
         <Loaded Value="True"/>
       </Unit80>
       <Unit81>
@@ -731,7 +730,7 @@
         <CursorPos X="1" Y="69"/>
         <TopLine Value="50"/>
         <EditorIndex Value="11"/>
-        <UsageCount Value="13"/>
+        <UsageCount Value="14"/>
         <Loaded Value="True"/>
       </Unit81>
       <Unit82>
@@ -740,7 +739,7 @@
         <CursorPos X="88" Y="37"/>
         <TopLine Value="8"/>
         <EditorIndex Value="12"/>
-        <UsageCount Value="13"/>
+        <UsageCount Value="14"/>
         <Loaded Value="True"/>
       </Unit82>
       <Unit83>
@@ -749,7 +748,7 @@
         <CursorPos X="1" Y="41"/>
         <TopLine Value="22"/>
         <EditorIndex Value="13"/>
-        <UsageCount Value="12"/>
+        <UsageCount Value="13"/>
         <Loaded Value="True"/>
       </Unit83>
       <Unit84>
@@ -758,7 +757,7 @@
         <CursorPos X="8" Y="28"/>
         <TopLine Value="10"/>
         <EditorIndex Value="15"/>
-        <UsageCount Value="12"/>
+        <UsageCount Value="13"/>
         <Loaded Value="True"/>
       </Unit84>
       <Unit85>
@@ -767,7 +766,7 @@
         <CursorPos X="15" Y="44"/>
         <TopLine Value="19"/>
         <EditorIndex Value="7"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit85>
       <Unit86>
@@ -783,7 +782,7 @@
         <CursorPos X="46" Y="18"/>
         <TopLine Value="1"/>
         <EditorIndex Value="1"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit87>
       <Unit88>
@@ -792,9 +791,16 @@
         <CursorPos X="46" Y="166"/>
         <TopLine Value="148"/>
         <EditorIndex Value="2"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit88>
+      <Unit89>
+        <Filename Value="FitServer.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="FitServer"/>
+        <UsageCount Value="21"/>
+        <SyntaxHighlighter Value="Text"/>
+      </Unit89>
     </Units>
     <JumpHistory Count="1" HistoryIndex="0">
       <Position1>
@@ -811,7 +817,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="C:\Others\fit\Packages\wst-0.5\;$(LazarusDir)\lcl\interfaces\win32\;$(LazarusDir)\fpc\2.2.0\source\rtl\win32\;$(LazarusDir)\lcl\include\;$(LazarusDir)\fpc\2.2.0\source\rtl\inc\"/>
-      <OtherUnitFiles Value="..\Packages\TAGraph\Component\;..\Desktop\;..\..\fitminimizers-0.9.24\;..\CgiClient\;..\Desktop\DataLoaders\;..\Desktop\ModelCurves\;..\Desktop\ModelCurves\UserPointsSet\;$(LazarusDir)\components\jpeg\;$(LazarusDir)\components\images\;..\Packages\wst-0.5\;..\Packages\synapse40\source\lib\;$(LazarusDir)\components\codetools\units\i386-win32\"/>
+      <OtherUnitFiles Value="..\Packages\TAGraph\Component\;..\Desktop\;..\..\fitminimizers-0.9.24\;..\CgiClient\;..\Desktop\DataLoaders\;..\Desktop\ModelCurves\;..\Desktop\ModelCurves\UserPointsSet\;$(LazarusDir)\components\jpeg\;$(LazarusDir)\components\images\;..\Packages\wst-0.5\;..\Packages\synapse40\source\lib\;$(LazarusDir)\components\codetools\units\i386-win32\;C:\Others\fit\Common\"/>
       <UnitOutputDirectory Value="o\FitServer\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Parsing>

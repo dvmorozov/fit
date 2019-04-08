@@ -19,7 +19,7 @@ uses
   Minimizer in 'Minimizer.pas',
   MSCRDataClasses in 'MSCRDataClasses.pas', Minimizer_DS,
   InputWavelengthDialog, InputBackFactorDialog, InputMaxRFactorDialog,
-  CombEnumerator, FitServer, MainCalcThread, FitClient, FitClientStub,
+  CombEnumerator, MainCalcThread, FitClient, FitClientStub,
   FitServerStub, FitServerProxy, FitClientApp, FitServerApp,
   DataClasses, FitServerWithThread, FitTask, 
   FitServerMultithreaded, Settings, TurboPowerIPro,

@@ -9,7 +9,7 @@
       <TargetFileExt Value=".exe"/>
       <Title Value="FitServer"/>
       <UseXPManifest Value="True"/>
-      <ActiveEditorIndexAtStart Value="2"/>
+      <ActiveEditorIndexAtStart Value="6"/>
     </General>
     <VersionInfo>
       <ProjectVersion Value=""/>
@@ -28,27 +28,27 @@
     </RunParams>
     <RequiredPackages Count="6">
       <Item1>
-        <PackageName Value="TurboPowerIPro"/>
-        <MinVersion Major="1" Valid="True"/>
-      </Item1>
-      <Item2>
-        <PackageName Value="IDEIntf"/>
-        <MinVersion Major="1" Valid="True"/>
-      </Item2>
-      <Item3>
-        <PackageName Value="FCL"/>
-        <MinVersion Major="1" Valid="True"/>
-      </Item3>
-      <Item4>
-        <PackageName Value="LCL"/>
-      </Item4>
-      <Item5>
-        <PackageName Value="ta"/>
-        <MinVersion Major="1" Minor="1" Valid="True"/>
-      </Item5>
-      <Item6>
         <PackageName Value="FitGrids"/>
         <MinVersion Valid="True"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="ta"/>
+        <MinVersion Major="1" Minor="1" Valid="True"/>
+      </Item2>
+      <Item3>
+        <PackageName Value="LCL"/>
+      </Item3>
+      <Item4>
+        <PackageName Value="FCL"/>
+        <MinVersion Major="1" Valid="True"/>
+      </Item4>
+      <Item5>
+        <PackageName Value="IDEIntf"/>
+        <MinVersion Major="1" Valid="True"/>
+      </Item5>
+      <Item6>
+        <PackageName Value="TurboPowerIPro"/>
+        <MinVersion Major="1" Valid="True"/>
       </Item6>
     </RequiredPackages>
     <Units Count="89">
@@ -56,7 +56,7 @@
         <Filename Value="FitServer_.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="FitServer_"/>
-        <CursorPos X="1" Y="16"/>
+        <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
         <EditorIndex Value="8"/>
         <UsageCount Value="200"/>
@@ -77,7 +77,6 @@
       </Unit1>
       <Unit2>
         <Filename Value="..\Desktop\DataLoader.pas"/>
-        <IsPartOfProject Value="True"/>
         <UnitName Value="DataLoader"/>
         <CursorPos X="5" Y="179"/>
         <TopLine Value="163"/>
@@ -553,7 +552,7 @@
         <UsageCount Value="201"/>
       </Unit60>
       <Unit61>
-        <Filename Value="..\Desktop\fit_server_imp.pas"/>
+        <Filename Value="fit_server_imp.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="fit_server_imp"/>
         <CursorPos X="63" Y="25"/>
@@ -563,7 +562,7 @@
         <Loaded Value="True"/>
       </Unit61>
       <Unit62>
-        <Filename Value="..\Desktop\fit_server.pas"/>
+        <Filename Value="fit_server.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="fit_server"/>
         <CursorPos X="40" Y="247"/>
@@ -573,11 +572,11 @@
         <Loaded Value="True"/>
       </Unit62>
       <Unit63>
-        <Filename Value="..\Desktop\fit_server_binder.pas"/>
+        <Filename Value="fit_server_binder.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="fit_server_binder"/>
-        <CursorPos X="29" Y="1544"/>
-        <TopLine Value="1526"/>
+        <CursorPos X="4" Y="2688"/>
+        <TopLine Value="2659"/>
         <EditorIndex Value="6"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
@@ -797,15 +796,11 @@
         <Loaded Value="True"/>
       </Unit88>
     </Units>
-    <JumpHistory Count="2" HistoryIndex="1">
+    <JumpHistory Count="1" HistoryIndex="0">
       <Position1>
-        <Filename Value="..\..\fitminimizers-0.9.24\SimpMath.pas"/>
-        <Caret Line="18" Column="46" TopLine="1"/>
+        <Filename Value="fit_server_binder.pas"/>
+        <Caret Line="1544" Column="29" TopLine="1526"/>
       </Position1>
-      <Position2>
-        <Filename Value="..\..\fitminimizers-0.9.24\Tools.pas"/>
-        <Caret Line="1" Column="1" TopLine="1"/>
-      </Position2>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

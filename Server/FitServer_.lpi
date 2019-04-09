@@ -9,7 +9,7 @@
       <TargetFileExt Value=".exe"/>
       <Title Value="FitServer"/>
       <UseXPManifest Value="True"/>
-      <ActiveEditorIndexAtStart Value="26"/>
+      <ActiveEditorIndexAtStart Value="21"/>
     </General>
     <VersionInfo>
       <ProjectVersion Value=""/>
@@ -56,7 +56,7 @@
         <Filename Value="FitServer_.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="FitServer_"/>
-        <CursorPos X="34" Y="52"/>
+        <CursorPos X="86" Y="18"/>
         <TopLine Value="17"/>
         <EditorIndex Value="8"/>
         <UsageCount Value="200"/>
@@ -84,7 +84,6 @@
       </Unit2>
       <Unit3>
         <Filename Value="..\Desktop\PointSetViewer.pas"/>
-        <IsPartOfProject Value="True"/>
         <UnitName Value="PointSetViewer"/>
         <CursorPos X="51" Y="19"/>
         <TopLine Value="1"/>
@@ -111,28 +110,34 @@
         <UsageCount Value="164"/>
       </Unit5>
       <Unit6>
-        <Filename Value="..\Desktop\Minimizer_S.pas"/>
+        <Filename Value="Minimizer_S.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Minimizer_S"/>
         <CursorPos X="48" Y="287"/>
         <TopLine Value="268"/>
+        <EditorIndex Value="21"/>
         <UsageCount Value="200"/>
+        <Loaded Value="True"/>
       </Unit6>
       <Unit7>
-        <Filename Value="..\Desktop\Minimizer.pas"/>
+        <Filename Value="Minimizer.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Minimizer"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
+        <EditorIndex Value="20"/>
         <UsageCount Value="200"/>
+        <Loaded Value="True"/>
       </Unit7>
       <Unit8>
-        <Filename Value="..\Desktop\MSCRDataClasses.pas"/>
+        <Filename Value="MSCRDataClasses.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="MSCRDataClasses"/>
-        <CursorPos X="21" Y="1"/>
+        <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
+        <EditorIndex Value="19"/>
         <UsageCount Value="200"/>
+        <Loaded Value="True"/>
       </Unit8>
       <Unit9>
         <Filename Value="..\Desktop\TAGraph\Component\TAGraph.pas"/>
@@ -142,12 +147,14 @@
         <UsageCount Value="129"/>
       </Unit9>
       <Unit10>
-        <Filename Value="..\Desktop\Minimizer_DS.pas"/>
+        <Filename Value="Minimizer_DS.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Minimizer_DS"/>
         <CursorPos X="36" Y="22"/>
         <TopLine Value="15"/>
+        <EditorIndex Value="18"/>
         <UsageCount Value="200"/>
+        <Loaded Value="True"/>
       </Unit10>
       <Unit11>
         <Filename Value="..\Desktop\Unit5.pas"/>
@@ -160,12 +167,14 @@
         <UsageCount Value="165"/>
       </Unit11>
       <Unit12>
-        <Filename Value="..\Desktop\CombEnumerator.pas"/>
+        <Filename Value="CombEnumerator.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="CombEnumerator"/>
         <CursorPos X="11" Y="163"/>
         <TopLine Value="146"/>
+        <EditorIndex Value="17"/>
         <UsageCount Value="200"/>
+        <Loaded Value="True"/>
       </Unit12>
       <Unit13>
         <Filename Value="..\Desktop\SimpMath.pas"/>
@@ -193,7 +202,7 @@
         <UnitName Value="ClassInheritIDs"/>
         <CursorPos X="24" Y="53"/>
         <TopLine Value="35"/>
-        <EditorIndex Value="18"/>
+        <EditorIndex Value="23"/>
         <UsageCount Value="82"/>
         <Loaded Value="True"/>
       </Unit16>
@@ -219,34 +228,37 @@
         <UsageCount Value="130"/>
       </Unit19>
       <Unit20>
-        <Filename Value="..\Desktop\DataClasses.pas"/>
+        <Filename Value="DataClasses.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="DataClasses"/>
-        <CursorPos X="20" Y="328"/>
-        <TopLine Value="301"/>
+        <CursorPos X="131" Y="321"/>
+        <TopLine Value="289"/>
         <EditorIndex Value="16"/>
         <UsageCount Value="207"/>
         <Loaded Value="True"/>
       </Unit20>
       <Unit21>
-        <Filename Value="..\Desktop\Math3d.pas"/>
+        <Filename Value="Math3d.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Math3d"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
+        <EditorIndex Value="37"/>
         <UsageCount Value="207"/>
+        <Loaded Value="True"/>
       </Unit21>
       <Unit22>
-        <Filename Value="..\Desktop\DownhillSimplexContainer.pas"/>
+        <Filename Value="DownhillSimplexContainer.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="DownhillSimplexContainer"/>
         <CursorPos X="23" Y="389"/>
         <TopLine Value="366"/>
+        <EditorIndex Value="36"/>
         <UsageCount Value="207"/>
+        <Loaded Value="True"/>
       </Unit22>
       <Unit23>
         <Filename Value="..\Desktop\DownhillSimplexAlgorithm.pas"/>
-        <IsPartOfProject Value="True"/>
         <UnitName Value="DownhillSimplexAlgorithm"/>
         <CursorPos X="5" Y="449"/>
         <TopLine Value="469"/>
@@ -262,27 +274,30 @@
       </Unit24>
       <Unit25>
         <Filename Value="..\Desktop\Algorithm.pas"/>
-        <IsPartOfProject Value="True"/>
         <UnitName Value="Algorithm"/>
         <CursorPos X="19" Y="18"/>
         <TopLine Value="1"/>
         <UsageCount Value="207"/>
       </Unit25>
       <Unit26>
-        <Filename Value="..\Desktop\AlgorithmContainer.pas"/>
+        <Filename Value="AlgorithmContainer.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="AlgorithmContainer"/>
         <CursorPos X="17" Y="42"/>
         <TopLine Value="23"/>
+        <EditorIndex Value="35"/>
         <UsageCount Value="207"/>
+        <Loaded Value="True"/>
       </Unit26>
       <Unit27>
-        <Filename Value="..\Desktop\ObjSavingStringList.pas"/>
+        <Filename Value="ObjSavingStringList.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ObjSavingStringList"/>
         <CursorPos X="49" Y="14"/>
         <TopLine Value="1"/>
+        <EditorIndex Value="34"/>
         <UsageCount Value="207"/>
+        <Loaded Value="True"/>
       </Unit27>
       <Unit28>
         <Filename Value="..\Desktop\Unit4.pas"/>
@@ -302,12 +317,14 @@
         <UsageCount Value="133"/>
       </Unit29>
       <Unit30>
-        <Filename Value="..\Desktop\Runner.pas"/>
+        <Filename Value="Runner.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Runner"/>
         <CursorPos X="6" Y="28"/>
         <TopLine Value="10"/>
+        <EditorIndex Value="33"/>
         <UsageCount Value="207"/>
+        <Loaded Value="True"/>
       </Unit30>
       <Unit31>
         <Filename Value="..\Desktop\TableComp.pas"/>
@@ -338,12 +355,14 @@
         <UsageCount Value="165"/>
       </Unit34>
       <Unit35>
-        <Filename Value="..\Desktop\MainCalcThread.pas"/>
+        <Filename Value="MainCalcThread.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="MainCalcThread"/>
         <CursorPos X="33" Y="21"/>
         <TopLine Value="26"/>
+        <EditorIndex Value="32"/>
         <UsageCount Value="200"/>
+        <Loaded Value="True"/>
       </Unit35>
       <Unit36>
         <Filename Value="..\Desktop\FitClientStub.pas"/>
@@ -389,7 +408,7 @@
         <UnitName Value="FitServerApp"/>
         <CursorPos X="22" Y="21"/>
         <TopLine Value="9"/>
-        <EditorIndex Value="28"/>
+        <EditorIndex Value="39"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit41>
@@ -409,7 +428,7 @@
         <UnitName Value="FitTaskWithThread"/>
         <CursorPos X="61" Y="138"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="26"/>
+        <EditorIndex Value="31"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit43>
@@ -419,7 +438,7 @@
         <UnitName Value="FitTask"/>
         <CursorPos X="59" Y="10"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="25"/>
+        <EditorIndex Value="30"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit44>
@@ -429,7 +448,7 @@
         <UnitName Value="FitServerMultithreaded"/>
         <CursorPos X="76" Y="16"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="29"/>
+        <EditorIndex Value="40"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit45>
@@ -588,7 +607,7 @@
         <UnitName Value="Main"/>
         <CursorPos X="39" Y="184"/>
         <TopLine Value="112"/>
-        <EditorIndex Value="17"/>
+        <EditorIndex Value="22"/>
         <UsageCount Value="206"/>
         <Loaded Value="True"/>
       </Unit64>
@@ -616,7 +635,7 @@
         <UnitName Value="FormServer"/>
         <CursorPos X="21" Y="42"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="27"/>
+        <EditorIndex Value="38"/>
         <UsageCount Value="202"/>
         <Loaded Value="True"/>
       </Unit67>
@@ -659,7 +678,7 @@
         <UnitName Value="NumericGrid"/>
         <CursorPos X="9" Y="150"/>
         <TopLine Value="128"/>
-        <EditorIndex Value="19"/>
+        <EditorIndex Value="24"/>
         <UsageCount Value="31"/>
         <Loaded Value="True"/>
       </Unit73>
@@ -668,7 +687,7 @@
         <UnitName Value="Interfaces"/>
         <CursorPos X="24" Y="45"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="20"/>
+        <EditorIndex Value="25"/>
         <UsageCount Value="31"/>
         <Loaded Value="True"/>
       </Unit74>
@@ -677,7 +696,7 @@
         <UnitName Value="DataLoader"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="21"/>
+        <EditorIndex Value="26"/>
         <UsageCount Value="31"/>
         <Loaded Value="True"/>
       </Unit75>
@@ -686,7 +705,7 @@
         <UnitName Value="PointsSet"/>
         <CursorPos X="22" Y="16"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="22"/>
+        <EditorIndex Value="27"/>
         <UsageCount Value="31"/>
         <Loaded Value="True"/>
       </Unit76>
@@ -695,7 +714,7 @@
         <UnitName Value="CBRCComponent"/>
         <CursorPos X="40" Y="40"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="23"/>
+        <EditorIndex Value="28"/>
         <UsageCount Value="31"/>
         <Loaded Value="True"/>
       </Unit77>
@@ -704,7 +723,7 @@
         <UnitName Value="SimpMath"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="24"/>
+        <EditorIndex Value="29"/>
         <UsageCount Value="31"/>
         <Loaded Value="True"/>
       </Unit78>

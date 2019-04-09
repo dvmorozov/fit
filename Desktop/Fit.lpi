@@ -13,7 +13,7 @@
     </General>
     <VersionInfo>
       <AutoIncrementBuild Value="True"/>
-      <BuildNr Value="1141"/>
+      <BuildNr Value="1142"/>
       <StringTable ProductVersion="0.0.0.1001"/>
     </VersionInfo>
     <BuildModes Count="2">
@@ -110,7 +110,7 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="17"/>
         <WindowIndex Value="1"/>
-        <CursorPos X="42" Y="19"/>
+        <CursorPos X="18" Y="12"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -185,7 +185,6 @@
       </Unit5>
       <Unit6>
         <Filename Value="Minimizer_S.pas"/>
-        <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <CursorPos Y="111"/>
@@ -194,7 +193,6 @@
       </Unit6>
       <Unit7>
         <Filename Value="Minimizer.pas"/>
-        <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <CursorPos X="30" Y="96"/>
@@ -203,7 +201,6 @@
       </Unit7>
       <Unit8>
         <Filename Value="MSCRDataClasses.pas"/>
-        <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <CursorPos X="21" Y="18"/>
@@ -212,7 +209,6 @@
       </Unit8>
       <Unit9>
         <Filename Value="Minimizer_DS.pas"/>
-        <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <CursorPos X="23" Y="171"/>
@@ -236,7 +232,6 @@
       </Unit10>
       <Unit11>
         <Filename Value="CombEnumerator.pas"/>
-        <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <CursorPos X="45" Y="184"/>
@@ -264,7 +259,6 @@
       </Unit13>
       <Unit14>
         <Filename Value="DataClasses.pas"/>
-        <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <TopLine Value="14"/>
@@ -274,7 +268,6 @@
       </Unit14>
       <Unit15>
         <Filename Value="Math3d.pas"/>
-        <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <UsageCount Value="207"/>
@@ -282,7 +275,6 @@
       </Unit15>
       <Unit16>
         <Filename Value="DownhillSimplexContainer.pas"/>
-        <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <CursorPos X="51" Y="76"/>
@@ -312,7 +304,6 @@
       </Unit19>
       <Unit20>
         <Filename Value="AlgorithmContainer.pas"/>
-        <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <CursorPos Y="91"/>
@@ -321,7 +312,6 @@
       </Unit20>
       <Unit21>
         <Filename Value="ObjSavingStringList.pas"/>
-        <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <CursorPos X="16" Y="14"/>
@@ -346,7 +336,6 @@
       </Unit22>
       <Unit23>
         <Filename Value="Runner.pas"/>
-        <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <TopLine Value="10"/>
@@ -386,7 +375,6 @@
       </Unit26>
       <Unit27>
         <Filename Value="MainCalcThread.pas"/>
-        <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <CursorPos Y="57"/>
@@ -944,7 +932,7 @@
         <UnitName Value="ConfigurableUserPointsSet"/>
         <IsVisibleTab Value="True"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="30"/>
+        <TopLine Value="29"/>
         <CursorPos X="17" Y="80"/>
         <UsageCount Value="215"/>
         <Loaded Value="True"/>

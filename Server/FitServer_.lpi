@@ -9,7 +9,7 @@
       <TargetFileExt Value=".exe"/>
       <Title Value="FitServer"/>
       <UseXPManifest Value="True"/>
-      <ActiveEditorIndexAtStart Value="0"/>
+      <ActiveEditorIndexAtStart Value="26"/>
     </General>
     <VersionInfo>
       <ProjectVersion Value=""/>
@@ -28,27 +28,27 @@
     </RunParams>
     <RequiredPackages Count="6">
       <Item1>
-        <PackageName Value="FitGrids"/>
-        <MinVersion Valid="True"/>
-      </Item1>
-      <Item2>
-        <PackageName Value="ta"/>
-        <MinVersion Major="1" Minor="1" Valid="True"/>
-      </Item2>
-      <Item3>
-        <PackageName Value="LCL"/>
-      </Item3>
-      <Item4>
-        <PackageName Value="FCL"/>
-        <MinVersion Major="1" Valid="True"/>
-      </Item4>
-      <Item5>
-        <PackageName Value="IDEIntf"/>
-        <MinVersion Major="1" Valid="True"/>
-      </Item5>
-      <Item6>
         <PackageName Value="TurboPowerIPro"/>
         <MinVersion Major="1" Valid="True"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="IDEIntf"/>
+        <MinVersion Major="1" Valid="True"/>
+      </Item2>
+      <Item3>
+        <PackageName Value="FCL"/>
+        <MinVersion Major="1" Valid="True"/>
+      </Item3>
+      <Item4>
+        <PackageName Value="LCL"/>
+      </Item4>
+      <Item5>
+        <PackageName Value="ta"/>
+        <MinVersion Major="1" Minor="1" Valid="True"/>
+      </Item5>
+      <Item6>
+        <PackageName Value="FitGrids"/>
+        <MinVersion Valid="True"/>
       </Item6>
     </RequiredPackages>
     <Units Count="90">
@@ -328,9 +328,7 @@
         <UnitName Value="FitServer"/>
         <CursorPos X="123" Y="73"/>
         <TopLine Value="64"/>
-        <EditorIndex Value="0"/>
         <UsageCount Value="200"/>
-        <Loaded Value="True"/>
       </Unit33>
       <Unit34>
         <Filename Value="..\Desktop\FitClient.pas"/>
@@ -355,12 +353,12 @@
         <UsageCount Value="169"/>
       </Unit36>
       <Unit37>
-        <Filename Value="..\Desktop\FitServerStub.pas"/>
+        <Filename Value="FitServerStub.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="FitServerStub"/>
-        <CursorPos X="41" Y="39"/>
-        <TopLine Value="21"/>
-        <EditorIndex Value="3"/>
+        <CursorPos X="87" Y="37"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="2"/>
         <UsageCount Value="204"/>
         <Loaded Value="True"/>
       </Unit37>
@@ -386,35 +384,37 @@
         <UsageCount Value="180"/>
       </Unit40>
       <Unit41>
-        <Filename Value="..\Desktop\FitServerApp.pas"/>
+        <Filename Value="FitServerApp.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="FitServerApp"/>
-        <CursorPos X="15" Y="65"/>
-        <TopLine Value="44"/>
+        <CursorPos X="22" Y="21"/>
+        <TopLine Value="9"/>
         <EditorIndex Value="28"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit41>
       <Unit42>
-        <Filename Value="..\Desktop\FitServerWithThread.pas"/>
+        <Filename Value="FitServerWithThread.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="FitServerWithThread"/>
-        <CursorPos X="5" Y="77"/>
-        <TopLine Value="56"/>
+        <CursorPos X="54" Y="74"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="3"/>
         <UsageCount Value="200"/>
+        <Loaded Value="True"/>
       </Unit42>
       <Unit43>
-        <Filename Value="..\Desktop\FitTaskWithThread.pas"/>
+        <Filename Value="FitTaskWithThread.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="FitTaskWithThread"/>
-        <CursorPos X="64" Y="129"/>
-        <TopLine Value="122"/>
+        <CursorPos X="61" Y="138"/>
+        <TopLine Value="1"/>
         <EditorIndex Value="26"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit43>
       <Unit44>
-        <Filename Value="..\Desktop\FitTask.pas"/>
+        <Filename Value="FitTask.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="FitTask"/>
         <CursorPos X="59" Y="10"/>
@@ -424,12 +424,14 @@
         <Loaded Value="True"/>
       </Unit44>
       <Unit45>
-        <Filename Value="..\Desktop\FitServerMultithreaded.pas"/>
+        <Filename Value="FitServerMultithreaded.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="FitServerMultithreaded"/>
-        <CursorPos X="5" Y="82"/>
-        <TopLine Value="61"/>
+        <CursorPos X="76" Y="16"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="29"/>
         <UsageCount Value="200"/>
+        <Loaded Value="True"/>
       </Unit45>
       <Unit46>
         <Filename Value="..\Desktop\Unit2.pas"/>
@@ -781,7 +783,7 @@
         <UnitName Value="SimpMath"/>
         <CursorPos X="46" Y="18"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="0"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit87>
@@ -790,7 +792,7 @@
         <UnitName Value="Tools"/>
         <CursorPos X="46" Y="166"/>
         <TopLine Value="148"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="1"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit88>
@@ -798,16 +800,11 @@
         <Filename Value="FitServer.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="FitServer"/>
-        <UsageCount Value="21"/>
+        <UsageCount Value="22"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit89>
     </Units>
-    <JumpHistory Count="1" HistoryIndex="0">
-      <Position1>
-        <Filename Value="fit_server_binder.pas"/>
-        <Caret Line="1544" Column="29" TopLine="1526"/>
-      </Position1>
-    </JumpHistory>
+    <JumpHistory Count="0" HistoryIndex="-1"/>
   </ProjectOptions>
   <CompilerOptions>
     <Version Value="5"/>

@@ -20,11 +20,11 @@ uses
   MSCRDataClasses in 'MSCRDataClasses.pas', Minimizer_DS,
   InputWavelengthDialog, InputBackFactorDialog, InputMaxRFactorDialog,
   CombEnumerator, MainCalcThread, FitClient, FitClientStub,
-  FitServerStub, FitServerProxy, FitClientApp, FitServerApp,
-  DataClasses, FitServerWithThread, FitTask, 
-  FitServerMultithreaded, Settings, TurboPowerIPro,
+  FitClientApp,
+  DataClasses,
+  Settings, TurboPowerIPro,
   FitGrids, SelfCheckedComponentList,
-  FitTaskWithThread, StrUtils
+  StrUtils
 {$ifdef windows}
   ,ta
 {$else}

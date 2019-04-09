@@ -13,7 +13,7 @@
     </General>
     <VersionInfo>
       <AutoIncrementBuild Value="True"/>
-      <BuildNr Value="1140"/>
+      <BuildNr Value="1141"/>
       <StringTable ProductVersion="0.0.0.1001"/>
     </VersionInfo>
     <BuildModes Count="2">
@@ -108,7 +108,7 @@
       <Unit0>
         <Filename Value="Fit.lpr"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="19"/>
+        <EditorIndex Value="17"/>
         <WindowIndex Value="1"/>
         <CursorPos X="42" Y="19"/>
         <UsageCount Value="200"/>
@@ -121,7 +121,7 @@
         <ComponentName Value="FormMain"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="18"/>
+        <EditorIndex Value="16"/>
         <WindowIndex Value="1"/>
         <TopLine Value="2046"/>
         <CursorPos X="64" Y="2062"/>
@@ -158,7 +158,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="InputWavelengthDialog"/>
-        <EditorIndex Value="22"/>
+        <EditorIndex Value="20"/>
         <WindowIndex Value="1"/>
         <TopLine Value="28"/>
         <CursorPos X="21" Y="40"/>
@@ -226,7 +226,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="InputBackFactorDialog"/>
-        <EditorIndex Value="20"/>
+        <EditorIndex Value="18"/>
         <WindowIndex Value="1"/>
         <CursorPos X="27" Y="12"/>
         <UsageCount Value="201"/>
@@ -335,7 +335,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="InputMaxRFactorDialog"/>
-        <EditorIndex Value="21"/>
+        <EditorIndex Value="19"/>
         <WindowIndex Value="1"/>
         <TopLine Value="16"/>
         <CursorPos X="27" Y="12"/>
@@ -357,7 +357,7 @@
       <Unit24>
         <Filename Value="TableComp.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="15"/>
+        <EditorIndex Value="13"/>
         <WindowIndex Value="1"/>
         <TopLine Value="380"/>
         <CursorPos Y="450"/>
@@ -404,18 +404,15 @@
       </Unit28>
       <Unit29>
         <Filename Value="FitServerStub.pas"/>
-        <IsPartOfProject Value="True"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <TopLine Value="4"/>
         <CursorPos X="16" Y="20"/>
         <UsageCount Value="204"/>
-        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit29>
       <Unit30>
         <Filename Value="FitServerProxy.pas"/>
-        <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <TopLine Value="9"/>
@@ -443,17 +440,13 @@
       </Unit32>
       <Unit33>
         <Filename Value="FitServerApp.pas"/>
-        <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <UsageCount Value="200"/>
-        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit33>
       <Unit34>
         <Filename Value="FitServerWithThread.pas"/>
-        <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <CursorPos X="15" Y="140"/>
@@ -462,7 +455,6 @@
       </Unit34>
       <Unit35>
         <Filename Value="FitTaskWithThread.pas"/>
-        <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <CursorPos X="30" Y="177"/>
@@ -471,18 +463,15 @@
       </Unit35>
       <Unit36>
         <Filename Value="FitTask.pas"/>
-        <IsPartOfProject Value="True"/>
-        <EditorIndex Value="24"/>
+        <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <TopLine Value="780"/>
         <CursorPos X="25" Y="796"/>
         <UsageCount Value="200"/>
-        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit36>
       <Unit37>
         <Filename Value="FitServerMultithreaded.pas"/>
-        <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <CursorPos Y="30"/>
@@ -504,7 +493,7 @@
       <Unit39>
         <Filename Value="Settings.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="14"/>
+        <EditorIndex Value="12"/>
         <WindowIndex Value="1"/>
         <TopLine Value="29"/>
         <CursorPos X="18" Y="43"/>
@@ -640,7 +629,7 @@
       <Unit56>
         <Filename Value="FitViewer.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="12"/>
+        <EditorIndex Value="10"/>
         <WindowIndex Value="1"/>
         <TopLine Value="193"/>
         <CursorPos Y="193"/>
@@ -706,7 +695,7 @@
       <Unit63>
         <Filename Value="DataLoaders\CSVFileLoader.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="7"/>
+        <EditorIndex Value="5"/>
         <WindowIndex Value="1"/>
         <TopLine Value="10"/>
         <CursorPos X="9" Y="37"/>
@@ -736,7 +725,7 @@
       <Unit66>
         <Filename Value="ModelCurves\CurvePointsSet.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="8"/>
+        <EditorIndex Value="6"/>
         <WindowIndex Value="1"/>
         <TopLine Value="61"/>
         <CursorPos X="5" Y="71"/>
@@ -804,7 +793,7 @@
       <Unit73>
         <Filename Value="ModelCurves\TitlePointsSet.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="16"/>
+        <EditorIndex Value="14"/>
         <WindowIndex Value="1"/>
         <CursorPos X="32" Y="23"/>
         <UsageCount Value="239"/>
@@ -814,7 +803,7 @@
       <Unit74>
         <Filename Value="ModelCurves\TwoBranchesPseudoVoigtPointsSet.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="17"/>
+        <EditorIndex Value="15"/>
         <WindowIndex Value="1"/>
         <TopLine Value="51"/>
         <CursorPos X="24" Y="66"/>
@@ -852,7 +841,7 @@
       <Unit78>
         <Filename Value="ModelCurves\CurveTypesSingleton.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="13"/>
+        <EditorIndex Value="11"/>
         <WindowIndex Value="1"/>
         <TopLine Value="17"/>
         <CursorPos Y="46"/>
@@ -890,7 +879,7 @@
       <Unit82>
         <Filename Value="ModelCurves\IntPointsSet.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="23"/>
+        <EditorIndex Value="21"/>
         <WindowIndex Value="1"/>
         <TopLine Value="7"/>
         <CursorPos X="32" Y="28"/>
@@ -914,7 +903,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="CreateUserPointsSetDialog"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="3"/>
         <WindowIndex Value="1"/>
         <TopLine Value="4"/>
         <CursorPos X="26" Y="26"/>
@@ -930,7 +919,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="UserPointsSetPropDialog"/>
-        <EditorIndex Value="10"/>
+        <EditorIndex Value="8"/>
         <WindowIndex Value="1"/>
         <TopLine Value="51"/>
         <CursorPos X="6" Y="67"/>
@@ -953,8 +942,9 @@
         <Filename Value="ModelCurves\UserPointsSet\configurableuserpointsset.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ConfigurableUserPointsSet"/>
+        <IsVisibleTab Value="True"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="31"/>
+        <TopLine Value="30"/>
         <CursorPos X="17" Y="80"/>
         <UsageCount Value="215"/>
         <Loaded Value="True"/>
@@ -1020,7 +1010,7 @@
       <Unit94>
         <Filename Value="ModelCurves\UserPointsSet\CreateUserPointsSetDlgAdapter.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="4"/>
         <WindowIndex Value="1"/>
         <TopLine Value="5"/>
         <CursorPos X="25" Y="18"/>
@@ -1032,7 +1022,7 @@
         <Filename Value="ModelCurves\UserPointsSet\curvetypeparametersfactory.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="CurveTypeParametersFactory"/>
-        <EditorIndex Value="9"/>
+        <EditorIndex Value="7"/>
         <WindowIndex Value="1"/>
         <TopLine Value="14"/>
         <CursorPos X="37" Y="29"/>
@@ -1043,7 +1033,7 @@
       <Unit96>
         <Filename Value="ModelCurves\UserPointsSet\CurveTypeStorageAdapter.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="11"/>
+        <EditorIndex Value="9"/>
         <WindowIndex Value="1"/>
         <TopLine Value="45"/>
         <CursorPos X="13" Y="72"/>

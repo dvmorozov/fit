@@ -21,6 +21,7 @@ uses SysUtils, FitClientStub, MyExceptions, IntClientCallback,
      CBRCComponent;
 
 type
+    { Proxy class transmitting messages from server back to client. }
     TFitServerProxy = class(TCBRCComponent, IClientCallback)
     protected
         FFitStub: TFitClientStub;

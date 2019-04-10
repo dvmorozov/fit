@@ -19,15 +19,23 @@ interface
 
 uses Classes, SysUtils,
 {$IFDEF FIT}
+     { Connects back to client in monolithic application for callbacks. }
      FitServerProxy,
 {$ELSE}
-     //  Server build. Key SERVER is not necessary.
+     { Server build. Key SERVER is not necessary. }
      FitViewer,
 {$ENDIF}
-     FitServerStub, FitServer, FormServer,
-     (* FitServerWithThread, *) FitServerMultithreaded;
+     { Receives messages from client. }
+     FitServerStub,
+     { Implements server logic. }
+     FitServer,
+     { Contains server form with chart component. }
+     FormServer,
+     { Contains algorithm container. }
+     FitServerMultithreaded;
 type
-	{ Class of server application. This class is basic unit of interaction with client. }
+    { Class of server application. This class is basic unit of interaction
+      with client. }
     TFitServerApp = class(TComponent)
     protected
 {$IFDEF FIT}
@@ -93,7 +101,6 @@ end;
 procedure TFitServerApp.RecreateServer;
 begin
     FFitServer.Free; FFitServer := nil;
-    //FFitServer := TFitServerWithThread.Create(nil);
     FFitServer := TFitServerMultithreaded.Create(nil);
 {$IFDEF FIT}
     FFitServer.FitProxy := FFitProxy;

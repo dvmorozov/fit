@@ -1,4 +1,4 @@
-//  servernaya chast'; predusmotret' variant sborki bez GUI
+{ Server application. }
 program FitServer_;
 
 {$MODE Delphi}
@@ -7,7 +7,7 @@ program FitServer_;
 
 uses
 {$ifdef unix}
-  cthreads,     //  neobhodimo dlya linux
+  cthreads,     //  for linux
 {$endif}
   Interfaces,   //  LCL widgetset
   Forms,
@@ -16,7 +16,6 @@ uses
   FitViewer,
   Math3d in '..\..\Library\Math\Math3d.pas',
   DownhillSimplexContainer in '..\..\Library\Algorithms\DownhillSimplexContainer.pas',
-  Decisions in '..\..\Library\Algorithms\Decisions.pas',
   AlgorithmContainer in '..\..\Library\Algorithms\AlgorithmContainer.pas',
   Runner in '..\..\Library\Common\Runner.pas',
   ObjSavingStringList in '..\..\Library\Common\ObjSavingStringList.pas',

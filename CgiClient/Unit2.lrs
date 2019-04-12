@@ -1,4 +1,6 @@
+{ This is an automatically generated lazarus resource file }
+
 LazarusResources.Add('TCGIDatamodule2','FORMDATA',[
-  'TPF0'#241#15'TCGIDatamodule2'#14'CGIDatamodule2'#6'Height'#3#240#0#5'Width'#3
-  +'@'#1#0#0
+  'TPF0'#241#15'TCGIDatamodule2'#14'CGIDatamodule2'#6'Height'#3#240#0#16'Horizo'
+  +'ntalOffset'#2#12#14'VerticalOffset'#2'w'#5'Width'#3'@'#1#0#0
 ]);

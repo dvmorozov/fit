@@ -6,7 +6,9 @@ unit Unit2;
 interface
 
 uses
-  Classes, SysUtils, LResources, cgiModules, DataLoader;
+  Classes, SysUtils, LResources, cgiModules, TitlePointsSet, DATFileLoader,
+  PointsSet, DataLoader, LorentzPointsSet, PseudoVoigtPointsSet, GaussPointsSet,
+  CurvePointsSet;
 
 type
 
@@ -1912,12 +1914,12 @@ begin
         //  izvlechenie tipa patterna
         PatternType := Application.RequestVariables['pattern_type'];
         if UpperCase(Trim(PatternType)) = 'LORENTZIAN' then
-            Proxy.CurveType := Lorentzian
+            Proxy.CurveTypeId := TLorentzPointsSet.GetCurveTypeId_
         else
         if UpperCase(Trim(PatternType)) = 'PSEUDOVOIGT' then
-            Proxy.CurveType := PseudoVoigtian
+            Proxy.CurveTypeId := TPseudoVoigtPointsSet.GetCurveTypeId_
         else
-            Proxy.CurveType := Gaussian;
+            Proxy.CurveTypeId := TGaussPointsSet.GetCurveTypeId_;
         //??? special'nye patterny poka ne obrabatyvayutsya
         GoToSpecimenPositions;
     end

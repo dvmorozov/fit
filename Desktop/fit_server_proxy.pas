@@ -9,7 +9,8 @@ Unit fit_server_proxy;
 {$IFDEF FPC} {$mode objfpc}{$H+} {$ENDIF}
 Interface
 
-Uses SysUtils, Classes, TypInfo, base_service_intf, service_intf, fit_server;
+Uses SysUtils, Classes, TypInfo, IntPointsSet,
+    base_service_intf, service_intf, fit_server;
 
 Type
 
@@ -131,9 +132,9 @@ Type
     );
     function GetCurveType(
       const  ProblemID : integer
-    ):integer;
+    ):TCurveTypeId;
     procedure SetCurveType(
-      const  CurveTypeId : integer; 
+      const  CurveTypeId : TCurveTypeId;
       const  ProblemID : integer
     );
     function GetWaveLength(
@@ -1075,7 +1076,7 @@ End;
 
 function TFitServer_Proxy.GetCurveType(
   const  ProblemID : integer
-):integer;
+):TCurveTypeId;
 Var
   locSerializer : IFormatterClient;
   strPrmName : string;
@@ -1098,7 +1099,7 @@ Begin
 End;
 
 procedure TFitServer_Proxy.SetCurveType(
-  const  CurveTypeId : integer; 
+  const  CurveTypeId : TCurveTypeId;
   const  ProblemID : integer
 );
 Var
@@ -1743,7 +1744,7 @@ End;
 
 
 initialization
-  {$i fit_server.wst}
+  {$i ..\Server\fit_server.wst}
 
   {$IF DECLARED(Register_fit_server_ServiceMetadata)}
   Register_fit_server_ServiceMetadata();

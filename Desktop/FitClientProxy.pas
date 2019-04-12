@@ -19,6 +19,9 @@ interface
 uses SysUtils, MSCRDataClasses, CommonTypes, PointsSet, SelfCopied,
     MyExceptions, IntPointsSet, TitlePointsSet, CurvePointsSet,
 {$IFNDEF FIT}
+{$IFDEF FITCGI}
+    Classes, fit_server, NamedPointsSet,
+{$ENDIF}
     base_service_intf,
     fit_server_proxy                //  Calls the server via network.
 {$ELSE}
@@ -29,8 +32,8 @@ uses SysUtils, MSCRDataClasses, CommonTypes, PointsSet, SelfCopied,
 type
 {$IFNDEF FIT}
     TFitServerStub = IFitServer;    //  TFitServerStub is substituted by
-                                    //  TFitClientProxy to access the server
-                                    //  via network.
+                                    //  IFitServer to access the server
+                                    //  via XMP-RPC (wst-5.0).
 {$ENDIF}
 
 {$IFDEF FITPRO} {$DEFINE USE_RESULT_PROCESSING} {$ENDIF}
@@ -153,12 +156,13 @@ type
         property CurveTypeId: TCurveTypeId read GetCurveType write SetCurveType;
         property State: TFitServerState read GetState;
         property WaveLength: Double read GetWaveLength write SetWaveLength;
-
         property FitStub: TFitServerStub read FFitStub write FFitStub;
     end;
 
 implementation
 
+{ Provides access to ProblemID, which is global variable. }
+uses Main;
 
 const OutOfServerResources: string = 'Out of server resources.';
 
@@ -237,7 +241,7 @@ procedure TFitClientProxy.SetCurveType(ACurveType: TCurveTypeId);
 begin
     Assert(Assigned(FitStub));
 {$IFNDEF FIT}
-    FitStub.SetCurveType(LongInt(ACurveType), ProblemID);
+    FitStub.SetCurveType(ACurveType, ProblemID);
 {$ELSE}
     FitStub.SetCurveType(ACurveType);
 {$ENDIF}
@@ -895,7 +899,7 @@ begin
 
                 Points := CreateNamedPointsSet(R._Result);
                 Result.Add(Points);
-                Points.SetTypeName(R.Name);
+                Points.SetCurveTypeName(R.Name);
             finally
                 R.Free;
             end;

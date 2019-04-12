@@ -45,8 +45,7 @@ uses
   Sysutils, Dialogs,
   fit_server_imp, metadata_service_imp, server_listener, fit_server,
   server_binary_formatter, server_service_soap, server_service_xmlrpc,
-  fit_server_binder, synapse_tcp_server, Main, FormServer, NumericGrid,
-  GeneralHashFunctions, FitServer;
+  fit_server_binder, synapse_tcp_server, Main, FormServer, NumericGrid, FitServer;
 
 {$R manifest.res}
 

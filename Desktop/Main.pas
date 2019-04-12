@@ -42,7 +42,7 @@ uses SysUtils, Forms
         synapse_http_protocol, soap_formatter, binary_formatter,
         base_service_intf
 {$IFDEF FITCGI}
-    , FitClientProxy
+    , FitClientProxy, PointsSet, NamedPointsSet
 {$ENDIF}
     //{$ENDIF}
 {$ENDIF}

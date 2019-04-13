@@ -5,7 +5,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>860</x>
-      <y>230</y>
+      <y>340</y>
       <w>180</w>
       <h>40</h>
     </coordinates>
@@ -16,7 +16,7 @@
     <id>UMLInterface</id>
     <coordinates>
       <x>590</x>
-      <y>60</y>
+      <y>170</y>
       <w>80</w>
       <h>90</h>
     </coordinates>
@@ -29,7 +29,7 @@
     <id>Relation</id>
     <coordinates>
       <x>640</x>
-      <y>110</y>
+      <y>220</y>
       <w>330</w>
       <h>140</h>
     </coordinates>
@@ -40,7 +40,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>230</x>
-      <y>230</y>
+      <y>340</y>
       <w>180</w>
       <h>40</h>
     </coordinates>
@@ -51,7 +51,7 @@
     <id>Relation</id>
     <coordinates>
       <x>310</x>
-      <y>110</y>
+      <y>220</y>
       <w>320</w>
       <h>140</h>
     </coordinates>
@@ -62,7 +62,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>230</x>
-      <y>390</y>
+      <y>500</y>
       <w>180</w>
       <h>40</h>
     </coordinates>
@@ -73,18 +73,18 @@
     <id>Relation</id>
     <coordinates>
       <x>310</x>
-      <y>260</y>
+      <y>370</y>
       <w>30</w>
       <h>150</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;130.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>620</x>
-      <y>230</y>
+      <y>340</y>
       <w>260</w>
       <h>50</h>
     </coordinates>
@@ -97,7 +97,7 @@ m2=provide
     <id>Relation</id>
     <coordinates>
       <x>400</x>
-      <y>230</y>
+      <y>340</y>
       <w>240</w>
       <h>50</h>
     </coordinates>
@@ -110,7 +110,7 @@ m1=require
     <id>UMLClass</id>
     <coordinates>
       <x>860</x>
-      <y>390</y>
+      <y>180</y>
       <w>180</w>
       <h>40</h>
     </coordinates>
@@ -121,20 +121,20 @@ FitServer_.lpr</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>940</x>
-      <y>260</y>
+      <x>980</x>
+      <y>210</y>
       <w>30</w>
       <h>150</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;130.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;130.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>1200</x>
-      <y>230</y>
-      <w>120</w>
+      <y>340</y>
+      <w>180</w>
       <h>40</h>
     </coordinates>
     <panel_attributes>TFitServerApp</panel_attributes>
@@ -144,7 +144,7 @@ FitServer_.lpr</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>1030</x>
-      <y>240</y>
+      <y>350</y>
       <w>190</w>
       <h>30</h>
     </coordinates>
@@ -155,7 +155,7 @@ FitServer_.lpr</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>230</x>
-      <y>550</y>
+      <y>660</y>
       <w>180</w>
       <h>40</h>
     </coordinates>
@@ -166,7 +166,7 @@ FitServer_.lpr</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>310</x>
-      <y>420</y>
+      <y>530</y>
       <w>30</w>
       <h>150</h>
     </coordinates>
@@ -177,7 +177,7 @@ FitServer_.lpr</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>230</x>
-      <y>710</y>
+      <y>820</y>
       <w>180</w>
       <h>40</h>
     </coordinates>
@@ -189,7 +189,7 @@ CgiFit.lpr</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>310</x>
-      <y>580</y>
+      <y>690</y>
       <w>30</w>
       <h>150</h>
     </coordinates>
@@ -200,7 +200,7 @@ CgiFit.lpr</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>450</x>
-      <y>710</y>
+      <y>820</y>
       <w>180</w>
       <h>40</h>
     </coordinates>
@@ -212,7 +212,7 @@ Fit.lpr</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>350</x>
-      <y>580</y>
+      <y>690</y>
       <w>210</w>
       <h>150</h>
     </coordinates>
@@ -223,7 +223,7 @@ Fit.lpr</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>0</x>
-      <y>710</y>
+      <y>820</y>
       <w>180</w>
       <h>40</h>
     </coordinates>
@@ -235,7 +235,7 @@ FitPro.lpr</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>80</x>
-      <y>580</y>
+      <y>690</y>
       <w>220</w>
       <h>150</h>
     </coordinates>
@@ -246,8 +246,8 @@ FitPro.lpr</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1200</x>
-      <y>390</y>
-      <w>120</w>
+      <y>500</y>
+      <w>180</w>
       <h>40</h>
     </coordinates>
     <panel_attributes>TFitServerProxy</panel_attributes>
@@ -256,8 +256,8 @@ FitPro.lpr</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1250</x>
-      <y>260</y>
+      <x>1280</x>
+      <y>370</y>
       <w>30</w>
       <h>150</h>
     </coordinates>
@@ -267,8 +267,8 @@ FitPro.lpr</panel_attributes>
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>1420</x>
-      <y>390</y>
+      <x>1530</x>
+      <y>500</y>
       <w>120</w>
       <h>90</h>
     </coordinates>
@@ -280,20 +280,20 @@ FitPro.lpr</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1310</x>
-      <y>400</y>
-      <w>180</w>
+      <x>1370</x>
+      <y>510</y>
+      <w>230</w>
       <h>30</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>160.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>210.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>1200</x>
-      <y>550</y>
-      <w>120</w>
+      <y>660</y>
+      <w>180</w>
       <h>40</h>
     </coordinates>
     <panel_attributes>TFitClientStub</panel_attributes>
@@ -302,8 +302,8 @@ FitPro.lpr</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1250</x>
-      <y>490</y>
+      <x>1280</x>
+      <y>600</y>
       <w>70</w>
       <h>80</h>
     </coordinates>
@@ -315,8 +315,8 @@ m2=provide
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1240</x>
-      <y>420</y>
+      <x>1270</x>
+      <y>530</y>
       <w>80</w>
       <h>90</h>
     </coordinates>
@@ -328,20 +328,20 @@ m1=require
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1310</x>
-      <y>440</y>
-      <w>190</w>
+      <x>1370</x>
+      <y>550</y>
+      <w>220</w>
       <h>150</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>170.0;10.0;170.0;130.0;10.0;130.0</additional_attributes>
+    <additional_attributes>200.0;10.0;200.0;130.0;10.0;130.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>1200</x>
-      <y>680</y>
-      <w>120</w>
+      <y>820</y>
+      <w>180</w>
       <h>40</h>
     </coordinates>
     <panel_attributes>TFitClient</panel_attributes>
@@ -350,23 +350,123 @@ m1=require
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1310</x>
-      <y>440</y>
-      <w>210</w>
-      <h>280</h>
+      <x>1370</x>
+      <y>550</y>
+      <w>260</w>
+      <h>310</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>190.0;10.0;190.0;260.0;10.0;260.0</additional_attributes>
+    <additional_attributes>240.0;10.0;240.0;290.0;10.0;290.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1220</x>
-      <y>420</y>
+      <x>1240</x>
+      <y>530</y>
       <w>30</w>
       <h>150</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;130.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>860</x>
+      <y>500</y>
+      <w>180</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>TFitServerStub</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1200</x>
+      <y>180</y>
+      <w>180</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>TFitServer</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>400</x>
+      <y>510</y>
+      <w>480</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;460.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>980</x>
+      <y>370</y>
+      <w>290</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>270.0;10.0;270.0;70.0;10.0;70.0;10.0;130.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1280</x>
+      <y>210</y>
+      <w>30</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;130.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>670</x>
+      <y>570</y>
+      <w>140</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Direct
+calls</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>730</x>
+      <y>510</y>
+      <w>30</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>670</x>
+      <y>410</y>
+      <w>140</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>XML-RPC</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>730</x>
+      <y>350</y>
+      <w>30</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
   </element>
 </diagram>

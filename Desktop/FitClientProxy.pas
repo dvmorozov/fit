@@ -19,8 +19,10 @@ interface
 uses SysUtils, MSCRDataClasses, CommonTypes, PointsSet, SelfCopied,
     MyExceptions, IntPointsSet, TitlePointsSet, CurvePointsSet,
 {$IFNDEF FIT}
+    {FITCGI or FITPRO}
+    fit_server,
 {$IFDEF FITCGI}
-    Classes, fit_server, NamedPointsSet,
+    Classes, NamedPointsSet,
 {$ENDIF}
     base_service_intf,
     fit_server_proxy                //  Calls the server via network.
@@ -30,7 +32,7 @@ uses SysUtils, MSCRDataClasses, CommonTypes, PointsSet, SelfCopied,
     ;
   
 type
-{$IFNDEF FIT}
+{$IF DEFINED(FIT) OR DEFINED(FITPRO)}
     TFitServerStub = IFitServer;    //  TFitServerStub is substituted by
                                     //  IFitServer to access the server
                                     //  via XMP-RPC (wst-5.0).
@@ -126,7 +128,7 @@ type
         procedure FindPeakBounds;
         procedure FindBackPoints;
         procedure FindPeakPositions;
-{$IFDEF FIT}
+{$IF DEFINED(FIT) OR DEFINED(FITPRO)}
         procedure AllPointsAsPeakPositions;
 {$ENDIF}
 {$IFDEF FITCGI}
@@ -1176,7 +1178,7 @@ begin
     end;
 end;
 
-{$IFDEF FIT}
+{$IF DEFINED(FIT) OR DEFINED(FITPRO)}
 procedure TFitClientProxy.AllPointsAsPeakPositions;
 var Res: LongInt;
     ErrMsg: string;

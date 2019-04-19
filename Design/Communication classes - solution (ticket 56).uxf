@@ -390,7 +390,7 @@ m1=require
       <h>217</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;.
-FitStub</panel_attributes>
+FitService</panel_attributes>
     <additional_attributes>310.0;290.0;310.0;200.0;10.0;200.0;10.0;10.0</additional_attributes>
   </element>
   <element>
@@ -502,7 +502,9 @@ calls</panel_attributes>
       <h>224</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;.
-FitStub</panel_attributes>
+
+
+FitService</panel_attributes>
     <additional_attributes>850.0;300.0;550.0;300.0;550.0;100.0;10.0;100.0;10.0;10.0</additional_attributes>
   </element>
   <element>
@@ -1179,7 +1181,7 @@ FitPro.lpr</panel_attributes>
     <id>UMLNote</id>
     <coordinates>
       <x>588</x>
-      <y>1351</y>
+      <y>1358</y>
       <w>98</w>
       <h>49</h>
     </coordinates>
@@ -1192,10 +1194,10 @@ FitPro.lpr</panel_attributes>
       <x>630</x>
       <y>1330</y>
       <w>21</w>
-      <h>35</h>
+      <h>42</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;30.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -1239,7 +1241,7 @@ FitPro.lpr</panel_attributes>
       <h>224</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-
-FitStub</panel_attributes>
+FitService</panel_attributes>
     <additional_attributes>850.0;300.0;640.0;300.0;640.0;100.0;10.0;100.0;10.0;10.0</additional_attributes>
   </element>
   <element>

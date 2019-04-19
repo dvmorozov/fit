@@ -17,7 +17,8 @@ unit FitClientProxy;
 interface
 
 uses SysUtils, MSCRDataClasses, CommonTypes, PointsSet, SelfCopied,
-    MyExceptions, IntPointsSet, TitlePointsSet, CurvePointsSet,
+    MyExceptions, IntPointsSet, TitlePointsSet, CurvePointsSet, CBRCComponent,
+    int_fit_service,
 {$IFNDEF FIT}
     {FITCGI or FITPRO}
     fit_server,
@@ -45,7 +46,7 @@ type
       centralized error handling in the client. Converts data 
       to appropriate type. Should impelement the same interface 
       as the server. }
-    TFitClientProxy = class(TObject)
+    TFitClientProxy = class(TCBRCComponent, IFitService)
     protected
         FFitStub: TFitServerStub;
         { Getting / setting server attributes. }

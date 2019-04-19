@@ -23,7 +23,7 @@ uses
 {$endif}
   , Main, CommonTypes, TableComp, ClassInheritIDs, GeneralHashFunctions,
   CreateUserPointsSetDialog, UserPointsSetPropDialog,
-  ConfigurablePointsSet, ConfigurableUserPointsSet;
+  ConfigurablePointsSet, ConfigurableUserPointsSet, int_fit_service;
 
 {$R manifest.res}
 

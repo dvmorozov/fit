@@ -16,7 +16,7 @@ unit FitClientApp;
 
 interface
 
-uses SysUtils, FitClient, FitClientStub, FitClientProxy,
+uses SysUtils, FitClient, FitClientStub, fit_client_proxy,
   ExtensionDataLoaderInjector;
 
 type

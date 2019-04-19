@@ -32,7 +32,7 @@ uses SysUtils, MSCRDataClasses, CommonTypes, PointsSet, SelfCopied,
     ;
   
 type
-{$IF DEFINED(FIT) OR DEFINED(FITPRO)}
+{$IF DEFINED(FITCGI) OR DEFINED(FITPRO)}
     TFitServerStub = IFitServer;    //  TFitServerStub is substituted by
                                     //  IFitServer to access the server
                                     //  via XMP-RPC (wst-5.0).

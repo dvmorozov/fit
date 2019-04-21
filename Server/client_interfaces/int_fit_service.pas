@@ -37,10 +37,11 @@ type
         { Throws an exception when R = nil. }
         function ProcessPointsResult(R: TPointsResult): TTitlePointsSet;
     {$ENDIF}
-        { GetXXXX methods create and return A NEW OBJECT,
+        { All GetXXXX methods create and return A NEW OBJECT,
           responsibility to free it is put on calling code. }
 
-        procedure SetProfilePointsSet(APointsSet: TTitlePointsSet);
+        { Returns hint or error message received from the server. }
+        function SetProfilePointsSet(APointsSet: TTitlePointsSet): string;
         function GetProfilePointsSet: TTitlePointsSet;
         function GetSelectedArea: TTitlePointsSet;
 

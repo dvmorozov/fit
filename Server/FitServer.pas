@@ -35,7 +35,7 @@ uses Classes, TitlePointsSet, SelfCheckedComponentList, SysUtils, MSCRDataClasse
      FitServerProxy,    //      Proxy to client to call it back.
 {$ENDIF}
      SelfCopied, MyExceptions, FitTask, SimpMath,
-     MainCalcThread, CommonTypes, IntClientCallback,
+     MainCalcThread, CommonTypes, IntClientCallback, int_fit_service,
      CBRCComponent;
 
 type
@@ -69,7 +69,7 @@ type
           It should store all the data necessary for operations including selected
           intervals because client can be unable to store data.
         }
-    TFitServer = class(TCBRCComponent, IClientCallback)
+    TFitServer = class(TCBRCComponent, IClientCallback, IFitService)
     protected
 {$IFDEF FIT}
         FFitProxy: TFitServerProxy;
@@ -127,7 +127,6 @@ type
         FCurveExpr: string;
                 { Allows to retrieve the value from the client-side. }
         FMaxRFactor: Double;
-        procedure SetMaxRFactor(AMaxRFactor: Double);
 
     protected
         FCurveThresh: Double;
@@ -382,9 +381,13 @@ type
                   for the actor or long-term activity are better implemented by properties.  }
 
                 { Maximum allowed value of R-factor. }
-        property MaxRFactor: Double read FMaxRFactor write SetMaxRFactor;
+        procedure SetMaxRFactor(AMaxRFactor: Double);
+        function GetMaxRFactor: Double;
+        property MaxRFactor: Double read GetMaxRFactor write SetMaxRFactor;
                 { Denominator of ratio of background to maximal intensity. }
-        property BackFactor: Double read FBackFactor write FBackFactor;
+        procedure SetBackFactor(ABackFactor: Double);
+        function GetBackFactor: Double;
+        property BackFactor: Double read GetBackFactor write SetBackFactor;
                 { The threshold for determination of curve (specimen) boundaries. It is supposed
                   that background was cut out. The curve boundaries are defined by exceeding
                   the threshold by curve function. The same threshold removes instances with
@@ -2365,6 +2368,21 @@ begin
             FT := TFitTask(TaskList.Items[i]);
             FT.MaxRFactor := AMaxRFactor;
         end;
+end;
+
+function TFitServer.GetMaxRFactor: Double;
+begin
+    Result := FMaxRFactor;
+end;
+
+procedure TFitServer.SetBackFactor(ABackFactor: Double);
+begin
+    FBackFactor := ABackFactor;
+end;
+
+function TFitServer.GetBackFactor: Double;
+begin
+    Result := FBackFactor;
 end;
 
 procedure TFitServer.SetCurveThresh(ACurveThresh: Double);

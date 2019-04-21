@@ -128,13 +128,8 @@ type
                 { Allows to retrieve the value from the client-side. }
         FMaxRFactor: Double;
 
-    protected
         FCurveThresh: Double;
-        procedure SetCurveThresh(ACurveThresh: Double);
-
-    protected
         FCurveTypeId: TCurveTypeId;
-        procedure SetCurveType(ACurveTypeId: TCurveTypeId);
 
     protected
                 { Is set up to True after finishing first cycle of calculation. }
@@ -392,9 +387,16 @@ type
                   that background was cut out. The curve boundaries are defined by exceeding
                   the threshold by curve function. The same threshold removes instances with
                   too small amplitude. }
-        property CurveThresh: Double read FCurveThresh write SetCurveThresh;
-        property CurveTypeId: TCurveTypeId read FCurveTypeId write SetCurveType;
-        property State: TFitServerState read FState;
+        procedure SetCurveThresh(ACurveThresh: Double);
+        function GetCurveThresh: Double;
+        property CurveThresh: Double read GetCurveThresh write SetCurveThresh;
+
+        procedure SetCurveType(ACurveTypeId: TCurveTypeId);
+        function GetCurveType: TCurveTypeId;
+        property CurveTypeId: TCurveTypeId read GetCurveType write SetCurveType;
+
+        function GetState: TFitServerState;
+        property State: TFitServerState read GetState;
         property WaveLength: Double read FWaveLength write SetWaveLength;
         property SelectedAreaMode: Boolean read FSelectedAreaMode;
 {$IFDEF FIT}
@@ -2076,6 +2078,11 @@ begin
     else SavedState := AState;  //  dlya posleduyuschego vosstanovleniya
 end;
 
+function TFitServer.GetState: TFitServerState;
+begin
+    Result := FState;
+end;
+
 procedure TFitServer.SetWaveLength(AWaveLength: Double);
 begin
     Assert(Assigned(SpecimenList));
@@ -2390,6 +2397,11 @@ begin
     FCurveThresh := ACurveThresh;
 end;
 
+function TFitServer.GetCurveThresh: Double;
+begin
+    Result := FCurveThresh;
+end;
+
 procedure TFitServer.SetCurveType(ACurveTypeId: TCurveTypeId);
 var i: LongInt;
     FT: TFitTask;
@@ -2401,6 +2413,11 @@ begin
             FT := TFitTask(TaskList.Items[i]);
             FT.CurveTypeId := ACurveTypeId;
         end;
+end;
+
+function TFitServer.GetCurveType: TCurveTypeId;
+begin
+    Result := FCurveTypeId;
 end;
 
 procedure TFitServer.SetSpecialCurveParameters(

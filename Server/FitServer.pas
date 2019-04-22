@@ -263,9 +263,9 @@ type
                 { Set experimental profile data. }
         function SetProfilePointsSet(APointsSet: TTitlePointsSet): string;
                 { Get experimental profile data. }
-        function GetProfilePointsSet: TPointsSet;
+        function GetProfilePointsSet: TTitlePointsSet;
                 { Get data for the selected interval. }
-        function GetSelectedArea: TPointsSet;
+        function GetSelectedArea: TTitlePointsSet;
 
         function SetBackgroundPointsSet(ABackgroundPoints: TTitlePointsSet): string;
         function GetBackgroundPoints: TPointsSet;
@@ -397,7 +397,9 @@ type
 
         function GetState: TFitServerState;
         property State: TFitServerState read GetState;
-        property WaveLength: Double read FWaveLength write SetWaveLength;
+
+        function GetWaveLength: Double;
+        property WaveLength: Double read GetWaveLength write SetWaveLength;
         property SelectedAreaMode: Boolean read FSelectedAreaMode;
 {$IFDEF FIT}
                 { This can be equal to Nil. }
@@ -1313,7 +1315,7 @@ begin
     Result := ExpProfile;
 end;
 
-function TFitServer.GetSelectedArea: TPointsSet;
+function TFitServer.GetSelectedArea: TTitlePointsSet;
 begin
     Result := SelectedArea;
 end;
@@ -2088,6 +2090,11 @@ begin
     Assert(Assigned(SpecimenList));
     FWaveLength := AWaveLength;
     SpecimenList.Lambda := WaveLength;
+end;
+
+function TFitServer.GetWaveLength: Double;
+begin
+    Result := FWaveLength;
 end;
 
 procedure TFitServer.DoAllAutomaticallyAlg;

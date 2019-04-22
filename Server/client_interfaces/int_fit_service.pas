@@ -92,19 +92,28 @@ type
 
         { Asynchronous (long) methods. }
 
-        procedure SmoothProfile;
+        { Returns hint or error message received from the server. }
+        function SmoothProfile: string;
         procedure SubtractAllBackground(Auto: Boolean);
-        procedure DoAllAutomatically;
-        procedure FindGausses;
+        { Returns hint or error message received from the server. }
+        function DoAllAutomatically: string;
+        { Returns hint or error message received from the server. }
+        function FindGausses: string;
     {$IFNDEF EXCLUDE_SOMETHING}
-        procedure FindGaussesAgain;
+        { Returns hint or error message received from the server. }
+        function FindGaussesAgain: string;
     {$ENDIF}
-        procedure FindGaussesSequentially;
-        procedure FindPeakBounds;
-        procedure FindBackPoints;
-        procedure FindPeakPositions;
+        { Returns hint or error message received from the server. }
+        function FindGaussesSequentially: string;
+        { Returns hint or error message received from the server. }
+        function FindPeakBounds: string;
+        { Returns hint or error message received from the server. }
+        function FindBackPoints: string;
+        { Returns hint or error message received from the server. }
+        function FindPeakPositions: string;
     {$IF DEFINED(FIT) OR DEFINED(FITPRO)}
-        procedure AllPointsAsPeakPositions;
+        { Returns hint or error message received from the server. }
+        function AllPointsAsPeakPositions: string;
     {$ENDIF}
     {$IFDEF FITCGI}
         function GetGraph(
@@ -122,9 +131,10 @@ type
         function GetSqrRFactorStr: string;
 
         { Synchronous methods. }
-
-        procedure SelectArea(StartPointIndex, StopPointIndex: LongInt);
-        procedure ReturnToTotalProfile;
+        { Returns hint or error message received from the server. }
+        function SelectArea(StartPointIndex, StopPointIndex: LongInt): string;
+        { Returns hint or error message received from the server. }
+        function ReturnToTotalProfile: string;
         procedure CreateSpecimenList;
     end;
 

@@ -45,13 +45,16 @@ type
         function GetProfilePointsSet: TTitlePointsSet;
         function GetSelectedArea: TTitlePointsSet;
 
-        procedure SetBackgroundPointsSet(ABackgroundPoints: TTitlePointsSet);
+        { Returns hint or error message received from the server. }
+        function SetBackgroundPointsSet(ABackgroundPoints: TTitlePointsSet): string;
         function GetBackgroundPoints: TTitlePointsSet;
 
-        procedure SetCurvePositions(ACurvePositions: TPointsSet);
+        { Returns hint or error message received from the server. }
+        function SetCurvePositions(ACurvePositions: TPointsSet): string;
         function GetCurvePositions: TTitlePointsSet;
 
-        procedure SetRFactorIntervals(ARFactorIntervals: TPointsSet);
+        { Returns hint or error message received from the server. }
+        function SetRFactorIntervals(ARFactorIntervals: TPointsSet): string;
         function GetRFactorIntervals: TTitlePointsSet;
     {$IFNDEF EXCLUDE_SOMETHING}
         function GetSpecialCurveParameters: Curve_parameters;

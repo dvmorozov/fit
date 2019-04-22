@@ -268,13 +268,13 @@ type
         function GetSelectedArea: TTitlePointsSet;
 
         function SetBackgroundPointsSet(ABackgroundPoints: TTitlePointsSet): string;
-        function GetBackgroundPoints: TPointsSet;
+        function GetBackgroundPoints: TTitlePointsSet;
 
         function SetCurvePositions(ACurvePositions: TPointsSet): string;
-        function GetCurvePositions: TPointsSet;
+        function GetCurvePositions: TTitlePointsSet;
 
         function SetRFactorIntervals(ARFactorIntervals: TPointsSet): string;
-        function GetRFactorIntervals: TPointsSet;
+        function GetRFactorIntervals: TTitlePointsSet;
 
         procedure SetSpecialCurveParameters(
             ACurveExpr: string;
@@ -318,8 +318,8 @@ type
         procedure SetSpecimenParameter(SpecIndex: LongInt; ParamIndex: LongInt;
             Value: Double);
 
-        function GetCalcProfilePointsSet: TPointsSet;
-        function GetDeltaProfilePointsSet: TPointsSet;
+        function GetCalcProfilePointsSet: TTitlePointsSet;
+        function GetDeltaProfilePointsSet: TTitlePointsSet;
 
                 { Asynchronous long-term operations. }
                 { Smoothes experimental data. Returns describing message.
@@ -1305,7 +1305,7 @@ begin
     end;
 end;
 
-function TFitServer.GetBackgroundPoints: TPointsSet;
+function TFitServer.GetBackgroundPoints: TTitlePointsSet;
 begin
     Result := BackgroundPoints;
 end;
@@ -1320,17 +1320,17 @@ begin
     Result := SelectedArea;
 end;
 
-function TFitServer.GetCalcProfilePointsSet: TPointsSet;
+function TFitServer.GetCalcProfilePointsSet: TTitlePointsSet;
 begin
     Result := CalcProfile;
 end;
 
-function TFitServer.GetDeltaProfilePointsSet: TPointsSet;
+function TFitServer.GetDeltaProfilePointsSet: TTitlePointsSet;
 begin
     Result := DeltaProfile;
 end;
 
-function TFitServer.GetRFactorIntervals: TPointsSet;
+function TFitServer.GetRFactorIntervals: TTitlePointsSet;
 begin
     Result := RFactorIntervals;
 end;

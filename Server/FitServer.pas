@@ -1310,7 +1310,7 @@ begin
     Result := BackgroundPoints;
 end;
 
-function TFitServer.GetProfilePointsSet: TPointsSet;
+function TFitServer.GetProfilePointsSet: TTitlePointsSet;
 begin
     Result := ExpProfile;
 end;
@@ -1340,7 +1340,7 @@ begin
     Result := Params;
 end;
 
-function TFitServer.GetCurvePositions: TPointsSet;
+function TFitServer.GetCurvePositions: TTitlePointsSet;
 begin
     Result := CurvePositions;
 end;

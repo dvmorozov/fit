@@ -70,17 +70,17 @@ type
         { GetXXXX methods create and return A NEW OBJECT, 
           responsibility to free it is put on calling code. }
         
-        procedure SetProfilePointsSet(APointsSet: TTitlePointsSet);
+        function SetProfilePointsSet(APointsSet: TTitlePointsSet): string;
         function GetProfilePointsSet: TTitlePointsSet;
         function GetSelectedArea: TTitlePointsSet;
 
-        procedure SetBackgroundPointsSet(ABackgroundPoints: TTitlePointsSet);
+        function SetBackgroundPointsSet(ABackgroundPoints: TTitlePointsSet): string;
         function GetBackgroundPoints: TTitlePointsSet;
 
-        procedure SetCurvePositions(ACurvePositions: TPointsSet);
+        function SetCurvePositions(ACurvePositions: TPointsSet): string;
         function GetCurvePositions: TTitlePointsSet;
 
-        procedure SetRFactorIntervals(ARFactorIntervals: TPointsSet);
+        function SetRFactorIntervals(ARFactorIntervals: TPointsSet): string;
         function GetRFactorIntervals: TTitlePointsSet;
 {$IFNDEF EXCLUDE_SOMETHING}
         function GetSpecialCurveParameters: Curve_parameters;
@@ -118,19 +118,19 @@ type
 
         { Asynchronous (long) methods. }
         
-        procedure SmoothProfile;
+        function SmoothProfile: string;
         procedure SubtractAllBackground(Auto: Boolean);
-        procedure DoAllAutomatically;
-        procedure FindGausses;
+        function DoAllAutomatically: string;
+        function FindGausses: string;
 {$IFNDEF EXCLUDE_SOMETHING}
-        procedure FindGaussesAgain;
+        function FindGaussesAgain: string;
 {$ENDIF}
-        procedure FindGaussesSequentially;
-        procedure FindPeakBounds;
-        procedure FindBackPoints;
-        procedure FindPeakPositions;
+        function FindGaussesSequentially: string;
+        function FindPeakBounds: string;
+        function FindBackPoints: string;
+        function FindPeakPositions: string;
 {$IF DEFINED(FIT) OR DEFINED(FITPRO)}
-        procedure AllPointsAsPeakPositions;
+        function AllPointsAsPeakPositions: string;
 {$ENDIF}
 {$IFDEF FITCGI}
         function GetGraph(
@@ -149,8 +149,8 @@ type
 
         { Synchronous methods. }
         
-        procedure SelectArea(StartPointIndex, StopPointIndex: LongInt);
-        procedure ReturnToTotalProfile;
+        function SelectArea(StartPointIndex, StopPointIndex: LongInt): string;
+        function ReturnToTotalProfile: string;
         procedure CreateSpecimenList;
 
         property MaxRFactor: Double read GetMaxRFactor write SetMaxRFactor;
@@ -299,7 +299,7 @@ begin
 {$ENDIF}
 end;
 
-procedure TFitClientProxy.SetProfilePointsSet(APointsSet: TTitlePointsSet);
+function TFitClientProxy.SetProfilePointsSet(APointsSet: TTitlePointsSet): string;
 var Res: LongInt;
     ErrMsg: string;
 {$IFNDEF FIT}
@@ -328,6 +328,7 @@ begin
         -1: raise EUserException.Create(ErrMsg);
         -2: raise Exception.Create(ErrMsg);
     end;
+    Result := ErrMsg;
 end;
 
 {$IFDEF USE_RESULT_PROCESSING}
@@ -410,8 +411,8 @@ begin
 {$ENDIF}
 end;
 
-procedure TFitClientProxy.SetBackgroundPointsSet(
-    ABackgroundPoints: TTitlePointsSet);
+function TFitClientProxy.SetBackgroundPointsSet(
+    ABackgroundPoints: TTitlePointsSet): string;
 var Res: LongInt;
     ErrMsg: string;
 {$IFNDEF FIT}
@@ -440,6 +441,7 @@ begin
         -1: raise EUserException.Create(ErrMsg);
         -2: raise Exception.Create(ErrMsg);
     end;
+    Result := ErrMsg;
 end;
 
 function TFitClientProxy.GetBackgroundPoints: TTitlePointsSet;
@@ -466,7 +468,7 @@ begin
 {$ENDIF}
 end;
 
-procedure TFitClientProxy.SetCurvePositions(ACurvePositions: TPointsSet);
+function TFitClientProxy.SetCurvePositions(ACurvePositions: TPointsSet): string;
 var Res: LongInt;
     ErrMsg: string;
 {$IFNDEF FIT}
@@ -494,6 +496,7 @@ begin
         -1: raise EUserException.Create(ErrMsg);
         -2: raise Exception.Create(ErrMsg);
     end;
+    Result := ErrMsg;
 end;
 
 function TFitClientProxy.GetCurvePositions: TTitlePointsSet;
@@ -520,7 +523,7 @@ begin
 {$ENDIF}
 end;
 
-procedure TFitClientProxy.SetRFactorIntervals(ARFactorIntervals: TPointsSet);
+function TFitClientProxy.SetRFactorIntervals(ARFactorIntervals: TPointsSet): string;
 var Res: LongInt;
     ErrMsg: string;
 {$IFNDEF FIT}
@@ -548,6 +551,7 @@ begin
         -1: raise EUserException.Create(ErrMsg);
         -2: raise Exception.Create(ErrMsg);
     end;
+    Result := ErrMsg;
 end;
 
 function TFitClientProxy.GetRFactorIntervals: TTitlePointsSet;
@@ -970,7 +974,7 @@ begin
 {$ENDIF}
 end;
 
-procedure TFitClientProxy.SmoothProfile;
+function TFitClientProxy.SmoothProfile: string;
 var Res: LongInt;
     ErrMsg: string;
 {$IFNDEF FIT}
@@ -991,6 +995,7 @@ begin
         -1: raise EUserException.Create(ErrMsg);
         -2: raise Exception.Create(ErrMsg);
     end;
+    Result := ErrMsg;
 end;
 
 procedure TFitClientProxy.SubtractAllBackground(Auto: Boolean);
@@ -1016,7 +1021,7 @@ begin
     end;
 end;
 
-procedure TFitClientProxy.DoAllAutomatically;
+function TFitClientProxy.DoAllAutomatically: string;
 var Res: LongInt;
     ErrMsg: string;
 {$IFNDEF FIT}
@@ -1037,9 +1042,10 @@ begin
         -1: raise EUserException.Create(ErrMsg);
         -2: raise Exception.Create(ErrMsg);
     end;
+    Result := ErrMsg;
 end;
 
-procedure TFitClientProxy.FindGausses;
+function TFitClientProxy.FindGausses: string;
 var Res: LongInt;
     ErrMsg: string;
 {$IFNDEF FIT}
@@ -1060,10 +1066,11 @@ begin
         -1: raise EUserException.Create(ErrMsg);
         -2: raise Exception.Create(ErrMsg);
     end;
+    Result := ErrMsg;
 end;
 
 {$IFNDEF EXCLUDE_SOMETHING}
-procedure TFitClientProxy.FindGaussesAgain;
+function TFitClientProxy.FindGaussesAgain: string;
 var Res: LongInt;
     ErrMsg: string;
 {$IFNDEF FIT}
@@ -1084,10 +1091,11 @@ begin
         -1: raise EUserException.Create(ErrMsg);
         -2: raise Exception.Create(ErrMsg);
     end;
-end;
 {$ENDIF}
+    Result := ErrMsg;
+end;
 
-procedure TFitClientProxy.FindGaussesSequentially;
+function TFitClientProxy.FindGaussesSequentially: string;
 var Res: LongInt;
     ErrMsg: string;
 {$IFNDEF FIT}
@@ -1108,9 +1116,10 @@ begin
         -1: raise EUserException.Create(ErrMsg);
         -2: raise Exception.Create(ErrMsg);
     end;
+    Result := ErrMsg;
 end;
 
-procedure TFitClientProxy.FindPeakBounds;
+function TFitClientProxy.FindPeakBounds: string;
 var Res: LongInt;
     ErrMsg: string;
 {$IFNDEF FIT}
@@ -1131,9 +1140,10 @@ begin
         -1: raise EUserException.Create(ErrMsg);
         -2: raise Exception.Create(ErrMsg);
     end;
+    Result := ErrMsg;
 end;
 
-procedure TFitClientProxy.FindBackPoints;
+function TFitClientProxy.FindBackPoints: string;
 var Res: LongInt;
     ErrMsg: string;
 {$IFNDEF FIT}
@@ -1154,9 +1164,10 @@ begin
         -1: raise EUserException.Create(ErrMsg);
         -2: raise Exception.Create(ErrMsg);
     end;
+    Result := ErrMsg;
 end;
 
-procedure TFitClientProxy.FindPeakPositions;
+function TFitClientProxy.FindPeakPositions: string;
 var Res: LongInt;
     ErrMsg: string;
 {$IFNDEF FIT}
@@ -1177,10 +1188,11 @@ begin
         -1: raise EUserException.Create(ErrMsg);
         -2: raise Exception.Create(ErrMsg);
     end;
+    Result := ErrMsg;
 end;
 
 {$IF DEFINED(FIT) OR DEFINED(FITPRO)}
-procedure TFitClientProxy.AllPointsAsPeakPositions;
+function TFitClientProxy.AllPointsAsPeakPositions: string;
 var Res: LongInt;
     ErrMsg: string;
 begin
@@ -1190,6 +1202,7 @@ begin
         -1: raise EUserException.Create(ErrMsg);
         -2: raise Exception.Create(ErrMsg);
     end;
+    Result := ErrMsg;
 end;
 {$ENDIF}
 
@@ -1301,7 +1314,7 @@ begin
 {$ENDIF}
 end;
 
-procedure TFitClientProxy.SelectArea(StartPointIndex, StopPointIndex: LongInt);
+function TFitClientProxy.SelectArea(StartPointIndex, StopPointIndex: LongInt): string;
 var Res: LongInt;
     ErrMsg: string;
 {$IFNDEF FIT}
@@ -1322,9 +1335,10 @@ begin
         -1: raise EUserException.Create(ErrMsg);
         -2: raise Exception.Create(ErrMsg);
     end;
+    Result := ErrMsg;
 end;
 
-procedure TFitClientProxy.ReturnToTotalProfile;
+function TFitClientProxy.ReturnToTotalProfile: string;
 var Res: LongInt;
     ErrMsg: string;
 {$IFNDEF FIT}
@@ -1345,6 +1359,7 @@ begin
         -1: raise EUserException.Create(ErrMsg);
         -2: raise Exception.Create(ErrMsg);
     end;
+    Result := ErrMsg;
 end;
 
 procedure TFitClientProxy.CreateSpecimenList;

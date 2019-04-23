@@ -22,7 +22,8 @@ uses SysUtils, FitServer, CommonTypes, SelfCopied, MSCRDataClasses,
     NamedPointsSet;
 
 type
-    { For transmission through network class converts exceptions into error codes. }
+    { For transmission through network class converts exceptions into error codes.
+      Maintains instance of TFitServer, recreates it in the case of fatal error. }
     TFitServerStub = class(TObject)
     protected
         FServer: TFitServer;

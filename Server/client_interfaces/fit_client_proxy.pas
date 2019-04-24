@@ -3,7 +3,7 @@ This software is distributed under GPL
 in the hope that it will be useful, but WITHOUT ANY WARRANTY;
 without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
 
-@abstract(Contains definition of proxy class calling server part by different ways depending on compilation keys.)
+@abstract(Contains definition of proxy class calling server by means of XML-RPC.)
 
 @author(Dmitry Morozov dvmorozov@hotmail.com, 
 LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
@@ -11,7 +11,6 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit fit_client_proxy;
 
-//{$mode objfpc}{$H+}
 {$MODE Delphi}
 
 interface
@@ -19,25 +18,15 @@ interface
 uses SysUtils, MSCRDataClasses, CommonTypes, PointsSet, SelfCopied,
     MyExceptions, IntPointsSet, TitlePointsSet, CurvePointsSet, CBRCComponent,
     int_fit_service,
-{$IFNDEF FIT}
-    {FITCGI or FITPRO}
     fit_server,
 {$IFDEF FITCGI}
     Classes, NamedPointsSet,
 {$ENDIF}
     base_service_intf,
     fit_server_proxy                //  Calls the server via network.
-{$ELSE}
-    FitServerStub                   //  Calls the server directly.
-{$ENDIF}
     ;
   
 type
-{$IF DEFINED(FITCGI) OR DEFINED(FITPRO)}
-    TFitServerStub = IFitServer;    //  TFitServerStub is substituted by
-                                    //  IFitServer to access the server
-                                    //  via XMP-RPC (wst-5.0).
-{$ENDIF}
 
 {$IFDEF FITPRO} {$DEFINE USE_RESULT_PROCESSING} {$ENDIF}
 {$IFDEF FITCGI} {$DEFINE USE_RESULT_PROCESSING} {$ENDIF}
@@ -48,7 +37,9 @@ type
       as the server. }
     TFitClientProxy = class(TCBRCComponent, IFitService)
     protected
-        FFitStub: TFitServerStub;
+        FFitStub: IFitServer;       //  Access the server
+                                    //  via XMP-RPC (wst-5.0)
+                                    
         { Getting / setting server attributes. }
         
         function GetMaxRFactor: Double;
@@ -173,81 +164,49 @@ const OutOfServerResources: string = 'Out of server resources.';
 function TFitClientProxy.GetMaxRFactor: Double;
 begin
     Assert(Assigned(FitStub));
-{$IFNDEF FIT}
     Result := FitStub.GetMaxRFactor(ProblemID);
-{$ELSE}
-    Result := FitStub.GetMaxRFactor;
-{$ENDIF}
 end;
 
 procedure TFitClientProxy.SetMaxRFactor(AMaxRFactor: Double);
 begin
     Assert(Assigned(FitStub));
-{$IFNDEF FIT}
     FitStub.SetMaxRFactor(AMaxRFactor, ProblemID);
-{$ELSE}
-    FitStub.SetMaxRFactor(AMaxRFactor);
-{$ENDIF}
 end;
 
 function TFitClientProxy.GetBackFactor: Double;
 begin
     Assert(Assigned(FitStub));
-{$IFNDEF FIT}
     Result := FitStub.GetBackFactor(ProblemID);
-{$ELSE}
-    Result := FitStub.GetBackFactor;
-{$ENDIF}
 end;
 
 procedure TFitClientProxy.SetBackFactor(ABackFactor: Double);
 begin
     Assert(Assigned(FitStub));
-{$IFNDEF FIT}
     FitStub.SetBackFactor(ABackFactor, ProblemID);
-{$ELSE}
-    FitStub.SetBackFactor(ABackFactor);
-{$ENDIF}
 end;
 
 function TFitClientProxy.GetCurveThresh: Double;
 begin
     Assert(Assigned(FitStub));
-{$IFNDEF FIT}
     Result := FitStub.GetCurveThresh(ProblemID);
-{$ELSE}
-    Result := FitStub.GetCurveThresh;
-{$ENDIF}
 end;
 
 procedure TFitClientProxy.SetCurveThresh(ACurveThresh: Double);
 begin
     Assert(Assigned(FitStub));
-{$IFNDEF FIT}
     FitStub.SetCurveThresh(ACurveThresh, ProblemID);
-{$ELSE}
-    FitStub.SetCurveThresh(ACurveThresh);
-{$ENDIF}
 end;
 
 function TFitClientProxy.GetCurveType: TCurveTypeId;
 begin
     Assert(Assigned(FitStub));
-{$IFNDEF FIT}
     Result := TCurveTypeId(FitStub.GetCurveType(ProblemID));
-{$ELSE}
-    Result := TCurveTypeId(FitStub.GetCurveType);
-{$ENDIF}
 end;
 
 procedure TFitClientProxy.SetCurveType(ACurveType: TCurveTypeId);
 begin
     Assert(Assigned(FitStub));
-{$IFNDEF FIT}
     FitStub.SetCurveType(ACurveType, ProblemID);
-{$ELSE}
-    FitStub.SetCurveType(ACurveType);
-{$ENDIF}
 end;
 
 {$IFNDEF EXCLUDE_SOMETHING}
@@ -272,44 +231,29 @@ end;
 function TFitClientProxy.GetState: TFitServerState;
 begin
     Assert(Assigned(FitStub));
-{$IFNDEF FIT}
     Result := TFitServerState(FitStub.GetState(ProblemID));
-{$ELSE}
-    Result := TFitServerState(FitStub.GetState);
-{$ENDIF}
 end;
 
 procedure TFitClientProxy.SetWaveLength(AWaveLength: Double);
 begin
     Assert(Assigned(FitStub));
-{$IFNDEF FIT}
     FitStub.SetWaveLength(AWaveLength, ProblemID);
-{$ELSE}
-    FitStub.SetWaveLength(AWaveLength);
-{$ENDIF}
 end;
 
 function TFitClientProxy.GetWaveLength: Double;
 begin
     Assert(Assigned(FitStub));
-{$IFNDEF FIT}
     Result := FitStub.GetWaveLength(ProblemID);
-{$ELSE}
-    Result := FitStub.GetWaveLength;
-{$ENDIF}
 end;
 
 function TFitClientProxy.SetProfilePointsSet(APointsSet: TTitlePointsSet): string;
 var Res: LongInt;
     ErrMsg: string;
-{$IFNDEF FIT}
     ADR: TArrayOfFloatDoubleRemotable;
     R: TResult;
-{$ENDIF}
 begin
     Assert(Assigned(FitStub));
     Res := 0; ErrMsg := '';
-{$IFNDEF FIT}
     //  ob'ekt, peredannyi cherez parametr ne dolzhen osvobozhdat'sya!
     ADR := CreateRemotableArray(APointsSet);
     try
@@ -321,9 +265,6 @@ begin
     Res := R.ErrCode;
     ErrMsg := R.ErrMsg;
     R.Free;
-{$ELSE}
-    Res := FitStub.SetProfilePointsSet(APointsSet, ErrMsg);
-{$ENDIF}
     case Res of
         -1: raise EUserException.Create(ErrMsg);
         -2: raise Exception.Create(ErrMsg);
@@ -364,65 +305,24 @@ end;
 {$ENDIF}
 
 function TFitClientProxy.GetProfilePointsSet: TTitlePointsSet;
-{$IFDEF FIT}
-var Res: LongInt;
-    ErrMsg: string;
-    Points: TPointsSet;
-{$ENDIF}
 begin
     Assert(Assigned(FitStub));
-{$IFNDEF FIT}
     Result := ProcessPointsResult(FitStub.GetProfilePointsSet(ProblemID));
-{$ELSE}
-    Points := nil;  //  chtoby ne bylo warning'a
-    //  ob'ekt, peredannyi cherez parametr ne dolzhen osvobozhdat'sya!
-    Res := FitStub.GetProfilePointsSet(Points, ErrMsg);
-    if Assigned(Points) then
-        Result := TTitlePointsSet.CreateFromPoints(nil, Points)
-    else Result := nil;
-    case Res of
-        -1: begin Result.Free; raise EUserException.Create(ErrMsg); end;
-        -2: begin Result.Free; raise Exception.Create(ErrMsg); end;
-    end;
-{$ENDIF}
 end;
 
 function TFitClientProxy.GetSelectedArea: TTitlePointsSet;
-{$IFDEF FIT}
-var Res: LongInt;
-    Points: TPointsSet;
-    ErrMsg: string;
-{$ENDIF}
 begin
     Assert(Assigned(FitStub));
-{$IFNDEF FIT}
-    //  ob'ekt, peredannyi cherez parametr ne dolzhen osvobozhdat'sya!
     Result := ProcessPointsResult(FitStub.GetSelectedArea(ProblemID));
-{$ELSE}
-    Points := nil;  //  chtoby ne bylo warning'a
-    Res := FitStub.GetSelectedArea(Points, ErrMsg);
-    if Assigned(Points) then
-        Result := TTitlePointsSet.CreateFromPoints(nil, Points)
-    else Result := nil;
-    case Res of
-        -1: begin Result.Free; raise EUserException.Create(ErrMsg); end;
-        -2: begin Result.Free; raise Exception.Create(ErrMsg); end;
-    end;
-{$ENDIF}
 end;
 
 function TFitClientProxy.SetBackgroundPointsSet(
     ABackgroundPoints: TTitlePointsSet): string;
 var Res: LongInt;
     ErrMsg: string;
-{$IFNDEF FIT}
-    ADR: TArrayOfFloatDoubleRemotable;
-    R: TResult;
-{$ENDIF}
 begin
     Assert(Assigned(FitStub));
     Res := 0; ErrMsg := '';
-{$IFNDEF FIT}
     //  ob'ekt, peredannyi cherez parametr ne dolzhen osvobozhdat'sya!
     ADR := CreateRemotableArray(ABackgroundPoints);
     try
@@ -434,9 +334,6 @@ begin
     Res := R.ErrCode;
     ErrMsg := R.ErrMsg;
     R.Free;
-{$ELSE}
-    Res := FitStub.SetBackgroundPointsSet(ABackgroundPoints, ErrMsg);
-{$ENDIF}
     case Res of
         -1: raise EUserException.Create(ErrMsg);
         -2: raise Exception.Create(ErrMsg);
@@ -445,40 +342,17 @@ begin
 end;
 
 function TFitClientProxy.GetBackgroundPoints: TTitlePointsSet;
-{$IFDEF FIT}
-var Res: LongInt;
-    Points: TPointsSet;
-    ErrMsg: string;
-{$ENDIF}
 begin
     Assert(Assigned(FitStub));
-{$IFNDEF FIT}
     Result := ProcessPointsResult(FitStub.GetBackgroundPoints(ProblemID));
-{$ELSE}
-    Points := nil;  //  chtoby ne bylo warning'a
-    //  ob'ekt, peredannyi cherez parametr ne dolzhen osvobozhdat'sya!
-    Res := FitStub.GetBackgroundPoints(Points, ErrMsg);
-    if Assigned(Points) then
-        Result := TTitlePointsSet.CreateFromPoints(nil, Points)
-    else Result := nil;
-    case Res of
-        -1: raise EUserException.Create(ErrMsg);
-        -2: raise Exception.Create(ErrMsg);
-    end;
-{$ENDIF}
 end;
 
 function TFitClientProxy.SetCurvePositions(ACurvePositions: TPointsSet): string;
 var Res: LongInt;
     ErrMsg: string;
-{$IFNDEF FIT}
-    ADR: TArrayOfFloatDoubleRemotable;
-    R: TResult;
-{$ENDIF}
 begin
     Assert(Assigned(FitStub));
     Res := 0; ErrMsg := '';
-{$IFNDEF FIT}
     //  ob'ekt, peredannyi cherez parametr ne dolzhen osvobozhdat'sya!
     ADR := CreateRemotableArray(ACurvePositions);
     try
@@ -489,9 +363,6 @@ begin
     Res := R.ErrCode;
     ErrMsg := R.ErrMsg;
     R.Free;
-{$ELSE}
-    Res := FitStub.SetCurvePositions(ACurvePositions, ErrMsg);
-{$ENDIF}
     case Res of
         -1: raise EUserException.Create(ErrMsg);
         -2: raise Exception.Create(ErrMsg);
@@ -500,40 +371,19 @@ begin
 end;
 
 function TFitClientProxy.GetCurvePositions: TTitlePointsSet;
-{$IFDEF FIT}
-var Res: LongInt;
-    Points: TPointsSet;
-    ErrMsg: string;
-{$ENDIF}
 begin
     Assert(Assigned(FitStub));
-{$IFNDEF FIT}
     Result := ProcessPointsResult(FitStub.GetSpecimenPositions(ProblemID));
-{$ELSE}
-    Points := nil;  //  chtoby ne bylo warning'a
-    //  ob'ekt, peredannyi cherez parametr ne dolzhen osvobozhdat'sya!
-    Res := FitStub.GetCurvePositions(Points, ErrMsg);
-    if Assigned(Points) then
-        Result := TTitlePointsSet.CreateFromPoints(nil, Points)
-    else Result := nil;
-    case Res of
-        -1: raise EUserException.Create(ErrMsg);
-        -2: raise Exception.Create(ErrMsg);
-    end;
-{$ENDIF}
 end;
 
 function TFitClientProxy.SetRFactorIntervals(ARFactorIntervals: TPointsSet): string;
 var Res: LongInt;
     ErrMsg: string;
-{$IFNDEF FIT}
     ADR: TArrayOfFloatDoubleRemotable;
     R: TResult;
-{$ENDIF}
 begin
     Assert(Assigned(FitStub));
     Res := 0; ErrMsg := '';
-{$IFNDEF FIT}
     //  ob'ekt, peredannyi cherez parametr ne dolzhen osvobozhdat'sya!
     ADR := CreateRemotableArray(ARFactorIntervals);
     try
@@ -544,9 +394,6 @@ begin
     Res := R.ErrCode;
     ErrMsg := R.ErrMsg;
     R.Free;
-{$ELSE}
-    Res := FitStub.SetRFactorIntervals(ARFactorIntervals, ErrMsg);
-{$ENDIF}
     case Res of
         -1: raise EUserException.Create(ErrMsg);
         -2: raise Exception.Create(ErrMsg);
@@ -555,27 +402,9 @@ begin
 end;
 
 function TFitClientProxy.GetRFactorIntervals: TTitlePointsSet;
-{$IFDEF FIT}
-var Res: LongInt;
-    Points: TPointsSet;
-    ErrMsg: string;
-{$ENDIF}
 begin
     Assert(Assigned(FitStub));
-{$IFNDEF FIT}
     Result := ProcessPointsResult(FitStub.GetSpecimenIntervals(ProblemID));
-{$ELSE}
-    Points := nil;  //  chtoby ne bylo warning'a
-    //  ob'ekt, peredannyi cherez parametr ne dolzhen osvobozhdat'sya!
-    Res := FitStub.GetRFactorIntervals(Points, ErrMsg);
-    if Assigned(Points) then
-        Result := TTitlePointsSet.CreateFromPoints(nil, Points)
-    else Result := nil;
-    case Res of
-        -1: raise EUserException.Create(ErrMsg);
-        -2: raise Exception.Create(ErrMsg);
-    end;
-{$ENDIF}
 end;
 
 {$IFDEF FITCGI}
@@ -657,13 +486,10 @@ end;
 function TFitClientProxy.GetSpecimenCount: LongInt;
 var Res: LongInt;
     ErrMsg: string;
-{$IFNDEF FIT}
     Count: TIntResult;
-{$ENDIF}
 begin
     Assert(Assigned(FitStub));
     Res := 0; ErrMsg := '';
-{$IFNDEF FIT}
     Count := FitStub.GetSpecimenCount(ProblemID);
     if not Assigned(Count) then
         raise Exception.Create(OutOfServerResources);
@@ -672,9 +498,6 @@ begin
     ErrMsg := Count.ErrMsg;
     Result := Count._Result;
     Count.Free;
-{$ELSE}
-    Res := FitStub.GetSpecimenCount(Result, ErrMsg);
-{$ENDIF}
     case Res of
         -1: raise EUserException.Create(ErrMsg);
         -2: raise Exception.Create(ErrMsg);
@@ -684,13 +507,10 @@ end;
 function TFitClientProxy.GetSpecimenParameterCount(SpecIndex: LongInt): LongInt;
 var Res: LongInt;
     ErrMsg: string;
-{$IFNDEF FIT}
     Count: TIntResult;
-{$ENDIF}
 begin
     Assert(Assigned(FitStub));
     Res := 0; ErrMsg := '';
-{$IFNDEF FIT}
     Count := FitStub.GetSpecimenParameterCount(ProblemID, SpecIndex);
     if not Assigned(Count) then
         raise Exception.Create(OutOfServerResources);
@@ -699,9 +519,6 @@ begin
     ErrMsg := Count.ErrMsg;
     Result := Count._Result;
     Count.Free;
-{$ELSE}
-    Res := FitStub.GetSpecimenParameterCount(SpecIndex, Result, ErrMsg);
-{$ENDIF}
     case Res of
         -1: raise EUserException.Create(ErrMsg);
         -2: raise Exception.Create(ErrMsg);
@@ -713,13 +530,10 @@ procedure TFitClientProxy.GetSpecimenParameter(
     var Name: string; var Value: Double; var Type_: LongInt);
 var Res: LongInt;
     ErrMsg: string;
-{$IFNDEF FIT}
     R: TSpecParamResult;
-{$ENDIF}
 begin
     Assert(Assigned(FitStub));
     Res := 0; ErrMsg := '';
-{$IFNDEF FIT}
     R := FitStub.GetSpecimenParameter(
         ProblemID, SpecIndex, ParamIndex);
     if not Assigned(R) then
@@ -731,10 +545,6 @@ begin
     Name := R.Name;
     Value := R.Value;
     Type_ := R._Type;
-{$ELSE}
-    Res := FitStub.GetSpecimenParameter(
-        SpecIndex, ParamIndex, Name, Value, Type_, ErrMsg);
-{$ENDIF}
     case Res of
         -1: raise EUserException.Create(ErrMsg);
         -2: raise Exception.Create(ErrMsg);
@@ -746,13 +556,10 @@ procedure TFitClientProxy.SetSpecimenParameter(
     Value: Double);
 var Res: LongInt;
     ErrMsg: string;
-{$IFNDEF FIT}
     R: TResult;
-{$ENDIF}
 begin
     Assert(Assigned(FitStub));
     Res := 0; ErrMsg := '';
-{$IFNDEF FIT}
     R := FitStub.SetSpecimenParameter(
         ProblemID, SpecIndex, ParamIndex, Value);
     if not Assigned(R) then
@@ -760,10 +567,6 @@ begin
 
     Res := R.ErrCode;
     ErrMsg := R.ErrMsg;
-{$ELSE}
-    Res := FitStub.SetSpecimenParameter(
-        SpecIndex, ParamIndex, Value, ErrMsg);
-{$ENDIF}
     case Res of
         -1: raise EUserException.Create(ErrMsg);
         -2: raise Exception.Create(ErrMsg);
@@ -773,19 +576,16 @@ end;
 function TFitClientProxy.GetSpecimenList: TMSCRSpecimenList;
 var Res: LongInt;
     ErrMsg: string;
-{$IFNDEF FIT}
     Count: TIntResult;
     SpecIndex, SpecCount: LongInt;
     ParamIndex, ParamCount: LongInt;
     R: TSpecParamResult;
     CP: Curve_parameters;
     P: TSpecialCurveParameter;
-{$ENDIF}
 begin
     Result := nil;  //  chtoby ne bylo warning'a
     Assert(Assigned(FitStub));
     Res := 0; ErrMsg := '';
-{$IFNDEF FIT}
     Result := TMSCRSpecimenList.Create(nil);
     try
         Count := FitStub.GetSpecimenCount(ProblemID);
@@ -851,30 +651,19 @@ begin
         Result.Free; Result := nil;
         raise;
     end;
-{$ELSE}
-    Res := FitStub.GetSpecimenList(Result, ErrMsg);
-    case Res of
-        -1: raise EUserException.Create(ErrMsg);
-        -2: raise Exception.Create(ErrMsg);
-    end;
-    Result := TMSCRSpecimenList(Result.GetCopy);
-{$ENDIF}
 end;
 
 function TFitClientProxy.GetCurvesList: TSelfCopiedCompList;
 var Res: LongInt;
     ErrMsg: string;
-{$IFNDEF FIT}
     SpecCount: TIntResult;
     SpecIndex, Count: LongInt;
     Points: TNamedPointsSet;
     R: TNamedPointsResult;
-{$ENDIF}
 begin
     Result := nil;  //  chtoby ne bylo warning'a
     Assert(Assigned(FitStub));
     Res := 0; ErrMsg := '';
-{$IFNDEF FIT}
     Result := TSelfCopiedCompList.Create(nil);
     try
         SpecCount := FitStub.GetSpecimenCount(ProblemID);
@@ -915,82 +704,31 @@ begin
         Result.Free; Result := nil;
         raise;
     end;
-{$ELSE}
-    //  ob'ekt, peredannyi cherez parametr ne dolzhen osvobozhdat'sya!
-    Res := FitStub.GetCurvesList(Result, ErrMsg);
-    case Res of
-        -1: raise EUserException.Create(ErrMsg);
-        -2: raise Exception.Create(ErrMsg);
-    end;
-    Result := TSelfCopiedCompList(Result.GetCopy);
-{$ENDIF}
 end;
 
 function TFitClientProxy.GetCalcProfilePointsSet: TTitlePointsSet;
-{$IFDEF FIT}
-var Res: LongInt;
-    Points: TPointsSet;
-    ErrMsg: string;
-{$ENDIF}
 begin
     Assert(Assigned(FitStub));
-{$IFNDEF FIT}
     Result := ProcessPointsResult(FitStub.GetCalcProfilePointsSet(ProblemID));
-{$ELSE}
-    Points := nil;  //  chtoby ne bylo warning'a
-    //  ob'ekt, peredannyi cherez parametr ne dolzhen osvobozhdat'sya!
-    Res := FitStub.GetCalcProfilePointsSet(Points, ErrMsg);
-    if Assigned(Points) then
-        Result := TTitlePointsSet.CreateFromPoints(nil, Points)
-    else Result := nil;
-    case Res of
-        -1: raise EUserException.Create(ErrMsg);
-        -2: raise Exception.Create(ErrMsg);
-    end;
-{$ENDIF}
 end;
 
 function TFitClientProxy.GetDeltaProfilePointsSet: TTitlePointsSet;
-{$IFDEF FIT}
-var Res: LongInt;
-    Points: TPointsSet;
-    ErrMsg: string;
-{$ENDIF}
 begin
     Assert(Assigned(FitStub));
-{$IFNDEF FIT}
     Result := ProcessPointsResult(FitStub.GetDeltaProfilePointsSet(ProblemID));
-{$ELSE}
-    Points := nil;  //  chtoby ne bylo warning'a
-    //  ob'ekt, peredannyi cherez parametr ne dolzhen osvobozhdat'sya!
-    Res := FitStub.GetDeltaProfilePointsSet(Points, ErrMsg);
-    if Assigned(Points) then
-        Result := TTitlePointsSet.CreateFromPoints(nil, Points)
-    else Result := nil;
-    case Res of
-        -1: raise EUserException.Create(ErrMsg);
-        -2: raise Exception.Create(ErrMsg);
-    end;
-{$ENDIF}
 end;
 
 function TFitClientProxy.SmoothProfile: string;
 var Res: LongInt;
     ErrMsg: string;
-{$IFNDEF FIT}
     R: TResult;
-{$ENDIF}
 begin
     Assert(Assigned(FitStub));
-{$IFNDEF FIT}
     R := FitStub.SmoothProfile(ProblemID);
     if not Assigned(R) then raise Exception.Create(OutOfServerResources);
     Res := R.ErrCode;
     ErrMsg := R.ErrMsg;
     R.Free;
-{$ELSE}
-    Res := FitStub.SmoothProfile(ErrMsg);
-{$ENDIF}
     case Res of
         -1: raise EUserException.Create(ErrMsg);
         -2: raise Exception.Create(ErrMsg);
@@ -1001,20 +739,14 @@ end;
 procedure TFitClientProxy.SubtractAllBackground(Auto: Boolean);
 var Res: LongInt;
     ErrMsg: string;
-{$IFNDEF FIT}
     R: TResult;
-{$ENDIF}
 begin
     Assert(Assigned(FitStub));
-{$IFNDEF FIT}
     R := FitStub.SubtractAllBackground(Auto, ProblemID);
     if not Assigned(R) then raise Exception.Create(OutOfServerResources);
     Res := R.ErrCode;
     ErrMsg := R.ErrMsg;
     R.Free;
-{$ELSE}
-    Res := FitStub.SubtractAllBackground(Auto, ErrMsg);
-{$ENDIF}
     case Res of
         -1: raise EUserException.Create(ErrMsg);
         -2: raise Exception.Create(ErrMsg);
@@ -1024,20 +756,14 @@ end;
 function TFitClientProxy.DoAllAutomatically: string;
 var Res: LongInt;
     ErrMsg: string;
-{$IFNDEF FIT}
     R: TResult;
-{$ENDIF}
 begin
     Assert(Assigned(FitStub));
-{$IFNDEF FIT}
     R := FitStub.DoAllAutomatically(ProblemID);
     if not Assigned(R) then raise Exception.Create(OutOfServerResources);
     Res := R.ErrCode;
     ErrMsg := R.ErrMsg;
     R.Free;
-{$ELSE}
-    Res := FitStub.DoAllAutomatically(ErrMsg);
-{$ENDIF}
     case Res of
         -1: raise EUserException.Create(ErrMsg);
         -2: raise Exception.Create(ErrMsg);
@@ -1048,20 +774,14 @@ end;
 function TFitClientProxy.FindGausses: string;
 var Res: LongInt;
     ErrMsg: string;
-{$IFNDEF FIT}
     R: TResult;
-{$ENDIF}
 begin
     Assert(Assigned(FitStub));
-{$IFNDEF FIT}
     R := FitStub.MinimizeDifference(ProblemID);
     if not Assigned(R) then raise Exception.Create(OutOfServerResources);
     Res := R.ErrCode;
     ErrMsg := R.ErrMsg;
     R.Free;
-{$ELSE}
-    Res := FitStub.FindGausses(ErrMsg);
-{$ENDIF}
     case Res of
         -1: raise EUserException.Create(ErrMsg);
         -2: raise Exception.Create(ErrMsg);
@@ -1073,45 +793,33 @@ end;
 function TFitClientProxy.FindGaussesAgain: string;
 var Res: LongInt;
     ErrMsg: string;
-{$IFNDEF FIT}
     R: TResult;
-{$ENDIF}
 begin
     Assert(Assigned(FitStub));
-{$IFNDEF FIT}
     R := FitStub.FindGaussesAgain;
     if not Assigned(R) then raise Exception.Create(OutOfServerResources);
     Res := R.ErrCode;
     ErrMsg := R.ErrMsg;
     R.Free;
-{$ELSE}
-    Res := FitStub.FindGaussesAgain(ErrMsg);
-{$ENDIF}
     case Res of
         -1: raise EUserException.Create(ErrMsg);
         -2: raise Exception.Create(ErrMsg);
     end;
-{$ENDIF}
     Result := ErrMsg;
 end;
+{$ENDIF}
 
 function TFitClientProxy.FindGaussesSequentially: string;
 var Res: LongInt;
     ErrMsg: string;
-{$IFNDEF FIT}
     R: TResult;
-{$ENDIF}
 begin
     Assert(Assigned(FitStub));
-{$IFNDEF FIT}
     R := FitStub.MinimizeNumberOfSpecimens(ProblemID);
     if not Assigned(R) then raise Exception.Create(OutOfServerResources);
     Res := R.ErrCode;
     ErrMsg := R.ErrMsg;
     R.Free;
-{$ELSE}
-    Res := FitStub.FindGaussesSequentially(ErrMsg);
-{$ENDIF}
     case Res of
         -1: raise EUserException.Create(ErrMsg);
         -2: raise Exception.Create(ErrMsg);
@@ -1122,20 +830,14 @@ end;
 function TFitClientProxy.FindPeakBounds: string;
 var Res: LongInt;
     ErrMsg: string;
-{$IFNDEF FIT}
     R: TResult;
-{$ENDIF}
 begin
     Assert(Assigned(FitStub));
-{$IFNDEF FIT}
     R := FitStub.FindSpecimenIntervals(ProblemID);
     if not Assigned(R) then raise Exception.Create(OutOfServerResources);
     Res := R.ErrCode;
     ErrMsg := R.ErrMsg;
     R.Free;
-{$ELSE}
-    Res := FitStub.FindPeakBounds(ErrMsg);
-{$ENDIF}
     case Res of
         -1: raise EUserException.Create(ErrMsg);
         -2: raise Exception.Create(ErrMsg);
@@ -1146,20 +848,14 @@ end;
 function TFitClientProxy.FindBackPoints: string;
 var Res: LongInt;
     ErrMsg: string;
-{$IFNDEF FIT}
     R: TResult;
-{$ENDIF}
 begin
     Assert(Assigned(FitStub));
-{$IFNDEF FIT}
     R := FitStub.FindBackPoints(ProblemID);
     if not Assigned(R) then raise Exception.Create(OutOfServerResources);
     Res := R.ErrCode;
     ErrMsg := R.ErrMsg;
     R.Free;
-{$ELSE}
-    Res := FitStub.FindBackPoints(ErrMsg);
-{$ENDIF}
     case Res of
         -1: raise EUserException.Create(ErrMsg);
         -2: raise Exception.Create(ErrMsg);
@@ -1170,20 +866,14 @@ end;
 function TFitClientProxy.FindPeakPositions: string;
 var Res: LongInt;
     ErrMsg: string;
-{$IFNDEF FIT}
     R: TResult;
-{$ENDIF}
 begin
     Assert(Assigned(FitStub));
-{$IFNDEF FIT}
     R := FitStub.FindSpecimenPositions(ProblemID);
     if not Assigned(R) then raise Exception.Create(OutOfServerResources);
     Res := R.ErrCode;
     ErrMsg := R.ErrMsg;
     R.Free;
-{$ELSE}
-    Res := FitStub.FindPeakPositions(ErrMsg);
-{$ENDIF}
     case Res of
         -1: raise EUserException.Create(ErrMsg);
         -2: raise Exception.Create(ErrMsg);
@@ -1209,20 +899,14 @@ end;
 procedure TFitClientProxy.StopAsyncOper;
 var Res: LongInt;
     ErrMsg: string;
-{$IFNDEF FIT}
     R: TResult;
-{$ENDIF}
 begin
     Assert(Assigned(FitStub));
-{$IFNDEF FIT}
     R := FitStub.StopAsyncOper(ProblemID);
     if not Assigned(R) then raise Exception.Create(OutOfServerResources);
     Res := R.ErrCode;
     ErrMsg := R.ErrMsg;
     R.Free;
-{$ELSE}
-    Res := FitStub.StopAsyncOper(ErrMsg);
-{$ENDIF}
     case Res of
         -1: raise EUserException.Create(ErrMsg);
         -2: raise Exception.Create(ErrMsg);
@@ -1231,106 +915,70 @@ end;
 
 function TFitClientProxy.AsyncOper: Boolean;
 var ErrMsg: string;
-{$IFNDEF FIT}
     R: TBoolResult;
-{$ENDIF}
 begin
     Assert(Assigned(FitStub));
-{$IFNDEF FIT}
     R := FitStub.AsyncOper(ProblemID);
     if not Assigned(R) then raise Exception.Create(OutOfServerResources);
     Result := R._Result;
     R.Free;
-{$ELSE}
-    Result := FitStub.AsyncOper(ErrMsg);
-{$ENDIF}
 end;
 
 function TFitClientProxy.GetCalcTimeStr: string;
 var ErrMsg: string;
-{$IFNDEF FIT}
     R: TStringResult;
-{$ENDIF}
 begin
     Assert(Assigned(FitStub));
-{$IFNDEF FIT}
     R := FitStub.GetCalcTimeStr(ProblemID);
     if not Assigned(R) then raise Exception.Create(OutOfServerResources);
     Result := R._Result;
     R.Free;
-{$ELSE}
-    Result := FitStub.GetCalcTimeStr(ErrMsg);
-{$ENDIF}
 end;
 
 function TFitClientProxy.GetRFactorStr: string;
 var ErrMsg: string;
-{$IFNDEF FIT}
     R: TStringResult;
-{$ENDIF}
 begin
     Assert(Assigned(FitStub));
-{$IFNDEF FIT}
     R := FitStub.GetRFactorStr(ProblemID);
     if not Assigned(R) then raise Exception.Create(OutOfServerResources);
     Result := R._Result;
     R.Free;
-{$ELSE}
-    Result := FitStub.GetRFactorStr(ErrMsg);
-{$ENDIF}
 end;
 
 function TFitClientProxy.GetAbsRFactorStr: string;
 var ErrMsg: string;
-{$IFNDEF FIT}
     R: TStringResult;
-{$ENDIF}
 begin
     Assert(Assigned(FitStub));
-{$IFNDEF FIT}
     R := FitStub.GetAbsRFactorStr(ProblemID);
     if not Assigned(R) then raise Exception.Create(OutOfServerResources);
     Result := R._Result;
     R.Free;
-{$ELSE}
-    Result := FitStub.GetAbsRFactorStr(ErrMsg);
-{$ENDIF}
 end;
 
 function TFitClientProxy.GetSqrRFactorStr: string;
 var ErrMsg: string;
-{$IFNDEF FIT}
     R: TStringResult;
-{$ENDIF}
 begin
     Assert(Assigned(FitStub));
-{$IFNDEF FIT}
     R := FitStub.GetSqrRFactorStr(ProblemID);
     if not Assigned(R) then raise Exception.Create(OutOfServerResources);
     Result := R._Result;
     R.Free;
-{$ELSE}
-    Result := FitStub.GetSqrRFactorStr(ErrMsg);
-{$ENDIF}
 end;
 
 function TFitClientProxy.SelectArea(StartPointIndex, StopPointIndex: LongInt): string;
 var Res: LongInt;
     ErrMsg: string;
-{$IFNDEF FIT}
     R: TResult;
-{$ENDIF}
 begin
     Assert(Assigned(FitStub));
-{$IFNDEF FIT}
     R := FitStub.SelectArea(StartPointIndex, StopPointIndex, ProblemID);
     if not Assigned(R) then raise Exception.Create(OutOfServerResources);
     Res := R.ErrCode;
     ErrMsg := R.ErrMsg;
     R.Free;
-{$ELSE}
-    Res := FitStub.SelectArea(StartPointIndex, StopPointIndex, ErrMsg);
-{$ENDIF}
     case Res of
         -1: raise EUserException.Create(ErrMsg);
         -2: raise Exception.Create(ErrMsg);
@@ -1341,20 +989,14 @@ end;
 function TFitClientProxy.ReturnToTotalProfile: string;
 var Res: LongInt;
     ErrMsg: string;
-{$IFNDEF FIT}
     R: TResult;
-{$ENDIF}
 begin
     Assert(Assigned(FitStub));
-{$IFNDEF FIT}
     R := FitStub.ReturnToTotalProfile(ProblemID);
     if not Assigned(R) then raise Exception.Create(OutOfServerResources);
     Res := R.ErrCode;
     ErrMsg := R.ErrMsg;
     R.Free;
-{$ELSE}
-    Res := FitStub.ReturnToTotalProfile(ErrMsg);
-{$ENDIF}
     case Res of
         -1: raise EUserException.Create(ErrMsg);
         -2: raise Exception.Create(ErrMsg);
@@ -1365,20 +1007,14 @@ end;
 procedure TFitClientProxy.CreateSpecimenList;
 var Res: LongInt;
     ErrMsg: string;
-{$IFNDEF FIT}
     R: TResult;
-{$ENDIF}
 begin
     Assert(Assigned(FitStub));
-{$IFNDEF FIT}
     R := FitStub.CreateSpecimenList(ProblemID);
     if not Assigned(R) then raise Exception.Create(OutOfServerResources);
     Res := R.ErrCode;
     ErrMsg := R.ErrMsg;
     R.Free;
-{$ELSE}
-    Res := FitStub.CreateSpecimenList(ErrMsg);
-{$ENDIF}
     case Res of
         -1: raise EUserException.Create(ErrMsg);
         -2: raise Exception.Create(ErrMsg);
@@ -1388,20 +1024,14 @@ end;
 procedure TFitClientProxy.AddPointToData(XValue, YValue: Double);
 var Res: LongInt;
     ErrMsg: string;
-{$IFNDEF FIT}
     R: TResult;
-{$ENDIF}
 begin
     Assert(Assigned(FitStub));
-{$IFNDEF FIT}
     R := FitStub.AddPointToData(XValue, YValue, ProblemID);
     if not Assigned(R) then raise Exception.Create(OutOfServerResources);
     Res := R.ErrCode;
     ErrMsg := R.ErrMsg;
     R.Free;
-{$ELSE}
-    Res := FitStub.AddPointToData(XValue, YValue, ErrMsg);
-{$ENDIF}
     case Res of
         -1: raise EUserException.Create(ErrMsg);
         -2: raise Exception.Create(ErrMsg);
@@ -1411,20 +1041,14 @@ end;
 procedure TFitClientProxy.AddPointToBackground(XValue, YValue: Double);
 var Res: LongInt;
     ErrMsg: string;
-{$IFNDEF FIT}
     R: TResult;
-{$ENDIF}
 begin
     Assert(Assigned(FitStub));
-{$IFNDEF FIT}
     R := FitStub.AddPointToBackground(XValue, YValue, ProblemID);
     if not Assigned(R) then raise Exception.Create(OutOfServerResources);
     Res := R.ErrCode;
     ErrMsg := R.ErrMsg;
     R.Free;
-{$ELSE}
-    Res := FitStub.AddPointToBackground(XValue, YValue, ErrMsg);
-{$ENDIF}
     case Res of
         -1: raise EUserException.Create(ErrMsg);
         -2: raise Exception.Create(ErrMsg);
@@ -1434,20 +1058,14 @@ end;
 procedure TFitClientProxy.AddPointToRFactorIntervals(XValue, YValue: Double);
 var Res: LongInt;
     ErrMsg: string;
-{$IFNDEF FIT}
     R: TResult;
-{$ENDIF}
 begin
     Assert(Assigned(FitStub));
-{$IFNDEF FIT}
     R := FitStub.AddPointToSpecimenIntervals(XValue, YValue, ProblemID);
     if not Assigned(R) then raise Exception.Create(OutOfServerResources);
     Res := R.ErrCode;
     ErrMsg := R.ErrMsg;
     R.Free;
-{$ELSE}
-    Res := FitStub.AddPointToRFactorIntervals(XValue, YValue, ErrMsg);
-{$ENDIF}
     case Res of
         -1: raise EUserException.Create(ErrMsg);
         -2: raise Exception.Create(ErrMsg);
@@ -1457,20 +1075,14 @@ end;
 procedure TFitClientProxy.AddPointToCurvePositions(XValue, YValue: Double);
 var Res: LongInt;
     ErrMsg: string;
-{$IFNDEF FIT}
     R: TResult;
-{$ENDIF}
 begin
     Assert(Assigned(FitStub));
-{$IFNDEF FIT}
     R := FitStub.AddPointToSpecimenPositions(XValue, YValue, ProblemID);
     if not Assigned(R) then raise Exception.Create(OutOfServerResources);
     Res := R.ErrCode;
     ErrMsg := R.ErrMsg;
     R.Free;
-{$ELSE}
-    Res := FitStub.AddPointToCurvePositions(XValue, YValue, ErrMsg);
-{$ENDIF}
     case Res of
         -1: raise EUserException.Create(ErrMsg);
         -2: raise Exception.Create(ErrMsg);
@@ -1481,22 +1093,15 @@ procedure TFitClientProxy.ReplacePointInData(
     PrevXValue, PrevYValue, NewXValue, NewYValue: Double);
 var Res: LongInt;
     ErrMsg: string;
-{$IFNDEF FIT}
     R: TResult;
-{$ENDIF}
 begin
     Assert(Assigned(FitStub));
-{$IFNDEF FIT}
     R := FitStub.ReplacePointInProfile(
         PrevXValue, PrevYValue, NewXValue, NewYValue, ProblemID);
     if not Assigned(R) then raise Exception.Create(OutOfServerResources);
     Res := R.ErrCode;
     ErrMsg := R.ErrMsg;
     R.Free;
-{$ELSE}
-    Res := FitStub.ReplacePointInData(
-        PrevXValue, PrevYValue, NewXValue, NewYValue, ErrMsg);
-{$ENDIF}
     case Res of
         -1: raise EUserException.Create(ErrMsg);
         -2: raise Exception.Create(ErrMsg);
@@ -1507,22 +1112,15 @@ procedure TFitClientProxy.ReplacePointInBackground(
     PrevXValue, PrevYValue, NewXValue, NewYValue: Double);
 var Res: LongInt;
     ErrMsg: string;
-{$IFNDEF FIT}
     R: TResult;
-{$ENDIF}
 begin
     Assert(Assigned(FitStub));
-{$IFNDEF FIT}
     R := FitStub.ReplacePointInBackground(
         PrevXValue, PrevYValue, NewXValue, NewYValue, ProblemID);
     if not Assigned(R) then raise Exception.Create(OutOfServerResources);
     Res := R.ErrCode;
     ErrMsg := R.ErrMsg;
     R.Free;
-{$ELSE}
-    Res := FitStub.ReplacePointInBackground(
-        PrevXValue, PrevYValue, NewXValue, NewYValue, ErrMsg);
-{$ENDIF}
     case Res of
         -1: raise EUserException.Create(ErrMsg);
         -2: raise Exception.Create(ErrMsg);
@@ -1533,22 +1131,15 @@ procedure TFitClientProxy.ReplacePointInRFactorIntervals(
     PrevXValue, PrevYValue, NewXValue, NewYValue: Double);
 var Res: LongInt;
     ErrMsg: string;
-{$IFNDEF FIT}
     R: TResult;
-{$ENDIF}
 begin
     Assert(Assigned(FitStub));
-{$IFNDEF FIT}
     R := FitStub.ReplacePointInSpecimenIntervals(
         PrevXValue, PrevYValue, NewXValue, NewYValue, ProblemID);
     if not Assigned(R) then raise Exception.Create(OutOfServerResources);
     Res := R.ErrCode;
     ErrMsg := R.ErrMsg;
     R.Free;
-{$ELSE}
-    Res := FitStub.ReplacePointInRFactorIntervals(
-        PrevXValue, PrevYValue, NewXValue, NewYValue, ErrMsg);
-{$ENDIF}
     case Res of
         -1: raise EUserException.Create(ErrMsg);
         -2: raise Exception.Create(ErrMsg);
@@ -1559,22 +1150,15 @@ procedure TFitClientProxy.ReplacePointInCurvePositions(
     PrevXValue, PrevYValue, NewXValue, NewYValue: Double);
 var Res: LongInt;
     ErrMsg: string;
-{$IFNDEF FIT}
     R: TResult;
-{$ENDIF}
 begin
     Assert(Assigned(FitStub));
-{$IFNDEF FIT}
     R := FitStub.ReplacePointInSpecimenPositions(
         PrevXValue, PrevYValue, NewXValue, NewYValue, ProblemID);
     if not Assigned(R) then raise Exception.Create(OutOfServerResources);
     Res := R.ErrCode;
     ErrMsg := R.ErrMsg;
     R.Free;
-{$ELSE}
-    Res := FitStub.ReplacePointInCurvePositions(
-        PrevXValue, PrevYValue, NewXValue, NewYValue, ErrMsg);
-{$ENDIF}
     case Res of
         -1: raise EUserException.Create(ErrMsg);
         -2: raise Exception.Create(ErrMsg);

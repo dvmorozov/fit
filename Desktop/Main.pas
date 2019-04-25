@@ -42,7 +42,7 @@ uses SysUtils, Forms
         synapse_http_protocol, soap_formatter, binary_formatter,
         base_service_intf
 {$IFDEF FITCGI}
-    , FitClientProxy, PointsSet, NamedPointsSet
+    , fit_client_proxy, PointsSet, NamedPointsSet
 {$ENDIF}
     //{$ENDIF}
 {$ENDIF}
@@ -51,14 +51,9 @@ uses SysUtils, Forms
 //  k nim mozhno bylo by poluchit' dostup iz drugih modulei
 {$IFDEF FITCLIENT}
     var FitClientApp_: TFitClientApp;
-    {$IFNDEF FIT}
-        ProblemID: LongInt;     //  poka podderzhivaetsya tol'ko odin ProblemID
-                                //  na klient
-    {$ENDIF}
 {$ELSE}
 {$IFDEF FITCGI}
     var Proxy: TFitClientProxy;
-        ProblemID: LongInt = 0;
         Key: string = '';       //  klyuch, poluchennyi vo vremya registratsii
         UserName: string = '';
 {$ENDIF}    //  FITCGI
@@ -324,7 +319,7 @@ initialization
     FitClientApp_.FitProxy.FitStub := FitServerApp_.FitStub;
 {$ELSE}
 {$IFDEF FITCGI}
-    Proxy := TFitClientProxy.Create;
+    Proxy := TFitClientProxy.Create(nil);
     Proxy.FitStub := //wst_CreateInstance_IFitServer;
         TFitServer_Proxy.Create(
             'IFitServer',

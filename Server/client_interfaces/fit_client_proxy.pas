@@ -37,6 +37,8 @@ type
       as the server. }
     TFitClientProxy = class(TCBRCComponent, IFitService)
     protected
+        ProblemID: LongInt;         //  For now only single problem id is
+                                    //  supported per client.
         FFitStub: IFitServer;       //  Access the server
                                     //  via XMP-RPC (wst-5.0)
                                     
@@ -58,6 +60,8 @@ type
         function ProcessPointsResult(R: TPointsResult): TTitlePointsSet;
 {$ENDIF}
     public
+        constructor Create(AOwner: TComponent); override;
+        
         { GetXXXX methods create and return A NEW OBJECT, 
           responsibility to free it is put on calling code. }
         
@@ -150,7 +154,7 @@ type
         property CurveTypeId: TCurveTypeId read GetCurveType write SetCurveType;
         property State: TFitServerState read GetState;
         property WaveLength: Double read GetWaveLength write SetWaveLength;
-        property FitStub: TFitServerStub read FFitStub write FFitStub;
+        property FitStub: IFitServer read FFitStub write FFitStub;
     end;
 
 implementation
@@ -161,6 +165,12 @@ uses Main;
 const OutOfServerResources: string = 'Out of server resources.';
 
 {========================== TFitClientProxy ===================================}
+
+constructor TFitClientProxy.Create(AOwner: TComponent);
+begin
+    ProblemID := 0;
+end;
+
 function TFitClientProxy.GetMaxRFactor: Double;
 begin
     Assert(Assigned(FitStub));

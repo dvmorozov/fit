@@ -330,6 +330,8 @@ function TFitClientProxy.SetBackgroundPointsSet(
     ABackgroundPoints: TTitlePointsSet): string;
 var Res: LongInt;
     ErrMsg: string;
+    ADR: TArrayOfFloatDoubleRemotable;
+    R: TResult;
 begin
     Assert(Assigned(FitStub));
     Res := 0; ErrMsg := '';
@@ -360,6 +362,8 @@ end;
 function TFitClientProxy.SetCurvePositions(ACurvePositions: TPointsSet): string;
 var Res: LongInt;
     ErrMsg: string;
+    ADR: TArrayOfFloatDoubleRemotable;
+    R: TResult;
 begin
     Assert(Assigned(FitStub));
     Res := 0; ErrMsg := '';

@@ -8,7 +8,7 @@
       <IconPath Value="./"/>
       <TargetFileExt Value=".exe"/>
       <UseAppBundle Value="False"/>
-      <ActiveEditorIndexAtStart Value="17"/>
+      <ActiveEditorIndexAtStart Value="8"/>
     </General>
     <VersionInfo>
       <ProjectVersion Value=""/>
@@ -38,7 +38,7 @@
         <MinVersion Major="1" Minor="1" Valid="True"/>
       </Item3>
     </RequiredPackages>
-    <Units Count="66">
+    <Units Count="65">
       <Unit0>
         <Filename Value="CgiFit.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -55,8 +55,8 @@
         <IsPartOfProject Value="True"/>
         <ResourceFilename Value="Unit2.lrs"/>
         <UnitName Value="Unit2"/>
-        <CursorPos X="17" Y="11"/>
-        <TopLine Value="1"/>
+        <CursorPos X="55" Y="4396"/>
+        <TopLine Value="4379"/>
         <EditorIndex Value="8"/>
         <UsageCount Value="202"/>
         <Loaded Value="True"/>
@@ -167,42 +167,42 @@
         <UnitName Value="fit_server_proxy"/>
         <CursorPos X="22" Y="1104"/>
         <TopLine Value="1073"/>
-        <UsageCount Value="200"/>
+        <UsageCount Value="196"/>
       </Unit13>
       <Unit14>
         <Filename Value="..\DataLoader.pas"/>
         <UnitName Value="DataLoader"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <UsageCount Value="199"/>
+        <UsageCount Value="195"/>
       </Unit14>
       <Unit15>
         <Filename Value="..\FitClientProxy.pas"/>
         <UnitName Value="FitClientProxy"/>
         <CursorPos X="19" Y="129"/>
         <TopLine Value="109"/>
-        <UsageCount Value="110"/>
+        <UsageCount Value="106"/>
       </Unit15>
       <Unit16>
         <Filename Value="..\Main.pas"/>
         <UnitName Value="Main"/>
         <CursorPos X="1" Y="261"/>
         <TopLine Value="1"/>
-        <UsageCount Value="203"/>
+        <UsageCount Value="199"/>
       </Unit16>
       <Unit17>
         <Filename Value="..\Packages\VariousGrids\SelfCopied.pas"/>
         <UnitName Value="SelfCopied"/>
         <CursorPos X="3" Y="2"/>
         <TopLine Value="1"/>
-        <UsageCount Value="69"/>
+        <UsageCount Value="65"/>
       </Unit17>
       <Unit18>
         <Filename Value="..\CommonTypes.pas"/>
         <UnitName Value="CommonTypes"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <UsageCount Value="201"/>
+        <UsageCount Value="197"/>
       </Unit18>
       <Unit19>
         <Filename Value="specimen_positions.pas"/>
@@ -217,7 +217,7 @@
         <UnitName Value="MSCRDataClasses"/>
         <CursorPos X="21" Y="58"/>
         <TopLine Value="46"/>
-        <UsageCount Value="199"/>
+        <UsageCount Value="195"/>
       </Unit20>
       <Unit21>
         <Filename Value="fitting.pas"/>
@@ -240,7 +240,7 @@
         <UnitName Value="SimpMath"/>
         <CursorPos X="9" Y="701"/>
         <TopLine Value="682"/>
-        <UsageCount Value="69"/>
+        <UsageCount Value="65"/>
       </Unit23>
       <Unit24>
         <Filename Value="gen_spec_pos_progress.pas"/>
@@ -303,7 +303,7 @@
         <UnitName Value="GeneralHashfunctions"/>
         <CursorPos X="57" Y="7"/>
         <TopLine Value="1"/>
-        <UsageCount Value="98"/>
+        <UsageCount Value="94"/>
       </Unit31>
       <Unit32>
         <Filename Value="pattern.pas"/>
@@ -342,7 +342,7 @@
       <Unit36>
         <Filename Value="..\GeneralHashFunctions.pas"/>
         <UnitName Value="GeneralHashFunctions"/>
-        <UsageCount Value="198"/>
+        <UsageCount Value="194"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit36>
       <Unit37>
@@ -360,237 +360,336 @@
         <UnitName Value="fit_server"/>
         <CursorPos X="27" Y="246"/>
         <TopLine Value="226"/>
-        <UsageCount Value="119"/>
+        <UsageCount Value="115"/>
       </Unit38>
       <Unit39>
         <Filename Value="E:\lazarus\fpc\2.2.0\source\rtl\objpas\classes\classesh.inc"/>
         <CursorPos X="14" Y="1339"/>
         <TopLine Value="1320"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="5"/>
       </Unit39>
       <Unit40>
-        <Filename Value="..\..\..\lazarus\fpc\2.2.0\source\rtl\objpas\sysutils\sysutilh.inc"/>
-        <CursorPos X="14" Y="172"/>
-        <TopLine Value="151"/>
-        <UsageCount Value="3"/>
-      </Unit40>
-      <Unit41>
         <Filename Value="evaluation.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="evaluation"/>
-        <CursorPos X="47" Y="20"/>
-        <TopLine Value="6"/>
+        <CursorPos X="17" Y="69"/>
+        <TopLine Value="34"/>
+        <EditorIndex Value="19"/>
         <UsageCount Value="200"/>
-      </Unit41>
-      <Unit42>
+        <Loaded Value="True"/>
+      </Unit40>
+      <Unit41>
         <Filename Value="..\Packages\TAGraph\Component\TAGraph.pas"/>
         <UnitName Value="TAGraph"/>
         <CursorPos X="20" Y="2776"/>
         <TopLine Value="2756"/>
-        <UsageCount Value="89"/>
-      </Unit42>
-      <Unit43>
+        <UsageCount Value="85"/>
+      </Unit41>
+      <Unit42>
         <Filename Value="..\..\..\lazarus\fpc\2.2.0\source\packages\fcl-base\src\inc\cgiapp.pp"/>
         <UnitName Value="cgiapp"/>
         <CursorPos X="28" Y="221"/>
         <TopLine Value="200"/>
-        <UsageCount Value="4"/>
-      </Unit43>
-      <Unit44>
+        <UsageCount Value="0"/>
+      </Unit42>
+      <Unit43>
         <Filename Value="..\..\..\lazarus\fpc\2.2.0\source\rtl\objpas\sysutils\osutilsh.inc"/>
         <CursorPos X="13" Y="32"/>
         <TopLine Value="21"/>
-        <UsageCount Value="4"/>
-      </Unit44>
-      <Unit45>
+        <UsageCount Value="0"/>
+      </Unit43>
+      <Unit44>
         <Filename Value="..\..\..\lazarus\fpc\2.2.0\source\rtl\objpas\sysutils\osutil.inc"/>
         <CursorPos X="18" Y="164"/>
         <TopLine Value="141"/>
-        <UsageCount Value="4"/>
-      </Unit45>
-      <Unit46>
+        <UsageCount Value="0"/>
+      </Unit44>
+      <Unit45>
         <Filename Value="..\..\..\lazarus\fpc\2.2.0\source\packages\fcl-base\src\inc\custapp.pp"/>
         <UnitName Value="CustApp"/>
         <CursorPos X="1" Y="502"/>
         <TopLine Value="472"/>
-        <UsageCount Value="8"/>
-      </Unit46>
-      <Unit47>
-        <Filename Value="data.inc"/>
-        <CursorPos X="48" Y="2"/>
-        <TopLine Value="1"/>
-        <UsageCount Value="3"/>
-      </Unit47>
-      <Unit48>
+        <UsageCount Value="4"/>
+      </Unit45>
+      <Unit46>
         <Filename Value="..\Desktop\CommonTypes.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="CommonTypes"/>
-        <UsageCount Value="38"/>
+        <UsageCount Value="77"/>
         <SyntaxHighlighter Value="Text"/>
-      </Unit48>
-      <Unit49>
+      </Unit46>
+      <Unit47>
         <Filename Value="..\Desktop\DataLoader.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="DataLoader"/>
         <CursorPos X="45" Y="18"/>
         <TopLine Value="1"/>
-        <UsageCount Value="38"/>
-      </Unit49>
-      <Unit50>
+        <UsageCount Value="77"/>
+      </Unit47>
+      <Unit48>
         <Filename Value="..\Desktop\fit_server_proxy.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="fit_server_proxy"/>
         <CursorPos X="17" Y="1747"/>
         <TopLine Value="1601"/>
-        <EditorIndex Value="16"/>
-        <UsageCount Value="38"/>
+        <EditorIndex Value="17"/>
+        <UsageCount Value="77"/>
         <Loaded Value="True"/>
-      </Unit50>
-      <Unit51>
+      </Unit48>
+      <Unit49>
         <Filename Value="..\Desktop\GeneralHashFunctions.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="GeneralHashFunctions"/>
-        <UsageCount Value="38"/>
+        <UsageCount Value="77"/>
         <SyntaxHighlighter Value="Text"/>
-      </Unit51>
-      <Unit52>
+      </Unit49>
+      <Unit50>
         <Filename Value="..\Desktop\Main.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Main"/>
-        <CursorPos X="27" Y="60"/>
-        <TopLine Value="42"/>
+        <CursorPos X="27" Y="56"/>
+        <TopLine Value="38"/>
         <EditorIndex Value="13"/>
-        <UsageCount Value="38"/>
+        <UsageCount Value="77"/>
         <Loaded Value="True"/>
-      </Unit52>
-      <Unit53>
+      </Unit50>
+      <Unit51>
         <Filename Value="..\Desktop\MSCRDataClasses.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="MSCRDataClasses"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <UsageCount Value="38"/>
-      </Unit53>
-      <Unit54>
+        <UsageCount Value="77"/>
+      </Unit51>
+      <Unit52>
         <Filename Value="..\..\..\lazarus_lib\FitMinimizers\Tools.pas"/>
         <UnitName Value="Tools"/>
         <CursorPos X="46" Y="166"/>
         <TopLine Value="151"/>
-        <UsageCount Value="8"/>
-      </Unit54>
-      <Unit55>
+        <UsageCount Value="4"/>
+      </Unit52>
+      <Unit53>
         <Filename Value="..\..\..\lazarus_lib\FitGrids\NumericGrid.pas"/>
         <UnitName Value="NumericGrid"/>
         <CursorPos X="23" Y="18"/>
         <TopLine Value="8"/>
-        <UsageCount Value="8"/>
-      </Unit55>
-      <Unit56>
+        <UsageCount Value="4"/>
+      </Unit53>
+      <Unit54>
         <Filename Value="..\Desktop\FitClientProxy.pas"/>
         <UnitName Value="FitClientProxy"/>
         <CursorPos X="29" Y="156"/>
         <TopLine Value="128"/>
-        <UsageCount Value="14"/>
-      </Unit56>
-      <Unit57>
+        <UsageCount Value="10"/>
+      </Unit54>
+      <Unit55>
         <Filename Value="..\Desktop\fit_server.pas"/>
         <UnitName Value="fit_server"/>
         <CursorPos X="13" Y="30"/>
         <TopLine Value="17"/>
-        <UsageCount Value="9"/>
-      </Unit57>
-      <Unit58>
+        <UsageCount Value="5"/>
+      </Unit55>
+      <Unit56>
         <Filename Value="..\..\fitminimizers\SimpMath.pas"/>
         <UnitName Value="SimpMath"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
         <EditorIndex Value="12"/>
-        <UsageCount Value="18"/>
+        <UsageCount Value="38"/>
         <Loaded Value="True"/>
-      </Unit58>
-      <Unit59>
+      </Unit56>
+      <Unit57>
         <Filename Value="..\..\fitgrids\NumericGrid.pas"/>
         <UnitName Value="NumericGrid"/>
         <CursorPos X="1" Y="150"/>
         <TopLine Value="132"/>
-        <UsageCount Value="9"/>
-      </Unit59>
-      <Unit60>
+        <UsageCount Value="5"/>
+      </Unit57>
+      <Unit58>
         <Filename Value="..\..\..\lazarus-0.9.24\fpc\2.2.0\source\packages\fcl-base\src\inc\custapp.pp"/>
         <UnitName Value="CustApp"/>
         <CursorPos X="1" Y="502"/>
         <TopLine Value="467"/>
-        <EditorIndex Value="15"/>
-        <UsageCount Value="17"/>
+        <EditorIndex Value="16"/>
+        <UsageCount Value="37"/>
         <Loaded Value="True"/>
-      </Unit60>
-      <Unit61>
+      </Unit58>
+      <Unit59>
         <Filename Value="..\Desktop\DataLoaders\DataLoader.pas"/>
         <UnitName Value="DataLoader"/>
         <CursorPos X="34" Y="19"/>
         <TopLine Value="1"/>
         <EditorIndex Value="11"/>
-        <UsageCount Value="17"/>
+        <UsageCount Value="37"/>
         <Loaded Value="True"/>
-      </Unit61>
-      <Unit62>
+      </Unit59>
+      <Unit60>
         <Filename Value="..\Packages\wst-0.5\service_intf.pas"/>
         <UnitName Value="service_intf"/>
         <CursorPos X="78" Y="12"/>
         <TopLine Value="1"/>
         <EditorIndex Value="10"/>
-        <UsageCount Value="17"/>
+        <UsageCount Value="37"/>
         <Loaded Value="True"/>
-      </Unit62>
-      <Unit63>
+      </Unit60>
+      <Unit61>
         <Filename Value="..\Desktop\ModelCurves\NamedPointsSet.pas"/>
         <UnitName Value="NamedPointsSet"/>
         <CursorPos X="35" Y="36"/>
         <TopLine Value="23"/>
-        <EditorIndex Value="14"/>
-        <UsageCount Value="13"/>
+        <EditorIndex Value="15"/>
+        <UsageCount Value="33"/>
         <Loaded Value="True"/>
-      </Unit63>
-      <Unit64>
+      </Unit61>
+      <Unit62>
         <Filename Value="..\Desktop\ModelCurves\LorentzPointsSet.pas"/>
         <UnitName Value="LorentzPointsSet"/>
         <CursorPos X="24" Y="32"/>
         <TopLine Value="14"/>
         <EditorIndex Value="9"/>
-        <UsageCount Value="13"/>
+        <UsageCount Value="33"/>
         <Loaded Value="True"/>
-      </Unit64>
-      <Unit65>
+      </Unit62>
+      <Unit63>
         <Filename Value="..\Server\client_interfaces\fit_client_proxy.pas"/>
         <UnitName Value="fit_client_proxy"/>
-        <CursorPos X="1" Y="1162"/>
-        <TopLine Value="10"/>
-        <EditorIndex Value="17"/>
-        <UsageCount Value="13"/>
+        <CursorPos X="55" Y="161"/>
+        <TopLine Value="147"/>
+        <EditorIndex Value="18"/>
+        <UsageCount Value="33"/>
         <Loaded Value="True"/>
-      </Unit65>
+      </Unit63>
+      <Unit64>
+        <Filename Value="..\Packages\wst-0.5\binary_formatter.pas"/>
+        <UnitName Value="binary_formatter"/>
+        <CursorPos X="6" Y="49"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="14"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
+      </Unit64>
     </Units>
-    <JumpHistory Count="5" HistoryIndex="4">
+    <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="..\Server\client_interfaces\fit_client_proxy.pas"/>
-        <Caret Line="174" Column="9" TopLine="151"/>
+        <Filename Value="Unit2.pas"/>
+        <Caret Line="2213" Column="24" TopLine="2195"/>
       </Position1>
       <Position2>
-        <Filename Value="..\Server\client_interfaces\fit_client_proxy.pas"/>
-        <Caret Line="180" Column="50" TopLine="162"/>
+        <Filename Value="Unit2.pas"/>
+        <Caret Line="2221" Column="70" TopLine="2203"/>
       </Position2>
       <Position3>
-        <Filename Value="..\Server\client_interfaces\fit_client_proxy.pas"/>
-        <Caret Line="384" Column="11" TopLine="354"/>
+        <Filename Value="Unit2.pas"/>
+        <Caret Line="2253" Column="24" TopLine="2235"/>
       </Position3>
       <Position4>
-        <Filename Value="..\Server\client_interfaces\fit_client_proxy.pas"/>
-        <Caret Line="397" Column="27" TopLine="374"/>
+        <Filename Value="Unit2.pas"/>
+        <Caret Line="2258" Column="70" TopLine="2240"/>
       </Position4>
       <Position5>
-        <Filename Value="..\Server\client_interfaces\fit_client_proxy.pas"/>
-        <Caret Line="796" Column="9" TopLine="771"/>
+        <Filename Value="Unit2.pas"/>
+        <Caret Line="2288" Column="24" TopLine="2270"/>
       </Position5>
+      <Position6>
+        <Filename Value="Unit2.pas"/>
+        <Caret Line="2293" Column="70" TopLine="2275"/>
+      </Position6>
+      <Position7>
+        <Filename Value="Unit2.pas"/>
+        <Caret Line="2323" Column="24" TopLine="2305"/>
+      </Position7>
+      <Position8>
+        <Filename Value="Unit2.pas"/>
+        <Caret Line="2328" Column="70" TopLine="2310"/>
+      </Position8>
+      <Position9>
+        <Filename Value="Unit2.pas"/>
+        <Caret Line="2822" Column="24" TopLine="2804"/>
+      </Position9>
+      <Position10>
+        <Filename Value="Unit2.pas"/>
+        <Caret Line="2824" Column="38" TopLine="2806"/>
+      </Position10>
+      <Position11>
+        <Filename Value="Unit2.pas"/>
+        <Caret Line="2997" Column="19" TopLine="2979"/>
+      </Position11>
+      <Position12>
+        <Filename Value="Unit2.pas"/>
+        <Caret Line="2998" Column="37" TopLine="2980"/>
+      </Position12>
+      <Position13>
+        <Filename Value="Unit2.pas"/>
+        <Caret Line="3000" Column="38" TopLine="2982"/>
+      </Position13>
+      <Position14>
+        <Filename Value="Unit2.pas"/>
+        <Caret Line="3031" Column="24" TopLine="3013"/>
+      </Position14>
+      <Position15>
+        <Filename Value="Unit2.pas"/>
+        <Caret Line="3034" Column="32" TopLine="3016"/>
+      </Position15>
+      <Position16>
+        <Filename Value="Unit2.pas"/>
+        <Caret Line="3373" Column="70" TopLine="3363"/>
+      </Position16>
+      <Position17>
+        <Filename Value="Unit2.pas"/>
+        <Caret Line="3811" Column="70" TopLine="3793"/>
+      </Position17>
+      <Position18>
+        <Filename Value="Unit2.pas"/>
+        <Caret Line="3990" Column="24" TopLine="3972"/>
+      </Position18>
+      <Position19>
+        <Filename Value="Unit2.pas"/>
+        <Caret Line="4038" Column="24" TopLine="4020"/>
+      </Position19>
+      <Position20>
+        <Filename Value="Unit2.pas"/>
+        <Caret Line="4046" Column="33" TopLine="4028"/>
+      </Position20>
+      <Position21>
+        <Filename Value="Unit2.pas"/>
+        <Caret Line="4148" Column="24" TopLine="4130"/>
+      </Position21>
+      <Position22>
+        <Filename Value="Unit2.pas"/>
+        <Caret Line="4207" Column="24" TopLine="4189"/>
+      </Position22>
+      <Position23>
+        <Filename Value="Unit2.pas"/>
+        <Caret Line="4254" Column="24" TopLine="4236"/>
+      </Position23>
+      <Position24>
+        <Filename Value="Unit2.pas"/>
+        <Caret Line="4310" Column="24" TopLine="4292"/>
+      </Position24>
+      <Position25>
+        <Filename Value="Unit2.pas"/>
+        <Caret Line="4326" Column="70" TopLine="4308"/>
+      </Position25>
+      <Position26>
+        <Filename Value="Unit2.pas"/>
+        <Caret Line="4358" Column="24" TopLine="4340"/>
+      </Position26>
+      <Position27>
+        <Filename Value="Unit2.pas"/>
+        <Caret Line="4374" Column="70" TopLine="4356"/>
+      </Position27>
+      <Position28>
+        <Filename Value="Unit2.pas"/>
+        <Caret Line="4386" Column="27" TopLine="4368"/>
+      </Position28>
+      <Position29>
+        <Filename Value="Unit2.pas"/>
+        <Caret Line="4388" Column="84" TopLine="4370"/>
+      </Position29>
+      <Position30>
+        <Filename Value="Unit2.pas"/>
+        <Caret Line="4397" Column="9" TopLine="4379"/>
+      </Position30>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
@@ -600,7 +699,7 @@
       <Filename Value="o\FitCgi\$(TargetCPU)-$(TargetOS)\fit.cgi"/>
     </Target>
     <SearchPaths>
-      <OtherUnitFiles Value="C:\lazarus-0.9.24\components\codetools\;..\Server\;C:\lazarus-0.9.24\ideintf\;C:\lazarus-0.9.24\fpc\2.2.0\source\packages\fcl-base\src\inc\;..\..\FitGrids-0.9.24\;..\..\FitMinimizers-0.9.24\;..\Packages\synapse40\source\lib\;..\Packages\synapse40\source\;..\Packages\wst-0.5\;..\Desktop\;..\Desktop\DataLoaders\;..\Desktop\ModelCurves\;..\Desktop\ModelCurves\UserPointsSet\"/>
+      <OtherUnitFiles Value="C:\lazarus-0.9.24\components\codetools\;..\Server\;..\Server\client_interfaces\;C:\lazarus-0.9.24\ideintf\;C:\lazarus-0.9.24\fpc\2.2.0\source\packages\fcl-base\src\inc\;..\..\FitGrids-0.9.24\;..\..\FitMinimizers-0.9.24\;..\Packages\synapse40\source\lib\;..\Packages\synapse40\source\;..\Packages\wst-0.5\;..\Desktop\;..\Desktop\DataLoaders\;..\Desktop\ModelCurves\;..\Desktop\ModelCurves\UserPointsSet\"/>
       <UnitOutputDirectory Value="o\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Linking>

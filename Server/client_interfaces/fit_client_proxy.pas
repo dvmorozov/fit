@@ -37,7 +37,7 @@ type
       as the server. }
     TFitClientProxy = class(TCBRCComponent, IFitService)
     protected
-        ProblemID: LongInt;         //  For now only single problem id is
+        FProblemId: LongInt;        //  For now only single problem id is
                                     //  supported per client.
         FFitStub: IFitServer;       //  Access the server
                                     //  via XMP-RPC (wst-5.0)
@@ -147,6 +147,9 @@ type
         function SelectArea(StartPointIndex, StopPointIndex: LongInt): string;
         function ReturnToTotalProfile: string;
         procedure CreateSpecimenList;
+        
+        { Should be called in appropriate server state. }
+        procedure CreateProblem;
 
         property MaxRFactor: Double read GetMaxRFactor write SetMaxRFactor;
         property BackFactor: Double read GetBackFactor write SetBackFactor;
@@ -155,6 +158,8 @@ type
         property State: TFitServerState read GetState;
         property WaveLength: Double read GetWaveLength write SetWaveLength;
         property FitStub: IFitServer read FFitStub write FFitStub;
+        { Passed via URL parameter for CGI application, should be writeable. }
+        property ProblemId: LongInt read FProblemId write FProblemId;
     end;
 
 implementation
@@ -168,7 +173,12 @@ const OutOfServerResources: string = 'Out of server resources.';
 
 constructor TFitClientProxy.Create(AOwner: TComponent);
 begin
-    ProblemID := 0;
+    FProblemId := 0;
+end;
+
+procedure TFitClientProxy.CreateProblem;
+begin
+    FProblemId := FitStub.CreateProblem;
 end;
 
 function TFitClientProxy.GetMaxRFactor: Double;

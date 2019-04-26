@@ -60,7 +60,11 @@ type
         property Viewer: TFitViewer read FViewer;
         property Form: TFormMain read FForm;
 {$ENDIF}
+{$IFNDEF FIT}
         property FitStub: TFitServerStub read FFitStub;
+{$ELSE}
+        property FitStub: TFitServer read FFitServer;
+{$ENDIF}
     end;
 
 implementation

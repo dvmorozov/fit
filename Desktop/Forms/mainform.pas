@@ -2255,10 +2255,10 @@ begin
             //  mozhno voobsche ubrat' proverku i deystvovat' kak pri
             //  polnost'yu avtomaticheskom raschete; eto pozvolit
             //  oboyti udalenie fona
-            if (FitClientApp_.FitProxy.State = ReadyForFit) or
+            if (FitClientApp_.FitClient.FitProxy.State = ReadyForFit) or
                //   dopuskaetsya zapuskat' raschet v dannom sostoyanii,
                //   t.k. neobhodimye dannye budut dopolneny avtomaticheski
-               (FitClientApp_.FitProxy.State = ReadyForAutoFit)
+               (FitClientApp_.FitClient.FitProxy.State = ReadyForAutoFit)
                then
             begin
                 ActionFitMinNumberOfSpec.Tag := ActionFitMinNumberOfSpec.Tag or 1;

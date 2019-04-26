@@ -315,8 +315,6 @@ initialization
     ProblemID := FitClientApp_.FitProxy.FitStub.CreateProblem;
 {$ELSE}
 {$IFDEF FIT}
-    // trebuetsya obratnaya svyaz'
-    FitClientApp_.FitProxy.FitStub := FitServerApp_.FitStub;
 {$ELSE}
 {$IFDEF FITCGI}
     Proxy := TFitClientProxy.Create(nil);

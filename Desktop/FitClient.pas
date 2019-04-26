@@ -17,9 +17,16 @@ unit FitClient;
 interface
 
 uses Classes, PointsSet, TitlePointsSet, SelfCopied, SysUtils, MSCRDataClasses,
-    fit_client_proxy, CBRCComponent, NeutronPointsSet,
+    {$IFNDEF FIT}
+    fit_client_proxy,
+    {$ENDIF}
+    CBRCComponent, NeutronPointsSet,
     IntPointsSet, CurvePointsSet, IntClientCallback,
-    IntFitViewer, IntDataLoader, IntDataLoaderInjector;
+    IntFitViewer, IntDataLoader, IntDataLoaderInjector
+    {$IFDEF FIT}
+    , FitServer
+    {$ENDIF}
+    ;
     
 type
     { Modes of selectiion of active point set. }
@@ -91,7 +98,11 @@ type
     { Implements all client logic of the application. Must be completely independent from UI. }
     TFitClient = class(TCBRCComponent, IClientCallback)
     protected
+{$IFNDEF FIT}
         FFitProxy: TFitClientProxy;
+{$ELSE}
+        FFitProxy: TFitServer;
+{$ENDIF}
         FDataLoader: IDataLoader;
         FDataLoaderInjector: IDataLoaderInjector;
         { All the data displayed on the chart. They are required to be able control of X-coordinate. }
@@ -317,8 +328,12 @@ type
         property OpenState: TOpenState read FOpenState;
         property AsyncState: TAsyncState read FAsyncState;
         property SelectedAreaMode: Boolean read FSelectedAreaMode;
-        
+
+        {$IFDEF FIT}
+        property FitProxy: TFitServer read FFitProxy write FFitProxy;
+        {$ELSE}
         property FitProxy: TFitClientProxy read FFitProxy write FFitProxy;
+        {$ENDIF}
         property NeutronPointsSet: TTitlePointsSet
             read FNeutronPointsSet write FNeutronPointsSet;
     end;

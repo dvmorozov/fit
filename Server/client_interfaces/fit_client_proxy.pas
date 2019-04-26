@@ -15,7 +15,7 @@ unit fit_client_proxy;
 
 interface
 
-uses SysUtils, MSCRDataClasses, CommonTypes, PointsSet, SelfCopied,
+uses SysUtils, MSCRDataClasses, CommonTypes, PointsSet, SelfCopied, Classes,
     MyExceptions, IntPointsSet, TitlePointsSet, CurvePointsSet, CBRCComponent,
     int_fit_service,
     fit_server,

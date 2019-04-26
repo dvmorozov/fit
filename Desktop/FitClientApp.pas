@@ -16,7 +16,10 @@ unit FitClientApp;
 
 interface
 
-uses SysUtils, FitClient, FitClientStub, fit_client_proxy,
+uses SysUtils, FitClient, FitClientStub,
+  {$IFNDEF FIT}
+  fit_client_proxy,
+  {$ENDIF}
   ExtensionDataLoaderInjector;
 
 type
@@ -24,7 +27,6 @@ type
       components except UI. }
     TFitClientApp = class(TObject)
     private
-        FFitProxy: TFitClientProxy;
         FFitStub: TFitClientStub;
         FFitClient: TFitClient;
         FDataLoaderInjector: TExtensionDataLoaderInjector;
@@ -35,7 +37,6 @@ type
 
         property FitClient: TFitClient read FFitClient;
         property FitStub: TFitClientStub read FFitStub;
-        property FitProxy: TFitClientProxy read FFitProxy;
     end;
 
 implementation
@@ -45,12 +46,10 @@ implementation
 constructor TFitClientApp.Create;
 begin
     inherited;
-    FFitProxy := TFitClientProxy.Create(nil);
     FFitStub := TFitClientStub.Create(nil);
     FDataLoaderInjector := TExtensionDataLoaderInjector.Create(nil);
     FFitClient := TFitClient.Create(nil, FDataLoaderInjector);
 
-    FFitClient.FitProxy := FFitProxy;
     FFitStub.FitClient := FFitClient;
 end;
 
@@ -58,7 +57,6 @@ destructor TFitClientApp.Destroy;
 begin
     FFitClient.Free;
     FFitStub.Free;
-    FFitProxy.Free;
     FDataLoaderInjector.Free;
 end;
 

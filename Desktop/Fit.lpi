@@ -13,7 +13,7 @@
     </General>
     <VersionInfo>
       <AutoIncrementBuild Value="True"/>
-      <BuildNr Value="1146"/>
+      <BuildNr Value="1147"/>
       <StringTable ProductVersion="0.0.0.1001"/>
     </VersionInfo>
     <BuildModes Count="2">
@@ -411,6 +411,7 @@
       </Unit30>
       <Unit31>
         <Filename Value="..\Server\client_interfaces\fit_client_proxy.pas"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <WindowIndex Value="1"/>
         <TopLine Value="226"/>
@@ -581,11 +582,10 @@
       <Unit52>
         <Filename Value="Main.pas"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="37"/>
-        <CursorPos X="7" Y="45"/>
+        <TopLine Value="31"/>
+        <CursorPos X="21" Y="51"/>
         <UsageCount Value="202"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -1052,7 +1052,6 @@
         <WindowIndex Value="1"/>
         <TopLine Value="373"/>
         <CursorPos X="26" Y="398"/>
-        <FoldState Value=" T1il00xJ"/>
         <UsageCount Value="105"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>

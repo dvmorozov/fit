@@ -20,7 +20,7 @@ uses SysUtils, MSCRDataClasses, CommonTypes, PointsSet, SelfCopied, Classes,
     int_fit_service,
     fit_server,
 {$IFDEF FITCGI}
-    Classes, NamedPointsSet,
+    NamedPointsSet,
 {$ENDIF}
     base_service_intf,
     fit_server_proxy                //  Calls the server via network.

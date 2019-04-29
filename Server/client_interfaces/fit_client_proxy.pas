@@ -173,7 +173,14 @@ const OutOfServerResources: string = 'Out of server resources.';
 
 constructor TFitClientProxy.Create(AOwner: TComponent);
 begin
-    FProblemId := 0;
+    FFitStub := //wst_CreateInstance_IFitServer;
+        TFitServer_Proxy.Create(
+            'IFitServer',
+            'binary:',
+            'TCP:Address=' + InternalIP +
+            ';Port=' + InternalPort + ';target=IFitServer'
+            );
+    FProblemId := FFitStub.CreateProblem;
 end;
 
 procedure TFitClientProxy.CreateProblem;

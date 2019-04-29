@@ -99,6 +99,9 @@ function CreateNamedPointsSet(
 {$ENDIF}
 
 const
+    //  Global setting should be in this file because the
+    //  same setting should be used in building client and server
+    //  applications.
 {$IFDEF LOCAL_ACCESS}
     //  IP dlya svyazi CGI-klienta s serverom prilozheniya
     InternalIP: string = '127.0.0.1';

@@ -87,6 +87,8 @@ begin
     FFitStub := TFitServerStub.Create;
     FFitStub.RecreateServer := RecreateServer;
     RecreateServer;
+
+    FFitServer := FFitStub.Server;
 end;
 
 destructor TFitServerApp.Destroy;

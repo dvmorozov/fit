@@ -101,8 +101,9 @@ type
 {$IFNDEF FIT}
         FFitProxy: TFitClientProxy;
 {$ELSE}
-        FFitProxy: TFitServer;
+        function GetFitProxy: TFitServer;
 {$ENDIF}
+    protected
         FDataLoader: IDataLoader;
         FDataLoaderInjector: IDataLoaderInjector;
         { All the data displayed on the chart. They are required to be able control of X-coordinate. }
@@ -330,7 +331,7 @@ type
         property SelectedAreaMode: Boolean read FSelectedAreaMode;
 
         {$IFDEF FIT}
-        property FitProxy: TFitServer read FFitProxy write FFitProxy;
+        property FitProxy: TFitServer read GetFitProxy;
         {$ELSE}
         property FitProxy: TFitClientProxy read FFitProxy write FFitProxy;
         {$ENDIF}
@@ -355,7 +356,16 @@ const
 
 implementation
 
+{$IFDEF FIT}
+uses Main;
+{$ENDIF}
+
 {================================ TFitClient ==================================}
+
+function TFitClient.GetFitProxy: TFitServer;
+begin
+    Result := FitServerApp_.FitStub;
+end;
 
 destructor TFitClient.Destroy;
 begin

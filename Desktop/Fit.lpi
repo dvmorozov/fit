@@ -12,9 +12,13 @@
       <UseXPManifest Value="True"/>
     </General>
     <VersionInfo>
+      <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
-      <BuildNr Value="1152"/>
-      <StringTable ProductVersion="0.0.0.1001"/>
+      <MajorVersionNr Value="1"/>
+      <MinorVersionNr Value="1"/>
+      <BuildNr Value="1153"/>
+      <Attributes pvaDebug="True"/>
+      <StringTable LegalCopyright="D.V.Morozov" OriginalFilename="Fit" ProductName="Fit" ProductVersion="1.1.0"/>
     </VersionInfo>
     <BuildModes Count="2">
       <Item1 Name="Linux" Default="True"/>
@@ -110,7 +114,8 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="29"/>
         <WindowIndex Value="1"/>
-        <CursorPos X="18" Y="12"/>
+        <TopLine Value="48"/>
+        <CursorPos X="38" Y="73"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -174,13 +179,13 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="AboutBoxDialog"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="13"/>
         <WindowIndex Value="1"/>
         <TopLine Value="20"/>
         <CursorPos Y="37"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit5>
       <Unit6>
@@ -366,7 +371,6 @@
       <Unit26>
         <Filename Value="FitClient.pas"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="11"/>
         <WindowIndex Value="1"/>
         <TopLine Value="90"/>
@@ -1081,8 +1085,8 @@
         <Filename Value="..\Server\FitServerApp.pas"/>
         <EditorIndex Value="4"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="62"/>
-        <CursorPos Y="91"/>
+        <TopLine Value="72"/>
+        <CursorPos X="23" Y="81"/>
         <UsageCount Value="13"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -1091,6 +1095,8 @@
         <Filename Value="..\Server\FitServerProxy.pas"/>
         <EditorIndex Value="2"/>
         <WindowIndex Value="1"/>
+        <TopLine Value="30"/>
+        <CursorPos Y="45"/>
         <UsageCount Value="12"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -1103,7 +1109,7 @@
       <Define3 Value="WINDOWS"/>
       <Define4 Value="Lazarus"/>
     </OtherDefines>
-    <JumpHistory Count="8" HistoryIndex="7">
+    <JumpHistory Count="10" HistoryIndex="9">
       <Position1>
         <Filename Value="FitClient.pas"/>
         <Caret Line="98" Column="6" TopLine="84"/>
@@ -1136,6 +1142,14 @@
         <Filename Value="FitClient.pas"/>
         <Caret Line="104" Column="18" TopLine="88"/>
       </Position8>
+      <Position9>
+        <Filename Value="FitClient.pas"/>
+        <Caret Line="106" Column="14" TopLine="90"/>
+      </Position9>
+      <Position10>
+        <Filename Value="..\Server\FitServerApp.pas"/>
+        <Caret Line="81" Column="23" TopLine="72"/>
+      </Position10>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
@@ -1194,8 +1208,8 @@
         <Kind Value="bpkSource"/>
         <WatchScope Value="wpsLocal"/>
         <WatchKind Value="wpkWrite"/>
-        <Source Value="..\Server\FitServerApp.pas"/>
-        <Line Value="91"/>
+        <Source Value="..\Server\FitServerProxy.pas"/>
+        <Line Value="45"/>
       </Item3>
     </BreakPoints>
     <Watches Count="1">

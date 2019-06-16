@@ -710,7 +710,8 @@ m1=require
       <w>126</w>
       <h>28</h>
     </coordinates>
-    <panel_attributes>TFitClient</panel_attributes>
+    <panel_attributes>TFitClient
+bg=green</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -743,7 +744,8 @@ m1=require
       <w>126</w>
       <h>28</h>
     </coordinates>
-    <panel_attributes>TFitServer</panel_attributes>
+    <panel_attributes>TFitServer
+bg=green</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -866,7 +868,8 @@ calls</panel_attributes>
       <w>126</w>
       <h>28</h>
     </coordinates>
-    <panel_attributes>TFitServer_ServiceImp</panel_attributes>
+    <panel_attributes>TFitServer_ServiceImp
+bg=green</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -901,7 +904,8 @@ calls</panel_attributes>
       <w>126</w>
       <h>28</h>
     </coordinates>
-    <panel_attributes>TFitServer_Proxy</panel_attributes>
+    <panel_attributes>TFitServer_Proxy
+bg=green</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -923,7 +927,8 @@ calls</panel_attributes>
       <w>126</w>
       <h>28</h>
     </coordinates>
-    <panel_attributes>TFitClientProxy</panel_attributes>
+    <panel_attributes>TFitClientProxy
+bg=green</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1074,7 +1079,8 @@ FitPro.lpr</panel_attributes>
       <w>126</w>
       <h>28</h>
     </coordinates>
-    <panel_attributes>TFitClient</panel_attributes>
+    <panel_attributes>TFitClient
+bg=green</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1085,7 +1091,8 @@ FitPro.lpr</panel_attributes>
       <w>126</w>
       <h>28</h>
     </coordinates>
-    <panel_attributes>TFitServerStub</panel_attributes>
+    <panel_attributes>TFitServerStub
+bg=green</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1096,7 +1103,8 @@ FitPro.lpr</panel_attributes>
       <w>126</w>
       <h>28</h>
     </coordinates>
-    <panel_attributes>TFitServer</panel_attributes>
+    <panel_attributes>TFitServer
+bg=green</panel_attributes>
     <additional_attributes/>
   </element>
   <element>

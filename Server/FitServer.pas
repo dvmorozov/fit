@@ -455,9 +455,10 @@ begin
     begin AbortAsyncOper; Result := CalcAborted; end;
 
     try
-        Assert(Assigned(APointsSet));   //  kriticheskaya oshibka
+        Assert(Assigned(APointsSet));
 
-        ExpProfile.Free; ExpProfile := APointsSet;
+        { TODO: Copying points is required. }
+        ExpProfile.Free; ExpProfile := TTitlePointsSet(APointsSet.GetCopy);
         if ExpProfile.PointsCount = 0 then
             raise EUserException.Create(InadmissibleData);
 

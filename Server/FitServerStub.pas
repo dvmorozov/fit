@@ -980,7 +980,7 @@ begin
 
     try
         Result := 0; ErrMsg := '';
-        ErrMsg := Server.SetProfilePointsSet(TTitlePointsSet(APointsSet.GetCopy));
+        ErrMsg := Server.SetProfilePointsSet(APointsSet);
     except
         on E: EUserException do
         begin

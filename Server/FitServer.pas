@@ -1308,32 +1308,32 @@ end;
 
 function TFitServer.GetBackgroundPoints: TTitlePointsSet;
 begin
-    Result := BackgroundPoints;
+    Result := TTitlePointsSet(BackgroundPoints.GetCopy);
 end;
 
 function TFitServer.GetProfilePointsSet: TTitlePointsSet;
 begin
-    Result := ExpProfile;
+    Result := TTitlePointsSet(ExpProfile.GetCopy);
 end;
 
 function TFitServer.GetSelectedArea: TTitlePointsSet;
 begin
-    Result := SelectedArea;
+    Result := TTitlePointsSet(SelectedArea.GetCopy);
 end;
 
 function TFitServer.GetCalcProfilePointsSet: TTitlePointsSet;
 begin
-    Result := CalcProfile;
+    Result := TTitlePointsSet(CalcProfile.GetCopy);
 end;
 
 function TFitServer.GetDeltaProfilePointsSet: TTitlePointsSet;
 begin
-    Result := DeltaProfile;
+    Result := TTitlePointsSet(DeltaProfile.GetCopy);
 end;
 
 function TFitServer.GetRFactorIntervals: TTitlePointsSet;
 begin
-    Result := RFactorIntervals;
+    Result := TTitlePointsSet(RFactorIntervals.GetCopy);
 end;
 
 function TFitServer.GetSpecialCurveParameters: Curve_parameters;
@@ -1343,12 +1343,12 @@ end;
 
 function TFitServer.GetCurvePositions: TTitlePointsSet;
 begin
-    Result := CurvePositions;
+    Result := TTitlePointsSet(CurvePositions.GetCopy);
 end;
 
 function TFitServer.GetCurvesList: TSelfCopiedCompList;
 begin
-    Result := CurvesList;
+    Result := TSelfCopiedCompList(CurvesList.GetCopy);
 end;
 
 function TFitServer.GetSpecimenCount: LongInt;
@@ -1867,7 +1867,7 @@ end;
 function TFitServer.GetSpecimenList: TMSCRSpecimenList;
 begin
     //  vozvraschaem chto est' bez proverki
-    Result := SpecimenList;
+    Result := TMSCRSpecimenList(SpecimenList.GetCopy);
 end;
 
 procedure TFitServer.CreateResultedProfile;

@@ -70,7 +70,7 @@ begin
   Application.CreateForm(TCreateUserPointsSetDlg, CreateUserPointsSetDlg);
   Application.CreateForm(TUserPointsSetPropDlg, UserPointsSetPropDlg);
 
-  InFile := CmdLineParamFound('INFILE');
+  InFile := 'C:\Others\fit\Data\2.dat'; // CmdLineParamFound('INFILE');
   if InFile <> '' then
   begin
     FormMain.LoadDataFile(InFile);

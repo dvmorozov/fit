@@ -362,10 +362,12 @@ uses Main;
 
 {================================ TFitClient ==================================}
 
+{$IFDEF FIT}
 function TFitClient.GetFitProxy: TFitServer;
 begin
     Result := FitServerApp_.FitStub;
 end;
+{$ENDIF}
 
 destructor TFitClient.Destroy;
 begin

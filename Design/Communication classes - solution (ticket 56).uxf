@@ -696,11 +696,11 @@ m1=require
     <coordinates>
       <x>980</x>
       <y>826</y>
-      <w>140</w>
+      <w>133</w>
       <h>105</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>180.0;10.0;180.0;130.0;10.0;130.0</additional_attributes>
+    <additional_attributes>170.0;10.0;170.0;130.0;10.0;130.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -719,11 +719,11 @@ bg=green</panel_attributes>
     <coordinates>
       <x>980</x>
       <y>826</y>
-      <w>168</w>
+      <w>154</w>
       <h>210</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>220.0;10.0;220.0;280.0;10.0;280.0</additional_attributes>
+    <additional_attributes>200.0;10.0;200.0;280.0;10.0;280.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -753,16 +753,16 @@ bg=green</panel_attributes>
     <coordinates>
       <x>945</x>
       <y>700</y>
-      <w>161</w>
-      <h>56</h>
+      <w>168</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;60.0;210.0;60.0;210.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0;220.0;70.0;220.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>1197</x>
+      <x>1190</x>
       <y>840</y>
       <w>98</w>
       <h>49</h>
@@ -774,13 +774,13 @@ calls</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1162</x>
+      <x>1134</x>
       <y>861</y>
-      <w>49</w>
+      <w>70</w>
       <h>21</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>50.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>80.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -820,11 +820,11 @@ calls</panel_attributes>
     <coordinates>
       <x>945</x>
       <y>700</y>
-      <w>217</w>
+      <w>189</w>
       <h>105</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;.</panel_attributes>
-    <additional_attributes>290.0;10.0;290.0;100.0;10.0;100.0;10.0;130.0</additional_attributes>
+    <additional_attributes>250.0;10.0;250.0;100.0;10.0;100.0;10.0;130.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
@@ -1165,14 +1165,14 @@ bg=green</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>357</x>
-      <y>1456</y>
-      <w>609</w>
-      <h>224</h>
+      <x>441</x>
+      <y>1379</y>
+      <w>525</w>
+      <h>301</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+    <panel_attributes>lt=-&gt;
 FitService</panel_attributes>
-    <additional_attributes>850.0;300.0;640.0;300.0;640.0;100.0;10.0;100.0;10.0;10.0</additional_attributes>
+    <additional_attributes>730.0;410.0;290.0;410.0;290.0;250.0;10.0;250.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -1395,11 +1395,11 @@ bg=green</panel_attributes>
     <coordinates>
       <x>357</x>
       <y>1379</y>
-      <w>98</w>
+      <w>84</w>
       <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>120.0;10.0;120.0;50.0;10.0;50.0;10.0;80.0</additional_attributes>
+    <additional_attributes>100.0;10.0;100.0;50.0;10.0;50.0;10.0;80.0</additional_attributes>
   </element>
   <element>
     <id>UMLInterface</id>
@@ -1429,12 +1429,23 @@ bg=green</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>980</x>
-      <y>700</y>
-      <w>203</w>
-      <h>350</h>
+      <y>616</y>
+      <w>175</w>
+      <h>434</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+    <panel_attributes>lt=-&gt;
 FitService</panel_attributes>
-    <additional_attributes>10.0;480.0;270.0;480.0;270.0;10.0</additional_attributes>
+    <additional_attributes>10.0;600.0;230.0;600.0;230.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>189</x>
+      <y>1232</y>
+      <w>301</w>
+      <h>252</h>
+    </coordinates>
+    <panel_attributes>Shared library</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>

@@ -87,17 +87,6 @@ function GetSeqErrorCode(): LongInt;
 //  dopolnyaet soobschenie kodom oschibki
 function CreateErrorMessage(Msg: string): string;
 
-{$IFDEF FITPRO} {$DEFINE USE_ARRAY_CONVERSION} {$ENDIF}
-{$IFDEF FITCGI} {$DEFINE USE_ARRAY_CONVERSION} {$ENDIF}
-{$IFDEF FITSERVER}{$IFNDEF FIT} {$DEFINE USE_ARRAY_CONVERSION} {$ENDIF}{$ENDIF}
-
-{$IFDEF USE_ARRAY_CONVERSION}
-function CreateRemotableArray(
-    APointsSet: TPointsSet): TArrayOfFloatDoubleRemotable;
-function CreateNamedPointsSet(
-    ARemotable: TArrayOfFloatDoubleRemotable): TNamedPointsSet;
-{$ENDIF}
-
 const
     //  Global setting should be in this file because the
     //  same setting should be used in building client and server
@@ -148,52 +137,6 @@ begin
         //  vyhod isklyucheniy nedopustim
     end;
 end;
-
-{$IFDEF USE_ARRAY_CONVERSION}
-function CreateRemotableArray(
-    APointsSet: TPointsSet): TArrayOfFloatDoubleRemotable;
-var i, Count: LongInt;
-begin
-    Result := nil;
-    if not Assigned(APointsSet) then Exit;
-    
-    Result := TArrayOfFloatDoubleRemotable.Create;
-    //  tochki zagruzhayutsya poparno
-    Count := APointsSet.PointsCount * 2;
-    Result.SetLength(Count);
-    i := 0;
-    while i < Count do
-    begin
-        Result.Item[i] := APointsSet.PointXCoord[i div 2];
-        Inc(i);
-        Result.Item[i] := APointsSet.PointYCoord[i div 2];
-        Inc(i);
-    end;
-end;
-
-function CreateNamedPointsSet(
-    ARemotable: TArrayOfFloatDoubleRemotable): TNamedPointsSet;
-var i: LongInt;
-    X, Y: Double;
-begin
-    //  trebuetsya dopustit' ravenstvo nil
-    Result := nil;
-    if not Assigned(ARemotable) then Exit;
-    
-    Assert(ARemotable.Length mod 2 = 0);
-    Result := TNamedPointsSet.Create(nil);
-
-    i := 0;
-    while i < ARemotable.Length do
-    begin
-        X := ARemotable.Item[i];
-        Inc(i);
-        Y := ARemotable.Item[i];
-        Inc(i);
-        Result.AddNewPoint(X, Y);
-    end;
-end;
-{$ENDIF}
 
 function GetUserDir: string;
 {$IFDEF WINDOWS}
@@ -287,9 +230,28 @@ begin
     LeaveCriticalSection(LogCS);
 end;
 
+{$IFDEF FITPRO}
+type
+    TCFunction = function: string; cdecl;
+
+var
+    FitServiceFactory: TCFunction;
+    ProxyLibHandle: THandle;
+    dummy : integer;
+{$ENDIF}
+
 //  klyuch FIT vkluchaet i klienta, i server v odin modul' s
 //  pryamoi svyaz'yu mezhdu nimi
 initialization
+{$IFDEF FITPRO}
+    ProxyLibHandle := LoadLibrary('ClientProxy.dll');
+    FitServiceFactory := GetProcAddress(ProxyLibHandle, 'CreateFitServiceInstance');
+    if Assigned(FitServiceFactory) then
+    begin
+        dummy := 1;
+    end;
+{$ENDIF}
+
 {$IFDEF FITCLIENT}
     FitClientApp_ := TFitClientApp.Create;
 {$ENDIF}
@@ -360,5 +322,6 @@ finalization
 {$ENDIF}
 {$ENDIF}
     DoneCriticalsection(LogCS);
+    FreeLibrary(ProxyLibHandle);
 end.
 

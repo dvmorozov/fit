@@ -11,13 +11,13 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit int_fit_service;
 
-{$mode delphi}
+{$MODE Delphi}
 
 interface
 
 uses
-  Classes, SysUtils, IntPointsSet, CommonTypes, PointsSet, TitlePointsSet,
-  CurvePointsSet, MSCRDataClasses, SelfCopied;
+    Classes, SysUtils, IntPointsSet, CommonTypes, PointsSet, TitlePointsSet,
+    CurvePointsSet, MSCRDataClasses, SelfCopied;
 
 type
     { Defines base interface of communication from client to server. }
@@ -33,10 +33,6 @@ type
         function GetState: TFitServerState;
         procedure SetWaveLength(AWaveLength: Double);
         function GetWaveLength: Double;
-    {$IFDEF USE_RESULT_PROCESSING}
-        { Throws an exception when R = nil. }
-        function ProcessPointsResult(R: TPointsResult): TTitlePointsSet;
-    {$ENDIF}
         { All GetXXXX methods create and return A NEW OBJECT,
           responsibility to free it is put on calling code. }
 

@@ -4,7 +4,8 @@ library ClientProxy;
 
 uses
   Classes
-  { you can add units after this }, fit_client_proxy, ta;
+  { you can add units after this }, fit_client_proxy,
+  ta, int_fit_service;
   
 
 function Test(): string; cdecl;

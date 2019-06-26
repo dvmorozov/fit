@@ -15,25 +15,20 @@ unit fit_client_proxy;
 
 interface
 
-uses SysUtils, MSCRDataClasses, CommonTypes, PointsSet, SelfCopied, Classes,
+uses
+    SysUtils, MSCRDataClasses, CommonTypes, PointsSet, SelfCopied, Classes,
     MyExceptions, IntPointsSet, TitlePointsSet, CurvePointsSet, CBRCComponent,
     int_fit_service,
     fit_server,
-{$IFDEF FITCGI}
     NamedPointsSet,
-{$ENDIF}
     base_service_intf,
     fit_server_proxy                //  Calls the server via network.
     ;
-  
-type
 
-{$IFDEF FITPRO} {$DEFINE USE_RESULT_PROCESSING} {$ENDIF}
-{$IFDEF FITCGI} {$DEFINE USE_RESULT_PROCESSING} {$ENDIF}
-{$IFDEF FITCLIENTINSERVER} {$DEFINE USE_RESULT_PROCESSING} {$ENDIF}     //  TODO: remove client functions from the server
-    { Converts error codes back into exceptions to provide 
-      centralized error handling in the client. Converts data 
-      to appropriate type. Should impelement the same interface 
+type
+    { Converts error codes back into exceptions to provide
+      centralized error handling in the client. Converts data
+      to appropriate type. Should implement the same interface
       as the server. }
     TFitClientProxy = class(TCBRCComponent, IFitService)
     protected
@@ -55,10 +50,9 @@ type
         function GetState: TFitServerState;
         procedure SetWaveLength(AWaveLength: Double);
         function GetWaveLength: Double;
-{$IFDEF USE_RESULT_PROCESSING}
         { Throws an exception when R = nil. }
         function ProcessPointsResult(R: TPointsResult): TTitlePointsSet;
-{$ENDIF}
+
     public
         constructor Create(AOwner: TComponent); override;
         
@@ -168,6 +162,50 @@ implementation
 uses Main;
 
 const OutOfServerResources: string = 'Out of server resources.';
+
+function CreateRemotableArray(
+    APointsSet: TPointsSet): TArrayOfFloatDoubleRemotable;
+var i, Count: LongInt;
+begin
+    Result := nil;
+    if not Assigned(APointsSet) then Exit;
+
+    Result := TArrayOfFloatDoubleRemotable.Create;
+    //  tochki zagruzhayutsya poparno
+    Count := APointsSet.PointsCount * 2;
+    Result.SetLength(Count);
+    i := 0;
+    while i < Count do
+    begin
+        Result.Item[i] := APointsSet.PointXCoord[i div 2];
+        Inc(i);
+        Result.Item[i] := APointsSet.PointYCoord[i div 2];
+        Inc(i);
+    end;
+end;
+
+function CreateNamedPointsSet(
+    ARemotable: TArrayOfFloatDoubleRemotable): TNamedPointsSet;
+var i: LongInt;
+    X, Y: Double;
+begin
+    //  trebuetsya dopustit' ravenstvo nil
+    Result := nil;
+    if not Assigned(ARemotable) then Exit;
+
+    Assert(ARemotable.Length mod 2 = 0);
+    Result := TNamedPointsSet.Create(nil);
+
+    i := 0;
+    while i < ARemotable.Length do
+    begin
+        X := ARemotable.Item[i];
+        Inc(i);
+        Y := ARemotable.Item[i];
+        Inc(i);
+        Result.AddNewPoint(X, Y);
+    end;
+end;
 
 {========================== TFitClientProxy ===================================}
 
@@ -299,7 +337,6 @@ begin
     Result := ErrMsg;
 end;
 
-{$IFDEF USE_RESULT_PROCESSING}
 function TFitClientProxy.ProcessPointsResult(R: TPointsResult): TTitlePointsSet;
 var Points: TPointsSet;
     Res: LongInt;
@@ -329,7 +366,6 @@ begin
         -2: begin Result.Free; raise Exception.Create(ErrMsg); end;
     end;
 end;
-{$ENDIF}
 
 function TFitClientProxy.GetProfilePointsSet: TTitlePointsSet;
 begin

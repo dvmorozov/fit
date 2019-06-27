@@ -7,18 +7,22 @@ uses
   { you can add units after this }, fit_client_proxy,
   ta, int_fit_service;
   
-
-function Test(): string; cdecl;
-begin
-     Result := 'test';
-end;
-
+var
+   FitService: IFitService;
+  
 function CreateFitServiceInstance: IFitService; cdecl;
 begin
-     Result := TFitClientProxy.Create(nil);
+     FitService := TFitClientProxy.Create(nil);
+     Result := FitService;
+end;
+
+procedure DestroyFitServiceInstance; cdecl;
+begin
+    FitService._Release;
 end;
 
 exports
-  Test, CreateFitServiceInstance;
+    CreateFitServiceInstance,
+    DestroyFitServiceInstance;
 end.
 

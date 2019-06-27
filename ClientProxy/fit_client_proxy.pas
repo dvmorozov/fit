@@ -55,6 +55,7 @@ type
 
     public
         constructor Create(AOwner: TComponent); override;
+        destructor Destroy; override;
         
         { GetXXXX methods create and return A NEW OBJECT, 
           responsibility to free it is put on calling code. }
@@ -219,6 +220,11 @@ begin
             ';Port=' + InternalPort + ';target=IFitServer'
             );
     FProblemId := FFitStub.CreateProblem;
+end;
+
+destructor TFitClientProxy.Destroy;
+begin
+     FitStub.DiscardProblem(ProblemID);
 end;
 
 procedure TFitClientProxy.CreateProblem;

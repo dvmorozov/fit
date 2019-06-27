@@ -16,11 +16,7 @@ unit FitClientApp;
 
 interface
 
-uses SysUtils, FitClient, FitClientStub,
-  {$IFNDEF FIT}
-  fit_client_proxy,
-  {$ENDIF}
-  ExtensionDataLoaderInjector;
+uses SysUtils, FitClient, FitClientStub, ExtensionDataLoaderInjector;
 
 type
     { Container class (agregate), which integrates all application

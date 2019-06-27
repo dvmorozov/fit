@@ -2,8 +2,6 @@ program FitPro;
 
 {$MODE Delphi}
 
-{$INCLUDE wst.inc}
-
 uses
 {$IFDEF UNIX}
   cthreads,     //  neobhodimo dlya linux
@@ -12,10 +10,8 @@ uses
   Forms,
   Variants,
   MainForm,
-  DataLoader in 'DataLoader.pas',
-  PointSetViewer in 'PointSetViewer.pas',
+  DataLoader,
   AboutBoxDialog,
-  Unit3,
   InputWavelengthDialog, InputBackFactorDialog, InputMaxRFactorDialog,
   FitClient, FitClientApp,
   FitTask, Settings, TurboPowerIPro,
@@ -46,6 +42,6 @@ uses
 
 begin
   Application.Initialize;
-  Form1.ApplicationProperties1.Title := 'FitPro';
+  FormMain.ApplicationProperties1.Title := 'FitPro';
   Application.Run;
 end.

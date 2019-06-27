@@ -17,14 +17,14 @@ unit FitClient;
 interface
 
 uses Classes, PointsSet, TitlePointsSet, SelfCopied, SysUtils, MSCRDataClasses,
-    {$IFNDEF FIT}
-    fit_client_proxy,
-    {$ENDIF}
     CBRCComponent, NeutronPointsSet,
     IntPointsSet, CurvePointsSet, IntClientCallback,
     IntFitViewer, IntDataLoader, IntDataLoaderInjector
     {$IFDEF FIT}
     , FitServer
+    {$ENDIF}
+    {$IFDEF FITPRO}
+    , int_fit_service
     {$ENDIF}
     ;
     
@@ -98,11 +98,8 @@ type
     { Implements all client logic of the application. Must be completely independent from UI. }
     TFitClient = class(TCBRCComponent, IClientCallback)
     protected
-{$IFNDEF FIT}
-        FFitProxy: TFitClientProxy;
-{$ELSE}
-        function GetFitProxy: TFitServer;
-{$ENDIF}
+        FFitProxy: IFitService;
+
     protected
         FDataLoader: IDataLoader;
         FDataLoaderInjector: IDataLoaderInjector;
@@ -330,11 +327,8 @@ type
         property AsyncState: TAsyncState read FAsyncState;
         property SelectedAreaMode: Boolean read FSelectedAreaMode;
 
-        {$IFDEF FIT}
-        property FitProxy: TFitServer read GetFitProxy;
-        {$ELSE}
-        property FitProxy: TFitClientProxy read FFitProxy write FFitProxy;
-        {$ENDIF}
+        property FitProxy: IFitService read FFitProxy write FFitProxy;
+
         property NeutronPointsSet: TTitlePointsSet
             read FNeutronPointsSet write FNeutronPointsSet;
     end;
@@ -1280,49 +1274,49 @@ end;
 function TFitClient.GetMaxRFactor: Double;
 begin
     Assert(Assigned(FitProxy));
-    Result := FitProxy.MaxRFactor;
+    Result := FitProxy.GetMaxRFactor;
 end;
 
 procedure TFitClient.SetMaxRFactor(AMaxRFactor: Double);
 begin
     Assert(Assigned(FitProxy));
-    FitProxy.MaxRFactor := AMaxRFactor;
+    FitProxy.SetMaxRFactor(AMaxRFactor);
 end;
 
 function TFitClient.GetBackFactor: Double;
 begin
     Assert(Assigned(FitProxy));
-    Result := FitProxy.BackFactor;
+    Result := FitProxy.GetBackFactor;
 end;
 
 procedure TFitClient.SetBackFactor(ABackFactor: Double);
 begin
     Assert(Assigned(FitProxy));
-    FitProxy.BackFactor := ABackFactor;
+    FitProxy.SetBackFactor(ABackFactor);
 end;
 
 function TFitClient.GetCurveThresh: Double;
 begin
     Assert(Assigned(FitProxy));
-    Result := FitProxy.CurveThresh;
+    Result := FitProxy.GetCurveThresh;
 end;
 
 procedure TFitClient.SetCurveThresh(ACurveThresh: Double);
 begin
     Assert(Assigned(FitProxy));
-    FitProxy.CurveThresh := ACurveThresh;
+    FitProxy.SetCurveThresh(ACurveThresh);
 end;
 
 function TFitClient.GetCurveType: TCurveTypeId;
 begin
     Assert(Assigned(FitProxy));
-    Result := FitProxy.CurveTypeId;
+    Result := FitProxy.GetCurveType;
 end;
 
 procedure TFitClient.SetCurveType(ACurveType: TCurveTypeId);
 begin
     Assert(Assigned(FitProxy));
-    FitProxy.CurveTypeId := ACurveType;
+    FitProxy.SetCurveType(ACurveType);
 end;
 
 {$IFNDEF EXCLUDE_SOMETHING}

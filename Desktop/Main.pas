@@ -36,15 +36,19 @@ uses SysUtils, Forms
         {$ENDIF}
     {$ENDIF}
 {$ELSE}
-    //{$IFDEF FITPRO}
-    //  trebuetsya dlya cgifit
-        , DataLoader, fit_server_proxy, synapse_tcp_protocol,
-        synapse_http_protocol, soap_formatter, binary_formatter,
-        base_service_intf
-{$IFDEF FITCGI}
-    , fit_client_proxy, PointsSet, NamedPointsSet
-{$ENDIF}
-    //{$ENDIF}
+    {$IFDEF FITPRO}
+        , int_fit_service
+    {$ELSE}
+        {$IFDEF FITCGI}
+            , DataLoader, PointsSet, NamedPointsSet
+        {$ELSE}
+            {$IFDEF USE_PROXY}
+                , fit_server_proxy, synapse_tcp_protocol,
+                synapse_http_protocol, soap_formatter,
+                binary_formatter, base_service_intf
+            {$ENDIF}
+        {$ENDIF}
+    {$ENDIF}
 {$ENDIF}
     ;
 //  peremennye vyneseny v otdel'nyi modul', dlya togo chtoby
@@ -232,12 +236,11 @@ end;
 
 {$IFDEF FITPRO}
 type
-    TCFunction = function: string; cdecl;
+    TFitServiceFactory = function: IFitService; cdecl;
 
 var
-    FitServiceFactory: TCFunction;
+    CreateFitServiceInstance: TFitServiceFactory;
     ProxyLibHandle: THandle;
-    dummy : integer;
 {$ENDIF}
 
 //  klyuch FIT vkluchaet i klienta, i server v odin modul' s
@@ -245,54 +248,30 @@ var
 initialization
 {$IFDEF FITPRO}
     ProxyLibHandle := LoadLibrary('ClientProxy.dll');
-    FitServiceFactory := GetProcAddress(ProxyLibHandle, 'CreateFitServiceInstance');
-    if Assigned(FitServiceFactory) then
+    CreateFitServiceInstance :=
+        GetProcAddress(ProxyLibHandle, 'CreateFitServiceInstance');
+
+    if Assigned(CreateFitServiceInstance) then
     begin
-        dummy := 1;
+        FitClientApp_.FitClient.FitProxy := CreateFitServiceInstance();
     end;
 {$ENDIF}
 
 {$IFDEF FITCLIENT}
     FitClientApp_ := TFitClientApp.Create;
 {$ENDIF}
-{$IFDEF FITSERVER}
-{$IFDEF FIT}
-    FitServerApp_ := TFitServerApp.Create;
-{$ENDIF}
-{$ENDIF}
 
-{$IFDEF FITPRO} {$DEFINE USE_PROXY} {$ENDIF}
-{$IFDEF FITCGI} {$DEFINE USE_PROXY} {$ENDIF}
+{$IFDEF FITSERVER}
+    {$IFDEF FIT}
+        FitServerApp_ := TFitServerApp.Create;
+    {$ENDIF}
+{$ENDIF}
 
 {$IFDEF USE_PROXY}
+{$INCLUDE wst.inc}
     SYNAPSE_RegisterTCP_Transport();
     SYNAPSE_RegisterHTTP_Transport();
 {$ENDIF}
-
-{$IFDEF FITPRO}
-    FitClientApp_.FitProxy.FitStub := //wst_CreateInstance_IFitServer;
-        TFitServer_Proxy.Create(
-            'IFitServer',
-            'binary:',
-            'TCP:Address=' + InternalIP +
-            ';Port=' + InternalPort + ';target=IFitServer'
-            );
-    ProblemID := FitClientApp_.FitProxy.FitStub.CreateProblem;
-{$ELSE}
-{$IFDEF FIT}
-{$ELSE}
-{$IFDEF FITCGI}
-    Proxy := TFitClientProxy.Create(nil);
-    Proxy.FitStub := //wst_CreateInstance_IFitServer;
-        TFitServer_Proxy.Create(
-            'IFitServer',
-            'binary:',
-            'TCP:Address=' + InternalIP +
-            ';Port=' + InternalPort + ';target=IFitServer'
-            );
-{$ENDIF}    //  FITCGI
-{$ENDIF}    //  FIT
-{$ENDIF}    //  FITPRO
 
 {$IFDEF FITSERVER}
 {$IFDEF FIT}
@@ -302,26 +281,23 @@ initialization
     InitCriticalSection(LogCS);
 
 finalization
-{$IFDEF FITPRO}
-    FitClientApp_.FitProxy.FitStub.DiscardProblem(ProblemID);
-    FitClientApp_.FitProxy.FitStub._Release;
-{$ELSE}
 {$IFDEF FITCGI}
     Proxy.FitStub._Release;
     Proxy.Free;
 {$ENDIF}    //  FITCGI
-{$ENDIF}    //  FITPRO
 
 {$IFDEF FITCLIENT}
     FitClientApp_.Free;
 {$ENDIF}
 
 {$IFDEF FITSERVER}
-{$IFDEF FIT}
-    FitServerApp_.Free;
-{$ENDIF}
+    {$IFDEF FIT}
+        FitServerApp_.Free;
+    {$ENDIF}
 {$ENDIF}
     DoneCriticalsection(LogCS);
+{$IFDEF FITPRO}
     FreeLibrary(ProxyLibHandle);
+{$ENDIF}
 end.
 

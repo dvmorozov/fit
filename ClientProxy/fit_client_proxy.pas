@@ -18,9 +18,7 @@ interface
 uses
     SysUtils, MSCRDataClasses, CommonTypes, PointsSet, SelfCopied, Classes,
     MyExceptions, IntPointsSet, TitlePointsSet, CurvePointsSet, CBRCComponent,
-    int_fit_service,
-    fit_server,
-    NamedPointsSet,
+    int_fit_service, fit_server, NamedPointsSet,
     base_service_intf,
     fit_server_proxy                //  Calls the server via network.
     ;
@@ -158,9 +156,37 @@ type
     end;
 
 implementation
+uses synapse_tcp_protocol, synapse_http_protocol, soap_formatter,
+    binary_formatter;
 
-{ Provides access to ProblemID, which is global variable. }
-uses Main;
+const
+    //  Global setting should be in this file because the
+    //  same setting should be used in building client and server
+    //  applications.
+{$IFDEF LOCAL_ACCESS}
+    //  IP dlya svyazi CGI-klienta s serverom prilozheniya
+    InternalIP: string = '127.0.0.1';
+    InternalPort: string = '1234';
+    //  IP dlya svyazi brauzera s CGI-klientom;
+    //  eti dannye vstavlyayutsya v ishodyaschie stranitsy
+    //  'fit' ispol'zuetsya pri rabote s denwer'om
+{$IFDEF USE_DENWER}
+    ExternalIP: string = 'fit';
+{$ELSE}
+    ExternalIP: string = '127.0.0.1';
+{$ENDIF}
+{$ELSE}
+    //  IP dlya svyazi CGI-klienta s serverom prilozheniya
+    //InternalIP: string = '192.168.0.190';
+    //  CGI-klient i server rabotayut na odnom kompyutere
+    InternalIP: string = '127.0.0.1';
+    InternalPort: string = '1234';
+    //  IP dlya svyazi brauzera s CGI-klientom;
+    //  eti dannye vstavlyayutsya v ishodyaschie stranitsy
+    ExternalIP: string = 'ec2-54-158-234-101.compute-1.amazonaws.com';
+{$ENDIF}
+
+{$INCLUDE wst.inc}
 
 const OutOfServerResources: string = 'Out of server resources.';
 
@@ -212,7 +238,7 @@ end;
 
 constructor TFitClientProxy.Create(AOwner: TComponent);
 begin
-    FFitStub := //wst_CreateInstance_IFitServer;
+    FFitStub :=
         TFitServer_Proxy.Create(
             'IFitServer',
             'binary:',
@@ -1238,6 +1264,9 @@ begin
     end;
 end;
 
+begin
+    SYNAPSE_RegisterTCP_Transport();
+    SYNAPSE_RegisterHTTP_Transport();
 end.
 
 

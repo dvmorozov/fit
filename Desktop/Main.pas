@@ -41,12 +41,6 @@ uses SysUtils, Forms
     {$ELSE}
         {$IFDEF FITCGI}
             , DataLoader, PointsSet, NamedPointsSet
-        {$ELSE}
-            {$IFDEF USE_PROXY}
-                , fit_server_proxy, synapse_tcp_protocol,
-                synapse_http_protocol, soap_formatter,
-                binary_formatter, base_service_intf
-            {$ENDIF}
         {$ENDIF}
     {$ENDIF}
 {$ENDIF}
@@ -57,8 +51,7 @@ uses SysUtils, Forms
     var FitClientApp_: TFitClientApp;
 {$ELSE}
 {$IFDEF FITCGI}
-    var Proxy: TFitClientProxy;
-        Key: string = '';       //  klyuch, poluchennyi vo vremya registratsii
+    var Key: string = '';       //  klyuch, poluchennyi vo vremya registratsii
         UserName: string = '';
 {$ENDIF}    //  FITCGI
 {$ENDIF}    //  FITCLIENT
@@ -90,33 +83,6 @@ procedure WriteLog(Msg: string; MsgType: TMsgType);
 function GetSeqErrorCode(): LongInt;
 //  dopolnyaet soobschenie kodom oschibki
 function CreateErrorMessage(Msg: string): string;
-
-const
-    //  Global setting should be in this file because the
-    //  same setting should be used in building client and server
-    //  applications.
-{$IFDEF LOCAL_ACCESS}
-    //  IP dlya svyazi CGI-klienta s serverom prilozheniya
-    InternalIP: string = '127.0.0.1';
-    InternalPort: string = '1234';
-    //  IP dlya svyazi brauzera s CGI-klientom;
-    //  eti dannye vstavlyayutsya v ishodyaschie stranitsy
-    //  'fit' ispol'zuetsya pri rabote s denwer'om
-{$IFDEF USE_DENWER}
-    ExternalIP: string = 'fit';
-{$ELSE}
-    ExternalIP: string = '127.0.0.1';
-{$ENDIF}
-{$ELSE}
-    //  IP dlya svyazi CGI-klienta s serverom prilozheniya
-    //InternalIP: string = '192.168.0.190';
-    //  CGI-klient i server rabotayut na odnom kompyutere
-    InternalIP: string = '127.0.0.1';
-    InternalPort: string = '1234';
-    //  IP dlya svyazi brauzera s CGI-klientom;
-    //  eti dannye vstavlyayutsya v ishodyaschie stranitsy
-    ExternalIP: string = 'ec2-54-158-234-101.compute-1.amazonaws.com';
-{$ENDIF}
 
 implementation
     
@@ -267,12 +233,6 @@ initialization
     {$ENDIF}
 {$ENDIF}
 
-{$IFDEF USE_PROXY}
-{$INCLUDE wst.inc}
-    SYNAPSE_RegisterTCP_Transport();
-    SYNAPSE_RegisterHTTP_Transport();
-{$ENDIF}
-
 {$IFDEF FITSERVER}
 {$IFDEF FIT}
     FitServerApp_.FitProxy.FitStub := FitClientApp_.FitStub;
@@ -281,11 +241,6 @@ initialization
     InitCriticalSection(LogCS);
 
 finalization
-{$IFDEF FITCGI}
-    Proxy.FitStub._Release;
-    Proxy.Free;
-{$ENDIF}    //  FITCGI
-
 {$IFDEF FITCLIENT}
     FitClientApp_.Free;
 {$ENDIF}

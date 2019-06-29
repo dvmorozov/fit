@@ -7,7 +7,7 @@
       <MainUnit Value="0"/>
       <IconPath Value="./"/>
       <TargetFileExt Value=".exe"/>
-      <ActiveEditorIndexAtStart Value="0"/>
+      <ActiveEditorIndexAtStart Value="8"/>
     </General>
     <VersionInfo>
       <ProjectVersion Value=""/>
@@ -28,10 +28,10 @@
     </RunParams>
     <RequiredPackages Count="2">
       <Item1>
-        <PackageName Value="ta"/>
+        <PackageName Value="IDEIntf"/>
       </Item1>
       <Item2>
-        <PackageName Value="IDEIntf"/>
+        <PackageName Value="ta"/>
       </Item2>
     </RequiredPackages>
     <Units Count="12">
@@ -39,20 +39,20 @@
         <Filename Value="ClientProxy.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ClientProxy"/>
-        <CursorPos X="17" Y="21"/>
+        <CursorPos X="51" Y="10"/>
         <TopLine Value="1"/>
         <EditorIndex Value="0"/>
-        <UsageCount Value="24"/>
+        <UsageCount Value="25"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
         <Filename Value="fit_client_proxy.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="fit_client_proxy"/>
-        <CursorPos X="1" Y="227"/>
-        <TopLine Value="195"/>
+        <CursorPos X="22" Y="160"/>
+        <TopLine Value="139"/>
         <EditorIndex Value="8"/>
-        <UsageCount Value="24"/>
+        <UsageCount Value="25"/>
         <Loaded Value="True"/>
       </Unit1>
       <Unit2>
@@ -123,7 +123,7 @@
         <UnitName Value="fit_server"/>
         <CursorPos X="19" Y="245"/>
         <TopLine Value="227"/>
-        <EditorIndex Value="11"/>
+        <EditorIndex Value="10"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit9>
@@ -132,21 +132,52 @@
         <UnitName Value="NamedPointsSet"/>
         <CursorPos X="57" Y="18"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="10"/>
+        <EditorIndex Value="9"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit10>
       <Unit11>
         <Filename Value="..\Desktop\Main.pas"/>
         <UnitName Value="Main"/>
-        <CursorPos X="1" Y="45"/>
-        <TopLine Value="25"/>
-        <EditorIndex Value="9"/>
+        <CursorPos X="1" Y="264"/>
+        <TopLine Value="246"/>
         <UsageCount Value="11"/>
-        <Loaded Value="True"/>
       </Unit11>
     </Units>
-    <JumpHistory Count="0" HistoryIndex="-1"/>
+    <JumpHistory Count="8" HistoryIndex="7">
+      <Position1>
+        <Filename Value="fit_client_proxy.pas"/>
+        <Caret Line="222" Column="13" TopLine="195"/>
+      </Position1>
+      <Position2>
+        <Filename Value="fit_client_proxy.pas"/>
+        <Caret Line="162" Column="1" TopLine="13"/>
+      </Position2>
+      <Position3>
+        <Filename Value="fit_client_proxy.pas"/>
+        <Caret Line="171" Column="50" TopLine="153"/>
+      </Position3>
+      <Position4>
+        <Filename Value="fit_client_proxy.pas"/>
+        <Caret Line="57" Column="25" TopLine="29"/>
+      </Position4>
+      <Position5>
+        <Filename Value="fit_client_proxy.pas"/>
+        <Caret Line="160" Column="41" TopLine="133"/>
+      </Position5>
+      <Position6>
+        <Filename Value="fit_client_proxy.pas"/>
+        <Caret Line="159" Column="19" TopLine="146"/>
+      </Position6>
+      <Position7>
+        <Filename Value="fit_client_proxy.pas"/>
+        <Caret Line="162" Column="24" TopLine="144"/>
+      </Position7>
+      <Position8>
+        <Filename Value="fit_client_proxy.pas"/>
+        <Caret Line="186" Column="1" TopLine="151"/>
+      </Position8>
+    </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
     <Version Value="5"/>
@@ -166,7 +197,6 @@
     <Other>
       <CustomOptions Value="-dLazarus
 -dEXCLUDE_SOMETHING
--dUSE_PROXY
 "/>
       <CompilerPath Value="$(CompPath)"/>
     </Other>

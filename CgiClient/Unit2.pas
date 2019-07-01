@@ -180,7 +180,7 @@ uses data, background, background_more, pattern, pattern_more, specimen_position
     gen_spec_int_progress, projects, project_files, project_files_empty,
     fit_server_proxy, projects_empty, soap_formatter, binary_formatter,
     base_service_intf, specimen_parameters_file, file_results, file_results_empty,
-    evaluation, fit_client_proxy, Main, MSCRDataClasses, Settings,
+    evaluation, Main, MSCRDataClasses, Settings,
     GeneralHashfunctions, CommonTypes;
 
 const
@@ -711,7 +711,7 @@ begin
 
     //  sozdanie zadachi
     Proxy.CreateProblem;
-    WriteProblemFile(ProjectName, FileName, Proxy.ProblemId);
+    WriteProblemFile(ProjectName, FileName, Proxy.GetProblemId);
 
     //  zagruzka fayla v zadachu
     DataLoader := TDATFileLoader.Create(nil);
@@ -775,7 +775,7 @@ begin
     begin GoToRegistration(YetNotRegistered); Exit; end;
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
-        Proxy.ProblemId := StrToInt(Application.RequestVariables['problem_id']);
+        Proxy.SetProblemId(StrToInt(Application.RequestVariables['problem_id']));
     except
         raise Exception.Create(ProblemIDIsAbsent);
     end;
@@ -785,7 +785,7 @@ begin
         raise Exception.Create(ChunkNumberIsAbsent);
     end;
 
-    GetDataNames(Proxy.ProblemId, UserName, ProjectName, FileName);
+    GetDataNames(Proxy.GetProblemId, UserName, ProjectName, FileName);
     //  poka dannye sohranyayutsya tol'ko v vide DAT-faila
     Data := Proxy.GetProfilePointsSet;
     try
@@ -926,7 +926,7 @@ begin
     //  vypolnenie zaprosa
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
-        Proxy.ProblemId := StrToInt(Application.RequestVariables['problem_id']);
+        Proxy.SetProblemId(StrToInt(Application.RequestVariables['problem_id']));
     except
         raise Exception.Create(ProblemIDIsAbsent);
     end;
@@ -974,7 +974,7 @@ begin
     //  vypolnenie zaprosa
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
-        Proxy.ProblemId := StrToInt(Application.RequestVariables['problem_id']);
+        Proxy.SetProblemId(StrToInt(Application.RequestVariables['problem_id']));
     except
         raise Exception.Create(ProblemIDIsAbsent);
     end;
@@ -1029,7 +1029,7 @@ begin
     //  vypolnenie zaprosa
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
-        Proxy.ProblemId := StrToInt(Application.RequestVariables['problem_id']);
+        Proxy.SetProblemId(StrToInt(Application.RequestVariables['problem_id']));
     except
         raise Exception.Create(ProblemIDIsAbsent);
     end;
@@ -1080,7 +1080,7 @@ begin
     //  vypolnenie zaprosa
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
-        Proxy.ProblemId := StrToInt(Application.RequestVariables['problem_id']);
+        Proxy.SetProblemId(StrToInt(Application.RequestVariables['problem_id']));
     except
         raise Exception.Create(ProblemIDIsAbsent);
     end;
@@ -1137,7 +1137,7 @@ begin
     //  vypolnenie zaprosa
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
-        Proxy.ProblemId := StrToInt(Application.RequestVariables['problem_id']);
+        Proxy.SetProblemId(StrToInt(Application.RequestVariables['problem_id']));
     except
         raise Exception.Create(ProblemIDIsAbsent);
     end;
@@ -1188,7 +1188,7 @@ var Template: string;
 begin
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
-        Proxy.ProblemId := StrToInt(Application.RequestVariables['problem_id']);
+        Proxy.SetProblemId(StrToInt(Application.RequestVariables['problem_id']));
     except
         raise Exception.Create(ProblemIDIsAbsent);
     end;
@@ -1211,7 +1211,7 @@ begin
     begin
         //  povtor vyvoda stranitsy
         Template := PrepareTemplate_fitting_progress;
-        Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.ProblemId);
+        Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.GetProblemId);
         Template := ReplaceStrings(Template, Pair, 1);
 
         Pair[1][1] := 'CalcTime'; Pair[1][2] := Proxy.GetCalcTimeStr;
@@ -1234,7 +1234,7 @@ var Template: string;
 begin
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
-        Proxy.ProblemId := StrToInt(Application.RequestVariables['problem_id']);
+        Proxy.SetProblemId(StrToInt(Application.RequestVariables['problem_id']));
     except
         raise Exception.Create(ProblemIDIsAbsent);
     end;
@@ -1262,7 +1262,7 @@ begin
     begin
         //  povtor vyvoda stranitsy
         Template := PrepareTemplate_gen_back_progress;
-        Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.ProblemId);
+        Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.GetProblemId);
         Template := ReplaceStrings(Template, Pair, 1);
 
         Pair[1][1] := 'CurChunkNum'; Pair[1][2] := IntToStr(CurChunkNum);
@@ -1284,7 +1284,7 @@ var Template: string;
 begin
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
-        Proxy.ProblemId := StrToInt(Application.RequestVariables['problem_id']);
+        Proxy.SetProblemId(StrToInt(Application.RequestVariables['problem_id']));
     except
         raise Exception.Create(ProblemIDIsAbsent);
     end;
@@ -1312,7 +1312,7 @@ begin
     begin
         //  povtor vyvoda stranitsy
         Template := PrepareTemplate_gen_spec_pos_progress;
-        Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.ProblemId);
+        Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.GetProblemId);
         Template := ReplaceStrings(Template, Pair, 1);
 
         Pair[1][1] := 'CurChunkNum'; Pair[1][2] := IntToStr(CurChunkNum);
@@ -1334,7 +1334,7 @@ var Template: string;
 begin
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
-        Proxy.ProblemId := StrToInt(Application.RequestVariables['problem_id']);
+        Proxy.SetProblemId(StrToInt(Application.RequestVariables['problem_id']));
     except
         raise Exception.Create(ProblemIDIsAbsent);
     end;
@@ -1362,7 +1362,7 @@ begin
     begin
         //  povtor vyvoda stranitsy
         Template := PrepareTemplate_gen_spec_int_progress;
-        Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.ProblemId);
+        Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.GetProblemId);
         Template := ReplaceStrings(Template, Pair, 1);
 
         Pair[1][1] := 'CurChunkNum'; Pair[1][2] := IntToStr(CurChunkNum);
@@ -1381,7 +1381,7 @@ procedure TCGIDatamodule2.StopBackGenProcess;
 begin
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
-        Proxy.ProblemId := StrToInt(Application.RequestVariables['problem_id']);
+        Proxy.SetProblemId(StrToInt(Application.RequestVariables['problem_id']));
     except
         raise Exception.Create(ProblemIDIsAbsent);
     end;
@@ -1414,7 +1414,7 @@ procedure TCGIDatamodule2.StopSpecIntGenProcess;
 begin
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
-        Proxy.ProblemId := StrToInt(Application.RequestVariables['problem_id']);
+        Proxy.SetProblemId(StrToInt(Application.RequestVariables['problem_id']));
     except
         raise Exception.Create(ProblemIDIsAbsent);
     end;
@@ -1447,7 +1447,7 @@ procedure TCGIDatamodule2.StopSpecPosGenProcess;
 begin
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
-        Proxy.ProblemId := StrToInt(Application.RequestVariables['problem_id']);
+        Proxy.SetProblemId(StrToInt(Application.RequestVariables['problem_id']));
     except
         raise Exception.Create(ProblemIDIsAbsent);
     end;
@@ -1480,7 +1480,7 @@ procedure TCGIDatamodule2.StopFitting;
 begin
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
-        Proxy.ProblemId := StrToInt(Application.RequestVariables['problem_id']);
+        Proxy.SetProblemId(StrToInt(Application.RequestVariables['problem_id']));
     except
         raise Exception.Create(ProblemIDIsAbsent);
     end;
@@ -1529,7 +1529,7 @@ begin
     end;
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
-        Proxy.ProblemId := StrToInt(Application.RequestVariables['problem_id']);
+        Proxy.SetProblemId(StrToInt(Application.RequestVariables['problem_id']));
     except
         raise Exception.Create(ProblemIDIsAbsent);
     end;
@@ -1592,7 +1592,7 @@ var Template: string;
 begin
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
-        Proxy.ProblemId := StrToInt(Application.RequestVariables['problem_id']);
+        Proxy.SetProblemId(StrToInt(Application.RequestVariables['problem_id']));
     except
         raise Exception.Create(ProblemIDIsAbsent);
     end;
@@ -1622,7 +1622,7 @@ begin
         try
             //  chtenie schablona i zapolnenie ego parametrov
             Template := PrepareTemplate_background;
-            Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.ProblemId);
+            Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.GetProblemId);
             Template := ReplaceStrings(Template, Pair, 1);
             
             Pair[1][1] := 'GraphURL'; Pair[1][2] := GetGraphURL;
@@ -1667,7 +1667,7 @@ begin
     end;
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
-        Proxy.ProblemId := StrToInt(Application.RequestVariables['problem_id']);
+        Proxy.SetProblemId(StrToInt(Application.RequestVariables['problem_id']));
     except
         raise Exception.Create(ProblemIDIsAbsent);
     end;
@@ -1684,7 +1684,7 @@ begin
         try
             //  chtenie schablona i zapolnenie ego parametrov
             Template := PrepareTemplate_background_more;
-            Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.ProblemId);
+            Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.GetProblemId);
             Template := ReplaceStrings(Template, Pair, 1);
             
             Pair[1][1] := 'GraphURL'; Pair[1][2] := GetGraphURL;
@@ -1731,7 +1731,7 @@ begin
     end;
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
-        Proxy.ProblemId := StrToInt(Application.RequestVariables['problem_id']);
+        Proxy.SetProblemId(StrToInt(Application.RequestVariables['problem_id']));
     except
         raise Exception.Create(ProblemIDIsAbsent);
     end;
@@ -1758,13 +1758,13 @@ begin
         end;
     end;
     //  vypolnenie zaprosa
-    if BackF <> '' then Proxy.BackFactor := BackFactor;
+    if BackF <> '' then Proxy.SetBackFactor(BackFactor);
     Proxy.FindBackPoints;
     //GoToBackground;
     //  protsess asinhronnyi, poetomu perehodim k oknu progressa;
     //  chtenie schablona i zapolnenie ego parametrov
     Template := PrepareTemplate_gen_back_progress;
-    Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.ProblemId);
+    Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.GetProblemId);
     Template := ReplaceStrings(Template, Pair, 1);
 
     Pair[1][1] := 'CurChunkNum'; Pair[1][2] := IntToStr(CurChunkNum);
@@ -1789,7 +1789,7 @@ begin
     end;
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
-        Proxy.ProblemId := StrToInt(Application.RequestVariables['problem_id']);
+        Proxy.SetProblemId(StrToInt(Application.RequestVariables['problem_id']));
     except
         raise Exception.Create(ProblemIDIsAbsent);
     end;
@@ -1843,7 +1843,7 @@ begin
     end;
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
-        Proxy.ProblemId := StrToInt(Application.RequestVariables['problem_id']);
+        Proxy.SetProblemId(StrToInt(Application.RequestVariables['problem_id']));
     except
         raise Exception.Create(ProblemIDIsAbsent);
     end;
@@ -1855,7 +1855,7 @@ begin
     //  vypolnenie zaprosa
     //  chtenie schablona i zapolnenie ego parametrov
     Template := PrepareTemplate_pattern;
-    Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.ProblemId);
+    Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.GetProblemId);
     Template := ReplaceStrings(Template, Pair, 1);
     
     Pair[1][1] := 'GraphURL'; Pair[1][2] := GetGraphURL;
@@ -1873,7 +1873,7 @@ var CurChunkNum: LongInt;
 begin
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
-        Proxy.ProblemId := StrToInt(Application.RequestVariables['problem_id']);
+        Proxy.SetProblemId(StrToInt(Application.RequestVariables['problem_id']));
     except
         raise Exception.Create(ProblemIDIsAbsent);
     end;
@@ -1894,7 +1894,7 @@ var Command: string;
 begin
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
-        Proxy.ProblemId := StrToInt(Application.RequestVariables['problem_id']);
+        Proxy.SetProblemId(StrToInt(Application.RequestVariables['problem_id']));
     except
         raise Exception.Create(ProblemIDIsAbsent);
     end;
@@ -1914,12 +1914,12 @@ begin
         //  izvlechenie tipa patterna
         PatternType := Application.RequestVariables['pattern_type'];
         if UpperCase(Trim(PatternType)) = 'LORENTZIAN' then
-            Proxy.CurveTypeId := TLorentzPointsSet.GetCurveTypeId_
+            Proxy.SetCurveType(TLorentzPointsSet.GetCurveTypeId_)
         else
         if UpperCase(Trim(PatternType)) = 'PSEUDOVOIGT' then
-            Proxy.CurveTypeId := TPseudoVoigtPointsSet.GetCurveTypeId_
+            Proxy.SetCurveType(TPseudoVoigtPointsSet.GetCurveTypeId_)
         else
-            Proxy.CurveTypeId := TGaussPointsSet.GetCurveTypeId_;
+            Proxy.SetCurveType(TGaussPointsSet.GetCurveTypeId_);
         //??? special'nye patterny poka ne obrabatyvayutsya
         GoToSpecimenPositions;
     end
@@ -1947,7 +1947,7 @@ begin
     end;
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
-        Proxy.ProblemId := StrToInt(Application.RequestVariables['problem_id']);
+        Proxy.SetProblemId(StrToInt(Application.RequestVariables['problem_id']));
     except
         raise Exception.Create(ProblemIDIsAbsent);
     end;
@@ -1958,7 +1958,7 @@ begin
     end;
     //  chtenie schablona i zapolnenie ego parametrov
     Template := PrepareTemplate_pattern_more;
-    Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.ProblemId);
+    Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.GetProblemId);
     Template := ReplaceStrings(Template, Pair, 1);
     
     Pair[1][1] := 'GraphURL'; Pair[1][2] := GetGraphURL;
@@ -1977,7 +1977,7 @@ var CurChunkNum: LongInt;
 begin
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
-        Proxy.ProblemId := StrToInt(Application.RequestVariables['problem_id']);
+        Proxy.SetProblemId(StrToInt(Application.RequestVariables['problem_id']));
     except
         raise Exception.Create(ProblemIDIsAbsent);
     end;
@@ -1996,7 +1996,7 @@ var CurChunkNum: LongInt;
 begin
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
-        Proxy.ProblemId := StrToInt(Application.RequestVariables['problem_id']);
+        Proxy.SetProblemId(StrToInt(Application.RequestVariables['problem_id']));
     except
         raise Exception.Create(ProblemIDIsAbsent);
     end;
@@ -2033,7 +2033,7 @@ begin
     end;
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
-        Proxy.ProblemId := StrToInt(Application.RequestVariables['problem_id']);
+        Proxy.SetProblemId(StrToInt(Application.RequestVariables['problem_id']));
     except
         raise Exception.Create(ProblemIDIsAbsent);
     end;
@@ -2050,7 +2050,7 @@ begin
         try
             //  chtenie schablona i zapolnenie ego parametrov
             Template := PrepareTemplate_specimen_positions;
-            Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.ProblemId);
+            Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.GetProblemId);
             Template := ReplaceStrings(Template, Pair, 1);
             
             Pair[1][1] := 'GraphURL'; Pair[1][2] := GetGraphURL;
@@ -2078,7 +2078,7 @@ var CurChunkNum: LongInt;
 begin
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
-        Proxy.ProblemId := StrToInt(Application.RequestVariables['problem_id']);
+        Proxy.SetProblemId(StrToInt(Application.RequestVariables['problem_id']));
     except
         raise Exception.Create(ProblemIDIsAbsent);
     end;
@@ -2097,7 +2097,7 @@ var CurChunkNum: LongInt;
 begin
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
-        Proxy.ProblemId := StrToInt(Application.RequestVariables['problem_id']);
+        Proxy.SetProblemId(StrToInt(Application.RequestVariables['problem_id']));
     except
         raise Exception.Create(ProblemIDIsAbsent);
     end;
@@ -2116,7 +2116,7 @@ var CurChunkNum: LongInt;
 begin
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
-        Proxy.ProblemId := StrToInt(Application.RequestVariables['problem_id']);
+        Proxy.SetProblemId(StrToInt(Application.RequestVariables['problem_id']));
     except
         raise Exception.Create(ProblemIDIsAbsent);
     end;
@@ -2151,7 +2151,7 @@ begin
         Exit;
     end;
     try
-        Proxy.ProblemId := StrToInt(Application.RequestVariables['problem_id']);
+        Proxy.SetProblemId(StrToInt(Application.RequestVariables['problem_id']));
     except
         raise Exception.Create(ProblemIDIsAbsent);
     end;
@@ -2167,7 +2167,7 @@ begin
         Intervals := Proxy.GetRFactorIntervals;
         try
             Template := PrepareTemplate_specimen_intervals;
-            Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.ProblemId);
+            Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.GetProblemId);
             Template := ReplaceStrings(Template, Pair, 1);
             
             Pair[1][1] := 'GraphURL'; Pair[1][2] := GetGraphURL;
@@ -2210,7 +2210,7 @@ begin
     end;
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
-        Proxy.ProblemId := StrToInt(Application.RequestVariables['problem_id']);
+        Proxy.SetProblemId(StrToInt(Application.RequestVariables['problem_id']));
     except
         raise Exception.Create(ProblemIDIsAbsent);
     end;
@@ -2218,11 +2218,11 @@ begin
 
     //  chtenie schablona i zapolnenie ego parametrov
     Template := PrepareTemplate_fitting;
-    Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.ProblemId);
+    Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.GetProblemId);
     Template := ReplaceStrings(Template, Pair, 1);
     
     Pair[1][1] := 'MaxRFactor';
-    Pair[1][2] := FloatToStrF(Proxy.MaxRFactor, ffGeneral, 10, 8);
+    Pair[1][2] := FloatToStrF(Proxy.GetMaxRFactor, ffGeneral, 10, 8);
     Template := ReplaceStrings(Template, Pair, 1);
 
     Template := InsertKey(Template, Key);
@@ -2250,12 +2250,12 @@ begin
     end;
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
-        Proxy.ProblemId := StrToInt(Application.RequestVariables['problem_id']);
+        Proxy.SetProblemId(StrToInt(Application.RequestVariables['problem_id']));
     except
         raise Exception.Create(ProblemIDIsAbsent);
     end;
     Template := PrepareTemplate_fitting_process;
-    Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.ProblemId);
+    Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.GetProblemId);
     Template := ReplaceStrings(Template, Pair, 1);
     Pair[1][1] := 'HintFitting'; Pair[1][2] := HintMinimizeDifference;
     Template := ReplaceStrings(Template, Pair, 1);
@@ -2285,12 +2285,12 @@ begin
     end;
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
-        Proxy.ProblemId := StrToInt(Application.RequestVariables['problem_id']);
+        Proxy.SetProblemId(StrToInt(Application.RequestVariables['problem_id']));
     except
         raise Exception.Create(ProblemIDIsAbsent);
     end;
     Template := PrepareTemplate_fitting_process;
-    Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.ProblemId);
+    Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.GetProblemId);
     Template := ReplaceStrings(Template, Pair, 1);
     Pair[1][1] := 'HintFitting'; Pair[1][2] := HintMinimizeNumberOfSpecimens;
     Template := ReplaceStrings(Template, Pair, 1);
@@ -2320,12 +2320,12 @@ begin
     end;
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
-        Proxy.ProblemId := StrToInt(Application.RequestVariables['problem_id']);
+        Proxy.SetProblemId(StrToInt(Application.RequestVariables['problem_id']));
     except
         raise Exception.Create(ProblemIDIsAbsent);
     end;
     Template := PrepareTemplate_fitting_process;
-    Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.ProblemId);
+    Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.GetProblemId);
     Template := ReplaceStrings(Template, Pair, 1);
     Pair[1][1] := 'HintFitting'; Pair[1][2] := HintDoAllAutomatically;
     Template := ReplaceStrings(Template, Pair, 1);
@@ -2658,7 +2658,7 @@ end;
 procedure TCGIDatamodule2.DeleteProblem(ProblemID: LongInt);
 begin
     Sysutils.DeleteFile(KeyDir + IntToStr(ProblemID) + '.problem');
-    Proxy.FitStub.DiscardProblem(ProblemID);
+    Proxy.DiscardProblem(ProblemId);
 end;
 
 procedure TCGIDatamodule2.WriteProblemFile(
@@ -2819,9 +2819,9 @@ begin
     try
         //  !!! syuda prihodit iz okna parametrov ekzemplyarov patterna !!!
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
-        Proxy.ProblemId := StrToInt(Application.RequestVariables['problem_id']);
+        Proxy.SetProblemId(StrToInt(Application.RequestVariables['problem_id']));
         //  udalenie zadachi po zaverschenii raboty
-        DeleteProblem(Proxy.ProblemId);
+        DeleteProblem(Proxy.GetProblemId);
     except
         //  ProblemID - optsionalnyi parametr
     end;
@@ -2994,10 +2994,10 @@ begin
     try
         //  !!! syuda prihodit iz okna parametrov ekzemplyarov patterna !!!
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
-        Proxy.ProblemId := StrToInt(Application.RequestVariables['problem_id']);
-        GetDataNames(Proxy.ProblemId, UserName, ProjectName, FileName);
+        Proxy.SetProblemId(StrToInt(Application.RequestVariables['problem_id']));
+        GetDataNames(Proxy.GetProblemId, UserName, ProjectName, FileName);
         //  udalenie zadachi po zaverschenii raboty
-        DeleteProblem(Proxy.ProblemId);
+        DeleteProblem(Proxy.GetProblemId);
     except
         //  ProblemID - optsional'nyi parametr
         ProjectName := Application.RequestVariables['project_name'];
@@ -3028,10 +3028,10 @@ begin
     try
         //  !!! syuda prihodit iz okna parametrov ekzemplyarov patterna !!!
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
-        Proxy.ProblemId := StrToInt(Application.RequestVariables['problem_id']);
-        GetDataNames(Proxy.ProblemId, UserName, ProjectName, FileName);
+        Proxy.SetProblemId(StrToInt(Application.RequestVariables['problem_id']));
+        GetDataNames(Proxy.GetProblemId, UserName, ProjectName, FileName);
         //  udalenie zadachi po zaverschenii raboty
-        DeleteProblem(Proxy.ProblemId);
+        DeleteProblem(Proxy.GetProblemId);
     except
         //  ProblemID - optsional'nyi parametr
         ProjectName := Application.RequestVariables['project_name'];
@@ -3370,7 +3370,7 @@ var TmplBegin, TmplEnd, TmplLen: LongInt;
     UserFileName, FileDescription: string;
 begin
     Result := PrepareTemplate_data;
-    Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.ProblemId);
+    Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.GetProblemId);
     Result := ReplaceStrings(Result, Pair, 1);
 
     Pair[1][1] := 'GraphURL'; Pair[1][2] := GetGraphURL;
@@ -3808,7 +3808,7 @@ var Pair: array[1..1] of TStringPair;
     TmplSpecimen,       //  schablon stroki znacheniy parametrov
     Data, TmplTemp: string;
 begin
-    Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.ProblemId);
+    Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.GetProblemId);
     Page := ReplaceStrings(Page, Pair, 1);
 
     Pair[1][1] := 'GraphURL'; Pair[1][2] := GetGraphURL;
@@ -3987,7 +3987,7 @@ begin
     end;
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
-        Proxy.ProblemId := StrToInt(Application.RequestVariables['problem_id']);
+        Proxy.SetProblemId(StrToInt(Application.RequestVariables['problem_id']));
     except
         raise Exception.Create(ProblemIDIsAbsent);
     end;
@@ -4035,7 +4035,7 @@ begin
     end;
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
-        Proxy.ProblemId := StrToInt(Application.RequestVariables['problem_id']);
+        Proxy.SetProblemId(StrToInt(Application.RequestVariables['problem_id']));
     except
         raise Exception.Create(ProblemIDIsAbsent);
     end;
@@ -4043,7 +4043,7 @@ begin
     ResultName := Application.RequestVariables['result_name'];
     ResultDescription := Application.RequestVariables['result_description'];
     
-    GetDataNames(Proxy.ProblemId, UserName, ProjectName, FileName);
+    GetDataNames(Proxy.GetProblemId, UserName, ProjectName, FileName);
     //  poisk poslednego rezul'tata, sootvetstvuyuschego
     //  dannomu imeni faila
     FileName := ChangeFileExt(FileName, '');
@@ -4145,7 +4145,7 @@ begin
     end;
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
-        Proxy.ProblemId := StrToInt(Application.RequestVariables['problem_id']);
+        Proxy.SetProblemId(StrToInt(Application.RequestVariables['problem_id']));
     except
         raise Exception.Create(ProblemIDIsAbsent);
     end;
@@ -4204,7 +4204,7 @@ begin
     end;
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
-        Proxy.ProblemId := StrToInt(Application.RequestVariables['problem_id']);
+        Proxy.SetProblemId(StrToInt(Application.RequestVariables['problem_id']));
     except
         raise Exception.Create(ProblemIDIsAbsent);
     end;
@@ -4251,7 +4251,7 @@ begin
     end;
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
-        Proxy.ProblemId := StrToInt(Application.RequestVariables['problem_id']);
+        Proxy.SetProblemId(StrToInt(Application.RequestVariables['problem_id']));
     except
         raise Exception.Create(ProblemIDIsAbsent);
     end;
@@ -4307,7 +4307,7 @@ begin
     end;
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
-        Proxy.ProblemId := StrToInt(Application.RequestVariables['problem_id']);
+        Proxy.SetProblemId(StrToInt(Application.RequestVariables['problem_id']));
     except
         raise Exception.Create(ProblemIDIsAbsent);
     end;
@@ -4323,7 +4323,7 @@ begin
     //  protsess asinhronnyi, poetomu perehodim k oknu progressa;
     //  chtenie schablona i zapolnenie ego parametrov
     Template := PrepareTemplate_gen_spec_pos_progress;
-    Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.ProblemId);
+    Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.GetProblemId);
     Template := ReplaceStrings(Template, Pair, 1);
 
     Pair[1][1] := 'CurChunkNum'; Pair[1][2] := IntToStr(CurChunkNum);
@@ -4355,7 +4355,7 @@ begin
     end;
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
-        Proxy.ProblemId := StrToInt(Application.RequestVariables['problem_id']);
+        Proxy.SetProblemId(StrToInt(Application.RequestVariables['problem_id']));
     except
         raise Exception.Create(ProblemIDIsAbsent);
     end;
@@ -4371,7 +4371,7 @@ begin
     //  protsess asinhronnyi, poetomu perehodim k oknu progressa;
     //  chtenie schablona i zapolnenie ego parametrov
     Template := PrepareTemplate_gen_spec_int_progress;
-    Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.ProblemId);
+    Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.GetProblemId);
     Template := ReplaceStrings(Template, Pair, 1);
 
     Pair[1][1] := 'CurChunkNum'; Pair[1][2] := IntToStr(CurChunkNum);
@@ -4383,9 +4383,10 @@ end;
 
 function TCGIDatamodule2.GetGraphURL: string;
 begin
-    Assert(Proxy.ProblemId <> 0);
+    Assert(Proxy.GetProblemId <> 0);
     Result := 'https://' + ExternalIP +
-        '/cgi-bin/fit.cgi?command=get_graph&problem_id=' + IntToStr(Proxy.ProblemId);
+        '/cgi-bin/fit.cgi?command=get_graph&problem_id=' +
+        IntToStr(Proxy.GetProblemId);
 end;
 
 procedure TCGIDatamodule2.GetGraph;
@@ -4394,7 +4395,7 @@ var Stream: TMemoryStream;
 begin
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
-        Proxy.ProblemId := StrToInt(Application.RequestVariables['problem_id']);
+        Proxy.SetProblemId(StrToInt(Application.RequestVariables['problem_id']));
     except
         raise Exception.Create(ProblemIDIsAbsent);
     end;

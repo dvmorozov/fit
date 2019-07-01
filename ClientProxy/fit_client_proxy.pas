@@ -143,6 +143,9 @@ type
         
         { Should be called in appropriate server state. }
         procedure CreateProblem;
+        function GetProblemId: LongInt;
+        procedure SetProblemId(AProblemId: LongInt);
+        procedure DiscardProblem(AProblemId: LongInt);
 
         property MaxRFactor: Double read GetMaxRFactor write SetMaxRFactor;
         property BackFactor: Double read GetBackFactor write SetBackFactor;
@@ -221,17 +224,31 @@ begin
             'TCP:Address=' + InternalIP +
             ';Port=' + InternalPort + ';target=IFitServer'
             );
-    FProblemId := FFitStub.CreateProblem;
 end;
 
 destructor TFitClientProxy.Destroy;
 begin
-     FitStub.DiscardProblem(ProblemID);
+    DiscardProblem(FProblemId);
 end;
 
 procedure TFitClientProxy.CreateProblem;
 begin
     FProblemId := FitStub.CreateProblem;
+end;
+
+procedure TFitClientProxy.DiscardProblem(AProblemId: LongInt);
+begin
+    FitStub.DiscardProblem(AProblemId);
+end;
+
+function TFitClientProxy.GetProblemId: LongInt;
+begin
+    Result := FProblemId;
+end;
+
+procedure TFitClientProxy.SetProblemId(AProblemId: LongInt);
+begin
+    FProblemId := AProblemId;
 end;
 
 function TFitClientProxy.GetMaxRFactor: Double;

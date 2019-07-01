@@ -7,7 +7,7 @@
       <MainUnit Value="0"/>
       <IconPath Value="./"/>
       <TargetFileExt Value=".exe"/>
-      <ActiveEditorIndexAtStart Value="8"/>
+      <ActiveEditorIndexAtStart Value="6"/>
     </General>
     <VersionInfo>
       <ProjectVersion Value=""/>
@@ -34,25 +34,23 @@
         <PackageName Value="IDEIntf"/>
       </Item2>
     </RequiredPackages>
-    <Units Count="12">
+    <Units Count="13">
       <Unit0>
         <Filename Value="ClientProxy.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ClientProxy"/>
         <CursorPos X="51" Y="10"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="0"/>
-        <UsageCount Value="125"/>
-        <Loaded Value="True"/>
+        <UsageCount Value="144"/>
       </Unit0>
       <Unit1>
         <Filename Value="fit_client_proxy.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="fit_client_proxy"/>
-        <CursorPos X="13" Y="162"/>
-        <TopLine Value="140"/>
-        <EditorIndex Value="8"/>
-        <UsageCount Value="125"/>
+        <CursorPos X="19" Y="231"/>
+        <TopLine Value="213"/>
+        <EditorIndex Value="7"/>
+        <UsageCount Value="144"/>
         <Loaded Value="True"/>
       </Unit1>
       <Unit2>
@@ -60,8 +58,8 @@
         <UnitName Value="MSCRDataClasses"/>
         <CursorPos X="33" Y="18"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="1"/>
-        <UsageCount Value="61"/>
+        <EditorIndex Value="0"/>
+        <UsageCount Value="70"/>
         <Loaded Value="True"/>
       </Unit2>
       <Unit3>
@@ -69,8 +67,8 @@
         <UnitName Value="SimpMath"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="2"/>
-        <UsageCount Value="61"/>
+        <EditorIndex Value="1"/>
+        <UsageCount Value="70"/>
         <Loaded Value="True"/>
       </Unit3>
       <Unit4>
@@ -78,8 +76,8 @@
         <UnitName Value="DataClasses"/>
         <CursorPos X="18" Y="25"/>
         <TopLine Value="9"/>
-        <EditorIndex Value="3"/>
-        <UsageCount Value="61"/>
+        <EditorIndex Value="2"/>
+        <UsageCount Value="70"/>
         <Loaded Value="True"/>
       </Unit4>
       <Unit5>
@@ -87,8 +85,8 @@
         <UnitName Value="NumericGrid"/>
         <CursorPos X="14" Y="150"/>
         <TopLine Value="132"/>
-        <EditorIndex Value="4"/>
-        <UsageCount Value="61"/>
+        <EditorIndex Value="3"/>
+        <UsageCount Value="70"/>
         <Loaded Value="True"/>
       </Unit5>
       <Unit6>
@@ -96,8 +94,8 @@
         <UnitName Value="Tools"/>
         <CursorPos X="20" Y="21"/>
         <TopLine Value="3"/>
-        <EditorIndex Value="5"/>
-        <UsageCount Value="61"/>
+        <EditorIndex Value="4"/>
+        <UsageCount Value="70"/>
         <Loaded Value="True"/>
       </Unit6>
       <Unit7>
@@ -105,8 +103,8 @@
         <UnitName Value="TitlePointsSet"/>
         <CursorPos X="14" Y="19"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="6"/>
-        <UsageCount Value="61"/>
+        <EditorIndex Value="5"/>
+        <UsageCount Value="70"/>
         <Loaded Value="True"/>
       </Unit7>
       <Unit8>
@@ -114,39 +112,139 @@
         <UnitName Value="IntPointsSet"/>
         <CursorPos X="6" Y="27"/>
         <TopLine Value="4"/>
-        <EditorIndex Value="7"/>
-        <UsageCount Value="61"/>
+        <EditorIndex Value="6"/>
+        <UsageCount Value="70"/>
         <Loaded Value="True"/>
       </Unit8>
       <Unit9>
         <Filename Value="..\Server\fit_server.pas"/>
         <UnitName Value="fit_server"/>
-        <CursorPos X="19" Y="245"/>
-        <TopLine Value="227"/>
-        <EditorIndex Value="11"/>
-        <UsageCount Value="61"/>
-        <Loaded Value="True"/>
+        <CursorPos X="14" Y="291"/>
+        <TopLine Value="273"/>
+        <UsageCount Value="63"/>
       </Unit9>
       <Unit10>
         <Filename Value="..\Desktop\ModelCurves\NamedPointsSet.pas"/>
         <UnitName Value="NamedPointsSet"/>
         <CursorPos X="57" Y="18"/>
-        <TopLine Value="1"/>
+        <TopLine Value="17"/>
         <EditorIndex Value="10"/>
-        <UsageCount Value="61"/>
+        <UsageCount Value="70"/>
         <Loaded Value="True"/>
       </Unit10>
       <Unit11>
         <Filename Value="..\Desktop\Main.pas"/>
         <UnitName Value="Main"/>
-        <CursorPos X="84" Y="83"/>
-        <TopLine Value="79"/>
-        <EditorIndex Value="9"/>
-        <UsageCount Value="23"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="8"/>
+        <UsageCount Value="32"/>
         <Loaded Value="True"/>
       </Unit11>
+      <Unit12>
+        <Filename Value="..\Server\client_interfaces\int_fit_service.pas"/>
+        <UnitName Value="int_fit_service"/>
+        <CursorPos X="55" Y="140"/>
+        <TopLine Value="111"/>
+        <EditorIndex Value="9"/>
+        <UsageCount Value="19"/>
+        <Loaded Value="True"/>
+      </Unit12>
     </Units>
-    <JumpHistory Count="0" HistoryIndex="-1"/>
+    <JumpHistory Count="23" HistoryIndex="22">
+      <Position1>
+        <Filename Value="..\Desktop\Main.pas"/>
+        <Caret Line="224" Column="69" TopLine="213"/>
+      </Position1>
+      <Position2>
+        <Filename Value="..\Desktop\Main.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
+      </Position2>
+      <Position3>
+        <Filename Value="..\Desktop\Main.pas"/>
+        <Caret Line="39" Column="19" TopLine="21"/>
+      </Position3>
+      <Position4>
+        <Filename Value="..\Desktop\Main.pas"/>
+        <Caret Line="227" Column="51" TopLine="212"/>
+      </Position4>
+      <Position5>
+        <Filename Value="..\Server\client_interfaces\int_fit_service.pas"/>
+        <Caret Line="128" Column="73" TopLine="105"/>
+      </Position5>
+      <Position6>
+        <Filename Value="fit_client_proxy.pas"/>
+        <Caret Line="162" Column="13" TopLine="140"/>
+      </Position6>
+      <Position7>
+        <Filename Value="fit_client_proxy.pas"/>
+        <Caret Line="232" Column="20" TopLine="206"/>
+      </Position7>
+      <Position8>
+        <Filename Value="fit_client_proxy.pas"/>
+        <Caret Line="31" Column="5" TopLine="61"/>
+      </Position8>
+      <Position9>
+        <Filename Value="fit_client_proxy.pas"/>
+        <Caret Line="33" Column="19" TopLine="15"/>
+      </Position9>
+      <Position10>
+        <Filename Value="fit_client_proxy.pas"/>
+        <Caret Line="155" Column="69" TopLine="137"/>
+      </Position10>
+      <Position11>
+        <Filename Value="fit_client_proxy.pas"/>
+        <Caret Line="237" Column="33" TopLine="206"/>
+      </Position11>
+      <Position12>
+        <Filename Value="fit_client_proxy.pas"/>
+        <Caret Line="239" Column="24" TopLine="219"/>
+      </Position12>
+      <Position13>
+        <Filename Value="fit_client_proxy.pas"/>
+        <Caret Line="33" Column="9" TopLine="79"/>
+      </Position13>
+      <Position14>
+        <Filename Value="fit_client_proxy.pas"/>
+        <Caret Line="232" Column="37" TopLine="219"/>
+      </Position14>
+      <Position15>
+        <Filename Value="fit_client_proxy.pas"/>
+        <Caret Line="146" Column="30" TopLine="127"/>
+      </Position15>
+      <Position16>
+        <Filename Value="fit_client_proxy.pas"/>
+        <Caret Line="226" Column="15" TopLine="213"/>
+      </Position16>
+      <Position17>
+        <Filename Value="fit_client_proxy.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
+      </Position17>
+      <Position18>
+        <Filename Value="fit_client_proxy.pas"/>
+        <Caret Line="146" Column="26" TopLine="131"/>
+      </Position18>
+      <Position19>
+        <Filename Value="fit_client_proxy.pas"/>
+        <Caret Line="226" Column="1" TopLine="209"/>
+      </Position19>
+      <Position20>
+        <Filename Value="fit_client_proxy.pas"/>
+        <Caret Line="145" Column="34" TopLine="131"/>
+      </Position20>
+      <Position21>
+        <Filename Value="fit_client_proxy.pas"/>
+        <Caret Line="240" Column="40" TopLine="212"/>
+      </Position21>
+      <Position22>
+        <Filename Value="fit_client_proxy.pas"/>
+        <Caret Line="230" Column="6" TopLine="212"/>
+      </Position22>
+      <Position23>
+        <Filename Value="fit_client_proxy.pas"/>
+        <Caret Line="148" Column="26" TopLine="155"/>
+      </Position23>
+    </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
     <Version Value="5"/>

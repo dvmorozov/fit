@@ -132,6 +132,12 @@ type
         { Returns hint or error message received from the server. }
         function ReturnToTotalProfile: string;
         procedure CreateSpecimenList;
+        
+        { Methods supporting CGI-client. }
+        procedure CreateProblem;
+        function GetProblemId: LongInt;
+        procedure SetProblemId(AProblemId: LongInt);
+        procedure DiscardProblem(AProblemId: LongInt);
     end;
 
 implementation

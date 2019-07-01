@@ -21,6 +21,14 @@ unit Main;
 
 interface
 
+{$IFDEF FITPRO}
+    {$DEFINE USE_PROXY_DLL}
+{$ELSE}
+    {$IFDEF FITCGI}
+        {$DEFINE USE_PROXY_DLL}
+    {$ENDIF}
+{$ENDIF}
+
 uses SysUtils, Forms
 {$IFDEF WINDOWS}
     , windows, shfolder
@@ -36,7 +44,7 @@ uses SysUtils, Forms
         {$ENDIF}
     {$ENDIF}
 {$ELSE}
-    {$IFDEF FITPRO}
+    {$IFDEF USE_PROXY_DLL}
         , int_fit_service
     {$ELSE}
         {$IFDEF FITCGI}
@@ -48,13 +56,15 @@ uses SysUtils, Forms
 //  peremennye vyneseny v otdel'nyi modul', dlya togo chtoby
 //  k nim mozhno bylo by poluchit' dostup iz drugih modulei
 {$IFDEF FITCLIENT}
-    var FitClientApp_: TFitClientApp;
+var FitClientApp_: TFitClientApp;
 {$ELSE}
+{$ENDIF}
+
 {$IFDEF FITCGI}
-    var Key: string = '';       //  klyuch, poluchennyi vo vremya registratsii
-        UserName: string = '';
+var Key: string = '';        //  key obtained during registration
+    UserName: string = '';
+    Proxy: IFitService;
 {$ENDIF}    //  FITCGI
-{$ENDIF}    //  FITCLIENT
 
 {$IFDEF FITSERVER}
     {$IFDEF FIT}
@@ -227,7 +237,7 @@ begin
     LeaveCriticalSection(LogCS);
 end;
 
-{$IFDEF FITPRO}
+{$IFDEF USE_PROXY_DLL}
 type
     TFitServiceFactory = function: IFitService; cdecl;
 
@@ -239,14 +249,20 @@ var
 //  klyuch FIT vkluchaet i klienta, i server v odin modul' s
 //  pryamoi svyaz'yu mezhdu nimi
 initialization
-{$IFDEF FITPRO}
+{$IFDEF USE_PROXY_DLL}
     ProxyLibHandle := LoadLibrary('ClientProxy.dll');
     CreateFitServiceInstance :=
         GetProcAddress(ProxyLibHandle, 'CreateFitServiceInstance');
 
     if Assigned(CreateFitServiceInstance) then
     begin
+{$IFDEF FITPRO}
         FitClientApp_.FitClient.FitProxy := CreateFitServiceInstance();
+{$ELSE}
+    {$IFDEF FITCGI}
+        Proxy := CreateFitServiceInstance();
+    {$ENDIF}
+{$ENDIF}
     end;
 {$ENDIF}
 

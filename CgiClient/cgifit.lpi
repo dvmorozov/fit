@@ -8,7 +8,7 @@
       <IconPath Value="./"/>
       <TargetFileExt Value=".exe"/>
       <UseAppBundle Value="False"/>
-      <ActiveEditorIndexAtStart Value="26"/>
+      <ActiveEditorIndexAtStart Value="21"/>
     </General>
     <VersionInfo>
       <ProjectVersion Value=""/>
@@ -27,15 +27,15 @@
     </RunParams>
     <RequiredPackages Count="3">
       <Item1>
-        <PackageName Value="CGILaz"/>
+        <PackageName Value="ta"/>
+        <MinVersion Major="1" Minor="1" Valid="True"/>
       </Item1>
       <Item2>
         <PackageName Value="LCL"/>
         <MinVersion Major="1" Valid="True"/>
       </Item2>
       <Item3>
-        <PackageName Value="ta"/>
-        <MinVersion Major="1" Minor="1" Valid="True"/>
+        <PackageName Value="CGILaz"/>
       </Item3>
     </RequiredPackages>
     <Units Count="57">
@@ -55,8 +55,8 @@
         <IsPartOfProject Value="True"/>
         <ResourceFilename Value="Unit2.lrs"/>
         <UnitName Value="Unit2"/>
-        <CursorPos X="39" Y="4392"/>
-        <TopLine Value="4379"/>
+        <CursorPos X="63" Y="713"/>
+        <TopLine Value="696"/>
         <EditorIndex Value="21"/>
         <UsageCount Value="202"/>
         <Loaded Value="True"/>
@@ -65,8 +65,8 @@
         <Filename Value="data.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="data"/>
-        <CursorPos X="22" Y="70"/>
-        <TopLine Value="39"/>
+        <CursorPos X="57" Y="151"/>
+        <TopLine Value="133"/>
         <EditorIndex Value="13"/>
         <UsageCount Value="203"/>
         <Loaded Value="True"/>
@@ -175,42 +175,42 @@
         <UnitName Value="fit_server_proxy"/>
         <CursorPos X="22" Y="1104"/>
         <TopLine Value="1073"/>
-        <UsageCount Value="189"/>
+        <UsageCount Value="178"/>
       </Unit13>
       <Unit14>
         <Filename Value="..\DataLoader.pas"/>
         <UnitName Value="DataLoader"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <UsageCount Value="188"/>
+        <UsageCount Value="177"/>
       </Unit14>
       <Unit15>
         <Filename Value="..\FitClientProxy.pas"/>
         <UnitName Value="FitClientProxy"/>
         <CursorPos X="19" Y="129"/>
         <TopLine Value="109"/>
-        <UsageCount Value="99"/>
+        <UsageCount Value="88"/>
       </Unit15>
       <Unit16>
         <Filename Value="..\Main.pas"/>
         <UnitName Value="Main"/>
         <CursorPos X="1" Y="261"/>
         <TopLine Value="1"/>
-        <UsageCount Value="192"/>
+        <UsageCount Value="181"/>
       </Unit16>
       <Unit17>
         <Filename Value="..\Packages\VariousGrids\SelfCopied.pas"/>
         <UnitName Value="SelfCopied"/>
         <CursorPos X="3" Y="2"/>
         <TopLine Value="1"/>
-        <UsageCount Value="58"/>
+        <UsageCount Value="47"/>
       </Unit17>
       <Unit18>
         <Filename Value="..\CommonTypes.pas"/>
         <UnitName Value="CommonTypes"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <UsageCount Value="190"/>
+        <UsageCount Value="179"/>
       </Unit18>
       <Unit19>
         <Filename Value="specimen_positions.pas"/>
@@ -227,7 +227,7 @@
         <UnitName Value="MSCRDataClasses"/>
         <CursorPos X="21" Y="58"/>
         <TopLine Value="46"/>
-        <UsageCount Value="188"/>
+        <UsageCount Value="177"/>
       </Unit20>
       <Unit21>
         <Filename Value="fitting.pas"/>
@@ -254,7 +254,7 @@
         <UnitName Value="SimpMath"/>
         <CursorPos X="9" Y="701"/>
         <TopLine Value="682"/>
-        <UsageCount Value="58"/>
+        <UsageCount Value="47"/>
       </Unit23>
       <Unit24>
         <Filename Value="gen_spec_pos_progress.pas"/>
@@ -323,7 +323,7 @@
         <UnitName Value="GeneralHashfunctions"/>
         <CursorPos X="57" Y="7"/>
         <TopLine Value="1"/>
-        <UsageCount Value="87"/>
+        <UsageCount Value="76"/>
       </Unit31>
       <Unit32>
         <Filename Value="pattern.pas"/>
@@ -368,7 +368,7 @@
       <Unit36>
         <Filename Value="..\GeneralHashFunctions.pas"/>
         <UnitName Value="GeneralHashFunctions"/>
-        <UsageCount Value="187"/>
+        <UsageCount Value="176"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit36>
       <Unit37>
@@ -386,7 +386,7 @@
         <UnitName Value="fit_server"/>
         <CursorPos X="27" Y="246"/>
         <TopLine Value="226"/>
-        <UsageCount Value="108"/>
+        <UsageCount Value="97"/>
       </Unit38>
       <Unit39>
         <Filename Value="evaluation.pas"/>
@@ -403,13 +403,13 @@
         <UnitName Value="TAGraph"/>
         <CursorPos X="20" Y="2776"/>
         <TopLine Value="2756"/>
-        <UsageCount Value="78"/>
+        <UsageCount Value="67"/>
       </Unit40>
       <Unit41>
         <Filename Value="..\Desktop\CommonTypes.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="CommonTypes"/>
-        <UsageCount Value="149"/>
+        <UsageCount Value="224"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit41>
       <Unit42>
@@ -418,7 +418,7 @@
         <UnitName Value="DataLoader"/>
         <CursorPos X="45" Y="18"/>
         <TopLine Value="1"/>
-        <UsageCount Value="149"/>
+        <UsageCount Value="224"/>
       </Unit42>
       <Unit43>
         <Filename Value="..\Desktop\fit_server_proxy.pas"/>
@@ -426,23 +426,23 @@
         <UnitName Value="fit_server_proxy"/>
         <CursorPos X="17" Y="1747"/>
         <TopLine Value="1601"/>
-        <UsageCount Value="149"/>
+        <UsageCount Value="224"/>
       </Unit43>
       <Unit44>
         <Filename Value="..\Desktop\GeneralHashFunctions.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="GeneralHashFunctions"/>
-        <UsageCount Value="149"/>
+        <UsageCount Value="224"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit44>
       <Unit45>
         <Filename Value="..\Desktop\Main.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Main"/>
-        <CursorPos X="22" Y="104"/>
-        <TopLine Value="97"/>
+        <CursorPos X="5" Y="66"/>
+        <TopLine Value="50"/>
         <EditorIndex Value="26"/>
-        <UsageCount Value="149"/>
+        <UsageCount Value="224"/>
         <Loaded Value="True"/>
       </Unit45>
       <Unit46>
@@ -451,98 +451,219 @@
         <UnitName Value="MSCRDataClasses"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <UsageCount Value="149"/>
+        <UsageCount Value="224"/>
       </Unit46>
       <Unit47>
-        <Filename Value="..\Desktop\FitClientProxy.pas"/>
-        <UnitName Value="FitClientProxy"/>
-        <CursorPos X="29" Y="156"/>
-        <TopLine Value="128"/>
-        <UsageCount Value="3"/>
-      </Unit47>
-      <Unit48>
         <Filename Value="..\..\fitminimizers\SimpMath.pas"/>
         <UnitName Value="SimpMath"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
         <EditorIndex Value="25"/>
-        <UsageCount Value="73"/>
+        <UsageCount Value="110"/>
         <Loaded Value="True"/>
-      </Unit48>
-      <Unit49>
+      </Unit47>
+      <Unit48>
         <Filename Value="..\..\..\lazarus-0.9.24\fpc\2.2.0\source\packages\fcl-base\src\inc\custapp.pp"/>
         <UnitName Value="CustApp"/>
         <CursorPos X="32" Y="313"/>
         <TopLine Value="295"/>
-        <EditorIndex Value="29"/>
-        <UsageCount Value="72"/>
+        <EditorIndex Value="30"/>
+        <UsageCount Value="109"/>
         <Loaded Value="True"/>
-      </Unit49>
-      <Unit50>
+      </Unit48>
+      <Unit49>
         <Filename Value="..\Desktop\DataLoaders\DataLoader.pas"/>
         <UnitName Value="DataLoader"/>
         <CursorPos X="34" Y="19"/>
         <TopLine Value="1"/>
         <EditorIndex Value="24"/>
-        <UsageCount Value="72"/>
+        <UsageCount Value="109"/>
         <Loaded Value="True"/>
-      </Unit50>
-      <Unit51>
+      </Unit49>
+      <Unit50>
         <Filename Value="..\Packages\wst-0.5\service_intf.pas"/>
         <UnitName Value="service_intf"/>
         <CursorPos X="78" Y="12"/>
         <TopLine Value="1"/>
         <EditorIndex Value="23"/>
-        <UsageCount Value="72"/>
+        <UsageCount Value="109"/>
         <Loaded Value="True"/>
-      </Unit51>
-      <Unit52>
+      </Unit50>
+      <Unit51>
         <Filename Value="..\Desktop\ModelCurves\NamedPointsSet.pas"/>
         <UnitName Value="NamedPointsSet"/>
         <CursorPos X="35" Y="36"/>
         <TopLine Value="23"/>
-        <EditorIndex Value="28"/>
-        <UsageCount Value="68"/>
+        <EditorIndex Value="29"/>
+        <UsageCount Value="105"/>
         <Loaded Value="True"/>
-      </Unit52>
-      <Unit53>
+      </Unit51>
+      <Unit52>
         <Filename Value="..\Desktop\ModelCurves\LorentzPointsSet.pas"/>
         <UnitName Value="LorentzPointsSet"/>
         <CursorPos X="24" Y="32"/>
         <TopLine Value="14"/>
         <EditorIndex Value="22"/>
-        <UsageCount Value="68"/>
+        <UsageCount Value="105"/>
         <Loaded Value="True"/>
-      </Unit53>
-      <Unit54>
+      </Unit52>
+      <Unit53>
         <Filename Value="..\Server\client_interfaces\fit_client_proxy.pas"/>
         <UnitName Value="fit_client_proxy"/>
         <CursorPos X="1" Y="165"/>
         <TopLine Value="157"/>
-        <EditorIndex Value="30"/>
-        <UsageCount Value="68"/>
-        <Loaded Value="True"/>
-      </Unit54>
-      <Unit55>
+        <UsageCount Value="57"/>
+      </Unit53>
+      <Unit54>
         <Filename Value="..\Packages\wst-0.5\binary_formatter.pas"/>
         <UnitName Value="binary_formatter"/>
         <CursorPos X="6" Y="49"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="27"/>
-        <UsageCount Value="46"/>
+        <EditorIndex Value="28"/>
+        <UsageCount Value="99"/>
         <Loaded Value="True"/>
-      </Unit55>
-      <Unit56>
+      </Unit54>
+      <Unit55>
         <Filename Value="..\Desktop\FitClient.pas"/>
         <UnitName Value="FitClient"/>
         <CursorPos X="33" Y="24"/>
         <TopLine Value="9"/>
         <EditorIndex Value="32"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="64"/>
+        <Loaded Value="True"/>
+      </Unit55>
+      <Unit56>
+        <Filename Value="..\Server\client_interfaces\int_fit_service.pas"/>
+        <UnitName Value="int_fit_service"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="27"/>
+        <UsageCount Value="63"/>
         <Loaded Value="True"/>
       </Unit56>
     </Units>
-    <JumpHistory Count="0" HistoryIndex="-1"/>
+    <JumpHistory Count="30" HistoryIndex="29">
+      <Position1>
+        <Filename Value="..\Desktop\Main.pas"/>
+        <Caret Line="262" Column="17" TopLine="244"/>
+      </Position1>
+      <Position2>
+        <Filename Value="..\Desktop\Main.pas"/>
+        <Caret Line="63" Column="1" TopLine="46"/>
+      </Position2>
+      <Position3>
+        <Filename Value="..\Desktop\Main.pas"/>
+        <Caret Line="263" Column="33" TopLine="245"/>
+      </Position3>
+      <Position4>
+        <Filename Value="..\Desktop\Main.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
+      </Position4>
+      <Position5>
+        <Filename Value="..\Desktop\Main.pas"/>
+        <Caret Line="27" Column="19" TopLine="11"/>
+      </Position5>
+      <Position6>
+        <Filename Value="..\Desktop\Main.pas"/>
+        <Caret Line="50" Column="23" TopLine="34"/>
+      </Position6>
+      <Position7>
+        <Filename Value="..\Desktop\Main.pas"/>
+        <Caret Line="61" Column="1" TopLine="47"/>
+      </Position7>
+      <Position8>
+        <Filename Value="..\Desktop\Main.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
+      </Position8>
+      <Position9>
+        <Filename Value="..\Desktop\Main.pas"/>
+        <Caret Line="260" Column="41" TopLine="244"/>
+      </Position9>
+      <Position10>
+        <Filename Value="..\Desktop\Main.pas"/>
+        <Caret Line="263" Column="17" TopLine="247"/>
+      </Position10>
+      <Position11>
+        <Filename Value="..\Desktop\Main.pas"/>
+        <Caret Line="281" Column="27" TopLine="265"/>
+      </Position11>
+      <Position12>
+        <Filename Value="..\Desktop\Main.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
+      </Position12>
+      <Position13>
+        <Filename Value="..\Desktop\Main.pas"/>
+        <Caret Line="214" Column="127" TopLine="200"/>
+      </Position13>
+      <Position14>
+        <Filename Value="..\Desktop\Main.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
+      </Position14>
+      <Position15>
+        <Filename Value="..\Desktop\Main.pas"/>
+        <Caret Line="260" Column="41" TopLine="244"/>
+      </Position15>
+      <Position16>
+        <Filename Value="..\Desktop\Main.pas"/>
+        <Caret Line="263" Column="17" TopLine="247"/>
+      </Position16>
+      <Position17>
+        <Filename Value="Unit2.pas"/>
+        <Caret Line="712" Column="20" TopLine="694"/>
+      </Position17>
+      <Position18>
+        <Filename Value="..\Desktop\Main.pas"/>
+        <Caret Line="66" Column="5" TopLine="57"/>
+      </Position18>
+      <Position19>
+        <Filename Value="Unit2.pas"/>
+        <Caret Line="712" Column="10" TopLine="696"/>
+      </Position19>
+      <Position20>
+        <Filename Value="Unit2.pas"/>
+        <Caret Line="680" Column="11" TopLine="664"/>
+      </Position20>
+      <Position21>
+        <Filename Value="Unit2.pas"/>
+        <Caret Line="183" Column="1" TopLine="154"/>
+      </Position21>
+      <Position22>
+        <Filename Value="..\Desktop\Main.pas"/>
+        <Caret Line="263" Column="11" TopLine="1"/>
+      </Position22>
+      <Position23>
+        <Filename Value="..\Desktop\Main.pas"/>
+        <Caret Line="281" Column="27" TopLine="265"/>
+      </Position23>
+      <Position24>
+        <Filename Value="..\Desktop\Main.pas"/>
+        <Caret Line="288" Column="44" TopLine="270"/>
+      </Position24>
+      <Position25>
+        <Filename Value="..\Desktop\Main.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
+      </Position25>
+      <Position26>
+        <Filename Value="..\Desktop\Main.pas"/>
+        <Caret Line="25" Column="23" TopLine="9"/>
+      </Position26>
+      <Position27>
+        <Filename Value="..\Desktop\Main.pas"/>
+        <Caret Line="28" Column="27" TopLine="12"/>
+      </Position27>
+      <Position28>
+        <Filename Value="..\Desktop\Main.pas"/>
+        <Caret Line="47" Column="22" TopLine="31"/>
+      </Position28>
+      <Position29>
+        <Filename Value="Unit2.pas"/>
+        <Caret Line="712" Column="9" TopLine="696"/>
+      </Position29>
+      <Position30>
+        <Filename Value="Unit2.pas"/>
+        <Caret Line="713" Column="61" TopLine="696"/>
+      </Position30>
+    </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
     <Version Value="5"/>

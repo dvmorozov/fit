@@ -84,6 +84,33 @@ function GetSeqErrorCode(): LongInt;
 //  dopolnyaet soobschenie kodom oschibki
 function CreateErrorMessage(Msg: string): string;
 
+const
+    //  Global setting should be in this file because the
+    //  same setting should be used in building client and server
+    //  applications.
+{$IFDEF LOCAL_ACCESS}
+    //  IP dlya svyazi CGI-klienta s serverom prilozheniya
+    InternalIP: string = '127.0.0.1';
+    InternalPort: string = '1234';
+    //  IP dlya svyazi brauzera s CGI-klientom;
+    //  eti dannye vstavlyayutsya v ishodyaschie stranitsy
+    //  'fit' ispol'zuetsya pri rabote s denwer'om
+{$IFDEF USE_DENWER}
+    ExternalIP: string = 'fit';
+{$ELSE}
+    ExternalIP: string = '127.0.0.1';
+{$ENDIF}
+{$ELSE}
+    //  IP dlya svyazi CGI-klienta s serverom prilozheniya
+    //InternalIP: string = '192.168.0.190';
+    //  CGI-klient i server rabotayut na odnom kompyutere
+    InternalIP: string = '127.0.0.1';
+    InternalPort: string = '1234';
+    //  IP dlya svyazi brauzera s CGI-klientom;
+    //  eti dannye vstavlyayutsya v ishodyaschie stranitsy
+    ExternalIP: string = 'ec2-54-158-234-101.compute-1.amazonaws.com';
+{$ENDIF}
+
 implementation
     
 var SequentialErrorCode: LongInt = 1000;

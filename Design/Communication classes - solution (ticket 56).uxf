@@ -888,13 +888,13 @@ bg=green</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>553</x>
+      <x>546</x>
       <y>1239</y>
-      <w>224</w>
+      <w>231</w>
       <h>98</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;70.0;300.0;70.0;300.0;120.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0;310.0;70.0;310.0;120.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -1028,7 +1028,7 @@ FitServer_.lpr</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>399</x>
+      <x>476</x>
       <y>1652</y>
       <w>126</w>
       <h>28</h>
@@ -1440,35 +1440,35 @@ FitService</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>434</x>
-      <y>1379</y>
+      <x>532</x>
+      <y>1239</y>
       <w>21</w>
-      <h>287</h>
+      <h>427</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;390.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;590.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>490</x>
-      <y>1561</y>
+      <x>588</x>
+      <y>1568</y>
       <w>98</w>
       <h>77</h>
     </coordinates>
-    <panel_attributes>Uses interface
-directly because
-CGI-client is not
-able to maintain
-objects during
-session.</panel_attributes>
+    <panel_attributes>Uses interface 
+IFitServer directly 
+becauseCGI-client 
+is not able to 
+maintain objects 
+during session.</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>434</x>
-      <y>1596</y>
+      <x>532</x>
+      <y>1603</y>
       <w>70</w>
       <h>21</h>
     </coordinates>

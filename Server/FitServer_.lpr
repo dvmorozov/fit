@@ -12,16 +12,16 @@ uses
   Interfaces,   //  LCL widgetset
   Forms,
   Variants,
-  DataLoader in 'DataLoader.pas',
+  DataLoader,
   FitViewer,
-  Math3d in '..\..\Library\Math\Math3d.pas',
-  DownhillSimplexContainer in '..\..\Library\Algorithms\DownhillSimplexContainer.pas',
-  AlgorithmContainer in '..\..\Library\Algorithms\AlgorithmContainer.pas',
-  Runner in '..\..\Library\Common\Runner.pas',
-  ObjSavingStringList in '..\..\Library\Common\ObjSavingStringList.pas',
-  Minimizer_S in 'Minimizer_S.pas',
-  Minimizer in 'Minimizer.pas',
-  MSCRDataClasses in 'MSCRDataClasses.pas', Minimizer_DS, CombEnumerator, MainCalcThread,
+  Math3d,
+  DownhillSimplexContainer,
+  AlgorithmContainer,
+  Runner,
+  ObjSavingStringList,
+  Minimizer_S,
+  Minimizer,
+  MSCRDataClasses, Minimizer_DS, CombEnumerator, MainCalcThread,
   FitServerStub, FitServerApp,
   DataClasses, FitServerWithThread, FitTask, 
   FitServerMultithreaded, TurboPowerIPro,
@@ -42,10 +42,10 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
 {$ENDIF}
-  Sysutils, Dialogs,
-  fit_server_imp, metadata_service_imp, server_listener, fit_server,
+  Sysutils, Dialogs, metadata_service_imp, server_listener, fit_server,
   server_binary_formatter, server_service_soap, server_service_xmlrpc,
-  fit_server_binder, synapse_tcp_server, Main, FormServer, NumericGrid, FitServer;
+  fit_server_binder, fit_server_imp, synapse_tcp_server,
+  FormServer, NumericGrid, FitServer, Main;
 
 {$R manifest.res}
 

@@ -48,8 +48,6 @@ type
         function GetState: TFitServerState;
         procedure SetWaveLength(AWaveLength: Double);
         function GetWaveLength: Double;
-        { Throws an exception when R = nil. }
-        function ProcessPointsResult(R: TPointsResult): TTitlePointsSet;
 
     public
         constructor Create(AOwner: TComponent); override;
@@ -160,58 +158,10 @@ type
 
 implementation
 uses synapse_tcp_protocol, synapse_http_protocol, soap_formatter,
-    binary_formatter,
-    { This module contains global definitions
+    binary_formatter, fit_server_aux,
+      { This module contains global definitions
       which are used in all applications. }
     Main;
-
-{$INCLUDE wst.inc}
-
-const OutOfServerResources: string = 'Out of server resources.';
-
-function CreateRemotableArray(
-    APointsSet: TPointsSet): TArrayOfFloatDoubleRemotable;
-var i, Count: LongInt;
-begin
-    Result := nil;
-    if not Assigned(APointsSet) then Exit;
-
-    Result := TArrayOfFloatDoubleRemotable.Create;
-    //  tochki zagruzhayutsya poparno
-    Count := APointsSet.PointsCount * 2;
-    Result.SetLength(Count);
-    i := 0;
-    while i < Count do
-    begin
-        Result.Item[i] := APointsSet.PointXCoord[i div 2];
-        Inc(i);
-        Result.Item[i] := APointsSet.PointYCoord[i div 2];
-        Inc(i);
-    end;
-end;
-
-function CreateNamedPointsSet(
-    ARemotable: TArrayOfFloatDoubleRemotable): TNamedPointsSet;
-var i: LongInt;
-    X, Y: Double;
-begin
-    //  trebuetsya dopustit' ravenstvo nil
-    Result := nil;
-    if not Assigned(ARemotable) then Exit;
-
-    Assert(ARemotable.Length mod 2 = 0);
-    Result := TNamedPointsSet.Create(nil);
-
-    i := 0;
-    while i < ARemotable.Length do
-    begin
-        X := ARemotable.Item[i];
-        Inc(i);
-        Y := ARemotable.Item[i];
-        Inc(i);
-        Result.AddNewPoint(X, Y);
-    end;
-end;
 
 {========================== TFitClientProxy ===================================}
 
@@ -360,36 +310,6 @@ begin
         -2: raise Exception.Create(ErrMsg);
     end;
     Result := ErrMsg;
-end;
-
-function TFitClientProxy.ProcessPointsResult(R: TPointsResult): TTitlePointsSet;
-var Points: TPointsSet;
-    Res: LongInt;
-    ErrMsg: string;
-begin
-    Result := nil; Res := 0; ErrMsg := '';
-    if not Assigned(R) then raise Exception.Create(OutOfServerResources);
-
-    try
-        //  sozdaetsya promezhutochnyi ob'ekt dlya sovmestimosti
-        Points := CreateNamedPointsSet(R._Result);
-        try
-            Res := R.ErrCode;
-            ErrMsg := R.ErrMsg;
-            if Assigned(Points) then
-                Result := TTitlePointsSet.CreateFromPoints(nil, Points)
-            else Result := nil;
-        finally
-            Points.Free;
-        end;
-    finally
-        R.Free;
-    end;
-
-    case Res of
-        -1: begin Result.Free; raise EUserException.Create(ErrMsg); end;
-        -2: begin Result.Free; raise Exception.Create(ErrMsg); end;
-    end;
 end;
 
 function TFitClientProxy.GetProfilePointsSet: TTitlePointsSet;

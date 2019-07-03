@@ -242,10 +242,6 @@ Type
   End;
 
 procedure RegisterFitServerImplementationFactory();
-function CreateRemotableArray(
-    APointsSet: TPointsSet): TArrayOfFloatDoubleRemotable;
-function CreateNamedPointsSet(
-    ARemotable: TArrayOfFloatDoubleRemotable): TNamedPointsSet;
 
 //  ne prostoe statsionarnoe prilozhenie, a servernoe
 var ProblemList: TComponentList;
@@ -253,51 +249,8 @@ var ProblemList: TComponentList;
                                     //  k spisku podzadach
 Implementation
 
-uses config_objects, SelfCopied, (* LazJPEG *) LazPNG, Main, FormServer, Forms;
-
-function CreateRemotableArray(
-    APointsSet: TPointsSet): TArrayOfFloatDoubleRemotable;
-var i, Count: LongInt;
-begin
-    Result := nil;
-    if not Assigned(APointsSet) then Exit;
-
-    Result := TArrayOfFloatDoubleRemotable.Create;
-    //  tochki zagruzhayutsya poparno
-    Count := APointsSet.PointsCount * 2;
-    Result.SetLength(Count);
-    i := 0;
-    while i < Count do
-    begin
-        Result.Item[i] := APointsSet.PointXCoord[i div 2];
-        Inc(i);
-        Result.Item[i] := APointsSet.PointYCoord[i div 2];
-        Inc(i);
-    end;
-end;
-
-function CreateNamedPointsSet(
-    ARemotable: TArrayOfFloatDoubleRemotable): TNamedPointsSet;
-var i: LongInt;
-    X, Y: Double;
-begin
-    //  trebuetsya dopustit' ravenstvo nil
-    Result := nil;
-    if not Assigned(ARemotable) then Exit;
-
-    Assert(ARemotable.Length mod 2 = 0);
-    Result := TNamedPointsSet.Create(nil);
-
-    i := 0;
-    while i < ARemotable.Length do
-    begin
-        X := ARemotable.Item[i];
-        Inc(i);
-        Y := ARemotable.Item[i];
-        Inc(i);
-        Result.AddNewPoint(X, Y);
-    end;
-end;
+uses config_objects, SelfCopied, (* LazJPEG *) LazPNG, Main, FormServer,
+    Forms, fit_server_aux;
 
 const
     InadmissibleProblemID: string = 'Inadmissible problem ID!';   //'Inadmissible client ID!';

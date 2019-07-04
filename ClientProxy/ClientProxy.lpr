@@ -2,18 +2,16 @@ library ClientProxy;
 
 {$mode objfpc}{$H+}
 
-uses
-  Classes
-  { you can add units after this }, fit_client_proxy,
-  ta, int_fit_service, fit_server, fit_server_proxy, Main;
+uses Classes
+    { you can add units after this }, fit_client_proxy,
+    ta, int_fit_service, fit_server, fit_server_proxy, Main;
   
-var
-   FitService: IFitService;
+var FitService: IFitService;
   
 function CreateFitServiceInstance: IFitService; cdecl;
 begin
-     FitService := TFitClientProxy.Create(nil);
-     Result := FitService;
+    FitService := TFitClientProxy.Create(nil) as IFitService;
+    Result := FitService;
 end;
 
 procedure DestroyFitServiceInstance; cdecl;
@@ -21,8 +19,20 @@ begin
     FitService._Release;
 end;
 
-var
-    FitServer: IFitServer;
+var FitProblem: IFitProblem;
+
+function CreateFitProblemInstance: IFitProblem; cdecl;
+begin
+    FitProblem := TFitClientProxy.Create(nil);
+    Result := FitProblem;
+end;
+
+procedure DestroyFitProblemInstance; cdecl;
+begin
+    FitProblem._Release;
+end;
+
+var FitServer: IFitServer;
 
 function CreateFitServerInstance: IFitServer; cdecl;
 begin
@@ -45,6 +55,8 @@ exports
     CreateFitServiceInstance,
     DestroyFitServiceInstance,
     CreateFitServerInstance,
-    DestroyFitServerInstance;
+    DestroyFitServerInstance,
+    CreateFitProblemInstance,
+    DestroyFitProblemInstance;
 end.
 

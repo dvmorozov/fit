@@ -28,7 +28,7 @@ type
       centralized error handling in the client. Converts data
       to appropriate type. Should implement the same interface
       as the server. }
-    TFitClientProxy = class(TCBRCComponent, IFitService)
+    TFitClientProxy = class(TCBRCComponent, IFitProblem)
     protected
         FProblemId: LongInt;        //  For now only single problem id is
                                     //  supported per client.
@@ -159,8 +159,7 @@ type
 implementation
 uses synapse_tcp_protocol, synapse_http_protocol, soap_formatter,
     binary_formatter, fit_server_aux,
-      { This module contains global definitions
-      which are used in all applications. }
+    { This module contains global definitions which are used in all applications. }
     Main;
 
 {========================== TFitClientProxy ===================================}

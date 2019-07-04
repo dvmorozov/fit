@@ -13,7 +13,7 @@
     </General>
     <VersionInfo>
       <AutoIncrementBuild Value="True"/>
-      <BuildNr Value="5"/>
+      <BuildNr Value="7"/>
       <StringTable ProductVersion="0.0.0.1"/>
     </VersionInfo>
     <BuildModes Count="1">
@@ -64,7 +64,6 @@
         <TopLine Value="15"/>
         <CursorPos X="37" Y="28"/>
         <UsageCount Value="200"/>
-        <LoadedDesigner Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit0>
       <Unit1>
@@ -335,9 +334,10 @@
       <Unit38>
         <Filename Value="FitClient.pas"/>
         <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="4"/>
-        <TopLine Value="11"/>
-        <CursorPos X="22" Y="27"/>
+        <TopLine Value="280"/>
+        <CursorPos X="54" Y="297"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -628,7 +628,6 @@
       <Unit81>
         <Filename Value="Main.pas"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <CursorPos X="76" Y="6"/>
         <UsageCount Value="236"/>
@@ -1158,7 +1157,7 @@
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit137>
     </Units>
-    <JumpHistory Count="27" HistoryIndex="26">
+    <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="Main.pas"/>
         <Caret Line="261" Column="55" TopLine="240"/>
@@ -1261,9 +1260,20 @@
         <Caret Line="239" Column="20" TopLine="236"/>
       </Position26>
       <Position27>
-        <Filename Value="Main.pas"/>
-        <Caret Line="46" Column="33" TopLine="54"/>
+        <Filename Value="FitClient.pas"/>
+        <Caret Line="27" Column="22" TopLine="11"/>
       </Position27>
+      <Position28>
+        <Filename Value="FitClient.pas"/>
+        <Caret Line="305" Column="27" TopLine="289"/>
+      </Position28>
+      <Position29>
+        <Filename Value="FitClient.pas"/>
+        <Caret Line="357" Column="13" TopLine="331"/>
+      </Position29>
+      <Position30>
+        <Filename Value="FitClient.pas"/>
+      </Position30>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

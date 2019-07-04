@@ -11,7 +11,6 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit FitClient;
 
-//{$mode objfpc}{$H+}
 {$MODE Delphi}
 
 interface
@@ -19,12 +18,9 @@ interface
 uses Classes, PointsSet, TitlePointsSet, SelfCopied, SysUtils, MSCRDataClasses,
     CBRCComponent, NeutronPointsSet,
     IntPointsSet, CurvePointsSet, IntClientCallback,
-    IntFitViewer, IntDataLoader, IntDataLoaderInjector
+    IntFitViewer, IntDataLoader, IntDataLoaderInjector, int_fit_service
     {$IFDEF FIT}
     , FitServer
-    {$ENDIF}
-    {$IFDEF FITPRO}
-    , int_fit_service
     {$ENDIF}
     ;
     
@@ -305,7 +301,9 @@ type
         function GetCalcTimeStr: string;
         function GetRFactorStr: string;
         procedure CreateSpecimenList;
-
+{$IFDEF FIT}
+        function GetFitProxy: TFitServer;
+{$ENDIF}
         { Getters of server attributes. }
         
         property MaxRFactor: Double read GetMaxRFactor write SetMaxRFactor;

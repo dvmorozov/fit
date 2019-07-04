@@ -133,6 +133,13 @@ type
         function ReturnToTotalProfile: string;
         procedure CreateSpecimenList;
     end;
+    
+    IFitProblem = interface(IFitService)
+        procedure CreateProblem;
+        function GetProblemId: LongInt;
+        procedure SetProblemId(AProblemId: LongInt);
+        procedure DiscardProblem(AProblemId: LongInt);
+    end;
 
 implementation
 

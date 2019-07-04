@@ -7,7 +7,7 @@
       <MainUnit Value="0"/>
       <IconPath Value="./"/>
       <TargetFileExt Value=".exe"/>
-      <ActiveEditorIndexAtStart Value="7"/>
+      <ActiveEditorIndexAtStart Value="14"/>
     </General>
     <VersionInfo>
       <ProjectVersion Value=""/>
@@ -39,8 +39,8 @@
         <Filename Value="ClientProxy.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ClientProxy"/>
-        <CursorPos X="30" Y="58"/>
-        <TopLine Value="27"/>
+        <CursorPos X="44" Y="24"/>
+        <TopLine Value="17"/>
         <EditorIndex Value="7"/>
         <UsageCount Value="148"/>
         <Loaded Value="True"/>
@@ -48,8 +48,8 @@
       <Unit1>
         <Filename Value="fit_client_proxy.pas"/>
         <UnitName Value="fit_client_proxy"/>
-        <CursorPos X="1" Y="1185"/>
-        <TopLine Value="1150"/>
+        <CursorPos X="1" Y="147"/>
+        <TopLine Value="134"/>
         <EditorIndex Value="8"/>
         <UsageCount Value="144"/>
         <Loaded Value="True"/>
@@ -139,7 +139,7 @@
         <Filename Value="..\Desktop\Main.pas"/>
         <UnitName Value="Main"/>
         <CursorPos X="1" Y="1"/>
-        <TopLine Value="24"/>
+        <TopLine Value="1"/>
         <EditorIndex Value="13"/>
         <UsageCount Value="34"/>
         <Loaded Value="True"/>
@@ -147,8 +147,8 @@
       <Unit12>
         <Filename Value="..\Server\client_interfaces\int_fit_service.pas"/>
         <UnitName Value="int_fit_service"/>
-        <CursorPos X="16" Y="137"/>
-        <TopLine Value="103"/>
+        <CursorPos X="1" Y="142"/>
+        <TopLine Value="107"/>
         <EditorIndex Value="14"/>
         <UsageCount Value="21"/>
         <Loaded Value="True"/>
@@ -188,7 +188,7 @@
         <Loaded Value="True"/>
       </Unit16>
     </Units>
-    <JumpHistory Count="12" HistoryIndex="11">
+    <JumpHistory Count="14" HistoryIndex="13">
       <Position1>
         <Filename Value="ClientProxy.lpr"/>
         <Caret Line="15" Column="29" TopLine="3"/>
@@ -237,6 +237,14 @@
         <Filename Value="ClientProxy.lpr"/>
         <Caret Line="30" Column="60" TopLine="9"/>
       </Position12>
+      <Position13>
+        <Filename Value="ClientProxy.lpr"/>
+        <Caret Line="24" Column="44" TopLine="17"/>
+      </Position13>
+      <Position14>
+        <Filename Value="fit_client_proxy.pas"/>
+        <Caret Line="1160" Column="22" TopLine="1150"/>
+      </Position14>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

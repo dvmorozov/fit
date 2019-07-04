@@ -21,14 +21,6 @@ unit Main;
 
 interface
 
-{$IFDEF FITPRO}
-    {$DEFINE USE_PROXY_DLL}
-{$ELSE}
-    {$IFDEF FITCGI}
-        {$DEFINE USE_PROXY_DLL}
-    {$ENDIF}
-{$ENDIF}
-
 uses SysUtils, Forms
 {$IFDEF WINDOWS}
     , windows, shfolder
@@ -44,12 +36,11 @@ uses SysUtils, Forms
         {$ENDIF}
     {$ENDIF}
 {$ELSE}
-    {$IFDEF USE_PROXY_DLL}
+    {$IFDEF FITPRO}
         , int_fit_service
-    {$ELSE}
-        {$IFDEF FITCGI}
-            , DataLoader, PointsSet, NamedPointsSet
-        {$ENDIF}
+    {$ENDIF}
+    {$IFDEF FITCGI}
+        , int_fit_service, DataLoader, PointsSet, NamedPointsSet
     {$ENDIF}
 {$ENDIF}
     ;
@@ -63,7 +54,7 @@ var FitClientApp_: TFitClientApp;
 {$IFDEF FITCGI}
 var Key: string = '';        //  key obtained during registration
     UserName: string = '';
-    Proxy: IFitService;
+    Proxy: IFitProblem;
 {$ENDIF}    //  FITCGI
 
 {$IFDEF FITSERVER}
@@ -237,7 +228,7 @@ begin
     LeaveCriticalSection(LogCS);
 end;
 
-{$IFDEF USE_PROXY_DLL}
+{$IFDEF FITPRO}
 type
     TFitServiceFactory = function: IFitService; cdecl;
 
@@ -246,24 +237,34 @@ var
     ProxyLibHandle: THandle;
 {$ENDIF}
 
+{$IFDEF FITCGI}
+type
+    TFitProblemFactory = function: IFitProblem; cdecl;
+
+var
+    CreateFitProblemInstance: TFitProblemFactory;
+    ProxyLibHandle: THandle;
+{$ENDIF}
+
 //  klyuch FIT vkluchaet i klienta, i server v odin modul' s
 //  pryamoi svyaz'yu mezhdu nimi
 initialization
-{$IFDEF USE_PROXY_DLL}
+{$IFDEF FITPRO}
     ProxyLibHandle := LoadLibrary('ClientProxy.dll');
     CreateFitServiceInstance :=
         GetProcAddress(ProxyLibHandle, 'CreateFitServiceInstance');
 
     if Assigned(CreateFitServiceInstance) then
-    begin
-{$IFDEF FITPRO}
         FitClientApp_.FitClient.FitProxy := CreateFitServiceInstance();
-{$ELSE}
-    {$IFDEF FITCGI}
-        Proxy := CreateFitServiceInstance();
-    {$ENDIF}
 {$ENDIF}
-    end;
+
+{$IFDEF FITCGI}
+    ProxyLibHandle := LoadLibrary('ClientProxy.dll');
+    CreateFitProblemInstance :=
+        GetProcAddress(ProxyLibHandle, 'CreateFitProblemInstance');
+
+    if Assigned(CreateFitProblemInstance) then
+        Proxy := CreateFitProblemInstance();
 {$ENDIF}
 
 {$IFDEF FITCLIENT}

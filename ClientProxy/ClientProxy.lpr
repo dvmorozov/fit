@@ -1,54 +1,84 @@
 library ClientProxy;
 
-{$mode objfpc}{$H+}
+{$MODE Delphi}
 
-uses Classes
-    { you can add units after this }, fit_client_proxy,
-    ta, int_fit_service, fit_server, fit_server_proxy, Main;
+uses Classes, fit_client_proxy, ta, int_fit_service, fit_server,
+    fit_server_proxy, Main, SyncObjs;
   
-var FitService: IFitService;
+var
+    FitService: IFitService;
+    FitProblem: IFitProblem;
+    FitServer: IFitServer;
+    CS: TCriticalSection;
   
 function CreateFitServiceInstance: IFitService; cdecl;
 begin
-    FitService := TFitClientProxy.Create(nil) as IFitService;
+    CS.Acquire;
+    
+    if FitService = Nil then
+        FitService := TFitClientProxy.Create(nil) as IFitService;
     Result := FitService;
+    
+    CS.Release;
 end;
 
 procedure DestroyFitServiceInstance; cdecl;
 begin
+    CS.Acquire;
+    
     FitService._Release;
+    FitService := Nil;
+    
+    CS.Release;
 end;
-
-var FitProblem: IFitProblem;
 
 function CreateFitProblemInstance: IFitProblem; cdecl;
 begin
-    FitProblem := TFitClientProxy.Create(nil);
+    CS.Acquire;
+    
+    if FitProblem = Nil then
+        FitProblem := TFitClientProxy.Create(nil);
     Result := FitProblem;
+    
+    CS.Release;
 end;
 
 procedure DestroyFitProblemInstance; cdecl;
 begin
+    CS.Acquire;
+    
     FitProblem._Release;
+    FitProblem := Nil;
+    
+    CS.Release;
 end;
-
-var FitServer: IFitServer;
 
 function CreateFitServerInstance: IFitServer; cdecl;
 begin
-    FitServer := TFitServer_Proxy.Create
-    (
-        'IFitServer',
-        'binary:',
-        'TCP:Address=' + InternalIP +
-        ';Port=' + InternalPort + ';target=IFitServer'
-    );
+    CS.Acquire;
+    
+    if FitServer = Nil then
+        { Uses configuration parameters from Main module. }
+        FitServer := TFitServer_Proxy.Create
+        (
+            'IFitServer',
+            'binary:',
+            'TCP:Address=' + InternalIP +
+            ';Port=' + InternalPort + ';target=IFitServer'
+        );
     Result := FitServer;
+    
+    CS.Release;
 end;
 
 procedure DestroyFitServerInstance; cdecl;
 begin
+    CS.Acquire;
+    
     FitServer._Release;
+    FitServer := Nil;
+    
+    CS.Release;
 end;
 
 exports

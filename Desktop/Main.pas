@@ -268,6 +268,7 @@ initialization
 {$ENDIF}
 
 {$IFDEF FITCLIENT}
+    { Client is included into application. }
     FitClientApp_ := TFitClientApp.Create;
 {$ENDIF}
 
@@ -278,7 +279,11 @@ initialization
 {$ENDIF}
 
 {$IFDEF FITSERVER}
+    { Server is included into application. }
 {$IFDEF FIT}
+    { Link is established to make calls from client to server. }
+    FitClientApp_.FitClient.FitProxy := FitServerApp_.FitStub;
+    { Link is established to make calls from server to client. }
     FitServerApp_.FitProxy.FitStub := FitClientApp_.FitStub;
 {$ENDIF}
 {$ENDIF}
@@ -294,8 +299,13 @@ finalization
         FitServerApp_.Free;
     {$ENDIF}
 {$ENDIF}
+
     DoneCriticalsection(LogCS);
+
 {$IFDEF FITPRO}
+    FreeLibrary(ProxyLibHandle);
+{$ENDIF}
+{$IFDEF FITCGI}
     FreeLibrary(ProxyLibHandle);
 {$ENDIF}
 end.

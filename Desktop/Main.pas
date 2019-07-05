@@ -231,18 +231,22 @@ end;
 {$IFDEF FITPRO}
 type
     TFitServiceFactory = function: IFitService; cdecl;
+    TFitServiceDestuctor = procedure; cdecl;
 
 var
     CreateFitServiceInstance: TFitServiceFactory;
+    DestroyFitServiceInstance: TFitServiceDestuctor;
     ProxyLibHandle: THandle;
 {$ENDIF}
 
 {$IFDEF FITCGI}
 type
     TFitProblemFactory = function: IFitProblem; cdecl;
+    TFitProblemDestructor = procedure; cdecl;
 
 var
     CreateFitProblemInstance: TFitProblemFactory;
+    DestroyFitProblemInstance: TFitProblemDestructor;
     ProxyLibHandle: THandle;
 {$ENDIF}
 
@@ -253,18 +257,24 @@ initialization
     ProxyLibHandle := LoadLibrary('ClientProxy.dll');
     CreateFitServiceInstance :=
         GetProcAddress(ProxyLibHandle, 'CreateFitServiceInstance');
+    DestroyFitServiceInstance :=
+        GetProcAddress(ProxyLibHandle, 'DestroyFitServiceInstance');
 
-    if Assigned(CreateFitServiceInstance) then
-        FitClientApp_.FitClient.FitProxy := CreateFitServiceInstance();
+    Assert(Assigned(CreateFitServiceInstance));
+    Assert(Assigned(DestroyFitServiceInstance));
+    FitClientApp_.FitClient.FitProxy := CreateFitServiceInstance();
 {$ENDIF}
 
 {$IFDEF FITCGI}
     ProxyLibHandle := LoadLibrary('ClientProxy.dll');
     CreateFitProblemInstance :=
         GetProcAddress(ProxyLibHandle, 'CreateFitProblemInstance');
+    DestroyFitProblemInstance :=
+        GetProcAddress(ProxyLibHandle, 'DestroyFitProblemInstance');
 
-    if Assigned(CreateFitProblemInstance) then
-        Proxy := CreateFitProblemInstance();
+    Assert(Assigned(CreateFitProblemInstance));
+    Assert(Assigned(DestroyFitProblemInstance));
+    Proxy := CreateFitProblemInstance();
 {$ENDIF}
 
 {$IFDEF FITCLIENT}
@@ -303,9 +313,11 @@ finalization
     DoneCriticalsection(LogCS);
 
 {$IFDEF FITPRO}
+    DestroyFitServiceInstance;
     FreeLibrary(ProxyLibHandle);
 {$ENDIF}
 {$IFDEF FITCGI}
+    DestroyFitProblemInstance;
     FreeLibrary(ProxyLibHandle);
 {$ENDIF}
 end.

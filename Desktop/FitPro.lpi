@@ -13,7 +13,7 @@
     </General>
     <VersionInfo>
       <AutoIncrementBuild Value="True"/>
-      <BuildNr Value="7"/>
+      <BuildNr Value="8"/>
       <StringTable ProductVersion="0.0.0.1"/>
     </VersionInfo>
     <BuildModes Count="1">

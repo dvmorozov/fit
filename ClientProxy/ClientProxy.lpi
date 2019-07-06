@@ -7,7 +7,7 @@
       <MainUnit Value="0"/>
       <IconPath Value="./"/>
       <TargetFileExt Value=".exe"/>
-      <ActiveEditorIndexAtStart Value="7"/>
+      <ActiveEditorIndexAtStart Value="8"/>
     </General>
     <VersionInfo>
       <ProjectVersion Value=""/>
@@ -28,13 +28,13 @@
     </RunParams>
     <RequiredPackages Count="2">
       <Item1>
-        <PackageName Value="IDEIntf"/>
+        <PackageName Value="ta"/>
       </Item1>
       <Item2>
-        <PackageName Value="ta"/>
+        <PackageName Value="IDEIntf"/>
       </Item2>
     </RequiredPackages>
-    <Units Count="17">
+    <Units Count="18">
       <Unit0>
         <Filename Value="ClientProxy.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -50,7 +50,7 @@
         <UnitName Value="fit_client_proxy"/>
         <CursorPos X="1" Y="147"/>
         <TopLine Value="134"/>
-        <EditorIndex Value="8"/>
+        <EditorIndex Value="9"/>
         <UsageCount Value="144"/>
         <Loaded Value="True"/>
       </Unit1>
@@ -122,7 +122,7 @@
         <UnitName Value="fit_server"/>
         <CursorPos X="13" Y="291"/>
         <TopLine Value="273"/>
-        <EditorIndex Value="9"/>
+        <EditorIndex Value="10"/>
         <UsageCount Value="64"/>
         <Loaded Value="True"/>
       </Unit9>
@@ -131,7 +131,7 @@
         <UnitName Value="NamedPointsSet"/>
         <CursorPos X="57" Y="18"/>
         <TopLine Value="17"/>
-        <EditorIndex Value="15"/>
+        <EditorIndex Value="16"/>
         <UsageCount Value="73"/>
         <Loaded Value="True"/>
       </Unit10>
@@ -140,7 +140,7 @@
         <UnitName Value="Main"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="13"/>
+        <EditorIndex Value="14"/>
         <UsageCount Value="35"/>
         <Loaded Value="True"/>
       </Unit11>
@@ -149,7 +149,7 @@
         <UnitName Value="int_fit_service"/>
         <CursorPos X="1" Y="142"/>
         <TopLine Value="112"/>
-        <EditorIndex Value="14"/>
+        <EditorIndex Value="15"/>
         <UsageCount Value="22"/>
         <Loaded Value="True"/>
       </Unit12>
@@ -158,7 +158,7 @@
         <UnitName Value="FitClient"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="12"/>
+        <EditorIndex Value="13"/>
         <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit13>
@@ -167,7 +167,7 @@
         <UnitName Value="fit_server_imp"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="11"/>
+        <EditorIndex Value="12"/>
         <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit14>
@@ -183,12 +183,26 @@
         <UnitName Value="fit_server_aux"/>
         <CursorPos X="74" Y="27"/>
         <TopLine Value="76"/>
-        <EditorIndex Value="10"/>
+        <EditorIndex Value="11"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit16>
+      <Unit17>
+        <Filename Value="..\Server\client_interfaces\fit_server_proxy.pas"/>
+        <UnitName Value="fit_server_proxy"/>
+        <CursorPos X="10" Y="1747"/>
+        <TopLine Value="1717"/>
+        <EditorIndex Value="8"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit17>
     </Units>
-    <JumpHistory Count="0" HistoryIndex="-1"/>
+    <JumpHistory Count="1" HistoryIndex="0">
+      <Position1>
+        <Filename Value="..\Server\client_interfaces\fit_server_proxy.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
+      </Position1>
+    </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
     <Version Value="5"/>

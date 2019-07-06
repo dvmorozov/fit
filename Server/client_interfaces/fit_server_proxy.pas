@@ -1744,7 +1744,7 @@ End;
 
 
 initialization
-  {$i ..\Server\fit_server.wst}
+  {$i ..\fit_server.wst}
 
   {$IF DECLARED(Register_fit_server_ServiceMetadata)}
   Register_fit_server_ServiceMetadata();

@@ -175,42 +175,42 @@
         <UnitName Value="fit_server_proxy"/>
         <CursorPos X="22" Y="1104"/>
         <TopLine Value="1073"/>
-        <UsageCount Value="177"/>
+        <UsageCount Value="172"/>
       </Unit13>
       <Unit14>
         <Filename Value="..\DataLoader.pas"/>
         <UnitName Value="DataLoader"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <UsageCount Value="176"/>
+        <UsageCount Value="171"/>
       </Unit14>
       <Unit15>
         <Filename Value="..\FitClientProxy.pas"/>
         <UnitName Value="FitClientProxy"/>
         <CursorPos X="19" Y="129"/>
         <TopLine Value="109"/>
-        <UsageCount Value="87"/>
+        <UsageCount Value="82"/>
       </Unit15>
       <Unit16>
         <Filename Value="..\Main.pas"/>
         <UnitName Value="Main"/>
         <CursorPos X="1" Y="261"/>
         <TopLine Value="1"/>
-        <UsageCount Value="180"/>
+        <UsageCount Value="175"/>
       </Unit16>
       <Unit17>
         <Filename Value="..\Packages\VariousGrids\SelfCopied.pas"/>
         <UnitName Value="SelfCopied"/>
         <CursorPos X="3" Y="2"/>
         <TopLine Value="1"/>
-        <UsageCount Value="46"/>
+        <UsageCount Value="41"/>
       </Unit17>
       <Unit18>
         <Filename Value="..\CommonTypes.pas"/>
         <UnitName Value="CommonTypes"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <UsageCount Value="178"/>
+        <UsageCount Value="173"/>
       </Unit18>
       <Unit19>
         <Filename Value="specimen_positions.pas"/>
@@ -227,7 +227,7 @@
         <UnitName Value="MSCRDataClasses"/>
         <CursorPos X="21" Y="58"/>
         <TopLine Value="46"/>
-        <UsageCount Value="176"/>
+        <UsageCount Value="171"/>
       </Unit20>
       <Unit21>
         <Filename Value="fitting.pas"/>
@@ -254,7 +254,7 @@
         <UnitName Value="SimpMath"/>
         <CursorPos X="9" Y="701"/>
         <TopLine Value="682"/>
-        <UsageCount Value="46"/>
+        <UsageCount Value="41"/>
       </Unit23>
       <Unit24>
         <Filename Value="gen_spec_pos_progress.pas"/>
@@ -323,7 +323,7 @@
         <UnitName Value="GeneralHashfunctions"/>
         <CursorPos X="57" Y="7"/>
         <TopLine Value="1"/>
-        <UsageCount Value="75"/>
+        <UsageCount Value="70"/>
       </Unit31>
       <Unit32>
         <Filename Value="pattern.pas"/>
@@ -368,7 +368,7 @@
       <Unit36>
         <Filename Value="..\GeneralHashFunctions.pas"/>
         <UnitName Value="GeneralHashFunctions"/>
-        <UsageCount Value="175"/>
+        <UsageCount Value="170"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit36>
       <Unit37>
@@ -386,7 +386,7 @@
         <UnitName Value="fit_server"/>
         <CursorPos X="27" Y="246"/>
         <TopLine Value="226"/>
-        <UsageCount Value="96"/>
+        <UsageCount Value="91"/>
       </Unit38>
       <Unit39>
         <Filename Value="evaluation.pas"/>
@@ -403,7 +403,7 @@
         <UnitName Value="TAGraph"/>
         <CursorPos X="20" Y="2776"/>
         <TopLine Value="2756"/>
-        <UsageCount Value="66"/>
+        <UsageCount Value="61"/>
       </Unit40>
       <Unit41>
         <Filename Value="..\Desktop\CommonTypes.pas"/>
@@ -512,7 +512,7 @@
         <UnitName Value="fit_client_proxy"/>
         <CursorPos X="1" Y="165"/>
         <TopLine Value="157"/>
-        <UsageCount Value="56"/>
+        <UsageCount Value="51"/>
       </Unit53>
       <Unit54>
         <Filename Value="..\Packages\wst-0.5\binary_formatter.pas"/>
@@ -529,7 +529,7 @@
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
         <EditorIndex Value="33"/>
-        <UsageCount Value="72"/>
+        <UsageCount Value="96"/>
         <Loaded Value="True"/>
       </Unit55>
       <Unit56>
@@ -538,7 +538,7 @@
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
         <EditorIndex Value="28"/>
-        <UsageCount Value="71"/>
+        <UsageCount Value="95"/>
         <Loaded Value="True"/>
       </Unit56>
       <Unit57>
@@ -547,7 +547,7 @@
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
         <EditorIndex Value="24"/>
-        <UsageCount Value="17"/>
+        <UsageCount Value="41"/>
         <Loaded Value="True"/>
       </Unit57>
     </Units>

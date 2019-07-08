@@ -34,13 +34,13 @@
         <PackageName Value="ta"/>
       </Item2>
     </RequiredPackages>
-    <Units Count="20">
+    <Units Count="21">
       <Unit0>
         <Filename Value="ClientProxy.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ClientProxy"/>
-        <CursorPos X="34" Y="40"/>
-        <TopLine Value="9"/>
+        <CursorPos X="19" Y="5"/>
+        <TopLine Value="21"/>
         <EditorIndex Value="7"/>
         <UsageCount Value="237"/>
         <Loaded Value="True"/>
@@ -120,7 +120,7 @@
         <UnitName Value="fit_server"/>
         <CursorPos X="13" Y="291"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="10"/>
+        <EditorIndex Value="9"/>
         <UsageCount Value="109"/>
         <Loaded Value="True"/>
       </Unit9>
@@ -129,7 +129,7 @@
         <UnitName Value="NamedPointsSet"/>
         <CursorPos X="57" Y="18"/>
         <TopLine Value="17"/>
-        <EditorIndex Value="17"/>
+        <EditorIndex Value="16"/>
         <UsageCount Value="118"/>
         <Loaded Value="True"/>
       </Unit10>
@@ -138,17 +138,17 @@
         <UnitName Value="Main"/>
         <CursorPos X="43" Y="300"/>
         <TopLine Value="233"/>
-        <EditorIndex Value="15"/>
-        <UsageCount Value="80"/>
+        <EditorIndex Value="14"/>
+        <UsageCount Value="81"/>
         <Loaded Value="True"/>
       </Unit11>
       <Unit12>
         <Filename Value="..\Server\client_interfaces\int_fit_service.pas"/>
         <UnitName Value="int_fit_service"/>
-        <CursorPos X="1" Y="142"/>
+        <CursorPos X="5" Y="137"/>
         <TopLine Value="112"/>
-        <EditorIndex Value="16"/>
-        <UsageCount Value="67"/>
+        <EditorIndex Value="15"/>
+        <UsageCount Value="68"/>
         <Loaded Value="True"/>
       </Unit12>
       <Unit13>
@@ -156,8 +156,8 @@
         <UnitName Value="FitClient"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="14"/>
-        <UsageCount Value="57"/>
+        <EditorIndex Value="13"/>
+        <UsageCount Value="58"/>
         <Loaded Value="True"/>
       </Unit13>
       <Unit14>
@@ -165,8 +165,8 @@
         <UnitName Value="fit_server_imp"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="13"/>
-        <UsageCount Value="57"/>
+        <EditorIndex Value="12"/>
+        <UsageCount Value="58"/>
         <Loaded Value="True"/>
       </Unit14>
       <Unit15>
@@ -181,8 +181,8 @@
         <UnitName Value="fit_server_aux"/>
         <CursorPos X="74" Y="27"/>
         <TopLine Value="76"/>
-        <EditorIndex Value="12"/>
-        <UsageCount Value="56"/>
+        <EditorIndex Value="11"/>
+        <UsageCount Value="57"/>
         <Loaded Value="True"/>
       </Unit16>
       <Unit17>
@@ -190,31 +190,35 @@
         <UnitName Value="fit_server_proxy"/>
         <CursorPos X="81" Y="1728"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="9"/>
         <UsageCount Value="55"/>
-        <Loaded Value="True"/>
       </Unit17>
       <Unit18>
         <Filename Value="..\Server\client_interfaces\fit_problem.pas"/>
         <UnitName Value="fit_problem"/>
-        <CursorPos X="24" Y="167"/>
-        <TopLine Value="149"/>
+        <CursorPos X="65" Y="1160"/>
+        <TopLine Value="1142"/>
         <EditorIndex Value="8"/>
-        <UsageCount Value="54"/>
+        <UsageCount Value="55"/>
         <Loaded Value="True"/>
       </Unit18>
       <Unit19>
         <Filename Value="..\Server\client_interfaces\fit_client_proxy.pas"/>
-        <IsPartOfProject Value="True"/>
         <UnitName Value="fit_client_proxy"/>
-        <CursorPos X="1" Y="18"/>
-        <TopLine Value="1"/>
-        <EditorIndex Value="11"/>
-        <UsageCount Value="21"/>
+        <CursorPos X="27" Y="36"/>
+        <TopLine Value="4"/>
+        <EditorIndex Value="10"/>
+        <UsageCount Value="22"/>
         <Loaded Value="True"/>
       </Unit19>
+      <Unit20>
+        <Filename Value="..\Packages\TAGraph\Component\TA.pas"/>
+        <UnitName Value="ta"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="10"/>
+      </Unit20>
     </Units>
-    <JumpHistory Count="8" HistoryIndex="7">
+    <JumpHistory Count="24" HistoryIndex="23">
       <Position1>
         <Filename Value="ClientProxy.lpr"/>
         <Caret Line="19" Column="32" TopLine="1"/>
@@ -247,6 +251,70 @@
         <Filename Value="ClientProxy.lpr"/>
         <Caret Line="6" Column="50" TopLine="1"/>
       </Position8>
+      <Position9>
+        <Filename Value="..\Server\client_interfaces\fit_problem.pas"/>
+        <Caret Line="31" Column="44" TopLine="21"/>
+      </Position9>
+      <Position10>
+        <Filename Value="..\Server\client_interfaces\fit_client_proxy.pas"/>
+        <Caret Line="32" Column="14" TopLine="1"/>
+      </Position10>
+      <Position11>
+        <Filename Value="..\Server\client_interfaces\fit_client_proxy.pas"/>
+        <Caret Line="37" Column="29" TopLine="4"/>
+      </Position11>
+      <Position12>
+        <Filename Value="..\Server\client_interfaces\fit_client_proxy.pas"/>
+        <Caret Line="32" Column="7" TopLine="4"/>
+      </Position12>
+      <Position13>
+        <Filename Value="..\Server\client_interfaces\fit_problem.pas"/>
+        <Caret Line="53" Column="59" TopLine="33"/>
+      </Position13>
+      <Position14>
+        <Filename Value="..\Server\client_interfaces\fit_problem.pas"/>
+        <Caret Line="198" Column="46" TopLine="180"/>
+      </Position14>
+      <Position15>
+        <Filename Value="..\Server\client_interfaces\fit_problem.pas"/>
+        <Caret Line="592" Column="44" TopLine="574"/>
+      </Position15>
+      <Position16>
+        <Filename Value="..\Server\client_interfaces\fit_problem.pas"/>
+        <Caret Line="14" Column="23" TopLine="1"/>
+      </Position16>
+      <Position17>
+        <Filename Value="..\Server\client_interfaces\fit_problem.pas"/>
+        <Caret Line="185" Column="23" TopLine="1"/>
+      </Position17>
+      <Position18>
+        <Filename Value="..\Server\client_interfaces\fit_problem.pas"/>
+        <Caret Line="215" Column="1" TopLine="195"/>
+      </Position18>
+      <Position19>
+        <Filename Value="..\Server\client_interfaces\fit_problem.pas"/>
+        <Caret Line="567" Column="18" TopLine="549"/>
+      </Position19>
+      <Position20>
+        <Filename Value="..\Server\client_interfaces\fit_problem.pas"/>
+        <Caret Line="541" Column="18" TopLine="523"/>
+      </Position20>
+      <Position21>
+        <Filename Value="..\Server\client_interfaces\fit_problem.pas"/>
+        <Caret Line="10" Column="78" TopLine="1"/>
+      </Position21>
+      <Position22>
+        <Filename Value="..\Server\client_interfaces\fit_client_proxy.pas"/>
+        <Caret Line="25" Column="38" TopLine="8"/>
+      </Position22>
+      <Position23>
+        <Filename Value="ClientProxy.lpr"/>
+        <Caret Line="19" Column="38" TopLine="13"/>
+      </Position23>
+      <Position24>
+        <Filename Value="ClientProxy.lpr"/>
+        <Caret Line="5" Column="15" TopLine="1"/>
+      </Position24>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

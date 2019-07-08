@@ -51,7 +51,6 @@ type
 
     public
         constructor Create(AOwner: TComponent); override;
-        destructor Destroy; override;
         
         { GetXXXX methods create and return A NEW OBJECT, 
           responsibility to free it is put on calling code. }
@@ -152,8 +151,6 @@ type
         property State: TFitServerState read GetState;
         property WaveLength: Double read GetWaveLength write SetWaveLength;
         property FitStub: IFitServer read FFitStub write FFitStub;
-        { Passed via URL parameter for CGI application, should be writeable. }
-        property ProblemId: LongInt read FProblemId write FProblemId;
     end;
 
 implementation
@@ -173,11 +170,6 @@ begin
             'TCP:Address=' + InternalIP +
             ';Port=' + InternalPort + ';target=IFitServer'
             );
-end;
-
-destructor TFitProblem.Destroy;
-begin
-    DiscardProblem(FProblemId);
 end;
 
 procedure TFitProblem.CreateProblem;
@@ -203,49 +195,49 @@ end;
 function TFitProblem.GetMaxRFactor: Double;
 begin
     Assert(Assigned(FitStub));
-    Result := FitStub.GetMaxRFactor(ProblemID);
+    Result := FitStub.GetMaxRFactor(FProblemId);
 end;
 
 procedure TFitProblem.SetMaxRFactor(AMaxRFactor: Double);
 begin
     Assert(Assigned(FitStub));
-    FitStub.SetMaxRFactor(AMaxRFactor, ProblemID);
+    FitStub.SetMaxRFactor(AMaxRFactor, FProblemId);
 end;
 
 function TFitProblem.GetBackFactor: Double;
 begin
     Assert(Assigned(FitStub));
-    Result := FitStub.GetBackFactor(ProblemID);
+    Result := FitStub.GetBackFactor(FProblemId);
 end;
 
 procedure TFitProblem.SetBackFactor(ABackFactor: Double);
 begin
     Assert(Assigned(FitStub));
-    FitStub.SetBackFactor(ABackFactor, ProblemID);
+    FitStub.SetBackFactor(ABackFactor, FProblemId);
 end;
 
 function TFitProblem.GetCurveThresh: Double;
 begin
     Assert(Assigned(FitStub));
-    Result := FitStub.GetCurveThresh(ProblemID);
+    Result := FitStub.GetCurveThresh(FProblemId);
 end;
 
 procedure TFitProblem.SetCurveThresh(ACurveThresh: Double);
 begin
     Assert(Assigned(FitStub));
-    FitStub.SetCurveThresh(ACurveThresh, ProblemID);
+    FitStub.SetCurveThresh(ACurveThresh, FProblemId);
 end;
 
 function TFitProblem.GetCurveType: TCurveTypeId;
 begin
     Assert(Assigned(FitStub));
-    Result := TCurveTypeId(FitStub.GetCurveType(ProblemID));
+    Result := TCurveTypeId(FitStub.GetCurveType(FProblemId));
 end;
 
 procedure TFitProblem.SetCurveType(ACurveType: TCurveTypeId);
 begin
     Assert(Assigned(FitStub));
-    FitStub.SetCurveType(ACurveType, ProblemID);
+    FitStub.SetCurveType(ACurveType, FProblemId);
 end;
 
 {$IFNDEF EXCLUDE_SOMETHING}
@@ -270,19 +262,19 @@ end;
 function TFitProblem.GetState: TFitServerState;
 begin
     Assert(Assigned(FitStub));
-    Result := TFitServerState(FitStub.GetState(ProblemID));
+    Result := TFitServerState(FitStub.GetState(FProblemId));
 end;
 
 procedure TFitProblem.SetWaveLength(AWaveLength: Double);
 begin
     Assert(Assigned(FitStub));
-    FitStub.SetWaveLength(AWaveLength, ProblemID);
+    FitStub.SetWaveLength(AWaveLength, FProblemId);
 end;
 
 function TFitProblem.GetWaveLength: Double;
 begin
     Assert(Assigned(FitStub));
-    Result := FitStub.GetWaveLength(ProblemID);
+    Result := FitStub.GetWaveLength(FProblemId);
 end;
 
 function TFitProblem.SetProfilePointsSet(APointsSet: TTitlePointsSet): string;
@@ -296,7 +288,7 @@ begin
     //  ob'ekt, peredannyi cherez parametr ne dolzhen osvobozhdat'sya!
     ADR := CreateRemotableArray(APointsSet);
     try
-        R := FitStub.SetProfilePointsSet(ADR, ProblemID);
+        R := FitStub.SetProfilePointsSet(ADR, FProblemId);
     finally
         ADR.Free;
     end;
@@ -314,13 +306,13 @@ end;
 function TFitProblem.GetProfilePointsSet: TTitlePointsSet;
 begin
     Assert(Assigned(FitStub));
-    Result := ProcessPointsResult(FitStub.GetProfilePointsSet(ProblemID));
+    Result := ProcessPointsResult(FitStub.GetProfilePointsSet(FProblemId));
 end;
 
 function TFitProblem.GetSelectedArea: TTitlePointsSet;
 begin
     Assert(Assigned(FitStub));
-    Result := ProcessPointsResult(FitStub.GetSelectedArea(ProblemID));
+    Result := ProcessPointsResult(FitStub.GetSelectedArea(FProblemId));
 end;
 
 function TFitProblem.SetBackgroundPointsSet(
@@ -335,7 +327,7 @@ begin
     //  ob'ekt, peredannyi cherez parametr ne dolzhen osvobozhdat'sya!
     ADR := CreateRemotableArray(ABackgroundPoints);
     try
-        R := FitStub.SetBackgroundPointsSet(ADR, ProblemID);
+        R := FitStub.SetBackgroundPointsSet(ADR, FProblemId);
     finally
         ADR.Free;
     end;
@@ -353,7 +345,7 @@ end;
 function TFitProblem.GetBackgroundPoints: TTitlePointsSet;
 begin
     Assert(Assigned(FitStub));
-    Result := ProcessPointsResult(FitStub.GetBackgroundPoints(ProblemID));
+    Result := ProcessPointsResult(FitStub.GetBackgroundPoints(FProblemId));
 end;
 
 function TFitProblem.SetCurvePositions(ACurvePositions: TPointsSet): string;
@@ -367,7 +359,7 @@ begin
     //  ob'ekt, peredannyi cherez parametr ne dolzhen osvobozhdat'sya!
     ADR := CreateRemotableArray(ACurvePositions);
     try
-        R := FitStub.SetSpecimenPositions(ADR, ProblemID);
+        R := FitStub.SetSpecimenPositions(ADR, FProblemId);
     finally
         ADR.Free;
     end;
@@ -384,7 +376,7 @@ end;
 function TFitProblem.GetCurvePositions: TTitlePointsSet;
 begin
     Assert(Assigned(FitStub));
-    Result := ProcessPointsResult(FitStub.GetSpecimenPositions(ProblemID));
+    Result := ProcessPointsResult(FitStub.GetSpecimenPositions(FProblemId));
 end;
 
 function TFitProblem.SetRFactorIntervals(ARFactorIntervals: TPointsSet): string;
@@ -398,7 +390,7 @@ begin
     //  ob'ekt, peredannyi cherez parametr ne dolzhen osvobozhdat'sya!
     ADR := CreateRemotableArray(ARFactorIntervals);
     try
-        R := FitStub.SetSpecimenIntervals(ADR, ProblemID);
+        R := FitStub.SetSpecimenIntervals(ADR, FProblemId);
     finally
         ADR.Free;
     end;
@@ -415,7 +407,7 @@ end;
 function TFitProblem.GetRFactorIntervals: TTitlePointsSet;
 begin
     Assert(Assigned(FitStub));
-    Result := ProcessPointsResult(FitStub.GetSpecimenIntervals(ProblemID));
+    Result := ProcessPointsResult(FitStub.GetSpecimenIntervals(FProblemId));
 end;
 
 {$IFDEF FITCGI}
@@ -428,7 +420,7 @@ begin
     Assert(Assigned(FitStub));
     Result := TMemoryStream.Create;
     try
-        R := FitStub.GetGraph(Width, Height, ProblemID);
+        R := FitStub.GetGraph(Width, Height, FProblemId);
         if not Assigned(R) then
             raise Exception.Create(OutOfServerResources);
         try
@@ -456,14 +448,14 @@ function TFitProblem.GetProfileChunk(
     const ChunkNum: LongInt): TTitlePointsSet;
 begin
     Assert(Assigned(FitStub));
-    Result := ProcessPointsResult(FitStub.GetProfileChunk(ProblemID, ChunkNum));
+    Result := ProcessPointsResult(FitStub.GetProfileChunk(FProblemId, ChunkNum));
 end;
 
 function TFitProblem.GetProfileChunkCount: LongInt;
 var Count: TIntResult;
 begin
     Assert(Assigned(FitStub));
-    Count := FitStub.GetProfileChunkCount(ProblemID);
+    Count := FitStub.GetProfileChunkCount(FProblemId);
     if not Assigned(Count) then
         raise Exception.Create(OutOfServerResources);
 
@@ -501,7 +493,7 @@ var Res: LongInt;
 begin
     Assert(Assigned(FitStub));
     Res := 0; ErrMsg := '';
-    Count := FitStub.GetSpecimenCount(ProblemID);
+    Count := FitStub.GetSpecimenCount(FProblemId);
     if not Assigned(Count) then
         raise Exception.Create(OutOfServerResources);
 
@@ -522,7 +514,7 @@ var Res: LongInt;
 begin
     Assert(Assigned(FitStub));
     Res := 0; ErrMsg := '';
-    Count := FitStub.GetSpecimenParameterCount(ProblemID, SpecIndex);
+    Count := FitStub.GetSpecimenParameterCount(FProblemId, SpecIndex);
     if not Assigned(Count) then
         raise Exception.Create(OutOfServerResources);
 
@@ -546,7 +538,7 @@ begin
     Assert(Assigned(FitStub));
     Res := 0; ErrMsg := '';
     R := FitStub.GetSpecimenParameter(
-        ProblemID, SpecIndex, ParamIndex);
+        FProblemId, SpecIndex, ParamIndex);
     if not Assigned(R) then
         raise Exception.Create(OutOfServerResources);
 
@@ -572,7 +564,7 @@ begin
     Assert(Assigned(FitStub));
     Res := 0; ErrMsg := '';
     R := FitStub.SetSpecimenParameter(
-        ProblemID, SpecIndex, ParamIndex, Value);
+        FProblemId, SpecIndex, ParamIndex, Value);
     if not Assigned(R) then
         raise Exception.Create(OutOfServerResources);
 
@@ -599,7 +591,7 @@ begin
     Res := 0; ErrMsg := '';
     Result := TMSCRSpecimenList.Create(nil);
     try
-        Count := FitStub.GetSpecimenCount(ProblemID);
+        Count := FitStub.GetSpecimenCount(FProblemId);
         if not Assigned(Count) then
             raise Exception.Create(OutOfServerResources);
 
@@ -614,7 +606,7 @@ begin
 
         for SpecIndex := 0 to SpecCount - 1 do
         begin
-            Count := FitStub.GetSpecimenParameterCount(ProblemID, SpecIndex);
+            Count := FitStub.GetSpecimenParameterCount(FProblemId, SpecIndex);
             if not Assigned(Count) then
                 raise Exception.Create(OutOfServerResources);
 
@@ -634,7 +626,7 @@ begin
                 for ParamIndex := 0 to ParamCount - 1 do
                 begin
                     R := FitStub.GetSpecimenParameter(
-                        ProblemID, SpecIndex, ParamIndex);
+                        FProblemId, SpecIndex, ParamIndex);
                     if not Assigned(R) then
                         raise Exception.Create(OutOfServerResources);
                     try
@@ -677,7 +669,7 @@ begin
     Res := 0; ErrMsg := '';
     Result := TSelfCopiedCompList.Create(nil);
     try
-        SpecCount := FitStub.GetSpecimenCount(ProblemID);
+        SpecCount := FitStub.GetSpecimenCount(FProblemId);
         if not Assigned(SpecCount) then
             raise Exception.Create(OutOfServerResources);
             
@@ -692,7 +684,7 @@ begin
 
         for SpecIndex := 0 to Count - 1 do
         begin
-            R := FitStub.GetSpecimenPoints(SpecIndex, ProblemID);
+            R := FitStub.GetSpecimenPoints(SpecIndex, FProblemId);
             if not Assigned(R) then
                 raise Exception.Create(OutOfServerResources);
 
@@ -720,13 +712,13 @@ end;
 function TFitProblem.GetCalcProfilePointsSet: TTitlePointsSet;
 begin
     Assert(Assigned(FitStub));
-    Result := ProcessPointsResult(FitStub.GetCalcProfilePointsSet(ProblemID));
+    Result := ProcessPointsResult(FitStub.GetCalcProfilePointsSet(FProblemId));
 end;
 
 function TFitProblem.GetDeltaProfilePointsSet: TTitlePointsSet;
 begin
     Assert(Assigned(FitStub));
-    Result := ProcessPointsResult(FitStub.GetDeltaProfilePointsSet(ProblemID));
+    Result := ProcessPointsResult(FitStub.GetDeltaProfilePointsSet(FProblemId));
 end;
 
 function TFitProblem.SmoothProfile: string;
@@ -735,7 +727,7 @@ var Res: LongInt;
     R: TResult;
 begin
     Assert(Assigned(FitStub));
-    R := FitStub.SmoothProfile(ProblemID);
+    R := FitStub.SmoothProfile(FProblemId);
     if not Assigned(R) then raise Exception.Create(OutOfServerResources);
     Res := R.ErrCode;
     ErrMsg := R.ErrMsg;
@@ -753,7 +745,7 @@ var Res: LongInt;
     R: TResult;
 begin
     Assert(Assigned(FitStub));
-    R := FitStub.SubtractAllBackground(Auto, ProblemID);
+    R := FitStub.SubtractAllBackground(Auto, FProblemId);
     if not Assigned(R) then raise Exception.Create(OutOfServerResources);
     Res := R.ErrCode;
     ErrMsg := R.ErrMsg;
@@ -770,7 +762,7 @@ var Res: LongInt;
     R: TResult;
 begin
     Assert(Assigned(FitStub));
-    R := FitStub.DoAllAutomatically(ProblemID);
+    R := FitStub.DoAllAutomatically(FProblemId);
     if not Assigned(R) then raise Exception.Create(OutOfServerResources);
     Res := R.ErrCode;
     ErrMsg := R.ErrMsg;
@@ -788,7 +780,7 @@ var Res: LongInt;
     R: TResult;
 begin
     Assert(Assigned(FitStub));
-    R := FitStub.MinimizeDifference(ProblemID);
+    R := FitStub.MinimizeDifference(FProblemId);
     if not Assigned(R) then raise Exception.Create(OutOfServerResources);
     Res := R.ErrCode;
     ErrMsg := R.ErrMsg;
@@ -826,7 +818,7 @@ var Res: LongInt;
     R: TResult;
 begin
     Assert(Assigned(FitStub));
-    R := FitStub.MinimizeNumberOfSpecimens(ProblemID);
+    R := FitStub.MinimizeNumberOfSpecimens(FProblemId);
     if not Assigned(R) then raise Exception.Create(OutOfServerResources);
     Res := R.ErrCode;
     ErrMsg := R.ErrMsg;
@@ -844,7 +836,7 @@ var Res: LongInt;
     R: TResult;
 begin
     Assert(Assigned(FitStub));
-    R := FitStub.FindSpecimenIntervals(ProblemID);
+    R := FitStub.FindSpecimenIntervals(FProblemId);
     if not Assigned(R) then raise Exception.Create(OutOfServerResources);
     Res := R.ErrCode;
     ErrMsg := R.ErrMsg;
@@ -862,7 +854,7 @@ var Res: LongInt;
     R: TResult;
 begin
     Assert(Assigned(FitStub));
-    R := FitStub.FindBackPoints(ProblemID);
+    R := FitStub.FindBackPoints(FProblemId);
     if not Assigned(R) then raise Exception.Create(OutOfServerResources);
     Res := R.ErrCode;
     ErrMsg := R.ErrMsg;
@@ -880,7 +872,7 @@ var Res: LongInt;
     R: TResult;
 begin
     Assert(Assigned(FitStub));
-    R := FitStub.FindSpecimenPositions(ProblemID);
+    R := FitStub.FindSpecimenPositions(FProblemId);
     if not Assigned(R) then raise Exception.Create(OutOfServerResources);
     Res := R.ErrCode;
     ErrMsg := R.ErrMsg;
@@ -913,7 +905,7 @@ var Res: LongInt;
     R: TResult;
 begin
     Assert(Assigned(FitStub));
-    R := FitStub.StopAsyncOper(ProblemID);
+    R := FitStub.StopAsyncOper(FProblemId);
     if not Assigned(R) then raise Exception.Create(OutOfServerResources);
     Res := R.ErrCode;
     ErrMsg := R.ErrMsg;
@@ -929,7 +921,7 @@ var ErrMsg: string;
     R: TBoolResult;
 begin
     Assert(Assigned(FitStub));
-    R := FitStub.AsyncOper(ProblemID);
+    R := FitStub.AsyncOper(FProblemId);
     if not Assigned(R) then raise Exception.Create(OutOfServerResources);
     Result := R._Result;
     R.Free;
@@ -940,7 +932,7 @@ var ErrMsg: string;
     R: TStringResult;
 begin
     Assert(Assigned(FitStub));
-    R := FitStub.GetCalcTimeStr(ProblemID);
+    R := FitStub.GetCalcTimeStr(FProblemId);
     if not Assigned(R) then raise Exception.Create(OutOfServerResources);
     Result := R._Result;
     R.Free;
@@ -951,7 +943,7 @@ var ErrMsg: string;
     R: TStringResult;
 begin
     Assert(Assigned(FitStub));
-    R := FitStub.GetRFactorStr(ProblemID);
+    R := FitStub.GetRFactorStr(FProblemId);
     if not Assigned(R) then raise Exception.Create(OutOfServerResources);
     Result := R._Result;
     R.Free;
@@ -962,7 +954,7 @@ var ErrMsg: string;
     R: TStringResult;
 begin
     Assert(Assigned(FitStub));
-    R := FitStub.GetAbsRFactorStr(ProblemID);
+    R := FitStub.GetAbsRFactorStr(FProblemId);
     if not Assigned(R) then raise Exception.Create(OutOfServerResources);
     Result := R._Result;
     R.Free;
@@ -973,7 +965,7 @@ var ErrMsg: string;
     R: TStringResult;
 begin
     Assert(Assigned(FitStub));
-    R := FitStub.GetSqrRFactorStr(ProblemID);
+    R := FitStub.GetSqrRFactorStr(FProblemId);
     if not Assigned(R) then raise Exception.Create(OutOfServerResources);
     Result := R._Result;
     R.Free;
@@ -985,7 +977,7 @@ var Res: LongInt;
     R: TResult;
 begin
     Assert(Assigned(FitStub));
-    R := FitStub.SelectArea(StartPointIndex, StopPointIndex, ProblemID);
+    R := FitStub.SelectArea(StartPointIndex, StopPointIndex, FProblemId);
     if not Assigned(R) then raise Exception.Create(OutOfServerResources);
     Res := R.ErrCode;
     ErrMsg := R.ErrMsg;
@@ -1003,7 +995,7 @@ var Res: LongInt;
     R: TResult;
 begin
     Assert(Assigned(FitStub));
-    R := FitStub.ReturnToTotalProfile(ProblemID);
+    R := FitStub.ReturnToTotalProfile(FProblemId);
     if not Assigned(R) then raise Exception.Create(OutOfServerResources);
     Res := R.ErrCode;
     ErrMsg := R.ErrMsg;
@@ -1021,7 +1013,7 @@ var Res: LongInt;
     R: TResult;
 begin
     Assert(Assigned(FitStub));
-    R := FitStub.CreateSpecimenList(ProblemID);
+    R := FitStub.CreateSpecimenList(FProblemId);
     if not Assigned(R) then raise Exception.Create(OutOfServerResources);
     Res := R.ErrCode;
     ErrMsg := R.ErrMsg;
@@ -1038,7 +1030,7 @@ var Res: LongInt;
     R: TResult;
 begin
     Assert(Assigned(FitStub));
-    R := FitStub.AddPointToData(XValue, YValue, ProblemID);
+    R := FitStub.AddPointToData(XValue, YValue, FProblemId);
     if not Assigned(R) then raise Exception.Create(OutOfServerResources);
     Res := R.ErrCode;
     ErrMsg := R.ErrMsg;
@@ -1055,7 +1047,7 @@ var Res: LongInt;
     R: TResult;
 begin
     Assert(Assigned(FitStub));
-    R := FitStub.AddPointToBackground(XValue, YValue, ProblemID);
+    R := FitStub.AddPointToBackground(XValue, YValue, FProblemId);
     if not Assigned(R) then raise Exception.Create(OutOfServerResources);
     Res := R.ErrCode;
     ErrMsg := R.ErrMsg;
@@ -1072,7 +1064,7 @@ var Res: LongInt;
     R: TResult;
 begin
     Assert(Assigned(FitStub));
-    R := FitStub.AddPointToSpecimenIntervals(XValue, YValue, ProblemID);
+    R := FitStub.AddPointToSpecimenIntervals(XValue, YValue, FProblemId);
     if not Assigned(R) then raise Exception.Create(OutOfServerResources);
     Res := R.ErrCode;
     ErrMsg := R.ErrMsg;
@@ -1089,7 +1081,7 @@ var Res: LongInt;
     R: TResult;
 begin
     Assert(Assigned(FitStub));
-    R := FitStub.AddPointToSpecimenPositions(XValue, YValue, ProblemID);
+    R := FitStub.AddPointToSpecimenPositions(XValue, YValue, FProblemId);
     if not Assigned(R) then raise Exception.Create(OutOfServerResources);
     Res := R.ErrCode;
     ErrMsg := R.ErrMsg;
@@ -1108,7 +1100,7 @@ var Res: LongInt;
 begin
     Assert(Assigned(FitStub));
     R := FitStub.ReplacePointInProfile(
-        PrevXValue, PrevYValue, NewXValue, NewYValue, ProblemID);
+        PrevXValue, PrevYValue, NewXValue, NewYValue, FProblemId);
     if not Assigned(R) then raise Exception.Create(OutOfServerResources);
     Res := R.ErrCode;
     ErrMsg := R.ErrMsg;
@@ -1127,7 +1119,7 @@ var Res: LongInt;
 begin
     Assert(Assigned(FitStub));
     R := FitStub.ReplacePointInBackground(
-        PrevXValue, PrevYValue, NewXValue, NewYValue, ProblemID);
+        PrevXValue, PrevYValue, NewXValue, NewYValue, FProblemId);
     if not Assigned(R) then raise Exception.Create(OutOfServerResources);
     Res := R.ErrCode;
     ErrMsg := R.ErrMsg;
@@ -1146,7 +1138,7 @@ var Res: LongInt;
 begin
     Assert(Assigned(FitStub));
     R := FitStub.ReplacePointInSpecimenIntervals(
-        PrevXValue, PrevYValue, NewXValue, NewYValue, ProblemID);
+        PrevXValue, PrevYValue, NewXValue, NewYValue, FProblemId);
     if not Assigned(R) then raise Exception.Create(OutOfServerResources);
     Res := R.ErrCode;
     ErrMsg := R.ErrMsg;
@@ -1165,7 +1157,7 @@ var Res: LongInt;
 begin
     Assert(Assigned(FitStub));
     R := FitStub.ReplacePointInSpecimenPositions(
-        PrevXValue, PrevYValue, NewXValue, NewYValue, ProblemID);
+        PrevXValue, PrevYValue, NewXValue, NewYValue, FProblemId);
     if not Assigned(R) then raise Exception.Create(OutOfServerResources);
     Res := R.ErrCode;
     ErrMsg := R.ErrMsg;

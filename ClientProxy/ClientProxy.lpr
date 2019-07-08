@@ -2,8 +2,8 @@ library ClientProxy;
 
 {$MODE Delphi}
 
-uses Classes, fit_client_proxy, ta, int_fit_service, fit_server,
-    fit_server_proxy, Main, SyncObjs, fit_problem;
+uses Classes, Main, SyncObjs, ta, int_fit_service, fit_server,
+    fit_client_proxy, fit_server_proxy, fit_problem;
   
 var
     FitService: IFitService;
@@ -16,7 +16,7 @@ begin
     CS.Acquire;
     
     if FitService = Nil then
-        FitService := TFitProblem.Create(nil) as IFitService;
+        FitService := TFitClientProxy.Create(nil) as IFitService;
     Result := FitService;
     
     CS.Release;

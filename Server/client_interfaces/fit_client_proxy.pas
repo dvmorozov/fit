@@ -15,13 +15,29 @@ unit fit_client_proxy;
 
 interface
 
-//type
-    //TFitProblem
-
 uses
-  Classes, SysUtils; 
+  Classes, SysUtils, fit_problem;
+  
+type
+    TFitClientProxy = class(TFitProblem)
+    public
+        constructor Create(AOwner: TComponent); override;
+        destructor Destroy; override;
+    end;
 
 implementation
+
+constructor TFitClientProxy.Create(AOwner: TComponent);
+begin
+    inherited Create(AOwner);
+    CreateProblem;
+end;
+
+destructor TFitClientProxy.Destroy;
+begin
+    DiscardProblem(FProblemId);
+    inherited Destroy;
+end;
 
 end.
 

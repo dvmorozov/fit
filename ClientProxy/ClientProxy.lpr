@@ -3,7 +3,7 @@ library ClientProxy;
 {$MODE Delphi}
 
 uses Classes, fit_client_proxy, ta, int_fit_service, fit_server,
-    fit_server_proxy, Main, SyncObjs;
+    fit_server_proxy, Main, SyncObjs, fit_problem;
   
 var
     FitService: IFitService;
@@ -16,7 +16,7 @@ begin
     CS.Acquire;
     
     if FitService = Nil then
-        FitService := TFitClientProxy.Create(nil) as IFitService;
+        FitService := TFitProblem.Create(nil) as IFitService;
     Result := FitService;
     
     CS.Release;
@@ -37,7 +37,7 @@ begin
     CS.Acquire;
     
     if FitProblem = Nil then
-        FitProblem := TFitClientProxy.Create(nil);
+        FitProblem := TFitProblem.Create(nil);
     Result := FitProblem;
     
     CS.Release;

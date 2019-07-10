@@ -9,6 +9,7 @@ The curve fitting application. It allows to model data by set of curves of selec
 Server side should be compiled and installed separately. It is supposed but it is not required that
 backend is installed on dedicated machine.
 - FitServer - builds computing backend.
+- ClientProxy - builds shared library implementing XML-RPC calls from client to server.
 
 All applications are built from the same code base by following compilation keys:
 - FIT - controls building of monolithic desktop application. Is mutually exclusive with FITPRO.
@@ -17,7 +18,7 @@ All applications are built from the same code base by following compilation keys
 - FITCLIENT - incorporates client code.
 - SERVER - controls building of server application.
 
-## How to build desktop application
+## How to build desktop applications Fit and FitPro
 
 ### Install latest version of Lazarus
 
@@ -37,14 +38,14 @@ Latest built was done with
 
 [fitminimizers/master](https://github.com/dvmorozov/fitminimizers/tree/master)
 
-Install components into Lazarus, add included directories in project properties and rebuild the project.
+Install components into Lazarus, add included directories in project properties and rebuild projects.
 
-## How to build CGI client
+## How to build CGI client, server application and proxy shared library
 
 ### Install Lazarus 0.9.24
 
 Unfortunately wst-0.5 can not be built without modifications with latest versions of Lazarus.
-It is recommended to use version 0.9.24.
+So, it is recommended to use version 0.9.24.
 
 [Lazarus 0.9.24](https://sourceforge.net/projects/lazarus/files/Lazarus%20Windows%2032%20bits/Old%20releases/Lazarus%200.9.24/Lazarus-0.9.24-fpc-2.2.0-20071114-win32.exe/download)
 
@@ -58,7 +59,7 @@ It is recommended to use version 0.9.24.
 
 [wst-0.5](https://osdn.net/projects/sfnet_lazarus-ccr/downloads/Web%20Service%20Toolkit/Web%20Service%20Toolkit%200.5/wst-0.5.zip/)
 
-Add included directories in project properties and rebuild the project.
+Add included directories in project properties and rebuild projects.
 
 ## More info
 

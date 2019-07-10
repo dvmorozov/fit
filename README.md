@@ -22,7 +22,7 @@ To open and modify diagram files use my favourite [UMLet](https://www.umlet.com/
 
 ### Open data file by command line parameter
 
-Fit.exe /INFILE=*<file_name>*
+Fit.exe /INFILE=*file_name*
 
 ## Web application
 

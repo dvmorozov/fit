@@ -16,7 +16,7 @@
       <AutoIncrementBuild Value="True"/>
       <MajorVersionNr Value="1"/>
       <MinorVersionNr Value="1"/>
-      <BuildNr Value="1159"/>
+      <BuildNr Value="1161"/>
       <Attributes pvaDebug="True"/>
       <StringTable LegalCopyright="D.V.Morozov" OriginalFilename="Fit" ProductName="Fit" ProductVersion="1.1.0"/>
     </VersionInfo>
@@ -114,10 +114,11 @@
       <Unit0>
         <Filename Value="Fit.lpr"/>
         <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="36"/>
         <WindowIndex Value="1"/>
         <TopLine Value="48"/>
-        <CursorPos Y="76"/>
+        <CursorPos X="13" Y="73"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -228,7 +229,7 @@
         <UnitName Value="InputBackFactorDialog"/>
         <EditorIndex Value="37"/>
         <WindowIndex Value="1"/>
-        <CursorPos X="27" Y="12"/>
+        <CursorPos X="26" Y="14"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -587,7 +588,6 @@
       <Unit52>
         <Filename Value="Main.pas"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <WindowIndex Value="1"/>
         <TopLine Value="219"/>

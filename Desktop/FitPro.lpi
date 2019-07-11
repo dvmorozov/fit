@@ -12,9 +12,13 @@
       <UseXPManifest Value="True"/>
     </General>
     <VersionInfo>
+      <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
-      <BuildNr Value="11"/>
-      <StringTable ProductVersion="0.0.0.1"/>
+      <MajorVersionNr Value="1"/>
+      <MinorVersionNr Value="1"/>
+      <BuildNr Value="13"/>
+      <Attributes pvaDebug="True"/>
+      <StringTable FileDescription="Remote client." LegalCopyright="Dmitry Morozov" OriginalFilename="FitPro" ProductName="Fit" ProductVersion="1.1.0"/>
     </VersionInfo>
     <BuildModes Count="1">
       <Item1 Name="default" Default="True"/>
@@ -62,7 +66,7 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="2"/>
         <TopLine Value="15"/>
-        <CursorPos Y="43"/>
+        <CursorPos Y="45"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>

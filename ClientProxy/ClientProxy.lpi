@@ -10,9 +10,15 @@
       <ActiveEditorIndexAtStart Value="7"/>
     </General>
     <VersionInfo>
-      <ProjectVersion Value=""/>
-      <Language Value=""/>
-      <CharSet Value=""/>
+      <UseVersionInfo Value="True"/>
+      <AutoIncrementBuild Value="True"/>
+      <CurrentVersionNr Value="1"/>
+      <CurrentMajorRevNr Value="1"/>
+      <CurrentBuildNr Value="4"/>
+      <ProjectVersion Value="1.1.0.1"/>
+      <FileDescription Value="Proxy library providing communication with server application."/>
+      <LegalCopyright Value="Dmitry .Morozov"/>
+      <ProductName Value="Fit"/>
     </VersionInfo>
     <PublishOptions>
       <Version Value="2"/>
@@ -28,10 +34,10 @@
     </RunParams>
     <RequiredPackages Count="2">
       <Item1>
-        <PackageName Value="IDEIntf"/>
+        <PackageName Value="ta"/>
       </Item1>
       <Item2>
-        <PackageName Value="ta"/>
+        <PackageName Value="IDEIntf"/>
       </Item2>
     </RequiredPackages>
     <Units Count="21">
@@ -39,8 +45,8 @@
         <Filename Value="ClientProxy.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ClientProxy"/>
-        <CursorPos X="19" Y="5"/>
-        <TopLine Value="21"/>
+        <CursorPos X="21" Y="14"/>
+        <TopLine Value="5"/>
         <EditorIndex Value="7"/>
         <UsageCount Value="237"/>
         <Loaded Value="True"/>

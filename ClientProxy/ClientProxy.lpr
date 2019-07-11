@@ -2,6 +2,8 @@ library ClientProxy;
 
 {$MODE Delphi}
 
+{$R ClientProxy.res}
+
 uses Classes, Main, SyncObjs, ta, int_fit_service, fit_server,
     fit_client_proxy, fit_server_proxy, fit_problem;
   

@@ -40,6 +40,8 @@ uses
 
 //{$R FitPro.res}
 
+{$R *.res}
+
 begin
   Application.Initialize;
   FormMain.ApplicationProperties1.Title := 'FitPro';

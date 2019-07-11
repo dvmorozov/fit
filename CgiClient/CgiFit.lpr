@@ -16,6 +16,9 @@ MSCRDataClasses;
 var MSec: Comp;
     FileName: string;
     SavedOutput: Text;
+
+{$R CgiFit.res}
+
 begin
   try
       //uzhe est' v initialization cgiModules

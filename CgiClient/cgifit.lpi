@@ -11,7 +11,15 @@
       <ActiveEditorIndexAtStart Value="26"/>
     </General>
     <VersionInfo>
-      <ProjectVersion Value=""/>
+      <UseVersionInfo Value="True"/>
+      <AutoIncrementBuild Value="True"/>
+      <CurrentVersionNr Value="1"/>
+      <CurrentMajorRevNr Value="1"/>
+      <CurrentBuildNr Value="2"/>
+      <ProjectVersion Value="0.0.0.0"/>
+      <FileDescription Value="CGI-client application."/>
+      <LegalCopyright Value="Dmitry Morozov"/>
+      <ProductName Value="Fit"/>
     </VersionInfo>
     <PublishOptions>
       <Version Value="2"/>
@@ -27,15 +35,15 @@
     </RunParams>
     <RequiredPackages Count="3">
       <Item1>
-        <PackageName Value="CGILaz"/>
+        <PackageName Value="ta"/>
+        <MinVersion Major="1" Minor="1" Valid="True"/>
       </Item1>
       <Item2>
         <PackageName Value="LCL"/>
         <MinVersion Major="1" Valid="True"/>
       </Item2>
       <Item3>
-        <PackageName Value="ta"/>
-        <MinVersion Major="1" Minor="1" Valid="True"/>
+        <PackageName Value="CGILaz"/>
       </Item3>
     </RequiredPackages>
     <Units Count="58">
@@ -43,7 +51,7 @@
         <Filename Value="CgiFit.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="cgifit"/>
-        <CursorPos X="16" Y="14"/>
+        <CursorPos X="1" Y="22"/>
         <TopLine Value="1"/>
         <EditorIndex Value="0"/>
         <UsageCount Value="200"/>
@@ -175,42 +183,42 @@
         <UnitName Value="fit_server_proxy"/>
         <CursorPos X="22" Y="1104"/>
         <TopLine Value="1073"/>
-        <UsageCount Value="172"/>
+        <UsageCount Value="171"/>
       </Unit13>
       <Unit14>
         <Filename Value="..\DataLoader.pas"/>
         <UnitName Value="DataLoader"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <UsageCount Value="171"/>
+        <UsageCount Value="170"/>
       </Unit14>
       <Unit15>
         <Filename Value="..\FitClientProxy.pas"/>
         <UnitName Value="FitClientProxy"/>
         <CursorPos X="19" Y="129"/>
         <TopLine Value="109"/>
-        <UsageCount Value="82"/>
+        <UsageCount Value="81"/>
       </Unit15>
       <Unit16>
         <Filename Value="..\Main.pas"/>
         <UnitName Value="Main"/>
         <CursorPos X="1" Y="261"/>
         <TopLine Value="1"/>
-        <UsageCount Value="175"/>
+        <UsageCount Value="174"/>
       </Unit16>
       <Unit17>
         <Filename Value="..\Packages\VariousGrids\SelfCopied.pas"/>
         <UnitName Value="SelfCopied"/>
         <CursorPos X="3" Y="2"/>
         <TopLine Value="1"/>
-        <UsageCount Value="41"/>
+        <UsageCount Value="40"/>
       </Unit17>
       <Unit18>
         <Filename Value="..\CommonTypes.pas"/>
         <UnitName Value="CommonTypes"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <UsageCount Value="173"/>
+        <UsageCount Value="172"/>
       </Unit18>
       <Unit19>
         <Filename Value="specimen_positions.pas"/>
@@ -227,7 +235,7 @@
         <UnitName Value="MSCRDataClasses"/>
         <CursorPos X="21" Y="58"/>
         <TopLine Value="46"/>
-        <UsageCount Value="171"/>
+        <UsageCount Value="170"/>
       </Unit20>
       <Unit21>
         <Filename Value="fitting.pas"/>
@@ -254,7 +262,7 @@
         <UnitName Value="SimpMath"/>
         <CursorPos X="9" Y="701"/>
         <TopLine Value="682"/>
-        <UsageCount Value="41"/>
+        <UsageCount Value="40"/>
       </Unit23>
       <Unit24>
         <Filename Value="gen_spec_pos_progress.pas"/>
@@ -323,7 +331,7 @@
         <UnitName Value="GeneralHashfunctions"/>
         <CursorPos X="57" Y="7"/>
         <TopLine Value="1"/>
-        <UsageCount Value="70"/>
+        <UsageCount Value="69"/>
       </Unit31>
       <Unit32>
         <Filename Value="pattern.pas"/>
@@ -368,7 +376,7 @@
       <Unit36>
         <Filename Value="..\GeneralHashFunctions.pas"/>
         <UnitName Value="GeneralHashFunctions"/>
-        <UsageCount Value="170"/>
+        <UsageCount Value="169"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit36>
       <Unit37>
@@ -386,7 +394,7 @@
         <UnitName Value="fit_server"/>
         <CursorPos X="27" Y="246"/>
         <TopLine Value="226"/>
-        <UsageCount Value="91"/>
+        <UsageCount Value="90"/>
       </Unit38>
       <Unit39>
         <Filename Value="evaluation.pas"/>
@@ -403,7 +411,7 @@
         <UnitName Value="TAGraph"/>
         <CursorPos X="20" Y="2776"/>
         <TopLine Value="2756"/>
-        <UsageCount Value="61"/>
+        <UsageCount Value="60"/>
       </Unit40>
       <Unit41>
         <Filename Value="..\Desktop\CommonTypes.pas"/>
@@ -512,7 +520,7 @@
         <UnitName Value="fit_client_proxy"/>
         <CursorPos X="1" Y="165"/>
         <TopLine Value="157"/>
-        <UsageCount Value="51"/>
+        <UsageCount Value="50"/>
       </Unit53>
       <Unit54>
         <Filename Value="..\Packages\wst-0.5\binary_formatter.pas"/>
@@ -529,7 +537,7 @@
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
         <EditorIndex Value="32"/>
-        <UsageCount Value="96"/>
+        <UsageCount Value="100"/>
         <Loaded Value="True"/>
       </Unit55>
       <Unit56>
@@ -538,7 +546,7 @@
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
         <EditorIndex Value="27"/>
-        <UsageCount Value="95"/>
+        <UsageCount Value="99"/>
         <Loaded Value="True"/>
       </Unit56>
       <Unit57>
@@ -546,7 +554,7 @@
         <UnitName Value="fit_client_proxy"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <UsageCount Value="41"/>
+        <UsageCount Value="40"/>
       </Unit57>
     </Units>
     <JumpHistory Count="0" HistoryIndex="-1"/>

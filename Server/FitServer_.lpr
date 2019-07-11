@@ -50,7 +50,11 @@ uses
 {$R manifest.res}
 
 var listener : TwstListener;
+
+{$R FitServer_.res}
+
 begin
+  Application.Title:='FitServer';
   Application.Initialize;
   //Form1.ApplicationProperties1.Title := 'FitServer';
 

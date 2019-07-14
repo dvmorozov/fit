@@ -334,11 +334,13 @@ begin
     end;
 end;
 
+{$hints off}
 function TSpecimenList.GetCellEnabledCharSet(const ACol,
     ARow: Integer): TCharSet;
 begin
     Result := POS_REAL_SET;
 end;
+{$hints on}
 
 initialization
     RegisterClass(Curve_parameters);

@@ -801,12 +801,10 @@ begin
 end;
 
 procedure TFitViewer.SetXCoordMode(AMode: LongInt);
-var MinX,MaxX,MinY,MaxY: Double;
 begin
     FXCoordMode := AMode;
     Plot;   //  dolzhen byt' obrabotchik sobytiya, a rezhim
             //  dolzhen ustanavlivat'sya v TIntegralIntmaker'e
-    GetMinMax(MinX,MaxX,MinY,MaxY);
 end;
 
 function TFitViewer.GetMaxX: Double; //  sredi vseh prisoedinennyh krivyh

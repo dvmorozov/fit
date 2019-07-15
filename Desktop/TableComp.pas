@@ -549,6 +549,7 @@ begin
     Result := True;
 end;
 
+{$hints off}
 function TRowCompList.MayIDoDeleteRows(StartRow,
     RowsCount: Integer): Boolean;
 begin
@@ -560,6 +561,7 @@ function TRowCompList.MayIDoInsertRows(StartRow,
 begin
     Result := True;
 end;
+{$hints on}
 
 procedure TRowCompList.RowAdded;
 begin
@@ -607,6 +609,7 @@ begin
     for i := 1 to RowsCount do Insert(First, CreateNewObject);
 end;
 
+{$hints off}
 procedure TRowCompList.BeforeStringToValue(const ACol, ARow: Integer;
     const AString: string);
 begin
@@ -616,6 +619,7 @@ begin
     if Count = 0 then Add(CreateNewObject);
         //  в пустой объект добавляется строка
 end;
+{$hints on}
 
 function TRowCompList.Add(Item: TComponent): Integer;
 var Flag: Boolean;
@@ -792,6 +796,7 @@ begin
     Result := True;
 end;
 
+{$hints off}
 function TColCompList.MayIDoDeleteColumns(StartCol,
     ColsCount: Integer): Boolean;
 begin
@@ -803,6 +808,7 @@ function TColCompList.MayIDoInsertColumns(StartCol,
 begin
     Result := True;
 end;
+{$hints on}
 
 procedure TColCompList.SetDataToGrid(Grid: TStringGrid);
 var i: LongInt;
@@ -811,6 +817,7 @@ begin
         for i := FixedCols to ColCount - 1 do SetColContents(Grid, i);
 end;
 
+{$hints off}
 procedure TColCompList.BeforeStringToValue(const ACol, ARow: Integer;
     const AString: string);
 begin
@@ -831,6 +838,7 @@ function TTableCompList.IsCellDisabled(const ACol, ARow: Integer): Boolean;
 begin
     Result := False;
 end;
+{$hints on}
 
 procedure TTableCompList.AllDataDeleted;
 begin
@@ -842,6 +850,7 @@ begin
     raise ETableCompList.Create('Columns adding is impossible...');
 end;
 
+{$hints off}
 procedure TTableCompList.ColumnsDeleted(const StartCol,
     ColsCount: Integer);
 begin
@@ -853,12 +862,14 @@ procedure TTableCompList.ColumnsInserted(const StartCol,
 begin
     raise ETableCompList.Create('Columns insertion is impossible...');
 end;
+{$hints on}
 
 procedure TTableCompList.RowAdded;
 begin
     raise ETableCompList.Create('Row adding is impossible...');
 end;
 
+{$hints off}
 procedure TTableCompList.RowsDeleted(const StartRow, RowsCount: Integer);
 begin
     raise ETableCompList.Create('Row deleting is impossible...');
@@ -868,6 +879,7 @@ procedure TTableCompList.RowsInserted(const StartRow, RowsCount: Integer);
 begin
     raise ETableCompList.Create('Row insertion is impossible...');
 end;
+{$hints on}
 
 function TTableCompList.MayIDoAddColumn: Boolean;
 begin

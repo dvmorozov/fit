@@ -303,6 +303,7 @@ begin
     PlotPointsSet(SelectedArea);
 end;
 
+{$hints off}
 procedure TFitViewer.PlotSpecimens(
     Sender: TObject; CurvePointsSetList: TSelfCopiedCompList;
     SpecimenList: TMSCRSpecimenList);
@@ -343,6 +344,7 @@ begin
         PlotPointsSet(SA);
     end;{for j := 0 to GL.Count - 1 do...}
 end;
+{$hints on}
 
 procedure TFitViewer.Clear(Sender: TObject);
 begin

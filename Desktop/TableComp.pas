@@ -906,6 +906,7 @@ begin
     Result := False;
 end;
 
+{$hints off}
 function TTableCompList.MayIDoDeleteColumns(StartCol,
     ColsCount: Integer): Boolean;
 begin
@@ -929,6 +930,7 @@ function TTableCompList.MayIDoInsertRows(StartRow,
 begin
     Result := False;
 end;
+{$hints on}
 
 function TTableCompList.GetColNumFixed: Boolean;
 begin

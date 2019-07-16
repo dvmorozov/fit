@@ -92,6 +92,9 @@ type
 Implementation
 uses TypInfo, wst_resources_imp,metadata_repository;
 
+{ The module is generated, so all hints are suppressed. }
+{$hints off}
+
 { TFitServer_ServiceBinder implementation }
 procedure TFitServer_ServiceBinder.SmoothProfileHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
 var
@@ -2683,12 +2686,12 @@ Begin
   GetServerServiceRegistry().Register('IFitServer',TFitServer_ServiceBinderFactory.Create() as IItemFactory);
 End;
 
-initialization
+{$hints on}
 
+initialization
   {$i fit_server.wst}
 
   {$IF DECLARED(Register_fit_server_ServiceMetadata)}
   Register_fit_server_ServiceMetadata();
   {$IFEND}
-
 End.

@@ -8,10 +8,9 @@ Unit fit_server_imp;
 {$IFDEF FPC} {$mode objfpc}{$H+} {$ENDIF}
 Interface
 
-Uses SysUtils, Classes, FitServerApp, CommonTypes, ComponentList,
-    DataLoader, MyExceptions, base_service_intf, server_service_intf,
-    server_service_imputils, fit_server, TitlePointsSet, PointsSet,
-    IntPointsSet, NamedPointsSet;
+Uses SysUtils, Classes, FitServerApp, ComponentList,
+    MyExceptions, base_service_intf, server_service_intf,
+    fit_server, TitlePointsSet, PointsSet, IntPointsSet;
 
 Type
   //  metody etogo klassa vyzyvayutsya vneschnimi klientami,
@@ -255,6 +254,9 @@ uses config_objects, SelfCopied, (* LazJPEG *) LazPNG, Main, FormServer,
 const
     InadmissibleProblemID: string = 'Inadmissible problem ID!';   //'Inadmissible client ID!';
     InadmissibleChunkNum: string = 'Inadmissible chunk number!';
+    
+{ The module is generated, so all hints are suppressed. }
+{$hints off}
 
 { TFitServer_ServiceImp implementation }
 function TFitServer_ServiceImp.SmoothProfile(
@@ -2996,6 +2998,8 @@ Begin
                 IServiceImplementationFactory);
 End;
 
+{$hints on}
+
 initialization
     InitCriticalSection(CS);
     ProblemList := TComponentList.Create(nil);
@@ -3010,3 +3014,4 @@ finalization
     end;
     DoneCriticalSection(CS);
 End.
+

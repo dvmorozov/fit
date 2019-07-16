@@ -29,7 +29,6 @@ uses SysUtils, Forms
     , FitClientApp
 {$ENDIF}
 {$IFDEF FITSERVER}
-    , FitServerApp, PointsSet, NamedPointsSet
     {$IFNDEF FIT}
         {$IFNDEF FITP2P}
             , base_service_intf
@@ -176,6 +175,7 @@ end;
 var LogCS: TRTLCriticalSection;
     LogMsgCount: LongInt = 1;
 
+{$hints off}
 procedure WriteLog(Msg: string; MsgType: TMsgType);
 var Log: TextFile;
     FileName: string;
@@ -227,6 +227,7 @@ begin
     end;
     LeaveCriticalSection(LogCS);
 end;
+{$hints on}
 
 {$IFDEF FITPRO}
 type

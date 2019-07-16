@@ -228,6 +228,7 @@ begin
   Matr[4, 4] := 1;
 end;
 
+{$hints off}
 procedure Mul3DMatrix(var A, B: TMatrix; var Matr: TMatrix);
 var i, k, l: Integer;
     TempMatr: TMatrix;
@@ -238,6 +239,7 @@ begin
       for l := 1 to 4 do TempMatr[i, k] := TempMatr[i, k] + A[i, l] * B[l, k];
   Matr := TempMatr;
 end;
+{$hints on}
 
 procedure Add3DMatrix(var A, B: TMatrix; var Matr: TMatrix);
 var i, k: Integer;
@@ -246,6 +248,7 @@ begin
     for k := 1 to 4 do Matr[i, k] := A[i, k] + B[i, k];
 end;
 
+{$hints off}
 procedure MulVectMatr(Matr: TMatrix; var Vector: T3Vector);
 var Vect1, Vect2: T4Vector;
     i, k: Integer;
@@ -256,6 +259,7 @@ begin
         for k := 1 to 4 do Vect2[i] := Vect2[i] + Vect1[k] * Matr[k, i];
     Mov4in3Vector(Vect2, Vector);
 end;
+{$hints on}
 
 procedure RotationX(Angle: Double);
 var TempMatr3: TMatrix;
@@ -267,6 +271,7 @@ begin
   Mul3DMatrix(RotXMatr, TempMatr3, TempMatr2);
 end;
 
+{$hints off}
 procedure RotationX2(Angle: Double);
 var TempMatr3, TempRotXMatr: TMatrix;
     i, j: Longint;
@@ -276,6 +281,7 @@ begin
   GetMatrixRotX(Angle, TempRotXMatr);
   Mul3DMatrix(TempMatr3, TempRotXMatr, TempRotMatr);
 end;
+{$hints on}
 
 procedure RotationY(Angle: Double);
 var TempMatr3: TMatrix;
@@ -287,6 +293,7 @@ begin
   Mul3DMatrix(RotYMatr, TempMatr3, TempMatr2);
 end;
 
+{$hints off}
 procedure RotationY2(Angle: Double);
 var TempMatr3, TempRotYMatr: TMatrix;
     i, j: Longint;
@@ -296,6 +303,7 @@ begin
   GetMatrixRotY(Angle, TempRotYMatr);
   Mul3DMatrix(TempMatr3, TempRotYMatr, TempRotMatr);
 end;
+{$hints on}
 
 procedure RotationZ(Angle: Double);
 var TempMatr3: TMatrix;

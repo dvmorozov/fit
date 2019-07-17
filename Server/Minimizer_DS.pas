@@ -15,7 +15,7 @@ unit Minimizer_DS;
 
 interface
 
-uses Minimizer, SelfCheckedComponentList, Classes,
+uses SysUtils, Minimizer, SelfCheckedComponentList, Classes,
     DownhillSimplexContainer, Tools, DownhillSimplexAlgorithm;
 
 type
@@ -148,22 +148,28 @@ begin
     Result := 0;
 end;
 
+{$hints off}
 procedure TDownhillSimplexMinimizer.SetValueIndex(const AValueIndex: LongInt);
 begin
+    raise Exception.Create('Method not implemented.');
 end;
 
 procedure TDownhillSimplexMinimizer.ShowCurJobProgress(Sender: TComponent;
     MinValue, MaxValue, CurValue: LongInt);
 begin
+    raise Exception.Create('Method not implemented.');
 end;
 
 procedure TDownhillSimplexMinimizer.ResetCurJobProgress(Sender: TComponent);
 begin
+    raise Exception.Create('Method not implemented.');
 end;
 
 procedure TDownhillSimplexMinimizer.ShowMessage(Sender: TComponent; Msg: string);
 begin
+    raise Exception.Create('Method not implemented.');
 end;
+{$hints on}
 
 procedure TDownhillSimplexMinimizer.UpdatingResults(Sender: TComponent);
 begin

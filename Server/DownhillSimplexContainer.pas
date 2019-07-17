@@ -206,6 +206,7 @@ type
         TVariableParameter;         //  tip dlya preobrazovaniya ukazatelya
                                     //  na massiv parametrov
 
+{$hints off}
 function TDownhillSimplexContainer.GetInitParamLength(
     Sender: TComponent; ParameterNumber, ParametersCount: LongInt): Double;
 begin
@@ -213,6 +214,7 @@ begin
     //  ??? vynesti v zapis' dlya parametra i sdelat' poisk
     //  sootvetstvuyuschego parametra
 end;
+{$hints on}
 
 procedure TDownhillSimplexContainer.FillStartDecision(Sender: TComponent;
     StartDecision: TFloatDecision);

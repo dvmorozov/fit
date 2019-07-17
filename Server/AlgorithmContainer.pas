@@ -66,7 +66,7 @@ end;
 
 constructor TRunningAlgorithmContainer.Create(AOwner: TComponent);
 begin
-    inherited Create(nil);
+    inherited Create(AOwner);
     Runner := TRunner.Create(nil);
     Runner.OnRunningProcedure := Running;
     Runner.OnEndRunningProcedure := RunningFinished;

@@ -29,6 +29,7 @@ uses SysUtils, Forms
     , FitClientApp
 {$ENDIF}
 {$IFDEF FITSERVER}
+    , FitServerApp
     {$IFNDEF FIT}
         {$IFNDEF FITP2P}
             , base_service_intf

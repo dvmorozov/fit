@@ -16,7 +16,7 @@ unit SelfCopied;
 interface
 
 uses
-    Classes, SelfCheckedComponentList, SysUtils, CBRCComponent, MyExceptions;
+    Classes, SelfCheckedComponentList, SysUtils, CBRCComponent;
 
 type
 	{ The interface of component which can copy itself. }

@@ -81,7 +81,7 @@ type
                 //  на тот случай, если класс поддерживает несколько ID
             const AnObject: TSelfSavedComponent
                 //  объект, свойства которого нужно прочитать
-            ); virtual;
+            ); virtual; abstract;
 
         class procedure WriteProperties(
             //  выполняет запись свойств класса в файл (здесь ничего не делает)
@@ -126,14 +126,6 @@ begin
         ReadInheritChain(Reader, Self);
         ReadListEnd;
     end;
-end;
-
-class procedure TSelfSavedComponent.ReadProperties(
-    const Reader: TReader;
-    const PropHeaderRec: TPropHeaderRec;
-    const AnObject: TSelfSavedComponent
-    );
-begin
 end;
 
 class procedure TSelfSavedComponent.ReadPropHeader(const Reader: TReader;

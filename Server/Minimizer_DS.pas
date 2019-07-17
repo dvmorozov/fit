@@ -46,13 +46,13 @@ type
         {IDiscretValue}
         function GetNumberOfValues: LongInt;
         function GetValueIndex: LongInt;
-        procedure SetValueIndex(const AValueIndex: LongInt);
+        procedure SetValueIndex(const AValueIndex: LongInt); virtual; abstract;
 
         {IUpdatingResults}
         procedure ShowCurJobProgress(Sender: TComponent;
-            MinValue, MaxValue, CurValue: LongInt);
-        procedure ResetCurJobProgress(Sender: TComponent);
-        procedure ShowMessage(Sender: TComponent; Msg: string);
+            MinValue, MaxValue, CurValue: LongInt); virtual; abstract;
+        procedure ResetCurJobProgress(Sender: TComponent); virtual; abstract;
+        procedure ShowMessage(Sender: TComponent; Msg: string); virtual; abstract;
         procedure UpdatingResults(Sender: TComponent);
 
         constructor Create(AOwner: TComponent); override;
@@ -147,29 +147,6 @@ function TDownhillSimplexMinimizer.GetValueIndex: LongInt;
 begin
     Result := 0;
 end;
-
-{$hints off}
-procedure TDownhillSimplexMinimizer.SetValueIndex(const AValueIndex: LongInt);
-begin
-    raise Exception.Create('Method not implemented.');
-end;
-
-procedure TDownhillSimplexMinimizer.ShowCurJobProgress(Sender: TComponent;
-    MinValue, MaxValue, CurValue: LongInt);
-begin
-    raise Exception.Create('Method not implemented.');
-end;
-
-procedure TDownhillSimplexMinimizer.ResetCurJobProgress(Sender: TComponent);
-begin
-    raise Exception.Create('Method not implemented.');
-end;
-
-procedure TDownhillSimplexMinimizer.ShowMessage(Sender: TComponent; Msg: string);
-begin
-    raise Exception.Create('Method not implemented.');
-end;
-{$hints on}
 
 procedure TDownhillSimplexMinimizer.UpdatingResults(Sender: TComponent);
 begin

@@ -43,7 +43,7 @@ type
         procedure SetItem(index: Integer; Item: TComponent);
         procedure SetCapacity(ACapacity: Integer);
         //  устанавливает связи со вставляемыми компонентами, если необходимо
-        procedure LinkItemWithList(const Item: TComponent); virtual;
+        procedure LinkItemWithList(const Item: TComponent); virtual; abstract;
 
         function GetSelfCheckingMode: LongInt; virtual; abstract;
         procedure SetSelfCheckingMode(const AMode: LongInt); virtual; abstract;
@@ -264,10 +264,6 @@ begin
             except Items[i] := nil end;
     end;
     Clear;
-end;
-
-procedure TComponentList.LinkItemWithList(const Item: TComponent);
-begin
 end;
 
 procedure TComponentList.IsReady;

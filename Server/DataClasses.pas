@@ -222,25 +222,21 @@ begin
 end;
 
 function TSpecimenList.ValueToString(const ACol, ARow: Integer): string;
-var TN: Curve_parameters;
+var CurveParameters: Curve_parameters;
 begin
     CheckColIndex(ACol);
     CheckRowIndex(ARow);
 
     if ARow <= GetFixedRows - 1 then
     begin
-		//	Column headers are filled.
-        if ARow > 0 then Result := ''
-        else
-        begin
-        
-        end;
+        { Column headers are filled. }
+        if ARow > 0 then Result := '';
         Exit;
     end;
 
     if (ACol <= GetFixedCols - 1) and (ARow > GetFixedRows - 1) then
     begin
-		//	Fixed row cells are filled by sequential numbers.
+        { Fixed row cells are filled by sequential numbers. }
         if ACol > 0 then Result := ''
         else Result := IntToStr(ARow - (GetFixedRows - 1));
         Exit;
@@ -248,24 +244,23 @@ begin
 
     if (ACol > GetFixedCols - 1) and (ARow > GetFixedRows - 1) then
     begin
-		//	Information area of the table is filled.
+        { Information area of the table is filled. }
         if Count <> 0 then
-			//	If the list is empty then the method must return empty string
-			//	to allow the grid filling empty row for which there isn't real
-			//	data object in the list.
         begin
-            (* ???
-            TN := Curve_parameters(Items[ARow - GetFixedRows]);
-            with TN do case ACol - GetFixedCols of
-                0 : Result := FloatToStrF(Intensity, ffGeneral, 8, 4);
-                1 : Result := FloatToStrF(StartPos, ffGeneral, 6, 4);
-                2 : Result := FloatToStrF(PeakPos, ffGeneral, 6, 4);
-                3 : Result := FloatToStrF(FinishPos, ffGeneral, 6, 4);
-                4 : Result := FloatToStrF(IntCorrFactor, ffGeneral, 6, 4);
-                5 : Result := FloatToStrF(Sigma, ffGeneral, 6, 4);
-            end;
-            *)
-        end else    //  stroki, ekvivalentnye znacheniyam "po umolchaniyu"
+            CurveParameters := Curve_parameters(Items[ARow - GetFixedRows]);
+            with CurveParameters do
+                case ACol - GetFixedCols of
+                    0 : Result := FloatToStrF(GetParamValueByName('Intensity'), ffGeneral, 8, 4);
+                    1 : Result := FloatToStrF(GetParamValueByName('StartPos'), ffGeneral, 6, 4);
+                    2 : Result := FloatToStrF(GetParamValueByName('PeakPos'), ffGeneral, 6, 4);
+                    3 : Result := FloatToStrF(GetParamValueByName('FinishPos'), ffGeneral, 6, 4);
+                    4 : Result := FloatToStrF(GetParamValueByName('IntCorrFactor'), ffGeneral, 6, 4);
+                    5 : Result := FloatToStrF(GetParamValueByName('Sigma'), ffGeneral, 6, 4);
+                end;
+        end else
+            { If the list is empty then the method must return empty string
+              to allow the grid filling empty row for which there isn't real
+              data object in the list. }
             case ACol - GetFixedCols of
                 0, 1, 2, 3, 5 : Result := '0';
                 4 : Result := '1';

@@ -215,11 +215,13 @@ begin
     inherited Destroy;
 end;
 
+{$hints off}
 procedure Settings_v1.DefineProperties(Filer: TFiler);
 begin
     //  !!! ne rabotaet s XML-potokami !!!
     //Filer.DefineProperty('Curve types', ReadCurveTypes, WriteCurveTypes, True);
 end;
+{$hints on}
 
 procedure Settings_v1.ReadCurveTypes(Reader: TReader);
 begin

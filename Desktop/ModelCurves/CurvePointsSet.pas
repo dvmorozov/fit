@@ -80,6 +80,7 @@ type
         destructor Destroy; override;
 
         procedure CopyParameters(const Dest: TObject); override;
+        function GetParamValueByName(ParamName: string): double;
 
     published
         { Published for XML-serialization. }
@@ -673,6 +674,21 @@ begin
         P.CopyTo(New);
     end;
     Curve_parameters(Dest).SavedInitHash := SavedInitHash;
+end;
+
+function Curve_parameters.GetParamValueByName(ParamName: string): double;
+var i: Integer;
+    P: TSpecialCurveParameter;
+begin
+    for i := 0 to Params.Count - 1 do
+    begin
+        P := TSpecialCurveParameter(Params.Items[i]);
+        if P.Name = ParamName then
+        begin
+            Result := P.Value;
+            break;
+        end;
+    end;
 end;
 
 end.

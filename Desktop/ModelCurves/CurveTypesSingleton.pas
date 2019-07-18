@@ -50,7 +50,7 @@ type
         class function Create: TCurveTypesSingleton;
         procedure RegisterCurveType(CurveClass: TCurveClass);
         { Implementation of ICurveFactory. }
-        function CreatePointsSet(TypeId: TCurveTypeId): TNamedPointsSet;
+        function CreatePointsSet(TypeId: TCurveTypeId): TNamedPointsSet; virtual; abstract;
         { Implementation of ICurveTypeIterator. }
         procedure FirstCurveType;
         procedure NextCurveType;
@@ -84,11 +84,6 @@ begin
     if FCurveTypesSingleton = nil then
       FCurveTypesSingleton := TCurveTypesSingleton.Init;
     Result := FCurveTypesSingleton;
-end;
-
-function TCurveTypesSingleton.CreatePointsSet(TypeId: TCurveTypeId): TNamedPointsSet;
-begin
-    raise ENotImplemented.Create('TCurveTypesSingleton.CreatePointsSet not implemented.');
 end;
 
 function SortAlphabetically(Item1, Item2: Pointer): Integer;

@@ -19,7 +19,6 @@ uses SysUtils, PointsSet, CurvePointsSet, NamedPointsSet,
   CurveTypesSingleton, IntPointsSet, ConfigurablePointsSet;
 
 type
-    PDouble = ^Double;
     (*
     function ParseAndCalcExpression(Expr: LPCSTR; ParamList: LPCSTR;
         Result: PDouble): LongInt; cdecl;

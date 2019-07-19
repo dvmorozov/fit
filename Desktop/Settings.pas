@@ -20,7 +20,7 @@ interface
 
 uses
     Classes, SysUtils, LCLProc, Laz_XMLStreaming, Laz_DOM, Laz_XMLCfg, TypInfo,
-    PointsSet, CurvePointsSet, SelfCheckedComponentList;
+    CurvePointsSet, SelfCheckedComponentList;
 
 type
     { Contains and serializes attributes of mathematical expression. }
@@ -253,10 +253,12 @@ begin
     FParameters.Free; FParameters := AParameters;
 end;
 
+{$hints off}
 procedure Curve_type.DefineProperties(Filer: TFiler);
 begin
     //Filer.DefineProperty('Params', ReadParams, WriteParams, True);
 end;
+{$hints on}
 
 procedure Curve_type.ReadParams(Reader: TReader);
 begin

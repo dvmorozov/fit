@@ -88,7 +88,7 @@ type
             const Writer: TWriter;
             const AnObject: TSelfSavedComponent
                 //  объект, свойства которого нужно записать
-            ); virtual;
+            ); virtual; abstract;
 
     public
         procedure DefineProperties(Filer: TFiler); override;
@@ -163,13 +163,6 @@ begin
         (*end;*)
         CurClassType := TSelfSavedComponents(CurClassType.ClassParent);
     until CurClassType = TSelfSavedComponent.ClassParent;
-end;
-
-class procedure TSelfSavedComponent.WriteProperties(
-    const Writer: TWriter;
-    const AnObject: TSelfSavedComponent
-    );
-begin
 end;
 
 class procedure TSelfSavedComponent.WritePropHeader(const Writer: TWriter);

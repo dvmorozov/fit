@@ -535,11 +535,13 @@ begin
     end;
 end;
 
+{$hints off}
 procedure TFitTask.SetStep(NewStepValue: Double);
 var Dummy: LongInt;
 begin
     Dummy := 0;
 end;
+{$hints on}
 
 procedure TFitTask.SetNextParam;
 var GP: TCurvePointsSet;

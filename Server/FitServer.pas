@@ -17,7 +17,6 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 
 unit FitServer;
 
-//{$mode objfpc}{$H+}
 {$MODE Delphi}
 
 interface
@@ -36,7 +35,7 @@ uses Classes, TitlePointsSet, SelfCheckedComponentList, SysUtils, MSCRDataClasse
 {$ENDIF}
      SelfCopied, MyExceptions, FitTask, SimpMath,
      MainCalcThread, CommonTypes, IntClientCallback, int_fit_service,
-     CBRCComponent;
+     CBRCComponent, Windows;
 
 type
         { In varying gaussian parameters now amplitude and position are varied,
@@ -446,6 +445,11 @@ const
 implementation
 
 uses Main;
+
+function ParseAndCalcExpression(Expr: LPCSTR; ParamList: LPCSTR;
+    Result: PDouble): LongInt; cdecl; external 'MathExpr' name 'ParseAndCalcExpression';
+function GetSymbols: LPCSTR; cdecl; external 'MathExpr' name 'GetSymbols';
+procedure FreeSymbols(Symbols: LPCSTR); cdecl; external 'MathExpr' name 'FreeSymbols';
 
 {================================= TFitServer =================================}
 function TFitServer.SetProfilePointsSet(APointsSet: TTitlePointsSet): string;
@@ -2529,13 +2533,11 @@ end;
 procedure TFitServer.CreateParameters(ACurveExpr: string);
 var Result: LongInt;
     ExprResult: Double;
-    (* ??? peredelat' bez ispol'zovaniya
+    { TODO: remake without using LPCSTR. }
     Symbols, Saved: LPCSTR;
-    *)
     P: TSpecialCurveParameter;
     Index: LongInt;
 begin
-(*  ???
     Assert(Assigned(Params));
     Assert(Assigned(Params.Params));
 
@@ -2592,7 +2594,6 @@ begin
         //  sdelano soobschenie
         raise EUserException.Create('Inadmissible or invalid expression.');
     end;
-    *)
 end;
 
 // !!! povtornyy vyzov dlya dannyh koordinat udalyaet tochku iz spiska !!!

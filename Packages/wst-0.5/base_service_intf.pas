@@ -13,6 +13,11 @@
 {$INCLUDE wst_global.inc}
 unit base_service_intf;
 
+{ Because the module is from another author, messages are suppressed. }
+{$warnings off}
+{$hints off}
+{$notes off}
+
 interface
 
 uses

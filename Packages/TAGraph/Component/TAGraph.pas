@@ -5,6 +5,11 @@ unit TAGraph;
 {$MODE DELPHI}{$H+}
 {$ENDIF}
 
+{ Because the module is from another author, messages are suppressed. }
+{$warnings off}
+{$hints off}
+{$notes off}
+
 { Copyright (C) 2005 by Philippe Martinole  <philippe.martinole@teleauto.org>
 
   This library is free software; you can redistribute it and/or modify it

@@ -14,6 +14,11 @@
 {$RANGECHECKS OFF}
 unit binary_streamer;
 
+{ Because the module is from another author, messages are suppressed. }
+{$warnings off}
+{$hints off}
+{$notes off}
+
 interface
 
 uses

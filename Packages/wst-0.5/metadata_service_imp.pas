@@ -11,6 +11,12 @@ Interface
 
 Uses SysUtils, Classes, 
      base_service_intf, server_service_intf, server_service_imputils, metadata_service;
+     
+{ Because the module is from another author, messages are suppressed. }
+{$warnings off}
+{$hints off}
+{$notes off}
+
 
 {$INCLUDE wst.inc}
 {$INCLUDE wst_delphi.inc}

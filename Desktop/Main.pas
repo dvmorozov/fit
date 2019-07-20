@@ -41,7 +41,7 @@ uses SysUtils, Forms
         , int_fit_service
     {$ENDIF}
     {$IFDEF FITCGI}
-        , int_fit_service, DataLoader, PointsSet, NamedPointsSet
+        , int_fit_service
     {$ENDIF}
 {$ENDIF}
     ;
@@ -139,7 +139,9 @@ end;
 
 function GetUserDir: string;
 {$IFDEF WINDOWS}
-var Path: array[0..MAX_PATH] of Char;
+    {$IFNDEF FITCGI}
+        var Path: array[0..MAX_PATH] of Char;
+    {$ENDIF}
 {$ENDIF}
 begin
 {$IFDEF WINDOWS}

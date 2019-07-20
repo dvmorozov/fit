@@ -15,7 +15,7 @@
       <AutoIncrementBuild Value="True"/>
       <CurrentVersionNr Value="1"/>
       <CurrentMajorRevNr Value="1"/>
-      <CurrentBuildNr Value="2"/>
+      <CurrentBuildNr Value="6"/>
       <ProjectVersion Value="0.0.0.0"/>
       <FileDescription Value="CGI-client application."/>
       <LegalCopyright Value="Dmitry Morozov"/>
@@ -46,7 +46,7 @@
         <PackageName Value="CGILaz"/>
       </Item3>
     </RequiredPackages>
-    <Units Count="58">
+    <Units Count="61">
       <Unit0>
         <Filename Value="CgiFit.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -402,7 +402,7 @@
         <UnitName Value="evaluation"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="31"/>
+        <EditorIndex Value="34"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit39>
@@ -447,8 +447,8 @@
         <Filename Value="..\Desktop\Main.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Main"/>
-        <CursorPos X="21" Y="245"/>
-        <TopLine Value="231"/>
+        <CursorPos X="9" Y="44"/>
+        <TopLine Value="26"/>
         <EditorIndex Value="26"/>
         <UsageCount Value="224"/>
         <Loaded Value="True"/>
@@ -473,8 +473,8 @@
       <Unit48>
         <Filename Value="..\..\..\lazarus-0.9.24\fpc\2.2.0\source\packages\fcl-base\src\inc\custapp.pp"/>
         <UnitName Value="CustApp"/>
-        <CursorPos X="32" Y="313"/>
-        <TopLine Value="295"/>
+        <CursorPos X="6" Y="97"/>
+        <TopLine Value="1"/>
         <EditorIndex Value="30"/>
         <UsageCount Value="109"/>
         <Loaded Value="True"/>
@@ -536,7 +536,7 @@
         <UnitName Value="FitClient"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="32"/>
+        <EditorIndex Value="35"/>
         <UsageCount Value="100"/>
         <Loaded Value="True"/>
       </Unit55>
@@ -556,8 +556,76 @@
         <TopLine Value="1"/>
         <UsageCount Value="40"/>
       </Unit57>
+      <Unit58>
+        <Filename Value="..\Desktop\ModelCurves\PseudoVoigtPointsSet.pas"/>
+        <UnitName Value="PseudoVoigtPointsSet"/>
+        <CursorPos X="1" Y="178"/>
+        <TopLine Value="160"/>
+        <EditorIndex Value="31"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit58>
+      <Unit59>
+        <Filename Value="..\..\..\lazarus-0.9.24\fpc\2.2.0\source\packages\fcl-base\src\inc\avl_tree.pp"/>
+        <UnitName Value="AVL_Tree"/>
+        <CursorPos X="22" Y="965"/>
+        <TopLine Value="947"/>
+        <EditorIndex Value="32"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit59>
+      <Unit60>
+        <Filename Value="..\..\fitgrids-0.9.24\NumericGrid.pas"/>
+        <UnitName Value="NumericGrid"/>
+        <CursorPos X="46" Y="1150"/>
+        <TopLine Value="1133"/>
+        <EditorIndex Value="33"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit60>
     </Units>
-    <JumpHistory Count="0" HistoryIndex="-1"/>
+    <JumpHistory Count="10" HistoryIndex="9">
+      <Position1>
+        <Filename Value="..\..\..\lazarus-0.9.24\fpc\2.2.0\source\packages\fcl-base\src\inc\custapp.pp"/>
+        <Caret Line="313" Column="32" TopLine="295"/>
+      </Position1>
+      <Position2>
+        <Filename Value="..\Desktop\ModelCurves\PseudoVoigtPointsSet.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
+      </Position2>
+      <Position3>
+        <Filename Value="..\Desktop\ModelCurves\PseudoVoigtPointsSet.pas"/>
+        <Caret Line="154" Column="1" TopLine="136"/>
+      </Position3>
+      <Position4>
+        <Filename Value="..\..\..\lazarus-0.9.24\fpc\2.2.0\source\packages\fcl-base\src\inc\avl_tree.pp"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
+      </Position4>
+      <Position5>
+        <Filename Value="..\..\..\lazarus-0.9.24\fpc\2.2.0\source\packages\fcl-base\src\inc\avl_tree.pp"/>
+        <Caret Line="965" Column="22" TopLine="1"/>
+      </Position5>
+      <Position6>
+        <Filename Value="..\..\fitgrids-0.9.24\NumericGrid.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
+      </Position6>
+      <Position7>
+        <Filename Value="..\Desktop\Main.pas"/>
+        <Caret Line="47" Column="5" TopLine="29"/>
+      </Position7>
+      <Position8>
+        <Filename Value="..\Desktop\Main.pas"/>
+        <Caret Line="145" Column="13" TopLine="124"/>
+      </Position8>
+      <Position9>
+        <Filename Value="..\Desktop\Main.pas"/>
+        <Caret Line="41" Column="48" TopLine="1"/>
+      </Position9>
+      <Position10>
+        <Filename Value="..\Desktop\Main.pas"/>
+        <Caret Line="44" Column="26" TopLine="26"/>
+      </Position10>
+    </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
     <Version Value="5"/>

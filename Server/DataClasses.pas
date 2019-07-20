@@ -276,56 +276,53 @@ begin
     if (ACol > GetFixedCols - 1) and (ARow > GetFixedRows - 1) then
     begin
         Result := True;
-        //  case ACol - GetFixedCols of
-            //  0, 1, 2, 3, 4 :
-                try StrToFloat(AString) except Result := False; Exit end;
-        //  end;
+        try
+           StrToFloat(AString)
+        except
+           Result := False;
+           Exit
+        end;
     end else Result := True;
 end;
 
 procedure TSpecimenList.SetValueByDefault(const ACol, ARow: Integer);
-var TN: Curve_parameters;
+var CurveParameters: Curve_parameters;
 begin
     if (ACol > GetFixedCols - 1) and (ARow > GetFixedRows - 1) then
         if Count <> 0 then
-			//	If the list is empty then the method must return empty string
-			//	to allow the grid filling empty row for which there isn't real
-			//	data object in the list.
         begin
-            TN := Curve_parameters(Items[ARow - GetFixedRows]);
-            (* ???
-            with TN do case ACol - GetFixedCols of
-                0 : Intensity := 0;
-                1 : StartPos := 0;
-                2 : PeakPos := 0;
-                3 : FinishPos := 0;
-                4 : IntCorrFactor := 1;
-                5 : Sigma := 1;
+            CurveParameters := Curve_parameters(Items[ARow - GetFixedRows]);
+            with CurveParameters do
+            case ACol - GetFixedCols of
+                0 : SetParamValueByName('Intensity', 0);
+                1 : SetParamValueByName('StartPos', 0);
+                2 : SetParamValueByName('PeakPos', 0);
+                3 : SetParamValueByName('FinishPos', 0);
+                4 : SetParamValueByName('IntCorrFactor', 1);
+                5 : SetParamValueByName('Sigma', 1);
             end;
-            *)
         end;
 end;
 
 procedure TSpecimenList.StringToValue(const ACol, ARow: Integer;
     const AString: string);
-var TN: Curve_parameters;
+var CurveParameters: Curve_parameters;
 begin
     BeforeStringToValue(ACol, ARow, AString);
     if (ACol > GetFixedCols - 1) and (ARow > GetFixedRows - 1) then
     begin
         Assert(IsDataValid(ACol, ARow, AString));
 
-        TN := Curve_parameters(Items[ARow - GetFixedRows]);
-        (* ???
-        with TN do case ACol - GetFixedCols of
-            0 : Intensity := StrToFloat(AString);
-            1 : StartPos := StrToFloat(AString);
-            2 : PeakPos := StrToFloat(AString);
-            3 : FinishPos := StrToFloat(AString);
-            4 : IntCorrFactor := StrToFloat(AString);
-            5 : Sigma := StrToFloat(AString);
+        CurveParameters := Curve_parameters(Items[ARow - GetFixedRows]);
+        with CurveParameters do
+        case ACol - GetFixedCols of
+            0 : SetParamValueByName('Intensity', StrToFloat(AString));
+            1 : SetParamValueByName('StartPos', StrToFloat(AString));
+            2 : SetParamValueByName('PeakPos', StrToFloat(AString));
+            3 : SetParamValueByName('FinishPos', StrToFloat(AString));
+            4 : SetParamValueByName('IntCorrFactor', StrToFloat(AString));
+            5 : SetParamValueByName('Sigma', StrToFloat(AString));
         end;
-        *)
     end;
 end;
 

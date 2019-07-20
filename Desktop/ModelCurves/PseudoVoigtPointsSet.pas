@@ -151,7 +151,6 @@ begin
 end;
 
 function TPseudoVoigtPointsSet.GetParamByName(Name: string): Double;
-var P: TSpecialCurveParameter;
 begin
     if UpperCase(Name) = 'ETA' then Result := Eta
     else Result := inherited;
@@ -176,7 +175,6 @@ begin
 end;
 
 procedure TPseudoVoigtPointsSet.SetParam(Index: LongInt; Value: Double);
-var P: TSpecialCurveParameter;
 begin
     Assert((Index < GetParamCount) and (Index >= 0));
     Modified := True;

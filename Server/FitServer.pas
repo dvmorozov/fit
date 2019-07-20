@@ -1706,6 +1706,7 @@ begin
     {$ENDIF}
 end;
 
+{$hints off}
 procedure TFitServer.ShowCurMin(Min: Double);
 begin
     {$IFDEF FIT}
@@ -1717,6 +1718,7 @@ begin
       end;
     {$ENDIF}
 end;
+{$hints on}
 
 procedure TFitServer.Done;
 begin

@@ -128,22 +128,11 @@ implementation
 { TCreateUserPointsSetDlg }
 
 procedure TCreateUserPointsSetDlg.InsertFunc(FuncName: string);
-var Str: string;
-    Temp: LongInt;
+var Temp: LongInt;
 begin
     with EditExpression do
     begin
-        (* tak rabotaet...
-        SelLength := 0;
-        Str := Text;
-        Temp := SelStart;
-        //  ravenstvo SelStart nulyu oznachaet, chto stroka pustaya
-        Insert(FuncName + '()', Str, Temp + 1);
-        Text := Str;
-        SelStart := Temp + Length(FuncName) + 1;
-        *)
-        //  ...no tak pravil'nee, potomu chto
-        //  vydelennyy tekst zamenyaetsya na novyy
+        { Selected text is replaced by new. }
         Temp := SelStart;
         SelText := FuncName + '()';
         SelStart := Temp + Length(FuncName) + 1;
@@ -151,19 +140,10 @@ begin
 end;
 
 procedure TCreateUserPointsSetDlg.InsertSymbol(Symbol: string);
-var Str: string;
-    Temp: LongInt;
+var Temp: LongInt;
 begin
     with EditExpression do
     begin
-        (*
-        SelLength := 0;
-        Str := Text;
-        Temp := SelStart;
-        Insert(Symbol, Str, Temp + 1);
-        Text := Str;
-        SelStart := Temp + Length(Symbol);
-        *)
         Temp := SelStart;
         SelText := Symbol;
         SelStart := Temp + Length(Symbol);

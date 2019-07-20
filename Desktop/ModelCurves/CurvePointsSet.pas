@@ -81,6 +81,7 @@ type
 
         procedure CopyParameters(const Dest: TObject); override;
         function GetParamValueByName(ParamName: string): double;
+        procedure SetParamValueByName(ParamName: string; AValue: double);
 
     published
         { Published for XML-serialization. }
@@ -691,4 +692,20 @@ begin
     end;
 end;
 
+procedure Curve_parameters.SetParamValueByName(ParamName: string; AValue: double);
+var i: Integer;
+    P: TSpecialCurveParameter;
+begin
+    for i := 0 to Params.Count - 1 do
+    begin
+        P := TSpecialCurveParameter(Params.Items[i]);
+        if P.Name = ParamName then
+        begin
+            P.Value := AValue;
+            break;
+        end;
+    end;
+end;
+
+begin
 end.

@@ -1699,6 +1699,7 @@ begin
     //Optimization;
 end;
 
+{$hints off}
 procedure TFitTask.Optimization;
 var ErrorCode: LongInt;
 begin
@@ -1712,6 +1713,7 @@ begin
 
     Minimizer.Free; Minimizer := nil;
 end;
+{$hints on}
 
 procedure TFitTask.FindGausses;
 //var    i: LongInt;

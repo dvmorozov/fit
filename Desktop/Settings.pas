@@ -13,7 +13,6 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit Settings;
 
-//{$mode objfpc}{$H+}
 {$MODE Delphi}
 
 interface

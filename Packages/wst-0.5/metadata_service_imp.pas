@@ -17,7 +17,6 @@ Uses SysUtils, Classes,
 {$hints off}
 {$notes off}
 
-
 {$INCLUDE wst.inc}
 {$INCLUDE wst_delphi.inc}
 

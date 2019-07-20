@@ -17,6 +17,11 @@ unit config_objects;
 interface
 uses SysUtils, Classes, base_service_intf;
 
+{ Because the module is from another author, messages are suppressed. }
+{$warnings off}
+{$hints off}
+{$notes off}
+
 {$INCLUDE wst.inc}
 {$INCLUDE wst_delphi.inc}
 

@@ -17,7 +17,11 @@ interface
 
 uses
     Classes, SysUtils, IntPointsSet, CommonTypes, PointsSet, TitlePointsSet,
-    CurvePointsSet, MSCRDataClasses, SelfCopied;
+    MSCRDataClasses, SelfCopied
+{$IFNDEF EXCLUDE_SOMETHING}
+    , CurvePointsSet
+{$ENDIF}
+    ;
 
 type
     { Defines base interface of communication from client to server. }

@@ -323,10 +323,8 @@ end;
 //  ustanavlivaet ukazateli na parametry s predopredelennoy semantikoy
 procedure T2BranchesPseudoVoigtPointsSet.SetSpecParamPtr(
     P: TSpecialCurveParameter);
-var Name: string;
 begin
     Assert(Assigned(P));
-    Name := P.Name;
     if UpperCase(P.Name) = 'ETA' then
         EtaP := P
     else
@@ -345,10 +343,8 @@ end;
 //  ustanavlivaet indeksy var'iruemyh parametrov s predopredelennoy semantikoy
 procedure T2BranchesPseudoVoigtPointsSet.SetSpecParamVarIndex(
     P: TSpecialCurveParameter; Index: LongInt);
-var Name: string;
 begin
     Assert(Assigned(P));
-    Name := P.Name;
     if UpperCase(P.Name) = 'ETA' then
         EtaIndex := Index
     else

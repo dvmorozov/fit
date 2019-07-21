@@ -133,7 +133,6 @@ begin
 end;
 
 procedure TAsymPseudoVoigtPointsSet.SetParamByName(Name: string; Value: Double);
-var P: TSpecialCurveParameter;
 {$IFDEF WRITE_PARAMS_LOG}
     LogStr: string;
 {$ENDIF}
@@ -159,7 +158,6 @@ begin
 end;
 
 procedure TAsymPseudoVoigtPointsSet.SetParam(Index: LongInt; Value: Double);
-var P: TSpecialCurveParameter;
 begin
     Assert((Index < GetParamCount) and (Index >= 0));
     Modified := True;

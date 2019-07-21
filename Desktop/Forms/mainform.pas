@@ -1655,6 +1655,7 @@ begin
     end;
 end;
 
+{$hints off}
 procedure TFormMain.ChartMouseUp(Sender: TOBject; Button: TMouseButton;
     Shift: TShiftState; X, Y: Integer);
 begin
@@ -1662,6 +1663,7 @@ begin
     UpX := X; UpY := Y;
     OnChartClick;
 end;
+{$hints on}
 
 procedure TFormMain.TabSheetDatasheetShow(Sender: TObject);
 begin
@@ -1781,6 +1783,7 @@ begin
     //TimerBalloonHide.Enabled := True;
 end;
 
+{$hints off}
 procedure TFormMain.Chart1MouseMove(Sender: TObject; Shift: TShiftState; X,
   Y: Integer);
 //var i: LongInt;
@@ -1791,6 +1794,7 @@ begin
     //   begin Screen.Cursor := crCross; Quit end;
     Screen.Cursor := crArrow;
 end;
+{$hints on}
 
 procedure TFormMain.CheckListBoxLegendKeyPress(Sender: TObject; var Key: Char);
 begin
@@ -1830,6 +1834,7 @@ begin
     CheckListBoxChanged;
 end;
 
+{$warnings off}
 procedure TFormMain.SinThetaLambdaClick(Sender: TObject);
 var SaveDecimalSeparator: Char;
 begin
@@ -1874,6 +1879,7 @@ begin
         SinThetaLambda2.Checked := True;
     end;
 end;
+{$warnings on}
 
 procedure TFormMain.ThetaClick(Sender: TObject);
 begin
@@ -1916,64 +1922,61 @@ label DoItAgain;
 begin
     Result := True;
     
-    with SaveDialog1 do
-    begin
 DoItAgain:
-        if Execute then
+    if SaveDialog1.Execute then
+    begin
+        FileName := SaveDialog1.FileName;
+        if FileName <> '' then
         begin
-            FileName := SaveDialog1.FileName;
-            if FileName <> '' then
+            SaveDialog1.InitialDir := ExtractFilePath(FileName);
+            if ExtractFileExt(FileName) = '' then
+                FileName := FileName + '.txt';
+
+            if FileExists(FileName) then
             begin
-                SaveDialog1.InitialDir := ExtractFilePath(FileName);
-                if ExtractFileExt(FileName) = '' then
-                    FileName := FileName + '.txt';
-                    
-                if FileExists(FileName) then
+                DlgResult := MessageDlg('File ' +
+                    ExtractFileName(FileName) + ' exists.' +
+                    #13#10 + 'Overwrite?', mtConfirmation,
+                    mbYesNoCancel, 0
+                    );
+                if DlgResult = mrCancel then
                 begin
-                    DlgResult := MessageDlg('File ' +
-                        ExtractFileName(FileName) + ' exists.' +
-                        #13#10 + 'Overwrite?', mtConfirmation,
-                        mbYesNoCancel, 0
-                        );
-                    if DlgResult = mrCancel then
-                    begin
-                        Result := False;
-                        Exit;
-                    end;
-                    if DlgResult = mrNo then goto DoItAgain;
+                    Result := False;
+                    Exit;
                 end;
-                    
-                AssignFile(F, FileName);
-                Rewrite(F);
-                
-                try
-                    with GridData do
-                    begin
-                        //  zagolovki pishutsya pryamo iz tablitsy
-                        for i := 0 to RowCount - 1 do
-                        begin
-                            St := '';
-                            for j := 0 to ColCount - 1 do
-                                if j <> ColCount - 1 then
-                                    St := St + Cells[j, i] + #9
-                                else St := St + Cells[j, i];
-                            WriteLn(F, St);
-                        end;{for i := FixedRows to RowCount - 1 do...}
-                    end;
-                finally
-                    CloseFile(F);
-                end;
-            end
-            else
-            begin
-                DlgResult := MessageDlg(
-                    'File name must not be empty.' + #13#10 +
-                    'Select file again?', mtError, mbYesNo, 0);
-                if DlgResult = mrYes then goto DoItAgain
-                else Result := False;
+                if DlgResult = mrNo then goto DoItAgain;
             end;
-        end else Result := False;
-    end;
+
+            AssignFile(F, FileName);
+            Rewrite(F);
+
+            try
+                with GridData do
+                begin
+                    //  zagolovki pishutsya pryamo iz tablitsy
+                    for i := 0 to RowCount - 1 do
+                    begin
+                        St := '';
+                        for j := 0 to ColCount - 1 do
+                            if j <> ColCount - 1 then
+                                St := St + Cells[j, i] + #9
+                            else St := St + Cells[j, i];
+                        WriteLn(F, St);
+                    end;{for i := FixedRows to RowCount - 1 do...}
+                end;
+            finally
+                CloseFile(F);
+            end;
+        end
+        else
+        begin
+            DlgResult := MessageDlg(
+                'File name must not be empty.' + #13#10 +
+                'Select file again?', mtError, mbYesNo, 0);
+            if DlgResult = mrYes then goto DoItAgain
+            else Result := False;
+        end;
+    end else Result := False;
 end;
 
 //  sohranenie tabl. parametrov krivyh kak XML fayla
@@ -2413,6 +2416,7 @@ begin
         ShowRFactor;
 end;
 
+{$hints off}
 procedure TFormMain.OnFindComponentClass(Reader: TReader;
     const ClassName: string; var ComponentClass: TComponentClass);
 begin
@@ -2423,6 +2427,7 @@ begin
         ComponentClass := Curve_type
     else ComponentClass := nil;
 end;
+{$hints on}
 
 //  poluchenie imeni konfiguratsionnogo fayla
 function TFormMain.GetConfigFileName: string;
@@ -2524,12 +2529,11 @@ begin
 end;
 
 procedure TFormMain.AddCurveMenuItems;
-    //  vozvraschaet True, esli elementy dobavleny
+    { True is returned if menu items were added. }
     function ItemsAdd(ParentMenu: TMenuItem;
         var ItemCount: LongInt; OnClick: TNotifyEvent): Boolean;
     var i: LongInt;
         ct: Curve_type;
-        mi: TMenuItem;
     begin
         Result := False;
         for i := 0 to Settings.Curve_types.Count - 1 do
@@ -2544,22 +2548,23 @@ procedure TFormMain.AddCurveMenuItems;
         ItemCount := i;
     end;
 
-var i: LongInt;
+var ItemCount: LongInt;
     mi: TMenuItem;
 begin
-    if ItemsAdd(SelCurveType, i, OnSpecialCurveClick) then
+    ItemCount := 0;
+    if ItemsAdd(SelCurveType, ItemCount, OnSpecialCurveClick) then
     begin
-        //  vstavlyaetsya razdelitel'
+        { Separator is created. }
         mi := TMenuItem.Create(SelCurveType);
-        mi.Caption := ' ';//'-';
+        mi.Caption := ' ';
         mi.Enabled := False;
-        SelCurveType.Insert(i + 1, mi);
-        //  sozdaetsya menyu dlya udaleniya pol'zovatel'skih krivyh
+        SelCurveType.Insert(ItemCount + 1, mi);
+        { Menu is created for deleting user curve types. }
         mi := TMenuItem.Create(SelCurveType);
         mi.Caption := MenuDelCustCapt;
         SelCurveType.Add(mi);
-        //  sozaetsya podmenyu udaleniya
-        ItemsAdd(mi, i, OnDeleteSpecialCurveClick);
+        { Submenu for deleting item is created. }
+        ItemsAdd(mi, ItemCount, OnDeleteSpecialCurveClick);
     end;
 end;
 

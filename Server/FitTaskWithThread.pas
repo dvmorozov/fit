@@ -29,6 +29,7 @@ type
         procedure RecreateMainCalcThread(
             ACurrentTask: TCurrentTask; ADoneProc: TDoneProc);
 
+     public
         procedure ShowCurMin; override;
         function GetCurMinInitialized: Boolean; override;
         procedure DoneProc; override;

@@ -16,7 +16,7 @@
       <AutoIncrementBuild Value="True"/>
       <CurrentVersionNr Value="1"/>
       <CurrentMajorRevNr Value="1"/>
-      <CurrentBuildNr Value="106"/>
+      <CurrentBuildNr Value="107"/>
       <ProjectVersion Value="1.1.0.1"/>
       <FileDescription Value="Server application."/>
       <LegalCopyright Value="Dmitry Morozov"/>
@@ -198,7 +198,7 @@
         <CursorPos X="34" Y="91"/>
         <TopLine Value="70"/>
         <EditorIndex Value="10"/>
-        <UsageCount Value="73"/>
+        <UsageCount Value="75"/>
         <Loaded Value="True"/>
       </Unit15>
       <Unit16>
@@ -736,7 +736,7 @@
         <CursorPos X="9" Y="47"/>
         <TopLine Value="29"/>
         <EditorIndex Value="42"/>
-        <UsageCount Value="92"/>
+        <UsageCount Value="94"/>
         <Loaded Value="True"/>
       </Unit79>
       <Unit80>
@@ -836,7 +836,7 @@
         <CursorPos X="16" Y="20"/>
         <TopLine Value="1"/>
         <EditorIndex Value="18"/>
-        <UsageCount Value="70"/>
+        <UsageCount Value="74"/>
         <Loaded Value="True"/>
       </Unit91>
       <Unit92>
@@ -845,7 +845,7 @@
         <CursorPos X="42" Y="1282"/>
         <TopLine Value="1264"/>
         <EditorIndex Value="19"/>
-        <UsageCount Value="35"/>
+        <UsageCount Value="37"/>
         <Loaded Value="True"/>
       </Unit92>
       <Unit93>
@@ -854,7 +854,7 @@
         <CursorPos X="1" Y="12"/>
         <TopLine Value="1"/>
         <EditorIndex Value="21"/>
-        <UsageCount Value="35"/>
+        <UsageCount Value="37"/>
         <Loaded Value="True"/>
       </Unit93>
       <Unit94>
@@ -863,7 +863,7 @@
         <CursorPos X="37" Y="271"/>
         <TopLine Value="250"/>
         <EditorIndex Value="4"/>
-        <UsageCount Value="35"/>
+        <UsageCount Value="37"/>
         <Loaded Value="True"/>
       </Unit94>
       <Unit95>
@@ -872,7 +872,7 @@
         <CursorPos X="1" Y="269"/>
         <TopLine Value="251"/>
         <EditorIndex Value="17"/>
-        <UsageCount Value="23"/>
+        <UsageCount Value="25"/>
         <Loaded Value="True"/>
       </Unit95>
       <Unit96>
@@ -881,7 +881,7 @@
         <CursorPos X="30" Y="557"/>
         <TopLine Value="540"/>
         <EditorIndex Value="38"/>
-        <UsageCount Value="22"/>
+        <UsageCount Value="24"/>
         <Loaded Value="True"/>
       </Unit96>
       <Unit97>
@@ -890,7 +890,7 @@
         <CursorPos X="65" Y="526"/>
         <TopLine Value="508"/>
         <EditorIndex Value="47"/>
-        <UsageCount Value="22"/>
+        <UsageCount Value="24"/>
         <Loaded Value="True"/>
       </Unit97>
       <Unit98>
@@ -899,7 +899,7 @@
         <CursorPos X="1" Y="22"/>
         <TopLine Value="4"/>
         <EditorIndex Value="43"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="22"/>
         <Loaded Value="True"/>
       </Unit98>
       <Unit99>
@@ -908,7 +908,7 @@
         <CursorPos X="38" Y="443"/>
         <TopLine Value="425"/>
         <EditorIndex Value="44"/>
-        <UsageCount Value="19"/>
+        <UsageCount Value="21"/>
         <Loaded Value="True"/>
       </Unit99>
       <Unit100>
@@ -917,7 +917,7 @@
         <CursorPos X="1" Y="693"/>
         <TopLine Value="659"/>
         <EditorIndex Value="6"/>
-        <UsageCount Value="13"/>
+        <UsageCount Value="15"/>
         <Loaded Value="True"/>
       </Unit100>
       <Unit101>
@@ -926,7 +926,7 @@
         <CursorPos X="1" Y="61"/>
         <TopLine Value="41"/>
         <EditorIndex Value="20"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="13"/>
         <Loaded Value="True"/>
       </Unit101>
       <Unit102>
@@ -935,7 +935,7 @@
         <CursorPos X="1" Y="20"/>
         <TopLine Value="1"/>
         <EditorIndex Value="22"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit102>
       <Unit103>
@@ -944,7 +944,7 @@
         <CursorPos X="1" Y="20"/>
         <TopLine Value="1"/>
         <EditorIndex Value="23"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit103>
       <Unit104>
@@ -953,7 +953,7 @@
         <CursorPos X="1" Y="19"/>
         <TopLine Value="1"/>
         <EditorIndex Value="45"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit104>
       <Unit105>
@@ -962,7 +962,7 @@
         <CursorPos X="1" Y="14"/>
         <TopLine Value="1"/>
         <EditorIndex Value="46"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit105>
       <Unit106>
@@ -971,7 +971,7 @@
         <CursorPos X="1" Y="24"/>
         <TopLine Value="1"/>
         <EditorIndex Value="41"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit106>
       <Unit107>
@@ -980,11 +980,16 @@
         <CursorPos X="5" Y="20"/>
         <TopLine Value="2"/>
         <EditorIndex Value="28"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit107>
     </Units>
-    <JumpHistory Count="0" HistoryIndex="-1"/>
+    <JumpHistory Count="1" HistoryIndex="0">
+      <Position1>
+        <Filename Value="..\Desktop\Settings.pas"/>
+        <Caret Line="68" Column="34" TopLine="50"/>
+      </Position1>
+    </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
     <Version Value="5"/>

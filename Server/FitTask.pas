@@ -1390,7 +1390,8 @@ var i,j,k: LongInt;
     //  koordinaty tochki privyazki sozdavaemogo avtomaticheski
     //  ekz. patterna, kogda pol'zovatel'skie tochki privyazki
     //  ne zadany
-    SpecX, SpecY: Double;
+    //SpecX,
+    SpecY: Double;
 begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
     Assert(Assigned(CurvePositions));

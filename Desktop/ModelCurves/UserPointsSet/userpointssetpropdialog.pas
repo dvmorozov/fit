@@ -132,7 +132,6 @@ begin
 end;
 
 procedure TUserPointsSetPropDlg.CheckListFixedClickCheck(Sender: TObject);
-var P: TSpecialCurveParameter;
 begin
     if CheckListFixed.ItemIndex <> -1 then UpdateCheck
     else ClickCheck := True;

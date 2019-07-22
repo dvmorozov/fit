@@ -16,20 +16,17 @@ unit UserPointsSet;
 interface
 
 uses SysUtils, PointsSet, CurvePointsSet, NamedPointsSet,
-  CurveTypesSingleton, IntPointsSet, ConfigurablePointsSet;
+  CurveTypesSingleton, IntPointsSet, ConfigurablePointsSet, Windows;
+
+function ParseAndCalcExpression(Expr: LPCSTR; ParamList: LPCSTR;
+    Result: PDouble): LongInt; cdecl;
+    external 'MathExpr' name 'ParseAndCalcExpression';
+function GetSymbols: LPCSTR; cdecl;
+    external 'MathExpr' name 'GetSymbols';
+procedure FreeSymbols(Symbols: LPCSTR); cdecl;
+    external 'MathExpr' name 'FreeSymbols';
 
 type
-    (*
-    function ParseAndCalcExpression(Expr: LPCSTR; ParamList: LPCSTR;
-        Result: PDouble): LongInt; cdecl;
-        external 'MathExpr' name 'ParseAndCalcExpression';
-    function GetSymbols: LPCSTR; cdecl;
-        external 'MathExpr' name 'GetSymbols';
-    procedure FreeSymbols(Symbols: LPCSTR); cdecl;
-        external 'MathExpr' name 'FreeSymbols';
-    bez ispol'zovaniya...
-    *)
-
     { Container for points of user curve given as expression. }
     TUserPointsSet = class(TNamedPointsSet)
     protected
@@ -85,26 +82,20 @@ begin
     Assert(Assigned(Params.Params));
     Assert(Assigned(Links));
     Assert(Assigned(ArgP));
-    //  zapolnyaetsya znachenie argumenta;
+    { Sets up value of argument. }
     P := ArgP;
     P.Value := ArgValue;
-    //  sozdaetsya stroka parametrov;
-    //  zdes' ispol'zuyutsya vse parametry
+    { Creates string of parameters. }
     Prs := '';
     for i := 0 to Params.Params.Count - 1 do
     begin
         P := TSpecialCurveParameter(Params.Params.Items[i]);
         Prs := Prs + P.Name + '=' + FloatToStr(P.Value) + Chr(0);
     end;
-    //  !!! ustanovka znacheniy parametrov i vychislenie vyrazheniya
-    //  d. delat'sya atomarnym vyzovom v mnogopotochnoy srede =>
-    //  nel'zya predvaritel'no gotovit' znacheniya parametrov !!!
-    (*
+    Result := 0;
+    { Sets parameter values and calculates expression. }
     if ParseAndCalcExpression(PChar(Expression), PChar(Prs), @Result) <> 1 then
-        //??? mozhet zamenit' na Assert nad rezul'tatom
         raise Exception.Create('Inadmissible or invalid expression');
-
-        bez ispol'zovaniya...*)
 end;
 
 procedure TUserPointsSet.DoCalc(const Intervals: TPointsSet);

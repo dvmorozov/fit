@@ -16,7 +16,7 @@ unit Minimizer_DS;
 interface
 
 uses SysUtils, Minimizer, SelfCheckedComponentList, Classes,
-    DownhillSimplexContainer, Tools, DownhillSimplexAlgorithm;
+    DownhillSimplexContainer, Tools;
 
 type
 	{ Implements downhill simplex algorithm. }

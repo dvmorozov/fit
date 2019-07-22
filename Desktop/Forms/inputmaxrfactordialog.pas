@@ -65,6 +65,7 @@ implementation
 
 //uses Unit6;
 
+{$warnings off}
 //  vypolnyaet podgotovku stroki k preobrazovaniyu v chislo;
 //  esli dazhe posle podgotovki preobrazovat' stroku v chislo
 //  nevozmozhno, to voznikaet isklyuchenie
@@ -100,12 +101,14 @@ begin
         DecimalSeparator := SavedDecimalSeparator;
     end;
 end;
+{$warnings on}
 
 {$ifdef windows}
 //  pri isp. PostMessage d.b. global'noy, t.k.
 //  struktura obrabatyvaetsya vne tela protsedury
 var EBT: _tagEDITBALLOONTIP;
-    
+
+{$hints off}
 procedure ShowBalloon(Hwnd: HWND; Msg: WideString; Title: WideString);
 //var FH: TFormHint;
 begin
@@ -128,6 +131,7 @@ begin
     FH.ShowModal;
     *)
 end;
+{$hints on}
 {$endif}
 
 procedure TInputMaxRFactorDlg.FormCloseQuery(Sender: TObject;

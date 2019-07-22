@@ -1385,93 +1385,93 @@ LazarusResources.Add('TFormMain','FORMDATA',[
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#11'TSaveDialog'#11'SaveDialog1'#5'Title'#6#24'Sel'
   +'ect File to Save Data'#6'Filter'#6',Text files (*.TXT)|*.TXT|All files (*.*'
   +')|*.*'#4'left'#3'H'#2#3'top'#3#160#0#0#0#22'TApplicationProperties'#22'Appl'
-  +'icationProperties1'#5'Title'#6#3'Fit'#6'OnIdle'#7#26'ApplicationProperties1'
-  +'Idle'#6'OnHint'#7#26'ApplicationProperties1Hint'#4'left'#3'x'#1#3'top'#2'P'
-  +#0#0#6'TTimer'#15'CheckStateTimer'#8'Interval'#3#244#1#7'OnTimer'#7#20'Check'
-  +'StateTimerTimer'#4'left'#3'x'#1#0#0#6'TTimer'#16'TimerBalloonShow'#7'Enable'
-  +'d'#8#8'Interval'#3#200#0#7'OnTimer'#7#21'TimerBalloonShowTimer'#4'left'#3
-  +#224#1#0#0#6'TTimer'#16'TimerBalloonHide'#7'Enabled'#8#7'OnTimer'#7#21'Timer'
-  +'BalloonHideTimer'#4'left'#3'H'#2#0#0#11'TActionList'#11'ActionList1'#6'Imag'
-  +'es'#7#10'ImageList2'#4'left'#3#224#1#3'top'#3#160#0#0#7'TAction'#10'ActionQ'
-  +'uit'#8'Category'#6#4'Data'#7'Caption'#6#5'&Quit'#9'OnExecute'#7#17'ActionQu'
-  +'itExecute'#0#0#7'TAction'#29'ActionSelCharacteristicPoints'#8'Category'#6#4
-  +'Data'#7'Caption'#6'$Select Characteristic Points of Peak'#9'OnExecute'#7'$A'
-  +'ctionSelCharacteristicPointsExecute'#0#0#7'TAction'#12'ActionSmooth'#8'Cate'
-  +'gory'#6#4'Data'#7'Caption'#6#12'ActionSmooth'#9'OnExecute'#7#19'ActionSmoot'
-  +'hExecute'#0#0#7'TAction'#16'ActionSetPortion'#8'Category'#6#4'Data'#7'Capti'
-  +'on'#6#31'Set Portion of Max Amplitude...'#4'Hint'#6'KSet portion of maximum'
-  +' amplitude for automatic background points generation'#9'OnExecute'#7#23'Ac'
-  +'tionSetPortionExecute'#0#0#7'TAction'#17'ActionSelBackAuto'#8'Category'#6#4
-  +'Data'#7'Caption'#6#22'Generate Automatically'#4'Hint'#6#22'Generate automat'
-  +'ically'#10'ImageIndex'#2#11#9'OnExecute'#7#24'ActionSelBackAutoExecute'#0#0
-  +#7'TAction'#16'ActionSelBackVis'#8'Category'#6#4'Data'#7'Caption'#6#22'Start'
-  +' Visual Selection'#9'OnExecute'#7#23'ActionSelBackVisExecute'#0#0#7'TAction'
-  +#16'ActionRemoveBack'#8'Category'#6#4'Data'#7'Caption'#6#10'Remove All'#4'Hi'
-  +'nt'#6#17'Remove all points'#10'ImageIndex'#2#14#9'OnExecute'#7#23'ActionRem'
-  +'oveBackExecute'#0#0#7'TAction'#16'ActionRmBackAuto'#8'Category'#6#4'Data'#7
-  ,'Caption'#6#13'Automatically'#4'Hint'#6#21'Subract automatically'#10'ImageIn'
-  +'dex'#2#12#9'OnExecute'#7#23'ActionRmBackAutoExecute'#0#0#7'TAction'#20'Acti'
-  +'onRmBackSelected'#8'Category'#6#4'Data'#7'Caption'#6#18'By Selected Points'
-  +#4'Hint'#6#27'Subtract by selected points'#10'ImageIndex'#2#15#9'OnExecute'#7
-  +#27'ActionRmBackSelectedExecute'#0#0#7'TAction'#19'ActionSelAreaLimits'#8'Ca'
-  +'tegory'#6#4'Data'#7'Caption'#6#22'Start Visual Selection'#9'OnExecute'#7#26
-  +'ActionSelAreaLimitsExecute'#0#0#7'TAction'#13'ActionSelArea'#8'Category'#6#4
-  +'Data'#7'Caption'#6#6'Select'#9'OnExecute'#7#20'ActionSelAreaExecute'#0#0#7
-  +'TAction'#19'ActionSelEntireProf'#8'Category'#6#4'Data'#7'Caption'#6#21'Retu'
-  +'rn to Entire Data'#9'OnExecute'#7#26'ActionSelEntireProfExecute'#0#0#7'TAct'
-  +'ion'#12'ActionReload'#8'Category'#6#4'Data'#7'Caption'#6#7'&Reload'#4'Hint'
-  +#6'"Reload experimental data from file'#9'OnExecute'#7#19'ActionReloadExecut'
-  +'e'#0#0#7'TAction'#12'ActionImport'#8'Category'#6#4'Data'#7'Caption'#6#10'&I'
-  +'mport...'#4'Hint'#6'"Import experimental data from file'#10'ImageIndex'#2#4
-  +#9'OnExecute'#7#19'ActionImportExecute'#0#0#7'TAction'#29'ActionSelRFactorIn'
-  +'tervalsAuto'#8'Category'#6#5'Model'#7'Caption'#6#22'Generate Automatically'
-  +#10'ImageIndex'#2#11#9'OnExecute'#7'$ActionSelRFactorIntervalsAutoExecute'#0
-  +#0#7'TAction'#28'ActionSelRFactorIntervalsVis'#8'Category'#6#5'Model'#7'Capt'
-  +'ion'#6#22'Start Visual Selection'#9'OnExecute'#7'#ActionSelRFactorIntervals'
-  +'VisExecute'#0#0#7'TAction'#28'ActionRemoveRFactorIntervals'#8'Category'#6#5
-  +'Model'#7'Caption'#6#10'Remove All'#10'ImageIndex'#2#14#9'OnExecute'#7'#Acti'
-  +'onRemoveRFactorIntervalsExecute'#0#0#7'TAction'#20'ActionSelSpecPosAuto'#8
-  +'Category'#6#5'Model'#7'Caption'#6#22'Generate Automatically'#10'ImageIndex'
-  +#2#11#9'OnExecute'#7#27'ActionSelSpecPosAutoExecute'#0#0#7'TAction'#19'Actio'
-  +'nSelSpecPosVis'#8'Category'#6#5'Model'#7'Caption'#6#22'Start Visual Selecti'
-  +'on'#9'OnExecute'#7#26'ActionSelSpecPosVisExecute'#0#0#7'TAction'#19'ActionR'
-  +'emoveSpecPos'#8'Category'#6#5'Model'#7'Caption'#6#10'Remove All'#10'ImageIn'
-  +'dex'#2#14#9'OnExecute'#7#26'ActionRemoveSpecPosExecute'#0#0#7'TAction'#20'A'
-  +'ctionSelCurveBounds'#8'Category'#6#5'Model'#7'Caption'#6#30'Select Pattern '
-  +'Specimen Bounds'#9'OnExecute'#7#27'ActionSelCurveBoundsExecute'#0#0#7'TActi'
-  +'on'#16'ActionSaveAsText'#8'Category'#6#5'Model'#7'Caption'#6#20'Save as Tex'
-  +'t File...'#4'Hint'#6'"Save model parameters as text file'#10'ImageIndex'#2#0
-  +#9'OnExecute'#7#23'ActionSaveAsTextExecute'#0#0#7'TAction'#15'ActionDoAllAut'
-  +'o'#8'Category'#6#7'Fitting'#7'Caption'#6#20'Do All Automatically'#4'Hint'#6
-  +#20'Do all automatically'#10'ImageIndex'#2#11#9'OnExecute'#7#22'ActionDoAllA'
-  +'utoExecute'#0#0#7'TAction'#24'ActionFitMinNumberOfSpec'#8'Category'#6#7'Fit'
-  +'ting'#7'Caption'#6#28'Minimize Number of Specimens'#9'OnExecute'#7#31'Actio'
-  +'nFitMinNumberOfSpecExecute'#0#0#7'TAction'#22'ActionFitMinDifference'#8'Cat'
-  +'egory'#6#7'Fitting'#7'Caption'#6#19'Minimize Difference'#9'OnExecute'#7#29
-  +'ActionFitMinDifferenceExecute'#0#0#7'TAction'#17'ActionStopFitting'#8'Categ'
-  +'ory'#6#7'Fitting'#7'Caption'#6#4'Stop'#9'OnExecute'#7#24'ActionStopFittingE'
-  +'xecute'#0#0#7'TAction'#19'ActionSetMaxRFactor'#8'Category'#6#7'Fitting'#7'C'
-  +'aption'#6' Set Max Acceptable Difference...'#9'OnExecute'#7#26'ActionSetMax'
-  +'RFactorExecute'#0#0#7'TAction'#10'ActionCopy'#8'Category'#6#4'Edit'#7'Capti'
-  +'on'#6#17'Copy to Clipboard'#10'ImageIndex'#2#1#9'OnExecute'#7#17'ActionCopy'
-  +'Execute'#0#0#7'TAction'#12'ActionDelete'#8'Category'#6#4'Edit'#7'Caption'#6
-  +#6'Delete'#9'OnExecute'#7#19'ActionDeleteExecute'#0#0#7'TAction'#15'ActionSe'
-  +'lectAll'#8'Category'#6#4'Edit'#7'Caption'#6#10'Select All'#9'OnExecute'#7#22
-  +'ActionSelectAllExecute'#0#0#7'TAction'#12'ActionZoomIn'#8'Category'#6#4'Vie'
-  +'w'#7'Caption'#6#7'Zoom In'#4'Hint'#6#7'Zoom in'#10'ImageIndex'#2#8#9'OnExec'
-  +'ute'#7#19'ActionZoomInExecute'#0#0#7'TAction'#13'ActionZoomOut'#8'Category'
-  +#6#4'View'#7'Caption'#6#8'Zoom Out'#4'Hint'#6#8'Zoom out'#10'ImageIndex'#2#9
-  +#9'OnExecute'#7#20'ActionZoomOutExecute'#0#0#7'TAction'#17'ActionViewMarkers'
-  +#8'Category'#6#4'View'#7'Caption'#6#12'View Markers'#9'OnExecute'#7#24'Actio'
-  +'nViewMarkersExecute'#0#0#7'TAction'#14'ActionGlossary'#8'Category'#6#4'Help'
-  +#7'Caption'#6#8'Glossary'#0#0#7'TAction'#11'ActionAbout'#8'Category'#6#4'Hel'
-  +'p'#7'Caption'#6#9'&About...'#9'OnExecute'#7#18'ActionAboutExecute'#0#0#7'TA'
-  +'ction'#28'ActionSelSpecPosAtEveryPoint'#8'Category'#6#5'Model'#7'Caption'#6
-  +#14'At Every Point'#9'OnExecute'#7'#ActionSelSpecPosAtEveryPointExecute'#0#0
-  +#7'TAction'#19'ActionAnimationMode'#8'Category'#6#4'View'#7'Caption'#6#14'An'
-  +'imation Mode'#9'OnExecute'#7#26'ActionAnimationModeExecute'#8'OnUpdate'#7#25
-  +'ActionAnimationModeUpdate'#0#0#7'TAction'#17'ActionPatternType'#8'Category'
-  +#6#5'Model'#7'Caption'#6#12'Pattern Type'#18'DisableIfNoHandler'#8#8'OnUpdat'
-  +'e'#7#23'ActionPatternTypeUpdate'#0#0#0#6'TTimer'#10'TimerAsync'#7'Enabled'#8
-  ,#8'Interval'#3#208#7#7'OnTimer'#7#15'TimerAsyncTimer'#4'left'#3#176#2#0#0#0
+  +'icationProperties1'#5'Title'#6#3'Fit'#6'OnHint'#7#26'ApplicationProperties1'
+  +'Hint'#4'left'#3'x'#1#3'top'#2'P'#0#0#6'TTimer'#15'CheckStateTimer'#8'Interv'
+  +'al'#3#244#1#7'OnTimer'#7#20'CheckStateTimerTimer'#4'left'#3'x'#1#0#0#6'TTim'
+  +'er'#16'TimerBalloonShow'#7'Enabled'#8#8'Interval'#3#200#0#7'OnTimer'#7#21'T'
+  +'imerBalloonShowTimer'#4'left'#3#224#1#0#0#6'TTimer'#16'TimerBalloonHide'#7
+  +'Enabled'#8#7'OnTimer'#7#21'TimerBalloonHideTimer'#4'left'#3'H'#2#0#0#11'TAc'
+  +'tionList'#11'ActionList1'#6'Images'#7#10'ImageList2'#4'left'#3#224#1#3'top'
+  +#3#160#0#0#7'TAction'#10'ActionQuit'#8'Category'#6#4'Data'#7'Caption'#6#5'&Q'
+  +'uit'#9'OnExecute'#7#17'ActionQuitExecute'#0#0#7'TAction'#29'ActionSelCharac'
+  +'teristicPoints'#8'Category'#6#4'Data'#7'Caption'#6'$Select Characteristic P'
+  +'oints of Peak'#9'OnExecute'#7'$ActionSelCharacteristicPointsExecute'#0#0#7
+  +'TAction'#12'ActionSmooth'#8'Category'#6#4'Data'#7'Caption'#6#12'ActionSmoot'
+  +'h'#9'OnExecute'#7#19'ActionSmoothExecute'#0#0#7'TAction'#16'ActionSetPortio'
+  +'n'#8'Category'#6#4'Data'#7'Caption'#6#31'Set Portion of Max Amplitude...'#4
+  +'Hint'#6'KSet portion of maximum amplitude for automatic background points g'
+  +'eneration'#9'OnExecute'#7#23'ActionSetPortionExecute'#0#0#7'TAction'#17'Act'
+  +'ionSelBackAuto'#8'Category'#6#4'Data'#7'Caption'#6#22'Generate Automaticall'
+  +'y'#4'Hint'#6#22'Generate automatically'#10'ImageIndex'#2#11#9'OnExecute'#7
+  +#24'ActionSelBackAutoExecute'#0#0#7'TAction'#16'ActionSelBackVis'#8'Category'
+  +#6#4'Data'#7'Caption'#6#22'Start Visual Selection'#9'OnExecute'#7#23'ActionS'
+  +'elBackVisExecute'#0#0#7'TAction'#16'ActionRemoveBack'#8'Category'#6#4'Data'
+  +#7'Caption'#6#10'Remove All'#4'Hint'#6#17'Remove all points'#10'ImageIndex'#2
+  +#14#9'OnExecute'#7#23'ActionRemoveBackExecute'#0#0#7'TAction'#16'ActionRmBac'
+  +'kAuto'#8'Category'#6#4'Data'#7'Caption'#6#13'Automatically'#4'Hint'#6#21'Su'
+  ,'bract automatically'#10'ImageIndex'#2#12#9'OnExecute'#7#23'ActionRmBackAuto'
+  +'Execute'#0#0#7'TAction'#20'ActionRmBackSelected'#8'Category'#6#4'Data'#7'Ca'
+  +'ption'#6#18'By Selected Points'#4'Hint'#6#27'Subtract by selected points'#10
+  +'ImageIndex'#2#15#9'OnExecute'#7#27'ActionRmBackSelectedExecute'#0#0#7'TActi'
+  +'on'#19'ActionSelAreaLimits'#8'Category'#6#4'Data'#7'Caption'#6#22'Start Vis'
+  +'ual Selection'#9'OnExecute'#7#26'ActionSelAreaLimitsExecute'#0#0#7'TAction'
+  +#13'ActionSelArea'#8'Category'#6#4'Data'#7'Caption'#6#6'Select'#9'OnExecute'
+  +#7#20'ActionSelAreaExecute'#0#0#7'TAction'#19'ActionSelEntireProf'#8'Categor'
+  +'y'#6#4'Data'#7'Caption'#6#21'Return to Entire Data'#9'OnExecute'#7#26'Actio'
+  +'nSelEntireProfExecute'#0#0#7'TAction'#12'ActionReload'#8'Category'#6#4'Data'
+  +#7'Caption'#6#7'&Reload'#4'Hint'#6'"Reload experimental data from file'#9'On'
+  +'Execute'#7#19'ActionReloadExecute'#0#0#7'TAction'#12'ActionImport'#8'Catego'
+  +'ry'#6#4'Data'#7'Caption'#6#10'&Import...'#4'Hint'#6'"Import experimental da'
+  +'ta from file'#10'ImageIndex'#2#4#9'OnExecute'#7#19'ActionImportExecute'#0#0
+  +#7'TAction'#29'ActionSelRFactorIntervalsAuto'#8'Category'#6#5'Model'#7'Capti'
+  +'on'#6#22'Generate Automatically'#10'ImageIndex'#2#11#9'OnExecute'#7'$Action'
+  +'SelRFactorIntervalsAutoExecute'#0#0#7'TAction'#28'ActionSelRFactorIntervals'
+  +'Vis'#8'Category'#6#5'Model'#7'Caption'#6#22'Start Visual Selection'#9'OnExe'
+  +'cute'#7'#ActionSelRFactorIntervalsVisExecute'#0#0#7'TAction'#28'ActionRemov'
+  +'eRFactorIntervals'#8'Category'#6#5'Model'#7'Caption'#6#10'Remove All'#10'Im'
+  +'ageIndex'#2#14#9'OnExecute'#7'#ActionRemoveRFactorIntervalsExecute'#0#0#7'T'
+  +'Action'#20'ActionSelSpecPosAuto'#8'Category'#6#5'Model'#7'Caption'#6#22'Gen'
+  +'erate Automatically'#10'ImageIndex'#2#11#9'OnExecute'#7#27'ActionSelSpecPos'
+  +'AutoExecute'#0#0#7'TAction'#19'ActionSelSpecPosVis'#8'Category'#6#5'Model'#7
+  +'Caption'#6#22'Start Visual Selection'#9'OnExecute'#7#26'ActionSelSpecPosVis'
+  +'Execute'#0#0#7'TAction'#19'ActionRemoveSpecPos'#8'Category'#6#5'Model'#7'Ca'
+  +'ption'#6#10'Remove All'#10'ImageIndex'#2#14#9'OnExecute'#7#26'ActionRemoveS'
+  +'pecPosExecute'#0#0#7'TAction'#20'ActionSelCurveBounds'#8'Category'#6#5'Mode'
+  +'l'#7'Caption'#6#30'Select Pattern Specimen Bounds'#9'OnExecute'#7#27'Action'
+  +'SelCurveBoundsExecute'#0#0#7'TAction'#16'ActionSaveAsText'#8'Category'#6#5
+  +'Model'#7'Caption'#6#20'Save as Text File...'#4'Hint'#6'"Save model paramete'
+  +'rs as text file'#10'ImageIndex'#2#0#9'OnExecute'#7#23'ActionSaveAsTextExecu'
+  +'te'#0#0#7'TAction'#15'ActionDoAllAuto'#8'Category'#6#7'Fitting'#7'Caption'#6
+  +#20'Do All Automatically'#4'Hint'#6#20'Do all automatically'#10'ImageIndex'#2
+  +#11#9'OnExecute'#7#22'ActionDoAllAutoExecute'#0#0#7'TAction'#24'ActionFitMin'
+  +'NumberOfSpec'#8'Category'#6#7'Fitting'#7'Caption'#6#28'Minimize Number of S'
+  +'pecimens'#9'OnExecute'#7#31'ActionFitMinNumberOfSpecExecute'#0#0#7'TAction'
+  +#22'ActionFitMinDifference'#8'Category'#6#7'Fitting'#7'Caption'#6#19'Minimiz'
+  +'e Difference'#9'OnExecute'#7#29'ActionFitMinDifferenceExecute'#0#0#7'TActio'
+  +'n'#17'ActionStopFitting'#8'Category'#6#7'Fitting'#7'Caption'#6#4'Stop'#9'On'
+  +'Execute'#7#24'ActionStopFittingExecute'#0#0#7'TAction'#19'ActionSetMaxRFact'
+  +'or'#8'Category'#6#7'Fitting'#7'Caption'#6' Set Max Acceptable Difference...'
+  +#9'OnExecute'#7#26'ActionSetMaxRFactorExecute'#0#0#7'TAction'#10'ActionCopy'
+  +#8'Category'#6#4'Edit'#7'Caption'#6#17'Copy to Clipboard'#10'ImageIndex'#2#1
+  +#9'OnExecute'#7#17'ActionCopyExecute'#0#0#7'TAction'#12'ActionDelete'#8'Cate'
+  +'gory'#6#4'Edit'#7'Caption'#6#6'Delete'#9'OnExecute'#7#19'ActionDeleteExecut'
+  +'e'#0#0#7'TAction'#15'ActionSelectAll'#8'Category'#6#4'Edit'#7'Caption'#6#10
+  +'Select All'#9'OnExecute'#7#22'ActionSelectAllExecute'#0#0#7'TAction'#12'Act'
+  +'ionZoomIn'#8'Category'#6#4'View'#7'Caption'#6#7'Zoom In'#4'Hint'#6#7'Zoom i'
+  +'n'#10'ImageIndex'#2#8#9'OnExecute'#7#19'ActionZoomInExecute'#0#0#7'TAction'
+  +#13'ActionZoomOut'#8'Category'#6#4'View'#7'Caption'#6#8'Zoom Out'#4'Hint'#6#8
+  +'Zoom out'#10'ImageIndex'#2#9#9'OnExecute'#7#20'ActionZoomOutExecute'#0#0#7
+  +'TAction'#17'ActionViewMarkers'#8'Category'#6#4'View'#7'Caption'#6#12'View M'
+  +'arkers'#9'OnExecute'#7#24'ActionViewMarkersExecute'#0#0#7'TAction'#14'Actio'
+  +'nGlossary'#8'Category'#6#4'Help'#7'Caption'#6#8'Glossary'#0#0#7'TAction'#11
+  +'ActionAbout'#8'Category'#6#4'Help'#7'Caption'#6#9'&About...'#9'OnExecute'#7
+  +#18'ActionAboutExecute'#0#0#7'TAction'#28'ActionSelSpecPosAtEveryPoint'#8'Ca'
+  +'tegory'#6#5'Model'#7'Caption'#6#14'At Every Point'#9'OnExecute'#7'#ActionSe'
+  +'lSpecPosAtEveryPointExecute'#0#0#7'TAction'#19'ActionAnimationMode'#8'Categ'
+  +'ory'#6#4'View'#7'Caption'#6#14'Animation Mode'#9'OnExecute'#7#26'ActionAnim'
+  +'ationModeExecute'#8'OnUpdate'#7#25'ActionAnimationModeUpdate'#0#0#7'TAction'
+  +#17'ActionPatternType'#8'Category'#6#5'Model'#7'Caption'#6#12'Pattern Type'
+  +#18'DisableIfNoHandler'#8#8'OnUpdate'#7#23'ActionPatternTypeUpdate'#0#0#0#6
+  +'TTimer'#10'TimerAsync'#7'Enabled'#8#8'Interval'#3#208#7#7'OnTimer'#7#15'Tim'
+  ,'erAsyncTimer'#4'left'#3#176#2#0#0#0
 ]);

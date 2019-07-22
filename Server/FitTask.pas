@@ -89,7 +89,7 @@ type
         function Func: Double;
         procedure CalcFunc;
         function GetStep: Double;
-        procedure SetStep(NewStepValue: Double);
+        procedure SetStep(NewStepValue: Double); virtual; abstract;
         procedure SetNextParam;
         procedure SetFirstParam;
         function GetParam: Double;
@@ -534,14 +534,6 @@ begin
             Result := 0.1;
     end;
 end;
-
-{$hints off}
-procedure TFitTask.SetStep(NewStepValue: Double);
-var Dummy: LongInt;
-begin
-    Dummy := 0;
-end;
-{$hints on}
 
 procedure TFitTask.SetNextParam;
 var GP: TCurvePointsSet;
@@ -1246,10 +1238,9 @@ begin
 end;
 *)
 procedure TFitTask.CalcInitHash(Specimen: TCurvePointsSet);
-var i, j: LongInt;
+var i: LongInt;
     P: TSpecialCurveParameter;
     Value: string;
-    Ptr: ^Byte;
 begin
     Assert(Assigned(Specimen));
     Specimen.InitHash := 0;

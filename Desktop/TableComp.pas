@@ -16,8 +16,7 @@ unit TableComp;
 interface
 
 uses
-    Classes, Grids, Controls, Graphics, Tools,
-    SysUtils, NumericGrid, MyExceptions, SelfCopied;
+    Classes, Grids, Controls, Graphics, Tools, SysUtils, NumericGrid, SelfCopied;
 
 type
     ETableCompList = class(Exception);

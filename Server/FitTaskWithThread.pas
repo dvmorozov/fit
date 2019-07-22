@@ -66,6 +66,7 @@ implementation
 
 uses Main;
 
+{$warnings off}
 procedure TFitTaskWithThread.RecreateMainCalcThread(
     ACurrentTask: TCurrentTask; ADoneProc: TDoneProc);
 begin
@@ -83,6 +84,7 @@ begin
     //  zapusk potoka resheniya zadachi
     MainCalcThread.Resume;
 end;
+{$warnings on}
 
 procedure TFitTaskWithThread.DestroyMainCalcThread;
 begin

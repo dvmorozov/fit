@@ -1911,7 +1911,6 @@ object FormMain: TFormMain
   end
   object ApplicationProperties1: TApplicationProperties
     Title = 'Fit'
-    OnIdle = ApplicationProperties1Idle
     OnHint = ApplicationProperties1Hint
     left = 376
     top = 80

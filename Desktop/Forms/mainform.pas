@@ -281,7 +281,6 @@ type
     procedure ActionZoomInExecute(Sender: TObject);
     procedure ActionZoomOutExecute(Sender: TObject);
     procedure ApplicationProperties1Hint(Sender: TObject);
-    procedure ApplicationProperties1Idle(Sender: TObject; var Done: Boolean);
     procedure ButAddSelectedDataPointToPositionsClick(Sender: TObject);
     procedure ButAddSelectedPointToIntervalsClick(Sender: TObject);
     procedure ButAddSelectedDataPointClick(Sender: TObject);
@@ -475,6 +474,7 @@ begin
 end;
 *)
 
+{$hints off}
 procedure TFormMain.CheckListBoxLegendDrawItem(
     Control: TWinControl; Index: Integer;
     ARect: TRect; State: TOwnerDrawState);
@@ -541,6 +541,7 @@ begin
     LB.Canvas.TextOut(
         ARect.Left + Size + 6, ARect.Top, LB.Items.Strings[Index]);
 end;
+{$hints on}
 
 procedure TFormMain.CheckStateTimerTimer(Sender: TObject);
 begin
@@ -657,6 +658,7 @@ begin
     //  Creates menu items for curve types.
     //  The list must contain at least one item.
     CTS.FirstCurveType;
+    Index := 0;
     while True do
     begin
         MenuItem := TMenuItem.Create(SelCurveType);
@@ -1050,7 +1052,6 @@ begin
 end;
 
 procedure TFormMain.ActionSmoothExecute(Sender: TObject);
-var ActivePointsSet: TNeutronPointsSet;
 begin
     //  sglazhivanie mozhno primenyat' posledovatel'no neskol'ko raz
     FitClientApp_.FitClient.SmoothProfile;
@@ -1075,12 +1076,6 @@ end;
 procedure TFormMain.ActionZoomOutExecute(Sender: TObject);
 begin
     Chart.ZoomOut;
-end;
-
-procedure TFormMain.ApplicationProperties1Idle(Sender: TObject; var Done: Boolean);
-begin
-    //  pochemu-to vyzyvaetsya, kogda v ocheredi est' esche soobscheniya -
-    //  ne pozvolyaet vyvodit' balloon => primenim taymer
 end;
 
 procedure TFormMain.ButAddSelectedDataPointToPositionsClick(Sender: TObject);
@@ -1277,14 +1272,13 @@ begin
     ActiveControl := EditBalloon;
     //  !!! pri isp. ShowBalloon nel'zya dopuskat' vyhod
     //  isklyucheniya za granitsy obrabotchika sobytiya !!!
-    ShowBalloon(Handle, HintMessage,
-        ''          //vmesto Error - tak luchshe smotritsya
-        );
+    ShowBalloon(Handle, WideString(HintMessage), WideString(''));
 {$else}
     MessageDlg(HintMessage, mtError, [mbOk], 0);
 {$endif}
 end;
 
+{$hints off}
 procedure TFormMain.GridDataSelectEditor(Sender: TObject; aCol, aRow: Integer;
   var Editor: TWinControl);
 begin
@@ -1292,6 +1286,7 @@ begin
     SavedAmp := GridData.Cells[1, GridData.Row];
     EditDone := False;
 end;
+{$hints on}
 
 procedure TFormMain.FormCreate(Sender: TObject);
 begin
@@ -1582,9 +1577,7 @@ begin
                 Handle := EditBalloonChart.Handle;
             //  !!! pri isp. ShowBalloon nel'zya dopuskat' vyhod
             //  isklyucheniya za granitsy obrabotchika sobytiya !!!
-            ShowBalloon(Handle, E.Message,
-                ''          //vmesto Error - tak luchshe smotritsya
-                );
+            ShowBalloon(Handle, WideString(E.Message), WideString(''));
             //raise BE;
         end;
 {$else}
@@ -1593,6 +1586,7 @@ begin
     end;
 end;
 
+{$hints off}
 procedure TFormMain.ChartDrawReticule(Sender: TComponent; IndexSerie, Index,
     Xi, Yi: Integer; Xg, Yg: Double);
 begin
@@ -1611,6 +1605,7 @@ begin
     //Windows.SetCursor(Windows.LoadCursor(0, LclCursorToWin32CursorMap[ACursor]));
     DownX := X; DownY := Y;
 end;
+{$hints on}
 
 procedure TFormMain.UpdateBarsPos;
 var DeltaX, DeltaY: Double;
@@ -1794,12 +1789,12 @@ begin
     //   begin Screen.Cursor := crCross; Quit end;
     Screen.Cursor := crArrow;
 end;
-{$hints on}
 
 procedure TFormMain.CheckListBoxLegendKeyPress(Sender: TObject; var Key: Char);
 begin
     CheckListBoxChanged;
 end;
+{$hints on}
 
 procedure TFormMain.CheckListBoxChanged;
 var i: LongInt;
@@ -2568,6 +2563,7 @@ begin
     end;
 end;
 
+{$hints off}
 procedure TFormMain.AddCurveMenuItem(ct: Curve_type);
 var i, LastIndex: LongInt;
     mi, DelMenu: TMenuItem;
@@ -2580,7 +2576,7 @@ begin
     for i := 0 to SelCurveType.Count - 1 do
     begin
         mi := SelCurveType.Items[i];
-        if LongInt(@mi.OnClick) = LongInt(OnSpecialCurveClick) then
+        if PtrUInt(@mi.OnClick) = PtrUInt(OnSpecialCurveClick) then
             LastIndex := i;
     end;
 
@@ -2607,6 +2603,7 @@ begin
     //  sozdaetsya element podmenyu udaleniya
     CreateCurveMenuItem(DelMenu.Count, ct, DelMenu, OnDeleteSpecialCurveClick);
 end;
+{$hints on}
 
 procedure TFormMain.ReadCurves;
 var F: TSearchRec;

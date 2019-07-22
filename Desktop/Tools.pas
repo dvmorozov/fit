@@ -15,7 +15,7 @@ unit Tools;
 
 interface
 
-uses SysUtils, Classes, SimpMath, CBRCComponent, MyExceptions;
+uses SysUtils, Classes, SimpMath, CBRCComponent;
 
 type
 	{ Returns value of parameter with given name. }
@@ -169,6 +169,7 @@ begin
                     FloatToStrF(Vector[3], ffGeneral, 6, 4) + ')';
 end;
 
+{$warnings off}
 function DoubleVector3AsString(const Vect: TDoubleVector3;
     FixedMode: Boolean; Precision, Digits: LongInt): string;
 var St: string;
@@ -190,6 +191,7 @@ begin
     DecimalSeparator := SavedDecimalSeparator;
     Result := St;
 end;
+{$warnings on}
 
 function StringAsDoubleVector3(const Str: string): TDoubleVector3;
 var i, BegIndex, VectIndex: LongInt;
@@ -288,6 +290,7 @@ begin
     end;
 end;
 
+{$warnings off}
 function CalculateSimpExpr(var Expression: string; var ErrorCode: LongInt;
 const ParamRequest: FParamRequest): Double;
 
@@ -447,6 +450,7 @@ begin
     Result := CalculateSimpExpr(Expression, ErrorCode, ParamRequest);
     DecimalSeparator := SaveDecimalSeparator;
 end;
+{$warnings on}
 
 function GetRandomWithSign: Double;
 begin

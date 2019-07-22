@@ -49,7 +49,7 @@ function MyStrToFloat(Str: string): Double;
 
 implementation
 
-
+{$warnings off}
 function MyStrToFloat(Str: string): Double;
 var i: LongInt;
 begin
@@ -58,6 +58,7 @@ begin
             Str[i] := DecimalSeparator;
     Result := StrToFloat(Str);
 end;
+{$warnings on}
 
 {============================== TDataLoader ===================================}
 

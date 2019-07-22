@@ -82,6 +82,7 @@ begin
 	inherited Destroy;
 end;
 
+{$warnings off}
 procedure TRunner.Run;
 begin
 	RunningThread.RunningProcedure := OnRunningProcedure;
@@ -98,6 +99,7 @@ procedure TRunner.Resume;
 begin
 	RunningThread.Resume;
 end;
+{$warnings on}
 
 procedure TRunner.Synchronize(AProcedure: TThreadMethod);
 begin

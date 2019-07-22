@@ -55,6 +55,7 @@ begin
     inherited;
 end;
 
+{$warnings off}
 procedure TFitServerWithThread.RecreateMainCalcThread(
     ACurrentTask: TCurrentTask; ADoneProc: TDoneProc);
 begin
@@ -73,6 +74,7 @@ begin
     //  zapusk potoka resheniya zadachi
     MainCalcThread.Resume;
 end;
+{$warnings on}
 
 procedure TFitServerWithThread.DestroyMainCalcThread;
 begin

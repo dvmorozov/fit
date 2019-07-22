@@ -23,6 +23,11 @@ interface
 (*                                                                        *)
 (**************************************************************************)
 
+{ Because the module is from another author, messages are suppressed. }
+{$warnings off}
+{$hints off}
+{$notes off}
+
 type THashfunction = function(const key : String) : Cardinal;
 
 

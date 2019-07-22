@@ -220,13 +220,13 @@ begin
     //  !!! ne rabotaet s XML-potokami !!!
     //Filer.DefineProperty('Curve types', ReadCurveTypes, WriteCurveTypes, True);
 end;
-{$hints on}
 
 procedure Settings_v1.ReadCurveTypes(Reader: TReader);
 begin
     FCurveTypes.Free;
     FCurveTypes := TSelfCheckedComponentList(Reader.ReadComponent);
 end;
+{$hints on}
 
 procedure Settings_v1.WriteCurveTypes(Writer: TWriter);
 begin

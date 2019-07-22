@@ -137,9 +137,10 @@ begin
     inherited Destroy;
 end;
 
+{$warnings off}
 initialization
     RegisterClass(TMSCRSpecimenList);
     DecimalSeparator := '.';
 end.
-
+{$warnings on}
 

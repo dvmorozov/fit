@@ -119,6 +119,7 @@ int my_strcmp(const char *string1, const char *string2)
 
 char* my_strlwr(char *str)
 {
-    return _strlwr(str);
+    _strlwr_s(str, strlen(str));
+    return str;
 }
 //--------------------------------------------------------------------------------------------------

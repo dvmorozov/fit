@@ -269,7 +269,7 @@ int zubr_lex( void )
       //  распознано начало числа
       expr[--char_index] = c;
       //  сканируем число и устанавливаем индекс на следующий символ
-      n = sscanf( &expr[char_index], "%lf", &zubr_lval.val );
+      n = sscanf_s( &expr[char_index], "%lf", &zubr_lval.val );
       while( expr[char_index] == '.'   ||
              isdigit(expr[char_index]) ||
              expr[char_index] == 'E'   ||

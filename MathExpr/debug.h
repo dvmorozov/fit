@@ -4,15 +4,16 @@
 #define debug_h
 //--------------------------------------------------------------------------------------------------
 
+#include <assert.h>
+
 //  !!! чтобы можно было вызывать ф-и модуля из C-файлов !!!
 #ifdef __cplusplus
 extern "C"
 {
 #endif
-void my_assert(char*, char*, unsigned int);
 
 #ifdef _DEBUG
-#define MY_ASSERT(exp) ((exp) || (my_assert(#exp, __FILE__, __LINE__), 0))
+#define MY_ASSERT(exp) assert(exp)
 #else
 #define MY_ASSERT(exp)
 #endif

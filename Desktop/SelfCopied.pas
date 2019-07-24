@@ -22,13 +22,9 @@ type
 	{ The interface of component which can copy itself. }
     ISelfCopied = interface
         ['{DF1ABB41-F255-11D4-968F-C7AD39AA7469}']
-		{ Returns only copy of the object itself without copies of associated objects. }
+	{ Returns only copy of the object itself without copies of associated objects. }
         function GetCopy: TObject;
         procedure CopyParameters(const Dest: TObject);
-
-		{ Sets special copying modes. This is caused by necessity of nested calls. }
-        procedure SetSelfCopyingMode(const AMode: LongInt);
-        function GetSelfCopyingMode: LongInt;
     end;
 
 const SelfCopiedGUID: TGUID = '{DF1ABB41-F255-11D4-968F-C7AD39AA7469}';
@@ -39,9 +35,6 @@ type
     public
         function GetCopy: TObject; virtual;
         procedure CopyParameters(const Dest: TObject); virtual;
-
-        procedure SetSelfCopyingMode(const AMode: LongInt); virtual; abstract;
-        function GetSelfCopyingMode: LongInt; virtual; abstract;
     end;
 
     ESelfCopiedCompList = class(Exception);

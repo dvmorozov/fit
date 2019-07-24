@@ -15,7 +15,7 @@
       <AutoIncrementBuild Value="True"/>
       <CurrentVersionNr Value="1"/>
       <CurrentMajorRevNr Value="1"/>
-      <CurrentBuildNr Value="6"/>
+      <CurrentBuildNr Value="7"/>
       <ProjectVersion Value="0.0.0.0"/>
       <FileDescription Value="CGI-client application."/>
       <LegalCopyright Value="Dmitry Morozov"/>
@@ -35,15 +35,15 @@
     </RunParams>
     <RequiredPackages Count="3">
       <Item1>
-        <PackageName Value="ta"/>
-        <MinVersion Major="1" Minor="1" Valid="True"/>
+        <PackageName Value="CGILaz"/>
       </Item1>
       <Item2>
         <PackageName Value="LCL"/>
         <MinVersion Major="1" Valid="True"/>
       </Item2>
       <Item3>
-        <PackageName Value="CGILaz"/>
+        <PackageName Value="ta"/>
+        <MinVersion Major="1" Minor="1" Valid="True"/>
       </Item3>
     </RequiredPackages>
     <Units Count="61">
@@ -584,48 +584,7 @@
         <Loaded Value="True"/>
       </Unit60>
     </Units>
-    <JumpHistory Count="10" HistoryIndex="9">
-      <Position1>
-        <Filename Value="..\..\..\lazarus-0.9.24\fpc\2.2.0\source\packages\fcl-base\src\inc\custapp.pp"/>
-        <Caret Line="313" Column="32" TopLine="295"/>
-      </Position1>
-      <Position2>
-        <Filename Value="..\Desktop\ModelCurves\PseudoVoigtPointsSet.pas"/>
-        <Caret Line="1" Column="1" TopLine="1"/>
-      </Position2>
-      <Position3>
-        <Filename Value="..\Desktop\ModelCurves\PseudoVoigtPointsSet.pas"/>
-        <Caret Line="154" Column="1" TopLine="136"/>
-      </Position3>
-      <Position4>
-        <Filename Value="..\..\..\lazarus-0.9.24\fpc\2.2.0\source\packages\fcl-base\src\inc\avl_tree.pp"/>
-        <Caret Line="1" Column="1" TopLine="1"/>
-      </Position4>
-      <Position5>
-        <Filename Value="..\..\..\lazarus-0.9.24\fpc\2.2.0\source\packages\fcl-base\src\inc\avl_tree.pp"/>
-        <Caret Line="965" Column="22" TopLine="1"/>
-      </Position5>
-      <Position6>
-        <Filename Value="..\..\fitgrids-0.9.24\NumericGrid.pas"/>
-        <Caret Line="1" Column="1" TopLine="1"/>
-      </Position6>
-      <Position7>
-        <Filename Value="..\Desktop\Main.pas"/>
-        <Caret Line="47" Column="5" TopLine="29"/>
-      </Position7>
-      <Position8>
-        <Filename Value="..\Desktop\Main.pas"/>
-        <Caret Line="145" Column="13" TopLine="124"/>
-      </Position8>
-      <Position9>
-        <Filename Value="..\Desktop\Main.pas"/>
-        <Caret Line="41" Column="48" TopLine="1"/>
-      </Position9>
-      <Position10>
-        <Filename Value="..\Desktop\Main.pas"/>
-        <Caret Line="44" Column="26" TopLine="26"/>
-      </Position10>
-    </JumpHistory>
+    <JumpHistory Count="0" HistoryIndex="-1"/>
   </ProjectOptions>
   <CompilerOptions>
     <Version Value="5"/>

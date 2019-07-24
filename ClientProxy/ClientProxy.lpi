@@ -34,10 +34,10 @@
     </RunParams>
     <RequiredPackages Count="2">
       <Item1>
-        <PackageName Value="ta"/>
+        <PackageName Value="IDEIntf"/>
       </Item1>
       <Item2>
-        <PackageName Value="IDEIntf"/>
+        <PackageName Value="ta"/>
       </Item2>
     </RequiredPackages>
     <Units Count="24">

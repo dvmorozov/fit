@@ -16,7 +16,7 @@
       <AutoIncrementBuild Value="True"/>
       <MajorVersionNr Value="1"/>
       <MinorVersionNr Value="1"/>
-      <BuildNr Value="1201"/>
+      <BuildNr Value="1203"/>
       <Attributes pvaDebug="True"/>
       <StringTable FileDescription="Desktop application." LegalCopyright="Dmitry Morozov" OriginalFilename="Fit" ProductName="Fit" ProductVersion="1.1.0"/>
     </VersionInfo>
@@ -259,8 +259,8 @@
         <Filename Value="SelfCopied.pas"/>
         <EditorIndex Value="8"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="28"/>
-        <CursorPos X="18" Y="44"/>
+        <TopLine Value="22"/>
+        <CursorPos X="52" Y="38"/>
         <UsageCount Value="100"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -704,10 +704,11 @@
       <Unit63>
         <Filename Value="ModelCurves\PointsSet.pas"/>
         <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="36"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="204"/>
-        <CursorPos Y="221"/>
+        <TopLine Value="12"/>
+        <CursorPos X="33" Y="22"/>
         <UsageCount Value="215"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -1070,8 +1071,8 @@
         <Filename Value="..\Server\FitServer.pas"/>
         <EditorIndex Value="5"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="56"/>
-        <CursorPos X="5" Y="72"/>
+        <TopLine Value="2259"/>
+        <CursorPos X="28" Y="2275"/>
         <UsageCount Value="105"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -1114,8 +1115,8 @@
         <CursorPos Y="84"/>
         <ExtraEditorCount Value="1"/>
         <ExtraEditor1>
-          <IsVisibleTab Value="True"/>
           <EditorIndex Value="-1"/>
+          <WindowIndex Value="-1"/>
           <TopLine Value="74"/>
           <CursorPos X="77" Y="87"/>
         </ExtraEditor1>
@@ -1289,7 +1290,6 @@
       </Unit119>
       <Unit120>
         <Filename Value="..\..\fitgrids\NumericGrid.pas"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="44"/>
         <WindowIndex Value="1"/>
         <TopLine Value="495"/>
@@ -1333,122 +1333,126 @@
       <Define3 Value="WINDOWS"/>
       <Define4 Value="Lazarus"/>
     </OtherDefines>
-    <JumpHistory Count="29" HistoryIndex="28">
+    <JumpHistory Count="30" HistoryIndex="25">
       <Position1>
-        <Filename Value="SelfCopied.pas"/>
-        <Caret Line="44" Column="18" TopLine="28"/>
-      </Position1>
-      <Position2>
-        <Filename Value="DataLoaders\DataLoader.pas"/>
-        <Caret Line="61" TopLine="42"/>
-      </Position2>
-      <Position3>
-        <Filename Value="ModelCurves\CurvePointsSet.pas"/>
-        <Caret Line="222" Column="44" TopLine="206"/>
-      </Position3>
-      <Position4>
-        <Filename Value="Tools.pas"/>
-        <Caret Line="194" TopLine="164"/>
-      </Position4>
-      <Position5>
-        <Filename Value="Tools.pas"/>
-        <Caret Line="18" Column="50" TopLine="2"/>
-      </Position5>
-      <Position6>
-        <Filename Value="..\..\fitgrids\NumericGrid.pas"/>
-        <Caret Line="140" Column="38" TopLine="124"/>
-      </Position6>
-      <Position7>
         <Filename Value="..\..\fitgrids\NumericGrid.pas"/>
         <Caret Line="510" Column="38" TopLine="483"/>
-      </Position7>
-      <Position8>
+      </Position1>
+      <Position2>
         <Filename Value="..\..\fitgrids\NumericGrid.pas"/>
         <Caret Line="1715" Column="45" TopLine="1688"/>
+      </Position2>
+      <Position3>
+        <Filename Value="..\..\fitgrids\NumericGrid.pas"/>
+        <Caret Line="1823" Column="48" TopLine="1797"/>
+      </Position3>
+      <Position4>
+        <Filename Value="..\..\fitgrids\NumericGrid.pas"/>
+        <Caret Line="1863" Column="44" TopLine="1845"/>
+      </Position4>
+      <Position5>
+        <Filename Value="..\..\fitgrids\NumericGrid.pas"/>
+        <Caret Line="1560" Column="57" TopLine="1544"/>
+      </Position5>
+      <Position6>
+        <Filename Value="..\..\fitminimizers\Tools.pas"/>
+        <Caret Line="442" Column="15" TopLine="415"/>
+      </Position6>
+      <Position7>
+        <Filename Value="C:\lazarus\components\turbopower_ipro\iphtml.pas"/>
+        <Caret Line="12312" Column="6" TopLine="12297"/>
+      </Position7>
+      <Position8>
+        <Filename Value="..\..\fitminimizers\SelfCheckedComponentList.pas"/>
+        <Caret Line="49" Column="18" TopLine="33"/>
       </Position8>
       <Position9>
         <Filename Value="..\..\fitgrids\NumericGrid.pas"/>
-        <Caret Line="1823" Column="48" TopLine="1797"/>
+        <Caret Line="510" Column="23" TopLine="495"/>
       </Position9>
       <Position10>
         <Filename Value="..\..\fitgrids\NumericGrid.pas"/>
-        <Caret Line="1863" Column="44" TopLine="1845"/>
+        <Caret Line="1715" Column="45" TopLine="1688"/>
       </Position10>
       <Position11>
         <Filename Value="..\..\fitgrids\NumericGrid.pas"/>
-        <Caret Line="1560" Column="57" TopLine="1544"/>
+        <Caret Line="1823" Column="48" TopLine="1797"/>
       </Position11>
       <Position12>
-        <Filename Value="..\..\fitminimizers\Tools.pas"/>
-        <Caret Line="442" Column="15" TopLine="415"/>
-      </Position12>
-      <Position13>
-        <Filename Value="C:\lazarus\components\turbopower_ipro\iphtml.pas"/>
-        <Caret Line="12312" Column="6" TopLine="12297"/>
-      </Position13>
-      <Position14>
-        <Filename Value="..\..\fitminimizers\SelfCheckedComponentList.pas"/>
-        <Caret Line="49" Column="18" TopLine="33"/>
-      </Position14>
-      <Position15>
-        <Filename Value="..\..\fitgrids\NumericGrid.pas"/>
-        <Caret Line="510" Column="23" TopLine="495"/>
-      </Position15>
-      <Position16>
-        <Filename Value="..\..\fitgrids\NumericGrid.pas"/>
-        <Caret Line="1715" Column="45" TopLine="1688"/>
-      </Position16>
-      <Position17>
-        <Filename Value="..\..\fitgrids\NumericGrid.pas"/>
-        <Caret Line="1823" Column="48" TopLine="1797"/>
-      </Position17>
-      <Position18>
         <Filename Value="..\..\fitgrids\NumericGrid.pas"/>
         <Caret Line="1883" Column="11" TopLine="1851"/>
-      </Position18>
-      <Position19>
+      </Position12>
+      <Position13>
         <Filename Value="..\..\fitgrids\NumericGrid.pas"/>
         <Caret Line="1197" Column="20" TopLine="1178"/>
-      </Position19>
-      <Position20>
+      </Position13>
+      <Position14>
         <Filename Value="SelfCopied.pas"/>
         <Caret Line="44" Column="18" TopLine="28"/>
+      </Position14>
+      <Position15>
+        <Filename Value="..\..\fitminimizers\SelfCheckedComponentList.pas"/>
+        <Caret Line="47" Column="25" TopLine="31"/>
+      </Position15>
+      <Position16>
+        <Filename Value="..\..\fitminimizers\SelfCheckedComponentList.pas"/>
+        <Caret Line="184" Column="25" TopLine="157"/>
+      </Position16>
+      <Position17>
+        <Filename Value="..\..\fitminimizers\SelfCheckedComponentList.pas"/>
+        <Caret Line="191" Column="21" TopLine="164"/>
+      </Position17>
+      <Position18>
+        <Filename Value="..\..\fitminimizers\SelfCheckedComponentList.pas"/>
+        <Caret Line="244" Column="21" TopLine="217"/>
+      </Position18>
+      <Position19>
+        <Filename Value="..\..\fitminimizers\SelfCheckedComponentList.pas"/>
+        <Caret Line="268" TopLine="241"/>
+      </Position19>
+      <Position20>
+        <Filename Value="..\..\fitminimizers\SelfCheckedComponentList.pas"/>
       </Position20>
       <Position21>
         <Filename Value="..\..\fitminimizers\SelfCheckedComponentList.pas"/>
-        <Caret Line="47" Column="25" TopLine="31"/>
+        <Caret Line="47" Column="42" TopLine="31"/>
       </Position21>
       <Position22>
-        <Filename Value="..\..\fitminimizers\SelfCheckedComponentList.pas"/>
-        <Caret Line="184" Column="25" TopLine="157"/>
-      </Position22>
-      <Position23>
-        <Filename Value="..\..\fitminimizers\SelfCheckedComponentList.pas"/>
-        <Caret Line="191" Column="21" TopLine="164"/>
-      </Position23>
-      <Position24>
-        <Filename Value="..\..\fitminimizers\SelfCheckedComponentList.pas"/>
-        <Caret Line="244" Column="21" TopLine="217"/>
-      </Position24>
-      <Position25>
-        <Filename Value="..\..\fitminimizers\SelfCheckedComponentList.pas"/>
-        <Caret Line="268" TopLine="241"/>
-      </Position25>
-      <Position26>
-        <Filename Value="..\..\fitminimizers\SelfCheckedComponentList.pas"/>
-      </Position26>
-      <Position27>
-        <Filename Value="..\..\fitminimizers\SelfCheckedComponentList.pas"/>
-        <Caret Line="47" Column="42" TopLine="31"/>
-      </Position27>
-      <Position28>
         <Filename Value="Tools.pas"/>
         <Caret Line="18" TopLine="2"/>
-      </Position28>
-      <Position29>
+      </Position22>
+      <Position23>
         <Filename Value="Tools.pas"/>
         <Caret Line="453" TopLine="434"/>
+      </Position23>
+      <Position24>
+        <Filename Value="..\..\fitgrids\NumericGrid.pas"/>
+        <Caret Line="511" Column="13" TopLine="495"/>
+      </Position24>
+      <Position25>
+        <Filename Value="..\Server\FitServer.pas"/>
+        <Caret Line="2275" Column="28" TopLine="2259"/>
+      </Position25>
+      <Position26>
+        <Filename Value="ModelCurves\PointsSet.pas"/>
+        <Caret Line="22" Column="33" TopLine="12"/>
+      </Position26>
+      <Position27>
+        <Filename Value="SelfCopied.pas"/>
+        <Caret Line="38" Column="52" TopLine="22"/>
+      </Position27>
+      <Position28>
+        <Filename Value="SelfCopied.pas"/>
+        <Caret Line="23" Column="5" TopLine="7"/>
+      </Position28>
+      <Position29>
+        <Filename Value="SelfCopied.pas"/>
+        <Caret Line="38" Column="53" TopLine="22"/>
       </Position29>
+      <Position30>
+        <Filename Value="FitClientApp.pas"/>
+        <Caret Line="34" Column="32" TopLine="18"/>
+      </Position30>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

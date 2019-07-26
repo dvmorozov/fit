@@ -98,8 +98,6 @@ begin
 end;
 
 procedure TFitServerWithThread.AbortAsyncOper;
-var i: LongInt;
-    FT: TFitTask;
 begin
     if State <> AsyncOperation then
         raise EUserException.Create(InadmissibleServerState + CRLF +
@@ -116,8 +114,6 @@ begin
 end;
 
 procedure TFitServerWithThread.StopAsyncOper;
-var i: LongInt;
-    FT: TFitTask;
 begin
     if State <> AsyncOperation then
         raise EUserException.Create(InadmissibleServerState + CRLF +

@@ -42,8 +42,6 @@ type
 
         procedure SetItem(index: Integer; Item: TComponent);
         procedure SetCapacity(ACapacity: Integer);
-        //  устанавливает связи со вставляемыми компонентами, если необходимо
-        procedure LinkItemWithList(const Item: TComponent); virtual; abstract;
 
         function GetSelfCheckingMode: LongInt; virtual; abstract;
         procedure SetSelfCheckingMode(const AMode: LongInt); virtual; abstract;
@@ -67,9 +65,6 @@ type
         procedure Pack;
         function GetState: LongInt;
         procedure SetState(AState: LongInt);
-        //  выполняется после чтения списка из потока
-        procedure ActionAfterReading; virtual;
-        procedure LinkAllItemsWithList;
 
         procedure Clear;
         procedure ClearAll;
@@ -170,26 +165,9 @@ begin
     List.Capacity := ACapacity;
 end;
 
-procedure TComponentList.ActionAfterReading;
-begin
-    LinkAllItemsWithList;
-end;
-
-procedure TComponentList.LinkAllItemsWithList;
-var i: LongInt;
-    TC: TComponent;
-begin
-    for i := 0 to Count - 1 do
-    begin
-        TC := Items[i];
-        LinkItemWithList(TC);
-    end;
-end;
-
 function TComponentList.Add;
 begin
     Add := List.Add(Item);
-    LinkItemWithList(Item);
 end;
 
 procedure TComponentList.Sort(Compare: TListSortCompare);
@@ -242,7 +220,6 @@ end;
 procedure TComponentList.Insert(Index: Integer; Item: TComponent);
 begin
     List.Insert(Index, Item);
-    LinkItemWithList(Item);
 end;
 
 procedure TComponentList.Pack;

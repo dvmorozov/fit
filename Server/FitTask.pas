@@ -196,15 +196,6 @@ type
           Calculates resulting profile. }
         procedure CalculateProfile;
 
-        { Control methods. }
-        
-        { Synchronously terminates long-term operation without calling termination method. }
-        procedure AbortAsyncOper; virtual; abstract;
-        { Asynchronously terminates long-term operation with calling termination method. }
-        procedure StopAsyncOper; virtual; abstract;
-
-        { Long-term methods. }
-
         { Fits pattern specimens starting from given parameter set (initially or repeatedly). }
         procedure FindGausses; virtual;
         procedure FindGaussesAgain; virtual;

@@ -110,12 +110,6 @@ begin
 
     DoneDisabled := True;
 
-    for i := 0 to TaskList.Count - 1 do
-    begin
-        FT := TFitTask(TaskList.Items[i]);
-        FT.AbortAsyncOper;
-    end;
-
     MainCalcThread.Terminate;
     DestroyMainCalcThread;
     FState := SavedState;
@@ -132,12 +126,6 @@ begin
     Assert(Assigned(TaskList));
     Assert(Assigned(MainCalcThread));
     
-    for i := 0 to TaskList.Count - 1 do
-    begin
-        FT := TFitTask(TaskList.Items[i]);
-        FT.StopAsyncOper;
-    end;
-
     MainCalcThread.Terminate;
     //  ozhidaniya zdes' nikakogo byt' ne dolzhno,
     //  poskol'ku metod vypolnyaetsya sinhronno i

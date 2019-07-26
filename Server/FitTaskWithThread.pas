@@ -45,9 +45,9 @@ type
         constructor Create(AOwner: TComponent); override;
         destructor Destroy; override;
 		{ Synchronous termination of long-term operation without call of termination procedure. }
-        procedure AbortAsyncOper; override;
+        procedure AbortAsyncOper;
 		{ Asynchronous termination of long-term operation with call of termination procedure. }
-        procedure StopAsyncOper; override;
+        procedure StopAsyncOper;
         //  ozhidaet zaversheniya vypolneniya potoka
         procedure DestroyMainCalcThread;
 

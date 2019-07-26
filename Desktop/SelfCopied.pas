@@ -49,9 +49,6 @@ type
         function GetSharedCopy: TObject; virtual;
         procedure CopyParameters(const Dest: TObject); virtual;
 
-        procedure SetSelfCopyingMode(const AMode: LongInt); virtual; abstract;
-        function GetSelfCopyingMode: LongInt; virtual; abstract;
-
         procedure Insert(Index: Integer; Item: TComponent); override;
         function Add(Item: TComponent): Integer; override;
     end;

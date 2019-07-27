@@ -93,19 +93,6 @@ type
             //  сохраняет во внутренних полях
             //  значения высоты строк таблицы
 
-        procedure SetRowContents(
-            //  заполняет строку таблицы с номером RowNum
-            Grid: TStringGrid; RowNum: LongInt); virtual; abstract;
-        function GetRowContents(
-            //  сохраняет содержимое строки с номером RowNum
-            Grid: TStringGrid; RowNum: LongInt): Boolean; virtual; abstract;
-        procedure SetColContents(
-            //  заполняет столбец таблицы с номером ColNum
-            Grid: TStringGrid; ColNum: LongInt); virtual; abstract;
-        function GetColContents(
-            //  сохраняет содержимое столбца с номером ColNum
-            Grid: TStringGrid; ColNum: LongInt): Boolean; virtual; abstract;
-
         procedure InitColWidths;    //  первоначальная инициализация массива
         procedure InitRowHeights;
 
@@ -290,6 +277,13 @@ type
         function MayIDoClearAllCells: Boolean; override;
         function MayIDoClearSelectedArea: Boolean; override;
 
+        procedure SetRowContents(
+            //  заполняет строку таблицы с номером RowNum
+            Grid: TStringGrid; RowNum: LongInt); virtual; abstract;
+        function GetRowContents(
+            //  сохраняет содержимое строки с номером RowNum
+            Grid: TStringGrid; RowNum: LongInt): Boolean; virtual; abstract;
+
         procedure RowsDeleted(
             const StartRow, RowsCount: LongInt); override;
         procedure RowsInserted(
@@ -342,6 +336,13 @@ type
         function MayIDoDeleteAllData: Boolean; override;
         function MayIDoClearSelectedArea: Boolean; override;
         function MayIDoClearAllCells: Boolean; override;
+
+        procedure SetColContents(
+            //  заполняет столбец таблицы с номером ColNum
+            Grid: TStringGrid; ColNum: LongInt); virtual; abstract;
+        function GetColContents(
+            //  сохраняет содержимое столбца с номером ColNum
+            Grid: TStringGrid; ColNum: LongInt): Boolean; virtual; abstract;
 
         procedure ColumnsDeleted(
             const StartCol, ColsCount: LongInt); override;

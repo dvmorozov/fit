@@ -89,7 +89,8 @@ type
         function Func: Double;
         procedure CalcFunc;
         function GetStep: Double;
-        procedure SetStep(NewStepValue: Double); virtual; abstract;
+        { Should be implemented because is used by pointer. See OnSetStep. }
+        procedure SetStep(NewStepValue: Double);
         procedure SetNextParam;
         procedure SetFirstParam;
         function GetParam: Double;
@@ -525,6 +526,13 @@ begin
             Result := 0.1;
     end;
 end;
+
+{$hints off}
+procedure TFitTask.SetStep(NewStepValue: Double);
+begin
+
+end;
+{$hints on}
 
 procedure TFitTask.SetNextParam;
 var GP: TCurvePointsSet;

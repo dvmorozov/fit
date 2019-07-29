@@ -123,8 +123,9 @@ type
             //  (таблица установит цвет "по умолчанию")
             const ACol, ARow: LongInt;
             var Color: TColor): Boolean; virtual;
+        { Returns default empty mask. }
         function GetCellEditMask(
-            const ACol, ARow: LongInt): string; virtual; abstract;
+            const ACol, ARow: LongInt): string; virtual;
         function GetCellEnabledCharSet(
             const ACol, ARow: LongInt): TCharSet; virtual; abstract;
         function IsCellDisabled(
@@ -831,7 +832,14 @@ end;
 function TTableCompList.GetCellColor(const ACol, ARow: Integer;
     var Color: TColor): Boolean;
 begin
+    Color := clDefault;
     Result := False;
+end;
+
+function TTableCompList.GetCellEditMask(
+    const ACol, ARow: LongInt): string;
+begin
+    Result := '';
 end;
 
 function TTableCompList.IsCellDisabled(const ACol, ARow: Integer): Boolean;

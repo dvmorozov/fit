@@ -36,6 +36,7 @@ type
 
     { Class-singleton containing information about curve types. }
 {$warnings off}
+{$hints off}
     TCurveTypesSingleton = class(TCBRCComponent,
         ICurveFactory, ICurveTypeIterator, ICurveTypeSelector)
     private
@@ -51,6 +52,7 @@ type
         class function Create: TCurveTypesSingleton;
         procedure RegisterCurveType(CurveClass: TCurveClass);
         { Implementation of ICurveFactory. }
+        { TODO: create implementation based on TFitTask.GetPatternSpecimen: TCurvePointsSet. }
         function CreatePointsSet(TypeId: TCurveTypeId): TNamedPointsSet; virtual; abstract;
         { Implementation of ICurveTypeIterator. }
         procedure FirstCurveType;
@@ -64,7 +66,6 @@ type
         { Returns value of FCurrentCurveType. The value should be checked on Nil. }
         function GetSelectedCurveType: TCurveTypeId;
     end;
-{$warnings on}
 
 implementation
 
@@ -210,6 +211,8 @@ begin
         Result := StringToGUID('{00000000-0000-0000-0000-000000000000}');
 end;
 
+{$hints on}
+{$warnings on}
 end.
 
 

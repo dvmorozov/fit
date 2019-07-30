@@ -90,7 +90,6 @@ type
     public
         CurrentMinimum: Double;
         
-        procedure MinimizeStep; virtual; abstract;
         procedure Minimize(var ErrorCode: LongInt); virtual; abstract;
         // vozvraschaet kod oshibki
         function IsReady: LongInt; virtual;

@@ -51,7 +51,7 @@ type
         procedure OnException(Sender: TObject; E: Exception);
 
     public
-        constructor Create;
+        constructor Create(AOwner: TComponent); override;
         destructor Destroy; override;
 
 {$IFDEF FIT}
@@ -73,12 +73,12 @@ uses Main;
 
 {================================ TFitServerApp ===============================}
 
-constructor TFitServerApp.Create;
+constructor TFitServerApp.Create(AOwner: TComponent);
 begin
     //  raskommentirovat' pri rabote servera otdel'noy programmoy
     //Application.OnException := OnException;
 {$IFDEF FIT}
-    FFitProxy := TFitServerProxy.Create(nil);
+    FFitProxy := TFitServerProxy.Create(AOwner);
 {$ELSE}
     FForm := TFormMain.Create(nil);
     FViewer := TFitViewer.Create(nil);

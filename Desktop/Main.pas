@@ -289,7 +289,7 @@ initialization
 
 {$IFDEF FITSERVER}
     {$IFDEF FIT}
-        FitServerApp_ := TFitServerApp.Create;
+        FitServerApp_ := TFitServerApp.Create(nil);
     {$ENDIF}
 {$ENDIF}
 

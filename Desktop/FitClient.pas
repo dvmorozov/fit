@@ -267,7 +267,7 @@ type
         procedure SetWaveLength(AWaveLength: Double);
         function GetWaveLength: Double;
 
-        constructor Create(AOwner: TComponent;
+        constructor CreateWithInjector(AOwner: TComponent;
             ADataLoaderInjector: IDataLoaderInjector);
         destructor Destroy; override;
 
@@ -375,7 +375,7 @@ begin
     inherited Destroy;
 end;
 
-constructor TFitClient.Create(AOwner: TComponent;
+constructor TFitClient.CreateWithInjector(AOwner: TComponent;
     ADataLoaderInjector: IDataLoaderInjector);
 begin
     inherited Create(AOwner);

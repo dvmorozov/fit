@@ -337,7 +337,9 @@ end;
 initialization
     RegisterClass(Curve_parameters);
     RegisterClass(TSpecimenList);
+{$warnings off}
     DecimalSeparator := '.';
+{$warnings on}
 end.
 
 

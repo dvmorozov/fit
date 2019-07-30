@@ -21,6 +21,7 @@ uses SysUtils, IntExpressionParser, CurvePointsSet,
 type
     { Class-adapter implementing basic operation for parsing curve expression.
       Implemented as singleton. }
+{$warnings off}
     TExpressionParserAdapter = class(TCBRCComponent, IExpressionParser)
     private
         class var FExpressionParserAdapter: TExpressionParserAdapter;
@@ -28,9 +29,9 @@ type
 
     public
         class function Create: TExpressionParserAdapter;
-
         function ParseExpression(Expression: string): Curve_parameters;
     end;
+{$warnings on}
 
 implementation
 

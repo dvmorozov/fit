@@ -18,6 +18,7 @@ interface
 uses Classes, SysUtils, IntCreateUserPointsSetDlg, CBRCComponent;
 
 type
+{$warnings off}
     { Class-adapter implementing basic operations for creating user
       dialog for configuring parameters of custom curve type. }
     TCreateUserPointsSetDlgAdapter = class(TCBRCComponent, ICreateUserPointsSetDlg)
@@ -31,6 +32,7 @@ type
         function GetExpression: string;
         function GetName: string;
     end;
+{$warnings on}
 
 implementation
 

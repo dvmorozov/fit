@@ -19,6 +19,7 @@ uses Classes, SysUtils, Settings, IntCurveTypeParametersFactory, CBRCComponent,
     CurvePointsSet;
 
 type
+{$warnings off}
     { Class-factory implementing operation for creating custom curve type object. }
     TCurveTypeParametersFactory = class(TCBRCComponent,
         ICurveTypeParametersFactory)
@@ -27,10 +28,10 @@ type
 
     public
         class function Create: TCurveTypeParametersFactory;
-
         function CreateUserCurveType(Name: string;
             Expression: string; Parameters: Curve_parameters): Curve_type;
     end;
+{$warnings on}
 
 implementation
 

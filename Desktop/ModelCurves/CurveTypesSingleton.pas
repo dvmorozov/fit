@@ -35,6 +35,7 @@ type
     end;
 
     { Class-singleton containing information about curve types. }
+{$warnings off}
     TCurveTypesSingleton = class(TCBRCComponent,
         ICurveFactory, ICurveTypeIterator, ICurveTypeSelector)
     private
@@ -63,6 +64,7 @@ type
         { Returns value of FCurrentCurveType. The value should be checked on Nil. }
         function GetSelectedCurveType: TCurveTypeId;
     end;
+{$warnings on}
 
 implementation
 

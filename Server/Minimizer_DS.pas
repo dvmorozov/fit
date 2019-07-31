@@ -46,13 +46,13 @@ type
         {IDiscretValue}
         function GetNumberOfValues: LongInt;
         function GetValueIndex: LongInt;
-        procedure SetValueIndex(const AValueIndex: LongInt); virtual; abstract;
+        procedure SetValueIndex(const AValueIndex: LongInt);
 
         {IUpdatingResults}
         procedure ShowCurJobProgress(Sender: TComponent;
-            MinValue, MaxValue, CurValue: LongInt); virtual; abstract;
-        procedure ResetCurJobProgress(Sender: TComponent); virtual; abstract;
-        procedure ShowMessage(Sender: TComponent; Msg: string); virtual; abstract;
+            MinValue, MaxValue, CurValue: LongInt);
+        procedure ResetCurJobProgress(Sender: TComponent);
+        procedure ShowMessage(Sender: TComponent; Msg: string);
         procedure UpdatingResults(Sender: TComponent);
 
         constructor Create(AOwner: TComponent); override;
@@ -147,6 +147,29 @@ function TDownhillSimplexMinimizer.GetValueIndex: LongInt;
 begin
     Result := 0;
 end;
+
+procedure TDownhillSimplexMinimizer.SetValueIndex(const AValueIndex: LongInt);
+begin
+    Assert(AValueIndex = 0);
+end;
+
+{$hints off}
+procedure TDownhillSimplexMinimizer.ShowCurJobProgress(Sender: TComponent;
+    MinValue, MaxValue, CurValue: LongInt);
+begin
+
+end;
+
+procedure TDownhillSimplexMinimizer.ResetCurJobProgress(Sender: TComponent);
+begin
+
+end;
+
+procedure TDownhillSimplexMinimizer.ShowMessage(Sender: TComponent; Msg: string);
+begin
+
+end;
+{$hints on}
 
 procedure TDownhillSimplexMinimizer.UpdatingResults(Sender: TComponent);
 begin

@@ -22,9 +22,6 @@ type
         ['{E7E7008A-EE1C-4828-B1D6-A53806820A66}']
         procedure IsReady;
         function MyNameIs: string;
-        //методы для установки / получения режима самопроверки
-        procedure SetSelfCheckingMode(const AMode: LongInt);
-        function GetSelfCheckingMode: LongInt;
     end;
 
 const SelfCheckedGUID: TGUID = '{E7E7008A-EE1C-4828-B1D6-A53806820A66}';
@@ -43,9 +40,6 @@ type
         procedure SetItem(index: Integer; Item: TComponent);
         procedure SetCapacity(ACapacity: Integer);
 
-        function GetSelfCheckingMode: LongInt; virtual; abstract;
-        procedure SetSelfCheckingMode(const AMode: LongInt); virtual; abstract;
-        
         procedure ReadList(Reader: TReader);
         procedure WriteList(Writer: TWriter);
 
@@ -57,9 +51,6 @@ type
 
         procedure IsReady; virtual;
         function MyNameIs: string; virtual;
-        //  устанавливает заданный режим самопроверки на всех
-        //  элементах, поддерживающих интерфейс самопроверки
-        procedure SetCheckingModeInItems(const AMode: LongInt);
 
         procedure Sort(Compare: TListSortCompare);
         procedure Pack;
@@ -249,15 +240,6 @@ var i: LongInt;
 begin
     for i := 0 to Count - 1 do
         if Items[i].GetInterface(SelfCheckedGUID, ISC) then ISC.IsReady;
-end;
-
-procedure TComponentList.SetCheckingModeInItems(const AMode: LongInt);
-var i: LongInt;
-    ISC: ISelfChecked;
-begin
-    for i := 0 to Count - 1 do
-        if Items[i].GetInterface(SelfCheckedGUID, ISC) then
-            ISC.SetSelfCheckingMode(AMode);
 end;
 
 function TComponentList.MyNameIs: string;

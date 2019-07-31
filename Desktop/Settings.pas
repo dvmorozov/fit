@@ -99,6 +99,7 @@ procedure ReadComponentFromXMLConfig(XMLConfig: TXMLConfig; const Path: string;
 
 implementation
 
+{$warnings off}
 function CreateXMLWriter(ADoc: TDOMDocument; const Path: string;
     Append: Boolean; var DestroyDriver: Boolean): TWriter;
 var Driver: TAbstractObjectWriter;
@@ -128,6 +129,7 @@ begin
         DummyStream := nil;
     end;
 end;
+{$warnings on}
 
 procedure WriteComponentToXMLConfig(XMLConfig: TXMLConfig; const Path: string;
     AComponent: TComponent);

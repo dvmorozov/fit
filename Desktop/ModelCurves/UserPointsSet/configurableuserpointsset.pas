@@ -31,12 +31,11 @@ implementation
 uses
 {$IFNDEF SERVER}
   UserPointsSetPropDialog, ExpressionParserAdapter, CurveTypeStorageAdapter,
-  MainForm,
+  MainForm, CurveTypeParametersFactory, CreateUserPointsSetDlgAdapter,
 {$ELSE}
   FormServer,
 {$ENDIF}
-  CurveTypeParametersFactory, CreateUserPointsSetDlgAdapter, Settings,
-  Controls, Main, Dialogs;
+  Settings, Controls, Main, Dialogs;
 
 class function TConfigurableUserPointsSet.HasConfigurableParameters: Boolean;
 begin

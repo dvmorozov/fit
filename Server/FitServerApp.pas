@@ -72,7 +72,7 @@ implementation
 uses Main;
 
 {================================ TFitServerApp ===============================}
-
+{$hints off}
 constructor TFitServerApp.Create(AOwner: TComponent);
 begin
     //  raskommentirovat' pri rabote servera otdel'noy programmoy
@@ -90,6 +90,7 @@ begin
 
     FFitServer := FFitStub.Server;
 end;
+{$hints on}
 
 destructor TFitServerApp.Destroy;
 begin

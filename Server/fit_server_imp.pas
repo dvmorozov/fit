@@ -2938,7 +2938,7 @@ Begin
     Result := 0;    //  vozvrat v sluchae oschibki
     try
         Assert(Assigned(ProblemList));
-        Problem := TFitServerApp.Create;
+        Problem := TFitServerApp.Create(nil);
         Result := Longint(Problem);
 
         EnterCriticalsection(CS);

@@ -16,7 +16,7 @@ unit CurvePointsSet;
 interface
 
 uses Classes, SysUtils, SimpMath, SelfCopied, PointsSet, TitlePointsSet,
-  DataLoader;
+  data_loader;
 
 type
     TParameterType = (

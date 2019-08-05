@@ -18,7 +18,7 @@ unit FitServerMultithreaded;
 interface
 
 uses SysUtils, FitTask, FitTaskWithThread, FitServerWithThread,
-    FitServer, MyExceptions, CommonTypes;
+    FitServer, MyExceptions, common_types;
 
 type
     { Executes algorithms in separate threads. }

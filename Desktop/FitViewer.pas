@@ -17,9 +17,9 @@ interface
 
 uses PointsSet, Classes, SysUtils, Graphics, SelfCopied,
     TitlePointsSet, NeutronPointsSet, CurvePointsSet, NamedPointsSet,
-    DataLoader,
+    data_loader,
 {$IFNDEF SERVER}
-    FitClient, IntFitViewer,
+    fit_client, IntFitViewer,
 {$ENDIF}
     tagraph, Forms, SelfCheckedComponentList, MSCRDataClasses;
 
@@ -48,7 +48,7 @@ type
      )
     protected
 {$IFNDEF SERVER}
-        FitClient: TFitClient;
+        fit_client: TFitClient;
 {$ENDIF}
         FXCoordMode: LongInt;
         MaxX, MinX, MaxY, MinY: Double;
@@ -222,8 +222,8 @@ uses
 {$IFNDEF SERVER}
 procedure TFitViewer.SetFitClient(AFitClient: TFitClient);
 begin
-    FitClient := AFitClient;
-    FitClient.FitViewer := Self;
+    fit_client := AFitClient;
+    fit_client.FitViewer := Self;
 end;
 {$ENDIF}
 const

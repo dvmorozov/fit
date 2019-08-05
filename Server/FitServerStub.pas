@@ -17,7 +17,7 @@ unit FitServerStub;
 
 interface
 
-uses SysUtils, FitServer, CommonTypes, SelfCopied, MSCRDataClasses,
+uses SysUtils, FitServer, common_types, SelfCopied, MSCRDataClasses,
     MyExceptions, IntPointsSet, PointsSet, TitlePointsSet, CurvePointsSet,
     NamedPointsSet;
 

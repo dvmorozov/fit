@@ -19,9 +19,9 @@ interface
 uses
     LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
     ExtCtrls, StdCtrls, Menus, PointsSet, FitViewer, ComCtrls,
-    FitClient, NumericGrid, CheckLst, MSCRDataClasses,
+    fit_client, NumericGrid, CheckLst, MSCRDataClasses,
     LResources, tagraph, ActnList, Settings, Laz_XMLCfg,
-    MyExceptions, CommonTypes, Main, NeutronPointsSet,
+    MyExceptions, common_types, Main, NeutronPointsSet,
     IntPointsSet, CurvePointsSet, UserPointsSet, GaussPointsSet,
     PseudoVoigtPointsSet, AsymPseudoVoigtPointsSet, LorentzPointsSet,
     TwoBranchesPseudoVoigtPointsSet, NamedPointsSet, CurveTypesSingleton,

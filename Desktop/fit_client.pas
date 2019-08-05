@@ -9,7 +9,7 @@ without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
 LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
 Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
-unit FitClient;
+unit fit_client;
 
 {$MODE Delphi}
 
@@ -18,7 +18,7 @@ interface
 uses Classes, PointsSet, TitlePointsSet, SelfCopied, SysUtils, MSCRDataClasses,
     CBRCComponent, NeutronPointsSet,
     IntPointsSet, CurvePointsSet, IntClientCallback,
-    IntFitViewer, IntDataLoader, IntDataLoaderInjector, int_fit_service
+    IntFitViewer, int_data_loader, int_data_loader_injector, int_fit_service
     {$IFDEF FIT}
     , FitServer
     {$ENDIF}

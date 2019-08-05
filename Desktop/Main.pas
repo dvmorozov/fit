@@ -26,7 +26,7 @@ uses SysUtils, Forms
     , windows, shfolder
 {$ENDIF}
 {$IFDEF FITCLIENT}
-    , FitClientApp
+    , fit_client_app
 {$ENDIF}
 {$IFDEF FITSERVER}
     {$IFDEF FIT}

@@ -11,8 +11,8 @@ uses
   MainForm,
   AboutBoxDialog,
   InputWavelengthDialog, InputBackFactorDialog, InputMaxRFactorDialog,
-  FitClient, FitClientStub,
-  FitClientApp,
+  fit_client, fit_client_stub,
+  fit_client_app,
   Settings, TurboPowerIPro,
   FitGrids, SelfCheckedComponentList,
   StrUtils
@@ -21,7 +21,7 @@ uses
 {$else}
   ,TA_LINUX
 {$endif}
-  , Main, CommonTypes, TableComp, ClassInheritIDs, GeneralHashFunctions,
+  , Main, common_types, TableComp, serialization_ids, GeneralHashFunctions,
   CreateUserPointsSetDialog, UserPointsSetPropDialog,
   ConfigurablePointsSet, ConfigurableUserPointsSet, int_fit_service;
 

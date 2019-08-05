@@ -9,13 +9,13 @@ without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
 LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
 Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
-unit IntDataLoaderInjector;
+unit int_data_loader_injector;
 
 {$MODE Delphi}
 
 interface
 
-uses IntDataLoader;
+uses int_data_loader;
 
 type
     { Interface defining basic operation for creating data loader. }

@@ -16,7 +16,7 @@ unit int_fit_service;
 interface
 
 uses
-    Classes, SysUtils, IntPointsSet, CommonTypes, PointsSet, TitlePointsSet,
+    Classes, SysUtils, IntPointsSet, common_types, PointsSet, TitlePointsSet,
     MSCRDataClasses, SelfCopied
 {$IFNDEF EXCLUDE_SOMETHING}
     , CurvePointsSet

@@ -9,14 +9,14 @@ without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
 LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
 Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
-unit DataLoader;
+unit data_loader;
 
 {$MODE Delphi}
 
 interface
 
 uses Classes, SysUtils, PointsSet, TitlePointsSet,
-  NeutronPointsSet, IntDataLoader;
+  NeutronPointsSet, int_data_loader;
 
 type
     EFileNotExists = class(Exception);

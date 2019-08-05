@@ -9,14 +9,14 @@ without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
 LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
 Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
-unit ExtensionDataLoaderInjector;
+unit extension_data_loader_injector;
 
 {$MODE Delphi}
 
 interface
 
-uses SysUtils, DataLoader, DATFileLoader, CSVFileLoader, CBRCComponent,
-  IntDataLoader, IntDataLoaderInjector;
+uses SysUtils, data_loader, dat_file_loader, csv_file_loader, CBRCComponent,
+  int_data_loader, int_data_loader_injector;
 
 type
     { Implementation of data loader injector based on file extension. }

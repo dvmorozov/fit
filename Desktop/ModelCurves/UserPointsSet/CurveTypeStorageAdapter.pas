@@ -21,6 +21,7 @@ type
     { Class-adapter implementing basic operation for 
       storing parameters of custom curve type.
       Implemented as singleton. }
+    {$warnings off}
     TCurveTypeStorageAdapter = class(TCBRCComponent, ICurveTypeStorage)
     private
         class var FCurveTypeStorageAdapter: TCurveTypeStorageAdapter;
@@ -33,6 +34,7 @@ type
         procedure UpdateCurveType(CurveType: Curve_type);
         procedure DeleteCurveType(CurveType: Curve_type);
     end;
+    {$warnings on}
 
 implementation
 

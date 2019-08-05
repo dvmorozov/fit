@@ -11,7 +11,7 @@ LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794,
 Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 
-unit ClassInheritIDs;
+unit serialization_ids;
 
 {$MODE Delphi}
 

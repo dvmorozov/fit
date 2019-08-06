@@ -8,9 +8,9 @@ uses
 {$endif}
   Interfaces,   //  LCL widgetset
   Forms, Variants,
-  MainForm,
-  AboutBoxDialog,
-  InputWavelengthDialog, InputBackFactorDialog, InputMaxRFactorDialog,
+  main_form,
+  about_box_dialog,
+  input_wavelength_dialog, input_back_factor_dialog, input_max_rfactor_dialog,
   fit_client, fit_client_stub,
   fit_client_app,
   Settings, TurboPowerIPro,

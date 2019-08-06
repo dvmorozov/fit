@@ -9,7 +9,7 @@ without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
 LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
 Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
-unit FitViewer;
+unit fit_viewer;
 
 {$MODE Delphi}
 
@@ -212,7 +212,7 @@ implementation
 
 uses
 {$IFNDEF SERVER}
-    mainform
+    main_form
 {$ELSE}
     FormServer
 {$ENDIF}

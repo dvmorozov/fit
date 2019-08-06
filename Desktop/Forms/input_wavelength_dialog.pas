@@ -9,7 +9,7 @@ without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
 LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
 Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
-unit InputWavelengthDialog;
+unit input_wavelength_dialog;
 
 {$MODE Delphi}
 
@@ -41,7 +41,7 @@ var
 
 implementation
 
-uses InputMaxRFactorDialog;
+uses input_max_rfactor_dialog;
 
 procedure TInputWavelengthDlg.FormCloseQuery(Sender: TObject;
     var CanClose: Boolean
@@ -75,7 +75,7 @@ begin
 end;
 
 initialization
-    {$i inputwavelengthdialog.lrs}
+    {$i input_wavelength_dialog.lrs}
 end.
 
 

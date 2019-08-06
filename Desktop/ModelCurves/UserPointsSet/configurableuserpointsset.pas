@@ -31,7 +31,7 @@ implementation
 uses
 {$IFNDEF SERVER}
   UserPointsSetPropDialog, ExpressionParserAdapter, CurveTypeStorageAdapter,
-  MainForm, CurveTypeParametersFactory, CreateUserPointsSetDlgAdapter,
+  main_form, CurveTypeParametersFactory, CreateUserPointsSetDlgAdapter,
 {$ELSE}
   FormServer,
 {$ENDIF}

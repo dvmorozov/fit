@@ -10,7 +10,7 @@ LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794,
 Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 
-unit AboutBoxDialog;
+unit about_box_dialog;
 
 {$MODE Delphi}
 
@@ -46,7 +46,7 @@ var
 
 implementation
 
-uses MainForm, LCLIntf;
+uses main_form, LCLIntf;
 
 { TAboutBox }
 
@@ -63,7 +63,7 @@ end;
 
 
 initialization
-  {$I aboutboxdialog.lrs}
+  {$I about_box_dialog.lrs}
 end.
  
 

@@ -9,13 +9,13 @@ without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
 LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
 Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
-unit TitlePointsSet;
+unit title_points_set;
 
 {$MODE Delphi}
 
 interface
 
-uses Classes, SysUtils, PointsSet, NeutronPointsSet;
+uses Classes, SysUtils, points_set, neutron_points_set;
 
 type
     { Point set with title. TODO: must implement functionality of argument

@@ -9,13 +9,13 @@ without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
 LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
 Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
-unit CurvePointsSet;
+unit curve_points_set;
 
 {$MODE Delphi}
 
 interface
 
-uses Classes, SysUtils, SimpMath, SelfCopied, PointsSet, TitlePointsSet,
+uses Classes, SysUtils, SimpMath, SelfCopied, points_set, title_points_set,
   data_loader;
 
 type

@@ -16,7 +16,7 @@ unit IntFitViewer;
 interface
 
 uses
-  MSCRDataClasses, SelfCopied, TitlePointsSet, NeutronPointsSet;
+  MSCRDataClasses, SelfCopied, title_points_set, neutron_points_set;
 
 type
     { Defines interface allowing to display data in chart and grids.

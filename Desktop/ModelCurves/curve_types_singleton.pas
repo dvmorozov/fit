@@ -9,14 +9,14 @@ without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
 LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
 Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
-unit CurveTypesSingleton;
+unit curve_types_singleton;
 
 {$MODE Delphi}
 
 interface
 
-uses Classes, SysUtils, NamedPointsSet, CBRCComponent, IntPointsSet,
-  IntCurveFactory, IntCurveTypeSelector, IntCurveTypeIterator, crc;
+uses Classes, SysUtils, named_points_set, CBRCComponent, int_points_set,
+  int_curve_factory, int_curve_type_selector, int_curve_type_iterator, crc;
 
 type
     { Class-reference type for base curve type. }

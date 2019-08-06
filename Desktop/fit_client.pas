@@ -15,9 +15,9 @@ unit fit_client;
 
 interface
 
-uses Classes, PointsSet, TitlePointsSet, SelfCopied, SysUtils, MSCRDataClasses,
-    CBRCComponent, NeutronPointsSet,
-    IntPointsSet, CurvePointsSet, IntClientCallback,
+uses Classes, points_set, title_points_set, SelfCopied, SysUtils, MSCRDataClasses,
+    CBRCComponent, neutron_points_set,
+    int_points_set, curve_points_set, IntClientCallback,
     IntFitViewer, int_data_loader, int_data_loader_injector, int_fit_service
     {$IFDEF FIT}
     , FitServer
@@ -85,9 +85,9 @@ type
         Sender: TObject; DeltaProfile: TTitlePointsSet) of object;
     TRefresh = procedure(Sender: TObject) of object;
     TRefreshPointsSet = procedure(
-        Sender: TObject; PointsSet: TNeutronPointsSet) of object;
+        Sender: TObject; points_set: TNeutronPointsSet) of object;
     TClear = procedure(Sender: TObject) of object;
-    THide = procedure(Sender: TObject; PointsSet: TNeutronPointsSet) of object;
+    THide = procedure(Sender: TObject; points_set: TNeutronPointsSet) of object;
     TAsyncOperationFinished = procedure(Sender: TObject) of object;
     TPlotProc = procedure of object;
 

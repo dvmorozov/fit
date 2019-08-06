@@ -18,7 +18,7 @@ interface
 
 uses
   SysUtils, LResources, Forms, ExtCtrls,
-  StdCtrls, CheckLst, CurvePointsSet, Settings;
+  StdCtrls, CheckLst, curve_points_set, Settings;
 
 type
 

@@ -9,13 +9,13 @@ without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
 LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
 Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
-unit IntCurveTypeIterator;
+unit int_curve_type_iterator;
 
 {$MODE Delphi}
 
 interface
 
-uses IntPointsSet;
+uses int_points_set;
 
 type
     { Interface defining basic operation for iterating through curve types. }

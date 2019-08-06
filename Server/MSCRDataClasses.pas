@@ -15,8 +15,7 @@ unit MSCRDataClasses;
 
 interface
 
-uses Classes, SysUtils, SimpMath,
-     DataClasses, CurvePointsSet;
+uses Classes, SysUtils, SimpMath, DataClasses, curve_points_set;
 
 const
 	{ Display mode constants. }

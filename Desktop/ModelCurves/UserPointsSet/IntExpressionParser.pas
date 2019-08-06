@@ -15,7 +15,7 @@ unit IntExpressionParser;
 
 interface
 
-uses CurvePointsSet;
+uses curve_points_set;
 
 type
     { Interface defining basic operation for parsing curve expression. }

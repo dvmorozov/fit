@@ -15,8 +15,8 @@ unit UserPointsSet;
 
 interface
 
-uses SysUtils, PointsSet, CurvePointsSet, NamedPointsSet,
-  CurveTypesSingleton, IntPointsSet, ConfigurablePointsSet, Windows;
+uses SysUtils, points_set, curve_points_set, named_points_set,
+  curve_types_singleton, int_points_set, ConfigurablePointsSet, Windows;
 
 function ParseAndCalcExpression(Expr: LPCSTR; ParamList: LPCSTR;
     Result: PDouble): LongInt; cdecl;

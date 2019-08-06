@@ -18,8 +18,8 @@ unit FitServerStub;
 interface
 
 uses SysUtils, FitServer, common_types, SelfCopied, MSCRDataClasses,
-    MyExceptions, IntPointsSet, PointsSet, TitlePointsSet, CurvePointsSet,
-    NamedPointsSet;
+    MyExceptions, int_points_set, points_set, title_points_set,
+    curve_points_set, named_points_set;
 
 type
     { For transmission through network class converts exceptions into error codes.

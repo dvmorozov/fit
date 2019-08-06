@@ -27,9 +27,9 @@ because exceptions of this type can be thrown from libraries.
 In this case keeping the state of application can't be guaranteed.
 }
 
-uses Classes, TitlePointsSet, SelfCheckedComponentList, SysUtils, MSCRDataClasses,
-     CurvePointsSet, NamedPointsSet, PointsSet, GaussPointsSet,
-     UserPointsSet, IntPointsSet,
+uses Classes, title_points_set, SelfCheckedComponentList, SysUtils,
+     MSCRDataClasses, curve_points_set, named_points_set, points_set,
+     gauss_points_set, UserPointsSet, int_points_set,
 {$IFDEF FIT}
      FitServerProxy,    //      Proxy to client to call it back.
 {$ENDIF}

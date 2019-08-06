@@ -9,14 +9,14 @@ without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
 LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
 Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
-unit TwoBranchesPseudoVoigtPointsSet;
+unit two_branches_pseudo_voigt_points_set;
 
 {$MODE Delphi}
 
 interface
 
-uses Classes, SysUtils, IntPointsSet, PointsSet, NamedPointsSet, CurvePointsSet,
-    CurveTypesSingleton, SimpMath;
+uses Classes, SysUtils, int_points_set, points_set, named_points_set, curve_points_set,
+    curve_types_singleton, SimpMath;
 
 type
     { Pseudo-Voigt curve having different form parameters for

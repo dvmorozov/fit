@@ -15,8 +15,8 @@ unit fit_viewer;
 
 interface
 
-uses PointsSet, Classes, SysUtils, Graphics, SelfCopied,
-    TitlePointsSet, NeutronPointsSet, CurvePointsSet, NamedPointsSet,
+uses points_set, Classes, SysUtils, Graphics, SelfCopied,
+    title_points_set, neutron_points_set, curve_points_set, named_points_set,
     data_loader,
 {$IFNDEF SERVER}
     fit_client, IntFitViewer,
@@ -149,11 +149,11 @@ type
         procedure Refresh(Sender: TObject);
 	{ Does not clear series but only refreshes intencities. }
         procedure RefreshPointsSet(
-            Sender: TObject; PointsSet: TNeutronPointsSet);
+            Sender: TObject; points_set: TNeutronPointsSet);
         { Method of IFitViewer interface. }
         procedure Clear(Sender: TObject);
         { Method of IFitViewer interface. }
-        procedure Hide(Sender: TObject; PointsSet: TNeutronPointsSet);
+        procedure Hide(Sender: TObject; points_set: TNeutronPointsSet);
         { Method of IFitViewer interface. }
         procedure SetUpdateGrids(Update: Boolean);
         { Method of IFitViewer interface. }
@@ -368,13 +368,13 @@ begin
 {$ENDIF}
 end;
 
-procedure TFitViewer.Hide(Sender: TObject; PointsSet: TNeutronPointsSet);
+procedure TFitViewer.Hide(Sender: TObject; points_set: TNeutronPointsSet);
 var Index: LongInt;
 begin
-    if not Assigned(PointsSet) then Exit;
+    if not Assigned(points_set) then Exit;
     if not Assigned(PointsSetList) then Exit;
     
-    Index := PointsSetList.IndexOf(PointsSet);
+    Index := PointsSetList.IndexOf(points_set);
     // el-t v CheckListBox svyazan s el-tom v PointsSetList tol'ko po indeksu
     if Index <> -1 then
     begin
@@ -384,7 +384,7 @@ begin
 {$ENDIF}
         if Index < TFormMain(Form).Chart.SeriesCount then
             TFormMain(Form).Chart.DeleteSerie(TFormMain(Form).Chart.GetSerie(Index));
-        PointsSetList.Remove(PointsSet);
+        PointsSetList.Remove(points_set);
     end;
 end;
 
@@ -404,20 +404,20 @@ begin
 end;
 
 procedure TFitViewer.RefreshPointsSet(
-    Sender: TObject; PointsSet: TNeutronPointsSet);
+    Sender: TObject; points_set: TNeutronPointsSet);
 var Index, j: LongInt;
     LS: TTASerie;
 begin
     //Assert(Assigned(PointsSet));
-    if not Assigned(PointsSet) then Exit;
+    if not Assigned(points_set) then Exit;
     if not Assigned(PointsSetList) then Exit;
 
-    Index := PointsSetList.IndexOf(PointsSet);
+    Index := PointsSetList.IndexOf(points_set);
     Assert(Index <> -1);
  
     LS := TTASerie(TFormMain(Form).Chart.GetSerie(Index));
-    Assert(LS.Count = PointsSet.PointsCount);
-    with PointsSet do
+    Assert(LS.Count = points_set.PointsCount);
+    with points_set do
         for j := 0 to PointsCount - 1 do
             LS.SetYValue(j, PointIntensity[j]);
 end;

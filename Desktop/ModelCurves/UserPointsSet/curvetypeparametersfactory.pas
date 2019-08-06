@@ -16,7 +16,7 @@ unit CurveTypeParametersFactory;
 interface
 
 uses Classes, SysUtils, Settings, IntCurveTypeParametersFactory, CBRCComponent,
-    CurvePointsSet;
+    curve_points_set;
 
 type
 {$warnings off}

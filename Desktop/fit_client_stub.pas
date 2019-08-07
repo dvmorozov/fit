@@ -16,7 +16,7 @@ unit fit_client_stub;
 
 interface
 
-uses IntClientCallback, CBRCComponent;
+uses int_client_callback, CBRCComponent;
   
 type
     TFitClientStub = class(TCBRCComponent, IClientCallback)

@@ -17,7 +17,7 @@ interface
 
 uses Classes, points_set, title_points_set, SelfCopied, SysUtils, MSCRDataClasses,
     CBRCComponent, neutron_points_set,
-    int_points_set, curve_points_set, IntClientCallback,
+    int_points_set, curve_points_set, int_client_callback,
     IntFitViewer, int_data_loader, int_data_loader_injector, int_fit_service
     {$IFDEF FIT}
     , FitServer

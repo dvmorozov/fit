@@ -23,7 +23,7 @@ uses Classes, SysUtils,
      FitServerProxy,
 {$ELSE}
      { Server build. Key SERVER is not necessary. }
-     FitViewer,
+     fit_viewer,
 {$ENDIF}
      { Receives messages from client. }
      FitServerStub,

@@ -10,7 +10,7 @@ Interface
 
 Uses SysUtils, Classes, FitServerApp, ComponentList,
     MyExceptions, base_service_intf, server_service_intf,
-    fit_server, TitlePointsSet, PointsSet, IntPointsSet;
+    fit_server, title_points_set, points_set, int_points_set;
 
 Type
   //  metody etogo klassa vyzyvayutsya vneschnimi klientami,
@@ -1000,7 +1000,7 @@ var Problem: TFitServerApp;
     i: LongInt;
     B: Byte;
     R: TRect;
-    SizeChanged: Boolean;
+    //SizeChanged: Boolean;
     EC: LongInt;
     W, H: LongInt;
 Begin
@@ -1082,6 +1082,7 @@ Begin
                 PlotDataPoints(nil, Data);
             end;
 
+            BackgroundPoints := nil;
             Result.ErrCode := Problem.FitStub.GetBackgroundPoints(
                 BackgroundPoints, Result.ErrMsg);
             if Result.ErrCode <> 0 then Exit;
@@ -1970,8 +1971,9 @@ var Problem: TFitServerApp;
     PS: TPointsSet;
     EC: LongInt;
 Begin
+    Result := nil;
+    PS := nil;
     try
-        Result := nil;
         Result := TPointsResult.Create; //  ob'ekty vozvraschayutsya po ssylke
     except
         on E: Exception do begin WriteLog(E.Message, Fatal); Exit; end
@@ -2020,8 +2022,9 @@ var Problem: TFitServerApp;
     PS: TPointsSet;
     EC: LongInt;
 Begin
+    Result := nil;
+    PS := nil;
     try
-        Result := nil;
         Result := TPointsResult.Create; //  ob'ekty vozvraschayutsya po ssylke
     except
         on E: Exception do begin WriteLog(E.Message, Fatal); Exit; end

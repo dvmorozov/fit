@@ -13,7 +13,6 @@ uses
   Forms,
   Variants,
   DataLoader,
-  FitViewer,
   Math3d,
   DownhillSimplexContainer,
   AlgorithmContainer,

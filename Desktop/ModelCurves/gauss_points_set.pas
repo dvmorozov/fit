@@ -31,7 +31,7 @@ type
         function GetCurveTypeName: string; override;
         { Overrides method defined in TNamedPointsSet. }
         function GetCurveTypeId: TCurveTypeId; override;
-        class function GetCurveTypeId_: TCurveTypeId; override;
+        class function GetCurveTypeId_: TCurveTypeId; virtual;
     end;
 
     ValuePair = class(TObject)

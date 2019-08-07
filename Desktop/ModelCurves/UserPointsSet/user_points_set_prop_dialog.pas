@@ -9,10 +9,9 @@ without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
 LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
 Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
-unit UserPointsSetPropDialog;
+unit user_points_set_prop_dialog;
 
 {$MODE Delphi}
-//{$mode objfpc}{$H+}
 
 interface
 
@@ -230,7 +229,7 @@ begin
 end;
 
 initialization
-  {$I userpointssetpropdialog.lrs}
+  {$I user_points_set_prop_dialog.lrs}
 end.
 
 

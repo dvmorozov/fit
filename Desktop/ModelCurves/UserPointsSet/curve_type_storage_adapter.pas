@@ -9,13 +9,13 @@ without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
 LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
 Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
-unit CurveTypeStorageAdapter;
+unit curve_type_storage_adapter;
 
 {$MODE Delphi}
 
 interface
 
-uses SysUtils, Settings, CBRCComponent, IntCurveTypeStorage;
+uses SysUtils, Settings, CBRCComponent, int_curve_type_storage;
 
 type
     { Class-adapter implementing basic operation for 

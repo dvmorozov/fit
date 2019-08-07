@@ -1,11 +1,11 @@
-unit NonConfigurablePointsSet;
+unit non_configurable_points_set;
 
 {$mode delphi}
 
 interface
 
 uses
-  SysUtils, ConfigurablePointsSet;
+  SysUtils, configurable_points_set;
 
 type
   { Should be used by all curve types which

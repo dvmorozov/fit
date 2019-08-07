@@ -22,8 +22,8 @@ uses
   ,TA_LINUX
 {$endif}
   , Main, common_types, TableComp, serialization_ids, GeneralHashFunctions,
-  CreateUserPointsSetDialog, UserPointsSetPropDialog,
-  ConfigurablePointsSet, ConfigurableUserPointsSet, int_fit_service;
+  create_user_points_set_dlg, user_points_set_prop_dialog,
+  configurable_points_set, configurable_user_points_set, int_fit_service;
 
 {$R manifest.res}
 

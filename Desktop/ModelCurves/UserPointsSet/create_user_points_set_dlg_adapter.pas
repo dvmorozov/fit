@@ -9,13 +9,13 @@ without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
 LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
 Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
-unit CreateUserPointsSetDlgAdapter;
+unit create_user_points_set_dlg_adapter;
 
 {$MODE Delphi}
 
 interface
 
-uses Classes, SysUtils, IntCreateUserPointsSetDlg, CBRCComponent;
+uses Classes, SysUtils, int_create_user_points_set_dlg, CBRCComponent;
 
 type
 {$warnings off}
@@ -36,7 +36,7 @@ type
 
 implementation
 
-uses CreateUserPointsSetDialog;
+uses create_user_points_set_dlg;
 
 { Class members aren't supported by Lazarus 0.9.24, global variable are used instead. }
 var FCreateUserPointsSetDlgAdapter: TCreateUserPointsSetDlgAdapter;

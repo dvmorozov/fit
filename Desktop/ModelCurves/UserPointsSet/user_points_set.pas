@@ -9,14 +9,14 @@ without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
 LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
 Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
-unit UserPointsSet;
+unit user_points_set;
 
 {$MODE Delphi}
 
 interface
 
 uses SysUtils, points_set, curve_points_set, named_points_set,
-  curve_types_singleton, int_points_set, ConfigurablePointsSet, Windows;
+  curve_types_singleton, int_points_set, configurable_points_set, Windows;
 
 function ParseAndCalcExpression(Expr: LPCSTR; ParamList: LPCSTR;
     Result: PDouble): LongInt; cdecl;
@@ -54,7 +54,7 @@ type
     
 implementation
 
-uses ConfigurableUserPointsSet;
+uses configurable_user_points_set;
 
 {=========================== TUserPointsSet ================================}
 

@@ -1,11 +1,11 @@
-unit ConfigurableUserPointsSet;
+unit configurable_user_points_set;
 
 {$mode delphi}
 
 interface
 
 uses
-  Classes, SysUtils, ConfigurablePointsSet;
+  Classes, SysUtils, configurable_points_set;
 
 type
   { Special implementation used by TUserPointsSet. }
@@ -30,8 +30,8 @@ implementation
 
 uses
 {$IFNDEF SERVER}
-  UserPointsSetPropDialog, ExpressionParserAdapter, CurveTypeStorageAdapter,
-  main_form, CurveTypeParametersFactory, CreateUserPointsSetDlgAdapter,
+  user_points_set_prop_dialog, expression_parser_adapter, curve_type_storage_adapter,
+  main_form, curve_type_parameters_factory, create_user_points_set_dlg_adapter,
 {$ELSE}
   FormServer,
 {$ENDIF}

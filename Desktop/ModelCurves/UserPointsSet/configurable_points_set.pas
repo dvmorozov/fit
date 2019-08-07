@@ -1,4 +1,4 @@
-unit ConfigurablePointsSet;
+unit configurable_points_set;
 
 {$mode delphi}
 

@@ -9,7 +9,7 @@ without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
 LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
 Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
-unit IntCreateUserPointsSetDlg;
+unit int_create_user_points_set_dlg;
 
 {$MODE Delphi}
 

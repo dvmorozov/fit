@@ -9,13 +9,13 @@ without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
 LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
 Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
-unit CurveTypeParametersFactory;
+unit curve_type_parameters_factory;
 
 {$MODE Delphi}
 
 interface
 
-uses Classes, SysUtils, Settings, IntCurveTypeParametersFactory, CBRCComponent,
+uses Classes, SysUtils, Settings, int_curve_type_parameters_factory, CBRCComponent,
     curve_points_set;
 
 type

@@ -248,7 +248,7 @@ var ProblemList: TComponentList;
                                     //  k spisku podzadach
 Implementation
 
-uses config_objects, SelfCopied, (* LazJPEG *) LazPNG, Main, FormServer,
+uses config_objects, self_copied_component, (* LazJPEG *) LazPNG, app, FormServer,
     Forms, fit_server_aux;
 
 const

@@ -27,7 +27,7 @@ type
 
 implementation
 
-uses Main;
+uses app;
 
 {============================== TCSVFileLoader ================================}
 

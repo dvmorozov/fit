@@ -35,7 +35,7 @@ uses
 {$ELSE}
   FormServer,
 {$ENDIF}
-  Settings, Controls, Main, Dialogs;
+  Settings, Controls, app, Dialogs;
 
 class function TConfigurableUserPointsSet.HasConfigurableParameters: Boolean;
 begin

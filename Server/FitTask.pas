@@ -224,7 +224,7 @@ type
 
 implementation
 
-uses Main, SimpMath, GeneralHashFunctions;
+uses app, SimpMath, GeneralHashFunctions;
 
 {================================== TFitTask ==================================}
 

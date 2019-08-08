@@ -63,7 +63,7 @@ type
         function GetCurveTypeName: string; override;
         { Overrides method defined in TNamedPointsSet. }
         function GetCurveTypeId: TCurveTypeId; override;
-        class function GetCurveTypeId_: TCurveTypeId; virtual;
+        class function GetCurveTypeId_: TCurveTypeId; override;
 
         function HasSigmaRight: Boolean;
         function HasEtaRight: Boolean;

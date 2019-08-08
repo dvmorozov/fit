@@ -40,6 +40,8 @@ type
           instead of property because property assumes storing data
           in object, but storing any data is not necessary in this case. }
         function GetCurveTypeName: string; virtual;
+        { Abstract method returning unique type identifier. }
+        class function GetCurveTypeId_: TCurveTypeId; virtual; abstract;
 
         class function GetConfigurablePointsSet:
             TConfigurablePointsSetClass; virtual;

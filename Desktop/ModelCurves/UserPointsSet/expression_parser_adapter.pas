@@ -35,7 +35,7 @@ type
 
 implementation
 
-uses Main, MyExceptions, Dialogs;
+uses app, MyExceptions, Dialogs;
 
 constructor TExpressionParserAdapter.Init;
 begin

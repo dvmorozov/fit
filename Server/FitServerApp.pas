@@ -69,7 +69,7 @@ type
 
 implementation
 
-uses Main;
+uses app;
 
 {================================ TFitServerApp ===============================}
 {$hints off}

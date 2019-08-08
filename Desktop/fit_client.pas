@@ -349,7 +349,7 @@ const
 implementation
 
 {$IFDEF FIT}
-uses Main;
+uses app;
 {$ENDIF}
 
 {================================ TFitClient ==================================}

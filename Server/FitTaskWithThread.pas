@@ -64,7 +64,7 @@ type
 
 implementation
 
-uses Main;
+uses app;
 
 {$warnings off}
 procedure TFitTaskWithThread.RecreateMainCalcThread(

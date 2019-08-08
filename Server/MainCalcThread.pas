@@ -40,7 +40,7 @@ type
 
 implementation
 
-uses Main;
+uses app;
 
 procedure TMainCalcThread.SetCurrentTask(ACurrentTask: TCurrentTask);
 begin

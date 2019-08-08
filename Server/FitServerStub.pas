@@ -163,7 +163,7 @@ type
 
 implementation
 
-uses Main;
+uses app;
 
 {=========================== TFitServerStub ===================================}
 function TFitServerStub.SmoothProfile(var ErrMsg: string): LongInt;

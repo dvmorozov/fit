@@ -444,7 +444,7 @@ const
 
 implementation
 
-uses Main;
+uses app;
 
 function ParseAndCalcExpression(Expr: LPCSTR; ParamList: LPCSTR;
     Result: PDouble): LongInt; cdecl; external 'MathExpr' name 'ParseAndCalcExpression';

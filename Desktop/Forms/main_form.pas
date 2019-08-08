@@ -21,7 +21,7 @@ uses
     ExtCtrls, StdCtrls, Menus, points_set, fit_viewer, ComCtrls,
     fit_client, NumericGrid, CheckLst, MSCRDataClasses,
     LResources, tagraph, ActnList, Settings, Laz_XMLCfg,
-    MyExceptions, common_types, Main, neutron_points_set,
+    MyExceptions, common_types, app, neutron_points_set,
     int_points_set, curve_points_set, user_points_set, gauss_points_set,
     pseudo_voigt_points_set, asym_pseudo_voigt_points_set, lorentz_points_set,
     two_branches_pseudo_voigt_points_set, named_points_set, curve_types_singleton,

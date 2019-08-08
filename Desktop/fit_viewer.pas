@@ -15,7 +15,7 @@ unit fit_viewer;
 
 interface
 
-uses points_set, Classes, SysUtils, Graphics, SelfCopied,
+uses points_set, Classes, SysUtils, Graphics, self_copied_component,
     title_points_set, neutron_points_set, curve_points_set, named_points_set,
     data_loader,
 {$IFNDEF SERVER}

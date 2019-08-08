@@ -13,7 +13,7 @@ uses
   input_wavelength_dialog, input_back_factor_dialog, input_max_rfactor_dialog,
   fit_client, fit_client_stub,
   fit_client_app,
-  Settings, TurboPowerIPro,
+  app_settings, TurboPowerIPro,
   FitGrids, SelfCheckedComponentList,
   StrUtils
 {$ifdef windows}
@@ -21,7 +21,7 @@ uses
 {$else}
   ,TA_LINUX
 {$endif}
-  , app, common_types, TableComp, serialization_ids, GeneralHashFunctions,
+  , common_types, table_components, serialization_ids, GeneralHashFunctions,
   create_user_points_set_dlg, user_points_set_prop_dialog,
   configurable_points_set, configurable_user_points_set, int_fit_service;
 

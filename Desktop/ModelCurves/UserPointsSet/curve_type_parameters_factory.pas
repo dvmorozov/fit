@@ -15,7 +15,7 @@ unit curve_type_parameters_factory;
 
 interface
 
-uses Classes, SysUtils, Settings, int_curve_type_parameters_factory, CBRCComponent,
+uses Classes, SysUtils, app_settings, int_curve_type_parameters_factory, CBRCComponent,
     curve_points_set;
 
 type

@@ -15,7 +15,7 @@ unit curve_type_storage_adapter;
 
 interface
 
-uses SysUtils, Settings, CBRCComponent, int_curve_type_storage;
+uses SysUtils, app_settings, CBRCComponent, int_curve_type_storage;
 
 type
     { Class-adapter implementing basic operation for 

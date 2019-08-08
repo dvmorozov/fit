@@ -16,7 +16,7 @@ unit FitTask;
 
 interface
 
-uses Classes, SysUtils, points_set, curve_points_set, SelfCopied,
+uses Classes, SysUtils, points_set, curve_points_set, self_copied_component,
     Minimizer, Minimizer_S, Minimizer_DS, MainCalcThread,
     MSCRDataClasses, int_points_set, lorentz_points_set, gauss_points_set,
     two_branches_pseudo_voigt_points_set, asym_pseudo_voigt_points_set,

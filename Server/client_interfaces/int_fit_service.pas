@@ -17,7 +17,7 @@ interface
 
 uses
     Classes, SysUtils, int_points_set, common_types, points_set, title_points_set,
-    MSCRDataClasses, SelfCopied
+    MSCRDataClasses, self_copied_component
 {$IFNDEF EXCLUDE_SOMETHING}
     , curve_points_set
 {$ENDIF}

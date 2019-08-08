@@ -9,14 +9,15 @@ without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
 LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
 Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
-unit TableComp;
+unit table_components;
 
 {$MODE Delphi}
 
 interface
 
 uses
-    Classes, Grids, Controls, Graphics, Tools, SysUtils, NumericGrid, SelfCopied;
+    Classes, Grids, Controls, Graphics, Tools, SysUtils, NumericGrid,
+    self_copied_component;
 
 type
     ETableCompList = class(Exception);

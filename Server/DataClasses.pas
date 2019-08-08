@@ -16,7 +16,8 @@ unit DataClasses;
 interface
 
 uses
-    Classes, Grids, SysUtils, NumericGrid, Tools, TableComp, curve_points_set;
+    Classes, Grids, SysUtils, NumericGrid, Tools, table_components,
+    curve_points_set;
 
 type
 	{ Set of pattern instances forming the calculated profile in sum. }

@@ -15,7 +15,7 @@ unit int_curve_type_storage;
 
 interface
 
-uses Settings;
+uses app_settings;
 
 type
     { Interface defining basic operation for storing parameters of custom curve type. }

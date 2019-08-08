@@ -15,7 +15,7 @@ unit curve_points_set;
 
 interface
 
-uses Classes, SysUtils, SimpMath, SelfCopied, points_set, title_points_set,
+uses Classes, SysUtils, SimpMath, self_copied_component, points_set, title_points_set,
   data_loader;
 
 type

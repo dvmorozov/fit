@@ -15,7 +15,7 @@ unit int_curve_type_parameters_factory;
 
 interface
 
-uses curve_points_set, Settings;
+uses curve_points_set, app_settings;
 
 type
     { Interface defining operation for creating custom curve type object. }

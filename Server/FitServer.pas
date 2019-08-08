@@ -33,7 +33,7 @@ uses Classes, title_points_set, SelfCheckedComponentList, SysUtils,
 {$IFDEF FIT}
      FitServerProxy,    //      Proxy to client to call it back.
 {$ENDIF}
-     SelfCopied, MyExceptions, FitTask, SimpMath,
+     self_copied_component, MyExceptions, FitTask, SimpMath,
      MainCalcThread, common_types, int_client_callback, int_fit_service,
      CBRCComponent, Windows;
 

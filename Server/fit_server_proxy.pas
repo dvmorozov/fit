@@ -10,9 +10,8 @@ LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794,
 Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 
-unit FitServerProxy;
+unit fit_server_proxy;
 
-//{$mode objfpc}{$H+}
 {$MODE Delphi}
 
 interface

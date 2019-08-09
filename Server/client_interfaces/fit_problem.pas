@@ -16,7 +16,7 @@ unit fit_problem;
 interface
 
 uses
-    SysUtils, MSCRDataClasses, CommonTypes, PointsSet, SelfCopied, Classes,
+    SysUtils, mscr_specimen_list, CommonTypes, PointsSet, SelfCopied, Classes,
     MyExceptions, IntPointsSet, TitlePointsSet, CurvePointsSet, CBRCComponent,
     int_fit_service, fit_server, NamedPointsSet,
     base_service_intf,

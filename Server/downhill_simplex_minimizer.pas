@@ -9,13 +9,13 @@ without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
 LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
 Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
-unit Minimizer_DS;
+unit downhill_simplex_minimizer;
 
 {$MODE Delphi}
 
 interface
 
-uses SysUtils, Minimizer, SelfCheckedComponentList, Classes,
+uses SysUtils, minimizer, SelfCheckedComponentList, Classes,
     DownhillSimplexContainer, Tools;
 
 type

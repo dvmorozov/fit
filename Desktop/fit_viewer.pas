@@ -21,7 +21,7 @@ uses points_set, Classes, SysUtils, Graphics, self_copied_component,
 {$IFNDEF SERVER}
     fit_client, IntFitViewer,
 {$ENDIF}
-    tagraph, Forms, SelfCheckedComponentList, MSCRDataClasses;
+    tagraph, Forms, SelfCheckedComponentList, mscr_specimen_list;
 
 {$IFNDEF SERVER}
 // Switch on updating legend and grids.

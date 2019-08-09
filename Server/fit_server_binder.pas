@@ -9,7 +9,7 @@ unit fit_server_binder;
 interface
 
 uses SysUtils, Classes, base_service_intf, server_service_intf, fit_server,
-  IntPointsSet;
+  int_points_set;
 
 type
 

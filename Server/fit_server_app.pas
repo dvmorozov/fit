@@ -10,9 +10,8 @@ LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794,
 Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 
-unit FitServerApp;
+unit fit_server_app;
 
-//{$mode objfpc}{$H+}
 {$MODE Delphi}
 
 interface
@@ -28,7 +27,7 @@ uses Classes, SysUtils,
      { Receives messages from client. }
      FitServerStub,
      { Implements server logic. }
-     FitServer,
+     fit_server,
      { Contains server form with chart component. }
      FormServer,
      { Contains algorithm container. }

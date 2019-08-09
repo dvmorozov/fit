@@ -8,7 +8,7 @@
 
     Copyright (C) 1999-2008 D.Morozov (dvmorozov@mail.ru)
 ------------------------------------------------------------------------------}
-unit ComponentList;
+unit component_list;
 
 {$MODE Delphi}
 

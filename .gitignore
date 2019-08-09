@@ -27,3 +27,5 @@
 /Packages/wst-0.5/*.ppu
 /Packages/wst-0.5/*.o
 /MathExpr/VC/Debug
+/Server/backup/*.bak
+/Server/client_interfaces/backup/*.bak

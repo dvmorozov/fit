@@ -13,18 +13,19 @@ uses
   Forms,
   Variants,
   DataLoader,
-  Math3d,
-  DownhillSimplexContainer,
-  AlgorithmContainer,
-  Runner,
-  ObjSavingStringList,
-  Minimizer_S,
-  Minimizer,
-  MSCRDataClasses, Minimizer_DS, CombEnumerator, MainCalcThread,
-  FitServerStub, FitServerApp,
-  DataClasses, FitServerWithThread, FitTask, 
-  FitServerMultithreaded, TurboPowerIPro,
-  FitGrids, FitTaskWithThread
+  math_3d,
+  downhill_simplex_container,
+  algorithm_container,
+  runner_thread,
+  obj_saving_string_list,
+  simple_minimizer,
+  minimizer,
+  mscr_specimen_list,
+downhill_simplex_minimizer, comb_enumerator, main_calc_thread,
+  fit_server_stub, fit_server_app,
+  data_classes, fit_server_with_thread, fit_task,
+  fit_server_multithreaded, TurboPowerIPro,
+  FitGrids, fit_task_with_thread
 {$ifdef windows}
   ,ta
 {$else}
@@ -39,10 +40,10 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
 {$ENDIF}
-  Sysutils, Dialogs, metadata_service_imp, server_listener, fit_server,
+  Sysutils, Dialogs, metadata_service_imp, server_listener, int_fit_server,
   server_binary_formatter, server_service_soap, server_service_xmlrpc,
   fit_server_binder, fit_server_imp, synapse_tcp_server,
-  FormServer, FitServer, Main, fit_server_aux;
+  form_main, fit_server, Main, fit_server_aux;
 
 {$R manifest.res}
 
@@ -51,9 +52,9 @@ var listener : TwstListener;
 {$R FitServer_.res}
 
 begin
-  Application.Title:='FitServer';
+  Application.Title:='fit_server';
   Application.Initialize;
-  //Form1.ApplicationProperties1.Title := 'FitServer';
+  //Form1.ApplicationProperties1.Title := 'fit_server';
 
   Server_service_RegisterBinaryFormat();
   Server_service_RegisterSoapFormat();
@@ -68,7 +69,7 @@ begin
 
   //  ispol`zuetsya ShowMessage vmesto MessageBox, poskol`ku
   //  ne zavisit ot platformy
-  WriteLog('FitServer listening on TCP-port ' + InternalPort, Notification_);
+  WriteLog('fit_server listening on TCP-port ' + InternalPort, Notification_);
     
   listener := TwstSynapseTcpListener.Create(
         InternalIP, StrToInt(InternalPort), 25000, 'Fit Service'

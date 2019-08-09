@@ -9,16 +9,15 @@ without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
 LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
 Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
-unit FitTask;
+unit fit_task;
 
-//{$mode objfpc}{$H+}
 {$MODE Delphi}
 
 interface
 
 uses Classes, SysUtils, points_set, curve_points_set, self_copied_component,
-    Minimizer, Minimizer_S, Minimizer_DS, MainCalcThread,
-    MSCRDataClasses, int_points_set, lorentz_points_set, gauss_points_set,
+    minimizer, simple_minimizer, downhill_simplex_minimizer, main_calc_thread,
+    mscr_specimen_list, int_points_set, lorentz_points_set, gauss_points_set,
     two_branches_pseudo_voigt_points_set, asym_pseudo_voigt_points_set,
     user_points_set, pseudo_voigt_points_set;
   

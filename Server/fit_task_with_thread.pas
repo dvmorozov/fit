@@ -197,7 +197,11 @@ begin
     LeaveCriticalsection(CS);
     //  dop. potok ostanavlivaetsya
     if Flag then
+{$IFDEF FIT}
         MainCalcThread.Synchronize(ShowCurMinExternal);
+{$ELSE}
+        MainCalcThread.Synchronize(MainCalcThread, ShowCurMinExternal);
+{$ENDIF}
 end;
 
 function TFitTaskWithThread.GetCurMin: Double;

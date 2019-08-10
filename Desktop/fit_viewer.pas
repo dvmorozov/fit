@@ -214,9 +214,9 @@ implementation
 uses
     main_form;
 {$ELSE}
-//    FormServer
+uses
+    form_main;
 {$ENDIF}
-//    ;
 
 {========================== TFitViewer ==================================}
 {$IFNDEF SERVER}

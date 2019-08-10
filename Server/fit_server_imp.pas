@@ -8,7 +8,7 @@ Unit fit_server_imp;
 {$IFDEF FPC} {$mode objfpc}{$H+} {$ENDIF}
 Interface
 
-Uses SysUtils, Classes, FitServerApp, ComponentList,
+Uses SysUtils, Classes, fit_server_app, component_list,
     MyExceptions, base_service_intf, server_service_intf,
     int_fit_server, title_points_set, points_set, int_points_set;
 
@@ -248,7 +248,7 @@ var ProblemList: TComponentList;
                                     //  k spisku podzadach
 Implementation
 
-uses config_objects, self_copied_component, (* LazJPEG *) LazPNG, app, FormServer,
+uses config_objects, self_copied_component, (* LazJPEG *) LazPNG, app, form_main,
     Forms, fit_server_aux;
 
 const

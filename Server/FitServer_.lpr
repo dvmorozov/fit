@@ -12,7 +12,7 @@ uses
   Interfaces,   //  LCL widgetset
   Forms,
   Variants,
-  DataLoader,
+  data_loader,
   math_3d,
   downhill_simplex_container,
   algorithm_container,
@@ -43,7 +43,7 @@ downhill_simplex_minimizer, comb_enumerator, main_calc_thread,
   Sysutils, Dialogs, metadata_service_imp, server_listener, int_fit_server,
   server_binary_formatter, server_service_soap, server_service_xmlrpc,
   fit_server_binder, fit_server_imp, synapse_tcp_server,
-  form_main, fit_server, Main, fit_server_aux;
+  form_main, fit_server, app, fit_server_aux;
 
 {$R manifest.res}
 

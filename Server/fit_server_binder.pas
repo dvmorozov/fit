@@ -8,7 +8,7 @@ unit fit_server_binder;
 {$IFDEF FPC} {$mode objfpc}{$H+} {$ENDIF}
 interface
 
-uses SysUtils, Classes, base_service_intf, server_service_intf, fit_server,
+uses SysUtils, Classes, base_service_intf, server_service_intf, int_fit_server,
   int_points_set;
 
 type

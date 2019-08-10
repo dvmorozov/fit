@@ -18,7 +18,7 @@ interface
 uses
     SysUtils, mscr_specimen_list, CommonTypes, PointsSet, SelfCopied, Classes,
     MyExceptions, IntPointsSet, TitlePointsSet, CurvePointsSet, CBRCComponent,
-    int_fit_service, fit_server, NamedPointsSet,
+    int_fit_service, int_fit_server, NamedPointsSet,
     base_service_intf,
     fit_server_proxy                //  XML-RPC interface to server.
     ;

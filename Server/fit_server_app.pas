@@ -19,19 +19,19 @@ interface
 uses Classes, SysUtils,
 {$IFDEF FIT}
      { Connects back to client in monolithic application for callbacks. }
-     FitServerProxy,
+     fit_server_proxy,
 {$ELSE}
      { Server build. Key SERVER is not necessary. }
      fit_viewer,
 {$ENDIF}
      { Receives messages from client. }
-     FitServerStub,
+     fit_server_stub,
      { Implements server logic. }
      fit_server,
      { Contains server form with chart component. }
-     FormServer,
+     form_main,
      { Contains algorithm container. }
-     FitServerMultithreaded;
+     fit_server_multithreaded;
 type
     { Class of server application. This class is basic unit of interaction
       with client. }

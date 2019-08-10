@@ -16,8 +16,8 @@ unit downhill_simplex_container;
 interface
 
 uses
-    Classes, DownhillSimplexAlgorithm, AlgorithmContainer, Decisions, SysUtils,
-    SimpMath, CombEnumerator, CBRCComponent, Tools;
+    Classes, DownhillSimplexAlgorithm, algorithm_container, Decisions, SysUtils,
+    SimpMath, comb_enumerator, CBRCComponent, Tools;
 
 const
 	{ Possible states of parameters in TDownhillRealParameters. }

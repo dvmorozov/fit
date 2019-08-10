@@ -16,7 +16,7 @@ unit obj_saving_string_list;
 interface
 
 uses
-    SelfCopied, SysUtils, Classes;
+    self_copied_component, SysUtils, Classes;
 
 type
 	{ List of components which for each object relates string identifier. }

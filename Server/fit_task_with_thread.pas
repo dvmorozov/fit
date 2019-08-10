@@ -21,7 +21,7 @@ type
 	{ Executes task solution in separate thread. }
     TFitTaskWithThread = class(TFitTask)
     protected
-        main_calc_thread: TMainCalcThread;
+        MainCalcThread: TMainCalcThread;
         CS: TRTLCriticalSection;    //  Use instead of TCriticalSection.
         FDoneDisabled: Boolean;     //  Suppresses calling DoneProc.
         
@@ -69,19 +69,19 @@ uses app;
 procedure TFitTaskWithThread.RecreateMainCalcThread(
     ACurrentTask: TCurrentTask; ADoneProc: TDoneProc);
 begin
-    if Assigned(main_calc_thread) then AbortAsyncOper;
+    if Assigned(MainCalcThread) then AbortAsyncOper;
 
     AllDone := False;
     DoneDisabled := False;
     
-    main_calc_thread := TMainCalcThread.Create(True (* CreateSuspended *));
-    if Assigned(main_calc_thread.FatalException) then
-       raise main_calc_thread.FatalException;
+    MainCalcThread := TMainCalcThread.Create(True (* CreateSuspended *));
+    if Assigned(MainCalcThread.FatalException) then
+       raise MainCalcThread.FatalException;
     //  prisoedinenie zadachi
-    main_calc_thread.SetCurrentTask(ACurrentTask);
-    main_calc_thread.SetDoneProc(ADoneProc);
+    MainCalcThread.SetCurrentTask(ACurrentTask);
+    MainCalcThread.SetDoneProc(ADoneProc);
     //  zapusk potoka resheniya zadachi
-    main_calc_thread.Resume;
+    MainCalcThread.Resume;
 end;
 {$warnings on}
 
@@ -90,18 +90,18 @@ begin
     //  proverka neozhidannyh situatsiy;
     //  ne protivorechit semantike metoda - nefatal'n. oshibka
     try
-        Assert(Assigned(main_calc_thread));
+        Assert(Assigned(MainCalcThread));
     except
         on E: EAssertionFailed do WriteLog(E.Message, Surprising)
         else raise;
     end;
 
-    if Assigned(main_calc_thread) then
+    if Assigned(MainCalcThread) then
     begin
-        main_calc_thread.Terminate;
-        main_calc_thread.WaitFor;
-        main_calc_thread.Free;
-        main_calc_thread := nil;
+        MainCalcThread.Terminate;
+        MainCalcThread.WaitFor;
+        MainCalcThread.Free;
+        MainCalcThread := nil;
     end;
 end;
 
@@ -153,7 +153,7 @@ begin
     //  proverka neozhidannyh situatsiy;
     //  ne protivorechit semantike metoda - nefatal'n. oshibka
     try
-        Assert(Assigned(main_calc_thread));
+        Assert(Assigned(MainCalcThread));
     except
         on E: EAssertionFailed do WriteLog(E.Message, Surprising)
         else raise;
@@ -161,7 +161,7 @@ begin
 
     Terminated := True;
     if Assigned(minimizer) then minimizer.Terminated := True;
-    if Assigned(main_calc_thread) then main_calc_thread.Terminate;
+    if Assigned(MainCalcThread) then MainCalcThread.Terminate;
     //  ozhidaniya zdes' nikakogo byt' ne dolzhno,
     //  poskol'ku metod vypolnyaetsya v osn. potoke
     //  dolzhen bystro vernut' upravlenie
@@ -197,7 +197,7 @@ begin
     LeaveCriticalsection(CS);
     //  dop. potok ostanavlivaetsya
     if Flag then
-        main_calc_thread.Synchronize(main_calc_thread, ShowCurMinExternal);
+        MainCalcThread.Synchronize(ShowCurMinExternal);
 end;
 
 function TFitTaskWithThread.GetCurMin: Double;
@@ -253,7 +253,7 @@ end;
 
 destructor TFitTaskWithThread.Destroy;
 begin
-    if Assigned(main_calc_thread) then AbortAsyncOper;
+    if Assigned(MainCalcThread) then AbortAsyncOper;
     //DeleteCriticalSection(CS);
     DoneCriticalSection(CS);
     inherited;

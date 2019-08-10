@@ -16,7 +16,7 @@ unit fit_server_aux;
 interface
 
 uses
-  Classes, SysUtils, points_set, named_points_set, title_points_set, fit_server,
+  Classes, SysUtils, points_set, named_points_set, title_points_set, int_fit_server,
   MyExceptions,
   { Modules of wst-0.5 }
   base_service_intf;

@@ -11,7 +11,6 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit app;
 
-//{$MODE objfpc}{$H+}
 {$MODE Delphi}
 //{$DEFINE LOCAL_ACCESS}      //  vklyuchaet kompilyatsiyu servisa s
                             //  dostupom na lokal'nom komp'yutere
@@ -30,7 +29,7 @@ uses SysUtils, Forms
 {$ENDIF}
 {$IFDEF FITSERVER}
     {$IFDEF FIT}
-        , FitServerApp
+        , fit_server_app
     {$ELSE}
         {$IFNDEF FITP2P}
             , base_service_intf

@@ -210,13 +210,13 @@ type
 
 implementation
 
-uses
 {$IFNDEF SERVER}
-    main_form
+uses
+    main_form;
 {$ELSE}
-    FormServer
+//    FormServer
 {$ENDIF}
-    ;
+//    ;
 
 {========================== TFitViewer ==================================}
 {$IFNDEF SERVER}

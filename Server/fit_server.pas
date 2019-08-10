@@ -31,7 +31,8 @@ uses Classes, title_points_set, SelfCheckedComponentList, SysUtils,
      mscr_specimen_list, curve_points_set, named_points_set, points_set,
      gauss_points_set, user_points_set, int_points_set,
 {$IFDEF FIT}
-     FitServerProxy,    //      Proxy to client to call it back.
+     { Proxy to client to call it back. }
+     fit_server_proxy,
 {$ENDIF}
      self_copied_component, MyExceptions, fit_task, SimpMath,
      main_calc_thread, common_types, int_client_callback, int_fit_service,

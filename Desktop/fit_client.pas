@@ -20,7 +20,7 @@ uses Classes, points_set, title_points_set, self_copied_component,
     int_points_set, curve_points_set, int_client_callback,
     IntFitViewer, int_data_loader, int_data_loader_injector, int_fit_service
     {$IFDEF FIT}
-    , int_fit_server
+    , fit_server
     {$ENDIF}
     ;
     

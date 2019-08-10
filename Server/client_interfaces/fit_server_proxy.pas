@@ -9,8 +9,7 @@ Unit fit_server_proxy;
 {$IFDEF FPC} {$mode objfpc}{$H+} {$ENDIF}
 Interface
 
-Uses SysUtils, Classes, TypInfo, IntPointsSet,
-    base_service_intf, service_intf, fit_server;
+Uses SysUtils, Classes, TypInfo, IntPointsSet, base_service_intf, service_intf, int_fit_server;
 
 Type
 

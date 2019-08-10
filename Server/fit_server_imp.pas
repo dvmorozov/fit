@@ -10,7 +10,7 @@ Interface
 
 Uses SysUtils, Classes, FitServerApp, ComponentList,
     MyExceptions, base_service_intf, server_service_intf,
-    fit_server, title_points_set, points_set, int_points_set;
+    int_fit_server, title_points_set, points_set, int_points_set;
 
 Type
   //  metody etogo klassa vyzyvayutsya vneschnimi klientami,

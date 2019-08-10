@@ -8,7 +8,7 @@ unit int_fit_server;
 {$IFDEF FPC} {$mode objfpc}{$H+} {$ENDIF}
 interface
 
-uses SysUtils, Classes, TypInfo, base_service_intf, service_intf, int_points_et;
+uses SysUtils, Classes, TypInfo, base_service_intf, service_intf, int_points_set;
 
 const
   sNAME_SPACE = 'fit_server';

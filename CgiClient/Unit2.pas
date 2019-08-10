@@ -6,9 +6,9 @@ unit Unit2;
 interface
 
 uses
-  Classes, SysUtils, LResources, cgiModules, TitlePointsSet, DATFileLoader,
-  PointsSet, DataLoader, LorentzPointsSet, PseudoVoigtPointsSet, GaussPointsSet,
-  CurvePointsSet;
+  Classes, SysUtils, LResources, cgiModules, title_points_set, dat_file_loader,
+  points_set, data_loader, lorentz_points_set, pseudo_voigt_points_set, gauss_points_set,
+  curve_points_set;
 
 type
 

@@ -17,7 +17,7 @@ unit algorithm_container;
 interface
 
 uses
-    Classes, Runner, Algorithm, Tools;
+    Classes, runner_thread, Algorithm, Tools;
 
 type
     { Class defines abstract methods to control any type of algorithms. } 

@@ -9,14 +9,14 @@
       <TargetFileExt Value=".exe"/>
       <Title Value="FitServer"/>
       <UseXPManifest Value="True"/>
-      <ActiveEditorIndexAtStart Value="12"/>
+      <ActiveEditorIndexAtStart Value="38"/>
     </General>
     <VersionInfo>
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <CurrentVersionNr Value="1"/>
       <CurrentMajorRevNr Value="1"/>
-      <CurrentBuildNr Value="218"/>
+      <CurrentBuildNr Value="219"/>
       <ProjectVersion Value="1.1.0.1"/>
       <FileDescription Value="Server application."/>
       <LegalCopyright Value="Dmitry Morozov"/>
@@ -64,7 +64,7 @@
         <Filename Value="FitServer_.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="FitServer_"/>
-        <CursorPos X="9" Y="15"/>
+        <CursorPos X="16" Y="22"/>
         <TopLine Value="2"/>
         <EditorIndex Value="6"/>
         <UsageCount Value="200"/>
@@ -128,11 +128,11 @@
         <Loaded Value="True"/>
       </Unit6>
       <Unit7>
-        <Filename Value="Minimizer.pas"/>
+        <Filename Value="int_minimizer.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="minimizer"/>
-        <CursorPos X="7" Y="12"/>
-        <TopLine Value="49"/>
+        <UnitName Value="int_minimizer"/>
+        <CursorPos X="19" Y="12"/>
+        <TopLine Value="1"/>
         <EditorIndex Value="38"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>

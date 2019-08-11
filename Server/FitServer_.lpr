@@ -19,7 +19,7 @@ uses
   runner_thread,
   obj_saving_string_list,
   simple_minimizer,
-  minimizer,
+  int_minimizer,
   mscr_specimen_list,
 downhill_simplex_minimizer, comb_enumerator, main_calc_thread,
   fit_server_stub, fit_server_app,

@@ -15,7 +15,7 @@ unit simple_minimizer;
 
 interface
 
-uses minimizer, SelfCheckedComponentList, SysUtils;
+uses int_minimizer, SelfCheckedComponentList, SysUtils;
 
 type
     { Implements simple downhill simplex algorithm. }

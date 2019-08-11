@@ -42,8 +42,7 @@ downhill_simplex_minimizer, comb_enumerator, main_calc_thread,
 {$ENDIF}
   Sysutils, Dialogs, metadata_service_imp, server_listener, int_fit_server,
   server_binary_formatter, server_service_soap, server_service_xmlrpc,
-  fit_server_binder, fit_server_imp, synapse_tcp_server,
-  form_main, fit_server, app, fit_server_aux;
+  fit_server_binder, fit_server_imp, synapse_tcp_server, fit_server, app, fit_server_aux;
 
 {$R manifest.res}
 

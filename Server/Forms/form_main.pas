@@ -19,7 +19,6 @@ uses
   Classes, SysUtils, LResources, Forms, Controls, Graphics, Dialogs, TAGraph,
   ExtCtrls;
 
-{$IFNDEF FIT}
 type
   { TFormMain }
   TFormMain = class(TForm)
@@ -34,7 +33,6 @@ type
 
 var
   FormMain: TFormMain;
-{$ENDIF}
 
 implementation
 

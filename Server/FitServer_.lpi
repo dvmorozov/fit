@@ -9,14 +9,14 @@
       <TargetFileExt Value=".exe"/>
       <Title Value="FitServer"/>
       <UseXPManifest Value="True"/>
-      <ActiveEditorIndexAtStart Value="38"/>
+      <ActiveEditorIndexAtStart Value="39"/>
     </General>
     <VersionInfo>
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <CurrentVersionNr Value="1"/>
       <CurrentMajorRevNr Value="1"/>
-      <CurrentBuildNr Value="219"/>
+      <CurrentBuildNr Value="220"/>
       <ProjectVersion Value="1.1.0.1"/>
       <FileDescription Value="Server application."/>
       <LegalCopyright Value="Dmitry Morozov"/>
@@ -59,13 +59,13 @@
         <MinVersion Major="1" Valid="True"/>
       </Item6>
     </RequiredPackages>
-    <Units Count="119">
+    <Units Count="120">
       <Unit0>
         <Filename Value="FitServer_.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="FitServer_"/>
-        <CursorPos X="16" Y="22"/>
-        <TopLine Value="2"/>
+        <CursorPos X="56" Y="45"/>
+        <TopLine Value="10"/>
         <EditorIndex Value="6"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
@@ -123,7 +123,7 @@
         <UnitName Value="simple_minimizer"/>
         <CursorPos X="15" Y="18"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="39"/>
+        <EditorIndex Value="40"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit6>
@@ -251,7 +251,7 @@
         <UnitName Value="math_3d"/>
         <CursorPos X="13" Y="12"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="40"/>
+        <EditorIndex Value="41"/>
         <UsageCount Value="207"/>
         <Loaded Value="True"/>
       </Unit21>
@@ -384,7 +384,7 @@
         <UnitName Value="fit_server_stub"/>
         <CursorPos X="16" Y="19"/>
         <TopLine Value="10"/>
-        <EditorIndex Value="46"/>
+        <EditorIndex Value="47"/>
         <UsageCount Value="204"/>
         <Loaded Value="True"/>
       </Unit37>
@@ -415,7 +415,7 @@
         <UnitName Value="fit_server_app"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="45"/>
+        <EditorIndex Value="46"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit41>
@@ -455,7 +455,7 @@
         <UnitName Value="fit_server_multithreaded"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="49"/>
+        <EditorIndex Value="50"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit45>
@@ -613,7 +613,6 @@
       <Unit66>
         <Filename Value="form_main.pas"/>
         <ComponentName Value="Form1"/>
-        <IsPartOfProject Value="True"/>
         <ResourceFilename Value="form_main.lrs"/>
         <UnitName Value="form_main"/>
         <CursorPos X="1" Y="1"/>
@@ -739,7 +738,7 @@
         <UnitName Value="int_fit_server"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="48"/>
+        <EditorIndex Value="49"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit83>
@@ -748,7 +747,7 @@
         <UnitName Value="fit_server_proxy"/>
         <CursorPos X="1" Y="15"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="47"/>
+        <EditorIndex Value="48"/>
         <UsageCount Value="100"/>
         <Loaded Value="True"/>
       </Unit84>
@@ -815,7 +814,7 @@
         <UnitName Value="Decisions"/>
         <CursorPos X="30" Y="557"/>
         <TopLine Value="540"/>
-        <EditorIndex Value="41"/>
+        <EditorIndex Value="42"/>
         <UsageCount Value="101"/>
         <Loaded Value="True"/>
       </Unit92>
@@ -840,7 +839,7 @@
         <UnitName Value="binary_streamer"/>
         <CursorPos X="5" Y="419"/>
         <TopLine Value="384"/>
-        <EditorIndex Value="42"/>
+        <EditorIndex Value="43"/>
         <UsageCount Value="100"/>
         <Loaded Value="True"/>
       </Unit95>
@@ -881,7 +880,7 @@
         <UnitName Value="metadata_service_imp"/>
         <CursorPos X="1" Y="19"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="43"/>
+        <EditorIndex Value="44"/>
         <UsageCount Value="122"/>
         <Loaded Value="True"/>
       </Unit100>
@@ -890,7 +889,7 @@
         <UnitName Value="metadata_service_binder"/>
         <CursorPos X="1" Y="14"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="44"/>
+        <EditorIndex Value="45"/>
         <UsageCount Value="122"/>
         <Loaded Value="True"/>
       </Unit101>
@@ -925,7 +924,7 @@
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
         <EditorIndex Value="7"/>
-        <UsageCount Value="82"/>
+        <UsageCount Value="83"/>
         <Loaded Value="True"/>
       </Unit105>
       <Unit106>
@@ -934,7 +933,7 @@
         <CursorPos X="19" Y="136"/>
         <TopLine Value="106"/>
         <EditorIndex Value="21"/>
-        <UsageCount Value="80"/>
+        <UsageCount Value="81"/>
         <Loaded Value="True"/>
       </Unit106>
       <Unit107>
@@ -943,7 +942,7 @@
         <CursorPos X="26" Y="24"/>
         <TopLine Value="15"/>
         <EditorIndex Value="14"/>
-        <UsageCount Value="80"/>
+        <UsageCount Value="81"/>
         <Loaded Value="True"/>
       </Unit107>
       <Unit108>
@@ -952,7 +951,7 @@
         <CursorPos X="62" Y="34"/>
         <TopLine Value="16"/>
         <EditorIndex Value="15"/>
-        <UsageCount Value="80"/>
+        <UsageCount Value="81"/>
         <Loaded Value="True"/>
       </Unit108>
       <Unit109>
@@ -961,7 +960,7 @@
         <CursorPos X="29" Y="38"/>
         <TopLine Value="33"/>
         <EditorIndex Value="16"/>
-        <UsageCount Value="80"/>
+        <UsageCount Value="81"/>
         <Loaded Value="True"/>
       </Unit109>
       <Unit110>
@@ -970,7 +969,7 @@
         <CursorPos X="62" Y="66"/>
         <TopLine Value="48"/>
         <EditorIndex Value="17"/>
-        <UsageCount Value="80"/>
+        <UsageCount Value="81"/>
         <Loaded Value="True"/>
       </Unit110>
       <Unit111>
@@ -979,7 +978,7 @@
         <CursorPos X="39" Y="23"/>
         <TopLine Value="14"/>
         <EditorIndex Value="18"/>
-        <UsageCount Value="80"/>
+        <UsageCount Value="81"/>
         <Loaded Value="True"/>
       </Unit111>
       <Unit112>
@@ -995,7 +994,7 @@
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
         <EditorIndex Value="23"/>
-        <UsageCount Value="51"/>
+        <UsageCount Value="52"/>
         <Loaded Value="True"/>
       </Unit113>
       <Unit114>
@@ -1011,7 +1010,7 @@
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
         <EditorIndex Value="36"/>
-        <UsageCount Value="50"/>
+        <UsageCount Value="51"/>
         <Loaded Value="True"/>
       </Unit115>
       <Unit116>
@@ -1019,7 +1018,7 @@
         <CursorPos X="3" Y="1211"/>
         <TopLine Value="1237"/>
         <EditorIndex Value="30"/>
-        <UsageCount Value="29"/>
+        <UsageCount Value="30"/>
         <Loaded Value="True"/>
       </Unit116>
       <Unit117>
@@ -1035,9 +1034,21 @@
         <CursorPos X="27" Y="79"/>
         <TopLine Value="44"/>
         <EditorIndex Value="13"/>
-        <UsageCount Value="29"/>
+        <UsageCount Value="30"/>
         <Loaded Value="True"/>
       </Unit118>
+      <Unit119>
+        <Filename Value="Forms\form_main.pas"/>
+        <ComponentName Value="Form1"/>
+        <HasResources Value="True"/>
+        <ResourceFilename Value="Forms\form_main.lrs"/>
+        <UnitName Value="form_main"/>
+        <CursorPos X="1" Y="36"/>
+        <TopLine Value="7"/>
+        <EditorIndex Value="39"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit119>
     </Units>
     <JumpHistory Count="0" HistoryIndex="-1"/>
   </ProjectOptions>

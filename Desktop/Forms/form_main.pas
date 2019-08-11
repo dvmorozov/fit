@@ -9,10 +9,9 @@ without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
 LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
 Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
-unit main_form;
+unit form_main;
 
 {$MODE Delphi}
-//{$mode objfpc}{$H+}
 
 interface
 
@@ -21,13 +20,14 @@ uses
     ExtCtrls, StdCtrls, Menus, points_set, fit_viewer, ComCtrls,
     fit_client, NumericGrid, CheckLst, mscr_specimen_list,
     LResources, tagraph, ActnList, app_settings, Laz_XMLCfg,
-    MyExceptions, common_types, app, neutron_points_set,
+    MyExceptions, common_types, neutron_points_set,
     int_points_set, curve_points_set, user_points_set, gauss_points_set,
     pseudo_voigt_points_set, asym_pseudo_voigt_points_set, lorentz_points_set,
     two_branches_pseudo_voigt_points_set, named_points_set, curve_types_singleton,
 {$IFDEF WINDOWS}
     Windows;
 {$ENDIF}
+
 type
 	{ States of results grid window. }
     TResState = (
@@ -44,7 +44,6 @@ type
     TViewState = (GraphEmpty, GraphNotEmpty);
 
   { TFormMain }
-
   TFormMain = class(TForm)
     ActionPatternType: TAction;
     ActionAnimationMode: TAction;
@@ -456,7 +455,9 @@ const
     
 implementation
 
-uses input_wavelength_dialog, input_max_rfactor_dialog, input_back_factor_dialog, about_box_dialog;
+uses input_wavelength_dialog, input_max_rfactor_dialog,
+    input_back_factor_dialog, about_box_dialog, app;
+
 (*
 function OFNHookProc(
     Wnd: HWnd; Msg: UINT; WParam: WPARAM; LParam: LPARAM): UINT; stdcall;
@@ -2705,9 +2706,9 @@ begin
     if EditHint then TimerBalloonShow.Enabled := True;
 end;
 
-//{$i cursors.lrs}
 initialization
-  {$i main_form.lrs}
+  //{$i cursors.lrs}
+  {$i form_main.lrs}
 end.
 
 

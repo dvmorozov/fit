@@ -23,13 +23,13 @@ uses Classes, SysUtils,
 {$ELSE}
      { Server build. Key SERVER is not necessary. }
      fit_viewer,
+     { Contains server form with chart component. }
+     form_main,
 {$ENDIF}
      { Receives messages from client. }
      fit_server_stub,
      { Implements server logic. }
      fit_server,
-     { Contains server form with chart component. }
-     form_main,
      { Contains algorithm container. }
      fit_server_multithreaded;
 type

@@ -38,7 +38,7 @@ type
 
 implementation
 
-uses main_form;
+uses form_main;
 
 constructor TCurveTypeStorageAdapter.Init;
 begin

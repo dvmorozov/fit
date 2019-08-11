@@ -16,8 +16,7 @@ unit about_box_dialog;
 
 interface
 
-uses Forms, StdCtrls,
-  ExtCtrls, LResources, Classes;
+uses Forms, StdCtrls, ExtCtrls, LResources, Classes;
 
 type
 
@@ -46,10 +45,9 @@ var
 
 implementation
 
-uses main_form, LCLIntf;
+uses form_main, LCLIntf;
 
 { TAboutBox }
-
 procedure TAboutBox.FormShow(Sender: TObject);
 begin
     Caption := FormMain.ApplicationProperties1.Title;

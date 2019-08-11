@@ -16,7 +16,7 @@
       <AutoIncrementBuild Value="True"/>
       <CurrentVersionNr Value="1"/>
       <CurrentMajorRevNr Value="1"/>
-      <CurrentBuildNr Value="211"/>
+      <CurrentBuildNr Value="218"/>
       <ProjectVersion Value="1.1.0.1"/>
       <FileDescription Value="Server application."/>
       <LegalCopyright Value="Dmitry Morozov"/>
@@ -36,30 +36,30 @@
     </RunParams>
     <RequiredPackages Count="6">
       <Item1>
-        <PackageName Value="TurboPowerIPro"/>
-        <MinVersion Major="1" Valid="True"/>
-      </Item1>
-      <Item2>
-        <PackageName Value="IDEIntf"/>
-        <MinVersion Major="1" Valid="True"/>
-      </Item2>
-      <Item3>
-        <PackageName Value="FCL"/>
-        <MinVersion Major="1" Valid="True"/>
-      </Item3>
-      <Item4>
-        <PackageName Value="LCL"/>
-      </Item4>
-      <Item5>
-        <PackageName Value="ta"/>
-        <MinVersion Major="1" Minor="1" Valid="True"/>
-      </Item5>
-      <Item6>
         <PackageName Value="FitGrids"/>
         <MinVersion Valid="True"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="ta"/>
+        <MinVersion Major="1" Minor="1" Valid="True"/>
+      </Item2>
+      <Item3>
+        <PackageName Value="LCL"/>
+      </Item3>
+      <Item4>
+        <PackageName Value="FCL"/>
+        <MinVersion Major="1" Valid="True"/>
+      </Item4>
+      <Item5>
+        <PackageName Value="IDEIntf"/>
+        <MinVersion Major="1" Valid="True"/>
+      </Item5>
+      <Item6>
+        <PackageName Value="TurboPowerIPro"/>
+        <MinVersion Major="1" Valid="True"/>
       </Item6>
     </RequiredPackages>
-    <Units Count="122">
+    <Units Count="119">
       <Unit0>
         <Filename Value="FitServer_.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -78,7 +78,7 @@
         <UnitName Value="Unit1"/>
         <CursorPos X="34" Y="570"/>
         <TopLine Value="550"/>
-        <UsageCount Value="120"/>
+        <UsageCount Value="116"/>
         <Bookmarks Count="1">
           <Item0 X="1" Y="468" ID="0"/>
         </Bookmarks>
@@ -88,14 +88,14 @@
         <UnitName Value="DataLoader"/>
         <CursorPos X="5" Y="179"/>
         <TopLine Value="163"/>
-        <UsageCount Value="156"/>
+        <UsageCount Value="152"/>
       </Unit2>
       <Unit3>
         <Filename Value="..\Desktop\PointSetViewer.pas"/>
         <UnitName Value="PointSetViewer"/>
         <CursorPos X="51" Y="19"/>
         <TopLine Value="1"/>
-        <UsageCount Value="156"/>
+        <UsageCount Value="152"/>
       </Unit3>
       <Unit4>
         <Filename Value="..\Desktop\Unit3.pas"/>
@@ -105,7 +105,7 @@
         <UnitName Value="Unit3"/>
         <CursorPos X="13" Y="48"/>
         <TopLine Value="30"/>
-        <UsageCount Value="120"/>
+        <UsageCount Value="116"/>
       </Unit4>
       <Unit5>
         <Filename Value="..\Desktop\Unit12.pas"/>
@@ -115,7 +115,7 @@
         <UnitName Value="Unit12"/>
         <CursorPos X="52" Y="49"/>
         <TopLine Value="29"/>
-        <UsageCount Value="120"/>
+        <UsageCount Value="116"/>
       </Unit5>
       <Unit6>
         <Filename Value="simple_minimizer.pas"/>
@@ -152,7 +152,7 @@
         <UnitName Value="tagraph"/>
         <CursorPos X="24" Y="233"/>
         <TopLine Value="215"/>
-        <UsageCount Value="85"/>
+        <UsageCount Value="81"/>
       </Unit9>
       <Unit10>
         <Filename Value="downhill_simplex_minimizer.pas"/>
@@ -172,7 +172,7 @@
         <UnitName Value="Unit5"/>
         <CursorPos X="1" Y="50"/>
         <TopLine Value="29"/>
-        <UsageCount Value="121"/>
+        <UsageCount Value="117"/>
       </Unit11>
       <Unit12>
         <Filename Value="comb_enumerator.pas"/>
@@ -189,35 +189,35 @@
         <UnitName Value="SimpMath"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <UsageCount Value="79"/>
+        <UsageCount Value="75"/>
       </Unit13>
       <Unit14>
         <Filename Value="..\Desktop\CBRCComponent.pas"/>
         <UnitName Value="CBRCComponent"/>
         <CursorPos X="13" Y="13"/>
         <TopLine Value="1"/>
-        <UsageCount Value="79"/>
+        <UsageCount Value="75"/>
       </Unit14>
       <Unit15>
         <Filename Value="..\Desktop\SelfSaved.pas"/>
         <UnitName Value="SelfSaved"/>
         <CursorPos X="34" Y="91"/>
         <TopLine Value="70"/>
-        <UsageCount Value="96"/>
+        <UsageCount Value="92"/>
       </Unit15>
       <Unit16>
         <Filename Value="..\Desktop\ClassInheritIDs.pas"/>
         <UnitName Value="ClassInheritIDs"/>
         <CursorPos X="24" Y="53"/>
         <TopLine Value="35"/>
-        <UsageCount Value="76"/>
+        <UsageCount Value="72"/>
       </Unit16>
       <Unit17>
         <Filename Value="..\Desktop\MyExceptions.pas"/>
         <UnitName Value="MyExceptions"/>
         <CursorPos X="19" Y="20"/>
         <TopLine Value="1"/>
-        <UsageCount Value="85"/>
+        <UsageCount Value="81"/>
       </Unit17>
       <Unit18>
         <Filename Value="..\Desktop\Tools.pas"/>
@@ -233,7 +233,7 @@
         <UnitName Value="SelfCopied"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <UsageCount Value="104"/>
+        <UsageCount Value="100"/>
       </Unit19>
       <Unit20>
         <Filename Value="data_classes.pas"/>
@@ -270,21 +270,21 @@
         <UnitName Value="DownhillSimplexAlgorithm"/>
         <CursorPos X="5" Y="449"/>
         <TopLine Value="469"/>
-        <UsageCount Value="163"/>
+        <UsageCount Value="159"/>
       </Unit23>
       <Unit24>
         <Filename Value="..\Desktop\Decisions.pas"/>
         <UnitName Value="Decisions"/>
         <CursorPos X="62" Y="17"/>
         <TopLine Value="1"/>
-        <UsageCount Value="163"/>
+        <UsageCount Value="159"/>
       </Unit24>
       <Unit25>
         <Filename Value="..\Desktop\Algorithm.pas"/>
         <UnitName Value="Algorithm"/>
         <CursorPos X="19" Y="18"/>
         <TopLine Value="1"/>
-        <UsageCount Value="163"/>
+        <UsageCount Value="159"/>
       </Unit25>
       <Unit26>
         <Filename Value="algorithm_container.pas"/>
@@ -314,14 +314,14 @@
         <UnitName Value="Unit4"/>
         <CursorPos X="1" Y="12"/>
         <TopLine Value="1"/>
-        <UsageCount Value="120"/>
+        <UsageCount Value="116"/>
       </Unit28>
       <Unit29>
         <Filename Value="..\Desktop\ComponentList.pas"/>
         <UnitName Value="ComponentList"/>
         <CursorPos X="19" Y="45"/>
         <TopLine Value="27"/>
-        <UsageCount Value="89"/>
+        <UsageCount Value="85"/>
       </Unit29>
       <Unit30>
         <Filename Value="runner_thread.pas"/>
@@ -338,28 +338,28 @@
         <UnitName Value="TableComp"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <UsageCount Value="107"/>
+        <UsageCount Value="103"/>
       </Unit31>
       <Unit32>
         <Filename Value="..\Desktop\NumericGrid.pas"/>
         <UnitName Value="NumericGrid"/>
         <CursorPos X="19" Y="301"/>
         <TopLine Value="293"/>
-        <UsageCount Value="79"/>
+        <UsageCount Value="75"/>
       </Unit32>
       <Unit33>
         <Filename Value="..\Common\FitServer.pas"/>
         <UnitName Value="FitServer"/>
         <CursorPos X="123" Y="73"/>
         <TopLine Value="64"/>
-        <UsageCount Value="156"/>
+        <UsageCount Value="152"/>
       </Unit33>
       <Unit34>
         <Filename Value="..\Desktop\FitClient.pas"/>
         <UnitName Value="FitClient"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <UsageCount Value="121"/>
+        <UsageCount Value="117"/>
       </Unit34>
       <Unit35>
         <Filename Value="main_calc_thread.pas"/>
@@ -376,7 +376,7 @@
         <UnitName Value="FitClientStub"/>
         <CursorPos X="43" Y="35"/>
         <TopLine Value="1"/>
-        <UsageCount Value="125"/>
+        <UsageCount Value="121"/>
       </Unit36>
       <Unit37>
         <Filename Value="fit_server_stub.pas"/>
@@ -384,7 +384,7 @@
         <UnitName Value="fit_server_stub"/>
         <CursorPos X="16" Y="19"/>
         <TopLine Value="10"/>
-        <EditorIndex Value="47"/>
+        <EditorIndex Value="46"/>
         <UsageCount Value="204"/>
         <Loaded Value="True"/>
       </Unit37>
@@ -393,21 +393,21 @@
         <UnitName Value="FitServerProxy"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <UsageCount Value="122"/>
+        <UsageCount Value="118"/>
       </Unit38>
       <Unit39>
         <Filename Value="..\Desktop\FitClientProxy.pas"/>
         <UnitName Value="FitClientProxy"/>
         <CursorPos X="15" Y="563"/>
         <TopLine Value="544"/>
-        <UsageCount Value="124"/>
+        <UsageCount Value="120"/>
       </Unit39>
       <Unit40>
         <Filename Value="..\Desktop\FitClientApp.pas"/>
         <UnitName Value="FitClientApp"/>
         <CursorPos X="21" Y="32"/>
         <TopLine Value="1"/>
-        <UsageCount Value="136"/>
+        <UsageCount Value="132"/>
       </Unit40>
       <Unit41>
         <Filename Value="fit_server_app.pas"/>
@@ -415,7 +415,7 @@
         <UnitName Value="fit_server_app"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="46"/>
+        <EditorIndex Value="45"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit41>
@@ -455,7 +455,7 @@
         <UnitName Value="fit_server_multithreaded"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="50"/>
+        <EditorIndex Value="49"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit45>
@@ -466,14 +466,14 @@
         <UnitName Value="Unit2"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <UsageCount Value="121"/>
+        <UsageCount Value="117"/>
       </Unit46>
       <Unit47>
         <Filename Value="..\Desktop\Settings.pas"/>
         <UnitName Value="Settings"/>
         <CursorPos X="15" Y="132"/>
         <TopLine Value="107"/>
-        <UsageCount Value="138"/>
+        <UsageCount Value="134"/>
       </Unit47>
       <Unit48>
         <Filename Value="..\Desktop\Unit7.pas"/>
@@ -483,7 +483,7 @@
         <UnitName Value="Unit7"/>
         <CursorPos X="13" Y="140"/>
         <TopLine Value="122"/>
-        <UsageCount Value="123"/>
+        <UsageCount Value="119"/>
       </Unit48>
       <Unit49>
         <Filename Value="..\Desktop\Unit1.lfm"/>
@@ -496,7 +496,7 @@
       <Unit50>
         <Filename Value="..\Desktop\Packages\FitGrids\Tools.pas"/>
         <UnitName Value="Tools"/>
-        <UsageCount Value="178"/>
+        <UsageCount Value="174"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit50>
       <Unit51>
@@ -504,47 +504,47 @@
         <UnitName Value="CBRCComponent"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <UsageCount Value="178"/>
+        <UsageCount Value="174"/>
       </Unit51>
       <Unit52>
         <Filename Value="..\Desktop\Packages\FitGrids\ClassInheritIDs.pas"/>
         <UnitName Value="ClassInheritIDs"/>
         <CursorPos X="74" Y="125"/>
         <TopLine Value="106"/>
-        <UsageCount Value="178"/>
+        <UsageCount Value="174"/>
       </Unit52>
       <Unit53>
         <Filename Value="..\Desktop\Packages\FitGrids\ComponentList.pas"/>
         <UnitName Value="ComponentList"/>
         <CursorPos X="6" Y="39"/>
         <TopLine Value="59"/>
-        <UsageCount Value="178"/>
+        <UsageCount Value="174"/>
       </Unit53>
       <Unit54>
         <Filename Value="..\Desktop\Packages\FitGrids\MyExceptions.pas"/>
         <UnitName Value="MyExceptions"/>
         <CursorPos X="15" Y="20"/>
         <TopLine Value="1"/>
-        <UsageCount Value="178"/>
+        <UsageCount Value="174"/>
       </Unit54>
       <Unit55>
         <Filename Value="..\Desktop\Packages\FitGrids\NumericGrid.pas"/>
         <UnitName Value="NumericGrid"/>
         <CursorPos X="127" Y="2362"/>
         <TopLine Value="2360"/>
-        <UsageCount Value="178"/>
+        <UsageCount Value="174"/>
       </Unit55>
       <Unit56>
         <Filename Value="..\Desktop\Packages\FitGrids\SelfCopied.pas"/>
         <UnitName Value="SelfCopied"/>
         <CursorPos X="5" Y="133"/>
         <TopLine Value="105"/>
-        <UsageCount Value="178"/>
+        <UsageCount Value="174"/>
       </Unit56>
       <Unit57>
         <Filename Value="..\Desktop\Packages\FitGrids\SelfSaved.pas"/>
         <UnitName Value="SelfSaved"/>
-        <UsageCount Value="178"/>
+        <UsageCount Value="174"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit57>
       <Unit58>
@@ -552,12 +552,12 @@
         <UnitName Value="SimpMath"/>
         <CursorPos X="66" Y="919"/>
         <TopLine Value="914"/>
-        <UsageCount Value="178"/>
+        <UsageCount Value="174"/>
       </Unit58>
       <Unit59>
         <Filename Value="..\Desktop\Packages\FitGrids\TableComp.pas"/>
         <UnitName Value="TableComp"/>
-        <UsageCount Value="178"/>
+        <UsageCount Value="174"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit59>
       <Unit60>
@@ -565,13 +565,13 @@
         <UnitName Value="TAGraph"/>
         <CursorPos X="100" Y="389"/>
         <TopLine Value="382"/>
-        <UsageCount Value="178"/>
+        <UsageCount Value="174"/>
       </Unit60>
       <Unit61>
         <Filename Value="fit_server_imp.pas"/>
         <UnitName Value="fit_server_imp"/>
-        <CursorPos X="81" Y="251"/>
-        <TopLine Value="222"/>
+        <CursorPos X="26" Y="247"/>
+        <TopLine Value="92"/>
         <EditorIndex Value="12"/>
         <UsageCount Value="202"/>
         <Loaded Value="True"/>
@@ -601,14 +601,14 @@
         <UnitName Value="Main"/>
         <CursorPos X="1" Y="33"/>
         <TopLine Value="17"/>
-        <UsageCount Value="197"/>
+        <UsageCount Value="193"/>
       </Unit64>
       <Unit65>
         <Filename Value="..\Desktop\CommonTypes.pas"/>
         <UnitName Value="CommonTypes"/>
         <CursorPos X="9" Y="16"/>
         <TopLine Value="1"/>
-        <UsageCount Value="115"/>
+        <UsageCount Value="111"/>
       </Unit65>
       <Unit66>
         <Filename Value="form_main.pas"/>
@@ -616,31 +616,29 @@
         <IsPartOfProject Value="True"/>
         <ResourceFilename Value="form_main.lrs"/>
         <UnitName Value="form_main"/>
-        <CursorPos X="20" Y="42"/>
-        <TopLine Value="10"/>
-        <EditorIndex Value="45"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
         <UsageCount Value="202"/>
-        <Loaded Value="True"/>
       </Unit66>
       <Unit67>
         <Filename Value="..\Desktop\GeneralHashFunctions.pas"/>
         <UnitName Value="GeneralHashfunctions"/>
         <CursorPos X="16" Y="27"/>
         <TopLine Value="23"/>
-        <UsageCount Value="164"/>
+        <UsageCount Value="160"/>
       </Unit67>
       <Unit68>
         <Filename Value="..\..\..\lazarus\fpc\2.2.0\source\rtl\inc\systemh.inc"/>
         <CursorPos X="3" Y="339"/>
         <TopLine Value="318"/>
-        <UsageCount Value="4"/>
+        <UsageCount Value="0"/>
       </Unit68>
       <Unit69>
         <Filename Value="..\..\fitgrids\NumericGrid.pas"/>
         <UnitName Value="NumericGrid"/>
         <CursorPos X="9" Y="150"/>
         <TopLine Value="128"/>
-        <UsageCount Value="73"/>
+        <UsageCount Value="69"/>
       </Unit69>
       <Unit70>
         <Filename Value="..\..\..\lazarus-0.9.24\lcl\interfaces\win32\interfaces.pp"/>
@@ -648,7 +646,7 @@
         <CursorPos X="46" Y="45"/>
         <TopLine Value="10"/>
         <EditorIndex Value="9"/>
-        <UsageCount Value="99"/>
+        <UsageCount Value="116"/>
         <Loaded Value="True"/>
       </Unit70>
       <Unit71>
@@ -656,84 +654,84 @@
         <UnitName Value="DataLoader"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <UsageCount Value="73"/>
+        <UsageCount Value="69"/>
       </Unit71>
       <Unit72>
         <Filename Value="..\Desktop\ModelCurves\PointsSet.pas"/>
         <UnitName Value="PointsSet"/>
         <CursorPos X="22" Y="16"/>
         <TopLine Value="1"/>
-        <UsageCount Value="93"/>
+        <UsageCount Value="89"/>
       </Unit72>
       <Unit73>
         <Filename Value="..\..\fitminimizers\CBRCComponent.pas"/>
         <UnitName Value="CBRCComponent"/>
         <CursorPos X="40" Y="40"/>
         <TopLine Value="1"/>
-        <UsageCount Value="93"/>
+        <UsageCount Value="89"/>
       </Unit73>
       <Unit74>
         <Filename Value="..\Desktop\ModelCurves\IntPointsSet.pas"/>
         <UnitName Value="IntPointsSet"/>
         <CursorPos X="17" Y="19"/>
         <TopLine Value="1"/>
-        <UsageCount Value="93"/>
+        <UsageCount Value="89"/>
       </Unit74>
       <Unit75>
         <Filename Value="..\Desktop\ModelCurves\NamedPointsSet.pas"/>
         <UnitName Value="NamedPointsSet"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <UsageCount Value="93"/>
+        <UsageCount Value="89"/>
       </Unit75>
       <Unit76>
         <Filename Value="..\Desktop\ModelCurves\CurveTypesSingleton.pas"/>
         <UnitName Value="CurveTypesSingleton"/>
         <CursorPos X="1" Y="39"/>
         <TopLine Value="17"/>
-        <UsageCount Value="90"/>
+        <UsageCount Value="86"/>
       </Unit76>
       <Unit77>
         <Filename Value="..\Desktop\ModelCurves\UserPointsSet\curvetypeparametersfactory.pas"/>
         <UnitName Value="CurveTypeParametersFactory"/>
         <CursorPos X="88" Y="37"/>
         <TopLine Value="8"/>
-        <UsageCount Value="56"/>
+        <UsageCount Value="52"/>
       </Unit77>
       <Unit78>
         <Filename Value="..\Desktop\ModelCurves\UserPointsSet\CreateUserPointsSetDlgAdapter.pas"/>
         <UnitName Value="CreateUserPointsSetDlgAdapter"/>
         <CursorPos X="1" Y="41"/>
         <TopLine Value="22"/>
-        <UsageCount Value="55"/>
+        <UsageCount Value="51"/>
       </Unit78>
       <Unit79>
         <Filename Value="..\..\..\lazarus-0.9.24\fpc\2.2.0\source\rtl\objpas\objpas.pp"/>
         <UnitName Value="objpas"/>
         <CursorPos X="8" Y="28"/>
         <TopLine Value="10"/>
-        <UsageCount Value="55"/>
+        <UsageCount Value="51"/>
       </Unit79>
       <Unit80>
         <Filename Value="..\Desktop\FitViewer.pas"/>
         <UnitName Value="FitViewer"/>
         <CursorPos X="1" Y="347"/>
         <TopLine Value="306"/>
-        <UsageCount Value="90"/>
+        <UsageCount Value="86"/>
       </Unit80>
       <Unit81>
         <Filename Value="..\..\fitminimizers-0.9.24\SimpMath.pas"/>
         <UnitName Value="SimpMath"/>
         <CursorPos X="11" Y="939"/>
         <TopLine Value="912"/>
-        <UsageCount Value="96"/>
+        <UsageCount Value="92"/>
       </Unit81>
       <Unit82>
         <Filename Value="..\..\fitminimizers-0.9.24\Tools.pas"/>
         <UnitName Value="Tools"/>
         <CursorPos X="46" Y="166"/>
         <TopLine Value="148"/>
-        <UsageCount Value="75"/>
+        <UsageCount Value="71"/>
       </Unit82>
       <Unit83>
         <Filename Value="int_fit_server.pas"/>
@@ -741,7 +739,7 @@
         <UnitName Value="int_fit_server"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="49"/>
+        <EditorIndex Value="48"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit83>
@@ -750,7 +748,7 @@
         <UnitName Value="fit_server_proxy"/>
         <CursorPos X="1" Y="15"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="48"/>
+        <EditorIndex Value="47"/>
         <UsageCount Value="100"/>
         <Loaded Value="True"/>
       </Unit84>
@@ -768,7 +766,7 @@
         <UnitName Value="IntClientCallback"/>
         <CursorPos X="23" Y="8"/>
         <TopLine Value="1"/>
-        <UsageCount Value="90"/>
+        <UsageCount Value="86"/>
       </Unit86>
       <Unit87>
         <Filename Value="client_interfaces\fit_server_aux.pas"/>
@@ -794,14 +792,14 @@
         <UnitName Value="TAGraph"/>
         <CursorPos X="1" Y="12"/>
         <TopLine Value="1"/>
-        <UsageCount Value="110"/>
+        <UsageCount Value="106"/>
       </Unit89>
       <Unit90>
         <Filename Value="..\..\fitminimizers-0.9.24\SelfCheckedComponentList.pas"/>
         <UnitName Value="SelfCheckedComponentList"/>
         <CursorPos X="1" Y="159"/>
         <TopLine Value="141"/>
-        <UsageCount Value="110"/>
+        <UsageCount Value="106"/>
       </Unit90>
       <Unit91>
         <Filename Value="component_list.pas"/>
@@ -835,7 +833,7 @@
         <UnitName Value="UserPointsSet"/>
         <CursorPos X="1" Y="22"/>
         <TopLine Value="4"/>
-        <UsageCount Value="91"/>
+        <UsageCount Value="87"/>
       </Unit94>
       <Unit95>
         <Filename Value="..\Packages\wst-0.5\binary_streamer.pas"/>
@@ -851,14 +849,14 @@
         <UnitName Value="CurvePointsSet"/>
         <CursorPos X="1" Y="693"/>
         <TopLine Value="659"/>
-        <UsageCount Value="85"/>
+        <UsageCount Value="81"/>
       </Unit96>
       <Unit97>
         <Filename Value="..\Packages\synapse40\source\lib\synafpc.pas"/>
         <UnitName Value="synafpc"/>
         <CursorPos X="1" Y="61"/>
         <TopLine Value="41"/>
-        <UsageCount Value="119"/>
+        <UsageCount Value="115"/>
       </Unit97>
       <Unit98>
         <Filename Value="..\Packages\wst-0.5\imp_utils.pas"/>
@@ -901,7 +899,7 @@
         <UnitName Value="config_objects"/>
         <CursorPos X="1" Y="24"/>
         <TopLine Value="1"/>
-        <UsageCount Value="81"/>
+        <UsageCount Value="77"/>
       </Unit102>
       <Unit103>
         <Filename Value="client_interfaces\int_fit_service.pas"/>
@@ -922,192 +920,126 @@
         <Loaded Value="True"/>
       </Unit104>
       <Unit105>
-        <Filename Value="..\Desktop\ModelCurves\UserPointsSet\configurableuserpointsset.pas"/>
-        <UnitName Value="ConfigurableUserPointsSet"/>
-        <CursorPos X="1" Y="34"/>
-        <TopLine Value="20"/>
-        <UsageCount Value="3"/>
-      </Unit105>
-      <Unit106>
-        <Filename Value="..\..\..\lazarus-0.9.24\components\codetools\laz_xmlstreaming.pas"/>
-        <UnitName Value="Laz_XMLStreaming"/>
-        <CursorPos X="67" Y="27"/>
-        <TopLine Value="13"/>
-        <UsageCount Value="1"/>
-      </Unit106>
-      <Unit107>
-        <Filename Value="..\Packages\wst-0.5\wst_resources_imp.pas"/>
-        <UnitName Value="wst_resources_imp"/>
-        <CursorPos X="10" Y="227"/>
-        <TopLine Value="203"/>
-        <UsageCount Value="1"/>
-      </Unit107>
-      <Unit108>
         <Filename Value="..\Desktop\DataLoaders\int_data_loader.pas"/>
         <UnitName Value="int_data_loader"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
         <EditorIndex Value="7"/>
-        <UsageCount Value="64"/>
+        <UsageCount Value="82"/>
         <Loaded Value="True"/>
-      </Unit108>
-      <Unit109>
+      </Unit105>
+      <Unit106>
         <Filename Value="..\Desktop\ModelCurves\curve_points_set.pas"/>
         <UnitName Value="curve_points_set"/>
         <CursorPos X="19" Y="136"/>
         <TopLine Value="106"/>
         <EditorIndex Value="21"/>
-        <UsageCount Value="62"/>
+        <UsageCount Value="80"/>
         <Loaded Value="True"/>
-      </Unit109>
-      <Unit110>
+      </Unit106>
+      <Unit107>
         <Filename Value="..\Desktop\ModelCurves\named_points_set.pas"/>
         <UnitName Value="named_points_set"/>
         <CursorPos X="26" Y="24"/>
         <TopLine Value="15"/>
         <EditorIndex Value="14"/>
-        <UsageCount Value="62"/>
+        <UsageCount Value="80"/>
         <Loaded Value="True"/>
-      </Unit110>
-      <Unit111>
+      </Unit107>
+      <Unit108>
         <Filename Value="..\Desktop\ModelCurves\gauss_points_set.pas"/>
         <UnitName Value="gauss_points_set"/>
         <CursorPos X="62" Y="34"/>
         <TopLine Value="16"/>
         <EditorIndex Value="15"/>
-        <UsageCount Value="62"/>
+        <UsageCount Value="80"/>
         <Loaded Value="True"/>
-      </Unit111>
-      <Unit112>
+      </Unit108>
+      <Unit109>
         <Filename Value="..\Desktop\ModelCurves\UserPointsSet\user_points_set.pas"/>
         <UnitName Value="user_points_set"/>
         <CursorPos X="29" Y="38"/>
         <TopLine Value="33"/>
         <EditorIndex Value="16"/>
-        <UsageCount Value="62"/>
+        <UsageCount Value="80"/>
         <Loaded Value="True"/>
-      </Unit112>
-      <Unit113>
+      </Unit109>
+      <Unit110>
         <Filename Value="..\Desktop\ModelCurves\two_branches_pseudo_voigt_points_set.pas"/>
         <UnitName Value="two_branches_pseudo_voigt_points_set"/>
         <CursorPos X="62" Y="66"/>
         <TopLine Value="48"/>
         <EditorIndex Value="17"/>
-        <UsageCount Value="62"/>
+        <UsageCount Value="80"/>
         <Loaded Value="True"/>
-      </Unit113>
-      <Unit114>
+      </Unit110>
+      <Unit111>
         <Filename Value="..\Desktop\ModelCurves\pseudo_voigt_points_set.pas"/>
         <UnitName Value="pseudo_voigt_points_set"/>
         <CursorPos X="39" Y="23"/>
         <TopLine Value="14"/>
         <EditorIndex Value="18"/>
-        <UsageCount Value="62"/>
+        <UsageCount Value="80"/>
         <Loaded Value="True"/>
-      </Unit114>
-      <Unit115>
+      </Unit111>
+      <Unit112>
         <Filename Value="FitServer.pas"/>
         <UnitName Value="FitServer"/>
         <CursorPos X="50" Y="36"/>
         <TopLine Value="20"/>
-        <UsageCount Value="6"/>
-      </Unit115>
-      <Unit116>
+        <UsageCount Value="2"/>
+      </Unit112>
+      <Unit113>
         <Filename Value="..\Desktop\fit_viewer.pas"/>
         <UnitName Value="fit_viewer"/>
-        <CursorPos X="1" Y="220"/>
-        <TopLine Value="200"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
         <EditorIndex Value="23"/>
-        <UsageCount Value="33"/>
+        <UsageCount Value="51"/>
         <Loaded Value="True"/>
-      </Unit116>
-      <Unit117>
+      </Unit113>
+      <Unit114>
         <Filename Value="FitTask.pas"/>
         <UnitName Value="FitTask"/>
         <CursorPos X="28" Y="13"/>
         <TopLine Value="5"/>
-        <UsageCount Value="6"/>
-      </Unit117>
-      <Unit118>
+        <UsageCount Value="2"/>
+      </Unit114>
+      <Unit115>
         <Filename Value="..\Desktop\ModelCurves\UserPointsSet\configurable_user_points_set.pas"/>
         <UnitName Value="configurable_user_points_set"/>
-        <CursorPos X="3" Y="36"/>
-        <TopLine Value="20"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
         <EditorIndex Value="36"/>
-        <UsageCount Value="32"/>
+        <UsageCount Value="50"/>
         <Loaded Value="True"/>
-      </Unit118>
-      <Unit119>
+      </Unit115>
+      <Unit116>
         <Filename Value="..\..\..\lazarus-0.9.24\fpc\2.2.0\source\rtl\objpas\classes\classesh.inc"/>
         <CursorPos X="3" Y="1211"/>
         <TopLine Value="1237"/>
         <EditorIndex Value="30"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="29"/>
         <Loaded Value="True"/>
-      </Unit119>
-      <Unit120>
+      </Unit116>
+      <Unit117>
         <Filename Value="..\Desktop\ModelCurves\int_points_set.pas"/>
         <UnitName Value="int_points_set"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <UsageCount Value="10"/>
-      </Unit120>
-      <Unit121>
+        <UsageCount Value="6"/>
+      </Unit117>
+      <Unit118>
         <Filename Value="..\..\..\lazarus-0.9.24\components\images\lazpng.pas"/>
         <UnitName Value="LazPNG"/>
         <CursorPos X="27" Y="79"/>
         <TopLine Value="44"/>
         <EditorIndex Value="13"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="29"/>
         <Loaded Value="True"/>
-      </Unit121>
+      </Unit118>
     </Units>
-    <JumpHistory Count="11" HistoryIndex="10">
-      <Position1>
-        <Filename Value="..\Desktop\fit_viewer.pas"/>
-        <Caret Line="1" Column="1" TopLine="1"/>
-      </Position1>
-      <Position2>
-        <Filename Value="fit_task_with_thread.pas"/>
-        <Caret Line="1" Column="1" TopLine="1"/>
-      </Position2>
-      <Position3>
-        <Filename Value="fit_task_with_thread.pas"/>
-        <Caret Line="200" Column="20" TopLine="182"/>
-      </Position3>
-      <Position4>
-        <Filename Value="fit_task_with_thread.pas"/>
-        <Caret Line="24" Column="33" TopLine="6"/>
-      </Position4>
-      <Position5>
-        <Filename Value="main_calc_thread.pas"/>
-        <Caret Line="27" Column="34" TopLine="9"/>
-      </Position5>
-      <Position6>
-        <Filename Value="fit_task_with_thread.pas"/>
-        <Caret Line="24" Column="33" TopLine="6"/>
-      </Position6>
-      <Position7>
-        <Filename Value="fit_server_imp.pas"/>
-        <Caret Line="1" Column="1" TopLine="1"/>
-      </Position7>
-      <Position8>
-        <Filename Value="fit_server_imp.pas"/>
-        <Caret Line="11" Column="37" TopLine="1"/>
-      </Position8>
-      <Position9>
-        <Filename Value="fit_server_imp.pas"/>
-        <Caret Line="13" Column="56" TopLine="1"/>
-      </Position9>
-      <Position10>
-        <Filename Value="..\..\..\lazarus-0.9.24\components\images\lazpng.pas"/>
-        <Caret Line="1" Column="1" TopLine="1"/>
-      </Position10>
-      <Position11>
-        <Filename Value="..\..\..\lazarus-0.9.24\components\images\lazpng.pas"/>
-        <Caret Line="71" Column="33" TopLine="18"/>
-      </Position11>
-    </JumpHistory>
+    <JumpHistory Count="0" HistoryIndex="-1"/>
   </ProjectOptions>
   <CompilerOptions>
     <Version Value="5"/>

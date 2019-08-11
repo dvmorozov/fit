@@ -11,7 +11,7 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit form_main;
 
-{$mode objfpc}{$H+}
+{$MODE Delphi}
 
 interface
 
@@ -19,10 +19,9 @@ uses
   Classes, SysUtils, LResources, Forms, Controls, Graphics, Dialogs, TAGraph,
   ExtCtrls;
 
+{$IFNDEF FIT}
 type
-
   { TFormMain }
-
   TFormMain = class(TForm)
     ApplicationProperties1: TApplicationProperties;
     Chart: TTAChart;
@@ -31,15 +30,15 @@ type
     { private declarations }
   public
     { public declarations }
-  end; 
+  end;
 
 var
   FormMain: TFormMain;
+{$ENDIF}
 
 implementation
 
 initialization
   {$I form_main.lrs}
-
 end.
 

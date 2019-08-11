@@ -8,7 +8,7 @@ uses
 {$endif}
   Interfaces,   //  LCL widgetset
   Forms, Variants,
-  main_form,
+  form_main,
   about_box_dialog,
   input_wavelength_dialog, input_back_factor_dialog, input_max_rfactor_dialog,
   fit_client, fit_client_stub,

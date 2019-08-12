@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Fit: int_minimizer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<table class="container"><tr><td class="navigation">
+<h2>Fit</h2><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p><p><a href="GVClasses.png" class="navigation">Classes hierarchy graph</a></p></td><td class="content">
+<h1 class="unit">Unit int_minimizer</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Uses">Uses</a></div><div class="one_section"><a class="section" href="#PasDoc-Classes">Classes, Interfaces, Objects and Records</a></div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section"><a class="section" href="#PasDoc-Types">Types</a></div><div class="one_section"><a class="section" href="#PasDoc-Constants">Constants</a></div><div class="one_section">Variables</div></div>
+<span id="PasDoc-Description"></span><h2 class="description">Description</h2>
+<p>
+Contains definitions of base classes for optimization algorithms.</p>
+<p>
+This software is distributed under GPL in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
+
+<p>
+
+<p></p>
+<span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
+<ul class="useslist"><li>Classes</li></ul><h2 class="overview">Overview</h2>
+<span id="PasDoc-Classes"></span><h3 class="cio">Classes, Interfaces, Objects and Records</h3>
+<table class="classestable wide_list">
+<tr class="listheader">
+<th class="itemname">Name</th>
+<th class="itemdesc">Description</th>
+</tr>
+<tr class="list">
+<td class="itemname">Interface&nbsp;<a class="bold" href="int_minimizer.IMinimizer.html"><code>IMinimizer</code></a></td>
+<td class="itemdesc">Defines interface of data provider for optimization algorithm.</td>
+</tr>
+<tr class="list2">
+<td class="itemname">Class&nbsp;<a class="bold" href="int_minimizer.TIntMinimizer.html"><code>TIntMinimizer</code></a></td>
+<td class="itemdesc">Defines component implementing <a class="normal" href="int_minimizer.IMinimizer.html">IMinimizer</a> interface (providing data for optimization algorithm).</td>
+</tr>
+<tr class="list">
+<td class="itemname">Class&nbsp;<a class="bold" href="int_minimizer.TMinimizer.html"><code>TMinimizer</code></a></td>
+<td class="itemdesc">Implements interface for optimization of any function.</td>
+</tr>
+</table>
+<span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="int_minimizer.html#Register">Register</a></b>;</code></td>
+</tr>
+</table>
+<span id="PasDoc-Types"></span><h3 class="summary">Types</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><b><a  href="int_minimizer.html#TCalcFunc">TCalcFunc</a></b> = procedure of object;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="int_minimizer.html#TEndOfCycle">TEndOfCycle</a></b> = function: Boolean of object;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="int_minimizer.html#TFunc">TFunc</a></b> = function: Double of object;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="int_minimizer.html#TGetParam">TGetParam</a></b> = function: Double of object;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="int_minimizer.html#TGetStep">TGetStep</a></b> = function: Double of object;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="int_minimizer.html#TSetFirstParam">TSetFirstParam</a></b> = procedure of object;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="int_minimizer.html#TSetNextParam">TSetNextParam</a></b> = procedure of object;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="int_minimizer.html#TSetParam">TSetParam</a></b> = procedure(NewParamValue: Double) of object;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="int_minimizer.html#TSetStep">TSetStep</a></b> = procedure(NewStepValue: Double) of object;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="int_minimizer.html#TShowCurMin">TShowCurMin</a></b> = procedure of object;</code></td>
+</tr>
+</table>
+<span id="PasDoc-Constants"></span><h3 class="summary">Constants</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><b><a  href="int_minimizer.html#MIN_FUNCTION_NOT_ASSIGNED">MIN_FUNCTION_NOT_ASSIGNED</a></b>  : LongInt = 1;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="int_minimizer.html#MIN_NO_ERRORS">MIN_NO_ERRORS</a></b>              : LongInt = 0;</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Functions and Procedures</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="Register"></span><code>procedure <b>Register</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<h3 class="detail">Types</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="TCalcFunc"></span><code><b>TCalcFunc</b> = procedure of object;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="TEndOfCycle"></span><code><b>TEndOfCycle</b> = function: Boolean of object;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="TFunc"></span><code><b>TFunc</b> = function: Double of object;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="TGetParam"></span><code><b>TGetParam</b> = function: Double of object;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="TGetStep"></span><code><b>TGetStep</b> = function: Double of object;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="TSetFirstParam"></span><code><b>TSetFirstParam</b> = procedure of object;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="TSetNextParam"></span><code><b>TSetNextParam</b> = procedure of object;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="TSetParam"></span><code><b>TSetParam</b> = procedure(NewParamValue: Double) of object;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="TSetStep"></span><code><b>TSetStep</b> = procedure(NewStepValue: Double) of object;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="TShowCurMin"></span><code><b>TShowCurMin</b> = procedure of object;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<h3 class="detail">Constants</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="MIN_FUNCTION_NOT_ASSIGNED"></span><code><b>MIN_FUNCTION_NOT_ASSIGNED</b>  : LongInt = 1;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="MIN_NO_ERRORS"></span><code><b>MIN_NO_ERRORS</b>              : LongInt = 0;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<h2 class="authors">Author</h2>
+<ul class="authors">
+<li>Dmitry Morozov <a  href="mailto:dvmorozov@hotmail.com">dvmorozov@hotmail.com</a>, 
+LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
+Facebook https://www.facebook.com/profile.php?id=100004082021870</li>
+</ul>
+<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+</span>
+</td></tr></table></body></html>

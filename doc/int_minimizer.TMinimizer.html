@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Fit: int_minimizer: Class TMinimizer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<table class="container"><tr><td class="navigation">
+<h2>Fit</h2><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p><p><a href="GVClasses.png" class="navigation">Classes hierarchy graph</a></p></td><td class="content">
+<span id="TMinimizer"></span><h1 class="cio">Class TMinimizer</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Hierarchy">Hierarchy</a></div><div class="one_section"><a class="section" href="#PasDoc-Fields">Fields</a></div><div class="one_section"><a class="section" href="#PasDoc-Methods">Methods</a></div><div class="one_section"><a class="section" href="#PasDoc-Properties">Properties</a></div></div>
+<span id="PasDoc-Description"></span><h2 class="unit">Unit</h2>
+<p class="unitlink">
+<a  href="int_minimizer.html">int_minimizer</a></p>
+<h2 class="declaration">Declaration</h2>
+<p class="declaration">
+<code>type TMinimizer = class(TComponent)</code></p>
+<h2 class="description">Description</h2>
+<p>
+Implements interface for optimization of any function.</p>
+<span id="PasDoc-Hierarchy"></span><h2 class="hierarchy">Hierarchy</h2>
+<ul class="hierarchy"><li class="ancestor">TComponent</li>
+<li class="thisitem">TMinimizer</li></ul><h2 class="overview">Overview</h2>
+<span id="PasDoc-Fields"></span><h3 class="summary">Fields</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code><b><a  href="int_minimizer.TMinimizer.html#CurrentMinimum">CurrentMinimum</a></b>: Double;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code><b><a  href="int_minimizer.TMinimizer.html#FOnCalcFunc">FOnCalcFunc</a></b>: <a  href="int_minimizer.html#TCalcFunc">TCalcFunc</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code><b><a  href="int_minimizer.TMinimizer.html#FOnEndOfCycle">FOnEndOfCycle</a></b>: <a  href="int_minimizer.html#TEndOfCycle">TEndOfCycle</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code><b><a  href="int_minimizer.TMinimizer.html#FOnFunc">FOnFunc</a></b>: <a  href="int_minimizer.html#TFunc">TFunc</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code><b><a  href="int_minimizer.TMinimizer.html#FOnGetParam">FOnGetParam</a></b>: <a  href="int_minimizer.html#TGetParam">TGetParam</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code><b><a  href="int_minimizer.TMinimizer.html#FOnGetStep">FOnGetStep</a></b>: <a  href="int_minimizer.html#TGetStep">TGetStep</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code><b><a  href="int_minimizer.TMinimizer.html#FOnSetFirstParam">FOnSetFirstParam</a></b>: <a  href="int_minimizer.html#TSetFirstParam">TSetFirstParam</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code><b><a  href="int_minimizer.TMinimizer.html#FOnSetNextParam">FOnSetNextParam</a></b>: <a  href="int_minimizer.html#TSetNextParam">TSetNextParam</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code><b><a  href="int_minimizer.TMinimizer.html#FOnSetParam">FOnSetParam</a></b>: <a  href="int_minimizer.html#TSetParam">TSetParam</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code><b><a  href="int_minimizer.TMinimizer.html#FOnSetStep">FOnSetStep</a></b>: <a  href="int_minimizer.html#TSetStep">TSetStep</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code><b><a  href="int_minimizer.TMinimizer.html#FOnShowCurMin">FOnShowCurMin</a></b>: <a  href="int_minimizer.html#TShowCurMin">TShowCurMin</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code><b><a  href="int_minimizer.TMinimizer.html#FTerminated">FTerminated</a></b>: Boolean;</code></td>
+</tr>
+</table>
+<span id="PasDoc-Methods"></span><h3 class="summary">Methods</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>constructor <b><a  href="int_minimizer.TMinimizer.html#Create">Create</a></b>(AOwner: TComponent); override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="int_minimizer.TMinimizer.html#IsReady">IsReady</a></b>: LongInt; virtual;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="int_minimizer.TMinimizer.html#Minimize">Minimize</a></b>(var ErrorCode: LongInt); virtual; abstract;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="int_minimizer.TMinimizer.html#SetTerminated">SetTerminated</a></b>(ATerminated: Boolean); virtual;</code></td>
+</tr>
+</table>
+<span id="PasDoc-Properties"></span><h3 class="summary">Properties</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a  href="int_minimizer.TMinimizer.html#OnCalcFunc">OnCalcFunc</a></b>: <a  href="int_minimizer.html#TCalcFunc">TCalcFunc</a> read <a  href="int_minimizer.TMinimizer.html#FOnCalcFunc">FOnCalcFunc</a> write <a  href="int_minimizer.TMinimizer.html#FOnCalcFunc">FOnCalcFunc</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a  href="int_minimizer.TMinimizer.html#OnEndOfCycle">OnEndOfCycle</a></b>: <a  href="int_minimizer.html#TEndOfCycle">TEndOfCycle</a>
+            read <a  href="int_minimizer.TMinimizer.html#FOnEndOfCycle">FOnEndOfCycle</a> write <a  href="int_minimizer.TMinimizer.html#FOnEndOfCycle">FOnEndOfCycle</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a  href="int_minimizer.TMinimizer.html#OnFunc">OnFunc</a></b>: <a  href="int_minimizer.html#TFunc">TFunc</a> read <a  href="int_minimizer.TMinimizer.html#FOnFunc">FOnFunc</a> write <a  href="int_minimizer.TMinimizer.html#FOnFunc">FOnFunc</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a  href="int_minimizer.TMinimizer.html#OnGetParam">OnGetParam</a></b>: <a  href="int_minimizer.html#TGetParam">TGetParam</a> read <a  href="int_minimizer.TMinimizer.html#FOnGetParam">FOnGetParam</a> write <a  href="int_minimizer.TMinimizer.html#FOnGetParam">FOnGetParam</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a  href="int_minimizer.TMinimizer.html#OnGetStep">OnGetStep</a></b>: <a  href="int_minimizer.html#TGetStep">TGetStep</a> read <a  href="int_minimizer.TMinimizer.html#FOnGetStep">FOnGetStep</a> write <a  href="int_minimizer.TMinimizer.html#FOnGetStep">FOnGetStep</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a  href="int_minimizer.TMinimizer.html#OnSetFirstParam">OnSetFirstParam</a></b>: <a  href="int_minimizer.html#TSetFirstParam">TSetFirstParam</a>
+            read <a  href="int_minimizer.TMinimizer.html#FOnSetFirstParam">FOnSetFirstParam</a> write <a  href="int_minimizer.TMinimizer.html#FOnSetFirstParam">FOnSetFirstParam</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a  href="int_minimizer.TMinimizer.html#OnSetNextParam">OnSetNextParam</a></b>: <a  href="int_minimizer.html#TSetNextParam">TSetNextParam</a>
+            read <a  href="int_minimizer.TMinimizer.html#FOnSetNextParam">FOnSetNextParam</a> write <a  href="int_minimizer.TMinimizer.html#FOnSetNextParam">FOnSetNextParam</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a  href="int_minimizer.TMinimizer.html#OnSetParam">OnSetParam</a></b>: <a  href="int_minimizer.html#TSetParam">TSetParam</a> read <a  href="int_minimizer.TMinimizer.html#FOnSetParam">FOnSetParam</a> write <a  href="int_minimizer.TMinimizer.html#FOnSetParam">FOnSetParam</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a  href="int_minimizer.TMinimizer.html#OnSetStep">OnSetStep</a></b>: <a  href="int_minimizer.html#TSetStep">TSetStep</a> read <a  href="int_minimizer.TMinimizer.html#FOnSetStep">FOnSetStep</a> write <a  href="int_minimizer.TMinimizer.html#FOnSetStep">FOnSetStep</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a  href="int_minimizer.TMinimizer.html#OnShowCurMin">OnShowCurMin</a></b>: <a  href="int_minimizer.html#TShowCurMin">TShowCurMin</a>
+            read <a  href="int_minimizer.TMinimizer.html#FOnShowCurMin">FOnShowCurMin</a> write <a  href="int_minimizer.TMinimizer.html#FOnShowCurMin">FOnShowCurMin</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="int_minimizer.TMinimizer.html#Terminated">Terminated</a></b>: Boolean read <a  href="int_minimizer.TMinimizer.html#FTerminated">FTerminated</a> write <a  href="int_minimizer.TMinimizer.html#SetTerminated">SetTerminated</a>;</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Fields</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="CurrentMinimum"></span><code><b>CurrentMinimum</b>: Double;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="FOnCalcFunc"></span><code><b>FOnCalcFunc</b>: <a  href="int_minimizer.html#TCalcFunc">TCalcFunc</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="FOnEndOfCycle"></span><code><b>FOnEndOfCycle</b>: <a  href="int_minimizer.html#TEndOfCycle">TEndOfCycle</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="FOnFunc"></span><code><b>FOnFunc</b>: <a  href="int_minimizer.html#TFunc">TFunc</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="FOnGetParam"></span><code><b>FOnGetParam</b>: <a  href="int_minimizer.html#TGetParam">TGetParam</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="FOnGetStep"></span><code><b>FOnGetStep</b>: <a  href="int_minimizer.html#TGetStep">TGetStep</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="FOnSetFirstParam"></span><code><b>FOnSetFirstParam</b>: <a  href="int_minimizer.html#TSetFirstParam">TSetFirstParam</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="FOnSetNextParam"></span><code><b>FOnSetNextParam</b>: <a  href="int_minimizer.html#TSetNextParam">TSetNextParam</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="FOnSetParam"></span><code><b>FOnSetParam</b>: <a  href="int_minimizer.html#TSetParam">TSetParam</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="FOnSetStep"></span><code><b>FOnSetStep</b>: <a  href="int_minimizer.html#TSetStep">TSetStep</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="FOnShowCurMin"></span><code><b>FOnShowCurMin</b>: <a  href="int_minimizer.html#TShowCurMin">TShowCurMin</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="FTerminated"></span><code><b>FTerminated</b>: Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+FMinInterface: <a class="normal" href="int_minimizer.IMinimizer.html">IMinimizer</a>;</p>
+</td></tr>
+</table>
+<h3 class="detail">Methods</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Create"></span><code>constructor <b>Create</b>(AOwner: TComponent); override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="IsReady"></span><code>function <b>IsReady</b>: LongInt; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+vozvraschaet kod oshibki</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Minimize"></span><code>procedure <b>Minimize</b>(var ErrorCode: LongInt); virtual; abstract;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="SetTerminated"></span><code>procedure <b>SetTerminated</b>(ATerminated: Boolean); virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<h3 class="detail">Properties</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><span id="OnCalcFunc"></span><code>property <b>OnCalcFunc</b>: <a  href="int_minimizer.html#TCalcFunc">TCalcFunc</a> read <a  href="int_minimizer.TMinimizer.html#FOnCalcFunc">FOnCalcFunc</a> write <a  href="int_minimizer.TMinimizer.html#FOnCalcFunc">FOnCalcFunc</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><span id="OnEndOfCycle"></span><code>property <b>OnEndOfCycle</b>: <a  href="int_minimizer.html#TEndOfCycle">TEndOfCycle</a>
+            read <a  href="int_minimizer.TMinimizer.html#FOnEndOfCycle">FOnEndOfCycle</a> write <a  href="int_minimizer.TMinimizer.html#FOnEndOfCycle">FOnEndOfCycle</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><span id="OnFunc"></span><code>property <b>OnFunc</b>: <a  href="int_minimizer.html#TFunc">TFunc</a> read <a  href="int_minimizer.TMinimizer.html#FOnFunc">FOnFunc</a> write <a  href="int_minimizer.TMinimizer.html#FOnFunc">FOnFunc</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+property MinInterface: <a class="normal" href="int_minimizer.IMinimizer.html">IMinimizer</a> read FMinInterface write FMinInterface;</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><span id="OnGetParam"></span><code>property <b>OnGetParam</b>: <a  href="int_minimizer.html#TGetParam">TGetParam</a> read <a  href="int_minimizer.TMinimizer.html#FOnGetParam">FOnGetParam</a> write <a  href="int_minimizer.TMinimizer.html#FOnGetParam">FOnGetParam</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><span id="OnGetStep"></span><code>property <b>OnGetStep</b>: <a  href="int_minimizer.html#TGetStep">TGetStep</a> read <a  href="int_minimizer.TMinimizer.html#FOnGetStep">FOnGetStep</a> write <a  href="int_minimizer.TMinimizer.html#FOnGetStep">FOnGetStep</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><span id="OnSetFirstParam"></span><code>property <b>OnSetFirstParam</b>: <a  href="int_minimizer.html#TSetFirstParam">TSetFirstParam</a>
+            read <a  href="int_minimizer.TMinimizer.html#FOnSetFirstParam">FOnSetFirstParam</a> write <a  href="int_minimizer.TMinimizer.html#FOnSetFirstParam">FOnSetFirstParam</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><span id="OnSetNextParam"></span><code>property <b>OnSetNextParam</b>: <a  href="int_minimizer.html#TSetNextParam">TSetNextParam</a>
+            read <a  href="int_minimizer.TMinimizer.html#FOnSetNextParam">FOnSetNextParam</a> write <a  href="int_minimizer.TMinimizer.html#FOnSetNextParam">FOnSetNextParam</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><span id="OnSetParam"></span><code>property <b>OnSetParam</b>: <a  href="int_minimizer.html#TSetParam">TSetParam</a> read <a  href="int_minimizer.TMinimizer.html#FOnSetParam">FOnSetParam</a> write <a  href="int_minimizer.TMinimizer.html#FOnSetParam">FOnSetParam</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><span id="OnSetStep"></span><code>property <b>OnSetStep</b>: <a  href="int_minimizer.html#TSetStep">TSetStep</a> read <a  href="int_minimizer.TMinimizer.html#FOnSetStep">FOnSetStep</a> write <a  href="int_minimizer.TMinimizer.html#FOnSetStep">FOnSetStep</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><span id="OnShowCurMin"></span><code>property <b>OnShowCurMin</b>: <a  href="int_minimizer.html#TShowCurMin">TShowCurMin</a>
+            read <a  href="int_minimizer.TMinimizer.html#FOnShowCurMin">FOnShowCurMin</a> write <a  href="int_minimizer.TMinimizer.html#FOnShowCurMin">FOnShowCurMin</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Terminated"></span><code>property <b>Terminated</b>: Boolean read <a  href="int_minimizer.TMinimizer.html#FTerminated">FTerminated</a> write <a  href="int_minimizer.TMinimizer.html#SetTerminated">SetTerminated</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+</span>
+</td></tr></table></body></html>

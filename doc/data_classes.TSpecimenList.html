@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Fit: data_classes: Class TSpecimenList</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<table class="container"><tr><td class="navigation">
+<h2>Fit</h2><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p><p><a href="GVClasses.png" class="navigation">Classes hierarchy graph</a></p></td><td class="content">
+<span id="TSpecimenList"></span><h1 class="cio">Class TSpecimenList</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Hierarchy">Hierarchy</a></div><div class="one_section">Fields</div><div class="one_section"><a class="section" href="#PasDoc-Methods">Methods</a></div><div class="one_section">Properties</div></div>
+<span id="PasDoc-Description"></span><h2 class="unit">Unit</h2>
+<p class="unitlink">
+<a  href="data_classes.html">data_classes</a></p>
+<h2 class="declaration">Declaration</h2>
+<p class="declaration">
+<code>type TSpecimenList = class(<a class="normal" href="table_components.TRowCompList.html">TRowCompList</a>)</code></p>
+<h2 class="description">Description</h2>
+<p>
+Set of pattern instances forming the <a class="normal" href="curve_points_set.html#Calculated">calculated</a> profile in sum.</p>
+<span id="PasDoc-Hierarchy"></span><h2 class="hierarchy">Hierarchy</h2>
+<ul class="hierarchy"><li class="ancestor">TSelfCheckedComponentList</li>
+<li class="ancestor"><a class="normal" href="self_copied_component.TSelfCopiedCompList.html">TSelfCopiedCompList</a></li>
+<li class="ancestor"><a class="normal" href="table_components.TTableCompList.html">TTableCompList</a></li>
+<li class="ancestor"><a class="normal" href="table_components.TRowCompList.html">TRowCompList</a></li>
+<li class="thisitem">TSpecimenList</li></ul><h2 class="overview">Overview</h2>
+<span id="PasDoc-Methods"></span><h3 class="summary">Methods</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="data_classes.TSpecimenList.html#GetCellEnabledCharSet">GetCellEnabledCharSet</a></b>(const ACol, ARow: LongInt): <a  href="Tools.html#TCharSet">TCharSet</a>; override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="data_classes.TSpecimenList.html#GetInfoCols">GetInfoCols</a></b>: LongInt; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="data_classes.TSpecimenList.html#GetRowContents">GetRowContents</a></b>( Grid: TStringGrid; RowNum: LongInt): Boolean; override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="data_classes.TSpecimenList.html#IsDataValid">IsDataValid</a></b>(const ACol, ARow: LongInt; const AString: string): Boolean; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="data_classes.TSpecimenList.html#ValueToString">ValueToString</a></b>(const ACol, ARow: LongInt): string; override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>function <b><a  href="data_classes.TSpecimenList.html#CreateNewObject">CreateNewObject</a></b>: TComponent; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>function <b><a  href="data_classes.TSpecimenList.html#RecalcParamValue">RecalcParamValue</a></b>(P: <a  href="curve_points_set.TSpecialCurveParameter.html">TSpecialCurveParameter</a>): Double; virtual;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="data_classes.TSpecimenList.html#SetCaption">SetCaption</a></b>(Grid: TStringGrid); override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="data_classes.TSpecimenList.html#SetColOptions">SetColOptions</a></b>(Grid: TStringGrid); override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="data_classes.TSpecimenList.html#SetRowContents">SetRowContents</a></b>(Grid: TStringGrid; RowNum: LongInt); override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="data_classes.TSpecimenList.html#SetValueByDefault">SetValueByDefault</a></b>(const ACol, ARow: LongInt); override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="data_classes.TSpecimenList.html#StringToValue">StringToValue</a></b>(const ACol, ARow: LongInt; const AString: string); override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="data_classes.TSpecimenList.html#ReverseCalcParamValue">ReverseCalcParamValue</a></b>( P: <a  href="curve_points_set.TSpecialCurveParameter.html">TSpecialCurveParameter</a>; NewValue: Double); virtual;</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Methods</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetCellEnabledCharSet"></span><code>function <b>GetCellEnabledCharSet</b>(const ACol, ARow: LongInt): <a  href="Tools.html#TCharSet">TCharSet</a>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetInfoCols"></span><code>function <b>GetInfoCols</b>: LongInt; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetRowContents"></span><code>function <b>GetRowContents</b>( Grid: TStringGrid; RowNum: LongInt): Boolean; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="IsDataValid"></span><code>function <b>IsDataValid</b>(const ACol, ARow: LongInt; const AString: string): Boolean; override;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Performs &quot;soft&quot; data validation without throwing an exception. However if coordinates of row or column have inadmissible values exception is thrown. Always returns true. Override to perform suitable validation.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="ValueToString"></span><code>function <b>ValueToString</b>(const ACol, ARow: LongInt): string; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="CreateNewObject"></span><code>function <b>CreateNewObject</b>: TComponent; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="RecalcParamValue"></span><code>function <b>RecalcParamValue</b>(P: <a  href="curve_points_set.TSpecialCurveParameter.html">TSpecialCurveParameter</a>): Double; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Generic method for conversion values to <a class="normal" href="app.html#User">user</a> friendly representation.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetCaption"></span><code>procedure <b>SetCaption</b>(Grid: TStringGrid); override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetColOptions"></span><code>procedure <b>SetColOptions</b>(Grid: TStringGrid); override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetRowContents"></span><code>procedure <b>SetRowContents</b>(Grid: TStringGrid; RowNum: LongInt); override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetValueByDefault"></span><code>procedure <b>SetValueByDefault</b>(const ACol, ARow: LongInt); override;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Sets valid default value for the cell with given coordinates. Is used in cell initialization.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="StringToValue"></span><code>procedure <b>StringToValue</b>(const ACol, ARow: LongInt; const AString: string); override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="ReverseCalcParamValue"></span><code>procedure <b>ReverseCalcParamValue</b>( P: <a  href="curve_points_set.TSpecialCurveParameter.html">TSpecialCurveParameter</a>; NewValue: Double); virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Generic method for reverse conversion of value from <a class="normal" href="app.html#User">user</a> to internal representation.</p>
+</td></tr>
+</table>
+<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+</span>
+</td></tr></table></body></html>

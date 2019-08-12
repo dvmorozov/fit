@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Fit: fit_server_aux</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<table class="container"><tr><td class="navigation">
+<h2>Fit</h2><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p><p><a href="GVClasses.png" class="navigation">Classes hierarchy graph</a></p></td><td class="content">
+<h1 class="unit">Unit fit_server_aux</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Uses">Uses</a></div><div class="one_section">Classes, Interfaces, Objects and Records</div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section">Types</div><div class="one_section"><a class="section" href="#PasDoc-Constants">Constants</a></div><div class="one_section">Variables</div></div>
+<span id="PasDoc-Description"></span><h2 class="description">Description</h2>
+<p>
+Contains server auxiliary functions.</p>
+<p>
+This software is distributed under GPL in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
+
+<p>
+
+<p></p>
+<span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
+<ul class="useslist"><li>base_service_intf</li><li>Classes</li><li><a  href="int_fit_server.html">int_fit_server</a></li><li>MyExceptions</li><li><a  href="named_points_set.html">named_points_set</a></li><li><a  href="points_set.html">points_set</a></li><li>SysUtils</li><li><a  href="title_points_set.html">title_points_set</a></li></ul><h2 class="overview">Overview</h2>
+<span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code>function <b><a  href="fit_server_aux.html#CreateNamedPointsSet">CreateNamedPointsSet</a></b>( ARemotable: TArrayOfFloatDoubleRemotable): <a  href="named_points_set.TNamedPointsSet.html">TNamedPointsSet</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a  href="fit_server_aux.html#CreateRemotableArray">CreateRemotableArray</a></b>( APointsSet: <a  href="points_set.TPointsSet.html">TPointsSet</a>): TArrayOfFloatDoubleRemotable;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a  href="fit_server_aux.html#ProcessPointsResult">ProcessPointsResult</a></b>(R: <a  href="int_fit_server.TPointsResult.html">TPointsResult</a>): <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>;</code></td>
+</tr>
+</table>
+<span id="PasDoc-Constants"></span><h3 class="summary">Constants</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><b><a  href="fit_server_aux.html#OutOfServerResources">OutOfServerResources</a></b>: string = 'Out of server resources.';</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Functions and Procedures</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="CreateNamedPointsSet"></span><code>function <b>CreateNamedPointsSet</b>( ARemotable: TArrayOfFloatDoubleRemotable): <a  href="named_points_set.TNamedPointsSet.html">TNamedPointsSet</a>;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="CreateRemotableArray"></span><code>function <b>CreateRemotableArray</b>( APointsSet: <a  href="points_set.TPointsSet.html">TPointsSet</a>): TArrayOfFloatDoubleRemotable;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Modules of wst-0.5</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="ProcessPointsResult"></span><code>function <b>ProcessPointsResult</b>(R: <a  href="int_fit_server.TPointsResult.html">TPointsResult</a>): <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<h3 class="detail">Constants</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OutOfServerResources"></span><code><b>OutOfServerResources</b>: string = 'Out of server resources.';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<h2 class="authors">Author</h2>
+<ul class="authors">
+<li>Dmitry Morozov <a  href="mailto:dvmorozov@hotmail.com">dvmorozov@hotmail.com</a>,
+LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794,
+Facebook https://www.facebook.com/profile.php?id=100004082021870</li>
+</ul>
+<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+</span>
+</td></tr></table></body></html>

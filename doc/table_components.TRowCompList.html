@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Fit: table_components: Class TRowCompList</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<table class="container"><tr><td class="navigation">
+<h2>Fit</h2><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p><p><a href="GVClasses.png" class="navigation">Classes hierarchy graph</a></p></td><td class="content">
+<span id="TRowCompList"></span><h1 class="cio">Class TRowCompList</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Hierarchy">Hierarchy</a></div><div class="one_section">Fields</div><div class="one_section"><a class="section" href="#PasDoc-Methods">Methods</a></div><div class="one_section">Properties</div></div>
+<span id="PasDoc-Description"></span><h2 class="unit">Unit</h2>
+<p class="unitlink">
+<a  href="table_components.html">table_components</a></p>
+<h2 class="declaration">Declaration</h2>
+<p class="declaration">
+<code>type TRowCompList = class(<a class="normal" href="table_components.TTableCompList.html">TTableCompList</a>)</code></p>
+<h2 class="description">Description</h2>
+<div class="nodescription">No description available, ancestor TTableCompList description follows</div><p>
+Component list which can display component properties in grid. Class implements functions of saving/reading table properties, but does not bind grid positions with list items. If number of columns returned by <a class="normal" href="table_components.TTableCompList.html#GetColCount">GetColCount</a> is changed then corresponding changes in <a class="normal" href="table_components.TTableCompList.html#SetCaption">SetCaption</a>, <a class="normal" href="table_components.TTableCompList.html#SetColOptions">SetColOptions</a>, <a class="normal" href="table_components.TTableCompList.html#SetColFunc">SetColFunc</a>, SetRowContents, GetRowContents should be done.</p>
+<span id="PasDoc-Hierarchy"></span><h2 class="hierarchy">Hierarchy</h2>
+<ul class="hierarchy"><li class="ancestor">TSelfCheckedComponentList</li>
+<li class="ancestor"><a class="normal" href="self_copied_component.TSelfCopiedCompList.html">TSelfCopiedCompList</a></li>
+<li class="ancestor"><a class="normal" href="table_components.TTableCompList.html">TTableCompList</a></li>
+<li class="thisitem">TRowCompList</li></ul><h2 class="overview">Overview</h2>
+<span id="PasDoc-Methods"></span><h3 class="summary">Methods</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TRowCompList.html#Add">Add</a></b>(Item: TComponent): Integer; override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TRowCompList.html#GetColNumFixed">GetColNumFixed</a></b>: Boolean; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TRowCompList.html#GetDataFromGrid">GetDataFromGrid</a></b>(Grid: TStringGrid): Boolean; override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TRowCompList.html#GetInfoRows">GetInfoRows</a></b>: LongInt; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TRowCompList.html#GetRowContents">GetRowContents</a></b>( Grid: TStringGrid; RowNum: LongInt): Boolean; virtual; abstract;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TRowCompList.html#IsDataSourceEmpty">IsDataSourceEmpty</a></b>: Boolean; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TRowCompList.html#MayIDoAddRow">MayIDoAddRow</a></b>: Boolean; override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TRowCompList.html#MayIDoClearAllCells">MayIDoClearAllCells</a></b>: Boolean; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TRowCompList.html#MayIDoClearSelectedArea">MayIDoClearSelectedArea</a></b>: Boolean; override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TRowCompList.html#MayIDoDeleteAllData">MayIDoDeleteAllData</a></b>: Boolean; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TRowCompList.html#MayIDoDeleteRows">MayIDoDeleteRows</a></b>(StartRow, RowsCount: LongInt): Boolean; override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TRowCompList.html#MayIDoInsertRows">MayIDoInsertRows</a></b>(StartRow, RowsCount: LongInt): Boolean; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TRowCompList.html#CreateNewObject">CreateNewObject</a></b>: TComponent; virtual; abstract;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="table_components.TRowCompList.html#AllDataDeleted">AllDataDeleted</a></b>; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="table_components.TRowCompList.html#BeforeStringToValue">BeforeStringToValue</a></b>(const ACol, ARow: Integer; const AString: string); override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="table_components.TRowCompList.html#Delete">Delete</a></b>(Index: Integer); override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="table_components.TRowCompList.html#Insert">Insert</a></b>(Index: Integer; Item: TComponent); override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="table_components.TRowCompList.html#RowAdded">RowAdded</a></b>; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="table_components.TRowCompList.html#RowsDeleted">RowsDeleted</a></b>( const StartRow, RowsCount: LongInt); override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="table_components.TRowCompList.html#RowsInserted">RowsInserted</a></b>( const StartRow, RowsCount: LongInt); override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="table_components.TRowCompList.html#SetDataToGrid">SetDataToGrid</a></b>(Grid: TStringGrid); override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="table_components.TRowCompList.html#SetRowContents">SetRowContents</a></b>( Grid: TStringGrid; RowNum: LongInt); virtual; abstract;</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Methods</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Add"></span><code>function <b>Add</b>(Item: TComponent): Integer; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetColNumFixed"></span><code>function <b>GetColNumFixed</b>: Boolean; override;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+минимально возможное число строк = Fixed + 1 для обеспечения возможности ввода</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetDataFromGrid"></span><code>function <b>GetDataFromGrid</b>(Grid: TStringGrid): Boolean; override;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+создает новый компонент, который будет представлять строку таблицы для правильной работы функций необходимо, чтобы число строк в информационной части таблицы было равно числу элементов в списке</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetInfoRows"></span><code>function <b>GetInfoRows</b>: LongInt; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetRowContents"></span><code>function <b>GetRowContents</b>( Grid: TStringGrid; RowNum: LongInt): Boolean; virtual; abstract;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="IsDataSourceEmpty"></span><code>function <b>IsDataSourceEmpty</b>: Boolean; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="MayIDoAddRow"></span><code>function <b>MayIDoAddRow</b>: Boolean; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="MayIDoClearAllCells"></span><code>function <b>MayIDoClearAllCells</b>: Boolean; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="MayIDoClearSelectedArea"></span><code>function <b>MayIDoClearSelectedArea</b>: Boolean; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="MayIDoDeleteAllData"></span><code>function <b>MayIDoDeleteAllData</b>: Boolean; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="MayIDoDeleteRows"></span><code>function <b>MayIDoDeleteRows</b>(StartRow, RowsCount: LongInt): Boolean; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="MayIDoInsertRows"></span><code>function <b>MayIDoInsertRows</b>(StartRow, RowsCount: LongInt): Boolean; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="CreateNewObject"></span><code>function <b>CreateNewObject</b>: TComponent; virtual; abstract;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+список компонентов, каждый из которых представляет собой строку таблицы; число столбцов предполагается фиксированным, поэтому для реализации переменного числа столбцов нужно сделать соответствующие изменения</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="AllDataDeleted"></span><code>procedure <b>AllDataDeleted</b>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="BeforeStringToValue"></span><code>procedure <b>BeforeStringToValue</b>(const ACol, ARow: Integer; const AString: string); override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Delete"></span><code>procedure <b>Delete</b>(Index: Integer); override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Insert"></span><code>procedure <b>Insert</b>(Index: Integer; Item: TComponent); override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="RowAdded"></span><code>procedure <b>RowAdded</b>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="RowsDeleted"></span><code>procedure <b>RowsDeleted</b>( const StartRow, RowsCount: LongInt); override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="RowsInserted"></span><code>procedure <b>RowsInserted</b>( const StartRow, RowsCount: LongInt); override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetDataToGrid"></span><code>procedure <b>SetDataToGrid</b>(Grid: TStringGrid); override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetRowContents"></span><code>procedure <b>SetRowContents</b>( Grid: TStringGrid; RowNum: LongInt); virtual; abstract;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+</span>
+</td></tr></table></body></html>

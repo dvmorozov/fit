@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Fit: fit_task_with_thread: Class TFitTaskWithThread</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<table class="container"><tr><td class="navigation">
+<h2>Fit</h2><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p><p><a href="GVClasses.png" class="navigation">Classes hierarchy graph</a></p></td><td class="content">
+<span id="TFitTaskWithThread"></span><h1 class="cio">Class TFitTaskWithThread</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Hierarchy">Hierarchy</a></div><div class="one_section"><a class="section" href="#PasDoc-Fields">Fields</a></div><div class="one_section"><a class="section" href="#PasDoc-Methods">Methods</a></div><div class="one_section"><a class="section" href="#PasDoc-Properties">Properties</a></div></div>
+<span id="PasDoc-Description"></span><h2 class="unit">Unit</h2>
+<p class="unitlink">
+<a  href="fit_task_with_thread.html">fit_task_with_thread</a></p>
+<h2 class="declaration">Declaration</h2>
+<p class="declaration">
+<code>type TFitTaskWithThread = class(<a class="normal" href="fit_task.TFitTask.html">TFitTask</a>)</code></p>
+<h2 class="description">Description</h2>
+<p>
+Executes task solution in separate thread.</p>
+<span id="PasDoc-Hierarchy"></span><h2 class="hierarchy">Hierarchy</h2>
+<ul class="hierarchy"><li class="ancestor">TComponent</li>
+<li class="ancestor"><a class="normal" href="fit_task.TFitTask.html">TFitTask</a></li>
+<li class="thisitem">TFitTaskWithThread</li></ul><h2 class="overview">Overview</h2>
+<span id="PasDoc-Fields"></span><h3 class="summary">Fields</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="fit_task_with_thread.TFitTaskWithThread.html#CS">CS</a></b>: TRTLCriticalSection;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="fit_task_with_thread.TFitTaskWithThread.html#FDoneDisabled">FDoneDisabled</a></b>: Boolean;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="fit_task_with_thread.TFitTaskWithThread.html#MainCalcThread">MainCalcThread</a></b>: <a  href="main_calc_thread.TMainCalcThread.html">TMainCalcThread</a>;</code></td>
+</tr>
+</table>
+<span id="PasDoc-Methods"></span><h3 class="summary">Methods</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>constructor <b><a  href="fit_task_with_thread.TFitTaskWithThread.html#Create">Create</a></b>(AOwner: TComponent); override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>destructor <b><a  href="fit_task_with_thread.TFitTaskWithThread.html#Destroy">Destroy</a></b>; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_task_with_thread.TFitTaskWithThread.html#GetAllDone">GetAllDone</a></b>: Boolean; override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_task_with_thread.TFitTaskWithThread.html#GetCurAbsMin">GetCurAbsMin</a></b>: Double; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_task_with_thread.TFitTaskWithThread.html#GetCurMin">GetCurMin</a></b>: Double; override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_task_with_thread.TFitTaskWithThread.html#GetCurMinInitialized">GetCurMinInitialized</a></b>: Boolean; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="fit_task_with_thread.TFitTaskWithThread.html#GetCurSqrMin">GetCurSqrMin</a></b>: Double; override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_task_with_thread.TFitTaskWithThread.html#AbortAsyncOper">AbortAsyncOper</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_task_with_thread.TFitTaskWithThread.html#DestroyMainCalcThread">DestroyMainCalcThread</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_task_with_thread.TFitTaskWithThread.html#DoneProc">DoneProc</a></b>; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_task_with_thread.TFitTaskWithThread.html#FindGausses">FindGausses</a></b>; override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_task_with_thread.TFitTaskWithThread.html#FindGaussesAgain">FindGaussesAgain</a></b>; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_task_with_thread.TFitTaskWithThread.html#FindGaussesSequentially">FindGaussesSequentially</a></b>; override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_task_with_thread.TFitTaskWithThread.html#ShowCurMin">ShowCurMin</a></b>; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_task_with_thread.TFitTaskWithThread.html#StopAsyncOper">StopAsyncOper</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_task_with_thread.TFitTaskWithThread.html#RecreateMainCalcThread">RecreateMainCalcThread</a></b>( ACurrentTask: <a  href="main_calc_thread.html#TCurrentTask">TCurrentTask</a>; ADoneProc: <a  href="main_calc_thread.html#TDoneProc">TDoneProc</a>);</code></td>
+</tr>
+</table>
+<span id="PasDoc-Properties"></span><h3 class="summary">Properties</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="fit_task_with_thread.TFitTaskWithThread.html#DoneDisabled">DoneDisabled</a></b>: Boolean read <a  href="fit_task_with_thread.TFitTaskWithThread.html#FDoneDisabled">FDoneDisabled</a> write <a  href="fit_task_with_thread.TFitTaskWithThread.html#FDoneDisabled">FDoneDisabled</a>;</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Fields</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="CS"></span><code><b>CS</b>: TRTLCriticalSection;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FDoneDisabled"></span><code><b>FDoneDisabled</b>: Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Use instead of TCriticalSection.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="MainCalcThread"></span><code><b>MainCalcThread</b>: <a  href="main_calc_thread.TMainCalcThread.html">TMainCalcThread</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<h3 class="detail">Methods</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Create"></span><code>constructor <b>Create</b>(AOwner: TComponent); override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Destroy"></span><code>destructor <b>Destroy</b>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetAllDone"></span><code>function <b>GetAllDone</b>: Boolean; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetCurAbsMin"></span><code>function <b>GetCurAbsMin</b>: Double; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetCurMin"></span><code>function <b>GetCurMin</b>: Double; override;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Methods implement synchronization to work in multithreading environment.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetCurMinInitialized"></span><code>function <b>GetCurMinInitialized</b>: Boolean; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetCurSqrMin"></span><code>function <b>GetCurSqrMin</b>: Double; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="AbortAsyncOper"></span><code>procedure <b>AbortAsyncOper</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Synchronous termination of long-term operation without call of termination procedure.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="DestroyMainCalcThread"></span><code>procedure <b>DestroyMainCalcThread</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+ozhidaet zaversheniya vypolneniya potoka</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="DoneProc"></span><code>procedure <b>DoneProc</b>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="FindGausses"></span><code>procedure <b>FindGausses</b>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Fits pattern specimens starting from given parameter set (initially or repeatedly).</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="FindGaussesAgain"></span><code>procedure <b>FindGaussesAgain</b>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="FindGaussesSequentially"></span><code>procedure <b>FindGaussesSequentially</b>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Searches set of pattern specimens (curves) fitting exprerimental data with given accuracy sequentially decreasing number of curves.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="ShowCurMin"></span><code>procedure <b>ShowCurMin</b>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="StopAsyncOper"></span><code>procedure <b>StopAsyncOper</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Asynchronous termination of long-term operation with call of termination procedure.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="RecreateMainCalcThread"></span><code>procedure <b>RecreateMainCalcThread</b>( ACurrentTask: <a  href="main_calc_thread.html#TCurrentTask">TCurrentTask</a>; ADoneProc: <a  href="main_calc_thread.html#TDoneProc">TDoneProc</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Suppresses calling <a class="normal" href="fit_task_with_thread.TFitTaskWithThread.html#DoneProc">DoneProc</a>.</p>
+</td></tr>
+</table>
+<h3 class="detail">Properties</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="DoneDisabled"></span><code>property <b>DoneDisabled</b>: Boolean read <a  href="fit_task_with_thread.TFitTaskWithThread.html#FDoneDisabled">FDoneDisabled</a> write <a  href="fit_task_with_thread.TFitTaskWithThread.html#FDoneDisabled">FDoneDisabled</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+</span>
+</td></tr></table></body></html>

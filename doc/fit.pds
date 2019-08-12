@@ -44,8 +44,8 @@ LatexGraphicsPackage=0
 Count=4
 Item_0=FPC
 Item_1=MSWINDOWS
-Item_2=WIN32
-Item_3=CPU386
+Item_2=
+Item_3=
 
 [Header]
 Count=0
@@ -91,7 +91,7 @@ Item_17=..\..\..\fit\Desktop\Forms\input_back_factor_dialog.pas
 Item_18=..\..\..\fit\Desktop\Forms\input_max_rfactor_dialog.pas
 Item_19=..\..\..\fit\Desktop\Forms\input_wavelength_dialog.pas
 Item_20=..\..\..\fit\Desktop\int_client_callback.pas
-Item_21=..\..\..\fit\Desktop\intfitviewer.pas
+Item_21=..\..\..\fit\Desktop\int_fit_viewer.pas
 Item_22=..\..\..\fit\Desktop\main_calc_thread.pas
 Item_23=..\..\..\fit\Desktop\ModelCurves\asym_pseudo_voigt_points_set.pas
 Item_24=..\..\..\fit\Desktop\ModelCurves\curve_points_set.pas

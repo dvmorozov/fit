@@ -30,7 +30,7 @@ DiGraph Classes {
   IFitProblem -> IFitService
   IFitProblem [href="int_fit_service.IFitProblem.html"]
   IFitViewer -> IInterface
-  IFitViewer [href="IntFitViewer.IFitViewer.html"]
+  IFitViewer [href="int_fit_viewer.IFitViewer.html"]
   IOptimizedFunction -> IInterface
   IOptimizedFunction [href="downhill_simplex_container.IOptimizedFunction.html"]
   IPointsSet -> IInterface

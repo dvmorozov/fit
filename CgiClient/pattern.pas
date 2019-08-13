@@ -11,7 +11,7 @@ function ReplaceStrings_pattern(Text: string): string;
 
 implementation
 
-uses data, Main;
+uses data, app;
 
 const
     PairCount = 10; //  kol-vo elementov

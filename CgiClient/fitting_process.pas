@@ -19,7 +19,7 @@ const
 
 implementation
 
-uses data, Main;
+uses data, app;
 
 const
     PairCount = 1; // 2; //  kol-vo elementov

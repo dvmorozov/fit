@@ -180,7 +180,7 @@ uses data, background, background_more, pattern, pattern_more, specimen_position
     gen_spec_int_progress, projects, project_files, project_files_empty,
     fit_server_proxy, projects_empty, soap_formatter, binary_formatter,
     base_service_intf, specimen_parameters_file, file_results, file_results_empty,
-    evaluation, Main, mscr_specimen_list, Settings,
+    evaluation, app, mscr_specimen_list, Settings,
     GeneralHashfunctions, CommonTypes;
 
 const

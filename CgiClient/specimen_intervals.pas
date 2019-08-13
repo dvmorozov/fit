@@ -10,7 +10,7 @@ function PrepareTemplate_specimen_intervals: string;
 
 implementation
 
-uses data, Main;
+uses data, app;
 
 const
     PairCount = 9; // 12; //  kol-vo elementov

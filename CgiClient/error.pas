@@ -10,7 +10,7 @@ function PrepareTemplate_error: string;
 
 implementation
 
-uses data, Main;
+uses data, app;
 
 const
     PairCount = 1; // 3; //  kol-vo elementov

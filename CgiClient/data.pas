@@ -67,7 +67,7 @@ function ReplaceStrings(Text: string; Pairs: array of TStringPair;
   
 implementation
 
-uses Main;
+uses app;
 
 const
     PairCount = 12;// 14; //  kol-vo elementov

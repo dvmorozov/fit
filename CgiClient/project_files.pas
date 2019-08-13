@@ -11,7 +11,7 @@ function ReplaceStrings_project_files(Text: string): string;
 
 implementation
 
-uses data, Main;
+uses data, app;
 
 const
     PairCount = 11; //  kol-vo elementov

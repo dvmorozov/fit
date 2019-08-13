@@ -10,7 +10,7 @@ function PrepareTemplate_fitting: string;
 
 implementation
 
-uses data, Main;
+uses data, app;
 
 const
     PairCount = 6;  //  kol-vo elementov

@@ -10,7 +10,7 @@ function PrepareTemplate_gen_back_progress: string;
 
 implementation
 
-uses data, Main;
+uses data, app;
 
 const
     PairCount = 2; // 3; //  kol-vo elementov

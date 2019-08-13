@@ -10,7 +10,7 @@ function PrepareTemplate_evaluation: string;
 
 implementation
 
-uses data, registration_free, Main;
+uses data, registration_free, app;
 
 const
     PairCount = 4;  //  kol-vo elementov

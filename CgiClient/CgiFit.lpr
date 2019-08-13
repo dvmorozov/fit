@@ -9,9 +9,7 @@ project_files_empty,
 gen_spec_int_progress, start, error, specimen_positions, ta,
   fitting, fitting_process, gen_spec_pos_progress, gen_back_progress,
   fitting_progress, registration_free, Settings, projects_empty,
-file_results_empty, pattern, projects, specimen_parameters, project_files, file_results, evaluation,
-CommonTypes, DataLoader, fit_server_proxy, GeneralHashFunctions, Main,
-MSCRDataClasses;
+file_results_empty, pattern, projects, specimen_parameters, project_files, file_results, evaluation;
   
 var MSec: Comp;
     FileName: string;

@@ -11,7 +11,7 @@ function ReplaceStrings_file_results(Text: string): string;
 
 implementation
 
-uses data, Main;
+uses data, app;
 
 const
     PairCount = 6;  //  kol-vo elementov

@@ -11,7 +11,7 @@ function ReplaceStrings_background(Text: string): string;
 
 implementation
 
-uses data, Main;
+uses data, app;
 
 const
     PairCount = 11; // 13;  //  kol-vo elementov

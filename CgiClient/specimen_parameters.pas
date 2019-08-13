@@ -10,7 +10,7 @@ function PrepareTemplate_specimen_parameters: string;
 
 implementation
 
-uses data, Main;
+uses data, app;
 
 const
     PairCount = 10; // 11; //  kol-vo elementov

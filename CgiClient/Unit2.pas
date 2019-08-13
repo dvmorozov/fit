@@ -260,7 +260,7 @@ begin
 {$ELSE}
                 Beep;
 {$ENDIF}
-                WriteLog('Start page visited', Main.Notification_);
+                WriteLog('Start page visited', Notification_);
             end
             else
             begin
@@ -388,7 +388,7 @@ end;
 
 procedure TCGIDatamodule2.HandleCommand(Command: string);
 begin
-     WriteLog('HandleCommand', Main.Notification_);
+     WriteLog('HandleCommand', Notification_);
     if Command = 'add_point_to_profile' then AddPointToProfile
     else
     if Command = 'go_to_background' then GoToBackground
@@ -445,7 +445,7 @@ begin
 {$ELSE}
         Beep;
 {$ENDIF}
-        WriteLog('Back to start page', Main.Notification_);
+        WriteLog('Back to start page', Notification_);
     end
     else
     if Command = 'generate_specimen_positions' then GenerateSpecimenPositions
@@ -825,7 +825,7 @@ var FileName, NewFileBaseName: string;
     P: File_v1;
     UserFileName, FileDescription: string;
 begin
-    WriteLog('UploadData', Main.Notification_);
+    WriteLog('UploadData', Notification_);
 
     //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
     Key := Application.RequestVariables['key'];
@@ -2790,7 +2790,7 @@ begin
 {$ELSE}
             Beep;
 {$ENDIF}
-            WriteLog('New registration: ' + UserName, Main.Notification_);
+            WriteLog('New registration: ' + UserName, Notification_);
         except
             raise Exception.Create(UnsuccessfulFileOperation);
         end;
@@ -2895,7 +2895,7 @@ begin
     
     WriteKeyToFile;
     GoToProjectsActual;
-    WriteLog('Login: ' + UserName, Main.Notification_);
+    WriteLog('Login: ' + UserName, Notification_);
 end;
 
 procedure TCGIDatamodule2.StartEvaluation;
@@ -2951,7 +2951,7 @@ begin
 
     WriteKeyToFile;
     GoToProjectsActual;
-    WriteLog('Login: ' + UserName, Main.Notification_);
+    WriteLog('Login: ' + UserName, Notification_);
 end;
     
 procedure TCGIDatamodule2.GoToProjectsActual;

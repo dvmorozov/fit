@@ -4,12 +4,11 @@ program cgifit;
 
 uses
   cgiModules, Unit2, SysUtils, data, background, background_more,
-project_files_empty,
-  pattern_more, specimen_parameters_file, specimen_intervals,
-gen_spec_int_progress, start, error, specimen_positions, ta,
-  fitting, fitting_process, gen_spec_pos_progress, gen_back_progress,
-  fitting_progress, registration_free, Settings, projects_empty,
-file_results_empty, pattern, projects, specimen_parameters, project_files, file_results, evaluation;
+  project_files_empty, pattern_more, specimen_parameters_file, specimen_intervals,
+  gen_spec_int_progress, start, error, specimen_positions, ta, fitting,
+  fitting_process, gen_spec_pos_progress, gen_back_progress, fitting_progress,
+  registration_free, Settings, projects_empty, file_results_empty, pattern,
+  projects, specimen_parameters, project_files, file_results, evaluation, app;
   
 var MSec: Comp;
     FileName: string;

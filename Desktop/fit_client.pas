@@ -15,7 +15,7 @@ unit fit_client;
 
 interface
 
-uses Classes, points_set, title_points_set, self_copied_component,
+uses Classes, title_points_set, self_copied_component,
     SysUtils, mscr_specimen_list, CBRCComponent, neutron_points_set,
     int_points_set, curve_points_set, int_client_callback,
     int_fit_viewer, int_data_loader, int_data_loader_injector, int_fit_service

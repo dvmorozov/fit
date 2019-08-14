@@ -8,14 +8,14 @@
       <IconPath Value="./"/>
       <TargetFileExt Value=".exe"/>
       <UseAppBundle Value="False"/>
-      <ActiveEditorIndexAtStart Value="11"/>
+      <ActiveEditorIndexAtStart Value="2"/>
     </General>
     <VersionInfo>
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <CurrentVersionNr Value="1"/>
       <CurrentMajorRevNr Value="1"/>
-      <CurrentBuildNr Value="44"/>
+      <CurrentBuildNr Value="45"/>
       <ProjectVersion Value="0.0.0.0"/>
       <FileDescription Value="CGI-client application."/>
       <LegalCopyright Value="Dmitry Morozov"/>
@@ -35,18 +35,18 @@
     </RunParams>
     <RequiredPackages Count="3">
       <Item1>
-        <PackageName Value="ta"/>
-        <MinVersion Major="1" Minor="1" Valid="True"/>
+        <PackageName Value="CGILaz"/>
       </Item1>
       <Item2>
         <PackageName Value="LCL"/>
         <MinVersion Major="1" Valid="True"/>
       </Item2>
       <Item3>
-        <PackageName Value="CGILaz"/>
+        <PackageName Value="ta"/>
+        <MinVersion Major="1" Minor="1" Valid="True"/>
       </Item3>
     </RequiredPackages>
-    <Units Count="64">
+    <Units Count="65">
       <Unit0>
         <Filename Value="CgiFit.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -65,7 +65,7 @@
         <UnitName Value="Unit2"/>
         <CursorPos X="36" Y="2954"/>
         <TopLine Value="2936"/>
-        <EditorIndex Value="24"/>
+        <EditorIndex Value="25"/>
         <UsageCount Value="202"/>
         <Loaded Value="True"/>
       </Unit1>
@@ -75,7 +75,7 @@
         <UnitName Value="data"/>
         <CursorPos X="9" Y="70"/>
         <TopLine Value="41"/>
-        <EditorIndex Value="15"/>
+        <EditorIndex Value="16"/>
         <UsageCount Value="203"/>
         <Loaded Value="True"/>
       </Unit2>
@@ -85,7 +85,7 @@
         <UnitName Value="background"/>
         <CursorPos X="15" Y="14"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="17"/>
+        <EditorIndex Value="18"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit3>
@@ -111,7 +111,7 @@
         <UnitName Value="pattern_more"/>
         <CursorPos X="35" Y="7"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="16"/>
+        <EditorIndex Value="17"/>
         <UsageCount Value="205"/>
         <Loaded Value="True"/>
       </Unit6>
@@ -121,7 +121,7 @@
         <UnitName Value="specimen_parameters_file"/>
         <CursorPos X="16" Y="13"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="12"/>
+        <EditorIndex Value="13"/>
         <UsageCount Value="205"/>
         <Loaded Value="True"/>
       </Unit7>
@@ -131,7 +131,7 @@
         <UnitName Value="specimen_intervals"/>
         <CursorPos X="15" Y="13"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="21"/>
+        <EditorIndex Value="22"/>
         <UsageCount Value="202"/>
         <Loaded Value="True"/>
       </Unit8>
@@ -141,7 +141,7 @@
         <UnitName Value="gen_spec_int_progress"/>
         <CursorPos X="15" Y="13"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="8"/>
+        <EditorIndex Value="9"/>
         <UsageCount Value="202"/>
         <Loaded Value="True"/>
       </Unit9>
@@ -154,7 +154,7 @@
         <UnitName Value="cgiModules"/>
         <CursorPos X="17" Y="93"/>
         <TopLine Value="79"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="3"/>
         <UsageCount Value="207"/>
         <Loaded Value="True"/>
       </Unit10>
@@ -164,7 +164,7 @@
         <UnitName Value="start"/>
         <CursorPos X="15" Y="176"/>
         <TopLine Value="158"/>
-        <EditorIndex Value="23"/>
+        <EditorIndex Value="24"/>
         <UsageCount Value="207"/>
         <Loaded Value="True"/>
       </Unit11>
@@ -174,7 +174,7 @@
         <UnitName Value="error"/>
         <CursorPos X="15" Y="13"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="4"/>
         <UsageCount Value="207"/>
         <Loaded Value="True"/>
       </Unit12>
@@ -226,7 +226,7 @@
         <UnitName Value="specimen_positions"/>
         <CursorPos X="15" Y="13"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="18"/>
+        <EditorIndex Value="19"/>
         <UsageCount Value="202"/>
         <Loaded Value="True"/>
       </Unit19>
@@ -243,7 +243,7 @@
         <UnitName Value="fitting"/>
         <CursorPos X="15" Y="13"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="22"/>
+        <EditorIndex Value="23"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
       </Unit21>
@@ -253,7 +253,7 @@
         <UnitName Value="fitting_process"/>
         <CursorPos X="15" Y="22"/>
         <TopLine Value="4"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="5"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit22>
@@ -270,7 +270,7 @@
         <UnitName Value="gen_spec_pos_progress"/>
         <CursorPos X="15" Y="13"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="7"/>
         <UsageCount Value="204"/>
         <Loaded Value="True"/>
       </Unit24>
@@ -280,7 +280,7 @@
         <UnitName Value="gen_back_progress"/>
         <CursorPos X="15" Y="13"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="6"/>
         <UsageCount Value="204"/>
         <Loaded Value="True"/>
       </Unit25>
@@ -298,7 +298,7 @@
         <UnitName Value="registration_free"/>
         <CursorPos X="15" Y="26"/>
         <TopLine Value="8"/>
-        <EditorIndex Value="7"/>
+        <EditorIndex Value="8"/>
         <UsageCount Value="212"/>
         <Loaded Value="True"/>
       </Unit27>
@@ -308,7 +308,7 @@
         <UnitName Value="Settings"/>
         <CursorPos X="49" Y="192"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="33"/>
+        <EditorIndex Value="34"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
       </Unit28>
@@ -341,7 +341,7 @@
         <UnitName Value="pattern"/>
         <CursorPos X="15" Y="14"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="14"/>
+        <EditorIndex Value="15"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit32>
@@ -351,7 +351,7 @@
         <UnitName Value="projects"/>
         <CursorPos X="15" Y="14"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="9"/>
+        <EditorIndex Value="10"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit33>
@@ -361,7 +361,7 @@
         <UnitName Value="specimen_parameters"/>
         <CursorPos X="15" Y="13"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="20"/>
+        <EditorIndex Value="21"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit34>
@@ -371,7 +371,7 @@
         <UnitName Value="project_files"/>
         <CursorPos X="15" Y="14"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="10"/>
+        <EditorIndex Value="11"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
       </Unit35>
@@ -387,7 +387,7 @@
         <UnitName Value="file_results"/>
         <CursorPos X="28" Y="14"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="13"/>
+        <EditorIndex Value="14"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit37>
@@ -404,7 +404,7 @@
         <UnitName Value="evaluation"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="32"/>
+        <EditorIndex Value="33"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit39>
@@ -460,7 +460,7 @@
         <UnitName Value="SimpMath"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="26"/>
+        <EditorIndex Value="27"/>
         <UsageCount Value="110"/>
         <Loaded Value="True"/>
       </Unit47>
@@ -469,7 +469,7 @@
         <UnitName Value="CustApp"/>
         <CursorPos X="6" Y="97"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="29"/>
+        <EditorIndex Value="30"/>
         <UsageCount Value="109"/>
         <Loaded Value="True"/>
       </Unit48>
@@ -485,7 +485,7 @@
         <UnitName Value="service_intf"/>
         <CursorPos X="78" Y="12"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="25"/>
+        <EditorIndex Value="26"/>
         <UsageCount Value="109"/>
         <Loaded Value="True"/>
       </Unit50>
@@ -515,7 +515,7 @@
         <UnitName Value="binary_formatter"/>
         <CursorPos X="6" Y="49"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="28"/>
+        <EditorIndex Value="29"/>
         <UsageCount Value="100"/>
         <Loaded Value="True"/>
       </Unit54>
@@ -531,7 +531,7 @@
         <UnitName Value="int_fit_service"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="27"/>
+        <EditorIndex Value="28"/>
         <UsageCount Value="102"/>
         <Loaded Value="True"/>
       </Unit56>
@@ -554,7 +554,7 @@
         <UnitName Value="AVL_Tree"/>
         <CursorPos X="22" Y="965"/>
         <TopLine Value="947"/>
-        <EditorIndex Value="30"/>
+        <EditorIndex Value="31"/>
         <UsageCount Value="22"/>
         <Loaded Value="True"/>
       </Unit59>
@@ -563,7 +563,7 @@
         <UnitName Value="NumericGrid"/>
         <CursorPos X="46" Y="1150"/>
         <TopLine Value="1133"/>
-        <EditorIndex Value="31"/>
+        <EditorIndex Value="32"/>
         <UsageCount Value="22"/>
         <Loaded Value="True"/>
       </Unit60>
@@ -572,34 +572,59 @@
         <UnitName Value="table_components"/>
         <CursorPos X="31" Y="25"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="19"/>
+        <EditorIndex Value="20"/>
         <UsageCount Value="22"/>
         <Loaded Value="True"/>
       </Unit61>
       <Unit62>
         <Filename Value="..\Desktop\fit_client.pas"/>
         <UnitName Value="fit_client"/>
-        <CursorPos X="38" Y="1236"/>
-        <TopLine Value="1218"/>
-        <EditorIndex Value="11"/>
+        <CursorPos X="15" Y="18"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="12"/>
         <UsageCount Value="19"/>
         <Loaded Value="True"/>
       </Unit62>
       <Unit63>
         <Filename Value="..\Desktop\app.pas"/>
         <UnitName Value="app"/>
-        <CursorPos X="19" Y="182"/>
-        <TopLine Value="164"/>
+        <CursorPos X="1" Y="25"/>
+        <TopLine Value="7"/>
         <EditorIndex Value="1"/>
         <UsageCount Value="18"/>
         <Loaded Value="True"/>
       </Unit63>
+      <Unit64>
+        <Filename Value="..\..\..\lazarus-0.9.24\ideintf\graphpropedits.pas"/>
+        <UnitName Value="GraphPropEdits"/>
+        <CursorPos X="38" Y="96"/>
+        <TopLine Value="78"/>
+        <EditorIndex Value="2"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit64>
     </Units>
-    <JumpHistory Count="1" HistoryIndex="0">
+    <JumpHistory Count="5" HistoryIndex="4">
       <Position1>
         <Filename Value="..\Desktop\fit_client.pas"/>
-        <Caret Line="1236" Column="28" TopLine="1238"/>
+        <Caret Line="1236" Column="38" TopLine="1218"/>
       </Position1>
+      <Position2>
+        <Filename Value="..\Desktop\app.pas"/>
+        <Caret Line="182" Column="19" TopLine="164"/>
+      </Position2>
+      <Position3>
+        <Filename Value="..\Desktop\app.pas"/>
+        <Caret Line="42" Column="41" TopLine="25"/>
+      </Position3>
+      <Position4>
+        <Filename Value="..\Desktop\app.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
+      </Position4>
+      <Position5>
+        <Filename Value="..\..\..\lazarus-0.9.24\ideintf\graphpropedits.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
+      </Position5>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

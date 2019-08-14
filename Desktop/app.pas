@@ -22,7 +22,7 @@ interface
 
 uses SysUtils, Forms
 {$IFDEF WINDOWS}
-    , windows, shfolder
+    , windows
 {$ENDIF}
 {$IFDEF FITCLIENT}
     , fit_client_app

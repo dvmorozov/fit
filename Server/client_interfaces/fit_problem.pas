@@ -114,7 +114,7 @@ type
         function FindPeakBounds: string;
         function FindBackPoints: string;
         function FindPeakPositions: string;
-{$IF DEFINED(FIT) OR DEFINED(FITPRO)}
+{$IF DEFINED(FIT) OR DEFINED(FITPRO) OR DEFINED(FITCGI)}
         function AllPointsAsPeakPositions: string;
 {$ENDIF}
 {$IFDEF FITCGI}
@@ -884,7 +884,7 @@ begin
     Result := ErrMsg;
 end;
 
-{$IF DEFINED(FIT) OR DEFINED(FITPRO)}
+{$IF DEFINED(FIT) OR DEFINED(FITPRO) OR DEFINED(FITCGI)}
 function TFitProblem.AllPointsAsPeakPositions: string;
 var Res: LongInt;
     ErrMsg: string;

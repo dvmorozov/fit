@@ -1,7 +1,7 @@
 {
 This unit has been produced by ws_helper.
   Input unit name : "fit_server".
-  This unit name  : "fit_server".
+  This unit name  : "int_fit_server".
   Date            : "12.01.2009 11:43:17".
 }
 unit int_fit_server;

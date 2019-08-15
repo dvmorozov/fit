@@ -14,7 +14,7 @@ type
       { Returns true if curve type has parameters which should be configured
         by user, otherwise returns false. }
       class function HasConfigurableParameters: Boolean; override;
-{$IFNDEF SERVER}
+{$IF NOT DEFINED(SERVER) AND NOT DEFINED(CLIENT_PROXY)}
       { Displays dialog for set up user configurable parameters. Returns true
         if dialog was confirmed and false if it was cancelled. }
       class function ShowConfigurationDialog: Boolean; override;
@@ -29,7 +29,7 @@ type
 implementation
 
 uses
-{$IFNDEF SERVER}
+{$IF NOT DEFINED(SERVER) AND NOT DEFINED(CLIENT_PROXY)}
   user_points_set_prop_dialog, expression_parser_adapter, curve_type_storage_adapter,
   curve_type_parameters_factory, create_user_points_set_dlg_adapter,
 {$ELSE}
@@ -42,7 +42,7 @@ begin
     Result := True;
 end;
 
-{$IFNDEF SERVER}
+{$IF NOT DEFINED(SERVER) AND NOT DEFINED(CLIENT_PROXY)}
 class function TConfigurableUserPointsSet.ShowConfigurationDialog: Boolean;
 var ct: Curve_type;
     ep: TExpressionParserAdapter;

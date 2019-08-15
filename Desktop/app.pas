@@ -23,6 +23,9 @@ interface
 uses SysUtils, Forms
 {$IFDEF WINDOWS}
     , windows
+{$IFNDEF FITCGI}
+    , shfolder
+{$ENDIF}
 {$ENDIF}
 {$IFDEF FITCLIENT}
     , fit_client_app

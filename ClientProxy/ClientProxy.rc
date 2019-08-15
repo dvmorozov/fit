@@ -1,5 +1,5 @@
 1 VERSIONINFO
-FILEVERSION 1,1,0,29
+FILEVERSION 1,1,0,55
 PRODUCTVERSION 1,1,0,1
 {
  BLOCK "StringFileInfo"
@@ -9,7 +9,7 @@ PRODUCTVERSION 1,1,0,1
    VALUE "Comments", "\000"
    VALUE "CompanyName", "\000"
    VALUE "FileDescription", "Proxy library providing communication with server application.\000"
-   VALUE "FileVersion", "1.1.0.29\000"
+   VALUE "FileVersion", "1.1.0.55\000"
    VALUE "InternalName", "\000"
    VALUE "LegalCopyright", "Dmitry .Morozov\000"
    VALUE "LegalTrademarks", "\000"

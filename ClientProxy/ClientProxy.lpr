@@ -4,15 +4,16 @@ library ClientProxy;
 
 {$R ClientProxy.res}
 
-uses Classes, Main, SyncObjs, ta, int_fit_service, fit_server,
-    fit_client_proxy, fit_server_proxy, fit_problem;
+uses
+    Classes, SyncObjs, ta, int_fit_service, int_fit_server,
+    fit_client_proxy, fit_problem;
   
 var
     FitService: IFitService;
     FitProblem: IFitProblem;
     FitServer: IFitServer;
     CS: TCriticalSection;
-  
+    
 function CreateFitServiceInstance: IFitService; cdecl;
 begin
     CS.Acquire;

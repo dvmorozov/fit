@@ -16,10 +16,10 @@ unit fit_problem;
 interface
 
 uses
-    SysUtils, mscr_specimen_list, CommonTypes, PointsSet, SelfCopied, Classes,
-    MyExceptions, IntPointsSet, TitlePointsSet, CurvePointsSet, CBRCComponent,
-    int_fit_service, int_fit_server, NamedPointsSet,
-    base_service_intf,
+    SysUtils, Classes, MyExceptions, CBRCComponent, mscr_specimen_list,
+    common_types, points_set, self_copied_component, int_points_set,
+    title_points_set, curve_points_set, named_points_set, int_fit_service,
+    int_fit_server, base_service_intf,
     fit_server_proxy                //  XML-RPC interface to server.
     ;
 
@@ -157,12 +157,14 @@ implementation
 uses synapse_tcp_protocol, synapse_http_protocol, soap_formatter,
     binary_formatter, fit_server_aux,
     { This module contains global definitions which are used in all applications. }
-    Main;
+    app;
 
 {========================== TFitClientProxy ===================================}
 
 constructor TFitProblem.Create(AOwner: TComponent);
 begin
+    inherited Create(AOwner);
+    
     FFitStub :=
         TFitServer_Proxy.Create(
             'IFitServer',

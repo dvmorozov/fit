@@ -7,14 +7,14 @@
       <MainUnit Value="0"/>
       <IconPath Value="./"/>
       <TargetFileExt Value=".exe"/>
-      <ActiveEditorIndexAtStart Value="2"/>
+      <ActiveEditorIndexAtStart Value="3"/>
     </General>
     <VersionInfo>
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <CurrentVersionNr Value="1"/>
       <CurrentMajorRevNr Value="1"/>
-      <CurrentBuildNr Value="55"/>
+      <CurrentBuildNr Value="68"/>
       <ProjectVersion Value="1.1.0.1"/>
       <FileDescription Value="Proxy library providing communication with server application."/>
       <LegalCopyright Value="Dmitry .Morozov"/>
@@ -34,18 +34,18 @@
     </RunParams>
     <RequiredPackages Count="2">
       <Item1>
-        <PackageName Value="IDEIntf"/>
+        <PackageName Value="ta"/>
       </Item1>
       <Item2>
-        <PackageName Value="ta"/>
+        <PackageName Value="IDEIntf"/>
       </Item2>
     </RequiredPackages>
-    <Units Count="33">
+    <Units Count="34">
       <Unit0>
         <Filename Value="ClientProxy.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ClientProxy"/>
-        <CursorPos X="34" Y="9"/>
+        <CursorPos X="57" Y="9"/>
         <TopLine Value="1"/>
         <EditorIndex Value="2"/>
         <UsageCount Value="237"/>
@@ -163,22 +163,26 @@
       <Unit16>
         <Filename Value="..\Server\client_interfaces\fit_server_aux.pas"/>
         <UnitName Value="fit_server_aux"/>
-        <CursorPos X="74" Y="27"/>
-        <TopLine Value="76"/>
+        <CursorPos X="19" Y="20"/>
+        <TopLine Value="18"/>
+        <EditorIndex Value="5"/>
         <UsageCount Value="60"/>
+        <Loaded Value="True"/>
       </Unit16>
       <Unit17>
         <Filename Value="..\Server\client_interfaces\fit_server_proxy.pas"/>
         <UnitName Value="fit_server_proxy"/>
-        <CursorPos X="81" Y="1728"/>
-        <TopLine Value="1"/>
+        <CursorPos X="1" Y="250"/>
+        <TopLine Value="290"/>
+        <EditorIndex Value="4"/>
         <UsageCount Value="55"/>
+        <Loaded Value="True"/>
       </Unit17>
       <Unit18>
         <Filename Value="..\Server\client_interfaces\fit_problem.pas"/>
         <UnitName Value="fit_problem"/>
-        <CursorPos X="17" Y="39"/>
-        <TopLine Value="90"/>
+        <CursorPos X="72" Y="19"/>
+        <TopLine Value="1"/>
         <EditorIndex Value="3"/>
         <UsageCount Value="58"/>
         <Loaded Value="True"/>
@@ -283,48 +287,73 @@
         <TopLine Value="111"/>
         <UsageCount Value="10"/>
       </Unit32>
+      <Unit33>
+        <Filename Value="..\..\fitminimizers-0.9.24\MyExceptions.pas"/>
+        <UnitName Value="MyExceptions"/>
+        <CursorPos X="6" Y="24"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="6"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit33>
     </Units>
-    <JumpHistory Count="10" HistoryIndex="9">
+    <JumpHistory Count="14" HistoryIndex="13">
       <Position1>
-        <Filename Value="ClientProxy.lpr"/>
-        <Caret Line="9" Column="33" TopLine="1"/>
+        <Filename Value="..\Server\client_interfaces\fit_problem.pas"/>
+        <Caret Line="39" Column="17" TopLine="1"/>
       </Position1>
       <Position2>
-        <Filename Value="ClientProxy.lpr"/>
-        <Caret Line="1" Column="1" TopLine="1"/>
+        <Filename Value="..\Server\client_interfaces\fit_problem.pas"/>
+        <Caret Line="19" Column="57" TopLine="6"/>
       </Position2>
       <Position3>
-        <Filename Value="ClientProxy.lpr"/>
-        <Caret Line="8" Column="50" TopLine="1"/>
+        <Filename Value="..\..\fitminimizers-0.9.24\MyExceptions.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
       </Position3>
       <Position4>
-        <Filename Value="ClientProxy.lpr"/>
-        <Caret Line="8" Column="45" TopLine="1"/>
+        <Filename Value="..\..\fitminimizers-0.9.24\MyExceptions.pas"/>
+        <Caret Line="24" Column="6" TopLine="1"/>
       </Position4>
       <Position5>
-        <Filename Value="ClientProxy.lpr"/>
-        <Caret Line="8" Column="40" TopLine="1"/>
+        <Filename Value="..\Server\client_interfaces\fit_server_proxy.pas"/>
+        <Caret Line="1728" Column="81" TopLine="1"/>
       </Position5>
       <Position6>
-        <Filename Value="ClientProxy.lpr"/>
-        <Caret Line="12" Column="26" TopLine="1"/>
+        <Filename Value="..\Server\client_interfaces\fit_server_aux.pas"/>
+        <Caret Line="27" Column="74" TopLine="76"/>
       </Position6>
       <Position7>
-        <Filename Value="ClientProxy.lpr"/>
-        <Caret Line="57" Column="41" TopLine="39"/>
+        <Filename Value="..\Server\client_interfaces\fit_server_aux.pas"/>
+        <Caret Line="111" Column="10" TopLine="1"/>
       </Position7>
       <Position8>
         <Filename Value="ClientProxy.lpr"/>
-        <Caret Line="14" Column="21" TopLine="1"/>
+        <Caret Line="9" Column="41" TopLine="1"/>
       </Position8>
       <Position9>
-        <Filename Value="ClientProxy.lpr"/>
-        <Caret Line="47" Column="31" TopLine="21"/>
+        <Filename Value="..\Server\client_interfaces\fit_problem.pas"/>
+        <Caret Line="160" Column="8" TopLine="138"/>
       </Position9>
       <Position10>
         <Filename Value="..\Server\client_interfaces\fit_problem.pas"/>
-        <Caret Line="24" Column="5" TopLine="6"/>
+        <Caret Line="53" Column="25" TopLine="28"/>
       </Position10>
+      <Position11>
+        <Filename Value="..\Server\client_interfaces\fit_problem.pas"/>
+        <Caret Line="164" Column="21" TopLine="146"/>
+      </Position11>
+      <Position12>
+        <Filename Value="..\Server\client_interfaces\fit_problem.pas"/>
+        <Caret Line="31" Column="5" TopLine="13"/>
+      </Position12>
+      <Position13>
+        <Filename Value="..\Server\client_interfaces\fit_problem.pas"/>
+        <Caret Line="53" Column="27" TopLine="35"/>
+      </Position13>
+      <Position14>
+        <Filename Value="..\Server\client_interfaces\fit_problem.pas"/>
+        <Caret Line="55" Column="33" TopLine="37"/>
+      </Position14>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

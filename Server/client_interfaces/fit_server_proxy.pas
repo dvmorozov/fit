@@ -9,232 +9,235 @@ Unit fit_server_proxy;
 {$IFDEF FPC} {$mode objfpc}{$H+} {$ENDIF}
 Interface
 
-Uses SysUtils, Classes, TypInfo, IntPointsSet, base_service_intf, service_intf, int_fit_server;
+Uses
+    SysUtils, Classes, TypInfo, int_points_set, base_service_intf,
+    service_intf, int_fit_server;
 
 Type
 
 
-  TFitServer_Proxy=class(TBaseProxy,IFitServer)
-  Protected
-    class function GetServiceType() : PTypeInfo;override;
-    function SmoothProfile(
-      const  ProblemID : integer
-    ):TResult;
-    function SubtractAllBackground(
-      const  Auto : boolean; 
-      const  ProblemID : integer
-    ):TResult;
-    function DoAllAutomatically(
-      const  ProblemID : integer
-    ):TResult;
-    function MinimizeDifference(
-      const  ProblemID : integer
-    ):TResult;
-    function MinimizeNumberOfSpecimens(
-      const  ProblemID : integer
-    ):TResult;
-    function FindSpecimenIntervals(
-      const  ProblemID : integer
-    ):TResult;
-    function FindSpecimenPositions(
-      const  ProblemID : integer
-    ):TResult;
-    function FindBackPoints(
-      const  ProblemID : integer
-    ):TResult;
-    function StopAsyncOper(
-      const  ProblemID : integer
-    ):TResult;
-    function AsyncOper(
-      const  ProblemID : integer
-    ):TBoolResult;
-    function SelectArea(
-      const  StartPointIndex : integer; 
-      const  StopPointIndex : integer; 
-      const  ProblemID : integer
-    ):TResult;
-    function ReturnToTotalProfile(
-      const  ProblemID : integer
-    ):TResult;
-    function CreateSpecimenList(
-      const  ProblemID : integer
-    ):TResult;
-    function SetProfilePointsSet(
-      const  PointsSet : TArrayOfFloatDoubleRemotable; 
-      const  ProblemID : integer
-    ):TResult;
-    function SetBackgroundPointsSet(
-      const  BackgroundPoints : TArrayOfFloatDoubleRemotable; 
-      const  ProblemID : integer
-    ):TResult;
-    function SetSpecimenPositions(
-      const  SpecimenPositions : TArrayOfFloatDoubleRemotable; 
-      const  ProblemID : integer
-    ):TResult;
-    function SetSpecimenIntervals(
-      const  SpecimenIntervals : TArrayOfFloatDoubleRemotable; 
-      const  ProblemID : integer
-    ):TResult;
-    function AddPointToBackground(
-      const  XValue : Double; 
-      const  YValue : Double; 
-      const  ProblemID : integer
-    ):TResult;
-    function AddPointToSpecimenIntervals(
-      const  XValue : Double; 
-      const  YValue : Double; 
-      const  ProblemID : integer
-    ):TResult;
-    function AddPointToSpecimenPositions(
-      const  XValue : Double; 
-      const  YValue : Double; 
-      const  ProblemID : integer
-    ):TResult;
-    function GetProfilePointsSet(
-      const  ProblemID : integer
-    ):TPointsResult;
-    function GetSelectedArea(
-      const  ProblemID : integer
-    ):TPointsResult;
-    function GetBackgroundPoints(
-      const  ProblemID : integer
-    ):TPointsResult;
-    function GetSpecimenPositions(
-      const  ProblemID : integer
-    ):TPointsResult;
-    function GetSpecimenIntervals(
-      const  ProblemID : integer
-    ):TPointsResult;
-    function GetCalcProfilePointsSet(
-      const  ProblemID : integer
-    ):TPointsResult;
-    function GetDeltaProfilePointsSet(
-      const  ProblemID : integer
-    ):TPointsResult;
-    procedure SetCurveThresh(
-      const  CurveThresh : Double; 
-      const  ProblemID : integer
-    );
-    function GetMaxRFactor(
-      const  ProblemID : integer
-    ):Double;
-    procedure SetMaxRFactor(
-      const  MaxRFactor : Double; 
-      const  ProblemID : integer
-    );
-    function GetBackFactor(
-      const  ProblemID : integer
-    ):Double;
-    procedure SetBackFactor(
-      const  BackFactor : Double; 
-      const  ProblemID : integer
-    );
-    function GetCurveType(
-      const  ProblemID : integer
-    ):TCurveTypeId;
-    procedure SetCurveType(
-      const  CurveTypeId : TCurveTypeId;
-      const  ProblemID : integer
-    );
-    function GetWaveLength(
-      const  ProblemID : integer
-    ):Double;
-    procedure SetWaveLength(
-      const  WaveLength : Double; 
-      const  ProblemID : integer
-    );
-    function GetCurveThresh(
-      const  ProblemID : integer
-    ):Double;
-    function GetState(
-      const  ProblemID : integer
-    ):integer;
-    function ReplacePointInProfile(
-      const  PrevXValue : Double; 
-      const  PrevYValue : Double; 
-      const  NewXValue : Double; 
-      const  NewYValue : Double; 
-      const  ProblemID : integer
-    ):TResult;
-    function ReplacePointInBackground(
-      const  PrevXValue : Double; 
-      const  PrevYValue : Double; 
-      const  NewXValue : Double; 
-      const  NewYValue : Double; 
-      const  ProblemID : integer
-    ):TResult;
-    function ReplacePointInSpecimenIntervals(
-      const  PrevXValue : Double; 
-      const  PrevYValue : Double; 
-      const  NewXValue : Double; 
-      const  NewYValue : Double; 
-      const  ProblemID : integer
-    ):TResult;
-    function ReplacePointInSpecimenPositions(
-      const  PrevXValue : Double; 
-      const  PrevYValue : Double; 
-      const  NewXValue : Double; 
-      const  NewYValue : Double; 
-      const  ProblemID : integer
-    ):TResult;
-    function CreateProblem():integer;
-    procedure DiscardProblem(
-      const  ProblemID : integer
-    );
-    function GetSpecimenCount(
-      const  ProblemID : integer
-    ):TIntResult;
-    function GetSpecimenPoints(
-      const  SpecIndex : integer; 
-      const  ProblemID : integer
-    ):TNamedPointsResult;
-    function GetSpecimenParameterCount(
-      const  ProblemID : integer; 
-      const  SpecIndex : integer
-    ):TIntResult;
-    function GetSpecimenParameter(
-      const  ProblemID : integer; 
-      const  SpecIndex : integer; 
-      const  ParamIndex : integer
-    ):TSpecParamResult;
-    function AddPointToData(
-      const  XValue : Double; 
-      const  YValue : Double; 
-      const  ProblemID : integer
-    ):TResult;
-    function GetGraph(
-      const  Width : integer; 
-      const  Height : integer; 
-      const  ProblemID : integer
-    ):TPictureResult;
-    function GetProfileChunk(
-      const  ProblemID : integer; 
-      const  ChunkNum : integer
-    ):TPointsResult;
-    function GetProfileChunkCount(
-      const  ProblemID : integer
-    ):TIntResult;
-    function SetSpecimenParameter(
-      const  ProblemID : integer; 
-      const  SpecIndex : integer; 
-      const  ParamIndex : integer; 
-      const  Value : Double
-    ):TResult;
-    function GetCalcTimeStr(
-      const  ProblemID : integer
-    ):TStringResult;
-    function GetRFactorStr(
-      const  ProblemID : integer
-    ):TStringResult;
-    function GetAbsRFactorStr(
-      const  ProblemID : integer
-    ):TStringResult;
-    function GetSqrRFactorStr(
-      const  ProblemID : integer
-    ):TStringResult;
-  End;
+    TFitServer_Proxy=class(TBaseProxy,IFitServer)
+    Protected
+      class function GetServiceType() : PTypeInfo;override;
+      function SmoothProfile(
+        const  ProblemID : integer
+      ):TResult;
+      function SubtractAllBackground(
+        const  Auto : boolean;
+        const  ProblemID : integer
+      ):TResult;
+      function DoAllAutomatically(
+        const  ProblemID : integer
+      ):TResult;
+      function MinimizeDifference(
+        const  ProblemID : integer
+      ):TResult;
+      function MinimizeNumberOfSpecimens(
+        const  ProblemID : integer
+      ):TResult;
+      function FindSpecimenIntervals(
+        const  ProblemID : integer
+      ):TResult;
+      function FindSpecimenPositions(
+        const  ProblemID : integer
+      ):TResult;
+      function FindBackPoints(
+        const  ProblemID : integer
+      ):TResult;
+      function StopAsyncOper(
+        const  ProblemID : integer
+      ):TResult;
+      function AsyncOper(
+        const  ProblemID : integer
+      ):TBoolResult;
+      function SelectArea(
+        const  StartPointIndex : integer;
+        const  StopPointIndex : integer;
+        const  ProblemID : integer
+      ):TResult;
+      function ReturnToTotalProfile(
+        const  ProblemID : integer
+      ):TResult;
+      function CreateSpecimenList(
+        const  ProblemID : integer
+      ):TResult;
+      function SetProfilePointsSet(
+        const  PointsSet : TArrayOfFloatDoubleRemotable;
+        const  ProblemID : integer
+      ):TResult;
+      function SetBackgroundPointsSet(
+        const  BackgroundPoints : TArrayOfFloatDoubleRemotable;
+        const  ProblemID : integer
+      ):TResult;
+      function SetSpecimenPositions(
+        const  SpecimenPositions : TArrayOfFloatDoubleRemotable;
+        const  ProblemID : integer
+      ):TResult;
+      function SetSpecimenIntervals(
+        const  SpecimenIntervals : TArrayOfFloatDoubleRemotable;
+        const  ProblemID : integer
+      ):TResult;
+      function AddPointToBackground(
+        const  XValue : Double;
+        const  YValue : Double;
+        const  ProblemID : integer
+      ):TResult;
+      function AddPointToSpecimenIntervals(
+        const  XValue : Double;
+        const  YValue : Double;
+        const  ProblemID : integer
+      ):TResult;
+      function AddPointToSpecimenPositions(
+        const  XValue : Double;
+        const  YValue : Double;
+        const  ProblemID : integer
+      ):TResult;
+      function GetProfilePointsSet(
+        const  ProblemID : integer
+      ):TPointsResult;
+      function GetSelectedArea(
+        const  ProblemID : integer
+      ):TPointsResult;
+      function GetBackgroundPoints(
+        const  ProblemID : integer
+      ):TPointsResult;
+      function GetSpecimenPositions(
+        const  ProblemID : integer
+      ):TPointsResult;
+      function GetSpecimenIntervals(
+        const  ProblemID : integer
+      ):TPointsResult;
+      function GetCalcProfilePointsSet(
+        const  ProblemID : integer
+      ):TPointsResult;
+      function GetDeltaProfilePointsSet(
+        const  ProblemID : integer
+      ):TPointsResult;
+      procedure SetCurveThresh(
+        const  CurveThresh : Double;
+        const  ProblemID : integer
+      );
+      function GetMaxRFactor(
+        const  ProblemID : integer
+      ):Double;
+      procedure SetMaxRFactor(
+        const  MaxRFactor : Double;
+        const  ProblemID : integer
+      );
+      function GetBackFactor(
+        const  ProblemID : integer
+      ):Double;
+      procedure SetBackFactor(
+        const  BackFactor : Double;
+        const  ProblemID : integer
+      );
+      function GetCurveType(
+        const  ProblemID : integer
+      ):TCurveTypeId;
+      procedure SetCurveType(
+        const  CurveTypeId : TCurveTypeId;
+        const  ProblemID : integer
+      );
+      function GetWaveLength(
+        const  ProblemID : integer
+      ):Double;
+      procedure SetWaveLength(
+        const  WaveLength : Double;
+        const  ProblemID : integer
+      );
+      function GetCurveThresh(
+        const  ProblemID : integer
+      ):Double;
+      function GetState(
+        const  ProblemID : integer
+      ):integer;
+      function ReplacePointInProfile(
+        const  PrevXValue : Double;
+        const  PrevYValue : Double;
+        const  NewXValue : Double;
+        const  NewYValue : Double;
+        const  ProblemID : integer
+      ):TResult;
+      function ReplacePointInBackground(
+        const  PrevXValue : Double;
+        const  PrevYValue : Double;
+        const  NewXValue : Double;
+        const  NewYValue : Double;
+        const  ProblemID : integer
+      ):TResult;
+      function ReplacePointInSpecimenIntervals(
+        const  PrevXValue : Double;
+        const  PrevYValue : Double;
+        const  NewXValue : Double;
+        const  NewYValue : Double;
+        const  ProblemID : integer
+      ):TResult;
+      function ReplacePointInSpecimenPositions(
+        const  PrevXValue : Double;
+        const  PrevYValue : Double;
+        const  NewXValue : Double;
+        const  NewYValue : Double;
+        const  ProblemID : integer
+      ):TResult;
+      function CreateProblem():integer;
+      procedure DiscardProblem(
+        const  ProblemID : integer
+      );
+      function GetSpecimenCount(
+        const  ProblemID : integer
+      ):TIntResult;
+      function GetSpecimenPoints(
+        const  SpecIndex : integer;
+        const  ProblemID : integer
+      ):TNamedPointsResult;
+      function GetSpecimenParameterCount(
+        const  ProblemID : integer;
+        const  SpecIndex : integer
+      ):TIntResult;
+      function GetSpecimenParameter(
+        const  ProblemID : integer;
+        const  SpecIndex : integer;
+        const  ParamIndex : integer
+      ):TSpecParamResult;
+      function AddPointToData(
+        const  XValue : Double;
+        const  YValue : Double;
+        const  ProblemID : integer
+      ):TResult;
+      function GetGraph(
+        const  Width : integer;
+        const  Height : integer;
+        const  ProblemID : integer
+      ):TPictureResult;
+      function GetProfileChunk(
+        const  ProblemID : integer;
+        const  ChunkNum : integer
+      ):TPointsResult;
+      function GetProfileChunkCount(
+        const  ProblemID : integer
+      ):TIntResult;
+      function SetSpecimenParameter(
+        const  ProblemID : integer;
+        const  SpecIndex : integer;
+        const  ParamIndex : integer;
+        const  Value : Double
+      ):TResult;
+      function GetCalcTimeStr(
+        const  ProblemID : integer
+      ):TStringResult;
+      function GetRFactorStr(
+        const  ProblemID : integer
+      ):TStringResult;
+      function GetAbsRFactorStr(
+        const  ProblemID : integer
+      ):TStringResult;
+      function GetSqrRFactorStr(
+        const  ProblemID : integer
+      ):TStringResult;
+    End;
 
-  Function wst_CreateInstance_IFitServer(const AFormat : string = 'SOAP:'; const ATransport : string = 'HTTP:'):IFitServer;
+    Function wst_CreateInstance_IFitServer(const AFormat : string = 'SOAP:';
+        const ATransport : string = 'HTTP:'):IFitServer;
 
 Implementation
 uses wst_resources_imp, metadata_repository;
@@ -242,7 +245,9 @@ uses wst_resources_imp, metadata_repository;
 
 Function wst_CreateInstance_IFitServer(const AFormat : string; const ATransport : string):IFitServer;
 Begin
-  Result := TFitServer_Proxy.Create('IFitServer',AFormat+GetServiceDefaultFormatProperties(TypeInfo(IFitServer)),ATransport + 'address=' + GetServiceDefaultAddress(TypeInfo(IFitServer)));
+  Result := TFitServer_Proxy.Create('IFitServer',
+    AFormat+GetServiceDefaultFormatProperties(TypeInfo(IFitServer)),
+    ATransport + 'address=' + GetServiceDefaultAddress(TypeInfo(IFitServer)));
 End;
 
 { TFitServer_Proxy implementation }

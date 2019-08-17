@@ -6,7 +6,7 @@ library ClientProxy;
 
 uses
     Classes, SyncObjs, ta, int_fit_service, int_fit_server,
-    fit_client_proxy, fit_problem;
+    fit_client_proxy, fit_server_proxy, fit_problem, app;
   
 var
     FitService: IFitService;

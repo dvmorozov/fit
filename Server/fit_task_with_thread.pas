@@ -18,7 +18,7 @@ interface
 uses Classes, SysUtils, fit_task, main_calc_thread;
 
 type
-	{ Executes task solution in separate thread. }
+    { Executes task solution in separate thread. }
     TFitTaskWithThread = class(TFitTask)
     protected
         MainCalcThread: TMainCalcThread;
@@ -32,9 +32,9 @@ type
         procedure ShowCurMin; override;
         function GetCurMinInitialized: Boolean; override;
         procedure DoneProc; override;
-		
-		{ Methods implement synchronization to work in multithreading environment. }
-		
+        
+        { Methods implement synchronization to work in multithreading environment. }
+        
         function GetCurMin: Double; override;
         function GetCurAbsMin: Double; override;
         function GetCurSqrMin: Double; override;
@@ -43,15 +43,15 @@ type
     public
         constructor Create(AOwner: TComponent); override;
         destructor Destroy; override;
-		{ Synchronous termination of long-term operation without call of termination procedure. }
+        { Synchronous termination of long-term operation without call of termination procedure. }
         procedure AbortAsyncOper;
-		{ Asynchronous termination of long-term operation with call of termination procedure. }
+        { Asynchronous termination of long-term operation with call of termination procedure. }
         procedure StopAsyncOper;
         //  ozhidaet zaversheniya vypolneniya potoka
         procedure DestroyMainCalcThread;
 
-		{ Asynchronous long-term operations. }
-		
+        { Asynchronous long-term operations. }
+        
         { Fits pattern specimens starting from given parameter set (initially or repeatedly). }
         procedure FindGausses; override;
         procedure FindGaussesAgain; override;

@@ -19,7 +19,7 @@ uses
     self_copied_component, SysUtils, Classes;
 
 type
-	{ List of components which for each object relates string identifier. }
+    { List of components which for each object relates string identifier. }
     TObjSavingStringList = class(TSelfCopiedCompList)
     protected
             

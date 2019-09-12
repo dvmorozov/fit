@@ -18,7 +18,7 @@ interface
 uses Classes, SysUtils, SimpMath, data_classes, curve_points_set;
 
 const
-	{ Display mode constants. }
+    { Display mode constants. }
     XCM_2T    = 0; 
     XCM_T     = 1; 
     XCM_SINTL = 2; 
@@ -28,10 +28,10 @@ const
     FinishPosName: string = 'Finish Pos.';
 
 type
-	{ Defines container for curve instances (specimens). 
-	  Allows to input/output angles in different representations. 
-	  In copying data from grid verifies them and adds to the list 
-	  only data for which corresponding rows are correct. }
+    { Defines container for curve instances (specimens). 
+      Allows to input/output angles in different representations. 
+      In copying data from grid verifies them and adds to the list 
+      only data for which corresponding rows are correct. }
     TMSCRSpecimenList = class(TSpecimenList)
     protected
         function RecalcParamValue(P: TSpecialCurveParameter): Double; override;
@@ -39,16 +39,16 @@ type
             P: TSpecialCurveParameter; NewValue: Double); override;
         
     public
-		{ Vawelength at which neutronogram was recorded. }
+        { Vawelength at which neutronogram was recorded. }
         Lambda: Double;
-		{ It is supposed that data are given in 2 * Theta format. }
+        { It is supposed that data are given in 2 * Theta format. }
         ViewMode: LongInt;
       
         function GetCopy: TObject; override;
         procedure CopyParameters(const Dest: TObject); override;
     end; 
     
-	{ Container of curve parameters (specimens) which is stored in XML-stream. }
+    { Container of curve parameters (specimens) which is stored in XML-stream. }
     Parameters_list = class(TComponent)
     private
         FParameters: TMSCRSpecimenList;

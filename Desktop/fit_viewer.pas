@@ -66,15 +66,15 @@ type
         procedure SetXCoordMode(AMode: LongInt);
 
     protected
-	{ List of data sets for each item of which chart serie is related.
-	  The list is passive, it contains pointers to external data. }
+        { List of data sets for each item of which chart serie is related.
+          The list is passive, it contains pointers to external data. }
         PointsSetList: TSelfCheckedComponentList;
-	{ Returns maximum number of curves in one of given R-factor intervals. }
+        { Returns maximum number of curves in one of given R-factor intervals. }
         function GetMaxCurveNum(
             CurvesList: TSelfCopiedCompList;
             RFactorIntervals: TTitlePointsSet
             ): LongInt;
-	{ Returns total number of profile points belonging to any of intervals. }
+        { Returns total number of profile points belonging to any of intervals. }
         function GetPointsNumInIntervals(
             Profile: TTitlePointsSet;
             RFactorIntervals: TTitlePointsSet
@@ -148,7 +148,7 @@ type
             Sender: TObject; BackgroundPoints: TTitlePointsSet);
         { Method of IFitViewer interface. }
         procedure Refresh(Sender: TObject);
-	{ Does not clear series but only refreshes intencities. }
+        { Does not clear series but only refreshes intencities. }
         procedure RefreshPointsSet(
             Sender: TObject; points_set: TNeutronPointsSet);
         { Method of IFitViewer interface. }
@@ -184,9 +184,9 @@ type
 
         procedure SetViewMarkers(AViewMarkers: Boolean);
         procedure ViewAllMarkers;
-	{ Clears all series and fills them again saving parameter values. }
+        { Clears all series and fills them again saving parameter values. }
         procedure Plot;
-	{ Returns number of the first visible curve from curve list.
+        { Returns number of the first visible curve from curve list.
           This function actually gives the number of active curve
           when only single curve is visible in the chart. This should
           be checked separately. }
@@ -194,8 +194,8 @@ type
         function GetActivePointsSet: TNeutronPointsSet;
         function GetPointsSet(ActiveNumber: LongInt): TNeutronPointsSet;
 
-	{ Return boundary values among all curves. }
-		
+        { Return boundary values among all curves. }
+        
         function GetMaxX: Double;
         function GetMinX: Double;
         function GetMaxY: Double;

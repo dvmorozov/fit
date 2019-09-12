@@ -27,8 +27,8 @@ type
   private
     CurrentTask : TCurrentTask;
 
-	{ These methods are synchronized with main application thread. }
-	
+    { These methods are synchronized with main application thread. }
+    
     ShowResultsProc : TShowResultsProc;
     DoneProc : TDoneProc;
   public

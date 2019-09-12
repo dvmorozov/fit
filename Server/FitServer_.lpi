@@ -9,14 +9,14 @@
       <TargetFileExt Value=".exe"/>
       <Title Value="FitServer"/>
       <UseXPManifest Value="True"/>
-      <ActiveEditorIndexAtStart Value="20"/>
+      <ActiveEditorIndexAtStart Value="5"/>
     </General>
     <VersionInfo>
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <CurrentVersionNr Value="1"/>
       <CurrentMajorRevNr Value="1"/>
-      <CurrentBuildNr Value="230"/>
+      <CurrentBuildNr Value="231"/>
       <ProjectVersion Value="1.1.0.1"/>
       <FileDescription Value="Server application."/>
       <LegalCopyright Value="Dmitry Morozov"/>
@@ -36,27 +36,27 @@
     </RunParams>
     <RequiredPackages Count="6">
       <Item1>
-        <PackageName Value="FitGrids"/>
-        <MinVersion Valid="True"/>
-      </Item1>
-      <Item2>
-        <PackageName Value="ta"/>
-        <MinVersion Major="1" Minor="1" Valid="True"/>
-      </Item2>
-      <Item3>
-        <PackageName Value="LCL"/>
-      </Item3>
-      <Item4>
-        <PackageName Value="FCL"/>
-        <MinVersion Major="1" Valid="True"/>
-      </Item4>
-      <Item5>
-        <PackageName Value="IDEIntf"/>
-        <MinVersion Major="1" Valid="True"/>
-      </Item5>
-      <Item6>
         <PackageName Value="TurboPowerIPro"/>
         <MinVersion Major="1" Valid="True"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="IDEIntf"/>
+        <MinVersion Major="1" Valid="True"/>
+      </Item2>
+      <Item3>
+        <PackageName Value="FCL"/>
+        <MinVersion Major="1" Valid="True"/>
+      </Item3>
+      <Item4>
+        <PackageName Value="LCL"/>
+      </Item4>
+      <Item5>
+        <PackageName Value="ta"/>
+        <MinVersion Major="1" Minor="1" Valid="True"/>
+      </Item5>
+      <Item6>
+        <PackageName Value="FitGrids"/>
+        <MinVersion Valid="True"/>
       </Item6>
     </RequiredPackages>
     <Units Count="120">
@@ -590,7 +590,7 @@
         <Filename Value="fit_server_binder.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="fit_server_binder"/>
-        <CursorPos X="1" Y="1"/>
+        <CursorPos X="3" Y="1949"/>
         <TopLine Value="1"/>
         <EditorIndex Value="5"/>
         <UsageCount Value="201"/>
@@ -772,7 +772,7 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="fit_server_aux"/>
         <CursorPos X="124" Y="8"/>
-        <TopLine Value="1"/>
+        <TopLine Value="5"/>
         <EditorIndex Value="20"/>
         <UsageCount Value="228"/>
         <Loaded Value="True"/>
@@ -1051,7 +1051,12 @@
         <Loaded Value="True"/>
       </Unit119>
     </Units>
-    <JumpHistory Count="0" HistoryIndex="-1"/>
+    <JumpHistory Count="1" HistoryIndex="0">
+      <Position1>
+        <Filename Value="fit_server_binder.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
+      </Position1>
+    </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
     <Version Value="5"/>

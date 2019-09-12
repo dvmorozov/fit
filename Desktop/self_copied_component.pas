@@ -19,10 +19,10 @@ uses
     Classes, SelfCheckedComponentList, SysUtils, CBRCComponent;
 
 type
-	{ The interface of component which can copy itself. }
+    { The interface of component which can copy itself. }
     ISelfCopied = interface
         ['{DF1ABB41-F255-11D4-968F-C7AD39AA7469}']
-	{ Returns only copy of the object itself without copies of associated objects. }
+        { Returns only copy of the object itself without copies of associated objects. }
         function GetCopy: TObject;
         procedure CopyParameters(const Dest: TObject);
     end;
@@ -30,7 +30,7 @@ type
 const SelfCopiedGUID: TGUID = '{DF1ABB41-F255-11D4-968F-C7AD39AA7469}';
 
 type
-	{ The component implementing self copying interface. }
+    { The component implementing self copying interface. }
     TSelfCopiedComponent = class(TCBRCComponent, ISelfCopied)
     public
         function GetCopy: TObject; virtual;
@@ -39,13 +39,13 @@ type
 
     ESelfCopiedCompList = class(Exception);
 
-	{ List of self copied components. By default is always active, so copy of 
+    { List of self copied components. By default is always active, so copy of 
       list is also active. Caller should make the list inactive by itself if 
-	  necessary. }
+      necessary. }
     TSelfCopiedCompList = class(TSelfCheckedComponentList, ISelfCopied)
     public
         function GetCopy: TObject; virtual;
-		{ Returns copy of list which owns its items. }
+        { Returns copy of list which owns its items. }
         function GetSharedCopy: TObject; virtual;
         procedure CopyParameters(const Dest: TObject); virtual;
 

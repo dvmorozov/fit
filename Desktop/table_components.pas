@@ -22,36 +22,36 @@ uses
 type
     ETableCompList = class(Exception);
 
-	{ Component list which can display component properties in grid.
-          Class implements functions of saving/reading table properties,
-          but does not bind grid positions with list items. If number of
-          columns returned by GetColCount is changed then corresponding
-          changes in SetCaption, SetColOptions, SetColFunc, SetRowContents,
-          GetRowContents should be done. }
+    { Component list which can display component properties in grid.
+      Class implements functions of saving/reading table properties,
+      but does not bind grid positions with list items. If number of
+      columns returned by GetColCount is changed then corresponding
+      changes in SetCaption, SetColOptions, SetColFunc, SetRowContents,
+      GetRowContents should be done. }
     TTableCompList = class(TSelfCopiedCompList, IGridDataSource)
     protected
         FCaption: string;
 
-		{ Arrays are deleted from the destructor. Therefore deleting
+        { Arrays are deleted from the destructor. Therefore deleting
           array items should be disabled during deleting the whole object. }
         SavedColWidths: TLongArray;
         SavedRowHeights: TLongArray;
-		{ Indicates that array is already initialized. }
+        { Indicates that array is already initialized. }
         AreColWidthsReady: Boolean;
         AreRowHeightsReady: Boolean;
 
-		{ Saved table properties. }
+        { Saved table properties. }
         FSavedCol, FSavedRow, FSavedLeftCol, FSavedTopRow: LongInt;
         FSavedSelection: TGridRect;
 
-		{ Indicates that grid parameters were saved. It is set up in GridRelease. }
+        { Indicates that grid parameters were saved. It is set up in GridRelease. }
         SettingsSaved: Boolean;
         HeightsSaved, WidthsSaved: Boolean;
 
-		{ Indicates that the object is destroyed. } 
+        { Indicates that the object is destroyed. } 
         Destroying: Boolean;
 
-		{ Checks that column (row) index is valid. Otherwise throws an exception. }
+        { Checks that column (row) index is valid. Otherwise throws an exception. }
         procedure CheckColIndex(const Index: LongInt);
         procedure CheckRowIndex(const Index: LongInt);
 

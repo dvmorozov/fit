@@ -18,7 +18,7 @@ interface
 uses SysUtils, Classes, SimpMath, CBRCComponent;
 
 type
-	{ Returns value of parameter with given name. }
+    { Returns value of parameter with given name. }
     FParamRequest = function(Param: string): Double of object;
 
     TCharSet = set of Char;
@@ -27,7 +27,7 @@ type
     ETools = class(Exception);
 
 const
-	{ Error constants of the procedure evaluating user defined expression. }
+    { Error constants of the procedure evaluating user defined expression. }
     CALC_NO_ERRORS          : LongInt = 0;
     CALC_INVALID_PARAMETER  : LongInt = 1;
     CALC_INVALID_EXPRESSION : LongInt = 2;
@@ -43,7 +43,7 @@ procedure InsertVectorIntoArray(
     const Index: LongInt;
     const Vector: TDoubleVector3
     );
-{ Deletes vector with given position from array. }	
+{ Deletes vector with given position from array. }  
 procedure DeleteVectorFromArray(
     var Arr: TVector3Array;
     const Index: LongInt
@@ -52,7 +52,7 @@ procedure DeleteVectorFromArray(
 type
     TLongArray = array of LongInt;
 
-{ Deletes item from array. }		
+{ Deletes item from array. }        
 procedure DeleteItemLongArr(
     var Arr: TLongArray;
     const Index: LongInt
@@ -63,7 +63,7 @@ procedure InsertItemLongArr(
     const Index: LongInt;
     const Item: LongInt
     );
-{ Adds item to array. }	
+{ Adds item to array. } 
 procedure AddItemLongArr(
     var Arr: TLongArray;
     const Item: LongInt
@@ -78,7 +78,7 @@ const DoubleVector3EditMask = '!\(0\.0999\,\ 0\.0999\,\ 0\.0999\);1;';
 
 { Converts vector to string. Result has format of DoubleVector3EditMask. }
 function DoubleVector3AsString(const Vect: TDoubleVector3;
-	{ True means that number of digits after decimal separator is fixed. }
+    { True means that number of digits after decimal separator is fixed. }
     FixedMode: Boolean;
     Precision, Digits: LongInt): string;
 
@@ -91,9 +91,9 @@ function StrToVector3(const St: string): TDoubleVector3;
 function Vector3ToStr(const Vector: TDoubleVector3): string;
 { Converts given number to number with given accuracy. }
 function WithGivenAccuracy(
-	{ The number to convert. }
+    { The number to convert. }
     Value: Double;
-	{ Required number of decimal digits after decimal separator. }
+    { Required number of decimal digits after decimal separator. }
     Decimals: LongInt
     ): Double;
 { Returns substring of command line string excluding path to executable 
@@ -119,13 +119,13 @@ function GetCharSetPosition(St: string; ChSet: TCharSet;
     StartIndex: LongInt; var Ch: Char): LongInt;
 { Returns index of array and index of item in this array by through index of element among all arrays. }
 procedure GetPosInArrays(
-	{ Array containing lengths of item arrays. }
+    { Array containing lengths of item arrays. }
     const ArraysLengths: array of LongInt;
-	{ Throug index of item in arrays. }
+    { Throug index of item in arrays. }
     const Index: LongInt;
-	{ Index of array containing required item. }
+    { Index of array containing required item. }
     var ArrayNumber: LongInt;
-	{ Index of item in this array. }
+    { Index of item in this array. }
     var ArrayIndex: LongInt
     );
 

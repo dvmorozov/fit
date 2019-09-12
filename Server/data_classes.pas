@@ -20,13 +20,13 @@ uses
     curve_points_set;
 
 type
-	{ Set of pattern instances forming the calculated profile in sum. }
+    { Set of pattern instances forming the calculated profile in sum. }
     TSpecimenList = class(TRowCompList)
     protected
         function CreateNewObject: TComponent; override;
         { Generic method for conversion values to user friendly representation. }
         function RecalcParamValue(P: TSpecialCurveParameter): Double; virtual;
-		{ Generic method for reverse conversion of value from user to internal representation. }
+        { Generic method for reverse conversion of value from user to internal representation. }
         procedure ReverseCalcParamValue(
             P: TSpecialCurveParameter; NewValue: Double); virtual;
 
@@ -39,9 +39,9 @@ type
 
         function ValueToString(const ACol, ARow: LongInt): string; override;
         procedure StringToValue(const ACol, ARow: LongInt; const AString: string); override;
-		{ Sets valid default value for the cell with given coordinates. Is used in cell initialization. }
+        { Sets valid default value for the cell with given coordinates. Is used in cell initialization. }
         procedure SetValueByDefault(const ACol, ARow: LongInt); override;
-		{ Performs "soft" data validation without throwing an exception. However if coordinates of row
+        { Performs "soft" data validation without throwing an exception. However if coordinates of row
           or column have inadmissible values exception is thrown. Always returns true. Override to 
           perform suitable validation. }
         function IsDataValid(const ACol, ARow: LongInt; const AString: string): Boolean; override;
@@ -63,8 +63,8 @@ begin
     if Count <> 0 then
     begin
         Index := 0;
-		//	If the set of curver parameters is empty
-		//	then it's impossible to set up headers.
+        //  If the set of curver parameters is empty
+        //  then it's impossible to set up headers.
         CP := Curve_parameters(Items[0]);
         //  !!! dolzhny obrabatyvat'sya vse parametry, krome argumenta !!!
         Assert(Grid.ColCount - Grid.FixedCols = CP.Params.Count - 1);
@@ -93,7 +93,7 @@ begin
             if Count <> 0 then
             begin
                 CP := Curve_parameters(Items[0]);
-				//	All parameters must be processed except the argument.
+                //  All parameters must be processed except the argument.
                 Assert(Grid.ColCount - Grid.FixedCols = CP.Params.Count - 1);
                 Index := 0;
                 for i := 0 to CP.Params.Count - 1 do
@@ -129,7 +129,7 @@ begin
             Cells[0, RowNum] := IntToStr(RowNum);
             
             CP := Curve_parameters(Items[RowNum - FixedRows]);
-            //	All parameters must be processed except the argument.
+            //  All parameters must be processed except the argument.
             Assert(Grid.ColCount - Grid.FixedCols = CP.Params.Count - 1);
             Index := 0;
             for i := 0 to CP.Params.Count - 1 do
@@ -145,7 +145,7 @@ begin
         end
         else
         begin
-			//	Empty row is initialized.
+            //  Empty row is initialized.
             Cells[0, RowNum] := IntToStr(RowNum);
             for i := FixedCols to ColCount - 1 do Cells[i, RowNum] := '';
         end;
@@ -162,7 +162,7 @@ begin
         Assert((RowNum - FixedRows >= 0) and (RowNum - FixedRows < Count));
         
         CP := Curve_parameters(Items[RowNum - FixedRows]);
-        //	All parameters must be processed except the argument.
+        //  All parameters must be processed except the argument.
         Assert(Grid.ColCount - Grid.FixedCols = CP.Params.Count - 1);
         Index := 0;
         for i := 0 to CP.Params.Count - 1 do
@@ -174,7 +174,7 @@ begin
                     ReverseCalcParamValue(P,
                         StrToFloat(Cells[FixedCols + Index, RowNum]));
                 except
-					//	Non-fatal error in string conversion.
+                    //  Non-fatal error in string conversion.
                     Result := False;
                 end;
                 Inc(Index);

@@ -19,7 +19,7 @@ uses SysUtils, SelfCheckedComponentList, Classes, Tools,
     downhill_simplex_container, int_minimizer;
 
 type
-	{ Implements downhill simplex algorithm. }
+    { Implements downhill simplex algorithm. }
     TDownhillSimplexMinimizer = class(TMinimizer,
         IOptimizedFunction, IDownhillRealParameters, IUpdatingResults)
     private

@@ -62,7 +62,7 @@ type
                 Sender: TObject; PointsSet: TNeutronPointsSet);
         { Is called before cleaning all diagram data. }
         procedure Clear(Sender: TObject);
-	{ Hides given point set and removes corresponding item from CheckBox. }
+        { Hides given point set and removes corresponding item from CheckBox. }
         procedure Hide(Sender: TObject; PointsSet: TNeutronPointsSet);
 {$IFDEF USE_GRIDS}
         { Handler to fill data table. }

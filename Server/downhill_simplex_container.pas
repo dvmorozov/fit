@@ -20,21 +20,21 @@ uses
     SimpMath, comb_enumerator, CBRCComponent, Tools;
 
 const
-	{ Possible states of parameters in TDownhillRealParameters. }
-	{ Waiting for call of CreateParameters. }
+    { Possible states of parameters in TDownhillRealParameters. }
+    { Waiting for call of CreateParameters. }
     PH_CREATING    = 0;
-	{ Processing. }
+    { Processing. }
     PH_WORKING     = 1;
 
 type
     TVariableParameter = record
         Value: Double;
-		{ If True possible values of parameter are limited by MaxLimit, MinLimit. }
+        { If True possible values of parameter are limited by MaxLimit, MinLimit. }
         Limited: Boolean;
-		{ Maximal possible value of parameter. Is used if Limited is True. }
+        { Maximal possible value of parameter. Is used if Limited is True. }
         MaxLimit: Double; 
-		{ Minimal possible value of parameter. Is used if Limited is True. }
-		MinLimit: Double;
+        { Minimal possible value of parameter. Is used if Limited is True. }
+        MinLimit: Double;
     end;
 
     { Provides access to variable parameters to algorithm container. }
@@ -42,13 +42,13 @@ type
         function GetParametersNumber: LongInt;
         function GetParameter(index: LongInt): TVariableParameter;
         procedure SetParameter(index: LongInt; AParameter: TVariableParameter);
-		{ Total number of variable parameters. }
+        { Total number of variable parameters. }
         property ParametersNumber: LongInt read GetParametersNumber;
         property Parameter[index: LongInt]: TVariableParameter
             read GetParameter           write SetParameter;
     end;
 
-	{ Provides additional methods to work with parameters. }
+    { Provides additional methods to work with parameters. }
     IDownhillRealParameters = interface(IDownhillSimplexParameters)
         { Initializing parameter list. }
         procedure CreateParameters;
@@ -56,12 +56,12 @@ type
         procedure ParametersUpdated;
     end;
 
-	{ Provides values of optimized function. }
+    { Provides values of optimized function. }
     IOptimizedFunction = interface
         function GetOptimizedFunction: Double;
     end;
 
-	{ Provides way of displaying results. }
+    { Provides way of displaying results. }
     IUpdatingResults = interface
         procedure ShowCurJobProgress(Sender: TComponent;
             MinValue, MaxValue, CurValue: LongInt);
@@ -72,23 +72,23 @@ type
 
     EDownhillRealParameters = class(Exception);
 
-	{ Container for algorithm parameters. }
+    { Container for algorithm parameters. }
     TDownhillRealParameters = class(TCBRCComponent, IDownhillRealParameters)
     protected
-		{ Pointer to parameter array. }
+        { Pointer to parameter array. }
         FParameters: Pointer;
-		{ Total number of parameters in array. }
+        { Total number of parameters in array. }
         FParametersNumber: LongInt;
-		{ Current state of parameter processing. }
+        { Current state of parameter processing. }
         PhaseParameters: Byte;
 
         procedure CreateParameters; virtual;
         procedure FreeParameters;
-		{ Initializes parameters. }
+        { Initializes parameters. }
         procedure FillParameters; virtual; abstract;
-		{ Converts parameters from array to components of vectors of magnetic moments. }
+        { Converts parameters from array to components of vectors of magnetic moments. }
         procedure ParametersUpdated; virtual; abstract;
-		{ Returns actual number of parameters. }
+        { Returns actual number of parameters. }
         function GetActualParametersNumber: LongInt; virtual; abstract;
         function GetParametersNumber: LongInt;
         function GetParameter(index: LongInt): TVariableParameter;
@@ -101,25 +101,25 @@ type
     public
         constructor Create(AOwner: TComponent); override;
         destructor Destroy; override;
-		{ Implementation of IDownhillSimplexParameters }
-		{ Number of variable parameters. }
+        { Implementation of IDownhillSimplexParameters }
+        { Number of variable parameters. }
         property ParametersNumber: LongInt read GetParametersNumber;
         property Parameter[index: LongInt]: TVariableParameter
-			read GetParameter write SetParameter;
-		{ Implementation of IDiscretValue }
-		{ Number of discrete values which the quantity can take. }
+            read GetParameter write SetParameter;
+        { Implementation of IDiscretValue }
+        { Number of discrete values which the quantity can take. }
         property NumberOfValues: LongInt read GetNumberOfValues;
-		{ Index of discrete value selected at this moment. }
+        { Index of discrete value selected at this moment. }
         property ValueIndex: LongInt read GetValueIndex write SetValueIndex;
     end;
 
     EDownhillSimplexContainer = class(Exception);
 
-	{ Container servicing algorithm. Container is responsible for
+    { Container servicing algorithm. Container is responsible for
       limiting values of parameters by cyclical boundary conditions. }
     TDownhillSimplexContainer = class(TAlgorithmContainer, IDownhillSimplexServer)
     protected
-		{ Array of interfaces used for getting parameters. }
+        { Array of interfaces used for getting parameters. }
         FParametersInterfaces : array of IDownhillRealParameters;
         FIOptimizedFunction: IOptimizedFunction;
         FIUpdatingResults: IUpdatingResults;
@@ -132,12 +132,12 @@ type
 
         EOC: Boolean;
         message: string;
-		{ Initializes environment and starts algorithm. }
+        { Initializes environment and starts algorithm. }
         procedure Running; override;
         procedure RunningFinished; override;
 
-		{ Methods don't use parameters because are called by Synchronize }
-		
+        { Methods don't use parameters because are called by Synchronize }
+        
         procedure ShowMessage;
         procedure UpdateMainForm;
         
@@ -146,12 +146,12 @@ type
         procedure CreateParameters;
         procedure DestroyAlgorithm; override;
 
-		{ Returns initial characteristic length for every parameter. }
+        { Returns initial characteristic length for every parameter. }
         function GetInitParamLength(Sender: TComponent;
             ParameterNumber, ParametersCount: LongInt): Double; virtual;
         procedure FillStartDecision(Sender: TComponent;
             StartDecision: TFloatDecision); virtual;
-		{ Calculates function value for set of parameters of solution object. }
+        { Calculates function value for set of parameters of solution object. }
         procedure EvaluateDecision(Sender: TComponent; Decision: TFloatDecision); virtual;
         procedure UpdateResults(Sender: TComponent;
             Decision: TFloatDecision); virtual;
@@ -169,15 +169,15 @@ type
         function GetParametersNumber: LongInt;
         function GetParameter(index: LongInt): TVariableParameter;
         procedure SetParameter(index: LongInt; AParameter: TVariableParameter);
-		{ Total number of variable parameters. }
+        { Total number of variable parameters. }
         property ParametersNumber: LongInt  read GetParametersNumber;
         property Parameter[index: LongInt]: TVariableParameter
                 read GetParameter           write SetParameter;
 
     public
-		{ Overall minimum among all optimization cycles. }
+        { Overall minimum among all optimization cycles. }
         TotalMinimum: Double;
-		
+        
         constructor Create(AOwner: TComponent); override;
         destructor Destroy; override;
         
@@ -191,11 +191,11 @@ type
         property UpdatingResults: IUpdatingResults
                 read GetIUpdatingResults write FIUpdatingResults;
 
-		{ Container must save copies of these properties because during
+        { Container must save copies of these properties because during
           calculation process algorithm object can be created a few times. }
         property FinalTolerance: Double read FFinalTolerance write FFinalTolerance;
         property RestartDisabled: Boolean read FRestartDisabled write FRestartDisabled;
-		{ Stops calculation if minimal value changed less than on this value for optimization cycle. }
+        { Stops calculation if minimal value changed less than on this value for optimization cycle. }
         property ExitDerivative: Double read FExitDerivative write FExitDerivative;
     end;
 

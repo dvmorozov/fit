@@ -192,7 +192,10 @@ begin
     Container := TDownhillSimplexContainer.Create(nil);
     Container.UpdatingResults := Self;
     Container.OptimizedFunction := Self;
-    //Container.FinalTolerance := 0.1;//0.5; //???
+    //  Final tolerance should have non zero value,
+    //  otherwise computaion will never end
+    //  (see TDownhillSimplexContainer.CreateAlgorithm).
+    Container.FinalTolerance := 0.001;
     Container.RestartDisabled := True;
     Container.AddIDSPToList(Self);
 end;

@@ -69,7 +69,7 @@ begin
   Application.CreateForm(TInputMaxRFactorDlg, InputMaxRFactorDlg);
   Application.CreateForm(TCreateUserPointsSetDlg, CreateUserPointsSetDlg);
   Application.CreateForm(TUserPointsSetPropDlg, UserPointsSetPropDlg);
-
+  //    Syntax /INFILE=file_name.dat
   InFile := CmdLineParamFound('INFILE');
   if InFile <> '' then
   begin

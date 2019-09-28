@@ -383,10 +383,12 @@ begin
     //    with Algorithm as TDownhillSimplexSAAlgorithm do
     begin
         DownhillSimplexServer := Self;
+        //  Final tolerance should have non zero value,
+        //  otherwise computaion will never end.
         FinalTolerance := Self.FinalTolerance;
         RestartDisabled := Self.RestartDisabled;
         ExitDerivative := Self.ExitDerivative;
-    //        Temperature := 1;     //  dlya TDownhillSimplexSAAlgorithm
+        //  Temperature := 1;     //  dlya TDownhillSimplexSAAlgorithm
     end;
 end;
 

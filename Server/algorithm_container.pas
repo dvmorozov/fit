@@ -41,8 +41,8 @@ type
         procedure Run; virtual;
     end;
 
-    {Class allows executing algorithm in separate thread.}
-    TRunningAlgorithmContainer = class(TAlgorithmContainer)
+    { Class allows executing algorithm in separate thread. }
+    TThreadAlgorithmContainer = class(TAlgorithmContainer)
     protected
         {Object implementing separate thread.
         DestroyAlgorithm must be called after destroying the object.}
@@ -55,6 +55,9 @@ type
         
         procedure Run; override;
     end;
+
+    { This type is deprecated, it is defined only for backward compatibility. }
+    TRunningAlgorithmContainer = TThreadAlgorithmContainer;
 
 procedure Register;
 

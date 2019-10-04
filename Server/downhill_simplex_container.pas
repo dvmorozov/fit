@@ -115,8 +115,8 @@ type
 
     EDownhillSimplexContainer = class(Exception);
 
-    { Container servicing algorithm. Container is responsible for
-      limiting values of parameters by cyclical boundary conditions. }
+    { Container is responsible for feeding algorithm with parameters 
+      and limiting values of parameters by cyclical boundary conditions. }
     TDownhillSimplexContainer = class(TAlgorithmContainer, IDownhillSimplexServer)
     protected
         { Array of interfaces used for getting parameters. }
@@ -136,11 +136,11 @@ type
         procedure Running; override;
         procedure RunningFinished; override;
 
-        { Methods don't use parameters because are called by Synchronize }
-        
+        { Wrapping method. It doesn't have parameters because is called by Synchronize. }
         procedure ShowMessage;
+        { Wrapping method. It doesn't have parameters because is called by Synchronize. }
         procedure UpdateMainForm;
-        
+
         procedure FillParameters(Decision: TFloatDecision); virtual;
         procedure CreateAlgorithm; override;
         procedure CreateParameters;
@@ -202,9 +202,7 @@ type
 implementation
 
 type
-    TParametersArray = array[0..MaxInt div SizeOf(TVariableParameter) - 1] of
-        TVariableParameter;         //  tip dlya preobrazovaniya ukazatelya
-                                    //  na massiv parametrov
+    TParametersArray = array[0..MaxInt div SizeOf(TVariableParameter) - 1] of TVariableParameter;
 
 {$hints off}
 function TDownhillSimplexContainer.GetInitParamLength(
@@ -384,11 +382,11 @@ begin
     begin
         DownhillSimplexServer := Self;
         //  Final tolerance should have non zero value,
-        //  otherwise computaion will never end.
+        //  otherwise computation will never end.
         FinalTolerance := Self.FinalTolerance;
         RestartDisabled := Self.RestartDisabled;
         ExitDerivative := Self.ExitDerivative;
-        //  Temperature := 1;     //  dlya TDownhillSimplexSAAlgorithm
+        //  Temperature := 1;     //  for TDownhillSimplexSAAlgorithm
     end;
 end;
 

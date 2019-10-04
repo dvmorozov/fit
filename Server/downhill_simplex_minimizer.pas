@@ -19,7 +19,7 @@ uses SysUtils, SelfCheckedComponentList, Classes, Tools,
     downhill_simplex_container, int_minimizer;
 
 type
-    { Implements downhill simplex algorithm. }
+    { Implements interfaces required by downhill simplex algorithm. }
     TDownhillSimplexMinimizer = class(TMinimizer,
         IOptimizedFunction, IDownhillRealParameters, IUpdatingResults)
     private
@@ -139,7 +139,7 @@ end;
 {IDiscretValue}
 function TDownhillSimplexMinimizer.GetNumberOfValues: LongInt;
 begin
-    //  minimal'noe chislo znacheniy d.b. = 1
+    //  Minimum number of values should be equal to 1.
     Result := 1;
 end;
 
@@ -193,7 +193,7 @@ begin
     Container.UpdatingResults := Self;
     Container.OptimizedFunction := Self;
     //  Final tolerance should have non zero value,
-    //  otherwise computaion will never end
+    //  otherwise computation will never end
     //  (see TDownhillSimplexContainer.CreateAlgorithm).
     Container.FinalTolerance := 0.001;
     Container.RestartDisabled := True;

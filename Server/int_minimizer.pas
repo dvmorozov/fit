@@ -68,7 +68,7 @@ type
         function  EndOfCycle: Boolean; virtual; abstract;
     end;
 
-    { Adapter providing interface for optimization of any function. }
+    { Adapter supporting set of function pointers ("events") for any optimization task. }
     TMinimizer = class(TComponent)
     private
         FOnFunc: TFunc;

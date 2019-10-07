@@ -20,7 +20,7 @@ uses
     Classes, runner_thread, Algorithm, Tools;
 
 type
-    { Class defines abstract methods to control any type of algorithms. } 
+    { Defines abstract methods to control any type of algorithms. } 
     TAlgorithmContainer = class(TComponent)
     protected
         Algorithm: TAlgorithm;
@@ -41,7 +41,7 @@ type
         procedure Run; virtual;
     end;
 
-    { Class allows executing algorithm in separate thread. }
+    { Allows executing algorithm in separate thread. }
     TThreadAlgorithmContainer = class(TAlgorithmContainer)
     protected
         {Object implementing separate thread.

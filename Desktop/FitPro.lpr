@@ -9,14 +9,13 @@ uses
   Interfaces,   //  LCL widgetset
   Forms,
   Variants,
-  MainForm,
-  DataLoader,
-  AboutBoxDialog,
-  InputWavelengthDialog, InputBackFactorDialog, InputMaxRFactorDialog,
-  FitClient, FitClientApp,
-  FitTask, Settings, TurboPowerIPro,
-  FitGrids, Tools, CBRCComponent, ClassInheritIDs, ComponentList,
-  MyExceptions, NumericGrid, SelfCopied, SelfSaved, SimpMath, TableComp,
+  form_main,
+  about_box_dialog,
+  input_wavelength_dialog, input_back_factor_dialog, input_max_rfactor_dialog,
+  fit_client, fit_client_app,
+  Settings, TurboPowerIPro,
+  FitGrids, Tools,
+  MyExceptions, NumericGrid, SimpMath,
   TAGraph
 {$IFDEF WINDOWS}
   , ta
@@ -32,9 +31,9 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
 {$ENDIF}
-  Main,
-  CreateUserPointsSetDialog, UserPointsSetPropDialog,
-  ConfigurablePointsSet, ConfigurableUserPointsSet;
+  app,
+  create_user_points_set_dlg, user_points_set_prop_dialog,
+  configurable_points_set, configurable_user_points_set;
 
 {$R manifest.res}
 

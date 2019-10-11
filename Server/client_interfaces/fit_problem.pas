@@ -114,9 +114,7 @@ type
         function FindPeakBounds: string;
         function FindBackPoints: string;
         function FindPeakPositions: string;
-{$IF DEFINED(FIT) OR DEFINED(FITPRO) OR DEFINED(FITCGI)}
         function AllPointsAsPeakPositions: string;
-{$ENDIF}
 {$IFDEF FITCGI}
         function GetGraph(
             const Width: LongInt; const Height: LongInt): TMemoryStream;

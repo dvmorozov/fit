@@ -16,7 +16,7 @@ unit downhill_simplex_minimizer;
 interface
 
 uses SysUtils, SelfCheckedComponentList, Classes, Tools,
-    downhill_simplex_container, int_minimizer;
+    DownhillSimplexContainer, int_minimizer;
 
 type
     { Implements application interfaces required by downhill simplex algorithm. }

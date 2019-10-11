@@ -111,10 +111,8 @@ type
         function FindBackPoints: string;
         { Returns hint or error message received from the server. }
         function FindPeakPositions: string;
-    {$IF DEFINED(FIT) OR DEFINED(FITPRO) OR DEFINED(FITCGI)}
         { Returns hint or error message received from the server. }
         function AllPointsAsPeakPositions: string;
-    {$ENDIF}
     {$IFDEF FITCGI}
         function GetGraph(
             const Width: LongInt; const Height: LongInt): TMemoryStream;

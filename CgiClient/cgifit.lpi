@@ -15,7 +15,7 @@
       <AutoIncrementBuild Value="True"/>
       <CurrentVersionNr Value="1"/>
       <CurrentMajorRevNr Value="1"/>
-      <CurrentBuildNr Value="48"/>
+      <CurrentBuildNr Value="49"/>
       <ProjectVersion Value="0.0.0.0"/>
       <FileDescription Value="CGI-client application."/>
       <LegalCopyright Value="Dmitry Morozov"/>
@@ -35,15 +35,15 @@
     </RunParams>
     <RequiredPackages Count="3">
       <Item1>
-        <PackageName Value="CGILaz"/>
+        <PackageName Value="ta"/>
+        <MinVersion Major="1" Minor="1" Valid="True"/>
       </Item1>
       <Item2>
         <PackageName Value="LCL"/>
         <MinVersion Major="1" Valid="True"/>
       </Item2>
       <Item3>
-        <PackageName Value="ta"/>
-        <MinVersion Major="1" Minor="1" Valid="True"/>
+        <PackageName Value="CGILaz"/>
       </Item3>
     </RequiredPackages>
     <Units Count="65">
@@ -308,7 +308,7 @@
         <UnitName Value="Settings"/>
         <CursorPos X="49" Y="192"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="34"/>
+        <EditorIndex Value="33"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
       </Unit28>
@@ -404,7 +404,7 @@
         <UnitName Value="evaluation"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="33"/>
+        <EditorIndex Value="32"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit39>
@@ -460,16 +460,14 @@
         <UnitName Value="SimpMath"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="27"/>
         <UsageCount Value="110"/>
-        <Loaded Value="True"/>
       </Unit47>
       <Unit48>
         <Filename Value="..\..\..\lazarus-0.9.24\fpc\2.2.0\source\packages\fcl-base\src\inc\custapp.pp"/>
         <UnitName Value="CustApp"/>
         <CursorPos X="6" Y="97"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="30"/>
+        <EditorIndex Value="29"/>
         <UsageCount Value="109"/>
         <Loaded Value="True"/>
       </Unit48>
@@ -515,7 +513,7 @@
         <UnitName Value="binary_formatter"/>
         <CursorPos X="6" Y="49"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="29"/>
+        <EditorIndex Value="28"/>
         <UsageCount Value="100"/>
         <Loaded Value="True"/>
       </Unit54>
@@ -531,7 +529,7 @@
         <UnitName Value="int_fit_service"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="28"/>
+        <EditorIndex Value="27"/>
         <UsageCount Value="102"/>
         <Loaded Value="True"/>
       </Unit56>
@@ -554,7 +552,7 @@
         <UnitName Value="AVL_Tree"/>
         <CursorPos X="22" Y="965"/>
         <TopLine Value="947"/>
-        <EditorIndex Value="31"/>
+        <EditorIndex Value="30"/>
         <UsageCount Value="22"/>
         <Loaded Value="True"/>
       </Unit59>
@@ -563,7 +561,7 @@
         <UnitName Value="NumericGrid"/>
         <CursorPos X="46" Y="1150"/>
         <TopLine Value="1133"/>
-        <EditorIndex Value="32"/>
+        <EditorIndex Value="31"/>
         <UsageCount Value="22"/>
         <Loaded Value="True"/>
       </Unit60>

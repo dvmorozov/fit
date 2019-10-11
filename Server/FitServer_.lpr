@@ -14,14 +14,11 @@ uses
   Variants,
   data_loader,
   math_3d,
-  downhill_simplex_container,
-  algorithm_container,
-  runner_thread,
   obj_saving_string_list,
   simple_minimizer,
   int_minimizer,
   mscr_specimen_list,
-downhill_simplex_minimizer, comb_enumerator, main_calc_thread,
+downhill_simplex_minimizer, main_calc_thread,
   fit_server_stub, fit_server_app,
   data_classes, fit_server_with_thread, fit_task,
   fit_server_multithreaded, TurboPowerIPro,
@@ -43,7 +40,7 @@ downhill_simplex_minimizer, comb_enumerator, main_calc_thread,
   Sysutils, Dialogs, metadata_service_imp, server_listener, int_fit_server,
   server_binary_formatter, server_service_soap, server_service_xmlrpc,
   fit_server_binder, fit_server_imp, synapse_tcp_server, fit_server, app, fit_server_aux,
-  int_fit_service;
+  int_fit_service, component_list, fit_server_proxy, form_main;
 
 {$R manifest.res}
 
@@ -52,7 +49,7 @@ var listener : TwstListener;
 {$R FitServer_.res}
 
 begin
-  Application.Title:='fit_server';
+  Application.Title:='FitServer';
   Application.Initialize;
   //Form1.ApplicationProperties1.Title := 'fit_server';
 
@@ -75,7 +72,7 @@ begin
         InternalIP, StrToInt(InternalPort), 25000, 'Fit Service'
         );
   listener.Start();
-  //Application.CreateForm(TForm1, Form1);
+  Application.CreateForm(TFormMain, FormMain);
   Application.Run;  //  neobhodima dlya obrabotki soobschenii sinhronizatsii
   listener.Free;
 end.

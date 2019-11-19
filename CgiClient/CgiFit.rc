@@ -1,5 +1,5 @@
 1 VERSIONINFO
-FILEVERSION 1,1,0,49
+FILEVERSION 1,1,0,51
 PRODUCTVERSION 0,0,0,0
 {
  BLOCK "StringFileInfo"
@@ -9,7 +9,7 @@ PRODUCTVERSION 0,0,0,0
    VALUE "Comments", "\000"
    VALUE "CompanyName", "\000"
    VALUE "FileDescription", "CGI-client application.\000"
-   VALUE "FileVersion", "1.1.0.49\000"
+   VALUE "FileVersion", "1.1.0.51\000"
    VALUE "InternalName", "\000"
    VALUE "LegalCopyright", "Dmitry Morozov\000"
    VALUE "LegalTrademarks", "\000"

@@ -1,21 +1,22 @@
-{ Этот файл был автоматически создан Lazarus. Не редактировать!
-Исходный код используется только для компиляции и установки пакета.
+{ This file was automatically created by Lazarus. Do not edit!
+  This source is only used to compile and install the package.
  }
 
-unit ta; 
+unit ta;
 
+{$warn 5023 off : no warning about unused units}
 interface
 
 uses
-  TAGraph, LazarusPackageIntf; 
+  TAGraph, LazarusPackageIntf;
 
 implementation
 
-procedure Register; 
+procedure Register;
 begin
-  RegisterUnit('TAGraph', @TAGraph.Register); 
-end; 
+  RegisterUnit('TAGraph', @TAGraph.Register);
+end;
 
 initialization
-  RegisterPackage('ta', @Register); 
+  RegisterPackage('ta', @Register);
 end.

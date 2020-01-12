@@ -1,4 +1,3 @@
-(*!!! комментарии, кот. нужно будет удалить выделяются данным образом !!!*)
 unit TAGraph;
 
 {$IFDEF fpc}
@@ -263,8 +262,9 @@ type
     Down:Boolean;
     Zoom:Boolean;
     Fixed:Boolean;
-    XDown,YDown,XOld,YOld:Integer;              (* XDown - точка, где была нажата клавиша; XOld - точка, до которой мышь была протащена *)
-    XMarkOld,YMarkOld:Integer;                  (* используются при рисовании штрихов *)
+    XDown,YDown,XOld,YOld:Integer;              // XDown - the point where key was pressed;
+                                                // XOld - the point to which mouse pointer was moved
+    XMarkOld,YMarkOld:Integer;                  // Are used in drawing strokes
     ZoomRect:TRect;
 
     FShowReticule:Boolean;
@@ -312,15 +312,16 @@ type
     procedure Resize; override;                 //  DM  20/11/08
     function GetWidth: LongInt;                 //  DM  21/04/09
     procedure SetWidth(Value: LongInt);
-    function GetHeight: LongInt;                (* nuzhno dlya togo, choby ispol'zovat' real'nye razmery bitmapa *)
+    function GetHeight: LongInt;                //  Real bitmap size
     procedure SetHeight(Value: LongInt);
   public
     { Dйclarations publiques }
-    (* опубликовано для задания извне *)
+    //  Was puplished to be set by client
     //  DM 20/11/07
     AxisColor:TColor;                           //  Axis color
-    (* опубликовано для доступа к полям размера *)
-    Bitmap: TBitmap;                            //  DM 20/11/07
+    //  Was published to provide access to size attributes
+    //  DM 20/11/07
+    Bitmap: TBitmap;
     
     constructor Create(AOwner:TComponent); override;
     destructor  Destroy; override;
@@ -1201,9 +1202,7 @@ for i:=0 to NbPoints-2 do
                    end;
                 psVertLineBT:
                    begin                                //  DM 29/01/08
-                   (* Canvas.MoveTo(XImage^[i],YMin); *)
-                   (* Canvas.LineTo(XImage^[i],YMax); *)
-                   (* линия накладывается так, чтобы не затенять график *)
+                   // the line is drawn avoiding overlapping the chart
                    for StrokeY:=YMin to YMax-1 do
                         if Canvas.Pixels[XImage^[i],StrokeY]=
                             GraphBrush.Color then
@@ -1211,22 +1210,15 @@ for i:=0 to NbPoints-2 do
                                     Canvas.Pen.Color;
                    if i mod 2 = 0 then
                    begin
-                       (*   четная точка (индексирование начинается с 0) -
-                            интервал находится справа *)
-                       (*   в этой части программы эта точка точно не последняя *)
-                       (*
-                       SavedBrushStyle:=Canvas.Brush.Style;
-                       Canvas.Brush.Style:=bsBDiagonal;
-                            стили почему-то не работают, поэтому рисуем вручную
-                       Canvas.FillRect(Rect(XImage[i],YMin,XImage[i+1],YMax));
-                       Canvas.Brush.Style:=SavedBrushStyle;
-                       *)
+                       //   even point - indexing starts from zero
+                       //   interval is located to the right
+                       //   this point is definitely not the last
                        StartX:=XImage^[i];StopX:=XImage^[i+1]-1;
                        if StopX>XMax-1 then StopX:=XMax-1;
                        for StrokeX:=StartX to StopX do
                            for StrokeY:=YMin to YMax-1 do
                            begin
-                               (* сетка накладывается так, чтобы не затенять график *)
+                               // the grid is drawn avoiding overlapping the chart
                                if (StrokeX+StrokeY) mod 5=0 then
                                    if Canvas.Pixels[StrokeX,StrokeY]=
                                        GraphBrush.Color then
@@ -1237,7 +1229,7 @@ for i:=0 to NbPoints-2 do
                    end;  //  psVertLineBT
                 psVertLineTB:
                    begin                                //  DM 29/01/08
-                   (* линия накладывается так, чтобы не затенять график *)
+                   // the line is drawn avoiding overlapping the chart
                    for StrokeY:=YMin to YMax-1 do
                         if Canvas.Pixels[XImage^[i],StrokeY]=
                             GraphBrush.Color then
@@ -1245,15 +1237,15 @@ for i:=0 to NbPoints-2 do
                                     Canvas.Pen.Color;
                    if i mod 2 = 0 then
                    begin
-                       (*   четная точка (индексирование начинается с 0) -
-                            интервал находится справа *)
-                       (*   в этой части программы эта точка точно не последняя *)
+                       //   even point - indexing starts from zero
+                       //   interval is located to the right
+                       //   this point is definitely not the last
                        StartX:=XImage^[i];StopX:=XImage^[i+1]-1;
                        if StopX>XMax-1 then StopX:=XMax-1;
                        for StrokeX:=StartX to StopX do
                            for StrokeY:=YMin to YMax-1 do
                            begin
-                               (* сетка накладывается так, чтобы не затенять график *)
+                               // the grid is drawn avoiding overlapping the chart
                                if (StrokeX-StrokeY) mod 5=0 then
                                    if Canvas.Pixels[StrokeX,StrokeY]=
                                        GraphBrush.Color then
@@ -1270,13 +1262,11 @@ for i:=0 to NbPoints-2 do
          begin
              //  DM 06/02/08
              SavedColor:=Canvas.Brush.Color;        //  DM 02/10/07
-             Canvas.Brush.Style:=FPointBrushStyle;  //bsClear;  DM 02/10/07
+             Canvas.Brush.Style:=FPointBrushStyle;  //  DM 02/10/07
              Canvas.Brush.Color:=Canvas.Pen.Color;  //  DM 02/10/07
              case PointStyle of
                 psVertLineBT: begin                 //  DM 29/01/08
-                   (* Canvas.MoveTo(XImage^[i],YMin); *)
-                   (* Canvas.LineTo(XImage^[i],YMax); *)
-                   (* линия накладывается так, чтобы не затенять график *)
+                   // the line is drawn avoiding overlapping the chart
                    for StrokeY:=YMin to YMax-1 do
                         if Canvas.Pixels[XImage^[i],StrokeY]=
                             GraphBrush.Color then
@@ -1284,19 +1274,9 @@ for i:=0 to NbPoints-2 do
                                     Canvas.Pen.Color;
                    if i mod 2 = 0 then
                    begin
-                       (*   четная точка (индексирование начинается с 0) -
-                            интервал находится справа *)
-                       (*   в этой части программы эта точка точно не последняя *)
-                       (*
-                       SavedBrushStyle:=Canvas.Brush.Style;
-                       Canvas.Brush.Style:=bsBDiagonal;
-                            стили почему-то не работают, поэтому рисуем вручную
-                       Canvas.FillRect(Rect(XImage[i],YMin,XImage[i+1],YMax));
-                       Canvas.Brush.Style:=SavedBrushStyle;
-                       *)
-                       (* !!! комбинация условий обеспечивает, что если
-                       выделенная область целиком выходит за границы окна,
-                       то штрихи не рисуются !!! *)
+                       //   even point - indexing starts from zero
+                       //   interval is located to the right
+                       //   this point is definitely not the last
                        StartX:=XImage^[i];StopX:=XImage^[i+1]-1;
                        if StartX<=XMin then
                        begin
@@ -1305,8 +1285,7 @@ for i:=0 to NbPoints-2 do
                            for StrokeX:=StartX to StopX do
                                for StrokeY:=YMin to YMax-1 do
                                begin
-                                   (* сетка накладывается так,
-                                   чтобы не затенять график *)
+                                   // the grid is drawn avoiding overlapping the chart
                                    if (StrokeX+StrokeY) mod 5=0 then
                                        if Canvas.Pixels[StrokeX,StrokeY]=
                                            GraphBrush.Color then
@@ -1317,7 +1296,7 @@ for i:=0 to NbPoints-2 do
                    end; //  if i mod 2 = 0 then
                 end;  //  psVertLineBT
                 psVertLineTB: begin                 //  DM 08/02/08
-                   (* линия накладывается так, чтобы не затенять график *)
+                   // the line is drawn avoiding overlapping the chart
                    for StrokeY:=YMin to YMax-1 do
                         if Canvas.Pixels[XImage^[i],StrokeY]=
                             GraphBrush.Color then
@@ -1325,12 +1304,12 @@ for i:=0 to NbPoints-2 do
                                     Canvas.Pen.Color;
                    if i mod 2 = 0 then
                    begin
-                       (*   четная точка (индексирование начинается с 0) -
-                            интервал находится справа *)
-                       (*   в этой части программы эта точка точно не последняя *)
-                       (* !!! комбинация условий обеспечивает, что если
-                       выделенная область целиком выходит за границы окна,
-                       то штрихи не рисуются !!! *)
+                       //  even point - indexing starts from zero
+                       //  interval is located to the right
+                       //  this point is definitely not the last
+                       //  combination of conditions providing that
+                       //  if given area is out of window then strokes
+                       //  aren't drawn
                        StartX:=XImage^[i];StopX:=XImage^[i+1]-1;
                        if StartX<=XMin then
                        begin
@@ -1339,8 +1318,7 @@ for i:=0 to NbPoints-2 do
                            for StrokeX:=StartX to StopX do
                                for StrokeY:=YMin to YMax-1 do
                                begin
-                                   (* сетка накладывается так,
-                                   чтобы не затенять график *)
+                                   // the grid is drawn avoiding overlapping the chart
                                    if (StrokeX-StrokeY) mod 5=0 then
                                        if Canvas.Pixels[StrokeX,StrokeY]=
                                            GraphBrush.Color then
@@ -1413,9 +1391,7 @@ if FShowPoints and (YImage^[NbPoints-1]>YMin) and (YImage^[NbPoints-1]<YMax)
          else
          if PointStyle=psVertLineBT then
             begin                                   //  DM 29/01/08
-            (* Canvas.MoveTo(XImage^[NbPoints-1],YMin); *)
-            (* Canvas.LineTo(XImage^[NbPoints-1],YMax); *)
-            (* линия накладывается так, чтобы не затенять график *)
+            // the line is drawn avoiding overlapping the chart
             for StrokeY:=YMin to YMax-1 do
                 with Chart as TTAChart do
                      if Canvas.Pixels[XImage^[NbPoints-1],StrokeY]=
@@ -1426,7 +1402,7 @@ if FShowPoints and (YImage^[NbPoints-1]>YMin) and (YImage^[NbPoints-1]<YMax)
          else
          if PointStyle=psVertLineTB then
             begin                                   //  DM 29/01/08
-            (* линия накладывается так, чтобы не затенять график *)
+            // the line is drawn avoiding overlapping the chart
             for StrokeY:=YMin to YMax-1 do
                 with Chart as TTAChart do
                      if Canvas.Pixels[XImage^[NbPoints-1],StrokeY]=
@@ -1570,20 +1546,9 @@ if not(UpdateInProgress) then
       end;
    end;
 
-XGraph^[Index]:=Value;
+  XGraph^[Index]:=Value;
 
-{XGraph^[Index]:=Value;
-
-XGraphMax:=MinDouble;
-XGraphMin:=MaxDouble;
-for i:=0 to NbPoints-1 do
-   begin
-   Val:=XGraph^[i];
-   if Val>XGraphMax then XGraphMax:=Val;
-   if Val<XGraphMin then XGraphMin:=Val;
-   end;}
-
-Chart.Invalidate;
+  Chart.Invalidate;
 end;
 
 procedure TTASerie.SetYValue(Index:Integer;Value:Double);
@@ -1626,9 +1591,9 @@ if not(UpdateInProgress) then
       end;
    end;
 
-YGraph^[Index]:=Value;
+  YGraph^[Index]:=Value;
 
-Chart.Invalidate;
+  Chart.Invalidate;
 end;
 
 function TTASerie.GetXImgValue(Index:Integer):Integer;
@@ -2035,20 +2000,18 @@ if FYGraphMin<>FYGraphMax then
    end;
 
 YMarkWidth:=35;
-if MaxLargTexte+7+7>YMarkWidth then //35+7
+if MaxLargTexte+7+7>YMarkWidth then
    begin
    YMarkWidth:=MaxLargTexte+7+7;
 
    if FMirrorX then
       begin
-      //XImageMin:=Width-YMarkWidth-GetLegendWidth;
       XImageMin:=Width-YMarkWidth-GetLegendWidth-RightMargin;   // DM 09/10/07
       XImageMax:=10;
       end
    else
       begin
       XImageMin:=YMarkWidth;
-      //XImageMax:=Width-10-GetLegendWidth;
       XImageMax:=Width-10-GetLegendWidth-RightMargin;           // DM 09/10/07
       end;
 
@@ -2060,13 +2023,13 @@ if MaxLargTexte+7+7>YMarkWidth then //35+7
    end;
 
 // Back
-(* сразу делается очистка и рисуется рамка *)
+// Cleaning and drawing frame
 //Canvas.Pen.Style:=psClear;                                    //  DM 20/11/07
 Canvas.Pen.Mode:=pmCopy;                                        //  DM 20/11/07
 Canvas.Pen.Color:=AxisColor;                                    //  DM 20/11/07
 Canvas.Pen.Style:=psSolid;                                      //  DM 20/11/07
 Canvas.Pen.Width:=1;                                            //  DM 20/11/07
-(* д.б. имеено белый, чтобы линии рисовались через xor требуемым цветом *)
+// Must be namely white for correct drawing of lines via xor
 Canvas.Brush.Color:=clWhite;                                    //  DM 20/11/07
 Canvas.Brush.Assign(FGraphBrush);
 Canvas.Rectangle(XImageMin,YImageMin,XImageMax,YImageMax);
@@ -2383,7 +2346,6 @@ if Serie is TTASerie then (Serie as TTASerie).Chart:=Self;
 if Serie is TTALine then (Serie as TTALine).Chart:=Self;
 end;
 
-//procedure TTAChart.DeleteSerie(Serie:TTASerie);
 procedure TTAChart.DeleteSerie(Serie:TComponent);
 var
    i:Integer;
@@ -2440,9 +2402,9 @@ var
    Serie:TComponent;
    XMinSeries,XMaxSeries,YMinSeries,YMaxSeries:Double;
    SerieNumber,PointNumber:Integer;
-   R:TRect;                                             //  DM  20/11/08
+   R:TRect;                                     //  DM  20/11/08
 begin
-if FShowVerticalReticule then               (* гашение маркерных линий *)
+if FShowVerticalReticule then                   //  removing marker lines
    DrawVerticalReticule(XMarkOld);
 if FShowReticule then
    DrawReticule(XMarkOld,YMarkOld);
@@ -2452,8 +2414,8 @@ if Zoom then
    begin
    Zoom:=False;
    Fixed:=True;
-   XImageToGraph(ZoomRect.Left,FXGraphMin);     (* границы прямоугольника в пикселах *)
-   XImageToGraph(ZoomRect.Right,FXGraphMax);    (* преобразуются в единицы графика *)
+   XImageToGraph(ZoomRect.Left,FXGraphMin);     //  rectangle boundaries in pixels
+   XImageToGraph(ZoomRect.Right,FXGraphMax);    //  are transformed in unit of chart
    YImageToGraph(ZoomRect.Bottom,FYGraphMin);
    YImageToGraph(ZoomRect.Top,FYGraphMax);
    end
@@ -2677,21 +2639,14 @@ end;
 
 procedure TTAChart.SetShowVerticalReticule(Value:Boolean);
 begin
-{if FShowVerticalReticule then
-   begin
-   DrawVerticalReticule(XMarkOld);
-   FShowVerticalReticule:=False;
-   end;}
-FShowVerticalReticule:=Value;
-Invalidate;
+  FShowVerticalReticule:=Value;
+  Invalidate;
 end;
 
 procedure TTAChart.SetShowReticule(Value:Boolean);
 begin
-//if Value=False then
-//   DrawReticule(XMarkOld,YMarkOld);
-FShowReticule:=Value;
-Invalidate;
+  FShowReticule:=Value;
+  Invalidate;
 end;
 
 procedure TTAChart.GetPointNextTo(X,Y:Integer;var SerieNumberOut,PointNumberOut,XOut,YOut:Integer);
@@ -2811,7 +2766,7 @@ XDown:=X;
 YDown:=Y;
 XOld:=X;
 YOld:=Y;
-(* гашение маркерных линий *)
+//  removing marker lines
 if FShowVerticalReticule then
    DrawVerticalReticule(XMarkOld);                                  // DM 22/11/07
 if FShowReticule then
@@ -2824,12 +2779,11 @@ procedure TTAChart.DrawReticule(X,Y:Integer);
 begin
 Canvas.Pen.Style:=psSolid;
 Canvas.Pen.Mode:=pmXor;
-(* получится как-раз AxisColor, если фон белый *)
+//  it would be AxisColor providng that background is white
 Canvas.Pen.Color:=(not AxisColor) and $00FFFFFF;                    //ClWhite; DM 20/11/07
 Canvas.Pen.Style:=psSolid;
 Canvas.Pen.Width:=1;
-(* проверено, что здесь координаты те же, что и в Rectangle,
-однако линии рисуются правильно только при этих добавках *)
+//  workaround for correct drawing
 //Canvas.MoveTo(X,YImageMin);                                       // DM 20/11/07
 Canvas.MoveTo(X,YImageMin-2);
 //Canvas.LineTo(X,YImageMax);                                       // DM 20/11/07
@@ -2865,8 +2819,8 @@ if Down then
    Canvas.Pen.Style:=psSolid;
    Canvas.Pen.Width:=1;
 
-   Canvas.Rectangle(XDown,YDown,XOld,YOld); (* стирается пред. прямоуг. *)
-   Canvas.Rectangle(XDown,YDown,X,Y);       (* рисуется новый прямоуг. *)
+   Canvas.Rectangle(XDown,YDown,XOld,YOld); //  clearing before drawing
+   Canvas.Rectangle(XDown,YDown,X,Y);       //  rectangle
    
    XOld:=X;
    YOld:=Y;
@@ -2911,8 +2865,8 @@ else
          if (XReticule<>XMarkOld) or (YReticule<>YMarkOld) then
             if (XReticule>=XMin) and (XReticule<=XMax) and (YReticule>=YMin) and (YReticule<=YMax) then
                begin
-               DrawReticule(XMarkOld,YMarkOld);     (* гашение *)
-               DrawReticule(XReticule,YReticule);   (* рисование заново *)
+               DrawReticule(XMarkOld,YMarkOld);     //  removing
+               DrawReticule(XReticule,YReticule);   //  and redrawing
                FShowReticule:=True;
                XMarkOld:=XReticule;
                YMarkOld:=YReticule;
@@ -2924,7 +2878,7 @@ end;
 
 procedure TTAChart.MouseUp(Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-if Down then                                    (* клавиша была нажата *)
+if Down then                                        //  key pressed
    begin
    XMarkOld:=X;
    YMarkOld:=Y;
@@ -2936,27 +2890,25 @@ if Down then                                    (* клавиша была нажата *)
    Canvas.Pen.Style:=psSolid;
    Canvas.Pen.Width:=1;
 
-   Canvas.Rectangle(XDown,YDown,XOld,YOld);     (* стирается прямоуг. *)
+   Canvas.Rectangle(XDown,YDown,XOld,YOld);         //  rectangle is cleaned
 
    Down:=False;
-   (* !!! прежний алгоритм при FSeriecount=0 вызывает искл. !!!
-      нельзя вызывать Invalidate, потому что маркерные линиии
-      в таком режиме не отображаются
-   *)
-   if FSeriecount=0 then Exit;                  //  DM 03/10/07
-   (* выделяется особый случай, когда координаты совпадают,
-      в остальном обработка остается прежней; д. вызывать
-      Invalidate для гашения маркерных линий;
-   *)
+   // workaround to avoid exception
+   // Invalidate should not be called because marker
+   // lines are not drawn in this case
+   if FSeriecount=0 then Exit;                      //  DM 03/10/07
+   // special case is handled when coordianates coincide,
+   // calls Invalidate to hide marker lines
    if (XDown=XOld) and (YDown=YOld) then
    begin
-        Fixed:=True;                            //  DM 01/10/07
+        Fixed:=True;                                //  DM 01/10/07
    end
    else
    begin
        if (XDown<XOld) and (YDown<YOld) then
-          begin                                 (* выделена область вправо и вниз от начальной точки *)
-          Zoom:=True;                           (* только при этом условии zoom *)
+          begin                                     //  area is selected to the right
+                                                    //  and down from initial point,
+          Zoom:=True;                               //  zoomed only on that condition
           end
        else
           begin
@@ -2965,8 +2917,8 @@ if Down then                                    (* клавиша была нажата *)
           end;
        if XDown<XOld then
           begin
-          ZoomRect.Left:=XDown;                 (* устанавливается правильный порядок координат в ZoomRect *)
-          ZoomRect.Right:=XOld;
+          ZoomRect.Left:=XDown;                     //  proper coordinate order
+          ZoomRect.Right:=XOld;                     //  is set up
           end
        else
           begin
@@ -3030,7 +2982,7 @@ procedure TTAChart.ZoomIn;
 var D: Double;
 begin
     if SeriesCount <> 0 then
-    begin   (* без такой проверки перестает отображать данные *)
+    begin
         Zoom := True;
         D := XGraphMax - XGraphMin;
         D := D * 0.1;
@@ -3052,7 +3004,7 @@ procedure TTAChart.ZoomOut;
 var D: Double;
 begin
     if SeriesCount <> 0 then
-    begin   (* без такой проверки перестает отображать данные *)
+    begin
         Zoom := True;
         D := XGraphMax - XGraphMin;
         D := D * 0.1;

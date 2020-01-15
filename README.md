@@ -46,6 +46,4 @@ To generate documentation [PasDoc](https://github.com/pasdoc/pasdoc/wiki) is use
 
 {% include contacts.html %}
 
-{% include google_ads.html %}
-
 {% include counter.html %}

@@ -38,6 +38,9 @@ Fit.exe /INFILE=*file_name*
 
 To generate documentation [PasDoc](https://github.com/pasdoc/pasdoc/wiki) is used.
 
+{% include counter.html %}
+
+
 ## Related projects
 
 [fitminimizers](https://dvmorozov.github.io/fitminimizers/)

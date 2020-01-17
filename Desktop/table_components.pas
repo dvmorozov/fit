@@ -16,8 +16,8 @@ unit table_components;
 interface
 
 uses
-    Classes, Grids, Controls, Graphics, Tools, SysUtils, NumericGrid,
-    self_copied_component;
+    Classes, Grids, Controls, Graphics, SysUtils, NumericGrid,
+    self_copied_component, vectors;
 
 type
     ETableCompList = class(Exception);

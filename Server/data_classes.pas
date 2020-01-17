@@ -16,7 +16,7 @@ unit data_classes;
 interface
 
 uses
-    Classes, Grids, SysUtils, NumericGrid, Tools, table_components,
+    Classes, Grids, SysUtils, NumericGrid, table_components,
     curve_points_set;
 
 type

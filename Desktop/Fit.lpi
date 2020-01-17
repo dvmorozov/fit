@@ -111,7 +111,7 @@
         <MinVersion Major="1" Valid="True"/>
       </Item7>
     </RequiredPackages>
-    <Units Count="128">
+    <Units Count="129">
       <Unit0>
         <Filename Value="Fit.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -251,7 +251,7 @@
       </Unit12>
       <Unit13>
         <Filename Value="self_copied_component.pas"/>
-        <EditorIndex Value="15"/>
+        <EditorIndex Value="16"/>
         <WindowIndex Value="1"/>
         <TopLine Value="3"/>
         <CursorPos X="22" Y="15"/>
@@ -516,7 +516,7 @@
       <Unit41>
         <Filename Value="int_fit_viewer.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="14"/>
+        <EditorIndex Value="15"/>
         <WindowIndex Value="1"/>
         <TopLine Value="3"/>
         <CursorPos X="41" Y="19"/>
@@ -538,7 +538,7 @@
       <Unit43>
         <Filename Value="DataLoaders\data_loader.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="18"/>
+        <EditorIndex Value="19"/>
         <WindowIndex Value="1"/>
         <TopLine Value="76"/>
         <CursorPos X="24" Y="85"/>
@@ -549,7 +549,7 @@
       <Unit44>
         <Filename Value="DataLoaders\int_data_loader.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="12"/>
+        <EditorIndex Value="13"/>
         <WindowIndex Value="1"/>
         <CursorPos X="16" Y="22"/>
         <UsageCount Value="216"/>
@@ -559,7 +559,7 @@
       <Unit45>
         <Filename Value="DataLoaders\int_data_loader_injector.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="13"/>
+        <EditorIndex Value="14"/>
         <WindowIndex Value="1"/>
         <CursorPos X="7" Y="18"/>
         <UsageCount Value="202"/>
@@ -569,7 +569,7 @@
       <Unit46>
         <Filename Value="DataLoaders\extension_data_loader_injector.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="11"/>
+        <EditorIndex Value="12"/>
         <WindowIndex Value="1"/>
         <TopLine Value="2"/>
         <CursorPos X="16" Y="18"/>
@@ -955,7 +955,7 @@
       </Unit81>
       <Unit82>
         <Filename Value="..\Server\fit_server.pas"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="2"/>
         <WindowIndex Value="1"/>
         <TopLine Value="19"/>
         <CursorPos X="41" Y="34"/>
@@ -1207,7 +1207,7 @@
       </Unit108>
       <Unit109>
         <Filename Value="self_saved_component.pas"/>
-        <EditorIndex Value="17"/>
+        <EditorIndex Value="18"/>
         <WindowIndex Value="1"/>
         <CursorPos X="82" Y="15"/>
         <UsageCount Value="91"/>
@@ -1233,7 +1233,7 @@
       </Unit111>
       <Unit112>
         <Filename Value="..\Server\fit_server_app.pas"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="3"/>
         <WindowIndex Value="1"/>
         <TopLine Value="49"/>
         <CursorPos X="26" Y="35"/>
@@ -1243,7 +1243,7 @@
       </Unit112>
       <Unit113>
         <Filename Value="..\Server\fit_server_with_thread.pas"/>
-        <EditorIndex Value="9"/>
+        <EditorIndex Value="10"/>
         <WindowIndex Value="1"/>
         <TopLine Value="7"/>
         <CursorPos X="16" Y="18"/>
@@ -1253,7 +1253,7 @@
       </Unit113>
       <Unit114>
         <Filename Value="..\Server\fit_server_multithreaded.pas"/>
-        <EditorIndex Value="10"/>
+        <EditorIndex Value="11"/>
         <WindowIndex Value="1"/>
         <CursorPos X="5" Y="20"/>
         <UsageCount Value="61"/>
@@ -1262,7 +1262,7 @@
       </Unit114>
       <Unit115>
         <Filename Value="..\Server\fit_task_with_thread.pas"/>
-        <EditorIndex Value="7"/>
+        <EditorIndex Value="8"/>
         <WindowIndex Value="1"/>
         <TopLine Value="185"/>
         <CursorPos X="36" Y="201"/>
@@ -1280,7 +1280,7 @@
       </Unit116>
       <Unit117>
         <Filename Value="..\Server\main_calc_thread.pas"/>
-        <EditorIndex Value="8"/>
+        <EditorIndex Value="9"/>
         <WindowIndex Value="1"/>
         <TopLine Value="11"/>
         <CursorPos X="32" Y="27"/>
@@ -1307,7 +1307,7 @@
       </Unit119>
       <Unit120>
         <Filename Value="..\Server\fit_task.pas"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="4"/>
         <WindowIndex Value="1"/>
         <TopLine Value="3"/>
         <CursorPos X="12" Y="19"/>
@@ -1317,7 +1317,7 @@
       </Unit120>
       <Unit121>
         <Filename Value="..\Server\simple_minimizer.pas"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="5"/>
         <WindowIndex Value="1"/>
         <TopLine Value="2"/>
         <CursorPos X="10" Y="18"/>
@@ -1327,7 +1327,7 @@
       </Unit121>
       <Unit122>
         <Filename Value="..\Server\downhill_simplex_minimizer.pas"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="6"/>
         <WindowIndex Value="1"/>
         <TopLine Value="3"/>
         <CursorPos X="35" Y="12"/>
@@ -1340,7 +1340,7 @@
         <ComponentName Value="FormHint"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="7"/>
         <WindowIndex Value="1"/>
         <UsageCount Value="58"/>
         <Loaded Value="True"/>
@@ -1357,7 +1357,7 @@
       </Unit124>
       <Unit125>
         <Filename Value="..\..\fitminimizers\package\DownhillSimplexAlgorithm.pas"/>
-        <EditorIndex Value="16"/>
+        <EditorIndex Value="17"/>
         <WindowIndex Value="1"/>
         <TopLine Value="504"/>
         <CursorPos X="27" Y="515"/>
@@ -1375,14 +1375,21 @@
       </Unit126>
       <Unit127>
         <Filename Value="..\Packages\TAGraph\Component\TAGraph.pas"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="19"/>
+        <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <TopLine Value="3042"/>
         <CursorPos Y="3060"/>
         <UsageCount Value="17"/>
-        <Loaded Value="True"/>
       </Unit127>
+      <Unit128>
+        <Filename Value="..\Packages\TAGraph\Package\TAGraph.pas"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="31"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit128>
     </Units>
     <OtherDefines Count="5">
       <Define0 Value="FIT"/>
@@ -1474,7 +1481,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(LazarusDir)\lcl\interfaces\win32;$(LazarusDir)\lcl\include;$(LazarusDir)\fpc\2.2.0\source\rtl\inc"/>
-      <OtherUnitFiles Value="..\Repository\NewVCL;C:\lazarus_lib\synapse\synapse\source\lib;C:\lazarus_lib\wst-0.5;$(LazarusDir)\components\codetools\units\i386-win32;TAGraph\Component;DataLoaders;ModelCurves;ModelCurves\UserPointsSet"/>
+      <OtherUnitFiles Value="..\Repository\NewVCL;C:\lazarus_lib\synapse\synapse\source\lib\;C:\lazarus_lib\wst-0.5\;$(LazarusDir)\components\codetools\units\i386-win32;TAGraph\Component;DataLoaders;ModelCurves;ModelCurves\UserPointsSet"/>
       <UnitOutputDirectory Value="o\Fit\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Parsing>

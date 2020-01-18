@@ -11,8 +11,6 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit create_user_points_set_dlg_adapter;
 
-{$MODE Delphi}
-
 interface
 
 uses Classes, SysUtils, int_create_user_points_set_dlg, CBRCComponent;

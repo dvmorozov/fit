@@ -1,7 +1,5 @@
 program Fit;
 
-{$MODE Delphi}
-
 uses
 {$ifdef unix}
   cthreads,
@@ -16,20 +14,15 @@ uses
   app_settings, TurboPowerIPro,
   FitGrids, SelfCheckedComponentList,
   StrUtils
-{$ifdef windows}
-  ,ta
-{$else}
-  ,TA_LINUX
-{$endif}
-  , common_types, table_components, serialization_ids, GeneralHashFunctions,
+  ,common_types, table_components, serialization_ids, GeneralHashFunctions,
   create_user_points_set_dlg, user_points_set_prop_dialog,
   configurable_points_set, configurable_user_points_set, int_fit_service;
 
 {$R manifest.res}
 
-{$ifdef windows}
+{$IFNDEF FPC OR IFDEF WINDOWS}
 {$R *.res}
-{$endif}
+{$ENDIF}
 
 function CmdLineParamFound(ParamName: string): string;
 const

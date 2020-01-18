@@ -11,8 +11,6 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit fit_task;
 
-{$MODE Delphi}
-
 interface
 
 uses Classes, SysUtils, points_set, curve_points_set, self_copied_component,
@@ -1304,9 +1302,8 @@ begin
     else
     if IsEqualGUID(FCurveTypeId, TPseudoVoigtPointsSet.GetCurveTypeId_) then
     begin
-        Result := T2BranchesPseudoVoigtPointsSet.Create(nil);
-        // vremenno, dlya proverki algoritma...
-        //??? Result := TPseudoVoigtPointsSet.Create(nil)
+        //Result := T2BranchesPseudoVoigtPointsSet.Create(nil);
+        Result := TPseudoVoigtPointsSet.Create(nil)
     end
     else
     if IsEqualGUID(FCurveTypeId, TAsymPseudoVoigtPointsSet.GetCurveTypeId_) then
@@ -1316,10 +1313,12 @@ begin
     else
     if IsEqualGUID(FCurveTypeId, TUserPointsSet.GetCurveTypeId_) then
     begin
+{$IFNDEF FPC OR IFDEF WINDOWS}
         Result := TUserPointsSet.Create(nil);
         TUserPointsSet(Result).Expression := FCurveExpr;
         TUserPointsSet(Result).SetParameters(
             Curve_parameters(Params.GetCopy));
+{$ENDIF}
     end
     else
     if IsEqualGUID(FCurveTypeId, T2BranchesPseudoVoigtPointsSet.GetCurveTypeId_) then

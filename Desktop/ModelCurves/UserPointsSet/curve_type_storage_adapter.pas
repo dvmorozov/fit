@@ -11,8 +11,6 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit curve_type_storage_adapter;
 
-{$MODE Delphi}
-
 interface
 
 uses SysUtils, app_settings, CBRCComponent, int_curve_type_storage;

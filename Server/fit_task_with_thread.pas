@@ -11,8 +11,6 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit fit_task_with_thread;
 
-{$MODE Delphi}
-
 interface
 
 uses Classes, SysUtils, fit_task, main_calc_thread;

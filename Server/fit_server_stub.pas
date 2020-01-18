@@ -12,13 +12,15 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 
 unit fit_server_stub;
 
-{$MODE Delphi}
-
 interface
 
 uses SysUtils, fit_server, common_types, self_copied_component, mscr_specimen_list,
     MyExceptions, int_points_set, points_set, title_points_set,
-    curve_points_set, named_points_set;
+    named_points_set
+{$IFNDEF FPC OR IFDEF WINDOWS}
+    , curve_points_set
+{$ENDIF}
+    ;
 
 type
     { For transmission through network class converts exceptions into error codes.
@@ -81,13 +83,14 @@ type
             ACurvePositions: TPointsSet; var ErrMsg: string): LongInt;
         function SetRFactorIntervals(
             ARFactorIntervals: TPointsSet; var ErrMsg: string): LongInt;
+{$IFNDEF FPC OR IFDEF WINDOWS}
         function SetSpecialCurveParameters(
             ACurveExpr: string;
             { Equality to Nil means initialization. }
             CP: Curve_parameters;
             var ErrMsg: string
             ): LongInt;
-            
+{$ENDIF}
         function AddPointToData(
             XValue, YValue: Double; var ErrMsg: string): LongInt;
         function AddPointToBackground(
@@ -106,7 +109,7 @@ type
         function ReplacePointInCurvePositions(PrevXValue, PrevYValue,
             NewXValue, NewYValue: Double; var ErrMsg: string): LongInt;
 
-        { Data getting. }
+        { Getting data. }
         
         function GetProfilePointsSet(var Points: TPointsSet;
             var ErrMsg: string): LongInt;
@@ -118,17 +121,16 @@ type
             var ErrMsg: string): LongInt;
         function GetRFactorIntervals(var Points: TPointsSet;
             var ErrMsg: string): LongInt;
+{$IFNDEF FPC OR IFDEF WINDOWS}
         function GetSpecialCurveParameters(var CP: Curve_parameters; var
             ErrMsg: string): LongInt;
+{$ENDIF}
         { Returns list of curve (specimen) parameters. }
         function GetSpecimenList(var Points: TMSCRSpecimenList;
             var ErrMsg: string): LongInt;
-//{$IFDEF FIT}
         { Returns list of components containing points of curves (specimens). }
         function GetCurvesList(var Points: TSelfCopiedCompList;
             var ErrMsg: string): LongInt;
-//{$ELSE}
-        { Simplified way of transmission via network. }
         
         function GetSpecimenCount(
             var Count: LongInt; var ErrMsg: string): LongInt;
@@ -141,7 +143,6 @@ type
             var ErrMsg: string): LongInt;
         function SetSpecimenParameter(SpecIndex: LongInt; ParamIndex: LongInt;
             Value: Double; var ErrMsg: string): LongInt;
-//{$ENDIF}
         function GetCalcProfilePointsSet(var Points: TPointsSet;
             var ErrMsg: string): LongInt;
         function GetDeltaProfilePointsSet(var Points: TPointsSet;
@@ -926,6 +927,7 @@ begin
     end;
 end;
 
+{$IFNDEF FPC OR IFDEF WINDOWS}
 function TFitServerStub.SetSpecialCurveParameters(
     ACurveExpr: string;
     CP: Curve_parameters;   //  ravenstvo nil oznachaet
@@ -964,6 +966,7 @@ begin
         end else RecreateServer;
     end;
 end;
+{$ENDIF}
 
 function TFitServerStub.SetProfilePointsSet(
     APointsSet: TTitlePointsSet; var ErrMsg: string): LongInt;
@@ -1308,6 +1311,7 @@ begin
     end;
 end;
 
+{$IFNDEF FPC OR IFDEF WINDOWS}
 function TFitServerStub.GetSpecialCurveParameters(
     var CP: Curve_parameters; var ErrMsg: string): LongInt;
 begin
@@ -1338,6 +1342,7 @@ begin
         end else RecreateServer;
     end;
 end;
+{$ENDIF}
 
 function TFitServerStub.GetSpecimenList(
     var Points: TMSCRSpecimenList; var ErrMsg: string): LongInt;

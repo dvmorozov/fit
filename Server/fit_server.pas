@@ -17,8 +17,6 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 
 unit fit_server;
 
-{$MODE Delphi}
-
 interface
 
 {
@@ -36,7 +34,11 @@ uses Classes, title_points_set, SelfCheckedComponentList, SysUtils,
 {$ENDIF}
      self_copied_component, MyExceptions, fit_task, SimpMath,
      main_calc_thread, common_types, int_client_callback, int_fit_service,
-     CBRCComponent, Windows;
+     CBRCComponent
+{$IFNDEF FPC OR IFDEF WINDOWS}
+     , Windows
+{$ENDIF}
+     ;
 
 type
         { In varying gaussian parameters now amplitude and position are varied,
@@ -247,8 +249,9 @@ type
         procedure GoToReadyForFit;
 
                 { Checks expression and fills list of parameters. }
+{$IFNDEF FPC OR IFDEF WINDOWS}
         procedure CreateParameters(ACurveExpr: string);
-
+{$ENDIF}
         function GetAllInitialized: Boolean;
                 { Does not really create any thread. Simply calls methods synchronously. }
         procedure RecreateMainCalcThread(
@@ -275,13 +278,13 @@ type
 
         function SetRFactorIntervals(ARFactorIntervals: TPointsSet): string;
         function GetRFactorIntervals: TTitlePointsSet;
-
+{$IFNDEF FPC OR IFDEF WINDOWS}
         procedure SetSpecialCurveParameters(
             ACurveExpr: string;
                         { Equality to Nil means initialization. }
             CP: Curve_parameters);
         function GetSpecialCurveParameters: Curve_parameters;
-
+{$ENDIF}
                 { The server should support primitives for adding and updating points
           to support thin clients which can not store all set of data. }
                 { All methods call AddPoint. }
@@ -447,10 +450,12 @@ implementation
 
 uses app;
 
+{$IFNDEF FPC OR IFDEF WINDOWS}
 function ParseAndCalcExpression(Expr: LPCSTR; ParamList: LPCSTR;
     Result: PDouble): LongInt; cdecl; external 'MathExpr' name 'ParseAndCalcExpression';
 function GetSymbols: LPCSTR; cdecl; external 'MathExpr' name 'GetSymbols';
 procedure FreeSymbols(Symbols: LPCSTR); cdecl; external 'MathExpr' name 'FreeSymbols';
+{$ENDIF}
 
 {================================= TFitServer =================================}
 function TFitServer.SetProfilePointsSet(APointsSet: TTitlePointsSet): string;
@@ -1341,10 +1346,12 @@ begin
     Result := TTitlePointsSet(RFactorIntervals.GetCopy);
 end;
 
+{$IFNDEF FPC OR IFDEF WINDOWS}
 function TFitServer.GetSpecialCurveParameters: Curve_parameters;
 begin
     Result := Params;
 end;
+{$ENDIF}
 
 function TFitServer.GetCurvePositions: TTitlePointsSet;
 begin
@@ -2435,6 +2442,7 @@ begin
     Result := FCurveTypeId;
 end;
 
+{$IFNDEF FPC OR IFDEF WINDOWS}
 procedure TFitServer.SetSpecialCurveParameters(
     ACurveExpr: string; CP: Curve_parameters);
 var i: LongInt;
@@ -2466,6 +2474,7 @@ begin
             FT.SetSpecialCurve(FCurveExpr, Curve_parameters(Params.GetCopy));
         end;
 end;
+{$ENDIF}
 
 function TFitServer.AsyncOper: Boolean;
 begin
@@ -2533,6 +2542,7 @@ begin
     Result := TimeStr;
 end;
 
+{$IFNDEF FPC OR IFDEF WINDOWS}
 procedure TFitServer.CreateParameters(ACurveExpr: string);
 var Result: LongInt;
     ExprResult: Double;
@@ -2598,6 +2608,7 @@ begin
         raise EUserException.Create('Inadmissible or invalid expression.');
     end;
 end;
+{$ENDIF}
 
 // !!! povtornyy vyzov dlya dannyh koordinat udalyaet tochku iz spiska !!!
 procedure TFitServer.AddPoint(

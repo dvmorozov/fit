@@ -12,8 +12,6 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 
 unit about_box_dialog;
 
-{$MODE Delphi}
-
 interface
 
 uses Forms, StdCtrls, ExtCtrls, LResources, Classes;

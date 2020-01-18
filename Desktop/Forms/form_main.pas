@@ -11,22 +11,21 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit form_main;
 
-{$MODE Delphi}
-
 interface
 
 uses
     LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
     ExtCtrls, StdCtrls, Menus, points_set, fit_viewer, ComCtrls,
     fit_client, NumericGrid, CheckLst, mscr_specimen_list,
-    LResources, tagraph, ActnList, app_settings, Laz_XMLCfg,
-    MyExceptions, common_types, neutron_points_set,
+    LResources, TAGraph, ActnList, app_settings, Laz_XMLCfg,
+    common_types, neutron_points_set,
     int_points_set, curve_points_set, user_points_set, gauss_points_set,
     pseudo_voigt_points_set, asym_pseudo_voigt_points_set, lorentz_points_set,
-    two_branches_pseudo_voigt_points_set, named_points_set, curve_types_singleton,
-{$IFDEF WINDOWS}
-    Windows;
+    two_branches_pseudo_voigt_points_set, named_points_set, curve_types_singleton
+{$IFNDEF FPC OR IFDEF WINDOWS}
+    , MyExceptions, Windows
 {$ENDIF}
+    ;
 
 type
 	{ States of results grid window. }
@@ -1227,7 +1226,7 @@ begin
                 end;
             end;
     except
-{$ifdef windows}
+{$IFNDEF FPC OR IFDEF WINDOWS}
         on E: EUserException do
         //  !!! takie isklyucheniya ne popadut v log !!!
         begin
@@ -1235,9 +1234,9 @@ begin
             SenderEditHint := TNumericGrid(Sender);
             HintMessage := E.Message;
         end;
-{$else}
+{$ELSE}
         raise;
-{$endif}
+{$ENDIF}
     end;
 end;
 
@@ -2485,12 +2484,14 @@ begin
 end;
 
 procedure TFormMain.OnSpecialCurveClick(Sender: TObject);
+{$IFNDEF FPC OR IFDEF WINDOWS}
 var i: LongInt;
     ct: Curve_type;
     mi: TMenuItem;
     Tag: LongInt;
+{$ENDIF}
 begin
-{$IFNDEF EXCLUDE_SOMETHING}
+{$IFNDEF FPC OR IFDEF WINDOWS}
     mi := TMenuItem(Sender);
     Tag := mi.Tag;
     //  poisk pol'zovatel'skogo tipa krivoy

@@ -11,8 +11,6 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit simple_minimizer;
 
-{$MODE Delphi}
-
 interface
 
 uses int_minimizer, SelfCheckedComponentList, SysUtils;

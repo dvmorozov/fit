@@ -11,9 +11,6 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit create_user_points_set_dlg;
 
-{$MODE Delphi}
-//{$mode objfpc}{$H+}
-
 interface
 
 uses

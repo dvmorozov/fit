@@ -12,8 +12,6 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 
 unit fit_server_multithreaded;
 
-{$MODE Delphi}
-
 interface
 
 uses SysUtils, fit_task, fit_task_with_thread, fit_server_with_thread,

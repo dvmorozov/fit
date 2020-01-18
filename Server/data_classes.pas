@@ -11,8 +11,6 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit data_classes;
 
-{$MODE Delphi}
-
 interface
 
 uses

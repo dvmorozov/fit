@@ -11,8 +11,6 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit self_copied_component;
 
-{$MODE Delphi}
-
 interface
 
 uses

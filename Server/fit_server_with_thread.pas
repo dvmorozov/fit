@@ -11,8 +11,6 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit fit_server_with_thread;
 
-{$MODE Delphi}
-
 interface
 
 uses SysUtils, fit_server, common_types, main_calc_thread, MyExceptions,

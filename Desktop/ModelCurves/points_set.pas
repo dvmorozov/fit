@@ -11,8 +11,6 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit points_set;
 
-{$MODE Delphi}
-
 interface
 
 uses Classes, SysUtils, SimpMath, self_copied_component;

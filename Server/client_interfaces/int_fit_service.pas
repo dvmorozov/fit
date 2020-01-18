@@ -11,14 +11,12 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit int_fit_service;
 
-{$MODE Delphi}
-
 interface
 
 uses
     Classes, SysUtils, int_points_set, common_types, points_set, title_points_set,
     mscr_specimen_list, self_copied_component
-{$IFNDEF EXCLUDE_SOMETHING}
+{$IFNDEF FPC OR IFDEF WINDOWS}
     , curve_points_set
 {$ENDIF}
     ;
@@ -56,14 +54,14 @@ type
         { Returns hint or error message received from the server. }
         function SetRFactorIntervals(ARFactorIntervals: TPointsSet): string;
         function GetRFactorIntervals: TTitlePointsSet;
-    {$IFNDEF EXCLUDE_SOMETHING}
+{$IFNDEF FPC OR IFDEF WINDOWS}
         function GetSpecialCurveParameters: Curve_parameters;
         procedure SetSpecialCurveParameters(
             ACurveExpr: string;
             { Nil means initialization. }
             CP: Curve_parameters
             );
-    {$ENDIF}
+{$ENDIF}
         procedure AddPointToData(XValue, YValue: Double);
         procedure AddPointToBackground(XValue, YValue: Double);
         procedure AddPointToRFactorIntervals(XValue, YValue: Double);

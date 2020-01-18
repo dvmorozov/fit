@@ -11,8 +11,6 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit extension_data_loader_injector;
 
-{$MODE Delphi}
-
 interface
 
 uses SysUtils, data_loader, dat_file_loader, csv_file_loader, CBRCComponent,

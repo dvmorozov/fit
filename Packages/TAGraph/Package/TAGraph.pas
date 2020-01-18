@@ -1,9 +1,5 @@
 unit TAGraph;
 
-{$IFDEF fpc}
-{$MODE DELPHI}{$H+}
-{$ENDIF}
-
 { Because the module is from another author, messages are suppressed. }
 {$warnings off}
 {$hints off}

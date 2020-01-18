@@ -11,12 +11,14 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit input_back_factor_dialog;
 
-{$MODE Delphi}
-
 interface
 
 uses SysUtils, Forms, Controls, StdCtrls,
-  ExtCtrls, LResources;
+    ExtCtrls, LResources
+{$IFDEF FPC AND IFNDEF WINDOWS}
+    , Dialogs
+{$ENDIF}
+    ;
 
 type
   TInputBackFactorDlg = class(TForm)
@@ -54,13 +56,13 @@ begin
             Value := StringToValue(ValueEdit.Text);
             if Value <= 1 then raise Exception.Create(' ');
         except
-{$ifdef windows}
+{$IFNDEF FPC OR IFDEF WINDOWS}
             ShowBalloon(ValueEdit.Handle, WideString(Msg),
                 ''          //vmesto Error - tak luchshe smotritsya
                 );
-{$else}
+{$ELSE}
             MessageDlg(Msg, mtError, [mbOk], 0);
-{$endif}
+{$ENDIF}
             ActiveControl := ValueEdit;
             CanClose := False;
         end;

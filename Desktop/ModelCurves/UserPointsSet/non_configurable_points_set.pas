@@ -1,7 +1,5 @@
 unit non_configurable_points_set;
 
-{$mode delphi}
-
 interface
 
 uses

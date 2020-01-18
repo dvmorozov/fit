@@ -11,8 +11,6 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit two_branches_pseudo_voigt_points_set;
 
-{$MODE Delphi}
-
 interface
 
 uses Classes, SysUtils, int_points_set, points_set, named_points_set, curve_points_set,

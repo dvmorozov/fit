@@ -13,8 +13,6 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 
 unit serialization_ids;
 
-{$MODE Delphi}
-
 interface
 
 const

@@ -30,12 +30,12 @@ implementation
 
 uses
 {$IF NOT DEFINED(SERVER) AND NOT DEFINED(CLIENT_PROXY)}
-  user_points_set_prop_dialog, expression_parser_adapter, curve_type_storage_adapter,
-  curve_type_parameters_factory, create_user_points_set_dlg_adapter,
-{$ELSE}
-//  FormServer,
+{$IFNDEF FPC OR IFDEF WINDOWS}
+    user_points_set_prop_dialog, expression_parser_adapter, curve_type_storage_adapter,
+    curve_type_parameters_factory, create_user_points_set_dlg_adapter, app_settings,
 {$ENDIF}
-  app_settings, Controls, app, Dialogs;
+{$ENDIF}
+    Controls, app, Dialogs;
 
 class function TConfigurableUserPointsSet.HasConfigurableParameters: Boolean;
 begin
@@ -44,6 +44,7 @@ end;
 
 {$IF NOT DEFINED(SERVER) AND NOT DEFINED(CLIENT_PROXY)}
 class function TConfigurableUserPointsSet.ShowConfigurationDialog: Boolean;
+{$IFNDEF FPC OR IFDEF WINDOWS}
 var ct: Curve_type;
     ep: TExpressionParserAdapter;
     da: TCreateUserPointsSetDlgAdapter;
@@ -51,12 +52,14 @@ var ct: Curve_type;
     ca: TCurveTypeStorageAdapter;
 
 label dlg1, dlg2;
+{$ENDIF}
 begin
+{$IFNDEF FPC OR IFDEF WINDOWS}
     ep := TExpressionParserAdapter.Create;
     da := TCreateUserPointsSetDlgAdapter.Create;
     cf := TCurveTypeParametersFactory.Create;
     ca := TCurveTypeStorageAdapter.Create;
-{$IFNDEF EXCLUDE_SOMETHING}
+
 dlg1:
     Result := False;
     ct := nil;

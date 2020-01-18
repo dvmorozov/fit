@@ -12,8 +12,6 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit int_client_callback;
 
-{$mode delphi}
-
 interface
 
 type

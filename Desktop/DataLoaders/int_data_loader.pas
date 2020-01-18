@@ -11,8 +11,6 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit int_data_loader;
 
-{$MODE Delphi}
-
 interface
 
 uses title_points_set;

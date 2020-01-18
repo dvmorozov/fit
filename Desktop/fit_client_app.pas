@@ -11,8 +11,6 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit fit_client_app;
 
-{$MODE Delphi}
-
 interface
 
 uses SysUtils, fit_client, fit_client_stub, extension_data_loader_injector;

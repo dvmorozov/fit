@@ -11,8 +11,6 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit int_curve_type_parameters_factory;
 
-{$MODE Delphi}
-
 interface
 
 uses curve_points_set, app_settings;

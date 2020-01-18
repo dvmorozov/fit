@@ -11,8 +11,6 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit data_loader;
 
-{$MODE Delphi}
-
 interface
 
 uses Classes, SysUtils, points_set, title_points_set,

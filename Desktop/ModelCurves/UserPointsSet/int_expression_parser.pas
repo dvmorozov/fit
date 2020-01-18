@@ -11,16 +11,18 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit int_expression_parser;
 
-{$MODE Delphi}
-
 interface
 
+{$IFNDEF FPC OR IFDEF WINDOWS}
 uses curve_points_set;
+{$ENDIF}
 
 type
     { Interface defining basic operation for parsing curve expression. }
     IExpressionParser = interface
+{$IFNDEF FPC OR IFDEF WINDOWS}
         function ParseExpression(Expression: string): Curve_parameters;
+{$ENDIF}
     end;
 
 implementation

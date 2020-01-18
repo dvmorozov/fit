@@ -11,9 +11,6 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit fit_client_stub;
 
-//{$mode objfpc}{$H+}
-{$MODE Delphi}
-
 interface
 
 uses int_client_callback, CBRCComponent;

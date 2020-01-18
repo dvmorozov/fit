@@ -11,8 +11,6 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit fit_viewer;
 
-{$MODE Delphi}
-
 interface
 
 uses
@@ -22,7 +20,7 @@ uses
 {$IFNDEF SERVER}
     fit_client, int_fit_viewer,
 {$ENDIF}
-    tagraph, Forms, SelfCheckedComponentList, mscr_specimen_list;
+    TAGraph, Forms, SelfCheckedComponentList, mscr_specimen_list;
 
 {$IFNDEF SERVER}
 // Switch on updating legend and grids.

@@ -11,13 +11,15 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit user_points_set_prop_dialog;
 
-{$MODE Delphi}
-
 interface
 
 uses
-  SysUtils, LResources, Forms, ExtCtrls,
-  StdCtrls, CheckLst, curve_points_set, app_settings;
+    SysUtils, LResources, Forms, ExtCtrls,
+    StdCtrls, CheckLst, curve_points_set, app_settings
+    {$IFDEF FPC AND IFNDEF WINDOWS}
+    , Dialogs
+    {$ENDIF}
+    ;
 
 type
 
@@ -146,14 +148,14 @@ begin
         try
             P.Value := StringToValue(EditInitValue.Text);
         except
-{$ifdef windows}
+{$IFNDEF FPC OR IFDEF WINDOWS}
             ShowBalloon(EditInitValue.Handle,
                 ImproperRealValueInput,
                 ''          //vmesto Error - tak luchshe smotritsya
                 );
-{$else}
-            MessageDlg(ImproperRealValueInput, mtError, [mbOk], 0);
-{$endif}
+{$ELSE}
+            MessageDlg(string(ImproperRealValueInput), mtError, [mbOk], 0);
+{$ENDIF}
             ActiveControl := EditInitValue;
         end;
     end;

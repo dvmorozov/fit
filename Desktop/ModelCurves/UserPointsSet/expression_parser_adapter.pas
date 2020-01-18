@@ -11,12 +11,13 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit expression_parser_adapter;
 
-{$MODE Delphi}
-
 interface
 
-uses SysUtils, int_expression_parser, curve_points_set,
-  CBRCComponent;
+uses SysUtils, int_expression_parser,
+{$IFNDEF FPC OR IFDEF WINDOWS}
+    curve_points_set,
+{$ENDIF}
+    CBRCComponent;
 
 type
     { Class-adapter implementing basic operation for parsing curve expression.
@@ -29,13 +30,19 @@ type
 
     public
         class function Create: TExpressionParserAdapter;
+{$IFNDEF FPC OR IFDEF WINDOWS}
         function ParseExpression(Expression: string): Curve_parameters;
+{$ENDIF}
     end;
 {$warnings on}
 
 implementation
 
-uses app, MyExceptions, Dialogs;
+uses app,
+{$IFNDEF FPC OR IFDEF WINDOWS}
+    MyExceptions,
+{$ENDIF}
+    Dialogs;
 
 constructor TExpressionParserAdapter.Init;
 begin
@@ -49,6 +56,7 @@ begin
     Result := FExpressionParserAdapter;
 end;
 
+{$IFNDEF FPC OR IFDEF WINDOWS}
 function TExpressionParserAdapter.ParseExpression(
     Expression: string): Curve_parameters;
 begin
@@ -63,6 +71,7 @@ begin
         else raise;
     end;
 end;
+{$ENDIF}
 
 end.
 

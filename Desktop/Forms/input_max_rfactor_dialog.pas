@@ -11,15 +11,15 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit input_max_rfactor_dialog;
 
-{$MODE Delphi}
-
 interface
 
 uses SysUtils, Forms, Controls, StdCtrls,
   ExtCtrls, LResources
-{$ifdef windows}
-  ,Windows, CommCtrl
-{$endif}
+{$IFNDEF FPC OR IFDEF WINDOWS}
+  , Windows, CommCtrl
+{$ELSE}
+  , Dialogs
+{$ENDIF}
   ;
 
 type
@@ -145,14 +145,13 @@ begin
         try
             Value := StringToValue(RFactorValueEdit.Text) / 100;
         except
-{$ifdef windows}
+{$IFNDEF FPC OR IFDEF WINDOWS}
             ShowBalloon(RFactorValueEdit.Handle,
                 ImproperRealValueInput,
-                ''          //vmesto Error - tak luchshe smotritsya
                 );
-{$else}
-            MessageDlg(ImproperRealValueInput, mtError, [mbOk], 0);
-{$endif}
+{$ELSE}
+            MessageDlg(string(ImproperRealValueInput), mtError, [mbOk], 0);
+{$ENDIF}
             ActiveControl := RFactorValueEdit;
             CanClose := False;
         end;

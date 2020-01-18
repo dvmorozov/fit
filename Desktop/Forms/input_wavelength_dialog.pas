@@ -11,12 +11,14 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit input_wavelength_dialog;
 
-{$MODE Delphi}
-
 interface
 
 uses SysUtils, Forms, Controls, StdCtrls,
-  ExtCtrls, LResources;
+    ExtCtrls, LResources
+{$IFDEF FPC AND IFNDEF WINDOWS}
+    , Dialogs
+{$ENDIF}
+    ;
 
 type
 
@@ -55,13 +57,13 @@ begin
             Value := StringToValue(WavelengthValueEdit.Text);
             if Value = 0 then raise Exception.Create(' ');
         except
-{$ifdef windows}
+{$IFNDEF FPC OR IFDEF WINDOWS}
             ShowBalloon(WavelengthValueEdit.Handle, WideString(Msg),
                 ''          //vmesto Error - tak luchshe smotritsya
                 );
-{$else}
+{$ELSE}
             MessageDlg(Msg, mtError, [mbOk], 0);
-{$endif}
+{$ENDIF}
             ActiveControl := WavelengthValueEdit;
             CanClose := False;
         end;

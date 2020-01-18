@@ -11,8 +11,6 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit curve_types_singleton;
 
-{$MODE Delphi}
-
 interface
 
 uses Classes, SysUtils, named_points_set, CBRCComponent, int_points_set,

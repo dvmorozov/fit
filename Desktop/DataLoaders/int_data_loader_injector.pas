@@ -11,6 +11,12 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit int_data_loader_injector;
 
+{$IF NOT DEFINED(FPC)}
+{$DEFINE _WINDOWS}
+{$ELSEIF DEFINED(WINDOWS)}
+{$DEFINE _WINDOWS}
+{$ENDIF}
+
 interface
 
 uses int_data_loader;

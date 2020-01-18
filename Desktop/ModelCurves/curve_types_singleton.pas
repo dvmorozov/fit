@@ -11,6 +11,12 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit curve_types_singleton;
 
+{$IF NOT DEFINED(FPC)}
+{$DEFINE _WINDOWS}
+{$ELSEIF DEFINED(WINDOWS)}
+{$DEFINE _WINDOWS}
+{$ENDIF}
+
 interface
 
 uses Classes, SysUtils, named_points_set, CBRCComponent, int_points_set,

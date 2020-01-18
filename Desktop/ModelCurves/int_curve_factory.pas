@@ -11,6 +11,12 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit int_curve_factory;
 
+{$IF NOT DEFINED(FPC)}
+{$DEFINE _WINDOWS}
+{$ELSEIF DEFINED(WINDOWS)}
+{$DEFINE _WINDOWS}
+{$ENDIF}
+
 interface
 
 uses int_points_set, named_points_set;

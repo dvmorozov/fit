@@ -17,6 +17,12 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 
 unit fit_server;
 
+{$IF NOT DEFINED(FPC)}
+{$DEFINE _WINDOWS}
+{$ELSEIF DEFINED(WINDOWS)}
+{$DEFINE _WINDOWS}
+{$ENDIF}
+
 interface
 
 {
@@ -35,7 +41,7 @@ uses Classes, title_points_set, SelfCheckedComponentList, SysUtils,
      self_copied_component, MyExceptions, fit_task, SimpMath,
      main_calc_thread, common_types, int_client_callback, int_fit_service,
      CBRCComponent
-{$IFNDEF FPC OR IFDEF WINDOWS}
+{$IFDEF _WINDOWS}
      , Windows
 {$ENDIF}
      ;
@@ -249,7 +255,7 @@ type
         procedure GoToReadyForFit;
 
                 { Checks expression and fills list of parameters. }
-{$IFNDEF FPC OR IFDEF WINDOWS}
+{$IFDEF _WINDOWS}
         procedure CreateParameters(ACurveExpr: string);
 {$ENDIF}
         function GetAllInitialized: Boolean;
@@ -278,7 +284,7 @@ type
 
         function SetRFactorIntervals(ARFactorIntervals: TPointsSet): string;
         function GetRFactorIntervals: TTitlePointsSet;
-{$IFNDEF FPC OR IFDEF WINDOWS}
+{$IFDEF _WINDOWS}
         procedure SetSpecialCurveParameters(
             ACurveExpr: string;
                         { Equality to Nil means initialization. }
@@ -450,7 +456,7 @@ implementation
 
 uses app;
 
-{$IFNDEF FPC OR IFDEF WINDOWS}
+{$IFDEF _WINDOWS}
 function ParseAndCalcExpression(Expr: LPCSTR; ParamList: LPCSTR;
     Result: PDouble): LongInt; cdecl; external 'MathExpr' name 'ParseAndCalcExpression';
 function GetSymbols: LPCSTR; cdecl; external 'MathExpr' name 'GetSymbols';
@@ -1346,7 +1352,7 @@ begin
     Result := TTitlePointsSet(RFactorIntervals.GetCopy);
 end;
 
-{$IFNDEF FPC OR IFDEF WINDOWS}
+{$IFDEF _WINDOWS}
 function TFitServer.GetSpecialCurveParameters: Curve_parameters;
 begin
     Result := Params;
@@ -2442,7 +2448,7 @@ begin
     Result := FCurveTypeId;
 end;
 
-{$IFNDEF FPC OR IFDEF WINDOWS}
+{$IFDEF _WINDOWS}
 procedure TFitServer.SetSpecialCurveParameters(
     ACurveExpr: string; CP: Curve_parameters);
 var i: LongInt;
@@ -2542,7 +2548,7 @@ begin
     Result := TimeStr;
 end;
 
-{$IFNDEF FPC OR IFDEF WINDOWS}
+{$IFDEF _WINDOWS}
 procedure TFitServer.CreateParameters(ACurveExpr: string);
 var Result: LongInt;
     ExprResult: Double;

@@ -11,16 +11,22 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit user_points_set;
 
+{$IF NOT DEFINED(FPC)}
+{$DEFINE _WINDOWS}
+{$ELSEIF DEFINED(WINDOWS)}
+{$DEFINE _WINDOWS}
+{$ENDIF}
+
 interface
 
 uses SysUtils, curve_points_set, named_points_set,
     curve_types_singleton, int_points_set, configurable_points_set
-{$IFNDEF FPC OR IFDEF WINDOWS}
+{$IFDEF _WINDOWS}
     , Windows, points_set
 {$ENDIF}
     ;
 
-{$IFNDEF FPC OR IFDEF WINDOWS}
+{$IFDEF _WINDOWS}
 function ParseAndCalcExpression(Expr: LPCSTR; ParamList: LPCSTR;
     Result: PDouble): LongInt; cdecl;
     external 'MathExpr' name 'ParseAndCalcExpression';
@@ -36,7 +42,7 @@ type
     protected
         { Expression given in general text form. }
         FExpression: string;
-{$IFNDEF FPC OR IFDEF WINDOWS}
+{$IFDEF _WINDOWS}
         { Performs recalculation of all points of function. }
         procedure DoCalc(const Intervals: TPointsSet); override;
         { Performs calculation of function value for given value of argument. }
@@ -78,7 +84,7 @@ begin
     Result := StringToGUID('{d8cafce5-8b03-4cce-9e93-ea28acb8e7ca}');
 end;
 
-{$IFNDEF FPC OR IFDEF WINDOWS}
+{$IFDEF _WINDOWS}
 function TUserPointsSet.CalcValue(ArgValue: Double): Double;
 var P: TSpecialCurveParameter;
     Prs: string;

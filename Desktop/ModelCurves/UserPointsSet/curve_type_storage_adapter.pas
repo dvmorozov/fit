@@ -11,6 +11,12 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit curve_type_storage_adapter;
 
+{$IF NOT DEFINED(FPC)}
+{$DEFINE _WINDOWS}
+{$ELSEIF DEFINED(WINDOWS)}
+{$DEFINE _WINDOWS}
+{$ENDIF}
+
 interface
 
 uses SysUtils, app_settings, CBRCComponent, int_curve_type_storage;

@@ -1,7 +1,12 @@
 unit configurable_points_set;
 
-interface
+{$IF NOT DEFINED(FPC)}
+{$DEFINE _WINDOWS}
+{$ELSEIF DEFINED(WINDOWS)}
+{$DEFINE _WINDOWS}
+{$ENDIF}
 
+interface
 
 type
   TConfigurablePointsSetClass = class of TConfigurablePointsSet;

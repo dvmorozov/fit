@@ -1,6 +1,10 @@
 unit configurable_user_points_set;
 
-{$mode delphi}
+{$IF NOT DEFINED(FPC)}
+{$DEFINE _WINDOWS}
+{$ELSEIF DEFINED(WINDOWS)}
+{$DEFINE _WINDOWS}
+{$ENDIF}
 
 interface
 
@@ -30,7 +34,7 @@ implementation
 
 uses
 {$IF NOT DEFINED(SERVER) AND NOT DEFINED(CLIENT_PROXY)}
-{$IFNDEF FPC OR IFDEF WINDOWS}
+{$IFDEF _WINDOWS}
     user_points_set_prop_dialog, expression_parser_adapter, curve_type_storage_adapter,
     curve_type_parameters_factory, create_user_points_set_dlg_adapter, app_settings,
 {$ENDIF}
@@ -44,7 +48,7 @@ end;
 
 {$IF NOT DEFINED(SERVER) AND NOT DEFINED(CLIENT_PROXY)}
 class function TConfigurableUserPointsSet.ShowConfigurationDialog: Boolean;
-{$IFNDEF FPC OR IFDEF WINDOWS}
+{$IFDEF _WINDOWS}
 var ct: Curve_type;
     ep: TExpressionParserAdapter;
     da: TCreateUserPointsSetDlgAdapter;
@@ -54,7 +58,7 @@ var ct: Curve_type;
 label dlg1, dlg2;
 {$ENDIF}
 begin
-{$IFNDEF FPC OR IFDEF WINDOWS}
+{$IFDEF _WINDOWS}
     ep := TExpressionParserAdapter.Create;
     da := TCreateUserPointsSetDlgAdapter.Create;
     cf := TCurveTypeParametersFactory.Create;

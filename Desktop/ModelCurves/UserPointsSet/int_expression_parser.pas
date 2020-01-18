@@ -11,16 +11,22 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit int_expression_parser;
 
+{$IF NOT DEFINED(FPC)}
+{$DEFINE _WINDOWS}
+{$ELSEIF DEFINED(WINDOWS)}
+{$DEFINE _WINDOWS}
+{$ENDIF}
+
 interface
 
-{$IFNDEF FPC OR IFDEF WINDOWS}
+{$IFDEF _WINDOWS}
 uses curve_points_set;
 {$ENDIF}
 
 type
     { Interface defining basic operation for parsing curve expression. }
     IExpressionParser = interface
-{$IFNDEF FPC OR IFDEF WINDOWS}
+{$IFDEF _WINDOWS}
         function ParseExpression(Expression: string): Curve_parameters;
 {$ENDIF}
     end;

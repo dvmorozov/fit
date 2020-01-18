@@ -11,10 +11,16 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit expression_parser_adapter;
 
+{$IF NOT DEFINED(FPC)}
+{$DEFINE _WINDOWS}
+{$ELSEIF DEFINED(WINDOWS)}
+{$DEFINE _WINDOWS}
+{$ENDIF}
+
 interface
 
 uses SysUtils, int_expression_parser,
-{$IFNDEF FPC OR IFDEF WINDOWS}
+{$IFDEF _WINDOWS}
     curve_points_set,
 {$ENDIF}
     CBRCComponent;
@@ -30,7 +36,7 @@ type
 
     public
         class function Create: TExpressionParserAdapter;
-{$IFNDEF FPC OR IFDEF WINDOWS}
+{$IFDEF _WINDOWS}
         function ParseExpression(Expression: string): Curve_parameters;
 {$ENDIF}
     end;
@@ -39,7 +45,7 @@ type
 implementation
 
 uses app,
-{$IFNDEF FPC OR IFDEF WINDOWS}
+{$IFDEF _WINDOWS}
     MyExceptions,
 {$ENDIF}
     Dialogs;
@@ -56,7 +62,7 @@ begin
     Result := FExpressionParserAdapter;
 end;
 
-{$IFNDEF FPC OR IFDEF WINDOWS}
+{$IFDEF _WINDOWS}
 function TExpressionParserAdapter.ParseExpression(
     Expression: string): Curve_parameters;
 begin

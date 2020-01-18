@@ -11,11 +11,17 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit input_wavelength_dialog;
 
+{$IF NOT DEFINED(FPC)}
+{$DEFINE _WINDOWS}
+{$ELSEIF DEFINED(WINDOWS)}
+{$DEFINE _WINDOWS}
+{$ENDIF}
+
 interface
 
 uses SysUtils, Forms, Controls, StdCtrls,
     ExtCtrls, LResources
-{$IFDEF FPC AND IFNDEF WINDOWS}
+{$IFNDEF _WINDOWS}
     , Dialogs
 {$ENDIF}
     ;
@@ -57,7 +63,7 @@ begin
             Value := StringToValue(WavelengthValueEdit.Text);
             if Value = 0 then raise Exception.Create(' ');
         except
-{$IFNDEF FPC OR IFDEF WINDOWS}
+{$IFDEF _WINDOWS}
             ShowBalloon(WavelengthValueEdit.Handle, WideString(Msg),
                 ''          //vmesto Error - tak luchshe smotritsya
                 );

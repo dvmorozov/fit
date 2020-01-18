@@ -11,6 +11,12 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit curve_points_set;
 
+{$IF NOT DEFINED(FPC)}
+{$DEFINE _WINDOWS}
+{$ELSEIF DEFINED(WINDOWS)}
+{$DEFINE _WINDOWS}
+{$ENDIF}
+
 interface
 
 uses Classes, SysUtils, SimpMath, self_copied_component, points_set, title_points_set,

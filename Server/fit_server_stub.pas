@@ -12,12 +12,18 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 
 unit fit_server_stub;
 
+{$IF NOT DEFINED(FPC)}
+{$DEFINE _WINDOWS}
+{$ELSEIF DEFINED(WINDOWS)}
+{$DEFINE _WINDOWS}
+{$ENDIF}
+
 interface
 
 uses SysUtils, fit_server, common_types, self_copied_component, mscr_specimen_list,
     MyExceptions, int_points_set, points_set, title_points_set,
     named_points_set
-{$IFNDEF FPC OR IFDEF WINDOWS}
+{$IFDEF _WINDOWS}
     , curve_points_set
 {$ENDIF}
     ;
@@ -83,7 +89,7 @@ type
             ACurvePositions: TPointsSet; var ErrMsg: string): LongInt;
         function SetRFactorIntervals(
             ARFactorIntervals: TPointsSet; var ErrMsg: string): LongInt;
-{$IFNDEF FPC OR IFDEF WINDOWS}
+{$IFDEF _WINDOWS}
         function SetSpecialCurveParameters(
             ACurveExpr: string;
             { Equality to Nil means initialization. }
@@ -121,7 +127,7 @@ type
             var ErrMsg: string): LongInt;
         function GetRFactorIntervals(var Points: TPointsSet;
             var ErrMsg: string): LongInt;
-{$IFNDEF FPC OR IFDEF WINDOWS}
+{$IFDEF _WINDOWS}
         function GetSpecialCurveParameters(var CP: Curve_parameters; var
             ErrMsg: string): LongInt;
 {$ENDIF}
@@ -927,7 +933,7 @@ begin
     end;
 end;
 
-{$IFNDEF FPC OR IFDEF WINDOWS}
+{$IFDEF _WINDOWS}
 function TFitServerStub.SetSpecialCurveParameters(
     ACurveExpr: string;
     CP: Curve_parameters;   //  ravenstvo nil oznachaet
@@ -1311,7 +1317,7 @@ begin
     end;
 end;
 
-{$IFNDEF FPC OR IFDEF WINDOWS}
+{$IFDEF _WINDOWS}
 function TFitServerStub.GetSpecialCurveParameters(
     var CP: Curve_parameters; var ErrMsg: string): LongInt;
 begin

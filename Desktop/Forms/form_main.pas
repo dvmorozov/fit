@@ -11,6 +11,12 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit form_main;
 
+{$IF NOT DEFINED(FPC)}
+{$DEFINE _WINDOWS}
+{$ELSEIF DEFINED(WINDOWS)}
+{$DEFINE _WINDOWS}
+{$ENDIF}
+
 interface
 
 uses
@@ -22,7 +28,7 @@ uses
     int_points_set, curve_points_set, user_points_set, gauss_points_set,
     pseudo_voigt_points_set, asym_pseudo_voigt_points_set, lorentz_points_set,
     two_branches_pseudo_voigt_points_set, named_points_set, curve_types_singleton
-{$IFNDEF FPC OR IFDEF WINDOWS}
+{$IFDEF _WINDOWS}
     , MyExceptions, Windows
 {$ENDIF}
     ;
@@ -1226,7 +1232,7 @@ begin
                 end;
             end;
     except
-{$IFNDEF FPC OR IFDEF WINDOWS}
+{$IFDEF _WINDOWS}
         on E: EUserException do
         //  !!! takie isklyucheniya ne popadut v log !!!
         begin
@@ -1662,19 +1668,19 @@ end;
 
 procedure TFormMain.TabSheetDatasheetShow(Sender: TObject);
 begin
-{$ifdef windows}
+{$IFDEF _WINDOWS}
     LockWindowUpdate(Handle);       //  zdorovo pomogaet umen'sheniyu
                                     //  mertsaniya pod Windows
-{$endif}
+{$ENDIF}
     with GridDatasheet do
     begin
         Top := 8; Left := 4;
         Height := PanelDatasheet.ClientHeight - 16;
         Width := PanelDatasheet.ClientWidth - 12;
     end;
-{$ifdef windows}
+{$IFDEF _WINDOWS}
     LockWindowUpdate(0);
-{$endif}
+{$ENDIF}
 end;
 
 procedure TFormMain.TabSheetIntervalsShow(Sender: TObject);
@@ -2484,14 +2490,14 @@ begin
 end;
 
 procedure TFormMain.OnSpecialCurveClick(Sender: TObject);
-{$IFNDEF FPC OR IFDEF WINDOWS}
+{$IFDEF _WINDOWS}
 var i: LongInt;
     ct: Curve_type;
     mi: TMenuItem;
     Tag: LongInt;
 {$ENDIF}
 begin
-{$IFNDEF FPC OR IFDEF WINDOWS}
+{$IFDEF _WINDOWS}
     mi := TMenuItem(Sender);
     Tag := mi.Tag;
     //  poisk pol'zovatel'skogo tipa krivoy
@@ -2691,7 +2697,7 @@ begin
     if E is BalloonException then
         with E as BalloonException do
             ShowBalloon(Handle, Message,
-                ''          //vmesto Error - tak luchshe smotritsya
+                ''
                 )
     else
 {$endif}

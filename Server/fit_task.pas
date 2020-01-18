@@ -11,6 +11,12 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit fit_task;
 
+{$IF NOT DEFINED(FPC)}
+{$DEFINE _WINDOWS}
+{$ELSEIF DEFINED(WINDOWS)}
+{$DEFINE _WINDOWS}
+{$ENDIF}
+
 interface
 
 uses Classes, SysUtils, points_set, curve_points_set, self_copied_component,
@@ -1313,7 +1319,7 @@ begin
     else
     if IsEqualGUID(FCurveTypeId, TUserPointsSet.GetCurveTypeId_) then
     begin
-{$IFNDEF FPC OR IFDEF WINDOWS}
+{$IFDEF _WINDOWS}
         Result := TUserPointsSet.Create(nil);
         TUserPointsSet(Result).Expression := FCurveExpr;
         TUserPointsSet(Result).SetParameters(

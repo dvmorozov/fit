@@ -11,6 +11,12 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit fit_client;
 
+{$IF NOT DEFINED(FPC)}
+{$DEFINE _WINDOWS}
+{$ELSEIF DEFINED(WINDOWS)}
+{$DEFINE _WINDOWS}
+{$ENDIF}
+
 interface
 
 uses Classes, title_points_set, self_copied_component,
@@ -20,7 +26,7 @@ uses Classes, title_points_set, self_copied_component,
 {$IFDEF FIT}
     , fit_server
 {$ENDIF}
-{$IFNDEF FPC OR IFDEF WINDOWS}
+{$IFDEF _WINDOWS}
     , curve_points_set
 {$ENDIF}
     ;
@@ -224,7 +230,7 @@ type
         function GetSelectedPoints: TNeutronPointsSet;
         function GetRFactorIntervals: TNeutronPointsSet;
         function GetCurvePositions: TNeutronPointsSet;
-{$IFNDEF FPC OR IFDEF WINDOWS}
+{$IFDEF _WINDOWS}
         function GetSpecialCurveParameters: Curve_parameters;
         procedure SetSpecialCurveParameters(
             ACurveExpr: string;
@@ -427,7 +433,7 @@ begin
     Result := CurvePositions;
 end;
 
-{$IFNDEF FPC OR IFDEF WINDOWS}
+{$IFDEF _WINDOWS}
 function TFitClient.GetSpecialCurveParameters: Curve_parameters;
 begin
     Result := FitProxy.GetSpecialCurveParameters;
@@ -1318,7 +1324,7 @@ begin
     FitProxy.SetCurveType(ACurveType);
 end;
 
-{$IFNDEF FPC OR IFDEF WINDOWS}
+{$IFDEF _WINDOWS}
 procedure TFitClient.SetSpecialCurveParameters(
     ACurveExpr: string;
     CP: Curve_parameters    //  ravenstvo nil oznachaet

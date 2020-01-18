@@ -11,11 +11,17 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit input_back_factor_dialog;
 
+{$IF NOT DEFINED(FPC)}
+{$DEFINE _WINDOWS}
+{$ELSEIF DEFINED(WINDOWS)}
+{$DEFINE _WINDOWS}
+{$ENDIF}
+
 interface
 
 uses SysUtils, Forms, Controls, StdCtrls,
     ExtCtrls, LResources
-{$IFDEF FPC AND IFNDEF WINDOWS}
+{$IFNDEF _WINDOWS}
     , Dialogs
 {$ENDIF}
     ;
@@ -56,7 +62,7 @@ begin
             Value := StringToValue(ValueEdit.Text);
             if Value <= 1 then raise Exception.Create(' ');
         except
-{$IFNDEF FPC OR IFDEF WINDOWS}
+{$IFDEF _WINDOWS}
             ShowBalloon(ValueEdit.Handle, WideString(Msg),
                 ''          //vmesto Error - tak luchshe smotritsya
                 );

@@ -2692,17 +2692,7 @@ end;
 
 procedure TFormMain.OnException(Sender: TObject; E: Exception);
 begin
-(* !!! ShowBalloon nel'zya ispol'zovat' zdes' !!!
-{$ifdef windows}
-    if E is BalloonException then
-        with E as BalloonException do
-            ShowBalloon(Handle, Message,
-                ''
-                )
-    else
-{$endif}
-*)
-        MessageDlg(E.Message, mtError, [mbOk], 0);
+    MessageDlg(E.Message, mtError, [mbOk], 0);
 
     WriteLog(E.Message, Fatal);
 end;

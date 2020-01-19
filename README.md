@@ -4,7 +4,7 @@ The curve fitting application. It allows to model data by set of curves of selec
 
 Fully automatical mode is available.
 
-The application is written in Free Pascal with Lazarus and is working under Windows and Linux (potentially could be compiled for Mac, but this was not done yet).
+The application is written in Free Pascal with Lazarus (Delphi is not supported) and is working under Windows and Linux (potentially could be compiled for Mac, but this was not done yet).
 
 ## Look how fully automated fitting works
 

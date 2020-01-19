@@ -67,11 +67,15 @@
       <Version Value="2"/>
     </PublishOptions>
     <RunParams>
+      <local>
+        <CommandLineParams Value="\INFILE=&quot;\media\dmitry\WORK\04 - github\fit\Data\2.dat&quot;"/>
+        <LaunchingApplication PathPlusParams="\usr\X11R6\bin\xterm -T 'Lazarus Run Output' -e $(LazarusDir)\tools\runwait.sh $(TargetCmdLine)"/>
+      </local>
       <FormatVersion Value="2"/>
       <Modes Count="1">
         <Mode0 Name="default">
           <local>
-            <CommandLineParams Value="\INFILE='\media\dmitry\WORK\04 - github\fit\Data\2.dat'"/>
+            <CommandLineParams Value="\INFILE=&quot;\media\dmitry\WORK\04 - github\fit\Data\2.dat&quot;"/>
             <LaunchingApplication PathPlusParams="\usr\X11R6\bin\xterm -T 'Lazarus Run Output' -e $(LazarusDir)\tools\runwait.sh $(TargetCmdLine)"/>
           </local>
         </Mode0>
@@ -109,10 +113,10 @@
       <Unit0>
         <Filename Value="Fit.lpr"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="7"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="47"/>
-        <CursorPos Y="68"/>
+        <TopLine Value="48"/>
+        <CursorPos Y="69"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -541,7 +545,7 @@
       <Unit46>
         <Filename Value="DataLoaders\extension_data_loader_injector.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="7"/>
+        <EditorIndex Value="8"/>
         <WindowIndex Value="1"/>
         <TopLine Value="31"/>
         <CursorPos X="8" Y="39"/>
@@ -571,7 +575,7 @@
       <Unit49>
         <Filename Value="ModelCurves\points_set.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="8"/>
+        <EditorIndex Value="9"/>
         <WindowIndex Value="1"/>
         <TopLine Value="2"/>
         <CursorPos X="8" Y="12"/>
@@ -741,7 +745,7 @@
       <Unit67>
         <Filename Value="ModelCurves\UserPointsSet\user_points_set.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="10"/>
+        <EditorIndex Value="11"/>
         <WindowIndex Value="1"/>
         <TopLine Value="9"/>
         <CursorPos X="31" Y="24"/>
@@ -878,7 +882,7 @@
       <Unit81>
         <Filename Value="..\Server\client_interfaces\int_fit_service.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="9"/>
+        <EditorIndex Value="10"/>
         <WindowIndex Value="1"/>
         <TopLine Value="6"/>
         <CursorPos X="14" Y="18"/>
@@ -890,7 +894,8 @@
         <Filename Value="..\Server\fit_server.pas"/>
         <IsPartOfProject Value="True"/>
         <WindowIndex Value="1"/>
-        <CursorPos X="5" Y="5"/>
+        <TopLine Value="1643"/>
+        <CursorPos Y="1664"/>
         <UsageCount Value="141"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -1132,7 +1137,7 @@
       </Unit107>
       <Unit108>
         <Filename Value="main_calc_thread.pas"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="2"/>
         <WindowIndex Value="1"/>
         <TopLine Value="54"/>
         <CursorPos Y="67"/>
@@ -1176,7 +1181,7 @@
       </Unit112>
       <Unit113>
         <Filename Value="..\Server\fit_server_multithreaded.pas"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="3"/>
         <WindowIndex Value="1"/>
         <TopLine Value="63"/>
         <CursorPos Y="84"/>
@@ -1204,7 +1209,7 @@
       <Unit116>
         <Filename Value="..\Server\fit_task.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="6"/>
         <WindowIndex Value="1"/>
         <CursorPos X="16" Y="15"/>
         <UsageCount Value="115"/>
@@ -1293,7 +1298,7 @@
       </Unit125>
       <Unit126>
         <Filename Value="..\Server\fit_server_stub.pas"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="4"/>
         <WindowIndex Value="1"/>
         <TopLine Value="1295"/>
         <CursorPos X="18" Y="1320"/>
@@ -1319,11 +1324,10 @@
       </Unit128>
       <Unit129>
         <Filename Value="Forms\backup\form_main.pas"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="5"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="2475"/>
-        <CursorPos X="18" Y="2500"/>
+        <TopLine Value="2476"/>
+        <CursorPos X="7" Y="2479"/>
         <UsageCount Value="27"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -1516,11 +1520,13 @@
       <Unit152>
         <Filename Value="..\..\fitminimizers\package\DownhillSimplexContainer.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="-1"/>
-        <WindowIndex Value="-1"/>
-        <TopLine Value="-1"/>
-        <CursorPos X="-1" Y="-1"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="363"/>
+        <CursorPos Y="376"/>
         <UsageCount Value="20"/>
+        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit152>
       <Unit153>
@@ -1597,7 +1603,7 @@
       <Define2 Value="FITSERVER"/>
       <Define3 Value="Lazarus"/>
     </OtherDefines>
-    <JumpHistory Count="9" HistoryIndex="8">
+    <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="..\Server\fit_server_multithreaded.pas"/>
         <Caret Line="84" TopLine="63"/>
@@ -1634,6 +1640,90 @@
         <Filename Value="..\Server\fit_server_stub.pas"/>
         <Caret Line="1320" Column="18" TopLine="1295"/>
       </Position9>
+      <Position10>
+        <Filename Value="Forms\backup\form_main.pas"/>
+        <Caret Line="2479" Column="7" TopLine="2476"/>
+      </Position10>
+      <Position11>
+        <Filename Value="Fit.lpr"/>
+        <Caret Line="68" TopLine="47"/>
+      </Position11>
+      <Position12>
+        <Filename Value="Fit.lpr"/>
+        <Caret Line="69" TopLine="48"/>
+      </Position12>
+      <Position13>
+        <Filename Value="..\Server\fit_server_multithreaded.pas"/>
+        <Caret Line="84" TopLine="63"/>
+      </Position13>
+      <Position14>
+        <Filename Value="..\Server\fit_server.pas"/>
+        <Caret Line="1652" TopLine="1639"/>
+      </Position14>
+      <Position15>
+        <Filename Value="..\Server\fit_server.pas"/>
+        <Caret Line="1664" TopLine="1643"/>
+      </Position15>
+      <Position16>
+        <Filename Value="..\..\fitminimizers\package\DownhillSimplexContainer.pas"/>
+        <Caret Line="348" TopLine="335"/>
+      </Position16>
+      <Position17>
+        <Filename Value="..\..\fitminimizers\package\DownhillSimplexContainer.pas"/>
+        <Caret Line="282" TopLine="269"/>
+      </Position17>
+      <Position18>
+        <Filename Value="..\..\fitminimizers\package\DownhillSimplexContainer.pas"/>
+        <Caret Line="291" TopLine="270"/>
+      </Position18>
+      <Position19>
+        <Filename Value="..\..\fitminimizers\package\DownhillSimplexContainer.pas"/>
+        <Caret Line="376" TopLine="363"/>
+      </Position19>
+      <Position20>
+        <Filename Value="..\..\fitminimizers\package\DownhillSimplexContainer.pas"/>
+        <Caret Line="348" TopLine="335"/>
+      </Position20>
+      <Position21>
+        <Filename Value="..\..\fitminimizers\package\DownhillSimplexContainer.pas"/>
+        <Caret Line="282" TopLine="269"/>
+      </Position21>
+      <Position22>
+        <Filename Value="..\..\fitminimizers\package\DownhillSimplexContainer.pas"/>
+        <Caret Line="291" TopLine="270"/>
+      </Position22>
+      <Position23>
+        <Filename Value="..\..\fitminimizers\package\DownhillSimplexContainer.pas"/>
+        <Caret Line="376" TopLine="363"/>
+      </Position23>
+      <Position24>
+        <Filename Value="..\..\fitminimizers\package\DownhillSimplexContainer.pas"/>
+        <Caret Line="348" TopLine="335"/>
+      </Position24>
+      <Position25>
+        <Filename Value="..\..\fitminimizers\package\DownhillSimplexContainer.pas"/>
+        <Caret Line="282" TopLine="269"/>
+      </Position25>
+      <Position26>
+        <Filename Value="..\..\fitminimizers\package\DownhillSimplexContainer.pas"/>
+        <Caret Line="291" TopLine="270"/>
+      </Position26>
+      <Position27>
+        <Filename Value="..\..\fitminimizers\package\DownhillSimplexContainer.pas"/>
+        <Caret Line="376" TopLine="363"/>
+      </Position27>
+      <Position28>
+        <Filename Value="..\..\fitminimizers\package\DownhillSimplexContainer.pas"/>
+        <Caret Line="348" TopLine="335"/>
+      </Position28>
+      <Position29>
+        <Filename Value="..\..\fitminimizers\package\DownhillSimplexContainer.pas"/>
+        <Caret Line="282" TopLine="269"/>
+      </Position29>
+      <Position30>
+        <Filename Value="..\..\fitminimizers\package\DownhillSimplexContainer.pas"/>
+        <Caret Line="291" TopLine="270"/>
+      </Position30>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
@@ -1673,71 +1763,6 @@
     </Other>
   </CompilerOptions>
   <Debugging>
-    <BreakPoints Count="9">
-      <Item1>
-        <Kind Value="bpkSource"/>
-        <WatchScope Value="wpsLocal"/>
-        <WatchKind Value="wpkWrite"/>
-        <Source Value="VBOXSVR\04_-_github\fitminimizers\package\DownhillSimplexContainer.pas"/>
-        <Line Value="291"/>
-      </Item1>
-      <Item2>
-        <Kind Value="bpkSource"/>
-        <WatchScope Value="wpsLocal"/>
-        <WatchKind Value="wpkWrite"/>
-        <Source Value="VBOXSVR\04_-_github\fitminimizers\package\DownhillSimplexContainer.pas"/>
-        <Line Value="282"/>
-      </Item2>
-      <Item3>
-        <Kind Value="bpkSource"/>
-        <WatchScope Value="wpsLocal"/>
-        <WatchKind Value="wpkWrite"/>
-        <Source Value="VBOXSVR\04_-_github\fitminimizers\package\DownhillSimplexContainer.pas"/>
-        <Line Value="376"/>
-      </Item3>
-      <Item4>
-        <Kind Value="bpkSource"/>
-        <WatchScope Value="wpsLocal"/>
-        <WatchKind Value="wpkWrite"/>
-        <Source Value="..\Server\fit_server_multithreaded.pas"/>
-        <Line Value="84"/>
-      </Item4>
-      <Item5>
-        <Kind Value="bpkSource"/>
-        <WatchScope Value="wpsLocal"/>
-        <WatchKind Value="wpkWrite"/>
-        <Source Value="..\Server\fit_server.pas"/>
-        <Line Value="1652"/>
-      </Item5>
-      <Item6>
-        <Kind Value="bpkSource"/>
-        <WatchScope Value="wpsLocal"/>
-        <WatchKind Value="wpkWrite"/>
-        <Source Value="..\Server\fit_server.pas"/>
-        <Line Value="1664"/>
-      </Item6>
-      <Item7>
-        <Kind Value="bpkSource"/>
-        <WatchScope Value="wpsLocal"/>
-        <WatchKind Value="wpkWrite"/>
-        <Source Value="..\Server\fit_server.pas"/>
-        <Line Value="1669"/>
-      </Item7>
-      <Item8>
-        <Kind Value="bpkSource"/>
-        <WatchScope Value="wpsLocal"/>
-        <WatchKind Value="wpkWrite"/>
-        <Source Value="VBOXSVR\04_-_github\fitminimizers\package\DownhillSimplexContainer.pas"/>
-        <Line Value="348"/>
-      </Item8>
-      <Item9>
-        <Kind Value="bpkSource"/>
-        <WatchScope Value="wpsLocal"/>
-        <WatchKind Value="wpkWrite"/>
-        <Source Value="Fit.lpr"/>
-        <Line Value="68"/>
-      </Item9>
-    </BreakPoints>
     <Watches Count="1">
       <Item1>
         <Expression Value="DataPoints"/>

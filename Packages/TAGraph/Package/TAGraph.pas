@@ -3053,7 +3053,7 @@ end;
 
 procedure Register;
 begin
-  RegisterComponents('TeleAuto', [TTAChart]);
+  RegisterComponents('Fit', [TTAChart]);
 end;
 
 {$IFDEF fpc}

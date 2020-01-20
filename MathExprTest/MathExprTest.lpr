@@ -10,7 +10,11 @@ uses
   Forms
   { you can add units after this }, Unit2;
 
+{$R *.res}
+
 begin
+  Application.Title:='MathExpr Test';
+
   Application.Initialize;
   Application.CreateForm(TCalcExpressionDlg, CalcExpressionDlg);
   Application.Run;

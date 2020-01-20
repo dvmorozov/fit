@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29609.76
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MathExpr", "MathExpr.vcxproj", "{526FF702-4D4C-4280-B8DB-AE28B4432F8D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{526FF702-4D4C-4280-B8DB-AE28B4432F8D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{526FF702-4D4C-4280-B8DB-AE28B4432F8D}.Debug|Win32.Build.0 = Debug|Win32
+		{526FF702-4D4C-4280-B8DB-AE28B4432F8D}.Debug|x64.ActiveCfg = Debug|x64
+		{526FF702-4D4C-4280-B8DB-AE28B4432F8D}.Debug|x64.Build.0 = Debug|x64
+		{526FF702-4D4C-4280-B8DB-AE28B4432F8D}.Release|Win32.ActiveCfg = Release|Win32
+		{526FF702-4D4C-4280-B8DB-AE28B4432F8D}.Release|Win32.Build.0 = Release|Win32
+		{526FF702-4D4C-4280-B8DB-AE28B4432F8D}.Release|x64.ActiveCfg = Release|x64
+		{526FF702-4D4C-4280-B8DB-AE28B4432F8D}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {699AA7DB-1728-4CEE-A6AE-7812EF9FA424}
+	EndGlobalSection
+EndGlobal

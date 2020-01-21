@@ -22,9 +22,9 @@ To open and modify diagram files use my favourite [UMLet](https://www.umlet.com/
 
 ![Fitting results](assets/images/2018-12-23_13h17_55.png)
 
-### Open data file by command line parameter
+### Command line parameters
 
-Fit.exe /INFILE=*file_name*
+/INFILE=*file_name* - opens data file on application start up 
 
 ## Web application
 

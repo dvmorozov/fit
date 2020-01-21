@@ -25,7 +25,8 @@ To open and modify diagram files use my favourite [UMLet](https://www.umlet.com/
 ### Executables
 
 There is no installer. The main executable is Fit.exe.
-On Windows MathExpr.dll should be put in the same directory as Fit.exe.
+
+On Windows MathExpr.dll should be put in the same directory as Fit.exe (this enables experimental feature of curves having shapes defined by arbitrary expression, but it is not supported under Linux for now).
 
 ### Command line parameters
 

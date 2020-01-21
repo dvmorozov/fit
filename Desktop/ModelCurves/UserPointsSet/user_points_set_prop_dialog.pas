@@ -5,9 +5,9 @@ without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
 
 @abstract(Contains definition of TUserPointsSetPropDlg.)
 
-@author(Dmitry Morozov dvmorozov@hotmail.com, 
-LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
-Facebook https://www.facebook.com/profile.php?id=100004082021870)
+@author(Dmitry Morozov dvmorozov@hotmail.com,
+LinkedIn: https://www.linkedin.com/in/dmitry-morozov-79490a59/
+Facebook: https://www.facebook.com/dmitry.v.morozov)
 }
 unit user_points_set_prop_dialog;
 

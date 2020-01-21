@@ -11,8 +11,8 @@ the server should be brought into initial which was just after start. Sometimes 
 accroding to its semantics EAssertionFailed can be catched inside it.)
 
 @author(Dmitry Morozov dvmorozov@hotmail.com,
-LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794,
-Facebook https://www.facebook.com/profile.php?id=100004082021870)
+LinkedIn: https://www.linkedin.com/in/dmitry-morozov-79490a59/
+Facebook: https://www.facebook.com/dmitry.v.morozov)
 }
 
 unit fit_server;

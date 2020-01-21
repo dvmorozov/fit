@@ -22,6 +22,11 @@ To open and modify diagram files use my favourite [UMLet](https://www.umlet.com/
 
 ![Fitting results](assets/images/2018-12-23_13h17_55.png)
 
+### Executables
+
+There is no installer. The main executable is Fit.exe.
+On Windows MathExpr.dll should be put in the same directory as Fit.exe.
+
 ### Command line parameters
 
 /INFILE=*file_name* - opens data file on application start up 

@@ -5,18 +5,26 @@ without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
 
 @abstract(Contains definition of TInputWavelengthDlg.)
 
-@author(Dmitry Morozov dvmorozov@hotmail.com, 
-LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
-Facebook https://www.facebook.com/profile.php?id=100004082021870)
+@author(Dmitry Morozov dvmorozov@hotmail.com,
+LinkedIn: https://www.linkedin.com/in/dmitry-morozov-79490a59/
+Facebook: https://www.facebook.com/dmitry.v.morozov)
 }
 unit input_wavelength_dialog;
 
-{$MODE Delphi}
+{$IF NOT DEFINED(FPC)}
+{$DEFINE _WINDOWS}
+{$ELSEIF DEFINED(WINDOWS)}
+{$DEFINE _WINDOWS}
+{$ENDIF}
 
 interface
 
 uses SysUtils, Forms, Controls, StdCtrls,
-  ExtCtrls, LResources;
+    ExtCtrls, LResources
+{$IFNDEF _WINDOWS}
+    , Dialogs
+{$ENDIF}
+    ;
 
 type
 
@@ -55,13 +63,13 @@ begin
             Value := StringToValue(WavelengthValueEdit.Text);
             if Value = 0 then raise Exception.Create(' ');
         except
-{$ifdef windows}
+{$IFDEF _WINDOWS}
             ShowBalloon(WavelengthValueEdit.Handle, WideString(Msg),
                 ''          //vmesto Error - tak luchshe smotritsya
                 );
-{$else}
+{$ELSE}
             MessageDlg(Msg, mtError, [mbOk], 0);
-{$endif}
+{$ENDIF}
             ActiveControl := WavelengthValueEdit;
             CanClose := False;
         end;

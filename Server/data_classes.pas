@@ -11,12 +11,10 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit data_classes;
 
-{$MODE Delphi}
-
 interface
 
 uses
-    Classes, Grids, SysUtils, NumericGrid, Tools, table_components,
+    Classes, Grids, SysUtils, NumericGrid, table_components,
     curve_points_set;
 
 type

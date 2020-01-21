@@ -5,13 +5,17 @@ without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
 
 @abstract(Contains definition of TFormMain.)
 
-@author(Dmitry Morozov dvmorozov@hotmail.com, 
-LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
-Facebook https://www.facebook.com/profile.php?id=100004082021870)
+@author(Dmitry Morozov dvmorozov@hotmail.com,
+LinkedIn: https://www.linkedin.com/in/dmitry-morozov-79490a59/
+Facebook: https://www.facebook.com/dmitry.v.morozov)
 }
 unit form_main;
 
-{$MODE Delphi}
+{$IF NOT DEFINED(FPC)}
+{$DEFINE _WINDOWS}
+{$ELSEIF DEFINED(WINDOWS)}
+{$DEFINE _WINDOWS}
+{$ENDIF}
 
 interface
 
@@ -19,14 +23,15 @@ uses
     LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
     ExtCtrls, StdCtrls, Menus, points_set, fit_viewer, ComCtrls,
     fit_client, NumericGrid, CheckLst, mscr_specimen_list,
-    LResources, tagraph, ActnList, app_settings, Laz_XMLCfg,
-    MyExceptions, common_types, neutron_points_set,
+    LResources, TAGraph, ActnList, app_settings, Laz_XMLCfg,
+    common_types, neutron_points_set,
     int_points_set, curve_points_set, user_points_set, gauss_points_set,
     pseudo_voigt_points_set, asym_pseudo_voigt_points_set, lorentz_points_set,
-    two_branches_pseudo_voigt_points_set, named_points_set, curve_types_singleton,
-{$IFDEF WINDOWS}
-    Windows;
+    two_branches_pseudo_voigt_points_set, named_points_set, curve_types_singleton
+{$IFDEF _WINDOWS}
+    , MyExceptions, Windows
 {$ENDIF}
+    ;
 
 type
 	{ States of results grid window. }
@@ -1227,7 +1232,7 @@ begin
                 end;
             end;
     except
-{$ifdef windows}
+{$IFDEF _WINDOWS}
         on E: EUserException do
         //  !!! takie isklyucheniya ne popadut v log !!!
         begin
@@ -1235,9 +1240,9 @@ begin
             SenderEditHint := TNumericGrid(Sender);
             HintMessage := E.Message;
         end;
-{$else}
+{$ELSE}
         raise;
-{$endif}
+{$ENDIF}
     end;
 end;
 
@@ -1663,19 +1668,19 @@ end;
 
 procedure TFormMain.TabSheetDatasheetShow(Sender: TObject);
 begin
-{$ifdef windows}
+{$IFDEF _WINDOWS}
     LockWindowUpdate(Handle);       //  zdorovo pomogaet umen'sheniyu
                                     //  mertsaniya pod Windows
-{$endif}
+{$ENDIF}
     with GridDatasheet do
     begin
         Top := 8; Left := 4;
         Height := PanelDatasheet.ClientHeight - 16;
         Width := PanelDatasheet.ClientWidth - 12;
     end;
-{$ifdef windows}
+{$IFDEF _WINDOWS}
     LockWindowUpdate(0);
-{$endif}
+{$ENDIF}
 end;
 
 procedure TFormMain.TabSheetIntervalsShow(Sender: TObject);
@@ -2485,12 +2490,14 @@ begin
 end;
 
 procedure TFormMain.OnSpecialCurveClick(Sender: TObject);
+{$IFDEF _WINDOWS}
 var i: LongInt;
     ct: Curve_type;
     mi: TMenuItem;
     Tag: LongInt;
+{$ENDIF}
 begin
-{$IFNDEF EXCLUDE_SOMETHING}
+{$IFDEF _WINDOWS}
     mi := TMenuItem(Sender);
     Tag := mi.Tag;
     //  poisk pol'zovatel'skogo tipa krivoy
@@ -2685,17 +2692,7 @@ end;
 
 procedure TFormMain.OnException(Sender: TObject; E: Exception);
 begin
-(* !!! ShowBalloon nel'zya ispol'zovat' zdes' !!!
-{$ifdef windows}
-    if E is BalloonException then
-        with E as BalloonException do
-            ShowBalloon(Handle, Message,
-                ''          //vmesto Error - tak luchshe smotritsya
-                )
-    else
-{$endif}
-*)
-        MessageDlg(E.Message, mtError, [mbOk], 0);
+    MessageDlg(E.Message, mtError, [mbOk], 0);
 
     WriteLog(E.Message, Fatal);
 end;

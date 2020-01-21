@@ -5,23 +5,30 @@ without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
 
 @abstract(Contains definitions of classes used in displaying results to user.)
 
-@author(Dmitry Morozov dvmorozov@hotmail.com, 
-LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
-Facebook https://www.facebook.com/profile.php?id=100004082021870)
+@author(Dmitry Morozov dvmorozov@hotmail.com,
+LinkedIn: https://www.linkedin.com/in/dmitry-morozov-79490a59/
+Facebook: https://www.facebook.com/dmitry.v.morozov)
 }
 unit fit_client;
 
-{$MODE Delphi}
+{$IF NOT DEFINED(FPC)}
+{$DEFINE _WINDOWS}
+{$ELSEIF DEFINED(WINDOWS)}
+{$DEFINE _WINDOWS}
+{$ENDIF}
 
 interface
 
 uses Classes, title_points_set, self_copied_component,
     SysUtils, mscr_specimen_list, CBRCComponent, neutron_points_set,
-    int_points_set, curve_points_set, int_client_callback,
-    int_fit_viewer, int_data_loader, int_data_loader_injector, int_fit_service
-    {$IFDEF FIT}
+    int_points_set, int_client_callback, int_fit_viewer, int_data_loader,
+    int_data_loader_injector, int_fit_service
+{$IFDEF FIT}
     , fit_server
-    {$ENDIF}
+{$ENDIF}
+{$IFDEF _WINDOWS}
+    , curve_points_set
+{$ENDIF}
     ;
     
 type
@@ -223,7 +230,7 @@ type
         function GetSelectedPoints: TNeutronPointsSet;
         function GetRFactorIntervals: TNeutronPointsSet;
         function GetCurvePositions: TNeutronPointsSet;
-{$IFNDEF EXCLUDE_SOMETHING}
+{$IFDEF _WINDOWS}
         function GetSpecialCurveParameters: Curve_parameters;
         procedure SetSpecialCurveParameters(
             ACurveExpr: string;
@@ -426,7 +433,7 @@ begin
     Result := CurvePositions;
 end;
 
-{$IFNDEF EXCLUDE_SOMETHING}
+{$IFDEF _WINDOWS}
 function TFitClient.GetSpecialCurveParameters: Curve_parameters;
 begin
     Result := FitProxy.GetSpecialCurveParameters;
@@ -1317,7 +1324,7 @@ begin
     FitProxy.SetCurveType(ACurveType);
 end;
 
-{$IFNDEF EXCLUDE_SOMETHING}
+{$IFDEF _WINDOWS}
 procedure TFitClient.SetSpecialCurveParameters(
     ACurveExpr: string;
     CP: Curve_parameters    //  ravenstvo nil oznachaet

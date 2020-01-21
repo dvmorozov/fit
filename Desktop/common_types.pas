@@ -5,16 +5,19 @@ without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
 
 @abstract(Contains definitions of enumerable constants.)
 
-@author(Dmitry Morozov dvmorozov@hotmail.com, 
-LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
-Facebook https://www.facebook.com/profile.php?id=100004082021870)
+@author(Dmitry Morozov dvmorozov@hotmail.com,
+LinkedIn: https://www.linkedin.com/in/dmitry-morozov-79490a59/
+Facebook: https://www.facebook.com/dmitry.v.morozov)
 }
 unit common_types;
 
-{$mode objfpc}{$H+}
+{$IF NOT DEFINED(FPC)}
+{$DEFINE _WINDOWS}
+{$ELSEIF DEFINED(WINDOWS)}
+{$DEFINE _WINDOWS}
+{$ENDIF}
 
 interface
-
 
 type
     { Server states. Sequence of states is designated by numbers. }

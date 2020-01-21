@@ -5,19 +5,23 @@ without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
 
 @abstract(Contains definition of visual component which can display data in grid.)
 
-@author(Dmitry Morozov dvmorozov@hotmail.com, 
-LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
-Facebook https://www.facebook.com/profile.php?id=100004082021870)
+@author(Dmitry Morozov dvmorozov@hotmail.com,
+LinkedIn: https://www.linkedin.com/in/dmitry-morozov-79490a59/
+Facebook: https://www.facebook.com/dmitry.v.morozov)
 }
 unit table_components;
 
-{$MODE Delphi}
+{$IF NOT DEFINED(FPC)}
+{$DEFINE _WINDOWS}
+{$ELSEIF DEFINED(WINDOWS)}
+{$DEFINE _WINDOWS}
+{$ENDIF}
 
 interface
 
 uses
-    Classes, Grids, Controls, Graphics, Tools, SysUtils, NumericGrid,
-    self_copied_component;
+    Classes, Grids, Controls, Graphics, SysUtils, NumericGrid,
+    self_copied_component, vectors;
 
 type
     ETableCompList = class(Exception);

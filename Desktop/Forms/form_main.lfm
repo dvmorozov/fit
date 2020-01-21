@@ -1,16 +1,15 @@
 object FormMain: TFormMain
   Left = 311
-  Height = 762
+  Height = 610
   Top = 92
-  Width = 1278
+  Width = 1022
   HorzScrollBar.Page = 1191
   VertScrollBar.Page = 502
   ActiveControl = PanelTop
   Caption = 'FormMain'
-  ClientHeight = 737
-  ClientWidth = 1278
-  DesignTimePPI = 120
-  Font.Height = -11
+  ClientHeight = 610
+  ClientWidth = 1022
+  Font.Height = -9
   Font.Name = 'MS Sans Serif'
   Menu = MainMenu1
   OnCloseQuery = FormCloseQuery
@@ -18,61 +17,76 @@ object FormMain: TFormMain
   OnDestroy = FormDestroy
   Position = poDefault
   ShowHint = True
-  LCLVersion = '1.8.4.0'
+  LCLVersion = '2.0.6.0'
   object StatusBar: TStatusBar
     Left = 0
-    Height = 28
-    Top = 709
-    Width = 1278
+    Height = 21
+    Top = 589
+    Width = 1022
+    Font.Height = -9
+    Font.Name = 'MS Sans Serif'
     Panels = <    
       item
-        Width = 300
+        Width = 240
       end    
       item
-        Width = 500
+        Width = 400
       end    
       item
-        Width = 50
+        Width = 40
       end>
+    ParentFont = False
     SimplePanel = False
   end
   object PageControl1: TPageControl
     Left = 0
-    Height = 144
-    Top = 565
-    Width = 1278
+    Height = 115
+    Top = 474
+    Width = 1022
     ActivePage = TabSheetBackground
     Align = alBottom
+    Font.Height = -9
+    Font.Name = 'MS Sans Serif'
+    ParentFont = False
     TabIndex = 0
     TabOrder = 4
     object TabSheetBackground: TTabSheet
       Caption = 'Background Points'
-      ClientHeight = 115
-      ClientWidth = 1270
+      ClientHeight = 91
+      ClientWidth = 1018
+      Font.Height = -9
+      Font.Name = 'MS Sans Serif'
       OnResize = TabSheetBackgroundResize
       OnShow = TabSheetBackgroundShow
+      ParentFont = False
       object PanelBackground: TPanel
         Left = 0
-        Height = 115
+        Height = 91
         Top = 0
-        Width = 1270
+        Width = 1018
         Align = alClient
         BevelOuter = bvNone
-        ClientHeight = 115
-        ClientWidth = 1270
+        ClientHeight = 91
+        ClientWidth = 1018
+        Font.Height = -9
+        Font.Name = 'MS Sans Serif'
         ParentColor = False
+        ParentFont = False
         TabOrder = 0
         object GridBackground: TNumericGrid
-          Left = 30
-          Height = 115
+          Left = 24
+          Height = 91
           Top = 0
-          Width = 1240
+          Width = 994
           Align = alClient
           Color = clBtnFace
           ColCount = 2
           FixedCols = 0
+          Font.Height = -9
+          Font.Name = 'MS Sans Serif'
           GridLineWidth = 0
           Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goEditing, goTabs, goRowSelect, goDblClickAutoSize]
+          ParentFont = False
           RowCount = 2
           ScrollBars = ssBoth
           TabOrder = 1
@@ -88,22 +102,28 @@ object FormMain: TFormMain
           DisabledColor = clSilver
         end
         object EditBalloonGridBackground: TEdit
-          Left = 49
-          Height = 24
-          Top = 10
-          Width = 3
+          Left = 39
+          Height = 20
+          Top = 8
+          Width = 2
+          Font.Height = -9
+          Font.Name = 'MS Sans Serif'
+          ParentFont = False
           TabOrder = 0
         end
         object ToolBar1: TToolBar
           Left = 0
-          Height = 115
+          Height = 91
           Top = 0
-          Width = 30
+          Width = 24
           Align = alLeft
           AutoSize = True
           Caption = 'ToolBar1'
           Flat = False
+          Font.Height = -9
+          Font.Name = 'MS Sans Serif'
           Images = ImageList2
+          ParentFont = False
           TabOrder = 2
           object ToolButton1: TToolButton
             Left = 1
@@ -112,17 +132,17 @@ object FormMain: TFormMain
           end
           object ToolButton2: TToolButton
             Left = 1
-            Top = 30
+            Top = 24
             Action = ActionRmBackAuto
           end
           object ToolButton3: TToolButton
             Left = 1
-            Top = 58
+            Top = 46
             Action = ActionRmBackSelected
           end
           object ToolButton4: TToolButton
             Left = 1
-            Top = 86
+            Top = 68
             Action = ActionRemoveBack
           end
         end
@@ -130,9 +150,12 @@ object FormMain: TFormMain
     end
     object TabSheetIntervals: TTabSheet
       Caption = 'Specimen Application Intervals'
-      ClientHeight = 115
-      ClientWidth = 1270
+      ClientHeight = 91
+      ClientWidth = 1018
+      Font.Height = -9
+      Font.Name = 'MS Sans Serif'
       OnShow = TabSheetIntervalsShow
+      ParentFont = False
       object PanelIntervals: TPanel
         Left = 0
         Height = 115
@@ -142,7 +165,10 @@ object FormMain: TFormMain
         BevelOuter = bvNone
         ClientHeight = 115
         ClientWidth = 1270
+        Font.Height = -9
+        Font.Name = 'MS Sans Serif'
         ParentColor = False
+        ParentFont = False
         TabOrder = 0
         object GridIntervals: TNumericGrid
           Left = 30
@@ -154,8 +180,11 @@ object FormMain: TFormMain
           Color = clBtnFace
           ColCount = 2
           FixedCols = 0
+          Font.Height = -9
+          Font.Name = 'MS Sans Serif'
           GridLineWidth = 0
           Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goTabs, goRowSelect, goDblClickAutoSize]
+          ParentFont = False
           RowCount = 2
           ScrollBars = ssBoth
           TabOrder = 1
@@ -171,10 +200,13 @@ object FormMain: TFormMain
           DisabledColor = clSilver
         end
         object EditBalloonGridIntervals: TEdit
-          Left = 13
+          Left = 10
           Height = 24
-          Top = 13
-          Width = 5
+          Top = 10
+          Width = 4
+          Font.Height = -9
+          Font.Name = 'MS Sans Serif'
+          ParentFont = False
           TabOrder = 0
         end
         object ToolBar2: TToolBar
@@ -186,7 +218,10 @@ object FormMain: TFormMain
           AutoSize = True
           Caption = 'ToolBar2'
           Flat = False
+          Font.Height = -9
+          Font.Name = 'MS Sans Serif'
           Images = ImageList2
+          ParentFont = False
           TabOrder = 2
           object ToolButton5: TToolButton
             Left = 1
@@ -195,7 +230,7 @@ object FormMain: TFormMain
           end
           object ToolButton7: TToolButton
             Left = 1
-            Top = 30
+            Top = 24
             Action = ActionRemoveRFactorIntervals
           end
         end
@@ -203,9 +238,12 @@ object FormMain: TFormMain
     end
     object TabSheetSpecPositions: TTabSheet
       Caption = 'Specimen Positions'
-      ClientHeight = 115
-      ClientWidth = 1270
+      ClientHeight = 91
+      ClientWidth = 1018
+      Font.Height = -9
+      Font.Name = 'MS Sans Serif'
       OnShow = TabSheetSpecPositionsShow
+      ParentFont = False
       object PanelSpecPositions: TPanel
         Left = 0
         Height = 115
@@ -215,7 +253,10 @@ object FormMain: TFormMain
         BevelOuter = bvNone
         ClientHeight = 115
         ClientWidth = 1270
+        Font.Height = -9
+        Font.Name = 'MS Sans Serif'
         ParentColor = False
+        ParentFont = False
         TabOrder = 0
         object GridSpecPositions: TNumericGrid
           Left = 30
@@ -227,8 +268,11 @@ object FormMain: TFormMain
           Color = clBtnFace
           ColCount = 2
           FixedCols = 0
+          Font.Height = -9
+          Font.Name = 'MS Sans Serif'
           GridLineWidth = 0
           Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goTabs, goRowSelect, goDblClickAutoSize]
+          ParentFont = False
           RowCount = 2
           ScrollBars = ssBoth
           TabOrder = 0
@@ -244,10 +288,13 @@ object FormMain: TFormMain
           DisabledColor = clSilver
         end
         object EditBalloonGridSpecPositions: TEdit
-          Left = 13
+          Left = 10
           Height = 24
-          Top = 13
-          Width = 5
+          Top = 10
+          Width = 4
+          Font.Height = -9
+          Font.Name = 'MS Sans Serif'
+          ParentFont = False
           TabOrder = 1
         end
         object ToolBar3: TToolBar
@@ -259,7 +306,10 @@ object FormMain: TFormMain
           AutoSize = True
           Caption = 'ToolBar3'
           Flat = False
+          Font.Height = -9
+          Font.Name = 'MS Sans Serif'
           Images = ImageList2
+          ParentFont = False
           TabOrder = 2
           object ToolButton6: TToolButton
             Left = 1
@@ -268,7 +318,7 @@ object FormMain: TFormMain
           end
           object ToolButton8: TToolButton
             Left = 1
-            Top = 30
+            Top = 24
             Action = ActionRemoveSpecPos
           end
         end
@@ -276,9 +326,12 @@ object FormMain: TFormMain
     end
     object TabSheetParameters: TTabSheet
       Caption = 'Specimen Parameters'
-      ClientHeight = 115
-      ClientWidth = 1270
+      ClientHeight = 91
+      ClientWidth = 1018
+      Font.Height = -9
+      Font.Name = 'MS Sans Serif'
       OnShow = TabSheetParametersShow
+      ParentFont = False
       object PanelParameters: TPanel
         Left = 0
         Height = 115
@@ -288,7 +341,10 @@ object FormMain: TFormMain
         BevelOuter = bvNone
         ClientHeight = 115
         ClientWidth = 1270
+        Font.Height = -9
+        Font.Name = 'MS Sans Serif'
         ParentColor = False
+        ParentFont = False
         TabOrder = 0
         object GridParameters: TNumericGrid
           Left = 30
@@ -300,8 +356,11 @@ object FormMain: TFormMain
           Color = clBtnFace
           ColCount = 2
           FixedCols = 0
+          Font.Height = -9
+          Font.Name = 'MS Sans Serif'
           GridLineWidth = 0
           Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goTabs, goRowSelect, goDblClickAutoSize]
+          ParentFont = False
           RowCount = 2
           ScrollBars = ssBoth
           TabOrder = 0
@@ -317,10 +376,13 @@ object FormMain: TFormMain
           DisabledColor = clSilver
         end
         object EditBalloonGridParameters: TEdit
-          Left = 13
+          Left = 10
           Height = 24
-          Top = 13
-          Width = 5
+          Top = 10
+          Width = 4
+          Font.Height = -9
+          Font.Name = 'MS Sans Serif'
+          ParentFont = False
           TabOrder = 1
         end
         object ToolBar4: TToolBar
@@ -332,7 +394,10 @@ object FormMain: TFormMain
           AutoSize = True
           Caption = 'ToolBar4'
           Flat = False
+          Font.Height = -9
+          Font.Name = 'MS Sans Serif'
           Images = ImageList2
+          ParentFont = False
           TabOrder = 2
           object ToolButton9: TToolButton
             Left = 1
@@ -341,7 +406,7 @@ object FormMain: TFormMain
           end
           object ToolButton10: TToolButton
             Left = 1
-            Top = 30
+            Top = 24
             Action = ActionCopy
           end
         end
@@ -349,9 +414,12 @@ object FormMain: TFormMain
     end
     object TabSheetDatasheet: TTabSheet
       Caption = 'Datasheet'
-      ClientHeight = 115
-      ClientWidth = 1270
+      ClientHeight = 91
+      ClientWidth = 1018
+      Font.Height = -9
+      Font.Name = 'MS Sans Serif'
       OnShow = TabSheetDatasheetShow
+      ParentFont = False
       object PanelDatasheet: TPanel
         Left = 0
         Height = 115
@@ -361,7 +429,10 @@ object FormMain: TFormMain
         BevelOuter = bvNone
         ClientHeight = 115
         ClientWidth = 1270
+        Font.Height = -9
+        Font.Name = 'MS Sans Serif'
         ParentColor = False
+        ParentFont = False
         TabOrder = 0
         object GridDatasheet: TNumericGrid
           Left = 30
@@ -373,8 +444,11 @@ object FormMain: TFormMain
           Color = clBtnFace
           ColCount = 2
           FixedCols = 0
+          Font.Height = -9
+          Font.Name = 'MS Sans Serif'
           GridLineWidth = 0
           Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goTabs, goRowSelect, goDblClickAutoSize]
+          ParentFont = False
           RowCount = 2
           ScrollBars = ssBoth
           TabOrder = 0
@@ -390,10 +464,13 @@ object FormMain: TFormMain
           DisabledColor = clSilver
         end
         object EditBalloonGridDatasheet: TEdit
-          Left = 13
+          Left = 10
           Height = 24
-          Top = 13
-          Width = 5
+          Top = 10
+          Width = 4
+          Font.Height = -9
+          Font.Name = 'MS Sans Serif'
+          ParentFont = False
           TabOrder = 1
         end
         object ToolBar5: TToolBar
@@ -405,7 +482,10 @@ object FormMain: TFormMain
           AutoSize = True
           Caption = 'ToolBar5'
           Flat = False
+          Font.Height = -9
+          Font.Name = 'MS Sans Serif'
           Images = ImageList2
+          ParentFont = False
           TabOrder = 2
           object ToolButton11: TToolButton
             Left = 1
@@ -414,7 +494,7 @@ object FormMain: TFormMain
           end
           object ToolButton12: TToolButton
             Left = 1
-            Top = 30
+            Top = 24
             Action = ActionCopy
           end
         end
@@ -424,9 +504,9 @@ object FormMain: TFormMain
   object SplitterBottom: TSplitter
     Cursor = crVSplit
     Left = 0
-    Height = 8
-    Top = 557
-    Width = 1278
+    Height = 6
+    Top = 468
+    Width = 1022
     Align = alBottom
     Beveled = True
     Color = clGray
@@ -434,132 +514,166 @@ object FormMain: TFormMain
     ResizeAnchor = akBottom
   end
   object SplitterLeftChart: TSplitter
-    Left = 164
-    Height = 525
-    Top = 32
-    Width = 5
+    Left = 131
+    Height = 442
+    Top = 26
+    Width = 4
     Beveled = True
     Color = clGrayText
     ParentColor = False
   end
   object PanelRight: TPanel
-    Left = 1116
-    Height = 525
-    Top = 32
-    Width = 162
+    Left = 892
+    Height = 442
+    Top = 26
+    Width = 130
     Align = alRight
     BevelOuter = bvNone
-    ClientHeight = 525
-    ClientWidth = 162
+    ClientHeight = 442
+    ClientWidth = 130
+    Font.Height = -9
+    Font.Name = 'MS Sans Serif'
     ParentColor = False
+    ParentFont = False
     TabOrder = 3
     TabStop = True
     object Panel2: TPanel
       Left = 0
-      Height = 525
+      Height = 442
       Top = 0
-      Width = 162
+      Width = 130
       Align = alClient
       BevelOuter = bvNone
-      ClientHeight = 525
-      ClientWidth = 162
+      ClientHeight = 442
+      ClientWidth = 130
+      Font.Height = -9
+      Font.Name = 'MS Sans Serif'
+      ParentFont = False
       TabOrder = 0
       TabStop = True
       object Label5: TLabel
-        Left = 8
-        Height = 16
+        Left = 6
+        Height = 10
         Top = 0
-        Width = 44
+        Width = 34
         Caption = 'Graphs'
+        Font.Height = -9
+        Font.Name = 'MS Sans Serif'
         ParentColor = False
+        ParentFont = False
       end
       object Label1: TLabel
-        Left = 8
-        Height = 14
-        Top = 453
-        Width = 48
+        Left = 6
+        Height = 11
+        Top = 385
+        Width = 38
         Anchors = [akLeft, akBottom]
         AutoSize = False
         Caption = 'Position:'
+        Font.Height = -9
+        Font.Name = 'MS Sans Serif'
         ParentColor = False
+        ParentFont = False
       end
       object LabelAngle: TLabel
-        Left = 58
-        Height = 16
-        Top = 453
-        Width = 96
+        Left = 46
+        Height = 13
+        Top = 384
+        Width = 77
         Anchors = [akLeft, akBottom]
         AutoSize = False
+        Font.Height = -9
+        Font.Name = 'MS Sans Serif'
         ParentColor = False
+        ParentFont = False
       end
       object Label2: TLabel
-        Left = 8
-        Height = 14
-        Top = 473
-        Width = 48
+        Left = 6
+        Height = 11
+        Top = 401
+        Width = 38
         Anchors = [akLeft, akBottom]
         AutoSize = False
         Caption = 'Intensity:'
+        Font.Height = -9
+        Font.Name = 'MS Sans Serif'
         ParentColor = False
+        ParentFont = False
       end
       object LabelIntensity: TLabel
-        Left = 58
-        Height = 16
-        Top = 473
-        Width = 96
+        Left = 46
+        Height = 13
+        Top = 400
+        Width = 77
         Anchors = [akLeft, akBottom]
         AutoSize = False
+        Font.Height = -9
+        Font.Name = 'MS Sans Serif'
         ParentColor = False
+        ParentFont = False
       end
       object Label3: TLabel
-        Left = 8
-        Height = 14
-        Top = 493
-        Width = 48
+        Left = 6
+        Height = 11
+        Top = 417
+        Width = 38
         Anchors = [akLeft, akBottom]
         AutoSize = False
         Caption = 'R-Factor:'
+        Font.Height = -9
+        Font.Name = 'MS Sans Serif'
         ParentColor = False
+        ParentFont = False
       end
       object LabelMin: TLabel
-        Left = 58
-        Height = 16
-        Top = 493
-        Width = 96
+        Left = 46
+        Height = 13
+        Top = 416
+        Width = 77
         Anchors = [akLeft, akBottom]
         AutoSize = False
+        Font.Height = -9
+        Font.Name = 'MS Sans Serif'
         ParentColor = False
+        ParentFont = False
       end
       object Label6: TLabel
-        Left = 8
-        Height = 16
-        Top = 435
-        Width = 21
+        Left = 6
+        Height = 10
+        Top = 373
+        Width = 18
         Anchors = [akLeft, akBottom]
         Caption = 'Info'
+        Font.Height = -9
+        Font.Name = 'MS Sans Serif'
         ParentColor = False
+        ParentFont = False
       end
       object CheckListBoxLegend: TCheckListBox
-        Left = 8
-        Height = 412
-        Top = 18
-        Width = 146
+        Left = 6
+        Height = 352
+        Top = 14
+        Width = 118
         Anchors = [akTop, akLeft, akRight, akBottom]
         BorderStyle = bsNone
-        ItemHeight = 13
+        Font.Height = -9
+        Font.Name = 'MS Sans Serif'
+        ItemHeight = 10
         OnClick = CheckListBoxLegendClick
         OnDrawItem = CheckListBoxLegendDrawItem
         OnKeyPress = CheckListBoxLegendKeyPress
+        ParentFont = False
         Style = lbOwnerDrawFixed
         TabOrder = 0
+        TopIndex = -1
       end
     end
   end
   object SplitterChartRight: TSplitter
-    Left = 1111
-    Height = 525
-    Top = 32
-    Width = 5
+    Left = 888
+    Height = 442
+    Top = 26
+    Width = 4
     Align = alRight
     Beveled = True
     Color = clGrayText
@@ -567,23 +681,26 @@ object FormMain: TFormMain
     ResizeAnchor = akRight
   end
   object PanelChart: TPanel
-    Left = 169
-    Height = 525
-    Top = 32
-    Width = 942
+    Left = 135
+    Height = 442
+    Top = 26
+    Width = 753
     Align = alClient
     BevelOuter = bvNone
-    ClientHeight = 525
-    ClientWidth = 942
+    ClientHeight = 442
+    ClientWidth = 753
     Color = clWindow
+    Font.Height = -9
+    Font.Name = 'MS Sans Serif'
     ParentColor = False
+    ParentFont = False
     TabOrder = 2
     TabStop = True
     object Chart: TTAChart
       Left = 0
-      Height = 502
+      Height = 429
       Top = 0
-      Width = 919
+      Width = 740
       AutoUpdateXMin = True
       AutoUpdateXMax = True
       AutoUpdateYMin = True
@@ -609,19 +726,19 @@ object FormMain: TFormMain
     end
     object ScrollBarX: TScrollBar
       Left = 0
-      Height = 23
-      Top = 502
-      Width = 942
+      Height = 13
+      Top = 429
+      Width = 753
       Align = alBottom
       PageSize = 0
       TabOrder = 1
       OnChange = ScrollBarXChange
     end
     object ScrollBarY: TScrollBar
-      Left = 919
-      Height = 502
+      Left = 740
+      Height = 429
       Top = 0
-      Width = 23
+      Width = 13
       Align = alRight
       Kind = sbVertical
       PageSize = 0
@@ -629,45 +746,57 @@ object FormMain: TFormMain
       OnChange = ScrollBarYChange
     end
     object EditBalloonChart: TEdit
-      Left = 64
-      Height = 24
-      Top = 7
-      Width = 5
+      Left = 51
+      Height = 20
+      Top = 6
+      Width = 4
+      Font.Height = -9
+      Font.Name = 'MS Sans Serif'
+      ParentFont = False
       TabOrder = 0
     end
   end
   object PanelLeft: TPanel
     Left = 0
-    Height = 525
-    Top = 32
-    Width = 164
+    Height = 442
+    Top = 26
+    Width = 131
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 525
-    ClientWidth = 164
+    ClientHeight = 442
+    ClientWidth = 131
+    Font.Height = -9
+    Font.Name = 'MS Sans Serif'
     ParentColor = False
+    ParentFont = False
     TabOrder = 1
     TabStop = True
     object Label4: TLabel
-      Left = 8
-      Height = 16
+      Left = 6
+      Height = 10
       Top = 0
-      Width = 29
+      Width = 23
       Caption = 'Data'
+      Font.Height = -9
+      Font.Name = 'MS Sans Serif'
       ParentColor = False
+      ParentFont = False
     end
     object GridData: TNumericGrid
       Left = 0
-      Height = 525
+      Height = 442
       Top = 0
-      Width = 164
+      Width = 131
       Align = alClient
       BorderStyle = bsNone
       Color = clBtnFace
       ColCount = 2
       FixedCols = 0
+      Font.Height = -9
+      Font.Name = 'MS Sans Serif'
       GridLineWidth = 0
       Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goEditing, goTabs, goRowSelect, goDblClickAutoSize]
+      ParentFont = False
       RowCount = 2
       ScrollBars = ssBoth
       TabOrder = 1
@@ -683,34 +812,43 @@ object FormMain: TFormMain
       DisabledColor = clSilver
     end
     object EditBalloonGridData: TEdit
-      Left = 24
-      Height = 24
-      Top = 25
-      Width = 5
+      Left = 19
+      Height = 20
+      Top = 20
+      Width = 4
+      Font.Height = -9
+      Font.Name = 'MS Sans Serif'
+      ParentFont = False
       TabOrder = 0
     end
   end
   object PanelTop: TPanel
     Left = 0
-    Height = 32
+    Height = 26
     Top = 0
-    Width = 1278
+    Width = 1022
     Align = alTop
     AutoSize = True
-    ClientHeight = 32
-    ClientWidth = 1278
+    ClientHeight = 26
+    ClientWidth = 1022
+    Font.Height = -9
+    Font.Name = 'MS Sans Serif'
+    ParentFont = False
     TabOrder = 0
     TabStop = True
     OnClick = PanelTopClick
     object ToolBar6: TToolBar
       Left = 1
-      Height = 30
+      Height = 24
       Top = 1
-      Width = 1276
+      Width = 1020
       AutoSize = True
       Caption = 'ToolBar6'
       Flat = False
+      Font.Height = -9
+      Font.Name = 'MS Sans Serif'
       Images = ImageList2
+      ParentFont = False
       TabOrder = 0
       object ToolButton13: TToolButton
         Left = 1
@@ -718,18 +856,18 @@ object FormMain: TFormMain
         Action = ActionImport
       end
       object ToolButton14: TToolButton
-        Left = 30
+        Left = 24
         Top = 2
         Action = ActionZoomIn
       end
       object ToolButton15: TToolButton
-        Left = 59
+        Left = 47
         Top = 2
         Action = ActionZoomOut
         Style = tbsCheck
       end
       object ToolButton16: TToolButton
-        Left = 88
+        Left = 70
         Top = 2
         Action = ActionDoAllAuto
       end
@@ -738,8 +876,8 @@ object FormMain: TFormMain
   object MainMenu1: TMainMenu
     ParentBidiMode = False
     Images = ImageList2
-    left = 688
-    top = 80
+    left = 550
+    top = 64
     object Data: TMenuItem
       Caption = '&Data'
       object Import: TMenuItem
@@ -1159,18 +1297,16 @@ object FormMain: TFormMain
     end
   end
   object OpenDialog1: TOpenDialog
-    Width = 840
-    Height = 630
     Title = 'Open Profile Data'
     DefaultExt = '.*.DAT'
     Filter = 'DAT - files (*.DAT)|*.DAT;*.dat|All files (*.*)|*.*'
     Options = [ofPathMustExist, ofFileMustExist, ofNoTestFileCreate, ofEnableSizing, ofDontAddToRecent]
-    left = 688
-    top = 160
+    left = 550
+    top = 128
   end
   object ImageList1: TImageList
-    left = 480
-    top = 80
+    left = 384
+    top = 64
     Bitmap = {
       4C69060000001000000010000000000000FF000000FF000000FF000000FF0000
       00FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
@@ -1368,8 +1504,8 @@ object FormMain: TFormMain
     }
   end
   object ViewModeMenu: TPopupMenu
-    left = 376
-    top = 160
+    left = 301
+    top = 128
     object Theta2: TMenuItem
       Caption = 'Theta'
       OnClick = ThetaClick
@@ -1385,8 +1521,8 @@ object FormMain: TFormMain
     end
   end
   object ImageList2: TImageList
-    left = 584
-    top = 80
+    left = 467
+    top = 64
     Bitmap = {
       4C69100000001000000010000000ECC681FFF0CA82FFF4CA7DFFE8C788FFEFCF
       94FFEED192F1EDCF92FFEED092FFEED093FFF2D396FFF7D79BFFF6D69BFFE6C4
@@ -1906,35 +2042,35 @@ object FormMain: TFormMain
   object SaveDialog1: TSaveDialog
     Title = 'Select File to Save Data'
     Filter = 'Text files (*.TXT)|*.TXT|All files (*.*)|*.*'
-    left = 584
-    top = 160
+    left = 467
+    top = 128
   end
   object ApplicationProperties1: TApplicationProperties
     Title = 'Fit'
     OnHint = ApplicationProperties1Hint
-    left = 376
-    top = 80
+    left = 301
+    top = 64
   end
   object CheckStateTimer: TTimer
     Interval = 500
     OnTimer = CheckStateTimerTimer
-    left = 376
+    left = 301
   end
   object TimerBalloonShow: TTimer
     Enabled = False
     Interval = 200
     OnTimer = TimerBalloonShowTimer
-    left = 480
+    left = 384
   end
   object TimerBalloonHide: TTimer
     Enabled = False
     OnTimer = TimerBalloonHideTimer
-    left = 584
+    left = 467
   end
   object ActionList1: TActionList
     Images = ImageList2
-    left = 480
-    top = 160
+    left = 384
+    top = 128
     object ActionQuit: TAction
       Category = 'Data'
       Caption = '&Quit'
@@ -2156,6 +2292,6 @@ object FormMain: TFormMain
     Enabled = False
     Interval = 2000
     OnTimer = TimerAsyncTimer
-    left = 688
+    left = 550
   end
 end

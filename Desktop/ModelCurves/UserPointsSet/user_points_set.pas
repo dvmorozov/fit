@@ -5,19 +5,28 @@ without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
 
 @abstract(Contains definitions of class for user curve given as expression.)
 
-@author(Dmitry Morozov dvmorozov@hotmail.com, 
-LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
-Facebook https://www.facebook.com/profile.php?id=100004082021870)
+@author(Dmitry Morozov dvmorozov@hotmail.com,
+LinkedIn: https://www.linkedin.com/in/dmitry-morozov-79490a59/
+Facebook: https://www.facebook.com/dmitry.v.morozov)
 }
 unit user_points_set;
 
-{$MODE Delphi}
+{$IF NOT DEFINED(FPC)}
+{$DEFINE _WINDOWS}
+{$ELSEIF DEFINED(WINDOWS)}
+{$DEFINE _WINDOWS}
+{$ENDIF}
 
 interface
 
-uses SysUtils, points_set, curve_points_set, named_points_set,
-  curve_types_singleton, int_points_set, configurable_points_set, Windows;
+uses SysUtils, curve_points_set, named_points_set,
+    curve_types_singleton, int_points_set, configurable_points_set
+{$IFDEF _WINDOWS}
+    , Windows, points_set
+{$ENDIF}
+    ;
 
+{$IFDEF _WINDOWS}
 function ParseAndCalcExpression(Expr: LPCSTR; ParamList: LPCSTR;
     Result: PDouble): LongInt; cdecl;
     external 'MathExpr' name 'ParseAndCalcExpression';
@@ -25,6 +34,7 @@ function GetSymbols: LPCSTR; cdecl;
     external 'MathExpr' name 'GetSymbols';
 procedure FreeSymbols(Symbols: LPCSTR); cdecl;
     external 'MathExpr' name 'FreeSymbols';
+{$ENDIF}
 
 type
     { Container for points of user curve given as expression. }
@@ -32,11 +42,12 @@ type
     protected
         { Expression given in general text form. }
         FExpression: string;
-
+{$IFDEF _WINDOWS}
         { Performs recalculation of all points of function. }
         procedure DoCalc(const Intervals: TPointsSet); override;
         { Performs calculation of function value for given value of argument. }
         function CalcValue(ArgValue: Double): Double;
+{$ENDIF}
 
     public
         procedure CopyParameters(const Dest: TObject); override;
@@ -73,6 +84,7 @@ begin
     Result := StringToGUID('{d8cafce5-8b03-4cce-9e93-ea28acb8e7ca}');
 end;
 
+{$IFDEF _WINDOWS}
 function TUserPointsSet.CalcValue(ArgValue: Double): Double;
 var P: TSpecialCurveParameter;
     Prs: string;
@@ -119,6 +131,7 @@ begin
             PointYCoord[j] := CalcValue(PointXCoord[j]);
     end;
 end;
+{$ENDIF}
 
 procedure TUserPointsSet.CopyParameters(const Dest: TObject);
 begin

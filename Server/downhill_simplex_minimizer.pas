@@ -11,8 +11,6 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit downhill_simplex_minimizer;
 
-{$MODE Delphi}
-
 interface
 
 uses SysUtils, SelfCheckedComponentList, Classes, Tools,

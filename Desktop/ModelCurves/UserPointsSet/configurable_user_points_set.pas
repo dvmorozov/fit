@@ -1,6 +1,21 @@
+{
+This software is distributed under GPL
+in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
+
+@abstract(Contains definition of TConfigurableUserPointsSet.)
+
+@author(Dmitry Morozov dvmorozov@hotmail.com,
+LinkedIn: https://www.linkedin.com/in/dmitry-morozov-79490a59/
+Facebook: https://www.facebook.com/dmitry.v.morozov)
+}
 unit configurable_user_points_set;
 
-{$mode delphi}
+{$IF NOT DEFINED(FPC)}
+{$DEFINE _WINDOWS}
+{$ELSEIF DEFINED(WINDOWS)}
+{$DEFINE _WINDOWS}
+{$ENDIF}
 
 interface
 
@@ -30,12 +45,12 @@ implementation
 
 uses
 {$IF NOT DEFINED(SERVER) AND NOT DEFINED(CLIENT_PROXY)}
-  user_points_set_prop_dialog, expression_parser_adapter, curve_type_storage_adapter,
-  curve_type_parameters_factory, create_user_points_set_dlg_adapter,
-{$ELSE}
-//  FormServer,
+{$IFDEF _WINDOWS}
+    user_points_set_prop_dialog, expression_parser_adapter, curve_type_storage_adapter,
+    curve_type_parameters_factory, create_user_points_set_dlg_adapter, app_settings,
 {$ENDIF}
-  app_settings, Controls, app, Dialogs;
+{$ENDIF}
+    Controls, app, Dialogs;
 
 class function TConfigurableUserPointsSet.HasConfigurableParameters: Boolean;
 begin
@@ -44,6 +59,7 @@ end;
 
 {$IF NOT DEFINED(SERVER) AND NOT DEFINED(CLIENT_PROXY)}
 class function TConfigurableUserPointsSet.ShowConfigurationDialog: Boolean;
+{$IFDEF _WINDOWS}
 var ct: Curve_type;
     ep: TExpressionParserAdapter;
     da: TCreateUserPointsSetDlgAdapter;
@@ -51,12 +67,14 @@ var ct: Curve_type;
     ca: TCurveTypeStorageAdapter;
 
 label dlg1, dlg2;
+{$ENDIF}
 begin
+{$IFDEF _WINDOWS}
     ep := TExpressionParserAdapter.Create;
     da := TCreateUserPointsSetDlgAdapter.Create;
     cf := TCurveTypeParametersFactory.Create;
     ca := TCurveTypeStorageAdapter.Create;
-{$IFNDEF EXCLUDE_SOMETHING}
+
 dlg1:
     Result := False;
     ct := nil;

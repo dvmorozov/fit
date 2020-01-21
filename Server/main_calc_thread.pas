@@ -11,8 +11,6 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit main_calc_thread;
 
-{$MODE Delphi}
-
 interface
 
 uses Classes, SysUtils;

@@ -5,13 +5,17 @@ without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
 
 @abstract(Contains definition of class representing single optimization task.)
 
-@author(Dmitry Morozov dvmorozov@hotmail.com, 
-LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
-Facebook https://www.facebook.com/profile.php?id=100004082021870)
+@author(Dmitry Morozov dvmorozov@hotmail.com,
+LinkedIn: https://www.linkedin.com/in/dmitry-morozov-79490a59/
+Facebook: https://www.facebook.com/dmitry.v.morozov)
 }
 unit fit_task;
 
-{$MODE Delphi}
+{$IF NOT DEFINED(FPC)}
+{$DEFINE _WINDOWS}
+{$ELSEIF DEFINED(WINDOWS)}
+{$DEFINE _WINDOWS}
+{$ENDIF}
 
 interface
 
@@ -1304,9 +1308,8 @@ begin
     else
     if IsEqualGUID(FCurveTypeId, TPseudoVoigtPointsSet.GetCurveTypeId_) then
     begin
-        Result := T2BranchesPseudoVoigtPointsSet.Create(nil);
-        // vremenno, dlya proverki algoritma...
-        //??? Result := TPseudoVoigtPointsSet.Create(nil)
+        //Result := T2BranchesPseudoVoigtPointsSet.Create(nil);
+        Result := TPseudoVoigtPointsSet.Create(nil)
     end
     else
     if IsEqualGUID(FCurveTypeId, TAsymPseudoVoigtPointsSet.GetCurveTypeId_) then
@@ -1316,10 +1319,12 @@ begin
     else
     if IsEqualGUID(FCurveTypeId, TUserPointsSet.GetCurveTypeId_) then
     begin
+{$IFDEF _WINDOWS}
         Result := TUserPointsSet.Create(nil);
         TUserPointsSet(Result).Expression := FCurveExpr;
         TUserPointsSet(Result).SetParameters(
             Curve_parameters(Params.GetCopy));
+{$ENDIF}
     end
     else
     if IsEqualGUID(FCurveTypeId, T2BranchesPseudoVoigtPointsSet.GetCurveTypeId_) then

@@ -5,21 +5,27 @@ without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
 
 @abstract(Contains definition of TInputMaxRFactorDlg.)
 
-@author(Dmitry Morozov dvmorozov@hotmail.com, 
-LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
-Facebook https://www.facebook.com/profile.php?id=100004082021870)
+@author(Dmitry Morozov dvmorozov@hotmail.com,
+LinkedIn: https://www.linkedin.com/in/dmitry-morozov-79490a59/
+Facebook: https://www.facebook.com/dmitry.v.morozov)
 }
 unit input_max_rfactor_dialog;
 
-{$MODE Delphi}
+{$IF NOT DEFINED(FPC)}
+{$DEFINE _WINDOWS}
+{$ELSEIF DEFINED(WINDOWS)}
+{$DEFINE _WINDOWS}
+{$ENDIF}
 
 interface
 
 uses SysUtils, Forms, Controls, StdCtrls,
   ExtCtrls, LResources
-{$ifdef windows}
-  ,Windows, CommCtrl
-{$endif}
+{$IFDEF _WINDOWS}
+  , Windows, CommCtrl
+{$ELSE}
+  , Dialogs
+{$ENDIF}
   ;
 
 type
@@ -45,13 +51,13 @@ var
   
 const
     ImproperRealValueInput: WideString = 'Improper real value input.';
-{$ifdef windows}
+{$IFDEF _WINDOWS}
 const
     Error: WideString = 'Error';
-{$endif}
+{$ENDIF}
   
 function StringToValue(Str: string): Double;
-{$ifdef windows}
+{$IFDEF _WINDOWS}
 procedure ShowBalloon(Hwnd: HWND; Msg: WideString; Title: WideString);
 
 type
@@ -59,11 +65,9 @@ type
     public
         Handle: HWND;
     end;
-{$endif}
+{$ENDIF}
 
 implementation
-
-//uses Unit6;
 
 {$warnings off}
 //  vypolnyaet podgotovku stroki k preobrazovaniyu v chislo;
@@ -103,7 +107,7 @@ begin
 end;
 {$warnings on}
 
-{$ifdef windows}
+{$IFDEF _WINDOWS}
 //  pri isp. PostMessage d.b. global'noy, t.k.
 //  struktura obrabatyvaetsya vne tela protsedury
 var EBT: _tagEDITBALLOONTIP;
@@ -132,7 +136,7 @@ begin
     *)
 end;
 {$hints on}
-{$endif}
+{$ENDIF}
 
 procedure TInputMaxRFactorDlg.FormCloseQuery(Sender: TObject;
     var CanClose: Boolean);
@@ -145,14 +149,12 @@ begin
         try
             Value := StringToValue(RFactorValueEdit.Text) / 100;
         except
-{$ifdef windows}
+{$IFDEF _WINDOWS}
             ShowBalloon(RFactorValueEdit.Handle,
-                ImproperRealValueInput,
-                ''          //vmesto Error - tak luchshe smotritsya
-                );
-{$else}
-            MessageDlg(ImproperRealValueInput, mtError, [mbOk], 0);
-{$endif}
+                ImproperRealValueInput, '');
+{$ELSE}
+            MessageDlg(string(ImproperRealValueInput), mtError, [mbOk], 0);
+{$ENDIF}
             ActiveControl := RFactorValueEdit;
             CanClose := False;
         end;

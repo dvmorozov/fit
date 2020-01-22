@@ -29,13 +29,11 @@ There is no installer. The main executable is Fit.exe.
 #### Win64
 
 [Fit](https://github.com/dvmorozov/fit/raw/master/Desktop/o/x86_64-win64/Fit-x86_64-win64.exe)
-
 [MathExpr](https://github.com/dvmorozov/fit/raw/master/Desktop/o/x86_64-win64/MathExpr.dll)
 
 #### Win32
 
 [Fit](https://github.com/dvmorozov/fit/raw/master/Desktop/o/i386-win32/Fit-i386-win32.exe)
-
 [MathExpr](https://github.com/dvmorozov/fit/raw/master/Desktop/o/i386-win32/MathExpr.dll)
 
 On Windows MathExpr.dll should be put in the same directory as Fit.exe (this enables experimental feature of curves having shapes defined by arbitrary expression, but it is not supported under Linux for now).

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <Component>
+    <component class="Settings_v1">
+      <properties>
+        <integer name="Reserved" value="-1"/>
+      </properties>
+    </component>
+  </Component>
+</CONFIG>

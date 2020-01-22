@@ -46,6 +46,10 @@ On Windows MathExpr.dll should be put in the same directory as Fit.exe (this ena
 
 /INFILE=*file_name* - opens data file on application start up 
 
+### Test data set
+
+[Zip](https://github.com/dvmorozov/fit/raw/master/Data/test_data.zip)
+
 ## Web application
 
 [FitEasily](fiteasily.html)

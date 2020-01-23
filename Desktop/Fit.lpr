@@ -7,9 +7,9 @@ program Fit;
 {$ENDIF}
 
 uses
-{$ifdef unix}
+{$IFDEF UNIX}{$IFDEF UseCThreads}
   cthreads,
-{$endif}
+{$ENDIF}{$ENDIF}
   Interfaces,   //  LCL widgetset
   Forms, Variants, form_main, about_box_dialog, input_wavelength_dialog,
   input_back_factor_dialog, input_max_rfactor_dialog, fit_client,

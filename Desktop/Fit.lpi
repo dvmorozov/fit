@@ -22,7 +22,7 @@
       <MajorVersionNr Value="1"/>
       <MinorVersionNr Value="1"/>
       <RevisionNr Value="1"/>
-      <BuildNr Value="1316"/>
+      <BuildNr Value="1319"/>
       <Attributes pvaDebug="True"/>
       <StringTable FileDescription="Desktop application." LegalCopyright="Dmitry Morozov" OriginalFilename="Fit" ProductName="Fit" ProductVersion="1.1.1"/>
     </VersionInfo>
@@ -38,7 +38,7 @@
           <SearchPaths>
             <IncludeFiles Value="$(LazarusDir)\lcl\include"/>
             <Libraries Value="..\ClientProxy"/>
-            <OtherUnitFiles Value="..\CgiClient;..\Server;DataLoaders;ModelCurves;ModelCurves\UserPointsSet;Forms;..\Server\client_interfaces;..\Packages\wst-0.5;..\Packages\utils;..\Packages\TAGraph\Package;\VBOXSVR\04_-_github\fitminimizers\package;..\..\fitminimizers\package;..\..\fitgrids\package"/>
+            <OtherUnitFiles Value="..\CgiClient;..\Server;..\Server\client_interfaces;..\Packages\wst-0.5;..\Packages\utils;..\Packages\TAGraph\Package;..\..\fitminimizers\package;..\..\fitgrids\package;DataLoaders;ModelCurves;ModelCurves\UserPointsSet;Forms"/>
             <UnitOutputDirectory Value="o\Fit\$(TargetCPU)-$(TargetOS)"/>
           </SearchPaths>
           <Parsing>
@@ -117,8 +117,7 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="25"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="49"/>
-        <CursorPos Y="69"/>
+        <CursorPos Y="13"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -589,6 +588,7 @@
       <Unit49>
         <Filename Value="ModelCurves\points_set.pas"/>
         <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="27"/>
         <WindowIndex Value="1"/>
         <TopLine Value="2"/>
@@ -929,7 +929,7 @@
         <IsPartOfProject Value="True"/>
         <WindowIndex Value="1"/>
         <CursorPos X="53" Y="15"/>
-        <UsageCount Value="142"/>
+        <UsageCount Value="145"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit82>
@@ -1216,7 +1216,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="63"/>
         <CursorPos Y="84"/>
-        <UsageCount Value="74"/>
+        <UsageCount Value="75"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit113>
@@ -1240,11 +1240,10 @@
       <Unit116>
         <Filename Value="..\Server\fit_task.pas"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="24"/>
         <WindowIndex Value="1"/>
         <CursorPos X="53" Y="10"/>
-        <UsageCount Value="116"/>
+        <UsageCount Value="119"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit116>
@@ -1334,7 +1333,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="1295"/>
         <CursorPos X="18" Y="1320"/>
-        <UsageCount Value="34"/>
+        <UsageCount Value="35"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit126>
@@ -1496,7 +1495,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="307"/>
         <CursorPos X="34" Y="320"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="11"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit146>

@@ -22,7 +22,7 @@
       <MajorVersionNr Value="1"/>
       <MinorVersionNr Value="1"/>
       <RevisionNr Value="1"/>
-      <BuildNr Value="20"/>
+      <BuildNr Value="22"/>
       <Attributes pvaDebug="True"/>
       <StringTable FileDescription="Remote client." LegalCopyright="Dmitry Morozov" OriginalFilename="FitPro" ProductName="Fit" ProductVersion="1.1.1"/>
     </VersionInfo>
@@ -67,12 +67,13 @@
         <MinVersion Major="1" Valid="True"/>
       </Item6>
     </RequiredPackages>
-    <Units Count="188">
+    <Units Count="191">
       <Unit0>
         <Filename Value="FitPro.lpr"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
-        <CursorPos X="17" Y="29"/>
+        <TopLine Value="3"/>
+        <CursorPos Y="27"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -662,6 +663,7 @@
         <TopLine Value="171"/>
         <CursorPos Y="189"/>
         <UsageCount Value="23"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit85>
       <Unit86>
         <Filename Value="Forms\aboutboxdialog.pas"/>
@@ -1509,8 +1511,30 @@
         <UsageCount Value="22"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit187>
+      <Unit188>
+        <Filename Value="C:\lazarus\ide\lazarus.pp"/>
+        <UnitName Value="Lazarus"/>
+        <EditorIndex Value="1"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit188>
+      <Unit189>
+        <Filename Value="..\..\fitgrids\package\FitGrids.pas"/>
+        <EditorIndex Value="2"/>
+        <CursorPos X="60" Y="13"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit189>
+      <Unit190>
+        <Filename Value="..\..\fitgrids\package\FitGrids.lpk"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="XML"/>
+      </Unit190>
     </Units>
-    <JumpHistory Count="8" HistoryIndex="7">
+    <JumpHistory Count="11" HistoryIndex="10">
       <Position1>
         <Filename Value="FitPro.lpr"/>
         <Caret Line="45" TopLine="15"/>
@@ -1543,6 +1567,17 @@
         <Filename Value="FitPro.lpr"/>
         <Caret Line="17"/>
       </Position8>
+      <Position9>
+        <Filename Value="FitPro.lpr"/>
+        <Caret Line="29" Column="17"/>
+      </Position9>
+      <Position10>
+        <Filename Value="C:\lazarus\ide\lazarus.pp"/>
+      </Position10>
+      <Position11>
+        <Filename Value="..\..\fitgrids\package\FitGrids.pas"/>
+        <Caret Line="13" Column="60"/>
+      </Position11>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

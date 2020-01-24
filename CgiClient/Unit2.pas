@@ -181,7 +181,7 @@ uses data, background, background_more, pattern, pattern_more, specimen_position
     fit_server_proxy, projects_empty, soap_formatter, binary_formatter,
     base_service_intf, specimen_parameters_file, file_results, file_results_empty,
     evaluation, app, mscr_specimen_list, Settings,
-    GeneralHashfunctions, CommonTypes;
+    GeneralHashfunctions, common_types;
 
 const
     CommandNotFound:                string = 'Command not found.';              //'Команда не обнаружена.';

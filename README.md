@@ -5,11 +5,11 @@ The curve fitting application. It allows to model data by set of curves of selec
 ## Projects
 
 - Fit - builds ready-to-use desktop application containing client and server part in single executable.
-- FitPro - builds client desktop application. The application should be configured to access server. 
-Server side should be compiled and installed separately. It is supposed but it is not required that
-backend is installed on dedicated machine.
+- FitPro - builds native client desktop application. The application should be configured to access server. 
+Server could be compiled and installed on separate machine.
 - FitServer - builds computing backend.
 - ClientProxy - builds shared library implementing XML-RPC calls from client to server.
+- CgiClient - CGI UI for FitServer.
 
 All applications are built from the same code base by following compilation keys:
 - FIT - controls building of monolithic desktop application. Is mutually exclusive with FITPRO.
@@ -40,12 +40,11 @@ Latest built was done with
 
 Install components into Lazarus, add included directories in project properties and rebuild projects.
 
-## How to build CGI client, server application and proxy shared library
+## How to build CgiClient, FitServer and ClientProxy
 
 ### Install Lazarus 0.9.24
 
-Unfortunately wst-0.5 can not be built without modifications with latest versions of Lazarus.
-So, it is recommended to use version 0.9.24.
+Unfortunately wst-0.5 can not be built without modifications with latest versions of Lazarus. So, it is recommended to use version 0.9.24. Delphi compatiblity mode should be turned on. This is supposed to be fixed by replacing this obsolete library.
 
 [Lazarus 0.9.24](https://sourceforge.net/projects/lazarus/files/Lazarus%20Windows%2032%20bits/Old%20releases/Lazarus%200.9.24/Lazarus-0.9.24-fpc-2.2.0-20071114-win32.exe/download)
 

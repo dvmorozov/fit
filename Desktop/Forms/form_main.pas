@@ -34,18 +34,18 @@ uses
     ;
 
 type
-	{ States of results grid window. }
+    { States of results grid window. }
     TResState = (
-		{ Window is invisible. }
+        { Window is invisible. }
         GridInvisible,
-		{ Window is visible but selection area is empty. }
+        { Window is visible but selection area is empty. }
         GridSelEmpty,
-		{ A few rows are selected. }
+        { A few rows are selected. }
         GridSelNonEmpty,
-		{ Whole table is selected. }
+        { Whole table is selected. }
         GridSelAll
         );
-	{ States of graph output. }
+    { States of graph output. }
     TViewState = (GraphEmpty, GraphNotEmpty);
 
   { TFormMain }
@@ -328,41 +328,41 @@ type
     procedure SetWavelengthClick(Sender: TObject);
 
   protected
-	{ Initial values set up just after file loading. }
+    { Initial values set up just after file loading. }
     InitXGraphMax, InitXGraphMin, InitYGraphMax, InitYGraphMin: Double;
 
-	{ These variables are used for separating clicks from area selection. }
+    { These variables are used for separating clicks from area selection. }
     DownX, DownY, UpX, UpY: Integer;
 
-	{ Saved content of edited cells. }
+    { Saved content of edited cells. }
     SavedPos, SavedAmp: string;
-	{ Protects from reentrance into editing finalization. }
+    { Protects from reentrance into editing finalization. }
     EditDone: Boolean;
-	{ Indicates that hint message should be displayed. }
+    { Indicates that hint message should be displayed. }
     FHandleEditHint: Boolean;
     procedure SetHandleEditHint(EditHint: Boolean);
 
   protected
-	{ The object created event EditDone. }
+    { The object created event EditDone. }
     SenderEditHint: TNumericGrid;
 
     HintMessage: string;
     DrawReticule: Boolean;
-    
-	{ Callback for calculating object. }
+
+    { Callback for calculating object. }
     procedure AsyncOperationFinished(Sender: TObject);
-	{ Wrapper. }
+    { Wrapper. }
     procedure SubtractAllBackground(Auto: Boolean);
-    
+
     procedure SetSelectionMode(ASelectionMode: TSelMode);
     procedure SetResState(State: TResState);
     procedure SetAsyncState(State: TAsyncState);
-	{ Sets states of controls according to state of file. }
+    { Sets states of controls according to state of file. }
     procedure SetOpenState(State: TOpenState);
-	{ Sets states of controls responsible for changing chart display mode. }
+    { Sets states of controls responsible for changing chart display mode. }
     procedure SetViewState(State: TViewState);
     procedure UpdateBarsPos;
-	{ The event OnClick of Chart arises between MouseUp and MouseDown.
+    { The event OnClick of Chart arises between MouseUp and MouseDown.
       That is why OnClick is not used. }
     procedure OnChartClick;
     function GetConfigFileName: string;
@@ -380,16 +380,16 @@ type
     Settings: Settings_v1;
 
     FitViewer: TFitViewer;
-	{ Index of curve on which the first click was. It is used in the cases when points of only one curve can be selected. }
+    { Index of curve on which the first click was. It is used in the cases when points of only one curve can be selected. }
     ActiveNumber: LongInt;
-	{ Collection should be passive. Object is set from TFitViewer and is checked on Nil. }
+    { Collection should be passive. Object is set from TFitViewer and is checked on Nil. }
     SpecimenList: TMSCRSpecimenList;
-	{ Indicates that data in tables were changed. }
+    { Indicates that data in tables were changed. }
     ModifiedParameters: Boolean;
     ModifiedDatasheet: Boolean;
-	{ Index of a serie point of which is selected at the moment. }
+    { Index of a serie point of which is selected at the moment. }
     CurSerieIndex: LongInt;
-	{ Index of selected value. }
+    { Index of selected value. }
     ValueIndex: LongInt;
 
     { Tries read the user settings object. In the case of failure creates new object. }
@@ -408,11 +408,11 @@ type
     procedure AddCurveMenuItem(ct: Curve_type);
 
     procedure CheckListBoxChanged;
-	{ Saving curve parameters into text file. }
+    { Saving curve parameters into text file. }
     function SaveTableAsText(GridData: TNumericGrid): Boolean;
-	{ Saving curve parameters into XML file. }
+    { Saving curve parameters into XML file. }
     procedure SaveTable;
-	{ Loading curve parameters from XML file. }
+    { Loading curve parameters from XML file. }
     procedure LoadTable;
 
     procedure ShowHint(const Hint: string);
@@ -420,18 +420,18 @@ type
     procedure ShowRFactor;
 
     procedure LoadDataFile(FileName: string);
-    
+
     property HandleEditHint: Boolean read FHandleEditHint
         write SetHandleEditHint;
   end;
 
 var
     FormMain: TFormMain;
-  
+
 const
     crCursorDrag:       TCursor = 6;
     crCursorSelect:     TCursor = 7;
-    
+
 const
     StopVisualSel:      string = 'Stop Visual Selection';
     StartVisualSel:     string = 'Start Visual Selection';
@@ -457,7 +457,7 @@ const
     HintWait:           string = 'Calculation started. Please wait';
 
     MenuDelCustCapt:    string = 'Delete Special';
-    
+
 implementation
 
 uses input_wavelength_dialog, input_max_rfactor_dialog,
@@ -496,10 +496,10 @@ begin
     LB := TCheckListBox(Control);
     Size := ARect.Bottom - ARect.Top;
     Color := LB.Canvas.Brush.Color;
-    
+
     //if (LB.ItemIndex <> Index) or (LB.ItemIndex = -1) then
         LB.Canvas.Brush.Color := LB.Color;
-    
+
     Inc(ARect.Bottom);  //  !!! nuzhno !!!
     Inc(ARect.Bottom);  //  !!! nuzhno !!!
     //  ochistka
@@ -553,13 +553,13 @@ procedure TFormMain.CheckStateTimerTimer(Sender: TObject);
 begin
     //  eta proverka pochemu-to ne srabatyvaet
     //if csDestroying in ComponentState then Exit;
-    
+
     //  zdes' proveryayutsya sostoyaniya ob'ektov programmy i
     //  v sootvetstvuyuschee sostoyanie ustanavlivayutsya el-ty
     //  upravleniya
     if Chart.SeriesCount <> 0 then SetViewState(GraphNotEmpty)
     else SetViewState(GraphEmpty);
-    
+
     if not (ActiveControl is TNumericGrid) then
         SetResState(GridInvisible)
     else
@@ -1179,7 +1179,7 @@ var PrevXValue, PrevYValue, NewXValue, NewYValue: Double;
 begin
     //  vvod vruchnuyu tochek fona poka nevozmozhen
     if Sender = GridBackground then Exit;
-    
+
     try
         //  !!! pochemu-to vyzyvaetsya po tri raza,
         //  poetomu nuzhno ispol'zovat' flag !!!
@@ -1304,11 +1304,11 @@ begin
     FitViewer.SetFitClient(FitClientApp_.FitClient);
     FitViewer.SetViewMarkers(ViewMarkers.Checked);
     FitViewer.Clear(Self);
-  
+
     ActiveNumber := -1;
 
     FitClientApp_.FitClient.OnAsyncOperationFinished := AsyncOperationFinished;
-  
+
     ShowHint(HintMain);
     ModifiedParameters := False;
     ModifiedDatasheet := False;
@@ -1325,7 +1325,7 @@ begin
     //  potomu chto on nepravil'no preobrazuetsya v tsvet liniy v DrawReticule;
     //  libo nuzhno delat' preobrazovanie v RGB-tsvet
     Chart.AxisColor := clGray;   //clBtnFace;    //$00b99d7f;
-    
+
     //  chtoby sdelat' nevidimymi, sohranyaya Visible = True
     EditBalloonGridBackground.Width := 0;
     EditBalloonGridBackground.Height := 0;
@@ -1400,7 +1400,7 @@ begin
             (ScrollBarX.Max - ScrollBarX.Min);
         Chart.XGraphMin := Chart.XGraphMax - D;
         *)
-        
+
         DeltaX := (InitXGraphMax - InitXGraphMin) -
                   (Chart.XGraphMax - Chart.XGraphMin);
         D := Chart.XGraphMax - Chart.XGraphMin;
@@ -1427,7 +1427,7 @@ begin
         Chart.YGraphMax := Chart.YGraphMin + D;
         Chart.Invalidate;
         *)
-        
+
         DeltaY := (InitYGraphMax - InitYGraphMin) -
                   (Chart.YGraphMax - Chart.YGraphMin);
         D := Chart.YGraphMax - Chart.YGraphMin;
@@ -1814,7 +1814,7 @@ begin
                 if Items.Objects[i] is TTASerie then
                 begin
                     TS := TTASerie(Items.Objects[i]);
-        
+
                     if Checked[i] then
                     begin
                         TS.ShowLines := TS.InitShowLines;
@@ -1922,7 +1922,7 @@ var i, j, DlgResult: LongInt;
 label DoItAgain;
 begin
     Result := True;
-    
+
 DoItAgain:
     if SaveDialog1.Execute then
     begin
@@ -2015,7 +2015,7 @@ begin
         Result := MessageDlg(
             'Model parameters has been modified.' + #13#10 + 'Save?',
             mtConfirmation, mbYesNoCancel, 0);
-            
+
         if Result = mrYes then
         begin
             if SaveTableAsText(GridParameters) then ModifiedParameters := False
@@ -2026,7 +2026,7 @@ begin
                 Exit;
             end;
         end;
-        
+
         if Result = mrCancel then
         begin
             PageControl1.ActivePage := TabSheetParameters;
@@ -2050,7 +2050,7 @@ begin
                 Exit;
             end;
         end;
-        
+
         if Result = mrCancel then
         begin
             PageControl1.ActivePage := TabSheetDatasheet;
@@ -2093,11 +2093,11 @@ begin
     SelBackVisCaption := StartVisualSel;
     SelSpecPosVisCaption := StartVisPosSel;
     SelRFactorIntervalsVisCaption := StartVisualSel;
-    
+
     RemoveBack.Tag := RemoveBack.Tag and $FFFFFFFE;
     RemoveRFactorIntervals.Tag := RemoveRFactorIntervals.Tag and $FFFFFFFE;
     RemoveSpecPos.Tag := RemoveSpecPos.Tag and $FFFFFFFE;
-    
+
     case ASelectionMode of
         ModeSelNone:
             begin
@@ -2128,14 +2128,14 @@ begin
                     ActionRmBackSelected.Tag := ActionRmBackSelected.Tag and $FFFFFFFE;
                 SelBackVisCaption := StopVisualSel;
             end;
-            
+
         ModeSelPeakPos:
             begin
                 RemoveSpecPos.Tag := RemoveSpecPos.Tag or 1;
                 PeakPos.Tag := PeakPos.Tag or 2;
                 SelSpecPosVisCaption := StopVisPosSel;
             end;
-            
+
         ModeSelPeakBounds:
             begin
                 RemoveRFactorIntervals.Tag := RemoveRFactorIntervals.Tag or 1;
@@ -2169,7 +2169,7 @@ begin
             SelCharacteristicPoints.Tag := SelCharacteristicPoints.Tag and $FFFFFFFE;
             SelCurveBounds.Tag := SelCurveBounds.Tag and $FFFFFFFE;
         end;
-        
+
         AsyncStart:
         begin
             //  Operation
@@ -2177,12 +2177,12 @@ begin
 
             SetSelectionMode(FitClientApp_.FitClient.SelectionMode);
         end;
-        
+
         AsyncDone:
         begin
             //  Operation
             ActionStopFitting.Tag := ActionStopFitting.Tag and $FFFFFFFE;
-            
+
             SetSelectionMode(FitClientApp_.FitClient.SelectionMode);
         end;
     end;
@@ -2245,7 +2245,7 @@ begin
     ActionSelCharacteristicPoints.Tag :=
         ActionSelCharacteristicPoints.Tag and $FFFFFFFE;
     ActionSelCurveBounds.Tag := ActionSelCurveBounds.Tag and $FFFFFFFE;
-    
+
     case State of
         OpenSuccess:
         begin
@@ -2255,7 +2255,7 @@ begin
             ActionDoAllAuto.Tag := ActionDoAllAuto.Tag or 1;
             ActionSmooth.Tag := ActionSmooth.Tag or 1;
             RmBack.Tag := RmBack.Tag or 1;
-            
+
             //  mozhno voobsche ubrat' proverku i deystvovat' kak pri
             //  polnost'yu avtomaticheskom raschete; eto pozvolit
             //  oboyti udalenie fona
@@ -2279,13 +2279,13 @@ begin
             //  real'no razresheniya primenyayutsya nizhe
             SetAsyncState(FitClientApp_.FitClient.AsyncState);
         end;
-        
+
         OpenFailure:
         begin
             Caption := ApplicationProperties1.Title;
         end;
     end;
-    
+
     if (ActionReload.Tag and 1) = 0 then ActionReload.Enabled := False;
     if (ActionReload.Tag and 1) = 1 then ActionReload.Enabled := True;
     if (ActionSaveAsText.Tag and 1) = 0 then ActionSaveAsText.Enabled := False;
@@ -2391,7 +2391,7 @@ begin
             ActionViewMarkers.Enabled := False;
             UseRule.Enabled := False;
         end;
-        
+
         GraphNotEmpty:
         begin
             ActionZoomIn.Enabled := True;
@@ -2600,7 +2600,7 @@ begin
         DelMenu.Caption := MenuDelCustCapt;
         SelCurveType.Add(DelMenu);
     end;
-    
+
     if SelCurveType.Find('-') = nil then
     begin
         //  vstavlyaetsya razdelitel'

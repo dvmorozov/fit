@@ -27,15 +27,14 @@ type
   { TAboutBox }
 
   TAboutBox = class(TForm)
+    Image1: TImage;
     Panel1: TPanel;
     OKButton: TButton;
-    StaticText1: TStaticText;
     StaticText3: TStaticText;
     StaticText4: TStaticText;
     StaticTextTitle: TStaticText;
     StaticText11: TStaticText;
     StaticTextGitHub: TStaticText;
-    StaticText2: TStaticText;
     procedure FormShow(Sender: TObject);
     procedure StaticTextGitHubClick(Sender: TObject);
   private

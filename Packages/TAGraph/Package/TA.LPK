@@ -21,8 +21,8 @@
     </CompilerOptions>
     <Description Value="Modified TAGraph package."/>
     <License Value="GPL"/>
-    <Version Major="1" Minor="1" Release="5" Build="3"/>
-    <Files Count="3">
+    <Version Major="1" Minor="1" Release="5" Build="4"/>
+    <Files Count="2">
       <Item1>
         <Filename Value="TAGraph.pas"/>
         <HasRegisterProc Value="True"/>
@@ -32,10 +32,6 @@
         <Filename Value="TA.LPK"/>
         <Type Value="Text"/>
       </Item2>
-      <Item3>
-        <Filename Value="TA.pas"/>
-        <UnitName Value="ta"/>
-      </Item3>
     </Files>
     <RequiredPkgs Count="2">
       <Item1>

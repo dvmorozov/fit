@@ -10,10 +10,18 @@ Each curve type should be defined in separate module and should implement interf
 
 ## Step-by-step instructions
 
-1. Create new module and define new curve class and descent it from TNamedPointsSet. Implement methods of interface IPointsSet.
+1. Create new module and define new curve class and derive it from TNamedPointsSet. 
+
+1. Implement methods of interface IPointsSet. Make sure that GetCurveTypeName returns unique curve name and GetCurveTypeId_ return unuque curve type.
 
 1. Instantiate TCurveTypesSingleton and call RegisterCurveType passing to it class of curve.
 
-1. Add new module to the project. New class should be automatically displayed in the main menu.
+1. Add new module to the project. 
+
+1. Add line creating instances of new class into TFitTask.GetPatternSpecimen.
+
+1. Extend NamedPointsSetClasses array in TFormMain.ActionSelCurveExecute with type of new curve.
+
+1. New curve type should be automatically displayed in the sub-menu "Model -> Pattern Type". Items are sorted alphabetically.
 
 {% include google_ads.html %}

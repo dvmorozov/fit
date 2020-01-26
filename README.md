@@ -10,7 +10,7 @@ The application is written in Free Pascal with Lazarus (Delphi is not supported)
 
 {% include video_fully_automated_fitting.html %}
 
-## Open architecture
+## Plugin architecture
 
 [How to add new data loader](how-to-extend-data-loaders)
 

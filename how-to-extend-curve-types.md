@@ -12,7 +12,7 @@ Each curve type should be defined in separate module and should implement interf
 
 1. Create new module and define new curve class and derive it from TNamedPointsSet. 
 
-1. Implement methods of interface IPointsSet. Make sure that GetCurveTypeName returns unique curve name and GetCurveTypeId_ return unuque curve type.
+1. Implement methods of interface IPointsSet. Make sure that GetCurveTypeName returns unique curve name and GetCurveTypeId_ return unuque curve type (use __uuidgen__ utility).
 
 1. Instantiate TCurveTypesSingleton and call RegisterCurveType passing to it class of curve.
 

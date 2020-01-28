@@ -2185,7 +2185,7 @@ end;
 
 function TFitServer.CreateTaskObject: TFitTask;
 begin
-    Result := TFitTask.Create(nil);
+    Result := TFitTask.Create(nil, FEnableBackgroundVariation);
 end;
 
 procedure TFitServer.CreateTasks;

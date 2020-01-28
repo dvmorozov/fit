@@ -80,6 +80,8 @@ type
         CommonVaryingFlag: Boolean;
         { Flag indicating that amplitudes of background points are variated at the moment. }
         BackgroundVaryingFlag: Boolean;
+        { Disables or enables background variation. }
+        FEnableBackgroundVariation: Boolean;
 
         FShowCurMin: TShowCurMin;
         FDoneProc: TDoneProc;
@@ -168,7 +170,8 @@ type
         function GetPatternSpecimen: TCurvePointsSet;
 
     public
-        constructor Create(AOwner: TComponent); override;
+        constructor Create(AOwner: TComponent;
+            AEnableBackgroundVariation: Boolean); virtual;
         destructor Destroy; override;
 
         { Sets up experimental profile data. }
@@ -781,7 +784,8 @@ begin
     end;
 end;
 
-constructor TFitTask.Create(AOwner: TComponent);
+constructor TFitTask.Create(AOwner: TComponent;
+    AEnableBackgroundVariation: Boolean);
 begin
     inherited Create(AOwner);
     CommonSpecimenParams := Curve_parameters.Create(nil);
@@ -795,6 +799,7 @@ begin
     AStep := 100{10};                   //  shag amplitudy dolzhen nastraivat'sya,
                                         //  inache mozhet ne byt' shodimosti k min.
     x0Step := 0.01;
+    FEnableBackgroundVariation := AEnableBackgroundVariation;
 end;
 
 destructor TFitTask.Destroy;

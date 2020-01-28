@@ -21,8 +21,8 @@
       <AutoIncrementBuild Value="True"/>
       <MajorVersionNr Value="1"/>
       <MinorVersionNr Value="1"/>
-      <RevisionNr Value="3"/>
-      <BuildNr Value="1323"/>
+      <RevisionNr Value="4"/>
+      <BuildNr Value="1325"/>
       <Attributes pvaDebug="True"/>
       <StringTable FileDescription="Desktop application." LegalCopyright="Dmitry Morozov" OriginalFilename="Fit" ProductName="Fit" ProductVersion="1.1.1"/>
     </VersionInfo>
@@ -135,10 +135,11 @@
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <WindowIndex Value="1"/>
-        <CursorPos X="53" Y="10"/>
+        <TopLine Value="809"/>
+        <CursorPos X="5" Y="811"/>
         <UsageCount Value="200"/>
         <Bookmarks Count="1">
-          <Item0 Y="473"/>
+          <Item0 Y="474"/>
         </Bookmarks>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -936,7 +937,7 @@
         <IsPartOfProject Value="True"/>
         <WindowIndex Value="1"/>
         <CursorPos X="53" Y="15"/>
-        <UsageCount Value="149"/>
+        <UsageCount Value="150"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit82>
@@ -1250,7 +1251,7 @@
         <EditorIndex Value="23"/>
         <WindowIndex Value="1"/>
         <CursorPos X="53" Y="10"/>
-        <UsageCount Value="123"/>
+        <UsageCount Value="124"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit116>
@@ -1534,123 +1535,127 @@
       <Define2 Value="FITSERVER"/>
       <Define3 Value="Lazarus"/>
     </OtherDefines>
-    <JumpHistory Count="29" HistoryIndex="28">
+    <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="..\Server\fit_server.pas"/>
-        <Caret Line="1661" TopLine="1640"/>
+        <Filename Value="main_calc_thread.pas"/>
+        <Caret Line="63" Column="32" TopLine="54"/>
       </Position1>
       <Position2>
         <Filename Value="..\Server\fit_server.pas"/>
-        <Caret Line="1664" TopLine="1643"/>
+        <Caret Line="1650" TopLine="1637"/>
       </Position2>
       <Position3>
         <Filename Value="..\Server\fit_server.pas"/>
-        <Caret Line="1699" TopLine="1687"/>
+        <Caret Line="1652" TopLine="1637"/>
       </Position3>
       <Position4>
-        <Filename Value="main_calc_thread.pas"/>
-        <Caret Line="63" Column="32" TopLine="54"/>
+        <Filename Value="..\Server\fit_server.pas"/>
+        <Caret Line="1654" TopLine="1637"/>
       </Position4>
       <Position5>
         <Filename Value="..\Server\fit_server.pas"/>
-        <Caret Line="1650" TopLine="1637"/>
+        <Caret Line="1655" TopLine="1637"/>
       </Position5>
       <Position6>
         <Filename Value="..\Server\fit_server.pas"/>
-        <Caret Line="1652" TopLine="1637"/>
+        <Caret Line="1657" TopLine="1637"/>
       </Position6>
       <Position7>
         <Filename Value="..\Server\fit_server.pas"/>
-        <Caret Line="1654" TopLine="1637"/>
+        <Caret Line="1658" TopLine="1637"/>
       </Position7>
       <Position8>
         <Filename Value="..\Server\fit_server.pas"/>
-        <Caret Line="1655" TopLine="1637"/>
+        <Caret Line="1660" TopLine="1639"/>
       </Position8>
       <Position9>
-        <Filename Value="..\Server\fit_server.pas"/>
-        <Caret Line="1657" TopLine="1637"/>
+        <Filename Value="Fit.lpr"/>
+        <Caret Line="69" TopLine="50"/>
       </Position9>
       <Position10>
-        <Filename Value="..\Server\fit_server.pas"/>
-        <Caret Line="1658" TopLine="1637"/>
+        <Filename Value="DataLoaders\dat_file_loader.pas"/>
+        <Caret Line="49" TopLine="40"/>
       </Position10>
       <Position11>
         <Filename Value="..\Server\fit_server.pas"/>
-        <Caret Line="1660" TopLine="1639"/>
+        <Caret Line="1650" TopLine="1643"/>
       </Position11>
       <Position12>
-        <Filename Value="Fit.lpr"/>
-        <Caret Line="69" TopLine="50"/>
+        <Filename Value="..\Server\fit_server.pas"/>
+        <Caret Line="1699" TopLine="1678"/>
       </Position12>
       <Position13>
-        <Filename Value="DataLoaders\dat_file_loader.pas"/>
-        <Caret Line="49" TopLine="40"/>
+        <Filename Value="..\Server\fit_server.pas"/>
+        <Caret Line="1637" Column="15" TopLine="1637"/>
       </Position13>
       <Position14>
         <Filename Value="..\Server\fit_server.pas"/>
-        <Caret Line="1650" TopLine="1643"/>
+        <Caret Line="1693" TopLine="1681"/>
       </Position14>
       <Position15>
-        <Filename Value="..\Server\fit_server.pas"/>
-        <Caret Line="1699" TopLine="1678"/>
+        <Filename Value="Fit.lpr"/>
+        <Caret Line="69" TopLine="50"/>
       </Position15>
       <Position16>
         <Filename Value="..\Server\fit_server.pas"/>
-        <Caret Line="1637" Column="15" TopLine="1637"/>
+        <Caret Line="1693" TopLine="1670"/>
       </Position16>
       <Position17>
-        <Filename Value="..\Server\fit_server.pas"/>
-        <Caret Line="1693" TopLine="1681"/>
-      </Position17>
-      <Position18>
-        <Filename Value="Fit.lpr"/>
-        <Caret Line="69" TopLine="50"/>
-      </Position18>
-      <Position19>
-        <Filename Value="..\Server\fit_server.pas"/>
-        <Caret Line="1693" TopLine="1670"/>
-      </Position19>
-      <Position20>
         <Filename Value="Fit.lpr"/>
         <Caret Line="69" TopLine="49"/>
-      </Position20>
-      <Position21>
+      </Position17>
+      <Position18>
         <Filename Value="ModelCurves\points_set.pas"/>
         <Caret Line="10" Column="53" TopLine="2"/>
+      </Position18>
+      <Position19>
+        <Filename Value="Forms\about_box_dialog.pas"/>
+        <Caret Line="10" Column="53"/>
+      </Position19>
+      <Position20>
+        <Filename Value="Forms\about_box_dialog.pas"/>
+        <Caret Line="63" Column="5" TopLine="46"/>
+      </Position20>
+      <Position21>
+        <Filename Value="Forms\about_box_dialog.pas"/>
+        <Caret Line="64" Column="5" TopLine="47"/>
       </Position21>
       <Position22>
         <Filename Value="Forms\about_box_dialog.pas"/>
-        <Caret Line="10" Column="53"/>
+        <Caret Line="63" Column="5" TopLine="46"/>
       </Position22>
       <Position23>
         <Filename Value="Forms\about_box_dialog.pas"/>
-        <Caret Line="63" Column="5" TopLine="46"/>
+        <Caret Line="64" Column="5" TopLine="47"/>
       </Position23>
       <Position24>
         <Filename Value="Forms\about_box_dialog.pas"/>
-        <Caret Line="64" Column="5" TopLine="47"/>
+        <Caret Line="63" Column="5" TopLine="46"/>
       </Position24>
       <Position25>
         <Filename Value="Forms\about_box_dialog.pas"/>
-        <Caret Line="63" Column="5" TopLine="46"/>
+        <Caret Line="62" Column="5" TopLine="45"/>
       </Position25>
       <Position26>
-        <Filename Value="Forms\about_box_dialog.pas"/>
-        <Caret Line="64" Column="5" TopLine="47"/>
+        <Filename Value="Forms\form_main.pas"/>
+        <Caret Line="10" Column="53"/>
       </Position26>
       <Position27>
-        <Filename Value="Forms\about_box_dialog.pas"/>
-        <Caret Line="63" Column="5" TopLine="46"/>
+        <Filename Value="Forms\form_main.pas"/>
+        <Caret Line="746" Column="49" TopLine="740"/>
       </Position27>
       <Position28>
-        <Filename Value="Forms\about_box_dialog.pas"/>
-        <Caret Line="62" Column="5" TopLine="45"/>
+        <Filename Value="Forms\form_main.pas"/>
+        <Caret Line="747" Column="49" TopLine="741"/>
       </Position28>
       <Position29>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="10" Column="53"/>
+        <Caret Line="812" Column="5" TopLine="810"/>
       </Position29>
+      <Position30>
+        <Filename Value="Forms\form_main.pas"/>
+        <Caret Line="811" Column="5" TopLine="809"/>
+      </Position30>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

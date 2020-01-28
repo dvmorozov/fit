@@ -924,14 +924,15 @@ object FormMain: TFormMain
         ImageIndex = 5
         OnClick = ActionReloadExecute
       end
-      object MenuItem10: TMenuItem
+      object ArgumentTransformation: TMenuItem
         Caption = 'Argument Transformation'
-        object MenuItem14: TMenuItem
+        object CreateRule: TMenuItem
           Caption = 'Create Rule...'
+          Visible = False
         end
-        object MenuItem6: TMenuItem
+        object SetRuleParameters: TMenuItem
           Caption = 'Set Rule Parameters'
-          object MenuItem17: TMenuItem
+          object SetWavelength: TMenuItem
             Caption = 'Wavelength...'
             OnClick = SetWavelengthClick
           end
@@ -1067,7 +1068,7 @@ object FormMain: TFormMain
           AutoCheck = True
           OnClick = ActionSelSpecPosAutoExecute
         end
-        object MenuItem3: TMenuItem
+        object SpecAtEveryPoint: TMenuItem
           Action = ActionSelSpecPosAtEveryPoint
         end
         object SelSpecPosVis: TMenuItem
@@ -1111,9 +1112,12 @@ object FormMain: TFormMain
             OnClick = ActionRmBackAutoExecute
           end
           object RmBackSelected: TMenuItem
-            Action = ActionRmBackSelected
+            Action = ActionSaveAsText
             OnClick = ActionRmBackSelectedExecute
           end
+        end
+        object BackEnableVariation: TMenuItem
+          Action = ActionEnBackVariation
         end
       end
       object MenuItem16: TMenuItem
@@ -2086,39 +2090,39 @@ object FormMain: TFormMain
       OnExecute = ActionSmoothExecute
     end
     object ActionSetPortion: TAction
-      Category = 'Data'
+      Category = 'Model'
       Caption = 'Set Portion of Max Amplitude...'
       Hint = 'Set portion of maximum amplitude for automatic background points generation'
       OnExecute = ActionSetPortionExecute
     end
     object ActionSelBackAuto: TAction
-      Category = 'Data'
+      Category = 'Model'
       Caption = 'Generate Automatically'
       Hint = 'Generate automatically'
       ImageIndex = 11
       OnExecute = ActionSelBackAutoExecute
     end
     object ActionSelBackVis: TAction
-      Category = 'Data'
+      Category = 'Model'
       Caption = 'Start Visual Selection'
       OnExecute = ActionSelBackVisExecute
     end
     object ActionRemoveBack: TAction
-      Category = 'Data'
+      Category = 'Model'
       Caption = 'Remove All'
       Hint = 'Remove all points'
       ImageIndex = 14
       OnExecute = ActionRemoveBackExecute
     end
     object ActionRmBackAuto: TAction
-      Category = 'Data'
+      Category = 'Model'
       Caption = 'Automatically'
       Hint = 'Subract automatically'
       ImageIndex = 12
       OnExecute = ActionRmBackAutoExecute
     end
     object ActionRmBackSelected: TAction
-      Category = 'Data'
+      Category = 'Model'
       Caption = 'By Selected Points'
       Hint = 'Subtract by selected points'
       ImageIndex = 15
@@ -2285,6 +2289,11 @@ object FormMain: TFormMain
       Caption = 'Pattern Type'
       DisableIfNoHandler = False
       OnUpdate = ActionPatternTypeUpdate
+    end
+    object ActionEnBackVariation: TAction
+      Category = 'Model'
+      Caption = 'Enable Variation'
+      OnExecute = ActionEnBackVariationExecute
     end
   end
   object TimerAsync: TTimer

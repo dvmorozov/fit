@@ -206,6 +206,9 @@ type
         function GetCurveType: TCurveTypeId;
         procedure SetCurveType(ACurveType: TCurveTypeId);
 
+        function GetEnableBackgroundVariation: Boolean;
+        procedure SetEnableBackgroundVariation(AEnable: Boolean);
+
         { Creates list of selected points and inserts new item into chart legend (CheckListBox). }
         procedure RecreateAndShowSelectedPoints(Title: string);
 
@@ -311,8 +314,12 @@ type
 {$IFDEF FIT}
         function GetFitProxy: TFitServer;
 {$ENDIF}
-        { Getters of server attributes. }
-        
+
+        { Server attributes. }
+
+        property EnableBackgroundVariation: Boolean
+            read GetEnableBackgroundVariation write SetEnableBackgroundVariation;
+
         property MaxRFactor: Double read GetMaxRFactor write SetMaxRFactor;
         property BackFactor: Double read GetBackFactor write SetBackFactor;
         property CurveThresh: Double read GetCurveThresh write SetCurveThresh;
@@ -1322,6 +1329,18 @@ procedure TFitClient.SetCurveType(ACurveType: TCurveTypeId);
 begin
     Assert(Assigned(FitProxy));
     FitProxy.SetCurveType(ACurveType);
+end;
+
+function TFitClient.GetEnableBackgroundVariation: Boolean;
+begin
+    Assert(Assigned(FitProxy));
+    Result := FitProxy.GetEnableBackgroundVariation;
+end;
+
+procedure TFitClient.SetEnableBackgroundVariation(AEnable: Boolean);
+begin
+    Assert(Assigned(FitProxy));
+    FitProxy.SetEnableBackgroundVariation(AEnable);
 end;
 
 {$IFDEF _WINDOWS}

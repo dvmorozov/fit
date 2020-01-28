@@ -26,8 +26,10 @@ uses Classes, SysUtils, points_set, curve_points_set, self_copied_component,
     user_points_set, pseudo_voigt_points_set;
   
 type
-    { Fits profile interval by model curves (specimens). 
-      Should be inherited from TComponent to allow inserting into TComponentList. }
+    { Fits profile interval by model curves (specimens).
+      Provides variable parameters and evaluation function for optimization
+      algorithm.
+      It is inherited from TComponent to allow inserting into TComponentList. }
     TFitTask = class(TComponent)
     protected
         FBegIndex: LongInt;
@@ -80,6 +82,8 @@ type
         CommonVaryingFlag: Boolean;
         { Flag indicating that amplitudes of background points are variated at the moment. }
         BackgroundVaryingFlag: Boolean;
+        { Disables or enables background variation. }
+        FEnableBackgroundVariation: Boolean;
 
         FShowCurMin: TShowCurMin;
         FDoneProc: TDoneProc;
@@ -90,14 +94,22 @@ type
         
         { Calculates R-factor. }
         function Func: Double;
+        { Computes evaluation function. }
         procedure CalcFunc;
+        { Returns initial variation step for current variable parameter. }
         function GetStep: Double;
-        { Should be implemented because is used by pointer. See OnSetStep. }
+        { Does nothing. Should be implemented because is used by pointer.
+          See OnSetStep. }
         procedure SetStep(NewStepValue: Double);
+        { Moves iteration to next variable parameter. }
         procedure SetNextParam;
+        { Sets iteration to the first variable parameter. }
         procedure SetFirstParam;
+        { Returns variable parameter value. }
         function GetParam: Double;
+        { Sets variable parameter value. }
         procedure SetParam(NewParamValue: Double);
+        { Returns True at the end of iteration cycle. }
         function EndOfCycle: Boolean;
         { Divides all optimization steps by 2. }
         procedure DivideStepsBy2;
@@ -168,7 +180,8 @@ type
         function GetPatternSpecimen: TCurvePointsSet;
 
     public
-        constructor Create(AOwner: TComponent); override;
+        constructor Create(AOwner: TComponent;
+            AEnableBackgroundVariation: Boolean); virtual;
         destructor Destroy; override;
 
         { Sets up experimental profile data. }
@@ -507,7 +520,7 @@ function TFitTask.GetStep: Double;
 var GP: TCurvePointsSet;
     P: TSpecialCurveParameter;
 begin
-    if BackgroundVaryingFlag then
+    if FEnableBackgroundVariation and BackgroundVaryingFlag then
     begin
         Result := 0.1;
     end
@@ -589,21 +602,22 @@ begin
         Exit;
     end;
 
-    if BackgroundVaryingFlag then
+    if FEnableBackgroundVariation then
     begin
-        //  povtornoe obraschenie k var'irovaniyu
-        //  dannyh fona
-        Inc(BackgroundVaryingIndex);
-    end;
-    
-    if BackgroundVaryingIndex < //Background.PointsCount
-        4 then
-    begin
-        //  pervonachal'noe obraschenie k var'irovaniyu
-        //  dannyh fona
-        BackgroundVaryingFlag := True;
-        EOC := False;
-        Exit;
+        if BackgroundVaryingFlag then
+        begin
+            //  Increments parameter index for next iteration.
+            Inc(BackgroundVaryingIndex);
+        end;
+
+        if BackgroundVaryingIndex < //Background.PointsCount
+            4 then
+        begin
+            //  There are still next variable background parameters.
+            BackgroundVaryingFlag := True;
+            EOC := False;
+            Exit;
+        end;
     end;
 end;
 
@@ -635,7 +649,7 @@ begin
     Assert(Assigned(CurvesList));
     Assert(Assigned(CommonSpecimenParams));
     
-    if BackgroundVaryingFlag then
+    if FEnableBackgroundVariation and BackgroundVaryingFlag then
     begin
         Assert(BackgroundVaryingIndex < (*Background.PointsCount*)4);
         //Result := Background.PointYCoord[BackgroundVaryingIndex];
@@ -672,7 +686,7 @@ begin
     Assert(Assigned(CurvesList));
     Assert(Assigned(CommonSpecimenParams));
     
-    if BackgroundVaryingFlag then
+    if FEnableBackgroundVariation and BackgroundVaryingFlag then
     begin
         Assert(BackgroundVaryingIndex < (*Background.PointsCount*)4);
         //Background.PointYCoord[BackgroundVaryingIndex] := NewParamValue;
@@ -781,7 +795,8 @@ begin
     end;
 end;
 
-constructor TFitTask.Create(AOwner: TComponent);
+constructor TFitTask.Create(AOwner: TComponent;
+    AEnableBackgroundVariation: Boolean);
 begin
     inherited Create(AOwner);
     CommonSpecimenParams := Curve_parameters.Create(nil);
@@ -795,6 +810,7 @@ begin
     AStep := 100{10};                   //  shag amplitudy dolzhen nastraivat'sya,
                                         //  inache mozhet ne byt' shodimosti k min.
     x0Step := 0.01;
+    FEnableBackgroundVariation := AEnableBackgroundVariation;
 end;
 
 destructor TFitTask.Destroy;

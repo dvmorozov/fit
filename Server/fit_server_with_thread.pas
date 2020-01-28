@@ -127,7 +127,7 @@ end;
 
 function TFitServerWithThread.CreateTaskObject: TFitTask;
 begin
-    Result := TFitTask.Create(nil);
+    Result := TFitTask.Create(nil, FEnableBackgroundVariation);
 end;
 
 end.

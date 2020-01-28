@@ -50,6 +50,7 @@ type
 
   { TFormMain }
   TFormMain = class(TForm)
+    ActionEnBackVariation: TAction;
     ActionPatternType: TAction;
     ActionAnimationMode: TAction;
     ActionSelSpecPosAtEveryPoint: TAction;
@@ -121,11 +122,12 @@ type
     MenuItem1: TMenuItem;
     FitMinNumberOfSpec: TMenuItem;
     FitMinDifference: TMenuItem;
-    MenuItem10: TMenuItem;
-    MenuItem14: TMenuItem;
+    ArgumentTransformation: TMenuItem;
+    CreateRule: TMenuItem;
     BackPoints: TMenuItem;
-    MenuItem3: TMenuItem;
+    SpecAtEveryPoint: TMenuItem;
     MenuItem5: TMenuItem;
+    BackEnableVariation: TMenuItem;
     PanelParameters: TPanel;
     PanelIntervals: TPanel;
     PanelDatasheet: TPanel;
@@ -151,7 +153,7 @@ type
     Panel2: TPanel;
     PanelRight: TPanel;
     PeakPos: TMenuItem;
-    MenuItem17: TMenuItem;
+    SetWavelength: TMenuItem;
     ScrollBarX: TScrollBar;
     ScrollBarY: TScrollBar;
     SplitterChartRight: TSplitter;
@@ -192,7 +194,7 @@ type
     SinThetaLambda: TMenuItem;
     N2Theta: TMenuItem;
     Theta: TMenuItem;
-    MenuItem6: TMenuItem;
+    SetRuleParameters: TMenuItem;
     SelRFactorIntervalsAuto: TMenuItem;
     SelRFactorIntervalsVis: TMenuItem;
     MenuItem20: TMenuItem;
@@ -251,6 +253,8 @@ type
     procedure ActionCopyExecute(Sender: TObject);
     procedure ActionDeleteExecute(Sender: TObject);
     procedure ActionDoAllAutoExecute(Sender: TObject);
+    procedure ActionEnBackVariationExecute(Sender: TObject);
+    procedure ActionEnBackVariationUpdate(Sender: TObject);
     procedure ActionFitMinDifferenceExecute(Sender: TObject);
     procedure ActionFitMinNumberOfSpecExecute(Sender: TObject);
     procedure ActionImportExecute(Sender: TObject);
@@ -689,7 +693,7 @@ end;
 procedure TFormMain.ActionDeleteExecute(Sender: TObject);
 var i, RowsToDelete, Index: LongInt;
 begin
-    //  ??? obobschit' na vse gridy
+    //  TODO: obobschit' na vse gridy
     if Assigned(SpecimenList) then
     begin
         with GridParameters do
@@ -738,6 +742,18 @@ begin
 {$IFDEF FITPRO}
     TimerAsync.Enabled := True;
 {$ENDIF}
+end;
+
+procedure TFormMain.ActionEnBackVariationExecute(Sender: TObject);
+begin
+    FitClientApp_.FitClient.EnableBackgroundVariation :=
+        not FitClientApp_.FitClient.EnableBackgroundVariation;
+    ActionEnBackVariation.Checked := FitClientApp_.FitClient.EnableBackgroundVariation;
+end;
+
+procedure TFormMain.ActionEnBackVariationUpdate(Sender: TObject);
+begin
+    ActionEnBackVariation.Checked := FitClientApp_.FitClient.EnableBackgroundVariation;
 end;
 
 procedure TFormMain.ActionFitMinDifferenceExecute(Sender: TObject);

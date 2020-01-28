@@ -39,7 +39,8 @@ type
         function GetAllDone: Boolean; override;
 
     public
-        constructor Create(AOwner: TComponent); override;
+        constructor Create(AOwner: TComponent;
+            AEnableBackgroundVariation: Boolean); override;
         destructor Destroy; override;
         { Synchronous termination of long-term operation without call of termination procedure. }
         procedure AbortAsyncOper;
@@ -246,17 +247,16 @@ begin
     LeaveCriticalsection(CS);
 end;
 
-constructor TFitTaskWithThread.Create(AOwner: TComponent);
+constructor TFitTaskWithThread.Create(AOwner: TComponent;
+    AEnableBackgroundVariation: Boolean);
 begin
     inherited;
-    //InitializeCriticalSection(CS);
     InitCriticalSection(CS);
 end;
 
 destructor TFitTaskWithThread.Destroy;
 begin
     if Assigned(MainCalcThread) then AbortAsyncOper;
-    //DeleteCriticalSection(CS);
     DoneCriticalSection(CS);
     inherited;
 end;

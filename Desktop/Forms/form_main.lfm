@@ -7,7 +7,7 @@ object FormMain: TFormMain
   VertScrollBar.Page = 502
   ActiveControl = PanelTop
   Caption = 'FormMain'
-  ClientHeight = 610
+  ClientHeight = 590
   ClientWidth = 1022
   Font.Height = -9
   Font.Name = 'MS Sans Serif'
@@ -20,8 +20,8 @@ object FormMain: TFormMain
   LCLVersion = '2.0.6.0'
   object StatusBar: TStatusBar
     Left = 0
-    Height = 21
-    Top = 589
+    Height = 23
+    Top = 567
     Width = 1022
     Font.Height = -9
     Font.Name = 'MS Sans Serif'
@@ -41,7 +41,7 @@ object FormMain: TFormMain
   object PageControl1: TPageControl
     Left = 0
     Height = 115
-    Top = 474
+    Top = 452
     Width = 1022
     ActivePage = TabSheetBackground
     Align = alBottom
@@ -52,8 +52,8 @@ object FormMain: TFormMain
     TabOrder = 4
     object TabSheetBackground: TTabSheet
       Caption = 'Background Points'
-      ClientHeight = 91
-      ClientWidth = 1018
+      ClientHeight = 89
+      ClientWidth = 1014
       Font.Height = -9
       Font.Name = 'MS Sans Serif'
       OnResize = TabSheetBackgroundResize
@@ -61,13 +61,13 @@ object FormMain: TFormMain
       ParentFont = False
       object PanelBackground: TPanel
         Left = 0
-        Height = 91
+        Height = 89
         Top = 0
-        Width = 1018
+        Width = 1014
         Align = alClient
         BevelOuter = bvNone
-        ClientHeight = 91
-        ClientWidth = 1018
+        ClientHeight = 89
+        ClientWidth = 1014
         Font.Height = -9
         Font.Name = 'MS Sans Serif'
         ParentColor = False
@@ -75,9 +75,9 @@ object FormMain: TFormMain
         TabOrder = 0
         object GridBackground: TNumericGrid
           Left = 24
-          Height = 91
+          Height = 89
           Top = 0
-          Width = 994
+          Width = 990
           Align = alClient
           Color = clBtnFace
           ColCount = 2
@@ -103,7 +103,7 @@ object FormMain: TFormMain
         end
         object EditBalloonGridBackground: TEdit
           Left = 39
-          Height = 20
+          Height = 21
           Top = 8
           Width = 2
           Font.Height = -9
@@ -113,7 +113,7 @@ object FormMain: TFormMain
         end
         object ToolBar1: TToolBar
           Left = 0
-          Height = 91
+          Height = 89
           Top = 0
           Width = 24
           Align = alLeft
@@ -141,8 +141,8 @@ object FormMain: TFormMain
             Action = ActionRmBackSelected
           end
           object ToolButton4: TToolButton
-            Left = 1
-            Top = 68
+            Left = 24
+            Top = 2
             Action = ActionRemoveBack
           end
         end
@@ -505,7 +505,7 @@ object FormMain: TFormMain
     Cursor = crVSplit
     Left = 0
     Height = 6
-    Top = 468
+    Top = 446
     Width = 1022
     Align = alBottom
     Beveled = True
@@ -515,7 +515,7 @@ object FormMain: TFormMain
   end
   object SplitterLeftChart: TSplitter
     Left = 131
-    Height = 442
+    Height = 420
     Top = 26
     Width = 4
     Beveled = True
@@ -524,12 +524,12 @@ object FormMain: TFormMain
   end
   object PanelRight: TPanel
     Left = 892
-    Height = 442
+    Height = 420
     Top = 26
     Width = 130
     Align = alRight
     BevelOuter = bvNone
-    ClientHeight = 442
+    ClientHeight = 420
     ClientWidth = 130
     Font.Height = -9
     Font.Name = 'MS Sans Serif'
@@ -539,12 +539,12 @@ object FormMain: TFormMain
     TabStop = True
     object Panel2: TPanel
       Left = 0
-      Height = 442
+      Height = 420
       Top = 0
       Width = 130
       Align = alClient
       BevelOuter = bvNone
-      ClientHeight = 442
+      ClientHeight = 420
       ClientWidth = 130
       Font.Height = -9
       Font.Name = 'MS Sans Serif'
@@ -553,7 +553,7 @@ object FormMain: TFormMain
       TabStop = True
       object Label5: TLabel
         Left = 6
-        Height = 10
+        Height = 13
         Top = 0
         Width = 34
         Caption = 'Graphs'
@@ -565,7 +565,7 @@ object FormMain: TFormMain
       object Label1: TLabel
         Left = 6
         Height = 11
-        Top = 385
+        Top = 363
         Width = 38
         Anchors = [akLeft, akBottom]
         AutoSize = False
@@ -578,7 +578,7 @@ object FormMain: TFormMain
       object LabelAngle: TLabel
         Left = 46
         Height = 13
-        Top = 384
+        Top = 362
         Width = 77
         Anchors = [akLeft, akBottom]
         AutoSize = False
@@ -590,7 +590,7 @@ object FormMain: TFormMain
       object Label2: TLabel
         Left = 6
         Height = 11
-        Top = 401
+        Top = 379
         Width = 38
         Anchors = [akLeft, akBottom]
         AutoSize = False
@@ -603,7 +603,7 @@ object FormMain: TFormMain
       object LabelIntensity: TLabel
         Left = 46
         Height = 13
-        Top = 400
+        Top = 378
         Width = 77
         Anchors = [akLeft, akBottom]
         AutoSize = False
@@ -615,7 +615,7 @@ object FormMain: TFormMain
       object Label3: TLabel
         Left = 6
         Height = 11
-        Top = 417
+        Top = 395
         Width = 38
         Anchors = [akLeft, akBottom]
         AutoSize = False
@@ -628,7 +628,7 @@ object FormMain: TFormMain
       object LabelMin: TLabel
         Left = 46
         Height = 13
-        Top = 416
+        Top = 394
         Width = 77
         Anchors = [akLeft, akBottom]
         AutoSize = False
@@ -639,8 +639,8 @@ object FormMain: TFormMain
       end
       object Label6: TLabel
         Left = 6
-        Height = 10
-        Top = 373
+        Height = 13
+        Top = 348
         Width = 18
         Anchors = [akLeft, akBottom]
         Caption = 'Info'
@@ -651,7 +651,7 @@ object FormMain: TFormMain
       end
       object CheckListBoxLegend: TCheckListBox
         Left = 6
-        Height = 352
+        Height = 330
         Top = 14
         Width = 118
         Anchors = [akTop, akLeft, akRight, akBottom]
@@ -665,13 +665,12 @@ object FormMain: TFormMain
         ParentFont = False
         Style = lbOwnerDrawFixed
         TabOrder = 0
-        TopIndex = -1
       end
     end
   end
   object SplitterChartRight: TSplitter
     Left = 888
-    Height = 442
+    Height = 420
     Top = 26
     Width = 4
     Align = alRight
@@ -682,12 +681,12 @@ object FormMain: TFormMain
   end
   object PanelChart: TPanel
     Left = 135
-    Height = 442
+    Height = 420
     Top = 26
     Width = 753
     Align = alClient
     BevelOuter = bvNone
-    ClientHeight = 442
+    ClientHeight = 420
     ClientWidth = 753
     Color = clWindow
     Font.Height = -9
@@ -698,7 +697,7 @@ object FormMain: TFormMain
     TabStop = True
     object Chart: TTAChart
       Left = 0
-      Height = 429
+      Height = 407
       Top = 0
       Width = 740
       AutoUpdateXMin = True
@@ -727,7 +726,7 @@ object FormMain: TFormMain
     object ScrollBarX: TScrollBar
       Left = 0
       Height = 13
-      Top = 429
+      Top = 407
       Width = 753
       Align = alBottom
       PageSize = 0
@@ -736,7 +735,7 @@ object FormMain: TFormMain
     end
     object ScrollBarY: TScrollBar
       Left = 740
-      Height = 429
+      Height = 407
       Top = 0
       Width = 13
       Align = alRight
@@ -747,7 +746,7 @@ object FormMain: TFormMain
     end
     object EditBalloonChart: TEdit
       Left = 51
-      Height = 20
+      Height = 21
       Top = 6
       Width = 4
       Font.Height = -9
@@ -758,12 +757,12 @@ object FormMain: TFormMain
   end
   object PanelLeft: TPanel
     Left = 0
-    Height = 442
+    Height = 420
     Top = 26
     Width = 131
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 442
+    ClientHeight = 420
     ClientWidth = 131
     Font.Height = -9
     Font.Name = 'MS Sans Serif'
@@ -773,7 +772,7 @@ object FormMain: TFormMain
     TabStop = True
     object Label4: TLabel
       Left = 6
-      Height = 10
+      Height = 13
       Top = 0
       Width = 23
       Caption = 'Data'
@@ -784,7 +783,7 @@ object FormMain: TFormMain
     end
     object GridData: TNumericGrid
       Left = 0
-      Height = 442
+      Height = 420
       Top = 0
       Width = 131
       Align = alClient
@@ -813,7 +812,7 @@ object FormMain: TFormMain
     end
     object EditBalloonGridData: TEdit
       Left = 19
-      Height = 20
+      Height = 21
       Top = 20
       Width = 4
       Font.Height = -9
@@ -876,7 +875,7 @@ object FormMain: TFormMain
   object MainMenu1: TMainMenu
     ParentBidiMode = False
     Images = ImageList2
-    left = 550
+    left = 552
     top = 64
     object Data: TMenuItem
       Caption = '&Data'
@@ -925,14 +924,15 @@ object FormMain: TFormMain
         ImageIndex = 5
         OnClick = ActionReloadExecute
       end
-      object MenuItem10: TMenuItem
+      object ArgumentTransformation: TMenuItem
         Caption = 'Argument Transformation'
-        object MenuItem14: TMenuItem
+        object CreateRule: TMenuItem
           Caption = 'Create Rule...'
+          Visible = False
         end
-        object MenuItem6: TMenuItem
+        object SetRuleParameters: TMenuItem
           Caption = 'Set Rule Parameters'
-          object MenuItem17: TMenuItem
+          object SetWavelength: TMenuItem
             Caption = 'Wavelength...'
             OnClick = SetWavelengthClick
           end
@@ -974,39 +974,6 @@ object FormMain: TFormMain
         object SelEntireProf: TMenuItem
           Action = ActionSelEntireProf
           OnClick = ActionSelEntireProfExecute
-        end
-      end
-      object Back: TMenuItem
-        Caption = 'Background'
-        object SetPortion: TMenuItem
-          Action = ActionSetPortion
-          OnClick = ActionSetPortionExecute
-        end
-        object BackPoints: TMenuItem
-          Caption = 'Points'
-          object SelBackAuto: TMenuItem
-            Action = ActionSelBackAuto
-            OnClick = ActionSelBackAutoExecute
-          end
-          object SelBackVis: TMenuItem
-            Action = ActionSelBackVis
-            OnClick = ActionSelBackVisExecute
-          end
-          object RemoveBack: TMenuItem
-            Action = ActionRemoveBack
-            OnClick = ActionRemoveBackExecute
-          end
-        end
-        object RmBack: TMenuItem
-          Caption = 'Subtract'
-          object RmBackAuto: TMenuItem
-            Action = ActionRmBackAuto
-            OnClick = ActionRmBackAutoExecute
-          end
-          object RmBackSelected: TMenuItem
-            Action = ActionRmBackSelected
-            OnClick = ActionRmBackSelectedExecute
-          end
         end
       end
       object Smooth: TMenuItem
@@ -1101,7 +1068,7 @@ object FormMain: TFormMain
           AutoCheck = True
           OnClick = ActionSelSpecPosAutoExecute
         end
-        object MenuItem3: TMenuItem
+        object SpecAtEveryPoint: TMenuItem
           Action = ActionSelSpecPosAtEveryPoint
         end
         object SelSpecPosVis: TMenuItem
@@ -1115,6 +1082,42 @@ object FormMain: TFormMain
         object RemoveSpecPos: TMenuItem
           Action = ActionRemoveSpecPos
           OnClick = ActionRemoveSpecPosExecute
+        end
+      end
+      object Back: TMenuItem
+        Caption = 'Background'
+        object SetPortion: TMenuItem
+          Action = ActionSetPortion
+          OnClick = ActionSetPortionExecute
+        end
+        object BackPoints: TMenuItem
+          Caption = 'Points'
+          object SelBackAuto: TMenuItem
+            Action = ActionSelBackAuto
+            OnClick = ActionSelBackAutoExecute
+          end
+          object SelBackVis: TMenuItem
+            Action = ActionSelBackVis
+            OnClick = ActionSelBackVisExecute
+          end
+          object RemoveBack: TMenuItem
+            Action = ActionRemoveBack
+            OnClick = ActionRemoveBackExecute
+          end
+        end
+        object RmBack: TMenuItem
+          Caption = 'Subtract'
+          object RmBackAuto: TMenuItem
+            Action = ActionRmBackAuto
+            OnClick = ActionRmBackAutoExecute
+          end
+          object RmBackSelected: TMenuItem
+            Action = ActionSaveAsText
+            OnClick = ActionRmBackSelectedExecute
+          end
+        end
+        object BackEnableVariation: TMenuItem
+          Action = ActionEnBackVariation
         end
       end
       object MenuItem16: TMenuItem
@@ -2087,39 +2090,39 @@ object FormMain: TFormMain
       OnExecute = ActionSmoothExecute
     end
     object ActionSetPortion: TAction
-      Category = 'Data'
+      Category = 'Model'
       Caption = 'Set Portion of Max Amplitude...'
       Hint = 'Set portion of maximum amplitude for automatic background points generation'
       OnExecute = ActionSetPortionExecute
     end
     object ActionSelBackAuto: TAction
-      Category = 'Data'
+      Category = 'Model'
       Caption = 'Generate Automatically'
       Hint = 'Generate automatically'
       ImageIndex = 11
       OnExecute = ActionSelBackAutoExecute
     end
     object ActionSelBackVis: TAction
-      Category = 'Data'
+      Category = 'Model'
       Caption = 'Start Visual Selection'
       OnExecute = ActionSelBackVisExecute
     end
     object ActionRemoveBack: TAction
-      Category = 'Data'
+      Category = 'Model'
       Caption = 'Remove All'
       Hint = 'Remove all points'
       ImageIndex = 14
       OnExecute = ActionRemoveBackExecute
     end
     object ActionRmBackAuto: TAction
-      Category = 'Data'
+      Category = 'Model'
       Caption = 'Automatically'
       Hint = 'Subract automatically'
       ImageIndex = 12
       OnExecute = ActionRmBackAutoExecute
     end
     object ActionRmBackSelected: TAction
-      Category = 'Data'
+      Category = 'Model'
       Caption = 'By Selected Points'
       Hint = 'Subtract by selected points'
       ImageIndex = 15
@@ -2286,6 +2289,12 @@ object FormMain: TFormMain
       Caption = 'Pattern Type'
       DisableIfNoHandler = False
       OnUpdate = ActionPatternTypeUpdate
+    end
+    object ActionEnBackVariation: TAction
+      Category = 'Model'
+      Caption = 'Enable Variation'
+      OnExecute = ActionEnBackVariationExecute
+      OnUpdate = ActionEnBackVariationUpdate
     end
   end
   object TimerAsync: TTimer

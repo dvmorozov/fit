@@ -22,7 +22,7 @@
       <MajorVersionNr Value="1"/>
       <MinorVersionNr Value="1"/>
       <RevisionNr Value="4"/>
-      <BuildNr Value="1328"/>
+      <BuildNr Value="1329"/>
       <Attributes pvaDebug="True"/>
       <StringTable FileDescription="Desktop application." LegalCopyright="Dmitry Morozov" OriginalFilename="Fit" ProductName="Fit" ProductVersion="1.1.1"/>
     </VersionInfo>
@@ -73,15 +73,11 @@
       <Version Value="2"/>
     </PublishOptions>
     <RunParams>
-      <local>
-        <CommandLineParams Value="/INFILE=&quot;C:\Projects\fit\Data\2.dat&quot;"/>
-        <LaunchingApplication PathPlusParams="\usr\X11R6\bin\xterm -T 'Lazarus Run Output' -e $(LazarusDir)\tools\runwait.sh $(TargetCmdLine)"/>
-      </local>
       <FormatVersion Value="2"/>
       <Modes Count="1">
         <Mode0 Name="default">
           <local>
-            <CommandLineParams Value="/INFILE=&quot;C:\Projects\fit\Data\2.dat&quot;"/>
+            <CommandLineParams Value="\INFILE=&quot;C:\Projects\fit\Data\2.dat&quot;"/>
             <LaunchingApplication PathPlusParams="\usr\X11R6\bin\xterm -T 'Lazarus Run Output' -e $(LazarusDir)\tools\runwait.sh $(TargetCmdLine)"/>
           </local>
         </Mode0>
@@ -115,7 +111,7 @@
         <MinVersion Major="1" Valid="True"/>
       </Item7>
     </RequiredPackages>
-    <Units Count="152">
+    <Units Count="148">
       <Unit0>
         <Filename Value="Fit.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -1438,37 +1434,6 @@
         <DefaultSyntaxHighlighter Value="XML"/>
       </Unit143>
       <Unit144>
-        <Filename Value="\\VBOXSVR\04_-_github\fitgrids\package\NumericGrid.pas"/>
-        <EditorIndex Value="-1"/>
-        <WindowIndex Value="1"/>
-        <TopLine Value="307"/>
-        <CursorPos X="34" Y="320"/>
-        <UsageCount Value="12"/>
-        <DefaultSyntaxHighlighter Value="Delphi"/>
-      </Unit144>
-      <Unit145>
-        <Filename Value="\\usr\share\lazarus\2.0.6\ide\lazarus.pp"/>
-        <UnitName Value="Lazarus"/>
-        <EditorIndex Value="-1"/>
-        <WindowIndex Value="1"/>
-        <UsageCount Value="11"/>
-        <DefaultSyntaxHighlighter Value="Delphi"/>
-      </Unit145>
-      <Unit146>
-        <Filename Value="\\VBOXSVR\04_-_github\fitgrids\package\FitGrids.pas"/>
-        <EditorIndex Value="-1"/>
-        <WindowIndex Value="1"/>
-        <UsageCount Value="9"/>
-        <DefaultSyntaxHighlighter Value="Delphi"/>
-      </Unit146>
-      <Unit147>
-        <Filename Value="\\VBOXSVR\04_-_github\fitminimizers\package\FitMinimizers.pas"/>
-        <EditorIndex Value="-1"/>
-        <WindowIndex Value="1"/>
-        <UsageCount Value="9"/>
-        <DefaultSyntaxHighlighter Value="Delphi"/>
-      </Unit147>
-      <Unit148>
         <Filename Value="..\..\fit-experimental\Server\client_interfaces\int_fit_service.pas"/>
         <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
@@ -1476,8 +1441,8 @@
         <CursorPos X="16" Y="32"/>
         <UsageCount Value="9"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
-      </Unit148>
-      <Unit149>
+      </Unit144>
+      <Unit145>
         <Filename Value="app.pas"/>
         <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
@@ -1485,23 +1450,23 @@
         <CursorPos X="7" Y="42"/>
         <UsageCount Value="10"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
-      </Unit149>
-      <Unit150>
+      </Unit145>
+      <Unit146>
         <Filename Value="C:\lazarus\fpc\3.0.4\source\rtl\objpas\classes\classesh.inc"/>
         <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <TopLine Value="1777"/>
         <CursorPos X="17" Y="1840"/>
         <UsageCount Value="10"/>
-      </Unit150>
-      <Unit151>
+      </Unit146>
+      <Unit147>
         <Filename Value="C:\lazarus\fpc\3.0.4\source\rtl\inc\threadh.inc"/>
         <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <TopLine Value="144"/>
         <CursorPos X="11" Y="160"/>
         <UsageCount Value="10"/>
-      </Unit151>
+      </Unit147>
     </Units>
     <OtherDefines Count="4">
       <Define0 Value="FIT"/>
@@ -1640,7 +1605,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(LazarusDir)\lcl\interfaces\win32;$(LazarusDir)\lcl\include;$(LazarusDir)\fpc\2.2.0\source\rtl\inc"/>
-      <OtherUnitFiles Value="..\Repository\NewVCL;C:\lazarus_lib\synapse\synapse\source\lib\;C:\lazarus_lib\wst-0.5\;$(LazarusDir)\components\codetools\units\i386-win32;TAGraph\Component;DataLoaders;ModelCurves;ModelCurves\UserPointsSet;\VBOXSVR\04_-_github\fitminimizers\package"/>
+      <OtherUnitFiles Value="..\Repository\NewVCL;C:\lazarus_lib\synapse\synapse\source\lib;C:\lazarus_lib\wst-0.5;$(LazarusDir)\components\codetools\units\i386-win32;TAGraph\Component;DataLoaders;ModelCurves;ModelCurves\UserPointsSet;\VBOXSVR\04_-_github\fitminimizers\package\"/>
       <UnitOutputDirectory Value="o\Fit\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Parsing>

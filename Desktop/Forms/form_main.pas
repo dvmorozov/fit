@@ -254,6 +254,7 @@ type
     procedure ActionDeleteExecute(Sender: TObject);
     procedure ActionDoAllAutoExecute(Sender: TObject);
     procedure ActionEnBackVariationExecute(Sender: TObject);
+    procedure ActionEnBackVariationUpdate(Sender: TObject);
     procedure ActionFitMinDifferenceExecute(Sender: TObject);
     procedure ActionFitMinNumberOfSpecExecute(Sender: TObject);
     procedure ActionImportExecute(Sender: TObject);
@@ -692,7 +693,7 @@ end;
 procedure TFormMain.ActionDeleteExecute(Sender: TObject);
 var i, RowsToDelete, Index: LongInt;
 begin
-    //  ??? obobschit' na vse gridy
+    //  TODO: obobschit' na vse gridy
     if Assigned(SpecimenList) then
     begin
         with GridParameters do
@@ -745,7 +746,14 @@ end;
 
 procedure TFormMain.ActionEnBackVariationExecute(Sender: TObject);
 begin
-  ;
+    FitClientApp_.FitClient.EnableBackgroundVariation :=
+        not FitClientApp_.FitClient.EnableBackgroundVariation;
+    ActionEnBackVariation.Checked := FitClientApp_.FitClient.EnableBackgroundVariation;
+end;
+
+procedure TFormMain.ActionEnBackVariationUpdate(Sender: TObject);
+begin
+    ActionEnBackVariation.Checked := FitClientApp_.FitClient.EnableBackgroundVariation;
 end;
 
 procedure TFormMain.ActionFitMinDifferenceExecute(Sender: TObject);

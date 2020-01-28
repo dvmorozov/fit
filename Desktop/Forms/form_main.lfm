@@ -875,7 +875,7 @@ object FormMain: TFormMain
   object MainMenu1: TMainMenu
     ParentBidiMode = False
     Images = ImageList2
-    left = 550
+    left = 552
     top = 64
     object Data: TMenuItem
       Caption = '&Data'
@@ -2294,6 +2294,7 @@ object FormMain: TFormMain
       Category = 'Model'
       Caption = 'Enable Variation'
       OnExecute = ActionEnBackVariationExecute
+      OnUpdate = ActionEnBackVariationUpdate
     end
   end
   object TimerAsync: TTimer

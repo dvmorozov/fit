@@ -39,8 +39,11 @@ type
         function GetCurveType: TCurveTypeId;
         procedure SetCurveType(ACurveType: TCurveTypeId);
         function GetState: TFitServerState;
-        procedure SetWaveLength(AWaveLength: Double);
         function GetWaveLength: Double;
+        procedure SetWaveLength(AWaveLength: Double);
+        function GetEnableBackgroundVariation: Boolean;
+        procedure SetEnableBackgroundVariation(AEnable: Boolean);
+
         { All GetXXXX methods create and return A NEW OBJECT,
           responsibility to free it is put on calling code. }
 

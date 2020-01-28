@@ -138,6 +138,7 @@ type
 
         FCurveThresh: Double;
         FCurveTypeId: TCurveTypeId;
+        FEnableBackgroundVariation: Boolean;
 
     protected
                 { Is set up to True after finishing first cycle of calculation. }
@@ -414,6 +415,9 @@ type
                 { This can be equal to Nil. }
         property FitProxy: TFitServerProxy read FFitProxy write FFitProxy;
 {$ENDIF}
+
+        function GetEnableBackgroundVariation: Boolean;
+        procedure SetEnableBackgroundVariation(AEnable: Boolean);
     end;
 
 const
@@ -636,6 +640,7 @@ begin
     FCurveThresh := 0;
     //  Sets default curve type.
     FCurveTypeId := TGaussPointsSet.GetCurveTypeId_;
+    FEnableBackgroundVariation := False;
 
     //  chtoby mozhno bylo dobavlyat' tochki tablichno bez vhoda
     //  v spets. rezhim
@@ -2116,6 +2121,16 @@ end;
 function TFitServer.GetWaveLength: Double;
 begin
     Result := FWaveLength;
+end;
+
+function TFitServer.GetEnableBackgroundVariation: Boolean;
+begin
+    Result := FEnableBackgroundVariation;
+end;
+
+procedure TFitServer.SetEnableBackgroundVariation(AEnable: Boolean);
+begin
+    FEnableBackgroundVariation := AEnable;
 end;
 
 procedure TFitServer.DoAllAutomaticallyAlg;

@@ -248,7 +248,7 @@ LazarusResources.Add('TFormMain','FORMDATA',[
   +'Top'#2#2#6'Action'#7#13'ActionZoomOut'#5'Style'#7#8'tbsCheck'#0#0#11'TToolB'
   +'utton'#12'ToolButton16'#4'Left'#2'F'#3'Top'#2#2#6'Action'#7#15'ActionDoAllA'
   +'uto'#0#0#0#0#9'TMainMenu'#9'MainMenu1'#14'ParentBidiMode'#8#6'Images'#7#10
-  +'ImageList2'#4'left'#3'&'#2#3'top'#2'@'#0#9'TMenuItem'#4'Data'#7'Caption'#6#5
+  +'ImageList2'#4'left'#3'('#2#3'top'#2'@'#0#9'TMenuItem'#4'Data'#7'Caption'#6#5
   +'&Data'#0#9'TMenuItem'#6'Import'#6'Action'#7#12'ActionImport'#7'OnClick'#7#19
   +'ActionImportExecute'#0#0#9'TMenuItem'#6'Reload'#6'Action'#7#12'ActionReload'
   +#11'Bitmap.Data'#10':'#4#0#0'6'#4#0#0'BM6'#4#0#0#0#0#0#0'6'#0#0#0'('#0#0#0#16
@@ -1518,7 +1518,7 @@ LazarusResources.Add('TFormMain','FORMDATA',[
   +'Category'#6#5'Model'#7'Caption'#6#12'Pattern Type'#18'DisableIfNoHandler'#8
   +#8'OnUpdate'#7#23'ActionPatternTypeUpdate'#0#0#7'TAction'#21'ActionEnBackVar'
   +'iation'#8'Category'#6#5'Model'#7'Caption'#6#16'Enable Variation'#9'OnExecut'
-  +'e'#7#28'ActionEnBackVariationExecute'#0#0#0#6'TTimer'#10'TimerAsync'#7'Enab'
-  +'led'#8#8'Interval'#3#208#7#7'OnTimer'#7#15'TimerAsyncTimer'#4'left'#3'&'#2#0
-  +#0#0
+  +'e'#7#28'ActionEnBackVariationExecute'#8'OnUpdate'#7#27'ActionEnBackVariatio'
+  +'nUpdate'#0#0#0#6'TTimer'#10'TimerAsync'#7'Enabled'#8#8'Interval'#3#208#7#7
+  +'OnTimer'#7#15'TimerAsyncTimer'#4'left'#3'&'#2#0#0#0
 ]);

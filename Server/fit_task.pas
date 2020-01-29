@@ -64,7 +64,7 @@ type
         A, B, C, x0: Double;
         
         //  ======================= dannye dlya optimizatora ====================
-        Minimizer: TMinimizer;
+        FMinimizer: TMinimizer;
 
         AStep, x0Step: Double;
         { Index of pattern instance (specimen) parameters of which are variated at the moment. }
@@ -82,8 +82,10 @@ type
         CommonVaryingFlag: Boolean;
         { Flag indicating that amplitudes of background points are variated at the moment. }
         BackgroundVaryingFlag: Boolean;
-        { Disables or enables background variation. }
+        { Enables background variation. }
         FEnableBackgroundVariation: Boolean;
+        { Enables fast optimization algorithm. }
+        FEnableFastMinimizer: Boolean;
 
         FShowCurMin: TShowCurMin;
         FDoneProc: TDoneProc;
@@ -173,7 +175,11 @@ type
         { Deletes poins with given X from the list passed via parameter. }
         procedure DeletePoint(var Points: TPointsSet; XValue: Double);
         procedure AddPointToCurvePositions(XValue: Double);
-        procedure CreateMinimizer;
+        { Creates fast optimization algorithm for the 1th step of 2-stage processing,
+          by default is disabled.
+          TODO: Make configurable. }
+        procedure CreateFastMinimizer;
+        { Creates downhill simplex algorithm for the 2nd step of 2-stage processing. }
         procedure CreateDHSMinimizer;
         { Calculates hash of initial values of parameters of pattern instance. }
         procedure CalcInitHash(Specimen: TCurvePointsSet);
@@ -780,7 +786,7 @@ function TFitTask.EndOfCalculation: Boolean;
 begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
     Result := False;
-    if (Minimizer.CurrentMinimum < FMaxRFactor) then
+    if (FMinimizer.CurrentMinimum < FMaxRFactor) then
     begin
         //OutputDebugString(PChar('Desired R-factor achived...'));
         Result := True;
@@ -811,6 +817,7 @@ begin
                                         //  inache mozhet ne byt' shodimosti k min.
     x0Step := 0.01;
     FEnableBackgroundVariation := AEnableBackgroundVariation;
+    FEnableFastMinimizer := False;
 end;
 
 destructor TFitTask.Destroy;
@@ -821,7 +828,7 @@ begin
     Background.Free; Background := nil;
     SavedBackground.Free; SavedBackground := nil;
     CurvePositions.Free; CurvePositions := nil;
-    Minimizer.Free; Minimizer := nil;
+    FMinimizer.Free; FMinimizer := nil;
     Params.Free;
     CommonSpecimenParams.Free;
     inherited;
@@ -934,35 +941,28 @@ begin
             CalcProfile.PointYCoord[j] - PS.PointYCoord[j];
 end;
 
-procedure TFitTask.CreateMinimizer;
+procedure TFitTask.CreateFastMinimizer;
 var i: longint;
 begin
-    //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
-    Minimizer.Free; Minimizer := nil;
-    // dlya dannoy zadachi luchshe podhodit prostoy optimizator
-    //Minimizer := TSimpleMinimizer2.Create(nil);
-    Minimizer := TSimpleMinimizer3.Create(nil);
-    Minimizer.OnFunc := Func;
-    Minimizer.OnCalcFunc := CalcFunc;
-    Minimizer.OnGetStep := GetStep;
-    Minimizer.OnSetStep := SetStep;
-    Minimizer.OnSetNextParam := SetNextParam;
-    Minimizer.OnSetFirstParam := SetFirstParam;
-    Minimizer.OnGetParam := GetParam;
-    Minimizer.OnSetParam := SetParam;
-    Minimizer.OnEndOfCycle := EndOfCycle;
-    Minimizer.OnShowCurMin := ShowCurMin;
+    FMinimizer.Free; FMinimizer := nil;
+    FMinimizer := TSimpleMinimizer3.Create(nil);
+    FMinimizer.OnFunc := Func;
+    FMinimizer.OnCalcFunc := CalcFunc;
+    FMinimizer.OnGetStep := GetStep;
+    FMinimizer.OnSetStep := SetStep;
+    FMinimizer.OnSetNextParam := SetNextParam;
+    FMinimizer.OnSetFirstParam := SetFirstParam;
+    FMinimizer.OnGetParam := GetParam;
+    FMinimizer.OnSetParam := SetParam;
+    FMinimizer.OnEndOfCycle := EndOfCycle;
+    FMinimizer.OnShowCurMin := ShowCurMin;
 
-    //Minimizer.DivideStepsBy2 := DivideStepsBy2;
-    TSimpleMinimizer3(Minimizer).EndOfCalculation := EndOfCalculation;
-    TSimpleMinimizer3(Minimizer).MultipleSteps := MultipleSteps;
+    TSimpleMinimizer3(FMinimizer).EndOfCalculation := EndOfCalculation;
+    TSimpleMinimizer3(FMinimizer).MultipleSteps := MultipleSteps;
 
-    AStep := 100{10};           //  shag amplitudy dolzhen nastraivat'sya,
-                                //  inache mozhet ne byt' shodimosti k min.
+    //  Initial step values.
+    AStep := 100;
     x0Step := 0.01;
-    (* nailuchschiy rezul'tat byl poluchen bez etoy ustanovki,
-    no dlya obespecheniya povtoryaemosti predyduschih rezul'tatov
-    ustanovka sohranena *)
     for i := 0 to CommonSpecimenParams.Params.Count - 1 do
     begin
         TSpecialCurveParameter(
@@ -981,20 +981,18 @@ end;
 
 procedure TFitTask.CreateDHSMinimizer;
 begin
-    //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
-    Minimizer.Free; Minimizer := nil;
-    // dlya dannoy zadachi luchshe podhodit prostoy optimizator
-    Minimizer := TDownhillSimplexMinimizer.Create(nil);
-    Minimizer.OnFunc := Func;
-    Minimizer.OnCalcFunc := CalcFunc;
-    Minimizer.OnGetStep := GetStep;
-    Minimizer.OnSetStep := SetStep;
-    Minimizer.OnSetNextParam := SetNextParam;
-    Minimizer.OnSetFirstParam := SetFirstParam;
-    Minimizer.OnGetParam := GetParam;
-    Minimizer.OnSetParam := SetParam;
-    Minimizer.OnEndOfCycle := EndOfCycle;
-    Minimizer.OnShowCurMin := ShowCurMin;
+    FMinimizer.Free; FMinimizer := nil;
+    FMinimizer := TDownhillSimplexMinimizer.Create(nil);
+    FMinimizer.OnFunc := Func;
+    FMinimizer.OnCalcFunc := CalcFunc;
+    FMinimizer.OnGetStep := GetStep;
+    FMinimizer.OnSetStep := SetStep;
+    FMinimizer.OnSetNextParam := SetNextParam;
+    FMinimizer.OnSetFirstParam := SetFirstParam;
+    FMinimizer.OnGetParam := GetParam;
+    FMinimizer.OnSetParam := SetParam;
+    FMinimizer.OnEndOfCycle := EndOfCycle;
+    FMinimizer.OnShowCurMin := ShowCurMin;
 
     EOC := False;
     ParamNum := 0;
@@ -1714,15 +1712,16 @@ end;
 procedure TFitTask.Optimization;
 var ErrorCode: LongInt;
 begin
-    //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
-    //  dvoynaya optimizatsiya uluchshaet kachestvo podgonki;
-    CreateMinimizer;
-    Minimizer.Minimize(ErrorCode);
+    if FEnableFastMinimizer then
+    begin
+        CreateFastMinimizer;
+        FMinimizer.Minimize(ErrorCode);
+    end;
 
     CreateDHSMinimizer;
-    Minimizer.Minimize(ErrorCode);
+    FMinimizer.Minimize(ErrorCode);
 
-    Minimizer.Free; Minimizer := nil;
+    FMinimizer.Free; FMinimizer := nil;
 end;
 {$hints on}
 

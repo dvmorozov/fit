@@ -21,7 +21,7 @@
       <AutoIncrementBuild Value="True"/>
       <MajorVersionNr Value="1"/>
       <MinorVersionNr Value="1"/>
-      <RevisionNr Value="4"/>
+      <RevisionNr Value="5"/>
       <BuildNr Value="23"/>
       <Attributes pvaDebug="True"/>
       <StringTable FileDescription="Remote client." LegalCopyright="Dmitry Morozov" OriginalFilename="FitPro" ProductName="Fit" ProductVersion="1.1.1"/>

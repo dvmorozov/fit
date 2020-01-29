@@ -159,7 +159,7 @@ begin
     end;
 
     Terminated := True;
-    if Assigned(minimizer) then minimizer.Terminated := True;
+    if Assigned(FMinimizer) then FMinimizer.Terminated := True;
     if Assigned(MainCalcThread) then MainCalcThread.Terminate;
     //  ozhidaniya zdes' nikakogo byt' ne dolzhno,
     //  poskol'ku metod vypolnyaetsya v osn. potoke

@@ -33,7 +33,7 @@ In this case keeping the state of application can't be guaranteed.
 
 uses Classes, title_points_set, SelfCheckedComponentList, SysUtils,
      mscr_specimen_list, curve_points_set, named_points_set, points_set,
-     gauss_points_set, user_points_set, int_points_set,
+     gauss_points_set, user_points_set, int_points_set, special_curve_parameter,
 {$IFDEF FIT}
      { Proxy to client to call it back. }
      fit_server_proxy,

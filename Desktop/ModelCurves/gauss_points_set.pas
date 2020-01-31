@@ -20,7 +20,7 @@ unit gauss_points_set;
 interface
 
 uses Classes, SysUtils, int_points_set, points_set, curve_points_set, named_points_set,
-  curve_types_singleton, SimpMath;
+  curve_types_singleton, special_curve_parameter, SimpMath;
 
 type
     { Curve having Gauss form. }
@@ -64,7 +64,7 @@ begin
     P.Type_ := Variable;       //  ne var'iruetsya otdel'no,
                                //  prinimaet odno znachenie dlya vseh
                                //  krivyh podzadachi (intervala)
-    InitLinks;
+    InitListOfVariableParameters;
 end;
 
 function TGaussPointsSet.GetCurveTypeName: string;

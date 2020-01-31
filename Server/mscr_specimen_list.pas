@@ -15,7 +15,7 @@ unit mscr_specimen_list;
 
 interface
 
-uses Classes, SysUtils, SimpMath, data_classes, curve_points_set;
+uses Classes, SysUtils, SimpMath, data_classes, special_curve_parameter;
 
 const
     { Display mode constants. }

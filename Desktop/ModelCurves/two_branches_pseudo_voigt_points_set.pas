@@ -20,7 +20,7 @@ unit two_branches_pseudo_voigt_points_set;
 interface
 
 uses Classes, SysUtils, int_points_set, points_set, named_points_set, curve_points_set,
-    curve_types_singleton, SimpMath;
+    curve_types_singleton, special_curve_parameter, SimpMath;
 
 type
     { Pseudo-Voigt curve having different form parameters for
@@ -143,7 +143,7 @@ begin
     P.Type_ := Variable;        //  razreschaetsya var'irovanie parametra
                                 //  otdel'no dlya kazhdogo ekzemplyara
                                 //  patterna
-    InitLinks;
+    InitListOfVariableParameters;
 end;
 
 procedure T2BranchesPseudoVoigtPointsSet.SetEta(Value: Double);

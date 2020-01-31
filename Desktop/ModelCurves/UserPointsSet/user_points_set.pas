@@ -19,8 +19,8 @@ unit user_points_set;
 
 interface
 
-uses SysUtils, curve_points_set, named_points_set,
-    curve_types_singleton, int_points_set, configurable_points_set
+uses SysUtils, curve_points_set, named_points_set, curve_types_singleton,
+    int_points_set, configurable_points_set, special_curve_parameter
 {$IFDEF _WINDOWS}
     , Windows, points_set
 {$ENDIF}
@@ -92,7 +92,7 @@ var P: TSpecialCurveParameter;
 begin
     Assert(Assigned(Params));
     Assert(Assigned(Params.Params));
-    Assert(Assigned(Links));
+    Assert(Assigned(FVariableParameters));
     Assert(Assigned(ArgP));
     { Sets up value of argument. }
     P := ArgP;

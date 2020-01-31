@@ -20,8 +20,8 @@ unit user_points_set_prop_dialog;
 interface
 
 uses
-    SysUtils, LResources, Forms, ExtCtrls,
-    StdCtrls, CheckLst, curve_points_set, app_settings
+    SysUtils, LResources, Forms, ExtCtrls, StdCtrls, CheckLst,
+    app_settings, special_curve_parameter
     {$IFNDEF _WINDOWS}
     , Dialogs
     {$ENDIF}

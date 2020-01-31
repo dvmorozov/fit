@@ -15,7 +15,7 @@ interface
 
 uses
     Classes, Grids, SysUtils, NumericGrid, table_components,
-    curve_points_set;
+    curve_points_set, special_curve_parameter;
 
 type
     { Set of pattern instances forming the calculated profile in sum. }

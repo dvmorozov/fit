@@ -19,8 +19,9 @@ unit asym_pseudo_voigt_points_set;
 
 interface
 
-uses Classes, SysUtils, int_points_set, points_set,
-  pseudo_voigt_points_set, curve_points_set, curve_types_singleton, SimpMath;
+uses Classes, SysUtils, int_points_set, points_set, pseudo_voigt_points_set,
+    curve_points_set, curve_types_singleton, special_curve_parameter,
+    SimpMath;
 
 type
     { Curve having asymmetrical Pseudo-Voigt form. }
@@ -99,7 +100,7 @@ begin
     P.Type_ := Variable;        //  razreschaetsya var'irovanie parametra
                                 //  otdel'no dlya kazhdogo ekzemplyara
                                 //  patterna
-    InitLinks;
+    InitListOfVariableParameters;
 end;
 
 procedure TAsymPseudoVoigtPointsSet.SetDeltaSigma(Value: Double);

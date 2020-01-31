@@ -19,58 +19,10 @@ unit curve_points_set;
 
 interface
 
-uses Classes, SysUtils, SimpMath, self_copied_component, points_set, title_points_set,
-  data_loader;
+uses Classes, SysUtils, SimpMath, self_copied_component, points_set,
+    title_points_set, data_loader, special_curve_parameter;
 
 type
-    TParameterType = (
-        { Created by user and non-variable. Such parameters are variated together for all
-        instances in the given interval if it isn't disabled by special flag. }
-        Shared,
-        { Created by user and variable. }
-        Variable,
-        { Created by the application. }
-        Calculated,
-        { Argument of expression. Always variable. }
-        Argument,
-        { Non-variable parameter describing instance position. }
-        InvariablePosition,
-        { Variable parameter describing instance position. }
-        VariablePosition
-        );
-
-    TSpecialCurveParameter = class(TCollectionItem)
-    private
-        FName: string;
-        FValue: Double;
-        FType: TParameterType;
-        FVariationDisabled: Boolean;
-        FVariationStep: Double;
-
-        FSavedValue: Double;
-
-        function GetValue_: string;
-        procedure SetValue_(AValue: string);
-
-    public
-        constructor Create(Collection: TCollection); override;
-        procedure CopyTo(const Dest: TSpecialCurveParameter);
-
-        property SavedValue: Double read FSavedValue write FSavedValue;
-        property Value: Double read FValue write FValue;
-        property VariationDisabled: Boolean
-            read FVariationDisabled write FVariationDisabled;
-        property VariationStep: Double
-            read FVariationStep write FVariationStep;
-
-    published
-        { Published for XML-serialization. }
-        property Name: string read FName write FName;
-        { String because some problem with XML-serialization as Double. }
-        property Value_: string read GetValue_ write SetValue_;
-        property Type_: TParameterType read FType write FType;
-    end;
-
     { Generic type of instance parameter container. }
     Curve_parameters = class(TSelfCopiedComponent)
     protected
@@ -92,29 +44,29 @@ type
         property Params: TCollection read FParams write FParams;
     end;
 
-    { Generic container for point set of all calcuated curves. TODO: must
-      inherit Lambda from TNeutronPointsSet to adjust calculated and experimental
-      curves on chart. }
+    { Generic container for point set of all calcuated curves. }
     TCurvePointsSet = class(TTitlePointsSet)
     protected
-        { List of curve parameters. }
+        { List of all curve parameters. }
         FParams: Curve_parameters;
         { List of variable parameters. }
-        Links: TList;
-        { Parameters with predefined semantics have constraints, which
+        FVariableParameters: TList;
+        { Set of variable parameters common for all curve types (meaning could
+          be different in particular cases).
+          Parameters with predefined semantics have constraints, which
           can be associated with curve points. Attributes store pointers
           to parameters with predefined semantics. Parameters are created
           in descendant constructors. }
         AmplitudeP: TSpecialCurveParameter;
         PositionP: TSpecialCurveParameter;
         SigmaP: TSpecialCurveParameter;
+        { It is used in TUserPointsSet. TODO: move it to TUserPointsSet. }
         ArgP: TSpecialCurveParameter;
 
         Fx0IsSet: Boolean;
         { X0 variation boundaries. }
         Fx0Low, Fx0High: Double;
 
-        //  predostavlyayut dostup k var'iruemym parametram
         { Returns variable parameter by through index. }
         function GetParam(Index: LongInt): Double; virtual;
         { Sets value of variable parameter. }
@@ -142,7 +94,7 @@ type
         procedure ScaleCurve(const Factor: Double);
         { Performs intialization of variable list parameters and 
           set up of AmplIndex, PosIndex, SigmaIndex. }
-        procedure InitLinks;
+        procedure InitListOfVariableParameters;
         
         { These functions don't perform profile recalculation and
           are used for initialization purposes (when Modified is set up). }
@@ -232,7 +184,7 @@ end;
 
 destructor TCurvePointsSet.Destroy;
 begin
-    Links.Free;
+    FVariableParameters.Free;
     FParams.Free;
     inherited;
 end;
@@ -268,7 +220,7 @@ begin
     if Index = SigmaIndex then Result := Sigma
     else
     begin
-        P := TSpecialCurveParameter(Links.Items[index]);
+        P := TSpecialCurveParameter(FVariableParameters.Items[index]);
         Result := P.Value;
     end;
 end;
@@ -286,7 +238,7 @@ begin
     if Index = SigmaIndex then Sigma := Value
     else
     begin
-        P := TSpecialCurveParameter(Links.Items[Index]);
+        P := TSpecialCurveParameter(FVariableParameters.Items[Index]);
         P.Value := Value;
     end;
 end;
@@ -391,7 +343,7 @@ end;
 
 function TCurvePointsSet.GetParamCount: LongInt;
 begin
-    Result := Links.Count;
+    Result := FVariableParameters.Count;
 end;
 
 procedure TCurvePointsSet.Setx0(Value: Double);
@@ -527,15 +479,15 @@ begin
         Points[i][2] := Points[i][2] * Factor;
 end;
 
-procedure TCurvePointsSet.InitLinks;
+procedure TCurvePointsSet.InitListOfVariableParameters;
 var i, Index: LongInt;
     P: TSpecialCurveParameter;
 begin
     Assert(Assigned(Params));
     Assert(Assigned(Params.Params));
 
-    Links.Free;
-    Links := TList.Create;
+    FVariableParameters.Free;
+    FVariableParameters := TList.Create;
 
     for i := 0 to Params.Params.Count - 1 do
     begin
@@ -545,7 +497,7 @@ begin
            (P.Type_ = VariablePosition) then
         begin
             //  zdes' tol'ko var'iruemye
-            Index := Links.Add(P);
+            Index := FVariableParameters.Add(P);
             //  opredelyayutsya indeksy parametrov s
             //  predopredelennoy semantikoy v spiske
             //  var'iruemyh parametrov
@@ -613,35 +565,7 @@ begin
     Assert(Assigned(AParams));
 
     FParams.Free; FParams := AParams;
-    InitLinks;
-end;
-
-{======================== TSpecialCurveParameter ==============================}
-
-constructor TSpecialCurveParameter.Create(Collection: TCollection);
-begin
-    inherited;
-    FType := Calculated;
-end;
-
-procedure TSpecialCurveParameter.CopyTo(const Dest: TSpecialCurveParameter);
-begin
-    Dest.Name := Name;
-    Dest.Value := Value;
-    Dest.Type_ := Type_;
-    Dest.SavedValue := SavedValue;
-    Dest.VariationDisabled := VariationDisabled;
-    Dest.VariationStep := VariationStep;
-end;
-
-function TSpecialCurveParameter.GetValue_: string;
-begin
-    Result := FloatToStr(FValue);
-end;
-
-procedure TSpecialCurveParameter.SetValue_(AValue: string);
-begin
-    FValue := StrToFloat(AValue);
+    InitListOfVariableParameters;
 end;
 
 {========================== Curve_parameters ==================================}

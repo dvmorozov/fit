@@ -20,7 +20,8 @@ unit curve_points_set;
 interface
 
 uses Classes, SysUtils, SimpMath, self_copied_component, points_set,
-    title_points_set, data_loader, special_curve_parameter;
+    title_points_set, data_loader, special_curve_parameter,
+    amplitude_curve_parameter, persistent_curve_parameter_container;
 
 type
     { Generic type of instance parameter container. }
@@ -57,7 +58,7 @@ type
           can be associated with curve points. Attributes store pointers
           to parameters with predefined semantics. Parameters are created
           in descendant constructors. }
-        AmplitudeP: TSpecialCurveParameter;
+        AmplitudeP: TAmplitudeCurveParameter;
         PositionP: TSpecialCurveParameter;
         SigmaP: TSpecialCurveParameter;
         { It is used in TUserPointsSet. TODO: move it to TUserPointsSet. }
@@ -87,7 +88,7 @@ type
     protected
         Modified: Boolean;
 
-    protected
+        procedure AddParameter(Parameter: TSpecialCurveParameter);
         { Performs recalculation of all profile points. }
         procedure DoCalc(const Intervals: TPointsSet); virtual; abstract;
         { Multiplies profile points by given factor. }
@@ -269,7 +270,8 @@ begin
     begin
         for i := 0 to FParams.Params.Count - 1 do
         begin
-            P := TSpecialCurveParameter(FParams.Params.Items[i]);
+            P := TPersistentCurveParameterContainer(
+                FParams.Params.Items[i]).Parameter;
             if UpperCase(P.Name) = UpperCase(Name) then
             begin
                 Result := P.Value;
@@ -325,7 +327,8 @@ begin
     begin
         for i := 0 to FParams.Params.Count - 1 do
         begin
-            P := TSpecialCurveParameter(FParams.Params.Items[i]);
+            P := TPersistentCurveParameterContainer(
+                FParams.Params.Items[i]).Parameter;
             if UpperCase(P.Name) = UpperCase(Name) then
             begin
 {$IFDEF WRITE_PARAMS_LOG}
@@ -415,10 +418,7 @@ begin
     LogStr := ' SetA: Value = ' + FloatToStr(Value);
     WriteLog(LogStr, Notification_);
 {$ENDIF}
-    //  nuzhno brat' po modulyu, potomu chto
-    //  algoritm optimizatsii mozhet zagonyat'
-    //  v oblast' otritsatel'nyh znacheniy
-    AmplitudeP.Value := Abs(Value);
+    AmplitudeP.Value := Value;
 end;
 
 procedure TCurvePointsSet.SetSigma(Value: Double);
@@ -491,7 +491,8 @@ begin
 
     for i := 0 to Params.Params.Count - 1 do
     begin
-        P := TSpecialCurveParameter(Params.Params.Items[i]);
+        P := TPersistentCurveParameterContainer(
+            Params.Params.Items[i]).Parameter;
 
         if (P.Type_ = Variable) or
            (P.Type_ = VariablePosition) then
@@ -516,7 +517,7 @@ procedure TCurvePointsSet.SetSpecParamPtr(P: TSpecialCurveParameter);
 begin
     Assert(Assigned(P));
     if UpperCase(P.Name) = 'SIGMA' then SigmaP := P;
-    if UpperCase(P.Name) = 'A' then AmplitudeP := P;
+    if UpperCase(P.Name) = 'A' then AmplitudeP := TAmplitudeCurveParameter(P);
     if (P.Type_ = VariablePosition) or
        (P.Type_ = InvariablePosition) then PositionP := P;
 end;
@@ -540,7 +541,8 @@ begin
 
     for i := 0 to Params.Params.Count - 1 do
     begin
-        P := TSpecialCurveParameter(Params.Params.Items[i]);
+        P := TPersistentCurveParameterContainer(
+            Params.Params.Items[i]).Parameter;
         P.SavedValue := P.Value;
     end;
 end;
@@ -554,7 +556,8 @@ begin
 
     for i := 0 to Params.Params.Count - 1 do
     begin
-        P := TSpecialCurveParameter(Params.Params.Items[i]);
+        P := TPersistentCurveParameterContainer(
+            Params.Params.Items[i]).Parameter;
         P.Value := P.SavedValue;
     end;
     Modified := True;
@@ -568,18 +571,37 @@ begin
     InitListOfVariableParameters;
 end;
 
+procedure TCurvePointsSet.AddParameter(Parameter: TSpecialCurveParameter);
+var
+    Container: TPersistentCurveParameterContainer;
+begin
+    Container := TPersistentCurveParameterContainer(FParams.Params.Add);
+    try
+        Container.Parameter := Parameter;
+    except
+        FParams.Params.Delete(Container.ID);
+        Container.Free;
+        raise;
+    end;
+end;
+
 {========================== Curve_parameters ==================================}
 
 constructor Curve_parameters.Create;
-var P: TSpecialCurveParameter;
+var Parameter: TSpecialCurveParameter;
+    Container: TPersistentCurveParameterContainer;
 begin
     inherited;
-    FParams := TCollection.Create(TSpecialCurveParameter);
-    //  !!! pustaya kollektsiya zapisyvaetsya v XML-potok nekorrektno !!!
-    P := TSpecialCurveParameter.Create(FParams);
-    P.Name := 'x';
-    P.Type_ := Argument;
-    P.Value := 0;
+    FParams := TCollection.Create(TPersistentCurveParameterContainer);
+    { Collection should contain at least on item, otherwise is written
+      incorrectly. TODO: check it. }
+    Parameter := TSpecialCurveParameter.Create;
+    Parameter.Name := 'x';
+    Parameter.Type_ := Argument;
+    Parameter.Value := 0;
+
+    Container := TPersistentCurveParameterContainer(FParams.Add);
+    Container.Parameter := Parameter;
 end;
 
 destructor Curve_parameters.Destroy;
@@ -590,7 +612,8 @@ end;
 
 procedure Curve_parameters.CopyParameters(const Dest: TObject);
 var i: LongInt;
-    P, New: TSpecialCurveParameter;
+    Parametr, NewParameter: TSpecialCurveParameter;
+    NewContainer: TPersistentCurveParameterContainer;
 begin
     inherited;
 
@@ -598,9 +621,19 @@ begin
 
     for i := 0 to Params.Count - 1 do
     begin
-        P := TSpecialCurveParameter(Params.Items[i]);
-        New := TSpecialCurveParameter.Create(Curve_parameters(Dest).Params);
-        P.CopyTo(New);
+        Parametr := TPersistentCurveParameterContainer(Params.Items[i]).Parameter;
+
+        NewParameter := TSpecialCurveParameter.Create;
+        Parametr.CopyTo(NewParameter);
+
+        try
+            NewContainer :=
+                TPersistentCurveParameterContainer(Curve_parameters(Dest).Params.Add);
+        except
+            NewParameter.Free;
+            raise;
+        end;
+        NewContainer.Parameter := NewParameter;
     end;
     Curve_parameters(Dest).SavedInitHash := SavedInitHash;
 end;
@@ -611,7 +644,8 @@ var i: Integer;
 begin
     for i := 0 to Params.Count - 1 do
     begin
-        P := TSpecialCurveParameter(Params.Items[i]);
+        P := TPersistentCurveParameterContainer(
+            Params.Items[i]).Parameter;
         if P.Name = ParamName then
         begin
             Result := P.Value;
@@ -626,7 +660,8 @@ var i: Integer;
 begin
     for i := 0 to Params.Count - 1 do
     begin
-        P := TSpecialCurveParameter(Params.Items[i]);
+        P := TPersistentCurveParameterContainer(
+            Params.Items[i]).Parameter;
         if P.Name = ParamName then
         begin
             P.Value := AValue;

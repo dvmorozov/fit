@@ -20,7 +20,8 @@ unit user_points_set;
 interface
 
 uses SysUtils, curve_points_set, named_points_set, curve_types_singleton,
-    int_points_set, configurable_points_set, special_curve_parameter
+    int_points_set, configurable_points_set, special_curve_parameter,
+    persistent_curve_parameter_container
 {$IFDEF _WINDOWS}
     , Windows, points_set
 {$ENDIF}
@@ -101,7 +102,8 @@ begin
     Prs := '';
     for i := 0 to Params.Params.Count - 1 do
     begin
-        P := TSpecialCurveParameter(Params.Params.Items[i]);
+        P := TPersistentCurveParameterContainer(
+            Params.Params.Items[i]).Parameter;
         Prs := Prs + P.Name + '=' + FloatToStr(P.Value) + Chr(0);
     end;
     Result := 0;

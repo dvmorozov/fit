@@ -21,7 +21,7 @@ interface
 
 uses
     SysUtils, LResources, Forms, ExtCtrls, StdCtrls, CheckLst,
-    app_settings, special_curve_parameter
+    app_settings, special_curve_parameter, persistent_curve_parameter_container
     {$IFNDEF _WINDOWS}
     , Dialogs
     {$ENDIF}
@@ -81,7 +81,8 @@ var P: TSpecialCurveParameter;
 begin
     for i := 0 to ct.Params.Count - 1 do
     begin
-        P := TSpecialCurveParameter(ct.Params.Items[i]);
+        P := TPersistentCurveParameterContainer(
+            ct.Params.Items[i]).Parameter;
         if (P.Type_ = InvariablePosition) or
            (P.Type_ = VariablePosition) then P.Type_ := Variable;
     end;
@@ -99,7 +100,8 @@ var P: TSpecialCurveParameter;
 begin
     for i := 0 to ct.Params.Count - 1 do
     begin
-        P := TSpecialCurveParameter(ct.Params.Items[i]);
+        P := TPersistentCurveParameterContainer(
+            ct.Params.Items[i]).Parameter;
         if P.Type_ = Argument then P.Type_ := Variable;
     end;
     
@@ -186,7 +188,8 @@ begin
     ComboArgument.Items.Clear;
     for i := 0 to ct.Params.Count - 1 do
     begin
-        P := TSpecialCurveParameter(ct.Params.Items[i]);
+        P := TPersistentCurveParameterContainer(
+            ct.Params.Items[i]).Parameter;
         //  !!! svyazku po indeksu delat' nel'zya,
         //  poskol'ku spisok sortirovan !!!
         ComboArgument.Items.AddObject(P.Name, P);
@@ -203,7 +206,8 @@ begin
     ComboPosition.Items.Clear;
     for i := 0 to ct.Params.Count - 1 do
     begin
-        P := TSpecialCurveParameter(ct.Params.Items[i]);
+        P := TPersistentCurveParameterContainer(
+            ct.Params.Items[i]).Parameter;
         if (P.Type_ = Shared) or (P.Type_ = Variable) or
            (P.Type_ = InvariablePosition) or (P.Type_ = VariablePosition) then
         begin
@@ -224,7 +228,8 @@ begin
     CheckListFixed.Items.Clear;
     for i := 0 to ct.Params.Count - 1 do
     begin
-        P := TSpecialCurveParameter(ct.Params.Items[i]);
+        P := TPersistentCurveParameterContainer(
+            ct.Params.Items[i]).Parameter;
         if (P.Type_ = Shared) or (P.Type_ = Variable) or
            (P.Type_ = InvariablePosition) or (P.Type_ = VariablePosition) then
         begin

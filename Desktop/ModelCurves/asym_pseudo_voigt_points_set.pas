@@ -90,16 +90,18 @@ begin
 end;
 
 constructor TAsymPseudoVoigtPointsSet.Create(AOwner: TComponent);
-var P: TSpecialCurveParameter;
+var Parameter: TSpecialCurveParameter;
 begin
     inherited;
     DeltaSigmaIndex := -1;
 
-    P := TSpecialCurveParameter(FParams.Params.Add);
-    P.Name := 'deltasigma'; P.Value := 0;
-    P.Type_ := Variable;        //  razreschaetsya var'irovanie parametra
-                                //  otdel'no dlya kazhdogo ekzemplyara
-                                //  patterna
+    Parameter := TSpecialCurveParameter.Create;
+    Parameter.Name := 'deltasigma'; Parameter.Value := 0;
+    Parameter.Type_ := Variable;        //  razreschaetsya var'irovanie parametra
+                                        //  otdel'no dlya kazhdogo ekzemplyara
+                                        //  patterna
+    AddParameter(Parameter);
+
     InitListOfVariableParameters;
 end;
 

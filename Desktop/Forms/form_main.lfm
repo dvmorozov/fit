@@ -1,14 +1,14 @@
 object FormMain: TFormMain
-  Left = 311
-  Height = 610
-  Top = 92
-  Width = 1022
+  Left = 3
+  Height = 358
+  Top = 2
+  Width = 622
   HorzScrollBar.Page = 1191
   VertScrollBar.Page = 502
   ActiveControl = PanelTop
   Caption = 'FormMain'
-  ClientHeight = 590
-  ClientWidth = 1022
+  ClientHeight = 338
+  ClientWidth = 622
   Font.Height = -9
   Font.Name = 'MS Sans Serif'
   Menu = MainMenu1
@@ -21,8 +21,8 @@ object FormMain: TFormMain
   object StatusBar: TStatusBar
     Left = 0
     Height = 23
-    Top = 567
-    Width = 1022
+    Top = 315
+    Width = 622
     Font.Height = -9
     Font.Name = 'MS Sans Serif'
     Panels = <    
@@ -41,8 +41,8 @@ object FormMain: TFormMain
   object PageControl1: TPageControl
     Left = 0
     Height = 115
-    Top = 452
-    Width = 1022
+    Top = 200
+    Width = 622
     ActivePage = TabSheetBackground
     Align = alBottom
     Font.Height = -9
@@ -53,7 +53,7 @@ object FormMain: TFormMain
     object TabSheetBackground: TTabSheet
       Caption = 'Background Points'
       ClientHeight = 89
-      ClientWidth = 1014
+      ClientWidth = 614
       Font.Height = -9
       Font.Name = 'MS Sans Serif'
       OnResize = TabSheetBackgroundResize
@@ -63,11 +63,11 @@ object FormMain: TFormMain
         Left = 0
         Height = 89
         Top = 0
-        Width = 1014
+        Width = 614
         Align = alClient
         BevelOuter = bvNone
         ClientHeight = 89
-        ClientWidth = 1014
+        ClientWidth = 614
         Font.Height = -9
         Font.Name = 'MS Sans Serif'
         ParentColor = False
@@ -77,7 +77,7 @@ object FormMain: TFormMain
           Left = 24
           Height = 89
           Top = 0
-          Width = 990
+          Width = 590
           Align = alClient
           Color = clBtnFace
           ColCount = 2
@@ -505,8 +505,8 @@ object FormMain: TFormMain
     Cursor = crVSplit
     Left = 0
     Height = 6
-    Top = 446
-    Width = 1022
+    Top = 194
+    Width = 622
     Align = alBottom
     Beveled = True
     Color = clGray
@@ -515,7 +515,7 @@ object FormMain: TFormMain
   end
   object SplitterLeftChart: TSplitter
     Left = 131
-    Height = 420
+    Height = 168
     Top = 26
     Width = 4
     Beveled = True
@@ -523,13 +523,13 @@ object FormMain: TFormMain
     ParentColor = False
   end
   object PanelRight: TPanel
-    Left = 892
-    Height = 420
+    Left = 492
+    Height = 168
     Top = 26
     Width = 130
     Align = alRight
     BevelOuter = bvNone
-    ClientHeight = 420
+    ClientHeight = 168
     ClientWidth = 130
     Font.Height = -9
     Font.Name = 'MS Sans Serif'
@@ -539,12 +539,12 @@ object FormMain: TFormMain
     TabStop = True
     object Panel2: TPanel
       Left = 0
-      Height = 420
+      Height = 168
       Top = 0
       Width = 130
       Align = alClient
       BevelOuter = bvNone
-      ClientHeight = 420
+      ClientHeight = 168
       ClientWidth = 130
       Font.Height = -9
       Font.Name = 'MS Sans Serif'
@@ -565,7 +565,7 @@ object FormMain: TFormMain
       object Label1: TLabel
         Left = 6
         Height = 11
-        Top = 363
+        Top = 111
         Width = 38
         Anchors = [akLeft, akBottom]
         AutoSize = False
@@ -578,7 +578,7 @@ object FormMain: TFormMain
       object LabelAngle: TLabel
         Left = 46
         Height = 13
-        Top = 362
+        Top = 110
         Width = 77
         Anchors = [akLeft, akBottom]
         AutoSize = False
@@ -590,7 +590,7 @@ object FormMain: TFormMain
       object Label2: TLabel
         Left = 6
         Height = 11
-        Top = 379
+        Top = 127
         Width = 38
         Anchors = [akLeft, akBottom]
         AutoSize = False
@@ -603,7 +603,7 @@ object FormMain: TFormMain
       object LabelIntensity: TLabel
         Left = 46
         Height = 13
-        Top = 378
+        Top = 126
         Width = 77
         Anchors = [akLeft, akBottom]
         AutoSize = False
@@ -615,7 +615,7 @@ object FormMain: TFormMain
       object Label3: TLabel
         Left = 6
         Height = 11
-        Top = 395
+        Top = 143
         Width = 38
         Anchors = [akLeft, akBottom]
         AutoSize = False
@@ -628,7 +628,7 @@ object FormMain: TFormMain
       object LabelMin: TLabel
         Left = 46
         Height = 13
-        Top = 394
+        Top = 142
         Width = 77
         Anchors = [akLeft, akBottom]
         AutoSize = False
@@ -640,7 +640,7 @@ object FormMain: TFormMain
       object Label6: TLabel
         Left = 6
         Height = 13
-        Top = 348
+        Top = 96
         Width = 18
         Anchors = [akLeft, akBottom]
         Caption = 'Info'
@@ -651,7 +651,7 @@ object FormMain: TFormMain
       end
       object CheckListBoxLegend: TCheckListBox
         Left = 6
-        Height = 330
+        Height = 78
         Top = 14
         Width = 118
         Anchors = [akTop, akLeft, akRight, akBottom]
@@ -669,8 +669,8 @@ object FormMain: TFormMain
     end
   end
   object SplitterChartRight: TSplitter
-    Left = 888
-    Height = 420
+    Left = 488
+    Height = 168
     Top = 26
     Width = 4
     Align = alRight
@@ -681,13 +681,13 @@ object FormMain: TFormMain
   end
   object PanelChart: TPanel
     Left = 135
-    Height = 420
+    Height = 168
     Top = 26
-    Width = 753
+    Width = 353
     Align = alClient
     BevelOuter = bvNone
-    ClientHeight = 420
-    ClientWidth = 753
+    ClientHeight = 168
+    ClientWidth = 353
     Color = clWindow
     Font.Height = -9
     Font.Name = 'MS Sans Serif'
@@ -697,9 +697,9 @@ object FormMain: TFormMain
     TabStop = True
     object Chart: TTAChart
       Left = 0
-      Height = 407
+      Height = 155
       Top = 0
-      Width = 740
+      Width = 340
       AutoUpdateXMin = True
       AutoUpdateXMax = True
       AutoUpdateYMin = True
@@ -726,16 +726,16 @@ object FormMain: TFormMain
     object ScrollBarX: TScrollBar
       Left = 0
       Height = 13
-      Top = 407
-      Width = 753
+      Top = 155
+      Width = 353
       Align = alBottom
       PageSize = 0
       TabOrder = 1
       OnChange = ScrollBarXChange
     end
     object ScrollBarY: TScrollBar
-      Left = 740
-      Height = 407
+      Left = 340
+      Height = 155
       Top = 0
       Width = 13
       Align = alRight
@@ -757,12 +757,12 @@ object FormMain: TFormMain
   end
   object PanelLeft: TPanel
     Left = 0
-    Height = 420
+    Height = 168
     Top = 26
     Width = 131
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 420
+    ClientHeight = 168
     ClientWidth = 131
     Font.Height = -9
     Font.Name = 'MS Sans Serif'
@@ -783,7 +783,7 @@ object FormMain: TFormMain
     end
     object GridData: TNumericGrid
       Left = 0
-      Height = 420
+      Height = 168
       Top = 0
       Width = 131
       Align = alClient
@@ -825,11 +825,11 @@ object FormMain: TFormMain
     Left = 0
     Height = 26
     Top = 0
-    Width = 1022
+    Width = 622
     Align = alTop
     AutoSize = True
     ClientHeight = 26
-    ClientWidth = 1022
+    ClientWidth = 622
     Font.Height = -9
     Font.Name = 'MS Sans Serif'
     ParentFont = False
@@ -840,7 +840,7 @@ object FormMain: TFormMain
       Left = 1
       Height = 24
       Top = 1
-      Width = 1020
+      Width = 620
       AutoSize = True
       Caption = 'ToolBar6'
       Flat = False

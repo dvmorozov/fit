@@ -14,8 +14,8 @@ unit data_classes;
 interface
 
 uses
-    Classes, Grids, SysUtils, NumericGrid, table_components,
-    curve_points_set, special_curve_parameter;
+    Classes, Grids, SysUtils, NumericGrid, table_components, curve_points_set,
+    special_curve_parameter, persistent_curve_parameter_container;
 
 type
     { Set of pattern instances forming the calculated profile in sum. }
@@ -68,7 +68,8 @@ begin
         Assert(Grid.ColCount - Grid.FixedCols = CP.Params.Count - 1);
         for i := 0 to CP.Params.Count - 1 do
         begin
-            P := TSpecialCurveParameter(CP.Params.Items[i]);
+            P := TPersistentCurveParameterContainer(
+                CP.Params.Items[i]).Parameter;
             if P.Type_ <> Argument then
             begin
                 Grid.Cells[Grid.FixedCols + Index, 0] := P.Name;
@@ -96,7 +97,8 @@ begin
                 Index := 0;
                 for i := 0 to CP.Params.Count - 1 do
                 begin
-                    P := TSpecialCurveParameter(CP.Params.Items[i]);
+                    P := TPersistentCurveParameterContainer(
+                        CP.Params.Items[i]).Parameter;
                     case P.Type_ of
                         Argument: begin end;
                         Calculated: begin
@@ -132,7 +134,8 @@ begin
             Index := 0;
             for i := 0 to CP.Params.Count - 1 do
             begin
-                P := TSpecialCurveParameter(CP.Params.Items[i]);
+                P := TPersistentCurveParameterContainer(
+                    CP.Params.Items[i]).Parameter;
                 if P.Type_ <> Argument then
                 begin
                     Cells[FixedCols + Index, RowNum] :=
@@ -165,7 +168,8 @@ begin
         Index := 0;
         for i := 0 to CP.Params.Count - 1 do
         begin
-            P := TSpecialCurveParameter(CP.Params.Items[i]);
+            P := TPersistentCurveParameterContainer(
+                CP.Params.Items[i]).Parameter;
             if P.Type_ <> Argument then
             begin
                 try
@@ -211,7 +215,8 @@ begin
         CP := Curve_parameters(Items[0]);
         for i := 0 to CP.Params.Count - 1 do
         begin
-            P := TSpecialCurveParameter(CP.Params.Items[i]);
+            P := TPersistentCurveParameterContainer(
+                CP.Params.Items[i]).Parameter;
             if P.Type_ <> Argument then Inc(Result);
         end;
     end

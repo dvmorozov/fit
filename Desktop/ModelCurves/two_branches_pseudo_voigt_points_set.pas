@@ -19,8 +19,10 @@ unit two_branches_pseudo_voigt_points_set;
 
 interface
 
-uses Classes, SysUtils, int_points_set, points_set, named_points_set, curve_points_set,
-    curve_types_singleton, special_curve_parameter, SimpMath;
+uses
+    Classes, SysUtils, int_points_set, points_set, named_points_set,
+    curve_points_set, curve_types_singleton, special_curve_parameter,
+    amplitude_curve_parameter, SimpMath;
 
 type
     { Pseudo-Voigt curve having different form parameters for
@@ -103,46 +105,52 @@ begin
 end;
 
 constructor T2BranchesPseudoVoigtPointsSet.Create(AOwner: TComponent);
-var P: TSpecialCurveParameter;
+var Parameter: TSpecialCurveParameter;
 begin
     inherited;
     SigmaRightIndex := -1;
     EtaRightIndex := -1;
     EtaIndex := -1;
 
-    P := TSpecialCurveParameter(FParams.Params.Add);
-    P.Name := 'A'; P.Value := 0; P.Type_ := Variable;
+    Parameter := TAmplitudeCurveParameter.Create;
+    AddParameter(Parameter);
 
-    P := TSpecialCurveParameter(FParams.Params.Add);
-    P.Name := 'x0'; P.Value := 0;
-    P.Type_ := VariablePosition;
-    //P.Type_ := InvariablePosition;
+    Parameter := TSpecialCurveParameter.Create;
+    Parameter.Name := 'x0'; Parameter.Value := 0;
+    Parameter.Type_ := VariablePosition;
+    //Parameter.Type_ := InvariablePosition;
+    AddParameter(Parameter);
 
-    P := TSpecialCurveParameter(FParams.Params.Add);
-    P.Name := 'sigma'; P.Value := 0.25;
-    P.Type_ := Variable;
-    //P.Type_ := Shared;      //  ne var'iruetsya otdel'no,
-                                //  prinimaet odno znachenie dlya vseh
-                                //  krivyh podzadachi
+    Parameter := TSpecialCurveParameter.Create;
+    Parameter.Name := 'sigma'; Parameter.Value := 0.25;
+    Parameter.Type_ := Variable;
+    //Parameter.Type_ := Shared;    //  ne var'iruetsya otdel'no,
+                                    //  prinimaet odno znachenie dlya vseh
+                                    //  krivyh podzadachi
+    AddParameter(Parameter);
 
-    P := TSpecialCurveParameter(FParams.Params.Add);
-    P.Name := 'eta'; P.Value := 0;
-    P.Type_ := Variable;        //  razreschaetsya var'irovanie parametra
-                                //  otdel'no dlya kazhdogo ekzemplyara
-                                //  patterna
+    Parameter := TSpecialCurveParameter.Create;
+    Parameter.Name := 'eta'; Parameter.Value := 0;
+    Parameter.Type_ := Variable;    //  razreschaetsya var'irovanie parametra
+                                    //  otdel'no dlya kazhdogo ekzemplyara
+                                    //  patterna
+    AddParameter(Parameter);
 
-    P := TSpecialCurveParameter(FParams.Params.Add);
-    P.Name := 'sigmaright'; P.Value := 0.25;
-    P.Type_ := Variable;
-    //P.Type_ := Shared;      //  ne var'iruetsya otdel'no,
-                                //  prinimaet odno znachenie dlya vseh
-                                //  krivyh podzadachi
+    Parameter := TSpecialCurveParameter.Create;
+    Parameter.Name := 'sigmaright'; Parameter.Value := 0.25;
+    Parameter.Type_ := Variable;
+    //Parameter.Type_ := Shared;    //  ne var'iruetsya otdel'no,
+                                    //  prinimaet odno znachenie dlya vseh
+                                    //  krivyh podzadachi
+    AddParameter(Parameter);
 
-    P := TSpecialCurveParameter(FParams.Params.Add);
-    P.Name := 'etaright'; P.Value := 0;
-    P.Type_ := Variable;        //  razreschaetsya var'irovanie parametra
-                                //  otdel'no dlya kazhdogo ekzemplyara
-                                //  patterna
+    Parameter := TSpecialCurveParameter.Create;
+    Parameter.Name := 'etaright'; Parameter.Value := 0;
+    Parameter.Type_ := Variable;    //  razreschaetsya var'irovanie parametra
+                                    //  otdel'no dlya kazhdogo ekzemplyara
+                                    //  patterna
+    AddParameter(Parameter);
+
     InitListOfVariableParameters;
 end;
 

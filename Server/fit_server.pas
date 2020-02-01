@@ -34,6 +34,7 @@ In this case keeping the state of application can't be guaranteed.
 uses Classes, title_points_set, SelfCheckedComponentList, SysUtils,
      mscr_specimen_list, curve_points_set, named_points_set, points_set,
      gauss_points_set, user_points_set, int_points_set, special_curve_parameter,
+     persistent_curve_parameter_container,
 {$IFDEF FIT}
      { Proxy to client to call it back. }
      fit_server_proxy,
@@ -1394,7 +1395,7 @@ end;
 
 function TFitServer.GetSpecimenParameterCount(SpecIndex: LongInt): LongInt;
 var SpecParamList: TMSCRSpecimenList;
-    CP: Curve_parameters;
+    CurveParameters: Curve_parameters;
 begin
     SpecParamList := GetSpecimenList;
     if not Assigned(SpecParamList) then
@@ -1402,15 +1403,15 @@ begin
     if (SpecIndex < 0) or (SpecIndex >= SpecParamList.Count) then
         raise EUserException.Create(InadmissibleSpecimenIndex);
 
-    CP := Curve_parameters(SpecParamList.Items[SpecIndex]);
-    Result := CP.Params.Count;
+    CurveParameters := Curve_parameters(SpecParamList.Items[SpecIndex]);
+    Result := CurveParameters.Params.Count;
 end;
 
 procedure TFitServer.GetSpecimenParameter(SpecIndex: LongInt; ParamIndex: LongInt;
     var Name: string; var Value: Double; var Type_: LongInt);
 var SpecParamList: TMSCRSpecimenList;
-    CP: Curve_parameters;
-    P: TSpecialCurveParameter;
+    CurveParameters: Curve_parameters;
+    Parameter: TSpecialCurveParameter;
 begin
     SpecParamList := GetSpecimenList;
     if not Assigned(SpecParamList) then
@@ -1418,21 +1419,21 @@ begin
     if (SpecIndex < 0) or (SpecIndex >= SpecParamList.Count) then
         raise EUserException.Create(InadmissibleSpecimenIndex);
 
-    CP := Curve_parameters(SpecParamList.Items[SpecIndex]);
-    if (ParamIndex < 0) or (ParamIndex >= CP.Params.Count) then
+    CurveParameters := Curve_parameters(SpecParamList.Items[SpecIndex]);
+    if (ParamIndex < 0) or (ParamIndex >= CurveParameters.Params.Count) then
         raise EUserException.Create(InadmissibleParameterIndex);
 
-    P := TSpecialCurveParameter(CP.Params.Items[ParamIndex]);
-    Name := P.Name;
-    Value := P.Value;
-    Type_ := LongInt(P.Type_);
+    Parameter := TPersistentCurveParameterContainer(CurveParameters.Params.Items[ParamIndex]).Parameter;
+    Name := Parameter.Name;
+    Value := Parameter.Value;
+    Type_ := LongInt(Parameter.Type_);
 end;
 
 procedure TFitServer.SetSpecimenParameter(
     SpecIndex: LongInt; ParamIndex: LongInt; Value: Double);
 var SpecParamList: TMSCRSpecimenList;
-    CP: Curve_parameters;
-    P: TSpecialCurveParameter;
+    CurveParameters: Curve_parameters;
+    Parameter: TSpecialCurveParameter;
 begin
     SpecParamList := GetSpecimenList;
     if not Assigned(SpecParamList) then
@@ -1440,13 +1441,15 @@ begin
     if (SpecIndex < 0) or (SpecIndex >= SpecParamList.Count) then
         raise EUserException.Create(InadmissibleSpecimenIndex);
 
-    CP := Curve_parameters(SpecParamList.Items[SpecIndex]);
-    if (ParamIndex < 0) or (ParamIndex >= CP.Params.Count) then
+    CurveParameters := Curve_parameters(SpecParamList.Items[SpecIndex]);
+    if (ParamIndex < 0) or (ParamIndex >= CurveParameters.Params.Count) then
         raise EUserException.Create(InadmissibleParameterIndex);
 
-    P := TSpecialCurveParameter(CP.Params.Items[ParamIndex]);
-    P.Value := Value;
-    //  ??? dlya isklucheniya izbytochnogo perescheta pri
+    Parameter := TPersistentCurveParameterContainer(
+        CurveParameters.Params.Items[ParamIndex]
+        ).Parameter;
+    Parameter.Value := Value;
+    //  TODO: dlya isklucheniya izbytochnogo perescheta pri
     //  izmenenii srazu neskol'kih parametrov mozhno sdelat'
     //  v interfeyse otdel'nuyu funktsiyu perescheta; odnako
     //  eto uslozhnit interfeys i mozhet privesti k oschibkam,
@@ -1561,34 +1564,53 @@ end;
 procedure TFitServer.AddSpecimenToList(
     Points: TCurvePointsSet; StartPointIndex, StopPointIndex: LongInt
     );
-var NC: Curve_parameters;
-    P: TSpecialCurveParameter;
+var
+    CurveParameters: Curve_parameters;
     Integral: Double;
+
+    procedure AddNewParameter(Name: string; Value: Double);
+    var
+        Parameter: TSpecialCurveParameter;
+        Container: TPersistentCurveParameterContainer;
+    begin
+        try
+            Parameter := TSpecialCurveParameter.Create;
+            Parameter.Name := Name;
+            Parameter.Value := Value;
+            Parameter.Type_ := Calculated;
+
+            Container := TPersistentCurveParameterContainer(CurveParameters.Params.Add);
+            try
+                Container.Parameter := Parameter;
+            except
+                CurveParameters.Params.Delete(Container.ID);
+                Container.Free;
+            end;
+
+        except
+            Parameter.Free;
+            raise;
+        end;
+    end;
+
 begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
     Assert(Assigned(Points));
     Assert(Assigned(SpecimenList));
     Integral := Integrate(Points, StartPointIndex, StopPointIndex);
 
-    NC := Curve_parameters(Points.Params.GetCopy);
-    NC.SavedInitHash := Points.InitHash;
+    CurveParameters := Curve_parameters(Points.Params.GetCopy);
     try
+        CurveParameters.SavedInitHash := Points.InitHash;
         //  dobavlyayutya vychislyaemye parametry
-        P := TSpecialCurveParameter(NC.Params.Add);
-        P.Name := StartPosName; P.Value := Points.PointXCoord[StartPointIndex];
-        P.Type_ := Calculated;
+        AddNewParameter(StartPosName, Points.PointXCoord[StartPointIndex]);
+        AddNewParameter(FinishPosName, Points.PointXCoord[StopPointIndex]);
+        AddNewParameter('Integral', Integral);
 
-        P := TSpecialCurveParameter(NC.Params.Add);
-        P.Name := FinishPosName; P.Value := Points.PointXCoord[StopPointIndex];
-        P.Type_ := Calculated;
+        SpecimenList.Add(CurveParameters);
 
-        P := TSpecialCurveParameter(NC.Params.Add);
-        P.Name := 'Integral'; P.Value := Integral;
-        P.Type_ := Calculated;
-
-        SpecimenList.Add(NC);
     except
-        NC.Free;
+        CurveParameters.Free;
         raise;
     end;
 end;
@@ -2569,8 +2591,8 @@ var Result: LongInt;
     ExprResult: Double;
     { TODO: remake without using LPCSTR. }
     Symbols, Saved: LPCSTR;
-    P: TSpecialCurveParameter;
-    Index: LongInt;
+    Parameter: TSpecialCurveParameter;
+    Container: TPersistentCurveParameterContainer;
 begin
     Assert(Assigned(Params));
     Assert(Assigned(Params.Params));
@@ -2591,34 +2613,51 @@ begin
         Symbols := GetSymbols;
         Saved := Symbols;
         try
-            Index := 0;
             while Assigned(Symbols) and (Length(Symbols) <> 0) do
             begin
-                P := TSpecialCurveParameter.Create(Params.Params);
-                P.Name := Symbols;
-                //  raspoznaetsya imya argumenta
-                if UpperCase(P.Name) = 'X' then P.Type_ := Argument
-                else
-                //  raspoznaetsya tipichnyy fiksirovannyy parametr polozheniya
-                if UpperCase(P.Name) = 'X0' then
-                    P.Type_ := InvariablePosition
-                else
-                    P.Type_ := Variable;
+                Parameter := TSpecialCurveParameter.Create;
 
-                Symbols := Symbols + Length(Symbols) + 1;
-                Inc(Index);
+                try
+                    Parameter.Name := Symbols;
+                    //  raspoznaetsya imya argumenta
+                    if UpperCase(Parameter.Name) = 'X' then Parameter.Type_ := Argument
+                    else
+                    //  raspoznaetsya tipichnyy fiksirovannyy parametr polozheniya
+                    if UpperCase(Parameter.Name) = 'X0' then
+                        Parameter.Type_ := InvariablePosition
+                    else
+                        Parameter.Type_ := Variable;
+
+                    Symbols := Symbols + Length(Symbols) + 1;
+
+                    Container := TPersistentCurveParameterContainer(Params.Params.Add);
+
+                    try
+                        Container.Parameter := Parameter;
+                    except
+                        Params.Params.Delete(Container.ID);
+                        Container.Free;
+                        raise;
+                    end;
+
+                except
+                    Parameter.Free;
+                    raise;
+                end;
             end;
         finally
             FreeSymbols(Saved);
         end;
+
         if Params.Params.Count = 0 then
             //  argument-to dolzhen byt'
             raise EUserException.Create('Lack of argument.');
         if  Params.Params.Count = 1 then
             //  edinstvennyy parametr m.b. tol'ko argumentom
         begin
-            P := TSpecialCurveParameter(Params.Params.Items[0]);
-            P.Type_ := Argument;
+            Parameter := TPersistentCurveParameterContainer(
+                Params.Params.Items[0]).Parameter;
+            Parameter.Type_ := Argument;
         end;
     end
     else

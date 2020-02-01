@@ -29,8 +29,8 @@ type
 
     { Represents parameter of curve point set. It could be variable or not,
       depending on selected type. }
-    TSpecialCurveParameter = class(TCollectionItem)
-    private
+    TSpecialCurveParameter = class(TObject)
+    protected
         FName: string;
         FValue: Double;
         FType: TParameterType;
@@ -39,31 +39,30 @@ type
 
         FSavedValue: Double;
 
-        function GetValue_: string;
-        procedure SetValue_(AValue: string);
+        { These methods are overriden in descendant classes
+          to provide some special computation on parameter values. }
+
+        function GetValue: Double; virtual;
+        procedure SetValue(AValue: Double); virtual;
 
     public
-        constructor Create(Collection: TCollection); override;
+        constructor Create;
         procedure CopyTo(const Dest: TSpecialCurveParameter);
 
         property SavedValue: Double read FSavedValue write FSavedValue;
-        property Value: Double read FValue write FValue;
+        property Value: Double read GetValue write SetValue;
         property VariationDisabled: Boolean
             read FVariationDisabled write FVariationDisabled;
         property VariationStep: Double
             read FVariationStep write FVariationStep;
 
-    published
-        { Published for XML-serialization. }
         property Name: string read FName write FName;
-        { String because some problem with XML-serialization as Double. }
-        property Value_: string read GetValue_ write SetValue_;
         property Type_: TParameterType read FType write FType;
     end;
 
 implementation
 
-constructor TSpecialCurveParameter.Create(Collection: TCollection);
+constructor TSpecialCurveParameter.Create;
 begin
     inherited;
     FType := Calculated;
@@ -79,15 +78,14 @@ begin
     Dest.VariationStep := VariationStep;
 end;
 
-function TSpecialCurveParameter.GetValue_: string;
+function TSpecialCurveParameter.GetValue: Double;
 begin
-    Result := FloatToStr(FValue);
+    Result := FValue;
 end;
 
-procedure TSpecialCurveParameter.SetValue_(AValue: string);
+procedure TSpecialCurveParameter.SetValue(AValue: Double);
 begin
-    FValue := StrToFloat(AValue);
+    FValue := AValue;
 end;
 
 end.
-

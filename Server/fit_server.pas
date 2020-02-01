@@ -1423,7 +1423,7 @@ begin
     if (ParamIndex < 0) or (ParamIndex >= CurveParameters.Params.Count) then
         raise EUserException.Create(InadmissibleParameterIndex);
 
-    Parameter := TPersistentCurveParameterContainer(CurveParameters.Params.Items[ParamIndex]).Parameter;
+    Parameter := CurveParameters.Parameters[ParamIndex];
     Name := Parameter.Name;
     Value := Parameter.Value;
     Type_ := LongInt(Parameter.Type_);
@@ -1445,9 +1445,7 @@ begin
     if (ParamIndex < 0) or (ParamIndex >= CurveParameters.Params.Count) then
         raise EUserException.Create(InadmissibleParameterIndex);
 
-    Parameter := TPersistentCurveParameterContainer(
-        CurveParameters.Params.Items[ParamIndex]
-        ).Parameter;
+    Parameter := CurveParameters.Parameters[ParamIndex];
     Parameter.Value := Value;
     //  TODO: dlya isklucheniya izbytochnogo perescheta pri
     //  izmenenii srazu neskol'kih parametrov mozhno sdelat'
@@ -2655,8 +2653,7 @@ begin
         if  Params.Params.Count = 1 then
             //  edinstvennyy parametr m.b. tol'ko argumentom
         begin
-            Parameter := TPersistentCurveParameterContainer(
-                Params.Params.Items[0]).Parameter;
+            Parameter := Params.Parameters[0];
             Parameter.Type_ := Argument;
         end;
     end

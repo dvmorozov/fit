@@ -29,6 +29,11 @@ type
     protected
         FParams: TCollection;
 
+        function GetParameter(Index: LongInt): TSpecialCurveParameter;
+        procedure SetParameter(Index: LongInt; Parameter: TSpecialCurveParameter);
+
+        function GetCount: LongInt;
+
     public
         { Initial parameters hash. Should be used for copying optimization. }
         SavedInitHash: Cardinal;
@@ -39,6 +44,11 @@ type
         procedure CopyParameters(const Dest: TObject); override;
         function GetParamValueByName(ParamName: string): double;
         procedure SetParamValueByName(ParamName: string; AValue: double);
+
+        property Parameters[Index: LongInt]: TSpecialCurveParameter
+            read GetParameter write SetParameter;
+
+        property Count: LongInt read GetCount;
 
     published
         { Published for XML-serialization. }
@@ -268,10 +278,9 @@ begin
     end
     else
     begin
-        for i := 0 to FParams.Params.Count - 1 do
+        for i := 0 to FParams.Count - 1 do
         begin
-            P := TPersistentCurveParameterContainer(
-                FParams.Params.Items[i]).Parameter;
+            P := FParams.Parameters[i];
             if UpperCase(P.Name) = UpperCase(Name) then
             begin
                 Result := P.Value;
@@ -325,10 +334,9 @@ begin
     end
     else
     begin
-        for i := 0 to FParams.Params.Count - 1 do
+        for i := 0 to FParams.Count - 1 do
         begin
-            P := TPersistentCurveParameterContainer(
-                FParams.Params.Items[i]).Parameter;
+            P := FParams.Parameters[i];
             if UpperCase(P.Name) = UpperCase(Name) then
             begin
 {$IFDEF WRITE_PARAMS_LOG}
@@ -483,16 +491,14 @@ procedure TCurvePointsSet.InitListOfVariableParameters;
 var i, Index: LongInt;
     P: TSpecialCurveParameter;
 begin
-    Assert(Assigned(Params));
-    Assert(Assigned(Params.Params));
+    Assert(Assigned(FParams));
 
     FVariableParameters.Free;
     FVariableParameters := TList.Create;
 
-    for i := 0 to Params.Params.Count - 1 do
+    for i := 0 to FParams.Count - 1 do
     begin
-        P := TPersistentCurveParameterContainer(
-            Params.Params.Items[i]).Parameter;
+        P := FParams.Parameters[i];
 
         if (P.Type_ = Variable) or
            (P.Type_ = VariablePosition) then
@@ -536,13 +542,11 @@ procedure TCurvePointsSet.StoreParams;
 var i: LongInt;
     P: TSpecialCurveParameter;
 begin
-    Assert(Assigned(Params));
-    Assert(Assigned(Params.Params));
+    Assert(Assigned(FParams));
 
-    for i := 0 to Params.Params.Count - 1 do
+    for i := 0 to FParams.Count - 1 do
     begin
-        P := TPersistentCurveParameterContainer(
-            Params.Params.Items[i]).Parameter;
+        P := FParams.Parameters[i];
         P.SavedValue := P.Value;
     end;
 end;
@@ -551,13 +555,11 @@ procedure TCurvePointsSet.RestoreParams;
 var i: LongInt;
     P: TSpecialCurveParameter;
 begin
-    Assert(Assigned(Params));
-    Assert(Assigned(Params.Params));
+    Assert(Assigned(FParams));
 
-    for i := 0 to Params.Params.Count - 1 do
+    for i := 0 to FParams.Count - 1 do
     begin
-        P := TPersistentCurveParameterContainer(
-            Params.Params.Items[i]).Parameter;
+        P := FParams.Parameters[i];
         P.Value := P.SavedValue;
     end;
     Modified := True;
@@ -612,19 +614,19 @@ end;
 
 procedure Curve_parameters.CopyParameters(const Dest: TObject);
 var i: LongInt;
-    Parametr, NewParameter: TSpecialCurveParameter;
+    Parameter, NewParameter: TSpecialCurveParameter;
     NewContainer: TPersistentCurveParameterContainer;
 begin
     inherited;
 
     Curve_parameters(Dest).Params.Clear;
 
-    for i := 0 to Params.Count - 1 do
+    for i := 0 to Count - 1 do
     begin
-        Parametr := TPersistentCurveParameterContainer(Params.Items[i]).Parameter;
+        Parameter := Parameters[i];
 
         NewParameter := TSpecialCurveParameter.Create;
-        Parametr.CopyTo(NewParameter);
+        Parameter.CopyTo(NewParameter);
 
         try
             NewContainer :=
@@ -642,10 +644,9 @@ function Curve_parameters.GetParamValueByName(ParamName: string): double;
 var i: Integer;
     P: TSpecialCurveParameter;
 begin
-    for i := 0 to Params.Count - 1 do
+    for i := 0 to Count - 1 do
     begin
-        P := TPersistentCurveParameterContainer(
-            Params.Items[i]).Parameter;
+        P := Parameters[i];
         if P.Name = ParamName then
         begin
             Result := P.Value;
@@ -658,16 +659,33 @@ procedure Curve_parameters.SetParamValueByName(ParamName: string; AValue: double
 var i: Integer;
     P: TSpecialCurveParameter;
 begin
-    for i := 0 to Params.Count - 1 do
+    for i := 0 to Count - 1 do
     begin
-        P := TPersistentCurveParameterContainer(
-            Params.Items[i]).Parameter;
+        P := Parameters[i];
         if P.Name = ParamName then
         begin
             P.Value := AValue;
             break;
         end;
     end;
+end;
+
+function Curve_parameters.GetParameter(Index: LongInt): TSpecialCurveParameter;
+begin
+    Assert(Assigned(FParams));
+    Result := TPersistentCurveParameterContainer(FParams.Items[Index]).Parameter;
+end;
+
+procedure Curve_parameters.SetParameter(Index: LongInt; Parameter: TSpecialCurveParameter);
+begin
+    Assert(Assigned(FParams));
+    TPersistentCurveParameterContainer(FParams.Items[Index]).Parameter := Parameter;
+end;
+
+function Curve_parameters.GetCount: LongInt;
+begin
+    Assert(Assigned(FParams));
+    Result := FParams.Count;
 end;
 
 begin

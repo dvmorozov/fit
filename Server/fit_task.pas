@@ -534,8 +534,7 @@ begin
     else
     if CommonVaryingFlag then
     begin
-        P := TPersistentCurveParameterContainer(
-            CommonSpecimenParams.Params.Items[CommonVaryingIndex]).Parameter;
+        P := CommonSpecimenParams.Parameters[CommonVaryingIndex];
         Result := P.VariationStep;
     end
     else
@@ -595,10 +594,8 @@ begin
         if CommonVaryingIndex < Count then
         begin
             Inc(CommonVaryingIndex);
-            while ((CommonVaryingIndex <> Count) and
-                   (TPersistentCurveParameterContainer(
-                        CommonSpecimenParams.Params.Items[CommonVaryingIndex]
-                     ).Parameter.VariationDisabled)) do
+            while (CommonVaryingIndex <> Count) and
+                   CommonSpecimenParams.Parameters[CommonVaryingIndex].VariationDisabled do
                 Inc(CommonVaryingIndex);
         end;
     end;
@@ -639,9 +636,7 @@ begin
     //  poisk pervogo parametra razreschennogo k variatsii
     for i := 0 to CommonSpecimenParams.Params.Count - 1 do
     begin
-        if not TPersistentCurveParameterContainer(
-            CommonSpecimenParams.Params.Items[i]
-        ).Parameter.VariationDisabled then Break;
+        if not CommonSpecimenParams.Parameters[i].VariationDisabled then Break;
     end;
     CommonVaryingIndex := i;
     CommonVaryingFlag := False;
@@ -652,7 +647,7 @@ end;
 
 function TFitTask.GetParam: Double;
 var GP: TCurvePointsSet;
-    P: TSpecialCurveParameter;
+    Parameter: TSpecialCurveParameter;
 begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
     Assert(Assigned(CurvesList));
@@ -673,10 +668,8 @@ begin
     if CommonVaryingFlag then
     begin
         Assert(CommonVaryingIndex < CommonSpecimenParams.Params.Count);
-        P := TPersistentCurveParameterContainer(
-                CommonSpecimenParams.Params.Items[CommonVaryingIndex]
-            ).Parameter;
-        Result := P.Value;
+        Parameter := CommonSpecimenParams.Parameters[CommonVaryingIndex];
+        Result := Parameter.Value;
     end
     else
     begin
@@ -690,7 +683,7 @@ end;
 procedure TFitTask.SetParam(NewParamValue: Double);
 var GP: TCurvePointsSet;
     i: LongInt;
-    P: TSpecialCurveParameter;
+    Parameter: TSpecialCurveParameter;
 begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
     Assert(Assigned(CurvesList));
@@ -718,18 +711,16 @@ begin
     if CommonVaryingFlag then
     begin
         Assert(CommonVaryingIndex < CommonSpecimenParams.Params.Count);
-        P := TPersistentCurveParameterContainer(
-                CommonSpecimenParams.Params.Items[CommonVaryingIndex]
-            ).Parameter;
-        P.Value := NewParamValue;
-                
+        Parameter := CommonSpecimenParams.Parameters[CommonVaryingIndex];
+        Parameter.Value := NewParamValue;
+
         //  ustanovka znacheniya obschego parametra u vseh ekzemplyarov
         for i := 0 to CurvesList.Count - 1 do
         begin
             GP := TCurvePointsSet(CurvesList.Items[i]);
-            GP.ParamByName[TPersistentCurveParameterContainer(
-                    CommonSpecimenParams.Params.Items[CommonVaryingIndex]
-                ).Parameter.Name] := NewParamValue;
+            GP.ParamByName[
+                CommonSpecimenParams.Parameters[CommonVaryingIndex].Name
+            ] := NewParamValue;
         end;
         //CalculateProfile;
     end
@@ -764,12 +755,8 @@ begin
     x0Step := x0Step * {0.5} {0.6} 0.99;
     for i := 0 to CommonSpecimenParams.Params.Count - 1 do
     begin
-        TPersistentCurveParameterContainer(
-            CommonSpecimenParams.Params.Items[i]
-        ).Parameter.VariationStep :=
-        TPersistentCurveParameterContainer(
-            CommonSpecimenParams.Params.Items[i]
-        ).Parameter.VariationStep * 0.99;
+        CommonSpecimenParams.Parameters[i].VariationStep :=
+        CommonSpecimenParams.Parameters[i].VariationStep * 0.99;
     end;
 end;
 
@@ -782,12 +769,8 @@ begin
     x0Step := x0Step * Factor;
     for i := 0 to CommonSpecimenParams.Params.Count - 1 do
     begin
-        TPersistentCurveParameterContainer(
-            CommonSpecimenParams.Params.Items[i]
-        ).Parameter.VariationStep :=
-        TPersistentCurveParameterContainer(
-            CommonSpecimenParams.Params.Items[i]
-        ).Parameter.VariationStep * Factor;
+        CommonSpecimenParams.Parameters[i].VariationStep :=
+        CommonSpecimenParams.Parameters[i].VariationStep * Factor;
     end;
 end;
 
@@ -974,9 +957,7 @@ begin
     x0Step := 0.01;
     for i := 0 to CommonSpecimenParams.Params.Count - 1 do
     begin
-        TPersistentCurveParameterContainer(
-            CommonSpecimenParams.Params.Items[i]
-        ).Parameter.VariationStep := 0.1;
+        CommonSpecimenParams.Parameters[i].VariationStep := 0.1;
     end;
 
     EOC := False;
@@ -1272,7 +1253,8 @@ begin
     Specimen.InitHash := 0;
     for i := 0 to Specimen.Params.Params.Count - 1 do
     begin
-        Parameter := TPersistentCurveParameterContainer(Specimen.Params.Params.Items[i]);
+        Parameter := TPersistentCurveParameterContainer(
+            Specimen.Params.Params.Items[i]);
         Value := Parameter.Value_;
         Specimen.InitHash := Specimen.InitHash + JSHash(Value);
     end;
@@ -1281,8 +1263,8 @@ end;
 procedure TFitTask.SearchSpecimenAndInit(
     SpecimenParameters: TMSCRSpecimenList; Specimen: TCurvePointsSet);
 var i, j, k: LongInt;
-    NC: Curve_parameters;
-    P, P2: TSpecialCurveParameter;
+    CurveParameters: Curve_parameters;
+    Parameter, Parameter2: TSpecialCurveParameter;
 begin
     //Assert(Assigned(SpecimenParameters));
     //  ravenstvo nil ne protivorechit rasschirennoy semantike metoda; krome
@@ -1293,24 +1275,22 @@ begin
     
     for i := 0 to SpecimenParameters.Count - 1 do
     begin
-        NC := Curve_parameters(SpecimenParameters.Items[i]);
+        CurveParameters := Curve_parameters(SpecimenParameters.Items[i]);
         
-        if NC.SavedInitHash = Specimen.InitHash then
+        if CurveParameters.SavedInitHash = Specimen.InitHash then
         begin
-            //Specimen.SetParameters(Curve_parameters(NC.GetCopy));
+            //Specimen.SetParameters(Curve_parameters(CurveParameters.GetCopy));
             //  v naborah parametrov, hranyaschihsya v spiske SpecimenParameters
             //  mogut byt' vychislyaemye, kotorye ne nuzhno kopirovat'
             for j := 0 to Specimen.Params.Params.Count - 1 do
             begin
-                P := TPersistentCurveParameterContainer(
-                        Specimen.Params.Params.Items[j]).Parameter;
-                for k := 0 to NC.Params.Count - 1 do
+                Parameter := Specimen.Params.Parameters[j];
+                for k := 0 to CurveParameters.Params.Count - 1 do
                 begin
-                    P2 := TPersistentCurveParameterContainer(
-                        NC.Params.Items[k]).Parameter;
-                    if P.Name = P2.Name then
+                    Parameter2 := CurveParameters.Parameters[k];
+                    if Parameter.Name = Parameter2.Name then
                     begin
-                        P.Value := P2.Value;
+                        Parameter.Value := Parameter2.Value;
                         Break;
                     end;
                 end;
@@ -1365,20 +1345,14 @@ begin
         //  pervonachal'naya initsyalizatsyya spiska obschih parametrov;
         for i := 0 to Result.Params.Params.Count - 1 do
         begin
-            if (TPersistentCurveParameterContainer(
-                    Result.Params.Params.Items[i]
-                ).Parameter.Type_ = Shared) and (not
-                TPersistentCurveParameterContainer(
-                    Result.Params.Params.Items[i]
-                ).Parameter.VariationDisabled) then
+            if (Result.Params.Parameters[i].Type_ = Shared) and (not
+                Result.Params.Parameters[i].VariationDisabled) then
             begin
                 //  !!! predpolagaetsya, chto vse krivye odnogo tipa !!!
                 Parameter := TSpecialCurveParameter.Create;
 
                 try
-                    TPersistentCurveParameterContainer(
-                            Result.Params.Params.Items[i]
-                        ).Parameter.CopyTo(Parameter);
+                    Result.Params.Parameters[i].CopyTo(Parameter);
                     //  spetsial'naya initsializatsiya
                     if ((UpperCase(Parameter.Name) = 'SIGMA') or
                        ((UpperCase(Parameter.Name) = 'SIGMARIGTH')))
@@ -1410,16 +1384,12 @@ begin
     for i := 0 to Result.Params.Params.Count - 1 do
     begin
         //  initsializatsiya znacheniy
-        if ((UpperCase(TPersistentCurveParameterContainer(
-            Result.Params.Params.Items[i]).Parameter.Name) = 'SIGMA') or
-           ((UpperCase(TPersistentCurveParameterContainer(
-            Result.Params.Params.Items[i]).Parameter.Name) = 'SIGMARIGTH')))
+        if ((UpperCase(Result.Params.Parameters[i].Name) = 'SIGMA') or
+           ((UpperCase(Result.Params.Parameters[i].Name) = 'SIGMARIGTH')))
             then
         begin
-            TPersistentCurveParameterContainer(
-                Result.Params.Params.Items[i]).Parameter.Value := 0.25;
-            TPersistentCurveParameterContainer(
-                Result.Params.Params.Items[i]).Parameter.VariationStep := 0.1;
+            Result.Params.Parameters[i].Value := 0.25;
+            Result.Params.Parameters[i].VariationStep := 0.1;
         end;
     end;
 end;

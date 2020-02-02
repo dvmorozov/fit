@@ -1,5 +1,7 @@
 program Fit;
 
+{$DEFINE UseCThreads}
+
 {$IF NOT DEFINED(FPC)}
 {$DEFINE _WINDOWS}
 {$ELSEIF DEFINED(WINDOWS)}

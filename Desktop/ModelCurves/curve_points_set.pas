@@ -19,9 +19,10 @@ unit curve_points_set;
 
 interface
 
-uses Classes, SysUtils, SimpMath, self_copied_component, points_set,
+uses Classes, SysUtils, self_copied_component, points_set,
     title_points_set, data_loader, special_curve_parameter,
-    amplitude_curve_parameter, persistent_curve_parameter_container;
+    amplitude_curve_parameter, sigma_curve_parameter,
+    persistent_curve_parameter_container;
 
 type
     { Generic type of instance parameter container. }
@@ -70,7 +71,7 @@ type
           in descendant constructors. }
         AmplitudeP: TAmplitudeCurveParameter;
         PositionP: TSpecialCurveParameter;
-        SigmaP: TSpecialCurveParameter;
+        SigmaP: TSigmaCurveParameter;
         { It is used in TUserPointsSet. TODO: move it to TUserPointsSet. }
         ArgP: TSpecialCurveParameter;
 
@@ -118,8 +119,8 @@ type
         function GetSigma: Double;
 
     public
-        { Indexes of attributes with predefined semantics. Indexes are 
-          filled only in the case if parameters with requirede names are
+        { Indexes of attributes with predefined semantics. Indexes are
+          filled only in the case if parameters with required names are
           variable and are indexes in the List. It's necessary in accessing
           to variable parameters via Param[Index] it would be possible to
           set up parameters with predefined semantics in according to 
@@ -416,35 +417,17 @@ begin
 end;
 
 procedure TCurvePointsSet.SetA(Value: Double);
-{$IFDEF WRITE_PARAMS_LOG}
-var LogStr: string;
-{$ENDIF}
 begin
     Assert(Assigned(AmplitudeP));
     Modified := True;
-{$IFDEF WRITE_PARAMS_LOG}
-    LogStr := ' SetA: Value = ' + FloatToStr(Value);
-    WriteLog(LogStr, Notification_);
-{$ENDIF}
     AmplitudeP.Value := Value;
 end;
 
 procedure TCurvePointsSet.SetSigma(Value: Double);
-{$IFDEF WRITE_PARAMS_LOG}
-var LogStr: string;
-{$ENDIF}
 begin
     Assert(Assigned(SigmaP));
     Modified := True;
-{$IFDEF WRITE_PARAMS_LOG}
-    LogStr := ' SetSigma: Value = ' + FloatToStr(Value);
-    WriteLog(LogStr, Notification_);
-{$ENDIF}
-    //  nuzhno brat' po modulyu, potomu chto
-    //  algoritm optimizatsii mozhet zagonyat'
-    //  v oblast' otritsatel'nyh znacheniy
-    SigmaP.Value := Abs(Value);
-    if SigmaP.Value = 0 then SigmaP.Value := TINY;
+    SigmaP.Value := Value;
 end;
 
 function TCurvePointsSet.Hasx0: Boolean;
@@ -522,7 +505,7 @@ end;
 procedure TCurvePointsSet.SetSpecParamPtr(P: TSpecialCurveParameter);
 begin
     Assert(Assigned(P));
-    if UpperCase(P.Name) = 'SIGMA' then SigmaP := P;
+    if UpperCase(P.Name) = 'SIGMA' then SigmaP := TSigmaCurveParameter(P);
     if UpperCase(P.Name) = 'A' then AmplitudeP := TAmplitudeCurveParameter(P);
     if (P.Type_ = VariablePosition) or
        (P.Type_ = InvariablePosition) then PositionP := P;

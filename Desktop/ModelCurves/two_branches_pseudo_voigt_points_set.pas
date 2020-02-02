@@ -22,7 +22,7 @@ interface
 uses
     Classes, SysUtils, int_points_set, points_set, named_points_set,
     curve_points_set, curve_types_singleton, special_curve_parameter,
-    amplitude_curve_parameter, SimpMath;
+    amplitude_curve_parameter, sigma_curve_parameter, SimpMath;
 
 type
     { Pseudo-Voigt curve having different form parameters for
@@ -121,12 +121,7 @@ begin
     //Parameter.Type_ := InvariablePosition;
     AddParameter(Parameter);
 
-    Parameter := TSpecialCurveParameter.Create;
-    Parameter.Name := 'sigma'; Parameter.Value := 0.25;
-    Parameter.Type_ := Variable;
-    //Parameter.Type_ := Shared;    //  ne var'iruetsya otdel'no,
-                                    //  prinimaet odno znachenie dlya vseh
-                                    //  krivyh podzadachi
+    Parameter := TSigmaCurveParameter.Create;
     AddParameter(Parameter);
 
     Parameter := TSpecialCurveParameter.Create;

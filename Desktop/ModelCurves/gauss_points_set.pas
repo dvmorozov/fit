@@ -21,7 +21,7 @@ interface
 
 uses Classes, SysUtils, int_points_set, points_set, curve_points_set, named_points_set,
     curve_types_singleton, special_curve_parameter, amplitude_curve_parameter,
-    SimpMath;
+    sigma_curve_parameter, SimpMath;
 
 type
     { Curve having Gauss form. }
@@ -61,11 +61,8 @@ begin
     Parameter.Type_ := VariablePosition;
     AddParameter(Parameter);
 
-    Parameter := TSpecialCurveParameter.Create;
-    Parameter.Name := 'sigma'; Parameter.Value := 0.25;
-    Parameter.Type_ := Variable;        //  ne var'iruetsya otdel'no,
-                                        //  prinimaet odno znachenie dlya vseh
-                                        //  krivyh podzadachi (intervala)
+    Parameter := TSigmaCurveParameter.Create;
+
     AddParameter(Parameter);
 
     InitListOfVariableParameters;

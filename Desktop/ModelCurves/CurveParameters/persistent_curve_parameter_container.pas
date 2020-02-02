@@ -26,7 +26,7 @@ type
         procedure SetType(AType: TParameterType);
 
     public
-        destructor Destroy; virtual;
+        destructor Destroy; override;
 
         property Parameter: TSpecialCurveParameter
             read FSpecialCurveParameter write FSpecialCurveParameter;

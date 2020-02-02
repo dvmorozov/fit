@@ -21,11 +21,7 @@ interface
 
 uses
     Classes, Grids, SysUtils, NumericGrid, table_components, curve_points_set,
-    special_curve_parameter
-{$IFDEF _WINDOWS}
-    , persistent_curve_parameter_container
-{$ENDIF}
-    ;
+    special_curve_parameter;
 
 type
     { Set of pattern instances forming the calculated profile in sum. }

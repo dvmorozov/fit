@@ -22,9 +22,7 @@ interface
 uses
     SysUtils, LResources, Forms, ExtCtrls, StdCtrls, CheckLst,
     app_settings, special_curve_parameter
-{$IFDEF _WINDOWS}
-    , persistent_curve_parameter_container
-{$ELSE}
+{$IFNDEF _WINDOWS}
     , Dialogs
 {$ENDIF}
     ;

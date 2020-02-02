@@ -115,10 +115,7 @@ begin
     Parameter := TAmplitudeCurveParameter.Create;
     AddParameter(Parameter);
 
-    Parameter := TSpecialCurveParameter.Create;
-    Parameter.Name := 'x0'; Parameter.Value := 0;
-    Parameter.Type_ := VariablePosition;
-    //Parameter.Type_ := InvariablePosition;
+    Parameter := TPositionCurveParameter.Create;
     AddParameter(Parameter);
 
     Parameter := TSigmaCurveParameter.Create;

@@ -19,9 +19,10 @@ unit curve_points_set;
 
 interface
 
-uses Classes, SysUtils, self_copied_component, points_set,
-    title_points_set, data_loader, special_curve_parameter,
-    amplitude_curve_parameter, sigma_curve_parameter,
+uses
+    Classes, SysUtils, self_copied_component, points_set,
+    title_points_set, data_loader, amplitude_curve_parameter,
+    sigma_curve_parameter, position_curve_parameter,
     persistent_curve_parameter_container;
 
 type
@@ -70,14 +71,10 @@ type
           to parameters with predefined semantics. Parameters are created
           in descendant constructors. }
         AmplitudeP: TAmplitudeCurveParameter;
-        PositionP: TSpecialCurveParameter;
+        PositionP: TPositionCurveParameter;
         SigmaP: TSigmaCurveParameter;
         { It is used in TUserPointsSet. TODO: move it to TUserPointsSet. }
         ArgP: TSpecialCurveParameter;
-
-        Fx0IsSet: Boolean;
-        { X0 variation boundaries. }
-        Fx0Low, Fx0High: Double;
 
         { Returns variable parameter by through index. }
         function GetParam(Index: LongInt): Double; virtual;
@@ -359,61 +356,10 @@ begin
 end;
 
 procedure TCurvePointsSet.Setx0(Value: Double);
-var i: LongInt;
-    TempDouble: Double;
-    Highindex: LongInt;
-    Lowindex: LongInt;
-    P: TSpecialCurveParameter;
-{$IFDEF WRITE_PARAMS_LOG}
-    LogStr: string;
-{$ENDIF}
 begin
     Assert(Assigned(PositionP));
-    P := PositionP;
-{$IFDEF WRITE_PARAMS_LOG}
-    LogStr := ' SetX0: Value = ' + FloatToStr(Value);
-    WriteLog(LogStr, Notification_);
-{$ENDIF}
     Modified := True;
-    //  nuzhno brat' po modulyu, potomu chto
-    //  algoritm optimizatsii mozhet zagonyat'
-    //  v oblast' otritsatel'nyh znacheniy
-    Value := Abs(Value);
-    if not Fx0IsSet then
-    begin
-        //  pervaya ustanovka parametra
-        Fx0IsSet := True;
-        P.Value := Value;
-        Fx0Low := MIN_VALUE;
-        Fx0High := MAX_VALUE;
-        Highindex := -1;
-        Lowindex := -1;
-        //  opredelenie granits variatsii parametra
-        for i := 0 to PointsCount - 1 do
-        begin
-            TempDouble := PointXCoord[i];
-            if TempDouble < P.Value then
-            begin
-                if Abs(TempDouble - P.Value) < Abs(Fx0Low - P.Value) then
-                    Fx0Low := TempDouble;
-                Lowindex := i;
-            end;
-            if TempDouble > P.Value then
-            begin
-                if Abs(TempDouble - P.Value) < Abs(Fx0High - P.Value) then
-                    Fx0High := TempDouble;
-                Highindex := i;
-            end;
-        end;
-        if Lowindex = -1 then Fx0Low := P.Value;
-        if Highindex = -1 then Fx0High := P.Value;
-    end
-    else
-    begin
-        if Value < Fx0Low then begin P.Value := Fx0Low; Exit end;
-        if Value > Fx0High then begin P.Value := Fx0High; Exit end;
-        P.Value := Value;
-    end;
+    PositionP.Value := Value;
 end;
 
 procedure TCurvePointsSet.SetA(Value: Double);
@@ -432,12 +378,12 @@ end;
 
 function TCurvePointsSet.Hasx0: Boolean;
 begin
-    if Assigned(PositionP) then Result := True else Result := False;
+    Result := Assigned(PositionP);
 end;
 
 function TCurvePointsSet.HasA: Boolean;
 begin
-    if Assigned(AmplitudeP) then Result := True else Result := False;
+    Result := Assigned(AmplitudeP);
 end;
 
 function TCurvePointsSet.HasSigma: Boolean;
@@ -508,7 +454,7 @@ begin
     if UpperCase(P.Name) = 'SIGMA' then SigmaP := TSigmaCurveParameter(P);
     if UpperCase(P.Name) = 'A' then AmplitudeP := TAmplitudeCurveParameter(P);
     if (P.Type_ = VariablePosition) or
-       (P.Type_ = InvariablePosition) then PositionP := P;
+       (P.Type_ = InvariablePosition) then PositionP := TPositionCurveParameter(P);
 end;
 //  ustanavlivaet indeksy var'iruemyh parametrov s predopredelennoy
 //  semantikoy

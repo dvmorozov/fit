@@ -8,7 +8,7 @@ unit special_curve_parameter;
 
 interface
 
-uses Classes, SysUtils, curve_points_set;
+uses Classes, SysUtils;
 
 type
     TParameterType = (
@@ -36,7 +36,6 @@ type
         FType: TParameterType;
         FVariationDisabled: Boolean;
         FVariationStep: Double;
-        FOwner: TCurvePointsSet;
 
         FSavedValue: Double;
 
@@ -47,7 +46,7 @@ type
         procedure SetValue(AValue: Double); virtual;
 
     public
-        constructor Create(AOwner: TCurvePointsSet);
+        constructor Create;
         procedure CopyTo(const Dest: TSpecialCurveParameter);
 
         property SavedValue: Double read FSavedValue write FSavedValue;
@@ -63,11 +62,10 @@ type
 
 implementation
 
-constructor TSpecialCurveParameter.Create(AOwner: TCurvePointsSet);
+constructor TSpecialCurveParameter.Create;
 begin
     inherited Create;
     FType := Calculated;
-    FOwner := AOwner;
 end;
 
 procedure TSpecialCurveParameter.CopyTo(const Dest: TSpecialCurveParameter);

@@ -21,9 +21,9 @@ interface
 
 uses
     Classes, SysUtils, self_copied_component, points_set,
-    title_points_set, data_loader, amplitude_curve_parameter,
-    sigma_curve_parameter, position_curve_parameter,
-    persistent_curve_parameter_container;
+    title_points_set, amplitude_curve_parameter, sigma_curve_parameter,
+    position_curve_parameter, persistent_curve_parameter_container,
+    special_curve_parameter;
 
 type
     { Generic type of instance parameter container. }

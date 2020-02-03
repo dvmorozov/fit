@@ -21,7 +21,7 @@ interface
 
 uses Classes, SysUtils, int_points_set, points_set, curve_points_set, named_points_set,
     curve_types_singleton, special_curve_parameter, amplitude_curve_parameter,
-    sigma_curve_parameter, SimpMath;
+    sigma_curve_parameter, position_curve_parameter, SimpMath;
 
 type
     { Curve having Gauss form. }
@@ -56,7 +56,7 @@ begin
     Parameter := TAmplitudeCurveParameter.Create;
     AddParameter(Parameter);
 
-    Parameter := TPositionCurveParameter.Create;
+    Parameter := TPositionCurveParameter.Create(Self);
     AddParameter(Parameter);
 
     Parameter := TSigmaCurveParameter.Create;

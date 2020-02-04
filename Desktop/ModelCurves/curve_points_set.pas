@@ -78,6 +78,7 @@ type
 
         { Returns variable parameter by through index. }
         function GetParam(Index: LongInt): Double; virtual;
+        function GetParameter(Index: LongInt): TSpecialCurveParameter;
         { Sets value of variable parameter. }
         procedure SetParam(Index: LongInt; Value: Double); virtual;
         { Returns total number of variable parameters. }
@@ -88,10 +89,10 @@ type
         procedure SetParamByName(Name: string; Value: Double); virtual;
         
         { Initializes pointers to parameters with predefined semantics. }
-        procedure SetSpecParamPtr(P: TSpecialCurveParameter); virtual;
-        { Initializes indexes of variable parameters with predefined semantics. }
-        procedure SetSpecParamVarIndex(
-            P: TSpecialCurveParameter; Index: LongInt); virtual;
+        procedure SetSpecParamPtr(Parameter: TSpecialCurveParameter); virtual;
+
+        { Sets up indexes of parameters with predefined semantics. }
+        procedure SetSpecParamVarIndex(P: TSpecialCurveParameter; Index: LongInt); virtual;
 
     protected
         Modified: Boolean;
@@ -101,8 +102,7 @@ type
         procedure DoCalc(const Intervals: TPointsSet); virtual; abstract;
         { Multiplies profile points by given factor. }
         procedure ScaleCurve(const Factor: Double);
-        { Performs intialization of variable list parameters and 
-          set up of AmplIndex, PosIndex, SigmaIndex. }
+        { Performs intialization of variable list parameters. }
         procedure InitListOfVariableParameters;
         
         { These functions don't perform profile recalculation and
@@ -116,19 +116,6 @@ type
         function GetSigma: Double;
 
     public
-        { Indexes of attributes with predefined semantics. Indexes are
-          filled only in the case if parameters with required names are
-          variable and are indexes in the List. It's necessary in accessing
-          to variable parameters via Param[Index] it would be possible to
-          set up parameters with predefined semantics in according to 
-          restrictions. Must be public to assign optimization step. }
-        { Curve amplitude. }
-        AmplIndex: LongInt;
-        { Curve position. }
-        PosIndex: LongInt;
-        { Curve width. }
-        SigmaIndex: LongInt;
-
         { Boundaries for R-factor calculation. }
         MinX, MaxX: Double;
         { Flag designating that boundaries of R-factor calculation
@@ -163,6 +150,7 @@ type
 
         { Provides access to variable parameters for optimizer. }
         property Param[index: LongInt]: Double read GetParam write SetParam;
+        property Parameters[index: LongInt]: TSpecialCurveParameter read GetParameter;
         property ParamCount: LongInt read GetParamCount;
         { Provides access to all parameters by name. }
         property ParamByName[Name: string]: Double read GetParamByName write SetParamByName;
@@ -186,9 +174,6 @@ begin
     inherited;
     FParams := Curve_parameters.Create(nil);
     Modified := True;
-    AmplIndex := -1;
-    PosIndex := -1;
-    SigmaIndex := -1;
 end;
 
 destructor TCurvePointsSet.Destroy;
@@ -218,72 +203,39 @@ begin
 end;
 
 function TCurvePointsSet.GetParam(Index: LongInt): Double;
-var P: TSpecialCurveParameter;
+var Parameter: TSpecialCurveParameter;
 begin
     Assert(index < GetParamCount);
-    
-    if Index = PosIndex then Result := x0
-    else
-    if Index = AmplIndex then Result := A
-    else
-    if Index = SigmaIndex then Result := Sigma
-    else
-    begin
-        P := TSpecialCurveParameter(FVariableParameters.Items[index]);
-        Result := P.Value;
-    end;
+    Parameter := TSpecialCurveParameter(FVariableParameters.Items[index]);
+    Result := Parameter.Value;
+end;
+
+function TCurvePointsSet.GetParameter(Index: LongInt): TSpecialCurveParameter;
+begin
+    Assert(index < GetParamCount);
+    Result := TSpecialCurveParameter(FVariableParameters.Items[index]);
 end;
 
 procedure TCurvePointsSet.SetParam(Index: LongInt; Value: Double);
-var P: TSpecialCurveParameter;
+var Parameter: TSpecialCurveParameter;
 begin
     Assert((Index < GetParamCount) and (Index >= 0));
     Modified := True;
-
-    if Index = PosIndex then x0 := Value
-    else
-    if Index = AmplIndex then A := Value
-    else
-    if Index = SigmaIndex then Sigma := Value
-    else
-    begin
-        P := TSpecialCurveParameter(FVariableParameters.Items[Index]);
-        P.Value := Value;
-    end;
+    Parameter := TSpecialCurveParameter(FVariableParameters.Items[Index]);
+    Parameter.Value := Value;
 end;
 
 function TCurvePointsSet.GetParamByName(Name: string): Double;
 var i: LongInt;
-    P: TSpecialCurveParameter;
+    Parameter: TSpecialCurveParameter;
 begin
-    //  snachala proveryayutsya special'nye imena
-    if UpperCase(Name) = 'X0' then
+    for i := 0 to FParams.Count - 1 do
     begin
-        Result := x0;
-        Exit;
-    end
-    else
-    if UpperCase(Name) = 'A' then
-    begin
-        Result := A;
-        Exit;
-    end
-    else
-    if UpperCase(Name) = 'SIGMA' then
-    begin
-        Result := Sigma;
-        Exit;
-    end
-    else
-    begin
-        for i := 0 to FParams.Count - 1 do
+        Parameter := FParams.Parameters[i];
+        if UpperCase(Parameter.Name) = UpperCase(Name) then
         begin
-            P := FParams.Parameters[i];
-            if UpperCase(P.Name) = UpperCase(Name) then
-            begin
-                Result := P.Value;
-                Exit;
-            end;
+            Result := Parameter.Value;
+            Exit;
         end;
     end;
     Assert(False);
@@ -292,59 +244,15 @@ end;
 procedure TCurvePointsSet.SetParamByName(Name: string; Value: Double);
 var i: LongInt;
     P: TSpecialCurveParameter;
-{$IFDEF WRITE_PARAMS_LOG}
-    LogStr: string;
-{$ENDIF}
 begin
     Modified := True;
-    //  snachala proveryayutsya special'nye imena
-    if UpperCase(Name) = 'X0' then
+    for i := 0 to FParams.Count - 1 do
     begin
-{$IFDEF WRITE_PARAMS_LOG}
-        LogStr := IntToStr(LongInt(Self)) + ' SetParamByName(x0): Value = ' +
-            FloatToStr(Value);
-        WriteLog(LogStr, Notification_);
-{$ENDIF}
-        x0 := Value;
-        Exit;
-    end
-    else
-    if UpperCase(Name) = 'A' then
-    begin
-{$IFDEF WRITE_PARAMS_LOG}
-        LogStr := IntToStr(LongInt(Self)) + ' SetParamByName(A): Value = ' +
-            FloatToStr(Value);
-        WriteLog(LogStr, Notification_);
-{$ENDIF}
-        A := Value;
-        Exit;
-    end
-    else
-    if UpperCase(Name) = 'SIGMA' then
-    begin
-{$IFDEF WRITE_PARAMS_LOG}
-        LogStr := IntToStr(LongInt(Self)) + ' SetParamByName(Sigma): Value = ' +
-            FloatToStr(Value);
-        WriteLog(LogStr, Notification_);
-{$ENDIF}
-        Sigma := Value;
-        Exit;
-    end
-    else
-    begin
-        for i := 0 to FParams.Count - 1 do
+        P := FParams.Parameters[i];
+        if UpperCase(P.Name) = UpperCase(Name) then
         begin
-            P := FParams.Parameters[i];
-            if UpperCase(P.Name) = UpperCase(Name) then
-            begin
-{$IFDEF WRITE_PARAMS_LOG}
-                LogStr := IntToStr(LongInt(Self)) +
-                    ' SetParamByName('+ Name +'): Value = ' + FloatToStr(Value);
-                WriteLog(LogStr, Notification_);
-{$ENDIF}
-                P.Value := Value;
-                Exit;
-            end;
+            P.Value := Value;
+            Exit;
         end;
     end;
     Assert(False);
@@ -417,8 +325,8 @@ begin
 end;
 
 procedure TCurvePointsSet.InitListOfVariableParameters;
-var i, Index: LongInt;
-    P: TSpecialCurveParameter;
+var i: LongInt;
+    Parameter: TSpecialCurveParameter;
 begin
     Assert(Assigned(FParams));
 
@@ -427,69 +335,62 @@ begin
 
     for i := 0 to FParams.Count - 1 do
     begin
-        P := FParams.Parameters[i];
+        Parameter := FParams.Parameters[i];
 
-        if (P.Type_ = Variable) or
-           (P.Type_ = VariablePosition) then
+        if (Parameter.Type_ = Variable) or
+           (Parameter.Type_ = VariablePosition) then
         begin
-            //  zdes' tol'ko var'iruemye
-            Index := FVariableParameters.Add(P);
-            //  opredelyayutsya indeksy parametrov s
-            //  predopredelennoy semantikoy v spiske
-            //  var'iruemyh parametrov
-            SetSpecParamVarIndex(P, Index);
+            FVariableParameters.Add(Parameter);
         end;
-        if P.Type_ = Argument then ArgP := P;
-
-        //  ustanavlivayutsya ukazateli na parametry
-        //  s predopredelennoy semantikoy
-        SetSpecParamPtr(P);
+        SetSpecParamPtr(Parameter);
     end;
 end;
 
-//  ustanavlivaet ukazateli na parametry s predopredelennoy semantikoy
-procedure TCurvePointsSet.SetSpecParamPtr(P: TSpecialCurveParameter);
+procedure TCurvePointsSet.SetSpecParamVarIndex(P: TSpecialCurveParameter; Index: LongInt);
 begin
-    Assert(Assigned(P));
-    if UpperCase(P.Name) = 'SIGMA' then SigmaP := TSigmaCurveParameter(P);
-    if UpperCase(P.Name) = 'A' then AmplitudeP := TAmplitudeCurveParameter(P);
-    if (P.Type_ = VariablePosition) or
-       (P.Type_ = InvariablePosition) then PositionP := TPositionCurveParameter(P);
+
 end;
-//  ustanavlivaet indeksy var'iruemyh parametrov s predopredelennoy
-//  semantikoy
-procedure TCurvePointsSet.SetSpecParamVarIndex(
-    P: TSpecialCurveParameter; Index: LongInt);
+
+//  ustanavlivaet ukazateli na parametry s predopredelennoy semantikoy
+procedure TCurvePointsSet.SetSpecParamPtr(Parameter: TSpecialCurveParameter);
 begin
-    Assert(Assigned(P));
-    if UpperCase(P.Name) = 'SIGMA' then SigmaIndex := Index;
-    if UpperCase(P.Name) = 'A' then AmplIndex := Index;
-    if P.Type_ = VariablePosition then PosIndex := Index;
+    Assert(Assigned(Parameter));
+    if UpperCase(Parameter.Name) = 'SIGMA' then
+        SigmaP := TSigmaCurveParameter(Parameter);
+
+    if UpperCase(Parameter.Name) = 'A' then
+        AmplitudeP := TAmplitudeCurveParameter(Parameter);
+
+    if (Parameter.Type_ = VariablePosition) or
+       (Parameter.Type_ = InvariablePosition) then
+       PositionP := TPositionCurveParameter(Parameter);
+
+    if Parameter.Type_ = Argument then ArgP := Parameter;
 end;
 
 procedure TCurvePointsSet.StoreParams;
 var i: LongInt;
-    P: TSpecialCurveParameter;
+    Parameter: TSpecialCurveParameter;
 begin
     Assert(Assigned(FParams));
 
     for i := 0 to FParams.Count - 1 do
     begin
-        P := FParams.Parameters[i];
-        P.SavedValue := P.Value;
+        Parameter := FParams.Parameters[i];
+        Parameter.SavedValue := Parameter.Value;
     end;
 end;
 
 procedure TCurvePointsSet.RestoreParams;
 var i: LongInt;
-    P: TSpecialCurveParameter;
+    Parameter: TSpecialCurveParameter;
 begin
     Assert(Assigned(FParams));
 
     for i := 0 to FParams.Count - 1 do
     begin
-        P := FParams.Parameters[i];
-        P.Value := P.SavedValue;
+        Parameter := FParams.Parameters[i];
+        Parameter.Value := Parameter.SavedValue;
     end;
     Modified := True;
 end;

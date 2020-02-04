@@ -49,6 +49,10 @@ type
         constructor Create;
         procedure CopyTo(const Dest: TSpecialCurveParameter);
 
+        function MinimumStepAchieved(): Boolean; virtual;
+        procedure InitVariationStep(); virtual;
+        procedure MultiplyVariationStep(Factor: Double);
+
         property SavedValue: Double read FSavedValue write FSavedValue;
         property Value: Double read GetValue write SetValue;
         property VariationDisabled: Boolean
@@ -84,8 +88,30 @@ begin
 end;
 
 procedure TSpecialCurveParameter.SetValue(AValue: Double);
+{$IFDEF WRITE_PARAMS_LOG}
+    LogStr: string;
+{$ENDIF}
 begin
+{$IFDEF WRITE_PARAMS_LOG}
+    LogStr := 'SetValue: Name = ' + FName + ', Value = ' + FloatToStr(AValue);
+    WriteLog(LogStr, Notification_);
+{$ENDIF}
     FValue := AValue;
+end;
+
+procedure TSpecialCurveParameter.InitVariationStep();
+begin
+    FVariationStep := 0.1;
+end;
+
+function TSpecialCurveParameter.MinimumStepAchieved(): Boolean;
+begin
+    Result := FVariationStep < 0.00001;
+end;
+
+procedure TSpecialCurveParameter.MultiplyVariationStep(Factor: Double);
+begin
+    FVariationStep := FVariationStep * Factor;
 end;
 
 end.

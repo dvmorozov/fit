@@ -36,7 +36,7 @@ var LogStr: string;
 {$ENDIF}
 begin
 {$IFDEF WRITE_PARAMS_LOG}
-    LogStr := ' SetSigma: Value = ' + FloatToStr(Value);
+    LogStr := 'SetValue: Name = ' + FName + ', Value = ' + FloatToStr(AValue);
     WriteLog(LogStr, Notification_);
 {$ENDIF}
     FValue := Abs(AValue);

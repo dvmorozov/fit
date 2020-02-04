@@ -24,6 +24,8 @@ type
 
     public
         constructor Create(APointsSet: TPointsSet);
+
+        procedure InitVariationStep(); override;
     end;
 
 const
@@ -54,7 +56,7 @@ var i: LongInt;
 {$ENDIF}
 begin
 {$IFDEF WRITE_PARAMS_LOG}
-    LogStr := ' SetX0: Value = ' + FloatToStr(AValue);
+    LogStr := 'SetValue: Name = ' + FName + ', Value = ' + FloatToStr(AValue);
     WriteLog(LogStr, Notification_);
 {$ENDIF}
     //  nuzhno brat' po modulyu, potomu chto
@@ -96,6 +98,11 @@ begin
         if FValue > Fx0High then begin FValue := Fx0High; Exit end;
         FValue := AValue;
     end;
+end;
+
+procedure TPositionCurveParameter.InitVariationStep();
+begin
+    FVariationStep := 0.01;
 end;
 
 end.

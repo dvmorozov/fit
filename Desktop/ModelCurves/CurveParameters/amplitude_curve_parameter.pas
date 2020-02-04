@@ -19,6 +19,9 @@ type
 
     public
         constructor Create;
+
+        function MinimumStepAchieved(): Boolean; override;
+        procedure InitVariationStep(); override;
     end;
 
 implementation
@@ -37,10 +40,20 @@ var LogStr: string;
 {$ENDIF}
 begin
 {$IFDEF WRITE_PARAMS_LOG}
-    LogStr := ' SetA: Value = ' + FloatToStr(Value);
+    LogStr := 'SetValue: Name = ' + FName + ', Value = ' + FloatToStr(AValue);
     WriteLog(LogStr, Notification_);
 {$ENDIF}
     FValue := Abs(AValue);
+end;
+
+function TAmplitudeCurveParameter.MinimumStepAchieved(): Boolean;
+begin
+    Result := FVariationStep < 0.0001;
+end;
+
+procedure TAmplitudeCurveParameter.InitVariationStep();
+begin
+    FVariationStep := 100;
 end;
 
 end.

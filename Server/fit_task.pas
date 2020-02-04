@@ -67,7 +67,6 @@ type
         //  ======================= dannye dlya optimizatora ====================
         FMinimizer: TMinimizer;
 
-        AStep, x0Step: Double;
         { Index of pattern instance (specimen) parameters of which are variated at the moment. }
         CurveNum: LongInt;
         { Index of parameter of pattern instance which is variated at the moment. }
@@ -114,7 +113,7 @@ type
         procedure SetParam(NewParamValue: Double);
         { Returns True at the end of iteration cycle. }
         function EndOfCycle: Boolean;
-        { Divides all optimization steps by 2. }
+        { Divides all optimization steps by 2. Iterface method for TSimpleMinimizer2. }
         procedure DivideStepsBy2;
         procedure MultipleSteps(Factor: Double);
         { Returns flag indicating termination of the calculation. }
@@ -136,7 +135,6 @@ type
           For this class is always True for now because the class does not support asynchronous operations. }
         AllDone: Boolean;
 
-    protected
         procedure ShowCurMin; virtual;
         procedure DoneProc; virtual;
 
@@ -185,6 +183,8 @@ type
         { Calculates hash of initial values of parameters of pattern instance. }
         procedure CalcInitHash(Specimen: TCurvePointsSet);
         function GetPatternSpecimen: TCurvePointsSet;
+        function MinimumStepAchieved: Boolean;
+        procedure InitializeVariationSteps;
 
     public
         constructor Create(AOwner: TComponent;
@@ -524,28 +524,22 @@ begin
 end;
 
 function TFitTask.GetStep: Double;
-var GP: TCurvePointsSet;
-    P: TSpecialCurveParameter;
+var Curve: TCurvePointsSet;
 begin
     if FEnableBackgroundVariation and BackgroundVaryingFlag then
     begin
+        //  TODO: move into separate "background" class.
         Result := 0.1;
     end
     else
     if CommonVaryingFlag then
     begin
-        P := CommonSpecimenParams.Parameters[CommonVaryingIndex];
-        Result := P.VariationStep;
+        Result := CommonSpecimenParams.Parameters[CommonVaryingIndex].VariationStep;
     end
     else
     begin
-        GP := TCurvePointsSet(CurvesList.Items[CurveNum]);
-        
-        if ParamNum = GP.AmplIndex then Result := AStep
-        else
-        if ParamNum = GP.PosIndex then Result := x0Step
-        else
-            Result := 0.1;
+        Curve := TCurvePointsSet(CurvesList.Items[CurveNum]);
+        Result := Curve.Parameters[ParamNum].VariationStep;
     end;
 end;
 
@@ -747,17 +741,8 @@ begin
 end;
 
 procedure TFitTask.DivideStepsBy2;
-var i: LongInt;
 begin
-    Assert(Assigned(CommonSpecimenParams));
-    
-    AStep := AStep * {0.5} {0.6} 0.99;
-    x0Step := x0Step * {0.5} {0.6} 0.99;
-    for i := 0 to CommonSpecimenParams.Params.Count - 1 do
-    begin
-        CommonSpecimenParams.Parameters[i].VariationStep :=
-        CommonSpecimenParams.Parameters[i].VariationStep * 0.99;
-    end;
+    MultipleSteps(0.99);
 end;
 
 procedure TFitTask.MultipleSteps(Factor: Double);
@@ -765,12 +750,9 @@ var i: LongInt;
 begin
     Assert(Assigned(CommonSpecimenParams));
     
-    AStep := AStep * Factor;
-    x0Step := x0Step * Factor;
     for i := 0 to CommonSpecimenParams.Params.Count - 1 do
     begin
-        CommonSpecimenParams.Parameters[i].VariationStep :=
-        CommonSpecimenParams.Parameters[i].VariationStep * Factor;
+        CommonSpecimenParams.Parameters[i].MultiplyVariationStep(Factor);
     end;
 end;
 
@@ -785,9 +767,9 @@ begin
     end
     else
     begin
-        if (AStep < 0.0001{0.01}{0.1}{1}) then
+        if MinimumStepAchieved then
         begin
-            //OutputDebugString(PChar('Minimal amplitude step achived...'));
+            //OutputDebugString(PChar('Minimumu step achived...'));
             Result := True;
         end;
     end;
@@ -805,9 +787,6 @@ begin
     FCurveTypeId := TGaussPointsSet.GetCurveTypeId_;
     AllDone := True;
     
-    AStep := 100{10};                   //  shag amplitudy dolzhen nastraivat'sya,
-                                        //  inache mozhet ne byt' shodimosti k min.
-    x0Step := 0.01;
     FEnableBackgroundVariation := AEnableBackgroundVariation;
     FEnableFastMinimizer := False;
 end;
@@ -933,8 +912,56 @@ begin
             CalcProfile.PointYCoord[j] - PS.PointYCoord[j];
 end;
 
+procedure TFitTask.InitializeVariationSteps;
+var
+    i, j: LongInt;
+    Curve: TCurvePointsSet;
+begin
+    for i := 0 to CommonSpecimenParams.Params.Count - 1 do
+    begin
+        CommonSpecimenParams.Parameters[i].InitVariationStep();
+    end;
+
+    for i := 0 to CurvesList.Count - 1 do
+    begin
+        Curve := TCurvePointsSet(CurvesList.Items[i]);
+        for j := 0 to Curve.ParamCount - 1 do
+        begin
+            Curve.Parameters[j].InitVariationStep();
+        end;
+    end;
+end;
+
+function TFitTask.MinimumStepAchieved: Boolean;
+var
+    i, j: LongInt;
+    Curve: TCurvePointsSet;
+begin
+    for i := 0 to CommonSpecimenParams.Params.Count - 1 do
+    begin
+        if not CommonSpecimenParams.Parameters[i].MinimumStepAchieved() then
+        begin
+            Result := False;
+            Exit;
+        end;
+    end;
+
+    for i := 0 to CurvesList.Count - 1 do
+    begin
+        Curve := TCurvePointsSet(CurvesList.Items[i]);
+        for j := 0 to Curve.ParamCount - 1 do
+        begin
+            if not Curve.Parameters[j].MinimumStepAchieved() then
+            begin
+                Result := False;
+                Exit;
+            end;
+        end;
+    end;
+    Result := True;
+end;
+
 procedure TFitTask.CreateFastMinimizer;
-var i: longint;
 begin
     FMinimizer.Free; FMinimizer := nil;
     FMinimizer := TSimpleMinimizer3.Create(nil);
@@ -952,13 +979,7 @@ begin
     TSimpleMinimizer3(FMinimizer).EndOfCalculation := EndOfCalculation;
     TSimpleMinimizer3(FMinimizer).MultipleSteps := MultipleSteps;
 
-    //  Initial step values.
-    AStep := 100;
-    x0Step := 0.01;
-    for i := 0 to CommonSpecimenParams.Params.Count - 1 do
-    begin
-        CommonSpecimenParams.Parameters[i].VariationStep := 0.1;
-    end;
+    InitializeVariationSteps;
 
     EOC := False;
     ParamNum := 0;
@@ -984,6 +1005,8 @@ begin
     FMinimizer.OnSetParam := SetParam;
     FMinimizer.OnEndOfCycle := EndOfCycle;
     FMinimizer.OnShowCurMin := ShowCurMin;
+
+    InitializeVariationSteps;
 
     EOC := False;
     ParamNum := 0;

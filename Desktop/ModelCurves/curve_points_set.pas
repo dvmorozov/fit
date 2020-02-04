@@ -48,12 +48,12 @@ type
         procedure SetParamValueByName(ParamName: string; AValue: double);
 
         property Parameters[Index: LongInt]: TSpecialCurveParameter
-            read GetParameter write SetParameter;
+            read GetParameter write SetParameter; default;
 
         property Count: LongInt read GetCount;
 
     published
-        { Published for XML-serialization. }
+        { Published for XML-serialization. Don't rename. }
         property Params: TCollection read FParams write FParams;
     end;
 
@@ -142,7 +142,7 @@ type
         procedure RestoreParams;
         procedure CopyParameters(const Dest: TObject); override;
 
-        { Designate initialization of attributes with predefined semantics. }
+        { Return True if attributes with predefined semantics were assigned. }
         
         function Hasx0: Boolean;
         function HasA: Boolean;
@@ -231,7 +231,7 @@ var i: LongInt;
 begin
     for i := 0 to FParams.Count - 1 do
     begin
-        Parameter := FParams.Parameters[i];
+        Parameter := FParams[i];
         if UpperCase(Parameter.Name) = UpperCase(Name) then
         begin
             Result := Parameter.Value;
@@ -248,7 +248,7 @@ begin
     Modified := True;
     for i := 0 to FParams.Count - 1 do
     begin
-        P := FParams.Parameters[i];
+        P := FParams[i];
         if UpperCase(P.Name) = UpperCase(Name) then
         begin
             P.Value := Value;
@@ -335,7 +335,7 @@ begin
 
     for i := 0 to FParams.Count - 1 do
     begin
-        Parameter := FParams.Parameters[i];
+        Parameter := FParams[i];
 
         if (Parameter.Type_ = Variable) or
            (Parameter.Type_ = VariablePosition) then
@@ -376,7 +376,7 @@ begin
 
     for i := 0 to FParams.Count - 1 do
     begin
-        Parameter := FParams.Parameters[i];
+        Parameter := FParams[i];
         Parameter.SavedValue := Parameter.Value;
     end;
 end;
@@ -389,7 +389,7 @@ begin
 
     for i := 0 to FParams.Count - 1 do
     begin
-        Parameter := FParams.Parameters[i];
+        Parameter := FParams[i];
         Parameter.Value := Parameter.SavedValue;
     end;
     Modified := True;
@@ -472,14 +472,14 @@ end;
 
 function Curve_parameters.GetParamValueByName(ParamName: string): double;
 var i: Integer;
-    P: TSpecialCurveParameter;
+    Parameter: TSpecialCurveParameter;
 begin
     for i := 0 to Count - 1 do
     begin
-        P := Parameters[i];
-        if P.Name = ParamName then
+        Parameter := Parameters[i];
+        if Parameter.Name = ParamName then
         begin
-            Result := P.Value;
+            Result := Parameter.Value;
             break;
         end;
     end;
@@ -487,14 +487,14 @@ end;
 
 procedure Curve_parameters.SetParamValueByName(ParamName: string; AValue: double);
 var i: Integer;
-    P: TSpecialCurveParameter;
+    Parameter: TSpecialCurveParameter;
 begin
     for i := 0 to Count - 1 do
     begin
-        P := Parameters[i];
-        if P.Name = ParamName then
+        Parameter := Parameters[i];
+        if Parameter.Name = ParamName then
         begin
-            P.Value := AValue;
+            Parameter.Value := AValue;
             break;
         end;
     end;

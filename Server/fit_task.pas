@@ -534,7 +534,7 @@ begin
     else
     if CommonVaryingFlag then
     begin
-        Result := CommonSpecimenParams.Parameters[CommonVaryingIndex].VariationStep;
+        Result := CommonSpecimenParams[CommonVaryingIndex].VariationStep;
     end
     else
     begin
@@ -589,7 +589,7 @@ begin
         begin
             Inc(CommonVaryingIndex);
             while (CommonVaryingIndex <> Count) and
-                   CommonSpecimenParams.Parameters[CommonVaryingIndex].VariationDisabled do
+                   CommonSpecimenParams[CommonVaryingIndex].VariationDisabled do
                 Inc(CommonVaryingIndex);
         end;
     end;
@@ -630,7 +630,7 @@ begin
     //  poisk pervogo parametra razreschennogo k variatsii
     for i := 0 to CommonSpecimenParams.Params.Count - 1 do
     begin
-        if not CommonSpecimenParams.Parameters[i].VariationDisabled then Break;
+        if not CommonSpecimenParams[i].VariationDisabled then Break;
     end;
     CommonVaryingIndex := i;
     CommonVaryingFlag := False;
@@ -662,7 +662,7 @@ begin
     if CommonVaryingFlag then
     begin
         Assert(CommonVaryingIndex < CommonSpecimenParams.Params.Count);
-        Parameter := CommonSpecimenParams.Parameters[CommonVaryingIndex];
+        Parameter := CommonSpecimenParams[CommonVaryingIndex];
         Result := Parameter.Value;
     end
     else
@@ -705,7 +705,7 @@ begin
     if CommonVaryingFlag then
     begin
         Assert(CommonVaryingIndex < CommonSpecimenParams.Params.Count);
-        Parameter := CommonSpecimenParams.Parameters[CommonVaryingIndex];
+        Parameter := CommonSpecimenParams[CommonVaryingIndex];
         Parameter.Value := NewParamValue;
 
         //  ustanovka znacheniya obschego parametra u vseh ekzemplyarov
@@ -713,7 +713,7 @@ begin
         begin
             GP := TCurvePointsSet(CurvesList.Items[i]);
             GP.ParamByName[
-                CommonSpecimenParams.Parameters[CommonVaryingIndex].Name
+                CommonSpecimenParams[CommonVaryingIndex].Name
             ] := NewParamValue;
         end;
         //CalculateProfile;
@@ -752,7 +752,7 @@ begin
     
     for i := 0 to CommonSpecimenParams.Params.Count - 1 do
     begin
-        CommonSpecimenParams.Parameters[i].MultiplyVariationStep(Factor);
+        CommonSpecimenParams[i].MultiplyVariationStep(Factor);
     end;
 end;
 
@@ -919,7 +919,7 @@ var
 begin
     for i := 0 to CommonSpecimenParams.Params.Count - 1 do
     begin
-        CommonSpecimenParams.Parameters[i].InitVariationStep();
+        CommonSpecimenParams[i].InitVariationStep;
     end;
 
     for i := 0 to CurvesList.Count - 1 do
@@ -927,7 +927,7 @@ begin
         Curve := TCurvePointsSet(CurvesList.Items[i]);
         for j := 0 to Curve.ParamCount - 1 do
         begin
-            Curve.Parameters[j].InitVariationStep();
+            Curve.Parameters[j].InitVariationStep;
         end;
     end;
 end;
@@ -939,7 +939,7 @@ var
 begin
     for i := 0 to CommonSpecimenParams.Params.Count - 1 do
     begin
-        if not CommonSpecimenParams.Parameters[i].MinimumStepAchieved() then
+        if not CommonSpecimenParams[i].MinimumStepAchieved then
         begin
             Result := False;
             Exit;
@@ -951,7 +951,7 @@ begin
         Curve := TCurvePointsSet(CurvesList.Items[i]);
         for j := 0 to Curve.ParamCount - 1 do
         begin
-            if not Curve.Parameters[j].MinimumStepAchieved() then
+            if not Curve.Parameters[j].MinimumStepAchieved then
             begin
                 Result := False;
                 Exit;
@@ -1307,10 +1307,10 @@ begin
             //  mogut byt' vychislyaemye, kotorye ne nuzhno kopirovat'
             for j := 0 to Specimen.Params.Params.Count - 1 do
             begin
-                Parameter := Specimen.Params.Parameters[j];
+                Parameter := Specimen.Params[j];
                 for k := 0 to CurveParameters.Params.Count - 1 do
                 begin
-                    Parameter2 := CurveParameters.Parameters[k];
+                    Parameter2 := CurveParameters[k];
                     if Parameter.Name = Parameter2.Name then
                     begin
                         Parameter.Value := Parameter2.Value;
@@ -1368,14 +1368,14 @@ begin
         //  pervonachal'naya initsyalizatsyya spiska obschih parametrov;
         for i := 0 to Result.Params.Params.Count - 1 do
         begin
-            if (Result.Params.Parameters[i].Type_ = Shared) and (not
-                Result.Params.Parameters[i].VariationDisabled) then
+            if (Result.Params[i].Type_ = Shared) and (not
+                Result.Params[i].VariationDisabled) then
             begin
                 //  !!! predpolagaetsya, chto vse krivye odnogo tipa !!!
                 Parameter := TSpecialCurveParameter.Create;
 
                 try
-                    Result.Params.Parameters[i].CopyTo(Parameter);
+                    Result.Params[i].CopyTo(Parameter);
                     //  spetsial'naya initsializatsiya
                     if ((UpperCase(Parameter.Name) = 'SIGMA') or
                        ((UpperCase(Parameter.Name) = 'SIGMARIGTH')))
@@ -1407,12 +1407,12 @@ begin
     for i := 0 to Result.Params.Params.Count - 1 do
     begin
         //  initsializatsiya znacheniy
-        if ((UpperCase(Result.Params.Parameters[i].Name) = 'SIGMA') or
-           ((UpperCase(Result.Params.Parameters[i].Name) = 'SIGMARIGTH')))
+        if ((UpperCase(Result.Params[i].Name) = 'SIGMA') or
+           ((UpperCase(Result.Params[i].Name) = 'SIGMARIGTH')))
             then
         begin
-            Result.Params.Parameters[i].Value := 0.25;
-            Result.Params.Parameters[i].VariationStep := 0.1;
+            Result.Params[i].Value := 0.25;
+            Result.Params[i].VariationStep := 0.1;
         end;
     end;
 end;

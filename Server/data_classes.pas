@@ -74,7 +74,7 @@ begin
         Assert(Grid.ColCount - Grid.FixedCols = CurveParameters.Params.Count - 1);
         for i := 0 to CurveParameters.Params.Count - 1 do
         begin
-            Parameter := CurveParameters.Parameters[i];
+            Parameter := CurveParameters[i];
             if Parameter.Type_ <> Argument then
             begin
                 Grid.Cells[Grid.FixedCols + Index, 0] := Parameter.Name;
@@ -102,7 +102,7 @@ begin
                 Index := 0;
                 for i := 0 to CurveParameters.Params.Count - 1 do
                 begin
-                    Parameters := CurveParameters.Parameters[i];
+                    Parameters := CurveParameters[i];
                     case Parameters.Type_ of
                         Argument: begin end;
                         Calculated: begin
@@ -138,7 +138,7 @@ begin
             Index := 0;
             for i := 0 to CurveParameters.Params.Count - 1 do
             begin
-                Parameter := CurveParameters.Parameters[i];
+                Parameter := CurveParameters[i];
                 if Parameter.Type_ <> Argument then
                 begin
                     Cells[FixedCols + Index, RowNum] :=
@@ -171,7 +171,7 @@ begin
         Index := 0;
         for i := 0 to CurveParameters.Count - 1 do
         begin
-            Parameter := CurveParameters.Parameters[i];
+            Parameter := CurveParameters[i];
             if Parameter.Type_ <> Argument then
             begin
                 try
@@ -217,7 +217,7 @@ begin
         CurveParameters := Curve_parameters(Items[0]);
         for i := 0 to CurveParameters.Params.Count - 1 do
         begin
-            Parameter := CurveParameters.Parameters[i];
+            Parameter := CurveParameters[i];
             if Parameter.Type_ <> Argument then Inc(Result);
         end;
     end

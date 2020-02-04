@@ -1423,7 +1423,7 @@ begin
     if (ParamIndex < 0) or (ParamIndex >= CurveParameters.Params.Count) then
         raise EUserException.Create(InadmissibleParameterIndex);
 
-    Parameter := CurveParameters.Parameters[ParamIndex];
+    Parameter := CurveParameters[ParamIndex];
     Name := Parameter.Name;
     Value := Parameter.Value;
     Type_ := LongInt(Parameter.Type_);
@@ -1445,7 +1445,7 @@ begin
     if (ParamIndex < 0) or (ParamIndex >= CurveParameters.Params.Count) then
         raise EUserException.Create(InadmissibleParameterIndex);
 
-    Parameter := CurveParameters.Parameters[ParamIndex];
+    Parameter := CurveParameters[ParamIndex];
     Parameter.Value := Value;
     //  TODO: dlya isklucheniya izbytochnogo perescheta pri
     //  izmenenii srazu neskol'kih parametrov mozhno sdelat'
@@ -2647,13 +2647,13 @@ begin
             FreeSymbols(Saved);
         end;
 
-        if Params.Params.Count = 0 then
+        if Params.Count = 0 then
             //  argument-to dolzhen byt'
             raise EUserException.Create('Lack of argument.');
-        if  Params.Params.Count = 1 then
+        if  Params.Count = 1 then
             //  edinstvennyy parametr m.b. tol'ko argumentom
         begin
-            Parameter := Params.Parameters[0];
+            Parameter := Params[0];
             Parameter.Type_ := Argument;
         end;
     end

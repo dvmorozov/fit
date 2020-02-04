@@ -81,7 +81,7 @@ var Parameter: TSpecialCurveParameter;
 begin
     for i := 0 to ct.Parameters.Count - 1 do
     begin
-        Parameter := ct.Parameters.Parameters[i];
+        Parameter := ct.Parameters[i];
         if (Parameter.Type_ = InvariablePosition) or
            (Parameter.Type_ = VariablePosition) then Parameter.Type_ := Variable;
     end;
@@ -99,7 +99,7 @@ var Parameter: TSpecialCurveParameter;
 begin
     for i := 0 to ct.Params.Count - 1 do
     begin
-        Parameter := ct.Parameters.Parameters[i];
+        Parameter := ct.Parameters[i];
         if Parameter.Type_ = Argument then Parameter.Type_ := Variable;
     end;
     
@@ -186,7 +186,7 @@ begin
     ComboArgument.Items.Clear;
     for i := 0 to ct.Params.Count - 1 do
     begin
-        Parameter := ct.Parameters.Parameters[i];
+        Parameter := ct.Parameters[i];
         //  !!! svyazku po indeksu delat' nel'zya,
         //  poskol'ku spisok sortirovan !!!
         ComboArgument.Items.AddObject(Parameter.Name, Parameter);
@@ -203,7 +203,7 @@ begin
     ComboPosition.Items.Clear;
     for i := 0 to ct.Params.Count - 1 do
     begin
-        Parameter := ct.Parameters.Parameters[i];
+        Parameter := ct.Parameters[i];
         if (Parameter.Type_ = Shared) or (Parameter.Type_ = Variable) or
            (Parameter.Type_ = InvariablePosition) or (Parameter.Type_ = VariablePosition) then
         begin
@@ -224,7 +224,7 @@ begin
     CheckListFixed.Items.Clear;
     for i := 0 to ct.Params.Count - 1 do
     begin
-        Parameter := ct.Parameters.Parameters[i];
+        Parameter := ct.Parameters[i];
         if (Parameter.Type_ = Shared) or (Parameter.Type_ = Variable) or
            (Parameter.Type_ = InvariablePosition) or (Parameter.Type_ = VariablePosition) then
         begin

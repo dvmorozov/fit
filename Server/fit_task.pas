@@ -539,7 +539,7 @@ begin
     else
     begin
         Curve := TCurvePointsSet(CurvesList.Items[CurveNum]);
-        Result := Curve.Parameters[ParamNum].VariationStep;
+        Result := Curve.VariableParameters[ParamNum].VariationStep;
     end;
 end;
 
@@ -563,7 +563,7 @@ begin
     begin
         //  perebor parametrov krivoy
         GP := TCurvePointsSet(CurvesList.Items[CurveNum]);
-        if ParamNum < GP.ParamCount - 1 then
+        if ParamNum < GP.VariableParameterCount - 1 then
         begin
             Inc(ParamNum);
             EOC := False;
@@ -670,7 +670,7 @@ begin
         Assert(CurvesList.Count <> 0);
 
         GP := TCurvePointsSet(CurvesList.Items[CurveNum]);
-        Result := GP.Param[ParamNum];
+        Result := GP.VariableParameterValue[ParamNum];
     end;
 end;
 
@@ -712,7 +712,7 @@ begin
         for i := 0 to CurvesList.Count - 1 do
         begin
             GP := TCurvePointsSet(CurvesList.Items[i]);
-            GP.ParamByName[
+            GP.ParametersByName[
                 CommonSpecimenParams[CommonVaryingIndex].Name
             ] := NewParamValue;
         end;
@@ -729,7 +729,7 @@ begin
         GP := TCurvePointsSet(CurvesList.Items[CurveNum]);
         //  ??? v nekotoryh sluchayah rabotaet optimal'nee
         //SubbCurveFromProfile(GP);
-        GP.Param[ParamNum] := NewParamValue;
+        GP.VariableParameterValue[ParamNum] := NewParamValue;
         //GP.ReCalc(nil);
         //AddCurveToProfile(GP);
     end;
@@ -925,9 +925,9 @@ begin
     for i := 0 to CurvesList.Count - 1 do
     begin
         Curve := TCurvePointsSet(CurvesList.Items[i]);
-        for j := 0 to Curve.ParamCount - 1 do
+        for j := 0 to Curve.VariableParameterCount - 1 do
         begin
-            Curve.Parameters[j].InitVariationStep;
+            Curve.VariableParameters[j].InitVariationStep;
         end;
     end;
 end;
@@ -949,9 +949,9 @@ begin
     for i := 0 to CurvesList.Count - 1 do
     begin
         Curve := TCurvePointsSet(CurvesList.Items[i]);
-        for j := 0 to Curve.ParamCount - 1 do
+        for j := 0 to Curve.VariableParameterCount - 1 do
         begin
-            if not Curve.Parameters[j].MinimumStepAchieved then
+            if not Curve.VariableParameters[j].MinimumStepAchieved then
             begin
                 Result := False;
                 Exit;
@@ -1274,10 +1274,10 @@ var i: LongInt;
 begin
     Assert(Assigned(Specimen));
     Specimen.InitHash := 0;
-    for i := 0 to Specimen.Params.Params.Count - 1 do
+    for i := 0 to Specimen.Parameters.Params.Count - 1 do
     begin
         Parameter := TPersistentCurveParameterContainer(
-            Specimen.Params.Params.Items[i]);
+            Specimen.Parameters.Params.Items[i]);
         Value := Parameter.Value_;
         Specimen.InitHash := Specimen.InitHash + JSHash(Value);
     end;
@@ -1305,9 +1305,9 @@ begin
             //Specimen.SetParameters(Curve_parameters(CurveParameters.GetCopy));
             //  v naborah parametrov, hranyaschihsya v spiske SpecimenParameters
             //  mogut byt' vychislyaemye, kotorye ne nuzhno kopirovat'
-            for j := 0 to Specimen.Params.Params.Count - 1 do
+            for j := 0 to Specimen.Parameters.Params.Count - 1 do
             begin
-                Parameter := Specimen.Params[j];
+                Parameter := Specimen.Parameters[j];
                 for k := 0 to CurveParameters.Params.Count - 1 do
                 begin
                     Parameter2 := CurveParameters[k];
@@ -1366,16 +1366,16 @@ begin
     if CommonSpecimenParams.Params.Count = 0 then
     begin
         //  pervonachal'naya initsyalizatsyya spiska obschih parametrov;
-        for i := 0 to Result.Params.Params.Count - 1 do
+        for i := 0 to Result.Parameters.Params.Count - 1 do
         begin
-            if (Result.Params[i].Type_ = Shared) and (not
-                Result.Params[i].VariationDisabled) then
+            if (Result.Parameters[i].Type_ = Shared) and (not
+                Result.Parameters[i].VariationDisabled) then
             begin
                 //  !!! predpolagaetsya, chto vse krivye odnogo tipa !!!
                 Parameter := TSpecialCurveParameter.Create;
 
                 try
-                    Result.Params[i].CopyTo(Parameter);
+                    Result.Parameters[i].CopyTo(Parameter);
                     //  spetsial'naya initsializatsiya
                     if ((UpperCase(Parameter.Name) = 'SIGMA') or
                        ((UpperCase(Parameter.Name) = 'SIGMARIGTH')))
@@ -1404,15 +1404,15 @@ begin
         end;
     end;
     
-    for i := 0 to Result.Params.Params.Count - 1 do
+    for i := 0 to Result.Parameters.Params.Count - 1 do
     begin
         //  initsializatsiya znacheniy
-        if ((UpperCase(Result.Params[i].Name) = 'SIGMA') or
-           ((UpperCase(Result.Params[i].Name) = 'SIGMARIGTH')))
+        if ((UpperCase(Result.Parameters[i].Name) = 'SIGMA') or
+           ((UpperCase(Result.Parameters[i].Name) = 'SIGMARIGTH')))
             then
         begin
-            Result.Params[i].Value := 0.25;
-            Result.Params[i].VariationStep := 0.1;
+            Result.Parameters[i].Value := 0.25;
+            Result.Parameters[i].VariationStep := 0.1;
         end;
     end;
 end;

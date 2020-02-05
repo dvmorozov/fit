@@ -91,17 +91,17 @@ var P: TSpecialCurveParameter;
     Prs: string;
     i: LongInt;
 begin
-    Assert(Assigned(Params));
+    Assert(Assigned(Parameters));
     Assert(Assigned(FVariableParameters));
     Assert(Assigned(ArgP));
     { Sets up value of argument. }
     P := ArgP;
     P.Value := ArgValue;
-    { Creates string of parameters. }
+    { Creates string of VariableParameters. }
     Prs := '';
-    for i := 0 to Params.Count - 1 do
+    for i := 0 to Parameters.Count - 1 do
     begin
-        P := Params[i];
+        P := Parameters[i];
         Prs := Prs + P.Name + '=' + FloatToStr(P.Value) + Chr(0);
     end;
     Result := 0;

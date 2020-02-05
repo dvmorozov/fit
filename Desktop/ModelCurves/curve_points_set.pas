@@ -77,16 +77,16 @@ type
         ArgP: TSpecialCurveParameter;
 
         { Returns variable parameter by through index. }
-        function GetParam(Index: LongInt): Double; virtual;
-        function GetParameter(Index: LongInt): TSpecialCurveParameter;
+        function GetVariableParameterValue(Index: LongInt): Double; virtual;
+        function GetVariableParameter(Index: LongInt): TSpecialCurveParameter;
         { Sets value of variable parameter. }
-        procedure SetParam(Index: LongInt; Value: Double); virtual;
+        procedure SetVariableParameterValue(Index: LongInt; Value: Double); virtual;
         { Returns total number of variable parameters. }
-        function GetParamCount: LongInt;
+        function GetVariableParameterCount: LongInt;
         
         { Returns value of parameter with given name. }
-        function GetParamByName(Name: string): Double; virtual;
-        procedure SetParamByName(Name: string; Value: Double); virtual;
+        function GetParameterByName(Name: string): Double; virtual;
+        procedure SetParameterByName(Name: string; Value: Double); virtual;
         
         { Initializes pointers to parameters with predefined semantics. }
         procedure SetSpecParamPtr(Parameter: TSpecialCurveParameter); virtual;
@@ -149,13 +149,16 @@ type
         function HasSigma: Boolean;
 
         { Provides access to variable parameters for optimizer. }
-        property Param[index: LongInt]: Double read GetParam write SetParam;
-        property Parameters[index: LongInt]: TSpecialCurveParameter read GetParameter;
-        property ParamCount: LongInt read GetParamCount;
+        property VariableParameterValue[index: LongInt]: Double
+            read GetVariableParameterValue write SetVariableParameterValue;
+        property VariableParameters[index: LongInt]: TSpecialCurveParameter
+            read GetVariableParameter;
+        property VariableParameterCount: LongInt read GetVariableParameterCount;
         { Provides access to all parameters by name. }
-        property ParamByName[Name: string]: Double read GetParamByName write SetParamByName;
+        property ParametersByName[Name: string]: Double
+            read GetParameterByName write SetParameterByName;
         { Returns object containing all parameters. }
-        property Params: Curve_parameters read FParams;
+        property Parameters: Curve_parameters read FParams;
         { Properties provide access to attributes having predefined semantics for special algorithms.
           Use methods HasX before to check existense of such attributes. }
 
@@ -202,30 +205,30 @@ begin
     TCurvePointsSet(Dest).InitHash := InitHash;
 end;
 
-function TCurvePointsSet.GetParam(Index: LongInt): Double;
+function TCurvePointsSet.GetVariableParameterValue(Index: LongInt): Double;
 var Parameter: TSpecialCurveParameter;
 begin
-    Assert(index < GetParamCount);
+    Assert(index < GetVariableParameterCount);
     Parameter := TSpecialCurveParameter(FVariableParameters.Items[index]);
     Result := Parameter.Value;
 end;
 
-function TCurvePointsSet.GetParameter(Index: LongInt): TSpecialCurveParameter;
+function TCurvePointsSet.GetVariableParameter(Index: LongInt): TSpecialCurveParameter;
 begin
-    Assert(index < GetParamCount);
+    Assert(index < GetVariableParameterCount);
     Result := TSpecialCurveParameter(FVariableParameters.Items[index]);
 end;
 
-procedure TCurvePointsSet.SetParam(Index: LongInt; Value: Double);
+procedure TCurvePointsSet.SetVariableParameterValue(Index: LongInt; Value: Double);
 var Parameter: TSpecialCurveParameter;
 begin
-    Assert((Index < GetParamCount) and (Index >= 0));
+    Assert((Index < GetVariableParameterCount) and (Index >= 0));
     Modified := True;
     Parameter := TSpecialCurveParameter(FVariableParameters.Items[Index]);
     Parameter.Value := Value;
 end;
 
-function TCurvePointsSet.GetParamByName(Name: string): Double;
+function TCurvePointsSet.GetParameterByName(Name: string): Double;
 var i: LongInt;
     Parameter: TSpecialCurveParameter;
 begin
@@ -241,7 +244,7 @@ begin
     Assert(False);
 end;
 
-procedure TCurvePointsSet.SetParamByName(Name: string; Value: Double);
+procedure TCurvePointsSet.SetParameterByName(Name: string; Value: Double);
 var i: LongInt;
     P: TSpecialCurveParameter;
 begin
@@ -258,7 +261,7 @@ begin
     Assert(False);
 end;
 
-function TCurvePointsSet.GetParamCount: LongInt;
+function TCurvePointsSet.GetVariableParameterCount: LongInt;
 begin
     Result := FVariableParameters.Count;
 end;

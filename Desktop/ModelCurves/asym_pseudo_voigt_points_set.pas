@@ -34,20 +34,20 @@ type
         procedure SetDeltaSigma(Value: Double);
         function GetDeltaSigma: Double;
 
-        { Sets up pointers to parameters with predefined semantics. }
+        { Sets up pointers to VariableParameters with predefined semantics. }
         procedure SetSpecParamPtr(P: TSpecialCurveParameter); override;
-        { Sets up indexes of parameters with predefined semantics. }
+        { Sets up indexes of VariableParameters with predefined semantics. }
         procedure SetSpecParamVarIndex(P: TSpecialCurveParameter; Index: LongInt); override;
 
         { Returns parameter with given index. }
-        function GetParam(Index: LongInt): Double; override;
+        function GetVariableParameterValue(Index: LongInt): Double; override;
         { Sets up variable paremeter with given index. }
-        procedure SetParam(Index: LongInt; Value: Double); override;
+        procedure SetVariableParameterValue(Index: LongInt; Value: Double); override;
         
         { Returns parameter with given name. }
-        function GetParamByName(Name: string): Double; override;
+        function GetParameterByName(Name: string): Double; override;
         { Sets up parameter with given name. }
-        procedure SetParamByName(Name: string; Value: Double); override;
+        procedure SetParameterByName(Name: string; Value: Double); override;
 
         { Performs recalculation of all points of function. }
         procedure DoCalc(const Intervals: TPointsSet); override;
@@ -139,7 +139,7 @@ begin
     Result := GetCurveTypeId_;
 end;
 
-procedure TAsymPseudoVoigtPointsSet.SetParamByName(Name: string; Value: Double);
+procedure TAsymPseudoVoigtPointsSet.SetParameterByName(Name: string; Value: Double);
 {$IFDEF WRITE_PARAMS_LOG}
     LogStr: string;
 {$ENDIF}
@@ -150,7 +150,7 @@ begin
     begin
 {$IFDEF WRITE_PARAMS_LOG}
         LogStr := IntToStr(LongInt(Self)) +
-            ' SetParamByName(DeltaSigma): Value = ' + FloatToStr(Value);
+            ' SetVariableParameterValueByName(DeltaSigma): Value = ' + FloatToStr(Value);
         WriteLog(LogStr, Notification_);
 {$ENDIF}
         DeltaSigma := Value;
@@ -158,24 +158,24 @@ begin
     else inherited;
 end;
 
-function TAsymPseudoVoigtPointsSet.GetParamByName(Name: string): Double;
+function TAsymPseudoVoigtPointsSet.GetParameterByName(Name: string): Double;
 begin
     if UpperCase(Name) = 'DELTASIGMA' then Result := DeltaSigma
     else Result := inherited;
 end;
 
-procedure TAsymPseudoVoigtPointsSet.SetParam(Index: LongInt; Value: Double);
+procedure TAsymPseudoVoigtPointsSet.SetVariableParameterValue(Index: LongInt; Value: Double);
 begin
-    Assert((Index < GetParamCount) and (Index >= 0));
+    Assert((Index < GetVariableParameterCount) and (Index >= 0));
     Modified := True;
 
     if Index = DeltaSigmaIndex then DeltaSigma := Value
     else inherited;
 end;
 
-function TAsymPseudoVoigtPointsSet.GetParam(Index: LongInt): Double;
+function TAsymPseudoVoigtPointsSet.GetVariableParameterValue(Index: LongInt): Double;
 begin
-    Assert(Index < GetParamCount);
+    Assert(Index < GetVariableParameterCount);
 
     if Index = DeltaSigmaIndex then Result := DeltaSigma
     else Result := inherited;

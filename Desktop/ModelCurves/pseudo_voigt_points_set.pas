@@ -36,20 +36,20 @@ type
         procedure SetEta(Value: Double);
         function GetEta: Double;
         
-        { Initializes pointers to parameters with predefined semantics. }
+        { Initializes pointers to VariableParameters with predefined semantics. }
         procedure SetSpecParamPtr(P: TSpecialCurveParameter); override;
-        { Initializes indexes of parameters with predefined semantics. }
+        { Initializes indexes of VariableParameters with predefined semantics. }
         procedure SetSpecParamVarIndex(P: TSpecialCurveParameter; Index: LongInt); override;
         
         { Returns variable parameter with given index. }
-        function GetParam(Index: LongInt): Double; override;
+        function GetVariableParameterValue(Index: LongInt): Double; override;
         { Sets up variable paremeter with given index. }
-        procedure SetParam(Index: LongInt; Value: Double); override;
+        procedure SetVariableParameterValue(Index: LongInt; Value: Double); override;
         
         { Returns parameter with given name. }
-        function GetParamByName(Name: string): Double; override;
+        function GetParameterByName(Name: string): Double; override;
         { Sets up parameter with given name. }
-        procedure SetParamByName(Name: string; Value: Double); override;
+        procedure SetParameterByName(Name: string; Value: Double); override;
 
         { Performs recalculation of all points of function. }
         procedure DoCalc(const Intervals: TPointsSet); override;
@@ -154,13 +154,13 @@ begin
     Result := StringToGUID('{9f27dc7c-970f-4dac-88cd-f5fb3400d38d}');
 end;
 
-function TPseudoVoigtPointsSet.GetParamByName(Name: string): Double;
+function TPseudoVoigtPointsSet.GetParameterByName(Name: string): Double;
 begin
     if UpperCase(Name) = 'ETA' then Result := Eta
     else Result := inherited;
 end;
 
-procedure TPseudoVoigtPointsSet.SetParamByName(Name: string; Value: Double);
+procedure TPseudoVoigtPointsSet.SetParameterByName(Name: string; Value: Double);
 {$IFDEF WRITE_PARAMS_LOG}
 var LogStr: string;
 {$ENDIF}
@@ -178,9 +178,9 @@ begin
     else inherited;
 end;
 
-procedure TPseudoVoigtPointsSet.SetParam(Index: LongInt; Value: Double);
+procedure TPseudoVoigtPointsSet.SetVariableParameterValue(Index: LongInt; Value: Double);
 begin
-    Assert((Index < GetParamCount) and (Index >= 0));
+    Assert((Index < GetVariableParameterCount) and (Index >= 0));
     Modified := True;
 
     if Index = EtaIndex then
@@ -188,9 +188,9 @@ begin
     else inherited;
 end;
 
-function TPseudoVoigtPointsSet.GetParam(Index: LongInt): Double;
+function TPseudoVoigtPointsSet.GetVariableParameterValue(Index: LongInt): Double;
 begin
-    Assert(index < GetParamCount);
+    Assert(index < GetVariableParameterCount);
 
     if Index = EtaIndex then Result := Eta
     else Result := inherited;

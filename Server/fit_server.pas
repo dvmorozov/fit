@@ -1597,7 +1597,7 @@ begin
     Assert(Assigned(SpecimenList));
     Integral := Integrate(Points, StartPointIndex, StopPointIndex);
 
-    CurveParameters := Curve_parameters(Points.Params.GetCopy);
+    CurveParameters := Curve_parameters(Points.Parameters.GetCopy);
     try
         CurveParameters.SavedInitHash := Points.InitHash;
         //  dobavlyayutya vychislyaemye parametry

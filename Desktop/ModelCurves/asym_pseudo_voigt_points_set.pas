@@ -40,14 +40,14 @@ type
         procedure SetSpecParamVarIndex(P: TSpecialCurveParameter; Index: LongInt); override;
 
         { Returns parameter with given index. }
-        function GetVariableParameterValue(Index: LongInt): Double; override;
+        function GetVariableValue(Index: LongInt): Double; override;
         { Sets up variable paremeter with given index. }
-        procedure SetVariableParameterValue(Index: LongInt; Value: Double); override;
+        procedure SetVariableValue(Index: LongInt; Value: Double); override;
         
         { Returns parameter with given name. }
-        function GetParameterByName(Name: string): Double; override;
+        function GetValueByName(Name: string): Double; override;
         { Sets up parameter with given name. }
-        procedure SetParameterByName(Name: string; Value: Double); override;
+        procedure SetValueByName(Name: string; Value: Double); override;
 
         { Performs recalculation of all points of function. }
         procedure DoCalc(const Intervals: TPointsSet); override;
@@ -139,7 +139,7 @@ begin
     Result := GetCurveTypeId_;
 end;
 
-procedure TAsymPseudoVoigtPointsSet.SetParameterByName(Name: string; Value: Double);
+procedure TAsymPseudoVoigtPointsSet.SetValueByName(Name: string; Value: Double);
 {$IFDEF WRITE_PARAMS_LOG}
     LogStr: string;
 {$ENDIF}
@@ -158,24 +158,24 @@ begin
     else inherited;
 end;
 
-function TAsymPseudoVoigtPointsSet.GetParameterByName(Name: string): Double;
+function TAsymPseudoVoigtPointsSet.GetValueByName(Name: string): Double;
 begin
     if UpperCase(Name) = 'DELTASIGMA' then Result := DeltaSigma
     else Result := inherited;
 end;
 
-procedure TAsymPseudoVoigtPointsSet.SetVariableParameterValue(Index: LongInt; Value: Double);
+procedure TAsymPseudoVoigtPointsSet.SetVariableValue(Index: LongInt; Value: Double);
 begin
-    Assert((Index < GetVariableParameterCount) and (Index >= 0));
+    Assert((Index < GetVariableCount) and (Index >= 0));
     Modified := True;
 
     if Index = DeltaSigmaIndex then DeltaSigma := Value
     else inherited;
 end;
 
-function TAsymPseudoVoigtPointsSet.GetVariableParameterValue(Index: LongInt): Double;
+function TAsymPseudoVoigtPointsSet.GetVariableValue(Index: LongInt): Double;
 begin
-    Assert(Index < GetVariableParameterCount);
+    Assert(Index < GetVariableCount);
 
     if Index = DeltaSigmaIndex then Result := DeltaSigma
     else Result := inherited;

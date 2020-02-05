@@ -52,14 +52,14 @@ type
         procedure SetSpecParamVarIndex(P: TSpecialCurveParameter; Index: LongInt); override;
 
         { Returns variable parameter with given index. }
-        function GetVariableParameterValue(Index: LongInt): Double; override;
+        function GetVariableValue(Index: LongInt): Double; override;
         { Sets up variable paremeter with given index. }
-        procedure SetVariableParameterValue(Index: LongInt; Value: Double); override;
+        procedure SetVariableValue(Index: LongInt; Value: Double); override;
         
         { Returns parameter with given name. }
-        function GetParameterByName(Name: string): Double; override;
+        function GetValueByName(Name: string): Double; override;
         { Sets up parameter with given name. }
-        procedure SetParameterByName(Name: string; Value: Double); override;
+        procedure SetValueByName(Name: string; Value: Double); override;
 
         { Performs recalculation of all points of function. }
         procedure DoCalc(const Intervals: TPointsSet); override;
@@ -228,7 +228,7 @@ begin
     Result := StringToGUID('{6de06c1b-e51a-48c6-b036-c81a841ec468}');
 end;
 
-procedure T2BranchesPseudoVoigtPointsSet.SetParameterByName(
+procedure T2BranchesPseudoVoigtPointsSet.SetValueByName(
     Name: string; Value: Double);
 {$IFDEF WRITE_PARAMS_LOG}
 var LogStr: string;
@@ -269,7 +269,7 @@ begin
     end;
 end;
 
-function T2BranchesPseudoVoigtPointsSet.GetParameterByName(Name: string): Double;
+function T2BranchesPseudoVoigtPointsSet.GetValueByName(Name: string): Double;
 begin
     if UpperCase(Name) = 'ETARIGHT' then
         Result := EtaRight
@@ -286,9 +286,9 @@ begin
     end;
 end;
 
-procedure T2BranchesPseudoVoigtPointsSet.SetVariableParameterValue(Index: LongInt; Value: Double);
+procedure T2BranchesPseudoVoigtPointsSet.SetVariableValue(Index: LongInt; Value: Double);
 begin
-    Assert((Index < GetVariableParameterCount) and (Index >= 0));
+    Assert((Index < GetVariableCount) and (Index >= 0));
     Modified := True;
 
     if Index = EtaRightIndex then
@@ -306,9 +306,9 @@ begin
     end;
 end;
 
-function T2BranchesPseudoVoigtPointsSet.GetVariableParameterValue(Index: LongInt): Double;
+function T2BranchesPseudoVoigtPointsSet.GetVariableValue(Index: LongInt): Double;
 begin
-    Assert(Index < GetVariableParameterCount);
+    Assert(Index < GetVariableCount);
 
     if Index = EtaRightIndex then
         Result := EtaRight

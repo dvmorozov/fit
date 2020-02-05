@@ -551,7 +551,7 @@ end;
 {$hints on}
 
 procedure TFitTask.SetNextParam;
-var GP: TCurvePointsSet;
+var Curve: TCurvePointsSet;
     Count: LongInt;
 begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
@@ -562,8 +562,8 @@ begin
     if CurvesList.Count <> 0 then
     begin
         //  perebor parametrov krivoy
-        GP := TCurvePointsSet(CurvesList.Items[CurveNum]);
-        if ParamNum < GP.VariableParameterCount - 1 then
+        Curve := TCurvePointsSet(CurvesList.Items[CurveNum]);
+        if ParamNum < Curve.VariableCount - 1 then
         begin
             Inc(ParamNum);
             EOC := False;
@@ -670,7 +670,7 @@ begin
         Assert(CurvesList.Count <> 0);
 
         GP := TCurvePointsSet(CurvesList.Items[CurveNum]);
-        Result := GP.VariableParameterValue[ParamNum];
+        Result := GP.VariableValue[ParamNum];
     end;
 end;
 
@@ -712,7 +712,7 @@ begin
         for i := 0 to CurvesList.Count - 1 do
         begin
             GP := TCurvePointsSet(CurvesList.Items[i]);
-            GP.ParametersByName[
+            GP.ValuesByName[
                 CommonSpecimenParams[CommonVaryingIndex].Name
             ] := NewParamValue;
         end;
@@ -729,7 +729,7 @@ begin
         GP := TCurvePointsSet(CurvesList.Items[CurveNum]);
         //  ??? v nekotoryh sluchayah rabotaet optimal'nee
         //SubbCurveFromProfile(GP);
-        GP.VariableParameterValue[ParamNum] := NewParamValue;
+        GP.VariableValue[ParamNum] := NewParamValue;
         //GP.ReCalc(nil);
         //AddCurveToProfile(GP);
     end;
@@ -925,7 +925,7 @@ begin
     for i := 0 to CurvesList.Count - 1 do
     begin
         Curve := TCurvePointsSet(CurvesList.Items[i]);
-        for j := 0 to Curve.VariableParameterCount - 1 do
+        for j := 0 to Curve.VariableCount - 1 do
         begin
             Curve.VariableParameters[j].InitVariationStep;
         end;
@@ -949,7 +949,7 @@ begin
     for i := 0 to CurvesList.Count - 1 do
     begin
         Curve := TCurvePointsSet(CurvesList.Items[i]);
-        for j := 0 to Curve.VariableParameterCount - 1 do
+        for j := 0 to Curve.VariableCount - 1 do
         begin
             if not Curve.VariableParameters[j].MinimumStepAchieved then
             begin

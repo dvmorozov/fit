@@ -253,12 +253,12 @@ begin
             CurveParameters := Curve_parameters(Items[ARow - GetFixedRows]);
             with CurveParameters do
                 case ACol - GetFixedCols of
-                    0 : Result := FloatToStrF(GetParamValueByName('Intensity'), ffGeneral, 8, 4);
-                    1 : Result := FloatToStrF(GetParamValueByName('StartPos'), ffGeneral, 6, 4);
-                    2 : Result := FloatToStrF(GetParamValueByName('PeakPos'), ffGeneral, 6, 4);
-                    3 : Result := FloatToStrF(GetParamValueByName('FinishPos'), ffGeneral, 6, 4);
-                    4 : Result := FloatToStrF(GetParamValueByName('IntCorrFactor'), ffGeneral, 6, 4);
-                    5 : Result := FloatToStrF(GetParamValueByName('Sigma'), ffGeneral, 6, 4);
+                    0 : Result := FloatToStrF(ValuesByName['Intensity'], ffGeneral, 8, 4);
+                    1 : Result := FloatToStrF(ValuesByName['StartPos'], ffGeneral, 6, 4);
+                    2 : Result := FloatToStrF(ValuesByName['PeakPos'], ffGeneral, 6, 4);
+                    3 : Result := FloatToStrF(ValuesByName['FinishPos'], ffGeneral, 6, 4);
+                    4 : Result := FloatToStrF(ValuesByName['IntCorrFactor'], ffGeneral, 6, 4);
+                    5 : Result := FloatToStrF(ValuesByName['Sigma'], ffGeneral, 6, 4);
                 end;
         end else
             { If the list is empty then the method must return empty string
@@ -297,12 +297,12 @@ begin
             CurveParameters := Curve_parameters(Items[ARow - GetFixedRows]);
             with CurveParameters do
             case ACol - GetFixedCols of
-                0 : SetParamValueByName('Intensity', 0);
-                1 : SetParamValueByName('StartPos', 0);
-                2 : SetParamValueByName('PeakPos', 0);
-                3 : SetParamValueByName('FinishPos', 0);
-                4 : SetParamValueByName('IntCorrFactor', 1);
-                5 : SetParamValueByName('Sigma', 1);
+                0 : ValuesByName['Intensity'] := 0;
+                1 : ValuesByName['StartPos'] := 0;
+                2 : ValuesByName['PeakPos'] := 0;
+                3 : ValuesByName['FinishPos'] := 0;
+                4 : ValuesByName['IntCorrFactor'] := 1;
+                5 : ValuesByName['Sigma'] := 1;
             end;
         end;
 end;
@@ -319,12 +319,12 @@ begin
         CurveParameters := Curve_parameters(Items[ARow - GetFixedRows]);
         with CurveParameters do
         case ACol - GetFixedCols of
-            0 : SetParamValueByName('Intensity', StrToFloat(AString));
-            1 : SetParamValueByName('StartPos', StrToFloat(AString));
-            2 : SetParamValueByName('PeakPos', StrToFloat(AString));
-            3 : SetParamValueByName('FinishPos', StrToFloat(AString));
-            4 : SetParamValueByName('IntCorrFactor', StrToFloat(AString));
-            5 : SetParamValueByName('Sigma', StrToFloat(AString));
+            0 : ValuesByName['Intensity'] := StrToFloat(AString);
+            1 : ValuesByName['StartPos'] := StrToFloat(AString);
+            2 : ValuesByName['PeakPos'] := StrToFloat(AString);
+            3 : ValuesByName['FinishPos'] := StrToFloat(AString);
+            4 : ValuesByName['IntCorrFactor'] := StrToFloat(AString);
+            5 : ValuesByName['Sigma'] := StrToFloat(AString);
         end;
     end;
 end;

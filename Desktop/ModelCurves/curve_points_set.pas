@@ -89,9 +89,12 @@ type
 
         { Returns variable parameter by through index. }
         function GetVariableValue(Index: LongInt): Double; virtual;
-        function GetVariableParameter(Index: LongInt): TSpecialCurveParameter;
+        { Returns optimization step for parameter. }
+        function GetVariationStep(Index: LongInt): Double; virtual;
         { Sets value of variable parameter. }
         procedure SetVariableValue(Index: LongInt; Value: Double); virtual;
+        { Sets optimization step for parameter. }
+        procedure SetVariationStep(Index: LongInt; AStep: Double); virtual;
         { Returns total number of variable parameters. }
         function GetVariableCount: LongInt;
 
@@ -149,6 +152,11 @@ type
         procedure RestoreParams;
         procedure CopyParameters(const Dest: TObject); override;
 
+        { These methods are used to limit direct access to variable parameters. }
+
+        function MinimumStepAchieved(VariableIndex: LongInt): Boolean;
+        procedure InitVariationStep(VariableIndex: LongInt);
+
         { Return True if attributes with predefined semantics were assigned. }
         
         function Hasx0: Boolean;
@@ -156,11 +164,11 @@ type
         function HasSigma: Boolean;
 
         { Provides access to variable parameters for optimizer. }
-        property VariableValue[index: LongInt]: Double
+        property VariableValues[index: LongInt]: Double
             read GetVariableValue write SetVariableValue;
-        { TODO: remove direct access to parameters. }
-        property VariableParameters[index: LongInt]: TSpecialCurveParameter
-            read GetVariableParameter;
+        { Provides access to variation steps for optimizer. }
+        property VariationSteps[index: LongInt]: Double
+            read GetVariationStep write SetVariationStep;
         property VariableCount: LongInt read GetVariableCount;
         { Returns object containing all parameters. }
         property Parameters: Curve_parameters read FParams;
@@ -216,6 +224,18 @@ begin
     TCurvePointsSet(Dest).InitHash := InitHash;
 end;
 
+function TCurvePointsSet.MinimumStepAchieved(VariableIndex: LongInt): Boolean;
+begin
+    Assert((VariableIndex >= 0) and (VariableIndex < FVariableParameters.Count));
+    Result := TSpecialCurveParameter(FVariableParameters[VariableIndex]).MinimumStepAchieved;
+end;
+
+procedure TCurvePointsSet.InitVariationStep(VariableIndex: LongInt);
+begin
+    Assert((VariableIndex >= 0) and (VariableIndex < FVariableParameters.Count));
+    TSpecialCurveParameter(FVariableParameters[VariableIndex]).InitVariationStep;
+end;
+
 function TCurvePointsSet.GetVariableValue(Index: LongInt): Double;
 var Parameter: TSpecialCurveParameter;
 begin
@@ -224,10 +244,13 @@ begin
     Result := Parameter.Value;
 end;
 
-function TCurvePointsSet.GetVariableParameter(Index: LongInt): TSpecialCurveParameter;
+function TCurvePointsSet.GetVariationStep(Index: LongInt): Double;
+var Parameter: TSpecialCurveParameter;
 begin
-    Assert(index < GetVariableCount);
-    Result := TSpecialCurveParameter(FVariableParameters.Items[index]);
+    Assert(Index < GetVariableCount);
+    Parameter := TSpecialCurveParameter(FVariableParameters.Items[index]);
+    Assert(not Parameter.VariationDisabled);
+    Result := Parameter.VariationStep;
 end;
 
 procedure TCurvePointsSet.SetVariableValue(Index: LongInt; Value: Double);
@@ -237,6 +260,15 @@ begin
     Modified := True;
     Parameter := TSpecialCurveParameter(FVariableParameters.Items[Index]);
     Parameter.Value := Value;
+end;
+
+procedure TCurvePointsSet.SetVariationStep(Index: LongInt; AStep: Double);
+var Parameter: TSpecialCurveParameter;
+begin
+    Assert((Index < GetVariableCount) and (Index >= 0));
+    Parameter := TSpecialCurveParameter(FVariableParameters.Items[Index]);
+    Assert(not Parameter.VariationDisabled);
+    Parameter.VariationStep := AStep;
 end;
 
 function TCurvePointsSet.GetValueByName(Name: string): Double;

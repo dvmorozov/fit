@@ -539,7 +539,7 @@ begin
     else
     begin
         Curve := TCurvePointsSet(CurvesList.Items[CurveNum]);
-        Result := Curve.VariableParameters[ParamNum].VariationStep;
+        Result := Curve.VariationSteps[ParamNum];
     end;
 end;
 
@@ -670,7 +670,7 @@ begin
         Assert(CurvesList.Count <> 0);
 
         GP := TCurvePointsSet(CurvesList.Items[CurveNum]);
-        Result := GP.VariableValue[ParamNum];
+        Result := GP.VariableValues[ParamNum];
     end;
 end;
 
@@ -729,7 +729,7 @@ begin
         GP := TCurvePointsSet(CurvesList.Items[CurveNum]);
         //  ??? v nekotoryh sluchayah rabotaet optimal'nee
         //SubbCurveFromProfile(GP);
-        GP.VariableValue[ParamNum] := NewParamValue;
+        GP.VariableValues[ParamNum] := NewParamValue;
         //GP.ReCalc(nil);
         //AddCurveToProfile(GP);
     end;
@@ -927,7 +927,7 @@ begin
         Curve := TCurvePointsSet(CurvesList.Items[i]);
         for j := 0 to Curve.VariableCount - 1 do
         begin
-            Curve.VariableParameters[j].InitVariationStep;
+            Curve.InitVariationStep(j);
         end;
     end;
 end;
@@ -951,7 +951,7 @@ begin
         Curve := TCurvePointsSet(CurvesList.Items[i]);
         for j := 0 to Curve.VariableCount - 1 do
         begin
-            if not Curve.VariableParameters[j].MinimumStepAchieved then
+            if not Curve.MinimumStepAchieved(j) then
             begin
                 Result := False;
                 Exit;

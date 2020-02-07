@@ -120,7 +120,6 @@ type
         
         procedure Setx0(Value: Double);
         procedure SetA(Value: Double);
-        procedure SetSigma(Value: Double);
         function Getx0: Double;
         function GetA: Double;
         function GetSigma: Double;
@@ -161,7 +160,6 @@ type
         
         function Hasx0: Boolean;
         function HasA: Boolean;
-        function HasSigma: Boolean;
 
         { Provides access to variable parameters for optimizer. }
         property VariableValues[index: LongInt]: Double
@@ -182,9 +180,11 @@ type
           Use methods HasX before to check existense of such attributes. }
 
         { Variation of the parameter x0 is limited by two adjacent points. }
+        { TODO: remove setter. }
         property x0: Double read Getx0 write Setx0;
+        { TODO: remove setter. }
         property A: Double read GetA write SetA;
-        property Sigma: Double read GetSigma write SetSigma;
+        property Sigma: Double read GetSigma;
     end;
 
 implementation
@@ -301,13 +301,6 @@ begin
     AmplitudeP.Value := Value;
 end;
 
-procedure TCurvePointsSet.SetSigma(Value: Double);
-begin
-    Assert(Assigned(SigmaP));
-    Modified := True;
-    SigmaP.Value := Value;
-end;
-
 function TCurvePointsSet.Hasx0: Boolean;
 begin
     Result := Assigned(PositionP);
@@ -316,11 +309,6 @@ end;
 function TCurvePointsSet.HasA: Boolean;
 begin
     Result := Assigned(AmplitudeP);
-end;
-
-function TCurvePointsSet.HasSigma: Boolean;
-begin
-    if Assigned(SigmaP) then Result := True else Result := False;
 end;
 
 function TCurvePointsSet.Getx0: Double;

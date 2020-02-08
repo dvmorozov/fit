@@ -23,34 +23,17 @@ uses
     Classes, SysUtils, int_points_set, curve_points_set, points_set,
     named_points_set, curve_types_singleton, special_curve_parameter,
     amplitude_curve_parameter, sigma_curve_parameter, position_curve_parameter,
-    SimpMath;
+    eta_curve_parameter, SimpMath;
 
 type
     { Function having Pseudo-Voigt form. }
     TPseudoVoigtPointsSet = class(TNamedPointsSet)
     protected
         { Relative weights of gaussian and lorentzian. }
-        EtaP: TSpecialCurveParameter;
-        EtaIndex: LongInt;
+        EtaP: TEtaCurveParameter;
         
-        procedure SetEta(Value: Double);
         function GetEta: Double;
         
-        { Initializes pointers to VariableParameters with predefined semantics. }
-        procedure SetSpecParamPtr(P: TSpecialCurveParameter); override;
-        { Initializes indexes of VariableParameters with predefined semantics. }
-        procedure SetSpecParamVarIndex(P: TSpecialCurveParameter; Index: LongInt); override;
-        
-        { Returns variable parameter with given index. }
-        function GetVariableValue(Index: LongInt): Double; override;
-        { Sets up variable paremeter with given index. }
-        procedure SetVariableValue(Index: LongInt; Value: Double); override;
-        
-        { Returns parameter with given name. }
-        function GetValueByName(Name: string): Double; override;
-        { Sets up parameter with given name. }
-        procedure SetValueByName(Name: string; Value: Double); override;
-
         { Performs recalculation of all points of function. }
         procedure DoCalc(const Intervals: TPointsSet); override;
 
@@ -62,9 +45,7 @@ type
         function GetCurveTypeId: TCurveTypeId; override;
         class function GetCurveTypeId_: TCurveTypeId; override;
 
-        function HasEta: Boolean;
-        
-        property Eta: Double read GetEta write SetEta;
+        property Eta: Double read GetEta;
     end;
 
 implementation
@@ -93,10 +74,10 @@ end;
 
 constructor TPseudoVoigtPointsSet.Create(AOwner: TComponent);
 var Parameter: TSpecialCurveParameter;
+    Count: LongInt;
 begin
     inherited;
-    EtaIndex := -1;
-    
+
     Parameter := TAmplitudeCurveParameter.Create;
     AddParameter(Parameter);
 
@@ -107,36 +88,18 @@ begin
     Parameter.Type_ := Shared;          //  common parameter for all instances
     AddParameter(Parameter);
 
-    Parameter := TSpecialCurveParameter.Create;
-    Parameter.Name := 'eta'; Parameter.Value := 0;
-    Parameter.Type_ := Variable;        //  razreschaetsya var'irovanie parametra
-                                        //  otdel'no dlya kazhdogo ekzemplyara
-                                        //  patterna
-    AddParameter(Parameter);
+    EtaP := TEtaCurveParameter.Create;
+    AddParameter(EtaP);
 
     InitListOfVariableParameters;
-end;
-
-procedure TPseudoVoigtPointsSet.SetEta(Value: Double);
-begin
-    Assert(Assigned(EtaP));
-    Modified := True;
-    //  nuzhno brat' po modulyu, potomu chto
-    //  algoritm optimizatsii mozhet zagonyat'
-    //  v oblast' otritsatel'nyh znacheniy
-    EtaP.Value := Abs(Value);
-    if EtaP.Value > 1 then EtaP.Value := 1;
+    Count := FVariableParameters.Count;
+    Assert(Count = 3);
 end;
 
 function TPseudoVoigtPointsSet.GetEta: Double;
 begin
     Assert(Assigned(EtaP));
     Result := EtaP.Value;
-end;
-
-function TPseudoVoigtPointsSet.HasEta: Boolean;
-begin
-    if Assigned(EtaP) then Result := True else Result := False;
 end;
 
 function TPseudoVoigtPointsSet.GetCurveTypeName: string;
@@ -152,67 +115,6 @@ end;
 class function TPseudoVoigtPointsSet.GetCurveTypeId_: TCurveTypeId;
 begin
     Result := StringToGUID('{9f27dc7c-970f-4dac-88cd-f5fb3400d38d}');
-end;
-
-function TPseudoVoigtPointsSet.GetValueByName(Name: string): Double;
-begin
-    if UpperCase(Name) = 'ETA' then Result := Eta
-    else Result := inherited;
-end;
-
-procedure TPseudoVoigtPointsSet.SetValueByName(Name: string; Value: Double);
-{$IFDEF WRITE_PARAMS_LOG}
-var LogStr: string;
-{$ENDIF}
-begin
-    Modified := True;
-    
-    if UpperCase(Name) = 'ETA' then
-    begin
-{$IFDEF WRITE_PARAMS_LOG}
-        LogStr := ' SetParamByName(Eta): Value = ' + FloatToStr(Value);
-        WriteLog(LogStr, Notification_);
-{$ENDIF}
-        Eta := Value;
-    end
-    else inherited;
-end;
-
-procedure TPseudoVoigtPointsSet.SetVariableValue(Index: LongInt; Value: Double);
-begin
-    Assert((Index < GetVariableCount) and (Index >= 0));
-    Modified := True;
-
-    if Index = EtaIndex then
-        Eta := Value
-    else inherited;
-end;
-
-function TPseudoVoigtPointsSet.GetVariableValue(Index: LongInt): Double;
-begin
-    Assert(index < GetVariableCount);
-
-    if Index = EtaIndex then Result := Eta
-    else Result := inherited;
-end;
-
-//  ustanavlivaet ukazateli na parametry s predopredelennoy semantikoy
-procedure TPseudoVoigtPointsSet.SetSpecParamPtr(
-    P: TSpecialCurveParameter);
-begin
-    Assert(Assigned(P));
-    if UpperCase(P.Name) = 'ETA' then EtaP := P
-    else inherited;
-end;
-
-//  ustanavlivaet indeksy var'iruemyh parametrov s predopredelennoy
-//  semantikoy
-procedure TPseudoVoigtPointsSet.SetSpecParamVarIndex(
-    P: TSpecialCurveParameter; Index: LongInt);
-begin
-    Assert(Assigned(P));
-    if UpperCase(P.Name) = 'ETA' then EtaIndex := Index
-    else inherited;
 end;
 
 var CTS: TCurveTypesSingleton;

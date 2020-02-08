@@ -514,7 +514,6 @@ begin
     Curve_parameters(Dest).SavedInitHash := SavedInitHash;
 end;
 
-
 function Curve_parameters.GetParameter(Index: LongInt): TSpecialCurveParameter;
 begin
     Assert(Assigned(FParams));

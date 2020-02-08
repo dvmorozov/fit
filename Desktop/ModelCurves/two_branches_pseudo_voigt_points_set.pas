@@ -23,43 +23,20 @@ uses
     Classes, SysUtils, int_points_set, points_set, named_points_set,
     curve_points_set, curve_types_singleton, special_curve_parameter,
     amplitude_curve_parameter, sigma_curve_parameter, position_curve_parameter,
-    SimpMath;
+    eta_curve_parameter, SimpMath;
 
 type
     { Pseudo-Voigt curve having different form parameters for
       the right and left branches. }
     T2BranchesPseudoVoigtPointsSet = class(TNamedPointsSet)
     protected
-        SigmaRightP: TSpecialCurveParameter;
-        SigmaRightIndex: LongInt;
-        
-        EtaRightP: TSpecialCurveParameter;
-        EtaRightIndex: LongInt;
-        
-        EtaP: TSpecialCurveParameter;
-        EtaIndex: LongInt;
+        SigmaRightP: TSigmaCurveParameter;
+        EtaRightP: TEtaCurveParameter;
+        EtaP: TEtaCurveParameter;
 
-        procedure SetSigmaRight(Value: Double);
         function GetSigmaRight: Double;
-        procedure SetEtaRight(Value: Double);
         function GetEtaRight: Double;
-        procedure SetEta(Value: Double);
         function GetEta: Double;
-
-        { Sets up pointers to VariableParameters with predefined semantics. }
-        procedure SetSpecParamPtr(P: TSpecialCurveParameter); override;
-        { Sets up indexes of VariableParameters with predefined semantics. }
-        procedure SetSpecParamVarIndex(P: TSpecialCurveParameter; Index: LongInt); override;
-
-        { Returns variable parameter with given index. }
-        function GetVariableValue(Index: LongInt): Double; override;
-        { Sets up variable paremeter with given index. }
-        procedure SetVariableValue(Index: LongInt; Value: Double); override;
-        
-        { Returns parameter with given name. }
-        function GetValueByName(Name: string): Double; override;
-        { Sets up parameter with given name. }
-        procedure SetValueByName(Name: string; Value: Double); override;
 
         { Performs recalculation of all points of function. }
         procedure DoCalc(const Intervals: TPointsSet); override;
@@ -72,13 +49,9 @@ type
         function GetCurveTypeId: TCurveTypeId; override;
         class function GetCurveTypeId_: TCurveTypeId; override;
 
-        function HasSigmaRight: Boolean;
-        function HasEtaRight: Boolean;
-        function HasEta: Boolean;
-
-        property SigmaRight: Double read GetSigmaRight write SetSigmaRight;
-        property EtaRight: Double read GetEtaRight write SetEtaRight;
-        property Eta: Double read GetEta write SetEta;
+        property SigmaRight: Double read GetSigmaRight;
+        property EtaRight: Double read GetEtaRight;
+        property Eta: Double read GetEta;
     end;
 
 implementation
@@ -107,11 +80,9 @@ end;
 
 constructor T2BranchesPseudoVoigtPointsSet.Create(AOwner: TComponent);
 var Parameter: TSpecialCurveParameter;
+    Count: LongInt;
 begin
     inherited;
-    SigmaRightIndex := -1;
-    EtaRightIndex := -1;
-    EtaIndex := -1;
 
     Parameter := TAmplitudeCurveParameter.Create;
     AddParameter(Parameter);
@@ -122,40 +93,20 @@ begin
     Parameter := TSigmaCurveParameter.Create;
     AddParameter(Parameter);
 
-    Parameter := TSpecialCurveParameter.Create;
-    Parameter.Name := 'eta'; Parameter.Value := 0;
-    Parameter.Type_ := Variable;    //  razreschaetsya var'irovanie parametra
-                                    //  otdel'no dlya kazhdogo ekzemplyara
-                                    //  patterna
-    AddParameter(Parameter);
+    EtaP := TEtaCurveParameter.Create;
+    AddParameter(EtaP);
 
-    Parameter := TSpecialCurveParameter.Create;
-    Parameter.Name := 'sigmaright'; Parameter.Value := 0.25;
-    Parameter.Type_ := Variable;
-    //Parameter.Type_ := Shared;    //  ne var'iruetsya otdel'no,
-                                    //  prinimaet odno znachenie dlya vseh
-                                    //  krivyh podzadachi
-    AddParameter(Parameter);
+    SigmaRightP := TSigmaCurveParameter.Create;
+    SigmaRightP.Name := 'sigmaright';
+    AddParameter(SigmaRightP);
 
-    Parameter := TSpecialCurveParameter.Create;
-    Parameter.Name := 'etaright'; Parameter.Value := 0;
-    Parameter.Type_ := Variable;    //  razreschaetsya var'irovanie parametra
-                                    //  otdel'no dlya kazhdogo ekzemplyara
-                                    //  patterna
-    AddParameter(Parameter);
+    EtaRightP := TEtaCurveParameter.Create;
+    EtaRightP.Name := 'etaright';
+    AddParameter(EtaRightP);
 
     InitListOfVariableParameters;
-end;
-
-procedure T2BranchesPseudoVoigtPointsSet.SetEta(Value: Double);
-begin
-    Assert(Assigned(EtaP));
-    Modified := True;
-    //  nuzhno brat' po modulyu, potomu chto
-    //  algoritm optimizatsii mozhet zagonyat'
-    //  v oblast' otritsatel'nyh znacheniy
-    EtaP.Value := Abs(Value);
-    if EtaP.Value > 1 then EtaP.Value := 1;
+    Count := FVariableParameters.Count;
+    Assert(Count = 6);
 end;
 
 function T2BranchesPseudoVoigtPointsSet.GetEta: Double;
@@ -164,53 +115,16 @@ begin
     Result := EtaP.Value;
 end;
 
-procedure T2BranchesPseudoVoigtPointsSet.SetEtaRight(Value: Double);
-begin
-    Assert(Assigned(EtaRightP));
-    Modified := True;
-    //  nuzhno brat' po modulyu, potomu chto
-    //  algoritm optimizatsii mozhet zagonyat'
-    //  v oblast' otritsatel'nyh znacheniy
-    EtaRightP.Value := Abs(Value);
-    if EtaRightP.Value > 1 then EtaRightP.Value := 1;
-end;
-
 function T2BranchesPseudoVoigtPointsSet.GetEtaRight: Double;
 begin
     Assert(Assigned(EtaRightP));
     Result := EtaRightP.Value;
 end;
 
-procedure T2BranchesPseudoVoigtPointsSet.SetSigmaRight(Value: Double);
-begin
-    Assert(Assigned(SigmaRightP));
-    Modified := True;
-    //  nuzhno brat' po modulyu, potomu chto
-    //  algoritm optimizatsii mozhet zagonyat'
-    //  v oblast' otritsatel'nyh znacheniy
-    SigmaRightP.Value := Abs(Value);
-    if SigmaRightP.Value = 0 then SigmaRightP.Value := TINY;
-end;
-
 function T2BranchesPseudoVoigtPointsSet.GetSigmaRight: Double;
 begin
     Assert(Assigned(SigmaRightP));
     Result := SigmaRightP.Value;
-end;
-
-function T2BranchesPseudoVoigtPointsSet.HasEta: Boolean;
-begin
-    if Assigned(EtaP) then Result := True else Result := False;
-end;
-
-function T2BranchesPseudoVoigtPointsSet.HasEtaRight: Boolean;
-begin
-    if Assigned(EtaRightP) then Result := True else Result := False;
-end;
-
-function T2BranchesPseudoVoigtPointsSet.HasSigmaRight: Boolean;
-begin
-    if Assigned(SigmaRightP) then Result := True else Result := False;
 end;
 
 function T2BranchesPseudoVoigtPointsSet.GetCurveTypeName: string;
@@ -226,143 +140,6 @@ end;
 class function T2BranchesPseudoVoigtPointsSet.GetCurveTypeId_: TCurveTypeId;
 begin
     Result := StringToGUID('{6de06c1b-e51a-48c6-b036-c81a841ec468}');
-end;
-
-procedure T2BranchesPseudoVoigtPointsSet.SetValueByName(
-    Name: string; Value: Double);
-{$IFDEF WRITE_PARAMS_LOG}
-var LogStr: string;
-{$ENDIF}
-begin
-    Modified := True;
-
-    if UpperCase(Name) = 'ETARIGHT' then
-    begin
-{$IFDEF WRITE_PARAMS_LOG}
-        LogStr := ' SetParamByName(EtaRight): Value = ' + FloatToStr(Value);
-        WriteLog(LogStr, Notification_);
-{$ENDIF}
-        EtaRight := Value;
-    end
-    else
-    begin
-        if UpperCase(Name) = 'SIGMARIGHT' then
-        begin
-{$IFDEF WRITE_PARAMS_LOG}
-            LogStr := ' SetParamByName(SigmaRight): Value = ' + FloatToStr(Value);
-            WriteLog(LogStr, Notification_);
-{$ENDIF}
-            SigmaRight := Value;
-        end
-        else
-        begin
-            if UpperCase(Name) = 'ETA' then
-            begin
-{$IFDEF WRITE_PARAMS_LOG}
-                LogStr := ' SetParamByName(Eta): Value = ' + FloatToStr(Value);
-                WriteLog(LogStr, Notification_);
-{$ENDIF}
-                Eta := Value;
-            end
-            else inherited;
-        end;
-    end;
-end;
-
-function T2BranchesPseudoVoigtPointsSet.GetValueByName(Name: string): Double;
-begin
-    if UpperCase(Name) = 'ETARIGHT' then
-        Result := EtaRight
-    else
-    begin
-        if UpperCase(Name) = 'SIGMARIGHT' then
-            Result := SigmaRight
-        else
-        begin
-            if UpperCase(Name) = 'ETA' then
-                Result := Eta
-            else Result := inherited;
-        end;
-    end;
-end;
-
-procedure T2BranchesPseudoVoigtPointsSet.SetVariableValue(Index: LongInt; Value: Double);
-begin
-    Assert((Index < GetVariableCount) and (Index >= 0));
-    Modified := True;
-
-    if Index = EtaRightIndex then
-        EtaRight := Value
-    else
-    begin
-        if Index = SigmaRightIndex then
-            SigmaRight := Value
-        else
-        begin
-            if Index = EtaIndex then
-                Eta := Value
-            else inherited;
-        end;
-    end;
-end;
-
-function T2BranchesPseudoVoigtPointsSet.GetVariableValue(Index: LongInt): Double;
-begin
-    Assert(Index < GetVariableCount);
-
-    if Index = EtaRightIndex then
-        Result := EtaRight
-    else
-    begin
-        if Index = SigmaRightIndex then
-            Result := SigmaRight
-        else
-        begin
-            if Index = EtaIndex then
-                Result := Eta
-            else Result := inherited;
-        end;
-    end;
-end;
-
-//  ustanavlivaet ukazateli na parametry s predopredelennoy semantikoy
-procedure T2BranchesPseudoVoigtPointsSet.SetSpecParamPtr(
-    P: TSpecialCurveParameter);
-begin
-    Assert(Assigned(P));
-    if UpperCase(P.Name) = 'ETA' then
-        EtaP := P
-    else
-    begin
-        if UpperCase(P.Name) = 'ETARIGHT' then
-            EtaRightP := P
-        else
-        begin
-            if UpperCase(P.Name) = 'SIGMARIGHT' then
-                SigmaRightP := P
-            else inherited;
-        end;
-    end;
-end;
-
-//  ustanavlivaet indeksy var'iruemyh parametrov s predopredelennoy semantikoy
-procedure T2BranchesPseudoVoigtPointsSet.SetSpecParamVarIndex(
-    P: TSpecialCurveParameter; Index: LongInt);
-begin
-    Assert(Assigned(P));
-    if UpperCase(P.Name) = 'ETA' then
-        EtaIndex := Index
-    else
-    begin
-        if UpperCase(P.Name) = 'ETARIGHT' then
-            EtaRightIndex := Index
-        else
-        begin
-            if UpperCase(P.Name) = 'SIGMARIGHT' then
-                SigmaRightIndex := Index
-            else inherited;
-        end;
-    end;
 end;
 
 var CTS: TCurveTypesSingleton;

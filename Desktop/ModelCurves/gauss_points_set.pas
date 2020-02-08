@@ -50,7 +50,9 @@ implementation
 {=========================== TGaussPointsSet ==================================}
 
 constructor TGaussPointsSet.Create(AOwner: TComponent);
-var Parameter: TSpecialCurveParameter;
+var
+    Parameter: TSpecialCurveParameter;
+    Count: LongInt;
 begin
     inherited;
     Parameter := TAmplitudeCurveParameter.Create;
@@ -63,6 +65,8 @@ begin
     AddParameter(Parameter);
 
     InitListOfVariableParameters;
+    Count := FVariableParameters.Count;
+    Assert(Count = 3);
 end;
 
 function TGaussPointsSet.GetCurveTypeName: string;

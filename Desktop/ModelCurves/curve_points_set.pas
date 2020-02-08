@@ -101,9 +101,6 @@ type
         { Initializes pointers to parameters with predefined semantics. }
         procedure SetSpecParamPtr(Parameter: TSpecialCurveParameter); virtual;
 
-        { Sets up indexes of parameters with predefined semantics. TODO: remove it. }
-        procedure SetSpecParamVarIndex(P: TSpecialCurveParameter; Index: LongInt); virtual;
-
     protected
         Modified: Boolean;
 
@@ -356,11 +353,6 @@ begin
         end;
         SetSpecParamPtr(Parameter);
     end;
-end;
-
-procedure TCurvePointsSet.SetSpecParamVarIndex(P: TSpecialCurveParameter; Index: LongInt);
-begin
-
 end;
 
 //  ustanavlivaet ukazateli na parametry s predopredelennoy semantikoy

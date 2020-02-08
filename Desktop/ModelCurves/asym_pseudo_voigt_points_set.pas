@@ -30,8 +30,12 @@ type
         { Difference of half-widths of left and right sides of the curve. }
         DeltaSigmaP: TDeltaSigmaCurveParameter;
 
+        function GetDeltaSigma: Double;
+
         { Performs recalculation of all points of function. }
         procedure DoCalc(const Intervals: TPointsSet); override;
+
+        property DeltaSigma: Double read GetDeltaSigma;
         
     public
         constructor Create(AOwner: TComponent); override;
@@ -57,16 +61,24 @@ begin
             for j := Trunc(Intervals.PointXCoord[i shl 1]) to
                 Trunc(Intervals.PointXCoord[(i shl 1) + 1]) do
                     Points[j][2] := AsymPseudoVoigtPoint(
-                        A, Sigma, Eta, x0, Points[j][1], DeltaSigmaP.Value);
+                        A, Sigma, Eta, x0, Points[j][1], DeltaSigma);
         end;
     end
     else
     begin
-        AsymPseudoVoigt(Points, A, Sigma, Eta, x0, DeltaSigmaP.Value);
+        AsymPseudoVoigt(Points, A, Sigma, Eta, x0, DeltaSigma);
     end;
 end;
 
+function TAsymPseudoVoigtPointsSet.GetDeltaSigma: Double;
+begin
+    Assert(Assigned(DeltaSigmaP));
+    Result := DeltaSigmaP.Value;
+end;
+
 constructor TAsymPseudoVoigtPointsSet.Create(AOwner: TComponent);
+var
+    Count: LongInt;
 begin
     inherited;
 
@@ -74,6 +86,9 @@ begin
     AddParameter(DeltaSigmaP);
 
     InitListOfVariableParameters;
+
+    Count := FVariableParameters.Count;
+    Assert(Count = 4);
 end;
 
 function TAsymPseudoVoigtPointsSet.GetCurveTypeName: string;

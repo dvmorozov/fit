@@ -37,6 +37,8 @@ type
         { Performs recalculation of all points of function. }
         procedure DoCalc(const Intervals: TPointsSet); override;
 
+        property Eta: Double read GetEta;
+
     public
         constructor Create(AOwner: TComponent); override;
         { Overrides method defined in TNamedPointsSet. }
@@ -44,8 +46,6 @@ type
         { Overrides method defined in TNamedPointsSet. }
         function GetCurveTypeId: TCurveTypeId; override;
         class function GetCurveTypeId_: TCurveTypeId; override;
-
-        property Eta: Double read GetEta;
     end;
 
 implementation

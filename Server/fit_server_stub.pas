@@ -24,7 +24,7 @@ uses SysUtils, fit_server, common_types, self_copied_component, mscr_specimen_li
     MyExceptions, int_points_set, points_set, title_points_set,
     named_points_set
 {$IFDEF _WINDOWS}
-    , curve_points_set
+    , persistent_curve_parameters
 {$ENDIF}
     ;
 

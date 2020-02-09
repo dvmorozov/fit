@@ -20,8 +20,8 @@ unit data_classes;
 interface
 
 uses
-    Classes, Grids, SysUtils, NumericGrid, table_components, curve_points_set,
-    special_curve_parameter;
+    Classes, Grids, SysUtils, NumericGrid, table_components,
+    special_curve_parameter, persistent_curve_parameters;
 
 type
     { Set of pattern instances forming the calculated profile in sum. }

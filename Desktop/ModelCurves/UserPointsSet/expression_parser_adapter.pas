@@ -21,7 +21,7 @@ interface
 
 uses SysUtils, int_expression_parser,
 {$IFDEF _WINDOWS}
-    curve_points_set,
+    persistent_curve_parameters,
 {$ENDIF}
     CBRCComponent;
 

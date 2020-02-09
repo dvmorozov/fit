@@ -22,7 +22,6 @@ interface
 uses
     points_set, Classes, SysUtils, Graphics, self_copied_component,
     title_points_set, neutron_points_set, curve_points_set, named_points_set,
-    data_loader,
 {$IFNDEF SERVER}
     fit_client, int_fit_viewer,
 {$ENDIF}
@@ -216,6 +215,12 @@ type
 implementation
 
 uses form_main;
+
+const
+    { The minimal allowed number. }
+    MIN_VALUE: Double = -1e100;
+    { The maximal allowed number. }
+    MAX_VALUE: Double =  1e100;
 
 {========================== TFitViewer ==================================}
 {$IFNDEF SERVER}

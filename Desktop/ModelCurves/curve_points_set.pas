@@ -19,155 +19,71 @@ unit curve_points_set;
 
 interface
 
-uses Classes, SysUtils, SimpMath, self_copied_component, points_set, title_points_set,
-  data_loader;
+uses
+    Classes, SysUtils, self_copied_component, points_set,
+    title_points_set, amplitude_curve_parameter, sigma_curve_parameter,
+    position_curve_parameter, persistent_curve_parameter_container,
+    special_curve_parameter, persistent_curve_parameters;
 
 type
-    TParameterType = (
-        { Created by user and non-variable. Such parameters are variated together for all
-        instances in the given interval if it isn't disabled by special flag. }
-        Shared,
-        { Created by user and variable. }
-        Variable,
-        { Created by the application. }
-        Calculated,
-        { Argument of expression. Always variable. }
-        Argument,
-        { Non-variable parameter describing instance position. }
-        InvariablePosition,
-        { Variable parameter describing instance position. }
-        VariablePosition
-        );
-
-    TSpecialCurveParameter = class(TCollectionItem)
-    private
-        FName: string;
-        FValue: Double;
-        FType: TParameterType;
-        FVariationDisabled: Boolean;
-        FVariationStep: Double;
-
-        FSavedValue: Double;
-
-        function GetValue_: string;
-        procedure SetValue_(AValue: string);
-
-    public
-        constructor Create(Collection: TCollection); override;
-        procedure CopyTo(const Dest: TSpecialCurveParameter);
-
-        property SavedValue: Double read FSavedValue write FSavedValue;
-        property Value: Double read FValue write FValue;
-        property VariationDisabled: Boolean
-            read FVariationDisabled write FVariationDisabled;
-        property VariationStep: Double
-            read FVariationStep write FVariationStep;
-
-    published
-        { Published for XML-serialization. }
-        property Name: string read FName write FName;
-        { String because some problem with XML-serialization as Double. }
-        property Value_: string read GetValue_ write SetValue_;
-        property Type_: TParameterType read FType write FType;
-    end;
-
-    { Generic type of instance parameter container. }
-    Curve_parameters = class(TSelfCopiedComponent)
-    protected
-        FParams: TCollection;
-
-    public
-        { Initial parameters hash. Should be used for copying optimization. }
-        SavedInitHash: Cardinal;
-
-        constructor Create(AOwner: TComponent); override;
-        destructor Destroy; override;
-
-        procedure CopyParameters(const Dest: TObject); override;
-        function GetParamValueByName(ParamName: string): double;
-        procedure SetParamValueByName(ParamName: string; AValue: double);
-
-    published
-        { Published for XML-serialization. }
-        property Params: TCollection read FParams write FParams;
-    end;
-
-    { Generic container for point set of all calcuated curves. TODO: must
-      inherit Lambda from TNeutronPointsSet to adjust calculated and experimental
-      curves on chart. }
+    { Generic container for point set of all calcuated curves. }
     TCurvePointsSet = class(TTitlePointsSet)
     protected
-        { List of curve parameters. }
+        { List of all curve parameters. }
         FParams: Curve_parameters;
         { List of variable parameters. }
-        Links: TList;
-        { Parameters with predefined semantics have constraints, which
+        FVariableParameters: TList;
+        { Set of variable parameters common for all curve types (meaning could
+          be different in particular cases).
+          Parameters with predefined semantics have constraints, which
           can be associated with curve points. Attributes store pointers
           to parameters with predefined semantics. Parameters are created
           in descendant constructors. }
-        AmplitudeP: TSpecialCurveParameter;
-        PositionP: TSpecialCurveParameter;
-        SigmaP: TSpecialCurveParameter;
+        AmplitudeP: TAmplitudeCurveParameter;
+        PositionP: TPositionCurveParameter;
+        SigmaP: TSigmaCurveParameter;
+        { It is used in TUserPointsSet. TODO: move it to TUserPointsSet. }
         ArgP: TSpecialCurveParameter;
 
-        Fx0IsSet: Boolean;
-        { X0 variation boundaries. }
-        Fx0Low, Fx0High: Double;
-
-        //  predostavlyayut dostup k var'iruemym parametram
-        { Returns variable parameter by through index. }
-        function GetParam(Index: LongInt): Double; virtual;
-        { Sets value of variable parameter. }
-        procedure SetParam(Index: LongInt; Value: Double); virtual;
-        { Returns total number of variable parameters. }
-        function GetParamCount: LongInt;
-        
         { Returns value of parameter with given name. }
-        function GetParamByName(Name: string): Double; virtual;
-        procedure SetParamByName(Name: string; Value: Double); virtual;
-        
+        function GetValueByName(Name: string): Double; virtual;
+        procedure SetValueByName(Name: string; Value: Double); virtual;
+
+        { Returns variable parameter by through index. }
+        function GetVariableValue(Index: LongInt): Double; virtual;
+        { Returns optimization step for parameter. }
+        function GetVariationStep(Index: LongInt): Double; virtual;
+        { Sets value of variable parameter. }
+        procedure SetVariableValue(Index: LongInt; Value: Double); virtual;
+        { Sets optimization step for parameter. }
+        procedure SetVariationStep(Index: LongInt; AStep: Double); virtual;
+        { Returns total number of variable parameters. }
+        function GetVariableCount: LongInt;
+
         { Initializes pointers to parameters with predefined semantics. }
-        procedure SetSpecParamPtr(P: TSpecialCurveParameter); virtual;
-        { Initializes indexes of variable parameters with predefined semantics. }
-        procedure SetSpecParamVarIndex(
-            P: TSpecialCurveParameter; Index: LongInt); virtual;
+        procedure SetSpecParamPtr(Parameter: TSpecialCurveParameter); virtual;
 
     protected
         Modified: Boolean;
 
-    protected
+        procedure AddParameter(Parameter: TSpecialCurveParameter);
         { Performs recalculation of all profile points. }
         procedure DoCalc(const Intervals: TPointsSet); virtual; abstract;
         { Multiplies profile points by given factor. }
         procedure ScaleCurve(const Factor: Double);
-        { Performs intialization of variable list parameters and 
-          set up of AmplIndex, PosIndex, SigmaIndex. }
-        procedure InitLinks;
+        { Performs intialization of variable list parameters. }
+        procedure InitListOfVariableParameters;
         
         { These functions don't perform profile recalculation and
           are used for initialization purposes (when Modified is set up). }
         
         procedure Setx0(Value: Double);
         procedure SetA(Value: Double);
-        procedure SetSigma(Value: Double);
         function Getx0: Double;
         function GetA: Double;
         function GetSigma: Double;
 
     public
-        { Indexes of attributes with predefined semantics. Indexes are 
-          filled only in the case if parameters with requirede names are
-          variable and are indexes in the List. It's necessary in accessing
-          to variable parameters via Param[Index] it would be possible to
-          set up parameters with predefined semantics in according to 
-          restrictions. Must be public to assign optimization step. }
-        { Curve amplitude. }
-        AmplIndex: LongInt;
-        { Curve position. }
-        PosIndex: LongInt;
-        { Curve width. }
-        SigmaIndex: LongInt;
-
         { Boundaries for R-factor calculation. }
         MinX, MaxX: Double;
         { Flag designating that boundaries of R-factor calculation
@@ -194,45 +110,54 @@ type
         procedure RestoreParams;
         procedure CopyParameters(const Dest: TObject); override;
 
-        { Designate initialization of attributes with predefined semantics. }
+        { These methods are used to limit direct access to variable parameters. }
+
+        function MinimumStepAchieved(VariableIndex: LongInt): Boolean;
+        procedure InitVariationStep(VariableIndex: LongInt);
+
+        { Return True if attributes with predefined semantics were assigned. }
         
         function Hasx0: Boolean;
         function HasA: Boolean;
-        function HasSigma: Boolean;
 
         { Provides access to variable parameters for optimizer. }
-        property Param[index: LongInt]: Double read GetParam write SetParam;
-        property ParamCount: LongInt read GetParamCount;
-        { Provides access to all parameters by name. }
-        property ParamByName[Name: string]: Double read GetParamByName write SetParamByName;
+        property VariableValues[index: LongInt]: Double
+            read GetVariableValue write SetVariableValue;
+        { Provides access to variation steps for optimizer. }
+        property VariationSteps[index: LongInt]: Double
+            read GetVariationStep write SetVariationStep;
+        property VariableCount: LongInt read GetVariableCount;
         { Returns object containing all parameters. }
-        property Params: Curve_parameters read FParams;
-        { Properties provide access to attributes having predefined semantics for special algorithms.
+        property Parameters: Curve_parameters read FParams;
+
+        { Provides access to all parameters by name. }
+        property ValuesByName[Name: string]: Double
+            read GetValueByName write SetValueByName;
+
+        { Properties provide access to attributes having predefined semantics
+          for special algorithms.
           Use methods HasX before to check existense of such attributes. }
 
         { Variation of the parameter x0 is limited by two adjacent points. }
+        { TODO: remove setter. }
         property x0: Double read Getx0 write Setx0;
+        { TODO: remove setter. }
         property A: Double read GetA write SetA;
-        property Sigma: Double read GetSigma write SetSigma;
+        property Sigma: Double read GetSigma;
     end;
 
 implementation
-
-{=========================== TCurvePointsSet ==================================}
 
 constructor TCurvePointsSet.Create(AOwner: TComponent);
 begin
     inherited;
     FParams := Curve_parameters.Create(nil);
     Modified := True;
-    AmplIndex := -1;
-    PosIndex := -1;
-    SigmaIndex := -1;
 end;
 
 destructor TCurvePointsSet.Destroy;
 begin
-    Links.Free;
+    FVariableParameters.Free;
     FParams.Free;
     inherited;
 end;
@@ -256,250 +181,91 @@ begin
     TCurvePointsSet(Dest).InitHash := InitHash;
 end;
 
-function TCurvePointsSet.GetParam(Index: LongInt): Double;
-var P: TSpecialCurveParameter;
+function TCurvePointsSet.MinimumStepAchieved(VariableIndex: LongInt): Boolean;
 begin
-    Assert(index < GetParamCount);
-    
-    if Index = PosIndex then Result := x0
-    else
-    if Index = AmplIndex then Result := A
-    else
-    if Index = SigmaIndex then Result := Sigma
-    else
-    begin
-        P := TSpecialCurveParameter(Links.Items[index]);
-        Result := P.Value;
-    end;
+    Assert((VariableIndex >= 0) and (VariableIndex < FVariableParameters.Count));
+    Result := TSpecialCurveParameter(FVariableParameters[VariableIndex]).MinimumStepAchieved;
 end;
 
-procedure TCurvePointsSet.SetParam(Index: LongInt; Value: Double);
-var P: TSpecialCurveParameter;
+procedure TCurvePointsSet.InitVariationStep(VariableIndex: LongInt);
 begin
-    Assert((Index < GetParamCount) and (Index >= 0));
+    Assert((VariableIndex >= 0) and (VariableIndex < FVariableParameters.Count));
+    TSpecialCurveParameter(FVariableParameters[VariableIndex]).InitVariationStep;
+end;
+
+function TCurvePointsSet.GetVariableValue(Index: LongInt): Double;
+var Parameter: TSpecialCurveParameter;
+begin
+    Assert(index < GetVariableCount);
+    Parameter := TSpecialCurveParameter(FVariableParameters.Items[index]);
+    Result := Parameter.Value;
+end;
+
+function TCurvePointsSet.GetVariationStep(Index: LongInt): Double;
+var Parameter: TSpecialCurveParameter;
+begin
+    Assert(Index < GetVariableCount);
+    Parameter := TSpecialCurveParameter(FVariableParameters.Items[index]);
+    Assert(not Parameter.VariationDisabled);
+    Result := Parameter.VariationStep;
+end;
+
+procedure TCurvePointsSet.SetVariableValue(Index: LongInt; Value: Double);
+var Parameter: TSpecialCurveParameter;
+begin
+    Assert((Index < GetVariableCount) and (Index >= 0));
     Modified := True;
-
-    if Index = PosIndex then x0 := Value
-    else
-    if Index = AmplIndex then A := Value
-    else
-    if Index = SigmaIndex then Sigma := Value
-    else
-    begin
-        P := TSpecialCurveParameter(Links.Items[Index]);
-        P.Value := Value;
-    end;
+    Parameter := TSpecialCurveParameter(FVariableParameters.Items[Index]);
+    Parameter.Value := Value;
 end;
 
-function TCurvePointsSet.GetParamByName(Name: string): Double;
-var i: LongInt;
-    P: TSpecialCurveParameter;
+procedure TCurvePointsSet.SetVariationStep(Index: LongInt; AStep: Double);
+var Parameter: TSpecialCurveParameter;
 begin
-    //  snachala proveryayutsya special'nye imena
-    if UpperCase(Name) = 'X0' then
-    begin
-        Result := x0;
-        Exit;
-    end
-    else
-    if UpperCase(Name) = 'A' then
-    begin
-        Result := A;
-        Exit;
-    end
-    else
-    if UpperCase(Name) = 'SIGMA' then
-    begin
-        Result := Sigma;
-        Exit;
-    end
-    else
-    begin
-        for i := 0 to FParams.Params.Count - 1 do
-        begin
-            P := TSpecialCurveParameter(FParams.Params.Items[i]);
-            if UpperCase(P.Name) = UpperCase(Name) then
-            begin
-                Result := P.Value;
-                Exit;
-            end;
-        end;
-    end;
-    Assert(False);
+    Assert((Index < GetVariableCount) and (Index >= 0));
+    Parameter := TSpecialCurveParameter(FVariableParameters.Items[Index]);
+    Assert(not Parameter.VariationDisabled);
+    Parameter.VariationStep := AStep;
 end;
 
-procedure TCurvePointsSet.SetParamByName(Name: string; Value: Double);
-var i: LongInt;
-    P: TSpecialCurveParameter;
-{$IFDEF WRITE_PARAMS_LOG}
-    LogStr: string;
-{$ENDIF}
+function TCurvePointsSet.GetValueByName(Name: string): Double;
+begin
+    Result := FParams.ValuesByName[Name];
+end;
+
+procedure TCurvePointsSet.SetValueByName(Name: string; Value: Double);
 begin
     Modified := True;
-    //  snachala proveryayutsya special'nye imena
-    if UpperCase(Name) = 'X0' then
-    begin
-{$IFDEF WRITE_PARAMS_LOG}
-        LogStr := IntToStr(LongInt(Self)) + ' SetParamByName(x0): Value = ' +
-            FloatToStr(Value);
-        WriteLog(LogStr, Notification_);
-{$ENDIF}
-        x0 := Value;
-        Exit;
-    end
-    else
-    if UpperCase(Name) = 'A' then
-    begin
-{$IFDEF WRITE_PARAMS_LOG}
-        LogStr := IntToStr(LongInt(Self)) + ' SetParamByName(A): Value = ' +
-            FloatToStr(Value);
-        WriteLog(LogStr, Notification_);
-{$ENDIF}
-        A := Value;
-        Exit;
-    end
-    else
-    if UpperCase(Name) = 'SIGMA' then
-    begin
-{$IFDEF WRITE_PARAMS_LOG}
-        LogStr := IntToStr(LongInt(Self)) + ' SetParamByName(Sigma): Value = ' +
-            FloatToStr(Value);
-        WriteLog(LogStr, Notification_);
-{$ENDIF}
-        Sigma := Value;
-        Exit;
-    end
-    else
-    begin
-        for i := 0 to FParams.Params.Count - 1 do
-        begin
-            P := TSpecialCurveParameter(FParams.Params.Items[i]);
-            if UpperCase(P.Name) = UpperCase(Name) then
-            begin
-{$IFDEF WRITE_PARAMS_LOG}
-                LogStr := IntToStr(LongInt(Self)) +
-                    ' SetParamByName('+ Name +'): Value = ' + FloatToStr(Value);
-                WriteLog(LogStr, Notification_);
-{$ENDIF}
-                P.Value := Value;
-                Exit;
-            end;
-        end;
-    end;
-    Assert(False);
+    FParams.ValuesByName[Name] := Value;
 end;
 
-function TCurvePointsSet.GetParamCount: LongInt;
+function TCurvePointsSet.GetVariableCount: LongInt;
 begin
-    Result := Links.Count;
+    Result := FVariableParameters.Count;
 end;
 
 procedure TCurvePointsSet.Setx0(Value: Double);
-var i: LongInt;
-    TempDouble: Double;
-    Highindex: LongInt;
-    Lowindex: LongInt;
-    P: TSpecialCurveParameter;
-{$IFDEF WRITE_PARAMS_LOG}
-    LogStr: string;
-{$ENDIF}
 begin
     Assert(Assigned(PositionP));
-    P := PositionP;
-{$IFDEF WRITE_PARAMS_LOG}
-    LogStr := ' SetX0: Value = ' + FloatToStr(Value);
-    WriteLog(LogStr, Notification_);
-{$ENDIF}
     Modified := True;
-    //  nuzhno brat' po modulyu, potomu chto
-    //  algoritm optimizatsii mozhet zagonyat'
-    //  v oblast' otritsatel'nyh znacheniy
-    Value := Abs(Value);
-    if not Fx0IsSet then
-    begin
-        //  pervaya ustanovka parametra
-        Fx0IsSet := True;
-        P.Value := Value;
-        Fx0Low := MIN_VALUE;
-        Fx0High := MAX_VALUE;
-        Highindex := -1;
-        Lowindex := -1;
-        //  opredelenie granits variatsii parametra
-        for i := 0 to PointsCount - 1 do
-        begin
-            TempDouble := PointXCoord[i];
-            if TempDouble < P.Value then
-            begin
-                if Abs(TempDouble - P.Value) < Abs(Fx0Low - P.Value) then
-                    Fx0Low := TempDouble;
-                Lowindex := i;
-            end;
-            if TempDouble > P.Value then
-            begin
-                if Abs(TempDouble - P.Value) < Abs(Fx0High - P.Value) then
-                    Fx0High := TempDouble;
-                Highindex := i;
-            end;
-        end;
-        if Lowindex = -1 then Fx0Low := P.Value;
-        if Highindex = -1 then Fx0High := P.Value;
-    end
-    else
-    begin
-        if Value < Fx0Low then begin P.Value := Fx0Low; Exit end;
-        if Value > Fx0High then begin P.Value := Fx0High; Exit end;
-        P.Value := Value;
-    end;
+    PositionP.Value := Value;
 end;
 
 procedure TCurvePointsSet.SetA(Value: Double);
-{$IFDEF WRITE_PARAMS_LOG}
-var LogStr: string;
-{$ENDIF}
 begin
     Assert(Assigned(AmplitudeP));
     Modified := True;
-{$IFDEF WRITE_PARAMS_LOG}
-    LogStr := ' SetA: Value = ' + FloatToStr(Value);
-    WriteLog(LogStr, Notification_);
-{$ENDIF}
-    //  nuzhno brat' po modulyu, potomu chto
-    //  algoritm optimizatsii mozhet zagonyat'
-    //  v oblast' otritsatel'nyh znacheniy
-    AmplitudeP.Value := Abs(Value);
-end;
-
-procedure TCurvePointsSet.SetSigma(Value: Double);
-{$IFDEF WRITE_PARAMS_LOG}
-var LogStr: string;
-{$ENDIF}
-begin
-    Assert(Assigned(SigmaP));
-    Modified := True;
-{$IFDEF WRITE_PARAMS_LOG}
-    LogStr := ' SetSigma: Value = ' + FloatToStr(Value);
-    WriteLog(LogStr, Notification_);
-{$ENDIF}
-    //  nuzhno brat' po modulyu, potomu chto
-    //  algoritm optimizatsii mozhet zagonyat'
-    //  v oblast' otritsatel'nyh znacheniy
-    SigmaP.Value := Abs(Value);
-    if SigmaP.Value = 0 then SigmaP.Value := TINY;
+    AmplitudeP.Value := Value;
 end;
 
 function TCurvePointsSet.Hasx0: Boolean;
 begin
-    if Assigned(PositionP) then Result := True else Result := False;
+    Result := Assigned(PositionP);
 end;
 
 function TCurvePointsSet.HasA: Boolean;
 begin
-    if Assigned(AmplitudeP) then Result := True else Result := False;
-end;
-
-function TCurvePointsSet.HasSigma: Boolean;
-begin
-    if Assigned(SigmaP) then Result := True else Result := False;
+    Result := Assigned(AmplitudeP);
 end;
 
 function TCurvePointsSet.Getx0: Double;
@@ -527,83 +293,68 @@ begin
         Points[i][2] := Points[i][2] * Factor;
 end;
 
-procedure TCurvePointsSet.InitLinks;
-var i, Index: LongInt;
-    P: TSpecialCurveParameter;
+procedure TCurvePointsSet.InitListOfVariableParameters;
+var i: LongInt;
+    Parameter: TSpecialCurveParameter;
 begin
-    Assert(Assigned(Params));
-    Assert(Assigned(Params.Params));
+    Assert(Assigned(FParams));
 
-    Links.Free;
-    Links := TList.Create;
+    FVariableParameters.Free;
+    FVariableParameters := TList.Create;
 
-    for i := 0 to Params.Params.Count - 1 do
+    for i := 0 to FParams.Count - 1 do
     begin
-        P := TSpecialCurveParameter(Params.Params.Items[i]);
+        Parameter := FParams[i];
 
-        if (P.Type_ = Variable) or
-           (P.Type_ = VariablePosition) then
+        if (Parameter.Type_ = Variable) or
+           (Parameter.Type_ = VariablePosition) then
         begin
-            //  zdes' tol'ko var'iruemye
-            Index := Links.Add(P);
-            //  opredelyayutsya indeksy parametrov s
-            //  predopredelennoy semantikoy v spiske
-            //  var'iruemyh parametrov
-            SetSpecParamVarIndex(P, Index);
+            FVariableParameters.Add(Parameter);
         end;
-        if P.Type_ = Argument then ArgP := P;
-
-        //  ustanavlivayutsya ukazateli na parametry
-        //  s predopredelennoy semantikoy
-        SetSpecParamPtr(P);
+        SetSpecParamPtr(Parameter);
     end;
 end;
 
 //  ustanavlivaet ukazateli na parametry s predopredelennoy semantikoy
-procedure TCurvePointsSet.SetSpecParamPtr(P: TSpecialCurveParameter);
+procedure TCurvePointsSet.SetSpecParamPtr(Parameter: TSpecialCurveParameter);
 begin
-    Assert(Assigned(P));
-    if UpperCase(P.Name) = 'SIGMA' then SigmaP := P;
-    if UpperCase(P.Name) = 'A' then AmplitudeP := P;
-    if (P.Type_ = VariablePosition) or
-       (P.Type_ = InvariablePosition) then PositionP := P;
-end;
-//  ustanavlivaet indeksy var'iruemyh parametrov s predopredelennoy
-//  semantikoy
-procedure TCurvePointsSet.SetSpecParamVarIndex(
-    P: TSpecialCurveParameter; Index: LongInt);
-begin
-    Assert(Assigned(P));
-    if UpperCase(P.Name) = 'SIGMA' then SigmaIndex := Index;
-    if UpperCase(P.Name) = 'A' then AmplIndex := Index;
-    if P.Type_ = VariablePosition then PosIndex := Index;
+    Assert(Assigned(Parameter));
+    if UpperCase(Parameter.Name) = 'SIGMA' then
+        SigmaP := TSigmaCurveParameter(Parameter);
+
+    if UpperCase(Parameter.Name) = 'A' then
+        AmplitudeP := TAmplitudeCurveParameter(Parameter);
+
+    if (Parameter.Type_ = VariablePosition) or
+       (Parameter.Type_ = InvariablePosition) then
+       PositionP := TPositionCurveParameter(Parameter);
+
+    if Parameter.Type_ = Argument then ArgP := Parameter;
 end;
 
 procedure TCurvePointsSet.StoreParams;
 var i: LongInt;
-    P: TSpecialCurveParameter;
+    Parameter: TSpecialCurveParameter;
 begin
-    Assert(Assigned(Params));
-    Assert(Assigned(Params.Params));
+    Assert(Assigned(FParams));
 
-    for i := 0 to Params.Params.Count - 1 do
+    for i := 0 to FParams.Count - 1 do
     begin
-        P := TSpecialCurveParameter(Params.Params.Items[i]);
-        P.SavedValue := P.Value;
+        Parameter := FParams[i];
+        Parameter.SavedValue := Parameter.Value;
     end;
 end;
 
 procedure TCurvePointsSet.RestoreParams;
 var i: LongInt;
-    P: TSpecialCurveParameter;
+    Parameter: TSpecialCurveParameter;
 begin
-    Assert(Assigned(Params));
-    Assert(Assigned(Params.Params));
+    Assert(Assigned(FParams));
 
-    for i := 0 to Params.Params.Count - 1 do
+    for i := 0 to FParams.Count - 1 do
     begin
-        P := TSpecialCurveParameter(Params.Params.Items[i]);
-        P.Value := P.SavedValue;
+        Parameter := FParams[i];
+        Parameter.Value := Parameter.SavedValue;
     end;
     Modified := True;
 end;
@@ -613,101 +364,20 @@ begin
     Assert(Assigned(AParams));
 
     FParams.Free; FParams := AParams;
-    InitLinks;
+    InitListOfVariableParameters;
 end;
 
-{======================== TSpecialCurveParameter ==============================}
-
-constructor TSpecialCurveParameter.Create(Collection: TCollection);
+procedure TCurvePointsSet.AddParameter(Parameter: TSpecialCurveParameter);
+var
+    Container: TPersistentCurveParameterContainer;
 begin
-    inherited;
-    FType := Calculated;
-end;
-
-procedure TSpecialCurveParameter.CopyTo(const Dest: TSpecialCurveParameter);
-begin
-    Dest.Name := Name;
-    Dest.Value := Value;
-    Dest.Type_ := Type_;
-    Dest.SavedValue := SavedValue;
-    Dest.VariationDisabled := VariationDisabled;
-    Dest.VariationStep := VariationStep;
-end;
-
-function TSpecialCurveParameter.GetValue_: string;
-begin
-    Result := FloatToStr(FValue);
-end;
-
-procedure TSpecialCurveParameter.SetValue_(AValue: string);
-begin
-    FValue := StrToFloat(AValue);
-end;
-
-{========================== Curve_parameters ==================================}
-
-constructor Curve_parameters.Create;
-var P: TSpecialCurveParameter;
-begin
-    inherited;
-    FParams := TCollection.Create(TSpecialCurveParameter);
-    //  !!! pustaya kollektsiya zapisyvaetsya v XML-potok nekorrektno !!!
-    P := TSpecialCurveParameter.Create(FParams);
-    P.Name := 'x';
-    P.Type_ := Argument;
-    P.Value := 0;
-end;
-
-destructor Curve_parameters.Destroy;
-begin
-    FParams.Free;
-    inherited;
-end;
-
-procedure Curve_parameters.CopyParameters(const Dest: TObject);
-var i: LongInt;
-    P, New: TSpecialCurveParameter;
-begin
-    inherited;
-
-    Curve_parameters(Dest).Params.Clear;
-
-    for i := 0 to Params.Count - 1 do
-    begin
-        P := TSpecialCurveParameter(Params.Items[i]);
-        New := TSpecialCurveParameter.Create(Curve_parameters(Dest).Params);
-        P.CopyTo(New);
-    end;
-    Curve_parameters(Dest).SavedInitHash := SavedInitHash;
-end;
-
-function Curve_parameters.GetParamValueByName(ParamName: string): double;
-var i: Integer;
-    P: TSpecialCurveParameter;
-begin
-    for i := 0 to Params.Count - 1 do
-    begin
-        P := TSpecialCurveParameter(Params.Items[i]);
-        if P.Name = ParamName then
-        begin
-            Result := P.Value;
-            break;
-        end;
-    end;
-end;
-
-procedure Curve_parameters.SetParamValueByName(ParamName: string; AValue: double);
-var i: Integer;
-    P: TSpecialCurveParameter;
-begin
-    for i := 0 to Params.Count - 1 do
-    begin
-        P := TSpecialCurveParameter(Params.Items[i]);
-        if P.Name = ParamName then
-        begin
-            P.Value := AValue;
-            break;
-        end;
+    Container := TPersistentCurveParameterContainer(FParams.Params.Add);
+    try
+        Container.Parameter := Parameter;
+    except
+        FParams.Params.Delete(Container.ID);
+        Container.Free;
+        raise;
     end;
 end;
 

@@ -19,37 +19,25 @@ unit pseudo_voigt_points_set;
 
 interface
 
-uses Classes, SysUtils, int_points_set, curve_points_set, points_set,
-    named_points_set, curve_types_singleton, SimpMath;
+uses
+    Classes, SysUtils, int_points_set, curve_points_set, points_set,
+    named_points_set, curve_types_singleton, special_curve_parameter,
+    amplitude_curve_parameter, sigma_curve_parameter, position_curve_parameter,
+    eta_curve_parameter, SimpMath;
 
 type
     { Function having Pseudo-Voigt form. }
     TPseudoVoigtPointsSet = class(TNamedPointsSet)
     protected
         { Relative weights of gaussian and lorentzian. }
-        EtaP: TSpecialCurveParameter;
-        EtaIndex: LongInt;
+        EtaP: TEtaCurveParameter;
         
-        procedure SetEta(Value: Double);
         function GetEta: Double;
         
-        { Initializes pointers to parameters with predefined semantics. }
-        procedure SetSpecParamPtr(P: TSpecialCurveParameter); override;
-        { Initializes indexes of parameters with predefined semantics. }
-        procedure SetSpecParamVarIndex(P: TSpecialCurveParameter; Index: LongInt); override;
-        
-        { Returns variable parameter with given index. }
-        function GetParam(Index: LongInt): Double; override;
-        { Sets up variable paremeter with given index. }
-        procedure SetParam(Index: LongInt; Value: Double); override;
-        
-        { Returns parameter with given name. }
-        function GetParamByName(Name: string): Double; override;
-        { Sets up parameter with given name. }
-        procedure SetParamByName(Name: string; Value: Double); override;
-
         { Performs recalculation of all points of function. }
         procedure DoCalc(const Intervals: TPointsSet); override;
+
+        property Eta: Double read GetEta;
 
     public
         constructor Create(AOwner: TComponent); override;
@@ -58,10 +46,6 @@ type
         { Overrides method defined in TNamedPointsSet. }
         function GetCurveTypeId: TCurveTypeId; override;
         class function GetCurveTypeId_: TCurveTypeId; override;
-
-        function HasEta: Boolean;
-        
-        property Eta: Double read GetEta write SetEta;
     end;
 
 implementation
@@ -89,54 +73,33 @@ begin
 end;
 
 constructor TPseudoVoigtPointsSet.Create(AOwner: TComponent);
-var P: TSpecialCurveParameter;
+var Parameter: TSpecialCurveParameter;
+    Count: LongInt;
 begin
     inherited;
-    EtaIndex := -1;
-    
-    P := TSpecialCurveParameter(FParams.Params.Add);
-    P.Name := 'A'; P.Value := 0; P.Type_ := Variable;
 
-    P := TSpecialCurveParameter(FParams.Params.Add);
-    P.Name := 'x0'; P.Value := 0;
-    P.Type_ := VariablePosition;
-    //P.Type_ := InvariablePosition;
+    Parameter := TAmplitudeCurveParameter.Create;
+    AddParameter(Parameter);
 
-    P := TSpecialCurveParameter(FParams.Params.Add);
-    P.Name := 'sigma'; P.Value := 0.25;
-    //P.Type_ := Variable       //  ne var'iruetsya otdel'no,
-                                //  prinimaet odno znachenie dlya vseh
-                                //  krivyh podzadachi
-    P.Type_ := Shared;
+    Parameter := TPositionCurveParameter.Create(Self);
+    AddParameter(Parameter);
 
-    P := TSpecialCurveParameter(FParams.Params.Add);
-    P.Name := 'eta'; P.Value := 0;
-    P.Type_ := Variable;        //  razreschaetsya var'irovanie parametra
-                                //  otdel'no dlya kazhdogo ekzemplyara
-                                //  patterna
-    InitLinks;
-end;
+    Parameter := TSigmaCurveParameter.Create;
+    Parameter.Type_ := Shared;          //  common parameter for all instances
+    AddParameter(Parameter);
 
-procedure TPseudoVoigtPointsSet.SetEta(Value: Double);
-begin
-    Assert(Assigned(EtaP));
-    Modified := True;
-    //  nuzhno brat' po modulyu, potomu chto
-    //  algoritm optimizatsii mozhet zagonyat'
-    //  v oblast' otritsatel'nyh znacheniy
-    EtaP.Value := Abs(Value);
-    if EtaP.Value > 1 then EtaP.Value := 1;
+    EtaP := TEtaCurveParameter.Create;
+    AddParameter(EtaP);
+
+    InitListOfVariableParameters;
+    Count := FVariableParameters.Count;
+    Assert(Count = 3);
 end;
 
 function TPseudoVoigtPointsSet.GetEta: Double;
 begin
     Assert(Assigned(EtaP));
     Result := EtaP.Value;
-end;
-
-function TPseudoVoigtPointsSet.HasEta: Boolean;
-begin
-    if Assigned(EtaP) then Result := True else Result := False;
 end;
 
 function TPseudoVoigtPointsSet.GetCurveTypeName: string;
@@ -152,67 +115,6 @@ end;
 class function TPseudoVoigtPointsSet.GetCurveTypeId_: TCurveTypeId;
 begin
     Result := StringToGUID('{9f27dc7c-970f-4dac-88cd-f5fb3400d38d}');
-end;
-
-function TPseudoVoigtPointsSet.GetParamByName(Name: string): Double;
-begin
-    if UpperCase(Name) = 'ETA' then Result := Eta
-    else Result := inherited;
-end;
-
-procedure TPseudoVoigtPointsSet.SetParamByName(Name: string; Value: Double);
-{$IFDEF WRITE_PARAMS_LOG}
-var LogStr: string;
-{$ENDIF}
-begin
-    Modified := True;
-    
-    if UpperCase(Name) = 'ETA' then
-    begin
-{$IFDEF WRITE_PARAMS_LOG}
-        LogStr := ' SetParamByName(Eta): Value = ' + FloatToStr(Value);
-        WriteLog(LogStr, Notification_);
-{$ENDIF}
-        Eta := Value;
-    end
-    else inherited;
-end;
-
-procedure TPseudoVoigtPointsSet.SetParam(Index: LongInt; Value: Double);
-begin
-    Assert((Index < GetParamCount) and (Index >= 0));
-    Modified := True;
-
-    if Index = EtaIndex then
-        Eta := Value
-    else inherited;
-end;
-
-function TPseudoVoigtPointsSet.GetParam(Index: LongInt): Double;
-begin
-    Assert(index < GetParamCount);
-
-    if Index = EtaIndex then Result := Eta
-    else Result := inherited;
-end;
-
-//  ustanavlivaet ukazateli na parametry s predopredelennoy semantikoy
-procedure TPseudoVoigtPointsSet.SetSpecParamPtr(
-    P: TSpecialCurveParameter);
-begin
-    Assert(Assigned(P));
-    if UpperCase(P.Name) = 'ETA' then EtaP := P
-    else inherited;
-end;
-
-//  ustanavlivaet indeksy var'iruemyh parametrov s predopredelennoy
-//  semantikoy
-procedure TPseudoVoigtPointsSet.SetSpecParamVarIndex(
-    P: TSpecialCurveParameter; Index: LongInt);
-begin
-    Assert(Assigned(P));
-    if UpperCase(P.Name) = 'ETA' then EtaIndex := Index
-    else inherited;
 end;
 
 var CTS: TCurveTypesSingleton;

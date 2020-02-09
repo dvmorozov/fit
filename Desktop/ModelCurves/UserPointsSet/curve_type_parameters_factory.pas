@@ -19,8 +19,9 @@ unit curve_type_parameters_factory;
 
 interface
 
-uses Classes, SysUtils, app_settings, int_curve_type_parameters_factory, CBRCComponent,
-    curve_points_set;
+uses
+    Classes, SysUtils, app_settings, int_curve_type_parameters_factory,
+    persistent_curve_parameters, CBRCComponent;
 
 type
 {$warnings off}

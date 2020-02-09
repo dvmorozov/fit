@@ -19,37 +19,23 @@ unit asym_pseudo_voigt_points_set;
 
 interface
 
-uses Classes, SysUtils, int_points_set, points_set,
-  pseudo_voigt_points_set, curve_points_set, curve_types_singleton, SimpMath;
+uses Classes, SysUtils, int_points_set, points_set, pseudo_voigt_points_set,
+    curve_points_set, curve_types_singleton, special_curve_parameter,
+    delta_sigma_curve_parameter, SimpMath;
 
 type
     { Curve having asymmetrical Pseudo-Voigt form. }
     TAsymPseudoVoigtPointsSet = class(TPseudoVoigtPointsSet)
     protected
         { Difference of half-widths of left and right sides of the curve. }
-        DeltaSigmaP: TSpecialCurveParameter;
-        DeltaSigmaIndex: LongInt;
+        DeltaSigmaP: TDeltaSigmaCurveParameter;
 
-        procedure SetDeltaSigma(Value: Double);
         function GetDeltaSigma: Double;
-
-        { Sets up pointers to parameters with predefined semantics. }
-        procedure SetSpecParamPtr(P: TSpecialCurveParameter); override;
-        { Sets up indexes of parameters with predefined semantics. }
-        procedure SetSpecParamVarIndex(P: TSpecialCurveParameter; Index: LongInt); override;
-
-        { Returns parameter with given index. }
-        function GetParam(Index: LongInt): Double; override;
-        { Sets up variable paremeter with given index. }
-        procedure SetParam(Index: LongInt; Value: Double); override;
-        
-        { Returns parameter with given name. }
-        function GetParamByName(Name: string): Double; override;
-        { Sets up parameter with given name. }
-        procedure SetParamByName(Name: string; Value: Double); override;
 
         { Performs recalculation of all points of function. }
         procedure DoCalc(const Intervals: TPointsSet); override;
+
+        property DeltaSigma: Double read GetDeltaSigma;
         
     public
         constructor Create(AOwner: TComponent); override;
@@ -58,10 +44,6 @@ type
         { Overrides method defined in TNamedPointsSet. }
         function GetCurveTypeId: TCurveTypeId; override;
         class function GetCurveTypeId_: TCurveTypeId; override;
-
-        function HasDeltaSigma: Boolean;
-
-        property DeltaSigma: Double read GetDeltaSigma write SetDeltaSigma;
     end;
 
 implementation
@@ -88,37 +70,25 @@ begin
     end;
 end;
 
-constructor TAsymPseudoVoigtPointsSet.Create(AOwner: TComponent);
-var P: TSpecialCurveParameter;
-begin
-    inherited;
-    DeltaSigmaIndex := -1;
-
-    P := TSpecialCurveParameter(FParams.Params.Add);
-    P.Name := 'deltasigma'; P.Value := 0;
-    P.Type_ := Variable;        //  razreschaetsya var'irovanie parametra
-                                //  otdel'no dlya kazhdogo ekzemplyara
-                                //  patterna
-    InitLinks;
-end;
-
-procedure TAsymPseudoVoigtPointsSet.SetDeltaSigma(Value: Double);
-begin
-    Assert(Assigned(DeltaSigmaP));
-    Modified := True;
-    //  !!! dopuskayutsya otritsatel'nye znacheniya !!!
-    DeltaSigmaP.Value := Value;
-end;
-
 function TAsymPseudoVoigtPointsSet.GetDeltaSigma: Double;
 begin
     Assert(Assigned(DeltaSigmaP));
     Result := DeltaSigmaP.Value;
 end;
 
-function TAsymPseudoVoigtPointsSet.HasDeltaSigma: Boolean;
+constructor TAsymPseudoVoigtPointsSet.Create(AOwner: TComponent);
+var
+    Count: LongInt;
 begin
-    if Assigned(DeltaSigmaP) then Result := True else Result := False;
+    inherited;
+
+    DeltaSigmaP := TDeltaSigmaCurveParameter.Create;
+    AddParameter(DeltaSigmaP);
+
+    InitListOfVariableParameters;
+
+    Count := FVariableParameters.Count;
+    Assert(Count = 4);
 end;
 
 function TAsymPseudoVoigtPointsSet.GetCurveTypeName: string;
@@ -134,66 +104,6 @@ end;
 function TAsymPseudoVoigtPointsSet.GetCurveTypeId: TCurveTypeId;
 begin
     Result := GetCurveTypeId_;
-end;
-
-procedure TAsymPseudoVoigtPointsSet.SetParamByName(Name: string; Value: Double);
-{$IFDEF WRITE_PARAMS_LOG}
-    LogStr: string;
-{$ENDIF}
-begin
-    Modified := True;
-
-    if UpperCase(Name) = 'DELTASIGMA' then
-    begin
-{$IFDEF WRITE_PARAMS_LOG}
-        LogStr := IntToStr(LongInt(Self)) +
-            ' SetParamByName(DeltaSigma): Value = ' + FloatToStr(Value);
-        WriteLog(LogStr, Notification_);
-{$ENDIF}
-        DeltaSigma := Value;
-    end
-    else inherited;
-end;
-
-function TAsymPseudoVoigtPointsSet.GetParamByName(Name: string): Double;
-begin
-    if UpperCase(Name) = 'DELTASIGMA' then Result := DeltaSigma
-    else Result := inherited;
-end;
-
-procedure TAsymPseudoVoigtPointsSet.SetParam(Index: LongInt; Value: Double);
-begin
-    Assert((Index < GetParamCount) and (Index >= 0));
-    Modified := True;
-
-    if Index = DeltaSigmaIndex then DeltaSigma := Value
-    else inherited;
-end;
-
-function TAsymPseudoVoigtPointsSet.GetParam(Index: LongInt): Double;
-begin
-    Assert(Index < GetParamCount);
-
-    if Index = DeltaSigmaIndex then Result := DeltaSigma
-    else Result := inherited;
-end;
-
-//  ustanavlivaet ukazateli na parametry s predopredelennoy semantikoy
-procedure TAsymPseudoVoigtPointsSet.SetSpecParamPtr(
-    P: TSpecialCurveParameter);
-begin
-    Assert(Assigned(P));
-    if UpperCase(P.Name) = 'DELTASIGMA' then DeltaSigmaP := P
-    else inherited;
-end;
-//  ustanavlivaet indeksy var'iruemyh parametrov s predopredelennoy
-//  semantikoy
-procedure TAsymPseudoVoigtPointsSet.SetSpecParamVarIndex(
-    P: TSpecialCurveParameter; Index: LongInt);
-begin
-    Assert(Assigned(P));
-    if UpperCase(P.Name) = 'DELTASIGMA' then DeltaSigmaIndex := Index
-    else inherited;
 end;
 
 var CTS: TCurveTypesSingleton;

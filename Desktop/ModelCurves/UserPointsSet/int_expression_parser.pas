@@ -19,9 +19,8 @@ unit int_expression_parser;
 
 interface
 
-{$IFDEF _WINDOWS}
-uses curve_points_set;
-{$ENDIF}
+uses
+    persistent_curve_parameters;
 
 type
     { Interface defining basic operation for parsing curve expression. }

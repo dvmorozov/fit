@@ -43,12 +43,6 @@ type
         destructor Destroy; override;
     end;
 
-const 
-      { The minimal allowed number. }
-      MIN_VALUE: Double = -1e100;
-      { The maximal allowed number. }
-      MAX_VALUE: Double =  1e100;
-
 function MyStrToFloat(Str: string): Double;
 
 implementation

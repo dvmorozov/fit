@@ -27,7 +27,7 @@ uses Classes, title_points_set, self_copied_component,
     , fit_server
 {$ENDIF}
 {$IFDEF _WINDOWS}
-    , curve_points_set
+    , persistent_curve_parameters
 {$ENDIF}
     ;
     

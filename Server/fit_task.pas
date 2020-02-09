@@ -23,8 +23,9 @@ uses Classes, SysUtils, points_set, curve_points_set, self_copied_component,
     int_minimizer, simple_minimizer, downhill_simplex_minimizer, main_calc_thread,
     mscr_specimen_list, int_points_set, lorentz_points_set, gauss_points_set,
     two_branches_pseudo_voigt_points_set, asym_pseudo_voigt_points_set,
-    user_points_set, pseudo_voigt_points_set;
-  
+    user_points_set, pseudo_voigt_points_set, special_curve_parameter,
+    persistent_curve_parameter_container, persistent_curve_parameters;
+
 type
     { Fits profile interval by model curves (specimens).
       Provides variable parameters and evaluation function for optimization
@@ -66,7 +67,6 @@ type
         //  ======================= dannye dlya optimizatora ====================
         FMinimizer: TMinimizer;
 
-        AStep, x0Step: Double;
         { Index of pattern instance (specimen) parameters of which are variated at the moment. }
         CurveNum: LongInt;
         { Index of parameter of pattern instance which is variated at the moment. }
@@ -113,7 +113,7 @@ type
         procedure SetParam(NewParamValue: Double);
         { Returns True at the end of iteration cycle. }
         function EndOfCycle: Boolean;
-        { Divides all optimization steps by 2. }
+        { Divides all optimization steps by 2. Iterface method for TSimpleMinimizer2. }
         procedure DivideStepsBy2;
         procedure MultipleSteps(Factor: Double);
         { Returns flag indicating termination of the calculation. }
@@ -135,7 +135,6 @@ type
           For this class is always True for now because the class does not support asynchronous operations. }
         AllDone: Boolean;
 
-    protected
         procedure ShowCurMin; virtual;
         procedure DoneProc; virtual;
 
@@ -184,6 +183,8 @@ type
         { Calculates hash of initial values of parameters of pattern instance. }
         procedure CalcInitHash(Specimen: TCurvePointsSet);
         function GetPatternSpecimen: TCurvePointsSet;
+        function MinimumStepAchieved: Boolean;
+        procedure InitializeVariationSteps;
 
     public
         constructor Create(AOwner: TComponent;
@@ -523,29 +524,22 @@ begin
 end;
 
 function TFitTask.GetStep: Double;
-var GP: TCurvePointsSet;
-    P: TSpecialCurveParameter;
+var Curve: TCurvePointsSet;
 begin
     if FEnableBackgroundVariation and BackgroundVaryingFlag then
     begin
+        //  TODO: move into separate "background" class.
         Result := 0.1;
     end
     else
     if CommonVaryingFlag then
     begin
-        P := TSpecialCurveParameter(
-            CommonSpecimenParams.Params.Items[CommonVaryingIndex]);
-        Result := P.VariationStep;
+        Result := CommonSpecimenParams[CommonVaryingIndex].VariationStep;
     end
     else
     begin
-        GP := TCurvePointsSet(CurvesList.Items[CurveNum]);
-        
-        if ParamNum = GP.AmplIndex then Result := AStep
-        else
-        if ParamNum = GP.PosIndex then Result := x0Step
-        else
-            Result := 0.1;
+        Curve := TCurvePointsSet(CurvesList.Items[CurveNum]);
+        Result := Curve.VariationSteps[ParamNum];
     end;
 end;
 
@@ -557,7 +551,7 @@ end;
 {$hints on}
 
 procedure TFitTask.SetNextParam;
-var GP: TCurvePointsSet;
+var Curve: TCurvePointsSet;
     Count: LongInt;
 begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
@@ -568,8 +562,8 @@ begin
     if CurvesList.Count <> 0 then
     begin
         //  perebor parametrov krivoy
-        GP := TCurvePointsSet(CurvesList.Items[CurveNum]);
-        if ParamNum < GP.ParamCount - 1 then
+        Curve := TCurvePointsSet(CurvesList.Items[CurveNum]);
+        if ParamNum < Curve.VariableCount - 1 then
         begin
             Inc(ParamNum);
             EOC := False;
@@ -594,9 +588,8 @@ begin
         if CommonVaryingIndex < Count then
         begin
             Inc(CommonVaryingIndex);
-            while ((CommonVaryingIndex <> Count) and
-                   (TSpecialCurveParameter(CommonSpecimenParams.Params.Items[
-                        CommonVaryingIndex]).VariationDisabled)) do
+            while (CommonVaryingIndex <> Count) and
+                   CommonSpecimenParams[CommonVaryingIndex].VariationDisabled do
                 Inc(CommonVaryingIndex);
         end;
     end;
@@ -637,8 +630,7 @@ begin
     //  poisk pervogo parametra razreschennogo k variatsii
     for i := 0 to CommonSpecimenParams.Params.Count - 1 do
     begin
-        if not TSpecialCurveParameter(CommonSpecimenParams.Params.Items[
-            i]).VariationDisabled then Break;
+        if not CommonSpecimenParams[i].VariationDisabled then Break;
     end;
     CommonVaryingIndex := i;
     CommonVaryingFlag := False;
@@ -649,7 +641,7 @@ end;
 
 function TFitTask.GetParam: Double;
 var GP: TCurvePointsSet;
-    P: TSpecialCurveParameter;
+    Parameter: TSpecialCurveParameter;
 begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
     Assert(Assigned(CurvesList));
@@ -670,23 +662,22 @@ begin
     if CommonVaryingFlag then
     begin
         Assert(CommonVaryingIndex < CommonSpecimenParams.Params.Count);
-        P := TSpecialCurveParameter(
-            CommonSpecimenParams.Params.Items[CommonVaryingIndex]);
-        Result := P.Value;
+        Parameter := CommonSpecimenParams[CommonVaryingIndex];
+        Result := Parameter.Value;
     end
     else
     begin
         Assert(CurvesList.Count <> 0);
 
         GP := TCurvePointsSet(CurvesList.Items[CurveNum]);
-        Result := GP.Param[ParamNum];
+        Result := GP.VariableValues[ParamNum];
     end;
 end;
 
 procedure TFitTask.SetParam(NewParamValue: Double);
 var GP: TCurvePointsSet;
     i: LongInt;
-    P: TSpecialCurveParameter;
+    Parameter: TSpecialCurveParameter;
 begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
     Assert(Assigned(CurvesList));
@@ -714,17 +705,16 @@ begin
     if CommonVaryingFlag then
     begin
         Assert(CommonVaryingIndex < CommonSpecimenParams.Params.Count);
-        P := TSpecialCurveParameter(
-            CommonSpecimenParams.Params.Items[CommonVaryingIndex]);
-        P.Value := NewParamValue;
-                
+        Parameter := CommonSpecimenParams[CommonVaryingIndex];
+        Parameter.Value := NewParamValue;
+
         //  ustanovka znacheniya obschego parametra u vseh ekzemplyarov
         for i := 0 to CurvesList.Count - 1 do
         begin
             GP := TCurvePointsSet(CurvesList.Items[i]);
-            GP.ParamByName[TSpecialCurveParameter(
-                CommonSpecimenParams.Params.Items[
-                    CommonVaryingIndex]).Name] := NewParamValue;
+            GP.ValuesByName[
+                CommonSpecimenParams[CommonVaryingIndex].Name
+            ] := NewParamValue;
         end;
         //CalculateProfile;
     end
@@ -739,7 +729,7 @@ begin
         GP := TCurvePointsSet(CurvesList.Items[CurveNum]);
         //  ??? v nekotoryh sluchayah rabotaet optimal'nee
         //SubbCurveFromProfile(GP);
-        GP.Param[ParamNum] := NewParamValue;
+        GP.VariableValues[ParamNum] := NewParamValue;
         //GP.ReCalc(nil);
         //AddCurveToProfile(GP);
     end;
@@ -751,19 +741,8 @@ begin
 end;
 
 procedure TFitTask.DivideStepsBy2;
-var i: LongInt;
 begin
-    Assert(Assigned(CommonSpecimenParams));
-    
-    AStep := AStep * {0.5} {0.6} 0.99;
-    x0Step := x0Step * {0.5} {0.6} 0.99;
-    for i := 0 to CommonSpecimenParams.Params.Count - 1 do
-    begin
-        TSpecialCurveParameter(
-            CommonSpecimenParams.Params.Items[i]).VariationStep :=
-            TSpecialCurveParameter(
-                CommonSpecimenParams.Params.Items[i]).VariationStep * 0.99;
-    end;
+    MultipleSteps(0.99);
 end;
 
 procedure TFitTask.MultipleSteps(Factor: Double);
@@ -771,14 +750,9 @@ var i: LongInt;
 begin
     Assert(Assigned(CommonSpecimenParams));
     
-    AStep := AStep * Factor;
-    x0Step := x0Step * Factor;
     for i := 0 to CommonSpecimenParams.Params.Count - 1 do
     begin
-        TSpecialCurveParameter(
-            CommonSpecimenParams.Params.Items[i]).VariationStep :=
-            TSpecialCurveParameter(
-                CommonSpecimenParams.Params.Items[i]).VariationStep * Factor;
+        CommonSpecimenParams[i].MultiplyVariationStep(Factor);
     end;
 end;
 
@@ -793,9 +767,9 @@ begin
     end
     else
     begin
-        if (AStep < 0.0001{0.01}{0.1}{1}) then
+        if MinimumStepAchieved then
         begin
-            //OutputDebugString(PChar('Minimal amplitude step achived...'));
+            //OutputDebugString(PChar('Minimumu step achived...'));
             Result := True;
         end;
     end;
@@ -813,9 +787,6 @@ begin
     FCurveTypeId := TGaussPointsSet.GetCurveTypeId_;
     AllDone := True;
     
-    AStep := 100{10};                   //  shag amplitudy dolzhen nastraivat'sya,
-                                        //  inache mozhet ne byt' shodimosti k min.
-    x0Step := 0.01;
     FEnableBackgroundVariation := AEnableBackgroundVariation;
     FEnableFastMinimizer := False;
 end;
@@ -941,8 +912,56 @@ begin
             CalcProfile.PointYCoord[j] - PS.PointYCoord[j];
 end;
 
+procedure TFitTask.InitializeVariationSteps;
+var
+    i, j: LongInt;
+    Curve: TCurvePointsSet;
+begin
+    for i := 0 to CommonSpecimenParams.Params.Count - 1 do
+    begin
+        CommonSpecimenParams[i].InitVariationStep;
+    end;
+
+    for i := 0 to CurvesList.Count - 1 do
+    begin
+        Curve := TCurvePointsSet(CurvesList.Items[i]);
+        for j := 0 to Curve.VariableCount - 1 do
+        begin
+            Curve.InitVariationStep(j);
+        end;
+    end;
+end;
+
+function TFitTask.MinimumStepAchieved: Boolean;
+var
+    i, j: LongInt;
+    Curve: TCurvePointsSet;
+begin
+    for i := 0 to CommonSpecimenParams.Params.Count - 1 do
+    begin
+        if not CommonSpecimenParams[i].MinimumStepAchieved then
+        begin
+            Result := False;
+            Exit;
+        end;
+    end;
+
+    for i := 0 to CurvesList.Count - 1 do
+    begin
+        Curve := TCurvePointsSet(CurvesList.Items[i]);
+        for j := 0 to Curve.VariableCount - 1 do
+        begin
+            if not Curve.MinimumStepAchieved(j) then
+            begin
+                Result := False;
+                Exit;
+            end;
+        end;
+    end;
+    Result := True;
+end;
+
 procedure TFitTask.CreateFastMinimizer;
-var i: longint;
 begin
     FMinimizer.Free; FMinimizer := nil;
     FMinimizer := TSimpleMinimizer3.Create(nil);
@@ -960,14 +979,7 @@ begin
     TSimpleMinimizer3(FMinimizer).EndOfCalculation := EndOfCalculation;
     TSimpleMinimizer3(FMinimizer).MultipleSteps := MultipleSteps;
 
-    //  Initial step values.
-    AStep := 100;
-    x0Step := 0.01;
-    for i := 0 to CommonSpecimenParams.Params.Count - 1 do
-    begin
-        TSpecialCurveParameter(
-            CommonSpecimenParams.Params.Items[i]).VariationStep := 0.1;
-    end;
+    InitializeVariationSteps;
 
     EOC := False;
     ParamNum := 0;
@@ -993,6 +1005,8 @@ begin
     FMinimizer.OnSetParam := SetParam;
     FMinimizer.OnEndOfCycle := EndOfCycle;
     FMinimizer.OnShowCurMin := ShowCurMin;
+
+    InitializeVariationSteps;
 
     EOC := False;
     ParamNum := 0;
@@ -1255,15 +1269,16 @@ end;
 *)
 procedure TFitTask.CalcInitHash(Specimen: TCurvePointsSet);
 var i: LongInt;
-    P: TSpecialCurveParameter;
+    Parameter: TPersistentCurveParameterContainer;
     Value: string;
 begin
     Assert(Assigned(Specimen));
     Specimen.InitHash := 0;
-    for i := 0 to Specimen.Params.Params.Count - 1 do
+    for i := 0 to Specimen.Parameters.Params.Count - 1 do
     begin
-        P := TSpecialCurveParameter(Specimen.Params.Params.Items[i]);
-        Value := P.Value_;
+        Parameter := TPersistentCurveParameterContainer(
+            Specimen.Parameters.Params.Items[i]);
+        Value := Parameter.Value_;
         Specimen.InitHash := Specimen.InitHash + JSHash(Value);
     end;
 end;
@@ -1271,8 +1286,8 @@ end;
 procedure TFitTask.SearchSpecimenAndInit(
     SpecimenParameters: TMSCRSpecimenList; Specimen: TCurvePointsSet);
 var i, j, k: LongInt;
-    NC: Curve_parameters;
-    P, P2: TSpecialCurveParameter;
+    CurveParameters: Curve_parameters;
+    Parameter, Parameter2: TSpecialCurveParameter;
 begin
     //Assert(Assigned(SpecimenParameters));
     //  ravenstvo nil ne protivorechit rasschirennoy semantike metoda; krome
@@ -1283,22 +1298,22 @@ begin
     
     for i := 0 to SpecimenParameters.Count - 1 do
     begin
-        NC := Curve_parameters(SpecimenParameters.Items[i]);
+        CurveParameters := Curve_parameters(SpecimenParameters.Items[i]);
         
-        if NC.SavedInitHash = Specimen.InitHash then
+        if CurveParameters.SavedInitHash = Specimen.InitHash then
         begin
-            //Specimen.SetParameters(Curve_parameters(NC.GetCopy));
+            //Specimen.SetParameters(Curve_parameters(CurveParameters.GetCopy));
             //  v naborah parametrov, hranyaschihsya v spiske SpecimenParameters
             //  mogut byt' vychislyaemye, kotorye ne nuzhno kopirovat'
-            for j := 0 to Specimen.Params.Params.Count - 1 do
+            for j := 0 to Specimen.Parameters.Params.Count - 1 do
             begin
-                P := TSpecialCurveParameter(Specimen.Params.Params.Items[j]);
-                for k := 0 to NC.Params.Count - 1 do
+                Parameter := Specimen.Parameters[j];
+                for k := 0 to CurveParameters.Params.Count - 1 do
                 begin
-                    P2 := TSpecialCurveParameter(NC.Params.Items[k]);
-                    if P.Name = P2.Name then
+                    Parameter2 := CurveParameters[k];
+                    if Parameter.Name = Parameter2.Name then
                     begin
-                        P.Value := P2.Value;
+                        Parameter.Value := Parameter2.Value;
                         Break;
                     end;
                 end;
@@ -1310,7 +1325,8 @@ end;
 
 function TFitTask.GetPatternSpecimen: TCurvePointsSet;
 var i: LongInt;
-    P: TSpecialCurveParameter;
+    Parameter: TSpecialCurveParameter;
+    Container: TPersistentCurveParameterContainer;
 begin
     if IsEqualGUID(FCurveTypeId, TLorentzPointsSet.GetCurveTypeId_) then
     begin
@@ -1350,42 +1366,53 @@ begin
     if CommonSpecimenParams.Params.Count = 0 then
     begin
         //  pervonachal'naya initsyalizatsyya spiska obschih parametrov;
-        for i := 0 to Result.Params.Params.Count - 1 do
+        for i := 0 to Result.Parameters.Params.Count - 1 do
         begin
-            if (TSpecialCurveParameter(
-                Result.Params.Params.Items[i]).Type_ = Shared) and
-               (not TSpecialCurveParameter(
-                Result.Params.Params.Items[i]).VariationDisabled) then
+            if (Result.Parameters[i].Type_ = Shared) and (not
+                Result.Parameters[i].VariationDisabled) then
             begin
                 //  !!! predpolagaetsya, chto vse krivye odnogo tipa !!!
-                P := TSpecialCurveParameter(CommonSpecimenParams.Params.Add);
-                TSpecialCurveParameter(
-                    Result.Params.Params.Items[i]).CopyTo(P);
-                //  spetsial'naya initsializatsiya
-                if ((UpperCase(P.Name) = 'SIGMA') or
-                   ((UpperCase(P.Name) = 'SIGMARIGTH')))
-                    then
-                begin
-                    P.Value := 0.25;
-                    P.VariationStep := 0.1;
+                Parameter := TSpecialCurveParameter.Create;
+
+                try
+                    Result.Parameters[i].CopyTo(Parameter);
+                    //  spetsial'naya initsializatsiya
+                    if ((UpperCase(Parameter.Name) = 'SIGMA') or
+                       ((UpperCase(Parameter.Name) = 'SIGMARIGTH')))
+                        then
+                    begin
+                        Parameter.Value := 0.25;
+                        Parameter.VariationStep := 0.1;
+                    end;
+
+                    Container := TPersistentCurveParameterContainer(
+                        CommonSpecimenParams.Params.Add);
+
+                    try
+                        Container.Parameter := Parameter;
+                    except
+                        CommonSpecimenParams.Params.Delete(Container.ID);
+                        Container.Free;
+                        raise;
+                    end;
+
+                except
+                    Parameter.Free;
+                    raise;
                 end;
             end;
         end;
     end;
     
-    for i := 0 to Result.Params.Params.Count - 1 do
+    for i := 0 to Result.Parameters.Params.Count - 1 do
     begin
         //  initsializatsiya znacheniy
-        if ((UpperCase(TSpecialCurveParameter(
-            Result.Params.Params.Items[i]).Name) = 'SIGMA') or
-           ((UpperCase(TSpecialCurveParameter(
-            Result.Params.Params.Items[i]).Name) = 'SIGMARIGTH')))
+        if ((UpperCase(Result.Parameters[i].Name) = 'SIGMA') or
+           ((UpperCase(Result.Parameters[i].Name) = 'SIGMARIGTH')))
             then
         begin
-            TSpecialCurveParameter(
-                Result.Params.Params.Items[i]).Value := 0.25;
-            TSpecialCurveParameter(
-                Result.Params.Params.Items[i]).VariationStep := 0.1;
+            Result.Parameters[i].Value := 0.25;
+            Result.Parameters[i].VariationStep := 0.1;
         end;
     end;
 end;

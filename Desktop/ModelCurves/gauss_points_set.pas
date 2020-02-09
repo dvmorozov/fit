@@ -20,7 +20,8 @@ unit gauss_points_set;
 interface
 
 uses Classes, SysUtils, int_points_set, points_set, curve_points_set, named_points_set,
-  curve_types_singleton, SimpMath;
+    curve_types_singleton, special_curve_parameter, amplitude_curve_parameter,
+    sigma_curve_parameter, position_curve_parameter, SimpMath;
 
 type
     { Curve having Gauss form. }
@@ -49,22 +50,23 @@ implementation
 {=========================== TGaussPointsSet ==================================}
 
 constructor TGaussPointsSet.Create(AOwner: TComponent);
-var P: TSpecialCurveParameter;
+var
+    Parameter: TSpecialCurveParameter;
+    Count: LongInt;
 begin
     inherited;
-    P := TSpecialCurveParameter(FParams.Params.Add);
-    P.Name := 'A'; P.Value := 0; P.Type_ := Variable;
+    Parameter := TAmplitudeCurveParameter.Create;
+    AddParameter(Parameter);
 
-    P := TSpecialCurveParameter(FParams.Params.Add);
-    P.Name := 'x0'; P.Value := 0;
-    P.Type_ := VariablePosition;
+    Parameter := TPositionCurveParameter.Create(Self);
+    AddParameter(Parameter);
 
-    P := TSpecialCurveParameter(FParams.Params.Add);
-    P.Name := 'sigma'; P.Value := 0.25;
-    P.Type_ := Variable;       //  ne var'iruetsya otdel'no,
-                               //  prinimaet odno znachenie dlya vseh
-                               //  krivyh podzadachi (intervala)
-    InitLinks;
+    Parameter := TSigmaCurveParameter.Create;
+    AddParameter(Parameter);
+
+    InitListOfVariableParameters;
+    Count := FVariableParameters.Count;
+    Assert(Count = 3);
 end;
 
 function TGaussPointsSet.GetCurveTypeName: string;

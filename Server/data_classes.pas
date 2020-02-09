@@ -11,11 +11,17 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit data_classes;
 
+{$IF NOT DEFINED(FPC)}
+{$DEFINE _WINDOWS}
+{$ELSEIF DEFINED(WINDOWS)}
+{$DEFINE _WINDOWS}
+{$ENDIF}
+
 interface
 
 uses
     Classes, Grids, SysUtils, NumericGrid, table_components,
-    curve_points_set;
+    special_curve_parameter, persistent_curve_parameters;
 
 type
     { Set of pattern instances forming the calculated profile in sum. }
@@ -51,8 +57,8 @@ type
 implementation
 
 procedure TSpecimenList.SetCaption;
-var CP: Curve_parameters;
-    P: TSpecialCurveParameter;
+var CurveParameters: Curve_parameters;
+    Parameter: TSpecialCurveParameter;
     i, Index: LongInt;
 begin
     Assert(Assigned(Grid));
@@ -63,15 +69,15 @@ begin
         Index := 0;
         //  If the set of curver parameters is empty
         //  then it's impossible to set up headers.
-        CP := Curve_parameters(Items[0]);
+        CurveParameters := Curve_parameters(Items[0]);
         //  !!! dolzhny obrabatyvat'sya vse parametry, krome argumenta !!!
-        Assert(Grid.ColCount - Grid.FixedCols = CP.Params.Count - 1);
-        for i := 0 to CP.Params.Count - 1 do
+        Assert(Grid.ColCount - Grid.FixedCols = CurveParameters.Params.Count - 1);
+        for i := 0 to CurveParameters.Params.Count - 1 do
         begin
-            P := TSpecialCurveParameter(CP.Params.Items[i]);
-            if P.Type_ <> Argument then
+            Parameter := CurveParameters[i];
+            if Parameter.Type_ <> Argument then
             begin
-                Grid.Cells[Grid.FixedCols + Index, 0] := P.Name;
+                Grid.Cells[Grid.FixedCols + Index, 0] := Parameter.Name;
                 Inc(Index);
             end;
         end;
@@ -79,25 +85,25 @@ begin
 end;
 
 procedure TSpecimenList.SetColOptions(Grid: TStringGrid);
-var CP: Curve_parameters;
-    P: TSpecialCurveParameter;
+var CurveParameters: Curve_parameters;
+    Parameters: TSpecialCurveParameter;
     i, Index: LongInt;
 begin
     Assert(Assigned(Grid));
-    
+
     if Grid is TNumericGrid then
         with TNumericGrid(Grid) do
         begin
             if Count <> 0 then
             begin
-                CP := Curve_parameters(Items[0]);
+                CurveParameters := Curve_parameters(Items[0]);
                 //  All parameters must be processed except the argument.
-                Assert(Grid.ColCount - Grid.FixedCols = CP.Params.Count - 1);
+                Assert(Grid.ColCount - Grid.FixedCols = CurveParameters.Params.Count - 1);
                 Index := 0;
-                for i := 0 to CP.Params.Count - 1 do
+                for i := 0 to CurveParameters.Params.Count - 1 do
                 begin
-                    P := TSpecialCurveParameter(CP.Params.Items[i]);
-                    case P.Type_ of
+                    Parameters := CurveParameters[i];
+                    case Parameters.Type_ of
                         Argument: begin end;
                         Calculated: begin
                             ColOptions[Grid.FixedCols + Index] := coDisabled;
@@ -115,8 +121,8 @@ begin
 end;
 
 procedure TSpecimenList.SetRowContents(Grid: TStringGrid; RowNum: LongInt);
-var CP: Curve_parameters;
-    P: TSpecialCurveParameter;
+var CurveParameters: Curve_parameters;
+    Parameter: TSpecialCurveParameter;
     i, Index: LongInt;
 begin
     Assert(Assigned(Grid));
@@ -126,17 +132,17 @@ begin
         begin
             Cells[0, RowNum] := IntToStr(RowNum);
             
-            CP := Curve_parameters(Items[RowNum - FixedRows]);
+            CurveParameters := Curve_parameters(Items[RowNum - FixedRows]);
             //  All parameters must be processed except the argument.
-            Assert(Grid.ColCount - Grid.FixedCols = CP.Params.Count - 1);
+            Assert(Grid.ColCount - Grid.FixedCols = CurveParameters.Params.Count - 1);
             Index := 0;
-            for i := 0 to CP.Params.Count - 1 do
+            for i := 0 to CurveParameters.Params.Count - 1 do
             begin
-                P := TSpecialCurveParameter(CP.Params.Items[i]);
-                if P.Type_ <> Argument then
+                Parameter := CurveParameters[i];
+                if Parameter.Type_ <> Argument then
                 begin
                     Cells[FixedCols + Index, RowNum] :=
-                        FloatToStrF(RecalcParamValue(P), ffFixed, 8, 4);
+                        FloatToStrF(RecalcParamValue(Parameter), ffFixed, 8, 4);
                     Inc(Index);
                 end;
             end;
@@ -150,8 +156,8 @@ begin
 end;
 
 function TSpecimenList.GetRowContents;
-var CP: Curve_parameters;
-    P: TSpecialCurveParameter;
+var CurveParameters: Curve_parameters;
+    Parameter: TSpecialCurveParameter;
     i, Index: LongInt;
 begin
     Result := True;
@@ -159,17 +165,17 @@ begin
     begin
         Assert((RowNum - FixedRows >= 0) and (RowNum - FixedRows < Count));
         
-        CP := Curve_parameters(Items[RowNum - FixedRows]);
+        CurveParameters := Curve_parameters(Items[RowNum - FixedRows]);
         //  All parameters must be processed except the argument.
-        Assert(Grid.ColCount - Grid.FixedCols = CP.Params.Count - 1);
+        Assert(Grid.ColCount - Grid.FixedCols = CurveParameters.Params.Count - 1);
         Index := 0;
-        for i := 0 to CP.Params.Count - 1 do
+        for i := 0 to CurveParameters.Count - 1 do
         begin
-            P := TSpecialCurveParameter(CP.Params.Items[i]);
-            if P.Type_ <> Argument then
+            Parameter := CurveParameters[i];
+            if Parameter.Type_ <> Argument then
             begin
                 try
-                    ReverseCalcParamValue(P,
+                    ReverseCalcParamValue(Parameter,
                         StrToFloat(Cells[FixedCols + Index, RowNum]));
                 except
                     //  Non-fatal error in string conversion.
@@ -200,19 +206,19 @@ begin
 end;
 
 function TSpecimenList.GetInfoCols: LongInt;
-var CP: Curve_parameters;
-    P: TSpecialCurveParameter;
+var CurveParameters: Curve_parameters;
+    Parameter: TSpecialCurveParameter;
     i: LongInt;
 begin
     if Count <> 0 then
     begin
         Result := 0;
         
-        CP := Curve_parameters(Items[0]);
-        for i := 0 to CP.Params.Count - 1 do
+        CurveParameters := Curve_parameters(Items[0]);
+        for i := 0 to CurveParameters.Params.Count - 1 do
         begin
-            P := TSpecialCurveParameter(CP.Params.Items[i]);
-            if P.Type_ <> Argument then Inc(Result);
+            Parameter := CurveParameters[i];
+            if Parameter.Type_ <> Argument then Inc(Result);
         end;
     end
     else Result := GetFixedCols + 1;
@@ -247,12 +253,12 @@ begin
             CurveParameters := Curve_parameters(Items[ARow - GetFixedRows]);
             with CurveParameters do
                 case ACol - GetFixedCols of
-                    0 : Result := FloatToStrF(GetParamValueByName('Intensity'), ffGeneral, 8, 4);
-                    1 : Result := FloatToStrF(GetParamValueByName('StartPos'), ffGeneral, 6, 4);
-                    2 : Result := FloatToStrF(GetParamValueByName('PeakPos'), ffGeneral, 6, 4);
-                    3 : Result := FloatToStrF(GetParamValueByName('FinishPos'), ffGeneral, 6, 4);
-                    4 : Result := FloatToStrF(GetParamValueByName('IntCorrFactor'), ffGeneral, 6, 4);
-                    5 : Result := FloatToStrF(GetParamValueByName('Sigma'), ffGeneral, 6, 4);
+                    0 : Result := FloatToStrF(ValuesByName['Intensity'], ffGeneral, 8, 4);
+                    1 : Result := FloatToStrF(ValuesByName['StartPos'], ffGeneral, 6, 4);
+                    2 : Result := FloatToStrF(ValuesByName['PeakPos'], ffGeneral, 6, 4);
+                    3 : Result := FloatToStrF(ValuesByName['FinishPos'], ffGeneral, 6, 4);
+                    4 : Result := FloatToStrF(ValuesByName['IntCorrFactor'], ffGeneral, 6, 4);
+                    5 : Result := FloatToStrF(ValuesByName['Sigma'], ffGeneral, 6, 4);
                 end;
         end else
             { If the list is empty then the method must return empty string
@@ -291,12 +297,12 @@ begin
             CurveParameters := Curve_parameters(Items[ARow - GetFixedRows]);
             with CurveParameters do
             case ACol - GetFixedCols of
-                0 : SetParamValueByName('Intensity', 0);
-                1 : SetParamValueByName('StartPos', 0);
-                2 : SetParamValueByName('PeakPos', 0);
-                3 : SetParamValueByName('FinishPos', 0);
-                4 : SetParamValueByName('IntCorrFactor', 1);
-                5 : SetParamValueByName('Sigma', 1);
+                0 : ValuesByName['Intensity'] := 0;
+                1 : ValuesByName['StartPos'] := 0;
+                2 : ValuesByName['PeakPos'] := 0;
+                3 : ValuesByName['FinishPos'] := 0;
+                4 : ValuesByName['IntCorrFactor'] := 1;
+                5 : ValuesByName['Sigma'] := 1;
             end;
         end;
 end;
@@ -313,12 +319,12 @@ begin
         CurveParameters := Curve_parameters(Items[ARow - GetFixedRows]);
         with CurveParameters do
         case ACol - GetFixedCols of
-            0 : SetParamValueByName('Intensity', StrToFloat(AString));
-            1 : SetParamValueByName('StartPos', StrToFloat(AString));
-            2 : SetParamValueByName('PeakPos', StrToFloat(AString));
-            3 : SetParamValueByName('FinishPos', StrToFloat(AString));
-            4 : SetParamValueByName('IntCorrFactor', StrToFloat(AString));
-            5 : SetParamValueByName('Sigma', StrToFloat(AString));
+            0 : ValuesByName['Intensity'] := StrToFloat(AString);
+            1 : ValuesByName['StartPos'] := StrToFloat(AString);
+            2 : ValuesByName['PeakPos'] := StrToFloat(AString);
+            3 : ValuesByName['FinishPos'] := StrToFloat(AString);
+            4 : ValuesByName['IntCorrFactor'] := StrToFloat(AString);
+            5 : ValuesByName['Sigma'] := StrToFloat(AString);
         end;
     end;
 end;

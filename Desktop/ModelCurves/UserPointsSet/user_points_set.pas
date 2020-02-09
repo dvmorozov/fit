@@ -19,10 +19,11 @@ unit user_points_set;
 
 interface
 
-uses SysUtils, curve_points_set, named_points_set,
-    curve_types_singleton, int_points_set, configurable_points_set
+uses SysUtils, curve_points_set, named_points_set, curve_types_singleton,
+    int_points_set, configurable_points_set
 {$IFDEF _WINDOWS}
-    , Windows, points_set
+    , points_set, special_curve_parameter
+    , Windows
 {$ENDIF}
     ;
 
@@ -90,18 +91,17 @@ var P: TSpecialCurveParameter;
     Prs: string;
     i: LongInt;
 begin
-    Assert(Assigned(Params));
-    Assert(Assigned(Params.Params));
-    Assert(Assigned(Links));
+    Assert(Assigned(Parameters));
+    Assert(Assigned(FVariableParameters));
     Assert(Assigned(ArgP));
     { Sets up value of argument. }
     P := ArgP;
     P.Value := ArgValue;
-    { Creates string of parameters. }
+    { Creates string of VariableParameters. }
     Prs := '';
-    for i := 0 to Params.Params.Count - 1 do
+    for i := 0 to Parameters.Count - 1 do
     begin
-        P := TSpecialCurveParameter(Params.Params.Items[i]);
+        P := Parameters[i];
         Prs := Prs + P.Name + '=' + FloatToStr(P.Value) + Chr(0);
     end;
     Result := 0;

@@ -110,7 +110,7 @@ var CurveType: TCurveType;
 begin
     CurveType := TCurveType.Create;
     CurveType.CurveClass := CurveClass;
-    //  Instantiates curve object to call its methods.
+    { Instantiates curve object to call its methods. }
     Curve := CurveClass.Create(nil);
     try
         CurveType.CurveTypeName := Curve.GetCurveTypeName;
@@ -120,6 +120,14 @@ begin
     end;
     FCurveTypes.Add(CurveType);
     FCurveTypes.Sort(@SortAlphabetically);
+    { The first type is selected by default.
+      https://github.com/dvmorozov/fit/issues/126 }
+    if FCurveTypes.Count <> 0 then
+    begin
+        FSelectedCurveType := FCurveTypes.Items[0];
+    end
+    else
+        FSelectedCurveType := nil;
 end;
 
 procedure TCurveTypesSingleton.FirstCurveType;
@@ -210,8 +218,8 @@ begin
     if FSelectedCurveType <> nil then
         Result := FSelectedCurveType.CurveTypeId
     else
-        //  In this case returned GUID should be different from GUID
-        //  of any registered type.
+        { In this case returned GUID should be different from GUID
+          of any registered type. }
         Result := StringToGUID('{00000000-0000-0000-0000-000000000000}');
 end;
 

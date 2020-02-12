@@ -111,6 +111,8 @@ begin
 end;
 
 procedure TFitServerWithThread.StopAsyncOper;
+var
+    i: LongInt;
 begin
     if State <> AsyncOperation then
         raise EUserException.Create(InadmissibleServerState + CRLF +
@@ -118,7 +120,12 @@ begin
 
     Assert(Assigned(TaskList));
     Assert(Assigned(main_calc_thread));
-    
+
+    for i := 0 to TaskList.Count - 1 do
+    begin
+        TFitTask(TaskList.Items[i]).Terminate;
+    end;
+
     main_calc_thread.Terminate;
     //  ozhidaniya zdes' nikakogo byt' ne dolzhno,
     //  poskol'ku metod vypolnyaetsya sinhronno i

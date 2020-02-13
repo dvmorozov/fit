@@ -42,11 +42,13 @@ type
         constructor Create(AOwner: TComponent;
             AEnableBackgroundVariation: Boolean); override;
         destructor Destroy; override;
-        { Synchronous termination of long-term operation without call of termination procedure. }
+        { Sets up termination flags and waits for
+          actual termination of the thread. }
         procedure AbortAsyncOper;
-        { Asynchronous termination of long-term operation with call of termination procedure. }
-        procedure StopAsyncOper;
-        //  ozhidaet zaversheniya vypolneniya potoka
+        { Sets up termination flags and returns. The method doesn't wait for
+          actual termination of the thread. }
+        procedure StopAsyncOper; override;
+        { Waits for thread termination. }
         procedure DestroyMainCalcThread;
 
         { Asynchronous long-term operations. }
@@ -149,8 +151,7 @@ end;
 
 procedure TFitTaskWithThread.StopAsyncOper;
 begin
-    //  proverka neozhidannyh situatsiy;
-    //  ne protivorechit semantike metoda - nefatal'n. oshibka
+    inherited;
     try
         Assert(Assigned(MainCalcThread));
     except
@@ -158,12 +159,7 @@ begin
         else raise;
     end;
 
-    FTerminated := True;
-    if Assigned(FMinimizer) then FMinimizer.Terminated := True;
     if Assigned(MainCalcThread) then MainCalcThread.Terminate;
-    //  ozhidaniya zdes' nikakogo byt' ne dolzhno,
-    //  poskol'ku metod vypolnyaetsya v osn. potoke
-    //  dolzhen bystro vernut' upravlenie
 end;
 
 procedure TFitTaskWithThread.DoneProc;

@@ -123,7 +123,7 @@ begin
 
     for i := 0 to TaskList.Count - 1 do
     begin
-        TFitTask(TaskList.Items[i]).Terminate;
+        TFitTask(TaskList.Items[i]).StopAsyncOper;
     end;
 
     main_calc_thread.Terminate;

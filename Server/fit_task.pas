@@ -223,10 +223,11 @@ type
         { Fits pattern specimens starting from given parameter set (initially or repeatedly). }
         procedure FindGausses; virtual;
         procedure FindGaussesAgain; virtual;
-        { Searches set of pattern specimens (curves) fitting exprerimental data with given accuracy
-          sequentially decreasing number of curves. }
+        { Searches set of pattern specimens (curves) fitting exprerimental data
+          with given accuracy sequentially decreasing number of curves. }
         procedure FindGaussesSequentially; virtual;
-        procedure Terminate;
+        { Sets up termination flags and returns. }
+        procedure StopAsyncOper; virtual;
 
         property MaxRFactor: Double write FMaxRFactor;
         property CurveTypeId: TCurveTypeId write FCurveTypeId;
@@ -1922,9 +1923,10 @@ begin
     Params.Free; Params := AParams;
 end;
 
-procedure TFitTask.Terminate;
+procedure TFitTask.StopAsyncOper;
 begin
     FTerminated := True;
+    if Assigned(FMinimizer) then FMinimizer.Terminated := True;
 end;
 
 end.

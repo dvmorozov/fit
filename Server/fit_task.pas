@@ -63,7 +63,7 @@ type
         CommonSpecimenParams: Curve_parameters;
         { Background parameters. }
         A, B, C, x0: Double;
-        
+
         //  ======================= dannye dlya optimizatora ====================
         FMinimizer: TMinimizer;
 
@@ -73,7 +73,7 @@ type
         ParamNum: LongInt;
         EOC: Boolean;
         { Flag signalling to terminate all internal loops. }
-        Terminated: Boolean;
+        FTerminated: Boolean;
         { Index of common parameter which is variated at the moment. }
         CommonVaryingIndex: LongInt;
         { Index of background point amplitude of which is variated at the moment. }
@@ -131,9 +131,9 @@ type
         CurSqrMin: Double;
         CurAbsMin: Double;
         CurMinInitialized: Boolean;
-        { Flag indicating that asynchronous operation executed as subtask was terminated. 
+        { Flag indicating that asynchronous operation executed as subtask was Terminated.
           For this class is always True for now because the class does not support asynchronous operations. }
-        AllDone: Boolean;
+        FAllDone: Boolean;
 
         procedure ShowCurMin; virtual;
         procedure DoneProc; virtual;
@@ -223,9 +223,11 @@ type
         { Fits pattern specimens starting from given parameter set (initially or repeatedly). }
         procedure FindGausses; virtual;
         procedure FindGaussesAgain; virtual;
-        { Searches set of pattern specimens (curves) fitting exprerimental data with given accuracy
-          sequentially decreasing number of curves. }
+        { Searches set of pattern specimens (curves) fitting exprerimental data
+          with given accuracy sequentially decreasing number of curves. }
         procedure FindGaussesSequentially; virtual;
+        { Sets up termination flags and returns. }
+        procedure StopAsyncOper; virtual;
 
         property MaxRFactor: Double write FMaxRFactor;
         property CurveTypeId: TCurveTypeId write FCurveTypeId;
@@ -785,7 +787,7 @@ begin
     FMaxRFactor := 0.01;
     //  Sets default curve type
     FCurveTypeId := TGaussPointsSet.GetCurveTypeId_;
-    AllDone := True;
+    FAllDone := False;
     
     FEnableBackgroundVariation := AEnableBackgroundVariation;
     FEnableFastMinimizer := False;
@@ -1646,7 +1648,7 @@ begin
     //  udalyaem iz spiska vydelennyh tochek te tochki, dlya
     //  kotoryh gaussiany imeyut nulevuyu amplitudu i te
     //  tochki, v kotoryh proizvodnaya eksp. profilya maksimal'na
-    while (GetRFactor < FMaxRFactor) and (not Terminated) do
+    while (GetRFactor < FMaxRFactor) and (not FTerminated) do
     begin
         //  predyduschiy tsikl optimizatsii umen'shil fakt. rash.;
         //  sohranim parametry zdes'
@@ -1692,7 +1694,7 @@ begin
     //  udalyaem iz spiska vydelennyh tochek te tochki,
     //  dlya kotoryh gaussiany imeyut nulevuyu amplitudu i
     //  te tochki, v kotoryh amplituda gaussianov minimal'na
-    while (GetRFactor < FMaxRFactor) and (not Terminated) do
+    while (GetRFactor < FMaxRFactor) and (not FTerminated) do
     begin
         StoreCurveParams;
         ZerosDeleted := DeleteZeros;
@@ -1880,7 +1882,7 @@ end;
 
 function TFitTask.GetAllDone: Boolean;
 begin
-    Result := AllDone;
+    Result := FAllDone;
 end;
 
 procedure TFitTask.ShowCurMin;
@@ -1900,7 +1902,7 @@ end;
 
 procedure TFitTask.DoneProc;
 begin
-    AllDone := True;
+    FAllDone := True;
     DoneProcExternal;
 end;
 
@@ -1919,6 +1921,12 @@ begin
     
     FCurveExpr := ACurveExpr;
     Params.Free; Params := AParams;
+end;
+
+procedure TFitTask.StopAsyncOper;
+begin
+    FTerminated := True;
+    if Assigned(FMinimizer) then FMinimizer.Terminated := True;
 end;
 
 end.

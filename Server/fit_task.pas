@@ -35,7 +35,7 @@ type
     protected
         FBegIndex: LongInt;
         FEndIndex: LongInt;
-
+        FCurveScalingEnabled: Boolean;
         FMaxRFactor: Double;
         FCurveTypeId: TCurveTypeId;
         { Expression defining user curve type. }
@@ -228,6 +228,8 @@ type
         procedure FindGaussesSequentially; virtual;
         { Sets up termination flags and returns. }
         procedure StopAsyncOper; virtual;
+        { Returns the factor scaling calculated points up to scale of experimental data. }
+        function GetScalingFactor: Double;
 
         property MaxRFactor: Double write FMaxRFactor;
         property CurveTypeId: TCurveTypeId write FCurveTypeId;
@@ -238,8 +240,6 @@ type
           for optimal rebuilding overall resulting profile. }
         property BegIndex: LongInt read FBegIndex write FBegIndex;
         property EndIndex: LongInt read FEndIndex write FEndIndex;
-        property ProfileIntegral: Double read GetProfileIntegral;
-        property CalcProfileIntegral: Double read GetCalcProfileIntegral;
     end;
 
     { The wrapper for future OpenCL implementation. }
@@ -295,7 +295,8 @@ var CPS: TCurvePointsSet;
     RFactor: Double;
     Flag: Boolean;
     RangeDefined: Boolean;
-    CPI, PI: Double;
+    ScalingFactor: Double;
+    CalcProfileIntegral: Double;
 begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
     Assert(Assigned(CalcProfile));
@@ -319,11 +320,10 @@ begin
     end;
 
     RFactor := 0;
-    //  vychislyaem normu
-    CPI := CalcProfileIntegral; PI := ProfileIntegral;
-    if CPI = 0 then begin Result := 1; Exit; end;
-    //  spetsial'nyy sluchay, kogda profil' = 0
-    if PI = 0 then begin Result := CPI; Exit; end;
+    ScalingFactor := GetScalingFactor;
+    CalcProfileIntegral := GetCalcProfileIntegral;
+    if CalcProfileIntegral = 0 then
+        CalcProfileIntegral := 1;
 
     //  profil' rasschityvaetsya prostoy summoy po vsem rasschitannym krivym,
     //  inache nel'zya poluchit' korrektnyy R-faktor dlya krivyh s ogranicheniyami;
@@ -353,98 +353,14 @@ begin
         if Flag then            //  tochka vklyuchena v raschet R-faktora
         begin
             RFactor := RFactor +
-                Abs(CalcProfile.PointYCoord[i] * PI / CPI -
+                Abs(CalcProfile.PointYCoord[i] * ScalingFactor -
                     ExpProfile.PointYCoord[i]);
         end;
     end;
-    RFactor := RFactor / PI;
+    RFactor := RFactor / CalcProfileIntegral;
     Result := RFactor;
 end;
-(*
-function TFitTask.GetOptimizingRFactor: Double;
-var SA: TPointsSet;
-    CPS: TCurvePointsSet;
-    i, j: LongInt;
-    RFactor: Double;
-    Flag: Boolean;
-    RangeDefined: Boolean;
-    CPI, PI: Double;
-begin
-    //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
-    Assert(Assigned(CalcProfile));
-    SA := ExpProfile;
-    Assert(Assigned(SA));
 
-    Assert(Assigned(CurvesList));
-    //  esli ni u odnoy krivoy diapazon ne zadan,
-    //  to R-faktor schitaetsya po vsemu profilyu
-    RangeDefined := False;
-    if UseCurveRanges then
-    begin
-        for j := 0 to CurvesList.Count - 1 do
-        begin
-            CPS := TCurvePointsSet(CurvesList.Items[j]);
-            if CPS.RangeDefined then
-            begin
-                RangeDefined := True;
-                Break;
-            end;
-        end;
-    end;
-
-    RFactor := 0;
-    //  normirovka uluchshaet shodimost' DownhillSimplex'a
-    //  vychislyaem normu
-    CPI := CalcProfileIntegral; PI := ProfileIntegral;
-
-    //  profil' rasschityvaetsya prostoy summoy po vsem rasschitannym krivym,
-    //  inache nel'zya poluchit' korrektnyy R-faktor dlya krivyh s ogranicheniyami;
-    //  pri vychislenii R-faktora kazhdaya tochka proveryaetsya na prinalezhnost'
-    //  k diapazonu kakoy-libo iz krivyh, t.o. v konechnoe znachenie R-faktora
-    //  vkladyvayut tol'ko tochki iz ob'edineniya diapazonov vseh krivyh
-    for i := 0 to CalcProfile.PointsCount - 1 do
-    begin
-        //  proveryaetsya prinadlezhnost' tochki diapazonu krivoy
-        if RangeDefined then
-        begin
-            Flag := False;      //  tochka ne prinadlezhit nikakomu diapazonu
-            for j := 0 to CurvesList.Count - 1 do
-            begin
-                CPS := TCurvePointsSet(CurvesList.Items[j]);
-                if CPS.RangeDefined and
-                   (CalcProfile.PointXCoord[i] >= CPS.MinX) and
-                   (CalcProfile.PointXCoord[i] <= CPS.MaxX) then
-                begin
-                    Flag := True;
-                    Break;
-                end;
-            end;
-        end
-        else Flag := True;      //  schitaem po vsem tochkam
-
-        if Flag then            //  tochka vklyuchena v raschet R-faktora
-        begin
-            if CPI <> 0 then
-            begin
-                if PI <> 0 then
-                    RFactor := RFactor +
-                        Sqr(CalcProfile.PointYCoord[i] / CPI -
-                            SA.PointYCoord[i] / PI)
-                else
-                    RFactor := RFactor +
-                        Sqr(CalcProfile.PointYCoord[i] / CPI);
-            end
-            else
-            begin
-                if PI <> 0 then
-                    RFactor := RFactor +
-                        Sqr(SA.PointYCoord[i] / PI);
-            end;
-        end;
-    end;
-    Result := RFactor;
-end;
-*)
 function TFitTask.GetRFactor: Double;
 begin
     Result := GetSqrRFactor;
@@ -459,7 +375,8 @@ var CPS: TCurvePointsSet;
     RFactor: Double;
     Flag: Boolean;
     RangeDefined: Boolean;
-    CPI, PI: Double;
+    ScalingFactor: Double;
+    CalcProfileIntegral: Double;
 begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
     Assert(Assigned(CalcProfile));
@@ -483,11 +400,10 @@ begin
     end;
 
     RFactor := 0;
-    //  vychislyaem normu
-    CPI := CalcProfileIntegral; PI := ProfileIntegral;
-    if CPI = 0 then begin Result := 1; Exit; end;
-    //  spetsial'nyy sluchay, kogda profil' = 0
-    if PI = 0 then begin Result := CPI; Exit; end;
+    ScalingFactor := GetScalingFactor;
+    CalcProfileIntegral := GetCalcProfileIntegral;
+    if CalcProfileIntegral = 0 then
+        CalcProfileIntegral := 1;
 
     //  profil' rasschityvaetsya prostoy summoy po vsem rasschitannym krivym,
     //  inache nel'zya poluchit' korrektnyy R-faktor dlya krivyh s ogranicheniyami;
@@ -517,11 +433,11 @@ begin
         if Flag then            //  tochka vklyuchena v raschet R-faktora
         begin
             RFactor := RFactor +
-                Sqr(CalcProfile.PointYCoord[i] * PI / CPI -
+                Sqr(CalcProfile.PointYCoord[i] * ScalingFactor -
                     ExpProfile.PointYCoord[i]);
         end;
     end;
-    RFactor := RFactor / Sqr(PI);
+    RFactor := RFactor / Sqr(CalcProfileIntegral);
     Result := RFactor;
 end;
 
@@ -791,6 +707,7 @@ begin
     
     FEnableBackgroundVariation := AEnableBackgroundVariation;
     FEnableFastMinimizer := False;
+    FCurveScalingEnabled := True;
 end;
 
 destructor TFitTask.Destroy;
@@ -1929,7 +1846,24 @@ begin
     if Assigned(FMinimizer) then FMinimizer.Terminated := True;
 end;
 
+function TFitTask.GetScalingFactor: Double;
+var
+    CalcProfileIntegral, ProfileIntegral: Double;
+begin
+    if FCurveScalingEnabled then
+    begin
+        CalcProfileIntegral := GetCalcProfileIntegral;
+        ProfileIntegral := GetProfileIntegral;
+
+        if (CalcProfileIntegral = 0) or (ProfileIntegral = 0) then
+        begin
+            Result := 1;
+            Exit;
+        end;
+        Result := ProfileIntegral / CalcProfileIntegral;
+    end
+    else
+        Result := 1;
+end;
+
 end.
-
-
-

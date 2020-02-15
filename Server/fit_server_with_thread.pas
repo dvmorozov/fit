@@ -127,14 +127,12 @@ begin
     end;
 
     main_calc_thread.Terminate;
-    //  ozhidaniya zdes' nikakogo byt' ne dolzhno,
-    //  poskol'ku metod vypolnyaetsya sinhronno i
-    //  dolzhen bystro vernut' upravlenie
 end;
 
 function TFitServerWithThread.CreateTaskObject: TFitTask;
 begin
-    Result := TFitTask.Create(nil, FEnableBackgroundVariation);
+    Result := TFitTask.Create(nil,
+        FEnableBackgroundVariation, FCurveScalingEnabled);
 end;
 
 end.

@@ -209,6 +209,9 @@ type
         function GetEnableBackgroundVariation: Boolean;
         procedure SetEnableBackgroundVariation(AEnable: Boolean);
 
+        function GetCurveScalingEnabled: Boolean;
+        procedure SetCurveScalingEnabled(AEnabled: Boolean);
+
         { Creates list of selected points and inserts new item into chart legend (CheckListBox). }
         procedure RecreateAndShowSelectedPoints(Title: string);
 
@@ -320,16 +323,21 @@ type
         property EnableBackgroundVariation: Boolean
             read GetEnableBackgroundVariation write SetEnableBackgroundVariation;
 
+        property CurveScalingEnabled: Boolean
+            read GetCurveScalingEnabled write SetCurveScalingEnabled;
+
         property MaxRFactor: Double read GetMaxRFactor write SetMaxRFactor;
         property BackFactor: Double read GetBackFactor write SetBackFactor;
         property CurveThresh: Double read GetCurveThresh write SetCurveThresh;
         property CurveTypeId: TCurveTypeId read GetCurveType write SetCurveType;
 
         { Plotting events are called from methods of the same name for providing
-          synchronization with main application thread. Point to methods of TIIViewer. }
+          synchronization with main application thread.
+          Point to methods of TIIViewer. }
 
-        { Callbacks for updating user interface. They are called from main thread of client application.
-          Callbacks can throw exceptions. They can be not assigned (nil). }
+        { Callbacks for updating user interface. They are called from main thread
+          of client application. Callbacks can throw exceptions.
+          They can be not assigned (nil). }
         property OnAsyncOperationFinished: TAsyncOperationFinished
             read FAsyncOperationFinished write FAsyncOperationFinished;
 
@@ -1341,6 +1349,18 @@ procedure TFitClient.SetEnableBackgroundVariation(AEnable: Boolean);
 begin
     Assert(Assigned(FitProxy));
     FitProxy.SetEnableBackgroundVariation(AEnable);
+end;
+
+function TFitClient.GetCurveScalingEnabled: Boolean;
+begin
+    Assert(Assigned(FitProxy));
+    Result := FitProxy.GetCurveScalingEnabled;
+end;
+
+procedure TFitClient.SetCurveScalingEnabled(AEnabled: Boolean);
+begin
+    Assert(Assigned(FitProxy));
+    FitProxy.SetCurveScalingEnabled(AEnabled);
 end;
 
 {$IFDEF _WINDOWS}

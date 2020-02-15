@@ -140,6 +140,7 @@ type
         FCurveThresh: Double;
         FCurveTypeId: TCurveTypeId;
         FEnableBackgroundVariation: Boolean;
+        FCurveScalingEnabled: Boolean;
 
     protected
                 { Is set up to True after finishing first cycle of calculation. }
@@ -419,6 +420,9 @@ type
 
         function GetEnableBackgroundVariation: Boolean;
         procedure SetEnableBackgroundVariation(AEnable: Boolean);
+
+        function GetCurveScalingEnabled: Boolean;
+        procedure SetCurveScalingEnabled(AEnabled: Boolean);
     end;
 
 const
@@ -642,6 +646,7 @@ begin
     //  Sets default curve type.
     FCurveTypeId := TGaussPointsSet.GetCurveTypeId_;
     FEnableBackgroundVariation := False;
+    FCurveScalingEnabled := True;
 
     //  chtoby mozhno bylo dobavlyat' tochki tablichno bez vhoda
     //  v spets. rezhim
@@ -2132,6 +2137,16 @@ begin
     FEnableBackgroundVariation := AEnable;
 end;
 
+function TFitServer.GetCurveScalingEnabled: Boolean;
+begin
+    Result := FCurveScalingEnabled;
+end;
+
+procedure TFitServer.SetCurveScalingEnabled(AEnabled: Boolean);
+begin
+    FCurveScalingEnabled := AEnabled;
+end;
+
 procedure TFitServer.DoAllAutomaticallyAlg;
 begin
     //  сохраняется пользовательский выбор кривой;
@@ -2184,7 +2199,8 @@ end;
 
 function TFitServer.CreateTaskObject: TFitTask;
 begin
-    Result := TFitTask.Create(nil, FEnableBackgroundVariation);
+    Result := TFitTask.Create(nil,
+        FEnableBackgroundVariation, FCurveScalingEnabled);
 end;
 
 procedure TFitServer.CreateTasks;

@@ -40,7 +40,8 @@ type
 
     public
         constructor Create(AOwner: TComponent;
-            AEnableBackgroundVariation: Boolean); override;
+            AEnableBackgroundVariation: Boolean;
+            ACurveScalingEnabled: Boolean); override;
         destructor Destroy; override;
         { Sets up termination flags and waits for
           actual termination of the thread. }
@@ -244,7 +245,8 @@ begin
 end;
 
 constructor TFitTaskWithThread.Create(AOwner: TComponent;
-    AEnableBackgroundVariation: Boolean);
+    AEnableBackgroundVariation: Boolean;
+    ACurveScalingEnabled: Boolean);
 begin
     inherited;
     InitCriticalSection(CS);

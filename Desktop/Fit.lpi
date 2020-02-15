@@ -134,11 +134,14 @@
         <ComponentName Value="FormMain"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <WindowIndex Value="1"/>
+        <TopLine Value="247"/>
+        <CursorPos Y="258"/>
         <UsageCount Value="200"/>
         <Bookmarks Count="1">
-          <Item0 Y="475"/>
+          <Item0 Y="479"/>
         </Bookmarks>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -324,8 +327,8 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="3"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="1246"/>
-        <CursorPos Y="1262"/>
+        <TopLine Value="1330"/>
+        <CursorPos X="24" Y="1337"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -890,8 +893,8 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="31"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="13"/>
-        <CursorPos X="5" Y="28"/>
+        <TopLine Value="95"/>
+        <CursorPos X="9" Y="46"/>
         <UsageCount Value="210"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -900,8 +903,8 @@
         <Filename Value="..\Server\fit_server.pas"/>
         <IsPartOfProject Value="True"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="2012"/>
-        <CursorPos X="34" Y="2031"/>
+        <TopLine Value="2187"/>
+        <CursorPos X="57" Y="2203"/>
         <UsageCount Value="207"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -1161,7 +1164,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="84"/>
         <CursorPos Y="109"/>
-        <UsageCount Value="59"/>
+        <UsageCount Value="60"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit107>
@@ -1169,9 +1172,9 @@
         <Filename Value="..\Server\fit_server_with_thread.pas"/>
         <EditorIndex Value="47"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="102"/>
-        <CursorPos Y="129"/>
-        <UsageCount Value="59"/>
+        <TopLine Value="111"/>
+        <CursorPos X="49" Y="135"/>
+        <UsageCount Value="60"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit108>
@@ -1179,8 +1182,8 @@
         <Filename Value="..\Server\fit_server_multithreaded.pas"/>
         <EditorIndex Value="46"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="43"/>
-        <CursorPos X="12" Y="58"/>
+        <TopLine Value="25"/>
+        <CursorPos X="57" Y="41"/>
         <UsageCount Value="105"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -1189,8 +1192,8 @@
         <Filename Value="..\Server\fit_task_with_thread.pas"/>
         <EditorIndex Value="13"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="35"/>
-        <CursorPos Y="46"/>
+        <TopLine Value="28"/>
+        <CursorPos X="21" Y="42"/>
         <UsageCount Value="100"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -1201,18 +1204,17 @@
         <WindowIndex Value="1"/>
         <TopLine Value="38"/>
         <CursorPos X="5" Y="25"/>
-        <UsageCount Value="58"/>
+        <UsageCount Value="59"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit111>
       <Unit112>
         <Filename Value="..\Server\fit_task.pas"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="8"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="688"/>
-        <CursorPos X="33" Y="710"/>
+        <TopLine Value="69"/>
+        <CursorPos X="17" Y="80"/>
         <UsageCount Value="220"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -1272,7 +1274,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="19"/>
         <CursorPos X="5" Y="34"/>
-        <UsageCount Value="36"/>
+        <UsageCount Value="37"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit118>
@@ -1365,7 +1367,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="16"/>
         <CursorPos X="5" Y="15"/>
-        <UsageCount Value="148"/>
+        <UsageCount Value="149"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit127>
@@ -1375,7 +1377,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="84"/>
         <CursorPos X="26" Y="93"/>
-        <UsageCount Value="72"/>
+        <UsageCount Value="73"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit128>
@@ -1386,7 +1388,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="3"/>
         <CursorPos X="27" Y="21"/>
-        <UsageCount Value="146"/>
+        <UsageCount Value="147"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit129>
@@ -1406,7 +1408,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="11"/>
         <CursorPos X="41" Y="26"/>
-        <UsageCount Value="107"/>
+        <UsageCount Value="108"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit131>
@@ -1434,7 +1436,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="629"/>
         <CursorPos X="43" Y="644"/>
-        <UsageCount Value="32"/>
+        <UsageCount Value="33"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit134>
@@ -1444,12 +1446,12 @@
         <WindowIndex Value="1"/>
         <TopLine Value="278"/>
         <CursorPos X="27" Y="292"/>
-        <UsageCount Value="32"/>
+        <UsageCount Value="33"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit135>
       <Unit136>
-        <Filename Value="..\..\fit-experimental\Server\fit_task.pas"/>
+        <Filename Value="\\VBOXSVR\04_-_github\fit-experimental\Server\fit_task.pas"/>
         <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <TopLine Value="212"/>
@@ -1466,121 +1468,124 @@
     </OtherDefines>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="..\Server\fit_server.pas"/>
-        <Caret Line="248" Column="43" TopLine="231"/>
+        <Filename Value="fit_client.pas"/>
+        <Caret Line="324" Column="81" TopLine="304"/>
       </Position1>
       <Position2>
-        <Filename Value="..\Server\fit_server.pas"/>
-        <Caret Line="319" Column="31" TopLine="290"/>
+        <Filename Value="fit_client.pas"/>
+        <Caret Line="1337" Column="49" TopLine="1313"/>
       </Position2>
       <Position3>
-        <Filename Value="..\Server\fit_server.pas"/>
-        <Caret Line="655" Column="16" TopLine="627"/>
+        <Filename Value="fit_client.pas"/>
+        <Caret Line="1340" Column="52" TopLine="1316"/>
       </Position3>
       <Position4>
-        <Filename Value="..\Server\fit_server.pas"/>
-        <Caret Line="1391" TopLine="1372"/>
+        <Filename Value="fit_client.pas"/>
+        <Caret Line="1343" Column="50" TopLine="1319"/>
       </Position4>
       <Position5>
-        <Filename Value="..\Server\fit_server.pas"/>
-        <Caret Line="2041" Column="34" TopLine="2023"/>
+        <Filename Value="fit_client.pas"/>
+        <Caret Line="1346" Column="42" TopLine="1322"/>
       </Position5>
       <Position6>
-        <Filename Value="..\Server\fit_task.pas"/>
-        <Caret Line="232" Column="28" TopLine="214"/>
+        <Filename Value="fit_client.pas"/>
+        <Caret Line="323" Column="42" TopLine="304"/>
       </Position6>
       <Position7>
-        <Filename Value="..\Server\fit_task.pas"/>
-        <Caret Line="322" Column="38" TopLine="291"/>
+        <Filename Value="Forms\form_main.pas"/>
+        <Caret Line="749" Column="29" TopLine="734"/>
       </Position7>
       <Position8>
-        <Filename Value="..\Server\fit_task.pas"/>
-        <Caret Line="397" Column="38" TopLine="366"/>
+        <Filename Value="fit_client.pas"/>
+        <Caret Line="336" Column="11" TopLine="316"/>
       </Position8>
       <Position9>
-        <Filename Value="..\Server\fit_task.pas"/>
-        <Caret Line="1852" Column="5" TopLine="1815"/>
+        <Filename Value="Forms\form_main.pas"/>
+        <Caret Line="749" Column="29" TopLine="734"/>
       </Position9>
       <Position10>
-        <Filename Value="..\Server\fit_task.pas"/>
-        <Caret Line="1842" Column="31" TopLine="1815"/>
+        <Filename Value="Forms\form_main.pas"/>
+        <Caret Line="750" Column="37" TopLine="734"/>
       </Position10>
       <Position11>
-        <Filename Value="..\Server\fit_task.pas"/>
+        <Filename Value="Forms\form_main.pas"/>
+        <Caret Line="751" Column="62" TopLine="734"/>
       </Position11>
       <Position12>
-        <Filename Value="..\Server\fit_task.pas"/>
-        <Caret Line="93" Column="40" TopLine="64"/>
+        <Filename Value="fit_client.pas"/>
+        <Caret Line="209" Column="18" TopLine="195"/>
       </Position12>
       <Position13>
-        <Filename Value="..\Server\fit_task.pas"/>
-        <Caret Line="268" Column="41" TopLine="237"/>
+        <Filename Value="fit_client.pas"/>
+        <Caret Line="321" Column="18" TopLine="307"/>
       </Position13>
       <Position14>
-        <Filename Value="..\Server\fit_task.pas"/>
-        <Caret Line="1840" Column="24" TopLine="1811"/>
+        <Filename Value="fit_client.pas"/>
+        <Caret Line="1334" Column="21" TopLine="1318"/>
       </Position14>
       <Position15>
-        <Filename Value="..\Server\fit_task.pas"/>
-        <Caret Line="1843" Column="6" TopLine="1811"/>
+        <Filename Value="fit_client.pas"/>
+        <Caret Line="1337" Column="24" TopLine="1330"/>
       </Position15>
       <Position16>
-        <Filename Value="..\Server\fit_task.pas"/>
-        <Caret Line="1840" Column="41" TopLine="1811"/>
+        <Filename Value="..\Server\fit_server.pas"/>
+        <Caret Line="421" Column="18" TopLine="407"/>
       </Position16>
       <Position17>
-        <Filename Value="..\Server\fit_task.pas"/>
-        <Caret Line="1844" Column="5" TopLine="1816"/>
+        <Filename Value="..\Server\client_interfaces\int_fit_service.pas"/>
+        <Caret Line="46" Column="9" TopLine="95"/>
       </Position17>
       <Position18>
-        <Filename Value="..\Server\fit_task.pas"/>
-        <Caret Line="1845" Column="58" TopLine="1816"/>
+        <Filename Value="..\Server\fit_server.pas"/>
+        <Caret Line="425" Column="62" TopLine="407"/>
       </Position18>
       <Position19>
-        <Filename Value="..\Server\fit_server_app.pas"/>
-        <Caret Line="109" TopLine="84"/>
+        <Filename Value="..\Server\fit_server.pas"/>
+        <Caret Line="2147" Column="38" TopLine="2126"/>
       </Position19>
       <Position20>
-        <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="1082" Column="33" TopLine="1064"/>
+        <Filename Value="..\Server\fit_server_multithreaded.pas"/>
+        <Caret Line="41" Column="57" TopLine="25"/>
       </Position20>
       <Position21>
-        <Filename Value="Forms\form_main.pas"/>
+        <Filename Value="..\Server\fit_task_with_thread.pas"/>
+        <Caret Line="247" Column="34" TopLine="232"/>
       </Position21>
       <Position22>
-        <Filename Value="..\Server\fit_server.pas"/>
-        <Caret Line="1943" Column="34" TopLine="1915"/>
+        <Filename Value="..\Server\fit_task_with_thread.pas"/>
+        <Caret Line="42" Column="21" TopLine="28"/>
       </Position22>
       <Position23>
-        <Filename Value="..\Server\fit_server.pas"/>
-        <Caret Line="2007" Column="34" TopLine="1970"/>
+        <Filename Value="Forms\form_main.pas"/>
+        <Caret Line="751" Column="62" TopLine="734"/>
       </Position23>
       <Position24>
-        <Filename Value="..\Server\fit_server.pas"/>
-        <Caret Line="2031" Column="34" TopLine="2012"/>
+        <Filename Value="Forms\form_main.pas"/>
+        <Caret Line="758" Column="62" TopLine="736"/>
       </Position24>
       <Position25>
-        <Filename Value="..\Server\fit_task.pas"/>
-        <Caret Line="327" TopLine="327"/>
+        <Filename Value="Forms\form_main.pas"/>
+        <Caret Line="751" Column="3" TopLine="736"/>
       </Position25>
       <Position26>
-        <Filename Value="..\Server\fit_task.pas"/>
-        <Caret Line="431" Column="46" TopLine="415"/>
+        <Filename Value="Forms\form_main.pas"/>
+        <Caret Line="749" Column="29" TopLine="736"/>
       </Position26>
       <Position27>
-        <Filename Value="..\Server\fit_task.pas"/>
+        <Filename Value="Forms\form_main.pas"/>
+        <Caret Line="755" TopLine="737"/>
       </Position27>
       <Position28>
-        <Filename Value="..\Server\fit_task.pas"/>
-        <Caret Line="1848" Column="29" TopLine="1828"/>
+        <Filename Value="Forms\form_main.pas"/>
+        <Caret Line="770" Column="3" TopLine="753"/>
       </Position28>
       <Position29>
-        <Filename Value="..\Server\fit_task.pas"/>
-        <Caret Line="38" Column="19" TopLine="19"/>
+        <Filename Value="Forms\form_main.pas"/>
+        <Caret Line="777" Column="5" TopLine="753"/>
       </Position29>
       <Position30>
-        <Filename Value="..\Server\fit_task.pas"/>
-        <Caret Line="710" Column="35" TopLine="680"/>
+        <Filename Value="Forms\form_main.pas"/>
+        <Caret Line="778" Column="29" TopLine="754"/>
       </Position30>
     </JumpHistory>
   </ProjectOptions>
@@ -1628,7 +1633,7 @@
         <WatchKind Value="wpkWrite"/>
         <Source Value="..\Server\fit_server.pas"/>
         <InitialEnabled Value="False"/>
-        <Line Value="1830"/>
+        <Line Value="1835"/>
       </Item1>
       <Item2>
         <Kind Value="bpkSource"/>
@@ -1636,7 +1641,7 @@
         <WatchKind Value="wpkWrite"/>
         <Source Value="..\Server\fit_server.pas"/>
         <InitialEnabled Value="False"/>
-        <Line Value="1842"/>
+        <Line Value="1847"/>
       </Item2>
       <Item3>
         <Kind Value="bpkSource"/>
@@ -1644,7 +1649,7 @@
         <WatchKind Value="wpkWrite"/>
         <Source Value="..\Server\fit_server.pas"/>
         <InitialEnabled Value="False"/>
-        <Line Value="1816"/>
+        <Line Value="1821"/>
       </Item3>
       <Item4>
         <Kind Value="bpkSource"/>
@@ -1652,7 +1657,7 @@
         <WatchKind Value="wpkWrite"/>
         <Source Value="..\Server\fit_task.pas"/>
         <InitialEnabled Value="False"/>
-        <Line Value="1670"/>
+        <Line Value="1674"/>
       </Item4>
       <Item5>
         <Kind Value="bpkSource"/>
@@ -1660,7 +1665,7 @@
         <WatchKind Value="wpkWrite"/>
         <Source Value="..\Server\fit_task.pas"/>
         <InitialEnabled Value="False"/>
-        <Line Value="1667"/>
+        <Line Value="1671"/>
       </Item5>
       <Item6>
         <Kind Value="bpkSource"/>
@@ -1708,7 +1713,7 @@
         <WatchKind Value="wpkWrite"/>
         <Source Value="..\Server\fit_task.pas"/>
         <InitialEnabled Value="False"/>
-        <Line Value="1605"/>
+        <Line Value="1609"/>
       </Item11>
       <Item12>
         <Kind Value="bpkSource"/>
@@ -1716,7 +1721,7 @@
         <WatchKind Value="wpkWrite"/>
         <Source Value="..\Server\fit_task.pas"/>
         <InitialEnabled Value="False"/>
-        <Line Value="1559"/>
+        <Line Value="1563"/>
       </Item12>
       <Item13>
         <Kind Value="bpkSource"/>
@@ -1730,7 +1735,7 @@
         <WatchScope Value="wpsLocal"/>
         <WatchKind Value="wpkWrite"/>
         <Source Value="..\Server\fit_server_multithreaded.pas"/>
-        <Line Value="54"/>
+        <Line Value="55"/>
       </Item14>
     </BreakPoints>
     <Watches Count="1">

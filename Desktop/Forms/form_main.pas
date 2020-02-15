@@ -50,6 +50,7 @@ type
 
   { TFormMain }
   TFormMain = class(TForm)
+    ActionEnableCurveScaling: TAction;
     ActionEnBackVariation: TAction;
     ActionPatternType: TAction;
     ActionAnimationMode: TAction;
@@ -125,6 +126,7 @@ type
     ArgumentTransformation: TMenuItem;
     CreateRule: TMenuItem;
     BackPoints: TMenuItem;
+    CurveScalingEnabled: TMenuItem;
     SpecAtEveryPoint: TMenuItem;
     MenuItem5: TMenuItem;
     BackEnableVariation: TMenuItem;
@@ -255,6 +257,8 @@ type
     procedure ActionDoAllAutoExecute(Sender: TObject);
     procedure ActionEnBackVariationExecute(Sender: TObject);
     procedure ActionEnBackVariationUpdate(Sender: TObject);
+    procedure ActionEnableCurveScalingExecute(Sender: TObject);
+    procedure ActionEnableCurveScalingUpdate(Sender: TObject);
     procedure ActionFitMinDifferenceExecute(Sender: TObject);
     procedure ActionFitMinNumberOfSpecExecute(Sender: TObject);
     procedure ActionImportExecute(Sender: TObject);
@@ -748,12 +752,24 @@ procedure TFormMain.ActionEnBackVariationExecute(Sender: TObject);
 begin
     FitClientApp_.FitClient.EnableBackgroundVariation :=
         not FitClientApp_.FitClient.EnableBackgroundVariation;
-    ActionEnBackVariation.Checked := FitClientApp_.FitClient.EnableBackgroundVariation;
+    ActionEnBackVariationUpdate(Sender);
 end;
 
 procedure TFormMain.ActionEnBackVariationUpdate(Sender: TObject);
 begin
     ActionEnBackVariation.Checked := FitClientApp_.FitClient.EnableBackgroundVariation;
+end;
+
+procedure TFormMain.ActionEnableCurveScalingExecute(Sender: TObject);
+begin
+    FitClientApp_.FitClient.CurveScalingEnabled :=
+        not FitClientApp_.FitClient.CurveScalingEnabled;
+    ActionEnableCurveScalingUpdate(Sender);
+end;
+
+procedure TFormMain.ActionEnableCurveScalingUpdate(Sender: TObject);
+begin
+    ActionEnableCurveScaling.Checked := FitClientApp_.FitClient.CurveScalingEnabled;
 end;
 
 procedure TFormMain.ActionFitMinDifferenceExecute(Sender: TObject);

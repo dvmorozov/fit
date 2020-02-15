@@ -35,6 +35,9 @@ type
     protected
         FBegIndex: LongInt;
         FEndIndex: LongInt;
+        { Enables curve scaling. Generally it should be true, otherwise
+          optimization could stuck in local minimum. However it could be
+          set to false for some special curve types. }
         FCurveScalingEnabled: Boolean;
         FMaxRFactor: Double;
         FCurveTypeId: TCurveTypeId;
@@ -188,7 +191,8 @@ type
 
     public
         constructor Create(AOwner: TComponent;
-            AEnableBackgroundVariation: Boolean); virtual;
+            AEnableBackgroundVariation: Boolean;
+            ACurveScalingEnabled: Boolean); virtual;
         destructor Destroy; override;
 
         { Sets up experimental profile data. }
@@ -694,7 +698,7 @@ begin
 end;
 
 constructor TFitTask.Create(AOwner: TComponent;
-    AEnableBackgroundVariation: Boolean);
+    AEnableBackgroundVariation: Boolean; ACurveScalingEnabled: Boolean);
 begin
     inherited Create(AOwner);
     CommonSpecimenParams := Curve_parameters.Create(nil);
@@ -707,7 +711,7 @@ begin
     
     FEnableBackgroundVariation := AEnableBackgroundVariation;
     FEnableFastMinimizer := False;
-    FCurveScalingEnabled := True;
+    FCurveScalingEnabled := ACurveScalingEnabled;
 end;
 
 destructor TFitTask.Destroy;

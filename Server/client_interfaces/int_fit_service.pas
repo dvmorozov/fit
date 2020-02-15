@@ -43,6 +43,8 @@ type
         procedure SetWaveLength(AWaveLength: Double);
         function GetEnableBackgroundVariation: Boolean;
         procedure SetEnableBackgroundVariation(AEnable: Boolean);
+        function GetCurveScalingEnabled: Boolean;
+        procedure SetCurveScalingEnabled(AEnabled: Boolean);
 
         { All GetXXXX methods create and return A NEW OBJECT,
           responsibility to free it is put on calling code. }

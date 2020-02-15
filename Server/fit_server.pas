@@ -139,7 +139,7 @@ type
 
         FCurveThresh: Double;
         FCurveTypeId: TCurveTypeId;
-        FEnableBackgroundVariation: Boolean;
+        FBackgroundVariationEnabled: Boolean;
         FCurveScalingEnabled: Boolean;
 
     protected
@@ -418,8 +418,8 @@ type
         property FitProxy: TFitServerProxy read FFitProxy write FFitProxy;
 {$ENDIF}
 
-        function GetEnableBackgroundVariation: Boolean;
-        procedure SetEnableBackgroundVariation(AEnable: Boolean);
+        function GetBackgroundVariationEnabled: Boolean;
+        procedure SetBackgroundVariationEnabled(AEnable: Boolean);
 
         function GetCurveScalingEnabled: Boolean;
         procedure SetCurveScalingEnabled(AEnabled: Boolean);
@@ -645,7 +645,7 @@ begin
     FCurveThresh := 0;
     //  Sets default curve type.
     FCurveTypeId := TGaussPointsSet.GetCurveTypeId_;
-    FEnableBackgroundVariation := False;
+    FBackgroundVariationEnabled := False;
     FCurveScalingEnabled := True;
 
     //  chtoby mozhno bylo dobavlyat' tochki tablichno bez vhoda
@@ -2127,14 +2127,14 @@ begin
     Result := FWaveLength;
 end;
 
-function TFitServer.GetEnableBackgroundVariation: Boolean;
+function TFitServer.GetBackgroundVariationEnabled: Boolean;
 begin
-    Result := FEnableBackgroundVariation;
+    Result := FBackgroundVariationEnabled;
 end;
 
-procedure TFitServer.SetEnableBackgroundVariation(AEnable: Boolean);
+procedure TFitServer.SetBackgroundVariationEnabled(AEnable: Boolean);
 begin
-    FEnableBackgroundVariation := AEnable;
+    FBackgroundVariationEnabled := AEnable;
 end;
 
 function TFitServer.GetCurveScalingEnabled: Boolean;
@@ -2200,7 +2200,7 @@ end;
 function TFitServer.CreateTaskObject: TFitTask;
 begin
     Result := TFitTask.Create(nil,
-        FEnableBackgroundVariation, FCurveScalingEnabled);
+        FBackgroundVariationEnabled, FCurveScalingEnabled);
 end;
 
 procedure TFitServer.CreateTasks;

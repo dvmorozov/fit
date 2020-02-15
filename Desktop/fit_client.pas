@@ -206,8 +206,8 @@ type
         function GetCurveType: TCurveTypeId;
         procedure SetCurveType(ACurveType: TCurveTypeId);
 
-        function GetEnableBackgroundVariation: Boolean;
-        procedure SetEnableBackgroundVariation(AEnable: Boolean);
+        function GetBackgroundVariationEnabled: Boolean;
+        procedure SetBackgroundVariationEnabled(AEnable: Boolean);
 
         function GetCurveScalingEnabled: Boolean;
         procedure SetCurveScalingEnabled(AEnabled: Boolean);
@@ -320,8 +320,8 @@ type
 
         { Server attributes. }
 
-        property EnableBackgroundVariation: Boolean
-            read GetEnableBackgroundVariation write SetEnableBackgroundVariation;
+        property BackgroundVariationEnabled: Boolean
+            read GetBackgroundVariationEnabled write SetBackgroundVariationEnabled;
 
         property CurveScalingEnabled: Boolean
             read GetCurveScalingEnabled write SetCurveScalingEnabled;
@@ -1339,16 +1339,16 @@ begin
     FitProxy.SetCurveType(ACurveType);
 end;
 
-function TFitClient.GetEnableBackgroundVariation: Boolean;
+function TFitClient.GetBackgroundVariationEnabled: Boolean;
 begin
     Assert(Assigned(FitProxy));
-    Result := FitProxy.GetEnableBackgroundVariation;
+    Result := FitProxy.GetBackgroundVariationEnabled;
 end;
 
-procedure TFitClient.SetEnableBackgroundVariation(AEnable: Boolean);
+procedure TFitClient.SetBackgroundVariationEnabled(AEnable: Boolean);
 begin
     Assert(Assigned(FitProxy));
-    FitProxy.SetEnableBackgroundVariation(AEnable);
+    FitProxy.SetBackgroundVariationEnabled(AEnable);
 end;
 
 function TFitClient.GetCurveScalingEnabled: Boolean;

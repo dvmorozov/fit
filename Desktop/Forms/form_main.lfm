@@ -1,7 +1,7 @@
 object FormMain: TFormMain
-  Left = 35
+  Left = 265
   Height = 600
-  Top = 112
+  Top = 159
   Width = 1119
   HorzScrollBar.Page = 1191
   VertScrollBar.Page = 502
@@ -1205,6 +1205,9 @@ object FormMain: TFormMain
         Action = ActionSetMaxRFactor
         OnClick = ActionSetMaxRFactorExecute
       end
+      object CurveScalingEnabled: TMenuItem
+        Action = ActionEnableCurveScaling
+      end
     end
     object Edit1: TMenuItem
       Caption = '&Edit'
@@ -2295,6 +2298,12 @@ object FormMain: TFormMain
       Caption = 'Enable Variation'
       OnExecute = ActionEnBackVariationExecute
       OnUpdate = ActionEnBackVariationUpdate
+    end
+    object ActionEnableCurveScaling: TAction
+      Category = 'Fitting'
+      Caption = 'Enable Curve Scaling'
+      OnExecute = ActionEnableCurveScalingExecute
+      OnUpdate = ActionEnableCurveScalingUpdate
     end
   end
   object TimerAsync: TTimer

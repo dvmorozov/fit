@@ -37,7 +37,8 @@ implementation
 
 function TFitServerMultithreaded.CreateTaskObject: TFitTask;
 begin
-    Result := TFitTaskWithThread.Create(nil, FEnableBackgroundVariation);
+    Result := TFitTaskWithThread.Create(nil,
+        FEnableBackgroundVariation, FCurveScalingEnabled);
 end;
 
 procedure TFitServerMultithreaded.AbortAsyncOper;

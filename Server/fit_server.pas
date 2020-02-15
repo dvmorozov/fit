@@ -116,7 +116,7 @@ type
                 { Contains all pattern specimens collected from tasks
                   (for example, for separate intervals).
                   Items are added synchronously to the list. }
-        CurvesList: TSelfCopiedCompList;
+        FCurvesList: TSelfCopiedCompList;
                 { Positions of pattern specimens. Only X-coordinates are used. }
         CurvePositions: TTitlePointsSet;
                 { Containers of parameters of pattern specimens.
@@ -140,6 +140,7 @@ type
         FCurveThresh: Double;
         FCurveTypeId: TCurveTypeId;
         FEnableBackgroundVariation: Boolean;
+        FCurveScalingEnabled: Boolean;
 
     protected
                 { Is set up to True after finishing first cycle of calculation. }
@@ -419,6 +420,9 @@ type
 
         function GetEnableBackgroundVariation: Boolean;
         procedure SetEnableBackgroundVariation(AEnable: Boolean);
+
+        function GetCurveScalingEnabled: Boolean;
+        procedure SetCurveScalingEnabled(AEnabled: Boolean);
     end;
 
 const
@@ -642,6 +646,7 @@ begin
     //  Sets default curve type.
     FCurveTypeId := TGaussPointsSet.GetCurveTypeId_;
     FEnableBackgroundVariation := False;
+    FCurveScalingEnabled := True;
 
     //  chtoby mozhno bylo dobavlyat' tochki tablichno bez vhoda
     //  v spets. rezhim
@@ -652,7 +657,7 @@ begin
     CurvePositions := TTitlePointsSet.Create(nil);
     SpecimenList := TMSCRSpecimenList.Create(nil);
     SpecimenList.Lambda := WaveLength;
-    CurvesList := TSelfCopiedCompList.Create(nil);
+    FCurvesList := TSelfCopiedCompList.Create(nil);
 
     SetState(ProfileWaiting);
 end;
@@ -1372,16 +1377,14 @@ end;
 
 function TFitServer.GetCurvesList: TSelfCopiedCompList;
 begin
-    Result := TSelfCopiedCompList(CurvesList.GetCopy);
+    Result := TSelfCopiedCompList(FCurvesList.GetCopy);
 end;
 
 function TFitServer.GetSpecimenCount: LongInt;
-var SpecList: TSelfCopiedCompList;
 begin
-    SpecList := GetCurvesList;
-    if not Assigned(SpecList) then
+    if not Assigned(FCurvesList) then
         raise EUserException.Create(SpecimenListNotReady);
-    Result := SpecList.Count;
+    Result := FCurvesList.Count;
 end;
 
 function TFitServer.GetSpecimenPoints(SpecIndex: LongInt): TNamedPointsSet;
@@ -1390,7 +1393,9 @@ begin
     Count := GetSpecimenCount;
     if (SpecIndex < 0) or (SpecIndex >= Count) then
         raise EUserException.Create(InadmissibleSpecimenIndex);
-    Result := TNamedPointsSet(GetCurvesList.Items[SpecIndex]);
+
+    Result := TNamedPointsSet(TNamedPointsSet(
+        FCurvesList.Items[SpecIndex]).GetCopy);
 end;
 
 function TFitServer.GetSpecimenParameterCount(SpecIndex: LongInt): LongInt;
@@ -1917,9 +1922,9 @@ end;
 
 procedure TFitServer.CreateResultedProfile;
 var i, j: LongInt;
-    FT: TFitTask;
-    PS: TPointsSet;
-    CPI, PI: Double;
+    FitTask: TFitTask;
+    PointsSet: TPointsSet;
+    ScalingFactor: Double;
 begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
     Assert(Assigned(TaskList));
@@ -1932,29 +1937,23 @@ begin
 
     for i := 0 to TaskList.Count - 1 do
     begin
-        FT := TFitTask(TaskList.Items[i]);
-        PS := FT.GetCalcProfile;
-        Assert(Assigned(PS));
-        Assert((FT.EndIndex - FT.BegIndex + 1) = PS.PointsCount);
-        Assert((FT.BegIndex >= 0) and (FT.BegIndex < CalcProfile.PointsCount));
-        Assert((FT.EndIndex >= 0) and (FT.EndIndex < CalcProfile.PointsCount));
-        CPI := FT.CalcProfileIntegral;
-        PI := FT.ProfileIntegral;
-        if CPI <> 0 then
-            //  esli CPI = 0 to pribavlyat' nechego
-            for j := FT.BegIndex to FT.EndIndex do
-            begin
-                if PI <> 0 then
-                    CalcProfile.PointYCoord[j] := CalcProfile.PointYCoord[j] +
-                           PS.PointYCoord[j - FT.BegIndex] * PI / CPI
-                else
-                    //  spetsial'nyy sluchay, kogda vse tochki profilya ravny 0
-                    //  rassmatrivaetsya otdel'no
-                    CalcProfile.PointYCoord[j] := CalcProfile.PointYCoord[j] +
-                           PS.PointYCoord[j - FT.BegIndex];
-            end;
+        FitTask := TFitTask(TaskList.Items[i]);
+        PointsSet := FitTask.GetCalcProfile;
+
+        Assert(Assigned(PointsSet));
+        Assert((FitTask.EndIndex - FitTask.BegIndex + 1) = PointsSet.PointsCount);
+        Assert((FitTask.BegIndex >= 0) and (FitTask.BegIndex < CalcProfile.PointsCount));
+        Assert((FitTask.EndIndex >= 0) and (FitTask.EndIndex < CalcProfile.PointsCount));
+
+        ScalingFactor := FitTask.GetScalingFactor;
+        for j := FitTask.BegIndex to FitTask.EndIndex do
+        begin
+            CalcProfile.PointYCoord[j] := CalcProfile.PointYCoord[j] +
+                   PointsSet.PointYCoord[j - FitTask.BegIndex] * ScalingFactor;
+        end;
     end;
 end;
+
 //  tochki privyazki ne dolzhny sobirat'sya iz podzadach,
 //  tak kak pri etom budut propadat' tochki ne voschedschie
 //  v podzadachi, a eto mozhet ozadachivat' pol'zovatelya
@@ -1980,15 +1979,17 @@ begin
     end;
 end;
 *)
+
 procedure TFitServer.CreateDeltaProfile;
 var i, j: LongInt;
-    FT: TFitTask;
-    PS: TPointsSet;
-    CPI, PI: Double;
+    FitTask: TFitTask;
+    PointsSet: TPointsSet;
+    ScalingFactor: Double;
 begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
     Assert(Assigned(TaskList));
     Assert(Assigned(ExpProfile));
+
     DeltaProfile.Free; DeltaProfile := nil;
     DeltaProfile := TTitlePointsSet.Create(nil);
     //  ustanavlivaetsya trebuemoe kol-vo tochek
@@ -2000,66 +2001,49 @@ begin
 
     for i := 0 to TaskList.Count - 1 do
     begin
-        FT := TFitTask(TaskList.Items[i]);
-        PS := FT.GetCalcProfile;
-        Assert(Assigned(PS));
-        Assert((FT.EndIndex - FT.BegIndex + 1) = PS.PointsCount);
-        Assert((FT.BegIndex >= 0) and (FT.BegIndex < CalcProfile.PointsCount));
-        Assert((FT.EndIndex >= 0) and (FT.EndIndex < CalcProfile.PointsCount));
+        FitTask := TFitTask(TaskList.Items[i]);
+        PointsSet := FitTask.GetCalcProfile;
 
-        CPI := FT.CalcProfileIntegral;
-        PI := FT.ProfileIntegral;
-        if CPI <> 0 then
+        Assert(Assigned(PointsSet));
+        Assert((FitTask.EndIndex - FitTask.BegIndex + 1) = PointsSet.PointsCount);
+        Assert((FitTask.BegIndex >= 0) and (FitTask.BegIndex < CalcProfile.PointsCount));
+        Assert((FitTask.EndIndex >= 0) and (FitTask.EndIndex < CalcProfile.PointsCount));
+
+        ScalingFactor := FitTask.GetScalingFactor;
+        for j := FitTask.BegIndex to FitTask.EndIndex do
         begin
-            for j := FT.BegIndex to FT.EndIndex do
-            begin
-                DeltaProfile.PointYCoord[j] :=
-                    ExpProfile.PointYCoord[j] -
-                    PS.PointYCoord[j - FT.BegIndex] * PI / CPI;
-            end;
-        end
-        else
-        begin
-            for j := FT.BegIndex to FT.EndIndex do
-                DeltaProfile.PointYCoord[j] := ExpProfile.PointYCoord[j];
+            DeltaProfile.PointYCoord[j] := ExpProfile.PointYCoord[j] -
+                PointsSet.PointYCoord[j - FitTask.BegIndex] * ScalingFactor;
         end;
     end;
 end;
 
 procedure TFitServer.CreateResultedCurvesList;
 var i, j, k: LongInt;
-    FT: TFitTask;
-    CL: TSelfCopiedCompList;
-    CPI, PI: Double;
-    Copy: TPointsSet;
+    FitTask: TFitTask;
+    TaskCurvesList: TSelfCopiedCompList;
+    ScalingFactor: Double;
+    CurveCopy: TPointsSet;
 begin
-    //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
     Assert(Assigned(TaskList));
-    CurvesList.Free; CurvesList := nil;
-    CurvesList := TSelfCopiedCompList.Create(nil);
+
+    FCurvesList.Free; FCurvesList := nil;
+    FCurvesList := TSelfCopiedCompList.Create(nil);
 
     for i := 0 to TaskList.Count - 1 do
     begin
-        FT := TFitTask(TaskList.Items[i]);
-        CL := FT.GetCurvesList;
-        Assert(Assigned(CL));
-        CPI := FT.CalcProfileIntegral;
-        PI := FT.ProfileIntegral;
-        for j := 0 to CL.Count - 1 do
+        FitTask := TFitTask(TaskList.Items[i]);
+        ScalingFactor := FitTask.GetScalingFactor;
+        TaskCurvesList := FitTask.GetCurvesList;
+
+        Assert(Assigned(TaskCurvesList));
+
+        for j := 0 to TaskCurvesList.Count - 1 do
         begin
-            Copy := TPointsSet(TPointsSet(CL.Items[j]).GetCopy);
-            if CPI <> 0 then
-            begin
-                if PI <> 0 then
-                    for k := 0 to Copy.PointsCount - 1 do
-                        Copy.PointYCoord[k] := Copy.PointYCoord[k] * PI / CPI
-                else
-                    //  spetsial'nyy sluchay, kogda PI = 0
-                    //  rassmatrivaetsya otdel'no
-                    for k := 0 to Copy.PointsCount - 1 do
-                        Copy.PointYCoord[k] := Copy.PointYCoord[k];
-            end;
-            CurvesList.Add(Copy);
+            CurveCopy := TPointsSet(TPointsSet(TaskCurvesList.Items[j]).GetCopy);
+            for k := 0 to CurveCopy.PointsCount - 1 do
+                CurveCopy.PointYCoord[k] := CurveCopy.PointYCoord[k] * ScalingFactor;
+            FCurvesList.Add(CurveCopy);
         end;
     end;
 end;
@@ -2089,7 +2073,7 @@ begin
             RFactorIntervals.Clear;
             CurvePositions.Clear;
             SpecimenList.Clear;
-            CurvesList.Clear;
+            FCurvesList.Clear;
 
             SelectedArea.Free; SelectedArea := nil;
             CalcProfile.Free; CalcProfile := nil;
@@ -2153,6 +2137,16 @@ begin
     FEnableBackgroundVariation := AEnable;
 end;
 
+function TFitServer.GetCurveScalingEnabled: Boolean;
+begin
+    Result := FCurveScalingEnabled;
+end;
+
+procedure TFitServer.SetCurveScalingEnabled(AEnabled: Boolean);
+begin
+    FCurveScalingEnabled := AEnabled;
+end;
+
 procedure TFitServer.DoAllAutomaticallyAlg;
 begin
     //  сохраняется пользовательский выбор кривой;
@@ -2205,7 +2199,8 @@ end;
 
 function TFitServer.CreateTaskObject: TFitTask;
 begin
-    Result := TFitTask.Create(nil, FEnableBackgroundVariation);
+    Result := TFitTask.Create(nil,
+        FEnableBackgroundVariation, FCurveScalingEnabled);
 end;
 
 procedure TFitServer.CreateTasks;
@@ -2378,13 +2373,13 @@ var NS: TCurvePointsSet;
     StartPointIndex, StopPointIndex: LongInt;
     i, j: LongInt;
 begin
-    Assert(Assigned(CurvesList));
+    Assert(Assigned(FCurvesList));
     Assert(Assigned(SpecimenList));
     SpecimenList.Clear;
 
-    for i := 0 to CurvesList.Count - 1 do
+    for i := 0 to FCurvesList.Count - 1 do
     begin
-        NS := TCurvePointsSet(CurvesList.Items[i]);
+        NS := TCurvePointsSet(FCurvesList.Items[i]);
         //  opredelenie indeksov granichnyh tochek sravneniem s porogom
         StartPointIndex := -1; StopPointIndex := -1;
         for j := 0 to NS.PointsCount - 1 do

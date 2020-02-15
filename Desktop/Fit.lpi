@@ -22,7 +22,7 @@
       <MajorVersionNr Value="1"/>
       <MinorVersionNr Value="1"/>
       <RevisionNr Value="9"/>
-      <BuildNr Value="1374"/>
+      <BuildNr Value="1375"/>
       <Attributes pvaDebug="True"/>
       <StringTable FileDescription="Desktop application." LegalCopyright="Dmitry Morozov" OriginalFilename="Fit" ProductName="Fit" ProductVersion="1.1.1"/>
     </VersionInfo>
@@ -1451,7 +1451,7 @@
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit135>
       <Unit136>
-        <Filename Value="\\VBOXSVR\04_-_github\fit-experimental\Server\fit_task.pas"/>
+        <Filename Value="VBOXSVR\04_-_github\fit-experimental\Server\fit_task.pas"/>
         <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <TopLine Value="212"/>
@@ -1466,7 +1466,7 @@
       <Define2 Value="FITSERVER"/>
       <Define3 Value="Lazarus"/>
     </OtherDefines>
-    <JumpHistory Count="30" HistoryIndex="29">
+    <JumpHistory Count="29" HistoryIndex="28">
       <Position1>
         <Filename Value="fit_client.pas"/>
         <Caret Line="324" Column="81" TopLine="304"/>
@@ -1532,61 +1532,57 @@
         <Caret Line="421" Column="18" TopLine="407"/>
       </Position16>
       <Position17>
-        <Filename Value="..\Server\client_interfaces\int_fit_service.pas"/>
-        <Caret Line="46" Column="9" TopLine="95"/>
+        <Filename Value="..\Server\fit_server.pas"/>
+        <Caret Line="425" Column="62" TopLine="407"/>
       </Position17>
       <Position18>
         <Filename Value="..\Server\fit_server.pas"/>
-        <Caret Line="425" Column="62" TopLine="407"/>
+        <Caret Line="2147" Column="38" TopLine="2126"/>
       </Position18>
       <Position19>
-        <Filename Value="..\Server\fit_server.pas"/>
-        <Caret Line="2147" Column="38" TopLine="2126"/>
-      </Position19>
-      <Position20>
         <Filename Value="..\Server\fit_server_multithreaded.pas"/>
         <Caret Line="41" Column="57" TopLine="25"/>
+      </Position19>
+      <Position20>
+        <Filename Value="..\Server\fit_task_with_thread.pas"/>
+        <Caret Line="247" Column="34" TopLine="232"/>
       </Position20>
       <Position21>
         <Filename Value="..\Server\fit_task_with_thread.pas"/>
-        <Caret Line="247" Column="34" TopLine="232"/>
+        <Caret Line="42" Column="21" TopLine="28"/>
       </Position21>
       <Position22>
-        <Filename Value="..\Server\fit_task_with_thread.pas"/>
-        <Caret Line="42" Column="21" TopLine="28"/>
+        <Filename Value="Forms\form_main.pas"/>
+        <Caret Line="751" Column="62" TopLine="734"/>
       </Position22>
       <Position23>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="751" Column="62" TopLine="734"/>
+        <Caret Line="758" Column="62" TopLine="736"/>
       </Position23>
       <Position24>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="758" Column="62" TopLine="736"/>
+        <Caret Line="751" Column="3" TopLine="736"/>
       </Position24>
       <Position25>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="751" Column="3" TopLine="736"/>
+        <Caret Line="749" Column="29" TopLine="736"/>
       </Position25>
       <Position26>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="749" Column="29" TopLine="736"/>
+        <Caret Line="755" TopLine="737"/>
       </Position26>
       <Position27>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="755" TopLine="737"/>
+        <Caret Line="770" Column="3" TopLine="753"/>
       </Position27>
       <Position28>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="770" Column="3" TopLine="753"/>
+        <Caret Line="777" Column="5" TopLine="753"/>
       </Position28>
       <Position29>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="777" Column="5" TopLine="753"/>
-      </Position29>
-      <Position30>
-        <Filename Value="Forms\form_main.pas"/>
         <Caret Line="778" Column="29" TopLine="754"/>
-      </Position30>
+      </Position29>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
@@ -1597,7 +1593,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(LazarusDir)\lcl\interfaces\win32;$(LazarusDir)\lcl\include;$(LazarusDir)\fpc\2.2.0\source\rtl\inc"/>
-      <OtherUnitFiles Value="..\Repository\NewVCL;C:\lazarus_lib\synapse\synapse\source\lib\;C:\lazarus_lib\wst-0.5\;$(LazarusDir)\components\codetools\units\i386-win32;TAGraph\Component;DataLoaders;ModelCurves;ModelCurves\UserPointsSet;\VBOXSVR\04_-_github\fitminimizers\package;ModelCurves\CurveParameters"/>
+      <OtherUnitFiles Value="..\Repository\NewVCL;C:\lazarus_lib\synapse\synapse\source\lib;C:\lazarus_lib\wst-0.5;$(LazarusDir)\components\codetools\units\i386-win32;TAGraph\Component;DataLoaders;ModelCurves;ModelCurves\UserPointsSet;\VBOXSVR\04_-_github\fitminimizers\package\;ModelCurves\CurveParameters"/>
       <UnitOutputDirectory Value="o\Fit\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Parsing>

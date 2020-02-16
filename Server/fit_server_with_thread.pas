@@ -132,7 +132,7 @@ end;
 function TFitServerWithThread.CreateTaskObject: TFitTask;
 begin
     Result := TFitTask.Create(nil,
-        FEnableBackgroundVariation, FCurveScalingEnabled);
+        FBackgroundVariationEnabled, FCurveScalingEnabled);
 end;
 
 end.

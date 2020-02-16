@@ -750,14 +750,14 @@ end;
 
 procedure TFormMain.ActionEnBackVariationExecute(Sender: TObject);
 begin
-    FitClientApp_.FitClient.EnableBackgroundVariation :=
-        not FitClientApp_.FitClient.EnableBackgroundVariation;
+    FitClientApp_.FitClient.BackgroundVariationEnabled :=
+        not FitClientApp_.FitClient.BackgroundVariationEnabled;
     ActionEnBackVariationUpdate(Sender);
 end;
 
 procedure TFormMain.ActionEnBackVariationUpdate(Sender: TObject);
 begin
-    ActionEnBackVariation.Checked := FitClientApp_.FitClient.EnableBackgroundVariation;
+    ActionEnBackVariation.Checked := FitClientApp_.FitClient.BackgroundVariationEnabled;
 end;
 
 procedure TFormMain.ActionEnableCurveScalingExecute(Sender: TObject);

@@ -18,6 +18,10 @@ type
 
     public
         constructor Create;
+        function CreateCopy: TSpecialCurveParameter; override;
+        procedure InitVariationStep; override;
+        procedure InitValue; override;
+        function MinimumStepAchieved: Boolean; override;
     end;
 
 implementation
@@ -26,8 +30,23 @@ constructor TDeltaSigmaCurveParameter.Create;
 begin
     inherited;
     FName := 'deltasigma';
-    FValue := 0;
     FType := Variable;
+end;
+
+procedure TDeltaSigmaCurveParameter.InitVariationStep;
+begin
+    FVariationStep := 0.1;
+end;
+
+procedure TDeltaSigmaCurveParameter.InitValue;
+begin
+    FValue := 0;
+end;
+
+function TDeltaSigmaCurveParameter.CreateCopy: TSpecialCurveParameter;
+begin
+    Result := TDeltaSigmaCurveParameter.Create;
+    CopyTo(Result);
 end;
 
 procedure TDeltaSigmaCurveParameter.SetValue(AValue: Double);
@@ -40,6 +59,11 @@ begin
     WriteLog(LogStr, Notification_);
 {$ENDIF}
     FValue := AValue;
+end;
+
+function TDeltaSigmaCurveParameter.MinimumStepAchieved: Boolean;
+begin
+    Result := FVariationStep < 0.00001;
 end;
 
 end.

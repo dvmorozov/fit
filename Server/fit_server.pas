@@ -35,6 +35,7 @@ uses Classes, title_points_set, SelfCheckedComponentList, SysUtils,
      mscr_specimen_list, curve_points_set, named_points_set, points_set,
      gauss_points_set, user_points_set, int_points_set, special_curve_parameter,
      persistent_curve_parameter_container, persistent_curve_parameters,
+     calculated_curve_parameter, user_curve_parameter,
 {$IFDEF FIT}
      { Proxy to client to call it back. }
      fit_server_proxy,
@@ -139,7 +140,7 @@ type
 
         FCurveThresh: Double;
         FCurveTypeId: TCurveTypeId;
-        FEnableBackgroundVariation: Boolean;
+        FBackgroundVariationEnabled: Boolean;
         FCurveScalingEnabled: Boolean;
 
     protected
@@ -418,8 +419,8 @@ type
         property FitProxy: TFitServerProxy read FFitProxy write FFitProxy;
 {$ENDIF}
 
-        function GetEnableBackgroundVariation: Boolean;
-        procedure SetEnableBackgroundVariation(AEnable: Boolean);
+        function GetBackgroundVariationEnabled: Boolean;
+        procedure SetBackgroundVariationEnabled(AEnable: Boolean);
 
         function GetCurveScalingEnabled: Boolean;
         procedure SetCurveScalingEnabled(AEnabled: Boolean);
@@ -645,7 +646,7 @@ begin
     FCurveThresh := 0;
     //  Sets default curve type.
     FCurveTypeId := TGaussPointsSet.GetCurveTypeId_;
-    FEnableBackgroundVariation := False;
+    FBackgroundVariationEnabled := False;
     FCurveScalingEnabled := True;
 
     //  chtoby mozhno bylo dobavlyat' tochki tablichno bez vhoda
@@ -1573,14 +1574,13 @@ var
 
     procedure AddNewParameter(Name: string; Value: Double);
     var
-        Parameter: TSpecialCurveParameter;
+        Parameter: TCalculatedCurveParameter;
         Container: TPersistentCurveParameterContainer;
     begin
         try
-            Parameter := TSpecialCurveParameter.Create;
+            Parameter := TCalculatedCurveParameter.Create;
             Parameter.Name := Name;
             Parameter.Value := Value;
-            Parameter.Type_ := Calculated;
 
             Container := TPersistentCurveParameterContainer(CurveParameters.Params.Add);
             try
@@ -1597,7 +1597,6 @@ var
     end;
 
 begin
-    //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
     Assert(Assigned(Points));
     Assert(Assigned(SpecimenList));
     Integral := Integrate(Points, StartPointIndex, StopPointIndex);
@@ -2127,14 +2126,14 @@ begin
     Result := FWaveLength;
 end;
 
-function TFitServer.GetEnableBackgroundVariation: Boolean;
+function TFitServer.GetBackgroundVariationEnabled: Boolean;
 begin
-    Result := FEnableBackgroundVariation;
+    Result := FBackgroundVariationEnabled;
 end;
 
-procedure TFitServer.SetEnableBackgroundVariation(AEnable: Boolean);
+procedure TFitServer.SetBackgroundVariationEnabled(AEnable: Boolean);
 begin
-    FEnableBackgroundVariation := AEnable;
+    FBackgroundVariationEnabled := AEnable;
 end;
 
 function TFitServer.GetCurveScalingEnabled: Boolean;
@@ -2200,7 +2199,7 @@ end;
 function TFitServer.CreateTaskObject: TFitTask;
 begin
     Result := TFitTask.Create(nil,
-        FEnableBackgroundVariation, FCurveScalingEnabled);
+        FBackgroundVariationEnabled, FCurveScalingEnabled);
 end;
 
 procedure TFitServer.CreateTasks;
@@ -2363,7 +2362,7 @@ begin
         //  rabotaet ne optimal'no, no podhodit dlya
         //  povtornoy initsializatsii pri dobavlenii /
         //  udalenii tochek privyazki ekzemplyarov patterna
-        FT.UpdateCurves(SpecimenList);
+        FT.RecreateCurveInstances(SpecimenList);
         FT.CalculateProfile;
     end;
 end;
@@ -2591,7 +2590,6 @@ begin
     Assert(Assigned(Params.Params));
 
     if Length(ACurveExpr) = 0 then
-        //  eto dopustimaya fatal'naya oshibka pol'zovatelya
         raise EUserException.Create('Inadmissible or invalid expression.');
 
     Result := ParseAndCalcExpression(PChar(ACurveExpr), '', @ExprResult);
@@ -2602,13 +2600,13 @@ begin
     begin
         //  pervonachal'noe zapolnenie parametrov
         Params.Params.Clear;
-
+        //  List of parameter names separated by zeros.
         Symbols := GetSymbols;
         Saved := Symbols;
         try
             while Assigned(Symbols) and (Length(Symbols) <> 0) do
             begin
-                Parameter := TSpecialCurveParameter.Create;
+                Parameter := TUserCurveParameter.Create;
 
                 try
                     Parameter.Name := Symbols;
@@ -2654,9 +2652,6 @@ begin
     end
     else
     begin
-        //  eto dopustimaya fatal'naya oshibka pol'zovatelya -
-        //  sostoyanie d. sohranit'sya, pol'zovatelyu d.b.
-        //  sdelano soobschenie
         raise EUserException.Create('Inadmissible or invalid expression.');
     end;
 end;

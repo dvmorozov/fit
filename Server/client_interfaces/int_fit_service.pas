@@ -41,8 +41,8 @@ type
         function GetState: TFitServerState;
         function GetWaveLength: Double;
         procedure SetWaveLength(AWaveLength: Double);
-        function GetEnableBackgroundVariation: Boolean;
-        procedure SetEnableBackgroundVariation(AEnable: Boolean);
+        function GetBackgroundVariationEnabled: Boolean;
+        procedure SetBackgroundVariationEnabled(AEnable: Boolean);
         function GetCurveScalingEnabled: Boolean;
         procedure SetCurveScalingEnabled(AEnabled: Boolean);
 

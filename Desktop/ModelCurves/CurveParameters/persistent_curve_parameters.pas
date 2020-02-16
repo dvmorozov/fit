@@ -21,7 +21,8 @@ interface
 
 uses
     Classes, SysUtils, self_copied_component,
-    persistent_curve_parameter_container, special_curve_parameter;
+    persistent_curve_parameter_container, special_curve_parameter,
+    amplitude_curve_parameter;
 
 type
     { Curve parameter container. It is used for persistent storage. }
@@ -104,8 +105,8 @@ begin
     FParams := TCollection.Create(TPersistentCurveParameterContainer);
     { Collection should contain at least on item, otherwise is written
       incorrectly. TODO: check it. }
-    Parameter := TSpecialCurveParameter.Create;
-    Parameter.Name := 'x';
+    Parameter := TAmplitudeCurveParameter.Create;
+    Parameter.Name := '?';
     Parameter.Type_ := Argument;
     Parameter.Value := 0;
 
@@ -131,9 +132,7 @@ begin
     for i := 0 to Count - 1 do
     begin
         Parameter := Parameters[i];
-
-        NewParameter := TSpecialCurveParameter.Create;
-        Parameter.CopyTo(NewParameter);
+        NewParameter := Parameter.CreateCopy;
 
         try
             NewContainer :=

@@ -47,10 +47,15 @@ type
 
     public
         constructor Create;
-        procedure CopyTo(const Dest: TSpecialCurveParameter);
+        procedure CopyTo(const Dest: TSpecialCurveParameter); virtual;
 
-        function MinimumStepAchieved(): Boolean; virtual;
-        procedure InitVariationStep(); virtual;
+        { Must be abstract because only instances of descendant classes could
+          be created. https://github.com/dvmorozov/fit/issues/143 }
+        function CreateCopy: TSpecialCurveParameter; virtual; abstract;
+        procedure InitVariationStep; virtual; abstract;
+        procedure InitValue; virtual; abstract;
+        function MinimumStepAchieved: Boolean; virtual; abstract;
+
         procedure MultiplyVariationStep(Factor: Double);
 
         property SavedValue: Double read FSavedValue write FSavedValue;
@@ -70,6 +75,8 @@ constructor TSpecialCurveParameter.Create;
 begin
     inherited Create;
     FType := Calculated;
+    InitValue;
+    InitVariationStep;
 end;
 
 procedure TSpecialCurveParameter.CopyTo(const Dest: TSpecialCurveParameter);
@@ -97,16 +104,6 @@ begin
     WriteLog(LogStr, Notification_);
 {$ENDIF}
     FValue := AValue;
-end;
-
-procedure TSpecialCurveParameter.InitVariationStep();
-begin
-    FVariationStep := 0.1;
-end;
-
-function TSpecialCurveParameter.MinimumStepAchieved(): Boolean;
-begin
-    Result := FVariationStep < 0.00001;
 end;
 
 procedure TSpecialCurveParameter.MultiplyVariationStep(Factor: Double);

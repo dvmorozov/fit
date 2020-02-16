@@ -63,7 +63,7 @@ type
           Using ranges is switched off when they are not given to accelerate computation. }
         UseCurveRanges: Boolean;
         { List of parameters of pattern instances (specimens) which are common for all the instances. }
-        CommonSpecimenParams: Curve_parameters;
+        FCommonVariableParameters: Curve_parameters;
         { Background parameters. }
         A, B, C, x0: Double;
 
@@ -169,9 +169,6 @@ type
         { Removes from list of curve positions the point
           in which experimental profile has maximal derivative.  }
         function DeleteMaxDerivative(var Deleted: TCurvePointsSet): Boolean;
-        { The method is called for initial creation of curves. 
-          It is executed more effectively than Update. }
-        //procedure CreateCurves;
 
         { Auxiliary methods. }
         { Deletes poins with given X from the list passed via parameter. }
@@ -185,7 +182,7 @@ type
         procedure CreateDHSMinimizer;
         { Calculates hash of initial values of parameters of pattern instance. }
         procedure CalcInitHash(Specimen: TCurvePointsSet);
-        function GetPatternSpecimen: TCurvePointsSet;
+        function CreatePatternInstance: TCurvePointsSet;
         function MinimumStepAchieved: Boolean;
         procedure InitializeVariationSteps;
 
@@ -215,7 +212,7 @@ type
             ACurveExpr: string; AParams: Curve_parameters);
         { Recreates pattern instances (curves). It should be public
           for initial calculation of R-factor for overall profile. }
-        procedure UpdateCurves(SpecimenParameters: TMSCRSpecimenList);
+        procedure RecreateCurveInstances(SpecimenParameters: TMSCRSpecimenList);
         { Searches pattern specimen by hash and sets its parameters 
           from the given list. }
         procedure SearchSpecimenAndInit(
@@ -456,7 +453,7 @@ begin
     else
     if CommonVaryingFlag then
     begin
-        Result := CommonSpecimenParams[CommonVaryingIndex].VariationStep;
+        Result := FCommonVariableParameters[CommonVaryingIndex].VariationStep;
     end
     else
     begin
@@ -478,7 +475,7 @@ var Curve: TCurvePointsSet;
 begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
     Assert(Assigned(CurvesList));
-    Assert(Assigned(CommonSpecimenParams));
+    Assert(Assigned(FCommonVariableParameters));
 
     EOC := True;
     if CurvesList.Count <> 0 then
@@ -502,7 +499,7 @@ begin
         Exit;
     end;
 
-    Count := CommonSpecimenParams.Params.Count;
+    Count := FCommonVariableParameters.Params.Count;
     if CommonVaryingFlag then
     begin
         //  poisk sleduyuschego obschego parametra,
@@ -511,7 +508,7 @@ begin
         begin
             Inc(CommonVaryingIndex);
             while (CommonVaryingIndex <> Count) and
-                   CommonSpecimenParams[CommonVaryingIndex].VariationDisabled do
+                   FCommonVariableParameters[CommonVaryingIndex].VariationDisabled do
                 Inc(CommonVaryingIndex);
         end;
     end;
@@ -550,9 +547,9 @@ begin
     ParamNum := 0;
     EOC := False;
     //  poisk pervogo parametra razreschennogo k variatsii
-    for i := 0 to CommonSpecimenParams.Params.Count - 1 do
+    for i := 0 to FCommonVariableParameters.Params.Count - 1 do
     begin
-        if not CommonSpecimenParams[i].VariationDisabled then Break;
+        if not FCommonVariableParameters[i].VariationDisabled then Break;
     end;
     CommonVaryingIndex := i;
     CommonVaryingFlag := False;
@@ -567,7 +564,7 @@ var GP: TCurvePointsSet;
 begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
     Assert(Assigned(CurvesList));
-    Assert(Assigned(CommonSpecimenParams));
+    Assert(Assigned(FCommonVariableParameters));
     
     if FEnableBackgroundVariation and BackgroundVaryingFlag then
     begin
@@ -583,8 +580,8 @@ begin
     else
     if CommonVaryingFlag then
     begin
-        Assert(CommonVaryingIndex < CommonSpecimenParams.Params.Count);
-        Parameter := CommonSpecimenParams[CommonVaryingIndex];
+        Assert(CommonVaryingIndex < FCommonVariableParameters.Params.Count);
+        Parameter := FCommonVariableParameters[CommonVaryingIndex];
         Result := Parameter.Value;
     end
     else
@@ -603,7 +600,7 @@ var GP: TCurvePointsSet;
 begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
     Assert(Assigned(CurvesList));
-    Assert(Assigned(CommonSpecimenParams));
+    Assert(Assigned(FCommonVariableParameters));
     
     if FEnableBackgroundVariation and BackgroundVaryingFlag then
     begin
@@ -626,8 +623,8 @@ begin
     else
     if CommonVaryingFlag then
     begin
-        Assert(CommonVaryingIndex < CommonSpecimenParams.Params.Count);
-        Parameter := CommonSpecimenParams[CommonVaryingIndex];
+        Assert(CommonVaryingIndex < FCommonVariableParameters.Params.Count);
+        Parameter := FCommonVariableParameters[CommonVaryingIndex];
         Parameter.Value := NewParamValue;
 
         //  ustanovka znacheniya obschego parametra u vseh ekzemplyarov
@@ -635,7 +632,7 @@ begin
         begin
             GP := TCurvePointsSet(CurvesList.Items[i]);
             GP.ValuesByName[
-                CommonSpecimenParams[CommonVaryingIndex].Name
+                FCommonVariableParameters[CommonVaryingIndex].Name
             ] := NewParamValue;
         end;
         //CalculateProfile;
@@ -670,11 +667,11 @@ end;
 procedure TFitTask.MultipleSteps(Factor: Double);
 var i: LongInt;
 begin
-    Assert(Assigned(CommonSpecimenParams));
+    Assert(Assigned(FCommonVariableParameters));
     
-    for i := 0 to CommonSpecimenParams.Params.Count - 1 do
+    for i := 0 to FCommonVariableParameters.Params.Count - 1 do
     begin
-        CommonSpecimenParams[i].MultiplyVariationStep(Factor);
+        FCommonVariableParameters[i].MultiplyVariationStep(Factor);
     end;
 end;
 
@@ -701,8 +698,8 @@ constructor TFitTask.Create(AOwner: TComponent;
     AEnableBackgroundVariation: Boolean; ACurveScalingEnabled: Boolean);
 begin
     inherited Create(AOwner);
-    CommonSpecimenParams := Curve_parameters.Create(nil);
-    CommonSpecimenParams.Params.Clear;  //  Curve_parameters sozdaet v konstruktore
+    FCommonVariableParameters := Curve_parameters.Create(nil);
+    FCommonVariableParameters.Params.Clear;  //  Curve_parameters sozdaet v konstruktore
                                         //  odin parametr - nuzhno ego udalit'
     FMaxRFactor := 0.01;
     //  Sets default curve type
@@ -724,7 +721,7 @@ begin
     CurvePositions.Free; CurvePositions := nil;
     FMinimizer.Free; FMinimizer := nil;
     Params.Free;
-    CommonSpecimenParams.Free;
+    FCommonVariableParameters.Free;
     inherited;
 end;
 
@@ -840,9 +837,9 @@ var
     i, j: LongInt;
     Curve: TCurvePointsSet;
 begin
-    for i := 0 to CommonSpecimenParams.Params.Count - 1 do
+    for i := 0 to FCommonVariableParameters.Params.Count - 1 do
     begin
-        CommonSpecimenParams[i].InitVariationStep;
+        FCommonVariableParameters[i].InitVariationStep;
     end;
 
     for i := 0 to CurvesList.Count - 1 do
@@ -860,9 +857,9 @@ var
     i, j: LongInt;
     Curve: TCurvePointsSet;
 begin
-    for i := 0 to CommonSpecimenParams.Params.Count - 1 do
+    for i := 0 to FCommonVariableParameters.Params.Count - 1 do
     begin
-        if not CommonSpecimenParams[i].MinimumStepAchieved then
+        if not FCommonVariableParameters[i].MinimumStepAchieved then
         begin
             Result := False;
             Exit;
@@ -1092,104 +1089,7 @@ begin
     Deleted := CurvesList.Extract(MinGP);
     Result := True;
 end;
-(*
-procedure TFitTask.CreateCurves;
-var i, j: LongInt;
-    SA: TPointsSet;
-    GP: TCurvePointsSet;
-begin
-    //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
-    Assert(Assigned(CurvePositions));
-    SA := ExpProfile;
-    Assert(Assigned(SA));
-    Assert(SA.PointsCount >= 2);
 
-    //  sozdaem zanovo nabor krivyh
-    CurvesList.Free; CurvesList := nil;
-    CurvesList := TSelfCopiedCompList.Create(nil);
-
-    //  sozdaem zanovo summarnyy profil'
-    if Assigned(CalcProfile) then CalcProfile.Clear
-    else CalcProfile := TPointsSet.Create(nil);
-    //  kol-vo tochek profilya ustanavlivaetsya ravnym kol-vu tochek uchastka
-    for i := 0 to SA.PointsCount - 1 do
-        CalcProfile.AddNewPoint(SA.PointXCoord[i], 0);
-        
-    if CurvePositions.PointsCount = 0 then
-    begin
-        //  dobavlyaetsya odin ekzemplyar patterna na dannyy interval;
-        //  esli pattern imeet parametr polozheniya, to u ekzemplyara
-        //  znachenie etogo parametra ustanavlivaetsya ravnym
-        //  seredine intervala
-        GP := GetPatternSpecimen;
-
-        try
-            //  dlina kazhdogo ekz. patterna ust. ravnoy
-            //  dline uchastka vybrannogo pol'zovatelem
-            for j := 0 to SA.PointsCount - 1 do
-                GP.AddNewPoint(SA.PointXCoord[j], 0);
-
-            if GP is TUserPointsSet then
-            begin
-                TUserPointsSet(GP).Expression := FCurveExpr;
-                TUserPointsSet(GP).SetParameters(
-                    Curve_parameters(Params.GetCopy));
-            end;
-            //  amplituda i tochka privyazki ustanavlivayutsya po
-            //  sredney tochke intervala
-            if GP.HasA then GP.A := SA.PointYCoord[SA.PointsCount div 2];
-            //  ust. polozhenie ekz. patterna
-            if GP.Hasx0 then
-            begin
-                GP.x0 := SA.PointXCoord[SA.PointsCount div 2];
-                GP.Initx0 := SA.PointXCoord[SA.PointsCount div 2];
-            end;
-            //  ne zapolnyaetsya, potomu chto ne nuzhna
-            //GP.Lambda := WaveLength;
-            CalcInitHash(GP);
-            //  dobavlenie novogo ekz. patterna v spisok
-            CurvesList.Add(GP);
-        except
-            GP.Free;
-            raise;
-        end;
-    end
-    else
-    begin
-        for i := 0 to CurvePositions.PointsCount - 1 do
-        begin
-            //  sozdaetsya novaya krivaya
-            GP := GetPatternSpecimen;
-
-            try
-                //  dlina kazhdoy krivoy ust. ravnoy dline uchastka
-                //  vybrannogo pol'zovatelem
-                for j := 0 to SA.PointsCount - 1 do
-                    GP.AddNewPoint(SA.PointXCoord[j], 0);
-
-                if GP.HasA then GP.A := CurvePositions.PointYCoord[i];
-                // ust. polozhenie krivoy
-                if GP.Hasx0 then
-                begin
-                    GP.x0 := CurvePositions.PointXCoord[i];
-                    GP.Initx0 := CurvePositions.PointXCoord[i];
-                end;
-                //  ne zapolnyaetsya, potomu chto ne nuzhna
-                //GP.Lambda := WaveLength;
-                CalcInitHash(GP);
-                //  dobavlenie novoy krivoy v spisok krivyh
-                CurvesList.Add(GP);
-                //  !!! esli net parametra-pozitsii, to sozdaetsya vsego odna
-                //  krivaya - ostal'nye tochki iz CurvePositions ignoriruyutsya !!!
-                if not GP.Hasx0 then Break;
-            except
-                GP.Free;
-                raise;
-            end;
-        end;
-    end;
-end;
-*)
 procedure TFitTask.CalcInitHash(Specimen: TCurvePointsSet);
 var i: LongInt;
     Parameter: TPersistentCurveParameterContainer;
@@ -1246,7 +1146,7 @@ begin
     end;
 end;
 
-function TFitTask.GetPatternSpecimen: TCurvePointsSet;
+function TFitTask.CreatePatternInstance: TCurvePointsSet;
 var i: LongInt;
     Parameter: TSpecialCurveParameter;
     Container: TPersistentCurveParameterContainer;
@@ -1261,7 +1161,6 @@ begin
     else
     if IsEqualGUID(FCurveTypeId, TPseudoVoigtPointsSet.GetCurveTypeId_) then
     begin
-        //Result := T2BranchesPseudoVoigtPointsSet.Create(nil);
         Result := TPseudoVoigtPointsSet.Create(nil)
     end
     else
@@ -1282,39 +1181,32 @@ begin
     else
     if IsEqualGUID(FCurveTypeId, T2BranchesPseudoVoigtPointsSet.GetCurveTypeId_) then
     begin
-        //  By default.
         Result := T2BranchesPseudoVoigtPointsSet.Create(nil);
     end;
     
-    if CommonSpecimenParams.Params.Count = 0 then
+    if FCommonVariableParameters.Count = 0 then
     begin
-        //  pervonachal'naya initsyalizatsyya spiska obschih parametrov;
-        for i := 0 to Result.Parameters.Params.Count - 1 do
+        //  Initializing list of common parameters. It is performed only
+        //  once when the first curve instance is created (it is assumed
+        //  that all the instances have the same type).
+        //  TODO: remove the assumption mentioned above.
+        for i := 0 to Result.Parameters.Count - 1 do
         begin
             if (Result.Parameters[i].Type_ = Shared) and (not
                 Result.Parameters[i].VariationDisabled) then
             begin
-                //  !!! predpolagaetsya, chto vse krivye odnogo tipa !!!
-                Parameter := TSpecialCurveParameter.Create;
+                Parameter := Result.Parameters[i].CreateCopy;
+                Parameter.InitValue;
+                Parameter.InitVariationStep;
 
                 try
-                    Result.Parameters[i].CopyTo(Parameter);
-                    //  spetsial'naya initsializatsiya
-                    if ((UpperCase(Parameter.Name) = 'SIGMA') or
-                       ((UpperCase(Parameter.Name) = 'SIGMARIGTH')))
-                        then
-                    begin
-                        Parameter.Value := 0.25;
-                        Parameter.VariationStep := 0.1;
-                    end;
-
                     Container := TPersistentCurveParameterContainer(
-                        CommonSpecimenParams.Params.Add);
+                        FCommonVariableParameters.Params.Add);
 
                     try
                         Container.Parameter := Parameter;
                     except
-                        CommonSpecimenParams.Params.Delete(Container.ID);
+                        FCommonVariableParameters.Params.Delete(Container.ID);
                         Container.Free;
                         raise;
                     end;
@@ -1327,38 +1219,29 @@ begin
         end;
     end;
     
-    for i := 0 to Result.Parameters.Params.Count - 1 do
+    for i := 0 to Result.Parameters.Count - 1 do
     begin
-        //  initsializatsiya znacheniy
-        if ((UpperCase(Result.Parameters[i].Name) = 'SIGMA') or
-           ((UpperCase(Result.Parameters[i].Name) = 'SIGMARIGTH')))
-            then
-        begin
-            Result.Parameters[i].Value := 0.25;
-            Result.Parameters[i].VariationStep := 0.1;
-        end;
+        Result.Parameters[i].InitValue;
+        Result.Parameters[i].InitVariationStep;
     end;
 end;
 
-procedure TFitTask.UpdateCurves(SpecimenParameters: TMSCRSpecimenList);
+procedure TFitTask.RecreateCurveInstances(SpecimenParameters: TMSCRSpecimenList);
 var i,j,k: LongInt;
-    SA: TPointsSet;
-    GP: TCurvePointsSet;
-    Flag: Boolean;
+    Curve: TCurvePointsSet;
+    CurveFound: Boolean;
     //  koordinaty tochki privyazki sozdavaemogo avtomaticheski
     //  ekz. patterna, kogda pol'zovatel'skie tochki privyazki
     //  ne zadany
-    //SpecX,
-    SpecY: Double;
+    //CurvePosition,
+    CurveAmplitude: Double;
 begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
     Assert(Assigned(CurvePositions));
-    SA := ExpProfile;
-    Assert(Assigned(SA));
-    Assert(SA.PointsCount >= 2);
+    Assert(Assigned(ExpProfile));
+    Assert(ExpProfile.PointsCount >= 2);
 
-    //  eto delaet vozmozhnym vyzov UpdateCurves
-    //  bez predvaritel'nogo vyzova CreateCurves
+    //  Saves previously created curve instances.
     if not Assigned(CurvesList) then
         CurvesList := TSelfCopiedCompList.Create(nil);
 
@@ -1366,44 +1249,44 @@ begin
     if Assigned(CalcProfile) then CalcProfile.Clear
     else CalcProfile := TPointsSet.Create(nil);
     //  kol-vo tochek profilya ustanavlivaetsya ravnym kol-vu tochek uchastka
-    for i := 0 to SA.PointsCount - 1 do
-        CalcProfile.AddNewPoint(SA.PointXCoord[i], 0);
+    for i := 0 to ExpProfile.PointsCount - 1 do
+        CalcProfile.AddNewPoint(ExpProfile.PointXCoord[i], 0);
     //  sozdaem zanovo massiv tochek fona
     if Assigned(Background) then Background.Clear
     else Background := TPointsSet.Create(nil);
-    for i := 0 to SA.PointsCount - 1 do
-        Background.AddNewPoint(SA.PointXCoord[i], 0);
+    for i := 0 to ExpProfile.PointsCount - 1 do
+        Background.AddNewPoint(ExpProfile.PointXCoord[i], 0);
 
     if Assigned(SavedBackground) then SavedBackground.Clear
     else SavedBackground := TPointsSet.Create(nil);
-    for i := 0 to SA.PointsCount - 1 do
-        SavedBackground.AddNewPoint(SA.PointXCoord[i], 0);
+    for i := 0 to ExpProfile.PointsCount - 1 do
+        SavedBackground.AddNewPoint(ExpProfile.PointXCoord[i], 0);
 
     //  proveryaem i udalyaem te ekz. patterna,
     //  polozheniya kot. net sredi vybrannyh tochek
     k := 0;
     while k < CurvesList.Count do
     begin
-        Flag := False;
-        GP := TCurvePointsSet(CurvesList.Items[k]);
+        CurveFound := False;
+        Curve := TCurvePointsSet(CurvesList.Items[k]);
         //  esli pattern ne imeet parametra polozheniya, to
         //  ego ekzemplyary ne udalyayutsya
-        if not GP.Hasx0 then Break;
+        if not Curve.Hasx0 then Break;
         
         for i := 0 to CurvePositions.PointsCount - 1 do
         begin
-            if GP.Initx0 = CurvePositions.PointXCoord[i] then
+            if Curve.Initx0 = CurvePositions.PointXCoord[i] then
             begin
-                Flag := True;
+                CurveFound := True;
                 Break;
             end;
         end;
 
-        if not Flag then
+        if not CurveFound then
         begin // udalyaem
             //  CurvesList po-umolchaniyu osvobozhdaet
             //  komponenty, ssylki na kotorye hranit
-            CurvesList.Remove(GP);
+            CurvesList.Remove(Curve);
         end
         else Inc(k);
     end;
@@ -1420,42 +1303,42 @@ begin
             //  znachenie etogo parametra ustanavlivaetsya ravnym
             //  seredine intervala
             (*  v pervom variante algoritma dobavlyalsya odin ekzemplyar
-                krivoy lyubogo tipa, odnako eto vyzyvalo problemu pri
+                krivoy tipa po umolchaniyu, odnako eto vyzyvalo problemu pri
                 ispol'zovanii programmy - nel'zya bylo udalit' iz
                 intervala edinstvennuyu krivuyu, sozdannuyu etim
                 algoritmom
-            GP := GetPatternSpecimen;
+            Curve := CreatePatternInstance;
 
             try
                 //  dlina kazhdogo ekz. patterna ust. ravnoy
                 //  dline uchastka vybrannogo pol'zovatelem
                 for j := 0 to SA.PointsCount - 1 do
-                    GP.AddNewPoint(SA.PointXCoord[j], 0);
+                    Curve.AddNewPoint(SA.PointXCoord[j], 0);
 
                 //  amplituda i tochka privyazki ustanavlivayutsya po
                 //  sredney tochke intervala
-                SpecX := SA.PointXCoord[SA.PointsCount div 2];
-                SpecY := SA.PointYCoord[SA.PointsCount div 2];
-                if GP.HasA then GP.A := SpecY;
+                CurvePosition := SA.PointXCoord[SA.PointsCount div 2];
+                CurveAmplitude := SA.PointYCoord[SA.PointsCount div 2];
+                if Curve.HasA then Curve.A := CurveAmplitude;
                 //  ust. polozhenie ekz. patterna
-                if GP.Hasx0 then
+                if Curve.Hasx0 then
                 begin
-                    GP.x0 := SpecX;
-                    GP.Initx0 := SpecX;
+                    Curve.x0 := CurvePosition;
+                    Curve.Initx0 := CurvePosition;
                 end;
-                if GP.HasSigma then GP.Sigma := Sigma;
+                if Curve.HasSigma then Curve.Sigma := Sigma;
                 //  ne zapolnyaetsya, potomu chto ne nuzhna
-                //GP.Lambda := WaveLength;
-                CalcInitHash(GP);
-                SearchSpecimenAndInit(SpecimenParameters, GP);
+                //Curve.Lambda := WaveLength;
+                CalcInitHash(Curve);
+                SearchSpecimenAndInit(SpecimenParameters, Curve);
                 //  dobavlenie novogo ekz. patterna v spisok
-                CurvesList.Add(GP);
+                CurvesList.Add(Curve);
                 //  dobavlenie tochki pryavyazki, kogda pattern imeet tochku
                 //  privyazki dlya posleduyuschego otobrazheniya v obschem spiske
                 if TCurvePointsSet(CurvesList.Items[0]).Hasx0 then
-                    CurvePositions.AddNewPoint(SpecX, SpecY);
+                    CurvePositions.AddNewPoint(CurvePosition, CurveAmplitude);
             except
-                GP.Free;
+                Curve.Free;
                 raise;
             end;
             *)
@@ -1464,33 +1347,33 @@ begin
             //  imeet parametra polozheniya
             if IsEqualGUID(FCurveTypeId, TUserPointsSet.GetCurveTypeId_) then
             begin
-                GP := GetPatternSpecimen;
+                Curve := CreatePatternInstance;
 
                 try
-                    TUserPointsSet(GP).Expression := FCurveExpr;
-                    TUserPointsSet(GP).SetParameters(
+                    TUserPointsSet(Curve).Expression := FCurveExpr;
+                    TUserPointsSet(Curve).SetParameters(
                         Curve_parameters(Params.GetCopy));
 
-                    if not GP.Hasx0 then
+                    if not Curve.Hasx0 then
                     begin
                         //  dlina kazhdogo ekz. patterna ust. ravnoy
                         //  dline uchastka vybrannogo pol'zovatelem
-                        for j := 0 to SA.PointsCount - 1 do
-                            GP.AddNewPoint(SA.PointXCoord[j], 0);
+                        for j := 0 to ExpProfile.PointsCount - 1 do
+                            Curve.AddNewPoint(ExpProfile.PointXCoord[j], 0);
 
                         //  amplituda i tochka privyazki ustanavlivayutsya po
                         //  sredney tochke intervala
-                        SpecY := SA.PointYCoord[SA.PointsCount div 2];
-                        if GP.HasA then GP.A := SpecY;
+                        CurveAmplitude := ExpProfile.PointYCoord[ExpProfile.PointsCount div 2];
+                        if Curve.HasA then Curve.A := CurveAmplitude;
                         //  ne zapolnyaetsya, potomu chto ne nuzhna
-                        //GP.Lambda := WaveLength;
-                        CalcInitHash(GP);
-                        SearchSpecimenAndInit(SpecimenParameters, GP);
+                        //Curve.Lambda := WaveLength;
+                        CalcInitHash(Curve);
+                        SearchSpecimenAndInit(SpecimenParameters, Curve);
                         //  dobavlenie novogo ekz. patterna v spisok
-                        CurvesList.Add(GP);
-                    end else GP.Free;
+                        CurvesList.Add(Curve);
+                    end else Curve.Free;
                 except
-                    GP.Free;
+                    Curve.Free;
                     raise;
                 end;
             end;
@@ -1500,52 +1383,52 @@ begin
             //  proveryaem vybrannye tochki i dobavlyaem novye ekz. patterna
             for i := 0 to CurvePositions.PointsCount - 1 do
             begin
-                Flag := False;
+                CurveFound := False;
                 for k := 0 to CurvesList.Count - 1 do
                 begin
-                    GP := TCurvePointsSet(CurvesList.Items[k]);
-                    if not GP.Hasx0 then Break;
+                    Curve := TCurvePointsSet(CurvesList.Items[k]);
+                    if not Curve.Hasx0 then Break;
 
-                    //if GP.Initx0 = CurvePositions.PointXCoord[i] then
-                    if Abs(GP.Initx0 - CurvePositions.PointXCoord[i]) <= TINY then
+                    //if Curve.Initx0 = CurvePositions.PointXCoord[i] then
+                    if Abs(Curve.Initx0 - CurvePositions.PointXCoord[i]) <= TINY then
                     begin
-                        Flag := True;
+                        CurveFound := True;
                         Break;
                     end;
                 end;
 
-                if not Flag then
+                if not CurveFound then
                 //  naydena tochka privyazki ekz. patterna, dlya kot. net
                 //  ekzemplyara (pri tom, chto pattern imeet parametr polozheniya)
                 //  ili spisok ekzemplyarov patterna pust
                 begin
                     //  sozdaetsya novyy ekz. patterna
-                    GP := GetPatternSpecimen;
+                    Curve := CreatePatternInstance;
 
                     try
                         //  dlina kazhdogo ekz. patterna ust. ravnoy
                         //  dline uchastka vybrannogo pol'zovatelem
-                        for j := 0 to SA.PointsCount - 1 do
-                            GP.AddNewPoint(SA.PointXCoord[j], 0);
+                        for j := 0 to ExpProfile.PointsCount - 1 do
+                            Curve.AddNewPoint(ExpProfile.PointXCoord[j], 0);
 
-                        if GP.HasA then GP.A := CurvePositions.PointYCoord[i];
+                        if Curve.HasA then Curve.A := CurvePositions.PointYCoord[i];
                         //  ust. polozhenie ekz. patterna
-                        if GP.Hasx0 then
+                        if Curve.Hasx0 then
                         begin
-                            GP.x0 := CurvePositions.PointXCoord[i];
-                            GP.Initx0 := CurvePositions.PointXCoord[i];
+                            Curve.x0 := CurvePositions.PointXCoord[i];
+                            Curve.Initx0 := CurvePositions.PointXCoord[i];
                         end;
                         //  ne zapolnyaetsya, potomu chto ne nuzhna
-                        //GP.Lambda := WaveLength;
-                        CalcInitHash(GP);
-                        SearchSpecimenAndInit(SpecimenParameters, GP);
+                        //Curve.Lambda := WaveLength;
+                        CalcInitHash(Curve);
+                        SearchSpecimenAndInit(SpecimenParameters, Curve);
                         //  dobavlenie novogo ekz. patterna v spisok
-                        CurvesList.Add(GP);
+                        CurvesList.Add(Curve);
                         //  esli pattern ne imeet parametra polozheniya,
                         //  to sozdaetsya tol'ko odin ekzemplyar
-                        if not GP.Hasx0 then Break;
+                        if not Curve.Hasx0 then Break;
                     except
-                        GP.Free;
+                        Curve.Free;
                         raise;
                     end;
                 end;
@@ -1702,7 +1585,7 @@ procedure TFitTask.FindGaussesAgain;
 begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyani
     // povtornaya initsializatsiya gaussianov
-    UpdateCurves(nil);
+    RecreateCurveInstances(nil);
     CalculateProfile;
     Optimization;
     DoneProc;

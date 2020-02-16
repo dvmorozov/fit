@@ -116,7 +116,7 @@ procedure TFitTaskWithThread.FindGaussesAgain;
 begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyani
     // povtornaya initsializatsiya gaussianov
-    UpdateCurves(nil);
+    RecreateCurveInstances(nil);
     CalculateProfile;
     RecreateMainCalcThread(Optimization, DoneProc);
 end;

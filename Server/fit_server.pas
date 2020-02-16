@@ -2363,7 +2363,7 @@ begin
         //  rabotaet ne optimal'no, no podhodit dlya
         //  povtornoy initsializatsii pri dobavlenii /
         //  udalenii tochek privyazki ekzemplyarov patterna
-        FT.UpdateCurves(SpecimenList);
+        FT.RecreateCurveInstances(SpecimenList);
         FT.CalculateProfile;
     end;
 end;

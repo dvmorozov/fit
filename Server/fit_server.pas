@@ -35,6 +35,7 @@ uses Classes, title_points_set, SelfCheckedComponentList, SysUtils,
      mscr_specimen_list, curve_points_set, named_points_set, points_set,
      gauss_points_set, user_points_set, int_points_set, special_curve_parameter,
      persistent_curve_parameter_container, persistent_curve_parameters,
+     calculated_curve_parameter, user_curve_parameter,
 {$IFDEF FIT}
      { Proxy to client to call it back. }
      fit_server_proxy,
@@ -1573,14 +1574,13 @@ var
 
     procedure AddNewParameter(Name: string; Value: Double);
     var
-        Parameter: TSpecialCurveParameter;
+        Parameter: TCalculatedCurveParameter;
         Container: TPersistentCurveParameterContainer;
     begin
         try
-            Parameter := TSpecialCurveParameter.Create;
+            Parameter := TCalculatedCurveParameter.Create;
             Parameter.Name := Name;
             Parameter.Value := Value;
-            Parameter.Type_ := Calculated;
 
             Container := TPersistentCurveParameterContainer(CurveParameters.Params.Add);
             try
@@ -2590,7 +2590,6 @@ begin
     Assert(Assigned(Params.Params));
 
     if Length(ACurveExpr) = 0 then
-        //  eto dopustimaya fatal'naya oshibka pol'zovatelya
         raise EUserException.Create('Inadmissible or invalid expression.');
 
     Result := ParseAndCalcExpression(PChar(ACurveExpr), '', @ExprResult);
@@ -2601,13 +2600,13 @@ begin
     begin
         //  pervonachal'noe zapolnenie parametrov
         Params.Params.Clear;
-
+        //  List of parameter names separated by zeros.
         Symbols := GetSymbols;
         Saved := Symbols;
         try
             while Assigned(Symbols) and (Length(Symbols) <> 0) do
             begin
-                Parameter := TSpecialCurveParameter.Create;
+                Parameter := TUserCurveParameter.Create;
 
                 try
                     Parameter.Name := Symbols;
@@ -2653,9 +2652,6 @@ begin
     end
     else
     begin
-        //  eto dopustimaya fatal'naya oshibka pol'zovatelya -
-        //  sostoyanie d. sohranit'sya, pol'zovatelyu d.b.
-        //  sdelano soobschenie
         raise EUserException.Create('Inadmissible or invalid expression.');
     end;
 end;

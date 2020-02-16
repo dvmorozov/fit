@@ -54,8 +54,8 @@ type
         function CreateCopy: TSpecialCurveParameter; virtual; abstract;
         procedure InitVariationStep; virtual; abstract;
         procedure InitValue; virtual; abstract;
+        function MinimumStepAchieved: Boolean; virtual; abstract;
 
-        function MinimumStepAchieved: Boolean; virtual;
         procedure MultiplyVariationStep(Factor: Double);
 
         property SavedValue: Double read FSavedValue write FSavedValue;
@@ -104,11 +104,6 @@ begin
     WriteLog(LogStr, Notification_);
 {$ENDIF}
     FValue := AValue;
-end;
-
-function TSpecialCurveParameter.MinimumStepAchieved(): Boolean;
-begin
-    Result := FVariationStep < 0.00001;
 end;
 
 procedure TSpecialCurveParameter.MultiplyVariationStep(Factor: Double);

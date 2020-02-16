@@ -21,6 +21,7 @@ type
         function CreateCopy: TSpecialCurveParameter; override;
         procedure InitVariationStep; override;
         procedure InitValue; override;
+        function MinimumStepAchieved: Boolean; override;
     end;
 
 implementation
@@ -59,6 +60,11 @@ begin
 {$ENDIF}
     FValue := Abs(AValue);
     if FValue = 0 then FValue := TINY;
+end;
+
+function TSigmaCurveParameter.MinimumStepAchieved: Boolean;
+begin
+    Result := FVariationStep < 0.00001;
 end;
 
 end.

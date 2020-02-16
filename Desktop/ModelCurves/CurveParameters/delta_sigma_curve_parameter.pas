@@ -21,6 +21,7 @@ type
         function CreateCopy: TSpecialCurveParameter; override;
         procedure InitVariationStep; override;
         procedure InitValue; override;
+        function MinimumStepAchieved: Boolean; override;
     end;
 
 implementation
@@ -58,6 +59,11 @@ begin
     WriteLog(LogStr, Notification_);
 {$ENDIF}
     FValue := AValue;
+end;
+
+function TDeltaSigmaCurveParameter.MinimumStepAchieved: Boolean;
+begin
+    Result := FVariationStep < 0.00001;
 end;
 
 end.

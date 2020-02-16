@@ -22,8 +22,7 @@ type
         function CreateCopy: TSpecialCurveParameter; override;
         procedure InitVariationStep; override;
         procedure InitValue; override;
-
-        function MinimumStepAchieved(): Boolean; override;
+        function MinimumStepAchieved: Boolean; override;
     end;
 
 implementation
@@ -63,7 +62,7 @@ begin
     FValue := Abs(AValue);
 end;
 
-function TAmplitudeCurveParameter.MinimumStepAchieved(): Boolean;
+function TAmplitudeCurveParameter.MinimumStepAchieved: Boolean;
 begin
     Result := FVariationStep < 0.0001;
 end;

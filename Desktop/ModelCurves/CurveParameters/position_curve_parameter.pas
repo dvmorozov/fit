@@ -27,6 +27,7 @@ type
         function CreateCopy: TSpecialCurveParameter; override;
         procedure InitVariationStep; override;
         procedure InitValue; override;
+        function MinimumStepAchieved: Boolean; override;
     end;
 
 const
@@ -114,6 +115,11 @@ begin
         if FValue > Fx0High then begin FValue := Fx0High; Exit end;
         FValue := AValue;
     end;
+end;
+
+function TPositionCurveParameter.MinimumStepAchieved: Boolean;
+begin
+    Result := FVariationStep < 0.00001;
 end;
 
 end.

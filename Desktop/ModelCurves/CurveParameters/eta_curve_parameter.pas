@@ -21,6 +21,7 @@ type
         function CreateCopy: TSpecialCurveParameter; override;
         procedure InitVariationStep; override;
         procedure InitValue; override;
+        function MinimumStepAchieved: Boolean; override;
     end;
 
 implementation
@@ -59,6 +60,11 @@ begin
 {$ENDIF}
     FValue := Abs(AValue);
     if FValue > 1 then FValue := 1;
+end;
+
+function TEtaCurveParameter.MinimumStepAchieved: Boolean;
+begin
+    Result := FVariationStep < 0.00001;
 end;
 
 end.

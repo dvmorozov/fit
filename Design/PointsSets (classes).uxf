@@ -644,7 +644,7 @@ curves.</panel_attributes>
       <w>182</w>
       <h>21</h>
     </coordinates>
-    <panel_attributes>TSpecialCurveParameter</panel_attributes>
+    <panel_attributes>/TSpecialCurveParameter/</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -686,11 +686,11 @@ layer=1</panel_attributes>
     <coordinates>
       <x>133</x>
       <y>252</y>
-      <w>154</w>
+      <w>147</w>
       <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>200.0;80.0;200.0;40.0;10.0;40.0;10.0;10.0</additional_attributes>
+    <additional_attributes>190.0;80.0;190.0;40.0;10.0;40.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -708,11 +708,11 @@ layer=1</panel_attributes>
     <coordinates>
       <x>133</x>
       <y>126</y>
-      <w>189</w>
+      <w>175</w>
       <h>196</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>250.0;260.0;250.0;130.0;10.0;130.0;10.0;10.0</additional_attributes>
+    <additional_attributes>230.0;260.0;230.0;140.0;10.0;140.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -728,13 +728,13 @@ layer=1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>420</x>
+      <x>427</x>
       <y>126</y>
-      <w>154</w>
+      <w>147</w>
       <h>196</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;260.0;10.0;130.0;200.0;130.0;200.0;10.0</additional_attributes>
+    <additional_attributes>10.0;260.0;10.0;140.0;190.0;140.0;190.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -750,12 +750,58 @@ layer=1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>385</x>
+      <x>371</x>
       <y>126</y>
       <w>21</w>
       <h>196</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;260.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>49</x>
+      <y>168</y>
+      <w>182</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>TCalculatedCurveParameter
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>154</x>
+      <y>182</y>
+      <w>182</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>240.0;180.0;240.0;30.0;10.0;30.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>469</x>
+      <y>168</y>
+      <w>182</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>TUserCurveParameter
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>399</x>
+      <y>182</y>
+      <w>154</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;180.0;10.0;30.0;200.0;30.0;200.0;10.0</additional_attributes>
   </element>
 </diagram>

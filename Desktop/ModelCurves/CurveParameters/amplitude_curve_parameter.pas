@@ -19,9 +19,11 @@ type
 
     public
         constructor Create;
+        function CreateCopy: TSpecialCurveParameter; override;
+        procedure InitVariationStep; override;
+        procedure InitValue; override;
 
         function MinimumStepAchieved(): Boolean; override;
-        procedure InitVariationStep(); override;
     end;
 
 implementation
@@ -30,8 +32,23 @@ constructor TAmplitudeCurveParameter.Create;
 begin
     inherited;
     FName := 'A';
-    FValue := 0;
     FType := Variable;
+end;
+
+procedure TAmplitudeCurveParameter.InitVariationStep;
+begin
+    FVariationStep := 100;
+end;
+
+procedure TAmplitudeCurveParameter.InitValue;
+begin
+    FValue := 0;
+end;
+
+function TAmplitudeCurveParameter.CreateCopy: TSpecialCurveParameter;
+begin
+    Result := TAmplitudeCurveParameter.Create;
+    CopyTo(Result);
 end;
 
 procedure TAmplitudeCurveParameter.SetValue(AValue: Double);
@@ -49,11 +66,6 @@ end;
 function TAmplitudeCurveParameter.MinimumStepAchieved(): Boolean;
 begin
     Result := FVariationStep < 0.0001;
-end;
-
-procedure TAmplitudeCurveParameter.InitVariationStep();
-begin
-    FVariationStep := 100;
 end;
 
 end.

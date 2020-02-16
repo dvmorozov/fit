@@ -1597,7 +1597,6 @@ var
     end;
 
 begin
-    //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
     Assert(Assigned(Points));
     Assert(Assigned(SpecimenList));
     Integral := Integrate(Points, StartPointIndex, StopPointIndex);

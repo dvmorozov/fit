@@ -24,8 +24,9 @@ type
 
     public
         constructor Create(APointsSet: TPointsSet);
-
-        procedure InitVariationStep(); override;
+        function CreateCopy: TSpecialCurveParameter; override;
+        procedure InitVariationStep; override;
+        procedure InitValue; override;
     end;
 
 const
@@ -40,10 +41,25 @@ constructor TPositionCurveParameter.Create;
 begin
     inherited Create;
     FName := 'x0';
-    FValue := 0;
     FType := VariablePosition;
     Fx0IsSet := False;
     FPointsSet := APointsSet;
+end;
+
+procedure TPositionCurveParameter.InitVariationStep;
+begin
+   FVariationStep := 0.01;
+end;
+
+procedure TPositionCurveParameter.InitValue;
+begin
+    FValue := 0;
+end;
+
+function TPositionCurveParameter.CreateCopy: TSpecialCurveParameter;
+begin
+    Result := TPositionCurveParameter.Create(FPointsSet);
+    CopyTo(Result);
 end;
 
 procedure TPositionCurveParameter.SetValue(AValue: Double);
@@ -98,11 +114,6 @@ begin
         if FValue > Fx0High then begin FValue := Fx0High; Exit end;
         FValue := AValue;
     end;
-end;
-
-procedure TPositionCurveParameter.InitVariationStep();
-begin
-    FVariationStep := 0.01;
 end;
 
 end.

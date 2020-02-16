@@ -18,6 +18,9 @@ type
 
     public
         constructor Create;
+        function CreateCopy: TSpecialCurveParameter; override;
+        procedure InitVariationStep; override;
+        procedure InitValue; override;
     end;
 
 implementation
@@ -26,8 +29,23 @@ constructor TEtaCurveParameter.Create;
 begin
     inherited;
     FName := 'eta';
-    FValue := 0;
     FType := Variable;
+end;
+
+procedure TEtaCurveParameter.InitVariationStep;
+begin
+    FVariationStep := 0.1;
+end;
+
+procedure TEtaCurveParameter.InitValue;
+begin
+    FValue := 0;
+end;
+
+function TEtaCurveParameter.CreateCopy: TSpecialCurveParameter;
+begin
+    Result := TEtaCurveParameter.Create;
+    CopyTo(Result);
 end;
 
 procedure TEtaCurveParameter.SetValue(AValue: Double);

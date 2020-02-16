@@ -63,7 +63,7 @@ type
           Using ranges is switched off when they are not given to accelerate computation. }
         UseCurveRanges: Boolean;
         { List of parameters of pattern instances (specimens) which are common for all the instances. }
-        CommonSpecimenParams: Curve_parameters;
+        FCommonVariableParameters: Curve_parameters;
         { Background parameters. }
         A, B, C, x0: Double;
 
@@ -182,7 +182,7 @@ type
         procedure CreateDHSMinimizer;
         { Calculates hash of initial values of parameters of pattern instance. }
         procedure CalcInitHash(Specimen: TCurvePointsSet);
-        function GetPatternSpecimen: TCurvePointsSet;
+        function CreatePatternInstance: TCurvePointsSet;
         function MinimumStepAchieved: Boolean;
         procedure InitializeVariationSteps;
 
@@ -453,7 +453,7 @@ begin
     else
     if CommonVaryingFlag then
     begin
-        Result := CommonSpecimenParams[CommonVaryingIndex].VariationStep;
+        Result := FCommonVariableParameters[CommonVaryingIndex].VariationStep;
     end
     else
     begin
@@ -475,7 +475,7 @@ var Curve: TCurvePointsSet;
 begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
     Assert(Assigned(CurvesList));
-    Assert(Assigned(CommonSpecimenParams));
+    Assert(Assigned(FCommonVariableParameters));
 
     EOC := True;
     if CurvesList.Count <> 0 then
@@ -499,7 +499,7 @@ begin
         Exit;
     end;
 
-    Count := CommonSpecimenParams.Params.Count;
+    Count := FCommonVariableParameters.Params.Count;
     if CommonVaryingFlag then
     begin
         //  poisk sleduyuschego obschego parametra,
@@ -508,7 +508,7 @@ begin
         begin
             Inc(CommonVaryingIndex);
             while (CommonVaryingIndex <> Count) and
-                   CommonSpecimenParams[CommonVaryingIndex].VariationDisabled do
+                   FCommonVariableParameters[CommonVaryingIndex].VariationDisabled do
                 Inc(CommonVaryingIndex);
         end;
     end;
@@ -547,9 +547,9 @@ begin
     ParamNum := 0;
     EOC := False;
     //  poisk pervogo parametra razreschennogo k variatsii
-    for i := 0 to CommonSpecimenParams.Params.Count - 1 do
+    for i := 0 to FCommonVariableParameters.Params.Count - 1 do
     begin
-        if not CommonSpecimenParams[i].VariationDisabled then Break;
+        if not FCommonVariableParameters[i].VariationDisabled then Break;
     end;
     CommonVaryingIndex := i;
     CommonVaryingFlag := False;
@@ -564,7 +564,7 @@ var GP: TCurvePointsSet;
 begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
     Assert(Assigned(CurvesList));
-    Assert(Assigned(CommonSpecimenParams));
+    Assert(Assigned(FCommonVariableParameters));
     
     if FEnableBackgroundVariation and BackgroundVaryingFlag then
     begin
@@ -580,8 +580,8 @@ begin
     else
     if CommonVaryingFlag then
     begin
-        Assert(CommonVaryingIndex < CommonSpecimenParams.Params.Count);
-        Parameter := CommonSpecimenParams[CommonVaryingIndex];
+        Assert(CommonVaryingIndex < FCommonVariableParameters.Params.Count);
+        Parameter := FCommonVariableParameters[CommonVaryingIndex];
         Result := Parameter.Value;
     end
     else
@@ -600,7 +600,7 @@ var GP: TCurvePointsSet;
 begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
     Assert(Assigned(CurvesList));
-    Assert(Assigned(CommonSpecimenParams));
+    Assert(Assigned(FCommonVariableParameters));
     
     if FEnableBackgroundVariation and BackgroundVaryingFlag then
     begin
@@ -623,8 +623,8 @@ begin
     else
     if CommonVaryingFlag then
     begin
-        Assert(CommonVaryingIndex < CommonSpecimenParams.Params.Count);
-        Parameter := CommonSpecimenParams[CommonVaryingIndex];
+        Assert(CommonVaryingIndex < FCommonVariableParameters.Params.Count);
+        Parameter := FCommonVariableParameters[CommonVaryingIndex];
         Parameter.Value := NewParamValue;
 
         //  ustanovka znacheniya obschego parametra u vseh ekzemplyarov
@@ -632,7 +632,7 @@ begin
         begin
             GP := TCurvePointsSet(CurvesList.Items[i]);
             GP.ValuesByName[
-                CommonSpecimenParams[CommonVaryingIndex].Name
+                FCommonVariableParameters[CommonVaryingIndex].Name
             ] := NewParamValue;
         end;
         //CalculateProfile;
@@ -667,11 +667,11 @@ end;
 procedure TFitTask.MultipleSteps(Factor: Double);
 var i: LongInt;
 begin
-    Assert(Assigned(CommonSpecimenParams));
+    Assert(Assigned(FCommonVariableParameters));
     
-    for i := 0 to CommonSpecimenParams.Params.Count - 1 do
+    for i := 0 to FCommonVariableParameters.Params.Count - 1 do
     begin
-        CommonSpecimenParams[i].MultiplyVariationStep(Factor);
+        FCommonVariableParameters[i].MultiplyVariationStep(Factor);
     end;
 end;
 
@@ -698,8 +698,8 @@ constructor TFitTask.Create(AOwner: TComponent;
     AEnableBackgroundVariation: Boolean; ACurveScalingEnabled: Boolean);
 begin
     inherited Create(AOwner);
-    CommonSpecimenParams := Curve_parameters.Create(nil);
-    CommonSpecimenParams.Params.Clear;  //  Curve_parameters sozdaet v konstruktore
+    FCommonVariableParameters := Curve_parameters.Create(nil);
+    FCommonVariableParameters.Params.Clear;  //  Curve_parameters sozdaet v konstruktore
                                         //  odin parametr - nuzhno ego udalit'
     FMaxRFactor := 0.01;
     //  Sets default curve type
@@ -721,7 +721,7 @@ begin
     CurvePositions.Free; CurvePositions := nil;
     FMinimizer.Free; FMinimizer := nil;
     Params.Free;
-    CommonSpecimenParams.Free;
+    FCommonVariableParameters.Free;
     inherited;
 end;
 
@@ -837,9 +837,9 @@ var
     i, j: LongInt;
     Curve: TCurvePointsSet;
 begin
-    for i := 0 to CommonSpecimenParams.Params.Count - 1 do
+    for i := 0 to FCommonVariableParameters.Params.Count - 1 do
     begin
-        CommonSpecimenParams[i].InitVariationStep;
+        FCommonVariableParameters[i].InitVariationStep;
     end;
 
     for i := 0 to CurvesList.Count - 1 do
@@ -857,9 +857,9 @@ var
     i, j: LongInt;
     Curve: TCurvePointsSet;
 begin
-    for i := 0 to CommonSpecimenParams.Params.Count - 1 do
+    for i := 0 to FCommonVariableParameters.Params.Count - 1 do
     begin
-        if not CommonSpecimenParams[i].MinimumStepAchieved then
+        if not FCommonVariableParameters[i].MinimumStepAchieved then
         begin
             Result := False;
             Exit;
@@ -1146,7 +1146,7 @@ begin
     end;
 end;
 
-function TFitTask.GetPatternSpecimen: TCurvePointsSet;
+function TFitTask.CreatePatternInstance: TCurvePointsSet;
 var i: LongInt;
     Parameter: TSpecialCurveParameter;
     Container: TPersistentCurveParameterContainer;
@@ -1161,7 +1161,6 @@ begin
     else
     if IsEqualGUID(FCurveTypeId, TPseudoVoigtPointsSet.GetCurveTypeId_) then
     begin
-        //Result := T2BranchesPseudoVoigtPointsSet.Create(nil);
         Result := TPseudoVoigtPointsSet.Create(nil)
     end
     else
@@ -1182,39 +1181,32 @@ begin
     else
     if IsEqualGUID(FCurveTypeId, T2BranchesPseudoVoigtPointsSet.GetCurveTypeId_) then
     begin
-        //  By default.
         Result := T2BranchesPseudoVoigtPointsSet.Create(nil);
     end;
     
-    if CommonSpecimenParams.Params.Count = 0 then
+    if FCommonVariableParameters.Count = 0 then
     begin
-        //  pervonachal'naya initsyalizatsyya spiska obschih parametrov;
-        for i := 0 to Result.Parameters.Params.Count - 1 do
+        //  Initializing list of common parameters. It is performed only
+        //  once when the first curve instance is created (it is assumed
+        //  that all the instances have the same type).
+        //  TODO: remove the assumption mentioned above.
+        for i := 0 to Result.Parameters.Count - 1 do
         begin
             if (Result.Parameters[i].Type_ = Shared) and (not
                 Result.Parameters[i].VariationDisabled) then
             begin
-                //  !!! predpolagaetsya, chto vse krivye odnogo tipa !!!
-                Parameter := TSpecialCurveParameter.Create;
+                Parameter := Result.Parameters[i].CreateCopy;
+                Parameter.InitValue;
+                Parameter.InitVariationStep;
 
                 try
-                    Result.Parameters[i].CopyTo(Parameter);
-                    //  spetsial'naya initsializatsiya
-                    if ((UpperCase(Parameter.Name) = 'SIGMA') or
-                       ((UpperCase(Parameter.Name) = 'SIGMARIGTH')))
-                        then
-                    begin
-                        Parameter.Value := 0.25;
-                        Parameter.VariationStep := 0.1;
-                    end;
-
                     Container := TPersistentCurveParameterContainer(
-                        CommonSpecimenParams.Params.Add);
+                        FCommonVariableParameters.Params.Add);
 
                     try
                         Container.Parameter := Parameter;
                     except
-                        CommonSpecimenParams.Params.Delete(Container.ID);
+                        FCommonVariableParameters.Params.Delete(Container.ID);
                         Container.Free;
                         raise;
                     end;
@@ -1227,16 +1219,10 @@ begin
         end;
     end;
     
-    for i := 0 to Result.Parameters.Params.Count - 1 do
+    for i := 0 to Result.Parameters.Count - 1 do
     begin
-        //  initsializatsiya znacheniy
-        if ((UpperCase(Result.Parameters[i].Name) = 'SIGMA') or
-           ((UpperCase(Result.Parameters[i].Name) = 'SIGMARIGTH')))
-            then
-        begin
-            Result.Parameters[i].Value := 0.25;
-            Result.Parameters[i].VariationStep := 0.1;
-        end;
+        Result.Parameters[i].InitValue;
+        Result.Parameters[i].InitVariationStep;
     end;
 end;
 
@@ -1321,7 +1307,7 @@ begin
                 ispol'zovanii programmy - nel'zya bylo udalit' iz
                 intervala edinstvennuyu krivuyu, sozdannuyu etim
                 algoritmom
-            Curve := GetPatternSpecimen;
+            Curve := CreatePatternInstance;
 
             try
                 //  dlina kazhdogo ekz. patterna ust. ravnoy
@@ -1361,7 +1347,7 @@ begin
             //  imeet parametra polozheniya
             if IsEqualGUID(FCurveTypeId, TUserPointsSet.GetCurveTypeId_) then
             begin
-                Curve := GetPatternSpecimen;
+                Curve := CreatePatternInstance;
 
                 try
                     TUserPointsSet(Curve).Expression := FCurveExpr;
@@ -1417,7 +1403,7 @@ begin
                 //  ili spisok ekzemplyarov patterna pust
                 begin
                     //  sozdaetsya novyy ekz. patterna
-                    Curve := GetPatternSpecimen;
+                    Curve := CreatePatternInstance;
 
                     try
                         //  dlina kazhdogo ekz. patterna ust. ravnoy

@@ -18,6 +18,9 @@ type
 
     public
         constructor Create;
+        function CreateCopy: TSpecialCurveParameter; override;
+        procedure InitVariationStep; override;
+        procedure InitValue; override;
     end;
 
 implementation
@@ -26,8 +29,23 @@ constructor TSigmaCurveParameter.Create;
 begin
     inherited;
     FName := 'sigma';
-    FValue := 0.25;
     FType := Variable;
+end;
+
+procedure TSigmaCurveParameter.InitVariationStep;
+begin
+    FVariationStep := 0.1;
+end;
+
+procedure TSigmaCurveParameter.InitValue;
+begin
+    FValue := 0.25;
+end;
+
+function TSigmaCurveParameter.CreateCopy: TSpecialCurveParameter;
+begin
+    Result := TSigmaCurveParameter.Create;
+    CopyTo(Result);
 end;
 
 procedure TSigmaCurveParameter.SetValue(AValue: Double);

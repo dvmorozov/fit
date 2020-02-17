@@ -275,6 +275,11 @@ type
 
                 { Set experimental profile data. }
         function SetProfilePointsSet(APointsSet: TTitlePointsSet): string;
+
+        { Methods return copies of objects, they should be free by caller. }
+
+        function GetCalcProfilePointsSet: TTitlePointsSet;
+        function GetDeltaProfilePointsSet: TTitlePointsSet;
                 { Get experimental profile data. }
         function GetProfilePointsSet: TTitlePointsSet;
                 { Get data for the selected interval. }
@@ -330,9 +335,6 @@ type
             var Name: string; var Value: Double; var Type_: LongInt);
         procedure SetSpecimenParameter(SpecIndex: LongInt; ParamIndex: LongInt;
             Value: Double);
-
-        function GetCalcProfilePointsSet: TTitlePointsSet;
-        function GetDeltaProfilePointsSet: TTitlePointsSet;
 
                 { Asynchronous long-term operations. }
                 { Smoothes experimental data. Returns describing message.
@@ -1336,32 +1338,50 @@ end;
 
 function TFitServer.GetBackgroundPoints: TTitlePointsSet;
 begin
-    Result := TTitlePointsSet(BackgroundPoints.GetCopy);
+    if Assigned(BackgroundPoints) then
+        Result := TTitlePointsSet(BackgroundPoints.GetCopy)
+    else
+        Result := nil;
 end;
 
 function TFitServer.GetProfilePointsSet: TTitlePointsSet;
 begin
-    Result := TTitlePointsSet(ExpProfile.GetCopy);
+    if Assigned(ExpProfile) then
+        Result := TTitlePointsSet(ExpProfile.GetCopy)
+    else
+        Result := nil;
 end;
 
 function TFitServer.GetSelectedArea: TTitlePointsSet;
 begin
-    Result := TTitlePointsSet(SelectedArea.GetCopy);
+    if Assigned(SelectedArea) then
+        Result := TTitlePointsSet(SelectedArea.GetCopy)
+    else
+        Result := nil;
 end;
 
 function TFitServer.GetCalcProfilePointsSet: TTitlePointsSet;
 begin
-    Result := TTitlePointsSet(CalcProfile.GetCopy);
+    if Assigned(CalcProfile) then
+        Result := TTitlePointsSet(CalcProfile.GetCopy)
+    else
+        Result := nil;
 end;
 
 function TFitServer.GetDeltaProfilePointsSet: TTitlePointsSet;
 begin
-    Result := TTitlePointsSet(DeltaProfile.GetCopy);
+    if Assigned(DeltaProfile) then
+        Result := TTitlePointsSet(DeltaProfile.GetCopy)
+    else
+        Result := nil;
 end;
 
 function TFitServer.GetRFactorIntervals: TTitlePointsSet;
 begin
-    Result := TTitlePointsSet(RFactorIntervals.GetCopy);
+    if Assigned(RFactorIntervals) then
+        Result := TTitlePointsSet(RFactorIntervals.GetCopy)
+    else
+        Result := nil;
 end;
 
 {$IFDEF _WINDOWS}
@@ -1373,12 +1393,18 @@ end;
 
 function TFitServer.GetCurvePositions: TTitlePointsSet;
 begin
-    Result := TTitlePointsSet(CurvePositions.GetCopy);
+    if Assigned(CurvePositions) then
+        Result := TTitlePointsSet(CurvePositions.GetCopy)
+    else
+        Result := nil;
 end;
 
 function TFitServer.GetCurvesList: TSelfCopiedCompList;
 begin
-    Result := TSelfCopiedCompList(FCurvesList.GetCopy);
+    if Assigned(FCurvesList) then
+        Result := TSelfCopiedCompList(FCurvesList.GetCopy)
+    else
+        Result := nil;
 end;
 
 function TFitServer.GetSpecimenCount: LongInt;

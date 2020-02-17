@@ -35,7 +35,7 @@ uses Classes, title_points_set, SelfCheckedComponentList, SysUtils,
      mscr_specimen_list, curve_points_set, named_points_set, points_set,
      gauss_points_set, user_points_set, int_points_set, special_curve_parameter,
      persistent_curve_parameter_container, persistent_curve_parameters,
-     calculated_curve_parameter, user_curve_parameter,
+     calculated_curve_parameter,
 {$IFDEF FIT}
      { Proxy to client to call it back. }
      fit_server_proxy,
@@ -44,7 +44,7 @@ uses Classes, title_points_set, SelfCheckedComponentList, SysUtils,
      main_calc_thread, common_types, int_client_callback, int_fit_service,
      CBRCComponent
 {$IFDEF _WINDOWS}
-     , Windows
+     , user_curve_parameter, Windows
 {$ENDIF}
      ;
 

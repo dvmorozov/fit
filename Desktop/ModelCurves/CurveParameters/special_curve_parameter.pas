@@ -8,7 +8,7 @@ unit special_curve_parameter;
 
 interface
 
-uses Classes, SysUtils;
+uses Classes, SysUtils, log;
 
 type
     TParameterType = (
@@ -96,12 +96,13 @@ end;
 
 procedure TSpecialCurveParameter.SetValue(AValue: Double);
 {$IFDEF WRITE_PARAMS_LOG}
+var
     LogStr: string;
 {$ENDIF}
 begin
 {$IFDEF WRITE_PARAMS_LOG}
     LogStr := 'SetValue: Name = ' + FName + ', Value = ' + FloatToStr(AValue);
-    WriteLog(LogStr, Notification_);
+    WriteLog(LogStr, Notification);
 {$ENDIF}
     FValue := AValue;
 end;

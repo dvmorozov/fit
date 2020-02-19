@@ -13,14 +13,14 @@ uses
   cthreads,
 {$ENDIF}{$ENDIF}
   Interfaces,   //  LCL widgetset
-  Forms, Variants, form_main, about_box_dialog, input_wavelength_dialog,
+  Forms, Variants, app, form_main, about_box_dialog, input_wavelength_dialog,
   input_back_factor_dialog, input_max_rfactor_dialog, fit_client,
   fit_client_stub, fit_client_app, app_settings, TurboPowerIPro,
   SelfCheckedComponentList, StrUtils, common_types, table_components,
   serialization_ids, GeneralHashFunctions, create_user_points_set_dlg,
   user_points_set_prop_dialog, configurable_points_set,
   configurable_user_points_set, int_fit_service, fit_server, fit_task,
-  persistent_curve_parameter_container, persistent_curve_parameters;
+  persistent_curve_parameter_container, persistent_curve_parameters, unit1;
 
 {$R manifest.res}
 

@@ -8,7 +8,7 @@ unit sigma_curve_parameter;
 
 interface
 
-uses Classes, SysUtils, SimpMath, special_curve_parameter;
+uses Classes, SysUtils, SimpMath, special_curve_parameter, log;
 
 type
     { Represents curve width. It can take only positive value. }
@@ -51,12 +51,13 @@ end;
 
 procedure TSigmaCurveParameter.SetValue(AValue: Double);
 {$IFDEF WRITE_PARAMS_LOG}
-var LogStr: string;
+var
+    LogStr: string;
 {$ENDIF}
 begin
 {$IFDEF WRITE_PARAMS_LOG}
     LogStr := 'SetValue: Name = ' + FName + ', Value = ' + FloatToStr(AValue);
-    WriteLog(LogStr, Notification_);
+    WriteLog(LogStr, Notification);
 {$ENDIF}
     FValue := Abs(AValue);
     if FValue = 0 then FValue := TINY;

@@ -22,7 +22,6 @@ function GetConfigDir: string;
 implementation
 
 const
-    InternalError: string = 'Internal service error. Error code: ';
     StrErrorID: string = ' Error identifier: ';
 
 {$IFDEF WINDOWS}
@@ -70,36 +69,50 @@ begin
 end;
 
 function GetConfigDir: string;
-var FileName: string;
+var
+    DirName: string;
 begin
     //  poluchenie puti k papke prilozheniya dlya
     //  tekuschego pol'zovatelya i imeni fayla
-    FileName := GetUserDir;
-    if FileName <> '' then
+    DirName := GetUserDir;
+    if DirName <> '' then
     begin
-        FileName := FileName + Slash + Application.Title + Slash;
-        if not FileExists(FileName) then
-            if not ForceDirectories(FileName) then
-                FileName := ''; //  ne udalos' sozdat' katalog
+        DirName := DirName + Slash + Application.Title + Slash;
+        if not FileExists(DirName) then
+            if not ForceDirectories(DirName) then
+                DirName := ''; //  ne udalos' sozdat' katalog
     end;
-    Result := FileName;
+    Result := DirName;
 end;
 
 var LogCS: TRTLCriticalSection;
     LogMsgCount: LongInt = 1;
+    Log: TextFile;
+
+procedure InitializeLog;
+var
+    LogFileName: string;
+begin
+    InitCriticalSection(LogCS);
+
+    LogFileName := GetConfigDir + 'log.txt';
+
+    AssignFile(Log, LogFileName);
+    if FileExists(LogFileName) then Append(Log)
+    else Rewrite(Log);
+end;
+
+procedure FinalizeLog;
+begin
+    CloseFile(Log);
+    DoneCriticalsection(LogCS);
+end;
 
 {$hints off}
 procedure WriteLog(Msg: string; MsgType: TMsgType);
-var Log: TextFile;
-    FileName: string;
 begin
     EnterCriticalSection(LogCS);
     try
-        FileName := GetConfigDir + 'log.txt';
-
-        AssignFile(Log, FileName);
-        if FileExists(FileName) then Append(Log)
-        else Rewrite(Log);
 {$IFNDEF WRITE_PARAMS_LOG}
         Writeln(Log, DateTimeToStr(Now));
 {$ENDIF}
@@ -133,7 +146,6 @@ begin
         Inc(LogMsgCount);
 
         Flush(Log);
-        CloseFile(Log);
     except
         //  Exceptions are ignored.
     end;
@@ -142,13 +154,9 @@ end;
 {$hints on}
 
 initialization
-    { Initializes log critical section. Must be the first operation.
-      https://github.com/dvmorozov/fit/issues/161 }
-    InitCriticalSection(LogCS);
+    InitializeLog;
 
 finalization
-    { Destroys log critical section. Must be the last operation.
-      https://github.com/dvmorozov/fit/issues/161 }
-    DoneCriticalsection(LogCS);
+    FinalizeLog;
 end.
 

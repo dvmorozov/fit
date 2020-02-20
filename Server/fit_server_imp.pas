@@ -254,7 +254,8 @@ uses config_objects, self_copied_component, (* LazJPEG *) LazPNG, app, form_main
 const
     InadmissibleProblemID: string = 'Inadmissible problem ID!';   //'Inadmissible client ID!';
     InadmissibleChunkNum: string = 'Inadmissible chunk number!';
-    
+    InternalError: string = 'Internal service error. Error code: ';
+
 { The module is generated, so all hints are suppressed. }
 {$hints off}
 

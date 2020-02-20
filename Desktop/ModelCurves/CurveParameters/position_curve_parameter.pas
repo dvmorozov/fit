@@ -8,7 +8,7 @@ unit position_curve_parameter;
 
 interface
 
-uses Classes, SysUtils, points_set, special_curve_parameter;
+uses Classes, SysUtils, points_set, special_curve_parameter, log;
 
 type
     { The abciss coordinate of curve position (middle point). }
@@ -74,7 +74,7 @@ var i: LongInt;
 begin
 {$IFDEF WRITE_PARAMS_LOG}
     LogStr := 'SetValue: Name = ' + FName + ', Value = ' + FloatToStr(AValue);
-    WriteLog(LogStr, Notification_);
+    WriteLog(LogStr, Notification);
 {$ENDIF}
     //  nuzhno brat' po modulyu, potomu chto
     //  algoritm optimizatsii mozhet zagonyat'

@@ -31,7 +31,7 @@ uses Classes, SysUtils,
      { Implements server logic. }
      fit_server,
      { Contains algorithm container. }
-     fit_server_multithreaded;
+     fit_server_multithreaded, log;
 type
     { Class of server application. This class is basic unit of interaction
       with client. }

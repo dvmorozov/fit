@@ -13,7 +13,7 @@ unit fit_task_with_thread;
 
 interface
 
-uses Classes, SysUtils, fit_task, main_calc_thread;
+uses Classes, SysUtils, fit_task, main_calc_thread, log;
 
 type
     { Executes task solution in separate thread. }
@@ -94,7 +94,7 @@ begin
     try
         Assert(Assigned(MainCalcThread));
     except
-        on E: EAssertionFailed do WriteLog(E.Message, Surprising)
+        on E: EAssertionFailed do WriteLog(E.Message, Warning)
         else raise;
     end;
 
@@ -156,7 +156,7 @@ begin
     try
         Assert(Assigned(MainCalcThread));
     except
-        on E: EAssertionFailed do WriteLog(E.Message, Surprising)
+        on E: EAssertionFailed do WriteLog(E.Message, Warning)
         else raise;
     end;
 

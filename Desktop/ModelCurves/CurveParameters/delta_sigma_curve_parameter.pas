@@ -8,7 +8,7 @@ unit delta_sigma_curve_parameter;
 
 interface
 
-uses Classes, SysUtils, special_curve_parameter;
+uses Classes, SysUtils, special_curve_parameter, log;
 
 type
     { Represents curve width. }
@@ -51,12 +51,13 @@ end;
 
 procedure TDeltaSigmaCurveParameter.SetValue(AValue: Double);
 {$IFDEF WRITE_PARAMS_LOG}
-var LogStr: string;
+var
+    LogStr: string;
 {$ENDIF}
 begin
 {$IFDEF WRITE_PARAMS_LOG}
     LogStr := 'SetValue: Name = ' + FName + ', Value = ' + FloatToStr(AValue);
-    WriteLog(LogStr, Notification_);
+    WriteLog(LogStr, Notification);
 {$ENDIF}
     FValue := AValue;
 end;

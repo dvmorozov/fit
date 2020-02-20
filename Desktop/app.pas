@@ -11,22 +11,13 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit app;
 
-{$MODE Delphi}
 //{$DEFINE LOCAL_ACCESS}      //  vklyuchaet kompilyatsiyu servisa s
                             //  dostupom na lokal'nom komp'yutere
 //{$DEFINE USE_DENWER}
-//{$DEFINE WRITE_PARAMS_LOG}  //  vklyuchaet zapis' posledovatel'nosti
-                            //  izmeneniya var'iruemyh parametrov
 
 interface
 
 uses SysUtils, Forms
-{$IFDEF WINDOWS}
-    , windows
-{$IFNDEF FITCGI}
-    , shfolder
-{$ENDIF}
-{$ENDIF}
 {$IFDEF FITCLIENT}
     , fit_client_app
 {$ENDIF}
@@ -67,27 +58,6 @@ var Key: string = '';        //  key obtained during registration
     {$ENDIF}
 {$ENDIF}
 
-//  funkcii dlya opredeleniya mestopolozheniya
-//  ??? f-i d. rabotat' v mnogopotochnom okruzhenii
-function GetUserDir: string;
-function GetConfigDir: string;
-
-{$IFDEF WINDOWS}
-const Slash: string = '\';
-{$ELSE}
-const Slash: string = '/';
-{$ENDIF}
-const
-    InternalError: string = 'Internal service error. Error code: ';
-    StrErrorID: string = ' Error identifier: ';
-
-type TMsgType = (Fatal, Surprising, Notification_, User);
-
-procedure WriteLog(Msg: string; MsgType: TMsgType);
-function GetSeqErrorCode(): LongInt;
-//  dopolnyaet soobschenie kodom oschibki
-function CreateErrorMessage(Msg: string): string;
-
 const
     //  Global setting should be in this file because the
     //  same setting should be used in building client and server
@@ -116,124 +86,6 @@ const
 {$ENDIF}
 
 implementation
-    
-var SequentialErrorCode: LongInt = 1000;
-function GetSeqErrorCode(): LongInt;
-begin
-    try
-        Result := SequentialErrorCode;
-        Inc(SequentialErrorCode);
-    except
-        //  vyhod isklyucheniy nedopustim
-    end;
-end;
-
-function CreateErrorMessage(Msg: string): string;
-var EC: LongInt;
-begin
-    try
-        EC := GetSeqErrorCode;
-        Result := Msg + StrErrorID + IntToStr(EC);
-    except
-        //  vyhod isklyucheniy nedopustim
-    end;
-end;
-
-function GetUserDir: string;
-{$IFDEF WINDOWS}
-    {$IFNDEF FITCGI}
-        var Path: array[0..MAX_PATH] of Char;
-    {$ENDIF}
-{$ENDIF}
-begin
-{$IFDEF WINDOWS}
-{$IFNDEF FITCGI}
-    Path[0] := #0;
-    //  pochemu-to s flagom CSIDL_FLAG_CREATE ne rabotaet !
-    (* WINDOWS *)
-    SHGetFolderPath(0, (* CSIDL_PERSONAL *)CSIDL_APPDATA, 0, 0, @Path);
-    Result := StrPas(Path);
-{$ELSE}
-    Result := '..\data\tmp\';
-{$ENDIF}
-{$ELSE}
-    Result := //GetEnvironmentVariable('HOME');
-                '/home/www/tmp/';
-{$ENDIF}
-end;
-
-function GetConfigDir: string;
-var FileName: string;
-begin
-    //  poluchenie puti k papke prilozheniya dlya
-    //  tekuschego pol'zovatelya i imeni fayla
-    FileName := GetUserDir;
-    if FileName <> '' then
-    begin
-        FileName := FileName + Slash + Application.Title + Slash;
-        if not FileExists(FileName) then
-            if not ForceDirectories(FileName) then
-                FileName := ''; //  ne udalos' sozdat' katalog
-    end;
-    Result := FileName;
-end;
-
-var LogCS: TRTLCriticalSection;
-    LogMsgCount: LongInt = 1;
-
-{$hints off}
-procedure WriteLog(Msg: string; MsgType: TMsgType);
-var Log: TextFile;
-    FileName: string;
-begin
-    EnterCriticalSection(LogCS);
-    try
-        FileName := GetConfigDir + 'log.txt';
-
-        AssignFile(Log, FileName);
-        if FileExists(FileName) then Append(Log)
-        else Rewrite(Log);
-{$IFNDEF WRITE_PARAMS_LOG}
-        Writeln(Log, DateTimeToStr(Now));
-{$ENDIF}
-        if MsgType = Fatal then
-            Writeln(Log,
-{$IFNDEF WRITE_PARAMS_LOG}
-                'Fatal:' + Chr(9) +
-{$ENDIF}
-                Msg)
-        else
-        if MsgType = Surprising then
-            Writeln(Log,
-{$IFNDEF WRITE_PARAMS_LOG}
-                'Surprising:' + Chr(9) +
-{$ENDIF}
-                Msg)
-        else
-        if MsgType = Notification_ then
-            Writeln(Log,
-{$IFNDEF WRITE_PARAMS_LOG}
-                'Notification:' + Chr(9) +
-{$ENDIF}
-                Msg)
-        else
-            Writeln(Log,
-{$IFNDEF WRITE_PARAMS_LOG}
-                'User mistake:' + Chr(9) +
-{$ENDIF}
-                Msg);
-            
-        Inc(LogMsgCount);
-        
-        Flush(Log);
-        CloseFile(Log);
-    except
-        //  ne dolzhen vybrasyvat' isklyucheniya - sam
-        //  ispol'zuetsya dlya zapisi soobscheniy isklyucheniy
-    end;
-    LeaveCriticalSection(LogCS);
-end;
-{$hints on}
 
 {$IFDEF FITPRO}
 type
@@ -304,7 +156,6 @@ initialization
     FitServerApp_.FitProxy.FitStub := FitClientApp_.FitStub;
 {$ENDIF}
 {$ENDIF}
-    InitCriticalSection(LogCS);
 
 finalization
 {$IFDEF FITCLIENT}
@@ -316,8 +167,6 @@ finalization
         FitServerApp_.Free;
     {$ENDIF}
 {$ENDIF}
-
-    DoneCriticalsection(LogCS);
 
 {$IFDEF FITPRO}
     DestroyFitServiceInstance;

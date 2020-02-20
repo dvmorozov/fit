@@ -110,38 +110,23 @@ end;
 
 {$hints off}
 procedure WriteLog(Msg: string; MsgType: TMsgType);
+var
+    DateTimeStr: string;
 begin
     EnterCriticalSection(LogCS);
     try
-{$IFNDEF WRITE_PARAMS_LOG}
-        Writeln(Log, DateTimeToStr(Now));
-{$ENDIF}
+        DateTimeStr := DateTimeToStr(Now);
+
         if MsgType = Fatal then
-            Writeln(Log,
-{$IFNDEF WRITE_PARAMS_LOG}
-                'Fatal:' + Chr(9) +
-{$ENDIF}
-                Msg)
+            Writeln(Log, DateTimeStr + Chr(9) + 'Fatal       :' + Chr(9) + Msg)
         else
         if MsgType = Warning then
-            Writeln(Log,
-{$IFNDEF WRITE_PARAMS_LOG}
-                'Warning:' + Chr(9) +
-{$ENDIF}
-                Msg)
+            Writeln(Log, DateTimeStr + Chr(9) + 'Warning     :' + Chr(9) + Msg)
         else
         if MsgType = Notification then
-            Writeln(Log,
-{$IFNDEF WRITE_PARAMS_LOG}
-                'Notification:' + Chr(9) +
-{$ENDIF}
-                Msg)
+            Writeln(Log, DateTimeStr + Chr(9) + 'Notification:' + Chr(9) + Msg)
         else
-            Writeln(Log,
-{$IFNDEF WRITE_PARAMS_LOG}
-                'User mistake:' + Chr(9) +
-{$ENDIF}
-                Msg);
+            Writeln(Log, DateTimeStr + Chr(9) + 'Other       :' + Chr(9) + Msg);
 
         Inc(LogMsgCount);
 

@@ -20,7 +20,7 @@ uses
   serialization_ids, GeneralHashFunctions, create_user_points_set_dlg,
   user_points_set_prop_dialog, configurable_points_set,
   configurable_user_points_set, int_fit_service, fit_server, fit_task,
-  persistent_curve_parameter_container, persistent_curve_parameters, unit1;
+  persistent_curve_parameter_container, persistent_curve_parameters;
 
 {$R manifest.res}
 

@@ -49,6 +49,12 @@ These versions are not maintained and will be replaced.
 
 /INFILE=*file_name* - opens data file on application start up 
 
+/WRITE_PARAMS_LOG - turns on variable parameters logging 
+
+On Windows log file is located in the folder
+
+C:\Users\user_name\AppData\Roaming\Fit-x86_64-win64
+
 ### Test data set
 
 [Zip](https://github.com/dvmorozov/fit/raw/master/Data/test_data.zip)

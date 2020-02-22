@@ -68,14 +68,7 @@ var i: LongInt;
     TempDouble: Double;
     Highindex: LongInt;
     Lowindex: LongInt;
-{$IFDEF WRITE_PARAMS_LOG}
-    LogStr: string;
-{$ENDIF}
 begin
-{$IFDEF WRITE_PARAMS_LOG}
-    LogStr := 'SetValue: Name = ' + FName + ', Value = ' + FloatToStr(AValue);
-    WriteLog(LogStr, Notification);
-{$ENDIF}
     //  nuzhno brat' po modulyu, potomu chto
     //  algoritm optimizatsii mozhet zagonyat'
     //  v oblast' otritsatel'nyh znacheniy
@@ -115,6 +108,7 @@ begin
         if FValue > Fx0High then begin FValue := Fx0High; Exit end;
         FValue := AValue;
     end;
+    WriteValueToLog(AValue);
 end;
 
 function TPositionCurveParameter.MinimumStepAchieved: Boolean;

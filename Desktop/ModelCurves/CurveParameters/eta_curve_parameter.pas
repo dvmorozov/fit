@@ -50,17 +50,10 @@ begin
 end;
 
 procedure TEtaCurveParameter.SetValue(AValue: Double);
-{$IFDEF WRITE_PARAMS_LOG}
-var
-    LogStr: string;
-{$ENDIF}
 begin
-{$IFDEF WRITE_PARAMS_LOG}
-    LogStr := 'SetValue: Name = ' + FName + ', Value = ' + FloatToStr(AValue);
-    WriteLog(LogStr, Notification);
-{$ENDIF}
     FValue := Abs(AValue);
     if FValue > 1 then FValue := 1;
+    WriteValueToLog(AValue);
 end;
 
 function TEtaCurveParameter.MinimumStepAchieved: Boolean;

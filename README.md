@@ -47,13 +47,12 @@ These versions are not maintained and will be replaced.
 
 ### Command line parameters
 
-/INFILE=*file_name* - opens data file on application start up 
+__/INFILE=*file_name*__ - opens data file on application start up 
 
-/WRITE_PARAMS_LOG - turns on variable parameters logging 
+__/WRITE_PARAMS_LOG__ - turns on variable parameters logging 
 
 On Windows log file is located in the folder
-
-C:\Users\user_name\AppData\Roaming\Fit-x86_64-win64
+__C:\Users\user_name\AppData\Roaming\Fit-x86_64-win64__
 
 ### Test data set
 

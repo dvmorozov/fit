@@ -44,6 +44,7 @@ type
 
         function GetValue: Double; virtual;
         procedure SetValue(AValue: Double); virtual;
+        procedure WriteValueToLog(AValue: Double);
 
     public
         constructor Create;
@@ -68,6 +69,8 @@ type
         property Name: string read FName write FName;
         property Type_: TParameterType read FType write FType;
     end;
+
+var WriteParamsLog: Boolean = False;
 
 implementation
 
@@ -95,16 +98,23 @@ begin
 end;
 
 procedure TSpecialCurveParameter.SetValue(AValue: Double);
-{$IFDEF WRITE_PARAMS_LOG}
+begin
+    FValue := AValue;
+    WriteValueToLog(AValue);
+end;
+
+procedure TSpecialCurveParameter.WriteValueToLog(AValue: Double);
 var
     LogStr: string;
-{$ENDIF}
 begin
-{$IFDEF WRITE_PARAMS_LOG}
-    LogStr := 'SetValue: Name = ' + FName + ', Value = ' + FloatToStr(AValue);
-    WriteLog(LogStr, Notification);
-{$ENDIF}
-    FValue := AValue;
+    if WriteParamsLog then
+    begin
+        LogStr :=
+            'Set value: Name = ' + FName +
+            ', Original value = ' + FloatToStr(AValue) +
+            ', Assigned value = ' + FloatToStr(FValue);
+        WriteLog(LogStr, Notification);
+    end;
 end;
 
 procedure TSpecialCurveParameter.MultiplyVariationStep(Factor: Double);

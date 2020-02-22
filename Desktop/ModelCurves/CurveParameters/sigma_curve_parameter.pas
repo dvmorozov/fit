@@ -50,17 +50,10 @@ begin
 end;
 
 procedure TSigmaCurveParameter.SetValue(AValue: Double);
-{$IFDEF WRITE_PARAMS_LOG}
-var
-    LogStr: string;
-{$ENDIF}
 begin
-{$IFDEF WRITE_PARAMS_LOG}
-    LogStr := 'SetValue: Name = ' + FName + ', Value = ' + FloatToStr(AValue);
-    WriteLog(LogStr, Notification);
-{$ENDIF}
     FValue := Abs(AValue);
     if FValue = 0 then FValue := TINY;
+    WriteValueToLog(AValue);
 end;
 
 function TSigmaCurveParameter.MinimumStepAchieved: Boolean;

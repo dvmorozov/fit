@@ -50,16 +50,9 @@ begin
 end;
 
 procedure TDeltaSigmaCurveParameter.SetValue(AValue: Double);
-{$IFDEF WRITE_PARAMS_LOG}
-var
-    LogStr: string;
-{$ENDIF}
 begin
-{$IFDEF WRITE_PARAMS_LOG}
-    LogStr := 'SetValue: Name = ' + FName + ', Value = ' + FloatToStr(AValue);
-    WriteLog(LogStr, Notification);
-{$ENDIF}
     FValue := AValue;
+    WriteValueToLog(AValue);
 end;
 
 function TDeltaSigmaCurveParameter.MinimumStepAchieved: Boolean;

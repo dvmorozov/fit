@@ -48,6 +48,8 @@ type
 
 implementation
 
+uses int_curve_factory;
+
 {====================== TAsymPseudoVoigtPointsSet =============================}
 
 procedure TAsymPseudoVoigtPointsSet.DoCalc(const Intervals: TPointsSet);
@@ -106,9 +108,9 @@ begin
     Result := GetCurveTypeId_;
 end;
 
-var CTS: TCurveTypesSingleton;
+var CTS: ICurveFactory;
 
 initialization
-    CTS := TCurveTypesSingleton.Create;
+    CTS := TCurveTypesSingleton.CreateCurveFactory;
     CTS.RegisterCurveType(TAsymPseudoVoigtPointsSet);
 end.

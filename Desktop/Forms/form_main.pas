@@ -469,7 +469,8 @@ const
 implementation
 
 uses input_wavelength_dialog, input_max_rfactor_dialog,
-    input_back_factor_dialog, about_box_dialog, app;
+    input_back_factor_dialog, about_box_dialog, app, int_curve_type_iterator,
+    int_curve_type_selector;
 
 (*
 function OFNHookProc(
@@ -660,37 +661,40 @@ begin
 end;
 
 procedure TFormMain.ActionPatternTypeUpdate(Sender: TObject);
-var CTS: TCurveTypesSingleton;
+var CurveTypeIterator: ICurveTypeIterator;
+    CurveTypeSelector: ICurveTypeSelector;
     MenuItem: TMenuItem;
     Index: Integer;
     SelectedCurveTypeId: TCurveTypeId;
 begin
-    CTS := TCurveTypesSingleton.Create;
-    SelectedCurveTypeId := CTS.GetSelectedCurveType;
+    CurveTypeIterator := TCurveTypesSingleton.CreateCurveTypeIterator;
+    CurveTypeSelector := TCurveTypesSingleton.CreateCurveTypeSelector;
+
+    SelectedCurveTypeId := CurveTypeSelector.GetSelectedCurveType;
     //  Clears menu.
     SelCurveType.Clear;
     //  Creates menu items for curve types.
     //  The list must contain at least one item.
-    CTS.FirstCurveType;
+    CurveTypeIterator.FirstCurveType;
     Index := 0;
     while True do
     begin
         MenuItem := TMenuItem.Create(SelCurveType);
         MenuItem.Name := 'CurveType' + IntToStr(Index);
-        MenuItem.Tag := CTS.GetCurveTypeTag(CTS.GetCurveTypeId);
+        MenuItem.Tag := CurveTypeIterator.GetCurveTypeTag(CurveTypeIterator.GetCurveTypeId);
         Inc(Index);
         MenuItem.OnClick := ActionSelCurveExecute;
         //  Caption must be set after action to overwrite action attribute.
-        MenuItem.Caption := CTS.GetCurveTypeName;
+        MenuItem.Caption := CurveTypeIterator.GetCurveTypeName;
         //  Sets checked state.
-        if IsEqualGUID(SelectedCurveTypeId, CTS.GetCurveTypeId) then
+        if IsEqualGUID(SelectedCurveTypeId, CurveTypeIterator.GetCurveTypeId) then
             MenuItem.Checked := True;
 
         SelCurveType.Add(MenuItem);
         //  The last item should be processed as well.
-        if CTS.EndCurveType then Break
+        if CurveTypeIterator.EndCurveType then Break
         else
-            CTS.NextCurveType;
+            CurveTypeIterator.NextCurveType;
     end;
 end;
 
@@ -965,7 +969,10 @@ begin
 end;
 
 procedure TFormMain.ActionSelCurveExecute(Sender: TObject);
-var CTS: TCurveTypesSingleton;
+var
+    CurveTypeIterator: ICurveTypeIterator;
+    CurveTypeSelector: ICurveTypeSelector;
+
     NamedPointsSetClasses: array[1..6] of TNamedPointsSetClass = (
         TGaussPointsSet, TLorentzPointsSet,
         TPseudoVoigtPointsSet, TAsymPseudoVoigtPointsSet,
@@ -973,12 +980,14 @@ var CTS: TCurveTypesSingleton;
     i: Integer;
     NamedPointsSetClass: TNamedPointsSetClass;
 begin
-    CTS := TCurveTypesSingleton.Create;
+    CurveTypeIterator := TCurveTypesSingleton.CreateCurveTypeIterator;
+    CurveTypeSelector := TCurveTypesSingleton.CreateCurveTypeSelector;
+
     for i := 1 to 6 do
     begin
         NamedPointsSetClass := NamedPointsSetClasses[i];
         if TMenuItem(Sender).Tag =
-            CTS.GetCurveTypeTag(NamedPointsSetClass.GetCurveTypeId_) then
+            CurveTypeIterator.GetCurveTypeTag(NamedPointsSetClass.GetCurveTypeId_) then
         begin
             if NamedPointsSetClass.GetConfigurablePointsSet.HasConfigurableParameters then
                 if not NamedPointsSetClass.GetConfigurablePointsSet.ShowConfigurationDialog then
@@ -1001,7 +1010,7 @@ begin
 
             //  Curve type can be selected only after successful configuration.
             FitClientApp_.FitClient.CurveTypeId := NamedPointsSetClass.GetCurveTypeId_;
-            CTS.SelectCurveType(NamedPointsSetClass.GetCurveTypeId_);
+            CurveTypeSelector.SelectCurveType(NamedPointsSetClass.GetCurveTypeId_);
 
             Break;
         end

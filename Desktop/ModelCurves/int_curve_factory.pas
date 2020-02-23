@@ -22,9 +22,23 @@ interface
 uses int_points_set, named_points_set;
 
 type
+    { Class-reference type for base curve type. }
+    TCurveClass = class of TNamedPointsSet;
+
+    { Class containing information about curve types. }
+    TCurveType = class
+    public
+        CurveTypeName: string;
+        CurveClass: TCurveClass;
+        CurveTypeId: TCurveTypeId;
+        CurveTypeTag: Integer;
+    end;
+
     { Interface defining basic operation for creating curve instances. }
     ICurveFactory = interface
-        function CreatePointsSet(TypeId: TCurveTypeId): TNamedPointsSet;
+        ['{a627bac8-86ef-4d43-bcd5-5c2072ca5fc4}']
+        //function CreatePointsSet(TypeId: TCurveTypeId): TNamedPointsSet;
+        procedure RegisterCurveType(CurveClass: TCurveClass);
     end;
 
 implementation

@@ -56,6 +56,8 @@ type
 
 implementation
 
+uses int_curve_factory;
+
 {=================== T2BranchesPseudoVoigtPointsSet ===========================}
 
 procedure T2BranchesPseudoVoigtPointsSet.DoCalc(const Intervals: TPointsSet);
@@ -142,10 +144,10 @@ begin
     Result := StringToGUID('{6de06c1b-e51a-48c6-b036-c81a841ec468}');
 end;
 
-var CTS: TCurveTypesSingleton;
+var CTS: ICurveFactory;
 
 initialization
-    CTS := TCurveTypesSingleton.Create;
+    CTS := TCurveTypesSingleton.CreateCurveFactory;
     CTS.RegisterCurveType(T2BranchesPseudoVoigtPointsSet);
 end.
 

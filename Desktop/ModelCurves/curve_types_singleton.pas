@@ -40,7 +40,7 @@ type
         { Curve type selected by user. }
         FSelectedCurveType: TCurveType;
 
-        constructor Create;
+        constructor Init;
 
     public
         class function CreateCurveFactory: ICurveFactory;
@@ -71,13 +71,13 @@ type
 implementation
 
 { Class members aren't supported by Lazarus 0.9.24, global variable is used instead. }
-var CTS: TCurveTypesSingleton;
+var CurveTypesSingleton: TCurveTypesSingleton;
 
 const
     CurveTypeMustBeSelected: string = 'Curve type must be previously selected.';
     NoItemsInTheList: string = 'No more items in the list.';
 
-constructor TCurveTypesSingleton.Create;
+constructor TCurveTypesSingleton.Init;
 begin
     inherited;
     FCurveTypes := TList.Create;
@@ -90,17 +90,17 @@ end;
 
 class function TCurveTypesSingleton.CreateCurveFactory: ICurveFactory;
 begin
-    Result := CTS as ICurveFactory;
+    Result := CurveTypesSingleton as ICurveFactory;
 end;
 
 class function TCurveTypesSingleton.CreateCurveTypeIterator: ICurveTypeIterator;
 begin
-    Result := CTS as ICurveTypeIterator;
+    Result := CurveTypesSingleton as ICurveTypeIterator;
 end;
 
 class function TCurveTypesSingleton.CreateCurveTypeSelector: ICurveTypeSelector;
 begin
-    Result := CTS as ICurveTypeSelector;
+    Result := CurveTypesSingleton as ICurveTypeSelector;
 end;
 
 function SortAlphabetically(Item1, Item2: Pointer): Integer;
@@ -236,10 +236,10 @@ end;
 {$hints on}
 {$warnings on}
 initialization
-    CTS := TCurveTypesSingleton.Create;
+    CurveTypesSingleton := TCurveTypesSingleton.Init;
 
 finalization
-    CTS.Free;
+    CurveTypesSingleton.Free;
 
 end.
 

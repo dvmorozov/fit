@@ -19,18 +19,18 @@ unit create_user_points_set_dlg_adapter;
 
 interface
 
-uses Classes, SysUtils, int_create_user_points_set_dlg, CBRCComponent;
+uses Classes, SysUtils, int_create_user_points_set_dlg;
 
 type
 {$warnings off}
     { Class-adapter implementing basic operations for creating user
       dialog for configuring parameters of custom curve type. }
-    TCreateUserPointsSetDlgAdapter = class(TCBRCComponent, ICreateUserPointsSetDlg)
+    TCreateUserPointsSetDlgAdapter = class(TInterfacedObject, ICreateUserPointsSetDlg)
     private
         constructor Init;
 
     public
-        class function Create: TCreateUserPointsSetDlgAdapter;
+        class function Create: ICreateUserPointsSetDlg;
 
         function ShowModal: Integer;
         function GetExpression: string;
@@ -43,18 +43,16 @@ implementation
 uses create_user_points_set_dlg;
 
 { Class members aren't supported by Lazarus 0.9.24, global variable are used instead. }
-var FCreateUserPointsSetDlgAdapter: TCreateUserPointsSetDlgAdapter;
+var CreateUserPointsSetDlgAdapter: TCreateUserPointsSetDlgAdapter;
 
 constructor TCreateUserPointsSetDlgAdapter.Init;
 begin
-    inherited Create(nil);
+    inherited;
 end;
 
-class function TCreateUserPointsSetDlgAdapter.Create: TCreateUserPointsSetDlgAdapter;
+class function TCreateUserPointsSetDlgAdapter.Create: ICreateUserPointsSetDlg;
 begin
-    if FCreateUserPointsSetDlgAdapter = nil then
-      FCreateUserPointsSetDlgAdapter := TCreateUserPointsSetDlgAdapter.Init;
-    Result := FCreateUserPointsSetDlgAdapter;
+    Result := CreateUserPointsSetDlgAdapter as ICreateUserPointsSetDlg;
 end;
 
 function TCreateUserPointsSetDlgAdapter.ShowModal: Integer;
@@ -72,6 +70,12 @@ function TCreateUserPointsSetDlgAdapter.GetName: string;
 begin
     Result := CreateUserPointsSetDlg.EditCurveName.Text;
 end;
+
+initialization
+    CreateUserPointsSetDlgAdapter := TCreateUserPointsSetDlgAdapter.Init;
+
+finalization
+    CreateUserPointsSetDlgAdapter.Free;
 
 end.
 

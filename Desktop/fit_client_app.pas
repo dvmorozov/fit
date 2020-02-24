@@ -46,7 +46,7 @@ constructor TFitClientApp.Create;
 begin
     inherited;
     FFitStub := TFitClientStub.Create(nil);
-    FDataLoaderInjector := TExtensionDataLoaderInjector.Create(nil);
+    FDataLoaderInjector := TExtensionDataLoaderInjector.Create;
     FFitClient := TFitClient.CreateWithInjector(nil, FDataLoaderInjector);
 
     FFitStub.FitClient := FFitClient;

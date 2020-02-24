@@ -22,7 +22,7 @@
       <MajorVersionNr Value="1"/>
       <MinorVersionNr Value="1"/>
       <RevisionNr Value="15"/>
-      <BuildNr Value="1398"/>
+      <BuildNr Value="1400"/>
       <Attributes pvaDebug="True"/>
       <StringTable FileDescription="Desktop application." LegalCopyright="Dmitry Morozov" OriginalFilename="Fit" ProductName="Fit" ProductVersion="1.1.1"/>
     </VersionInfo>
@@ -116,7 +116,7 @@
         <MinVersion Major="1" Valid="True"/>
       </Item7>
     </RequiredPackages>
-    <Units Count="154">
+    <Units Count="158">
       <Unit0>
         <Filename Value="Fit.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -133,7 +133,7 @@
         <ComponentName Value="FormMain"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <TopLine Value="2089"/>
         <CursorPos Y="2101"/>
@@ -141,7 +141,6 @@
         <Bookmarks Count="1">
           <Item0 Y="480"/>
         </Bookmarks>
-        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit1>
       <Unit2>
@@ -224,12 +223,11 @@
       <Unit10>
         <Filename Value="serialization_ids.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="7"/>
+        <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <TopLine Value="56"/>
         <CursorPos X="45" Y="70"/>
         <UsageCount Value="207"/>
-        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit10>
       <Unit11>
@@ -237,7 +235,7 @@
         <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <TopLine Value="15"/>
-        <CursorPos X="34" Y="32"/>
+        <CursorPos X="48" Y="32"/>
         <UsageCount Value="105"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit11>
@@ -323,12 +321,11 @@
       <Unit21>
         <Filename Value="fit_client.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="130"/>
-        <CursorPos X="44" Y="102"/>
+        <TopLine Value="87"/>
+        <CursorPos X="24" Y="102"/>
         <UsageCount Value="200"/>
-        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit21>
       <Unit22>
@@ -379,11 +376,12 @@
       <Unit27>
         <Filename Value="fit_client_app.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="-1"/>
+        <EditorIndex Value="2"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="6"/>
-        <CursorPos X="26" Y="22"/>
+        <TopLine Value="11"/>
+        <CursorPos Y="49"/>
         <UsageCount Value="202"/>
+        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit27>
       <Unit28>
@@ -529,19 +527,21 @@
       <Unit43>
         <Filename Value="DataLoaders\int_data_loader_injector.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="-1"/>
+        <EditorIndex Value="4"/>
         <WindowIndex Value="1"/>
-        <CursorPos X="53" Y="10"/>
+        <TopLine Value="4"/>
+        <CursorPos X="48" Y="27"/>
         <UsageCount Value="202"/>
+        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit43>
       <Unit44>
         <Filename Value="DataLoaders\extension_data_loader_injector.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="1"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="22"/>
-        <CursorPos X="42" Y="27"/>
+        <TopLine Value="25"/>
+        <CursorPos X="67" Y="27"/>
         <UsageCount Value="202"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -706,11 +706,10 @@
       <Unit61>
         <Filename Value="ModelCurves\curve_types_singleton.pas"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="12"/>
+        <EditorIndex Value="9"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="216"/>
-        <CursorPos X="53" Y="239"/>
+        <TopLine Value="68"/>
+        <CursorPos Y="83"/>
         <UsageCount Value="213"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -833,17 +832,17 @@
         <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <TopLine Value="5"/>
-        <CursorPos X="48" Y="26"/>
+        <CursorPos X="5" Y="25"/>
         <UsageCount Value="233"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit73>
       <Unit74>
         <Filename Value="ModelCurves\UserPointsSet\expression_parser_adapter.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="11"/>
+        <EditorIndex Value="8"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="59"/>
-        <CursorPos Y="85"/>
+        <TopLine Value="42"/>
+        <CursorPos Y="57"/>
         <UsageCount Value="230"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -851,10 +850,10 @@
       <Unit75>
         <Filename Value="ModelCurves\UserPointsSet\create_user_points_set_dlg_adapter.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="8"/>
+        <EditorIndex Value="5"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="52"/>
-        <CursorPos X="62" Y="60"/>
+        <TopLine Value="8"/>
+        <CursorPos X="73" Y="28"/>
         <UsageCount Value="216"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -862,10 +861,10 @@
       <Unit76>
         <Filename Value="ModelCurves\UserPointsSet\curve_type_parameters_factory.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="9"/>
+        <EditorIndex Value="6"/>
         <WindowIndex Value="1"/>
         <TopLine Value="43"/>
-        <CursorPos Y="69"/>
+        <CursorPos Y="49"/>
         <UsageCount Value="213"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -873,10 +872,10 @@
       <Unit77>
         <Filename Value="ModelCurves\UserPointsSet\curve_type_storage_adapter.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="10"/>
+        <EditorIndex Value="7"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="58"/>
-        <CursorPos Y="84"/>
+        <TopLine Value="36"/>
+        <CursorPos Y="51"/>
         <UsageCount Value="207"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -1370,7 +1369,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="19"/>
         <CursorPos X="26" Y="33"/>
-        <UsageCount Value="197"/>
+        <UsageCount Value="198"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit130>
       <Unit131>
@@ -1407,7 +1406,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="3"/>
         <CursorPos Y="21"/>
-        <UsageCount Value="103"/>
+        <UsageCount Value="104"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit134>
       <Unit135>
@@ -1431,32 +1430,29 @@
       <Unit137>
         <Filename Value="ModelCurves\UserPointsSet\user_curve_parameter.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <TopLine Value="7"/>
         <CursorPos X="53" Y="11"/>
-        <UsageCount Value="82"/>
-        <Loaded Value="True"/>
+        <UsageCount Value="83"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit137>
       <Unit138>
         <Filename Value="..\Server\client_interfaces\fit_server_proxy.pas"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <TopLine Value="897"/>
         <CursorPos X="27" Y="911"/>
         <UsageCount Value="40"/>
-        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit138>
       <Unit139>
         <Filename Value="..\Server\client_interfaces\fit_problem.pas"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <TopLine Value="687"/>
         <CursorPos X="22" Y="712"/>
         <UsageCount Value="40"/>
-        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit139>
       <Unit140>
@@ -1513,7 +1509,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="82"/>
         <CursorPos X="40" Y="91"/>
-        <UsageCount Value="68"/>
+        <UsageCount Value="69"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit146>
       <Unit147>
@@ -1569,12 +1565,50 @@
       </Unit152>
       <Unit153>
         <Filename Value="..\Server\component_list.pas"/>
-        <EditorIndex Value="-1"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="3"/>
         <WindowIndex Value="1"/>
+        <TopLine Value="6"/>
         <CursorPos X="28" Y="31"/>
         <UsageCount Value="15"/>
+        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit153>
+      <Unit154>
+        <Filename Value="ModelCurves\UserPointsSet\backup\create_user_points_set_dlg_adapter.pas"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="27"/>
+        <CursorPos X="58" Y="28"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit154>
+      <Unit155>
+        <Filename Value="ModelCurves\UserPointsSet\backup\curve_type_parameters_factory.pas"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="13"/>
+        <CursorPos X="41" Y="28"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit155>
+      <Unit156>
+        <Filename Value="ModelCurves\UserPointsSet\backup\curve_type_storage_adapter.pas"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="7"/>
+        <CursorPos X="43" Y="29"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit156>
+      <Unit157>
+        <Filename Value="ModelCurves\UserPointsSet\backup\int_create_user_points_set_dlg.pas"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <CursorPos X="5" Y="25"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit157>
     </Units>
     <OtherDefines Count="4">
       <Define0 Value="FIT"/>
@@ -1582,115 +1616,119 @@
       <Define2 Value="FITSERVER"/>
       <Define3 Value="Lazarus"/>
     </OtherDefines>
-    <JumpHistory Count="27" HistoryIndex="26">
+    <JumpHistory Count="28" HistoryIndex="27">
       <Position1>
-        <Filename Value="ModelCurves\UserPointsSet\curve_type_storage_adapter.pas"/>
-        <Caret Line="29" Column="61" TopLine="19"/>
+        <Filename Value="ModelCurves\UserPointsSet\expression_parser_adapter.pas"/>
+        <Caret Line="52" Column="28" TopLine="23"/>
       </Position1>
       <Position2>
-        <Filename Value="ModelCurves\UserPointsSet\curve_type_parameters_factory.pas"/>
-        <Caret Line="30" Column="32" TopLine="16"/>
+        <Filename Value="ModelCurves\curve_types_singleton.pas"/>
+        <Caret Line="83" TopLine="68"/>
       </Position2>
       <Position3>
-        <Filename Value="ModelCurves\UserPointsSet\curve_type_storage_adapter.pas"/>
-        <Caret Line="52" Column="66" TopLine="45"/>
+        <Filename Value="ModelCurves\UserPointsSet\expression_parser_adapter.pas"/>
+        <Caret Line="57" TopLine="42"/>
       </Position3>
       <Position4>
         <Filename Value="ModelCurves\UserPointsSet\curve_type_storage_adapter.pas"/>
-        <Caret Line="49" Column="14" TopLine="34"/>
+        <Caret Line="51" TopLine="43"/>
       </Position4>
       <Position5>
-        <Filename Value="ModelCurves\UserPointsSet\curve_type_storage_adapter.pas"/>
-        <Caret Line="80" Column="5" TopLine="57"/>
+        <Filename Value="ModelCurves\UserPointsSet\curve_type_parameters_factory.pas"/>
+        <Caret Line="49" TopLine="24"/>
       </Position5>
       <Position6>
         <Filename Value="ModelCurves\UserPointsSet\create_user_points_set_dlg_adapter.pas"/>
-        <Caret Line="46" Column="34" TopLine="25"/>
+        <Caret Line="41" Column="87" TopLine="19"/>
       </Position6>
       <Position7>
-        <Filename Value="ModelCurves\UserPointsSet\curve_type_parameters_factory.pas"/>
-        <Caret Line="44" Column="26" TopLine="25"/>
+        <Filename Value="ModelCurves\curve_types_singleton.pas"/>
+        <Caret Line="83" TopLine="68"/>
       </Position7>
       <Position8>
-        <Filename Value="ModelCurves\UserPointsSet\curve_type_storage_adapter.pas"/>
-        <Caret Line="81" Column="5" TopLine="55"/>
+        <Filename Value="ModelCurves\UserPointsSet\expression_parser_adapter.pas"/>
+        <Caret Line="57" TopLine="42"/>
       </Position8>
       <Position9>
         <Filename Value="ModelCurves\UserPointsSet\curve_type_storage_adapter.pas"/>
-        <Caret Line="53" Column="66" TopLine="43"/>
+        <Caret Line="51" TopLine="43"/>
       </Position9>
       <Position10>
-        <Filename Value="ModelCurves\UserPointsSet\expression_parser_adapter.pas"/>
-        <Caret Line="61" TopLine="39"/>
+        <Filename Value="ModelCurves\UserPointsSet\curve_type_parameters_factory.pas"/>
+        <Caret Line="49" TopLine="24"/>
       </Position10>
       <Position11>
-        <Filename Value="ModelCurves\UserPointsSet\expression_parser_adapter.pas"/>
-        <Caret Line="32" Column="68" TopLine="9"/>
+        <Filename Value="ModelCurves\curve_types_singleton.pas"/>
+        <Caret Line="239" TopLine="216"/>
       </Position11>
       <Position12>
-        <Filename Value="ModelCurves\UserPointsSet\curve_type_storage_adapter.pas"/>
-        <Caret Line="53" Column="66" TopLine="43"/>
+        <Filename Value="ModelCurves\curve_types_singleton.pas"/>
+        <Caret Line="83" TopLine="68"/>
       </Position12>
       <Position13>
         <Filename Value="ModelCurves\UserPointsSet\expression_parser_adapter.pas"/>
-        <Caret Line="32" Column="68" TopLine="9"/>
+        <Caret Line="82" TopLine="59"/>
       </Position13>
       <Position14>
         <Filename Value="ModelCurves\UserPointsSet\expression_parser_adapter.pas"/>
-        <Caret Line="61" Column="60" TopLine="44"/>
+        <Caret Line="57" TopLine="42"/>
       </Position14>
       <Position15>
-        <Filename Value="ModelCurves\UserPointsSet\expression_parser_adapter.pas"/>
-        <Caret Line="37" Column="49" TopLine="32"/>
+        <Filename Value="ModelCurves\UserPointsSet\curve_type_storage_adapter.pas"/>
+        <Caret Line="81" TopLine="58"/>
       </Position15>
       <Position16>
-        <Filename Value="ModelCurves\UserPointsSet\expression_parser_adapter.pas"/>
-        <Caret Line="32" Column="74" TopLine="23"/>
+        <Filename Value="ModelCurves\UserPointsSet\curve_type_storage_adapter.pas"/>
+        <Caret Line="51" TopLine="36"/>
       </Position16>
       <Position17>
-        <Filename Value="ModelCurves\UserPointsSet\expression_parser_adapter.pas"/>
-        <Caret Line="52" Column="28" TopLine="23"/>
+        <Filename Value="ModelCurves\UserPointsSet\curve_type_parameters_factory.pas"/>
+        <Caret Line="66" TopLine="43"/>
       </Position17>
       <Position18>
-        <Filename Value="ModelCurves\curve_types_singleton.pas"/>
-        <Caret Line="74" Column="6" TopLine="216"/>
+        <Filename Value="ModelCurves\UserPointsSet\curve_type_parameters_factory.pas"/>
+        <Caret Line="49" TopLine="43"/>
       </Position18>
       <Position19>
-        <Filename Value="ModelCurves\curve_types_singleton.pas"/>
-        <Caret Line="83" TopLine="68"/>
+        <Filename Value="ModelCurves\UserPointsSet\create_user_points_set_dlg_adapter.pas"/>
+        <Caret Line="75" TopLine="52"/>
       </Position19>
       <Position20>
-        <Filename Value="ModelCurves\UserPointsSet\expression_parser_adapter.pas"/>
-        <Caret Line="57" TopLine="42"/>
+        <Filename Value="ModelCurves\UserPointsSet\create_user_points_set_dlg_adapter.pas"/>
+        <Caret Line="51" TopLine="35"/>
       </Position20>
       <Position21>
-        <Filename Value="ModelCurves\UserPointsSet\curve_type_storage_adapter.pas"/>
-        <Caret Line="51" TopLine="43"/>
+        <Filename Value="ModelCurves\UserPointsSet\create_user_points_set_dlg_adapter.pas"/>
+        <Caret Line="28" Column="61" TopLine="8"/>
       </Position21>
       <Position22>
-        <Filename Value="ModelCurves\UserPointsSet\curve_type_parameters_factory.pas"/>
-        <Caret Line="49" TopLine="24"/>
+        <Filename Value="ModelCurves\UserPointsSet\create_user_points_set_dlg_adapter.pas"/>
+        <Caret Line="28" Column="69" TopLine="8"/>
       </Position22>
       <Position23>
-        <Filename Value="ModelCurves\UserPointsSet\create_user_points_set_dlg_adapter.pas"/>
-        <Caret Line="41" Column="87" TopLine="19"/>
+        <Filename Value="ModelCurves\UserPointsSet\curve_type_parameters_factory.pas"/>
+        <Caret Line="49" TopLine="43"/>
       </Position23>
       <Position24>
-        <Filename Value="ModelCurves\curve_types_singleton.pas"/>
-        <Caret Line="83" TopLine="68"/>
+        <Filename Value="DataLoaders\extension_data_loader_injector.pas"/>
+        <Caret Line="27" Column="67" TopLine="19"/>
       </Position24>
       <Position25>
-        <Filename Value="ModelCurves\UserPointsSet\expression_parser_adapter.pas"/>
-        <Caret Line="57" TopLine="42"/>
+        <Filename Value="ModelCurves\UserPointsSet\create_user_points_set_dlg_adapter.pas"/>
+        <Caret Line="28" Column="73" TopLine="8"/>
       </Position25>
       <Position26>
-        <Filename Value="ModelCurves\UserPointsSet\curve_type_storage_adapter.pas"/>
-        <Caret Line="51" TopLine="43"/>
+        <Filename Value="DataLoaders\extension_data_loader_injector.pas"/>
+        <Caret Line="27" Column="67" TopLine="25"/>
       </Position26>
       <Position27>
-        <Filename Value="ModelCurves\UserPointsSet\curve_type_parameters_factory.pas"/>
-        <Caret Line="49" TopLine="24"/>
+        <Filename Value="fit_client_app.pas"/>
+        <Caret Line="49" TopLine="11"/>
       </Position27>
+      <Position28>
+        <Filename Value="..\Server\component_list.pas"/>
+        <Caret Line="31" Column="28" TopLine="6"/>
+      </Position28>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

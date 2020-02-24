@@ -19,12 +19,12 @@ unit extension_data_loader_injector;
 
 interface
 
-uses SysUtils, data_loader, dat_file_loader, csv_file_loader, CBRCComponent,
+uses SysUtils, data_loader, dat_file_loader, csv_file_loader,
   int_data_loader, int_data_loader_injector;
 
 type
     { Implementation of data loader injector based on file extension. }
-    TExtensionDataLoaderInjector = class(TCBRCComponent, IDataLoaderInjector)
+    TExtensionDataLoaderInjector = class(TInterfacedObject, IDataLoaderInjector)
     private
         FDataLoader: TDataLoader;
 

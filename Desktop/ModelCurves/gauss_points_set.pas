@@ -47,6 +47,8 @@ type
 
 implementation
 
+uses int_curve_factory;
+
 {=========================== TGaussPointsSet ==================================}
 
 constructor TGaussPointsSet.Create(AOwner: TComponent);
@@ -158,10 +160,10 @@ begin
       else Result := 0;
 end;
 
-var CTS: TCurveTypesSingleton;
+var CTS: ICurveFactory;
 
 initialization
-    CTS := TCurveTypesSingleton.Create;
+    CTS := TCurveTypesSingleton.CreateCurveFactory;
     CTS.RegisterCurveType(TGaussPointsSet);
 end.
 

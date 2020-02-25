@@ -38,6 +38,8 @@ type
 
 implementation
 
+uses int_curve_factory;
+
 {========================== TLorentzPointsSet =================================}
 
 function TLorentzPointsSet.GetCurveTypeName: string;
@@ -120,9 +122,9 @@ begin
     end;
 end;
 
-var CTS: TCurveTypesSingleton;
+var CTS: ICurveFactory;
 
 initialization
-    CTS := TCurveTypesSingleton.Create;
+    CTS := TCurveTypesSingleton.CreateCurveFactory;
     CTS.RegisterCurveType(TLorentzPointsSet);
 end.

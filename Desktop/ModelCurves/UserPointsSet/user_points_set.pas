@@ -66,7 +66,7 @@ type
     
 implementation
 
-uses configurable_user_points_set;
+uses configurable_user_points_set, int_curve_factory;
 
 {=========================== TUserPointsSet ================================}
 
@@ -144,10 +144,10 @@ begin
     Result := TConfigurableUserPointsSet;
 end;
 
-var CTS: TCurveTypesSingleton;
+var CTS: ICurveFactory;
 
 initialization
-    CTS := TCurveTypesSingleton.Create;
+    CTS := TCurveTypesSingleton.CreateCurveFactory;
     CTS.RegisterCurveType(TUserPointsSet);
 end.
 

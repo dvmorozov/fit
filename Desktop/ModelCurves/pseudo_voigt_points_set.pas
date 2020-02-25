@@ -50,6 +50,7 @@ type
 
 implementation
 
+uses int_curve_factory;
 
 {======================== TPseudoVoigtPointsSet ===============================}
 
@@ -117,10 +118,10 @@ begin
     Result := StringToGUID('{9f27dc7c-970f-4dac-88cd-f5fb3400d38d}');
 end;
 
-var CTS: TCurveTypesSingleton;
+var CTS: ICurveFactory;
 
 initialization
-    CTS := TCurveTypesSingleton.Create;
+    CTS := TCurveTypesSingleton.CreateCurveFactory;
     CTS.RegisterCurveType(TPseudoVoigtPointsSet);
 end.
 

@@ -44,13 +44,16 @@ type
 implementation
 
 uses
+    Controls, Dialogs,
 {$IF NOT DEFINED(SERVER) AND NOT DEFINED(CLIENT_PROXY)}
 {$IFDEF _WINDOWS}
     user_points_set_prop_dialog, expression_parser_adapter, curve_type_storage_adapter,
     curve_type_parameters_factory, create_user_points_set_dlg_adapter, app_settings,
+    int_curve_type_parameters_factory, int_create_user_points_set_dlg,
+    int_curve_type_storage, int_expression_parser,
 {$ENDIF}
 {$ENDIF}
-    Controls, app, Dialogs;
+    app;
 
 class function TConfigurableUserPointsSet.HasConfigurableParameters: Boolean;
 begin
@@ -61,10 +64,10 @@ end;
 class function TConfigurableUserPointsSet.ShowConfigurationDialog: Boolean;
 {$IFDEF _WINDOWS}
 var ct: Curve_type;
-    ep: TExpressionParserAdapter;
-    da: TCreateUserPointsSetDlgAdapter;
-    cf: TCurveTypeParametersFactory;
-    ca: TCurveTypeStorageAdapter;
+    ep: IExpressionParser;
+    da: ICreateUserPointsSetDlg;
+    cf: ICurveTypeParametersFactory;
+    ca: ICurveTypeStorage;
 
 label dlg1, dlg2;
 {$ENDIF}

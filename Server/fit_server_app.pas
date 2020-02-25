@@ -77,7 +77,7 @@ begin
     //  raskommentirovat' pri rabote servera otdel'noy programmoy
     //Application.OnException := OnException;
 {$IFDEF FIT}
-    FFitProxy := TFitServerProxy.Create(AOwner);
+    FFitProxy := TFitServerProxy.Create;
 {$ELSE}
     FForm := TFormMain.Create(nil);
     FViewer := TFitViewer.Create(nil);
@@ -107,7 +107,7 @@ end;
 procedure TFitServerApp.RecreateServer;
 begin
     FFitServer.Free; FFitServer := nil;
-    FFitServer := TFitServerMultithreaded.Create(nil);
+    FFitServer := TFitServerMultithreaded.Create;
 {$IFDEF FIT}
     FFitServer.FitProxy := FFitProxy;
 {$ENDIF}

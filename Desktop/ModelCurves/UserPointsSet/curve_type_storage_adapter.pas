@@ -19,20 +19,19 @@ unit curve_type_storage_adapter;
 
 interface
 
-uses SysUtils, app_settings, CBRCComponent, int_curve_type_storage;
+uses SysUtils, app_settings, int_curve_type_storage;
 
 type
     { Class-adapter implementing basic operation for 
       storing parameters of custom curve type.
       Implemented as singleton. }
     {$warnings off}
-    TCurveTypeStorageAdapter = class(TCBRCComponent, ICurveTypeStorage)
+    TCurveTypeStorageAdapter = class(TInterfacedObject, ICurveTypeStorage)
     private
-        class var FCurveTypeStorageAdapter: TCurveTypeStorageAdapter;
         constructor Init;
 
     public
-        class function Create: TCurveTypeStorageAdapter;
+        class function Create: ICurveTypeStorage;
 
         procedure AddCurveType(CurveType: Curve_type);
         procedure UpdateCurveType(CurveType: Curve_type);
@@ -44,16 +43,16 @@ implementation
 
 uses form_main;
 
+var CurveTypeStorageAdapter: TCurveTypeStorageAdapter;
+
 constructor TCurveTypeStorageAdapter.Init;
 begin
-    inherited Create(nil);
+    inherited;
 end;
 
-class function TCurveTypeStorageAdapter.Create: TCurveTypeStorageAdapter;
+class function TCurveTypeStorageAdapter.Create: ICurveTypeStorage;
 begin
-    if FCurveTypeStorageAdapter = nil then
-      FCurveTypeStorageAdapter := TCurveTypeStorageAdapter.Init;
-    Result := FCurveTypeStorageAdapter;
+    Result := CurveTypeStorageAdapter as ICurveTypeStorage;
 end;
 
 procedure TCurveTypeStorageAdapter.AddCurveType(CurveType: Curve_type);
@@ -77,6 +76,12 @@ procedure TCurveTypeStorageAdapter.DeleteCurveType(CurveType: Curve_type);
 begin
     FormMain.DeleteCurve(CurveType);
 end;
+
+initialization
+    CurveTypeStorageAdapter := TCurveTypeStorageAdapter.Init;
+
+finalization
+    CurveTypeStorageAdapter.Free;
 
 end.
 

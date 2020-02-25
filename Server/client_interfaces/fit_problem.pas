@@ -16,7 +16,7 @@ unit fit_problem;
 interface
 
 uses
-    SysUtils, Classes, MyExceptions, CBRCComponent, mscr_specimen_list,
+    SysUtils, Classes, MyExceptions, mscr_specimen_list,
     common_types, points_set, self_copied_component, int_points_set,
     title_points_set, curve_points_set, named_points_set, int_fit_service,
     int_fit_server, base_service_intf,
@@ -28,7 +28,7 @@ type
       centralized error handling in the client. Converts data
       to appropriate type. Should implement the same interface
       as the server. }
-    TFitProblem = class(TCBRCComponent, IFitProblem)
+    TFitProblem = class(TInterfacedObject, IFitProblem)
     protected
         FProblemId: LongInt;        //  For now only single problem id is
                                     //  supported per client.

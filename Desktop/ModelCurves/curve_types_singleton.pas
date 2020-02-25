@@ -23,25 +23,15 @@ uses Classes, SysUtils, named_points_set, CBRCComponent, int_points_set,
   int_curve_factory, int_curve_type_selector, int_curve_type_iterator, crc;
 
 type
-    { Class-reference type for base curve type. }
-    TCurveClass = class of TNamedPointsSet;
     { ENotImplementd isn't supported by Lazarus 0.9.24. It is used
       for building server part using wst-0.5. }
     ENotImplemented = class(Exception);
 
-    { Class containing information about curve types. }
-    TCurveType = class
-    public
-        CurveTypeName: string;
-        CurveClass: TCurveClass;
-        CurveTypeId: TCurveTypeId;
-        CurveTypeTag: Integer;
-    end;
-
-    { Class-singleton containing information about curve types. }
+    { Class-singleton containing information about curve types.
+      Should be inherited from TCompoenent to }
 {$warnings off}
 {$hints off}
-    TCurveTypesSingleton = class(TCBRCComponent,
+    TCurveTypesSingleton = class(TInterfacedObject,
         ICurveFactory, ICurveTypeIterator, ICurveTypeSelector)
     private
         FCurveTypes: TList;
@@ -53,11 +43,17 @@ type
         constructor Init;
 
     public
-        class function Create: TCurveTypesSingleton;
-        procedure RegisterCurveType(CurveClass: TCurveClass);
+        class function CreateCurveFactory: ICurveFactory;
+        class function CreateCurveTypeIterator: ICurveTypeIterator;
+        class function CreateCurveTypeSelector: ICurveTypeSelector;
+
+        destructor Destroy; override;
+
         { Implementation of ICurveFactory. }
         { TODO: create implementation based on TFitTask.GetPatternSpecimen: TCurvePointsSet. }
-        function CreatePointsSet(TypeId: TCurveTypeId): TNamedPointsSet; virtual; abstract;
+        //function CreatePointsSet(TypeId: TCurveTypeId): TNamedPointsSet; virtual; abstract;
+        procedure RegisterCurveType(CurveClass: TCurveClass);
+
         { Implementation of ICurveTypeIterator. }
         procedure FirstCurveType;
         procedure NextCurveType;
@@ -65,6 +61,7 @@ type
         function GetCurveTypeName: string;
         function GetCurveTypeId: TCurveTypeId;
         function GetCurveTypeTag(CurveTypeId: TCurveTypeId): Integer;
+
         { Implementation of ICurveTypeSelector. }
         procedure SelectCurveType(TypeId: TCurveTypeId);
         { Returns value of FCurrentCurveType. The value should be checked on Nil. }
@@ -73,24 +70,37 @@ type
 
 implementation
 
-{ Class members aren't supported by Lazarus 0.9.24, global variable are used instead. }
-var FCurveTypesSingleton: TCurveTypesSingleton;
+{ Class members aren't supported by Lazarus 0.9.24, global variable is used instead. }
+var CurveTypesSingleton: TCurveTypesSingleton;
 
 const
-  CurveTypeMustBeSelected: string = 'Curve type must be previously selected.';
-  NoItemsInTheList: string = 'No more items in the list.';
+    CurveTypeMustBeSelected: string = 'Curve type must be previously selected.';
+    NoItemsInTheList: string = 'No more items in the list.';
 
 constructor TCurveTypesSingleton.Init;
 begin
-    inherited Create(nil);
+    inherited;
     FCurveTypes := TList.Create;
 end;
 
-class function TCurveTypesSingleton.Create: TCurveTypesSingleton;
+destructor TCurveTypesSingleton.Destroy;
 begin
-    if FCurveTypesSingleton = nil then
-      FCurveTypesSingleton := TCurveTypesSingleton.Init;
-    Result := FCurveTypesSingleton;
+    inherited;
+end;
+
+class function TCurveTypesSingleton.CreateCurveFactory: ICurveFactory;
+begin
+    Result := CurveTypesSingleton as ICurveFactory;
+end;
+
+class function TCurveTypesSingleton.CreateCurveTypeIterator: ICurveTypeIterator;
+begin
+    Result := CurveTypesSingleton as ICurveTypeIterator;
+end;
+
+class function TCurveTypesSingleton.CreateCurveTypeSelector: ICurveTypeSelector;
+begin
+    Result := CurveTypesSingleton as ICurveTypeSelector;
 end;
 
 function SortAlphabetically(Item1, Item2: Pointer): Integer;
@@ -225,6 +235,12 @@ end;
 
 {$hints on}
 {$warnings on}
+initialization
+    CurveTypesSingleton := TCurveTypesSingleton.Init;
+
+finalization
+    CurveTypesSingleton.Free;
+
 end.
 
 

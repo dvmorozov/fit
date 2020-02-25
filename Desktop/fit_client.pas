@@ -20,7 +20,7 @@ unit fit_client;
 interface
 
 uses Classes, title_points_set, self_copied_component,
-    SysUtils, mscr_specimen_list, CBRCComponent, neutron_points_set,
+    SysUtils, mscr_specimen_list, neutron_points_set,
     int_points_set, int_client_callback, int_fit_viewer, int_data_loader,
     int_data_loader_injector, int_fit_service
 {$IFDEF FIT}
@@ -99,7 +99,7 @@ type
     TPlotProc = procedure of object;
 
     { Implements all client logic of the application. Must be completely independent from UI. }
-    TFitClient = class(TCBRCComponent, IClientCallback)
+    TFitClient = class(TInterfacedObject, IClientCallback)
     protected
         FFitProxy: IFitService;
 
@@ -280,7 +280,7 @@ type
         procedure SetWaveLength(AWaveLength: Double);
         function GetWaveLength: Double;
 
-        constructor CreateWithInjector(AOwner: TComponent;
+        constructor CreateWithInjector(
             ADataLoaderInjector: IDataLoaderInjector);
         destructor Destroy; override;
 
@@ -397,10 +397,10 @@ begin
     inherited Destroy;
 end;
 
-constructor TFitClient.CreateWithInjector(AOwner: TComponent;
+constructor TFitClient.CreateWithInjector(
     ADataLoaderInjector: IDataLoaderInjector);
 begin
-    inherited Create(AOwner);
+    inherited;
     FDataLoaderInjector := ADataLoaderInjector;
     FSelectionMode := ModeSelNone;
     FOpenState := OpenFailure;

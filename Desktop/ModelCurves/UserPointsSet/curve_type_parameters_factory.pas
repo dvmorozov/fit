@@ -21,18 +21,18 @@ interface
 
 uses
     Classes, SysUtils, app_settings, int_curve_type_parameters_factory,
-    persistent_curve_parameters, CBRCComponent;
+    persistent_curve_parameters;
 
 type
 {$warnings off}
     { Class-factory implementing operation for creating custom curve type object. }
-    TCurveTypeParametersFactory = class(TCBRCComponent,
+    TCurveTypeParametersFactory = class(TInterfacedObject,
         ICurveTypeParametersFactory)
     private
         constructor Init;
 
     public
-        class function Create: TCurveTypeParametersFactory;
+        class function Create: ICurveTypeParametersFactory;
         function CreateUserCurveType(Name: string;
             Expression: string; Parameters: Curve_parameters): Curve_type;
     end;
@@ -41,18 +41,16 @@ type
 implementation
 
 { Class members aren't supported by Lazarus 0.9.24, global variable are used instead. }
-var FCurveTypeParametersFactory: TCurveTypeParametersFactory;
+var CurveTypeParametersFactory: TCurveTypeParametersFactory;
 
 constructor TCurveTypeParametersFactory.Init;
 begin
-    inherited Create(nil);
+    inherited;
 end;
 
-class function TCurveTypeParametersFactory.Create: TCurveTypeParametersFactory;
+class function TCurveTypeParametersFactory.Create: ICurveTypeParametersFactory;
 begin
-    if FCurveTypeParametersFactory = nil then
-      FCurveTypeParametersFactory := TCurveTypeParametersFactory.Init;
-    Result := FCurveTypeParametersFactory;
+    Result := CurveTypeParametersFactory as ICurveTypeParametersFactory;
 end;
 
 function TCurveTypeParametersFactory.CreateUserCurveType(Name: string;
@@ -63,6 +61,12 @@ begin
     Result.Expression := Expression;
     Result.Parameters := Parameters;
 end;
+
+initialization
+    CurveTypeParametersFactory := TCurveTypeParametersFactory.Init;
+
+finalization
+    CurveTypeParametersFactory.Free;
 
 end.
 

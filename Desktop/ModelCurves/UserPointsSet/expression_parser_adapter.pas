@@ -29,13 +29,12 @@ type
     { Class-adapter implementing basic operation for parsing curve expression.
       Implemented as singleton. }
 {$warnings off}
-    TExpressionParserAdapter = class(TCBRCComponent, IExpressionParser)
+    TExpressionParserAdapter = class(TInterfacedObject, IExpressionParser)
     private
-        class var FExpressionParserAdapter: TExpressionParserAdapter;
         constructor Init;
 
     public
-        class function Create: TExpressionParserAdapter;
+        class function Create: IExpressionParser;
 {$IFDEF _WINDOWS}
         function ParseExpression(Expression: string): Curve_parameters;
 {$ENDIF}
@@ -50,16 +49,16 @@ uses app,
 {$ENDIF}
     Dialogs;
 
+var ExpressionParserAdapter: TExpressionParserAdapter;
+
 constructor TExpressionParserAdapter.Init;
 begin
-    inherited Create(nil);
+    inherited;
 end;
 
-class function TExpressionParserAdapter.Create: TExpressionParserAdapter;
+class function TExpressionParserAdapter.Create: IExpressionParser;
 begin
-    if FExpressionParserAdapter = nil then
-      FExpressionParserAdapter := TExpressionParserAdapter.Init;
-    Result := FExpressionParserAdapter;
+    Result := ExpressionParserAdapter as IExpressionParser;
 end;
 
 {$IFDEF _WINDOWS}
@@ -78,6 +77,12 @@ begin
     end;
 end;
 {$ENDIF}
+
+initialization
+    ExpressionParserAdapter := TExpressionParserAdapter.Init;
+
+finalization
+    ExpressionParserAdapter.Free;
 
 end.
 

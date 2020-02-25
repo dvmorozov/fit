@@ -41,8 +41,7 @@ uses Classes, title_points_set, SelfCheckedComponentList, SysUtils,
      fit_server_proxy,
 {$ENDIF}
      self_copied_component, MyExceptions, fit_task, SimpMath,
-     main_calc_thread, common_types, int_client_callback, int_fit_service,
-     CBRCComponent
+     main_calc_thread, common_types, int_client_callback, int_fit_service
 {$IFDEF _WINDOWS}
      , user_curve_parameter, Windows
 {$ENDIF}
@@ -79,7 +78,7 @@ type
           It should store all the data necessary for operations including selected
           intervals because client can be unable to store data.
         }
-    TFitServer = class(TCBRCComponent, IClientCallback, IFitService)
+    TFitServer = class(TInterfacedObject, IClientCallback, IFitService)
     protected
 {$IFDEF FIT}
         FFitProxy: TFitServerProxy;
@@ -268,7 +267,7 @@ type
             ACurrentTask: TCurrentTask; ADoneProc: TDoneProc); virtual;
 
     public
-        constructor Create(AOwner: TComponent); override;
+        constructor Create;
         destructor Destroy; override;
 
                 { Interface methods changing state shoud notify about it. }
@@ -637,7 +636,7 @@ begin
     inherited;
 end;
 
-constructor TFitServer.Create(AOwner: TComponent);
+constructor TFitServer.Create;
 begin
     inherited;
 

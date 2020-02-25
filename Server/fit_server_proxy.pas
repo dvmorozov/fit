@@ -16,12 +16,11 @@ unit fit_server_proxy;
 
 interface
 
-uses SysUtils, fit_client_stub, MyExceptions, int_client_callback,
-     CBRCComponent;
+uses SysUtils, fit_client_stub, MyExceptions, int_client_callback;
 
 type
     { Proxy class transmitting messages from server back to client. }
-    TFitServerProxy = class(TCBRCComponent, IClientCallback)
+    TFitServerProxy = class(TInterfacedObject, IClientCallback)
     protected
         FFitStub: TFitClientStub;
 

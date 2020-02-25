@@ -19,10 +19,10 @@ unit fit_client_stub;
 
 interface
 
-uses int_client_callback, CBRCComponent;
+uses int_client_callback;
   
 type
-    TFitClientStub = class(TCBRCComponent, IClientCallback)
+    TFitClientStub = class(TInterfacedObject, IClientCallback)
     protected
         FFitClient: TObject;
 

@@ -49,10 +49,11 @@ uses
 {$IFDEF _WINDOWS}
     user_points_set_prop_dialog, expression_parser_adapter, curve_type_storage_adapter,
     curve_type_parameters_factory, create_user_points_set_dlg_adapter, app_settings,
-{$ENDIF}
-{$ENDIF}
     int_curve_type_parameters_factory, int_create_user_points_set_dlg,
-    int_curve_type_storage, int_expression_parser, app;
+    int_curve_type_storage, int_expression_parser,
+{$ENDIF}
+{$ENDIF}
+    app;
 
 class function TConfigurableUserPointsSet.HasConfigurableParameters: Boolean;
 begin

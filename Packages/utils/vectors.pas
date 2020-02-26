@@ -10,7 +10,7 @@ unit vectors;
 
 interface
 
-uses SysUtils, Classes, SimpMath, CBRCComponent
+uses SysUtils, Classes, SimpMath
 {$IFNDEF Lazarus}
     , Windows
 {$ENDIF};

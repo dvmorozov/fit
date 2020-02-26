@@ -21,9 +21,9 @@ interface
 
 uses SysUtils, int_expression_parser,
 {$IFDEF _WINDOWS}
-    persistent_curve_parameters,
+    persistent_curve_parameters
 {$ENDIF}
-    CBRCComponent;
+    ;
 
 type
     { Class-adapter implementing basic operation for parsing curve expression.

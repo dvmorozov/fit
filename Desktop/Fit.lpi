@@ -22,7 +22,7 @@
       <MajorVersionNr Value="1"/>
       <MinorVersionNr Value="1"/>
       <RevisionNr Value="16"/>
-      <BuildNr Value="1408"/>
+      <BuildNr Value="1409"/>
       <Attributes pvaDebug="True"/>
       <StringTable FileDescription="Desktop application." LegalCopyright="Dmitry Morozov" OriginalFilename="Fit" ProductName="Fit" ProductVersion="1.1.1"/>
     </VersionInfo>
@@ -137,7 +137,7 @@
         <EditorIndex Value="13"/>
         <WindowIndex Value="1"/>
         <TopLine Value="464"/>
-        <CursorPos X="51" Y="473"/>
+        <CursorPos X="32" Y="490"/>
         <UsageCount Value="200"/>
         <Bookmarks Count="1">
           <Item0 Y="480"/>
@@ -1634,7 +1634,7 @@
       <Define2 Value="FITSERVER"/>
       <Define3 Value="Lazarus"/>
     </OtherDefines>
-    <JumpHistory Count="30" HistoryIndex="29">
+    <JumpHistory Count="29" HistoryIndex="28">
       <Position1>
         <Filename Value="ModelCurves\curve_types_singleton.pas"/>
         <Caret Line="22" Column="44" TopLine="12"/>
@@ -1724,35 +1724,31 @@
       </Position22>
       <Position23>
         <Filename Value="..\Server\fit_server.pas"/>
-        <Caret TopLine="16"/>
+        <Caret Line="641" Column="24" TopLine="626"/>
       </Position23>
       <Position24>
         <Filename Value="..\Server\fit_server.pas"/>
-        <Caret Line="641" Column="24" TopLine="626"/>
+        <Caret Line="38" Column="61" TopLine="19"/>
       </Position24>
       <Position25>
         <Filename Value="..\Server\fit_server.pas"/>
-        <Caret Line="38" Column="61" TopLine="19"/>
+        <Caret Line="641" Column="24" TopLine="626"/>
       </Position25>
       <Position26>
         <Filename Value="..\Server\fit_server.pas"/>
-        <Caret Line="641" Column="24" TopLine="626"/>
+        <Caret Line="38" Column="86" TopLine="16"/>
       </Position26>
       <Position27>
-        <Filename Value="..\Server\fit_server.pas"/>
-        <Caret Line="38" Column="86" TopLine="16"/>
-      </Position27>
-      <Position28>
         <Filename Value="..\Server\fit_task.pas"/>
         <Caret Line="701" Column="24" TopLine="686"/>
+      </Position27>
+      <Position28>
+        <Filename Value="Forms\form_main.pas"/>
       </Position28>
       <Position29>
         <Filename Value="Forms\form_main.pas"/>
-      </Position29>
-      <Position30>
-        <Filename Value="Forms\form_main.pas"/>
         <Caret Line="472" Column="77" TopLine="448"/>
-      </Position30>
+      </Position29>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
@@ -1763,7 +1759,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(LazarusDir)\lcl\interfaces\win32;$(LazarusDir)\lcl\include;$(LazarusDir)\fpc\2.2.0\source\rtl\inc"/>
-      <OtherUnitFiles Value="..\Repository\NewVCL;C:\lazarus_lib\synapse\synapse\source\lib\;C:\lazarus_lib\wst-0.5\;$(LazarusDir)\components\codetools\units\i386-win32;TAGraph\Component;DataLoaders;ModelCurves;ModelCurves\UserPointsSet;\VBOXSVR\04_-_github\fitminimizers\package;ModelCurves\CurveParameters;..\Common"/>
+      <OtherUnitFiles Value="..\Repository\NewVCL;C:\lazarus_lib\synapse\synapse\source\lib;C:\lazarus_lib\wst-0.5;$(LazarusDir)\components\codetools\units\i386-win32;TAGraph\Component;DataLoaders;ModelCurves;ModelCurves\UserPointsSet;\VBOXSVR\04_-_github\fitminimizers\package\;ModelCurves\CurveParameters;..\Common"/>
       <UnitOutputDirectory Value="o\Fit\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Parsing>

@@ -26,7 +26,7 @@ uses
     ActnList, app_settings, Laz_XMLCfg, common_types, neutron_points_set,
     int_points_set, curve_points_set, user_points_set, gauss_points_set,
     pseudo_voigt_points_set, asym_pseudo_voigt_points_set, lorentz_points_set,
-    two_branches_pseudo_voigt_points_set, named_points_set, curve_types_singleton,
+    two_branches_pseudo_voigt_points_set, named_points_set,
     log
 {$IFDEF _WINDOWS}
     , MyExceptions, Windows
@@ -470,7 +470,7 @@ implementation
 
 uses input_wavelength_dialog, input_max_rfactor_dialog,
     input_back_factor_dialog, about_box_dialog, app, int_curve_type_iterator,
-    int_curve_type_selector;
+    int_curve_type_selector, curve_types_singleton;
 
 (*
 function OFNHookProc(
@@ -1011,7 +1011,6 @@ begin
             //  Curve type can be selected only after successful configuration.
             FitClientApp_.FitClient.CurveTypeId := NamedPointsSetClass.GetCurveTypeId_;
             CurveTypeSelector.SelectCurveType(NamedPointsSetClass.GetCurveTypeId_);
-
             Break;
         end
     end;

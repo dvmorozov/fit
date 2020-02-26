@@ -1335,8 +1335,6 @@ end;
 {$hints on}
 
 procedure TFormMain.FormCreate(Sender: TObject);
-var
-    CurveTypeSelector: ICurveTypeSelector;
 begin
     Application.OnException := OnException;
     Caption := ApplicationProperties1.Title;
@@ -1404,9 +1402,6 @@ begin
     ReadSettings;
     ReadCurves;
     AddCurveMenuItems;
-
-    CurveTypeSelector := TCurveTypesSingleton.CreateCurveTypeSelector;
-    FitClientApp_.FitClient.CurveTypeId := CurveTypeSelector.GetSelectedCurveType;
 end;
 
 procedure TFormMain.ModelClick(Sender: TObject);

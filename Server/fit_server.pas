@@ -1745,8 +1745,7 @@ begin
             FState := SavedState;           //  vossta. sost. predshestvovashee
                                             //  vhodu v AsyncOperation
             FitDone := True;
-            //FState := ReadyForFit;
-            //SetState(ReadyForFit);        //  !!! udalyaet podzadachi !!!
+            SetState(Finished);
 {$IFDEF FIT}
             if (not DoneDisabled) and Assigned(FitProxy) then FitProxy.Done;
 {$ENDIF}
@@ -2115,7 +2114,7 @@ begin
             TaskList.Free; TaskList := nil;
         end;
         //  vypolnyaetsya dlitel'naya operatsiya
-        AsyncOperation: begin end;
+        AsyncOperation: begin SavedState := AState; Exit; end;
         //  fon uzhe otsechen (gotovnost' k podgonke
         //  krivyh v avtomaticheskom rezhime)
         ReadyForAutoFit: begin
@@ -2130,16 +2129,13 @@ begin
             TaskList.Free; TaskList := nil;
         end;
     end;
-    if FState <> AsyncOperation then
-    begin
-        SavedState := FState;
-        FState := AState;
-    end
-    else SavedState := AState;  //  dlya posleduyuschego vosstanovleniya
+    SavedState := FState;
+    FState := AState;
 end;
 
 function TFitServer.GetState: TFitServerState;
 begin
+    WriteLog('GetState: ' + IntToStr(LongInt(FState)), Debug);
     Result := FState;
 end;
 

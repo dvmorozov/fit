@@ -2114,7 +2114,7 @@ begin
             TaskList.Free; TaskList := nil;
         end;
         //  vypolnyaetsya dlitel'naya operatsiya
-        AsyncOperation: begin SavedState := AState; Exit; end;
+        AsyncOperation: begin end;
         //  fon uzhe otsechen (gotovnost' k podgonke
         //  krivyh v avtomaticheskom rezhime)
         ReadyForAutoFit: begin
@@ -2129,13 +2129,16 @@ begin
             TaskList.Free; TaskList := nil;
         end;
     end;
-    SavedState := FState;
-    FState := AState;
+    if FState <> AsyncOperation then
+    begin
+        SavedState := FState;
+        FState := AState;
+    end
+    else SavedState := AState;  //  dlya posleduyuschego vosstanovleniya
 end;
 
 function TFitServer.GetState: TFitServerState;
 begin
-    WriteLog('GetState: ' + IntToStr(LongInt(FState)), Debug);
     Result := FState;
 end;
 

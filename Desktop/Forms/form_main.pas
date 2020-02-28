@@ -2265,7 +2265,6 @@ procedure TFormMain.SetOpenState(State: TOpenState);
 var
     FitServerState: TFitServerState;
 begin
-    WriteLog('SetOpenState: ' + IntToStr(LongInt(State)), Debug);
     //  File
     ActionReload.Tag := ActionReload.Tag and $FFFFFFFE;
     ActionSaveAsText.Tag := ActionSaveAsText.Tag and $FFFFFFFE;
@@ -2292,7 +2291,6 @@ begin
     case State of
         OpenSuccess:
         begin
-            WriteLog('OpenSuccess', Debug);
             //  !!! rabota s Tag sdelana dlya zaschity ot mertsaniya !!!
             ActionReload.Tag := ActionReload.Tag or 1;
 
@@ -2311,7 +2309,6 @@ begin
                (FitServerState = Finished)
                then
             begin
-                WriteLog('OpenSuccess 1', Debug);
                 ActionFitMinNumberOfSpec.Tag := ActionFitMinNumberOfSpec.Tag or 1;
                 ActionFitMinDifference.Tag := ActionFitMinDifference.Tag or 1;
             end;

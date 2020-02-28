@@ -22,17 +22,20 @@ interface
 type
     { Server states. Sequence of states is designated by numbers. }
     TFitServerState = (
-        { waiting of loading profile data }
+        { Waiting of loading profile data. }
         ProfileWaiting,
-        { background isn't removed yet after last profile loading; state must not change on loading background points (2) }
+        { Background isn't removed yet after last profile loading.
+          State must not change on loading background points. }
         BackNotRemoved,
-        { long operation is performed }
+        { Computation is performed. }
         AsyncOperation,
-        { states below should be used only to inform user - fitting should be allowed in any case }     
-        { background removed (ready to fit parameters in automatic mode) }
+        { States below should be used only to inform user - optimization
+          should be allowed in any case when background removed (ready to
+          fit parameters in automatic mode). }
         ReadyForAutoFit,
-        { ready to fit with given user constraints }
+        { Ready to fit with given user constraints. }
         ReadyForFit,
+        { Computation has been finished, allows further restarting. }
         Finished
         );
 

@@ -1745,8 +1745,7 @@ begin
             FState := SavedState;           //  vossta. sost. predshestvovashee
                                             //  vhodu v AsyncOperation
             FitDone := True;
-            //FState := ReadyForFit;
-            //SetState(ReadyForFit);        //  !!! udalyaet podzadachi !!!
+            SetState(Finished);
 {$IFDEF FIT}
             if (not DoneDisabled) and Assigned(FitProxy) then FitProxy.Done;
 {$ENDIF}

@@ -2262,6 +2262,8 @@ begin
 end;
 
 procedure TFormMain.SetOpenState(State: TOpenState);
+var
+    FitServerState: TFitServerState;
 begin
     //  File
     ActionReload.Tag := ActionReload.Tag and $FFFFFFFE;
@@ -2299,10 +2301,12 @@ begin
             //  mozhno voobsche ubrat' proverku i deystvovat' kak pri
             //  polnost'yu avtomaticheskom raschete; eto pozvolit
             //  oboyti udalenie fona
-            if (FitClientApp_.FitClient.FitProxy.GetState = ReadyForFit) or
+            FitServerState := FitClientApp_.FitClient.FitProxy.GetState;
+            if (FitServerState = ReadyForFit) or
                //   dopuskaetsya zapuskat' raschet v dannom sostoyanii,
                //   t.k. neobhodimye dannye budut dopolneny avtomaticheski
-               (FitClientApp_.FitClient.FitProxy.GetState = ReadyForAutoFit)
+               (FitServerState = ReadyForAutoFit) or
+               (FitServerState = Finished)
                then
             begin
                 ActionFitMinNumberOfSpec.Tag := ActionFitMinNumberOfSpec.Tag or 1;

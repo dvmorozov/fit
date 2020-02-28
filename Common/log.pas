@@ -12,7 +12,7 @@ uses
 {$ENDIF}
     ;
 
-type TMsgType = (Fatal, Warning, Notification, User);
+type TMsgType = (Fatal, Warning, Notification, Debug);
 
 procedure WriteLog(Msg: string; MsgType: TMsgType);
 function GetSeqErrorCode: LongInt;

@@ -22,7 +22,7 @@ type
     { Proxy class transmitting messages from server back to client. }
     TFitServerProxy = class(TInterfacedObject, IClientCallback)
     protected
-        FFitStub: TFitClientStub;
+        FFitClientStub: TFitClientStub;
 
     public
         procedure ShowCurMin(Min: Double);
@@ -32,7 +32,8 @@ type
         procedure FindBackPointsDone;
         procedure FindPeakPositionsDone;
         { Pointer to the client part receiving messages. }
-        property FitStub: TFitClientStub read FFitStub write FFitStub;
+        property FitClientStub: TFitClientStub
+            read FFitClientStub write FFitClientStub;
     end;
 
 implementation
@@ -40,67 +41,67 @@ implementation
 procedure TFitServerProxy.ShowCurMin(Min: Double);
 begin
     try
-        Assert(Assigned(FitStub));
+        Assert(Assigned(FitClientStub));
     except
         on E: EAssertionFailed do raise EUserException.Create(E.Message)
         else raise;
     end;
-    FitStub.ShowCurMin(Min);
+    FitClientStub.ShowCurMin(Min);
 end;
 
 procedure TFitServerProxy.ShowProfile;
 begin
     try
-        Assert(Assigned(FitStub));
+        Assert(Assigned(FitClientStub));
     except
         on E: EAssertionFailed do raise EUserException.Create(E.Message)
         else raise;
     end;
-    FitStub.ShowProfile;
+    FitClientStub.ShowProfile;
 end;
 
 procedure TFitServerProxy.Done;
 begin
     try
-        Assert(Assigned(FitStub));
+        Assert(Assigned(FitClientStub));
     except
         on E: EAssertionFailed do raise EUserException.Create(E.Message)
         else raise;
     end;
-    FitStub.Done;
+    FitClientStub.Done;
 end;
 
 procedure TFitServerProxy.FindPeakBoundsDone;
 begin
     try
-        Assert(Assigned(FitStub));
+        Assert(Assigned(FitClientStub));
     except
         on E: EAssertionFailed do raise EUserException.Create(E.Message)
         else raise;
     end;
-    FitStub.FindPeakBoundsDone;
+    FitClientStub.FindPeakBoundsDone;
 end;
 
 procedure TFitServerProxy.FindBackPointsDone;
 begin
     try
-        Assert(Assigned(FitStub));
+        Assert(Assigned(FitClientStub));
     except
         on E: EAssertionFailed do raise EUserException.Create(E.Message)
         else raise;
     end;
-    FitStub.FindBackPointsDone;
+    FitClientStub.FindBackPointsDone;
 end;
 
 procedure TFitServerProxy.FindPeakPositionsDone;
 begin
     try
-        Assert(Assigned(FitStub));
+        Assert(Assigned(FitClientStub));
     except
         on E: EAssertionFailed do raise EUserException.Create(E.Message)
         else raise;
     end;
-    FitStub.FindPeakPositionsDone;
+    FitClientStub.FindPeakPositionsDone;
 end;
 
 end.

@@ -26,7 +26,7 @@ type
       components except UI. }
     TFitClientApp = class(TObject)
     private
-        FFitStub: TFitClientStub;
+        FFitClientStub: TFitClientStub;
         FFitClient: TFitClient;
         FDataLoaderInjector: TExtensionDataLoaderInjector;
 
@@ -35,7 +35,7 @@ type
         destructor Destroy; override;
 
         property FitClient: TFitClient read FFitClient;
-        property FitStub: TFitClientStub read FFitStub;
+        property FitClientStub: TFitClientStub read FFitClientStub;
     end;
 
 implementation
@@ -45,17 +45,17 @@ implementation
 constructor TFitClientApp.Create;
 begin
     inherited;
-    FFitStub := TFitClientStub.Create;
+    FFitClientStub := TFitClientStub.Create;
     FDataLoaderInjector := TExtensionDataLoaderInjector.Create;
     FFitClient := TFitClient.CreateWithInjector(FDataLoaderInjector);
 
-    FFitStub.FitClient := FFitClient;
+    FFitClientStub.FitClient := FFitClient;
 end;
 
 destructor TFitClientApp.Destroy;
 begin
     FFitClient.Free;
-    FFitStub.Free;
+    FFitClientStub.Free;
     FDataLoaderInjector.Free;
 end;
 

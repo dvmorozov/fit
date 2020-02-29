@@ -133,10 +133,11 @@
         <ComponentName Value="FormMain"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="15"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="2439"/>
-        <CursorPos X="21" Y="2453"/>
+        <TopLine Value="1353"/>
+        <CursorPos X="13" Y="1371"/>
         <UsageCount Value="200"/>
         <Bookmarks Count="1">
           <Item0 Y="488"/>
@@ -880,11 +881,10 @@
       <Unit77>
         <Filename Value="ModelCurves\UserPointsSet\curve_type_storage_adapter.pas"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="20"/>
         <WindowIndex Value="1"/>
         <TopLine Value="51"/>
-        <CursorPos X="30" Y="66"/>
+        <CursorPos X="44" Y="69"/>
         <UsageCount Value="207"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -1419,7 +1419,7 @@
         <EditorIndex Value="24"/>
         <WindowIndex Value="1"/>
         <CursorPos X="45" Y="97"/>
-        <UsageCount Value="136"/>
+        <UsageCount Value="138"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit134>
@@ -1439,7 +1439,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="7"/>
         <CursorPos X="53" Y="11"/>
-        <UsageCount Value="115"/>
+        <UsageCount Value="117"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit136>
       <Unit137>
@@ -1456,7 +1456,7 @@
         <EditorIndex Value="4"/>
         <WindowIndex Value="1"/>
         <CursorPos X="35" Y="25"/>
-        <UsageCount Value="55"/>
+        <UsageCount Value="56"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit138>
@@ -1516,7 +1516,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="2"/>
         <CursorPos X="19" Y="17"/>
-        <UsageCount Value="101"/>
+        <UsageCount Value="103"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit145>
@@ -1570,7 +1570,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="10"/>
         <CursorPos X="35" Y="20"/>
-        <UsageCount Value="30"/>
+        <UsageCount Value="31"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit151>
@@ -1614,7 +1614,7 @@
         <EditorIndex Value="2"/>
         <WindowIndex Value="1"/>
         <CursorPos X="46" Y="24"/>
-        <UsageCount Value="25"/>
+        <UsageCount Value="26"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit156>
@@ -1623,7 +1623,7 @@
         <EditorIndex Value="22"/>
         <WindowIndex Value="1"/>
         <CursorPos X="33" Y="13"/>
-        <UsageCount Value="23"/>
+        <UsageCount Value="24"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit157>
@@ -1643,107 +1643,127 @@
       <Define2 Value="FITSERVER"/>
       <Define3 Value="Lazarus"/>
     </OtherDefines>
-    <JumpHistory Count="25" HistoryIndex="24">
+    <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="415" Column="20" TopLine="397"/>
+        <Caret Line="2619" Column="54" TopLine="2573"/>
       </Position1>
       <Position2>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="2491" Column="30" TopLine="2484"/>
+        <Caret Line="2661" Column="59" TopLine="2632"/>
       </Position2>
       <Position3>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="2505" Column="31" TopLine="2497"/>
+        <Caret Line="2497" Column="48" TopLine="2437"/>
       </Position3>
       <Position4>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="2552" Column="24" TopLine="2522"/>
+        <Caret Line="2527" Column="20" TopLine="2497"/>
       </Position4>
       <Position5>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="415" Column="30" TopLine="399"/>
+        <Caret Line="385" Column="30" TopLine="369"/>
       </Position5>
       <Position6>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="2505" Column="36" TopLine="2475"/>
+        <Caret Line="1171" TopLine="1123"/>
       </Position6>
       <Position7>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="2537" Column="40" TopLine="2522"/>
+        <Caret Line="1174" Column="20" TopLine="1144"/>
       </Position7>
       <Position8>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="2619" Column="54" TopLine="2573"/>
+        <Caret Line="1370" Column="14" TopLine="1354"/>
       </Position8>
       <Position9>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="2661" Column="59" TopLine="2632"/>
+        <Caret Line="2585" Column="41" TopLine="2555"/>
       </Position9>
       <Position10>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="2497" Column="48" TopLine="2437"/>
+        <Caret Line="2598" Column="36" TopLine="2578"/>
       </Position10>
       <Position11>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="2527" Column="20" TopLine="2497"/>
+        <Caret Line="2618" Column="38" TopLine="2604"/>
       </Position11>
       <Position12>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="385" Column="30" TopLine="369"/>
+        <Caret Line="16" Column="38"/>
       </Position12>
       <Position13>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="1171" TopLine="1123"/>
+        <Caret Line="471" Column="13" TopLine="452"/>
       </Position13>
       <Position14>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="1174" Column="20" TopLine="1144"/>
+        <Caret Line="2532" Column="36" TopLine="2509"/>
       </Position14>
       <Position15>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="1370" Column="14" TopLine="1354"/>
+        <Caret Line="2618" Column="38" TopLine="2604"/>
       </Position15>
       <Position16>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="2585" Column="41" TopLine="2555"/>
+        <Caret Line="2598" Column="31" TopLine="2577"/>
       </Position16>
       <Position17>
-        <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="2598" Column="36" TopLine="2578"/>
+        <Filename Value="ModelCurves\UserPointsSet\curve_type_storage_adapter.pas"/>
+        <Caret Line="62" Column="14" TopLine="48"/>
       </Position17>
       <Position18>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="2618" Column="38" TopLine="2604"/>
+        <Caret Line="2453" Column="21" TopLine="2439"/>
       </Position18>
       <Position19>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="16" Column="38"/>
+        <Caret Line="2447" Column="54" TopLine="2445"/>
       </Position19>
       <Position20>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="471" Column="13" TopLine="452"/>
+        <Caret Line="252" Column="58" TopLine="248"/>
       </Position20>
       <Position21>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="2532" Column="36" TopLine="2509"/>
+        <Caret Line="265" Column="38" TopLine="248"/>
       </Position21>
       <Position22>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="2618" Column="38" TopLine="2604"/>
+        <Caret Line="678" Column="44" TopLine="669"/>
       </Position22>
       <Position23>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="2598" Column="31" TopLine="2577"/>
+        <Caret Line="631" Column="28" TopLine="621"/>
       </Position23>
       <Position24>
-        <Filename Value="ModelCurves\UserPointsSet\curve_type_storage_adapter.pas"/>
-        <Caret Line="62" Column="14" TopLine="48"/>
+        <Filename Value="Forms\form_main.pas"/>
+        <Caret Line="382" Column="33" TopLine="362"/>
       </Position24>
       <Position25>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="2453" Column="21" TopLine="2439"/>
+        <Caret Line="307" Column="25" TopLine="290"/>
       </Position25>
+      <Position26>
+        <Filename Value="Forms\form_main.pas"/>
+        <Caret Line="1373" Column="24" TopLine="1353"/>
+      </Position26>
+      <Position27>
+        <Filename Value="Forms\form_main.pas"/>
+        <Caret Line="254" Column="34" TopLine="248"/>
+      </Position27>
+      <Position28>
+        <Filename Value="Forms\form_main.pas"/>
+        <Caret Line="305" Column="25" TopLine="276"/>
+      </Position28>
+      <Position29>
+        <Filename Value="Forms\form_main.pas"/>
+        <Caret Line="1371" Column="13" TopLine="1354"/>
+      </Position29>
+      <Position30>
+        <Filename Value="Forms\form_main.pas"/>
+        <Caret Line="380" Column="35" TopLine="367"/>
+      </Position30>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
@@ -1754,7 +1774,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(LazarusDir)\lcl\interfaces\win32;$(LazarusDir)\lcl\include;$(LazarusDir)\fpc\2.2.0\source\rtl\inc"/>
-      <OtherUnitFiles Value="..\Repository\NewVCL;C:\lazarus_lib\synapse\synapse\source\lib;C:\lazarus_lib\wst-0.5;$(LazarusDir)\components\codetools\units\i386-win32;TAGraph\Component;DataLoaders;ModelCurves;ModelCurves\UserPointsSet;\VBOXSVR\04_-_github\fitminimizers\package\;ModelCurves\CurveParameters;..\Common"/>
+      <OtherUnitFiles Value="..\Repository\NewVCL;C:\lazarus_lib\synapse\synapse\source\lib\;C:\lazarus_lib\wst-0.5\;$(LazarusDir)\components\codetools\units\i386-win32;TAGraph\Component;DataLoaders;ModelCurves;ModelCurves\UserPointsSet;\VBOXSVR\04_-_github\fitminimizers\package;ModelCurves\CurveParameters;..\Common"/>
       <UnitOutputDirectory Value="o\Fit\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Parsing>

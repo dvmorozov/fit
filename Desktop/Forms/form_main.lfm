@@ -1039,7 +1039,7 @@ object FormMain: TFormMain
       Caption = '&Model'
       OnClick = ModelClick
       object SelCurveType: TMenuItem
-        Action = ActionPatternType
+        Action = ActionCurveType
       end
       object RFactorIntervals: TMenuItem
         Caption = 'Specimen Application Intervals'
@@ -2287,11 +2287,10 @@ object FormMain: TFormMain
       OnExecute = ActionAnimationModeExecute
       OnUpdate = ActionAnimationModeUpdate
     end
-    object ActionPatternType: TAction
+    object ActionCurveType: TAction
       Category = 'Model'
-      Caption = 'Pattern Type'
+      Caption = 'Curve Type'
       DisableIfNoHandler = False
-      OnUpdate = ActionPatternTypeUpdate
     end
     object ActionEnBackVariation: TAction
       Category = 'Model'

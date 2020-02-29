@@ -371,16 +371,16 @@ LazarusResources.Add('TFormMain','FORMDATA',[
   +#130#249#244'x'#129#248#244'x'#129#248#244'x'#129#248#244'sw'#247#244'd^'#245
   +#132#10'ImageIndex'#2#10#7'OnClick'#7#17'ActionQuitExecute'#0#0#0#9'TMenuIte'
   +'m'#5'Model'#7'Caption'#6#6'&Model'#7'OnClick'#7#10'ModelClick'#0#9'TMenuIte'
-  +'m'#12'SelCurveType'#6'Action'#7#17'ActionPatternType'#0#0#9'TMenuItem'#16'R'
-  +'FactorIntervals'#7'Caption'#6#30'Specimen Application Intervals'#0#9'TMenuI'
-  +'tem'#23'SelRFactorIntervalsAuto'#6'Action'#7#29'ActionSelRFactorIntervalsAu'
-  +'to'#7'OnClick'#7'$ActionSelRFactorIntervalsAutoExecute'#0#0#9'TMenuItem'#22
-  +'SelRFactorIntervalsVis'#6'Action'#7#28'ActionSelRFactorIntervalsVis'#7'OnCl'
-  +'ick'#7'#ActionSelRFactorIntervalsVisExecute'#0#0#9'TMenuItem'#10'MenuItem20'
-  +#7'Caption'#6#1' '#7'Enabled'#8#0#0#9'TMenuItem'#22'RemoveRFactorIntervals'#6
-  +'Action'#7#28'ActionRemoveRFactorIntervals'#7'OnClick'#7'#ActionRemoveRFacto'
-  +'rIntervalsExecute'#0#0#0#9'TMenuItem'#7'PeakPos'#7'Caption'#6#18'Specimen P'
-  +'ositions'#7'OnClick'#7#12'PeakPosClick'#0#9'TMenuItem'#14'SelSpecPosAuto'#6
+  +'m'#12'SelCurveType'#6'Action'#7#15'ActionCurveType'#0#0#9'TMenuItem'#16'RFa'
+  +'ctorIntervals'#7'Caption'#6#30'Specimen Application Intervals'#0#9'TMenuIte'
+  +'m'#23'SelRFactorIntervalsAuto'#6'Action'#7#29'ActionSelRFactorIntervalsAuto'
+  +#7'OnClick'#7'$ActionSelRFactorIntervalsAutoExecute'#0#0#9'TMenuItem'#22'Sel'
+  +'RFactorIntervalsVis'#6'Action'#7#28'ActionSelRFactorIntervalsVis'#7'OnClick'
+  +#7'#ActionSelRFactorIntervalsVisExecute'#0#0#9'TMenuItem'#10'MenuItem20'#7'C'
+  +'aption'#6#1' '#7'Enabled'#8#0#0#9'TMenuItem'#22'RemoveRFactorIntervals'#6'A'
+  +'ction'#7#28'ActionRemoveRFactorIntervals'#7'OnClick'#7'#ActionRemoveRFactor'
+  +'IntervalsExecute'#0#0#0#9'TMenuItem'#7'PeakPos'#7'Caption'#6#18'Specimen Po'
+  +'sitions'#7'OnClick'#7#12'PeakPosClick'#0#9'TMenuItem'#14'SelSpecPosAuto'#6
   +'Action'#7#20'ActionSelSpecPosAuto'#9'AutoCheck'#9#7'OnClick'#7#27'ActionSel'
   +'SpecPosAutoExecute'#0#0#9'TMenuItem'#16'SpecAtEveryPoint'#6'Action'#7#28'Ac'
   +'tionSelSpecPosAtEveryPoint'#0#0#9'TMenuItem'#13'SelSpecPosVis'#6'Action'#7
@@ -1515,14 +1515,13 @@ LazarusResources.Add('TFormMain','FORMDATA',[
   +'ion'#6#14'At Every Point'#9'OnExecute'#7'#ActionSelSpecPosAtEveryPointExecu'
   +'te'#0#0#7'TAction'#19'ActionAnimationMode'#8'Category'#6#4'View'#7'Caption'
   +#6#14'Animation Mode'#9'OnExecute'#7#26'ActionAnimationModeExecute'#8'OnUpda'
-  +'te'#7#25'ActionAnimationModeUpdate'#0#0#7'TAction'#17'ActionPatternType'#8
-  +'Category'#6#5'Model'#7'Caption'#6#12'Pattern Type'#18'DisableIfNoHandler'#8
-  +#8'OnUpdate'#7#23'ActionPatternTypeUpdate'#0#0#7'TAction'#21'ActionEnBackVar'
-  +'iation'#8'Category'#6#5'Model'#7'Caption'#6#16'Enable Variation'#9'OnExecut'
-  +'e'#7#28'ActionEnBackVariationExecute'#8'OnUpdate'#7#27'ActionEnBackVariatio'
-  +'nUpdate'#0#0#7'TAction'#24'ActionEnableCurveScaling'#8'Category'#6#7'Fittin'
-  +'g'#7'Caption'#6#20'Enable Curve Scaling'#9'OnExecute'#7#31'ActionEnableCurv'
-  +'eScalingExecute'#8'OnUpdate'#7#30'ActionEnableCurveScalingUpdate'#0#0#0#6'T'
-  +'Timer'#10'TimerAsync'#7'Enabled'#8#8'Interval'#3#208#7#7'OnTimer'#7#15'Time'
-  +'rAsyncTimer'#4'left'#3'&'#2#0#0#0
+  +'te'#7#25'ActionAnimationModeUpdate'#0#0#7'TAction'#15'ActionCurveType'#8'Ca'
+  +'tegory'#6#5'Model'#7'Caption'#6#10'Curve Type'#18'DisableIfNoHandler'#8#0#0
+  +#7'TAction'#21'ActionEnBackVariation'#8'Category'#6#5'Model'#7'Caption'#6#16
+  +'Enable Variation'#9'OnExecute'#7#28'ActionEnBackVariationExecute'#8'OnUpdat'
+  +'e'#7#27'ActionEnBackVariationUpdate'#0#0#7'TAction'#24'ActionEnableCurveSca'
+  +'ling'#8'Category'#6#7'Fitting'#7'Caption'#6#20'Enable Curve Scaling'#9'OnEx'
+  +'ecute'#7#31'ActionEnableCurveScalingExecute'#8'OnUpdate'#7#30'ActionEnableC'
+  +'urveScalingUpdate'#0#0#0#6'TTimer'#10'TimerAsync'#7'Enabled'#8#8'Interval'#3
+  +#208#7#7'OnTimer'#7#15'TimerAsyncTimer'#4'left'#3'&'#2#0#0#0
 ]);

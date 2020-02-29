@@ -52,7 +52,7 @@ type
   TFormMain = class(TForm)
     ActionEnableCurveScaling: TAction;
     ActionEnBackVariation: TAction;
-    ActionPatternType: TAction;
+    ActionCurveType: TAction;
     ActionAnimationMode: TAction;
     ActionSelSpecPosAtEveryPoint: TAction;
     ActionAbout: TAction;
@@ -262,7 +262,6 @@ type
     procedure ActionFitMinDifferenceExecute(Sender: TObject);
     procedure ActionFitMinNumberOfSpecExecute(Sender: TObject);
     procedure ActionImportExecute(Sender: TObject);
-    procedure ActionPatternTypeUpdate(Sender: TObject);
     procedure ActionQuitExecute(Sender: TObject);
     procedure ActionReloadExecute(Sender: TObject);
     procedure ActionRemoveBackExecute(Sender: TObject);
@@ -378,6 +377,7 @@ type
         const ClassName: string; var ComponentClass: TComponentClass);
     procedure OnException(Sender: TObject; E: Exception);
     procedure DoEditHint;
+    procedure CreateCurveTypeMenus;
 
 {$IFDEF _WINDOWS}
     procedure OnDeleteUserCurveClick(Sender: TObject);
@@ -668,7 +668,7 @@ begin
     end;{with OpenDialog do...}
 end;
 
-procedure TFormMain.ActionPatternTypeUpdate(Sender: TObject);
+procedure TFormMain.CreateCurveTypeMenus;
 var CurveTypeIterator: ICurveTypeIterator;
     CurveTypeSelector: ICurveTypeSelector;
     MenuItem: TMenuItem;
@@ -1368,6 +1368,7 @@ begin
     //Windows.SetCursor(Windows.LoadCursor(0, LclCursorToWin32CursorMap[ACursor]));
     Settings := Settings_v1.Create(nil);
     ReadSettings;
+    CreateCurveTypeMenus;
 {$IFDEF _WINDOWS}
     ReadUserCurves;
     CreateUserCurveMenus;

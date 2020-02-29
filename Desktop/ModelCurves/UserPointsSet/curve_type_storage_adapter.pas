@@ -59,22 +59,22 @@ procedure TCurveTypeStorageAdapter.AddCurveType(CurveType: Curve_type);
 begin
     //  Saving curve parameters.
     FormMain.Settings.Curve_types.Add(CurveType);
-    FormMain.WriteCurve(CurveType);
+    FormMain.WriteUserCurve(CurveType);
 
     //FormMain.DeleteDummyCurve;
     //  Adds new menu item.
-    FormMain.AddCurveMenuItem(CurveType);
+    FormMain.AddUserCurveMenu(CurveType);
 end;
 
 procedure TCurveTypeStorageAdapter.UpdateCurveType(CurveType: Curve_type);
 begin
     DeleteFile(PChar(CurveType.FileName));
-    FormMain.WriteCurve(CurveType);
+    FormMain.WriteUserCurve(CurveType);
 end;
 
 procedure TCurveTypeStorageAdapter.DeleteCurveType(CurveType: Curve_type);
 begin
-    FormMain.DeleteCurve(CurveType);
+    FormMain.DeleteUserCurve(CurveType);
 end;
 
 initialization

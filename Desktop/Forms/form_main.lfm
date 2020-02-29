@@ -1,5 +1,5 @@
 object FormMain: TFormMain
-  Left = 44
+  Left = 613
   Height = 372
   Top = 150
   Width = 622
@@ -151,7 +151,7 @@ object FormMain: TFormMain
     object TabSheetIntervals: TTabSheet
       Caption = 'Specimen Application Intervals'
       ClientHeight = 91
-      ClientWidth = 1018
+      ClientWidth = 618
       Font.Height = -9
       Font.Name = 'MS Sans Serif'
       OnShow = TabSheetIntervalsShow
@@ -239,7 +239,7 @@ object FormMain: TFormMain
     object TabSheetSpecPositions: TTabSheet
       Caption = 'Specimen Positions'
       ClientHeight = 91
-      ClientWidth = 1018
+      ClientWidth = 618
       Font.Height = -9
       Font.Name = 'MS Sans Serif'
       OnShow = TabSheetSpecPositionsShow
@@ -327,7 +327,7 @@ object FormMain: TFormMain
     object TabSheetParameters: TTabSheet
       Caption = 'Specimen Parameters'
       ClientHeight = 91
-      ClientWidth = 1018
+      ClientWidth = 618
       Font.Height = -9
       Font.Name = 'MS Sans Serif'
       OnShow = TabSheetParametersShow
@@ -415,7 +415,7 @@ object FormMain: TFormMain
     object TabSheetDatasheet: TTabSheet
       Caption = 'Datasheet'
       ClientHeight = 91
-      ClientWidth = 1018
+      ClientWidth = 618
       Font.Height = -9
       Font.Name = 'MS Sans Serif'
       OnShow = TabSheetDatasheetShow

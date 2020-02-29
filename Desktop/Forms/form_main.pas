@@ -52,7 +52,7 @@ type
   TFormMain = class(TForm)
     ActionEnableCurveScaling: TAction;
     ActionEnBackVariation: TAction;
-    ActionPatternType: TAction;
+    ActionCurveType: TAction;
     ActionAnimationMode: TAction;
     ActionSelSpecPosAtEveryPoint: TAction;
     ActionAbout: TAction;
@@ -262,7 +262,6 @@ type
     procedure ActionFitMinDifferenceExecute(Sender: TObject);
     procedure ActionFitMinNumberOfSpecExecute(Sender: TObject);
     procedure ActionImportExecute(Sender: TObject);
-    procedure ActionPatternTypeUpdate(Sender: TObject);
     procedure ActionQuitExecute(Sender: TObject);
     procedure ActionReloadExecute(Sender: TObject);
     procedure ActionRemoveBackExecute(Sender: TObject);
@@ -376,12 +375,14 @@ type
     function GetConfigFileName: string;
     procedure OnFindComponentClass(Reader: TReader;
         const ClassName: string; var ComponentClass: TComponentClass);
-    //procedure AddDummyCurve;
-    //procedure DeleteDummyCurve;
-    procedure OnDeleteSpecialCurveClick(Sender: TObject);
-    procedure OnSpecialCurveClick(Sender: TObject);
     procedure OnException(Sender: TObject; E: Exception);
     procedure DoEditHint;
+    procedure CreateCurveTypeMenus;
+
+{$IFDEF _WINDOWS}
+    procedure OnDeleteUserCurveClick(Sender: TObject);
+    procedure OnUserCurveClick(Sender: TObject);
+{$ENDIF}
 
   public
     { Application settings. Type should be checked. }
@@ -400,20 +401,26 @@ type
     { Index of selected value. }
     ValueIndex: LongInt;
 
+{$IFDEF _WINDOWS}
+    //procedure AddDummyCurve;
+    //procedure DeleteDummyCurve;
+    procedure ReadUserCurves;
+    procedure WriteUserCurve(ct: Curve_type);
+    { Creates all menu items corresponding to user defined curves. }
+    procedure CreateUserCurveMenus;
+    { Adds menu item corresponding to user defined curve. }
+    procedure AddUserCurveMenu(ct: Curve_type);
+    procedure DeleteUserCurve(ct: Curve_type);
+{$ENDIF}
+
     { Tries read the user settings object. In the case of failure creates new object. }
     procedure ReadSettings;
     procedure WriteSettings;
     { Searches files containing parameters of user defined curves and loads them. }
-    procedure ReadCurves;
-    procedure WriteCurve(ct: Curve_type);
-    procedure DeleteCurve(ct: Curve_type);
+
     { Creates single menu item. }
-    procedure CreateCurveMenuItem(Pos: LongInt; ct: Curve_type;
-    ParentMenu: TMenuItem; OnClick: TNotifyEvent);
-    { Creates all menu items corresponding to user defined curves. }
-    procedure AddCurveMenuItems;
-    { Adds menu item corresponding to user defined curve. }
-    procedure AddCurveMenuItem(ct: Curve_type);
+    procedure CreateMenuItem(Pos: LongInt; ct: Curve_type;
+        ParentMenu: TMenuItem; OnClick: TNotifyEvent);
 
     procedure CheckListBoxChanged;
     { Saving curve parameters into text file. }
@@ -463,8 +470,9 @@ const
     HintMain:           string =
         'Drag mouse from top-left to bottom-right to zoom';
     HintWait:           string = 'Calculation started. Please wait';
-
-    MenuDelCustCapt:    string = 'Delete Special';
+{$IFDEF _WINDOWS}
+    MenuDelUserCapt:    string = 'Delete User';
+{$ENDIF}
 
 implementation
 
@@ -660,7 +668,7 @@ begin
     end;{with OpenDialog do...}
 end;
 
-procedure TFormMain.ActionPatternTypeUpdate(Sender: TObject);
+procedure TFormMain.CreateCurveTypeMenus;
 var CurveTypeIterator: ICurveTypeIterator;
     CurveTypeSelector: ICurveTypeSelector;
     MenuItem: TMenuItem;
@@ -1163,47 +1171,7 @@ begin
     FitClientApp_.FitClient.AddPointToBackground(XValue, YValue);
 end;
 
-(*
-procedure TFormMain.DeleteDummyCurve;
-var i: LongInt;
-    ct: Curve_type;
-    Flag: Boolean;
-begin
-    while Settings.Curve_types.Count > 1 do
-    begin
-        Flag := False;
-        for i := 0 to Settings.Curve_types.Count - 1 do
-        begin
-            ct := Curve_type(Settings.Curve_types.Items[i]);
-            if ct.Name = 'Dummy' then
-            begin
-                Settings.Curve_types.Delete(i);
-                Flag := True;
-                Break;
-            end;
-        end;
-        if not Flag then Break;
-    end;
-end;
-*)
-(*
-procedure TFormMain.AddDummyCurve;
-var ct: Curve_type;
-begin
-    //  esli ne byl vnesen hotya by odin element,
-    //  to chtenie spiska vposledstvii vyzyvaet
-    //  isklyuchenie SIGSEGV i padenie programmy;
-    //  obschaya zaschita ot nepravil'nogo xml-fayla
-    //  ne pomogaet - krivizna biblioteki lazarus'a
-    if Settings.Curve_types.Count = 0 then
-    begin
-        ct := Curve_type.Create(nil);
-        ct.Name := 'Dummy';
-        ct.Expression := '1.0+1.0';
-        Settings.Curve_types.Add(ct);
-    end;
-end;
-*)
+
 procedure TFormMain.FormDestroy(Sender: TObject);
 begin
     //AddDummyCurve;
@@ -1400,8 +1368,11 @@ begin
     //Windows.SetCursor(Windows.LoadCursor(0, LclCursorToWin32CursorMap[ACursor]));
     Settings := Settings_v1.Create(nil);
     ReadSettings;
-    ReadCurves;
-    AddCurveMenuItems;
+    CreateCurveTypeMenus;
+{$IFDEF _WINDOWS}
+    ReadUserCurves;
+    CreateUserCurveMenus;
+{$ENDIF}
 end;
 
 procedure TFormMain.ModelClick(Sender: TObject);
@@ -2480,7 +2451,64 @@ begin
     Result := GetConfigDir + 'config.xml';
 end;
 
-procedure TFormMain.DeleteCurve(ct: Curve_type);
+procedure TFormMain.CreateMenuItem(Pos: LongInt; ct: Curve_type;
+    ParentMenu: TMenuItem; OnClick: TNotifyEvent);
+var mi: TMenuItem;
+begin
+    mi := TMenuItem.Create(ParentMenu);
+    mi.Caption := ct.Name;
+    mi.OnClick := OnClick;
+    //  obratnaya svyaz'
+    mi.Tag := LongInt(ct);  (* 32 *)
+    //  novye elementy dobavlyayutsya v nachalo
+    //  spiska, no v poryadke sozdaniya
+    ParentMenu.Insert(Pos, mi);
+end;
+
+{$IFDEF _WINDOWS}
+(*
+procedure TFormMain.DeleteDummyCurve;
+var i: LongInt;
+    ct: Curve_type;
+    Flag: Boolean;
+begin
+    while Settings.Curve_types.Count > 1 do
+    begin
+        Flag := False;
+        for i := 0 to Settings.Curve_types.Count - 1 do
+        begin
+            ct := Curve_type(Settings.Curve_types.Items[i]);
+            if ct.Name = 'Dummy' then
+            begin
+                Settings.Curve_types.Delete(i);
+                Flag := True;
+                Break;
+            end;
+        end;
+        if not Flag then Break;
+    end;
+end;
+*)
+(*
+procedure TFormMain.AddDummyCurve;
+var ct: Curve_type;
+begin
+    //  esli ne byl vnesen hotya by odin element,
+    //  to chtenie spiska vposledstvii vyzyvaet
+    //  isklyuchenie SIGSEGV i padenie programmy;
+    //  obschaya zaschita ot nepravil'nogo xml-fayla
+    //  ne pomogaet - krivizna biblioteki lazarus'a
+    if Settings.Curve_types.Count = 0 then
+    begin
+        ct := Curve_type.Create(nil);
+        ct.Name := 'Dummy';
+        ct.Expression := '1.0+1.0';
+        Settings.Curve_types.Add(ct);
+    end;
+end;
+*)
+
+procedure TFormMain.DeleteUserCurve(ct: Curve_type);
     //  udalenie elementa podmenyu iz dannogo menyu,
     //  svyazannogo s dannoy zapis'yu tipa krivoy
     procedure DeleteItem(ParentMenu: TMenuItem; Tag: LongInt);
@@ -2505,14 +2533,14 @@ begin
     //AddDummyCurve;
     //  udalenie menyu
     DeleteItem(SelCurveType, LongInt(ct));
-    //  poisk menyu MenuDelCustCapt
-    mi := SelCurveType.Find(MenuDelCustCapt);
+    //  poisk menyu MenuDelUserCapt
+    mi := SelCurveType.Find(MenuDelUserCapt);
     DeleteItem(mi, LongInt(ct));
-    //  udalenie menyu MenuDelCustCapt
+    //  udalenie menyu MenuDelUserCapt
     if mi.Count = 0 then mi.Free;
 end;
 
-procedure TFormMain.OnDeleteSpecialCurveClick(Sender: TObject);
+procedure TFormMain.OnDeleteUserCurveClick(Sender: TObject);
 var i: LongInt;
     ct: Curve_type;
     mi: TMenuItem;
@@ -2527,21 +2555,19 @@ begin
         //  el-ty sravnivayutsya po ukazatelyu (* 32 *)
         if LongInt(ct) = Tag then
         begin
-            DeleteCurve(ct);
+            DeleteUserCurve(ct);
             Break;
         end;
     end;
 end;
 
-procedure TFormMain.OnSpecialCurveClick(Sender: TObject);
-{$IFDEF _WINDOWS}
-var i: LongInt;
+procedure TFormMain.OnUserCurveClick(Sender: TObject);
+var
+    i: LongInt;
     ct: Curve_type;
     mi: TMenuItem;
     Tag: LongInt;
-{$ENDIF}
 begin
-{$IFDEF _WINDOWS}
     mi := TMenuItem(Sender);
     Tag := mi.Tag;
     //  poisk pol'zovatel'skogo tipa krivoy
@@ -2558,26 +2584,11 @@ begin
             Break;
         end;
     end;
-{$ENDIF}
 end;
 
-procedure TFormMain.CreateCurveMenuItem(Pos: LongInt; ct: Curve_type;
-    ParentMenu: TMenuItem; OnClick: TNotifyEvent);
-var mi: TMenuItem;
-begin
-    mi := TMenuItem.Create(ParentMenu);
-    mi.Caption := ct.Name;
-    mi.OnClick := OnClick;
-    //  obratnaya svyaz'
-    mi.Tag := LongInt(ct);  (* 32 *)
-    //  novye elementy dobavlyayutsya v nachalo
-    //  spiska, no v poryadke sozdaniya
-    ParentMenu.Insert(Pos, mi);
-end;
-
-procedure TFormMain.AddCurveMenuItems;
+procedure TFormMain.CreateUserCurveMenus;
     { True is returned if menu items were added. }
-    function ItemsAdd(ParentMenu: TMenuItem;
+    function AddItem(ParentMenu: TMenuItem;
         var ItemCount: LongInt; OnClick: TNotifyEvent): Boolean;
     var i: LongInt;
         ct: Curve_type;
@@ -2588,7 +2599,7 @@ procedure TFormMain.AddCurveMenuItems;
             ct := Curve_type(Settings.Curve_types.Items[i]);
             if ct.Name <> 'Dummy' then
             begin
-                CreateCurveMenuItem(i, ct, ParentMenu, OnClick);
+                CreateMenuItem(i, ct, ParentMenu, OnClick);
                 Result := True;
             end;
         end;
@@ -2599,7 +2610,7 @@ var ItemCount: LongInt;
     mi: TMenuItem;
 begin
     ItemCount := 0;
-    if ItemsAdd(SelCurveType, ItemCount, OnSpecialCurveClick) then
+    if AddItem(SelCurveType, ItemCount, OnUserCurveClick) then
     begin
         { Separator is created. }
         mi := TMenuItem.Create(SelCurveType);
@@ -2608,15 +2619,14 @@ begin
         SelCurveType.Insert(ItemCount + 1, mi);
         { Menu is created for deleting user curve types. }
         mi := TMenuItem.Create(SelCurveType);
-        mi.Caption := MenuDelCustCapt;
+        mi.Caption := MenuDelUserCapt;
         SelCurveType.Add(mi);
         { Submenu for deleting item is created. }
-        ItemsAdd(mi, ItemCount, OnDeleteSpecialCurveClick);
+        AddItem(mi, ItemCount, OnDeleteUserCurveClick);
     end;
 end;
 
-{$hints off}
-procedure TFormMain.AddCurveMenuItem(ct: Curve_type);
+procedure TFormMain.AddUserCurveMenu(ct: Curve_type);
 var i, LastIndex: LongInt;
     mi, DelMenu: TMenuItem;
 begin
@@ -2628,20 +2638,20 @@ begin
     for i := 0 to SelCurveType.Count - 1 do
     begin
         mi := SelCurveType.Items[i];
-        if PtrUInt(@mi.OnClick) = PtrUInt(OnSpecialCurveClick) then
+        if PtrUInt(@mi.OnClick) = PtrUInt(OnUserCurveClick) then
             LastIndex := i;
     end;
 
     Inc(LastIndex);     //  indeks sleduyuschego elementa
-    CreateCurveMenuItem(LastIndex, ct, SelCurveType, OnSpecialCurveClick);
+    CreateMenuItem(LastIndex, ct, SelCurveType, OnUserCurveClick);
 
-    DelMenu := SelCurveType.Find(MenuDelCustCapt);
+    DelMenu := SelCurveType.Find(MenuDelUserCapt);
     //  sozdaetsya menyu dlya udaleniya pol'zovatel'skih
     //  krivyh, esli ono ne bylo sozdano ranee
     if DelMenu = nil then
     begin
         DelMenu := TMenuItem.Create(SelCurveType);
-        DelMenu.Caption := MenuDelCustCapt;
+        DelMenu.Caption := MenuDelUserCapt;
         SelCurveType.Add(DelMenu);
     end;
 
@@ -2653,11 +2663,11 @@ begin
         SelCurveType.Insert(LastIndex + 1, mi);
     end;
     //  sozdaetsya element podmenyu udaleniya
-    CreateCurveMenuItem(DelMenu.Count, ct, DelMenu, OnDeleteSpecialCurveClick);
+    CreateMenuItem(
+        DelMenu.Count, ct, DelMenu, OnDeleteUserCurveClick);
 end;
-{$hints on}
 
-procedure TFormMain.ReadCurves;
+procedure TFormMain.ReadUserCurves;
 var F: TSearchRec;
     Path, FileName: string;
     XMLConfig: TXMLConfig;
@@ -2688,6 +2698,20 @@ begin
     end;
 end;
 
+procedure TFormMain.WriteUserCurve(ct: Curve_type);
+var XMLConfig: TXMLConfig;
+begin
+    ct.FileName := GetConfigDir +
+        IntToStr(QWord(TimeStampToMSecs(DateTimeToTimeStamp(Now)))) + '.cpr';
+    XMLConfig := TXMLConfig.Create(ct.FileName);
+    try
+        WriteComponentToXMLConfig(XMLConfig, 'Component', ct);
+        XMLConfig.Flush;
+    except end;
+    XMLConfig.Free;
+end;
+{$ENDIF}
+
 procedure TFormMain.ReadSettings;
 var XMLConfig: TXMLConfig;
     FileName: string;
@@ -2716,19 +2740,6 @@ begin
     XMLConfig := TXMLConfig.Create(Filename);
     try
         WriteComponentToXMLConfig(XMLConfig, 'Component', Settings);
-        XMLConfig.Flush;
-    except end;
-    XMLConfig.Free;
-end;
-
-procedure TFormMain.WriteCurve(ct: Curve_type);
-var XMLConfig: TXMLConfig;
-begin
-    ct.FileName := GetConfigDir +
-        IntToStr(QWord(TimeStampToMSecs(DateTimeToTimeStamp(Now)))) + '.cpr';
-    XMLConfig := TXMLConfig.Create(ct.FileName);
-    try
-        WriteComponentToXMLConfig(XMLConfig, 'Component', ct);
         XMLConfig.Flush;
     except end;
     XMLConfig.Free;

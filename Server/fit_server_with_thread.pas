@@ -113,9 +113,7 @@ end;
 procedure TFitServerWithThread.StopAsyncOper;
 var
     i: LongInt;
-    AState: TFitServerState;
 begin
-    AState := State;
     if State <> AsyncOperation then
         raise EUserException.Create(InadmissibleServerState + CRLF +
             CalcNotStarted);

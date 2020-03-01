@@ -3,7 +3,7 @@ This software is distributed under GPL
 in the hope that it will be useful, but WITHOUT ANY WARRANTY;
 without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
 
-@abstract(Contains definition of container class for callback methods.)
+@abstract(Contains definition of thread class executing server methods.)
 
 @author(Dmitry Morozov dvmorozov@hotmail.com, 
 LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
@@ -13,41 +13,63 @@ unit main_calc_thread;
 
 interface
 
-uses Classes, SysUtils;
+uses
+    Classes, SysUtils;
 
 type
-    TCurrentTask = procedure of object;
-    TShowResultsProc = procedure of object;
-    TDoneProc = procedure of object;
-
-    //??? nuzhno sdelat' perehvat isklyucheniy i sohranenie soobscheniya
-    //  v ob'ekte potoka dlya posleduyuschego chteniya
+    { Must contain counterparts of IClientCallback methods withoud parameters
+      for synchronous call from UI thread. }
+    //  TODO: nuzhno sdelat' perehvat isklyucheniy i sohranenie soobscheniya
+    //  v ob'ekte potoka dlya posleduyuschego chteniya.
     TMainCalcThread = class(TThread)
     private
-        CurrentTask: TCurrentTask;
-        //  vyzovy etih metodov sinhroniziruyutsya
-        //  s osnovnym potokom prilozheniya, iz
-        //  kotorogo proishodit vyzov vseh operatsiy
-        DoneProc: TDoneProc;
+        FTask: TThreadMethod;
+        { These methods are synchronized with UI thread. }
+        FShowCurMin: TThreadMethod;
+        FShowProfile: TThreadMethod;
+        FDone: TThreadMethod;
+        FFindPeakBoundsDone: TThreadMethod;
+        FFindBackPointsDone: TThreadMethod;
+        FFindPeakPositionsDone: TThreadMethod;
+
     public
         procedure Execute; override;
 
-        procedure SetCurrentTask(ACurrentTask: TCurrentTask);
-        procedure SetDoneProc(ADoneProc: TDoneProc);
+        procedure ShowCurMin;
+        procedure ShowProfile;
+        procedure Done;
+        procedure FindPeakBoundsDone;
+        procedure FindBackPointsDone;
+        procedure FindPeakPositionsDone;
+
+        procedure SetSyncMethods(ATask, AShowCurMin, AShowProfile,
+            ADone, AFindPeakBoundsDone, AFindBackPointsDone,
+            AFindPeakPositionsDone: TThreadMethod);
     end;
 
 implementation
 
 uses app;
 
-procedure TMainCalcThread.SetCurrentTask(ACurrentTask: TCurrentTask);
+procedure TMainCalcThread.SetSyncMethods(
+    ATask, AShowCurMin, AShowProfile,
+    ADone, AFindPeakBoundsDone, AFindBackPointsDone,
+    AFindPeakPositionsDone: TThreadMethod);
 begin
-    CurrentTask := ACurrentTask;
-end;
+    Assert(Assigned(ATask);
+    Assert(Assigned(AShowCurMin));
+    Assert(Assigned(AShowProfile)):
+    Assert(Assigned(ADone));
+    Assert(Assigned(AFindPeakBoundsDone));
+    Assert(Assigned(AFindBackPointsDone));
+    Assert(Assigned(AFindPeakPositionsDone));
 
-procedure TMainCalcThread.SetDoneProc(ADoneProc: TDoneProc);
-begin
-    DoneProc := ADoneProc;
+    FTask := ATask;
+    FShowCurMin := AShowCurMin;
+    FShowProfile := AShowProfile;
+    FDone := ADone;
+    FFindPeakBoundsDone := AFindPeakBoundsDone;
+    FFindPeakPositionsDone := AFindPeakPositionsDone;
 end;
 
 procedure TMainCalcThread.Execute;
@@ -55,13 +77,41 @@ begin
     //  !!! zdes' ostavim takuyu shemu obrabotki,
     //  potomu chto vypolnyaetsya v drugom potoke !!!
     try
-        Assert(Assigned(CurrentTask));  //  proverka tol'ko pri otladke -
-                                        //  isklyuchenie ne vyhodit naruzhu
-        CurrentTask;
+        FTask;
     except
         on E: Exception do WriteLog(E.Message, Fatal);
     end;
-    if Assigned(DoneProc) then Synchronize(DoneProc);
+    Synchronize(FDone);
+end;
+
+procedure TMainCalcThread.ShowCurMin;
+begin
+    Synchronize(FShowCurMin);
+end;
+
+procedure TMainCalcThread.ShowProfile;
+begin
+    Synchronize(FShowProfile);
+end;
+
+procedure TMainCalcThread.Done;
+begin
+    Synchronize(FDone);
+end;
+
+procedure TMainCalcThread.FindPeakBoundsDone;
+begin
+    Synchronize(FFindPeakBoundsDone);
+end;
+
+procedure TMainCalcThread.FindBackPointsDone;
+begin
+    Synchronize(FFindBackPointsDone);
+end;
+
+procedure TMainCalcThread.FindPeakPositionsDone;
+begin
+    Synchronize(FFindPeakPositionsDone);
 end;
 
 end.

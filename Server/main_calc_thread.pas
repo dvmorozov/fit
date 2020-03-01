@@ -31,6 +31,7 @@ type
         FFindPeakBoundsDone: TThreadMethod;
         FFindBackPointsDone: TThreadMethod;
         FFindPeakPositionsDone: TThreadMethod;
+        FDoneAll: TThreadMethod;
 
     public
         procedure Execute; override;
@@ -44,7 +45,7 @@ type
 
         procedure SetSyncMethods(ATask, AShowCurMin, AShowProfile,
             ADone, AFindPeakBoundsDone, AFindBackPointsDone,
-            AFindPeakPositionsDone: TThreadMethod);
+            AFindPeakPositionsDone, ADoneAll: TThreadMethod);
     end;
 
 implementation
@@ -54,7 +55,7 @@ uses app;
 procedure TMainCalcThread.SetSyncMethods(
     ATask, AShowCurMin, AShowProfile,
     ADone, AFindPeakBoundsDone, AFindBackPointsDone,
-    AFindPeakPositionsDone: TThreadMethod);
+    AFindPeakPositionsDone, ADoneAll: TThreadMethod);
 begin
     Assert(Assigned(ATask);
     Assert(Assigned(AShowCurMin));
@@ -63,6 +64,7 @@ begin
     Assert(Assigned(AFindPeakBoundsDone));
     Assert(Assigned(AFindBackPointsDone));
     Assert(Assigned(AFindPeakPositionsDone));
+    Assert(Assigned(ADoneAll));
 
     FTask := ATask;
     FShowCurMin := AShowCurMin;
@@ -70,6 +72,7 @@ begin
     FDone := ADone;
     FFindPeakBoundsDone := AFindPeakBoundsDone;
     FFindPeakPositionsDone := AFindPeakPositionsDone;
+    FDoneAll := ADoneAll;
 end;
 
 procedure TMainCalcThread.Execute;
@@ -81,7 +84,7 @@ begin
     except
         on E: Exception do WriteLog(E.Message, Fatal);
     end;
-    Synchronize(FDone);
+    Synchronize(FDoneAll);
 end;
 
 procedure TMainCalcThread.ShowCurMin;

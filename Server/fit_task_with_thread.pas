@@ -80,7 +80,7 @@ begin
     if Assigned(MainCalcThread.FatalException) then
        raise MainCalcThread.FatalException;
     //  prisoedinenie zadachi
-    MainCalcThread.SetCurrentTask(ACurrentTask);
+    MainCalcThread.SetSyncMethods(ACurrentTask);
     MainCalcThread.SetDoneProc(ADoneProc);
     //  zapusk potoka resheniya zadachi
     MainCalcThread.Resume;

@@ -50,7 +50,7 @@ begin
             CalcNotStarted);
 
     Assert(Assigned(TaskList));
-    Assert(Assigned(main_calc_thread));
+    Assert(Assigned(FMainCalcThread));
     //  bolee optimal'naya realizatsiya
     for i := 0 to TaskList.Count - 1 do
     begin
@@ -64,7 +64,7 @@ begin
         FT.DestroyMainCalcThread;
     end;
 
-    main_calc_thread.Terminate;
+    FMainCalcThread.Terminate;
     DestroyMainCalcThread;
     FState := SavedState;
 end;

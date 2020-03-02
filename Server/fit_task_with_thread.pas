@@ -13,18 +13,19 @@ unit fit_task_with_thread;
 
 interface
 
-uses Classes, SysUtils, fit_task, main_calc_thread, log;
+uses
+    Classes, SysUtils, fit_task, main_calc_thread, log;
 
 type
     { Executes task solution in separate thread. }
     TFitTaskWithThread = class(TFitTask)
     protected
-        MainCalcThread: TMainCalcThread;
+        FMainCalcThread: TMainCalcThread;
         CS: TRTLCriticalSection;    //  Use instead of TCriticalSection.
         FDoneDisabled: Boolean;     //  Suppresses calling DoneProc.
         
         procedure RecreateMainCalcThread(
-            ACurrentTask: TCurrentTask; ADoneProc: TDoneProc);
+            ACurrentTask: TThreadMethod; ADoneProc: TThreadMethod);
 
      public
         procedure ShowCurMin; override;
@@ -38,7 +39,15 @@ type
         function GetCurSqrMin: Double; override;
         function GetAllDone: Boolean; override;
 
-    public
+        {TODO: methods should be implemented. }
+
+        procedure ShowCurMinSync;
+        procedure ShowProfileSync;
+        procedure DoneSync;
+        procedure FindPeakBoundsDoneSync;
+        procedure FindBackPointsDoneSync;
+        procedure FindPeakPositionsDoneSync;
+
         constructor Create(AOwner: TComponent;
             AEnableBackgroundVariation: Boolean;
             ACurveScalingEnabled: Boolean); override;
@@ -69,21 +78,23 @@ uses app;
 
 {$warnings off}
 procedure TFitTaskWithThread.RecreateMainCalcThread(
-    ACurrentTask: TCurrentTask; ADoneProc: TDoneProc);
+    ACurrentTask: TThreadMethod; ADoneProc: TThreadMethod);
 begin
-    if Assigned(MainCalcThread) then AbortAsyncOper;
+    if Assigned(FMainCalcThread) then AbortAsyncOper;
 
     FAllDone := False;
     DoneDisabled := False;
     
-    MainCalcThread := TMainCalcThread.Create(True (* CreateSuspended *));
-    if Assigned(MainCalcThread.FatalException) then
-       raise MainCalcThread.FatalException;
-    //  prisoedinenie zadachi
-    MainCalcThread.SetSyncMethods(ACurrentTask);
-    MainCalcThread.SetDoneProc(ADoneProc);
-    //  zapusk potoka resheniya zadachi
-    MainCalcThread.Resume;
+    FMainCalcThread := TMainCalcThread.Create(True (* CreateSuspended *));
+    if Assigned(FMainCalcThread.FatalException) then
+       raise FMainCalcThread.FatalException;
+    { Assignment of callbacks. }
+    FMainCalcThread.SetSyncMethods(
+        ACurrentTask, ShowCurMinSync, ShowProfileSync, DoneSync,
+        FindPeakBoundsDoneSync, FindBackPointsDoneSync, FindPeakPositionsDoneSync,
+        ADoneProc);
+    { Start thread. }
+    FMainCalcThread.Resume;
 end;
 {$warnings on}
 
@@ -92,18 +103,18 @@ begin
     //  proverka neozhidannyh situatsiy;
     //  ne protivorechit semantike metoda - nefatal'n. oshibka
     try
-        Assert(Assigned(MainCalcThread));
+        Assert(Assigned(FMainCalcThread));
     except
         on E: EAssertionFailed do WriteLog(E.Message, Warning)
         else raise;
     end;
 
-    if Assigned(MainCalcThread) then
+    if Assigned(FMainCalcThread) then
     begin
-        MainCalcThread.Terminate;
-        MainCalcThread.WaitFor;
-        MainCalcThread.Free;
-        MainCalcThread := nil;
+        FMainCalcThread.Terminate;
+        FMainCalcThread.WaitFor;
+        FMainCalcThread.Free;
+        FMainCalcThread := nil;
     end;
 end;
 
@@ -154,13 +165,13 @@ procedure TFitTaskWithThread.StopAsyncOper;
 begin
     inherited;
     try
-        Assert(Assigned(MainCalcThread));
+        Assert(Assigned(FMainCalcThread));
     except
         on E: EAssertionFailed do WriteLog(E.Message, Warning)
         else raise;
     end;
 
-    if Assigned(MainCalcThread) then MainCalcThread.Terminate;
+    if Assigned(FMainCalcThread) then FMainCalcThread.Terminate;
 end;
 
 procedure TFitTaskWithThread.DoneProc;
@@ -194,9 +205,9 @@ begin
     //  dop. potok ostanavlivaetsya
     if Flag then
 {$IFDEF FIT}
-        MainCalcThread.Synchronize(ShowCurMinExternal);
+        FMainCalcThread.Synchronize(ShowCurMinExternal);
 {$ELSE}
-        MainCalcThread.Synchronize(MainCalcThread, ShowCurMinExternal);
+        FMainCalcThread.Synchronize(FMainCalcThread, ShowCurMinExternal);
 {$ENDIF}
 end;
 
@@ -254,9 +265,39 @@ end;
 
 destructor TFitTaskWithThread.Destroy;
 begin
-    if Assigned(MainCalcThread) then AbortAsyncOper;
+    if Assigned(FMainCalcThread) then AbortAsyncOper;
     DoneCriticalSection(CS);
     inherited;
+end;
+
+procedure TFitTaskWithThread.ShowCurMinSync;
+begin
+
+end;
+
+procedure TFitTaskWithThread.ShowProfileSync;
+begin
+
+end;
+
+procedure TFitTaskWithThread.DoneSync;
+begin
+
+end;
+
+procedure TFitTaskWithThread.FindPeakBoundsDoneSync;
+begin
+
+end;
+
+procedure TFitTaskWithThread.FindBackPointsDoneSync;
+begin
+
+end;
+
+procedure FindPeakPositionsDoneSync;
+begin
+
 end;
 
 end.

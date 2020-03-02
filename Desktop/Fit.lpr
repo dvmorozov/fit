@@ -21,8 +21,8 @@ uses
     create_user_points_set_dlg, user_points_set_prop_dialog,
     configurable_points_set, configurable_user_points_set, int_fit_service,
     fit_server, fit_task, int_fit_server, fit_server_with_thread,
-    persistent_curve_parameter_container, persistent_curve_parameters,
-    special_curve_parameter;
+    fit_task_with_thread, persistent_curve_parameter_container,
+    persistent_curve_parameters, special_curve_parameter;
 
 {$R manifest.res}
 

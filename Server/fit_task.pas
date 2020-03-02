@@ -19,7 +19,8 @@ unit fit_task;
 
 interface
 
-uses Classes, SysUtils, points_set, curve_points_set, self_copied_component,
+uses
+    Classes, SysUtils, points_set, curve_points_set, self_copied_component,
     int_minimizer, simple_minimizer, downhill_simplex_minimizer, main_calc_thread,
     mscr_specimen_list, int_points_set, lorentz_points_set, gauss_points_set,
     two_branches_pseudo_voigt_points_set, asym_pseudo_voigt_points_set,
@@ -92,7 +93,7 @@ type
         FEnableFastMinimizer: Boolean;
 
         FShowCurMin: TShowCurMin;
-        FDoneProc: TDoneProc;
+        FDoneProc: TThreadMethod;
         function GetProfileIntegral: Double;
         function GetCalcProfileIntegral: Double;
 
@@ -237,7 +238,7 @@ type
         property CurveTypeId: TCurveTypeId write FCurveTypeId;
         { Callback to update information at achieving new minimum. }
         property ShowCurMinExternal: TShowCurMin read FShowCurMin write FShowCurMin;
-        property DoneProcExternal: TDoneProc read FDoneProc write FDoneProc;
+        property DoneProcExternal: TThreadMethod read FDoneProc write FDoneProc;
         { Attributes store indexes of begin and end of the task interval 
           for optimal rebuilding overall resulting profile. }
         property BegIndex: LongInt read FBegIndex write FBegIndex;

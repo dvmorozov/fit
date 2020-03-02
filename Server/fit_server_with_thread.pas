@@ -91,34 +91,24 @@ begin
 
     Assert(not Assigned(FMainCalcThread));
 
-    FMainCalcThread := TMainCalcThread.Create(True (* CreateSuspended *));
+    FMainCalcThread := TMainCalcThread.Create(True { CreateSuspended });
     if Assigned(FMainCalcThread.FatalException) then
        raise FMainCalcThread.FatalException;
 
-    //  Assigns callbacks.
+    { Assigns callbacks. }
     FMainCalcThread.SetSyncMethods(
         ACurrentTask, ShowCurMinSync, ShowProfileSync, DoneSync,
         FindPeakBoundsDoneSync, FindBackPointsDoneSync, FindPeakPositionsDoneSync,
         ADoneProc);
-    //  Sets appropriate state befor starting thread.
+    { Sets appropriate state befor starting thread. }
     SetState(AsyncOperation);
-    //  Starts thread.
+    { Starts thread. }
     FMainCalcThread.Resume;
 end;
 {$warnings on}
 
 procedure TFitServerWithThread.DestroyMainCalcThread;
 begin
-    //  proverka neozhidannyh situatsiy;
-    //  ne protivorechit semantike metoda - nefatal'n. oshibka
-    (*
-    try
-        Assert(Assigned(FMainCalcThread));
-    except
-        on E: EAssertionFailed do WriteLog(E.Message, Surprising)
-        else raise;
-    end;
-    *)
     if Assigned(FMainCalcThread) then
     begin
         FMainCalcThread.Terminate;

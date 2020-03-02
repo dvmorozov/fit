@@ -45,7 +45,7 @@ type
 
         procedure SetSyncMethods(ATask, AShowCurMin, AShowProfile,
             ADone, AFindPeakBoundsDone, AFindBackPointsDone,
-            AFindPeakPositionsDone, ADoneAll: TThreadMethod);
+            AFindPeakPositionsDone, AAllDone: TThreadMethod);
     end;
 
 implementation
@@ -55,7 +55,7 @@ uses app;
 procedure TMainCalcThread.SetSyncMethods(
     ATask, AShowCurMin, AShowProfile,
     ADone, AFindPeakBoundsDone, AFindBackPointsDone,
-    AFindPeakPositionsDone, ADoneAll: TThreadMethod);
+    AFindPeakPositionsDone, AAllDone: TThreadMethod);
 begin
     Assert(Assigned(ATask);
     Assert(Assigned(AShowCurMin));
@@ -64,7 +64,7 @@ begin
     Assert(Assigned(AFindPeakBoundsDone));
     Assert(Assigned(AFindBackPointsDone));
     Assert(Assigned(AFindPeakPositionsDone));
-    Assert(Assigned(ADoneAll));
+    Assert(Assigned(AAllDone));
 
     FTask := ATask;
     FShowCurMin := AShowCurMin;
@@ -72,7 +72,7 @@ begin
     FDone := ADone;
     FFindPeakBoundsDone := AFindPeakBoundsDone;
     FFindPeakPositionsDone := AFindPeakPositionsDone;
-    FDoneAll := ADoneAll;
+    FDoneAll := AAllDone;
 end;
 
 procedure TMainCalcThread.Execute;

@@ -264,7 +264,7 @@ type
         function GetAllInitialized: Boolean;
                 { Does not really create any thread. Simply calls methods synchronously. }
         procedure RecreateMainCalcThread(
-            ACurrentTask: TCurrentTask; ADoneProc: TDoneProc); virtual;
+            ACurrentTask: TThreadMethod; ADoneProc: TThreadMethod); virtual;
 
     public
         constructor Create;

@@ -14,7 +14,7 @@ unit fit_server_with_thread;
 interface
 
 uses
-    SysUtils, fit_server, common_types, main_calc_thread, MyExceptions,
+    Classes, SysUtils, fit_server, common_types, main_calc_thread, MyExceptions,
     fit_task;
 
 type
@@ -30,7 +30,7 @@ type
         FCurMin: Double;
 
         procedure RecreateMainCalcThread(
-            ACurrentTask: TCurrentTask; ADoneProc: TDoneProc); override;
+            ACurrentTask: TThreadMethod; ADoneProc: TThreadMethod); override;
         { Waits for completion of the thread. Do not call from synchonized
           method, otherwise this will result in deadlock. }
         procedure DestroyMainCalcThread;
@@ -84,23 +84,25 @@ end;
 
 {$warnings off}
 procedure TFitServerWithThread.RecreateMainCalcThread(
-    ACurrentTask: TCurrentTask; ADoneProc: TDoneProc);
+    ACurrentTask: TThreadMethod; ADoneProc: TThreadMethod);
 begin
     if State = AsyncOperation then AbortAsyncOper;
     DoneDisabled := False;
 
-    Assert(not Assigned(MainCalcThread));
+    Assert(not Assigned(FMainCalcThread));
 
     FMainCalcThread := TMainCalcThread.Create(True (* CreateSuspended *));
-    //  tak rekomenduet rukovodstvo
     if Assigned(FMainCalcThread.FatalException) then
        raise FMainCalcThread.FatalException;
-    //  prisoedinenie zadachi
-    FMainCalcThread.SetSyncMethods(ACurrentTask);
-    FMainCalcThread.SetDoneProc(ADoneProc);
-    //  ustanovka sostoyaniya d.b. do zapuska potoka
+
+    //  Assigns callbacks.
+    FMainCalcThread.SetSyncMethods(
+        ACurrentTask, ShowCurMinSync, ShowProfileSync, DoneSync,
+        FindPeakBoundsDoneSync, FindBackPointsDoneSync, FindPeakPositionsDoneSync,
+        ADoneProc);
+    //  Sets appropriate state befor starting thread.
     SetState(AsyncOperation);
-    //  zapusk potoka resheniya zadachi
+    //  Starts thread.
     FMainCalcThread.Resume;
 end;
 {$warnings on}

@@ -153,7 +153,7 @@ initialization
     { Link is established to make calls from client to server. }
     FitClientApp_.FitClient.FitProxy := FitServerApp_.FitStub;
     { Link is established to make calls from server to client. }
-    FitServerApp_.FitProxy.FitStub := FitClientApp_.FitStub;
+    FitServerApp_.FitProxy.FitClientStub := FitClientApp_.FitClientStub;
 {$ENDIF}
 {$ENDIF}
 

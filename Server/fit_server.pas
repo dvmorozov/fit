@@ -41,7 +41,7 @@ uses Classes, title_points_set, SelfCheckedComponentList, SysUtils,
      fit_server_proxy,
 {$ENDIF}
      self_copied_component, MyExceptions, fit_task, SimpMath,
-     main_calc_thread, common_types, int_client_callback, int_fit_service
+     common_types, int_client_callback, int_fit_service
 {$IFDEF _WINDOWS}
      , user_curve_parameter, Windows
 {$ENDIF}
@@ -264,7 +264,7 @@ type
         function GetAllInitialized: Boolean;
                 { Does not really create any thread. Simply calls methods synchronously. }
         procedure RecreateMainCalcThread(
-            ACurrentTask: TCurrentTask; ADoneProc: TDoneProc); virtual;
+            ACurrentTask: TThreadMethod; ADoneProc: TThreadMethod); virtual;
 
     public
         constructor Create;
@@ -2299,8 +2299,8 @@ begin
             TF.CurveTypeId := CurveTypeId;
             if CurveTypeId = Special then
                 TF.SetSpecialCurve(FCurveExpr, Curve_parameters(Params.GetCopy));
-            TF.ShowCurMinExternal := ShowCurMin;
-            TF.DoneProcExternal := DoneProc;
+            TF.ServerShowCurMin := ShowCurMin;
+            TF.ServerDoneProc := DoneProc;
 
             TaskList.Add(TF);
         except
@@ -2365,8 +2365,8 @@ begin
                 TF.CurveTypeId := CurveTypeId;
                 if IsEqualGUID(CurveTypeId, TUserPointsSet.GetCurveTypeId_) then
                     TF.SetSpecialCurve(FCurveExpr, Curve_parameters(Params.GetCopy));
-                TF.ShowCurMinExternal := ShowCurMinInternal;
-                TF.DoneProcExternal := DoneProc;
+                TF.ServerShowCurMin := ShowCurMinInternal;
+                TF.ServerDoneProc := DoneProc;
 
                 TaskList.Add(TF);
             except
@@ -2865,7 +2865,7 @@ begin
 end;
 
 procedure TFitServer.RecreateMainCalcThread(
-    ACurrentTask: TCurrentTask; ADoneProc: TDoneProc);
+    ACurrentTask: TThreadMethod; ADoneProc: TThreadMethod);
 begin
     Assert(Assigned(ACurrentTask));
     Assert(Assigned(ADoneProc));

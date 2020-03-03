@@ -141,7 +141,7 @@ type
         FAllDone: Boolean;
 
         procedure ShowCurMin; virtual;
-        procedure DoneProc; virtual;
+        procedure Done; virtual;
 
         function GetSqrRFactor: Double;
         function GetAbsRFactor: Double;
@@ -1583,7 +1583,7 @@ begin
 
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyani
     Optimization;
-    DoneProc;
+    Done;
 end;
 
 procedure TFitTask.FindGaussesAgain;
@@ -1593,14 +1593,14 @@ begin
     RecreateCurveInstances(nil);
     CalculateProfile;
     Optimization;
-    DoneProc;
+    Done;
 end;
 
 procedure TFitTask.FindGaussesSequentially;
 begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
     FindGaussesSequentiallyAlg;
-    DoneProc;
+    Done;
 end;
 
 procedure TFitTask.AddPointToCurvePositions(XValue: Double);
@@ -1709,7 +1709,7 @@ begin
     ServerShowCurMin;
 end;
 
-procedure TFitTask.DoneProc;
+procedure TFitTask.Done;
 begin
     FAllDone := True;
     ServerDoneProc;

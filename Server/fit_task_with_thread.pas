@@ -21,7 +21,7 @@ type
     TFitTaskWithThread = class(TFitTask)
     protected
         FMainCalcThread: TMainCalcThread;
-        FDoneDisabled: Boolean;     //  Suppresses calling DoneProc.
+        FDoneDisabled: Boolean;     //  Suppresses calling Done.
         
         procedure RecreateMainCalcThread(
             ATask: TThreadMethod; AAllDone: TThreadMethod);
@@ -32,7 +32,7 @@ type
 
         procedure ShowCurMin; override;
         function GetCurMinInitialized: Boolean; override;
-        procedure DoneProc; override;
+        procedure Done; override;
         
         { Methods implement synchronization to work in multithreading environment. }
         
@@ -112,7 +112,7 @@ end;
 
 procedure TFitTaskWithThread.FindGaussesSequentially;
 begin
-    RecreateMainCalcThread(FindGaussesSequentiallyAlg, DoneProc);
+    RecreateMainCalcThread(FindGaussesSequentiallyAlg, Done);
 end;
 
 procedure TFitTaskWithThread.FindGaussesAgain;
@@ -121,12 +121,12 @@ begin
     // povtornaya initsializatsiya gaussianov
     RecreateCurveInstances(nil);
     CalculateProfile;
-    RecreateMainCalcThread(Optimization, DoneProc);
+    RecreateMainCalcThread(Optimization, Done);
 end;
 
 procedure TFitTaskWithThread.FindGausses;
 begin
-    RecreateMainCalcThread(Optimization, DoneProc);
+    RecreateMainCalcThread(Optimization, Done);
 end;
 
 procedure TFitTaskWithThread.AbortAsyncOper;
@@ -142,7 +142,7 @@ begin
     if Assigned(FMainCalcThread) then FMainCalcThread.Terminate;
 end;
 
-procedure TFitTaskWithThread.DoneProc;
+procedure TFitTaskWithThread.Done;
 begin
     FMainCalcThread.Done;
 end;

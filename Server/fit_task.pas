@@ -21,7 +21,7 @@ interface
 
 uses
     Classes, SysUtils, points_set, curve_points_set, self_copied_component,
-    int_minimizer, simple_minimizer, downhill_simplex_minimizer, main_calc_thread,
+    int_minimizer, simple_minimizer, downhill_simplex_minimizer,
     mscr_specimen_list, int_points_set, lorentz_points_set, gauss_points_set,
     two_branches_pseudo_voigt_points_set, asym_pseudo_voigt_points_set,
     user_points_set, pseudo_voigt_points_set, special_curve_parameter,
@@ -237,8 +237,8 @@ type
         property MaxRFactor: Double write FMaxRFactor;
         property CurveTypeId: TCurveTypeId write FCurveTypeId;
         { Callback to update information at achieving new minimum. }
-        property ShowCurMinExternal: TShowCurMin read FShowCurMin write FShowCurMin;
-        property DoneProcExternal: TThreadMethod read FDoneProc write FDoneProc;
+        property ServerShowCurMin: TThreadMethod read FShowCurMin write FShowCurMin;
+        property ServerDoneProc: TThreadMethod read FDoneProc write FDoneProc;
         { Attributes store indexes of begin and end of the task interval 
           for optimal rebuilding overall resulting profile. }
         property BegIndex: LongInt read FBegIndex write FBegIndex;
@@ -1706,13 +1706,13 @@ begin
     CurMin := CurSqrMin;    //  chtoby ne pereschityvat'
                             //  !!! dolzhno sootvetstvovat' GetRFactor !!!
     CurMinInitialized := True;
-    ShowCurMinExternal;
+    ServerShowCurMin;
 end;
 
 procedure TFitTask.DoneProc;
 begin
     FAllDone := True;
-    DoneProcExternal;
+    ServerDoneProc;
 end;
 
 procedure TFitTask.SetSpecialCurve(

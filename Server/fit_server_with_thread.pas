@@ -30,7 +30,7 @@ type
         FCurMin: Double;
 
         procedure RecreateMainCalcThread(
-            ACurrentTask: TThreadMethod; ADoneProc: TThreadMethod); override;
+            ATask: TThreadMethod; AAllDone: TThreadMethod); override;
         { Waits for completion of the thread. Do not call from synchonized
           method, otherwise this will result in deadlock. }
         procedure DestroyMainCalcThread;
@@ -84,7 +84,7 @@ end;
 
 {$warnings off}
 procedure TFitServerWithThread.RecreateMainCalcThread(
-    ACurrentTask: TThreadMethod; ADoneProc: TThreadMethod);
+    ATask: TThreadMethod; AAllDone: TThreadMethod);
 begin
     if State = AsyncOperation then AbortAsyncOper;
     DoneDisabled := False;
@@ -97,9 +97,9 @@ begin
 
     { Assigns callbacks. }
     FMainCalcThread.SetSyncMethods(
-        ACurrentTask, ShowCurMinSync, ShowProfileSync, DoneSync,
+        ATask, ShowCurMinSync, ShowProfileSync, DoneSync,
         FindPeakBoundsDoneSync, FindBackPointsDoneSync, FindPeakPositionsDoneSync,
-        ADoneProc);
+        AAllDone);
     { Sets appropriate state befor starting thread. }
     SetState(AsyncOperation);
     { Starts thread. }

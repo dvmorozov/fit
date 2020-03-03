@@ -14,7 +14,7 @@ unit main_calc_thread;
 interface
 
 uses
-    Classes, SysUtils;
+    Classes, SysUtils, log;
 
 type
     { Must contain counterparts of IClientCallback methods withoud parameters
@@ -31,7 +31,7 @@ type
         FFindPeakBoundsDone: TThreadMethod;
         FFindBackPointsDone: TThreadMethod;
         FFindPeakPositionsDone: TThreadMethod;
-        FDoneAll: TThreadMethod;
+        FAllDone: TThreadMethod;
 
     public
         procedure Execute; override;
@@ -57,9 +57,9 @@ procedure TMainCalcThread.SetSyncMethods(
     ADone, AFindPeakBoundsDone, AFindBackPointsDone,
     AFindPeakPositionsDone, AAllDone: TThreadMethod);
 begin
-    Assert(Assigned(ATask);
+    Assert(Assigned(ATask));
     Assert(Assigned(AShowCurMin));
-    Assert(Assigned(AShowProfile)):
+    Assert(Assigned(AShowProfile));
     Assert(Assigned(ADone));
     Assert(Assigned(AFindPeakBoundsDone));
     Assert(Assigned(AFindBackPointsDone));
@@ -72,7 +72,7 @@ begin
     FDone := ADone;
     FFindPeakBoundsDone := AFindPeakBoundsDone;
     FFindPeakPositionsDone := AFindPeakPositionsDone;
-    FDoneAll := AAllDone;
+    FAllDone := AAllDone;
 end;
 
 procedure TMainCalcThread.Execute;
@@ -84,7 +84,7 @@ begin
     except
         on E: Exception do WriteLog(E.Message, Fatal);
     end;
-    Synchronize(FDoneAll);
+    Synchronize(FAllDone);
 end;
 
 procedure TMainCalcThread.ShowCurMin;

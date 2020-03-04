@@ -89,7 +89,8 @@ begin
     if State = AsyncOperation then AbortAsyncOper;
     DoneDisabled := False;
 
-    Assert(not Assigned(FMainCalcThread));
+    if Assigned(FMainCalcThread) then
+        DestroyMainCalcThread;
 
     FMainCalcThread := TMainCalcThread.Create(True { CreateSuspended });
     if Assigned(FMainCalcThread.FatalException) then

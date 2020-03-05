@@ -222,8 +222,7 @@ type
                  );
                 { Searches for peak boundaries and returns its points.
                   Searches among points which do not belong to any other peak. }
-        function FindProfileMaximums: TTitlePointsSet;
-        function FindProfileMinimums: TTitlePointsSet;
+        function FindProfileExtremums(SearchMinimums: Boolean): TTitlePointsSet;
                 { Fills the list of peak positions for automatic fit. }
         procedure FindPeakPositionsForAutoAlg;
         function Integrate(Points: TPointsSet;
@@ -856,142 +855,41 @@ begin
     end;
 end;
 
-function TFitServer.FindProfileMaximums: TTitlePointsSet;
-var Data: TPointsSet;
-    Max: Double;
-    MaxX0: Double;
-    MaxIndex: LongInt;
-    MaxFound: Boolean;
+function TFitServer.FindProfileExtremums(SearchMinimums: Boolean): TTitlePointsSet;
+var
+    Data: TPointsSet;
+    ExtremumValue: Double;
+    ExtremumX0: Double;
+    ExtremumIndex: LongInt;
+    ExtremumFound: Boolean;
     LeftIndex, RightIndex: LongInt;
     //LeftIndex2, RightIndex2: LongInt;
     LeftX0, RightX0, Temp: Double;
     i: LongInt;
-    GlobalMax: Double;
-begin
-    Result := FindProfileMinimums;
-    Exit;
+    GlobalExtremum: Double;
 
-
-    if FSelectedAreaMode then Data := SelectedArea
-    else Data := ExpProfile;
-    Assert(Assigned(Data));
-    Data.Sort;
-
-    Result := TTitlePointsSet.Create(nil);
-    try
-        //  tsiklicheski vybiraetsya maksimal'naya tochka sredi teh,
-        //  prinadlezhnost' kotoryh k pikam esche ne opredelena
-        repeat
-            Max := MIN_VALUE; MaxFound := False;
-            for i := 0 to Data.PointsCount - 1 do
-            begin
-                if (Data.PointYCoord[i] > Max) and
-                   (Result.IndexOfValueX(Data.PointXCoord[i]) = -1) then
-                begin
-                    Max := Data.PointYCoord[i];
-                    MaxX0 := Data.PointXCoord[i];
-                    MaxIndex := i;
-                    MaxFound := True;
-                end;
-            end;
-            //  predotvraschaet zatsiklivanie v sluchae, kogda vse tochki
-            //  profilya vybrany (takoe mozhet byt', naprimer, pri slishkom
-            //  maloy velichine nizhney granitsy poiska pikov)
-            //  !!! vyhod d.b. do dobavleniya tochki !!!
-            if not MaxFound then Break;
-            //  pervyy naydennyy maksimum yavlyaetsya global'nym
-            if Result.PointsCount = 0 then GlobalMax := Max;
-            Result.AddNewPoint(MaxX0, Data.PointYCoord[MaxIndex]);
-            //  opredelyaem granitsy pika dlya vychisleniya faktora rashodimosti
-            Temp := Max; LeftIndex := MaxIndex; LeftX0 := MaxX0;
-            //  !!! trebuetsya zaschita ot dubley inache budet sboy sortirovki !!!
-            for i := MaxIndex - 1 downto 0 do
-            begin
-                //  !!! dlya sravneniya d. ispol'zovat'sya <,
-                //  tak kak inache piki mogut smykat'sya !!!
-                if (Data.PointYCoord[i] < Temp) and
-                   (Result.IndexOfValueX(Data.PointXCoord[i]) = -1) then
-                begin
-                    Temp := Data.PointYCoord[i];
-                    LeftIndex := i;
-                    LeftX0 := Data.PointXCoord[i];
-                    Result.AddNewPoint(LeftX0, Data.PointYCoord[LeftIndex]);
-                end
-                else Break;
-            end;
-            //  iskusstvennoe ushirenie pika vlevo
-            (*
-            if LeftIndex < 10 then LeftIndex2 := 0
-            else LeftIndex2 := LeftIndex - 10;
-            for i := LeftIndex - 1 downto LeftIndex2 do
-            begin
-                if (Result.IndexOfValueX(Data.PointXCoord[i]) = -1) then
-                begin
-                    LeftIndex := i;
-                    LeftX0 := Data.PointXCoord[i];
-                    Result.AddNewPoint(LeftX0, Data.PointYCoord[LeftIndex]);
-                end
-            end;
-            *)
-            Temp := Max; RightIndex := MaxIndex; RightX0 := MaxX0;
-            for i := MaxIndex + 1 to Data.PointsCount - 1 do
-            begin
-                //  !!! dlya sravneniya d. ispol'zovat'sya <,
-                //  tak kak inache piki mogut smykat'sya !!!
-                if (Data.PointYCoord[i] < Temp) and
-                   (Result.IndexOfValueX(Data.PointXCoord[i]) = -1) then
-                begin
-                    Temp := Data.PointYCoord[i];
-                    RightIndex := i;
-                    RightX0 := Data.PointXCoord[i];
-                    Result.AddNewPoint(RightX0, Data.PointYCoord[RightIndex]);
-                end
-                else Break;
-            end;
-            //  iskusstvennoe ushirenie pika vpravo
-            (*
-            if RightIndex + 10 > Data.PointsCount - 1 then
-                RightIndex2 := Data.PointsCount - 1
-            else RightIndex2 := RightIndex + 10;
-            for i := RightIndex + 1 to RightIndex2 do
-            begin
-                if (Result.IndexOfValueX(Data.PointXCoord[i]) = -1) then
-                begin
-                    RightIndex := i;
-                    RightX0 := Data.PointXCoord[i];
-                    Result.AddNewPoint(RightX0, Data.PointYCoord[RightIndex]);
-                end
-                else Break;
-            end;
-            *)
-
-        //??? nuzhno otsenivat' velichinu shuma v fone i ustanavlivat' dolyu ot
-        //  maksimuma kot. byla by bol'she shuma, krome togo nuzhna vozmozhnost'
-        //  vvoda dannoy velichiny vruchnuyu;
-        //  zdes' nuzhna ne dolya maksimuma, a nekotoroe znachenie (poskol'ku
-        //  mozhet prisutstvovat' fon), kotoroe k tomu zhe d.b. razlichnym po
-        //  profilyu (poprostu fon d.b. udalen!)
-        until Max < GlobalMax / BackFactor;
-    except
-        Result.Free;
-        raise;
+    function GetBoundaryValue: Double;
+    begin
+        if SearchMinimums then
+            Result := MAX_VALUE
+        else
+            Result := MIN_VALUE;
     end;
-end;
 
-function TFitServer.FindProfileMinimums: TTitlePointsSet;
-var Data: TPointsSet;
-    Min: Double;
-    MinX0: Double;
-    MinIndex: LongInt;
-    MinFound: Boolean;
-    LeftIndex, RightIndex: LongInt;
-    //LeftIndex2, RightIndex2: LongInt;
-    LeftX0, RightX0, Temp: Double;
-    i: LongInt;
-    GlobalMin: Double;
+    function IsFirstBetter(Value1, Value2: Double): Boolean;
+    begin
+        if SearchMinimums then
+            Result := Value1 < Value2
+        else
+            Result := Value1 > Value2;
+    end;
+
 begin
     if FSelectedAreaMode then Data := SelectedArea
     else Data := ExpProfile;
+
+    SearchMinimums := True;
+
     Assert(Assigned(Data));
     Data.Sort;
 
@@ -1000,36 +898,38 @@ begin
         //  tsiklicheski vybiraetsya minimal'naya tochka sredi teh,
         //  prinadlezhnost' kotoryh k pikam esche ne opredelena
         repeat
-            Min := MAX_VALUE; MinFound := False;
+            ExtremumValue := GetBoundaryValue;
+            ExtremumFound := False;
+
             for i := 0 to Data.PointsCount - 1 do
             begin
-                if (Data.PointYCoord[i] < Min) and
+                if IsFirstBetter(Data.PointYCoord[i], ExtremumValue) and
                    (Result.IndexOfValueX(Data.PointXCoord[i]) = -1) then
                 begin
-                    Min := Data.PointYCoord[i];
-                    MinX0 := Data.PointXCoord[i];
-                    MinIndex := i;
-                    MinFound := True;
+                    ExtremumValue := Data.PointYCoord[i];
+                    ExtremumX0 := Data.PointXCoord[i];
+                    ExtremumIndex := i;
+                    ExtremumFound := True;
                 end;
             end;
             //  predotvraschaet zatsiklivanie v sluchae, kogda vse tochki
             //  profilya vybrany (takoe mozhet byt', naprimer, pri slishkom
             //  maloy velichine nizhney granitsy poiska pikov)
             //  !!! vyhod d.b. do dobavleniya tochki !!!
-            if not MinFound then Break;
+            if not ExtremumFound then Break;
             //  pervyy naydennyy maksimum yavlyaetsya global'nym
-            if Result.PointsCount = 0 then GlobalMin := Min;
-            Result.AddNewPoint(MinX0, Data.PointYCoord[MinIndex]);
+            if Result.PointsCount = 0 then GlobalExtremum := ExtremumValue;
+            Result.AddNewPoint(ExtremumX0, Data.PointYCoord[ExtremumIndex]);
 
             //  opredelyaem granitsy pika dlya vychisleniya faktora rashodimosti
-            Temp := Min; LeftIndex := MinIndex; LeftX0 := MinX0;
+            Temp := ExtremumValue; LeftIndex := ExtremumIndex; LeftX0 := ExtremumX0;
             //  !!! trebuetsya zaschita ot dubley inache budet sboy sortirovki !!!
-            for i := MinIndex - 1 downto 0 do
+            for i := ExtremumIndex - 1 downto 0 do
             begin
                 //  !!! dlya sravneniya d. ispol'zovat'sya <,
                 //  tak kak inache piki mogut smykat'sya !!!
-                if (Data.PointYCoord[i] > Temp) and
-                   (Result.IndexOfValueX(Data.PointXCoord[i]) = -1) then
+                if not IsFirstBetter(Data.PointYCoord[i], Temp) and
+                    (Result.IndexOfValueX(Data.PointXCoord[i]) = -1) then
                 begin
                     Temp := Data.PointYCoord[i];
                     LeftIndex := i;
@@ -1052,12 +952,12 @@ begin
                 end
             end;
             *)
-            Temp := Min; RightIndex := MinIndex; RightX0 := MinX0;
-            for i := MinIndex + 1 to Data.PointsCount - 1 do
+            Temp := ExtremumValue; RightIndex := ExtremumIndex; RightX0 := ExtremumX0;
+            for i := ExtremumIndex + 1 to Data.PointsCount - 1 do
             begin
                 //  !!! dlya sravneniya d. ispol'zovat'sya <,
                 //  tak kak inache piki mogut smykat'sya !!!
-                if (Data.PointYCoord[i] > Temp) and
+                if not IsFirstBetter(Data.PointYCoord[i], Temp) and
                    (Result.IndexOfValueX(Data.PointXCoord[i]) = -1) then
                 begin
                     Temp := Data.PointYCoord[i];
@@ -1090,7 +990,7 @@ begin
         //  zdes' nuzhna ne dolya maksimuma, a nekotoroe znachenie (poskol'ku
         //  mozhet prisutstvovat' fon), kotoroe k tomu zhe d.b. razlichnym po
         //  profilyu (poprostu fon d.b. udalen!)
-        until Min < GlobalMin / BackFactor;
+        until ExtremumValue < GlobalExtremum / BackFactor;
     except
         Result.Free;
         raise;
@@ -1101,7 +1001,7 @@ procedure TFitServer.FindPeakPositionsForAutoAlg;
 begin
     FCurvePositions.Free; FCurvePositions := nil;
     //  vse tochki pikov vybirayutsya v kachestve tochek privyazki krivyh
-    FCurvePositions := FindProfileMaximums;
+    FCurvePositions := FindProfileExtremums(False);
     SpecPosFoundForAuto := True;
 end;
 
@@ -1109,15 +1009,14 @@ procedure TFitServer.FindPeakPositionsAlg;
 var
     i: LongInt;
     Data: TPointsSet;
-    PrevInt, CurInt: Double;
+    PrevValue, CurValue: Double;
     PeakFound: Boolean;
     Peaks: TPointsSet;
     X: Double;
     LastPoint: Boolean;
     SearchMinimums: Boolean;
 
-    function CompareValues(
-        CurValue, PrevValue: Double): Boolean;
+    function GoesBack: Boolean;
     begin
         if SearchMinimums then
         begin
@@ -1134,8 +1033,8 @@ begin
     { Points selected at previous steps are removed. }
     FCurvePositions.Clear;
 
-    SearchMinimums := True;
-    Peaks := FindProfileMaximums;
+    SearchMinimums := False;
+    Peaks := FindProfileExtremums(SearchMinimums);
     try
         Assert(Assigned(Peaks));
         { Peaks collecton contains all data points having values different
@@ -1148,35 +1047,34 @@ begin
         else Data := ExpProfile;
         Assert(Assigned(Data));
         Data.Sort;
-        //  iz Peaks, poluchennyh posle vyzova FindProfileMaximums,
+        //  iz Peaks, poluchennyh posle vyzova FindProfileExtremums,
         //  isklyuchayutsya vse tochki, krome lokal'nyh maksimumov vnutri
         //  kazhdogo pika
         PeakFound := False;
-        PrevInt := Peaks.PointYCoord[0];
+        PrevValue := Peaks.PointYCoord[0];
         for i := 1 to Peaks.PointsCount - 1 do
         begin
-            CurInt := Peaks.PointYCoord[i];
+            CurValue := Peaks.PointYCoord[i];
             if not PeakFound then
             begin
                 { Inflection point is searched. Last point is included
                   if data are going in the given direction. }
                 LastPoint := i = Peaks.PointsCount - 1;
-                if CompareValues(CurInt, PrevInt) or
-                   (not CompareValues(CurInt, PrevInt) and LastPoint) then
+                if GoesBack or (not GoesBack and LastPoint) then
                 begin
                     if LastPoint then
                     begin
                         X := Peaks.PointXCoord[i];
                         //  zaschita ot dubley
                         if FCurvePositions.IndexOfValueX(X) = -1 then
-                            FCurvePositions.AddNewPoint(X, CurInt);
+                            FCurvePositions.AddNewPoint(X, CurValue);
                     end
                     else
                     begin
                         X := Peaks.PointXCoord[i - 1];
                         //  zaschita ot dubley
                         if FCurvePositions.IndexOfValueX(X) = -1 then
-                            FCurvePositions.AddNewPoint(X, PrevInt);
+                            FCurvePositions.AddNewPoint(X, PrevValue);
                     end;
                     PeakFound := True;
                 end;
@@ -1184,10 +1082,9 @@ begin
             else
             begin
                 //  ischem peregib vniz
-                if not CompareValues(CurInt, PrevInt)
-                    then PeakFound := False;
+                if not GoesBack then PeakFound := False;
             end;
-            PrevInt := CurInt;
+            PrevValue := CurValue;
         end;
     except
         Peaks.Free;
@@ -1241,7 +1138,7 @@ begin
     //  !!! spisok ne ochischaetsya, chtoby naydennye tochki dobavlyalis'
     //  k tochkam vybrannym pol'zovatelem !!!
     Assert(Assigned(RFactorIntervals));
-    Peaks := FindProfileMaximums;
+    Peaks := FindProfileExtremums(False);
     try
         Assert(Assigned(Peaks));
         //  dazhe v samom uzkom pike d.b.
@@ -1255,7 +1152,7 @@ begin
         else Data := ExpProfile;
         Assert(Assigned(Data));
         Data.Sort;
-        //  iz Peaks, poluchennyh posle vyzova FindProfileMaximums,
+        //  iz Peaks, poluchennyh posle vyzova FindProfileExtremums,
         //  isklyuchayutsya vse tochki, krome tochek ogranichivayuschih pik
         First := False;
         for i := 0 to Data.PointsCount - 1 do
@@ -2352,7 +2249,7 @@ begin
         ShowProfile;
     end;
     //??? mozhno optimizirovat' razbiv na nesk. funktsiy
-    //  i vyzyvaya FindProfileMaximums tol'ko odin raz
+    //  i vyzyvaya FindProfileExtremums tol'ko odin raz
 
     //  set of curve positions selected by user is saved if given
     //  https://action.mindjet.com/task/14588987

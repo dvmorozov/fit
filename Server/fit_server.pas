@@ -1106,24 +1106,40 @@ begin
 end;
 
 procedure TFitServer.FindPeakPositionsAlg;
-var i: LongInt;
+var
+    i: LongInt;
     Data: TPointsSet;
     PrevInt, CurInt: Double;
     PeakFound: Boolean;
     Peaks: TPointsSet;
     X: Double;
     LastPoint: Boolean;
+    SearchMinimums: Boolean;
+
+    function CompareValues(
+        CurValue, PrevValue: Double): Boolean;
+    begin
+        if SearchMinimums then
+        begin
+            Result := CurValue > PrevValue;
+        end
+        else
+        begin
+            Result := CurValue < PrevValue;
+        end;
+    end;
+
 begin
     Assert(Assigned(FCurvePositions));
+    { Points selected at previous steps are removed. }
     FCurvePositions.Clear;
 
+    SearchMinimums := True;
     Peaks := FindProfileMaximums;
-    //  Peaks zaschischaetsya ot utechki resursov
     try
-        (*  Maximums are selected.
         Assert(Assigned(Peaks));
-        //  dazhe v samom uzkom pike d.b.
-        //  ne men'she 3-h tochek
+        { Peaks collecton contains all data points having values different
+          from some estimated average by defined value. }
         Assert(Peaks.PointsCount >= 3);
 
         Peaks.Sort;    //  !!!
@@ -1135,7 +1151,6 @@ begin
         //  iz Peaks, poluchennyh posle vyzova FindProfileMaximums,
         //  isklyuchayutsya vse tochki, krome lokal'nyh maksimumov vnutri
         //  kazhdogo pika
-        //  !!! tochki dobavl. k tochkam, vybrannym pol'zovatelem !!!
         PeakFound := False;
         PrevInt := Peaks.PointYCoord[0];
         for i := 1 to Peaks.PointsCount - 1 do
@@ -1143,51 +1158,11 @@ begin
             CurInt := Peaks.PointYCoord[i];
             if not PeakFound then
             begin
-                //  ischem peregib vniz
-                if CurInt < PrevInt then
-                begin
-                    X := Peaks.PointXCoord[i - 1];
-                    //  zaschita ot dubley
-                    if FCurvePositions.IndexOfValueX(X) = -1 then
-                        FCurvePositions.AddNewPoint(X, PrevInt);
-                    PeakFound := True;
-                end;
-            end
-            else
-            begin
-                //  ischem peregib vverh
-                if CurInt > PrevInt then PeakFound := False;
-            end;
-            PrevInt := CurInt;
-        end;
-        *)
-        Assert(Assigned(Peaks));
-        //  dazhe v samom uzkom pike d.b.
-        //  ne men'she 3-h tochek
-        Assert(Peaks.PointsCount >= 3);
-
-        Peaks.Sort;    //  !!!
-
-        if FSelectedAreaMode then Data := SelectedArea
-        else Data := ExpProfile;
-        Assert(Assigned(Data));
-        Data.Sort;
-        //  iz Peaks, poluchennyh posle vyzova FindProfileMaximums,
-        //  isklyuchayutsya vse tochki, krome lokal'nyh maksimumov vnutri
-        //  kazhdogo pika
-        //  !!! tochki dobavl. k tochkam, vybrannym pol'zovatelem !!!
-        PeakFound := False;
-        PrevInt := Peaks.PointYCoord[0];
-        for i := 1 to Peaks.PointsCount - 1 do
-        begin
-            CurInt := Peaks.PointYCoord[i];
-            if not PeakFound then
-            begin
-                //  ischem peregib vverch
-                { Last point is included if data are going down. }
+                { Inflection point is searched. Last point is included
+                  if data are going in the given direction. }
                 LastPoint := i = Peaks.PointsCount - 1;
-                if (CurInt > PrevInt) or
-                   ((CurInt < PrevInt) and LastPoint) then
+                if CompareValues(CurInt, PrevInt) or
+                   (not CompareValues(CurInt, PrevInt) and LastPoint) then
                 begin
                     if LastPoint then
                     begin
@@ -1209,7 +1184,8 @@ begin
             else
             begin
                 //  ischem peregib vniz
-                if CurInt < PrevInt then PeakFound := False;
+                if not CompareValues(CurInt, PrevInt)
+                    then PeakFound := False;
             end;
             PrevInt := CurInt;
         end;

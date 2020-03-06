@@ -2565,14 +2565,14 @@ end;
 
 procedure TFitServer.SetCurveType(ACurveTypeId: TCurveTypeId);
 var i: LongInt;
-    FT: TFitTask;
+    FitTask: TFitTask;
 begin
     FCurveTypeId := ACurveTypeId;
     if Assigned(TaskList) then
         for i := 0 to TaskList.Count - 1 do
         begin
-            FT := TFitTask(TaskList.Items[i]);
-            FT.CurveTypeId := ACurveTypeId;
+            FitTask := TFitTask(TaskList.Items[i]);
+            FitTask.CurveTypeId := ACurveTypeId;
         end;
 end;
 
@@ -2585,7 +2585,7 @@ end;
 procedure TFitServer.SetSpecialCurveParameters(
     ACurveExpr: string; CP: Curve_parameters);
 var i: LongInt;
-    FT: TFitTask;
+    FitTask: TFitTask;
 begin
     if State = AsyncOperation then
         raise EUserException.Create(InadmissibleServerState + CRLF +
@@ -2609,8 +2609,8 @@ begin
     if Assigned(TaskList) then
         for i := 0 to TaskList.Count - 1 do
         begin
-            FT := TFitTask(TaskList.Items[i]);
-            FT.SetSpecialCurve(FCurveExpr, Curve_parameters(Params.GetCopy));
+            FitTask := TFitTask(TaskList.Items[i]);
+            FitTask.SetSpecialCurve(FCurveExpr, Curve_parameters(Params.GetCopy));
         end;
 end;
 {$ENDIF}
@@ -2621,14 +2621,15 @@ begin
 end;
 
 function TFitServer.GetRFactorStr: string;
-var F: Double;
+var RFactor: Double;
 begin
     if GetAllInitialized then
     begin
-        F := GetRFactor;
-        Result := //FloatToStr(F);
-                    FloatToStrF(F, ffFixed, 10, 8);
-    end else Result := RFactorStillNotCalculated;
+        RFactor := GetRFactor;
+        Result := //FloatToStr(RFactor);
+                    FloatToStrF(RFactor, ffFixed, 10, 8);
+    end
+    else Result := RFactorStillNotCalculated;
 end;
 
 function TFitServer.GetAbsRFactorStr: string;

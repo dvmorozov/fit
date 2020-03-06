@@ -220,9 +220,8 @@ type
                   StartPointIndex,
                   StopPointIndex: LongInt
                  );
-                { Searches for peak boundaries and returns its points.
-                  Searches among points which do not belong to any other peak. }
-        function FindProfileExtremums(SearchMinimums: Boolean): TTitlePointsSet;
+                { Searches for peak points and return them. }
+        function FilterOutBackgroundPoints(SearchMinimums: Boolean): TTitlePointsSet;
                 { Fills the list of peak positions for automatic fit. }
         procedure FindPeakPositionsForAutoAlg;
         function Integrate(Points: TPointsSet;
@@ -855,7 +854,7 @@ begin
     end;
 end;
 
-function TFitServer.FindProfileExtremums(SearchMinimums: Boolean): TTitlePointsSet;
+function TFitServer.FilterOutBackgroundPoints(SearchMinimums: Boolean): TTitlePointsSet;
 var
     Data: TPointsSet;
     ExtremumValue: Double;
@@ -1001,41 +1000,37 @@ procedure TFitServer.FindPeakPositionsForAutoAlg;
 begin
     FCurvePositions.Free; FCurvePositions := nil;
     //  vse tochki pikov vybirayutsya v kachestve tochek privyazki krivyh
-    FCurvePositions := FindProfileExtremums(False);
+    FCurvePositions := FilterOutBackgroundPoints(False);
     SpecPosFoundForAuto := True;
 end;
 
 procedure TFitServer.FindPeakPositionsAlg;
 var
-    i: LongInt;
-    Data: TPointsSet;
-    PrevValue, CurValue: Double;
-    PeakFound: Boolean;
     Peaks: TPointsSet;
-    X: Double;
-    LastPoint: Boolean;
     SearchMinimums: Boolean;
 
-    function GoesBack: Boolean;
-    begin
-        if SearchMinimums then
+    procedure FindExtremums;
+    var
+        i: LongInt;
+        Data: TPointsSet;
+        PrevValue, CurValue: Double;
+        PeakFound: Boolean;
+        X: Double;
+        LastPoint: Boolean;
+
+        function GoesBack: Boolean;
         begin
-            Result := CurValue > PrevValue;
-        end
-        else
-        begin
-            Result := CurValue < PrevValue;
+            if SearchMinimums then
+            begin
+                Result := CurValue > PrevValue;
+            end
+            else
+            begin
+                Result := CurValue < PrevValue;
+            end;
         end;
-    end;
 
-begin
-    Assert(Assigned(FCurvePositions));
-    { Points selected at previous steps are removed. }
-    FCurvePositions.Clear;
-
-    SearchMinimums := False;
-    Peaks := FindProfileExtremums(SearchMinimums);
-    try
+    begin
         Assert(Assigned(Peaks));
         { Peaks collecton contains all data points having values different
           from some estimated average by defined value. }
@@ -1047,7 +1042,7 @@ begin
         else Data := ExpProfile;
         Assert(Assigned(Data));
         Data.Sort;
-        //  iz Peaks, poluchennyh posle vyzova FindProfileExtremums,
+        //  iz Peaks, poluchennyh posle vyzova FilterOutBackgroundPoints,
         //  isklyuchayutsya vse tochki, krome lokal'nyh maksimumov vnutri
         //  kazhdogo pika
         PeakFound := False;
@@ -1086,6 +1081,27 @@ begin
             end;
             PrevValue := CurValue;
         end;
+    end;
+
+begin
+    Assert(Assigned(FCurvePositions));
+    { Points selected at previous steps are removed. }
+    FCurvePositions.Clear;
+
+    SearchMinimums := False;
+    Peaks := FilterOutBackgroundPoints(SearchMinimums);
+    try
+        FindExtremums;
+    except
+        Peaks.Free;
+        raise;
+    end;
+    Peaks.Free;
+
+    SearchMinimums := True;
+    Peaks := FilterOutBackgroundPoints(SearchMinimums);
+    try
+        FindExtremums;
     except
         Peaks.Free;
         raise;
@@ -1138,7 +1154,7 @@ begin
     //  !!! spisok ne ochischaetsya, chtoby naydennye tochki dobavlyalis'
     //  k tochkam vybrannym pol'zovatelem !!!
     Assert(Assigned(RFactorIntervals));
-    Peaks := FindProfileExtremums(False);
+    Peaks := FilterOutBackgroundPoints(False);
     try
         Assert(Assigned(Peaks));
         //  dazhe v samom uzkom pike d.b.
@@ -1152,7 +1168,7 @@ begin
         else Data := ExpProfile;
         Assert(Assigned(Data));
         Data.Sort;
-        //  iz Peaks, poluchennyh posle vyzova FindProfileExtremums,
+        //  iz Peaks, poluchennyh posle vyzova FilterOutBackgroundPoints,
         //  isklyuchayutsya vse tochki, krome tochek ogranichivayuschih pik
         First := False;
         for i := 0 to Data.PointsCount - 1 do
@@ -2249,7 +2265,7 @@ begin
         ShowProfile;
     end;
     //??? mozhno optimizirovat' razbiv na nesk. funktsiy
-    //  i vyzyvaya FindProfileExtremums tol'ko odin raz
+    //  i vyzyvaya FilterOutBackgroundPoints tol'ko odin raz
 
     //  set of curve positions selected by user is saved if given
     //  https://action.mindjet.com/task/14588987

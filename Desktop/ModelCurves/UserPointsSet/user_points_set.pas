@@ -57,6 +57,7 @@ type
         { Overrides method defined in TNamedPointsSet. }
         function GetCurveTypeId: TCurveTypeId; override;
         class function GetCurveTypeId_: TCurveTypeId; override;
+        class function GetExtremumMode: TExtremumMode; override;
 
         class function GetConfigurablePointsSet:
             TConfigurablePointsSetClass; override;
@@ -83,6 +84,11 @@ end;
 class function TUserPointsSet.GetCurveTypeId_: TCurveTypeId;
 begin
     Result := StringToGUID('{d8cafce5-8b03-4cce-9e93-ea28acb8e7ca}');
+end;
+
+class function TUserPointsSet.GetExtremumMode: TExtremumMode;
+begin
+    Result := MaximumsAndMinimums;
 end;
 
 {$IFDEF _WINDOWS}

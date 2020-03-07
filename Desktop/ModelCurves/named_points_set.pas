@@ -23,6 +23,11 @@ uses curve_points_set, int_points_set, configurable_points_set;
 
 type
     TNamedPointsSetClass = class of TNamedPointsSet;
+    TExtremumMode = (
+        OnlyMaximums,
+        OnlyMinimums,
+        MaximumsAndMinimums
+    );
     { Base curve class allowing setting up type name. Type name distinguishes
       this curve from all other curve types, as opposite to the 'Title' attributes
       which is used to distinguish separate curve instances. }
@@ -46,6 +51,8 @@ type
         function GetCurveTypeName: string; virtual;
         { Abstract method returning unique type identifier. }
         class function GetCurveTypeId_: TCurveTypeId; virtual; abstract;
+        { Returns algorithm of searching of extremum points. }
+        class function GetExtremumMode: TExtremumMode; virtual; abstract;
 
         class function GetConfigurablePointsSet:
             TConfigurablePointsSetClass; virtual;

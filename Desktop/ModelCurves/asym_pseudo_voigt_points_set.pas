@@ -21,7 +21,7 @@ interface
 
 uses Classes, SysUtils, int_points_set, points_set, pseudo_voigt_points_set,
     curve_points_set, curve_types_singleton, special_curve_parameter,
-    delta_sigma_curve_parameter, SimpMath;
+    delta_sigma_curve_parameter, named_points_set, SimpMath;
 
 type
     { Curve having asymmetrical Pseudo-Voigt form. }
@@ -44,6 +44,7 @@ type
         { Overrides method defined in TNamedPointsSet. }
         function GetCurveTypeId: TCurveTypeId; override;
         class function GetCurveTypeId_: TCurveTypeId; override;
+        class function GetExtremumMode: TExtremumMode; override;
     end;
 
 implementation
@@ -101,6 +102,11 @@ end;
 class function TAsymPseudoVoigtPointsSet.GetCurveTypeId_: TCurveTypeId;
 begin
     Result := StringToGUID('{74a6ec30-a019-475d-99a3-b62c4ab03a6c}');
+end;
+
+class function TAsymPseudoVoigtPointsSet.GetExtremumMode: TExtremumMode;
+begin
+    Result := OnlyMaximums;
 end;
 
 function TAsymPseudoVoigtPointsSet.GetCurveTypeId: TCurveTypeId;

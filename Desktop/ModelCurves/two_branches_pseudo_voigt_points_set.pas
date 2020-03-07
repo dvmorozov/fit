@@ -48,6 +48,7 @@ type
         { Overrides method defined in TNamedPointsSet. }
         function GetCurveTypeId: TCurveTypeId; override;
         class function GetCurveTypeId_: TCurveTypeId; override;
+        class function GetExtremumMode: TExtremumMode; override;
 
         property SigmaRight: Double read GetSigmaRight;
         property EtaRight: Double read GetEtaRight;
@@ -142,6 +143,11 @@ end;
 class function T2BranchesPseudoVoigtPointsSet.GetCurveTypeId_: TCurveTypeId;
 begin
     Result := StringToGUID('{6de06c1b-e51a-48c6-b036-c81a841ec468}');
+end;
+
+class function T2BranchesPseudoVoigtPointsSet.GetExtremumMode: TExtremumMode;
+begin
+    Result := OnlyMaximums;
 end;
 
 var CTS: ICurveFactory;

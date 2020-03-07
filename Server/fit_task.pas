@@ -1162,7 +1162,9 @@ begin
     end
     else
     if IsEqualGUID(FCurveTypeId, TGaussPointsSet.GetCurveTypeId_) then
+    begin
         Result := TGaussPointsSet.Create(nil)
+    end
     else
     if IsEqualGUID(FCurveTypeId, TPseudoVoigtPointsSet.GetCurveTypeId_) then
     begin

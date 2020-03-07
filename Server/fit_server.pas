@@ -1000,6 +1000,7 @@ procedure TFitServer.FindPeakPositionsForAutoAlg;
 begin
     FCurvePositions.Free; FCurvePositions := nil;
     //  vse tochki pikov vybirayutsya v kachestve tochek privyazki krivyh
+    //  TODO: use special value of TExtremumMode and generalize algorithm.
     FCurvePositions := FilterOutBackgroundPoints(False);
     SpecPosFoundForAuto := True;
 end;

@@ -66,6 +66,7 @@ type
         procedure SelectCurveType(TypeId: TCurveTypeId);
         { Returns value of FCurrentCurveType. The value should be checked on Nil. }
         function GetSelectedCurveType: TCurveTypeId;
+        function GetSelectedExtremumMode: TExtremumMode;
     end;
 
 implementation
@@ -232,6 +233,14 @@ begin
         { In this case returned GUID should be different from GUID
           of any registered type. }
         Result := StringToGUID('{00000000-0000-0000-0000-000000000000}');
+end;
+
+function TCurveTypesSingleton.GetSelectedExtremumMode: TExtremumMode;
+begin
+    if FSelectedCurveType <> nil then
+        Result := FSelectedCurveType.ExtremumMode
+    else
+        Result := OnlyMaximums;
 end;
 
 {$hints on}

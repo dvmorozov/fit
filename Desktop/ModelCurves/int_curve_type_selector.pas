@@ -19,7 +19,7 @@ unit int_curve_type_selector;
 
 interface
 
-uses int_points_set;
+uses int_points_set, named_points_set;
 
 type
     { Interface defining basic operation for selecting curve type. }
@@ -27,6 +27,7 @@ type
         ['{307b3235-97a7-45bb-a6cd-ec7b5e503e51}']
         procedure SelectCurveType(TypeId: TCurveTypeId);
         function GetSelectedCurveType: TCurveTypeId;
+        function GetSelectedExtremumMode: TExtremumMode;
     end;
 
 implementation

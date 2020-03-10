@@ -991,7 +991,7 @@ begin
     CurveTypeIterator := TCurveTypesSingleton.CreateCurveTypeIterator;
     CurveTypeSelector := TCurveTypesSingleton.CreateCurveTypeSelector;
 
-    for i := 1 to 6 do
+    for i := 1 to Length(NamedPointsSetClasses) do
     begin
         NamedPointsSetClass := NamedPointsSetClasses[i];
         if TMenuItem(Sender).Tag =
@@ -1017,11 +1017,14 @@ begin
                 end;
 
             //  Curve type can be selected only after successful configuration.
+{$IFNDEF FIT}
             FitClientApp_.FitClient.CurveTypeId := NamedPointsSetClass.GetCurveTypeId_;
+{$ENDIF}
             CurveTypeSelector.SelectCurveType(NamedPointsSetClass.GetCurveTypeId_);
             Break;
         end
     end;
+    CreateCurveTypeMenus;
 end;
 
 procedure TFormMain.ActionSelectAllExecute(Sender: TObject);
@@ -2567,7 +2570,10 @@ var
     ct: Curve_type;
     mi: TMenuItem;
     Tag: LongInt;
+    CurveTypeSelector: ICurveTypeSelector;
 begin
+    CurveTypeSelector := TCurveTypesSingleton.CreateCurveTypeSelector;
+
     mi := TMenuItem(Sender);
     Tag := mi.Tag;
     //  poisk pol'zovatel'skogo tipa krivoy
@@ -2579,8 +2585,11 @@ begin
         begin
             FitClientApp_.FitClient.SetSpecialCurveParameters(
                 ct.Expression, ct.Parameters);
+{$IFNDEF FIT}
             FitClientApp_.FitClient.CurveTypeId :=
                 TUserPointsSet.GetCurveTypeId_;
+{$ENDIF}
+            CurveTypeSelector.SelectCurveType(TUserPointsSet.GetCurveTypeId_);
             Break;
         end;
     end;

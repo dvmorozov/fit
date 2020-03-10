@@ -204,7 +204,9 @@ type
         function GetCurveThresh: Double;
         procedure SetCurveThresh(ACurveThresh: Double);
         function GetCurveType: TCurveTypeId;
+{$IFNDEF FIT}
         procedure SetCurveType(ACurveType: TCurveTypeId);
+{$ENDIF}
 
         function GetBackgroundVariationEnabled: Boolean;
         procedure SetBackgroundVariationEnabled(AEnable: Boolean);
@@ -329,7 +331,11 @@ type
         property MaxRFactor: Double read GetMaxRFactor write SetMaxRFactor;
         property BackFactor: Double read GetBackFactor write SetBackFactor;
         property CurveThresh: Double read GetCurveThresh write SetCurveThresh;
-        property CurveTypeId: TCurveTypeId read GetCurveType write SetCurveType;
+        property CurveTypeId: TCurveTypeId read GetCurveType
+{$IFNDEF FIT}
+            write SetCurveType
+{$ENDIF}
+            ;
 
         { Plotting events are called from methods of the same name for providing
           synchronization with main application thread.
@@ -1333,11 +1339,13 @@ begin
     Result := FitProxy.GetCurveType;
 end;
 
+{$IFNDEF FIT}
 procedure TFitClient.SetCurveType(ACurveType: TCurveTypeId);
 begin
     Assert(Assigned(FitProxy));
     FitProxy.SetCurveType(ACurveType);
 end;
+{$ENDIF}
 
 function TFitClient.GetBackgroundVariationEnabled: Boolean;
 begin

@@ -37,7 +37,10 @@ type
         function GetCurveThresh: Double;
         procedure SetCurveThresh(ACurveThresh: Double);
         function GetCurveType: TCurveTypeId;
+{$IFNDEF FIT}
+        { https://github.com/dvmorozov/fit/issues/160 }
         procedure SetCurveType(ACurveType: TCurveTypeId);
+{$ENDIF}
         function GetState: TFitServerState;
         function GetWaveLength: Double;
         procedure SetWaveLength(AWaveLength: Double);
@@ -108,10 +111,10 @@ type
         function DoAllAutomatically: string;
         { Returns hint or error message received from the server. }
         function FindGausses: string;
-    {$IFNDEF EXCLUDE_SOMETHING}
+{$IFNDEF EXCLUDE_SOMETHING}
         { Returns hint or error message received from the server. }
         function FindGaussesAgain: string;
-    {$ENDIF}
+{$ENDIF}
         { Returns hint or error message received from the server. }
         function FindGaussesSequentially: string;
         { Returns hint or error message received from the server. }
@@ -122,12 +125,12 @@ type
         function FindPeakPositions: string;
         { Returns hint or error message received from the server. }
         function AllPointsAsPeakPositions: string;
-    {$IFDEF FITCGI}
+{$IFDEF FITCGI}
         function GetGraph(
             const Width: LongInt; const Height: LongInt): TMemoryStream;
         function GetProfileChunk(const ChunkNum: LongInt): TTitlePointsSet;
         function GetProfileChunkCount: LongInt;
-    {$ENDIF}
+{$ENDIF}
         { Control methods. }
 
         procedure StopAsyncOper;

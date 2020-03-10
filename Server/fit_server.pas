@@ -80,6 +80,7 @@ type
         }
     TFitServer = class(TInterfacedObject, IClientCallback, IFitService)
     protected
+        FCurveTypeSelector: ICurveTypeSelector;
 {$IFDEF FIT}
         FFitProxy: TFitServerProxy;
 {$ENDIF}
@@ -138,11 +139,9 @@ type
         FMaxRFactor: Double;
 
         FCurveThresh: Double;
-        FCurveTypeId: TCurveTypeId;
         FBackgroundVariationEnabled: Boolean;
         FCurveScalingEnabled: Boolean;
 
-    protected
                 { Is set up to True after finishing first cycle of calculation. }
         FitDone: Boolean;
                 { Current total value of R-factor for all subtasks. }
@@ -404,9 +403,16 @@ type
         function GetCurveThresh: Double;
         property CurveThresh: Double read GetCurveThresh write SetCurveThresh;
 
+{$IFNDEF FIT}
+        { https://github.com/dvmorozov/fit/issues/160 }
         procedure SetCurveType(ACurveTypeId: TCurveTypeId);
+{$ENDIF}
         function GetCurveType: TCurveTypeId;
-        property CurveTypeId: TCurveTypeId read GetCurveType write SetCurveType;
+        property CurveTypeId: TCurveTypeId read GetCurveType
+{$IFNDEF FIT}
+            write SetCurveType
+{$ENDIF}
+        ;
 
         function GetState: TFitServerState;
         property State: TFitServerState read GetState;
@@ -642,8 +648,6 @@ begin
 end;
 
 constructor TFitServer.Create;
-var
-    CurveTypeSelector: ICurveTypeSelector;
 begin
     inherited;
 
@@ -653,8 +657,7 @@ begin
     FBackFactor := 30;
     FCurveThresh := 0;
     //  Sets default curve type.
-    CurveTypeSelector := TCurveTypesSingleton.CreateCurveTypeSelector;
-    FCurveTypeId := CurveTypeSelector.GetSelectedCurveType;
+    FCurveTypeSelector := TCurveTypesSingleton.CreateCurveTypeSelector;
 
     FBackgroundVariationEnabled := False;
     FCurveScalingEnabled := True;
@@ -2309,7 +2312,7 @@ end;
 
 procedure TFitServer.CreateTasks;
 var i, j: LongInt;
-    TF: TFitTask;
+    FitTask: TFitTask;
     Data, Temp: TPointsSet;
     BegIndex, EndIndex, PosIndex: LongInt;
 begin
@@ -2344,7 +2347,7 @@ begin
         ne ochen' horosho, t.k. posle vyzova avtomaticheskoy
         generatsii intervalov rezul'tat ob'edinyaetsya s dannym,
         pri etom mogut voznikat' lishnie tochki
-        TF := CreateTaskObject;
+        FitTask := CreateTaskObject;
         try
             BegIndex := 0;
             EndIndex := Data.PointsCount - 1;
@@ -2354,12 +2357,12 @@ begin
             RFactorIntervals.AddNewPoint(
                 Data.PointXCoord[EndIndex], Data.PointYCoord[EndIndex]);
 
-            TF.BegIndex := BegIndex;
-            TF.EndIndex := EndIndex;
+            FitTask.BegIndex := BegIndex;
+            FitTask.EndIndex := EndIndex;
             //  kopirovanie i ustanovka uchastka profilya
             Temp := TPointsSet(Data.GetCopy);
             try
-                TF.SetProfilePointsSet(Temp);
+                FitTask.SetProfilePointsSet(Temp);
             except
                 Temp.Free; raise;
             end;
@@ -2367,21 +2370,21 @@ begin
             //  ekzemplyarov patterna
             Temp := TPointsSet(FCurvePositions.GetCopy);
             try
-                TF.SetCurvePositions(Temp);
+                FitTask.SetCurvePositions(Temp);
             except
                 Temp.Free; raise;
             end;
             //  ustanovka dop. parametrov
-            TF.MaxRFactor := MaxRFactor;
-            TF.CurveTypeId := CurveTypeId;
+            FitTask.MaxRFactor := MaxRFactor;
+            FitTask.CurveTypeId := CurveTypeId;
             if CurveTypeId = Special then
-                TF.SetSpecialCurve(FCurveExpr, Curve_parameters(Params.GetCopy));
-            TF.ServerShowCurMin := ShowCurMin;
-            TF.ServerDoneProc := DoneProc;
+                FitTask.SetSpecialCurve(FCurveExpr, Curve_parameters(Params.GetCopy));
+            FitTask.ServerShowCurMin := ShowCurMin;
+            FitTask.ServerDoneProc := DoneProc;
 
-            TaskList.Add(TF);
+            TaskList.Add(FitTask);
         except
-            TF.Free; raise;
+            FitTask.Free; raise;
         end;
         *)
         //  avtomaticheskiy poisk granits intervalov
@@ -2400,21 +2403,21 @@ begin
             //  nuzhno korrektno obrabatyvat' takuyu situatsiyu;
             //  dlya nezakrytogo intervala podzadacha ne sozdayetsya
             if j + 1 > RFactorIntervals.PointsCount - 1 then Break;
-            TF := CreateTaskObject;
+            FitTask := CreateTaskObject;
             try
                 BegIndex := Data.IndexOfValueX(RFactorIntervals.PointXCoord[j]);
                 EndIndex := Data.IndexOfValueX(RFactorIntervals.PointXCoord[j + 1]);
                 Assert(BegIndex <> -1);
                 Assert(EndIndex <> -1);
 
-                TF.BegIndex := BegIndex;
-                TF.EndIndex := EndIndex;
+                FitTask.BegIndex := BegIndex;
+                FitTask.EndIndex := EndIndex;
                 //  kopirovanie i ustanovka uchastka profilya
                 Temp := TPointsSet.Create(nil);
                 try
                     for i := BegIndex to EndIndex do
                         Temp.AddNewPoint(Data.PointXCoord[i], Data.PointYCoord[i]);
-                    TF.SetProfilePointsSet(Temp);
+                    FitTask.SetProfilePointsSet(Temp);
                 except
                     Temp.Free; raise;
                 end;
@@ -2433,21 +2436,20 @@ begin
                                 FCurvePositions.PointYCoord[i]
                                 );
                     end;
-                    TF.SetCurvePositions(Temp);
+                    FitTask.SetCurvePositions(Temp);
                 except
                     Temp.Free; raise;
                 end;
                 //  ustanovka dop. parametrov
-                TF.MaxRFactor := MaxRFactor;
-                TF.CurveTypeId := CurveTypeId;
+                FitTask.MaxRFactor := MaxRFactor;
                 if IsEqualGUID(CurveTypeId, TUserPointsSet.GetCurveTypeId_) then
-                    TF.SetSpecialCurve(FCurveExpr, Curve_parameters(Params.GetCopy));
-                TF.ServerShowCurMin := ShowCurMinInternal;
-                TF.ServerDoneProc := DoneProc;
+                    FitTask.SetSpecialCurve(FCurveExpr, Curve_parameters(Params.GetCopy));
+                FitTask.ServerShowCurMin := ShowCurMinInternal;
+                FitTask.ServerDoneProc := DoneProc;
 
-                TaskList.Add(TF);
+                TaskList.Add(FitTask);
             except
-                TF.Free; raise;
+                FitTask.Free; raise;
             end;
 
             j := j + 2;
@@ -2564,22 +2566,17 @@ begin
     Result := FCurveThresh;
 end;
 
+{$IFNDEF FIT}
+{ https://github.com/dvmorozov/fit/issues/160 }
 procedure TFitServer.SetCurveType(ACurveTypeId: TCurveTypeId);
-var i: LongInt;
-    FitTask: TFitTask;
 begin
-    FCurveTypeId := ACurveTypeId;
-    if Assigned(TaskList) then
-        for i := 0 to TaskList.Count - 1 do
-        begin
-            FitTask := TFitTask(TaskList.Items[i]);
-            FitTask.CurveTypeId := ACurveTypeId;
-        end;
+    FCurveTypeSelector.SelectCurveType(ACurveTypeId);
 end;
+{$ENDIF}
 
 function TFitServer.GetCurveType: TCurveTypeId;
 begin
-    Result := FCurveTypeId;
+    Result := FCurveTypeSelector.GetSelectedCurveType;
 end;
 
 {$IFDEF _WINDOWS}

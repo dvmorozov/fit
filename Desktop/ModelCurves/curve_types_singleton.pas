@@ -105,10 +105,10 @@ end;
 
 function SortAlphabetically(Item1, Item2: Pointer): Integer;
 begin
-    if TCurveType(Item1).CurveTypeName < TCurveType(Item2).CurveTypeName then
+    if TCurveType(Item1).Name < TCurveType(Item2).Name then
         Result := -1
     else
-        if TCurveType(Item1).CurveTypeName > TCurveType(Item2).CurveTypeName then
+        if TCurveType(Item1).Name > TCurveType(Item2).Name then
             Result := 1
         else
             Result := 0;
@@ -119,12 +119,13 @@ var CurveType: TCurveType;
     Curve: TNamedPointsSet;
 begin
     CurveType := TCurveType.Create;
-    CurveType.CurveClass := CurveClass;
+    CurveType.Class_ := CurveClass;
+    CurveType.ExtremumMode := CurveClass.GetExtremumMode;
     { Instantiates curve object to call its methods. }
     Curve := CurveClass.Create(nil);
     try
-        CurveType.CurveTypeName := Curve.GetCurveTypeName;
-        CurveType.CurveTypeId := Curve.GetCurveTypeId;
+        CurveType.Name := Curve.GetCurveTypeName;
+        CurveType.TypeId := Curve.GetCurveTypeId;
     finally
         Curve.Free;
     end;
@@ -187,7 +188,7 @@ function TCurveTypesSingleton.GetCurveTypeName: string;
 begin
     if FCurrentCurveType <> nil then
     begin
-        Result := FCurrentCurveType.CurveTypeName;
+        Result := FCurrentCurveType.Name;
     end
         else raise EListError.Create(CurveTypeMustBeSelected);
 end;
@@ -196,7 +197,7 @@ function TCurveTypesSingleton.GetCurveTypeId: TCurveTypeId;
 begin
     if FCurrentCurveType <> nil then
     begin
-        Result := FCurrentCurveType.CurveTypeId;
+        Result := FCurrentCurveType.TypeId;
     end
         else raise EListError.Create(CurveTypeMustBeSelected);
 end;
@@ -212,7 +213,7 @@ begin
     FirstCurveType;
     while True do
     begin
-        if IsEqualGUID(FCurrentCurveType.CurveTypeId, TypeId) then
+        if IsEqualGUID(FCurrentCurveType.TypeId, TypeId) then
         begin
             FSelectedCurveType := FCurrentCurveType;
             Break;
@@ -226,7 +227,7 @@ end;
 function TCurveTypesSingleton.GetSelectedCurveType: TCurveTypeId;
 begin
     if FSelectedCurveType <> nil then
-        Result := FSelectedCurveType.CurveTypeId
+        Result := FSelectedCurveType.TypeId
     else
         { In this case returned GUID should be different from GUID
           of any registered type. }

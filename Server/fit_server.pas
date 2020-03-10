@@ -2265,7 +2265,7 @@ begin
         SubtractAllBackground(True);
         ShowProfile;
     end;
-    //??? mozhno optimizirovat' razbiv na nesk. funktsiy
+    //  TODO: mozhno optimizirovat' razbiv na nesk. funktsiy
     //  i vyzyvaya FilterOutBackgroundPoints tol'ko odin raz
 
     //  set of curve positions selected by user is saved if given

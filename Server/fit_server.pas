@@ -220,7 +220,7 @@ type
                   StopPointIndex: LongInt
                  );
                 { Searches for peak points and return them. }
-        function FilterOutBackgroundPoints(SearchMinimums: Boolean): TTitlePointsSet;
+        function SelectPeakPoints(SearchMinimums: Boolean): TTitlePointsSet;
                 { Fills the list of peak positions for automatic fit. }
         procedure FindPeakPositionsForAutoAlg;
         function Integrate(Points: TPointsSet;
@@ -857,7 +857,7 @@ begin
     end;
 end;
 
-function TFitServer.FilterOutBackgroundPoints(SearchMinimums: Boolean): TTitlePointsSet;
+function TFitServer.SelectPeakPoints(SearchMinimums: Boolean): TTitlePointsSet;
 var
     Data: TPointsSet;
     ExtremumValue: Double;
@@ -1004,87 +1004,101 @@ begin
     FCurvePositions.Free; FCurvePositions := nil;
     //  vse tochki pikov vybirayutsya v kachestve tochek privyazki krivyh
     //  TODO: use special value of TExtremumMode and generalize algorithm.
-    FCurvePositions := FilterOutBackgroundPoints(False);
+    FCurvePositions := SelectPeakPoints(False);
     SpecPosFoundForAuto := True;
 end;
 
 procedure TFitServer.FindPeakPositionsAlg;
 var
-    Peaks: TPointsSet;
-    SearchMinimums: Boolean;
+    ExtremumMode: TExtremumMode;
 
-    procedure FindExtremums;
+    procedure SearchExtremums(Minimums: Boolean);
     var
-        i: LongInt;
-        Data: TPointsSet;
-        PrevValue, CurValue: Double;
-        PeakFound: Boolean;
-        X: Double;
-        LastPoint: Boolean;
+        Peaks: TPointsSet;
 
-        function GoesBack: Boolean;
+        procedure SelectExtremums;
+        var
+            i: LongInt;
+            Data: TPointsSet;
+            PrevValue, CurValue: Double;
+            PeakFound: Boolean;
+            X: Double;
+            LastPoint: Boolean;
+
+            function DerivativeChanged: Boolean;
+            begin
+                if Minimums then
+                begin
+                    Result := CurValue > PrevValue;
+                end
+                else
+                begin
+                    Result := CurValue < PrevValue;
+                end;
+            end;
+
         begin
-            if SearchMinimums then
+            Assert(Assigned(Peaks));
+            { Peaks collecton contains all data points having values different
+              from some estimated average by defined value. }
+            Assert(Peaks.PointsCount >= 3);
+
+            Peaks.Sort;    //  !!!
+
+            if FSelectedAreaMode then Data := SelectedArea
+            else Data := ExpProfile;
+            Assert(Assigned(Data));
+            Data.Sort;
+            //  iz Peaks, poluchennyh posle vyzova SelectPeakPoints,
+            //  isklyuchayutsya vse tochki, krome lokal'nyh maksimumov vnutri
+            //  kazhdogo pika
+            PeakFound := False;
+            PrevValue := Peaks.PointYCoord[0];
+            for i := 1 to Peaks.PointsCount - 1 do
             begin
-                Result := CurValue > PrevValue;
-            end
-            else
-            begin
-                Result := CurValue < PrevValue;
+                CurValue := Peaks.PointYCoord[i];
+                if not PeakFound then
+                begin
+                    { Inflection point is searched. Last point is included
+                      if data are going in the given direction. }
+                    LastPoint := i = Peaks.PointsCount - 1;
+                    if DerivativeChanged or (not DerivativeChanged and LastPoint) then
+                    begin
+                        if LastPoint then
+                        begin
+                            X := Peaks.PointXCoord[i];
+                            //  zaschita ot dubley
+                            if FCurvePositions.IndexOfValueX(X) = -1 then
+                                FCurvePositions.AddNewPoint(X, CurValue);
+                        end
+                        else
+                        begin
+                            X := Peaks.PointXCoord[i - 1];
+                            //  zaschita ot dubley
+                            if FCurvePositions.IndexOfValueX(X) = -1 then
+                                FCurvePositions.AddNewPoint(X, PrevValue);
+                        end;
+                        PeakFound := True;
+                    end;
+                end
+                else
+                begin
+                    //  ischem peregib vniz
+                    if not DerivativeChanged then PeakFound := False;
+                end;
+                PrevValue := CurValue;
             end;
         end;
 
     begin
-        Assert(Assigned(Peaks));
-        { Peaks collecton contains all data points having values different
-          from some estimated average by defined value. }
-        Assert(Peaks.PointsCount >= 3);
-
-        Peaks.Sort;    //  !!!
-
-        if FSelectedAreaMode then Data := SelectedArea
-        else Data := ExpProfile;
-        Assert(Assigned(Data));
-        Data.Sort;
-        //  iz Peaks, poluchennyh posle vyzova FilterOutBackgroundPoints,
-        //  isklyuchayutsya vse tochki, krome lokal'nyh maksimumov vnutri
-        //  kazhdogo pika
-        PeakFound := False;
-        PrevValue := Peaks.PointYCoord[0];
-        for i := 1 to Peaks.PointsCount - 1 do
-        begin
-            CurValue := Peaks.PointYCoord[i];
-            if not PeakFound then
-            begin
-                { Inflection point is searched. Last point is included
-                  if data are going in the given direction. }
-                LastPoint := i = Peaks.PointsCount - 1;
-                if GoesBack or (not GoesBack and LastPoint) then
-                begin
-                    if LastPoint then
-                    begin
-                        X := Peaks.PointXCoord[i];
-                        //  zaschita ot dubley
-                        if FCurvePositions.IndexOfValueX(X) = -1 then
-                            FCurvePositions.AddNewPoint(X, CurValue);
-                    end
-                    else
-                    begin
-                        X := Peaks.PointXCoord[i - 1];
-                        //  zaschita ot dubley
-                        if FCurvePositions.IndexOfValueX(X) = -1 then
-                            FCurvePositions.AddNewPoint(X, PrevValue);
-                    end;
-                    PeakFound := True;
-                end;
-            end
-            else
-            begin
-                //  ischem peregib vniz
-                if not GoesBack then PeakFound := False;
-            end;
-            PrevValue := CurValue;
+        Peaks := SelectPeakPoints(Minimums);
+        try
+            SelectExtremums;
+        except
+            Peaks.Free;
+            raise;
         end;
+        Peaks.Free;
     end;
 
 begin
@@ -1092,25 +1106,17 @@ begin
     { Points selected at previous steps are removed. }
     FCurvePositions.Clear;
 
-    SearchMinimums := False;
-    Peaks := FilterOutBackgroundPoints(SearchMinimums);
-    try
-        FindExtremums;
-    except
-        Peaks.Free;
-        raise;
-    end;
-    Peaks.Free;
+    ExtremumMode := FCurveTypeSelector.GetSelectedExtremumMode;
 
-    SearchMinimums := True;
-    Peaks := FilterOutBackgroundPoints(SearchMinimums);
-    try
-        FindExtremums;
-    except
-        Peaks.Free;
-        raise;
+    case ExtremumMode of
+        OnlyMaximums: SearchExtremums(False);
+        OnlyMinimums: SearchExtremums(True);
+        MaximumsAndMinimums:
+        begin
+            SearchExtremums(False);
+            SearchExtremums(True);
+        end;
     end;
-    Peaks.Free;
 end;
 
 procedure TFitServer.FindPeakPositionsDoneProcActual;
@@ -1158,7 +1164,7 @@ begin
     //  !!! spisok ne ochischaetsya, chtoby naydennye tochki dobavlyalis'
     //  k tochkam vybrannym pol'zovatelem !!!
     Assert(Assigned(RFactorIntervals));
-    Peaks := FilterOutBackgroundPoints(False);
+    Peaks := SelectPeakPoints(False);
     try
         Assert(Assigned(Peaks));
         //  dazhe v samom uzkom pike d.b.
@@ -1172,7 +1178,7 @@ begin
         else Data := ExpProfile;
         Assert(Assigned(Data));
         Data.Sort;
-        //  iz Peaks, poluchennyh posle vyzova FilterOutBackgroundPoints,
+        //  iz Peaks, poluchennyh posle vyzova SelectPeakPoints,
         //  isklyuchayutsya vse tochki, krome tochek ogranichivayuschih pik
         First := False;
         for i := 0 to Data.PointsCount - 1 do
@@ -2269,7 +2275,7 @@ begin
         ShowProfile;
     end;
     //  TODO: mozhno optimizirovat' razbiv na nesk. funktsiy
-    //  i vyzyvaya FilterOutBackgroundPoints tol'ko odin raz
+    //  i vyzyvaya SelectPeakPoints tol'ko odin raz
 
     //  set of curve positions selected by user is saved if given
     //  https://action.mindjet.com/task/14588987

@@ -42,7 +42,7 @@ type
           set to false for some special curve types. }
         FCurveScalingEnabled: Boolean;
         FMaxRFactor: Double;
-        FCurveTypeId: TCurveTypeId;
+        FCurveTypeSelector: ICurveTypeSelector;
         { Expression defining user curve type. }
         FCurveExpr: string;
         { Parameters of user defined curve. Parameters are given from the caller. 
@@ -235,7 +235,6 @@ type
         function GetScalingFactor: Double;
 
         property MaxRFactor: Double write FMaxRFactor;
-        property CurveTypeId: TCurveTypeId write FCurveTypeId;
         { Callback to update information at achieving new minimum. }
         property ServerShowCurMin: TThreadMethod read FShowCurMin write FShowCurMin;
         property ServerDoneProc: TThreadMethod read FDoneProc write FDoneProc;
@@ -698,18 +697,15 @@ end;
 
 constructor TFitTask.Create(AOwner: TComponent;
     AEnableBackgroundVariation: Boolean; ACurveScalingEnabled: Boolean);
-var
-    CurveTypeSelector: ICurveTypeSelector;
 begin
     inherited Create(AOwner);
     FCommonVariableParameters := Curve_parameters.Create(nil);
-    FCommonVariableParameters.Params.Clear;  //  Curve_parameters sozdaet v konstruktore
-                                        //  odin parametr - nuzhno ego udalit'
+    FCommonVariableParameters.Params.Clear;     //  Curve_parameters sozdaet v konstruktore
+                                                //  odin parametr - nuzhno ego udalit'
     FMaxRFactor := 0.01;
     FAllDone := False;
     //  Sets default curve type
-    CurveTypeSelector := TCurveTypesSingleton.CreateCurveTypeSelector;
-    FCurveTypeId := CurveTypeSelector.GetSelectedCurveType;
+    FCurveTypeSelector := TCurveTypesSingleton.CreateCurveTypeSelector;
 
     FEnableBackgroundVariation := AEnableBackgroundVariation;
     FEnableFastMinimizer := False;
@@ -1155,26 +1151,30 @@ function TFitTask.CreatePatternInstance: TCurvePointsSet;
 var i: LongInt;
     Parameter: TSpecialCurveParameter;
     Container: TPersistentCurveParameterContainer;
+    SelectedCurveTypeId: TCurveTypeId;
 begin
-    if IsEqualGUID(FCurveTypeId, TLorentzPointsSet.GetCurveTypeId_) then
+    SelectedCurveTypeId := FCurveTypeSelector.GetSelectedCurveType;
+    if IsEqualGUID(SelectedCurveTypeId, TLorentzPointsSet.GetCurveTypeId_) then
     begin
         Result := TLorentzPointsSet.Create(nil);
     end
     else
-    if IsEqualGUID(FCurveTypeId, TGaussPointsSet.GetCurveTypeId_) then
+    if IsEqualGUID(SelectedCurveTypeId, TGaussPointsSet.GetCurveTypeId_) then
+    begin
         Result := TGaussPointsSet.Create(nil)
+    end
     else
-    if IsEqualGUID(FCurveTypeId, TPseudoVoigtPointsSet.GetCurveTypeId_) then
+    if IsEqualGUID(SelectedCurveTypeId, TPseudoVoigtPointsSet.GetCurveTypeId_) then
     begin
         Result := TPseudoVoigtPointsSet.Create(nil)
     end
     else
-    if IsEqualGUID(FCurveTypeId, TAsymPseudoVoigtPointsSet.GetCurveTypeId_) then
+    if IsEqualGUID(SelectedCurveTypeId, TAsymPseudoVoigtPointsSet.GetCurveTypeId_) then
     begin
         Result := TAsymPseudoVoigtPointsSet.Create(nil)
     end
     else
-    if IsEqualGUID(FCurveTypeId, TUserPointsSet.GetCurveTypeId_) then
+    if IsEqualGUID(SelectedCurveTypeId, TUserPointsSet.GetCurveTypeId_) then
     begin
 {$IFDEF _WINDOWS}
         Result := TUserPointsSet.Create(nil);
@@ -1184,7 +1184,7 @@ begin
 {$ENDIF}
     end
     else
-    if IsEqualGUID(FCurveTypeId, T2BranchesPseudoVoigtPointsSet.GetCurveTypeId_) then
+    if IsEqualGUID(SelectedCurveTypeId, T2BranchesPseudoVoigtPointsSet.GetCurveTypeId_) then
     begin
         Result := T2BranchesPseudoVoigtPointsSet.Create(nil);
     end;
@@ -1240,6 +1240,7 @@ var i,j,k: LongInt;
     //  ne zadany
     //CurvePosition,
     CurveAmplitude: Double;
+    SelectedCurveTypeId: TCurveTypeId;
 begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
     Assert(Assigned(CurvePositions));
@@ -1347,10 +1348,11 @@ begin
                 raise;
             end;
             *)
+            SelectedCurveTypeId := FCurveTypeSelector.GetSelectedCurveType;
             //  teper' sozdaetsya ekzemplyar tol'ko
             //  pol'zovatel'skoy krivoy, kotoraya ne
             //  imeet parametra polozheniya
-            if IsEqualGUID(FCurveTypeId, TUserPointsSet.GetCurveTypeId_) then
+            if IsEqualGUID(SelectedCurveTypeId, TUserPointsSet.GetCurveTypeId_) then
             begin
                 Curve := CreatePatternInstance;
 

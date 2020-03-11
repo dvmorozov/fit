@@ -30,13 +30,13 @@ type
         function MinimumStepAchieved: Boolean; override;
     end;
 
+implementation
+
 const
     { The minimal allowed number. }
     MIN_VALUE: Double = -1e100;
     { The maximal allowed number. }
     MAX_VALUE: Double =  1e100;
-
-implementation
 
 constructor TPositionCurveParameter.Create;
 begin

@@ -37,6 +37,7 @@ type
         { Overrides method defined in TNamedPointsSet. }
         function GetCurveTypeId: TCurveTypeId; override;
         class function GetCurveTypeId_: TCurveTypeId; override;
+        class function GetExtremumMode: TExtremumMode; override;
     end;
 
     ValuePair = class(TObject)
@@ -84,6 +85,11 @@ end;
 class function TGaussPointsSet.GetCurveTypeId_: TCurveTypeId;
 begin
     Result := StringToGUID('{ff4e399c-c33c-482e-84d7-952700bcd4ae}');
+end;
+
+class function TGaussPointsSet.GetExtremumMode: TExtremumMode;
+begin
+    Result := OnlyMaximums;
 end;
 
 procedure TGaussPointsSet.DoCalc(const Intervals: TPointsSet);

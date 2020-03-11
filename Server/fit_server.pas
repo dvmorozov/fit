@@ -80,6 +80,7 @@ type
         }
     TFitServer = class(TInterfacedObject, IClientCallback, IFitService)
     protected
+        FCurveTypeSelector: ICurveTypeSelector;
 {$IFDEF FIT}
         FFitProxy: TFitServerProxy;
 {$ENDIF}
@@ -118,7 +119,7 @@ type
                   Items are added synchronously to the list. }
         FCurvesList: TSelfCopiedCompList;
                 { Positions of pattern specimens. Only X-coordinates are used. }
-        CurvePositions: TTitlePointsSet;
+        FCurvePositions: TTitlePointsSet;
                 { Containers of parameters of pattern specimens.
                   TODO: change type and remove SetWaveLength. }
         SpecimenList: TMSCRSpecimenList;
@@ -138,11 +139,9 @@ type
         FMaxRFactor: Double;
 
         FCurveThresh: Double;
-        FCurveTypeId: TCurveTypeId;
         FBackgroundVariationEnabled: Boolean;
         FCurveScalingEnabled: Boolean;
 
-    protected
                 { Is set up to True after finishing first cycle of calculation. }
         FitDone: Boolean;
                 { Current total value of R-factor for all subtasks. }
@@ -220,9 +219,8 @@ type
                   StartPointIndex,
                   StopPointIndex: LongInt
                  );
-                { Searches for peak boundaries and returns its points.
-                  Searches among points which do not belong to any other peak. }
-        function FindPeaksInternal: TTitlePointsSet;
+                { Searches for peak points and return them. }
+        function SelectPeakPoints(SearchMinimums: Boolean): TTitlePointsSet;
                 { Fills the list of peak positions for automatic fit. }
         procedure FindPeakPositionsForAutoAlg;
         function Integrate(Points: TPointsSet;
@@ -405,9 +403,16 @@ type
         function GetCurveThresh: Double;
         property CurveThresh: Double read GetCurveThresh write SetCurveThresh;
 
+{$IFNDEF FIT}
+        { https://github.com/dvmorozov/fit/issues/160 }
         procedure SetCurveType(ACurveTypeId: TCurveTypeId);
+{$ENDIF}
         function GetCurveType: TCurveTypeId;
-        property CurveTypeId: TCurveTypeId read GetCurveType write SetCurveType;
+        property CurveTypeId: TCurveTypeId read GetCurveType
+{$IFNDEF FIT}
+            write SetCurveType
+{$ENDIF}
+        ;
 
         function GetState: TFitServerState;
         property State: TFitServerState read GetState;
@@ -466,6 +471,12 @@ const
 implementation
 
 uses app;
+
+const
+    { The minimal allowed number. }
+    MIN_VALUE: Double = -1e100;
+    { The maximal allowed number. }
+    MAX_VALUE: Double =  1e100;
 
 {$IFDEF _WINDOWS}
 function ParseAndCalcExpression(Expr: LPCSTR; ParamList: LPCSTR;
@@ -548,11 +559,11 @@ begin
         Assert(Assigned(ACurvePositions));
         Assert(Assigned(SpecimenList));
 
-        CurvePositions.Clear;
+        FCurvePositions.Clear;
         SpecimenList.Clear;
 
         for i := 0 to ACurvePositions.PointsCount - 1 do
-            AddPoint(CurvePositions,
+            AddPoint(FCurvePositions,
                 ACurvePositions.PointXCoord[i],
                 ACurvePositions.PointYCoord[i]
                 );
@@ -630,15 +641,13 @@ begin
 
     BackgroundPoints.Free;
     RFactorIntervals.Free;
-    CurvePositions.Free;
+    FCurvePositions.Free;
     ExpProfile.Free;
     Params.Free;
     inherited;
 end;
 
 constructor TFitServer.Create;
-var
-    CurveTypeSelector: ICurveTypeSelector;
 begin
     inherited;
 
@@ -648,8 +657,7 @@ begin
     FBackFactor := 30;
     FCurveThresh := 0;
     //  Sets default curve type.
-    CurveTypeSelector := TCurveTypesSingleton.CreateCurveTypeSelector;
-    FCurveTypeId := CurveTypeSelector.GetSelectedCurveType;
+    FCurveTypeSelector := TCurveTypesSingleton.CreateCurveTypeSelector;
 
     FBackgroundVariationEnabled := False;
     FCurveScalingEnabled := True;
@@ -660,7 +668,7 @@ begin
     BackgroundPoints := TTitlePointsSet.Create(nil);
     RFactorIntervals := TTitlePointsSet.Create(nil);
     //  elementy v eti spiski d. dobavlyat'sya sinhronno
-    CurvePositions := TTitlePointsSet.Create(nil);
+    FCurvePositions := TTitlePointsSet.Create(nil);
     SpecimenList := TMSCRSpecimenList.Create(nil);
     SpecimenList.Lambda := WaveLength;
     FCurvesList := TSelfCopiedCompList.Create(nil);
@@ -849,57 +857,81 @@ begin
     end;
 end;
 
-function TFitServer.FindPeaksInternal: TTitlePointsSet;
-var Data: TPointsSet;
-    Max: Double;
-    MaxX0: Double;
-    MaxIndex: LongInt;
-    MaxFound: Boolean;
+function TFitServer.SelectPeakPoints(SearchMinimums: Boolean): TTitlePointsSet;
+var
+    Data: TPointsSet;
+    ExtremumValue: Double;
+    ExtremumX0: Double;
+    ExtremumIndex: LongInt;
+    ExtremumFound: Boolean;
     LeftIndex, RightIndex: LongInt;
     //LeftIndex2, RightIndex2: LongInt;
     LeftX0, RightX0, Temp: Double;
     i: LongInt;
-    GlobalMax: Double;
+    GlobalExtremum: Double;
+
+    function GetBoundaryValue: Double;
+    begin
+        if SearchMinimums then
+            Result := MAX_VALUE
+        else
+            Result := MIN_VALUE;
+    end;
+
+    function IsFirstBetter(Value1, Value2: Double): Boolean;
+    begin
+        if SearchMinimums then
+            Result := Value1 < Value2
+        else
+            Result := Value1 > Value2;
+    end;
+
 begin
     if FSelectedAreaMode then Data := SelectedArea
     else Data := ExpProfile;
+
+    SearchMinimums := True;
+
     Assert(Assigned(Data));
     Data.Sort;
 
     Result := TTitlePointsSet.Create(nil);
     try
-        //  tsiklicheski vybiraetsya maksimal'naya tochka sredi teh,
+        //  tsiklicheski vybiraetsya minimal'naya tochka sredi teh,
         //  prinadlezhnost' kotoryh k pikam esche ne opredelena
         repeat
-            Max := 0; MaxFound := False;
+            ExtremumValue := GetBoundaryValue;
+            ExtremumFound := False;
+
             for i := 0 to Data.PointsCount - 1 do
             begin
-                if (Data.PointYCoord[i] > Max) and
+                if IsFirstBetter(Data.PointYCoord[i], ExtremumValue) and
                    (Result.IndexOfValueX(Data.PointXCoord[i]) = -1) then
                 begin
-                    Max := Data.PointYCoord[i];
-                    MaxX0 := Data.PointXCoord[i];
-                    MaxIndex := i;
-                    MaxFound := True;
+                    ExtremumValue := Data.PointYCoord[i];
+                    ExtremumX0 := Data.PointXCoord[i];
+                    ExtremumIndex := i;
+                    ExtremumFound := True;
                 end;
             end;
             //  predotvraschaet zatsiklivanie v sluchae, kogda vse tochki
             //  profilya vybrany (takoe mozhet byt', naprimer, pri slishkom
             //  maloy velichine nizhney granitsy poiska pikov)
             //  !!! vyhod d.b. do dobavleniya tochki !!!
-            if not MaxFound then Break;
+            if not ExtremumFound then Break;
             //  pervyy naydennyy maksimum yavlyaetsya global'nym
-            if Result.PointsCount = 0 then GlobalMax := Max;
-            Result.AddNewPoint(MaxX0, Data.PointYCoord[MaxIndex]);
+            if Result.PointsCount = 0 then GlobalExtremum := ExtremumValue;
+            Result.AddNewPoint(ExtremumX0, Data.PointYCoord[ExtremumIndex]);
+
             //  opredelyaem granitsy pika dlya vychisleniya faktora rashodimosti
-            Temp := Max; LeftIndex := MaxIndex; LeftX0 := MaxX0;
+            Temp := ExtremumValue; LeftIndex := ExtremumIndex; LeftX0 := ExtremumX0;
             //  !!! trebuetsya zaschita ot dubley inache budet sboy sortirovki !!!
-            for i := MaxIndex - 1 downto 0 do
+            for i := ExtremumIndex - 1 downto 0 do
             begin
                 //  !!! dlya sravneniya d. ispol'zovat'sya <,
                 //  tak kak inache piki mogut smykat'sya !!!
-                if (Data.PointYCoord[i] < Temp) and
-                   (Result.IndexOfValueX(Data.PointXCoord[i]) = -1) then
+                if not IsFirstBetter(Data.PointYCoord[i], Temp) and
+                    (Result.IndexOfValueX(Data.PointXCoord[i]) = -1) then
                 begin
                     Temp := Data.PointYCoord[i];
                     LeftIndex := i;
@@ -922,12 +954,12 @@ begin
                 end
             end;
             *)
-            Temp := Max; RightIndex := MaxIndex; RightX0 := MaxX0;
-            for i := MaxIndex + 1 to Data.PointsCount - 1 do
+            Temp := ExtremumValue; RightIndex := ExtremumIndex; RightX0 := ExtremumX0;
+            for i := ExtremumIndex + 1 to Data.PointsCount - 1 do
             begin
                 //  !!! dlya sravneniya d. ispol'zovat'sya <,
                 //  tak kak inache piki mogut smykat'sya !!!
-                if (Data.PointYCoord[i] < Temp) and
+                if not IsFirstBetter(Data.PointYCoord[i], Temp) and
                    (Result.IndexOfValueX(Data.PointXCoord[i]) = -1) then
                 begin
                     Temp := Data.PointYCoord[i];
@@ -960,7 +992,7 @@ begin
         //  zdes' nuzhna ne dolya maksimuma, a nekotoroe znachenie (poskol'ku
         //  mozhet prisutstvovat' fon), kotoroe k tomu zhe d.b. razlichnym po
         //  profilyu (poprostu fon d.b. udalen!)
-        until Max < GlobalMax / BackFactor;
+        until ExtremumValue < GlobalExtremum / BackFactor;
     except
         Result.Free;
         raise;
@@ -969,68 +1001,122 @@ end;
 
 procedure TFitServer.FindPeakPositionsForAutoAlg;
 begin
-    CurvePositions.Free; CurvePositions := nil;
+    FCurvePositions.Free; FCurvePositions := nil;
     //  vse tochki pikov vybirayutsya v kachestve tochek privyazki krivyh
-    CurvePositions := FindPeaksInternal;
+    //  TODO: use special value of TExtremumMode and generalize algorithm.
+    FCurvePositions := SelectPeakPoints(False);
     SpecPosFoundForAuto := True;
 end;
 
 procedure TFitServer.FindPeakPositionsAlg;
-var i: LongInt;
-    Data: TPointsSet;
-    PrevInt, CurInt: Double;
-    PeakFound: Boolean;
-    Peaks: TPointsSet;
-    X: Double;
-begin
-    Assert(Assigned(CurvePositions));
-    Peaks := FindPeaksInternal;
-    //  Peaks zaschischaetsya ot utechki resursov
-    try
-        Assert(Assigned(Peaks));
-        //  dazhe v samom uzkom pike d.b.
-        //  ne men'she 3-h tochek
-        Assert(Peaks.PointsCount >= 3);
+var
+    ExtremumMode: TExtremumMode;
 
-        Peaks.Sort;    //  !!!
+    procedure SearchExtremums(Minimums: Boolean);
+    var
+        Peaks: TPointsSet;
 
-        if FSelectedAreaMode then Data := SelectedArea
-        else Data := ExpProfile;
-        Assert(Assigned(Data));
-        Data.Sort;
-        //  iz Peaks, poluchennyh posle vyzova FindPeaksInternal,
-        //  isklyuchayutsya vse tochki, krome lokal'nyh maksimumov vnutri
-        //  kazhdogo pika
-        //  !!! tochki dobavl. k tochkam, vybrannym pol'zovatelem !!!
-        PeakFound := False;
-        PrevInt := Peaks.PointYCoord[0];
-        for i := 1 to Peaks.PointsCount - 1 do
-        begin
-            CurInt := Peaks.PointYCoord[i];
-            if not PeakFound then
+        procedure SelectExtremums;
+        var
+            i: LongInt;
+            Data: TPointsSet;
+            PrevValue, CurValue: Double;
+            PeakFound: Boolean;
+            X: Double;
+            LastPoint: Boolean;
+
+            function DerivativeChanged: Boolean;
             begin
-                //  ischem peregib vniz
-                if CurInt < PrevInt then
+                if Minimums then
                 begin
-                    X := Peaks.PointXCoord[i - 1];
-                    //  zaschita ot dubley
-                    if CurvePositions.IndexOfValueX(X) = -1 then
-                        CurvePositions.AddNewPoint(X, PrevInt);
-                    PeakFound := True;
+                    Result := CurValue > PrevValue;
+                end
+                else
+                begin
+                    Result := CurValue < PrevValue;
                 end;
-            end
-            else
-            begin
-                //  ischem peregib vverh
-                if CurInt > PrevInt then PeakFound := False;
             end;
-            PrevInt := CurInt;
+
+        begin
+            Assert(Assigned(Peaks));
+            { Peaks collecton contains all data points having values different
+              from some estimated average by defined value. }
+            Assert(Peaks.PointsCount >= 3);
+
+            Peaks.Sort;    //  !!!
+
+            if FSelectedAreaMode then Data := SelectedArea
+            else Data := ExpProfile;
+            Assert(Assigned(Data));
+            Data.Sort;
+            //  iz Peaks, poluchennyh posle vyzova SelectPeakPoints,
+            //  isklyuchayutsya vse tochki, krome lokal'nyh maksimumov vnutri
+            //  kazhdogo pika
+            PeakFound := False;
+            PrevValue := Peaks.PointYCoord[0];
+            for i := 1 to Peaks.PointsCount - 1 do
+            begin
+                CurValue := Peaks.PointYCoord[i];
+                if not PeakFound then
+                begin
+                    { Inflection point is searched. Last point is included
+                      if data are going in the given direction. }
+                    LastPoint := i = Peaks.PointsCount - 1;
+                    if DerivativeChanged or (not DerivativeChanged and LastPoint) then
+                    begin
+                        if LastPoint then
+                        begin
+                            X := Peaks.PointXCoord[i];
+                            //  zaschita ot dubley
+                            if FCurvePositions.IndexOfValueX(X) = -1 then
+                                FCurvePositions.AddNewPoint(X, CurValue);
+                        end
+                        else
+                        begin
+                            X := Peaks.PointXCoord[i - 1];
+                            //  zaschita ot dubley
+                            if FCurvePositions.IndexOfValueX(X) = -1 then
+                                FCurvePositions.AddNewPoint(X, PrevValue);
+                        end;
+                        PeakFound := True;
+                    end;
+                end
+                else
+                begin
+                    //  ischem peregib vniz
+                    if not DerivativeChanged then PeakFound := False;
+                end;
+                PrevValue := CurValue;
+            end;
         end;
-    except
+
+    begin
+        Peaks := SelectPeakPoints(Minimums);
+        try
+            SelectExtremums;
+        except
+            Peaks.Free;
+            raise;
+        end;
         Peaks.Free;
-        raise;
     end;
-    Peaks.Free;
+
+begin
+    Assert(Assigned(FCurvePositions));
+    { Points selected at previous steps are removed. }
+    FCurvePositions.Clear;
+
+    ExtremumMode := FCurveTypeSelector.GetSelectedExtremumMode;
+
+    case ExtremumMode of
+        OnlyMaximums: SearchExtremums(False);
+        OnlyMinimums: SearchExtremums(True);
+        MaximumsAndMinimums:
+        begin
+            SearchExtremums(False);
+            SearchExtremums(True);
+        end;
+    end;
 end;
 
 procedure TFitServer.FindPeakPositionsDoneProcActual;
@@ -1055,8 +1141,8 @@ procedure TFitServer.AllPointsAsPeakPositionsAlg;
 var i: LongInt;
     Data: TPointsSet;
 begin
-    Assert(Assigned(CurvePositions));
-    CurvePositions.Clear;
+    Assert(Assigned(FCurvePositions));
+    FCurvePositions.Clear;
 
     if FSelectedAreaMode then Data := SelectedArea
     else Data := ExpProfile;
@@ -1064,7 +1150,7 @@ begin
     Data.Sort;
     for i := 0 to Data.PointsCount - 1 do
     begin
-        CurvePositions.AddNewPoint(Data.PointXCoord[i], Data.PointYCoord[i]);
+        FCurvePositions.AddNewPoint(Data.PointXCoord[i], Data.PointYCoord[i]);
     end;
 end;
 
@@ -1078,7 +1164,7 @@ begin
     //  !!! spisok ne ochischaetsya, chtoby naydennye tochki dobavlyalis'
     //  k tochkam vybrannym pol'zovatelem !!!
     Assert(Assigned(RFactorIntervals));
-    Peaks := FindPeaksInternal;
+    Peaks := SelectPeakPoints(False);
     try
         Assert(Assigned(Peaks));
         //  dazhe v samom uzkom pike d.b.
@@ -1092,7 +1178,7 @@ begin
         else Data := ExpProfile;
         Assert(Assigned(Data));
         Data.Sort;
-        //  iz Peaks, poluchennyh posle vyzova FindPeaksInternal,
+        //  iz Peaks, poluchennyh posle vyzova SelectPeakPoints,
         //  isklyuchayutsya vse tochki, krome tochek ogranichivayuschih pik
         First := False;
         for i := 0 to Data.PointsCount - 1 do
@@ -1396,8 +1482,8 @@ end;
 
 function TFitServer.GetCurvePositions: TTitlePointsSet;
 begin
-    if Assigned(CurvePositions) then
-        Result := TTitlePointsSet(CurvePositions.GetCopy)
+    if Assigned(FCurvePositions) then
+        Result := TTitlePointsSet(FCurvePositions.GetCopy)
     else
         Result := nil;
 end;
@@ -1738,7 +1824,7 @@ begin
                 //  esli tochki privyazki byli naydeny avtomaticheski,
                 //  to ih pokazyvat' ne nuzhno, t.k. eto vse tochki
                 //  otlichnye ot fona
-                CurvePositions.Clear;
+                FCurvePositions.Clear;
                 SpecPosFoundForAuto := False;
             end;
 
@@ -1893,7 +1979,7 @@ begin
         RFactorIntervals.Clear;
         FindPeakBoundsAlg;
     end;
-    if CurvePositions.PointsCount = 0 then FindPeakPositionsForAutoAlg;
+    if FCurvePositions.PointsCount = 0 then FindPeakPositionsForAutoAlg;
     SetState(ReadyForFit);
 
     RecreateMainCalcThread(FindGaussesSequentiallyAlg, DoneProc);
@@ -1935,7 +2021,7 @@ begin
         RFactorIntervals.Clear;
         FindPeakBoundsAlg;
     end;
-    if CurvePositions.PointsCount = 0 then FindPeakPositionsForAutoAlg;
+    if FCurvePositions.PointsCount = 0 then FindPeakPositionsForAutoAlg;
     SetState(ReadyForFit);
 
     RecreateMainCalcThread(FindGaussesAlg, DoneProc);
@@ -2090,7 +2176,7 @@ begin
             Assert(Assigned(ExpProfile));
             Assert(Assigned(BackgroundPoints));
             Assert(Assigned(RFactorIntervals));
-            Assert(Assigned(CurvePositions));
+            Assert(Assigned(FCurvePositions));
             Assert(Assigned(SpecimenList));
             //  chtoby mozhno bylo dobavlyat' tochki tablichno bez vhoda
             //  v spets. rezhim
@@ -2098,7 +2184,7 @@ begin
             //  !!! ne dolzhen udalyat'sya pri vhode v BackNotRemoved !!!
             BackgroundPoints.Clear;
             RFactorIntervals.Clear;
-            CurvePositions.Clear;
+            FCurvePositions.Clear;
             SpecimenList.Clear;
             FCurvesList.Clear;
 
@@ -2188,13 +2274,13 @@ begin
         SubtractAllBackground(True);
         ShowProfile;
     end;
-    //??? mozhno optimizirovat' razbiv na nesk. funktsiy
-    //  i vyzyvaya FindPeaksInternal tol'ko odin raz
+    //  TODO: mozhno optimizirovat' razbiv na nesk. funktsiy
+    //  i vyzyvaya SelectPeakPoints tol'ko odin raz
 
     //  set of curve positions selected by user is saved if given
     //  https://action.mindjet.com/task/14588987
     //  https://github.com/dvmorozov/fit/issues/12
-    if CurvePositions.PointsCount = 0 then
+    if FCurvePositions.PointsCount = 0 then
        FindPeakPositionsForAutoAlg;
 
     FindPeakBoundsAlg;
@@ -2232,13 +2318,13 @@ end;
 
 procedure TFitServer.CreateTasks;
 var i, j: LongInt;
-    TF: TFitTask;
+    FitTask: TFitTask;
     Data, Temp: TPointsSet;
     BegIndex, EndIndex, PosIndex: LongInt;
 begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
     Assert(Assigned(RFactorIntervals));
-    Assert(Assigned(CurvePositions));
+    Assert(Assigned(FCurvePositions));
     //  zadachu nuzhno vypolnyat' nastol'ko, naskol'ko vozmozhno;
     //  dlya poslednego nezakrytogo intervala podzadacha ne sozdaetsya;
     //  eto proshe, chem zhestko ogranichivat', delat' proverki i
@@ -2253,7 +2339,7 @@ begin
     RFactorIntervals.Sort;      //  !!! tochki, ogranichivayuschie intervaly m.b.
                                 //  peredany izvne, poetomu sortirovka ne
                                 //  pomeshaet !!!
-    CurvePositions.Sort;        //  !!! to zhe samoe !!!
+    FCurvePositions.Sort;        //  !!! to zhe samoe !!!
 
     TaskList.Free; TaskList := nil;
     TaskList := TSelfCheckedComponentList.Create(nil);
@@ -2267,7 +2353,7 @@ begin
         ne ochen' horosho, t.k. posle vyzova avtomaticheskoy
         generatsii intervalov rezul'tat ob'edinyaetsya s dannym,
         pri etom mogut voznikat' lishnie tochki
-        TF := CreateTaskObject;
+        FitTask := CreateTaskObject;
         try
             BegIndex := 0;
             EndIndex := Data.PointsCount - 1;
@@ -2277,34 +2363,34 @@ begin
             RFactorIntervals.AddNewPoint(
                 Data.PointXCoord[EndIndex], Data.PointYCoord[EndIndex]);
 
-            TF.BegIndex := BegIndex;
-            TF.EndIndex := EndIndex;
+            FitTask.BegIndex := BegIndex;
+            FitTask.EndIndex := EndIndex;
             //  kopirovanie i ustanovka uchastka profilya
             Temp := TPointsSet(Data.GetCopy);
             try
-                TF.SetProfilePointsSet(Temp);
+                FitTask.SetProfilePointsSet(Temp);
             except
                 Temp.Free; raise;
             end;
             //  kopirovanie i ustanovka tochek dlya raspolozheniya
             //  ekzemplyarov patterna
-            Temp := TPointsSet(CurvePositions.GetCopy);
+            Temp := TPointsSet(FCurvePositions.GetCopy);
             try
-                TF.SetCurvePositions(Temp);
+                FitTask.SetCurvePositions(Temp);
             except
                 Temp.Free; raise;
             end;
             //  ustanovka dop. parametrov
-            TF.MaxRFactor := MaxRFactor;
-            TF.CurveTypeId := CurveTypeId;
+            FitTask.MaxRFactor := MaxRFactor;
+            FitTask.CurveTypeId := CurveTypeId;
             if CurveTypeId = Special then
-                TF.SetSpecialCurve(FCurveExpr, Curve_parameters(Params.GetCopy));
-            TF.ServerShowCurMin := ShowCurMin;
-            TF.ServerDoneProc := DoneProc;
+                FitTask.SetSpecialCurve(FCurveExpr, Curve_parameters(Params.GetCopy));
+            FitTask.ServerShowCurMin := ShowCurMin;
+            FitTask.ServerDoneProc := DoneProc;
 
-            TaskList.Add(TF);
+            TaskList.Add(FitTask);
         except
-            TF.Free; raise;
+            FitTask.Free; raise;
         end;
         *)
         //  avtomaticheskiy poisk granits intervalov
@@ -2323,21 +2409,21 @@ begin
             //  nuzhno korrektno obrabatyvat' takuyu situatsiyu;
             //  dlya nezakrytogo intervala podzadacha ne sozdayetsya
             if j + 1 > RFactorIntervals.PointsCount - 1 then Break;
-            TF := CreateTaskObject;
+            FitTask := CreateTaskObject;
             try
                 BegIndex := Data.IndexOfValueX(RFactorIntervals.PointXCoord[j]);
                 EndIndex := Data.IndexOfValueX(RFactorIntervals.PointXCoord[j + 1]);
                 Assert(BegIndex <> -1);
                 Assert(EndIndex <> -1);
 
-                TF.BegIndex := BegIndex;
-                TF.EndIndex := EndIndex;
+                FitTask.BegIndex := BegIndex;
+                FitTask.EndIndex := EndIndex;
                 //  kopirovanie i ustanovka uchastka profilya
                 Temp := TPointsSet.Create(nil);
                 try
                     for i := BegIndex to EndIndex do
                         Temp.AddNewPoint(Data.PointXCoord[i], Data.PointYCoord[i]);
-                    TF.SetProfilePointsSet(Temp);
+                    FitTask.SetProfilePointsSet(Temp);
                 except
                     Temp.Free; raise;
                 end;
@@ -2345,32 +2431,31 @@ begin
                 //  krivyh popadayuschih v zadannyy interval
                 Temp := TPointsSet.Create(nil);
                 try
-                    for i := 0 to CurvePositions.PointsCount - 1 do
+                    for i := 0 to FCurvePositions.PointsCount - 1 do
                     begin
                         PosIndex := Data.IndexOfValueX(
-                            CurvePositions.PointXCoord[i]);
+                            FCurvePositions.PointXCoord[i]);
                         Assert(PosIndex <> -1);
                         if (PosIndex >= BegIndex) and (PosIndex <= EndIndex) then
                             Temp.AddNewPoint(
-                                CurvePositions.PointXCoord[i],
-                                CurvePositions.PointYCoord[i]
+                                FCurvePositions.PointXCoord[i],
+                                FCurvePositions.PointYCoord[i]
                                 );
                     end;
-                    TF.SetCurvePositions(Temp);
+                    FitTask.SetCurvePositions(Temp);
                 except
                     Temp.Free; raise;
                 end;
                 //  ustanovka dop. parametrov
-                TF.MaxRFactor := MaxRFactor;
-                TF.CurveTypeId := CurveTypeId;
+                FitTask.MaxRFactor := MaxRFactor;
                 if IsEqualGUID(CurveTypeId, TUserPointsSet.GetCurveTypeId_) then
-                    TF.SetSpecialCurve(FCurveExpr, Curve_parameters(Params.GetCopy));
-                TF.ServerShowCurMin := ShowCurMinInternal;
-                TF.ServerDoneProc := DoneProc;
+                    FitTask.SetSpecialCurve(FCurveExpr, Curve_parameters(Params.GetCopy));
+                FitTask.ServerShowCurMin := ShowCurMinInternal;
+                FitTask.ServerDoneProc := DoneProc;
 
-                TaskList.Add(TF);
+                TaskList.Add(FitTask);
             except
-                TF.Free; raise;
+                FitTask.Free; raise;
             end;
 
             j := j + 2;
@@ -2487,29 +2572,24 @@ begin
     Result := FCurveThresh;
 end;
 
+{$IFNDEF FIT}
+{ https://github.com/dvmorozov/fit/issues/160 }
 procedure TFitServer.SetCurveType(ACurveTypeId: TCurveTypeId);
-var i: LongInt;
-    FT: TFitTask;
 begin
-    FCurveTypeId := ACurveTypeId;
-    if Assigned(TaskList) then
-        for i := 0 to TaskList.Count - 1 do
-        begin
-            FT := TFitTask(TaskList.Items[i]);
-            FT.CurveTypeId := ACurveTypeId;
-        end;
+    FCurveTypeSelector.SelectCurveType(ACurveTypeId);
 end;
+{$ENDIF}
 
 function TFitServer.GetCurveType: TCurveTypeId;
 begin
-    Result := FCurveTypeId;
+    Result := FCurveTypeSelector.GetSelectedCurveType;
 end;
 
 {$IFDEF _WINDOWS}
 procedure TFitServer.SetSpecialCurveParameters(
     ACurveExpr: string; CP: Curve_parameters);
 var i: LongInt;
-    FT: TFitTask;
+    FitTask: TFitTask;
 begin
     if State = AsyncOperation then
         raise EUserException.Create(InadmissibleServerState + CRLF +
@@ -2533,8 +2613,8 @@ begin
     if Assigned(TaskList) then
         for i := 0 to TaskList.Count - 1 do
         begin
-            FT := TFitTask(TaskList.Items[i]);
-            FT.SetSpecialCurve(FCurveExpr, Curve_parameters(Params.GetCopy));
+            FitTask := TFitTask(TaskList.Items[i]);
+            FitTask.SetSpecialCurve(FCurveExpr, Curve_parameters(Params.GetCopy));
         end;
 end;
 {$ENDIF}
@@ -2545,14 +2625,15 @@ begin
 end;
 
 function TFitServer.GetRFactorStr: string;
-var F: Double;
+var RFactor: Double;
 begin
     if GetAllInitialized then
     begin
-        F := GetRFactor;
-        Result := //FloatToStr(F);
-                    FloatToStrF(F, ffFixed, 10, 8);
-    end else Result := RFactorStillNotCalculated;
+        RFactor := GetRFactor;
+        Result := //FloatToStr(RFactor);
+                    FloatToStrF(RFactor, ffFixed, 10, 8);
+    end
+    else Result := RFactorStillNotCalculated;
 end;
 
 function TFitServer.GetAbsRFactorStr: string;
@@ -2743,7 +2824,7 @@ begin
         //  sochetaniyu sootvetstvuet gotovnost'
         //  k podgonke s parametrami pol'zovatelya
        (RFactorIntervals.PointsCount <> 0) and
-       (CurvePositions.PointsCount <> 0) then
+       (FCurvePositions.PointsCount <> 0) then
     begin
         //  trebuetsya peresozdanie podzadach i ekzemplyarov patterna,
         //  potomu chto menyayutsya granitsy
@@ -2786,8 +2867,8 @@ begin
         raise EUserException.Create(InadmissibleServerState + CRLF +
             DataMustBeSet);
 
-    Assert(Assigned(CurvePositions));
-    AddPoint(CurvePositions, XValue, YValue);
+    Assert(Assigned(FCurvePositions));
+    AddPoint(FCurvePositions, XValue, YValue);
     //  mozhno sdelat' optimal'nee, no dlya etogo podzadachi
     //  d.b. uzhe sozdany i spisok granits intervalov d.b. nepustym
     GoToReadyForFit;
@@ -2860,8 +2941,8 @@ begin
         raise EUserException.Create(InadmissibleServerState + CRLF +
             DataMustBeSet);
 
-    Assert(Assigned(CurvePositions));
-    CurvePositions.ReplacePoint(PrevXValue, PrevYValue, NewXValue, NewYValue);
+    Assert(Assigned(FCurvePositions));
+    FCurvePositions.ReplacePoint(PrevXValue, PrevYValue, NewXValue, NewYValue);
 end;
 
 procedure TFitServer.RecreateMainCalcThread(

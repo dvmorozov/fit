@@ -28,10 +28,11 @@ type
     { Class containing information about curve types. }
     TCurveType = class
     public
-        CurveTypeName: string;
-        CurveClass: TCurveClass;
-        CurveTypeId: TCurveTypeId;
-        CurveTypeTag: Integer;
+        Name: string;
+        Class_: TCurveClass;
+        TypeId: TCurveTypeId;
+        Tag: Integer;
+        ExtremumMode: TExtremumMode;
     end;
 
     { Interface defining basic operation for creating curve instances. }

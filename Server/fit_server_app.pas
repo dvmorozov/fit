@@ -25,9 +25,9 @@ uses Classes, SysUtils,
      fit_viewer,
      { Contains server form with chart component. }
      form_main,
-{$ENDIF}
      { Receives messages from client. }
      fit_server_stub,
+{$ENDIF}
      { Implements server logic. }
      fit_server,
      { Contains algorithm container. }
@@ -42,8 +42,8 @@ type
 {$ELSE}
         FViewer: TFitViewer;
         FForm: TFormMain;
-{$ENDIF}
         FFitStub: TFitServerStub;
+{$ENDIF}
         FFitServer: TFitServer;
 
         procedure RecreateServer;
@@ -82,12 +82,10 @@ begin
     FForm := TFormMain.Create(nil);
     FViewer := TFitViewer.Create(nil);
     FViewer.Form := FForm;
-{$ENDIF}
     FFitStub := TFitServerStub.Create;
     FFitStub.RecreateServer := RecreateServer;
+{$ENDIF}
     RecreateServer;
-
-    FFitServer := FFitStub.Server;
 end;
 {$hints on}
 
@@ -100,8 +98,8 @@ begin
 {$ELSE}
     FViewer.Free;
     FForm.Free;
-{$ENDIF}
     FFitStub.Free;
+{$ENDIF}
 end;
 
 procedure TFitServerApp.RecreateServer;
@@ -110,8 +108,9 @@ begin
     FFitServer := TFitServerMultithreaded.Create;
 {$IFDEF FIT}
     FFitServer.FitProxy := FFitProxy;
-{$ENDIF}
+{$ELSE}
     FFitStub.Server := FFitServer;
+{$ENDIF}
 end;
 
 procedure TFitServerApp.OnException(Sender: TObject; E: Exception);

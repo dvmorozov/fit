@@ -43,7 +43,7 @@ end;
 
 procedure TFitServerMultithreaded.AbortAsyncOper;
 var i: LongInt;
-    FT: TFitTaskWithThread;
+    FitTask: TFitTaskWithThread;
 begin
     if State <> AsyncOperation then
         raise EUserException.Create(InadmissibleServerState + CRLF +
@@ -54,14 +54,14 @@ begin
     //  bolee optimal'naya realizatsiya
     for i := 0 to TaskList.Count - 1 do
     begin
-        FT := TFitTaskWithThread(TaskList.Items[i]);
-        FT.DoneDisabled := True;
-        FT.StopAsyncOper;
+        FitTask := TFitTaskWithThread(TaskList.Items[i]);
+        FitTask.DoneDisabled := True;
+        FitTask.StopAsyncOper;
     end;
     for i := 0 to TaskList.Count - 1 do
     begin
-        FT := TFitTaskWithThread(TaskList.Items[i]);
-        FT.DestroyMainCalcThread;
+        FitTask := TFitTaskWithThread(TaskList.Items[i]);
+        FitTask.DestroyMainCalcThread;
     end;
 
     FMainCalcThread.Terminate;

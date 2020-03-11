@@ -20,7 +20,7 @@ unit lorentz_points_set;
 interface
 
 uses SysUtils, int_points_set, points_set, gauss_points_set,
-  curve_types_singleton, SimpMath;
+  curve_types_singleton, named_points_set, SimpMath;
 
 type
     { Curve class having Lorentz form. }
@@ -34,6 +34,7 @@ type
         { Overrides method defined in TNamedPointsSet. }
         function GetCurveTypeId: TCurveTypeId; override;
         class function GetCurveTypeId_: TCurveTypeId; override;
+        class function GetExtremumMode: TExtremumMode; override;
     end;
 
 implementation
@@ -55,6 +56,11 @@ end;
 class function TLorentzPointsSet.GetCurveTypeId_: TCurveTypeId;
 begin
     Result := StringToGUID('{7ca6fdaf-95b7-4d84-bcba-130c828407cc}');
+end;
+
+class function TLorentzPointsSet.GetExtremumMode: TExtremumMode;
+begin
+    Result := OnlyMaximums;
 end;
 
 procedure TLorentzPointsSet.DoCalc(const Intervals: TPointsSet);

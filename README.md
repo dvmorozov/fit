@@ -22,6 +22,8 @@ To open and modify diagram files use my favourite [UMLet](https://www.umlet.com/
 
 ![Fitting results](assets/images/2018-12-23_13h17_55.png)
 
+{% include google_ads.html %}
+
 ### Binaries
 
 There is no installer. The main executable is Fit.exe.

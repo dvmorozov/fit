@@ -84,11 +84,11 @@
     <coordinates>
       <x>329</x>
       <y>210</y>
-      <w>315</w>
+      <w>301</w>
       <h>126</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>430.0;10.0;430.0;110.0;10.0;110.0;10.0;160.0</additional_attributes>
+    <additional_attributes>410.0;10.0;410.0;90.0;10.0;90.0;10.0;160.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -126,7 +126,7 @@
       <h>126</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;110.0;440.0;110.0;440.0;160.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0;440.0;90.0;440.0;160.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>

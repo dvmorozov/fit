@@ -20,8 +20,8 @@ unit int_fit_service;
 interface
 
 uses
-    Classes, SysUtils, int_points_set, common_types, points_set, title_points_set,
-    mscr_specimen_list, self_copied_component
+    Classes, SysUtils, common_types, points_set, title_points_set,
+    mscr_specimen_list, self_copied_component, named_points_set
 {$IFDEF _WINDOWS}
     , persistent_curve_parameters
 {$ENDIF}

@@ -20,7 +20,7 @@ unit user_points_set;
 interface
 
 uses SysUtils, curve_points_set, named_points_set, curve_types_singleton,
-    int_points_set, configurable_points_set
+    configurable_points_set
 {$IFDEF _WINDOWS}
     , points_set, special_curve_parameter
     , Windows

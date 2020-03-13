@@ -22,11 +22,11 @@ interface
 uses
     Classes, SysUtils, points_set, curve_points_set, self_copied_component,
     int_minimizer, simple_minimizer, downhill_simplex_minimizer,
-    mscr_specimen_list, int_points_set, lorentz_points_set, gauss_points_set,
+    mscr_specimen_list, lorentz_points_set, gauss_points_set,
     two_branches_pseudo_voigt_points_set, asym_pseudo_voigt_points_set,
     user_points_set, pseudo_voigt_points_set, special_curve_parameter,
     persistent_curve_parameter_container, persistent_curve_parameters, log,
-    curve_types_singleton, int_curve_type_selector;
+    curve_types_singleton, int_curve_type_selector, named_points_set;
 
 type
     { Fits profile interval by model curves (specimens).

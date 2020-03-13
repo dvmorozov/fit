@@ -19,7 +19,7 @@ unit int_curve_type_iterator;
 
 interface
 
-uses int_points_set;
+uses named_points_set;
 
 type
     { Interface defining basic operation for iterating through curve types. }

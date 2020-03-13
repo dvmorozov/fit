@@ -20,10 +20,10 @@ unit pseudo_voigt_points_set;
 interface
 
 uses
-    Classes, SysUtils, int_points_set, curve_points_set, points_set,
-    named_points_set, curve_types_singleton, special_curve_parameter,
-    amplitude_curve_parameter, sigma_curve_parameter, position_curve_parameter,
-    eta_curve_parameter, SimpMath;
+    Classes, SysUtils, curve_points_set, points_set, named_points_set,
+    curve_types_singleton, special_curve_parameter, amplitude_curve_parameter,
+    sigma_curve_parameter, position_curve_parameter, eta_curve_parameter,
+    SimpMath;
 
 type
     { Function having Pseudo-Voigt form. }

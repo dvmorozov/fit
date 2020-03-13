@@ -19,7 +19,7 @@ unit named_points_set;
 
 interface
 
-uses curve_points_set, int_points_set, configurable_points_set;
+uses curve_points_set, configurable_points_set;
 
 type
     TNamedPointsSetClass = class of TNamedPointsSet;
@@ -28,18 +28,17 @@ type
         OnlyMinimums,
         MaximumsAndMinimums
     );
+    TCurveTypeId = TGuid;
     { Base curve class allowing setting up type name. Type name distinguishes
       this curve from all other curve types, as opposite to the 'Title' attributes
       which is used to distinguish separate curve instances. }
-    TNamedPointsSet = class(TCurvePointsSet, IPointsSet)
+    TNamedPointsSet = class(TCurvePointsSet)
     private
         { The attribute should not be used in descendants. }
         FName: string;
         FCurveTypeId: TCurveTypeId;
 
     public
-        { Sets unique identifier of curve type. }
-        procedure SetCurveTypeId(CurveTypeId: TCurveTypeId); virtual;
         { Sets name of curve type. The method is used in deserializing
           objects received from server. }
         procedure SetCurveTypeName(Name: string); virtual;
@@ -77,11 +76,6 @@ end;
 function TNamedPointsSet.GetCurveTypeId: TCurveTypeId;
 begin
     Result := FCurveTypeId;
-end;
-
-procedure TNamedPointsSet.SetCurveTypeId(CurveTypeId: TCurveTypeId);
-begin
-    FCurveTypeId := CurveTypeId;
 end;
 
 class function TNamedPointsSet.GetConfigurablePointsSet: TConfigurablePointsSetClass;

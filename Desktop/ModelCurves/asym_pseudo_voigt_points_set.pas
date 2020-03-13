@@ -19,9 +19,9 @@ unit asym_pseudo_voigt_points_set;
 
 interface
 
-uses Classes, SysUtils, int_points_set, points_set, pseudo_voigt_points_set,
-    curve_points_set, curve_types_singleton, special_curve_parameter,
-    delta_sigma_curve_parameter, named_points_set, SimpMath;
+uses Classes, SysUtils, points_set, pseudo_voigt_points_set, curve_points_set,
+    curve_types_singleton, special_curve_parameter, delta_sigma_curve_parameter,
+    named_points_set, SimpMath;
 
 type
     { Curve having asymmetrical Pseudo-Voigt form. }

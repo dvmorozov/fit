@@ -19,7 +19,7 @@ unit gauss_points_set;
 
 interface
 
-uses Classes, SysUtils, int_points_set, points_set, curve_points_set, named_points_set,
+uses Classes, SysUtils, points_set, curve_points_set, named_points_set,
     curve_types_singleton, special_curve_parameter, amplitude_curve_parameter,
     sigma_curve_parameter, position_curve_parameter, SimpMath;
 

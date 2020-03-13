@@ -33,7 +33,7 @@ In this case keeping the state of application can't be guaranteed.
 
 uses Classes, title_points_set, SelfCheckedComponentList, SysUtils,
      mscr_specimen_list, curve_points_set, named_points_set, points_set,
-     gauss_points_set, user_points_set, int_points_set, special_curve_parameter,
+     gauss_points_set, user_points_set, special_curve_parameter,
      persistent_curve_parameter_container, persistent_curve_parameters,
      calculated_curve_parameter, log, curve_types_singleton, int_curve_type_selector,
 {$IFDEF FIT}

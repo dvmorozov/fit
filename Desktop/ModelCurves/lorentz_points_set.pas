@@ -19,8 +19,8 @@ unit lorentz_points_set;
 
 interface
 
-uses SysUtils, int_points_set, points_set, gauss_points_set,
-  curve_types_singleton, named_points_set, SimpMath;
+uses SysUtils, points_set, gauss_points_set,
+    curve_types_singleton, named_points_set, SimpMath;
 
 type
     { Curve class having Lorentz form. }

@@ -122,11 +122,11 @@ begin
     CurveType := TCurveType.Create;
     CurveType.Class_ := CurveClass;
     CurveType.ExtremumMode := CurveClass.GetExtremumMode;
+    CurveType.TypeId := CurveClass.GetCurveTypeId;
     { Instantiates curve object to call its methods. }
     Curve := CurveClass.Create(nil);
     try
         CurveType.Name := Curve.GetCurveTypeName;
-        CurveType.TypeId := Curve.GetCurveTypeId;
     finally
         Curve.Free;
     end;

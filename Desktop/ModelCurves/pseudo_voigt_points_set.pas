@@ -44,8 +44,7 @@ type
         { Overrides method defined in TNamedPointsSet. }
         function GetCurveTypeName: string; override;
         { Overrides method defined in TNamedPointsSet. }
-        function GetCurveTypeId: TCurveTypeId; override;
-        class function GetCurveTypeId_: TCurveTypeId; override;
+        class function GetCurveTypeId: TCurveTypeId; override;
         class function GetExtremumMode: TExtremumMode; override;
     end;
 
@@ -109,12 +108,7 @@ begin
     Result := 'Pseudo-Voigt';
 end;
 
-function TPseudoVoigtPointsSet.GetCurveTypeId: TCurveTypeId;
-begin
-    Result := GetCurveTypeId_;
-end;
-
-class function TPseudoVoigtPointsSet.GetCurveTypeId_: TCurveTypeId;
+class function TPseudoVoigtPointsSet.GetCurveTypeId: TCurveTypeId;
 begin
     Result := StringToGUID('{9f27dc7c-970f-4dac-88cd-f5fb3400d38d}');
 end;

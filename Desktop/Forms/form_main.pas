@@ -994,7 +994,7 @@ begin
     begin
         NamedPointsSetClass := NamedPointsSetClasses[i];
         if TMenuItem(Sender).Tag =
-            CurveTypeIterator.GetCurveTypeTag(NamedPointsSetClass.GetCurveTypeId_) then
+            CurveTypeIterator.GetCurveTypeTag(NamedPointsSetClass.GetCurveTypeId) then
         begin
             if NamedPointsSetClass.GetConfigurablePointsSet.HasConfigurableParameters then
                 if not NamedPointsSetClass.GetConfigurablePointsSet.ShowConfigurationDialog then
@@ -1019,7 +1019,7 @@ begin
 {$IFNDEF FIT}
             FitClientApp_.FitClient.CurveTypeId := NamedPointsSetClass.GetCurveTypeId_;
 {$ENDIF}
-            CurveTypeSelector.SelectCurveType(NamedPointsSetClass.GetCurveTypeId_);
+            CurveTypeSelector.SelectCurveType(NamedPointsSetClass.GetCurveTypeId);
             Break;
         end
     end;
@@ -2588,7 +2588,7 @@ begin
             FitClientApp_.FitClient.CurveTypeId :=
                 TUserPointsSet.GetCurveTypeId_;
 {$ENDIF}
-            CurveTypeSelector.SelectCurveType(TUserPointsSet.GetCurveTypeId_);
+            CurveTypeSelector.SelectCurveType(TUserPointsSet.GetCurveTypeId);
             Break;
         end;
     end;

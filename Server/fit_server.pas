@@ -2448,7 +2448,7 @@ begin
                 end;
                 //  ustanovka dop. parametrov
                 FitTask.MaxRFactor := MaxRFactor;
-                if IsEqualGUID(CurveTypeId, TUserPointsSet.GetCurveTypeId_) then
+                if IsEqualGUID(CurveTypeId, TUserPointsSet.GetCurveTypeId) then
                     FitTask.SetSpecialCurve(FCurveExpr, Curve_parameters(Params.GetCopy));
                 FitTask.ServerShowCurMin := ShowCurMinInternal;
                 FitTask.ServerDoneProc := DoneProc;

@@ -1154,27 +1154,27 @@ var i: LongInt;
     SelectedCurveTypeId: TCurveTypeId;
 begin
     SelectedCurveTypeId := FCurveTypeSelector.GetSelectedCurveType;
-    if IsEqualGUID(SelectedCurveTypeId, TLorentzPointsSet.GetCurveTypeId_) then
+    if IsEqualGUID(SelectedCurveTypeId, TLorentzPointsSet.GetCurveTypeId) then
     begin
         Result := TLorentzPointsSet.Create(nil);
     end
     else
-    if IsEqualGUID(SelectedCurveTypeId, TGaussPointsSet.GetCurveTypeId_) then
+    if IsEqualGUID(SelectedCurveTypeId, TGaussPointsSet.GetCurveTypeId) then
     begin
         Result := TGaussPointsSet.Create(nil)
     end
     else
-    if IsEqualGUID(SelectedCurveTypeId, TPseudoVoigtPointsSet.GetCurveTypeId_) then
+    if IsEqualGUID(SelectedCurveTypeId, TPseudoVoigtPointsSet.GetCurveTypeId) then
     begin
         Result := TPseudoVoigtPointsSet.Create(nil)
     end
     else
-    if IsEqualGUID(SelectedCurveTypeId, TAsymPseudoVoigtPointsSet.GetCurveTypeId_) then
+    if IsEqualGUID(SelectedCurveTypeId, TAsymPseudoVoigtPointsSet.GetCurveTypeId) then
     begin
         Result := TAsymPseudoVoigtPointsSet.Create(nil)
     end
     else
-    if IsEqualGUID(SelectedCurveTypeId, TUserPointsSet.GetCurveTypeId_) then
+    if IsEqualGUID(SelectedCurveTypeId, TUserPointsSet.GetCurveTypeId) then
     begin
 {$IFDEF _WINDOWS}
         Result := TUserPointsSet.Create(nil);
@@ -1184,7 +1184,7 @@ begin
 {$ENDIF}
     end
     else
-    if IsEqualGUID(SelectedCurveTypeId, T2BranchesPseudoVoigtPointsSet.GetCurveTypeId_) then
+    if IsEqualGUID(SelectedCurveTypeId, T2BranchesPseudoVoigtPointsSet.GetCurveTypeId) then
     begin
         Result := T2BranchesPseudoVoigtPointsSet.Create(nil);
     end;
@@ -1352,7 +1352,7 @@ begin
             //  teper' sozdaetsya ekzemplyar tol'ko
             //  pol'zovatel'skoy krivoy, kotoraya ne
             //  imeet parametra polozheniya
-            if IsEqualGUID(SelectedCurveTypeId, TUserPointsSet.GetCurveTypeId_) then
+            if IsEqualGUID(SelectedCurveTypeId, TUserPointsSet.GetCurveTypeId) then
             begin
                 Curve := CreatePatternInstance;
 

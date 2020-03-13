@@ -32,8 +32,7 @@ type
         { Overrides method defined in TNamedPointsSet. }
         function GetCurveTypeName: string; override;
         { Overrides method defined in TNamedPointsSet. }
-        function GetCurveTypeId: TCurveTypeId; override;
-        class function GetCurveTypeId_: TCurveTypeId; override;
+        class function GetCurveTypeId: TCurveTypeId; override;
         class function GetExtremumMode: TExtremumMode; override;
     end;
 
@@ -48,12 +47,7 @@ begin
     Result := 'Lorentzian';
 end;
 
-function TLorentzPointsSet.GetCurveTypeId: TCurveTypeId;
-begin
-    Result := GetCurveTypeId_;
-end;
-
-class function TLorentzPointsSet.GetCurveTypeId_: TCurveTypeId;
+class function TLorentzPointsSet.GetCurveTypeId: TCurveTypeId;
 begin
     Result := StringToGUID('{7ca6fdaf-95b7-4d84-bcba-130c828407cc}');
 end;

@@ -35,8 +35,7 @@ type
         { Overrides method defined in TNamedPointsSet. }
         function GetCurveTypeName: string; override;
         { Overrides method defined in TNamedPointsSet. }
-        function GetCurveTypeId: TCurveTypeId; override;
-        class function GetCurveTypeId_: TCurveTypeId; override;
+        class function GetCurveTypeId: TCurveTypeId; override;
         class function GetExtremumMode: TExtremumMode; override;
     end;
 
@@ -77,12 +76,7 @@ begin
     Result := 'Gaussian';
 end;
 
-function TGaussPointsSet.GetCurveTypeId: TCurveTypeId;
-begin
-    Result := GetCurveTypeId_;
-end;
-
-class function TGaussPointsSet.GetCurveTypeId_: TCurveTypeId;
+class function TGaussPointsSet.GetCurveTypeId: TCurveTypeId;
 begin
     Result := StringToGUID('{ff4e399c-c33c-482e-84d7-952700bcd4ae}');
 end;

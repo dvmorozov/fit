@@ -117,19 +117,13 @@ end;
 
 procedure TCurveTypesSingleton.RegisterCurveType(CurveClass: TCurveClass);
 var CurveType: TCurveType;
-    Curve: TNamedPointsSet;
 begin
     CurveType := TCurveType.Create;
     CurveType.Class_ := CurveClass;
     CurveType.ExtremumMode := CurveClass.GetExtremumMode;
     CurveType.TypeId := CurveClass.GetCurveTypeId;
-    { Instantiates curve object to call its methods. }
-    Curve := CurveClass.Create(nil);
-    try
-        CurveType.Name := Curve.GetCurveTypeName;
-    finally
-        Curve.Free;
-    end;
+    CurveType.Name := CurveClass.GetCurveTypeName;
+
     FCurveTypes.Add(CurveType);
     FCurveTypes.Sort(@SortAlphabetically);
     { The first type is selected by default.

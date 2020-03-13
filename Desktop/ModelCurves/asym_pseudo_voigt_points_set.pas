@@ -40,7 +40,7 @@ type
     public
         constructor Create(AOwner: TComponent); override;
         { Overrides method defined in TNamedPointsSet. }
-        function GetCurveTypeName: string; override;
+        class function GetCurveTypeName: string; override;
         { Overrides method defined in TNamedPointsSet. }
         class function GetCurveTypeId: TCurveTypeId; override;
         class function GetExtremumMode: TExtremumMode; override;
@@ -93,7 +93,7 @@ begin
     Assert(Count = 4);
 end;
 
-function TAsymPseudoVoigtPointsSet.GetCurveTypeName: string;
+class function TAsymPseudoVoigtPointsSet.GetCurveTypeName: string;
 begin
     Result := 'Asym. Pseudo-Voigt';
 end;

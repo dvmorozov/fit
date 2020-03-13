@@ -42,7 +42,7 @@ type
     public
         constructor Create(AOwner: TComponent); override;
         { Overrides method defined in TNamedPointsSet. }
-        function GetCurveTypeName: string; override;
+        class function GetCurveTypeName: string; override;
         { Overrides method defined in TNamedPointsSet. }
         class function GetCurveTypeId: TCurveTypeId; override;
         class function GetExtremumMode: TExtremumMode; override;
@@ -103,7 +103,7 @@ begin
     Result := EtaP.Value;
 end;
 
-function TPseudoVoigtPointsSet.GetCurveTypeName: string;
+class function TPseudoVoigtPointsSet.GetCurveTypeName: string;
 begin
     Result := 'Pseudo-Voigt';
 end;

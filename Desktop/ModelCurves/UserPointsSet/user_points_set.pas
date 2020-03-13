@@ -53,7 +53,7 @@ type
     public
         procedure CopyParameters(const Dest: TObject); override;
         { Overrides method defined in TNamedPointsSet. }
-        function GetCurveTypeName: string; override;
+        class function GetCurveTypeName: string; override;
         { Overrides method defined in TNamedPointsSet. }
         class function GetCurveTypeId: TCurveTypeId; override;
         class function GetExtremumMode: TExtremumMode; override;
@@ -70,7 +70,7 @@ uses configurable_user_points_set, int_curve_factory;
 
 {=========================== TUserPointsSet ================================}
 
-function TUserPointsSet.GetCurveTypeName: string;
+class function TUserPointsSet.GetCurveTypeName: string;
 begin
     Result := 'User defined';
 end;

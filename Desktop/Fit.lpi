@@ -21,8 +21,8 @@
       <AutoIncrementBuild Value="True"/>
       <MajorVersionNr Value="1"/>
       <MinorVersionNr Value="1"/>
-      <RevisionNr Value="19"/>
-      <BuildNr Value="1431"/>
+      <RevisionNr Value="20"/>
+      <BuildNr Value="1433"/>
       <Attributes pvaDebug="True"/>
       <StringTable FileDescription="Desktop application." LegalCopyright="Dmitry Morozov" OriginalFilename="Fit" ProductName="Fit" ProductVersion="1.1.1"/>
     </VersionInfo>
@@ -135,8 +135,8 @@
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="20"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="2574"/>
-        <CursorPos X="76" Y="2591"/>
+        <TopLine Value="677"/>
+        <CursorPos X="54" Y="684"/>
         <UsageCount Value="200"/>
         <Bookmarks Count="1">
           <Item0 Y="487"/>
@@ -495,8 +495,8 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="47"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="204"/>
-        <CursorPos X="5" Y="223"/>
+        <TopLine Value="318"/>
+        <CursorPos X="28" Y="336"/>
         <UsageCount Value="245"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -576,8 +576,8 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="39"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="79"/>
-        <CursorPos X="56" Y="101"/>
+        <TopLine Value="25"/>
+        <CursorPos X="32" Y="93"/>
         <UsageCount Value="215"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -597,8 +597,8 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="37"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="55"/>
-        <CursorPos X="46" Y="79"/>
+        <TopLine Value="43"/>
+        <CursorPos X="7" Y="74"/>
         <UsageCount Value="215"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -608,8 +608,8 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="45"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="34"/>
-        <CursorPos X="48" Y="50"/>
+        <TopLine Value="14"/>
+        <CursorPos X="7" Y="45"/>
         <UsageCount Value="240"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -617,11 +617,10 @@
       <Unit51>
         <Filename Value="ModelCurves\named_points_set.pas"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="38"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="19"/>
-        <CursorPos X="5" Y="35"/>
+        <TopLine Value="31"/>
+        <CursorPos Y="50"/>
         <UsageCount Value="240"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -642,8 +641,8 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="8"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="90"/>
-        <CursorPos X="52" Y="111"/>
+        <TopLine Value="83"/>
+        <CursorPos X="7" Y="106"/>
         <UsageCount Value="239"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -673,8 +672,8 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="6"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="117"/>
-        <CursorPos X="61" Y="137"/>
+        <TopLine Value="103"/>
+        <CursorPos X="7" Y="132"/>
         <UsageCount Value="239"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -714,10 +713,11 @@
       <Unit60>
         <Filename Value="ModelCurves\curve_types_singleton.pas"/>
         <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="33"/>
         <WindowIndex Value="1"/>
         <TopLine Value="101"/>
-        <CursorPos X="17" Y="120"/>
+        <CursorPos X="24" Y="123"/>
         <UsageCount Value="213"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -745,8 +745,8 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="7"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="57"/>
-        <CursorPos X="45" Y="78"/>
+        <TopLine Value="42"/>
+        <CursorPos X="7" Y="73"/>
         <UsageCount Value="207"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -1018,7 +1018,6 @@
         <TopLine Value="92"/>
         <CursorPos X="71" Y="108"/>
         <UsageCount Value="30"/>
-        <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit89>
       <Unit90>
         <Filename Value="..\Server\FitTaskWithThread.pas"/>
@@ -1118,7 +1117,6 @@
         <TopLine Value="12915"/>
         <CursorPos X="7" Y="12923"/>
         <UsageCount Value="5"/>
-        <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit100>
       <Unit101>
         <Filename Value="..\Server\Minimizer.pas"/>
@@ -1546,124 +1544,124 @@
     </OtherDefines>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="ModelCurves\UserPointsSet\user_points_set.pas"/>
-        <Caret Line="23" Column="5" TopLine="4"/>
-      </Position1>
-      <Position2>
-        <Filename Value="..\Server\fit_server.pas"/>
-        <Caret Line="36" Column="41" TopLine="18"/>
-      </Position2>
-      <Position3>
-        <Filename Value="..\Server\fit_task.pas"/>
-        <Caret Line="25" Column="25" TopLine="6"/>
-      </Position3>
-      <Position4>
-        <Filename Value="ModelCurves\lorentz_points_set.pas"/>
-        <Caret Line="23" Column="5" TopLine="3"/>
-      </Position4>
-      <Position5>
-        <Filename Value="ModelCurves\two_branches_pseudo_voigt_points_set.pas"/>
-        <Caret Line="26" Column="5" TopLine="4"/>
-      </Position5>
-      <Position6>
-        <Filename Value="ModelCurves\asym_pseudo_voigt_points_set.pas"/>
-        <Caret Line="24" Column="5" TopLine="3"/>
-      </Position6>
-      <Position7>
-        <Filename Value="ModelCurves\pseudo_voigt_points_set.pas"/>
-        <Caret Line="26" Column="5" TopLine="4"/>
-      </Position7>
-      <Position8>
-        <Filename Value="fit_client.pas"/>
-        <Caret Line="206" Column="32" TopLine="187"/>
-      </Position8>
-      <Position9>
-        <Filename Value="fit_client.pas"/>
-        <Caret Line="25" Column="64"/>
-      </Position9>
-      <Position10>
-        <Filename Value="fit_client.pas"/>
-        <Caret Line="23"/>
-      </Position10>
-      <Position11>
-        <Filename Value="ModelCurves\named_points_set.pas"/>
-        <Caret Line="46" Column="24" TopLine="21"/>
-      </Position11>
-      <Position12>
-        <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="691" Column="49" TopLine="673"/>
-      </Position12>
-      <Position13>
         <Filename Value="ModelCurves\curve_types_singleton.pas"/>
         <Caret Line="62" Column="27" TopLine="43"/>
-      </Position13>
-      <Position14>
+      </Position1>
+      <Position2>
         <Filename Value="ModelCurves\curve_types_singleton.pas"/>
         <Caret Line="129" Column="49" TopLine="107"/>
-      </Position14>
-      <Position15>
+      </Position2>
+      <Position3>
         <Filename Value="ModelCurves\curve_types_singleton.pas"/>
         <Caret Line="125" Column="38" TopLine="106"/>
-      </Position15>
-      <Position16>
+      </Position3>
+      <Position4>
         <Filename Value="ModelCurves\named_points_set.pas"/>
         <Caret Line="50" Column="38" TopLine="27"/>
-      </Position16>
-      <Position17>
+      </Position4>
+      <Position5>
         <Filename Value="ModelCurves\named_points_set.pas"/>
         <Caret Line="74" TopLine="43"/>
-      </Position17>
-      <Position18>
+      </Position5>
+      <Position6>
         <Filename Value="ModelCurves\gauss_points_set.pas"/>
         <Caret Line="79" Column="46" TopLine="55"/>
-      </Position18>
-      <Position19>
+      </Position6>
+      <Position7>
         <Filename Value="ModelCurves\UserPointsSet\user_points_set.pas"/>
         <Caret Line="78" Column="45" TopLine="57"/>
-      </Position19>
-      <Position20>
+      </Position7>
+      <Position8>
         <Filename Value="ModelCurves\lorentz_points_set.pas"/>
         <Caret Line="50" Column="48" TopLine="34"/>
-      </Position20>
-      <Position21>
+      </Position8>
+      <Position9>
         <Filename Value="ModelCurves\two_branches_pseudo_voigt_points_set.pas"/>
         <Caret Line="137" Column="61" TopLine="117"/>
-      </Position21>
-      <Position22>
+      </Position9>
+      <Position10>
         <Filename Value="ModelCurves\pseudo_voigt_points_set.pas"/>
         <Caret Line="111" Column="52" TopLine="90"/>
-      </Position22>
-      <Position23>
+      </Position10>
+      <Position11>
         <Filename Value="ModelCurves\asym_pseudo_voigt_points_set.pas"/>
         <Caret Line="101" Column="56" TopLine="79"/>
-      </Position23>
-      <Position24>
+      </Position11>
+      <Position12>
         <Filename Value="..\Server\fit_server.pas"/>
         <Caret Line="2451" Column="74" TopLine="2432"/>
-      </Position24>
-      <Position25>
+      </Position12>
+      <Position13>
         <Filename Value="..\Server\fit_task.pas"/>
         <Caret Line="1222" Column="86" TopLine="1199"/>
-      </Position25>
-      <Position26>
+      </Position13>
+      <Position14>
         <Filename Value="..\Server\fit_task.pas"/>
         <Caret Line="1355" Column="78" TopLine="1337"/>
-      </Position26>
-      <Position27>
+      </Position14>
+      <Position15>
         <Filename Value="Forms\form_main.pas"/>
         <Caret Line="997" Column="81" TopLine="980"/>
-      </Position27>
-      <Position28>
+      </Position15>
+      <Position16>
         <Filename Value="Forms\form_main.pas"/>
         <Caret Line="1022" Column="81" TopLine="1004"/>
-      </Position28>
-      <Position29>
+      </Position16>
+      <Position17>
         <Filename Value="Forms\form_main.pas"/>
         <Caret Line="2591" Column="76" TopLine="2574"/>
-      </Position29>
-      <Position30>
+      </Position17>
+      <Position18>
         <Filename Value="ModelCurves\curve_types_singleton.pas"/>
         <Caret Line="120" Column="17" TopLine="101"/>
+      </Position18>
+      <Position19>
+        <Filename Value="ModelCurves\curve_types_singleton.pas"/>
+        <Caret Line="129" Column="46" TopLine="101"/>
+      </Position19>
+      <Position20>
+        <Filename Value="ModelCurves\named_points_set.pas"/>
+        <Caret Line="47" Column="34" TopLine="28"/>
+      </Position20>
+      <Position21>
+        <Filename Value="ModelCurves\named_points_set.pas"/>
+        <Caret Line="63" Column="42" TopLine="32"/>
+      </Position21>
+      <Position22>
+        <Filename Value="ModelCurves\named_points_set.pas"/>
+        <Caret Line="47" Column="23" TopLine="29"/>
+      </Position22>
+      <Position23>
+        <Filename Value="ModelCurves\named_points_set.pas"/>
+        <Caret Line="50" TopLine="31"/>
+      </Position23>
+      <Position24>
+        <Filename Value="ModelCurves\gauss_points_set.pas"/>
+        <Caret Line="36" Column="29" TopLine="26"/>
+      </Position24>
+      <Position25>
+        <Filename Value="ModelCurves\gauss_points_set.pas"/>
+        <Caret Line="74" Column="7" TopLine="43"/>
+      </Position25>
+      <Position26>
+        <Filename Value="ModelCurves\UserPointsSet\user_points_set.pas"/>
+        <Caret Line="56" Column="37" TopLine="37"/>
+      </Position26>
+      <Position27>
+        <Filename Value="ModelCurves\UserPointsSet\user_points_set.pas"/>
+        <Caret Line="73" Column="7" TopLine="42"/>
+      </Position27>
+      <Position28>
+        <Filename Value="ModelCurves\lorentz_points_set.pas"/>
+        <Caret Line="45" Column="7" TopLine="14"/>
+      </Position28>
+      <Position29>
+        <Filename Value="ModelCurves\two_branches_pseudo_voigt_points_set.pas"/>
+        <Caret Line="132" Column="7" TopLine="103"/>
+      </Position29>
+      <Position30>
+        <Filename Value="ModelCurves\pseudo_voigt_points_set.pas"/>
+        <Caret Line="106" Column="7" TopLine="83"/>
       </Position30>
     </JumpHistory>
   </ProjectOptions>

@@ -44,7 +44,7 @@ type
     public
         constructor Create(AOwner: TComponent); override;
         { Overrides method defined in TNamedPointsSet. }
-        function GetCurveTypeName: string; override;
+        class function GetCurveTypeName: string; override;
         { Overrides method defined in TNamedPointsSet. }
         class function GetCurveTypeId: TCurveTypeId; override;
         class function GetExtremumMode: TExtremumMode; override;
@@ -129,7 +129,7 @@ begin
     Result := SigmaRightP.Value;
 end;
 
-function T2BranchesPseudoVoigtPointsSet.GetCurveTypeName: string;
+class function T2BranchesPseudoVoigtPointsSet.GetCurveTypeName: string;
 begin
     Result := '2 br. Pseudo-Voigt';
 end;

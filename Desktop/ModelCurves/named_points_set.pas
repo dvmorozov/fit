@@ -41,17 +41,13 @@ type
         { Sets name of curve type. The method is used in deserializing
           objects received from server. }
         procedure SetCurveTypeName(Name: string); virtual;
-        { Returns name of curve type. It's better to use function
-          instead of property because property assumes storing data
-          in object, but storing any data is not necessary in this case. }
-        function GetCurveTypeName: string; virtual;
-        { Abstract method returning unique type identifier. }
+        { Returns unique name of curve type. }
+        class function GetCurveTypeName: string; virtual; abstract;
+        { Returns unique type identifier. }
         class function GetCurveTypeId: TCurveTypeId; virtual; abstract;
         { Returns algorithm of searching of extremum points. }
         class function GetExtremumMode: TExtremumMode; virtual; abstract;
-
-        class function GetConfigurablePointsSet:
-            TConfigurablePointsSetClass; virtual;
+        class function GetConfigurablePointsSet: TConfigurablePointsSetClass; virtual;
     end;
 
 implementation
@@ -59,11 +55,6 @@ implementation
 uses non_configurable_points_set;
 
 {============================ TNamedPointsSet =================================}
-
-function TNamedPointsSet.GetCurveTypeName: string;
-begin
-    Result := FName;
-end;
 
 procedure TNamedPointsSet.SetCurveTypeName(Name: string);
 begin

@@ -30,7 +30,7 @@ type
 
     public
         { Overrides method defined in TNamedPointsSet. }
-        function GetCurveTypeName: string; override;
+        class function GetCurveTypeName: string; override;
         { Overrides method defined in TNamedPointsSet. }
         class function GetCurveTypeId: TCurveTypeId; override;
         class function GetExtremumMode: TExtremumMode; override;
@@ -42,7 +42,7 @@ uses int_curve_factory;
 
 {========================== TLorentzPointsSet =================================}
 
-function TLorentzPointsSet.GetCurveTypeName: string;
+class function TLorentzPointsSet.GetCurveTypeName: string;
 begin
     Result := 'Lorentzian';
 end;

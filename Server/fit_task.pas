@@ -22,11 +22,11 @@ interface
 uses
     Classes, SysUtils, points_set, curve_points_set, self_copied_component,
     int_minimizer, simple_minimizer, downhill_simplex_minimizer,
-    mscr_specimen_list, int_points_set, lorentz_points_set, gauss_points_set,
+    mscr_specimen_list, lorentz_points_set, gauss_points_set,
     two_branches_pseudo_voigt_points_set, asym_pseudo_voigt_points_set,
     user_points_set, pseudo_voigt_points_set, special_curve_parameter,
     persistent_curve_parameter_container, persistent_curve_parameters, log,
-    curve_types_singleton, int_curve_type_selector;
+    curve_types_singleton, int_curve_type_selector, named_points_set;
 
 type
     { Fits profile interval by model curves (specimens).
@@ -1154,27 +1154,27 @@ var i: LongInt;
     SelectedCurveTypeId: TCurveTypeId;
 begin
     SelectedCurveTypeId := FCurveTypeSelector.GetSelectedCurveType;
-    if IsEqualGUID(SelectedCurveTypeId, TLorentzPointsSet.GetCurveTypeId_) then
+    if IsEqualGUID(SelectedCurveTypeId, TLorentzPointsSet.GetCurveTypeId) then
     begin
         Result := TLorentzPointsSet.Create(nil);
     end
     else
-    if IsEqualGUID(SelectedCurveTypeId, TGaussPointsSet.GetCurveTypeId_) then
+    if IsEqualGUID(SelectedCurveTypeId, TGaussPointsSet.GetCurveTypeId) then
     begin
         Result := TGaussPointsSet.Create(nil)
     end
     else
-    if IsEqualGUID(SelectedCurveTypeId, TPseudoVoigtPointsSet.GetCurveTypeId_) then
+    if IsEqualGUID(SelectedCurveTypeId, TPseudoVoigtPointsSet.GetCurveTypeId) then
     begin
         Result := TPseudoVoigtPointsSet.Create(nil)
     end
     else
-    if IsEqualGUID(SelectedCurveTypeId, TAsymPseudoVoigtPointsSet.GetCurveTypeId_) then
+    if IsEqualGUID(SelectedCurveTypeId, TAsymPseudoVoigtPointsSet.GetCurveTypeId) then
     begin
         Result := TAsymPseudoVoigtPointsSet.Create(nil)
     end
     else
-    if IsEqualGUID(SelectedCurveTypeId, TUserPointsSet.GetCurveTypeId_) then
+    if IsEqualGUID(SelectedCurveTypeId, TUserPointsSet.GetCurveTypeId) then
     begin
 {$IFDEF _WINDOWS}
         Result := TUserPointsSet.Create(nil);
@@ -1184,7 +1184,7 @@ begin
 {$ENDIF}
     end
     else
-    if IsEqualGUID(SelectedCurveTypeId, T2BranchesPseudoVoigtPointsSet.GetCurveTypeId_) then
+    if IsEqualGUID(SelectedCurveTypeId, T2BranchesPseudoVoigtPointsSet.GetCurveTypeId) then
     begin
         Result := T2BranchesPseudoVoigtPointsSet.Create(nil);
     end;
@@ -1352,7 +1352,7 @@ begin
             //  teper' sozdaetsya ekzemplyar tol'ko
             //  pol'zovatel'skoy krivoy, kotoraya ne
             //  imeet parametra polozheniya
-            if IsEqualGUID(SelectedCurveTypeId, TUserPointsSet.GetCurveTypeId_) then
+            if IsEqualGUID(SelectedCurveTypeId, TUserPointsSet.GetCurveTypeId) then
             begin
                 Curve := CreatePatternInstance;
 

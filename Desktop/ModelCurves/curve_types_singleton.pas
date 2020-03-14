@@ -19,8 +19,8 @@ unit curve_types_singleton;
 
 interface
 
-uses Classes, SysUtils, named_points_set, int_points_set,
-  int_curve_factory, int_curve_type_selector, int_curve_type_iterator, crc;
+uses Classes, SysUtils, named_points_set, int_curve_factory,
+    int_curve_type_selector, int_curve_type_iterator, crc;
 
 type
     { ENotImplementd isn't supported by Lazarus 0.9.24. It is used
@@ -117,19 +117,13 @@ end;
 
 procedure TCurveTypesSingleton.RegisterCurveType(CurveClass: TCurveClass);
 var CurveType: TCurveType;
-    Curve: TNamedPointsSet;
 begin
     CurveType := TCurveType.Create;
     CurveType.Class_ := CurveClass;
     CurveType.ExtremumMode := CurveClass.GetExtremumMode;
-    { Instantiates curve object to call its methods. }
-    Curve := CurveClass.Create(nil);
-    try
-        CurveType.Name := Curve.GetCurveTypeName;
-        CurveType.TypeId := Curve.GetCurveTypeId;
-    finally
-        Curve.Free;
-    end;
+    CurveType.TypeId := CurveClass.GetCurveTypeId;
+    CurveType.Name := CurveClass.GetCurveTypeName;
+
     FCurveTypes.Add(CurveType);
     FCurveTypes.Sort(@SortAlphabetically);
     { The first type is selected by default.

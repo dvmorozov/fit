@@ -84,11 +84,11 @@
     <coordinates>
       <x>329</x>
       <y>210</y>
-      <w>315</w>
+      <w>301</w>
       <h>126</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>430.0;10.0;430.0;110.0;10.0;110.0;10.0;160.0</additional_attributes>
+    <additional_attributes>410.0;10.0;410.0;90.0;10.0;90.0;10.0;160.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -99,9 +99,6 @@
       <h>63</h>
     </coordinates>
     <panel_attributes>TNamedPointsSet
---
--FCurveTypeId: TCurveTypeId
--FCurveTypeName: string
 --
 </panel_attributes>
     <additional_attributes/>
@@ -126,7 +123,7 @@
       <h>126</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;110.0;440.0;110.0;440.0;160.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0;440.0;90.0;440.0;160.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -351,35 +348,6 @@ GetSelectedCurveType: TCurveTypeId</panel_attributes>
     <additional_attributes>10.0;10.0;60.0;10.0;60.0;40.0;110.0;40.0</additional_attributes>
   </element>
   <element>
-    <id>UMLInterface</id>
-    <coordinates>
-      <x>791</x>
-      <y>7</y>
-      <w>210</w>
-      <h>119</h>
-    </coordinates>
-    <panel_attributes>IPointsSet
---
-GetCurveTypeId: TCurveTypeId
-SetCurveTypeId(CurveTypeId: TCurveTypeId)
-GetCurveTypeName: string
-SetCurveTypeName(TypeName: string)
-GetCurveTypeTag: Integer
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>707</x>
-      <y>98</y>
-      <w>203</w>
-      <h>70</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>270.0;10.0;270.0;60.0;10.0;60.0;10.0;80.0</additional_attributes>
-  </element>
-  <element>
     <id>UMLNote</id>
     <coordinates>
       <x>854</x>
@@ -407,31 +375,6 @@ internal list.</panel_attributes>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>430.0;150.0;430.0;110.0;10.0;110.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>854</x>
-      <y>154</y>
-      <w>98</w>
-      <h>63</h>
-    </coordinates>
-    <panel_attributes>Defines methods
-allowing to get 
-information about
-curve type.</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>903</x>
-      <y>91</y>
-      <w>21</w>
-      <h>77</h>
-    </coordinates>
-    <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>

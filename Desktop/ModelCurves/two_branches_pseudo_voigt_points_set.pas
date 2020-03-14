@@ -20,10 +20,10 @@ unit two_branches_pseudo_voigt_points_set;
 interface
 
 uses
-    Classes, SysUtils, int_points_set, points_set, named_points_set,
-    curve_points_set, curve_types_singleton, special_curve_parameter,
-    amplitude_curve_parameter, sigma_curve_parameter, position_curve_parameter,
-    eta_curve_parameter, SimpMath;
+    Classes, SysUtils, points_set, named_points_set, curve_points_set,
+    curve_types_singleton, special_curve_parameter, amplitude_curve_parameter,
+    sigma_curve_parameter, position_curve_parameter, eta_curve_parameter,
+    SimpMath;
 
 type
     { Pseudo-Voigt curve having different form parameters for
@@ -44,10 +44,9 @@ type
     public
         constructor Create(AOwner: TComponent); override;
         { Overrides method defined in TNamedPointsSet. }
-        function GetCurveTypeName: string; override;
+        class function GetCurveTypeName: string; override;
         { Overrides method defined in TNamedPointsSet. }
-        function GetCurveTypeId: TCurveTypeId; override;
-        class function GetCurveTypeId_: TCurveTypeId; override;
+        class function GetCurveTypeId: TCurveTypeId; override;
         class function GetExtremumMode: TExtremumMode; override;
 
         property SigmaRight: Double read GetSigmaRight;
@@ -130,17 +129,12 @@ begin
     Result := SigmaRightP.Value;
 end;
 
-function T2BranchesPseudoVoigtPointsSet.GetCurveTypeName: string;
+class function T2BranchesPseudoVoigtPointsSet.GetCurveTypeName: string;
 begin
     Result := '2 br. Pseudo-Voigt';
 end;
 
-function T2BranchesPseudoVoigtPointsSet.GetCurveTypeId: TCurveTypeId;
-begin
-    Result := GetCurveTypeId_;
-end;
-
-class function T2BranchesPseudoVoigtPointsSet.GetCurveTypeId_: TCurveTypeId;
+class function T2BranchesPseudoVoigtPointsSet.GetCurveTypeId: TCurveTypeId;
 begin
     Result := StringToGUID('{6de06c1b-e51a-48c6-b036-c81a841ec468}');
 end;

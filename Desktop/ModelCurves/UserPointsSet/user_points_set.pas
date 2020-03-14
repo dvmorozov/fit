@@ -20,7 +20,7 @@ unit user_points_set;
 interface
 
 uses SysUtils, curve_points_set, named_points_set, curve_types_singleton,
-    int_points_set, configurable_points_set
+    configurable_points_set
 {$IFDEF _WINDOWS}
     , points_set, special_curve_parameter
     , Windows
@@ -53,10 +53,9 @@ type
     public
         procedure CopyParameters(const Dest: TObject); override;
         { Overrides method defined in TNamedPointsSet. }
-        function GetCurveTypeName: string; override;
+        class function GetCurveTypeName: string; override;
         { Overrides method defined in TNamedPointsSet. }
-        function GetCurveTypeId: TCurveTypeId; override;
-        class function GetCurveTypeId_: TCurveTypeId; override;
+        class function GetCurveTypeId: TCurveTypeId; override;
         class function GetExtremumMode: TExtremumMode; override;
 
         class function GetConfigurablePointsSet:
@@ -71,17 +70,12 @@ uses configurable_user_points_set, int_curve_factory;
 
 {=========================== TUserPointsSet ================================}
 
-function TUserPointsSet.GetCurveTypeName: string;
+class function TUserPointsSet.GetCurveTypeName: string;
 begin
     Result := 'User defined';
 end;
 
-function TUserPointsSet.GetCurveTypeId: TCurveTypeId;
-begin
-    Result := GetCurveTypeId_;
-end;
-
-class function TUserPointsSet.GetCurveTypeId_: TCurveTypeId;
+class function TUserPointsSet.GetCurveTypeId: TCurveTypeId;
 begin
     Result := StringToGUID('{d8cafce5-8b03-4cce-9e93-ea28acb8e7ca}');
 end;

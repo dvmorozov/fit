@@ -24,10 +24,9 @@ uses
     ExtCtrls, StdCtrls, Menus, points_set, fit_viewer, ComCtrls,
     fit_client, NumericGrid, CheckLst, mscr_specimen_list, LResources, TAGraph,
     ActnList, app_settings, Laz_XMLCfg, common_types, neutron_points_set,
-    int_points_set, curve_points_set, user_points_set, gauss_points_set,
-    pseudo_voigt_points_set, asym_pseudo_voigt_points_set, lorentz_points_set,
-    two_branches_pseudo_voigt_points_set, named_points_set,
-    log
+    curve_points_set, user_points_set, gauss_points_set,
+    asym_pseudo_voigt_points_set, lorentz_points_set, pseudo_voigt_points_set,
+    two_branches_pseudo_voigt_points_set, named_points_set, log
 {$IFDEF _WINDOWS}
     , MyExceptions, Windows
 {$ENDIF}
@@ -995,7 +994,7 @@ begin
     begin
         NamedPointsSetClass := NamedPointsSetClasses[i];
         if TMenuItem(Sender).Tag =
-            CurveTypeIterator.GetCurveTypeTag(NamedPointsSetClass.GetCurveTypeId_) then
+            CurveTypeIterator.GetCurveTypeTag(NamedPointsSetClass.GetCurveTypeId) then
         begin
             if NamedPointsSetClass.GetConfigurablePointsSet.HasConfigurableParameters then
                 if not NamedPointsSetClass.GetConfigurablePointsSet.ShowConfigurationDialog then
@@ -1020,7 +1019,7 @@ begin
 {$IFNDEF FIT}
             FitClientApp_.FitClient.CurveTypeId := NamedPointsSetClass.GetCurveTypeId_;
 {$ENDIF}
-            CurveTypeSelector.SelectCurveType(NamedPointsSetClass.GetCurveTypeId_);
+            CurveTypeSelector.SelectCurveType(NamedPointsSetClass.GetCurveTypeId);
             Break;
         end
     end;
@@ -2589,7 +2588,7 @@ begin
             FitClientApp_.FitClient.CurveTypeId :=
                 TUserPointsSet.GetCurveTypeId_;
 {$ENDIF}
-            CurveTypeSelector.SelectCurveType(TUserPointsSet.GetCurveTypeId_);
+            CurveTypeSelector.SelectCurveType(TUserPointsSet.GetCurveTypeId);
             Break;
         end;
     end;

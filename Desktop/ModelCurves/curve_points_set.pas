@@ -64,7 +64,7 @@ type
         procedure SetSpecParamPtr(Parameter: TSpecialCurveParameter); virtual;
 
     protected
-        Modified: Boolean;
+        FRecalculate: Boolean;
 
         procedure AddParameter(Parameter: TSpecialCurveParameter);
         { Performs recalculation of all profile points. }
@@ -152,7 +152,7 @@ constructor TCurvePointsSet.Create(AOwner: TComponent);
 begin
     inherited;
     FParams := Curve_parameters.Create(nil);
-    Modified := True;
+    FRecalculate := True;
 end;
 
 destructor TCurvePointsSet.Destroy;
@@ -164,10 +164,10 @@ end;
 
 procedure TCurvePointsSet.ReCalc(const Intervals: TPointsSet);
 begin
-    if Modified then
+    if FRecalculate then
     begin
         DoCalc(Intervals);
-        Modified := False;
+        FRecalculate := False;
     end;
 end;
 
@@ -214,7 +214,7 @@ procedure TCurvePointsSet.SetVariableValue(Index: LongInt; Value: Double);
 var Parameter: TSpecialCurveParameter;
 begin
     Assert((Index < GetVariableCount) and (Index >= 0));
-    Modified := True;
+    FRecalculate := True;
     Parameter := TSpecialCurveParameter(FVariableParameters.Items[Index]);
     Parameter.Value := Value;
 end;
@@ -235,7 +235,7 @@ end;
 
 procedure TCurvePointsSet.SetValueByName(Name: string; Value: Double);
 begin
-    Modified := True;
+    FRecalculate := True;
     FParams.ValuesByName[Name] := Value;
 end;
 
@@ -247,14 +247,14 @@ end;
 procedure TCurvePointsSet.Setx0(Value: Double);
 begin
     Assert(Assigned(PositionP));
-    Modified := True;
+    FRecalculate := True;
     PositionP.Value := Value;
 end;
 
 procedure TCurvePointsSet.SetA(Value: Double);
 begin
     Assert(Assigned(AmplitudeP));
-    Modified := True;
+    FRecalculate := True;
     AmplitudeP.Value := Value;
 end;
 
@@ -356,7 +356,7 @@ begin
         Parameter := FParams[i];
         Parameter.Value := Parameter.SavedValue;
     end;
-    Modified := True;
+    FRecalculate := True;
 end;
 
 procedure TCurvePointsSet.SetParameters(AParams: Curve_parameters);

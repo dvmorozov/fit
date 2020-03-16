@@ -1174,16 +1174,16 @@ begin
         Result := TAsymPseudoVoigtPointsSet.Create(nil)
     end
     else
+{$IFDEF _WINDOWS}
     if IsEqualGUID(SelectedCurveTypeId, TUserPointsSet.GetCurveTypeId) then
     begin
-{$IFDEF _WINDOWS}
         Result := TUserPointsSet.Create(nil);
         TUserPointsSet(Result).Expression := FCurveExpr;
         TUserPointsSet(Result).SetParameters(
             Curve_parameters(Params.GetCopy));
-{$ENDIF}
     end
     else
+{$ENDIF}
     if IsEqualGUID(SelectedCurveTypeId, T2BranchesPseudoVoigtPointsSet.GetCurveTypeId) then
     begin
         Result := T2BranchesPseudoVoigtPointsSet.Create(nil);

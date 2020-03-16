@@ -2586,7 +2586,7 @@ begin
                 ct.Expression, ct.Parameters);
 {$IFNDEF FIT}
             FitClientApp_.FitClient.CurveTypeId :=
-                TUserPointsSet.GetCurveTypeId_;
+                TUserPointsSet.GetCurveTypeId;
 {$ENDIF}
             CurveTypeSelector.SelectCurveType(TUserPointsSet.GetCurveTypeId);
             Break;

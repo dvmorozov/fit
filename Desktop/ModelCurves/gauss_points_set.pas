@@ -39,10 +39,10 @@ type
         class function GetExtremumMode: TExtremumMode; override;
     end;
 
-    ValuePair = class(TObject)
+    TValuePair = class(TObject)
     public
-      X: double;
-      Y: double;
+        X: double;
+        Y: double;
     end;
 
 implementation
@@ -154,9 +154,9 @@ end;
 
 function ComparePairs(Item1, Item2: Pointer): Integer;
 begin
-    if ValuePair(Item1).X < ValuePair(Item2).X then Result := -1
+    if TValuePair(Item1).X < TValuePair(Item2).X then Result := -1
     else
-      if ValuePair(Item1).X > ValuePair(Item2).X then Result := 1
+      if TValuePair(Item1).X > TValuePair(Item2).X then Result := 1
       else Result := 0;
 end;
 

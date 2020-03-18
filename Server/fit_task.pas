@@ -728,7 +728,7 @@ end;
 
 procedure TFitTask.CalculateProfile;
 var i: LongInt;
-    PS: TCurvePointsSet;
+    Curve: TCurvePointsSet;
     RestoreBackground: Boolean;
 begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
@@ -738,8 +738,8 @@ begin
 
     for i := 0 to CurvesList.Count - 1 do
     begin
-        PS := TCurvePointsSet(CurvesList.Items[i]);
-        PS.ReCalc(nil);
+        Curve := TCurvePointsSet(CurvesList.Items[i]);
+        Curve.ReCalc(nil);
     end;
     //  raschet tochek fona
     RestoreBackground := False;

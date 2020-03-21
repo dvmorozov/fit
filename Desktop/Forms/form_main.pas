@@ -24,11 +24,11 @@ uses
     ExtCtrls, StdCtrls, Menus, points_set, fit_viewer, ComCtrls,
     fit_client, NumericGrid, CheckLst, mscr_specimen_list, LResources, TAGraph,
     ActnList, app_settings, Laz_XMLCfg, common_types, neutron_points_set,
-    curve_points_set, user_points_set, gauss_points_set,
-    asym_pseudo_voigt_points_set, lorentz_points_set, pseudo_voigt_points_set,
+    curve_points_set, gauss_points_set, asym_pseudo_voigt_points_set,
+    lorentz_points_set, pseudo_voigt_points_set,
     two_branches_pseudo_voigt_points_set, named_points_set, log
 {$IFDEF _WINDOWS}
-    , MyExceptions, Windows
+    , user_points_set, MyExceptions, Windows
 {$ENDIF}
     ;
 

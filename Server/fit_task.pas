@@ -28,7 +28,9 @@ uses
     persistent_curve_parameter_container, persistent_curve_parameters, log,
     int_curve_type_selector, named_points_set
 {$IFDEF _WINDOWS}
+{$IFDEF WINDOWS_SPECIFIC}
     , user_points_set
+{$ENDIF}
 {$ENDIF}
     ;
 
@@ -1178,7 +1180,7 @@ begin
         Result := TAsymPseudoVoigtPointsSet.Create(nil)
     end
     else
-{$IFDEF _WINDOWS}
+{$IFDEF WINDOWS_SPECIFIC}
     if IsEqualGUID(SelectedCurveTypeId, TUserPointsSet.GetCurveTypeId) then
     begin
         Result := TUserPointsSet.Create(nil);
@@ -1356,6 +1358,7 @@ begin
             //  teper' sozdaetsya ekzemplyar tol'ko
             //  pol'zovatel'skoy krivoy, kotoraya ne
             //  imeet parametra polozheniya
+{$IFDEF WINDOWS_SPECIFIC}
             if IsEqualGUID(SelectedCurveTypeId, TUserPointsSet.GetCurveTypeId) then
             begin
                 Curve := CreatePatternInstance;
@@ -1388,6 +1391,7 @@ begin
                     raise;
                 end;
             end;
+{$ENDIF}
         end //  if CurvePositions.PointsCount = 0
         else
         begin

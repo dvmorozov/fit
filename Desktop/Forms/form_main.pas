@@ -28,7 +28,10 @@ uses
     lorentz_points_set, pseudo_voigt_points_set,
     two_branches_pseudo_voigt_points_set, named_points_set, log
 {$IFDEF _WINDOWS}
-    , user_points_set, MyExceptions, Windows
+{$IFDEF WINDOWS_SPECIFIC}
+    , user_points_set
+{$ENDIF}
+    , MyExceptions, Windows
 {$ENDIF}
     ;
 
@@ -980,10 +983,20 @@ var
     CurveTypeIterator: ICurveTypeIterator;
     CurveTypeSelector: ICurveTypeSelector;
 
-    NamedPointsSetClasses: array[1..6] of TNamedPointsSetClass = (
+    NamedPointsSetClasses: array[1..
+{$IFDEF WINDOWS_SPECIFIC}
+    6
+{$ELSE}
+    5
+{$ENDIF}
+    ] of TNamedPointsSetClass = (
         TGaussPointsSet, TLorentzPointsSet,
         TPseudoVoigtPointsSet, TAsymPseudoVoigtPointsSet,
-        T2BranchesPseudoVoigtPointsSet, TUserPointsSet);
+        T2BranchesPseudoVoigtPointsSet
+{$IFDEF WINDOWS_SPECIFIC}
+        , TUserPointsSet
+{$ENDIF}
+        );
     i: Integer;
     NamedPointsSetClass: TNamedPointsSetClass;
 begin
@@ -2564,13 +2577,16 @@ begin
 end;
 
 procedure TFormMain.OnUserCurveClick(Sender: TObject);
+{$IFDEF WINDOWS_SPECIFIC}
 var
     i: LongInt;
     ct: Curve_type;
     mi: TMenuItem;
     Tag: LongInt;
     CurveTypeSelector: ICurveTypeSelector;
+{$ENDIF}
 begin
+{$IFDEF WINDOWS_SPECIFIC}
     CurveTypeSelector := TCurveTypesSingleton.CreateCurveTypeSelector;
 
     mi := TMenuItem(Sender);
@@ -2592,6 +2608,7 @@ begin
             Break;
         end;
     end;
+{$ENDIF}
 end;
 
 procedure TFormMain.CreateUserCurveMenus;

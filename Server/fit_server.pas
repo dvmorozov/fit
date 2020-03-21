@@ -43,7 +43,10 @@ uses Classes, title_points_set, SelfCheckedComponentList, SysUtils,
     self_copied_component, MyExceptions, fit_task, SimpMath,
     common_types, int_client_callback, int_fit_service
 {$IFDEF _WINDOWS}
-    , user_points_set, user_curve_parameter, Windows
+{$IFDEF WINDOWS_SPECIFIC}
+    , user_points_set
+{$ENDIF}
+    , user_curve_parameter, Windows
 {$ENDIF};
 
 type
@@ -2638,9 +2641,11 @@ begin
             end;
             // ustanovka dop. parametrov
             FitTask.MaxRFactor := MaxRFactor;
+{$IFDEF WINDOWS_SPECIFIC}
             if IsEqualGUID(CurveTypeId, TUserPointsSet.GetCurveTypeId) then
                 FitTask.SetSpecialCurve(FCurveExpr,
                     Curve_parameters(Params.GetCopy));
+{$ENDIF}
             FitTask.ServerShowCurMin := ShowCurMinInternal;
             FitTask.ServerDoneProc   := DoneProc;
 

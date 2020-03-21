@@ -21,13 +21,16 @@ interface
 
 uses SysUtils
 {$IFDEF _WINDOWS}
+{$IFDEF WINDOWS_SPECIFIC}
     , curve_points_set, named_points_set, curve_types_singleton
     , configurable_points_set, points_set, special_curve_parameter
     , Windows
 {$ENDIF}
+{$ENDIF}
     ;
 
 {$IFDEF _WINDOWS}
+{$IFDEF WINDOWS_SPECIFIC}
 function ParseAndCalcExpression(Expr: LPCSTR; ParamList: LPCSTR;
     Result: PDouble): LongInt; cdecl;
     external 'MathExpr' name 'ParseAndCalcExpression';
@@ -61,10 +64,12 @@ type
         property Expression: string read FExpression write FExpression;
     end;
 {$ENDIF}
+{$ENDIF}
     
 implementation
 
 {$IFDEF _WINDOWS}
+{$IFDEF WINDOWS_SPECIFIC}
 uses configurable_user_points_set, int_curve_factory;
 
 class function TUserPointsSet.GetCurveTypeName: string;
@@ -144,6 +149,7 @@ var CTS: ICurveFactory;
 initialization
     CTS := TCurveTypesSingleton.CreateCurveFactory;
     CTS.RegisterCurveType(TUserPointsSet);
+{$ENDIF}
 {$ENDIF}
 end.
 

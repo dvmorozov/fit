@@ -8,10 +8,16 @@
 ------------------------------------------------------------------------------------------------------------------------}
 unit vectors;
 
+{$IF NOT DEFINED(FPC)}
+{$DEFINE _WINDOWS}
+{$ELSEIF DEFINED(WINDOWS)}
+{$DEFINE _WINDOWS}
+{$ENDIF}
+
 interface
 
 uses SysUtils, Classes, SimpMath
-{$IFNDEF Lazarus}
+{$IFDEF _WINDOWS}
     , Windows
 {$ENDIF};
 
@@ -76,7 +82,7 @@ function WithGivenAccuracy(
     Decimals: LongInt): Double;
 { Returns substring of command line string excluding path to executable
   enclosed in quotation marks. }
-{$IFNDEF Lazarus}
+{$IFDEF _WINDOWS}
 { Delphi specific function. }
 function GetCmdLineParameters: string;
 {$ENDIF}
@@ -160,11 +166,11 @@ var
     SavedDecimalSeparator: Char;
 begin
     SavedDecimalSeparator :=
-{$IFNDEF Lazarus}
+{$IF NOT DEFINED(FPC)}
         FormatSettings.
 {$ENDIF}
-        DecimalSeparator;
-    {$IFNDEF Lazarus}
+            DecimalSeparator;
+{$IF NOT DEFINED(FPC)}
     FormatSettings.
 {$ENDIF}
         DecimalSeparator := '.';
@@ -182,7 +188,7 @@ begin
         St := St + FloatToStr(Vect[3]);
     end;
     St := St + ')';
-    {$IFNDEF Lazarus}
+{$IF NOT DEFINED(FPC)}
     FormatSettings.
 {$ENDIF}
         DecimalSeparator := SavedDecimalSeparator;
@@ -233,7 +239,7 @@ begin
     Result := TempLong / PowerOf10;
 end;
 
-{$IFNDEF Lazarus}
+{$IFDEF _WINDOWS}
 function GetCmdLineParameters: string;
 var
     St: string;
@@ -485,14 +491,14 @@ var
 begin
     ErrorCode := CALC_NO_ERRORS;
     SaveDecimalSeparator :=
-{$IFNDEF Lazarus}
+{$IF NOT DEFINED(FPC)}
         FormatSettings.
 {$ENDIF}
-        DecimalSeparator;
-    {$IFNDEF Lazarus}
-    FormatSettings.
+            DecimalSeparator;
+{$IF NOT DEFINED(FPC)}
+        FormatSettings.
 {$ENDIF}
-        DecimalSeparator := '.';
+            DecimalSeparator := '.';
     MakeAllOper(Expression, ['*', '/'], ErrorCode, ParamRequest);
     MakeAllOper(Expression, ['+', '-'], ErrorCode, ParamRequest);
     try
@@ -518,7 +524,7 @@ begin
             Exit;
         end;
     end;
-    {$IFNDEF Lazarus}
+{$IF NOT DEFINED(FPC)}
     FormatSettings.
 {$ENDIF}
         DecimalSeparator := SaveDecimalSeparator;
@@ -535,11 +541,11 @@ var
 begin
     ErrorCode := CALC_NO_ERRORS;
     SaveDecimalSeparator :=
-{$IFNDEF Lazarus}
+{$IF NOT DEFINED(FPC)}
         FormatSettings.
 {$ENDIF}
-        DecimalSeparator;
-    {$IFNDEF Lazarus}
+            DecimalSeparator;
+{$IF NOT DEFINED(FPC)}
     FormatSettings.
 {$ENDIF}
         DecimalSeparator := '.';
@@ -561,7 +567,7 @@ begin
         end;
     until Index = -1;
     Result := CalculateSimpExpr(Expression, ErrorCode, ParamRequest);
-    {$IFNDEF Lazarus}
+{$IF NOT DEFINED(FPC)}
     FormatSettings.
 {$ENDIF}
         DecimalSeparator := SaveDecimalSeparator;

@@ -19,15 +19,18 @@ unit user_points_set;
 
 interface
 
-uses SysUtils, curve_points_set, named_points_set, curve_types_singleton,
-    configurable_points_set
+uses SysUtils
 {$IFDEF _WINDOWS}
-    , points_set, special_curve_parameter
+{$IFDEF WINDOWS_SPECIFIC}
+    , curve_points_set, named_points_set, curve_types_singleton
+    , configurable_points_set, points_set, special_curve_parameter
     , Windows
+{$ENDIF}
 {$ENDIF}
     ;
 
 {$IFDEF _WINDOWS}
+{$IFDEF WINDOWS_SPECIFIC}
 function ParseAndCalcExpression(Expr: LPCSTR; ParamList: LPCSTR;
     Result: PDouble): LongInt; cdecl;
     external 'MathExpr' name 'ParseAndCalcExpression';
@@ -35,7 +38,6 @@ function GetSymbols: LPCSTR; cdecl;
     external 'MathExpr' name 'GetSymbols';
 procedure FreeSymbols(Symbols: LPCSTR); cdecl;
     external 'MathExpr' name 'FreeSymbols';
-{$ENDIF}
 
 type
     { Container for points of user curve given as expression. }
@@ -43,12 +45,10 @@ type
     protected
         { Expression given in general text form. }
         FExpression: string;
-{$IFDEF _WINDOWS}
         { Performs recalculation of all points of function. }
         procedure DoCalc(const Intervals: TPointsSet); override;
         { Performs calculation of function value for given value of argument. }
         function CalcValue(ArgValue: Double): Double;
-{$ENDIF}
 
     public
         procedure CopyParameters(const Dest: TObject); override;
@@ -63,12 +63,14 @@ type
 
         property Expression: string read FExpression write FExpression;
     end;
+{$ENDIF}
+{$ENDIF}
     
 implementation
 
+{$IFDEF _WINDOWS}
+{$IFDEF WINDOWS_SPECIFIC}
 uses configurable_user_points_set, int_curve_factory;
-
-{=========================== TUserPointsSet ================================}
 
 class function TUserPointsSet.GetCurveTypeName: string;
 begin
@@ -85,7 +87,6 @@ begin
     Result := MaximumsAndMinimums;
 end;
 
-{$IFDEF _WINDOWS}
 function TUserPointsSet.CalcValue(ArgValue: Double): Double;
 var P: TSpecialCurveParameter;
     Prs: string;
@@ -131,7 +132,6 @@ begin
             PointYCoord[j] := CalcValue(PointXCoord[j]);
     end;
 end;
-{$ENDIF}
 
 procedure TUserPointsSet.CopyParameters(const Dest: TObject);
 begin
@@ -149,5 +149,7 @@ var CTS: ICurveFactory;
 initialization
     CTS := TCurveTypesSingleton.CreateCurveFactory;
     CTS.RegisterCurveType(TUserPointsSet);
+{$ENDIF}
+{$ENDIF}
 end.
 

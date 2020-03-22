@@ -26,7 +26,7 @@ uses
     two_branches_pseudo_voigt_points_set, asym_pseudo_voigt_points_set,
     pseudo_voigt_points_set, special_curve_parameter, curve_types_singleton,
     persistent_curve_parameter_container, persistent_curve_parameters, log,
-    int_curve_type_selector, named_points_set
+    int_curve_type_selector, named_points_set, typinfo
 {$IFDEF _WINDOWS}
 {$IFDEF WINDOWS_SPECIFIC}
     , user_points_set
@@ -744,7 +744,7 @@ begin
 
     for i := 0 to CurvesList.Count - 1 do
     begin
-        Curve := TCurvePointsSet(CurvesList.Items[i]);
+        Curve := CurvesList.Items[i] as TCurvePointsSet;
         Curve.ReCalc(nil);
     end;
     //  raschet tochek fona
@@ -1167,17 +1167,17 @@ begin
     else
     if IsEqualGUID(SelectedCurveTypeId, TGaussPointsSet.GetCurveTypeId) then
     begin
-        Result := TGaussPointsSet.Create(nil)
+        Result := TGaussPointsSet.Create(nil);
     end
     else
     if IsEqualGUID(SelectedCurveTypeId, TPseudoVoigtPointsSet.GetCurveTypeId) then
     begin
-        Result := TPseudoVoigtPointsSet.Create(nil)
+        Result := TPseudoVoigtPointsSet.Create(nil);
     end
     else
     if IsEqualGUID(SelectedCurveTypeId, TAsymPseudoVoigtPointsSet.GetCurveTypeId) then
     begin
-        Result := TAsymPseudoVoigtPointsSet.Create(nil)
+        Result := TAsymPseudoVoigtPointsSet.Create(nil);
     end
     else
 {$IFDEF WINDOWS_SPECIFIC}
@@ -1245,8 +1245,10 @@ var i,j,k: LongInt;
     //  ekz. patterna, kogda pol'zovatel'skie tochki privyazki
     //  ne zadany
     //CurvePosition,
+{$IFDEF WINDOWS_SPECIFIC}
     CurveAmplitude: Double;
     SelectedCurveTypeId: TCurveTypeId;
+{$ENDIF}
 begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
     Assert(Assigned(CurvePositions));
@@ -1354,11 +1356,11 @@ begin
                 raise;
             end;
             *)
+{$IFDEF WINDOWS_SPECIFIC}
             SelectedCurveTypeId := FCurveTypeSelector.GetSelectedCurveType;
             //  teper' sozdaetsya ekzemplyar tol'ko
             //  pol'zovatel'skoy krivoy, kotoraya ne
             //  imeet parametra polozheniya
-{$IFDEF WINDOWS_SPECIFIC}
             if IsEqualGUID(SelectedCurveTypeId, TUserPointsSet.GetCurveTypeId) then
             begin
                 Curve := CreatePatternInstance;

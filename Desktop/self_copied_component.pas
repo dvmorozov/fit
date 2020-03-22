@@ -49,9 +49,14 @@ type
 
         procedure Insert(Index: Integer; Item: TComponent); override;
         function Add(Item: TComponent): Integer; override;
+        procedure Delete(Index: Integer); override;
     end;
 
 implementation
+
+const
+    InvalidItemType: string = 'Invalid item type...';
+    InvalidDestinationType: string = 'Invalid destination type...';
 
 function TSelfCopiedCompList.GetCopy: TObject;
 begin
@@ -74,9 +79,10 @@ var i: LongInt;
     ISC: ISelfCopied;
 begin
     if Dest.ClassType <> Self.ClassType then
-        raise ESelfCopiedCompList.Create('Invalid destination type...');
+        raise ESelfCopiedCompList.Create(InvalidDestinationType);
 
     if Count <> 0 then
+    begin
         if Count <> TSelfCopiedCompList(Dest).Count then
         begin
             TSelfCopiedCompList(Dest).Clear;
@@ -84,7 +90,7 @@ begin
             begin
                 if Items[i].GetInterface(SelfCopiedGUID, ISC) then
                     TSelfCopiedCompList(Dest).Add(TComponent(ISC.GetCopy))
-                else raise ESelfCopiedCompList.Create('Invalid item type...');
+                else raise ESelfCopiedCompList.Create(InvalidItemType);
             end;
         end else
         begin
@@ -92,23 +98,46 @@ begin
             begin
                 if Items[i].GetInterface(SelfCopiedGUID, ISC) then
                     ISC.CopyParameters(TSelfCopiedCompList(Dest).Items[i])
-                else raise ESelfCopiedCompList.Create('Invalid item type...');
+                else raise ESelfCopiedCompList.Create(InvalidItemType);
             end;
         end;
+    end;
 end;
 
 procedure TSelfCopiedCompList.Insert(Index: Integer; Item: TComponent);
-var ISC: ISelfCopied;
+var
+    ISC: ISelfCopied;
 begin
-    if Item.GetInterface(SelfCopiedGUID, ISC) then inherited
-    else raise ESelfCopiedCompList.Create('Invalid item type...');
+    if Item.GetInterface(SelfCopiedGUID, ISC) then
+    begin
+        inherited;
+        ISC._AddRef;
+    end
+    else raise ESelfCopiedCompList.Create(InvalidItemType);
 end;
 
 function TSelfCopiedCompList.Add(Item: TComponent): Integer;
-var ISC: ISelfCopied;
+var
+    ISC: ISelfCopied;
 begin
-    if Item.GetInterface(SelfCopiedGUID, ISC) then Result := inherited Add(Item)
-    else raise ESelfCopiedCompList.Create('Invalid item type...');
+    if Item.GetInterface(SelfCopiedGUID, ISC) then
+    begin
+        Result := inherited;
+        ISC._AddRef;
+    end
+    else raise ESelfCopiedCompList.Create(InvalidItemType);
+end;
+
+procedure TSelfCopiedCompList.Delete(Index: Integer);
+var
+    ISC: ISelfCopied;
+begin
+    if Items[Index].GetInterface(SelfCopiedGUID, ISC) then
+    begin
+        ISC._Release;
+        inherited;
+    end
+    else raise ESelfCopiedCompList.Create(InvalidItemType);
 end;
 
 function TSelfCopiedComponent.GetCopy: TObject;
@@ -126,8 +155,7 @@ end;
 procedure TSelfCopiedComponent.CopyParameters(const Dest: TObject);
 begin
     if Dest.ClassType <> Self.ClassType then
-        raise ESelfCopiedCompList.Create('Invalid destination type...');
+        raise ESelfCopiedCompList.Create(InvalidDestinationType);
 end;
 
-initialization
 end.

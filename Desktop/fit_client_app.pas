@@ -27,7 +27,7 @@ type
     TFitClientApp = class(TObject)
     private
         FFitClientStub: TFitClientStub;
-        FFitClient: TFitClient;
+        FFitClient:     TFitClient;
         FDataLoaderInjector: TExtensionDataLoaderInjector;
 
     public
@@ -60,6 +60,3 @@ begin
 end;
 
 end.
-
-
-

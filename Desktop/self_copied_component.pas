@@ -25,7 +25,8 @@ type
         procedure CopyParameters(const Dest: TObject);
     end;
 
-const SelfCopiedGUID: TGUID = '{DF1ABB41-F255-11D4-968F-C7AD39AA7469}';
+const
+    SelfCopiedGUID: TGUID = '{DF1ABB41-F255-11D4-968F-C7AD39AA7469}';
 
 type
     { The component implementing self copying interface. }
@@ -47,9 +48,9 @@ type
         function GetSharedCopy: TObject; virtual;
         procedure CopyParameters(const Dest: TObject); virtual;
 
-        procedure Insert(Index: Integer; Item: TComponent); override;
-        function Add(Item: TComponent): Integer; override;
-        procedure Delete(Index: Integer); override;
+        procedure Insert(Index: integer; Item: TComponent); override;
+        function Add(Item: TComponent): integer; override;
+        procedure Delete(Index: integer); override;
     end;
 
 implementation
@@ -66,7 +67,8 @@ begin
 end;
 
 function TSelfCopiedCompList.GetSharedCopy: TObject;
-var i: LongInt;
+var
+    i: longint;
 begin
     Result := NewInstance;
     TSelfCopiedCompList(Result).Create(nil);
@@ -75,36 +77,32 @@ begin
 end;
 
 procedure TSelfCopiedCompList.CopyParameters(const Dest: TObject);
-var i: LongInt;
+var
+    i:   longint;
     ISC: ISelfCopied;
 begin
     if Dest.ClassType <> Self.ClassType then
         raise ESelfCopiedCompList.Create(InvalidDestinationType);
 
     if Count <> 0 then
-    begin
         if Count <> TSelfCopiedCompList(Dest).Count then
         begin
             TSelfCopiedCompList(Dest).Clear;
             for i := 0 to Count - 1 do
-            begin
                 if Items[i].GetInterface(SelfCopiedGUID, ISC) then
                     TSelfCopiedCompList(Dest).Add(TComponent(ISC.GetCopy))
-                else raise ESelfCopiedCompList.Create(InvalidItemType);
-            end;
-        end else
-        begin
+                else
+                    raise ESelfCopiedCompList.Create(InvalidItemType);
+        end
+        else
             for i := 0 to Count - 1 do
-            begin
                 if Items[i].GetInterface(SelfCopiedGUID, ISC) then
                     ISC.CopyParameters(TSelfCopiedCompList(Dest).Items[i])
-                else raise ESelfCopiedCompList.Create(InvalidItemType);
-            end;
-        end;
-    end;
+                else
+                    raise ESelfCopiedCompList.Create(InvalidItemType);
 end;
 
-procedure TSelfCopiedCompList.Insert(Index: Integer; Item: TComponent);
+procedure TSelfCopiedCompList.Insert(Index: integer; Item: TComponent);
 var
     ISC: ISelfCopied;
 begin
@@ -113,10 +111,11 @@ begin
         inherited;
         ISC._AddRef;
     end
-    else raise ESelfCopiedCompList.Create(InvalidItemType);
+    else
+        raise ESelfCopiedCompList.Create(InvalidItemType);
 end;
 
-function TSelfCopiedCompList.Add(Item: TComponent): Integer;
+function TSelfCopiedCompList.Add(Item: TComponent): integer;
 var
     ISC: ISelfCopied;
 begin
@@ -125,10 +124,11 @@ begin
         Result := inherited;
         ISC._AddRef;
     end
-    else raise ESelfCopiedCompList.Create(InvalidItemType);
+    else
+        raise ESelfCopiedCompList.Create(InvalidItemType);
 end;
 
-procedure TSelfCopiedCompList.Delete(Index: Integer);
+procedure TSelfCopiedCompList.Delete(Index: integer);
 var
     ISC: ISelfCopied;
 begin
@@ -137,7 +137,8 @@ begin
         ISC._Release;
         inherited;
     end
-    else raise ESelfCopiedCompList.Create(InvalidItemType);
+    else
+        raise ESelfCopiedCompList.Create(InvalidItemType);
 end;
 
 function TSelfCopiedComponent.GetCopy: TObject;

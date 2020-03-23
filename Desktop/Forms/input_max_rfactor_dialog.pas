@@ -20,43 +20,43 @@ unit input_max_rfactor_dialog;
 interface
 
 uses SysUtils, Forms, Controls, StdCtrls,
-  ExtCtrls, LResources
+    ExtCtrls, LResources
 {$IFDEF _WINDOWS}
-  , Windows, CommCtrl
+    , Windows, CommCtrl
 {$ELSE}
-  , Dialogs
-{$ENDIF}
-  ;
+    , Dialogs
+{$ENDIF}  ;
 
 type
 
-  { TInputMaxRFactorDlg }
+    { TInputMaxRFactorDlg }
 
-  TInputMaxRFactorDlg = class(TForm)
-    OKBtn: TButton;
-    CancelBtn: TButton;
-    Bevel1: TBevel;
-    RFactorValueEdit: TEdit;
-    Label1: TLabel;
-    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
-    procedure FormActivate(Sender: TObject);
-  private
+    TInputMaxRFactorDlg = class(TForm)
+        OKBtn:     TButton;
+        CancelBtn: TButton;
+        Bevel1:    TBevel;
+        RFactorValueEdit: TEdit;
+        Label1:    TLabel;
+        procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
+        procedure FormActivate(Sender: TObject);
+    private
 
-  public
-    Value: Double;
-  end;
+    public
+        FValue: double;
+    end;
 
 var
     InputMaxRFactorDlg: TInputMaxRFactorDlg;
-  
+
 const
     ImproperRealValueInput: WideString = 'Improper real value input.';
 {$IFDEF _WINDOWS}
 const
     Error: WideString = 'Error';
+
 {$ENDIF}
-  
-function StringToValue(Str: string): Double;
+
+function StringToValue(Str: string): double;
 {$IFDEF _WINDOWS}
 procedure ShowBalloon(Hwnd: HWND; Msg: WideString; Title: WideString);
 
@@ -65,39 +65,43 @@ type
     public
         Handle: HWND;
     end;
+
 {$ENDIF}
 
 implementation
 
 {$warnings off}
-//  vypolnyaet podgotovku stroki k preobrazovaniyu v chislo;
-//  esli dazhe posle podgotovki preobrazovat' stroku v chislo
-//  nevozmozhno, to voznikaet isklyuchenie
-function StringToValue(Str: string): Double;
-var SavedDecimalSeparator : Char;
-    Index: LongInt;
-    LastFound: Boolean;
+   //  vypolnyaet podgotovku stroki k preobrazovaniyu v chislo;
+   //  esli dazhe posle podgotovki preobrazovat' stroku v chislo
+   //  nevozmozhno, to voznikaet isklyuchenie
+function StringToValue(Str: string): double;
+var
+    SavedDecimalSeparator: char;
+    Index:     longint;
+    LastFound: boolean;
 begin
     SavedDecimalSeparator := DecimalSeparator;
     //  vse zapyatye zamenyayutsya na tochki
     while True do
     begin
         Index := Pos(',', Str);
-        if Index = 0 then Break;
+        if Index = 0 then
+            Break;
         Str[Index] := '.';
     end;
     //  udalyayutsya vse tochki, krome posledney
-    Index := Length(Str); LastFound := False;
+    Index     := Length(Str);
+    LastFound := False;
     while Index > 0 do
     begin
         if Str[Index] = '.' then
-        begin
-            if not LastFound then LastFound := True
-            else Delete(Str, Index, 1);
-        end;
+            if not LastFound then
+                LastFound := True
+            else
+                Delete(Str, Index, 1);
         Dec(Index);
     end;
-    
+
     DecimalSeparator := '.';
     try
         Result := StrToFloat(Str);
@@ -105,21 +109,23 @@ begin
         DecimalSeparator := SavedDecimalSeparator;
     end;
 end;
+
 {$warnings on}
 
 {$IFDEF _WINDOWS}
-//  pri isp. PostMessage d.b. global'noy, t.k.
-//  struktura obrabatyvaetsya vne tela protsedury
-var EBT: _tagEDITBALLOONTIP;
+   //  pri isp. PostMessage d.b. global'noy, t.k.
+   //  struktura obrabatyvaetsya vne tela protsedury
+var
+    EBT: _tagEDITBALLOONTIP;
 
 {$hints off}
 procedure ShowBalloon(Hwnd: HWND; Msg: WideString; Title: WideString);
 //var FH: TFormHint;
 begin
     EBT.cbStruct := SizeOf(EBT);
-    EBT.pszText := PWideChar(Msg);
+    EBT.pszText  := PWideChar(Msg);
     EBT.pszTitle := PWideChar(Title);
-    EBT.ttiIcon := 0;
+    EBT.ttiIcon  := 0;
     //  ispol'zuet SendMessage
     Edit_ShowBalloonTip(Hwnd, LPARAM(Addr(EBT)));
     //  SendMessage inogda vyzyvaet chto-to vrode perepolneniya steka,
@@ -135,40 +141,36 @@ begin
     FH.ShowModal;
     *)
 end;
+
 {$hints on}
 {$ENDIF}
 
-procedure TInputMaxRFactorDlg.FormCloseQuery(Sender: TObject;
-    var CanClose: Boolean);
+procedure TInputMaxRFactorDlg.FormCloseQuery(Sender: TObject; var CanClose: boolean);
 begin
     CanClose := True;
     //  posle uspeshnogo zakrytiya okna d. b.
     //  garantirovano, chto znachenie korrektno
     if ModalResult = mrOk then
-    begin
         try
-            Value := StringToValue(RFactorValueEdit.Text) / 100;
+            FValue := StringToValue(RFactorValueEdit.Text) / 100;
         except
 {$IFDEF _WINDOWS}
             ShowBalloon(RFactorValueEdit.Handle,
                 ImproperRealValueInput, '');
 {$ELSE}
-            MessageDlg(string(ImproperRealValueInput), mtError, [mbOk], 0);
+            MessageDlg(string(ImproperRealValueInput), mtError, [mbOK], 0);
 {$ENDIF}
             ActiveControl := RFactorValueEdit;
-            CanClose := False;
-        end;
-    end;{if ModalResult = mrOk then...}
+            CanClose      := False;
+        end;{if ModalResult = mrOk then...}
 end;
 
 procedure TInputMaxRFactorDlg.FormActivate(Sender: TObject);
 begin
-    RFactorValueEdit.Text := FloatToStr(Value * 100);
+    RFactorValueEdit.Text := FloatToStr(FValue * 100);
     ActiveControl := RFactorValueEdit;
 end;
 
 initialization
     {$i input_max_rfactor_dialog.lrs}
 end.
-
-

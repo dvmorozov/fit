@@ -30,14 +30,14 @@ type
     TPseudoVoigtPointsSet = class(TNamedPointsSet)
     protected
         { Relative weights of gaussian and lorentzian. }
-        EtaP: TEtaCurveParameter;
-        
-        function GetEta: Double;
-        
+        FEtaP: TEtaCurveParameter;
+
+        function GetEta: double;
+
         { Performs recalculation of all points of function. }
         procedure DoCalc(const Intervals: TPointsSet); override;
 
-        property Eta: Double read GetEta;
+        property Eta: double read GetEta;
 
     public
         constructor Create(AOwner: TComponent); override;
@@ -55,27 +55,25 @@ uses int_curve_factory;
 {======================== TPseudoVoigtPointsSet ===============================}
 
 procedure TPseudoVoigtPointsSet.DoCalc(const Intervals: TPointsSet);
-var i, j: LongInt;
+var
+    i, j: longint;
 begin
     if Assigned(Intervals) then
     begin
         Assert((Intervals.PointsCount mod 2) = 0);
         for i := 0 to (Intervals.PointsCount shr 1) - 1 do
-        begin
             for j := Trunc(Intervals.PointXCoord[i shl 1]) to
                 Trunc(Intervals.PointXCoord[(i shl 1) + 1]) do
-                    Points[j][2] := PseudoVoigtPoint(A, Sigma, Eta, x0, Points[j][1]);
-        end;
+                Points[j][2] := PseudoVoigtPoint(A, Sigma, Eta, x0, Points[j][1]);
     end
     else
-    begin
         PseudoVoigt(Points, A, Sigma, Eta, x0);
-    end;
 end;
 
 constructor TPseudoVoigtPointsSet.Create(AOwner: TComponent);
-var Parameter: TSpecialCurveParameter;
-    Count: LongInt;
+var
+    Parameter: TSpecialCurveParameter;
+    Count:     longint;
 begin
     inherited;
 
@@ -89,18 +87,18 @@ begin
     Parameter.Type_ := Shared;          //  common parameter for all instances
     AddParameter(Parameter);
 
-    EtaP := TEtaCurveParameter.Create;
-    AddParameter(EtaP);
+    FEtaP := TEtaCurveParameter.Create;
+    AddParameter(FEtaP);
 
     InitListOfVariableParameters;
     Count := FVariableParameters.Count;
     Assert(Count = 3);
 end;
 
-function TPseudoVoigtPointsSet.GetEta: Double;
+function TPseudoVoigtPointsSet.GetEta: double;
 begin
-    Assert(Assigned(EtaP));
-    Result := EtaP.Value;
+    Assert(Assigned(FEtaP));
+    Result := FEtaP.Value;
 end;
 
 class function TPseudoVoigtPointsSet.GetCurveTypeName: string;
@@ -118,10 +116,10 @@ begin
     Result := OnlyMaximums;
 end;
 
-var CTS: ICurveFactory;
+var
+    CTS: ICurveFactory;
 
 initialization
     CTS := TCurveTypesSingleton.CreateCurveFactory;
     CTS.RegisterCurveType(TPseudoVoigtPointsSet);
 end.
-

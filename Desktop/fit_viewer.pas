@@ -47,41 +47,37 @@ type
       items of PointsSetList. }
     TFitViewer = class(TComponent
 {$IFNDEF SERVER}
-     , IFitViewer
+        , IFitViewer
 {$ENDIF}
-     )
+        )
     protected
 {$IFNDEF SERVER}
-        fit_client: TFitClient;
+        FFitClient: TFitClient;
 {$ENDIF}
-        FXCoordMode: LongInt;
-        MaxX, MinX, MaxY, MinY: Double;
-        ViewMarkers: Boolean;
+        FXCoordMode: longint;
+        FMaxX, FMinX, FMaxY, FMinY: double;
+        FViewMarkers: boolean;
         FForm: TForm;
         { Enables updating grids. By default is true. }
-        FUpdateGrids: Boolean;
+        FUpdateGrids: boolean;
         { Enables updating legend. By default is true. }
-        FUpdateLegends: Boolean;
+        FUpdateLegends: boolean;
         { Enables animation mode in which UI is updated on every
           computation cycle not only on finishing. By default is false. }
-        FAnimationMode: Boolean;
+        FAnimationMode: boolean;
 
-        procedure SetXCoordMode(AMode: LongInt);
+        procedure SetXCoordMode(AMode: longint);
 
     protected
         { List of data sets for each item of which chart serie is related.
           The list is passive, it contains pointers to external data. }
-        PointsSetList: TSelfCheckedComponentList;
+        FPointsSetList: TSelfCheckedComponentList;
         { Returns maximum number of curves in one of given R-factor intervals. }
-        function GetMaxCurveNum(
-            CurvesList: TSelfCopiedCompList;
-            RFactorIntervals: TTitlePointsSet
-            ): LongInt;
+        function GetMaxCurveNum(CurvesList: TSelfCopiedCompList;
+            RFactorIntervals: TTitlePointsSet): longint;
         { Returns total number of profile points belonging to any of intervals. }
-        function GetPointsNumInIntervals(
-            Profile: TTitlePointsSet;
-            RFactorIntervals: TTitlePointsSet
-            ): LongInt;
+        function GetPointsNumInIntervals(Profile: TTitlePointsSet;
+            RFactorIntervals: TTitlePointsSet): longint;
 {$IFDEF USE_GRIDS}
         procedure FillIntervalsTable(RFactorIntervals: TTitlePointsSet);
         procedure FillDataTable(Profile: TTitlePointsSet);
@@ -96,7 +92,7 @@ type
         procedure ClearSpecimenTable;
         procedure ClearDatasheetTable;
 {$ENDIF}
-        function ValToStr(Value: Double): string;
+        function ValToStr(Value: double): string;
         { Clears serie set and fills it again. }
         procedure PlotPointsSet(SA: TNeutronPointsSet);
 
@@ -109,68 +105,63 @@ type
 {$ENDIF}
     public
         { Method of IFitViewer interface. }
-        procedure PlotBackground(
-            Sender: TObject; BackgroundPoints: TTitlePointsSet);
+        procedure PlotBackground(Sender: TObject;
+            BackgroundPoints: TTitlePointsSet);
         { Method of IFitViewer interface. }
-        procedure PlotDataPoints(
-            Sender: TObject; DataPoints: TTitlePointsSet);
+        procedure PlotDataPoints(Sender: TObject;
+            DataPoints: TTitlePointsSet);
         { Method of IFitViewer interface. }
-        procedure PlotSelectedArea(
-            Sender: TObject; SelectedArea: TTitlePointsSet);
+        procedure PlotSelectedArea(Sender: TObject;
+            SelectedArea: TTitlePointsSet);
         { Method of IFitViewer interface. }
-        procedure PlotSpecimens(
-            Sender: TObject;
+        procedure PlotSpecimens(Sender: TObject;
             CurvePointsSetList: TSelfCopiedCompList;
             SpecimenList: TMSCRSpecimenList);
         { Method of IFitViewer interface. }
-        procedure PlotRFactorIntervals(
-            Sender: TObject; RFactorIntervals: TTitlePointsSet);
+        procedure PlotRFactorIntervals(Sender: TObject;
+            RFactorIntervals: TTitlePointsSet);
         { Method of IFitViewer interface. }
-        procedure PlotCurvePositions(
-            Sender: TObject; CurvePositions: TTitlePointsSet);
+        procedure PlotCurvePositions(Sender: TObject;
+            CurvePositions: TTitlePointsSet);
         { Method of IFitViewer interface. }
-        procedure PlotGaussProfile(
-            Sender: TObject; GaussProfile: TTitlePointsSet);
+        procedure PlotGaussProfile(Sender: TObject;
+            GaussProfile: TTitlePointsSet);
         { Method of IFitViewer interface. }
-        procedure PlotDeltaProfile(
-            Sender: TObject; DeltaProfile: TTitlePointsSet);
+        procedure PlotDeltaProfile(Sender: TObject;
+            DeltaProfile: TTitlePointsSet);
         { Method of IFitViewer interface. }
-        procedure PlotSelectedPoints(
-            Sender: TObject; SelectedPoints: TTitlePointsSet);
+        procedure PlotSelectedPoints(Sender: TObject;
+            SelectedPoints: TTitlePointsSet);
         { Method of IFitViewer interface. }
-        procedure HideRFactorIntervals(
-            Sender: TObject; RFactorIntervals: TTitlePointsSet);
+        procedure HideRFactorIntervals(Sender: TObject;
+            RFactorIntervals: TTitlePointsSet);
         { Method of IFitViewer interface. }
-        procedure HideCurvePositions(
-            Sender: TObject; CurvePositions: TTitlePointsSet);
+        procedure HideCurvePositions(Sender: TObject;
+            CurvePositions: TTitlePointsSet);
         { Method of IFitViewer interface. }
-        procedure HideDataPoints(
-            Sender: TObject; DataPoints: TTitlePointsSet);
+        procedure HideDataPoints(Sender: TObject;
+            DataPoints: TTitlePointsSet);
         { Method of IFitViewer interface. }
-        procedure HideBackground(
-            Sender: TObject; BackgroundPoints: TTitlePointsSet);
+        procedure HideBackground(Sender: TObject;
+            BackgroundPoints: TTitlePointsSet);
         { Method of IFitViewer interface. }
         procedure Refresh(Sender: TObject);
         { Does not clear series but only refreshes intencities. }
-        procedure RefreshPointsSet(
-            Sender: TObject; points_set: TNeutronPointsSet);
+        procedure RefreshPointsSet(Sender: TObject;
+            points_set: TNeutronPointsSet);
         { Method of IFitViewer interface. }
         procedure Clear(Sender: TObject);
         { Method of IFitViewer interface. }
         procedure Hide(Sender: TObject; points_set: TNeutronPointsSet);
         { Method of IFitViewer interface. }
-        procedure SetUpdateGrids(Update: Boolean);
+        procedure SetUpdateGrids(Update: boolean);
         { Method of IFitViewer interface. }
-        procedure SetUpdateLegends(Update: Boolean);
+        procedure SetUpdateLegends(Update: boolean);
 {$IFDEF USE_GRIDS}
         { Method of IFitViewer interface. }
-        procedure FillDatasheetTable(
-            Profile: TTitlePointsSet;
-            CurvesList: TSelfCopiedCompList;
-            GaussProfile: TTitlePointsSet;
-            DeltaProfile: TTitlePointsSet;
-            RFactorIntervals: TTitlePointsSet
-            );
+        procedure FillDatasheetTable(Profile: TTitlePointsSet;
+            CurvesList: TSelfCopiedCompList; GaussProfile: TTitlePointsSet;
+            DeltaProfile: TTitlePointsSet; RFactorIntervals: TTitlePointsSet);
 {$ENDIF}
 {$IFNDEF SERVER}
         { Method of IFitViewer interface. }
@@ -180,12 +171,12 @@ type
         { Method of IFitViewer interface. }
         procedure ShowHint(Hint: string);
         { Method of IFitViewer interface. }
-        procedure SetAnimationMode(On: Boolean);
+        procedure SetAnimationMode(On: boolean);
         { Method of IFitViewer interface. }
-        function GetAnimationMode: Boolean;
+        function GetAnimationMode: boolean;
 {$ENDIF}
 
-        procedure SetViewMarkers(AViewMarkers: Boolean);
+        procedure SetViewMarkers(AViewMarkers: boolean);
         procedure ViewAllMarkers;
         { Clears all series and fills them again saving parameter values. }
         procedure Plot;
@@ -193,22 +184,22 @@ type
           This function actually gives the number of active curve
           when only single curve is visible in the chart. This should
           be checked separately. }
-        function GetActiveCurve: LongInt;
+        function GetActiveCurve: longint;
         function GetActivePointsSet: TNeutronPointsSet;
-        function GetPointsSet(ActiveNumber: LongInt): TNeutronPointsSet;
+        function GetPointsSet(ActiveNumber: longint): TNeutronPointsSet;
 
         { Return boundary values among all curves. }
-        
-        function GetMaxX: Double;
-        function GetMinX: Double;
-        function GetMaxY: Double;
-        function GetMinY: Double;
-        procedure GetMinMax(var AMinX, AMaxX, AMinY, AMaxY: Double);
+
+        function GetMaxX: double;
+        function GetMinX: double;
+        function GetMaxY: double;
+        function GetMinY: double;
+        procedure GetMinMax(var AMinX, AMaxX, AMinY, AMaxY: double);
 
         constructor Create(AOwner: TComponent); override;
         destructor Destroy; override;
-        
-        property XCoordMode: LongInt read FXCoordMode write SetXCoordMode;
+
+        property XCoordMode: longint read FXCoordMode write SetXCoordMode;
         property Form: TForm read FForm write FForm;
     end;
 
@@ -218,44 +209,49 @@ uses form_main;
 
 const
     { The minimal allowed number. }
-    MIN_VALUE: Double = -1e100;
+    MIN_VALUE: double = -1e100;
     { The maximal allowed number. }
-    MAX_VALUE: Double =  1e100;
+    MAX_VALUE: double = 1e100;
 
 {========================== TFitViewer ==================================}
 {$IFNDEF SERVER}
 procedure TFitViewer.SetFitClient(AFitClient: TFitClient);
 begin
-    fit_client := AFitClient;
-    fit_client.FitViewer := Self;
+    FFitClient := AFitClient;
+    FFitClient.FFitViewer := Self;
 end;
+
 {$ENDIF}
 const
     ColorPalette: array[1..16] of TColor =
         (clRed, clGreen, clYellow, clBlue, clBlack, clGray, clFuchsia, clTeal,
-         clNavy, clMaroon, clLime, clOlive, clPurple, clSilver, clAqua, clBlack);
-         
+        clNavy, clMaroon, clLime, clOlive, clPurple, clSilver, clAqua, clBlack);
+
 procedure TFitViewer.Plot;
-var SA: TNeutronPointsSet;
-    j: LongInt;
+var
+    SA: TNeutronPointsSet;
+    j:  longint;
 begin
-    if not Assigned(PointsSetList) then Exit;
-    
-    for j := 0 to PointsSetList.Count - 1 do
+    if not Assigned(FPointsSetList) then
+        Exit;
+
+    for j := 0 to FPointsSetList.Count - 1 do
     begin
-        SA := TNeutronPointsSet(PointsSetList.Items[j]);
+        SA := TNeutronPointsSet(FPointsSetList.Items[j]);
         PlotPointsSet(SA);
     end;
     //ViewAllMarkers;     //??? nado
 end;
 
 procedure TFitViewer.PlotPointsSet(SA: TNeutronPointsSet);
-var LS: TTASerie;
-    i: LongInt;
+var
+    LS: TTASerie;
+    i:  longint;
 begin
-    if not Assigned(SA) then Exit;
-    
-    LS := TTASerie(TFormMain(Form).Chart.GetSerie(PointsSetList.IndexOf(SA)));
+    if not Assigned(SA) then
+        Exit;
+
+    LS := TTASerie(TFormMain(Form).Chart.GetSerie(FPointsSetList.IndexOf(SA)));
     //LS.HorizAxis := aBottomAxis;
     LS.Clear;
     with SA do
@@ -270,22 +266,23 @@ begin
             end;{case XCoordMode of...}
 end;
 
-procedure TFitViewer.PlotSelectedArea(
-    Sender: TObject; SelectedArea: TTitlePointsSet);
-var LS: TTASerie;
+procedure TFitViewer.PlotSelectedArea(Sender: TObject; SelectedArea: TTitlePointsSet);
+var
+    LS: TTASerie;
 begin
     //Assert(Assigned(SelectedArea));
-    if not Assigned(SelectedArea) then Exit;
+    if not Assigned(SelectedArea) then
+        Exit;
 
-    if PointsSetList.IndexOf(SelectedArea) = -1 then
+    if FPointsSetList.IndexOf(SelectedArea) = -1 then
     begin
         //  dobavlenie nabora tochek v spisok naborov tochek
-        PointsSetList.Add(SelectedArea);
+        FPointsSetList.Add(SelectedArea);
         //  dobavlenie serii
         LS := TTASerie.Create(nil);
         LS.PointStyle := psRectangle;
-        LS.ShowPoints := ViewMarkers;
-        LS.Title := SelectedArea.Title;
+        LS.ShowPoints := FViewMarkers;
+        LS.Title := SelectedArea.FTitle;
         LS.SeriesColor := clRed;
         LS.PointBrushStyle := bsClear;
 
@@ -308,32 +305,33 @@ begin
 end;
 
 {$hints off}
-procedure TFitViewer.PlotSpecimens(
-    Sender: TObject; CurvePointsSetList: TSelfCopiedCompList;
-    SpecimenList: TMSCRSpecimenList);
-var LS: TTASerie;
+procedure TFitViewer.PlotSpecimens(Sender: TObject;
+    CurvePointsSetList: TSelfCopiedCompList; SpecimenList: TMSCRSpecimenList);
+var
+    LS: TTASerie;
     SA: TNamedPointsSet;
-    j: LongInt;
+    j:  longint;
 begin
 {$IFDEF USE_GRIDS}
     if FUpdateGrids then
         FillSpecimenTable(SpecimenList);
 {$ENDIF}
     //Assert(Assigned(CurvePointsSetList));
-    if not Assigned(CurvePointsSetList) then Exit;
-    
+    if not Assigned(CurvePointsSetList) then
+        Exit;
+
     for j := 0 to CurvePointsSetList.Count - 1 do
     begin
         SA := TNamedPointsSet(CurvePointsSetList.Items[j]);
-        if PointsSetList.IndexOf(SA) = -1 then
+        if FPointsSetList.IndexOf(SA) = -1 then
         begin
             LS := TTASerie.Create(nil);
             LS.PointStyle := psRectangle;
-            LS.ShowPoints := ViewMarkers;
+            LS.ShowPoints := FViewMarkers;
             TFormMain(Form).Chart.AddSerie(LS);
-            PointsSetList.Add(SA);
+            FPointsSetList.Add(SA);
 
-            LS.Title := SA.GetCurveTypeName + ' ' + IntToStr(j+1);
+            LS.Title := SA.GetCurveTypeName + ' ' + IntToStr(j + 1);
 {$IFDEF USE_LEGEND}
             if FUpdateLegends then
             begin
@@ -342,12 +340,15 @@ begin
                     TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(LS)] := True;
             end;
 {$ENDIF}
-            if j + 1 <= 16 then LS.SeriesColor := ColorPalette[j + 1]
-            else LS.SeriesColor := ColorPalette[(j + 1) mod 16];
+            if j + 1 <= 16 then
+                LS.SeriesColor := ColorPalette[j + 1]
+            else
+                LS.SeriesColor := ColorPalette[(j + 1) mod 16];
         end;
         PlotPointsSet(SA);
     end;{for j := 0 to GL.Count - 1 do...}
 end;
+
 {$hints on}
 
 procedure TFitViewer.Clear(Sender: TObject);
@@ -358,7 +359,8 @@ begin
     if FUpdateLegends then
         TFormMain(Form).CheckListBoxLegend.Items.Clear;
 {$ENDIF}
-    if Assigned(PointsSetList) then PointsSetList.Clear;
+    if Assigned(FPointsSetList) then
+        FPointsSetList.Clear;
 {$IFDEF USE_GRIDS}
     if FUpdateGrids then
     begin
@@ -373,13 +375,16 @@ begin
 end;
 
 procedure TFitViewer.Hide(Sender: TObject; points_set: TNeutronPointsSet);
-var Index: LongInt;
+var
+    Index: longint;
 begin
-    if not Assigned(points_set) then Exit;
-    if not Assigned(PointsSetList) then Exit;
-    
-    Index := PointsSetList.IndexOf(points_set);
-    // el-t v CheckListBox svyazan s el-tom v PointsSetList tol'ko po indeksu
+    if not Assigned(points_set) then
+        Exit;
+    if not Assigned(FPointsSetList) then
+        Exit;
+
+    Index := FPointsSetList.IndexOf(points_set);
+    // el-t v CheckListBox svyazan s el-tom v FPointsSetList tol'ko po indeksu
     if Index <> -1 then
     begin
 {$IFDEF USE_LEGEND}
@@ -388,37 +393,41 @@ begin
 {$ENDIF}
         if Index < TFormMain(Form).Chart.SeriesCount then
             TFormMain(Form).Chart.DeleteSerie(TFormMain(Form).Chart.GetSerie(Index));
-        PointsSetList.Remove(points_set);
+        FPointsSetList.Remove(points_set);
     end;
 end;
 
 procedure TFitViewer.Refresh(Sender: TObject);
-var i: LongInt;
+var
+    i:  longint;
     NS: TNeutronPointsSet;
 begin
-    //Assert(Assigned(PointsSetList));
-    if not Assigned(PointsSetList) then Exit;
+    //Assert(Assigned(FPointsSetList));
+    if not Assigned(FPointsSetList) then
+        Exit;
 
-    for i := 0 to PointsSetList.Count - 1 do
+    for i := 0 to FPointsSetList.Count - 1 do
     begin
-        NS := TNeutronPointsSet(PointsSetList.Items[i]);
+        NS := TNeutronPointsSet(FPointsSetList.Items[i]);
         RefreshPointsSet(Sender, NS);
     end;
     //ViewAllMarkers; ??? nado
 end;
 
-procedure TFitViewer.RefreshPointsSet(
-    Sender: TObject; points_set: TNeutronPointsSet);
-var Index, j: LongInt;
+procedure TFitViewer.RefreshPointsSet(Sender: TObject; points_set: TNeutronPointsSet);
+var
+    Index, j: longint;
     LS: TTASerie;
 begin
     //Assert(Assigned(PointsSet));
-    if not Assigned(points_set) then Exit;
-    if not Assigned(PointsSetList) then Exit;
+    if not Assigned(points_set) then
+        Exit;
+    if not Assigned(FPointsSetList) then
+        Exit;
 
-    Index := PointsSetList.IndexOf(points_set);
+    Index := FPointsSetList.IndexOf(points_set);
     Assert(Index <> -1);
- 
+
     LS := TTASerie(TFormMain(Form).Chart.GetSerie(Index));
     Assert(LS.Count = points_set.PointsCount);
     with points_set do
@@ -426,8 +435,8 @@ begin
             LS.SetYValue(j, PointIntensity[j]);
 end;
 
-procedure TFitViewer.HideRFactorIntervals(
-    Sender: TObject; RFactorIntervals: TTitlePointsSet);
+procedure TFitViewer.HideRFactorIntervals(Sender: TObject;
+    RFactorIntervals: TTitlePointsSet);
 begin
     Hide(Sender, RFactorIntervals);
 {$IFDEF USE_GRIDS}
@@ -436,15 +445,18 @@ begin
 {$ENDIF}
 end;
 
-procedure TFitViewer.PlotRFactorIntervals(
-    Sender: TObject; RFactorIntervals: TTitlePointsSet);
-var LS: TTASerie;
+procedure TFitViewer.PlotRFactorIntervals(Sender: TObject;
+    RFactorIntervals: TTitlePointsSet);
+var
+    LS: TTASerie;
 begin
     //Assert(Assigned(RFactorIntervals));
-    if not Assigned(RFactorIntervals) then Exit;
-    if not Assigned(PointsSetList) then Exit;
+    if not Assigned(RFactorIntervals) then
+        Exit;
+    if not Assigned(FPointsSetList) then
+        Exit;
 
-    if PointsSetList.IndexOf(RFactorIntervals) = -1 then
+    if FPointsSetList.IndexOf(RFactorIntervals) = -1 then
     begin
         LS := TTASerie.Create(nil);
         LS.PointStyle := psVertLineTB;
@@ -454,10 +466,10 @@ begin
         LS.ShowPoints := True;
         LS.InitShowLines := LS.ShowLines;
         LS.InitShowPoints := LS.ShowPoints;
-        LS.Title := RFactorIntervals.Title;
-        
+        LS.Title := RFactorIntervals.FTitle;
+
         TFormMain(Form).Chart.AddSerie(LS);
-        PointsSetList.Add(RFactorIntervals);
+        FPointsSetList.Add(RFactorIntervals);
 {$IFDEF USE_LEGEND}
         if FUpdateLegends then
         begin
@@ -476,8 +488,8 @@ begin
     PlotPointsSet(RFactorIntervals);
 end;
 
-procedure TFitViewer.HideCurvePositions(
-    Sender: TObject; CurvePositions: TTitlePointsSet);
+procedure TFitViewer.HideCurvePositions(Sender: TObject;
+    CurvePositions: TTitlePointsSet);
 begin
     Hide(Sender, CurvePositions);
 {$IFDEF USE_GRIDS}
@@ -485,15 +497,18 @@ begin
 {$ENDIF}
 end;
 
-procedure TFitViewer.PlotCurvePositions(
-    Sender: TObject; CurvePositions: TTitlePointsSet);
-var LS: TTASerie;
+procedure TFitViewer.PlotCurvePositions(Sender: TObject;
+    CurvePositions: TTitlePointsSet);
+var
+    LS: TTASerie;
 begin
     //Assert(Assigned(CurvePositions));
-    if not Assigned(CurvePositions) then Exit;
-    if not Assigned(PointsSetList) then Exit;
+    if not Assigned(CurvePositions) then
+        Exit;
+    if not Assigned(FPointsSetList) then
+        Exit;
 
-    if PointsSetList.IndexOf(CurvePositions) = -1 then
+    if FPointsSetList.IndexOf(CurvePositions) = -1 then
     begin
         LS := TTASerie.Create(nil);
         LS.PointStyle := psDiagCross;
@@ -503,10 +518,10 @@ begin
         LS.ShowPoints := True;
         LS.InitShowLines := LS.ShowLines;
         LS.InitShowPoints := LS.ShowPoints;
-        LS.Title := CurvePositions.Title;
-        
+        LS.Title := CurvePositions.FTitle;
+
         TFormMain(Form).Chart.AddSerie(LS);
-        PointsSetList.Add(CurvePositions);
+        FPointsSetList.Add(CurvePositions);
 {$IFDEF USE_LEGEND}
         if FUpdateLegends then
         begin
@@ -526,15 +541,18 @@ begin
     PlotPointsSet(CurvePositions);
 end;
 
-procedure TFitViewer.PlotSelectedPoints(
-    Sender: TObject; SelectedPoints: TTitlePointsSet);
-var LS: TTASerie;
+procedure TFitViewer.PlotSelectedPoints(Sender: TObject;
+    SelectedPoints: TTitlePointsSet);
+var
+    LS: TTASerie;
 begin
     //Assert(Assigned(SelectedPoints));
-    if not Assigned(SelectedPoints) then Exit;
-    if not Assigned(PointsSetList) then Exit;
+    if not Assigned(SelectedPoints) then
+        Exit;
+    if not Assigned(FPointsSetList) then
+        Exit;
 
-    if PointsSetList.IndexOf(SelectedPoints) = -1 then
+    if FPointsSetList.IndexOf(SelectedPoints) = -1 then
     begin
         LS := TTASerie.Create(nil);
         LS.PointStyle := psVertLineBT;
@@ -544,10 +562,10 @@ begin
         LS.ShowPoints := True;
         LS.InitShowLines := LS.ShowLines;
         LS.InitShowPoints := LS.ShowPoints;
-        LS.Title := SelectedPoints.Title;
-        
+        LS.Title := SelectedPoints.FTitle;
+
         TFormMain(Form).Chart.AddSerie(LS);
-        PointsSetList.Add(SelectedPoints);
+        FPointsSetList.Add(SelectedPoints);
 {$IFDEF USE_LEGEND}
         if FUpdateLegends then
         begin
@@ -562,23 +580,24 @@ begin
     PlotPointsSet(SelectedPoints);
 end;
 
-procedure TFitViewer.PlotGaussProfile(
-    Sender: TObject; GaussProfile: TTitlePointsSet
-    );
-var LS: TTASerie;
+procedure TFitViewer.PlotGaussProfile(Sender: TObject; GaussProfile: TTitlePointsSet);
+var
+    LS: TTASerie;
 begin
     //Assert(Assigned(GaussProfile));
-    if not Assigned(GaussProfile) then Exit;
-    if not Assigned(PointsSetList) then Exit;
+    if not Assigned(GaussProfile) then
+        Exit;
+    if not Assigned(FPointsSetList) then
+        Exit;
 
     LS := TTASerie.Create(nil);
     LS.PointStyle := psRectangle;
-    LS.ShowPoints := ViewMarkers;
+    LS.ShowPoints := FViewMarkers;
     LS.SeriesColor := clBlack;
-    LS.Title := GaussProfile.Title;
-    
+    LS.Title := GaussProfile.FTitle;
+
     TFormMain(Form).Chart.AddSerie(LS);
-    PointsSetList.Add(GaussProfile);
+    FPointsSetList.Add(GaussProfile);
 {$IFDEF USE_LEGEND}
     if FUpdateLegends then
     begin
@@ -590,23 +609,24 @@ begin
     Plot; //??? sdelat' optimal'no - bez polnogo perestroeniya
 end;
 
-procedure TFitViewer.PlotDeltaProfile(
-    Sender: TObject; DeltaProfile: TTitlePointsSet
-    );
-var LS: TTASerie;
+procedure TFitViewer.PlotDeltaProfile(Sender: TObject; DeltaProfile: TTitlePointsSet);
+var
+    LS: TTASerie;
 begin
     //Assert(Assigned(DeltaProfile));
-    if not Assigned(DeltaProfile) then Exit;
-    if not Assigned(PointsSetList) then Exit;
+    if not Assigned(DeltaProfile) then
+        Exit;
+    if not Assigned(FPointsSetList) then
+        Exit;
 
     LS := TTASerie.Create(nil);
     LS.PointStyle := psRectangle;
-    LS.ShowPoints := ViewMarkers;
+    LS.ShowPoints := FViewMarkers;
     LS.SeriesColor := clGreen;
-    LS.Title := DeltaProfile.Title;
-    
+    LS.Title := DeltaProfile.FTitle;
+
     TFormMain(Form).Chart.AddSerie(LS);
-    PointsSetList.Add(DeltaProfile);
+    FPointsSetList.Add(DeltaProfile);
 {$IFDEF USE_LEGEND}
     TFormMain(Form).CheckListBoxLegend.Items.AddObject(LS.Title, LS);
     TFormMain(Form).CheckListBoxLegend.Checked[
@@ -615,8 +635,7 @@ begin
     Plot; //??? sdelat' optimal'no - bez polnogo perestroeniya
 end;
 
-procedure TFitViewer.HideDataPoints(
-    Sender: TObject; DataPoints: TTitlePointsSet);
+procedure TFitViewer.HideDataPoints(Sender: TObject; DataPoints: TTitlePointsSet);
 begin
     Hide(Sender, DataPoints);
 {$IFDEF USE_GRIDS}
@@ -625,8 +644,8 @@ begin
 {$ENDIF}
 end;
 
-procedure TFitViewer.HideBackground(
-    Sender: TObject; BackgroundPoints: TTitlePointsSet);
+procedure TFitViewer.HideBackground(Sender: TObject;
+    BackgroundPoints: TTitlePointsSet);
 begin
     Hide(Sender, BackgroundPoints);
 {$IFDEF USE_GRIDS}
@@ -635,15 +654,18 @@ begin
 {$ENDIF}
 end;
 
-procedure TFitViewer.PlotBackground(
-    Sender: TObject; BackgroundPoints: TTitlePointsSet);
-var LS: TTASerie;
+procedure TFitViewer.PlotBackground(Sender: TObject;
+    BackgroundPoints: TTitlePointsSet);
+var
+    LS: TTASerie;
 begin
     //Assert(Assigned(BackgroundPoints));
-    if not Assigned(BackgroundPoints) then Exit;
-    if not Assigned(PointsSetList) then Exit;
+    if not Assigned(BackgroundPoints) then
+        Exit;
+    if not Assigned(FPointsSetList) then
+        Exit;
 
-    if PointsSetList.IndexOf(BackgroundPoints) = -1 then
+    if FPointsSetList.IndexOf(BackgroundPoints) = -1 then
     begin
         LS := TTASerie.Create(nil);
         LS.PointStyle := psCircle;
@@ -653,10 +675,10 @@ begin
         LS.ShowPoints := True;
         LS.InitShowLines := LS.ShowLines;
         LS.InitShowPoints := LS.ShowPoints;
-        LS.Title := BackgroundPoints.Title;
-        
+        LS.Title := BackgroundPoints.FTitle;
+
         TFormMain(Form).Chart.AddSerie(LS);
-        PointsSetList.Add(BackgroundPoints);
+        FPointsSetList.Add(BackgroundPoints);
 {$IFDEF USE_LEGEND}
         if FUpdateLegends then
         begin
@@ -674,25 +696,27 @@ begin
     PlotPointsSet(BackgroundPoints);
 end;
 
-procedure TFitViewer.PlotDataPoints(
-    Sender: TObject; DataPoints: TTitlePointsSet);
-var LS: TTASerie;
+procedure TFitViewer.PlotDataPoints(Sender: TObject; DataPoints: TTitlePointsSet);
+var
+    LS: TTASerie;
 begin
     //Assert(Assigned(DataPoints));
-    if not Assigned(DataPoints) then Exit;
-    if not Assigned(PointsSetList) then Exit;
+    if not Assigned(DataPoints) then
+        Exit;
+    if not Assigned(FPointsSetList) then
+        Exit;
 
-    if PointsSetList.IndexOf(DataPoints) = -1 then
+    if FPointsSetList.IndexOf(DataPoints) = -1 then
     begin
         LS := TTASerie.Create(nil);
         LS.PointStyle := psRectangle;
-        LS.ShowPoints := ViewMarkers;
+        LS.ShowPoints := FViewMarkers;
         LS.SeriesColor := clRed;
         LS.PointBrushStyle := bsClear;
-        LS.Title := DataPoints.Title;
-        
+        LS.Title := DataPoints.FTitle;
+
         TFormMain(Form).Chart.AddSerie(LS);
-        PointsSetList.Add(DataPoints);
+        FPointsSetList.Add(DataPoints);
 {$IFDEF USE_LEGEND}
         if FUpdateLegends then
         begin
@@ -710,12 +734,12 @@ begin
     PlotPointsSet(DataPoints);
 end;
 
-procedure TFitViewer.SetUpdateGrids(Update: Boolean);
+procedure TFitViewer.SetUpdateGrids(Update: boolean);
 begin
     FUpdateGrids := Update;
 end;
 
-procedure TFitViewer.SetUpdateLegends(Update: Boolean);
+procedure TFitViewer.SetUpdateLegends(Update: boolean);
 begin
     FUpdateLegends := Update;
 end;
@@ -736,45 +760,47 @@ begin
     TFormMain(Form).ShowHint(Hint);
 end;
 
-procedure TFitViewer.SetAnimationMode(On: Boolean);
+procedure TFitViewer.SetAnimationMode(On: boolean);
 begin
     FAnimationMode := On;
     if On then
     begin
-        FUpdateGrids := False;
+        FUpdateGrids   := False;
         FUpdateLegends := False;
     end
     else
     begin
-        FUpdateGrids := True;
+        FUpdateGrids   := True;
         FUpdateLegends := True;
-    end
+    end;
 end;
 
-function TFitViewer.GetAnimationMode: Boolean;
+function TFitViewer.GetAnimationMode: boolean;
 begin
     Result := FAnimationMode;
 end;
+
 {$ENDIF}
 
 constructor TFitViewer.Create(AOwner: TComponent);
 begin
     inherited Create(AOwner);
-    PointsSetList := TSelfCheckedComponentList.Create(nil);
-    PointsSetList.SetState(cfPassive);
-    FXCoordMode := 0;
-    FUpdateGrids := true;
-    FUpdateLegends := true;
+    FPointsSetList := TSelfCheckedComponentList.Create(nil);
+    FPointsSetList.SetState(cfPassive);
+    FXCoordMode    := 0;
+    FUpdateGrids   := True;
+    FUpdateLegends := True;
 end;
 
 destructor TFitViewer.Destroy;
 begin
-    PointsSetList.Free;
+    FPointsSetList.Free;
     inherited Destroy;
 end;
 
-function TFitViewer.GetActiveCurve: LongInt;
-var i: LongInt;
+function TFitViewer.GetActiveCurve: longint;
+var
+    i:  longint;
     TS: TTASerie;
 begin
     Result := -1;
@@ -787,101 +813,115 @@ begin
         begin
             Result := i;
             Break;
-        end
+        end;
     end;{for i := 0 to SeriesCount - 1 do...}
     Assert(Result <> -1);
 end;
 
 function TFitViewer.GetActivePointsSet: TNeutronPointsSet;
-var ActiveNumber: LongInt;
+var
+    ActiveNumber: longint;
 begin
-    if not Assigned(PointsSetList) then begin Result := nil; Exit; end;
+    if not Assigned(FPointsSetList) then
+    begin
+        Result := nil;
+        Exit;
+    end;
     ActiveNumber := GetActiveCurve;
-    Result := TNeutronPointsSet(PointsSetList.Items[ActiveNumber]);
+    Result := TNeutronPointsSet(FPointsSetList.Items[ActiveNumber]);
 end;
 
-function TFitViewer.GetPointsSet(ActiveNumber: LongInt): TNeutronPointsSet;
+function TFitViewer.GetPointsSet(ActiveNumber: longint): TNeutronPointsSet;
 begin
-    if not Assigned(PointsSetList) then begin Result := nil; Exit; end;
-    Result := TNeutronPointsSet(PointsSetList.Items[ActiveNumber]);
+    if not Assigned(FPointsSetList) then
+    begin
+        Result := nil;
+        Exit;
+    end;
+    Result := TNeutronPointsSet(FPointsSetList.Items[ActiveNumber]);
 end;
 
-procedure TFitViewer.SetXCoordMode(AMode: LongInt);
+procedure TFitViewer.SetXCoordMode(AMode: longint);
 begin
     FXCoordMode := AMode;
     Plot;   //  dolzhen byt' obrabotchik sobytiya, a rezhim
-            //  dolzhen ustanavlivat'sya v TIntegralIntmaker'e
+    //  dolzhen ustanavlivat'sya v TIntegralIntmaker'e
 end;
 
-function TFitViewer.GetMaxX: Double; //  sredi vseh prisoedinennyh krivyh
+function TFitViewer.GetMaxX: double; //  sredi vseh prisoedinennyh krivyh
 begin
-    GetMinMax(MinX,MaxX,MinY,MaxY);
-    Result := MaxX;
+    GetMinMax(FMinX, FMaxX, FMinY, FMaxY);
+    Result := FMaxX;
 end;
 
-function TFitViewer.GetMinX: Double; //  sredi vseh prisoedinennyh krivyh
+function TFitViewer.GetMinX: double; //  sredi vseh prisoedinennyh krivyh
 begin
-    GetMinMax(MinX,MaxX,MinY,MaxY);
-    Result := MinX;
+    GetMinMax(FMinX, FMaxX, FMinY, FMaxY);
+    Result := FMinX;
 end;
 
-function TFitViewer.GetMaxY: Double; //  sredi vseh prisoedinennyh krivyh
+function TFitViewer.GetMaxY: double; //  sredi vseh prisoedinennyh krivyh
 begin
-    GetMinMax(MinX,MaxX,MinY,MaxY);
-    Result := MaxY;
+    GetMinMax(FMinX, FMaxX, FMinY, FMaxY);
+    Result := FMaxY;
 end;
 
-function TFitViewer.GetMinY: Double; //  sredi vseh prisoedinennyh krivyh
+function TFitViewer.GetMinY: double; //  sredi vseh prisoedinennyh krivyh
 begin
-    GetMinMax(MinX,MaxX,MinY,MaxY);
-    Result := MinY;
+    GetMinMax(FMinX, FMaxX, FMinY, FMaxY);
+    Result := FMinY;
 end;
 
-procedure TFitViewer.GetMinMax(var AMinX, AMaxX, AMinY, AMaxY: Double);
-                                    //  sredi vseh prisoedinennyh krivyh
-var i, j: LongInt;
-    PS: TNeutronPointsSet;
+procedure TFitViewer.GetMinMax(var AMinX, AMaxX, AMinY, AMaxY: double);
+//  sredi vseh prisoedinennyh krivyh
+var
+    i, j: longint;
+    PS:   TNeutronPointsSet;
 begin
-    AMinX := MAX_VALUE; AMaxX := MIN_VALUE;
-    AMinY := MAX_VALUE; AMaxY := MIN_VALUE;
-    if not Assigned(PointsSetList) then Exit;
-    
-    for i := 0 to PointsSetList.Count - 1 do
-    begin
-        if PointsSetList.Items[i] is TPointsSet then
+    AMinX := MAX_VALUE;
+    AMaxX := MIN_VALUE;
+    AMinY := MAX_VALUE;
+    AMaxY := MIN_VALUE;
+    if not Assigned(FPointsSetList) then
+        Exit;
+
+    for i := 0 to FPointsSetList.Count - 1 do
+        if FPointsSetList.Items[i] is TPointsSet then
         begin
-            PS := TNeutronPointsSet(PointsSetList.Items[i]);
+            PS := TNeutronPointsSet(FPointsSetList.Items[i]);
             for j := 0 to PS.PointsCount - 1 do
             begin
-                if PS.PointXCoord[j] > MaxX then
+                if PS.PointXCoord[j] > FMaxX then
                     case XCoordMode of
-                        XCM_T: AMaxX := PS.PointT[j];
-                        XCM_2T: AMaxX := PS.Point2T[j];
+                        XCM_T: AMaxX     := PS.PointT[j];
+                        XCM_2T: AMaxX    := PS.Point2T[j];
                         XCM_SinTL: AMaxX := PS.PointSinTL[j];
                     end;
-                    
-                if PS.PointXCoord[j] < MinX then
+
+                if PS.PointXCoord[j] < FMinX then
                     case XCoordMode of
-                        XCM_T: AMinX := PS.PointT[j];
-                        XCM_2T: AMinX := PS.Point2T[j];
+                        XCM_T: AMinX     := PS.PointT[j];
+                        XCM_2T: AMinX    := PS.Point2T[j];
                         XCM_SinTL: AMinX := PS.PointSinTL[j];
                     end;
-                    
-                if PS.PointYCoord[j] > AMaxY then AMaxY := PS.PointYCoord[j];
-                if PS.PointYCoord[j] < AMinY then AMinY := PS.PointYCoord[j];
+
+                if PS.PointYCoord[j] > AMaxY then
+                    AMaxY := PS.PointYCoord[j];
+                if PS.PointYCoord[j] < AMinY then
+                    AMinY := PS.PointYCoord[j];
             end;
-        end;{if PointsSetList.Items[i] is TPointsSet then...}
-    end;
+        end{if FPointsSetList.Items[i] is TPointsSet then...};
 end;
 
-procedure TFitViewer.SetViewMarkers(AViewMarkers: Boolean);
+procedure TFitViewer.SetViewMarkers(AViewMarkers: boolean);
 begin
-    ViewMarkers := AViewMarkers;
+    FViewMarkers := AViewMarkers;
     ViewAllMarkers;
 end;
 
 procedure TFitViewer.ViewAllMarkers;
-var i: LongInt;
+var
+    i:  longint;
     TS: TTASerie;
 begin
     //  vkl./vykl. markerov imeet smysl tol'ko dlya teh grafikov,
@@ -891,8 +931,8 @@ begin
         TS := TTASerie(TFormMain(Form).Chart.GetSerie(i));
         if (TS.ShowLines) or (TS.InitShowLines) then
         begin
-            TS.ShowPoints := ViewMarkers;
-            TS.InitShowPoints := ViewMarkers;
+            TS.ShowPoints     := FViewMarkers;
+            TS.InitShowPoints := FViewMarkers;
         end;
     end;
 end;
@@ -902,10 +942,11 @@ procedure TFitViewer.ClearIntervalsTable;
 begin
     with TFormMain(Form).GridIntervals do
     begin
-        ColCount := 2;
+        ColCount  := 2;
         //  poka ruchnoy vvod ne podderzhivaetsya
-        RowCount := 1;//2;
-        FixedCols := 0; FixedRows := 1;
+        RowCount  := 1;//2;
+        FixedCols := 0;
+        FixedRows := 1;
 
         Cells[0, 0] := StartName;
         Cells[1, 0] := StopName;
@@ -921,32 +962,37 @@ begin
         ResetColWidths;
     end;
 end;
+
 {$ENDIF}
 
 {$IFDEF USE_GRIDS}
 procedure TFitViewer.FillIntervalsTable(RFactorIntervals: TTitlePointsSet);
-var i, RowIndex: LongInt;
+var
+    i, RowIndex: longint;
 begin
     //Assert(Assigned(RFactorIntervals));
-    if not Assigned(RFactorIntervals) then Exit;
+    if not Assigned(RFactorIntervals) then
+        Exit;
     //  !!! nel'zya isp., potomu chto sbivaet fokus vvoda !!!
     //ClearIntervalsTable;
 
     with TFormMain(Form).GridIntervals do
     begin
-        ColCount := 2;
+        ColCount  := 2;
         //  ruchnoy vvod v etu tabl. poka ne podderzhivaetsya,
         //  poetomu stroka ne doavlyaetsya
-        RowCount := RFactorIntervals.PointsCount div 2 +
+        RowCount  := RFactorIntervals.PointsCount div 2 +
             RFactorIntervals.PointsCount mod 2 +    //  dop. stroka dobavl.
-                                                    //  pri nechetnom chisle tochek
+              //  pri nechetnom chisle tochek
             1;//2;
-        FixedCols := 0; FixedRows := 1;
+        FixedCols := 0;
+        FixedRows := 1;
 
         Cells[0, 0] := StartName;
         Cells[1, 0] := StopName;
 
-        i := 0; RowIndex := FixedRows;
+        i := 0;
+        RowIndex := FixedRows;
         //  chislo tochek m.b. nechetnym, kogda posledniy interval ne zakryt
         while i < RFactorIntervals.PointsCount do
         begin
@@ -971,9 +1017,10 @@ begin
         ResetColWidths;
     end;
 end;
+
 {$ENDIF}
 
-function TFitViewer.ValToStr(Value: Double): string;
+function TFitViewer.ValToStr(Value: double): string;
 begin
     //  ogranichenie min. znacheniya pri isp. ffGeneral;
     //  chisla po modulyu men'she takogo - 0.00001 -
@@ -997,8 +1044,10 @@ begin
     begin
         //  poka ruchnoy vvod ne podderzhivaetsya,
         //  poetomu lishnyaya stroka ne dobavlyaetsya
-        ColCount := 2; RowCount := 1;//2;
-        FixedCols := 0; FixedRows := 1;
+        ColCount  := 2;
+        RowCount  := 1;//2;
+        FixedCols := 0;
+        FixedRows := 1;
 
         Cells[0, 0] := '         ';
         Cells[1, 0] := '         ';
@@ -1017,6 +1066,7 @@ begin
     TFormMain(Form).TabSheetParameters.TabVisible := False;
 {$ENDIF}
 end;
+
 {$ENDIF}
 
 {$IFDEF USE_GRIDS}
@@ -1026,8 +1076,10 @@ begin
     begin
         //  poka ruchnoy vvod ne podderzhivaetsya, poetomu
         //  lishnyaya stroka ne dobavlyaetsya
-        ColCount := 2; RowCount := 1;//2;
-        FixedCols := 0; FixedRows := 1;
+        ColCount  := 2;
+        RowCount  := 1;//2;
+        FixedCols := 0;
+        FixedRows := 1;
 
         Cells[0, 0] := NumberName;
         Cells[1, 0] := ArgumentName;
@@ -1050,8 +1102,10 @@ begin
     begin
         //  poka ruchnoy vvod ne podderzhivaetsya, poetomu
         //  lishnyaya stroka ne dobavlyaetsya
-        ColCount := 2; RowCount := 1;//2;
-        FixedCols := 0; FixedRows := 1;
+        ColCount  := 2;
+        RowCount  := 1;//2;
+        FixedCols := 0;
+        FixedRows := 1;
 
         Cells[0, 0] := ArgumentName;
         Cells[1, 0] := ValueName;
@@ -1069,31 +1123,34 @@ begin
 end;
 
 procedure TFitViewer.FillPositionsTable(CurvePositions: TTitlePointsSet);
-var j: LongInt;
+var
+    j: longint;
 begin
     //Assert(Assigned(CurvePositions));
-    if not Assigned(CurvePositions) then Exit;
+    if not Assigned(CurvePositions) then
+        Exit;
     //  !!! nel'zya isp., potomu chto sbivaet fokus vvoda !!!
     //ClearPositionsTable;
 
     with TFormMain(Form).GridSpecPositions do
     begin
-        ColCount := 2;
+        ColCount  := 2;
         //  dobavlyaetsya vsegda odna lishnyaya stroka,
         //  chtoby mozhno bylo vvodit' novye znacheniya vruchnuyu
         //RowCount := BackgroundPoints.PointsCount + 2;
         //  poka ruchnoy vvod ne podderzhivaetsya, poetomu
         //  lishnyaya stroka ne dobavlyaetsya
-        RowCount := CurvePositions.PointsCount + 1;
-        FixedCols := 0; FixedRows := 1;
+        RowCount  := CurvePositions.PointsCount + 1;
+        FixedCols := 0;
+        FixedRows := 1;
 
         Cells[0, 0] := ArgumentName;
         Cells[1, 0] := ValueName;
 
         for j := 0 to CurvePositions.PointsCount - 1 do
         begin
-            Cells[0, j + 1] := ValToStr(CurvePositions.PointXCoord[j]);
-            Cells[1, j + 1] := ValToStr(CurvePositions.PointYCoord[j]);
+            Cells[0, j + 1]   := ValToStr(CurvePositions.PointXCoord[j]);
+            Cells[1, j + 1]   := ValToStr(CurvePositions.PointYCoord[j]);
             //  priznaki zapolneniya yacheek
             Objects[0, j + 1] := TObject(1);
             Objects[1, j + 1] := TObject(1);
@@ -1114,31 +1171,34 @@ begin
 end;
 
 procedure TFitViewer.FillBackgroundTable(BackgroundPoints: TTitlePointsSet);
-var j: LongInt;
+var
+    j: longint;
 begin
     //Assert(Assigned(BackgroundPoints));
-    if not Assigned(BackgroundPoints) then Exit;
+    if not Assigned(BackgroundPoints) then
+        Exit;
     //  !!! nel'zya isp., potomu chto sbivaet fokus vvoda !!!
     //ClearBackgroundTable;
 
     with TFormMain(Form).GridBackground do
     begin
-        ColCount := 2;
+        ColCount  := 2;
         //  dobavlyaetsya vsegda odna lishnyaya stroka,
         //  chtoby mozhno bylo vvodit' novye znacheniya vruchnuyu
         //RowCount := BackgroundPoints.PointsCount + 2;
         //  poka ruchnoy vvod ne podderzhivaetsya, poetomu
         //  lishnyaya stroka ne dobavlyaetsya
-        RowCount := BackgroundPoints.PointsCount + 1;
-        FixedCols := 0; FixedRows := 1;
+        RowCount  := BackgroundPoints.PointsCount + 1;
+        FixedCols := 0;
+        FixedRows := 1;
 
         Cells[0, 0] := ArgumentName;
         Cells[1, 0] := ValueName;
 
         for j := 0 to BackgroundPoints.PointsCount - 1 do
         begin
-            Cells[0, j + 1] := ValToStr(BackgroundPoints.PointXCoord[j]);
-            Cells[1, j + 1] := ValToStr(BackgroundPoints.PointYCoord[j]);
+            Cells[0, j + 1]   := ValToStr(BackgroundPoints.PointXCoord[j]);
+            Cells[1, j + 1]   := ValToStr(BackgroundPoints.PointYCoord[j]);
             //  priznaki zapolneniya yacheek
             Objects[0, j + 1] := TObject(1);
             Objects[1, j + 1] := TObject(1);
@@ -1162,14 +1222,16 @@ procedure TFitViewer.ClearDataTable;
 begin
     with TFormMain(Form).GridData do
     begin
-        ColCount := 2; RowCount := 2;
-        FixedCols := 0; FixedRows := 1;
+        ColCount  := 2;
+        RowCount  := 2;
+        FixedCols := 0;
+        FixedRows := 1;
 
-        Cells[0, 0] := ArgumentName;
-        Cells[1, 0] := ValueName;
+        Cells[0, 0]   := ArgumentName;
+        Cells[1, 0]   := ValueName;
         //  ochistka dopolnitel'noy stroki
-        Cells[0, 1] := '';
-        Cells[1, 1] := '';
+        Cells[0, 1]   := '';
+        Cells[1, 1]   := '';
         //  priznaki NEzapolneniya yacheek
         Objects[0, 1] := TObject(0);
         Objects[1, 1] := TObject(0);
@@ -1178,40 +1240,43 @@ begin
 end;
 
 procedure TFitViewer.FillDataTable(Profile: TTitlePointsSet);
-var j: LongInt;
+var
+    j: longint;
 begin
     //  vozvraschaet polnyy profil' ili vybrannyy v dannyy moment uchastok
     //Assert(Assigned(Profile));
-    if not Assigned(Profile) then Exit;
+    if not Assigned(Profile) then
+        Exit;
     //  !!! nel'zya isp., potomu chto sbivaet fokus vvoda !!!
     //ClearDataTable;
 
     with TFormMain(Form).GridData do
     begin
-        ColCount := 2;
+        ColCount  := 2;
         //  dobavlyaetsya vsegda odna lishnyaya stroka,
         //  chtoby mozhno bylo vvodit' novye znacheniya vruchnuyu
-        RowCount := Profile.PointsCount + 2;
-        FixedCols := 0; FixedRows := 1;
+        RowCount  := Profile.PointsCount + 2;
+        FixedCols := 0;
+        FixedRows := 1;
 
         Cells[0, 0] := ArgumentName;
         Cells[1, 0] := ValueName;
 
         for j := 0 to Profile.PointsCount - 1 do
         begin
-            Cells[0, j + 1] := ValToStr(Profile.PointXCoord[j]);
-            Cells[1, j + 1] := ValToStr(Profile.PointYCoord[j]);
+            Cells[0, j + 1]   := ValToStr(Profile.PointXCoord[j]);
+            Cells[1, j + 1]   := ValToStr(Profile.PointYCoord[j]);
             //  priznaki zapolneniya yacheek
             Objects[0, j + 1] := TObject(1);
             Objects[1, j + 1] := TObject(1);
         end;
         //  ochistka dopolnitel'noy stroki
-        Cells[0, RowCount - 1] := '';
-        Cells[1, RowCount - 1] := '';
+        Cells[0, RowCount - 1]   := '';
+        Cells[1, RowCount - 1]   := '';
         //  priznaki NEzapolneniya poslednih yacheek
         Objects[0, RowCount - 1] := TObject(0);
         Objects[1, RowCount - 1] := TObject(0);
-        
+
         ResetColWidths;
     end;
 end;
@@ -1220,10 +1285,11 @@ procedure TFitViewer.ClearDatasheetTable;
 begin
     with TFormMain(Form).GridDatasheet do
     begin
-        ColCount := 4;
+        ColCount  := 4;
         //  ruchnoy vvod v etu tabl. ne nuzhen
-        RowCount := 1;
-        FixedCols := 1; FixedRows := 1;
+        RowCount  := 1;
+        FixedCols := 1;
+        FixedRows := 1;
 
         Cells[0, 0] := ArgumentName;
         Cells[1, 0] := ValueName;
@@ -1236,16 +1302,13 @@ begin
 {$ENDIF}
 end;
 
-procedure TFitViewer.FillDatasheetTable(
-    Profile: TTitlePointsSet;
-    CurvesList: TSelfCopiedCompList;
-    GaussProfile: TTitlePointsSet;
-    DeltaProfile: TTitlePointsSet;
-    RFactorIntervals: TTitlePointsSet
-    );
-var i, j, k, StartIndex, EndIndex, RowIndex, ColIndex: LongInt;
-    P: TCurvePointsSet;
-    StartX: Double;
+procedure TFitViewer.FillDatasheetTable(Profile: TTitlePointsSet;
+    CurvesList: TSelfCopiedCompList; GaussProfile: TTitlePointsSet;
+    DeltaProfile: TTitlePointsSet; RFactorIntervals: TTitlePointsSet);
+var
+    i, j, k, StartIndex, EndIndex, RowIndex, ColIndex: longint;
+    P:      TCurvePointsSet;
+    StartX: double;
 begin
     //Assert(Assigned(Profile));
     //Assert(Assigned(CurvesList));
@@ -1254,13 +1317,20 @@ begin
     //Assert(Assigned(RFactorIntervals));
     //Assert(RFactorIntervals.PointsCount mod 2 = 0);
     //Assert(RFactorIntervals.PointsCount <> 0);
-    if not Assigned(Profile) then Exit;
-    if not Assigned(CurvesList) then Exit;
-    if not Assigned(GaussProfile) then Exit;
-    if not Assigned(DeltaProfile) then Exit;
-    if not Assigned(RFactorIntervals) then Exit;
-    if not (RFactorIntervals.PointsCount mod 2 = 0) then Exit;
-    if RFactorIntervals.PointsCount = 0 then Exit;
+    if not Assigned(Profile) then
+        Exit;
+    if not Assigned(CurvesList) then
+        Exit;
+    if not Assigned(GaussProfile) then
+        Exit;
+    if not Assigned(DeltaProfile) then
+        Exit;
+    if not Assigned(RFactorIntervals) then
+        Exit;
+    if not (RFactorIntervals.PointsCount mod 2 = 0) then
+        Exit;
+    if RFactorIntervals.PointsCount = 0 then
+        Exit;
 {$IFDEF WINDOWS}
     TFormMain(Form).TabSheetDatasheet.TabVisible := True;
 {$ENDIF}
@@ -1270,33 +1340,37 @@ begin
         //  chislo kolonok = 1 (fiks.) + 3
         //  (eksp. profil', rasschit. profil', raznost') +
         //  maksimal'noe chislo krivyh v nekotorom intervale
-        ColCount := 4 + GetMaxCurveNum(CurvesList, RFactorIntervals);
+        ColCount    := 4 + GetMaxCurveNum(CurvesList, RFactorIntervals);
         //  na kazhdyy interval dobavlyaetsya stroka zagolovka
-        RowCount := 1 + GetPointsNumInIntervals(Profile, RFactorIntervals) +
+        RowCount    := 1 + GetPointsNumInIntervals(Profile, RFactorIntervals) +
             RFactorIntervals.PointsCount div 2;
-        FixedCols := 1; FixedRows := 1;
+        FixedCols   := 1;
+        FixedRows   := 1;
         //  zapolnenie yacheek
         //  zagolovki stolbtsov (!!! d.b. ne men'she 4-h - sm. nizhe !!!)
         Cells[0, 0] := ArgumentName;
         Cells[1, 0] := ValueName;
         Cells[2, 0] := SummarizedName;
         Cells[3, 0] := DeltaName;
-        for i := 4 to ColCount - 1 do Cells[i, 0] := 'Curve ' + IntToStr(i - 3);
+        for i := 4 to ColCount - 1 do
+            Cells[i, 0] := 'Curve ' + IntToStr(i - 3);
 
-        i := 0; RowIndex := FixedRows;
+        i := 0;
+        RowIndex := FixedRows;
         while i < RFactorIntervals.PointsCount do
         begin
             //  !!! RowIndex d. ukazyvat' na nachalo dannyh intervala !!!
             StartX := RFactorIntervals.PointXCoord[i];
             //  formiruetsya zagolovok
-            for j := 1 to ColCount - 1 do Cells[j, RowIndex] := '';
-            Cells[1, RowIndex] := 'Interval';
-            Cells[2, RowIndex] := 'number';
-            Cells[3, RowIndex] := IntToStr(i div 2 + 1);
+            for j := 1 to ColCount - 1 do
+                Cells[j, RowIndex] := '';
+            Cells[1, RowIndex]     := 'Interval';
+            Cells[2, RowIndex]     := 'number';
+            Cells[3, RowIndex]     := IntToStr(i div 2 + 1);
             Inc(RowIndex);
 
             StartIndex := Profile.IndexOfValueX(RFactorIntervals.PointXCoord[i]);
-            EndIndex := Profile.IndexOfValueX(RFactorIntervals.PointXCoord[i + 1]);
+            EndIndex   := Profile.IndexOfValueX(RFactorIntervals.PointXCoord[i + 1]);
             for j := StartIndex to EndIndex do
             begin
                 Cells[0, RowIndex + j - StartIndex] :=
@@ -1326,38 +1400,42 @@ begin
         end;
         ResetColWidths;
     end;
-    TFormMain(Form).ModifiedDatasheet := True;
+    TFormMain(Form).FModifiedDatasheet := True;
 end;
 
 procedure TFitViewer.FillSpecimenTable(SpecimenList: TMSCRSpecimenList);
 begin
     //Assert(Assigned(SpecimenList));
-    if not Assigned(SpecimenList) then Exit;
-    TFormMain(Form).SpecimenList := SpecimenList;
+    if not Assigned(SpecimenList) then
+        Exit;
+    TFormMain(Form).FSpecimenList := SpecimenList;
     SpecimenList.GridAssign(TFormMain(Form).GridParameters);
-    TFormMain(Form).ModifiedParameters := True;
+    TFormMain(Form).FModifiedParameters := True;
 {$IFDEF WINDOWS}
     TFormMain(Form).TabSheetParameters.TabVisible := True;
 {$ENDIF}
 end;
+
 {$ENDIF}
 
-function TFitViewer.GetMaxCurveNum(
-    CurvesList: TSelfCopiedCompList;
-    RFactorIntervals: TTitlePointsSet
-    ): LongInt;
-var i, j, CurCount: LongInt;
-    P: TCurvePointsSet;
-    StartX: Double;
+function TFitViewer.GetMaxCurveNum(CurvesList: TSelfCopiedCompList;
+    RFactorIntervals: TTitlePointsSet): longint;
+var
+    i, j, CurCount: longint;
+    P:      TCurvePointsSet;
+    StartX: double;
 begin
     Result := 0;
 
     //Assert(Assigned(CurvesList));
     //Assert(Assigned(RFactorIntervals));
     //Assert(RFactorIntervals.PointsCount mod 2 = 0);
-    if not Assigned(CurvesList) then Exit;
-    if not Assigned(RFactorIntervals) then Exit;
-    if not (RFactorIntervals.PointsCount mod 2 = 0) then Exit;
+    if not Assigned(CurvesList) then
+        Exit;
+    if not Assigned(RFactorIntervals) then
+        Exit;
+    if not (RFactorIntervals.PointsCount mod 2 = 0) then
+        Exit;
 
     //  idem po vsem intervalam, podschityvaya krivye,
     //  kot. k nim otnosyatsya
@@ -1365,32 +1443,36 @@ begin
     while j < RFactorIntervals.PointsCount do
     begin
         CurCount := 0;
-        StartX := RFactorIntervals.PointXCoord[j];
+        StartX   := RFactorIntervals.PointXCoord[j];
 
         for i := 0 to CurvesList.Count - 1 do
         begin
             P := TCurvePointsSet(CurvesList.Items[i]);
-            if StartX = P.PointXCoord[0] then Inc(CurCount);
+            if StartX = P.PointXCoord[0] then
+                Inc(CurCount);
         end;
-        if CurCount > Result then Result := CurCount;
+        if CurCount > Result then
+            Result := CurCount;
         j := j + 2;
     end;
 end;
 
-function TFitViewer.GetPointsNumInIntervals(
-    Profile: TTitlePointsSet;
-    RFactorIntervals: TTitlePointsSet
-    ): LongInt;
-var j, StartIndex, EndIndex: LongInt;
+function TFitViewer.GetPointsNumInIntervals(Profile: TTitlePointsSet;
+    RFactorIntervals: TTitlePointsSet): longint;
+var
+    j, StartIndex, EndIndex: longint;
 begin
     Result := 0;
-    
+
     //Assert(Assigned(Profile));
     //Assert(Assigned(RFactorIntervals));
     //Assert(RFactorIntervals.PointsCount mod 2 = 0);
-    if not Assigned(Profile) then Exit;
-    if not Assigned(RFactorIntervals) then Exit;
-    if not (RFactorIntervals.PointsCount mod 2 = 0) then Exit;
+    if not Assigned(Profile) then
+        Exit;
+    if not Assigned(RFactorIntervals) then
+        Exit;
+    if not (RFactorIntervals.PointsCount mod 2 = 0) then
+        Exit;
 
     j := 0;
     while j < RFactorIntervals.PointsCount do
@@ -1407,9 +1489,7 @@ procedure TFitViewer.Paint;
 begin
     TFormMain(Form).Chart.Paint;
 end;
+
 {$ENDIF}
 
 end.
-
-
-

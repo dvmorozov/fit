@@ -18,31 +18,32 @@ interface
 
 uses Classes, SysUtils,
 {$IFDEF FIT}
-     { Connects back to client in monolithic application for callbacks. }
-     fit_server_proxy,
+    { Connects back to client in monolithic application for callbacks. }
+    fit_server_proxy,
 {$ELSE}
-     { Server build. Key SERVER is not necessary. }
-     fit_viewer,
-     { Contains server form with chart component. }
-     form_main,
-     { Receives messages from client. }
-     fit_server_stub,
+    { Server build. Key SERVER is not necessary. }
+    fit_viewer,
+    { Contains server form with chart component. }
+    form_main,
+    { Receives messages from client. }
+    fit_server_stub,
 {$ENDIF}
-     { Implements server logic. }
-     fit_server,
-     { Contains algorithm container. }
-     fit_server_multithreaded, log;
+    { Implements server logic. }
+    fit_server,
+    { Contains algorithm container. }
+    fit_server_multithreaded, log;
+
 type
     { Class of server application. This class is basic unit of interaction
       with client. }
     TFitServerApp = class(TComponent)
     protected
 {$IFDEF FIT}
-        FFitProxy: TFitServerProxy;
+        FFitProxy:  TFitServerProxy;
 {$ELSE}
-        FViewer: TFitViewer;
-        FForm: TFormMain;
-        FFitStub: TFitServerStub;
+        FViewer:    TFitViewer;
+        FForm:      TFormMain;
+        FFitStub:   TFitServerStub;
 {$ENDIF}
         FFitServer: TFitServer;
 
@@ -79,20 +80,21 @@ begin
 {$IFDEF FIT}
     FFitProxy := TFitServerProxy.Create;
 {$ELSE}
-    FForm := TFormMain.Create(nil);
-    FViewer := TFitViewer.Create(nil);
+    FForm     := TFormMain.Create(nil);
+    FViewer   := TFitViewer.Create(nil);
     FViewer.Form := FForm;
-    FFitStub := TFitServerStub.Create;
+    FFitStub  := TFitServerStub.Create;
     FFitStub.RecreateServer := RecreateServer;
 {$ENDIF}
     RecreateServer;
 end;
+
 {$hints on}
 
 destructor TFitServerApp.Destroy;
 begin
     FFitServer.Free;    //  server dolzhen unichtozhat'sya pervym,
-                        //  chtoby byli zaversheny dochernie potoki
+    //  chtoby byli zaversheny dochernie potoki
 {$IFDEF FIT}
     FFitProxy.Free;
 {$ELSE}
@@ -104,8 +106,9 @@ end;
 
 procedure TFitServerApp.RecreateServer;
 begin
-    FFitServer.Free; FFitServer := nil;
-    FFitServer := TFitServerMultithreaded.Create;
+    FFitServer.Free;
+    FFitServer      := nil;
+    FFitServer      := TFitServerMultithreaded.Create;
 {$IFDEF FIT}
     FFitServer.FitProxy := FFitProxy;
 {$ELSE}
@@ -119,6 +122,3 @@ begin
 end;
 
 end.
-
-
-

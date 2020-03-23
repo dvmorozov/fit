@@ -20,7 +20,7 @@ unit data_loader;
 interface
 
 uses Classes, SysUtils, points_set, title_points_set,
-  neutron_points_set, int_data_loader;
+    neutron_points_set, int_data_loader;
 
 type
     EFileNotExists = class(Exception);
@@ -30,8 +30,8 @@ type
     { Basic class for building loaders for different types of data files. }
     TDataLoader = class(TComponent, IDataLoader)
     protected
-        PointsSet: TPointsSet;
-        FFileName: string;
+        FPointsSet: TPointsSet;
+        FFileName:  string;
 
         procedure LoadDataSetActually; virtual; abstract;
         procedure CreatePointsSet;
@@ -43,39 +43,43 @@ type
         destructor Destroy; override;
     end;
 
-function MyStrToFloat(Str: string): Double;
+function MyStrToFloat(Str: string): double;
 
 implementation
 
 {$warnings off}
-function MyStrToFloat(Str: string): Double;
-var i: LongInt;
+function MyStrToFloat(Str: string): double;
+var
+    i: longint;
 begin
     for i := 1 to Length(Str) do
         if (Str[i] = '.') or (Str[i] = ',') then
             Str[i] := DecimalSeparator;
     Result := StrToFloat(Str);
 end;
+
 {$warnings on}
 
 {============================== TDataLoader ===================================}
 
 function TDataLoader.GetPointsSetCopy: TTitlePointsSet;
 begin
-    Assert(Assigned(PointsSet));
-    Result := TTitlePointsSet.CreateFromPoints(nil, PointsSet);
+    Assert(Assigned(FPointsSet));
+    Result := TTitlePointsSet.CreateFromPoints(nil, FPointsSet);
 end;
 
 destructor TDataLoader.Destroy;
 begin
-    PointsSet.Free;
+    FPointsSet.Free;
     inherited Destroy;
 end;
 
 procedure TDataLoader.CreatePointsSet;
 begin
-    if Assigned(PointsSet) then PointsSet.Clear
-    else PointsSet := TNeutronPointsSet.Create(nil);
+    if Assigned(FPointsSet) then
+        FPointsSet.Clear
+    else
+        FPointsSet := TNeutronPointsSet.Create(nil);
 end;
 
 procedure TDataLoader.LoadDataSet(AFileName: string);
@@ -89,18 +93,17 @@ end;
 
 procedure TDataLoader.Reload;
 begin
-    //  Object PointsSet must be saved because 
+    //  Object FPointsSet must be saved because
     //  there can be external pointers to it.
     Assert(FFileName <> '');
-    Assert(Assigned(PointsSet));
+    Assert(Assigned(FPointsSet));
 
     if not FileExists(FFileName) then
         raise EFileNotExists.Create('File ' + FFileName +
             ' does not exists.');
 
-    PointsSet.Clear;
+    FPointsSet.Clear;
     LoadDataSetActually;
 end;
 
 end.
-

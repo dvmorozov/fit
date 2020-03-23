@@ -22,33 +22,33 @@ type
         IOptimizedFunction, IDownhillRealParameters, IUpdatingResults)
     private
         Container: TDownhillSimplexContainer;
-        
+
     protected
-        procedure SetTerminated(ATerminated: Boolean); override;
+        procedure SetTerminated(ATerminated: boolean); override;
 
     public
-        procedure Minimize(var ErrorCode: LongInt); override;
+        procedure Minimize(var ErrorCode: longint); override;
 
         {IOptimizedFunction}
-        function GetOptimizedFunction: Double;
+        function GetOptimizedFunction: double;
 
         {IDownhillRealParameters}
         procedure CreateParameters;
         procedure ParametersUpdated;
 
         {IDownhillSimplexParameters}
-        function GetParametersNumber: LongInt;
-        function GetParameter(index: LongInt): TVariableParameter;
-        procedure SetParameter(index: LongInt; AParameter: TVariableParameter);
+        function GetParametersNumber: longint;
+        function GetParameter(index: longint): TVariableParameter;
+        procedure SetParameter(index: longint; AParameter: TVariableParameter);
 
         {IDiscretValue}
-        function GetNumberOfValues: LongInt;
-        function GetValueIndex: LongInt;
-        procedure SetValueIndex(const AValueIndex: LongInt);
+        function GetNumberOfValues: longint;
+        function GetValueIndex: longint;
+        procedure SetValueIndex(const AValueIndex: longint);
 
         {IUpdatingResults}
         procedure ShowCurJobProgress(Sender: TComponent;
-            MinValue, MaxValue, CurValue: LongInt);
+            MinValue, MaxValue, CurValue: longint);
         procedure ResetCurJobProgress(Sender: TComponent);
         procedure ShowMessage(Sender: TComponent; Msg: string);
         procedure UpdatingResults(Sender: TComponent);
@@ -66,17 +66,19 @@ begin
 end;
 
 {========================== TDownhillSimplexMinimizer =========================}
-procedure TDownhillSimplexMinimizer.Minimize(var ErrorCode: LongInt);
+procedure TDownhillSimplexMinimizer.Minimize(var ErrorCode: longint);
 begin
-    ErrorCode := IsReady;
+    ErrorCode  := IsReady;
     Terminated := False;
-    if ErrorCode <> MIN_NO_ERRORS then Exit;
+    if ErrorCode <> MIN_NO_ERRORS then
+        Exit;
 
-    with Container do Run;
+    with Container do
+        Run;
 end;
 
 {IOptimizedFunction}
-function TDownhillSimplexMinimizer.GetOptimizedFunction: Double;
+function TDownhillSimplexMinimizer.GetOptimizedFunction: double;
 begin
     OnCalcFunc;
     Result := OnFunc;
@@ -92,7 +94,7 @@ begin
 end;
 
 {IDownhillSimplexParameters}
-function TDownhillSimplexMinimizer.GetParametersNumber: LongInt;
+function TDownhillSimplexMinimizer.GetParametersNumber: longint;
 begin
     Result := 0;
     OnSetFirstParam;
@@ -103,31 +105,34 @@ begin
     end;
 end;
 
-function TDownhillSimplexMinimizer.GetParameter(
-    index: LongInt): TVariableParameter;
-var i: LongInt;
+function TDownhillSimplexMinimizer.GetParameter(index: longint): TVariableParameter;
+var
+    i: longint;
 begin
     i := 0;
     OnSetFirstParam;
     while not OnEndOfCycle do
     begin
-        if i = index then Break;
+        if i = index then
+            Break;
         Inc(i);
         OnSetNextParam;
     end;
     Result.Limited := False;
-    Result.Value := OnGetParam;
+    Result.Value   := OnGetParam;
 end;
 
-procedure TDownhillSimplexMinimizer.SetParameter(
-    index: LongInt; AParameter: TVariableParameter);
-var i: LongInt;
+procedure TDownhillSimplexMinimizer.SetParameter(index: longint;
+    AParameter: TVariableParameter);
+var
+    i: longint;
 begin
     i := 0;
     OnSetFirstParam;
     while not OnEndOfCycle do
     begin
-        if i = index then Break;
+        if i = index then
+            Break;
         Inc(i);
         OnSetNextParam;
     end;
@@ -135,25 +140,25 @@ begin
 end;
 
 {IDiscretValue}
-function TDownhillSimplexMinimizer.GetNumberOfValues: LongInt;
+function TDownhillSimplexMinimizer.GetNumberOfValues: longint;
 begin
     //  Minimum number of values should be equal to 1.
     Result := 1;
 end;
 
-function TDownhillSimplexMinimizer.GetValueIndex: LongInt;
+function TDownhillSimplexMinimizer.GetValueIndex: longint;
 begin
     Result := 0;
 end;
 
-procedure TDownhillSimplexMinimizer.SetValueIndex(const AValueIndex: LongInt);
+procedure TDownhillSimplexMinimizer.SetValueIndex(const AValueIndex: longint);
 begin
     Assert(AValueIndex = 0);
 end;
 
 {$hints off}
 procedure TDownhillSimplexMinimizer.ShowCurJobProgress(Sender: TComponent;
-    MinValue, MaxValue, CurValue: LongInt);
+    MinValue, MaxValue, CurValue: longint);
 begin
 
 end;
@@ -167,6 +172,7 @@ procedure TDownhillSimplexMinimizer.ShowMessage(Sender: TComponent; Msg: string)
 begin
 
 end;
+
 {$hints on}
 
 procedure TDownhillSimplexMinimizer.UpdatingResults(Sender: TComponent);
@@ -178,10 +184,11 @@ begin
     end;
 end;
 
-procedure TDownhillSimplexMinimizer.SetTerminated(ATerminated: Boolean);
+procedure TDownhillSimplexMinimizer.SetTerminated(ATerminated: boolean);
 begin
     inherited;
-    if ATerminated then Container.StopAlgorithm;
+    if ATerminated then
+        Container.StopAlgorithm;
 end;
 
 constructor TDownhillSimplexMinimizer.Create(AOwner: TComponent);
@@ -205,6 +212,3 @@ begin
 end;
 
 end.
-
-
-

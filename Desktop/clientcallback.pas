@@ -5,12 +5,12 @@ unit ClientCallback;
 interface
 
 uses
-  Classes, SysUtils;
+    Classes, SysUtils;
 
 { Defines callback functions called from server to client. }
 type
     IClientCallback = interface
-        procedure ShowCurMin(Min: Double);
+        procedure ShowCurMin(Min: double);
         procedure ShowProfile();
         procedure Done;
         procedure FindPeakBoundsDone;
@@ -21,4 +21,3 @@ type
 implementation
 
 end.
-

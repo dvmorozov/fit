@@ -19,26 +19,30 @@ type
     { Implements simple downhill simplex algorithm. }
     TSimpleMinimizer = class(TMinimizer)
     public
-        procedure Minimize(var ErrorCode: LongInt); override;
+        procedure Minimize(var ErrorCode: longint); override;
     end;
 
     { Implements simple downhill simplex algorithm having different steps for every parameter. }
     TSimpleMinimizer2 = class(TMinimizer)
     public
         { Divides all steps by 2. }
-        DivideStepsBy2: procedure of object;
+        DivideStepsBy2:
+        procedure of object;
         { Returns flag terminating calculation. }
-        EndOfCalculation: function: Boolean of object;
-        procedure Minimize(var ErrorCode: LongInt); override;
+        EndOfCalculation:
+        function: boolean of object;
+        procedure Minimize(var ErrorCode: longint); override;
     end;
 
     { Implements simple downhill simplex algorithm able to increase step size. Now this variant is used. }
     TSimpleMinimizer3 = class(TMinimizer)
     public
-        MultipleSteps: procedure(Factor: Double) of object;
+        MultipleSteps:
+        procedure(Factor: double) of object;
         { Returns flag terminating calculation. }
-        EndOfCalculation: function: Boolean of object;
-        procedure Minimize(var ErrorCode: LongInt); override;
+        EndOfCalculation:
+        function: boolean of object;
+        procedure Minimize(var ErrorCode: longint); override;
     end;
 
 procedure Register;
@@ -53,17 +57,19 @@ begin
 end;
 
 {============================== TSimpleMinimizer ==============================}
-procedure TSimpleMinimizer.Minimize(var ErrorCode: LongInt);
-var Step: Double;
-    SaveParam: Double;
-    MinimizeValue,MinimizeValue2: Double;
-    MinIndex: LongInt;
-    TotalMinimum: Double;
+procedure TSimpleMinimizer.Minimize(var ErrorCode: longint);
+var
+    Step:      double;
+    SaveParam: double;
+    MinimizeValue, MinimizeValue2: double;
+    MinIndex:  longint;
+    TotalMinimum: double;
 begin
     //  proverka prisoedineniya interfeysnyh funktsiy
     ErrorCode := IsReady;
-    if ErrorCode <> MIN_NO_ERRORS then Exit;
-    
+    if ErrorCode <> MIN_NO_ERRORS then
+        Exit;
+
     Step := OnGetStep;
     while (Step >= 0.001{!!!}) and (not Terminated) do
     begin
@@ -74,7 +80,7 @@ begin
         while (not OnEndOfCycle) and (not Terminated) do
         begin
             OnCalcFunc;
-            SaveParam := OnGetParam;
+            SaveParam      := OnGetParam;
             CurrentMinimum := OnFunc;
 
             OnSetParam(SaveParam + Step);
@@ -89,17 +95,20 @@ begin
             MinIndex := 0;
 
             if (MinimizeValue >= CurrentMinimum) and
-               (MinimizeValue2 >= CurrentMinimum) then MinIndex := 0;
+                (MinimizeValue2 >= CurrentMinimum) then
+                MinIndex := 0;
             if (MinimizeValue >= CurrentMinimum) and
-               (MinimizeValue2 < CurrentMinimum) then MinIndex := 2;
+                (MinimizeValue2 < CurrentMinimum) then
+                MinIndex := 2;
             if (MinimizeValue < CurrentMinimum) and
-               (MinimizeValue2 >= CurrentMinimum) then MinIndex := 1;
+                (MinimizeValue2 >= CurrentMinimum) then
+                MinIndex := 1;
             if (MinimizeValue < CurrentMinimum) and
-               (MinimizeValue2 < CurrentMinimum) then
-            begin
+                (MinimizeValue2 < CurrentMinimum) then
                 if MinimizeValue <= MinimizeValue2 then
-                    MinIndex := 1 else MinIndex := 2;
-            end;
+                    MinIndex := 1
+                else
+                    MinIndex := 2;
 
             case MinIndex of
                 1: OnSetParam(SaveParam + Step);
@@ -116,24 +125,27 @@ begin
                 end;
             OnSetNextParam;
         end;
-        if OnFunc >= TotalMinimum then OnSetStep(Step / 2);
+        if OnFunc >= TotalMinimum then
+            OnSetStep(Step / 2);
     end;{while (Step > 1e-5) and (not Terminated) do...}
 end;
 
 {============================== TSimpleMinimizer2 =============================}
-procedure TSimpleMinimizer2.Minimize(var ErrorCode: LongInt);
-var Step: Double;
-    SaveParam: Double;
-    MinimizeValue, MinimizeValue2: Double;
-    MinIndex: LongInt;
-    TotalMinimum: Double;
-    NewMinFound: Boolean;
+procedure TSimpleMinimizer2.Minimize(var ErrorCode: longint);
+var
+    Step:      double;
+    SaveParam: double;
+    MinimizeValue, MinimizeValue2: double;
+    MinIndex:  longint;
+    TotalMinimum: double;
+    NewMinFound: boolean;
 begin
     //  proverka prisoedineniya interfeysnyh funktsiy
     ErrorCode := IsReady;
-    if ErrorCode <> MIN_NO_ERRORS then Exit;
+    if ErrorCode <> MIN_NO_ERRORS then
+        Exit;
     CurrentMinimum := OnFunc;
-    
+
     //??? vydavat' kod oshibki ili vybrasyvat' isklyuchenie
     Assert(Assigned(DivideStepsBy2));
 
@@ -146,7 +158,7 @@ begin
         while (not OnEndOfCycle) and (not Terminated) do
         begin
             //  poluchenie shaga izmeneniya dlya ocherednogo parametra
-            Step := OnGetStep;
+            Step      := OnGetStep;
             //  poluchenie znacheniya ocherednogo parametra
             SaveParam := OnGetParam;
 
@@ -168,64 +180,78 @@ begin
             OnSetParam(SaveParam);
             MinIndex := 0;
             if (MinimizeValue >= CurrentMinimum) and
-               (MinimizeValue2 >= CurrentMinimum) then MinIndex := 0;
+                (MinimizeValue2 >= CurrentMinimum) then
+                MinIndex := 0;
             if (MinimizeValue >= CurrentMinimum) and
-               (MinimizeValue2 < CurrentMinimum) then MinIndex := 2;
+                (MinimizeValue2 < CurrentMinimum) then
+                MinIndex := 2;
             if (MinimizeValue < CurrentMinimum) and
-               (MinimizeValue2 >= CurrentMinimum) then MinIndex := 1;
+                (MinimizeValue2 >= CurrentMinimum) then
+                MinIndex := 1;
             if (MinimizeValue < CurrentMinimum) and
-               (MinimizeValue2 < CurrentMinimum) then
-            begin
+                (MinimizeValue2 < CurrentMinimum) then
                 if MinimizeValue <= MinimizeValue2 then
-                    MinIndex := 1 else MinIndex := 2;
-            end;
+                    MinIndex := 1
+                else
+                    MinIndex := 2;
 
             NewMinFound := False;
             case MinIndex of
-                1: begin OnSetParam(SaveParam + Step); NewMinFound := True; end;
-                2: begin OnSetParam(SaveParam - Step); NewMinFound := True; end;
+                1:
+                begin
+                    OnSetParam(SaveParam + Step);
+                    NewMinFound := True;
+                end;
+                2:
+                begin
+                    OnSetParam(SaveParam - Step);
+                    NewMinFound := True;
+                end;
             end;
 
             if NewMinFound then
             begin
                 OnCalcFunc; //  pereschet nuzhno delat', chtoby dopolnitel'nye dannye
-                            //  imeli znacheniya, sootvetstvuyuschie minimal'nomu znacheniyu
-                            //  funktsii
+                //  imeli znacheniya, sootvetstvuyuschie minimal'nomu znacheniyu
+                //  funktsii
                 CurrentMinimum := OnFunc;
-                if Assigned(OnShowCurMin) then OnShowCurMin;
+                if Assigned(OnShowCurMin) then
+                    OnShowCurMin;
                 //OutputDebugString(PChar(FloatToStr(CurrentMinimum) + Chr(10) + Chr(13)));
             end;
             OnSetNextParam;
         end;{while (not OnEndOfCycle) and (not Terminated) do...}
-        if (TotalMinimum <> 0) and
-           (Abs(CurrentMinimum - TotalMinimum) / TotalMinimum < 1e-5) then
-                DivideStepsBy2;
+        if (TotalMinimum <> 0) and (Abs(CurrentMinimum - TotalMinimum) /
+            TotalMinimum < 1e-5) then
+            DivideStepsBy2;
     end;{while (not EndOfCalculation) and (not Terminated) do...}
 end;
 
 {============================== TSimpleMinimizer3 =============================}
-procedure TSimpleMinimizer3.Minimize(var ErrorCode: LongInt);
-var Step: Double;
-    SaveParam: Double;
-    MinimizeValue, MinimizeValue2: Double;
-    MinIndex: LongInt;
-    TotalMinimum: Double;
-    NewMinFound: Boolean;
-    DownCount: LongInt;
-    
-    debug: LongInt;//???
+procedure TSimpleMinimizer3.Minimize(var ErrorCode: longint);
+var
+    Step:      double;
+    SaveParam: double;
+    MinimizeValue, MinimizeValue2: double;
+    MinIndex:  longint;
+    TotalMinimum: double;
+    NewMinFound: boolean;
+    DownCount: longint;
+
+    debug: longint;//???
 begin
     //  proverka prisoedineniya interfeysnyh funktsiy
     ErrorCode := IsReady;
-    if ErrorCode <> MIN_NO_ERRORS then Exit;
+    if ErrorCode <> MIN_NO_ERRORS then
+        Exit;
     CurrentMinimum := OnFunc;
-    TotalMinimum := CurrentMinimum;
-    DownCount := 0;
+    TotalMinimum   := CurrentMinimum;
+    DownCount      := 0;
 
     Assert(Assigned(MultipleSteps));
-    
+
     debug := 0;
-    
+
     //  beskonechnyy tsikl optimizatsii
     while (not EndOfCalculation) and (not Terminated) do
     begin
@@ -235,7 +261,7 @@ begin
         begin
             Inc(debug);
             //  poluchenie shaga izmeneniya dlya ocherednogo parametra
-            Step := OnGetStep;
+            Step      := OnGetStep;
             //  poluchenie znacheniya ocherednogo parametra
             SaveParam := OnGetParam;
 
@@ -257,36 +283,48 @@ begin
             OnSetParam(SaveParam);
             MinIndex := 0;
             if (MinimizeValue >= CurrentMinimum) and
-               (MinimizeValue2 >= CurrentMinimum) then MinIndex := 0;
+                (MinimizeValue2 >= CurrentMinimum) then
+                MinIndex := 0;
             if (MinimizeValue >= CurrentMinimum) and
-               (MinimizeValue2 < CurrentMinimum) then MinIndex := 2;
+                (MinimizeValue2 < CurrentMinimum) then
+                MinIndex := 2;
             if (MinimizeValue < CurrentMinimum) and
-               (MinimizeValue2 >= CurrentMinimum) then MinIndex := 1;
+                (MinimizeValue2 >= CurrentMinimum) then
+                MinIndex := 1;
             if (MinimizeValue < CurrentMinimum) and
-               (MinimizeValue2 < CurrentMinimum) then
-            begin
+                (MinimizeValue2 < CurrentMinimum) then
                 if MinimizeValue <= MinimizeValue2 then
-                    MinIndex := 1 else MinIndex := 2;
-            end;
+                    MinIndex := 1
+                else
+                    MinIndex := 2;
 
             NewMinFound := False;
             case MinIndex of
-                1: begin OnSetParam(SaveParam + Step); NewMinFound := True; end;
-                2: begin OnSetParam(SaveParam - Step); NewMinFound := True; end;
+                1:
+                begin
+                    OnSetParam(SaveParam + Step);
+                    NewMinFound := True;
+                end;
+                2:
+                begin
+                    OnSetParam(SaveParam - Step);
+                    NewMinFound := True;
+                end;
             end;
 
             if NewMinFound then
             begin
                 OnCalcFunc; //  pereschet nuzhno delat', chtoby dopolnitel'nye dannye
-                            //  imeli znacheniya, sootvetstvuyuschie minimal'nomu znacheniyu
-                            //  funktsii
+                //  imeli znacheniya, sootvetstvuyuschie minimal'nomu znacheniyu
+                //  funktsii
                 CurrentMinimum := OnFunc;
-                if Assigned(OnShowCurMin) then OnShowCurMin;
+                if Assigned(OnShowCurMin) then
+                    OnShowCurMin;
                 //OutputDebugString(PChar(FloatToStr(CurrentMinimum)));
             end;
             OnSetNextParam;
         end;{while (not OnEndOfCycle) and (not Terminated) do...}
-        
+
         if (TotalMinimum <> 0) then
         begin
             //  CurrentMinimum m. stat' bol'she, chem TotalMinimum posle
@@ -299,10 +337,9 @@ begin
                 //  shag uvelichivaetsya
                 Inc(DownCount);
                 if DownCount >= 10 then
-                begin
-                    MultipleSteps(1.01);
+                    MultipleSteps(1.01)
                     //OutputDebugString(PChar('Parameter steps increased...'));
-                end;
+                ;
             end
             else
             begin
@@ -314,10 +351,10 @@ begin
             end;
             if CurrentMinimum < TotalMinimum then
                 TotalMinimum := CurrentMinimum;
-        end else Break;
+        end
+        else
+            Break;
     end;{while (not EndOfCalculation) and (not Terminated) do...}
 end;
 
 end.
-
-

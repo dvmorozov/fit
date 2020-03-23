@@ -27,14 +27,14 @@ type
           synchronously. }
         FMainCalcThread: TMainCalcThread;
         { Temporarily saved value of current minimum. }
-        FCurMin: Double;
+        FCurMin: double;
 
-        procedure RecreateMainCalcThread(
-            ATask: TThreadMethod; AAllDone: TThreadMethod); override;
+        procedure RecreateMainCalcThread(ATask: TThreadMethod;
+            AAllDone: TThreadMethod); override;
         { Waits for completion of the thread. Do not call from synchonized
           method, otherwise this will result in deadlock. }
         procedure DestroyMainCalcThread;
-        
+
         function CreateTaskObject: TFitTask; override;
 
         { IClientCallback synchronized counterparts }
@@ -57,7 +57,7 @@ type
           because they update UI. These methods must not call inherited ones,
           instead call synchronized counterparts of FMainCalcThread. }
 
-        procedure ShowCurMin(Min: Double); override;
+        procedure ShowCurMin(Min: double); override;
         procedure ShowProfile; override;
         procedure Done; override;
         procedure FindPeakBoundsDone; override;
@@ -78,23 +78,25 @@ implementation
 
 destructor TFitServerWithThread.Destroy;
 begin
-    if State = AsyncOperation then AbortAsyncOper;
+    if State = AsyncOperation then
+        AbortAsyncOper;
     inherited;
 end;
 
 {$warnings off}
-procedure TFitServerWithThread.RecreateMainCalcThread(
-    ATask: TThreadMethod; AAllDone: TThreadMethod);
+procedure TFitServerWithThread.RecreateMainCalcThread(ATask: TThreadMethod;
+    AAllDone: TThreadMethod);
 begin
-    if State = AsyncOperation then AbortAsyncOper;
-    DoneDisabled := False;
+    if State = AsyncOperation then
+        AbortAsyncOper;
+    FDoneDisabled := False;
 
     if Assigned(FMainCalcThread) then
         DestroyMainCalcThread;
 
     FMainCalcThread := TMainCalcThread.Create(True { CreateSuspended });
     if Assigned(FMainCalcThread.FatalException) then
-       raise FMainCalcThread.FatalException;
+        raise FMainCalcThread.FatalException;
 
     { Assigns callbacks. }
     FMainCalcThread.SetSyncMethods(
@@ -106,6 +108,7 @@ begin
     { Starts thread. }
     FMainCalcThread.Resume;
 end;
+
 {$warnings on}
 
 procedure TFitServerWithThread.DestroyMainCalcThread;
@@ -125,42 +128,40 @@ begin
         raise EUserException.Create(InadmissibleServerState + CRLF +
             CalcNotStarted);
 
-    Assert(Assigned(TaskList));
+    Assert(Assigned(FTaskList));
     Assert(Assigned(FMainCalcThread));
 
-    DoneDisabled := True;
+    FDoneDisabled := True;
 
     FMainCalcThread.Terminate;
     DestroyMainCalcThread;
-    FState := SavedState;
+    FState := FSavedState;
 end;
 
 procedure TFitServerWithThread.StopAsyncOper;
 var
-    i: LongInt;
+    i: longint;
 begin
     if State <> AsyncOperation then
         raise EUserException.Create(InadmissibleServerState + CRLF +
             CalcNotStarted);
 
-    Assert(Assigned(TaskList));
+    Assert(Assigned(FTaskList));
     Assert(Assigned(FMainCalcThread));
 
-    for i := 0 to TaskList.Count - 1 do
-    begin
-        TFitTask(TaskList.Items[i]).StopAsyncOper;
-    end;
+    for i := 0 to FTaskList.Count - 1 do
+        TFitTask(FTaskList.Items[i]).StopAsyncOper;
 
     FMainCalcThread.Terminate;
 end;
 
 function TFitServerWithThread.CreateTaskObject: TFitTask;
 begin
-    Result := TFitTask.Create(nil,
-        FBackgroundVariationEnabled, FCurveScalingEnabled);
+    Result := TFitTask.Create(nil, FBackgroundVariationEnabled,
+        FCurveScalingEnabled);
 end;
 
-procedure TFitServerWithThread.ShowCurMin(Min: Double);
+procedure TFitServerWithThread.ShowCurMin(Min: double);
 begin
     FCurMin := Min;
     FMainCalcThread.ShowCurMin;
@@ -222,6 +223,3 @@ begin
 end;
 
 end.
-
-
-

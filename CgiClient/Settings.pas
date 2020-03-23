@@ -1,7 +1,7 @@
 unit Settings;
 
 //{$mode objfpc}{$H+}
-{$MODE Delphi}      //  trebuetsya dlya togo, chtoby skompilirovat' TFindContainer
+{$MODE Delphi}//  trebuetsya dlya togo, chtoby skompilirovat' TFindContainer
 
 interface
 
@@ -17,7 +17,7 @@ type
         property Name: string read FName write FName;
         property Description: string read FDescription write FDescription;
     end;
-    
+
     File_v1 = class(TComponent)
     protected
         FName: string;
@@ -27,38 +27,40 @@ type
         property Name: string read FName write FName;
         property Description: string read FDescription write FDescription;
     end;
-    
+
     TFindContainer = class(TObject)
     public
         procedure OnFindComponentClass(Reader: TReader;
             const ClassName: string; var ComponentClass: TComponentClass);
     end;
-    
+
 function CreateXMLWriter(ADoc: TDOMDocument; const Path: string;
-    Append: Boolean; var DestroyDriver: Boolean): TWriter;
+    Append: boolean; var DestroyDriver: boolean): TWriter;
 function CreateXMLReader(ADoc: TDOMDocument; const Path: string;
-    var DestroyDriver: Boolean): TReader;
+    var DestroyDriver: boolean): TReader;
 
 procedure WriteComponentToXMLConfig(XMLConfig: TXMLConfig; const Path: string;
     AComponent: TComponent);
 procedure ReadComponentFromXMLConfig(XMLConfig: TXMLConfig; const Path: string;
     var RootComponent: TComponent;  //  [in, out] - kornevoy komponent,
-                                    //  kotoryy chitaetsya iz potoka
+    //  kotoryy chitaetsya iz potoka
     OnFindComponentClass: TFindComponentClassEvent;
     TheOwner: TComponent            //  vladelets novogo kornevogo komponenta
     );
-    
+
 function ReadProjectProperties_v1(FileName: string): Project_v1;
 function ReadFileProperties_v1(FileName: string): File_v1;
 procedure WriteProperties(FileName: string; Prop: TComponent);
 
 implementation
 
-var FC: TFindContainer;
+var
+    FC: TFindContainer;
 
 function CreateXMLWriter(ADoc: TDOMDocument; const Path: string;
-    Append: Boolean; var DestroyDriver: Boolean): TWriter;
-var Driver: TAbstractObjectWriter;
+    Append: boolean; var DestroyDriver: boolean): TWriter;
+var
+    Driver: TAbstractObjectWriter;
 begin
     Driver := TXMLObjectWriter.Create(ADoc, Path, Append);
     DestroyDriver := True;
@@ -66,8 +68,9 @@ begin
 end;
 
 function CreateXMLReader(ADoc: TDOMDocument; const Path: string;
-  var DestroyDriver: boolean): TReader;
-var p: Pointer;
+    var DestroyDriver: boolean): TReader;
+var
+    p:      Pointer;
     Driver: TAbstractObjectReader;
     DummyStream: TMemoryStream;
 begin
@@ -78,7 +81,7 @@ begin
         // hack to set a write protected variable.
         // DestroyDriver := True; TReader will free it
         Driver := TXMLObjectReader.Create(ADoc, Path);
-        p := @Result.Driver;
+        p      := @Result.Driver;
         Result.Driver.Free;
         TAbstractObjectReader(p^) := Driver;
     finally
@@ -107,14 +110,14 @@ begin
 end;
 
 procedure ReadComponentFromXMLConfig(XMLConfig: TXMLConfig; const Path: string;
-    var RootComponent: TComponent;
-    OnFindComponentClass: TFindComponentClassEvent; TheOwner: TComponent);
+    var RootComponent: TComponent; OnFindComponentClass: TFindComponentClassEvent;
+    TheOwner: TComponent);
 var
-    DestroyDriver: Boolean;
-    Reader: TReader;
-    IsInherited: Boolean;
-    AClassName: String;
-    AClass: TComponentClass;
+    DestroyDriver: boolean;
+    Reader:      TReader;
+    IsInherited: boolean;
+    AClassName:  string;
+    AClass:      TComponentClass;
 begin
     Reader := nil;
     DestroyDriver := False;
@@ -124,29 +127,30 @@ begin
 
         // get root class
         AClassName := (Reader.Driver as TXMLObjectReader).GetRootClassName(IsInherited);
-        if IsInherited then begin
+        if IsInherited then
             // inherited is not supported by this simple function
             //DebugLn('ReadComponentFromXMLConfig WARNING: "inherited" is not supported by this simple function');
-        end;
+        ;
         AClass := nil;
         //  poisk tipa klassa po imeni klassa
         OnFindComponentClass(nil, AClassName, AClass);
-        if AClass=nil then
-            raise EClassNotFound.CreateFmt('Class "%s" not found',  [AClassName]);
+        if AClass = nil then
+            raise EClassNotFound.CreateFmt('Class "%s" not found', [AClassName]);
 
-        if RootComponent=nil then begin
+        if RootComponent = nil then
+        begin
             // create root component
             // first create the new instance and set the variable ...
             RootComponent := AClass.NewInstance as TComponent;
             // then call the constructor
             RootComponent.Create(TheOwner);
-        end else begin
-            // there is a root component, check if class is compatible
-            if not RootComponent.InheritsFrom(AClass) then begin
-                raise EComponentError.CreateFmt('Cannot assign a %s to a %s.',
-                                        [AClassName, RootComponent.ClassName]);
-            end;
-        end;
+        end
+        else
+        if not RootComponent.InheritsFrom(AClass) then
+            raise EComponentError.CreateFmt('Cannot assign a %s to a %s.',
+                [AClassName, RootComponent.ClassName])
+        // there is a root component, check if class is compatible
+        ;
 
         Reader.ReadRootComponent(RootComponent);
     finally
@@ -164,11 +168,13 @@ begin
     else
     if CompareText(ClassName, 'File_v1') = 0 then
         ComponentClass := File_v1
-    else ComponentClass := nil;
+    else
+        ComponentClass := nil;
 end;
 
 function ReadProjectProperties_v1(FileName: string): Project_v1;
-var XMLConfig: TXMLConfig;
+var
+    XMLConfig: TXMLConfig;
 begin
     Result := nil;
     if FileExists(FileName) then
@@ -190,7 +196,8 @@ begin
 end;
 
 function ReadFileProperties_v1(FileName: string): File_v1;
-var XMLConfig: TXMLConfig;
+var
+    XMLConfig: TXMLConfig;
 begin
     Result := nil;
     if FileExists(FileName) then
@@ -212,7 +219,8 @@ begin
 end;
 
 procedure WriteProperties(FileName: string; Prop: TComponent);
-var XMLConfig: TXMLConfig;
+var
+    XMLConfig: TXMLConfig;
 begin
     XMLConfig := TXMLConfig.Create(Filename);
     try
@@ -229,4 +237,3 @@ initialization
 finalization
     FC.Free;
 end.
-

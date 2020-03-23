@@ -25,26 +25,27 @@ type
         FFitClientStub: TFitClientStub;
 
     public
-        procedure ShowCurMin(Min: Double);
+        procedure ShowCurMin(Min: double);
         procedure ShowProfile;
         procedure Done;
         procedure FindPeakBoundsDone;
         procedure FindBackPointsDone;
         procedure FindPeakPositionsDone;
         { Pointer to the client part receiving messages. }
-        property FitClientStub: TFitClientStub
-            read FFitClientStub write FFitClientStub;
+        property FitClientStub: TFitClientStub read FFitClientStub write FFitClientStub;
     end;
 
 implementation
 
-procedure TFitServerProxy.ShowCurMin(Min: Double);
+procedure TFitServerProxy.ShowCurMin(Min: double);
 begin
     try
         Assert(Assigned(FitClientStub));
     except
-        on E: EAssertionFailed do raise EUserException.Create(E.Message)
-        else raise;
+        on E: EAssertionFailed do
+            raise EUserException.Create(E.Message)
+        else
+            raise;
     end;
     FitClientStub.ShowCurMin(Min);
 end;
@@ -54,8 +55,10 @@ begin
     try
         Assert(Assigned(FitClientStub));
     except
-        on E: EAssertionFailed do raise EUserException.Create(E.Message)
-        else raise;
+        on E: EAssertionFailed do
+            raise EUserException.Create(E.Message)
+        else
+            raise;
     end;
     FitClientStub.ShowProfile;
 end;
@@ -65,8 +68,10 @@ begin
     try
         Assert(Assigned(FitClientStub));
     except
-        on E: EAssertionFailed do raise EUserException.Create(E.Message)
-        else raise;
+        on E: EAssertionFailed do
+            raise EUserException.Create(E.Message)
+        else
+            raise;
     end;
     FitClientStub.Done;
 end;
@@ -76,8 +81,10 @@ begin
     try
         Assert(Assigned(FitClientStub));
     except
-        on E: EAssertionFailed do raise EUserException.Create(E.Message)
-        else raise;
+        on E: EAssertionFailed do
+            raise EUserException.Create(E.Message)
+        else
+            raise;
     end;
     FitClientStub.FindPeakBoundsDone;
 end;
@@ -87,8 +94,10 @@ begin
     try
         Assert(Assigned(FitClientStub));
     except
-        on E: EAssertionFailed do raise EUserException.Create(E.Message)
-        else raise;
+        on E: EAssertionFailed do
+            raise EUserException.Create(E.Message)
+        else
+            raise;
     end;
     FitClientStub.FindBackPointsDone;
 end;
@@ -98,13 +107,12 @@ begin
     try
         Assert(Assigned(FitClientStub));
     except
-        on E: EAssertionFailed do raise EUserException.Create(E.Message)
-        else raise;
+        on E: EAssertionFailed do
+            raise EUserException.Create(E.Message)
+        else
+            raise;
     end;
     FitClientStub.FindPeakPositionsDone;
 end;
 
 end.
-
-
-

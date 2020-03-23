@@ -16,33 +16,34 @@ unit fit_server_aux;
 interface
 
 uses
-  Classes, SysUtils, points_set, named_points_set, title_points_set,
-  int_fit_server, MyExceptions,
-  { Modules of wst-0.5 }
-  base_service_intf;
-  
-function CreateRemotableArray(
-    APointsSet: TPointsSet): TArrayOfFloatDoubleRemotable;
-function CreateNamedPointsSet(
-    ARemotable: TArrayOfFloatDoubleRemotable): TNamedPointsSet;
+    Classes, SysUtils, points_set, named_points_set, title_points_set,
+    int_fit_server, MyExceptions,
+    { Modules of wst-0.5 }
+    base_service_intf;
+
+function CreateRemotableArray(APointsSet: TPointsSet): TArrayOfFloatDoubleRemotable;
+function CreateNamedPointsSet(ARemotable: TArrayOfFloatDoubleRemotable):
+    TNamedPointsSet;
 function ProcessPointsResult(R: TPointsResult): TTitlePointsSet;
 
-const OutOfServerResources: string = 'Out of server resources.';
+const
+    OutOfServerResources: string = 'Out of server resources.';
 
 implementation
 
 {$INCLUDE wst.inc}
 
-function CreateRemotableArray(
-    APointsSet: TPointsSet): TArrayOfFloatDoubleRemotable;
-var i, Count: LongInt;
+function CreateRemotableArray(APointsSet: TPointsSet): TArrayOfFloatDoubleRemotable;
+var
+    i, Count: longint;
 begin
     Result := nil;
-    if not Assigned(APointsSet) then Exit;
+    if not Assigned(APointsSet) then
+        Exit;
 
     Result := TArrayOfFloatDoubleRemotable.Create;
     //  tochki zagruzhayutsya poparno
-    Count := APointsSet.PointsCount * 2;
+    Count  := APointsSet.PointsCount * 2;
     Result.SetLength(Count);
     i := 0;
     while i < Count do
@@ -54,14 +55,15 @@ begin
     end;
 end;
 
-function CreateNamedPointsSet(
-    ARemotable: TArrayOfFloatDoubleRemotable): TNamedPointsSet;
-var i: LongInt;
-    X, Y: Double;
+function CreateNamedPointsSet(ARemotable: TArrayOfFloatDoubleRemotable): TNamedPointsSet;
+var
+    i:    longint;
+    X, Y: double;
 begin
     //  trebuetsya dopustit' ravenstvo nil
     Result := nil;
-    if not Assigned(ARemotable) then Exit;
+    if not Assigned(ARemotable) then
+        Exit;
 
     Assert(ARemotable.Length mod 2 = 0);
     Result := TNamedPointsSet.Create(nil);
@@ -78,22 +80,27 @@ begin
 end;
 
 function ProcessPointsResult(R: TPointsResult): TTitlePointsSet;
-var Points: TPointsSet;
-    Res: LongInt;
+var
+    Points: TPointsSet;
+    Res:    longint;
     ErrMsg: string;
 begin
-    Result := nil; Res := 0; ErrMsg := '';
-    if not Assigned(R) then raise Exception.Create(OutOfServerResources);
+    Result := nil;
+    Res    := 0;
+    ErrMsg := '';
+    if not Assigned(R) then
+        raise Exception.Create(OutOfServerResources);
 
     try
         //  sozdaetsya promezhutochnyi ob'ekt dlya sovmestimosti
         Points := CreateNamedPointsSet(R._Result);
         try
-            Res := R.ErrCode;
+            Res    := R.ErrCode;
             ErrMsg := R.ErrMsg;
             if Assigned(Points) then
                 Result := TTitlePointsSet.CreateFromPoints(nil, Points)
-            else Result := nil;
+            else
+                Result := nil;
         finally
             Points.Free;
         end;
@@ -102,10 +109,17 @@ begin
     end;
 
     case Res of
-        -1: begin Result.Free; raise EUserException.Create(ErrMsg); end;
-        -2: begin Result.Free; raise Exception.Create(ErrMsg); end;
+        -1:
+        begin
+            Result.Free;
+            raise EUserException.Create(ErrMsg);
+        end;
+        -2:
+        begin
+            Result.Free;
+            raise Exception.Create(ErrMsg);
+        end;
     end;
 end;
 
 end.
-

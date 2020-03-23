@@ -24,27 +24,27 @@ uses Forms, StdCtrls, ExtCtrls, LResources, Classes;
 
 type
 
-  { TAboutBox }
+    { TAboutBox }
 
-  TAboutBox = class(TForm)
-    Image1: TImage;
-    Panel1: TPanel;
-    OKButton: TButton;
-    StaticText3: TStaticText;
-    StaticText4: TStaticText;
-    StaticTextTitle: TStaticText;
-    StaticText11: TStaticText;
-    StaticTextGitHub: TStaticText;
-    procedure FormShow(Sender: TObject);
-    procedure StaticTextGitHubClick(Sender: TObject);
-  private
-    { Private declarations }
-  public
-    { Public declarations }
-  end;
+    TAboutBox = class(TForm)
+        Image1:      TImage;
+        Panel1:      TPanel;
+        OKButton:    TButton;
+        StaticText3: TStaticText;
+        StaticText4: TStaticText;
+        StaticTextTitle: TStaticText;
+        StaticText11: TStaticText;
+        StaticTextGitHub: TStaticText;
+        procedure FormShow(Sender: TObject);
+        procedure StaticTextGitHubClick(Sender: TObject);
+    private
+        { Private declarations }
+    public
+        { Public declarations }
+    end;
 
 var
-  AboutBox: TAboutBox;
+    AboutBox: TAboutBox;
 
 implementation
 
@@ -67,5 +67,3 @@ initialization
   {$I about_box_dialog.lrs}
 end.
  
-
-

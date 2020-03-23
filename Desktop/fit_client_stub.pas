@@ -20,29 +20,28 @@ unit fit_client_stub;
 interface
 
 uses int_client_callback;
-  
+
 type
     TFitClientStub = class(TInterfacedObject, IClientCallback)
     protected
         FFitClient: TObject;
 
     public
-        procedure ShowCurMin(Min: Double);
+        procedure ShowCurMin(Min: double);
         procedure ShowProfile;
         procedure Done;
         procedure FindPeakBoundsDone;
         procedure FindBackPointsDone;
         procedure FindPeakPositionsDone;
 
-        property FitClient: TObject
-            read FFitClient write FFitClient;
+        property FitClient: TObject read FFitClient write FFitClient;
     end;
 
 implementation
 
 uses fit_client;
 
-procedure TFitClientStub.ShowCurMin(Min: Double);
+procedure TFitClientStub.ShowCurMin(Min: double);
 begin
     Assert(Assigned(FitClient));
     TFitClient(FitClient).ShowCurMin(Min);
@@ -79,6 +78,3 @@ begin
 end;
 
 end.
-
-
-

@@ -37,13 +37,15 @@ type
         procedure UpdateCurveType(CurveType: Curve_type);
         procedure DeleteCurveType(CurveType: Curve_type);
     end;
+
     {$warnings on}
 
 implementation
 
 uses form_main;
 
-var CurveTypeStorageAdapter: TCurveTypeStorageAdapter;
+var
+    CurveTypeStorageAdapter: TCurveTypeStorageAdapter;
 
 constructor TCurveTypeStorageAdapter.Init;
 begin
@@ -58,7 +60,7 @@ end;
 procedure TCurveTypeStorageAdapter.AddCurveType(CurveType: Curve_type);
 begin
     //  Saving curve parameters.
-    FormMain.Settings.Curve_types.Add(CurveType);
+    FormMain.FSettings.Curve_types.Add(CurveType);
     FormMain.WriteUserCurve(CurveType);
 
     //FormMain.DeleteDummyCurve;
@@ -68,7 +70,7 @@ end;
 
 procedure TCurveTypeStorageAdapter.UpdateCurveType(CurveType: Curve_type);
 begin
-    DeleteFile(PChar(CurveType.FileName));
+    DeleteFile(PChar(CurveType.FFileName));
     FormMain.WriteUserCurve(CurveType);
 end;
 
@@ -84,5 +86,3 @@ finalization
     CurveTypeStorageAdapter.Free;
 
 end.
-
-

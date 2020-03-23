@@ -33,15 +33,17 @@ type
 
     public
         class function Create: ICurveTypeParametersFactory;
-        function CreateUserCurveType(Name: string;
-            Expression: string; Parameters: Curve_parameters): Curve_type;
+        function CreateUserCurveType(Name: string; Expression: string;
+            Parameters: Curve_parameters): Curve_type;
     end;
+
 {$warnings on}
 
 implementation
 
 { Class members aren't supported by Lazarus 0.9.24, global variable are used instead. }
-var CurveTypeParametersFactory: TCurveTypeParametersFactory;
+var
+    CurveTypeParametersFactory: TCurveTypeParametersFactory;
 
 constructor TCurveTypeParametersFactory.Init;
 begin
@@ -56,7 +58,7 @@ end;
 function TCurveTypeParametersFactory.CreateUserCurveType(Name: string;
     Expression: string; Parameters: Curve_parameters): Curve_type;
 begin
-    Result := Curve_type.Create(nil);
+    Result      := Curve_type.Create(nil);
     Result.Name := Name;
     Result.Expression := Expression;
     Result.Parameters := Parameters;
@@ -69,5 +71,3 @@ finalization
     CurveTypeParametersFactory.Free;
 
 end.
-
-

@@ -16,8 +16,8 @@ unit fit_client_proxy;
 interface
 
 uses
-  Classes, SysUtils, fit_problem;
-  
+    Classes, SysUtils, fit_problem;
+
 type
     TFitClientProxy = class(TFitProblem)
     public
@@ -40,4 +40,3 @@ begin
 end;
 
 end.
-

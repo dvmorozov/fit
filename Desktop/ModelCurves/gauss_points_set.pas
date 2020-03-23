@@ -41,8 +41,8 @@ type
 
     TValuePair = class(TObject)
     public
-        X: double;
-        Y: double;
+        FX: double;
+        FY: double;
     end;
 
 implementation
@@ -54,7 +54,7 @@ uses int_curve_factory;
 constructor TGaussPointsSet.Create(AOwner: TComponent);
 var
     Parameter: TSpecialCurveParameter;
-    Count: LongInt;
+    Count:     longint;
 begin
     inherited;
     Parameter := TAmplitudeCurveParameter.Create;
@@ -87,7 +87,8 @@ begin
 end;
 
 procedure TGaussPointsSet.DoCalc(const Intervals: TPointsSet);
-var i, j: LongInt;
+var
+    i, j: longint;
     //x0Index, LastRightIndex: LongInt;
     //Zero: Boolean;
 begin
@@ -95,23 +96,21 @@ begin
     begin
         Assert((Intervals.PointsCount mod 2) = 0);
         for i := 0 to (Intervals.PointsCount shr 1) - 1 do
-        begin
-            (*  takoy variant ne daet uskoreniya, a kazhetsya rabotaet
+            for j := Trunc(Intervals.PointXCoord[i shl 1]) to
+                Trunc(Intervals.PointXCoord[(i shl 1) + 1]) do
+                Points[j][2] := GaussPoint(A, Sigma, x0, Points[j][1])(*  takoy variant ne daet uskoreniya, a kazhetsya rabotaet
                 dazhe chut' medlennee - vse s'edaet poisk indeksov ?!
             for j := IndexOfValueX(Intervals.GetPointXCoord(i shl 1)) to
                 IndexOfValueX(Intervals.GetPointXCoord((i shl 1) + 1)) do
                     Points[j][2] := GaussPoint(A, Sigma, x0, Points[j][1]);
-            *)
-            for j := Trunc(Intervals.PointXCoord[i shl 1]) to
-                Trunc(Intervals.PointXCoord[(i shl 1) + 1]) do
-                    Points[j][2] := GaussPoint(A, Sigma, x0, Points[j][1]);
-        end;
+            *);
     end
     else
     begin
         //  snachala nuzhno obnulit' tochki, chtoby vse tochki, znachenie
         //  funktsii v kotoryh < ZeroCurveAmplitude byli bez musora
-        for j := 0 to PointsCount - 1 do PointYCoord[j] := 0;
+        for j := 0 to PointsCount - 1 do
+            PointYCoord[j] := 0;
 
         //  schitaem optimal'no, ispol'zuya porog nulya i simmetriyu
         (*  optimal'nyi schet rabotaet tol'ko kogda x0 ne var'iruetsya,
@@ -152,19 +151,21 @@ begin
     end;
 end;
 
-function ComparePairs(Item1, Item2: Pointer): Integer;
+function ComparePairs(Item1, Item2: Pointer): integer;
 begin
-    if TValuePair(Item1).X < TValuePair(Item2).X then Result := -1
+    if TValuePair(Item1).FX < TValuePair(Item2).FX then
+        Result := -1
     else
-      if TValuePair(Item1).X > TValuePair(Item2).X then Result := 1
-      else Result := 0;
+    if TValuePair(Item1).FX > TValuePair(Item2).FX then
+        Result := 1
+    else
+        Result := 0;
 end;
 
-var CTS: ICurveFactory;
+var
+    CTS: ICurveFactory;
 
 initialization
     CTS := TCurveTypesSingleton.CreateCurveFactory;
     CTS.RegisterCurveType(TGaussPointsSet);
 end.
-
-

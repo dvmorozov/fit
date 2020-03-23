@@ -14,14 +14,14 @@ type
     { Represents curve width. }
     TDeltaSigmaCurveParameter = class(TSpecialCurveParameter)
     protected
-        procedure SetValue(AValue: Double); override;
+        procedure SetValue(AValue: double); override;
 
     public
         constructor Create;
         function CreateCopy: TSpecialCurveParameter; override;
         procedure InitVariationStep; override;
         procedure InitValue; override;
-        function MinimumStepAchieved: Boolean; override;
+        function MinimumStepAchieved: boolean; override;
     end;
 
 implementation
@@ -49,16 +49,15 @@ begin
     CopyTo(Result);
 end;
 
-procedure TDeltaSigmaCurveParameter.SetValue(AValue: Double);
+procedure TDeltaSigmaCurveParameter.SetValue(AValue: double);
 begin
     FValue := AValue;
     WriteValueToLog(AValue);
 end;
 
-function TDeltaSigmaCurveParameter.MinimumStepAchieved: Boolean;
+function TDeltaSigmaCurveParameter.MinimumStepAchieved: boolean;
 begin
     Result := FVariationStep < 0.00001;
 end;
 
 end.
-

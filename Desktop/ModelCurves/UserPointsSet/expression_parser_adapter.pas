@@ -22,8 +22,7 @@ interface
 uses SysUtils, int_expression_parser,
 {$IFDEF _WINDOWS}
     persistent_curve_parameters
-{$ENDIF}
-    ;
+{$ENDIF}    ;
 
 type
     { Class-adapter implementing basic operation for parsing curve expression.
@@ -39,6 +38,7 @@ type
         function ParseExpression(Expression: string): Curve_parameters;
 {$ENDIF}
     end;
+
 {$warnings on}
 
 implementation
@@ -49,7 +49,8 @@ uses app,
 {$ENDIF}
     Dialogs;
 
-var ExpressionParserAdapter: TExpressionParserAdapter;
+var
+    ExpressionParserAdapter: TExpressionParserAdapter;
 
 constructor TExpressionParserAdapter.Init;
 begin
@@ -62,20 +63,21 @@ begin
 end;
 
 {$IFDEF _WINDOWS}
-function TExpressionParserAdapter.ParseExpression(
-    Expression: string): Curve_parameters;
+function TExpressionParserAdapter.ParseExpression(Expression: string): Curve_parameters;
 begin
     try
         FitClientApp_.FitClient.SetSpecialCurveParameters(Expression, nil);
         Result := FitClientApp_.FitClient.GetSpecialCurveParameters;
     except
         on E: EUserException do
-            begin
-                MessageDlg(E.Message, mtError, [mbOk], 0);
-            end;
-        else raise;
+        begin
+            MessageDlg(E.Message, mtError, [mbOK], 0);
+        end;
+        else
+            raise;
     end;
 end;
+
 {$ENDIF}
 
 initialization
@@ -85,5 +87,3 @@ finalization
     ExpressionParserAdapter.Free;
 
 end.
-
-

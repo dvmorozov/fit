@@ -32,29 +32,28 @@ type
         FName: string;
         FExpression: string;
         FParameters: Curve_parameters;
-        
+
         procedure SetParameters(AParameters: Curve_parameters);
-        
+
         procedure ReadParams(Reader: TReader);
         procedure WriteParams(Writer: TWriter);
-        
+
         function GetParams: TCollection;
         procedure SetParams(AParams: TCollection);
 
     public
         { File name to serialize / deserialize data. }
-        FileName: string;
-        
+        FFileName: string;
+
         constructor Create(AOwner: TComponent); override;
         destructor Destroy; override;
 
         procedure DefineProperties(Filer: TFiler); override;
-        property Parameters: Curve_parameters
-            read FParameters write SetParameters;
+        property Parameters: Curve_parameters read FParameters write SetParameters;
 
     published
         { Published properties are used in XML-serializing. }
-    
+
         property Name: string read FName write FName;
         property Expression: string read FExpression write FExpression;
         //  By this way component is not written into XML-stream, we need to use DefineProperties.
@@ -62,13 +61,13 @@ type
         { Expression parameters. }
         property Params: TCollection read GetParams write SetParams;
     end;
-    
+
     { Contains and serializes application settings. }
     Settings_v1 = class(TComponent)
     private
         FCurveTypes: TSelfCheckedComponentList;
-        FReserved: LongInt;
-        
+        FReserved:   longint;
+
         procedure ReadCurveTypes(Reader: TReader);
         procedure WriteCurveTypes(Writer: TWriter);
 
@@ -80,33 +79,32 @@ type
 
         property Curve_types: TSelfCheckedComponentList
             read FCurveTypes write FCurveTypes;
-        
+
     published
         { Dummy property. Prevents exceptions in reading. }
-        property Reserved: LongInt read FReserved write FReserved;
+        property Reserved: longint read FReserved write FReserved;
     end;
-  
+
 function CreateXMLWriter(ADoc: TDOMDocument; const Path: string;
-    Append: Boolean; var DestroyDriver: Boolean): TWriter;
+    Append: boolean; var DestroyDriver: boolean): TWriter;
 function CreateXMLReader(ADoc: TDOMDocument; const Path: string;
-    var DestroyDriver: Boolean): TReader;
+    var DestroyDriver: boolean): TReader;
 
 procedure WriteComponentToXMLConfig(XMLConfig: TXMLConfig; const Path: string;
     AComponent: TComponent);
 procedure ReadComponentFromXMLConfig(XMLConfig: TXMLConfig; const Path: string;
     { Root component which are read from stream [in, out]. }
-    var RootComponent: TComponent;
-    OnFindComponentClass: TFindComponentClassEvent;
+    var RootComponent: TComponent; OnFindComponentClass: TFindComponentClassEvent;
     { Owner of newly created component. }
-    TheOwner: TComponent
-    );
+    TheOwner: TComponent);
 
 implementation
 
 {$warnings off}
 function CreateXMLWriter(ADoc: TDOMDocument; const Path: string;
-    Append: Boolean; var DestroyDriver: Boolean): TWriter;
-var Driver: TAbstractObjectWriter;
+    Append: boolean; var DestroyDriver: boolean): TWriter;
+var
+    Driver: TAbstractObjectWriter;
 begin
     Driver := TXMLObjectWriter.Create(ADoc, Path, Append);
     DestroyDriver := True;
@@ -114,8 +112,9 @@ begin
 end;
 
 function CreateXMLReader(ADoc: TDOMDocument; const Path: string;
-  var DestroyDriver: boolean): TReader;
-var p: Pointer;
+    var DestroyDriver: boolean): TReader;
+var
+    p:      Pointer;
     Driver: TAbstractObjectReader;
     DummyStream: TMemoryStream;
 begin
@@ -126,13 +125,14 @@ begin
         // hack to set a write protected variable.
         // DestroyDriver := True; TReader will free it
         Driver := TXMLObjectReader.Create(ADoc, Path);
-        p := @Result.Driver;
+        p      := @Result.Driver;
         Result.Driver.Free;
         TAbstractObjectReader(p^) := Driver;
     finally
         DummyStream := nil;
     end;
 end;
+
 {$warnings on}
 
 procedure WriteComponentToXMLConfig(XMLConfig: TXMLConfig; const Path: string;
@@ -156,14 +156,14 @@ begin
 end;
 
 procedure ReadComponentFromXMLConfig(XMLConfig: TXMLConfig; const Path: string;
-    var RootComponent: TComponent;
-    OnFindComponentClass: TFindComponentClassEvent; TheOwner: TComponent);
+    var RootComponent: TComponent; OnFindComponentClass: TFindComponentClassEvent;
+    TheOwner: TComponent);
 var
-    DestroyDriver: Boolean;
-    Reader: TReader;
-    IsInherited: Boolean;
-    AClassName: String;
-    AClass: TComponentClass;
+    DestroyDriver: boolean;
+    Reader:      TReader;
+    IsInherited: boolean;
+    AClassName:  string;
+    AClass:      TComponentClass;
 begin
     Reader := nil;
     DestroyDriver := False;
@@ -173,29 +173,30 @@ begin
 
         // get root class
         AClassName := (Reader.Driver as TXMLObjectReader).GetRootClassName(IsInherited);
-        if IsInherited then begin
+        if IsInherited then
             // inherited is not supported by this simple function
             //DebugLn('ReadComponentFromXMLConfig WARNING: "inherited" is not supported by this simple function');
-        end;
+        ;
         AClass := nil;
         //  poisk tipa klassa po imeni klassa
         OnFindComponentClass(nil, AClassName, AClass);
-        if AClass=nil then
-            raise EClassNotFound.CreateFmt('Class "%s" not found',  [AClassName]);
+        if AClass = nil then
+            raise EClassNotFound.CreateFmt('Class "%s" not found', [AClassName]);
 
-        if RootComponent=nil then begin
+        if RootComponent = nil then
+        begin
             // create root component
             // first create the new instance and set the variable ...
             RootComponent := AClass.NewInstance as TComponent;
             // then call the constructor
             RootComponent.Create(TheOwner);
-        end else begin
-            // there is a root component, check if class is compatible
-            if not RootComponent.InheritsFrom(AClass) then begin
-                raise EComponentError.CreateFmt('Cannot assign a %s to a %s.',
-                                        [AClassName, RootComponent.ClassName]);
-            end;
-        end;
+        end
+        else
+        if not RootComponent.InheritsFrom(AClass) then
+            raise EComponentError.CreateFmt('Cannot assign a %s to a %s.',
+                [AClassName, RootComponent.ClassName])
+        // there is a root component, check if class is compatible
+        ;
 
         Reader.ReadRootComponent(RootComponent);
     finally
@@ -211,7 +212,7 @@ constructor Settings_v1.Create(Owner: TComponent);
 begin
     inherited Create(Owner);
     FCurveTypes := TSelfCheckedComponentList.Create(nil);
-    FReserved := -1;
+    FReserved   := -1;
 end;
 
 destructor Settings_v1.Destroy;
@@ -232,6 +233,7 @@ begin
     FCurveTypes.Free;
     FCurveTypes := TSelfCheckedComponentList(Reader.ReadComponent);
 end;
+
 {$hints on}
 
 procedure Settings_v1.WriteCurveTypes(Writer: TWriter);
@@ -255,7 +257,8 @@ end;
 
 procedure Curve_type.SetParameters(AParameters: Curve_parameters);
 begin
-    FParameters.Free; FParameters := AParameters;
+    FParameters.Free;
+    FParameters := AParameters;
 end;
 
 {$hints off}
@@ -263,6 +266,7 @@ procedure Curve_type.DefineProperties(Filer: TFiler);
 begin
     //Filer.DefineProperty('Params', ReadParams, WriteParams, True);
 end;
+
 {$hints on}
 
 procedure Curve_type.ReadParams(Reader: TReader);
@@ -288,7 +292,3 @@ end;
 
 initialization
 end.
-
-
-
-

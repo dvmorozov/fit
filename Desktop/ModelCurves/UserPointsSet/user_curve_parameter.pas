@@ -18,7 +18,7 @@ type
         function CreateCopy: TSpecialCurveParameter; override;
         procedure InitVariationStep; override;
         procedure InitValue; override;
-        function MinimumStepAchieved: Boolean; override;
+        function MinimumStepAchieved: boolean; override;
     end;
 
 implementation
@@ -44,10 +44,9 @@ begin
     CopyTo(Result);
 end;
 
-function TUserCurveParameter.MinimumStepAchieved: Boolean;
+function TUserCurveParameter.MinimumStepAchieved: boolean;
 begin
     Result := True;
 end;
 
 end.
-

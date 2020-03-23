@@ -21,135 +21,137 @@ unit create_user_points_set_dlg;
 interface
 
 uses
-  LCLIntf, Classes, LResources, Forms, StdCtrls, ExtCtrls;
+    LCLIntf, Classes, LResources, Forms, StdCtrls, ExtCtrls;
 
 type
 
-  { TCreateUserPointsSetDlg }
+    { TCreateUserPointsSetDlg }
 
-  TCreateUserPointsSetDlg = class(TForm)
-    Bevel1: TBevel;
-    ButtonSin: TButton;
-    ButtonTh: TButton;
-    Button4: TButton;
-    Button5: TButton;
-    Button6: TButton;
-    ButtonMul: TButton;
-    ButtonArcsin: TButton;
-    ButtonArccos: TButton;
-    ButtonArctg: TButton;
-    Button1: TButton;
-    Button2: TButton;
-    ButtonCos: TButton;
-    Button3: TButton;
-    ButtonMinus: TButton;
-    ButtonArsh: TButton;
-    ButtonArch: TButton;
-    ButtonArth: TButton;
-    Button0: TButton;
-    ButtonBrackets: TButton;
-    ButtonDecimal: TButton;
-    ButtonPlus: TButton;
-    ButtonSch: TButton;
-    ButtonTg: TButton;
-    ButtonCsch: TButton;
-    ButtonLn: TButton;
-    ButtonPower: TButton;
-    ButtonExp: TButton;
-    ButtonAbs: TButton;
-    ButtonSqrt: TButton;
-    ButtonCtg: TButton;
-    ButtonCth: TButton;
-    ButtonArcctg: TButton;
-    ButtonArcth: TButton;
-    Button7: TButton;
-    ButtonLog: TButton;
-    Button9: TButton;
-    Button8: TButton;
-    ButtonDiv: TButton;
-    ButtonSh: TButton;
-    ButtonCh: TButton;
-    BtnContinue: TButton;
-    EditCurveName: TEdit;
-    Label1: TLabel;
-    Label2: TLabel;
-    BtnCancel: TButton;
-    EditExpression: TEdit;
-    procedure Button0Click(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
-    procedure Button2Click(Sender: TObject);
-    procedure Button3Click(Sender: TObject);
-    procedure Button4Click(Sender: TObject);
-    procedure Button5Click(Sender: TObject);
-    procedure Button6Click(Sender: TObject);
-    procedure Button7Click(Sender: TObject);
-    procedure Button8Click(Sender: TObject);
-    procedure Button9Click(Sender: TObject);
-    procedure ButtonAbsClick(Sender: TObject);
-    procedure ButtonArccosClick(Sender: TObject);
-    procedure ButtonArcctgClick(Sender: TObject);
-    procedure ButtonArchClick(Sender: TObject);
-    procedure ButtonArcsinClick(Sender: TObject);
-    procedure ButtonArctgClick(Sender: TObject);
-    procedure ButtonArcthClick(Sender: TObject);
-    procedure ButtonArshClick(Sender: TObject);
-    procedure ButtonArthClick(Sender: TObject);
-    procedure ButtonBracketsClick(Sender: TObject);
-    procedure ButtonChClick(Sender: TObject);
-    procedure ButtonCosClick(Sender: TObject);
-    procedure ButtonCschClick(Sender: TObject);
-    procedure ButtonCtgClick(Sender: TObject);
-    procedure ButtonCthClick(Sender: TObject);
-    procedure ButtonDecimalClick(Sender: TObject);
-    procedure ButtonDivClick(Sender: TObject);
-    procedure ButtonExpClick(Sender: TObject);
-    procedure ButtonLnClick(Sender: TObject);
-    procedure ButtonLogClick(Sender: TObject);
-    procedure ButtonMinusClick(Sender: TObject);
-    procedure ButtonMulClick(Sender: TObject);
-    procedure ButtonPlusClick(Sender: TObject);
-    procedure ButtonPowerClick(Sender: TObject);
-    procedure ButtonSchClick(Sender: TObject);
-    procedure ButtonShClick(Sender: TObject);
-    procedure ButtonSinClick(Sender: TObject);
-    procedure ButtonSqrtClick(Sender: TObject);
-    procedure ButtonTgClick(Sender: TObject);
-    procedure ButtonThClick(Sender: TObject);
-    procedure EditExpressionKeyPress(Sender: TObject; var Key: char);
-  private
-    { private declarations }
-    procedure InsertFunc(FuncName: string);
-    procedure InsertSymbol(Symbol: string);
-  public
-    { public declarations }
-  end; 
+    TCreateUserPointsSetDlg = class(TForm)
+        Bevel1:      TBevel;
+        ButtonSin:   TButton;
+        ButtonTh:    TButton;
+        Button4:     TButton;
+        Button5:     TButton;
+        Button6:     TButton;
+        ButtonMul:   TButton;
+        ButtonArcsin: TButton;
+        ButtonArccos: TButton;
+        ButtonArctg: TButton;
+        Button1:     TButton;
+        Button2:     TButton;
+        ButtonCos:   TButton;
+        Button3:     TButton;
+        ButtonMinus: TButton;
+        ButtonArsh:  TButton;
+        ButtonArch:  TButton;
+        ButtonArth:  TButton;
+        Button0:     TButton;
+        ButtonBrackets: TButton;
+        ButtonDecimal: TButton;
+        ButtonPlus:  TButton;
+        ButtonSch:   TButton;
+        ButtonTg:    TButton;
+        ButtonCsch:  TButton;
+        ButtonLn:    TButton;
+        ButtonPower: TButton;
+        ButtonExp:   TButton;
+        ButtonAbs:   TButton;
+        ButtonSqrt:  TButton;
+        ButtonCtg:   TButton;
+        ButtonCth:   TButton;
+        ButtonArcctg: TButton;
+        ButtonArcth: TButton;
+        Button7:     TButton;
+        ButtonLog:   TButton;
+        Button9:     TButton;
+        Button8:     TButton;
+        ButtonDiv:   TButton;
+        ButtonSh:    TButton;
+        ButtonCh:    TButton;
+        BtnContinue: TButton;
+        EditCurveName: TEdit;
+        Label1:      TLabel;
+        Label2:      TLabel;
+        BtnCancel:   TButton;
+        EditExpression: TEdit;
+        procedure Button0Click(Sender: TObject);
+        procedure Button1Click(Sender: TObject);
+        procedure Button2Click(Sender: TObject);
+        procedure Button3Click(Sender: TObject);
+        procedure Button4Click(Sender: TObject);
+        procedure Button5Click(Sender: TObject);
+        procedure Button6Click(Sender: TObject);
+        procedure Button7Click(Sender: TObject);
+        procedure Button8Click(Sender: TObject);
+        procedure Button9Click(Sender: TObject);
+        procedure ButtonAbsClick(Sender: TObject);
+        procedure ButtonArccosClick(Sender: TObject);
+        procedure ButtonArcctgClick(Sender: TObject);
+        procedure ButtonArchClick(Sender: TObject);
+        procedure ButtonArcsinClick(Sender: TObject);
+        procedure ButtonArctgClick(Sender: TObject);
+        procedure ButtonArcthClick(Sender: TObject);
+        procedure ButtonArshClick(Sender: TObject);
+        procedure ButtonArthClick(Sender: TObject);
+        procedure ButtonBracketsClick(Sender: TObject);
+        procedure ButtonChClick(Sender: TObject);
+        procedure ButtonCosClick(Sender: TObject);
+        procedure ButtonCschClick(Sender: TObject);
+        procedure ButtonCtgClick(Sender: TObject);
+        procedure ButtonCthClick(Sender: TObject);
+        procedure ButtonDecimalClick(Sender: TObject);
+        procedure ButtonDivClick(Sender: TObject);
+        procedure ButtonExpClick(Sender: TObject);
+        procedure ButtonLnClick(Sender: TObject);
+        procedure ButtonLogClick(Sender: TObject);
+        procedure ButtonMinusClick(Sender: TObject);
+        procedure ButtonMulClick(Sender: TObject);
+        procedure ButtonPlusClick(Sender: TObject);
+        procedure ButtonPowerClick(Sender: TObject);
+        procedure ButtonSchClick(Sender: TObject);
+        procedure ButtonShClick(Sender: TObject);
+        procedure ButtonSinClick(Sender: TObject);
+        procedure ButtonSqrtClick(Sender: TObject);
+        procedure ButtonTgClick(Sender: TObject);
+        procedure ButtonThClick(Sender: TObject);
+        procedure EditExpressionKeyPress(Sender: TObject; var Key: char);
+    private
+        { private declarations }
+        procedure InsertFunc(FuncName: string);
+        procedure InsertSymbol(Symbol: string);
+    public
+        { public declarations }
+    end;
 
 var
-  CreateUserPointsSetDlg: TCreateUserPointsSetDlg;
+    CreateUserPointsSetDlg: TCreateUserPointsSetDlg;
 
 implementation
 
 { TCreateUserPointsSetDlg }
 
 procedure TCreateUserPointsSetDlg.InsertFunc(FuncName: string);
-var Temp: LongInt;
+var
+    Temp: longint;
 begin
     with EditExpression do
     begin
         { Selected text is replaced by new. }
-        Temp := SelStart;
-        SelText := FuncName + '()';
+        Temp     := SelStart;
+        SelText  := FuncName + '()';
         SelStart := Temp + Length(FuncName) + 1;
     end;
 end;
 
 procedure TCreateUserPointsSetDlg.InsertSymbol(Symbol: string);
-var Temp: LongInt;
+var
+    Temp: longint;
 begin
     with EditExpression do
     begin
-        Temp := SelStart;
-        SelText := Symbol;
+        Temp     := SelStart;
+        SelText  := Symbol;
         SelStart := Temp + Length(Symbol);
     end;
 end;
@@ -355,15 +357,13 @@ begin
 end;
 
 procedure TCreateUserPointsSetDlg.EditExpressionKeyPress(Sender: TObject;
-  var Key: char);
+    var Key: char);
 begin
     //  desyatichnyy razdelitel'
-    if Key = ',' then Key := '.';
+    if Key = ',' then
+        Key := '.';
 end;
 
 initialization
   {$I create_user_points_set_dlg.lrs}
 end.
-
-
-

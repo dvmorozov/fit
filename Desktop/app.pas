@@ -11,9 +11,9 @@ Facebook https://www.facebook.com/profile.php?id=100004082021870)
 }
 unit app;
 
-//{$DEFINE LOCAL_ACCESS}      //  vklyuchaet kompilyatsiyu servisa s
-                            //  dostupom na lokal'nom komp'yutere
-//{$DEFINE USE_DENWER}
+   //{$DEFINE LOCAL_ACCESS}      //  vklyuchaet kompilyatsiyu servisa s
+   //  dostupom na lokal'nom komp'yutere
+   //{$DEFINE USE_DENWER}
 
 interface
 
@@ -23,38 +23,40 @@ uses SysUtils, Forms
 {$ENDIF}
 {$IFDEF FITSERVER}
     {$IFDEF FIT}
-        , fit_server_app
+    , fit_server_app
     {$ELSE}
         {$IFNDEF FITP2P}
-            , base_service_intf
+    , base_service_intf
         {$ENDIF}
     {$ENDIF}
 {$ELSE}
     {$IFDEF FITPRO}
-        , int_fit_service
+    , int_fit_service
     {$ENDIF}
     {$IFDEF FITCGI}
-        , int_fit_service
+    , int_fit_service
     {$ENDIF}
-{$ENDIF}
-    ;
-//  peremennye vyneseny v otdel'nyi modul', dlya togo chtoby
-//  k nim mozhno bylo by poluchit' dostup iz drugih modulei
+{$ENDIF}    ;
+   //  peremennye vyneseny v otdel'nyi modul', dlya togo chtoby
+   //  k nim mozhno bylo by poluchit' dostup iz drugih modulei
 {$IFDEF FITCLIENT}
-var FitClientApp_: TFitClientApp;
+var
+    FitClientApp_: TFitClientApp;
 {$ELSE}
 {$ENDIF}
 
 {$IFDEF FITCGI}
-var Key: string = '';        //  key obtained during registration
+var
+    Key:      string = '';        //  key obtained during registration
     UserName: string = '';
-    Proxy: IFitProblem;
-{$ENDIF}    //  FITCGI
+    Proxy:    IFitProblem;
+{$ENDIF}//  FITCGI
 
 {$IFDEF FITSERVER}
     {$IFDEF FIT}
-        //  dlya prostogo statsionarnogo prilozheniya
-        var FitServerApp_: TFitServerApp;
+//  dlya prostogo statsionarnogo prilozheniya
+var
+    FitServerApp_: TFitServerApp;
     {$ENDIF}
 {$ENDIF}
 
@@ -64,25 +66,25 @@ const
     //  applications.
 {$IFDEF LOCAL_ACCESS}
     //  IP dlya svyazi CGI-klienta s serverom prilozheniya
-    InternalIP: string = '127.0.0.1';
+    InternalIP: string   = '127.0.0.1';
     InternalPort: string = '1234';
     //  IP dlya svyazi brauzera s CGI-klientom;
     //  eti dannye vstavlyayutsya v ishodyaschie stranitsy
     //  'fit' ispol'zuetsya pri rabote s denwer'om
 {$IFDEF USE_DENWER}
-    ExternalIP: string = 'fit';
+    ExternalIP: string   = 'fit';
 {$ELSE}
-    ExternalIP: string = '127.0.0.1';
+    ExternalIP: string   = '127.0.0.1';
 {$ENDIF}
 {$ELSE}
     //  IP dlya svyazi CGI-klienta s serverom prilozheniya
     //InternalIP: string = '192.168.0.190';
     //  CGI-klient i server rabotayut na odnom kompyutere
-    InternalIP: string = '127.0.0.1';
+    InternalIP: string   = '127.0.0.1';
     InternalPort: string = '1234';
     //  IP dlya svyazi brauzera s CGI-klientom;
     //  eti dannye vstavlyayutsya v ishodyaschie stranitsy
-    ExternalIP: string = 'ec2-54-158-234-101.compute-1.amazonaws.com';
+    ExternalIP: string   = 'ec2-54-158-234-101.compute-1.amazonaws.com';
 {$ENDIF}
 
 implementation
@@ -109,8 +111,8 @@ var
     ProxyLibHandle: THandle;
 {$ENDIF}
 
-//  klyuch FIT vkluchaet i klienta, i server v odin modul' s
-//  pryamoi svyaz'yu mezhdu nimi
+   //  klyuch FIT vkluchaet i klienta, i server v odin modul' s
+   //  pryamoi svyaz'yu mezhdu nimi
 initialization
 {$IFDEF FITPRO}
     ProxyLibHandle := LoadLibrary('ClientProxy.dll');
@@ -143,7 +145,7 @@ initialization
 
 {$IFDEF FITSERVER}
     {$IFDEF FIT}
-        FitServerApp_ := TFitServerApp.Create(nil);
+    FitServerApp_ := TFitServerApp.Create(nil);
     {$ENDIF}
 {$ENDIF}
 
@@ -151,7 +153,7 @@ initialization
     { Server is included into application. }
 {$IFDEF FIT}
     { Link is established to make calls from client to server. }
-    FitClientApp_.FitClient.FitProxy := FitServerApp_.FitStub;
+    FitClientApp_.FitClient.FitProxy     := FitServerApp_.FitStub;
     { Link is established to make calls from server to client. }
     FitServerApp_.FitProxy.FitClientStub := FitClientApp_.FitClientStub;
 {$ENDIF}
@@ -164,7 +166,7 @@ finalization
 
 {$IFDEF FITSERVER}
     {$IFDEF FIT}
-        FitServerApp_.Free;
+    FitServerApp_.Free;
     {$ENDIF}
 {$ENDIF}
 
@@ -177,4 +179,3 @@ finalization
     FreeLibrary(ProxyLibHandle);
 {$ENDIF}
 end.
-

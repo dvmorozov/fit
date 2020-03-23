@@ -23,11 +23,11 @@ type
     //  v ob'ekte potoka dlya posleduyuschego chteniya.
     TMainCalcThread = class(TThread)
     private
-        FTask: TThreadMethod;
+        FTask:    TThreadMethod;
         { These methods are synchronized with UI thread. }
         FShowCurMin: TThreadMethod;
         FShowProfile: TThreadMethod;
-        FDone: TThreadMethod;
+        FDone:    TThreadMethod;
         FFindPeakBoundsDone: TThreadMethod;
         FFindBackPointsDone: TThreadMethod;
         FFindPeakPositionsDone: TThreadMethod;
@@ -53,9 +53,8 @@ implementation
 uses app;
 
 procedure TMainCalcThread.SetSyncMethods(
-    ATask, AShowCurMin, AShowProfile,
-    ADone, AFindPeakBoundsDone, AFindBackPointsDone,
-    AFindPeakPositionsDone, AAllDone: TThreadMethod);
+    ATask, AShowCurMin, AShowProfile, ADone, AFindPeakBoundsDone,
+    AFindBackPointsDone, AFindPeakPositionsDone, AAllDone: TThreadMethod);
 begin
     Assert(Assigned(ATask));
     Assert(Assigned(AShowCurMin));
@@ -66,10 +65,10 @@ begin
     Assert(Assigned(AFindPeakPositionsDone));
     Assert(Assigned(AAllDone));
 
-    FTask := ATask;
+    FTask    := ATask;
     FShowCurMin := AShowCurMin;
     FShowProfile := AShowProfile;
-    FDone := ADone;
+    FDone    := ADone;
     FFindPeakBoundsDone := AFindPeakBoundsDone;
     FFindPeakPositionsDone := AFindPeakPositionsDone;
     FAllDone := AAllDone;
@@ -82,7 +81,8 @@ begin
     try
         FTask;
     except
-        on E: Exception do WriteLog(E.Message, Fatal);
+        on E: Exception do
+            WriteLog(E.Message, Fatal);
     end;
     Synchronize(FAllDone);
 end;
@@ -118,6 +118,3 @@ begin
 end;
 
 end.
-
-
-

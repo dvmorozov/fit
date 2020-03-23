@@ -24,7 +24,7 @@ type
         function CreateTaskObject: TFitTask; override;
 
         { Algorithms are executed in separate threads. }
-        
+
         procedure FindGaussesSequentiallyAlg; override;
         procedure FindGaussesAlg; override;
         procedure FindGaussesAgainAlg; override;
@@ -32,87 +32,88 @@ type
     public
         procedure AbortAsyncOper; override;
     end;
-    
+
 implementation
 
 function TFitServerMultithreaded.CreateTaskObject: TFitTask;
 begin
-    Result := TFitTaskWithThread.Create(nil,
-        FBackgroundVariationEnabled, FCurveScalingEnabled);
+    Result := TFitTaskWithThread.Create(nil, FBackgroundVariationEnabled,
+        FCurveScalingEnabled);
 end;
 
 procedure TFitServerMultithreaded.AbortAsyncOper;
-var i: LongInt;
+var
+    i: longint;
     FitTask: TFitTaskWithThread;
 begin
     if State <> AsyncOperation then
         raise EUserException.Create(InadmissibleServerState + CRLF +
             CalcNotStarted);
 
-    Assert(Assigned(TaskList));
+    Assert(Assigned(FTaskList));
     Assert(Assigned(FMainCalcThread));
     //  bolee optimal'naya realizatsiya
-    for i := 0 to TaskList.Count - 1 do
+    for i := 0 to FTaskList.Count - 1 do
     begin
-        FitTask := TFitTaskWithThread(TaskList.Items[i]);
+        FitTask := TFitTaskWithThread(FTaskList.Items[i]);
         FitTask.DoneDisabled := True;
         FitTask.StopAsyncOper;
     end;
-    for i := 0 to TaskList.Count - 1 do
+    for i := 0 to FTaskList.Count - 1 do
     begin
-        FitTask := TFitTaskWithThread(TaskList.Items[i]);
+        FitTask := TFitTaskWithThread(FTaskList.Items[i]);
         FitTask.DestroyMainCalcThread;
     end;
 
     FMainCalcThread.Terminate;
     DestroyMainCalcThread;
-    FState := SavedState;
+    FState := FSavedState;
 end;
 
 procedure TFitServerMultithreaded.FindGaussesSequentiallyAlg;
-var i: LongInt;
+var
+    i:  longint;
     FT: TFitTask;
 begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
     CreateTasks;
     InitTasks;
     //??? eto budet rabotat' tol'ko poka net obschey Sigma
-    for i := 0 to TaskList.Count - 1 do
+    for i := 0 to FTaskList.Count - 1 do
     begin
-        FT := TFitTask(TaskList.Items[i]);
+        FT := TFitTask(FTaskList.Items[i]);
         FT.FindGaussesSequentially;
     end;
 end;
 
 procedure TFitServerMultithreaded.FindGaussesAlg;
-var i: LongInt;
+var
+    i:  longint;
     FT: TFitTask;
 begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
     CreateTasks;
     InitTasks;
     //??? eto budet rabotat' tol'ko poka net obschey Sigma
-    for i := 0 to TaskList.Count - 1 do
+    for i := 0 to FTaskList.Count - 1 do
     begin
-        FT := TFitTask(TaskList.Items[i]);
+        FT := TFitTask(FTaskList.Items[i]);
         FT.FindGausses;
     end;
 end;
 
 procedure TFitServerMultithreaded.FindGaussesAgainAlg;
-var i: LongInt;
+var
+    i:  longint;
     FT: TFitTask;
 begin
-    Assert(Assigned(TaskList));
+    Assert(Assigned(FTaskList));
     //??? eto budet rabotat' tol'ko poka net obschey Sigma
-    for i := 0 to TaskList.Count - 1 do
+    for i := 0 to FTaskList.Count - 1 do
     begin
-        FT := TFitTask(TaskList.Items[i]);
+        FT := TFitTask(FTaskList.Items[i]);
         FT.FindGaussesAgain;
     end;
 end;
 
 end.
-
-
-

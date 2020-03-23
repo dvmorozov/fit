@@ -338,25 +338,25 @@ type
 
   protected
     { Initial values set up just after file loading. }
-    InitXGraphMax, InitXGraphMin, InitYGraphMax, InitYGraphMin: Double;
+    FInitXGraphMax, FInitXGraphMin, FInitYGraphMax, FInitYGraphMin: Double;
 
     { These variables are used for separating clicks from area selection. }
-    DownX, DownY, UpX, UpY: Integer;
+    FDownX, FDownY, FUpX, FUpY: Integer;
 
     { Saved content of edited cells. }
-    SavedPos, SavedAmp: string;
+    FSavedPos, FSavedAmp: string;
     { Protects from reentrance into editing finalization. }
-    EditDone: Boolean;
+    FEditDone: Boolean;
     { Indicates that hint message should be displayed. }
     FHandleEditHint: Boolean;
     procedure SetHandleEditHint(EditHint: Boolean);
 
   protected
-    { The object created event EditDone. }
-    SenderEditHint: TNumericGrid;
+    { The object created event FEditDone. }
+    FSenderEditHint: TNumericGrid;
 
-    HintMessage: string;
-    DrawReticule: Boolean;
+    FHintMessage: string;
+    FDrawReticule: Boolean;
 
     { Callback for calculating object. }
     procedure AsyncOperationFinished(Sender: TObject);
@@ -388,20 +388,20 @@ type
 
   public
     { Application settings. Type should be checked. }
-    Settings: Settings_v1;
+    FSettings: Settings_v1;
 
-    FitViewer: TFitViewer;
+    FFitViewer: TFitViewer;
     { Index of curve on which the first click was. It is used in the cases when points of only one curve can be selected. }
-    ActiveNumber: LongInt;
+    FActiveNumber: LongInt;
     { Collection should be passive. Object is set from TFitViewer and is checked on Nil. }
-    SpecimenList: TMSCRSpecimenList;
+    FSpecimenList: TMSCRSpecimenList;
     { Indicates that data in tables were changed. }
-    ModifiedParameters: Boolean;
-    ModifiedDatasheet: Boolean;
+    FModifiedParameters: Boolean;
+    FModifiedDatasheet: Boolean;
     { Index of a serie point of which is selected at the moment. }
-    CurSerieIndex: LongInt;
+    FCurSerieIndex: LongInt;
     { Index of selected value. }
-    ValueIndex: LongInt;
+    FValueIndex: LongInt;
 
 {$IFDEF _WINDOWS}
     //procedure AddDummyCurve;
@@ -623,10 +623,10 @@ begin
     // chtoby proshlo obnovlenie grafika i Chart.XGraphMax
     // i dr. imeli pravil'nye znacheniya
     Application.ProcessMessages;
-    InitXGraphMax := Chart.XGraphMax;
-    InitXGraphMin := Chart.XGraphMin;
-    InitYGraphMax := Chart.YGraphMax;
-    InitYGraphMin := Chart.YGraphMin;
+    FInitXGraphMax := Chart.XGraphMax;
+    FInitXGraphMin := Chart.XGraphMin;
+    FInitYGraphMax := Chart.YGraphMax;
+    FInitYGraphMin := Chart.YGraphMin;
 end;
 
 procedure TFormMain.ActionImportExecute(Sender: TObject);
@@ -712,7 +712,7 @@ procedure TFormMain.ActionDeleteExecute(Sender: TObject);
 var i, RowsToDelete, Index: LongInt;
 begin
     //  TODO: obobschit' na vse gridy
-    if Assigned(SpecimenList) then
+    if Assigned(FSpecimenList) then
     begin
         with GridParameters do
         begin
@@ -722,11 +722,11 @@ begin
                 //  udalit' mozhno tol'ko tselye stroki
                 RowsToDelete := Selection.Bottom - Selection.Top + 1;
                 Index := Selection.Top - FixedRows;
-                for i := 1 to RowsToDelete do SpecimenList.Delete(Index);
+                for i := 1 to RowsToDelete do FSpecimenList.Delete(Index);
             end;
         end;
-        SpecimenList.GridAssign(GridParameters);
-        ModifiedParameters := True;
+        FSpecimenList.GridAssign(GridParameters);
+        FModifiedParameters := True;
     end;
 end;
 
@@ -743,12 +743,12 @@ end;
 
 procedure TFormMain.ActionAnimationModeExecute(Sender: TObject);
 begin
-    FitViewer.SetAnimationMode(not FitViewer.GetAnimationMode);
+    FFitViewer.SetAnimationMode(not FFitViewer.GetAnimationMode);
 end;
 
 procedure TFormMain.ActionAnimationModeUpdate(Sender: TObject);
 begin
-    ActionAnimationMode.Checked := FitViewer.GetAnimationMode;
+    ActionAnimationMode.Checked := FFitViewer.GetAnimationMode;
 end;
 
 procedure TFormMain.ActionDoAllAutoExecute(Sender: TObject);
@@ -814,10 +814,10 @@ begin
     // chtoby proshlo obnovlenie grafika i Chart.XGraphMax
     // i dr. imeli pravil'nye znacheniya
     Application.ProcessMessages;
-    InitXGraphMax := Chart.XGraphMax;
-    InitXGraphMin := Chart.XGraphMin;
-    InitYGraphMax := Chart.YGraphMax;
-    InitYGraphMin := Chart.YGraphMin;
+    FInitXGraphMax := Chart.XGraphMax;
+    FInitXGraphMin := Chart.XGraphMin;
+    FInitYGraphMax := Chart.YGraphMax;
+    FInitYGraphMin := Chart.YGraphMin;
 end;
 
 procedure TFormMain.ActionRemoveBackExecute(Sender: TObject);
@@ -864,13 +864,13 @@ begin
     if PageControl1.ActivePage = TabSheetParameters then
     begin
         if SaveTableAsText(GridParameters) then
-            ModifiedParameters := False;
+            FModifiedParameters := False;
     end
     else
     if PageControl1.ActivePage = TabSheetDatasheet then
     begin
         if SaveTableAsText(GridDatasheet) then
-            ModifiedDatasheet := False;
+            FModifiedDatasheet := False;
     end;
 end;
 
@@ -888,7 +888,7 @@ begin
     end;
 
     NP := FitClientApp_.FitClient.NeutronPointsSet;
-        //FitViewer.GetPointsSet(ActiveNumber);
+        //FFitViewer.GetPointsSet(FActiveNumber);
     SP.Sort;
 
     ShowHint(HintMain);
@@ -900,17 +900,17 @@ begin
     // chtoby proshlo obnovlenie grafika i Chart.XGraphMax
     // i dr. imeli pravil'nye znacheniya
     Application.ProcessMessages;
-    InitXGraphMax := Chart.XGraphMax;
-    InitXGraphMin := Chart.XGraphMin;
-    InitYGraphMax := Chart.YGraphMax;
-    InitYGraphMin := Chart.YGraphMin;
+    FInitXGraphMax := Chart.XGraphMax;
+    FInitXGraphMin := Chart.XGraphMin;
+    FInitYGraphMax := Chart.YGraphMax;
+    FInitYGraphMin := Chart.YGraphMin;
 end;
 
 procedure TFormMain.ActionSelAreaLimitsExecute(Sender: TObject);
 begin
     if not SelAreaLimits.Checked then
     begin
-        ActiveNumber := FitViewer.GetActiveCurve;
+        FActiveNumber := FFitViewer.GetActiveCurve;
         FitClientApp_.FitClient.SelectionMode := ModeSelAreaLimits;
         ShowHint(HintFirstStart);
     end
@@ -925,7 +925,7 @@ begin
     //  perehodim v rezhim vvoda tochek fona
     if not Back.Checked then
     begin
-        ActiveNumber := FitViewer.GetActiveCurve;
+        FActiveNumber := FFitViewer.GetActiveCurve;
         FitClientApp_.FitClient.SelectionMode := ModeSelBackground;
         ShowHint(HintFirst);
     end;
@@ -938,7 +938,7 @@ procedure TFormMain.ActionSelBackVisExecute(Sender: TObject);
 begin
     if not Back.Checked then
     begin
-        ActiveNumber := FitViewer.GetActiveCurve;
+        FActiveNumber := FFitViewer.GetActiveCurve;
         FitClientApp_.FitClient.SelectionMode := ModeSelBackground;
         ShowHint(HintFirst);
     end
@@ -950,7 +950,7 @@ procedure TFormMain.ActionSelCharacteristicPointsExecute(Sender: TObject);
 begin
     if not SelCharacteristicPoints.Checked then
     begin
-        ActiveNumber := FitViewer.GetActiveCurve;
+        FActiveNumber := FFitViewer.GetActiveCurve;
         FitClientApp_.FitClient.SelectionMode := ModeSelCharacteristicPoints;
         ShowHint(HintFirstStart);
     end
@@ -963,8 +963,8 @@ var PS: TNeutronPointsSet;
 begin
     if not SelCurveBounds.Checked then
     begin
-        ActiveNumber := FitViewer.GetActiveCurve;
-        PS := FitViewer.GetActivePointsSet;
+        FActiveNumber := FFitViewer.GetActiveCurve;
+        PS := FFitViewer.GetActivePointsSet;
         if not (PS is TCurvePointsSet) then
         begin
             MessageDlg('This operation allowed only with pattern specimens...',
@@ -1052,10 +1052,10 @@ begin
     // chtoby proshlo obnovlenie grafika i Chart.XGraphMax
     // i dr. imeli pravil'nye znacheniya
     Application.ProcessMessages;
-    InitXGraphMax := Chart.XGraphMax;
-    InitXGraphMin := Chart.XGraphMin;
-    InitYGraphMax := Chart.YGraphMax;
-    InitYGraphMin := Chart.YGraphMin;
+    FInitXGraphMax := Chart.XGraphMax;
+    FInitXGraphMin := Chart.XGraphMin;
+    FInitYGraphMax := Chart.YGraphMax;
+    FInitYGraphMin := Chart.YGraphMin;
 end;
 
 procedure TFormMain.ActionSelSpecPosAtEveryPointExecute(Sender: TObject);
@@ -1073,7 +1073,7 @@ begin
     //  perehodim v rezhim vybora intervalov rascheta R-faktora
     if not RFactorIntervals.Checked then
     begin
-        ActiveNumber := FitViewer.GetActiveCurve;
+        FActiveNumber := FFitViewer.GetActiveCurve;
         FitClientApp_.FitClient.SelectionMode := ModeSelPeakBounds;
         ShowHint(HintFirst);
     end;
@@ -1086,7 +1086,7 @@ procedure TFormMain.ActionSelRFactorIntervalsVisExecute(Sender: TObject);
 begin
     if not RFactorIntervals.Checked then
     begin
-        ActiveNumber := FitViewer.GetActiveCurve;
+        FActiveNumber := FFitViewer.GetActiveCurve;
         FitClientApp_.FitClient.SelectionMode := ModeSelPeakBounds;
         ShowHint(HintFirst);
     end
@@ -1098,7 +1098,7 @@ procedure TFormMain.ActionSelSpecPosVisExecute(Sender: TObject);
 begin
     if not PeakPos.Checked then
     begin
-        ActiveNumber := FitViewer.GetActiveCurve;
+        FActiveNumber := FFitViewer.GetActiveCurve;
         FitClientApp_.FitClient.SelectionMode := ModeSelPeakPos;
         ShowHint(HintFirst);
     end
@@ -1108,16 +1108,16 @@ end;
 
 procedure TFormMain.ActionSetMaxRFactorExecute(Sender: TObject);
 begin
-    InputMaxRFactorDlg.Value := FitClientApp_.FitClient.MaxRFactor;
+    InputMaxRFactorDlg.FValue := FitClientApp_.FitClient.MaxRFactor;
     if InputMaxRFactorDlg.ShowModal = mrOk then
-        FitClientApp_.FitClient.MaxRFactor := InputMaxRFactorDlg.Value;
+        FitClientApp_.FitClient.MaxRFactor := InputMaxRFactorDlg.FValue;
 end;
 
 procedure TFormMain.ActionSetPortionExecute(Sender: TObject);
 begin
-    InputBackFactorDlg.Value := FitClientApp_.FitClient.BackFactor;
+    InputBackFactorDlg.FValue := FitClientApp_.FitClient.BackFactor;
     if InputBackFactorDlg.ShowModal = mrOk then
-        FitClientApp_.FitClient.BackFactor := InputBackFactorDlg.Value;
+        FitClientApp_.FitClient.BackFactor := InputBackFactorDlg.FValue;
 end;
 
 procedure TFormMain.ActionSmoothExecute(Sender: TObject);
@@ -1134,7 +1134,7 @@ end;
 procedure TFormMain.ActionViewMarkersExecute(Sender: TObject);
 begin
     ViewMarkers.Checked := not ViewMarkers.Checked;
-    FitViewer.SetViewMarkers(ViewMarkers.Checked);
+    FFitViewer.SetViewMarkers(ViewMarkers.Checked);
 end;
 
 procedure TFormMain.ActionZoomInExecute(Sender: TObject);
@@ -1191,8 +1191,8 @@ procedure TFormMain.FormDestroy(Sender: TObject);
 begin
     //AddDummyCurve;
     WriteSettings;
-    Settings.Free;
-    FitViewer.Free;
+    FSettings.Free;
+    FFitViewer.Free;
 end;
 
 procedure TFormMain.GridDataEditingDone(Sender: TObject);
@@ -1206,21 +1206,21 @@ begin
     try
         //  !!! pochemu-to vyzyvaetsya po tri raza,
         //  poetomu nuzhno ispol'zovat' flag !!!
-        if not EditDone then
+        if not FEditDone then
             with Sender as TNumericGrid do
             begin
-                EditDone := True;
+                FEditDone := True;
                 if Col = 0 then
                 begin
                     //  redaktiruetsya polozhenie
                     //  !!! esli nichego ne vvedeno, to i obnovlyat' ne nuzhno !!!
-                    if SavedPos <> Cells[0, Row] then
+                    if FSavedPos <> Cells[0, Row] then
                         Objects[0, Row] := TObject(1);
                 end
                 else
                 begin
                     //  redaktiruetsya amplituda
-                    if SavedAmp <> Cells[1, Row] then
+                    if FSavedAmp <> Cells[1, Row] then
                         Objects[1, Row] := TObject(1);
                 end;
                 //  proveryayutsya vse priznaki zapolneniya yacheek...
@@ -1238,9 +1238,9 @@ begin
                 begin
                     //  !!! ispol'zuetsya StrToFloatDef, chtoby obrabatyvat'
                     //  sluchai, kogda stroka byla pustoy !!!
-                    PrevXValue := StrToFloatDef(SavedPos, 0);
+                    PrevXValue := StrToFloatDef(FSavedPos, 0);
                     NewXValue := StrToFloatDef(Cells[0, Row], 0);
-                    PrevYValue := StrToFloatDef(SavedAmp, 0);
+                    PrevYValue := StrToFloatDef(FSavedAmp, 0);
                     NewYValue := StrToFloatDef(Cells[1, Row], 0);
 
                     if Sender = GridData then
@@ -1260,8 +1260,8 @@ begin
         //  !!! takie isklyucheniya ne popadut v log !!!
         begin
             HandleEditHint := True; //  vklyuchaetsya taymer vyvoda soobscheniya
-            SenderEditHint := TNumericGrid(Sender);
-            HintMessage := E.Message;
+            FSenderEditHint := TNumericGrid(Sender);
+            FHintMessage := E.Message;
         end;
 {$ELSE}
         raise;
@@ -1278,10 +1278,10 @@ var //BE: BalloonException;
 {$endif}
 begin
 {$ifdef windows}
-    if SenderEditHint = GridBackground then
+    if FSenderEditHint = GridBackground then
         EditBalloon := EditBalloonGridBackground
     else
-    if SenderEditHint = GridData then
+    if FSenderEditHint = GridData then
         EditBalloon := EditBalloonGridData;
     //BE := BalloonException.Create(E.Message);
     //if TNumericGrid(Sender).EditorMode then
@@ -1289,10 +1289,10 @@ begin
     //    Handle := TNumericGrid(Sender).Editor.Handle
     //else
     //begin
-        CellRect := SenderEditHint.CellRect(
-            SenderEditHint.Col, SenderEditHint.Row);
-        EditBalloon.Left := CellRect.Left + SenderEditHint.Left;
-        EditBalloon.Top := CellRect.Top + SenderEditHint.Top;
+        CellRect := FSenderEditHint.CellRect(
+            FSenderEditHint.Col, FSenderEditHint.Row);
+        EditBalloon.Left := CellRect.Left + FSenderEditHint.Left;
+        EditBalloon.Top := CellRect.Top + FSenderEditHint.Top;
         //BE.Handle
             Handle := EditBalloon.Handle;
     //end;
@@ -1301,9 +1301,9 @@ begin
     ActiveControl := EditBalloon;
     //  !!! pri isp. ShowBalloon nel'zya dopuskat' vyhod
     //  isklyucheniya za granitsy obrabotchika sobytiya !!!
-    ShowBalloon(Handle, WideString(HintMessage), WideString(''));
+    ShowBalloon(Handle, WideString(FHintMessage), WideString(''));
 {$else}
-    MessageDlg(HintMessage, mtError, [mbOk], 0);
+    MessageDlg(FHintMessage, mtError, [mbOk], 0);
 {$endif}
 end;
 
@@ -1311,9 +1311,9 @@ end;
 procedure TFormMain.GridDataSelectEditor(Sender: TObject; aCol, aRow: Integer;
   var Editor: TWinControl);
 begin
-    SavedPos := GridData.Cells[0, GridData.Row];
-    SavedAmp := GridData.Cells[1, GridData.Row];
-    EditDone := False;
+    FSavedPos := GridData.Cells[0, GridData.Row];
+    FSavedAmp := GridData.Cells[1, GridData.Row];
+    FEditDone := False;
 end;
 {$hints on}
 
@@ -1322,19 +1322,19 @@ begin
     Application.OnException := OnException;
     Caption := ApplicationProperties1.Title;
 
-    FitViewer := TFitViewer.Create(nil);
-    FitViewer.Form := Self;
-    FitViewer.SetFitClient(FitClientApp_.FitClient);
-    FitViewer.SetViewMarkers(ViewMarkers.Checked);
-    FitViewer.Clear(Self);
+    FFitViewer := TFitViewer.Create(nil);
+    FFitViewer.Form := Self;
+    FFitViewer.SetFitClient(FitClientApp_.FitClient);
+    FFitViewer.SetViewMarkers(ViewMarkers.Checked);
+    FFitViewer.Clear(Self);
 
-    ActiveNumber := -1;
+    FActiveNumber := -1;
 
     FitClientApp_.FitClient.OnAsyncOperationFinished := AsyncOperationFinished;
 
     ShowHint(HintMain);
-    ModifiedParameters := False;
-    ModifiedDatasheet := False;
+    FModifiedParameters := False;
+    FModifiedDatasheet := False;
 
     //PanelLeft.Color := clWindow;
     //PanelChart.Color := clWindow;
@@ -1381,7 +1381,7 @@ begin
     //Chart.Cursor := crCross;//crCursorDrag;
     //Windows.SetCursor(crCursorDrag);
     //Windows.SetCursor(Windows.LoadCursor(0, LclCursorToWin32CursorMap[ACursor]));
-    Settings := Settings_v1.Create(nil);
+    FSettings := Settings_v1.Create(nil);
     ReadSettings;
     CreateCurveTypeMenus;
 {$IFDEF _WINDOWS}
@@ -1418,19 +1418,19 @@ begin
     if Chart.SeriesCount <> 0 then
     begin
         (*  vraschenie v druguyu storonu
-        DeltaX := (InitXGraphMax - InitXGraphMin) -
+        DeltaX := (FInitXGraphMax - FInitXGraphMin) -
                   (Chart.XGraphMax - Chart.XGraphMin);
         D := Chart.XGraphMax - Chart.XGraphMin;
-        Chart.XGraphMax := InitXGraphMax -
+        Chart.XGraphMax := FInitXGraphMax -
             (ScrollBarX.Position - ScrollBarX.Min) * DeltaX /
             (ScrollBarX.Max - ScrollBarX.Min);
         Chart.XGraphMin := Chart.XGraphMax - D;
         *)
 
-        DeltaX := (InitXGraphMax - InitXGraphMin) -
+        DeltaX := (FInitXGraphMax - FInitXGraphMin) -
                   (Chart.XGraphMax - Chart.XGraphMin);
         D := Chart.XGraphMax - Chart.XGraphMin;
-        Chart.XGraphMax := InitXGraphMax -
+        Chart.XGraphMax := FInitXGraphMax -
             (ScrollBarX.Max - ScrollBarX.Position) * DeltaX /
             (ScrollBarX.Max - ScrollBarX.Min);
         Chart.XGraphMin := Chart.XGraphMax - D;
@@ -1444,20 +1444,20 @@ begin
     if Chart.SeriesCount <> 0 then
     begin
         (*  vraschenie v druguyu storonu
-        DeltaY := (InitYGraphMax - InitYGraphMin) -
+        DeltaY := (FInitYGraphMax - FInitYGraphMin) -
                   (Chart.YGraphMax - Chart.YGraphMin);
         D := Chart.YGraphMax - Chart.YGraphMin;
-        Chart.YGraphMin := InitYGraphMin +
+        Chart.YGraphMin := FInitYGraphMin +
             (ScrollBarY.Position - ScrollBarY.Min) * DeltaY /
             (ScrollBarY.Max - ScrollBarY.Min);
         Chart.YGraphMax := Chart.YGraphMin + D;
         Chart.Invalidate;
         *)
 
-        DeltaY := (InitYGraphMax - InitYGraphMin) -
+        DeltaY := (FInitYGraphMax - FInitYGraphMin) -
                   (Chart.YGraphMax - Chart.YGraphMin);
         D := Chart.YGraphMax - Chart.YGraphMin;
-        Chart.YGraphMin := InitYGraphMin +
+        Chart.YGraphMin := FInitYGraphMin +
             (ScrollBarY.Max - ScrollBarY.Position) * DeltaY /
             (ScrollBarY.Max - ScrollBarY.Min);
         Chart.YGraphMax := Chart.YGraphMin + D;
@@ -1499,7 +1499,7 @@ var XValue, YValue: Double;
 {$endif}
 begin
     Assert(Assigned(FitClientApp_));
-    Assert(Assigned(FitViewer));
+    Assert(Assigned(FFitViewer));
     try
         //  !!! esli m-u dvumya klikami ne bylo dvizheniya myshi i
         //  ChartDrawReticule ne vyzyvalas', to CurSerieIndex i ValueIndex
@@ -1510,16 +1510,16 @@ begin
         //  TControl.Click; prostym perekrytiem metoda
         //  dobit'sya zhelaemogo effekta nel'zya; poetomu
         //  sdelana dopolnitel'naya prostaya proverka
-        if DrawReticule and
-            (DownX = UpX) and (DownY = UpY) and (ActiveNumber <> -1) then
+        if FDrawReticule and
+            (FDownX = FUpX) and (FDownY = FUpY) and (FActiveNumber <> -1) then
         begin
-            DrawReticule := False;
+            FDrawReticule := False;
             //  seriya, na kotoroy byl sdelan klik sravnivaetsya s aktivnoy;
             //  dopuskaetsya klik tol'ko na aktivnoy serii, tochki kotoroy
             //  dobavlyayutsya v vybrannuyu seriyu, ili na vybrannoy serii, iz
             //  kotoroy pri etom tochka udalyaetsya
-            if (CurSerieIndex = ActiveNumber) or
-               (FitViewer.GetPointsSet(CurSerieIndex) =
+            if (FCurSerieIndex = FActiveNumber) or
+               (FFitViewer.GetPointsSet(FCurSerieIndex) =
                 FitClientApp_.FitClient.GetCurrentPointsSet) then
             begin
                 case FitClientApp_.FitClient.SelectionMode of
@@ -1590,10 +1590,10 @@ begin
                     end;
                 end;
 
-                NS := FitViewer.GetPointsSet(CurSerieIndex);
+                NS := FFitViewer.GetPointsSet(FCurSerieIndex);
 
-                XValue := NS.PointXCoord[ValueIndex];
-                YValue := NS.PointYCoord[ValueIndex];
+                XValue := NS.PointXCoord[FValueIndex];
+                YValue := NS.PointYCoord[FValueIndex];
                 FitClientApp_.FitClient.AddPointToActive(XValue, YValue);
             end;
         end;
@@ -1602,8 +1602,8 @@ begin
         on E: EUserException do
         //  !!! takie isklyucheniya ne popadut v log !!!
         begin
-            EditBalloonChart.Left := UpX;
-            EditBalloonChart.Top := UpY;
+            EditBalloonChart.Left := FUpX;
+            EditBalloonChart.Top := FUpY;
             //BE := BalloonException.Create(E.Message);
             //BE.Handle
                 Handle := EditBalloonChart.Handle;
@@ -1622,9 +1622,9 @@ end;
 procedure TFormMain.ChartDrawReticule(Sender: TComponent; IndexSerie, Index,
     Xi, Yi: Integer; Xg, Yg: Double);
 begin
-    CurSerieIndex := IndexSerie;
-    ValueIndex := Index;
-    DrawReticule := True;
+    FCurSerieIndex := IndexSerie;
+    FValueIndex := Index;
+    FDrawReticule := True;
     LabelAngle.Caption := Format('%6.2f', [Xg]);
     LabelIntensity.Caption := Format('%6.2f', [Yg]);
 end;
@@ -1635,7 +1635,7 @@ begin
     //  Screen.Cursor := crCursorDrag;
     //  eto budet rabotat' tol'ko so standartnymi kursorami Windows
     //Windows.SetCursor(Windows.LoadCursor(0, LclCursorToWin32CursorMap[ACursor]));
-    DownX := X; DownY := Y;
+    FDownX := X; FDownY := Y;
 end;
 {$hints on}
 
@@ -1646,7 +1646,7 @@ begin
     if Chart.SeriesCount <> 0 then
     begin
         // !!! ne budet pravil'no rabotat' pri ispol'zovanii MirrorX !!!
-        DeltaX := (InitXGraphMax - InitXGraphMin) -
+        DeltaX := (FInitXGraphMax - FInitXGraphMin) -
             (Chart.XGraphMax - Chart.XGraphMin);
         // DeltaX m.b. = 0
         if DeltaX <> 0 then
@@ -1654,15 +1654,15 @@ begin
             //  ustanavlivaetsya priblizhennoe znachenie polozheniya ScrollBar'a
             (*  dlya prokrutki v druguyu storonu
             ScrollBarX.Position := ScrollBarX.Max - Round(
-                (Chart.XGraphMin - InitXGraphMin) *
+                (Chart.XGraphMin - FInitXGraphMin) *
                 (ScrollBarX.Max - ScrollBarX.Min) / DeltaX);
             *)
             ScrollBarX.Position := ScrollBarX.Min + Round(
-                (Chart.XGraphMin - InitXGraphMin) *
+                (Chart.XGraphMin - FInitXGraphMin) *
                 (ScrollBarX.Max - ScrollBarX.Min) / DeltaX);
         end;
 
-        DeltaY := (InitYGraphMax - InitYGraphMin) -
+        DeltaY := (FInitYGraphMax - FInitYGraphMin) -
             (Chart.YGraphMax - Chart.YGraphMin);
         // DeltaY m.b. = 0
         if DeltaY <> 0 then
@@ -1670,13 +1670,13 @@ begin
             //  ustanavlivaetsya priblizhennoe znachenie polozheniya SrollBar'a
             (*  dlya prokrutki v druguyu storonu
             ScrollBarY.Position := ScrollBarY.Min + Round(
-                (Chart.YGraphMin - InitYGraphMin) *
+                (Chart.YGraphMin - FInitYGraphMin) *
                 (ScrollBarY.Max - ScrollBarY.Min) / DeltaY);
             *)
             //  polozhenie dvizhka bara na min. sootvetstvuet
             //  polozheniyu okna na maks. grafika
             ScrollBarY.Position := ScrollBarY.Max - Round(
-                (Chart.YGraphMin - InitYGraphMin) *
+                (Chart.YGraphMin - FInitYGraphMin) *
                 (ScrollBarY.Max - ScrollBarY.Min) / DeltaY);
         end;
     end;
@@ -1687,7 +1687,7 @@ procedure TFormMain.ChartMouseUp(Sender: TOBject; Button: TMouseButton;
     Shift: TShiftState; X, Y: Integer);
 begin
     UpdateBarsPos;
-    UpX := X; UpY := Y;
+    FUpX := X; FUpY := Y;
     OnChartClick;
 end;
 {$hints on}
@@ -1787,13 +1787,13 @@ begin
     //  budet ust. fokus vvoda nevpopad - ne yasno,
     //  kak eto garantirovat'
     (*
-    if SenderEditHint = GridBackground then
+    if FSenderEditHint = GridBackground then
         Edit_HideBalloonTip(EditBalloonGridBackground.Handle)
     else
-    if SenderEditHint = GridData then
+    if FSenderEditHint = GridData then
         Edit_HideBalloonTip(EditBalloonGridData.Handle);
     //  vzvraschaetsya fokus vvoda
-    ActiveControl := SenderEditHint;
+    ActiveControl := FSenderEditHint;
     *)
     TimerBalloonHide.Enabled := False;
 end;
@@ -1876,11 +1876,11 @@ begin
                 InputWavelengthDlg.WavelengthValueEdit.Text));
             Screen.Cursor := crDefault;
             DecimalSeparator := SaveDecimalSeparator;
-            FitViewer.XCoordMode := XCM_SINTL;
-            if Assigned(SpecimenList) then
+            FFitViewer.XCoordMode := XCM_SINTL;
+            if Assigned(FSpecimenList) then
             begin
-                SpecimenList.ViewMode := XCM_SINTL;
-                SpecimenList.GridAssign(GridParameters);
+                FSpecimenList.ViewMode := XCM_SINTL;
+                FSpecimenList.GridAssign(GridParameters);
             end;
             Theta.Checked := False;
             Theta2.Checked := False;
@@ -1892,11 +1892,11 @@ begin
     end{if FitClientApp_.FitClient.GetWaveLength = 0 then...}
     else
     begin
-        FitViewer.XCoordMode := XCM_SINTL;
-        if Assigned(SpecimenList) then
+        FFitViewer.XCoordMode := XCM_SINTL;
+        if Assigned(FSpecimenList) then
         begin
-            SpecimenList.ViewMode := XCM_SINTL;
-            SpecimenList.GridAssign(GridParameters);
+            FSpecimenList.ViewMode := XCM_SINTL;
+            FSpecimenList.GridAssign(GridParameters);
         end;
         Theta.Checked := False;
         Theta2.Checked := False;
@@ -1910,11 +1910,11 @@ end;
 
 procedure TFormMain.ThetaClick(Sender: TObject);
 begin
-    FitViewer.XCoordMode := XCM_T;
-    if Assigned(SpecimenList) then
+    FFitViewer.XCoordMode := XCM_T;
+    if Assigned(FSpecimenList) then
     begin
-        SpecimenList.ViewMode := XCM_T;
-        SpecimenList.GridAssign(GridParameters);
+        FSpecimenList.ViewMode := XCM_T;
+        FSpecimenList.GridAssign(GridParameters);
     end;
     Theta.Checked := True;
     Theta2.Checked := True;
@@ -1926,11 +1926,11 @@ end;
 
 procedure TFormMain.N2ThetaClick(Sender: TObject);
 begin
-    FitViewer.XCoordMode := XCM_2T;
-    if Assigned(SpecimenList) then
+    FFitViewer.XCoordMode := XCM_2T;
+    if Assigned(FSpecimenList) then
     begin
-        SpecimenList.ViewMode := XCM_2T;
-        SpecimenList.GridAssign(GridParameters);
+        FSpecimenList.ViewMode := XCM_2T;
+        FSpecimenList.GridAssign(GridParameters);
     end;
     Theta.Checked := False;
     Theta2.Checked := False;
@@ -2036,7 +2036,7 @@ procedure TFormMain.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 var Result: LongInt;
 begin
     CanClose := True;
-    if ModifiedParameters then
+    if FModifiedParameters then
     begin
         Result := MessageDlg(
             'Model parameters has been modified.' + #13#10 + 'Save?',
@@ -2044,7 +2044,7 @@ begin
 
         if Result = mrYes then
         begin
-            if SaveTableAsText(GridParameters) then ModifiedParameters := False
+            if SaveTableAsText(GridParameters) then FModifiedParameters := False
             else
             begin
                 PageControl1.ActivePage := TabSheetParameters;
@@ -2061,14 +2061,14 @@ begin
         end;
     end;
 
-    if ModifiedDatasheet then
+    if FModifiedDatasheet then
     begin
         Result := MessageDlg(
             'Datasheet has been modified.' + #13#10 + 'Save?',
             mtConfirmation, mbYesNoCancel, 0);
         if Result = mrYes then
         begin
-            if SaveTableAsText(GridDatasheet) then ModifiedDatasheet := False
+            if SaveTableAsText(GridDatasheet) then FModifiedDatasheet := False
             else
             begin
                 PageControl1.ActivePage := TabSheetDatasheet;
@@ -2089,12 +2089,12 @@ procedure TFormMain.SetWavelengthClick(Sender: TObject);
 begin
     if InputWavelengthDlg.ShowModal = mrOk then
     begin
-        FitClientApp_.FitClient.SetWaveLength(InputWavelengthDlg.Value);
-        FitViewer.XCoordMode := XCM_SINTL;
-        if Assigned(SpecimenList) then
+        FitClientApp_.FitClient.SetWaveLength(InputWavelengthDlg.FValue);
+        FFitViewer.XCoordMode := XCM_SINTL;
+        if Assigned(FSpecimenList) then
         begin
-            SpecimenList.ViewMode := XCM_SINTL;
-            SpecimenList.GridAssign(GridParameters);
+            FSpecimenList.ViewMode := XCM_SINTL;
+            FSpecimenList.GridAssign(GridParameters);
         end;
         SinThetaLambda.Checked := True;
         SinThetaLambda2.Checked := True;
@@ -2543,8 +2543,8 @@ procedure TFormMain.DeleteUserCurve(ct: Curve_type);
 
 var mi: TMenuItem;
 begin
-    DeleteFile(PChar(ct.FileName));
-    Settings.Curve_types.Delete(Settings.Curve_types.IndexOf(ct));
+    DeleteFile(PChar(ct.FFileName));
+    FSettings.Curve_types.Delete(FSettings.Curve_types.IndexOf(ct));
     //AddDummyCurve;
     //  udalenie menyu
     DeleteItem(SelCurveType, LongInt(ct));
@@ -2564,9 +2564,9 @@ begin
     mi := TMenuItem(Sender);
     Tag := mi.Tag;
     //  udalenie pol'zovatel'skogo tipa krivoy
-    for i := 0 to Settings.Curve_types.Count - 1 do
+    for i := 0 to FSettings.Curve_types.Count - 1 do
     begin
-        ct := Curve_type(Settings.Curve_types.Items[i]);
+        ct := Curve_type(FSettings.Curve_types.Items[i]);
         //  el-ty sravnivayutsya po ukazatelyu (* 32 *)
         if LongInt(ct) = Tag then
         begin
@@ -2619,9 +2619,9 @@ procedure TFormMain.CreateUserCurveMenus;
         ct: Curve_type;
     begin
         Result := False;
-        for i := 0 to Settings.Curve_types.Count - 1 do
+        for i := 0 to FSettings.Curve_types.Count - 1 do
         begin
-            ct := Curve_type(Settings.Curve_types.Items[i]);
+            ct := Curve_type(FSettings.Curve_types.Items[i]);
             if ct.Name <> 'Dummy' then
             begin
                 CreateMenuItem(i, ct, ParentMenu, OnClick);
@@ -2708,8 +2708,8 @@ begin
                 C := nil;   //  !!! obyazat. d.b. proinitsializirovano nil !!!
                 ReadComponentFromXMLConfig(XMLConfig, 'Component',
                     TComponent(C), OnFindComponentClass, nil);
-                C.FileName := FileName;
-                Settings.Curve_types.Add(C);
+                C.FFileName := FileName;
+                FSettings.Curve_types.Add(C);
             except
                 C.Free;
             end;
@@ -2726,9 +2726,9 @@ end;
 procedure TFormMain.WriteUserCurve(ct: Curve_type);
 var XMLConfig: TXMLConfig;
 begin
-    ct.FileName := GetConfigDir +
+    ct.FFileName := GetConfigDir +
         IntToStr(QWord(TimeStampToMSecs(DateTimeToTimeStamp(Now)))) + '.cpr';
-    XMLConfig := TXMLConfig.Create(ct.FileName);
+    XMLConfig := TXMLConfig.Create(ct.FFileName);
     try
         WriteComponentToXMLConfig(XMLConfig, 'Component', ct);
         XMLConfig.Flush;
@@ -2747,10 +2747,10 @@ begin
         XMLConfig := TXMLConfig.Create(FileName);
         try
             ReadComponentFromXMLConfig(XMLConfig, 'Component',
-                TComponent(Settings), OnFindComponentClass, nil);
+                TComponent(FSettings), OnFindComponentClass, nil);
         except
-            Settings.Free; Settings := nil;
-            Settings := Settings_v1.Create(nil);
+            FSettings.Free; FSettings := nil;
+            FSettings := Settings_v1.Create(nil);
         end;
         XMLConfig.Free;
     end;
@@ -2764,7 +2764,7 @@ begin
     FileName := GetConfigFileName;
     XMLConfig := TXMLConfig.Create(Filename);
     try
-        WriteComponentToXMLConfig(XMLConfig, 'Component', Settings);
+        WriteComponentToXMLConfig(XMLConfig, 'Component', FSettings);
         XMLConfig.Flush;
     except end;
     XMLConfig.Free;

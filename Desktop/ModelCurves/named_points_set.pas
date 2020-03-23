@@ -23,12 +23,12 @@ uses curve_points_set, configurable_points_set;
 
 type
     TNamedPointsSetClass = class of TNamedPointsSet;
-    TExtremumMode = (
+    TExtremumMode   = (
         OnlyMaximums,
         OnlyMinimums,
         MaximumsAndMinimums
-    );
-    TCurveTypeId = TGuid;
+        );
+    TCurveTypeId    = TGuid;
     { Base curve class allowing setting up type name. Type name distinguishes
       this curve from all other curve types, as opposite to the 'Title' attributes
       which is used to distinguish separate curve instances. }
@@ -67,4 +67,3 @@ begin
 end;
 
 end.
-

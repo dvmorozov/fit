@@ -24,30 +24,29 @@ uses
     mscr_specimen_list, self_copied_component, named_points_set
 {$IFDEF _WINDOWS}
     , persistent_curve_parameters
-{$ENDIF}
-    ;
+{$ENDIF}    ;
 
 type
     { Defines base interface of communication from client to server. }
     IFitService = interface
-        function GetMaxRFactor: Double;
-        procedure SetMaxRFactor(AMaxRFactor: Double);
-        function GetBackFactor: Double;
-        procedure SetBackFactor(ABackFactor: Double);
-        function GetCurveThresh: Double;
-        procedure SetCurveThresh(ACurveThresh: Double);
+        function GetMaxRFactor: double;
+        procedure SetMaxRFactor(AMaxRFactor: double);
+        function GetBackFactor: double;
+        procedure SetBackFactor(ABackFactor: double);
+        function GetCurveThresh: double;
+        procedure SetCurveThresh(ACurveThresh: double);
         function GetCurveType: TCurveTypeId;
 {$IFNDEF FIT}
         { https://github.com/dvmorozov/fit/issues/160 }
         procedure SetCurveType(ACurveType: TCurveTypeId);
 {$ENDIF}
         function GetState: TFitServerState;
-        function GetWaveLength: Double;
-        procedure SetWaveLength(AWaveLength: Double);
-        function GetBackgroundVariationEnabled: Boolean;
-        procedure SetBackgroundVariationEnabled(AEnable: Boolean);
-        function GetCurveScalingEnabled: Boolean;
-        procedure SetCurveScalingEnabled(AEnabled: Boolean);
+        function GetWaveLength: double;
+        procedure SetWaveLength(AWaveLength: double);
+        function GetBackgroundVariationEnabled: boolean;
+        procedure SetBackgroundVariationEnabled(AEnable: boolean);
+        function GetCurveScalingEnabled: boolean;
+        procedure SetCurveScalingEnabled(AEnabled: boolean);
 
         { All GetXXXX methods create and return A NEW OBJECT,
           responsibility to free it is put on calling code. }
@@ -70,33 +69,31 @@ type
         function GetRFactorIntervals: TTitlePointsSet;
 {$IFDEF _WINDOWS}
         function GetSpecialCurveParameters: Curve_parameters;
-        procedure SetSpecialCurveParameters(
-            ACurveExpr: string;
-            { Nil means initialization. }
-            CP: Curve_parameters
-            );
+        procedure SetSpecialCurveParameters(ACurveExpr: string;
+        { Nil means initialization. }
+            CP: Curve_parameters);
 {$ENDIF}
-        procedure AddPointToData(XValue, YValue: Double);
-        procedure AddPointToBackground(XValue, YValue: Double);
-        procedure AddPointToRFactorIntervals(XValue, YValue: Double);
-        procedure AddPointToCurvePositions(XValue, YValue: Double);
+        procedure AddPointToData(XValue, YValue: double);
+        procedure AddPointToBackground(XValue, YValue: double);
+        procedure AddPointToRFactorIntervals(XValue, YValue: double);
+        procedure AddPointToCurvePositions(XValue, YValue: double);
 
         procedure ReplacePointInData(
-            PrevXValue, PrevYValue, NewXValue, NewYValue: Double);
+            PrevXValue, PrevYValue, NewXValue, NewYValue: double);
         procedure ReplacePointInBackground(
-            PrevXValue, PrevYValue, NewXValue, NewYValue: Double);
+            PrevXValue, PrevYValue, NewXValue, NewYValue: double);
         procedure ReplacePointInRFactorIntervals(
-            PrevXValue, PrevYValue, NewXValue, NewYValue: Double);
+            PrevXValue, PrevYValue, NewXValue, NewYValue: double);
         procedure ReplacePointInCurvePositions(
-            PrevXValue, PrevYValue, NewXValue, NewYValue: Double);
+            PrevXValue, PrevYValue, NewXValue, NewYValue: double);
 
         function GetSpecimenList: TMSCRSpecimenList;
-        function GetSpecimenCount: LongInt;
-        function GetSpecimenParameterCount(SpecIndex: LongInt): LongInt;
-        procedure GetSpecimenParameter(SpecIndex: LongInt; ParamIndex: LongInt;
-            var Name: string; var Value: Double; var Type_: LongInt);
-        procedure SetSpecimenParameter(SpecIndex: LongInt; ParamIndex: LongInt;
-            Value: Double);
+        function GetSpecimenCount: longint;
+        function GetSpecimenParameterCount(SpecIndex: longint): longint;
+        procedure GetSpecimenParameter(SpecIndex: longint; ParamIndex: longint;
+            var Name: string; var Value: double; var Type_: longint);
+        procedure SetSpecimenParameter(SpecIndex: longint; ParamIndex: longint;
+            Value: double);
         function GetCurvesList: TSelfCopiedCompList;
 
         function GetCalcProfilePointsSet: TTitlePointsSet;
@@ -106,7 +103,7 @@ type
 
         { Returns hint or error message received from the server. }
         function SmoothProfile: string;
-        procedure SubtractAllBackground(Auto: Boolean);
+        procedure SubtractAllBackground(Auto: boolean);
         { Returns hint or error message received from the server. }
         function DoAllAutomatically: string;
         { Returns hint or error message received from the server. }
@@ -126,15 +123,15 @@ type
         { Returns hint or error message received from the server. }
         function AllPointsAsPeakPositions: string;
 {$IFDEF FITCGI}
-        function GetGraph(
-            const Width: LongInt; const Height: LongInt): TMemoryStream;
-        function GetProfileChunk(const ChunkNum: LongInt): TTitlePointsSet;
-        function GetProfileChunkCount: LongInt;
+        function GetGraph(const Width: longint;
+            const Height: longint): TMemoryStream;
+        function GetProfileChunk(const ChunkNum: longint): TTitlePointsSet;
+        function GetProfileChunkCount: longint;
 {$ENDIF}
         { Control methods. }
 
         procedure StopAsyncOper;
-        function AsyncOper: Boolean;
+        function AsyncOper: boolean;
         function GetCalcTimeStr: string;
         function GetRFactorStr: string;
         function GetAbsRFactorStr: string;
@@ -142,20 +139,19 @@ type
 
         { Synchronous methods. }
         { Returns hint or error message received from the server. }
-        function SelectArea(StartPointIndex, StopPointIndex: LongInt): string;
+        function SelectArea(StartPointIndex, StopPointIndex: longint): string;
         { Returns hint or error message received from the server. }
         function ReturnToTotalProfile: string;
         procedure CreateSpecimenList;
     end;
-    
+
     IFitProblem = interface(IFitService)
         procedure CreateProblem;
-        function GetProblemId: LongInt;
-        procedure SetProblemId(AProblemId: LongInt);
-        procedure DiscardProblem(AProblemId: LongInt);
+        function GetProblemId: longint;
+        procedure SetProblemId(AProblemId: longint);
+        procedure DiscardProblem(AProblemId: longint);
     end;
 
 implementation
 
 end.
-

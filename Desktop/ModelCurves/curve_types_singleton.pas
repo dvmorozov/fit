@@ -57,10 +57,10 @@ type
         { Implementation of ICurveTypeIterator. }
         procedure FirstCurveType;
         procedure NextCurveType;
-        function EndCurveType: Boolean;
+        function EndCurveType: boolean;
         function GetCurveTypeName: string;
         function GetCurveTypeId: TCurveTypeId;
-        function GetCurveTypeTag(CurveTypeId: TCurveTypeId): Integer;
+        function GetCurveTypeTag(CurveTypeId: TCurveTypeId): integer;
 
         { Implementation of ICurveTypeSelector. }
         procedure SelectCurveType(TypeId: TCurveTypeId);
@@ -72,7 +72,8 @@ type
 implementation
 
 { Class members aren't supported by Lazarus 0.9.24, global variable is used instead. }
-var CurveTypesSingleton: TCurveTypesSingleton;
+var
+    CurveTypesSingleton: TCurveTypesSingleton;
 
 const
     CurveTypeMustBeSelected: string = 'Curve type must be previously selected.';
@@ -104,34 +105,33 @@ begin
     Result := CurveTypesSingleton as ICurveTypeSelector;
 end;
 
-function SortAlphabetically(Item1, Item2: Pointer): Integer;
+function SortAlphabetically(Item1, Item2: Pointer): integer;
 begin
-    if TCurveType(Item1).Name < TCurveType(Item2).Name then
+    if TCurveType(Item1).FName < TCurveType(Item2).FName then
         Result := -1
     else
-        if TCurveType(Item1).Name > TCurveType(Item2).Name then
-            Result := 1
-        else
-            Result := 0;
+    if TCurveType(Item1).FName > TCurveType(Item2).FName then
+        Result := 1
+    else
+        Result := 0;
 end;
 
 procedure TCurveTypesSingleton.RegisterCurveType(CurveClass: TCurveClass);
-var CurveType: TCurveType;
+var
+    CurveType: TCurveType;
 begin
     CurveType := TCurveType.Create;
-    CurveType.Class_ := CurveClass;
-    CurveType.ExtremumMode := CurveClass.GetExtremumMode;
-    CurveType.TypeId := CurveClass.GetCurveTypeId;
-    CurveType.Name := CurveClass.GetCurveTypeName;
+    CurveType.FClass := CurveClass;
+    CurveType.FExtremumMode := CurveClass.GetExtremumMode;
+    CurveType.FTypeId := CurveClass.GetCurveTypeId;
+    CurveType.FName := CurveClass.GetCurveTypeName;
 
     FCurveTypes.Add(CurveType);
     FCurveTypes.Sort(@SortAlphabetically);
     { The first type is selected by default.
       https://github.com/dvmorozov/fit/issues/126 }
     if FCurveTypes.Count <> 0 then
-    begin
-        FSelectedCurveType := FCurveTypes.Items[0];
-    end
+        FSelectedCurveType := FCurveTypes.Items[0]
     else
         FSelectedCurveType := nil;
 end;
@@ -145,15 +145,14 @@ begin
 end;
 
 procedure TCurveTypesSingleton.NextCurveType;
-var ItemIndex: Integer;
+var
+    ItemIndex: integer;
 begin
     if FCurrentCurveType <> nil then
     begin
         ItemIndex := FCurveTypes.IndexOf(FCurrentCurveType);
         if ItemIndex < FCurveTypes.Count - 1 then
-        begin
-            FCurrentCurveType := FCurveTypes[ItemIndex + 1];
-        end
+            FCurrentCurveType := FCurveTypes[ItemIndex + 1]
         else
             raise EListError.Create(NoItemsInTheList);
     end
@@ -161,7 +160,7 @@ begin
         raise EListError.Create(CurveTypeMustBeSelected);
 end;
 
-function TCurveTypesSingleton.EndCurveType: Boolean;
+function TCurveTypesSingleton.EndCurveType: boolean;
 begin
     if FCurrentCurveType <> nil then
     begin
@@ -171,33 +170,29 @@ begin
             Result := False;
     end
     else
-    begin
-        if FCurveTypes.Count = 0 then
-            Result := True
-        else
-            Result := False;
-    end;
+    if FCurveTypes.Count = 0 then
+        Result := True
+    else
+        Result := False;
 end;
 
 function TCurveTypesSingleton.GetCurveTypeName: string;
 begin
     if FCurrentCurveType <> nil then
-    begin
-        Result := FCurrentCurveType.Name;
-    end
-        else raise EListError.Create(CurveTypeMustBeSelected);
+        Result := FCurrentCurveType.FName
+    else
+        raise EListError.Create(CurveTypeMustBeSelected);
 end;
 
 function TCurveTypesSingleton.GetCurveTypeId: TCurveTypeId;
 begin
     if FCurrentCurveType <> nil then
-    begin
-        Result := FCurrentCurveType.TypeId;
-    end
-        else raise EListError.Create(CurveTypeMustBeSelected);
+        Result := FCurrentCurveType.FTypeId
+    else
+        raise EListError.Create(CurveTypeMustBeSelected);
 end;
 
-function TCurveTypesSingleton.GetCurveTypeTag(CurveTypeId: TCurveTypeId): Integer;
+function TCurveTypesSingleton.GetCurveTypeTag(CurveTypeId: TCurveTypeId): integer;
 begin
     { crc32 is used for compatibility with Lazarus 0.9.24. }
     Result := crc32(0, @CurveTypeId, SizeOf(CurveTypeId));
@@ -208,12 +203,13 @@ begin
     FirstCurveType;
     while True do
     begin
-        if IsEqualGUID(FCurrentCurveType.TypeId, TypeId) then
+        if IsEqualGUID(FCurrentCurveType.FTypeId, TypeId) then
         begin
             FSelectedCurveType := FCurrentCurveType;
             Break;
         end;
-        if EndCurveType then Break
+        if EndCurveType then
+            Break
         else
             NextCurveType;
     end;
@@ -222,7 +218,7 @@ end;
 function TCurveTypesSingleton.GetSelectedCurveType: TCurveTypeId;
 begin
     if FSelectedCurveType <> nil then
-        Result := FSelectedCurveType.TypeId
+        Result := FSelectedCurveType.FTypeId
     else
         { In this case returned GUID should be different from GUID
           of any registered type. }
@@ -232,7 +228,7 @@ end;
 function TCurveTypesSingleton.GetSelectedExtremumMode: TExtremumMode;
 begin
     if FSelectedCurveType <> nil then
-        Result := FSelectedCurveType.ExtremumMode
+        Result := FSelectedCurveType.FExtremumMode
     else
         Result := OnlyMaximums;
 end;
@@ -246,5 +242,3 @@ finalization
     CurveTypesSingleton.Free;
 
 end.
-
-

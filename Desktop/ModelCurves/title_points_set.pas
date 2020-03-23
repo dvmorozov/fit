@@ -26,12 +26,12 @@ type
       recalculation. }
     TTitlePointsSet = class(TNeutronPointsSet)
     public
-        { Title which is displayed in chart legend. }
-        Title: string;
-        
+        { FTitle which is displayed in chart legend. }
+        FTitle: string;
+
         procedure CopyParameters(const Dest: TObject); override;
-        constructor CreateFromPoints(
-            AOwner: TComponent; const Points: TPointsSet);
+        constructor CreateFromPoints(AOwner: TComponent;
+            const Points: TPointsSet);
     end;
 
 implementation
@@ -41,11 +41,11 @@ implementation
 procedure TTitlePointsSet.CopyParameters(const Dest: TObject);
 begin
     inherited;
-    TTitlePointsSet(Dest).Title := Title;
+    TTitlePointsSet(Dest).FTitle := FTitle;
 end;
 
-constructor TTitlePointsSet.CreateFromPoints(
-    AOwner: TComponent; const Points: TPointsSet);
+constructor TTitlePointsSet.CreateFromPoints(AOwner: TComponent;
+    const Points: TPointsSet);
 begin
     Assert(Assigned(Points));
     inherited Create(AOwner);
@@ -53,5 +53,3 @@ begin
 end;
 
 end.
-
-

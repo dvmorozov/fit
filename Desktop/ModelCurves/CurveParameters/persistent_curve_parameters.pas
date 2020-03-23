@@ -30,18 +30,18 @@ type
     protected
         FParams: TCollection;
 
-        function GetParameter(Index: LongInt): TSpecialCurveParameter;
-        procedure SetParameter(Index: LongInt; Parameter: TSpecialCurveParameter);
+        function GetParameter(Index: longint): TSpecialCurveParameter;
+        procedure SetParameter(Index: longint; Parameter: TSpecialCurveParameter);
 
         { Returns value of parameter with given name. }
-        function GetValueByName(Name: string): Double; virtual;
-        procedure SetValueByName(Name: string; Value: Double); virtual;
+        function GetValueByName(Name: string): double; virtual;
+        procedure SetValueByName(Name: string; Value: double); virtual;
 
-        function GetCount: LongInt;
+        function GetCount: longint;
 
     public
         { Initial parameters hash. Should be used for copying optimization. }
-        SavedInitHash: Cardinal;
+        FSavedInitHash: cardinal;
 
         constructor Create(AOwner: TComponent); override;
         destructor Destroy; override;
@@ -49,14 +49,14 @@ type
         procedure CopyParameters(const Dest: TObject); override;
         { Parameter names aren't case sensitive. }
 
-        property Parameters[Index: LongInt]: TSpecialCurveParameter
+        property Parameters[Index: longint]: TSpecialCurveParameter
             read GetParameter write SetParameter; default;
 
         { Provides access to all parameters by name. }
-        property ValuesByName[Name: string]: Double
+        property ValuesByName[Name: string]: double
             read GetValueByName write SetValueByName;
 
-        property Count: LongInt read GetCount;
+        property Count: longint read GetCount;
 
     published
         { Published for XML-serialization. Don't rename. }
@@ -65,8 +65,9 @@ type
 
 implementation
 
-function Curve_parameters.GetValueByName(Name: string): Double;
-var i: LongInt;
+function Curve_parameters.GetValueByName(Name: string): double;
+var
+    i: longint;
     Parameter: TSpecialCurveParameter;
 begin
     for i := 0 to FParams.Count - 1 do
@@ -81,8 +82,9 @@ begin
     Assert(False);
 end;
 
-procedure Curve_parameters.SetValueByName(Name: string; Value: Double);
-var i: LongInt;
+procedure Curve_parameters.SetValueByName(Name: string; Value: double);
+var
+    i: longint;
     Parameter: TSpecialCurveParameter;
 begin
     for i := 0 to FParams.Count - 1 do
@@ -98,11 +100,12 @@ begin
 end;
 
 constructor Curve_parameters.Create;
-var Parameter: TSpecialCurveParameter;
+var
+    Parameter: TSpecialCurveParameter;
     Container: TPersistentCurveParameterContainer;
 begin
     inherited;
-    FParams := TCollection.Create(TPersistentCurveParameterContainer);
+    FParams   := TCollection.Create(TPersistentCurveParameterContainer);
     { Collection should contain at least on item, otherwise is written
       incorrectly. TODO: check it. }
     Parameter := TAmplitudeCurveParameter.Create;
@@ -121,7 +124,8 @@ begin
 end;
 
 procedure Curve_parameters.CopyParameters(const Dest: TObject);
-var i: LongInt;
+var
+    i: longint;
     Parameter, NewParameter: TSpecialCurveParameter;
     NewContainer: TPersistentCurveParameterContainer;
 begin
@@ -131,7 +135,7 @@ begin
 
     for i := 0 to Count - 1 do
     begin
-        Parameter := Parameters[i];
+        Parameter    := Parameters[i];
         NewParameter := Parameter.CreateCopy;
 
         try
@@ -143,22 +147,23 @@ begin
         end;
         NewContainer.Parameter := NewParameter;
     end;
-    Curve_parameters(Dest).SavedInitHash := SavedInitHash;
+    Curve_parameters(Dest).FSavedInitHash := FSavedInitHash;
 end;
 
-function Curve_parameters.GetParameter(Index: LongInt): TSpecialCurveParameter;
+function Curve_parameters.GetParameter(Index: longint): TSpecialCurveParameter;
 begin
     Assert(Assigned(FParams));
     Result := TPersistentCurveParameterContainer(FParams.Items[Index]).Parameter;
 end;
 
-procedure Curve_parameters.SetParameter(Index: LongInt; Parameter: TSpecialCurveParameter);
+procedure Curve_parameters.SetParameter(Index: longint;
+    Parameter: TSpecialCurveParameter);
 begin
     Assert(Assigned(FParams));
     TPersistentCurveParameterContainer(FParams.Items[Index]).Parameter := Parameter;
 end;
 
-function Curve_parameters.GetCount: LongInt;
+function Curve_parameters.GetCount: longint;
 begin
     Assert(Assigned(FParams));
     Result := FParams.Count;

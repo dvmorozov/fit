@@ -15,14 +15,14 @@ type
       It can take only positive value. }
     TAmplitudeCurveParameter = class(TSpecialCurveParameter)
     protected
-        procedure SetValue(AValue: Double); override;
+        procedure SetValue(AValue: double); override;
 
     public
         constructor Create;
         function CreateCopy: TSpecialCurveParameter; override;
         procedure InitVariationStep; override;
         procedure InitValue; override;
-        function MinimumStepAchieved: Boolean; override;
+        function MinimumStepAchieved: boolean; override;
     end;
 
 implementation
@@ -50,16 +50,15 @@ begin
     CopyTo(Result);
 end;
 
-procedure TAmplitudeCurveParameter.SetValue(AValue: Double);
+procedure TAmplitudeCurveParameter.SetValue(AValue: double);
 begin
     FValue := Abs(AValue);
     WriteValueToLog(AValue);
 end;
 
-function TAmplitudeCurveParameter.MinimumStepAchieved: Boolean;
+function TAmplitudeCurveParameter.MinimumStepAchieved: boolean;
 begin
     Result := FVariationStep < 0.0001;
 end;
 
 end.
-

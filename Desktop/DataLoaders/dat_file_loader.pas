@@ -36,20 +36,21 @@ implementation
 
 procedure TDATFileLoader.LoadDataSetActually;
 var //F: TextFile;
-    Val1, Val2: Double;
-    Data: TStringList;
-    Str: string;
-    i, j: LongInt;
-    BegFound: Boolean;
-    BegIndex: LongInt;
-    Value1Found, Value2Found, FirstDelimiter: Boolean;
+    Val1, Val2: double;
+    Data:     TStringList;
+    Str:      string;
+    i, j:     longint;
+    BegFound: boolean;
+    BegIndex: longint;
+    Value1Found, Value2Found, FirstDelimiter: boolean;
 
-label ExtractValue;
+label
+    ExtractValue;
 begin
     Assert(FFileName <> '');
-    Assert(Assigned(PointsSet));
-    
-    PointsSet.Clear;
+    Assert(Assigned(FPointsSet));
+
+    FPointsSet.Clear;
     Data := TStringList.Create;
     try
         Data.LoadFromFile(FFileName);
@@ -57,15 +58,17 @@ begin
         begin
             { The first column - X (argument), the second - Y (value).  
               Column separator can be any symbol except numbers, point and comma. }
-            Str := Data.Strings[i] + ' ';   { Terminating symbol is added for algorithm. }
-                                            
+            Str := Data.Strings[i] + ' ';
+            { Terminating symbol is added for algorithm. }
+
             BegFound := False;
-            Value1Found := False; Value2Found := False;
+            Value1Found := False;
+            Value2Found := False;
             FirstDelimiter := False;
-            Val1 := 0; Val2 := 0;
+            Val1 := 0;
+            Val2 := 0;
             try
                 for j := 1 to Length(Str) do
-                begin
                     if ((Str[j] >= Chr($30)) and (Str[j] <= Chr($39))) or
                         (Str[j] = '.') or (Str[j] = ',') then
                     begin
@@ -77,49 +80,44 @@ begin
                         else
                         begin
                             if (Str[j] = '.') or (Str[j] = ',') then
-                            begin
                                 if not FirstDelimiter then
                                     FirstDelimiter := True
-                                else goto ExtractValue;
-                            end;
+                                else
+                                    goto ExtractValue;
                         end;
                     end
                     else
-                    begin
-ExtractValue:
-                        if BegFound then
-                        begin
-                            if not Value1Found then
+                        ExtractValue:
+                            if BegFound then
                             begin
-                                //  The first value (argument) is extracted.
-                                Val1 := MyStrToFloat(
-                                    Copy(Str, BegIndex, j - BegIndex));
-                                Value1Found := True;
-                            end
-                            else
-                            begin
-                                //  The second value (function) is extracted.
-                                Val2 := MyStrToFloat(
-                                    Copy(Str, BegIndex, j - BegIndex));
-                                Value2Found := True;
-                                //  Rest of the line is ignored.
-                                Break;
+                                if not Value1Found then
+                                begin
+                                    //  The first value (argument) is extracted.
+                                    Val1 :=
+                                        MyStrToFloat(Copy(Str, BegIndex, j - BegIndex));
+                                    Value1Found := True;
+                                end
+                                else
+                                begin
+                                    //  The second value (function) is extracted.
+                                    Val2 :=
+                                        MyStrToFloat(Copy(Str, BegIndex, j - BegIndex));
+                                    Value2Found := True;
+                                    //  Rest of the line is ignored.
+                                    Break;
+                                end;
+                                FirstDelimiter := False;
+                                BegFound := False;
                             end;
-                            FirstDelimiter := False;
-                            BegFound := False;
-                        end;
-                    end;
-                end;
             except
                 raise EInvalidFileFormat.Create('File ' +
                     FFileName + ' is not valid DAT-file.')
             end;
             if Value2Found then
-            begin
+                if FPointsSet.IndexOfValueX(Val1) = -1 then
+                    FPointsSet.AddNewPoint(Val1, Val2)
                 //  Duplicates by argument value are ignored.
-                if PointsSet.IndexOfValueX(Val1) = -1 then
-                    PointsSet.AddNewPoint(Val1, Val2);
-            end;
+            ;
         end;
     finally
         Data.Free;
@@ -137,7 +135,7 @@ ExtractValue:
                 raise EInvalidFileFormat.Create('File ' +
                     FFileName + ' is not valid DAT-file.')
             end;
-            PointsSet.AddNewPoint(Val1, Val2);
+            FPointsSet.AddNewPoint(Val1, Val2);
         end;
     finally
         CloseFile(F);
@@ -146,5 +144,3 @@ ExtractValue:
 end;
 
 end.
-
-

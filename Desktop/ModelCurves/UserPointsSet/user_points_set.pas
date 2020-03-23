@@ -26,18 +26,17 @@ uses SysUtils
     , configurable_points_set, points_set, special_curve_parameter
     , Windows
 {$ENDIF}
-{$ENDIF}
-    ;
+{$ENDIF}    ;
 
 {$IFDEF _WINDOWS}
 {$IFDEF WINDOWS_SPECIFIC}
 function ParseAndCalcExpression(Expr: LPCSTR; ParamList: LPCSTR;
-    Result: PDouble): LongInt; cdecl;
-    external 'MathExpr' name 'ParseAndCalcExpression';
+    Result: PDouble): longint; cdecl;
+    external 'MathExpr' Name 'ParseAndCalcExpression';
 function GetSymbols: LPCSTR; cdecl;
-    external 'MathExpr' name 'GetSymbols';
+    external 'MathExpr' Name 'GetSymbols';
 procedure FreeSymbols(Symbols: LPCSTR); cdecl;
-    external 'MathExpr' name 'FreeSymbols';
+    external 'MathExpr' Name 'FreeSymbols';
 
 type
     { Container for points of user curve given as expression. }
@@ -48,7 +47,7 @@ type
         { Performs recalculation of all points of function. }
         procedure DoCalc(const Intervals: TPointsSet); override;
         { Performs calculation of function value for given value of argument. }
-        function CalcValue(ArgValue: Double): Double;
+        function CalcValue(ArgValue: double): double;
 
     public
         procedure CopyParameters(const Dest: TObject); override;
@@ -58,14 +57,15 @@ type
         class function GetCurveTypeId: TCurveTypeId; override;
         class function GetExtremumMode: TExtremumMode; override;
 
-        class function GetConfigurablePointsSet:
-            TConfigurablePointsSetClass; override;
+        class function GetConfigurablePointsSet: TConfigurablePointsSetClass;
+            override;
 
         property Expression: string read FExpression write FExpression;
     end;
+
 {$ENDIF}
 {$ENDIF}
-    
+
 implementation
 
 {$IFDEF _WINDOWS}
@@ -87,22 +87,23 @@ begin
     Result := MaximumsAndMinimums;
 end;
 
-function TUserPointsSet.CalcValue(ArgValue: Double): Double;
-var P: TSpecialCurveParameter;
+function TUserPointsSet.CalcValue(ArgValue: double): double;
+var
+    P:   TSpecialCurveParameter;
     Prs: string;
-    i: LongInt;
+    i:   longint;
 begin
     Assert(Assigned(Parameters));
     Assert(Assigned(FVariableParameters));
     Assert(Assigned(ArgP));
     { Sets up value of argument. }
-    P := ArgP;
+    P   := ArgP;
     P.Value := ArgValue;
     { Creates string of VariableParameters. }
     Prs := '';
     for i := 0 to Parameters.Count - 1 do
     begin
-        P := Parameters[i];
+        P   := Parameters[i];
         Prs := Prs + P.Name + '=' + FloatToStr(P.Value) + Chr(0);
     end;
     Result := 0;
@@ -112,25 +113,23 @@ begin
 end;
 
 procedure TUserPointsSet.DoCalc(const Intervals: TPointsSet);
-var i, j: LongInt;
+var
+    i, j: longint;
 begin
     if Assigned(Intervals) then
     begin
         Assert((Intervals.PointsCount mod 2) = 0);
         for i := 0 to (Intervals.PointsCount shr 1) - 1 do
-        begin
             for j := Trunc(Intervals.PointXCoord[i shl 1]) to
                 Trunc(Intervals.PointXCoord[(i shl 1) + 1]) do
-                    PointYCoord[j] := CalcValue(PointXCoord[j]);
-        end;
+                PointYCoord[j] := CalcValue(PointXCoord[j]);
     end
     else
-    begin
+        for j := 0 to PointsCount - 1 do
+            PointYCoord[j] := CalcValue(PointXCoord[j])
         //  poskol'ku vid krivoy ne izvesten, to optimizatsiya
         //  nevozmozhna - delaem polnyy pereschet
-        for j := 0 to PointsCount - 1 do
-            PointYCoord[j] := CalcValue(PointXCoord[j]);
-    end;
+    ;
 end;
 
 procedure TUserPointsSet.CopyParameters(const Dest: TObject);
@@ -144,7 +143,8 @@ begin
     Result := TConfigurableUserPointsSet;
 end;
 
-var CTS: ICurveFactory;
+var
+    CTS: ICurveFactory;
 
 initialization
     CTS := TCurveTypesSingleton.CreateCurveFactory;
@@ -152,4 +152,3 @@ initialization
 {$ENDIF}
 {$ENDIF}
 end.
-

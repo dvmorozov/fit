@@ -28,15 +28,15 @@ type
     TAsymPseudoVoigtPointsSet = class(TPseudoVoigtPointsSet)
     protected
         { Difference of half-widths of left and right sides of the curve. }
-        DeltaSigmaP: TDeltaSigmaCurveParameter;
+        FDeltaSigmaP: TDeltaSigmaCurveParameter;
 
-        function GetDeltaSigma: Double;
+        function GetDeltaSigma: double;
 
         { Performs recalculation of all points of function. }
         procedure DoCalc(const Intervals: TPointsSet); override;
 
-        property DeltaSigma: Double read GetDeltaSigma;
-        
+        property DeltaSigma: double read GetDeltaSigma;
+
     public
         constructor Create(AOwner: TComponent); override;
         { Overrides method defined in TNamedPointsSet. }
@@ -53,39 +53,37 @@ uses int_curve_factory;
 {====================== TAsymPseudoVoigtPointsSet =============================}
 
 procedure TAsymPseudoVoigtPointsSet.DoCalc(const Intervals: TPointsSet);
-var i, j: LongInt;
+var
+    i, j: longint;
 begin
     if Assigned(Intervals) then
     begin
         Assert((Intervals.PointsCount mod 2) = 0);
         for i := 0 to (Intervals.PointsCount shr 1) - 1 do
-        begin
             for j := Trunc(Intervals.PointXCoord[i shl 1]) to
                 Trunc(Intervals.PointXCoord[(i shl 1) + 1]) do
-                    Points[j][2] := AsymPseudoVoigtPoint(
-                        A, Sigma, Eta, x0, Points[j][1], DeltaSigma);
-        end;
+                Points[j][2] :=
+                    AsymPseudoVoigtPoint(A, Sigma, Eta, x0,
+                    Points[j][1], DeltaSigma);
     end
     else
-    begin
         AsymPseudoVoigt(Points, A, Sigma, Eta, x0, DeltaSigma);
-    end;
 end;
 
-function TAsymPseudoVoigtPointsSet.GetDeltaSigma: Double;
+function TAsymPseudoVoigtPointsSet.GetDeltaSigma: double;
 begin
-    Assert(Assigned(DeltaSigmaP));
-    Result := DeltaSigmaP.Value;
+    Assert(Assigned(FDeltaSigmaP));
+    Result := FDeltaSigmaP.Value;
 end;
 
 constructor TAsymPseudoVoigtPointsSet.Create(AOwner: TComponent);
 var
-    Count: LongInt;
+    Count: longint;
 begin
     inherited;
 
-    DeltaSigmaP := TDeltaSigmaCurveParameter.Create;
-    AddParameter(DeltaSigmaP);
+    FDeltaSigmaP := TDeltaSigmaCurveParameter.Create;
+    AddParameter(FDeltaSigmaP);
 
     InitListOfVariableParameters;
 
@@ -108,7 +106,8 @@ begin
     Result := OnlyMaximums;
 end;
 
-var CTS: ICurveFactory;
+var
+    CTS: ICurveFactory;
 
 initialization
     CTS := TCurveTypesSingleton.CreateCurveFactory;

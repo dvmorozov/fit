@@ -112,6 +112,8 @@ begin
         else
             Exit;
     end;
+{$ELSE}
+    Result := False;
 {$ENDIF}
 end;
 

@@ -20,7 +20,7 @@ unit fit_server_stub;
 
 interface
 
-uses SysUtils, fit_server, common_types, self_copied_component, mscr_specimen_list,
+uses SysUtils, fit_server, self_copied_component, mscr_specimen_list,
     MyExceptions, int_points_set, points_set, title_points_set,
     named_points_set, log
 {$IFDEF _WINDOWS}

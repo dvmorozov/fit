@@ -41,7 +41,7 @@ uses Classes, title_points_set, SelfCheckedComponentList, SysUtils,
     fit_server_proxy,
 {$ENDIF}
     self_copied_component, MyExceptions, fit_task, SimpMath,
-    common_types, int_client_callback, int_fit_service
+    int_client_callback, int_fit_service
 {$IFDEF _WINDOWS}
 {$IFDEF WINDOWS_SPECIFIC}
     , user_points_set
@@ -50,9 +50,6 @@ uses Classes, title_points_set, SelfCheckedComponentList, SysUtils,
 {$ENDIF};
 
 type
-    { In varying gaussian parameters now amplitude and position are varied,
-      width is taken the same for all instances (specimens). }
-
     TRecreateServer = procedure of object;
 
     { The component which implements all server logic. It divides the task
@@ -977,7 +974,7 @@ begin
                 end
                 else
                     Break// !!! dlya sravneniya d. ispol'zovat'sya <,
-                // tak kak inache piki mogut smykat'sya !!!
+            // tak kak inache piki mogut smykat'sya !!!
             ;
             // iskusstvennoe ushirenie pika vlevo
             (*
@@ -1007,7 +1004,7 @@ begin
                 end
                 else
                     Break// !!! dlya sravneniya d. ispol'zovat'sya <,
-                // tak kak inache piki mogut smykat'sya !!!
+            // tak kak inache piki mogut smykat'sya !!!
             ;
             // iskusstvennoe ushirenie pika vpravo
             (*

@@ -26,7 +26,6 @@ uses {$IFDEF UNIX} {$IFDEF UseCThreads}
     TurboPowerIPro,
     SelfCheckedComponentList,
     StrUtils,
-    common_types,
     table_components,
     self_copied_component,
     ClientCallback,

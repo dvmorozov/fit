@@ -20,13 +20,32 @@ unit int_fit_service;
 interface
 
 uses
-    Classes, SysUtils, common_types, points_set, title_points_set,
+    Classes, SysUtils, points_set, title_points_set,
     mscr_specimen_list, self_copied_component, named_points_set
 {$IFDEF _WINDOWS}
     , persistent_curve_parameters
 {$ENDIF}    ;
 
 type
+    { Server states. Sequence of states is designated by numbers. }
+    TFitServerState = (
+        { Waiting of loading profile data. }
+        ProfileWaiting,
+        { Background isn't removed yet after last profile loading.
+          State must not change on loading background points. }
+        BackNotRemoved,
+        { Computation is performed. }
+        AsyncOperation,
+        { States below should be used only to inform user - optimization
+          should be allowed in any case when background removed (ready to
+          fit parameters in automatic mode). }
+        ReadyForAutoFit,
+        { Ready to fit with given user constraints. }
+        ReadyForFit,
+        { Computation has been finished, allows further restarting. }
+        Finished
+        );
+
     { Defines base interface of communication from client to server. }
     IFitService = interface
         function GetMaxRFactor: double;

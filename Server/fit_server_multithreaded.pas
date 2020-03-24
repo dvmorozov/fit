@@ -15,7 +15,7 @@ unit fit_server_multithreaded;
 interface
 
 uses SysUtils, fit_task, fit_task_with_thread, fit_server_with_thread,
-    fit_server, MyExceptions, common_types;
+    fit_server, int_fit_service, MyExceptions;
 
 type
     { Executes algorithms in separate threads. }

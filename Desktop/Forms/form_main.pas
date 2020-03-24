@@ -23,9 +23,9 @@ uses
     LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
     ExtCtrls, StdCtrls, Menus, points_set, fit_viewer, ComCtrls,
     fit_client, NumericGrid, CheckLst, mscr_specimen_list, LResources, TAGraph,
-    ActnList, app_settings, Laz_XMLCfg, common_types, neutron_points_set,
+    ActnList, app_settings, Laz_XMLCfg, neutron_points_set,
     curve_points_set, gauss_points_set, asym_pseudo_voigt_points_set,
-    lorentz_points_set, pseudo_voigt_points_set,
+    lorentz_points_set, pseudo_voigt_points_set, int_fit_service,
     two_branches_pseudo_voigt_points_set, named_points_set, log
 {$IFDEF _WINDOWS}
 {$IFDEF WINDOWS_SPECIFIC}

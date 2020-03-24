@@ -18,7 +18,6 @@ const
     sUNIT_NAME  = 'fit_server';
 
 type
-
     TResult     = class;
     TBoolResult = class;
     TPointsResult = class;

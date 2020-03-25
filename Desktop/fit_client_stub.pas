@@ -19,7 +19,8 @@ unit fit_client_stub;
 
 interface
 
-uses int_client_callback;
+uses
+    int_client_callback;
 
 type
     TFitClientStub = class(TInterfacedObject, IClientCallback)
@@ -39,7 +40,8 @@ type
 
 implementation
 
-uses fit_client;
+uses
+    fit_client;
 
 procedure TFitClientStub.ShowCurMin(Min: double);
 begin

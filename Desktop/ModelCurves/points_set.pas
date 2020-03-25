@@ -19,7 +19,8 @@ unit points_set;
 
 interface
 
-uses Classes, SysUtils, SimpMath, self_copied_component;
+uses
+    Classes, self_copied_component, SimpMath, SysUtils;
 
 type
     { Generic point set. }

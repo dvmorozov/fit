@@ -19,7 +19,8 @@ unit create_user_points_set_dlg_adapter;
 
 interface
 
-uses Classes, SysUtils, int_create_user_points_set_dlg;
+uses
+    Classes, int_create_user_points_set_dlg, SysUtils;
 
 type
 {$warnings off}
@@ -41,7 +42,8 @@ type
 
 implementation
 
-uses create_user_points_set_dlg;
+uses
+    create_user_points_set_dlg;
 
 { Class members aren't supported by Lazarus 0.9.24, global variable are used instead. }
 var

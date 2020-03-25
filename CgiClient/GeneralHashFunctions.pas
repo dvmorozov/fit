@@ -212,8 +212,8 @@ begin
         if ((i - 1) and 1) = 0 then
             Result := Result xor ((Result shl 7) xor Ord(Str[i]) * (Result shr 3))
         else
-            Result := Result xor (not
-                ((Result shl 11) + Ord(Str[i]) xor (Result shr 5)));
+            Result := Result xor
+                (not ((Result shl 11) + Ord(Str[i]) xor (Result shr 5)));
 end;
 
 (* End Of AP Hash function *)

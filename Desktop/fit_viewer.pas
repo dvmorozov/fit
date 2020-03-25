@@ -20,12 +20,13 @@ unit fit_viewer;
 interface
 
 uses
-    points_set, Classes, SysUtils, Graphics, self_copied_component,
-    title_points_set, neutron_points_set, curve_points_set, named_points_set,
+    Classes, curve_points_set, Graphics, named_points_set,
+    neutron_points_set, points_set, self_copied_component,
+    SysUtils, title_points_set,
 {$IFNDEF SERVER}
     fit_client, int_fit_viewer,
 {$ENDIF}
-    TAGraph, Forms, SelfCheckedComponentList, mscr_specimen_list;
+    Forms, mscr_specimen_list, SelfCheckedComponentList, TAGraph;
 
 {$IFNDEF SERVER}
 // Switch on updating legend and grids.

@@ -3,13 +3,14 @@ unit log;
 interface
 
 uses
-    Classes, SysUtils, Forms
+    Classes, Forms, SysUtils
 {$IFDEF WINDOWS}
     , Windows
 {$IFNDEF FITCGI}
     , Shfolder
 {$ENDIF}
-{$ENDIF}    ;
+{$ENDIF}
+    ;
 
 type
     TMsgType = (Fatal, Warning, Notification, Debug);
@@ -61,8 +62,7 @@ begin
 {$IFNDEF FITCGI}
     Path[0] := #0;
     //  pochemu-to s flagom CSIDL_FLAG_CREATE ne rabotaet !
-    (* WINDOWS *)
-    SHGetFolderPath(0, (* CSIDL_PERSONAL *)CSIDL_APPDATA, 0, 0, @Path);
+    SHGetFolderPath(0, {CSIDL_PERSONAL} CSIDL_APPDATA, 0, 0, @Path);
     Result := StrPas(Path);
 {$ELSE}
     Result := '..\data\tmp\';

@@ -20,13 +20,12 @@ unit form_main;
 interface
 
 uses
-    LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-    ExtCtrls, StdCtrls, Menus, points_set, fit_viewer, ComCtrls,
-    fit_client, NumericGrid, CheckLst, mscr_specimen_list, LResources, TAGraph,
-    ActnList, app_settings, Laz_XMLCfg, neutron_points_set,
-    curve_points_set, gauss_points_set, asym_pseudo_voigt_points_set,
-    lorentz_points_set, pseudo_voigt_points_set, int_fit_service,
-    two_branches_pseudo_voigt_points_set, named_points_set, log
+    LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, ExtCtrls,
+    StdCtrls, Menus, points_set, fit_viewer, ComCtrls, fit_client, NumericGrid,
+    CheckLst, mscr_specimen_list, LResources, TAGraph, ActnList, app_settings,
+    Laz_XMLCfg, neutron_points_set, curve_points_set, gauss_points_set,
+    asym_pseudo_voigt_points_set, lorentz_points_set, pseudo_voigt_points_set,
+    int_fit_service, two_branches_pseudo_voigt_points_set, named_points_set, log
 {$IFDEF _WINDOWS}
 {$IFDEF WINDOWS_SPECIFIC}
     , user_points_set
@@ -478,9 +477,10 @@ const
 
 implementation
 
-uses input_wavelength_dialog, input_max_rfactor_dialog,
-    input_back_factor_dialog, about_box_dialog, app, int_curve_type_iterator,
-    int_curve_type_selector, curve_types_singleton;
+uses
+    input_wavelength_dialog, input_max_rfactor_dialog, input_back_factor_dialog,
+    about_box_dialog, app, int_curve_type_iterator, int_curve_type_selector,
+    curve_types_singleton;
 
 (*
 function OFNHookProc(
@@ -2592,9 +2592,9 @@ begin
     mi := TMenuItem(Sender);
     Tag := mi.Tag;
     //  poisk pol'zovatel'skogo tipa krivoy
-    for i := 0 to Settings.Curve_types.Count - 1 do
+    for i := 0 to FSettings.Curve_types.Count - 1 do
     begin
-        ct := Curve_type(Settings.Curve_types.Items[i]);
+        ct := Curve_type(FSettings.Curve_types.Items[i]);
         //  el-ty sravnivayutsya po ukazatelyu (* 32 *)
         if LongInt(ct) = Tag then
         begin

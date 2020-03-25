@@ -20,11 +20,12 @@ unit int_fit_service;
 interface
 
 uses
-    Classes, SysUtils, points_set, title_points_set,
-    mscr_specimen_list, self_copied_component, named_points_set
+    Classes, mscr_specimen_list, named_points_set, points_set,
+    self_copied_component, SysUtils, title_points_set
 {$IFDEF _WINDOWS}
     , persistent_curve_parameters
-{$ENDIF}    ;
+{$ENDIF}
+    ;
 
 type
     { Server states. Sequence of states is designated by numbers. }

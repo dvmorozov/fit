@@ -338,7 +338,7 @@ begin
                 Inc(DownCount);
                 if DownCount >= 10 then
                     MultipleSteps(1.01)
-                    //OutputDebugString(PChar('Parameter steps increased...'));
+                //OutputDebugString(PChar('Parameter steps increased...'));
                 ;
             end
             else

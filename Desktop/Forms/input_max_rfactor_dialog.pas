@@ -19,13 +19,14 @@ unit input_max_rfactor_dialog;
 
 interface
 
-uses SysUtils, Forms, Controls, StdCtrls,
-    ExtCtrls, LResources
+uses
+    Controls, ExtCtrls, Forms, LResources, StdCtrls, SysUtils
 {$IFDEF _WINDOWS}
-    , Windows, CommCtrl
+    , CommCtrl, Windows
 {$ELSE}
     , Dialogs
-{$ENDIF}  ;
+{$ENDIF}
+    ;
 
 type
 

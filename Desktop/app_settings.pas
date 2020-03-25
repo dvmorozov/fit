@@ -22,8 +22,8 @@ unit app_settings;
 interface
 
 uses
-    Classes, SysUtils, LCLProc, Laz_XMLStreaming, Laz_DOM, Laz_XMLCfg, TypInfo,
-    persistent_curve_parameters, SelfCheckedComponentList;
+    Classes, Laz_DOM, Laz_XMLCfg, Laz_XMLStreaming, LCLProc,
+    persistent_curve_parameters, SelfCheckedComponentList, SysUtils, TypInfo;
 
 type
     { Contains and serializes attributes of mathematical expression. }

@@ -20,8 +20,8 @@ unit curve_type_parameters_factory;
 interface
 
 uses
-    Classes, SysUtils, app_settings, int_curve_type_parameters_factory,
-    persistent_curve_parameters;
+    app_settings, Classes, int_curve_type_parameters_factory,
+    persistent_curve_parameters, SysUtils;
 
 type
 {$warnings off}

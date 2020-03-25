@@ -14,7 +14,7 @@ unit fit_task_with_thread;
 interface
 
 uses
-    Classes, SysUtils, fit_task, main_calc_thread, log;
+    Classes, fit_task, log, main_calc_thread, SysUtils;
 
 type
     { Executes task solution in separate thread. }
@@ -74,7 +74,8 @@ type
 
 implementation
 
-uses app;
+uses
+    app;
 
 {$warnings off}
 procedure TFitTaskWithThread.RecreateMainCalcThread(ATask: TThreadMethod;

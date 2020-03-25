@@ -9,7 +9,7 @@ unit persistent_curve_parameter_container;
 interface
 
 uses
-    Classes, SysUtils, special_curve_parameter;
+    Classes, special_curve_parameter, SysUtils;
 
 type
     { An item of TCollection, it is used for persistent storaging of

@@ -16,7 +16,7 @@ unit fit_server_proxy;
 
 interface
 
-uses SysUtils, fit_client_stub, MyExceptions, int_client_callback;
+uses fit_client_stub, int_client_callback, MyExceptions, SysUtils;
 
 type
     { Proxy class transmitting messages from server back to client. }

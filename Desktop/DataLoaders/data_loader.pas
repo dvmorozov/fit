@@ -19,8 +19,9 @@ unit data_loader;
 
 interface
 
-uses Classes, SysUtils, points_set, title_points_set,
-    neutron_points_set, int_data_loader;
+uses
+    Classes, int_data_loader, neutron_points_set, points_set, SysUtils,
+    title_points_set;
 
 type
     EFileNotExists = class(Exception);

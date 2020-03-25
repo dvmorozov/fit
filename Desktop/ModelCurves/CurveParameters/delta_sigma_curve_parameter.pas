@@ -8,7 +8,8 @@ unit delta_sigma_curve_parameter;
 
 interface
 
-uses Classes, SysUtils, special_curve_parameter, log;
+uses
+    Classes, log, special_curve_parameter, SysUtils;
 
 type
     { Represents curve width. }

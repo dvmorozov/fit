@@ -19,7 +19,8 @@ unit curve_type_storage_adapter;
 
 interface
 
-uses SysUtils, app_settings, int_curve_type_storage;
+uses
+    app_settings, int_curve_type_storage, SysUtils;
 
 type
     { Class-adapter implementing basic operation for 
@@ -42,7 +43,8 @@ type
 
 implementation
 
-uses form_main;
+uses
+    form_main;
 
 var
     CurveTypeStorageAdapter: TCurveTypeStorageAdapter;

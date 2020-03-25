@@ -16,7 +16,7 @@ unit fit_client_proxy;
 interface
 
 uses
-    Classes, SysUtils, fit_problem;
+    Classes, fit_problem, SysUtils;
 
 type
     TFitClientProxy = class(TFitProblem)

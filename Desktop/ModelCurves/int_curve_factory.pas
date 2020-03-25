@@ -19,7 +19,8 @@ unit int_curve_factory;
 
 interface
 
-uses named_points_set;
+uses
+    named_points_set;
 
 type
     { Class-reference type for base curve type. }

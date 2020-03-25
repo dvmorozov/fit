@@ -19,10 +19,11 @@ unit expression_parser_adapter;
 
 interface
 
-uses SysUtils, int_expression_parser,
+uses
+    int_expression_parser, SysUtils,
 {$IFDEF _WINDOWS}
-    persistent_curve_parameters
-{$ENDIF}    ;
+    persistent_curve_parameters;
+{$ENDIF}
 
 type
     { Class-adapter implementing basic operation for parsing curve expression.

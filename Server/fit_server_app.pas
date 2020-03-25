@@ -22,12 +22,12 @@ uses Classes, SysUtils,
     fit_server_proxy,
 {$ELSE}
     { Server build. Key SERVER is not necessary. }
+    fit_server_stub,
     fit_viewer,
     { Contains server form with chart component. }
     form_main,
     { Receives messages from client. }
-    fit_server_stub,
-{$ENDIF}
+    {$ENDIF}
     { Implements server logic. }
     fit_server,
     { Contains algorithm container. }

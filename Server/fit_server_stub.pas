@@ -20,12 +20,11 @@ unit fit_server_stub;
 
 interface
 
-uses SysUtils, fit_server, self_copied_component, mscr_specimen_list,
-    MyExceptions, int_points_set, points_set, title_points_set,
-    named_points_set, log
-{$IFDEF _WINDOWS}
-    , persistent_curve_parameters
-{$ENDIF}    ;
+uses fit_server, int_points_set, log, mscr_specimen_list,
+    MyExceptions, named_points_set, points_set, self_copied_component,
+    SysUtils, title_points_set,
+    {$IFDEF _WINDOWS}
+    persistent_curve_parameters, {$ENDIF};
 
 type
     { For transmission through network class converts exceptions into error codes.

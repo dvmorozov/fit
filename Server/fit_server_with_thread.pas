@@ -14,8 +14,8 @@ unit fit_server_with_thread;
 interface
 
 uses
-    Classes, SysUtils, fit_server, main_calc_thread, MyExceptions,
-    fit_task, int_fit_service;
+    Classes, fit_server, fit_task, int_fit_service, main_calc_thread, MyExceptions,
+    SysUtils;
 
 type
     { The server component performing long-term operation in separate thread. }

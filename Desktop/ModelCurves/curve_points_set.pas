@@ -20,10 +20,10 @@ unit curve_points_set;
 interface
 
 uses
-    Classes, SysUtils, self_copied_component, points_set,
-    title_points_set, amplitude_curve_parameter, sigma_curve_parameter,
-    position_curve_parameter, persistent_curve_parameter_container,
-    special_curve_parameter, persistent_curve_parameters;
+    amplitude_curve_parameter, Classes, persistent_curve_parameter_container,
+    persistent_curve_parameters, points_set, position_curve_parameter,
+    self_copied_component, sigma_curve_parameter, special_curve_parameter,
+    SysUtils, title_points_set;
 
 type
     { Generic container for point set of all calcuated curves. }

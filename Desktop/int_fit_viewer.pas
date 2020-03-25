@@ -20,7 +20,8 @@ unit int_fit_viewer;
 interface
 
 uses
-    mscr_specimen_list, self_copied_component, title_points_set, neutron_points_set;
+    mscr_specimen_list, neutron_points_set, self_copied_component,
+    title_points_set;
 
 type
     { Defines interface allowing to display data in chart and grids.

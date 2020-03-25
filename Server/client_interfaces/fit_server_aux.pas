@@ -16,10 +16,9 @@ unit fit_server_aux;
 interface
 
 uses
-    Classes, SysUtils, points_set, named_points_set, title_points_set,
-    int_fit_server, MyExceptions,
+    base_service_intf, Classes, int_fit_server, MyExceptions,
     { Modules of wst-0.5 }
-    base_service_intf;
+    named_points_set, points_set, SysUtils, title_points_set;
 
 function CreateRemotableArray(APointsSet: TPointsSet): TArrayOfFloatDoubleRemotable;
 function CreateNamedPointsSet(ARemotable: TArrayOfFloatDoubleRemotable):

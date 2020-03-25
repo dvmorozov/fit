@@ -20,9 +20,8 @@ unit persistent_curve_parameters;
 interface
 
 uses
-    Classes, SysUtils, self_copied_component,
-    persistent_curve_parameter_container, special_curve_parameter,
-    amplitude_curve_parameter;
+    amplitude_curve_parameter, Classes, persistent_curve_parameter_container,
+    self_copied_component, special_curve_parameter, SysUtils;
 
 type
     { Curve parameter container. It is used for persistent storage. }

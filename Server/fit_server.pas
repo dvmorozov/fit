@@ -31,23 +31,25 @@ interface
   In this case keeping the state of application can't be guaranteed.
 }
 
-uses Classes, title_points_set, SelfCheckedComponentList, SysUtils,
-    mscr_specimen_list, curve_points_set, named_points_set, points_set,
-    gauss_points_set, special_curve_parameter, persistent_curve_parameters,
-    persistent_curve_parameter_container, calculated_curve_parameter, log,
-    curve_types_singleton, int_curve_type_selector,
+uses
+    calculated_curve_parameter, Classes, curve_points_set, curve_types_singleton,
+    gauss_points_set, int_curve_type_selector, log, mscr_specimen_list,
+    named_points_set, persistent_curve_parameter_container,
+    persistent_curve_parameters, points_set, SelfCheckedComponentList,
+    special_curve_parameter, SysUtils, title_points_set
 {$IFDEF FIT}
     {Proxy to client to call it back.}
-    fit_server_proxy,
+    , fit_server_proxy
 {$ENDIF}
-    self_copied_component, MyExceptions, fit_task, SimpMath,
-    int_client_callback, int_fit_service
+    , fit_task, int_client_callback, int_fit_service, MyExceptions
+    , self_copied_component, SimpMath
 {$IFDEF _WINDOWS}
 {$IFDEF WINDOWS_SPECIFIC}
     , user_points_set
 {$ENDIF}
     , user_curve_parameter, Windows
-{$ENDIF};
+{$ENDIF}
+    ;
 
 type
     TRecreateServer = procedure of object;
@@ -467,7 +469,8 @@ const
 
 implementation
 
-uses app;
+uses
+    app;
 
 const
     { The minimal allowed number. }
@@ -2601,7 +2604,7 @@ begin
 {$IFDEF WINDOWS_SPECIFIC}
             if IsEqualGUID(CurveTypeId, TUserPointsSet.GetCurveTypeId) then
                 FitTask.SetSpecialCurve(FCurveExpr,
-                    Curve_parameters(Params.GetCopy));
+                    Curve_parameters(FParams.GetCopy));
 {$ENDIF}
             FitTask.ServerShowCurMin := ShowCurMinInternal;
             FitTask.ServerDoneProc   := DoneProc;

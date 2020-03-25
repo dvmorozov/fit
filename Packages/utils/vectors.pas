@@ -16,10 +16,11 @@ unit vectors;
 
 interface
 
-uses SysUtils, Classes, SimpMath
+uses Classes, SimpMath, SysUtils
 {$IFDEF _WINDOWS}
     , Windows
-{$ENDIF};
+{$ENDIF}
+    ;
 
 type
     { Returns value of parameter with given name. }

@@ -19,7 +19,8 @@ unit named_points_set;
 
 interface
 
-uses curve_points_set, configurable_points_set;
+uses
+    configurable_points_set, curve_points_set;
 
 type
     TNamedPointsSetClass = class of TNamedPointsSet;
@@ -52,7 +53,8 @@ type
 
 implementation
 
-uses non_configurable_points_set;
+uses
+    non_configurable_points_set;
 
 {============================ TNamedPointsSet =================================}
 

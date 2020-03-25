@@ -5,7 +5,7 @@ unit Settings;
 
 interface
 
-uses Classes, SysUtils, LCLProc, Laz_XMLStreaming, Laz_DOM, Laz_XMLCfg, TypInfo;
+uses Classes, Laz_DOM, Laz_XMLCfg, Laz_XMLStreaming, LCLProc, SysUtils, TypInfo;
 
 type
     Project_v1 = class(TComponent)

@@ -14,7 +14,7 @@ unit main_calc_thread;
 interface
 
 uses
-    Classes, SysUtils, log;
+    Classes, log, SysUtils;
 
 type
     { Must contain counterparts of IClientCallback methods withoud parameters
@@ -50,7 +50,8 @@ type
 
 implementation
 
-uses app;
+uses
+    app;
 
 procedure TMainCalcThread.SetSyncMethods(
     ATask, AShowCurMin, AShowProfile, ADone, AFindPeakBoundsDone,

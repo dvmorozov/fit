@@ -8,7 +8,8 @@ unit position_curve_parameter;
 
 interface
 
-uses Classes, SysUtils, points_set, special_curve_parameter, log;
+uses
+    Classes, log, points_set, special_curve_parameter, SysUtils;
 
 type
     { The abciss coordinate of curve position (middle point). }

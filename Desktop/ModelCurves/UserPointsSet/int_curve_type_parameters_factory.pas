@@ -19,7 +19,8 @@ unit int_curve_type_parameters_factory;
 
 interface
 
-uses app_settings, persistent_curve_parameters;
+uses
+    app_settings, persistent_curve_parameters;
 
 type
     { Interface defining operation for creating custom curve type object. }

@@ -20,16 +20,16 @@ unit fit_client;
 interface
 
 uses
-    Classes, SysUtils, title_points_set, self_copied_component,
-    mscr_specimen_list, neutron_points_set, int_client_callback,
-    int_fit_viewer, int_data_loader, int_data_loader_injector,
-    int_fit_service, named_points_set
+    Classes, int_client_callback, int_data_loader, int_data_loader_injector,
+    int_fit_service, int_fit_viewer, mscr_specimen_list, named_points_set,
+    neutron_points_set, self_copied_component, SysUtils, title_points_set
 {$IFDEF FIT}
     , fit_server
 {$ENDIF}
 {$IFDEF _WINDOWS}
     , persistent_curve_parameters
-{$ENDIF}    ;
+{$ENDIF}
+    ;
 
 type
     { Modes of selectiion of active point set. }
@@ -368,8 +368,8 @@ const
 implementation
 
 {$IFDEF FIT}
-uses app;
-
+uses
+    app;
 {$ENDIF}
 
 {================================ TFitClient ==================================}
@@ -865,7 +865,7 @@ begin
             Plot;
             Exit;
         end// !!! dvuh tochek s odinakovymi X i raznymi Y vse ravno byt'
-           // ne mozhet, poetomu proveryaetsya tol'ko koordinata X !!!
+    // ne mozhet, poetomu proveryaetsya tol'ko koordinata X !!!
     ;
     // tochka ne naydena - dobavlyaem novuyu
     Points.AddNewPoint(XValue, YValue);

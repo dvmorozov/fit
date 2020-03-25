@@ -19,11 +19,12 @@ unit input_wavelength_dialog;
 
 interface
 
-uses SysUtils, Forms, Controls, StdCtrls,
-    ExtCtrls, LResources
+uses
+    Controls, ExtCtrls, Forms, LResources, StdCtrls, SysUtils
 {$IFNDEF _WINDOWS}
     , Dialogs
-{$ENDIF}    ;
+{$ENDIF}
+    ;
 
 type
 
@@ -48,7 +49,8 @@ var
 
 implementation
 
-uses input_max_rfactor_dialog;
+uses
+    input_max_rfactor_dialog;
 
 procedure TInputWavelengthDlg.FormCloseQuery(Sender: TObject; var CanClose: boolean);
 const

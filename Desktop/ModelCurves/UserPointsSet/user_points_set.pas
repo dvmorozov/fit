@@ -19,14 +19,15 @@ unit user_points_set;
 
 interface
 
-uses SysUtils
+uses
+    SysUtils
 {$IFDEF _WINDOWS}
 {$IFDEF WINDOWS_SPECIFIC}
-    , curve_points_set, named_points_set, curve_types_singleton
-    , configurable_points_set, points_set, special_curve_parameter
-    , Windows
+    , configurable_points_set, curve_points_set, curve_types_singleton
+    , named_points_set, points_set, special_curve_parameter, Windows
 {$ENDIF}
-{$ENDIF}    ;
+{$ENDIF}
+    ;
 
 {$IFDEF _WINDOWS}
 {$IFDEF WINDOWS_SPECIFIC}
@@ -95,9 +96,9 @@ var
 begin
     Assert(Assigned(Parameters));
     Assert(Assigned(FVariableParameters));
-    Assert(Assigned(ArgP));
+    Assert(Assigned(FArgP));
     { Sets up value of argument. }
-    P   := ArgP;
+    P   := FArgP;
     P.Value := ArgValue;
     { Creates string of VariableParameters. }
     Prs := '';
@@ -127,8 +128,8 @@ begin
     else
         for j := 0 to PointsCount - 1 do
             PointYCoord[j] := CalcValue(PointXCoord[j])
-        //  poskol'ku vid krivoy ne izvesten, to optimizatsiya
-        //  nevozmozhna - delaem polnyy pereschet
+    //  poskol'ku vid krivoy ne izvesten, to optimizatsiya
+    //  nevozmozhna - delaem polnyy pereschet
     ;
 end;
 

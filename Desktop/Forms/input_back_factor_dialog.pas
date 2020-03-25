@@ -19,11 +19,12 @@ unit input_back_factor_dialog;
 
 interface
 
-uses SysUtils, Forms, Controls, StdCtrls,
-    ExtCtrls, LResources
+uses
+    Controls, ExtCtrls, Forms, LResources, StdCtrls, SysUtils
 {$IFNDEF _WINDOWS}
     , Dialogs
-{$ENDIF}    ;
+{$ENDIF}
+    ;
 
 type
     TInputBackFactorDlg = class(TForm)
@@ -45,7 +46,8 @@ var
 
 implementation
 
-uses input_max_rfactor_dialog;
+uses
+    input_max_rfactor_dialog;
 
 procedure TInputBackFactorDlg.FormCloseQuery(Sender: TObject; var CanClose: boolean);
 const

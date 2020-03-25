@@ -19,8 +19,9 @@ unit extension_data_loader_injector;
 
 interface
 
-uses SysUtils, data_loader, dat_file_loader, csv_file_loader,
-    int_data_loader, int_data_loader_injector;
+uses
+    csv_file_loader, dat_file_loader, data_loader, int_data_loader,
+    int_data_loader_injector, SysUtils;
 
 type
     { Implementation of data loader injector based on file extension. }

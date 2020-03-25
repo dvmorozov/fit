@@ -21,7 +21,7 @@ unit create_user_points_set_dlg;
 interface
 
 uses
-    LCLIntf, Classes, LResources, Forms, StdCtrls, ExtCtrls;
+    Classes, ExtCtrls, Forms, LCLIntf, LResources, StdCtrls;
 
 type
 

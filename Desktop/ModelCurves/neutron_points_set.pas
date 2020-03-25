@@ -19,7 +19,8 @@ unit neutron_points_set;
 
 interface
 
-uses Classes, SysUtils, points_set;
+uses
+    Classes, points_set, SysUtils;
 
 type
     EWavelengthIsNotSpecified = class(Exception);

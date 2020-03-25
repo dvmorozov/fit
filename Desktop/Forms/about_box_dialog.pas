@@ -20,7 +20,8 @@ unit about_box_dialog;
 
 interface
 
-uses Forms, StdCtrls, ExtCtrls, LResources, Classes;
+uses
+    Classes, ExtCtrls, Forms, LResources, StdCtrls;
 
 type
 
@@ -48,7 +49,8 @@ var
 
 implementation
 
-uses form_main, LCLIntf;
+uses
+    form_main, LCLIntf;
 
 { TAboutBox }
 procedure TAboutBox.FormShow(Sender: TObject);

@@ -19,8 +19,9 @@ unit curve_types_singleton;
 
 interface
 
-uses Classes, SysUtils, named_points_set, int_curve_factory,
-    int_curve_type_selector, int_curve_type_iterator, crc;
+uses
+    Classes, crc, int_curve_factory, int_curve_type_iterator,
+    int_curve_type_selector, named_points_set, SysUtils;
 
 type
     { ENotImplementd isn't supported by Lazarus 0.9.24. It is used

@@ -19,7 +19,8 @@ unit int_data_loader_injector;
 
 interface
 
-uses int_data_loader;
+uses
+    int_data_loader;
 
 type
     { Interface defining basic operation for creating data loader. }

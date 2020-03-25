@@ -17,7 +17,8 @@ unit app;
 
 interface
 
-uses SysUtils, Forms
+uses
+    Forms, SysUtils
 {$IFDEF FITCLIENT}
     , fit_client_app
 {$ENDIF}
@@ -26,17 +27,18 @@ uses SysUtils, Forms
     , fit_server_app
     {$ELSE}
         {$IFNDEF FITP2P}
-    , base_service_intf
+        , base_service_intf
         {$ENDIF}
     {$ENDIF}
 {$ELSE}
     {$IFDEF FITPRO}
-    , int_fit_service
+        , int_fit_service
     {$ENDIF}
     {$IFDEF FITCGI}
-    , int_fit_service
+        , int_fit_service
     {$ENDIF}
-{$ENDIF}    ;
+{$ENDIF}
+    ;
    //  peremennye vyneseny v otdel'nyi modul', dlya togo chtoby
    //  k nim mozhno bylo by poluchit' dostup iz drugih modulei
 {$IFDEF FITCLIENT}
@@ -50,7 +52,7 @@ var
     Key:      string = '';        //  key obtained during registration
     UserName: string = '';
     Proxy:    IFitProblem;
-{$ENDIF}//  FITCGI
+{$ENDIF}
 
 {$IFDEF FITSERVER}
     {$IFDEF FIT}
@@ -166,7 +168,7 @@ finalization
 
 {$IFDEF FITSERVER}
     {$IFDEF FIT}
-    FitServerApp_.Free;
+        FitServerApp_.Free;
     {$ENDIF}
 {$ENDIF}
 

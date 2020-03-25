@@ -20,18 +20,19 @@ unit fit_task;
 interface
 
 uses
-    Classes, SysUtils, points_set, curve_points_set, self_copied_component,
-    int_minimizer, simple_minimizer, downhill_simplex_minimizer,
-    mscr_specimen_list, lorentz_points_set, gauss_points_set,
-    two_branches_pseudo_voigt_points_set, asym_pseudo_voigt_points_set,
-    pseudo_voigt_points_set, special_curve_parameter, curve_types_singleton,
-    persistent_curve_parameter_container, persistent_curve_parameters, log,
-    int_curve_type_selector, named_points_set, typinfo
+    asym_pseudo_voigt_points_set, Classes, curve_points_set, curve_types_singleton,
+    downhill_simplex_minimizer, gauss_points_set, int_curve_type_selector,
+    int_minimizer, log, lorentz_points_set, mscr_specimen_list, named_points_set,
+    persistent_curve_parameter_container, persistent_curve_parameters,
+    points_set, pseudo_voigt_points_set, self_copied_component,
+    simple_minimizer, special_curve_parameter, SysUtils,
+    two_branches_pseudo_voigt_points_set, typinfo
 {$IFDEF _WINDOWS}
 {$IFDEF WINDOWS_SPECIFIC}
     , user_points_set
 {$ENDIF}
-{$ENDIF}    ;
+{$ENDIF}
+    ;
 
 type
     { Fits profile interval by model curves (specimens).
@@ -257,7 +258,8 @@ type
 
 implementation
 
-uses app, SimpMath, GeneralHashFunctions;
+uses
+    app, GeneralHashFunctions, SimpMath;
 
 {================================== TFitTask ==================================}
 
@@ -510,7 +512,7 @@ begin
                 FCommonVariableParameters[FCommonVaryingIndex].VariationDisabled do
                 Inc(FCommonVaryingIndex);
         end//  poisk sleduyuschego obschego parametra,
-           //  variatsiya kotorogo ne zapreschena
+    //  variatsiya kotorogo ne zapreschena
     ;
 
     if FCommonVaryingIndex < Count then
@@ -523,7 +525,8 @@ begin
     if FEnableBackgroundVariation then
     begin
         if FBackgroundVaryingFlag then
-            Inc(FBackgroundVaryingIndex)//  Increments parameter index for next iteration.
+            Inc(FBackgroundVaryingIndex)
+        //  Increments parameter index for next iteration.
         ;
 
         if FBackgroundVaryingIndex < //FBackground.PointsCount
@@ -1188,7 +1191,7 @@ begin
         Result := TUserPointsSet.Create(nil);
         TUserPointsSet(Result).Expression := FCurveExpr;
         TUserPointsSet(Result).SetParameters(
-            Curve_parameters(Params.GetCopy));
+            Curve_parameters(FParams.GetCopy));
     end
     else
 {$ENDIF}
@@ -1223,9 +1226,9 @@ begin
                     raise;
                 end;
             end//  Initializing list of common parameters. It is performed only
-        //  once when the first curve instance is created (it is assumed
-        //  that all the instances have the same type).
-        //  TODO: remove the assumption mentioned above.
+    //  once when the first curve instance is created (it is assumed
+    //  that all the instances have the same type).
+    //  TODO: remove the assumption mentioned above.
     ;
 
     for i := 0 to Result.Parameters.Count - 1 do
@@ -1302,8 +1305,8 @@ begin
 
         if not CurveFound then
             FCurvesList.Remove(Curve)// udalyaem
-            //  FCurvesList po-umolchaniyu osvobozhdaet
-            //  komponenty, ssylki na kotorye hranit
+        //  FCurvesList po-umolchaniyu osvobozhdaet
+        //  komponenty, ssylki na kotorye hranit
 
         else
             Inc(k);
@@ -1370,19 +1373,19 @@ begin
                 try
                     TUserPointsSet(Curve).Expression := FCurveExpr;
                     TUserPointsSet(Curve).SetParameters(
-                        Curve_parameters(Params.GetCopy));
+                        Curve_parameters(FParams.GetCopy));
 
                     if not Curve.Hasx0 then
                     begin
                         //  dlina kazhdogo ekz. patterna ust. ravnoy
                         //  dline uchastka vybrannogo pol'zovatelem
-                        for j := 0 to ExpProfile.PointsCount - 1 do
-                            Curve.AddNewPoint(ExpProfile.PointXCoord[j], 0);
+                        for j := 0 to FExpProfile.PointsCount - 1 do
+                            Curve.AddNewPoint(FExpProfile.PointXCoord[j], 0);
 
                         //  amplituda i tochka privyazki ustanavlivayutsya po
                         //  sredney tochke intervala
                         CurveAmplitude :=
-                            ExpProfile.PointYCoord[ExpProfile.PointsCount div 2];
+                            FExpProfile.PointYCoord[FExpProfile.PointsCount div 2];
                         if Curve.HasA then
                             Curve.A := CurveAmplitude;
                         //  ne zapolnyaetsya, potomu chto ne nuzhna
@@ -1390,7 +1393,7 @@ begin
                         CalcInitHash(Curve);
                         SearchSpecimenAndInit(SpecimenParameters, Curve);
                         //  dobavlenie novogo ekz. patterna v spisok
-                        CurvesList.Add(Curve);
+                        FCurvesList.Add(Curve);
                     end
                     else
                         Curve.Free;
@@ -1664,7 +1667,7 @@ begin
         for j := 0 to Points.PointsCount - 1 do
             if Abs(XValue - Points.PointXCoord[j]) > TINY then
                 Temp.AddNewPoint(Points.PointXCoord[j], Points.PointYCoord[j])
-            //if XValue <> Points.PointXCoord[j] then
+        //if XValue <> Points.PointXCoord[j] then
         ;
         Points.Free;
         Points := nil;

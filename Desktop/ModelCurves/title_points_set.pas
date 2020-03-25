@@ -19,7 +19,8 @@ unit title_points_set;
 
 interface
 
-uses Classes, SysUtils, points_set, neutron_points_set;
+uses
+    Classes, neutron_points_set, points_set, SysUtils;
 
 type
     { Point set with title. TODO: must implement functionality of argument

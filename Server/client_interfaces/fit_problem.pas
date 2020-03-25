@@ -16,12 +16,14 @@ unit fit_problem;
 interface
 
 uses
-    SysUtils, Classes, MyExceptions, mscr_specimen_list,
-    points_set, self_copied_component, int_points_set,
-    title_points_set, curve_points_set, named_points_set, int_fit_service,
-    int_fit_server, base_service_intf,
+    base_service_intf,
+    Classes, curve_points_set,
     fit_server_proxy                //  XML-RPC interface to server.
-    ;
+    , int_fit_server, int_fit_service,
+    int_points_set,
+    mscr_specimen_list,
+    MyExceptions, named_points_set, points_set, self_copied_component,
+    SysUtils, title_points_set;
 
 type
     { Converts error codes back into exceptions to provide
@@ -151,10 +153,10 @@ type
 
 implementation
 
-uses synapse_tcp_protocol, synapse_http_protocol, soap_formatter,
-    binary_formatter, fit_server_aux,
+uses app, binary_formatter, fit_server_aux,
     { This module contains global definitions which are used in all applications. }
-    app;
+    soap_formatter,
+    synapse_http_protocol, synapse_tcp_protocol;
 
 {========================== TFitClientProxy ===================================}
 

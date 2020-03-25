@@ -10,8 +10,7 @@ unit int_fit_server;
 interface
 
 uses
-    SysUtils, Classes, TypInfo, base_service_intf, service_intf,
-    named_points_set;
+    base_service_intf, Classes, named_points_set, service_intf, SysUtils, TypInfo;
 
 const
     sNAME_SPACE = 'fit_server';
@@ -168,8 +167,8 @@ type
         function GetSpecimenPositions(const ProblemID: integer): TPointsResult;
         function GetSpecimenIntervals(const ProblemID: integer): TPointsResult;
         function GetCalcProfilePointsSet(const ProblemID: integer): TPointsResult;
-        function GetDeltaProfilePointsSet(
-            const ProblemID: integer): TPointsResult;
+        function GetDeltaProfilePointsSet(const ProblemID: integer):
+            TPointsResult;
         procedure SetCurveThresh(const CurveThresh: double;
             const ProblemID: integer);
         function GetMaxRFactor(const ProblemID: integer): double;

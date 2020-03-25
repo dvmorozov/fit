@@ -6,10 +6,10 @@ unit Unit2;
 interface
 
 uses
-    Classes, SysUtils, LResources, cgiModules, title_points_set, dat_file_loader,
-    points_set, data_loader, lorentz_points_set, pseudo_voigt_points_set,
-    gauss_points_set,
-    curve_points_set;
+    cgiModules, Classes, curve_points_set, dat_file_loader,
+    data_loader, gauss_points_set, lorentz_points_set,
+    LResources, points_set, pseudo_voigt_points_set,
+    SysUtils, title_points_set;
 
 type
 
@@ -172,14 +172,17 @@ var
 
 implementation
 
-uses Data, background, background_more, pattern, pattern_more, specimen_positions,
-    specimen_parameters, specimen_intervals, fitting, start, error, fitting_process,
-    fitting_progress, gen_back_progress, gen_spec_pos_progress, registration_free,
-    gen_spec_int_progress, projects, project_files, project_files_empty,
-    fit_server_proxy, projects_empty, soap_formatter, binary_formatter,
-    base_service_intf, specimen_parameters_file, file_results, file_results_empty,
-    evaluation, app, mscr_specimen_list, Settings,
-    GeneralHashfunctions;
+uses app, background, background_more, base_service_intf, binary_formatter,
+    Data, error, evaluation, file_results, file_results_empty,
+    fit_server_proxy, fitting, fitting_process,
+    fitting_progress, gen_back_progress, gen_spec_int_progress,
+    gen_spec_pos_progress, GeneralHashfunctions, mscr_specimen_list,
+    pattern, pattern_more, project_files, project_files_empty,
+    projects, projects_empty, registration_free,
+    Settings,
+    soap_formatter, specimen_intervals, specimen_parameters,
+    specimen_parameters_file, specimen_positions,
+    start;
 
 const
     CommandNotFound: string = 'Command not found.';

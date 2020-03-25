@@ -19,7 +19,8 @@ unit dat_file_loader;
 
 interface
 
-uses Classes, SysUtils, data_loader;
+uses
+    Classes, data_loader, SysUtils;
 
 type
     { Loads data from ordinary DAT-file consisting from lines having pairs
@@ -30,7 +31,6 @@ type
     end;
 
 implementation
-
 
 {============================== TDATFileLoader ================================}
 
@@ -116,7 +116,7 @@ begin
             if Value2Found then
                 if FPointsSet.IndexOfValueX(Val1) = -1 then
                     FPointsSet.AddNewPoint(Val1, Val2)
-                //  Duplicates by argument value are ignored.
+            //  Duplicates by argument value are ignored.
             ;
         end;
     finally

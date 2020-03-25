@@ -20,7 +20,7 @@ unit configurable_user_points_set;
 interface
 
 uses
-    Classes, SysUtils, configurable_points_set;
+    Classes, configurable_points_set, SysUtils;
 
 type
     { Special implementation used by TUserPointsSet. }
@@ -37,7 +37,7 @@ type
       { Returns true if user configurable parameters have default values,
         otherwise returns false. }
         class function HasDefaults: boolean; override;
-        { Sets up default values for user configurable parameters. }
+      { Sets up default values for user configurable parameters. }
         class procedure SetDefaults; override;
     end;
 
@@ -47,10 +47,10 @@ uses
     Controls, Dialogs,
 {$IF NOT DEFINED(SERVER) AND NOT DEFINED(CLIENT_PROXY)}
 {$IFDEF _WINDOWS}
-    user_points_set_prop_dialog, expression_parser_adapter, curve_type_storage_adapter,
-    curve_type_parameters_factory, create_user_points_set_dlg_adapter, app_settings,
-    int_curve_type_parameters_factory, int_create_user_points_set_dlg,
-    int_curve_type_storage, int_expression_parser,
+    app_settings, create_user_points_set_dlg_adapter, curve_type_parameters_factory,
+    curve_type_storage_adapter, expression_parser_adapter, int_create_user_points_set_dlg,
+    int_curve_type_parameters_factory, int_curve_type_storage, int_expression_parser,
+    user_points_set_prop_dialog,
 {$ENDIF}
 {$ENDIF}
     app;
@@ -116,7 +116,6 @@ begin
     Result := False;
 {$ENDIF}
 end;
-
 {$ENDIF}
 
 class function TConfigurableUserPointsSet.HasDefaults: boolean;

@@ -17,7 +17,7 @@ unit component_list;
 interface
 
 uses
-    LCLIntf, SysUtils, Classes, CBRCComponent, Tools;
+    CBRCComponent, Classes, LCLIntf, SysUtils, Tools;
 
 type
     ISelfChecked = interface

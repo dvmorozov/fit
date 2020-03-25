@@ -8,7 +8,8 @@ unit special_curve_parameter;
 
 interface
 
-uses Classes, SysUtils, log;
+uses
+    Classes, log, SysUtils;
 
 type
     TParameterType = (

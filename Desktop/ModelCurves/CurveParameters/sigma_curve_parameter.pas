@@ -8,7 +8,8 @@ unit sigma_curve_parameter;
 
 interface
 
-uses Classes, SysUtils, SimpMath, special_curve_parameter, log;
+uses
+    Classes, log, SimpMath, special_curve_parameter, SysUtils;
 
 type
     { Represents curve width. It can take only positive value. }

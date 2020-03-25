@@ -20,7 +20,7 @@ unit non_configurable_points_set;
 interface
 
 uses
-    SysUtils, configurable_points_set;
+    configurable_points_set, SysUtils;
 
 type
   { Should be used by all curve types which
@@ -36,7 +36,7 @@ type
       { Returns true if user configurable parameters have default values,
         otherwise returns false. }
         class function HasDefaults: boolean; override;
-        { Sets up default values for user configurable parameters. }
+      { Sets up default values for user configurable parameters. }
         class procedure SetDefaults; override;
     end;
 

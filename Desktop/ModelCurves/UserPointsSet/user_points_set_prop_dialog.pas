@@ -20,14 +20,14 @@ unit user_points_set_prop_dialog;
 interface
 
 uses
-    SysUtils, LResources, Forms, ExtCtrls, StdCtrls, CheckLst,
-    app_settings, special_curve_parameter
+    app_settings, CheckLst, ExtCtrls, Forms, LResources, special_curve_parameter,
+    StdCtrls, SysUtils
 {$IFNDEF _WINDOWS}
     , Dialogs
-{$ENDIF}    ;
+{$ENDIF}
+    ;
 
 type
-
     { TUserPointsSetPropDlg }
 
     TUserPointsSetPropDlg = class(TForm)

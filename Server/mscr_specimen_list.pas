@@ -15,7 +15,7 @@ unit mscr_specimen_list;
 
 interface
 
-uses Classes, SysUtils, SimpMath, data_classes, special_curve_parameter;
+uses Classes, data_classes, SimpMath, special_curve_parameter, SysUtils;
 
 const
     { Display mode constants. }
@@ -70,7 +70,7 @@ begin
         case ViewMode of
             XCM_2T:
                 Result := P.Value;
-                //  schitaetsya, chto iznachal'no koordinaty zadany v 2*Theta
+            //  schitaetsya, chto iznachal'no koordinaty zadany v 2*Theta
 
 
             XCM_T:

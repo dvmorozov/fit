@@ -22,7 +22,7 @@
       <MajorVersionNr Value="1"/>
       <MinorVersionNr Value="1"/>
       <RevisionNr Value="21"/>
-      <BuildNr Value="1467"/>
+      <BuildNr Value="1469"/>
       <Attributes pvaDebug="True"/>
       <StringTable FileDescription="Desktop application." LegalCopyright="Dmitry Morozov" OriginalFilename="Fit" ProductName="Fit" ProductVersion="1.1.1"/>
     </VersionInfo>
@@ -135,8 +135,8 @@
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="34"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="2582"/>
-        <CursorPos X="27" Y="2597"/>
+        <TopLine Value="779"/>
+        <CursorPos X="52" Y="791"/>
         <UsageCount Value="200"/>
         <Bookmarks Count="1">
           <Item0 Y="490"/>
@@ -242,7 +242,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="48"/>
         <CursorPos X="36" Y="107"/>
-        <UsageCount Value="142"/>
+        <UsageCount Value="147"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit11>
@@ -997,18 +997,19 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="4"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="706"/>
-        <CursorPos Y="720"/>
+        <TopLine Value="881"/>
+        <CursorPos X="19" Y="895"/>
         <UsageCount Value="220"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit84>
       <Unit85>
         <Filename Value="..\Server\simple_minimizer.pas"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="17"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="100"/>
-        <CursorPos X="33" Y="115"/>
+        <TopLine Value="331"/>
+        <CursorPos X="20" Y="32"/>
         <UsageCount Value="104"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -1149,11 +1150,10 @@
       <Unit99>
         <Filename Value="ModelCurves\curve_points_set.pas"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="61"/>
         <WindowIndex Value="1"/>
         <TopLine Value="144"/>
-        <CursorPos Y="158"/>
+        <CursorPos X="11" Y="154"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -1207,7 +1207,7 @@
         <EditorIndex Value="77"/>
         <WindowIndex Value="1"/>
         <CursorPos X="5" Y="8"/>
-        <UsageCount Value="137"/>
+        <UsageCount Value="142"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit104>
@@ -1331,7 +1331,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="475"/>
         <CursorPos Y="489"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="13"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit118>
@@ -1350,123 +1350,95 @@
       <Define2 Value="FITSERVER"/>
       <Define3 Value="Lazarus"/>
     </OtherDefines>
-    <JumpHistory Count="29" HistoryIndex="28">
+    <JumpHistory Count="22" HistoryIndex="21">
       <Position1>
-        <Filename Value="..\Packages\synapse40\source\demo\sftp\SimpleSFTP.pas"/>
-        <Caret Line="489" TopLine="475"/>
-      </Position1>
-      <Position2>
-        <Filename Value="..\Packages\synapse40\source\demo\sftp\SimpleSFTP.pas"/>
-        <Caret Line="549" TopLine="535"/>
-      </Position2>
-      <Position3>
-        <Filename Value="..\Packages\synapse40\source\demo\sftp\SimpleSFTP.pas"/>
-        <Caret Line="489" TopLine="475"/>
-      </Position3>
-      <Position4>
-        <Filename Value="table_components.pas"/>
-        <Caret Line="381" TopLine="367"/>
-      </Position4>
-      <Position5>
-        <Filename Value="fit_client.pas"/>
-        <Caret Line="396" Column="14" TopLine="371"/>
-      </Position5>
-      <Position6>
-        <Filename Value="fit_client_app.pas"/>
-        <Caret Line="56" TopLine="36"/>
-      </Position6>
-      <Position7>
-        <Filename Value="app_settings.pas"/>
-        <Caret Line="252" TopLine="238"/>
-      </Position7>
-      <Position8>
-        <Filename Value="fit_viewer.pas"/>
-        <Caret Line="796" TopLine="781"/>
-      </Position8>
-      <Position9>
-        <Filename Value="DataLoaders\data_loader.pas"/>
-        <Caret Line="72" TopLine="58"/>
-      </Position9>
-      <Position10>
-        <Filename Value="DataLoaders\extension_data_loader_injector.pas"/>
-        <Caret Line="61" Column="5" TopLine="38"/>
-      </Position10>
-      <Position11>
-        <Filename Value="ModelCurves\points_set.pas"/>
-        <Caret Line="322" TopLine="301"/>
-      </Position11>
-      <Position12>
-        <Filename Value="ModelCurves\CurveParameters\persistent_curve_parameters.pas"/>
-        <Caret Line="119" TopLine="105"/>
-      </Position12>
-      <Position13>
-        <Filename Value="ModelCurves\curve_types_singleton.pas"/>
-        <Caret Line="51" TopLine="43"/>
-      </Position13>
-      <Position14>
-        <Filename Value="..\Server\fit_server.pas"/>
-        <Caret Line="669" TopLine="655"/>
-      </Position14>
-      <Position15>
-        <Filename Value="..\Server\int_fit_server.pas"/>
-        <Caret Line="243" Column="17" TopLine="226"/>
-      </Position15>
-      <Position16>
-        <Filename Value="..\Server\int_fit_server.pas"/>
-        <Caret Line="255" TopLine="241"/>
-      </Position16>
-      <Position17>
-        <Filename Value="..\Server\int_fit_server.pas"/>
-        <Caret Line="270" TopLine="256"/>
-      </Position17>
-      <Position18>
-        <Filename Value="..\Server\fit_server_with_thread.pas"/>
-        <Caret Line="79" TopLine="61"/>
-      </Position18>
-      <Position19>
-        <Filename Value="..\Server\int_fit_server.pas"/>
-        <Caret Line="255" TopLine="241"/>
-      </Position19>
-      <Position20>
-        <Filename Value="..\Server\int_fit_server.pas"/>
-        <Caret Line="240" TopLine="236"/>
-      </Position20>
-      <Position21>
-        <Filename Value="..\Server\int_fit_server.pas"/>
-        <Caret Line="259" Column="14" TopLine="236"/>
-      </Position21>
-      <Position22>
-        <Filename Value="..\Server\int_fit_server.pas"/>
-        <Caret Line="274" Column="14" TopLine="256"/>
-      </Position22>
-      <Position23>
-        <Filename Value="..\Server\fit_server_with_thread.pas"/>
-        <Caret Line="79" TopLine="61"/>
-      </Position23>
-      <Position24>
-        <Filename Value="..\Server\fit_server_with_thread.pas"/>
-        <Caret Line="53" Column="9" TopLine="40"/>
-      </Position24>
-      <Position25>
-        <Filename Value="..\Server\fit_server_with_thread.pas"/>
-        <Caret Line="79" TopLine="65"/>
-      </Position25>
-      <Position26>
-        <Filename Value="..\Server\fit_task_with_thread.pas"/>
-        <Caret Line="190" TopLine="176"/>
-      </Position26>
-      <Position27>
         <Filename Value="..\Server\fit_task.pas"/>
         <Caret Line="720" TopLine="706"/>
-      </Position27>
-      <Position28>
+      </Position1>
+      <Position2>
         <Filename Value="ModelCurves\CurveParameters\persistent_curve_parameter_container.pas"/>
         <Caret Line="29" Column="9" TopLine="25"/>
-      </Position28>
-      <Position29>
+      </Position2>
+      <Position3>
         <Filename Value="ModelCurves\CurveParameters\persistent_curve_parameter_container.pas"/>
         <Caret Line="44" TopLine="24"/>
-      </Position29>
+      </Position3>
+      <Position4>
+        <Filename Value="ModelCurves\curve_points_set.pas"/>
+        <Caret Line="154" Column="11" TopLine="144"/>
+      </Position4>
+      <Position5>
+        <Filename Value="..\Server\fit_task.pas"/>
+        <Caret Line="667" Column="5" TopLine="653"/>
+      </Position5>
+      <Position6>
+        <Filename Value="..\Server\fit_task.pas"/>
+        <Caret Line="670" Column="20" TopLine="653"/>
+      </Position6>
+      <Position7>
+        <Filename Value="..\Server\fit_task.pas"/>
+        <Caret Line="896" Column="35" TopLine="883"/>
+      </Position7>
+      <Position8>
+        <Filename Value="..\Server\fit_task.pas"/>
+        <Caret Line="129" Column="32" TopLine="117"/>
+      </Position8>
+      <Position9>
+        <Filename Value="..\Server\fit_task.pas"/>
+        <Caret Line="667" Column="5" TopLine="652"/>
+      </Position9>
+      <Position10>
+        <Filename Value="..\Server\fit_task.pas"/>
+        <Caret Line="677" Column="59" TopLine="652"/>
+      </Position10>
+      <Position11>
+        <Filename Value="..\Server\fit_task.pas"/>
+        <Caret Line="124" Column="71" TopLine="117"/>
+      </Position11>
+      <Position12>
+        <Filename Value="..\Server\fit_task.pas"/>
+        <Caret Line="896" Column="19" TopLine="882"/>
+      </Position12>
+      <Position13>
+        <Filename Value="..\Server\simple_minimizer.pas"/>
+        <Caret Line="40" Column="31" TopLine="24"/>
+      </Position13>
+      <Position14>
+        <Filename Value="..\Server\simple_minimizer.pas"/>
+        <Caret Line="42" Column="26" TopLine="24"/>
+      </Position14>
+      <Position15>
+        <Filename Value="..\Server\simple_minimizer.pas"/>
+        <Caret Line="29" Column="32" TopLine="15"/>
+      </Position15>
+      <Position16>
+        <Filename Value="..\Server\simple_minimizer.pas"/>
+        <Caret Line="54" Column="15" TopLine="16"/>
+      </Position16>
+      <Position17>
+        <Filename Value="..\Server\fit_task.pas"/>
+        <Caret Line="129" Column="19" TopLine="117"/>
+      </Position17>
+      <Position18>
+        <Filename Value="..\Server\fit_task.pas"/>
+        <Caret Line="128" Column="22" TopLine="117"/>
+      </Position18>
+      <Position19>
+        <Filename Value="..\Server\fit_task.pas"/>
+        <Caret Line="896" Column="74" TopLine="882"/>
+      </Position19>
+      <Position20>
+        <Filename Value="..\Server\fit_task.pas"/>
+        <Caret Line="129" Column="30" TopLine="116"/>
+      </Position20>
+      <Position21>
+        <Filename Value="..\Server\fit_task.pas"/>
+        <Caret Line="895" Column="19" TopLine="881"/>
+      </Position21>
+      <Position22>
+        <Filename Value="..\Server\simple_minimizer.pas"/>
+        <Caret Line="32" Column="26" TopLine="18"/>
+      </Position22>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

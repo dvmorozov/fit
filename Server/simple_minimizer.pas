@@ -22,26 +22,24 @@ type
         procedure Minimize(var ErrorCode: longint); override;
     end;
 
-    { Implements simple downhill simplex algorithm having different steps for every parameter. }
+    { Implements simple downhill simplex algorithm having different steps for
+      every parameter. }
     TSimpleMinimizer2 = class(TMinimizer)
     public
         { Divides all steps by 2. }
-        DivideStepsBy2:
-        procedure of object;
+        FDivideVariationStepBy2: procedure of object;
         { Returns flag terminating calculation. }
-        EndOfCalculation:
-        function: boolean of object;
+        FEndOfCalculation: function: boolean of object;
         procedure Minimize(var ErrorCode: longint); override;
     end;
 
-    { Implements simple downhill simplex algorithm able to increase step size. Now this variant is used. }
+    { Implements simple downhill simplex algorithm able to increase step size.
+      Currently this variant is used. }
     TSimpleMinimizer3 = class(TMinimizer)
     public
-        MultipleSteps:
-        procedure(Factor: double) of object;
+        FMultiplyVariationStep: procedure(Factor: double) of object;
         { Returns flag terminating calculation. }
-        EndOfCalculation:
-        function: boolean of object;
+        FEndOfCalculation: function: boolean of object;
         procedure Minimize(var ErrorCode: longint); override;
     end;
 
@@ -51,9 +49,9 @@ implementation
 
 procedure Register;
 begin
-    //RegisterComponents('Minimax',[TSimpleMinimizer]);
-    //RegisterComponents('Minimax',[TSimpleMinimizer2]);
-    //RegisterComponents('Minimax',[TSimpleMinimizer3]);
+    //RegisterComponents('Fit',[TSimpleMinimizer]);
+    //RegisterComponents('Fit',[TSimpleMinimizer2]);
+    //RegisterComponents('Fir',[TSimpleMinimizer3]);
 end;
 
 {============================== TSimpleMinimizer ==============================}
@@ -147,10 +145,10 @@ begin
     CurrentMinimum := OnFunc;
 
     //??? vydavat' kod oshibki ili vybrasyvat' isklyuchenie
-    Assert(Assigned(DivideStepsBy2));
+    Assert(Assigned(FDivideVariationStepBy2));
 
     //  beskonechnyy tsikl optimizatsii
-    while (not EndOfCalculation) and (not Terminated) do
+    while (not FEndOfCalculation) and (not Terminated) do
     begin
         OnSetFirstParam;
         TotalMinimum := CurrentMinimum;
@@ -223,8 +221,8 @@ begin
         end;{while (not OnEndOfCycle) and (not Terminated) do...}
         if (TotalMinimum <> 0) and (Abs(CurrentMinimum - TotalMinimum) /
             TotalMinimum < 1e-5) then
-            DivideStepsBy2;
-    end;{while (not EndOfCalculation) and (not Terminated) do...}
+            FDivideVariationStepBy2;
+    end;{while (not FEndOfCalculation) and (not Terminated) do...}
 end;
 
 {============================== TSimpleMinimizer3 =============================}
@@ -248,12 +246,12 @@ begin
     TotalMinimum   := CurrentMinimum;
     DownCount      := 0;
 
-    Assert(Assigned(MultipleSteps));
+    Assert(Assigned(FMultiplyVariationStep));
 
     debug := 0;
 
     //  beskonechnyy tsikl optimizatsii
-    while (not EndOfCalculation) and (not Terminated) do
+    while (not FEndOfCalculation) and (not Terminated) do
     begin
         OnSetFirstParam;
         //  tsikl optimizatsii po vsem parametram
@@ -337,7 +335,7 @@ begin
                 //  shag uvelichivaetsya
                 Inc(DownCount);
                 if DownCount >= 10 then
-                    MultipleSteps(1.01)
+                    FMultiplyVariationStep(1.01)
                 //OutputDebugString(PChar('Parameter steps increased...'));
                 ;
             end
@@ -345,7 +343,7 @@ begin
             begin
                 //  za posledniy tsikl suschestvenno luchshiy
                 //  minimum ne nayden - shag umen'shaetsya
-                MultipleSteps(0.99);
+                FMultiplyVariationStep(0.99);
                 DownCount := 0;
                 //OutputDebugString(PChar('Parameter steps decreased...'));
             end;
@@ -354,7 +352,7 @@ begin
         end
         else
             Break;
-    end;{while (not EndOfCalculation) and (not Terminated) do...}
+    end;{while (not FEndOfCalculation) and (not Terminated) do...}
 end;
 
 end.

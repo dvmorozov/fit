@@ -125,8 +125,8 @@ type
         { Returns True at the end of iteration cycle. }
         function EndOfCycle: boolean;
         { Divides all optimization steps by 2. Iterface method for TSimpleMinimizer2. }
-        procedure DivideStepsBy2;
-        procedure MultipleSteps(Factor: double);
+        procedure DivideVariationStepBy2;
+        procedure MultiplyVariationStep(Factor: double);
         { Returns flag indicating termination of the calculation. }
         function EndOfCalculation: boolean;
         { Calculates R-factor used for optimization. }
@@ -662,12 +662,12 @@ begin
     Result := FEOC;
 end;
 
-procedure TFitTask.DivideStepsBy2;
+procedure TFitTask.DivideVariationStepBy2;
 begin
-    MultipleSteps(0.99);
+    MultiplyVariationStep(0.99);
 end;
 
-procedure TFitTask.MultipleSteps(Factor: double);
+procedure TFitTask.MultiplyVariationStep(Factor: double);
 var
     i: longint;
 begin
@@ -892,8 +892,8 @@ begin
     FMinimizer.OnEndOfCycle := EndOfCycle;
     FMinimizer.OnShowCurMin := ShowCurMin;
 
-    TSimpleMinimizer3(FMinimizer).EndOfCalculation := EndOfCalculation;
-    TSimpleMinimizer3(FMinimizer).MultipleSteps    := MultipleSteps;
+    TSimpleMinimizer3(FMinimizer).FEndOfCalculation := EndOfCalculation;
+    TSimpleMinimizer3(FMinimizer).FMultiplyVariationStep := MultiplyVariationStep;
 
     InitializeVariationSteps;
 

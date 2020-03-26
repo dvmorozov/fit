@@ -48,8 +48,6 @@ type
         class function CreateCurveTypeIterator: ICurveTypeIterator;
         class function CreateCurveTypeSelector: ICurveTypeSelector;
 
-        destructor Destroy; override;
-
         { Implementation of ICurveFactory. }
         { TODO: create implementation based on TFitTask.GetPatternSpecimen: TCurvePointsSet. }
         //function CreatePointsSet(TypeId: TCurveTypeId): TNamedPointsSet; virtual; abstract;
@@ -84,11 +82,6 @@ constructor TCurveTypesSingleton.Init;
 begin
     inherited;
     FCurveTypes := TList.Create;
-end;
-
-destructor TCurveTypesSingleton.Destroy;
-begin
-    inherited;
 end;
 
 class function TCurveTypesSingleton.CreateCurveFactory: ICurveFactory;

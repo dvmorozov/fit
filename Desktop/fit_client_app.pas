@@ -58,6 +58,7 @@ begin
     FFitClient.Free;
     FFitClientStub.Free;
     FDataLoaderInjector.Free;
+    inherited;
 end;
 
 end.

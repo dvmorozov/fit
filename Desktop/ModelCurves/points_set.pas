@@ -180,7 +180,7 @@ end;
 
 procedure TPointsSet.Clear;
 begin
-    FPoints := nil;
+    SetLength(FPoints, 0);
 end;
 
 procedure TPointsSet.DeletePoint(XValue: double);
@@ -214,7 +214,7 @@ begin
     end;
     if Found then
     begin
-        FPoints := nil;
+        Clear;
         FPoints := NewPoints;
     end
     else
@@ -273,7 +273,7 @@ begin
         raise;
     end;
 
-    FPoints := nil;
+    Clear;
     FPoints := NewPoints;
 end;
 
@@ -316,13 +316,13 @@ end;
 constructor TPointsSet.Create(AOwner: TComponent);
 begin
     inherited;
-    FPoints := nil;
+    Clear;
 end;
 
 destructor TPointsSet.Destroy;
 begin
-    FPoints := nil;
-    inherited Destroy;
+    Clear;
+    inherited;
 end;
 
 end.

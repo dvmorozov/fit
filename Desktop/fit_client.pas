@@ -393,7 +393,7 @@ begin
     FSelectedPoints.Free;
     NeutronPointsSet.Free;
     FRFactorIntervals.Free;
-    inherited Destroy;
+    inherited;
 end;
 
 constructor TFitClient.CreateWithInjector(ADataLoaderInjector: IDataLoaderInjector);

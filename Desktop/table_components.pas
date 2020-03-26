@@ -383,7 +383,7 @@ begin
     FDestroying := True;
     Finalize(FSavedColWidths);
     Finalize(FSavedRowHeights);
-    inherited Destroy;
+    inherited;
 end;
 
 procedure TTableCompList.GridAssign(Grid: TStringGrid);

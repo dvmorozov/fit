@@ -72,7 +72,7 @@ end;
 destructor TDataLoader.Destroy;
 begin
     FPointsSet.Free;
-    inherited Destroy;
+    inherited;
 end;
 
 procedure TDataLoader.CreatePointsSet;

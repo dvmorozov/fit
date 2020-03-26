@@ -241,7 +241,7 @@ destructor TPointsResult.Destroy();
 begin
     if Assigned(F_Result) then
         FreeAndNil(F_Result);
-    inherited Destroy();
+    inherited;
 end;
 
 { TNamedPointsResult }
@@ -256,7 +256,7 @@ destructor TNamedPointsResult.Destroy();
 begin
     if Assigned(F_Result) then
         FreeAndNil(F_Result);
-    inherited Destroy();
+    inherited;
 end;
 
 { TPictureResult }
@@ -271,7 +271,7 @@ destructor TPictureResult.Destroy();
 begin
     if Assigned(F_Result) then
         FreeAndNil(F_Result);
-    inherited Destroy();
+    inherited;
 end;
 
 

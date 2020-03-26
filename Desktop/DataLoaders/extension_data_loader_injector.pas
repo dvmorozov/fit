@@ -58,8 +58,7 @@ end;
 
 destructor TExtensionDataLoaderInjector.Destroy;
 begin
-    if FDataLoader <> nil then
-        FDataLoader.Free;
+    FDataLoader.Free;
     inherited;
 end;
 

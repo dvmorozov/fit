@@ -785,7 +785,7 @@ end;
 
 constructor TFitViewer.Create(AOwner: TComponent);
 begin
-    inherited Create(AOwner);
+    inherited;
     FPointsSetList := TSelfCheckedComponentList.Create(nil);
     FPointsSetList.SetState(cfPassive);
     FXCoordMode    := 0;
@@ -796,7 +796,7 @@ end;
 destructor TFitViewer.Destroy;
 begin
     FPointsSetList.Free;
-    inherited Destroy;
+    inherited;
 end;
 
 function TFitViewer.GetActiveCurve: longint;

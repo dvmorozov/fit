@@ -43,8 +43,7 @@ implementation
 
 destructor TPersistentCurveParameterContainer.Destroy;
 begin
-    if Assigned(FSpecialCurveParameter) then
-        FSpecialCurveParameter.Free;
+    FSpecialCurveParameter.Free;
     inherited;
 end;
 

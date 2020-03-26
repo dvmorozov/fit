@@ -296,7 +296,7 @@ type
           is responsibility of GUI. Instead of this must throw exceptions. }
 
         procedure SmoothProfile;
-        procedure SubtractAllBackground(Auto: boolean);
+        procedure SubtractBackground(Auto: boolean);
         procedure DoAllAutomatically;
         procedure FindGausses;
         procedure FindGaussesSequentially;
@@ -1221,7 +1221,7 @@ begin
     RefreshPointsSet;
 end;
 
-procedure TFitClient.SubtractAllBackground(Auto: boolean);
+procedure TFitClient.SubtractBackground(Auto: boolean);
 begin
     Assert(Assigned(FitProxy));
     if not Auto then
@@ -1229,7 +1229,7 @@ begin
         Assert(Assigned(FBackgroundPoints));
         FitProxy.SetBackgroundPointsSet(FBackgroundPoints);
     end;
-    FitProxy.SubtractAllBackground(Auto);
+    FitProxy.SubtractBackground(Auto);
     //  ochistka spiska i skrytie grafika
     RemoveBackgroundPoints;
     //  perezagruzka dannyh

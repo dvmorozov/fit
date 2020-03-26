@@ -360,7 +360,7 @@ type
     { Callback for calculating object. }
     procedure AsyncOperationFinished(Sender: TObject);
     { Wrapper. }
-    procedure SubtractAllBackground(Auto: Boolean);
+    procedure SubtractBackground(Auto: Boolean);
 
     procedure SetSelectionMode(ASelectionMode: TSelMode);
     procedure SetResState(State: TResState);
@@ -461,7 +461,7 @@ const
     HintMovePeak:       string =
         'Now you can pick the menu item "Move Peak to Results"';
     HintNextPoint:      string =
-        'Now you can pick a next point or the menu item "Find Gaussians"';
+        'Now you can pick a next point or the menu item "Minimize Difference"';
     HintNextBackPoint:  string =
         'Now you can pick a next point or the menu item "Remove Background"';
     HintNextPointOdd:   string = 'Now you can pick a left point of peak';
@@ -841,7 +841,7 @@ end;
 procedure TFormMain.ActionRmBackAutoExecute(Sender: TObject);
 begin
     FitClientApp_.FitClient.SelectionMode := ModeSelNone;
-    SubtractAllBackground(True);
+    SubtractBackground(True);
 end;
 
 procedure TFormMain.ActionRmBackSelectedExecute(Sender: TObject);
@@ -856,7 +856,7 @@ begin
     end;
 
     FitClientApp_.FitClient.SelectionMode := ModeSelNone;
-    SubtractAllBackground(False);
+    SubtractBackground(False);
 end;
 
 procedure TFormMain.ActionSaveAsTextExecute(Sender: TObject);
@@ -1405,11 +1405,11 @@ begin
 
 end;
 
-procedure TFormMain.SubtractAllBackground(Auto: Boolean);
+procedure TFormMain.SubtractBackground(Auto: Boolean);
 begin
     ShowHint(HintMain);
     Back.Checked := False;
-    FitClientApp_.FitClient.SubtractAllBackground(Auto);
+    FitClientApp_.FitClient.SubtractBackground(Auto);
 end;
 
 procedure TFormMain.ScrollBarXChange(Sender: TObject);

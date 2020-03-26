@@ -26,7 +26,7 @@ Type
     function SmoothProfile(
       const  ProblemID : integer
     ):TResult;
-    function SubtractAllBackground(
+    function SubtractBackground(
       const  Auto : boolean;
       const  ProblemID : integer
     ):TResult;
@@ -304,7 +304,7 @@ Begin
     end;
 End;
 
-function TFitServer_ServiceImp.SubtractAllBackground(
+function TFitServer_ServiceImp.SubtractBackground(
     const  Auto : boolean;
     const  ProblemID : integer
     ):TResult;
@@ -333,7 +333,7 @@ Begin
             LeaveCriticalsection(CS);
         end;
         Problem := TFitServerApp(ProblemID);
-        Result.ErrCode := Problem.FitStub.SubtractAllBackground(
+        Result.ErrCode := Problem.FitStub.SubtractBackground(
             Auto, Result.ErrMsg);
     except
         on E: EUserException do

@@ -54,7 +54,7 @@ type
           Return codes: 0 - success, -1 - inadmissible state, -2 - fatal error. }
 
         function SmoothProfile(var ErrMsg: string): longint;
-        function SubtractAllBackground(Auto: boolean;
+        function SubtractBackground(Auto: boolean;
             var ErrMsg: string): longint;
         function DoAllAutomatically(var ErrMsg: string): longint;
         function FindGausses(var ErrMsg: string): longint;
@@ -204,7 +204,7 @@ begin
     end;
 end;
 
-function TFitServerStub.SubtractAllBackground(Auto: boolean;
+function TFitServerStub.SubtractBackground(Auto: boolean;
     var ErrMsg: string): longint;
 begin
     try
@@ -223,7 +223,7 @@ begin
     try
         Result := 0;
         ErrMsg := '';
-        Server.SubtractAllBackground(Auto);
+        Server.SubtractBackground(Auto);
     except
         on E: EUserException do
         begin

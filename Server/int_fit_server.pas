@@ -130,7 +130,7 @@ type
     IFitServer = interface(IInvokable)
         ['{8935335B-96A6-4B32-A1E6-65BE9A4B3AAF}']
         function SmoothProfile(const ProblemID: integer): TResult;
-        function SubtractAllBackground(const Auto: boolean;
+        function SubtractBackground(const Auto: boolean;
             const ProblemID: integer): TResult;
         function DoAllAutomatically(const ProblemID: integer): TResult;
         function MinimizeDifference(const ProblemID: integer): TResult;
@@ -311,21 +311,21 @@ begin
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'SubtractAllBackground',
+        'SubtractBackground',
         '_E_N_',
-        'SubtractAllBackground'
+        'SubtractBackground'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'SubtractAllBackground',
+        'SubtractBackground',
         'FORMAT_Input_EncodingStyle',
         'literal'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'SubtractAllBackground',
+        'SubtractBackground',
         'FORMAT_OutputEncodingStyle',
         'literal'
         );

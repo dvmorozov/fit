@@ -2041,7 +2041,7 @@ begin
         raise Exception.Create(ChunkNumberIsAbsent);
     end;
     //  vypolnenie zaprosa
-    Proxy.SubtractAllBackground(False);
+    Proxy.SubtractBackground(False);
     GoToPattern;
 end;
 

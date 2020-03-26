@@ -338,12 +338,12 @@ type
           TODO: so far is executed synchronously. Refactor to asynchronous processing. }
         function SmoothProfile: string;
         { Linearly subtracts background in the SelectArea and recreates SelectArea.
-          TODO: unify with SubtractAllBackground. }
+          TODO: unify with SubtractBackground. }
         procedure SubtractBackground;
         { Subtracts the background by linear approximation. When Auto is True then
           background points selected before (no matter by which way) are dropped out.
           TODO: when it is called as interface method should return text message. }
-        procedure SubtractAllBackground(Auto: boolean);
+        procedure SubtractBackground(Auto: boolean);
         { Completely automatic procedure of finding model curves. }
         function DoAllAutomatically: string; virtual;
         { Performs model fitting (initial or subsequent). Corresponds to MinimizeDifference. }
@@ -707,7 +707,7 @@ begin
     SetState(ProfileWaiting);
 end;
 
-procedure TFitServer.SubtractAllBackground(Auto: boolean);
+procedure TFitServer.SubtractBackground(Auto: boolean);
 var
     Data, Background: TPointsSet;
     i, StartIndex, EndIndex: longint;
@@ -2418,7 +2418,7 @@ begin
     if FSavedState = BackNotRemoved then
     begin
         // pri povtornyh zapuskah fon ne udalyaetsya
-        SubtractAllBackground(True);
+        SubtractBackground(True);
         ShowProfile;
     end;
     // TODO: mozhno optimizirovat' razbiv na nesk. funktsiy

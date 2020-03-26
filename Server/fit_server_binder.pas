@@ -165,7 +165,7 @@ begin
   if hasObjCntrl then
     objCntrl.Activate();
   try
-    returnVal := tmpObj.SubtractAllBackground(Auto,ProblemID);
+    returnVal := tmpObj.SubtractBackground(Auto,ProblemID);
     if Assigned(TObject(returnVal)) then
       callCtx.AddObjectToFree(TObject(returnVal));
     
@@ -2603,7 +2603,7 @@ constructor TFitServer_ServiceBinder.Create();
 begin
   inherited Create(GetServiceImplementationRegistry().FindFactory('IFitServer'));
   RegisterVerbHandler('SmoothProfile',{$IFDEF FPC}@{$ENDIF}SmoothProfileHandler);
-  RegisterVerbHandler('SubtractAllBackground',{$IFDEF FPC}@{$ENDIF}SubtractAllBackgroundHandler);
+  RegisterVerbHandler('SubtractBackground',{$IFDEF FPC}@{$ENDIF}SubtractAllBackgroundHandler);
   RegisterVerbHandler('DoAllAutomatically',{$IFDEF FPC}@{$ENDIF}DoAllAutomaticallyHandler);
   RegisterVerbHandler('MinimizeDifference',{$IFDEF FPC}@{$ENDIF}MinimizeDifferenceHandler);
   RegisterVerbHandler('MinimizeNumberOfSpecimens',{$IFDEF FPC}@{$ENDIF}MinimizeNumberOfSpecimensHandler);

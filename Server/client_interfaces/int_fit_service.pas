@@ -123,7 +123,7 @@ type
 
         { Returns hint or error message received from the server. }
         function SmoothProfile: string;
-        procedure SubtractAllBackground(Auto: boolean);
+        procedure SubtractBackground(Auto: boolean);
         { Returns hint or error message received from the server. }
         function DoAllAutomatically: string;
         { Returns hint or error message received from the server. }

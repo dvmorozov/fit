@@ -104,7 +104,7 @@ type
         { Asynchronous (long) methods. }
 
         function SmoothProfile: string;
-        procedure SubtractAllBackground(Auto: boolean);
+        procedure SubtractBackground(Auto: boolean);
         function DoAllAutomatically: string;
         function FindGausses: string;
 {$IFNDEF EXCLUDE_SOMETHING}
@@ -765,14 +765,14 @@ begin
     Result := ErrMsg;
 end;
 
-procedure TFitProblem.SubtractAllBackground(Auto: boolean);
+procedure TFitProblem.SubtractBackground(Auto: boolean);
 var
     Res:    longint;
     ErrMsg: string;
     R:      TResult;
 begin
     Assert(Assigned(FitStub));
-    R := FitStub.SubtractAllBackground(Auto, FProblemId);
+    R := FitStub.SubtractBackground(Auto, FProblemId);
     if not Assigned(R) then
         raise Exception.Create(OutOfServerResources);
     Res    := R.ErrCode;

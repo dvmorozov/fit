@@ -21,7 +21,7 @@ type
     protected
         class function GetServiceType(): PTypeInfo; override;
         function SmoothProfile(const ProblemID: integer): TResult;
-        function SubtractAllBackground(const Auto: boolean;
+        function SubtractBackground(const Auto: boolean;
             const ProblemID: integer): TResult;
         function DoAllAutomatically(const ProblemID: integer): TResult;
         function MinimizeDifference(const ProblemID: integer): TResult;
@@ -163,7 +163,7 @@ begin
     end;
 end;
 
-function TFitServer_Proxy.SubtractAllBackground(const Auto: boolean;
+function TFitServer_Proxy.SubtractBackground(const Auto: boolean;
     const ProblemID: integer): TResult;
 var
     locSerializer: IFormatterClient;
@@ -171,7 +171,7 @@ var
 begin
     locSerializer := GetSerializer();
     try
-        locSerializer.BeginCall('SubtractAllBackground', GetTarget(),
+        locSerializer.BeginCall('SubtractBackground', GetTarget(),
             (Self as ICallContext));
         locSerializer.Put('Auto', TypeInfo(boolean), Auto);
         locSerializer.Put('ProblemID', TypeInfo(integer), ProblemID);

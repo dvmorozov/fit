@@ -116,13 +116,12 @@ type
           is calculated. }
         FRFactorIntervals: TTitlePointsSet;
 
-        { Contains all pattern specimens collected from tasks
-          (for example, for separate intervals).
-          Items are added synchronously to the list. }
+        { Contains all curves collected from tasks (for example,
+          for separate intervals). Items are added synchronously to the list. }
         FCurvesList:     TSelfCopiedCompList;
-        { Positions of pattern specimens. Only X-coordinates are used. }
+        { Positions of curves. Only X-coordinates are used. }
         FCurvePositions: TTitlePointsSet;
-        { Containers of parameters of pattern specimens.
+        { Containers of parameters of curves.
           TODO: change type and remove SetWaveLength. }
         FSpecimenList:   TMSCRSpecimenList;
 
@@ -242,15 +241,14 @@ type
 
         procedure CreateResultedProfile;
         { Calculates profile containing differences between calculated and experimental data.
-          In the calculation all the specimens are included. Will not work properly if specimen areas are overlapped. }
+          In the calculation all curves are included. Will not work properly if curves are overlapped. }
         procedure CreateDeltaProfile;
         procedure CreateResultedCurvesList;
         { Collects resulting set of curve positions. Points should not be collected from subtasks because
           in this case part of points can be missed. This can confise the user. }
         // procedure CreateResultedCurvePositions;
-        { Iterates through list of pattern specimens and creates
-          common list of parameters of all the specimens complementing
-          them with calculated parameters. }
+        { Iterates through list of curves and creates common list of parameters
+          of all curves complementing them with calculated parameters. }
         procedure CreateSpecimenListAlg;
         { Prepares intermediate results for user. }
         procedure GoToReadyForFit;
@@ -317,7 +315,7 @@ type
         procedure ReplacePointInCurvePositions(PrevXValue, PrevYValue,
             NewXValue, NewYValue: double);
 
-        { Returns list of parameters of all specimens. }
+        { Returns list of parameters of all curves. }
         function GetSpecimenList: TMSCRSpecimenList;
         { Returns list of components containing sets of points. }
         function GetCurvesList: TSelfCopiedCompList;
@@ -351,14 +349,14 @@ type
         { Performs model fitting without initialization of application intervals. }
         function FindGaussesAgain: string; virtual;
         { Search for model describing experimental data with given accuracy
-          by minimum number of specimens. Sequentially reducing the number of specimens.
-          Corresponds to MinimizeNumberOfSpecimens. }
-        function FindGaussesSequentially: string; virtual;
-        { Searches for intervals of application of pattern specimens. }
+          by minimum number of specimens. Sequentially reducing the number
+          of specimens. }
+        function MinimizeNumberOfCurves: string; virtual;
+        { Searches for intervals of application of curves. }
         function FindPeakBounds: string; virtual;
         { Searches for background points. }
         function FindBackPoints: string; virtual;
-        { Searches for peak positions (positions of specimens). }
+        { Searches for curve positions. }
         function FindPeakPositions: string; virtual;
         function AllPointsAsPeakPositions: string; virtual;
 
@@ -2033,7 +2031,7 @@ begin
     for i := 0 to FTaskList.Count - 1 do
     begin
         FT := TFitTask(FTaskList.Items[i]);
-        FT.FindGaussesSequentially;
+        FT.MinimizeNumberOfCurves;
     end;
 end;
 
@@ -2065,7 +2063,7 @@ begin
     end;
 end;
 
-function TFitServer.FindGaussesSequentially: string;
+function TFitServer.MinimizeNumberOfCurves: string;
 begin
     Result := '';
     if State = AsyncOperation then

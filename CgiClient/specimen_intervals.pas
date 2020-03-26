@@ -64,7 +64,7 @@ const
             //'»нтервалы применени€ экземпл€ров паттернов могут быть ' +
             //'сгенерированы автоматически только дл€ данных, имеющих ' +
             //'вид профил€. '
-            'The specimen application interval cuts down specimens which '      +
+            'The specimen application interval cuts down curves which '      +
             'have the position inside.'
             //'»нтервалом ограничиваютс€ экземпл€ры паттерна, ' +
             //'имеющие точку прив€зки в нем.'

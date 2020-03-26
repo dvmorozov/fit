@@ -133,7 +133,7 @@ type
         function FindGaussesAgain: string;
 {$ENDIF}
         { Returns hint or error message received from the server. }
-        function FindGaussesSequentially: string;
+        function MinimizeNumberOfCurves: string;
         { Returns hint or error message received from the server. }
         function FindPeakBounds: string;
         { Returns hint or error message received from the server. }

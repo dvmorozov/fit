@@ -134,7 +134,7 @@ type
             const ProblemID: integer): TResult;
         function DoAllAutomatically(const ProblemID: integer): TResult;
         function MinimizeDifference(const ProblemID: integer): TResult;
-        function MinimizeNumberOfSpecimens(const ProblemID: integer): TResult;
+        function MinimizeNumberOfCurves(const ProblemID: integer): TResult;
         function FindSpecimenIntervals(const ProblemID: integer): TResult;
         function FindSpecimenPositions(const ProblemID: integer): TResult;
         function FindBackPoints(const ProblemID: integer): TResult;
@@ -374,21 +374,21 @@ begin
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'MinimizeNumberOfSpecimens',
+        'MinimizeNumberOfCurves',
         '_E_N_',
-        'MinimizeNumberOfSpecimens'
+        'MinimizeNumberOfCurves'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'MinimizeNumberOfSpecimens',
+        'MinimizeNumberOfCurves',
         'FORMAT_Input_EncodingStyle',
         'literal'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'MinimizeNumberOfSpecimens',
+        'MinimizeNumberOfCurves',
         'FORMAT_OutputEncodingStyle',
         'literal'
         );

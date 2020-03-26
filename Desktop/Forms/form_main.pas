@@ -801,7 +801,7 @@ procedure TFormMain.ActionFitMinNumberOfSpecExecute(Sender: TObject);
 begin
     ShowHint(HintMain);
     SelSpecPosVis.Checked := False;
-    FitClientApp_.FitClient.FindGaussesSequentially;
+    FitClientApp_.FitClient.MinimizeNumberOfCurves;
     ShowHint(HintWait);
 {$IFDEF FITPRO}
     TimerAsync.Enabled := True;
@@ -967,7 +967,7 @@ begin
         PS := FFitViewer.GetActivePointsSet;
         if not (PS is TCurvePointsSet) then
         begin
-            MessageDlg('This operation allowed only with pattern specimens...',
+            MessageDlg('This operation allowed only with curves...',
                 mtWarning, [mbOk], 0);
             Exit;
         end;

@@ -12,7 +12,7 @@ function ReplaceStrings_fitting_process(Text: string): string;
 const
     HintMinimizeDifference:         string = 'Minimizing total difference between experimental and calculated data is performed.';
                                                                                 //'Выполняется минимизация расхождения.';
-    HintMinimizeNumberOfSpecimens:  string = 'Minimizing number of pattern specimens is performed.';
+    HintMinimizeNumberOfCurves:     string = 'Minimizing number of curves is performed.';
                                                                                 //'Выполняется минимизация числа экземпляров паттерна.';
     HintDoAllAutomatically:         string = 'Automatic model fitting is performed.';
                                                                                 //'Выполняется подгонка параметров модели, созданной способом "по-умолчанию".';

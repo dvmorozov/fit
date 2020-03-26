@@ -35,7 +35,7 @@ uses
     ;
 
 type
-    { Fits profile interval by model curves (specimens).
+    { Fits profile interval by model curves.
       Provides variable parameters and evaluation function for optimization
       algorithm.
       It is inherited from TComponent to allow inserting into TComponentList. }
@@ -63,14 +63,14 @@ type
         { The calculated profile. Every value is calculated as a sum of values 
           of corresponding points of every curve (specimen) and background. }
         FCalcProfile: TPointsSet;
-        { Contains positions of curves (specimens). Only X-coordinates are used. }
+        { Contains positions of curves. Only X-coordinates are used. }
         FCurvePositions: TPointsSet;
-        { Set of curves (specimens) used to model experimental data inside given interval. }
-        FCurvesList:  TSelfCopiedCompList;
+        { Set of curves used to model experimental data inside given interval. }
+        FCurves:  TSelfCopiedCompList;
         { The flag switches on using intervals in calculating R-factors.
           Using ranges is switched off when they are not given to accelerate computation. }
         FUseCurveRanges: boolean;
-        { List of parameters of pattern instances (specimens) which are common for all the instances. }
+        { List of parameters of curves which are common for all the instances. }
         FCommonVariableParameters: Curve_parameters;
         { Background parameters. }
         FA, FB, FC, Fx0: double;
@@ -230,12 +230,12 @@ type
           Calculates resulting profile. }
         procedure CalculateProfile;
 
-        { Fits pattern specimens starting from given parameter set (initially or repeatedly). }
+        { Fits curves starting from given parameter set (initially or repeatedly). }
         procedure FindGausses; virtual;
         procedure FindGaussesAgain; virtual;
-        { Searches set of pattern specimens (curves) fitting exprerimental data
-          with given accuracy sequentially decreasing number of curves. }
-        procedure FindGaussesSequentially; virtual;
+        { Searches set of curves fitting exprerimental data with given
+          accuracy sequentially decreasing number of such curves. }
+        procedure MinimizeNumberOfCurves; virtual;
         { Sets up termination flags and returns. }
         procedure StopAsyncOper; virtual;
         { Returns the factor scaling calculated points up to scale of experimental data. }
@@ -315,14 +315,14 @@ begin
     Assert(Assigned(FCalcProfile));
     Assert(Assigned(FExpProfile));
 
-    Assert(Assigned(FCurvesList));
+    Assert(Assigned(FCurves));
     //  esli ni u odnoy krivoy diapazon ne zadan,
     //  to R-faktor schitaetsya po vsemu profilyu
     RangeDefined := False;
     if FUseCurveRanges then
-        for j := 0 to FCurvesList.Count - 1 do
+        for j := 0 to FCurves.Count - 1 do
         begin
-            CPS := TCurvePointsSet(FCurvesList.Items[j]);
+            CPS := TCurvePointsSet(FCurves.Items[j]);
             if CPS.FRangeDefined then
             begin
                 RangeDefined := True;
@@ -347,9 +347,9 @@ begin
         if RangeDefined then
         begin
             Flag := False;      //  tochka ne prinadlezhit nikakomu diapazonu
-            for j := 0 to FCurvesList.Count - 1 do
+            for j := 0 to FCurves.Count - 1 do
             begin
-                CPS := TCurvePointsSet(FCurvesList.Items[j]);
+                CPS := TCurvePointsSet(FCurves.Items[j]);
                 if CPS.FRangeDefined and
                     (FCalcProfile.PointXCoord[i] >= CPS.FMinX) and
                     (FCalcProfile.PointXCoord[i] <= CPS.FMaxX) then
@@ -392,14 +392,14 @@ begin
     Assert(Assigned(FCalcProfile));
     Assert(Assigned(FExpProfile));
 
-    Assert(Assigned(FCurvesList));
+    Assert(Assigned(FCurves));
     //  esli ni u odnoy krivoy diapazon ne zadan,
     //  to R-faktor schitaetsya po vsemu profilyu
     RangeDefined := False;
     if FUseCurveRanges then
-        for j := 0 to FCurvesList.Count - 1 do
+        for j := 0 to FCurves.Count - 1 do
         begin
-            CPS := TCurvePointsSet(FCurvesList.Items[j]);
+            CPS := TCurvePointsSet(FCurves.Items[j]);
             if CPS.FRangeDefined then
             begin
                 RangeDefined := True;
@@ -424,9 +424,9 @@ begin
         if RangeDefined then
         begin
             Flag := False;      //  tochka ne prinadlezhit nikakomu diapazonu
-            for j := 0 to FCurvesList.Count - 1 do
+            for j := 0 to FCurves.Count - 1 do
             begin
-                CPS := TCurvePointsSet(FCurvesList.Items[j]);
+                CPS := TCurvePointsSet(FCurves.Items[j]);
                 if CPS.FRangeDefined and
                     (FCalcProfile.PointXCoord[i] >= CPS.FMinX) and
                     (FCalcProfile.PointXCoord[i] <= CPS.FMaxX) then
@@ -459,7 +459,7 @@ begin
         Result := FCommonVariableParameters[FCommonVaryingIndex].VariationStep
     else
     begin
-        Curve  := TCurvePointsSet(FCurvesList.Items[FCurveNum]);
+        Curve  := TCurvePointsSet(FCurves.Items[FCurveNum]);
         Result := Curve.VariationSteps[FParamNum];
     end;
 end;
@@ -478,14 +478,14 @@ var
     Count: longint;
 begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
-    Assert(Assigned(FCurvesList));
+    Assert(Assigned(FCurves));
     Assert(Assigned(FCommonVariableParameters));
 
     FEOC := True;
-    if FCurvesList.Count <> 0 then
+    if FCurves.Count <> 0 then
     begin
         //  perebor parametrov krivoy
-        Curve := TCurvePointsSet(FCurvesList.Items[FCurveNum]);
+        Curve := TCurvePointsSet(FCurves.Items[FCurveNum]);
         if FParamNum < Curve.VariableCount - 1 then
         begin
             Inc(FParamNum);
@@ -494,7 +494,7 @@ begin
         end;
     end;
 
-    if FCurveNum < FCurvesList.Count - 1 then
+    if FCurveNum < FCurves.Count - 1 then
     begin
         //  perebor krivyh
         Inc(FCurveNum);
@@ -565,7 +565,7 @@ var
     Parameter: TSpecialCurveParameter;
 begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
-    Assert(Assigned(FCurvesList));
+    Assert(Assigned(FCurves));
     Assert(Assigned(FCommonVariableParameters));
 
     if FEnableBackgroundVariation and FBackgroundVaryingFlag then
@@ -588,9 +588,9 @@ begin
     end
     else
     begin
-        Assert(FCurvesList.Count <> 0);
+        Assert(FCurves.Count <> 0);
 
-        GP     := TCurvePointsSet(FCurvesList.Items[FCurveNum]);
+        GP     := TCurvePointsSet(FCurves.Items[FCurveNum]);
         Result := GP.VariableValues[FParamNum];
     end;
 end;
@@ -602,7 +602,7 @@ var
     Parameter: TSpecialCurveParameter;
 begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
-    Assert(Assigned(FCurvesList));
+    Assert(Assigned(FCurves));
     Assert(Assigned(FCommonVariableParameters));
 
     if FEnableBackgroundVariation and FBackgroundVaryingFlag then
@@ -631,9 +631,9 @@ begin
         Parameter.Value := NewParamValue;
 
         //  ustanovka znacheniya obschego parametra u vseh ekzemplyarov
-        for i := 0 to FCurvesList.Count - 1 do
+        for i := 0 to FCurves.Count - 1 do
         begin
-            GP    := TCurvePointsSet(FCurvesList.Items[i]);
+            GP    := TCurvePointsSet(FCurves.Items[i]);
             GP.ValuesByName[
                 FCommonVariableParameters[FCommonVaryingIndex].Name
                 ] := NewParamValue;
@@ -642,13 +642,13 @@ begin
     end
     else
     begin
-        Assert(FCurvesList.Count <> 0);
+        Assert(FCurves.Count <> 0);
         //  takoy algoritm mog by privodit' k nakopleniyu oshibki
         //  v summarnom profile (kogda znachenie intensivnosti
         //  summarnogo profilya otlichaetsya ot summy intensivnostey
         //  vseh krivyh), no pri variatsii Sigma ispol'zuetsya
         //  polnyy pereschet, poetomu nakopleniya ne proishodit
-        GP := TCurvePointsSet(FCurvesList.Items[FCurveNum]);
+        GP := TCurvePointsSet(FCurves.Items[FCurveNum]);
         //  ??? v nekotoryh sluchayah rabotaet optimal'nee
         //SubbCurveFromProfile(GP);
         GP.VariableValues[FParamNum] := NewParamValue;
@@ -711,7 +711,7 @@ end;
 destructor TFitTask.Destroy;
 begin
     FExpProfile.Free;
-    FCurvesList.Free;
+    FCurves.Free;
     FCalcProfile.Free;
     FBackground.Free;
     FSavedBackground.Free;
@@ -729,13 +729,13 @@ var
     RestoreBackground: boolean;
 begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
-    Assert(Assigned(FCurvesList));
+    Assert(Assigned(FCurves));
     Assert(FBackground.PointsCount = FSavedBackground.PointsCount);
     Assert(FExpProfile.PointsCount = FSavedBackground.PointsCount);
 
-    for i := 0 to FCurvesList.Count - 1 do
+    for i := 0 to FCurves.Count - 1 do
     begin
-        Curve := FCurvesList.Items[i] as TCurvePointsSet;
+        Curve := FCurves.Items[i] as TCurvePointsSet;
         Curve.ReCalc(nil);
     end;
     //  raschet tochek fona
@@ -766,11 +766,11 @@ var
     PS: TCurvePointsSet;
 begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
-    Assert(Assigned(FCurvesList));
+    Assert(Assigned(FCurves));
 
-    for i := 0 to FCurvesList.Count - 1 do
+    for i := 0 to FCurves.Count - 1 do
     begin
-        PS := TCurvePointsSet(FCurvesList.Items[i]);
+        PS := TCurvePointsSet(FCurves.Items[i]);
         PS.StoreParams;
     end;
 end;
@@ -781,11 +781,11 @@ var
     PS: TCurvePointsSet;
 begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
-    Assert(Assigned(FCurvesList));
+    Assert(Assigned(FCurves));
 
-    for i := 0 to FCurvesList.Count - 1 do
+    for i := 0 to FCurves.Count - 1 do
     begin
-        PS := TCurvePointsSet(FCurvesList.Items[i]);
+        PS := TCurvePointsSet(FCurves.Items[i]);
         PS.RestoreParams;
     end;
 end;
@@ -798,7 +798,7 @@ begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
     Assert(Assigned(FCalcProfile));
     Assert(Assigned(FBackground));
-    Assert(Assigned(FCurvesList));
+    Assert(Assigned(FCurves));
     Assert(FBackground.PointsCount = FCalcProfile.PointsCount);
 
     //  obnulenie profilya
@@ -806,9 +806,9 @@ begin
         FCalcProfile.PointYCoord[i] := 0;
 
     //  vychislenie novogo
-    for i := 0 to FCurvesList.Count - 1 do
+    for i := 0 to FCurves.Count - 1 do
     begin
-        PS := TPointsSet(FCurvesList.Items[i]);
+        PS := TPointsSet(FCurves.Items[i]);
         AddCurveToProfile(PS);
     end;
     //  dobavleniye fona
@@ -843,9 +843,9 @@ begin
     for i := 0 to FCommonVariableParameters.Params.Count - 1 do
         FCommonVariableParameters[i].InitVariationStep;
 
-    for i := 0 to FCurvesList.Count - 1 do
+    for i := 0 to FCurves.Count - 1 do
     begin
-        Curve := TCurvePointsSet(FCurvesList.Items[i]);
+        Curve := TCurvePointsSet(FCurves.Items[i]);
         for j := 0 to Curve.VariableCount - 1 do
             Curve.InitVariationStep(j);
     end;
@@ -863,9 +863,9 @@ begin
             Exit;
         end;
 
-    for i := 0 to FCurvesList.Count - 1 do
+    for i := 0 to FCurves.Count - 1 do
     begin
-        Curve := TCurvePointsSet(FCurvesList.Items[i]);
+        Curve := TCurvePointsSet(FCurves.Items[i]);
         for j := 0 to Curve.VariableCount - 1 do
             if not Curve.MinimumStepAchieved(j) then
             begin
@@ -950,9 +950,9 @@ begin
     Result := False;
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
     MaxA   := 0;
-    for i := 0 to FCurvesList.Count - 1 do
+    for i := 0 to FCurves.Count - 1 do
     begin
-        GP := TCurvePointsSet(FCurvesList.Items[i]);
+        GP := TCurvePointsSet(FCurves.Items[i]);
         if not GP.HasA then
             Exit;
 
@@ -964,9 +964,9 @@ begin
     //  oznachaet, chto model' sovershenno ne sootvetstvuet
     //  dannym, poetomu vse krivye mozhno udalit'
     i := 0;
-    while i < FCurvesList.Count do
+    while i < FCurves.Count do
     begin
-        GP := TCurvePointsSet(FCurvesList.Items[i]);
+        GP := TCurvePointsSet(FCurves.Items[i]);
         if not GP.HasA then
             Exit;
 
@@ -983,7 +983,7 @@ begin
                     Break;
                 end//if FCurvePositions.PointXCoord[j] = GP.FInitx0 then
             ;
-            FCurvesList.Remove(GP);  //  osvobozhdaet GP
+            FCurves.Remove(GP);  //  osvobozhdaet GP
         end
         else
             Inc(i);
@@ -1002,8 +1002,8 @@ begin
     Deleted := nil;
     MaxGP   := nil;
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
-    Assert(FCurvesList.Count <> 0);
-    if FCurvesList.Count <= 1 then
+    Assert(FCurves.Count <> 0);
+    if FCurves.Count <= 1 then
         Exit;
     Assert(Assigned(FCurvePositions));
     SA := FExpProfile;
@@ -1012,9 +1012,9 @@ begin
         Exit;
 
     First := True;
-    for i := 0 to FCurvesList.Count - 1 do
+    for i := 0 to FCurves.Count - 1 do
     begin
-        GP := TCurvePointsSet(FCurvesList.Items[i]);
+        GP := TCurvePointsSet(FCurves.Items[i]);
         if not GP.Hasx0 then
             Exit;
 
@@ -1053,7 +1053,7 @@ begin
     end;
     Assert(Assigned(MaxGP));
     DeletePoint(FCurvePositions, MaxGP.FInitx0);
-    Deleted := FCurvesList.Extract(MaxGP);
+    Deleted := FCurves.Extract(MaxGP);
     Result  := True;
 end;
 
@@ -1068,14 +1068,14 @@ var
 begin
     Result := False;
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
-    Assert(FCurvesList.Count <> 0);
-    if FCurvesList.Count <= 1 then
+    Assert(FCurves.Count <> 0);
+    if FCurves.Count <= 1 then
         Exit;
 
     First := True;
-    for i := 0 to FCurvesList.Count - 1 do
+    for i := 0 to FCurves.Count - 1 do
     begin
-        GP := TCurvePointsSet(FCurvesList.Items[i]);
+        GP := TCurvePointsSet(FCurves.Items[i]);
         if not GP.HasA then
             Exit;
 
@@ -1095,7 +1095,7 @@ begin
     end;
     Assert(Assigned(MinGP));
     DeletePoint(FCurvePositions, MinGP.FInitx0);
-    Deleted := FCurvesList.Extract(MinGP);
+    Deleted := FCurves.Extract(MinGP);
     Result  := True;
 end;
 
@@ -1251,8 +1251,8 @@ begin
     Assert(FExpProfile.PointsCount >= 2);
 
     //  Saves previously created curve instances.
-    if not Assigned(FCurvesList) then
-        FCurvesList := TSelfCopiedCompList.Create(nil);
+    if not Assigned(FCurves) then
+        FCurves := TSelfCopiedCompList.Create(nil);
 
     //  sozdaem zanovo summarnyy profil'
     if Assigned(FCalcProfile) then
@@ -1280,10 +1280,10 @@ begin
     //  proveryaem i udalyaem te ekz. patterna,
     //  polozheniya kot. net sredi vybrannyh tochek
     k := 0;
-    while k < FCurvesList.Count do
+    while k < FCurves.Count do
     begin
         CurveFound := False;
-        Curve      := TCurvePointsSet(FCurvesList.Items[k]);
+        Curve      := TCurvePointsSet(FCurves.Items[k]);
         //  esli pattern ne imeet parametra polozheniya, to
         //  ego ekzemplyary ne udalyayutsya
         if not Curve.Hasx0 then
@@ -1297,8 +1297,8 @@ begin
             end;
 
         if not CurveFound then
-            FCurvesList.Remove(Curve)// udalyaem
-        //  FCurvesList po-umolchaniyu osvobozhdaet
+            FCurves.Remove(Curve)// udalyaem
+        //  FCurves po-umolchaniyu osvobozhdaet
         //  komponenty, ssylki na kotorye hranit
 
         else
@@ -1307,7 +1307,7 @@ begin
     //  uslovie obratnoe dannomu oznachaet, chto spisok krivyh ne
     //  pust, i pri etom pattern ne imeet parametra polozheniya;
     //  v takom sluchae nichego delat' ne nuzhno...
-    if (FCurvesList.Count = 0) or (TCurvePointsSet(FCurvesList.Items[0]).Hasx0) then
+    if (FCurves.Count = 0) or (TCurvePointsSet(FCurves.Items[0]).Hasx0) then
         if FCurvePositions.PointsCount = 0 then
         begin
             //  dobavlyaetsya odin ekzemplyar patterna na dannyy interval;
@@ -1344,10 +1344,10 @@ begin
                 CalcInitHash(Curve);
                 SearchSpecimenAndInit(SpecimenParameters, Curve);
                 //  dobavlenie novogo ekz. patterna v spisok
-                FCurvesList.Add(Curve);
+                FCurves.Add(Curve);
                 //  dobavlenie tochki pryavyazki, kogda pattern imeet tochku
                 //  privyazki dlya posleduyuschego otobrazheniya v obschem spiske
-                if TCurvePointsSet(FCurvesList.Items[0]).Hasx0 then
+                if TCurvePointsSet(FCurves.Items[0]).Hasx0 then
                     FCurvePositions.AddNewPoint(CurvePosition, CurveAmplitude);
             except
                 Curve.Free;
@@ -1401,9 +1401,9 @@ begin
             for i := 0 to FCurvePositions.PointsCount - 1 do
             begin
                 CurveFound := False;
-                for k := 0 to FCurvesList.Count - 1 do
+                for k := 0 to FCurves.Count - 1 do
                 begin
-                    Curve := TCurvePointsSet(FCurvesList.Items[k]);
+                    Curve := TCurvePointsSet(FCurves.Items[k]);
                     if not Curve.Hasx0 then
                         Break;
 
@@ -1442,7 +1442,7 @@ begin
                         CalcInitHash(Curve);
                         SearchSpecimenAndInit(SpecimenParameters, Curve);
                         //  dobavlenie novogo ekz. patterna v spisok
-                        FCurvesList.Add(Curve);
+                        FCurves.Add(Curve);
                         //  esli pattern ne imeet parametra polozheniya,
                         //  to sozdaetsya tol'ko odin ekzemplyar
                         if not Curve.Hasx0 then
@@ -1502,7 +1502,7 @@ begin
                         Assert(Assigned(Deleted));
                         if Deleted.Hasx0 then
                             AddPointToCurvePositions(Deleted.FInitx0);
-                        FCurvesList.Add(Deleted);
+                        FCurves.Add(Deleted);
                         Deleted      := nil;
                         PointDeleted := False;
                     end;
@@ -1518,7 +1518,7 @@ begin
         end
         else
             Break;
-        if FCurvesList.Count <= 1 then
+        if FCurves.Count <= 1 then
             Break;
     end;
 
@@ -1549,7 +1549,7 @@ begin
                         Assert(Assigned(Deleted));
                         if Deleted.Hasx0 then
                             AddPointToCurvePositions(Deleted.FInitx0);
-                        FCurvesList.Add(Deleted);
+                        FCurves.Add(Deleted);
                         Deleted      := nil;
                         PointDeleted := False;
                     end;
@@ -1566,7 +1566,7 @@ begin
         end
         else
             Break;
-        if FCurvesList.Count <= 1 then
+        if FCurves.Count <= 1 then
             Break;
     end;
 
@@ -1602,8 +1602,8 @@ begin
     // nachal'naya initsializatsiya neobhodima, kogda pri
     // vychislenii R-faktora predpolagaetsya, chto vse
     // tochki vychislennogo profilya ne d.b. ravny 0
-    //Assert(Assigned(FCurvesList));
-    //with FCurvesList do
+    //Assert(Assigned(FCurves));
+    //with FCurves do
     //  for i := 0 to Count - 1 do
     //  begin
     //      GP := TPointsSet(Items[i]);
@@ -1628,7 +1628,7 @@ begin
     Done;
 end;
 
-procedure TFitTask.FindGaussesSequentially;
+procedure TFitTask.MinimizeNumberOfCurves;
 begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
     FindGaussesSequentiallyAlg;
@@ -1703,7 +1703,7 @@ end;
 
 function TFitTask.GetCurvesList: TSelfCopiedCompList;
 begin
-    Result := FCurvesList;
+    Result := FCurves;
 end;
 
 function TFitTask.GetCurMin: double;

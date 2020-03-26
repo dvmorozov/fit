@@ -25,7 +25,7 @@ type
             const ProblemID: integer): TResult;
         function DoAllAutomatically(const ProblemID: integer): TResult;
         function MinimizeDifference(const ProblemID: integer): TResult;
-        function MinimizeNumberOfSpecimens(
+        function MinimizeNumberOfCurves(
             const ProblemID: integer): TResult;
         function FindSpecimenIntervals(const ProblemID: integer): TResult;
         function FindSpecimenPositions(const ProblemID: integer): TResult;
@@ -237,7 +237,7 @@ begin
     end;
 end;
 
-function TFitServer_Proxy.MinimizeNumberOfSpecimens(
+function TFitServer_Proxy.MinimizeNumberOfCurves(
     const ProblemID: integer): TResult;
 var
     locSerializer: IFormatterClient;
@@ -245,7 +245,7 @@ var
 begin
     locSerializer := GetSerializer();
     try
-        locSerializer.BeginCall('MinimizeNumberOfSpecimens', GetTarget(),
+        locSerializer.BeginCall('MinimizeNumberOfCurves', GetTarget(),
             (Self as ICallContext));
         locSerializer.Put('ProblemID', TypeInfo(integer), ProblemID);
         locSerializer.EndCall();

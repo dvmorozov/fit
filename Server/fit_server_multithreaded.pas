@@ -82,7 +82,7 @@ begin
     for i := 0 to FTaskList.Count - 1 do
     begin
         FT := TFitTask(FTaskList.Items[i]);
-        FT.FindGaussesSequentially;
+        FT.MinimizeNumberOfCurves;
     end;
 end;
 

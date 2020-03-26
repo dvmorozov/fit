@@ -46,7 +46,7 @@ type
         procedure GoToStartPage(Capt: string; Hint: string);
         procedure GoToFitting;
         procedure MinimizeDifference;
-        procedure MinimizeNumberOfSpecimens;
+        procedure MinimizeNumberOfCurves;
         procedure DoAllAutomatically;
 
         //  perehod k oknu vybora tochek privyazki patterna
@@ -478,7 +478,7 @@ begin
         MinimizeDifference
     else
     if Command = 'minimize_number_of_specimens' then
-        MinimizeNumberOfSpecimens
+        MinimizeNumberOfCurves
     else
     if Command = 'do_all_automatically' then
         DoAllAutomatically
@@ -2447,7 +2447,7 @@ begin
     CGIDatamodule2.AddResponseLn(Template);
 end;
 
-procedure TCGIDatamodule2.MinimizeNumberOfSpecimens;
+procedure TCGIDatamodule2.MinimizeNumberOfCurves;
 var
     Template: string;
     Pair:     array[1..1] of TStringPair;
@@ -2477,10 +2477,10 @@ begin
     Pair[1][2] := IntToStr(Proxy.GetProblemId);
     Template   := ReplaceStrings(Template, Pair, 1);
     Pair[1][1] := 'HintFitting';
-    Pair[1][2] := HintMinimizeNumberOfSpecimens;
+    Pair[1][2] := HintMinimizeNumberOfCurves;
     Template   := ReplaceStrings(Template, Pair, 1);
     Template   := InsertKey(Template, Key);
-    Proxy.FindGaussesSequentially;
+    Proxy.MinimizeNumberOfCurves;
     //  vyvod stranitsy
     CGIDatamodule2.AddResponseLn(Template);
 end;

@@ -36,7 +36,7 @@ Type
     function MinimizeDifference(
       const  ProblemID : integer
     ):TResult;
-    function MinimizeNumberOfSpecimens(
+    function MinimizeNumberOfCurves(
       const  ProblemID : integer
     ):TResult;
     function FindSpecimenIntervals(
@@ -438,7 +438,7 @@ Begin
     end;
 End;
 
-function TFitServer_ServiceImp.MinimizeNumberOfSpecimens(
+function TFitServer_ServiceImp.MinimizeNumberOfCurves(
     const  ProblemID : integer
     ):TResult;
 var Problem: TFitServerApp;
@@ -466,7 +466,7 @@ Begin
             LeaveCriticalsection(CS);
         end;
         Problem := TFitServerApp(ProblemID);
-        Result.ErrCode := Problem.FitStub.FindGaussesSequentially(Result.ErrMsg);
+        Result.ErrCode := Problem.FitStub.MinimizeNumberOfCurves(Result.ErrMsg);
     except
         on E: EUserException do
         begin
@@ -995,7 +995,7 @@ var Problem: TFitServerApp;
     //  !!! osvobozhdat' ne nuzhno, poskol'ku kopii ne sozdayutsya !!!
     Data, BackgroundPoints, GaussProfile, DeltaProfile,
     CurvePositions, RFactorIntervals: TTitlePointsSet;
-    Specimens: TSelfCopiedCompList;
+    Curves: TSelfCopiedCompList;
     Bitmap: TPNGImage;//TJPEGImage;
     Stream: TMemoryStream;
     i: LongInt;
@@ -1147,12 +1147,11 @@ Begin
             (*  poka ne predusmotreno masschtabirovanie risunka
                 krivye risovat' ne nuzhno - vse slivaetsya *)
             Result.ErrCode := Problem.FitStub.GetCurvesList(
-                Specimens, Result.ErrMsg);
+                Curves, Result.ErrMsg);
             if Result.ErrCode <> 0 then Exit;
             //  nebol'schoe kolichestvo krivyh vse-taki budem vyvodit'
-            if Specimens.Count <= 10 then
-                PlotSpecimens(nil, Specimens, nil);
-            (* *)
+            if Curves.Count <= 10 then
+                PlotSpecimens(nil, Curves, nil);
             Paint;
         end;
 

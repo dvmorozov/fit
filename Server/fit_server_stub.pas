@@ -59,7 +59,7 @@ type
         function DoAllAutomatically(var ErrMsg: string): longint;
         function FindGausses(var ErrMsg: string): longint;
         function FindGaussesAgain(var ErrMsg: string): longint;
-        function FindGaussesSequentially(var ErrMsg: string): longint;
+        function MinimizeNumberOfCurves(var ErrMsg: string): longint;
         function FindPeakBounds(var ErrMsg: string): longint;
         function FindBackPoints(var ErrMsg: string): longint;
         function FindPeakPositions(var ErrMsg: string): longint;
@@ -129,7 +129,7 @@ type
         { Returns list of curve (specimen) parameters. }
         function GetSpecimenList(var Points: TMSCRSpecimenList;
             var ErrMsg: string): longint;
-        { Returns list of components containing points of curves (specimens). }
+        { Returns list of components containing points of curves. }
         function GetCurvesList(var Points: TSelfCopiedCompList;
             var ErrMsg: string): longint;
 
@@ -353,7 +353,7 @@ begin
     end;
 end;
 
-function TFitServerStub.FindGaussesSequentially(var ErrMsg: string): longint;
+function TFitServerStub.MinimizeNumberOfCurves(var ErrMsg: string): longint;
 begin
     try
         Result := -2;
@@ -371,7 +371,7 @@ begin
     try
         Result := 0;
         ErrMsg := '';
-        ErrMsg := Server.FindGaussesSequentially;
+        ErrMsg := Server.MinimizeNumberOfCurves;
     except
         on E: EUserException do
         begin

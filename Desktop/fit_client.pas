@@ -107,8 +107,8 @@ type
         FNeutronPointsSet: TTitlePointsSet;
         { Region of given profile data with which user is working at the given moment. }
         FSelectedArea:   TTitlePointsSet;
-        { Sum of all model specimens which is compared with experimental data. }
-        FGaussProfile:   TTitlePointsSet;
+        { Sum of all model curces which is compared with experimental data. }
+        FCurveProfile:   TTitlePointsSet;
         FDeltaProfile:   TTitlePointsSet;
         { Set of points selected by user. }
         FSelectedPoints: TTitlePointsSet;
@@ -117,11 +117,11 @@ type
         { List of point pairs which limit interval of R-factor calculation. 
           Always must be displayed in order to show user in which mode R-factor is calculated. }
         FRFactorIntervals: TTitlePointsSet;
-        { Positions of pattern specimens. Only X-coordinates are used. }
+        { Positions of curves. Only X-coordinates are used. }
         FCurvePositions: TTitlePointsSet;
-        { Containers of calculated pattern specimens. Each object contains data of specimen curve. }
+        { Containers of calculated curves. Each object contains data of specimen curve. }
         FCurvesList:     TSelfCopiedCompList;
-        { Containers of parameters of pattern specimens. }
+        { Containers of parameters of curves. }
         FSpecimenList:   TMSCRSpecimenList;
         { TODO: remove this attribute. }
         FWaveLength:     double;
@@ -299,7 +299,7 @@ type
         procedure SubtractBackground(Auto: boolean);
         procedure DoAllAutomatically;
         procedure FindGausses;
-        procedure FindGaussesSequentially;
+        procedure MinimizeNumberOfCurves;
         procedure FindPeakBounds;
         procedure FindBackPoints;
         procedure FindPeakPositions;
@@ -389,7 +389,7 @@ begin
     FSelectedArea.Free;
     FCurvesList.Free;
     FDeltaProfile.Free;
-    FGaussProfile.Free;
+    FCurveProfile.Free;
     FSelectedPoints.Free;
     NeutronPointsSet.Free;
     FRFactorIntervals.Free;
@@ -542,10 +542,10 @@ end;
 procedure TFitClient.RemoveGaussProfile;
 begin
     //  dopuskaetsya ravenstvo nil
-    FToRefresh := FGaussProfile;
+    FToRefresh := FCurveProfile;
     Hide;
-    FGaussProfile.Free;
-    FGaussProfile := nil;
+    FCurveProfile.Free;
+    FCurveProfile := nil;
 end;
 
 procedure TFitClient.RemoveDeltaProfile;
@@ -635,11 +635,11 @@ end;
 procedure TFitClient.UpdateAll;
 begin
     RemoveGaussProfile;
-    FGaussProfile := FitProxy.GetCalcProfilePointsSet;
-    if Assigned(FGaussProfile) and (FGaussProfile.PointsCount <> 0) then
+    FCurveProfile := FitProxy.GetCalcProfilePointsSet;
+    if Assigned(FCurveProfile) and (FCurveProfile.PointsCount <> 0) then
     begin
-        FGaussProfile.FTitle := SummarizedName;
-        FGaussProfile.Lambda := FWaveLength;
+        FCurveProfile.FTitle := SummarizedName;
+        FCurveProfile.Lambda := FWaveLength;
         PlotGaussProfile;
     end;
 
@@ -818,8 +818,8 @@ begin
         FSelectedArea.Lambda := AWaveLength;
     if Assigned(FSelectedPoints) then
         FSelectedPoints.Lambda := AWaveLength;
-    if Assigned(FGaussProfile) then
-        FGaussProfile.Lambda := AWaveLength;
+    if Assigned(FCurveProfile) then
+        FCurveProfile.Lambda := AWaveLength;
     if Assigned(FDeltaProfile) then
         FDeltaProfile.Lambda := AWaveLength;
     if Assigned(FCurvesList) then
@@ -963,7 +963,7 @@ end;
 procedure TFitClient.PlotGaussProfile;
 begin
     if Assigned(FFitViewer) then
-        FFitViewer.PlotGaussProfile(Self, FGaussProfile);
+        FFitViewer.PlotGaussProfile(Self, FCurveProfile);
 end;
 
 procedure TFitClient.PlotDeltaProfile;
@@ -1257,12 +1257,12 @@ begin
     FAsyncState := AsyncWorks;
 end;
 
-procedure TFitClient.FindGaussesSequentially;
+procedure TFitClient.MinimizeNumberOfCurves;
 begin
     Assert(Assigned(FitProxy));
     //???    FitProxy.SetCurvePositions(FCurvePositions);
     //???    FitProxy.SetRFactorIntervals(FRFactorIntervals);
-    FitProxy.FindGaussesSequentially;
+    FitProxy.MinimizeNumberOfCurves;
     FAsyncState := AsyncWorks;
 end;
 

@@ -28,7 +28,7 @@ const
     FinishPosName: string = 'Finish Pos.';
 
 type
-    { Defines container for curve instances (specimens). 
+    { Defines container for curves.
       Allows to input/output angles in different representations. 
       In copying data from grid verifies them and adds to the list 
       only data for which corresponding rows are correct. }
@@ -48,7 +48,7 @@ type
         procedure CopyParameters(const Dest: TObject); override;
     end;
 
-    { Container of curve parameters (specimens) which is stored in XML-stream. }
+    { Container of curves which is stored in XML-stream. }
     Parameters_list = class(TComponent)
     private
         FParameters: TMSCRSpecimenList;

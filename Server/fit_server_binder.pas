@@ -294,7 +294,7 @@ begin
   if hasObjCntrl then
     objCntrl.Activate();
   try
-    returnVal := tmpObj.MinimizeNumberOfSpecimens(ProblemID);
+    returnVal := tmpObj.MinimizeNumberOfCurves(ProblemID);
     if Assigned(TObject(returnVal)) then
       callCtx.AddObjectToFree(TObject(returnVal));
     
@@ -2606,7 +2606,7 @@ begin
   RegisterVerbHandler('SubtractBackground',{$IFDEF FPC}@{$ENDIF}SubtractAllBackgroundHandler);
   RegisterVerbHandler('DoAllAutomatically',{$IFDEF FPC}@{$ENDIF}DoAllAutomaticallyHandler);
   RegisterVerbHandler('MinimizeDifference',{$IFDEF FPC}@{$ENDIF}MinimizeDifferenceHandler);
-  RegisterVerbHandler('MinimizeNumberOfSpecimens',{$IFDEF FPC}@{$ENDIF}MinimizeNumberOfSpecimensHandler);
+  RegisterVerbHandler('MinimizeNumberOfCurves',{$IFDEF FPC}@{$ENDIF}MinimizeNumberOfSpecimensHandler);
   RegisterVerbHandler('FindSpecimenIntervals',{$IFDEF FPC}@{$ENDIF}FindSpecimenIntervalsHandler);
   RegisterVerbHandler('FindSpecimenPositions',{$IFDEF FPC}@{$ENDIF}FindSpecimenPositionsHandler);
   RegisterVerbHandler('FindBackPoints',{$IFDEF FPC}@{$ENDIF}FindBackPointsHandler);

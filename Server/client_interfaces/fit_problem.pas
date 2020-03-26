@@ -110,7 +110,7 @@ type
 {$IFNDEF EXCLUDE_SOMETHING}
         function FindGaussesAgain: string;
 {$ENDIF}
-        function FindGaussesSequentially: string;
+        function MinimizeNumberOfCurves: string;
         function FindPeakBounds: string;
         function FindBackPoints: string;
         function FindPeakPositions: string;
@@ -847,14 +847,14 @@ end;
 
 {$ENDIF}
 
-function TFitProblem.FindGaussesSequentially: string;
+function TFitProblem.MinimizeNumberOfCurves: string;
 var
     Res:    longint;
     ErrMsg: string;
     R:      TResult;
 begin
     Assert(Assigned(FitStub));
-    R := FitStub.MinimizeNumberOfSpecimens(FProblemId);
+    R := FitStub.MinimizeNumberOfCurves(FProblemId);
     if not Assigned(R) then
         raise Exception.Create(OutOfServerResources);
     Res    := R.ErrCode;

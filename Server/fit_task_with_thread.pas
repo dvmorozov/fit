@@ -63,12 +63,12 @@ type
 
         { Asynchronous long-term operations. }
 
-        { Fits pattern specimens starting from given parameter set (initially or repeatedly). }
+        { Fits curves starting from given parameter set (initially or repeatedly). }
         procedure FindGausses; override;
         procedure FindGaussesAgain; override;
-        { Searches set of pattern specimens (curves) fitting exprerimental data with given accuracy
-          sequentially decreasing number of curves. }
-        procedure FindGaussesSequentially; override;
+        { Searches set of pattern curves fitting exprerimental data with given accuracy
+          sequentially decreasing number of such curves. }
+        procedure MinimizeNumberOfCurves; override;
         property DoneDisabled: boolean read FDoneDisabled write FDoneDisabled;
     end;
 
@@ -113,7 +113,7 @@ begin
     end;
 end;
 
-procedure TFitTaskWithThread.FindGaussesSequentially;
+procedure TFitTaskWithThread.MinimizeNumberOfCurves;
 begin
     RecreateMainCalcThread(FindGaussesSequentiallyAlg, Done);
 end;

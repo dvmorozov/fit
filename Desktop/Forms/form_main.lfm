@@ -1138,7 +1138,7 @@ object FormMain: TFormMain
       end
     end
     object Fitting: TMenuItem
-      Caption = '&Fitting'
+      Caption = '&Fit'
       object DoAllAuto: TMenuItem
         Action = ActionDoAllAuto
         ImageIndex = 6
@@ -2214,7 +2214,7 @@ object FormMain: TFormMain
     end
     object ActionFitMinNumberOfSpec: TAction
       Category = 'Fitting'
-      Caption = 'Minimize Number of Specimens'
+      Caption = 'Minimize Number of Curves'
       OnExecute = ActionFitMinNumberOfSpecExecute
     end
     object ActionFitMinDifference: TAction

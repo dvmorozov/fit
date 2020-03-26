@@ -27,7 +27,7 @@ const
 //'реальной кривой достигает минимума.'
         ),
         ('HintMinimizeNumberOfSpecimens1',
-'Minimize number of pattern specimens on the condition that the difference '    +
+'Minimize number of curves on the condition that the difference '    +
 'between experimental and calculated data in the specimen application interval '+
 'does not exceed the given value.'
         ),
@@ -35,8 +35,8 @@ const
 //'Поиск значений параметров, при которых фактор расходимости не больше '         +
 //'максимально допустимого и количество экземпляров паттерна минимально.<BR>'     +
 'This algorithm combines minimization of the difference factor with '           +
-'consecutive decreasing of number of pattern specimens. Thus the algorithm '    +
-'suited for initially excessive number of specimens. This may be useful in the '+
+'consecutive decreasing of number of curves. Thus the algorithm '    +
+'suited for initially excessive number of curves. This may be useful in the '+
 'cases of complex profile, when it is not possible to select specimen '         +
 'positions unambiguously. The algorithm requires defining of the maximum '      +
 'acceptable value of difference factor for each of specimen application '       +

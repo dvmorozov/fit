@@ -13,7 +13,7 @@ type
         procedure ShowCurMin(Min: double);
         procedure ShowProfile();
         procedure Done;
-        procedure FindPeakBoundsDone;
+        procedure ComputeCurveBoundsDone;
         procedure FindBackPointsDone;
         procedure FindPeakPositionsDone;
     end;

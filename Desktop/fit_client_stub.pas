@@ -31,7 +31,7 @@ type
         procedure ShowCurMin(Min: double);
         procedure ShowProfile;
         procedure Done;
-        procedure FindPeakBoundsDone;
+        procedure ComputeCurveBoundsDone;
         procedure FindBackPointsDone;
         procedure FindPeakPositionsDone;
 
@@ -61,10 +61,10 @@ begin
     TFitClient(FitClient).Done;
 end;
 
-procedure TFitClientStub.FindPeakBoundsDone;
+procedure TFitClientStub.ComputeCurveBoundsDone;
 begin
     Assert(Assigned(FitClient));
-    TFitClient(FitClient).FindPeakBoundsDone;
+    TFitClient(FitClient).ComputeCurveBoundsDone;
 end;
 
 procedure TFitClientStub.FindBackPointsDone;

@@ -28,7 +28,7 @@ type
         procedure ShowCurMin(Min: double);
         procedure ShowProfile;
         procedure Done;
-        procedure FindPeakBoundsDone;
+        procedure ComputeCurveBoundsDone;
         procedure FindBackPointsDone;
         procedure FindPeakPositionsDone;
         { Pointer to the client part receiving messages. }
@@ -76,7 +76,7 @@ begin
     FitClientStub.Done;
 end;
 
-procedure TFitServerProxy.FindPeakBoundsDone;
+procedure TFitServerProxy.ComputeCurveBoundsDone;
 begin
     try
         Assert(Assigned(FitClientStub));
@@ -86,7 +86,7 @@ begin
         else
             raise;
     end;
-    FitClientStub.FindPeakBoundsDone;
+    FitClientStub.ComputeCurveBoundsDone;
 end;
 
 procedure TFitServerProxy.FindBackPointsDone;

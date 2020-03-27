@@ -931,7 +931,7 @@ begin
     end;
     //??? el-t menyu d.b. zapreschen do okonchaniya rascheta;
     // proverit' vse analogichnye sluchai
-    FitClientApp_.FitClient.FindBackPoints;
+    FitClientApp_.FitClient.ComputeBackgroundPoints;
 end;
 
 procedure TFormMain.ActionSelBackVisExecute(Sender: TObject);
@@ -1079,7 +1079,7 @@ begin
     end;
     //??? el-t menyu d.b. zapreschen do okonchaniya rascheta;
     // proverit' vse analogichnye sluchai
-    FitClientApp_.FitClient.FindPeakBounds;
+    FitClientApp_.FitClient.ComputeCurveBounds;
 end;
 
 procedure TFormMain.ActionSelRFactorIntervalsVisExecute(Sender: TObject);

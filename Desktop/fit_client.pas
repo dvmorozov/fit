@@ -288,7 +288,7 @@ type
         procedure ShowCurMin(Min: double);
         procedure ShowProfile;
         procedure Done;
-        procedure FindPeakBoundsDone;
+        procedure ComputeCurveBoundsDone;
         procedure FindBackPointsDone;
         procedure FindPeakPositionsDone;
 
@@ -300,8 +300,8 @@ type
         procedure DoAllAutomatically;
         procedure MinimizeDifference;
         procedure MinimizeNumberOfCurves;
-        procedure FindPeakBounds;
-        procedure FindBackPoints;
+        procedure ComputeCurveBounds;
+        procedure ComputeBackgroundPoints;
         procedure FindPeakPositions;
         procedure AllPointsAsPeakPositions;
         procedure StopAsyncOper;
@@ -709,7 +709,7 @@ begin
         FFitViewer.ShowHint(HintDone);
 end;
 
-procedure TFitClient.FindPeakBoundsDone;
+procedure TFitClient.ComputeCurveBoundsDone;
 begin
     //  zdes' eto nedopustimye sostoyaniya
     Assert(Assigned(FitProxy));
@@ -1266,17 +1266,17 @@ begin
     FAsyncState := AsyncWorks;
 end;
 
-procedure TFitClient.FindPeakBounds;
+procedure TFitClient.ComputeCurveBounds;
 begin
     Assert(Assigned(FitProxy));
-    FitProxy.FindPeakBounds;
+    FitProxy.ComputeCurveBounds;
     FAsyncState := AsyncWorks;
 end;
 
-procedure TFitClient.FindBackPoints;
+procedure TFitClient.ComputeBackgroundPoints;
 begin
     Assert(Assigned(FitProxy));
-    FitProxy.FindBackPoints;
+    FitProxy.ComputeBackgroundPoints;
     FAsyncState := AsyncWorks;
 end;
 

@@ -45,7 +45,7 @@ type
         procedure ShowCurMinSync;
         procedure ShowProfileSync;
         procedure DoneSync;
-        procedure FindPeakBoundsDoneSync;
+        procedure ComputeCurveBoundsDoneSync;
         procedure FindBackPointsDoneSync;
         procedure FindPeakPositionsDoneSync;
 
@@ -60,7 +60,7 @@ type
         procedure ShowCurMin(Min: double); override;
         procedure ShowProfile; override;
         procedure Done; override;
-        procedure FindPeakBoundsDone; override;
+        procedure ComputeCurveBoundsDone; override;
         procedure FindBackPointsDone; override;
         procedure FindPeakPositionsDone; override;
 
@@ -101,7 +101,7 @@ begin
     { Assigns callbacks. }
     FMainCalcThread.SetSyncMethods(
         ATask, ShowCurMinSync, ShowProfileSync, DoneSync,
-        FindPeakBoundsDoneSync, FindBackPointsDoneSync, FindPeakPositionsDoneSync,
+        ComputeCurveBoundsDoneSync, FindBackPointsDoneSync, FindPeakPositionsDoneSync,
         AAllDone);
     { Sets appropriate state befor starting thread. }
     SetState(AsyncOperation);
@@ -177,9 +177,9 @@ begin
     FMainCalcThread.Done;
 end;
 
-procedure TFitServerWithThread.FindPeakBoundsDone;
+procedure TFitServerWithThread.ComputeCurveBoundsDone;
 begin
-    FMainCalcThread.FindPeakBoundsDone;
+    FMainCalcThread.ComputeCurveBoundsDone;
 end;
 
 procedure TFitServerWithThread.FindBackPointsDone;
@@ -207,9 +207,9 @@ begin
     inherited Done;
 end;
 
-procedure TFitServerWithThread.FindPeakBoundsDoneSync;
+procedure TFitServerWithThread.ComputeCurveBoundsDoneSync;
 begin
-    inherited FindPeakBoundsDone;
+    inherited ComputeCurveBoundsDone;
 end;
 
 procedure TFitServerWithThread.FindBackPointsDoneSync;

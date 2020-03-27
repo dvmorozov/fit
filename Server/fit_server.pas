@@ -178,7 +178,7 @@ type
         { TODO: implement. }
         procedure Done; virtual;
         { TODO: implement. }
-        procedure FindPeakBoundsDone; virtual;
+        procedure ComputeCurveBoundsDone; virtual;
         { TODO: implement. }
         procedure FindBackPointsDone; virtual;
         { TODO: implement. }
@@ -187,8 +187,8 @@ type
         { The algorithm methods. They are executed asynchronously. }
 
         { Calculates boundaries of R-factor intervals based on data obtained from FindPeaksInternal. }
-        procedure FindPeakBoundsAlg;
-        procedure FindPeakBoundsDoneProcActual;
+        procedure ComputeCurveBoundsAlg;
+        procedure ComputeCurveBoundsDoneProcActual;
         { Calculates background points. }
         procedure FindBackPointsAlg;
         procedure FindBackPointsDoneProcActual;
@@ -353,9 +353,9 @@ type
           of specimens. }
         function MinimizeNumberOfCurves: string; virtual;
         { Searches for intervals of application of curves. }
-        function FindPeakBounds: string; virtual;
+        function ComputeCurveBounds: string; virtual;
         { Searches for background points. }
-        function FindBackPoints: string; virtual;
+        function ComputeBackgroundPoints: string; virtual;
         { Searches for curve positions. }
         function FindPeakPositions: string; virtual;
         function AllPointsAsPeakPositions: string; virtual;
@@ -1195,7 +1195,7 @@ begin
         FCurvePositions.AddNewPoint(Data.PointXCoord[i], Data.PointYCoord[i]);
 end;
 
-procedure TFitServer.FindPeakBoundsAlg;
+procedure TFitServer.ComputeCurveBoundsAlg;
 var
     i:     longint;
     Data:  TPointsSet;
@@ -1267,18 +1267,18 @@ begin
     end;
 end;
 
-procedure TFitServer.FindPeakBoundsDoneProcActual;
+procedure TFitServer.ComputeCurveBoundsDoneProcActual;
 begin
     try
         // iz AsyncOperation perehodit v prezhnee sostoyanie
         SetState(FSavedState);
         FState := FSavedState; // trebuetsya pri perehode iz AsyncOperation
-        // !!! d.b. zdes', a ne v FindPeakBounds, t.k.
+        // !!! d.b. zdes', a ne v ComputeCurveBounds, t.k.
         // etot metod vyzyvaetsya iz naslednika !!!
         GoToReadyForFit;
 {$IFDEF FIT}
         if (not FDoneDisabled) and Assigned(FitProxy) then
-            FitProxy.FindPeakBoundsDone;
+            FitProxy.ComputeCurveBoundsDone;
 {$ENDIF}
     except
         on E: Exception do
@@ -1352,7 +1352,7 @@ begin
         FindPeakPositionsDoneProcActual);
 end;
 
-function TFitServer.FindPeakBounds: string;
+function TFitServer.ComputeCurveBounds: string;
 begin
     Result := '';
     if State = AsyncOperation then
@@ -1366,10 +1366,10 @@ begin
             DataMustBeSet);
 
     FStartTime := Now;
-    RecreateMainCalcThread(FindPeakBoundsAlg, FindPeakBoundsDoneProcActual);
+    RecreateMainCalcThread(ComputeCurveBoundsAlg, ComputeCurveBoundsDoneProcActual);
 end;
 
-function TFitServer.FindBackPoints: string;
+function TFitServer.ComputeBackgroundPoints: string;
 begin
     Result := '';
     if State = AsyncOperation then
@@ -1980,7 +1980,7 @@ begin
 
 end;
 
-procedure TFitServer.FindPeakBoundsDone;
+procedure TFitServer.ComputeCurveBoundsDone;
 begin
 
 end;
@@ -2084,7 +2084,7 @@ begin
     if FRFactorIntervals.PointsCount < 2 then
     begin
         FRFactorIntervals.Clear;
-        FindPeakBoundsAlg;
+        ComputeCurveBoundsAlg;
     end;
     if FCurvePositions.PointsCount = 0 then
         FindPeakPositionsForAutoAlg;
@@ -2133,7 +2133,7 @@ begin
     if FRFactorIntervals.PointsCount < 2 then
     begin
         FRFactorIntervals.Clear;
-        FindPeakBoundsAlg;
+        ComputeCurveBoundsAlg;
     end;
     if FCurvePositions.PointsCount = 0 then
         FindPeakPositionsForAutoAlg;
@@ -2428,7 +2428,7 @@ begin
     if FCurvePositions.PointsCount = 0 then
         FindPeakPositionsForAutoAlg;
 
-    FindPeakBoundsAlg;
+    ComputeCurveBoundsAlg;
     FindGaussesSequentiallyAlg;
 end;
 
@@ -2547,7 +2547,7 @@ begin
          // avtomaticheskiy poisk meschaet udalyat' tochki,
          // poetomu poka otklyuchen
          // FRFactorIntervals.Clear;
-         // FindPeakBoundsAlg;
+         // ComputeCurveBoundsAlg;
     ;
     // else
     // begin

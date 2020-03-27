@@ -135,9 +135,9 @@ type
         { Returns hint or error message received from the server. }
         function MinimizeNumberOfCurves: string;
         { Returns hint or error message received from the server. }
-        function FindPeakBounds: string;
+        function ComputeCurveBounds: string;
         { Returns hint or error message received from the server. }
-        function FindBackPoints: string;
+        function ComputeBackgroundPoints: string;
         { Returns hint or error message received from the server. }
         function FindPeakPositions: string;
         { Returns hint or error message received from the server. }

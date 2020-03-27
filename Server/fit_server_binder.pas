@@ -423,7 +423,7 @@ begin
   if hasObjCntrl then
     objCntrl.Activate();
   try
-    returnVal := tmpObj.FindBackPoints(ProblemID);
+    returnVal := tmpObj.ComputeBackgroundPoints(ProblemID);
     if Assigned(TObject(returnVal)) then
       callCtx.AddObjectToFree(TObject(returnVal));
     
@@ -2609,7 +2609,7 @@ begin
   RegisterVerbHandler('MinimizeNumberOfCurves',{$IFDEF FPC}@{$ENDIF}MinimizeNumberOfSpecimensHandler);
   RegisterVerbHandler('FindSpecimenIntervals',{$IFDEF FPC}@{$ENDIF}FindSpecimenIntervalsHandler);
   RegisterVerbHandler('FindSpecimenPositions',{$IFDEF FPC}@{$ENDIF}FindSpecimenPositionsHandler);
-  RegisterVerbHandler('FindBackPoints',{$IFDEF FPC}@{$ENDIF}FindBackPointsHandler);
+  RegisterVerbHandler('ComputeBackgroundPoints',{$IFDEF FPC}@{$ENDIF}FindBackPointsHandler);
   RegisterVerbHandler('StopAsyncOper',{$IFDEF FPC}@{$ENDIF}StopAsyncOperHandler);
   RegisterVerbHandler('AsyncOper',{$IFDEF FPC}@{$ENDIF}AsyncOperHandler);
   RegisterVerbHandler('SelectArea',{$IFDEF FPC}@{$ENDIF}SelectAreaHandler);

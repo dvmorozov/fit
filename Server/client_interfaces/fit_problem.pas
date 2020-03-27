@@ -111,8 +111,8 @@ type
         function FindGaussesAgain: string;
 {$ENDIF}
         function MinimizeNumberOfCurves: string;
-        function FindPeakBounds: string;
-        function FindBackPoints: string;
+        function ComputeCurveBounds: string;
+        function ComputeBackgroundPoints: string;
         function FindPeakPositions: string;
         function AllPointsAsPeakPositions: string;
 {$IFDEF FITCGI}
@@ -867,7 +867,7 @@ begin
     Result := ErrMsg;
 end;
 
-function TFitProblem.FindPeakBounds: string;
+function TFitProblem.ComputeCurveBounds: string;
 var
     Res:    longint;
     ErrMsg: string;
@@ -887,14 +887,14 @@ begin
     Result := ErrMsg;
 end;
 
-function TFitProblem.FindBackPoints: string;
+function TFitProblem.ComputeBackgroundPoints: string;
 var
     Res:    longint;
     ErrMsg: string;
     R:      TResult;
 begin
     Assert(Assigned(FitStub));
-    R := FitStub.FindBackPoints(FProblemId);
+    R := FitStub.ComputeBackgroundPoints(FProblemId);
     if not Assigned(R) then
         raise Exception.Create(OutOfServerResources);
     Res    := R.ErrCode;

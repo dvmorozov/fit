@@ -29,7 +29,7 @@ type
             const ProblemID: integer): TResult;
         function FindSpecimenIntervals(const ProblemID: integer): TResult;
         function FindSpecimenPositions(const ProblemID: integer): TResult;
-        function FindBackPoints(const ProblemID: integer): TResult;
+        function ComputeBackgroundPoints(const ProblemID: integer): TResult;
         function StopAsyncOper(const ProblemID: integer): TResult;
         function AsyncOper(const ProblemID: integer): TBoolResult;
         function SelectArea(const StartPointIndex: integer;
@@ -310,14 +310,14 @@ begin
     end;
 end;
 
-function TFitServer_Proxy.FindBackPoints(const ProblemID: integer): TResult;
+function TFitServer_Proxy.ComputeBackgroundPoints(const ProblemID: integer): TResult;
 var
     locSerializer: IFormatterClient;
     strPrmName:    string;
 begin
     locSerializer := GetSerializer();
     try
-        locSerializer.BeginCall('FindBackPoints', GetTarget(), (Self as ICallContext));
+        locSerializer.BeginCall('ComputeBackgroundPoints', GetTarget(), (Self as ICallContext));
         locSerializer.Put('ProblemID', TypeInfo(integer), ProblemID);
         locSerializer.EndCall();
 

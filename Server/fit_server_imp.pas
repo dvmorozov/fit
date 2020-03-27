@@ -45,7 +45,7 @@ Type
     function FindSpecimenPositions(
       const  ProblemID : integer
     ):TResult;
-    function FindBackPoints(
+    function ComputeBackgroundPoints(
       const  ProblemID : integer
     ):TResult;
     function StopAsyncOper(
@@ -510,7 +510,7 @@ Begin
             LeaveCriticalsection(CS);
         end;
         Problem := TFitServerApp(ProblemID);
-        Result.ErrCode := Problem.FitStub.FindPeakBounds(Result.ErrMsg);
+        Result.ErrCode := Problem.FitStub.ComputeCurveBounds(Result.ErrMsg);
     except
         on E: EUserException do
         begin
@@ -570,7 +570,7 @@ Begin
     end;
 End;
 
-function TFitServer_ServiceImp.FindBackPoints(
+function TFitServer_ServiceImp.ComputeBackgroundPoints(
     const  ProblemID : integer
     ):TResult;
 var Problem: TFitServerApp;
@@ -598,7 +598,7 @@ Begin
             LeaveCriticalsection(CS);
         end;
         Problem := TFitServerApp(ProblemID);
-        Result.ErrCode := Problem.FitStub.FindBackPoints(Result.ErrMsg);
+        Result.ErrCode := Problem.FitStub.ComputeBackgroundPoints(Result.ErrMsg);
     except
         on E: EUserException do
         begin

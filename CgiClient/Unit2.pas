@@ -23,7 +23,7 @@ type
         //  vysyvaetsya vo vseh sluchayah !!!
         procedure GoToBackground;
         procedure BackMore;
-        procedure GenerateBackPoints;
+        procedure ComputeBackgroundPoints;
         procedure SelectBackPoint;
 
         procedure GoToPattern;
@@ -40,7 +40,7 @@ type
         procedure UpdateSpecimen;
 
         procedure GoToSpecimenIntervals;
-        procedure GenerateSpecimenIntervals;
+        procedure ComputeCurveBounds;
         procedure SaveSpecParameters;
 
         procedure GoToStartPage(Capt: string; Hint: string);
@@ -439,7 +439,7 @@ begin
         BackMore
     else
     if Command = 'generate_back_points' then
-        GenerateBackPoints
+        ComputeBackgroundPoints
     else
     if Command = 'select_back_point' then
         SelectBackPoint
@@ -516,7 +516,7 @@ begin
         GenerateSpecimenPositions
     else
     if Command = 'generate_specimen_intervals' then
-        GenerateSpecimenIntervals
+        ComputeCurveBounds
     else
     if Command = 'go_to_specimen_parameters' then
         GoToSpecimenParameters
@@ -1858,7 +1858,7 @@ begin
     CGIDatamodule2.AddResponseLn(Template);
 end;
 
-procedure TCGIDatamodule2.GenerateBackPoints;
+procedure TCGIDatamodule2.ComputeBackgroundPoints;
 var
     BackF: string;
     CurChunkNum: longint;
@@ -1909,7 +1909,7 @@ begin
     //  vypolnenie zaprosa
     if BackF <> '' then
         Proxy.SetBackFactor(BackFactor);
-    Proxy.FindBackPoints;
+    Proxy.ComputeBackgroundPoints;
     //GoToBackground;
     //  protsess asinhronnyi, poetomu perehodim k oknu progressa;
     //  chtenie schablona i zapolnenie ego parametrov
@@ -4633,7 +4633,7 @@ begin
     CGIDatamodule2.AddResponseLn(Template);
 end;
 
-procedure TCGIDatamodule2.GenerateSpecimenIntervals;
+procedure TCGIDatamodule2.ComputeCurveBounds;
 var
     CurChunkNum: longint;
     BackF:    string;//???сделать извлечение и установку
@@ -4667,7 +4667,7 @@ begin
         raise Exception.Create(ChunkNumberIsAbsent);
     end;
     //  vypolnenie zaprosa (poluchenie dannyh fona)
-    Proxy.FindPeakBounds;
+    Proxy.ComputeCurveBounds;
     //GoToSpecimenIntervals;
     //  protsess asinhronnyi, poetomu perehodim k oknu progressa;
     //  chtenie schablona i zapolnenie ego parametrov

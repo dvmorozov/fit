@@ -137,7 +137,7 @@ type
         function MinimizeNumberOfCurves(const ProblemID: integer): TResult;
         function FindSpecimenIntervals(const ProblemID: integer): TResult;
         function FindSpecimenPositions(const ProblemID: integer): TResult;
-        function FindBackPoints(const ProblemID: integer): TResult;
+        function ComputeBackgroundPoints(const ProblemID: integer): TResult;
         function StopAsyncOper(const ProblemID: integer): TResult;
         function AsyncOper(const ProblemID: integer): TBoolResult;
         function SelectArea(const StartPointIndex: integer;
@@ -437,21 +437,21 @@ begin
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'FindBackPoints',
+        'ComputeBackgroundPoints',
         '_E_N_',
-        'FindBackPoints'
+        'ComputeBackgroundPoints'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'FindBackPoints',
+        'ComputeBackgroundPoints',
         'FORMAT_Input_EncodingStyle',
         'literal'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'FindBackPoints',
+        'ComputeBackgroundPoints',
         'FORMAT_OutputEncodingStyle',
         'literal'
         );

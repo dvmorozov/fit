@@ -46,7 +46,7 @@ type
         procedure ShowCurMinSync;
         procedure ShowProfileSync;
         procedure DoneProcSync;
-        procedure FindPeakBoundsDoneSync;
+        procedure ComputeCurveBoundsDoneSync;
         procedure FindBackPointsDoneSync;
         procedure FindPeakPositionsDoneSync;
 
@@ -94,7 +94,7 @@ begin
     { Assignment of callbacks. }
     FMainCalcThread.SetSyncMethods(
         ATask, ShowCurMinSync, ShowProfileSync, DoneProcSync,
-        FindPeakBoundsDoneSync, FindBackPointsDoneSync, FindPeakPositionsDoneSync,
+        ComputeCurveBoundsDoneSync, FindBackPointsDoneSync, FindPeakPositionsDoneSync,
         AAllDone);
     { Start thread. }
     FMainCalcThread.Resume;
@@ -211,7 +211,7 @@ begin
         ServerDoneProc;
 end;
 
-procedure TFitTaskWithThread.FindPeakBoundsDoneSync;
+procedure TFitTaskWithThread.ComputeCurveBoundsDoneSync;
 begin
 
 end;

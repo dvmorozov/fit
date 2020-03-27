@@ -422,7 +422,7 @@ Begin
             LeaveCriticalsection(CS);
         end;
         Problem := TFitServerApp(ProblemID);
-        Result.ErrCode := Problem.FitStub.FindGausses(Result.ErrMsg);
+        Result.ErrCode := Problem.FitStub.MinimizeDifference(Result.ErrMsg);
     except
         on E: EUserException do
         begin

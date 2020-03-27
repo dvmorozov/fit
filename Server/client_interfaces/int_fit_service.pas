@@ -127,7 +127,7 @@ type
         { Returns hint or error message received from the server. }
         function DoAllAutomatically: string;
         { Returns hint or error message received from the server. }
-        function FindGausses: string;
+        function MinimizeDifference: string;
 {$IFNDEF EXCLUDE_SOMETHING}
         { Returns hint or error message received from the server. }
         function FindGaussesAgain: string;

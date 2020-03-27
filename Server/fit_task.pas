@@ -231,7 +231,7 @@ type
         procedure CalculateProfile;
 
         { Fits curves starting from given parameter set (initially or repeatedly). }
-        procedure FindGausses; virtual;
+        procedure MinimizeDifference; virtual;
         procedure FindGaussesAgain; virtual;
         { Searches set of curves fitting exprerimental data with given
           accuracy sequentially decreasing number of such curves. }
@@ -1595,7 +1595,7 @@ end;
 
 {$hints on}
 
-procedure TFitTask.FindGausses;
+procedure TFitTask.MinimizeDifference;
    //var    i: LongInt;
    //GP: TPointsSet;
 begin

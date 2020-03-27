@@ -64,7 +64,7 @@ type
         { Asynchronous long-term operations. }
 
         { Fits curves starting from given parameter set (initially or repeatedly). }
-        procedure FindGausses; override;
+        procedure MinimizeDifference; override;
         procedure FindGaussesAgain; override;
         { Searches set of pattern curves fitting exprerimental data with given accuracy
           sequentially decreasing number of such curves. }
@@ -127,7 +127,7 @@ begin
     RecreateMainCalcThread(Optimization, Done);
 end;
 
-procedure TFitTaskWithThread.FindGausses;
+procedure TFitTaskWithThread.MinimizeDifference;
 begin
     RecreateMainCalcThread(Optimization, Done);
 end;

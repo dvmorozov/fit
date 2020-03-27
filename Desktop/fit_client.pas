@@ -298,7 +298,7 @@ type
         procedure SmoothProfile;
         procedure SubtractBackground(Auto: boolean);
         procedure DoAllAutomatically;
-        procedure FindGausses;
+        procedure MinimizeDifference;
         procedure MinimizeNumberOfCurves;
         procedure FindPeakBounds;
         procedure FindBackPoints;
@@ -1248,12 +1248,12 @@ begin
     FAsyncState := AsyncWorks;
 end;
 
-procedure TFitClient.FindGausses;
+procedure TFitClient.MinimizeDifference;
 begin
     Assert(Assigned(FitProxy));
     //???    FitProxy.SetCurvePositions(FCurvePositions);
     //???    FitProxy.SetRFactorIntervals(FRFactorIntervals);
-    FitProxy.FindGausses;
+    FitProxy.MinimizeDifference;
     FAsyncState := AsyncWorks;
 end;
 

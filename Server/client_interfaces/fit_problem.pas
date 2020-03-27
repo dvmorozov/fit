@@ -106,7 +106,7 @@ type
         function SmoothProfile: string;
         procedure SubtractBackground(Auto: boolean);
         function DoAllAutomatically: string;
-        function FindGausses: string;
+        function MinimizeDifference: string;
 {$IFNDEF EXCLUDE_SOMETHING}
         function FindGaussesAgain: string;
 {$ENDIF}
@@ -804,7 +804,7 @@ begin
     Result := ErrMsg;
 end;
 
-function TFitProblem.FindGausses: string;
+function TFitProblem.MinimizeDifference: string;
 var
     Res:    longint;
     ErrMsg: string;

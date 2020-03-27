@@ -2442,7 +2442,7 @@ begin
     Pair[1][2] := HintMinimizeDifference;
     Template   := ReplaceStrings(Template, Pair, 1);
     Template   := InsertKey(Template, Key);
-    Proxy.FindGausses;
+    Proxy.MinimizeDifference;
     //  vyvod stranitsy
     CGIDatamodule2.AddResponseLn(Template);
 end;

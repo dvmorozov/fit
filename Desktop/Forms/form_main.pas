@@ -790,7 +790,7 @@ procedure TFormMain.ActionFitMinDifferenceExecute(Sender: TObject);
 begin
     ShowHint(HintMain);
     SelSpecPosVis.Checked := False;
-    FitClientApp_.FitClient.FindGausses;
+    FitClientApp_.FitClient.MinimizeDifference;
     ShowHint(HintWait);
 {$IFDEF FITPRO}
     TimerAsync.Enabled := True;

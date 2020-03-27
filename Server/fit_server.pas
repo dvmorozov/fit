@@ -345,7 +345,7 @@ type
         { Completely automatic procedure of finding model curves. }
         function DoAllAutomatically: string; virtual;
         { Performs model fitting (initial or subsequent). Corresponds to MinimizeDifference. }
-        function FindGausses: string; virtual;
+        function MinimizeDifference: string; virtual;
         { Performs model fitting without initialization of application intervals. }
         function FindGaussesAgain: string; virtual;
         { Search for model describing experimental data with given accuracy
@@ -2046,7 +2046,7 @@ begin
     for i := 0 to FTaskList.Count - 1 do
     begin
         FT := TFitTask(FTaskList.Items[i]);
-        FT.FindGausses;
+        FT.MinimizeDifference;
     end;
 end;
 
@@ -2112,7 +2112,7 @@ begin
     RecreateMainCalcThread(FindGaussesAgainAlg, DoneProc);
 end;
 
-function TFitServer.FindGausses: string;
+function TFitServer.MinimizeDifference: string;
 begin
     Result := '';
     if State = AsyncOperation then

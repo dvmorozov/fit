@@ -57,7 +57,7 @@ type
         function SubtractBackground(Auto: boolean;
             var ErrMsg: string): longint;
         function DoAllAutomatically(var ErrMsg: string): longint;
-        function FindGausses(var ErrMsg: string): longint;
+        function MinimizeDifference(var ErrMsg: string): longint;
         function FindGaussesAgain(var ErrMsg: string): longint;
         function MinimizeNumberOfCurves(var ErrMsg: string): longint;
         function FindPeakBounds(var ErrMsg: string): longint;
@@ -279,7 +279,7 @@ begin
     end;
 end;
 
-function TFitServerStub.FindGausses(var ErrMsg: string): longint;
+function TFitServerStub.MinimizeDifference(var ErrMsg: string): longint;
 begin
     try
         Result := -2;
@@ -297,7 +297,7 @@ begin
     try
         Result := 0;
         ErrMsg := '';
-        ErrMsg := Server.FindGausses;
+        ErrMsg := Server.MinimizeDifference;
     except
         on E: EUserException do
         begin

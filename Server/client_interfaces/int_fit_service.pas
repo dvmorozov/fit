@@ -130,7 +130,7 @@ type
         function MinimizeDifference: string;
 {$IFNDEF EXCLUDE_SOMETHING}
         { Returns hint or error message received from the server. }
-        function FindGaussesAgain: string;
+        function MinimizeDifferenceAgain: string;
 {$ENDIF}
         { Returns hint or error message received from the server. }
         function MinimizeNumberOfCurves: string;
@@ -139,7 +139,7 @@ type
         { Returns hint or error message received from the server. }
         function ComputeBackgroundPoints: string;
         { Returns hint or error message received from the server. }
-        function FindPeakPositions: string;
+        function ComputeCurvePositions: string;
         { Returns hint or error message received from the server. }
         function AllPointsAsPeakPositions: string;
 {$IFDEF FITCGI}

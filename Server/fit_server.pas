@@ -180,51 +180,53 @@ type
         { TODO: implement. }
         procedure ComputeCurveBoundsDone; virtual;
         { TODO: implement. }
-        procedure FindBackPointsDone; virtual;
+        procedure ComputeBackgroundPointsDone; virtual;
         { TODO: implement. }
-        procedure FindPeakPositionsDone; virtual;
+        procedure ComputeCurvePositionsDone; virtual;
 
         { The algorithm methods. They are executed asynchronously. }
 
-        { Calculates boundaries of R-factor intervals based on data obtained from FindPeaksInternal. }
+        { Calculates boundaries of R-factor intervals based on data obtained
+          from ComputeCurvePositionsActual. }
         procedure ComputeCurveBoundsAlg;
         procedure ComputeCurveBoundsDoneProcActual;
+        { Calculates reference points for linear cut up the background.
+          The points aren't sorted by X. }
+        function ComputeBackgroundPointsActual(Data: TPointsSet): TPointsSet;
         { Calculates background points. }
-        procedure FindBackPointsAlg;
-        procedure FindBackPointsDoneProcActual;
+        procedure ComputeBackgroundPointsAlg;
+        procedure ComputeBackgroundPointsDoneProcActual;
         { Calculates peak positions which will be taken as specimen positions. }
-        procedure FindPeakPositionsAlg;
+        procedure ComputeCurvePositionsAlg;
         { Selects all points as specimen positions. }
         procedure AllPointsAsPeakPositionsAlg;
-        procedure FindPeakPositionsDoneProcActual;
+        procedure ComputeCurvePositionsDoneProcActual;
 
         { Wrappers for corresponding methods of TFitTask. }
 
-        procedure FindGaussesSequentiallyAlg; virtual;
-        procedure FindGaussesAlg; virtual;
-        procedure FindGaussesAgainAlg; virtual;
+        procedure MinimizeNumberOfCurvesAlg; virtual;
+        procedure MinimizeDifferenceAlg; virtual;
+        procedure MinimizeDifferenceAgainAlg; virtual;
         procedure DoAllAutomaticallyAlg;
 
         { Low-level methods used by algorithms. }
 
-        procedure Smoothing(ANeutronPointsSet: TPointsSet);
+        procedure SmoothProfileActual(ANeutronPointsSet: TPointsSet);
         { Linearly subtracts background at the given interval of points. }
-        procedure SubtractLinearly(Data: TPointsSet; StartIndex: longint;
-            EndIndex: longint);
+        procedure SubtractBackgroundLinearly(
+            Data: TPointsSet; StartIndex: longint; EndIndex: longint);
 
-        { Calculates reference points for linear cut up the background. The points aren't arranged by X. }
-        function FindBackgroundPoints(Data: TPointsSet): TPointsSet;
         { Integrates specimen curve and adds resulting value to the list of results. }
         procedure AddSpecimenToList(Points: TCurvePointsSet;
         { Indexes of start and end points defining boundaries of the peak. }
             StartPointIndex, StopPointIndex: longint);
         { Searches for peak points and return them. }
-        function SelectPeakPoints(SearchMinimums: boolean): TTitlePointsSet;
+        function ComputeCurvePositionsActual(SearchMinimums: boolean): TTitlePointsSet;
         { Fills the list of peak positions for automatic fit. }
-        procedure FindPeakPositionsForAutoAlg;
-        function Integrate(Points: TPointsSet;
+        procedure ComputeCurvePositionsForAutoAlg;
+        function IntegrateWithBoundaries(Points: TPointsSet;
             StartPointIndex, StopPointIndex: longint): double;
-        function IntegrateAll(Points: TPointsSet): double;
+        function Integrate(Points: TPointsSet): double;
         { Calculates the R-factor for FCalcProfile and SelectArea by sum for all subtasks. }
         function GetRFactor: double;
         function GetAbsRFactor: double;
@@ -347,7 +349,7 @@ type
         { Performs model fitting (initial or subsequent). Corresponds to MinimizeDifference. }
         function MinimizeDifference: string; virtual;
         { Performs model fitting without initialization of application intervals. }
-        function FindGaussesAgain: string; virtual;
+        function MinimizeDifferenceAgain: string; virtual;
         { Search for model describing experimental data with given accuracy
           by minimum number of specimens. Sequentially reducing the number
           of specimens. }
@@ -357,7 +359,7 @@ type
         { Searches for background points. }
         function ComputeBackgroundPoints: string; virtual;
         { Searches for curve positions. }
-        function FindPeakPositions: string; virtual;
+        function ComputeCurvePositions: string; virtual;
         function AllPointsAsPeakPositions: string; virtual;
 
         { Control operations. }
@@ -748,12 +750,12 @@ begin
         begin
             // dlya podderzhki vyzova cherez web-interfeys
             if FBackgroundPoints.PointsCount < 2 then
-                Background := FindBackgroundPoints(Data)
+                Background := ComputeBackgroundPointsActual(Data)
             else
                 Background := FBackgroundPoints;
         end
         else
-            Background := FindBackgroundPoints(Data);
+            Background := ComputeBackgroundPointsActual(Data);
         try
             // zaschischaet resursy Background ot poteri
             Assert(Assigned(Background));
@@ -771,10 +773,10 @@ begin
                 // sohranenie intensivnosti posledney tochki dlya
                 // togo, chtoby na sleduyuschem otrezke vychitanie
                 // bylo sdelano korrektno; pri posleduyuschem
-                // primenenii SubtractLinearly v etoy tochke
+                // primenenii SubtractBackgroundLinearly v etoy tochke
                 // nichego krome nulya poluchit'sya ne mozhet
                 SavedI := Data.PointYCoord[EndIndex];
-                SubtractLinearly(Data, StartIndex, EndIndex);
+                SubtractBackgroundLinearly(Data, StartIndex, EndIndex);
                 StartIndex := EndIndex;
                 Data.PointYCoord[EndIndex] := SavedI;
             end;
@@ -808,7 +810,7 @@ end;
    // poetomu na kazhdom shage ischetsya lokal'nyy minimum v storony ot global'nogo;
    // dlya drugih tipov fona dannyy algoritm rabotat' ne budet !!!;
    // !!! dolzhna vozvraschat' korrektnyy ukazatel' ili vybrasyvat' isklyuchenie !!!
-function TFitServer.FindBackgroundPoints(Data: TPointsSet): TPointsSet;
+function TFitServer.ComputeBackgroundPointsActual(Data: TPointsSet): TPointsSet;
 var
     Min, CurMin: double;
     LeftMin, RightMin: double;
@@ -891,7 +893,7 @@ begin
     end;
 end;
 
-function TFitServer.SelectPeakPoints(SearchMinimums: boolean): TTitlePointsSet;
+function TFitServer.ComputeCurvePositionsActual(SearchMinimums: boolean): TTitlePointsSet;
 var
     Data: TPointsSet;
     ExtremumValue: double;
@@ -1037,17 +1039,17 @@ begin
     end;
 end;
 
-procedure TFitServer.FindPeakPositionsForAutoAlg;
+procedure TFitServer.ComputeCurvePositionsForAutoAlg;
 begin
     FCurvePositions.Free;
     FCurvePositions      := nil;
     // vse tochki pikov vybirayutsya v kachestve tochek privyazki krivyh
     // TODO: use special value of TExtremumMode and generalize algorithm.
-    FCurvePositions      := SelectPeakPoints(False);
+    FCurvePositions      := ComputeCurvePositionsActual(False);
     FSpecPosFoundForAuto := True;
 end;
 
-procedure TFitServer.FindPeakPositionsAlg;
+procedure TFitServer.ComputeCurvePositionsAlg;
 var
     ExtremumMode: TExtremumMode;
 
@@ -1086,7 +1088,7 @@ var
                 Data := FExpProfile;
             Assert(Assigned(Data));
             Data.Sort;
-            // iz Peaks, poluchennyh posle vyzova SelectPeakPoints,
+            // iz Peaks, poluchennyh posle vyzova ComputeCurvePositionsActual,
             // isklyuchayutsya vse tochki, krome lokal'nyh maksimumov vnutri
             // kazhdogo pika
             PeakFound := False;
@@ -1128,7 +1130,7 @@ var
         end;
 
     begin
-        Peaks := SelectPeakPoints(Minimums);
+        Peaks := ComputeCurvePositionsActual(Minimums);
         try
             SelectExtremums;
         except
@@ -1158,18 +1160,18 @@ begin
     end;
 end;
 
-procedure TFitServer.FindPeakPositionsDoneProcActual;
+procedure TFitServer.ComputeCurvePositionsDoneProcActual;
 begin
     try
         // iz AsyncOperation perehodit v prezhnee sostoyanie
         SetState(FSavedState);
         FState := FSavedState; // trebuetsya pri perehode iz AsyncOperation
-        // !!! d.b. zdes', a ne v FindPeakPositions, t.k.
+        // !!! d.b. zdes', a ne v ComputeCurvePositions, t.k.
         // etot metod vyzyvaetsya iz naslednika !!!
         GoToReadyForFit;
 {$IFDEF FIT}
         if (not FDoneDisabled) and Assigned(FitProxy) then
-            FitProxy.FindPeakPositionsDone;
+            FitProxy.ComputeCurvePositionsDone;
 {$ENDIF}
     except
         on E: Exception do
@@ -1206,7 +1208,7 @@ begin
     // !!! spisok ne ochischaetsya, chtoby naydennye tochki dobavlyalis'
     // k tochkam vybrannym pol'zovatelem !!!
     Assert(Assigned(FRFactorIntervals));
-    Peaks := SelectPeakPoints(False);
+    Peaks := ComputeCurvePositionsActual(False);
     try
         Assert(Assigned(Peaks));
         // dazhe v samom uzkom pike d.b.
@@ -1223,7 +1225,7 @@ begin
             Data := FExpProfile;
         Assert(Assigned(Data));
         Data.Sort;
-        // iz Peaks, poluchennyh posle vyzova SelectPeakPoints,
+        // iz Peaks, poluchennyh posle vyzova ComputeCurvePositionsActual,
         // isklyuchayutsya vse tochki, krome tochek ogranichivayuschih pik
         First := False;
         for i := 0 to Data.PointsCount - 1 do
@@ -1286,7 +1288,7 @@ begin
     end;
 end;
 
-procedure TFitServer.FindBackPointsAlg;
+procedure TFitServer.ComputeBackgroundPointsAlg;
 var
     Data, Background: TPointsSet;
     i: longint;
@@ -1300,7 +1302,7 @@ begin
     Assert(Assigned(Data));
     Data.Sort;
 
-    Background := FindBackgroundPoints(Data);
+    Background := ComputeBackgroundPointsActual(Data);
     try
         Assert(Assigned(Background));
         // !!! spisok nuzhno ochischat', chtoby iskluchit'
@@ -1316,7 +1318,7 @@ begin
     end;
 end;
 
-function TFitServer.FindPeakPositions: string;
+function TFitServer.ComputeCurvePositions: string;
 begin
     Result := '';
     if State = AsyncOperation then
@@ -1330,8 +1332,8 @@ begin
             DataMustBeSet);
 
     FStartTime := Now;
-    RecreateMainCalcThread(FindPeakPositionsAlg,
-        FindPeakPositionsDoneProcActual);
+    RecreateMainCalcThread(ComputeCurvePositionsAlg,
+        ComputeCurvePositionsDoneProcActual);
 end;
 
 function TFitServer.AllPointsAsPeakPositions: string;
@@ -1349,7 +1351,7 @@ begin
 
     FStartTime := Now;
     RecreateMainCalcThread(AllPointsAsPeakPositionsAlg,
-        FindPeakPositionsDoneProcActual);
+        ComputeCurvePositionsDoneProcActual);
 end;
 
 function TFitServer.ComputeCurveBounds: string;
@@ -1383,10 +1385,10 @@ begin
             DataMustBeSet);
 
     FStartTime := Now;
-    RecreateMainCalcThread(FindBackPointsAlg, FindBackPointsDoneProcActual);
+    RecreateMainCalcThread(ComputeBackgroundPointsAlg, ComputeBackgroundPointsDoneProcActual);
 end;
 
-procedure TFitServer.FindBackPointsDoneProcActual;
+procedure TFitServer.ComputeBackgroundPointsDoneProcActual;
 begin
     try
         // iz AsyncOperation perehodit v prezhnee sostoyanie
@@ -1394,7 +1396,7 @@ begin
         FState := FSavedState; // trebuetsya pri perehode iz AsyncOperation
 {$IFDEF FIT}
         if (not FDoneDisabled) and Assigned(FitProxy) then
-            FitProxy.FindBackPointsDone;
+            FitProxy.ComputeBackgroundPointsDone;
 {$ENDIF}
     except
         on E: Exception do
@@ -1403,7 +1405,7 @@ begin
 end;
 
 // sglazhivanie bez smescheniya
-procedure TFitServer.Smoothing(ANeutronPointsSet: TPointsSet);
+procedure TFitServer.SmoothProfileActual(ANeutronPointsSet: TPointsSet);
 var
     i:      longint;
     // MaxBefore, MaxAfter: Double;
@@ -1480,7 +1482,7 @@ begin
             DataMustBeSet);
 
     try
-        Smoothing(FExpProfile);
+        SmoothProfileActual(FExpProfile);
     except
         on E: Exception do
         begin
@@ -1648,8 +1650,8 @@ begin
     GoToReadyForFit;
 end;
 
-procedure TFitServer.SubtractLinearly(Data: TPointsSet; StartIndex: longint;
-    EndIndex: longint);
+procedure TFitServer.SubtractBackgroundLinearly(
+    Data: TPointsSet; StartIndex: longint; EndIndex: longint);
 var
     i:     longint;
     Delta: double;
@@ -1680,7 +1682,7 @@ begin
         SA := FExpProfile;
     Assert(Assigned(SA));
 
-    SubtractLinearly(SA, 0, SA.PointsCount - 1);
+    SubtractBackgroundLinearly(SA, 0, SA.PointsCount - 1);
 end;
 
 procedure TFitServer.SelectAreaActual(Points: TPointsSet;
@@ -1754,7 +1756,7 @@ begin
     FSelectedArea := nil;
 end;
 
-function TFitServer.Integrate(Points: TPointsSet;
+function TFitServer.IntegrateWithBoundaries(Points: TPointsSet;
     StartPointIndex, StopPointIndex: longint): double;
 var
     i: longint;
@@ -1805,7 +1807,7 @@ var
 begin
     Assert(Assigned(Points));
     Assert(Assigned(FSpecimenList));
-    Integral := Integrate(Points, StartPointIndex, StopPointIndex);
+    Integral := IntegrateWithBoundaries(Points, StartPointIndex, StopPointIndex);
 
     CurveParameters := Curve_parameters(Points.Parameters.GetCopy);
     try
@@ -1823,7 +1825,7 @@ begin
     end;
 end;
 
-function TFitServer.IntegrateAll(Points: TPointsSet): double;
+function TFitServer.Integrate(Points: TPointsSet): double;
 var
     i: longint;
     TempDouble: double;
@@ -1985,12 +1987,12 @@ begin
 
 end;
 
-procedure TFitServer.FindBackPointsDone;
+procedure TFitServer.ComputeBackgroundPointsDone;
 begin
 
 end;
 
-procedure TFitServer.FindPeakPositionsDone;
+procedure TFitServer.ComputeCurvePositionsDone;
 begin
 
 end;
@@ -2020,7 +2022,7 @@ begin
         Result := False;
 end;
 
-procedure TFitServer.FindGaussesSequentiallyAlg;
+procedure TFitServer.MinimizeNumberOfCurvesAlg;
 var
     i:  longint;
     FT: TFitTask;
@@ -2035,7 +2037,7 @@ begin
     end;
 end;
 
-procedure TFitServer.FindGaussesAlg;
+procedure TFitServer.MinimizeDifferenceAlg;
 var
     i:  longint;
     FT: TFitTask;
@@ -2050,7 +2052,7 @@ begin
     end;
 end;
 
-procedure TFitServer.FindGaussesAgainAlg;
+procedure TFitServer.MinimizeDifferenceAgainAlg;
 var
     i:  longint;
     FT: TFitTask;
@@ -2059,7 +2061,7 @@ begin
     for i := 0 to FTaskList.Count - 1 do
     begin
         FT := TFitTask(FTaskList.Items[i]);
-        FT.FindGaussesAgain;
+        FT.MinimizeDifferenceAgain;
     end;
 end;
 
@@ -2087,13 +2089,13 @@ begin
         ComputeCurveBoundsAlg;
     end;
     if FCurvePositions.PointsCount = 0 then
-        FindPeakPositionsForAutoAlg;
+        ComputeCurvePositionsForAutoAlg;
     SetState(ReadyForFit);
 
-    RecreateMainCalcThread(FindGaussesSequentiallyAlg, DoneProc);
+    RecreateMainCalcThread(MinimizeNumberOfCurvesAlg, DoneProc);
 end;
 
-function TFitServer.FindGaussesAgain: string;
+function TFitServer.MinimizeDifferenceAgain: string;
 begin
     Result := '';
     if State = AsyncOperation then
@@ -2109,7 +2111,7 @@ begin
         raise EUserException.Create(InadmissibleServerState + CRLF +
             NotAllData);
 
-    RecreateMainCalcThread(FindGaussesAgainAlg, DoneProc);
+    RecreateMainCalcThread(MinimizeDifferenceAgainAlg, DoneProc);
 end;
 
 function TFitServer.MinimizeDifference: string;
@@ -2136,10 +2138,10 @@ begin
         ComputeCurveBoundsAlg;
     end;
     if FCurvePositions.PointsCount = 0 then
-        FindPeakPositionsForAutoAlg;
+        ComputeCurvePositionsForAutoAlg;
     SetState(ReadyForFit);
 
-    RecreateMainCalcThread(FindGaussesAlg, DoneProc);
+    RecreateMainCalcThread(MinimizeDifferenceAlg, DoneProc);
 end;
 
 function TFitServer.GetSpecimenList: TMSCRSpecimenList;
@@ -2420,16 +2422,16 @@ begin
         ShowProfile;
     end;
     // TODO: mozhno optimizirovat' razbiv na nesk. funktsiy
-    // i vyzyvaya SelectPeakPoints tol'ko odin raz
+    // i vyzyvaya ComputeCurvePositionsActual tol'ko odin raz
 
     // set of curve positions selected by user is saved if given
     // https://action.mindjet.com/task/14588987
     // https://github.com/dvmorozov/fit/issues/12
     if FCurvePositions.PointsCount = 0 then
-        FindPeakPositionsForAutoAlg;
+        ComputeCurvePositionsForAutoAlg;
 
     ComputeCurveBoundsAlg;
-    FindGaussesSequentiallyAlg;
+    MinimizeNumberOfCurvesAlg;
 end;
 
 function TFitServer.DoAllAutomatically: string;

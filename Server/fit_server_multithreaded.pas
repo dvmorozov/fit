@@ -25,9 +25,9 @@ type
 
         { Algorithms are executed in separate threads. }
 
-        procedure FindGaussesSequentiallyAlg; override;
-        procedure FindGaussesAlg; override;
-        procedure FindGaussesAgainAlg; override;
+        procedure MinimizeNumberOfCurvesAlg; override;
+        procedure MinimizeDifferenceAlg; override;
+        procedure MinimizeDifferenceAgainAlg; override;
 
     public
         procedure AbortAsyncOper; override;
@@ -70,7 +70,7 @@ begin
     FState := FSavedState;
 end;
 
-procedure TFitServerMultithreaded.FindGaussesSequentiallyAlg;
+procedure TFitServerMultithreaded.MinimizeNumberOfCurvesAlg;
 var
     i:  longint;
     FT: TFitTask;
@@ -86,7 +86,7 @@ begin
     end;
 end;
 
-procedure TFitServerMultithreaded.FindGaussesAlg;
+procedure TFitServerMultithreaded.MinimizeDifferenceAlg;
 var
     i:  longint;
     FT: TFitTask;
@@ -102,7 +102,7 @@ begin
     end;
 end;
 
-procedure TFitServerMultithreaded.FindGaussesAgainAlg;
+procedure TFitServerMultithreaded.MinimizeDifferenceAgainAlg;
 var
     i:  longint;
     FT: TFitTask;
@@ -112,7 +112,7 @@ begin
     for i := 0 to FTaskList.Count - 1 do
     begin
         FT := TFitTask(FTaskList.Items[i]);
-        FT.FindGaussesAgain;
+        FT.MinimizeDifferenceAgain;
     end;
 end;
 

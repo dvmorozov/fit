@@ -23,7 +23,7 @@ type
     procedure MinimizeNumberOfSpecimensHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure FindSpecimenIntervalsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure FindSpecimenPositionsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
-    procedure FindBackPointsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
+    procedure ComputeBackgroundPointsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure StopAsyncOperHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure AsyncOperHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure SelectAreaHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
@@ -399,7 +399,7 @@ begin
   end;
 end;
 
-procedure TFitServer_ServiceBinder.FindBackPointsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
+procedure TFitServer_ServiceBinder.ComputeBackgroundPointsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
 var
   cllCntrl : ICallControl;
   objCntrl : IObjectControl;
@@ -2609,7 +2609,7 @@ begin
   RegisterVerbHandler('MinimizeNumberOfCurves',{$IFDEF FPC}@{$ENDIF}MinimizeNumberOfSpecimensHandler);
   RegisterVerbHandler('FindSpecimenIntervals',{$IFDEF FPC}@{$ENDIF}FindSpecimenIntervalsHandler);
   RegisterVerbHandler('FindSpecimenPositions',{$IFDEF FPC}@{$ENDIF}FindSpecimenPositionsHandler);
-  RegisterVerbHandler('ComputeBackgroundPoints',{$IFDEF FPC}@{$ENDIF}FindBackPointsHandler);
+  RegisterVerbHandler('ComputeBackgroundPoints',{$IFDEF FPC}@{$ENDIF}ComputeBackgroundPointsHandler);
   RegisterVerbHandler('StopAsyncOper',{$IFDEF FPC}@{$ENDIF}StopAsyncOperHandler);
   RegisterVerbHandler('AsyncOper',{$IFDEF FPC}@{$ENDIF}AsyncOperHandler);
   RegisterVerbHandler('SelectArea',{$IFDEF FPC}@{$ENDIF}SelectAreaHandler);

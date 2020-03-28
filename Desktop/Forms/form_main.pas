@@ -1065,7 +1065,7 @@ end;
 
 procedure TFormMain.ActionSelSpecPosAutoExecute(Sender: TObject);
 begin
-    FitClientApp_.FitClient.FindPeakPositions;
+    FitClientApp_.FitClient.ComputeCurvePositions;
 end;
 
 procedure TFormMain.ActionSelRFactorIntervalsAutoExecute(Sender: TObject);

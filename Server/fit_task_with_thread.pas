@@ -47,8 +47,8 @@ type
         procedure ShowProfileSync;
         procedure DoneProcSync;
         procedure ComputeCurveBoundsDoneSync;
-        procedure FindBackPointsDoneSync;
-        procedure FindPeakPositionsDoneSync;
+        procedure ComputeBackgroundPointsDoneSync;
+        procedure ComputeCurvePositionsDoneSync;
 
         constructor Create(AOwner: TComponent;
             AEnableBackgroundVariation: boolean;
@@ -65,7 +65,7 @@ type
 
         { Fits curves starting from given parameter set (initially or repeatedly). }
         procedure MinimizeDifference; override;
-        procedure FindGaussesAgain; override;
+        procedure MinimizeDifferenceAgain; override;
         { Searches set of pattern curves fitting exprerimental data with given accuracy
           sequentially decreasing number of such curves. }
         procedure MinimizeNumberOfCurves; override;
@@ -94,7 +94,7 @@ begin
     { Assignment of callbacks. }
     FMainCalcThread.SetSyncMethods(
         ATask, ShowCurMinSync, ShowProfileSync, DoneProcSync,
-        ComputeCurveBoundsDoneSync, FindBackPointsDoneSync, FindPeakPositionsDoneSync,
+        ComputeCurveBoundsDoneSync, ComputeBackgroundPointsDoneSync, ComputeCurvePositionsDoneSync,
         AAllDone);
     { Start thread. }
     FMainCalcThread.Resume;
@@ -115,10 +115,10 @@ end;
 
 procedure TFitTaskWithThread.MinimizeNumberOfCurves;
 begin
-    RecreateMainCalcThread(FindGaussesSequentiallyAlg, Done);
+    RecreateMainCalcThread(MinimizeNumberOfCurvesAlg, Done);
 end;
 
-procedure TFitTaskWithThread.FindGaussesAgain;
+procedure TFitTaskWithThread.MinimizeDifferenceAgain;
 begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyani
     // povtornaya initsializatsiya gaussianov
@@ -216,12 +216,12 @@ begin
 
 end;
 
-procedure TFitTaskWithThread.FindBackPointsDoneSync;
+procedure TFitTaskWithThread.ComputeBackgroundPointsDoneSync;
 begin
 
 end;
 
-procedure TFitTaskWithThread.FindPeakPositionsDoneSync;
+procedure TFitTaskWithThread.ComputeCurvePositionsDoneSync;
 begin
 
 end;

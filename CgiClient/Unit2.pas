@@ -4616,7 +4616,7 @@ begin
         raise Exception.Create(ChunkNumberIsAbsent);
     end;
     //  vypolnenie zaprosa (poluchenie dannyh fona)
-    Proxy.FindPeakPositions;
+    Proxy.ComputeCurvePositions;
     //GoToSpecimenPositions;
     //  protsess asinhronnyi, poetomu perehodim k oknu progressa;
     //  chtenie schablona i zapolnenie ego parametrov

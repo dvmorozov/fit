@@ -32,8 +32,8 @@ type
         procedure ShowProfile;
         procedure Done;
         procedure ComputeCurveBoundsDone;
-        procedure FindBackPointsDone;
-        procedure FindPeakPositionsDone;
+        procedure ComputeBackgroundPointsDone;
+        procedure ComputeCurvePositionsDone;
 
         property FitClient: TObject read FFitClient write FFitClient;
     end;
@@ -67,16 +67,16 @@ begin
     TFitClient(FitClient).ComputeCurveBoundsDone;
 end;
 
-procedure TFitClientStub.FindBackPointsDone;
+procedure TFitClientStub.ComputeBackgroundPointsDone;
 begin
     Assert(Assigned(FitClient));
-    TFitClient(FitClient).FindBackPointsDone;
+    TFitClient(FitClient).ComputeBackgroundPointsDone;
 end;
 
-procedure TFitClientStub.FindPeakPositionsDone;
+procedure TFitClientStub.ComputeCurvePositionsDone;
 begin
     Assert(Assigned(FitClient));
-    TFitClient(FitClient).FindPeakPositionsDone;
+    TFitClient(FitClient).ComputeCurvePositionsDone;
 end;
 
 end.

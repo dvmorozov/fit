@@ -46,8 +46,8 @@ type
         procedure ShowProfileSync;
         procedure DoneSync;
         procedure ComputeCurveBoundsDoneSync;
-        procedure FindBackPointsDoneSync;
-        procedure FindPeakPositionsDoneSync;
+        procedure ComputeBackgroundPointsDoneSync;
+        procedure ComputeCurvePositionsDoneSync;
 
     public
         destructor Destroy; override;
@@ -61,8 +61,8 @@ type
         procedure ShowProfile; override;
         procedure Done; override;
         procedure ComputeCurveBoundsDone; override;
-        procedure FindBackPointsDone; override;
-        procedure FindPeakPositionsDone; override;
+        procedure ComputeBackgroundPointsDone; override;
+        procedure ComputeCurvePositionsDone; override;
 
         { Control commands. }
 
@@ -101,7 +101,7 @@ begin
     { Assigns callbacks. }
     FMainCalcThread.SetSyncMethods(
         ATask, ShowCurMinSync, ShowProfileSync, DoneSync,
-        ComputeCurveBoundsDoneSync, FindBackPointsDoneSync, FindPeakPositionsDoneSync,
+        ComputeCurveBoundsDoneSync, ComputeBackgroundPointsDoneSync, ComputeCurvePositionsDoneSync,
         AAllDone);
     { Sets appropriate state befor starting thread. }
     SetState(AsyncOperation);
@@ -182,14 +182,14 @@ begin
     FMainCalcThread.ComputeCurveBoundsDone;
 end;
 
-procedure TFitServerWithThread.FindBackPointsDone;
+procedure TFitServerWithThread.ComputeBackgroundPointsDone;
 begin
-    FMainCalcThread.FindBackPointsDone;
+    FMainCalcThread.ComputeBackgroundPointsDone;
 end;
 
-procedure TFitServerWithThread.FindPeakPositionsDone;
+procedure TFitServerWithThread.ComputeCurvePositionsDone;
 begin
-    FMainCalcThread.FindPeakPositionsDone;
+    FMainCalcThread.ComputeCurvePositionsDone;
 end;
 
 procedure TFitServerWithThread.ShowCurMinSync;
@@ -212,14 +212,14 @@ begin
     inherited ComputeCurveBoundsDone;
 end;
 
-procedure TFitServerWithThread.FindBackPointsDoneSync;
+procedure TFitServerWithThread.ComputeBackgroundPointsDoneSync;
 begin
-    inherited FindBackPointsDone;
+    inherited ComputeBackgroundPointsDone;
 end;
 
-procedure TFitServerWithThread.FindPeakPositionsDoneSync;
+procedure TFitServerWithThread.ComputeCurvePositionsDoneSync;
 begin
-    inherited FindPeakPositionsDone;
+    inherited ComputeCurvePositionsDone;
 end;
 
 end.

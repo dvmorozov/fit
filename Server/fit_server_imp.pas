@@ -554,7 +554,7 @@ Begin
             LeaveCriticalsection(CS);
         end;
         Problem := TFitServerApp(ProblemID);
-        Result.ErrCode := Problem.FitStub.FindPeakPositions(Result.ErrMsg);
+        Result.ErrCode := Problem.FitStub.ComputeCurvePositions(Result.ErrMsg);
     except
         on E: EUserException do
         begin

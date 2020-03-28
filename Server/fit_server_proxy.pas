@@ -29,8 +29,8 @@ type
         procedure ShowProfile;
         procedure Done;
         procedure ComputeCurveBoundsDone;
-        procedure FindBackPointsDone;
-        procedure FindPeakPositionsDone;
+        procedure ComputeBackgroundPointsDone;
+        procedure ComputeCurvePositionsDone;
         { Pointer to the client part receiving messages. }
         property FitClientStub: TFitClientStub read FFitClientStub write FFitClientStub;
     end;
@@ -89,7 +89,7 @@ begin
     FitClientStub.ComputeCurveBoundsDone;
 end;
 
-procedure TFitServerProxy.FindBackPointsDone;
+procedure TFitServerProxy.ComputeBackgroundPointsDone;
 begin
     try
         Assert(Assigned(FitClientStub));
@@ -99,10 +99,10 @@ begin
         else
             raise;
     end;
-    FitClientStub.FindBackPointsDone;
+    FitClientStub.ComputeBackgroundPointsDone;
 end;
 
-procedure TFitServerProxy.FindPeakPositionsDone;
+procedure TFitServerProxy.ComputeCurvePositionsDone;
 begin
     try
         Assert(Assigned(FitClientStub));
@@ -112,7 +112,7 @@ begin
         else
             raise;
     end;
-    FitClientStub.FindPeakPositionsDone;
+    FitClientStub.ComputeCurvePositionsDone;
 end;
 
 end.

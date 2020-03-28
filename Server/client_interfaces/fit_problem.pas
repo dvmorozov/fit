@@ -108,12 +108,12 @@ type
         function DoAllAutomatically: string;
         function MinimizeDifference: string;
 {$IFNDEF EXCLUDE_SOMETHING}
-        function FindGaussesAgain: string;
+        function MinimizeDifferenceAgain: string;
 {$ENDIF}
         function MinimizeNumberOfCurves: string;
         function ComputeCurveBounds: string;
         function ComputeBackgroundPoints: string;
-        function FindPeakPositions: string;
+        function ComputeCurvePositions: string;
         function AllPointsAsPeakPositions: string;
 {$IFDEF FITCGI}
         function GetGraph(const Width: longint;
@@ -825,14 +825,14 @@ begin
 end;
 
 {$IFNDEF EXCLUDE_SOMETHING}
-function TFitProblem.FindGaussesAgain: string;
+function TFitProblem.MinimizeDifferenceAgain: string;
 var
     Res:    longint;
     ErrMsg: string;
     R:      TResult;
 begin
     Assert(Assigned(FitStub));
-    R := FitStub.FindGaussesAgain;
+    R := FitStub.MinimizeDifferenceAgain;
     if not Assigned(R) then
         raise Exception.Create(OutOfServerResources);
     Res    := R.ErrCode;
@@ -907,7 +907,7 @@ begin
     Result := ErrMsg;
 end;
 
-function TFitProblem.FindPeakPositions: string;
+function TFitProblem.ComputeCurvePositions: string;
 var
     Res:    longint;
     ErrMsg: string;

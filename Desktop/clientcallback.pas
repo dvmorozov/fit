@@ -14,8 +14,8 @@ type
         procedure ShowProfile();
         procedure Done;
         procedure ComputeCurveBoundsDone;
-        procedure FindBackPointsDone;
-        procedure FindPeakPositionsDone;
+        procedure ComputeBackgroundPointsDone;
+        procedure ComputeCurvePositionsDone;
     end;
 
 implementation

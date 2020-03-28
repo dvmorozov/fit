@@ -29,8 +29,8 @@ type
         FShowProfile: TThreadMethod;
         FDone:    TThreadMethod;
         FComputeCurveBoundsDone: TThreadMethod;
-        FFindBackPointsDone: TThreadMethod;
-        FFindPeakPositionsDone: TThreadMethod;
+        FComputeBackgroundPointsDone: TThreadMethod;
+        FComputeCurvePositionsDone: TThreadMethod;
         FAllDone: TThreadMethod;
 
     public
@@ -40,12 +40,12 @@ type
         procedure ShowProfile;
         procedure Done;
         procedure ComputeCurveBoundsDone;
-        procedure FindBackPointsDone;
-        procedure FindPeakPositionsDone;
+        procedure ComputeBackgroundPointsDone;
+        procedure ComputeCurvePositionsDone;
 
         procedure SetSyncMethods(ATask, AShowCurMin, AShowProfile,
-            ADone, AComputeCurveBoundsDone, AFindBackPointsDone,
-            AFindPeakPositionsDone, AAllDone: TThreadMethod);
+            ADone, AComputeCurveBoundsDone, AComputeBackgroundPointsDone,
+            AComputeCurvePositionsDone, AAllDone: TThreadMethod);
     end;
 
 implementation
@@ -55,15 +55,15 @@ uses
 
 procedure TMainCalcThread.SetSyncMethods(
     ATask, AShowCurMin, AShowProfile, ADone, AComputeCurveBoundsDone,
-    AFindBackPointsDone, AFindPeakPositionsDone, AAllDone: TThreadMethod);
+    AComputeBackgroundPointsDone, AComputeCurvePositionsDone, AAllDone: TThreadMethod);
 begin
     Assert(Assigned(ATask));
     Assert(Assigned(AShowCurMin));
     Assert(Assigned(AShowProfile));
     Assert(Assigned(ADone));
     Assert(Assigned(AComputeCurveBoundsDone));
-    Assert(Assigned(AFindBackPointsDone));
-    Assert(Assigned(AFindPeakPositionsDone));
+    Assert(Assigned(AComputeBackgroundPointsDone));
+    Assert(Assigned(AComputeCurvePositionsDone));
     Assert(Assigned(AAllDone));
 
     FTask    := ATask;
@@ -71,7 +71,7 @@ begin
     FShowProfile := AShowProfile;
     FDone    := ADone;
     FComputeCurveBoundsDone := AComputeCurveBoundsDone;
-    FFindPeakPositionsDone := AFindPeakPositionsDone;
+    FComputeCurvePositionsDone := AComputeCurvePositionsDone;
     FAllDone := AAllDone;
 end;
 
@@ -108,14 +108,14 @@ begin
     Synchronize(FComputeCurveBoundsDone);
 end;
 
-procedure TMainCalcThread.FindBackPointsDone;
+procedure TMainCalcThread.ComputeBackgroundPointsDone;
 begin
-    Synchronize(FFindBackPointsDone);
+    Synchronize(FComputeBackgroundPointsDone);
 end;
 
-procedure TMainCalcThread.FindPeakPositionsDone;
+procedure TMainCalcThread.ComputeCurvePositionsDone;
 begin
-    Synchronize(FFindPeakPositionsDone);
+    Synchronize(FComputeCurvePositionsDone);
 end;
 
 end.

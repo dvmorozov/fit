@@ -289,8 +289,8 @@ type
         procedure ShowProfile;
         procedure Done;
         procedure ComputeCurveBoundsDone;
-        procedure FindBackPointsDone;
-        procedure FindPeakPositionsDone;
+        procedure ComputeBackgroundPointsDone;
+        procedure ComputeCurvePositionsDone;
 
         { Wrappers for server methods. Mustn't create messages because this
           is responsibility of GUI. Instead of this must throw exceptions. }
@@ -302,7 +302,7 @@ type
         procedure MinimizeNumberOfCurves;
         procedure ComputeCurveBounds;
         procedure ComputeBackgroundPoints;
-        procedure FindPeakPositions;
+        procedure ComputeCurvePositions;
         procedure AllPointsAsPeakPositions;
         procedure StopAsyncOper;
         { Gets state of asynchronous operation from the server. }
@@ -731,7 +731,7 @@ begin
         OnAsyncOperationFinished(Self);
 end;
 
-procedure TFitClient.FindBackPointsDone;
+procedure TFitClient.ComputeBackgroundPointsDone;
 begin
     //  zdes' eto nedopustimye sostoyaniya
     Assert(Assigned(FitProxy));
@@ -753,7 +753,7 @@ begin
         OnAsyncOperationFinished(Self);
 end;
 
-procedure TFitClient.FindPeakPositionsDone;
+procedure TFitClient.ComputeCurvePositionsDone;
 begin
     //  zdes' eto nedopustimye sostoyaniya
     Assert(Assigned(FitProxy));
@@ -1280,10 +1280,10 @@ begin
     FAsyncState := AsyncWorks;
 end;
 
-procedure TFitClient.FindPeakPositions;
+procedure TFitClient.ComputeCurvePositions;
 begin
     Assert(Assigned(FitProxy));
-    FitProxy.FindPeakPositions;
+    FitProxy.ComputeCurvePositions;
     FAsyncState := AsyncWorks;
 end;
 

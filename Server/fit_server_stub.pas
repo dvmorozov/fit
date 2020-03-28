@@ -58,11 +58,11 @@ type
             var ErrMsg: string): longint;
         function DoAllAutomatically(var ErrMsg: string): longint;
         function MinimizeDifference(var ErrMsg: string): longint;
-        function FindGaussesAgain(var ErrMsg: string): longint;
+        function MinimizeDifferenceAgain(var ErrMsg: string): longint;
         function MinimizeNumberOfCurves(var ErrMsg: string): longint;
         function ComputeCurveBounds(var ErrMsg: string): longint;
         function ComputeBackgroundPoints(var ErrMsg: string): longint;
-        function FindPeakPositions(var ErrMsg: string): longint;
+        function ComputeCurvePositions(var ErrMsg: string): longint;
         function AllPointsAsPeakPositions(var ErrMsg: string): longint;
 
         function StopAsyncOper(var ErrMsg: string): longint;
@@ -316,7 +316,7 @@ begin
     end;
 end;
 
-function TFitServerStub.FindGaussesAgain(var ErrMsg: string): longint;
+function TFitServerStub.MinimizeDifferenceAgain(var ErrMsg: string): longint;
 begin
     try
         Result := -2;
@@ -334,7 +334,7 @@ begin
     try
         Result := 0;
         ErrMsg := '';
-        ErrMsg := Server.FindGaussesAgain;
+        ErrMsg := Server.MinimizeDifferenceAgain;
     except
         on E: EUserException do
         begin
@@ -464,7 +464,7 @@ begin
     end;
 end;
 
-function TFitServerStub.FindPeakPositions(var ErrMsg: string): longint;
+function TFitServerStub.ComputeCurvePositions(var ErrMsg: string): longint;
 begin
     try
         Result := -2;
@@ -482,7 +482,7 @@ begin
     try
         Result := 0;
         ErrMsg := '';
-        ErrMsg := Server.FindPeakPositions;
+        ErrMsg := Server.ComputeCurvePositions;
     except
         on E: EUserException do
         begin

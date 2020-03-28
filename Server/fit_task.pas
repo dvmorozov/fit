@@ -156,7 +156,7 @@ type
 
         { Searches for set of curves fitting experimental profile with given accuracy
           sequentially decreasing number of curves. }
-        procedure FindGaussesSequentiallyAlg;
+        procedure MinimizeNumberOfCurvesAlg;
         { Executes cycle of fitting of parameters of curves. }
         procedure Optimization;
 
@@ -183,8 +183,7 @@ type
         procedure DeletePoint(var Points: TPointsSet; XValue: double);
         procedure AddPointToCurvePositions(XValue: double);
         { Creates fast optimization algorithm for the 1th step of 2-stage processing,
-          by default is disabled.
-          TODO: Make configurable. }
+          by default is disabled. TODO: Make configurable. }
         procedure CreateFastMinimizer;
         { Creates downhill simplex algorithm for the 2nd step of 2-stage processing. }
         procedure CreateDHSMinimizer;
@@ -232,7 +231,7 @@ type
 
         { Fits curves starting from given parameter set (initially or repeatedly). }
         procedure MinimizeDifference; virtual;
-        procedure FindGaussesAgain; virtual;
+        procedure MinimizeDifferenceAgain; virtual;
         { Searches set of curves fitting exprerimental data with given
           accuracy sequentially decreasing number of such curves. }
         procedure MinimizeNumberOfCurves; virtual;
@@ -1456,7 +1455,7 @@ begin
     ;
 end;
 
-procedure TFitTask.FindGaussesSequentiallyAlg;
+procedure TFitTask.MinimizeNumberOfCurvesAlg;
 var
     ZerosDeleted, PointDeleted: boolean;
     Deleted: TCurvePointsSet;
@@ -1618,7 +1617,7 @@ begin
     Done;
 end;
 
-procedure TFitTask.FindGaussesAgain;
+procedure TFitTask.MinimizeDifferenceAgain;
 begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyani
     // povtornaya initsializatsiya gaussianov
@@ -1631,7 +1630,7 @@ end;
 procedure TFitTask.MinimizeNumberOfCurves;
 begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
-    FindGaussesSequentiallyAlg;
+    MinimizeNumberOfCurvesAlg;
     Done;
 end;
 

@@ -33,15 +33,15 @@ type
         { Handler drawing specimen curves. Provides different ways of displaying data.
           Component which will actually display the data must store all pointers
           to visual components inside its own memory to be able hide them. }
-        procedure PlotSpecimens(Sender: TObject;
+        procedure PlotCurves(Sender: TObject;
             CurvePointsSetList: TSelfCopiedCompList;
-            SpecimenList: TMSCRSpecimenList);
+            CurveList: TMSCRCurveList);
         procedure PlotSelectedPoints(Sender: TObject;
             SelectedPoints: TTitlePointsSet);
-        procedure PlotRFactorIntervals(Sender: TObject;
-            RFactorIntervals: TTitlePointsSet);
-        procedure HideRFactorIntervals(Sender: TObject;
-            RFactorIntervals: TTitlePointsSet);
+        procedure PlotRFactorBounds(Sender: TObject;
+            RFactorBounds: TTitlePointsSet);
+        procedure HideRFactorBounds(Sender: TObject;
+            RFactorBounds: TTitlePointsSet);
         procedure PlotCurvePositions(Sender: TObject;
             CurvePositions: TTitlePointsSet);
         procedure HideCurvePositions(Sender: TObject;
@@ -73,7 +73,7 @@ type
         { Handler to fill data table. }
         procedure FillDatasheetTable(Profile: TTitlePointsSet;
             CurvesList: TSelfCopiedCompList; GaussProfile: TTitlePointsSet;
-            DeltaProfile: TTitlePointsSet; RFactorIntervals: TTitlePointsSet);
+            DeltaProfile: TTitlePointsSet; RFactorBounds: TTitlePointsSet);
         procedure SetUpdateGrids(Update: boolean);
 {$ENDIF}
 {$IFDEF USE_LEGEND}

@@ -74,7 +74,7 @@ type
         function SelectArea(StartPointIndex, StopPointIndex: longint;
             var ErrMsg: string): longint;
         function ReturnToTotalProfile(var ErrMsg: string): longint;
-        function CreateSpecimenList(var ErrMsg: string): longint;
+        function CreateCurveList(var ErrMsg: string): longint;
 
         { Data setting. Set methods create new objects. The responsibility
           to free them is put on server. }
@@ -85,7 +85,7 @@ type
             var ErrMsg: string): longint;
         function SetCurvePositions(ACurvePositions: TPointsSet;
             var ErrMsg: string): longint;
-        function SetRFactorIntervals(ARFactorIntervals: TPointsSet;
+        function SetRFactorBounds(ARFactorBounds: TPointsSet;
             var ErrMsg: string): longint;
 {$IFDEF _WINDOWS}
         function SetSpecialCurveParameters(ACurveExpr: string;
@@ -96,7 +96,7 @@ type
             var ErrMsg: string): longint;
         function AddPointToBackground(XValue, YValue: double;
             var ErrMsg: string): longint;
-        function AddPointToRFactorIntervals(XValue, YValue: double;
+        function AddPointToRFactorBounds(XValue, YValue: double;
             var ErrMsg: string): longint;
         function AddPointToCurvePositions(XValue, YValue: double;
             var ErrMsg: string): longint;
@@ -105,7 +105,7 @@ type
             NewXValue, NewYValue: double; var ErrMsg: string): longint;
         function ReplacePointInBackground(PrevXValue, PrevYValue,
             NewXValue, NewYValue: double; var ErrMsg: string): longint;
-        function ReplacePointInRFactorIntervals(PrevXValue, PrevYValue,
+        function ReplacePointInRFactorBounds(PrevXValue, PrevYValue,
             NewXValue, NewYValue: double; var ErrMsg: string): longint;
         function ReplacePointInCurvePositions(PrevXValue, PrevYValue,
             NewXValue, NewYValue: double; var ErrMsg: string): longint;
@@ -120,29 +120,29 @@ type
             var ErrMsg: string): longint;
         function GetCurvePositions(var Points: TPointsSet;
             var ErrMsg: string): longint;
-        function GetRFactorIntervals(var Points: TPointsSet;
+        function GetRFactorBounds(var Points: TPointsSet;
             var ErrMsg: string): longint;
 {$IFDEF _WINDOWS}
         function GetSpecialCurveParameters(var CP: Curve_parameters;
             var ErrMsg: string): longint;
 {$ENDIF}
         { Returns list of curve (specimen) parameters. }
-        function GetSpecimenList(var Points: TMSCRSpecimenList;
+        function GetCurveList(var Points: TMSCRCurveList;
             var ErrMsg: string): longint;
         { Returns list of components containing points of curves. }
         function GetCurvesList(var Points: TSelfCopiedCompList;
             var ErrMsg: string): longint;
 
-        function GetSpecimenCount(var Count: longint;
+        function GetCurveCount(var Count: longint;
             var ErrMsg: string): longint;
-        function GetSpecimenPoints(SpecIndex: longint;
+        function GetCurvePoints(SpecIndex: longint;
             var Points: TPointsSet; var Name: string; var ErrMsg: string): longint;
-        function GetSpecimenParameterCount(SpecIndex: longint;
+        function GetCurveParameterCount(SpecIndex: longint;
             var Count: longint; var ErrMsg: string): longint;
-        function GetSpecimenParameter(SpecIndex: longint; ParamIndex: longint;
+        function GetCurveParameter(SpecIndex: longint; ParamIndex: longint;
             var Name: string; var Value: double; var Type_: longint;
             var ErrMsg: string): longint;
-        function SetSpecimenParameter(SpecIndex: longint; ParamIndex: longint;
+        function SetCurveParameter(SpecIndex: longint; ParamIndex: longint;
             Value: double; var ErrMsg: string): longint;
         function GetCalcProfilePointsSet(var Points: TPointsSet;
             var ErrMsg: string): longint;
@@ -538,7 +538,7 @@ begin
     end;
 end;
 
-function TFitServerStub.CreateSpecimenList(var ErrMsg: string): longint;
+function TFitServerStub.CreateCurveList(var ErrMsg: string): longint;
 begin
     try
         Result := -2;
@@ -556,7 +556,7 @@ begin
     try
         Result := 0;
         ErrMsg := '';
-        Server.CreateSpecimenList;
+        Server.CreateCurveList;
     except
         on E: EUserException do
         begin
@@ -1273,7 +1273,7 @@ begin
     end;
 end;
 
-function TFitServerStub.SetRFactorIntervals(ARFactorIntervals: TPointsSet;
+function TFitServerStub.SetRFactorBounds(ARFactorBounds: TPointsSet;
     var ErrMsg: string): longint;
 begin
     try
@@ -1292,8 +1292,8 @@ begin
     try
         Result := 0;
         ErrMsg := '';
-        ErrMsg := Server.SetRFactorIntervals(
-            TPointsSet(ARFactorIntervals.GetCopy));
+        ErrMsg := Server.SetRFactorBounds(
+            TPointsSet(ARFactorBounds.GetCopy));
     except
         on E: EUserException do
         begin
@@ -1540,7 +1540,7 @@ begin
     end;
 end;
 
-function TFitServerStub.GetRFactorIntervals(var Points: TPointsSet;
+function TFitServerStub.GetRFactorBounds(var Points: TPointsSet;
     var ErrMsg: string): longint;
 begin
     try
@@ -1559,7 +1559,7 @@ begin
     try
         Result := 0;
         ErrMsg := '';
-        Points := Server.GetRFactorIntervals;
+        Points := Server.GetRFactorBounds;
     except
         on E: EUserException do
         begin
@@ -1619,7 +1619,7 @@ end;
 
 {$ENDIF}
 
-function TFitServerStub.GetSpecimenList(var Points: TMSCRSpecimenList;
+function TFitServerStub.GetCurveList(var Points: TMSCRCurveList;
     var ErrMsg: string): longint;
 begin
     try
@@ -1638,7 +1638,7 @@ begin
     try
         Result := 0;
         ErrMsg := '';
-        Points := Server.GetSpecimenList;
+        Points := Server.GetCurveList;
     except
         on E: EUserException do
         begin
@@ -1696,7 +1696,7 @@ begin
     end;
 end;
 //{$ELSE}
-function TFitServerStub.GetSpecimenCount(var Count: longint;
+function TFitServerStub.GetCurveCount(var Count: longint;
     var ErrMsg: string): longint;
 begin
     try
@@ -1715,7 +1715,7 @@ begin
     try
         Result := 0;
         ErrMsg := '';
-        Count  := Server.GetSpecimenCount;
+        Count  := Server.GetCurveCount;
     except
         on E: EUserException do
         begin
@@ -1734,7 +1734,7 @@ begin
     end;
 end;
 
-function TFitServerStub.GetSpecimenPoints(SpecIndex: longint;
+function TFitServerStub.GetCurvePoints(SpecIndex: longint;
     var Points: TPointsSet; var Name: string; var ErrMsg: string): longint;
 var
     CPS: TNamedPointsSet;
@@ -1755,7 +1755,7 @@ begin
     try
         Result := 0;
         ErrMsg := '';
-        CPS    := Server.GetSpecimenPoints(SpecIndex);
+        CPS    := Server.GetCurvePoints(SpecIndex);
         Points := CPS;
         Name   := CPS.GetCurveTypeName;
         Result := 0;
@@ -1777,7 +1777,7 @@ begin
     end;
 end;
 
-function TFitServerStub.GetSpecimenParameterCount(SpecIndex: longint;
+function TFitServerStub.GetCurveParameterCount(SpecIndex: longint;
     var Count: longint; var ErrMsg: string): longint;
 begin
     try
@@ -1796,7 +1796,7 @@ begin
     try
         Result := 0;
         ErrMsg := '';
-        Count  := Server.GetSpecimenParameterCount(SpecIndex);
+        Count  := Server.GetCurveParameterCount(SpecIndex);
     except
         on E: EUserException do
         begin
@@ -1815,7 +1815,7 @@ begin
     end;
 end;
 
-function TFitServerStub.SetSpecimenParameter(SpecIndex: longint;
+function TFitServerStub.SetCurveParameter(SpecIndex: longint;
     ParamIndex: longint; Value: double; var ErrMsg: string): longint;
 begin
     try
@@ -1834,7 +1834,7 @@ begin
     try
         Result := 0;
         ErrMsg := '';
-        Server.SetSpecimenParameter(SpecIndex, ParamIndex, Value);
+        Server.SetCurveParameter(SpecIndex, ParamIndex, Value);
     except
         on E: EUserException do
         begin
@@ -1853,7 +1853,7 @@ begin
     end;
 end;
 
-function TFitServerStub.GetSpecimenParameter(SpecIndex: longint;
+function TFitServerStub.GetCurveParameter(SpecIndex: longint;
     ParamIndex: longint; var Name: string; var Value: double;
     var Type_: longint; var ErrMsg: string): longint;
 begin
@@ -1873,7 +1873,7 @@ begin
     try
         Result := 0;
         ErrMsg := '';
-        Server.GetSpecimenParameter(SpecIndex, ParamIndex, Name, Value, Type_);
+        Server.GetCurveParameter(SpecIndex, ParamIndex, Name, Value, Type_);
     except
         on E: EUserException do
         begin
@@ -2054,7 +2054,7 @@ begin
     end;
 end;
 
-function TFitServerStub.AddPointToRFactorIntervals(XValue, YValue: double;
+function TFitServerStub.AddPointToRFactorBounds(XValue, YValue: double;
     var ErrMsg: string): longint;
 begin
     try
@@ -2073,7 +2073,7 @@ begin
     try
         Result := 0;
         ErrMsg := '';
-        Server.AddPointToRFactorIntervals(XValue, YValue);
+        Server.AddPointToRFactorBounds(XValue, YValue);
     except
         on E: EUserException do
         begin
@@ -2209,7 +2209,7 @@ begin
     end;
 end;
 
-function TFitServerStub.ReplacePointInRFactorIntervals(
+function TFitServerStub.ReplacePointInRFactorBounds(
     PrevXValue, PrevYValue, NewXValue, NewYValue: double;
     var ErrMsg: string): longint;
 begin
@@ -2229,7 +2229,7 @@ begin
     try
         Result := 0;
         ErrMsg := '';
-        Server.ReplacePointInRFactorIntervals(
+        Server.ReplacePointInRFactorBounds(
             PrevXValue, PrevYValue, NewXValue, NewYValue);
     except
         on E: EUserException do

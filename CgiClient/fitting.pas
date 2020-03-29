@@ -26,12 +26,12 @@ const
 //'Поиск значений параметров, при которых расхождение между модельной и ' +
 //'реальной кривой достигает минимума.'
         ),
-        ('HintMinimizeNumberOfSpecimens1',
+        ('HintMinimizeNumberOfCurves1',
 'Minimize number of curves on the condition that the difference '    +
 'between experimental and calculated data in the specimen application interval '+
 'does not exceed the given value.'
         ),
-        ('HintMinimizeNumberOfSpecimens2',
+        ('HintMinimizeNumberOfCurves2',
 //'Поиск значений параметров, при которых фактор расходимости не больше '         +
 //'максимально допустимого и количество экземпляров паттерна минимально.<BR>'     +
 'This algorithm combines minimization of the difference factor with '           +
@@ -65,7 +65,7 @@ const
             'Start'
             //  'Минимизировать расхождение'
         ),
-        ('CaptButMinimizeNumberOfSpecimens',
+        ('CaptButMinimizeNumberOfCurves',
             'Start'
             //  'Минимизировать число экземпляров паттерна'
         )

@@ -32,7 +32,7 @@ type
       Allows to input/output angles in different representations. 
       In copying data from grid verifies them and adds to the list 
       only data for which corresponding rows are correct. }
-    TMSCRSpecimenList = class(TSpecimenList)
+    TMSCRCurveList = class(TCurveList)
     protected
         function RecalcParamValue(P: TSpecialCurveParameter): double; override;
         procedure ReverseCalcParamValue(P: TSpecialCurveParameter;
@@ -51,19 +51,19 @@ type
     { Container of curves which is stored in XML-stream. }
     Parameters_list = class(TComponent)
     private
-        FParameters: TMSCRSpecimenList;
+        FParameters: TMSCRCurveList;
 
     public
         constructor Create(Owner: TComponent); override;
         destructor Destroy; override;
 
     published
-        property Parameters: TMSCRSpecimenList read FParameters write FParameters;
+        property Parameters: TMSCRCurveList read FParameters write FParameters;
     end;
 
 implementation
 
-function TMSCRSpecimenList.RecalcParamValue(P: TSpecialCurveParameter): double;
+function TMSCRCurveList.RecalcParamValue(P: TSpecialCurveParameter): double;
 begin
     if (P.Type_ = InvariablePosition) or (P.Type_ = VariablePosition) or
         (P.Name = StartPosName) or (P.Name = FinishPosName) then
@@ -88,7 +88,7 @@ begin
         Result := P.Value;
 end;
 
-procedure TMSCRSpecimenList.ReverseCalcParamValue(P: TSpecialCurveParameter;
+procedure TMSCRCurveList.ReverseCalcParamValue(P: TSpecialCurveParameter;
     NewValue: double);
 begin
     if (P.Type_ = InvariablePosition) or (P.Type_ = VariablePosition) or
@@ -106,17 +106,17 @@ begin
         P.Value := NewValue;
 end;
 
-function TMSCRSpecimenList.GetCopy: TObject;
+function TMSCRCurveList.GetCopy: TObject;
 begin
-    Result := TMSCRSpecimenList.Create(nil);
+    Result := TMSCRCurveList.Create(nil);
     CopyParameters(Result);
 end;
 
-procedure TMSCRSpecimenList.CopyParameters(const Dest: TObject);
+procedure TMSCRCurveList.CopyParameters(const Dest: TObject);
 begin
     inherited;
-    TMSCRSpecimenList(Dest).Lambda   := Lambda;
-    TMSCRSpecimenList(Dest).ViewMode := ViewMode;
+    TMSCRCurveList(Dest).Lambda   := Lambda;
+    TMSCRCurveList(Dest).ViewMode := ViewMode;
 end;
 
 { Parameters_list }
@@ -124,7 +124,7 @@ end;
 constructor Parameters_list.Create(Owner: TComponent);
 begin
     inherited Create(Owner);
-    FParameters := TMSCRSpecimenList.Create(nil);
+    FParameters := TMSCRCurveList.Create(nil);
 end;
 
 destructor Parameters_list.Destroy;
@@ -135,7 +135,7 @@ end;
 
 {$warnings off}
 initialization
-    RegisterClass(TMSCRSpecimenList);
+    RegisterClass(TMSCRCurveList);
     DecimalSeparator := '.';
 end.
 {$warnings on}

@@ -17,30 +17,30 @@ type
   TFitServer_ServiceBinder = class(TBaseServiceBinder)
   protected
     procedure SmoothProfileHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
-    procedure SubtractAllBackgroundHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
+    procedure SubtractBackgroundHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure DoAllAutomaticallyHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure MinimizeDifferenceHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
-    procedure MinimizeNumberOfSpecimensHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
-    procedure FindSpecimenIntervalsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
-    procedure FindSpecimenPositionsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
+    procedure MinimizeNumberOfCurvesHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
+    procedure ComputeCurveBoundsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
+    procedure ComputeCurvePositionsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure ComputeBackgroundPointsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure StopAsyncOperHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure AsyncOperHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure SelectAreaHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure ReturnToTotalProfileHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
-    procedure CreateSpecimenListHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
+    procedure CreateCurveListHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure SetProfilePointsSetHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure SetBackgroundPointsSetHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
-    procedure SetSpecimenPositionsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
-    procedure SetSpecimenIntervalsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
+    procedure SetCurvePositionsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
+    procedure SetCurveBoundsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure AddPointToBackgroundHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
-    procedure AddPointToSpecimenIntervalsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
-    procedure AddPointToSpecimenPositionsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
+    procedure AddPointToCurveBoundsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
+    procedure AddPointToCurvePositionsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure GetProfilePointsSetHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure GetSelectedAreaHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure GetBackgroundPointsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
-    procedure GetSpecimenPositionsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
-    procedure GetSpecimenIntervalsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
+    procedure GetCurvePositionsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
+    procedure GetCurveBoundsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure GetCalcProfilePointsSetHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure GetDeltaProfilePointsSetHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure SetCurveThreshHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
@@ -56,19 +56,19 @@ type
     procedure GetStateHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure ReplacePointInProfileHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure ReplacePointInBackgroundHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
-    procedure ReplacePointInSpecimenIntervalsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
-    procedure ReplacePointInSpecimenPositionsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
+    procedure ReplacePointInCurveBoundsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
+    procedure ReplacePointInCurvePositionsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure CreateProblemHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure DiscardProblemHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
-    procedure GetSpecimenCountHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
-    procedure GetSpecimenPointsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
-    procedure GetSpecimenParameterCountHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
-    procedure GetSpecimenParameterHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
+    procedure GetCurveCountHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
+    procedure GetCurvePointsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
+    procedure GetCurveParameterCountHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
+    procedure GetCurveParameterHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure AddPointToDataHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure GetGraphHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure GetProfileChunkHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure GetProfileChunkCountHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
-    procedure SetSpecimenParameterHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
+    procedure SetCurveParameterHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure GetCalcTimeStrHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure GetRFactorStrHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure GetAbsRFactorStrHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
@@ -139,7 +139,7 @@ begin
   end;
 end;
 
-procedure TFitServer_ServiceBinder.SubtractAllBackgroundHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
+procedure TFitServer_ServiceBinder.SubtractBackgroundHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
 var
   cllCntrl : ICallControl;
   objCntrl : IObjectControl;
@@ -270,7 +270,7 @@ begin
   end;
 end;
 
-procedure TFitServer_ServiceBinder.MinimizeNumberOfSpecimensHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
+procedure TFitServer_ServiceBinder.MinimizeNumberOfCurvesHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
 var
   cllCntrl : ICallControl;
   objCntrl : IObjectControl;
@@ -313,7 +313,7 @@ begin
   end;
 end;
 
-procedure TFitServer_ServiceBinder.FindSpecimenIntervalsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
+procedure TFitServer_ServiceBinder.ComputeCurveBoundsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
 var
   cllCntrl : ICallControl;
   objCntrl : IObjectControl;
@@ -337,7 +337,7 @@ begin
   if hasObjCntrl then
     objCntrl.Activate();
   try
-    returnVal := tmpObj.FindSpecimenIntervals(ProblemID);
+    returnVal := tmpObj.ComputeCurveBounds(ProblemID);
     if Assigned(TObject(returnVal)) then
       callCtx.AddObjectToFree(TObject(returnVal));
     
@@ -356,7 +356,7 @@ begin
   end;
 end;
 
-procedure TFitServer_ServiceBinder.FindSpecimenPositionsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
+procedure TFitServer_ServiceBinder.ComputeCurvePositionsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
 var
   cllCntrl : ICallControl;
   objCntrl : IObjectControl;
@@ -380,7 +380,7 @@ begin
   if hasObjCntrl then
     objCntrl.Activate();
   try
-    returnVal := tmpObj.FindSpecimenPositions(ProblemID);
+    returnVal := tmpObj.ComputeCurvePositions(ProblemID);
     if Assigned(TObject(returnVal)) then
       callCtx.AddObjectToFree(TObject(returnVal));
     
@@ -618,7 +618,7 @@ begin
   end;
 end;
 
-procedure TFitServer_ServiceBinder.CreateSpecimenListHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
+procedure TFitServer_ServiceBinder.CreateCurveListHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
 var
   cllCntrl : ICallControl;
   objCntrl : IObjectControl;
@@ -642,7 +642,7 @@ begin
   if hasObjCntrl then
     objCntrl.Activate();
   try
-    returnVal := tmpObj.CreateSpecimenList(ProblemID);
+    returnVal := tmpObj.CreateCurveList(ProblemID);
     if Assigned(TObject(returnVal)) then
       callCtx.AddObjectToFree(TObject(returnVal));
     
@@ -757,7 +757,7 @@ begin
   end;
 end;
 
-procedure TFitServer_ServiceBinder.SetSpecimenPositionsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
+procedure TFitServer_ServiceBinder.SetCurvePositionsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
 var
   cllCntrl : ICallControl;
   objCntrl : IObjectControl;
@@ -766,17 +766,17 @@ var
   callCtx : ICallContext;
   strPrmName : string;
   procName,trgName : string;
-  SpecimenPositions : TArrayOfFloatDoubleRemotable;
+  CurvePositions : TArrayOfFloatDoubleRemotable;
   ProblemID : integer;
   returnVal : TResult;
 begin
   callCtx := AContext;
   TObject(returnVal) := nil;
-  TObject(SpecimenPositions) := nil;
+  TObject(CurvePositions) := nil;
   
-  strPrmName := 'SpecimenPositions';  AFormatter.Get(TypeInfo(TArrayOfFloatDoubleRemotable),strPrmName,SpecimenPositions);
-  if Assigned(Pointer(SpecimenPositions)) then
-    callCtx.AddObjectToFree(TObject(SpecimenPositions));
+  strPrmName := 'CurvePositions';  AFormatter.Get(TypeInfo(TArrayOfFloatDoubleRemotable),strPrmName,CurvePositions);
+  if Assigned(Pointer(CurvePositions)) then
+    callCtx.AddObjectToFree(TObject(CurvePositions));
   strPrmName := 'ProblemID';  AFormatter.Get(TypeInfo(integer),strPrmName,ProblemID);
   
   tmpObj := Self.GetFactory().CreateInstance() as IFitServer;
@@ -786,7 +786,7 @@ begin
   if hasObjCntrl then
     objCntrl.Activate();
   try
-    returnVal := tmpObj.SetSpecimenPositions(SpecimenPositions,ProblemID);
+    returnVal := tmpObj.SetCurvePositions(CurvePositions,ProblemID);
     if Assigned(TObject(returnVal)) then
       callCtx.AddObjectToFree(TObject(returnVal));
     
@@ -805,7 +805,7 @@ begin
   end;
 end;
 
-procedure TFitServer_ServiceBinder.SetSpecimenIntervalsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
+procedure TFitServer_ServiceBinder.SetCurveBoundsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
 var
   cllCntrl : ICallControl;
   objCntrl : IObjectControl;
@@ -814,17 +814,17 @@ var
   callCtx : ICallContext;
   strPrmName : string;
   procName,trgName : string;
-  SpecimenIntervals : TArrayOfFloatDoubleRemotable;
+  CurveBounds : TArrayOfFloatDoubleRemotable;
   ProblemID : integer;
   returnVal : TResult;
 begin
   callCtx := AContext;
   TObject(returnVal) := nil;
-  TObject(SpecimenIntervals) := nil;
+  TObject(CurveBounds) := nil;
   
-  strPrmName := 'SpecimenIntervals';  AFormatter.Get(TypeInfo(TArrayOfFloatDoubleRemotable),strPrmName,SpecimenIntervals);
-  if Assigned(Pointer(SpecimenIntervals)) then
-    callCtx.AddObjectToFree(TObject(SpecimenIntervals));
+  strPrmName := 'CurveBounds';  AFormatter.Get(TypeInfo(TArrayOfFloatDoubleRemotable),strPrmName,CurveBounds);
+  if Assigned(Pointer(CurveBounds)) then
+    callCtx.AddObjectToFree(TObject(CurveBounds));
   strPrmName := 'ProblemID';  AFormatter.Get(TypeInfo(integer),strPrmName,ProblemID);
   
   tmpObj := Self.GetFactory().CreateInstance() as IFitServer;
@@ -834,7 +834,7 @@ begin
   if hasObjCntrl then
     objCntrl.Activate();
   try
-    returnVal := tmpObj.SetSpecimenIntervals(SpecimenIntervals,ProblemID);
+    returnVal := tmpObj.SetCurveBounds(CurveBounds,ProblemID);
     if Assigned(TObject(returnVal)) then
       callCtx.AddObjectToFree(TObject(returnVal));
     
@@ -900,7 +900,7 @@ begin
   end;
 end;
 
-procedure TFitServer_ServiceBinder.AddPointToSpecimenIntervalsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
+procedure TFitServer_ServiceBinder.AddPointToCurveBoundsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
 var
   cllCntrl : ICallControl;
   objCntrl : IObjectControl;
@@ -928,7 +928,7 @@ begin
   if hasObjCntrl then
     objCntrl.Activate();
   try
-    returnVal := tmpObj.AddPointToSpecimenIntervals(XValue,YValue,ProblemID);
+    returnVal := tmpObj.AddPointToCurveBounds(XValue,YValue,ProblemID);
     if Assigned(TObject(returnVal)) then
       callCtx.AddObjectToFree(TObject(returnVal));
     
@@ -947,7 +947,7 @@ begin
   end;
 end;
 
-procedure TFitServer_ServiceBinder.AddPointToSpecimenPositionsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
+procedure TFitServer_ServiceBinder.AddPointToCurvePositionsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
 var
   cllCntrl : ICallControl;
   objCntrl : IObjectControl;
@@ -975,7 +975,7 @@ begin
   if hasObjCntrl then
     objCntrl.Activate();
   try
-    returnVal := tmpObj.AddPointToSpecimenPositions(XValue,YValue,ProblemID);
+    returnVal := tmpObj.AddPointToCurvePositions(XValue,YValue,ProblemID);
     if Assigned(TObject(returnVal)) then
       callCtx.AddObjectToFree(TObject(returnVal));
     
@@ -1123,7 +1123,7 @@ begin
   end;
 end;
 
-procedure TFitServer_ServiceBinder.GetSpecimenPositionsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
+procedure TFitServer_ServiceBinder.GetCurvePositionsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
 var
   cllCntrl : ICallControl;
   objCntrl : IObjectControl;
@@ -1147,7 +1147,7 @@ begin
   if hasObjCntrl then
     objCntrl.Activate();
   try
-    returnVal := tmpObj.GetSpecimenPositions(ProblemID);
+    returnVal := tmpObj.GetCurvePositions(ProblemID);
     if Assigned(TObject(returnVal)) then
       callCtx.AddObjectToFree(TObject(returnVal));
     
@@ -1166,7 +1166,7 @@ begin
   end;
 end;
 
-procedure TFitServer_ServiceBinder.GetSpecimenIntervalsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
+procedure TFitServer_ServiceBinder.GetCurveBoundsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
 var
   cllCntrl : ICallControl;
   objCntrl : IObjectControl;
@@ -1190,7 +1190,7 @@ begin
   if hasObjCntrl then
     objCntrl.Activate();
   try
-    returnVal := tmpObj.GetSpecimenIntervals(ProblemID);
+    returnVal := tmpObj.GetCurveBounds(ProblemID);
     if Assigned(TObject(returnVal)) then
       callCtx.AddObjectToFree(TObject(returnVal));
     
@@ -1837,7 +1837,7 @@ begin
   end;
 end;
 
-procedure TFitServer_ServiceBinder.ReplacePointInSpecimenIntervalsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
+procedure TFitServer_ServiceBinder.ReplacePointInCurveBoundsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
 var
   cllCntrl : ICallControl;
   objCntrl : IObjectControl;
@@ -1869,7 +1869,7 @@ begin
   if hasObjCntrl then
     objCntrl.Activate();
   try
-    returnVal := tmpObj.ReplacePointInSpecimenIntervals(PrevXValue,PrevYValue,NewXValue,NewYValue,ProblemID);
+    returnVal := tmpObj.ReplacePointInCurveBounds(PrevXValue,PrevYValue,NewXValue,NewYValue,ProblemID);
     if Assigned(TObject(returnVal)) then
       callCtx.AddObjectToFree(TObject(returnVal));
     
@@ -1888,7 +1888,7 @@ begin
   end;
 end;
 
-procedure TFitServer_ServiceBinder.ReplacePointInSpecimenPositionsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
+procedure TFitServer_ServiceBinder.ReplacePointInCurvePositionsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
 var
   cllCntrl : ICallControl;
   objCntrl : IObjectControl;
@@ -1920,7 +1920,7 @@ begin
   if hasObjCntrl then
     objCntrl.Activate();
   try
-    returnVal := tmpObj.ReplacePointInSpecimenPositions(PrevXValue,PrevYValue,NewXValue,NewYValue,ProblemID);
+    returnVal := tmpObj.ReplacePointInCurvePositions(PrevXValue,PrevYValue,NewXValue,NewYValue,ProblemID);
     if Assigned(TObject(returnVal)) then
       callCtx.AddObjectToFree(TObject(returnVal));
     
@@ -2015,7 +2015,7 @@ begin
   end;
 end;
 
-procedure TFitServer_ServiceBinder.GetSpecimenCountHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
+procedure TFitServer_ServiceBinder.GetCurveCountHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
 var
   cllCntrl : ICallControl;
   objCntrl : IObjectControl;
@@ -2039,7 +2039,7 @@ begin
   if hasObjCntrl then
     objCntrl.Activate();
   try
-    returnVal := tmpObj.GetSpecimenCount(ProblemID);
+    returnVal := tmpObj.GetCurveCount(ProblemID);
     if Assigned(TObject(returnVal)) then
       callCtx.AddObjectToFree(TObject(returnVal));
     
@@ -2058,7 +2058,7 @@ begin
   end;
 end;
 
-procedure TFitServer_ServiceBinder.GetSpecimenPointsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
+procedure TFitServer_ServiceBinder.GetCurvePointsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
 var
   cllCntrl : ICallControl;
   objCntrl : IObjectControl;
@@ -2084,7 +2084,7 @@ begin
   if hasObjCntrl then
     objCntrl.Activate();
   try
-    returnVal := tmpObj.GetSpecimenPoints(SpecIndex,ProblemID);
+    returnVal := tmpObj.GetCurvePoints(SpecIndex,ProblemID);
     if Assigned(TObject(returnVal)) then
       callCtx.AddObjectToFree(TObject(returnVal));
     
@@ -2103,7 +2103,7 @@ begin
   end;
 end;
 
-procedure TFitServer_ServiceBinder.GetSpecimenParameterCountHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
+procedure TFitServer_ServiceBinder.GetCurveParameterCountHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
 var
   cllCntrl : ICallControl;
   objCntrl : IObjectControl;
@@ -2129,7 +2129,7 @@ begin
   if hasObjCntrl then
     objCntrl.Activate();
   try
-    returnVal := tmpObj.GetSpecimenParameterCount(ProblemID,SpecIndex);
+    returnVal := tmpObj.GetCurveParameterCount(ProblemID,SpecIndex);
     if Assigned(TObject(returnVal)) then
       callCtx.AddObjectToFree(TObject(returnVal));
     
@@ -2148,7 +2148,7 @@ begin
   end;
 end;
 
-procedure TFitServer_ServiceBinder.GetSpecimenParameterHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
+procedure TFitServer_ServiceBinder.GetCurveParameterHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
 var
   cllCntrl : ICallControl;
   objCntrl : IObjectControl;
@@ -2176,7 +2176,7 @@ begin
   if hasObjCntrl then
     objCntrl.Activate();
   try
-    returnVal := tmpObj.GetSpecimenParameter(ProblemID,SpecIndex,ParamIndex);
+    returnVal := tmpObj.GetCurveParameter(ProblemID,SpecIndex,ParamIndex);
     if Assigned(TObject(returnVal)) then
       callCtx.AddObjectToFree(TObject(returnVal));
     
@@ -2377,7 +2377,7 @@ begin
   end;
 end;
 
-procedure TFitServer_ServiceBinder.SetSpecimenParameterHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
+procedure TFitServer_ServiceBinder.SetCurveParameterHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
 var
   cllCntrl : ICallControl;
   objCntrl : IObjectControl;
@@ -2407,7 +2407,7 @@ begin
   if hasObjCntrl then
     objCntrl.Activate();
   try
-    returnVal := tmpObj.SetSpecimenParameter(ProblemID,SpecIndex,ParamIndex,Value);
+    returnVal := tmpObj.SetCurveParameter(ProblemID,SpecIndex,ParamIndex,Value);
     if Assigned(TObject(returnVal)) then
       callCtx.AddObjectToFree(TObject(returnVal));
     
@@ -2603,30 +2603,30 @@ constructor TFitServer_ServiceBinder.Create();
 begin
   inherited Create(GetServiceImplementationRegistry().FindFactory('IFitServer'));
   RegisterVerbHandler('SmoothProfile',{$IFDEF FPC}@{$ENDIF}SmoothProfileHandler);
-  RegisterVerbHandler('SubtractBackground',{$IFDEF FPC}@{$ENDIF}SubtractAllBackgroundHandler);
+  RegisterVerbHandler('SubtractBackground',{$IFDEF FPC}@{$ENDIF}SubtractBackgroundHandler);
   RegisterVerbHandler('DoAllAutomatically',{$IFDEF FPC}@{$ENDIF}DoAllAutomaticallyHandler);
   RegisterVerbHandler('MinimizeDifference',{$IFDEF FPC}@{$ENDIF}MinimizeDifferenceHandler);
-  RegisterVerbHandler('MinimizeNumberOfCurves',{$IFDEF FPC}@{$ENDIF}MinimizeNumberOfSpecimensHandler);
-  RegisterVerbHandler('FindSpecimenIntervals',{$IFDEF FPC}@{$ENDIF}FindSpecimenIntervalsHandler);
-  RegisterVerbHandler('FindSpecimenPositions',{$IFDEF FPC}@{$ENDIF}FindSpecimenPositionsHandler);
+  RegisterVerbHandler('MinimizeNumberOfCurves',{$IFDEF FPC}@{$ENDIF}MinimizeNumberOfCurvesHandler);
+  RegisterVerbHandler('ComputeCurveBounds',{$IFDEF FPC}@{$ENDIF}ComputeCurveBoundsHandler);
+  RegisterVerbHandler('ComputeCurvePositions',{$IFDEF FPC}@{$ENDIF}ComputeCurvePositionsHandler);
   RegisterVerbHandler('ComputeBackgroundPoints',{$IFDEF FPC}@{$ENDIF}ComputeBackgroundPointsHandler);
   RegisterVerbHandler('StopAsyncOper',{$IFDEF FPC}@{$ENDIF}StopAsyncOperHandler);
   RegisterVerbHandler('AsyncOper',{$IFDEF FPC}@{$ENDIF}AsyncOperHandler);
   RegisterVerbHandler('SelectArea',{$IFDEF FPC}@{$ENDIF}SelectAreaHandler);
   RegisterVerbHandler('ReturnToTotalProfile',{$IFDEF FPC}@{$ENDIF}ReturnToTotalProfileHandler);
-  RegisterVerbHandler('CreateSpecimenList',{$IFDEF FPC}@{$ENDIF}CreateSpecimenListHandler);
+  RegisterVerbHandler('CreateCurveList',{$IFDEF FPC}@{$ENDIF}CreateCurveListHandler);
   RegisterVerbHandler('SetProfilePointsSet',{$IFDEF FPC}@{$ENDIF}SetProfilePointsSetHandler);
   RegisterVerbHandler('SetBackgroundPointsSet',{$IFDEF FPC}@{$ENDIF}SetBackgroundPointsSetHandler);
-  RegisterVerbHandler('SetSpecimenPositions',{$IFDEF FPC}@{$ENDIF}SetSpecimenPositionsHandler);
-  RegisterVerbHandler('SetSpecimenIntervals',{$IFDEF FPC}@{$ENDIF}SetSpecimenIntervalsHandler);
+  RegisterVerbHandler('SetCurvePositions',{$IFDEF FPC}@{$ENDIF}SetCurvePositionsHandler);
+  RegisterVerbHandler('SetCurveBounds',{$IFDEF FPC}@{$ENDIF}SetCurveBoundsHandler);
   RegisterVerbHandler('AddPointToBackground',{$IFDEF FPC}@{$ENDIF}AddPointToBackgroundHandler);
-  RegisterVerbHandler('AddPointToSpecimenIntervals',{$IFDEF FPC}@{$ENDIF}AddPointToSpecimenIntervalsHandler);
-  RegisterVerbHandler('AddPointToSpecimenPositions',{$IFDEF FPC}@{$ENDIF}AddPointToSpecimenPositionsHandler);
+  RegisterVerbHandler('AddPointToCurveBounds',{$IFDEF FPC}@{$ENDIF}AddPointToCurveBoundsHandler);
+  RegisterVerbHandler('AddPointToCurvePositions',{$IFDEF FPC}@{$ENDIF}AddPointToCurvePositionsHandler);
   RegisterVerbHandler('GetProfilePointsSet',{$IFDEF FPC}@{$ENDIF}GetProfilePointsSetHandler);
   RegisterVerbHandler('GetSelectedArea',{$IFDEF FPC}@{$ENDIF}GetSelectedAreaHandler);
   RegisterVerbHandler('GetBackgroundPoints',{$IFDEF FPC}@{$ENDIF}GetBackgroundPointsHandler);
-  RegisterVerbHandler('GetSpecimenPositions',{$IFDEF FPC}@{$ENDIF}GetSpecimenPositionsHandler);
-  RegisterVerbHandler('GetSpecimenIntervals',{$IFDEF FPC}@{$ENDIF}GetSpecimenIntervalsHandler);
+  RegisterVerbHandler('GetCurvePositions',{$IFDEF FPC}@{$ENDIF}GetCurvePositionsHandler);
+  RegisterVerbHandler('GetCurveBounds',{$IFDEF FPC}@{$ENDIF}GetCurveBoundsHandler);
   RegisterVerbHandler('GetCalcProfilePointsSet',{$IFDEF FPC}@{$ENDIF}GetCalcProfilePointsSetHandler);
   RegisterVerbHandler('GetDeltaProfilePointsSet',{$IFDEF FPC}@{$ENDIF}GetDeltaProfilePointsSetHandler);
   RegisterVerbHandler('SetCurveThresh',{$IFDEF FPC}@{$ENDIF}SetCurveThreshHandler);
@@ -2642,19 +2642,19 @@ begin
   RegisterVerbHandler('GetState',{$IFDEF FPC}@{$ENDIF}GetStateHandler);
   RegisterVerbHandler('ReplacePointInProfile',{$IFDEF FPC}@{$ENDIF}ReplacePointInProfileHandler);
   RegisterVerbHandler('ReplacePointInBackground',{$IFDEF FPC}@{$ENDIF}ReplacePointInBackgroundHandler);
-  RegisterVerbHandler('ReplacePointInSpecimenIntervals',{$IFDEF FPC}@{$ENDIF}ReplacePointInSpecimenIntervalsHandler);
-  RegisterVerbHandler('ReplacePointInSpecimenPositions',{$IFDEF FPC}@{$ENDIF}ReplacePointInSpecimenPositionsHandler);
+  RegisterVerbHandler('ReplacePointInCurveBounds',{$IFDEF FPC}@{$ENDIF}ReplacePointInCurveBoundsHandler);
+  RegisterVerbHandler('ReplacePointInCurvePositions',{$IFDEF FPC}@{$ENDIF}ReplacePointInCurvePositionsHandler);
   RegisterVerbHandler('CreateProblem',{$IFDEF FPC}@{$ENDIF}CreateProblemHandler);
   RegisterVerbHandler('DiscardProblem',{$IFDEF FPC}@{$ENDIF}DiscardProblemHandler);
-  RegisterVerbHandler('GetSpecimenCount',{$IFDEF FPC}@{$ENDIF}GetSpecimenCountHandler);
-  RegisterVerbHandler('GetSpecimenPoints',{$IFDEF FPC}@{$ENDIF}GetSpecimenPointsHandler);
-  RegisterVerbHandler('GetSpecimenParameterCount',{$IFDEF FPC}@{$ENDIF}GetSpecimenParameterCountHandler);
-  RegisterVerbHandler('GetSpecimenParameter',{$IFDEF FPC}@{$ENDIF}GetSpecimenParameterHandler);
+  RegisterVerbHandler('GetCurveCount',{$IFDEF FPC}@{$ENDIF}GetCurveCountHandler);
+  RegisterVerbHandler('GetCurvePoints',{$IFDEF FPC}@{$ENDIF}GetCurvePointsHandler);
+  RegisterVerbHandler('GetCurveParameterCount',{$IFDEF FPC}@{$ENDIF}GetCurveParameterCountHandler);
+  RegisterVerbHandler('GetCurveParameter',{$IFDEF FPC}@{$ENDIF}GetCurveParameterHandler);
   RegisterVerbHandler('AddPointToData',{$IFDEF FPC}@{$ENDIF}AddPointToDataHandler);
   RegisterVerbHandler('GetGraph',{$IFDEF FPC}@{$ENDIF}GetGraphHandler);
   RegisterVerbHandler('GetProfileChunk',{$IFDEF FPC}@{$ENDIF}GetProfileChunkHandler);
   RegisterVerbHandler('GetProfileChunkCount',{$IFDEF FPC}@{$ENDIF}GetProfileChunkCountHandler);
-  RegisterVerbHandler('SetSpecimenParameter',{$IFDEF FPC}@{$ENDIF}SetSpecimenParameterHandler);
+  RegisterVerbHandler('SetCurveParameter',{$IFDEF FPC}@{$ENDIF}SetCurveParameterHandler);
   RegisterVerbHandler('GetCalcTimeStr',{$IFDEF FPC}@{$ENDIF}GetCalcTimeStrHandler);
   RegisterVerbHandler('GetRFactorStr',{$IFDEF FPC}@{$ENDIF}GetRFactorStrHandler);
   RegisterVerbHandler('GetAbsRFactorStr',{$IFDEF FPC}@{$ENDIF}GetAbsRFactorStrHandler);

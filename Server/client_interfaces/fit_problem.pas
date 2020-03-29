@@ -67,8 +67,8 @@ type
         function SetCurvePositions(ACurvePositions: TPointsSet): string;
         function GetCurvePositions: TTitlePointsSet;
 
-        function SetRFactorIntervals(ARFactorIntervals: TPointsSet): string;
-        function GetRFactorIntervals: TTitlePointsSet;
+        function SetRFactorBounds(ARFactorBounds: TPointsSet): string;
+        function GetRFactorBounds: TTitlePointsSet;
 {$IFNDEF EXCLUDE_SOMETHING}
         function GetSpecialCurveParameters: Curve_parameters;
         procedure SetSpecialCurveParameters(ACurveExpr: string;
@@ -77,24 +77,24 @@ type
 {$ENDIF}
         procedure AddPointToData(XValue, YValue: double);
         procedure AddPointToBackground(XValue, YValue: double);
-        procedure AddPointToRFactorIntervals(XValue, YValue: double);
+        procedure AddPointToRFactorBounds(XValue, YValue: double);
         procedure AddPointToCurvePositions(XValue, YValue: double);
 
         procedure ReplacePointInData(
             PrevXValue, PrevYValue, NewXValue, NewYValue: double);
         procedure ReplacePointInBackground(
             PrevXValue, PrevYValue, NewXValue, NewYValue: double);
-        procedure ReplacePointInRFactorIntervals(
+        procedure ReplacePointInRFactorBounds(
             PrevXValue, PrevYValue, NewXValue, NewYValue: double);
         procedure ReplacePointInCurvePositions(
             PrevXValue, PrevYValue, NewXValue, NewYValue: double);
 
-        function GetSpecimenList: TMSCRSpecimenList;
-        function GetSpecimenCount: longint;
-        function GetSpecimenParameterCount(SpecIndex: longint): longint;
-        procedure GetSpecimenParameter(SpecIndex: longint; ParamIndex: longint;
+        function GetCurveList: TMSCRCurveList;
+        function GetCurveCount: longint;
+        function GetCurveParameterCount(SpecIndex: longint): longint;
+        procedure GetCurveParameter(SpecIndex: longint; ParamIndex: longint;
             var Name: string; var Value: double; var Type_: longint);
-        procedure SetSpecimenParameter(SpecIndex: longint; ParamIndex: longint;
+        procedure SetCurveParameter(SpecIndex: longint; ParamIndex: longint;
             Value: double);
         function GetCurvesList: TSelfCopiedCompList;
 
@@ -134,7 +134,7 @@ type
 
         function SelectArea(StartPointIndex, StopPointIndex: longint): string;
         function ReturnToTotalProfile: string;
-        procedure CreateSpecimenList;
+        procedure CreateCurveList;
 
         { Should be called in appropriate server state. }
         procedure CreateProblem;
@@ -365,7 +365,7 @@ begin
     //  ob'ekt, peredannyi cherez parametr ne dolzhen osvobozhdat'sya!
     ADR    := CreateRemotableArray(ACurvePositions);
     try
-        R := FitStub.SetSpecimenPositions(ADR, FProblemId);
+        R := FitStub.SetCurvePositions(ADR, FProblemId);
     finally
         ADR.Free;
     end;
@@ -382,10 +382,10 @@ end;
 function TFitProblem.GetCurvePositions: TTitlePointsSet;
 begin
     Assert(Assigned(FitStub));
-    Result := ProcessPointsResult(FitStub.GetSpecimenPositions(FProblemId));
+    Result := ProcessPointsResult(FitStub.GetCurvePositions(FProblemId));
 end;
 
-function TFitProblem.SetRFactorIntervals(ARFactorIntervals: TPointsSet): string;
+function TFitProblem.SetRFactorBounds(ARFactorBounds: TPointsSet): string;
 var
     Res:    longint;
     ErrMsg: string;
@@ -396,9 +396,9 @@ begin
     Res    := 0;
     ErrMsg := '';
     //  ob'ekt, peredannyi cherez parametr ne dolzhen osvobozhdat'sya!
-    ADR    := CreateRemotableArray(ARFactorIntervals);
+    ADR    := CreateRemotableArray(ARFactorBounds);
     try
-        R := FitStub.SetSpecimenIntervals(ADR, FProblemId);
+        R := FitStub.SetCurveBounds(ADR, FProblemId);
     finally
         ADR.Free;
     end;
@@ -412,10 +412,10 @@ begin
     Result := ErrMsg;
 end;
 
-function TFitProblem.GetRFactorIntervals: TTitlePointsSet;
+function TFitProblem.GetRFactorBounds: TTitlePointsSet;
 begin
     Assert(Assigned(FitStub));
-    Result := ProcessPointsResult(FitStub.GetSpecimenIntervals(FProblemId));
+    Result := ProcessPointsResult(FitStub.GetCurveBounds(FProblemId));
 end;
 
 {$IFDEF FITCGI}
@@ -499,7 +499,7 @@ end;
 
 {$ENDIF}
 
-function TFitProblem.GetSpecimenCount: longint;
+function TFitProblem.GetCurveCount: longint;
 var
     Res:    longint;
     ErrMsg: string;
@@ -508,7 +508,7 @@ begin
     Assert(Assigned(FitStub));
     Res    := 0;
     ErrMsg := '';
-    Count  := FitStub.GetSpecimenCount(FProblemId);
+    Count  := FitStub.GetCurveCount(FProblemId);
     if not Assigned(Count) then
         raise Exception.Create(OutOfServerResources);
 
@@ -522,7 +522,7 @@ begin
     end;
 end;
 
-function TFitProblem.GetSpecimenParameterCount(SpecIndex: longint): longint;
+function TFitProblem.GetCurveParameterCount(SpecIndex: longint): longint;
 var
     Res:    longint;
     ErrMsg: string;
@@ -531,7 +531,7 @@ begin
     Assert(Assigned(FitStub));
     Res    := 0;
     ErrMsg := '';
-    Count  := FitStub.GetSpecimenParameterCount(FProblemId, SpecIndex);
+    Count  := FitStub.GetCurveParameterCount(FProblemId, SpecIndex);
     if not Assigned(Count) then
         raise Exception.Create(OutOfServerResources);
 
@@ -545,7 +545,7 @@ begin
     end;
 end;
 
-procedure TFitProblem.GetSpecimenParameter(SpecIndex: longint;
+procedure TFitProblem.GetCurveParameter(SpecIndex: longint;
     ParamIndex: longint; var Name: string; var Value: double; var Type_: longint);
 var
     Res:    longint;
@@ -555,7 +555,7 @@ begin
     Assert(Assigned(FitStub));
     Res    := 0;
     ErrMsg := '';
-    R      := FitStub.GetSpecimenParameter(FProblemId, SpecIndex, ParamIndex);
+    R      := FitStub.GetCurveParameter(FProblemId, SpecIndex, ParamIndex);
     if not Assigned(R) then
         raise Exception.Create(OutOfServerResources);
 
@@ -571,7 +571,7 @@ begin
     end;
 end;
 
-procedure TFitProblem.SetSpecimenParameter(SpecIndex: longint;
+procedure TFitProblem.SetCurveParameter(SpecIndex: longint;
     ParamIndex: longint; Value: double);
 var
     Res:    longint;
@@ -581,7 +581,7 @@ begin
     Assert(Assigned(FitStub));
     Res    := 0;
     ErrMsg := '';
-    R      := FitStub.SetSpecimenParameter(FProblemId, SpecIndex, ParamIndex, Value);
+    R      := FitStub.SetCurveParameter(FProblemId, SpecIndex, ParamIndex, Value);
     if not Assigned(R) then
         raise Exception.Create(OutOfServerResources);
 
@@ -593,7 +593,7 @@ begin
     end;
 end;
 
-function TFitProblem.GetSpecimenList: TMSCRSpecimenList;
+function TFitProblem.GetCurveList: TMSCRCurveList;
 var
     Res:    longint;
     ErrMsg: string;
@@ -608,9 +608,9 @@ begin
     Assert(Assigned(FitStub));
     Res    := 0;
     ErrMsg := '';
-    Result := TMSCRSpecimenList.Create(nil);
+    Result := TMSCRCurveList.Create(nil);
     try
-        Count := FitStub.GetSpecimenCount(FProblemId);
+        Count := FitStub.GetCurveCount(FProblemId);
         if not Assigned(Count) then
             raise Exception.Create(OutOfServerResources);
 
@@ -625,7 +625,7 @@ begin
 
         for SpecIndex := 0 to SpecCount - 1 do
         begin
-            Count := FitStub.GetSpecimenParameterCount(FProblemId, SpecIndex);
+            Count := FitStub.GetCurveParameterCount(FProblemId, SpecIndex);
             if not Assigned(Count) then
                 raise Exception.Create(OutOfServerResources);
 
@@ -644,7 +644,7 @@ begin
             try
                 for ParamIndex := 0 to ParamCount - 1 do
                 begin
-                    R := FitStub.GetSpecimenParameter(
+                    R := FitStub.GetCurveParameter(
                         FProblemId, SpecIndex, ParamIndex);
                     if not Assigned(R) then
                         raise Exception.Create(OutOfServerResources);
@@ -692,7 +692,7 @@ begin
     ErrMsg := '';
     Result := TSelfCopiedCompList.Create(nil);
     try
-        SpecCount := FitStub.GetSpecimenCount(FProblemId);
+        SpecCount := FitStub.GetCurveCount(FProblemId);
         if not Assigned(SpecCount) then
             raise Exception.Create(OutOfServerResources);
 
@@ -707,7 +707,7 @@ begin
 
         for SpecIndex := 0 to Count - 1 do
         begin
-            R := FitStub.GetSpecimenPoints(SpecIndex, FProblemId);
+            R := FitStub.GetCurvePoints(SpecIndex, FProblemId);
             if not Assigned(R) then
                 raise Exception.Create(OutOfServerResources);
 
@@ -874,7 +874,7 @@ var
     R:      TResult;
 begin
     Assert(Assigned(FitStub));
-    R := FitStub.FindSpecimenIntervals(FProblemId);
+    R := FitStub.ComputeCurveBounds(FProblemId);
     if not Assigned(R) then
         raise Exception.Create(OutOfServerResources);
     Res    := R.ErrCode;
@@ -914,7 +914,7 @@ var
     R:      TResult;
 begin
     Assert(Assigned(FitStub));
-    R := FitStub.FindSpecimenPositions(FProblemId);
+    R := FitStub.ComputeCurvePositions(FProblemId);
     if not Assigned(R) then
         raise Exception.Create(OutOfServerResources);
     Res    := R.ErrCode;
@@ -1068,14 +1068,14 @@ begin
     Result := ErrMsg;
 end;
 
-procedure TFitProblem.CreateSpecimenList;
+procedure TFitProblem.CreateCurveList;
 var
     Res:    longint;
     ErrMsg: string;
     R:      TResult;
 begin
     Assert(Assigned(FitStub));
-    R := FitStub.CreateSpecimenList(FProblemId);
+    R := FitStub.CreateCurveList(FProblemId);
     if not Assigned(R) then
         raise Exception.Create(OutOfServerResources);
     Res    := R.ErrCode;
@@ -1125,14 +1125,14 @@ begin
     end;
 end;
 
-procedure TFitProblem.AddPointToRFactorIntervals(XValue, YValue: double);
+procedure TFitProblem.AddPointToRFactorBounds(XValue, YValue: double);
 var
     Res:    longint;
     ErrMsg: string;
     R:      TResult;
 begin
     Assert(Assigned(FitStub));
-    R := FitStub.AddPointToSpecimenIntervals(XValue, YValue, FProblemId);
+    R := FitStub.AddPointToCurveBounds(XValue, YValue, FProblemId);
     if not Assigned(R) then
         raise Exception.Create(OutOfServerResources);
     Res    := R.ErrCode;
@@ -1151,7 +1151,7 @@ var
     R:      TResult;
 begin
     Assert(Assigned(FitStub));
-    R := FitStub.AddPointToSpecimenPositions(XValue, YValue, FProblemId);
+    R := FitStub.AddPointToCurvePositions(XValue, YValue, FProblemId);
     if not Assigned(R) then
         raise Exception.Create(OutOfServerResources);
     Res    := R.ErrCode;
@@ -1205,7 +1205,7 @@ begin
     end;
 end;
 
-procedure TFitProblem.ReplacePointInRFactorIntervals(
+procedure TFitProblem.ReplacePointInRFactorBounds(
     PrevXValue, PrevYValue, NewXValue, NewYValue: double);
 var
     Res:    longint;
@@ -1213,7 +1213,7 @@ var
     R:      TResult;
 begin
     Assert(Assigned(FitStub));
-    R := FitStub.ReplacePointInSpecimenIntervals(PrevXValue,
+    R := FitStub.ReplacePointInCurveBounds(PrevXValue,
         PrevYValue, NewXValue, NewYValue, FProblemId);
     if not Assigned(R) then
         raise Exception.Create(OutOfServerResources);
@@ -1234,7 +1234,7 @@ var
     R:      TResult;
 begin
     Assert(Assigned(FitStub));
-    R := FitStub.ReplacePointInSpecimenPositions(PrevXValue,
+    R := FitStub.ReplacePointInCurvePositions(PrevXValue,
         PrevYValue, NewXValue, NewYValue, FProblemId);
     if not Assigned(R) then
         raise Exception.Create(OutOfServerResources);

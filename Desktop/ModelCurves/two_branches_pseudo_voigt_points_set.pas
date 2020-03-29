@@ -38,7 +38,7 @@ type
         function GetEta: double;
 
         { Performs recalculation of all points of function. }
-        procedure DoCalc(const Intervals: TPointsSet); override;
+        procedure DoCalc(const Bounds: TPointsSet); override;
 
     public
         constructor Create(AOwner: TComponent); override;
@@ -60,16 +60,16 @@ uses
 
 {=================== T2BranchesPseudoVoigtPointsSet ===========================}
 
-procedure T2BranchesPseudoVoigtPointsSet.DoCalc(const Intervals: TPointsSet);
+procedure T2BranchesPseudoVoigtPointsSet.DoCalc(const Bounds: TPointsSet);
 var
     i, j: longint;
 begin
-    if Assigned(Intervals) then
+    if Assigned(Bounds) then
     begin
-        Assert((Intervals.PointsCount mod 2) = 0);
-        for i := 0 to (Intervals.PointsCount shr 1) - 1 do
-            for j := Trunc(Intervals.PointXCoord[i shl 1]) to
-                Trunc(Intervals.PointXCoord[(i shl 1) + 1]) do
+        Assert((Bounds.PointsCount mod 2) = 0);
+        for i := 0 to (Bounds.PointsCount shr 1) - 1 do
+            for j := Trunc(Bounds.PointXCoord[i shl 1]) to
+                Trunc(Bounds.PointXCoord[(i shl 1) + 1]) do
                 Points[j][2] :=
                     TwoBranchesPseudoVoigtPoint(A, Sigma, Eta,
                     SigmaRight, EtaRight, x0, Points[j][1]);

@@ -85,8 +85,8 @@ type
         function GetCurvePositions: TTitlePointsSet;
 
         { Returns hint or error message received from the server. }
-        function SetRFactorIntervals(ARFactorIntervals: TPointsSet): string;
-        function GetRFactorIntervals: TTitlePointsSet;
+        function SetRFactorBounds(ARFactorBounds: TPointsSet): string;
+        function GetRFactorBounds: TTitlePointsSet;
 {$IFDEF _WINDOWS}
         function GetSpecialCurveParameters: Curve_parameters;
         procedure SetSpecialCurveParameters(ACurveExpr: string;
@@ -95,24 +95,24 @@ type
 {$ENDIF}
         procedure AddPointToData(XValue, YValue: double);
         procedure AddPointToBackground(XValue, YValue: double);
-        procedure AddPointToRFactorIntervals(XValue, YValue: double);
+        procedure AddPointToRFactorBounds(XValue, YValue: double);
         procedure AddPointToCurvePositions(XValue, YValue: double);
 
         procedure ReplacePointInData(
             PrevXValue, PrevYValue, NewXValue, NewYValue: double);
         procedure ReplacePointInBackground(
             PrevXValue, PrevYValue, NewXValue, NewYValue: double);
-        procedure ReplacePointInRFactorIntervals(
+        procedure ReplacePointInRFactorBounds(
             PrevXValue, PrevYValue, NewXValue, NewYValue: double);
         procedure ReplacePointInCurvePositions(
             PrevXValue, PrevYValue, NewXValue, NewYValue: double);
 
-        function GetSpecimenList: TMSCRSpecimenList;
-        function GetSpecimenCount: longint;
-        function GetSpecimenParameterCount(SpecIndex: longint): longint;
-        procedure GetSpecimenParameter(SpecIndex: longint; ParamIndex: longint;
+        function GetCurveList: TMSCRCurveList;
+        function GetCurveCount: longint;
+        function GetCurveParameterCount(SpecIndex: longint): longint;
+        procedure GetCurveParameter(SpecIndex: longint; ParamIndex: longint;
             var Name: string; var Value: double; var Type_: longint);
-        procedure SetSpecimenParameter(SpecIndex: longint; ParamIndex: longint;
+        procedure SetCurveParameter(SpecIndex: longint; ParamIndex: longint;
             Value: double);
         function GetCurvesList: TSelfCopiedCompList;
 
@@ -162,7 +162,7 @@ type
         function SelectArea(StartPointIndex, StopPointIndex: longint): string;
         { Returns hint or error message received from the server. }
         function ReturnToTotalProfile: string;
-        procedure CreateSpecimenList;
+        procedure CreateCurveList;
     end;
 
     IFitProblem = interface(IFitService)

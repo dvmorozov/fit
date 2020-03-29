@@ -114,7 +114,7 @@ type
         { Pairs of points defining intervals of R-factor calculation.
           Should always be displayed allowing user to see where R-factor
           is calculated. }
-        FRFactorIntervals: TTitlePointsSet;
+        FRFactorBounds: TTitlePointsSet;
 
         { Contains all curves collected from tasks (for example,
           for separate intervals). Items are added synchronously to the list. }
@@ -123,7 +123,7 @@ type
         FCurvePositions: TTitlePointsSet;
         { Containers of parameters of curves.
           TODO: change type and remove SetWaveLength. }
-        FSpecimenList:   TMSCRSpecimenList;
+        FCurveList:   TMSCRCurveList;
 
         { Dependent on this flag either data of the selected interval are used
           or data of the whole profile. }
@@ -217,7 +217,7 @@ type
             Data: TPointsSet; StartIndex: longint; EndIndex: longint);
 
         { Integrates specimen curve and adds resulting value to the list of results. }
-        procedure AddSpecimenToList(Points: TCurvePointsSet;
+        procedure AddCurveToList(Points: TCurvePointsSet;
         { Indexes of start and end points defining boundaries of the peak. }
             StartPointIndex, StopPointIndex: longint);
         { Searches for peak points and return them. }
@@ -251,7 +251,7 @@ type
         // procedure CreateResultedCurvePositions;
         { Iterates through list of curves and creates common list of parameters
           of all curves complementing them with calculated parameters. }
-        procedure CreateSpecimenListAlg;
+        procedure CreateCurveListAlg;
         { Prepares intermediate results for user. }
         procedure GoToReadyForFit;
 
@@ -289,8 +289,8 @@ type
         function SetCurvePositions(ACurvePositions: TPointsSet): string;
         function GetCurvePositions: TTitlePointsSet;
 
-        function SetRFactorIntervals(ARFactorIntervals: TPointsSet): string;
-        function GetRFactorIntervals: TTitlePointsSet;
+        function SetRFactorBounds(ARFactorBounds: TPointsSet): string;
+        function GetRFactorBounds: TTitlePointsSet;
 {$IFDEF _WINDOWS}
         procedure SetSpecialCurveParameters(ACurveExpr: string;
         { Equality to Nil means initialization. }
@@ -303,7 +303,7 @@ type
 
         procedure AddPointToData(XValue, YValue: double);
         procedure AddPointToBackground(XValue, YValue: double);
-        procedure AddPointToRFactorIntervals(XValue, YValue: double);
+        procedure AddPointToRFactorBounds(XValue, YValue: double);
         procedure AddPointToCurvePositions(XValue, YValue: double);
 
         { All methods call ReplacePoint. }
@@ -312,25 +312,25 @@ type
             NewYValue: double);
         procedure ReplacePointInBackground(PrevXValue, PrevYValue,
             NewXValue, NewYValue: double);
-        procedure ReplacePointInRFactorIntervals(PrevXValue, PrevYValue,
+        procedure ReplacePointInRFactorBounds(PrevXValue, PrevYValue,
             NewXValue, NewYValue: double);
         procedure ReplacePointInCurvePositions(PrevXValue, PrevYValue,
             NewXValue, NewYValue: double);
 
         { Returns list of parameters of all curves. }
-        function GetSpecimenList: TMSCRSpecimenList;
+        function GetCurveList: TMSCRCurveList;
         { Returns list of components containing sets of points. }
         function GetCurvesList: TSelfCopiedCompList;
 
         { These methods check validity of server state and
           throw EUserException in the case when state is invalid. }
 
-        function GetSpecimenCount: longint;
-        function GetSpecimenPoints(SpecIndex: longint): TNamedPointsSet;
-        function GetSpecimenParameterCount(SpecIndex: longint): longint;
-        procedure GetSpecimenParameter(SpecIndex: longint; ParamIndex: longint;
+        function GetCurveCount: longint;
+        function GetCurvePoints(SpecIndex: longint): TNamedPointsSet;
+        function GetCurveParameterCount(SpecIndex: longint): longint;
+        procedure GetCurveParameter(SpecIndex: longint; ParamIndex: longint;
             var Name: string; var Value: double; var Type_: longint);
-        procedure SetSpecimenParameter(SpecIndex: longint; ParamIndex: longint;
+        procedure SetCurveParameter(SpecIndex: longint; ParamIndex: longint;
             Value: double);
 
         { Asynchronous long-term operations. }
@@ -348,7 +348,7 @@ type
         function DoAllAutomatically: string; virtual;
         { Performs model fitting (initial or subsequent). Corresponds to MinimizeDifference. }
         function MinimizeDifference: string; virtual;
-        { Performs model fitting without initialization of application intervals. }
+        { Performs model fitting without initialization of bounds. }
         function MinimizeDifferenceAgain: string; virtual;
         { Search for model describing experimental data with given accuracy
           by minimum number of specimens. Sequentially reducing the number
@@ -382,7 +382,7 @@ type
         function ReturnToTotalProfile: string;
         { Defines starting and finishing point for each curve (specimen),
           integrates it and puts parameters into resulting list. }
-        procedure CreateSpecimenList;
+        procedure CreateCurveList;
 
         { The fields setting and getting of which are not related with sensitive
           for the actor or long-term activity are better implemented by properties. }
@@ -461,9 +461,9 @@ const
     StillNotDone: string = 'The calculation still not accomplished.';
     // Raschet ne byl zapuschen
     CalcNotStarted: string = 'The calculation not started.';
-    SpecimenListNotReady: string = 'Specimen list not ready.';
-    SpecimenParameterListNotReady: string = 'Specimen parameter list not ready.';
-    InadmissibleSpecimenIndex: string = 'Inadmissible specimen index.';
+    CurveListNotReady: string = 'Curve list not ready.';
+    CurveParameterListNotReady: string = 'Curve parameter list not ready.';
+    InadmissibleCurveIndex: string = 'Inadmissible specimen index.';
     InadmissibleParameterIndex: string = 'Inadmissible parameter index.';
     CRLF: string = #13#10;
 
@@ -578,10 +578,10 @@ begin
 
     try
         Assert(Assigned(ACurvePositions));
-        Assert(Assigned(FSpecimenList));
+        Assert(Assigned(FCurveList));
 
         FCurvePositions.Clear;
-        FSpecimenList.Clear;
+        FCurveList.Clear;
 
         for i := 0 to ACurvePositions.PointsCount - 1 do
             AddPoint(FCurvePositions, ACurvePositions.PointXCoord[i],
@@ -615,7 +615,7 @@ begin
     end;
 end;
 
-function TFitServer.SetRFactorIntervals(ARFactorIntervals: TPointsSet): string;
+function TFitServer.SetRFactorBounds(ARFactorBounds: TPointsSet): string;
 var
     i:   longint;
     Msg: string;
@@ -628,16 +628,16 @@ begin
     end;
 
     try
-        Assert(Assigned(ARFactorIntervals));
-        Assert(Assigned(FSpecimenList));
+        Assert(Assigned(ARFactorBounds));
+        Assert(Assigned(FCurveList));
 
-        FRFactorIntervals.Clear;
-        FSpecimenList.Clear;
+        FRFactorBounds.Clear;
+        FCurveList.Clear;
 
-        for i := 0 to ARFactorIntervals.PointsCount - 1 do
-            AddPoint(FRFactorIntervals, ARFactorIntervals.PointXCoord[i],
-                ARFactorIntervals.PointYCoord[i]);
-        ARFactorIntervals.Free;
+        for i := 0 to ARFactorBounds.PointsCount - 1 do
+            AddPoint(FRFactorBounds, ARFactorBounds.PointXCoord[i],
+                ARFactorBounds.PointYCoord[i]);
+        ARFactorBounds.Free;
 
         if FExpProfile.PointsCount > 2 then
             GoToReadyForFit
@@ -671,7 +671,7 @@ begin
     SetState(ProfileWaiting);
 
     FBackgroundPoints.Free;
-    FRFactorIntervals.Free;
+    FRFactorBounds.Free;
     FCurvePositions.Free;
     FExpProfile.Free;
     FParams.Free;
@@ -697,11 +697,11 @@ begin
     // v spets. rezhim
     FExpProfile     := TTitlePointsSet.Create(nil);
     FBackgroundPoints := TTitlePointsSet.Create(nil);
-    FRFactorIntervals := TTitlePointsSet.Create(nil);
+    FRFactorBounds := TTitlePointsSet.Create(nil);
     // elementy v eti spiski d. dobavlyat'sya sinhronno
     FCurvePositions := TTitlePointsSet.Create(nil);
-    FSpecimenList   := TMSCRSpecimenList.Create(nil);
-    FSpecimenList.Lambda := WaveLength;
+    FCurveList   := TMSCRCurveList.Create(nil);
+    FCurveList.Lambda := WaveLength;
     FCurvesList     := TSelfCopiedCompList.Create(nil);
 
     SetState(ProfileWaiting);
@@ -1207,7 +1207,7 @@ var
 begin
     // !!! spisok ne ochischaetsya, chtoby naydennye tochki dobavlyalis'
     // k tochkam vybrannym pol'zovatelem !!!
-    Assert(Assigned(FRFactorIntervals));
+    Assert(Assigned(FRFactorBounds));
     Peaks := ComputeCurvePositionsActual(False);
     try
         Assert(Assigned(Peaks));
@@ -1238,8 +1238,8 @@ begin
                     First := True;
                     // zaschita ot dubley tochek
                     X     := Data.PointXCoord[i];
-                    if FRFactorIntervals.IndexOfValueX(X) = -1 then
-                        FRFactorIntervals.AddNewPoint(X, Data.PointYCoord[i]);
+                    if FRFactorBounds.IndexOfValueX(X) = -1 then
+                        FRFactorBounds.AddNewPoint(X, Data.PointYCoord[i]);
                 end;
                 // ostal'nye tochki propuskaem...
             end
@@ -1248,8 +1248,8 @@ begin
             begin
                 // predyduschaya tochka - pravaya granitsa
                 X := Data.PointXCoord[i - 1];
-                if FRFactorIntervals.IndexOfValueX(X) = -1 then
-                    FRFactorIntervals.AddNewPoint(X,
+                if FRFactorBounds.IndexOfValueX(X) = -1 then
+                    FRFactorBounds.AddNewPoint(X,
                         Data.PointYCoord[i - 1]);
                 First := False;
             end// ne tochka pika
@@ -1260,8 +1260,8 @@ begin
             // v kachestve pravoy granitsy berem poslednyuyu tochku
             X := Data.PointXCoord[i];
             // zaschita ot dubley
-            if FRFactorIntervals.IndexOfValueX(X) = -1 then
-                FRFactorIntervals.AddNewPoint(X, Data.PointYCoord[i]);
+            if FRFactorBounds.IndexOfValueX(X) = -1 then
+                FRFactorBounds.AddNewPoint(X, Data.PointYCoord[i]);
             First := False;
         end;
     finally
@@ -1533,10 +1533,10 @@ begin
         Result := nil;
 end;
 
-function TFitServer.GetRFactorIntervals: TTitlePointsSet;
+function TFitServer.GetRFactorBounds: TTitlePointsSet;
 begin
-    if Assigned(FRFactorIntervals) then
-        Result := TTitlePointsSet(FRFactorIntervals.GetCopy)
+    if Assigned(FRFactorBounds) then
+        Result := TTitlePointsSet(FRFactorBounds.GetCopy)
     else
         Result := nil;
 end;
@@ -1566,52 +1566,52 @@ begin
         Result := nil;
 end;
 
-function TFitServer.GetSpecimenCount: longint;
+function TFitServer.GetCurveCount: longint;
 begin
     if not Assigned(FCurvesList) then
-        raise EUserException.Create(SpecimenListNotReady);
+        raise EUserException.Create(CurveListNotReady);
     Result := FCurvesList.Count;
 end;
 
-function TFitServer.GetSpecimenPoints(SpecIndex: longint): TNamedPointsSet;
+function TFitServer.GetCurvePoints(SpecIndex: longint): TNamedPointsSet;
 var
     Count: longint;
 begin
-    Count := GetSpecimenCount;
+    Count := GetCurveCount;
     if (SpecIndex < 0) or (SpecIndex >= Count) then
-        raise EUserException.Create(InadmissibleSpecimenIndex);
+        raise EUserException.Create(InadmissibleCurveIndex);
 
     Result := TNamedPointsSet(TNamedPointsSet(
         FCurvesList.Items[SpecIndex]).GetCopy);
 end;
 
-function TFitServer.GetSpecimenParameterCount(SpecIndex: longint): longint;
+function TFitServer.GetCurveParameterCount(SpecIndex: longint): longint;
 var
-    SpecParamList:   TMSCRSpecimenList;
+    SpecParamList:   TMSCRCurveList;
     CurveParameters: Curve_parameters;
 begin
-    SpecParamList := GetSpecimenList;
+    SpecParamList := GetCurveList;
     if not Assigned(SpecParamList) then
-        raise EUserException.Create(SpecimenParameterListNotReady);
+        raise EUserException.Create(CurveParameterListNotReady);
     if (SpecIndex < 0) or (SpecIndex >= SpecParamList.Count) then
-        raise EUserException.Create(InadmissibleSpecimenIndex);
+        raise EUserException.Create(InadmissibleCurveIndex);
 
     CurveParameters := Curve_parameters(SpecParamList.Items[SpecIndex]);
     Result := CurveParameters.Params.Count;
 end;
 
-procedure TFitServer.GetSpecimenParameter(SpecIndex: longint;
+procedure TFitServer.GetCurveParameter(SpecIndex: longint;
     ParamIndex: longint; var Name: string; var Value: double; var Type_: longint);
 var
-    SpecParamList: TMSCRSpecimenList;
+    SpecParamList: TMSCRCurveList;
     CurveParameters: Curve_parameters;
     Parameter: TSpecialCurveParameter;
 begin
-    SpecParamList := GetSpecimenList;
+    SpecParamList := GetCurveList;
     if not Assigned(SpecParamList) then
-        raise EUserException.Create(SpecimenParameterListNotReady);
+        raise EUserException.Create(CurveParameterListNotReady);
     if (SpecIndex < 0) or (SpecIndex >= SpecParamList.Count) then
-        raise EUserException.Create(InadmissibleSpecimenIndex);
+        raise EUserException.Create(InadmissibleCurveIndex);
 
     CurveParameters := Curve_parameters(SpecParamList.Items[SpecIndex]);
     if (ParamIndex < 0) or (ParamIndex >= CurveParameters.Params.Count) then
@@ -1623,18 +1623,18 @@ begin
     Type_     := longint(Parameter.Type_);
 end;
 
-procedure TFitServer.SetSpecimenParameter(SpecIndex: longint;
+procedure TFitServer.SetCurveParameter(SpecIndex: longint;
     ParamIndex: longint; Value: double);
 var
-    SpecParamList: TMSCRSpecimenList;
+    SpecParamList: TMSCRCurveList;
     CurveParameters: Curve_parameters;
     Parameter: TSpecialCurveParameter;
 begin
-    SpecParamList := GetSpecimenList;
+    SpecParamList := GetCurveList;
     if not Assigned(SpecParamList) then
-        raise EUserException.Create(SpecimenParameterListNotReady);
+        raise EUserException.Create(CurveParameterListNotReady);
     if (SpecIndex < 0) or (SpecIndex >= SpecParamList.Count) then
-        raise EUserException.Create(InadmissibleSpecimenIndex);
+        raise EUserException.Create(InadmissibleCurveIndex);
 
     CurveParameters := Curve_parameters(SpecParamList.Items[SpecIndex]);
     if (ParamIndex < 0) or (ParamIndex >= CurveParameters.Params.Count) then
@@ -1773,7 +1773,7 @@ begin
     Result := TempDouble;
 end;
 
-procedure TFitServer.AddSpecimenToList(Points: TCurvePointsSet;
+procedure TFitServer.AddCurveToList(Points: TCurvePointsSet;
     StartPointIndex, StopPointIndex: longint);
 var
     CurveParameters: Curve_parameters;
@@ -1806,7 +1806,7 @@ var
 
 begin
     Assert(Assigned(Points));
-    Assert(Assigned(FSpecimenList));
+    Assert(Assigned(FCurveList));
     Integral := IntegrateWithBoundaries(Points, StartPointIndex, StopPointIndex);
 
     CurveParameters := Curve_parameters(Points.Parameters.GetCopy);
@@ -1817,7 +1817,7 @@ begin
         AddNewParameter(FinishPosName, Points.PointXCoord[StopPointIndex]);
         AddNewParameter('Integral', Integral);
 
-        FSpecimenList.Add(CurveParameters);
+        FCurveList.Add(CurveParameters);
 
     except
         CurveParameters.Free;
@@ -1915,7 +1915,7 @@ begin
             // CreateResultedCurvePositions;
             CreateResultedProfile;
             CreateDeltaProfile;
-            CreateSpecimenListAlg;
+            CreateCurveListAlg;
 
             if FSpecPosFoundForAuto then
             begin
@@ -2083,9 +2083,9 @@ begin
     // raise EUserException.Create(
     // InadmissibleServerState + CRLF + NotAllData);
     // vmesto oshibki - sozdanie neobhodimyh dannyh
-    if FRFactorIntervals.PointsCount < 2 then
+    if FRFactorBounds.PointsCount < 2 then
     begin
-        FRFactorIntervals.Clear;
+        FRFactorBounds.Clear;
         ComputeCurveBoundsAlg;
     end;
     if FCurvePositions.PointsCount = 0 then
@@ -2132,9 +2132,9 @@ begin
     // raise EUserException.Create(
     // InadmissibleServerState + CRLF + NotAllData);
     // vmesto oshibki - sozdanie neobhodimyh dannyh
-    if FRFactorIntervals.PointsCount < 2 then
+    if FRFactorBounds.PointsCount < 2 then
     begin
-        FRFactorIntervals.Clear;
+        FRFactorBounds.Clear;
         ComputeCurveBoundsAlg;
     end;
     if FCurvePositions.PointsCount = 0 then
@@ -2144,10 +2144,10 @@ begin
     RecreateMainCalcThread(MinimizeDifferenceAlg, DoneProc);
 end;
 
-function TFitServer.GetSpecimenList: TMSCRSpecimenList;
+function TFitServer.GetCurveList: TMSCRCurveList;
 begin
     // vozvraschaem chto est' bez proverki
-    Result := TMSCRSpecimenList(FSpecimenList.GetCopy);
+    Result := TMSCRCurveList(FCurveList.GetCopy);
 end;
 
 procedure TFitServer.CreateResultedProfile;
@@ -2305,17 +2305,17 @@ begin
         begin
             Assert(Assigned(FExpProfile));
             Assert(Assigned(FBackgroundPoints));
-            Assert(Assigned(FRFactorIntervals));
+            Assert(Assigned(FRFactorBounds));
             Assert(Assigned(FCurvePositions));
-            Assert(Assigned(FSpecimenList));
+            Assert(Assigned(FCurveList));
             // chtoby mozhno bylo dobavlyat' tochki tablichno bez vhoda
             // v spets. rezhim
             FExpProfile.Clear;
             // !!! ne dolzhen udalyat'sya pri vhode v BackNotRemoved !!!
             FBackgroundPoints.Clear;
-            FRFactorIntervals.Clear;
+            FRFactorBounds.Clear;
             FCurvePositions.Clear;
-            FSpecimenList.Clear;
+            FCurveList.Clear;
             FCurvesList.Clear;
 
             FSelectedArea.Free;
@@ -2377,9 +2377,9 @@ end;
 
 procedure TFitServer.SetWaveLength(AWaveLength: double);
 begin
-    Assert(Assigned(FSpecimenList));
+    Assert(Assigned(FCurveList));
     FWaveLength := AWaveLength;
-    FSpecimenList.Lambda := WaveLength;
+    FCurveList.Lambda := WaveLength;
 end;
 
 function TFitServer.GetWaveLength: double;
@@ -2412,7 +2412,7 @@ begin
     // сохраняется пользовательский выбор кривой;
     // https://action.mindjet.com/task/14588987
     // udalyaetsya vse, chto bylo vybrano pol'zovatelem
-    FRFactorIntervals.Clear;
+    FRFactorBounds.Clear;
     FBackgroundPoints.Clear;
 
     if FSavedState = BackNotRemoved then
@@ -2474,13 +2474,13 @@ var
     BegIndex, EndIndex, PosIndex: longint;
 begin
     // metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
-    Assert(Assigned(FRFactorIntervals));
+    Assert(Assigned(FRFactorBounds));
     Assert(Assigned(FCurvePositions));
     // zadachu nuzhno vypolnyat' nastol'ko, naskol'ko vozmozhno;
     // dlya poslednego nezakrytogo intervala podzadacha ne sozdaetsya;
     // eto proshe, chem zhestko ogranichivat', delat' proverki i
     // vyvodit' soobscheniya
-    // Assert(FRFactorIntervals.PointsCount mod 2 = 0);
+    // Assert(FRFactorBounds.PointsCount mod 2 = 0);
 
     if FSelectedAreaMode then
         Data := FSelectedArea
@@ -2489,7 +2489,7 @@ begin
     Assert(Assigned(Data));
     Data.Sort;
 
-    FRFactorIntervals.Sort; // !!! tochki, ogranichivayuschie intervaly m.b.
+    FRFactorBounds.Sort; // !!! tochki, ogranichivayuschie intervaly m.b.
     // peredany izvne, poetomu sortirovka ne
     // pomeshaet !!!
     FCurvePositions.Sort; // !!! to zhe samoe !!!
@@ -2501,7 +2501,7 @@ begin
     // sozdanie i zapolnenie podzadach
     // odna podzadacha sozdaetsya dazhe kogda intervaly ne opredeleny;
     // !!! odna tochka v nabore granits - interval ne opredelen !!!
-    if FRFactorIntervals.PointsCount < 2 then
+    if FRFactorBounds.PointsCount < 2 then
     (* v kachestve intervala beretsya ves' nabor dannyh -
           ne ochen' horosho, t.k. posle vyzova avtomaticheskoy
           generatsii intervalov rezul'tat ob'edinyaetsya s dannym,
@@ -2511,9 +2511,9 @@ begin
           BegIndex := 0;
           EndIndex := Data.PointsCount - 1;
           //  delayutsya sootvet. dobavleniya v nabor granits intervala
-          FRFactorIntervals.AddNewPoint(
+          FRFactorBounds.AddNewPoint(
           Data.PointXCoord[BegIndex], Data.PointYCoord[BegIndex]);
-          FRFactorIntervals.AddNewPoint(
+          FRFactorBounds.AddNewPoint(
           Data.PointXCoord[EndIndex], Data.PointYCoord[EndIndex]);
 
           FitTask.BegIndex := BegIndex;
@@ -2548,24 +2548,24 @@ begin
         *)// avtomaticheskiy poisk granits intervalov
          // avtomaticheskiy poisk meschaet udalyat' tochki,
          // poetomu poka otklyuchen
-         // FRFactorIntervals.Clear;
+         // FRFactorBounds.Clear;
          // ComputeCurveBoundsAlg;
     ;
     // else
     // begin
     j := 0;
-    while j <= FRFactorIntervals.PointsCount - 1 do
+    while j <= FRFactorBounds.PointsCount - 1 do
     begin
         // chislo tochek mozhet byt' ne chetnym, kogda pol'zovatel' izmenyaet
         // granitsy intervalov posle sozdaniya ekzemplyarov patterna -
         // nuzhno korrektno obrabatyvat' takuyu situatsiyu;
         // dlya nezakrytogo intervala podzadacha ne sozdayetsya
-        if j + 1 > FRFactorIntervals.PointsCount - 1 then
+        if j + 1 > FRFactorBounds.PointsCount - 1 then
             Break;
         FitTask := CreateTaskObject;
         try
-            BegIndex := Data.IndexOfValueX(FRFactorIntervals.PointXCoord[j]);
-            EndIndex := Data.IndexOfValueX(FRFactorIntervals.PointXCoord[j + 1]);
+            BegIndex := Data.IndexOfValueX(FRFactorBounds.PointXCoord[j]);
+            EndIndex := Data.IndexOfValueX(FRFactorBounds.PointXCoord[j + 1]);
             Assert(BegIndex <> -1);
             Assert(EndIndex <> -1);
 
@@ -2633,20 +2633,20 @@ begin
         // rabotaet ne optimal'no, no podhodit dlya
         // povtornoy initsializatsii pri dobavlenii /
         // udalenii tochek privyazki ekzemplyarov patterna
-        FT.RecreateCurveInstances(FSpecimenList);
+        FT.RecreateCurves(FCurveList);
         FT.CalculateProfile;
     end;
 end;
 
-procedure TFitServer.CreateSpecimenListAlg;
+procedure TFitServer.CreateCurveListAlg;
 var
     NS:   TCurvePointsSet;
     StartPointIndex, StopPointIndex: longint;
     i, j: longint;
 begin
     Assert(Assigned(FCurvesList));
-    Assert(Assigned(FSpecimenList));
-    FSpecimenList.Clear;
+    Assert(Assigned(FCurveList));
+    FCurveList.Clear;
 
     for i := 0 to FCurvesList.Count - 1 do
     begin
@@ -2672,19 +2672,19 @@ begin
             // krivye so slishkom maloy intensivnost'yu ne vklyuchayutsya v spisok
             if StopPointIndex = -1 then
                 StopPointIndex := NS.PointsCount - 1;
-            AddSpecimenToList(NS, StartPointIndex, StopPointIndex);
+            AddCurveToList(NS, StartPointIndex, StopPointIndex);
         end;
     end;
 end;
 
-procedure TFitServer.CreateSpecimenList;
+procedure TFitServer.CreateCurveList;
 begin
     // interfeysnyy metod, poetomu proveryaet sostoyanie
     if not FFitDone then
         raise EUserException.Create(InadmissibleServerState + CRLF +
             StillNotDone);
     try
-        CreateSpecimenListAlg;
+        CreateCurveListAlg;
     except
         SetState(ProfileWaiting);
         raise;
@@ -3009,7 +3009,7 @@ begin
        // sochetaniyu sootvetstvuet gotovnost'
        // k podgonke s parametrami pol'zovatelya
 
-    (FRFactorIntervals.PointsCount <> 0) and
+    (FRFactorBounds.PointsCount <> 0) and
         (FCurvePositions.PointsCount <> 0) then
     begin
         // trebuetsya peresozdanie podzadach i ekzemplyarov patterna,
@@ -3024,13 +3024,13 @@ begin
         // CreateResultedCurvePositions;
         CreateResultedProfile;
         CreateDeltaProfile;
-        CreateSpecimenListAlg;
+        CreateCurveListAlg;
 
         SetState(ReadyForFit); // !!! udalyaet podzadachi !!!
     end;
 end;
 
-procedure TFitServer.AddPointToRFactorIntervals(XValue, YValue: double);
+procedure TFitServer.AddPointToRFactorBounds(XValue, YValue: double);
 begin
     if State = AsyncOperation then
         raise EUserException.Create(InadmissibleServerState + CRLF +
@@ -3039,8 +3039,8 @@ begin
         raise EUserException.Create(InadmissibleServerState + CRLF +
             DataMustBeSet);
 
-    Assert(Assigned(FRFactorIntervals));
-    AddPoint(FRFactorIntervals, XValue, YValue);
+    Assert(Assigned(FRFactorBounds));
+    AddPoint(FRFactorBounds, XValue, YValue);
     GoToReadyForFit;
 end;
 
@@ -3104,7 +3104,7 @@ begin
     SetState(BackNotRemoved);
 end;
 
-procedure TFitServer.ReplacePointInRFactorIntervals(PrevXValue, PrevYValue,
+procedure TFitServer.ReplacePointInRFactorBounds(PrevXValue, PrevYValue,
     NewXValue, NewYValue: double);
 begin
     if State = AsyncOperation then
@@ -3114,8 +3114,8 @@ begin
         raise EUserException.Create(InadmissibleServerState + CRLF +
             DataMustBeSet);
 
-    Assert(Assigned(FRFactorIntervals));
-    FRFactorIntervals.ReplacePoint(PrevXValue, PrevYValue, NewXValue, NewYValue);
+    Assert(Assigned(FRFactorBounds));
+    FRFactorBounds.ReplacePoint(PrevXValue, PrevYValue, NewXValue, NewYValue);
 end;
 
 procedure TFitServer.ReplacePointInCurvePositions(PrevXValue, PrevYValue,

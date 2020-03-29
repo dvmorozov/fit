@@ -27,38 +27,38 @@ type
         function MinimizeDifference(const ProblemID: integer): TResult;
         function MinimizeNumberOfCurves(
             const ProblemID: integer): TResult;
-        function FindSpecimenIntervals(const ProblemID: integer): TResult;
-        function FindSpecimenPositions(const ProblemID: integer): TResult;
+        function ComputeCurveBounds(const ProblemID: integer): TResult;
+        function ComputeCurvePositions(const ProblemID: integer): TResult;
         function ComputeBackgroundPoints(const ProblemID: integer): TResult;
         function StopAsyncOper(const ProblemID: integer): TResult;
         function AsyncOper(const ProblemID: integer): TBoolResult;
         function SelectArea(const StartPointIndex: integer;
             const StopPointIndex: integer; const ProblemID: integer): TResult;
         function ReturnToTotalProfile(const ProblemID: integer): TResult;
-        function CreateSpecimenList(const ProblemID: integer): TResult;
+        function CreateCurveList(const ProblemID: integer): TResult;
         function SetProfilePointsSet(const PointsSet:
             TArrayOfFloatDoubleRemotable; const ProblemID: integer): TResult;
         function SetBackgroundPointsSet(
             const BackgroundPoints: TArrayOfFloatDoubleRemotable;
             const ProblemID: integer): TResult;
-        function SetSpecimenPositions(
-            const SpecimenPositions: TArrayOfFloatDoubleRemotable;
+        function SetCurvePositions(
+            const CurvePositions: TArrayOfFloatDoubleRemotable;
             const ProblemID: integer): TResult;
-        function SetSpecimenIntervals(
-            const SpecimenIntervals: TArrayOfFloatDoubleRemotable;
+        function SetCurveBounds(
+            const CurveBounds: TArrayOfFloatDoubleRemotable;
             const ProblemID: integer): TResult;
         function AddPointToBackground(const XValue: double;
             const YValue: double; const ProblemID: integer): TResult;
-        function AddPointToSpecimenIntervals(const XValue: double;
+        function AddPointToCurveBounds(const XValue: double;
             const YValue: double; const ProblemID: integer): TResult;
-        function AddPointToSpecimenPositions(const XValue: double;
+        function AddPointToCurvePositions(const XValue: double;
             const YValue: double; const ProblemID: integer): TResult;
         function GetProfilePointsSet(const ProblemID: integer): TPointsResult;
         function GetSelectedArea(const ProblemID: integer): TPointsResult;
         function GetBackgroundPoints(const ProblemID: integer): TPointsResult;
-        function GetSpecimenPositions(
+        function GetCurvePositions(
             const ProblemID: integer): TPointsResult;
-        function GetSpecimenIntervals(
+        function GetCurveBounds(
             const ProblemID: integer): TPointsResult;
         function GetCalcProfilePointsSet(
             const ProblemID: integer): TPointsResult;
@@ -86,20 +86,20 @@ type
         function ReplacePointInBackground(const PrevXValue: double;
             const PrevYValue: double; const NewXValue: double;
             const NewYValue: double; const ProblemID: integer): TResult;
-        function ReplacePointInSpecimenIntervals(const PrevXValue: double;
+        function ReplacePointInCurveBounds(const PrevXValue: double;
             const PrevYValue: double; const NewXValue: double;
             const NewYValue: double; const ProblemID: integer): TResult;
-        function ReplacePointInSpecimenPositions(const PrevXValue: double;
+        function ReplacePointInCurvePositions(const PrevXValue: double;
             const PrevYValue: double; const NewXValue: double;
             const NewYValue: double; const ProblemID: integer): TResult;
         function CreateProblem(): integer;
         procedure DiscardProblem(const ProblemID: integer);
-        function GetSpecimenCount(const ProblemID: integer): TIntResult;
-        function GetSpecimenPoints(const SpecIndex: integer;
+        function GetCurveCount(const ProblemID: integer): TIntResult;
+        function GetCurvePoints(const SpecIndex: integer;
             const ProblemID: integer): TNamedPointsResult;
-        function GetSpecimenParameterCount(const ProblemID: integer;
+        function GetCurveParameterCount(const ProblemID: integer;
             const SpecIndex: integer): TIntResult;
-        function GetSpecimenParameter(const ProblemID: integer;
+        function GetCurveParameter(const ProblemID: integer;
             const SpecIndex: integer;
             const ParamIndex: integer): TSpecParamResult;
         function AddPointToData(const XValue: double; const YValue: double;
@@ -109,7 +109,7 @@ type
         function GetProfileChunk(const ProblemID: integer;
             const ChunkNum: integer): TPointsResult;
         function GetProfileChunkCount(const ProblemID: integer): TIntResult;
-        function SetSpecimenParameter(const ProblemID: integer;
+        function SetCurveParameter(const ProblemID: integer;
             const SpecIndex: integer; const ParamIndex: integer;
             const Value: double): TResult;
         function GetCalcTimeStr(const ProblemID: integer): TStringResult;
@@ -262,14 +262,14 @@ begin
     end;
 end;
 
-function TFitServer_Proxy.FindSpecimenIntervals(const ProblemID: integer): TResult;
+function TFitServer_Proxy.ComputeCurveBounds(const ProblemID: integer): TResult;
 var
     locSerializer: IFormatterClient;
     strPrmName:    string;
 begin
     locSerializer := GetSerializer();
     try
-        locSerializer.BeginCall('FindSpecimenIntervals', GetTarget(),
+        locSerializer.BeginCall('ComputeCurveBounds', GetTarget(),
             (Self as ICallContext));
         locSerializer.Put('ProblemID', TypeInfo(integer), ProblemID);
         locSerializer.EndCall();
@@ -286,14 +286,14 @@ begin
     end;
 end;
 
-function TFitServer_Proxy.FindSpecimenPositions(const ProblemID: integer): TResult;
+function TFitServer_Proxy.ComputeCurvePositions(const ProblemID: integer): TResult;
 var
     locSerializer: IFormatterClient;
     strPrmName:    string;
 begin
     locSerializer := GetSerializer();
     try
-        locSerializer.BeginCall('FindSpecimenPositions', GetTarget(),
+        locSerializer.BeginCall('ComputeCurvePositions', GetTarget(),
             (Self as ICallContext));
         locSerializer.Put('ProblemID', TypeInfo(integer), ProblemID);
         locSerializer.EndCall();
@@ -429,14 +429,14 @@ begin
     end;
 end;
 
-function TFitServer_Proxy.CreateSpecimenList(const ProblemID: integer): TResult;
+function TFitServer_Proxy.CreateCurveList(const ProblemID: integer): TResult;
 var
     locSerializer: IFormatterClient;
     strPrmName:    string;
 begin
     locSerializer := GetSerializer();
     try
-        locSerializer.BeginCall('CreateSpecimenList', GetTarget(),
+        locSerializer.BeginCall('CreateCurveList', GetTarget(),
             (Self as ICallContext));
         locSerializer.Put('ProblemID', TypeInfo(integer), ProblemID);
         locSerializer.EndCall();
@@ -508,8 +508,8 @@ begin
     end;
 end;
 
-function TFitServer_Proxy.SetSpecimenPositions(
-    const SpecimenPositions: TArrayOfFloatDoubleRemotable;
+function TFitServer_Proxy.SetCurvePositions(
+    const CurvePositions: TArrayOfFloatDoubleRemotable;
     const ProblemID: integer): TResult;
 var
     locSerializer: IFormatterClient;
@@ -517,10 +517,10 @@ var
 begin
     locSerializer := GetSerializer();
     try
-        locSerializer.BeginCall('SetSpecimenPositions', GetTarget(),
+        locSerializer.BeginCall('SetCurvePositions', GetTarget(),
             (Self as ICallContext));
-        locSerializer.Put('SpecimenPositions', TypeInfo(TArrayOfFloatDoubleRemotable),
-            SpecimenPositions);
+        locSerializer.Put('CurvePositions', TypeInfo(TArrayOfFloatDoubleRemotable),
+            CurvePositions);
         locSerializer.Put('ProblemID', TypeInfo(integer), ProblemID);
         locSerializer.EndCall();
 
@@ -536,8 +536,8 @@ begin
     end;
 end;
 
-function TFitServer_Proxy.SetSpecimenIntervals(
-    const SpecimenIntervals: TArrayOfFloatDoubleRemotable;
+function TFitServer_Proxy.SetCurveBounds(
+    const CurveBounds: TArrayOfFloatDoubleRemotable;
     const ProblemID: integer): TResult;
 var
     locSerializer: IFormatterClient;
@@ -545,10 +545,10 @@ var
 begin
     locSerializer := GetSerializer();
     try
-        locSerializer.BeginCall('SetSpecimenIntervals', GetTarget(),
+        locSerializer.BeginCall('SetCurveBounds', GetTarget(),
             (Self as ICallContext));
-        locSerializer.Put('SpecimenIntervals', TypeInfo(TArrayOfFloatDoubleRemotable),
-            SpecimenIntervals);
+        locSerializer.Put('CurveBounds', TypeInfo(TArrayOfFloatDoubleRemotable),
+            CurveBounds);
         locSerializer.Put('ProblemID', TypeInfo(integer), ProblemID);
         locSerializer.EndCall();
 
@@ -591,7 +591,7 @@ begin
     end;
 end;
 
-function TFitServer_Proxy.AddPointToSpecimenIntervals(const XValue: double;
+function TFitServer_Proxy.AddPointToCurveBounds(const XValue: double;
     const YValue: double; const ProblemID: integer): TResult;
 var
     locSerializer: IFormatterClient;
@@ -599,7 +599,7 @@ var
 begin
     locSerializer := GetSerializer();
     try
-        locSerializer.BeginCall('AddPointToSpecimenIntervals', GetTarget(),
+        locSerializer.BeginCall('AddPointToCurveBounds', GetTarget(),
             (Self as ICallContext));
         locSerializer.Put('XValue', TypeInfo(double), XValue);
         locSerializer.Put('YValue', TypeInfo(double), YValue);
@@ -618,7 +618,7 @@ begin
     end;
 end;
 
-function TFitServer_Proxy.AddPointToSpecimenPositions(const XValue: double;
+function TFitServer_Proxy.AddPointToCurvePositions(const XValue: double;
     const YValue: double; const ProblemID: integer): TResult;
 var
     locSerializer: IFormatterClient;
@@ -626,7 +626,7 @@ var
 begin
     locSerializer := GetSerializer();
     try
-        locSerializer.BeginCall('AddPointToSpecimenPositions', GetTarget(),
+        locSerializer.BeginCall('AddPointToCurvePositions', GetTarget(),
             (Self as ICallContext));
         locSerializer.Put('XValue', TypeInfo(double), XValue);
         locSerializer.Put('YValue', TypeInfo(double), YValue);
@@ -716,14 +716,14 @@ begin
     end;
 end;
 
-function TFitServer_Proxy.GetSpecimenPositions(const ProblemID: integer): TPointsResult;
+function TFitServer_Proxy.GetCurvePositions(const ProblemID: integer): TPointsResult;
 var
     locSerializer: IFormatterClient;
     strPrmName:    string;
 begin
     locSerializer := GetSerializer();
     try
-        locSerializer.BeginCall('GetSpecimenPositions', GetTarget(),
+        locSerializer.BeginCall('GetCurvePositions', GetTarget(),
             (Self as ICallContext));
         locSerializer.Put('ProblemID', TypeInfo(integer), ProblemID);
         locSerializer.EndCall();
@@ -740,14 +740,14 @@ begin
     end;
 end;
 
-function TFitServer_Proxy.GetSpecimenIntervals(const ProblemID: integer): TPointsResult;
+function TFitServer_Proxy.GetCurveBounds(const ProblemID: integer): TPointsResult;
 var
     locSerializer: IFormatterClient;
     strPrmName:    string;
 begin
     locSerializer := GetSerializer();
     try
-        locSerializer.BeginCall('GetSpecimenIntervals', GetTarget(),
+        locSerializer.BeginCall('GetCurveBounds', GetTarget(),
             (Self as ICallContext));
         locSerializer.Put('ProblemID', TypeInfo(integer), ProblemID);
         locSerializer.EndCall();
@@ -1116,7 +1116,7 @@ begin
     end;
 end;
 
-function TFitServer_Proxy.ReplacePointInSpecimenIntervals(const PrevXValue: double;
+function TFitServer_Proxy.ReplacePointInCurveBounds(const PrevXValue: double;
     const PrevYValue: double; const NewXValue: double; const NewYValue: double;
     const ProblemID: integer): TResult;
 var
@@ -1125,7 +1125,7 @@ var
 begin
     locSerializer := GetSerializer();
     try
-        locSerializer.BeginCall('ReplacePointInSpecimenIntervals', GetTarget(),
+        locSerializer.BeginCall('ReplacePointInCurveBounds', GetTarget(),
             (Self as ICallContext));
         locSerializer.Put('PrevXValue', TypeInfo(double), PrevXValue);
         locSerializer.Put('PrevYValue', TypeInfo(double), PrevYValue);
@@ -1146,7 +1146,7 @@ begin
     end;
 end;
 
-function TFitServer_Proxy.ReplacePointInSpecimenPositions(const PrevXValue: double;
+function TFitServer_Proxy.ReplacePointInCurvePositions(const PrevXValue: double;
     const PrevYValue: double; const NewXValue: double; const NewYValue: double;
     const ProblemID: integer): TResult;
 var
@@ -1155,7 +1155,7 @@ var
 begin
     locSerializer := GetSerializer();
     try
-        locSerializer.BeginCall('ReplacePointInSpecimenPositions', GetTarget(),
+        locSerializer.BeginCall('ReplacePointInCurvePositions', GetTarget(),
             (Self as ICallContext));
         locSerializer.Put('PrevXValue', TypeInfo(double), PrevXValue);
         locSerializer.Put('PrevYValue', TypeInfo(double), PrevYValue);
@@ -1217,14 +1217,14 @@ begin
     end;
 end;
 
-function TFitServer_Proxy.GetSpecimenCount(const ProblemID: integer): TIntResult;
+function TFitServer_Proxy.GetCurveCount(const ProblemID: integer): TIntResult;
 var
     locSerializer: IFormatterClient;
     strPrmName:    string;
 begin
     locSerializer := GetSerializer();
     try
-        locSerializer.BeginCall('GetSpecimenCount', GetTarget(), (Self as ICallContext));
+        locSerializer.BeginCall('GetCurveCount', GetTarget(), (Self as ICallContext));
         locSerializer.Put('ProblemID', TypeInfo(integer), ProblemID);
         locSerializer.EndCall();
 
@@ -1240,7 +1240,7 @@ begin
     end;
 end;
 
-function TFitServer_Proxy.GetSpecimenPoints(const SpecIndex: integer;
+function TFitServer_Proxy.GetCurvePoints(const SpecIndex: integer;
     const ProblemID: integer): TNamedPointsResult;
 var
     locSerializer: IFormatterClient;
@@ -1248,7 +1248,7 @@ var
 begin
     locSerializer := GetSerializer();
     try
-        locSerializer.BeginCall('GetSpecimenPoints', GetTarget(),
+        locSerializer.BeginCall('GetCurvePoints', GetTarget(),
             (Self as ICallContext));
         locSerializer.Put('SpecIndex', TypeInfo(integer), SpecIndex);
         locSerializer.Put('ProblemID', TypeInfo(integer), ProblemID);
@@ -1266,7 +1266,7 @@ begin
     end;
 end;
 
-function TFitServer_Proxy.GetSpecimenParameterCount(const ProblemID: integer;
+function TFitServer_Proxy.GetCurveParameterCount(const ProblemID: integer;
     const SpecIndex: integer): TIntResult;
 var
     locSerializer: IFormatterClient;
@@ -1274,7 +1274,7 @@ var
 begin
     locSerializer := GetSerializer();
     try
-        locSerializer.BeginCall('GetSpecimenParameterCount', GetTarget(),
+        locSerializer.BeginCall('GetCurveParameterCount', GetTarget(),
             (Self as ICallContext));
         locSerializer.Put('ProblemID', TypeInfo(integer), ProblemID);
         locSerializer.Put('SpecIndex', TypeInfo(integer), SpecIndex);
@@ -1292,7 +1292,7 @@ begin
     end;
 end;
 
-function TFitServer_Proxy.GetSpecimenParameter(const ProblemID: integer;
+function TFitServer_Proxy.GetCurveParameter(const ProblemID: integer;
     const SpecIndex: integer; const ParamIndex: integer): TSpecParamResult;
 var
     locSerializer: IFormatterClient;
@@ -1300,7 +1300,7 @@ var
 begin
     locSerializer := GetSerializer();
     try
-        locSerializer.BeginCall('GetSpecimenParameter', GetTarget(),
+        locSerializer.BeginCall('GetCurveParameter', GetTarget(),
             (Self as ICallContext));
         locSerializer.Put('ProblemID', TypeInfo(integer), ProblemID);
         locSerializer.Put('SpecIndex', TypeInfo(integer), SpecIndex);
@@ -1420,7 +1420,7 @@ begin
     end;
 end;
 
-function TFitServer_Proxy.SetSpecimenParameter(const ProblemID: integer;
+function TFitServer_Proxy.SetCurveParameter(const ProblemID: integer;
     const SpecIndex: integer; const ParamIndex: integer;
     const Value: double): TResult;
 var
@@ -1429,7 +1429,7 @@ var
 begin
     locSerializer := GetSerializer();
     try
-        locSerializer.BeginCall('SetSpecimenParameter', GetTarget(),
+        locSerializer.BeginCall('SetCurveParameter', GetTarget(),
             (Self as ICallContext));
         locSerializer.Put('ProblemID', TypeInfo(integer), ProblemID);
         locSerializer.Put('SpecIndex', TypeInfo(integer), SpecIndex);

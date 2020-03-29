@@ -393,7 +393,7 @@ type
     { Index of curve on which the first click was. It is used in the cases when points of only one curve can be selected. }
     FActiveNumber: LongInt;
     { Collection should be passive. Object is set from TFitViewer and is checked on Nil. }
-    FSpecimenList: TMSCRSpecimenList;
+    FCurveList: TMSCRCurveList;
     { Indicates that data in tables were changed. }
     FModifiedParameters: Boolean;
     FModifiedDatasheet: Boolean;
@@ -712,7 +712,7 @@ procedure TFormMain.ActionDeleteExecute(Sender: TObject);
 var i, RowsToDelete, Index: LongInt;
 begin
     //  TODO: obobschit' na vse gridy
-    if Assigned(FSpecimenList) then
+    if Assigned(FCurveList) then
     begin
         with GridParameters do
         begin
@@ -722,10 +722,10 @@ begin
                 //  udalit' mozhno tol'ko tselye stroki
                 RowsToDelete := Selection.Bottom - Selection.Top + 1;
                 Index := Selection.Top - FixedRows;
-                for i := 1 to RowsToDelete do FSpecimenList.Delete(Index);
+                for i := 1 to RowsToDelete do FCurveList.Delete(Index);
             end;
         end;
-        FSpecimenList.GridAssign(GridParameters);
+        FCurveList.GridAssign(GridParameters);
         FModifiedParameters := True;
     end;
 end;
@@ -828,7 +828,7 @@ end;
 
 procedure TFormMain.ActionRemoveRFactorIntervalsExecute(Sender: TObject);
 begin
-    FitClientApp_.FitClient.RemoveRFactorIntervals;
+    FitClientApp_.FitClient.RemoveRFactorBounds;
     FitClientApp_.FitClient.SelectionMode := ModeSelNone;
 end;
 
@@ -1170,7 +1170,7 @@ begin
         XValue := StrToFloatDef(Cells[0, Row], 0);
         YValue := StrToFloatDef(Cells[1, Row], 0);
     end;
-    FitClientApp_.FitClient.AddPointToRFactorIntervals(XValue, YValue);
+    FitClientApp_.FitClient.AddPointToRFactorBounds(XValue, YValue);
 end;
 
 procedure TFormMain.ButAddSelectedDataPointClick(Sender: TObject);
@@ -1582,7 +1582,7 @@ begin
 
                     ModeSelPeakBounds: begin
                         //  vybor granits pikov
-                        NS := FitClientApp_.FitClient.GetRFactorIntervals;
+                        NS := FitClientApp_.FitClient.GetRFactorBounds;
                         Assert(Assigned(NS));
 
                         if Odd(NS.PointsCount) then ShowHint(HintNextPointOdd)
@@ -1877,10 +1877,10 @@ begin
             Screen.Cursor := crDefault;
             DecimalSeparator := SaveDecimalSeparator;
             FFitViewer.XCoordMode := XCM_SINTL;
-            if Assigned(FSpecimenList) then
+            if Assigned(FCurveList) then
             begin
-                FSpecimenList.ViewMode := XCM_SINTL;
-                FSpecimenList.GridAssign(GridParameters);
+                FCurveList.ViewMode := XCM_SINTL;
+                FCurveList.GridAssign(GridParameters);
             end;
             Theta.Checked := False;
             Theta2.Checked := False;
@@ -1893,10 +1893,10 @@ begin
     else
     begin
         FFitViewer.XCoordMode := XCM_SINTL;
-        if Assigned(FSpecimenList) then
+        if Assigned(FCurveList) then
         begin
-            FSpecimenList.ViewMode := XCM_SINTL;
-            FSpecimenList.GridAssign(GridParameters);
+            FCurveList.ViewMode := XCM_SINTL;
+            FCurveList.GridAssign(GridParameters);
         end;
         Theta.Checked := False;
         Theta2.Checked := False;
@@ -1911,10 +1911,10 @@ end;
 procedure TFormMain.ThetaClick(Sender: TObject);
 begin
     FFitViewer.XCoordMode := XCM_T;
-    if Assigned(FSpecimenList) then
+    if Assigned(FCurveList) then
     begin
-        FSpecimenList.ViewMode := XCM_T;
-        FSpecimenList.GridAssign(GridParameters);
+        FCurveList.ViewMode := XCM_T;
+        FCurveList.GridAssign(GridParameters);
     end;
     Theta.Checked := True;
     Theta2.Checked := True;
@@ -1927,10 +1927,10 @@ end;
 procedure TFormMain.N2ThetaClick(Sender: TObject);
 begin
     FFitViewer.XCoordMode := XCM_2T;
-    if Assigned(FSpecimenList) then
+    if Assigned(FCurveList) then
     begin
-        FSpecimenList.ViewMode := XCM_2T;
-        FSpecimenList.GridAssign(GridParameters);
+        FCurveList.ViewMode := XCM_2T;
+        FCurveList.GridAssign(GridParameters);
     end;
     Theta.Checked := False;
     Theta2.Checked := False;
@@ -2091,10 +2091,10 @@ begin
     begin
         FitClientApp_.FitClient.SetWaveLength(InputWavelengthDlg.FValue);
         FFitViewer.XCoordMode := XCM_SINTL;
-        if Assigned(FSpecimenList) then
+        if Assigned(FCurveList) then
         begin
-            FSpecimenList.ViewMode := XCM_SINTL;
-            FSpecimenList.GridAssign(GridParameters);
+            FCurveList.ViewMode := XCM_SINTL;
+            FCurveList.GridAssign(GridParameters);
         end;
         SinThetaLambda.Checked := True;
         SinThetaLambda2.Checked := True;

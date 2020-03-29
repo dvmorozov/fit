@@ -135,37 +135,37 @@ type
         function DoAllAutomatically(const ProblemID: integer): TResult;
         function MinimizeDifference(const ProblemID: integer): TResult;
         function MinimizeNumberOfCurves(const ProblemID: integer): TResult;
-        function FindSpecimenIntervals(const ProblemID: integer): TResult;
-        function FindSpecimenPositions(const ProblemID: integer): TResult;
+        function ComputeCurveBounds(const ProblemID: integer): TResult;
+        function ComputeCurvePositions(const ProblemID: integer): TResult;
         function ComputeBackgroundPoints(const ProblemID: integer): TResult;
         function StopAsyncOper(const ProblemID: integer): TResult;
         function AsyncOper(const ProblemID: integer): TBoolResult;
         function SelectArea(const StartPointIndex: integer;
             const StopPointIndex: integer; const ProblemID: integer): TResult;
         function ReturnToTotalProfile(const ProblemID: integer): TResult;
-        function CreateSpecimenList(const ProblemID: integer): TResult;
+        function CreateCurveList(const ProblemID: integer): TResult;
         function SetProfilePointsSet(const PointsSet: TArrayOfFloatDoubleRemotable;
             const ProblemID: integer): TResult;
         function SetBackgroundPointsSet(
             const BackgroundPoints: TArrayOfFloatDoubleRemotable;
             const ProblemID: integer): TResult;
-        function SetSpecimenPositions(
-            const SpecimenPositions: TArrayOfFloatDoubleRemotable;
+        function SetCurvePositions(
+            const CurvePositions: TArrayOfFloatDoubleRemotable;
             const ProblemID: integer): TResult;
-        function SetSpecimenIntervals(
-            const SpecimenIntervals: TArrayOfFloatDoubleRemotable;
+        function SetCurveBounds(
+            const CurveBounds: TArrayOfFloatDoubleRemotable;
             const ProblemID: integer): TResult;
         function AddPointToBackground(const XValue: double;
             const YValue: double; const ProblemID: integer): TResult;
-        function AddPointToSpecimenIntervals(const XValue: double;
+        function AddPointToCurveBounds(const XValue: double;
             const YValue: double; const ProblemID: integer): TResult;
-        function AddPointToSpecimenPositions(const XValue: double;
+        function AddPointToCurvePositions(const XValue: double;
             const YValue: double; const ProblemID: integer): TResult;
         function GetProfilePointsSet(const ProblemID: integer): TPointsResult;
         function GetSelectedArea(const ProblemID: integer): TPointsResult;
         function GetBackgroundPoints(const ProblemID: integer): TPointsResult;
-        function GetSpecimenPositions(const ProblemID: integer): TPointsResult;
-        function GetSpecimenIntervals(const ProblemID: integer): TPointsResult;
+        function GetCurvePositions(const ProblemID: integer): TPointsResult;
+        function GetCurveBounds(const ProblemID: integer): TPointsResult;
         function GetCalcProfilePointsSet(const ProblemID: integer): TPointsResult;
         function GetDeltaProfilePointsSet(const ProblemID: integer):
             TPointsResult;
@@ -191,20 +191,20 @@ type
         function ReplacePointInBackground(const PrevXValue: double;
             const PrevYValue: double; const NewXValue: double;
             const NewYValue: double; const ProblemID: integer): TResult;
-        function ReplacePointInSpecimenIntervals(const PrevXValue: double;
+        function ReplacePointInCurveBounds(const PrevXValue: double;
             const PrevYValue: double; const NewXValue: double;
             const NewYValue: double; const ProblemID: integer): TResult;
-        function ReplacePointInSpecimenPositions(const PrevXValue: double;
+        function ReplacePointInCurvePositions(const PrevXValue: double;
             const PrevYValue: double; const NewXValue: double;
             const NewYValue: double; const ProblemID: integer): TResult;
         function CreateProblem(): integer;
         procedure DiscardProblem(const ProblemID: integer);
-        function GetSpecimenCount(const ProblemID: integer): TIntResult;
-        function GetSpecimenPoints(const SpecIndex: integer;
+        function GetCurveCount(const ProblemID: integer): TIntResult;
+        function GetCurvePoints(const SpecIndex: integer;
             const ProblemID: integer): TNamedPointsResult;
-        function GetSpecimenParameterCount(const ProblemID: integer;
+        function GetCurveParameterCount(const ProblemID: integer;
             const SpecIndex: integer): TIntResult;
-        function GetSpecimenParameter(const ProblemID: integer;
+        function GetCurveParameter(const ProblemID: integer;
             const SpecIndex: integer;
             const ParamIndex: integer): TSpecParamResult;
         function AddPointToData(const XValue: double; const YValue: double;
@@ -214,7 +214,7 @@ type
         function GetProfileChunk(const ProblemID: integer;
             const ChunkNum: integer): TPointsResult;
         function GetProfileChunkCount(const ProblemID: integer): TIntResult;
-        function SetSpecimenParameter(const ProblemID: integer;
+        function SetCurveParameter(const ProblemID: integer;
             const SpecIndex: integer; const ParamIndex: integer;
             const Value: double): TResult;
         function GetCalcTimeStr(const ProblemID: integer): TStringResult;
@@ -395,42 +395,42 @@ begin
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'FindSpecimenIntervals',
+        'ComputeCurveBounds',
         '_E_N_',
-        'FindSpecimenIntervals'
+        'ComputeCurveBounds'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'FindSpecimenIntervals',
+        'ComputeCurveBounds',
         'FORMAT_Input_EncodingStyle',
         'literal'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'FindSpecimenIntervals',
+        'ComputeCurveBounds',
         'FORMAT_OutputEncodingStyle',
         'literal'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'FindSpecimenPositions',
+        'ComputeCurvePositions',
         '_E_N_',
-        'FindSpecimenPositions'
+        'ComputeCurvePositions'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'FindSpecimenPositions',
+        'ComputeCurvePositions',
         'FORMAT_Input_EncodingStyle',
         'literal'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'FindSpecimenPositions',
+        'ComputeCurvePositions',
         'FORMAT_OutputEncodingStyle',
         'literal'
         );
@@ -542,21 +542,21 @@ begin
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'CreateSpecimenList',
+        'CreateCurveList',
         '_E_N_',
-        'CreateSpecimenList'
+        'CreateCurveList'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'CreateSpecimenList',
+        'CreateCurveList',
         'FORMAT_Input_EncodingStyle',
         'literal'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'CreateSpecimenList',
+        'CreateCurveList',
         'FORMAT_OutputEncodingStyle',
         'literal'
         );
@@ -605,42 +605,42 @@ begin
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'SetSpecimenPositions',
+        'SetCurvePositions',
         '_E_N_',
-        'SetSpecimenPositions'
+        'SetCurvePositions'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'SetSpecimenPositions',
+        'SetCurvePositions',
         'FORMAT_Input_EncodingStyle',
         'literal'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'SetSpecimenPositions',
+        'SetCurvePositions',
         'FORMAT_OutputEncodingStyle',
         'literal'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'SetSpecimenIntervals',
+        'SetCurveBounds',
         '_E_N_',
-        'SetSpecimenIntervals'
+        'SetCurveBounds'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'SetSpecimenIntervals',
+        'SetCurveBounds',
         'FORMAT_Input_EncodingStyle',
         'literal'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'SetSpecimenIntervals',
+        'SetCurveBounds',
         'FORMAT_OutputEncodingStyle',
         'literal'
         );
@@ -668,42 +668,42 @@ begin
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'AddPointToSpecimenIntervals',
+        'AddPointToCurveBounds',
         '_E_N_',
-        'AddPointToSpecimenIntervals'
+        'AddPointToCurveBounds'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'AddPointToSpecimenIntervals',
+        'AddPointToCurveBounds',
         'FORMAT_Input_EncodingStyle',
         'literal'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'AddPointToSpecimenIntervals',
+        'AddPointToCurveBounds',
         'FORMAT_OutputEncodingStyle',
         'literal'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'AddPointToSpecimenPositions',
+        'AddPointToCurvePositions',
         '_E_N_',
-        'AddPointToSpecimenPositions'
+        'AddPointToCurvePositions'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'AddPointToSpecimenPositions',
+        'AddPointToCurvePositions',
         'FORMAT_Input_EncodingStyle',
         'literal'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'AddPointToSpecimenPositions',
+        'AddPointToCurvePositions',
         'FORMAT_OutputEncodingStyle',
         'literal'
         );
@@ -773,42 +773,42 @@ begin
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'GetSpecimenPositions',
+        'GetCurvePositions',
         '_E_N_',
-        'GetSpecimenPositions'
+        'GetCurvePositions'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'GetSpecimenPositions',
+        'GetCurvePositions',
         'FORMAT_Input_EncodingStyle',
         'literal'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'GetSpecimenPositions',
+        'GetCurvePositions',
         'FORMAT_OutputEncodingStyle',
         'literal'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'GetSpecimenIntervals',
+        'GetCurveBounds',
         '_E_N_',
-        'GetSpecimenIntervals'
+        'GetCurveBounds'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'GetSpecimenIntervals',
+        'GetCurveBounds',
         'FORMAT_Input_EncodingStyle',
         'literal'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'GetSpecimenIntervals',
+        'GetCurveBounds',
         'FORMAT_OutputEncodingStyle',
         'literal'
         );
@@ -1130,42 +1130,42 @@ begin
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'ReplacePointInSpecimenIntervals',
+        'ReplacePointInCurveBounds',
         '_E_N_',
-        'ReplacePointInSpecimenIntervals'
+        'ReplacePointInCurveBounds'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'ReplacePointInSpecimenIntervals',
+        'ReplacePointInCurveBounds',
         'FORMAT_Input_EncodingStyle',
         'literal'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'ReplacePointInSpecimenIntervals',
+        'ReplacePointInCurveBounds',
         'FORMAT_OutputEncodingStyle',
         'literal'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'ReplacePointInSpecimenPositions',
+        'ReplacePointInCurvePositions',
         '_E_N_',
-        'ReplacePointInSpecimenPositions'
+        'ReplacePointInCurvePositions'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'ReplacePointInSpecimenPositions',
+        'ReplacePointInCurvePositions',
         'FORMAT_Input_EncodingStyle',
         'literal'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'ReplacePointInSpecimenPositions',
+        'ReplacePointInCurvePositions',
         'FORMAT_OutputEncodingStyle',
         'literal'
         );
@@ -1214,84 +1214,84 @@ begin
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'GetSpecimenCount',
+        'GetCurveCount',
         '_E_N_',
-        'GetSpecimenCount'
+        'GetCurveCount'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'GetSpecimenCount',
+        'GetCurveCount',
         'FORMAT_Input_EncodingStyle',
         'literal'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'GetSpecimenCount',
+        'GetCurveCount',
         'FORMAT_OutputEncodingStyle',
         'literal'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'GetSpecimenPoints',
+        'GetCurvePoints',
         '_E_N_',
-        'GetSpecimenPoints'
+        'GetCurvePoints'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'GetSpecimenPoints',
+        'GetCurvePoints',
         'FORMAT_Input_EncodingStyle',
         'literal'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'GetSpecimenPoints',
+        'GetCurvePoints',
         'FORMAT_OutputEncodingStyle',
         'literal'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'GetSpecimenParameterCount',
+        'GetCurveParameterCount',
         '_E_N_',
-        'GetSpecimenParameterCount'
+        'GetCurveParameterCount'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'GetSpecimenParameterCount',
+        'GetCurveParameterCount',
         'FORMAT_Input_EncodingStyle',
         'literal'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'GetSpecimenParameterCount',
+        'GetCurveParameterCount',
         'FORMAT_OutputEncodingStyle',
         'literal'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'GetSpecimenParameter',
+        'GetCurveParameter',
         '_E_N_',
-        'GetSpecimenParameter'
+        'GetCurveParameter'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'GetSpecimenParameter',
+        'GetCurveParameter',
         'FORMAT_Input_EncodingStyle',
         'literal'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'GetSpecimenParameter',
+        'GetCurveParameter',
         'FORMAT_OutputEncodingStyle',
         'literal'
         );
@@ -1382,21 +1382,21 @@ begin
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'SetSpecimenParameter',
+        'SetCurveParameter',
         '_E_N_',
-        'SetSpecimenParameter'
+        'SetCurveParameter'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'SetSpecimenParameter',
+        'SetCurveParameter',
         'FORMAT_Input_EncodingStyle',
         'literal'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'SetSpecimenParameter',
+        'SetCurveParameter',
         'FORMAT_OutputEncodingStyle',
         'literal'
         );

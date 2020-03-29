@@ -37,9 +37,9 @@ type
         procedure CreatePatternActually;
         //  izmenenie parametrov patterna
         procedure UpdatePattern;
-        procedure UpdateSpecimen;
+        procedure UpdateCurve;
 
-        procedure GoToSpecimenIntervals;
+        procedure GoToCurveBounds;
         procedure ComputeCurveBounds;
         procedure SaveSpecParameters;
 
@@ -50,12 +50,12 @@ type
         procedure DoAllAutomatically;
 
         //  perehod k oknu vybora tochek privyazki patterna
-        procedure GoToSpecimenPositions;
-        procedure SelectSpecimenPosition;
-        procedure GenerateSpecimenPositions;
+        procedure GoToCurvePositions;
+        procedure SelectCurvePosition;
+        procedure GenerateCurvePositions;
 
-        procedure GoToSpecimenParameters;
-        procedure UpdateSpecimenParameters;
+        procedure GoToCurveParameters;
+        procedure UpdateCurveParameters;
         procedure LogIn;
         procedure StartEvaluation;
         procedure LogOut;
@@ -112,8 +112,8 @@ type
         function InsertDataWithTagByTemplate(Page: string;
             Data: TPointsSet; Selected: TPointsSet): string;
         //  special'niy variant vstavki dannyh dlya granits intervalov
-        function InsertDataWithTagByIntervals(Page: string;
-            Data: TPointsSet; SpecIntervals: TPointsSet): string;
+        function InsertDataWithTagByBounds(Page: string;
+            Data: TPointsSet; SpecBounds: TPointsSet): string;
         function InsertNamesByTemplate(TemplateIn: string;
             Names: TStringList; Files: TStringList): string;
 
@@ -244,7 +244,7 @@ const
     //'Недопустимый код ключа.';
     Profile: string      = 'Exp. data';
     //'Данные';
-    HeaderSpecimenNumber: string = 'Specimen number';
+    HeaderCurveNumber: string = 'Curve number';
     //'Номер экземпляра';
 
 {$ifdef windows}
@@ -463,10 +463,10 @@ begin
         UpdatePattern
     else
     if Command = 'update_specimen' then
-        UpdateSpecimen
+        UpdateCurve
     else
     if Command = 'go_to_specimen_intervals' then
-        GoToSpecimenIntervals
+        GoToCurveBounds
     else
     if Command = 'go_to_fitting' then
         GoToFitting
@@ -513,22 +513,22 @@ begin
     end
     else
     if Command = 'generate_specimen_positions' then
-        GenerateSpecimenPositions
+        GenerateCurvePositions
     else
     if Command = 'generate_specimen_intervals' then
         ComputeCurveBounds
     else
     if Command = 'go_to_specimen_parameters' then
-        GoToSpecimenParameters
+        GoToCurveParameters
     else
     if Command = 'select_specimen_position' then
-        SelectSpecimenPosition
+        SelectCurvePosition
     else
     if Command = 'select_bound_point' then
         SelectBoundPoint
     else
     if Command = 'update_specimen_parameters' then
-        UpdateSpecimenParameters
+        UpdateCurveParameters
     else
     if Command = 'upload_data' then
         UploadData
@@ -582,10 +582,10 @@ begin
         BackMore
     else
     if Command = 'go_to_chunk_specimen_intervals' then
-        GoToSpecimenIntervals
+        GoToCurveBounds
     else
     if Command = 'go_to_chunk_specimen_positions' then
-        GoToSpecimenPositions
+        GoToCurvePositions
     else
     if Command = 'open_project' then
         OpenProject
@@ -1356,7 +1356,7 @@ begin
     end
     else
         //  vyvod resul'tatov
-        GoToSpecimenParameters;
+        GoToCurveParameters;
 end;
 
 procedure TCGIDatamodule2.RefreshBackProgress;
@@ -1462,7 +1462,7 @@ begin
     end
     else
         //  vyvod resul'tatov
-        GoToSpecimenPositions;
+        GoToCurvePositions;
 end;
 
 procedure TCGIDatamodule2.RefreshSpecIntProgress;
@@ -1515,7 +1515,7 @@ begin
     end
     else
         //  vyvod resul'tatov
-        GoToSpecimenIntervals;
+        GoToCurveBounds;
 end;
 
 procedure TCGIDatamodule2.StopBackGenProcess;
@@ -1581,7 +1581,7 @@ begin
     end
     else
         //  vyvod resul'tatov
-        GoToSpecimenIntervals;
+        GoToCurveBounds;
 end;
 
 procedure TCGIDatamodule2.StopSpecPosGenProcess;
@@ -1614,7 +1614,7 @@ begin
     end
     else
         //  vyvod resul'tatov
-        GoToSpecimenPositions;
+        GoToCurvePositions;
 end;
 
 procedure TCGIDatamodule2.StopFitting;
@@ -1647,7 +1647,7 @@ begin
     end
     else
         //  vyvod resul'tatov
-        GoToSpecimenParameters;
+        GoToCurveParameters;
 end;
 
 procedure TCGIDatamodule2.AddPointToProfile;
@@ -2080,7 +2080,7 @@ begin
         else
             Proxy.SetCurveType(TGaussPointsSet.GetCurveTypeId_);
         //??? special'nye patterny poka ne obrabatyvayutsya
-        GoToSpecimenPositions;
+        GoToCurvePositions;
     end
     else
         raise Exception.Create(UnrecognizedCommand);
@@ -2177,7 +2177,7 @@ begin
 end;
 
 //  perehod k oknu vybora tochek privyazki patterna
-procedure TCGIDatamodule2.GoToSpecimenPositions;
+procedure TCGIDatamodule2.GoToCurvePositions;
 var
     Template: string;
     Data, SpecPositions: TPointsSet;
@@ -2283,7 +2283,7 @@ begin
     GoToPattern;
 end;
 
-procedure TCGIDatamodule2.UpdateSpecimen;
+procedure TCGIDatamodule2.UpdateCurve;
 var
     CurChunkNum: longint;
 begin
@@ -2300,14 +2300,14 @@ begin
         raise Exception.Create(ChunkNumberIsAbsent);
     end;
     //  ??? vypolnenie zaprosa
-    GoToSpecimenParameters;
+    GoToCurveParameters;
 end;
 
-procedure TCGIDatamodule2.GoToSpecimenIntervals;
+procedure TCGIDatamodule2.GoToCurveBounds;
 var
     Template: string;
     Pair:     array[1..1] of TStringPair;
-    Data, Intervals: TPointsSet;
+    Data, Bounds: TPointsSet;
     CurChunkNum: longint;
 begin
     //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
@@ -2338,7 +2338,7 @@ begin
     //Data := Proxy.GetProfilePointsSet;
     Data := Proxy.GetProfileChunk(CurChunkNum);
     try
-        Intervals := Proxy.GetRFactorIntervals;
+        Bounds := Proxy.GetRFactorBounds;
         try
             Template   := PrepareTemplate_specimen_intervals;
             Pair[1][1] := 'ProblemID';
@@ -2353,12 +2353,12 @@ begin
             Pair[1][2] := IntToStr(CurChunkNum);
             Template   := ReplaceStrings(Template, Pair, 1);
 
-            Template := InsertDataWithTagByIntervals(
-                Template, Data, Intervals);
+            Template := InsertDataWithTagByBounds(
+                Template, Data, Bounds);
             Template := InsertChunkLinks(Template, CurChunkNum, Data);
             Template := InsertKey(Template, Key);
         finally
-            Intervals.Free;
+            Bounds.Free;
         end;
     finally
         Data.Free;
@@ -3697,8 +3697,8 @@ begin
     end;
 end;
 
-function TCGIDatamodule2.InsertDataWithTagByIntervals(Page: string;
-    Data: TPointsSet; SpecIntervals: TPointsSet): string;
+function TCGIDatamodule2.InsertDataWithTagByBounds(Page: string;
+    Data: TPointsSet; SpecBounds: TPointsSet): string;
 var
     TmplBegin, TmplEnd, TmplLen: longint;
     Template, DataStr: string;
@@ -3735,12 +3735,12 @@ begin
 
                 Found := False;
                 //  dopuskaetsya ravenstvo nil
-                if Assigned(SpecIntervals) then
+                if Assigned(SpecBounds) then
                 begin
-                    SpecIntervals.Sort; //  dlya pravil'noy ustanovki Left, Right
-                    for j := 0 to SpecIntervals.PointsCount - 1 do
-                        if (Abs(X - SpecIntervals.PointXCoord[j]) <= TINY) and
-                            (Abs(Y - SpecIntervals.PointYCoord[j]) <= TINY) then
+                    SpecBounds.Sort; //  dlya pravil'noy ustanovki Left, Right
+                    for j := 0 to SpecBounds.PointsCount - 1 do
+                        if (Abs(X - SpecBounds.PointXCoord[j]) <= TINY) and
+                            (Abs(Y - SpecBounds.PointYCoord[j]) <= TINY) then
                         begin
                             Found := True;
                             Break;
@@ -3834,8 +3834,8 @@ end;
 
 const
     //  markery schablona stroki znacheniy parametrov ekzemplyara patterna
-    BeginSpecimenParameters: string = 'BeginSpecimenParameters';
-    EndSpecimenParameters: string = 'EndSpecimenParameters';
+    BeginCurveParameters: string = 'BeginCurveParameters';
+    EndCurveParameters: string = 'EndCurveParameters';
     //  markery schablona znacheniya parametra ekzemplyara patterna
     BeginValueItem: string = 'BeginValueItem';
     EndValueItem: string   = 'EndValueItem';
@@ -4073,7 +4073,7 @@ end;
 function TCGIDatamodule2.FillTemplateBySpecParameters(Page: string): string;
 var
     Pair: array[1..1] of TStringPair;
-    SpecParams: TMSCRSpecimenList;
+    SpecParams: TMSCRCurveList;
     i, j, ParamCount: longint;
     CP:   Curve_parameters;
     P:    TSpecialCurveParameter;
@@ -4082,7 +4082,7 @@ var
     //TmplDividerBegin,
     TmplValueBegin,     //  polozhenie schablona znacheniya parametra
     TmplInputBegin,     //  polozhenie poley vvoda znacheniy parametrov
-    TmplCalculatedInputBegin, TmplSpecimenBegin,
+    TmplCalculatedInputBegin, TmplCurveBegin,
     //  polozhenie strok znacheniy parametrov
     TmplEnd, TmplLen, TmplBeginTemp: longint;
     TmplHeader,
@@ -4090,7 +4090,7 @@ var
     TmplInput,          //  schablon polya vvoda znacheniya obychnogo parametra
     TmplCalculatedInput,//  schablon vychislyaemogo parametra
     TmplValue,          //  schablon znacheniya parametra
-    TmplSpecimen,       //  schablon stroki znacheniy parametrov
+    TmplCurve,       //  schablon stroki znacheniy parametrov
     Data, TmplTemp: string;
 begin
     Pair[1][1] := 'ProblemID';
@@ -4101,7 +4101,7 @@ begin
     Pair[1][2] := GetGraphURL;
     Page := ReplaceStrings(Page, Pair, 1);
 
-    SpecParams := Proxy.GetSpecimenList;
+    SpecParams := Proxy.GetCurveList;
     try
         FillHeaders := True;
         //  !!! shablony dolzhny udalyat'sya iz teksta nezavisimo ot nalichiya
@@ -4112,11 +4112,11 @@ begin
             EndHeaderItem, TmplHeaderBegin);
 
         //  snachala izvlekaetsya schablon stroki parametrov
-        TmplSpecimen := ExtractTemplate(Page, BeginSpecimenParameters,
-            EndSpecimenParameters, TmplSpecimenBegin);
+        TmplCurve := ExtractTemplate(Page, BeginCurveParameters,
+            EndCurveParameters, TmplCurveBegin);
 
         //  !!! schablon znacheniya parametra vybiraetsya iz schablona stroki !!!
-        TmplValue := ExtractTemplate(TmplSpecimen, BeginValueItem,
+        TmplValue := ExtractTemplate(TmplCurve, BeginValueItem,
             EndValueItem, TmplValueBegin);
         (*
         TmplDivider := ExtractTemplate(Page,
@@ -4139,7 +4139,7 @@ begin
             //  parametrov pervogo v spiske ekzemplyara patterna !!!
             if FillHeaders then
             begin
-                if Length(TmplSpecimen) <> 0 then
+                if Length(TmplCurve) <> 0 then
                 begin
                     TmplTemp      := '';
                     TmplBeginTemp := TmplHeaderBegin;
@@ -4147,7 +4147,7 @@ begin
                     begin
                         //  vstavlyaetsya zagolovok nomera ekzemplyara
                         Pair[1][1] := HeaderItemName;
-                        Pair[1][2] := HeaderSpecimenNumber;
+                        Pair[1][2] := HeaderCurveNumber;
                         Data := ReplaceStrings(TmplHeader, Pair, 1);
 
                         Insert(Data, TmplTemp, TmplBeginTemp);
@@ -4160,7 +4160,7 @@ begin
                         *)
                         //  vyvod poley vvoda; polya vvoda d
                         Pair[1][1] := ItemName;
-                        Pair[1][2] := HeaderSpecimenNumber;
+                        Pair[1][2] := HeaderCurveNumber;
                         Data := ReplaceStrings(TmplInput, Pair, 1);
                         Insert(Data, Page, TmplInputBegin);
                         TmplInputBegin := TmplInputBegin + Length(Data);
@@ -4206,15 +4206,15 @@ begin
                         end;
                     end;
                     Insert(TmplTemp, Page, TmplHeaderBegin);
-                    TmplSpecimenBegin := TmplSpecimenBegin + Length(TmplTemp);
+                    TmplCurveBegin := TmplCurveBegin + Length(TmplTemp);
                     ParamCount := CP.Params.Count + 1;  //  dobavlyaetsya pole nomera
                 end;
                 FillHeaders := False;
             end;
             //  vyvod znacheniy parametrov
-            if Length(TmplSpecimen) <> 0 then
+            if Length(TmplCurve) <> 0 then
             begin
-                TmplTemp      := TmplSpecimen;
+                TmplTemp      := TmplCurve;
                 TmplBeginTemp := TmplValueBegin;
                 if Length(TmplValue) <> 0 then
                 begin
@@ -4240,8 +4240,8 @@ begin
                         end;
                     end;
                 end;
-                Insert(TmplTemp, Page, TmplSpecimenBegin);
-                TmplSpecimenBegin := TmplSpecimenBegin + Length(TmplTemp);
+                Insert(TmplTemp, Page, TmplCurveBegin);
+                TmplCurveBegin := TmplCurveBegin + Length(TmplTemp);
             end;
         end;
         //  vyvod chisla parametrov
@@ -4254,7 +4254,7 @@ begin
     Result := Page;
 end;
 
-procedure TCGIDatamodule2.GoToSpecimenParameters;
+procedure TCGIDatamodule2.GoToCurveParameters;
 var
     Page: string;
     Pair: array[1..1] of TStringPair;
@@ -4381,7 +4381,7 @@ begin
     end;
 
     if Trim(ResultName) = '' then
-        ResultName := 'Specimen parameters set number ' +
+        ResultName := 'Curve parameters set number ' +
             IntToStr(NewFileIndex)//  sozdanie imeni rezul'tata "po-umolchaniyu"
     ;
     Page := PrepareTemplate_specimen_parameters_file;
@@ -4415,10 +4415,10 @@ begin
     finally
         CloseFile(F);
     end;
-    GoToSpecimenParameters;
+    GoToCurveParameters;
 end;
 
-procedure TCGIDatamodule2.UpdateSpecimenParameters;
+procedure TCGIDatamodule2.UpdateCurveParameters;
 var
     SpecIndex: longint;
     i, j, ParamCount: longint;
@@ -4451,17 +4451,17 @@ begin
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
         SpecIndex :=
-            StrToInt(Application.RequestVariables[HeaderSpecimenNumber]) - 1;
+            StrToInt(Application.RequestVariables[HeaderCurveNumber]) - 1;
     except
         raise Exception.Create(InvalidSpecIndex);
     end;
     //  poluchenie parametrov ekzemplyara patterna po zadannomu indeksu
-    ParamCount := Proxy.GetSpecimenParameterCount(SpecIndex);
+    ParamCount := Proxy.GetCurveParameterCount(SpecIndex);
     //  perebor parametrov ekzemplyara i proverka nalichiya imen sredi
     //  peredannyh parametrov
     for i := 0 to ParamCount - 1 do
     begin
-        Proxy.GetSpecimenParameter(SpecIndex, i, Name_, Value, Type_);
+        Proxy.GetCurveParameter(SpecIndex, i, Name_, Value, Type_);
         if (TParameterType(Type_) <> Argument) and
             (TParameterType(Type_) <> Calculated) and
             (TParameterType(Type_) <> InvariablePosition) and
@@ -4479,15 +4479,15 @@ begin
                 except
                     raise Exception.Create(InvalidParValue);
                 end;
-                Proxy.SetSpecimenParameter(SpecIndex, i, Value);
+                Proxy.SetCurveParameter(SpecIndex, i, Value);
             end;
         end;
     end;
-    GoToSpecimenParameters;
+    GoToCurveParameters;
 end;
 
 //  perekluchaet priznak vybora tochki privyazki
-procedure TCGIDatamodule2.SelectSpecimenPosition;
+procedure TCGIDatamodule2.SelectCurvePosition;
 var
     Argument, Value: double;
     Data:  TPointsSet;
@@ -4531,7 +4531,7 @@ begin
         Data.Free;
     end;
     Proxy.AddPointToCurvePositions(Argument, Value);
-    GoToSpecimenPositions;
+    GoToCurvePositions;
 end;
 
 //  perekluchaet priznak vybora tochki privyazki
@@ -4578,11 +4578,11 @@ begin
     finally
         Data.Free;
     end;
-    Proxy.AddPointToRFactorIntervals(Argument, Value);
-    GoToSpecimenIntervals;
+    Proxy.AddPointToRFactorBounds(Argument, Value);
+    GoToCurveBounds;
 end;
 
-procedure TCGIDatamodule2.GenerateSpecimenPositions;
+procedure TCGIDatamodule2.GenerateCurvePositions;
 var
     CurChunkNum: longint;
     BackF:    string;//???сделать извлечение и установку
@@ -4617,7 +4617,7 @@ begin
     end;
     //  vypolnenie zaprosa (poluchenie dannyh fona)
     Proxy.ComputeCurvePositions;
-    //GoToSpecimenPositions;
+    //GoToCurvePositions;
     //  protsess asinhronnyi, poetomu perehodim k oknu progressa;
     //  chtenie schablona i zapolnenie ego parametrov
     Template   := PrepareTemplate_gen_spec_pos_progress;
@@ -4668,7 +4668,7 @@ begin
     end;
     //  vypolnenie zaprosa (poluchenie dannyh fona)
     Proxy.ComputeCurveBounds;
-    //GoToSpecimenIntervals;
+    //GoToCurveBounds;
     //  protsess asinhronnyi, poetomu perehodim k oknu progressa;
     //  chtenie schablona i zapolnenie ego parametrov
     Template   := PrepareTemplate_gen_spec_int_progress;

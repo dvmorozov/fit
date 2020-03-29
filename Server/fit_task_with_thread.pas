@@ -122,7 +122,7 @@ procedure TFitTaskWithThread.MinimizeDifferenceAgain;
 begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyani
     // povtornaya initsializatsiya gaussianov
-    RecreateCurveInstances(nil);
+    RecreateCurves(nil);
     CalculateProfile;
     RecreateMainCalcThread(Optimization, Done);
 end;

@@ -17,7 +17,7 @@ const
     PairArray: array[1..PairCount] of TStringPair = (
         ('Title',
             'Interval progress'
-            //'Generating specimen application intervals is performed'
+            //'Generating specimen bounds is performed'
             //'Выполняется генерация интервалов применения экземпляров паттерна'
         ),
         (* zameneno kartinkoy
@@ -27,7 +27,7 @@ const
         ),
         *)
         ('HintSpecIntProgress',
-            'Generating specimen application intervals is performed. Please wait for completion.'
+            'Generating specimen bounds is performed. Please wait for completion.'
             //'Запущен процесс поиска интервалов применения экземпляров паттерна. Пожалуйста ожидайте завершения!'
         )
         );

@@ -75,22 +75,22 @@ type
         FPointsSetList: TSelfCheckedComponentList;
         { Returns maximum number of curves in one of given R-factor intervals. }
         function GetMaxCurveNum(CurvesList: TSelfCopiedCompList;
-            RFactorIntervals: TTitlePointsSet): longint;
+            RFactorBounds: TTitlePointsSet): longint;
         { Returns total number of profile points belonging to any of intervals. }
-        function GetPointsNumInIntervals(Profile: TTitlePointsSet;
-            RFactorIntervals: TTitlePointsSet): longint;
+        function GetPointsNumInBounds(Profile: TTitlePointsSet;
+            RFactorBounds: TTitlePointsSet): longint;
 {$IFDEF USE_GRIDS}
-        procedure FillIntervalsTable(RFactorIntervals: TTitlePointsSet);
+        procedure FillBoundsTable(RFactorBounds: TTitlePointsSet);
         procedure FillDataTable(Profile: TTitlePointsSet);
         procedure FillBackgroundTable(BackgroundPoints: TTitlePointsSet);
         procedure FillPositionsTable(CurvePositions: TTitlePointsSet);
-        procedure FillSpecimenTable(SpecimenList: TMSCRSpecimenList);
+        procedure FillCurveTable(CurveList: TMSCRCurveList);
 
-        procedure ClearIntervalsTable;
+        procedure ClearBoundsTable;
         procedure ClearDataTable;
         procedure ClearBackgroundTable;
         procedure ClearPositionsTable;
-        procedure ClearSpecimenTable;
+        procedure ClearCurveTable;
         procedure ClearDatasheetTable;
 {$ENDIF}
         function ValToStr(Value: double): string;
@@ -115,12 +115,12 @@ type
         procedure PlotSelectedArea(Sender: TObject;
             SelectedArea: TTitlePointsSet);
         { Method of IFitViewer interface. }
-        procedure PlotSpecimens(Sender: TObject;
+        procedure PlotCurves(Sender: TObject;
             CurvePointsSetList: TSelfCopiedCompList;
-            SpecimenList: TMSCRSpecimenList);
+            CurveList: TMSCRCurveList);
         { Method of IFitViewer interface. }
-        procedure PlotRFactorIntervals(Sender: TObject;
-            RFactorIntervals: TTitlePointsSet);
+        procedure PlotRFactorBounds(Sender: TObject;
+            RFactorBounds: TTitlePointsSet);
         { Method of IFitViewer interface. }
         procedure PlotCurvePositions(Sender: TObject;
             CurvePositions: TTitlePointsSet);
@@ -134,8 +134,8 @@ type
         procedure PlotSelectedPoints(Sender: TObject;
             SelectedPoints: TTitlePointsSet);
         { Method of IFitViewer interface. }
-        procedure HideRFactorIntervals(Sender: TObject;
-            RFactorIntervals: TTitlePointsSet);
+        procedure HideRFactorBounds(Sender: TObject;
+            RFactorBounds: TTitlePointsSet);
         { Method of IFitViewer interface. }
         procedure HideCurvePositions(Sender: TObject;
             CurvePositions: TTitlePointsSet);
@@ -162,7 +162,7 @@ type
         { Method of IFitViewer interface. }
         procedure FillDatasheetTable(Profile: TTitlePointsSet;
             CurvesList: TSelfCopiedCompList; GaussProfile: TTitlePointsSet;
-            DeltaProfile: TTitlePointsSet; RFactorIntervals: TTitlePointsSet);
+            DeltaProfile: TTitlePointsSet; RFactorBounds: TTitlePointsSet);
 {$ENDIF}
 {$IFNDEF SERVER}
         { Method of IFitViewer interface. }
@@ -306,8 +306,8 @@ begin
 end;
 
 {$hints off}
-procedure TFitViewer.PlotSpecimens(Sender: TObject;
-    CurvePointsSetList: TSelfCopiedCompList; SpecimenList: TMSCRSpecimenList);
+procedure TFitViewer.PlotCurves(Sender: TObject;
+    CurvePointsSetList: TSelfCopiedCompList; CurveList: TMSCRCurveList);
 var
     LS: TTASerie;
     SA: TNamedPointsSet;
@@ -315,7 +315,7 @@ var
 begin
 {$IFDEF USE_GRIDS}
     if FUpdateGrids then
-        FillSpecimenTable(SpecimenList);
+        FillCurveTable(CurveList);
 {$ENDIF}
     //Assert(Assigned(CurvePointsSetList));
     if not Assigned(CurvePointsSetList) then
@@ -368,8 +368,8 @@ begin
         ClearDataTable;
         ClearBackgroundTable;
         ClearPositionsTable;
-        ClearIntervalsTable;
-        ClearSpecimenTable;
+        ClearBoundsTable;
+        ClearCurveTable;
         ClearDatasheetTable;
     end;
 {$ENDIF}
@@ -436,28 +436,28 @@ begin
             LS.SetYValue(j, PointIntensity[j]);
 end;
 
-procedure TFitViewer.HideRFactorIntervals(Sender: TObject;
-    RFactorIntervals: TTitlePointsSet);
+procedure TFitViewer.HideRFactorBounds(Sender: TObject;
+    RFactorBounds: TTitlePointsSet);
 begin
-    Hide(Sender, RFactorIntervals);
+    Hide(Sender, RFactorBounds);
 {$IFDEF USE_GRIDS}
     if FUpdateGrids then
-        ClearIntervalsTable;
+        ClearBoundsTable;
 {$ENDIF}
 end;
 
-procedure TFitViewer.PlotRFactorIntervals(Sender: TObject;
-    RFactorIntervals: TTitlePointsSet);
+procedure TFitViewer.PlotRFactorBounds(Sender: TObject;
+    RFactorBounds: TTitlePointsSet);
 var
     LS: TTASerie;
 begin
-    //Assert(Assigned(RFactorIntervals));
-    if not Assigned(RFactorIntervals) then
+    //Assert(Assigned(RFactorBounds));
+    if not Assigned(RFactorBounds) then
         Exit;
     if not Assigned(FPointsSetList) then
         Exit;
 
-    if FPointsSetList.IndexOf(RFactorIntervals) = -1 then
+    if FPointsSetList.IndexOf(RFactorBounds) = -1 then
     begin
         LS := TTASerie.Create(nil);
         LS.PointStyle := psVertLineTB;
@@ -467,10 +467,10 @@ begin
         LS.ShowPoints := True;
         LS.InitShowLines := LS.ShowLines;
         LS.InitShowPoints := LS.ShowPoints;
-        LS.Title := RFactorIntervals.FTitle;
+        LS.Title := RFactorBounds.FTitle;
 
         TFormMain(Form).Chart.AddSerie(LS);
-        FPointsSetList.Add(RFactorIntervals);
+        FPointsSetList.Add(RFactorBounds);
 {$IFDEF USE_LEGEND}
         if FUpdateLegends then
         begin
@@ -481,12 +481,12 @@ begin
 {$ENDIF}
     end;
     //  !!! pri ispol'zovanii psVertLineXX trebuetsya sortirovka !!!
-    RFactorIntervals.Sort;
+    RFactorBounds.Sort;
 {$IFDEF USE_GRIDS}
     if FUpdateGrids then
-        FillIntervalsTable(RFactorIntervals);
+        FillBoundsTable(RFactorBounds);
 {$ENDIF}
-    PlotPointsSet(RFactorIntervals);
+    PlotPointsSet(RFactorBounds);
 end;
 
 procedure TFitViewer.HideCurvePositions(Sender: TObject;
@@ -939,7 +939,7 @@ begin
 end;
 
 {$IFDEF USE_GRIDS}
-procedure TFitViewer.ClearIntervalsTable;
+procedure TFitViewer.ClearBoundsTable;
 begin
     with TFormMain(Form).GridIntervals do
     begin
@@ -967,23 +967,23 @@ end;
 {$ENDIF}
 
 {$IFDEF USE_GRIDS}
-procedure TFitViewer.FillIntervalsTable(RFactorIntervals: TTitlePointsSet);
+procedure TFitViewer.FillBoundsTable(RFactorBounds: TTitlePointsSet);
 var
     i, RowIndex: longint;
 begin
-    //Assert(Assigned(RFactorIntervals));
-    if not Assigned(RFactorIntervals) then
+    //Assert(Assigned(RFactorBounds));
+    if not Assigned(RFactorBounds) then
         Exit;
     //  !!! nel'zya isp., potomu chto sbivaet fokus vvoda !!!
-    //ClearIntervalsTable;
+    //ClearBoundsTable;
 
     with TFormMain(Form).GridIntervals do
     begin
         ColCount  := 2;
         //  ruchnoy vvod v etu tabl. poka ne podderzhivaetsya,
         //  poetomu stroka ne doavlyaetsya
-        RowCount  := RFactorIntervals.PointsCount div 2 +
-            RFactorIntervals.PointsCount mod 2 +    //  dop. stroka dobavl.
+        RowCount  := RFactorBounds.PointsCount div 2 +
+            RFactorBounds.PointsCount mod 2 +    //  dop. stroka dobavl.
               //  pri nechetnom chisle tochek
             1;//2;
         FixedCols := 0;
@@ -995,12 +995,12 @@ begin
         i := 0;
         RowIndex := FixedRows;
         //  chislo tochek m.b. nechetnym, kogda posledniy interval ne zakryt
-        while i < RFactorIntervals.PointsCount do
+        while i < RFactorBounds.PointsCount do
         begin
-            Cells[0, RowIndex] := ValToStr(RFactorIntervals.PointXCoord[i]);
+            Cells[0, RowIndex] := ValToStr(RFactorBounds.PointXCoord[i]);
             Inc(i);
-            if i < RFactorIntervals.PointsCount then
-                Cells[1, RowIndex] := ValToStr(RFactorIntervals.PointXCoord[i]);
+            if i < RFactorBounds.PointsCount then
+                Cells[1, RowIndex] := ValToStr(RFactorBounds.PointXCoord[i]);
             Inc(i);
             Inc(RowIndex);
         end;
@@ -1039,7 +1039,7 @@ begin
 end;
 
 {$IFDEF USE_GRIDS}
-procedure TFitViewer.ClearSpecimenTable;
+procedure TFitViewer.ClearCurveTable;
 begin
     with TFormMain(Form).GridParameters do
     begin
@@ -1305,7 +1305,7 @@ end;
 
 procedure TFitViewer.FillDatasheetTable(Profile: TTitlePointsSet;
     CurvesList: TSelfCopiedCompList; GaussProfile: TTitlePointsSet;
-    DeltaProfile: TTitlePointsSet; RFactorIntervals: TTitlePointsSet);
+    DeltaProfile: TTitlePointsSet; RFactorBounds: TTitlePointsSet);
 var
     i, j, k, StartIndex, EndIndex, RowIndex, ColIndex: longint;
     P:      TCurvePointsSet;
@@ -1315,9 +1315,9 @@ begin
     //Assert(Assigned(CurvesList));
     //Assert(Assigned(GaussProfile));
     //Assert(Assigned(DeltaProfile));
-    //Assert(Assigned(RFactorIntervals));
-    //Assert(RFactorIntervals.PointsCount mod 2 = 0);
-    //Assert(RFactorIntervals.PointsCount <> 0);
+    //Assert(Assigned(RFactorBounds));
+    //Assert(RFactorBounds.PointsCount mod 2 = 0);
+    //Assert(RFactorBounds.PointsCount <> 0);
     if not Assigned(Profile) then
         Exit;
     if not Assigned(CurvesList) then
@@ -1326,11 +1326,11 @@ begin
         Exit;
     if not Assigned(DeltaProfile) then
         Exit;
-    if not Assigned(RFactorIntervals) then
+    if not Assigned(RFactorBounds) then
         Exit;
-    if not (RFactorIntervals.PointsCount mod 2 = 0) then
+    if not (RFactorBounds.PointsCount mod 2 = 0) then
         Exit;
-    if RFactorIntervals.PointsCount = 0 then
+    if RFactorBounds.PointsCount = 0 then
         Exit;
 {$IFDEF WINDOWS}
     TFormMain(Form).TabSheetDatasheet.TabVisible := True;
@@ -1341,10 +1341,10 @@ begin
         //  chislo kolonok = 1 (fiks.) + 3
         //  (eksp. profil', rasschit. profil', raznost') +
         //  maksimal'noe chislo krivyh v nekotorom intervale
-        ColCount    := 4 + GetMaxCurveNum(CurvesList, RFactorIntervals);
+        ColCount    := 4 + GetMaxCurveNum(CurvesList, RFactorBounds);
         //  na kazhdyy interval dobavlyaetsya stroka zagolovka
-        RowCount    := 1 + GetPointsNumInIntervals(Profile, RFactorIntervals) +
-            RFactorIntervals.PointsCount div 2;
+        RowCount    := 1 + GetPointsNumInBounds(Profile, RFactorBounds) +
+            RFactorBounds.PointsCount div 2;
         FixedCols   := 1;
         FixedRows   := 1;
         //  zapolnenie yacheek
@@ -1358,10 +1358,10 @@ begin
 
         i := 0;
         RowIndex := FixedRows;
-        while i < RFactorIntervals.PointsCount do
+        while i < RFactorBounds.PointsCount do
         begin
             //  !!! RowIndex d. ukazyvat' na nachalo dannyh intervala !!!
-            StartX := RFactorIntervals.PointXCoord[i];
+            StartX := RFactorBounds.PointXCoord[i];
             //  formiruetsya zagolovok
             for j := 1 to ColCount - 1 do
                 Cells[j, RowIndex] := '';
@@ -1370,8 +1370,8 @@ begin
             Cells[3, RowIndex]     := IntToStr(i div 2 + 1);
             Inc(RowIndex);
 
-            StartIndex := Profile.IndexOfValueX(RFactorIntervals.PointXCoord[i]);
-            EndIndex   := Profile.IndexOfValueX(RFactorIntervals.PointXCoord[i + 1]);
+            StartIndex := Profile.IndexOfValueX(RFactorBounds.PointXCoord[i]);
+            EndIndex   := Profile.IndexOfValueX(RFactorBounds.PointXCoord[i + 1]);
             for j := StartIndex to EndIndex do
             begin
                 Cells[0, RowIndex + j - StartIndex] :=
@@ -1404,13 +1404,13 @@ begin
     TFormMain(Form).FModifiedDatasheet := True;
 end;
 
-procedure TFitViewer.FillSpecimenTable(SpecimenList: TMSCRSpecimenList);
+procedure TFitViewer.FillCurveTable(CurveList: TMSCRCurveList);
 begin
-    //Assert(Assigned(SpecimenList));
-    if not Assigned(SpecimenList) then
+    //Assert(Assigned(CurveList));
+    if not Assigned(CurveList) then
         Exit;
-    TFormMain(Form).FSpecimenList := SpecimenList;
-    SpecimenList.GridAssign(TFormMain(Form).GridParameters);
+    TFormMain(Form).FCurveList := CurveList;
+    CurveList.GridAssign(TFormMain(Form).GridParameters);
     TFormMain(Form).FModifiedParameters := True;
 {$IFDEF WINDOWS}
     TFormMain(Form).TabSheetParameters.TabVisible := True;
@@ -1420,7 +1420,7 @@ end;
 {$ENDIF}
 
 function TFitViewer.GetMaxCurveNum(CurvesList: TSelfCopiedCompList;
-    RFactorIntervals: TTitlePointsSet): longint;
+    RFactorBounds: TTitlePointsSet): longint;
 var
     i, j, CurCount: longint;
     P:      TCurvePointsSet;
@@ -1429,22 +1429,22 @@ begin
     Result := 0;
 
     //Assert(Assigned(CurvesList));
-    //Assert(Assigned(RFactorIntervals));
-    //Assert(RFactorIntervals.PointsCount mod 2 = 0);
+    //Assert(Assigned(RFactorBounds));
+    //Assert(RFactorBounds.PointsCount mod 2 = 0);
     if not Assigned(CurvesList) then
         Exit;
-    if not Assigned(RFactorIntervals) then
+    if not Assigned(RFactorBounds) then
         Exit;
-    if not (RFactorIntervals.PointsCount mod 2 = 0) then
+    if not (RFactorBounds.PointsCount mod 2 = 0) then
         Exit;
 
     //  idem po vsem intervalam, podschityvaya krivye,
     //  kot. k nim otnosyatsya
     j := 0;
-    while j < RFactorIntervals.PointsCount do
+    while j < RFactorBounds.PointsCount do
     begin
         CurCount := 0;
-        StartX   := RFactorIntervals.PointXCoord[j];
+        StartX   := RFactorBounds.PointXCoord[j];
 
         for i := 0 to CurvesList.Count - 1 do
         begin
@@ -1458,28 +1458,28 @@ begin
     end;
 end;
 
-function TFitViewer.GetPointsNumInIntervals(Profile: TTitlePointsSet;
-    RFactorIntervals: TTitlePointsSet): longint;
+function TFitViewer.GetPointsNumInBounds(Profile: TTitlePointsSet;
+    RFactorBounds: TTitlePointsSet): longint;
 var
     j, StartIndex, EndIndex: longint;
 begin
     Result := 0;
 
     //Assert(Assigned(Profile));
-    //Assert(Assigned(RFactorIntervals));
-    //Assert(RFactorIntervals.PointsCount mod 2 = 0);
+    //Assert(Assigned(RFactorBounds));
+    //Assert(RFactorBounds.PointsCount mod 2 = 0);
     if not Assigned(Profile) then
         Exit;
-    if not Assigned(RFactorIntervals) then
+    if not Assigned(RFactorBounds) then
         Exit;
-    if not (RFactorIntervals.PointsCount mod 2 = 0) then
+    if not (RFactorBounds.PointsCount mod 2 = 0) then
         Exit;
 
     j := 0;
-    while j < RFactorIntervals.PointsCount do
+    while j < RFactorBounds.PointsCount do
     begin
-        StartIndex := Profile.IndexOfValueX(RFactorIntervals.PointXCoord[j]);
-        EndIndex := Profile.IndexOfValueX(RFactorIntervals.PointXCoord[j + 1]);
+        StartIndex := Profile.IndexOfValueX(RFactorBounds.PointXCoord[j]);
+        EndIndex := Profile.IndexOfValueX(RFactorBounds.PointXCoord[j + 1]);
         Result := Result + EndIndex - StartIndex + 1;
         j := j + 2;
     end;

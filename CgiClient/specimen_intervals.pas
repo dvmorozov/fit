@@ -16,13 +16,13 @@ const
     PairCount = 9; // 12; //  kol-vo elementov
     PairArray: array[1..PairCount] of TStringPair = (
         ('Title',
-            'Specimen intervals'
-            //'The page of selection of specimen application intervals'
+            'Curve intervals'
+            //'The page of selection of specimen bounds'
             //'Выбор интервалов применения экземпляров паттерна'
         ),
-        ('HintIntervals1',
+        ('HintBounds1',
             'The division of whole experimental data on specimen '              +
-            'application intervals is advisable only for data looking '         +
+            'bounds is advisable only for data looking '         +
             'like set of peaks. The possibility of that division based on '     +
             'assumption that sections of data corresponding to different peaks '+
             'obtained at different physical conditions and therefore do not '   +
@@ -32,7 +32,7 @@ const
             'difference factor. As a result visually worse coincidence '        +
             'between experimental and calculated curves achieved in regions of '+
             'relatively small amplitude.<BR>'                                   +
-            'If a few specimen application intervals was created the total '    +
+            'If a few specimen bounds was created the total '    +
             'difference factor is calculated by summation of the individual '   +
             'values.<BR>'                                                       +
             'If the division on intervals has no meaning for your data simply ' +
@@ -57,8 +57,8 @@ const
             //Если для Ваших данных разделение на интервалы не имеет смысла,
             //то просто создайте один интервал, включающий все данные.
         ),  //  !!! v kontse dolzhen byt' probel !!!
-        ('HintIntervals2',
-            'The specimen application intervals could be '                      +
+        ('HintBounds2',
+            'The specimen bounds could be '                      +
             'generated automatically at present time only for data '            +
             'looking like set of peaks. '                                       +
             //'Интервалы применения экземпляров паттернов могут быть ' +
@@ -104,7 +104,7 @@ const
         ),
         *)
         ('CaptButNextStage',
-            'Specimen parameters'
+            'Curve parameters'
             //'Перейти к заданию значений параметров'
         ),
         ('HintValues',

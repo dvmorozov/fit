@@ -68,7 +68,7 @@ type
 
         procedure AddParameter(Parameter: TSpecialCurveParameter);
         { Performs recalculation of all profile points. }
-        procedure DoCalc(const Intervals: TPointsSet); virtual; abstract;
+        procedure DoCalc(const Bounds: TPointsSet); virtual; abstract;
         { Multiplies profile points by given factor. }
         procedure ScaleCurve(const Factor: double);
         { Performs intialization of variable list parameters. }
@@ -103,7 +103,7 @@ type
           Equity to nil designates that functions should be calculated 
           for all points. Indexes instead of coordinates are used to 
           avoid searching. }
-        procedure ReCalc(const Intervals: TPointsSet);
+        procedure ReCalc(const Bounds: TPointsSet);
         { Temporarily stores values of variable parameters in internal memory area. }
         procedure StoreParams;
         { Restores values of variable parameters from temporary storage. }
@@ -162,11 +162,11 @@ begin
     inherited;
 end;
 
-procedure TCurvePointsSet.ReCalc(const Intervals: TPointsSet);
+procedure TCurvePointsSet.ReCalc(const Bounds: TPointsSet);
 begin
     if FRecalculate then
     begin
-        DoCalc(Intervals);
+        DoCalc(Bounds);
         FRecalculate := False;
     end;
 end;

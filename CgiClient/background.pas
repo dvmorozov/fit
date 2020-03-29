@@ -17,16 +17,16 @@ const
     PairCount = 11; // 13;  //  kol-vo elementov
     PairArray: array[1..PairCount] of TStringPair = (
         ('Title',
-            'Baseline'      // 'The page of baseline points input'
+            'Background'      // 'The page of background points input'
             //  'Страница ввода точек фона'
         ),
         ('CaptBackground',
-            'Automatic selection of baseline points'
+            'Automatic selection of background points'
             //  'Автоматическая генерация'
         ),
         ('HintBackground',
-'Automatic selection of baseline points is possible for the time present ' +
-'only if the baseline looks like smooth concave curve.'
+'Automatic selection of background points is possible for the time present ' +
+'only if the background looks like smooth concave curve.'
 //'Автоматическая генерация точек возможна только если фон напоминает гладкую ' +
 //'вогнутую вниз кривую.'
         ),
@@ -41,7 +41,7 @@ const
         ),
         *)
         ('CaptPointSelection',
-            'Baseline points'
+            'Background points'
             //  'Выбор точек фона'
         ),
         ('CaptArgument',
@@ -65,15 +65,15 @@ const
         ),
         *)
         ('CaptButSkip',
-            'Skip baseline'
+            'Skip background'
             //  'Пропустить удаление фона'
         ),
         ('CaptButDelBackground',
-            'Remove baseline'
+            'Remove background'
             //  'Удалить фон и перейти к созданию модели'
         ),
         ('HintValues',
-'To select the point as baseline point type its argument in the input field.' +
+'To select the point as background point type its argument in the input field.' +
 'Then press the button. To unselect press the button again.'
 //'Для выбора точки в качестве точки фона введите ее аргумент в соответствующее поле. ' +
 //'Нажмите кнопку. Для отмены выбора нажмите кнопку еще раз.'

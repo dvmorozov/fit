@@ -34,7 +34,7 @@ type
         function GetDeltaSigma: double;
 
         { Performs recalculation of all points of function. }
-        procedure DoCalc(const Intervals: TPointsSet); override;
+        procedure DoCalc(const Bounds: TPointsSet); override;
 
         property DeltaSigma: double read GetDeltaSigma;
 
@@ -54,16 +54,16 @@ uses
 
 {====================== TAsymPseudoVoigtPointsSet =============================}
 
-procedure TAsymPseudoVoigtPointsSet.DoCalc(const Intervals: TPointsSet);
+procedure TAsymPseudoVoigtPointsSet.DoCalc(const Bounds: TPointsSet);
 var
     i, j: longint;
 begin
-    if Assigned(Intervals) then
+    if Assigned(Bounds) then
     begin
-        Assert((Intervals.PointsCount mod 2) = 0);
-        for i := 0 to (Intervals.PointsCount shr 1) - 1 do
-            for j := Trunc(Intervals.PointXCoord[i shl 1]) to
-                Trunc(Intervals.PointXCoord[(i shl 1) + 1]) do
+        Assert((Bounds.PointsCount mod 2) = 0);
+        for i := 0 to (Bounds.PointsCount shr 1) - 1 do
+            for j := Trunc(Bounds.PointXCoord[i shl 1]) to
+                Trunc(Bounds.PointXCoord[(i shl 1) + 1]) do
                 Points[j][2] :=
                     AsymPseudoVoigtPoint(A, Sigma, Eta, x0,
                     Points[j][1], DeltaSigma);

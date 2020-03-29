@@ -25,7 +25,7 @@ uses
 
 type
     { Set of pattern instances forming the calculated profile in sum. }
-    TSpecimenList = class(TRowCompList)
+    TCurveList = class(TRowCompList)
     protected
         function CreateNewObject: TComponent; override;
         { Generic method for conversion values to user friendly representation. }
@@ -58,7 +58,7 @@ type
 
 implementation
 
-procedure TSpecimenList.SetCaption;
+procedure TCurveList.SetCaption;
 var
     CurveParameters: Curve_parameters;
     Parameter: TSpecialCurveParameter;
@@ -87,7 +87,7 @@ begin
     end;
 end;
 
-procedure TSpecimenList.SetColOptions(Grid: TStringGrid);
+procedure TCurveList.SetColOptions(Grid: TStringGrid);
 var
     CurveParameters: Curve_parameters;
     Parameters: TSpecialCurveParameter;
@@ -124,7 +124,7 @@ begin
             end;
 end;
 
-procedure TSpecimenList.SetRowContents(Grid: TStringGrid; RowNum: longint);
+procedure TCurveList.SetRowContents(Grid: TStringGrid; RowNum: longint);
 var
     CurveParameters: Curve_parameters;
     Parameter: TSpecialCurveParameter;
@@ -161,7 +161,7 @@ begin
         end;
 end;
 
-function TSpecimenList.GetRowContents;
+function TCurveList.GetRowContents;
 var
     CurveParameters: Curve_parameters;
     Parameter: TSpecialCurveParameter;
@@ -194,25 +194,25 @@ begin
     end;
 end;
 
-function TSpecimenList.CreateNewObject: TComponent;
+function TCurveList.CreateNewObject: TComponent;
 begin
     Result := Curve_parameters.Create(nil);
 end;
 
-function TSpecimenList.RecalcParamValue(P: TSpecialCurveParameter): double;
+function TCurveList.RecalcParamValue(P: TSpecialCurveParameter): double;
 begin
     Assert(Assigned(P));
     Result := P.Value;
 end;
 
-procedure TSpecimenList.ReverseCalcParamValue(P: TSpecialCurveParameter;
+procedure TCurveList.ReverseCalcParamValue(P: TSpecialCurveParameter;
     NewValue: double);
 begin
     Assert(Assigned(P));
     P.Value := NewValue;
 end;
 
-function TSpecimenList.GetInfoCols: longint;
+function TCurveList.GetInfoCols: longint;
 var
     CurveParameters: Curve_parameters;
     Parameter: TSpecialCurveParameter;
@@ -234,7 +234,7 @@ begin
         Result := GetFixedCols + 1;
 end;
 
-function TSpecimenList.ValueToString(const ACol, ARow: integer): string;
+function TCurveList.ValueToString(const ACol, ARow: integer): string;
 var
     CurveParameters: Curve_parameters;
 begin
@@ -286,7 +286,7 @@ begin
             end{ Information area of the table is filled. };
 end;
 
-function TSpecimenList.IsDataValid(const ACol, ARow: integer;
+function TCurveList.IsDataValid(const ACol, ARow: integer;
     const AString: string): boolean;
 begin
     CheckColIndex(ACol);
@@ -305,7 +305,7 @@ begin
         Result := True;
 end;
 
-procedure TSpecimenList.SetValueByDefault(const ACol, ARow: integer);
+procedure TCurveList.SetValueByDefault(const ACol, ARow: integer);
 var
     CurveParameters: Curve_parameters;
 begin
@@ -325,7 +325,7 @@ begin
         end;
 end;
 
-procedure TSpecimenList.StringToValue(const ACol, ARow: integer;
+procedure TCurveList.StringToValue(const ACol, ARow: integer;
     const AString: string);
 var
     CurveParameters: Curve_parameters;
@@ -349,7 +349,7 @@ begin
 end;
 
 {$hints off}
-function TSpecimenList.GetCellEnabledCharSet(const ACol, ARow: integer): TCharSet;
+function TCurveList.GetCellEnabledCharSet(const ACol, ARow: integer): TCharSet;
 begin
     Result := POS_REAL_SET;
 end;
@@ -358,7 +358,7 @@ end;
 
 initialization
     RegisterClass(Curve_parameters);
-    RegisterClass(TSpecimenList);
+    RegisterClass(TCurveList);
 {$warnings off}
     DecimalSeparator := '.';
 {$warnings on}

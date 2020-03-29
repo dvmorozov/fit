@@ -27,7 +27,7 @@ type
     { Curve class having Lorentz form. }
     TLorentzPointsSet = class(TGaussPointsSet)
     protected
-        procedure DoCalc(const Intervals: TPointsSet); override;
+        procedure DoCalc(const Bounds: TPointsSet); override;
 
     public
         { Overrides method defined in TNamedPointsSet. }
@@ -59,22 +59,22 @@ begin
     Result := OnlyMaximums;
 end;
 
-procedure TLorentzPointsSet.DoCalc(const Intervals: TPointsSet);
+procedure TLorentzPointsSet.DoCalc(const Bounds: TPointsSet);
 var
     i, j: longint;
     //x0Index, LastRightIndex: LongInt;
     //Zero: Boolean;
 begin
-    if Assigned(Intervals) then
+    if Assigned(Bounds) then
     begin
-        Assert((Intervals.PointsCount mod 2) = 0);
-        for i := 0 to (Intervals.PointsCount shr 1) - 1 do
-            for j := Trunc(Intervals.PointXCoord[i shl 1]) to
-                Trunc(Intervals.PointXCoord[(i shl 1) + 1]) do
+        Assert((Bounds.PointsCount mod 2) = 0);
+        for i := 0 to (Bounds.PointsCount shr 1) - 1 do
+            for j := Trunc(Bounds.PointXCoord[i shl 1]) to
+                Trunc(Bounds.PointXCoord[(i shl 1) + 1]) do
                 Points[j][2] := LorentzPoint(A, Sigma, x0, Points[j][1])(*  takoy variant ne daet uskoreniya, a kazhetsya rabotaet
                 dazhe chut' medlennee - vse s'edaet poisk indeksov ?!
-            for j := IndexOfValueX(Intervals.GetPointXCoord(i shl 1)) to
-                IndexOfValueX(Intervals.GetPointXCoord((i shl 1) + 1)) do
+            for j := IndexOfValueX(Bounds.GetPointXCoord(i shl 1)) to
+                IndexOfValueX(Bounds.GetPointXCoord((i shl 1) + 1)) do
                     Points[j][2] := GaussPoint(A, Sigma, x0, Points[j][1]);
             *);
     end

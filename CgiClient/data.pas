@@ -18,7 +18,7 @@ const
             //  'Ввод данных'
         ),
         ('CaptBackDeleting',
-            'Baseline'
+            'Background'
             //  'Удаление фона'
         ),
         ('CaptModelCreating',
@@ -33,16 +33,16 @@ const
             'Pattern'
             //  'Выбор паттерна'
         ),
-        ('CaptSpecimenPositions',
-            'Specimen positions'
+        ('CaptCurvePositions',
+            'Curve positions'
             //  'Точки привязки экземпляров'
         ),
-        ('CaptSpecimenIntervals',
-            'Specimen application intervals'
+        ('CaptCurveBounds',
+            'Curve bounds'
             //  'Выбор интервалов применения'
         ),
-        ('CaptSpecimenParameters',
-            'Specimen parameters'
+        ('CaptCurveParameters',
+            'Curve parameters'
             //  'Параметры экземпляров'
         ),
         ('HintAbout',   //  feedback
@@ -108,11 +108,11 @@ const
         ),
         //('CaptButDel', 'Удалить'),
         ('LinkNextStage',
-            'Baseline'
+            'Background'
             //  'Перейти к выбору точек фона'
         ),
         ('LinkSkip',
-            'Skip baseline'
+            'Skip background'
             //  'Пропустить удаление фона'
         ),
         ('LinkProject',

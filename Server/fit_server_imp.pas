@@ -39,10 +39,10 @@ Type
     function MinimizeNumberOfCurves(
       const  ProblemID : integer
     ):TResult;
-    function FindSpecimenIntervals(
+    function ComputeCurveBounds(
       const  ProblemID : integer
     ):TResult;
-    function FindSpecimenPositions(
+    function ComputeCurvePositions(
       const  ProblemID : integer
     ):TResult;
     function ComputeBackgroundPoints(
@@ -62,7 +62,7 @@ Type
     function ReturnToTotalProfile(
       const  ProblemID : integer
     ):TResult;
-    function CreateSpecimenList(
+    function CreateCurveList(
       const  ProblemID : integer
     ):TResult;
     function SetProfilePointsSet(
@@ -73,12 +73,12 @@ Type
       const  BackgroundPoints : TArrayOfFloatDoubleRemotable;
       const  ProblemID : integer
     ):TResult;
-    function SetSpecimenPositions(
-      const  SpecimenPositions : TArrayOfFloatDoubleRemotable;
+    function SetCurvePositions(
+      const  CurvePositions : TArrayOfFloatDoubleRemotable;
       const  ProblemID : integer
     ):TResult;
-    function SetSpecimenIntervals(
-      const  SpecimenIntervals : TArrayOfFloatDoubleRemotable;
+    function SetCurveBounds(
+      const  CurveBounds : TArrayOfFloatDoubleRemotable;
       const  ProblemID : integer
     ):TResult;
     function AddPointToData(
@@ -91,12 +91,12 @@ Type
       const  YValue : Double;
       const  ProblemID : integer
     ):TResult;
-    function AddPointToSpecimenIntervals(
+    function AddPointToCurveBounds(
       const  XValue : Double;
       const  YValue : Double;
       const  ProblemID : integer
     ):TResult;
-    function AddPointToSpecimenPositions(
+    function AddPointToCurvePositions(
       const  XValue : Double;
       const  YValue : Double;
       const  ProblemID : integer
@@ -110,10 +110,10 @@ Type
     function GetBackgroundPoints(
       const  ProblemID : integer
     ):TPointsResult;
-    function GetSpecimenPositions(
+    function GetCurvePositions(
       const  ProblemID : integer
     ):TPointsResult;
-    function GetSpecimenIntervals(
+    function GetCurveBounds(
       const  ProblemID : integer
     ):TPointsResult;
     function GetCalcProfilePointsSet(
@@ -174,14 +174,14 @@ Type
       const  NewYValue : Double;
       const  ProblemID : integer
     ):TResult;
-    function ReplacePointInSpecimenIntervals(
+    function ReplacePointInCurveBounds(
       const  PrevXValue : Double;
       const  PrevYValue : Double;
       const  NewXValue : Double;
       const  NewYValue : Double;
       const  ProblemID : integer
     ):TResult;
-    function ReplacePointInSpecimenPositions(
+    function ReplacePointInCurvePositions(
       const  PrevXValue : Double;
       const  PrevYValue : Double;
       const  NewXValue : Double;
@@ -192,18 +192,18 @@ Type
     procedure DiscardProblem(
        const ProblemID : integer
     );
-    function GetSpecimenCount(
+    function GetCurveCount(
        const ProblemID : Longint
     ):TIntResult;
-    function GetSpecimenPoints(
+    function GetCurvePoints(
       const  SpecIndex : integer;
       const  ProblemID : Longint
     ):TNamedPointsResult;
-    function GetSpecimenParameterCount(
+    function GetCurveParameterCount(
       const  ProblemID : integer;
       const  SpecIndex : integer
     ):TIntResult;
-    function GetSpecimenParameter(
+    function GetCurveParameter(
       const  ProblemID : integer;
       const  SpecIndex : integer;
       const  ParamIndex : integer
@@ -220,7 +220,7 @@ Type
     function GetProfileChunkCount(
       const  ProblemID : integer
     ):TIntResult;
-    function SetSpecimenParameter(
+    function SetCurveParameter(
       const  ProblemID : integer;
       const  SpecIndex : integer;
       const  ParamIndex : integer;
@@ -482,7 +482,7 @@ Begin
     end;
 End;
 
-function TFitServer_ServiceImp.FindSpecimenIntervals(
+function TFitServer_ServiceImp.ComputeCurveBounds(
     const  ProblemID : integer
     ):TResult;
 var Problem: TFitServerApp;
@@ -526,7 +526,7 @@ Begin
     end;
 End;
 
-function TFitServer_ServiceImp.FindSpecimenPositions(
+function TFitServer_ServiceImp.ComputeCurvePositions(
     const  ProblemID : integer
     ):TResult;
 var Problem: TFitServerApp;
@@ -883,7 +883,7 @@ Begin
     end;
 End;
 
-function TFitServer_ServiceImp.GetSpecimenCount(
+function TFitServer_ServiceImp.GetCurveCount(
     const ProblemID : Longint
     ):TIntResult;
 var Problem: TFitServerApp;
@@ -912,7 +912,7 @@ Begin
             LeaveCriticalsection(CS);
         end;
         Problem := TFitServerApp(ProblemID);
-        Result.ErrCode := Problem.FitStub.GetSpecimenCount(
+        Result.ErrCode := Problem.FitStub.GetCurveCount(
             Result._Result, Result.ErrMsg);
     except
         on E: EUserException do
@@ -929,7 +929,7 @@ Begin
     end;
 End;
 
-function TFitServer_ServiceImp.GetSpecimenParameterCount(
+function TFitServer_ServiceImp.GetCurveParameterCount(
     const  ProblemID : integer;
     const  SpecIndex : integer
     ):TIntResult;
@@ -959,7 +959,7 @@ Begin
             LeaveCriticalsection(CS);
         end;
         Problem := TFitServerApp(ProblemID);
-        Result.ErrCode := Problem.FitStub.GetSpecimenParameterCount(
+        Result.ErrCode := Problem.FitStub.GetCurveParameterCount(
             SpecIndex, Result._Result, Result.ErrMsg);
     except
         on E: EUserException do
@@ -980,7 +980,7 @@ const
     //SelectedAreaName: string = 'Selected area';
     //ProfileName: string = 'Data';
     SelectedAreaName: string = 'Experimental data';
-    RFactorIntervalsName: string = 'Spec.app.intervals';
+    RFactorBoundsName: string = 'Spec.app.intervals';
     BackgroundPointsName: string = 'Background points';
     CurvePositionsName: string = 'Spec.positions';
     SummarizedName: string = 'Summarized';
@@ -994,7 +994,7 @@ function TFitServer_ServiceImp.GetGraph(
 var Problem: TFitServerApp;
     //  !!! osvobozhdat' ne nuzhno, poskol'ku kopii ne sozdayutsya !!!
     Data, BackgroundPoints, GaussProfile, DeltaProfile,
-    CurvePositions, RFactorIntervals: TTitlePointsSet;
+    CurvePositions, RFactorBounds: TTitlePointsSet;
     Curves: TSelfCopiedCompList;
     Bitmap: TPNGImage;//TJPEGImage;
     Stream: TMemoryStream;
@@ -1132,16 +1132,16 @@ Begin
                 PlotCurvePositions(nil, CurvePositions);
             end;
 
-            Result.ErrCode := Problem.FitStub.GetRFactorIntervals(
-                RFactorIntervals, Result.ErrMsg);
+            Result.ErrCode := Problem.FitStub.GetRFactorBounds(
+                RFactorBounds, Result.ErrMsg);
             if Result.ErrCode <> 0 then Exit;
             
-            if Assigned(RFactorIntervals) and
-                (RFactorIntervals.PointsCount <> 0) then
+            if Assigned(RFactorBounds) and
+                (RFactorBounds.PointsCount <> 0) then
             begin
-                //RFactorIntervals.Lambda := WaveLength;
-                RFactorIntervals.Title := RFactorIntervalsName;
-                PlotRFactorIntervals(nil, RFactorIntervals);
+                //RFactorBounds.Lambda := WaveLength;
+                RFactorBounds.Title := RFactorBoundsName;
+                PlotRFactorBounds(nil, RFactorBounds);
             end;
 
             (*  poka ne predusmotreno masschtabirovanie risunka
@@ -1151,7 +1151,7 @@ Begin
             if Result.ErrCode <> 0 then Exit;
             //  nebol'schoe kolichestvo krivyh vse-taki budem vyvodit'
             if Curves.Count <= 10 then
-                PlotSpecimens(nil, Curves, nil);
+                PlotCurves(nil, Curves, nil);
             Paint;
         end;
 
@@ -1333,7 +1333,7 @@ Begin
     end;
 End;
 
-function TFitServer_ServiceImp.GetSpecimenParameter(
+function TFitServer_ServiceImp.GetCurveParameter(
     const  ProblemID : integer;
     const  SpecIndex : integer;
     const  ParamIndex : integer
@@ -1363,7 +1363,7 @@ Begin
             LeaveCriticalsection(CS);
         end;
         Problem := TFitServerApp(ProblemID);
-        Result.ErrCode := Problem.FitStub.GetSpecimenParameter(
+        Result.ErrCode := Problem.FitStub.GetCurveParameter(
             SpecIndex, ParamIndex, Result.Name, Result.Value,
             Result._Type, Result.ErrMsg);
     except
@@ -1381,7 +1381,7 @@ Begin
     end;
 End;
 
-function TFitServer_ServiceImp.SetSpecimenParameter(
+function TFitServer_ServiceImp.SetCurveParameter(
     const  ProblemID : integer;
     const  SpecIndex : integer;
     const  ParamIndex : integer;
@@ -1412,7 +1412,7 @@ Begin
             LeaveCriticalsection(CS);
         end;
         Problem := TFitServerApp(ProblemID);
-        Result.ErrCode := Problem.FitStub.SetSpecimenParameter(
+        Result.ErrCode := Problem.FitStub.SetCurveParameter(
             SpecIndex, ParamIndex, Value, Result.ErrMsg);
     except
         on E: EUserException do
@@ -1520,7 +1520,7 @@ Begin
     end;
 End;
 
-function TFitServer_ServiceImp.CreateSpecimenList(
+function TFitServer_ServiceImp.CreateCurveList(
     const  ProblemID : integer
     ):TResult;
 var Problem: TFitServerApp;
@@ -1548,7 +1548,7 @@ Begin
             LeaveCriticalsection(CS);
         end;
         Problem := TFitServerApp(ProblemID);
-        Result.ErrCode := Problem.FitStub.CreateSpecimenList(Result.ErrMsg);
+        Result.ErrCode := Problem.FitStub.CreateCurveList(Result.ErrMsg);
     except
         on E: EUserException do
         begin
@@ -1670,8 +1670,8 @@ Begin
     end;
 End;
 
-function TFitServer_ServiceImp.SetSpecimenPositions(
-    const  SpecimenPositions : TArrayOfFloatDoubleRemotable;
+function TFitServer_ServiceImp.SetCurvePositions(
+    const  CurvePositions : TArrayOfFloatDoubleRemotable;
     const  ProblemID : integer
     ):TResult;
 var PS: TPointsSet;
@@ -1701,7 +1701,7 @@ Begin
         end;
         Problem := TFitServerApp(ProblemID);
         //  sozdaetsya promezhutochnyi ob'ekt dlya sovmestimosti
-        PS := CreateNamedPointsSet(SpecimenPositions);
+        PS := CreateNamedPointsSet(CurvePositions);
         try
             Result.ErrCode := Problem.FitStub.SetCurvePositions(
                 PS, Result.ErrMsg);
@@ -1723,8 +1723,8 @@ Begin
     end;
 End;
 
-function TFitServer_ServiceImp.SetSpecimenIntervals(
-    const  SpecimenIntervals : TArrayOfFloatDoubleRemotable;
+function TFitServer_ServiceImp.SetCurveBounds(
+    const  CurveBounds : TArrayOfFloatDoubleRemotable;
     const  ProblemID : integer
     ):TResult;
 var PS: TPointsSet;
@@ -1754,9 +1754,9 @@ Begin
         end;
         Problem := TFitServerApp(ProblemID);
         //  sozdaetsya promezhutochnyi ob'ekt dlya sovmestimosti
-        PS := CreateNamedPointsSet(SpecimenIntervals);
+        PS := CreateNamedPointsSet(CurveBounds);
         try
-            Result.ErrCode := Problem.FitStub.SetRFactorIntervals(
+            Result.ErrCode := Problem.FitStub.SetRFactorBounds(
                 PS, Result.ErrMsg);
         finally
             PS.Free;
@@ -1870,7 +1870,7 @@ Begin
     end;
 End;
 
-function TFitServer_ServiceImp.AddPointToSpecimenIntervals(
+function TFitServer_ServiceImp.AddPointToCurveBounds(
     const  XValue : Double;
     const  YValue : Double;
     const  ProblemID : integer
@@ -1900,7 +1900,7 @@ Begin
             LeaveCriticalsection(CS);
         end;
         Problem := TFitServerApp(ProblemID);
-        Result.ErrCode := Problem.FitStub.AddPointToRFactorIntervals(
+        Result.ErrCode := Problem.FitStub.AddPointToRFactorBounds(
             XValue, YValue, Result.ErrMsg);
     except
         on E: EUserException do
@@ -1917,7 +1917,7 @@ Begin
     end;
 End;
 
-function TFitServer_ServiceImp.AddPointToSpecimenPositions(
+function TFitServer_ServiceImp.AddPointToCurvePositions(
     const  XValue : Double;
     const  YValue : Double;
     const  ProblemID : integer
@@ -2114,7 +2114,7 @@ Begin
     end;
 End;
 
-function TFitServer_ServiceImp.GetSpecimenPositions(
+function TFitServer_ServiceImp.GetCurvePositions(
     const  ProblemID : integer
     ):TPointsResult;
 var Problem: TFitServerApp;
@@ -2163,7 +2163,7 @@ Begin
     end;
 End;
 
-function TFitServer_ServiceImp.GetSpecimenIntervals(
+function TFitServer_ServiceImp.GetCurveBounds(
     const  ProblemID : integer
     ):TPointsResult;
 var Problem: TFitServerApp;
@@ -2194,7 +2194,7 @@ Begin
         end;
         Problem := TFitServerApp(ProblemID);
         //  Points - pryamoi ukazatel', a ne kopiya - ne osvobozhdat'!
-        Result.ErrCode := Problem.FitStub.GetRFactorIntervals(PS, Result.ErrMsg);
+        Result.ErrCode := Problem.FitStub.GetRFactorBounds(PS, Result.ErrMsg);
         if Result.ErrCode = 0 then
             Result._Result := CreateRemotableArray(PS);
     except
@@ -2312,7 +2312,7 @@ Begin
     end;
 End;
 
-function TFitServer_ServiceImp.GetSpecimenPoints(
+function TFitServer_ServiceImp.GetCurvePoints(
     const SpecIndex : integer;
     const ProblemID : Longint
     ):TNamedPointsResult;
@@ -2344,7 +2344,7 @@ Begin
         end;
         Problem := TFitServerApp(ProblemID);
         //  Points - pryamoi ukazatel', a ne kopiya - ne osvobozhdat'!
-        Result.ErrCode := Problem.FitStub.GetSpecimenPoints(SpecIndex,
+        Result.ErrCode := Problem.FitStub.GetCurvePoints(SpecIndex,
             PS, Result.Name, Result.ErrMsg);
         if Result.ErrCode = 0 then
             Result._Result := CreateRemotableArray(PS);
@@ -2835,7 +2835,7 @@ Begin
     end;
 End;
 
-function TFitServer_ServiceImp.ReplacePointInSpecimenIntervals(
+function TFitServer_ServiceImp.ReplacePointInCurveBounds(
     const  PrevXValue : Double;
     const  PrevYValue : Double;
     const  NewXValue : Double;
@@ -2867,7 +2867,7 @@ Begin
             LeaveCriticalsection(CS);
         end;
         Problem := TFitServerApp(ProblemID);
-        Result.ErrCode := Problem.FitStub.ReplacePointInRFactorIntervals(
+        Result.ErrCode := Problem.FitStub.ReplacePointInRFactorBounds(
             PrevXValue, PrevYValue, NewXValue, NewYValue, Result.ErrMsg);
     except
         on E: EUserException do
@@ -2884,7 +2884,7 @@ Begin
     end;
 End;
 
-function TFitServer_ServiceImp.ReplacePointInSpecimenPositions(
+function TFitServer_ServiceImp.ReplacePointInCurvePositions(
     const  PrevXValue : Double;
     const  PrevYValue : Double;
     const  NewXValue : Double;

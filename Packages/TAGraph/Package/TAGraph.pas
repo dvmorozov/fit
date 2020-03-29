@@ -561,7 +561,7 @@ end;
 
 // Fin des modifications
 
-procedure CalculateIntervals(Mini,Maxi:Double;var Debut,Pas:Double);
+procedure CalculateBounds(Mini,Maxi:Double;var Debut,Pas:Double);
 var
    Etendue,EtendueTmp:Double;
    NbPas,Mult:array[1..3] of Double;
@@ -1978,7 +1978,7 @@ begin
 MaxLargTexte:=0;
 Debut:=FYGraphMax;
 Pas:=1;
-CalculateIntervals(FYGraphMin,FYGraphMax,Debut,Pas);
+CalculateBounds(FYGraphMin,FYGraphMax,Debut,Pas);
 if FYGraphMin<>FYGraphMax then
    begin
    Marque:=Debut;
@@ -2078,7 +2078,7 @@ if FShowAxisLabel then
 // X graduations
 Debut:=FXGraphMax;
 Pas:=1;
-CalculateIntervals(FXGraphMin,FXGraphMax,Debut,Pas);
+CalculateBounds(FXGraphMin,FXGraphMax,Debut,Pas);
 if FXGraphMin<>FXGraphMax then
    begin
    Marque:=Debut;
@@ -2122,7 +2122,7 @@ if FXGraphMin<>FXGraphMax then
 MaxLargTexte:=0;
 Debut:=FYGraphMax;
 Pas:=1;
-CalculateIntervals(FYGraphMin,FYGraphMax,Debut,Pas);
+CalculateBounds(FYGraphMin,FYGraphMax,Debut,Pas);
 if FYGraphMin<>FYGraphMax then
    begin
    Marque:=Debut;

@@ -188,7 +188,7 @@ type
         { Creates downhill simplex algorithm for the 2nd step of 2-stage processing. }
         procedure CreateDHSMinimizer;
         { Calculates hash of initial values of parameters of pattern instance. }
-        procedure CalcInitHash(Specimen: TCurvePointsSet);
+        procedure CalcInitHash(Curve: TCurvePointsSet);
         function CreatePatternInstance: TCurvePointsSet;
         function MinimumStepAchieved: boolean;
         procedure InitializeVariationSteps;
@@ -219,12 +219,10 @@ type
             AParams: Curve_parameters);
         { Recreates pattern instances (curves). It should be public
           for initial calculation of R-factor for overall profile. }
-        procedure RecreateCurveInstances(SpecimenParameters: TMSCRSpecimenList);
+        procedure RecreateCurves(TupleList: TMSCRCurveList);
         { Searches pattern specimen by hash and sets its parameters 
           from the given list. }
-        procedure SearchSpecimenAndInit(
-            SpecimenParameters: TMSCRSpecimenList;
-            Specimen: TCurvePointsSet);
+        procedure InitCurve(TupleList: TMSCRCurveList; Curve: TCurvePointsSet);
         { Recalculates all pattern instances and FBackground.
           Calculates resulting profile. }
         procedure CalculateProfile;
@@ -1098,50 +1096,48 @@ begin
     Result  := True;
 end;
 
-procedure TFitTask.CalcInitHash(Specimen: TCurvePointsSet);
+procedure TFitTask.CalcInitHash(Curve: TCurvePointsSet);
 var
     i:     longint;
     Parameter: TPersistentCurveParameterContainer;
     Value: string;
 begin
-    Assert(Assigned(Specimen));
-    Specimen.FInitHash := 0;
-    for i := 0 to Specimen.Parameters.Params.Count - 1 do
+    Assert(Assigned(Curve));
+    Curve.FInitHash := 0;
+    for i := 0 to Curve.Parameters.Params.Count - 1 do
     begin
         Parameter := TPersistentCurveParameterContainer(
-            Specimen.Parameters.Params.Items[i]);
+            Curve.Parameters.Params.Items[i]);
         Value     := Parameter.Value_;
-        Specimen.FInitHash := Specimen.FInitHash + JSHash(Value);
+        Curve.FInitHash := Curve.FInitHash + JSHash(Value);
     end;
 end;
 
-procedure TFitTask.SearchSpecimenAndInit(SpecimenParameters: TMSCRSpecimenList;
-    Specimen: TCurvePointsSet);
+procedure TFitTask.InitCurve(TupleList: TMSCRCurveList; Curve: TCurvePointsSet);
 var
     i, j, k: longint;
     CurveParameters: Curve_parameters;
     Parameter, Parameter2: TSpecialCurveParameter;
 begin
-    //Assert(Assigned(SpecimenParameters));
     //  ravenstvo nil ne protivorechit rasschirennoy semantike metoda; krome
     //  togo neobhodimo dopustit' vozmozhnost' takogo znacheniya pri vyzove
     //  iz drugih metodov klassa
-    if not Assigned(SpecimenParameters) then
+    if not Assigned(TupleList) then
         Exit;
-    Assert(Assigned(Specimen));
+    Assert(Assigned(Curve));
 
-    for i := 0 to SpecimenParameters.Count - 1 do
+    for i := 0 to TupleList.Count - 1 do
     begin
-        CurveParameters := Curve_parameters(SpecimenParameters.Items[i]);
+        CurveParameters := Curve_parameters(TupleList.Items[i]);
 
-        if CurveParameters.FSavedInitHash = Specimen.FInitHash then
+        if CurveParameters.FSavedInitHash = Curve.FInitHash then
         begin
-            //Specimen.SetParameters(Curve_parameters(CurveParameters.GetCopy));
-            //  v naborah parametrov, hranyaschihsya v spiske SpecimenParameters
+            //Curve.SetParameters(Curve_parameters(CurveParameters.GetCopy));
+            //  v naborah parametrov, hranyaschihsya v spiske CurveParameters
             //  mogut byt' vychislyaemye, kotorye ne nuzhno kopirovat'
-            for j := 0 to Specimen.Parameters.Params.Count - 1 do
+            for j := 0 to Curve.Parameters.Params.Count - 1 do
             begin
-                Parameter := Specimen.Parameters[j];
+                Parameter := Curve.Parameters[j];
                 for k := 0 to CurveParameters.Params.Count - 1 do
                 begin
                     Parameter2 := CurveParameters[k];
@@ -1230,7 +1226,7 @@ begin
     end;
 end;
 
-procedure TFitTask.RecreateCurveInstances(SpecimenParameters: TMSCRSpecimenList);
+procedure TFitTask.RecreateCurves(TupleList: TMSCRCurveList);
 var
     i, j, k:    longint;
     Curve:      TCurvePointsSet;
@@ -1341,7 +1337,7 @@ begin
                 //  ne zapolnyaetsya, potomu chto ne nuzhna
                 //Curve.Lambda := WaveLength;
                 CalcInitHash(Curve);
-                SearchSpecimenAndInit(SpecimenParameters, Curve);
+                InitCurve(TupleList, Curve);
                 //  dobavlenie novogo ekz. patterna v spisok
                 FCurves.Add(Curve);
                 //  dobavlenie tochki pryavyazki, kogda pattern imeet tochku
@@ -1383,7 +1379,7 @@ begin
                         //  ne zapolnyaetsya, potomu chto ne nuzhna
                         //Curve.Lambda := WaveLength;
                         CalcInitHash(Curve);
-                        SearchSpecimenAndInit(SpecimenParameters, Curve);
+                        SearchCurveAndInit(TupleList, Curve);
                         //  dobavlenie novogo ekz. patterna v spisok
                         FCurvesList.Add(Curve);
                     end
@@ -1439,7 +1435,7 @@ begin
                         //  ne zapolnyaetsya, potomu chto ne nuzhna
                         //Curve.Lambda := WaveLength;
                         CalcInitHash(Curve);
-                        SearchSpecimenAndInit(SpecimenParameters, Curve);
+                        InitCurve(TupleList, Curve);
                         //  dobavlenie novogo ekz. patterna v spisok
                         FCurves.Add(Curve);
                         //  esli pattern ne imeet parametra polozheniya,
@@ -1621,7 +1617,7 @@ procedure TFitTask.MinimizeDifferenceAgain;
 begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyani
     // povtornaya initsializatsiya gaussianov
-    RecreateCurveInstances(nil);
+    RecreateCurves(nil);
     CalculateProfile;
     Optimization;
     Done;

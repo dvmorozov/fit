@@ -49,7 +49,7 @@ type
         class function CreateCurveTypeSelector: ICurveTypeSelector;
 
         { Implementation of ICurveFactory. }
-        { TODO: create implementation based on TFitTask.GetPatternSpecimen: TCurvePointsSet. }
+        { TODO: create implementation based on TFitTask.GetPatternCurve: TCurvePointsSet. }
         //function CreatePointsSet(TypeId: TCurveTypeId): TNamedPointsSet; virtual; abstract;
         procedure RegisterCurveType(CurveClass: TCurveClass);
 

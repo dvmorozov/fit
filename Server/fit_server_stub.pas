@@ -63,7 +63,7 @@ type
         function ComputeCurveBounds(var ErrMsg: string): longint;
         function ComputeBackgroundPoints(var ErrMsg: string): longint;
         function ComputeCurvePositions(var ErrMsg: string): longint;
-        function AllPointsAsPeakPositions(var ErrMsg: string): longint;
+        function SelectAllPointsAsCurvePositions(var ErrMsg: string): longint;
 
         function StopAsyncOper(var ErrMsg: string): longint;
         function AsyncOper(var ErrMsg: string): boolean;
@@ -501,7 +501,7 @@ begin
     end;
 end;
 
-function TFitServerStub.AllPointsAsPeakPositions(var ErrMsg: string): longint;
+function TFitServerStub.SelectAllPointsAsCurvePositions(var ErrMsg: string): longint;
 begin
     try
         Result := -2;
@@ -519,7 +519,7 @@ begin
     try
         Result := 0;
         ErrMsg := '';
-        ErrMsg := Server.AllPointsAsPeakPositions;
+        ErrMsg := Server.SelectAllPointsAsCurvePositions;
     except
         on E: EUserException do
         begin

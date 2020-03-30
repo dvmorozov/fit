@@ -199,7 +199,7 @@ type
         { Calculates peak positions which will be taken as specimen positions. }
         procedure ComputeCurvePositionsAlg;
         { Selects all points as specimen positions. }
-        procedure AllPointsAsPeakPositionsAlg;
+        procedure SelectAllPointsAsCurvePositionsAlg;
         procedure ComputeCurvePositionsDoneProcActual;
 
         { Wrappers for corresponding methods of TFitTask. }
@@ -360,7 +360,7 @@ type
         function ComputeBackgroundPoints: string; virtual;
         { Searches for curve positions. }
         function ComputeCurvePositions: string; virtual;
-        function AllPointsAsPeakPositions: string; virtual;
+        function SelectAllPointsAsCurvePositions: string; virtual;
 
         { Control operations. }
 
@@ -1179,7 +1179,7 @@ begin
     end;
 end;
 
-procedure TFitServer.AllPointsAsPeakPositionsAlg;
+procedure TFitServer.SelectAllPointsAsCurvePositionsAlg;
 var
     i:    longint;
     Data: TPointsSet;
@@ -1336,7 +1336,7 @@ begin
         ComputeCurvePositionsDoneProcActual);
 end;
 
-function TFitServer.AllPointsAsPeakPositions: string;
+function TFitServer.SelectAllPointsAsCurvePositions: string;
 begin
     Result := '';
     if State = AsyncOperation then
@@ -1350,7 +1350,7 @@ begin
             DataMustBeSet);
 
     FStartTime := Now;
-    RecreateMainCalcThread(AllPointsAsPeakPositionsAlg,
+    RecreateMainCalcThread(SelectAllPointsAsCurvePositionsAlg,
         ComputeCurvePositionsDoneProcActual);
 end;
 

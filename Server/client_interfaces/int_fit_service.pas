@@ -141,7 +141,7 @@ type
         { Returns hint or error message received from the server. }
         function ComputeCurvePositions: string;
         { Returns hint or error message received from the server. }
-        function AllPointsAsPeakPositions: string;
+        function SelectAllPointsAsCurvePositions: string;
 {$IFDEF FITCGI}
         function GetGraph(const Width: longint;
             const Height: longint): TMemoryStream;

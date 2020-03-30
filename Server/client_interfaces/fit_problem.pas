@@ -114,7 +114,7 @@ type
         function ComputeCurveBounds: string;
         function ComputeBackgroundPoints: string;
         function ComputeCurvePositions: string;
-        function AllPointsAsPeakPositions: string;
+        function SelectAllPointsAsCurvePositions: string;
 {$IFDEF FITCGI}
         function GetGraph(const Width: longint;
             const Height: longint): TMemoryStream;
@@ -928,13 +928,13 @@ begin
 end;
 
 {$IF DEFINED(FIT) OR DEFINED(FITPRO) OR DEFINED(FITCGI)}
-function TFitProblem.AllPointsAsPeakPositions: string;
+function TFitProblem.SelectAllPointsAsCurvePositions: string;
 var
     Res:    longint;
     ErrMsg: string;
 begin
     Assert(Assigned(FitStub));
-    Res := FitStub.AllPointsAsPeakPositions(ErrMsg);
+    Res := FitStub.SelectAllPointsAsCurvePositions(ErrMsg);
     case Res of
         -1: raise EUserException.Create(ErrMsg);
         -2: raise Exception.Create(ErrMsg);

@@ -47,7 +47,7 @@ var
 implementation
 
 uses
-    input_max_rfactor_dialog;
+    set_maximum_rfactor_dialog;
 
 procedure TInputBackFactorDlg.FormCloseQuery(Sender: TObject; var CanClose: boolean);
 const

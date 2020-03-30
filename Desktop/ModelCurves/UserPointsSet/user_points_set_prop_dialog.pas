@@ -70,7 +70,7 @@ var
 
 implementation
 
-uses input_max_rfactor_dialog;
+uses set_maximum_rfactor_dialog;
 
 { TUserPointsSetPropDlg }
 

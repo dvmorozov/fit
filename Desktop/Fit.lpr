@@ -28,7 +28,7 @@ uses {$IFDEF UNIX} {$IFDEF UseCThreads}
     Forms,
     GeneralHashFunctions,
     input_back_factor_dialog,
-    input_max_rfactor_dialog,
+    set_maximum_rfactor_dialog,
     input_wavelength_dialog,
     int_fit_server,
     int_fit_service,
@@ -89,7 +89,7 @@ begin
     Application.CreateForm(TAboutBox, AboutBox);
     Application.CreateForm(TInputWavelengthDlg, InputWavelengthDlg);
     Application.CreateForm(TInputBackFactorDlg, InputBackFactorDlg);
-    Application.CreateForm(TInputMaxRFactorDlg, InputMaxRFactorDlg);
+    Application.CreateForm(TSetMaximumRFactorDlg, SetMaximumRFactorDlg);
     Application.CreateForm(TCreateUserPointsSetDlg, CreateUserPointsSetDlg);
     Application.CreateForm(TUserPointsSetPropDlg, UserPointsSetPropDlg);
     //  Syntax /INFILE=file_name.dat.

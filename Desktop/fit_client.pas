@@ -33,9 +33,10 @@ uses
 
 type
     { Modes of selectiion of active point set. }
-    TSelMode    = (ModeSelNone, ModeSelAreaLimits, ModeSelCharacteristicPoints,
-        ModeSelGaussianBounds, ModeSelBackground, ModeSelPeakPos,
-        ModeSelPeakBounds);
+    TSelMode    =
+        (ModeSelectNothing, ModeSelectIntervalBounds, ModeSelectCharacteristicPoints,
+         ModeSelectCurveBounds, ModeSelectBackground, ModeSelectCurvePositions,
+         ModeSelectRFactorBounds);
     { Results of data file opening. }
     TOpenState  = (OpenSuccess, OpenFailure);
     { States of processing long operations. }
@@ -303,7 +304,7 @@ type
         procedure ComputeCurveBounds;
         procedure ComputeBackgroundPoints;
         procedure ComputeCurvePositions;
-        procedure AllPointsAsPeakPositions;
+        procedure SelectAllPointsAsCurvePositions;
         procedure StopAsyncOper;
         { Gets state of asynchronous operation from the server. }
         function AsyncOper: boolean;
@@ -400,7 +401,7 @@ constructor TFitClient.CreateWithInjector(ADataLoaderInjector: IDataLoaderInject
 begin
     inherited;
     FDataLoaderInjector := ADataLoaderInjector;
-    FSelectionMode := ModeSelNone;
+    FSelectionMode := ModeSelectNothing;
     FOpenState  := OpenFailure;
     FAsyncState := AsyncStart;
 
@@ -1087,29 +1088,29 @@ end;
 procedure TFitClient.SetSelectionMode(ASelectionMode: TSelMode);
 begin
     case ASelectionMode of
-        ModeSelNone:
+        ModeSelectNothing:
             case FSelectionMode of
-                ModeSelAreaLimits: RemoveSelectedPoints;
-                ModeSelCharacteristicPoints: RemoveSelectedPoints;
-                ModeSelGaussianBounds: RemoveSelectedPoints;
+                ModeSelectIntervalBounds: RemoveSelectedPoints;
+                ModeSelectCharacteristicPoints: RemoveSelectedPoints;
+                ModeSelectCurveBounds: RemoveSelectedPoints;
             end;
-        ModeSelAreaLimits:
+        ModeSelectIntervalBounds:
             RecreateAndShowSelectedPoints('Area Limits');
-        ModeSelCharacteristicPoints:
+        ModeSelectCharacteristicPoints:
             RecreateAndShowSelectedPoints('Characteristic Points');
-        ModeSelGaussianBounds:
+        ModeSelectCurveBounds:
             RecreateAndShowSelectedPoints('Curve Bounds');
-        ModeSelBackground:
+        ModeSelectBackground:
         begin
             Assert(Assigned(FBackgroundPoints));
             PlotBackground;
         end;
-        ModeSelPeakPos:
+        ModeSelectCurvePositions:
         begin
             Assert(Assigned(FCurvePositions));
             PlotCurvePositions;
         end;
-        ModeSelPeakBounds:
+        ModeSelectRFactorBounds:
         begin
             Assert(Assigned(FRFactorBounds));
             PlotRFactorBounds;
@@ -1126,30 +1127,30 @@ end;
 procedure TFitClient.AddPointToActive(XValue, YValue: double);
 begin
     case FSelectionMode of
-        ModeSelAreaLimits: AddPointToSelected(XValue, YValue);
-        ModeSelCharacteristicPoints: AddPointToSelected(XValue, YValue);
-        ModeSelGaussianBounds: AddPointToSelected(XValue, YValue);
-        ModeSelBackground: AddPointToBackground(XValue, YValue);
-        ModeSelPeakPos: AddPointToCurvePositions(XValue, YValue);
-        ModeSelPeakBounds: AddPointToRFactorBounds(XValue, YValue);
+        ModeSelectIntervalBounds: AddPointToSelected(XValue, YValue);
+        ModeSelectCharacteristicPoints: AddPointToSelected(XValue, YValue);
+        ModeSelectCurveBounds: AddPointToSelected(XValue, YValue);
+        ModeSelectBackground: AddPointToBackground(XValue, YValue);
+        ModeSelectCurvePositions: AddPointToCurvePositions(XValue, YValue);
+        ModeSelectRFactorBounds: AddPointToRFactorBounds(XValue, YValue);
     end;
 end;
 
 function TFitClient.GetCurrentPointsSet: TTitlePointsSet;
 begin
     case FSelectionMode of
-        ModeSelNone:
+        ModeSelectNothing:
             if FSelectedAreaMode then
                 Result := FSelectedArea
             else
                 Result := NeutronPointsSet;
 
-        ModeSelAreaLimits: Result := FSelectedPoints;
-        ModeSelCharacteristicPoints: Result := FSelectedPoints;
-        ModeSelGaussianBounds: Result := FSelectedPoints;
-        ModeSelBackground: Result := FBackgroundPoints;
-        ModeSelPeakPos: Result    := FCurvePositions;
-        ModeSelPeakBounds: Result := FRFactorBounds;
+        ModeSelectIntervalBounds: Result := FSelectedPoints;
+        ModeSelectCharacteristicPoints: Result := FSelectedPoints;
+        ModeSelectCurveBounds: Result := FSelectedPoints;
+        ModeSelectBackground: Result := FBackgroundPoints;
+        ModeSelectCurvePositions: Result    := FCurvePositions;
+        ModeSelectRFactorBounds: Result := FRFactorBounds;
     end;
 end;
 
@@ -1287,10 +1288,10 @@ begin
     FAsyncState := AsyncWorks;
 end;
 
-procedure TFitClient.AllPointsAsPeakPositions;
+procedure TFitClient.SelectAllPointsAsCurvePositions;
 begin
     Assert(Assigned(FitProxy));
-    FitProxy.AllPointsAsPeakPositions;
+    FitProxy.SelectAllPointsAsCurvePositions;
     FAsyncState := AsyncWorks;
 end;
 

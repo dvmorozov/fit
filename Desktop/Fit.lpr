@@ -85,7 +85,7 @@ var
 begin
     Application.Initialize;
     Application.CreateForm(TFormMain, FormMain);
-    FormMain.ApplicationProperties1.Title := 'Fit';
+    FormMain.ApplicationProperties.Title := 'Fit';
     Application.CreateForm(TAboutBox, AboutBox);
     Application.CreateForm(TInputWavelengthDlg, InputWavelengthDlg);
     Application.CreateForm(TInputBackFactorDlg, InputBackFactorDlg);

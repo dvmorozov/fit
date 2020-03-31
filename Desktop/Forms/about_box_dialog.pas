@@ -55,8 +55,8 @@ uses
 { TAboutBox }
 procedure TAboutBox.FormShow(Sender: TObject);
 begin
-    Caption := FormMain.ApplicationProperties1.Title;
-    StaticTextTitle.Caption := FormMain.ApplicationProperties1.Title;
+    Caption := FormMain.ApplicationProperties.Title;
+    StaticTextTitle.Caption := FormMain.ApplicationProperties.Title;
 end;
 
 procedure TAboutBox.StaticTextGitHubClick(Sender: TObject);

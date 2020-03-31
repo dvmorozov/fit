@@ -1,7 +1,7 @@
 object FormMain: TFormMain
-  Left = 699
+  Left = 702
   Height = 372
-  Top = 150
+  Top = 51
   Width = 622
   HorzScrollBar.Page = 1191
   VertScrollBar.Page = 502
@@ -11,7 +11,7 @@ object FormMain: TFormMain
   ClientWidth = 622
   Font.Height = -9
   Font.Name = 'MS Sans Serif'
-  Menu = MainMenu1
+  Menu = MainMenu
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy
@@ -38,7 +38,7 @@ object FormMain: TFormMain
     ParentFont = False
     SimplePanel = False
   end
-  object PageControl1: TPageControl
+  object PageControl: TPageControl
     Left = 0
     Height = 115
     Top = 214
@@ -872,18 +872,18 @@ object FormMain: TFormMain
       end
     end
   end
-  object MainMenu1: TMainMenu
+  object MainMenu: TMainMenu
     ParentBidiMode = False
     Images = ImageList2
     left = 552
     top = 64
-    object Data: TMenuItem
+    object MenuData: TMenuItem
       Caption = '&Data'
-      object Import: TMenuItem
+      object MenuImportData: TMenuItem
         Action = ActionImportData
         OnClick = ActionImportDataExecute
       end
-      object Reload: TMenuItem
+      object MenuReloadData: TMenuItem
         Action = ActionReloadData
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -924,76 +924,75 @@ object FormMain: TFormMain
         ImageIndex = 5
         OnClick = ActionReloadDataExecute
       end
-      object ArgumentTransformation: TMenuItem
+      object MenuArgumentTransformation: TMenuItem
         Caption = 'Argument Transformation'
-        object CreateRule: TMenuItem
+        object MenuCreateRule: TMenuItem
           Caption = 'Create Rule...'
           Visible = False
         end
-        object SetRuleParameters: TMenuItem
+        object MenuSetRuleParameters: TMenuItem
           Caption = 'Set Rule Parameters'
-          object SetWavelength: TMenuItem
+          object MenuSetWavelength: TMenuItem
             Caption = 'Wavelength...'
-            OnClick = SetWavelengthClick
+            OnClick = MenuSetWavelengthClick
           end
         end
-        object UseRule: TMenuItem
+        object MenuUseRule: TMenuItem
           Caption = 'Use Rule'
-          object Theta: TMenuItem
-            Caption = 'Theta'
-            OnClick = ThetaClick
+          object MenuTheta: TMenuItem
+            Caption = 'MenuTheta'
+            OnClick = MenuThetaClick
           end
-          object N2Theta: TMenuItem
+          object MenuN2Theta: TMenuItem
             Caption = '2 * Theta'
-            OnClick = N2ThetaClick
+            OnClick = MenuN2ThetaClick
           end
-          object SinThetaLambda: TMenuItem
+          object MenuSinThetaLambda: TMenuItem
             Caption = 'Sin(Theta)/Lambda'
-            OnClick = SinThetaLambdaClick
+            OnClick = MenuSinThetaLambdaClick
           end
         end
       end
-      object MenuItem9: TMenuItem
+      object MenuSeparator9: TMenuItem
         Caption = ' '
         Enabled = False
       end
-      object Range: TMenuItem
+      object MenuRange: TMenuItem
         Caption = 'Range'
-        object SelAreaLimits: TMenuItem
+        object MenuSelectIntervalBounds: TMenuItem
           Action = ActionSelectIntervalBounds
           OnClick = ActionSelectIntervalBoundsExecute
         end
-        object SelArea: TMenuItem
+        object MenuSelectDataInterval: TMenuItem
           Action = ActionSelectDataInterval
           OnClick = ActionSelectDataIntervalExecute
         end
-        object MenuItem18: TMenuItem
+        object MenuSeparator18: TMenuItem
           Caption = ' '
           Enabled = False
         end
-        object SelEntireProf: TMenuItem
+        object MenuSelectEntireProfile: TMenuItem
           Action = ActionSelectEntireProfile
           OnClick = ActionSelectEntireProfileExecute
         end
       end
-      object Smooth: TMenuItem
+      object MenuSmoothProfile: TMenuItem
         Action = ActionSmoothProfile
-        Caption = 'Smooth'
         OnClick = ActionSmoothProfileExecute
       end
-      object MenuItem8: TMenuItem
+      object MenuSeparator8: TMenuItem
         Caption = ' '
         Enabled = False
       end
-      object SelCharacteristicPoints: TMenuItem
+      object MenuSelectCharacteristicPoints: TMenuItem
         Action = ActionSelectCharacteristicPoints
         OnClick = ActionSelectCharacteristicPointsExecute
       end
-      object MenuItem1: TMenuItem
+      object MenuSeparator1: TMenuItem
         Caption = ' '
         Enabled = False
       end
-      object Quit: TMenuItem
+      object MenuQuit: TMenuItem
         Action = ActionQuit
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -1035,14 +1034,15 @@ object FormMain: TFormMain
         OnClick = ActionQuitExecute
       end
     end
-    object Edit1: TMenuItem
+    object MenuEdit: TMenuItem
       Caption = '&Edit'
-      object Copy: TMenuItem
+      object MenuCopy: TMenuItem
         Action = ActionCopy
         OnClick = ActionCopyExecute
       end
-      object Delete: TMenuItem
+      object MenuDelete: TMenuItem
         Action = ActionDelete
+        Caption = 'MenuDelete'
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
           200000000000000400006400000064000000000000000000000000000000140E
@@ -1082,159 +1082,157 @@ object FormMain: TFormMain
         ImageIndex = 2
         OnClick = ActionDeleteExecute
       end
-      object Separator1: TMenuItem
+      object MenuSeparator2: TMenuItem
         Caption = ' '
         Enabled = False
       end
-      object SelectAll: TMenuItem
+      object MenuSelectAll: TMenuItem
         Action = ActionSelectAll
         OnClick = ActionSelectAllExecute
       end
     end
-    object View: TMenuItem
+    object MenuView: TMenuItem
       Caption = '&View'
-      object ZoomIn: TMenuItem
+      object MenuZoomIn: TMenuItem
         Action = ActionZoomIn
         OnClick = ActionZoomInExecute
       end
-      object ZoomOut: TMenuItem
+      object MenuZoomOut: TMenuItem
         Action = ActionZoomOut
         OnClick = ActionZoomOutExecute
       end
-      object N4: TMenuItem
+      object MenuSeparator4: TMenuItem
         Caption = ' '
         Enabled = False
       end
-      object ViewMarkers: TMenuItem
+      object MenuViewMarkers: TMenuItem
         Action = ActionViewMarkers
         OnClick = ActionViewMarkersExecute
       end
-      object MenuItem5: TMenuItem
+      object MenuAnimationMode: TMenuItem
         Action = ActionAnimationMode
       end
     end
-    object Model: TMenuItem
+    object MenuModel: TMenuItem
       Caption = '&Model'
-      OnClick = ModelClick
-      object SelCurveType: TMenuItem
+      OnClick = MenuModelClick
+      object MenuSelectCurveType: TMenuItem
         Caption = 'Curve Type'
       end
-      object RFactorIntervals: TMenuItem
-        Caption = 'Specimen Application Intervals'
-        object SelRFactorIntervalsAuto: TMenuItem
+      object MenuRFactorIntervals: TMenuItem
+        Caption = 'RFactor Intervals'
+        object MenuComputeRFactorBounds: TMenuItem
           Action = ActionComputeRFactorBounds
           OnClick = ActionComputeRFactorBoundsExecute
         end
-        object SelRFactorIntervalsVis: TMenuItem
+        object MenuSelectRFactorBoundsManually: TMenuItem
           Action = ActionSelectRFactorBoundsManually
           OnClick = ActionSelectRFactorBoundsManuallyExecute
         end
-        object MenuItem20: TMenuItem
+        object MenuSeparator20: TMenuItem
           Caption = ' '
           Enabled = False
         end
-        object RemoveRFactorIntervals: TMenuItem
+        object MenuRemoveRFactorBounds: TMenuItem
           Action = ActionRemoveRFactorBounds
           OnClick = ActionRemoveRFactorBoundsExecute
         end
       end
-      object PeakPos: TMenuItem
-        Caption = 'Specimen Positions'
-        OnClick = PeakPosClick
-        object SelSpecPosAuto: TMenuItem
+      object MenuCurvePositions: TMenuItem
+        Caption = 'Curve Positions'
+        OnClick = CurvePositionsClick
+        object MenuComputCurvePositions: TMenuItem
           Action = ActionComputCurvePositions
           AutoCheck = True
-          OnClick = ActionComputCurvePositionsExecute
         end
-        object SpecAtEveryPoint: TMenuItem
+        object MenuSelectAllPointsAsCurvePositions: TMenuItem
           Action = ActionSelectAllPointsAsCurvePositions
         end
-        object SelSpecPosVis: TMenuItem
+        object MenuSelectCurvePositionsManually: TMenuItem
           Action = ActionSelectCurvePositionsManually
-          OnClick = ActionSelectCurvePositionsManuallyExecute
         end
-        object MenuItem19: TMenuItem
+        object MenuSeparator19: TMenuItem
           Caption = ' '
           Enabled = False
         end
-        object RemoveSpecPos: TMenuItem
+        object MenuRemoveCurvePositions: TMenuItem
           Action = ActionRemoveCurvePositions
           OnClick = ActionRemoveCurvePositionsExecute
         end
       end
-      object Back: TMenuItem
+      object MenuBackground: TMenuItem
         Caption = 'Background'
-        object SetPortion: TMenuItem
+        object MenuSetBackgroundFraction: TMenuItem
           Action = ActionSetBackgroundFraction
           OnClick = ActionSetBackgroundFractionExecute
         end
-        object BackPoints: TMenuItem
+        object MenuBackgroundPoints: TMenuItem
           Caption = 'Points'
-          object SelBackAuto: TMenuItem
+          object MenuComputeBackgroundPoints: TMenuItem
             Action = ActionComputeBackgroundPoints
             OnClick = ActionComputeBackgroundPointsExecute
           end
-          object SelBackVis: TMenuItem
+          object MenuSelectBackgroundManually: TMenuItem
             Action = ActionSelectBackgroundManually
             OnClick = ActionSelectBackgroundManuallyExecute
           end
-          object RemoveBack: TMenuItem
+          object MenuRemoveBackgroundPoints: TMenuItem
             Action = ActionRemoveBackgroundPoints
             OnClick = ActionRemoveBackgroundPointsExecute
           end
         end
-        object RmBack: TMenuItem
+        object MenuSubtractBackground: TMenuItem
           Caption = 'Subtract'
-          object RmBackAuto: TMenuItem
+          object MenuSubtractBackgroundAutomatically: TMenuItem
             Action = ActionSubtractBackgroundAutomatically
             OnClick = ActionSubtractBackgroundAutomaticallyExecute
           end
-          object RmBackSelected: TMenuItem
-            Action = ActionSaveModelAsText
+          object MenuSubtractBackgroundBySelectedPoints: TMenuItem
+            Action = ActionSubtractBackgroundBySelectedPoints
             OnClick = ActionSubtractBackgroundBySelectedPointsExecute
           end
         end
-        object BackEnableVariation: TMenuItem
+        object MenuEnableBackgroundVariation: TMenuItem
           Action = ActionEnableBackgroundVariation
         end
       end
-      object MenuItem16: TMenuItem
+      object MenuSeparator16: TMenuItem
         Caption = ' '
         Enabled = False
       end
-      object SelCurveBounds: TMenuItem
+      object MenuSelectCurveBounds: TMenuItem
         Action = ActionSelectCurveBounds
         OnClick = ActionSelectCurveBoundsExecute
       end
-      object MenuItem2: TMenuItem
+      object MenuSeparator3: TMenuItem
         Caption = ' '
         Enabled = False
       end
-      object SaveAsText: TMenuItem
+      object MenuSaveModelAsText: TMenuItem
         Action = ActionSaveModelAsText
         OnClick = ActionSaveModelAsTextExecute
       end
     end
-    object Fitting: TMenuItem
+    object MenuFit: TMenuItem
       Caption = '&Fit'
-      object DoAllAuto: TMenuItem
+      object MenuDoAllAutomatically: TMenuItem
         Action = ActionDoAllAutomatically
         ImageIndex = 6
         OnClick = ActionDoAllAutomaticallyExecute
       end
-      object MenuItem4: TMenuItem
+      object MenuSeparator5: TMenuItem
         Caption = ' '
         Enabled = False
       end
-      object FitMinNumberOfSpec: TMenuItem
+      object MenuMinimizeNumberOfCurves: TMenuItem
         Action = ActionMinimizeNumberOfCurves
         OnClick = ActionMinimizeNumberOfCurvesExecute
       end
-      object FitMinDifference: TMenuItem
+      object MenuMinimizeDifference: TMenuItem
         Action = ActionMinimizeDifference
         OnClick = ActionMinimizeDifferenceExecute
       end
-      object StopFitting: TMenuItem
+      object MenuStopFit: TMenuItem
         Action = ActionStopFit
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -1275,34 +1273,35 @@ object FormMain: TFormMain
         ImageIndex = 7
         OnClick = ActionStopFitExecute
       end
-      object MenuItem11: TMenuItem
+      object MenuSeparator6: TMenuItem
         Caption = ' '
         Enabled = False
       end
-      object SetMaxRFactor: TMenuItem
+      object MenuSetMaximumRFactor: TMenuItem
         Action = ActionSetMaximumRFactor
         OnClick = ActionSetMaximumRFactorExecute
       end
-      object CurveScalingEnabled: TMenuItem
+      object MenuEnableCurveScaling: TMenuItem
         Action = ActionEnableCurveScaling
       end
     end
-    object Help1: TMenuItem
+    object MenuHelp: TMenuItem
       Caption = '&Help'
-      object Glossary: TMenuItem
+      object MenuGlossary: TMenuItem
         Action = ActionGlossary
+        Caption = 'MenuGlossary'
       end
-      object MenuItem12: TMenuItem
+      object MenuSeparator7: TMenuItem
         Caption = ' '
         Enabled = False
       end
-      object About: TMenuItem
+      object MenuAbout: TMenuItem
         Action = ActionAbout
         OnClick = ActionAboutExecute
       end
     end
   end
-  object OpenDialog1: TOpenDialog
+  object OpenDialog: TOpenDialog
     Title = 'Open Profile Data'
     DefaultExt = '.*.DAT'
     Filter = 'DAT - files (*.DAT)|*.DAT;*.dat|All files (*.*)|*.*'
@@ -1509,21 +1508,21 @@ object FormMain: TFormMain
       00FF000000FF7B7B7BFF000000FF
     }
   end
-  object ViewModeMenu: TPopupMenu
+  object PopupViewMode: TPopupMenu
     left = 301
     top = 128
-    object Theta2: TMenuItem
+    object MenuTheta2: TMenuItem
       Caption = 'Theta'
-      OnClick = ThetaClick
+      OnClick = MenuThetaClick
     end
-    object N2Theta2: TMenuItem
+    object MenuN2Theta2: TMenuItem
       Caption = '2 * Theta'
       Checked = True
-      OnClick = N2ThetaClick
+      OnClick = MenuN2ThetaClick
     end
-    object SinThetaLambda2: TMenuItem
+    object MenuSinThetaLambda2: TMenuItem
       Caption = 'Sin(Theta)/Lambda'
-      OnClick = SinThetaLambdaClick
+      OnClick = MenuSinThetaLambdaClick
     end
   end
   object ImageList2: TImageList
@@ -2045,21 +2044,21 @@ object FormMain: TFormMain
       0000000000000000000000000000
     }
   end
-  object SaveDialog1: TSaveDialog
+  object SaveDialog: TSaveDialog
     Title = 'Select File to Save Data'
     Filter = 'Text files (*.TXT)|*.TXT|All files (*.*)|*.*'
     left = 467
     top = 128
   end
-  object ApplicationProperties1: TApplicationProperties
+  object ApplicationProperties: TApplicationProperties
     Title = 'Fit'
-    OnHint = ApplicationProperties1Hint
+    OnHint = ApplicationPropertiesHint
     left = 301
     top = 64
   end
-  object CheckStateTimer: TTimer
+  object TimerCheckState: TTimer
     Interval = 500
-    OnTimer = CheckStateTimerTimer
+    OnTimer = TimerCheckStateTimer
     left = 301
   end
   object TimerBalloonShow: TTimer
@@ -2073,7 +2072,7 @@ object FormMain: TFormMain
     OnTimer = TimerBalloonHideTimer
     left = 467
   end
-  object ActionList1: TActionList
+  object ActionList: TActionList
     Images = ImageList2
     left = 384
     top = 128
@@ -2133,12 +2132,12 @@ object FormMain: TFormMain
     end
     object ActionSelectIntervalBounds: TAction
       Category = 'Data'
-      Caption = 'Start Visual Selection'
+      Caption = 'Start Manual Selection'
       OnExecute = ActionSelectIntervalBoundsExecute
     end
     object ActionSelectDataInterval: TAction
       Category = 'Data'
-      Caption = 'Select Interval'
+      Caption = 'Select Data Interval'
       OnExecute = ActionSelectDataIntervalExecute
     end
     object ActionSelectEntireProfile: TAction

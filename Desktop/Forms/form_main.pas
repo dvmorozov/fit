@@ -90,8 +90,8 @@ type
     ActionSmoothProfile: TAction;
     ActionSelectCharacteristicPoints: TAction;
     ActionQuit: TAction;
-    ActionList1: TActionList;
-    ApplicationProperties1: TApplicationProperties;
+    ActionList: TActionList;
+    ApplicationProperties: TApplicationProperties;
     ButCopy4: TButton;
     ButSaveAsText4: TButton;
     CheckListBoxLegend: TCheckListBox;
@@ -117,45 +117,45 @@ type
     LabelAngle: TLabel;
     LabelIntensity: TLabel;
     LabelMin: TLabel;
-    MainMenu1: TMainMenu;
-    Data: TMenuItem;
-    DoAllAuto: TMenuItem;
-    MenuItem1: TMenuItem;
-    FitMinNumberOfSpec: TMenuItem;
-    FitMinDifference: TMenuItem;
-    ArgumentTransformation: TMenuItem;
-    CreateRule: TMenuItem;
-    BackPoints: TMenuItem;
-    CurveScalingEnabled: TMenuItem;
-    SpecAtEveryPoint: TMenuItem;
-    MenuItem5: TMenuItem;
-    BackEnableVariation: TMenuItem;
+    MainMenu: TMainMenu;
+    MenuData: TMenuItem;
+    MenuDoAllAutomatically: TMenuItem;
+    MenuSeparator1: TMenuItem;
+    MenuMinimizeNumberOfCurves: TMenuItem;
+    MenuMinimizeDifference: TMenuItem;
+    MenuArgumentTransformation: TMenuItem;
+    MenuCreateRule: TMenuItem;
+    MenuBackgroundPoints: TMenuItem;
+    MenuEnableCurveScaling: TMenuItem;
+    MenuSelectAllPointsAsCurvePositions: TMenuItem;
+    MenuAnimationMode: TMenuItem;
+    MenuEnableBackgroundVariation: TMenuItem;
     PanelParameters: TPanel;
     PanelIntervals: TPanel;
     PanelDatasheet: TPanel;
     PanelSpecPositions: TPanel;
     PanelBackground: TPanel;
-    SelArea: TMenuItem;
-    MenuItem18: TMenuItem;
-    SelEntireProf: TMenuItem;
-    Range: TMenuItem;
-    SelAreaLimits: TMenuItem;
-    SelBackAuto: TMenuItem;
-    RmBack: TMenuItem;
-    RmBackAuto: TMenuItem;
-    SelBackVis: TMenuItem;
-    RemoveBack: TMenuItem;
-    RmBackSelected: TMenuItem;
-    Back: TMenuItem;
-    SetPortion: TMenuItem;
-    PageControl1: TPageControl;
+    MenuSelectDataInterval: TMenuItem;
+    MenuSeparator18: TMenuItem;
+    MenuSelectEntireProfile: TMenuItem;
+    MenuRange: TMenuItem;
+    MenuSelectIntervalBounds: TMenuItem;
+    MenuComputeBackgroundPoints: TMenuItem;
+    MenuSubtractBackground: TMenuItem;
+    MenuSubtractBackgroundAutomatically: TMenuItem;
+    MenuSelectBackgroundManually: TMenuItem;
+    MenuRemoveBackgroundPoints: TMenuItem;
+    MenuSubtractBackgroundBySelectedPoints: TMenuItem;
+    MenuBackground: TMenuItem;
+    MenuSetBackgroundFraction: TMenuItem;
+    PageControl: TPageControl;
     PanelTop: TPanel;
     PanelLeft: TPanel;
     PanelChart: TPanel;
     Panel2: TPanel;
     PanelRight: TPanel;
-    PeakPos: TMenuItem;
-    SetWavelength: TMenuItem;
+    MenuCurvePositions: TMenuItem;
+    MenuSetWavelength: TMenuItem;
     ScrollBarX: TScrollBar;
     ScrollBarY: TScrollBar;
     SplitterChartRight: TSplitter;
@@ -192,63 +192,63 @@ type
     ToolButton7: TToolButton;
     ToolButton8: TToolButton;
     ToolButton9: TToolButton;
-    UseRule: TMenuItem;
-    SinThetaLambda: TMenuItem;
-    N2Theta: TMenuItem;
-    Theta: TMenuItem;
-    SetRuleParameters: TMenuItem;
-    SelRFactorIntervalsAuto: TMenuItem;
-    SelRFactorIntervalsVis: TMenuItem;
-    MenuItem20: TMenuItem;
-    RemoveRFactorIntervals: TMenuItem;
-    RFactorIntervals: TMenuItem;
-    SelSpecPosAuto: TMenuItem;
-    SelSpecPosVis: TMenuItem;
-    MenuItem19: TMenuItem;
-    RemoveSpecPos: TMenuItem;
-    StopFitting: TMenuItem;
-    MenuItem4: TMenuItem;
-    Smooth: TMenuItem;
-    SelCharacteristicPoints: TMenuItem;
-    SelCurveBounds: TMenuItem;
-    MenuItem2: TMenuItem;
+    MenuUseRule: TMenuItem;
+    MenuSinThetaLambda: TMenuItem;
+    MenuN2Theta: TMenuItem;
+    MenuTheta: TMenuItem;
+    MenuSetRuleParameters: TMenuItem;
+    MenuComputeRFactorBounds: TMenuItem;
+    MenuSelectRFactorBoundsManually: TMenuItem;
+    MenuSeparator20: TMenuItem;
+    MenuRemoveRFactorBounds: TMenuItem;
+    MenuRFactorIntervals: TMenuItem;
+    MenuComputCurvePositions: TMenuItem;
+    MenuSelectCurvePositionsManually: TMenuItem;
+    MenuSeparator19: TMenuItem;
+    MenuRemoveCurvePositions: TMenuItem;
+    MenuStopFit: TMenuItem;
+    MenuSeparator5: TMenuItem;
+    MenuSmoothProfile: TMenuItem;
+    MenuSelectCharacteristicPoints: TMenuItem;
+    MenuSelectCurveBounds: TMenuItem;
+    MenuSeparator3: TMenuItem;
     SelCurveLorentzian: TMenuItem;
-    SaveAsText: TMenuItem;
-    MenuItem16: TMenuItem;
-    MenuItem11: TMenuItem;
-    MenuItem8: TMenuItem;
-    SelCurveType: TMenuItem;
-    Fitting: TMenuItem;
-    SetMaxRFactor: TMenuItem;
-    Glossary: TMenuItem;
-    MenuItem12: TMenuItem;
-    Quit: TMenuItem;
-    MenuItem9: TMenuItem;
-    Reload: TMenuItem;
-    Model: TMenuItem;
-    Import: TMenuItem;
-    OpenDialog1: TOpenDialog;
+    MenuSaveModelAsText: TMenuItem;
+    MenuSeparator16: TMenuItem;
+    MenuSeparator6: TMenuItem;
+    MenuSeparator8: TMenuItem;
+    MenuSelectCurveType: TMenuItem;
+    MenuFit: TMenuItem;
+    MenuSetMaximumRFactor: TMenuItem;
+    MenuGlossary: TMenuItem;
+    MenuSeparator7: TMenuItem;
+    MenuQuit: TMenuItem;
+    MenuSeparator9: TMenuItem;
+    MenuReloadData: TMenuItem;
+    MenuModel: TMenuItem;
+    MenuImportData: TMenuItem;
+    OpenDialog: TOpenDialog;
     StatusBar: TStatusBar;
-    CheckStateTimer: TTimer;
-    View: TMenuItem;
-    ZoomIn: TMenuItem;
-    ZoomOut: TMenuItem;
+    TimerCheckState: TTimer;
+    MenuView: TMenuItem;
+    MenuZoomIn: TMenuItem;
+    MenuZoomOut: TMenuItem;
     ImageList1: TImageList;
-    Help1: TMenuItem;
-    About: TMenuItem;
-    ViewModeMenu: TPopupMenu;
-    Theta2: TMenuItem;
-    N2Theta2: TMenuItem;
-    SinThetaLambda2: TMenuItem;
+    MenuHelp: TMenuItem;
+    MenuAbout: TMenuItem;
+    PopupViewMode: TPopupMenu;
+    MenuTheta2: TMenuItem;
+    MenuN2Theta2: TMenuItem;
+    MenuSinThetaLambda2: TMenuItem;
     ImageList2: TImageList;
-    N4: TMenuItem;
-    ViewMarkers: TMenuItem;
-    SaveDialog1: TSaveDialog;
-    Edit1: TMenuItem;
-    Copy: TMenuItem;
-    Delete: TMenuItem;
-    Separator1: TMenuItem;
-    SelectAll: TMenuItem;
+    MenuSeparator4: TMenuItem;
+    MenuViewMarkers: TMenuItem;
+    SaveDialog: TSaveDialog;
+    MenuEdit: TMenuItem;
+    MenuCopy: TMenuItem;
+    MenuDelete: TMenuItem;
+    MenuSeparator2: TMenuItem;
+    MenuSelectAll: TMenuItem;
     procedure ActionAboutExecute(Sender: TObject);
     procedure ActionAnimationModeExecute(Sender: TObject);
     procedure ActionAnimationModeUpdate(Sender: TObject);
@@ -291,21 +291,21 @@ type
     procedure ActionViewMarkersExecute(Sender: TObject);
     procedure ActionZoomInExecute(Sender: TObject);
     procedure ActionZoomOutExecute(Sender: TObject);
-    procedure ApplicationProperties1Hint(Sender: TObject);
+    procedure ApplicationPropertiesHint(Sender: TObject);
     procedure ButAddSelectedDataPointToPositionsClick(Sender: TObject);
     procedure ButAddSelectedPointToIntervalsClick(Sender: TObject);
     procedure ButAddSelectedDataPointClick(Sender: TObject);
     procedure CheckListBoxLegendDrawItem(Control: TWinControl; Index: Integer;
       ARect: TRect; State: TOwnerDrawState);
-    procedure CheckStateTimerTimer(Sender: TObject);
+    procedure TimerCheckStateTimer(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure GridDataEditingDone(Sender: TObject);
     procedure GridDataSelectEditor(Sender: TObject; aCol, aRow: Integer;
       var Editor: TWinControl);
     procedure FormCreate(Sender: TObject);
-    procedure ModelClick(Sender: TObject);
+    procedure MenuModelClick(Sender: TObject);
     procedure PanelTopClick(Sender: TObject);
-    procedure PeakPosClick(Sender: TObject);
+    procedure CurvePositionsClick(Sender: TObject);
     procedure ScrollBarXChange(Sender: TObject);
     procedure ScrollBarYChange(Sender: TObject);
     procedure TabSheetBackgroundResize(Sender: TObject);
@@ -328,11 +328,11 @@ type
       Y: Integer);
     procedure CheckListBoxLegendKeyPress(Sender: TObject; var Key: Char);
     procedure CheckListBoxLegendClick(Sender: TObject);
-    procedure SinThetaLambdaClick(Sender: TObject);
-    procedure ThetaClick(Sender: TObject);
-    procedure N2ThetaClick(Sender: TObject);
+    procedure MenuSinThetaLambdaClick(Sender: TObject);
+    procedure MenuThetaClick(Sender: TObject);
+    procedure MenuN2ThetaClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
-    procedure SetWavelengthClick(Sender: TObject);
+    procedure MenuSetWavelengthClick(Sender: TObject);
 
   protected
     { Initial values set up just after file loading. }
@@ -393,7 +393,7 @@ type
     FActiveNumber: LongInt;
     { Collection should be passive. Object is set from TFitViewer and is checked on Nil. }
     FCurveList: TMSCRCurveList;
-    { Indicates that data in tables were changed. }
+    { Indicates that MenuData in tables were changed. }
     FModifiedParameters: Boolean;
     FModifiedDatasheet: Boolean;
     { Index of a serie point of which is selected at the moment. }
@@ -567,7 +567,7 @@ begin
 end;
 {$hints on}
 
-procedure TFormMain.CheckStateTimerTimer(Sender: TObject);
+procedure TFormMain.TimerCheckStateTimer(Sender: TObject);
 begin
     //  eta proverka pochemu-to ne srabatyvaet
     //if csDestroying in ComponentState then Exit;
@@ -603,7 +603,7 @@ begin
     SetOpenState(FitClientApp_.FitClient.OpenState);
 end;
 
-procedure TFormMain.ApplicationProperties1Hint(Sender: TObject);
+procedure TFormMain.ApplicationPropertiesHint(Sender: TObject);
 begin
     ShowHint(Application.Hint);
 end;
@@ -617,7 +617,7 @@ procedure TFormMain.LoadDataFile(FileName: string);
 begin
     //  v sluchae oshibki zagruzki d. vybrasyvat'sya isklyuchenie
     FitClientApp_.FitClient.LoadDataSet(FileName);
-    Caption := ApplicationProperties1.Title +
+    Caption := ApplicationProperties.Title +
         ' - ' + ExtractFileName(FileName);
     // chtoby proshlo obnovlenie grafika i Chart.XGraphMax
     // i dr. imeli pravil'nye znacheniya
@@ -656,7 +656,7 @@ begin
     //  chto pri ruchnoy obrabotke sootvetstvuyuschih sobscheniy v
     //  hook'e mozhno ih izbezhat'; v normal'nom rezhime raboty
     //  sboi ne zamecheny, poetomu poka ostavleno tak kak est' !!!
-    with OpenDialog1 do
+    with OpenDialog do
     begin
         InitialDir := ExtractFilePath(Application.ExeName);
         if Execute then
@@ -681,14 +681,14 @@ begin
 
     SelectedCurveTypeId := CurveTypeSelector.GetSelectedCurveType;
     //  Clears menu.
-    SelCurveType.Clear;
+    MenuSelectCurveType.Clear;
     //  Creates menu items for curve types.
     //  The list must contain at least one item.
     CurveTypeIterator.FirstCurveType;
     Index := 0;
     while True do
     begin
-        MenuItem := TMenuItem.Create(SelCurveType);
+        MenuItem := TMenuItem.Create(MenuSelectCurveType);
         MenuItem.Name := 'CurveType' + IntToStr(Index);
         MenuItem.Tag := CurveTypeIterator.GetCurveTypeTag(CurveTypeIterator.GetCurveTypeId);
         Inc(Index);
@@ -699,7 +699,7 @@ begin
         if IsEqualGUID(SelectedCurveTypeId, CurveTypeIterator.GetCurveTypeId) then
             MenuItem.Checked := True;
 
-        SelCurveType.Add(MenuItem);
+        MenuSelectCurveType.Add(MenuItem);
         //  The last item should be processed as well.
         if CurveTypeIterator.EndCurveType then Break
         else
@@ -788,7 +788,7 @@ end;
 procedure TFormMain.ActionMinimizeDifferenceExecute(Sender: TObject);
 begin
     ShowHint(HintMain);
-    SelSpecPosVis.Checked := False;
+    MenuSelectCurvePositionsManually.Checked := False;
     FitClientApp_.FitClient.MinimizeDifference;
     ShowHint(HintWait);
 {$IFDEF FITPRO}
@@ -799,7 +799,7 @@ end;
 procedure TFormMain.ActionMinimizeNumberOfCurvesExecute(Sender: TObject);
 begin
     ShowHint(HintMain);
-    SelSpecPosVis.Checked := False;
+    MenuSelectCurvePositionsManually.Checked := False;
     FitClientApp_.FitClient.MinimizeNumberOfCurves;
     ShowHint(HintWait);
 {$IFDEF FITPRO}
@@ -860,13 +860,13 @@ end;
 
 procedure TFormMain.ActionSaveModelAsTextExecute(Sender: TObject);
 begin
-    if PageControl1.ActivePage = TabSheetParameters then
+    if PageControl.ActivePage = TabSheetParameters then
     begin
         if SaveTableAsText(GridParameters) then
             FModifiedParameters := False;
     end
     else
-    if PageControl1.ActivePage = TabSheetDatasheet then
+    if PageControl.ActivePage = TabSheetDatasheet then
     begin
         if SaveTableAsText(GridDatasheet) then
             FModifiedDatasheet := False;
@@ -907,7 +907,7 @@ end;
 
 procedure TFormMain.ActionSelectIntervalBoundsExecute(Sender: TObject);
 begin
-    if not SelAreaLimits.Checked then
+    if not MenuSelectIntervalBounds.Checked then
     begin
         FActiveNumber := FFitViewer.GetActiveCurve;
         FitClientApp_.FitClient.SelectionMode := ModeSelectIntervalBounds;
@@ -922,7 +922,7 @@ end;
 procedure TFormMain.ActionComputeBackgroundPointsExecute(Sender: TObject);
 begin
     //  perehodim v rezhim vvoda tochek fona
-    if not Back.Checked then
+    if not MenuBackground.Checked then
     begin
         FActiveNumber := FFitViewer.GetActiveCurve;
         FitClientApp_.FitClient.SelectionMode := ModeSelectBackground;
@@ -935,7 +935,7 @@ end;
 
 procedure TFormMain.ActionSelectBackgroundManuallyExecute(Sender: TObject);
 begin
-    if not Back.Checked then
+    if not MenuBackground.Checked then
     begin
         FActiveNumber := FFitViewer.GetActiveCurve;
         FitClientApp_.FitClient.SelectionMode := ModeSelectBackground;
@@ -947,7 +947,7 @@ end;
 
 procedure TFormMain.ActionSelectCharacteristicPointsExecute(Sender: TObject);
 begin
-    if not SelCharacteristicPoints.Checked then
+    if not MenuSelectCharacteristicPoints.Checked then
     begin
         FActiveNumber := FFitViewer.GetActiveCurve;
         FitClientApp_.FitClient.SelectionMode := ModeSelectCharacteristicPoints;
@@ -960,7 +960,7 @@ end;
 procedure TFormMain.ActionSelectCurveBoundsExecute(Sender: TObject);
 var PS: TNeutronPointsSet;
 begin
-    if not SelCurveBounds.Checked then
+    if not MenuSelectCurveBounds.Checked then
     begin
         FActiveNumber := FFitViewer.GetActiveCurve;
         PS := FFitViewer.GetActivePointsSet;
@@ -1024,7 +1024,7 @@ begin
                 end
                 else
                 begin
-                    //  Save configuration data.
+                    //  Save configuration MenuData.
                 end;
 
             //  Curve type can be selected only after successful configuration.
@@ -1070,7 +1070,7 @@ end;
 procedure TFormMain.ActionComputeRFactorBoundsExecute(Sender: TObject);
 begin
     //  perehodim v rezhim vybora intervalov rascheta R-faktora
-    if not RFactorIntervals.Checked then
+    if not MenuRFactorIntervals.Checked then
     begin
         FActiveNumber := FFitViewer.GetActiveCurve;
         FitClientApp_.FitClient.SelectionMode := ModeSelectRFactorBounds;
@@ -1083,7 +1083,7 @@ end;
 
 procedure TFormMain.ActionSelectRFactorBoundsManuallyExecute(Sender: TObject);
 begin
-    if not RFactorIntervals.Checked then
+    if not MenuRFactorIntervals.Checked then
     begin
         FActiveNumber := FFitViewer.GetActiveCurve;
         FitClientApp_.FitClient.SelectionMode := ModeSelectRFactorBounds;
@@ -1095,7 +1095,7 @@ end;
 
 procedure TFormMain.ActionSelectCurvePositionsManuallyExecute(Sender: TObject);
 begin
-    if not PeakPos.Checked then
+    if not MenuCurvePositions.Checked then
     begin
         FActiveNumber := FFitViewer.GetActiveCurve;
         FitClientApp_.FitClient.SelectionMode := ModeSelectCurvePositions;
@@ -1132,8 +1132,8 @@ end;
 
 procedure TFormMain.ActionViewMarkersExecute(Sender: TObject);
 begin
-    ViewMarkers.Checked := not ViewMarkers.Checked;
-    FFitViewer.SetViewMarkers(ViewMarkers.Checked);
+    MenuViewMarkers.Checked := not MenuViewMarkers.Checked;
+    FFitViewer.SetViewMarkers(MenuViewMarkers.Checked);
 end;
 
 procedure TFormMain.ActionZoomInExecute(Sender: TObject);
@@ -1319,12 +1319,12 @@ end;
 procedure TFormMain.FormCreate(Sender: TObject);
 begin
     Application.OnException := OnException;
-    Caption := ApplicationProperties1.Title;
+    Caption := ApplicationProperties.Title;
 
     FFitViewer := TFitViewer.Create(nil);
     FFitViewer.Form := Self;
     FFitViewer.SetFitClient(FitClientApp_.FitClient);
-    FFitViewer.SetViewMarkers(ViewMarkers.Checked);
+    FFitViewer.SetViewMarkers(MenuViewMarkers.Checked);
     FFitViewer.Clear(Self);
 
     FActiveNumber := -1;
@@ -1338,7 +1338,7 @@ begin
     //PanelLeft.Color := clWindow;
     //PanelChart.Color := clWindow;
     //PanelRight.Color := clWindow;
-    //PageControl1.Color := clWindow;
+    //PageControl.Color := clWindow;
     CheckListBoxLegend.Color := clBtnFace;
     //  pochemu-to pri pervonachal'nom otkrytii
     //  formy v IDE sbrasyvaetsya v False
@@ -1389,7 +1389,7 @@ begin
 {$ENDIF}
 end;
 
-procedure TFormMain.ModelClick(Sender: TObject);
+procedure TFormMain.MenuModelClick(Sender: TObject);
 begin
 
 end;
@@ -1399,7 +1399,7 @@ begin
 
 end;
 
-procedure TFormMain.PeakPosClick(Sender: TObject);
+procedure TFormMain.CurvePositionsClick(Sender: TObject);
 begin
 
 end;
@@ -1407,7 +1407,7 @@ end;
 procedure TFormMain.SubtractBackground(Auto: Boolean);
 begin
     ShowHint(HintMain);
-    Back.Checked := False;
+    MenuBackground.Checked := False;
     FitClientApp_.FitClient.SubtractBackground(Auto);
 end;
 
@@ -1817,7 +1817,7 @@ begin
     //with Chart1 do
     // for i := 0 to SeriesCount - 1 do
     //  if Series[i].GetCursorValueIndex <> -1 then
-    //   begin Screen.Cursor := crCross; Quit end;
+    //   begin Screen.Cursor := crCross; MenuQuit end;
     Screen.Cursor := crArrow;
 end;
 
@@ -1861,7 +1861,7 @@ begin
 end;
 
 {$warnings off}
-procedure TFormMain.SinThetaLambdaClick(Sender: TObject);
+procedure TFormMain.MenuSinThetaLambdaClick(Sender: TObject);
 var SaveDecimalSeparator: Char;
 begin
     if FitClientApp_.FitClient.GetWaveLength = 0 then
@@ -1881,12 +1881,12 @@ begin
                 FCurveList.ViewMode := XCM_SINTL;
                 FCurveList.GridAssign(GridParameters);
             end;
-            Theta.Checked := False;
-            Theta2.Checked := False;
-            N2Theta.Checked := False;
-            N2Theta2.Checked := False;
-            SinThetaLambda.Checked := True;
-            SinThetaLambda2.Checked := True;
+            MenuTheta.Checked := False;
+            MenuTheta2.Checked := False;
+            MenuN2Theta.Checked := False;
+            MenuN2Theta2.Checked := False;
+            MenuSinThetaLambda.Checked := True;
+            MenuSinThetaLambda2.Checked := True;
         end;
     end{if FitClientApp_.FitClient.GetWaveLength = 0 then...}
     else
@@ -1897,17 +1897,17 @@ begin
             FCurveList.ViewMode := XCM_SINTL;
             FCurveList.GridAssign(GridParameters);
         end;
-        Theta.Checked := False;
-        Theta2.Checked := False;
-        N2Theta.Checked := False;
-        N2Theta2.Checked := False;
-        SinThetaLambda.Checked := True;
-        SinThetaLambda2.Checked := True;
+        MenuTheta.Checked := False;
+        MenuTheta2.Checked := False;
+        MenuN2Theta.Checked := False;
+        MenuN2Theta2.Checked := False;
+        MenuSinThetaLambda.Checked := True;
+        MenuSinThetaLambda2.Checked := True;
     end;
 end;
 {$warnings on}
 
-procedure TFormMain.ThetaClick(Sender: TObject);
+procedure TFormMain.MenuThetaClick(Sender: TObject);
 begin
     FFitViewer.XCoordMode := XCM_T;
     if Assigned(FCurveList) then
@@ -1915,15 +1915,15 @@ begin
         FCurveList.ViewMode := XCM_T;
         FCurveList.GridAssign(GridParameters);
     end;
-    Theta.Checked := True;
-    Theta2.Checked := True;
-    N2Theta.Checked := False;
-    N2Theta2.Checked := False;
-    SinThetaLambda.Checked := False;
-    SinThetaLambda2.Checked := False;
+    MenuTheta.Checked := True;
+    MenuTheta2.Checked := True;
+    MenuN2Theta.Checked := False;
+    MenuN2Theta2.Checked := False;
+    MenuSinThetaLambda.Checked := False;
+    MenuSinThetaLambda2.Checked := False;
 end;
 
-procedure TFormMain.N2ThetaClick(Sender: TObject);
+procedure TFormMain.MenuN2ThetaClick(Sender: TObject);
 begin
     FFitViewer.XCoordMode := XCM_2T;
     if Assigned(FCurveList) then
@@ -1931,12 +1931,12 @@ begin
         FCurveList.ViewMode := XCM_2T;
         FCurveList.GridAssign(GridParameters);
     end;
-    Theta.Checked := False;
-    Theta2.Checked := False;
-    N2Theta.Checked := True;
-    N2Theta2.Checked := True;
-    SinThetaLambda.Checked := False;
-    SinThetaLambda2.Checked := False;
+    MenuTheta.Checked := False;
+    MenuTheta2.Checked := False;
+    MenuN2Theta.Checked := True;
+    MenuN2Theta2.Checked := True;
+    MenuSinThetaLambda.Checked := False;
+    MenuSinThetaLambda2.Checked := False;
 end;
 
 function TFormMain.SaveTableAsText(GridData: TNumericGrid): Boolean;
@@ -1949,12 +1949,12 @@ begin
     Result := True;
 
 DoItAgain:
-    if SaveDialog1.Execute then
+    if SaveDialog.Execute then
     begin
-        FileName := SaveDialog1.FileName;
+        FileName := SaveDialog.FileName;
         if FileName <> '' then
         begin
-            SaveDialog1.InitialDir := ExtractFilePath(FileName);
+            SaveDialog.InitialDir := ExtractFilePath(FileName);
             if ExtractFileExt(FileName) = '' then
                 FileName := FileName + '.txt';
 
@@ -2046,7 +2046,7 @@ begin
             if SaveTableAsText(GridParameters) then FModifiedParameters := False
             else
             begin
-                PageControl1.ActivePage := TabSheetParameters;
+                PageControl.ActivePage := TabSheetParameters;
                 CanClose := False;
                 Exit;
             end;
@@ -2054,7 +2054,7 @@ begin
 
         if Result = mrCancel then
         begin
-            PageControl1.ActivePage := TabSheetParameters;
+            PageControl.ActivePage := TabSheetParameters;
             CanClose := False;
             Exit;
         end;
@@ -2070,7 +2070,7 @@ begin
             if SaveTableAsText(GridDatasheet) then FModifiedDatasheet := False
             else
             begin
-                PageControl1.ActivePage := TabSheetDatasheet;
+                PageControl.ActivePage := TabSheetDatasheet;
                 CanClose := False;
                 Exit;
             end;
@@ -2078,13 +2078,13 @@ begin
 
         if Result = mrCancel then
         begin
-            PageControl1.ActivePage := TabSheetDatasheet;
+            PageControl.ActivePage := TabSheetDatasheet;
             CanClose := False;
         end;
     end;
 end;
 
-procedure TFormMain.SetWavelengthClick(Sender: TObject);
+procedure TFormMain.MenuSetWavelengthClick(Sender: TObject);
 begin
     if InputWavelengthDlg.ShowModal = mrOk then
     begin
@@ -2095,8 +2095,8 @@ begin
             FCurveList.ViewMode := XCM_SINTL;
             FCurveList.GridAssign(GridParameters);
         end;
-        SinThetaLambda.Checked := True;
-        SinThetaLambda2.Checked := True;
+        MenuSinThetaLambda.Checked := True;
+        MenuSinThetaLambda2.Checked := True;
     end;
 end;
 
@@ -2106,45 +2106,45 @@ var SelBackVisCaption, SelSpecPosVisCaption,
     SelRFactorIntervalsVisCaption: string;
     NS: TPointsSet;
 begin
-    SelArea.Tag := SelArea.Tag and $FFFFFFFE;
-    SelAreaLimits.Tag := SelAreaLimits.Tag and $FFFFFFFD;
-    SelCharacteristicPoints.Tag := SelCharacteristicPoints.Tag and $FFFFFFFD;
-    SelCurveBounds.Tag := SelCurveBounds.Tag and $FFFFFFFD;
-    Back.Tag := Back.Tag and $FFFFFFFD;
-    RFactorIntervals.Tag := RFactorIntervals.Tag and $FFFFFFFD;
-    PeakPos.Tag := PeakPos.Tag and $FFFFFFFD;
+    MenuSelectDataInterval.Tag := MenuSelectDataInterval.Tag and $FFFFFFFE;
+    MenuSelectIntervalBounds.Tag := MenuSelectIntervalBounds.Tag and $FFFFFFFD;
+    MenuSelectCharacteristicPoints.Tag := MenuSelectCharacteristicPoints.Tag and $FFFFFFFD;
+    MenuSelectCurveBounds.Tag := MenuSelectCurveBounds.Tag and $FFFFFFFD;
+    MenuBackground.Tag := MenuBackground.Tag and $FFFFFFFD;
+    MenuRFactorIntervals.Tag := MenuRFactorIntervals.Tag and $FFFFFFFD;
+    MenuCurvePositions.Tag := MenuCurvePositions.Tag and $FFFFFFFD;
     //  initsializatsiya vosstanavlivaet ishodnyy tekst,
     //  kogda sootvetstvuyuschie flagi ne ustanovleny
     SelBackVisCaption := StartVisualSel;
     SelSpecPosVisCaption := StartVisPosSel;
     SelRFactorIntervalsVisCaption := StartVisualSel;
 
-    RemoveBack.Tag := RemoveBack.Tag and $FFFFFFFE;
-    RemoveRFactorIntervals.Tag := RemoveRFactorIntervals.Tag and $FFFFFFFE;
-    RemoveSpecPos.Tag := RemoveSpecPos.Tag and $FFFFFFFE;
+    MenuRemoveBackgroundPoints.Tag := MenuRemoveBackgroundPoints.Tag and $FFFFFFFE;
+    MenuRemoveRFactorBounds.Tag := MenuRemoveRFactorBounds.Tag and $FFFFFFFE;
+    MenuRemoveCurvePositions.Tag := MenuRemoveCurvePositions.Tag and $FFFFFFFE;
 
     case ASelectionMode of
         ModeSelectNothing:
             begin
                 if FitClientApp_.FitClient.SelectedAreaMode then
-                    SelEntireProf.Tag := SelEntireProf.Tag or 1;
+                    MenuSelectEntireProfile.Tag := MenuSelectEntireProfile.Tag or 1;
                 ShowHint(HintMain);
             end;
         ModeSelectIntervalBounds:
             begin
-                SelAreaLimits.Tag := SelAreaLimits.Tag or 2;
+                MenuSelectIntervalBounds.Tag := MenuSelectIntervalBounds.Tag or 2;
                 NS := FitClientApp_.FitClient.GetSelectedPoints;
                 Assert(Assigned(NS));
                 if NS.PointsCount = 2 then
-                    SelArea.Tag := SelArea.Tag or 1;
+                    MenuSelectDataInterval.Tag := MenuSelectDataInterval.Tag or 1;
             end;
         ModeSelectCharacteristicPoints:
-            SelCharacteristicPoints.Tag := SelCharacteristicPoints.Tag or 2;
-        ModeSelectCurveBounds: SelCurveBounds.Tag := SelCurveBounds.Tag or 2;
+            MenuSelectCharacteristicPoints.Tag := MenuSelectCharacteristicPoints.Tag or 2;
+        ModeSelectCurveBounds: MenuSelectCurveBounds.Tag := MenuSelectCurveBounds.Tag or 2;
         ModeSelectBackground:
             begin
-                RemoveBack.Tag := RemoveBack.Tag or 1;
-                Back.Tag := Back.Tag or 2;
+                MenuRemoveBackgroundPoints.Tag := MenuRemoveBackgroundPoints.Tag or 1;
+                MenuBackground.Tag := MenuBackground.Tag or 2;
                 NS := FitClientApp_.FitClient.GetBackgroundPoints;
                 Assert(Assigned(NS));
                 if NS.PointsCount > 0 then
@@ -2156,21 +2156,21 @@ begin
 
         ModeSelectCurvePositions:
             begin
-                RemoveSpecPos.Tag := RemoveSpecPos.Tag or 1;
-                PeakPos.Tag := PeakPos.Tag or 2;
+                MenuRemoveCurvePositions.Tag := MenuRemoveCurvePositions.Tag or 1;
+                MenuCurvePositions.Tag := MenuCurvePositions.Tag or 2;
                 SelSpecPosVisCaption := StopVisPosSel;
             end;
 
         ModeSelectRFactorBounds:
             begin
-                RemoveRFactorIntervals.Tag := RemoveRFactorIntervals.Tag or 1;
-                RFactorIntervals.Tag := RFactorIntervals.Tag or 2;
+                MenuRemoveRFactorBounds.Tag := MenuRemoveRFactorBounds.Tag or 1;
+                MenuRFactorIntervals.Tag := MenuRFactorIntervals.Tag or 2;
                 SelRFactorIntervalsVisCaption := StopVisualSel;
             end;
     end;
-    SelBackVis.Caption := SelBackVisCaption;
-    SelSpecPosVis.Caption := SelSpecPosVisCaption;
-    SelRFactorIntervalsVis.Caption := SelRFactorIntervalsVisCaption;
+    MenuSelectBackgroundManually.Caption := SelBackVisCaption;
+    MenuSelectCurvePositionsManually.Caption := SelSpecPosVisCaption;
+    MenuSelectRFactorBoundsManually.Caption := SelRFactorIntervalsVisCaption;
 end;
 
 procedure TFormMain.SetAsyncState(State: TAsyncState);
@@ -2180,19 +2180,19 @@ begin
         begin
             //  Operation
             ActionDoAllAutomatically.Tag := ActionDoAllAutomatically.Tag and $FFFFFFFE;
-            Smooth.Tag := Smooth.Tag and $FFFFFFFE;
-            RmBack.Tag := RmBack.Tag and $FFFFFFFE;
+            MenuSmoothProfile.Tag := MenuSmoothProfile.Tag and $FFFFFFFE;
+            MenuSubtractBackground.Tag := MenuSubtractBackground.Tag and $FFFFFFFE;
             ActionStopFit.Tag := ActionStopFit.Tag or 1;
 
             //  Dataset
-            SelAreaLimits.Tag := SelAreaLimits.Tag and $FFFFFFFE;
-            SelArea.Tag := SelArea.Tag and $FFFFFFFE;
-            SelEntireProf.Tag := SelEntireProf.Tag and $FFFFFFFE;
-            PeakPos.Tag := PeakPos.Tag and $FFFFFFFE;
-            Back.Tag := Back.Tag and $FFFFFFFE;
-            RFactorIntervals.Tag := RFactorIntervals.Tag and $FFFFFFFE;
-            SelCharacteristicPoints.Tag := SelCharacteristicPoints.Tag and $FFFFFFFE;
-            SelCurveBounds.Tag := SelCurveBounds.Tag and $FFFFFFFE;
+            MenuSelectIntervalBounds.Tag := MenuSelectIntervalBounds.Tag and $FFFFFFFE;
+            MenuSelectDataInterval.Tag := MenuSelectDataInterval.Tag and $FFFFFFFE;
+            MenuSelectEntireProfile.Tag := MenuSelectEntireProfile.Tag and $FFFFFFFE;
+            MenuCurvePositions.Tag := MenuCurvePositions.Tag and $FFFFFFFE;
+            MenuBackground.Tag := MenuBackground.Tag and $FFFFFFFE;
+            MenuRFactorIntervals.Tag := MenuRFactorIntervals.Tag and $FFFFFFFE;
+            MenuSelectCharacteristicPoints.Tag := MenuSelectCharacteristicPoints.Tag and $FFFFFFFE;
+            MenuSelectCurveBounds.Tag := MenuSelectCurveBounds.Tag and $FFFFFFFE;
         end;
 
         AsyncStart:
@@ -2257,7 +2257,7 @@ begin
     //  Operation
     ActionDoAllAutomatically.Tag := ActionDoAllAutomatically.Tag and $FFFFFFFE;
     ActionSmoothProfile.Tag := ActionSmoothProfile.Tag and $FFFFFFFE;
-    RmBack.Tag := RmBack.Tag and $FFFFFFFE;
+    MenuSubtractBackground.Tag := MenuSubtractBackground.Tag and $FFFFFFFE;
     ActionSubtractBackgroundBySelectedPoints.Tag := ActionSubtractBackgroundBySelectedPoints.Tag and $FFFFFFFE;
     ActionMinimizeNumberOfCurves.Tag := ActionMinimizeNumberOfCurves.Tag and $FFFFFFFE;
     ActionMinimizeDifference.Tag := ActionMinimizeDifference.Tag and $FFFFFFFE;
@@ -2267,8 +2267,8 @@ begin
     ActionSelectIntervalBounds.Tag := ActionSelectIntervalBounds.Tag and $FFFFFFFE;
     ActionSelectDataInterval.Tag := ActionSelectDataInterval.Tag and $FFFFFFFE;
     ActionSelectEntireProfile.Tag := ActionSelectEntireProfile.Tag and $FFFFFFFE;
-    Back.Tag := Back.Tag and $FFFFFFFE;
-    RFactorIntervals.Tag := RFactorIntervals.Tag and $FFFFFFFE;
+    MenuBackground.Tag := MenuBackground.Tag and $FFFFFFFE;
+    MenuRFactorIntervals.Tag := MenuRFactorIntervals.Tag and $FFFFFFFE;
     ActionSelectCharacteristicPoints.Tag :=
         ActionSelectCharacteristicPoints.Tag and $FFFFFFFE;
     ActionSelectCurveBounds.Tag := ActionSelectCurveBounds.Tag and $FFFFFFFE;
@@ -2281,7 +2281,7 @@ begin
 
             ActionDoAllAutomatically.Tag := ActionDoAllAutomatically.Tag or 1;
             ActionSmoothProfile.Tag := ActionSmoothProfile.Tag or 1;
-            RmBack.Tag := RmBack.Tag or 1;
+            MenuSubtractBackground.Tag := MenuSubtractBackground.Tag or 1;
 
             //  mozhno voobsche ubrat' proverku i deystvovat' kak pri
             //  polnost'yu avtomaticheskom raschete; eto pozvolit
@@ -2299,9 +2299,9 @@ begin
             end;
 
             ActionSelectIntervalBounds.Tag := ActionSelectIntervalBounds.Tag or 1;
-            PeakPos.Tag := PeakPos.Tag or 1;
-            Back.Tag := Back.Tag or 1;
-            RFactorIntervals.Tag := RFactorIntervals.Tag or 1;
+            MenuCurvePositions.Tag := MenuCurvePositions.Tag or 1;
+            MenuBackground.Tag := MenuBackground.Tag or 1;
+            MenuRFactorIntervals.Tag := MenuRFactorIntervals.Tag or 1;
             ActionSelectCharacteristicPoints.Tag :=
                 ActionSelectCharacteristicPoints.Tag or 1;
             ActionSelectCurveBounds.Tag := ActionSelectCurveBounds.Tag or 1;
@@ -2311,7 +2311,7 @@ begin
 
         OpenFailure:
         begin
-            Caption := ApplicationProperties1.Title;
+            Caption := ApplicationProperties.Title;
         end;
     end;
 
@@ -2324,9 +2324,9 @@ begin
     if (ActionDoAllAutomatically.Tag and 1) = 1 then ActionDoAllAutomatically.Enabled := True;
     if (ActionSmoothProfile.Tag and 1) = 0 then ActionSmoothProfile.Enabled := False;
     if (ActionSmoothProfile.Tag and 1) = 1 then ActionSmoothProfile.Enabled := True;
-    if (RmBack.Tag and 1) = 0 then
+    if (MenuSubtractBackground.Tag and 1) = 0 then
     begin
-        RmBack.Enabled := False;
+        MenuSubtractBackground.Enabled := False;
         //  управление действиями подменю
         ActionComputeBackgroundPoints.Enabled := False;
         ActionSelectBackgroundManually.Enabled := False;
@@ -2334,9 +2334,9 @@ begin
         ActionSubtractBackgroundAutomatically.Enabled := False;
         ActionSubtractBackgroundBySelectedPoints.Enabled := False;
     end;
-    if (RmBack.Tag and 1) = 1 then
+    if (MenuSubtractBackground.Tag and 1) = 1 then
     begin
-        RmBack.Enabled := True;
+        MenuSubtractBackground.Enabled := True;
         ActionComputeBackgroundPoints.Enabled := True;
         ActionSelectBackgroundManually.Enabled := True;
         ActionRemoveBackgroundPoints.Enabled := True;
@@ -2379,20 +2379,20 @@ begin
     if (ActionSelectEntireProfile.Tag and 1) = 1 then
         ActionSelectEntireProfile.Enabled := True;
 
-    if (PeakPos.Tag and 1) = 0 then PeakPos.Enabled := False;
-    if (PeakPos.Tag and 1) = 1 then PeakPos.Enabled := True;
-    if (PeakPos.Tag and 2) = 0 then PeakPos.Checked := False;
-    if (PeakPos.Tag and 2) = 2 then PeakPos.Checked := True;
+    if (MenuCurvePositions.Tag and 1) = 0 then MenuCurvePositions.Enabled := False;
+    if (MenuCurvePositions.Tag and 1) = 1 then MenuCurvePositions.Enabled := True;
+    if (MenuCurvePositions.Tag and 2) = 0 then MenuCurvePositions.Checked := False;
+    if (MenuCurvePositions.Tag and 2) = 2 then MenuCurvePositions.Checked := True;
 
-    if (Back.Tag and 1) = 0 then Back.Enabled := False;
-    if (Back.Tag and 1) = 1 then Back.Enabled := True;
-    if (Back.Tag and 2) = 0 then Back.Checked := False;
-    if (Back.Tag and 2) = 2 then Back.Checked := True;
+    if (MenuBackground.Tag and 1) = 0 then MenuBackground.Enabled := False;
+    if (MenuBackground.Tag and 1) = 1 then MenuBackground.Enabled := True;
+    if (MenuBackground.Tag and 2) = 0 then MenuBackground.Checked := False;
+    if (MenuBackground.Tag and 2) = 2 then MenuBackground.Checked := True;
 
-    if (RFactorIntervals.Tag and 1) = 0 then RFactorIntervals.Enabled := False;
-    if (RFactorIntervals.Tag and 1) = 1 then RFactorIntervals.Enabled := True;
-    if (RFactorIntervals.Tag and 2) = 0 then RFactorIntervals.Checked := False;
-    if (RFactorIntervals.Tag and 2) = 2 then RFactorIntervals.Checked := True;
+    if (MenuRFactorIntervals.Tag and 1) = 0 then MenuRFactorIntervals.Enabled := False;
+    if (MenuRFactorIntervals.Tag and 1) = 1 then MenuRFactorIntervals.Enabled := True;
+    if (MenuRFactorIntervals.Tag and 2) = 0 then MenuRFactorIntervals.Checked := False;
+    if (MenuRFactorIntervals.Tag and 2) = 2 then MenuRFactorIntervals.Checked := True;
 
     if (ActionSelectCharacteristicPoints.Tag and 1) = 0 then
         ActionSelectCharacteristicPoints.Enabled := False;
@@ -2418,7 +2418,7 @@ begin
             ActionZoomIn.Enabled := False;
             ActionZoomOut.Enabled := False;
             ActionViewMarkers.Enabled := False;
-            UseRule.Enabled := False;
+            MenuUseRule.Enabled := False;
         end;
 
         GraphNotEmpty:
@@ -2426,7 +2426,7 @@ begin
             ActionZoomIn.Enabled := True;
             ActionZoomOut.Enabled := True;
             ActionViewMarkers.Enabled := True;
-            UseRule.Enabled := True;
+            MenuUseRule.Enabled := True;
         end;
     end;
 end;
@@ -2546,9 +2546,9 @@ begin
     FSettings.Curve_types.Delete(FSettings.Curve_types.IndexOf(ct));
     //AddDummyCurve;
     //  udalenie menyu
-    DeleteItem(SelCurveType, LongInt(ct));
+    DeleteItem(MenuSelectCurveType, LongInt(ct));
     //  poisk menyu MenuDelUserCapt
-    mi := SelCurveType.Find(MenuDelUserCapt);
+    mi := MenuSelectCurveType.Find(MenuDelUserCapt);
     DeleteItem(mi, LongInt(ct));
     //  udalenie menyu MenuDelUserCapt
     if mi.Count = 0 then mi.Free;
@@ -2634,17 +2634,17 @@ var ItemCount: LongInt;
     mi: TMenuItem;
 begin
     ItemCount := 0;
-    if AddItem(SelCurveType, ItemCount, OnUserCurveClick) then
+    if AddItem(MenuSelectCurveType, ItemCount, OnUserCurveClick) then
     begin
         { Separator is created. }
-        mi := TMenuItem.Create(SelCurveType);
+        mi := TMenuItem.Create(MenuSelectCurveType);
         mi.Caption := ' ';
         mi.Enabled := False;
-        SelCurveType.Insert(ItemCount + 1, mi);
+        MenuSelectCurveType.Insert(ItemCount + 1, mi);
         { Menu is created for deleting user curve types. }
-        mi := TMenuItem.Create(SelCurveType);
+        mi := TMenuItem.Create(MenuSelectCurveType);
         mi.Caption := MenuDelUserCapt;
-        SelCurveType.Add(mi);
+        MenuSelectCurveType.Add(mi);
         { Submenu for deleting item is created. }
         AddItem(mi, ItemCount, OnDeleteUserCurveClick);
     end;
@@ -2659,32 +2659,32 @@ begin
     //  odnoznachno otdelit' takie elementy mozhno
     //  po ukazatelyu na obrabotchik sobytiy OnClick
     LastIndex := -1;
-    for i := 0 to SelCurveType.Count - 1 do
+    for i := 0 to MenuSelectCurveType.Count - 1 do
     begin
-        mi := SelCurveType.Items[i];
+        mi := MenuSelectCurveType.Items[i];
         if PtrUInt(@mi.OnClick) = PtrUInt(OnUserCurveClick) then
             LastIndex := i;
     end;
 
     Inc(LastIndex);     //  indeks sleduyuschego elementa
-    CreateMenuItem(LastIndex, ct, SelCurveType, OnUserCurveClick);
+    CreateMenuItem(LastIndex, ct, MenuSelectCurveType, OnUserCurveClick);
 
-    DelMenu := SelCurveType.Find(MenuDelUserCapt);
+    DelMenu := MenuSelectCurveType.Find(MenuDelUserCapt);
     //  sozdaetsya menyu dlya udaleniya pol'zovatel'skih
     //  krivyh, esli ono ne bylo sozdano ranee
     if DelMenu = nil then
     begin
-        DelMenu := TMenuItem.Create(SelCurveType);
+        DelMenu := TMenuItem.Create(MenuSelectCurveType);
         DelMenu.Caption := MenuDelUserCapt;
-        SelCurveType.Add(DelMenu);
+        MenuSelectCurveType.Add(DelMenu);
     end;
 
-    if SelCurveType.Find('-') = nil then
+    if MenuSelectCurveType.Find('-') = nil then
     begin
         //  vstavlyaetsya razdelitel'
-        mi := TMenuItem.Create(SelCurveType);
+        mi := TMenuItem.Create(MenuSelectCurveType);
         mi.Caption := '-';
-        SelCurveType.Insert(LastIndex + 1, mi);
+        MenuSelectCurveType.Insert(LastIndex + 1, mi);
     end;
     //  sozdaetsya element podmenyu udaleniya
     CreateMenuItem(

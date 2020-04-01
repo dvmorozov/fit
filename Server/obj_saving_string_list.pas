@@ -22,14 +22,14 @@ type
     { List of components which for each object relates string identifier. }
     TObjSavingStringList = class(TSelfCopiedCompList)
     protected
-            
+
     public
-        function GetObjectIdentifier(const ObjNum: LongInt): string; virtual;
+        function GetObjectIdentifier(const ObjNum: longint): string; virtual;
     end;
 
 implementation
 
-function TObjSavingStringList.GetObjectIdentifier(const ObjNum: LongInt): string;
+function TObjSavingStringList.GetObjectIdentifier(const ObjNum: longint): string;
 begin
     Result := 'Object ' + IntToStr(ObjNum);
 end;
@@ -37,5 +37,3 @@ end;
 initialization
     RegisterClass(TObjSavingStringList);
 end.
-
-

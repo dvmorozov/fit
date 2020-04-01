@@ -19,7 +19,8 @@ unit int_curve_type_selector;
 
 interface
 
-uses named_points_set;
+uses
+    named_points_set;
 
 type
     { Interface defining basic operation for selecting curve type. }
@@ -33,5 +34,3 @@ type
 implementation
 
 end.
-
-

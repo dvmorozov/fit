@@ -20,10 +20,9 @@ unit fit_client;
 interface
 
 uses
-    Classes, SysUtils, title_points_set, self_copied_component,
-    mscr_specimen_list, neutron_points_set, int_client_callback,
-    int_fit_viewer, int_data_loader, int_data_loader_injector,
-    int_fit_service, named_points_set
+    Classes, int_client_callback, int_data_loader, int_data_loader_injector,
+    int_fit_service, int_fit_viewer, mscr_specimen_list, named_points_set,
+    neutron_points_set, self_copied_component, SysUtils, title_points_set
 {$IFDEF FIT}
     , fit_server
 {$ENDIF}
@@ -31,14 +30,15 @@ uses
     , persistent_curve_parameters
 {$ENDIF}
     ;
-    
+
 type
     { Modes of selectiion of active point set. }
-    TSelMode = (ModeSelNone, ModeSelAreaLimits, ModeSelCharacteristicPoints,
-                ModeSelGaussianBounds, ModeSelBackground, ModeSelPeakPos,
-                ModeSelPeakBounds);
+    TSelMode    =
+        (ModeSelectNothing, ModeSelectIntervalBounds, ModeSelectCharacteristicPoints,
+        ModeSelectCurveBounds, ModeSelectBackground, ModeSelectCurvePositions,
+        ModeSelectRFactorBounds);
     { Results of data file opening. }
-    TOpenState = (OpenSuccess, OpenFailure);
+    TOpenState  = (OpenSuccess, OpenFailure);
     { States of processing long operations. }
     TAsyncState = (
         { Before start. }
@@ -50,52 +50,48 @@ type
         );
 
     { Handler to fill data table. }
-    TFillDatasheetTable = procedure(
-            Profile: TTitlePointsSet;
-            CurvesList: TSelfCopiedCompList;
-            GaussProfile: TTitlePointsSet;
-            DeltaProfile: TTitlePointsSet;
-            RFactorIntervals: TTitlePointsSet
-            ) of object;
+    TFillDatasheetTable = procedure(Profile: TTitlePointsSet;
+        CurvesList: TSelfCopiedCompList; GaussProfile: TTitlePointsSet;
+        DeltaProfile: TTitlePointsSet; RFactorBounds: TTitlePointsSet) of object;
     { Handler drawing points selected by user. }
-    TPlotSelectedPoints = procedure(
-        Sender: TObject; SelectedPoints: TTitlePointsSet) of object;
+    TPlotSelectedPoints = procedure(Sender: TObject;
+        SelectedPoints: TTitlePointsSet) of object;
     { Handler displaying data intervals. }
-    TPlotRFactorIntervals = procedure(
-        Sender: TObject; RFactorIntervals: TTitlePointsSet) of object;
+    TPlotRFactorBounds = procedure(Sender: TObject;
+        RFactorBounds: TTitlePointsSet) of object;
     { Handler hiding data intervals. }
-    THideRFactorIntervals = procedure(
-        Sender: TObject; RFactorIntervals: TTitlePointsSet) of object;
+    THideRFactorBounds = procedure(Sender: TObject;
+        RFactorBounds: TTitlePointsSet) of object;
     { Handler displaying curve positions. }
-    TPlotCurvePositions = procedure(
-        Sender: TObject; CurvePositions: TTitlePointsSet) of object;
+    TPlotCurvePositions = procedure(Sender: TObject;
+        CurvePositions: TTitlePointsSet) of object;
     { Handler hiding curve positions. }
-    THideCurvePositions = procedure(
-        Sender: TObject; CurvePositions: TTitlePointsSet) of object;
+    THideCurvePositions = procedure(Sender: TObject;
+        CurvePositions: TTitlePointsSet) of object;
     { Handler displaying background curve. }
-    TPlotBackground = procedure(
-        Sender: TObject; BackgroundPoints: TTitlePointsSet) of object;
+    TPlotBackground = procedure(Sender: TObject;
+        BackgroundPoints: TTitlePointsSet) of object;
     { Handler hiding background curve. }
-    THideBackground = procedure(
-        Sender: TObject; BackgroundPoints: TTitlePointsSet) of object;
+    THideBackground = procedure(Sender: TObject;
+        BackgroundPoints: TTitlePointsSet) of object;
     { Handler displaying data curve. }
-    TPlotDataPoints = procedure(
-        Sender: TObject; DataPoints: TTitlePointsSet) of object;
+    TPlotDataPoints = procedure(Sender: TObject;
+        DataPoints: TTitlePointsSet) of object;
     { Handler hiding data curve. }
-    THideDataPoints = procedure(
-        Sender: TObject; DataPoints: TTitlePointsSet) of object;
-    
-    TPlotSelectedArea = procedure(
-        Sender: TObject; SelectedArea: TTitlePointsSet) of object;
-    TPlotGaussProfile = procedure(
-        Sender: TObject; GaussProfile: TTitlePointsSet) of object;
-    TPlotDeltaProfile = procedure(
-        Sender: TObject; DeltaProfile: TTitlePointsSet) of object;
+    THideDataPoints = procedure(Sender: TObject;
+        DataPoints: TTitlePointsSet) of object;
+
+    TPlotSelectedArea = procedure(Sender: TObject;
+        SelectedArea: TTitlePointsSet) of object;
+    TPlotGaussProfile = procedure(Sender: TObject;
+        GaussProfile: TTitlePointsSet) of object;
+    TPlotDeltaProfile = procedure(Sender: TObject;
+        DeltaProfile: TTitlePointsSet) of object;
     TRefresh = procedure(Sender: TObject) of object;
-    TRefreshPointsSet = procedure(
-        Sender: TObject; points_set: TNeutronPointsSet) of object;
+    TRefreshPointsSet = procedure(Sender: TObject;
+        points_set: TNeutronPointsSet) of object;
     TClear = procedure(Sender: TObject) of object;
-    THide = procedure(Sender: TObject; points_set: TNeutronPointsSet) of object;
+    THide  = procedure(Sender: TObject; points_set: TNeutronPointsSet) of object;
     TAsyncOperationFinished = procedure(Sender: TObject) of object;
     TPlotProc = procedure of object;
 
@@ -105,49 +101,48 @@ type
         FFitProxy: IFitService;
 
     protected
-        FDataLoader: IDataLoader;
+        FDataLoader:     IDataLoader;
         FDataLoaderInjector: IDataLoaderInjector;
         { All the data displayed on the chart. They are required to be able control of X-coordinate. }
         FNeutronPointsSet: TTitlePointsSet;
         { Region of given profile data with which user is working at the given moment. }
-        SelectedArea: TTitlePointsSet;
-        { Sum of all model specimens which is compared with experimental data. }
-        GaussProfile: TTitlePointsSet;
-        DeltaProfile: TTitlePointsSet;
+        FSelectedArea:   TTitlePointsSet;
+        { Sum of all model curces which is compared with experimental data. }
+        FCurveProfile:   TTitlePointsSet;
+        FDeltaProfile:   TTitlePointsSet;
         { Set of points selected by user. }
-        SelectedPoints: TTitlePointsSet;
+        FSelectedPoints: TTitlePointsSet;
         { List of background points which is used for transmission between manual and automatic selection modes. }
-        BackgroundPoints: TTitlePointsSet;
+        FBackgroundPoints: TTitlePointsSet;
         { List of point pairs which limit interval of R-factor calculation. 
           Always must be displayed in order to show user in which mode R-factor is calculated. }
-        RFactorIntervals: TTitlePointsSet;
-        { Positions of pattern specimens. Only X-coordinates are used. }
-        CurvePositions: TTitlePointsSet;
-        { Containers of calculated pattern specimens. Each object contains data of specimen curve. }
-        CurvesList: TSelfCopiedCompList;
-        { Containers of parameters of pattern specimens. }
-        SpecimenList: TMSCRSpecimenList;
-
-        WaveLength: Double;
+        FRFactorBounds:  TTitlePointsSet;
+        { Positions of curves. Only X-coordinates are used. }
+        FCurvePositions: TTitlePointsSet;
+        { Containers of calculated curves. Each object contains data of specimen curve. }
+        FCurvesList:     TSelfCopiedCompList;
+        { Containers of parameters of curves. }
+        FCurveList:      TMSCRCurveList;
+        { TODO: remove this attribute. }
+        FWaveLength:     double;
         procedure SetCurvesListLambda;
 
     protected
-        CurMin: Double;
+        FCurMin:     double;
         { If True then in all operations only data belonging to selected ared are used
           otherwise all profile data are used. }
-        FSelectedAreaMode: Boolean;
+        FSelectedAreaMode: boolean;
         FSelectionMode: TSelMode;
-        FOpenState: TOpenState;
+        FOpenState:  TOpenState;
         FAsyncState: TAsyncState;
         { Adds new point to the given set. Second call removes point from the set. 
           In last case the set is recreated. }
         procedure AddPoint(var Points: TTitlePointsSet;
-            XValue, YValue: Double; Plot: TPlotProc);
+            XValue, YValue: double; Plot: TPlotProc);
         { Replaces point and updates chart. }
         procedure ReplacePoint(Points: TTitlePointsSet;
-            PrevXValue, PrevYValue, NewXValue, NewYValue: Double;
-            Plot: TPlotProc
-            );
+            PrevXValue, PrevYValue, NewXValue, NewYValue: double;
+            Plot: TPlotProc);
 
     protected
         { Pointers to methods for curve displaying. }
@@ -156,21 +151,21 @@ type
         FAsyncOperationFinished: TAsyncOperationFinished;
 
         { Is used in RefreshPointsSet, Hide. }
-        ToRefresh: TNeutronPointsSet;
+        FToRefresh: TNeutronPointsSet;
 
         { Updates all the data and refreshes chart. }
         procedure UpdateAll;
-        procedure HideSpecimens;
+        procedure HideCurves;
 
         { Wrappers for calls to external displaying methods. 
           They are necessary to check that external interface methods are connected.
           Opposite means that there aren't corresponding GUI elements. }
-        procedure PlotSpecimens;
+        procedure PlotCurves;
         procedure PlotSelectedPoints;
 
-        procedure PlotRFactorIntervals;
-        procedure HideRFactorIntervals;
-        
+        procedure PlotRFactorBounds;
+        procedure HideRFactorBounds;
+
         procedure PlotCurvePositions;
         procedure HideCurvePositions;
 
@@ -198,22 +193,22 @@ type
         procedure SetSelectionMode(ASelectionMode: TSelMode);
         function GetSelectionMode: TSelMode;
 
-        function GetMaxRFactor: Double;
-        procedure SetMaxRFactor(AMaxRFactor: Double);
-        function GetBackFactor: Double;
-        procedure SetBackFactor(ABackFactor: Double);
-        function GetCurveThresh: Double;
-        procedure SetCurveThresh(ACurveThresh: Double);
+        function GetMaxRFactor: double;
+        procedure SetMaxRFactor(AMaxRFactor: double);
+        function GetBackFactor: double;
+        procedure SetBackFactor(ABackFactor: double);
+        function GetCurveThresh: double;
+        procedure SetCurveThresh(ACurveThresh: double);
         function GetCurveType: TCurveTypeId;
 {$IFNDEF FIT}
         procedure SetCurveType(ACurveType: TCurveTypeId);
 {$ENDIF}
 
-        function GetBackgroundVariationEnabled: Boolean;
-        procedure SetBackgroundVariationEnabled(AEnable: Boolean);
+        function GetBackgroundVariationEnabled: boolean;
+        procedure SetBackgroundVariationEnabled(AEnable: boolean);
 
-        function GetCurveScalingEnabled: Boolean;
-        procedure SetCurveScalingEnabled(AEnabled: Boolean);
+        function GetCurveScalingEnabled: boolean;
+        procedure SetCurveScalingEnabled(AEnabled: boolean);
 
         { Creates list of selected points and inserts new item into chart legend (CheckListBox). }
         procedure RecreateAndShowSelectedPoints(Title: string);
@@ -227,61 +222,59 @@ type
 
         { Copies data from the given point set to the set of selected interval. }
         procedure SelectAreaActual(ANeutronPoints: TNeutronPointsSet;
-            StartPointIndex, StopPointIndex: LongInt);
+            StartPointIndex, StopPointIndex: longint);
         procedure CopyProfileDataFromLoader;
 
     public
-        FitViewer: IFitViewer;
+        FFitViewer: IFitViewer;
 
-        function GetSpecimenList: TMSCRSpecimenList;
+        function GetCurveList: TMSCRCurveList;
 
         function GetBackgroundPoints: TNeutronPointsSet;
         function GetSelectedPoints: TNeutronPointsSet;
-        function GetRFactorIntervals: TNeutronPointsSet;
+        function GetRFactorBounds: TNeutronPointsSet;
         function GetCurvePositions: TNeutronPointsSet;
 {$IFDEF _WINDOWS}
         function GetSpecialCurveParameters: Curve_parameters;
-        procedure SetSpecialCurveParameters(
-            ACurveExpr: string;
-            { Nil means first initialization. }
-            CP: Curve_parameters
-            );
+        procedure SetSpecialCurveParameters(ACurveExpr: string;
+        { Nil means first initialization. }
+            CP: Curve_parameters);
 {$ENDIF}
         { Do only cleaning of sets. }
-        
-        procedure RemoveRFactorIntervals;
+
+        procedure RemoveRFactorBounds;
         procedure RemoveCurvePositions;
         procedure RemoveBackgroundPoints;
 
         { All call AddPoint method. }
-        
-        procedure AddPointToSelected(XValue, YValue: Double);
-        procedure AddPointToBackground(XValue, YValue: Double);
-        procedure AddPointToRFactorIntervals(XValue, YValue: Double);
-        procedure AddPointToCurvePositions(XValue, YValue: Double);
-        
+
+        procedure AddPointToSelected(XValue, YValue: double);
+        procedure AddPointToBackground(XValue, YValue: double);
+        procedure AddPointToRFactorBounds(XValue, YValue: double);
+        procedure AddPointToCurvePositions(XValue, YValue: double);
+
         { All call ReplacePoint method. }
-        
+
         procedure ReplacePointInData(
-            PrevXValue, PrevYValue, NewXValue, NewYValue: Double);
+            PrevXValue, PrevYValue, NewXValue, NewYValue: double);
         procedure ReplacePointInSelected(
-            PrevXValue, PrevYValue, NewXValue, NewYValue: Double);
+            PrevXValue, PrevYValue, NewXValue, NewYValue: double);
         procedure ReplacePointInBackground(
-            PrevXValue, PrevYValue, NewXValue, NewYValue: Double);
-        procedure ReplacePointInRFactorIntervals(
-            PrevXValue, PrevYValue, NewXValue, NewYValue: Double);
+            PrevXValue, PrevYValue, NewXValue, NewYValue: double);
+        procedure ReplacePointInRFactorBounds(
+            PrevXValue, PrevYValue, NewXValue, NewYValue: double);
         procedure ReplacePointInCurvePositions(
-            PrevXValue, PrevYValue, NewXValue, NewYValue: Double);
-        procedure AddPointToActive(XValue, YValue: Double);
+            PrevXValue, PrevYValue, NewXValue, NewYValue: double);
+        procedure AddPointToActive(XValue, YValue: double);
         { Returns a set with which user works at the moment. }
         function GetCurrentPointsSet: TTitlePointsSet;
 
         { Cleans chart and moves data from full profile to data of selected iterval. }
-        procedure SelectArea(StartPointIndex, StopPointIndex: LongInt);
+        procedure SelectArea(StartPointIndex, StopPointIndex: longint);
         procedure ReturnToTotalProfile;
 
-        procedure SetWaveLength(AWaveLength: Double);
-        function GetWaveLength: Double;
+        procedure SetWaveLength(AWaveLength: double);
+        function GetWaveLength: double;
 
         constructor CreateWithInjector(
             ADataLoaderInjector: IDataLoaderInjector);
@@ -289,54 +282,52 @@ type
 
         procedure LoadDataSet(FileName: string);
         procedure Reload;
-        
+
         { Callbacks from the server. }
-        
-        procedure ShowCurMin(Min: Double);
+
+        procedure ShowCurMin(Min: double);
         procedure ShowProfile;
         procedure Done;
-        procedure FindPeakBoundsDone;
-        procedure FindBackPointsDone;
-        procedure FindPeakPositionsDone;
+        procedure ComputeCurveBoundsDone;
+        procedure ComputeBackgroundPointsDone;
+        procedure ComputeCurvePositionsDone;
 
         { Wrappers for server methods. Mustn't create messages because this
           is responsibility of GUI. Instead of this must throw exceptions. }
-        
+
         procedure SmoothProfile;
-        procedure SubtractAllBackground(Auto: Boolean);
+        procedure SubtractBackground(Auto: boolean);
         procedure DoAllAutomatically;
-        procedure FindGausses;
-        procedure FindGaussesSequentially;
-        procedure FindPeakBounds;
-        procedure FindBackPoints;
-        procedure FindPeakPositions;
-        procedure AllPointsAsPeakPositions;
+        procedure MinimizeDifference;
+        procedure MinimizeNumberOfCurves;
+        procedure ComputeCurveBounds;
+        procedure ComputeBackgroundPoints;
+        procedure ComputeCurvePositions;
+        procedure SelectAllPointsAsCurvePositions;
         procedure StopAsyncOper;
         { Gets state of asynchronous operation from the server. }
-        function AsyncOper: Boolean;
+        function AsyncOper: boolean;
         function GetCalcTimeStr: string;
         function GetRFactorStr: string;
-        procedure CreateSpecimenList;
+        procedure CreateCurveList;
 {$IFDEF FIT}
         function GetFitProxy: TFitServer;
 {$ENDIF}
 
         { Server attributes. }
 
-        property BackgroundVariationEnabled: Boolean
+        property BackgroundVariationEnabled: boolean
             read GetBackgroundVariationEnabled write SetBackgroundVariationEnabled;
 
-        property CurveScalingEnabled: Boolean
+        property CurveScalingEnabled: boolean
             read GetCurveScalingEnabled write SetCurveScalingEnabled;
 
-        property MaxRFactor: Double read GetMaxRFactor write SetMaxRFactor;
-        property BackFactor: Double read GetBackFactor write SetBackFactor;
-        property CurveThresh: Double read GetCurveThresh write SetCurveThresh;
+        property MaxRFactor: double read GetMaxRFactor write SetMaxRFactor;
+        property BackFactor: double read GetBackFactor write SetBackFactor;
+        property CurveThresh: double read GetCurveThresh write SetCurveThresh;
         property CurveTypeId: TCurveTypeId read GetCurveType
-{$IFNDEF FIT}
-            write SetCurveType
-{$ENDIF}
-            ;
+{$IFNDEF FIT} write SetCurveType
+{$ENDIF}            ;
 
         { Plotting events are called from methods of the same name for providing
           synchronization with main application thread.
@@ -348,37 +339,38 @@ type
         property OnAsyncOperationFinished: TAsyncOperationFinished
             read FAsyncOperationFinished write FAsyncOperationFinished;
 
-        property SelectionMode: TSelMode
-            read FSelectionMode write SetSelectionMode;
+        property SelectionMode: TSelMode read FSelectionMode write SetSelectionMode;
         property OpenState: TOpenState read FOpenState;
         property AsyncState: TAsyncState read FAsyncState;
-        property SelectedAreaMode: Boolean read FSelectedAreaMode;
+        property SelectedAreaMode: boolean read FSelectedAreaMode;
 
         property FitProxy: IFitService read FFitProxy write FFitProxy;
 
         property NeutronPointsSet: TTitlePointsSet
             read FNeutronPointsSet write FNeutronPointsSet;
     end;
-    
+
 const
-    RFactorIntervalsName:       string = 'Spec.app.intervals';
-    BackgroundPointsName:       string = 'Background points';
-    CurvePositionsName:         string = 'Spec.positions';
-    SelectedAreaName:           string = 'Selected interval';
-    SummarizedName:             string = 'Summarized';
-    ArgumentName:               string = 'Position';
-    ProfileName:                string = 'Data';
-    NumberName:                 string = 'Number';
-    ValueName:                  string = 'Amplitude';
-    DeltaName:                  string = 'Difference';
-    StartName:                  string = 'Starting Position';
-    StopName:                   string = 'Final Position';
-    HintDone:                   string = 'Calculation done';
+    RFactorBoundsName: string = 'Spec.app.intervals';
+    BackgroundPointsName: string = 'Background points';
+    CurvePositionsName: string = 'Spec.positions';
+    SelectedAreaName: string = 'Selected interval';
+    SummarizedName: string = 'Summarized';
+    ArgumentName: string = 'Position';
+    ProfileName: string = 'Data';
+    NumberName: string = 'Number';
+    ValueName: string = 'Amplitude';
+    DeltaName: string = 'Difference';
+    StartName: string = 'Starting Position';
+    StopName: string = 'Final Position';
+    HintDone: string = 'Calculation done';
 
 implementation
 
 {$IFDEF FIT}
-uses app;
+uses
+    app;
+
 {$ENDIF}
 
 {================================ TFitClient ==================================}
@@ -388,71 +380,71 @@ function TFitClient.GetFitProxy: TFitServer;
 begin
     Result := FitServerApp_.FitStub;
 end;
+
 {$ENDIF}
 
 destructor TFitClient.Destroy;
 begin
-    SpecimenList.Free;
-    BackgroundPoints.Free;
-    SelectedArea.Free;
-    CurvesList.Free;
-    DeltaProfile.Free;
-    GaussProfile.Free;
-    SelectedPoints.Free;
+    FCurveList.Free;
+    FBackgroundPoints.Free;
+    FSelectedArea.Free;
+    FCurvesList.Free;
+    FDeltaProfile.Free;
+    FCurveProfile.Free;
+    FSelectedPoints.Free;
     NeutronPointsSet.Free;
-    RFactorIntervals.Free;
-    inherited Destroy;
+    FRFactorBounds.Free;
+    inherited;
 end;
 
-constructor TFitClient.CreateWithInjector(
-    ADataLoaderInjector: IDataLoaderInjector);
+constructor TFitClient.CreateWithInjector(ADataLoaderInjector: IDataLoaderInjector);
 begin
     inherited;
     FDataLoaderInjector := ADataLoaderInjector;
-    FSelectionMode := ModeSelNone;
-    FOpenState := OpenFailure;
+    FSelectionMode := ModeSelectNothing;
+    FOpenState  := OpenFailure;
     FAsyncState := AsyncStart;
-    
+
     //  sozdayutsya pustye spiski, chtoby mozhno bylo
     //  vvodit' dannye vruchnuyu
     NeutronPointsSet := TTitlePointsSet.Create(nil);
     InitDataPoints;
-    
-    CurvePositions := TTitlePointsSet.Create(nil);
-    CurvePositions.Title := CurvePositionsName;
-    CurvePositions.Lambda := WaveLength;
 
-    BackgroundPoints := TTitlePointsSet.Create(nil);
-    BackgroundPoints.Title := BackgroundPointsName;
-    BackgroundPoints.Lambda := WaveLength;
-    
-    RFactorIntervals := TTitlePointsSet.Create(nil);
-    RFactorIntervals.Title := RFactorIntervalsName;
-    RFactorIntervals.Lambda := WaveLength;
+    FCurvePositions := TTitlePointsSet.Create(nil);
+    FCurvePositions.FTitle := CurvePositionsName;
+    FCurvePositions.Lambda := FWaveLength;
+
+    FBackgroundPoints := TTitlePointsSet.Create(nil);
+    FBackgroundPoints.FTitle := BackgroundPointsName;
+    FBackgroundPoints.Lambda := FWaveLength;
+
+    FRFactorBounds := TTitlePointsSet.Create(nil);
+    FRFactorBounds.FTitle := RFactorBoundsName;
+    FRFactorBounds.Lambda := FWaveLength;
 end;
 
 function TFitClient.GetBackgroundPoints: TNeutronPointsSet;
 begin
     //  dopuskaetsya vydavat' nil
-    Result := BackgroundPoints;
+    Result := FBackgroundPoints;
 end;
 
 function TFitClient.GetSelectedPoints: TNeutronPointsSet;
 begin
     //  dopuskaetsya vydavat' nil
-    Result := SelectedPoints;
+    Result := FSelectedPoints;
 end;
 
-function TFitClient.GetRFactorIntervals: TNeutronPointsSet;
+function TFitClient.GetRFactorBounds: TNeutronPointsSet;
 begin
     //  dopuskaetsya vydavat' nil
-    Result := RFactorIntervals;
+    Result := FRFactorBounds;
 end;
 
 function TFitClient.GetCurvePositions: TNeutronPointsSet;
 begin
     //  dopuskaetsya vydavat' nil
-    Result := CurvePositions;
+    Result := FCurvePositions;
 end;
 
 {$IFDEF _WINDOWS}
@@ -460,34 +452,37 @@ function TFitClient.GetSpecialCurveParameters: Curve_parameters;
 begin
     Result := FitProxy.GetSpecialCurveParameters;
 end;
+
 {$ENDIF}
 
-procedure TFitClient.SelectAreaActual(
-    ANeutronPoints: TNeutronPointsSet; StartPointIndex, StopPointIndex: LongInt
-    );
-var i: LongInt;
+procedure TFitClient.SelectAreaActual(ANeutronPoints: TNeutronPointsSet;
+    StartPointIndex, StopPointIndex: longint);
+var
+    i: longint;
 begin
     Assert(Assigned(ANeutronPoints));
     Assert(ANeutronPoints.PointsCount <> 0);
-    if (StartPointIndex < 0) or
-       (StopPointIndex > ANeutronPoints.PointsCount - 1) then Assert(False);
-    Assert(ANeutronPoints <> SelectedArea);
+    if (StartPointIndex < 0) or (StopPointIndex >
+        ANeutronPoints.PointsCount - 1) then
+        Assert(False);
+    Assert(ANeutronPoints <> FSelectedArea);
 
     RemoveSelectedArea;
-    SelectedArea := TTitlePointsSet.Create(nil);
+    FSelectedArea := TTitlePointsSet.Create(nil);
     try
-        SelectedArea.Lambda := WaveLength;
-        SelectedArea.Title := SelectedAreaName;
+        FSelectedArea.Lambda := FWaveLength;
+        FSelectedArea.FTitle := SelectedAreaName;
         for i := StartPointIndex to StopPointIndex do
-            SelectedArea.AddNewPoint(
+            FSelectedArea.AddNewPoint(
                 ANeutronPoints.PointXCoord[i], ANeutronPoints.PointYCoord[i]);
     except
-        SelectedArea.Free; SelectedArea := nil;
+        FSelectedArea.Free;
+        FSelectedArea := nil;
         raise;
     end;
 end;
 
-procedure TFitClient.SelectArea(StartPointIndex, StopPointIndex: LongInt);
+procedure TFitClient.SelectArea(StartPointIndex, StopPointIndex: longint);
 begin
     Assert(Assigned(NeutronPointsSet));
     Assert(Assigned(FitProxy));
@@ -510,31 +505,33 @@ begin
     PlotDataPoints;
 
     FSelectedAreaMode := False;
-    SelectedArea.Free; SelectedArea := nil;
+    FSelectedArea.Free;
+    FSelectedArea := nil;
 end;
 
 procedure TFitClient.RecreateAndShowSelectedPoints(Title: string);
 begin
     RemoveSelectedPoints;
-    SelectedPoints := TTitlePointsSet.Create(nil);
-    SelectedPoints.Title := Title;
-    SelectedPoints.Lambda := WaveLength;
+    FSelectedPoints := TTitlePointsSet.Create(nil);
+    FSelectedPoints.FTitle := Title;
+    FSelectedPoints.Lambda := FWaveLength;
     PlotSelectedPoints;
 end;
 
 procedure TFitClient.InitDataPoints;
 begin
     Assert(Assigned(NeutronPointsSet));
-    NeutronPointsSet.Title := ProfileName;
-    NeutronPointsSet.Lambda := WaveLength;
+    NeutronPointsSet.FTitle := ProfileName;
+    NeutronPointsSet.Lambda := FWaveLength;
 end;
 
 procedure TFitClient.RemoveSelectedPoints;
 begin
     //  dopuskaetsya ravenstvo nil
-    ToRefresh := SelectedPoints;
+    FToRefresh := FSelectedPoints;
     Hide;
-    SelectedPoints.Free; SelectedPoints := nil;
+    FSelectedPoints.Free;
+    FSelectedPoints := nil;
 end;
 
 procedure TFitClient.RemoveDataPoints;
@@ -546,55 +543,58 @@ end;
 procedure TFitClient.RemoveGaussProfile;
 begin
     //  dopuskaetsya ravenstvo nil
-    ToRefresh := GaussProfile;
+    FToRefresh := FCurveProfile;
     Hide;
-    GaussProfile.Free; GaussProfile := nil;
+    FCurveProfile.Free;
+    FCurveProfile := nil;
 end;
 
 procedure TFitClient.RemoveDeltaProfile;
 begin
     //  dopuskaetsya ravenstvo nil
-    ToRefresh := DeltaProfile;
+    FToRefresh := FDeltaProfile;
     Hide;
-    DeltaProfile.Free; DeltaProfile := nil;
+    FDeltaProfile.Free;
+    FDeltaProfile := nil;
 end;
 
 procedure TFitClient.RemoveSelectedArea;
 begin
     //  dopuskaetsya ravenstvo nil
-    ToRefresh := SelectedArea;
+    FToRefresh := FSelectedArea;
     Hide;
-    SelectedArea.Free; SelectedArea := nil;
+    FSelectedArea.Free;
+    FSelectedArea := nil;
 end;
 
-procedure TFitClient.RemoveRFactorIntervals;
+procedure TFitClient.RemoveRFactorBounds;
 begin
-    HideRFactorIntervals;
-    RFactorIntervals.Clear; //  dlya posleduyuschego vvoda
+    HideRFactorBounds;
+    FRFactorBounds.Clear; //  dlya posleduyuschego vvoda
 end;
 
 procedure TFitClient.RemoveCurvePositions;
 begin
     HideCurvePositions;
-    CurvePositions.Clear;   //  dlya posleduyuschego vvoda
+    FCurvePositions.Clear;   //  dlya posleduyuschego vvoda
 end;
 
 procedure TFitClient.RemoveBackgroundPoints;
 begin
     HideBackground;
-    BackgroundPoints.Clear; //  dlya posleduyuschego vvoda
+    FBackgroundPoints.Clear; //  dlya posleduyuschego vvoda
 end;
 
-procedure TFitClient.ShowCurMin(Min: Double);
+procedure TFitClient.ShowCurMin(Min: double);
 begin
     //  Stores current minimum value.
-    CurMin := Min;
+    FCurMin := Min;
     //  Updates UI.
-    if Assigned(FitViewer) then
+    if Assigned(FFitViewer) then
     begin
-        FitViewer.ShowTime;
-        FitViewer.ShowRFactor;
-        if FitViewer.GetAnimationMode then
+        FFitViewer.ShowTime;
+        FFitViewer.ShowRFactor;
+        if FFitViewer.GetAnimationMode then
             UpdateAll;
     end;
 end;
@@ -606,10 +606,10 @@ begin
         //  dannye udalyayutsya dlya ucheta vozmozhnyh izmeneniy,
         //  naprimer udaleniya fona
         RemoveSelectedArea;
-        SelectedArea := FitProxy.GetSelectedArea;
+        FSelectedArea := FitProxy.GetSelectedArea;
         //??? kak zdes' obrabatyvat' isklyucheniya
-        SelectedArea.Lambda := WaveLength;
-        SelectedArea.Title := SelectedAreaName;
+        FSelectedArea.Lambda := FWaveLength;
+        FSelectedArea.FTitle := SelectedAreaName;
         PlotSelectedArea;
     end
     else
@@ -617,7 +617,8 @@ begin
         //  dannye udalyayutsya dlya ucheta vozmozhnyh izmeneniy,
         //  naprimer udaleniya fona
         RemoveDataPoints;
-        NeutronPointsSet.Free; NeutronPointsSet := nil;
+        NeutronPointsSet.Free;
+        NeutronPointsSet := nil;
         NeutronPointsSet := FitProxy.GetProfilePointsSet;
         InitDataPoints;
         PlotDataPoints;
@@ -627,61 +628,67 @@ end;
 function TFitClient.GetProfilePointsSet: TTitlePointsSet;
 begin
     if FSelectedAreaMode then
-        Result := SelectedArea
-    else Result := NeutronPointsSet;
+        Result := FSelectedArea
+    else
+        Result := NeutronPointsSet;
 end;
 
 procedure TFitClient.UpdateAll;
 begin
     RemoveGaussProfile;
-    GaussProfile := FitProxy.GetCalcProfilePointsSet;
-    if Assigned(GaussProfile) and (GaussProfile.PointsCount <> 0) then
+    FCurveProfile := FitProxy.GetCalcProfilePointsSet;
+    if Assigned(FCurveProfile) and (FCurveProfile.PointsCount <> 0) then
     begin
-        GaussProfile.Title := SummarizedName;
-        GaussProfile.Lambda := WaveLength;
+        FCurveProfile.FTitle := SummarizedName;
+        FCurveProfile.Lambda := FWaveLength;
         PlotGaussProfile;
     end;
 
     RemoveDeltaProfile;
-    DeltaProfile := FitProxy.GetDeltaProfilePointsSet;
-    if Assigned(DeltaProfile) and (DeltaProfile.PointsCount <> 0) then
+    FDeltaProfile := FitProxy.GetDeltaProfilePointsSet;
+    if Assigned(FDeltaProfile) and (FDeltaProfile.PointsCount <> 0) then
     begin
-        DeltaProfile.Title := DeltaName;
-        DeltaProfile.Lambda := WaveLength;
+        FDeltaProfile.FTitle := DeltaName;
+        FDeltaProfile.Lambda := FWaveLength;
         PlotDeltaProfile;
     end;
 
     RemoveCurvePositions;
-    CurvePositions.Free; CurvePositions := nil;
-    CurvePositions := FitProxy.GetCurvePositions;
-    if Assigned(CurvePositions) and (CurvePositions.PointsCount <> 0) then
+    FCurvePositions.Free;
+    FCurvePositions := nil;
+    FCurvePositions := FitProxy.GetCurvePositions;
+    if Assigned(FCurvePositions) and (FCurvePositions.PointsCount <> 0) then
     begin
-        CurvePositions.Title := CurvePositionsName;
-        CurvePositions.Lambda := WaveLength;
+        FCurvePositions.FTitle := CurvePositionsName;
+        FCurvePositions.Lambda := FWaveLength;
         PlotCurvePositions;
     end;
 
-    RemoveRFactorIntervals; //  nuzhno skryvat', t.k. menyaetsya uk-l'
-    RFactorIntervals.Free; RFactorIntervals := nil;
-    RFactorIntervals := FitProxy.GetRFactorIntervals;
-    if Assigned(RFactorIntervals) and (RFactorIntervals.PointsCount <> 0) then
+    RemoveRFactorBounds; //  nuzhno skryvat', t.k. menyaetsya uk-l'
+    FRFactorBounds.Free;
+    FRFactorBounds := nil;
+    FRFactorBounds := FitProxy.GetRFactorBounds;
+    if Assigned(FRFactorBounds) and (FRFactorBounds.PointsCount <> 0) then
     begin
-        RFactorIntervals.Title := RFactorIntervalsName;
-        RFactorIntervals.Lambda := WaveLength;
-        PlotRFactorIntervals;
+        FRFactorBounds.FTitle := RFactorBoundsName;
+        FRFactorBounds.Lambda := FWaveLength;
+        PlotRFactorBounds;
     end;
 
-    HideSpecimens;
-    CurvesList.Free; CurvesList := nil;
-    CurvesList := FitProxy.GetCurvesList;
-    if Assigned(CurvesList) then SetCurvesListLambda;
+    HideCurves;
+    FCurvesList.Free;
+    FCurvesList := nil;
+    FCurvesList := FitProxy.GetCurvesList;
+    if Assigned(FCurvesList) then
+        SetCurvesListLambda;
 
-    SpecimenList.Free; SpecimenList := nil;
-    SpecimenList := FitProxy.GetSpecimenList;
-    if Assigned(SpecimenList) then
-        SpecimenList.Lambda := WaveLength;
+    FCurveList.Free;
+    FCurveList := nil;
+    FCurveList := FitProxy.GetCurveList;
+    if Assigned(FCurveList) then
+        FCurveList.Lambda := FWaveLength;
 
-    PlotSpecimens;
+    PlotCurves;
 {$IFDEF USE_GRIDS}
     if FUpdateGrids then
         FillDatasheetTable;
@@ -697,123 +704,138 @@ begin
     FAsyncState := AsyncDone;
 
     //  Updates UI.
-    if Assigned(OnAsyncOperationFinished) then OnAsyncOperationFinished(Self);
-    if Assigned(FitViewer) then
-        FitViewer.ShowHint(HintDone);
+    if Assigned(OnAsyncOperationFinished) then
+        OnAsyncOperationFinished(Self);
+    if Assigned(FFitViewer) then
+        FFitViewer.ShowHint(HintDone);
 end;
 
-procedure TFitClient.FindPeakBoundsDone;
+procedure TFitClient.ComputeCurveBoundsDone;
 begin
     //  zdes' eto nedopustimye sostoyaniya
     Assert(Assigned(FitProxy));
     //  nuzhno skryvat', t.k. menyaetsya uk-l'
-    RemoveRFactorIntervals;
-    RFactorIntervals.Free; RFactorIntervals := nil;
-    RFactorIntervals := FitProxy.GetRFactorIntervals;
-    if Assigned(RFactorIntervals) and (RFactorIntervals.PointsCount <> 0) then
+    RemoveRFactorBounds;
+    FRFactorBounds.Free;
+    FRFactorBounds := nil;
+    FRFactorBounds := FitProxy.GetRFactorBounds;
+    if Assigned(FRFactorBounds) and (FRFactorBounds.PointsCount <> 0) then
     begin
-        RFactorIntervals.Title := RFactorIntervalsName;
-        RFactorIntervals.Lambda := WaveLength;
+        FRFactorBounds.FTitle := RFactorBoundsName;
+        FRFactorBounds.Lambda := FWaveLength;
 
-        PlotRFactorIntervals;
+        PlotRFactorBounds;
     end;
     FAsyncState := AsyncDone;
     //  vyzyvaetsya metod glavnoy formy
-    if Assigned(OnAsyncOperationFinished) then OnAsyncOperationFinished(Self);
+    if Assigned(OnAsyncOperationFinished) then
+        OnAsyncOperationFinished(Self);
 end;
 
-procedure TFitClient.FindBackPointsDone;
+procedure TFitClient.ComputeBackgroundPointsDone;
 begin
     //  zdes' eto nedopustimye sostoyaniya
     Assert(Assigned(FitProxy));
 
     RemoveBackgroundPoints;
-    BackgroundPoints.Free; BackgroundPoints := nil;
-    BackgroundPoints := FitProxy.GetBackgroundPoints;
-    if Assigned(BackgroundPoints) and (BackgroundPoints.PointsCount <> 0) then
+    FBackgroundPoints.Free;
+    FBackgroundPoints := nil;
+    FBackgroundPoints := FitProxy.GetBackgroundPoints;
+    if Assigned(FBackgroundPoints) and (FBackgroundPoints.PointsCount <> 0) then
     begin
-        BackgroundPoints.Title := BackgroundPointsName;
-        BackgroundPoints.Lambda := WaveLength;
+        FBackgroundPoints.FTitle := BackgroundPointsName;
+        FBackgroundPoints.Lambda := FWaveLength;
 
         PlotBackground;
     end;
     FAsyncState := AsyncDone;
     //  vyzyvaetsya metod glavnoy formy
-    if Assigned(OnAsyncOperationFinished) then OnAsyncOperationFinished(Self);
+    if Assigned(OnAsyncOperationFinished) then
+        OnAsyncOperationFinished(Self);
 end;
 
-procedure TFitClient.FindPeakPositionsDone;
+procedure TFitClient.ComputeCurvePositionsDone;
 begin
     //  zdes' eto nedopustimye sostoyaniya
     Assert(Assigned(FitProxy));
     //  nuzhno skryvat', t.k. menyaetsya uk-l'
-    RemoveRFactorIntervals;
-    RFactorIntervals.Free; RFactorIntervals := nil;
-    RFactorIntervals := FitProxy.GetRFactorIntervals;
-    if Assigned(RFactorIntervals) and (RFactorIntervals.PointsCount <> 0) then
+    RemoveRFactorBounds;
+    FRFactorBounds.Free;
+    FRFactorBounds := nil;
+    FRFactorBounds := FitProxy.GetRFactorBounds;
+    if Assigned(FRFactorBounds) and (FRFactorBounds.PointsCount <> 0) then
     begin
-        RFactorIntervals.Title := RFactorIntervalsName;
-        RFactorIntervals.Lambda := WaveLength;
-        PlotRFactorIntervals;
+        FRFactorBounds.FTitle := RFactorBoundsName;
+        FRFactorBounds.Lambda := FWaveLength;
+        PlotRFactorBounds;
     end;
 
     RemoveCurvePositions;
-    CurvePositions.Free; CurvePositions := nil;
-    CurvePositions := FitProxy.GetCurvePositions;
-    if Assigned(CurvePositions) and (CurvePositions.PointsCount <> 0) then
+    FCurvePositions.Free;
+    FCurvePositions := nil;
+    FCurvePositions := FitProxy.GetCurvePositions;
+    if Assigned(FCurvePositions) and (FCurvePositions.PointsCount <> 0) then
     begin
-        CurvePositions.Title := CurvePositionsName;
-        CurvePositions.Lambda := WaveLength;
+        FCurvePositions.FTitle := CurvePositionsName;
+        FCurvePositions.Lambda := FWaveLength;
         PlotCurvePositions;
     end;
-    
+
     FAsyncState := AsyncDone;
     //  vyzyvaetsya metod glavnoy formy
-    if Assigned(OnAsyncOperationFinished) then OnAsyncOperationFinished(Self);
+    if Assigned(OnAsyncOperationFinished) then
+        OnAsyncOperationFinished(Self);
 end;
 
-function TFitClient.GetSpecimenList: TMSCRSpecimenList;
+function TFitClient.GetCurveList: TMSCRCurveList;
 begin
-    Assert(Assigned(SpecimenList));
-    Result := SpecimenList;
+    Assert(Assigned(FCurveList));
+    Result := FCurveList;
 end;
 
 procedure TFitClient.SetCurvesListLambda;
-var i: LongInt;
+var
+    i:  longint;
     NS: TNeutronPointsSet;
 begin
-    Assert(Assigned(CurvesList));
-    
-    with CurvesList do
-        for i := 0 to CurvesList.Count - 1 do
+    Assert(Assigned(FCurvesList));
+
+    with FCurvesList do
+        for i := 0 to FCurvesList.Count - 1 do
         begin
-            NS := TNeutronPointsSet(CurvesList.Items[i]);
-            NS.Lambda := WaveLength;
+            NS := TNeutronPointsSet(FCurvesList.Items[i]);
+            NS.Lambda := FWaveLength;
         end;
 end;
 
-procedure TFitClient.SetWaveLength(AWaveLength: Double);
+procedure TFitClient.SetWaveLength(AWaveLength: double);
 begin
-    WaveLength := AWaveLength;
-    if Assigned(NeutronPointsSet) then NeutronPointsSet.Lambda := AWaveLength;
-    if Assigned(BackgroundPoints) then BackgroundPoints.Lambda := AWaveLength;
-    if Assigned(SelectedArea) then SelectedArea.Lambda := AWaveLength;
-    if Assigned(SelectedPoints) then SelectedPoints.Lambda := AWaveLength;
-    if Assigned(GaussProfile) then GaussProfile.Lambda := AWaveLength;
-    if Assigned(DeltaProfile) then DeltaProfile.Lambda := AWaveLength;
-    if Assigned(CurvesList) then SetCurvesListLambda;
-    if Assigned(SpecimenList) then SpecimenList.Lambda := WaveLength;
+    FWaveLength := AWaveLength;
+    if Assigned(NeutronPointsSet) then
+        NeutronPointsSet.Lambda := AWaveLength;
+    if Assigned(FBackgroundPoints) then
+        FBackgroundPoints.Lambda := AWaveLength;
+    if Assigned(FSelectedArea) then
+        FSelectedArea.Lambda := AWaveLength;
+    if Assigned(FSelectedPoints) then
+        FSelectedPoints.Lambda := AWaveLength;
+    if Assigned(FCurveProfile) then
+        FCurveProfile.Lambda := AWaveLength;
+    if Assigned(FDeltaProfile) then
+        FDeltaProfile.Lambda := AWaveLength;
+    if Assigned(FCurvesList) then
+        SetCurvesListLambda;
+    if Assigned(FCurveList) then
+        FCurveList.Lambda := FWaveLength;
 end;
 
-function TFitClient.GetWaveLength: Double;
+function TFitClient.GetWaveLength: double;
 begin
-    Result := WaveLength;
+    Result := FWaveLength;
 end;
 
 procedure TFitClient.ReplacePoint(Points: TTitlePointsSet;
-    PrevXValue, PrevYValue, NewXValue, NewYValue: Double;
-    Plot: TPlotProc
-    );
+    PrevXValue, PrevYValue, NewXValue, NewYValue: double; Plot: TPlotProc);
 begin
     Assert(Assigned(Points));
     Points.ReplacePoint(PrevXValue, PrevYValue, NewXValue, NewYValue);
@@ -823,80 +845,80 @@ begin
 end;
 
 // !!! povtornyy vyzov dlya dannyh koordinat udalyaet tochku iz spiska !!!
-procedure TFitClient.AddPoint(
-    var Points: TTitlePointsSet; XValue, YValue: Double; Plot: TPlotProc);
-var i: LongInt;
+procedure TFitClient.AddPoint(var Points: TTitlePointsSet;
+    XValue, YValue: double; Plot: TPlotProc);
+var
+    i: longint;
 begin
     Assert(Assigned(Points));
 
     // ischem zadannuyu tochku v vybrannom spiske tochek
     for i := 0 to Points.PointsCount - 1 do
-    begin
-        // !!! dvuh tochek s odinakovymi X i raznymi Y vse ravno byt'
-        // ne mozhet, poetomu proveryaetsya tol'ko koordinata X !!!
         if XValue = Points.PointXCoord[i] then
         begin
             // nuzhno korrektno udalit' spisok tochek iz spiska vseh krivyh,
             // potomu chto DeletePoints izmenyaet znachenie uk-lya Points...
-            //ToRefresh := Points;
+            //FToRefresh := Points;
             //Hide;
-            
+
             Points.DeletePoint(XValue);
             // ...i posle etogo otobrazit' ego zanovo
             Plot;
             Exit;
-        end;
-    end;
+        end// !!! dvuh tochek s odinakovymi X i raznymi Y vse ravno byt'
+    // ne mozhet, poetomu proveryaetsya tol'ko koordinata X !!!
+    ;
     // tochka ne naydena - dobavlyaem novuyu
     Points.AddNewPoint(XValue, YValue);
     Plot;
 end;
 
-procedure TFitClient.PlotSpecimens;
+procedure TFitClient.PlotCurves;
 begin
-    if Assigned(FitViewer) then
-        FitViewer.PlotSpecimens(Self, CurvesList, SpecimenList);
+    if Assigned(FFitViewer) then
+        FFitViewer.PlotCurves(Self, FCurvesList, FCurveList);
 end;
 
-procedure TFitClient.HideSpecimens;
-var i: LongInt;
+procedure TFitClient.HideCurves;
+var
+    i: longint;
 begin
-    if Assigned(CurvesList) then
-        for i := 0 to CurvesList.Count - 1 do
+    if Assigned(FCurvesList) then
+        for i := 0 to FCurvesList.Count - 1 do
         begin
-            ToRefresh := TNeutronPointsSet(CurvesList.Items[i]);
+            FToRefresh := TNeutronPointsSet(FCurvesList.Items[i]);
             Hide;
         end;
 end;
 
 procedure TFitClient.PlotSelectedPoints;
 begin
-    if Assigned(FitViewer) then
-        FitViewer.PlotSelectedPoints(Self, SelectedPoints);
+    if Assigned(FFitViewer) then
+        FFitViewer.PlotSelectedPoints(Self, FSelectedPoints);
 end;
 
-procedure TFitClient.PlotRFactorIntervals;
+procedure TFitClient.PlotRFactorBounds;
 begin
-    if Assigned(FitViewer) then
-        FitViewer.PlotRFactorIntervals(Self, RFactorIntervals);
+    if Assigned(FFitViewer) then
+        FFitViewer.PlotRFactorBounds(Self, FRFactorBounds);
 end;
 
-procedure TFitClient.HideRFactorIntervals;
+procedure TFitClient.HideRFactorBounds;
 begin
-    if Assigned(FitViewer) then
-        FitViewer.HideRFactorIntervals(Self, RFactorIntervals);
+    if Assigned(FFitViewer) then
+        FFitViewer.HideRFactorBounds(Self, FRFactorBounds);
 end;
 
 procedure TFitClient.PlotCurvePositions;
 begin
-    if Assigned(FitViewer) then
-        FitViewer.PlotCurvePositions(Self, CurvePositions);
+    if Assigned(FFitViewer) then
+        FFitViewer.PlotCurvePositions(Self, FCurvePositions);
 end;
 
 procedure TFitClient.HideCurvePositions;
 begin
-    if Assigned(FitViewer) then
-        FitViewer.HideCurvePositions(Self, CurvePositions);
+    if Assigned(FFitViewer) then
+        FFitViewer.HideCurvePositions(Self, FCurvePositions);
 end;
 
 {$IFDEF USE_GRIDS}
@@ -904,84 +926,88 @@ procedure TFitClient.FillDatasheetTable;
 begin
     if Assigned(FitViewer) then
         FitViewer.FillDatasheetTable(GetProfilePointsSet, CurvesList,
-            GaussProfile, DeltaProfile, RFactorIntervals);
+            GaussProfile, DeltaProfile, RFactorBounds);
 end;
+
 {$ENDIF}
 
 procedure TFitClient.PlotDataPoints;
 begin
-    if Assigned(FitViewer) then
-        FitViewer.PlotDataPoints(Self, NeutronPointsSet);
+    if Assigned(FFitViewer) then
+        FFitViewer.PlotDataPoints(Self, NeutronPointsSet);
 end;
 
 procedure TFitClient.HideDataPoints;
 begin
-    if Assigned(FitViewer) then
-        FitViewer.HideDataPoints(Self, NeutronPointsSet);
+    if Assigned(FFitViewer) then
+        FFitViewer.HideDataPoints(Self, NeutronPointsSet);
 end;
 
 procedure TFitClient.PlotSelectedArea;
 begin
-    if Assigned(FitViewer) then
-        FitViewer.PlotSelectedArea(Self, SelectedArea);
+    if Assigned(FFitViewer) then
+        FFitViewer.PlotSelectedArea(Self, FSelectedArea);
 end;
 
 procedure TFitClient.PlotBackground;
 begin
-    if Assigned(FitViewer) then
-        FitViewer.PlotBackground(Self, BackgroundPoints);
+    if Assigned(FFitViewer) then
+        FFitViewer.PlotBackground(Self, FBackgroundPoints);
 end;
 
 procedure TFitClient.HideBackground;
 begin
-    if Assigned(FitViewer) then
-        FitViewer.HideBackground(Self, BackgroundPoints);
+    if Assigned(FFitViewer) then
+        FFitViewer.HideBackground(Self, FBackgroundPoints);
 end;
 
 procedure TFitClient.PlotGaussProfile;
 begin
-    if Assigned(FitViewer) then
-        FitViewer.PlotGaussProfile(Self, GaussProfile);
+    if Assigned(FFitViewer) then
+        FFitViewer.PlotGaussProfile(Self, FCurveProfile);
 end;
 
 procedure TFitClient.PlotDeltaProfile;
 begin
-    if Assigned(FitViewer) then
-        FitViewer.PlotDeltaProfile(Self, DeltaProfile);
+    if Assigned(FFitViewer) then
+        FFitViewer.PlotDeltaProfile(Self, FDeltaProfile);
 end;
 
 procedure TFitClient.Refresh;
 begin
-    if Assigned(FitViewer) then FitViewer.Refresh(Self);
+    if Assigned(FFitViewer) then
+        FFitViewer.Refresh(Self);
 end;
 
 procedure TFitClient.RefreshPointsSet;
 begin
-    Assert(Assigned(ToRefresh));
+    Assert(Assigned(FToRefresh));
 
-    if Assigned(FitViewer) then
-        FitViewer.RefreshPointsSet(Self, ToRefresh);
-    ToRefresh := nil;
+    if Assigned(FFitViewer) then
+        FFitViewer.RefreshPointsSet(Self, FToRefresh);
+    FToRefresh := nil;
 end;
 
 procedure TFitClient.Clear;
 begin
-    if Assigned(FitViewer) then FitViewer.Clear(Self);
+    if Assigned(FFitViewer) then
+        FFitViewer.Clear(Self);
 end;
 
 procedure TFitClient.Hide;
 begin
-    if Assigned(FitViewer) then FitViewer.Hide(Self, ToRefresh);
-    ToRefresh := nil;
+    if Assigned(FFitViewer) then
+        FFitViewer.Hide(Self, FToRefresh);
+    FToRefresh := nil;
 end;
 
-procedure TFitClient.ReplacePointInData(
-    PrevXValue, PrevYValue, NewXValue, NewYValue: Double);
+procedure TFitClient.ReplacePointInData(PrevXValue, PrevYValue,
+    NewXValue, NewYValue: double);
 begin
     if FSelectedAreaMode then
     begin
-        Assert(Assigned(SelectedArea));
-        ReplacePoint(SelectedArea,
+        Assert(Assigned(FSelectedArea));
+        ReplacePoint(FSelectedArea,
             PrevXValue, PrevYValue, NewXValue, NewYValue, PlotSelectedArea);
     end
     else
@@ -990,71 +1016,71 @@ begin
         ReplacePoint(NeutronPointsSet,
             PrevXValue, PrevYValue, NewXValue, NewYValue, PlotDataPoints);
     end;
-    FitProxy.ReplacePointInData(PrevXValue, PrevYValue, NewXValue, NewYValue) ;
+    FitProxy.ReplacePointInData(PrevXValue, PrevYValue, NewXValue, NewYValue);
 end;
 
 procedure TFitClient.ReplacePointInSelected(
-    PrevXValue, PrevYValue, NewXValue, NewYValue: Double);
+    PrevXValue, PrevYValue, NewXValue, NewYValue: double);
 begin
-    Assert(Assigned(SelectedPoints));
-    ReplacePoint(SelectedPoints,
+    Assert(Assigned(FSelectedPoints));
+    ReplacePoint(FSelectedPoints,
         PrevXValue, PrevYValue, NewXValue, NewYValue, PlotSelectedPoints);
     //???  vyzov servera
 end;
 
 procedure TFitClient.ReplacePointInBackground(
-    PrevXValue, PrevYValue, NewXValue, NewYValue: Double);
+    PrevXValue, PrevYValue, NewXValue, NewYValue: double);
 begin
-    Assert(Assigned(BackgroundPoints));
-    ReplacePoint(BackgroundPoints,
+    Assert(Assigned(FBackgroundPoints));
+    ReplacePoint(FBackgroundPoints,
         PrevXValue, PrevYValue, NewXValue, NewYValue, PlotBackground);
     FitProxy.ReplacePointInBackground(
-        PrevXValue, PrevYValue, NewXValue, NewYValue) ;
+        PrevXValue, PrevYValue, NewXValue, NewYValue);
 end;
 
-procedure TFitClient.ReplacePointInRFactorIntervals(
-    PrevXValue, PrevYValue, NewXValue, NewYValue: Double);
+procedure TFitClient.ReplacePointInRFactorBounds(
+    PrevXValue, PrevYValue, NewXValue, NewYValue: double);
 begin
-    Assert(Assigned(RFactorIntervals));
-    ReplacePoint(RFactorIntervals,
-        PrevXValue, PrevYValue, NewXValue, NewYValue, PlotRFactorIntervals);
+    Assert(Assigned(FRFactorBounds));
+    ReplacePoint(FRFactorBounds,
+        PrevXValue, PrevYValue, NewXValue, NewYValue, PlotRFactorBounds);
 end;
 
 procedure TFitClient.ReplacePointInCurvePositions(
-    PrevXValue, PrevYValue, NewXValue, NewYValue: Double);
+    PrevXValue, PrevYValue, NewXValue, NewYValue: double);
 begin
-    Assert(Assigned(CurvePositions));
-    ReplacePoint(CurvePositions,
+    Assert(Assigned(FCurvePositions));
+    ReplacePoint(FCurvePositions,
         PrevXValue, PrevYValue, NewXValue, NewYValue, PlotCurvePositions);
 end;
 
-procedure TFitClient.AddPointToSelected(XValue, YValue: Double);
+procedure TFitClient.AddPointToSelected(XValue, YValue: double);
 begin
-    Assert(Assigned(SelectedPoints));
-    AddPoint(SelectedPoints, XValue, YValue, PlotSelectedPoints);
+    Assert(Assigned(FSelectedPoints));
+    AddPoint(FSelectedPoints, XValue, YValue, PlotSelectedPoints);
 end;
 
-procedure TFitClient.AddPointToBackground(XValue, YValue: Double);
+procedure TFitClient.AddPointToBackground(XValue, YValue: double);
 begin
-    Assert(Assigned(BackgroundPoints));
-    AddPoint(BackgroundPoints, XValue, YValue, PlotBackground);
+    Assert(Assigned(FBackgroundPoints));
+    AddPoint(FBackgroundPoints, XValue, YValue, PlotBackground);
 end;
 
-procedure TFitClient.AddPointToRFactorIntervals(XValue, YValue: Double);
+procedure TFitClient.AddPointToRFactorBounds(XValue, YValue: double);
 begin
-    //Assert(Assigned(RFactorIntervals));
-    //AddPoint(RFactorIntervals, XValue, YValue, PlotRFactorIntervals);
-    
-    FitProxy.AddPointToRFactorIntervals(XValue, YValue);
+    //Assert(Assigned(FRFactorBounds));
+    //AddPoint(FRFactorBounds, XValue, YValue, PlotRFactorBounds);
+
+    FitProxy.AddPointToRFactorBounds(XValue, YValue);
     UpdateAll;
 end;
 
-procedure TFitClient.AddPointToCurvePositions(XValue, YValue: Double);
+procedure TFitClient.AddPointToCurvePositions(XValue, YValue: double);
 begin
-    //Assert(Assigned(CurvePositions));
-    //Assert(Assigned(RFactorIntervals));
-    //AddPoint(CurvePositions, XValue, YValue, PlotCurvePositions);
-    
+    //Assert(Assigned(FCurvePositions));
+    //Assert(Assigned(FRFactorBounds));
+    //AddPoint(FCurvePositions, XValue, YValue, PlotCurvePositions);
+
     FitProxy.AddPointToCurvePositions(XValue, YValue);
     UpdateAll;
 end;
@@ -1062,35 +1088,33 @@ end;
 procedure TFitClient.SetSelectionMode(ASelectionMode: TSelMode);
 begin
     case ASelectionMode of
-        ModeSelNone:
-            begin
-                case FSelectionMode of
-                    ModeSelAreaLimits: RemoveSelectedPoints;
-                    ModeSelCharacteristicPoints: RemoveSelectedPoints;
-                    ModeSelGaussianBounds: RemoveSelectedPoints;
-                end;
+        ModeSelectNothing:
+            case FSelectionMode of
+                ModeSelectIntervalBounds: RemoveSelectedPoints;
+                ModeSelectCharacteristicPoints: RemoveSelectedPoints;
+                ModeSelectCurveBounds: RemoveSelectedPoints;
             end;
-        ModeSelAreaLimits:
+        ModeSelectIntervalBounds:
             RecreateAndShowSelectedPoints('Area Limits');
-        ModeSelCharacteristicPoints:
+        ModeSelectCharacteristicPoints:
             RecreateAndShowSelectedPoints('Characteristic Points');
-        ModeSelGaussianBounds:
+        ModeSelectCurveBounds:
             RecreateAndShowSelectedPoints('Curve Bounds');
-        ModeSelBackground:
-            begin
-                Assert(Assigned(BackgroundPoints));
-                PlotBackground;
-            end;
-        ModeSelPeakPos:
-            begin
-                Assert(Assigned(CurvePositions));
-                PlotCurvePositions;
-            end;
-        ModeSelPeakBounds:
-            begin
-                Assert(Assigned(RFactorIntervals));
-                PlotRFactorIntervals;
-            end;
+        ModeSelectBackground:
+        begin
+            Assert(Assigned(FBackgroundPoints));
+            PlotBackground;
+        end;
+        ModeSelectCurvePositions:
+        begin
+            Assert(Assigned(FCurvePositions));
+            PlotCurvePositions;
+        end;
+        ModeSelectRFactorBounds:
+        begin
+            Assert(Assigned(FRFactorBounds));
+            PlotRFactorBounds;
+        end;
     end;
     FSelectionMode := ASelectionMode;
 end;
@@ -1100,32 +1124,33 @@ begin
     Result := FSelectionMode;
 end;
 
-procedure TFitClient.AddPointToActive(XValue, YValue: Double);
+procedure TFitClient.AddPointToActive(XValue, YValue: double);
 begin
     case FSelectionMode of
-        ModeSelAreaLimits: AddPointToSelected(XValue, YValue);
-        ModeSelCharacteristicPoints: AddPointToSelected(XValue, YValue);
-        ModeSelGaussianBounds: AddPointToSelected(XValue, YValue);
-        ModeSelBackground: AddPointToBackground(XValue, YValue);
-        ModeSelPeakPos: AddPointToCurvePositions(XValue, YValue);
-        ModeSelPeakBounds: AddPointToRFactorIntervals(XValue, YValue);
+        ModeSelectIntervalBounds: AddPointToSelected(XValue, YValue);
+        ModeSelectCharacteristicPoints: AddPointToSelected(XValue, YValue);
+        ModeSelectCurveBounds: AddPointToSelected(XValue, YValue);
+        ModeSelectBackground: AddPointToBackground(XValue, YValue);
+        ModeSelectCurvePositions: AddPointToCurvePositions(XValue, YValue);
+        ModeSelectRFactorBounds: AddPointToRFactorBounds(XValue, YValue);
     end;
 end;
 
 function TFitClient.GetCurrentPointsSet: TTitlePointsSet;
 begin
     case FSelectionMode of
-        ModeSelNone:
+        ModeSelectNothing:
             if FSelectedAreaMode then
-                Result := SelectedArea
-            else Result := NeutronPointsSet;
+                Result := FSelectedArea
+            else
+                Result := NeutronPointsSet;
 
-        ModeSelAreaLimits: Result := SelectedPoints;
-        ModeSelCharacteristicPoints: Result := SelectedPoints;
-        ModeSelGaussianBounds: Result := SelectedPoints;
-        ModeSelBackground: Result := BackgroundPoints;
-        ModeSelPeakPos: Result := CurvePositions;
-        ModeSelPeakBounds: Result := RFactorIntervals;
+        ModeSelectIntervalBounds: Result := FSelectedPoints;
+        ModeSelectCharacteristicPoints: Result := FSelectedPoints;
+        ModeSelectCurveBounds: Result    := FSelectedPoints;
+        ModeSelectBackground: Result     := FBackgroundPoints;
+        ModeSelectCurvePositions: Result := FCurvePositions;
+        ModeSelectRFactorBounds: Result  := FRFactorBounds;
     end;
 end;
 
@@ -1134,7 +1159,8 @@ begin
     Assert(Assigned(FDataLoader));
 
     RemoveDataPoints;
-    NeutronPointsSet.Free; NeutronPointsSet := nil;
+    NeutronPointsSet.Free;
+    NeutronPointsSet := nil;
     NeutronPointsSet := FDataLoader.GetPointsSetCopy;
     InitDataPoints;
 end;
@@ -1173,8 +1199,9 @@ begin
 end;
 
 procedure TFitClient.SmoothProfile;
-var NPS: TNeutronPointsSet;
-    i: LongInt;
+var
+    NPS: TNeutronPointsSet;
+    i:   longint;
 begin
     Assert(Assigned(FitProxy));
 
@@ -1188,26 +1215,28 @@ begin
         for i := 0 to NPS.PointsCount - 1 do
             NeutronPointsSet.PointYCoord[i] := NPS.PointYCoord[i];
     except
-        NPS.Free; raise;
+        NPS.Free;
+        raise;
     end;
-    ToRefresh := NeutronPointsSet;
+    FToRefresh := NeutronPointsSet;
     RefreshPointsSet;
 end;
 
-procedure TFitClient.SubtractAllBackground(Auto: Boolean);
+procedure TFitClient.SubtractBackground(Auto: boolean);
 begin
     Assert(Assigned(FitProxy));
     if not Auto then
     begin
-        Assert(Assigned(BackgroundPoints));
-        FitProxy.SetBackgroundPointsSet(BackgroundPoints);
+        Assert(Assigned(FBackgroundPoints));
+        FitProxy.SetBackgroundPointsSet(FBackgroundPoints);
     end;
-    FitProxy.SubtractAllBackground(Auto);
+    FitProxy.SubtractBackground(Auto);
     //  ochistka spiska i skrytie grafika
     RemoveBackgroundPoints;
     //  perezagruzka dannyh
     RemoveDataPoints;
-    NeutronPointsSet.Free; NeutronPointsSet := nil;
+    NeutronPointsSet.Free;
+    NeutronPointsSet := nil;
     NeutronPointsSet := FitProxy.GetProfilePointsSet;
     InitDataPoints;
     PlotDataPoints;
@@ -1220,56 +1249,56 @@ begin
     FAsyncState := AsyncWorks;
 end;
 
-procedure TFitClient.FindGausses;
+procedure TFitClient.MinimizeDifference;
 begin
     Assert(Assigned(FitProxy));
-//???    FitProxy.SetCurvePositions(CurvePositions);
-//???    FitProxy.SetRFactorIntervals(RFactorIntervals);
-    FitProxy.FindGausses;
+    //???    FitProxy.SetCurvePositions(FCurvePositions);
+    //???    FitProxy.SetRFactorBounds(FRFactorBounds);
+    FitProxy.MinimizeDifference;
     FAsyncState := AsyncWorks;
 end;
 
-procedure TFitClient.FindGaussesSequentially;
+procedure TFitClient.MinimizeNumberOfCurves;
 begin
     Assert(Assigned(FitProxy));
-//???    FitProxy.SetCurvePositions(CurvePositions);
-//???    FitProxy.SetRFactorIntervals(RFactorIntervals);
-    FitProxy.FindGaussesSequentially;
+    //???    FitProxy.SetCurvePositions(FCurvePositions);
+    //???    FitProxy.SetRFactorBounds(FRFactorBounds);
+    FitProxy.MinimizeNumberOfCurves;
     FAsyncState := AsyncWorks;
 end;
 
-procedure TFitClient.FindPeakBounds;
+procedure TFitClient.ComputeCurveBounds;
 begin
     Assert(Assigned(FitProxy));
-    FitProxy.FindPeakBounds;
+    FitProxy.ComputeCurveBounds;
     FAsyncState := AsyncWorks;
 end;
 
-procedure TFitClient.FindBackPoints;
+procedure TFitClient.ComputeBackgroundPoints;
 begin
     Assert(Assigned(FitProxy));
-    FitProxy.FindBackPoints;
+    FitProxy.ComputeBackgroundPoints;
     FAsyncState := AsyncWorks;
 end;
 
-procedure TFitClient.FindPeakPositions;
+procedure TFitClient.ComputeCurvePositions;
 begin
     Assert(Assigned(FitProxy));
-    FitProxy.FindPeakPositions;
+    FitProxy.ComputeCurvePositions;
     FAsyncState := AsyncWorks;
 end;
 
-procedure TFitClient.AllPointsAsPeakPositions;
+procedure TFitClient.SelectAllPointsAsCurvePositions;
 begin
     Assert(Assigned(FitProxy));
-    FitProxy.AllPointsAsPeakPositions;
+    FitProxy.SelectAllPointsAsCurvePositions;
     FAsyncState := AsyncWorks;
 end;
 
-procedure TFitClient.CreateSpecimenList;
+procedure TFitClient.CreateCurveList;
 begin
     Assert(Assigned(FitProxy));
-    FitProxy.CreateSpecimenList;
+    FitProxy.CreateCurveList;
 end;
 
 procedure TFitClient.StopAsyncOper;
@@ -1280,7 +1309,7 @@ begin
     //  poskol'ku Done vyzyvatsya standartnym obrazom
 end;
 
-function TFitClient.AsyncOper: Boolean;
+function TFitClient.AsyncOper: boolean;
 begin
     Assert(Assigned(FitProxy));
     Result := FitProxy.AsyncOper;
@@ -1298,37 +1327,37 @@ begin
     Result := FitProxy.GetRFactorStr;
 end;
 
-function TFitClient.GetMaxRFactor: Double;
+function TFitClient.GetMaxRFactor: double;
 begin
     Assert(Assigned(FitProxy));
     Result := FitProxy.GetMaxRFactor;
 end;
 
-procedure TFitClient.SetMaxRFactor(AMaxRFactor: Double);
+procedure TFitClient.SetMaxRFactor(AMaxRFactor: double);
 begin
     Assert(Assigned(FitProxy));
     FitProxy.SetMaxRFactor(AMaxRFactor);
 end;
 
-function TFitClient.GetBackFactor: Double;
+function TFitClient.GetBackFactor: double;
 begin
     Assert(Assigned(FitProxy));
     Result := FitProxy.GetBackFactor;
 end;
 
-procedure TFitClient.SetBackFactor(ABackFactor: Double);
+procedure TFitClient.SetBackFactor(ABackFactor: double);
 begin
     Assert(Assigned(FitProxy));
     FitProxy.SetBackFactor(ABackFactor);
 end;
 
-function TFitClient.GetCurveThresh: Double;
+function TFitClient.GetCurveThresh: double;
 begin
     Assert(Assigned(FitProxy));
     Result := FitProxy.GetCurveThresh;
 end;
 
-procedure TFitClient.SetCurveThresh(ACurveThresh: Double);
+procedure TFitClient.SetCurveThresh(ACurveThresh: double);
 begin
     Assert(Assigned(FitProxy));
     FitProxy.SetCurveThresh(ACurveThresh);
@@ -1346,44 +1375,42 @@ begin
     Assert(Assigned(FitProxy));
     FitProxy.SetCurveType(ACurveType);
 end;
+
 {$ENDIF}
 
-function TFitClient.GetBackgroundVariationEnabled: Boolean;
+function TFitClient.GetBackgroundVariationEnabled: boolean;
 begin
     Assert(Assigned(FitProxy));
     Result := FitProxy.GetBackgroundVariationEnabled;
 end;
 
-procedure TFitClient.SetBackgroundVariationEnabled(AEnable: Boolean);
+procedure TFitClient.SetBackgroundVariationEnabled(AEnable: boolean);
 begin
     Assert(Assigned(FitProxy));
     FitProxy.SetBackgroundVariationEnabled(AEnable);
 end;
 
-function TFitClient.GetCurveScalingEnabled: Boolean;
+function TFitClient.GetCurveScalingEnabled: boolean;
 begin
     Assert(Assigned(FitProxy));
     Result := FitProxy.GetCurveScalingEnabled;
 end;
 
-procedure TFitClient.SetCurveScalingEnabled(AEnabled: Boolean);
+procedure TFitClient.SetCurveScalingEnabled(AEnabled: boolean);
 begin
     Assert(Assigned(FitProxy));
     FitProxy.SetCurveScalingEnabled(AEnabled);
 end;
 
 {$IFDEF _WINDOWS}
-procedure TFitClient.SetSpecialCurveParameters(
-    ACurveExpr: string;
+procedure TFitClient.SetSpecialCurveParameters(ACurveExpr: string;
     CP: Curve_parameters    //  ravenstvo nil oznachaet
-                            //  pervonachal'nuyu initsializatsiyu
+    //  pervonachal'nuyu initsializatsiyu
     );
 begin
     Assert(Assigned(FitProxy));
     FitProxy.SetSpecialCurveParameters(ACurveExpr, CP);
 end;
+
 {$ENDIF}
 end.
-
-
-

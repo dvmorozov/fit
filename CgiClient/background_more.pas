@@ -17,7 +17,7 @@ const
     PairArray: array[1..PairCount] of TStringPair = (
         ('CaptBackFactor',
 //'ƒол€ максимальной амплитуды, используема€ дл€ автоматической генерации точек фона = '
-'The fraction of the maximum data value for automatic selection of baseline points = '
+'The fraction of the maximum data value for automatic selection of background points = '
         )
         );
 

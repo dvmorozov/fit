@@ -24,7 +24,7 @@ type
       dialog for configuring parameters of custom curve type. }
     ICreateUserPointsSetDlg = interface
         ['{9f15bf57-3cd2-4c4c-8eb8-76e86ad5c101}']
-        function ShowModal: Integer;
+        function ShowModal: integer;
         function GetExpression: string;
         function GetName: string;
     end;
@@ -32,5 +32,3 @@ type
 implementation
 
 end.
-
-

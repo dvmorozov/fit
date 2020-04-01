@@ -3,7 +3,7 @@ unit log;
 interface
 
 uses
-  Classes, SysUtils, Forms
+    Classes, Forms, SysUtils
 {$IFDEF WINDOWS}
     , Windows
 {$IFNDEF FITCGI}
@@ -12,10 +12,11 @@ uses
 {$ENDIF}
     ;
 
-type TMsgType = (Fatal, Warning, Notification, Debug);
+type
+    TMsgType = (Fatal, Warning, Notification, Debug);
 
 procedure WriteLog(Msg: string; MsgType: TMsgType);
-function GetSeqErrorCode: LongInt;
+function GetSeqErrorCode: longint;
 function CreateErrorMessage(Msg: string): string;
 function GetConfigDir: string;
 
@@ -25,30 +26,35 @@ const
     StrErrorID: string = ' Error identifier: ';
 
 {$IFDEF WINDOWS}
-const Slash: string = '\';
+const
+    Slash: string = '\';
 {$ELSE}
-const Slash: string = '/';
+const
+    Slash: string = '/';
 {$ENDIF}
 
-var SequentialErrorCode: LongInt = 1000;
+var
+    SequentialErrorCode: longint = 1000;
 
-function GetSeqErrorCode: LongInt;
+function GetSeqErrorCode: longint;
 begin
     Result := SequentialErrorCode;
     Inc(SequentialErrorCode);
 end;
 
 function CreateErrorMessage(Msg: string): string;
-var EC: LongInt;
+var
+    EC: longint;
 begin
-    EC := GetSeqErrorCode;
+    EC     := GetSeqErrorCode;
     Result := Msg + StrErrorID + IntToStr(EC);
 end;
 
 function GetUserDir: string;
 {$IFDEF WINDOWS}
     {$IFNDEF FITCGI}
-        var Path: array[0..MAX_PATH] of Char;
+var
+    Path: array[0..MAX_PATH] of char;
     {$ENDIF}
 {$ENDIF}
 begin
@@ -56,15 +62,14 @@ begin
 {$IFNDEF FITCGI}
     Path[0] := #0;
     //  pochemu-to s flagom CSIDL_FLAG_CREATE ne rabotaet !
-    (* WINDOWS *)
-    SHGetFolderPath(0, (* CSIDL_PERSONAL *)CSIDL_APPDATA, 0, 0, @Path);
+    SHGetFolderPath(0, {CSIDL_PERSONAL} CSIDL_APPDATA, 0, 0, @Path);
     Result := StrPas(Path);
 {$ELSE}
     Result := '..\data\tmp\';
 {$ENDIF}
 {$ELSE}
     Result := //GetEnvironmentVariable('HOME');
-                '/home/www/tmp/';
+        '/home/www/tmp/';
 {$ENDIF}
 end;
 
@@ -85,9 +90,10 @@ begin
     Result := DirName;
 end;
 
-var LogCS: TRTLCriticalSection;
-    LogMsgCount: LongInt = 1;
-    Log: TextFile;
+var
+    LogCS: TRTLCriticalSection;
+    LogMsgCount: longint = 1;
+    Log:   TextFile;
 
 procedure InitializeLog;
 var
@@ -98,8 +104,10 @@ begin
     LogFileName := GetConfigDir + 'log.txt';
 
     AssignFile(Log, LogFileName);
-    if FileExists(LogFileName) then Append(Log)
-    else Rewrite(Log);
+    if FileExists(LogFileName) then
+        Append(Log)
+    else
+        Rewrite(Log);
 end;
 
 procedure FinalizeLog;
@@ -136,6 +144,7 @@ begin
     end;
     LeaveCriticalSection(LogCS);
 end;
+
 {$hints on}
 
 initialization
@@ -144,4 +153,3 @@ initialization
 finalization
     FinalizeLog;
 end.
-

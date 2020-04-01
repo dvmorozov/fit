@@ -20,8 +20,8 @@ unit table_components;
 interface
 
 uses
-    Classes, Grids, Controls, Graphics, SysUtils, NumericGrid,
-    self_copied_component, vectors;
+    Classes, Controls, Graphics, Grids, NumericGrid, self_copied_component,
+    SysUtils, vectors;
 
 type
     ETableCompList = class(Exception);
@@ -38,26 +38,26 @@ type
 
         { Arrays are deleted from the destructor. Therefore deleting
           array items should be disabled during deleting the whole object. }
-        SavedColWidths: TLongArray;
-        SavedRowHeights: TLongArray;
+        FSavedColWidths:     TLongArray;
+        FSavedRowHeights:    TLongArray;
         { Indicates that array is already initialized. }
-        AreColWidthsReady: Boolean;
-        AreRowHeightsReady: Boolean;
+        FAreColWidthsReady:  boolean;
+        FAreRowHeightsReady: boolean;
 
         { Saved table properties. }
-        FSavedCol, FSavedRow, FSavedLeftCol, FSavedTopRow: LongInt;
+        FSavedCol, FSavedRow, FSavedLeftCol, FSavedTopRow: longint;
         FSavedSelection: TGridRect;
 
         { Indicates that grid parameters were saved. It is set up in GridRelease. }
-        SettingsSaved: Boolean;
-        HeightsSaved, WidthsSaved: Boolean;
+        FSettingsSaved: boolean;
+        FHeightsSaved, FWidthsSaved: boolean;
 
-        { Indicates that the object is destroyed. } 
-        Destroying: Boolean;
+        { Indicates that the object is destroyed. }
+        FDestroying: boolean;
 
         { Checks that column (row) index is valid. Otherwise throws an exception. }
-        procedure CheckColIndex(const Index: LongInt);
-        procedure CheckRowIndex(const Index: LongInt);
+        procedure CheckColIndex(const Index: longint);
+        procedure CheckRowIndex(const Index: longint);
 
     public
         constructor Create(AOwner: TComponent); override;
@@ -67,180 +67,169 @@ type
         //  методы старого интерфейса сохранить для совместимости с прежними
         //  приложениями, а также для того, чтобы можно было работать с
         //  неактивными сетками или когда активность таблицы не требуется
-        //
+
         //  методы данного интерфейса подразумевают, что источник данных
         //  является активным, а сетка пассивной (это отражается в названиях
         //  методов)
         ////////////////////////////////////////////////////////////////////////
 
         procedure GridAssign(Grid: TStringGrid); virtual;
-            //  установка параметров таблицы; когда данные устанавливаются
-            //  в сетку по инициативе источника данных ввод в таблицу запрещен
+        //  установка параметров таблицы; когда данные устанавливаются
+        //  в сетку по инициативе источника данных ввод в таблицу запрещен
         procedure GridRelease(Grid: TStringGrid); virtual;
-            //  сохранение изменений параметров таблицы
+        //  сохранение изменений параметров таблицы
         procedure SetDataToGrid(Grid: TStringGrid); virtual; abstract;
-        function GetDataFromGrid(Grid: TStringGrid): Boolean; virtual; abstract;
+        function GetDataFromGrid(Grid: TStringGrid): boolean; virtual; abstract;
 
         procedure SetCaption(Grid: TStringGrid); virtual; abstract;
         procedure SetColOptions(Grid: TStringGrid); virtual; abstract;
-            //  устанавливает опции колонок в Grid'е
+        //  устанавливает опции колонок в Grid'е
         procedure SetColFunc(Grid: TStringGrid); virtual;
-            //  устанавливает функции для колонок
+        //  устанавливает функции для колонок
 
         procedure SetColWidths(Grid: TStringGrid);
-            //  устанавливает ширину колонок таблицы
+        //  устанавливает ширину колонок таблицы
         procedure GetColWidths(Grid: TStringGrid);
-            //  сохраняет во внутренних полях
-            //  значения ширины колонок таблицы
+        //  сохраняет во внутренних полях
+        //  значения ширины колонок таблицы
         procedure SetRowHeights(Grid: TStringGrid);
-            //  устанавливает высоту строк таблицы
+        //  устанавливает высоту строк таблицы
         procedure GetRowHeights(Grid: TStringGrid);
-            //  сохраняет во внутренних полях
-            //  значения высоты строк таблицы
+        //  сохраняет во внутренних полях
+        //  значения высоты строк таблицы
 
         procedure InitColWidths;    //  первоначальная инициализация массива
         procedure InitRowHeights;
 
         ////////////////////////////////////////////////////////////////////////
         //  методы нового интерфейса
-        //
+
         //  методы данного интерфейса подразумевают, что активной
         //  является сетка, а источник данных пассивный (это также
         //  отражается в названиях методов)
         ////////////////////////////////////////////////////////////////////////
 
-        function IsDataSourceEmpty: Boolean; virtual; abstract;
+        function IsDataSourceEmpty: boolean; virtual; abstract;
 
-        function ValueToString(const ACol, ARow: LongInt
-            ): string; virtual; abstract;
-        procedure BeforeStringToValue(const ACol, ARow: LongInt;
+        function ValueToString(const ACol, ARow: longint): string;
+            virtual; abstract;
+        procedure BeforeStringToValue(const ACol, ARow: longint;
             const AString: string); virtual; abstract;
-        procedure StringToValue(const ACol, ARow: LongInt;
-            const AString: string
-            ); virtual; abstract;
-        procedure SetValueByDefault(const ACol, ARow: LongInt); virtual; abstract;
-            //  устанавливает правильное значение "по умолчанию"
-            //  для данной ячейки; используется при обработке операции
-            //  очистки ячейки
+        procedure StringToValue(const ACol, ARow: longint;
+            const AString: string); virtual; abstract;
+        procedure SetValueByDefault(const ACol, ARow: longint); virtual; abstract;
+        //  устанавливает правильное значение "по умолчанию"
+        //  для данной ячейки; используется при обработке операции
+        //  очистки ячейки
         function GetCellColor(
-            //  возвращает True, если должен быть установлен
-            //  цвет Color, в противном случае - False
-            //  (таблица установит цвет "по умолчанию")
-            const ACol, ARow: LongInt;
-            var Color: TColor): Boolean; virtual;
+        //  возвращает True, если должен быть установлен
+        //  цвет Color, в противном случае - False
+        //  (таблица установит цвет "по умолчанию")
+            const ACol, ARow: longint; var Color: TColor): boolean; virtual;
         { Returns default empty mask. }
-        function GetCellEditMask(
-            const ACol, ARow: LongInt): string; virtual;
-        function GetCellEnabledCharSet(
-            const ACol, ARow: LongInt): TCharSet; virtual; abstract;
+        function GetCellEditMask(const ACol, ARow: longint): string; virtual;
+        function GetCellEnabledCharSet(const ACol, ARow: longint): TCharSet;
+            virtual; abstract;
         function IsCellDisabled(
-            //  возвращает признак запрещения ввода
-            //  в ячейки - True - ввод запрещен
-            const ACol, ARow: LongInt): Boolean; virtual;
+        //  возвращает признак запрещения ввода
+        //  в ячейки - True - ввод запрещен
+            const ACol, ARow: longint): boolean; virtual;
 
-        function IsDataValid(const ACol, ARow: LongInt;
-            //  выполняет "мягкую" проверку данных без возбуждения
-            //  исключения; однако, если координаты строки/колонки
-            //  имеют недорустимые значения исключение вызывается;
-            //  всегда возвращает True - перекрыть для реализации
-            //  нужных проверок
-            const AString: string): Boolean; virtual; abstract;
+        function IsDataValid(const ACol, ARow: longint;
+        //  выполняет "мягкую" проверку данных без возбуждения
+        //  исключения; однако, если координаты строки/колонки
+        //  имеют недорустимые значения исключение вызывается;
+        //  всегда возвращает True - перекрыть для реализации
+        //  нужных проверок
+            const AString: string): boolean; virtual; abstract;
 
         //  все функции проверки возможности выполнения действия
         //  возвращают False; классы - потомки должны перекрыть их
-        function MayIDoInsertRows(StartRow, RowsCount: LongInt): Boolean; virtual;
-        function MayIDoDeleteRows(StartRow, RowsCount: LongInt): Boolean; virtual;
-        function MayIDoAddRow: Boolean; virtual;
+        function MayIDoInsertRows(StartRow, RowsCount: longint): boolean; virtual;
+        function MayIDoDeleteRows(StartRow, RowsCount: longint): boolean; virtual;
+        function MayIDoAddRow: boolean; virtual;
 
-        function MayIDoInsertColumns(StartCol, ColsCount: LongInt): Boolean; virtual;
-        function MayIDoDeleteColumns(StartCol, ColsCount: LongInt): Boolean; virtual;
-        function MayIDoAddColumn: Boolean; virtual;
+        function MayIDoInsertColumns(StartCol, ColsCount: longint): boolean; virtual;
+        function MayIDoDeleteColumns(StartCol, ColsCount: longint): boolean; virtual;
+        function MayIDoAddColumn: boolean; virtual;
 
-        function MayIDoDeleteAllData: Boolean; virtual;
-        function MayIDoClearSelectedArea: Boolean; virtual;
-        function MayIDoClearAllCells: Boolean; virtual;
+        function MayIDoDeleteAllData: boolean; virtual;
+        function MayIDoClearSelectedArea: boolean; virtual;
+        function MayIDoClearAllCells: boolean; virtual;
 
         //  функции управления массивами сохраненных значений
         //  ширины (высоты) колонок (столбцов)
         procedure DeleteAllColWidthItems;
-        procedure DeleteColWidthItem(const Index: LongInt);
-        procedure InsertColWidthItem(const Index: LongInt);
+        procedure DeleteColWidthItem(const Index: longint);
+        procedure InsertColWidthItem(const Index: longint);
         procedure AddColWidthItem;
 
-        procedure DeleteAllRowHeightItems;        
-        procedure DeleteRowHeightItem(const Index: LongInt);
-        procedure InsertRowHeightItem(const Index: LongInt);
+        procedure DeleteAllRowHeightItems;
+        procedure DeleteRowHeightItem(const Index: longint);
+        procedure InsertRowHeightItem(const Index: longint);
         procedure AddRowHeightItem;
 
-        function GetColWidthByDefault(
-            const Index: LongInt): LongInt; virtual;
-        function GetRowHeightByDefault(
-            const Index: LongInt): LongInt; virtual;
+        function GetColWidthByDefault(const Index: longint): longint;
+            virtual;
+        function GetRowHeightByDefault(const Index: longint): longint;
+            virtual;
 
         //  эти методы удаления, вставки, очистки вызывают
         //  исключение с сообщением о невозможности выполнить
         //  данное действие; классы - потомки должны перекрыть
         //  эти методы для реализации требуемых действий
-        procedure RowsDeleted(
-            const StartRow, RowsCount: LongInt); virtual;
-        procedure RowsInserted(
-            const StartRow, RowsCount: LongInt); virtual;
+        procedure RowsDeleted(const StartRow, RowsCount: longint); virtual;
+        procedure RowsInserted(const StartRow, RowsCount: longint); virtual;
         procedure RowAdded; virtual;
 
-        procedure ColumnsDeleted(
-            const StartCol, ColsCount: LongInt); virtual;
-        procedure ColumnsInserted(
-            const StartCol, ColsCount: LongInt); virtual;
+        procedure ColumnsDeleted(const StartCol, ColsCount: longint);
+            virtual;
+        procedure ColumnsInserted(const StartCol, ColsCount: longint);
+            virtual;
         procedure ColumnAdded; virtual;
 
         procedure AllDataDeleted; virtual;
 
-        function GetColCount: LongInt; virtual;
-            //  полное число колонок, включая Fixed
-        function GetRowCount: LongInt; virtual;
-            //  полное число строк, включая Fixed
-        function GetInfoCols: LongInt; virtual; abstract;
-            //  число колонок информационной части таблицы
-        function GetInfoRows: LongInt; virtual; abstract;
-            //  число строк информационной части таблицы
-        function GetFixedCols: LongInt; virtual;
-            //  число фиксированных колонок (по умолчанию = 1)
-        function GetFixedRows: LongInt; virtual;
-            //  число фиксированных строк (по умолчанию = 1)
-        function GetColNumFixed: Boolean; virtual;  //  (по умолчанию = False)
-        function GetRowNumFixed: Boolean; virtual;  //  (по умолчанию = False)
+        function GetColCount: longint; virtual;
+        //  полное число колонок, включая Fixed
+        function GetRowCount: longint; virtual;
+        //  полное число строк, включая Fixed
+        function GetInfoCols: longint; virtual; abstract;
+        //  число колонок информационной части таблицы
+        function GetInfoRows: longint; virtual; abstract;
+        //  число строк информационной части таблицы
+        function GetFixedCols: longint; virtual;
+        //  число фиксированных колонок (по умолчанию = 1)
+        function GetFixedRows: longint; virtual;
+        //  число фиксированных строк (по умолчанию = 1)
+        function GetColNumFixed: boolean; virtual;  //  (по умолчанию = False)
+        function GetRowNumFixed: boolean; virtual;  //  (по умолчанию = False)
 
-        function GetColWidth(const Col: LongInt): LongInt;
-        procedure SaveColWidth(const Col, Width: LongInt);
-        function GetRowHeight(const Row: LongInt): LongInt;
-        procedure SaveRowHeight(const Row, Height: LongInt);
-        function AutoWidths: Boolean;
-        function AutoHeights: Boolean;
+        function GetColWidth(const Col: longint): longint;
+        procedure SaveColWidth(const Col, Width: longint);
+        function GetRowHeight(const Row: longint): longint;
+        procedure SaveRowHeight(const Row, Height: longint);
+        function AutoWidths: boolean;
+        function AutoHeights: boolean;
 
         function GetSelection: TGridRect;
         procedure SaveSelection(const Selection: TGridRect);
-        function GetCol: LongInt;       //  номер текущей выбранной колонки
-        procedure SaveCol(const Col: LongInt);
-        function GetRow: LongInt;       //  номер текущей выбранной строки
-        procedure SaveRow(const Row: LongInt);
-        function GetLeftCol: LongInt;
-        procedure SaveLeftCol(const LeftCol: LongInt);
-        function GetTopRow: LongInt;
-        procedure SaveTopRow(const TopRow: LongInt);
+        function GetCol: longint;       //  номер текущей выбранной колонки
+        procedure SaveCol(const Col: longint);
+        function GetRow: longint;       //  номер текущей выбранной строки
+        procedure SaveRow(const Row: longint);
+        function GetLeftCol: longint;
+        procedure SaveLeftCol(const LeftCol: longint);
+        function GetTopRow: longint;
+        procedure SaveTopRow(const TopRow: longint);
 
-        property SavedCol: LongInt
-            read GetCol                 write SaveCol;
-        property SavedRow: LongInt
-            read GetRow                 write SaveRow;
-        property SavedLeftCol: LongInt
-            read GetLeftCol             write SaveLeftCol;
-        property SavedTopRow: LongInt
-            read GetTopRow              write SaveTopRow;
-        property SavedSelection: TGridRect
-            read GetSelection           write SaveSelection;
+        property SavedCol: longint read GetCol write SaveCol;
+        property SavedRow: longint read GetRow write SaveRow;
+        property SavedLeftCol: longint read GetLeftCol write SaveLeftCol;
+        property SavedTopRow: longint read GetTopRow write SaveTopRow;
+        property SavedSelection: TGridRect read GetSelection write SaveSelection;
 
-        property Caption: string
-            read FCaption               write FCaption;
+        property Caption: string read FCaption write FCaption;
     end;
 
     ERowCompList = class(Exception);
@@ -254,56 +243,54 @@ type
         //  нужно сделать соответствующие изменения
     protected
         function CreateNewObject: TComponent; virtual; abstract;
-            //  создает новый компонент, который будет
-            //  представлять строку таблицы
+        //  создает новый компонент, который будет
+        //  представлять строку таблицы
 
     public
         //  для правильной работы функций необходимо, чтобы число
         //  строк в информационной части таблицы было равно числу
         //  элементов в списке
-        function GetDataFromGrid(Grid: TStringGrid): Boolean; override;
+        function GetDataFromGrid(Grid: TStringGrid): boolean; override;
         procedure SetDataToGrid(Grid: TStringGrid); override;
 
-        function Add(Item: TComponent): Integer; override;
-        procedure Delete(Index: Integer); override;
-        procedure Insert(Index: Integer; Item: TComponent); override;
+        function Add(Item: TComponent): integer; override;
+        procedure Delete(Index: integer); override;
+        procedure Insert(Index: integer; Item: TComponent); override;
 
-        procedure BeforeStringToValue(const ACol, ARow: Integer;
-            //  проверяет правильность индексов и в случае ошибки
-            //  вызывает исключение; если список пустой добавляет
-            //  объект - строку; !!! нужно обязательно вызывать
-            //  в классах - наследниках !!!
+        procedure BeforeStringToValue(const ACol, ARow: integer;
+        //  проверяет правильность индексов и в случае ошибки
+        //  вызывает исключение; если список пустой добавляет
+        //  объект - строку; !!! нужно обязательно вызывать
+        //  в классах - наследниках !!!
             const AString: string); override;
 
-        function MayIDoInsertRows(StartRow, RowsCount: LongInt): Boolean; override;
-        function MayIDoDeleteRows(StartRow, RowsCount: LongInt): Boolean; override;
-        function MayIDoAddRow: Boolean; override;
+        function MayIDoInsertRows(StartRow, RowsCount: longint): boolean; override;
+        function MayIDoDeleteRows(StartRow, RowsCount: longint): boolean; override;
+        function MayIDoAddRow: boolean; override;
 
-        function MayIDoDeleteAllData: Boolean; override;
-        function MayIDoClearAllCells: Boolean; override;
-        function MayIDoClearSelectedArea: Boolean; override;
+        function MayIDoDeleteAllData: boolean; override;
+        function MayIDoClearAllCells: boolean; override;
+        function MayIDoClearSelectedArea: boolean; override;
 
         procedure SetRowContents(
-            //  заполняет строку таблицы с номером RowNum
-            Grid: TStringGrid; RowNum: LongInt); virtual; abstract;
+        //  заполняет строку таблицы с номером RowNum
+            Grid: TStringGrid; RowNum: longint); virtual; abstract;
         function GetRowContents(
-            //  сохраняет содержимое строки с номером RowNum
-            Grid: TStringGrid; RowNum: LongInt): Boolean; virtual; abstract;
+        //  сохраняет содержимое строки с номером RowNum
+            Grid: TStringGrid; RowNum: longint): boolean; virtual; abstract;
 
-        procedure RowsDeleted(
-            const StartRow, RowsCount: LongInt); override;
-        procedure RowsInserted(
-            const StartRow, RowsCount: LongInt); override;
+        procedure RowsDeleted(const StartRow, RowsCount: longint); override;
+        procedure RowsInserted(const StartRow, RowsCount: longint); override;
         procedure RowAdded; override;
 
         procedure AllDataDeleted; override;
-        function IsDataSourceEmpty: Boolean; override;
+        function IsDataSourceEmpty: boolean; override;
 
-        function GetInfoRows: LongInt; override;
-            //  минимально возможное число строк = Fixed + 1
-            //  для обеспечения возможности ввода
-        function GetColNumFixed: Boolean; override;
-            //  число колонок фиксировано
+        function GetInfoRows: longint; override;
+        //  минимально возможное число строк = Fixed + 1
+        //  для обеспечения возможности ввода
+        function GetColNumFixed: boolean; override;
+        //  число колонок фиксировано
     end;
 
     TColCompList = class(TTableCompList)
@@ -314,56 +301,56 @@ type
         //  нужно сделать соответствующие изменения
     protected
         function CreateNewObject: TComponent; virtual; abstract;
-            //  создает новый компонент, который будет
-            //  представлять столбец таблицы
+        //  создает новый компонент, который будет
+        //  представлять столбец таблицы
 
     public
         //  для правильной работы функций необходимо, чтобы число
         //  колонок в информационной части таблицы было равно числу
         //  элементов в списке
-        function GetDataFromGrid(Grid: TStringGrid): Boolean; override;
+        function GetDataFromGrid(Grid: TStringGrid): boolean; override;
         procedure SetDataToGrid(Grid: TStringGrid); override;
 
-        function Add(Item: TComponent): Integer; override;
-        procedure Delete(Index: Integer); override;
-        procedure Insert(Index: Integer; Item: TComponent); override;
+        function Add(Item: TComponent): integer; override;
+        procedure Delete(Index: integer); override;
+        procedure Insert(Index: integer; Item: TComponent); override;
 
-        procedure BeforeStringToValue(const ACol, ARow: LongInt;
-            //  проверяет правильность индексов и в случае ошибки
-            //  вызывает исключение; если список пустой добавляет
-            //  объект - столбец; !!! нужно обязательно вызывать
-            //  в классах - наследниках !!!
+        procedure BeforeStringToValue(const ACol, ARow: longint;
+        //  проверяет правильность индексов и в случае ошибки
+        //  вызывает исключение; если список пустой добавляет
+        //  объект - столбец; !!! нужно обязательно вызывать
+        //  в классах - наследниках !!!
             const AString: string); override;
 
-        function MayIDoInsertColumns(StartCol, ColsCount: LongInt): Boolean; override;
-        function MayIDoDeleteColumns(StartCol, ColsCount: LongInt): Boolean; override;
-        function MayIDoAddColumn: Boolean; override;
+        function MayIDoInsertColumns(StartCol, ColsCount: longint): boolean; override;
+        function MayIDoDeleteColumns(StartCol, ColsCount: longint): boolean; override;
+        function MayIDoAddColumn: boolean; override;
 
-        function MayIDoDeleteAllData: Boolean; override;
-        function MayIDoClearSelectedArea: Boolean; override;
-        function MayIDoClearAllCells: Boolean; override;
+        function MayIDoDeleteAllData: boolean; override;
+        function MayIDoClearSelectedArea: boolean; override;
+        function MayIDoClearAllCells: boolean; override;
 
         procedure SetColContents(
-            //  заполняет столбец таблицы с номером ColNum
-            Grid: TStringGrid; ColNum: LongInt); virtual; abstract;
+        //  заполняет столбец таблицы с номером ColNum
+            Grid: TStringGrid; ColNum: longint); virtual; abstract;
         function GetColContents(
-            //  сохраняет содержимое столбца с номером ColNum
-            Grid: TStringGrid; ColNum: LongInt): Boolean; virtual; abstract;
+        //  сохраняет содержимое столбца с номером ColNum
+            Grid: TStringGrid; ColNum: longint): boolean; virtual; abstract;
 
-        procedure ColumnsDeleted(
-            const StartCol, ColsCount: LongInt); override;
-        procedure ColumnsInserted(
-            const StartCol, ColsCount: LongInt); override;
+        procedure ColumnsDeleted(const StartCol, ColsCount: longint);
+            override;
+        procedure ColumnsInserted(const StartCol, ColsCount: longint);
+            override;
         procedure ColumnAdded; override;
 
         procedure AllDataDeleted; override;
-        function IsDataSourceEmpty: Boolean; override;
+        function IsDataSourceEmpty: boolean; override;
 
-        function GetInfoCols: LongInt; override;
-            //  минимально возможное число колонок = Fixed + 1
-            //  для обеспечения возможности ввода
-        function GetRowNumFixed: Boolean; override;
-            //  число строк всегда фиксировано
+        function GetInfoCols: longint; override;
+        //  минимально возможное число колонок = Fixed + 1
+        //  для обеспечения возможности ввода
+        function GetRowNumFixed: boolean; override;
+        //  число строк всегда фиксировано
     end;
 
     TIconicCompList = class(TTableCompList)
@@ -378,25 +365,25 @@ constructor TTableCompList.Create;
 begin
     inherited Create(AOwner);
 
-    FSavedCol := GetFixedCols;
-    FSavedRow := GetFixedRows;
+    FSavedCol     := GetFixedCols;
+    FSavedRow     := GetFixedRows;
     FSavedLeftCol := FSavedCol;
-    FSavedTopRow := FSavedRow;
+    FSavedTopRow  := FSavedRow;
     with FSavedSelection do
     begin
-        Left := FSavedCol;
-        Top := FSavedRow;
-        Right := FSavedCol;
-        Bottom := FSavedRow;        
+        Left   := FSavedCol;
+        Top    := FSavedRow;
+        Right  := FSavedCol;
+        Bottom := FSavedRow;
     end;
 end;
 
 destructor TTableCompList.Destroy;
 begin
-    Destroying := True;
-    Finalize(SavedColWidths);
-    Finalize(SavedrowHeights);
-    inherited Destroy;
+    FDestroying := True;
+    Finalize(FSavedColWidths);
+    Finalize(FSavedRowHeights);
+    inherited;
 end;
 
 procedure TTableCompList.GridAssign(Grid: TStringGrid);
@@ -426,16 +413,16 @@ begin
         FixedRows := GetFixedRows;
 
         LeftCol := GetLeftCol;
-        TopRow := GetTopRow;
-        Col := GetCol;
-        Row := GetRow;
+        TopRow  := GetTopRow;
+        Col     := GetCol;
+        Row     := GetRow;
 
-        Selection := GetSelection;
+        Selection  := GetSelection;
         EditorMode := False;
 
         Options := StaticOptions;
-            //  "по умолчанию", когда данные устанавливаются в сетку
-            //  по активности источника ввод в таблицу запрещен
+        //  "по умолчанию", когда данные устанавливаются в сетку
+        //  по активности источника ввод в таблицу запрещен
     end;    //  with Grid do...
 
     //  все операции с ячейками должны быть
@@ -450,37 +437,45 @@ begin
     //  нумеровать строки, если над ней производятся операции,
     //  поэтому лучше использовать способ таблицы для нумерации
     if Grid is TColorStringGrid then
-        with Grid as TColorStringGrid do EnumerateRows;
+        with Grid as TColorStringGrid do
+            EnumerateRows;
 
     if Grid is TIDAGrid then
-        with Grid as TIDAGrid do Changeable := False;
+        with Grid as TIDAGrid do
+            Changeable := False;
     //  по умолчанию ввод текста в ячейки запрещен
 
     if Grid is TDataGrid then
-        with Grid as TDataGrid do ShowTable;
+        with Grid as TDataGrid do
+            ShowTable;
 
     SetDataToGrid(Grid);    //  первый раз должна выполняться до
-                            //  установки высоты и ширины ячеек
+    //  установки высоты и ширины ячеек
 
     SetColWidths(Grid);
     SetRowHeights(Grid);
 end;
 
 procedure TTableCompList.SetColWidths(Grid: TStringGrid);
-var i: LongInt;
+var
+    i: longint;
 begin
-    if (Grid is TIDAGrid) and (not WidthsSaved) then
-        with Grid as TIDAGrid do AutoColWidths
+    if (Grid is TIDAGrid) and (not FWidthsSaved) then
+        with Grid as TIDAGrid do
+            AutoColWidths
     else
         with Grid do
-            for i := 0 to ColCount - 1 do ColWidths[i] := GetColWidth(i);
+            for i := 0 to ColCount - 1 do
+                ColWidths[i] := GetColWidth(i);
 end;
 
 procedure TTableCompList.GetColWidths(Grid: TStringGrid);
-var i: LongInt;
+var
+    i: longint;
 begin
     with Grid do
-        for i := 0 to ColCount - 1 do SaveColWidth(i, ColWidths[i]);
+        for i := 0 to ColCount - 1 do
+            SaveColWidth(i, ColWidths[i]);
 end;
 
 procedure TTableCompList.GridRelease(Grid: TStringGrid);
@@ -498,87 +493,93 @@ begin
         SaveSelection(Selection);
     end;
 
-    SettingsSaved := True;
+    FSettingsSaved := True;
 end;
 
 { TRowCompList }
 
 procedure TRowCompList.AllDataDeleted;
 begin
-    if not (Count = 0) then Clear;
+    if not (Count = 0) then
+        Clear;
 end;
 
-function TRowCompList.GetColNumFixed: Boolean;
+function TRowCompList.GetColNumFixed: boolean;
 begin
     Result := True;
 end;
 
-function TRowCompList.GetDataFromGrid(Grid: TStringGrid): Boolean;
-var i: LongInt;
+function TRowCompList.GetDataFromGrid(Grid: TStringGrid): boolean;
+var
+    i: longint;
 begin
     //  !!! не должно быть очистки списка, поскольку
     //  GetRowContents не создает новые объекты !!!
     Result := True;
     with Grid do
         for i := FixedRows to RowCount - 1 do
-            if not GetRowContents(Grid, i) then Result := False;
+            if not GetRowContents(Grid, i) then
+                Result := False;
 end;
 
-function TRowCompList.GetInfoRows: LongInt;
+function TRowCompList.GetInfoRows: longint;
 begin
-    if Count <> 0 then Result := Count
-    else Result := 1;
+    if Count <> 0 then
+        Result := Count
+    else
+        Result := 1;
 end;
 
-function TRowCompList.IsDataSourceEmpty: Boolean;
+function TRowCompList.IsDataSourceEmpty: boolean;
 begin
     Result := Count = 0;
 end;
 
-function TRowCompList.MayIDoAddRow: Boolean;
+function TRowCompList.MayIDoAddRow: boolean;
 begin
     Result := True;
 end;
 
-function TRowCompList.MayIDoClearAllCells: Boolean;
+function TRowCompList.MayIDoClearAllCells: boolean;
 begin
     Result := True;
 end;
 
-function TRowCompList.MayIDoClearSelectedArea: Boolean;
+function TRowCompList.MayIDoClearSelectedArea: boolean;
 begin
     Result := True;
 end;
 
-function TRowCompList.MayIDoDeleteAllData: Boolean;
+function TRowCompList.MayIDoDeleteAllData: boolean;
 begin
     Result := True;
 end;
 
 {$hints off}
-function TRowCompList.MayIDoDeleteRows(StartRow,
-    RowsCount: Integer): Boolean;
+function TRowCompList.MayIDoDeleteRows(StartRow, RowsCount: integer): boolean;
 begin
     Result := True;
 end;
 
-function TRowCompList.MayIDoInsertRows(StartRow,
-    RowsCount: Integer): Boolean;
+function TRowCompList.MayIDoInsertRows(StartRow, RowsCount: integer): boolean;
 begin
     Result := True;
 end;
+
 {$hints on}
 
 procedure TRowCompList.RowAdded;
 begin
-    if Count = 0 then Add(CreateNewObject);
-        //  в пустой объект добавляется строка
+    if Count = 0 then
+        Add(CreateNewObject);
+    //  в пустой объект добавляется строка
     Add(CreateNewObject);
 end;
 
-procedure TRowCompList.RowsDeleted(const StartRow, RowsCount: Integer);
-var i: LongInt;
-    First, Last: LongInt;
+procedure TRowCompList.RowsDeleted(const StartRow, RowsCount: integer);
+var
+    i: longint;
+    First, Last: longint;
 begin
     //  удаление элементов при пустом списке не должно
     //  вызывать исключения, так как пользователь, в
@@ -587,7 +588,7 @@ begin
     //  просто ничего не нужно делать
     if not (Count = 0) then
     begin
-        Last := StartRow - GetFixedRows + RowsCount - 1;
+        Last  := StartRow - GetFixedRows + RowsCount - 1;
         First := StartRow - GetFixedRows;
         if (First < 0) or (Last > Count - 1) then
             raise ERowCompList.Create('Invalid deleting parameters...');
@@ -600,104 +601,120 @@ begin
     end;
 end;
 
-procedure TRowCompList.RowsInserted(const StartRow, RowsCount: Integer);
-var i: LongInt;
-    First: LongInt;
+procedure TRowCompList.RowsInserted(const StartRow, RowsCount: integer);
+var
+    i:     longint;
+    First: longint;
 begin
     First := StartRow - GetFixedRows;
-    if Count = 0 then Add(CreateNewObject);
-        //  в пустой объект добавляется строка - сначала нужно
-        //  добавить, а уже потом проверять
+    if Count = 0 then
+        Add(CreateNewObject);
+    //  в пустой объект добавляется строка - сначала нужно
+    //  добавить, а уже потом проверять
 
     if (First < 0) or (First > Count - 1) then
         raise ERowCompList.Create('Invalid insertion parameters...');
 
-    for i := 1 to RowsCount do Insert(First, CreateNewObject);
+    for i := 1 to RowsCount do
+        Insert(First, CreateNewObject);
 end;
 
 {$hints off}
-procedure TRowCompList.BeforeStringToValue(const ACol, ARow: Integer;
+procedure TRowCompList.BeforeStringToValue(const ACol, ARow: integer;
     const AString: string);
 begin
     CheckColIndex(ACol);
     CheckRowIndex(ARow);
-    
-    if Count = 0 then Add(CreateNewObject);
-        //  в пустой объект добавляется строка
+
+    if Count = 0 then
+        Add(CreateNewObject);
+    //  в пустой объект добавляется строка
 end;
+
 {$hints on}
 
-function TRowCompList.Add(Item: TComponent): Integer;
-var Flag: Boolean;
+function TRowCompList.Add(Item: TComponent): integer;
+var
+    Flag: boolean;
 begin
-    Flag := Count = 0;
+    Flag   := Count = 0;
     Result := inherited Add(Item);  //  список уже не пуст !!!
-    if AreRowHeightsReady and not Flag then AddRowHeightItem;
-        //  должна вызываться последней, чтобы проверка
-        //  индексов дала правильные результаты; для
-        //  пустого объекта Add вызывается дважды,
-        //  поэтому первый раз нужно пропустить
+    if FAreRowHeightsReady and not Flag then
+        AddRowHeightItem;
+    //  должна вызываться последней, чтобы проверка
+    //  индексов дала правильные результаты; для
+    //  пустого объекта Add вызывается дважды,
+    //  поэтому первый раз нужно пропустить
 end;
 
-procedure TRowCompList.Delete(Index: Integer);
+procedure TRowCompList.Delete(Index: integer);
 begin
-    if (not Destroying) and AreRowHeightsReady then
+    if (not FDestroying) and FAreRowHeightsReady then
         DeleteRowHeightItem(Index);
-        //  должна вызываться первой, чтобы проверка
-        //  индексов дала правильные результаты
+    //  должна вызываться первой, чтобы проверка
+    //  индексов дала правильные результаты
     inherited;  //  число элементов в списке изменилось
-    if (not Destroying) and
-        (Count = 0) and AreRowHeightsReady then AddRowHeightItem;
-        //  если удалены все данные нужно добавить один
-        //  элемент на пустую строку
+    if (not FDestroying) and (Count = 0) and FAreRowHeightsReady then
+        AddRowHeightItem;
+    //  если удалены все данные нужно добавить один
+    //  элемент на пустую строку
 end;
 
-procedure TRowCompList.Insert(Index: Integer; Item: TComponent);
-var Flag: Boolean;
+procedure TRowCompList.Insert(Index: integer; Item: TComponent);
+var
+    Flag: boolean;
 begin
     Flag := Count = 0;
     inherited;
-    if AreRowHeightsReady and not Flag then InsertRowHeightItem(Index);
-        //  должна вызываться последней, чтобы проверка
-        //  индексов дала правильные результаты
+    if FAreRowHeightsReady and not Flag then
+        InsertRowHeightItem(Index);
+    //  должна вызываться последней, чтобы проверка
+    //  индексов дала правильные результаты
 end;
 
 procedure TRowCompList.SetDataToGrid(Grid: TStringGrid);
-var i: LongInt;
+var
+    i: longint;
 begin
     with Grid do
-        for i := FixedRows to RowCount - 1 do SetRowContents(Grid, i);
+        for i := FixedRows to RowCount - 1 do
+            SetRowContents(Grid, i);
 end;
 
 { TColCompList }
 
-function TColCompList.Add(Item: TComponent): Integer;
-var Flag: Boolean;
+function TColCompList.Add(Item: TComponent): integer;
+var
+    Flag: boolean;
 begin
-    Flag := Count = 0;
+    Flag   := Count = 0;
     Result := inherited Add(Item);  //  список уже не пуст !!!
-    if AreColWidthsReady and not Flag then AddColWidthItem;
-        //  должна вызываться последней, чтобы проверка
-        //  индексов дала правильные результаты; для
-        //  пустого объекта Add вызывается дважды,
-        //  поэтому первый раз нужно пропустить
+    if FAreColWidthsReady and not Flag then
+        AddColWidthItem;
+    //  должна вызываться последней, чтобы проверка
+    //  индексов дала правильные результаты; для
+    //  пустого объекта Add вызывается дважды,
+    //  поэтому первый раз нужно пропустить
 end;
 
 procedure TColCompList.AllDataDeleted;
 begin
-    if not (Count = 0) then Clear;
+    if not (Count = 0) then
+        Clear;
 end;
 
 procedure TColCompList.ColumnAdded;
 begin
-    if Count = 0 then Add(CreateNewObject);
-        //  в пустой объект добавляется столбец
+    if Count = 0 then
+        Add(CreateNewObject);
+    //  в пустой объект добавляется столбец
     Add(CreateNewObject);
 end;
 
-procedure TColCompList.ColumnsDeleted(const StartCol, ColsCount: Integer);
-var i: LongInt;
-    First, Last: LongInt;
+procedure TColCompList.ColumnsDeleted(const StartCol, ColsCount: integer);
+var
+    i: longint;
+    First, Last: longint;
 begin
     //  удаление элементов при пустом списке не должно
     //  вызывать исключения, так как пользователь, в
@@ -706,7 +723,7 @@ begin
     //  просто ничего не нужно делать
     if not (Count = 0) then
     begin
-        Last := StartCol - GetFixedCols + ColsCount - 1;
+        Last  := StartCol - GetFixedCols + ColsCount - 1;
         First := StartCol - GetFixedCols;
         if (First < 0) or (Last > Self.Count - 1) then
             raise EColCompList.Create('Invalid deleting parameters...');
@@ -719,138 +736,149 @@ begin
     end;
 end;
 
-procedure TColCompList.ColumnsInserted(const StartCol, ColsCount: Integer);
-var i: LongInt;
-    First: LongInt;
+procedure TColCompList.ColumnsInserted(const StartCol, ColsCount: integer);
+var
+    i:     longint;
+    First: longint;
 begin
     First := StartCol - GetFixedCols;
-    if Count = 0 then Add(CreateNewObject);
-        //  в пустой объект добавляется столбец - сначала нужно
-        //  добавить, а уже потом проверять
+    if Count = 0 then
+        Add(CreateNewObject);
+    //  в пустой объект добавляется столбец - сначала нужно
+    //  добавить, а уже потом проверять
 
     if (First < 0) or (First > Self.Count - 1) then
         raise EColCompList.Create('Invalid insertion parameters...');
 
-    for i := 1 to ColsCount do Insert(First, CreateNewObject);
+    for i := 1 to ColsCount do
+        Insert(First, CreateNewObject);
 end;
 
-procedure TColCompList.Delete(Index: Integer);
+procedure TColCompList.Delete(Index: integer);
 begin
-    if (not Destroying) and AreColWidthsReady then
+    if (not FDestroying) and FAreColWidthsReady then
         DeleteColWidthItem(Index);
-            //  должна вызываться первой, чтобы проверка
-            //  индексов дала правильные результаты
+    //  должна вызываться первой, чтобы проверка
+    //  индексов дала правильные результаты
     inherited;  //  число элементов в списке изменилось
-    if (not Destroying) and
-        (Count = 0) and AreColWidthsReady then AddColWidthItem;
-        //  если удалены все данные нужно добавить один
-        //  элемент на пустой столбец
+    if (not FDestroying) and (Count = 0) and FAreColWidthsReady then
+        AddColWidthItem;
+    //  если удалены все данные нужно добавить один
+    //  элемент на пустой столбец
 end;
 
-function TColCompList.GetDataFromGrid(Grid: TStringGrid): Boolean;
-var i: LongInt;
+function TColCompList.GetDataFromGrid(Grid: TStringGrid): boolean;
+var
+    i: longint;
 begin
     Result := True;
     with Grid do
         for i := FixedCols to ColCount - 1 do
-            if not GetColContents(Grid, i) then Result := False;
+            if not GetColContents(Grid, i) then
+                Result := False;
 end;
 
-function TColCompList.GetInfoCols: LongInt;
+function TColCompList.GetInfoCols: longint;
 begin
-    if Count <> 0 then Result := Count
-    else Result := 1;
+    if Count <> 0 then
+        Result := Count
+    else
+        Result := 1;
 end;
 
-function TColCompList.GetRowNumFixed: Boolean;
+function TColCompList.GetRowNumFixed: boolean;
 begin
     Result := True;
 end;
 
-procedure TColCompList.Insert(Index: Integer; Item: TComponent);
-var Flag: Boolean;
+procedure TColCompList.Insert(Index: integer; Item: TComponent);
+var
+    Flag: boolean;
 begin
     Flag := Count = 0;
     inherited;
-    if AreColWidthsReady and not Flag then InsertColWidthItem(Index);
-        //  должна вызываться последней, чтобы проверка
-        //  индексов дала правильные результаты
+    if FAreColWidthsReady and not Flag then
+        InsertColWidthItem(Index);
+    //  должна вызываться последней, чтобы проверка
+    //  индексов дала правильные результаты
 end;
 
-function TColCompList.IsDataSourceEmpty: Boolean;
+function TColCompList.IsDataSourceEmpty: boolean;
 begin
     Result := Count = 0;
 end;
 
-function TColCompList.MayIDoAddColumn: Boolean;
+function TColCompList.MayIDoAddColumn: boolean;
 begin
     Result := True;
 end;
 
-function TColCompList.MayIDoClearAllCells: Boolean;
+function TColCompList.MayIDoClearAllCells: boolean;
 begin
     Result := True;
 end;
 
-function TColCompList.MayIDoClearSelectedArea: Boolean;
+function TColCompList.MayIDoClearSelectedArea: boolean;
 begin
     Result := True;
 end;
 
-function TColCompList.MayIDoDeleteAllData: Boolean;
+function TColCompList.MayIDoDeleteAllData: boolean;
 begin
     Result := True;
 end;
 
 {$hints off}
-function TColCompList.MayIDoDeleteColumns(StartCol,
-    ColsCount: Integer): Boolean;
+function TColCompList.MayIDoDeleteColumns(StartCol, ColsCount: integer): boolean;
 begin
     Result := True;
 end;
 
-function TColCompList.MayIDoInsertColumns(StartCol,
-    ColsCount: Integer): Boolean;
+function TColCompList.MayIDoInsertColumns(StartCol, ColsCount: integer): boolean;
 begin
     Result := True;
 end;
+
 {$hints on}
 
 procedure TColCompList.SetDataToGrid(Grid: TStringGrid);
-var i: LongInt;
+var
+    i: longint;
 begin
     with Grid do
-        for i := FixedCols to ColCount - 1 do SetColContents(Grid, i);
+        for i := FixedCols to ColCount - 1 do
+            SetColContents(Grid, i);
 end;
 
 {$hints off}
-procedure TColCompList.BeforeStringToValue(const ACol, ARow: Integer;
+procedure TColCompList.BeforeStringToValue(const ACol, ARow: integer;
     const AString: string);
 begin
     CheckColIndex(ACol);
     CheckRowIndex(ARow);
-    
-    if Count = 0 then Add(CreateNewObject);
-        //  в пустой объект добавляется столбец
+
+    if Count = 0 then
+        Add(CreateNewObject);
+    //  в пустой объект добавляется столбец
 end;
 
-function TTableCompList.GetCellColor(const ACol, ARow: Integer;
-    var Color: TColor): Boolean;
+function TTableCompList.GetCellColor(const ACol, ARow: integer;
+    var Color: TColor): boolean;
 begin
-    Color := clDefault;
+    Color  := clDefault;
     Result := False;
 end;
 
-function TTableCompList.GetCellEditMask(
-    const ACol, ARow: LongInt): string;
+function TTableCompList.GetCellEditMask(const ACol, ARow: longint): string;
 begin
     Result := '';
 end;
 
-function TTableCompList.IsCellDisabled(const ACol, ARow: Integer): Boolean;
+function TTableCompList.IsCellDisabled(const ACol, ARow: integer): boolean;
 begin
     Result := False;
 end;
+
 {$hints on}
 
 procedure TTableCompList.AllDataDeleted;
@@ -864,17 +892,16 @@ begin
 end;
 
 {$hints off}
-procedure TTableCompList.ColumnsDeleted(const StartCol,
-    ColsCount: Integer);
+procedure TTableCompList.ColumnsDeleted(const StartCol, ColsCount: integer);
 begin
     raise ETableCompList.Create('Columns deleting is impossible...');
 end;
 
-procedure TTableCompList.ColumnsInserted(const StartCol,
-    ColsCount: Integer);
+procedure TTableCompList.ColumnsInserted(const StartCol, ColsCount: integer);
 begin
     raise ETableCompList.Create('Columns insertion is impossible...');
 end;
+
 {$hints on}
 
 procedure TTableCompList.RowAdded;
@@ -883,104 +910,102 @@ begin
 end;
 
 {$hints off}
-procedure TTableCompList.RowsDeleted(const StartRow, RowsCount: Integer);
+procedure TTableCompList.RowsDeleted(const StartRow, RowsCount: integer);
 begin
     raise ETableCompList.Create('Row deleting is impossible...');
 end;
 
-procedure TTableCompList.RowsInserted(const StartRow, RowsCount: Integer);
+procedure TTableCompList.RowsInserted(const StartRow, RowsCount: integer);
 begin
     raise ETableCompList.Create('Row insertion is impossible...');
 end;
+
 {$hints on}
 
-function TTableCompList.MayIDoAddColumn: Boolean;
+function TTableCompList.MayIDoAddColumn: boolean;
 begin
     Result := False;
 end;
 
-function TTableCompList.MayIDoAddRow: Boolean;
+function TTableCompList.MayIDoAddRow: boolean;
 begin
     Result := False;
 end;
 
-function TTableCompList.MayIDoClearAllCells: Boolean;
+function TTableCompList.MayIDoClearAllCells: boolean;
 begin
     Result := False;
 end;
 
-function TTableCompList.MayIDoClearSelectedArea: Boolean;
+function TTableCompList.MayIDoClearSelectedArea: boolean;
 begin
     Result := False;
 end;
 
-function TTableCompList.MayIDoDeleteAllData: Boolean;
+function TTableCompList.MayIDoDeleteAllData: boolean;
 begin
     Result := False;
 end;
 
 {$hints off}
-function TTableCompList.MayIDoDeleteColumns(StartCol,
-    ColsCount: Integer): Boolean;
+function TTableCompList.MayIDoDeleteColumns(StartCol, ColsCount: integer): boolean;
 begin
     Result := False;
 end;
 
-function TTableCompList.MayIDoDeleteRows(StartRow,
-    RowsCount: Integer): Boolean;
+function TTableCompList.MayIDoDeleteRows(StartRow, RowsCount: integer): boolean;
 begin
     Result := False;
 end;
 
-function TTableCompList.MayIDoInsertColumns(StartCol,
-    ColsCount: Integer): Boolean;
+function TTableCompList.MayIDoInsertColumns(StartCol, ColsCount: integer): boolean;
 begin
     Result := False;
 end;
 
-function TTableCompList.MayIDoInsertRows(StartRow,
-    RowsCount: Integer): Boolean;
+function TTableCompList.MayIDoInsertRows(StartRow, RowsCount: integer): boolean;
 begin
     Result := False;
 end;
+
 {$hints on}
 
-function TTableCompList.GetColNumFixed: Boolean;
+function TTableCompList.GetColNumFixed: boolean;
 begin
     Result := False;
 end;
 
-function TTableCompList.GetFixedCols: LongInt;
+function TTableCompList.GetFixedCols: longint;
 begin
     Result := 1;
 end;
 
-function TTableCompList.GetFixedRows: LongInt;
+function TTableCompList.GetFixedRows: longint;
 begin
     Result := 1;
 end;
 
-function TTableCompList.GetRowNumFixed: Boolean;
+function TTableCompList.GetRowNumFixed: boolean;
 begin
     Result := False;
 end;
 
-function TTableCompList.GetColCount: LongInt;
+function TTableCompList.GetColCount: longint;
 begin
     Result := GetInfoCols + GetFixedCols;
 end;
 
-function TTableCompList.GetRowCount: LongInt;
+function TTableCompList.GetRowCount: longint;
 begin
     Result := GetInfoRows + GetFixedRows;
 end;
 
-function TTableCompList.GetCol: LongInt;
+function TTableCompList.GetCol: longint;
 begin
     Result := FSavedCol;
 end;
 
-function TTableCompList.GetColWidth(const Col: Integer): LongInt;
+function TTableCompList.GetColWidth(const Col: integer): longint;
 begin
     CheckColIndex(Col);
     InitColWidths;
@@ -989,20 +1014,20 @@ begin
     //  удобно делать инициализацию в конструкторе,
     //  например, когда число колонок неизвестно
     //  на этапе создания объекта
-    Result := SavedColWidths[Col];
+    Result := FSavedColWidths[Col];
 end;
 
-function TTableCompList.GetLeftCol: LongInt;
+function TTableCompList.GetLeftCol: longint;
 begin
     Result := FSavedLeftCol;
 end;
 
-function TTableCompList.GetRow: LongInt;
+function TTableCompList.GetRow: longint;
 begin
     Result := FSavedRow;
 end;
 
-function TTableCompList.GetRowHeight(const Row: Integer): LongInt;
+function TTableCompList.GetRowHeight(const Row: integer): longint;
 begin
     CheckRowIndex(Row);
     InitRowHeights;
@@ -1011,7 +1036,7 @@ begin
     //  удобно делать инициализацию в конструкторе,
     //  например, когда число строк неизвестно
     //  на этапе создания объекта
-    Result := SavedRowHeights[Row];
+    Result := FSavedRowHeights[Row];
 end;
 
 function TTableCompList.GetSelection: TGridRect;
@@ -1019,17 +1044,17 @@ begin
     Result := FSavedSelection;
 end;
 
-function TTableCompList.GetTopRow: LongInt;
+function TTableCompList.GetTopRow: longint;
 begin
     Result := FSavedTopRow;
 end;
 
-procedure TTableCompList.SaveCol(const Col: Integer);
+procedure TTableCompList.SaveCol(const Col: integer);
 begin
     FSavedCol := Col;
 end;
 
-procedure TTableCompList.SaveColWidth(const Col, Width: Integer);
+procedure TTableCompList.SaveColWidth(const Col, Width: integer);
 begin
     CheckColIndex(Col);
     InitColWidths;
@@ -1038,21 +1063,21 @@ begin
     //  удобно делать инициализацию в конструкторе,
     //  например, когда число колонок неизвестно
     //  на этапе создания объекта
-    SavedColWidths[Col] := Width;
-    WidthsSaved := True;
+    FSavedColWidths[Col] := Width;
+    FWidthsSaved := True;
 end;
 
-procedure TTableCompList.SaveLeftCol(const LeftCol: Integer);
+procedure TTableCompList.SaveLeftCol(const LeftCol: integer);
 begin
     FSavedLeftCol := LeftCol;
 end;
 
-procedure TTableCompList.SaveRow(const Row: Integer);
+procedure TTableCompList.SaveRow(const Row: integer);
 begin
     FSavedRow := Row;
 end;
 
-procedure TTableCompList.SaveRowHeight(const Row, Height: Integer);
+procedure TTableCompList.SaveRowHeight(const Row, Height: integer);
 begin
     CheckRowIndex(Row);
     InitRowHeights;
@@ -1061,8 +1086,8 @@ begin
     //  удобно делать инициализацию в конструкторе,
     //  например, когда число строк неизвестно
     //  на этапе создания объекта
-    SavedRowHeights[Row] := Height;
-    HeightsSaved := True;
+    FSavedRowHeights[Row] := Height;
+    FHeightsSaved := True;
 end;
 
 procedure TTableCompList.SaveSelection(const Selection: TGridRect);
@@ -1070,60 +1095,60 @@ begin
     FSavedSelection := Selection;
 end;
 
-procedure TTableCompList.SaveTopRow(const TopRow: Integer);
+procedure TTableCompList.SaveTopRow(const TopRow: integer);
 begin
     FSavedTopRow := TopRow;
 end;
 
 procedure TTableCompList.AddColWidthItem;
 begin
-    CheckColIndex(Length(SavedColWidths)(* - 1 + 1*));
-    AddItemLongArr(SavedColWidths,
-        GetColWidthByDefault(Length(SavedColWidths)(* - 1 + 1*)));
-        //  последний элемент имеет индекс Length - 1,
-        //  а проверять нужно индекс на 1 больше
+    CheckColIndex(Length(FSavedColWidths)(* - 1 + 1*));
+    AddItemLongArr(FSavedColWidths,
+        GetColWidthByDefault(Length(FSavedColWidths)(* - 1 + 1*)));
+    //  последний элемент имеет индекс Length - 1,
+    //  а проверять нужно индекс на 1 больше
 end;
 
 procedure TTableCompList.AddRowHeightItem;
 begin
-    CheckRowIndex(Length(SavedRowHeights)(* - 1 + 1*));
-    AddItemLongArr(SavedRowHeights,
-        GetRowHeightByDefault(Length(SavedRowHeights)(* - 1 + 1*)));
-        //  последний элемент имеет индекс Length - 1,
-        //  а проверять нужно индекс на 1 больше
+    CheckRowIndex(Length(FSavedRowHeights)(* - 1 + 1*));
+    AddItemLongArr(FSavedRowHeights,
+        GetRowHeightByDefault(Length(FSavedRowHeights)(* - 1 + 1*)));
+    //  последний элемент имеет индекс Length - 1,
+    //  а проверять нужно индекс на 1 больше
 end;
 
-procedure TTableCompList.DeleteColWidthItem(const Index: Integer);
+procedure TTableCompList.DeleteColWidthItem(const Index: integer);
 begin
     CheckColIndex(Index);
-    DeleteItemLongArr(SavedColWidths, Index);
+    DeleteItemLongArr(FSavedColWidths, Index);
 end;
 
-procedure TTableCompList.DeleteRowHeightItem(const Index: Integer);
+procedure TTableCompList.DeleteRowHeightItem(const Index: integer);
 begin
     CheckRowIndex(Index);
-    DeleteItemLongArr(SavedRowHeights, Index);
+    DeleteItemLongArr(FSavedRowHeights, Index);
 end;
 
-procedure TTableCompList.InsertColWidthItem(const Index: Integer);
+procedure TTableCompList.InsertColWidthItem(const Index: integer);
 begin
     CheckColIndex(Index);
-    InsertItemLongArr(SavedColWidths, Index, GetColWidthByDefault(Index));
+    InsertItemLongArr(FSavedColWidths, Index, GetColWidthByDefault(Index));
 end;
 
-procedure TTableCompList.InsertRowHeightItem(const Index: Integer);
+procedure TTableCompList.InsertRowHeightItem(const Index: integer);
 begin
     CheckRowIndex(Index);
-    InsertItemLongArr(SavedRowHeights, Index, GetRowHeightByDefault(Index));
+    InsertItemLongArr(FSavedRowHeights, Index, GetRowHeightByDefault(Index));
 end;
 
-procedure TTableCompList.CheckColIndex(const Index: Integer);
+procedure TTableCompList.CheckColIndex(const Index: integer);
 begin
     if (Index < 0) or (Index >= GetColCount) then
         raise ETableCompList.Create('Invalid column index...');
 end;
 
-procedure TTableCompList.CheckRowIndex(const Index: Integer);
+procedure TTableCompList.CheckRowIndex(const Index: integer);
 begin
     if (Index < 0) or (Index >= GetRowCount) then
         raise ETableCompList.Create('Invalid row index...');
@@ -1131,85 +1156,94 @@ end;
 
 procedure TTableCompList.DeleteAllColWidthItems;
 begin
-    Finalize(SavedColWidths);
+    Finalize(FSavedColWidths);
 end;
 
 procedure TTableCompList.DeleteAllRowHeightItems;
 begin
-    Finalize(SavedRowHeights);
+    Finalize(FSavedRowHeights);
 end;
 
-function TTableCompList.GetColWidthByDefault(
-    const Index: Integer): LongInt;
+function TTableCompList.GetColWidthByDefault(const Index: integer): longint;
 begin
     CheckColIndex(Index);
     Result := 64;
 end;
 
-function TTableCompList.GetRowHeightByDefault(
-    const Index: Integer): LongInt;
+function TTableCompList.GetRowHeightByDefault(const Index: integer): longint;
 begin
     CheckRowIndex(Index);
     Result := 20;
 end;
 
 procedure TTableCompList.GetRowHeights(Grid: TStringGrid);
-var i: LongInt;
+var
+    i: longint;
 begin
     with Grid do
-        for i := 0 to RowCount - 1 do SaveRowHeight(i, RowHeights[i]);
+        for i := 0 to RowCount - 1 do
+            SaveRowHeight(i, RowHeights[i]);
 end;
 
 procedure TTableCompList.SetRowHeights(Grid: TStringGrid);
-var i: LongInt;
+var
+    i: longint;
 begin
-    if (Grid is TIDAGrid) and (not HeightsSaved) then
-        with Grid as TIDAGrid do AutoRowHeights
+    if (Grid is TIDAGrid) and (not FHeightsSaved) then
+        with Grid as TIDAGrid do
+            AutoRowHeights
     else
         with Grid do
-            for i := 0 to RowCount - 1 do RowHeights[i] := GetRowHeight(i);
+            for i := 0 to RowCount - 1 do
+                RowHeights[i] := GetRowHeight(i);
 end;
 
 procedure TTableCompList.InitColWidths;
-var i: LongInt;
+var
+    i: longint;
 begin
-    if not AreColWidthsReady then
+    if not FAreColWidthsReady then
     begin
         DeleteAllColWidthItems;
-        for i := 1 to GetColCount do AddColWidthItem;
-        AreColWidthsReady := True;
+        for i := 1 to GetColCount do
+            AddColWidthItem;
+        FAreColWidthsReady := True;
     end;
 end;
 
 procedure TTableCompList.InitRowHeights;
-var i: LongInt;
+var
+    i: longint;
 begin
-    if not AreRowHeightsReady then
+    if not FAreRowHeightsReady then
     begin
         DeleteAllRowHeightItems;
-        for i := 1 to GetRowCount do AddRowHeightItem;
-        AreRowHeightsReady := True;
+        for i := 1 to GetRowCount do
+            AddRowHeightItem;
+        FAreRowHeightsReady := True;
     end;
 end;
 
-function TTableCompList.AutoHeights: Boolean;
+function TTableCompList.AutoHeights: boolean;
 begin
-    Result := not HeightsSaved;
+    Result := not FHeightsSaved;
 end;
 
-function TTableCompList.AutoWidths: Boolean;
+function TTableCompList.AutoWidths: boolean;
 begin
-    Result := not WidthsSaved;
+    Result := not FWidthsSaved;
 end;
 
 procedure TTableCompList.SetColFunc(Grid: TStringGrid);
-var i: LongInt;
+var
+    i: longint;
 begin
     //  указатели на ф-и располагаются в Fixed строках
     //  "шапки" таблицы
     with Grid do
         if FixedRows <> 0 then
-            for i := 0 to ColCount - 1 do Objects[i, 0] := nil;
+            for i := 0 to ColCount - 1 do
+                Objects[i, 0] := nil;
 end;
 
 initialization

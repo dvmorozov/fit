@@ -19,7 +19,8 @@ unit fit_client_app;
 
 interface
 
-uses SysUtils, fit_client, fit_client_stub, extension_data_loader_injector;
+uses
+    extension_data_loader_injector, fit_client, fit_client_stub, SysUtils;
 
 type
     { Container class (agregate), which integrates all application
@@ -27,7 +28,7 @@ type
     TFitClientApp = class(TObject)
     private
         FFitClientStub: TFitClientStub;
-        FFitClient: TFitClient;
+        FFitClient:     TFitClient;
         FDataLoaderInjector: TExtensionDataLoaderInjector;
 
     public
@@ -57,9 +58,7 @@ begin
     FFitClient.Free;
     FFitClientStub.Free;
     FDataLoaderInjector.Free;
+    inherited;
 end;
 
 end.
-
-
-

@@ -16,7 +16,7 @@ unit fit_server_proxy;
 
 interface
 
-uses SysUtils, fit_client_stub, MyExceptions, int_client_callback;
+uses fit_client_stub, int_client_callback, MyExceptions, SysUtils;
 
 type
     { Proxy class transmitting messages from server back to client. }
@@ -25,26 +25,27 @@ type
         FFitClientStub: TFitClientStub;
 
     public
-        procedure ShowCurMin(Min: Double);
+        procedure ShowCurMin(Min: double);
         procedure ShowProfile;
         procedure Done;
-        procedure FindPeakBoundsDone;
-        procedure FindBackPointsDone;
-        procedure FindPeakPositionsDone;
+        procedure ComputeCurveBoundsDone;
+        procedure ComputeBackgroundPointsDone;
+        procedure ComputeCurvePositionsDone;
         { Pointer to the client part receiving messages. }
-        property FitClientStub: TFitClientStub
-            read FFitClientStub write FFitClientStub;
+        property FitClientStub: TFitClientStub read FFitClientStub write FFitClientStub;
     end;
 
 implementation
 
-procedure TFitServerProxy.ShowCurMin(Min: Double);
+procedure TFitServerProxy.ShowCurMin(Min: double);
 begin
     try
         Assert(Assigned(FitClientStub));
     except
-        on E: EAssertionFailed do raise EUserException.Create(E.Message)
-        else raise;
+        on E: EAssertionFailed do
+            raise EUserException.Create(E.Message)
+        else
+            raise;
     end;
     FitClientStub.ShowCurMin(Min);
 end;
@@ -54,8 +55,10 @@ begin
     try
         Assert(Assigned(FitClientStub));
     except
-        on E: EAssertionFailed do raise EUserException.Create(E.Message)
-        else raise;
+        on E: EAssertionFailed do
+            raise EUserException.Create(E.Message)
+        else
+            raise;
     end;
     FitClientStub.ShowProfile;
 end;
@@ -65,46 +68,51 @@ begin
     try
         Assert(Assigned(FitClientStub));
     except
-        on E: EAssertionFailed do raise EUserException.Create(E.Message)
-        else raise;
+        on E: EAssertionFailed do
+            raise EUserException.Create(E.Message)
+        else
+            raise;
     end;
     FitClientStub.Done;
 end;
 
-procedure TFitServerProxy.FindPeakBoundsDone;
+procedure TFitServerProxy.ComputeCurveBoundsDone;
 begin
     try
         Assert(Assigned(FitClientStub));
     except
-        on E: EAssertionFailed do raise EUserException.Create(E.Message)
-        else raise;
+        on E: EAssertionFailed do
+            raise EUserException.Create(E.Message)
+        else
+            raise;
     end;
-    FitClientStub.FindPeakBoundsDone;
+    FitClientStub.ComputeCurveBoundsDone;
 end;
 
-procedure TFitServerProxy.FindBackPointsDone;
+procedure TFitServerProxy.ComputeBackgroundPointsDone;
 begin
     try
         Assert(Assigned(FitClientStub));
     except
-        on E: EAssertionFailed do raise EUserException.Create(E.Message)
-        else raise;
+        on E: EAssertionFailed do
+            raise EUserException.Create(E.Message)
+        else
+            raise;
     end;
-    FitClientStub.FindBackPointsDone;
+    FitClientStub.ComputeBackgroundPointsDone;
 end;
 
-procedure TFitServerProxy.FindPeakPositionsDone;
+procedure TFitServerProxy.ComputeCurvePositionsDone;
 begin
     try
         Assert(Assigned(FitClientStub));
     except
-        on E: EAssertionFailed do raise EUserException.Create(E.Message)
-        else raise;
+        on E: EAssertionFailed do
+            raise EUserException.Create(E.Message)
+        else
+            raise;
     end;
-    FitClientStub.FindPeakPositionsDone;
+    FitClientStub.ComputeCurvePositionsDone;
 end;
 
 end.
-
-
-

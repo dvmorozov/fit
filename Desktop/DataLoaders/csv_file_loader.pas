@@ -19,7 +19,8 @@ unit csv_file_loader;
 
 interface
 
-uses Classes, SysUtils, data_loader;
+uses
+    Classes, data_loader, SysUtils;
 
 type
     { Loads data from CSV-file consisting from lines having pairs
@@ -31,7 +32,8 @@ type
 
 implementation
 
-uses app;
+uses
+    app;
 
 {============================== TCSVFileLoader ================================}
 
@@ -42,5 +44,3 @@ begin
 end;
 
 end.
-
-

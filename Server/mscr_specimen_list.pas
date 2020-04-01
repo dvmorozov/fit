@@ -15,111 +15,108 @@ unit mscr_specimen_list;
 
 interface
 
-uses Classes, SysUtils, SimpMath, data_classes, special_curve_parameter;
+uses Classes, data_classes, SimpMath, special_curve_parameter, SysUtils;
 
 const
     { Display mode constants. }
-    XCM_2T    = 0; 
-    XCM_T     = 1; 
-    XCM_SINTL = 2; 
-    
+    XCM_2T    = 0;
+    XCM_T     = 1;
+    XCM_SINTL = 2;
+
 const
-    StartPosName: string = 'Start Pos.';
+    StartPosName: string  = 'Start Pos.';
     FinishPosName: string = 'Finish Pos.';
 
 type
-    { Defines container for curve instances (specimens). 
+    { Defines container for curves.
       Allows to input/output angles in different representations. 
       In copying data from grid verifies them and adds to the list 
       only data for which corresponding rows are correct. }
-    TMSCRSpecimenList = class(TSpecimenList)
+    TMSCRCurveList = class(TCurveList)
     protected
-        function RecalcParamValue(P: TSpecialCurveParameter): Double; override;
-        procedure ReverseCalcParamValue(
-            P: TSpecialCurveParameter; NewValue: Double); override;
-        
+        function RecalcParamValue(P: TSpecialCurveParameter): double; override;
+        procedure ReverseCalcParamValue(P: TSpecialCurveParameter;
+            NewValue: double); override;
+
     public
         { Vawelength at which neutronogram was recorded. }
-        Lambda: Double;
+        Lambda:   double;
         { It is supposed that data are given in 2 * Theta format. }
-        ViewMode: LongInt;
-      
+        ViewMode: longint;
+
         function GetCopy: TObject; override;
         procedure CopyParameters(const Dest: TObject); override;
-    end; 
-    
-    { Container of curve parameters (specimens) which is stored in XML-stream. }
+    end;
+
+    { Container of curves which is stored in XML-stream. }
     Parameters_list = class(TComponent)
     private
-        FParameters: TMSCRSpecimenList;
+        FParameters: TMSCRCurveList;
 
     public
         constructor Create(Owner: TComponent); override;
         destructor Destroy; override;
 
     published
-        property Parameters: TMSCRSpecimenList
-            read FParameters write FParameters;
+        property Parameters: TMSCRCurveList read FParameters write FParameters;
     end;
 
 implementation
 
-function TMSCRSpecimenList.RecalcParamValue(
-    P: TSpecialCurveParameter): Double;
+function TMSCRCurveList.RecalcParamValue(P: TSpecialCurveParameter): double;
 begin
     if (P.Type_ = InvariablePosition) or (P.Type_ = VariablePosition) or
-       (P.Name = StartPosName) or (P.Name = FinishPosName) then
-    begin
+        (P.Name = StartPosName) or (P.Name = FinishPosName) then
         case ViewMode of
-        XCM_2T: begin
+            XCM_2T:
+                Result := P.Value;
             //  schitaetsya, chto iznachal'no koordinaty zadany v 2*Theta
-            Result := P.Value;
-            end;
 
-        XCM_T : begin
-            //  pereschet v Theta
-            Result := P.Value / 2;
-            end;
 
-        XCM_SINTL : begin
-            Assert(Lambda <> 0);
-            //  pereschet v Sin(Theta)/Lambda
-            Result := Sin((P.Value * pi) / (2 * 180)) / Lambda;
+            XCM_T:
+                Result := P.Value / 2;//  pereschet v Theta
+
+
+            XCM_SINTL:
+            begin
+                Assert(Lambda <> 0);
+                //  pereschet v Sin(Theta)/Lambda
+                Result := Sin((P.Value * pi) / (2 * 180)) / Lambda;
             end;
-        end;{case ViewMode of...}
-    end
-    else Result := P.Value;
+        end{case ViewMode of...}
+    else
+        Result := P.Value;
 end;
 
-procedure TMSCRSpecimenList.ReverseCalcParamValue(
-    P: TSpecialCurveParameter; NewValue: Double);
+procedure TMSCRCurveList.ReverseCalcParamValue(P: TSpecialCurveParameter;
+    NewValue: double);
 begin
     if (P.Type_ = InvariablePosition) or (P.Type_ = VariablePosition) or
-       (P.Name = StartPosName) or (P.Name = FinishPosName) then
-    begin
+        (P.Name = StartPosName) or (P.Name = FinishPosName) then
         case ViewMode of
-            XCM_T : P.Value := NewValue * 2;
-            XCM_2T : P.Value := NewValue;
-            XCM_SINTL : begin
+            XCM_T: P.Value  := NewValue * 2;
+            XCM_2T: P.Value := NewValue;
+            XCM_SINTL:
+            begin
                 Assert(Lambda <> 0);
                 P.Value := 2 * (180 / pi) * ArcSin(NewValue * Lambda);
-                end;
-        end; {case ViewMode of...}
-    end
-    else P.Value := NewValue;
+            end;
+        end{case ViewMode of...}
+    else
+        P.Value := NewValue;
 end;
 
-function TMSCRSpecimenList.GetCopy: TObject;
+function TMSCRCurveList.GetCopy: TObject;
 begin
-    Result := TMSCRSpecimenList.Create(nil);
+    Result := TMSCRCurveList.Create(nil);
     CopyParameters(Result);
 end;
 
-procedure TMSCRSpecimenList.CopyParameters(const Dest: TObject);
+procedure TMSCRCurveList.CopyParameters(const Dest: TObject);
 begin
     inherited;
-    TMSCRSpecimenList(Dest).Lambda := Lambda;
-    TMSCRSpecimenList(Dest).ViewMode := ViewMode;
+    TMSCRCurveList(Dest).Lambda   := Lambda;
+    TMSCRCurveList(Dest).ViewMode := ViewMode;
 end;
 
 { Parameters_list }
@@ -127,7 +124,7 @@ end;
 constructor Parameters_list.Create(Owner: TComponent);
 begin
     inherited Create(Owner);
-    FParameters := TMSCRSpecimenList.Create(nil);
+    FParameters := TMSCRCurveList.Create(nil);
 end;
 
 destructor Parameters_list.Destroy;
@@ -138,8 +135,7 @@ end;
 
 {$warnings off}
 initialization
-    RegisterClass(TMSCRSpecimenList);
+    RegisterClass(TMSCRCurveList);
     DecimalSeparator := '.';
 end.
 {$warnings on}
-

@@ -16,16 +16,16 @@ const
     PairCount = 9; // 11; //  kol-vo elementov
     PairArray: array[1..PairCount] of TStringPair = (
         ('Title',
-            'Specimen positions'
+            'Curve positions'
             //'The page of selection of specimen positions'
             //'Выбор точек привязки экземпляров паттерна'
         ),
-        ('CaptSpecimenPosFull',
-            'Specimen positions'
+        ('CaptCurvePosFull',
+            'Curve positions'
             //'Точки привязки экземпляров паттерна'
         ),
-        ('HintSpecimenPositions',
-            'Specimen positions.'
+        ('HintCurvePositions',
+            'Curve positions.'
             //'Точки привязки экземпляров паттерна.'
         ),
         (* zameneno kartinkoy
@@ -35,7 +35,7 @@ const
         ),
         *)
         ('CaptPointSelection',
-            'Specimen positions selection'
+            'Curve positions selection'
             //'Выбор точек привязки'
         ),
         ('CaptArgument',
@@ -57,7 +57,7 @@ const
         ),
         *)
         ('CaptButNextStage',
-            'Specimen application intervals'
+            'Curve bounds'
             //'Перейти к выбору интервалов применения'
         ),
         ('HintValues',

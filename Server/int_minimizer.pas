@@ -18,27 +18,27 @@ interface
 uses Classes;
 
 type
-    TFunc = function: Double of object;
+    TFunc     = function: double of object;
     TCalcFunc = procedure of object;
-    TGetStep = function: Double of object;
-    TSetStep = procedure(NewStepValue: Double) of object;
+    TGetStep  = function: double of object;
+    TSetStep  = procedure(NewStepValue: double) of object;
     TSetNextParam = procedure of object;
     TSetFirstParam = procedure of object;
-    TGetParam = function: Double of object;
-    TSetParam = procedure(NewParamValue: Double) of object;
-    TEndOfCycle = function: Boolean of object;
+    TGetParam = function: double of object;
+    TSetParam = procedure(NewParamValue: double) of object;
+    TEndOfCycle = function: boolean of object;
     TShowCurMin = procedure of object;
 
     { Defines interface of data provider for optimization algorithm. }
     IMinimizer = interface(IUnknown)
         { Returns result of function computation. }
-        function  Func: Double;
+        function Func: double;
         { Calculates function value. }
         procedure CalcFunc;
         { Returns current step value. }
-        function  GetStep: Double;
+        function GetStep: double;
         { Set new step value. }
-        procedure SetStep(NewStepValue: Double);
+        procedure SetStep(NewStepValue: double);
         { Selects next variable parameter. 
           Changes internal state of provider in such way to allow
           other methods to have access to parameter data. }
@@ -46,35 +46,35 @@ type
         { Selects the first variable parameter. }
         procedure SetFirstParam;
         { Returns value of selected parameter. }
-        function  GetParam: Double;
+        function GetParam: double;
         { Sets value of selected parameter. }
-        procedure SetParam(NewParamValue: Double);
+        procedure SetParam(NewParamValue: double);
         { Returns flag indicating end of calculation cycle (when the 
           last parameter has been varied and corresponding function 
           values were evaluated. }
-        function  EndOfCycle: Boolean;
+        function EndOfCycle: boolean;
     end;
 
     { Defines component implementing IMinimizer interface (providing data for optimization algorithm). }
     TIntMinimizer = class(TComponent, IMinimizer)
-        function  Func: Double; virtual; abstract;
+        function Func: double; virtual; abstract;
         procedure CalcFunc; virtual; abstract;
-        function  GetStep: Double; virtual; abstract;
-        procedure SetStep(NewStepValue: Double); virtual; abstract;
+        function GetStep: double; virtual; abstract;
+        procedure SetStep(NewStepValue: double); virtual; abstract;
         procedure SetNextParam; virtual; abstract;
         procedure SetFirstParam; virtual; abstract;
-        function  GetParam: Double; virtual; abstract;
-        procedure SetParam(NewParamValue: Double); virtual; abstract;
-        function  EndOfCycle: Boolean; virtual; abstract;
+        function GetParam: double; virtual; abstract;
+        procedure SetParam(NewParamValue: double); virtual; abstract;
+        function EndOfCycle: boolean; virtual; abstract;
     end;
 
     { Adapter supporting set of function pointers ("events") for any optimization task. }
     TMinimizer = class(TComponent)
     private
-        FOnFunc: TFunc;
+        FOnFunc:     TFunc;
         FOnCalcFunc: TCalcFunc;
-        FOnGetStep: TGetStep;
-        FOnSetStep: TSetStep;
+        FOnGetStep:  TGetStep;
+        FOnSetStep:  TSetStep;
         FOnSetNextParam: TSetNextParam;
         FOnSetFirstParam: TSetFirstParam;
         FOnGetParam: TGetParam;
@@ -82,21 +82,21 @@ type
         FOnEndOfCycle: TEndOfCycle;
         FOnShowCurMin: TShowCurMin;
         //FMinInterface: IMinimizer;
-        FTerminated: Boolean;
+        FTerminated: boolean;
 
     protected
-        procedure SetTerminated(ATerminated: Boolean); virtual;
+        procedure SetTerminated(ATerminated: boolean); virtual;
 
     public
-        CurrentMinimum: Double;
-        
-        procedure Minimize(var ErrorCode: LongInt); virtual; abstract;
+        CurrentMinimum: double;
+
+        procedure Minimize(var ErrorCode: longint); virtual; abstract;
         // vozvraschaet kod oshibki
-        function IsReady: LongInt; virtual;
+        function IsReady: longint; virtual;
         constructor Create(AOwner: TComponent); override;
-        
-        property Terminated: Boolean read FTerminated write SetTerminated;
-        
+
+        property Terminated: boolean read FTerminated write SetTerminated;
+
     published
         //property MinInterface: IMinimizer
         //    read FMinInterface write FMinInterface;
@@ -110,15 +110,13 @@ type
             read FOnSetFirstParam write FOnSetFirstParam;
         property OnGetParam: TGetParam read FOnGetParam write FOnGetParam;
         property OnSetParam: TSetParam read FOnSetParam write FOnSetParam;
-        property OnEndOfCycle: TEndOfCycle
-            read FOnEndOfCycle write FOnEndOfCycle;
-        property OnShowCurMin: TShowCurMin
-            read FOnShowCurMin write FOnShowCurMin;
+        property OnEndOfCycle: TEndOfCycle read FOnEndOfCycle write FOnEndOfCycle;
+        property OnShowCurMin: TShowCurMin read FOnShowCurMin write FOnShowCurMin;
     end;
 
 const
-    MIN_NO_ERRORS              : LongInt = 0;
-    MIN_FUNCTION_NOT_ASSIGNED  : LongInt = 1;
+    MIN_NO_ERRORS: longint = 0;
+    MIN_FUNCTION_NOT_ASSIGNED: longint = 1;
 
 procedure Register;
 
@@ -126,7 +124,7 @@ implementation
 
 procedure Register;
 begin
-    RegisterComponents('MSCR',[TMinimizer]);
+    RegisterComponents('MSCR', [TMinimizer]);
     (*
     //RegisterPropertyEditor(TypeInfo(IMinimizer),
     //    TMinimizer, 'MinInterface', TInterfaceProperty);
@@ -155,32 +153,59 @@ end;
 
 {================================ TMinimizer ==================================}
 
-procedure TMinimizer.SetTerminated(ATerminated: Boolean);
+procedure TMinimizer.SetTerminated(ATerminated: boolean);
 begin
     FTerminated := ATerminated;
 end;
 
-function TMinimizer.IsReady: LongInt;
+function TMinimizer.IsReady: longint;
 begin
     Result := MIN_NO_ERRORS;
     if not Assigned(OnFunc) then
-    begin Result := MIN_FUNCTION_NOT_ASSIGNED; Exit end;
+    begin
+        Result := MIN_FUNCTION_NOT_ASSIGNED;
+        Exit;
+    end;
     if not Assigned(OnCalcFunc) then
-    begin Result := MIN_FUNCTION_NOT_ASSIGNED; Exit end;
+    begin
+        Result := MIN_FUNCTION_NOT_ASSIGNED;
+        Exit;
+    end;
     if not Assigned(OnGetStep) then
-    begin Result := MIN_FUNCTION_NOT_ASSIGNED; Exit end;
+    begin
+        Result := MIN_FUNCTION_NOT_ASSIGNED;
+        Exit;
+    end;
     if not Assigned(OnSetStep) then
-    begin Result := MIN_FUNCTION_NOT_ASSIGNED; Exit end;
+    begin
+        Result := MIN_FUNCTION_NOT_ASSIGNED;
+        Exit;
+    end;
     if not Assigned(OnSetNextParam) then
-    begin Result := MIN_FUNCTION_NOT_ASSIGNED; Exit end;
+    begin
+        Result := MIN_FUNCTION_NOT_ASSIGNED;
+        Exit;
+    end;
     if not Assigned(OnSetFirstParam) then
-    begin Result := MIN_FUNCTION_NOT_ASSIGNED; Exit end;
+    begin
+        Result := MIN_FUNCTION_NOT_ASSIGNED;
+        Exit;
+    end;
     if not Assigned(OnGetParam) then
-    begin Result := MIN_FUNCTION_NOT_ASSIGNED; Exit end;
+    begin
+        Result := MIN_FUNCTION_NOT_ASSIGNED;
+        Exit;
+    end;
     if not Assigned(OnSetParam) then
-    begin Result := MIN_FUNCTION_NOT_ASSIGNED; Exit end;
+    begin
+        Result := MIN_FUNCTION_NOT_ASSIGNED;
+        Exit;
+    end;
     if not Assigned(OnEndOfCycle) then
-    begin Result := MIN_FUNCTION_NOT_ASSIGNED; Exit end;
+    begin
+        Result := MIN_FUNCTION_NOT_ASSIGNED;
+        Exit;
+    end;
 end;
 
 constructor TMinimizer.Create(AOwner: TComponent);
@@ -190,5 +215,3 @@ begin
 end;
 
 end.
-
-

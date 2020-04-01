@@ -16,8 +16,8 @@ const
     PairCount = 2; // 3; //  kol-vo elementov
     PairArray: array[1..PairCount] of TStringPair = (
         ('Title',
-            'Baseline progress'
-            //'Finding baseline points is performed'
+            'Background progress'
+            //'Finding background points is performed'
             //'Выполняется генерация точек фона'
         ),
         (* zameneno kartinkoy
@@ -27,7 +27,7 @@ const
         ),
         *)
         ('HintBackProgress',
-            'Finding baseline points is performed. Please wait for completion.'
+            'Finding background points is performed. Please wait for completion.'
             //'Запущен процесс поиска точек фона. Пожалуйста ожидайте завершения!'
         )
         );

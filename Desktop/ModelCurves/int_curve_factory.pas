@@ -19,7 +19,8 @@ unit int_curve_factory;
 
 interface
 
-uses named_points_set;
+uses
+    named_points_set;
 
 type
     { Class-reference type for base curve type. }
@@ -28,11 +29,11 @@ type
     { Class containing information about curve types. }
     TCurveType = class
     public
-        Name: string;
-        Class_: TCurveClass;
-        TypeId: TCurveTypeId;
-        Tag: Integer;
-        ExtremumMode: TExtremumMode;
+        FName:   string;
+        FClass:  TCurveClass;
+        FTypeId: TCurveTypeId;
+        FTag:    integer;
+        FExtremumMode: TExtremumMode;
     end;
 
     { Interface defining basic operation for creating curve instances. }
@@ -45,5 +46,3 @@ type
 implementation
 
 end.
-
-

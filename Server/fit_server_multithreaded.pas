@@ -14,8 +14,8 @@ unit fit_server_multithreaded;
 
 interface
 
-uses SysUtils, fit_task, fit_task_with_thread, fit_server_with_thread,
-    fit_server, MyExceptions, common_types;
+uses fit_server, fit_server_with_thread,
+    fit_task, fit_task_with_thread, int_fit_service, MyExceptions, SysUtils;
 
 type
     { Executes algorithms in separate threads. }
@@ -24,95 +24,96 @@ type
         function CreateTaskObject: TFitTask; override;
 
         { Algorithms are executed in separate threads. }
-        
-        procedure FindGaussesSequentiallyAlg; override;
-        procedure FindGaussesAlg; override;
-        procedure FindGaussesAgainAlg; override;
+
+        procedure MinimizeNumberOfCurvesAlg; override;
+        procedure MinimizeDifferenceAlg; override;
+        procedure MinimizeDifferenceAgainAlg; override;
 
     public
         procedure AbortAsyncOper; override;
     end;
-    
+
 implementation
 
 function TFitServerMultithreaded.CreateTaskObject: TFitTask;
 begin
-    Result := TFitTaskWithThread.Create(nil,
-        FBackgroundVariationEnabled, FCurveScalingEnabled);
+    Result := TFitTaskWithThread.Create(nil, FBackgroundVariationEnabled,
+        FCurveScalingEnabled);
 end;
 
 procedure TFitServerMultithreaded.AbortAsyncOper;
-var i: LongInt;
+var
+    i: longint;
     FitTask: TFitTaskWithThread;
 begin
     if State <> AsyncOperation then
         raise EUserException.Create(InadmissibleServerState + CRLF +
             CalcNotStarted);
 
-    Assert(Assigned(TaskList));
+    Assert(Assigned(FTaskList));
     Assert(Assigned(FMainCalcThread));
     //  bolee optimal'naya realizatsiya
-    for i := 0 to TaskList.Count - 1 do
+    for i := 0 to FTaskList.Count - 1 do
     begin
-        FitTask := TFitTaskWithThread(TaskList.Items[i]);
+        FitTask := TFitTaskWithThread(FTaskList.Items[i]);
         FitTask.DoneDisabled := True;
         FitTask.StopAsyncOper;
     end;
-    for i := 0 to TaskList.Count - 1 do
+    for i := 0 to FTaskList.Count - 1 do
     begin
-        FitTask := TFitTaskWithThread(TaskList.Items[i]);
+        FitTask := TFitTaskWithThread(FTaskList.Items[i]);
         FitTask.DestroyMainCalcThread;
     end;
 
     FMainCalcThread.Terminate;
     DestroyMainCalcThread;
-    FState := SavedState;
+    FState := FSavedState;
 end;
 
-procedure TFitServerMultithreaded.FindGaussesSequentiallyAlg;
-var i: LongInt;
+procedure TFitServerMultithreaded.MinimizeNumberOfCurvesAlg;
+var
+    i:  longint;
     FT: TFitTask;
 begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
     CreateTasks;
     InitTasks;
     //??? eto budet rabotat' tol'ko poka net obschey Sigma
-    for i := 0 to TaskList.Count - 1 do
+    for i := 0 to FTaskList.Count - 1 do
     begin
-        FT := TFitTask(TaskList.Items[i]);
-        FT.FindGaussesSequentially;
+        FT := TFitTask(FTaskList.Items[i]);
+        FT.MinimizeNumberOfCurves;
     end;
 end;
 
-procedure TFitServerMultithreaded.FindGaussesAlg;
-var i: LongInt;
+procedure TFitServerMultithreaded.MinimizeDifferenceAlg;
+var
+    i:  longint;
     FT: TFitTask;
 begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
     CreateTasks;
     InitTasks;
     //??? eto budet rabotat' tol'ko poka net obschey Sigma
-    for i := 0 to TaskList.Count - 1 do
+    for i := 0 to FTaskList.Count - 1 do
     begin
-        FT := TFitTask(TaskList.Items[i]);
-        FT.FindGausses;
+        FT := TFitTask(FTaskList.Items[i]);
+        FT.MinimizeDifference;
     end;
 end;
 
-procedure TFitServerMultithreaded.FindGaussesAgainAlg;
-var i: LongInt;
+procedure TFitServerMultithreaded.MinimizeDifferenceAgainAlg;
+var
+    i:  longint;
     FT: TFitTask;
 begin
-    Assert(Assigned(TaskList));
+    Assert(Assigned(FTaskList));
     //??? eto budet rabotat' tol'ko poka net obschey Sigma
-    for i := 0 to TaskList.Count - 1 do
+    for i := 0 to FTaskList.Count - 1 do
     begin
-        FT := TFitTask(TaskList.Items[i]);
-        FT.FindGaussesAgain;
+        FT := TFitTask(FTaskList.Items[i]);
+        FT.MinimizeDifferenceAgain;
     end;
 end;
 
 end.
-
-
-

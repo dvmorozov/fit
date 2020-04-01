@@ -20,13 +20,12 @@ unit form_main;
 interface
 
 uses
-    LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-    ExtCtrls, StdCtrls, Menus, points_set, fit_viewer, ComCtrls,
-    fit_client, NumericGrid, CheckLst, mscr_specimen_list, LResources, TAGraph,
-    ActnList, app_settings, Laz_XMLCfg, common_types, neutron_points_set,
-    curve_points_set, gauss_points_set, asym_pseudo_voigt_points_set,
-    lorentz_points_set, pseudo_voigt_points_set,
-    two_branches_pseudo_voigt_points_set, named_points_set, log
+    LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, ExtCtrls,
+    StdCtrls, Menus, points_set, fit_viewer, ComCtrls, fit_client, NumericGrid,
+    CheckLst, mscr_specimen_list, LResources, TAGraph, ActnList, app_settings,
+    Laz_XMLCfg, neutron_points_set, curve_points_set, gauss_points_set,
+    asym_pseudo_voigt_points_set, lorentz_points_set, pseudo_voigt_points_set,
+    int_fit_service, two_branches_pseudo_voigt_points_set, named_points_set, log
 {$IFDEF _WINDOWS}
 {$IFDEF WINDOWS_SPECIFIC}
     , user_points_set
@@ -53,10 +52,9 @@ type
   { TFormMain }
   TFormMain = class(TForm)
     ActionEnableCurveScaling: TAction;
-    ActionEnBackVariation: TAction;
-    ActionCurveType: TAction;
+    ActionEnableBackgroundVariation: TAction;
     ActionAnimationMode: TAction;
-    ActionSelSpecPosAtEveryPoint: TAction;
+    ActionSelectAllPointsAsCurvePositions: TAction;
     ActionAbout: TAction;
     ActionGlossary: TAction;
     ActionViewMarkers: TAction;
@@ -65,35 +63,35 @@ type
     ActionSelectAll: TAction;
     ActionDelete: TAction;
     ActionCopy: TAction;
-    ActionSetMaxRFactor: TAction;
-    ActionStopFitting: TAction;
-    ActionFitMinDifference: TAction;
-    ActionFitMinNumberOfSpec: TAction;
-    ActionDoAllAuto: TAction;
-    ActionSaveAsText: TAction;
-    ActionSelCurveBounds: TAction;
-    ActionRemoveSpecPos: TAction;
-    ActionSelSpecPosVis: TAction;
-    ActionSelSpecPosAuto: TAction;
-    ActionRemoveRFactorIntervals: TAction;
-    ActionSelRFactorIntervalsVis: TAction;
-    ActionSelRFactorIntervalsAuto: TAction;
-    ActionImport: TAction;
-    ActionReload: TAction;
-    ActionSelEntireProf: TAction;
-    ActionSelArea: TAction;
-    ActionSelAreaLimits: TAction;
-    ActionRmBackSelected: TAction;
-    ActionRmBackAuto: TAction;
-    ActionRemoveBack: TAction;
-    ActionSelBackVis: TAction;
-    ActionSelBackAuto: TAction;
-    ActionSetPortion: TAction;
-    ActionSmooth: TAction;
-    ActionSelCharacteristicPoints: TAction;
+    ActionSetMaximumRFactor: TAction;
+    ActionStopFit: TAction;
+    ActionMinimizeDifference: TAction;
+    ActionMinimizeNumberOfCurves: TAction;
+    ActionDoAllAutomatically: TAction;
+    ActionSaveModelAsText: TAction;
+    ActionSelectCurveBounds: TAction;
+    ActionRemoveCurvePositions: TAction;
+    ActionSelectCurvePositionsManually: TAction;
+    ActionComputCurvePositions: TAction;
+    ActionRemoveRFactorBounds: TAction;
+    ActionSelectRFactorBoundsManually: TAction;
+    ActionComputeRFactorBounds: TAction;
+    ActionImportData: TAction;
+    ActionReloadData: TAction;
+    ActionSelectEntireProfile: TAction;
+    ActionSelectDataInterval: TAction;
+    ActionSelectIntervalBounds: TAction;
+    ActionSubtractBackgroundBySelectedPoints: TAction;
+    ActionSubtractBackgroundAutomatically: TAction;
+    ActionRemoveBackgroundPoints: TAction;
+    ActionSelectBackgroundManually: TAction;
+    ActionComputeBackgroundPoints: TAction;
+    ActionSetBackgroundFraction: TAction;
+    ActionSmoothProfile: TAction;
+    ActionSelectCharacteristicPoints: TAction;
     ActionQuit: TAction;
-    ActionList1: TActionList;
-    ApplicationProperties1: TApplicationProperties;
+    ActionList: TActionList;
+    ApplicationProperties: TApplicationProperties;
     ButCopy4: TButton;
     ButSaveAsText4: TButton;
     CheckListBoxLegend: TCheckListBox;
@@ -119,45 +117,45 @@ type
     LabelAngle: TLabel;
     LabelIntensity: TLabel;
     LabelMin: TLabel;
-    MainMenu1: TMainMenu;
-    Data: TMenuItem;
-    DoAllAuto: TMenuItem;
-    MenuItem1: TMenuItem;
-    FitMinNumberOfSpec: TMenuItem;
-    FitMinDifference: TMenuItem;
-    ArgumentTransformation: TMenuItem;
-    CreateRule: TMenuItem;
-    BackPoints: TMenuItem;
-    CurveScalingEnabled: TMenuItem;
-    SpecAtEveryPoint: TMenuItem;
-    MenuItem5: TMenuItem;
-    BackEnableVariation: TMenuItem;
+    MainMenu: TMainMenu;
+    MenuData: TMenuItem;
+    MenuDoAllAutomatically: TMenuItem;
+    MenuSeparator1: TMenuItem;
+    MenuMinimizeNumberOfCurves: TMenuItem;
+    MenuMinimizeDifference: TMenuItem;
+    MenuArgumentTransformation: TMenuItem;
+    MenuCreateRule: TMenuItem;
+    MenuBackgroundPoints: TMenuItem;
+    MenuEnableCurveScaling: TMenuItem;
+    MenuSelectAllPointsAsCurvePositions: TMenuItem;
+    MenuAnimationMode: TMenuItem;
+    MenuEnableBackgroundVariation: TMenuItem;
     PanelParameters: TPanel;
     PanelIntervals: TPanel;
     PanelDatasheet: TPanel;
     PanelSpecPositions: TPanel;
     PanelBackground: TPanel;
-    SelArea: TMenuItem;
-    MenuItem18: TMenuItem;
-    SelEntireProf: TMenuItem;
-    Range: TMenuItem;
-    SelAreaLimits: TMenuItem;
-    SelBackAuto: TMenuItem;
-    RmBack: TMenuItem;
-    RmBackAuto: TMenuItem;
-    SelBackVis: TMenuItem;
-    RemoveBack: TMenuItem;
-    RmBackSelected: TMenuItem;
-    Back: TMenuItem;
-    SetPortion: TMenuItem;
-    PageControl1: TPageControl;
+    MenuSelectDataInterval: TMenuItem;
+    MenuSeparator18: TMenuItem;
+    MenuSelectEntireProfile: TMenuItem;
+    MenuRange: TMenuItem;
+    MenuSelectIntervalBounds: TMenuItem;
+    MenuComputeBackgroundPoints: TMenuItem;
+    MenuSubtractBackground: TMenuItem;
+    MenuSubtractBackgroundAutomatically: TMenuItem;
+    MenuSelectBackgroundManually: TMenuItem;
+    MenuRemoveBackgroundPoints: TMenuItem;
+    MenuSubtractBackgroundBySelectedPoints: TMenuItem;
+    MenuBackground: TMenuItem;
+    MenuSetBackgroundFraction: TMenuItem;
+    PageControl: TPageControl;
     PanelTop: TPanel;
     PanelLeft: TPanel;
     PanelChart: TPanel;
     Panel2: TPanel;
     PanelRight: TPanel;
-    PeakPos: TMenuItem;
-    SetWavelength: TMenuItem;
+    MenuCurvePositions: TMenuItem;
+    MenuSetWavelength: TMenuItem;
     ScrollBarX: TScrollBar;
     ScrollBarY: TScrollBar;
     SplitterChartRight: TSplitter;
@@ -194,120 +192,120 @@ type
     ToolButton7: TToolButton;
     ToolButton8: TToolButton;
     ToolButton9: TToolButton;
-    UseRule: TMenuItem;
-    SinThetaLambda: TMenuItem;
-    N2Theta: TMenuItem;
-    Theta: TMenuItem;
-    SetRuleParameters: TMenuItem;
-    SelRFactorIntervalsAuto: TMenuItem;
-    SelRFactorIntervalsVis: TMenuItem;
-    MenuItem20: TMenuItem;
-    RemoveRFactorIntervals: TMenuItem;
-    RFactorIntervals: TMenuItem;
-    SelSpecPosAuto: TMenuItem;
-    SelSpecPosVis: TMenuItem;
-    MenuItem19: TMenuItem;
-    RemoveSpecPos: TMenuItem;
-    StopFitting: TMenuItem;
-    MenuItem4: TMenuItem;
-    Smooth: TMenuItem;
-    SelCharacteristicPoints: TMenuItem;
-    SelCurveBounds: TMenuItem;
-    MenuItem2: TMenuItem;
+    MenuUseRule: TMenuItem;
+    MenuSinThetaLambda: TMenuItem;
+    MenuN2Theta: TMenuItem;
+    MenuTheta: TMenuItem;
+    MenuSetRuleParameters: TMenuItem;
+    MenuComputeRFactorBounds: TMenuItem;
+    MenuSelectRFactorBoundsManually: TMenuItem;
+    MenuSeparator20: TMenuItem;
+    MenuRemoveRFactorBounds: TMenuItem;
+    MenuRFactorIntervals: TMenuItem;
+    MenuComputCurvePositions: TMenuItem;
+    MenuSelectCurvePositionsManually: TMenuItem;
+    MenuSeparator19: TMenuItem;
+    MenuRemoveCurvePositions: TMenuItem;
+    MenuStopFit: TMenuItem;
+    MenuSeparator5: TMenuItem;
+    MenuSmoothProfile: TMenuItem;
+    MenuSelectCharacteristicPoints: TMenuItem;
+    MenuSelectCurveBounds: TMenuItem;
+    MenuSeparator3: TMenuItem;
     SelCurveLorentzian: TMenuItem;
-    SaveAsText: TMenuItem;
-    MenuItem16: TMenuItem;
-    MenuItem11: TMenuItem;
-    MenuItem8: TMenuItem;
-    SelCurveType: TMenuItem;
-    Fitting: TMenuItem;
-    SetMaxRFactor: TMenuItem;
-    Glossary: TMenuItem;
-    MenuItem12: TMenuItem;
-    Quit: TMenuItem;
-    MenuItem9: TMenuItem;
-    Reload: TMenuItem;
-    Model: TMenuItem;
-    Import: TMenuItem;
-    OpenDialog1: TOpenDialog;
+    MenuSaveModelAsText: TMenuItem;
+    MenuSeparator16: TMenuItem;
+    MenuSeparator6: TMenuItem;
+    MenuSeparator8: TMenuItem;
+    MenuSelectCurveType: TMenuItem;
+    MenuFit: TMenuItem;
+    MenuSetMaximumRFactor: TMenuItem;
+    MenuGlossary: TMenuItem;
+    MenuSeparator7: TMenuItem;
+    MenuQuit: TMenuItem;
+    MenuSeparator9: TMenuItem;
+    MenuReloadData: TMenuItem;
+    MenuModel: TMenuItem;
+    MenuImportData: TMenuItem;
+    OpenDialog: TOpenDialog;
     StatusBar: TStatusBar;
-    CheckStateTimer: TTimer;
-    View: TMenuItem;
-    ZoomIn: TMenuItem;
-    ZoomOut: TMenuItem;
+    TimerCheckState: TTimer;
+    MenuView: TMenuItem;
+    MenuZoomIn: TMenuItem;
+    MenuZoomOut: TMenuItem;
     ImageList1: TImageList;
-    Help1: TMenuItem;
-    About: TMenuItem;
-    ViewModeMenu: TPopupMenu;
-    Theta2: TMenuItem;
-    N2Theta2: TMenuItem;
-    SinThetaLambda2: TMenuItem;
+    MenuHelp: TMenuItem;
+    MenuAbout: TMenuItem;
+    PopupViewMode: TPopupMenu;
+    MenuTheta2: TMenuItem;
+    MenuN2Theta2: TMenuItem;
+    MenuSinThetaLambda2: TMenuItem;
     ImageList2: TImageList;
-    N4: TMenuItem;
-    ViewMarkers: TMenuItem;
-    SaveDialog1: TSaveDialog;
-    Edit1: TMenuItem;
-    Copy: TMenuItem;
-    Delete: TMenuItem;
-    Separator1: TMenuItem;
-    SelectAll: TMenuItem;
+    MenuSeparator4: TMenuItem;
+    MenuViewMarkers: TMenuItem;
+    SaveDialog: TSaveDialog;
+    MenuEdit: TMenuItem;
+    MenuCopy: TMenuItem;
+    MenuDelete: TMenuItem;
+    MenuSeparator2: TMenuItem;
+    MenuSelectAll: TMenuItem;
     procedure ActionAboutExecute(Sender: TObject);
     procedure ActionAnimationModeExecute(Sender: TObject);
     procedure ActionAnimationModeUpdate(Sender: TObject);
     procedure ActionCopyExecute(Sender: TObject);
     procedure ActionDeleteExecute(Sender: TObject);
-    procedure ActionDoAllAutoExecute(Sender: TObject);
-    procedure ActionEnBackVariationExecute(Sender: TObject);
-    procedure ActionEnBackVariationUpdate(Sender: TObject);
+    procedure ActionDoAllAutomaticallyExecute(Sender: TObject);
+    procedure ActionEnableBackgroundVariationExecute(Sender: TObject);
+    procedure ActionEnableBackgroundVariationUpdate(Sender: TObject);
     procedure ActionEnableCurveScalingExecute(Sender: TObject);
     procedure ActionEnableCurveScalingUpdate(Sender: TObject);
-    procedure ActionFitMinDifferenceExecute(Sender: TObject);
-    procedure ActionFitMinNumberOfSpecExecute(Sender: TObject);
-    procedure ActionImportExecute(Sender: TObject);
+    procedure ActionMinimizeDifferenceExecute(Sender: TObject);
+    procedure ActionMinimizeNumberOfCurvesExecute(Sender: TObject);
+    procedure ActionImportDataExecute(Sender: TObject);
     procedure ActionQuitExecute(Sender: TObject);
-    procedure ActionReloadExecute(Sender: TObject);
-    procedure ActionRemoveBackExecute(Sender: TObject);
-    procedure ActionRemoveRFactorIntervalsExecute(Sender: TObject);
-    procedure ActionRemoveSpecPosExecute(Sender: TObject);
-    procedure ActionRmBackAutoExecute(Sender: TObject);
-    procedure ActionRmBackSelectedExecute(Sender: TObject);
-    procedure ActionSaveAsTextExecute(Sender: TObject);
-    procedure ActionSelAreaExecute(Sender: TObject);
-    procedure ActionSelAreaLimitsExecute(Sender: TObject);
-    procedure ActionSelBackAutoExecute(Sender: TObject);
-    procedure ActionSelBackVisExecute(Sender: TObject);
-    procedure ActionSelCharacteristicPointsExecute(Sender: TObject);
-    procedure ActionSelCurveBoundsExecute(Sender: TObject);
+    procedure ActionReloadDataExecute(Sender: TObject);
+    procedure ActionRemoveBackgroundPointsExecute(Sender: TObject);
+    procedure ActionRemoveRFactorBoundsExecute(Sender: TObject);
+    procedure ActionRemoveCurvePositionsExecute(Sender: TObject);
+    procedure ActionSubtractBackgroundAutomaticallyExecute(Sender: TObject);
+    procedure ActionSubtractBackgroundBySelectedPointsExecute(Sender: TObject);
+    procedure ActionSaveModelAsTextExecute(Sender: TObject);
+    procedure ActionSelectDataIntervalExecute(Sender: TObject);
+    procedure ActionSelectIntervalBoundsExecute(Sender: TObject);
+    procedure ActionComputeBackgroundPointsExecute(Sender: TObject);
+    procedure ActionSelectBackgroundManuallyExecute(Sender: TObject);
+    procedure ActionSelectCharacteristicPointsExecute(Sender: TObject);
+    procedure ActionSelectCurveBoundsExecute(Sender: TObject);
     procedure ActionSelCurveExecute(Sender: TObject);
     procedure ActionSelectAllExecute(Sender: TObject);
-    procedure ActionSelEntireProfExecute(Sender: TObject);
-    procedure ActionSelSpecPosAtEveryPointExecute(Sender: TObject);
-    procedure ActionSelSpecPosAutoExecute(Sender: TObject);
-    procedure ActionSelRFactorIntervalsAutoExecute(Sender: TObject);
-    procedure ActionSelRFactorIntervalsVisExecute(Sender: TObject);
-    procedure ActionSelSpecPosVisExecute(Sender: TObject);
-    procedure ActionSetMaxRFactorExecute(Sender: TObject);
-    procedure ActionSetPortionExecute(Sender: TObject);
-    procedure ActionSmoothExecute(Sender: TObject);
-    procedure ActionStopFittingExecute(Sender: TObject);
+    procedure ActionSelectEntireProfileExecute(Sender: TObject);
+    procedure ActionSelectAllPointsAsCurvePositionsExecute(Sender: TObject);
+    procedure ActionComputCurvePositionsExecute(Sender: TObject);
+    procedure ActionComputeRFactorBoundsExecute(Sender: TObject);
+    procedure ActionSelectRFactorBoundsManuallyExecute(Sender: TObject);
+    procedure ActionSelectCurvePositionsManuallyExecute(Sender: TObject);
+    procedure ActionSetMaximumRFactorExecute(Sender: TObject);
+    procedure ActionSetBackgroundFractionExecute(Sender: TObject);
+    procedure ActionSmoothProfileExecute(Sender: TObject);
+    procedure ActionStopFitExecute(Sender: TObject);
     procedure ActionViewMarkersExecute(Sender: TObject);
     procedure ActionZoomInExecute(Sender: TObject);
     procedure ActionZoomOutExecute(Sender: TObject);
-    procedure ApplicationProperties1Hint(Sender: TObject);
+    procedure ApplicationPropertiesHint(Sender: TObject);
     procedure ButAddSelectedDataPointToPositionsClick(Sender: TObject);
     procedure ButAddSelectedPointToIntervalsClick(Sender: TObject);
     procedure ButAddSelectedDataPointClick(Sender: TObject);
     procedure CheckListBoxLegendDrawItem(Control: TWinControl; Index: Integer;
       ARect: TRect; State: TOwnerDrawState);
-    procedure CheckStateTimerTimer(Sender: TObject);
+    procedure TimerCheckStateTimer(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure GridDataEditingDone(Sender: TObject);
     procedure GridDataSelectEditor(Sender: TObject; aCol, aRow: Integer;
       var Editor: TWinControl);
     procedure FormCreate(Sender: TObject);
-    procedure ModelClick(Sender: TObject);
+    procedure MenuModelClick(Sender: TObject);
     procedure PanelTopClick(Sender: TObject);
-    procedure PeakPosClick(Sender: TObject);
+    procedure CurvePositionsClick(Sender: TObject);
     procedure ScrollBarXChange(Sender: TObject);
     procedure ScrollBarYChange(Sender: TObject);
     procedure TabSheetBackgroundResize(Sender: TObject);
@@ -330,38 +328,38 @@ type
       Y: Integer);
     procedure CheckListBoxLegendKeyPress(Sender: TObject; var Key: Char);
     procedure CheckListBoxLegendClick(Sender: TObject);
-    procedure SinThetaLambdaClick(Sender: TObject);
-    procedure ThetaClick(Sender: TObject);
-    procedure N2ThetaClick(Sender: TObject);
+    procedure MenuSinThetaLambdaClick(Sender: TObject);
+    procedure MenuThetaClick(Sender: TObject);
+    procedure MenuN2ThetaClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
-    procedure SetWavelengthClick(Sender: TObject);
+    procedure MenuSetWavelengthClick(Sender: TObject);
 
   protected
     { Initial values set up just after file loading. }
-    InitXGraphMax, InitXGraphMin, InitYGraphMax, InitYGraphMin: Double;
+    FInitXGraphMax, FInitXGraphMin, FInitYGraphMax, FInitYGraphMin: Double;
 
     { These variables are used for separating clicks from area selection. }
-    DownX, DownY, UpX, UpY: Integer;
+    FDownX, FDownY, FUpX, FUpY: Integer;
 
     { Saved content of edited cells. }
-    SavedPos, SavedAmp: string;
+    FSavedPos, FSavedAmp: string;
     { Protects from reentrance into editing finalization. }
-    EditDone: Boolean;
+    FEditDone: Boolean;
     { Indicates that hint message should be displayed. }
     FHandleEditHint: Boolean;
     procedure SetHandleEditHint(EditHint: Boolean);
 
   protected
-    { The object created event EditDone. }
-    SenderEditHint: TNumericGrid;
+    { The object created event FEditDone. }
+    FSenderEditHint: TNumericGrid;
 
-    HintMessage: string;
-    DrawReticule: Boolean;
+    FHintMessage: string;
+    FDrawReticule: Boolean;
 
     { Callback for calculating object. }
     procedure AsyncOperationFinished(Sender: TObject);
     { Wrapper. }
-    procedure SubtractAllBackground(Auto: Boolean);
+    procedure SubtractBackground(Auto: Boolean);
 
     procedure SetSelectionMode(ASelectionMode: TSelMode);
     procedure SetResState(State: TResState);
@@ -388,20 +386,20 @@ type
 
   public
     { Application settings. Type should be checked. }
-    Settings: Settings_v1;
+    FSettings: Settings_v1;
 
-    FitViewer: TFitViewer;
+    FFitViewer: TFitViewer;
     { Index of curve on which the first click was. It is used in the cases when points of only one curve can be selected. }
-    ActiveNumber: LongInt;
+    FActiveNumber: LongInt;
     { Collection should be passive. Object is set from TFitViewer and is checked on Nil. }
-    SpecimenList: TMSCRSpecimenList;
-    { Indicates that data in tables were changed. }
-    ModifiedParameters: Boolean;
-    ModifiedDatasheet: Boolean;
+    FCurveList: TMSCRCurveList;
+    { Indicates that MenuData in tables were changed. }
+    FModifiedParameters: Boolean;
+    FModifiedDatasheet: Boolean;
     { Index of a serie point of which is selected at the moment. }
-    CurSerieIndex: LongInt;
+    FCurSerieIndex: LongInt;
     { Index of selected value. }
-    ValueIndex: LongInt;
+    FValueIndex: LongInt;
 
 {$IFDEF _WINDOWS}
     //procedure AddDummyCurve;
@@ -462,7 +460,7 @@ const
     HintMovePeak:       string =
         'Now you can pick the menu item "Move Peak to Results"';
     HintNextPoint:      string =
-        'Now you can pick a next point or the menu item "Find Gaussians"';
+        'Now you can pick a next point or the menu item "Minimize Difference"';
     HintNextBackPoint:  string =
         'Now you can pick a next point or the menu item "Remove Background"';
     HintNextPointOdd:   string = 'Now you can pick a left point of peak';
@@ -478,9 +476,10 @@ const
 
 implementation
 
-uses input_wavelength_dialog, input_max_rfactor_dialog,
-    input_back_factor_dialog, about_box_dialog, app, int_curve_type_iterator,
-    int_curve_type_selector, curve_types_singleton;
+uses
+    input_wavelength_dialog, set_maximum_rfactor_dialog, input_back_factor_dialog,
+    about_box_dialog, app, int_curve_type_iterator, int_curve_type_selector,
+    curve_types_singleton;
 
 (*
 function OFNHookProc(
@@ -568,7 +567,7 @@ begin
 end;
 {$hints on}
 
-procedure TFormMain.CheckStateTimerTimer(Sender: TObject);
+procedure TFormMain.TimerCheckStateTimer(Sender: TObject);
 begin
     //  eta proverka pochemu-to ne srabatyvaet
     //if csDestroying in ComponentState then Exit;
@@ -604,7 +603,7 @@ begin
     SetOpenState(FitClientApp_.FitClient.OpenState);
 end;
 
-procedure TFormMain.ApplicationProperties1Hint(Sender: TObject);
+procedure TFormMain.ApplicationPropertiesHint(Sender: TObject);
 begin
     ShowHint(Application.Hint);
 end;
@@ -618,18 +617,18 @@ procedure TFormMain.LoadDataFile(FileName: string);
 begin
     //  v sluchae oshibki zagruzki d. vybrasyvat'sya isklyuchenie
     FitClientApp_.FitClient.LoadDataSet(FileName);
-    Caption := ApplicationProperties1.Title +
+    Caption := ApplicationProperties.Title +
         ' - ' + ExtractFileName(FileName);
     // chtoby proshlo obnovlenie grafika i Chart.XGraphMax
     // i dr. imeli pravil'nye znacheniya
     Application.ProcessMessages;
-    InitXGraphMax := Chart.XGraphMax;
-    InitXGraphMin := Chart.XGraphMin;
-    InitYGraphMax := Chart.YGraphMax;
-    InitYGraphMin := Chart.YGraphMin;
+    FInitXGraphMax := Chart.XGraphMax;
+    FInitXGraphMin := Chart.XGraphMin;
+    FInitYGraphMax := Chart.YGraphMax;
+    FInitYGraphMin := Chart.YGraphMin;
 end;
 
-procedure TFormMain.ActionImportExecute(Sender: TObject);
+procedure TFormMain.ActionImportDataExecute(Sender: TObject);
 (*
 var ofn: OPENFILENAME;
     Res: WINBOOL;
@@ -657,7 +656,7 @@ begin
     //  chto pri ruchnoy obrabotke sootvetstvuyuschih sobscheniy v
     //  hook'e mozhno ih izbezhat'; v normal'nom rezhime raboty
     //  sboi ne zamecheny, poetomu poka ostavleno tak kak est' !!!
-    with OpenDialog1 do
+    with OpenDialog do
     begin
         InitialDir := ExtractFilePath(Application.ExeName);
         if Execute then
@@ -682,14 +681,14 @@ begin
 
     SelectedCurveTypeId := CurveTypeSelector.GetSelectedCurveType;
     //  Clears menu.
-    SelCurveType.Clear;
+    MenuSelectCurveType.Clear;
     //  Creates menu items for curve types.
     //  The list must contain at least one item.
     CurveTypeIterator.FirstCurveType;
     Index := 0;
     while True do
     begin
-        MenuItem := TMenuItem.Create(SelCurveType);
+        MenuItem := TMenuItem.Create(MenuSelectCurveType);
         MenuItem.Name := 'CurveType' + IntToStr(Index);
         MenuItem.Tag := CurveTypeIterator.GetCurveTypeTag(CurveTypeIterator.GetCurveTypeId);
         Inc(Index);
@@ -700,7 +699,7 @@ begin
         if IsEqualGUID(SelectedCurveTypeId, CurveTypeIterator.GetCurveTypeId) then
             MenuItem.Checked := True;
 
-        SelCurveType.Add(MenuItem);
+        MenuSelectCurveType.Add(MenuItem);
         //  The last item should be processed as well.
         if CurveTypeIterator.EndCurveType then Break
         else
@@ -712,7 +711,7 @@ procedure TFormMain.ActionDeleteExecute(Sender: TObject);
 var i, RowsToDelete, Index: LongInt;
 begin
     //  TODO: obobschit' na vse gridy
-    if Assigned(SpecimenList) then
+    if Assigned(FCurveList) then
     begin
         with GridParameters do
         begin
@@ -722,11 +721,11 @@ begin
                 //  udalit' mozhno tol'ko tselye stroki
                 RowsToDelete := Selection.Bottom - Selection.Top + 1;
                 Index := Selection.Top - FixedRows;
-                for i := 1 to RowsToDelete do SpecimenList.Delete(Index);
+                for i := 1 to RowsToDelete do FCurveList.Delete(Index);
             end;
         end;
-        SpecimenList.GridAssign(GridParameters);
-        ModifiedParameters := True;
+        FCurveList.GridAssign(GridParameters);
+        FModifiedParameters := True;
     end;
 end;
 
@@ -743,15 +742,15 @@ end;
 
 procedure TFormMain.ActionAnimationModeExecute(Sender: TObject);
 begin
-    FitViewer.SetAnimationMode(not FitViewer.GetAnimationMode);
+    FFitViewer.SetAnimationMode(not FFitViewer.GetAnimationMode);
 end;
 
 procedure TFormMain.ActionAnimationModeUpdate(Sender: TObject);
 begin
-    ActionAnimationMode.Checked := FitViewer.GetAnimationMode;
+    ActionAnimationMode.Checked := FFitViewer.GetAnimationMode;
 end;
 
-procedure TFormMain.ActionDoAllAutoExecute(Sender: TObject);
+procedure TFormMain.ActionDoAllAutomaticallyExecute(Sender: TObject);
 begin
     Assert(Assigned(FitClientApp_));
     //  polnyy perezapusk rascheta - flag proveryat' ne nuzhno
@@ -762,16 +761,16 @@ begin
 {$ENDIF}
 end;
 
-procedure TFormMain.ActionEnBackVariationExecute(Sender: TObject);
+procedure TFormMain.ActionEnableBackgroundVariationExecute(Sender: TObject);
 begin
     FitClientApp_.FitClient.BackgroundVariationEnabled :=
         not FitClientApp_.FitClient.BackgroundVariationEnabled;
-    ActionEnBackVariationUpdate(Sender);
+    ActionEnableBackgroundVariationUpdate(Sender);
 end;
 
-procedure TFormMain.ActionEnBackVariationUpdate(Sender: TObject);
+procedure TFormMain.ActionEnableBackgroundVariationUpdate(Sender: TObject);
 begin
-    ActionEnBackVariation.Checked := FitClientApp_.FitClient.BackgroundVariationEnabled;
+    ActionEnableBackgroundVariation.Checked := FitClientApp_.FitClient.BackgroundVariationEnabled;
 end;
 
 procedure TFormMain.ActionEnableCurveScalingExecute(Sender: TObject);
@@ -786,65 +785,65 @@ begin
     ActionEnableCurveScaling.Checked := FitClientApp_.FitClient.CurveScalingEnabled;
 end;
 
-procedure TFormMain.ActionFitMinDifferenceExecute(Sender: TObject);
+procedure TFormMain.ActionMinimizeDifferenceExecute(Sender: TObject);
 begin
     ShowHint(HintMain);
-    SelSpecPosVis.Checked := False;
-    FitClientApp_.FitClient.FindGausses;
+    MenuSelectCurvePositionsManually.Checked := False;
+    FitClientApp_.FitClient.MinimizeDifference;
     ShowHint(HintWait);
 {$IFDEF FITPRO}
     TimerAsync.Enabled := True;
 {$ENDIF}
 end;
 
-procedure TFormMain.ActionFitMinNumberOfSpecExecute(Sender: TObject);
+procedure TFormMain.ActionMinimizeNumberOfCurvesExecute(Sender: TObject);
 begin
     ShowHint(HintMain);
-    SelSpecPosVis.Checked := False;
-    FitClientApp_.FitClient.FindGaussesSequentially;
+    MenuSelectCurvePositionsManually.Checked := False;
+    FitClientApp_.FitClient.MinimizeNumberOfCurves;
     ShowHint(HintWait);
 {$IFDEF FITPRO}
     TimerAsync.Enabled := True;
 {$ENDIF}
 end;
 
-procedure TFormMain.ActionReloadExecute(Sender: TObject);
+procedure TFormMain.ActionReloadDataExecute(Sender: TObject);
 begin
     FitClientApp_.FitClient.Reload;
     // chtoby proshlo obnovlenie grafika i Chart.XGraphMax
     // i dr. imeli pravil'nye znacheniya
     Application.ProcessMessages;
-    InitXGraphMax := Chart.XGraphMax;
-    InitXGraphMin := Chart.XGraphMin;
-    InitYGraphMax := Chart.YGraphMax;
-    InitYGraphMin := Chart.YGraphMin;
+    FInitXGraphMax := Chart.XGraphMax;
+    FInitXGraphMin := Chart.XGraphMin;
+    FInitYGraphMax := Chart.YGraphMax;
+    FInitYGraphMin := Chart.YGraphMin;
 end;
 
-procedure TFormMain.ActionRemoveBackExecute(Sender: TObject);
+procedure TFormMain.ActionRemoveBackgroundPointsExecute(Sender: TObject);
 begin
     FitClientApp_.FitClient.RemoveBackgroundPoints;
-    FitClientApp_.FitClient.SelectionMode := ModeSelNone;
+    FitClientApp_.FitClient.SelectionMode := ModeSelectNothing;
 end;
 
-procedure TFormMain.ActionRemoveRFactorIntervalsExecute(Sender: TObject);
+procedure TFormMain.ActionRemoveRFactorBoundsExecute(Sender: TObject);
 begin
-    FitClientApp_.FitClient.RemoveRFactorIntervals;
-    FitClientApp_.FitClient.SelectionMode := ModeSelNone;
+    FitClientApp_.FitClient.RemoveRFactorBounds;
+    FitClientApp_.FitClient.SelectionMode := ModeSelectNothing;
 end;
 
-procedure TFormMain.ActionRemoveSpecPosExecute(Sender: TObject);
+procedure TFormMain.ActionRemoveCurvePositionsExecute(Sender: TObject);
 begin
     FitClientApp_.FitClient.RemoveCurvePositions;
-    FitClientApp_.FitClient.SelectionMode := ModeSelNone;
+    FitClientApp_.FitClient.SelectionMode := ModeSelectNothing;
 end;
 
-procedure TFormMain.ActionRmBackAutoExecute(Sender: TObject);
+procedure TFormMain.ActionSubtractBackgroundAutomaticallyExecute(Sender: TObject);
 begin
-    FitClientApp_.FitClient.SelectionMode := ModeSelNone;
-    SubtractAllBackground(True);
+    FitClientApp_.FitClient.SelectionMode := ModeSelectNothing;
+    SubtractBackground(True);
 end;
 
-procedure TFormMain.ActionRmBackSelectedExecute(Sender: TObject);
+procedure TFormMain.ActionSubtractBackgroundBySelectedPointsExecute(Sender: TObject);
 begin
     if (FitClientApp_.FitClient.GetBackgroundPoints = nil) or
        (FitClientApp_.FitClient.GetBackgroundPoints.PointsCount < 2) then
@@ -855,26 +854,26 @@ begin
          Exit;
     end;
 
-    FitClientApp_.FitClient.SelectionMode := ModeSelNone;
-    SubtractAllBackground(False);
+    FitClientApp_.FitClient.SelectionMode := ModeSelectNothing;
+    SubtractBackground(False);
 end;
 
-procedure TFormMain.ActionSaveAsTextExecute(Sender: TObject);
+procedure TFormMain.ActionSaveModelAsTextExecute(Sender: TObject);
 begin
-    if PageControl1.ActivePage = TabSheetParameters then
+    if PageControl.ActivePage = TabSheetParameters then
     begin
         if SaveTableAsText(GridParameters) then
-            ModifiedParameters := False;
+            FModifiedParameters := False;
     end
     else
-    if PageControl1.ActivePage = TabSheetDatasheet then
+    if PageControl.ActivePage = TabSheetDatasheet then
     begin
         if SaveTableAsText(GridDatasheet) then
-            ModifiedDatasheet := False;
+            FModifiedDatasheet := False;
     end;
 end;
 
-procedure TFormMain.ActionSelAreaExecute(Sender: TObject);
+procedure TFormMain.ActionSelectDataIntervalExecute(Sender: TObject);
 var SP: TNeutronPointsSet;
     NP: TNeutronPointsSet;
 begin
@@ -888,7 +887,7 @@ begin
     end;
 
     NP := FitClientApp_.FitClient.NeutronPointsSet;
-        //FitViewer.GetPointsSet(ActiveNumber);
+        //FFitViewer.GetPointsSet(FActiveNumber);
     SP.Sort;
 
     ShowHint(HintMain);
@@ -896,86 +895,86 @@ begin
         NP.IndexOfValueX(SP.PointXCoord[0]),
         NP.IndexOfValueX(SP.PointXCoord[1])
         );
-    FitClientApp_.FitClient.SelectionMode := ModeSelNone;
+    FitClientApp_.FitClient.SelectionMode := ModeSelectNothing;
     // chtoby proshlo obnovlenie grafika i Chart.XGraphMax
     // i dr. imeli pravil'nye znacheniya
     Application.ProcessMessages;
-    InitXGraphMax := Chart.XGraphMax;
-    InitXGraphMin := Chart.XGraphMin;
-    InitYGraphMax := Chart.YGraphMax;
-    InitYGraphMin := Chart.YGraphMin;
+    FInitXGraphMax := Chart.XGraphMax;
+    FInitXGraphMin := Chart.XGraphMin;
+    FInitYGraphMax := Chart.YGraphMax;
+    FInitYGraphMin := Chart.YGraphMin;
 end;
 
-procedure TFormMain.ActionSelAreaLimitsExecute(Sender: TObject);
+procedure TFormMain.ActionSelectIntervalBoundsExecute(Sender: TObject);
 begin
-    if not SelAreaLimits.Checked then
+    if not MenuSelectIntervalBounds.Checked then
     begin
-        ActiveNumber := FitViewer.GetActiveCurve;
-        FitClientApp_.FitClient.SelectionMode := ModeSelAreaLimits;
+        FActiveNumber := FFitViewer.GetActiveCurve;
+        FitClientApp_.FitClient.SelectionMode := ModeSelectIntervalBounds;
         ShowHint(HintFirstStart);
     end
     else
     begin
-        FitClientApp_.FitClient.SelectionMode := ModeSelNone;
+        FitClientApp_.FitClient.SelectionMode := ModeSelectNothing;
     end;
 end;
 
-procedure TFormMain.ActionSelBackAutoExecute(Sender: TObject);
+procedure TFormMain.ActionComputeBackgroundPointsExecute(Sender: TObject);
 begin
     //  perehodim v rezhim vvoda tochek fona
-    if not Back.Checked then
+    if not MenuBackground.Checked then
     begin
-        ActiveNumber := FitViewer.GetActiveCurve;
-        FitClientApp_.FitClient.SelectionMode := ModeSelBackground;
+        FActiveNumber := FFitViewer.GetActiveCurve;
+        FitClientApp_.FitClient.SelectionMode := ModeSelectBackground;
         ShowHint(HintFirst);
     end;
     //??? el-t menyu d.b. zapreschen do okonchaniya rascheta;
     // proverit' vse analogichnye sluchai
-    FitClientApp_.FitClient.FindBackPoints;
+    FitClientApp_.FitClient.ComputeBackgroundPoints;
 end;
 
-procedure TFormMain.ActionSelBackVisExecute(Sender: TObject);
+procedure TFormMain.ActionSelectBackgroundManuallyExecute(Sender: TObject);
 begin
-    if not Back.Checked then
+    if not MenuBackground.Checked then
     begin
-        ActiveNumber := FitViewer.GetActiveCurve;
-        FitClientApp_.FitClient.SelectionMode := ModeSelBackground;
+        FActiveNumber := FFitViewer.GetActiveCurve;
+        FitClientApp_.FitClient.SelectionMode := ModeSelectBackground;
         ShowHint(HintFirst);
     end
     else
-        FitClientApp_.FitClient.SelectionMode := ModeSelNone;
+        FitClientApp_.FitClient.SelectionMode := ModeSelectNothing;
 end;
 
-procedure TFormMain.ActionSelCharacteristicPointsExecute(Sender: TObject);
+procedure TFormMain.ActionSelectCharacteristicPointsExecute(Sender: TObject);
 begin
-    if not SelCharacteristicPoints.Checked then
+    if not MenuSelectCharacteristicPoints.Checked then
     begin
-        ActiveNumber := FitViewer.GetActiveCurve;
-        FitClientApp_.FitClient.SelectionMode := ModeSelCharacteristicPoints;
+        FActiveNumber := FFitViewer.GetActiveCurve;
+        FitClientApp_.FitClient.SelectionMode := ModeSelectCharacteristicPoints;
         ShowHint(HintFirstStart);
     end
     else
-        FitClientApp_.FitClient.SelectionMode := ModeSelNone;
+        FitClientApp_.FitClient.SelectionMode := ModeSelectNothing;
 end;
 
-procedure TFormMain.ActionSelCurveBoundsExecute(Sender: TObject);
+procedure TFormMain.ActionSelectCurveBoundsExecute(Sender: TObject);
 var PS: TNeutronPointsSet;
 begin
-    if not SelCurveBounds.Checked then
+    if not MenuSelectCurveBounds.Checked then
     begin
-        ActiveNumber := FitViewer.GetActiveCurve;
-        PS := FitViewer.GetActivePointsSet;
+        FActiveNumber := FFitViewer.GetActiveCurve;
+        PS := FFitViewer.GetActivePointsSet;
         if not (PS is TCurvePointsSet) then
         begin
-            MessageDlg('This operation allowed only with pattern specimens...',
+            MessageDlg('This operation allowed only with curves...',
                 mtWarning, [mbOk], 0);
             Exit;
         end;
-        FitClientApp_.FitClient.SelectionMode := ModeSelGaussianBounds;
+        FitClientApp_.FitClient.SelectionMode := ModeSelectCurveBounds;
         ShowHint(HintFirstStart);
     end
     else
-        FitClientApp_.FitClient.SelectionMode := ModeSelNone;
+        FitClientApp_.FitClient.SelectionMode := ModeSelectNothing;
 end;
 
 procedure TFormMain.ActionSelCurveExecute(Sender: TObject);
@@ -1025,7 +1024,7 @@ begin
                 end
                 else
                 begin
-                    //  Save configuration data.
+                    //  Save configuration MenuData.
                 end;
 
             //  Curve type can be selected only after successful configuration.
@@ -1045,96 +1044,96 @@ begin
         with ActiveControl as TNumericGrid do SelectAll;
 end;
 
-procedure TFormMain.ActionSelEntireProfExecute(Sender: TObject);
+procedure TFormMain.ActionSelectEntireProfileExecute(Sender: TObject);
 begin
     FitClientApp_.FitClient.ReturnToTotalProfile;
     ShowHint(HintMain);
     // chtoby proshlo obnovlenie grafika i Chart.XGraphMax
     // i dr. imeli pravil'nye znacheniya
     Application.ProcessMessages;
-    InitXGraphMax := Chart.XGraphMax;
-    InitXGraphMin := Chart.XGraphMin;
-    InitYGraphMax := Chart.YGraphMax;
-    InitYGraphMin := Chart.YGraphMin;
+    FInitXGraphMax := Chart.XGraphMax;
+    FInitXGraphMin := Chart.XGraphMin;
+    FInitYGraphMax := Chart.YGraphMax;
+    FInitYGraphMin := Chart.YGraphMin;
 end;
 
-procedure TFormMain.ActionSelSpecPosAtEveryPointExecute(Sender: TObject);
+procedure TFormMain.ActionSelectAllPointsAsCurvePositionsExecute(Sender: TObject);
 begin
-    FitClientApp_.FitClient.AllPointsAsPeakPositions;
+    FitClientApp_.FitClient.SelectAllPointsAsCurvePositions;
 end;
 
-procedure TFormMain.ActionSelSpecPosAutoExecute(Sender: TObject);
+procedure TFormMain.ActionComputCurvePositionsExecute(Sender: TObject);
 begin
-    FitClientApp_.FitClient.FindPeakPositions;
+    FitClientApp_.FitClient.ComputeCurvePositions;
 end;
 
-procedure TFormMain.ActionSelRFactorIntervalsAutoExecute(Sender: TObject);
+procedure TFormMain.ActionComputeRFactorBoundsExecute(Sender: TObject);
 begin
     //  perehodim v rezhim vybora intervalov rascheta R-faktora
-    if not RFactorIntervals.Checked then
+    if not MenuRFactorIntervals.Checked then
     begin
-        ActiveNumber := FitViewer.GetActiveCurve;
-        FitClientApp_.FitClient.SelectionMode := ModeSelPeakBounds;
+        FActiveNumber := FFitViewer.GetActiveCurve;
+        FitClientApp_.FitClient.SelectionMode := ModeSelectRFactorBounds;
         ShowHint(HintFirst);
     end;
     //??? el-t menyu d.b. zapreschen do okonchaniya rascheta;
     // proverit' vse analogichnye sluchai
-    FitClientApp_.FitClient.FindPeakBounds;
+    FitClientApp_.FitClient.ComputeCurveBounds;
 end;
 
-procedure TFormMain.ActionSelRFactorIntervalsVisExecute(Sender: TObject);
+procedure TFormMain.ActionSelectRFactorBoundsManuallyExecute(Sender: TObject);
 begin
-    if not RFactorIntervals.Checked then
+    if not MenuRFactorIntervals.Checked then
     begin
-        ActiveNumber := FitViewer.GetActiveCurve;
-        FitClientApp_.FitClient.SelectionMode := ModeSelPeakBounds;
+        FActiveNumber := FFitViewer.GetActiveCurve;
+        FitClientApp_.FitClient.SelectionMode := ModeSelectRFactorBounds;
         ShowHint(HintFirst);
     end
     else
-        FitClientApp_.FitClient.SelectionMode := ModeSelNone;
+        FitClientApp_.FitClient.SelectionMode := ModeSelectNothing;
 end;
 
-procedure TFormMain.ActionSelSpecPosVisExecute(Sender: TObject);
+procedure TFormMain.ActionSelectCurvePositionsManuallyExecute(Sender: TObject);
 begin
-    if not PeakPos.Checked then
+    if not MenuCurvePositions.Checked then
     begin
-        ActiveNumber := FitViewer.GetActiveCurve;
-        FitClientApp_.FitClient.SelectionMode := ModeSelPeakPos;
+        FActiveNumber := FFitViewer.GetActiveCurve;
+        FitClientApp_.FitClient.SelectionMode := ModeSelectCurvePositions;
         ShowHint(HintFirst);
     end
     else
-        FitClientApp_.FitClient.SelectionMode := ModeSelNone;
+        FitClientApp_.FitClient.SelectionMode := ModeSelectNothing;
 end;
 
-procedure TFormMain.ActionSetMaxRFactorExecute(Sender: TObject);
+procedure TFormMain.ActionSetMaximumRFactorExecute(Sender: TObject);
 begin
-    InputMaxRFactorDlg.Value := FitClientApp_.FitClient.MaxRFactor;
-    if InputMaxRFactorDlg.ShowModal = mrOk then
-        FitClientApp_.FitClient.MaxRFactor := InputMaxRFactorDlg.Value;
+    SetMaximumRFactorDlg.FValue := FitClientApp_.FitClient.MaxRFactor;
+    if SetMaximumRFactorDlg.ShowModal = mrOk then
+        FitClientApp_.FitClient.MaxRFactor := SetMaximumRFactorDlg.FValue;
 end;
 
-procedure TFormMain.ActionSetPortionExecute(Sender: TObject);
+procedure TFormMain.ActionSetBackgroundFractionExecute(Sender: TObject);
 begin
-    InputBackFactorDlg.Value := FitClientApp_.FitClient.BackFactor;
+    InputBackFactorDlg.FValue := FitClientApp_.FitClient.BackFactor;
     if InputBackFactorDlg.ShowModal = mrOk then
-        FitClientApp_.FitClient.BackFactor := InputBackFactorDlg.Value;
+        FitClientApp_.FitClient.BackFactor := InputBackFactorDlg.FValue;
 end;
 
-procedure TFormMain.ActionSmoothExecute(Sender: TObject);
+procedure TFormMain.ActionSmoothProfileExecute(Sender: TObject);
 begin
     //  sglazhivanie mozhno primenyat' posledovatel'no neskol'ko raz
     FitClientApp_.FitClient.SmoothProfile;
 end;
 
-procedure TFormMain.ActionStopFittingExecute(Sender: TObject);
+procedure TFormMain.ActionStopFitExecute(Sender: TObject);
 begin
     FitClientApp_.FitClient.StopAsyncOper;
 end;
 
 procedure TFormMain.ActionViewMarkersExecute(Sender: TObject);
 begin
-    ViewMarkers.Checked := not ViewMarkers.Checked;
-    FitViewer.SetViewMarkers(ViewMarkers.Checked);
+    MenuViewMarkers.Checked := not MenuViewMarkers.Checked;
+    FFitViewer.SetViewMarkers(MenuViewMarkers.Checked);
 end;
 
 procedure TFormMain.ActionZoomInExecute(Sender: TObject);
@@ -1170,7 +1169,7 @@ begin
         XValue := StrToFloatDef(Cells[0, Row], 0);
         YValue := StrToFloatDef(Cells[1, Row], 0);
     end;
-    FitClientApp_.FitClient.AddPointToRFactorIntervals(XValue, YValue);
+    FitClientApp_.FitClient.AddPointToRFactorBounds(XValue, YValue);
 end;
 
 procedure TFormMain.ButAddSelectedDataPointClick(Sender: TObject);
@@ -1191,8 +1190,8 @@ procedure TFormMain.FormDestroy(Sender: TObject);
 begin
     //AddDummyCurve;
     WriteSettings;
-    Settings.Free;
-    FitViewer.Free;
+    FSettings.Free;
+    FFitViewer.Free;
 end;
 
 procedure TFormMain.GridDataEditingDone(Sender: TObject);
@@ -1206,21 +1205,21 @@ begin
     try
         //  !!! pochemu-to vyzyvaetsya po tri raza,
         //  poetomu nuzhno ispol'zovat' flag !!!
-        if not EditDone then
+        if not FEditDone then
             with Sender as TNumericGrid do
             begin
-                EditDone := True;
+                FEditDone := True;
                 if Col = 0 then
                 begin
                     //  redaktiruetsya polozhenie
                     //  !!! esli nichego ne vvedeno, to i obnovlyat' ne nuzhno !!!
-                    if SavedPos <> Cells[0, Row] then
+                    if FSavedPos <> Cells[0, Row] then
                         Objects[0, Row] := TObject(1);
                 end
                 else
                 begin
                     //  redaktiruetsya amplituda
-                    if SavedAmp <> Cells[1, Row] then
+                    if FSavedAmp <> Cells[1, Row] then
                         Objects[1, Row] := TObject(1);
                 end;
                 //  proveryayutsya vse priznaki zapolneniya yacheek...
@@ -1238,9 +1237,9 @@ begin
                 begin
                     //  !!! ispol'zuetsya StrToFloatDef, chtoby obrabatyvat'
                     //  sluchai, kogda stroka byla pustoy !!!
-                    PrevXValue := StrToFloatDef(SavedPos, 0);
+                    PrevXValue := StrToFloatDef(FSavedPos, 0);
                     NewXValue := StrToFloatDef(Cells[0, Row], 0);
-                    PrevYValue := StrToFloatDef(SavedAmp, 0);
+                    PrevYValue := StrToFloatDef(FSavedAmp, 0);
                     NewYValue := StrToFloatDef(Cells[1, Row], 0);
 
                     if Sender = GridData then
@@ -1260,8 +1259,8 @@ begin
         //  !!! takie isklyucheniya ne popadut v log !!!
         begin
             HandleEditHint := True; //  vklyuchaetsya taymer vyvoda soobscheniya
-            SenderEditHint := TNumericGrid(Sender);
-            HintMessage := E.Message;
+            FSenderEditHint := TNumericGrid(Sender);
+            FHintMessage := E.Message;
         end;
 {$ELSE}
         raise;
@@ -1278,10 +1277,10 @@ var //BE: BalloonException;
 {$endif}
 begin
 {$ifdef windows}
-    if SenderEditHint = GridBackground then
+    if FSenderEditHint = GridBackground then
         EditBalloon := EditBalloonGridBackground
     else
-    if SenderEditHint = GridData then
+    if FSenderEditHint = GridData then
         EditBalloon := EditBalloonGridData;
     //BE := BalloonException.Create(E.Message);
     //if TNumericGrid(Sender).EditorMode then
@@ -1289,10 +1288,10 @@ begin
     //    Handle := TNumericGrid(Sender).Editor.Handle
     //else
     //begin
-        CellRect := SenderEditHint.CellRect(
-            SenderEditHint.Col, SenderEditHint.Row);
-        EditBalloon.Left := CellRect.Left + SenderEditHint.Left;
-        EditBalloon.Top := CellRect.Top + SenderEditHint.Top;
+        CellRect := FSenderEditHint.CellRect(
+            FSenderEditHint.Col, FSenderEditHint.Row);
+        EditBalloon.Left := CellRect.Left + FSenderEditHint.Left;
+        EditBalloon.Top := CellRect.Top + FSenderEditHint.Top;
         //BE.Handle
             Handle := EditBalloon.Handle;
     //end;
@@ -1301,9 +1300,9 @@ begin
     ActiveControl := EditBalloon;
     //  !!! pri isp. ShowBalloon nel'zya dopuskat' vyhod
     //  isklyucheniya za granitsy obrabotchika sobytiya !!!
-    ShowBalloon(Handle, WideString(HintMessage), WideString(''));
+    ShowBalloon(Handle, WideString(FHintMessage), WideString(''));
 {$else}
-    MessageDlg(HintMessage, mtError, [mbOk], 0);
+    MessageDlg(FHintMessage, mtError, [mbOk], 0);
 {$endif}
 end;
 
@@ -1311,35 +1310,35 @@ end;
 procedure TFormMain.GridDataSelectEditor(Sender: TObject; aCol, aRow: Integer;
   var Editor: TWinControl);
 begin
-    SavedPos := GridData.Cells[0, GridData.Row];
-    SavedAmp := GridData.Cells[1, GridData.Row];
-    EditDone := False;
+    FSavedPos := GridData.Cells[0, GridData.Row];
+    FSavedAmp := GridData.Cells[1, GridData.Row];
+    FEditDone := False;
 end;
 {$hints on}
 
 procedure TFormMain.FormCreate(Sender: TObject);
 begin
     Application.OnException := OnException;
-    Caption := ApplicationProperties1.Title;
+    Caption := ApplicationProperties.Title;
 
-    FitViewer := TFitViewer.Create(nil);
-    FitViewer.Form := Self;
-    FitViewer.SetFitClient(FitClientApp_.FitClient);
-    FitViewer.SetViewMarkers(ViewMarkers.Checked);
-    FitViewer.Clear(Self);
+    FFitViewer := TFitViewer.Create(nil);
+    FFitViewer.Form := Self;
+    FFitViewer.SetFitClient(FitClientApp_.FitClient);
+    FFitViewer.SetViewMarkers(MenuViewMarkers.Checked);
+    FFitViewer.Clear(Self);
 
-    ActiveNumber := -1;
+    FActiveNumber := -1;
 
     FitClientApp_.FitClient.OnAsyncOperationFinished := AsyncOperationFinished;
 
     ShowHint(HintMain);
-    ModifiedParameters := False;
-    ModifiedDatasheet := False;
+    FModifiedParameters := False;
+    FModifiedDatasheet := False;
 
     //PanelLeft.Color := clWindow;
     //PanelChart.Color := clWindow;
     //PanelRight.Color := clWindow;
-    //PageControl1.Color := clWindow;
+    //PageControl.Color := clWindow;
     CheckListBoxLegend.Color := clBtnFace;
     //  pochemu-to pri pervonachal'nom otkrytii
     //  formy v IDE sbrasyvaetsya v False
@@ -1381,7 +1380,7 @@ begin
     //Chart.Cursor := crCross;//crCursorDrag;
     //Windows.SetCursor(crCursorDrag);
     //Windows.SetCursor(Windows.LoadCursor(0, LclCursorToWin32CursorMap[ACursor]));
-    Settings := Settings_v1.Create(nil);
+    FSettings := Settings_v1.Create(nil);
     ReadSettings;
     CreateCurveTypeMenus;
 {$IFDEF _WINDOWS}
@@ -1390,7 +1389,7 @@ begin
 {$ENDIF}
 end;
 
-procedure TFormMain.ModelClick(Sender: TObject);
+procedure TFormMain.MenuModelClick(Sender: TObject);
 begin
 
 end;
@@ -1400,16 +1399,16 @@ begin
 
 end;
 
-procedure TFormMain.PeakPosClick(Sender: TObject);
+procedure TFormMain.CurvePositionsClick(Sender: TObject);
 begin
 
 end;
 
-procedure TFormMain.SubtractAllBackground(Auto: Boolean);
+procedure TFormMain.SubtractBackground(Auto: Boolean);
 begin
     ShowHint(HintMain);
-    Back.Checked := False;
-    FitClientApp_.FitClient.SubtractAllBackground(Auto);
+    MenuBackground.Checked := False;
+    FitClientApp_.FitClient.SubtractBackground(Auto);
 end;
 
 procedure TFormMain.ScrollBarXChange(Sender: TObject);
@@ -1418,19 +1417,19 @@ begin
     if Chart.SeriesCount <> 0 then
     begin
         (*  vraschenie v druguyu storonu
-        DeltaX := (InitXGraphMax - InitXGraphMin) -
+        DeltaX := (FInitXGraphMax - FInitXGraphMin) -
                   (Chart.XGraphMax - Chart.XGraphMin);
         D := Chart.XGraphMax - Chart.XGraphMin;
-        Chart.XGraphMax := InitXGraphMax -
+        Chart.XGraphMax := FInitXGraphMax -
             (ScrollBarX.Position - ScrollBarX.Min) * DeltaX /
             (ScrollBarX.Max - ScrollBarX.Min);
         Chart.XGraphMin := Chart.XGraphMax - D;
         *)
 
-        DeltaX := (InitXGraphMax - InitXGraphMin) -
+        DeltaX := (FInitXGraphMax - FInitXGraphMin) -
                   (Chart.XGraphMax - Chart.XGraphMin);
         D := Chart.XGraphMax - Chart.XGraphMin;
-        Chart.XGraphMax := InitXGraphMax -
+        Chart.XGraphMax := FInitXGraphMax -
             (ScrollBarX.Max - ScrollBarX.Position) * DeltaX /
             (ScrollBarX.Max - ScrollBarX.Min);
         Chart.XGraphMin := Chart.XGraphMax - D;
@@ -1444,20 +1443,20 @@ begin
     if Chart.SeriesCount <> 0 then
     begin
         (*  vraschenie v druguyu storonu
-        DeltaY := (InitYGraphMax - InitYGraphMin) -
+        DeltaY := (FInitYGraphMax - FInitYGraphMin) -
                   (Chart.YGraphMax - Chart.YGraphMin);
         D := Chart.YGraphMax - Chart.YGraphMin;
-        Chart.YGraphMin := InitYGraphMin +
+        Chart.YGraphMin := FInitYGraphMin +
             (ScrollBarY.Position - ScrollBarY.Min) * DeltaY /
             (ScrollBarY.Max - ScrollBarY.Min);
         Chart.YGraphMax := Chart.YGraphMin + D;
         Chart.Invalidate;
         *)
 
-        DeltaY := (InitYGraphMax - InitYGraphMin) -
+        DeltaY := (FInitYGraphMax - FInitYGraphMin) -
                   (Chart.YGraphMax - Chart.YGraphMin);
         D := Chart.YGraphMax - Chart.YGraphMin;
-        Chart.YGraphMin := InitYGraphMin +
+        Chart.YGraphMin := FInitYGraphMin +
             (ScrollBarY.Max - ScrollBarY.Position) * DeltaY /
             (ScrollBarY.Max - ScrollBarY.Min);
         Chart.YGraphMax := Chart.YGraphMin + D;
@@ -1499,7 +1498,7 @@ var XValue, YValue: Double;
 {$endif}
 begin
     Assert(Assigned(FitClientApp_));
-    Assert(Assigned(FitViewer));
+    Assert(Assigned(FFitViewer));
     try
         //  !!! esli m-u dvumya klikami ne bylo dvizheniya myshi i
         //  ChartDrawReticule ne vyzyvalas', to CurSerieIndex i ValueIndex
@@ -1510,22 +1509,22 @@ begin
         //  TControl.Click; prostym perekrytiem metoda
         //  dobit'sya zhelaemogo effekta nel'zya; poetomu
         //  sdelana dopolnitel'naya prostaya proverka
-        if DrawReticule and
-            (DownX = UpX) and (DownY = UpY) and (ActiveNumber <> -1) then
+        if FDrawReticule and
+            (FDownX = FUpX) and (FDownY = FUpY) and (FActiveNumber <> -1) then
         begin
-            DrawReticule := False;
+            FDrawReticule := False;
             //  seriya, na kotoroy byl sdelan klik sravnivaetsya s aktivnoy;
             //  dopuskaetsya klik tol'ko na aktivnoy serii, tochki kotoroy
             //  dobavlyayutsya v vybrannuyu seriyu, ili na vybrannoy serii, iz
             //  kotoroy pri etom tochka udalyaetsya
-            if (CurSerieIndex = ActiveNumber) or
-               (FitViewer.GetPointsSet(CurSerieIndex) =
+            if (FCurSerieIndex = FActiveNumber) or
+               (FFitViewer.GetPointsSet(FCurSerieIndex) =
                 FitClientApp_.FitClient.GetCurrentPointsSet) then
             begin
                 case FitClientApp_.FitClient.SelectionMode of
-                    ModeSelNone: Exit;
+                    ModeSelectNothing: Exit;
 
-                    ModeSelAreaLimits: begin
+                    ModeSelectIntervalBounds: begin
                         // vybor tochek, ogranichivayuschih oblast'
                         NS := FitClientApp_.FitClient.GetSelectedPoints;
                         Assert(Assigned(NS));
@@ -1537,7 +1536,7 @@ begin
                         end;
                     end;
 
-                    ModeSelCharacteristicPoints: begin
+                    ModeSelectCharacteristicPoints: begin
                         // vybor tochek harakterizuyuschih pik
                         NS := FitClientApp_.FitClient.GetSelectedPoints;
                         Assert(Assigned(NS));
@@ -1550,7 +1549,7 @@ begin
                         end;
                     end;
 
-                    ModeSelGaussianBounds: begin
+                    ModeSelectCurveBounds: begin
                         // vybor tochek, ogranichivayuschih gaussian
                         NS := FitClientApp_.FitClient.GetSelectedPoints;
                         Assert(Assigned(NS));
@@ -1562,7 +1561,7 @@ begin
                         end;
                     end;
 
-                    ModeSelBackground: begin
+                    ModeSelectBackground: begin
                         // vybor tochek fona
                         NS := FitClientApp_.FitClient.GetBackgroundPoints;
                         Assert(Assigned(NS));
@@ -1571,7 +1570,7 @@ begin
                         else ShowHint(HintFirst);
                     end;
 
-                    ModeSelPeakPos: begin
+                    ModeSelectCurvePositions: begin
                         // vybor tochek nachal'nogo polozheniya gaussianov
                         NS := FitClientApp_.FitClient.GetCurvePositions;
                         Assert(Assigned(NS));
@@ -1580,9 +1579,9 @@ begin
                         else ShowHint(HintFirst);
                     end;
 
-                    ModeSelPeakBounds: begin
+                    ModeSelectRFactorBounds: begin
                         //  vybor granits pikov
-                        NS := FitClientApp_.FitClient.GetRFactorIntervals;
+                        NS := FitClientApp_.FitClient.GetRFactorBounds;
                         Assert(Assigned(NS));
 
                         if Odd(NS.PointsCount) then ShowHint(HintNextPointOdd)
@@ -1590,10 +1589,10 @@ begin
                     end;
                 end;
 
-                NS := FitViewer.GetPointsSet(CurSerieIndex);
+                NS := FFitViewer.GetPointsSet(FCurSerieIndex);
 
-                XValue := NS.PointXCoord[ValueIndex];
-                YValue := NS.PointYCoord[ValueIndex];
+                XValue := NS.PointXCoord[FValueIndex];
+                YValue := NS.PointYCoord[FValueIndex];
                 FitClientApp_.FitClient.AddPointToActive(XValue, YValue);
             end;
         end;
@@ -1602,8 +1601,8 @@ begin
         on E: EUserException do
         //  !!! takie isklyucheniya ne popadut v log !!!
         begin
-            EditBalloonChart.Left := UpX;
-            EditBalloonChart.Top := UpY;
+            EditBalloonChart.Left := FUpX;
+            EditBalloonChart.Top := FUpY;
             //BE := BalloonException.Create(E.Message);
             //BE.Handle
                 Handle := EditBalloonChart.Handle;
@@ -1622,9 +1621,9 @@ end;
 procedure TFormMain.ChartDrawReticule(Sender: TComponent; IndexSerie, Index,
     Xi, Yi: Integer; Xg, Yg: Double);
 begin
-    CurSerieIndex := IndexSerie;
-    ValueIndex := Index;
-    DrawReticule := True;
+    FCurSerieIndex := IndexSerie;
+    FValueIndex := Index;
+    FDrawReticule := True;
     LabelAngle.Caption := Format('%6.2f', [Xg]);
     LabelIntensity.Caption := Format('%6.2f', [Yg]);
 end;
@@ -1635,7 +1634,7 @@ begin
     //  Screen.Cursor := crCursorDrag;
     //  eto budet rabotat' tol'ko so standartnymi kursorami Windows
     //Windows.SetCursor(Windows.LoadCursor(0, LclCursorToWin32CursorMap[ACursor]));
-    DownX := X; DownY := Y;
+    FDownX := X; FDownY := Y;
 end;
 {$hints on}
 
@@ -1646,7 +1645,7 @@ begin
     if Chart.SeriesCount <> 0 then
     begin
         // !!! ne budet pravil'no rabotat' pri ispol'zovanii MirrorX !!!
-        DeltaX := (InitXGraphMax - InitXGraphMin) -
+        DeltaX := (FInitXGraphMax - FInitXGraphMin) -
             (Chart.XGraphMax - Chart.XGraphMin);
         // DeltaX m.b. = 0
         if DeltaX <> 0 then
@@ -1654,15 +1653,15 @@ begin
             //  ustanavlivaetsya priblizhennoe znachenie polozheniya ScrollBar'a
             (*  dlya prokrutki v druguyu storonu
             ScrollBarX.Position := ScrollBarX.Max - Round(
-                (Chart.XGraphMin - InitXGraphMin) *
+                (Chart.XGraphMin - FInitXGraphMin) *
                 (ScrollBarX.Max - ScrollBarX.Min) / DeltaX);
             *)
             ScrollBarX.Position := ScrollBarX.Min + Round(
-                (Chart.XGraphMin - InitXGraphMin) *
+                (Chart.XGraphMin - FInitXGraphMin) *
                 (ScrollBarX.Max - ScrollBarX.Min) / DeltaX);
         end;
 
-        DeltaY := (InitYGraphMax - InitYGraphMin) -
+        DeltaY := (FInitYGraphMax - FInitYGraphMin) -
             (Chart.YGraphMax - Chart.YGraphMin);
         // DeltaY m.b. = 0
         if DeltaY <> 0 then
@@ -1670,13 +1669,13 @@ begin
             //  ustanavlivaetsya priblizhennoe znachenie polozheniya SrollBar'a
             (*  dlya prokrutki v druguyu storonu
             ScrollBarY.Position := ScrollBarY.Min + Round(
-                (Chart.YGraphMin - InitYGraphMin) *
+                (Chart.YGraphMin - FInitYGraphMin) *
                 (ScrollBarY.Max - ScrollBarY.Min) / DeltaY);
             *)
             //  polozhenie dvizhka bara na min. sootvetstvuet
             //  polozheniyu okna na maks. grafika
             ScrollBarY.Position := ScrollBarY.Max - Round(
-                (Chart.YGraphMin - InitYGraphMin) *
+                (Chart.YGraphMin - FInitYGraphMin) *
                 (ScrollBarY.Max - ScrollBarY.Min) / DeltaY);
         end;
     end;
@@ -1687,7 +1686,7 @@ procedure TFormMain.ChartMouseUp(Sender: TOBject; Button: TMouseButton;
     Shift: TShiftState; X, Y: Integer);
 begin
     UpdateBarsPos;
-    UpX := X; UpY := Y;
+    FUpX := X; FUpY := Y;
     OnChartClick;
 end;
 {$hints on}
@@ -1787,13 +1786,13 @@ begin
     //  budet ust. fokus vvoda nevpopad - ne yasno,
     //  kak eto garantirovat'
     (*
-    if SenderEditHint = GridBackground then
+    if FSenderEditHint = GridBackground then
         Edit_HideBalloonTip(EditBalloonGridBackground.Handle)
     else
-    if SenderEditHint = GridData then
+    if FSenderEditHint = GridData then
         Edit_HideBalloonTip(EditBalloonGridData.Handle);
     //  vzvraschaetsya fokus vvoda
-    ActiveControl := SenderEditHint;
+    ActiveControl := FSenderEditHint;
     *)
     TimerBalloonHide.Enabled := False;
 end;
@@ -1818,7 +1817,7 @@ begin
     //with Chart1 do
     // for i := 0 to SeriesCount - 1 do
     //  if Series[i].GetCursorValueIndex <> -1 then
-    //   begin Screen.Cursor := crCross; Quit end;
+    //   begin Screen.Cursor := crCross; MenuQuit end;
     Screen.Cursor := crArrow;
 end;
 
@@ -1862,7 +1861,7 @@ begin
 end;
 
 {$warnings off}
-procedure TFormMain.SinThetaLambdaClick(Sender: TObject);
+procedure TFormMain.MenuSinThetaLambdaClick(Sender: TObject);
 var SaveDecimalSeparator: Char;
 begin
     if FitClientApp_.FitClient.GetWaveLength = 0 then
@@ -1876,68 +1875,68 @@ begin
                 InputWavelengthDlg.WavelengthValueEdit.Text));
             Screen.Cursor := crDefault;
             DecimalSeparator := SaveDecimalSeparator;
-            FitViewer.XCoordMode := XCM_SINTL;
-            if Assigned(SpecimenList) then
+            FFitViewer.XCoordMode := XCM_SINTL;
+            if Assigned(FCurveList) then
             begin
-                SpecimenList.ViewMode := XCM_SINTL;
-                SpecimenList.GridAssign(GridParameters);
+                FCurveList.ViewMode := XCM_SINTL;
+                FCurveList.GridAssign(GridParameters);
             end;
-            Theta.Checked := False;
-            Theta2.Checked := False;
-            N2Theta.Checked := False;
-            N2Theta2.Checked := False;
-            SinThetaLambda.Checked := True;
-            SinThetaLambda2.Checked := True;
+            MenuTheta.Checked := False;
+            MenuTheta2.Checked := False;
+            MenuN2Theta.Checked := False;
+            MenuN2Theta2.Checked := False;
+            MenuSinThetaLambda.Checked := True;
+            MenuSinThetaLambda2.Checked := True;
         end;
     end{if FitClientApp_.FitClient.GetWaveLength = 0 then...}
     else
     begin
-        FitViewer.XCoordMode := XCM_SINTL;
-        if Assigned(SpecimenList) then
+        FFitViewer.XCoordMode := XCM_SINTL;
+        if Assigned(FCurveList) then
         begin
-            SpecimenList.ViewMode := XCM_SINTL;
-            SpecimenList.GridAssign(GridParameters);
+            FCurveList.ViewMode := XCM_SINTL;
+            FCurveList.GridAssign(GridParameters);
         end;
-        Theta.Checked := False;
-        Theta2.Checked := False;
-        N2Theta.Checked := False;
-        N2Theta2.Checked := False;
-        SinThetaLambda.Checked := True;
-        SinThetaLambda2.Checked := True;
+        MenuTheta.Checked := False;
+        MenuTheta2.Checked := False;
+        MenuN2Theta.Checked := False;
+        MenuN2Theta2.Checked := False;
+        MenuSinThetaLambda.Checked := True;
+        MenuSinThetaLambda2.Checked := True;
     end;
 end;
 {$warnings on}
 
-procedure TFormMain.ThetaClick(Sender: TObject);
+procedure TFormMain.MenuThetaClick(Sender: TObject);
 begin
-    FitViewer.XCoordMode := XCM_T;
-    if Assigned(SpecimenList) then
+    FFitViewer.XCoordMode := XCM_T;
+    if Assigned(FCurveList) then
     begin
-        SpecimenList.ViewMode := XCM_T;
-        SpecimenList.GridAssign(GridParameters);
+        FCurveList.ViewMode := XCM_T;
+        FCurveList.GridAssign(GridParameters);
     end;
-    Theta.Checked := True;
-    Theta2.Checked := True;
-    N2Theta.Checked := False;
-    N2Theta2.Checked := False;
-    SinThetaLambda.Checked := False;
-    SinThetaLambda2.Checked := False;
+    MenuTheta.Checked := True;
+    MenuTheta2.Checked := True;
+    MenuN2Theta.Checked := False;
+    MenuN2Theta2.Checked := False;
+    MenuSinThetaLambda.Checked := False;
+    MenuSinThetaLambda2.Checked := False;
 end;
 
-procedure TFormMain.N2ThetaClick(Sender: TObject);
+procedure TFormMain.MenuN2ThetaClick(Sender: TObject);
 begin
-    FitViewer.XCoordMode := XCM_2T;
-    if Assigned(SpecimenList) then
+    FFitViewer.XCoordMode := XCM_2T;
+    if Assigned(FCurveList) then
     begin
-        SpecimenList.ViewMode := XCM_2T;
-        SpecimenList.GridAssign(GridParameters);
+        FCurveList.ViewMode := XCM_2T;
+        FCurveList.GridAssign(GridParameters);
     end;
-    Theta.Checked := False;
-    Theta2.Checked := False;
-    N2Theta.Checked := True;
-    N2Theta2.Checked := True;
-    SinThetaLambda.Checked := False;
-    SinThetaLambda2.Checked := False;
+    MenuTheta.Checked := False;
+    MenuTheta2.Checked := False;
+    MenuN2Theta.Checked := True;
+    MenuN2Theta2.Checked := True;
+    MenuSinThetaLambda.Checked := False;
+    MenuSinThetaLambda2.Checked := False;
 end;
 
 function TFormMain.SaveTableAsText(GridData: TNumericGrid): Boolean;
@@ -1950,12 +1949,12 @@ begin
     Result := True;
 
 DoItAgain:
-    if SaveDialog1.Execute then
+    if SaveDialog.Execute then
     begin
-        FileName := SaveDialog1.FileName;
+        FileName := SaveDialog.FileName;
         if FileName <> '' then
         begin
-            SaveDialog1.InitialDir := ExtractFilePath(FileName);
+            SaveDialog.InitialDir := ExtractFilePath(FileName);
             if ExtractFileExt(FileName) = '' then
                 FileName := FileName + '.txt';
 
@@ -2036,7 +2035,7 @@ procedure TFormMain.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 var Result: LongInt;
 begin
     CanClose := True;
-    if ModifiedParameters then
+    if FModifiedParameters then
     begin
         Result := MessageDlg(
             'Model parameters has been modified.' + #13#10 + 'Save?',
@@ -2044,10 +2043,10 @@ begin
 
         if Result = mrYes then
         begin
-            if SaveTableAsText(GridParameters) then ModifiedParameters := False
+            if SaveTableAsText(GridParameters) then FModifiedParameters := False
             else
             begin
-                PageControl1.ActivePage := TabSheetParameters;
+                PageControl.ActivePage := TabSheetParameters;
                 CanClose := False;
                 Exit;
             end;
@@ -2055,23 +2054,23 @@ begin
 
         if Result = mrCancel then
         begin
-            PageControl1.ActivePage := TabSheetParameters;
+            PageControl.ActivePage := TabSheetParameters;
             CanClose := False;
             Exit;
         end;
     end;
 
-    if ModifiedDatasheet then
+    if FModifiedDatasheet then
     begin
         Result := MessageDlg(
             'Datasheet has been modified.' + #13#10 + 'Save?',
             mtConfirmation, mbYesNoCancel, 0);
         if Result = mrYes then
         begin
-            if SaveTableAsText(GridDatasheet) then ModifiedDatasheet := False
+            if SaveTableAsText(GridDatasheet) then FModifiedDatasheet := False
             else
             begin
-                PageControl1.ActivePage := TabSheetDatasheet;
+                PageControl.ActivePage := TabSheetDatasheet;
                 CanClose := False;
                 Exit;
             end;
@@ -2079,25 +2078,25 @@ begin
 
         if Result = mrCancel then
         begin
-            PageControl1.ActivePage := TabSheetDatasheet;
+            PageControl.ActivePage := TabSheetDatasheet;
             CanClose := False;
         end;
     end;
 end;
 
-procedure TFormMain.SetWavelengthClick(Sender: TObject);
+procedure TFormMain.MenuSetWavelengthClick(Sender: TObject);
 begin
     if InputWavelengthDlg.ShowModal = mrOk then
     begin
-        FitClientApp_.FitClient.SetWaveLength(InputWavelengthDlg.Value);
-        FitViewer.XCoordMode := XCM_SINTL;
-        if Assigned(SpecimenList) then
+        FitClientApp_.FitClient.SetWaveLength(InputWavelengthDlg.FValue);
+        FFitViewer.XCoordMode := XCM_SINTL;
+        if Assigned(FCurveList) then
         begin
-            SpecimenList.ViewMode := XCM_SINTL;
-            SpecimenList.GridAssign(GridParameters);
+            FCurveList.ViewMode := XCM_SINTL;
+            FCurveList.GridAssign(GridParameters);
         end;
-        SinThetaLambda.Checked := True;
-        SinThetaLambda2.Checked := True;
+        MenuSinThetaLambda.Checked := True;
+        MenuSinThetaLambda2.Checked := True;
     end;
 end;
 
@@ -2107,71 +2106,71 @@ var SelBackVisCaption, SelSpecPosVisCaption,
     SelRFactorIntervalsVisCaption: string;
     NS: TPointsSet;
 begin
-    SelArea.Tag := SelArea.Tag and $FFFFFFFE;
-    SelAreaLimits.Tag := SelAreaLimits.Tag and $FFFFFFFD;
-    SelCharacteristicPoints.Tag := SelCharacteristicPoints.Tag and $FFFFFFFD;
-    SelCurveBounds.Tag := SelCurveBounds.Tag and $FFFFFFFD;
-    Back.Tag := Back.Tag and $FFFFFFFD;
-    RFactorIntervals.Tag := RFactorIntervals.Tag and $FFFFFFFD;
-    PeakPos.Tag := PeakPos.Tag and $FFFFFFFD;
+    MenuSelectDataInterval.Tag := MenuSelectDataInterval.Tag and $FFFFFFFE;
+    MenuSelectIntervalBounds.Tag := MenuSelectIntervalBounds.Tag and $FFFFFFFD;
+    MenuSelectCharacteristicPoints.Tag := MenuSelectCharacteristicPoints.Tag and $FFFFFFFD;
+    MenuSelectCurveBounds.Tag := MenuSelectCurveBounds.Tag and $FFFFFFFD;
+    MenuBackground.Tag := MenuBackground.Tag and $FFFFFFFD;
+    MenuRFactorIntervals.Tag := MenuRFactorIntervals.Tag and $FFFFFFFD;
+    MenuCurvePositions.Tag := MenuCurvePositions.Tag and $FFFFFFFD;
     //  initsializatsiya vosstanavlivaet ishodnyy tekst,
     //  kogda sootvetstvuyuschie flagi ne ustanovleny
     SelBackVisCaption := StartVisualSel;
     SelSpecPosVisCaption := StartVisPosSel;
     SelRFactorIntervalsVisCaption := StartVisualSel;
 
-    RemoveBack.Tag := RemoveBack.Tag and $FFFFFFFE;
-    RemoveRFactorIntervals.Tag := RemoveRFactorIntervals.Tag and $FFFFFFFE;
-    RemoveSpecPos.Tag := RemoveSpecPos.Tag and $FFFFFFFE;
+    MenuRemoveBackgroundPoints.Tag := MenuRemoveBackgroundPoints.Tag and $FFFFFFFE;
+    MenuRemoveRFactorBounds.Tag := MenuRemoveRFactorBounds.Tag and $FFFFFFFE;
+    MenuRemoveCurvePositions.Tag := MenuRemoveCurvePositions.Tag and $FFFFFFFE;
 
     case ASelectionMode of
-        ModeSelNone:
+        ModeSelectNothing:
             begin
                 if FitClientApp_.FitClient.SelectedAreaMode then
-                    SelEntireProf.Tag := SelEntireProf.Tag or 1;
+                    MenuSelectEntireProfile.Tag := MenuSelectEntireProfile.Tag or 1;
                 ShowHint(HintMain);
             end;
-        ModeSelAreaLimits:
+        ModeSelectIntervalBounds:
             begin
-                SelAreaLimits.Tag := SelAreaLimits.Tag or 2;
+                MenuSelectIntervalBounds.Tag := MenuSelectIntervalBounds.Tag or 2;
                 NS := FitClientApp_.FitClient.GetSelectedPoints;
                 Assert(Assigned(NS));
                 if NS.PointsCount = 2 then
-                    SelArea.Tag := SelArea.Tag or 1;
+                    MenuSelectDataInterval.Tag := MenuSelectDataInterval.Tag or 1;
             end;
-        ModeSelCharacteristicPoints:
-            SelCharacteristicPoints.Tag := SelCharacteristicPoints.Tag or 2;
-        ModeSelGaussianBounds: SelCurveBounds.Tag := SelCurveBounds.Tag or 2;
-        ModeSelBackground:
+        ModeSelectCharacteristicPoints:
+            MenuSelectCharacteristicPoints.Tag := MenuSelectCharacteristicPoints.Tag or 2;
+        ModeSelectCurveBounds: MenuSelectCurveBounds.Tag := MenuSelectCurveBounds.Tag or 2;
+        ModeSelectBackground:
             begin
-                RemoveBack.Tag := RemoveBack.Tag or 1;
-                Back.Tag := Back.Tag or 2;
+                MenuRemoveBackgroundPoints.Tag := MenuRemoveBackgroundPoints.Tag or 1;
+                MenuBackground.Tag := MenuBackground.Tag or 2;
                 NS := FitClientApp_.FitClient.GetBackgroundPoints;
                 Assert(Assigned(NS));
                 if NS.PointsCount > 0 then
-                    ActionRmBackSelected.Tag := ActionRmBackSelected.Tag or 1
+                    ActionSubtractBackgroundBySelectedPoints.Tag := ActionSubtractBackgroundBySelectedPoints.Tag or 1
                 else
-                    ActionRmBackSelected.Tag := ActionRmBackSelected.Tag and $FFFFFFFE;
+                    ActionSubtractBackgroundBySelectedPoints.Tag := ActionSubtractBackgroundBySelectedPoints.Tag and $FFFFFFFE;
                 SelBackVisCaption := StopVisualSel;
             end;
 
-        ModeSelPeakPos:
+        ModeSelectCurvePositions:
             begin
-                RemoveSpecPos.Tag := RemoveSpecPos.Tag or 1;
-                PeakPos.Tag := PeakPos.Tag or 2;
+                MenuRemoveCurvePositions.Tag := MenuRemoveCurvePositions.Tag or 1;
+                MenuCurvePositions.Tag := MenuCurvePositions.Tag or 2;
                 SelSpecPosVisCaption := StopVisPosSel;
             end;
 
-        ModeSelPeakBounds:
+        ModeSelectRFactorBounds:
             begin
-                RemoveRFactorIntervals.Tag := RemoveRFactorIntervals.Tag or 1;
-                RFactorIntervals.Tag := RFactorIntervals.Tag or 2;
+                MenuRemoveRFactorBounds.Tag := MenuRemoveRFactorBounds.Tag or 1;
+                MenuRFactorIntervals.Tag := MenuRFactorIntervals.Tag or 2;
                 SelRFactorIntervalsVisCaption := StopVisualSel;
             end;
     end;
-    SelBackVis.Caption := SelBackVisCaption;
-    SelSpecPosVis.Caption := SelSpecPosVisCaption;
-    SelRFactorIntervalsVis.Caption := SelRFactorIntervalsVisCaption;
+    MenuSelectBackgroundManually.Caption := SelBackVisCaption;
+    MenuSelectCurvePositionsManually.Caption := SelSpecPosVisCaption;
+    MenuSelectRFactorBoundsManually.Caption := SelRFactorIntervalsVisCaption;
 end;
 
 procedure TFormMain.SetAsyncState(State: TAsyncState);
@@ -2180,26 +2179,26 @@ begin
         AsyncWorks:
         begin
             //  Operation
-            ActionDoAllAuto.Tag := ActionDoAllAuto.Tag and $FFFFFFFE;
-            Smooth.Tag := Smooth.Tag and $FFFFFFFE;
-            RmBack.Tag := RmBack.Tag and $FFFFFFFE;
-            ActionStopFitting.Tag := ActionStopFitting.Tag or 1;
+            ActionDoAllAutomatically.Tag := ActionDoAllAutomatically.Tag and $FFFFFFFE;
+            MenuSmoothProfile.Tag := MenuSmoothProfile.Tag and $FFFFFFFE;
+            MenuSubtractBackground.Tag := MenuSubtractBackground.Tag and $FFFFFFFE;
+            ActionStopFit.Tag := ActionStopFit.Tag or 1;
 
             //  Dataset
-            SelAreaLimits.Tag := SelAreaLimits.Tag and $FFFFFFFE;
-            SelArea.Tag := SelArea.Tag and $FFFFFFFE;
-            SelEntireProf.Tag := SelEntireProf.Tag and $FFFFFFFE;
-            PeakPos.Tag := PeakPos.Tag and $FFFFFFFE;
-            Back.Tag := Back.Tag and $FFFFFFFE;
-            RFactorIntervals.Tag := RFactorIntervals.Tag and $FFFFFFFE;
-            SelCharacteristicPoints.Tag := SelCharacteristicPoints.Tag and $FFFFFFFE;
-            SelCurveBounds.Tag := SelCurveBounds.Tag and $FFFFFFFE;
+            MenuSelectIntervalBounds.Tag := MenuSelectIntervalBounds.Tag and $FFFFFFFE;
+            MenuSelectDataInterval.Tag := MenuSelectDataInterval.Tag and $FFFFFFFE;
+            MenuSelectEntireProfile.Tag := MenuSelectEntireProfile.Tag and $FFFFFFFE;
+            MenuCurvePositions.Tag := MenuCurvePositions.Tag and $FFFFFFFE;
+            MenuBackground.Tag := MenuBackground.Tag and $FFFFFFFE;
+            MenuRFactorIntervals.Tag := MenuRFactorIntervals.Tag and $FFFFFFFE;
+            MenuSelectCharacteristicPoints.Tag := MenuSelectCharacteristicPoints.Tag and $FFFFFFFE;
+            MenuSelectCurveBounds.Tag := MenuSelectCurveBounds.Tag and $FFFFFFFE;
         end;
 
         AsyncStart:
         begin
             //  Operation
-            ActionStopFitting.Tag := ActionStopFitting.Tag and $FFFFFFFE;
+            ActionStopFit.Tag := ActionStopFit.Tag and $FFFFFFFE;
 
             SetSelectionMode(FitClientApp_.FitClient.SelectionMode);
         end;
@@ -2207,7 +2206,7 @@ begin
         AsyncDone:
         begin
             //  Operation
-            ActionStopFitting.Tag := ActionStopFitting.Tag and $FFFFFFFE;
+            ActionStopFit.Tag := ActionStopFit.Tag and $FFFFFFFE;
 
             SetSelectionMode(FitClientApp_.FitClient.SelectionMode);
         end;
@@ -2252,37 +2251,37 @@ var
     FitServerState: TFitServerState;
 begin
     //  File
-    ActionReload.Tag := ActionReload.Tag and $FFFFFFFE;
-    ActionSaveAsText.Tag := ActionSaveAsText.Tag and $FFFFFFFE;
+    ActionReloadData.Tag := ActionReloadData.Tag and $FFFFFFFE;
+    ActionSaveModelAsText.Tag := ActionSaveModelAsText.Tag and $FFFFFFFE;
 
     //  Operation
-    ActionDoAllAuto.Tag := ActionDoAllAuto.Tag and $FFFFFFFE;
-    ActionSmooth.Tag := ActionSmooth.Tag and $FFFFFFFE;
-    RmBack.Tag := RmBack.Tag and $FFFFFFFE;
-    ActionRmBackSelected.Tag := ActionRmBackSelected.Tag and $FFFFFFFE;
-    ActionFitMinNumberOfSpec.Tag := ActionFitMinNumberOfSpec.Tag and $FFFFFFFE;
-    ActionFitMinDifference.Tag := ActionFitMinDifference.Tag and $FFFFFFFE;
-    ActionStopFitting.Tag := ActionStopFitting.Tag and $FFFFFFFE;
+    ActionDoAllAutomatically.Tag := ActionDoAllAutomatically.Tag and $FFFFFFFE;
+    ActionSmoothProfile.Tag := ActionSmoothProfile.Tag and $FFFFFFFE;
+    MenuSubtractBackground.Tag := MenuSubtractBackground.Tag and $FFFFFFFE;
+    ActionSubtractBackgroundBySelectedPoints.Tag := ActionSubtractBackgroundBySelectedPoints.Tag and $FFFFFFFE;
+    ActionMinimizeNumberOfCurves.Tag := ActionMinimizeNumberOfCurves.Tag and $FFFFFFFE;
+    ActionMinimizeDifference.Tag := ActionMinimizeDifference.Tag and $FFFFFFFE;
+    ActionStopFit.Tag := ActionStopFit.Tag and $FFFFFFFE;
 
     //  Dataset
-    ActionSelAreaLimits.Tag := ActionSelAreaLimits.Tag and $FFFFFFFE;
-    ActionSelArea.Tag := ActionSelArea.Tag and $FFFFFFFE;
-    ActionSelEntireProf.Tag := ActionSelEntireProf.Tag and $FFFFFFFE;
-    Back.Tag := Back.Tag and $FFFFFFFE;
-    RFactorIntervals.Tag := RFactorIntervals.Tag and $FFFFFFFE;
-    ActionSelCharacteristicPoints.Tag :=
-        ActionSelCharacteristicPoints.Tag and $FFFFFFFE;
-    ActionSelCurveBounds.Tag := ActionSelCurveBounds.Tag and $FFFFFFFE;
+    ActionSelectIntervalBounds.Tag := ActionSelectIntervalBounds.Tag and $FFFFFFFE;
+    ActionSelectDataInterval.Tag := ActionSelectDataInterval.Tag and $FFFFFFFE;
+    ActionSelectEntireProfile.Tag := ActionSelectEntireProfile.Tag and $FFFFFFFE;
+    MenuBackground.Tag := MenuBackground.Tag and $FFFFFFFE;
+    MenuRFactorIntervals.Tag := MenuRFactorIntervals.Tag and $FFFFFFFE;
+    ActionSelectCharacteristicPoints.Tag :=
+        ActionSelectCharacteristicPoints.Tag and $FFFFFFFE;
+    ActionSelectCurveBounds.Tag := ActionSelectCurveBounds.Tag and $FFFFFFFE;
 
     case State of
         OpenSuccess:
         begin
             //  !!! rabota s Tag sdelana dlya zaschity ot mertsaniya !!!
-            ActionReload.Tag := ActionReload.Tag or 1;
+            ActionReloadData.Tag := ActionReloadData.Tag or 1;
 
-            ActionDoAllAuto.Tag := ActionDoAllAuto.Tag or 1;
-            ActionSmooth.Tag := ActionSmooth.Tag or 1;
-            RmBack.Tag := RmBack.Tag or 1;
+            ActionDoAllAutomatically.Tag := ActionDoAllAutomatically.Tag or 1;
+            ActionSmoothProfile.Tag := ActionSmoothProfile.Tag or 1;
+            MenuSubtractBackground.Tag := MenuSubtractBackground.Tag or 1;
 
             //  mozhno voobsche ubrat' proverku i deystvovat' kak pri
             //  polnost'yu avtomaticheskom raschete; eto pozvolit
@@ -2295,120 +2294,120 @@ begin
                (FitServerState = Finished)
                then
             begin
-                ActionFitMinNumberOfSpec.Tag := ActionFitMinNumberOfSpec.Tag or 1;
-                ActionFitMinDifference.Tag := ActionFitMinDifference.Tag or 1;
+                ActionMinimizeNumberOfCurves.Tag := ActionMinimizeNumberOfCurves.Tag or 1;
+                ActionMinimizeDifference.Tag := ActionMinimizeDifference.Tag or 1;
             end;
 
-            ActionSelAreaLimits.Tag := ActionSelAreaLimits.Tag or 1;
-            PeakPos.Tag := PeakPos.Tag or 1;
-            Back.Tag := Back.Tag or 1;
-            RFactorIntervals.Tag := RFactorIntervals.Tag or 1;
-            ActionSelCharacteristicPoints.Tag :=
-                ActionSelCharacteristicPoints.Tag or 1;
-            ActionSelCurveBounds.Tag := ActionSelCurveBounds.Tag or 1;
+            ActionSelectIntervalBounds.Tag := ActionSelectIntervalBounds.Tag or 1;
+            MenuCurvePositions.Tag := MenuCurvePositions.Tag or 1;
+            MenuBackground.Tag := MenuBackground.Tag or 1;
+            MenuRFactorIntervals.Tag := MenuRFactorIntervals.Tag or 1;
+            ActionSelectCharacteristicPoints.Tag :=
+                ActionSelectCharacteristicPoints.Tag or 1;
+            ActionSelectCurveBounds.Tag := ActionSelectCurveBounds.Tag or 1;
             //  real'no razresheniya primenyayutsya nizhe
             SetAsyncState(FitClientApp_.FitClient.AsyncState);
         end;
 
         OpenFailure:
         begin
-            Caption := ApplicationProperties1.Title;
+            Caption := ApplicationProperties.Title;
         end;
     end;
 
-    if (ActionReload.Tag and 1) = 0 then ActionReload.Enabled := False;
-    if (ActionReload.Tag and 1) = 1 then ActionReload.Enabled := True;
-    if (ActionSaveAsText.Tag and 1) = 0 then ActionSaveAsText.Enabled := False;
-    if (ActionSaveAsText.Tag and 1) = 1 then ActionSaveAsText.Enabled := True;
+    if (ActionReloadData.Tag and 1) = 0 then ActionReloadData.Enabled := False;
+    if (ActionReloadData.Tag and 1) = 1 then ActionReloadData.Enabled := True;
+    if (ActionSaveModelAsText.Tag and 1) = 0 then ActionSaveModelAsText.Enabled := False;
+    if (ActionSaveModelAsText.Tag and 1) = 1 then ActionSaveModelAsText.Enabled := True;
 
-    if (ActionDoAllAuto.Tag and 1) = 0 then ActionDoAllAuto.Enabled := False;
-    if (ActionDoAllAuto.Tag and 1) = 1 then ActionDoAllAuto.Enabled := True;
-    if (ActionSmooth.Tag and 1) = 0 then ActionSmooth.Enabled := False;
-    if (ActionSmooth.Tag and 1) = 1 then ActionSmooth.Enabled := True;
-    if (RmBack.Tag and 1) = 0 then
+    if (ActionDoAllAutomatically.Tag and 1) = 0 then ActionDoAllAutomatically.Enabled := False;
+    if (ActionDoAllAutomatically.Tag and 1) = 1 then ActionDoAllAutomatically.Enabled := True;
+    if (ActionSmoothProfile.Tag and 1) = 0 then ActionSmoothProfile.Enabled := False;
+    if (ActionSmoothProfile.Tag and 1) = 1 then ActionSmoothProfile.Enabled := True;
+    if (MenuSubtractBackground.Tag and 1) = 0 then
     begin
-        RmBack.Enabled := False;
+        MenuSubtractBackground.Enabled := False;
         //  управление действиями подменю
-        ActionSelBackAuto.Enabled := False;
-        ActionSelBackVis.Enabled := False;
-        ActionRemoveBack.Enabled := False;
-        ActionRmBackAuto.Enabled := False;
-        ActionRmBackSelected.Enabled := False;
+        ActionComputeBackgroundPoints.Enabled := False;
+        ActionSelectBackgroundManually.Enabled := False;
+        ActionRemoveBackgroundPoints.Enabled := False;
+        ActionSubtractBackgroundAutomatically.Enabled := False;
+        ActionSubtractBackgroundBySelectedPoints.Enabled := False;
     end;
-    if (RmBack.Tag and 1) = 1 then
+    if (MenuSubtractBackground.Tag and 1) = 1 then
     begin
-        RmBack.Enabled := True;
-        ActionSelBackAuto.Enabled := True;
-        ActionSelBackVis.Enabled := True;
-        ActionRemoveBack.Enabled := True;
-        ActionRmBackAuto.Enabled := True;
-        ActionRmBackSelected.Enabled := True;
+        MenuSubtractBackground.Enabled := True;
+        ActionComputeBackgroundPoints.Enabled := True;
+        ActionSelectBackgroundManually.Enabled := True;
+        ActionRemoveBackgroundPoints.Enabled := True;
+        ActionSubtractBackgroundAutomatically.Enabled := True;
+        ActionSubtractBackgroundBySelectedPoints.Enabled := True;
     end;
 
-    if (ActionFitMinNumberOfSpec.Tag and 1) = 0 then
-        ActionFitMinNumberOfSpec.Enabled := False;
-    if (ActionFitMinNumberOfSpec.Tag and 1) = 1 then
-        ActionFitMinNumberOfSpec.Enabled := True;
+    if (ActionMinimizeNumberOfCurves.Tag and 1) = 0 then
+        ActionMinimizeNumberOfCurves.Enabled := False;
+    if (ActionMinimizeNumberOfCurves.Tag and 1) = 1 then
+        ActionMinimizeNumberOfCurves.Enabled := True;
 
-    if (ActionFitMinDifference.Tag and 1) = 0 then
-        ActionFitMinDifference.Enabled := False;
-    if (ActionFitMinDifference.Tag and 1) = 1 then
-        ActionFitMinDifference.Enabled := True;
+    if (ActionMinimizeDifference.Tag and 1) = 0 then
+        ActionMinimizeDifference.Enabled := False;
+    if (ActionMinimizeDifference.Tag and 1) = 1 then
+        ActionMinimizeDifference.Enabled := True;
 
-    if (ActionStopFitting.Tag and 1) = 0 then
-        ActionStopFitting.Enabled := False;
-    if (ActionStopFitting.Tag and 1) = 1 then
-        ActionStopFitting.Enabled := True;
+    if (ActionStopFit.Tag and 1) = 0 then
+        ActionStopFit.Enabled := False;
+    if (ActionStopFit.Tag and 1) = 1 then
+        ActionStopFit.Enabled := True;
 
-    if (ActionSelAreaLimits.Tag and 1) = 0 then
-        ActionSelAreaLimits.Enabled := False;
-    if (ActionSelAreaLimits.Tag and 1) = 1 then
-        ActionSelAreaLimits.Enabled := True;
+    if (ActionSelectIntervalBounds.Tag and 1) = 0 then
+        ActionSelectIntervalBounds.Enabled := False;
+    if (ActionSelectIntervalBounds.Tag and 1) = 1 then
+        ActionSelectIntervalBounds.Enabled := True;
 
-    if (ActionSelAreaLimits.Tag and 2) = 0 then
-        ActionSelAreaLimits.Checked := False;
-    if (ActionSelAreaLimits.Tag and 2) = 2 then
-        ActionSelAreaLimits.Checked := True;
+    if (ActionSelectIntervalBounds.Tag and 2) = 0 then
+        ActionSelectIntervalBounds.Checked := False;
+    if (ActionSelectIntervalBounds.Tag and 2) = 2 then
+        ActionSelectIntervalBounds.Checked := True;
 
-    if (ActionSelArea.Tag and 1) = 0 then
-        ActionSelArea.Enabled := False;
-    if (ActionSelArea.Tag and 1) = 1 then
-        ActionSelArea.Enabled := True;
+    if (ActionSelectDataInterval.Tag and 1) = 0 then
+        ActionSelectDataInterval.Enabled := False;
+    if (ActionSelectDataInterval.Tag and 1) = 1 then
+        ActionSelectDataInterval.Enabled := True;
 
-    if (ActionSelEntireProf.Tag and 1) = 0 then
-        ActionSelEntireProf.Enabled := False;
-    if (ActionSelEntireProf.Tag and 1) = 1 then
-        ActionSelEntireProf.Enabled := True;
+    if (ActionSelectEntireProfile.Tag and 1) = 0 then
+        ActionSelectEntireProfile.Enabled := False;
+    if (ActionSelectEntireProfile.Tag and 1) = 1 then
+        ActionSelectEntireProfile.Enabled := True;
 
-    if (PeakPos.Tag and 1) = 0 then PeakPos.Enabled := False;
-    if (PeakPos.Tag and 1) = 1 then PeakPos.Enabled := True;
-    if (PeakPos.Tag and 2) = 0 then PeakPos.Checked := False;
-    if (PeakPos.Tag and 2) = 2 then PeakPos.Checked := True;
+    if (MenuCurvePositions.Tag and 1) = 0 then MenuCurvePositions.Enabled := False;
+    if (MenuCurvePositions.Tag and 1) = 1 then MenuCurvePositions.Enabled := True;
+    if (MenuCurvePositions.Tag and 2) = 0 then MenuCurvePositions.Checked := False;
+    if (MenuCurvePositions.Tag and 2) = 2 then MenuCurvePositions.Checked := True;
 
-    if (Back.Tag and 1) = 0 then Back.Enabled := False;
-    if (Back.Tag and 1) = 1 then Back.Enabled := True;
-    if (Back.Tag and 2) = 0 then Back.Checked := False;
-    if (Back.Tag and 2) = 2 then Back.Checked := True;
+    if (MenuBackground.Tag and 1) = 0 then MenuBackground.Enabled := False;
+    if (MenuBackground.Tag and 1) = 1 then MenuBackground.Enabled := True;
+    if (MenuBackground.Tag and 2) = 0 then MenuBackground.Checked := False;
+    if (MenuBackground.Tag and 2) = 2 then MenuBackground.Checked := True;
 
-    if (RFactorIntervals.Tag and 1) = 0 then RFactorIntervals.Enabled := False;
-    if (RFactorIntervals.Tag and 1) = 1 then RFactorIntervals.Enabled := True;
-    if (RFactorIntervals.Tag and 2) = 0 then RFactorIntervals.Checked := False;
-    if (RFactorIntervals.Tag and 2) = 2 then RFactorIntervals.Checked := True;
+    if (MenuRFactorIntervals.Tag and 1) = 0 then MenuRFactorIntervals.Enabled := False;
+    if (MenuRFactorIntervals.Tag and 1) = 1 then MenuRFactorIntervals.Enabled := True;
+    if (MenuRFactorIntervals.Tag and 2) = 0 then MenuRFactorIntervals.Checked := False;
+    if (MenuRFactorIntervals.Tag and 2) = 2 then MenuRFactorIntervals.Checked := True;
 
-    if (ActionSelCharacteristicPoints.Tag and 1) = 0 then
-        ActionSelCharacteristicPoints.Enabled := False;
-    if (ActionSelCharacteristicPoints.Tag and 1) = 1 then
-        ActionSelCharacteristicPoints.Enabled := True;
+    if (ActionSelectCharacteristicPoints.Tag and 1) = 0 then
+        ActionSelectCharacteristicPoints.Enabled := False;
+    if (ActionSelectCharacteristicPoints.Tag and 1) = 1 then
+        ActionSelectCharacteristicPoints.Enabled := True;
 
-    if (ActionSelCharacteristicPoints.Tag and 2) = 0 then
-        ActionSelCharacteristicPoints.Checked := False;
-    if (ActionSelCharacteristicPoints.Tag and 2) = 2 then
-        ActionSelCharacteristicPoints.Checked := True;
+    if (ActionSelectCharacteristicPoints.Tag and 2) = 0 then
+        ActionSelectCharacteristicPoints.Checked := False;
+    if (ActionSelectCharacteristicPoints.Tag and 2) = 2 then
+        ActionSelectCharacteristicPoints.Checked := True;
 
-    if (ActionSelCurveBounds.Tag and 1) = 0 then
-        ActionSelCurveBounds.Enabled := False;
-    if (ActionSelCurveBounds.Tag and 1) = 1 then
-        ActionSelCurveBounds.Enabled := True;
+    if (ActionSelectCurveBounds.Tag and 1) = 0 then
+        ActionSelectCurveBounds.Enabled := False;
+    if (ActionSelectCurveBounds.Tag and 1) = 1 then
+        ActionSelectCurveBounds.Enabled := True;
 end;
 
 procedure TFormMain.SetViewState(State: TViewState);
@@ -2419,7 +2418,7 @@ begin
             ActionZoomIn.Enabled := False;
             ActionZoomOut.Enabled := False;
             ActionViewMarkers.Enabled := False;
-            UseRule.Enabled := False;
+            MenuUseRule.Enabled := False;
         end;
 
         GraphNotEmpty:
@@ -2427,7 +2426,7 @@ begin
             ActionZoomIn.Enabled := True;
             ActionZoomOut.Enabled := True;
             ActionViewMarkers.Enabled := True;
-            UseRule.Enabled := True;
+            MenuUseRule.Enabled := True;
         end;
     end;
 end;
@@ -2543,13 +2542,13 @@ procedure TFormMain.DeleteUserCurve(ct: Curve_type);
 
 var mi: TMenuItem;
 begin
-    DeleteFile(PChar(ct.FileName));
-    Settings.Curve_types.Delete(Settings.Curve_types.IndexOf(ct));
+    DeleteFile(PChar(ct.FFileName));
+    FSettings.Curve_types.Delete(FSettings.Curve_types.IndexOf(ct));
     //AddDummyCurve;
     //  udalenie menyu
-    DeleteItem(SelCurveType, LongInt(ct));
+    DeleteItem(MenuSelectCurveType, LongInt(ct));
     //  poisk menyu MenuDelUserCapt
-    mi := SelCurveType.Find(MenuDelUserCapt);
+    mi := MenuSelectCurveType.Find(MenuDelUserCapt);
     DeleteItem(mi, LongInt(ct));
     //  udalenie menyu MenuDelUserCapt
     if mi.Count = 0 then mi.Free;
@@ -2564,9 +2563,9 @@ begin
     mi := TMenuItem(Sender);
     Tag := mi.Tag;
     //  udalenie pol'zovatel'skogo tipa krivoy
-    for i := 0 to Settings.Curve_types.Count - 1 do
+    for i := 0 to FSettings.Curve_types.Count - 1 do
     begin
-        ct := Curve_type(Settings.Curve_types.Items[i]);
+        ct := Curve_type(FSettings.Curve_types.Items[i]);
         //  el-ty sravnivayutsya po ukazatelyu (* 32 *)
         if LongInt(ct) = Tag then
         begin
@@ -2592,9 +2591,9 @@ begin
     mi := TMenuItem(Sender);
     Tag := mi.Tag;
     //  poisk pol'zovatel'skogo tipa krivoy
-    for i := 0 to Settings.Curve_types.Count - 1 do
+    for i := 0 to FSettings.Curve_types.Count - 1 do
     begin
-        ct := Curve_type(Settings.Curve_types.Items[i]);
+        ct := Curve_type(FSettings.Curve_types.Items[i]);
         //  el-ty sravnivayutsya po ukazatelyu (* 32 *)
         if LongInt(ct) = Tag then
         begin
@@ -2619,9 +2618,9 @@ procedure TFormMain.CreateUserCurveMenus;
         ct: Curve_type;
     begin
         Result := False;
-        for i := 0 to Settings.Curve_types.Count - 1 do
+        for i := 0 to FSettings.Curve_types.Count - 1 do
         begin
-            ct := Curve_type(Settings.Curve_types.Items[i]);
+            ct := Curve_type(FSettings.Curve_types.Items[i]);
             if ct.Name <> 'Dummy' then
             begin
                 CreateMenuItem(i, ct, ParentMenu, OnClick);
@@ -2635,17 +2634,17 @@ var ItemCount: LongInt;
     mi: TMenuItem;
 begin
     ItemCount := 0;
-    if AddItem(SelCurveType, ItemCount, OnUserCurveClick) then
+    if AddItem(MenuSelectCurveType, ItemCount, OnUserCurveClick) then
     begin
         { Separator is created. }
-        mi := TMenuItem.Create(SelCurveType);
+        mi := TMenuItem.Create(MenuSelectCurveType);
         mi.Caption := ' ';
         mi.Enabled := False;
-        SelCurveType.Insert(ItemCount + 1, mi);
+        MenuSelectCurveType.Insert(ItemCount + 1, mi);
         { Menu is created for deleting user curve types. }
-        mi := TMenuItem.Create(SelCurveType);
+        mi := TMenuItem.Create(MenuSelectCurveType);
         mi.Caption := MenuDelUserCapt;
-        SelCurveType.Add(mi);
+        MenuSelectCurveType.Add(mi);
         { Submenu for deleting item is created. }
         AddItem(mi, ItemCount, OnDeleteUserCurveClick);
     end;
@@ -2660,32 +2659,32 @@ begin
     //  odnoznachno otdelit' takie elementy mozhno
     //  po ukazatelyu na obrabotchik sobytiy OnClick
     LastIndex := -1;
-    for i := 0 to SelCurveType.Count - 1 do
+    for i := 0 to MenuSelectCurveType.Count - 1 do
     begin
-        mi := SelCurveType.Items[i];
+        mi := MenuSelectCurveType.Items[i];
         if PtrUInt(@mi.OnClick) = PtrUInt(OnUserCurveClick) then
             LastIndex := i;
     end;
 
     Inc(LastIndex);     //  indeks sleduyuschego elementa
-    CreateMenuItem(LastIndex, ct, SelCurveType, OnUserCurveClick);
+    CreateMenuItem(LastIndex, ct, MenuSelectCurveType, OnUserCurveClick);
 
-    DelMenu := SelCurveType.Find(MenuDelUserCapt);
+    DelMenu := MenuSelectCurveType.Find(MenuDelUserCapt);
     //  sozdaetsya menyu dlya udaleniya pol'zovatel'skih
     //  krivyh, esli ono ne bylo sozdano ranee
     if DelMenu = nil then
     begin
-        DelMenu := TMenuItem.Create(SelCurveType);
+        DelMenu := TMenuItem.Create(MenuSelectCurveType);
         DelMenu.Caption := MenuDelUserCapt;
-        SelCurveType.Add(DelMenu);
+        MenuSelectCurveType.Add(DelMenu);
     end;
 
-    if SelCurveType.Find('-') = nil then
+    if MenuSelectCurveType.Find('-') = nil then
     begin
         //  vstavlyaetsya razdelitel'
-        mi := TMenuItem.Create(SelCurveType);
+        mi := TMenuItem.Create(MenuSelectCurveType);
         mi.Caption := '-';
-        SelCurveType.Insert(LastIndex + 1, mi);
+        MenuSelectCurveType.Insert(LastIndex + 1, mi);
     end;
     //  sozdaetsya element podmenyu udaleniya
     CreateMenuItem(
@@ -2708,8 +2707,8 @@ begin
                 C := nil;   //  !!! obyazat. d.b. proinitsializirovano nil !!!
                 ReadComponentFromXMLConfig(XMLConfig, 'Component',
                     TComponent(C), OnFindComponentClass, nil);
-                C.FileName := FileName;
-                Settings.Curve_types.Add(C);
+                C.FFileName := FileName;
+                FSettings.Curve_types.Add(C);
             except
                 C.Free;
             end;
@@ -2726,9 +2725,9 @@ end;
 procedure TFormMain.WriteUserCurve(ct: Curve_type);
 var XMLConfig: TXMLConfig;
 begin
-    ct.FileName := GetConfigDir +
+    ct.FFileName := GetConfigDir +
         IntToStr(QWord(TimeStampToMSecs(DateTimeToTimeStamp(Now)))) + '.cpr';
-    XMLConfig := TXMLConfig.Create(ct.FileName);
+    XMLConfig := TXMLConfig.Create(ct.FFileName);
     try
         WriteComponentToXMLConfig(XMLConfig, 'Component', ct);
         XMLConfig.Flush;
@@ -2747,10 +2746,10 @@ begin
         XMLConfig := TXMLConfig.Create(FileName);
         try
             ReadComponentFromXMLConfig(XMLConfig, 'Component',
-                TComponent(Settings), OnFindComponentClass, nil);
+                TComponent(FSettings), OnFindComponentClass, nil);
         except
-            Settings.Free; Settings := nil;
-            Settings := Settings_v1.Create(nil);
+            FSettings.Free; FSettings := nil;
+            FSettings := Settings_v1.Create(nil);
         end;
         XMLConfig.Free;
     end;
@@ -2764,7 +2763,7 @@ begin
     FileName := GetConfigFileName;
     XMLConfig := TXMLConfig.Create(Filename);
     try
-        WriteComponentToXMLConfig(XMLConfig, 'Component', Settings);
+        WriteComponentToXMLConfig(XMLConfig, 'Component', FSettings);
         XMLConfig.Flush;
     except end;
     XMLConfig.Free;

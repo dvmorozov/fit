@@ -8,20 +8,21 @@ unit eta_curve_parameter;
 
 interface
 
-uses Classes, SysUtils, special_curve_parameter, log;
+uses
+    Classes, log, special_curve_parameter, SysUtils;
 
 type
     { Represents curve width. It can take only positive value. }
     TEtaCurveParameter = class(TSpecialCurveParameter)
     protected
-        procedure SetValue(AValue: Double); override;
+        procedure SetValue(AValue: double); override;
 
     public
         constructor Create;
         function CreateCopy: TSpecialCurveParameter; override;
         procedure InitVariationStep; override;
         procedure InitValue; override;
-        function MinimumStepAchieved: Boolean; override;
+        function MinimumStepAchieved: boolean; override;
     end;
 
 implementation
@@ -49,17 +50,17 @@ begin
     CopyTo(Result);
 end;
 
-procedure TEtaCurveParameter.SetValue(AValue: Double);
+procedure TEtaCurveParameter.SetValue(AValue: double);
 begin
     FValue := Abs(AValue);
-    if FValue > 1 then FValue := 1;
+    if FValue > 1 then
+        FValue := 1;
     WriteValueToLog(AValue);
 end;
 
-function TEtaCurveParameter.MinimumStepAchieved: Boolean;
+function TEtaCurveParameter.MinimumStepAchieved: boolean;
 begin
     Result := FVariationStep < 0.00001;
 end;
 
 end.
-

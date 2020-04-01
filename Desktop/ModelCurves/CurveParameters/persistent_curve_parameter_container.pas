@@ -9,7 +9,7 @@ unit persistent_curve_parameter_container;
 interface
 
 uses
-    Classes, SysUtils, special_curve_parameter;
+    Classes, special_curve_parameter, SysUtils;
 
 type
     { An item of TCollection, it is used for persistent storaging of
@@ -43,44 +43,40 @@ implementation
 
 destructor TPersistentCurveParameterContainer.Destroy;
 begin
-    if Assigned(FSpecialCurveParameter) then
-    begin
-        FSpecialCurveParameter.Free;
-    end;
+    FSpecialCurveParameter.Free;
     inherited;
 end;
 
 function TPersistentCurveParameterContainer.GetName: string;
 begin
-   Assert(Assigned(FSpecialCurveParameter));
-   Result := FSpecialCurveParameter.Name;
+    Assert(Assigned(FSpecialCurveParameter));
+    Result := FSpecialCurveParameter.Name;
 end;
 
 procedure TPersistentCurveParameterContainer.SetName(AName: string);
 begin
-   Assert(Assigned(FSpecialCurveParameter));
-   FSpecialCurveParameter.Name := AName;
+    Assert(Assigned(FSpecialCurveParameter));
+    FSpecialCurveParameter.Name := AName;
 end;
 
 function TPersistentCurveParameterContainer.GetValue: string;
 begin
-   Result := FloatToStr(FSpecialCurveParameter.Value);
+    Result := FloatToStr(FSpecialCurveParameter.Value);
 end;
 
 procedure TPersistentCurveParameterContainer.SetValue(AValue: string);
 begin
-   FSpecialCurveParameter.Value := StrToFloat(AValue);
+    FSpecialCurveParameter.Value := StrToFloat(AValue);
 end;
 
 function TPersistentCurveParameterContainer.GetType: TParameterType;
 begin
-   Result := FSpecialCurveParameter.Type_;
+    Result := FSpecialCurveParameter.Type_;
 end;
 
 procedure TPersistentCurveParameterContainer.SetType(AType: TParameterType);
 begin
-   FSpecialCurveParameter.Type_ := AType;
+    FSpecialCurveParameter.Type_ := AType;
 end;
 
 end.
-

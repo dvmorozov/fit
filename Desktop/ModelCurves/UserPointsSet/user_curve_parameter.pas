@@ -8,7 +8,8 @@ unit user_curve_parameter;
 
 interface
 
-uses Classes, SysUtils, special_curve_parameter, log;
+uses
+    Classes, log, special_curve_parameter, SysUtils;
 
 type
     { Represents parameter of user-defined curve. }
@@ -18,7 +19,7 @@ type
         function CreateCopy: TSpecialCurveParameter; override;
         procedure InitVariationStep; override;
         procedure InitValue; override;
-        function MinimumStepAchieved: Boolean; override;
+        function MinimumStepAchieved: boolean; override;
     end;
 
 implementation
@@ -44,10 +45,9 @@ begin
     CopyTo(Result);
 end;
 
-function TUserCurveParameter.MinimumStepAchieved: Boolean;
+function TUserCurveParameter.MinimumStepAchieved: boolean;
 begin
     Result := True;
 end;
 
 end.
-

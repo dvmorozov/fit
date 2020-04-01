@@ -14,7 +14,7 @@ unit main_calc_thread;
 interface
 
 uses
-    Classes, SysUtils, log;
+    Classes, log, SysUtils;
 
 type
     { Must contain counterparts of IClientCallback methods withoud parameters
@@ -23,14 +23,14 @@ type
     //  v ob'ekte potoka dlya posleduyuschego chteniya.
     TMainCalcThread = class(TThread)
     private
-        FTask: TThreadMethod;
+        FTask:    TThreadMethod;
         { These methods are synchronized with UI thread. }
         FShowCurMin: TThreadMethod;
         FShowProfile: TThreadMethod;
-        FDone: TThreadMethod;
-        FFindPeakBoundsDone: TThreadMethod;
-        FFindBackPointsDone: TThreadMethod;
-        FFindPeakPositionsDone: TThreadMethod;
+        FDone:    TThreadMethod;
+        FComputeCurveBoundsDone: TThreadMethod;
+        FComputeBackgroundPointsDone: TThreadMethod;
+        FComputeCurvePositionsDone: TThreadMethod;
         FAllDone: TThreadMethod;
 
     public
@@ -39,39 +39,39 @@ type
         procedure ShowCurMin;
         procedure ShowProfile;
         procedure Done;
-        procedure FindPeakBoundsDone;
-        procedure FindBackPointsDone;
-        procedure FindPeakPositionsDone;
+        procedure ComputeCurveBoundsDone;
+        procedure ComputeBackgroundPointsDone;
+        procedure ComputeCurvePositionsDone;
 
         procedure SetSyncMethods(ATask, AShowCurMin, AShowProfile,
-            ADone, AFindPeakBoundsDone, AFindBackPointsDone,
-            AFindPeakPositionsDone, AAllDone: TThreadMethod);
+            ADone, AComputeCurveBoundsDone, AComputeBackgroundPointsDone,
+            AComputeCurvePositionsDone, AAllDone: TThreadMethod);
     end;
 
 implementation
 
-uses app;
+uses
+    app;
 
 procedure TMainCalcThread.SetSyncMethods(
-    ATask, AShowCurMin, AShowProfile,
-    ADone, AFindPeakBoundsDone, AFindBackPointsDone,
-    AFindPeakPositionsDone, AAllDone: TThreadMethod);
+    ATask, AShowCurMin, AShowProfile, ADone, AComputeCurveBoundsDone,
+    AComputeBackgroundPointsDone, AComputeCurvePositionsDone, AAllDone: TThreadMethod);
 begin
     Assert(Assigned(ATask));
     Assert(Assigned(AShowCurMin));
     Assert(Assigned(AShowProfile));
     Assert(Assigned(ADone));
-    Assert(Assigned(AFindPeakBoundsDone));
-    Assert(Assigned(AFindBackPointsDone));
-    Assert(Assigned(AFindPeakPositionsDone));
+    Assert(Assigned(AComputeCurveBoundsDone));
+    Assert(Assigned(AComputeBackgroundPointsDone));
+    Assert(Assigned(AComputeCurvePositionsDone));
     Assert(Assigned(AAllDone));
 
-    FTask := ATask;
+    FTask    := ATask;
     FShowCurMin := AShowCurMin;
     FShowProfile := AShowProfile;
-    FDone := ADone;
-    FFindPeakBoundsDone := AFindPeakBoundsDone;
-    FFindPeakPositionsDone := AFindPeakPositionsDone;
+    FDone    := ADone;
+    FComputeCurveBoundsDone := AComputeCurveBoundsDone;
+    FComputeCurvePositionsDone := AComputeCurvePositionsDone;
     FAllDone := AAllDone;
 end;
 
@@ -82,7 +82,8 @@ begin
     try
         FTask;
     except
-        on E: Exception do WriteLog(E.Message, Fatal);
+        on E: Exception do
+            WriteLog(E.Message, Fatal);
     end;
     Synchronize(FAllDone);
 end;
@@ -102,22 +103,19 @@ begin
     Synchronize(FDone);
 end;
 
-procedure TMainCalcThread.FindPeakBoundsDone;
+procedure TMainCalcThread.ComputeCurveBoundsDone;
 begin
-    Synchronize(FFindPeakBoundsDone);
+    Synchronize(FComputeCurveBoundsDone);
 end;
 
-procedure TMainCalcThread.FindBackPointsDone;
+procedure TMainCalcThread.ComputeBackgroundPointsDone;
 begin
-    Synchronize(FFindBackPointsDone);
+    Synchronize(FComputeBackgroundPointsDone);
 end;
 
-procedure TMainCalcThread.FindPeakPositionsDone;
+procedure TMainCalcThread.ComputeCurvePositionsDone;
 begin
-    Synchronize(FFindPeakPositionsDone);
+    Synchronize(FComputeCurvePositionsDone);
 end;
 
 end.
-
-
-

@@ -27,7 +27,7 @@ const
         'of instances of some base pattern found in the experimental data.'     +
         '<LI>The base pattern can be selected from a few forms: gaussian, '     +
         'lorentzian, pseudo-voigt.'                                             +
-        '<LI>Optionally the baseline can be removed.'                           +
+        '<LI>Optionally the background can be removed.'                           +
         '<LI>Some of instances are automatically excluded from the model'       +
         'based on theirs parameters.'                                           +
         '<LI>Fitting results are stored together with experimental data '       +
@@ -99,7 +99,7 @@ const
         '<LI>'                                                                  +
         'Removing '                                                             +
         '<A HREF="#" Title="Part of experimental data that can not be taken into account by the model.">' +
-        'baseline</A> if this is necessary.'                                  +
+        'background</A> if this is necessary.'                                  +
         //'Удаление '                                                             +
         //'<A HREF="#" ONCLICK="window.open(''https://ServerName/fit/_background_rus.htm'','''',''Toolbar=0,Location=0,Directories=0,Status=0,Menubar=0,Scrollbars=1,Resizable=1,Width=550,Height=100'');">' +
         //'фона</A> данных, если это необходимо.'                                 +
@@ -137,7 +137,7 @@ const
         'Selection of '                                                         +
         '<A HREF="#" Title="Interval of data arguments for which pattern instance, resulting curve, difference curve values' +
         'are calculated. At least one pattern instance will be created for every pattern application interval.">' +
-        'instance application intervals</A>. For data that looks like set of '  +
+        'instance bounds</A>. For data that looks like set of '  +
         'peaks this job could be done automatically, after than '               +
         'could be corrected manually.'                                          +
         //'Выбор '                                                                +
@@ -166,7 +166,7 @@ const
 
         '</UL></OL>'                                                            +
         'In the cases when the data looks like set of peaks all the job ('      +
-        'baseline removing, model creation and fitting) '                       +
+        'background removing, model creation and fitting) '                       +
         'can be done fully automatically.';
         //'В случаях, когда данные имеют вид профиля вся работа может быть '      +
         //'выполнена полностью автоматически.';

@@ -6,164 +6,162 @@ unit Unit2;
 interface
 
 uses
-  Classes, SysUtils, LResources, cgiModules, title_points_set, dat_file_loader,
-  points_set, data_loader, lorentz_points_set, pseudo_voigt_points_set, gauss_points_set,
-  curve_points_set;
+    cgiModules, Classes, curve_points_set, dat_file_loader,
+    data_loader, gauss_points_set, lorentz_points_set,
+    LResources, points_set, pseudo_voigt_points_set,
+    SysUtils, title_points_set;
 
 type
 
-  { TCGIDatamodule2 }
+    { TCGIDatamodule2 }
 
-  TCGIDatamodule2 = class(TCGIDatamodule)
-  private
-    { private declarations }
-    procedure HandleCommand(Command: string);
-    //  !!! d. ispol'zovat' cur_chunk_num, poskol'ku
-    //  vysyvaetsya vo vseh sluchayah !!!
-    procedure GoToBackground;
-    procedure BackMore;
-    procedure GenerateBackPoints;
-    procedure SelectBackPoint;
-    
-    procedure GoToPattern;
-    procedure DeleteBackground;
-    //  perehod k oknu sozdaniya patterna
-    procedure GoToPatternMore;
-    procedure DoPatternAction;
-    //  perehod k oknu redaktirovaniya patterna
-    procedure EditPattern;
-    procedure DeletePattern;
-    procedure CreatePatternActually;
-    //  izmenenie parametrov patterna
-    procedure UpdatePattern;
-    procedure UpdateSpecimen;
-    
-    procedure GoToSpecimenIntervals;
-    procedure GenerateSpecimenIntervals;
-    procedure SaveSpecParameters;
+    TCGIDatamodule2 = class(TCGIDatamodule)
+    private
+        { private declarations }
+        procedure HandleCommand(Command: string);
+        //  !!! d. ispol'zovat' cur_chunk_num, poskol'ku
+        //  vysyvaetsya vo vseh sluchayah !!!
+        procedure GoToBackground;
+        procedure BackMore;
+        procedure ComputeBackgroundPoints;
+        procedure SelectBackPoint;
 
-    procedure GoToStartPage(Capt: string; Hint: string);
-    procedure GoToFitting;
-    procedure MinimizeDifference;
-    procedure MinimizeNumberOfSpecimens;
-    procedure DoAllAutomatically;
+        procedure GoToPattern;
+        procedure DeleteBackground;
+        //  perehod k oknu sozdaniya patterna
+        procedure GoToPatternMore;
+        procedure DoPatternAction;
+        //  perehod k oknu redaktirovaniya patterna
+        procedure EditPattern;
+        procedure DeletePattern;
+        procedure CreatePatternActually;
+        //  izmenenie parametrov patterna
+        procedure UpdatePattern;
+        procedure UpdateCurve;
 
-    //  perehod k oknu vybora tochek privyazki patterna
-    procedure GoToSpecimenPositions;
-    procedure SelectSpecimenPosition;
-    procedure GenerateSpecimenPositions;
+        procedure GoToCurveBounds;
+        procedure ComputeCurveBounds;
+        procedure SaveSpecParameters;
 
-    procedure GoToSpecimenParameters;
-    procedure UpdateSpecimenParameters;
-    procedure LogIn;
-    procedure StartEvaluation;
-    procedure LogOut;
-    procedure DoRegister;
-    procedure GoToRegistration(const Hint: string);
-    procedure GoToEvaluation;
+        procedure GoToStartPage(Capt: string; Hint: string);
+        procedure GoToFitting;
+        procedure MinimizeDifference;
+        procedure MinimizeNumberOfCurves;
+        procedure DoAllAutomatically;
 
-    procedure GoToProjects;
-    procedure GoToProjectsActual;
-    procedure UploadData;
-    procedure SaveData;
-    procedure DeleteData;
-    procedure DeleteProject;
-    procedure CreateProject;
-    procedure OpenData;
+        //  perehod k oknu vybora tochek privyazki patterna
+        procedure GoToCurvePositions;
+        procedure SelectCurvePosition;
+        procedure GenerateCurvePositions;
 
-    procedure OpenFileResult;
-    procedure DeleteFileResult;
-    
-    procedure AddPointToProfile;
-    procedure GoToFirstData;
-    procedure GoToPrevData;
-    procedure GoToLastData;
-    procedure GoToNextData;
-    //  obrabotka klikov na ssylki na kuski
-    procedure GoToChunkData;
-    procedure OpenProject;
-    procedure GetFileResults;
-    procedure GetFileResultsActually(ProjectName: string; FileName: string);
+        procedure GoToCurveParameters;
+        procedure UpdateCurveParameters;
+        procedure LogIn;
+        procedure StartEvaluation;
+        procedure LogOut;
+        procedure DoRegister;
+        procedure GoToRegistration(const Hint: string);
+        procedure GoToEvaluation;
 
-    //  vyvodit stranitsu projecta bez predvaritel'noy proverki
-    procedure OpenProjectActual(ProjectFileName: string);
+        procedure GoToProjects;
+        procedure GoToProjectsActual;
+        procedure UploadData;
+        procedure SaveData;
+        procedure DeleteData;
+        procedure DeleteProject;
+        procedure CreateProject;
+        procedure OpenData;
 
-    procedure RefreshSpecIntProgress;
-    procedure RefreshSpecPosProgress;
-    procedure RefreshBackProgress;
-    procedure Refresh;
-    procedure StopFitting;
-    procedure StopBackGenProcess;
-    procedure StopSpecIntGenProcess;
-    procedure StopSpecPosGenProcess;
-    //  vybor tochki granitsy intervala primeneniya ekz. patternov
-    procedure SelectBoundPoint;
-    //  vozvraschaet nabor strok s nomerami kuskov dlya vstavki ssylok v stranitsu
-    function GetChunkNumbers(CurChunkNum: LongInt; ChunkCount: LongInt): TStringList;
-    
-    function InsertChunkLinks(
-        TmplIn: string; ChunkNum: LongInt; Data: TPointsSet): string;
-    function InsertDataByTemplate(
-        ChunkNum: LongInt;  (* dlya zapolneniya schablona *)
-        Data: TPointsSet;
-        ProjectName: string; FileName: string): string;
-    function InsertKey(Template: string; Key: string): string;
-        
-    function InsertDataWithTagByTemplate(
-        Page: string; Data: TPointsSet; Selected: TPointsSet): string;
-    //  special'niy variant vstavki dannyh dlya granits intervalov
-    function InsertDataWithTagByIntervals(
-        Page: string; Data: TPointsSet; SpecIntervals: TPointsSet): string;
-    function InsertNamesByTemplate(
-        TemplateIn: string; Names: TStringList; Files: TStringList): string;
-    
-    function GetGraphURL: string;
-    procedure GetGraph;
-    procedure GetSavedGraph;
-    //  obnovleniye vremennoy metki klyucha
-    procedure WriteKeyToFile;
-    procedure WriteProblemFile(
-        ProjectName: string; FileName: string; ProblemID: LongInt);
-    procedure DeleteProblem(ProblemID: LongInt);
-    //  izvlekaet imya pol'zovatelya po kluchu;
-    //  vozvraschaet False kogda kluch prosrochen
-    //  (chto yavlyaetsya dopustimym sostoyaniem)
-    function GetUserName: Boolean;
-    procedure GetDataNames(ProblemID: LongInt; var UserName: string;
-        var ProjectName: string; var FileName: string);
-    //  izvlekaet spisok projectov pol'zovatelya
-    function GetUserProjects(
-        const UserName: string; out ProjectFiles: TStringList): TStringList;
-    //  izvlekaet spisok failov proekta
-    function GetUserProjectFiles(const ProjectName: string;
-        out Files: TStringList): TStringList;
-    //  vozvraschaet spisok imen rezul'tatov, cherez Files peredaet
-    //  nazvaniya sootvetstvuyuschih failov
-    function GetProjectFileResults(const ProjectName: string;
-        FileName: string; out Files: TStringList): TStringList;
-    //  poluchenie indeksa dlya sozdaniya imeni novogo faila
-    function GetNewFileIndex(
-        const UserName: string; const ProjectName: string): LongInt;
-    //  poluchenie indeksa dlya sozdaniya imeni novogo projekta
-    function GetNewProjectIndex: LongInt;
-    function GetProjectName(ProjectFileName: string): string;
-    procedure GetProjectProperties(ProjectFileName: string;
-        out ProjectName: string; out ProjectDescription: string);
-    procedure GetFileProperties(
-        ProjectFileName: string; FileName: string;
-        out UserFileName: string; out FileDescription: string);
-    function FillTemplateBySpecParameters(Page: string): string;
-    function ExtractTemplate(
-        var From: string; MarkerBegin: string; MarkerEnd: string;
-        var Position: LongInt): string;
-    //  vozvraschaet html-kod grecheskogo simvola, sootvetstvuyuschego
-    //  dannomu imeni (ili samo imya, esli sootvetstvie ne naydeno)
-    function NameToGreekSymbol(Name_: string): string;
+        procedure OpenFileResult;
+        procedure DeleteFileResult;
 
-  public
-    { public declarations }
-    procedure CGIDatamodule2CGIRequest(Sender: TObject);
-  end;
+        procedure AddPointToProfile;
+        procedure GoToFirstData;
+        procedure GoToPrevData;
+        procedure GoToLastData;
+        procedure GoToNextData;
+        //  obrabotka klikov na ssylki na kuski
+        procedure GoToChunkData;
+        procedure OpenProject;
+        procedure GetFileResults;
+        procedure GetFileResultsActually(ProjectName: string; FileName: string);
+
+        //  vyvodit stranitsu projecta bez predvaritel'noy proverki
+        procedure OpenProjectActual(ProjectFileName: string);
+
+        procedure RefreshSpecIntProgress;
+        procedure RefreshSpecPosProgress;
+        procedure RefreshBackProgress;
+        procedure Refresh;
+        procedure StopFitting;
+        procedure StopBackGenProcess;
+        procedure StopSpecIntGenProcess;
+        procedure StopSpecPosGenProcess;
+        //  vybor tochki granitsy intervala primeneniya ekz. patternov
+        procedure SelectBoundPoint;
+        //  vozvraschaet nabor strok s nomerami kuskov dlya vstavki ssylok v stranitsu
+        function GetChunkNumbers(CurChunkNum: longint; ChunkCount: longint): TStringList;
+
+        function InsertChunkLinks(TmplIn: string; ChunkNum: longint;
+            Data: TPointsSet): string;
+        function InsertDataByTemplate(ChunkNum: longint;
+        (* dlya zapolneniya schablona *)
+            Data: TPointsSet; ProjectName: string; FileName: string): string;
+        function InsertKey(Template: string; Key: string): string;
+
+        function InsertDataWithTagByTemplate(Page: string;
+            Data: TPointsSet; Selected: TPointsSet): string;
+        //  special'niy variant vstavki dannyh dlya granits intervalov
+        function InsertDataWithTagByBounds(Page: string;
+            Data: TPointsSet; SpecBounds: TPointsSet): string;
+        function InsertNamesByTemplate(TemplateIn: string;
+            Names: TStringList; Files: TStringList): string;
+
+        function GetGraphURL: string;
+        procedure GetGraph;
+        procedure GetSavedGraph;
+        //  obnovleniye vremennoy metki klyucha
+        procedure WriteKeyToFile;
+        procedure WriteProblemFile(ProjectName: string; FileName: string;
+            ProblemID: longint);
+        procedure DeleteProblem(ProblemID: longint);
+        //  izvlekaet imya pol'zovatelya po kluchu;
+        //  vozvraschaet False kogda kluch prosrochen
+        //  (chto yavlyaetsya dopustimym sostoyaniem)
+        function GetUserName: boolean;
+        procedure GetDataNames(ProblemID: longint; var UserName: string;
+            var ProjectName: string; var FileName: string);
+        //  izvlekaet spisok projectov pol'zovatelya
+        function GetUserProjects(const UserName: string;
+            out ProjectFiles: TStringList): TStringList;
+        //  izvlekaet spisok failov proekta
+        function GetUserProjectFiles(const ProjectName: string;
+            out Files: TStringList): TStringList;
+        //  vozvraschaet spisok imen rezul'tatov, cherez Files peredaet
+        //  nazvaniya sootvetstvuyuschih failov
+        function GetProjectFileResults(const ProjectName: string;
+            FileName: string; out Files: TStringList): TStringList;
+        //  poluchenie indeksa dlya sozdaniya imeni novogo faila
+        function GetNewFileIndex(const UserName: string;
+            const ProjectName: string): longint;
+        //  poluchenie indeksa dlya sozdaniya imeni novogo projekta
+        function GetNewProjectIndex: longint;
+        function GetProjectName(ProjectFileName: string): string;
+        procedure GetProjectProperties(ProjectFileName: string;
+            out ProjectName: string; out ProjectDescription: string);
+        procedure GetFileProperties(ProjectFileName: string;
+            FileName: string; out UserFileName: string; out FileDescription: string);
+        function FillTemplateBySpecParameters(Page: string): string;
+        function ExtractTemplate(var From: string; MarkerBegin: string;
+            MarkerEnd: string; var Position: longint): string;
+        //  vozvraschaet html-kod grecheskogo simvola, sootvetstvuyuschego
+        //  dannomu imeni (ili samo imya, esli sootvetstvie ne naydeno)
+        function NameToGreekSymbol(Name_: string): string;
+
+    public
+        { public declarations }
+        procedure CGIDatamodule2CGIRequest(Sender: TObject);
+    end;
 
 procedure CopyDir(SrcDir: string; DstDir: string);
 procedure CopyFile(SrcFile: string; DstFile: string);
@@ -174,66 +172,96 @@ var
 
 implementation
 
-uses data, background, background_more, pattern, pattern_more, specimen_positions,
-    specimen_parameters, specimen_intervals, fitting, start, error, fitting_process,
-    fitting_progress, gen_back_progress, gen_spec_pos_progress, registration_free,
-    gen_spec_int_progress, projects, project_files, project_files_empty,
-    fit_server_proxy, projects_empty, soap_formatter, binary_formatter,
-    base_service_intf, specimen_parameters_file, file_results, file_results_empty,
-    evaluation, app, mscr_specimen_list, Settings,
-    GeneralHashfunctions, common_types;
+uses app, background, background_more, base_service_intf, binary_formatter,
+    Data, error, evaluation, file_results, file_results_empty,
+    fit_server_proxy, fitting, fitting_process,
+    fitting_progress, gen_back_progress, gen_spec_int_progress,
+    gen_spec_pos_progress, GeneralHashfunctions, mscr_specimen_list,
+    pattern, pattern_more, project_files, project_files_empty,
+    projects, projects_empty, registration_free,
+    Settings,
+    soap_formatter, specimen_intervals, specimen_parameters,
+    specimen_parameters_file, specimen_positions,
+    start;
 
 const
-    CommandNotFound:                string = 'Command not found.';              //'Команда не обнаружена.';
-    UnrecognizedCommand:            string = 'Unrecognized command.';           //'Команда не известна.';
-    InvalidArgument:                string = 'Inadmissible argument.';          //'Введено недопустимое значение аргумента.';
-    InvalidValue:                   string = 'Inadmissible value.';             //'Введено недопустимое значение.';
-    InvalidSpecIndex:               string = 'Inadmissible specimen number.';   //'Введен недопустимый номер экземпляра паттерна.';
-    InvalidParValue:                string = 'Inadmissible parameter value.';   //'Введено недопустимое значение параметра';
-    ProblemIDIsAbsent:              string = 'Lack of session number.';         //'Отсутствует номер сеанса.';
-    InvalidProblemID:               string = 'Inadmissible session number';     //'Недопустимый номер сеанса.';
-    ChunkNumberIsAbsent:            string = 'Lack of chunk number';            //'Отсутствует номер куска.';
-    PointMustBeSelectedFromData:    string = 'The argument must be choosed among arguments of data.';
-                                                                                //'Аргумент должен быть выбран среди аргументов точек данных.';
-    NoFileName:                     string = 'Inadmissible file name.';         //'Недопустимое имя файла.';
-    Yes:                            string = 'Yes';                             //'Да';
-    No:                             string = 'No';                              //'Нет';
+    CommandNotFound: string = 'Command not found.';
+    //'Команда не обнаружена.';
+    UnrecognizedCommand: string = 'Unrecognized command.';
+    //'Команда не известна.';
+    InvalidArgument: string = 'Inadmissible argument.';
+    //'Введено недопустимое значение аргумента.';
+    InvalidValue: string = 'Inadmissible value.';
+    //'Введено недопустимое значение.';
+    InvalidSpecIndex: string = 'Inadmissible specimen number.';
+    //'Введен недопустимый номер экземпляра паттерна.';
+    InvalidParValue: string = 'Inadmissible parameter value.';
+    //'Введено недопустимое значение параметра';
+    ProblemIDIsAbsent: string = 'Lack of session number.';
+    //'Отсутствует номер сеанса.';
+    InvalidProblemID: string = 'Inadmissible session number';
+    //'Недопустимый номер сеанса.';
+    ChunkNumberIsAbsent: string = 'Lack of chunk number';
+    //'Отсутствует номер куска.';
+    PointMustBeSelectedFromData: string =
+        'The argument must be choosed among arguments of data.';
+    //'Аргумент должен быть выбран среди аргументов точек данных.';
+    NoFileName: string = 'Inadmissible file name.';
+    //'Недопустимое имя файла.';
+    Yes: string   = 'Yes';                             //'Да';
+    No: string    = 'No';                              //'Нет';
     //  tipy granits intervala
-    Left:                           string = 'L';                               //'Левая';
-    Right:                          string = 'R';                               //'Правая';
+    Left: string  = 'L';
+    //'Левая';
+    Right: string = 'R';
+    //'Правая';
 
-    InvalidPassword:                string = 'Incorrect password!';             //'Неверный пароль!';
-    RepeatInput:                    string = 'Repeat input!';                   //'Повторите ввод!';
-    UserNameIsAbsent:               string = 'Username must not be empty!';     //'Имя пользователя должно быть введено!';
-    InadmissibleUserName:           string = 'Inadmissible username. User with such name already registered.';
-                                                                                //'Недопустимое имя пользователя.';
-    PasswordIsAbsent:               string = 'The password must not be empty!'; //'Пароль не может быть пустым!';
-    TimeOut:                        string = 'The temporary key expired. Please log in again.';
-                                                                                //'Действие временного ключа истекло. Требуется повторная аутентификация!';
-    ProjectNameIsAbsent:            string = 'Lack of project name.';           //'Отсутствует имя проекта.';
-    FileNameIsAbsent:               string = 'Lack of file name';               //'Отсутствует имя файла.';
-    UserWithName:                   string = 'User with username ';             //'Пользователь с именем ';
-    PleaseLogIn:                    string = 'Please type your username and password.';
-                                                                                //'Введите свои реквизиты.';
-    UnsuccessfulFileOperation:      string = 'Unsuccessful file operation.';    //'Ошибка операции с файлом.';
-    InvalidKeyValue:                string = 'Inadmissible key value.';         //'Недопустимый код ключа.';
-    Profile:                        string = 'Exp. data';                       //'Данные';
-    HeaderSpecimenNumber:           string = 'Specimen number';                 //'Номер экземпляра';
-    
+    InvalidPassword: string = 'Incorrect password!';
+    //'Неверный пароль!';
+    RepeatInput: string  = 'Repeat input!';
+    //'Повторите ввод!';
+    UserNameIsAbsent: string = 'Username must not be empty!';
+    //'Имя пользователя должно быть введено!';
+    InadmissibleUserName: string =
+        'Inadmissible username. User with such name already registered.';
+    //'Недопустимое имя пользователя.';
+    PasswordIsAbsent: string = 'The password must not be empty!';
+    //'Пароль не может быть пустым!';
+    TimeOut: string      =
+        'The temporary key expired. Please log in again.';
+    //'Действие временного ключа истекло. Требуется повторная аутентификация!';
+    ProjectNameIsAbsent: string = 'Lack of project name.';
+    //'Отсутствует имя проекта.';
+    FileNameIsAbsent: string = 'Lack of file name';
+    //'Отсутствует имя файла.';
+    UserWithName: string = 'User with username ';
+    //'Пользователь с именем ';
+    PleaseLogIn: string  = 'Please type your username and password.';
+    //'Введите свои реквизиты.';
+    UnsuccessfulFileOperation: string = 'Unsuccessful file operation.';
+    //'Ошибка операции с файлом.';
+    InvalidKeyValue: string = 'Inadmissible key value.';
+    //'Недопустимый код ключа.';
+    Profile: string      = 'Exp. data';
+    //'Данные';
+    HeaderCurveNumber: string = 'Curve number';
+    //'Номер экземпляра';
+
 {$ifdef windows}
-    KeyDir:                         string = '..\data\tmp\';
-    DataDir:                        string = '..\data\';
+    KeyDir: string  = '..\data\tmp\';
+    DataDir: string = '..\data\';
 {$else}
-    KeyDir:                         string = '/home/www/tmp/';
-    DataDir:                        string = '/home/www/data/';
+    KeyDir: string  = '/home/www/tmp/';
+    DataDir: string = '/home/www/data/';
 {$endif}
 
-    TINY: Double = 1e-6;
-    
+    TINY: double = 1e-6;
+
 { TCGIDatamodule2 }
 
 procedure TCGIDatamodule2.CGIDatamodule2CGIRequest(Sender: TObject);
-var Page: TStringList;
+var
+    Page:    TStringList;
     Command: string;
 begin
     try
@@ -266,7 +294,6 @@ begin
             begin
                 Command := Application.RequestVariables['command'];
                 if Command = 'get_graph' then
-                begin
                     try
                         Application.ContentType := 'image/png';
                         Application.EmitContentType;
@@ -274,12 +301,11 @@ begin
                     except
                         //  soobschenie ob oschibke ne vyvoditsya,
                         //  poskol'ku zagolovok ne html
-                        on E: Exception do WriteLog(E.Message, Fatal);
-                    end;
-                end
+                        on E: Exception do
+                            WriteLog(E.Message, Fatal);
+                    end
                 else
                 if Command = 'get_saved_graph' then
-                begin
                     try
                         Application.ContentType := 'image/png';
                         Application.EmitContentType;
@@ -287,9 +313,9 @@ begin
                     except
                         //  soobschenie ob oschibke ne vyvoditsya,
                         //  poskol'ku zagolovok ne html
-                        on E: Exception do WriteLog(E.Message, Fatal);
-                    end;
-                end
+                        on E: Exception do
+                            WriteLog(E.Message, Fatal);
+                    end
                 else
                 begin
                     //  bez etogo ne rabotaet - net avtomaticheskoy vstavki zagolovka
@@ -313,33 +339,40 @@ begin
             Page := TStringList.Create;
             Page.Clear;
             Application.GetCGIVarList(Page);
-            CGIDatamodule2.AddResponseLn('===================== GetCGIVarList ===================');
+            CGIDatamodule2.AddResponseLn(
+                '===================== GetCGIVarList ===================');
             CGIDatamodule2.AddResponseLn('<BR>');
             CGIDatamodule2.AddResponseLn(Page.Text);
             CGIDatamodule2.AddResponseLn('<BR>');
-            CGIDatamodule2.AddResponseLn('=======================================================');
+            CGIDatamodule2.AddResponseLn(
+                '=======================================================');
             CGIDatamodule2.AddResponseLn('<BR>');
 
             Page.Clear;
             Application.GetRequestVarList(Page);
-            CGIDatamodule2.AddResponseLn('===================== GetRequestVarList ===============');
+            CGIDatamodule2.AddResponseLn(
+                '===================== GetRequestVarList ===============');
             CGIDatamodule2.AddResponseLn('<BR>');
             CGIDatamodule2.AddResponseLn(Page.Text);
             CGIDatamodule2.AddResponseLn('<BR>');
-            CGIDatamodule2.AddResponseLn('=======================================================');
+            CGIDatamodule2.AddResponseLn(
+                '=======================================================');
             CGIDatamodule2.AddResponseLn('<BR>');
 
             CGIDatamodule2.AddResponseLn('AuthType: ' + Application.AuthType);
             CGIDatamodule2.AddResponseLn('<BR>');
-            CGIDatamodule2.AddResponseLn('ContentLength: ' + IntToStr(Application.ContentLength));
+            CGIDatamodule2.AddResponseLn('ContentLength: ' +
+                IntToStr(Application.ContentLength));
             CGIDatamodule2.AddResponseLn('<BR>');
             CGIDatamodule2.AddResponseLn('ContentType: ' + Application.ContentType);
             CGIDatamodule2.AddResponseLn('<BR>');
-            CGIDatamodule2.AddResponseLn('GatewayInterface: ' + Application.GatewayInterface);
+            CGIDatamodule2.AddResponseLn('GatewayInterface: ' +
+                Application.GatewayInterface);
             CGIDatamodule2.AddResponseLn('<BR>');
             CGIDatamodule2.AddResponseLn('Info: ' + Application.PathInfo);
             CGIDatamodule2.AddResponseLn('<BR>');
-            CGIDatamodule2.AddResponseLn('PathTranslated: ' + Application.PathTranslated);
+            CGIDatamodule2.AddResponseLn('PathTranslated: ' +
+                Application.PathTranslated);
             CGIDatamodule2.AddResponseLn('<BR>');
             CGIDatamodule2.AddResponseLn('QueryString: ' + Application.QueryString);
             CGIDatamodule2.AddResponseLn('<BR>');
@@ -357,19 +390,25 @@ begin
             CGIDatamodule2.AddResponseLn('<BR>');
             CGIDatamodule2.AddResponseLn('ServerName: ' + Application.ServerName);
             CGIDatamodule2.AddResponseLn('<BR>');
-            CGIDatamodule2.AddResponseLn('ServerPort: ' + IntToStr(Application.ServerPort));
+            CGIDatamodule2.AddResponseLn('ServerPort: ' +
+                IntToStr(Application.ServerPort));
             CGIDatamodule2.AddResponseLn('<BR>');
-            CGIDatamodule2.AddResponseLn('ServerProtocol: ' + Application.ServerProtocol);
+            CGIDatamodule2.AddResponseLn('ServerProtocol: ' +
+                Application.ServerProtocol);
             CGIDatamodule2.AddResponseLn('<BR>');
-            CGIDatamodule2.AddResponseLn('ServerSoftware: ' + Application.ServerSoftware);
+            CGIDatamodule2.AddResponseLn('ServerSoftware: ' +
+                Application.ServerSoftware);
             CGIDatamodule2.AddResponseLn('<BR>');
             CGIDatamodule2.AddResponseLn('HTTPAccept: ' + Application.HTTPAccept);
             CGIDatamodule2.AddResponseLn('<BR>');
-            CGIDatamodule2.AddResponseLn('HTTPAcceptCharset: ' + Application.HTTPAcceptCharset);
+            CGIDatamodule2.AddResponseLn('HTTPAcceptCharset: ' +
+                Application.HTTPAcceptCharset);
             CGIDatamodule2.AddResponseLn('<BR>');
-            CGIDatamodule2.AddResponseLn('HTTPAcceptEncoding: ' + Application.HTTPAcceptEncoding);
+            CGIDatamodule2.AddResponseLn('HTTPAcceptEncoding: ' +
+                Application.HTTPAcceptEncoding);
             CGIDatamodule2.AddResponseLn('<BR>');
-            CGIDatamodule2.AddResponseLn('HTTPIfModifiedSince: ' + Application.HTTPIfModifiedSince);
+            CGIDatamodule2.AddResponseLn('HTTPIfModifiedSince: ' +
+                Application.HTTPIfModifiedSince);
             CGIDatamodule2.AddResponseLn('<BR>');
             CGIDatamodule2.AddResponseLn('HTTPReferer: ' + Application.HTTPReferer);
             CGIDatamodule2.AddResponseLn('<BR>');
@@ -379,7 +418,8 @@ begin
             CGIDatamodule2.AddResponseLn('<BR>');
             CGIDatamodule2.AddResponseLn('Administrator: ' + Application.Administrator);
             CGIDatamodule2.AddResponseLn('<BR>');
-            CGIDatamodule2.AddResponseLn('=======================================================');
+            CGIDatamodule2.AddResponseLn(
+                '=======================================================');
             Page.Free;
 {$ENDIF}
         end;
@@ -388,54 +428,78 @@ end;
 
 procedure TCGIDatamodule2.HandleCommand(Command: string);
 begin
-     WriteLog('HandleCommand', Notification_);
-    if Command = 'add_point_to_profile' then AddPointToProfile
+    WriteLog('HandleCommand', Notification_);
+    if Command = 'add_point_to_profile' then
+        AddPointToProfile
     else
-    if Command = 'go_to_background' then GoToBackground
+    if Command = 'go_to_background' then
+        GoToBackground
     else
-    if Command = 'back_more' then BackMore
+    if Command = 'back_more' then
+        BackMore
     else
-    if Command = 'generate_back_points' then GenerateBackPoints
+    if Command = 'generate_back_points' then
+        ComputeBackgroundPoints
     else
-    if Command = 'select_back_point' then SelectBackPoint
+    if Command = 'select_back_point' then
+        SelectBackPoint
     else
-    if Command = 'skip_background' then GoToPattern
+    if Command = 'skip_background' then
+        GoToPattern
     else
-    if Command = 'delete_background' then DeleteBackground
+    if Command = 'delete_background' then
+        DeleteBackground
     else
-    if Command = 'create_pattern' then GoToPatternMore
+    if Command = 'create_pattern' then
+        GoToPatternMore
     else
-    if Command = 'do_pattern_action' then DoPatternAction
+    if Command = 'do_pattern_action' then
+        DoPatternAction
     else
-    if Command = 'create_pattern_actually' then CreatePatternActually
+    if Command = 'create_pattern_actually' then
+        CreatePatternActually
     else
-    if Command = 'update_pattern' then UpdatePattern
+    if Command = 'update_pattern' then
+        UpdatePattern
     else
-    if Command = 'update_specimen' then UpdateSpecimen
+    if Command = 'update_specimen' then
+        UpdateCurve
     else
-    if Command = 'go_to_specimen_intervals' then GoToSpecimenIntervals
+    if Command = 'go_to_specimen_intervals' then
+        GoToCurveBounds
     else
-    if Command = 'go_to_fitting' then GoToFitting
+    if Command = 'go_to_fitting' then
+        GoToFitting
     else
-    if Command = 'go_to_projects' then GoToProjects
+    if Command = 'go_to_projects' then
+        GoToProjects
     else
-    if Command = 'minimize_difference' then MinimizeDifference
+    if Command = 'minimize_difference' then
+        MinimizeDifference
     else
-    if Command = 'minimize_number_of_specimens' then MinimizeNumberOfSpecimens
+    if Command = 'minimize_number_of_specimens' then
+        MinimizeNumberOfCurves
     else
-    if Command = 'do_all_automatically' then DoAllAutomatically
+    if Command = 'do_all_automatically' then
+        DoAllAutomatically
     else
-    if Command = 'log_in' then LogIn
+    if Command = 'log_in' then
+        LogIn
     else
-    if Command = 'log_out' then LogOut
+    if Command = 'log_out' then
+        LogOut
     else
-    if Command = 'registration' then GoToRegistration(RegistrationPage)
+    if Command = 'registration' then
+        GoToRegistration(RegistrationPage)
     else
-    if Command = 'evaluation' then GoToEvaluation
+    if Command = 'evaluation' then
+        GoToEvaluation
     else
-    if Command = 'start_evaluation' then StartEvaluation
+    if Command = 'start_evaluation' then
+        StartEvaluation
     else
-    if Command = 'register' then DoRegister
+    if Command = 'register' then
+        DoRegister
     else
     if Command = 'go_to_start_page' then
     begin
@@ -448,80 +512,116 @@ begin
         WriteLog('Back to start page', Notification_);
     end
     else
-    if Command = 'generate_specimen_positions' then GenerateSpecimenPositions
+    if Command = 'generate_specimen_positions' then
+        GenerateCurvePositions
     else
-    if Command = 'generate_specimen_intervals' then GenerateSpecimenIntervals
+    if Command = 'generate_specimen_intervals' then
+        ComputeCurveBounds
     else
-    if Command = 'go_to_specimen_parameters' then GoToSpecimenParameters
+    if Command = 'go_to_specimen_parameters' then
+        GoToCurveParameters
     else
-    if Command = 'select_specimen_position' then SelectSpecimenPosition
+    if Command = 'select_specimen_position' then
+        SelectCurvePosition
     else
-    if Command = 'select_bound_point' then SelectBoundPoint
+    if Command = 'select_bound_point' then
+        SelectBoundPoint
     else
-    if Command = 'update_specimen_parameters' then UpdateSpecimenParameters
+    if Command = 'update_specimen_parameters' then
+        UpdateCurveParameters
     else
-    if Command = 'upload_data' then UploadData
+    if Command = 'upload_data' then
+        UploadData
     else
-    if Command = 'save_data' then SaveData
+    if Command = 'save_data' then
+        SaveData
     else
-    if Command = 'refresh_back_progress' then RefreshBackProgress
+    if Command = 'refresh_back_progress' then
+        RefreshBackProgress
     else
-    if Command = 'refresh_spec_pos_progress' then RefreshSpecPosProgress
+    if Command = 'refresh_spec_pos_progress' then
+        RefreshSpecPosProgress
     else
-    if Command = 'refresh_spec_int_progress' then RefreshSpecIntProgress
+    if Command = 'refresh_spec_int_progress' then
+        RefreshSpecIntProgress
     else
-    if Command = 'refresh' then Refresh
+    if Command = 'refresh' then
+        Refresh
     else
-    if Command = 'stop_fitting' then StopFitting
+    if Command = 'stop_fitting' then
+        StopFitting
     else
-    if Command = 'stop_back_gen_process' then StopBackGenProcess
+    if Command = 'stop_back_gen_process' then
+        StopBackGenProcess
     else
-    if Command = 'stop_spec_int_gen_process' then StopSpecIntGenProcess
+    if Command = 'stop_spec_int_gen_process' then
+        StopSpecIntGenProcess
     else
-    if Command = 'stop_spec_pos_gen_process' then StopSpecPosGenProcess
+    if Command = 'stop_spec_pos_gen_process' then
+        StopSpecPosGenProcess
     else
-    if Command = 'go_to_first_data' then GoToFirstData
+    if Command = 'go_to_first_data' then
+        GoToFirstData
     else
-    if Command = 'go_to_prev_data' then GoToPrevData
+    if Command = 'go_to_prev_data' then
+        GoToPrevData
     else
-    if Command = 'go_to_last_data' then GoToLastData
+    if Command = 'go_to_last_data' then
+        GoToLastData
     else
-    if Command = 'go_to_next_data' then GoToNextData
+    if Command = 'go_to_next_data' then
+        GoToNextData
     else
-    if Command = 'go_to_chunk_data' then GoToChunkData
+    if Command = 'go_to_chunk_data' then
+        GoToChunkData
     else
-    if Command = 'go_to_chunk_background' then GoToBackground
+    if Command = 'go_to_chunk_background' then
+        GoToBackground
     else
-    if Command = 'go_to_chunk_background_more' then BackMore
+    if Command = 'go_to_chunk_background_more' then
+        BackMore
     else
-    if Command = 'go_to_chunk_specimen_intervals' then GoToSpecimenIntervals
+    if Command = 'go_to_chunk_specimen_intervals' then
+        GoToCurveBounds
     else
-    if Command = 'go_to_chunk_specimen_positions' then GoToSpecimenPositions
+    if Command = 'go_to_chunk_specimen_positions' then
+        GoToCurvePositions
     else
-    if Command = 'open_project' then OpenProject
+    if Command = 'open_project' then
+        OpenProject
     else
-    if Command = 'delete_data' then DeleteData
+    if Command = 'delete_data' then
+        DeleteData
     else
-    if Command = 'open_data' then OpenData
+    if Command = 'open_data' then
+        OpenData
     else
-    if Command = 'delete_project' then DeleteProject
+    if Command = 'delete_project' then
+        DeleteProject
     else
-    if Command = 'create_project' then CreateProject
+    if Command = 'create_project' then
+        CreateProject
     else
-    if Command = 'save_spec_parameters' then SaveSpecParameters
+    if Command = 'save_spec_parameters' then
+        SaveSpecParameters
     else
-    if Command = 'get_file_results' then GetFileResults
+    if Command = 'get_file_results' then
+        GetFileResults
     else
-    if Command = 'delete_file_result' then DeleteFileResult
+    if Command = 'delete_file_result' then
+        DeleteFileResult
     else
-    if Command = 'open_file_result' then OpenFileResult
-    else raise ECGIAppException.Create(UnrecognizedCommand);
+    if Command = 'open_file_result' then
+        OpenFileResult
+    else
+        raise ECGIAppException.Create(UnrecognizedCommand);
 end;
 
 procedure TCGIDatamodule2.DeleteData;
-var FileName: string;
+var
+    FileName:    string;
     ProjectName: string;
-    DirName: string;    //  katalog pol'zovatelya
+    DirName:     string;    //  katalog pol'zovatelya
 begin
     //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
     Key := Application.RequestVariables['key'];
@@ -549,13 +649,16 @@ begin
     //  proverka imeni pol'zovatelya
     DirName := DataDir + UserName;
     if not DirectoryExists(DirName) then
-    begin GoToRegistration(YetNotRegistered); Exit; end;
+    begin
+        GoToRegistration(YetNotRegistered);
+        Exit;
+    end;
 
-    Sysutils.DeleteFile(DirName + Slash + ProjectName + Slash + FileName);
+    SysUtils.DeleteFile(DirName + Slash + ProjectName + Slash + FileName);
     //  udalenie faila svoistv
     FileName := ChangeFileExt(FileName, '.properties');
-    Sysutils.DeleteFile(DirName + Slash + ProjectName + Slash + FileName);
-    
+    SysUtils.DeleteFile(DirName + Slash + ProjectName + Slash + FileName);
+
     OpenProjectActual(ProjectName);
 end;
 
@@ -579,7 +682,8 @@ begin
 end;
 
 procedure TCGIDatamodule2.DeleteProject;
-var ProjectName: string;
+var
+    ProjectName: string;
     DirName: string;    //  katalog pol'zovatelya
     R: TSearchRec;
 begin
@@ -605,29 +709,31 @@ begin
     //  proverka imeni pol'zovatelya
     DirName := DataDir + UserName;
     if not DirectoryExists(DirName) then
-    begin GoToRegistration(YetNotRegistered); Exit; end;
+    begin
+        GoToRegistration(YetNotRegistered);
+        Exit;
+    end;
 
     //  udalenie vseh faylov v direktorii proekta
-    if FindFirst(DirName + Slash +
-        ProjectName + Slash + '*', faAnyFile, R) = 0 then
-    begin
+    if FindFirst(DirName + Slash + ProjectName + Slash + '*',
+        faAnyFile, R) = 0 then
         try
             repeat
                 if (R.Name <> '.') and (R.Name <> '..') then
-                    Sysutils.DeleteFile(DirName + Slash +
+                    SysUtils.DeleteFile(DirName + Slash +
                         ProjectName + Slash + R.Name);
             until FindNext(R) <> 0;
         finally
-            Sysutils.FindClose(R);
+            SysUtils.FindClose(R);
         end;
-    end;
     //  udalenie direktorii proekta
     RemoveDir(DirName + Slash + ProjectName);
     GoToProjectsActual;
 end;
 
 procedure TCGIDatamodule2.CreateProject;
-var ProjectName, ProjectDescription: string;
+var
+    ProjectName, ProjectDescription: string;
     ProjectDirName: string;
     DirName: string;    //  katalog pol'zovatelya
     R: TSearchRec;
@@ -655,7 +761,10 @@ begin
     //  proverka imeni pol'zovatelya
     DirName := DataDir + UserName;
     if not DirectoryExists(DirName) then
-    begin GoToRegistration(YetNotRegistered); Exit; end;
+    begin
+        GoToRegistration(YetNotRegistered);
+        Exit;
+    end;
 
     //  sozdanie direktorii proekta
     ProjectDirName := IntToStr(GetNewProjectIndex);
@@ -665,8 +774,8 @@ begin
     try
         P.Name := ProjectName;
         P.Description := ProjectDescription;
-        WriteProperties(DirName + Slash + ProjectDirName +
-            Slash + '.properties', P);
+        WriteProperties(DirName + Slash + ProjectDirName + Slash +
+            '.properties', P);
     finally
         P.Free;
     end;
@@ -674,11 +783,12 @@ begin
 end;
 
 procedure TCGIDatamodule2.OpenData;
-var FileName: string;
+var
+    FileName: string;
     ProjectName: string;
-    DirName: string;    //  katalog pol'zovatelya
+    DirName:  string;    //  katalog pol'zovatelya
     DataLoader: TDATFileLoader;
-    Data: TTitlePointsSet;
+    Data:     TTitlePointsSet;
     Template: string;
 begin
     //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
@@ -707,7 +817,10 @@ begin
     //  proverka imeni pol'zovatelya
     DirName := DataDir + UserName;
     if not DirectoryExists(DirName) then
-    begin GoToRegistration(YetNotRegistered); Exit; end;
+    begin
+        GoToRegistration(YetNotRegistered);
+        Exit;
+    end;
 
     //  sozdanie zadachi
     Proxy.CreateProblem;
@@ -745,14 +858,15 @@ begin
 end;
 
 procedure TCGIDatamodule2.SaveData;
-var FileName: string;
+var
+    FileName: string;
     ProjectName: string;
     DirName: string;    //  katalog pol'zovatelya
     Data: TTitlePointsSet;
     Template: string;
-    CurChunkNum: LongInt;
+    CurChunkNum: longint;
     F: TextFile;
-    i: LongInt;
+    i: longint;
 begin
     //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
     Key := Application.RequestVariables['key'];
@@ -772,7 +886,10 @@ begin
     //  proverka imeni pol'zovatelya
     DirName := DataDir + UserName;
     if not DirectoryExists(DirName) then
-    begin GoToRegistration(YetNotRegistered); Exit; end;
+    begin
+        GoToRegistration(YetNotRegistered);
+        Exit;
+    end;
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
         Proxy.SetProblemId(StrToInt(Application.RequestVariables['problem_id']));
@@ -817,10 +934,11 @@ begin
 end;
 
 procedure TCGIDatamodule2.UploadData;
-var FileName, NewFileBaseName: string;
+var
+    FileName, NewFileBaseName: string;
     ProjectName: string;
     DirName: string;    //  katalog pol'zovatelya
-    LastFileIndex: LongInt;
+    LastFileIndex: longint;
     From, To_: TFileStream;
     P: File_v1;
     UserFileName, FileDescription: string;
@@ -853,24 +971,27 @@ begin
     //  proverka imeni pol'zovatelya
     DirName := DataDir + UserName;
     if not DirectoryExists(DirName) then
-    begin GoToRegistration(YetNotRegistered); Exit; end;
+    begin
+        GoToRegistration(YetNotRegistered);
+        Exit;
+    end;
 
     //  poluchenie indeksa dlya sozdaniya imeni novogo faila
-    LastFileIndex := GetNewFileIndex(UserName, ProjectName);
+    LastFileIndex   := GetNewFileIndex(UserName, ProjectName);
     NewFileBaseName := IntToStr(LastFileIndex);
 
     //  izvlekaetsya imya vremennogo faila, sozdavaemogo web-serverom
     FileName := Application.UploadedFileName('file');//RequestVariables['file'];
     //if FileName = '' then raise Exception.Create(NoFileName);
     //  pustoe pole faila oznachaet, chto dolzhen byt' sozdan novyi fail
-    
+
     if FileName <> '' then
     begin
 {$IFDEF WINDOWS}
         //  !!! etot glyuk nablyudalsya tol'ko v denwer'e !!!
         //  udalyaetsya '/tmp/\' iz nachala...
         //  05/05/2013 nablyudaetsya v Apache 2.2 na XP.
-        
+
         (*  na vista ne pomogaet - cgi-skript ne mozhet sozdat'
             vremennyi fail - ispravlen tekst v cgiapp
             (TCgiApplication.GetTempCGIFileName)
@@ -883,11 +1004,12 @@ begin
         *)
 {$ENDIF}
         //  kopirovaniye faila v proekt
-        From := nil; To_ := nil;
+        From := nil;
+        To_  := nil;
         try
             From := TFileStream.Create(FileName, fmOpenRead);
-            To_ := TFileStream.Create(DirName + Slash + ProjectName + Slash +
-                NewFileBaseName + '.dat', fmCreate);
+            To_  := TFileStream.Create(DirName + Slash + ProjectName +
+                Slash + NewFileBaseName + '.dat', fmCreate);
             To_.CopyFrom(From, 0);
         finally
             From.Free;
@@ -899,8 +1021,8 @@ begin
         //  sozdaetsya pustoy fail
         To_ := nil;
         try
-            To_ := TFileStream.Create(DirName + Slash + ProjectName + Slash +
-                NewFileBaseName + '.dat', fmCreate);
+            To_ := TFileStream.Create(DirName + Slash + ProjectName +
+                Slash + NewFileBaseName + '.dat', fmCreate);
         finally
             To_.Free;
         end;
@@ -919,8 +1041,9 @@ begin
 end;
 
 procedure TCGIDatamodule2.GoToFirstData;
-var Template: string;
-    Points: TPointsSet;
+var
+    Template: string;
+    Points:   TPointsSet;
     ProjectName, FileName: string;
 begin
     //  vypolnenie zaprosa
@@ -966,9 +1089,10 @@ begin
 end;
 
 procedure TCGIDatamodule2.GoToPrevData;
-var Template: string;
-    Points: TPointsSet;
-    CurChunkNum: LongInt;
+var
+    Template:    string;
+    Points:      TPointsSet;
+    CurChunkNum: longint;
     ProjectName, FileName: string;
 begin
     //  vypolnenie zaprosa
@@ -1005,12 +1129,13 @@ begin
     if FileName = '' then
         raise Exception.Create(FileNameIsAbsent);
 
-    if CurChunkNum > 1 then Dec(CurChunkNum);
+    if CurChunkNum > 1 then
+        Dec(CurChunkNum);
     Points := Proxy.GetProfileChunk(CurChunkNum);
     try
         //  chtenie schablona i zapolnenie ego parametrov
-        Template := InsertDataByTemplate(
-            CurChunkNum, Points, ProjectName, FileName);
+        Template := InsertDataByTemplate(CurChunkNum, Points,
+            ProjectName, FileName);
         Template := InsertChunkLinks(Template, CurChunkNum, Points);
         Template := InsertKey(Template, Key);
     finally
@@ -1021,9 +1146,10 @@ begin
 end;
 
 procedure TCGIDatamodule2.GoToLastData;
-var Template: string;
-    Points: TPointsSet;
-    CurChunkNum: LongInt;
+var
+    Template:    string;
+    Points:      TPointsSet;
+    CurChunkNum: longint;
     ProjectName, FileName: string;
 begin
     //  vypolnenie zaprosa
@@ -1056,11 +1182,11 @@ begin
         raise Exception.Create(FileNameIsAbsent);
 
     CurChunkNum := Proxy.GetProfileChunkCount;
-    Points := Proxy.GetProfileChunk(CurChunkNum);
+    Points      := Proxy.GetProfileChunk(CurChunkNum);
     try
         //  chtenie schablona i zapolnenie ego parametrov
-        Template := InsertDataByTemplate(
-            CurChunkNum, Points, ProjectName, FileName);
+        Template := InsertDataByTemplate(CurChunkNum, Points,
+            ProjectName, FileName);
         Template := InsertChunkLinks(Template, CurChunkNum, Points);
         Template := InsertKey(Template, Key);
     finally
@@ -1071,10 +1197,11 @@ begin
 end;
 
 procedure TCGIDatamodule2.GoToNextData;
-var Template: string;
-    Points: TPointsSet;
-    CurChunkNum: LongInt;
-    ChunkCount: LongInt;
+var
+    Template:    string;
+    Points:      TPointsSet;
+    CurChunkNum: longint;
+    ChunkCount:  longint;
     ProjectName, FileName: string;
 begin
     //  vypolnenie zaprosa
@@ -1113,12 +1240,13 @@ begin
 
     ChunkCount := Proxy.GetProfileChunkCount;
     Inc(CurChunkNum);
-    if CurChunkNum > ChunkCount then CurChunkNum := ChunkCount;
+    if CurChunkNum > ChunkCount then
+        CurChunkNum := ChunkCount;
     Points := Proxy.GetProfileChunk(CurChunkNum);
     try
         //  chtenie schablona i zapolnenie ego parametrov
-        Template := InsertDataByTemplate(
-            CurChunkNum, Points, ProjectName, FileName);
+        Template := InsertDataByTemplate(CurChunkNum, Points,
+            ProjectName, FileName);
         Template := InsertChunkLinks(Template, CurChunkNum, Points);
         Template := InsertKey(Template, Key);
     finally
@@ -1129,9 +1257,10 @@ begin
 end;
 
 procedure TCGIDatamodule2.GoToChunkData;
-var Template: string;
-    Points: TPointsSet;
-    CurChunkNum: LongInt;
+var
+    Template:    string;
+    Points:      TPointsSet;
+    CurChunkNum: longint;
     ProjectName, FileName: string;
 begin
     //  vypolnenie zaprosa
@@ -1171,8 +1300,8 @@ begin
     Points := Proxy.GetProfileChunk(CurChunkNum);
     try
         //  chtenie schablona i zapolnenie ego parametrov
-        Template := InsertDataByTemplate(
-            CurChunkNum, Points, ProjectName, FileName);
+        Template := InsertDataByTemplate(CurChunkNum, Points,
+            ProjectName, FileName);
         Template := InsertChunkLinks(Template, CurChunkNum, Points);
         Template := InsertKey(Template, Key);
     finally
@@ -1183,8 +1312,9 @@ begin
 end;
 
 procedure TCGIDatamodule2.Refresh;
-var Template: string;
-    Pair: array[1..1] of TStringPair;
+var
+    Template: string;
+    Pair:     array[1..1] of TStringPair;
 begin
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
@@ -1210,13 +1340,15 @@ begin
     if Proxy.AsyncOper then
     begin
         //  povtor vyvoda stranitsy
-        Template := PrepareTemplate_fitting_progress;
-        Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.GetProblemId);
-        Template := ReplaceStrings(Template, Pair, 1);
+        Template   := PrepareTemplate_fitting_progress;
+        Pair[1][1] := 'ProblemID';
+        Pair[1][2] := IntToStr(Proxy.GetProblemId);
+        Template   := ReplaceStrings(Template, Pair, 1);
 
-        Pair[1][1] := 'CalcTime'; Pair[1][2] := Proxy.GetCalcTimeStr;
-        Template := ReplaceStrings(Template, Pair, 1);
-        
+        Pair[1][1] := 'CalcTime';
+        Pair[1][2] := Proxy.GetCalcTimeStr;
+        Template   := ReplaceStrings(Template, Pair, 1);
+
         Template := InsertKey(Template, Key);
 
         //  vyvod stranitsy
@@ -1224,13 +1356,14 @@ begin
     end
     else
         //  vyvod resul'tatov
-        GoToSpecimenParameters;
+        GoToCurveParameters;
 end;
 
 procedure TCGIDatamodule2.RefreshBackProgress;
-var Template: string;
-    Pair: array[1..1] of TStringPair;
-    CurChunkNum: LongInt;
+var
+    Template: string;
+    Pair:     array[1..1] of TStringPair;
+    CurChunkNum: longint;
 begin
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
@@ -1261,13 +1394,15 @@ begin
     if Proxy.AsyncOper then
     begin
         //  povtor vyvoda stranitsy
-        Template := PrepareTemplate_gen_back_progress;
-        Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.GetProblemId);
-        Template := ReplaceStrings(Template, Pair, 1);
+        Template   := PrepareTemplate_gen_back_progress;
+        Pair[1][1] := 'ProblemID';
+        Pair[1][2] := IntToStr(Proxy.GetProblemId);
+        Template   := ReplaceStrings(Template, Pair, 1);
 
-        Pair[1][1] := 'CurChunkNum'; Pair[1][2] := IntToStr(CurChunkNum);
-        Template := ReplaceStrings(Template, Pair, 1);
-        
+        Pair[1][1] := 'CurChunkNum';
+        Pair[1][2] := IntToStr(CurChunkNum);
+        Template   := ReplaceStrings(Template, Pair, 1);
+
         Template := InsertKey(Template, Key);
         //  vyvod stranitsy
         CGIDatamodule2.AddResponseLn(Template);
@@ -1278,9 +1413,10 @@ begin
 end;
 
 procedure TCGIDatamodule2.RefreshSpecPosProgress;
-var Template: string;
-    Pair: array[1..1] of TStringPair;
-    CurChunkNum: LongInt;
+var
+    Template: string;
+    Pair:     array[1..1] of TStringPair;
+    CurChunkNum: longint;
 begin
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
@@ -1311,26 +1447,29 @@ begin
     if Proxy.AsyncOper then
     begin
         //  povtor vyvoda stranitsy
-        Template := PrepareTemplate_gen_spec_pos_progress;
-        Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.GetProblemId);
-        Template := ReplaceStrings(Template, Pair, 1);
+        Template   := PrepareTemplate_gen_spec_pos_progress;
+        Pair[1][1] := 'ProblemID';
+        Pair[1][2] := IntToStr(Proxy.GetProblemId);
+        Template   := ReplaceStrings(Template, Pair, 1);
 
-        Pair[1][1] := 'CurChunkNum'; Pair[1][2] := IntToStr(CurChunkNum);
-        Template := ReplaceStrings(Template, Pair, 1);
-        
+        Pair[1][1] := 'CurChunkNum';
+        Pair[1][2] := IntToStr(CurChunkNum);
+        Template   := ReplaceStrings(Template, Pair, 1);
+
         Template := InsertKey(Template, Key);
         //  vyvod stranitsy
         CGIDatamodule2.AddResponseLn(Template);
     end
     else
         //  vyvod resul'tatov
-        GoToSpecimenPositions;
+        GoToCurvePositions;
 end;
 
 procedure TCGIDatamodule2.RefreshSpecIntProgress;
-var Template: string;
-    Pair: array[1..1] of TStringPair;
-    CurChunkNum: LongInt;
+var
+    Template: string;
+    Pair:     array[1..1] of TStringPair;
+    CurChunkNum: longint;
 begin
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
@@ -1361,20 +1500,22 @@ begin
     if Proxy.AsyncOper then
     begin
         //  povtor vyvoda stranitsy
-        Template := PrepareTemplate_gen_spec_int_progress;
-        Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.GetProblemId);
-        Template := ReplaceStrings(Template, Pair, 1);
+        Template   := PrepareTemplate_gen_spec_int_progress;
+        Pair[1][1] := 'ProblemID';
+        Pair[1][2] := IntToStr(Proxy.GetProblemId);
+        Template   := ReplaceStrings(Template, Pair, 1);
 
-        Pair[1][1] := 'CurChunkNum'; Pair[1][2] := IntToStr(CurChunkNum);
-        Template := ReplaceStrings(Template, Pair, 1);
-        
+        Pair[1][1] := 'CurChunkNum';
+        Pair[1][2] := IntToStr(CurChunkNum);
+        Template   := ReplaceStrings(Template, Pair, 1);
+
         Template := InsertKey(Template, Key);
         //  vyvod stranitsy
         CGIDatamodule2.AddResponseLn(Template);
     end
     else
         //  vyvod resul'tatov
-        GoToSpecimenIntervals;
+        GoToCurveBounds;
 end;
 
 procedure TCGIDatamodule2.StopBackGenProcess;
@@ -1440,7 +1581,7 @@ begin
     end
     else
         //  vyvod resul'tatov
-        GoToSpecimenIntervals;
+        GoToCurveBounds;
 end;
 
 procedure TCGIDatamodule2.StopSpecPosGenProcess;
@@ -1473,7 +1614,7 @@ begin
     end
     else
         //  vyvod resul'tatov
-        GoToSpecimenPositions;
+        GoToCurvePositions;
 end;
 
 procedure TCGIDatamodule2.StopFitting;
@@ -1506,14 +1647,15 @@ begin
     end
     else
         //  vyvod resul'tatov
-        GoToSpecimenParameters;
+        GoToCurveParameters;
 end;
 
 procedure TCGIDatamodule2.AddPointToProfile;
-var Template: string;
-    Argument, Value: Double;
-    Points: TPointsSet;
-    CurChunkNum: LongInt;
+var
+    Template:    string;
+    Argument, Value: double;
+    Points:      TPointsSet;
+    CurChunkNum: longint;
     ProjectName, FileName: string;
 begin
     //  vypolnenie zaprosa
@@ -1571,8 +1713,8 @@ begin
     Points := Proxy.GetProfileChunk(CurChunkNum);
     try
         //  chtenie schablona i zapolnenie ego parametrov
-        Template := InsertDataByTemplate(
-            CurChunkNum, Points, ProjectName, FileName);
+        Template := InsertDataByTemplate(CurChunkNum, Points,
+            ProjectName, FileName);
         Template := InsertChunkLinks(Template, CurChunkNum, Points);
         Template := InsertKey(Template, Key);
     finally
@@ -1582,13 +1724,14 @@ begin
     CGIDatamodule2.AddResponseLn(Template);
 end;
 
-//  !!! d. ispol'zovat' cur_chunk_num, poskol'ku
-//  vysyvaetsya vo vseh sluchayah !!!
+   //  !!! d. ispol'zovat' cur_chunk_num, poskol'ku
+   //  vysyvaetsya vo vseh sluchayah !!!
 procedure TCGIDatamodule2.GoToBackground;
-var Template: string;
+var
+    Template: string;
     Data, Background: TPointsSet;
-    Pair: array[1..1] of TStringPair;
-    CurChunkNum: LongInt;
+    Pair:     array[1..1] of TStringPair;
+    CurChunkNum: longint;
 begin
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
@@ -1621,15 +1764,18 @@ begin
         Background := Proxy.GetBackgroundPoints;
         try
             //  chtenie schablona i zapolnenie ego parametrov
-            Template := PrepareTemplate_background;
-            Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.GetProblemId);
-            Template := ReplaceStrings(Template, Pair, 1);
-            
-            Pair[1][1] := 'GraphURL'; Pair[1][2] := GetGraphURL;
-            Template := ReplaceStrings(Template, Pair, 1);
-            
-            Pair[1][1] := 'CurChunkNum'; Pair[1][2] := IntToStr(CurChunkNum);
-            Template := ReplaceStrings(Template, Pair, 1);
+            Template   := PrepareTemplate_background;
+            Pair[1][1] := 'ProblemID';
+            Pair[1][2] := IntToStr(Proxy.GetProblemId);
+            Template   := ReplaceStrings(Template, Pair, 1);
+
+            Pair[1][1] := 'GraphURL';
+            Pair[1][2] := GetGraphURL;
+            Template   := ReplaceStrings(Template, Pair, 1);
+
+            Pair[1][1] := 'CurChunkNum';
+            Pair[1][2] := IntToStr(CurChunkNum);
+            Template   := ReplaceStrings(Template, Pair, 1);
 
             Template := InsertDataWithTagByTemplate(
                 Template, Data, Background);
@@ -1646,11 +1792,12 @@ begin
 end;
 
 procedure TCGIDatamodule2.BackMore;
-var Template: string;
-    Argument, Value: Double;
+var
+    Template: string;
+    Argument, Value: double;
     Data, Background: TPointsSet;
-    Pair: array[1..1] of TStringPair;
-    CurChunkNum: LongInt;
+    Pair:     array[1..1] of TStringPair;
+    CurChunkNum: longint;
 begin
     Key := Application.RequestVariables['key'];
     if Trim(Key) = '' then
@@ -1683,15 +1830,18 @@ begin
         Background := Proxy.GetBackgroundPoints;
         try
             //  chtenie schablona i zapolnenie ego parametrov
-            Template := PrepareTemplate_background_more;
-            Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.GetProblemId);
-            Template := ReplaceStrings(Template, Pair, 1);
-            
-            Pair[1][1] := 'GraphURL'; Pair[1][2] := GetGraphURL;
-            Template := ReplaceStrings(Template, Pair, 1);
-            
-            Pair[1][1] := 'CurChunkNum'; Pair[1][2] := IntToStr(CurChunkNum);
-            Template := ReplaceStrings(Template, Pair, 1);
+            Template   := PrepareTemplate_background_more;
+            Pair[1][1] := 'ProblemID';
+            Pair[1][2] := IntToStr(Proxy.GetProblemId);
+            Template   := ReplaceStrings(Template, Pair, 1);
+
+            Pair[1][1] := 'GraphURL';
+            Pair[1][2] := GetGraphURL;
+            Template   := ReplaceStrings(Template, Pair, 1);
+
+            Pair[1][1] := 'CurChunkNum';
+            Pair[1][2] := IntToStr(CurChunkNum);
+            Template   := ReplaceStrings(Template, Pair, 1);
 
             Template := InsertDataWithTagByTemplate(
                 Template, Data, Background);
@@ -1708,10 +1858,11 @@ begin
     CGIDatamodule2.AddResponseLn(Template);
 end;
 
-procedure TCGIDatamodule2.GenerateBackPoints;
-var BackF: string;
-    CurChunkNum: LongInt;
-    BackFactor: Double;
+procedure TCGIDatamodule2.ComputeBackgroundPoints;
+var
+    BackF: string;
+    CurChunkNum: longint;
+    BackFactor: double;
     Template: string;
     Pair: array[1..1] of TStringPair;
 begin
@@ -1749,37 +1900,39 @@ begin
         //  nichego straschnogo - prodolzhaem s factorom po-umolchaniyu
     end;
     if BackF <> '' then
-    begin
         try
             BackFactor := MyStrToFloat(BackF);
         except
             //  znachenie bylo nepravil'no vvedeno
             raise Exception.Create(InvalidValue);
         end;
-    end;
     //  vypolnenie zaprosa
-    if BackF <> '' then Proxy.SetBackFactor(BackFactor);
-    Proxy.FindBackPoints;
+    if BackF <> '' then
+        Proxy.SetBackFactor(BackFactor);
+    Proxy.ComputeBackgroundPoints;
     //GoToBackground;
     //  protsess asinhronnyi, poetomu perehodim k oknu progressa;
     //  chtenie schablona i zapolnenie ego parametrov
-    Template := PrepareTemplate_gen_back_progress;
-    Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.GetProblemId);
-    Template := ReplaceStrings(Template, Pair, 1);
+    Template   := PrepareTemplate_gen_back_progress;
+    Pair[1][1] := 'ProblemID';
+    Pair[1][2] := IntToStr(Proxy.GetProblemId);
+    Template   := ReplaceStrings(Template, Pair, 1);
 
-    Pair[1][1] := 'CurChunkNum'; Pair[1][2] := IntToStr(CurChunkNum);
-    Template := ReplaceStrings(Template, Pair, 1);
-    Template := InsertKey(Template, Key);
+    Pair[1][1] := 'CurChunkNum';
+    Pair[1][2] := IntToStr(CurChunkNum);
+    Template   := ReplaceStrings(Template, Pair, 1);
+    Template   := InsertKey(Template, Key);
     //  vyvod stranitsy
     CGIDatamodule2.AddResponseLn(Template);
 end;
 
 procedure TCGIDatamodule2.SelectBackPoint;
-var Argument, Value: Double;
-    Data: TPointsSet;
-    i: LongInt;
-    Found: Boolean;
-    CurChunkNum: LongInt;
+var
+    Argument, Value: double;
+    Data:  TPointsSet;
+    i:     longint;
+    Found: boolean;
+    CurChunkNum: longint;
 begin
     //  vypolnenie zaprosa
     try
@@ -1806,15 +1959,14 @@ begin
         //  poisk poluchennoy tochki sredi tochek dannyh
         Found := False;
         for i := 0 to Data.PointsCount - 1 do
-        begin
             if Abs(Argument - Data.PointXCoord[i]) <= TINY then
             begin
                 Value := Data.PointYCoord[i];
                 Found := True;
                 Break;  //  tochka naidena...
             end;
-        end;
-        if not Found then raise Exception.Create(PointMustBeSelectedFromData);
+        if not Found then
+            raise Exception.Create(PointMustBeSelectedFromData);
 
         Proxy.AddPointToBackground(Argument, Value);
     finally
@@ -1824,9 +1976,10 @@ begin
 end;
 
 procedure TCGIDatamodule2.GoToPattern;
-var Template: string;
-    Pair: array[1..1] of TStringPair;
-    CurChunkNum: LongInt;
+var
+    Template: string;
+    Pair:     array[1..1] of TStringPair;
+    CurChunkNum: longint;
 begin
     Key := Application.RequestVariables['key'];
     if Trim(Key) = '' then
@@ -1854,22 +2007,26 @@ begin
     end;
     //  vypolnenie zaprosa
     //  chtenie schablona i zapolnenie ego parametrov
-    Template := PrepareTemplate_pattern;
-    Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.GetProblemId);
-    Template := ReplaceStrings(Template, Pair, 1);
-    
-    Pair[1][1] := 'GraphURL'; Pair[1][2] := GetGraphURL;
-    Template := ReplaceStrings(Template, Pair, 1);
-    
-    Pair[1][1] := 'CurChunkNum'; Pair[1][2] := IntToStr(CurChunkNum);
-    Template := ReplaceStrings(Template, Pair, 1);
-    Template := InsertKey(Template, Key);
+    Template   := PrepareTemplate_pattern;
+    Pair[1][1] := 'ProblemID';
+    Pair[1][2] := IntToStr(Proxy.GetProblemId);
+    Template   := ReplaceStrings(Template, Pair, 1);
+
+    Pair[1][1] := 'GraphURL';
+    Pair[1][2] := GetGraphURL;
+    Template   := ReplaceStrings(Template, Pair, 1);
+
+    Pair[1][1] := 'CurChunkNum';
+    Pair[1][2] := IntToStr(CurChunkNum);
+    Template   := ReplaceStrings(Template, Pair, 1);
+    Template   := InsertKey(Template, Key);
     //  vyvod stranitsy
     CGIDatamodule2.AddResponseLn(Template);
 end;
 
 procedure TCGIDatamodule2.DeleteBackground;
-var CurChunkNum: LongInt;
+var
+    CurChunkNum: longint;
 begin
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
@@ -1884,12 +2041,13 @@ begin
         raise Exception.Create(ChunkNumberIsAbsent);
     end;
     //  vypolnenie zaprosa
-    Proxy.SubtractAllBackground(False);
+    Proxy.SubtractBackground(False);
     GoToPattern;
 end;
 
 procedure TCGIDatamodule2.DoPatternAction;
-var Command: string;
+var
+    Command:     string;
     PatternType: string;
 begin
     try
@@ -1902,12 +2060,13 @@ begin
     Command := Application.RequestVariables['action'];
     if Command = '' then
         raise Exception.Create(CommandNotFound);
-    
+
     if Command = 'edit_pattern' then
         //  perehod k oknu redaktirovaniya patterna
         EditPattern
     else
-    if Command = 'delete_pattern' then DeletePattern
+    if Command = 'delete_pattern' then
+        DeletePattern
     else
     if Command = 'select_pattern' then
     begin
@@ -1921,14 +2080,16 @@ begin
         else
             Proxy.SetCurveType(TGaussPointsSet.GetCurveTypeId_);
         //??? special'nye patterny poka ne obrabatyvayutsya
-        GoToSpecimenPositions;
+        GoToCurvePositions;
     end
-    else raise Exception.Create(UnrecognizedCommand);
+    else
+        raise Exception.Create(UnrecognizedCommand);
 end;
 
 //  perehod k oknu sozdaniya patterna
 procedure TCGIDatamodule2.GoToPatternMore;
-var CurChunkNum: LongInt;
+var
+    CurChunkNum: longint;
     Template: string;
     Pair: array[1..1] of TStringPair;
 begin
@@ -1957,23 +2118,27 @@ begin
         raise Exception.Create(ChunkNumberIsAbsent);
     end;
     //  chtenie schablona i zapolnenie ego parametrov
-    Template := PrepareTemplate_pattern_more;
-    Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.GetProblemId);
-    Template := ReplaceStrings(Template, Pair, 1);
-    
-    Pair[1][1] := 'GraphURL'; Pair[1][2] := GetGraphURL;
-    Template := ReplaceStrings(Template, Pair, 1);
-    
-    Pair[1][1] := 'CurChunkNum'; Pair[1][2] := IntToStr(CurChunkNum);
-    Template := ReplaceStrings(Template, Pair, 1);
-    Template := InsertKey(Template, Key);
+    Template   := PrepareTemplate_pattern_more;
+    Pair[1][1] := 'ProblemID';
+    Pair[1][2] := IntToStr(Proxy.GetProblemId);
+    Template   := ReplaceStrings(Template, Pair, 1);
+
+    Pair[1][1] := 'GraphURL';
+    Pair[1][2] := GetGraphURL;
+    Template   := ReplaceStrings(Template, Pair, 1);
+
+    Pair[1][1] := 'CurChunkNum';
+    Pair[1][2] := IntToStr(CurChunkNum);
+    Template   := ReplaceStrings(Template, Pair, 1);
+    Template   := InsertKey(Template, Key);
     //  vyvod stranitsy
     CGIDatamodule2.AddResponseLn(Template);
 end;
 
 //  perehod k oknu redaktirovaniya patterna
 procedure TCGIDatamodule2.EditPattern;
-var CurChunkNum: LongInt;
+var
+    CurChunkNum: longint;
 begin
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
@@ -1992,7 +2157,8 @@ begin
 end;
 
 procedure TCGIDatamodule2.DeletePattern;
-var CurChunkNum: LongInt;
+var
+    CurChunkNum: longint;
 begin
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
@@ -2011,11 +2177,12 @@ begin
 end;
 
 //  perehod k oknu vybora tochek privyazki patterna
-procedure TCGIDatamodule2.GoToSpecimenPositions;
-var Template: string;
+procedure TCGIDatamodule2.GoToCurvePositions;
+var
+    Template: string;
     Data, SpecPositions: TPointsSet;
-    Pair: array[1..1] of TStringPair;
-    CurChunkNum: LongInt;
+    Pair:     array[1..1] of TStringPair;
+    CurChunkNum: longint;
 begin
     //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
     Key := Application.RequestVariables['key'];
@@ -2049,15 +2216,18 @@ begin
         SpecPositions := Proxy.GetCurvePositions;
         try
             //  chtenie schablona i zapolnenie ego parametrov
-            Template := PrepareTemplate_specimen_positions;
-            Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.GetProblemId);
-            Template := ReplaceStrings(Template, Pair, 1);
-            
-            Pair[1][1] := 'GraphURL'; Pair[1][2] := GetGraphURL;
-            Template := ReplaceStrings(Template, Pair, 1);
-            
-            Pair[1][1] := 'CurChunkNum'; Pair[1][2] := IntToStr(CurChunkNum);
-            Template := ReplaceStrings(Template, Pair, 1);
+            Template   := PrepareTemplate_specimen_positions;
+            Pair[1][1] := 'ProblemID';
+            Pair[1][2] := IntToStr(Proxy.GetProblemId);
+            Template   := ReplaceStrings(Template, Pair, 1);
+
+            Pair[1][1] := 'GraphURL';
+            Pair[1][2] := GetGraphURL;
+            Template   := ReplaceStrings(Template, Pair, 1);
+
+            Pair[1][1] := 'CurChunkNum';
+            Pair[1][2] := IntToStr(CurChunkNum);
+            Template   := ReplaceStrings(Template, Pair, 1);
 
             Template := InsertDataWithTagByTemplate(
                 Template, Data, SpecPositions);
@@ -2074,7 +2244,8 @@ begin
 end;
 
 procedure TCGIDatamodule2.CreatePatternActually;
-var CurChunkNum: LongInt;
+var
+    CurChunkNum: longint;
 begin
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
@@ -2093,7 +2264,8 @@ begin
 end;
 
 procedure TCGIDatamodule2.UpdatePattern;
-var CurChunkNum: LongInt;
+var
+    CurChunkNum: longint;
 begin
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
@@ -2111,8 +2283,9 @@ begin
     GoToPattern;
 end;
 
-procedure TCGIDatamodule2.UpdateSpecimen;
-var CurChunkNum: LongInt;
+procedure TCGIDatamodule2.UpdateCurve;
+var
+    CurChunkNum: longint;
 begin
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
@@ -2127,14 +2300,15 @@ begin
         raise Exception.Create(ChunkNumberIsAbsent);
     end;
     //  ??? vypolnenie zaprosa
-    GoToSpecimenParameters;
+    GoToCurveParameters;
 end;
 
-procedure TCGIDatamodule2.GoToSpecimenIntervals;
-var Template: string;
-    Pair: array[1..1] of TStringPair;
-    Data, Intervals: TPointsSet;
-    CurChunkNum: LongInt;
+procedure TCGIDatamodule2.GoToCurveBounds;
+var
+    Template: string;
+    Pair:     array[1..1] of TStringPair;
+    Data, Bounds: TPointsSet;
+    CurChunkNum: longint;
 begin
     //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
     Key := Application.RequestVariables['key'];
@@ -2164,24 +2338,27 @@ begin
     //Data := Proxy.GetProfilePointsSet;
     Data := Proxy.GetProfileChunk(CurChunkNum);
     try
-        Intervals := Proxy.GetRFactorIntervals;
+        Bounds := Proxy.GetRFactorBounds;
         try
-            Template := PrepareTemplate_specimen_intervals;
-            Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.GetProblemId);
-            Template := ReplaceStrings(Template, Pair, 1);
-            
-            Pair[1][1] := 'GraphURL'; Pair[1][2] := GetGraphURL;
-            Template := ReplaceStrings(Template, Pair, 1);
-            
-            Pair[1][1] := 'CurChunkNum'; Pair[1][2] := IntToStr(CurChunkNum);
-            Template := ReplaceStrings(Template, Pair, 1);
+            Template   := PrepareTemplate_specimen_intervals;
+            Pair[1][1] := 'ProblemID';
+            Pair[1][2] := IntToStr(Proxy.GetProblemId);
+            Template   := ReplaceStrings(Template, Pair, 1);
 
-            Template := InsertDataWithTagByIntervals(
-                Template, Data, Intervals);
+            Pair[1][1] := 'GraphURL';
+            Pair[1][2] := GetGraphURL;
+            Template   := ReplaceStrings(Template, Pair, 1);
+
+            Pair[1][1] := 'CurChunkNum';
+            Pair[1][2] := IntToStr(CurChunkNum);
+            Template   := ReplaceStrings(Template, Pair, 1);
+
+            Template := InsertDataWithTagByBounds(
+                Template, Data, Bounds);
             Template := InsertChunkLinks(Template, CurChunkNum, Data);
             Template := InsertKey(Template, Key);
         finally
-            Intervals.Free;
+            Bounds.Free;
         end;
     finally
         Data.Free;
@@ -2191,8 +2368,9 @@ begin
 end;
 
 procedure TCGIDatamodule2.GoToFitting;
-var Template: string;
-    Pair: array[1..1] of TStringPair;
+var
+    Template: string;
+    Pair:     array[1..1] of TStringPair;
 begin
     //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
     Key := Application.RequestVariables['key'];
@@ -2217,13 +2395,14 @@ begin
     //  vypolnenie zaprosa (poluchenie dannyh fona)
 
     //  chtenie schablona i zapolnenie ego parametrov
-    Template := PrepareTemplate_fitting;
-    Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.GetProblemId);
-    Template := ReplaceStrings(Template, Pair, 1);
-    
+    Template   := PrepareTemplate_fitting;
+    Pair[1][1] := 'ProblemID';
+    Pair[1][2] := IntToStr(Proxy.GetProblemId);
+    Template   := ReplaceStrings(Template, Pair, 1);
+
     Pair[1][1] := 'MaxRFactor';
     Pair[1][2] := FloatToStrF(Proxy.GetMaxRFactor, ffGeneral, 10, 8);
-    Template := ReplaceStrings(Template, Pair, 1);
+    Template   := ReplaceStrings(Template, Pair, 1);
 
     Template := InsertKey(Template, Key);
     //  vyvod stranitsy
@@ -2231,8 +2410,9 @@ begin
 end;
 
 procedure TCGIDatamodule2.MinimizeDifference;
-var Template: string;
-    Pair: array[1..1] of TStringPair;
+var
+    Template: string;
+    Pair:     array[1..1] of TStringPair;
 begin
     //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
     Key := Application.RequestVariables['key'];
@@ -2254,20 +2434,23 @@ begin
     except
         raise Exception.Create(ProblemIDIsAbsent);
     end;
-    Template := PrepareTemplate_fitting_process;
-    Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.GetProblemId);
-    Template := ReplaceStrings(Template, Pair, 1);
-    Pair[1][1] := 'HintFitting'; Pair[1][2] := HintMinimizeDifference;
-    Template := ReplaceStrings(Template, Pair, 1);
-    Template := InsertKey(Template, Key);
-    Proxy.FindGausses;
+    Template   := PrepareTemplate_fitting_process;
+    Pair[1][1] := 'ProblemID';
+    Pair[1][2] := IntToStr(Proxy.GetProblemId);
+    Template   := ReplaceStrings(Template, Pair, 1);
+    Pair[1][1] := 'HintFitting';
+    Pair[1][2] := HintMinimizeDifference;
+    Template   := ReplaceStrings(Template, Pair, 1);
+    Template   := InsertKey(Template, Key);
+    Proxy.MinimizeDifference;
     //  vyvod stranitsy
     CGIDatamodule2.AddResponseLn(Template);
 end;
 
-procedure TCGIDatamodule2.MinimizeNumberOfSpecimens;
-var Template: string;
-    Pair: array[1..1] of TStringPair;
+procedure TCGIDatamodule2.MinimizeNumberOfCurves;
+var
+    Template: string;
+    Pair:     array[1..1] of TStringPair;
 begin
     //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
     Key := Application.RequestVariables['key'];
@@ -2289,20 +2472,23 @@ begin
     except
         raise Exception.Create(ProblemIDIsAbsent);
     end;
-    Template := PrepareTemplate_fitting_process;
-    Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.GetProblemId);
-    Template := ReplaceStrings(Template, Pair, 1);
-    Pair[1][1] := 'HintFitting'; Pair[1][2] := HintMinimizeNumberOfSpecimens;
-    Template := ReplaceStrings(Template, Pair, 1);
-    Template := InsertKey(Template, Key);
-    Proxy.FindGaussesSequentially;
+    Template   := PrepareTemplate_fitting_process;
+    Pair[1][1] := 'ProblemID';
+    Pair[1][2] := IntToStr(Proxy.GetProblemId);
+    Template   := ReplaceStrings(Template, Pair, 1);
+    Pair[1][1] := 'HintFitting';
+    Pair[1][2] := HintMinimizeNumberOfCurves;
+    Template   := ReplaceStrings(Template, Pair, 1);
+    Template   := InsertKey(Template, Key);
+    Proxy.MinimizeNumberOfCurves;
     //  vyvod stranitsy
     CGIDatamodule2.AddResponseLn(Template);
 end;
 
 procedure TCGIDatamodule2.DoAllAutomatically;
-var Template: string;
-    Pair: array[1..1] of TStringPair;
+var
+    Template: string;
+    Pair:     array[1..1] of TStringPair;
 begin
     //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
     Key := Application.RequestVariables['key'];
@@ -2324,56 +2510,61 @@ begin
     except
         raise Exception.Create(ProblemIDIsAbsent);
     end;
-    Template := PrepareTemplate_fitting_process;
-    Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.GetProblemId);
-    Template := ReplaceStrings(Template, Pair, 1);
-    Pair[1][1] := 'HintFitting'; Pair[1][2] := HintDoAllAutomatically;
-    Template := ReplaceStrings(Template, Pair, 1);
-    Template := InsertKey(Template, Key);
+    Template   := PrepareTemplate_fitting_process;
+    Pair[1][1] := 'ProblemID';
+    Pair[1][2] := IntToStr(Proxy.GetProblemId);
+    Template   := ReplaceStrings(Template, Pair, 1);
+    Pair[1][1] := 'HintFitting';
+    Pair[1][2] := HintDoAllAutomatically;
+    Template   := ReplaceStrings(Template, Pair, 1);
+    Template   := InsertKey(Template, Key);
     Proxy.DoAllAutomatically;
     //  vyvod stranitsy
     CGIDatamodule2.AddResponseLn(Template);
 end;
 
 procedure TCGIDatamodule2.GoToStartPage(Capt: string; Hint: string);
-var Template: string;
-    Pair: array[1..1] of TStringPair;
+var
+    Template: string;
+    Pair:     array[1..1] of TStringPair;
 begin
     //  vypolnenie zaprosa
 
     //  chtenie schablona i zapolnenie ego parametrov
-    Template := PrepareTemplate_start;
+    Template   := PrepareTemplate_start;
     Pair[1][1] := 'CaptService';
     Pair[1][2] := Capt;
-    Template := ReplaceStrings(Template, Pair, 1);
+    Template   := ReplaceStrings(Template, Pair, 1);
     Pair[1][1] := 'HintService';
     Pair[1][2] := Hint;
-    Template := ReplaceStrings(Template, Pair, 1);
+    Template   := ReplaceStrings(Template, Pair, 1);
     Pair[1][1] := 'ServerName';
     Pair[1][2] := ExternalIP;
-    Template := ReplaceStrings(Template, Pair, 1);
+    Template   := ReplaceStrings(Template, Pair, 1);
     //  vyvod stranitsy
     CGIDatamodule2.AddResponseLn(Template);
 end;
 
 procedure TCGIDatamodule2.GoToRegistration(const Hint: string);
-var Template: string;
-    Pair: array[1..1] of TStringPair;
+var
+    Template: string;
+    Pair:     array[1..1] of TStringPair;
 begin
     //  vypolnenie zaprosa
 
     //  chtenie schablona i zapolnenie ego parametrov
-    Template := PrepareTemplate_registration;
+    Template   := PrepareTemplate_registration;
     Pair[1][1] := 'HintRegistration';
     Pair[1][2] := Hint;
-    Template := ReplaceStrings(Template, Pair, 1);
-    
+    Template   := ReplaceStrings(Template, Pair, 1);
+
     //  vyvod stranitsy
     CGIDatamodule2.AddResponseLn(Template);
 end;
 
 procedure TCGIDatamodule2.GoToEvaluation;
-var Template: string;
+var
+    Template: string;
 begin
     //  vypolnenie zaprosa
 
@@ -2385,25 +2576,26 @@ begin
 end;
 
 function TCGIDatamodule2.InsertKey(Template: string; Key: string): string;
-var Pair: array[1..1] of TStringPair;
+var
+    Pair: array[1..1] of TStringPair;
 begin
     Pair[1][1] := 'Key';
     Pair[1][2] := Key;
-    Result := ReplaceStrings(Template, Pair, 1);
+    Result     := ReplaceStrings(Template, Pair, 1);
 end;
 
-function TCGIDatamodule2.GetNewFileIndex(
-    const UserName: string; const ProjectName: string): LongInt;
-var DatName: string;
+function TCGIDatamodule2.GetNewFileIndex(const UserName: string;
+    const ProjectName: string): longint;
+var
+    DatName: string;
     //DatExt: string;
     //ExtPos: LongInt;
     R: TSearchRec;
-    FileIndex: LongInt;
+    FileIndex: longint;
 begin
     Result := 0;
-    if FindFirst(DataDir + UserName + Slash +
-            ProjectName + Slash + '*.dat', faArchive + faAnyFile, R) = 0 then
-    begin
+    if FindFirst(DataDir + UserName + Slash + ProjectName + Slash +
+        '*.dat', faArchive + faAnyFile, R) = 0 then
         try
             repeat
                 try
@@ -2416,84 +2608,84 @@ begin
 
                     //  dopuskaetsya nalichie failov, imenovannyh ne chislami
                     FileIndex := StrToInt(DatName);
-                    if FileIndex > Result then Result := FileIndex;
+                    if FileIndex > Result then
+                        Result := FileIndex;
                 except
                 end;
             until FindNext(R) <> 0;
         finally
-            Sysutils.FindClose(R);
+            SysUtils.FindClose(R);
         end;
-    end;
     //  sozdanie imeni novogo faila
     Inc(Result);
 end;
 
-function TCGIDatamodule2.GetNewProjectIndex: LongInt;
-var R: TSearchRec;
-    FileIndex: LongInt;
+function TCGIDatamodule2.GetNewProjectIndex: longint;
+var
+    R:   TSearchRec;
+    FileIndex: longint;
     Dir: string;
 begin
     Result := 0;
     //  !!! ustanovka faDirectory pochemu-to ne rabotaet pod linux
     //  poka rabotosposobnost' obespechivaetsya tem, chto vse faily,
     //  krome pwd schitayutsya katalogami !!!
-    if FindFirst(
-        DataDir + UserName + Slash + '*', (* faDirectory *) faAnyFile, R) = 0 then
-    begin
+    if FindFirst(DataDir + UserName + Slash + '*',
+        (* faDirectory *) faAnyFile, R) = 0 then
         try
             repeat
                 //if R.Attr = faDirectory then
                 //begin
-                    Dir := ExtractFileName(R.Name);
-                    if (Dir <> '.') and (Dir <> '..')
-                        and (Dir <> 'pwd') then
-                    begin
-                        try
-                            //  dopuskaetsya nalichie papok, imenovannyh ne chislami
-                            FileIndex := StrToInt(R.Name);
-                            if FileIndex > Result then Result := FileIndex;
-                        except
-                        end;
+                Dir := ExtractFileName(R.Name);
+                if (Dir <> '.') and (Dir <> '..') and
+                    (Dir <> 'pwd') then
+                    try
+                        //  dopuskaetsya nalichie papok, imenovannyh ne chislami
+                        FileIndex := StrToInt(R.Name);
+                        if FileIndex > Result then
+                            Result := FileIndex;
+                    except
                     end;
                 //end;
             until FindNext(R) <> 0;
         finally
-            Sysutils.FindClose(R);
+            SysUtils.FindClose(R);
         end;
-    end;
     //  sozdanie imeni novogo proekta
     Inc(Result);
 end;
 
 function TCGIDatamodule2.GetProjectFileResults(const ProjectName: string;
     FileName: string; out Files: TStringList): TStringList;
-var R: TSearchRec;
+var
+    R:      TSearchRec;
     SPName: string;
     Content: TStringList;
-    NamePos, i: LongInt;
-    TermFound: Boolean;
+    NamePos, i: longint;
+    TermFound: boolean;
 
 const
     BegMarker: string = '<META name="ResultName" content="';
 begin
-    Result := nil; Files := nil; Content := nil;
+    Result  := nil;
+    Files   := nil;
+    Content := nil;
     try
-        Result := TStringList.Create;
-        Files := TStringList.Create;
+        Result  := TStringList.Create;
+        Files   := TStringList.Create;
         Content := TStringList.Create;
 
         try
             FileName := ChangeFileExt(FileName, '');
-            if FindFirst(DataDir + UserName + Slash + ProjectName + Slash + FileName +
-                '.*.sp', faArchive + faAnyFile, R) = 0 then
-            begin
+            if FindFirst(DataDir + UserName + Slash + ProjectName +
+                Slash + FileName + '.*.sp', faArchive + faAnyFile, R) = 0 then
                 try
                     repeat
                         SPName := ExtractFileName(R.Name);
                         Files.Add(SPName);
                         try
-                            Content.LoadFromFile(DataDir + UserName + Slash +
-                                ProjectName + Slash + SPName);
+                            Content.LoadFromFile(DataDir + UserName +
+                                Slash + ProjectName + Slash + SPName);
                         except
                             raise Exception.Create(UnsuccessfulFileOperation);
                         end;
@@ -2503,13 +2695,17 @@ begin
                         NamePos := Pos(BegMarker, Content.Text);
                         if NamePos <> 0 then
                         begin
-                            NamePos := NamePos + Length(BegMarker);
+                            NamePos   := NamePos + Length(BegMarker);
                             TermFound := False;
                             for i := NamePos to Length(Content.Text) do
                                 if Content.Text[i] = '"' then
-                                begin TermFound := True; Break; end;
+                                begin
+                                    TermFound := True;
+                                    Break;
+                                end;
 
-                            if TermFound then Dec(i);
+                            if TermFound then
+                                Dec(i);
 
                             if i - NamePos + 1 > 0 then
                                 SPName := Copy(Content.Text, NamePos, i - NamePos + 1);
@@ -2518,9 +2714,8 @@ begin
                         Result.Add(SPName);
                     until FindNext(R) <> 0;
                 finally
-                    Sysutils.FindClose(R);
+                    SysUtils.FindClose(R);
                 end;
-            end;
         finally
             Content.Free;
         end;
@@ -2533,27 +2728,28 @@ end;
 
 function TCGIDatamodule2.GetUserProjectFiles(const ProjectName: string;
     out Files: TStringList): TStringList;
-var R: TSearchRec;
+var
+    R: TSearchRec;
     FileName: string;
     P: File_v1;
 begin
-    Result := nil; Files := nil;
+    Result := nil;
+    Files  := nil;
     try
         Result := TStringList.Create;
-        Files := TStringList.Create;
-        
-        if FindFirst(DataDir + UserName + Slash +
-            ProjectName + Slash + '*.dat', faArchive + faAnyFile, R) = 0 then
-        begin
+        Files  := TStringList.Create;
+
+        if FindFirst(DataDir + UserName + Slash + ProjectName +
+            Slash + '*.dat', faArchive + faAnyFile, R) = 0 then
             try
                 repeat
                     FileName := ExtractFileName(R.Name);
                     Files.Add(FileName);
-                    
+
                     FileName := ChangeFileExt(FileName, '.properties');
                     //  chtenie svoystv faila
-                    P := ReadFileProperties_v1(DataDir + UserName + Slash +
-                        ProjectName + Slash + FileName);
+                    P := ReadFileProperties_v1(DataDir + UserName +
+                        Slash + ProjectName + Slash + FileName);
                     try
                         Result.Add(P.Name);
                     finally
@@ -2561,9 +2757,8 @@ begin
                     end;
                 until FindNext(R) <> 0;
             finally
-                Sysutils.FindClose(R);
+                SysUtils.FindClose(R);
             end;
-        end;
     except
         Result.Free;
         Files.Free;
@@ -2571,12 +2766,14 @@ begin
     end;
 end;
 
-function TCGIDatamodule2.GetUserProjects(
-    const UserName: string; out ProjectFiles: TStringList): TStringList;
-var R: TSearchRec;
+function TCGIDatamodule2.GetUserProjects(const UserName: string;
+    out ProjectFiles: TStringList): TStringList;
+var
+    R:   TSearchRec;
     Dir: string;
 begin
-    Result := nil; ProjectFiles := nil;
+    Result := nil;
+    ProjectFiles := nil;
     try
         Result := TStringList.Create;
         ProjectFiles := TStringList.Create;
@@ -2585,25 +2782,23 @@ begin
         //  krome pwd schitayutsya katalogami !!!
         if FindFirst(DataDir + UserName + Slash + '*',
             (* faDirectory *) faAnyFile, R) = 0 then
-        begin
             try
                 repeat
                     //if R.Attr = faDirectory then
                     //begin
-                        Dir := ExtractFileName(R.Name);
-                        if (Dir <> '.') and (Dir <> '..')
-                            and (Dir <> 'pwd') then
-                        begin
-                            //  chtenie svoystv proekta
-                            Result.Add(GetProjectName(Dir));
-                            ProjectFiles.Add(Dir);
-                        end;
+                    Dir := ExtractFileName(R.Name);
+                    if (Dir <> '.') and (Dir <> '..') and
+                        (Dir <> 'pwd') then
+                    begin
+                        //  chtenie svoystv proekta
+                        Result.Add(GetProjectName(Dir));
+                        ProjectFiles.Add(Dir);
+                    end;
                     //end;
                 until FindNext(R) <> 0;
             finally
-                Sysutils.FindClose(R);
+                SysUtils.FindClose(R);
             end;
-        end;
     except
         Result.Free;
         ProjectFiles.Free;
@@ -2612,14 +2807,15 @@ begin
 end;
 
 //  vozvraschaet False kogda kluch prosrochen
-function TCGIDatamodule2.GetUserName: Boolean;
-var F: TextFile;
+function TCGIDatamodule2.GetUserName: boolean;
+var
+    F:    TextFile;
     Temp: string;
     KeyFileName: string;
     TimeStamp, Today: TTimeStamp;
-    DeltaTime: Int64;
+    DeltaTime: int64;
 begin
-    Result := True;
+    Result      := True;
     KeyFileName := KeyDir + Key + '.key';
     try
         AssignFile(F, KeyFileName);
@@ -2641,13 +2837,13 @@ begin
 
     //  proverka vremeni deystviya klyucha;
     //  proverka imeni pol'zovatelya
-    Today := DateTimeToTimeStamp(Now);
+    Today     := DateTimeToTimeStamp(Now);
     DeltaTime :=
-        Int64(TimeStampToMSecs(Today)) - Int64(TimeStampToMSecs(TimeStamp));
+        int64(TimeStampToMSecs(Today)) - int64(TimeStampToMSecs(TimeStamp));
     if (DeltaTime > 3600000) or (not DirectoryExists(DataDir + UserName)) then
     begin
         //  kluch prosrochen
-        Sysutils.DeleteFile(KeyFileName);
+        SysUtils.DeleteFile(KeyFileName);
         Result := False;
         Exit;
     end;
@@ -2655,15 +2851,16 @@ begin
     WriteKeyToFile;
 end;
 
-procedure TCGIDatamodule2.DeleteProblem(ProblemID: LongInt);
+procedure TCGIDatamodule2.DeleteProblem(ProblemID: longint);
 begin
-    Sysutils.DeleteFile(KeyDir + IntToStr(ProblemID) + '.problem');
+    SysUtils.DeleteFile(KeyDir + IntToStr(ProblemID) + '.problem');
     Proxy.DiscardProblem(ProblemId);
 end;
 
-procedure TCGIDatamodule2.WriteProblemFile(
-    ProjectName: string; FileName: string; ProblemID: LongInt);
-var ProblemFileName: string;
+procedure TCGIDatamodule2.WriteProblemFile(ProjectName: string;
+    FileName: string; ProblemID: longint);
+var
+    ProblemFileName: string;
     //TimeStamp: TTimeStamp;
     F: TextFile;
 begin
@@ -2686,9 +2883,10 @@ begin
     end;
 end;
 
-procedure TCGIDatamodule2.GetDataNames(ProblemID: LongInt; var UserName: string;
+procedure TCGIDatamodule2.GetDataNames(ProblemID: longint; var UserName: string;
     var ProjectName: string; var FileName: string);
-var ProblemFileName: string;
+var
+    ProblemFileName: string;
     F: TextFile;
 begin
     ProblemFileName := KeyDir + IntToStr(ProblemID) + '.problem';
@@ -2708,11 +2906,12 @@ begin
 end;
 
 procedure TCGIDatamodule2.WriteKeyToFile;
-var KeyFileName: string;
+var
+    KeyFileName: string;
     TimeStamp: TTimeStamp;
     F: TextFile;
 begin
-    TimeStamp := DateTimeToTimeStamp(Now);
+    TimeStamp   := DateTimeToTimeStamp(Now);
     KeyFileName := KeyDir + Key + '.key';
     try
         AssignFile(F, KeyFileName);
@@ -2730,15 +2929,16 @@ begin
 end;
 
 procedure TCGIDatamodule2.DoRegister;
-var UserName: string;
+var
+    UserName: string;
     Password, Password2: string;
     DirName, EMail: string;
     F: TextFile;
-    i: LongInt;
-    InadmissibleChars: set of Char =
-        ['\', '/', '*', '.', ',', '!', '?', ';', ':', '{', '}', '(', ')',
-        '[', ']', '"', '''', '|', '@', '#', '$', '%', '^', '&', '_', '-',
-        '+', '=', '<', '>'];
+    i: longint;
+    InadmissibleChars: set of
+    char = ['\', '/', '*', '.', ',', '!', '?', ';', ':', '{', '}',
+    '(', ')', '[', ']', '"', '''', '|', '@', '#', '$', '%', '^',
+    '&', '_', '-', '+', '=', '<', '>'];
 begin
     //  vypolnenie zaprosa
     UserName := Application.RequestVariables['username'];
@@ -2762,16 +2962,14 @@ begin
     EMail := Trim(Application.RequestVariables['email']);
     //  proverka dopustimosti simvolov v imeni pol'zovatelya
     for i := 1 to Length(Password) do
-    begin
         if (Password[i] in InadmissibleChars) then
         begin
             GoToRegistration(InadmissibleSymbols);
             Exit;
         end;
-    end;
     Password := LowerCase(IntToHex(JSHash(Password), 8));
     //  proverka dopustimosti imeni pol'zovatelya
-    DirName := DataDir + UserName;
+    DirName  := DataDir + UserName;
     if not DirectoryExists(DirName) then
     begin
         //  registratsiya novogo pol'zovatelya
@@ -2796,11 +2994,13 @@ begin
         end;
         GoToStartPage(RegisteredSucessfully, PleaseLogIn);
     end
-    else GoToRegistration(UserWithName + UserName + AlreadyRegistered);
+    else
+        GoToRegistration(UserWithName + UserName + AlreadyRegistered);
 end;
 
 procedure TCGIDatamodule2.LogOut;
-var KeyFileName: string;
+var
+    KeyFileName: string;
 begin
     Key := Application.RequestVariables['key'];
     if Trim(Key) = '' then
@@ -2826,17 +3026,18 @@ begin
         //  ProblemID - optsionalnyi parametr
     end;
     KeyFileName := KeyDir + Key + '.key';
-    Sysutils.DeleteFile(KeyFileName);
+    SysUtils.DeleteFile(KeyFileName);
     GoToStartPage(CaptStartAbout, HintStartAbout);
 end;
 
 procedure TCGIDatamodule2.LogIn;
-var Password: string;
+var
+    Password: string;
     DirName: string;
     PwdFileName: string;
     PassFromFile: string;
-    i: LongInt;
-    SymbolRange: LongInt;
+    i: longint;
+    SymbolRange: longint;
     F: TextFile;
 begin
     //  vypolnenie zaprosa
@@ -2854,9 +3055,12 @@ begin
     end;
     Password := LowerCase(IntToHex(JSHash(Password), 8));
     //  proverka imeni pol'zovatelya
-    DirName := DataDir + UserName;
+    DirName  := DataDir + UserName;
     if not DirectoryExists(DirName) then
-    begin GoToRegistration(YetNotRegistered); Exit; end;
+    begin
+        GoToRegistration(YetNotRegistered);
+        Exit;
+    end;
     //  chtenie parolya
     PwdFileName := DirName + Slash + 'pwd';
     try
@@ -2872,7 +3076,10 @@ begin
     end;
     //  proverka parolya
     if PassFromFile <> Password then
-    begin GoToStartPage(RepeatInput, InvalidPassword); Exit; end;
+    begin
+        GoToStartPage(RepeatInput, InvalidPassword);
+        Exit;
+    end;
 
     //  autentifikatsiya proschla uspeschno
     //  sozdanie klyuchevogo fayla
@@ -2892,17 +3099,18 @@ begin
             2: Key[i] := Chr(Random(10) + $30);
         end;
     end;
-    
+
     WriteKeyToFile;
     GoToProjectsActual;
     WriteLog('Login: ' + UserName, Notification_);
 end;
 
 procedure TCGIDatamodule2.StartEvaluation;
-var DirName, EvalDirName: string;
+var
+    DirName, EvalDirName: string;
     PassFromFile: string;
-    i: LongInt;
-    SymbolRange: LongInt;
+    i: longint;
+    SymbolRange: longint;
     F: TextFile;
 begin
     //  vypolnenie zaprosa
@@ -2927,12 +3135,12 @@ begin
     //  dobavlyaetsya prefiks dlya vydeleniya
     //  imen ocenochnyh akkauntov
     //  ??? nuzhno dobavlyat' datu v imya faila
-    DirName := DataDir + UserName;
+    DirName  := DataDir + UserName;
     CreateDir(DirName);
     //  kopirovaniye ocenochnyh failov
     EvalDirName := DataDir + 'Evaluator';
     CopyDir(EvalDirName, DirName);
-    
+
     //  sozdanie klyuchevogo fayla
     for i := 1 to 20 do
     begin
@@ -2953,9 +3161,10 @@ begin
     GoToProjectsActual;
     WriteLog('Login: ' + UserName, Notification_);
 end;
-    
+
 procedure TCGIDatamodule2.GoToProjectsActual;
-var Template: string;
+var
+    Template: string;
     Projects, ProjectFiles: TStringList;
 begin
     Projects := GetUserProjects(UserName, ProjectFiles);
@@ -2965,7 +3174,8 @@ begin
             Template := PrepareTemplate_projects;
             Template := InsertNamesByTemplate(Template, Projects, ProjectFiles);
         end
-        else Template := PrepareTemplate_projects_empty;
+        else
+            Template := PrepareTemplate_projects_empty;
     finally
         Projects.Free;
         ProjectFiles.Free;
@@ -2976,7 +3186,8 @@ begin
 end;
 
 procedure TCGIDatamodule2.OpenProject;
-var ProjectName, FileName: string;
+var
+    ProjectName, FileName: string;
 begin
     //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
     Key := Application.RequestVariables['key'];
@@ -3009,8 +3220,9 @@ begin
 end;
 
 procedure TCGIDatamodule2.GetFileResults;
-var ProjectName: string;
-    FileName: string;
+var
+    ProjectName: string;
+    FileName:    string;
 begin
     //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
     Key := Application.RequestVariables['key'];
@@ -3046,10 +3258,11 @@ begin
     //  vypolnenie zaprosa
     GetFileResultsActually(ProjectName, FileName);
 end;
-        
-procedure TCGIDatamodule2.GetFileResultsActually(
-    ProjectName: string; FileName: string);
-var Template: string;
+
+procedure TCGIDatamodule2.GetFileResultsActually(ProjectName: string;
+    FileName: string);
+var
+    Template: string;
     Names, Files: TStringList;
     Pair: array[1..1] of TStringPair;
     UserFileName, FileDescription: string;
@@ -3061,7 +3274,8 @@ begin
             Template := PrepareTemplate_file_results;
             Template := InsertNamesByTemplate(Template, Names, Files);
         end
-        else Template := PrepareTemplate_file_results_empty;
+        else
+            Template := PrepareTemplate_file_results_empty;
     finally
         Names.Free;
         Files.Free;
@@ -3070,29 +3284,30 @@ begin
 
     Pair[1][1] := 'ProjectFileName';
     Pair[1][2] := ProjectName;
-    Template := ReplaceStrings(Template, Pair, 1);
+    Template   := ReplaceStrings(Template, Pair, 1);
 
     Pair[1][1] := 'DataFileName';
     Pair[1][2] := FileName;
-    Template := ReplaceStrings(Template, Pair, 1);
+    Template   := ReplaceStrings(Template, Pair, 1);
 
     GetFileProperties(ProjectName, FileName, UserFileName, FileDescription);
     Pair[1][1] := 'UserFileName';
     Pair[1][2] := UserFileName;
-    Template := ReplaceStrings(Template, Pair, 1);
+    Template   := ReplaceStrings(Template, Pair, 1);
 
     Pair[1][1] := 'FileDescription';
     Pair[1][2] := FileDescription;
-    Template := ReplaceStrings(Template, Pair, 1);
+    Template   := ReplaceStrings(Template, Pair, 1);
     //  vyvod stranitsy
     CGIDatamodule2.AddResponseLn(Template);
 end;
 
 procedure TCGIDatamodule2.OpenFileResult;
-var ProjectName: string;
+var
+    ProjectName: string;
     FileName: string;
     Template: string;
-    Pair: array[1..1] of TStringPair;
+    Pair:    array[1..1] of TStringPair;
     Content: TStringList;
 begin
     //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
@@ -3116,7 +3331,7 @@ begin
     FileName := Application.RequestVariables['file_name'];
     if Trim(FileName) = '' then
         raise Exception.Create(FileNameIsAbsent);
-        
+
     Content := TStringList.Create;
     try
         try
@@ -3134,18 +3349,19 @@ begin
 
     Pair[1][1] := 'ProjectName';
     Pair[1][2] := ProjectName;
-    Template := ReplaceStrings(Template, Pair, 1);
+    Template   := ReplaceStrings(Template, Pair, 1);
 
     Pair[1][1] := 'GraphFileName';
     Pair[1][2] := ChangeFileExt(FileName, '.png');
-    Template := ReplaceStrings(Template, Pair, 1);
+    Template   := ReplaceStrings(Template, Pair, 1);
 
     //  vyvod stranitsy
     CGIDatamodule2.AddResponseLn(Template);
 end;
 
 procedure TCGIDatamodule2.DeleteFileResult;
-var ProjectName: string;
+var
+    ProjectName: string;
     FileName: string;
     DataFileName: string;
     R: TSearchRec;
@@ -3171,7 +3387,7 @@ begin
     FileName := Application.RequestVariables['file_name'];
     if Trim(FileName) = '' then
         raise Exception.Create(FileNameIsAbsent);
-        
+
     DataFileName := Application.RequestVariables['data_file_name'];
     if Trim(DataFileName) = '' then
         raise Exception.Create(FileNameIsAbsent);
@@ -3182,26 +3398,25 @@ begin
     //  pri podtverzhdenii udaleniya;
     //  poisk i udalenie vseh failov, otnosyaschihsya k dannomu rezul'tatu
     FileName := ChangeFileExt(FileName, '');
-    if FindFirst(DataDir + UserName + Slash + ProjectName + Slash + FileName +
-        '.*', faArchive + faAnyFile, R) = 0 then
-    begin
+    if FindFirst(DataDir + UserName + Slash + ProjectName + Slash +
+        FileName + '.*', faArchive + faAnyFile, R) = 0 then
         try
             repeat
-                Sysutils.DeleteFile(DataDir + UserName + Slash + ProjectName + Slash + R.Name);
+                SysUtils.DeleteFile(DataDir + UserName + Slash +
+                    ProjectName + Slash + R.Name);
             until FindNext(R) <> 0;
         finally
-            Sysutils.FindClose(R);
+            SysUtils.FindClose(R);
         end;
-    end;
     GetFileResultsActually(ProjectName, DataFileName);
 end;
 
 function TCGIDatamodule2.GetProjectName(ProjectFileName: string): string;
-var P: Project_v1;
+var
+    P: Project_v1;
 begin
-    P := ReadProjectProperties_v1(
-        DataDir + UserName + Slash + ProjectFileName + Slash +
-        '.properties');
+    P := ReadProjectProperties_v1(DataDir + UserName + Slash +
+        ProjectFileName + Slash + '.properties');
     try
         Result := P.Name;
     finally
@@ -3209,17 +3424,17 @@ begin
     end;
 end;
 
-procedure TCGIDatamodule2.GetFileProperties(
-    ProjectFileName: string; FileName: string;
-    out UserFileName: string; out FileDescription: string);
-var P: File_v1;
+procedure TCGIDatamodule2.GetFileProperties(ProjectFileName: string;
+    FileName: string; out UserFileName: string; out FileDescription: string);
+var
+    P: File_v1;
 begin
     //  chtenie svoystv faila
     FileName := ChangeFileExt(FileName, '.properties');
     P := ReadFileProperties_v1(DataDir + UserName + Slash +
         ProjectFileName + Slash + FileName);
     try
-        UserFileName := P.Name;
+        UserFileName    := P.Name;
         FileDescription := P.Description;
     finally
         P.Free;
@@ -3228,11 +3443,11 @@ end;
 
 procedure TCGIDatamodule2.GetProjectProperties(ProjectFileName: string;
     out ProjectName: string; out ProjectDescription: string);
-var P: Project_v1;
+var
+    P: Project_v1;
 begin
-    P := ReadProjectProperties_v1(
-        DataDir + UserName + Slash + ProjectFileName + Slash +
-        '.properties');
+    P := ReadProjectProperties_v1(DataDir + UserName + Slash +
+        ProjectFileName + Slash + '.properties');
     try
         ProjectName := P.Name;
         ProjectDescription := P.Description;
@@ -3242,7 +3457,8 @@ begin
 end;
 
 procedure TCGIDatamodule2.OpenProjectActual(ProjectFileName: string);
-var Template: string;
+var
+    Template: string;
     Names, Files: TStringList;
     Pair: array[1..1] of TStringPair;
     ProjectName, ProjectDescription: string;
@@ -3254,7 +3470,8 @@ begin
             Template := PrepareTemplate_project_files;
             Template := InsertNamesByTemplate(Template, Names, Files);
         end
-        else Template := PrepareTemplate_project_files_empty;
+        else
+            Template := PrepareTemplate_project_files_empty;
     finally
         Names.Free;
         Files.Free;
@@ -3263,31 +3480,33 @@ begin
 
     Pair[1][1] := 'ProjectFileName';
     Pair[1][2] := ProjectFileName;
-    Template := ReplaceStrings(Template, Pair, 1);
-    
+    Template   := ReplaceStrings(Template, Pair, 1);
+
     GetProjectProperties(ProjectFileName, ProjectName, ProjectDescription);
 
     Pair[1][1] := 'ProjectName';
     Pair[1][2] := ProjectName;
-    Template := ReplaceStrings(Template, Pair, 1);
+    Template   := ReplaceStrings(Template, Pair, 1);
 
     Pair[1][1] := 'ProjectDescription';
     Pair[1][2] := ProjectDescription;
-    Template := ReplaceStrings(Template, Pair, 1);
+    Template   := ReplaceStrings(Template, Pair, 1);
     //  vyvod stranitsy
     CGIDatamodule2.AddResponseLn(Template);
 end;
 
 procedure ShowErrorMessage(Msg: string);
-var Template: string;
-    Pair: array[1..1] of TStringPair;
+var
+    Template: string;
+    Pair:     array[1..1] of TStringPair;
 begin
     //  vypolnenie zaprosa
 
     //  chtenie schablona i zapolnenie ego parametrov
-    Template := PrepareTemplate_error;
-    Pair[1][1] := 'HintDescription'; Pair[1][2] := Msg;
-    Template := ReplaceStrings(Template, Pair, 1);
+    Template   := PrepareTemplate_error;
+    Pair[1][1] := 'HintDescription';
+    Pair[1][2] := Msg;
+    Template   := ReplaceStrings(Template, Pair, 1);
 
     //  vyvod stranitsy
     CGIDatamodule2.AddResponseLn(Template);
@@ -3295,29 +3514,31 @@ end;
 
 const
     BeginMarker: string = 'BeginDataTemplate';
-    EndMarker: string = 'EndDataTemplate';
+    EndMarker: string   = 'EndDataTemplate';
     BeginChunkTemplate: string = 'BeginChunkTemplate';
     EndChunkTemplate: string = 'EndChunkTemplate';
-    
-function TCGIDatamodule2.InsertChunkLinks(
-    TmplIn: string; ChunkNum: LongInt; Data: TPointsSet): string;
-var TmplBegin, TmplEnd, TmplLen: LongInt;
+
+function TCGIDatamodule2.InsertChunkLinks(TmplIn: string; ChunkNum: longint;
+    Data: TPointsSet): string;
+var
+    TmplBegin, TmplEnd, TmplLen: longint;
     Template, DataStr: string;
-    i: LongInt;
+    i:    longint;
     Pair: array[1..1] of TStringPair;
 
     List: TStringList;
-    ChunkCount: LongInt;
+    ChunkCount: longint;
 begin
-    Result := TmplIn;
+    Result    := TmplIn;
     //  zapolnenie ssylok na kuski
     TmplBegin := Pos(BeginChunkTemplate, Result);
-    TmplEnd := Pos(EndChunkTemplate, Result);
+    TmplEnd   := Pos(EndChunkTemplate, Result);
     if (TmplBegin > 0) and (TmplEnd > 0) then
     begin
-        TmplLen := TmplEnd - TmplBegin - Length(BeginChunkTemplate);
+        TmplLen  := TmplEnd - TmplBegin - Length(BeginChunkTemplate);
         Template := Copy(Result, TmplBegin + Length(BeginChunkTemplate), TmplLen);
-        Delete(Result, TmplBegin, TmplLen + Length(BeginChunkTemplate) + Length(EndChunkTemplate));
+        Delete(Result, TmplBegin, TmplLen + Length(BeginChunkTemplate) +
+            Length(EndChunkTemplate));
 
         if Assigned(Data) then
         begin
@@ -3330,7 +3551,7 @@ begin
                 begin
                     Pair[1][1] := 'ChunkNumber';
                     Pair[1][2] := List.Strings[i];
-                    DataStr := ReplaceStrings(Template, Pair, 1);
+                    DataStr    := ReplaceStrings(Template, Pair, 1);
 
                     Insert(DataStr, Result, TmplBegin);
                     TmplBegin := TmplBegin + Length(DataStr);
@@ -3342,7 +3563,7 @@ begin
     end;
 end;
 
-function ValToStr(Value: Double): string;
+function ValToStr(Value: double): string;
 begin
     //  ogranichenie min. znacheniya pri isp. ffGeneral;
     //  chisla po modulyu men'she takogo - 0.00001 -
@@ -3358,52 +3579,58 @@ begin
     //  okruglyayutsya do nulya avtomaticheski
     Result := FloatToStrF(Value, ffFixed, 8, 4);
 end;
-    
-function TCGIDatamodule2.InsertDataByTemplate(
-    ChunkNum: LongInt;  (* dlya zapolneniya schablona *)
+
+function TCGIDatamodule2.InsertDataByTemplate(ChunkNum: longint;
+    (* dlya zapolneniya schablona *)
     Data: TPointsSet; ProjectName: string; FileName: string): string;
-var TmplBegin, TmplEnd, TmplLen: LongInt;
+var
+    TmplBegin, TmplEnd, TmplLen: longint;
     Template, DataStr: string;
-    X, Y: Double;
-    i: LongInt;
+    X, Y: double;
+    i:    longint;
     Pair: array[1..1] of TStringPair;
     UserFileName, FileDescription: string;
 begin
-    Result := PrepareTemplate_data;
-    Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.GetProblemId);
-    Result := ReplaceStrings(Result, Pair, 1);
+    Result     := PrepareTemplate_data;
+    Pair[1][1] := 'ProblemID';
+    Pair[1][2] := IntToStr(Proxy.GetProblemId);
+    Result     := ReplaceStrings(Result, Pair, 1);
 
-    Pair[1][1] := 'GraphURL'; Pair[1][2] := GetGraphURL;
-    Result := ReplaceStrings(Result, Pair, 1);
-    
-    Pair[1][1] := 'CurChunkNum'; Pair[1][2] := IntToStr(ChunkNum);
-    Result := ReplaceStrings(Result, Pair, 1);
-    
+    Pair[1][1] := 'GraphURL';
+    Pair[1][2] := GetGraphURL;
+    Result     := ReplaceStrings(Result, Pair, 1);
+
+    Pair[1][1] := 'CurChunkNum';
+    Pair[1][2] := IntToStr(ChunkNum);
+    Result     := ReplaceStrings(Result, Pair, 1);
+
     GetFileProperties(ProjectName, FileName, UserFileName, FileDescription);
     //  !!! d. vyzyvat'sya do zameny FileName !!!
     Pair[1][1] := 'UserFileName';
     Pair[1][2] := UserFileName;
-    Result := ReplaceStrings(Result, Pair, 1);
+    Result     := ReplaceStrings(Result, Pair, 1);
 
     Pair[1][1] := 'FileDescription';
     Pair[1][2] := FileDescription;
-    Result := ReplaceStrings(Result, Pair, 1);
+    Result     := ReplaceStrings(Result, Pair, 1);
 
-    Pair[1][1] := 'ProjectName'; Pair[1][2] := ProjectName;
-    Result := ReplaceStrings(Result, Pair, 1);
+    Pair[1][1] := 'ProjectName';
+    Pair[1][2] := ProjectName;
+    Result     := ReplaceStrings(Result, Pair, 1);
 
-    Pair[1][1] := 'FileName'; Pair[1][2] := FileName;
-    Result := ReplaceStrings(Result, Pair, 1);
+    Pair[1][1] := 'FileName';
+    Pair[1][2] := FileName;
+    Result     := ReplaceStrings(Result, Pair, 1);
 
     TmplBegin := Pos(BeginMarker, Result);
-    TmplEnd := Pos(EndMarker, Result);
-    
+    TmplEnd   := Pos(EndMarker, Result);
+
     if (TmplBegin > 0) and (TmplEnd > 0) then
     begin
-        TmplLen := TmplEnd - TmplBegin - Length(BeginMarker);
+        TmplLen  := TmplEnd - TmplBegin - Length(BeginMarker);
         Template := Copy(Result, TmplBegin + Length(BeginMarker), TmplLen);
         Delete(Result, TmplBegin, TmplLen + Length(BeginMarker) + Length(EndMarker));
-        
+
         //  dopuskaetsya ravenstvo nil
         if Assigned(Data) then
         begin
@@ -3423,31 +3650,31 @@ begin
                 TmplBegin := TmplBegin + Length(DataStr);
             end;
         end;
-    end
+    end;
 end;
 
-function TCGIDatamodule2.InsertNamesByTemplate(
-    TemplateIn: string;
+function TCGIDatamodule2.InsertNamesByTemplate(TemplateIn: string;
     Names: TStringList; Files: TStringList): string;
-var TmplBegin, TmplEnd, TmplLen: LongInt;
+var
+    TmplBegin, TmplEnd, TmplLen: longint;
     Template, DataStr: string;
-    i: LongInt;
+    i:    longint;
     Pair: array[1..1] of TStringPair;
-    
+
 const
     BeginProjectTemplate: string = 'BeginNamesTemplate';
-    EndProjectTemplate: string = 'EndNamesTemplate';
+    EndProjectTemplate: string   = 'EndNamesTemplate';
 begin
     Result := TemplateIn;
 
     TmplBegin := Pos(BeginProjectTemplate, Result);
-    TmplEnd := Pos(EndProjectTemplate, Result);
+    TmplEnd   := Pos(EndProjectTemplate, Result);
 
     if (TmplBegin > 0) and (TmplEnd > 0) then
     begin
-        TmplLen := TmplEnd - TmplBegin - Length(BeginProjectTemplate);
-        Template := Copy(
-            Result, TmplBegin + Length(BeginProjectTemplate), TmplLen);
+        TmplLen  := TmplEnd - TmplBegin - Length(BeginProjectTemplate);
+        Template := Copy(Result, TmplBegin +
+            Length(BeginProjectTemplate), TmplLen);
         Delete(Result, TmplBegin,
             TmplLen + Length(BeginProjectTemplate) + Length(EndProjectTemplate));
 
@@ -3458,33 +3685,34 @@ begin
         begin
             Pair[1][1] := 'NameFromNames';
             Pair[1][2] := Names.Strings[i];
-            DataStr := ReplaceStrings(Template, Pair, 1);
+            DataStr    := ReplaceStrings(Template, Pair, 1);
 
             Pair[1][1] := 'NameFromFileNames';
             Pair[1][2] := Files.Strings[i];
-            DataStr := ReplaceStrings(DataStr, Pair, 1);
+            DataStr    := ReplaceStrings(DataStr, Pair, 1);
 
             Insert(DataStr, Result, TmplBegin);
             TmplBegin := TmplBegin + Length(DataStr);
         end;
-    end
+    end;
 end;
 
-function TCGIDatamodule2.InsertDataWithTagByIntervals(
-    Page: string; Data: TPointsSet; SpecIntervals: TPointsSet): string;
-var TmplBegin, TmplEnd, TmplLen: LongInt;
+function TCGIDatamodule2.InsertDataWithTagByBounds(Page: string;
+    Data: TPointsSet; SpecBounds: TPointsSet): string;
+var
+    TmplBegin, TmplEnd, TmplLen: longint;
     Template, DataStr: string;
-    X, Y: Double;
-    i, j: LongInt;
-    Pair: array[1..1] of TStringPair;
-    Found: Boolean;
+    X, Y:  double;
+    i, j:  longint;
+    Pair:  array[1..1] of TStringPair;
+    Found: boolean;
 begin
     TmplBegin := Pos(BeginMarker, Page);
-    TmplEnd := Pos(EndMarker, Page);
+    TmplEnd   := Pos(EndMarker, Page);
 
     if (TmplBegin > 0) and (TmplEnd > 0) then
     begin
-        TmplLen := TmplEnd - TmplBegin - Length(BeginMarker);
+        TmplLen  := TmplEnd - TmplBegin - Length(BeginMarker);
         Template := Copy(Page, TmplBegin + Length(BeginMarker), TmplLen);
         Delete(Page, TmplBegin, TmplLen + Length(BeginMarker) + Length(EndMarker));
 
@@ -3497,36 +3725,39 @@ begin
             begin
                 X := Data.PointXCoord[i];
                 Y := Data.PointYCoord[i];
-                Pair[1][1] := 'XValue'; Pair[1][2] := ValToStr(X);
+                Pair[1][1] := 'XValue';
+                Pair[1][2] := ValToStr(X);
                 DataStr := ReplaceStrings(Template, Pair, 1);
-                Pair[1][1] := 'YValue'; Pair[1][2] := ValToStr(Y);
+                Pair[1][1] := 'YValue';
+                Pair[1][2] := ValToStr(Y);
                 DataStr := ReplaceStrings(DataStr, Pair, 1);
                 Pair[1][1] := 'Selected';
 
                 Found := False;
                 //  dopuskaetsya ravenstvo nil
-                if Assigned(SpecIntervals) then
+                if Assigned(SpecBounds) then
                 begin
-                    SpecIntervals.Sort; //  dlya pravil'noy ustanovki Left, Right
-                    for j := 0 to SpecIntervals.PointsCount - 1 do
-                    begin
-                        if (Abs(X - SpecIntervals.PointXCoord[j]) <= TINY) and
-                           (Abs(Y - SpecIntervals.PointYCoord[j]) <= TINY) then
+                    SpecBounds.Sort; //  dlya pravil'noy ustanovki Left, Right
+                    for j := 0 to SpecBounds.PointsCount - 1 do
+                        if (Abs(X - SpecBounds.PointXCoord[j]) <= TINY) and
+                            (Abs(Y - SpecBounds.PointYCoord[j]) <= TINY) then
                         begin
                             Found := True;
                             Break;
                         end;
-                    end;
                 end;
 
                 if Found then
                 begin
                     //  tochki 1, 3, 5... - pravye granitsy
-                    if Odd(j) then Pair[1][2] := Right
-                    else Pair[1][2] := Left;
+                    if Odd(j) then
+                        Pair[1][2] := Right
+                    else
+                        Pair[1][2] := Left;
                 end
                 //  chtoby ne zagromozhdat' tablitsu slovo No ne vyvoditsya
-                else Pair[1][2] := '';  //  No;
+                else
+                    Pair[1][2] := '';  //  No;
                 DataStr := ReplaceStrings(DataStr, Pair, 1);
 
                 Insert(DataStr, Result, TmplBegin);
@@ -3534,24 +3765,26 @@ begin
             end;
         end;
     end
-    else Result := Page;
+    else
+        Result := Page;
 end;
 
-function TCGIDatamodule2.InsertDataWithTagByTemplate(
-    Page: string; Data: TPointsSet; Selected: TPointsSet): string;
-var TmplBegin, TmplEnd, TmplLen: LongInt;
+function TCGIDatamodule2.InsertDataWithTagByTemplate(Page: string;
+    Data: TPointsSet; Selected: TPointsSet): string;
+var
+    TmplBegin, TmplEnd, TmplLen: longint;
     Template, DataStr: string;
-    X, Y: Double;
-    i, j: LongInt;
-    Pair: array[1..1] of TStringPair;
-    Found: Boolean;
+    X, Y:  double;
+    i, j:  longint;
+    Pair:  array[1..1] of TStringPair;
+    Found: boolean;
 begin
     TmplBegin := Pos(BeginMarker, Page);
-    TmplEnd := Pos(EndMarker, Page);
+    TmplEnd   := Pos(EndMarker, Page);
 
     if (TmplBegin > 0) and (TmplEnd > 0) then
     begin
-        TmplLen := TmplEnd - TmplBegin - Length(BeginMarker);
+        TmplLen  := TmplEnd - TmplBegin - Length(BeginMarker);
         Template := Copy(Page, TmplBegin + Length(BeginMarker), TmplLen);
         Delete(Page, TmplBegin, TmplLen + Length(BeginMarker) + Length(EndMarker));
 
@@ -3564,9 +3797,11 @@ begin
             begin
                 X := Data.PointXCoord[i];
                 Y := Data.PointYCoord[i];
-                Pair[1][1] := 'XValue'; Pair[1][2] := ValToStr(X);
+                Pair[1][1] := 'XValue';
+                Pair[1][2] := ValToStr(X);
                 DataStr := ReplaceStrings(Template, Pair, 1);
-                Pair[1][1] := 'YValue'; Pair[1][2] := ValToStr(Y);
+                Pair[1][1] := 'YValue';
+                Pair[1][2] := ValToStr(Y);
                 DataStr := ReplaceStrings(DataStr, Pair, 1);
                 Pair[1][1] := 'Selected';
 
@@ -3574,18 +3809,18 @@ begin
                 //  dopuskaetsya ravenstvo nil
                 if Assigned(Selected) then
                     for j := 0 to Selected.PointsCount - 1 do
-                    begin
                         if (Abs(X - Selected.PointXCoord[j]) <= TINY) and
-                           (Abs(Y - Selected.PointYCoord[j]) <= TINY) then
+                            (Abs(Y - Selected.PointYCoord[j]) <= TINY) then
                         begin
                             Found := True;
                             Break;
                         end;
-                    end;
-                
-                if Found then Pair[1][2] := '+' // Yes
+
+                if Found then
+                    Pair[1][2] := '+' // Yes
                 //  chtoby ne zagromozhdat' tablitsu slovo No ne vyvoditsya
-                else Pair[1][2] := '';  //  No;
+                else
+                    Pair[1][2] := '';  //  No;
                 DataStr := ReplaceStrings(DataStr, Pair, 1);
 
                 Insert(DataStr, Result, TmplBegin);
@@ -3593,46 +3828,47 @@ begin
             end;
         end;
     end
-    else Result := Page;
+    else
+        Result := Page;
 end;
 
 const
     //  markery schablona stroki znacheniy parametrov ekzemplyara patterna
-    BeginSpecimenParameters: string = 'BeginSpecimenParameters';
-    EndSpecimenParameters: string = 'EndSpecimenParameters';
+    BeginCurveParameters: string = 'BeginCurveParameters';
+    EndCurveParameters: string = 'EndCurveParameters';
     //  markery schablona znacheniya parametra ekzemplyara patterna
     BeginValueItem: string = 'BeginValueItem';
-    EndValueItem: string = 'EndValueItem';
+    EndValueItem: string   = 'EndValueItem';
     //  marker znacheniya parametra ekzemplyara patterna
-    ItemValue: string = 'ItemValue';
+    ItemValue: string      = 'ItemValue';
     //  markery schablona zagolovka parametra ekzemplyara patterna
     BeginHeaderItem: string = 'BeginHeaderItem';
-    EndHeaderItem: string = 'EndHeaderItem';
+    EndHeaderItem: string  = 'EndHeaderItem';
     //  marker zagolovka parametra ekzemplyara patterna
     HeaderItemName: string = 'HeaderItemName';
     //BeginDividerItem: string = 'BeginDividerItem';
     //EndDividerItem: string = 'EndDividerItem';
     //  markery schablona dlya polya vvoda obychnogo parametra
     BeginInputItem: string = 'BeginInputItem';
-    EndInputItem: string = 'EndInputItem';
+    EndInputItem: string   = 'EndInputItem';
     //  markery schablona dlya polya vvoda vychislyaemogo parametra
     BeginInputCalculatedItem: string = 'BeginInputCalculatedItem';
     EndInputCalculatedItem: string = 'EndInputCalculatedItem';
-    
+
     ItemName: string = 'ItemName';
-    
-function TCGIDatamodule2.ExtractTemplate(
-    var From: string; MarkerBegin: string; MarkerEnd: string;
-    var Position: LongInt): string;
-var TmplEnd, TmplLen: LongInt;
+
+function TCGIDatamodule2.ExtractTemplate(var From: string; MarkerBegin: string;
+    MarkerEnd: string; var Position: longint): string;
+var
+    TmplEnd, TmplLen: longint;
 begin
-    Result := '';
+    Result   := '';
     Position := Pos(MarkerBegin, From);
-    TmplEnd := Pos(MarkerEnd, From);
+    TmplEnd  := Pos(MarkerEnd, From);
     if (Position > 0) and (TmplEnd > 0) then
     begin
         TmplLen := TmplEnd - Position - Length(MarkerBegin);
-        Result := Copy(From, Position + Length(MarkerBegin), TmplLen);
+        Result  := Copy(From, Position + Length(MarkerBegin), TmplLen);
         Delete(From, Position, TmplLen + Length(MarkerBegin) + Length(MarkerEnd));
     end;
 end;
@@ -3641,208 +3877,259 @@ function TCGIDatamodule2.NameToGreekSymbol(Name_: string): string;
 begin
     if UpperCase(Name_) = 'ALPHA' then
     begin
-        if Name_[1] = 'A' then Result := '&#913;'
-        else Result := '&#945;'
+        if Name_[1] = 'A' then
+            Result := '&#913;'
+        else
+            Result := '&#945;';
     end
     else
     if UpperCase(Name_) = 'BETA' then
     begin
-        if Name_[1] = 'B' then Result := '&#914;'
-        else Result := '&#946;'
+        if Name_[1] = 'B' then
+            Result := '&#914;'
+        else
+            Result := '&#946;';
     end
     else
     if UpperCase(Name_) = 'GAMMA' then
     begin
-        if Name_[1] = 'G' then Result := '&#915;'
-        else Result := '&#947;'
+        if Name_[1] = 'G' then
+            Result := '&#915;'
+        else
+            Result := '&#947;';
     end
     else
     if UpperCase(Name_) = 'DELTA' then
     begin
-        if Name_[1] = 'D' then Result := '&#916;'
-        else Result := '&#948;'
+        if Name_[1] = 'D' then
+            Result := '&#916;'
+        else
+            Result := '&#948;';
     end
     else
     if UpperCase(Name_) = 'EPSILON' then
     begin
-        if Name_[1] = 'E' then Result := '&#917;'
-        else Result := '&#949;'
+        if Name_[1] = 'E' then
+            Result := '&#917;'
+        else
+            Result := '&#949;';
     end
     else
     if UpperCase(Name_) = 'ZETA' then
     begin
-        if Name_[1] = 'Z' then Result := '&#918;'
-        else Result := '&#950;'
+        if Name_[1] = 'Z' then
+            Result := '&#918;'
+        else
+            Result := '&#950;';
     end
     else
     if UpperCase(Name_) = 'ETA' then
     begin
-        if Name_[1] = 'E' then Result := '&#919;'
-        else Result := '&#951;'
+        if Name_[1] = 'E' then
+            Result := '&#919;'
+        else
+            Result := '&#951;';
     end
     else
     if UpperCase(Name_) = 'THETA' then
     begin
-        if Name_[1] = 'T' then Result := '&#920;'
-        else Result := '&#952;'
+        if Name_[1] = 'T' then
+            Result := '&#920;'
+        else
+            Result := '&#952;';
     end
     else
     if UpperCase(Name_) = 'IOTA' then
     begin
-        if Name_[1] = 'I' then Result := '&#921;'
-        else Result := '&#953;'
+        if Name_[1] = 'I' then
+            Result := '&#921;'
+        else
+            Result := '&#953;';
     end
     else
     if UpperCase(Name_) = 'KAPPA' then
     begin
-        if Name_[1] = 'K' then Result := '&#922;'
-        else Result := '&#954;'
+        if Name_[1] = 'K' then
+            Result := '&#922;'
+        else
+            Result := '&#954;';
     end
     else
     if UpperCase(Name_) = 'LAMBDA' then
     begin
-        if Name_[1] = 'L' then Result := '&#923;'
-        else Result := '&#955;'
+        if Name_[1] = 'L' then
+            Result := '&#923;'
+        else
+            Result := '&#955;';
     end
     else
     if UpperCase(Name_) = 'MU' then
     begin
-        if Name_[1] = 'M' then Result := '&#924;'
-        else Result := '&#956;'
+        if Name_[1] = 'M' then
+            Result := '&#924;'
+        else
+            Result := '&#956;';
     end
     else
     if UpperCase(Name_) = 'NU' then
     begin
-        if Name_[1] = 'N' then Result := '&#925;'
-        else Result := '&#957;'
+        if Name_[1] = 'N' then
+            Result := '&#925;'
+        else
+            Result := '&#957;';
     end
     else
     if UpperCase(Name_) = 'XI' then
     begin
-        if Name_[1] = 'X' then Result := '&#926;'
-        else Result := '&#958;'
+        if Name_[1] = 'X' then
+            Result := '&#926;'
+        else
+            Result := '&#958;';
     end
     else
     if UpperCase(Name_) = 'OMICRON' then
     begin
-        if Name_[1] = 'O' then Result := '&#927;'
-        else Result := '&#959;'
+        if Name_[1] = 'O' then
+            Result := '&#927;'
+        else
+            Result := '&#959;';
     end
     else
     if UpperCase(Name_) = 'PI' then
     begin
-        if Name_[1] = 'P' then Result := '&#928;'
-        else Result := '&#960;'
+        if Name_[1] = 'P' then
+            Result := '&#928;'
+        else
+            Result := '&#960;';
     end
     else
     if UpperCase(Name_) = 'RHO' then
     begin
-        if Name_[1] = 'R' then Result := '&#929;'
-        else Result := '&#961;'
+        if Name_[1] = 'R' then
+            Result := '&#929;'
+        else
+            Result := '&#961;';
     end
     else
     if UpperCase(Name_) = 'SIGMA' then
     begin
-        if Name_[1] = 'S' then Result := '&#931;'
-        else Result := '&#963;'
+        if Name_[1] = 'S' then
+            Result := '&#931;'
+        else
+            Result := '&#963;';
     end
     else
     if UpperCase(Name_) = 'TAU' then
     begin
-        if Name_[1] = 'T' then Result := '&#932;'
-        else Result := '&#964;'
+        if Name_[1] = 'T' then
+            Result := '&#932;'
+        else
+            Result := '&#964;';
     end
     else
     if UpperCase(Name_) = 'UPSILON' then
     begin
-        if Name_[1] = 'U' then Result := '&#933;'
-        else Result := '&#965;'
+        if Name_[1] = 'U' then
+            Result := '&#933;'
+        else
+            Result := '&#965;';
     end
     else
     if UpperCase(Name_) = 'PHI' then
     begin
-        if Name_[1] = 'P' then Result := '&#934;'
-        else Result := '&#966;'
+        if Name_[1] = 'P' then
+            Result := '&#934;'
+        else
+            Result := '&#966;';
     end
     else
     if UpperCase(Name_) = 'CHI' then
     begin
-        if Name_[1] = 'C' then Result := '&#935;'
-        else Result := '&#967;'
+        if Name_[1] = 'C' then
+            Result := '&#935;'
+        else
+            Result := '&#967;';
     end
     else
     if UpperCase(Name_) = 'PSI' then
     begin
-        if Name_[1] = 'P' then Result := '&#936;'
-        else Result := '&#968;'
+        if Name_[1] = 'P' then
+            Result := '&#936;'
+        else
+            Result := '&#968;';
     end
     else
     if UpperCase(Name_) = 'OMEGA' then
     begin
-        if Name_[1] = 'O' then Result := '&#937;'
-        else Result := '&#969;'
+        if Name_[1] = 'O' then
+            Result := '&#937;'
+        else
+            Result := '&#969;';
     end
     else
         Result := Name_;
 end;
 
 function TCGIDatamodule2.FillTemplateBySpecParameters(Page: string): string;
-var Pair: array[1..1] of TStringPair;
-    SpecParams: TMSCRSpecimenList;
-    i, j, ParamCount: LongInt;
-    CP: Curve_parameters;
-    P: TSpecialCurveParameter;
-    FillHeaders: Boolean;
+var
+    Pair: array[1..1] of TStringPair;
+    SpecParams: TMSCRCurveList;
+    i, j, ParamCount: longint;
+    CP:   Curve_parameters;
+    P:    TSpecialCurveParameter;
+    FillHeaders: boolean;
     TmplHeaderBegin,    //  polozhenie schablona zagolovka parametra
     //TmplDividerBegin,
     TmplValueBegin,     //  polozhenie schablona znacheniya parametra
     TmplInputBegin,     //  polozhenie poley vvoda znacheniy parametrov
-    TmplCalculatedInputBegin,
-    TmplSpecimenBegin,  //  polozhenie strok znacheniy parametrov
-        TmplEnd, TmplLen, TmplBeginTemp: LongInt;
+    TmplCalculatedInputBegin, TmplCurveBegin,
+    //  polozhenie strok znacheniy parametrov
+    TmplEnd, TmplLen, TmplBeginTemp: longint;
     TmplHeader,
     //TmplDivider,
     TmplInput,          //  schablon polya vvoda znacheniya obychnogo parametra
     TmplCalculatedInput,//  schablon vychislyaemogo parametra
     TmplValue,          //  schablon znacheniya parametra
-    TmplSpecimen,       //  schablon stroki znacheniy parametrov
+    TmplCurve,       //  schablon stroki znacheniy parametrov
     Data, TmplTemp: string;
 begin
-    Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.GetProblemId);
+    Pair[1][1] := 'ProblemID';
+    Pair[1][2] := IntToStr(Proxy.GetProblemId);
     Page := ReplaceStrings(Page, Pair, 1);
 
-    Pair[1][1] := 'GraphURL'; Pair[1][2] := GetGraphURL;
+    Pair[1][1] := 'GraphURL';
+    Pair[1][2] := GetGraphURL;
     Page := ReplaceStrings(Page, Pair, 1);
-    
-    SpecParams := Proxy.GetSpecimenList;
+
+    SpecParams := Proxy.GetCurveList;
     try
         FillHeaders := True;
         //  !!! shablony dolzhny udalyat'sya iz teksta nezavisimo ot nalichiya
         //  ekzemplyarov patterna !!!
 
         //  izvlechenie schablona zagolovka parametra
-        TmplHeader := ExtractTemplate(Page,
-            BeginHeaderItem, EndHeaderItem, TmplHeaderBegin);
+        TmplHeader := ExtractTemplate(Page, BeginHeaderItem,
+            EndHeaderItem, TmplHeaderBegin);
 
         //  snachala izvlekaetsya schablon stroki parametrov
-        TmplSpecimen := ExtractTemplate(Page,
-            BeginSpecimenParameters, EndSpecimenParameters, TmplSpecimenBegin);
-    
+        TmplCurve := ExtractTemplate(Page, BeginCurveParameters,
+            EndCurveParameters, TmplCurveBegin);
+
         //  !!! schablon znacheniya parametra vybiraetsya iz schablona stroki !!!
-        TmplValue := ExtractTemplate(TmplSpecimen,
-            BeginValueItem, EndValueItem, TmplValueBegin);
+        TmplValue := ExtractTemplate(TmplCurve, BeginValueItem,
+            EndValueItem, TmplValueBegin);
         (*
         TmplDivider := ExtractTemplate(Page,
             BeginDividerItem, EndDividerItem, TmplDividerBegin);
         *)
         //  !!! schablon polya vvoda obychnogo parametra dolzhen
         //  stoyat' ran'sche schablona vvoda vychislyaemogo parametra !!!
-        TmplInput := ExtractTemplate(Page,
-            BeginInputItem, EndInputItem, TmplInputBegin);
+        TmplInput := ExtractTemplate(Page, BeginInputItem, EndInputItem,
+            TmplInputBegin);
 
-        TmplCalculatedInput := ExtractTemplate(Page,
-            BeginInputCalculatedItem, EndInputCalculatedItem,
-            TmplCalculatedInputBegin);
+        TmplCalculatedInput :=
+            ExtractTemplate(Page, BeginInputCalculatedItem,
+            EndInputCalculatedItem, TmplCalculatedInputBegin);
 
         ParamCount := 0;
         for i := 0 to SpecParams.Count - 1 do
@@ -3852,15 +4139,15 @@ begin
             //  parametrov pervogo v spiske ekzemplyara patterna !!!
             if FillHeaders then
             begin
-                if Length(TmplSpecimen) <> 0 then
+                if Length(TmplCurve) <> 0 then
                 begin
-                    TmplTemp := '';
+                    TmplTemp      := '';
                     TmplBeginTemp := TmplHeaderBegin;
                     if Length(TmplHeader) <> 0 then
                     begin
                         //  vstavlyaetsya zagolovok nomera ekzemplyara
                         Pair[1][1] := HeaderItemName;
-                        Pair[1][2] := HeaderSpecimenNumber;
+                        Pair[1][2] := HeaderCurveNumber;
                         Data := ReplaceStrings(TmplHeader, Pair, 1);
 
                         Insert(Data, TmplTemp, TmplBeginTemp);
@@ -3873,7 +4160,7 @@ begin
                         *)
                         //  vyvod poley vvoda; polya vvoda d
                         Pair[1][1] := ItemName;
-                        Pair[1][2] := HeaderSpecimenNumber;
+                        Pair[1][2] := HeaderCurveNumber;
                         Data := ReplaceStrings(TmplInput, Pair, 1);
                         Insert(Data, Page, TmplInputBegin);
                         TmplInputBegin := TmplInputBegin + Length(Data);
@@ -3896,8 +4183,8 @@ begin
                                 TmplInputBegin := TmplInputBegin + Length(TmplDivider);
                                 *)
                                 if (P.Type_ <> Calculated) and
-                                   (P.Type_ <> InvariablePosition) and
-                                   (P.Type_ <> VariablePosition) then
+                                    (P.Type_ <> InvariablePosition) and
+                                    (P.Type_ <> VariablePosition) then
                                 begin
                                     //  vyvod poley vvoda
                                     Pair[1][1] := ItemName;
@@ -3919,15 +4206,15 @@ begin
                         end;
                     end;
                     Insert(TmplTemp, Page, TmplHeaderBegin);
-                    TmplSpecimenBegin := TmplSpecimenBegin + Length(TmplTemp);
-                    ParamCount := CP.Params.Count + 1;  //  dobavlyaetsya pole nomera
+                    TmplCurveBegin := TmplCurveBegin + Length(TmplTemp);
+                    ParamCount     := CP.Params.Count + 1;  //  dobavlyaetsya pole nomera
                 end;
                 FillHeaders := False;
             end;
             //  vyvod znacheniy parametrov
-            if Length(TmplSpecimen) <> 0 then
+            if Length(TmplCurve) <> 0 then
             begin
-                TmplTemp := TmplSpecimen;
+                TmplTemp      := TmplCurve;
                 TmplBeginTemp := TmplValueBegin;
                 if Length(TmplValue) <> 0 then
                 begin
@@ -3953,8 +4240,8 @@ begin
                         end;
                     end;
                 end;
-                Insert(TmplTemp, Page, TmplSpecimenBegin);
-                TmplSpecimenBegin := TmplSpecimenBegin + Length(TmplTemp);
+                Insert(TmplTemp, Page, TmplCurveBegin);
+                TmplCurveBegin := TmplCurveBegin + Length(TmplTemp);
             end;
         end;
         //  vyvod chisla parametrov
@@ -3967,8 +4254,9 @@ begin
     Result := Page;
 end;
 
-procedure TCGIDatamodule2.GoToSpecimenParameters;
-var Page: string;
+procedure TCGIDatamodule2.GoToCurveParameters;
+var
+    Page: string;
     Pair: array[1..1] of TStringPair;
 begin
     //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
@@ -3994,9 +4282,11 @@ begin
     //  chtenie schablona i zapolnenie ego parametrov
     Page := PrepareTemplate_specimen_parameters;
 
-    Pair[1][1] := 'SqrRFactorValue'; Pair[1][2] := Proxy.GetSqrRFactorStr;
+    Pair[1][1] := 'SqrRFactorValue';
+    Pair[1][2] := Proxy.GetSqrRFactorStr;
     Page := ReplaceStrings(Page, Pair, 1);
-    Pair[1][1] := 'AbsRFactorValue'; Pair[1][2] := Proxy.GetAbsRFactorStr;
+    Pair[1][1] := 'AbsRFactorValue';
+    Pair[1][2] := Proxy.GetAbsRFactorStr;
     Page := ReplaceStrings(Page, Pair, 1);
 
     Page := FillTemplateBySpecParameters(Page);
@@ -4006,15 +4296,16 @@ begin
 end;
 
 procedure TCGIDatamodule2.SaveSpecParameters;
-var ProjectName, FileName: string;
-    Page: string;
+var
+    ProjectName, FileName: string;
+    Page:   string;
     ResultName, ResultDescription: string;
-    F: TextFile;
-    Pair: array[1..1] of TStringPair;
-    R: TSearchRec;
-    FileIndex, NewFileIndex: LongInt;
+    F:      TextFile;
+    Pair:   array[1..1] of TStringPair;
+    R:      TSearchRec;
+    FileIndex, NewFileIndex: longint;
     SPName: string;
-    DotPos: LongInt;
+    DotPos: longint;
     Stream: TMemoryStream;
     GraphFile: TFileStream;
     GraphFileName: string;
@@ -4042,15 +4333,14 @@ begin
 
     ResultName := Application.RequestVariables['result_name'];
     ResultDescription := Application.RequestVariables['result_description'];
-    
+
     GetDataNames(Proxy.GetProblemId, UserName, ProjectName, FileName);
     //  poisk poslednego rezul'tata, sootvetstvuyuschego
     //  dannomu imeni faila
-    FileName := ChangeFileExt(FileName, '');
+    FileName     := ChangeFileExt(FileName, '');
     NewFileIndex := 0;
-    if FindFirst(DataDir + UserName + Slash + ProjectName + Slash + FileName +
-        '.*.sp', faArchive + faAnyFile, R) = 0 then
-    begin
+    if FindFirst(DataDir + UserName + Slash + ProjectName + Slash +
+        FileName + '.*.sp', faArchive + faAnyFile, R) = 0 then
         try
             repeat
                 try
@@ -4062,26 +4352,27 @@ begin
                     begin
                         Delete(SPName, 1, DotPos);
                         FileIndex := StrToInt(SPName);
-                        if FileIndex > NewFileIndex then NewFileIndex := FileIndex;
+                        if FileIndex > NewFileIndex then
+                            NewFileIndex := FileIndex;
                     end;
                 except
                 end;
             until FindNext(R) <> 0;
         finally
-            Sysutils.FindClose(R);
+            SysUtils.FindClose(R);
         end;
-    end;
     //  sozdanie imeni novogo faila
     Inc(NewFileIndex);
 
     //  sohranenie grafika dlya resul'tata
     //??? schirina i vysota dolzhny izvlekat'sya iz stranitsy,
     //  no dolzhny byt' predusmotreny znacheniya po-umolchaniyu
-    Stream := nil; GraphFile := nil;
-    Stream := Proxy.GetGraph(600, 450);
+    Stream    := nil;
+    GraphFile := nil;
+    Stream    := Proxy.GetGraph(600, 450);
     GraphFileName := FileName + '.' + IntToStr(NewFileIndex) + '.png';
-    GraphFile := TFileStream.Create(
-        DataDir + UserName + Slash + ProjectName + Slash + GraphFileName, fmCreate);
+    GraphFile := TFileStream.Create(DataDir + UserName + Slash +
+        ProjectName + Slash + GraphFileName, fmCreate);
     try
         GraphFile.CopyFrom(Stream, 0(* !!! kopirovat' vse !!! *));
     finally
@@ -4090,28 +4381,33 @@ begin
     end;
 
     if Trim(ResultName) = '' then
-    begin
-        //  sozdanie imeni rezul'tata "po-umolchaniyu"
-        ResultName := 'Specimen parameters set number ' + IntToStr(NewFileIndex);
-    end;
+        ResultName := 'Curve parameters set number ' +
+            IntToStr(NewFileIndex)//  sozdanie imeni rezul'tata "po-umolchaniyu"
+    ;
     Page := PrepareTemplate_specimen_parameters_file;
     Page := FillTemplateBySpecParameters(Page);
-    
-    Pair[1][1] := 'HintResultName'; Pair[1][2] := ResultName;
+
+    Pair[1][1] := 'HintResultName';
+    Pair[1][2] := ResultName;
     Page := ReplaceStrings(Page, Pair, 1);
-    Pair[1][1] := 'HintResultDescription'; Pair[1][2] := ResultDescription;
+    Pair[1][1] := 'HintResultDescription';
+    Pair[1][2] := ResultDescription;
     Page := ReplaceStrings(Page, Pair, 1);
-    Pair[1][1] := 'ProjectName'; Pair[1][2] := ProjectName;
+    Pair[1][1] := 'ProjectName';
+    Pair[1][2] := ProjectName;
     Page := ReplaceStrings(Page, Pair, 1);
-    Pair[1][1] := 'GraphFileName'; Pair[1][2] := GraphFileName;
+    Pair[1][1] := 'GraphFileName';
+    Pair[1][2] := GraphFileName;
     Page := ReplaceStrings(Page, Pair, 1);
-    Pair[1][1] := 'SqrRFactorValue'; Pair[1][2] := Proxy.GetSqrRFactorStr;
+    Pair[1][1] := 'SqrRFactorValue';
+    Pair[1][2] := Proxy.GetSqrRFactorStr;
     Page := ReplaceStrings(Page, Pair, 1);
-    Pair[1][1] := 'AbsRFactorValue'; Pair[1][2] := Proxy.GetAbsRFactorStr;
+    Pair[1][1] := 'AbsRFactorValue';
+    Pair[1][2] := Proxy.GetAbsRFactorStr;
     Page := ReplaceStrings(Page, Pair, 1);
 
-    SPName := DataDir + UserName + Slash + ProjectName + Slash + FileName +
-        '.' + IntToStr(NewFileIndex) + '.sp';
+    SPName := DataDir + UserName + Slash + ProjectName + Slash +
+        FileName + '.' + IntToStr(NewFileIndex) + '.sp';
     AssignFile(F, SPName);
     try
         ReWrite(F);
@@ -4119,15 +4415,16 @@ begin
     finally
         CloseFile(F);
     end;
-    GoToSpecimenParameters;
+    GoToCurveParameters;
 end;
 
-procedure TCGIDatamodule2.UpdateSpecimenParameters;
-var SpecIndex: LongInt;
-    i, j, ParamCount: LongInt;
+procedure TCGIDatamodule2.UpdateCurveParameters;
+var
+    SpecIndex: longint;
+    i, j, ParamCount: longint;
     Name_, Value_: string;
-    Value: Double;
-    Type_: LongInt;
+    Value: double;
+    Type_: longint;
 begin
     //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
     Key := Application.RequestVariables['key'];
@@ -4149,26 +4446,26 @@ begin
     except
         raise Exception.Create(ProblemIDIsAbsent);
     end;
-    
+
     //  izvlechenie nomera ekzemplyara patterna
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
         SpecIndex :=
-            StrToInt(Application.RequestVariables[HeaderSpecimenNumber]) - 1;
+            StrToInt(Application.RequestVariables[HeaderCurveNumber]) - 1;
     except
         raise Exception.Create(InvalidSpecIndex);
     end;
     //  poluchenie parametrov ekzemplyara patterna po zadannomu indeksu
-    ParamCount := Proxy.GetSpecimenParameterCount(SpecIndex);
+    ParamCount := Proxy.GetCurveParameterCount(SpecIndex);
     //  perebor parametrov ekzemplyara i proverka nalichiya imen sredi
     //  peredannyh parametrov
     for i := 0 to ParamCount - 1 do
     begin
-        Proxy.GetSpecimenParameter(SpecIndex, i, Name_, Value, Type_);
+        Proxy.GetCurveParameter(SpecIndex, i, Name_, Value, Type_);
         if (TParameterType(Type_) <> Argument) and
-           (TParameterType(Type_) <> Calculated) and
-           (TParameterType(Type_) <> InvariablePosition) and
-           (TParameterType(Type_) <> VariablePosition) then
+            (TParameterType(Type_) <> Calculated) and
+            (TParameterType(Type_) <> InvariablePosition) and
+            (TParameterType(Type_) <> VariablePosition) then
         begin
             //  izvlechenie parametra i preobrazovanie ego k tipu double
             //  s proverkoy i vozbuzhdeniem isklucheniya
@@ -4182,20 +4479,21 @@ begin
                 except
                     raise Exception.Create(InvalidParValue);
                 end;
-                Proxy.SetSpecimenParameter(SpecIndex, i, Value);
+                Proxy.SetCurveParameter(SpecIndex, i, Value);
             end;
         end;
     end;
-    GoToSpecimenParameters;
+    GoToCurveParameters;
 end;
 
 //  perekluchaet priznak vybora tochki privyazki
-procedure TCGIDatamodule2.SelectSpecimenPosition;
-var Argument, Value: Double;
-    Data: TPointsSet;
-    Found: Boolean;
-    i: LongInt;
-    CurChunkNum: LongInt;
+procedure TCGIDatamodule2.SelectCurvePosition;
+var
+    Argument, Value: double;
+    Data:  TPointsSet;
+    Found: boolean;
+    i:     longint;
+    CurChunkNum: longint;
 begin
     try
         Argument := MyStrToFloat(Application.RequestVariables['argument']);
@@ -4221,28 +4519,28 @@ begin
         //  poisk poluchennoy tochki sredi tochek dannyh
         Found := False;
         for i := 0 to Data.PointsCount - 1 do
-        begin
             if Abs(Argument - Data.PointXCoord[i]) <= TINY then
             begin
                 Value := Data.PointYCoord[i];
                 Found := True;
                 Break;  //  tochka naidena...
             end;
-        end;
-        if not Found then raise Exception.Create(PointMustBeSelectedFromData);
+        if not Found then
+            raise Exception.Create(PointMustBeSelectedFromData);
     finally
         Data.Free;
     end;
     Proxy.AddPointToCurvePositions(Argument, Value);
-    GoToSpecimenPositions;
+    GoToCurvePositions;
 end;
 
 //  perekluchaet priznak vybora tochki privyazki
 procedure TCGIDatamodule2.SelectBoundPoint;
-var Argument, Value: Double;
-    Data: TPointsSet;
-    Found: Boolean;
-    CurChunkNum, i: LongInt;
+var
+    Argument, Value: double;
+    Data:  TPointsSet;
+    Found: boolean;
+    CurChunkNum, i: longint;
 begin
     try
         Argument := MyStrToFloat(Application.RequestVariables['argument']);
@@ -4269,27 +4567,27 @@ begin
         //  poisk poluchennoy tochki sredi tochek dannyh
         Found := False;
         for i := 0 to Data.PointsCount - 1 do
-        begin
             if Abs(Argument - Data.PointXCoord[i]) <= TINY then
             begin
                 Value := Data.PointYCoord[i];
                 Found := True;
                 Break;  //  tochka naidena...
             end;
-        end;
-        if not Found then raise Exception.Create(PointMustBeSelectedFromData);
+        if not Found then
+            raise Exception.Create(PointMustBeSelectedFromData);
     finally
         Data.Free;
     end;
-    Proxy.AddPointToRFactorIntervals(Argument, Value);
-    GoToSpecimenIntervals;
+    Proxy.AddPointToRFactorBounds(Argument, Value);
+    GoToCurveBounds;
 end;
 
-procedure TCGIDatamodule2.GenerateSpecimenPositions;
-var CurChunkNum: LongInt;
-    BackF: string;//???сделать извлечение и установку
+procedure TCGIDatamodule2.GenerateCurvePositions;
+var
+    CurChunkNum: longint;
+    BackF:    string;//???сделать извлечение и установку
     Template: string;
-    Pair: array[1..1] of TStringPair;
+    Pair:     array[1..1] of TStringPair;
 begin
     //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
     Key := Application.RequestVariables['key'];
@@ -4318,26 +4616,29 @@ begin
         raise Exception.Create(ChunkNumberIsAbsent);
     end;
     //  vypolnenie zaprosa (poluchenie dannyh fona)
-    Proxy.FindPeakPositions;
-    //GoToSpecimenPositions;
+    Proxy.ComputeCurvePositions;
+    //GoToCurvePositions;
     //  protsess asinhronnyi, poetomu perehodim k oknu progressa;
     //  chtenie schablona i zapolnenie ego parametrov
-    Template := PrepareTemplate_gen_spec_pos_progress;
-    Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.GetProblemId);
-    Template := ReplaceStrings(Template, Pair, 1);
+    Template   := PrepareTemplate_gen_spec_pos_progress;
+    Pair[1][1] := 'ProblemID';
+    Pair[1][2] := IntToStr(Proxy.GetProblemId);
+    Template   := ReplaceStrings(Template, Pair, 1);
 
-    Pair[1][1] := 'CurChunkNum'; Pair[1][2] := IntToStr(CurChunkNum);
-    Template := ReplaceStrings(Template, Pair, 1);
-    Template := InsertKey(Template, Key);
+    Pair[1][1] := 'CurChunkNum';
+    Pair[1][2] := IntToStr(CurChunkNum);
+    Template   := ReplaceStrings(Template, Pair, 1);
+    Template   := InsertKey(Template, Key);
     //  vyvod stranitsy
     CGIDatamodule2.AddResponseLn(Template);
 end;
 
-procedure TCGIDatamodule2.GenerateSpecimenIntervals;
-var CurChunkNum: LongInt;
-    BackF: string;//???сделать извлечение и установку
+procedure TCGIDatamodule2.ComputeCurveBounds;
+var
+    CurChunkNum: longint;
+    BackF:    string;//???сделать извлечение и установку
     Template: string;
-    Pair: array[1..1] of TStringPair;
+    Pair:     array[1..1] of TStringPair;
 begin
     //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
     Key := Application.RequestVariables['key'];
@@ -4366,17 +4667,19 @@ begin
         raise Exception.Create(ChunkNumberIsAbsent);
     end;
     //  vypolnenie zaprosa (poluchenie dannyh fona)
-    Proxy.FindPeakBounds;
-    //GoToSpecimenIntervals;
+    Proxy.ComputeCurveBounds;
+    //GoToCurveBounds;
     //  protsess asinhronnyi, poetomu perehodim k oknu progressa;
     //  chtenie schablona i zapolnenie ego parametrov
-    Template := PrepareTemplate_gen_spec_int_progress;
-    Pair[1][1] := 'ProblemID'; Pair[1][2] := IntToStr(Proxy.GetProblemId);
-    Template := ReplaceStrings(Template, Pair, 1);
+    Template   := PrepareTemplate_gen_spec_int_progress;
+    Pair[1][1] := 'ProblemID';
+    Pair[1][2] := IntToStr(Proxy.GetProblemId);
+    Template   := ReplaceStrings(Template, Pair, 1);
 
-    Pair[1][1] := 'CurChunkNum'; Pair[1][2] := IntToStr(CurChunkNum);
-    Template := ReplaceStrings(Template, Pair, 1);
-    Template := InsertKey(Template, Key);
+    Pair[1][1] := 'CurChunkNum';
+    Pair[1][2] := IntToStr(CurChunkNum);
+    Template   := ReplaceStrings(Template, Pair, 1);
+    Template   := InsertKey(Template, Key);
     //  vyvod stranitsy
     CGIDatamodule2.AddResponseLn(Template);
 end;
@@ -4390,8 +4693,9 @@ begin
 end;
 
 procedure TCGIDatamodule2.GetGraph;
-var Stream: TMemoryStream;
-    Width, Height: LongInt;
+var
+    Stream: TMemoryStream;
+    Width, Height: longint;
 begin
     try
         //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
@@ -4420,7 +4724,8 @@ begin
 end;
 
 procedure TCGIDatamodule2.GetSavedGraph;
-var Stream: TFileStream;
+var
+    Stream: TFileStream;
     ProjectName, GraphFileName: string;
 begin
     //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
@@ -4433,7 +4738,7 @@ begin
     //  proverka dopustimosti imeni pol'zovatelya i obnovlenie klyucha
     if not GetUserName then
         raise Exception.Create(InadmissibleUserName);
-        
+
     GraphFileName := Application.RequestVariables['graph_file_name'];
     //  !!! zdes' vyvodit' stranitsy oschibok nel'zya,
     //  poskol'ku tip kontenta ne html !!!
@@ -4446,9 +4751,8 @@ begin
     if Trim(ProjectName) = '' then
         raise Exception.Create(NoFileName);
 
-    Stream := TFileStream.Create(
-        DataDir + UserName + Slash + ProjectName + Slash + GraphFileName, fmOpenRead
-        );
+    Stream := TFileStream.Create(DataDir + UserName + Slash +
+        ProjectName + Slash + GraphFileName, fmOpenRead);
     try
         CGIDatamodule2.Response.CopyFrom(Stream, 0(* !!! kopirovat' vse !!! *));
     finally
@@ -4456,21 +4760,23 @@ begin
     end;
 end;
 
-function TCGIDatamodule2.GetChunkNumbers(
-    CurChunkNum: LongInt; ChunkCount: LongInt): TStringList;
-var LeftChunkNum: LongInt;      //  nomer kuska nachinayuschego seriyu s schagom 1
-    ChunkRoundNum: LongInt;
-    StepChunkNum: LongInt;      //  progressiruyuschiy schag numeratsii kuskov
-    ChunkMarker: LongInt;
-    RightChunkNum: LongInt;     //  nomer kuska, poslednego v serii s schagom 1
-    i: LongInt;
+function TCGIDatamodule2.GetChunkNumbers(CurChunkNum: longint;
+    ChunkCount: longint): TStringList;
+var
+    LeftChunkNum: longint;      //  nomer kuska nachinayuschego seriyu s schagom 1
+    ChunkRoundNum: longint;
+    StepChunkNum: longint;      //  progressiruyuschiy schag numeratsii kuskov
+    ChunkMarker: longint;
+    RightChunkNum: longint;     //  nomer kuska, poslednego v serii s schagom 1
+    i: longint;
 begin
     Result := TStringList.Create;
     Result.Sorted := False;
-    
-    LeftChunkNum := (CurChunkNum div 10) * 10;
+
+    LeftChunkNum  := (CurChunkNum div 10) * 10;
     RightChunkNum := LeftChunkNum + 10;
-    if LeftChunkNum = 0 then LeftChunkNum := 1;
+    if LeftChunkNum = 0 then
+        LeftChunkNum := 1;
     Result.Add(IntToStr(LeftChunkNum));
     //  dvizhenie v storonu men'schih nomerov
     StepChunkNum := 10;
@@ -4478,8 +4784,9 @@ begin
     begin
         //  okruglenie do tochnosti NextStepChunkNum
         ChunkRoundNum := (LeftChunkNum div StepChunkNum) * StepChunkNum;
-        ChunkMarker := ChunkRoundNum - StepChunkNum;
-        if ChunkMarker = 0 then ChunkMarker := 1;
+        ChunkMarker   := ChunkRoundNum - StepChunkNum;
+        if ChunkMarker = 0 then
+            ChunkMarker := 1;
         //  vstavlyaem v nachalo...
         Result.Insert(0, IntToStr(ChunkMarker));
         StepChunkNum := StepChunkNum * 10;
@@ -4487,22 +4794,26 @@ begin
     //  dvizhenie v storonu bol'schih nomerov
     for i := LeftChunkNum + 1 to RightChunkNum do
     begin
-        if i > ChunkCount then Exit;
+        if i > ChunkCount then
+            Exit;
         Result.Add(IntToStr(i));
     end;
     StepChunkNum := 10;
     repeat
         ChunkRoundNum := (RightChunkNum div StepChunkNum) * StepChunkNum;
-        if ChunkRoundNum = 0 then Break;
+        if ChunkRoundNum = 0 then
+            Break;
         ChunkMarker := ChunkRoundNum + StepChunkNum;
-        if ChunkMarker > ChunkCount then Break;
+        if ChunkMarker > ChunkCount then
+            Break;
         Result.Add(IntToStr(ChunkMarker));
         StepChunkNum := StepChunkNum * 10;
     until False;
 end;
 
 procedure CopyDir(SrcDir: string; DstDir: string);
-var F: TSearchRec;
+var
+    F:     TSearchRec;
     FName: string;
 begin
     if FindFirst(SrcDir + Slash + '*', faAnyFile, F) = 0 then
@@ -4510,7 +4821,6 @@ begin
         repeat
             FName := ExtractFileName(F.Name);
             if (FName <> '.') and (FName <> '..') then
-            begin
                 if (F.Attr and faDirectory) <> 0 then
                 begin
                     //  rekursivnyi vyzov dlya direktorii
@@ -4519,19 +4829,17 @@ begin
                         DstDir + Slash + FName);
                 end
                 else
-                begin
-                    //  obrabotka fayla
                     CopyFile(SrcDir + Slash + FName,
-                        DstDir + Slash + FName);
-                end;
-            end;
+                        DstDir + Slash + FName)//  obrabotka fayla
+            ;
         until FindNext(F) <> 0;
         FindClose(F);
     end;
 end;
 
 procedure CopyFile(SrcFile: string; DstFile: string);
-var Src, Dst: TFileStream;
+var
+    Src, Dst: TFileStream;
 begin
     Src := TFileStream.Create(SrcFile, fmOpenRead);
     Dst := TFileStream.Create(DstFile, fmCreate);
@@ -4543,4 +4851,3 @@ end;
 initialization
     //{$I Unit2.lrs}
 end.
-

@@ -19,7 +19,8 @@ unit int_data_loader;
 
 interface
 
-uses title_points_set;
+uses
+    title_points_set;
 
 type
     { Interface defining basic operation for data loading. }
@@ -32,5 +33,3 @@ type
 implementation
 
 end.
-
-

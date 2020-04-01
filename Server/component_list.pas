@@ -17,7 +17,7 @@ unit component_list;
 interface
 
 uses
-    LCLIntf,  SysUtils,  Classes, CBRCComponent, Tools;
+    CBRCComponent, Classes, LCLIntf, SysUtils, Tools;
 
 type
     ISelfChecked = interface
@@ -26,21 +26,22 @@ type
         function MyNameIs: string;
     end;
 
-const SelfCheckedGUID: TGUID = '{E7E7008A-EE1C-4828-B1D6-A53806820A66}';
+const
+    SelfCheckedGUID: TGUID = '{E7E7008A-EE1C-4828-B1D6-A53806820A66}';
 
 type
     //  по-умолчанию сам освобождает хранимые компоненты
     TComponentList = class(TCBRCComponent, ISelfChecked)
     protected
-        List: TList;
-        State: LongInt;
+        List:  TList;
+        State: longint;
 
-        function GetCount: Integer;
-        function GetItem(index: Integer): TComponent;
-        function GetCapacity: Integer;
+        function GetCount: integer;
+        function GetItem(index: integer): TComponent;
+        function GetCapacity: integer;
 
-        procedure SetItem(index: Integer; Item: TComponent);
-        procedure SetCapacity(ACapacity: Integer);
+        procedure SetItem(index: integer; Item: TComponent);
+        procedure SetCapacity(ACapacity: integer);
 
         procedure ReadList(Reader: TReader);
         procedure WriteList(Writer: TWriter);
@@ -56,26 +57,26 @@ type
 
         procedure Sort(Compare: TListSortCompare);
         procedure Pack;
-        function GetState: LongInt;
-        procedure SetState(AState: LongInt);
+        function GetState: longint;
+        procedure SetState(AState: longint);
 
         procedure Clear;
         procedure ClearAll;
-        function Add(Item: TComponent): Integer; virtual;
-        procedure Delete(Index: Integer); virtual;
-        procedure Insert(Index: Integer; Item: TComponent); virtual;
+        function Add(Item: TComponent): integer; virtual;
+        procedure Delete(Index: integer); virtual;
+        procedure Insert(Index: integer; Item: TComponent); virtual;
         function Extract(Item: Pointer): Pointer;
-        function Remove(Item: Pointer): Integer;
-        function IndexOf(Item: Pointer): Integer;
+        function Remove(Item: Pointer): integer;
+        function IndexOf(Item: Pointer): integer;
 
-        property Items[index: Integer]: TComponent read GetItem write SetItem;
-        property Capacity: Integer read GetCapacity write SetCapacity;
-        property Count: Integer read GetCount;
+        property Items[index: integer]: TComponent read GetItem write SetItem;
+        property Capacity: integer read GetCapacity write SetCapacity;
+        property Count: integer read GetCount;
     end;
 
 const
-    cfActive: LongInt = 1;
-    cfPassive: LongInt = 2;
+    cfActive: longint  = 1;
+    cfPassive: longint = 2;
 
 type
     TSelfCleanList = class(TList)
@@ -89,7 +90,7 @@ implementation
 
 procedure Register;
 begin
-    RegisterComponents('Common',  [TComponentList]);
+    RegisterComponents('Common', [TComponentList]);
 end;
 
 constructor TComponentList.Create;
@@ -112,7 +113,8 @@ begin
 end;
 
 procedure TComponentList.ReadList(Reader: TReader);
-var i, CompCount: LongInt;
+var
+    i, CompCount: longint;
 begin
     CompCount := Reader.ReadInteger;
     for i := 1 to CompCount do
@@ -120,7 +122,8 @@ begin
 end;
 
 procedure TComponentList.WriteList(Writer: TWriter);
-var i: LongInt;
+var
+    i: longint;
 begin
     Writer.WriteInteger(Count);
     for i := 0 to Count - 1 do
@@ -129,7 +132,8 @@ end;
 
 procedure TComponentList.Clear;
 begin
-    if State = cfActive then ClearAll;
+    if State = cfActive then
+        ClearAll;
     List.Clear;
 end;
 
@@ -148,12 +152,12 @@ begin
     List.Items[Index] := Item;
 end;
 
-function TComponentList.GetCapacity: Integer;
+function TComponentList.GetCapacity: integer;
 begin
-    GetCapacity := List.Capacity
+    GetCapacity := List.Capacity;
 end;
 
-procedure TComponentList.SetCapacity(ACapacity: Integer);
+procedure TComponentList.SetCapacity(ACapacity: integer);
 begin
     List.Capacity := ACapacity;
 end;
@@ -168,8 +172,9 @@ begin
     List.Sort(Compare);
 end;
 
-procedure TComponentList.Delete(Index: Integer);
-var TC: TComponent;
+procedure TComponentList.Delete(Index: integer);
+var
+    TC: TComponent;
 begin
     if State = cfActive then
     begin
@@ -184,7 +189,7 @@ begin
     Result := List.Extract(Item);
 end;
 
-function TComponentList.Remove(Item: Pointer): Integer;
+function TComponentList.Remove(Item: Pointer): integer;
 begin
     Result := IndexOf(Item);
     Delete(Result);
@@ -192,10 +197,11 @@ end;
 
 procedure TComponentList.ClearAll;
 begin
-    while Count <> 0 do Delete(0);
+    while Count <> 0 do
+        Delete(0);
 end;
 
-function TComponentList.IndexOf(Item: Pointer): Integer;
+function TComponentList.IndexOf(Item: Pointer): integer;
 begin
     Result := List.IndexOf(Item);
 end;
@@ -205,12 +211,12 @@ begin
     State := AState;
 end;
 
-function TComponentList.GetState: LongInt;
+function TComponentList.GetState: longint;
 begin
     Result := State;
 end;
 
-procedure TComponentList.Insert(Index: Integer; Item: TComponent);
+procedure TComponentList.Insert(Index: integer; Item: TComponent);
 begin
     List.Insert(Index, Item);
 end;
@@ -221,27 +227,33 @@ begin
 end;
 
 procedure TSelfCleanList.ClearAll;
-var i: LongInt;
+var
+    i:    longint;
     Item: Pointer;
 begin
     for i := 0 to Count - 1 do
     begin
         Item := Items[i];
         if Assigned(Item) then
-            with TObject(Item) do try
-                UtilizeObject(TObject(Item));
-                Items[i] := nil;
-            except Items[i] := nil end;
+            with TObject(Item) do
+                try
+                    UtilizeObject(TObject(Item));
+                    Items[i] := nil;
+                except
+                    Items[i] := nil
+                end;
     end;
     Clear;
 end;
 
 procedure TComponentList.IsReady;
-var i: LongInt;
+var
+    i:   longint;
     ISC: ISelfChecked;
 begin
     for i := 0 to Count - 1 do
-        if Items[i].GetInterface(SelfCheckedGUID, ISC) then ISC.IsReady;
+        if Items[i].GetInterface(SelfCheckedGUID, ISC) then
+            ISC.IsReady;
 end;
 
 function TComponentList.MyNameIs: string;

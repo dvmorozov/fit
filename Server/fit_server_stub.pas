@@ -20,13 +20,11 @@ unit fit_server_stub;
 
 interface
 
-uses SysUtils, fit_server, common_types, self_copied_component, mscr_specimen_list,
-    MyExceptions, int_points_set, points_set, title_points_set,
-    named_points_set, log
-{$IFDEF _WINDOWS}
-    , persistent_curve_parameters
-{$ENDIF}
-    ;
+uses fit_server, int_points_set, log, mscr_specimen_list,
+    MyExceptions, named_points_set, points_set, self_copied_component,
+    SysUtils, title_points_set,
+    {$IFDEF _WINDOWS}
+    persistent_curve_parameters, {$ENDIF};
 
 type
     { For transmission through network class converts exceptions into error codes.
@@ -34,125 +32,122 @@ type
     TFitServerStub = class(TObject)
     protected
         FServer: TFitServer;
-        FRecreateServer: procedure of object;
+        FRecreateServer:
+        procedure of object;
     public
         { Getting / setting attributes of the server. }
-        
-        function GetMaxRFactor: Double;
-        procedure SetMaxRFactor(AMaxRFactor: Double);
-        function GetBackFactor: Double;
-        procedure SetBackFactor(ABackFactor: Double);
-        function GetCurveThresh: Double;
-        procedure SetCurveThresh(ACurveThresh: Double);
+
+        function GetMaxRFactor: double;
+        procedure SetMaxRFactor(AMaxRFactor: double);
+        function GetBackFactor: double;
+        procedure SetBackFactor(ABackFactor: double);
+        function GetCurveThresh: double;
+        procedure SetCurveThresh(ACurveThresh: double);
         function GetCurveType: TCurveTypeId;
         procedure SetCurveType(ACurveType: TCurveTypeId);
         function GetState: TFitServerState;
-        function GetWaveLength: Double;
-        procedure SetWaveLength(AWaveLength: Double);
-        function GetSelectedAreaMode: Boolean;
+        function GetWaveLength: double;
+        procedure SetWaveLength(AWaveLength: double);
+        function GetSelectedAreaMode: boolean;
 
         { Wrappers to server methods. They should not throw exceptions. 
           Return codes: 0 - success, -1 - inadmissible state, -2 - fatal error. }
-          
-        function SmoothProfile(var ErrMsg: string): LongInt;
-        function SubtractAllBackground(
-            Auto: Boolean; var ErrMsg: string): LongInt;
-        function DoAllAutomatically(var ErrMsg: string): LongInt;
-        function FindGausses(var ErrMsg: string): LongInt;
-        function FindGaussesAgain(var ErrMsg: string): LongInt;
-        function FindGaussesSequentially(var ErrMsg: string): LongInt;
-        function FindPeakBounds(var ErrMsg: string): LongInt;
-        function FindBackPoints(var ErrMsg: string): LongInt;
-        function FindPeakPositions(var ErrMsg: string): LongInt;
-        function AllPointsAsPeakPositions(var ErrMsg: string): LongInt;
 
-        function StopAsyncOper(var ErrMsg: string): LongInt;
-        function AsyncOper(var ErrMsg: string): Boolean;
+        function SmoothProfile(var ErrMsg: string): longint;
+        function SubtractBackground(Auto: boolean;
+            var ErrMsg: string): longint;
+        function DoAllAutomatically(var ErrMsg: string): longint;
+        function MinimizeDifference(var ErrMsg: string): longint;
+        function MinimizeDifferenceAgain(var ErrMsg: string): longint;
+        function MinimizeNumberOfCurves(var ErrMsg: string): longint;
+        function ComputeCurveBounds(var ErrMsg: string): longint;
+        function ComputeBackgroundPoints(var ErrMsg: string): longint;
+        function ComputeCurvePositions(var ErrMsg: string): longint;
+        function SelectAllPointsAsCurvePositions(var ErrMsg: string): longint;
+
+        function StopAsyncOper(var ErrMsg: string): longint;
+        function AsyncOper(var ErrMsg: string): boolean;
         function GetCalcTimeStr(var ErrMsg: string): string;
         function GetRFactorStr(var ErrMsg: string): string;
         function GetAbsRFactorStr(var ErrMsg: string): string;
         function GetSqrRFactorStr(var ErrMsg: string): string;
-        function SelectArea(
-            StartPointIndex, StopPointIndex: LongInt;
-            var ErrMsg: string): LongInt;
-        function ReturnToTotalProfile(var ErrMsg: string): LongInt;
-        function CreateSpecimenList(var ErrMsg: string): LongInt;
+        function SelectArea(StartPointIndex, StopPointIndex: longint;
+            var ErrMsg: string): longint;
+        function ReturnToTotalProfile(var ErrMsg: string): longint;
+        function CreateCurveList(var ErrMsg: string): longint;
 
         { Data setting. Set methods create new objects. The responsibility
           to free them is put on server. }
-        
-        function SetProfilePointsSet(
-            APointsSet: TTitlePointsSet; var ErrMsg: string): LongInt;
-        function SetBackgroundPointsSet(
-            ABackgroundPoints: TTitlePointsSet; var ErrMsg: string): LongInt;
-        function SetCurvePositions(
-            ACurvePositions: TPointsSet; var ErrMsg: string): LongInt;
-        function SetRFactorIntervals(
-            ARFactorIntervals: TPointsSet; var ErrMsg: string): LongInt;
+
+        function SetProfilePointsSet(APointsSet: TTitlePointsSet;
+            var ErrMsg: string): longint;
+        function SetBackgroundPointsSet(ABackgroundPoints: TTitlePointsSet;
+            var ErrMsg: string): longint;
+        function SetCurvePositions(ACurvePositions: TPointsSet;
+            var ErrMsg: string): longint;
+        function SetRFactorBounds(ARFactorBounds: TPointsSet;
+            var ErrMsg: string): longint;
 {$IFDEF _WINDOWS}
-        function SetSpecialCurveParameters(
-            ACurveExpr: string;
-            { Equality to Nil means initialization. }
-            CP: Curve_parameters;
-            var ErrMsg: string
-            ): LongInt;
+        function SetSpecialCurveParameters(ACurveExpr: string;
+        { Equality to Nil means initialization. }
+            CP: Curve_parameters; var ErrMsg: string): longint;
 {$ENDIF}
-        function AddPointToData(
-            XValue, YValue: Double; var ErrMsg: string): LongInt;
-        function AddPointToBackground(
-            XValue, YValue: Double; var ErrMsg: string): LongInt;
-        function AddPointToRFactorIntervals(
-            XValue, YValue: Double; var ErrMsg: string): LongInt;
-        function AddPointToCurvePositions(
-            XValue, YValue: Double; var ErrMsg: string): LongInt;
+        function AddPointToData(XValue, YValue: double;
+            var ErrMsg: string): longint;
+        function AddPointToBackground(XValue, YValue: double;
+            var ErrMsg: string): longint;
+        function AddPointToRFactorBounds(XValue, YValue: double;
+            var ErrMsg: string): longint;
+        function AddPointToCurvePositions(XValue, YValue: double;
+            var ErrMsg: string): longint;
 
         function ReplacePointInData(PrevXValue, PrevYValue,
-            NewXValue, NewYValue: Double; var ErrMsg: string): LongInt;
+            NewXValue, NewYValue: double; var ErrMsg: string): longint;
         function ReplacePointInBackground(PrevXValue, PrevYValue,
-            NewXValue, NewYValue: Double; var ErrMsg: string): LongInt;
-        function ReplacePointInRFactorIntervals(PrevXValue, PrevYValue,
-            NewXValue, NewYValue: Double; var ErrMsg: string): LongInt;
+            NewXValue, NewYValue: double; var ErrMsg: string): longint;
+        function ReplacePointInRFactorBounds(PrevXValue, PrevYValue,
+            NewXValue, NewYValue: double; var ErrMsg: string): longint;
         function ReplacePointInCurvePositions(PrevXValue, PrevYValue,
-            NewXValue, NewYValue: Double; var ErrMsg: string): LongInt;
+            NewXValue, NewYValue: double; var ErrMsg: string): longint;
 
         { Getting data. }
-        
+
         function GetProfilePointsSet(var Points: TPointsSet;
-            var ErrMsg: string): LongInt;
+            var ErrMsg: string): longint;
         function GetSelectedArea(var Points: TPointsSet;
-            var ErrMsg: string): LongInt;
+            var ErrMsg: string): longint;
         function GetBackgroundPoints(var Points: TPointsSet;
-            var ErrMsg: string): LongInt;
+            var ErrMsg: string): longint;
         function GetCurvePositions(var Points: TPointsSet;
-            var ErrMsg: string): LongInt;
-        function GetRFactorIntervals(var Points: TPointsSet;
-            var ErrMsg: string): LongInt;
+            var ErrMsg: string): longint;
+        function GetRFactorBounds(var Points: TPointsSet;
+            var ErrMsg: string): longint;
 {$IFDEF _WINDOWS}
-        function GetSpecialCurveParameters(var CP: Curve_parameters; var
-            ErrMsg: string): LongInt;
+        function GetSpecialCurveParameters(var CP: Curve_parameters;
+            var ErrMsg: string): longint;
 {$ENDIF}
         { Returns list of curve (specimen) parameters. }
-        function GetSpecimenList(var Points: TMSCRSpecimenList;
-            var ErrMsg: string): LongInt;
-        { Returns list of components containing points of curves (specimens). }
+        function GetCurveList(var Points: TMSCRCurveList;
+            var ErrMsg: string): longint;
+        { Returns list of components containing points of curves. }
         function GetCurvesList(var Points: TSelfCopiedCompList;
-            var ErrMsg: string): LongInt;
-        
-        function GetSpecimenCount(
-            var Count: LongInt; var ErrMsg: string): LongInt;
-        function GetSpecimenPoints(SpecIndex: LongInt;
-            var Points: TPointsSet; var Name: string; var ErrMsg: string): LongInt;
-        function GetSpecimenParameterCount(SpecIndex: LongInt;
-            var Count: LongInt; var ErrMsg: string): LongInt;
-        function GetSpecimenParameter(SpecIndex: LongInt; ParamIndex: LongInt;
-            var Name: string; var Value: Double; var Type_: LongInt;
-            var ErrMsg: string): LongInt;
-        function SetSpecimenParameter(SpecIndex: LongInt; ParamIndex: LongInt;
-            Value: Double; var ErrMsg: string): LongInt;
+            var ErrMsg: string): longint;
+
+        function GetCurveCount(var Count: longint;
+            var ErrMsg: string): longint;
+        function GetCurvePoints(SpecIndex: longint;
+            var Points: TPointsSet; var Name: string; var ErrMsg: string): longint;
+        function GetCurveParameterCount(SpecIndex: longint;
+            var Count: longint; var ErrMsg: string): longint;
+        function GetCurveParameter(SpecIndex: longint; ParamIndex: longint;
+            var Name: string; var Value: double; var Type_: longint;
+            var ErrMsg: string): longint;
+        function SetCurveParameter(SpecIndex: longint; ParamIndex: longint;
+            Value: double; var ErrMsg: string): longint;
         function GetCalcProfilePointsSet(var Points: TPointsSet;
-            var ErrMsg: string): LongInt;
+            var ErrMsg: string): longint;
         function GetDeltaProfilePointsSet(var Points: TPointsSet;
-            var ErrMsg: string): LongInt;
+            var ErrMsg: string): longint;
 
         { Wrappers to server attributes. WSDL does not support properties. }
         //property MaxRFactor: Double read GetMaxRFactor write SetMaxRFactor;
@@ -172,19 +167,24 @@ implementation
 uses app;
 
 {=========================== TFitServerStub ===================================}
-function TFitServerStub.SmoothProfile(var ErrMsg: string): LongInt;
+function TFitServerStub.SmoothProfile(var ErrMsg: string): longint;
 begin
     try
         Result := -2;
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
-        Result := 0; ErrMsg := '';
+        Result := 0;
+        ErrMsg := '';
         ErrMsg := Server.SmoothProfile;
     except
         on E: EUserException do
@@ -198,25 +198,32 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := -2;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
-function TFitServerStub.SubtractAllBackground(
-    Auto: Boolean; var ErrMsg: string): LongInt;
+function TFitServerStub.SubtractBackground(Auto: boolean;
+    var ErrMsg: string): longint;
 begin
     try
         Result := -2;
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
-        Result := 0; ErrMsg := '';
-        Server.SubtractAllBackground(Auto);
+        Result := 0;
+        ErrMsg := '';
+        Server.SubtractBackground(Auto);
     except
         on E: EUserException do
         begin
@@ -229,23 +236,30 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := -2;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
-function TFitServerStub.DoAllAutomatically(var ErrMsg: string): LongInt;
+function TFitServerStub.DoAllAutomatically(var ErrMsg: string): longint;
 begin
     try
         Result := -2;
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
-        Result := 0; ErrMsg := '';
+        Result := 0;
+        ErrMsg := '';
         ErrMsg := Server.DoAllAutomatically;
     except
         on E: EUserException do
@@ -259,24 +273,31 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := -2;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
-function TFitServerStub.FindGausses(var ErrMsg: string): LongInt;
+function TFitServerStub.MinimizeDifference(var ErrMsg: string): longint;
 begin
     try
         Result := -2;
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
-        Result := 0; ErrMsg := '';
-        ErrMsg := Server.FindGausses;
+        Result := 0;
+        ErrMsg := '';
+        ErrMsg := Server.MinimizeDifference;
     except
         on E: EUserException do
         begin
@@ -289,24 +310,31 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := -2;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
-function TFitServerStub.FindGaussesAgain(var ErrMsg: string): LongInt;
+function TFitServerStub.MinimizeDifferenceAgain(var ErrMsg: string): longint;
 begin
     try
         Result := -2;
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
-        Result := 0; ErrMsg := '';
-        ErrMsg := Server.FindGaussesAgain;
+        Result := 0;
+        ErrMsg := '';
+        ErrMsg := Server.MinimizeDifferenceAgain;
     except
         on E: EUserException do
         begin
@@ -319,24 +347,31 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := -2;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
-function TFitServerStub.FindGaussesSequentially(var ErrMsg: string): LongInt;
+function TFitServerStub.MinimizeNumberOfCurves(var ErrMsg: string): longint;
 begin
     try
         Result := -2;
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
-        Result := 0; ErrMsg := '';
-        ErrMsg := Server.FindGaussesSequentially;
+        Result := 0;
+        ErrMsg := '';
+        ErrMsg := Server.MinimizeNumberOfCurves;
     except
         on E: EUserException do
         begin
@@ -349,24 +384,31 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := -2;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
-function TFitServerStub.FindPeakBounds(var ErrMsg: string): LongInt;
+function TFitServerStub.ComputeCurveBounds(var ErrMsg: string): longint;
 begin
     try
         Result := -2;
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
-        Result := 0; ErrMsg := '';
-        ErrMsg := Server.FindPeakBounds;
+        Result := 0;
+        ErrMsg := '';
+        ErrMsg := Server.ComputeCurveBounds;
     except
         on E: EUserException do
         begin
@@ -379,24 +421,31 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := -2;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
-function TFitServerStub.FindBackPoints(var ErrMsg: string): LongInt;
+function TFitServerStub.ComputeBackgroundPoints(var ErrMsg: string): longint;
 begin
     try
         Result := -2;
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
-        Result := 0; ErrMsg := '';
-        ErrMsg := Server.FindBackPoints;
+        Result := 0;
+        ErrMsg := '';
+        ErrMsg := Server.ComputeBackgroundPoints;
     except
         on E: EUserException do
         begin
@@ -409,24 +458,31 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := -2;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
-function TFitServerStub.FindPeakPositions(var ErrMsg: string): LongInt;
+function TFitServerStub.ComputeCurvePositions(var ErrMsg: string): longint;
 begin
     try
         Result := -2;
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
-        Result := 0; ErrMsg := '';
-        ErrMsg := Server.FindPeakPositions;
+        Result := 0;
+        ErrMsg := '';
+        ErrMsg := Server.ComputeCurvePositions;
     except
         on E: EUserException do
         begin
@@ -439,24 +495,31 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := -2;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
-function TFitServerStub.AllPointsAsPeakPositions(var ErrMsg: string): LongInt;
+function TFitServerStub.SelectAllPointsAsCurvePositions(var ErrMsg: string): longint;
 begin
     try
         Result := -2;
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
-        Result := 0; ErrMsg := '';
-        ErrMsg := Server.AllPointsAsPeakPositions;
+        Result := 0;
+        ErrMsg := '';
+        ErrMsg := Server.SelectAllPointsAsCurvePositions;
     except
         on E: EUserException do
         begin
@@ -469,24 +532,31 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := -2;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
-function TFitServerStub.CreateSpecimenList(var ErrMsg: string): LongInt;
+function TFitServerStub.CreateCurveList(var ErrMsg: string): longint;
 begin
     try
         Result := -2;
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
-        Result := 0; ErrMsg := '';
-        Server.CreateSpecimenList;
+        Result := 0;
+        ErrMsg := '';
+        Server.CreateCurveList;
     except
         on E: EUserException do
         begin
@@ -499,24 +569,31 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := -2;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
-function TFitServerStub.SelectArea(
-    StartPointIndex, StopPointIndex: LongInt; var ErrMsg: string): LongInt;
+function TFitServerStub.SelectArea(StartPointIndex, StopPointIndex: longint;
+    var ErrMsg: string): longint;
 begin
     try
         Result := -2;
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
-        Result := 0; ErrMsg := '';
+        Result := 0;
+        ErrMsg := '';
         ErrMsg := Server.SelectArea(StartPointIndex, StopPointIndex);
     except
         on E: EUserException do
@@ -530,23 +607,30 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := -2;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
-function TFitServerStub.ReturnToTotalProfile(var ErrMsg: string): LongInt;
+function TFitServerStub.ReturnToTotalProfile(var ErrMsg: string): longint;
 begin
     try
         Result := -2;
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
-        Result := 0; ErrMsg := '';
+        Result := 0;
+        ErrMsg := '';
         ErrMsg := Server.ReturnToTotalProfile;
     except
         on E: EUserException do
@@ -560,23 +644,30 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := -2;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
-function TFitServerStub.StopAsyncOper(var ErrMsg: string): LongInt;
+function TFitServerStub.StopAsyncOper(var ErrMsg: string): longint;
 begin
     try
         Result := -2;
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
-        Result := 0; ErrMsg := '';
+        Result := 0;
+        ErrMsg := '';
         Server.StopAsyncOper;
     except
         on E: EUserException do
@@ -590,23 +681,30 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := -2;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
-function TFitServerStub.AsyncOper(var ErrMsg: string): Boolean;
+function TFitServerStub.AsyncOper(var ErrMsg: string): boolean;
 begin
     try
         Result := False;
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
-        Result := False; ErrMsg := '';
+        Result := False;
+        ErrMsg := '';
         Result := Server.AsyncOper;
     except
         on E: EUserException do
@@ -620,7 +718,9 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := False;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
@@ -631,12 +731,17 @@ begin
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
-        Result := ''; ErrMsg := '';
+        Result := '';
+        ErrMsg := '';
         Result := Server.GetCalcTimeStr;
     except
         on E: EUserException do
@@ -650,7 +755,9 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := '';
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
@@ -661,12 +768,17 @@ begin
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
-        Result := ''; ErrMsg := '';
+        Result := '';
+        ErrMsg := '';
         Result := Server.GetRFactorStr;
     except
         on E: EUserException do
@@ -680,7 +792,9 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := '';
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
@@ -691,12 +805,17 @@ begin
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
-        Result := ''; ErrMsg := '';
+        Result := '';
+        ErrMsg := '';
         Result := Server.GetAbsRFactorStr;
     except
         on E: EUserException do
@@ -710,7 +829,9 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := '';
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
@@ -721,12 +842,17 @@ begin
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
-        Result := ''; ErrMsg := '';
+        Result := '';
+        ErrMsg := '';
         Result := Server.GetSqrRFactorStr;
     except
         on E: EUserException do
@@ -740,19 +866,25 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := '';
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
-function TFitServerStub.GetSelectedAreaMode: Boolean;
+function TFitServerStub.GetSelectedAreaMode: boolean;
 begin
     try
         Result := False;
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
@@ -763,19 +895,25 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := False;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
-function TFitServerStub.GetMaxRFactor: Double;
+function TFitServerStub.GetMaxRFactor: double;
 begin
     try
         Result := 0;
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
@@ -786,18 +924,24 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := 0;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
-procedure TFitServerStub.SetMaxRFactor(AMaxRFactor: Double);
+procedure TFitServerStub.SetMaxRFactor(AMaxRFactor: double);
 begin
     try
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
@@ -807,19 +951,25 @@ begin
         begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
-function TFitServerStub.GetBackFactor: Double;
+function TFitServerStub.GetBackFactor: double;
 begin
     try
         Result := 0;
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
@@ -830,18 +980,24 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := 0;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
-procedure TFitServerStub.SetBackFactor(ABackFactor: Double);
+procedure TFitServerStub.SetBackFactor(ABackFactor: double);
 begin
     try
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
@@ -851,19 +1007,25 @@ begin
         begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
-function TFitServerStub.GetCurveThresh: Double;
+function TFitServerStub.GetCurveThresh: double;
 begin
     try
         Result := 0;
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
@@ -874,18 +1036,24 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := 0;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
-procedure TFitServerStub.SetCurveThresh(ACurveThresh: Double);
+procedure TFitServerStub.SetCurveThresh(ACurveThresh: double);
 begin
     try
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
@@ -895,7 +1063,9 @@ begin
         begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
@@ -908,7 +1078,9 @@ begin
         begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
@@ -918,8 +1090,12 @@ begin
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
@@ -929,29 +1105,34 @@ begin
         begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
 {$IFDEF _WINDOWS}
-function TFitServerStub.SetSpecialCurveParameters(
-    ACurveExpr: string;
+function TFitServerStub.SetSpecialCurveParameters(ACurveExpr: string;
     CP: Curve_parameters;   //  ravenstvo nil oznachaet
-                            //  pervonachal'nuyu initsializatsiyu
-    var ErrMsg: string
-    ): LongInt;
+    //  pervonachal'nuyu initsializatsiyu
+    var ErrMsg: string): longint;
 begin
     try
         Result := -2;
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
-        Result := 0; ErrMsg := '';
+        Result := 0;
+        ErrMsg := '';
         if Assigned(CP) then
             Server.SetSpecialCurveParameters(
                 ACurveExpr, Curve_parameters(CP.GetCopy))
@@ -969,25 +1150,33 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := -2;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
+
 {$ENDIF}
 
-function TFitServerStub.SetProfilePointsSet(
-    APointsSet: TTitlePointsSet; var ErrMsg: string): LongInt;
+function TFitServerStub.SetProfilePointsSet(APointsSet: TTitlePointsSet;
+    var ErrMsg: string): longint;
 begin
     try
         Result := -2;
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
-        Result := 0; ErrMsg := '';
+        Result := 0;
+        ErrMsg := '';
         ErrMsg := Server.SetProfilePointsSet(APointsSet);
     except
         on E: EUserException do
@@ -1001,24 +1190,31 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := -2;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
-function TFitServerStub.SetBackgroundPointsSet(
-    ABackgroundPoints: TTitlePointsSet; var ErrMsg: string): LongInt;
+function TFitServerStub.SetBackgroundPointsSet(ABackgroundPoints: TTitlePointsSet;
+    var ErrMsg: string): longint;
 begin
     try
         Result := -2;
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
-        Result := 0; ErrMsg := '';
+        Result := 0;
+        ErrMsg := '';
         ErrMsg := Server.SetBackgroundPointsSet(
             TTitlePointsSet(ABackgroundPoints.GetCopy));
     except
@@ -1033,24 +1229,31 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := -2;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
-function TFitServerStub.SetCurvePositions(
-    ACurvePositions: TPointsSet; var ErrMsg: string): LongInt;
+function TFitServerStub.SetCurvePositions(ACurvePositions: TPointsSet;
+    var ErrMsg: string): longint;
 begin
     try
         Result := -2;
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
-        Result := 0; ErrMsg := '';
+        Result := 0;
+        ErrMsg := '';
         ErrMsg := Server.SetCurvePositions(TPointsSet(ACurvePositions.GetCopy));
     except
         on E: EUserException do
@@ -1064,26 +1267,33 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := -2;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
-function TFitServerStub.SetRFactorIntervals(
-    ARFactorIntervals: TPointsSet; var ErrMsg: string): LongInt;
+function TFitServerStub.SetRFactorBounds(ARFactorBounds: TPointsSet;
+    var ErrMsg: string): longint;
 begin
     try
         Result := -2;
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
-        Result := 0; ErrMsg := '';
-        ErrMsg := Server.SetRFactorIntervals(
-            TPointsSet(ARFactorIntervals.GetCopy));
+        Result := 0;
+        ErrMsg := '';
+        ErrMsg := Server.SetRFactorBounds(
+            TPointsSet(ARFactorBounds.GetCopy));
     except
         on E: EUserException do
         begin
@@ -1096,24 +1306,31 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := -2;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
-function TFitServerStub.GetProfilePointsSet(
-    var Points: TPointsSet; var ErrMsg: string): LongInt;
+function TFitServerStub.GetProfilePointsSet(var Points: TPointsSet;
+    var ErrMsg: string): longint;
 begin
     try
         Result := -2;
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
-        Result := 0; ErrMsg := '';
+        Result := 0;
+        ErrMsg := '';
         Points := Server.GetProfilePointsSet;
     except
         on E: EUserException do
@@ -1127,24 +1344,31 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := -2;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
-function TFitServerStub.GetSelectedArea(
-    var Points: TPointsSet; var ErrMsg: string): LongInt;
+function TFitServerStub.GetSelectedArea(var Points: TPointsSet;
+    var ErrMsg: string): longint;
 begin
     try
         Result := -2;
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
-        Result := 0; ErrMsg := '';
+        Result := 0;
+        ErrMsg := '';
         Points := Server.GetSelectedArea;
     except
         on E: EUserException do
@@ -1158,24 +1382,31 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := -2;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
-function TFitServerStub.GetCalcProfilePointsSet(
-    var Points: TPointsSet; var ErrMsg: string): LongInt;
+function TFitServerStub.GetCalcProfilePointsSet(var Points: TPointsSet;
+    var ErrMsg: string): longint;
 begin
     try
         Result := -2;
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
-        Result := 0; ErrMsg := '';
+        Result := 0;
+        ErrMsg := '';
         Points := Server.GetCalcProfilePointsSet;
     except
         on E: EUserException do
@@ -1189,24 +1420,31 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := -2;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
-function TFitServerStub.GetDeltaProfilePointsSet(
-    var Points: TPointsSet; var ErrMsg: string): LongInt;
+function TFitServerStub.GetDeltaProfilePointsSet(var Points: TPointsSet;
+    var ErrMsg: string): longint;
 begin
     try
         Result := -2;
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
-        Result := 0; ErrMsg := '';
+        Result := 0;
+        ErrMsg := '';
         Points := Server.GetDeltaProfilePointsSet;
     except
         on E: EUserException do
@@ -1220,24 +1458,31 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := -2;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
-function TFitServerStub.GetBackgroundPoints(
-    var Points: TPointsSet; var ErrMsg: string): LongInt;
+function TFitServerStub.GetBackgroundPoints(var Points: TPointsSet;
+    var ErrMsg: string): longint;
 begin
     try
         Result := -2;
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
-        Result := 0; ErrMsg := '';
+        Result := 0;
+        ErrMsg := '';
         Points := Server.GetBackgroundPoints;
     except
         on E: EUserException do
@@ -1251,24 +1496,31 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := -2;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
-function TFitServerStub.GetCurvePositions(
-    var Points: TPointsSet; var ErrMsg: string): LongInt;
+function TFitServerStub.GetCurvePositions(var Points: TPointsSet;
+    var ErrMsg: string): longint;
 begin
     try
         Result := -2;
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
-        Result := 0; ErrMsg := '';
+        Result := 0;
+        ErrMsg := '';
         Points := Server.GetCurvePositions;
     except
         on E: EUserException do
@@ -1282,25 +1534,32 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := -2;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
-function TFitServerStub.GetRFactorIntervals(
-    var Points: TPointsSet; var ErrMsg: string): LongInt;
+function TFitServerStub.GetRFactorBounds(var Points: TPointsSet;
+    var ErrMsg: string): longint;
 begin
     try
         Result := -2;
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
-        Result := 0; ErrMsg := '';
-        Points := Server.GetRFactorIntervals;
+        Result := 0;
+        ErrMsg := '';
+        Points := Server.GetRFactorBounds;
     except
         on E: EUserException do
         begin
@@ -1313,26 +1572,33 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := -2;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
 {$IFDEF _WINDOWS}
-function TFitServerStub.GetSpecialCurveParameters(
-    var CP: Curve_parameters; var ErrMsg: string): LongInt;
+function TFitServerStub.GetSpecialCurveParameters(var CP: Curve_parameters;
+    var ErrMsg: string): longint;
 begin
     try
         Result := -2;
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
-        Result := 0; ErrMsg := '';
-        CP := Server.GetSpecialCurveParameters;
+        Result := 0;
+        ErrMsg := '';
+        CP     := Server.GetSpecialCurveParameters;
     except
         on E: EUserException do
         begin
@@ -1345,26 +1611,34 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := -2;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
+
 {$ENDIF}
 
-function TFitServerStub.GetSpecimenList(
-    var Points: TMSCRSpecimenList; var ErrMsg: string): LongInt;
+function TFitServerStub.GetCurveList(var Points: TMSCRCurveList;
+    var ErrMsg: string): longint;
 begin
     try
         Result := -2;
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
-        Result := 0; ErrMsg := '';
-        Points := Server.GetSpecimenList;
+        Result := 0;
+        ErrMsg := '';
+        Points := Server.GetCurveList;
     except
         on E: EUserException do
         begin
@@ -1377,25 +1651,32 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := -2;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
 //{$IFDEF FIT}
-function TFitServerStub.GetCurvesList(
-    var Points: TSelfCopiedCompList; var ErrMsg: string): LongInt;
+function TFitServerStub.GetCurvesList(var Points: TSelfCopiedCompList;
+    var ErrMsg: string): longint;
 begin
     try
         Result := -2;
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
-        Result := 0; ErrMsg := '';
+        Result := 0;
+        ErrMsg := '';
         Points := Server.GetCurvesList;
     except
         on E: EUserException do
@@ -1409,25 +1690,32 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := -2;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 //{$ELSE}
-function TFitServerStub.GetSpecimenCount(
-    var Count: LongInt; var ErrMsg: string): LongInt;
+function TFitServerStub.GetCurveCount(var Count: longint;
+    var ErrMsg: string): longint;
 begin
     try
         Result := -2;
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
-        Result := 0; ErrMsg := '';
-        Count := Server.GetSpecimenCount;
+        Result := 0;
+        ErrMsg := '';
+        Count  := Server.GetCurveCount;
     except
         on E: EUserException do
         begin
@@ -1440,27 +1728,37 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := -2;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
-function TFitServerStub.GetSpecimenPoints(SpecIndex: LongInt;
-    var Points: TPointsSet; var Name: string; var ErrMsg: string): LongInt;
-var CPS: TNamedPointsSet;
+function TFitServerStub.GetCurvePoints(SpecIndex: longint;
+    var Points: TPointsSet; var Name: string; var ErrMsg: string): longint;
+var
+    CPS: TNamedPointsSet;
 begin
     try
         Result := -2;
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
-        Result := 0; ErrMsg := '';
-        CPS := Server.GetSpecimenPoints(SpecIndex);
-        Points := CPS; Name := CPS.GetCurveTypeName; Result := 0;
+        Result := 0;
+        ErrMsg := '';
+        CPS    := Server.GetCurvePoints(SpecIndex);
+        Points := CPS;
+        Name   := CPS.GetCurveTypeName;
+        Result := 0;
     except
         on E: EUserException do
         begin
@@ -1473,25 +1771,32 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := -2;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
-function TFitServerStub.GetSpecimenParameterCount(SpecIndex: LongInt;
-    var Count: LongInt; var ErrMsg: string): LongInt;
+function TFitServerStub.GetCurveParameterCount(SpecIndex: longint;
+    var Count: longint; var ErrMsg: string): longint;
 begin
     try
         Result := -2;
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
-        Result := 0; ErrMsg := '';
-        Count := Server.GetSpecimenParameterCount(SpecIndex);
+        Result := 0;
+        ErrMsg := '';
+        Count  := Server.GetCurveParameterCount(SpecIndex);
     except
         on E: EUserException do
         begin
@@ -1504,26 +1809,32 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := -2;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
-function TFitServerStub.SetSpecimenParameter(
-    SpecIndex: LongInt; ParamIndex: LongInt;
-    Value: Double; var ErrMsg: string): LongInt;
+function TFitServerStub.SetCurveParameter(SpecIndex: longint;
+    ParamIndex: longint; Value: double; var ErrMsg: string): longint;
 begin
     try
         Result := -2;
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
-        Result := 0; ErrMsg := '';
-        Server.SetSpecimenParameter(SpecIndex, ParamIndex, Value);
+        Result := 0;
+        ErrMsg := '';
+        Server.SetCurveParameter(SpecIndex, ParamIndex, Value);
     except
         on E: EUserException do
         begin
@@ -1536,26 +1847,33 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := -2;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
-function TFitServerStub.GetSpecimenParameter(SpecIndex: LongInt;
-    ParamIndex: LongInt; var Name: string; var Value: Double;
-    var Type_: LongInt; var ErrMsg: string): LongInt;
+function TFitServerStub.GetCurveParameter(SpecIndex: longint;
+    ParamIndex: longint; var Name: string; var Value: double;
+    var Type_: longint; var ErrMsg: string): longint;
 begin
     try
         Result := -2;
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
-        Result := 0; ErrMsg := '';
-        Server.GetSpecimenParameter(SpecIndex, ParamIndex, Name, Value, Type_);
+        Result := 0;
+        ErrMsg := '';
+        Server.GetCurveParameter(SpecIndex, ParamIndex, Name, Value, Type_);
     except
         on E: EUserException do
         begin
@@ -1568,7 +1886,9 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := -2;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 //{$ENDIF}
@@ -1580,8 +1900,12 @@ begin
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
@@ -1592,19 +1916,25 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := ProfileWaiting;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
-function TFitServerStub.GetWaveLength: Double;
+function TFitServerStub.GetWaveLength: double;
 begin
     try
         Result := 0;
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
@@ -1615,18 +1945,24 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := 0;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
-procedure TFitServerStub.SetWaveLength(AWaveLength: Double);
+procedure TFitServerStub.SetWaveLength(AWaveLength: double);
 begin
     try
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
@@ -1636,24 +1972,31 @@ begin
         begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
-function TFitServerStub.AddPointToData(
-    XValue, YValue: Double; var ErrMsg: string): LongInt;
+function TFitServerStub.AddPointToData(XValue, YValue: double;
+    var ErrMsg: string): longint;
 begin
     try
         Result := -2;
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
-        Result := 0; ErrMsg := '';
+        Result := 0;
+        ErrMsg := '';
         Server.AddPointToData(XValue, YValue);
     except
         on E: EUserException do
@@ -1667,24 +2010,31 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := -2;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
-function TFitServerStub.AddPointToBackground(
-    XValue, YValue: Double; var ErrMsg: string): LongInt;
+function TFitServerStub.AddPointToBackground(XValue, YValue: double;
+    var ErrMsg: string): longint;
 begin
     try
         Result := -2;
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
-        Result := 0; ErrMsg := '';
+        Result := 0;
+        ErrMsg := '';
         Server.AddPointToBackground(XValue, YValue);
     except
         on E: EUserException do
@@ -1698,25 +2048,32 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := -2;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
-function TFitServerStub.AddPointToRFactorIntervals(
-    XValue, YValue: Double; var ErrMsg: string): LongInt;
+function TFitServerStub.AddPointToRFactorBounds(XValue, YValue: double;
+    var ErrMsg: string): longint;
 begin
     try
         Result := -2;
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
-        Result := 0; ErrMsg := '';
-        Server.AddPointToRFactorIntervals(XValue, YValue);
+        Result := 0;
+        ErrMsg := '';
+        Server.AddPointToRFactorBounds(XValue, YValue);
     except
         on E: EUserException do
         begin
@@ -1729,24 +2086,31 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := -2;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
-function TFitServerStub.AddPointToCurvePositions(
-    XValue, YValue: Double; var ErrMsg: string): LongInt;
+function TFitServerStub.AddPointToCurvePositions(XValue, YValue: double;
+    var ErrMsg: string): longint;
 begin
     try
         Result := -2;
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
-        Result := 0; ErrMsg := '';
+        Result := 0;
+        ErrMsg := '';
         Server.AddPointToCurvePositions(XValue, YValue);
     except
         on E: EUserException do
@@ -1760,25 +2124,32 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := -2;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
 function TFitServerStub.ReplacePointInData(
-    PrevXValue, PrevYValue, NewXValue, NewYValue: Double;
-    var ErrMsg: string): LongInt;
+    PrevXValue, PrevYValue, NewXValue, NewYValue: double;
+    var ErrMsg: string): longint;
 begin
     try
         Result := -2;
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
-        Result := 0; ErrMsg := '';
+        Result := 0;
+        ErrMsg := '';
         Server.ReplacePointInData(PrevXValue, PrevYValue, NewXValue, NewYValue);
     except
         on E: EUserException do
@@ -1792,25 +2163,32 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := -2;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
 function TFitServerStub.ReplacePointInBackground(
-    PrevXValue, PrevYValue, NewXValue, NewYValue: Double;
-    var ErrMsg: string): LongInt;
+    PrevXValue, PrevYValue, NewXValue, NewYValue: double;
+    var ErrMsg: string): longint;
 begin
     try
         Result := -2;
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
-        Result := 0; ErrMsg := '';
+        Result := 0;
+        ErrMsg := '';
         Server.ReplacePointInBackground(
             PrevXValue, PrevYValue, NewXValue, NewYValue);
     except
@@ -1825,26 +2203,33 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := -2;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
-function TFitServerStub.ReplacePointInRFactorIntervals(
-    PrevXValue, PrevYValue, NewXValue, NewYValue: Double;
-    var ErrMsg: string): LongInt;
+function TFitServerStub.ReplacePointInRFactorBounds(
+    PrevXValue, PrevYValue, NewXValue, NewYValue: double;
+    var ErrMsg: string): longint;
 begin
     try
         Result := -2;
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
-        Result := 0; ErrMsg := '';
-        Server.ReplacePointInRFactorIntervals(
+        Result := 0;
+        ErrMsg := '';
+        Server.ReplacePointInRFactorBounds(
             PrevXValue, PrevYValue, NewXValue, NewYValue);
     except
         on E: EUserException do
@@ -1858,25 +2243,32 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := -2;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
 function TFitServerStub.ReplacePointInCurvePositions(
-    PrevXValue, PrevYValue, NewXValue, NewYValue: Double;
-    var ErrMsg: string): LongInt;
+    PrevXValue, PrevYValue, NewXValue, NewYValue: double;
+    var ErrMsg: string): longint;
 begin
     try
         Result := -2;
         Assert(Assigned(RecreateServer));
     except
         on E: Exception do
-        begin WriteLog(CreateErrorMessage(E.Message), Fatal); Exit; end
-        else Exit;
+        begin
+            WriteLog(CreateErrorMessage(E.Message), Fatal);
+            Exit;
+        end
+        else
+            Exit;
     end;
 
     try
-        Result := 0; ErrMsg := '';
+        Result := 0;
+        ErrMsg := '';
         Server.ReplacePointInCurvePositions(
             PrevXValue, PrevYValue, NewXValue, NewYValue);
     except
@@ -1891,11 +2283,10 @@ begin
             WriteLog(CreateErrorMessage(E.Message), Fatal);
             RecreateServer;
             Result := -2;
-        end else RecreateServer;
+        end
+        else
+            RecreateServer;
     end;
 end;
 
 end.
-
-
-

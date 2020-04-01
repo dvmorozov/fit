@@ -14,8 +14,8 @@ unit fit_server_with_thread;
 interface
 
 uses
-    Classes, SysUtils, fit_server, common_types, main_calc_thread, MyExceptions,
-    fit_task;
+    Classes, fit_server, fit_task, int_fit_service, main_calc_thread, MyExceptions,
+    SysUtils;
 
 type
     { The server component performing long-term operation in separate thread. }
@@ -27,14 +27,14 @@ type
           synchronously. }
         FMainCalcThread: TMainCalcThread;
         { Temporarily saved value of current minimum. }
-        FCurMin: Double;
+        FCurMin: double;
 
-        procedure RecreateMainCalcThread(
-            ATask: TThreadMethod; AAllDone: TThreadMethod); override;
+        procedure RecreateMainCalcThread(ATask: TThreadMethod;
+            AAllDone: TThreadMethod); override;
         { Waits for completion of the thread. Do not call from synchonized
           method, otherwise this will result in deadlock. }
         procedure DestroyMainCalcThread;
-        
+
         function CreateTaskObject: TFitTask; override;
 
         { IClientCallback synchronized counterparts }
@@ -45,9 +45,9 @@ type
         procedure ShowCurMinSync;
         procedure ShowProfileSync;
         procedure DoneSync;
-        procedure FindPeakBoundsDoneSync;
-        procedure FindBackPointsDoneSync;
-        procedure FindPeakPositionsDoneSync;
+        procedure ComputeCurveBoundsDoneSync;
+        procedure ComputeBackgroundPointsDoneSync;
+        procedure ComputeCurvePositionsDoneSync;
 
     public
         destructor Destroy; override;
@@ -57,12 +57,12 @@ type
           because they update UI. These methods must not call inherited ones,
           instead call synchronized counterparts of FMainCalcThread. }
 
-        procedure ShowCurMin(Min: Double); override;
+        procedure ShowCurMin(Min: double); override;
         procedure ShowProfile; override;
         procedure Done; override;
-        procedure FindPeakBoundsDone; override;
-        procedure FindBackPointsDone; override;
-        procedure FindPeakPositionsDone; override;
+        procedure ComputeCurveBoundsDone; override;
+        procedure ComputeBackgroundPointsDone; override;
+        procedure ComputeCurvePositionsDone; override;
 
         { Control commands. }
 
@@ -78,34 +78,38 @@ implementation
 
 destructor TFitServerWithThread.Destroy;
 begin
-    if State = AsyncOperation then AbortAsyncOper;
+    if State = AsyncOperation then
+        AbortAsyncOper;
     inherited;
 end;
 
 {$warnings off}
-procedure TFitServerWithThread.RecreateMainCalcThread(
-    ATask: TThreadMethod; AAllDone: TThreadMethod);
+procedure TFitServerWithThread.RecreateMainCalcThread(ATask: TThreadMethod;
+    AAllDone: TThreadMethod);
 begin
-    if State = AsyncOperation then AbortAsyncOper;
-    DoneDisabled := False;
+    if State = AsyncOperation then
+        AbortAsyncOper;
+    FDoneDisabled := False;
 
     if Assigned(FMainCalcThread) then
         DestroyMainCalcThread;
 
     FMainCalcThread := TMainCalcThread.Create(True { CreateSuspended });
     if Assigned(FMainCalcThread.FatalException) then
-       raise FMainCalcThread.FatalException;
+        raise FMainCalcThread.FatalException;
 
     { Assigns callbacks. }
     FMainCalcThread.SetSyncMethods(
         ATask, ShowCurMinSync, ShowProfileSync, DoneSync,
-        FindPeakBoundsDoneSync, FindBackPointsDoneSync, FindPeakPositionsDoneSync,
+        ComputeCurveBoundsDoneSync, ComputeBackgroundPointsDoneSync,
+        ComputeCurvePositionsDoneSync,
         AAllDone);
     { Sets appropriate state befor starting thread. }
     SetState(AsyncOperation);
     { Starts thread. }
     FMainCalcThread.Resume;
 end;
+
 {$warnings on}
 
 procedure TFitServerWithThread.DestroyMainCalcThread;
@@ -125,42 +129,40 @@ begin
         raise EUserException.Create(InadmissibleServerState + CRLF +
             CalcNotStarted);
 
-    Assert(Assigned(TaskList));
+    Assert(Assigned(FTaskList));
     Assert(Assigned(FMainCalcThread));
 
-    DoneDisabled := True;
+    FDoneDisabled := True;
 
     FMainCalcThread.Terminate;
     DestroyMainCalcThread;
-    FState := SavedState;
+    FState := FSavedState;
 end;
 
 procedure TFitServerWithThread.StopAsyncOper;
 var
-    i: LongInt;
+    i: longint;
 begin
     if State <> AsyncOperation then
         raise EUserException.Create(InadmissibleServerState + CRLF +
             CalcNotStarted);
 
-    Assert(Assigned(TaskList));
+    Assert(Assigned(FTaskList));
     Assert(Assigned(FMainCalcThread));
 
-    for i := 0 to TaskList.Count - 1 do
-    begin
-        TFitTask(TaskList.Items[i]).StopAsyncOper;
-    end;
+    for i := 0 to FTaskList.Count - 1 do
+        TFitTask(FTaskList.Items[i]).StopAsyncOper;
 
     FMainCalcThread.Terminate;
 end;
 
 function TFitServerWithThread.CreateTaskObject: TFitTask;
 begin
-    Result := TFitTask.Create(nil,
-        FBackgroundVariationEnabled, FCurveScalingEnabled);
+    Result := TFitTask.Create(nil, FBackgroundVariationEnabled,
+        FCurveScalingEnabled);
 end;
 
-procedure TFitServerWithThread.ShowCurMin(Min: Double);
+procedure TFitServerWithThread.ShowCurMin(Min: double);
 begin
     FCurMin := Min;
     FMainCalcThread.ShowCurMin;
@@ -176,19 +178,19 @@ begin
     FMainCalcThread.Done;
 end;
 
-procedure TFitServerWithThread.FindPeakBoundsDone;
+procedure TFitServerWithThread.ComputeCurveBoundsDone;
 begin
-    FMainCalcThread.FindPeakBoundsDone;
+    FMainCalcThread.ComputeCurveBoundsDone;
 end;
 
-procedure TFitServerWithThread.FindBackPointsDone;
+procedure TFitServerWithThread.ComputeBackgroundPointsDone;
 begin
-    FMainCalcThread.FindBackPointsDone;
+    FMainCalcThread.ComputeBackgroundPointsDone;
 end;
 
-procedure TFitServerWithThread.FindPeakPositionsDone;
+procedure TFitServerWithThread.ComputeCurvePositionsDone;
 begin
-    FMainCalcThread.FindPeakPositionsDone;
+    FMainCalcThread.ComputeCurvePositionsDone;
 end;
 
 procedure TFitServerWithThread.ShowCurMinSync;
@@ -206,22 +208,19 @@ begin
     inherited Done;
 end;
 
-procedure TFitServerWithThread.FindPeakBoundsDoneSync;
+procedure TFitServerWithThread.ComputeCurveBoundsDoneSync;
 begin
-    inherited FindPeakBoundsDone;
+    inherited ComputeCurveBoundsDone;
 end;
 
-procedure TFitServerWithThread.FindBackPointsDoneSync;
+procedure TFitServerWithThread.ComputeBackgroundPointsDoneSync;
 begin
-    inherited FindBackPointsDone;
+    inherited ComputeBackgroundPointsDone;
 end;
 
-procedure TFitServerWithThread.FindPeakPositionsDoneSync;
+procedure TFitServerWithThread.ComputeCurvePositionsDoneSync;
 begin
-    inherited FindPeakPositionsDone;
+    inherited ComputeCurvePositionsDone;
 end;
 
 end.
-
-
-

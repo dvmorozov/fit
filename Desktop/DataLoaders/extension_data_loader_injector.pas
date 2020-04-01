@@ -19,8 +19,9 @@ unit extension_data_loader_injector;
 
 interface
 
-uses SysUtils, data_loader, dat_file_loader, csv_file_loader,
-  int_data_loader, int_data_loader_injector;
+uses
+    csv_file_loader, dat_file_loader, data_loader, int_data_loader,
+    int_data_loader_injector, SysUtils;
 
 type
     { Implementation of data loader injector based on file extension. }
@@ -35,9 +36,9 @@ type
 
 implementation
 
-function TExtensionDataLoaderInjector.CreateDataLoader(
-  AFileName: string): IDataLoader;
-var Ext: string;
+function TExtensionDataLoaderInjector.CreateDataLoader(AFileName: string): IDataLoader;
+var
+    Ext: string;
 begin
     if FDataLoader <> nil then
         FDataLoader.Free;
@@ -45,14 +46,10 @@ begin
     Ext := UpperCase(ExtractFileExt(AFileName));
 
     if Ext = '.DAT' then
-    begin
-        FDataLoader := TDATFileLoader.Create(nil);
-    end
+        FDataLoader := TDATFileLoader.Create(nil)
     else
     if Ext = '.CSV' then
-    begin
-        FDataLoader := TCSVFileLoader.Create(nil);
-    end
+        FDataLoader := TCSVFileLoader.Create(nil)
     else
         raise EInvalidFileType.Create('Invalid file extension.');
 
@@ -61,10 +58,8 @@ end;
 
 destructor TExtensionDataLoaderInjector.Destroy;
 begin
-    if FDataLoader <> nil then
-        FDataLoader.Free;
+    FDataLoader.Free;
     inherited;
 end;
 
 end.
-

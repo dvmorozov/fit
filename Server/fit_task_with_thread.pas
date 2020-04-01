@@ -14,45 +14,45 @@ unit fit_task_with_thread;
 interface
 
 uses
-    Classes, SysUtils, fit_task, main_calc_thread, log;
+    Classes, fit_task, log, main_calc_thread, SysUtils;
 
 type
     { Executes task solution in separate thread. }
     TFitTaskWithThread = class(TFitTask)
     protected
         FMainCalcThread: TMainCalcThread;
-        FDoneDisabled: Boolean;     //  Suppresses calling Done.
-        
-        procedure RecreateMainCalcThread(
-            ATask: TThreadMethod; AAllDone: TThreadMethod);
+        FDoneDisabled:   boolean;     //  Suppresses calling Done.
 
-     public
+        procedure RecreateMainCalcThread(ATask: TThreadMethod;
+            AAllDone: TThreadMethod);
+
+    public
         { Waits for thread termination. }
         procedure DestroyMainCalcThread;
 
         procedure ShowCurMin; override;
-        function GetCurMinInitialized: Boolean; override;
+        function GetCurMinInitialized: boolean; override;
         procedure Done; override;
-        
+
         { Methods implement synchronization to work in multithreading environment. }
-        
-        function GetCurMin: Double; override;
-        function GetCurAbsMin: Double; override;
-        function GetCurSqrMin: Double; override;
-        function GetAllDone: Boolean; override;
+
+        function GetCurMin: double; override;
+        function GetCurAbsMin: double; override;
+        function GetCurSqrMin: double; override;
+        function GetAllDone: boolean; override;
 
         {TODO: methods should be implemented. }
 
         procedure ShowCurMinSync;
         procedure ShowProfileSync;
         procedure DoneProcSync;
-        procedure FindPeakBoundsDoneSync;
-        procedure FindBackPointsDoneSync;
-        procedure FindPeakPositionsDoneSync;
+        procedure ComputeCurveBoundsDoneSync;
+        procedure ComputeBackgroundPointsDoneSync;
+        procedure ComputeCurvePositionsDoneSync;
 
         constructor Create(AOwner: TComponent;
-            AEnableBackgroundVariation: Boolean;
-            ACurveScalingEnabled: Boolean); override;
+            AEnableBackgroundVariation: boolean;
+            ACurveScalingEnabled: boolean); override;
         destructor Destroy; override;
         { Sets up termination flags and waits for
           actual termination of the thread. }
@@ -62,41 +62,45 @@ type
         procedure StopAsyncOper; override;
 
         { Asynchronous long-term operations. }
-        
-        { Fits pattern specimens starting from given parameter set (initially or repeatedly). }
-        procedure FindGausses; override;
-        procedure FindGaussesAgain; override;
-        { Searches set of pattern specimens (curves) fitting exprerimental data with given accuracy
-          sequentially decreasing number of curves. }
-        procedure FindGaussesSequentially; override;
-        property DoneDisabled: Boolean read FDoneDisabled write FDoneDisabled;
+
+        { Fits curves starting from given parameter set (initially or repeatedly). }
+        procedure MinimizeDifference; override;
+        procedure MinimizeDifferenceAgain; override;
+        { Searches set of pattern curves fitting exprerimental data with given accuracy
+          sequentially decreasing number of such curves. }
+        procedure MinimizeNumberOfCurves; override;
+        property DoneDisabled: boolean read FDoneDisabled write FDoneDisabled;
     end;
 
 implementation
 
-uses app;
+uses
+    app;
 
 {$warnings off}
-procedure TFitTaskWithThread.RecreateMainCalcThread(
-    ATask: TThreadMethod; AAllDone: TThreadMethod);
+procedure TFitTaskWithThread.RecreateMainCalcThread(ATask: TThreadMethod;
+    AAllDone: TThreadMethod);
 begin
-    if Assigned(FMainCalcThread) then AbortAsyncOper;
+    if Assigned(FMainCalcThread) then
+        AbortAsyncOper;
 
-    FAllDone := False;
+    FAllDone     := False;
     DoneDisabled := False;
-    
+
     FMainCalcThread := TMainCalcThread.Create(True { CreateSuspended });
     if Assigned(FMainCalcThread.FatalException) then
-       raise FMainCalcThread.FatalException;
+        raise FMainCalcThread.FatalException;
 
     { Assignment of callbacks. }
     FMainCalcThread.SetSyncMethods(
         ATask, ShowCurMinSync, ShowProfileSync, DoneProcSync,
-        FindPeakBoundsDoneSync, FindBackPointsDoneSync, FindPeakPositionsDoneSync,
+        ComputeCurveBoundsDoneSync, ComputeBackgroundPointsDoneSync,
+        ComputeCurvePositionsDoneSync,
         AAllDone);
     { Start thread. }
     FMainCalcThread.Resume;
 end;
+
 {$warnings on}
 
 procedure TFitTaskWithThread.DestroyMainCalcThread;
@@ -110,21 +114,21 @@ begin
     end;
 end;
 
-procedure TFitTaskWithThread.FindGaussesSequentially;
+procedure TFitTaskWithThread.MinimizeNumberOfCurves;
 begin
-    RecreateMainCalcThread(FindGaussesSequentiallyAlg, Done);
+    RecreateMainCalcThread(MinimizeNumberOfCurvesAlg, Done);
 end;
 
-procedure TFitTaskWithThread.FindGaussesAgain;
+procedure TFitTaskWithThread.MinimizeDifferenceAgain;
 begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyani
     // povtornaya initsializatsiya gaussianov
-    RecreateCurveInstances(nil);
+    RecreateCurves(nil);
     CalculateProfile;
     RecreateMainCalcThread(Optimization, Done);
 end;
 
-procedure TFitTaskWithThread.FindGausses;
+procedure TFitTaskWithThread.MinimizeDifference;
 begin
     RecreateMainCalcThread(Optimization, Done);
 end;
@@ -139,7 +143,8 @@ end;
 procedure TFitTaskWithThread.StopAsyncOper;
 begin
     inherited;
-    if Assigned(FMainCalcThread) then FMainCalcThread.Terminate;
+    if Assigned(FMainCalcThread) then
+        FMainCalcThread.Terminate;
 end;
 
 procedure TFitTaskWithThread.Done;
@@ -152,41 +157,41 @@ begin
     FMainCalcThread.ShowCurMin;
 end;
 
-function TFitTaskWithThread.GetCurMin: Double;
+function TFitTaskWithThread.GetCurMin: double;
 begin
-    Result := CurMin;
+    Result := FCurMin;
 end;
 
-function TFitTaskWithThread.GetCurAbsMin: Double;
+function TFitTaskWithThread.GetCurAbsMin: double;
 begin
-    Result := CurAbsMin;
+    Result := FCurAbsMin;
 end;
 
-function TFitTaskWithThread.GetCurSqrMin: Double;
+function TFitTaskWithThread.GetCurSqrMin: double;
 begin
-    Result := CurSqrMin;
+    Result := FCurSqrMin;
 end;
 
-function TFitTaskWithThread.GetAllDone: Boolean;
+function TFitTaskWithThread.GetAllDone: boolean;
 begin
     Result := FAllDone;
 end;
 
-function TFitTaskWithThread.GetCurMinInitialized: Boolean;
+function TFitTaskWithThread.GetCurMinInitialized: boolean;
 begin
-    Result := CurMinInitialized;
+    Result := FCurMinInitialized;
 end;
 
 constructor TFitTaskWithThread.Create(AOwner: TComponent;
-    AEnableBackgroundVariation: Boolean;
-    ACurveScalingEnabled: Boolean);
+    AEnableBackgroundVariation: boolean; ACurveScalingEnabled: boolean);
 begin
     inherited;
 end;
 
 destructor TFitTaskWithThread.Destroy;
 begin
-    if Assigned(FMainCalcThread) then AbortAsyncOper;
+    if Assigned(FMainCalcThread) then
+        AbortAsyncOper;
     inherited;
 end;
 
@@ -203,25 +208,23 @@ end;
 procedure TFitTaskWithThread.DoneProcSync;
 begin
     FAllDone := True;
-    if not DoneDisabled then ServerDoneProc;
+    if not DoneDisabled then
+        ServerDoneProc;
 end;
 
-procedure TFitTaskWithThread.FindPeakBoundsDoneSync;
+procedure TFitTaskWithThread.ComputeCurveBoundsDoneSync;
 begin
 
 end;
 
-procedure TFitTaskWithThread.FindBackPointsDoneSync;
+procedure TFitTaskWithThread.ComputeBackgroundPointsDoneSync;
 begin
 
 end;
 
-procedure TFitTaskWithThread.FindPeakPositionsDoneSync;
+procedure TFitTaskWithThread.ComputeCurvePositionsDoneSync;
 begin
 
 end;
 
 end.
-
-
-

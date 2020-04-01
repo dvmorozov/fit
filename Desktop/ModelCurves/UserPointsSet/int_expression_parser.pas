@@ -18,22 +18,21 @@ unit int_expression_parser;
 {$ENDIF}
 
 interface
+
 {$IFDEF _WINDOWS}
 uses
     persistent_curve_parameters;
-{$ENDIF}
 
 type
     { Interface defining basic operation for parsing curve expression. }
     IExpressionParser = interface
         ['{b6b72f35-cf5d-43b0-9180-6370e420f026}']
-{$IFDEF _WINDOWS}
         function ParseExpression(Expression: string): Curve_parameters;
-{$ENDIF}
+
     end;
+
+{$ENDIF}
 
 implementation
 
 end.
-
-

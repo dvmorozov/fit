@@ -19,7 +19,8 @@ unit create_user_points_set_dlg_adapter;
 
 interface
 
-uses Classes, SysUtils, int_create_user_points_set_dlg;
+uses
+    Classes, int_create_user_points_set_dlg, SysUtils;
 
 type
 {$warnings off}
@@ -32,18 +33,21 @@ type
     public
         class function Create: ICreateUserPointsSetDlg;
 
-        function ShowModal: Integer;
+        function ShowModal: integer;
         function GetExpression: string;
         function GetName: string;
     end;
+
 {$warnings on}
 
 implementation
 
-uses create_user_points_set_dlg;
+uses
+    create_user_points_set_dlg;
 
 { Class members aren't supported by Lazarus 0.9.24, global variable are used instead. }
-var CreateUserPointsSetDlgAdapter: TCreateUserPointsSetDlgAdapter;
+var
+    CreateUserPointsSetDlgAdapter: TCreateUserPointsSetDlgAdapter;
 
 constructor TCreateUserPointsSetDlgAdapter.Init;
 begin
@@ -55,7 +59,7 @@ begin
     Result := CreateUserPointsSetDlgAdapter as ICreateUserPointsSetDlg;
 end;
 
-function TCreateUserPointsSetDlgAdapter.ShowModal: Integer;
+function TCreateUserPointsSetDlgAdapter.ShowModal: integer;
 begin
     CreateUserPointsSetDlg.ActiveControl := CreateUserPointsSetDlg.EditExpression;
     Result := CreateUserPointsSetDlg.ShowModal;
@@ -78,5 +82,3 @@ finalization
     CreateUserPointsSetDlgAdapter.Free;
 
 end.
-
-

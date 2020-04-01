@@ -19,30 +19,31 @@ unit fit_client_stub;
 
 interface
 
-uses int_client_callback;
-  
+uses
+    int_client_callback;
+
 type
     TFitClientStub = class(TInterfacedObject, IClientCallback)
     protected
         FFitClient: TObject;
 
     public
-        procedure ShowCurMin(Min: Double);
+        procedure ShowCurMin(Min: double);
         procedure ShowProfile;
         procedure Done;
-        procedure FindPeakBoundsDone;
-        procedure FindBackPointsDone;
-        procedure FindPeakPositionsDone;
+        procedure ComputeCurveBoundsDone;
+        procedure ComputeBackgroundPointsDone;
+        procedure ComputeCurvePositionsDone;
 
-        property FitClient: TObject
-            read FFitClient write FFitClient;
+        property FitClient: TObject read FFitClient write FFitClient;
     end;
 
 implementation
 
-uses fit_client;
+uses
+    fit_client;
 
-procedure TFitClientStub.ShowCurMin(Min: Double);
+procedure TFitClientStub.ShowCurMin(Min: double);
 begin
     Assert(Assigned(FitClient));
     TFitClient(FitClient).ShowCurMin(Min);
@@ -60,25 +61,22 @@ begin
     TFitClient(FitClient).Done;
 end;
 
-procedure TFitClientStub.FindPeakBoundsDone;
+procedure TFitClientStub.ComputeCurveBoundsDone;
 begin
     Assert(Assigned(FitClient));
-    TFitClient(FitClient).FindPeakBoundsDone;
+    TFitClient(FitClient).ComputeCurveBoundsDone;
 end;
 
-procedure TFitClientStub.FindBackPointsDone;
+procedure TFitClientStub.ComputeBackgroundPointsDone;
 begin
     Assert(Assigned(FitClient));
-    TFitClient(FitClient).FindBackPointsDone;
+    TFitClient(FitClient).ComputeBackgroundPointsDone;
 end;
 
-procedure TFitClientStub.FindPeakPositionsDone;
+procedure TFitClientStub.ComputeCurvePositionsDone;
 begin
     Assert(Assigned(FitClient));
-    TFitClient(FitClient).FindPeakPositionsDone;
+    TFitClient(FitClient).ComputeCurvePositionsDone;
 end;
 
 end.
-
-
-

@@ -16,12 +16,12 @@ const
     PairCount = 10; // 11; //  kol-vo elementov
     PairArray: array[1..PairCount] of TStringPair = (
         ('Title',
-            'Specimen parameters'
+            'Curve parameters'
             //'The page of input of specimen parameters'
             //'Корректировка значений параметров экземпляров паттерна'
         ),
-        ('CaptSpecimenParametersTable',
-            'Specimen parameters table'
+        ('CaptCurveParametersTable',
+            'Curve parameters table'
             //'Таблица параметров экземпляров паттерна'
         ),
         ('HintSelectedPattern',
@@ -29,7 +29,7 @@ const
             //'Здесь можно задать значения параметров экземпляров паттерна.'
         ),
         (* zameneno kartinkoy
-        ('CaptButUpdateSpecimen',
+        ('CaptButUpdateCurve',
             'Apply'
             //'Изменить'
         ),

@@ -19,8 +19,8 @@ unit input_wavelength_dialog;
 
 interface
 
-uses SysUtils, Forms, Controls, StdCtrls,
-    ExtCtrls, LResources
+uses
+    Controls, ExtCtrls, Forms, LResources, StdCtrls, SysUtils
 {$IFNDEF _WINDOWS}
     , Dialogs
 {$ENDIF}
@@ -28,62 +28,59 @@ uses SysUtils, Forms, Controls, StdCtrls,
 
 type
 
-  { TInputWavelengthDlg }
+    { TInputWavelengthDlg }
 
-  TInputWavelengthDlg = class(TForm)
-    OKBtn: TButton;
-    CancelBtn: TButton;
-    Bevel1: TBevel;
-    WavelengthValueEdit: TEdit;
-    Label1: TLabel;
-    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
-    procedure FormActivate(Sender: TObject);
-  private
+    TInputWavelengthDlg = class(TForm)
+        OKBtn:     TButton;
+        CancelBtn: TButton;
+        Bevel1:    TBevel;
+        WavelengthValueEdit: TEdit;
+        Label1:    TLabel;
+        procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
+        procedure FormActivate(Sender: TObject);
+    private
 
-  public
-    Value: Double;
-  end;
+    public
+        FValue: double;
+    end;
 
 var
-  InputWavelengthDlg: TInputWavelengthDlg;
+    InputWavelengthDlg: TInputWavelengthDlg;
 
 implementation
 
-uses input_max_rfactor_dialog;
+uses
+    set_maximum_rfactor_dialog;
 
-procedure TInputWavelengthDlg.FormCloseQuery(Sender: TObject;
-    var CanClose: Boolean
-    );
-const Msg: string = 'Improper wavelength input. Wavelength should not be zero.';
+procedure TInputWavelengthDlg.FormCloseQuery(Sender: TObject; var CanClose: boolean);
+const
+    Msg: string = 'Improper wavelength input. Wavelength should not be zero.';
 begin
     CanClose := True;
     if ModalResult = mrOk then
-    begin
         try
-            Value := StringToValue(WavelengthValueEdit.Text);
-            if Value = 0 then raise Exception.Create(' ');
+            FValue := StringToValue(WavelengthValueEdit.Text);
+            if FValue = 0 then
+                raise Exception.Create(' ');
         except
 {$IFDEF _WINDOWS}
             ShowBalloon(WavelengthValueEdit.Handle, WideString(Msg),
                 ''          //vmesto Error - tak luchshe smotritsya
                 );
 {$ELSE}
-            MessageDlg(Msg, mtError, [mbOk], 0);
+            MessageDlg(Msg, mtError, [mbOK], 0);
 {$ENDIF}
             ActiveControl := WavelengthValueEdit;
-            CanClose := False;
-        end;
-    end;{if ModalResult = mrOk then...}
+            CanClose      := False;
+        end;{if ModalResult = mrOk then...}
 end;
 
 procedure TInputWavelengthDlg.FormActivate(Sender: TObject);
 begin
-    WavelengthValueEdit.Text := FloatToStr(Value);
+    WavelengthValueEdit.Text := FloatToStr(FValue);
     ActiveControl := WavelengthValueEdit;
 end;
 
 initialization
     {$i input_wavelength_dialog.lrs}
 end.
-
-

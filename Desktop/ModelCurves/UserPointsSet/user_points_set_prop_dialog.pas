@@ -20,70 +20,71 @@ unit user_points_set_prop_dialog;
 interface
 
 uses
-    SysUtils, LResources, Forms, ExtCtrls, StdCtrls, CheckLst,
-    app_settings, special_curve_parameter
+    app_settings, CheckLst, ExtCtrls, Forms, LResources, special_curve_parameter,
+    StdCtrls, SysUtils
 {$IFNDEF _WINDOWS}
     , Dialogs
 {$ENDIF}
     ;
 
 type
+    { TUserPointsSetPropDlg }
 
-  { TUserPointsSetPropDlg }
+    TUserPointsSetPropDlg = class(TForm)
+        Bevel1:    TBevel;
+        BtnApply:  TButton;
+        BtnDone:   TButton;
+        BtnBacktrack: TButton;
+        CheckListFixed: TCheckListBox;
+        ComboArgument: TComboBox;
+        ComboPosition: TComboBox;
+        EditExpression: TEdit;
+        EditInitValue: TEdit;
+        Label1:    TLabel;
+        Label2:    TLabel;
+        Label3:    TLabel;
+        Label4:    TLabel;
+        BtnCancel: TButton;
+        Label5:    TLabel;
+        procedure BtnApplyClick(Sender: TObject);
+        procedure CheckListFixedClick(Sender: TObject);
+        procedure CheckListFixedClickCheck(Sender: TObject);
+        procedure ComboArgumentChange(Sender: TObject);
+        procedure ComboPositionChange(Sender: TObject);
+        procedure FormActivate(Sender: TObject);
 
-  TUserPointsSetPropDlg = class(TForm)
-    Bevel1: TBevel;
-    BtnApply: TButton;
-    BtnDone: TButton;
-    BtnBacktrack: TButton;
-    CheckListFixed: TCheckListBox;
-    ComboArgument: TComboBox;
-    ComboPosition: TComboBox;
-    EditExpression: TEdit;
-    EditInitValue: TEdit;
-    Label1: TLabel;
-    Label2: TLabel;
-    Label3: TLabel;
-    Label4: TLabel;
-    BtnCancel: TButton;
-    Label5: TLabel;
-    procedure BtnApplyClick(Sender: TObject);
-    procedure CheckListFixedClick(Sender: TObject);
-    procedure CheckListFixedClickCheck(Sender: TObject);
-    procedure ComboArgumentChange(Sender: TObject);
-    procedure ComboPositionChange(Sender: TObject);
-    procedure FormActivate(Sender: TObject);
-    
-  private
-    ClickCheck: Boolean;
+    private
+        FClickCheck: boolean;
 
-    procedure FillComboArgument;
-    procedure FillComboPosition;
-    procedure FillCheckListFixed;
-    procedure UpdateCheck;
-    
-  public
-    ct: Curve_type;     //  vneshnyaya ssylka
-  end; 
+        procedure FillComboArgument;
+        procedure FillComboPosition;
+        procedure FillCheckListFixed;
+        procedure UpdateCheck;
+
+    public
+        FCurveType: Curve_type;
+    end;
 
 var
-  UserPointsSetPropDlg: TUserPointsSetPropDlg;
+    UserPointsSetPropDlg: TUserPointsSetPropDlg;
 
 implementation
 
-uses input_max_rfactor_dialog;
+uses set_maximum_rfactor_dialog;
 
 { TUserPointsSetPropDlg }
 
 procedure TUserPointsSetPropDlg.ComboPositionChange(Sender: TObject);
-var Parameter: TSpecialCurveParameter;
-    i: LongInt;
+var
+    Parameter: TSpecialCurveParameter;
+    i: longint;
 begin
-    for i := 0 to ct.Parameters.Count - 1 do
+    for i := 0 to FCurveType.Parameters.Count - 1 do
     begin
-        Parameter := ct.Parameters[i];
+        Parameter := FCurveType.Parameters[i];
         if (Parameter.Type_ = InvariablePosition) or
-           (Parameter.Type_ = VariablePosition) then Parameter.Type_ := Variable;
+            (Parameter.Type_ = VariablePosition) then
+            Parameter.Type_ := Variable;
     end;
 
     Parameter := TSpecialCurveParameter(
@@ -94,58 +95,71 @@ begin
 end;
 
 procedure TUserPointsSetPropDlg.ComboArgumentChange(Sender: TObject);
-var Parameter: TSpecialCurveParameter;
-    i: LongInt;
+var
+    Parameter: TSpecialCurveParameter;
+    i: longint;
 begin
-    for i := 0 to ct.Params.Count - 1 do
+    for i := 0 to FCurveType.Params.Count - 1 do
     begin
-        Parameter := ct.Parameters[i];
-        if Parameter.Type_ = Argument then Parameter.Type_ := Variable;
+        Parameter := FCurveType.Parameters[i];
+        if Parameter.Type_ = Argument then
+            Parameter.Type_ := Variable;
     end;
-    
+
     Parameter := TSpecialCurveParameter(
         ComboArgument.Items.Objects[ComboArgument.ItemIndex]);
     Parameter.Type_ := Argument;
-    
+
     FillComboPosition;
     FillCheckListFixed;
 end;
 
 procedure TUserPointsSetPropDlg.UpdateCheck;
-var Parameter: TSpecialCurveParameter;
+var
+    Parameter: TSpecialCurveParameter;
 begin
     Parameter := TSpecialCurveParameter(
         CheckListFixed.Items.Objects[CheckListFixed.ItemIndex]);
     if CheckListFixed.Checked[CheckListFixed.ItemIndex] then
     begin
-        if Parameter.Type_ = VariablePosition then Parameter.Type_ := InvariablePosition
-        else Parameter.Type_ := Shared;
+        if Parameter.Type_ = VariablePosition then
+            Parameter.Type_ := InvariablePosition
+        else
+            Parameter.Type_ := Shared;
     end
     else
-    begin
-        if Parameter.Type_ = InvariablePosition then Parameter.Type_ := VariablePosition
-        else Parameter.Type_ := Variable;
-    end;
+    if Parameter.Type_ = InvariablePosition then
+        Parameter.Type_ := VariablePosition
+    else
+        Parameter.Type_ := Variable;
 end;
 
 procedure TUserPointsSetPropDlg.CheckListFixedClick(Sender: TObject);
-var Parameter: TSpecialCurveParameter;
+var
+    Parameter: TSpecialCurveParameter;
 begin
     Parameter := TSpecialCurveParameter(
         CheckListFixed.Items.Objects[CheckListFixed.ItemIndex]);
     EditInitValue.Text := FloatToStr(Parameter.Value);
 
-    if ClickCheck then begin UpdateCheck; ClickCheck := False; end;
+    if FClickCheck then
+    begin
+        UpdateCheck;
+        FClickCheck := False;
+    end;
 end;
 
 procedure TUserPointsSetPropDlg.CheckListFixedClickCheck(Sender: TObject);
 begin
-    if CheckListFixed.ItemIndex <> -1 then UpdateCheck
-    else ClickCheck := True;
+    if CheckListFixed.ItemIndex <> -1 then
+        UpdateCheck
+    else
+        FClickCheck := True;
 end;
 
 procedure TUserPointsSetPropDlg.BtnApplyClick(Sender: TObject);
-var Parameter: TSpecialCurveParameter;
+var
+    Parameter: TSpecialCurveParameter;
 begin
     if CheckListFixed.ItemIndex <> -1 then
     begin
@@ -160,7 +174,7 @@ begin
                 ''          //vmesto Error - tak luchshe smotritsya
                 );
 {$ELSE}
-            MessageDlg(string(ImproperRealValueInput), mtError, [mbOk], 0);
+            MessageDlg(string(ImproperRealValueInput), mtError, [mbOK], 0);
 {$ENDIF}
             ActiveControl := EditInitValue;
         end;
@@ -169,48 +183,53 @@ end;
 
 procedure TUserPointsSetPropDlg.FormActivate(Sender: TObject);
 begin
-    Assert(Assigned(ct));
-    EditExpression.Text := ct.Expression;
+    Assert(Assigned(FCurveType));
+    EditExpression.Text := FCurveType.Expression;
     FillComboArgument;
     FillComboPosition;
     FillCheckListFixed;
 end;
 
 procedure TUserPointsSetPropDlg.FillComboArgument;
-var i: LongInt;
+var
+    i: longint;
     Parameter: TSpecialCurveParameter;
     //  !!! nel'zya isp. indeks potomu, chto real'nyy indeks dannogo
     //  elementa menyaetsya v protsesse dobavleniya drugih elementov !!!
     ArgName: string;
 begin
     ComboArgument.Items.Clear;
-    for i := 0 to ct.Params.Count - 1 do
+    for i := 0 to FCurveType.Params.Count - 1 do
     begin
-        Parameter := ct.Parameters[i];
+        Parameter := FCurveType.Parameters[i];
         //  !!! svyazku po indeksu delat' nel'zya,
         //  poskol'ku spisok sortirovan !!!
         ComboArgument.Items.AddObject(Parameter.Name, Parameter);
-        if Parameter.Type_ = Argument then ArgName := Parameter.Name;
+        if Parameter.Type_ = Argument then
+            ArgName := Parameter.Name;
     end;
     ComboArgument.ItemIndex := ComboArgument.Items.IndexOf(ArgName);
 end;
 
 procedure TUserPointsSetPropDlg.FillComboPosition;
-var i: LongInt;
+var
+    i: longint;
     Parameter: TSpecialCurveParameter;
     PosName: string;
 begin
     ComboPosition.Items.Clear;
-    for i := 0 to ct.Params.Count - 1 do
+    for i := 0 to FCurveType.Params.Count - 1 do
     begin
-        Parameter := ct.Parameters[i];
+        Parameter := FCurveType.Parameters[i];
         if (Parameter.Type_ = Shared) or (Parameter.Type_ = Variable) or
-           (Parameter.Type_ = InvariablePosition) or (Parameter.Type_ = VariablePosition) then
+            (Parameter.Type_ = InvariablePosition) or
+            (Parameter.Type_ = VariablePosition) then
         begin
             ComboPosition.Items.AddObject(Parameter.Name, Parameter);
-            
+
             if (Parameter.Type_ = InvariablePosition) or
-               (Parameter.Type_ = VariablePosition) then PosName := Parameter.Name;
+                (Parameter.Type_ = VariablePosition) then
+                PosName := Parameter.Name;
         end;
     end;
     ComboPosition.ItemIndex := ComboPosition.Items.IndexOf(PosName);
@@ -218,19 +237,21 @@ end;
 
 //  vyvodit vse parametry, krome argumenta
 procedure TUserPointsSetPropDlg.FillCheckListFixed;
-var i, Index: LongInt;
+var
+    i, Index:  longint;
     Parameter: TSpecialCurveParameter;
 begin
     CheckListFixed.Items.Clear;
-    for i := 0 to ct.Params.Count - 1 do
+    for i := 0 to FCurveType.Params.Count - 1 do
     begin
-        Parameter := ct.Parameters[i];
+        Parameter := FCurveType.Parameters[i];
         if (Parameter.Type_ = Shared) or (Parameter.Type_ = Variable) or
-           (Parameter.Type_ = InvariablePosition) or (Parameter.Type_ = VariablePosition) then
+            (Parameter.Type_ = InvariablePosition) or
+            (Parameter.Type_ = VariablePosition) then
         begin
             Index := CheckListFixed.Items.Add(Parameter.Name);
             if (Parameter.Type_ = Shared) or (Parameter.Type_ = InvariablePosition) then
-                CheckListFixed.Checked[Index] := True;
+                CheckListFixed.Checked[Index]   := True;
             CheckListFixed.Items.Objects[Index] := Parameter;
         end;
     end;
@@ -239,6 +260,3 @@ end;
 initialization
   {$I user_points_set_prop_dialog.lrs}
 end.
-
-
-

@@ -19,58 +19,59 @@ unit points_set;
 
 interface
 
-uses Classes, SysUtils, SimpMath, self_copied_component;
+uses
+    Classes, self_copied_component, SimpMath, SysUtils;
 
 type
     { Generic point set. }
     TPointsSet = class(TSelfCopiedComponent)
     protected
         FPoints: TwoDimArray;
-        
-        function GetPointsCount: LongInt;
-        function GetPointXCoord(index: LongInt): Double; virtual;
-        procedure SetPointXCoord(index: LongInt; Value: Double); virtual;
-        function GetPointYCoord(index: LongInt): Double; virtual;
-        procedure SetPointYCoord(index: LongInt; Value: Double); virtual;
-        function GetMaxXCoord: Double;
-        function GetMaxYCoord: Double;
+
+        function GetPointsCount: longint;
+        function GetPointXCoord(index: longint): double; virtual;
+        procedure SetPointXCoord(index: longint; Value: double); virtual;
+        function GetPointYCoord(index: longint): double; virtual;
+        procedure SetPointYCoord(index: longint; Value: double); virtual;
+        function GetMaxXCoord: double;
+        function GetMaxYCoord: double;
 
     public
         procedure CopyParameters(const Dest: TObject); override;
-        
+
         constructor Create(AOwner: TComponent); override;
         destructor Destroy; override;
-        procedure AddNewPoint(XValue, YValue: Double);
-        procedure ReplacePoint(
-            PrevXValue, PrevYValue, NewXValue, NewYValue: Double);
-        procedure DeletePoint(XValue: Double);
+        procedure AddNewPoint(XValue, YValue: double);
+        procedure ReplacePoint(PrevXValue, PrevYValue, NewXValue,
+            NewYValue: double);
+        procedure DeletePoint(XValue: double);
         procedure Clear;
         procedure Sort; virtual;
         { Returns index of point with given X, -1 if point not found. }
-        function IndexOfValueX(XValue: Double): LongInt;
+        function IndexOfValueX(XValue: double): longint;
         { Returns index of point having X closest to the given value. }
-        function IndexOfNearestToX(XValue: Double): LongInt;
+        function IndexOfNearestToX(XValue: double): longint;
 
-        property PointsCount: LongInt read GetPointsCount;
+        property PointsCount: longint read GetPointsCount;
         property Points: TwoDimArray read FPoints;
-        property PointXCoord[index: LongInt]: Double
+        property PointXCoord[index: longint]: double
             read GetPointXCoord write SetPointXCoord;
-        property PointYCoord[index: LongInt]: Double
+        property PointYCoord[index: longint]: double
             read GetPointYCoord write SetPointYCoord;
-        property MaxXCoord: Double read GetMaxXCoord;
-        property MaxYCoord: Double read GetMaxYCoord;
+        property MaxXCoord: double read GetMaxXCoord;
+        property MaxYCoord: double read GetMaxYCoord;
     end;
 
 implementation
 
 {============================== TPointsSet =================================}
 
-function TPointsSet.GetPointsCount: LongInt;
+function TPointsSet.GetPointsCount: longint;
 begin
     Result := Length(FPoints);
 end;
 
-function TPointsSet.GetPointXCoord(index: LongInt): Double;
+function TPointsSet.GetPointXCoord(index: longint): double;
 begin
     Assert(Assigned(FPoints));
     Assert(index >= 0);
@@ -78,7 +79,7 @@ begin
     Result := FPoints[index][1];
 end;
 
-function TPointsSet.GetPointYCoord(index: LongInt): Double;
+function TPointsSet.GetPointYCoord(index: longint): double;
 begin
     Assert(Assigned(FPoints));
     Assert(index >= 0);
@@ -86,7 +87,7 @@ begin
     Result := FPoints[index][2];
 end;
 
-procedure TPointsSet.SetPointXCoord(index: LongInt; Value: Double);
+procedure TPointsSet.SetPointXCoord(index: longint; Value: double);
 begin
     Assert(Assigned(FPoints));
     Assert(index >= 0);
@@ -94,7 +95,7 @@ begin
     FPoints[index][1] := Value;
 end;
 
-procedure TPointsSet.SetPointYCoord(index: LongInt; Value: Double);
+procedure TPointsSet.SetPointYCoord(index: longint; Value: double);
 begin
     Assert(Assigned(FPoints));
     Assert(index >= 0);
@@ -102,28 +103,33 @@ begin
     FPoints[index][2] := Value;
 end;
 
-function TPointsSet.GetMaxXCoord: Double;
-var i: LongInt;
-    MaxX: Double;
+function TPointsSet.GetMaxXCoord: double;
+var
+    i:    longint;
+    MaxX: double;
 begin
     MaxX := PointXCoord[0];
     for i := 1 to PointsCount - 1 do
-        if PointXCoord[i] > MaxX then MaxX := PointXCoord[i];
+        if PointXCoord[i] > MaxX then
+            MaxX := PointXCoord[i];
     Result := MaxX;
 end;
 
-function TPointsSet.GetMaxYCoord: Double;
-var i: LongInt;
-    MaxY: Double;
+function TPointsSet.GetMaxYCoord: double;
+var
+    i:    longint;
+    MaxY: double;
 begin
     MaxY := PointYCoord[0];
     for i := 1 to PointsCount - 1 do
-        if PointYCoord[i] > MaxY then MaxY := PointYCoord[i];
+        if PointYCoord[i] > MaxY then
+            MaxY := PointYCoord[i];
     Result := MaxY;
 end;
 
 procedure TPointsSet.CopyParameters(const Dest: TObject);
-var i: LongInt;
+var
+    i: longint;
 begin
     inherited;
     TPointsSet(Dest).Clear;
@@ -131,22 +137,23 @@ begin
         TPointsSet(Dest).AddNewPoint(PointXCoord[i], PointYCoord[i]);
 end;
 
-procedure TPointsSet.AddNewPoint(XValue,YValue: Double);
+procedure TPointsSet.AddNewPoint(XValue, YValue: double);
 begin
     SetLength(FPoints, Length(FPoints) + 1);
     FPoints[PointsCount - 1][1] := XValue;
     FPoints[PointsCount - 1][2] := YValue;
 end;
 
-procedure TPointsSet.ReplacePoint(
-    PrevXValue, PrevYValue, NewXValue, NewYValue: Double);
-var i: LongInt;
+procedure TPointsSet.ReplacePoint(PrevXValue, PrevYValue, NewXValue,
+    NewYValue: double);
+var
+    i: longint;
 begin
     { Search the point with given argument and value in the selected list of points. }
     for i := 0 to PointsCount - 1 do
     begin
         if (Abs(PrevXValue - PointXCoord[i]) <= TINY) and
-           (Abs(PrevYValue - PointYCoord[i]) <= TINY) then
+            (Abs(PrevYValue - PointYCoord[i]) <= TINY) then
         begin
             PointXCoord[i] := NewXValue;
             PointYCoord[i] := NewYValue;
@@ -156,7 +163,6 @@ begin
         { The condition must be checked because as previous coordinates
           zeros can be passed what means that new point must be added. }
         if Abs(NewXValue - PointXCoord[i]) <= TINY then
-        begin
             if Abs(NewYValue - PointYCoord[i]) <= TINY then
                 { Ignores duplicates by argument and value. }
                 Exit
@@ -166,7 +172,6 @@ begin
                 PointYCoord[i] := NewYValue;
                 Exit;
             end;
-        end;
     end;
     { Point not found - add a new one. }
     AddNewPoint(NewXValue, NewYValue);
@@ -175,13 +180,14 @@ end;
 
 procedure TPointsSet.Clear;
 begin
-    FPoints := nil;
+    SetLength(FPoints, 0);
 end;
 
-procedure TPointsSet.DeletePoint(XValue: Double);
-var j, Index: LongInt;
+procedure TPointsSet.DeletePoint(XValue: double);
+var
+    j, Index:  longint;
     NewPoints: TwoDimArray;
-    Found: Boolean;
+    Found:     boolean;
 begin
     //  poisk tochki v nabore; otsutstvie ne schitat' oschibkoy
     SetLength(NewPoints, PointsCount - 1);
@@ -189,9 +195,8 @@ begin
     try
         Index := 0;
         for j := 0 to PointsCount - 1 do
-        begin
-            if (Abs(XValue - PointXCoord[j]) <= TINY) and
-                (not Found) then Found := True
+            if (Abs(XValue - PointXCoord[j]) <= TINY) and (not Found) then
+                Found := True
             else
             begin
                 Assert(Index < PointsCount - 1);
@@ -203,44 +208,47 @@ begin
                 //  pravil'no ustanovit' Found; Break privodit k
                 //  nevozmozhnosti udalit' poslednyuyu tochku...
             end;
-        end;
     except
         NewPoints := nil;
         raise;
     end;
     if Found then
     begin
-        FPoints := nil;
+        Clear;
         FPoints := NewPoints;
-    end else NewPoints := nil;
+    end
+    else
+        NewPoints := nil;
 end;
 
 procedure TPointsSet.Sort;
-var NewPoints: TwoDimArray;
-    i, j: LongInt;
-    MinValueX, MaxValueX: Double;
-    CurMaxValueX: Double;
-    index: LongInt;
+var
+    NewPoints: TwoDimArray;
+    i, j:      longint;
+    MinValueX, MaxValueX: double;
+    CurMaxValueX: double;
+    index:     longint;
 begin
-    if PointsCount = 0 then Exit;
+    if PointsCount = 0 then
+        Exit;
     SetLength(NewPoints, PointsCount);
     try
         //  poisk indeksa tochki s min. X
-        MinValueX := PointXCoord[0]; index := 0;
+        MinValueX := PointXCoord[0];
+        index     := 0;
         for j := 1 to PointsCount - 1 do
-        begin
             if PointXCoord[j] < MinValueX then
             begin
                 MinValueX := PointXCoord[j];
-                index := j;
+                index     := j;
             end;
-        end;
         NewPoints[0][1] := FPoints[index][1];
         NewPoints[0][2] := FPoints[index][2];
         //  poisk maksimal'nogo X
         MaxValueX := PointXCoord[0];
         for j := 1 to PointsCount - 1 do
-            if PointXCoord[j] > MaxValueX then MaxValueX := PointXCoord[j];
+            if PointXCoord[j] > MaxValueX then
+                MaxValueX := PointXCoord[j];
         //  tsikl po vse ostavshimsya tochkam novogo massiva
         for i := 1 to PointsCount - 1 do
         begin
@@ -248,16 +256,14 @@ begin
             index := -1;
             //  nahodim naimen'shuyu koord. X bol'shuyu zadannoy
             for j := 0 to PointsCount - 1 do
-            begin
                 if (PointXCoord[j] > MinValueX) and
-                   (PointXCoord[j] <= CurMaxValueX) then
+                    (PointXCoord[j] <= CurMaxValueX) then
                 begin
                     CurMaxValueX := PointXCoord[j];
                     index := j;
                 end;
-            end;
             Assert(index <> -1);    //  ne m.b. takogo, poskol'ku ne
-                                    //  d.b. tochek s odinakovym X
+            //  d.b. tochek s odinakovym X
             NewPoints[i][1] := FPoints[index][1];
             NewPoints[i][2] := FPoints[index][2];
             MinValueX := CurMaxValueX;
@@ -266,32 +272,34 @@ begin
         NewPoints := nil;
         raise;
     end;
-    
-    FPoints := nil;
+
+    Clear;
     FPoints := NewPoints;
 end;
 
-function TPointsSet.IndexOfValueX(XValue: Double): LongInt;
-var i: LongInt;
+function TPointsSet.IndexOfValueX(XValue: double): longint;
+var
+    i: longint;
 begin
     Result := -1;
     for i := 0 to PointsCount - 1 do
-    begin
         if (Abs(XValue - PointXCoord[i]) <= TINY) then
-        begin Result := i; Exit end;
-    end;
+        begin
+            Result := i;
+            Exit;
+        end;
 end;
 
-function TPointsSet.IndexOfNearestToX(XValue: Double): LongInt;
-var i: LongInt;
-    Min, Cur: Double;
+function TPointsSet.IndexOfNearestToX(XValue: double): longint;
+var
+    i: longint;
+    Min, Cur: double;
 begin
     Result := -1;
     for i := 0 to PointsCount - 1 do
-    begin
         if i = 0 then
         begin
-            Min := Abs(XValue - PointXCoord[i]);
+            Min    := Abs(XValue - PointXCoord[i]);
             Result := 0;
         end
         else
@@ -299,25 +307,22 @@ begin
             Cur := Abs(XValue - PointXCoord[i]);
             if Cur < Min then
             begin
-                Min := Cur;
+                Min    := Cur;
                 Result := i;
             end;
         end;
-    end;
 end;
 
 constructor TPointsSet.Create(AOwner: TComponent);
 begin
     inherited;
-    FPoints := nil;
+    Clear;
 end;
 
 destructor TPointsSet.Destroy;
 begin
-    FPoints := nil;
-    inherited Destroy;
+    Clear;
+    inherited;
 end;
 
 end.
-
-

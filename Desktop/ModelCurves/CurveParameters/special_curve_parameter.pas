@@ -8,7 +8,8 @@ unit special_curve_parameter;
 
 interface
 
-uses Classes, SysUtils, log;
+uses
+    Classes, log, SysUtils;
 
 type
     TParameterType = (
@@ -31,20 +32,20 @@ type
       depending on selected type. }
     TSpecialCurveParameter = class(TObject)
     protected
-        FName: string;
-        FValue: Double;
-        FType: TParameterType;
-        FVariationDisabled: Boolean;
-        FVariationStep: Double;
+        FName:  string;
+        FValue: double;
+        FType:  TParameterType;
+        FVariationDisabled: boolean;
+        FVariationStep: double;
 
-        FSavedValue: Double;
+        FSavedValue: double;
 
         { These methods are overriden in descendant classes
           to provide some special computation on parameter values. }
 
-        function GetValue: Double; virtual;
-        procedure SetValue(AValue: Double); virtual;
-        procedure WriteValueToLog(AValue: Double);
+        function GetValue: double; virtual;
+        procedure SetValue(AValue: double); virtual;
+        procedure WriteValueToLog(AValue: double);
 
     public
         constructor Create;
@@ -55,22 +56,22 @@ type
         function CreateCopy: TSpecialCurveParameter; virtual; abstract;
         procedure InitVariationStep; virtual; abstract;
         procedure InitValue; virtual; abstract;
-        function MinimumStepAchieved: Boolean; virtual; abstract;
+        function MinimumStepAchieved: boolean; virtual; abstract;
 
-        procedure MultiplyVariationStep(Factor: Double);
+        procedure MultiplyVariationStep(Factor: double);
 
-        property SavedValue: Double read FSavedValue write FSavedValue;
-        property Value: Double read GetValue write SetValue;
-        property VariationDisabled: Boolean
+        property SavedValue: double read FSavedValue write FSavedValue;
+        property Value: double read GetValue write SetValue;
+        property VariationDisabled: boolean
             read FVariationDisabled write FVariationDisabled;
-        property VariationStep: Double
-            read FVariationStep write FVariationStep;
+        property VariationStep: double read FVariationStep write FVariationStep;
 
         property Name: string read FName write FName;
         property Type_: TParameterType read FType write FType;
     end;
 
-var WriteParamsLog: Boolean = False;
+var
+    WriteParamsLog: boolean = False;
 
 implementation
 
@@ -84,7 +85,7 @@ end;
 
 procedure TSpecialCurveParameter.CopyTo(const Dest: TSpecialCurveParameter);
 begin
-    Dest.Name := Name;
+    Dest.Name  := Name;
     Dest.Value := Value;
     Dest.Type_ := Type_;
     Dest.SavedValue := SavedValue;
@@ -92,32 +93,31 @@ begin
     Dest.VariationStep := VariationStep;
 end;
 
-function TSpecialCurveParameter.GetValue: Double;
+function TSpecialCurveParameter.GetValue: double;
 begin
     Result := FValue;
 end;
 
-procedure TSpecialCurveParameter.SetValue(AValue: Double);
+procedure TSpecialCurveParameter.SetValue(AValue: double);
 begin
     FValue := AValue;
     WriteValueToLog(AValue);
 end;
 
-procedure TSpecialCurveParameter.WriteValueToLog(AValue: Double);
+procedure TSpecialCurveParameter.WriteValueToLog(AValue: double);
 var
     LogStr: string;
 begin
     if WriteParamsLog then
     begin
         LogStr :=
-            'Set value: Name = ' + FName +
-            ', Original value = ' + FloatToStr(AValue) +
-            ', Assigned value = ' + FloatToStr(FValue);
+            'Set value: Name = ' + FName + ', Original value = ' +
+            FloatToStr(AValue) + ', Assigned value = ' + FloatToStr(FValue);
         WriteLog(LogStr, Notification);
     end;
 end;
 
-procedure TSpecialCurveParameter.MultiplyVariationStep(Factor: Double);
+procedure TSpecialCurveParameter.MultiplyVariationStep(Factor: double);
 begin
     FVariationStep := FVariationStep * Factor;
 end;

@@ -19,7 +19,8 @@ unit int_curve_type_iterator;
 
 interface
 
-uses named_points_set;
+uses
+    named_points_set;
 
 type
     { Interface defining basic operation for iterating through curve types. }
@@ -27,14 +28,12 @@ type
         ['{3bab40fc-38da-4078-bb4d-dccd8be09b01}']
         procedure FirstCurveType;
         procedure NextCurveType;
-        function EndCurveType: Boolean;
+        function EndCurveType: boolean;
         function GetCurveTypeName: string;
         function GetCurveTypeId: TCurveTypeId;
-        function GetCurveTypeTag(CurveTypeId: TCurveTypeId): Integer;
+        function GetCurveTypeTag(CurveTypeId: TCurveTypeId): integer;
     end;
 
 implementation
 
 end.
-
-

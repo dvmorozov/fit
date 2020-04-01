@@ -1213,8 +1213,8 @@ var
     R:      TResult;
 begin
     Assert(Assigned(FitStub));
-    R := FitStub.ReplacePointInCurveBounds(PrevXValue,
-        PrevYValue, NewXValue, NewYValue, FProblemId);
+    R := FitStub.ReplacePointInCurveBounds(PrevXValue, PrevYValue,
+        NewXValue, NewYValue, FProblemId);
     if not Assigned(R) then
         raise Exception.Create(OutOfServerResources);
     Res    := R.ErrCode;
@@ -1234,8 +1234,8 @@ var
     R:      TResult;
 begin
     Assert(Assigned(FitStub));
-    R := FitStub.ReplacePointInCurvePositions(PrevXValue,
-        PrevYValue, NewXValue, NewYValue, FProblemId);
+    R := FitStub.ReplacePointInCurvePositions(PrevXValue, PrevYValue,
+        NewXValue, NewYValue, FProblemId);
     if not Assigned(R) then
         raise Exception.Create(OutOfServerResources);
     Res    := R.ErrCode;

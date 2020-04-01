@@ -25,8 +25,7 @@ type
             const ProblemID: integer): TResult;
         function DoAllAutomatically(const ProblemID: integer): TResult;
         function MinimizeDifference(const ProblemID: integer): TResult;
-        function MinimizeNumberOfCurves(
-            const ProblemID: integer): TResult;
+        function MinimizeNumberOfCurves(const ProblemID: integer): TResult;
         function ComputeCurveBounds(const ProblemID: integer): TResult;
         function ComputeCurvePositions(const ProblemID: integer): TResult;
         function ComputeBackgroundPoints(const ProblemID: integer): TResult;
@@ -56,10 +55,8 @@ type
         function GetProfilePointsSet(const ProblemID: integer): TPointsResult;
         function GetSelectedArea(const ProblemID: integer): TPointsResult;
         function GetBackgroundPoints(const ProblemID: integer): TPointsResult;
-        function GetCurvePositions(
-            const ProblemID: integer): TPointsResult;
-        function GetCurveBounds(
-            const ProblemID: integer): TPointsResult;
+        function GetCurvePositions(const ProblemID: integer): TPointsResult;
+        function GetCurveBounds(const ProblemID: integer): TPointsResult;
         function GetCalcProfilePointsSet(
             const ProblemID: integer): TPointsResult;
         function GetDeltaProfilePointsSet(const ProblemID: integer):
@@ -237,8 +234,7 @@ begin
     end;
 end;
 
-function TFitServer_Proxy.MinimizeNumberOfCurves(
-    const ProblemID: integer): TResult;
+function TFitServer_Proxy.MinimizeNumberOfCurves(const ProblemID: integer): TResult;
 var
     locSerializer: IFormatterClient;
     strPrmName:    string;
@@ -317,7 +313,8 @@ var
 begin
     locSerializer := GetSerializer();
     try
-        locSerializer.BeginCall('ComputeBackgroundPoints', GetTarget(), (Self as ICallContext));
+        locSerializer.BeginCall('ComputeBackgroundPoints', GetTarget(),
+            (Self as ICallContext));
         locSerializer.Put('ProblemID', TypeInfo(integer), ProblemID);
         locSerializer.EndCall();
 

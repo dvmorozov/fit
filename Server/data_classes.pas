@@ -325,8 +325,7 @@ begin
         end;
 end;
 
-procedure TCurveList.StringToValue(const ACol, ARow: integer;
-    const AString: string);
+procedure TCurveList.StringToValue(const ACol, ARow: integer; const AString: string);
 var
     CurveParameters: Curve_parameters;
 begin

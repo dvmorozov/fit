@@ -4207,7 +4207,7 @@ begin
                     end;
                     Insert(TmplTemp, Page, TmplHeaderBegin);
                     TmplCurveBegin := TmplCurveBegin + Length(TmplTemp);
-                    ParamCount := CP.Params.Count + 1;  //  dobavlyaetsya pole nomera
+                    ParamCount     := CP.Params.Count + 1;  //  dobavlyaetsya pole nomera
                 end;
                 FillHeaders := False;
             end;

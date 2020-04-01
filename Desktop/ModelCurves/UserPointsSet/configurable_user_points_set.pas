@@ -48,7 +48,8 @@ uses
 {$IF NOT DEFINED(SERVER) AND NOT DEFINED(CLIENT_PROXY)}
 {$IFDEF _WINDOWS}
     app_settings, create_user_points_set_dlg_adapter, curve_type_parameters_factory,
-    curve_type_storage_adapter, expression_parser_adapter, int_create_user_points_set_dlg,
+    curve_type_storage_adapter, expression_parser_adapter,
+    int_create_user_points_set_dlg,
     int_curve_type_parameters_factory, int_curve_type_storage, int_expression_parser,
     user_points_set_prop_dialog,
 {$ENDIF}
@@ -116,6 +117,7 @@ begin
     Result := False;
 {$ENDIF}
 end;
+
 {$ENDIF}
 
 class function TConfigurableUserPointsSet.HasDefaults: boolean;

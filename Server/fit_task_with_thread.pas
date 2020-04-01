@@ -94,7 +94,8 @@ begin
     { Assignment of callbacks. }
     FMainCalcThread.SetSyncMethods(
         ATask, ShowCurMinSync, ShowProfileSync, DoneProcSync,
-        ComputeCurveBoundsDoneSync, ComputeBackgroundPointsDoneSync, ComputeCurvePositionsDoneSync,
+        ComputeCurveBoundsDoneSync, ComputeBackgroundPointsDoneSync,
+        ComputeCurvePositionsDoneSync,
         AAllDone);
     { Start thread. }
     FMainCalcThread.Resume;

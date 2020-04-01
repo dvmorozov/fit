@@ -11,28 +11,28 @@ function ReplaceStrings_background(Text: string): string;
 
 implementation
 
-uses data, app;
+uses Data, app;
 
 const
     PairCount = 11; // 13;  //  kol-vo elementov
     PairArray: array[1..PairCount] of TStringPair = (
         ('Title',
-            'Background'      // 'The page of background points input'
-            //  'Страница ввода точек фона'
+        'Background'      // 'The page of background points input'
+        //  'Страница ввода точек фона'
         ),
         ('CaptBackground',
-            'Automatic selection of background points'
-            //  'Автоматическая генерация'
+        'Automatic selection of background points'
+        //  'Автоматическая генерация'
         ),
         ('HintBackground',
-'Automatic selection of background points is possible for the time present ' +
-'only if the background looks like smooth concave curve.'
-//'Автоматическая генерация точек возможна только если фон напоминает гладкую ' +
-//'вогнутую вниз кривую.'
+        'Automatic selection of background points is possible for the time present ' +
+        'only if the background looks like smooth concave curve.'
+        //'Автоматическая генерация точек возможна только если фон напоминает гладкую ' +
+        //'вогнутую вниз кривую.'
         ),
         ('CaptButMore',
-            'More'
-            //  'Дополнительно'
+        'More'
+        //  'Дополнительно'
         ),
         (* zameneno kartinkoy
         ('CaptButGenerate',
@@ -41,19 +41,19 @@ const
         ),
         *)
         ('CaptPointSelection',
-            'Background points'
-            //  'Выбор точек фона'
+        'Background points'
+        //  'Выбор точек фона'
         ),
         ('CaptArgument',
-            'Argument'
-            //  'Аргумент'
+        'Argument'
+        //  'Аргумент'
         ),
         ('CaptValue',
-            'Value'
-            //  'Значение'
+        'Value'
+        //  'Значение'
         ),
         ('CaptBackPoint',
-            ' ' //'Is b. p.?'
+        ' ' //'Is b. p.?'
             //  'Точка фона?'
         ),
         //('CaptButBackPoint', 'Точка фона'),
@@ -65,35 +65,39 @@ const
         ),
         *)
         ('CaptButSkip',
-            'Skip background'
-            //  'Пропустить удаление фона'
+        'Skip background'
+        //  'Пропустить удаление фона'
         ),
         ('CaptButDelBackground',
-            'Remove background'
-            //  'Удалить фон и перейти к созданию модели'
+        'Remove background'
+        //  'Удалить фон и перейти к созданию модели'
         ),
         ('HintValues',
-'To select the point as background point type its argument in the input field.' +
-'Then press the button. To unselect press the button again.'
-//'Для выбора точки в качестве точки фона введите ее аргумент в соответствующее поле. ' +
-//'Нажмите кнопку. Для отмены выбора нажмите кнопку еще раз.'
+        'To select the point as background point type its argument in the input field.'
+        +
+        'Then press the button. To unselect press the button again.'
+        //'Для выбора точки в качестве точки фона введите ее аргумент в соответствующее поле. ' +
+        //'Нажмите кнопку. Для отмены выбора нажмите кнопку еще раз.'
         )
         );
 
 function ReplaceStrings_background(Text: string): string;
-var Pair: array[1..1] of TStringPair;
+var
+    Pair: array[1..1] of TStringPair;
 begin
-    Result := ReplaceStrings(Text, PairArray, PairCount);
-    Result := ReplaceStrings(Result, CommonPairArray, CommonPairCount);
-    Pair[1][1] := 'ServerName'; Pair[1][2] := ExternalIP;
-    Result := ReplaceStrings(Result, Pair, 1);
+    Result     := ReplaceStrings(Text, PairArray, PairCount);
+    Result     := ReplaceStrings(Result, CommonPairArray, CommonPairCount);
+    Pair[1][1] := 'ServerName';
+    Pair[1][2] := ExternalIP;
+    Result     := ReplaceStrings(Result, Pair, 1);
 end;
 
 function PrepareTemplate_background: string;
-var Page: TStringList;
+var
+    Page: TStringList;
 begin
     Result := '';
-    Page := TStringList.Create;
+    Page   := TStringList.Create;
     try
         Page.LoadFromFile('background.htm');
         Result := ReplaceStrings_background(Page.Text);
@@ -103,4 +107,3 @@ begin
 end;
 
 end.
-

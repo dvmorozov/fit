@@ -35,8 +35,8 @@ type
     { Modes of selectiion of active point set. }
     TSelMode    =
         (ModeSelectNothing, ModeSelectIntervalBounds, ModeSelectCharacteristicPoints,
-         ModeSelectCurveBounds, ModeSelectBackground, ModeSelectCurvePositions,
-         ModeSelectRFactorBounds);
+        ModeSelectCurveBounds, ModeSelectBackground, ModeSelectCurvePositions,
+        ModeSelectRFactorBounds);
     { Results of data file opening. }
     TOpenState  = (OpenSuccess, OpenFailure);
     { States of processing long operations. }
@@ -52,8 +52,7 @@ type
     { Handler to fill data table. }
     TFillDatasheetTable = procedure(Profile: TTitlePointsSet;
         CurvesList: TSelfCopiedCompList; GaussProfile: TTitlePointsSet;
-        DeltaProfile: TTitlePointsSet; RFactorBounds: TTitlePointsSet) of
-        object;
+        DeltaProfile: TTitlePointsSet; RFactorBounds: TTitlePointsSet) of object;
     { Handler drawing points selected by user. }
     TPlotSelectedPoints = procedure(Sender: TObject;
         SelectedPoints: TTitlePointsSet) of object;
@@ -117,13 +116,13 @@ type
         FBackgroundPoints: TTitlePointsSet;
         { List of point pairs which limit interval of R-factor calculation. 
           Always must be displayed in order to show user in which mode R-factor is calculated. }
-        FRFactorBounds: TTitlePointsSet;
+        FRFactorBounds:  TTitlePointsSet;
         { Positions of curves. Only X-coordinates are used. }
         FCurvePositions: TTitlePointsSet;
         { Containers of calculated curves. Each object contains data of specimen curve. }
         FCurvesList:     TSelfCopiedCompList;
         { Containers of parameters of curves. }
-        FCurveList:   TMSCRCurveList;
+        FCurveList:      TMSCRCurveList;
         { TODO: remove this attribute. }
         FWaveLength:     double;
         procedure SetCurvesListLambda;
@@ -371,6 +370,7 @@ implementation
 {$IFDEF FIT}
 uses
     app;
+
 {$ENDIF}
 
 {================================ TFitClient ==================================}
@@ -1147,10 +1147,10 @@ begin
 
         ModeSelectIntervalBounds: Result := FSelectedPoints;
         ModeSelectCharacteristicPoints: Result := FSelectedPoints;
-        ModeSelectCurveBounds: Result := FSelectedPoints;
-        ModeSelectBackground: Result := FBackgroundPoints;
-        ModeSelectCurvePositions: Result    := FCurvePositions;
-        ModeSelectRFactorBounds: Result := FRFactorBounds;
+        ModeSelectCurveBounds: Result    := FSelectedPoints;
+        ModeSelectBackground: Result     := FBackgroundPoints;
+        ModeSelectCurvePositions: Result := FCurvePositions;
+        ModeSelectRFactorBounds: Result  := FRFactorBounds;
     end;
 end;
 

@@ -66,7 +66,7 @@ type
         { Contains positions of curves. Only X-coordinates are used. }
         FCurvePositions: TPointsSet;
         { Set of curves used to model experimental data inside given interval. }
-        FCurves:  TSelfCopiedCompList;
+        FCurves:      TSelfCopiedCompList;
         { The flag switches on using intervals in calculating R-factors.
           Using ranges is switched off when they are not given to accelerate computation. }
         FUseCurveRanges: boolean;
@@ -889,7 +889,7 @@ begin
     FMinimizer.OnEndOfCycle := EndOfCycle;
     FMinimizer.OnShowCurMin := ShowCurMin;
 
-    TSimpleMinimizer3(FMinimizer).FEndOfCalculation := EndOfCalculation;
+    TSimpleMinimizer3(FMinimizer).FEndOfCalculation      := EndOfCalculation;
     TSimpleMinimizer3(FMinimizer).FMultiplyVariationStep := MultiplyVariationStep;
 
     InitializeVariationSteps;

@@ -101,7 +101,8 @@ begin
     { Assigns callbacks. }
     FMainCalcThread.SetSyncMethods(
         ATask, ShowCurMinSync, ShowProfileSync, DoneSync,
-        ComputeCurveBoundsDoneSync, ComputeBackgroundPointsDoneSync, ComputeCurvePositionsDoneSync,
+        ComputeCurveBoundsDoneSync, ComputeBackgroundPointsDoneSync,
+        ComputeCurvePositionsDoneSync,
         AAllDone);
     { Sets appropriate state befor starting thread. }
     SetState(AsyncOperation);

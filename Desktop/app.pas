@@ -32,10 +32,10 @@ uses
     {$ENDIF}
 {$ELSE}
     {$IFDEF FITPRO}
-        , int_fit_service
+    , int_fit_service
     {$ENDIF}
     {$IFDEF FITCGI}
-        , int_fit_service
+    , int_fit_service
     {$ENDIF}
 {$ENDIF}
     ;
@@ -168,7 +168,7 @@ finalization
 
 {$IFDEF FITSERVER}
     {$IFDEF FIT}
-        FitServerApp_.Free;
+    FitServerApp_.Free;
     {$ENDIF}
 {$ENDIF}
 

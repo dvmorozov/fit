@@ -30,6 +30,7 @@ type
         function ParseExpression(Expression: string): Curve_parameters;
 
     end;
+
 {$ENDIF}
 
 implementation

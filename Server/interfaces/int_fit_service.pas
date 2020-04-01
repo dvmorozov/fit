@@ -24,8 +24,7 @@ uses
     self_copied_component, SysUtils, title_points_set
 {$IFDEF _WINDOWS}
     , persistent_curve_parameters
-{$ENDIF}
-    ;
+{$ENDIF}    ;
 
 type
     { Server states. Sequence of states is designated by numbers. }

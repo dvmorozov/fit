@@ -97,17 +97,17 @@ type
         procedure SetState(AState: TFitServerState); virtual;
 
     protected
-        FBackFactor:   double;
+        FBackFactor:    double;
         { Data of full experimental profile. }
-        FExpProfile:   TTitlePointsSet;
+        FExpProfile:    TTitlePointsSet;
         { The curve obtained by the sum of all curves of adjustable intervals
           to calculate the total R-factor along the entire profile. }
-        FCalcProfile:  TTitlePointsSet;
+        FCalcProfile:   TTitlePointsSet;
         { The curve obtained by calculating difference
           between experimental and calculated profiles. }
-        FDeltaProfile: TTitlePointsSet;
+        FDeltaProfile:  TTitlePointsSet;
         { Part of the whole profile with which user works at the given moment. }
-        FSelectedArea: TTitlePointsSet;
+        FSelectedArea:  TTitlePointsSet;
         { List of background points used in transition between manual and
           automatic modes of selection. }
         FBackgroundPoints: TTitlePointsSet;
@@ -123,7 +123,7 @@ type
         FCurvePositions: TTitlePointsSet;
         { Containers of parameters of curves.
           TODO: change type and remove SetWaveLength. }
-        FCurveList:   TMSCRCurveList;
+        FCurveList:      TMSCRCurveList;
 
         { Dependent on this flag either data of the selected interval are used
           or data of the whole profile. }
@@ -213,8 +213,8 @@ type
 
         procedure SmoothProfileActual(ANeutronPointsSet: TPointsSet);
         { Linearly subtracts background at the given interval of points. }
-        procedure SubtractBackgroundLinearly(
-            Data: TPointsSet; StartIndex: longint; EndIndex: longint);
+        procedure SubtractBackgroundLinearly(Data: TPointsSet;
+            StartIndex: longint; EndIndex: longint);
 
         { Integrates specimen curve and adds resulting value to the list of results. }
         procedure AddCurveToList(Points: TCurvePointsSet;
@@ -697,10 +697,10 @@ begin
     // v spets. rezhim
     FExpProfile     := TTitlePointsSet.Create(nil);
     FBackgroundPoints := TTitlePointsSet.Create(nil);
-    FRFactorBounds := TTitlePointsSet.Create(nil);
+    FRFactorBounds  := TTitlePointsSet.Create(nil);
     // elementy v eti spiski d. dobavlyat'sya sinhronno
     FCurvePositions := TTitlePointsSet.Create(nil);
-    FCurveList   := TMSCRCurveList.Create(nil);
+    FCurveList      := TMSCRCurveList.Create(nil);
     FCurveList.Lambda := WaveLength;
     FCurvesList     := TSelfCopiedCompList.Create(nil);
 
@@ -1385,7 +1385,8 @@ begin
             DataMustBeSet);
 
     FStartTime := Now;
-    RecreateMainCalcThread(ComputeBackgroundPointsAlg, ComputeBackgroundPointsDoneProcActual);
+    RecreateMainCalcThread(ComputeBackgroundPointsAlg,
+        ComputeBackgroundPointsDoneProcActual);
 end;
 
 procedure TFitServer.ComputeBackgroundPointsDoneProcActual;
@@ -1600,8 +1601,8 @@ begin
     Result := CurveParameters.Params.Count;
 end;
 
-procedure TFitServer.GetCurveParameter(SpecIndex: longint;
-    ParamIndex: longint; var Name: string; var Value: double; var Type_: longint);
+procedure TFitServer.GetCurveParameter(SpecIndex: longint; ParamIndex: longint;
+    var Name: string; var Value: double; var Type_: longint);
 var
     SpecParamList: TMSCRCurveList;
     CurveParameters: Curve_parameters;
@@ -1623,8 +1624,8 @@ begin
     Type_     := longint(Parameter.Type_);
 end;
 
-procedure TFitServer.SetCurveParameter(SpecIndex: longint;
-    ParamIndex: longint; Value: double);
+procedure TFitServer.SetCurveParameter(SpecIndex: longint; ParamIndex: longint;
+    Value: double);
 var
     SpecParamList: TMSCRCurveList;
     CurveParameters: Curve_parameters;
@@ -1650,8 +1651,8 @@ begin
     GoToReadyForFit;
 end;
 
-procedure TFitServer.SubtractBackgroundLinearly(
-    Data: TPointsSet; StartIndex: longint; EndIndex: longint);
+procedure TFitServer.SubtractBackgroundLinearly(Data: TPointsSet;
+    StartIndex: longint; EndIndex: longint);
 var
     i:     longint;
     Delta: double;
@@ -3009,8 +3010,7 @@ begin
        // sochetaniyu sootvetstvuet gotovnost'
        // k podgonke s parametrami pol'zovatelya
 
-    (FRFactorBounds.PointsCount <> 0) and
-        (FCurvePositions.PointsCount <> 0) then
+    (FRFactorBounds.PointsCount <> 0) and (FCurvePositions.PointsCount <> 0) then
     begin
         // trebuetsya peresozdanie podzadach i ekzemplyarov patterna,
         // potomu chto menyayutsya granitsy

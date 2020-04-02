@@ -21,8 +21,8 @@
       <AutoIncrementBuild Value="True"/>
       <MajorVersionNr Value="1"/>
       <MinorVersionNr Value="1"/>
-      <RevisionNr Value="21"/>
-      <BuildNr Value="1485"/>
+      <RevisionNr Value="22"/>
+      <BuildNr Value="1490"/>
       <Attributes pvaDebug="True"/>
       <StringTable FileDescription="Desktop application." LegalCopyright="Dmitry Morozov" OriginalFilename="Fit" ProductName="Fit" ProductVersion="1.1.1"/>
     </VersionInfo>
@@ -735,11 +735,11 @@
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit54>
       <Unit55>
-        <Filename Value="..\Server\fit_server.pas"/>
+        <Filename Value="..\Server\fit_service.pas"/>
         <IsPartOfProject Value="True"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="190"/>
-        <CursorPos X="55" Y="202"/>
+        <TopLine Value="28"/>
+        <CursorPos X="42" Y="29"/>
         <UsageCount Value="207"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -770,29 +770,29 @@
         <WindowIndex Value="1"/>
         <TopLine Value="97"/>
         <CursorPos X="5" Y="112"/>
-        <UsageCount Value="132"/>
+        <UsageCount Value="134"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit58>
       <Unit59>
-        <Filename Value="..\Server\fit_server_with_thread.pas"/>
+        <Filename Value="..\Server\fit_service_with_thread.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="42"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="54"/>
-        <CursorPos X="19" Y="49"/>
+        <TopLine Value="8"/>
+        <CursorPos X="18" Y="14"/>
         <UsageCount Value="204"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit59>
       <Unit60>
-        <Filename Value="..\Server\fit_server_multithreaded.pas"/>
+        <Filename Value="..\Server\fit_service_multithreaded.pas"/>
         <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="19"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="88"/>
-        <CursorPos X="30" Y="115"/>
-        <UsageCount Value="132"/>
+        <CursorPos X="31" Y="13"/>
+        <UsageCount Value="134"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit60>
@@ -836,7 +836,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="331"/>
         <CursorPos X="67" Y="344"/>
-        <UsageCount Value="136"/>
+        <UsageCount Value="138"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit64>
@@ -847,7 +847,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="84"/>
         <CursorPos Y="99"/>
-        <UsageCount Value="60"/>
+        <UsageCount Value="62"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit65>
       <Unit66>
@@ -857,7 +857,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="14"/>
         <CursorPos X="5" Y="28"/>
-        <UsageCount Value="61"/>
+        <UsageCount Value="63"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit66>
       <Unit67>
@@ -888,7 +888,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="37"/>
         <CursorPos X="29" Y="138"/>
-        <UsageCount Value="132"/>
+        <UsageCount Value="134"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit69>
@@ -963,7 +963,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="66"/>
         <CursorPos Y="98"/>
-        <UsageCount Value="135"/>
+        <UsageCount Value="137"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit76>
@@ -1047,7 +1047,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="227"/>
         <CursorPos X="21" Y="244"/>
-        <UsageCount Value="150"/>
+        <UsageCount Value="152"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit84>
@@ -1068,7 +1068,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="6"/>
         <CursorPos X="33" Y="19"/>
-        <UsageCount Value="143"/>
+        <UsageCount Value="145"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit86>
@@ -1131,7 +1131,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="475"/>
         <CursorPos Y="489"/>
-        <UsageCount Value="96"/>
+        <UsageCount Value="97"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit93>
@@ -1141,7 +1141,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="2"/>
         <CursorPos X="74" Y="15"/>
-        <UsageCount Value="92"/>
+        <UsageCount Value="93"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit94>
@@ -1151,7 +1151,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="41"/>
         <CursorPos X="39" Y="68"/>
-        <UsageCount Value="92"/>
+        <UsageCount Value="93"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit95>
@@ -1161,13 +1161,12 @@
         <WindowIndex Value="1"/>
         <TopLine Value="53"/>
         <CursorPos X="33" Y="61"/>
-        <UsageCount Value="92"/>
+        <UsageCount Value="93"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit96>
       <Unit97>
         <Filename Value="..\Server\fit_server_imp.pas"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <WindowIndex Value="1"/>
         <TopLine Value="2847"/>
@@ -1182,7 +1181,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="2631"/>
         <CursorPos X="49" Y="2645"/>
-        <UsageCount Value="65"/>
+        <UsageCount Value="66"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit98>
@@ -1193,7 +1192,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="88"/>
         <CursorPos X="29" Y="115"/>
-        <UsageCount Value="48"/>
+        <UsageCount Value="49"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit99>
@@ -1203,7 +1202,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="79"/>
         <CursorPos X="22" Y="95"/>
-        <UsageCount Value="48"/>
+        <UsageCount Value="49"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit100>
@@ -1214,7 +1213,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="52"/>
+        <UsageCount Value="54"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit101>
       <Unit102>
@@ -1224,7 +1223,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="52"/>
+        <UsageCount Value="54"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit102>
       <Unit103>
@@ -1234,7 +1233,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="52"/>
+        <UsageCount Value="54"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit103>
       <Unit104>
@@ -1244,7 +1243,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="52"/>
+        <UsageCount Value="54"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit104>
       <Unit105>
@@ -1254,7 +1253,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="52"/>
+        <UsageCount Value="54"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit105>
       <Unit106>
@@ -1264,7 +1263,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="52"/>
+        <UsageCount Value="54"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit106>
       <Unit107>
@@ -1274,7 +1273,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="52"/>
+        <UsageCount Value="54"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit107>
       <Unit108>
@@ -1284,7 +1283,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="52"/>
+        <UsageCount Value="54"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit108>
       <Unit109>
@@ -1303,127 +1302,119 @@
       <Define2 Value="FITSERVER"/>
       <Define3 Value="Lazarus"/>
     </OtherDefines>
-    <JumpHistory Count="30" HistoryIndex="29">
+    <JumpHistory Count="28" HistoryIndex="27">
       <Position1>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="1068" Column="5" TopLine="1066"/>
+        <Caret Line="1087" Column="5" TopLine="1085"/>
       </Position1>
       <Position2>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="1073" Column="5" TopLine="1066"/>
+        <Caret Line="831" Column="48" TopLine="829"/>
       </Position2>
       <Position3>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="1087" Column="5" TopLine="1085"/>
+        <Caret Line="1063" Column="35" TopLine="1061"/>
       </Position3>
       <Position4>
-        <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="831" Column="48" TopLine="829"/>
-      </Position4>
-      <Position5>
-        <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="1063" Column="35" TopLine="1061"/>
-      </Position5>
-      <Position6>
         <Filename Value="fit_client.pas"/>
         <Caret Line="307" Column="32" TopLine="295"/>
-      </Position6>
-      <Position7>
+      </Position4>
+      <Position5>
         <Filename Value="fit_client.pas"/>
         <Caret Line="1294" Column="45" TopLine="1267"/>
+      </Position5>
+      <Position6>
+        <Filename Value="Forms\form_main.pas"/>
+        <Caret Line="1063" Column="60" TopLine="1061"/>
+      </Position6>
+      <Position7>
+        <Filename Value="Forms\form_main.pas"/>
+        <Caret Line="1069" Column="60" TopLine="1067"/>
       </Position7>
       <Position8>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="1063" Column="60" TopLine="1061"/>
+        <Caret Line="740" Column="12" TopLine="734"/>
       </Position8>
       <Position9>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="1069" Column="60" TopLine="1067"/>
+        <Caret Line="739" TopLine="733"/>
       </Position9>
       <Position10>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="740" Column="12" TopLine="734"/>
+        <Caret Line="769" Column="27" TopLine="755"/>
       </Position10>
       <Position11>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="739" TopLine="733"/>
+        <Caret Line="831" Column="25" TopLine="817"/>
       </Position11>
       <Position12>
-        <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="769" Column="27" TopLine="755"/>
-      </Position12>
-      <Position13>
-        <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="831" Column="25" TopLine="817"/>
-      </Position13>
-      <Position14>
         <Filename Value="fit_client_app.pas"/>
         <Caret Line="38" Column="34" TopLine="24"/>
+      </Position12>
+      <Position13>
+        <Filename Value="fit_client.pas"/>
+        <Caret Line="100" Column="5" TopLine="86"/>
+      </Position13>
+      <Position14>
+        <Filename Value="fit_client.pas"/>
+        <Caret Line="218" Column="25" TopLine="215"/>
       </Position14>
       <Position15>
         <Filename Value="fit_client.pas"/>
-        <Caret Line="100" Column="5" TopLine="86"/>
+        <Caret Line="219" Column="25" TopLine="214"/>
       </Position15>
       <Position16>
         <Filename Value="fit_client.pas"/>
-        <Caret Line="218" Column="25" TopLine="215"/>
+        <Caret Line="220" Column="25" TopLine="214"/>
       </Position16>
       <Position17>
         <Filename Value="fit_client.pas"/>
-        <Caret Line="219" Column="25" TopLine="214"/>
+        <Caret Line="221" Column="25" TopLine="214"/>
       </Position17>
       <Position18>
         <Filename Value="fit_client.pas"/>
-        <Caret Line="220" Column="25" TopLine="214"/>
+        <Caret Line="222" Column="25" TopLine="214"/>
       </Position18>
       <Position19>
         <Filename Value="fit_client.pas"/>
-        <Caret Line="221" Column="25" TopLine="214"/>
+        <Caret Line="246" Column="32" TopLine="231"/>
       </Position19>
       <Position20>
         <Filename Value="fit_client.pas"/>
-        <Caret Line="222" Column="25" TopLine="214"/>
+        <Caret Line="570" Column="39" TopLine="556"/>
       </Position20>
       <Position21>
         <Filename Value="fit_client.pas"/>
-        <Caret Line="246" Column="32" TopLine="231"/>
+        <Caret Line="246" Column="27" TopLine="233"/>
       </Position21>
       <Position22>
-        <Filename Value="fit_client.pas"/>
-        <Caret Line="570" Column="39" TopLine="556"/>
+        <Filename Value="Forms\form_main.pas"/>
+        <Caret Line="256" TopLine="243"/>
       </Position22>
       <Position23>
-        <Filename Value="fit_client.pas"/>
-        <Caret Line="246" Column="27" TopLine="233"/>
+        <Filename Value="Forms\form_main.pas"/>
+        <Caret Line="1098" TopLine="1095"/>
       </Position23>
       <Position24>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="256" TopLine="243"/>
+        <Caret Line="1067" TopLine="1065"/>
       </Position24>
       <Position25>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="1098" TopLine="1095"/>
+        <Caret Line="679" Column="24" TopLine="670"/>
       </Position25>
       <Position26>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="1067" TopLine="1065"/>
+        <Caret Line="1044" Column="47" TopLine="1030"/>
       </Position26>
       <Position27>
-        <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="679" Column="24" TopLine="670"/>
-      </Position27>
-      <Position28>
-        <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="1044" Column="47" TopLine="1030"/>
-      </Position28>
-      <Position29>
         <Filename Value="Forms\about_box_dialog.pas"/>
         <Caret Line="56" Column="55" TopLine="44"/>
-      </Position29>
-      <Position30>
+      </Position27>
+      <Position28>
         <Filename Value="..\Server\fit_task.pas"/>
         <Caret Line="1116" Column="57" TopLine="1102"/>
-      </Position30>
+      </Position28>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

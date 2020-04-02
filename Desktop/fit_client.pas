@@ -24,7 +24,7 @@ uses
     int_fit_service, int_fit_viewer, mscr_specimen_list, named_points_set,
     neutron_points_set, self_copied_component, SysUtils, title_points_set
 {$IFDEF FIT}
-    , fit_server
+    , fit_service
 {$ENDIF}
 {$IFDEF _WINDOWS}
     , persistent_curve_parameters
@@ -311,7 +311,7 @@ type
         function GetRFactorStr: string;
         procedure CreateCurveList;
 {$IFDEF FIT}
-        function GetFitProxy: TFitServer;
+        function GetFitProxy: TFitService;
 {$ENDIF}
 
         { Server attributes. }
@@ -376,7 +376,7 @@ uses
 {================================ TFitClient ==================================}
 
 {$IFDEF FIT}
-function TFitClient.GetFitProxy: TFitServer;
+function TFitClient.GetFitProxy: TFitService;
 begin
     Result := FitServerApp_.FitStub;
 end;

@@ -140,9 +140,9 @@ type
         function ComputeBackgroundPoints(const ProblemID: integer): TResult;
         function StopAsyncOper(const ProblemID: integer): TResult;
         function AsyncOper(const ProblemID: integer): TBoolResult;
-        function SelectArea(const StartPointIndex: integer;
+        function SelectProfileInterval(const StartPointIndex: integer;
             const StopPointIndex: integer; const ProblemID: integer): TResult;
-        function ReturnToTotalProfile(const ProblemID: integer): TResult;
+        function SelectEntireProfile(const ProblemID: integer): TResult;
         function CreateCurveList(const ProblemID: integer): TResult;
         function SetProfilePointsSet(const PointsSet: TArrayOfFloatDoubleRemotable;
             const ProblemID: integer): TResult;
@@ -157,15 +157,15 @@ type
             const ProblemID: integer): TResult;
         function AddPointToBackground(const XValue: double;
             const YValue: double; const ProblemID: integer): TResult;
-        function AddPointToCurveBounds(const XValue: double;
+        function AddPointToRFactorBounds(const XValue: double;
             const YValue: double; const ProblemID: integer): TResult;
         function AddPointToCurvePositions(const XValue: double;
             const YValue: double; const ProblemID: integer): TResult;
         function GetProfilePointsSet(const ProblemID: integer): TPointsResult;
-        function GetSelectedArea(const ProblemID: integer): TPointsResult;
+        function GetSelectedProfileInterval(const ProblemID: integer): TPointsResult;
         function GetBackgroundPoints(const ProblemID: integer): TPointsResult;
         function GetCurvePositions(const ProblemID: integer): TPointsResult;
-        function GetCurveBounds(const ProblemID: integer): TPointsResult;
+        function SetRFactorBounds(const ProblemID: integer): TPointsResult;
         function GetCalcProfilePointsSet(const ProblemID: integer): TPointsResult;
         function GetDeltaProfilePointsSet(const ProblemID: integer):
             TPointsResult;
@@ -207,7 +207,7 @@ type
         function GetCurveParameter(const ProblemID: integer;
             const SpecIndex: integer;
             const ParamIndex: integer): TSpecParamResult;
-        function AddPointToData(const XValue: double; const YValue: double;
+        function AddPointToProfile(const XValue: double; const YValue: double;
             const ProblemID: integer): TResult;
         function GetGraph(const Width: integer; const Height: integer;
             const ProblemID: integer): TPictureResult;
@@ -500,42 +500,42 @@ begin
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'SelectArea',
+        'SelectProfileInterval',
         '_E_N_',
-        'SelectArea'
+        'SelectProfileInterval'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'SelectArea',
+        'SelectProfileInterval',
         'FORMAT_Input_EncodingStyle',
         'literal'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'SelectArea',
+        'SelectProfileInterval',
         'FORMAT_OutputEncodingStyle',
         'literal'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'ReturnToTotalProfile',
+        'SelectEntireProfile',
         '_E_N_',
-        'ReturnToTotalProfile'
+        'SelectEntireProfile'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'ReturnToTotalProfile',
+        'SelectEntireProfile',
         'FORMAT_Input_EncodingStyle',
         'literal'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'ReturnToTotalProfile',
+        'SelectEntireProfile',
         'FORMAT_OutputEncodingStyle',
         'literal'
         );
@@ -668,21 +668,21 @@ begin
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'AddPointToCurveBounds',
+        'AddPointToRFactorBounds',
         '_E_N_',
-        'AddPointToCurveBounds'
+        'AddPointToRFactorBounds'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'AddPointToCurveBounds',
+        'AddPointToRFactorBounds',
         'FORMAT_Input_EncodingStyle',
         'literal'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'AddPointToCurveBounds',
+        'AddPointToRFactorBounds',
         'FORMAT_OutputEncodingStyle',
         'literal'
         );
@@ -731,21 +731,21 @@ begin
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'GetSelectedArea',
+        'GetSelectedProfileInterval',
         '_E_N_',
-        'GetSelectedArea'
+        'GetSelectedProfileInterval'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'GetSelectedArea',
+        'GetSelectedProfileInterval',
         'FORMAT_Input_EncodingStyle',
         'literal'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'GetSelectedArea',
+        'GetSelectedProfileInterval',
         'FORMAT_OutputEncodingStyle',
         'literal'
         );
@@ -794,21 +794,21 @@ begin
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'GetCurveBounds',
+        'SetRFactorBounds',
         '_E_N_',
-        'GetCurveBounds'
+        'SetRFactorBounds'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'GetCurveBounds',
+        'SetRFactorBounds',
         'FORMAT_Input_EncodingStyle',
         'literal'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'GetCurveBounds',
+        'SetRFactorBounds',
         'FORMAT_OutputEncodingStyle',
         'literal'
         );
@@ -1298,21 +1298,21 @@ begin
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'AddPointToData',
+        'AddPointToProfile',
         '_E_N_',
-        'AddPointToData'
+        'AddPointToProfile'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'AddPointToData',
+        'AddPointToProfile',
         'FORMAT_Input_EncodingStyle',
         'literal'
         );
     mm.SetOperationCustomData(
         sUNIT_NAME,
         'IFitServer',
-        'AddPointToData',
+        'AddPointToProfile',
         'FORMAT_OutputEncodingStyle',
         'literal'
         );

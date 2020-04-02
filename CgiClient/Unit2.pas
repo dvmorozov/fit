@@ -1702,7 +1702,7 @@ begin
     if FileName = '' then
         raise Exception.Create(FileNameIsAbsent);
 
-    Proxy.AddPointToData(Argument, Value);
+    Proxy.AddPointToProfile(Argument, Value);
     //Points := Proxy.GetProfilePointsSet;
     //  vsegda izvlekaetsya posledniy kusok, dazhe esli v resul'tate
     //  sortirovki novaya tochka popala ne v nego...

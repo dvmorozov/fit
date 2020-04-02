@@ -227,12 +227,12 @@ type
         function IntegrateWithBoundaries(Points: TPointsSet;
             StartPointIndex, StopPointIndex: longint): double;
         function Integrate(Points: TPointsSet): double;
-        { Calculates the R-factor for FCalcProfile and SelectArea by sum for all subtasks. }
+        { Calculates the R-factor for FCalcProfile and SelectProfileInterval by sum for all subtasks. }
         function GetRFactor: double;
         function GetAbsRFactor: double;
         function GetSqrRFactor: double;
         { Copies data from given list to the list of selected interval. }
-        procedure SelectAreaActual(Points: TPointsSet;
+        procedure SelectProfileIntervalActual(Points: TPointsSet;
             StartPointIndex, StopPointIndex: longint);
         function CreateTaskObject: TFitTask; virtual;
         { Creates subtasks for selected intervals. If the intervals were not selected generates them automatically. }
@@ -280,7 +280,7 @@ type
         { Get experimental profile data. }
         function GetProfilePointsSet: TTitlePointsSet;
         { Get data for the selected interval. }
-        function GetSelectedArea: TTitlePointsSet;
+        function GetSelectedProfileInterval: TTitlePointsSet;
 
         function SetBackgroundPointsSet(ABackgroundPoints:
             TTitlePointsSet): string;
@@ -301,14 +301,14 @@ type
           to support thin clients which can not store all set of data. }
         { All methods call AddPoint. }
 
-        procedure AddPointToData(XValue, YValue: double);
+        procedure AddPointToProfile(XValue, YValue: double);
         procedure AddPointToBackground(XValue, YValue: double);
         procedure AddPointToRFactorBounds(XValue, YValue: double);
         procedure AddPointToCurvePositions(XValue, YValue: double);
 
         { All methods call ReplacePoint. }
 
-        procedure ReplacePointInData(PrevXValue, PrevYValue, NewXValue,
+        procedure ReplacePointInProfile(PrevXValue, PrevYValue, NewXValue,
             NewYValue: double);
         procedure ReplacePointInBackground(PrevXValue, PrevYValue,
             NewXValue, NewYValue: double);
@@ -337,7 +337,7 @@ type
         { Smoothes experimental data. Returns describing message.
           TODO: so far is executed synchronously. Refactor to asynchronous processing. }
         function SmoothProfile: string;
-        { Linearly subtracts background in the SelectArea and recreates SelectArea.
+        { Linearly subtracts background in the SelectProfileInterval and recreates SelectProfileInterval.
           TODO: unify with SubtractBackground. }
         procedure SubtractBackground;
         { Subtracts the background by linear approximation. When Auto is True then
@@ -378,8 +378,8 @@ type
         { Synchronous operations. }
 
         { Transfers part of profile data to the list of selected interval. }
-        function SelectArea(StartPointIndex, StopPointIndex: longint): string;
-        function ReturnToTotalProfile: string;
+        function SelectProfileInterval(StartPointIndex, StopPointIndex: longint): string;
+        function SelectEntireProfile: string;
         { Defines starting and finishing point for each curve (specimen),
           integrates it and puts parameters into resulting list. }
         procedure CreateCurveList;
@@ -1510,7 +1510,7 @@ begin
         Result := nil;
 end;
 
-function TFitService.GetSelectedArea: TTitlePointsSet;
+function TFitService.GetSelectedProfileInterval: TTitlePointsSet;
 begin
     if Assigned(FSelectedArea) then
         Result := TTitlePointsSet(FSelectedArea.GetCopy)
@@ -1686,7 +1686,7 @@ begin
     SubtractBackgroundLinearly(SA, 0, SA.PointsCount - 1);
 end;
 
-procedure TFitService.SelectAreaActual(Points: TPointsSet;
+procedure TFitService.SelectProfileIntervalActual(Points: TPointsSet;
     StartPointIndex, StopPointIndex: longint);
 var
     i: longint;
@@ -1704,7 +1704,7 @@ begin
         FSelectedArea.AddNewPoint(Points.PointXCoord[i], Points.PointYCoord[i]);
 end;
 
-function TFitService.SelectArea(StartPointIndex, StopPointIndex: longint): string;
+function TFitService.SelectProfileInterval(StartPointIndex, StopPointIndex: longint): string;
 begin
     Result := '';
     if State = AsyncOperation then
@@ -1726,11 +1726,11 @@ begin
     end;
 
     Assert(Assigned(FExpProfile));
-    SelectAreaActual(FExpProfile, StartPointIndex, StopPointIndex);
+    SelectProfileIntervalActual(FExpProfile, StartPointIndex, StopPointIndex);
     FSelectedAreaMode := True;
 end;
 
-function TFitService.ReturnToTotalProfile: string;
+function TFitService.SelectEntireProfile: string;
 begin
     Result := '';
     if State = AsyncOperation then
@@ -2972,7 +2972,7 @@ begin
     Points.AddNewPoint(XValue, YValue);
 end;
 
-procedure TFitService.AddPointToData(XValue, YValue: double);
+procedure TFitService.AddPointToProfile(XValue, YValue: double);
 begin
     if State = AsyncOperation then
         raise EUserException.Create(InadmissibleServerState + CRLF +
@@ -3060,7 +3060,7 @@ begin
     GoToReadyForFit;
 end;
 
-procedure TFitService.ReplacePointInData(PrevXValue, PrevYValue,
+procedure TFitService.ReplacePointInProfile(PrevXValue, PrevYValue,
     NewXValue, NewYValue: double);
 begin
     if State = AsyncOperation then

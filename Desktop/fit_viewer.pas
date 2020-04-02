@@ -112,7 +112,7 @@ type
         procedure PlotDataPoints(Sender: TObject;
             DataPoints: TTitlePointsSet);
         { Method of IFitViewer interface. }
-        procedure PlotSelectedArea(Sender: TObject;
+        procedure PlotSelectedProfileInterval(Sender: TObject;
             SelectedArea: TTitlePointsSet);
         { Method of IFitViewer interface. }
         procedure PlotCurves(Sender: TObject;
@@ -267,7 +267,7 @@ begin
             end;{case XCoordMode of...}
 end;
 
-procedure TFitViewer.PlotSelectedArea(Sender: TObject; SelectedArea: TTitlePointsSet);
+procedure TFitViewer.PlotSelectedProfileInterval(Sender: TObject; SelectedArea: TTitlePointsSet);
 var
     LS: TTASerie;
 begin

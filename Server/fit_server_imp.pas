@@ -35,9 +35,9 @@ type
         function ComputeBackgroundPoints(const ProblemID: integer): TResult;
         function StopAsyncOper(const ProblemID: integer): TResult;
         function AsyncOper(const ProblemID: integer): TBoolResult;
-        function SelectArea(const StartPointIndex: integer;
+        function SelectProfileInterval(const StartPointIndex: integer;
             const StopPointIndex: integer; const ProblemID: integer): TResult;
-        function ReturnToTotalProfile(const ProblemID: integer): TResult;
+        function SelectEntireProfile(const ProblemID: integer): TResult;
         function CreateCurveList(const ProblemID: integer): TResult;
         function SetProfilePointsSet(const PointsSet: TArrayOfFloatDoubleRemotable;
             const ProblemID: integer): TResult;
@@ -48,19 +48,19 @@ type
             const ProblemID: integer): TResult;
         function SetCurveBounds(const CurveBounds: TArrayOfFloatDoubleRemotable;
             const ProblemID: integer): TResult;
-        function AddPointToData(const XValue: double;
+        function AddPointToProfile(const XValue: double;
             const YValue: double; const ProblemID: integer): TResult;
         function AddPointToBackground(const XValue: double;
             const YValue: double; const ProblemID: integer): TResult;
-        function AddPointToCurveBounds(const XValue: double;
+        function AddPointToRFactorBounds(const XValue: double;
             const YValue: double; const ProblemID: integer): TResult;
         function AddPointToCurvePositions(const XValue: double;
             const YValue: double; const ProblemID: integer): TResult;
         function GetProfilePointsSet(const ProblemID: integer): TPointsResult;
-        function GetSelectedArea(const ProblemID: integer): TPointsResult;
+        function GetSelectedProfileInterval(const ProblemID: integer): TPointsResult;
         function GetBackgroundPoints(const ProblemID: integer): TPointsResult;
         function GetCurvePositions(const ProblemID: integer): TPointsResult;
-        function GetCurveBounds(const ProblemID: integer): TPointsResult;
+        function SetRFactorBounds(const ProblemID: integer): TPointsResult;
         function GetCalcProfilePointsSet(const ProblemID: integer): TPointsResult;
         function GetDeltaProfilePointsSet(
             const ProblemID: integer): TPointsResult;
@@ -1022,16 +1022,16 @@ begin
                             //  eto pomogaet !!!
             end;
             *)
-            if Problem.FitStub.GetSelectedAreaMode then
+            if Problem.FitStub.GetSelectedProfileIntervalMode then
             begin
                 Result.ErrCode :=
-                    Problem.FitStub.GetSelectedArea(Data, Result.ErrMsg);
+                    Problem.FitStub.GetSelectedProfileInterval(Data, Result.ErrMsg);
                 if Result.ErrCode <> 0 then
                     Exit;
 
                 //Data.Lambda := WaveLength;
                 Data.Title := SelectedAreaName;
-                PlotSelectedArea(nil, Data);
+                PlotSelectedProfileInterval(nil, Data);
             end
             else
             begin
@@ -1418,7 +1418,7 @@ begin
     end;
 end;
 
-function TFitServer_ServiceImp.SelectArea(const StartPointIndex: integer;
+function TFitServer_ServiceImp.SelectProfileInterval(const StartPointIndex: integer;
     const StopPointIndex: integer; const ProblemID: integer): TResult;
 var
     Problem: TFitServerApp;
@@ -1451,7 +1451,7 @@ begin
             LeaveCriticalsection(CS);
         end;
         Problem := TFitServerApp(ProblemID);
-        Result.ErrCode := Problem.FitStub.SelectArea(
+        Result.ErrCode := Problem.FitStub.SelectProfileInterval(
             StartPointIndex, StopPointIndex, Result.ErrMsg);
     except
         on E: EUserException do
@@ -1468,7 +1468,7 @@ begin
     end;
 end;
 
-function TFitServer_ServiceImp.ReturnToTotalProfile(
+function TFitServer_ServiceImp.SelectEntireProfile(
     const ProblemID: integer): TResult;
 var
     Problem: TFitServerApp;
@@ -1501,7 +1501,7 @@ begin
             LeaveCriticalsection(CS);
         end;
         Problem := TFitServerApp(ProblemID);
-        Result.ErrCode := Problem.FitStub.ReturnToTotalProfile(Result.ErrMsg);
+        Result.ErrCode := Problem.FitStub.SelectEntireProfile(Result.ErrMsg);
     except
         on E: EUserException do
         begin
@@ -1798,7 +1798,7 @@ begin
     end;
 end;
 
-function TFitServer_ServiceImp.AddPointToData(const XValue: double;
+function TFitServer_ServiceImp.AddPointToProfile(const XValue: double;
     const YValue: double; const ProblemID: integer): TResult;
 var
     Problem: TFitServerApp;
@@ -1832,7 +1832,7 @@ begin
         end;
         Problem := TFitServerApp(ProblemID);
         Result.ErrCode :=
-            Problem.FitStub.AddPointToData(XValue, YValue, Result.ErrMsg);
+            Problem.FitStub.AddPointToProfile(XValue, YValue, Result.ErrMsg);
     except
         on E: EUserException do
         begin
@@ -1898,7 +1898,7 @@ begin
     end;
 end;
 
-function TFitServer_ServiceImp.AddPointToCurveBounds(const XValue: double;
+function TFitServer_ServiceImp.AddPointToRFactorBounds(const XValue: double;
     const YValue: double; const ProblemID: integer): TResult;
 var
     Problem: TFitServerApp;
@@ -2054,7 +2054,7 @@ begin
     end;
 end;
 
-function TFitServer_ServiceImp.GetSelectedArea(
+function TFitServer_ServiceImp.GetSelectedProfileInterval(
     const ProblemID: integer): TPointsResult;
 var
     Problem: TFitServerApp;
@@ -2091,7 +2091,7 @@ begin
         end;
         Problem := TFitServerApp(ProblemID);
         //  Points - pryamoi ukazatel', a ne kopiya - ne osvobozhdat'!
-        Result.ErrCode := Problem.FitStub.GetSelectedArea(PS, Result.ErrMsg);
+        Result.ErrCode := Problem.FitStub.GetSelectedProfileInterval(PS, Result.ErrMsg);
         if Result.ErrCode = 0 then
             Result._Result := CreateRemotableArray(PS);
     except
@@ -2217,7 +2217,7 @@ begin
     end;
 end;
 
-function TFitServer_ServiceImp.GetCurveBounds(
+function TFitServer_ServiceImp.SetRFactorBounds(
     const ProblemID: integer): TPointsResult;
 var
     Problem: TFitServerApp;
@@ -2833,7 +2833,7 @@ begin
             LeaveCriticalsection(CS);
         end;
         Problem := TFitServerApp(ProblemID);
-        Result.ErrCode := Problem.FitStub.ReplacePointInData(
+        Result.ErrCode := Problem.FitStub.ReplacePointInProfile(
             PrevXValue, PrevYValue, NewXValue, NewYValue, Result.ErrMsg);
     except
         on E: EUserException do

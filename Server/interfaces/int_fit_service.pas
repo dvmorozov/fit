@@ -73,7 +73,7 @@ type
         { Returns hint or error message received from the server. }
         function SetProfilePointsSet(APointsSet: TTitlePointsSet): string;
         function GetProfilePointsSet: TTitlePointsSet;
-        function GetSelectedArea: TTitlePointsSet;
+        function GetSelectedProfileInterval: TTitlePointsSet;
 
         { Returns hint or error message received from the server. }
         function SetBackgroundPointsSet(ABackgroundPoints: TTitlePointsSet): string;
@@ -92,12 +92,12 @@ type
         { Nil means initialization. }
             CP: Curve_parameters);
 {$ENDIF}
-        procedure AddPointToData(XValue, YValue: double);
+        procedure AddPointToProfile(XValue, YValue: double);
         procedure AddPointToBackground(XValue, YValue: double);
         procedure AddPointToRFactorBounds(XValue, YValue: double);
         procedure AddPointToCurvePositions(XValue, YValue: double);
 
-        procedure ReplacePointInData(
+        procedure ReplacePointInProfile(
             PrevXValue, PrevYValue, NewXValue, NewYValue: double);
         procedure ReplacePointInBackground(
             PrevXValue, PrevYValue, NewXValue, NewYValue: double);
@@ -158,9 +158,9 @@ type
 
         { Synchronous methods. }
         { Returns hint or error message received from the server. }
-        function SelectArea(StartPointIndex, StopPointIndex: longint): string;
+        function SelectProfileInterval(StartPointIndex, StopPointIndex: longint): string;
         { Returns hint or error message received from the server. }
-        function ReturnToTotalProfile: string;
+        function SelectEntireProfile: string;
         procedure CreateCurveList;
     end;
 

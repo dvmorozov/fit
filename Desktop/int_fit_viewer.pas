@@ -50,7 +50,7 @@ type
             DataPoints: TTitlePointsSet);
         procedure HideDataPoints(Sender: TObject;
             DataPoints: TTitlePointsSet);
-        procedure PlotSelectedArea(Sender: TObject;
+        procedure PlotSelectedProfileInterval(Sender: TObject;
             SelectedArea: TTitlePointsSet);
         procedure PlotBackground(Sender: TObject;
             BackgroundPoints: TTitlePointsSet);

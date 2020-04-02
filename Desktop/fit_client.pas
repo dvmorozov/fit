@@ -24,7 +24,7 @@ uses
     int_fit_service, int_fit_viewer, mscr_specimen_list, named_points_set,
     neutron_points_set, self_copied_component, SysUtils, title_points_set
 {$IFDEF FIT}
-    , fit_server
+    , fit_service
 {$ENDIF}
 {$IFDEF _WINDOWS}
     , persistent_curve_parameters
@@ -81,7 +81,7 @@ type
     THideDataPoints = procedure(Sender: TObject;
         DataPoints: TTitlePointsSet) of object;
 
-    TPlotSelectedArea = procedure(Sender: TObject;
+    TPlotSelectedProfileInterval = procedure(Sender: TObject;
         SelectedArea: TTitlePointsSet) of object;
     TPlotGaussProfile = procedure(Sender: TObject;
         GaussProfile: TTitlePointsSet) of object;
@@ -172,7 +172,7 @@ type
         procedure PlotDataPoints;
         procedure HideDataPoints;
 
-        procedure PlotSelectedArea;
+        procedure PlotSelectedProfileInterval;
 
         procedure PlotBackground;
         procedure HideBackground;
@@ -221,7 +221,7 @@ type
         procedure RemoveDeltaProfile;
 
         { Copies data from the given point set to the set of selected interval. }
-        procedure SelectAreaActual(ANeutronPoints: TNeutronPointsSet;
+        procedure SelectProfileIntervalActual(ANeutronPoints: TNeutronPointsSet;
             StartPointIndex, StopPointIndex: longint);
         procedure CopyProfileDataFromLoader;
 
@@ -255,7 +255,7 @@ type
 
         { All call ReplacePoint method. }
 
-        procedure ReplacePointInData(
+        procedure ReplacePointInProfile(
             PrevXValue, PrevYValue, NewXValue, NewYValue: double);
         procedure ReplacePointInSelected(
             PrevXValue, PrevYValue, NewXValue, NewYValue: double);
@@ -270,8 +270,8 @@ type
         function GetCurrentPointsSet: TTitlePointsSet;
 
         { Cleans chart and moves data from full profile to data of selected iterval. }
-        procedure SelectArea(StartPointIndex, StopPointIndex: longint);
-        procedure ReturnToTotalProfile;
+        procedure SelectProfileInterval(StartPointIndex, StopPointIndex: longint);
+        procedure SelectEntireProfile;
 
         procedure SetWaveLength(AWaveLength: double);
         function GetWaveLength: double;
@@ -311,7 +311,7 @@ type
         function GetRFactorStr: string;
         procedure CreateCurveList;
 {$IFDEF FIT}
-        function GetFitProxy: TFitServer;
+        function GetFitProxy: TFitService;
 {$ENDIF}
 
         { Server attributes. }
@@ -376,7 +376,7 @@ uses
 {================================ TFitClient ==================================}
 
 {$IFDEF FIT}
-function TFitClient.GetFitProxy: TFitServer;
+function TFitClient.GetFitProxy: TFitService;
 begin
     Result := FitServerApp_.FitStub;
 end;
@@ -455,7 +455,7 @@ end;
 
 {$ENDIF}
 
-procedure TFitClient.SelectAreaActual(ANeutronPoints: TNeutronPointsSet;
+procedure TFitClient.SelectProfileIntervalActual(ANeutronPoints: TNeutronPointsSet;
     StartPointIndex, StopPointIndex: longint);
 var
     i: longint;
@@ -482,25 +482,25 @@ begin
     end;
 end;
 
-procedure TFitClient.SelectArea(StartPointIndex, StopPointIndex: longint);
+procedure TFitClient.SelectProfileInterval(StartPointIndex, StopPointIndex: longint);
 begin
     Assert(Assigned(NeutronPointsSet));
     Assert(Assigned(FitProxy));
 
-    FitProxy.SelectArea(StartPointIndex, StopPointIndex);
+    FitProxy.SelectProfileInterval(StartPointIndex, StopPointIndex);
     Clear;
-    SelectAreaActual(NeutronPointsSet, StartPointIndex, StopPointIndex);
-    PlotSelectedArea;
+    SelectProfileIntervalActual(NeutronPointsSet, StartPointIndex, StopPointIndex);
+    PlotSelectedProfileInterval;
 
     FSelectedAreaMode := True;
 end;
 
-procedure TFitClient.ReturnToTotalProfile;
+procedure TFitClient.SelectEntireProfile;
 begin
     Assert(Assigned(NeutronPointsSet));
     Assert(Assigned(FitProxy));
 
-    FitProxy.ReturnToTotalProfile;
+    FitProxy.SelectEntireProfile;
     Clear;
     PlotDataPoints;
 
@@ -606,11 +606,11 @@ begin
         //  dannye udalyayutsya dlya ucheta vozmozhnyh izmeneniy,
         //  naprimer udaleniya fona
         RemoveSelectedArea;
-        FSelectedArea := FitProxy.GetSelectedArea;
+        FSelectedArea := FitProxy.GetSelectedProfileInterval;
         //??? kak zdes' obrabatyvat' isklyucheniya
         FSelectedArea.Lambda := FWaveLength;
         FSelectedArea.FTitle := SelectedAreaName;
-        PlotSelectedArea;
+        PlotSelectedProfileInterval;
     end
     else
     begin
@@ -943,10 +943,10 @@ begin
         FFitViewer.HideDataPoints(Self, NeutronPointsSet);
 end;
 
-procedure TFitClient.PlotSelectedArea;
+procedure TFitClient.PlotSelectedProfileInterval;
 begin
     if Assigned(FFitViewer) then
-        FFitViewer.PlotSelectedArea(Self, FSelectedArea);
+        FFitViewer.PlotSelectedProfileInterval(Self, FSelectedArea);
 end;
 
 procedure TFitClient.PlotBackground;
@@ -1001,14 +1001,14 @@ begin
     FToRefresh := nil;
 end;
 
-procedure TFitClient.ReplacePointInData(PrevXValue, PrevYValue,
+procedure TFitClient.ReplacePointInProfile(PrevXValue, PrevYValue,
     NewXValue, NewYValue: double);
 begin
     if FSelectedAreaMode then
     begin
         Assert(Assigned(FSelectedArea));
         ReplacePoint(FSelectedArea,
-            PrevXValue, PrevYValue, NewXValue, NewYValue, PlotSelectedArea);
+            PrevXValue, PrevYValue, NewXValue, NewYValue, PlotSelectedProfileInterval);
     end
     else
     begin
@@ -1016,7 +1016,7 @@ begin
         ReplacePoint(NeutronPointsSet,
             PrevXValue, PrevYValue, NewXValue, NewYValue, PlotDataPoints);
     end;
-    FitProxy.ReplacePointInData(PrevXValue, PrevYValue, NewXValue, NewYValue);
+    FitProxy.ReplacePointInProfile(PrevXValue, PrevYValue, NewXValue, NewYValue);
 end;
 
 procedure TFitClient.ReplacePointInSelected(

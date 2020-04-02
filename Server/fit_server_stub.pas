@@ -48,7 +48,7 @@ type
         function GetState: TFitServerState;
         function GetWaveLength: double;
         procedure SetWaveLength(AWaveLength: double);
-        function GetSelectedAreaMode: boolean;
+        function GetSelectedProfileIntervalMode: boolean;
 
         { Wrappers to server methods. They should not throw exceptions. 
           Return codes: 0 - success, -1 - inadmissible state, -2 - fatal error. }
@@ -71,9 +71,9 @@ type
         function GetRFactorStr(var ErrMsg: string): string;
         function GetAbsRFactorStr(var ErrMsg: string): string;
         function GetSqrRFactorStr(var ErrMsg: string): string;
-        function SelectArea(StartPointIndex, StopPointIndex: longint;
+        function SelectProfileInterval(StartPointIndex, StopPointIndex: longint;
             var ErrMsg: string): longint;
-        function ReturnToTotalProfile(var ErrMsg: string): longint;
+        function SelectEntireProfile(var ErrMsg: string): longint;
         function CreateCurveList(var ErrMsg: string): longint;
 
         { Data setting. Set methods create new objects. The responsibility
@@ -92,7 +92,7 @@ type
         { Equality to Nil means initialization. }
             CP: Curve_parameters; var ErrMsg: string): longint;
 {$ENDIF}
-        function AddPointToData(XValue, YValue: double;
+        function AddPointToProfile(XValue, YValue: double;
             var ErrMsg: string): longint;
         function AddPointToBackground(XValue, YValue: double;
             var ErrMsg: string): longint;
@@ -101,7 +101,7 @@ type
         function AddPointToCurvePositions(XValue, YValue: double;
             var ErrMsg: string): longint;
 
-        function ReplacePointInData(PrevXValue, PrevYValue,
+        function ReplacePointInProfile(PrevXValue, PrevYValue,
             NewXValue, NewYValue: double; var ErrMsg: string): longint;
         function ReplacePointInBackground(PrevXValue, PrevYValue,
             NewXValue, NewYValue: double; var ErrMsg: string): longint;
@@ -114,7 +114,7 @@ type
 
         function GetProfilePointsSet(var Points: TPointsSet;
             var ErrMsg: string): longint;
-        function GetSelectedArea(var Points: TPointsSet;
+        function GetSelectedProfileInterval(var Points: TPointsSet;
             var ErrMsg: string): longint;
         function GetBackgroundPoints(var Points: TPointsSet;
             var ErrMsg: string): longint;
@@ -575,7 +575,7 @@ begin
     end;
 end;
 
-function TFitServerStub.SelectArea(StartPointIndex, StopPointIndex: longint;
+function TFitServerStub.SelectProfileInterval(StartPointIndex, StopPointIndex: longint;
     var ErrMsg: string): longint;
 begin
     try
@@ -594,7 +594,7 @@ begin
     try
         Result := 0;
         ErrMsg := '';
-        ErrMsg := Server.SelectArea(StartPointIndex, StopPointIndex);
+        ErrMsg := Server.SelectProfileInterval(StartPointIndex, StopPointIndex);
     except
         on E: EUserException do
         begin
@@ -613,7 +613,7 @@ begin
     end;
 end;
 
-function TFitServerStub.ReturnToTotalProfile(var ErrMsg: string): longint;
+function TFitServerStub.SelectEntireProfile(var ErrMsg: string): longint;
 begin
     try
         Result := -2;
@@ -631,7 +631,7 @@ begin
     try
         Result := 0;
         ErrMsg := '';
-        ErrMsg := Server.ReturnToTotalProfile;
+        ErrMsg := Server.SelectEntireProfile;
     except
         on E: EUserException do
         begin
@@ -872,7 +872,7 @@ begin
     end;
 end;
 
-function TFitServerStub.GetSelectedAreaMode: boolean;
+function TFitServerStub.GetSelectedProfileIntervalMode: boolean;
 begin
     try
         Result := False;
@@ -1350,7 +1350,7 @@ begin
     end;
 end;
 
-function TFitServerStub.GetSelectedArea(var Points: TPointsSet;
+function TFitServerStub.GetSelectedProfileInterval(var Points: TPointsSet;
     var ErrMsg: string): longint;
 begin
     try
@@ -1369,7 +1369,7 @@ begin
     try
         Result := 0;
         ErrMsg := '';
-        Points := Server.GetSelectedArea;
+        Points := Server.GetSelectedProfileInterval;
     except
         on E: EUserException do
         begin
@@ -1978,7 +1978,7 @@ begin
     end;
 end;
 
-function TFitServerStub.AddPointToData(XValue, YValue: double;
+function TFitServerStub.AddPointToProfile(XValue, YValue: double;
     var ErrMsg: string): longint;
 begin
     try
@@ -1997,7 +1997,7 @@ begin
     try
         Result := 0;
         ErrMsg := '';
-        Server.AddPointToData(XValue, YValue);
+        Server.AddPointToProfile(XValue, YValue);
     except
         on E: EUserException do
         begin
@@ -2130,7 +2130,7 @@ begin
     end;
 end;
 
-function TFitServerStub.ReplacePointInData(
+function TFitServerStub.ReplacePointInProfile(
     PrevXValue, PrevYValue, NewXValue, NewYValue: double;
     var ErrMsg: string): longint;
 begin
@@ -2150,7 +2150,7 @@ begin
     try
         Result := 0;
         ErrMsg := '';
-        Server.ReplacePointInData(PrevXValue, PrevYValue, NewXValue, NewYValue);
+        Server.ReplacePointInProfile(PrevXValue, PrevYValue, NewXValue, NewYValue);
     except
         on E: EUserException do
         begin

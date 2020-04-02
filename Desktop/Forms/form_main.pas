@@ -455,7 +455,7 @@ const
 
     HintSecondFinish:   string = 'Now you can pick a second point - "FINISH"';
     HintSecondPeak:     string = 'Now you can pick a second point - "PEAK"';
-    HintSelectArea:     string = 'Now you can pick the menu item "Select Area"';
+    HintSelectProfileInterval:     string = 'Now you can pick the menu item "Select Area"';
     HintThirdFinish:    string = 'Now you can pick a third point - "FINISH"';
     HintMovePeak:       string =
         'Now you can pick the menu item "Move Peak to Results"';
@@ -891,7 +891,7 @@ begin
     SP.Sort;
 
     ShowHint(HintMain);
-    FitClientApp_.FitClient.SelectArea(
+    FitClientApp_.FitClient.SelectProfileInterval(
         NP.IndexOfValueX(SP.PointXCoord[0]),
         NP.IndexOfValueX(SP.PointXCoord[1])
         );
@@ -1046,7 +1046,7 @@ end;
 
 procedure TFormMain.ActionSelectEntireProfileExecute(Sender: TObject);
 begin
-    FitClientApp_.FitClient.ReturnToTotalProfile;
+    FitClientApp_.FitClient.SelectEntireProfile;
     ShowHint(HintMain);
     // chtoby proshlo obnovlenie grafika i Chart.XGraphMax
     // i dr. imeli pravil'nye znacheniya
@@ -1243,7 +1243,7 @@ begin
                     NewYValue := StrToFloatDef(Cells[1, Row], 0);
 
                     if Sender = GridData then
-                        FitClientApp_.FitClient.ReplacePointInData(
+                        FitClientApp_.FitClient.ReplacePointInProfile(
                             PrevXValue, PrevYValue, NewXValue, NewYValue
                             )
                     else
@@ -1531,7 +1531,7 @@ begin
 
                         case NS.PointsCount of
                             0: ShowHint(HintSecondFinish);
-                            1: ShowHint(HintSelectArea);
+                            1: ShowHint(HintSelectProfileInterval);
                             2: Exit;    //  bol'she tochek ne dobavlyaem
                         end;
                     end;

@@ -26,21 +26,21 @@ type
     procedure ComputeBackgroundPointsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure StopAsyncOperHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure AsyncOperHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
-    procedure SelectAreaHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
-    procedure ReturnToTotalProfileHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
+    procedure SelectProfileIntervalHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
+    procedure SelectEntireProfileHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure CreateCurveListHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure SetProfilePointsSetHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure SetBackgroundPointsSetHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure SetCurvePositionsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure SetCurveBoundsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure AddPointToBackgroundHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
-    procedure AddPointToCurveBoundsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
+    procedure AddPointToRFactorBoundsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure AddPointToCurvePositionsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure GetProfilePointsSetHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
-    procedure GetSelectedAreaHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
+    procedure GetSelectedProfileIntervalHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure GetBackgroundPointsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure GetCurvePositionsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
-    procedure GetCurveBoundsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
+    procedure SetRFactorBoundsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure GetCalcProfilePointsSetHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure GetDeltaProfilePointsSetHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure SetCurveThreshHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
@@ -64,7 +64,7 @@ type
     procedure GetCurvePointsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure GetCurveParameterCountHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure GetCurveParameterHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
-    procedure AddPointToDataHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
+    procedure AddPointToProfileHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure GetGraphHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure GetProfileChunkHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
     procedure GetProfileChunkCountHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
@@ -528,7 +528,7 @@ begin
   end;
 end;
 
-procedure TFitServer_ServiceBinder.SelectAreaHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
+procedure TFitServer_ServiceBinder.SelectProfileIntervalHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
 var
   cllCntrl : ICallControl;
   objCntrl : IObjectControl;
@@ -556,7 +556,7 @@ begin
   if hasObjCntrl then
     objCntrl.Activate();
   try
-    returnVal := tmpObj.SelectArea(StartPointIndex,StopPointIndex,ProblemID);
+    returnVal := tmpObj.SelectProfileInterval(StartPointIndex,StopPointIndex,ProblemID);
     if Assigned(TObject(returnVal)) then
       callCtx.AddObjectToFree(TObject(returnVal));
     
@@ -575,7 +575,7 @@ begin
   end;
 end;
 
-procedure TFitServer_ServiceBinder.ReturnToTotalProfileHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
+procedure TFitServer_ServiceBinder.SelectEntireProfileHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
 var
   cllCntrl : ICallControl;
   objCntrl : IObjectControl;
@@ -599,7 +599,7 @@ begin
   if hasObjCntrl then
     objCntrl.Activate();
   try
-    returnVal := tmpObj.ReturnToTotalProfile(ProblemID);
+    returnVal := tmpObj.SelectEntireProfile(ProblemID);
     if Assigned(TObject(returnVal)) then
       callCtx.AddObjectToFree(TObject(returnVal));
     
@@ -900,7 +900,7 @@ begin
   end;
 end;
 
-procedure TFitServer_ServiceBinder.AddPointToCurveBoundsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
+procedure TFitServer_ServiceBinder.AddPointToRFactorBoundsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
 var
   cllCntrl : ICallControl;
   objCntrl : IObjectControl;
@@ -928,7 +928,7 @@ begin
   if hasObjCntrl then
     objCntrl.Activate();
   try
-    returnVal := tmpObj.AddPointToCurveBounds(XValue,YValue,ProblemID);
+    returnVal := tmpObj.AddPointToRFactorBounds(XValue,YValue,ProblemID);
     if Assigned(TObject(returnVal)) then
       callCtx.AddObjectToFree(TObject(returnVal));
     
@@ -1037,7 +1037,7 @@ begin
   end;
 end;
 
-procedure TFitServer_ServiceBinder.GetSelectedAreaHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
+procedure TFitServer_ServiceBinder.GetSelectedProfileIntervalHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
 var
   cllCntrl : ICallControl;
   objCntrl : IObjectControl;
@@ -1061,7 +1061,7 @@ begin
   if hasObjCntrl then
     objCntrl.Activate();
   try
-    returnVal := tmpObj.GetSelectedArea(ProblemID);
+    returnVal := tmpObj.GetSelectedProfileInterval(ProblemID);
     if Assigned(TObject(returnVal)) then
       callCtx.AddObjectToFree(TObject(returnVal));
     
@@ -1166,7 +1166,7 @@ begin
   end;
 end;
 
-procedure TFitServer_ServiceBinder.GetCurveBoundsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
+procedure TFitServer_ServiceBinder.SetRFactorBoundsHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
 var
   cllCntrl : ICallControl;
   objCntrl : IObjectControl;
@@ -1190,7 +1190,7 @@ begin
   if hasObjCntrl then
     objCntrl.Activate();
   try
-    returnVal := tmpObj.GetCurveBounds(ProblemID);
+    returnVal := tmpObj.SetRFactorBounds(ProblemID);
     if Assigned(TObject(returnVal)) then
       callCtx.AddObjectToFree(TObject(returnVal));
     
@@ -2195,7 +2195,7 @@ begin
   end;
 end;
 
-procedure TFitServer_ServiceBinder.AddPointToDataHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
+procedure TFitServer_ServiceBinder.AddPointToProfileHandler(AFormatter : IFormatterResponse; AContext : ICallContext);
 var
   cllCntrl : ICallControl;
   objCntrl : IObjectControl;
@@ -2223,7 +2223,7 @@ begin
   if hasObjCntrl then
     objCntrl.Activate();
   try
-    returnVal := tmpObj.AddPointToData(XValue,YValue,ProblemID);
+    returnVal := tmpObj.AddPointToProfile(XValue,YValue,ProblemID);
     if Assigned(TObject(returnVal)) then
       callCtx.AddObjectToFree(TObject(returnVal));
     
@@ -2612,21 +2612,21 @@ begin
   RegisterVerbHandler('ComputeBackgroundPoints',{$IFDEF FPC}@{$ENDIF}ComputeBackgroundPointsHandler);
   RegisterVerbHandler('StopAsyncOper',{$IFDEF FPC}@{$ENDIF}StopAsyncOperHandler);
   RegisterVerbHandler('AsyncOper',{$IFDEF FPC}@{$ENDIF}AsyncOperHandler);
-  RegisterVerbHandler('SelectArea',{$IFDEF FPC}@{$ENDIF}SelectAreaHandler);
-  RegisterVerbHandler('ReturnToTotalProfile',{$IFDEF FPC}@{$ENDIF}ReturnToTotalProfileHandler);
+  RegisterVerbHandler('SelectProfileInterval',{$IFDEF FPC}@{$ENDIF}SelectProfileIntervalHandler);
+  RegisterVerbHandler('SelectEntireProfile',{$IFDEF FPC}@{$ENDIF}SelectEntireProfileHandler);
   RegisterVerbHandler('CreateCurveList',{$IFDEF FPC}@{$ENDIF}CreateCurveListHandler);
   RegisterVerbHandler('SetProfilePointsSet',{$IFDEF FPC}@{$ENDIF}SetProfilePointsSetHandler);
   RegisterVerbHandler('SetBackgroundPointsSet',{$IFDEF FPC}@{$ENDIF}SetBackgroundPointsSetHandler);
   RegisterVerbHandler('SetCurvePositions',{$IFDEF FPC}@{$ENDIF}SetCurvePositionsHandler);
   RegisterVerbHandler('SetCurveBounds',{$IFDEF FPC}@{$ENDIF}SetCurveBoundsHandler);
   RegisterVerbHandler('AddPointToBackground',{$IFDEF FPC}@{$ENDIF}AddPointToBackgroundHandler);
-  RegisterVerbHandler('AddPointToCurveBounds',{$IFDEF FPC}@{$ENDIF}AddPointToCurveBoundsHandler);
+  RegisterVerbHandler('AddPointToRFactorBounds',{$IFDEF FPC}@{$ENDIF}AddPointToRFactorBoundsHandler);
   RegisterVerbHandler('AddPointToCurvePositions',{$IFDEF FPC}@{$ENDIF}AddPointToCurvePositionsHandler);
   RegisterVerbHandler('GetProfilePointsSet',{$IFDEF FPC}@{$ENDIF}GetProfilePointsSetHandler);
-  RegisterVerbHandler('GetSelectedArea',{$IFDEF FPC}@{$ENDIF}GetSelectedAreaHandler);
+  RegisterVerbHandler('GetSelectedProfileInterval',{$IFDEF FPC}@{$ENDIF}GetSelectedProfileIntervalHandler);
   RegisterVerbHandler('GetBackgroundPoints',{$IFDEF FPC}@{$ENDIF}GetBackgroundPointsHandler);
   RegisterVerbHandler('GetCurvePositions',{$IFDEF FPC}@{$ENDIF}GetCurvePositionsHandler);
-  RegisterVerbHandler('GetCurveBounds',{$IFDEF FPC}@{$ENDIF}GetCurveBoundsHandler);
+  RegisterVerbHandler('SetRFactorBounds',{$IFDEF FPC}@{$ENDIF}SetRFactorBoundsHandler);
   RegisterVerbHandler('GetCalcProfilePointsSet',{$IFDEF FPC}@{$ENDIF}GetCalcProfilePointsSetHandler);
   RegisterVerbHandler('GetDeltaProfilePointsSet',{$IFDEF FPC}@{$ENDIF}GetDeltaProfilePointsSetHandler);
   RegisterVerbHandler('SetCurveThresh',{$IFDEF FPC}@{$ENDIF}SetCurveThreshHandler);
@@ -2650,7 +2650,7 @@ begin
   RegisterVerbHandler('GetCurvePoints',{$IFDEF FPC}@{$ENDIF}GetCurvePointsHandler);
   RegisterVerbHandler('GetCurveParameterCount',{$IFDEF FPC}@{$ENDIF}GetCurveParameterCountHandler);
   RegisterVerbHandler('GetCurveParameter',{$IFDEF FPC}@{$ENDIF}GetCurveParameterHandler);
-  RegisterVerbHandler('AddPointToData',{$IFDEF FPC}@{$ENDIF}AddPointToDataHandler);
+  RegisterVerbHandler('AddPointToProfile',{$IFDEF FPC}@{$ENDIF}AddPointToProfileHandler);
   RegisterVerbHandler('GetGraph',{$IFDEF FPC}@{$ENDIF}GetGraphHandler);
   RegisterVerbHandler('GetProfileChunk',{$IFDEF FPC}@{$ENDIF}GetProfileChunkHandler);
   RegisterVerbHandler('GetProfileChunkCount',{$IFDEF FPC}@{$ENDIF}GetProfileChunkCountHandler);

@@ -31,9 +31,9 @@ type
         function ComputeBackgroundPoints(const ProblemID: integer): TResult;
         function StopAsyncOper(const ProblemID: integer): TResult;
         function AsyncOper(const ProblemID: integer): TBoolResult;
-        function SelectArea(const StartPointIndex: integer;
+        function SelectProfileInterval(const StartPointIndex: integer;
             const StopPointIndex: integer; const ProblemID: integer): TResult;
-        function ReturnToTotalProfile(const ProblemID: integer): TResult;
+        function SelectEntireProfile(const ProblemID: integer): TResult;
         function CreateCurveList(const ProblemID: integer): TResult;
         function SetProfilePointsSet(const PointsSet:
             TArrayOfFloatDoubleRemotable; const ProblemID: integer): TResult;
@@ -48,15 +48,15 @@ type
             const ProblemID: integer): TResult;
         function AddPointToBackground(const XValue: double;
             const YValue: double; const ProblemID: integer): TResult;
-        function AddPointToCurveBounds(const XValue: double;
+        function AddPointToRFactorBounds(const XValue: double;
             const YValue: double; const ProblemID: integer): TResult;
         function AddPointToCurvePositions(const XValue: double;
             const YValue: double; const ProblemID: integer): TResult;
         function GetProfilePointsSet(const ProblemID: integer): TPointsResult;
-        function GetSelectedArea(const ProblemID: integer): TPointsResult;
+        function GetSelectedProfileInterval(const ProblemID: integer): TPointsResult;
         function GetBackgroundPoints(const ProblemID: integer): TPointsResult;
         function GetCurvePositions(const ProblemID: integer): TPointsResult;
-        function GetCurveBounds(const ProblemID: integer): TPointsResult;
+        function SetRFactorBounds(const ProblemID: integer): TPointsResult;
         function GetCalcProfilePointsSet(
             const ProblemID: integer): TPointsResult;
         function GetDeltaProfilePointsSet(const ProblemID: integer):
@@ -99,7 +99,7 @@ type
         function GetCurveParameter(const ProblemID: integer;
             const SpecIndex: integer;
             const ParamIndex: integer): TSpecParamResult;
-        function AddPointToData(const XValue: double; const YValue: double;
+        function AddPointToProfile(const XValue: double; const YValue: double;
             const ProblemID: integer): TResult;
         function GetGraph(const Width: integer; const Height: integer;
             const ProblemID: integer): TPictureResult;
@@ -376,7 +376,7 @@ begin
     end;
 end;
 
-function TFitServer_Proxy.SelectArea(const StartPointIndex: integer;
+function TFitServer_Proxy.SelectProfileInterval(const StartPointIndex: integer;
     const StopPointIndex: integer; const ProblemID: integer): TResult;
 var
     locSerializer: IFormatterClient;
@@ -384,7 +384,7 @@ var
 begin
     locSerializer := GetSerializer();
     try
-        locSerializer.BeginCall('SelectArea', GetTarget(), (Self as ICallContext));
+        locSerializer.BeginCall('SelectProfileInterval', GetTarget(), (Self as ICallContext));
         locSerializer.Put('StartPointIndex', TypeInfo(integer), StartPointIndex);
         locSerializer.Put('StopPointIndex', TypeInfo(integer), StopPointIndex);
         locSerializer.Put('ProblemID', TypeInfo(integer), ProblemID);
@@ -402,14 +402,14 @@ begin
     end;
 end;
 
-function TFitServer_Proxy.ReturnToTotalProfile(const ProblemID: integer): TResult;
+function TFitServer_Proxy.SelectEntireProfile(const ProblemID: integer): TResult;
 var
     locSerializer: IFormatterClient;
     strPrmName:    string;
 begin
     locSerializer := GetSerializer();
     try
-        locSerializer.BeginCall('ReturnToTotalProfile', GetTarget(),
+        locSerializer.BeginCall('SelectEntireProfile', GetTarget(),
             (Self as ICallContext));
         locSerializer.Put('ProblemID', TypeInfo(integer), ProblemID);
         locSerializer.EndCall();
@@ -588,7 +588,7 @@ begin
     end;
 end;
 
-function TFitServer_Proxy.AddPointToCurveBounds(const XValue: double;
+function TFitServer_Proxy.AddPointToRFactorBounds(const XValue: double;
     const YValue: double; const ProblemID: integer): TResult;
 var
     locSerializer: IFormatterClient;
@@ -596,7 +596,7 @@ var
 begin
     locSerializer := GetSerializer();
     try
-        locSerializer.BeginCall('AddPointToCurveBounds', GetTarget(),
+        locSerializer.BeginCall('AddPointToRFactorBounds', GetTarget(),
             (Self as ICallContext));
         locSerializer.Put('XValue', TypeInfo(double), XValue);
         locSerializer.Put('YValue', TypeInfo(double), YValue);
@@ -666,14 +666,14 @@ begin
     end;
 end;
 
-function TFitServer_Proxy.GetSelectedArea(const ProblemID: integer): TPointsResult;
+function TFitServer_Proxy.GetSelectedProfileInterval(const ProblemID: integer): TPointsResult;
 var
     locSerializer: IFormatterClient;
     strPrmName:    string;
 begin
     locSerializer := GetSerializer();
     try
-        locSerializer.BeginCall('GetSelectedArea', GetTarget(), (Self as ICallContext));
+        locSerializer.BeginCall('GetSelectedProfileInterval', GetTarget(), (Self as ICallContext));
         locSerializer.Put('ProblemID', TypeInfo(integer), ProblemID);
         locSerializer.EndCall();
 
@@ -737,14 +737,14 @@ begin
     end;
 end;
 
-function TFitServer_Proxy.GetCurveBounds(const ProblemID: integer): TPointsResult;
+function TFitServer_Proxy.SetRFactorBounds(const ProblemID: integer): TPointsResult;
 var
     locSerializer: IFormatterClient;
     strPrmName:    string;
 begin
     locSerializer := GetSerializer();
     try
-        locSerializer.BeginCall('GetCurveBounds', GetTarget(),
+        locSerializer.BeginCall('SetRFactorBounds', GetTarget(),
             (Self as ICallContext));
         locSerializer.Put('ProblemID', TypeInfo(integer), ProblemID);
         locSerializer.EndCall();
@@ -1316,7 +1316,7 @@ begin
     end;
 end;
 
-function TFitServer_Proxy.AddPointToData(const XValue: double;
+function TFitServer_Proxy.AddPointToProfile(const XValue: double;
     const YValue: double; const ProblemID: integer): TResult;
 var
     locSerializer: IFormatterClient;
@@ -1324,7 +1324,7 @@ var
 begin
     locSerializer := GetSerializer();
     try
-        locSerializer.BeginCall('AddPointToData', GetTarget(), (Self as ICallContext));
+        locSerializer.BeginCall('AddPointToProfile', GetTarget(), (Self as ICallContext));
         locSerializer.Put('XValue', TypeInfo(double), XValue);
         locSerializer.Put('YValue', TypeInfo(double), YValue);
         locSerializer.Put('ProblemID', TypeInfo(integer), ProblemID);

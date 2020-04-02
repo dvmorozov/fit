@@ -29,9 +29,9 @@ uses Classes, SysUtils,
     { Receives messages from client. }
     {$ENDIF}
     { Implements server logic. }
-    fit_server,
+    fit_service,
     { Contains algorithm container. }
-    fit_server_multithreaded, log;
+    fit_service_multithreaded, log;
 
 type
     { Class of server application. This class is basic unit of interaction
@@ -45,7 +45,7 @@ type
         FForm:      TFormMain;
         FFitStub:   TFitServerStub;
 {$ENDIF}
-        FFitServer: TFitServer;
+        FFitServer: TFitService;
 
         procedure RecreateServer;
         procedure OnException(Sender: TObject; E: Exception);
@@ -63,7 +63,7 @@ type
 {$IFNDEF FIT}
         property FitStub: TFitServerStub read FFitStub;
 {$ELSE}
-        property FitStub: TFitServer read FFitServer;
+        property FitStub: TFitService read FFitServer;
 {$ENDIF}
     end;
 
@@ -108,7 +108,7 @@ procedure TFitServerApp.RecreateServer;
 begin
     FFitServer.Free;
     FFitServer      := nil;
-    FFitServer      := TFitServerMultithreaded.Create;
+    FFitServer      := TFitServiceMultithreaded.Create;
 {$IFDEF FIT}
     FFitServer.FitProxy := FFitProxy;
 {$ELSE}

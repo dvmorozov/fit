@@ -59,7 +59,7 @@ type
 
         function SetProfilePointsSet(APointsSet: TTitlePointsSet): string;
         function GetProfilePointsSet: TTitlePointsSet;
-        function GetSelectedArea: TTitlePointsSet;
+        function GetSelectedProfileInterval: TTitlePointsSet;
 
         function SetBackgroundPointsSet(ABackgroundPoints: TTitlePointsSet): string;
         function GetBackgroundPoints: TTitlePointsSet;
@@ -75,12 +75,12 @@ type
         { Nil means initialization. }
             CP: Curve_parameters);
 {$ENDIF}
-        procedure AddPointToData(XValue, YValue: double);
+        procedure AddPointToProfile(XValue, YValue: double);
         procedure AddPointToBackground(XValue, YValue: double);
         procedure AddPointToRFactorBounds(XValue, YValue: double);
         procedure AddPointToCurvePositions(XValue, YValue: double);
 
-        procedure ReplacePointInData(
+        procedure ReplacePointInProfile(
             PrevXValue, PrevYValue, NewXValue, NewYValue: double);
         procedure ReplacePointInBackground(
             PrevXValue, PrevYValue, NewXValue, NewYValue: double);
@@ -132,8 +132,8 @@ type
 
         { Synchronous methods. }
 
-        function SelectArea(StartPointIndex, StopPointIndex: longint): string;
-        function ReturnToTotalProfile: string;
+        function SelectProfileInterval(StartPointIndex, StopPointIndex: longint): string;
+        function SelectEntireProfile: string;
         procedure CreateCurveList;
 
         { Should be called in appropriate server state. }
@@ -310,10 +310,10 @@ begin
     Result := ProcessPointsResult(FitStub.GetProfilePointsSet(FProblemId));
 end;
 
-function TFitProblem.GetSelectedArea: TTitlePointsSet;
+function TFitProblem.GetSelectedProfileInterval: TTitlePointsSet;
 begin
     Assert(Assigned(FitStub));
-    Result := ProcessPointsResult(FitStub.GetSelectedArea(FProblemId));
+    Result := ProcessPointsResult(FitStub.GetSelectedProfileInterval(FProblemId));
 end;
 
 function TFitProblem.SetBackgroundPointsSet(
@@ -415,7 +415,7 @@ end;
 function TFitProblem.GetRFactorBounds: TTitlePointsSet;
 begin
     Assert(Assigned(FitStub));
-    Result := ProcessPointsResult(FitStub.GetCurveBounds(FProblemId));
+    Result := ProcessPointsResult(FitStub.SetRFactorBounds(FProblemId));
 end;
 
 {$IFDEF FITCGI}
@@ -1028,14 +1028,14 @@ begin
     R.Free;
 end;
 
-function TFitProblem.SelectArea(StartPointIndex, StopPointIndex: longint): string;
+function TFitProblem.SelectProfileInterval(StartPointIndex, StopPointIndex: longint): string;
 var
     Res:    longint;
     ErrMsg: string;
     R:      TResult;
 begin
     Assert(Assigned(FitStub));
-    R := FitStub.SelectArea(StartPointIndex, StopPointIndex, FProblemId);
+    R := FitStub.SelectProfileInterval(StartPointIndex, StopPointIndex, FProblemId);
     if not Assigned(R) then
         raise Exception.Create(OutOfServerResources);
     Res    := R.ErrCode;
@@ -1048,14 +1048,14 @@ begin
     Result := ErrMsg;
 end;
 
-function TFitProblem.ReturnToTotalProfile: string;
+function TFitProblem.SelectEntireProfile: string;
 var
     Res:    longint;
     ErrMsg: string;
     R:      TResult;
 begin
     Assert(Assigned(FitStub));
-    R := FitStub.ReturnToTotalProfile(FProblemId);
+    R := FitStub.SelectEntireProfile(FProblemId);
     if not Assigned(R) then
         raise Exception.Create(OutOfServerResources);
     Res    := R.ErrCode;
@@ -1087,14 +1087,14 @@ begin
     end;
 end;
 
-procedure TFitProblem.AddPointToData(XValue, YValue: double);
+procedure TFitProblem.AddPointToProfile(XValue, YValue: double);
 var
     Res:    longint;
     ErrMsg: string;
     R:      TResult;
 begin
     Assert(Assigned(FitStub));
-    R := FitStub.AddPointToData(XValue, YValue, FProblemId);
+    R := FitStub.AddPointToProfile(XValue, YValue, FProblemId);
     if not Assigned(R) then
         raise Exception.Create(OutOfServerResources);
     Res    := R.ErrCode;
@@ -1132,7 +1132,7 @@ var
     R:      TResult;
 begin
     Assert(Assigned(FitStub));
-    R := FitStub.AddPointToCurveBounds(XValue, YValue, FProblemId);
+    R := FitStub.AddPointToRFactorBounds(XValue, YValue, FProblemId);
     if not Assigned(R) then
         raise Exception.Create(OutOfServerResources);
     Res    := R.ErrCode;
@@ -1163,7 +1163,7 @@ begin
     end;
 end;
 
-procedure TFitProblem.ReplacePointInData(
+procedure TFitProblem.ReplacePointInProfile(
     PrevXValue, PrevYValue, NewXValue, NewYValue: double);
 var
     Res:    longint;

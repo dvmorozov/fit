@@ -76,7 +76,7 @@ type
     ActionRemoveRFactorBounds: TAction;
     ActionSelectRFactorBoundsManually: TAction;
     ActionComputeRFactorBounds: TAction;
-    ActionImportData: TAction;
+    ActionLoadProfile: TAction;
     ActionReloadData: TAction;
     ActionSelectEntireProfile: TAction;
     ActionSelectDataInterval: TAction;
@@ -261,7 +261,7 @@ type
     procedure ActionEnableCurveScalingUpdate(Sender: TObject);
     procedure ActionMinimizeDifferenceExecute(Sender: TObject);
     procedure ActionMinimizeNumberOfCurvesExecute(Sender: TObject);
-    procedure ActionImportDataExecute(Sender: TObject);
+    procedure ActionLoadProfileExecute(Sender: TObject);
     procedure ActionQuitExecute(Sender: TObject);
     procedure ActionReloadDataExecute(Sender: TObject);
     procedure ActionRemoveBackgroundPointsExecute(Sender: TObject);
@@ -628,7 +628,7 @@ begin
     FInitYGraphMin := Chart.YGraphMin;
 end;
 
-procedure TFormMain.ActionImportDataExecute(Sender: TObject);
+procedure TFormMain.ActionLoadProfileExecute(Sender: TObject);
 (*
 var ofn: OPENFILENAME;
     Res: WINBOOL;

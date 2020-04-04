@@ -35,7 +35,7 @@ object AboutBox: TAboutBox
       Top = 56
       Width = 129
       Alignment = taCenter
-      Caption = 'written by'
+      Caption = 'designed by'
       Font.CharSet = EASTEUROPE_CHARSET
       Font.Color = clBlack
       Font.Height = -13
@@ -96,7 +96,7 @@ object AboutBox: TAboutBox
       Top = 118
       Width = 129
       Alignment = taCenter
-      Caption = 'GitHub'
+      Caption = 'View at GitHub'
       DragCursor = crDefault
       Font.CharSet = RUSSIAN_CHARSET
       Font.Color = clNavy

@@ -52,7 +52,7 @@ end;
 
 class function TCurveTypeParametersFactory.Create: ICurveTypeParametersFactory;
 begin
-    Result := CurveTypeParametersFactory as ICurveTypeParametersFactory;
+    Result := ICurveTypeParametersFactory(CurveTypeParametersFactory);
 end;
 
 function TCurveTypeParametersFactory.CreateUserCurveType(Name: string;

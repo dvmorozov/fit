@@ -37,7 +37,7 @@ type
         function GetMaxYCoord: double;
 
     public
-        procedure CopyParameters(const Dest: TObject); override;
+        procedure CopyParameters(Dest: TObject); override;
 
         constructor Create(AOwner: TComponent); override;
         destructor Destroy; override;
@@ -127,7 +127,7 @@ begin
     Result := MaxY;
 end;
 
-procedure TPointsSet.CopyParameters(const Dest: TObject);
+procedure TPointsSet.CopyParameters(Dest: TObject);
 var
     i: longint;
 begin

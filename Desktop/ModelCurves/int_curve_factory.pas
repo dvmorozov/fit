@@ -38,7 +38,6 @@ type
 
     { Interface defining basic operation for creating curve instances. }
     ICurveFactory = interface
-        ['{a627bac8-86ef-4d43-bcd5-5c2072ca5fc4}']
         //function CreatePointsSet(TypeId: TCurveTypeId): TNamedPointsSet;
         procedure RegisterCurveType(CurveClass: TCurveClass);
     end;

@@ -25,7 +25,6 @@ uses
 type
     { Interface defining basic operation for selecting curve type. }
     ICurveTypeSelector = interface
-        ['{307b3235-97a7-45bb-a6cd-ec7b5e503e51}']
         procedure SelectCurveType(TypeId: TCurveTypeId);
         function GetSelectedCurveType: TCurveTypeId;
         function GetSelectedExtremumMode: TExtremumMode;

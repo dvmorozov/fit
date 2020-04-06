@@ -61,7 +61,7 @@ end;
 
 class function TExpressionParserAdapter.Create: IExpressionParser;
 begin
-    Result := ExpressionParserAdapter as IExpressionParser;
+    Result := IExpressionParser(ExpressionParserAdapter);
 end;
 
 {$IFDEF _WINDOWS}

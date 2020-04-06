@@ -30,7 +30,7 @@ type
         { FTitle which is displayed in chart legend. }
         FTitle: string;
 
-        procedure CopyParameters(const Dest: TObject); override;
+        procedure CopyParameters(Dest: TObject); override;
         constructor CreateFromPoints(AOwner: TComponent;
             const Points: TPointsSet);
     end;
@@ -39,7 +39,7 @@ implementation
 
 {============================ TTitlePointsSet =================================}
 
-procedure TTitlePointsSet.CopyParameters(const Dest: TObject);
+procedure TTitlePointsSet.CopyParameters(Dest: TObject);
 begin
     inherited;
     TTitlePointsSet(Dest).FTitle := FTitle;

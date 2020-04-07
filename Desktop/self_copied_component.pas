@@ -52,7 +52,6 @@ type
 implementation
 
 const
-    InvalidItemType: string = 'Invalid item type...';
     InvalidDestinationType: string = 'Invalid destination type...';
 
 function TSelfCopiedCompList.GetCopy: TObject;

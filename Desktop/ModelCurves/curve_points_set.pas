@@ -108,7 +108,7 @@ type
         procedure StoreParams;
         { Restores values of variable parameters from temporary storage. }
         procedure RestoreParams;
-        procedure CopyParameters(const Dest: TObject); override;
+        procedure CopyParameters(Dest: TObject); override;
 
         { These methods are used to limit direct access to variable parameters. }
 
@@ -171,7 +171,7 @@ begin
     end;
 end;
 
-procedure TCurvePointsSet.CopyParameters(const Dest: TObject);
+procedure TCurvePointsSet.CopyParameters(Dest: TObject);
 begin
     inherited;
     TCurvePointsSet(Dest).FMinX := FMinX;

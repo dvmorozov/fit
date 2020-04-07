@@ -25,7 +25,6 @@ uses
 type
     { Interface defining basic operation for creating data loader. }
     IDataLoaderInjector = interface
-        ['{b6d01424-04d5-4a30-98f6-b81ef17cedb3}']
         function CreateDataLoader(AFileName: string): IDataLoader;
     end;
 

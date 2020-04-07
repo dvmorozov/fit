@@ -38,7 +38,7 @@ type
         function GetPointSinTL(index: longint): double;
 
     public
-        procedure CopyParameters(const Dest: TObject); override;
+        procedure CopyParameters(Dest: TObject); override;
         procedure CopyPointsFrom(const Points: TPointsSet);
 
         constructor Create(AOwner: TComponent); override;
@@ -57,7 +57,7 @@ implementation
 
 {=========================== TNeutronPointsSet ================================}
 
-procedure TNeutronPointsSet.CopyParameters(const Dest: TObject);
+procedure TNeutronPointsSet.CopyParameters(Dest: TObject);
 begin
     inherited;
     TNeutronPointsSet(Dest).Lambda := Lambda;

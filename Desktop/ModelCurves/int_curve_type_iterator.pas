@@ -25,7 +25,6 @@ uses
 type
     { Interface defining basic operation for iterating through curve types. }
     ICurveTypeIterator = interface
-        ['{3bab40fc-38da-4078-bb4d-dccd8be09b01}']
         procedure FirstCurveType;
         procedure NextCurveType;
         function EndCurveType: boolean;

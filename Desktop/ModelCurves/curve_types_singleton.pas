@@ -86,17 +86,17 @@ end;
 
 class function TCurveTypesSingleton.CreateCurveFactory: ICurveFactory;
 begin
-    Result := CurveTypesSingleton as ICurveFactory;
+    Result := ICurveFactory(CurveTypesSingleton);
 end;
 
 class function TCurveTypesSingleton.CreateCurveTypeIterator: ICurveTypeIterator;
 begin
-    Result := CurveTypesSingleton as ICurveTypeIterator;
+    Result := ICurveTypeIterator(CurveTypesSingleton);
 end;
 
 class function TCurveTypesSingleton.CreateCurveTypeSelector: ICurveTypeSelector;
 begin
-    Result := CurveTypesSingleton as ICurveTypeSelector;
+    Result := ICurveTypeSelector(CurveTypesSingleton);
 end;
 
 function SortAlphabetically(Item1, Item2: Pointer): integer;

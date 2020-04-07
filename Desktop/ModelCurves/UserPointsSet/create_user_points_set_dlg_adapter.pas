@@ -56,7 +56,7 @@ end;
 
 class function TCreateUserPointsSetDlgAdapter.Create: ICreateUserPointsSetDlg;
 begin
-    Result := CreateUserPointsSetDlgAdapter as ICreateUserPointsSetDlg;
+    Result := ICreateUserPointsSetDlg(CreateUserPointsSetDlgAdapter);
 end;
 
 function TCreateUserPointsSetDlgAdapter.ShowModal: integer;

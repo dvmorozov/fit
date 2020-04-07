@@ -45,7 +45,7 @@ type
         ViewMode: longint;
 
         function GetCopy: TObject; override;
-        procedure CopyParameters(const Dest: TObject); override;
+        procedure CopyParameters(Dest: TObject); override;
     end;
 
     { Container of curves which is stored in XML-stream. }
@@ -112,7 +112,7 @@ begin
     CopyParameters(Result);
 end;
 
-procedure TMSCRCurveList.CopyParameters(const Dest: TObject);
+procedure TMSCRCurveList.CopyParameters(Dest: TObject);
 begin
     inherited;
     TMSCRCurveList(Dest).Lambda   := Lambda;

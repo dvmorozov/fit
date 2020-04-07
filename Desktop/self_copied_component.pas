@@ -19,21 +19,17 @@ uses
 type
     { The interface of component which can copy itself. }
     ISelfCopied = interface
-        ['{DF1ABB41-F255-11D4-968F-C7AD39AA7469}']
         { Returns only copy of the object itself without copies of associated objects. }
         function GetCopy: TObject;
-        procedure CopyParameters(const Dest: TObject);
+        procedure CopyParameters(Dest: TObject);
     end;
-
-const
-    SelfCopiedGUID: TGUID = '{DF1ABB41-F255-11D4-968F-C7AD39AA7469}';
 
 type
     { The component implementing self copying interface. }
     TSelfCopiedComponent = class(TCBRCComponent, ISelfCopied)
     public
         function GetCopy: TObject; virtual;
-        procedure CopyParameters(const Dest: TObject); virtual;
+        procedure CopyParameters(Dest: TObject); virtual;
     end;
 
     ESelfCopiedCompList = class(Exception);
@@ -46,7 +42,7 @@ type
         function GetCopy: TObject; virtual;
         { Returns copy of list which owns its items. }
         function GetSharedCopy: TObject; virtual;
-        procedure CopyParameters(const Dest: TObject); virtual;
+        procedure CopyParameters(Dest: TObject); virtual;
 
         procedure Insert(Index: integer; Item: TComponent); override;
         function Add(Item: TComponent): integer; override;
@@ -56,7 +52,6 @@ type
 implementation
 
 const
-    InvalidItemType: string = 'Invalid item type...';
     InvalidDestinationType: string = 'Invalid destination type...';
 
 function TSelfCopiedCompList.GetCopy: TObject;
@@ -76,10 +71,9 @@ begin
         TSelfCopiedCompList(Result).Add(TComponent(Items[i]));
 end;
 
-procedure TSelfCopiedCompList.CopyParameters(const Dest: TObject);
+procedure TSelfCopiedCompList.CopyParameters(Dest: TObject);
 var
     i:   longint;
-    ISC: ISelfCopied;
 begin
     if Dest.ClassType <> Self.ClassType then
         raise ESelfCopiedCompList.Create(InvalidDestinationType);
@@ -89,56 +83,30 @@ begin
         begin
             TSelfCopiedCompList(Dest).Clear;
             for i := 0 to Count - 1 do
-                if Items[i].GetInterface(SelfCopiedGUID, ISC) then
-                    TSelfCopiedCompList(Dest).Add(TComponent(ISC.GetCopy))
-                else
-                    raise ESelfCopiedCompList.Create(InvalidItemType);
+                TSelfCopiedCompList(Dest).Add(
+                    TComponent(TSelfCopiedComponent(Items[i]).GetCopy))
         end
         else
+        begin
             for i := 0 to Count - 1 do
-                if Items[i].GetInterface(SelfCopiedGUID, ISC) then
-                    ISC.CopyParameters(TSelfCopiedCompList(Dest).Items[i])
-                else
-                    raise ESelfCopiedCompList.Create(InvalidItemType);
+                TSelfCopiedComponent(Items[i]).CopyParameters(
+                    TSelfCopiedCompList(Dest).Items[i]);
+        end;
 end;
 
 procedure TSelfCopiedCompList.Insert(Index: integer; Item: TComponent);
-var
-    ISC: ISelfCopied;
 begin
-    if Item.GetInterface(SelfCopiedGUID, ISC) then
-    begin
-        inherited;
-        ISC._AddRef;
-    end
-    else
-        raise ESelfCopiedCompList.Create(InvalidItemType);
+    inherited;
 end;
 
 function TSelfCopiedCompList.Add(Item: TComponent): integer;
-var
-    ISC: ISelfCopied;
 begin
-    if Item.GetInterface(SelfCopiedGUID, ISC) then
-    begin
-        Result := inherited;
-        ISC._AddRef;
-    end
-    else
-        raise ESelfCopiedCompList.Create(InvalidItemType);
+    Result := inherited;
 end;
 
 procedure TSelfCopiedCompList.Delete(Index: integer);
-var
-    ISC: ISelfCopied;
 begin
-    if Items[Index].GetInterface(SelfCopiedGUID, ISC) then
-    begin
-        ISC._Release;
-        inherited;
-    end
-    else
-        raise ESelfCopiedCompList.Create(InvalidItemType);
+    inherited;
 end;
 
 function TSelfCopiedComponent.GetCopy: TObject;
@@ -153,7 +121,7 @@ begin
     end;
 end;
 
-procedure TSelfCopiedComponent.CopyParameters(const Dest: TObject);
+procedure TSelfCopiedComponent.CopyParameters(Dest: TObject);
 begin
     if Dest.ClassType <> Self.ClassType then
         raise ESelfCopiedCompList.Create(InvalidDestinationType);

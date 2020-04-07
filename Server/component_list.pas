@@ -21,7 +21,6 @@ uses
 
 type
     ISelfChecked = interface
-        ['{E7E7008A-EE1C-4828-B1D6-A53806820A66}']
         procedure IsReady;
         function MyNameIs: string;
     end;

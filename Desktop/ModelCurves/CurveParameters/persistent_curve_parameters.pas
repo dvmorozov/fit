@@ -45,7 +45,7 @@ type
         constructor Create(AOwner: TComponent); override;
         destructor Destroy; override;
 
-        procedure CopyParameters(const Dest: TObject); override;
+        procedure CopyParameters(Dest: TObject); override;
         { Parameter names aren't case sensitive. }
 
         property Parameters[Index: longint]: TSpecialCurveParameter
@@ -122,7 +122,7 @@ begin
     inherited;
 end;
 
-procedure Curve_parameters.CopyParameters(const Dest: TObject);
+procedure Curve_parameters.CopyParameters(Dest: TObject);
 var
     i: longint;
     Parameter, NewParameter: TSpecialCurveParameter;

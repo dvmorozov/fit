@@ -127,8 +127,7 @@ type
         property _Result: string read F_Result write F_Result;
     end;
 
-    IFitServer = interface(IInvokable)
-        ['{8935335B-96A6-4B32-A1E6-65BE9A4B3AAF}']
+    IFitServer = interface
         function SmoothProfile(const ProblemID: integer): TResult;
         function SubtractBackground(const Auto: boolean;
             const ProblemID: integer): TResult;

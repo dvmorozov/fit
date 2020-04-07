@@ -25,7 +25,6 @@ uses
 type
     { Interface defining basic operation for storing parameters of custom curve type. }
     ICurveTypeStorage = interface
-        ['{8a725ed0-9b41-45fa-bcdf-635e21dc88b6}']
         procedure AddCurveType(CurveType: Curve_type);
         procedure UpdateCurveType(CurveType: Curve_type);
         procedure DeleteCurveType(CurveType: Curve_type);

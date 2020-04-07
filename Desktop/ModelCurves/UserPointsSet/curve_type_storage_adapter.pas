@@ -56,7 +56,7 @@ end;
 
 class function TCurveTypeStorageAdapter.Create: ICurveTypeStorage;
 begin
-    Result := CurveTypeStorageAdapter as ICurveTypeStorage;
+    Result := ICurveTypeStorage(CurveTypeStorageAdapter);
 end;
 
 procedure TCurveTypeStorageAdapter.AddCurveType(CurveType: Curve_type);

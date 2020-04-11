@@ -108,7 +108,7 @@ end;
 
 function TMSCRCurveList.GetCopy: TObject;
 begin
-    Result := TMSCRCurveList.Create(nil);
+    Result := TMSCRCurveList.Create;
     CopyParameters(Result);
 end;
 
@@ -124,7 +124,7 @@ end;
 constructor Parameters_list.Create(Owner: TComponent);
 begin
     inherited Create(Owner);
-    FParameters := TMSCRCurveList.Create(nil);
+    FParameters := TMSCRCurveList.Create;
 end;
 
 destructor Parameters_list.Destroy;
@@ -135,7 +135,6 @@ end;
 
 {$warnings off}
 initialization
-    RegisterClass(TMSCRCurveList);
     DecimalSeparator := '.';
 end.
 {$warnings on}

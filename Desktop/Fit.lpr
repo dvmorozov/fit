@@ -43,7 +43,6 @@ uses {$IFDEF UNIX} {$IFDEF UseCThreads}
     persistent_curve_parameter_container,
     persistent_curve_parameters,
     self_copied_component,
-    SelfCheckedComponentList,
     special_curve_parameter,
     StrUtils,
     table_components,

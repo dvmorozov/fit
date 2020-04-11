@@ -1050,7 +1050,7 @@ begin
     end;
     Assert(Assigned(MaxGP));
     DeletePoint(FCurvePositions, MaxGP.FInitx0);
-    Deleted := FCurves.Extract(MaxGP);
+    Deleted := TCurvePointsSet(FCurves.Extract(MaxGP));
     Result  := True;
 end;
 
@@ -1092,7 +1092,7 @@ begin
     end;
     Assert(Assigned(MinGP));
     DeletePoint(FCurvePositions, MinGP.FInitx0);
-    Deleted := FCurves.Extract(MinGP);
+    Deleted := TCurvePointsSet(FCurves.Extract(MinGP));
     Result  := True;
 end;
 
@@ -1247,7 +1247,7 @@ begin
 
     //  Saves previously created curve instances.
     if not Assigned(FCurves) then
-        FCurves := TSelfCopiedCompList.Create(nil);
+        FCurves := TSelfCopiedCompList.Create;
 
     //  sozdaem zanovo summarnyy profil'
     if Assigned(FCalcProfile) then

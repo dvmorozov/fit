@@ -20,13 +20,13 @@ unit fit_viewer;
 interface
 
 uses
-    Classes, curve_points_set, Graphics, named_points_set,
+    Classes, Contnrs, curve_points_set, Graphics, named_points_set,
     neutron_points_set, points_set, self_copied_component,
     SysUtils, title_points_set,
 {$IFNDEF SERVER}
     fit_client, int_fit_viewer,
 {$ENDIF}
-    Forms, mscr_specimen_list, SelfCheckedComponentList, TAGraph;
+    Forms, mscr_specimen_list, TAGraph;
 
 {$IFNDEF SERVER}
 // Switch on updating legend and grids.
@@ -72,7 +72,7 @@ type
     protected
         { List of data sets for each item of which chart serie is related.
           The list is passive, it contains pointers to external data. }
-        FPointsSetList: TSelfCheckedComponentList;
+        FPointsSetList: TComponentList;
         { Returns maximum number of curves in one of given R-factor intervals. }
         function GetMaxCurveNum(CurvesList: TSelfCopiedCompList;
             RFactorBounds: TTitlePointsSet): longint;
@@ -786,8 +786,8 @@ end;
 constructor TFitViewer.Create(AOwner: TComponent);
 begin
     inherited;
-    FPointsSetList := TSelfCheckedComponentList.Create(nil);
-    FPointsSetList.SetState(cfPassive);
+    FPointsSetList := TComponentList.Create;
+    //??? FPointsSetList.SetState(cfPassive);
     FXCoordMode    := 0;
     FUpdateGrids   := True;
     FUpdateLegends := True;

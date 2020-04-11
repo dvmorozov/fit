@@ -32,11 +32,11 @@ interface
 }
 
 uses
-    calculated_curve_parameter, Classes, curve_points_set, curve_types_singleton,
-    gauss_points_set, int_curve_type_selector, log, mscr_specimen_list,
-    named_points_set, persistent_curve_parameter_container,
-    persistent_curve_parameters, points_set, SelfCheckedComponentList,
-    special_curve_parameter, SysUtils, title_points_set
+    calculated_curve_parameter, Classes, Contnrs, curve_points_set,
+    curve_types_singleton, gauss_points_set, int_curve_type_selector,
+    log, mscr_specimen_list, named_points_set,
+    persistent_curve_parameter_container, persistent_curve_parameters,
+    points_set, special_curve_parameter, SysUtils, title_points_set
 {$IFDEF FIT}
     {Proxy to client to call it back.}
     , fit_server_proxy
@@ -130,7 +130,7 @@ type
         FSelectedAreaMode: boolean;
         { List of subtasks for fitting parts of profile on intervals.
           By default is active. }
-        FTaskList:   TSelfCheckedComponentList;
+        FTaskList:   TComponentList;
         { Parameters of user defined curve. The object is created by server.
           It is necessary to provide parameter editing on the client-side. }
         FParams:     Curve_parameters;
@@ -700,9 +700,9 @@ begin
     FRFactorBounds  := TTitlePointsSet.Create(nil);
     // elementy v eti spiski d. dobavlyat'sya sinhronno
     FCurvePositions := TTitlePointsSet.Create(nil);
-    FCurveList      := TMSCRCurveList.Create(nil);
+    FCurveList      := TMSCRCurveList.Create;
     FCurveList.Lambda := WaveLength;
-    FCurvesList     := TSelfCopiedCompList.Create(nil);
+    FCurvesList     := TSelfCopiedCompList.Create;
 
     SetState(ProfileWaiting);
 end;
@@ -2269,7 +2269,7 @@ begin
 
     FCurvesList.Free;
     FCurvesList := nil;
-    FCurvesList := TSelfCopiedCompList.Create(nil);
+    FCurvesList := TSelfCopiedCompList.Create;
 
     for i := 0 to FTaskList.Count - 1 do
     begin
@@ -2497,7 +2497,7 @@ begin
 
     FTaskList.Free;
     FTaskList := nil;
-    FTaskList := TSelfCheckedComponentList.Create(nil);
+    FTaskList := TComponentList.Create;
 
     // sozdanie i zapolnenie podzadach
     // odna podzadacha sozdaetsya dazhe kogda intervaly ne opredeleny;

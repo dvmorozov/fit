@@ -22,8 +22,8 @@ unit app_settings;
 interface
 
 uses
-    Classes, Laz_DOM, Laz_XMLCfg, Laz_XMLStreaming, LCLProc,
-    persistent_curve_parameters, SelfCheckedComponentList, SysUtils, TypInfo;
+    Classes, Contnrs, Laz_DOM, Laz_XMLCfg, Laz_XMLStreaming, LCLProc,
+    persistent_curve_parameters, SysUtils, TypInfo;
 
 type
     { Contains and serializes attributes of mathematical expression. }
@@ -65,7 +65,7 @@ type
     { Contains and serializes application settings. }
     Settings_v1 = class(TComponent)
     private
-        FCurveTypes: TSelfCheckedComponentList;
+        FCurveTypes: TComponentList;
         FReserved:   longint;
 
         procedure ReadCurveTypes(Reader: TReader);
@@ -77,7 +77,7 @@ type
         { Does not work with XML-streams. }
         procedure DefineProperties(Filer: TFiler); override;
 
-        property Curve_types: TSelfCheckedComponentList
+        property Curve_types: TComponentList
             read FCurveTypes write FCurveTypes;
 
     published
@@ -211,7 +211,7 @@ end;
 constructor Settings_v1.Create(Owner: TComponent);
 begin
     inherited Create(Owner);
-    FCurveTypes := TSelfCheckedComponentList.Create(nil);
+    FCurveTypes := TComponentList.Create;
     FReserved   := -1;
 end;
 
@@ -231,14 +231,14 @@ end;
 procedure Settings_v1.ReadCurveTypes(Reader: TReader);
 begin
     FCurveTypes.Free;
-    FCurveTypes := TSelfCheckedComponentList(Reader.ReadComponent);
+    FCurveTypes := TComponentList(Reader.ReadComponent);
 end;
 
 {$hints on}
 
 procedure Settings_v1.WriteCurveTypes(Writer: TWriter);
 begin
-    Writer.WriteComponent(FCurveTypes);
+    //??? Writer.WriteComponent(FCurveTypes);
 end;
 
 {================================ Curve_type ==================================}

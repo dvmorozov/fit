@@ -357,7 +357,6 @@ end;
 
 initialization
     RegisterClass(Curve_parameters);
-    RegisterClass(TCurveList);
 {$warnings off}
     DecimalSeparator := '.';
 {$warnings on}

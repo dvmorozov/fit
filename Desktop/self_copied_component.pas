@@ -14,7 +14,7 @@ unit self_copied_component;
 interface
 
 uses
-    CBRCComponent, Classes, SelfCheckedComponentList, SysUtils;
+    CBRCComponent, Classes, Contnrs, SysUtils;
 
 type
     { The interface of component which can copy itself. }
@@ -37,16 +37,16 @@ type
     { List of self copied components. By default is always active, so copy of 
       list is also active. Caller should make the list inactive by itself if 
       necessary. }
-    TSelfCopiedCompList = class(TSelfCheckedComponentList, ISelfCopied)
+    TSelfCopiedCompList = class(TComponentList, ISelfCopied)
     public
         function GetCopy: TObject; virtual;
         { Returns copy of list which owns its items. }
         function GetSharedCopy: TObject; virtual;
         procedure CopyParameters(Dest: TObject); virtual;
 
-        procedure Insert(Index: integer; Item: TComponent); override;
-        function Add(Item: TComponent): integer; override;
-        procedure Delete(Index: integer); override;
+        procedure Insert(Index: integer; Item: TComponent); virtual;
+        function Add(Item: TComponent): integer; virtual;
+        procedure Delete(Index: integer); virtual;
     end;
 
 implementation
@@ -57,7 +57,7 @@ const
 function TSelfCopiedCompList.GetCopy: TObject;
 begin
     Result := NewInstance;
-    TSelfCopiedCompList(Result).Create(nil);
+    TSelfCopiedCompList(Result).Create;
     CopyParameters(Result);
 end;
 
@@ -66,7 +66,7 @@ var
     i: longint;
 begin
     Result := NewInstance;
-    TSelfCopiedCompList(Result).Create(nil);
+    TSelfCopiedCompList(Result).Create;
     for i := 0 to Count - 1 do
         TSelfCopiedCompList(Result).Add(TComponent(Items[i]));
 end;

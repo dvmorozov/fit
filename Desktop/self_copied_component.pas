@@ -14,7 +14,7 @@ unit self_copied_component;
 interface
 
 uses
-    CBRCComponent, Classes, Contnrs, SysUtils;
+    Classes, Contnrs, SysUtils;
 
 type
     { The interface of component which can copy itself. }
@@ -26,7 +26,7 @@ type
 
 type
     { The component implementing self copying interface. }
-    TSelfCopiedComponent = class(TCBRCComponent, ISelfCopied)
+    TSelfCopiedComponent = class(TComponent, ISelfCopied)
     public
         function GetCopy: TObject; virtual;
         procedure CopyParameters(Dest: TObject); virtual;

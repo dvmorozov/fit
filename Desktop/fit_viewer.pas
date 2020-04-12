@@ -787,7 +787,6 @@ constructor TFitViewer.Create(AOwner: TComponent);
 begin
     inherited;
     FPointsSetList := TComponentList.Create;
-    //??? FPointsSetList.SetState(cfPassive);
     FXCoordMode    := 0;
     FUpdateGrids   := True;
     FUpdateLegends := True;

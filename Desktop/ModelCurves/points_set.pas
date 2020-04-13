@@ -180,7 +180,9 @@ end;
 
 procedure TPointsSet.Clear;
 begin
-    SetLength(FPoints, 0);
+    if Assigned(FPoints) then
+        SetLength(FPoints, 0);
+    FPoints := nil;
 end;
 
 procedure TPointsSet.DeletePoint(XValue: double);

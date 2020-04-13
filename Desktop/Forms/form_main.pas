@@ -2286,7 +2286,7 @@ begin
             //  mozhno voobsche ubrat' proverku i deystvovat' kak pri
             //  polnost'yu avtomaticheskom raschete; eto pozvolit
             //  oboyti udalenie fona
-            FitServerState := FitClientApp_.FitClient.FitProxy.GetState;
+            FitServerState := FitClientApp_.FitClient.FitService.GetState;
             if (FitServerState = ReadyForFit) or
                //   dopuskaetsya zapuskat' raschet v dannom sostoyanii,
                //   t.k. neobhodimye dannye budut dopolneny avtomaticheski

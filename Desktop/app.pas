@@ -155,7 +155,7 @@ initialization
     { Server is included into application. }
 {$IFDEF FIT}
     { Link is established to make calls from client to server. }
-    FitClientApp_.FitClient.FitProxy     := FitServerApp_.FitStub;
+    FitClientApp_.FitClient.FitService   := FitServerApp_.FitStub;
     { Link is established to make calls from server to client. }
     FitServerApp_.FitProxy.FitClientStub := FitClientApp_.FitClientStub;
 {$ENDIF}

@@ -98,7 +98,7 @@ type
     { Implements all client logic of the application. Must be completely independent from UI. }
     TFitClient = class(TInterfacedObject, IClientCallback)
     protected
-        FFitProxy: IFitService;
+        FFitService:     IFitService;
         FDataLoader:     IDataLoader;
         FDataLoaderInjector: IDataLoaderInjector;
         { All the data displayed on the chart. They are required to be able control of X-coordinate. }
@@ -341,7 +341,7 @@ type
         property AsyncState: TAsyncState read FAsyncState;
         property SelectedAreaMode: boolean read FSelectedAreaMode;
 
-        property FitProxy: IFitService read FFitProxy write FFitProxy;
+        property FitService: IFitService read FFitService write FFitService;
     end;
 
 const
@@ -442,7 +442,7 @@ end;
 {$IFDEF _WINDOWS}
 function TFitClient.GetSpecialCurveParameters: Curve_parameters;
 begin
-    Result := FitProxy.GetSpecialCurveParameters;
+    Result := FitService.GetSpecialCurveParameters;
 end;
 
 {$ENDIF}
@@ -477,9 +477,9 @@ end;
 procedure TFitClient.SelectProfileInterval(StartPointIndex, StopPointIndex: longint);
 begin
     Assert(Assigned(FExpProfile));
-    Assert(Assigned(FitProxy));
+    Assert(Assigned(FitService));
 
-    FitProxy.SelectProfileInterval(StartPointIndex, StopPointIndex);
+    FitService.SelectProfileInterval(StartPointIndex, StopPointIndex);
     Clear;
     SelectProfileIntervalActual(FExpProfile, StartPointIndex, StopPointIndex);
     PlotSelectedProfileInterval;
@@ -490,9 +490,9 @@ end;
 procedure TFitClient.SelectEntireProfile;
 begin
     Assert(Assigned(FExpProfile));
-    Assert(Assigned(FitProxy));
+    Assert(Assigned(FitService));
 
-    FitProxy.SelectEntireProfile;
+    FitService.SelectEntireProfile;
     Clear;
     PlotExpProfile;
 
@@ -601,7 +601,7 @@ begin
         //  dannye udalyayutsya dlya ucheta vozmozhnyh izmeneniy,
         //  naprimer udaleniya fona
         RemoveSelectedArea;
-        FSelectedArea := FitProxy.GetSelectedProfileInterval;
+        FSelectedArea := FitService.GetSelectedProfileInterval;
         //??? kak zdes' obrabatyvat' isklyucheniya
         FSelectedArea.WaveLength := FWaveLength;
         FSelectedArea.FTitle := SelectedAreaName;
@@ -612,7 +612,7 @@ begin
         //  dannye udalyayutsya dlya ucheta vozmozhnyh izmeneniy,
         //  naprimer udaleniya fona
         ClearExpProfile;
-        SetExpProfile(FitProxy.GetProfilePointsSet);
+        SetExpProfile(FitService.GetProfilePointsSet);
         PlotExpProfile;
     end;
 end;
@@ -628,7 +628,7 @@ end;
 procedure TFitClient.UpdateAll;
 begin
     RemoveGaussProfile;
-    FCurveProfile := FitProxy.GetCalcProfilePointsSet;
+    FCurveProfile := FitService.GetCalcProfilePointsSet;
     if Assigned(FCurveProfile) and (FCurveProfile.PointsCount <> 0) then
     begin
         FCurveProfile.FTitle := SummarizedName;
@@ -637,7 +637,7 @@ begin
     end;
 
     RemoveDeltaProfile;
-    FDeltaProfile := FitProxy.GetDeltaProfilePointsSet;
+    FDeltaProfile := FitService.GetDeltaProfilePointsSet;
     if Assigned(FDeltaProfile) and (FDeltaProfile.PointsCount <> 0) then
     begin
         FDeltaProfile.FTitle := DeltaName;
@@ -648,7 +648,7 @@ begin
     RemoveCurvePositions;
     FCurvePositions.Free;
     FCurvePositions := nil;
-    FCurvePositions := FitProxy.GetCurvePositions;
+    FCurvePositions := FitService.GetCurvePositions;
     if Assigned(FCurvePositions) and (FCurvePositions.PointsCount <> 0) then
     begin
         FCurvePositions.FTitle := CurvePositionsName;
@@ -659,7 +659,7 @@ begin
     RemoveRFactorBounds; //  nuzhno skryvat', t.k. menyaetsya uk-l'
     FRFactorBounds.Free;
     FRFactorBounds := nil;
-    FRFactorBounds := FitProxy.GetRFactorBounds;
+    FRFactorBounds := FitService.GetRFactorBounds;
     if Assigned(FRFactorBounds) and (FRFactorBounds.PointsCount <> 0) then
     begin
         FRFactorBounds.FTitle := RFactorBoundsName;
@@ -670,13 +670,13 @@ begin
     HideCurves;
     FCurvesList.Free;
     FCurvesList := nil;
-    FCurvesList := FitProxy.GetCurvesList;
+    FCurvesList := FitService.GetCurvesList;
     if Assigned(FCurvesList) then
         SetCurvesListLambda;
 
     FCurveList.Free;
     FCurveList := nil;
-    FCurveList := FitProxy.GetCurveList;
+    FCurveList := FitService.GetCurveList;
     if Assigned(FCurveList) then
         FCurveList.FWaveLength := FWaveLength;
 
@@ -689,7 +689,7 @@ end;
 
 procedure TFitClient.Done;
 begin
-    Assert(Assigned(FitProxy));
+    Assert(Assigned(FitService));
 
     ShowProfile;
     UpdateAll;
@@ -705,12 +705,12 @@ end;
 procedure TFitClient.ComputeCurveBoundsDone;
 begin
     //  zdes' eto nedopustimye sostoyaniya
-    Assert(Assigned(FitProxy));
+    Assert(Assigned(FitService));
     //  nuzhno skryvat', t.k. menyaetsya uk-l'
     RemoveRFactorBounds;
     FRFactorBounds.Free;
     FRFactorBounds := nil;
-    FRFactorBounds := FitProxy.GetRFactorBounds;
+    FRFactorBounds := FitService.GetRFactorBounds;
     if Assigned(FRFactorBounds) and (FRFactorBounds.PointsCount <> 0) then
     begin
         FRFactorBounds.FTitle := RFactorBoundsName;
@@ -727,12 +727,12 @@ end;
 procedure TFitClient.ComputeBackgroundPointsDone;
 begin
     //  zdes' eto nedopustimye sostoyaniya
-    Assert(Assigned(FitProxy));
+    Assert(Assigned(FitService));
 
     RemoveBackgroundPoints;
     FBackgroundPoints.Free;
     FBackgroundPoints := nil;
-    FBackgroundPoints := FitProxy.GetBackgroundPoints;
+    FBackgroundPoints := FitService.GetBackgroundPoints;
     if Assigned(FBackgroundPoints) and (FBackgroundPoints.PointsCount <> 0) then
     begin
         FBackgroundPoints.FTitle := BackgroundPointsName;
@@ -749,12 +749,12 @@ end;
 procedure TFitClient.ComputeCurvePositionsDone;
 begin
     //  zdes' eto nedopustimye sostoyaniya
-    Assert(Assigned(FitProxy));
+    Assert(Assigned(FitService));
     //  nuzhno skryvat', t.k. menyaetsya uk-l'
     RemoveRFactorBounds;
     FRFactorBounds.Free;
     FRFactorBounds := nil;
-    FRFactorBounds := FitProxy.GetRFactorBounds;
+    FRFactorBounds := FitService.GetRFactorBounds;
     if Assigned(FRFactorBounds) and (FRFactorBounds.PointsCount <> 0) then
     begin
         FRFactorBounds.FTitle := RFactorBoundsName;
@@ -765,7 +765,7 @@ begin
     RemoveCurvePositions;
     FCurvePositions.Free;
     FCurvePositions := nil;
-    FCurvePositions := FitProxy.GetCurvePositions;
+    FCurvePositions := FitService.GetCurvePositions;
     if Assigned(FCurvePositions) and (FCurvePositions.PointsCount <> 0) then
     begin
         FCurvePositions.FTitle := CurvePositionsName;
@@ -926,13 +926,13 @@ end;
 procedure TFitClient.PlotExpProfile;
 begin
     if Assigned(FFitViewer) then
-        FFitViewer.PlotDataPoints(Self, FExpProfile);
+       FFitViewer.PlotExpProfile(Self, FExpProfile);
 end;
 
 procedure TFitClient.HideExpProfile;
 begin
     if Assigned(FFitViewer) then
-        FFitViewer.HideDataPoints(Self, FExpProfile);
+        FFitViewer.HideExpProfile(Self, FExpProfile);
 end;
 
 procedure TFitClient.PlotSelectedProfileInterval;
@@ -1008,7 +1008,7 @@ begin
         ReplacePoint(FExpProfile,
             PrevXValue, PrevYValue, NewXValue, NewYValue, PlotExpProfile);
     end;
-    FitProxy.ReplacePointInProfile(PrevXValue, PrevYValue, NewXValue, NewYValue);
+    FitService.ReplacePointInProfile(PrevXValue, PrevYValue, NewXValue, NewYValue);
 end;
 
 procedure TFitClient.ReplacePointInSelected(
@@ -1026,7 +1026,7 @@ begin
     Assert(Assigned(FBackgroundPoints));
     ReplacePoint(FBackgroundPoints,
         PrevXValue, PrevYValue, NewXValue, NewYValue, PlotBackground);
-    FitProxy.ReplacePointInBackground(
+    FitService.ReplacePointInBackground(
         PrevXValue, PrevYValue, NewXValue, NewYValue);
 end;
 
@@ -1063,7 +1063,7 @@ begin
     //Assert(Assigned(FRFactorBounds));
     //AddPoint(FRFactorBounds, XValue, YValue, PlotRFactorBounds);
 
-    FitProxy.AddPointToRFactorBounds(XValue, YValue);
+    FitService.AddPointToRFactorBounds(XValue, YValue);
     UpdateAll;
 end;
 
@@ -1073,7 +1073,7 @@ begin
     //Assert(Assigned(FRFactorBounds));
     //AddPoint(FCurvePositions, XValue, YValue, PlotCurvePositions);
 
-    FitProxy.AddPointToCurvePositions(XValue, YValue);
+    FitService.AddPointToCurvePositions(XValue, YValue);
     UpdateAll;
 end;
 
@@ -1151,7 +1151,7 @@ end;
 
 procedure TFitClient.LoadDataSet(FileName: string);
 begin
-    Assert(Assigned(FitProxy));
+    Assert(Assigned(FitService));
 
     FDataLoader := FDataLoaderInjector.CreateDataLoader(FileName);
     FDataLoader.LoadDataSet(FileName);
@@ -1162,14 +1162,14 @@ begin
     //  isklyuchenie v servere ne dolzhno preryvat'
     //  posl-t' vypolneniya v kliente, poetomu
     //  vyzyvaetsya v poslednyuyu ochered'
-    FitProxy.SetProfilePointsSet(FExpProfile);
+    FitService.SetProfilePointsSet(FExpProfile);
 end;
 
 procedure TFitClient.Reload;
 begin
     //  zdes' eto nedopustimye sostoyaniya
     Assert(Assigned(FDataLoader));
-    Assert(Assigned(FitProxy));
+    Assert(Assigned(FitService));
 
     FDataLoader.Reload;
     CopyProfileDataFromLoader;
@@ -1179,162 +1179,162 @@ begin
     //  isklyuchenie v servere ne dolzhno preryvat'
     //  posl-t' vypolneniya v kliente, poetomu
     //  vyzyvaetsya v poslednyuyu ochered'
-    FitProxy.SetProfilePointsSet(FExpProfile);
+    FitService.SetProfilePointsSet(FExpProfile);
 end;
 
 procedure TFitClient.SmoothProfile;
 begin
-    Assert(Assigned(FitProxy));
+    Assert(Assigned(FitService));
 
-    FitProxy.SmoothProfile;
+    FitService.SmoothProfile;
     FExpProfile.Free;
-    FExpProfile := FitProxy.GetProfilePointsSet;
+    FExpProfile := FitService.GetProfilePointsSet;
     FToRefresh := FExpProfile;
     RefreshPointsSet;
 end;
 
 procedure TFitClient.SubtractBackground(Auto: boolean);
 begin
-    Assert(Assigned(FitProxy));
+    Assert(Assigned(FitService));
     if not Auto then
     begin
         Assert(Assigned(FBackgroundPoints));
-        FitProxy.SetBackgroundPointsSet(FBackgroundPoints);
+        FitService.SetBackgroundPointsSet(FBackgroundPoints);
     end;
-    FitProxy.SubtractBackground(Auto);
+    FitService.SubtractBackground(Auto);
     //  ochistka spiska i skrytie grafika
     RemoveBackgroundPoints;
     //  perezagruzka dannyh
     ClearExpProfile;
-    SetExpProfile(FitProxy.GetProfilePointsSet);
+    SetExpProfile(FitService.GetProfilePointsSet);
     PlotExpProfile;
 end;
 
 procedure TFitClient.DoAllAutomatically;
 begin
-    Assert(Assigned(FitProxy));
-    FitProxy.DoAllAutomatically;
+    Assert(Assigned(FitService));
+    FitService.DoAllAutomatically;
     FAsyncState := AsyncWorks;
 end;
 
 procedure TFitClient.MinimizeDifference;
 begin
-    Assert(Assigned(FitProxy));
-    //???    FitProxy.SetCurvePositions(FCurvePositions);
-    //???    FitProxy.SetRFactorBounds(FRFactorBounds);
-    FitProxy.MinimizeDifference;
+    Assert(Assigned(FitService));
+    //???    FitService.SetCurvePositions(FCurvePositions);
+    //???    FitService.SetRFactorBounds(FRFactorBounds);
+    FitService.MinimizeDifference;
     FAsyncState := AsyncWorks;
 end;
 
 procedure TFitClient.MinimizeNumberOfCurves;
 begin
-    Assert(Assigned(FitProxy));
-    //???    FitProxy.SetCurvePositions(FCurvePositions);
-    //???    FitProxy.SetRFactorBounds(FRFactorBounds);
-    FitProxy.MinimizeNumberOfCurves;
+    Assert(Assigned(FitService));
+    //???    FitService.SetCurvePositions(FCurvePositions);
+    //???    FitService.SetRFactorBounds(FRFactorBounds);
+    FitService.MinimizeNumberOfCurves;
     FAsyncState := AsyncWorks;
 end;
 
 procedure TFitClient.ComputeCurveBounds;
 begin
-    Assert(Assigned(FitProxy));
-    FitProxy.ComputeCurveBounds;
+    Assert(Assigned(FitService));
+    FitService.ComputeCurveBounds;
     FAsyncState := AsyncWorks;
 end;
 
 procedure TFitClient.ComputeBackgroundPoints;
 begin
-    Assert(Assigned(FitProxy));
-    FitProxy.ComputeBackgroundPoints;
+    Assert(Assigned(FitService));
+    FitService.ComputeBackgroundPoints;
     FAsyncState := AsyncWorks;
 end;
 
 procedure TFitClient.ComputeCurvePositions;
 begin
-    Assert(Assigned(FitProxy));
-    FitProxy.ComputeCurvePositions;
+    Assert(Assigned(FitService));
+    FitService.ComputeCurvePositions;
     FAsyncState := AsyncWorks;
 end;
 
 procedure TFitClient.SelectAllPointsAsCurvePositions;
 begin
-    Assert(Assigned(FitProxy));
-    FitProxy.SelectAllPointsAsCurvePositions;
+    Assert(Assigned(FitService));
+    FitService.SelectAllPointsAsCurvePositions;
     FAsyncState := AsyncWorks;
 end;
 
 procedure TFitClient.CreateCurveList;
 begin
-    Assert(Assigned(FitProxy));
-    FitProxy.CreateCurveList;
+    Assert(Assigned(FitService));
+    FitService.CreateCurveList;
 end;
 
 procedure TFitClient.StopAsyncOper;
 begin
-    Assert(Assigned(FitProxy));
-    FitProxy.StopAsyncOper;
+    Assert(Assigned(FitService));
+    FitService.StopAsyncOper;
     //  izvlechenie dannyh zdes' delat' ne nuzhno,
     //  poskol'ku Done vyzyvatsya standartnym obrazom
 end;
 
 function TFitClient.AsyncOper: boolean;
 begin
-    Assert(Assigned(FitProxy));
-    Result := FitProxy.AsyncOper;
+    Assert(Assigned(FitService));
+    Result := FitService.AsyncOper;
 end;
 
 function TFitClient.GetCalcTimeStr: string;
 begin
-    Assert(Assigned(FitProxy));
-    Result := FitProxy.GetCalcTimeStr;
+    Assert(Assigned(FitService));
+    Result := FitService.GetCalcTimeStr;
 end;
 
 function TFitClient.GetRFactorStr: string;
 begin
-    Assert(Assigned(FitProxy));
-    Result := FitProxy.GetRFactorStr;
+    Assert(Assigned(FitService));
+    Result := FitService.GetRFactorStr;
 end;
 
 function TFitClient.GetMaxRFactor: double;
 begin
-    Assert(Assigned(FitProxy));
-    Result := FitProxy.GetMaxRFactor;
+    Assert(Assigned(FitService));
+    Result := FitService.GetMaxRFactor;
 end;
 
 procedure TFitClient.SetMaxRFactor(AMaxRFactor: double);
 begin
-    Assert(Assigned(FitProxy));
-    FitProxy.SetMaxRFactor(AMaxRFactor);
+    Assert(Assigned(FitService));
+    FitService.SetMaxRFactor(AMaxRFactor);
 end;
 
 function TFitClient.GetBackFactor: double;
 begin
-    Assert(Assigned(FitProxy));
-    Result := FitProxy.GetBackFactor;
+    Assert(Assigned(FitService));
+    Result := FitService.GetBackFactor;
 end;
 
 procedure TFitClient.SetBackFactor(ABackFactor: double);
 begin
-    Assert(Assigned(FitProxy));
-    FitProxy.SetBackFactor(ABackFactor);
+    Assert(Assigned(FitService));
+    FitService.SetBackFactor(ABackFactor);
 end;
 
 function TFitClient.GetCurveThresh: double;
 begin
-    Assert(Assigned(FitProxy));
-    Result := FitProxy.GetCurveThresh;
+    Assert(Assigned(FitService));
+    Result := FitService.GetCurveThresh;
 end;
 
 procedure TFitClient.SetCurveThresh(ACurveThresh: double);
 begin
-    Assert(Assigned(FitProxy));
-    FitProxy.SetCurveThresh(ACurveThresh);
+    Assert(Assigned(FitService));
+    FitService.SetCurveThresh(ACurveThresh);
 end;
 
 function TFitClient.GetCurveType: TCurveTypeId;
 begin
-    Assert(Assigned(FitProxy));
-    Result := FitProxy.GetCurveType;
+    Assert(Assigned(FitService));
+    Result := FitService.GetCurveType;
 end;
 
 {$IFNDEF FIT}
@@ -1348,26 +1348,26 @@ end;
 
 function TFitClient.GetBackgroundVariationEnabled: boolean;
 begin
-    Assert(Assigned(FitProxy));
-    Result := FitProxy.GetBackgroundVariationEnabled;
+    Assert(Assigned(FitService));
+    Result := FitService.GetBackgroundVariationEnabled;
 end;
 
 procedure TFitClient.SetBackgroundVariationEnabled(AEnable: boolean);
 begin
-    Assert(Assigned(FitProxy));
-    FitProxy.SetBackgroundVariationEnabled(AEnable);
+    Assert(Assigned(FitService));
+    FitService.SetBackgroundVariationEnabled(AEnable);
 end;
 
 function TFitClient.GetCurveScalingEnabled: boolean;
 begin
-    Assert(Assigned(FitProxy));
-    Result := FitProxy.GetCurveScalingEnabled;
+    Assert(Assigned(FitService));
+    Result := FitService.GetCurveScalingEnabled;
 end;
 
 procedure TFitClient.SetCurveScalingEnabled(AEnabled: boolean);
 begin
-    Assert(Assigned(FitProxy));
-    FitProxy.SetCurveScalingEnabled(AEnabled);
+    Assert(Assigned(FitService));
+    FitService.SetCurveScalingEnabled(AEnabled);
 end;
 
 {$IFDEF _WINDOWS}
@@ -1376,8 +1376,8 @@ procedure TFitClient.SetSpecialCurveParameters(ACurveExpr: string;
     //  pervonachal'nuyu initsializatsiyu
     );
 begin
-    Assert(Assigned(FitProxy));
-    FitProxy.SetSpecialCurveParameters(ACurveExpr, CP);
+    Assert(Assigned(FitService));
+    FitService.SetSpecialCurveParameters(ACurveExpr, CP);
 end;
 
 {$ENDIF}

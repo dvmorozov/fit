@@ -701,7 +701,7 @@ begin
     // elementy v eti spiski d. dobavlyat'sya sinhronno
     FCurvePositions := TTitlePointsSet.Create(nil);
     FCurveList      := TMSCRCurveList.Create;
-    FCurveList.Lambda := WaveLength;
+    FCurveList.FWaveLength := WaveLength;
     FCurvesList     := TSelfCopiedCompList.Create;
 
     SetState(ProfileWaiting);
@@ -2380,7 +2380,7 @@ procedure TFitService.SetWaveLength(AWaveLength: double);
 begin
     Assert(Assigned(FCurveList));
     FWaveLength := AWaveLength;
-    FCurveList.Lambda := WaveLength;
+    FCurveList.FWaveLength := WaveLength;
 end;
 
 function TFitService.GetWaveLength: double;

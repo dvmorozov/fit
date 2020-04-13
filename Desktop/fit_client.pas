@@ -99,12 +99,10 @@ type
     TFitClient = class(TInterfacedObject, IClientCallback)
     protected
         FFitProxy: IFitService;
-
-    protected
         FDataLoader:     IDataLoader;
         FDataLoaderInjector: IDataLoaderInjector;
         { All the data displayed on the chart. They are required to be able control of X-coordinate. }
-        FNeutronPointsSet: TTitlePointsSet;
+        FExpProfile:     TTitlePointsSet;
         { Region of given profile data with which user is working at the given moment. }
         FSelectedArea:   TTitlePointsSet;
         { Sum of all model curces which is compared with experimental data. }
@@ -128,7 +126,7 @@ type
         procedure SetCurvesListLambda;
 
     protected
-        FCurMin:     double;
+        FCurMin:         double;
         { If True then in all operations only data belonging to selected ared are used
           otherwise all profile data are used. }
         FSelectedAreaMode: boolean;
@@ -187,9 +185,6 @@ type
         procedure FillDatasheetTable;
 {$ENDIF}
 
-        { Returns full profile or part of profile selected at the moment. }
-        function GetProfilePointsSet: TTitlePointsSet;
-
         procedure SetSelectionMode(ASelectionMode: TSelMode);
         function GetSelectionMode: TSelMode;
 
@@ -230,6 +225,8 @@ type
 
         function GetCurveList: TMSCRCurveList;
 
+        { Returns full profile or part of profile selected at the moment. }
+        function GetProfilePoints: TTitlePointsSet;
         function GetBackgroundPoints: TNeutronPointsSet;
         function GetSelectedPoints: TNeutronPointsSet;
         function GetRFactorBounds: TNeutronPointsSet;
@@ -345,9 +342,6 @@ type
         property SelectedAreaMode: boolean read FSelectedAreaMode;
 
         property FitProxy: IFitService read FFitProxy write FFitProxy;
-
-        property NeutronPointsSet: TTitlePointsSet
-            read FNeutronPointsSet write FNeutronPointsSet;
     end;
 
 const
@@ -392,7 +386,7 @@ begin
     FDeltaProfile.Free;
     FCurveProfile.Free;
     FSelectedPoints.Free;
-    NeutronPointsSet.Free;
+    FExpProfile.Free;
     FRFactorBounds.Free;
     inherited;
 end;
@@ -407,20 +401,20 @@ begin
 
     //  sozdayutsya pustye spiski, chtoby mozhno bylo
     //  vvodit' dannye vruchnuyu
-    NeutronPointsSet := TTitlePointsSet.Create(nil);
+    FExpProfile := TTitlePointsSet.Create(nil);
     InitDataPoints;
 
     FCurvePositions := TTitlePointsSet.Create(nil);
     FCurvePositions.FTitle := CurvePositionsName;
-    FCurvePositions.Lambda := FWaveLength;
+    FCurvePositions.WaveLength := FWaveLength;
 
     FBackgroundPoints := TTitlePointsSet.Create(nil);
     FBackgroundPoints.FTitle := BackgroundPointsName;
-    FBackgroundPoints.Lambda := FWaveLength;
+    FBackgroundPoints.WaveLength := FWaveLength;
 
     FRFactorBounds := TTitlePointsSet.Create(nil);
     FRFactorBounds.FTitle := RFactorBoundsName;
-    FRFactorBounds.Lambda := FWaveLength;
+    FRFactorBounds.WaveLength := FWaveLength;
 end;
 
 function TFitClient.GetBackgroundPoints: TNeutronPointsSet;
@@ -470,7 +464,7 @@ begin
     RemoveSelectedArea;
     FSelectedArea := TTitlePointsSet.Create(nil);
     try
-        FSelectedArea.Lambda := FWaveLength;
+        FSelectedArea.WaveLength := FWaveLength;
         FSelectedArea.FTitle := SelectedAreaName;
         for i := StartPointIndex to StopPointIndex do
             FSelectedArea.AddNewPoint(
@@ -484,12 +478,12 @@ end;
 
 procedure TFitClient.SelectProfileInterval(StartPointIndex, StopPointIndex: longint);
 begin
-    Assert(Assigned(NeutronPointsSet));
+    Assert(Assigned(FExpProfile));
     Assert(Assigned(FitProxy));
 
     FitProxy.SelectProfileInterval(StartPointIndex, StopPointIndex);
     Clear;
-    SelectProfileIntervalActual(NeutronPointsSet, StartPointIndex, StopPointIndex);
+    SelectProfileIntervalActual(FExpProfile, StartPointIndex, StopPointIndex);
     PlotSelectedProfileInterval;
 
     FSelectedAreaMode := True;
@@ -497,7 +491,7 @@ end;
 
 procedure TFitClient.SelectEntireProfile;
 begin
-    Assert(Assigned(NeutronPointsSet));
+    Assert(Assigned(FExpProfile));
     Assert(Assigned(FitProxy));
 
     FitProxy.SelectEntireProfile;
@@ -514,15 +508,15 @@ begin
     RemoveSelectedPoints;
     FSelectedPoints := TTitlePointsSet.Create(nil);
     FSelectedPoints.FTitle := Title;
-    FSelectedPoints.Lambda := FWaveLength;
+    FSelectedPoints.WaveLength := FWaveLength;
     PlotSelectedPoints;
 end;
 
 procedure TFitClient.InitDataPoints;
 begin
-    Assert(Assigned(NeutronPointsSet));
-    NeutronPointsSet.FTitle := ProfileName;
-    NeutronPointsSet.Lambda := FWaveLength;
+    Assert(Assigned(FExpProfile));
+    FExpProfile.FTitle := ProfileName;
+    FExpProfile.WaveLength := FWaveLength;
 end;
 
 procedure TFitClient.RemoveSelectedPoints;
@@ -537,7 +531,7 @@ end;
 procedure TFitClient.RemoveDataPoints;
 begin
     HideDataPoints;
-    NeutronPointsSet.Clear; //  chtoby mozhno bylo dobavlyat' tochki vruchnuyu
+    FExpProfile.Clear; //  chtoby mozhno bylo dobavlyat' tochki vruchnuyu
 end;
 
 procedure TFitClient.RemoveGaussProfile;
@@ -608,7 +602,7 @@ begin
         RemoveSelectedArea;
         FSelectedArea := FitProxy.GetSelectedProfileInterval;
         //??? kak zdes' obrabatyvat' isklyucheniya
-        FSelectedArea.Lambda := FWaveLength;
+        FSelectedArea.WaveLength := FWaveLength;
         FSelectedArea.FTitle := SelectedAreaName;
         PlotSelectedProfileInterval;
     end
@@ -617,20 +611,20 @@ begin
         //  dannye udalyayutsya dlya ucheta vozmozhnyh izmeneniy,
         //  naprimer udaleniya fona
         RemoveDataPoints;
-        NeutronPointsSet.Free;
-        NeutronPointsSet := nil;
-        NeutronPointsSet := FitProxy.GetProfilePointsSet;
+        FExpProfile.Free;
+        FExpProfile := nil;
+        FExpProfile := FitProxy.GetProfilePointsSet;
         InitDataPoints;
         PlotDataPoints;
     end;
 end;
 
-function TFitClient.GetProfilePointsSet: TTitlePointsSet;
+function TFitClient.GetProfilePoints: TTitlePointsSet;
 begin
     if FSelectedAreaMode then
         Result := FSelectedArea
     else
-        Result := NeutronPointsSet;
+        Result := FExpProfile;
 end;
 
 procedure TFitClient.UpdateAll;
@@ -640,7 +634,7 @@ begin
     if Assigned(FCurveProfile) and (FCurveProfile.PointsCount <> 0) then
     begin
         FCurveProfile.FTitle := SummarizedName;
-        FCurveProfile.Lambda := FWaveLength;
+        FCurveProfile.WaveLength := FWaveLength;
         PlotGaussProfile;
     end;
 
@@ -649,7 +643,7 @@ begin
     if Assigned(FDeltaProfile) and (FDeltaProfile.PointsCount <> 0) then
     begin
         FDeltaProfile.FTitle := DeltaName;
-        FDeltaProfile.Lambda := FWaveLength;
+        FDeltaProfile.WaveLength := FWaveLength;
         PlotDeltaProfile;
     end;
 
@@ -660,7 +654,7 @@ begin
     if Assigned(FCurvePositions) and (FCurvePositions.PointsCount <> 0) then
     begin
         FCurvePositions.FTitle := CurvePositionsName;
-        FCurvePositions.Lambda := FWaveLength;
+        FCurvePositions.WaveLength := FWaveLength;
         PlotCurvePositions;
     end;
 
@@ -671,7 +665,7 @@ begin
     if Assigned(FRFactorBounds) and (FRFactorBounds.PointsCount <> 0) then
     begin
         FRFactorBounds.FTitle := RFactorBoundsName;
-        FRFactorBounds.Lambda := FWaveLength;
+        FRFactorBounds.WaveLength := FWaveLength;
         PlotRFactorBounds;
     end;
 
@@ -686,7 +680,7 @@ begin
     FCurveList := nil;
     FCurveList := FitProxy.GetCurveList;
     if Assigned(FCurveList) then
-        FCurveList.Lambda := FWaveLength;
+        FCurveList.FWaveLength := FWaveLength;
 
     PlotCurves;
 {$IFDEF USE_GRIDS}
@@ -722,7 +716,7 @@ begin
     if Assigned(FRFactorBounds) and (FRFactorBounds.PointsCount <> 0) then
     begin
         FRFactorBounds.FTitle := RFactorBoundsName;
-        FRFactorBounds.Lambda := FWaveLength;
+        FRFactorBounds.WaveLength := FWaveLength;
 
         PlotRFactorBounds;
     end;
@@ -744,7 +738,7 @@ begin
     if Assigned(FBackgroundPoints) and (FBackgroundPoints.PointsCount <> 0) then
     begin
         FBackgroundPoints.FTitle := BackgroundPointsName;
-        FBackgroundPoints.Lambda := FWaveLength;
+        FBackgroundPoints.WaveLength := FWaveLength;
 
         PlotBackground;
     end;
@@ -766,7 +760,7 @@ begin
     if Assigned(FRFactorBounds) and (FRFactorBounds.PointsCount <> 0) then
     begin
         FRFactorBounds.FTitle := RFactorBoundsName;
-        FRFactorBounds.Lambda := FWaveLength;
+        FRFactorBounds.WaveLength := FWaveLength;
         PlotRFactorBounds;
     end;
 
@@ -777,7 +771,7 @@ begin
     if Assigned(FCurvePositions) and (FCurvePositions.PointsCount <> 0) then
     begin
         FCurvePositions.FTitle := CurvePositionsName;
-        FCurvePositions.Lambda := FWaveLength;
+        FCurvePositions.WaveLength := FWaveLength;
         PlotCurvePositions;
     end;
 
@@ -804,29 +798,29 @@ begin
         for i := 0 to FCurvesList.Count - 1 do
         begin
             NS := TNeutronPointsSet(FCurvesList.Items[i]);
-            NS.Lambda := FWaveLength;
+            NS.WaveLength := FWaveLength;
         end;
 end;
 
 procedure TFitClient.SetWaveLength(AWaveLength: double);
 begin
     FWaveLength := AWaveLength;
-    if Assigned(NeutronPointsSet) then
-        NeutronPointsSet.Lambda := AWaveLength;
+    if Assigned(FExpProfile) then
+        FExpProfile.WaveLength := AWaveLength;
     if Assigned(FBackgroundPoints) then
-        FBackgroundPoints.Lambda := AWaveLength;
+        FBackgroundPoints.WaveLength := AWaveLength;
     if Assigned(FSelectedArea) then
-        FSelectedArea.Lambda := AWaveLength;
+        FSelectedArea.WaveLength := AWaveLength;
     if Assigned(FSelectedPoints) then
-        FSelectedPoints.Lambda := AWaveLength;
+        FSelectedPoints.WaveLength := AWaveLength;
     if Assigned(FCurveProfile) then
-        FCurveProfile.Lambda := AWaveLength;
+        FCurveProfile.WaveLength := AWaveLength;
     if Assigned(FDeltaProfile) then
-        FDeltaProfile.Lambda := AWaveLength;
+        FDeltaProfile.WaveLength := AWaveLength;
     if Assigned(FCurvesList) then
         SetCurvesListLambda;
     if Assigned(FCurveList) then
-        FCurveList.Lambda := FWaveLength;
+        FCurveList.FWaveLength := FWaveLength;
 end;
 
 function TFitClient.GetWaveLength: double;
@@ -934,13 +928,13 @@ end;
 procedure TFitClient.PlotDataPoints;
 begin
     if Assigned(FFitViewer) then
-        FFitViewer.PlotDataPoints(Self, NeutronPointsSet);
+        FFitViewer.PlotDataPoints(Self, FExpProfile);
 end;
 
 procedure TFitClient.HideDataPoints;
 begin
     if Assigned(FFitViewer) then
-        FFitViewer.HideDataPoints(Self, NeutronPointsSet);
+        FFitViewer.HideDataPoints(Self, FExpProfile);
 end;
 
 procedure TFitClient.PlotSelectedProfileInterval;
@@ -1012,8 +1006,8 @@ begin
     end
     else
     begin
-        Assert(Assigned(NeutronPointsSet));
-        ReplacePoint(NeutronPointsSet,
+        Assert(Assigned(FExpProfile));
+        ReplacePoint(FExpProfile,
             PrevXValue, PrevYValue, NewXValue, NewYValue, PlotDataPoints);
     end;
     FitProxy.ReplacePointInProfile(PrevXValue, PrevYValue, NewXValue, NewYValue);
@@ -1143,7 +1137,7 @@ begin
             if FSelectedAreaMode then
                 Result := FSelectedArea
             else
-                Result := NeutronPointsSet;
+                Result := FExpProfile;
 
         ModeSelectIntervalBounds: Result := FSelectedPoints;
         ModeSelectCharacteristicPoints: Result := FSelectedPoints;
@@ -1159,9 +1153,9 @@ begin
     Assert(Assigned(FDataLoader));
 
     RemoveDataPoints;
-    NeutronPointsSet.Free;
-    NeutronPointsSet := nil;
-    NeutronPointsSet := FDataLoader.GetPointsSetCopy;
+    FExpProfile.Free;
+    FExpProfile := nil;
+    FExpProfile := FDataLoader.GetPointsSetCopy;
     InitDataPoints;
 end;
 
@@ -1178,7 +1172,7 @@ begin
     //  isklyuchenie v servere ne dolzhno preryvat'
     //  posl-t' vypolneniya v kliente, poetomu
     //  vyzyvaetsya v poslednyuyu ochered'
-    FitProxy.SetProfilePointsSet(NeutronPointsSet);
+    FitProxy.SetProfilePointsSet(FExpProfile);
 end;
 
 procedure TFitClient.Reload;
@@ -1195,7 +1189,7 @@ begin
     //  isklyuchenie v servere ne dolzhno preryvat'
     //  posl-t' vypolneniya v kliente, poetomu
     //  vyzyvaetsya v poslednyuyu ochered'
-    FitProxy.SetProfilePointsSet(NeutronPointsSet);
+    FitProxy.SetProfilePointsSet(FExpProfile);
 end;
 
 procedure TFitClient.SmoothProfile;
@@ -1210,15 +1204,15 @@ begin
     //  poryadok v legende; nuzhno obnovlyat' dannye
     NPS := FitProxy.GetProfilePointsSet;
     try
-        Assert(NPS.PointsCount = NeutronPointsSet.PointsCount);
+        Assert(NPS.PointsCount = FExpProfile.PointsCount);
 
         for i := 0 to NPS.PointsCount - 1 do
-            NeutronPointsSet.PointYCoord[i] := NPS.PointYCoord[i];
+            FExpProfile.PointYCoord[i] := NPS.PointYCoord[i];
     except
         NPS.Free;
         raise;
     end;
-    FToRefresh := NeutronPointsSet;
+    FToRefresh := FExpProfile;
     RefreshPointsSet;
 end;
 
@@ -1235,9 +1229,9 @@ begin
     RemoveBackgroundPoints;
     //  perezagruzka dannyh
     RemoveDataPoints;
-    NeutronPointsSet.Free;
-    NeutronPointsSet := nil;
-    NeutronPointsSet := FitProxy.GetProfilePointsSet;
+    FExpProfile.Free;
+    FExpProfile := nil;
+    FExpProfile := FitProxy.GetProfilePointsSet;
     InitDataPoints;
     PlotDataPoints;
 end;

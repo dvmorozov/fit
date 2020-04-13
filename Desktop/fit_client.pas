@@ -167,8 +167,8 @@ type
         procedure PlotCurvePositions;
         procedure HideCurvePositions;
 
-        procedure PlotDataPoints;
-        procedure HideDataPoints;
+        procedure PlotExpProfile;
+        procedure HideExpProfile;
 
         procedure PlotSelectedProfileInterval;
 
@@ -208,8 +208,8 @@ type
         { Creates list of selected points and inserts new item into chart legend (CheckListBox). }
         procedure RecreateAndShowSelectedPoints(Title: string);
 
-        procedure InitDataPoints;
-        procedure RemoveDataPoints;
+        procedure SetExpProfile(AExpProfile: TTitlePointsSet);
+        procedure ClearExpProfile;
         procedure RemoveSelectedPoints;
         procedure RemoveSelectedArea;
         procedure RemoveGaussProfile;
@@ -399,10 +399,8 @@ begin
     FOpenState  := OpenFailure;
     FAsyncState := AsyncStart;
 
-    //  sozdayutsya pustye spiski, chtoby mozhno bylo
-    //  vvodit' dannye vruchnuyu
-    FExpProfile := TTitlePointsSet.Create(nil);
-    InitDataPoints;
+    { Empty lists are created to allow manual data input. }
+    SetExpProfile(TTitlePointsSet.Create(nil));
 
     FCurvePositions := TTitlePointsSet.Create(nil);
     FCurvePositions.FTitle := CurvePositionsName;
@@ -496,7 +494,7 @@ begin
 
     FitProxy.SelectEntireProfile;
     Clear;
-    PlotDataPoints;
+    PlotExpProfile;
 
     FSelectedAreaMode := False;
     FSelectedArea.Free;
@@ -512,26 +510,29 @@ begin
     PlotSelectedPoints;
 end;
 
-procedure TFitClient.InitDataPoints;
+procedure TFitClient.SetExpProfile(AExpProfile: TTitlePointsSet);
 begin
-    Assert(Assigned(FExpProfile));
+    Assert(Assigned(AExpProfile));
+
+    FExpProfile.Free;
+    FExpProfile := AExpProfile;
     FExpProfile.FTitle := ProfileName;
     FExpProfile.WaveLength := FWaveLength;
 end;
 
 procedure TFitClient.RemoveSelectedPoints;
 begin
-    //  dopuskaetsya ravenstvo nil
     FToRefresh := FSelectedPoints;
     Hide;
     FSelectedPoints.Free;
     FSelectedPoints := nil;
 end;
 
-procedure TFitClient.RemoveDataPoints;
+procedure TFitClient.ClearExpProfile;
 begin
-    HideDataPoints;
-    FExpProfile.Clear; //  chtoby mozhno bylo dobavlyat' tochki vruchnuyu
+    HideExpProfile;
+    FExpProfile.Clear;
+    { FExpProfile shouldn't be destroyed here to allow manual adding. }
 end;
 
 procedure TFitClient.RemoveGaussProfile;
@@ -610,12 +611,9 @@ begin
     begin
         //  dannye udalyayutsya dlya ucheta vozmozhnyh izmeneniy,
         //  naprimer udaleniya fona
-        RemoveDataPoints;
-        FExpProfile.Free;
-        FExpProfile := nil;
-        FExpProfile := FitProxy.GetProfilePointsSet;
-        InitDataPoints;
-        PlotDataPoints;
+        ClearExpProfile;
+        SetExpProfile(FitProxy.GetProfilePointsSet);
+        PlotExpProfile;
     end;
 end;
 
@@ -925,13 +923,13 @@ end;
 
 {$ENDIF}
 
-procedure TFitClient.PlotDataPoints;
+procedure TFitClient.PlotExpProfile;
 begin
     if Assigned(FFitViewer) then
         FFitViewer.PlotDataPoints(Self, FExpProfile);
 end;
 
-procedure TFitClient.HideDataPoints;
+procedure TFitClient.HideExpProfile;
 begin
     if Assigned(FFitViewer) then
         FFitViewer.HideDataPoints(Self, FExpProfile);
@@ -1008,7 +1006,7 @@ begin
     begin
         Assert(Assigned(FExpProfile));
         ReplacePoint(FExpProfile,
-            PrevXValue, PrevYValue, NewXValue, NewYValue, PlotDataPoints);
+            PrevXValue, PrevYValue, NewXValue, NewYValue, PlotExpProfile);
     end;
     FitProxy.ReplacePointInProfile(PrevXValue, PrevYValue, NewXValue, NewYValue);
 end;
@@ -1133,12 +1131,7 @@ end;
 function TFitClient.GetCurrentPointsSet: TTitlePointsSet;
 begin
     case FSelectionMode of
-        ModeSelectNothing:
-            if FSelectedAreaMode then
-                Result := FSelectedArea
-            else
-                Result := FExpProfile;
-
+        ModeSelectNothing:        Result := GetProfilePoints;
         ModeSelectIntervalBounds: Result := FSelectedPoints;
         ModeSelectCharacteristicPoints: Result := FSelectedPoints;
         ModeSelectCurveBounds: Result    := FSelectedPoints;
@@ -1152,11 +1145,8 @@ procedure TFitClient.CopyProfileDataFromLoader;
 begin
     Assert(Assigned(FDataLoader));
 
-    RemoveDataPoints;
-    FExpProfile.Free;
-    FExpProfile := nil;
-    FExpProfile := FDataLoader.GetPointsSetCopy;
-    InitDataPoints;
+    ClearExpProfile;
+    SetExpProfile(FDataLoader.GetPointsSetCopy);
 end;
 
 procedure TFitClient.LoadDataSet(FileName: string);
@@ -1167,7 +1157,7 @@ begin
     FDataLoader.LoadDataSet(FileName);
     CopyProfileDataFromLoader;
     Clear;
-    PlotDataPoints;
+    PlotExpProfile;
     FOpenState := OpenSuccess;
     //  isklyuchenie v servere ne dolzhno preryvat'
     //  posl-t' vypolneniya v kliente, poetomu
@@ -1184,7 +1174,7 @@ begin
     FDataLoader.Reload;
     CopyProfileDataFromLoader;
     Clear;
-    PlotDataPoints;
+    PlotExpProfile;
     FOpenState := OpenSuccess;
     //  isklyuchenie v servere ne dolzhno preryvat'
     //  posl-t' vypolneniya v kliente, poetomu
@@ -1193,25 +1183,12 @@ begin
 end;
 
 procedure TFitClient.SmoothProfile;
-var
-    NPS: TNeutronPointsSet;
-    i:   longint;
 begin
     Assert(Assigned(FitProxy));
 
     FitProxy.SmoothProfile;
-    //  nel'zya udalyat' spisok i sozdavat' zanovo - menyaetsya
-    //  poryadok v legende; nuzhno obnovlyat' dannye
-    NPS := FitProxy.GetProfilePointsSet;
-    try
-        Assert(NPS.PointsCount = FExpProfile.PointsCount);
-
-        for i := 0 to NPS.PointsCount - 1 do
-            FExpProfile.PointYCoord[i] := NPS.PointYCoord[i];
-    except
-        NPS.Free;
-        raise;
-    end;
+    FExpProfile.Free;
+    FExpProfile := FitProxy.GetProfilePointsSet;
     FToRefresh := FExpProfile;
     RefreshPointsSet;
 end;
@@ -1228,12 +1205,9 @@ begin
     //  ochistka spiska i skrytie grafika
     RemoveBackgroundPoints;
     //  perezagruzka dannyh
-    RemoveDataPoints;
-    FExpProfile.Free;
-    FExpProfile := nil;
-    FExpProfile := FitProxy.GetProfilePointsSet;
-    InitDataPoints;
-    PlotDataPoints;
+    ClearExpProfile;
+    SetExpProfile(FitProxy.GetProfilePointsSet);
+    PlotExpProfile;
 end;
 
 procedure TFitClient.DoAllAutomatically;

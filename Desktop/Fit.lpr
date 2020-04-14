@@ -32,7 +32,6 @@ uses {$IFDEF UNIX} {$IFDEF UseCThreads}
     input_wavelength_dialog,
     Interfaces,   //  LCL widgetset
     main_calc_thread,
-    component_list,
     data_classes,
     downhill_simplex_minimizer,
     fit_server_app,
@@ -43,7 +42,6 @@ uses {$IFDEF UNIX} {$IFDEF UseCThreads}
     persistent_curve_parameter_container,
     persistent_curve_parameters,
     self_copied_component,
-    SelfCheckedComponentList,
     special_curve_parameter,
     StrUtils,
     table_components,

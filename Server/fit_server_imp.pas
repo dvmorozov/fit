@@ -3076,8 +3076,7 @@ end;
 
 initialization
     InitCriticalSection(CS);
-    ProblemList := TComponentList.Create(nil);
-    ProblemList.SetState(cfActive);
+    ProblemList := TComponentList.Create(True);
 
 finalization
     EnterCriticalsection(CS);

@@ -40,9 +40,9 @@ type
 
     public
         { Vawelength at which neutronogram was recorded. }
-        Lambda:   double;
+        FWaveLength:    double;
         { It is supposed that data are given in 2 * Theta format. }
-        ViewMode: longint;
+        FViewMode:      longint;
 
         function GetCopy: TObject; override;
         procedure CopyParameters(Dest: TObject); override;
@@ -67,7 +67,7 @@ function TMSCRCurveList.RecalcParamValue(P: TSpecialCurveParameter): double;
 begin
     if (P.Type_ = InvariablePosition) or (P.Type_ = VariablePosition) or
         (P.Name = StartPosName) or (P.Name = FinishPosName) then
-        case ViewMode of
+        case FViewMode of
             XCM_2T:
                 Result := P.Value;
             //  schitaetsya, chto iznachal'no koordinaty zadany v 2*Theta
@@ -79,11 +79,11 @@ begin
 
             XCM_SINTL:
             begin
-                Assert(Lambda <> 0);
-                //  pereschet v Sin(Theta)/Lambda
-                Result := Sin((P.Value * pi) / (2 * 180)) / Lambda;
+                Assert(FWaveLength <> 0);
+                //  pereschet v Sin(Theta)/FWaveLength
+                Result := Sin((P.Value * pi) / (2 * 180)) / FWaveLength;
             end;
-        end{case ViewMode of...}
+        end{case FViewMode of...}
     else
         Result := P.Value;
 end;
@@ -93,30 +93,30 @@ procedure TMSCRCurveList.ReverseCalcParamValue(P: TSpecialCurveParameter;
 begin
     if (P.Type_ = InvariablePosition) or (P.Type_ = VariablePosition) or
         (P.Name = StartPosName) or (P.Name = FinishPosName) then
-        case ViewMode of
+        case FViewMode of
             XCM_T: P.Value  := NewValue * 2;
             XCM_2T: P.Value := NewValue;
             XCM_SINTL:
             begin
-                Assert(Lambda <> 0);
-                P.Value := 2 * (180 / pi) * ArcSin(NewValue * Lambda);
+                Assert(FWaveLength <> 0);
+                P.Value := 2 * (180 / pi) * ArcSin(NewValue * FWaveLength);
             end;
-        end{case ViewMode of...}
+        end{case FViewMode of...}
     else
         P.Value := NewValue;
 end;
 
 function TMSCRCurveList.GetCopy: TObject;
 begin
-    Result := TMSCRCurveList.Create(nil);
+    Result := TMSCRCurveList.Create;
     CopyParameters(Result);
 end;
 
 procedure TMSCRCurveList.CopyParameters(Dest: TObject);
 begin
     inherited;
-    TMSCRCurveList(Dest).Lambda   := Lambda;
-    TMSCRCurveList(Dest).ViewMode := ViewMode;
+    TMSCRCurveList(Dest).FWaveLength   := FWaveLength;
+    TMSCRCurveList(Dest).FViewMode := FViewMode;
 end;
 
 { Parameters_list }
@@ -124,7 +124,7 @@ end;
 constructor Parameters_list.Create(Owner: TComponent);
 begin
     inherited Create(Owner);
-    FParameters := TMSCRCurveList.Create(nil);
+    FParameters := TMSCRCurveList.Create;
 end;
 
 destructor Parameters_list.Destroy;
@@ -135,7 +135,6 @@ end;
 
 {$warnings off}
 initialization
-    RegisterClass(TMSCRCurveList);
     DecimalSeparator := '.';
 end.
 {$warnings on}

@@ -886,7 +886,7 @@ begin
         Exit;
     end;
 
-    NP := FitClientApp_.FitClient.NeutronPointsSet;
+    NP := FitClientApp_.FitClient.GetProfilePoints;
         //FFitViewer.GetPointsSet(FActiveNumber);
     SP.Sort;
 
@@ -1878,7 +1878,7 @@ begin
             FFitViewer.XCoordMode := XCM_SINTL;
             if Assigned(FCurveList) then
             begin
-                FCurveList.ViewMode := XCM_SINTL;
+                FCurveList.FViewMode := XCM_SINTL;
                 FCurveList.GridAssign(GridParameters);
             end;
             MenuTheta.Checked := False;
@@ -1894,7 +1894,7 @@ begin
         FFitViewer.XCoordMode := XCM_SINTL;
         if Assigned(FCurveList) then
         begin
-            FCurveList.ViewMode := XCM_SINTL;
+            FCurveList.FViewMode := XCM_SINTL;
             FCurveList.GridAssign(GridParameters);
         end;
         MenuTheta.Checked := False;
@@ -1912,7 +1912,7 @@ begin
     FFitViewer.XCoordMode := XCM_T;
     if Assigned(FCurveList) then
     begin
-        FCurveList.ViewMode := XCM_T;
+        FCurveList.FViewMode := XCM_T;
         FCurveList.GridAssign(GridParameters);
     end;
     MenuTheta.Checked := True;
@@ -1928,7 +1928,7 @@ begin
     FFitViewer.XCoordMode := XCM_2T;
     if Assigned(FCurveList) then
     begin
-        FCurveList.ViewMode := XCM_2T;
+        FCurveList.FViewMode := XCM_2T;
         FCurveList.GridAssign(GridParameters);
     end;
     MenuTheta.Checked := False;
@@ -2092,7 +2092,7 @@ begin
         FFitViewer.XCoordMode := XCM_SINTL;
         if Assigned(FCurveList) then
         begin
-            FCurveList.ViewMode := XCM_SINTL;
+            FCurveList.FViewMode := XCM_SINTL;
             FCurveList.GridAssign(GridParameters);
         end;
         MenuSinThetaLambda.Checked := True;
@@ -2286,7 +2286,7 @@ begin
             //  mozhno voobsche ubrat' proverku i deystvovat' kak pri
             //  polnost'yu avtomaticheskom raschete; eto pozvolit
             //  oboyti udalenie fona
-            FitServerState := FitClientApp_.FitClient.FitProxy.GetState;
+            FitServerState := FitClientApp_.FitClient.FitService.GetState;
             if (FitServerState = ReadyForFit) or
                //   dopuskaetsya zapuskat' raschet v dannom sostoyanii,
                //   t.k. neobhodimye dannye budut dopolneny avtomaticheski

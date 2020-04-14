@@ -20,7 +20,7 @@ unit title_points_set;
 interface
 
 uses
-    Classes, neutron_points_set, points_set, SysUtils;
+    Classes, neutron_points_set, SysUtils;
 
 type
     { Point set with title. TODO: must implement functionality of argument
@@ -31,8 +31,6 @@ type
         FTitle: string;
 
         procedure CopyParameters(Dest: TObject); override;
-        constructor CreateFromPoints(AOwner: TComponent;
-            const Points: TPointsSet);
     end;
 
 implementation
@@ -43,14 +41,6 @@ procedure TTitlePointsSet.CopyParameters(Dest: TObject);
 begin
     inherited;
     TTitlePointsSet(Dest).FTitle := FTitle;
-end;
-
-constructor TTitlePointsSet.CreateFromPoints(AOwner: TComponent;
-    const Points: TPointsSet);
-begin
-    Assert(Assigned(Points));
-    inherited Create(AOwner);
-    CopyPointsFrom(Points);
 end;
 
 end.

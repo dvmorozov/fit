@@ -13,8 +13,7 @@ unit downhill_simplex_minimizer;
 
 interface
 
-uses Classes, DownhillSimplexContainer, int_minimizer, SelfCheckedComponentList,
-    SysUtils, Tools;
+uses Classes, DownhillSimplexContainer, int_minimizer, SysUtils, Tools;
 
 type
     { Implements application interfaces required by downhill simplex algorithm. }
@@ -200,8 +199,8 @@ begin
     //  Final tolerance should have non zero value,
     //  otherwise computation will never end
     //  (see TDownhillSimplexContainer.CreateAlgorithm).
-    Container.FinalTolerance := 0.001;
-    Container.RestartDisabled := True;
+    Container.FinalTolerance := 0.0000001;
+    Container.RestartDisabled := False; //True;
     Container.AddIDSPToList(Self);
 end;
 

@@ -46,9 +46,9 @@ type
             CurvePositions: TTitlePointsSet);
         procedure HideCurvePositions(Sender: TObject;
             CurvePositions: TTitlePointsSet);
-        procedure PlotDataPoints(Sender: TObject;
+        procedure PlotExpProfile(Sender: TObject;
             DataPoints: TTitlePointsSet);
-        procedure HideDataPoints(Sender: TObject;
+        procedure HideExpProfile(Sender: TObject;
             DataPoints: TTitlePointsSet);
         procedure PlotSelectedProfileInterval(Sender: TObject;
             SelectedArea: TTitlePointsSet);

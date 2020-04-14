@@ -60,7 +60,7 @@ type
         procedure CheckRowIndex(const Index: longint);
 
     public
-        constructor Create(AOwner: TComponent); override;
+        constructor Create;
         destructor Destroy; override;
 
         ////////////////////////////////////////////////////////////////////////
@@ -363,7 +363,7 @@ implementation
 
 constructor TTableCompList.Create;
 begin
-    inherited Create(AOwner);
+    inherited;
 
     FSavedCol     := GetFixedCols;
     FSavedRow     := GetFixedRows;
@@ -1246,8 +1246,4 @@ begin
                 Objects[i, 0] := nil;
 end;
 
-initialization
-    RegisterClass(TRowCompList);
-    RegisterClass(TColCompList);
-    RegisterClass(TTableCompList);
 end.

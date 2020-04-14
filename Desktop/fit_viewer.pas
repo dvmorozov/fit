@@ -20,13 +20,13 @@ unit fit_viewer;
 interface
 
 uses
-    Classes, curve_points_set, Graphics, named_points_set,
+    Classes, Contnrs, curve_points_set, Graphics, named_points_set,
     neutron_points_set, points_set, self_copied_component,
     SysUtils, title_points_set,
 {$IFNDEF SERVER}
     fit_client, int_fit_viewer,
 {$ENDIF}
-    Forms, mscr_specimen_list, SelfCheckedComponentList, TAGraph;
+    Forms, mscr_specimen_list, TAGraph;
 
 {$IFNDEF SERVER}
 // Switch on updating legend and grids.
@@ -72,7 +72,7 @@ type
     protected
         { List of data sets for each item of which chart serie is related.
           The list is passive, it contains pointers to external data. }
-        FPointsSetList: TSelfCheckedComponentList;
+        FPointsSetList: TComponentList;
         { Returns maximum number of curves in one of given R-factor intervals. }
         function GetMaxCurveNum(CurvesList: TSelfCopiedCompList;
             RFactorBounds: TTitlePointsSet): longint;
@@ -95,7 +95,7 @@ type
 {$ENDIF}
         function ValToStr(Value: double): string;
         { Clears serie set and fills it again. }
-        procedure PlotPointsSet(SA: TNeutronPointsSet);
+        procedure PlotPointsSet(PointsSet: TNeutronPointsSet);
 
     public
 {$IFNDEF SERVER}
@@ -109,8 +109,8 @@ type
         procedure PlotBackground(Sender: TObject;
             BackgroundPoints: TTitlePointsSet);
         { Method of IFitViewer interface. }
-        procedure PlotDataPoints(Sender: TObject;
-            DataPoints: TTitlePointsSet);
+        procedure PlotExpProfile(Sender: TObject;
+            ExpProfile: TTitlePointsSet);
         { Method of IFitViewer interface. }
         procedure PlotSelectedProfileInterval(Sender: TObject;
             SelectedArea: TTitlePointsSet);
@@ -140,7 +140,7 @@ type
         procedure HideCurvePositions(Sender: TObject;
             CurvePositions: TTitlePointsSet);
         { Method of IFitViewer interface. }
-        procedure HideDataPoints(Sender: TObject;
+        procedure HideExpProfile(Sender: TObject;
             DataPoints: TTitlePointsSet);
         { Method of IFitViewer interface. }
         procedure HideBackground(Sender: TObject;
@@ -153,7 +153,7 @@ type
         { Method of IFitViewer interface. }
         procedure Clear(Sender: TObject);
         { Method of IFitViewer interface. }
-        procedure Hide(Sender: TObject; points_set: TNeutronPointsSet);
+        procedure Hide(Sender: TObject; PointsSet: TNeutronPointsSet);
         { Method of IFitViewer interface. }
         procedure SetUpdateGrids(Update: boolean);
         { Method of IFitViewer interface. }
@@ -244,26 +244,26 @@ begin
     //ViewAllMarkers;     //??? nado
 end;
 
-procedure TFitViewer.PlotPointsSet(SA: TNeutronPointsSet);
+procedure TFitViewer.PlotPointsSet(PointsSet: TNeutronPointsSet);
 var
-    LS: TTASerie;
+    Serie: TTASerie;
     i:  longint;
 begin
-    if not Assigned(SA) then
+    if not Assigned(PointsSet) then
         Exit;
 
-    LS := TTASerie(TFormMain(Form).Chart.GetSerie(FPointsSetList.IndexOf(SA)));
-    //LS.HorizAxis := aBottomAxis;
-    LS.Clear;
-    with SA do
+    Serie := TTASerie(TFormMain(Form).Chart.GetSerie(FPointsSetList.IndexOf(PointsSet)));
+    //Serie.HorizAxis := aBottomAxis;
+    Serie.Clear;
+    with PointsSet do
         for i := 0 to PointsCount - 1 do
             case XCoordMode of
                 //!!! zdes' pochemu-to voznikala oshibka kompilyatsii, hotya
                 //GetColor vozvraschaet tot zhe tip, chto potreblyaet AddXY !!!
-                XCM_2T: LS.AddXY(Point2T[i], PointIntensity[i], LS.SeriesColor);
-                XCM_T: LS.AddXY(PointT[i], PointIntensity[i], LS.SeriesColor);
+                XCM_2T: Serie.AddXY(Point2T[i], PointIntensity[i], Serie.SeriesColor);
+                XCM_T: Serie.AddXY(PointT[i], PointIntensity[i], Serie.SeriesColor);
                 XCM_SINTL:
-                    LS.AddXY(PointSinTL[i], PointIntensity[i], LS.SeriesColor);
+                    Serie.AddXY(PointSinTL[i], PointIntensity[i], Serie.SeriesColor);
             end;{case XCoordMode of...}
 end;
 
@@ -375,16 +375,16 @@ begin
 {$ENDIF}
 end;
 
-procedure TFitViewer.Hide(Sender: TObject; points_set: TNeutronPointsSet);
+procedure TFitViewer.Hide(Sender: TObject; PointsSet: TNeutronPointsSet);
 var
     Index: longint;
 begin
-    if not Assigned(points_set) then
+    if not Assigned(PointsSet) then
         Exit;
     if not Assigned(FPointsSetList) then
         Exit;
 
-    Index := FPointsSetList.IndexOf(points_set);
+    Index := FPointsSetList.IndexOf(PointsSet);
     // el-t v CheckListBox svyazan s el-tom v FPointsSetList tol'ko po indeksu
     if Index <> -1 then
     begin
@@ -394,7 +394,7 @@ begin
 {$ENDIF}
         if Index < TFormMain(Form).Chart.SeriesCount then
             TFormMain(Form).Chart.DeleteSerie(TFormMain(Form).Chart.GetSerie(Index));
-        FPointsSetList.Remove(points_set);
+        FPointsSetList.Extract(PointsSet);
     end;
 end;
 
@@ -636,7 +636,7 @@ begin
     Plot; //??? sdelat' optimal'no - bez polnogo perestroeniya
 end;
 
-procedure TFitViewer.HideDataPoints(Sender: TObject; DataPoints: TTitlePointsSet);
+procedure TFitViewer.HideExpProfile(Sender: TObject; DataPoints: TTitlePointsSet);
 begin
     Hide(Sender, DataPoints);
 {$IFDEF USE_GRIDS}
@@ -697,27 +697,26 @@ begin
     PlotPointsSet(BackgroundPoints);
 end;
 
-procedure TFitViewer.PlotDataPoints(Sender: TObject; DataPoints: TTitlePointsSet);
+procedure TFitViewer.PlotExpProfile(Sender: TObject; ExpProfile: TTitlePointsSet);
 var
     LS: TTASerie;
 begin
-    //Assert(Assigned(DataPoints));
-    if not Assigned(DataPoints) then
+    if not Assigned(ExpProfile) then
         Exit;
     if not Assigned(FPointsSetList) then
         Exit;
 
-    if FPointsSetList.IndexOf(DataPoints) = -1 then
+    if FPointsSetList.IndexOf(ExpProfile) = -1 then
     begin
         LS := TTASerie.Create(nil);
         LS.PointStyle := psRectangle;
         LS.ShowPoints := FViewMarkers;
         LS.SeriesColor := clRed;
         LS.PointBrushStyle := bsClear;
-        LS.Title := DataPoints.FTitle;
+        LS.Title := ExpProfile.FTitle;
 
         TFormMain(Form).Chart.AddSerie(LS);
-        FPointsSetList.Add(DataPoints);
+        FPointsSetList.Add(ExpProfile);
 {$IFDEF USE_LEGEND}
         if FUpdateLegends then
         begin
@@ -727,12 +726,12 @@ begin
         end;
 {$ENDIF}
     end;
-    DataPoints.Sort;
+    ExpProfile.Sort;
 {$IFDEF USE_GRIDS}
     if FUpdateGrids then
-        FillDataTable(DataPoints);
+        FillDataTable(ExpProfile);
 {$ENDIF}
-    PlotPointsSet(DataPoints);
+    PlotPointsSet(ExpProfile);
 end;
 
 procedure TFitViewer.SetUpdateGrids(Update: boolean);
@@ -786,8 +785,9 @@ end;
 constructor TFitViewer.Create(AOwner: TComponent);
 begin
     inherited;
-    FPointsSetList := TSelfCheckedComponentList.Create(nil);
-    FPointsSetList.SetState(cfPassive);
+    { List shouldn't destroy components,
+      they are destroyed by owners. }
+    FPointsSetList := TComponentList.Create(False);
     FXCoordMode    := 0;
     FUpdateGrids   := True;
     FUpdateLegends := True;

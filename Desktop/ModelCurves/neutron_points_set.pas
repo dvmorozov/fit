@@ -29,7 +29,7 @@ type
       point coordinates are expressed in 2 * Theta. }
     TNeutronPointsSet = class(TPointsSet)
     protected
-        FLambda: double;
+        FWaveLength: double;
 
         function GetPointIntensity(index: longint): double;
         procedure SetPointIntensity(index: longint; Value: double);
@@ -47,7 +47,7 @@ type
 
         property PointIntensity[index: longint]: double
             read GetPointIntensity write SetPointIntensity;
-        property Lambda: double read FLambda write FLambda;
+        property WaveLength: double read FWaveLength write FWaveLength;
         property PointT[index: longint]: double read GetPointT;
         property Point2T[index: longint]: double read GetPoint2T;
         property PointSinTL[index: longint]: double read GetPointSinTL;
@@ -60,7 +60,7 @@ implementation
 procedure TNeutronPointsSet.CopyParameters(Dest: TObject);
 begin
     inherited;
-    TNeutronPointsSet(Dest).Lambda := Lambda;
+    TNeutronPointsSet(Dest).WaveLength := WaveLength;
 end;
 
 constructor TNeutronPointsSet.Create(AOwner: TComponent);
@@ -97,8 +97,8 @@ end;
 
 function TNeutronPointsSet.GetPointSinTL(index: longint): double;
 begin
-    if Lambda <> 0 then
-        Result := Sin((FPoints[index][1] * pi) / (2 * 180)) / Lambda
+    if WaveLength <> 0 then
+        Result := Sin((FPoints[index][1] * pi) / (2 * 180)) / WaveLength
     else
         raise EWavelengthIsNotSpecified.Create('Wavelength undefined...');
 end;

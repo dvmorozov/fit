@@ -22,6 +22,8 @@ type
     private
         Container: TDownhillSimplexContainer;
 
+        procedure SelectParameter(index: longint);
+
     protected
         procedure SetTerminated(ATerminated: boolean); override;
 
@@ -105,24 +107,20 @@ begin
 end;
 
 function TDownhillSimplexMinimizer.GetParameter(index: longint): TVariableParameter;
-var
-    i: longint;
 begin
-    i := 0;
-    OnSetFirstParam;
-    while not OnEndOfCycle do
-    begin
-        if i = index then
-            Break;
-        Inc(i);
-        OnSetNextParam;
-    end;
+    SelectParameter(index);
     Result.Limited := False;
     Result.Value   := OnGetParam;
 end;
 
 procedure TDownhillSimplexMinimizer.SetParameter(index: longint;
     AParameter: TVariableParameter);
+begin
+    SelectParameter(index);
+    OnSetParam(AParameter.Value);
+end;
+
+procedure TDownhillSimplexMinimizer.SelectParameter(index: longint);
 var
     i: longint;
 begin
@@ -135,7 +133,6 @@ begin
         Inc(i);
         OnSetNextParam;
     end;
-    OnSetParam(AParameter.Value);
 end;
 
 {IDiscretValue}

@@ -79,8 +79,8 @@ end;
 {IOptimizedFunction}
 function TDownhillSimplexMinimizer.GetOptimizedFunction: double;
 begin
-    OnCalcFunc;
-    Result := OnFunc;
+    OnComputeFunc;
+    Result := OnGetFunc;
 end;
 
 {IDownhillRealParameters}
@@ -199,8 +199,8 @@ begin
     //  Final tolerance should have non zero value,
     //  otherwise computation will never end
     //  (see TDownhillSimplexContainer.CreateAlgorithm).
-    Container.FinalTolerance := 0.0000001;
-    Container.RestartDisabled := False; //True;
+    Container.FinalTolerance := 0.001;
+    Container.RestartDisabled := True;
     Container.AddIDSPToList(Self);
 end;
 

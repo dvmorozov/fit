@@ -68,26 +68,26 @@ begin
     if ErrorCode <> MIN_NO_ERRORS then
         Exit;
 
-    Step := OnGetStep;
+    Step := OnGetVariationStep;
     while (Step >= 0.001{!!!}) and (not Terminated) do
     begin
         OnSetFirstParam;
-        Step := OnGetStep;
-        OnCalcFunc;
-        TotalMinimum := OnFunc;
+        Step := OnGetVariationStep;
+        OnComputeFunc;
+        TotalMinimum := OnGetFunc;
         while (not OnEndOfCycle) and (not Terminated) do
         begin
-            OnCalcFunc;
+            OnComputeFunc;
             SaveParam      := OnGetParam;
-            CurrentMinimum := OnFunc;
+            CurrentMinimum := OnGetFunc;
 
             OnSetParam(SaveParam + Step);
-            OnCalcFunc;
-            MinimizeValue := OnFunc;
+            OnComputeFunc;
+            MinimizeValue := OnGetFunc;
 
             OnSetParam(SaveParam - Step);
-            OnCalcFunc;
-            MinimizeValue2 := OnFunc;
+            OnComputeFunc;
+            MinimizeValue2 := OnGetFunc;
 
             OnSetParam(SaveParam);
             MinIndex := 0;
@@ -113,18 +113,18 @@ begin
                 2: OnSetParam(SaveParam - Step);
             end;
 
-            OnCalcFunc;
+            OnComputeFunc;
 
             if Assigned(OnShowCurMin) then
-                if OnFunc < CurrentMinimum then
+                if OnGetFunc < CurrentMinimum then
                 begin
-                    CurrentMinimum := OnFunc;
+                    CurrentMinimum := OnGetFunc;
                     OnShowCurMin;
                 end;
             OnSetNextParam;
         end;
-        if OnFunc >= TotalMinimum then
-            OnSetStep(Step / 2);
+        if OnGetFunc >= TotalMinimum then
+            OnSetVariationStep(Step / 2);
     end;{while (Step > 1e-5) and (not Terminated) do...}
 end;
 
@@ -142,7 +142,7 @@ begin
     ErrorCode := IsReady;
     if ErrorCode <> MIN_NO_ERRORS then
         Exit;
-    CurrentMinimum := OnFunc;
+    CurrentMinimum := OnGetFunc;
 
     //??? vydavat' kod oshibki ili vybrasyvat' isklyuchenie
     Assert(Assigned(FDivideVariationStepBy2));
@@ -156,23 +156,23 @@ begin
         while (not OnEndOfCycle) and (not Terminated) do
         begin
             //  poluchenie shaga izmeneniya dlya ocherednogo parametra
-            Step      := OnGetStep;
+            Step      := OnGetVariationStep;
             //  poluchenie znacheniya ocherednogo parametra
             SaveParam := OnGetParam;
 
             //  pervoe izmenenie parametra
             OnSetParam(SaveParam + Step);
             //  vychislenie novogo znacheniya funktsii
-            OnCalcFunc;
+            OnComputeFunc;
             // poluchenie novogo znacheniya funktsii
-            MinimizeValue := OnFunc;
+            MinimizeValue := OnGetFunc;
 
             //  vtoroe izmenenie parametra
             OnSetParam(SaveParam - Step);
             //  vychislenie novogo znacheniya funktsii
-            OnCalcFunc;
+            OnComputeFunc;
             //  poluchenie novogo znacheniya funktsii
-            MinimizeValue2 := OnFunc;
+            MinimizeValue2 := OnGetFunc;
 
             //  vosstanovlenie ishodnogo znacheniya parametra
             OnSetParam(SaveParam);
@@ -209,10 +209,10 @@ begin
 
             if NewMinFound then
             begin
-                OnCalcFunc; //  pereschet nuzhno delat', chtoby dopolnitel'nye dannye
+                OnComputeFunc; //  pereschet nuzhno delat', chtoby dopolnitel'nye dannye
                 //  imeli znacheniya, sootvetstvuyuschie minimal'nomu znacheniyu
                 //  funktsii
-                CurrentMinimum := OnFunc;
+                CurrentMinimum := OnGetFunc;
                 if Assigned(OnShowCurMin) then
                     OnShowCurMin;
                 //OutputDebugString(PChar(FloatToStr(CurrentMinimum) + Chr(10) + Chr(13)));
@@ -242,7 +242,7 @@ begin
     ErrorCode := IsReady;
     if ErrorCode <> MIN_NO_ERRORS then
         Exit;
-    CurrentMinimum := OnFunc;
+    CurrentMinimum := OnGetFunc;
     TotalMinimum   := CurrentMinimum;
     DownCount      := 0;
 
@@ -259,23 +259,23 @@ begin
         begin
             Inc(debug);
             //  poluchenie shaga izmeneniya dlya ocherednogo parametra
-            Step      := OnGetStep;
+            Step      := OnGetVariationStep;
             //  poluchenie znacheniya ocherednogo parametra
             SaveParam := OnGetParam;
 
             //  pervoe izmenenie parametra
             OnSetParam(SaveParam + Step);
             //  vychislenie novogo znacheniya funktsii
-            OnCalcFunc;
+            OnComputeFunc;
             // poluchenie novogo znacheniya funktsii
-            MinimizeValue := OnFunc;
+            MinimizeValue := OnGetFunc;
 
             //  vtoroe izmenenie parametra
             OnSetParam(SaveParam - Step);
             //  vychislenie novogo znacheniya funktsii
-            OnCalcFunc;
+            OnComputeFunc;
             //  poluchenie novogo znacheniya funktsii
-            MinimizeValue2 := OnFunc;
+            MinimizeValue2 := OnGetFunc;
 
             //  vosstanovlenie ishodnogo znacheniya parametra
             OnSetParam(SaveParam);
@@ -312,10 +312,10 @@ begin
 
             if NewMinFound then
             begin
-                OnCalcFunc; //  pereschet nuzhno delat', chtoby dopolnitel'nye dannye
+                OnComputeFunc; //  pereschet nuzhno delat', chtoby dopolnitel'nye dannye
                 //  imeli znacheniya, sootvetstvuyuschie minimal'nomu znacheniyu
                 //  funktsii
-                CurrentMinimum := OnFunc;
+                CurrentMinimum := OnGetFunc;
                 if Assigned(OnShowCurMin) then
                     OnShowCurMin;
                 //OutputDebugString(PChar(FloatToStr(CurrentMinimum)));

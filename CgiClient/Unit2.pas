@@ -428,7 +428,7 @@ end;
 
 procedure TCGIDatamodule2.HandleCommand(Command: string);
 begin
-    WriteLog('HandleCommand', Notification_);
+    WriteLog('HandleCommand', Notification);
     if Command = 'add_point_to_profile' then
         AddPointToProfile
     else
@@ -509,7 +509,7 @@ begin
 {$ELSE}
         Beep;
 {$ENDIF}
-        WriteLog('Back to start page', Notification_);
+        WriteLog('Back to start page', Notification);
     end
     else
     if Command = 'generate_specimen_positions' then
@@ -943,7 +943,7 @@ var
     P: File_v1;
     UserFileName, FileDescription: string;
 begin
-    WriteLog('UploadData', Notification_);
+    WriteLog('UploadData', Notification);
 
     //  global'naya peremennaya - ispol'zuetsya dlya vypolneniya zaprosa
     Key := Application.RequestVariables['key'];
@@ -1000,7 +1000,7 @@ begin
         if Length(FileName) > 6 then
             FileName := Copy(FileName, 7, Length(FileName) - 6);
         FileName := '..\..\..\tmp\' + FileName;
-        WriteLog(FileName, Main.Notification_);
+        WriteLog(FileName, Main.Notification);
         *)
 {$ENDIF}
         //  kopirovaniye faila v proekt
@@ -2988,7 +2988,7 @@ begin
 {$ELSE}
             Beep;
 {$ENDIF}
-            WriteLog('New registration: ' + UserName, Notification_);
+            WriteLog('New registration: ' + UserName, Notification);
         except
             raise Exception.Create(UnsuccessfulFileOperation);
         end;
@@ -3102,7 +3102,7 @@ begin
 
     WriteKeyToFile;
     GoToProjectsActual;
-    WriteLog('Login: ' + UserName, Notification_);
+    WriteLog('Login: ' + UserName, Notification);
 end;
 
 procedure TCGIDatamodule2.StartEvaluation;
@@ -3159,7 +3159,7 @@ begin
 
     WriteKeyToFile;
     GoToProjectsActual;
-    WriteLog('Login: ' + UserName, Notification_);
+    WriteLog('Login: ' + UserName, Notification);
 end;
 
 procedure TCGIDatamodule2.GoToProjectsActual;

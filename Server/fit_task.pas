@@ -110,10 +110,10 @@ type
         { Computes evaluation function. }
         procedure CalcFunc;
         { Returns initial variation step for current variable parameter. }
-        function GetStep: double;
+        function GetVariationStep: double;
         { Does nothing. Should be implemented because is used by pointer.
           See OnSetStep. }
-        procedure SetStep(NewStepValue: double);
+        procedure SetVariationStep(NewStepValue: double);
         { Moves iteration to next variable parameter. }
         procedure SetNextParam;
         { Sets iteration to the first variable parameter. }
@@ -444,7 +444,7 @@ begin
     Result  := RFactor;
 end;
 
-function TFitTask.GetStep: double;
+function TFitTask.GetVariationStep: double;
 var
     Curve: TCurvePointsSet;
 begin
@@ -462,7 +462,7 @@ begin
 end;
 
 {$hints off}
-procedure TFitTask.SetStep(NewStepValue: double);
+procedure TFitTask.SetVariationStep(NewStepValue: double);
 begin
 
 end;
@@ -679,12 +679,17 @@ begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
     Result := False;
     if (FMinimizer.CurrentMinimum < FMaxRFactor) then
-        Result := True//OutputDebugString(PChar('Desired R-factor achived...'));
+    begin
+        Result := True;
+        WriteLog('Desired R-factor achived...', TMsgType.Notification);
+    end
 
     else
     if MinimumStepAchieved then
-        Result := True//OutputDebugString(PChar('Minimumu step achived...'));
-    ;
+    begin
+        Result := True;
+        WriteLog('Minimum step achived...', TMsgType.Notification);
+    end;
 end;
 
 constructor TFitTask.Create(AOwner: TComponent; AEnableBackgroundVariation: boolean;
@@ -878,10 +883,10 @@ begin
     FMinimizer.Free;
     FMinimizer := nil;
     FMinimizer := TSimpleMinimizer3.Create(nil);
-    FMinimizer.OnFunc := Func;
-    FMinimizer.OnCalcFunc := CalcFunc;
-    FMinimizer.OnGetStep := GetStep;
-    FMinimizer.OnSetStep := SetStep;
+    FMinimizer.OnGetFunc := Func;
+    FMinimizer.OnComputeFunc := CalcFunc;
+    FMinimizer.OnGetVariationStep := GetVariationStep;
+    FMinimizer.OnSetVariationStep := SetVariationStep;
     FMinimizer.OnSetNextParam := SetNextParam;
     FMinimizer.OnSetFirstParam := SetFirstParam;
     FMinimizer.OnGetParam := GetParam;
@@ -909,10 +914,10 @@ begin
     FMinimizer.Free;
     FMinimizer := nil;
     FMinimizer := TDownhillSimplexMinimizer.Create(nil);
-    FMinimizer.OnFunc := Func;
-    FMinimizer.OnCalcFunc := CalcFunc;
-    FMinimizer.OnGetStep := GetStep;
-    FMinimizer.OnSetStep := SetStep;
+    FMinimizer.OnGetFunc := Func;
+    FMinimizer.OnComputeFunc := CalcFunc;
+    FMinimizer.OnGetVariationStep := GetVariationStep;
+    FMinimizer.OnSetVariationStep := SetVariationStep;
     FMinimizer.OnSetNextParam := SetNextParam;
     FMinimizer.OnSetFirstParam := SetFirstParam;
     FMinimizer.OnGetParam := GetParam;

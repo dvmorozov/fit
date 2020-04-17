@@ -55,7 +55,7 @@ These versions are not maintained and will be replaced.
 
 __/INFILE=*file_name*__ - opens data file on application start up 
 
-__/WRITE_PARAMS_LOG__ - turns on variable parameters logging 
+__/WRITE_PARAMS_LOG__ - turns on logging of variable parameters
 
 On Windows log file is located in the folder
 __C:\Users\user_name\AppData\Roaming\Fit-x86_64-win64__

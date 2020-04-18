@@ -13,14 +13,14 @@ unit downhill_simplex_minimizer;
 
 interface
 
-uses Classes, DownhillSimplexContainer, int_minimizer, SysUtils, Tools;
+uses Classes, DownhillSimplexServer, int_minimizer, log, SysUtils, Tools;
 
 type
     { Implements application interfaces required by downhill simplex algorithm. }
     TDownhillSimplexMinimizer = class(TMinimizer,
         IOptimizedFunction, IDownhillRealParameters, IUpdatingResults)
     private
-        Container: TDownhillSimplexContainer;
+        Container: TDownhillSimplexServer;
 
         procedure SelectParameter(index: longint);
 
@@ -41,6 +41,8 @@ type
         function GetParametersNumber: longint;
         function GetParameter(index: longint): TVariableParameter;
         procedure SetParameter(index: longint; AParameter: TVariableParameter);
+        function GetVariationStep(index: LongInt): double;
+        procedure SetVariationStep(index: LongInt; Value: double);
 
         {IDiscretValue}
         function GetNumberOfValues: longint;
@@ -120,6 +122,18 @@ begin
     OnSetParam(AParameter.Value);
 end;
 
+function TDownhillSimplexMinimizer.GetVariationStep(index: LongInt): double;
+begin
+    SelectParameter(index);
+    Result := OnGetVariationStep;
+end;
+
+procedure TDownhillSimplexMinimizer.SetVariationStep(index: LongInt; Value: double);
+begin
+    SelectParameter(index);
+    OnSetVariationStep(Value);
+end;
+
 procedure TDownhillSimplexMinimizer.SelectParameter(index: longint);
 var
     i: longint;
@@ -155,8 +169,9 @@ end;
 {$hints off}
 procedure TDownhillSimplexMinimizer.ShowCurJobProgress(Sender: TComponent;
     MinValue, MaxValue, CurValue: longint);
+var dummy: longint;
 begin
-
+    dummy := 0;
 end;
 
 procedure TDownhillSimplexMinimizer.ResetCurJobProgress(Sender: TComponent);
@@ -175,8 +190,9 @@ procedure TDownhillSimplexMinimizer.UpdatingResults(Sender: TComponent);
 begin
     if Assigned(OnShowCurMin) then
     begin
-        CurrentMinimum := Container.TotalMinimum;
+        FCurrentMinimum := Container.FTotalMinimum;
         OnShowCurMin;
+        WriteLog('Current minimium = ' + FloatToStr(FCurrentMinimum), Debug);
     end;
 end;
 
@@ -190,13 +206,13 @@ end;
 constructor TDownhillSimplexMinimizer.Create(AOwner: TComponent);
 begin
     inherited Create(AOwner);
-    Container := TDownhillSimplexContainer.Create(nil);
+    Container := TDownhillSimplexServer.Create(nil);
     Container.UpdatingResults := Self;
     Container.OptimizedFunction := Self;
     //  Final tolerance should have non zero value,
     //  otherwise computation will never end
-    //  (see TDownhillSimplexContainer.CreateAlgorithm).
-    Container.FinalTolerance := 0.001;
+    //  (see TDownhillSimplexServer.CreateAlgorithm).
+    Container.FinalTolerance := 0.001; //1e-10;
     Container.RestartDisabled := True;
     Container.AddIDSPToList(Self);
 end;

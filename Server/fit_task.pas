@@ -106,9 +106,9 @@ type
         { Methods which are used by the optimizer. }
 
         { Calculates R-factor. }
-        function Func: double;
+        function GetFunc: double;
         { Computes evaluation function. }
-        procedure CalcFunc;
+        procedure ComputeFunc;
         { Returns initial variation step for current variable parameter. }
         function GetVariationStep: double;
         { Does nothing. Should be implemented because is used by pointer.
@@ -260,12 +260,12 @@ uses
 
 {================================== TFitTask ==================================}
 
-function TFitTask.Func: double;
+function TFitTask.GetFunc: double;
 begin
     Result := GetOptimizingRFactor;
 end;
 
-procedure TFitTask.CalcFunc;
+procedure TFitTask.ComputeFunc;
 begin
     //  krivye ne nuzhno pereschityvat', poskol'ku vse uzhe
     //  pereschitano v SetParam
@@ -678,7 +678,7 @@ function TFitTask.EndOfCalculation: boolean;
 begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
     Result := False;
-    if (FMinimizer.CurrentMinimum < FMaxRFactor) then
+    if (FMinimizer.FCurrentMinimum < FMaxRFactor) then
     begin
         Result := True;
         WriteLog('Desired R-factor achived...', TMsgType.Notification);
@@ -883,8 +883,8 @@ begin
     FMinimizer.Free;
     FMinimizer := nil;
     FMinimizer := TSimpleMinimizer3.Create(nil);
-    FMinimizer.OnGetFunc := Func;
-    FMinimizer.OnComputeFunc := CalcFunc;
+    FMinimizer.OnGetFunc := GetFunc;
+    FMinimizer.OnComputeFunc := ComputeFunc;
     FMinimizer.OnGetVariationStep := GetVariationStep;
     FMinimizer.OnSetVariationStep := SetVariationStep;
     FMinimizer.OnSetNextParam := SetNextParam;
@@ -914,8 +914,8 @@ begin
     FMinimizer.Free;
     FMinimizer := nil;
     FMinimizer := TDownhillSimplexMinimizer.Create(nil);
-    FMinimizer.OnGetFunc := Func;
-    FMinimizer.OnComputeFunc := CalcFunc;
+    FMinimizer.OnGetFunc := GetFunc;
+    FMinimizer.OnComputeFunc := ComputeFunc;
     FMinimizer.OnGetVariationStep := GetVariationStep;
     FMinimizer.OnSetVariationStep := SetVariationStep;
     FMinimizer.OnSetNextParam := SetNextParam;

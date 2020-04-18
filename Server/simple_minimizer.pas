@@ -79,7 +79,7 @@ begin
         begin
             OnComputeFunc;
             SaveParam      := OnGetParam;
-            CurrentMinimum := OnGetFunc;
+            FCurrentMinimum := OnGetFunc;
 
             OnSetParam(SaveParam + Step);
             OnComputeFunc;
@@ -92,17 +92,17 @@ begin
             OnSetParam(SaveParam);
             MinIndex := 0;
 
-            if (MinimizeValue >= CurrentMinimum) and
-                (MinimizeValue2 >= CurrentMinimum) then
+            if (MinimizeValue >= FCurrentMinimum) and
+                (MinimizeValue2 >= FCurrentMinimum) then
                 MinIndex := 0;
-            if (MinimizeValue >= CurrentMinimum) and
-                (MinimizeValue2 < CurrentMinimum) then
+            if (MinimizeValue >= FCurrentMinimum) and
+                (MinimizeValue2 < FCurrentMinimum) then
                 MinIndex := 2;
-            if (MinimizeValue < CurrentMinimum) and
-                (MinimizeValue2 >= CurrentMinimum) then
+            if (MinimizeValue < FCurrentMinimum) and
+                (MinimizeValue2 >= FCurrentMinimum) then
                 MinIndex := 1;
-            if (MinimizeValue < CurrentMinimum) and
-                (MinimizeValue2 < CurrentMinimum) then
+            if (MinimizeValue < FCurrentMinimum) and
+                (MinimizeValue2 < FCurrentMinimum) then
                 if MinimizeValue <= MinimizeValue2 then
                     MinIndex := 1
                 else
@@ -116,9 +116,9 @@ begin
             OnComputeFunc;
 
             if Assigned(OnShowCurMin) then
-                if OnGetFunc < CurrentMinimum then
+                if OnGetFunc < FCurrentMinimum then
                 begin
-                    CurrentMinimum := OnGetFunc;
+                    FCurrentMinimum := OnGetFunc;
                     OnShowCurMin;
                 end;
             OnSetNextParam;
@@ -142,7 +142,7 @@ begin
     ErrorCode := IsReady;
     if ErrorCode <> MIN_NO_ERRORS then
         Exit;
-    CurrentMinimum := OnGetFunc;
+    FCurrentMinimum := OnGetFunc;
 
     //??? vydavat' kod oshibki ili vybrasyvat' isklyuchenie
     Assert(Assigned(FDivideVariationStepBy2));
@@ -151,7 +151,7 @@ begin
     while (not FEndOfCalculation) and (not Terminated) do
     begin
         OnSetFirstParam;
-        TotalMinimum := CurrentMinimum;
+        TotalMinimum := FCurrentMinimum;
         //  tsikl optimizatsii po vsem parametram
         while (not OnEndOfCycle) and (not Terminated) do
         begin
@@ -177,17 +177,17 @@ begin
             //  vosstanovlenie ishodnogo znacheniya parametra
             OnSetParam(SaveParam);
             MinIndex := 0;
-            if (MinimizeValue >= CurrentMinimum) and
-                (MinimizeValue2 >= CurrentMinimum) then
+            if (MinimizeValue >= FCurrentMinimum) and
+                (MinimizeValue2 >= FCurrentMinimum) then
                 MinIndex := 0;
-            if (MinimizeValue >= CurrentMinimum) and
-                (MinimizeValue2 < CurrentMinimum) then
+            if (MinimizeValue >= FCurrentMinimum) and
+                (MinimizeValue2 < FCurrentMinimum) then
                 MinIndex := 2;
-            if (MinimizeValue < CurrentMinimum) and
-                (MinimizeValue2 >= CurrentMinimum) then
+            if (MinimizeValue < FCurrentMinimum) and
+                (MinimizeValue2 >= FCurrentMinimum) then
                 MinIndex := 1;
-            if (MinimizeValue < CurrentMinimum) and
-                (MinimizeValue2 < CurrentMinimum) then
+            if (MinimizeValue < FCurrentMinimum) and
+                (MinimizeValue2 < FCurrentMinimum) then
                 if MinimizeValue <= MinimizeValue2 then
                     MinIndex := 1
                 else
@@ -212,14 +212,14 @@ begin
                 OnComputeFunc; //  pereschet nuzhno delat', chtoby dopolnitel'nye dannye
                 //  imeli znacheniya, sootvetstvuyuschie minimal'nomu znacheniyu
                 //  funktsii
-                CurrentMinimum := OnGetFunc;
+                FCurrentMinimum := OnGetFunc;
                 if Assigned(OnShowCurMin) then
                     OnShowCurMin;
-                //OutputDebugString(PChar(FloatToStr(CurrentMinimum) + Chr(10) + Chr(13)));
+                //OutputDebugString(PChar(FloatToStr(FCurrentMinimum) + Chr(10) + Chr(13)));
             end;
             OnSetNextParam;
         end;{while (not OnEndOfCycle) and (not Terminated) do...}
-        if (TotalMinimum <> 0) and (Abs(CurrentMinimum - TotalMinimum) /
+        if (TotalMinimum <> 0) and (Abs(FCurrentMinimum - TotalMinimum) /
             TotalMinimum < 1e-5) then
             FDivideVariationStepBy2;
     end;{while (not FEndOfCalculation) and (not Terminated) do...}
@@ -242,8 +242,8 @@ begin
     ErrorCode := IsReady;
     if ErrorCode <> MIN_NO_ERRORS then
         Exit;
-    CurrentMinimum := OnGetFunc;
-    TotalMinimum   := CurrentMinimum;
+    FCurrentMinimum := OnGetFunc;
+    TotalMinimum   := FCurrentMinimum;
     DownCount      := 0;
 
     Assert(Assigned(FMultiplyVariationStep));
@@ -280,17 +280,17 @@ begin
             //  vosstanovlenie ishodnogo znacheniya parametra
             OnSetParam(SaveParam);
             MinIndex := 0;
-            if (MinimizeValue >= CurrentMinimum) and
-                (MinimizeValue2 >= CurrentMinimum) then
+            if (MinimizeValue >= FCurrentMinimum) and
+                (MinimizeValue2 >= FCurrentMinimum) then
                 MinIndex := 0;
-            if (MinimizeValue >= CurrentMinimum) and
-                (MinimizeValue2 < CurrentMinimum) then
+            if (MinimizeValue >= FCurrentMinimum) and
+                (MinimizeValue2 < FCurrentMinimum) then
                 MinIndex := 2;
-            if (MinimizeValue < CurrentMinimum) and
-                (MinimizeValue2 >= CurrentMinimum) then
+            if (MinimizeValue < FCurrentMinimum) and
+                (MinimizeValue2 >= FCurrentMinimum) then
                 MinIndex := 1;
-            if (MinimizeValue < CurrentMinimum) and
-                (MinimizeValue2 < CurrentMinimum) then
+            if (MinimizeValue < FCurrentMinimum) and
+                (MinimizeValue2 < FCurrentMinimum) then
                 if MinimizeValue <= MinimizeValue2 then
                     MinIndex := 1
                 else
@@ -315,22 +315,22 @@ begin
                 OnComputeFunc; //  pereschet nuzhno delat', chtoby dopolnitel'nye dannye
                 //  imeli znacheniya, sootvetstvuyuschie minimal'nomu znacheniyu
                 //  funktsii
-                CurrentMinimum := OnGetFunc;
+                FCurrentMinimum := OnGetFunc;
                 if Assigned(OnShowCurMin) then
                     OnShowCurMin;
-                //OutputDebugString(PChar(FloatToStr(CurrentMinimum)));
+                //OutputDebugString(PChar(FloatToStr(FCurrentMinimum)));
             end;
             OnSetNextParam;
         end;{while (not OnEndOfCycle) and (not Terminated) do...}
 
         if (TotalMinimum <> 0) then
         begin
-            //  CurrentMinimum m. stat' bol'she, chem TotalMinimum posle
+            //  FCurrentMinimum m. stat' bol'she, chem TotalMinimum posle
             //  uvelicheniya shaga
-            if (CurrentMinimum < TotalMinimum) and
-                (Abs(CurrentMinimum - TotalMinimum) / TotalMinimum >= 1e-5) then
+            if (FCurrentMinimum < TotalMinimum) and
+                (Abs(FCurrentMinimum - TotalMinimum) / TotalMinimum >= 1e-5) then
             begin
-                TotalMinimum := CurrentMinimum;
+                TotalMinimum := FCurrentMinimum;
                 //  neskol'ko tsiklov idet vniz -
                 //  shag uvelichivaetsya
                 Inc(DownCount);
@@ -347,8 +347,8 @@ begin
                 DownCount := 0;
                 //OutputDebugString(PChar('Parameter steps decreased...'));
             end;
-            if CurrentMinimum < TotalMinimum then
-                TotalMinimum := CurrentMinimum;
+            if FCurrentMinimum < TotalMinimum then
+                TotalMinimum := FCurrentMinimum;
         end
         else
             Break;

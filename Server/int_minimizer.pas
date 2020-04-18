@@ -87,7 +87,7 @@ type
         procedure SetTerminated(ATerminated: boolean); virtual;
 
     public
-        CurrentMinimum: double;
+        FCurrentMinimum: double;
 
         procedure Minimize(var ErrorCode: longint); virtual; abstract;
         // vozvraschaet kod oshibki

@@ -54,7 +54,7 @@ type
             MinValue, MaxValue, CurValue: longint);
         procedure ResetCurJobProgress(Sender: TComponent);
         procedure ShowMessage(Sender: TComponent; Msg: string);
-        procedure UpdatingResults(Sender: TComponent);
+        procedure UpdateResults(Sender: TComponent);
 
         constructor Create(AOwner: TComponent); override;
         destructor Destroy; override;
@@ -169,9 +169,8 @@ end;
 {$hints off}
 procedure TDownhillSimplexMinimizer.ShowCurJobProgress(Sender: TComponent;
     MinValue, MaxValue, CurValue: longint);
-var dummy: longint;
 begin
-    dummy := 0;
+
 end;
 
 procedure TDownhillSimplexMinimizer.ResetCurJobProgress(Sender: TComponent);
@@ -186,7 +185,7 @@ end;
 
 {$hints on}
 
-procedure TDownhillSimplexMinimizer.UpdatingResults(Sender: TComponent);
+procedure TDownhillSimplexMinimizer.UpdateResults(Sender: TComponent);
 begin
     if Assigned(OnShowCurMin) then
     begin

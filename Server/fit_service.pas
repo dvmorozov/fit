@@ -227,10 +227,10 @@ type
         function IntegrateWithBoundaries(Points: TPointsSet;
             StartPointIndex, StopPointIndex: longint): double;
         function Integrate(Points: TPointsSet): double;
-        { Calculates the R-factor for FCalcProfile and SelectProfileInterval by sum for all subtasks. }
-        function GetRFactor: double;
-        function GetAbsRFactor: double;
-        function GetSqrRFactor: double;
+        { Calculates the R-factor for FCalcProfile and SelectProfileInterval by sum for all tasks. }
+        function GetTotalRFactor: double;
+        function GetTotalAbsRFactor: double;
+        function GetTotalSqrRFactor: double;
         { Copies data from given list to the list of selected interval. }
         procedure SelectProfileIntervalActual(Points: TPointsSet;
             StartPointIndex, StopPointIndex: longint);
@@ -1841,7 +1841,7 @@ begin
     Result := TempDouble;
 end;
 
-function TFitService.GetRFactor: double;
+function TFitService.GetTotalRFactor: double;
 var
     i:  longint;
     FT: TFitTask;
@@ -1855,7 +1855,7 @@ begin
     end;
 end;
 
-function TFitService.GetAbsRFactor: double;
+function TFitService.GetTotalAbsRFactor: double;
 var
     i:  longint;
     FT: TFitTask;
@@ -1869,7 +1869,7 @@ begin
     end;
 end;
 
-function TFitService.GetSqrRFactor: double;
+function TFitService.GetTotalSqrRFactor: double;
 var
     i:  longint;
     FT: TFitTask;
@@ -1946,7 +1946,7 @@ procedure TFitService.ShowCurMinInternal;
 begin
     if GetAllInitialized then
     begin
-        FCurrentMinimum := GetRFactor;
+        FCurrentMinimum := GetTotalRFactor;
         // vyzyvaetsya v osnovnom potoke servera,
         // t.e. v tom zhe potoke, chto i ServerStub,
         // poetomu mozhno ispuskat' te zhe isklyucheniya
@@ -2535,7 +2535,7 @@ begin
           Temp.Free; raise;
           end;
           //  ustanovka dop. parametrov
-          FitTask.MaxRFactor := MaxRFactor;
+          FitTask.MinRFactor := MaxRFactor;
           FitTask.CurveTypeId := CurveTypeId;
           if CurveTypeId = Special then
           FitTask.SetSpecialCurve(FCurveExpr, Curve_parameters(FParams.GetCopy));
@@ -2601,7 +2601,7 @@ begin
                 raise;
             end;
             // ustanovka dop. parametrov
-            FitTask.MaxRFactor := MaxRFactor;
+            FitTask.MinRFactor := MaxRFactor;
 {$IFDEF WINDOWS_SPECIFIC}
             if IsEqualGUID(CurveTypeId, TUserPointsSet.GetCurveTypeId) then
                 FitTask.SetSpecialCurve(FCurveExpr,
@@ -2702,7 +2702,7 @@ begin
         for i := 0 to FTaskList.Count - 1 do
         begin
             FT := TFitTask(FTaskList.Items[i]);
-            FT.MaxRFactor := AMaxRFactor;
+            FT.MinRFactor := AMaxRFactor;
         end;
 end;
 
@@ -2799,9 +2799,8 @@ var
 begin
     if GetAllInitialized then
     begin
-        RFactor := GetRFactor;
-        Result  := // FloatToStr(RFactor);
-            FloatToStrF(RFactor, ffFixed, 10, 8);
+        RFactor := GetTotalRFactor;
+        Result  := FloatToStrF(RFactor, ffFixed, 10, 8);
     end
     else
         Result := RFactorStillNotCalculated;
@@ -2813,7 +2812,7 @@ var
 begin
     if GetAllInitialized then
     begin
-        F      := GetAbsRFactor;
+        F      := GetTotalAbsRFactor;
         Result := // FloatToStr(F);
             FloatToStrF(F, ffFixed, 10, 8);
     end
@@ -2827,7 +2826,7 @@ var
 begin
     if GetAllInitialized then
     begin
-        F      := GetSqrRFactor;
+        F      := GetTotalSqrRFactor;
         Result := // FloatToStr(F);
             FloatToStrF(F, ffFixed, 10, 8);
     end

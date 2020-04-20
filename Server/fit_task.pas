@@ -47,6 +47,7 @@ type
           optimization could stuck in local minimum. However it could be
           set to false for some special curve types. }
         FCurveScalingEnabled: boolean;
+        { Maximal value of R-factor allowed for minimizing number of curves. }
         FMaxRFactor:  double;
         FCurveTypeSelector: ICurveTypeSelector;
         { Expression defining user curve type. }
@@ -82,7 +83,7 @@ type
         FCurveNum: longint;
         { Index of parameter of pattern instance which is variated at the moment. }
         FParamNum: longint;
-        FEOC:      boolean;
+        FEndOfCycle: boolean;
         { Flag signalling to terminate all internal loops. }
         FTerminated: boolean;
         { Index of common parameter which is variated at the moment. }
@@ -146,7 +147,12 @@ type
           For this class is always True for now because the class does not support asynchronous operations. }
         FAllDone:   boolean;
 
+        { These methods notify service about computation progress. }
+        { Notifies service about achievement of new minimum value.
+          This method recomputes data if necessary to be in
+          consistent state with minimum R-factor value. }
         procedure ShowCurMin; virtual;
+        { Notifies service about finishing computation. }
         procedure Done; virtual;
 
         function GetSqrRFactor: double;
@@ -170,13 +176,13 @@ type
         procedure SubbCurveFromProfile(PS: TPointsSet);
         { Removes from list of curve positions those points
           for which calculated curves have zero amplitude. }
-        function DeleteZeros: boolean;
+        function DeleteCurvePositionsWithSmallAmplitude: boolean;
         { Deletes from list of curve positions the point
           in which amplitude of curve is minimal. }
-        function DeleteMin(var Deleted: TCurvePointsSet): boolean;
+        function DeleteCurvePositionWithMinimalAmplitude(var Deleted: TCurvePointsSet): boolean;
         { Removes from list of curve positions the point
           in which experimental profile has maximal derivative.  }
-        function DeleteMaxDerivative(var Deleted: TCurvePointsSet): boolean;
+        function DeleteCurvePositionWithMaxExpDerivative(var Deleted: TCurvePointsSet): boolean;
 
         { Auxiliary methods. }
         { Deletes poins with given X from the list passed via parameter. }
@@ -238,7 +244,7 @@ type
         { Returns the factor scaling calculated points up to scale of experimental data. }
         function GetScalingFactor: double;
 
-        property MaxRFactor: double write FMaxRFactor;
+        property MinRFactor: double write FMaxRFactor;
         { Callback to update information at achieving new minimum. }
         property ServerShowCurMin: TThreadMethod read FShowCurMin write FShowCurMin;
         property ServerDoneProc: TThreadMethod read FDoneProc write FDoneProc;
@@ -377,27 +383,25 @@ end;
 
 function TFitTask.GetSqrRFactor: double;
 var
-    CPS:     TCurvePointsSet;
-    i, j:    longint;
-    RFactor: double;
-    Flag:    boolean;
-    RangeDefined: boolean;
-    ScalingFactor: double;
+    PointsSet:      TCurvePointsSet;
+    i, j:           longint;
+    RFactor:        double;
+    PointInRange:   boolean;
+    RangeDefined:   boolean;
+    ScalingFactor:  double;
     CalcProfileIntegral: double;
 begin
-    //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
     Assert(Assigned(FCalcProfile));
     Assert(Assigned(FExpProfile));
-
     Assert(Assigned(FCurves));
-    //  esli ni u odnoy krivoy diapazon ne zadan,
-    //  to R-faktor schitaetsya po vsemu profilyu
+
+    { If range is not set, R-factor is computed by entire profile. }
     RangeDefined := False;
     if FUseCurveRanges then
         for j := 0 to FCurves.Count - 1 do
         begin
-            CPS := TCurvePointsSet(FCurves.Items[j]);
-            if CPS.FRangeDefined then
+            PointsSet := TCurvePointsSet(FCurves.Items[j]);
+            if PointsSet.FRangeDefined then
             begin
                 RangeDefined := True;
                 Break;
@@ -407,38 +411,36 @@ begin
     RFactor := 0;
     ScalingFactor := GetScalingFactor;
     CalcProfileIntegral := GetCalcProfileIntegral;
+    { Protection from division by zero. }
     if CalcProfileIntegral = 0 then
         CalcProfileIntegral := 1;
 
-    //  profil' rasschityvaetsya prostoy summoy po vsem rasschitannym krivym,
-    //  inache nel'zya poluchit' korrektnyy R-faktor dlya krivyh s ogranicheniyami;
-    //  pri vychislenii R-faktora kazhdaya tochka proveryaetsya na prinalezhnost'
-    //  k diapazonu kakoy-libo iz krivyh, t.o. v konechnoe znachenie R-faktora
-    //  vkladyvayut tol'ko tochki iz ob'edineniya diapazonov vseh krivyh
     for i := 0 to FCalcProfile.PointsCount - 1 do
     begin
-        //  proveryaetsya prinadlezhnost' tochki diapazonu krivoy
+        { Checks that point belongs to the range. }
+        PointInRange := True;
         if RangeDefined then
         begin
-            Flag := False;      //  tochka ne prinadlezhit nikakomu diapazonu
+            PointInRange := False;
             for j := 0 to FCurves.Count - 1 do
             begin
-                CPS := TCurvePointsSet(FCurves.Items[j]);
-                if CPS.FRangeDefined and
-                    (FCalcProfile.PointXCoord[i] >= CPS.FMinX) and
-                    (FCalcProfile.PointXCoord[i] <= CPS.FMaxX) then
+                PointsSet := TCurvePointsSet(FCurves.Items[j]);
+                if PointsSet.FRangeDefined and
+                    (FCalcProfile.PointXCoord[i] >= PointsSet.FMinX) and
+                    (FCalcProfile.PointXCoord[i] <= PointsSet.FMaxX) then
                 begin
-                    Flag := True;
+                    PointInRange := True;
                     Break;
                 end;
             end;
-        end
-        else
-            Flag := True;      //  schitaem po vsem tochkam
+        end;
 
-        if Flag then            //  tochka vklyuchena v raschet R-faktora
+        if PointInRange then
+        begin
+            { Point contributes to R-factor. }
             RFactor := RFactor + Sqr(FCalcProfile.PointYCoord[i] *
                 ScalingFactor - FExpProfile.PointYCoord[i]);
+        end;
     end;
     RFactor := RFactor / Sqr(CalcProfileIntegral);
     Result  := RFactor;
@@ -478,7 +480,7 @@ begin
     Assert(Assigned(FCurves));
     Assert(Assigned(FCommonVariableParameters));
 
-    FEOC := True;
+    FEndOfCycle := True;
     if FCurves.Count <> 0 then
     begin
         //  perebor parametrov krivoy
@@ -486,7 +488,7 @@ begin
         if FParamNum < Curve.VariableCount - 1 then
         begin
             Inc(FParamNum);
-            FEOC := False;
+            FEndOfCycle := False;
             Exit;
         end;
     end;
@@ -495,7 +497,7 @@ begin
     begin
         //  perebor krivyh
         Inc(FCurveNum);
-        FEOC      := False;
+        FEndOfCycle      := False;
         FParamNum := 0;
         Exit;
     end;
@@ -514,7 +516,7 @@ begin
 
     if FCommonVaryingIndex < Count then
     begin
-        FEOC := False;
+        FEndOfCycle := False;
         FCommonVaryingFlag := True;
         Exit;
     end;
@@ -531,7 +533,7 @@ begin
         begin
             //  There are still next variable FBackground parameters.
             FBackgroundVaryingFlag := True;
-            FEOC := False;
+            FEndOfCycle := False;
             Exit;
         end;
     end;
@@ -544,7 +546,7 @@ begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
     FCurveNum := 0;
     FParamNum := 0;
-    FEOC      := False;
+    FEndOfCycle      := False;
     //  poisk pervogo parametra razreschennogo k variatsii
     for i := 0 to FCommonVariableParameters.Params.Count - 1 do
         if not FCommonVariableParameters[i].VariationDisabled then
@@ -656,7 +658,7 @@ end;
 
 function TFitTask.EndOfCycle: boolean;
 begin
-    Result := FEOC;
+    Result := FEndOfCycle;
 end;
 
 procedure TFitTask.DivideVariationStepBy2;
@@ -697,9 +699,11 @@ constructor TFitTask.Create(AOwner: TComponent; AEnableBackgroundVariation: bool
 begin
     inherited Create(AOwner);
     FCommonVariableParameters := Curve_parameters.Create(nil);
-    FCommonVariableParameters.Params.Clear;
     //  Curve_parameters sozdaet v konstruktore
     //  odin parametr - nuzhno ego udalit'
+    //  TODO: remove this.
+    FCommonVariableParameters.Params.Clear;
+    { Sets initial value of R-factor. }
     FMaxRFactor := 0.01;
     FAllDone    := False;
     //  Sets default curve type
@@ -899,7 +903,7 @@ begin
 
     InitializeVariationSteps;
 
-    FEOC      := False;
+    FEndOfCycle      := False;
     FParamNum := 0;
     FCurveNum := 0;
     FCommonVaryingFlag := False;
@@ -927,7 +931,7 @@ begin
 
     InitializeVariationSteps;
 
-    FEOC      := False;
+    FEndOfCycle      := False;
     FParamNum := 0;
     FCurveNum := 0;
     FCommonVaryingFlag := False;
@@ -939,7 +943,7 @@ end;
 
    //  udalyaet iz spiska vydelennyh tochek te tochki,
    //  dlya kotoryh gaussiany imeyut nulevuyu intensivnost'
-function TFitTask.DeleteZeros: boolean;
+function TFitTask.DeleteCurvePositionsWithSmallAmplitude: boolean;
 var
     i, j: longint;
     GP:   TCurvePointsSet;
@@ -992,7 +996,7 @@ begin
     end;
 end;
 
-function TFitTask.DeleteMaxDerivative(var Deleted: TCurvePointsSet): boolean;
+function TFitTask.DeleteCurvePositionWithMaxExpDerivative(var Deleted: TCurvePointsSet): boolean;
 var
     Der, MaxDer: double;
     First: boolean;
@@ -1061,7 +1065,7 @@ end;
 
    //  udalyaet iz spiska vydelennyh tochek tu,
    //  u kotoroy amplituda krivoy minimal'na
-function TFitTask.DeleteMin(var Deleted: TCurvePointsSet): boolean;
+function TFitTask.DeleteCurvePositionWithMinimalAmplitude(var Deleted: TCurvePointsSet): boolean;
 var
     Min:   double;
     First: boolean;
@@ -1461,8 +1465,7 @@ var
     ZerosDeleted, PointDeleted: boolean;
     Deleted: TCurvePointsSet;
 begin
-    //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
-    //  pervyy tsikl optimizatsii
+    { The first cycle of optimization. }
     Optimization;
 
     Deleted      := nil;
@@ -1477,10 +1480,10 @@ begin
         //  predyduschiy tsikl optimizatsii umen'shil fakt. rash.;
         //  sohranim parametry zdes'
         StoreCurveParams;
-        ZerosDeleted := DeleteZeros;
+        ZerosDeleted := DeleteCurvePositionsWithSmallAmplitude;
         Deleted.Free;
         Deleted      := nil;
-        PointDeleted := DeleteMaxDerivative(Deleted);
+        PointDeleted := DeleteCurvePositionWithMaxExpDerivative(Deleted);
 
         if ZerosDeleted or PointDeleted then
         begin
@@ -1528,10 +1531,10 @@ begin
     while (GetRFactor < FMaxRFactor) and (not FTerminated) do
     begin
         StoreCurveParams;
-        ZerosDeleted := DeleteZeros;
+        ZerosDeleted := DeleteCurvePositionsWithSmallAmplitude;
         Deleted.Free;
         Deleted      := nil;
-        PointDeleted := DeleteMin(Deleted);
+        PointDeleted := DeleteCurvePositionWithMinimalAmplitude(Deleted);
 
         if ZerosDeleted or PointDeleted then
         begin
@@ -1572,7 +1575,7 @@ begin
 
     Deleted.Free;
     //SigmaVaryingDisabled := False;
-    //Optimization;
+    Optimization;
 end;
 
 {$hints off}

@@ -105,9 +105,9 @@ type
           avoid searching. }
         procedure ReCalc(const Bounds: TPointsSet);
         { Temporarily stores values of variable parameters in internal memory area. }
-        procedure StoreParams;
+        procedure BackupParameters;
         { Restores values of variable parameters from temporary storage. }
-        procedure RestoreParams;
+        procedure RestoreParameters;
         procedure CopyParameters(Dest: TObject); override;
 
         { These methods are used to limit direct access to variable parameters. }
@@ -337,7 +337,7 @@ begin
         FArgP := Parameter;
 end;
 
-procedure TCurvePointsSet.StoreParams;
+procedure TCurvePointsSet.BackupParameters;
 var
     i: longint;
     Parameter: TSpecialCurveParameter;
@@ -351,7 +351,7 @@ begin
     end;
 end;
 
-procedure TCurvePointsSet.RestoreParams;
+procedure TCurvePointsSet.RestoreParameters;
 var
     i: longint;
     Parameter: TSpecialCurveParameter;

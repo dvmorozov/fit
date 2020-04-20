@@ -168,8 +168,8 @@ type
 
         { Low-level methods of algorithms. }
 
-        procedure StoreCurveParams;
-        procedure RestoreCurveParams;
+        procedure BackupCurveParameters;
+        procedure RestoreCurveParameters;
         { Sums all pattern instances and FBackground into single calculated profile. }
         procedure CalcGaussSum;
         procedure AddCurveToProfile(PS: TPointsSet);
@@ -766,7 +766,7 @@ begin
     CalcGaussSum;
 end;
 
-procedure TFitTask.StoreCurveParams;
+procedure TFitTask.BackupCurveParameters;
 var
     i:  longint;
     PS: TCurvePointsSet;
@@ -777,11 +777,11 @@ begin
     for i := 0 to FCurves.Count - 1 do
     begin
         PS := TCurvePointsSet(FCurves.Items[i]);
-        PS.StoreParams;
+        PS.BackupParameters;
     end;
 end;
 
-procedure TFitTask.RestoreCurveParams;
+procedure TFitTask.RestoreCurveParameters;
 var
     i:  longint;
     PS: TCurvePointsSet;
@@ -792,7 +792,7 @@ begin
     for i := 0 to FCurves.Count - 1 do
     begin
         PS := TCurvePointsSet(FCurves.Items[i]);
-        PS.RestoreParams;
+        PS.RestoreParameters;
     end;
 end;
 
@@ -1479,7 +1479,7 @@ begin
     begin
         //  predyduschiy tsikl optimizatsii umen'shil fakt. rash.;
         //  sohranim parametry zdes'
-        StoreCurveParams;
+        BackupCurveParameters;
         ZerosDeleted := DeleteCurvePositionsWithSmallAmplitude;
         Deleted.Free;
         Deleted      := nil;
@@ -1499,7 +1499,7 @@ begin
                     //  !!! vosstanavlivaetsya tol'ko udalennaya krivaya
                     //  v tochke s maksimal'noy proizvodnoy - udalennye
                     //  krivye s nulevoy amplitudoy ne vosstanavlivayutsya !!!
-                    RestoreCurveParams;
+                    RestoreCurveParameters;
                     if PointDeleted then
                     begin
                         Assert(Assigned(Deleted));
@@ -1530,7 +1530,7 @@ begin
     //  te tochki, v kotoryh amplituda gaussianov minimal'na
     while (GetRFactor < FMaxRFactor) and (not FTerminated) do
     begin
-        StoreCurveParams;
+        BackupCurveParameters;
         ZerosDeleted := DeleteCurvePositionsWithSmallAmplitude;
         Deleted.Free;
         Deleted      := nil;
@@ -1546,7 +1546,7 @@ begin
                 if GetRFactor > FMaxRFactor then
                 begin
                     //  vosst. posled. "horoshee" sostoyanie
-                    RestoreCurveParams;
+                    RestoreCurveParameters;
                     if PointDeleted then
                     begin
                         Assert(Assigned(Deleted));

@@ -20,7 +20,7 @@ type
     TDownhillSimplexMinimizer = class(TMinimizer,
         IOptimizedFunction, IDownhillRealParameters, IUpdatingResults)
     private
-        Container: TDownhillSimplexServer;
+        Server: TDownhillSimplexServer;
 
         procedure SelectParameter(index: longint);
 
@@ -76,7 +76,7 @@ begin
     if ErrorCode <> MIN_NO_ERRORS then
         Exit;
 
-    with Container do
+    with Server do
         Run;
 end;
 
@@ -189,7 +189,7 @@ procedure TDownhillSimplexMinimizer.UpdateResults(Sender: TComponent);
 begin
     if Assigned(OnShowCurMin) then
     begin
-        FCurrentMinimum := Container.FTotalMinimum;
+        FCurrentMinimum := Server.FTotalMinimum;
         OnShowCurMin;
         WriteLog('Current minimium = ' + FloatToStr(FCurrentMinimum), Debug);
     end;
@@ -199,26 +199,26 @@ procedure TDownhillSimplexMinimizer.SetTerminated(ATerminated: boolean);
 begin
     inherited;
     if ATerminated then
-        Container.StopAlgorithm;
+        Server.StopAlgorithm;
 end;
 
 constructor TDownhillSimplexMinimizer.Create(AOwner: TComponent);
 begin
     inherited Create(AOwner);
-    Container := TDownhillSimplexServer.Create(nil);
-    Container.UpdatingResults := Self;
-    Container.OptimizedFunction := Self;
+    Server := TDownhillSimplexServer.Create(nil);
+    Server.UpdatingResults := Self;
+    Server.OptimizedFunction := Self;
     //  Final tolerance should have non zero value,
     //  otherwise computation will never end
     //  (see TDownhillSimplexServer.CreateAlgorithm).
-    Container.FinalTolerance := 0.001; //1e-10;
-    Container.RestartDisabled := True;
-    Container.AddIDSPToList(Self);
+    Server.FinalTolerance := 0.001; //1e-10;
+    Server.RestartDisabled := True;
+    Server.AddIDSPToList(Self);
 end;
 
 destructor TDownhillSimplexMinimizer.Destroy;
 begin
-    UtilizeObject(Container);
+    UtilizeObject(Server);
     inherited Destroy;
 end;
 

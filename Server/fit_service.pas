@@ -2535,7 +2535,7 @@ begin
           Temp.Free; raise;
           end;
           //  ustanovka dop. parametrov
-          FitTask.MinRFactor := MaxRFactor;
+          FitTask.MaxAcceptableRFactor := MaxRFactor;
           FitTask.CurveTypeId := CurveTypeId;
           if CurveTypeId = Special then
           FitTask.SetSpecialCurve(FCurveExpr, Curve_parameters(FParams.GetCopy));
@@ -2601,7 +2601,7 @@ begin
                 raise;
             end;
             // ustanovka dop. parametrov
-            FitTask.MinRFactor := MaxRFactor;
+            FitTask.MaxAcceptableRFactor := MaxRFactor;
 {$IFDEF WINDOWS_SPECIFIC}
             if IsEqualGUID(CurveTypeId, TUserPointsSet.GetCurveTypeId) then
                 FitTask.SetSpecialCurve(FCurveExpr,
@@ -2702,7 +2702,7 @@ begin
         for i := 0 to FTaskList.Count - 1 do
         begin
             FT := TFitTask(FTaskList.Items[i]);
-            FT.MinRFactor := AMaxRFactor;
+            FT.MaxAcceptableRFactor := AMaxRFactor;
         end;
 end;
 

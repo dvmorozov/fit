@@ -47,8 +47,8 @@ type
           optimization could stuck in local minimum. However it could be
           set to false for some special curve types. }
         FCurveScalingEnabled: boolean;
-        { Maximal value of R-factor allowed for minimizing number of curves. }
-        FMaxRFactor:  double;
+        { Maximal acceptable value of R-factor for minimizing number of curves. }
+        FMaxAcceptableRFactor:  double;
         FCurveTypeSelector: ICurveTypeSelector;
         { Expression defining user curve type. }
         FCurveExpr:   string;
@@ -244,7 +244,7 @@ type
         { Returns the factor scaling calculated points up to scale of experimental data. }
         function GetScalingFactor: double;
 
-        property MinRFactor: double write FMaxRFactor;
+        property MaxAcceptableRFactor: double write FMaxAcceptableRFactor;
         { Callback to update information at achieving new minimum. }
         property ServerShowCurMin: TThreadMethod read FShowCurMin write FShowCurMin;
         property ServerDoneProc: TThreadMethod read FDoneProc write FDoneProc;
@@ -680,7 +680,7 @@ function TFitTask.EndOfCalculation: boolean;
 begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
     Result := False;
-    if (FMinimizer.FCurrentMinimum < FMaxRFactor) then
+    if (FMinimizer.FCurrentMinimum < FMaxAcceptableRFactor) then
     begin
         Result := True;
         WriteLog('Desired R-factor achived...', TMsgType.Notification);
@@ -704,7 +704,7 @@ begin
     //  TODO: remove this.
     FCommonVariableParameters.Params.Clear;
     { Sets initial value of R-factor. }
-    FMaxRFactor := 0.01;
+    FMaxAcceptableRFactor := 0.01;
     FAllDone    := False;
     //  Sets default curve type
     FCurveTypeSelector := TCurveTypesSingleton.CreateCurveTypeSelector;
@@ -1475,7 +1475,7 @@ begin
     //  udalyaem iz spiska vydelennyh tochek te tochki, dlya
     //  kotoryh gaussiany imeyut nulevuyu amplitudu i te
     //  tochki, v kotoryh proizvodnaya eksp. profilya maksimal'na
-    while (GetRFactor < FMaxRFactor) and (not FTerminated) do
+    while (GetRFactor < FMaxAcceptableRFactor) and (not FTerminated) do
     begin
         //  predyduschiy tsikl optimizatsii umen'shil fakt. rash.;
         //  sohranim parametry zdes'
@@ -1489,10 +1489,10 @@ begin
         begin
             CalculateProfile;
 
-            if GetRFactor > FMaxRFactor then
+            if GetRFactor > FMaxAcceptableRFactor then
             begin
                 Optimization;
-                if GetRFactor > FMaxRFactor then
+                if GetRFactor > FMaxAcceptableRFactor then
                 begin
                     //  ne udalos' s pom. optimizatsii zagnat' fakt. rash. v
                     //  trebuemyy diapazon - vosst. posled. "horoshee" sostoyanie
@@ -1528,7 +1528,7 @@ begin
     //  udalyaem iz spiska vydelennyh tochek te tochki,
     //  dlya kotoryh gaussiany imeyut nulevuyu amplitudu i
     //  te tochki, v kotoryh amplituda gaussianov minimal'na
-    while (GetRFactor < FMaxRFactor) and (not FTerminated) do
+    while (GetRFactor < FMaxAcceptableRFactor) and (not FTerminated) do
     begin
         BackupCurveParameters;
         ZerosDeleted := DeleteCurvePositionsWithSmallAmplitude;
@@ -1540,10 +1540,10 @@ begin
         begin
             CalculateProfile;
 
-            if GetRFactor > FMaxRFactor then
+            if GetRFactor > FMaxAcceptableRFactor then
             begin
                 Optimization;
-                if GetRFactor > FMaxRFactor then
+                if GetRFactor > FMaxAcceptableRFactor then
                 begin
                     //  vosst. posled. "horoshee" sostoyanie
                     RestoreCurveParameters;

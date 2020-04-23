@@ -171,7 +171,7 @@ type
         procedure BackupCurveParameters;
         procedure RestoreCurveParameters;
         { Sums all pattern instances and FBackground into single calculated profile. }
-        procedure CalcGaussSum;
+        procedure ComputeCurveSum;
         procedure AddCurveToProfile(PS: TPointsSet);
         procedure SubbCurveFromProfile(PS: TPointsSet);
         { Removes from list of curve positions those points
@@ -231,7 +231,7 @@ type
         procedure InitCurve(TupleList: TMSCRCurveList; Curve: TCurvePointsSet);
         { Recalculates all pattern instances and FBackground.
           Calculates resulting profile. }
-        procedure CalculateProfile;
+        procedure ComputeProfile;
 
         { Fits curves starting from given parameter set (initially or repeatedly). }
         procedure MinimizeDifference; virtual;
@@ -275,7 +275,7 @@ procedure TFitTask.ComputeFunc;
 begin
     //  krivye ne nuzhno pereschityvat', poskol'ku vse uzhe
     //  pereschitano v SetParam
-    CalculateProfile;
+    ComputeProfile;
 end;
 
 function TFitTask.GetCalcProfileIntegral: double;
@@ -637,7 +637,7 @@ begin
                 FCommonVariableParameters[FCommonVaryingIndex].Name
                 ] := NewParamValue;
         end;
-        //CalculateProfile;
+        //ComputeProfile;
     end
     else
     begin
@@ -728,7 +728,7 @@ begin
     inherited;
 end;
 
-procedure TFitTask.CalculateProfile;
+procedure TFitTask.ComputeProfile;
 var
     i:     longint;
     Curve: TCurvePointsSet;
@@ -763,7 +763,7 @@ begin
     else
         FBackgroundWasSaved := False;
 
-    CalcGaussSum;
+    ComputeCurveSum;
 end;
 
 procedure TFitTask.BackupCurveParameters;
@@ -796,7 +796,7 @@ begin
     end;
 end;
 
-procedure TFitTask.CalcGaussSum;
+procedure TFitTask.ComputeCurveSum;
 var
     i:  longint;
     PS: TPointsSet;
@@ -1487,7 +1487,7 @@ begin
 
         if ZerosDeleted or PointDeleted then
         begin
-            CalculateProfile;
+            ComputeProfile;
 
             if GetRFactor > FMaxAcceptableRFactor then
             begin
@@ -1509,7 +1509,7 @@ begin
                         Deleted      := nil;
                         PointDeleted := False;
                     end;
-                    CalculateProfile;
+                    ComputeProfile;
                     ShowCurMin;     //  neobhodimo dlya sohraneniya
                     //  tekuschego znacheniya fakt. rash.
                     Break;
@@ -1538,7 +1538,7 @@ begin
 
         if ZerosDeleted or PointDeleted then
         begin
-            CalculateProfile;
+            ComputeProfile;
 
             if GetRFactor > FMaxAcceptableRFactor then
             begin
@@ -1557,7 +1557,7 @@ begin
                         PointDeleted := False;
                     end;
 
-                    CalculateProfile;
+                    ComputeProfile;
                     ShowCurMin;     //  neobhodimo dlya sohraneniya
                     //  tekuschego znacheniya fakt. rash.
                     Break;
@@ -1614,7 +1614,7 @@ begin
     //          TGaussPointsSet(GP).Sigma := 0.6;
     //      TGaussPointsSet(GP).A := 100;
     //  end
-    //CalculateProfile;
+    //ComputeProfile;
 
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyani
     Optimization;
@@ -1626,7 +1626,7 @@ begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyani
     // povtornaya initsializatsiya gaussianov
     RecreateCurves(nil);
-    CalculateProfile;
+    ComputeProfile;
     Optimization;
     Done;
 end;

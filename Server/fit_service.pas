@@ -156,7 +156,7 @@ type
     protected
         { Indicates that specimen positions were assigned automatically.
           That is at each point different from background. }
-        FSpecPosFoundForAuto: boolean;
+        FCurvePositionsAssignedAutomatically: boolean;
         FDoneDisabled: boolean;
 
         { These methods are executed in the separate thread. }
@@ -1046,7 +1046,7 @@ begin
     // vse tochki pikov vybirayutsya v kachestve tochek privyazki krivyh
     // TODO: use special value of TExtremumMode and generalize algorithm.
     FCurvePositions      := ComputeCurvePositionsActual(False);
-    FSpecPosFoundForAuto := True;
+    FCurvePositionsAssignedAutomatically := True;
 end;
 
 procedure TFitService.ComputeCurvePositionsAlg;
@@ -1884,27 +1884,31 @@ begin
 end;
 
 procedure TFitService.DoneProc;
-var
-    i:  longint;
-    FT: TFitTask;
-    AllDone: boolean;
+
+    function AllTasksDone: boolean;
+    var
+        i:  longint;
+        FT: TFitTask;
+    begin
+        Result := True;
+        for i := 0 to FTaskList.Count - 1 do
+        begin
+            FT := TFitTask(FTaskList.Items[i]);
+            if not FT.GetAllDone then
+            begin
+                Result := False;
+                Break;
+            end;
+        end;
+    end;
+
 begin
     try
         Assert(Assigned(FTaskList));
 
         ShowCurMinInternal;
 
-        AllDone := True;
-        for i := 0 to FTaskList.Count - 1 do
-        begin
-            FT := TFitTask(FTaskList.Items[i]);
-            if not FT.GetAllDone then
-            begin
-                AllDone := False;
-                Break;
-            end;
-        end;
-        if AllDone then
+        if AllTasksDone then
         begin
             // vyzyvatsya v osnovnom potoke servera,
             // t.e. v tom zhe potoke, chto i ServerStub,
@@ -1918,13 +1922,13 @@ begin
             CreateDeltaProfile;
             CreateCurveListAlg;
 
-            if FSpecPosFoundForAuto then
+            if FCurvePositionsAssignedAutomatically then
             begin
                 // esli tochki privyazki byli naydeny avtomaticheski,
                 // to ih pokazyvat' ne nuzhno, t.k. eto vse tochki
                 // otlichnye ot fona
                 FCurvePositions.Clear;
-                FSpecPosFoundForAuto := False;
+                FCurvePositionsAssignedAutomatically := False;
             end;
 
             FState   := FSavedState; // vossta. sost. predshestvovashee
@@ -2635,7 +2639,7 @@ begin
         // povtornoy initsializatsii pri dobavlenii /
         // udalenii tochek privyazki ekzemplyarov patterna
         FT.RecreateCurves(FCurveList);
-        FT.CalculateProfile;
+        FT.ComputeProfile;
     end;
 end;
 

@@ -124,7 +124,7 @@ begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyani
     // povtornaya initsializatsiya gaussianov
     RecreateCurves(nil);
-    CalculateProfile;
+    ComputeProfile;
     RecreateMainCalcThread(Optimization, Done);
 end;
 

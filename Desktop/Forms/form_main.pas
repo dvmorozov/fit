@@ -2020,7 +2020,7 @@ begin
     //!!! nel'zya vyzyvat' dialogi vnutri metoda Synchronize bez proverki,
     //potomu chto v dannoy biblioteke eto vyzyvaet tsikl vyborki soobscheniy,
     //kotoryy snova vhodit v Synchronize !!!
-    //MessageDlg('Gaussians calculation done...', mtInformation, [mbOk], 0);
+    //MessageDlg('Computation done...', mtInformation, [mbOk], 0);
     ShowTime;
 end;
 

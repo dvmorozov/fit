@@ -186,12 +186,12 @@ Server.FTotalMinimum -&gt; FCurrentMinimum</panel_attributes>
     <coordinates>
       <x>525</x>
       <y>245</y>
-      <w>273</w>
+      <w>266</w>
       <h>28</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 ShowCurMin</panel_attributes>
-    <additional_attributes>370.0;20.0;10.0;20.0</additional_attributes>
+    <additional_attributes>360.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLGeneric</id>
@@ -218,14 +218,14 @@ ShowCurMin</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>777</x>
+      <x>784</x>
       <y>252</y>
-      <w>210</w>
+      <w>203</w>
       <h>28</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 ShowCurMinInternal</panel_attributes>
-    <additional_attributes>280.0;20.0;10.0;20.0</additional_attributes>
+    <additional_attributes>270.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLGeneric</id>
@@ -233,7 +233,7 @@ ShowCurMinInternal</panel_attributes>
       <x>973</x>
       <y>266</y>
       <w>14</w>
-      <h>266</h>
+      <h>252</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -241,25 +241,25 @@ ShowCurMinInternal</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>777</x>
+      <x>784</x>
       <y>287</y>
-      <w>210</w>
+      <w>203</w>
       <h>21</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;280.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;270.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>777</x>
+      <x>784</x>
       <y>294</y>
-      <w>210</w>
+      <w>203</w>
       <h>28</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 FCurrentMinimum</panel_attributes>
-    <additional_attributes>280.0;20.0;10.0;20.0</additional_attributes>
+    <additional_attributes>270.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLFrame</id>
@@ -278,7 +278,7 @@ FCurrentMinimum</panel_attributes>
       <x>763</x>
       <y>322</y>
       <w>700</w>
-      <h>203</h>
+      <h>189</h>
     </coordinates>
     <panel_attributes>TFitService:ShowCurMin</panel_attributes>
     <additional_attributes/>
@@ -286,48 +286,48 @@ FCurrentMinimum</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>777</x>
+      <x>784</x>
       <y>336</y>
-      <w>210</w>
+      <w>203</w>
       <h>28</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 GetCalcProfile</panel_attributes>
-    <additional_attributes>10.0;20.0;280.0;20.0</additional_attributes>
+    <additional_attributes>10.0;20.0;270.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>777</x>
+      <x>784</x>
       <y>357</y>
-      <w>210</w>
+      <w>203</w>
       <h>21</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>280.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>270.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>777</x>
+      <x>784</x>
       <y>364</y>
-      <w>210</w>
+      <w>203</w>
       <h>28</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 GetCurvesList</panel_attributes>
-    <additional_attributes>10.0;20.0;280.0;20.0</additional_attributes>
+    <additional_attributes>10.0;20.0;270.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>777</x>
+      <x>784</x>
       <y>385</y>
-      <w>210</w>
+      <w>203</w>
       <h>21</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>280.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>270.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -471,7 +471,7 @@ ShowCurMin</panel_attributes>
       <x>1428</x>
       <y>427</y>
       <w>14</w>
-      <h>91</h>
+      <h>77</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -482,7 +482,7 @@ ShowCurMin</panel_attributes>
       <x>966</x>
       <y>434</y>
       <w>483</w>
-      <h>77</h>
+      <h>63</h>
     </coordinates>
     <panel_attributes>TFitClient.UpdateAll
 layer=1</panel_attributes>
@@ -514,13 +514,47 @@ GetCalcProfilePointsSet</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>777</x>
+      <x>784</x>
       <y>546</y>
-      <w>217</w>
+      <w>210</w>
       <h>28</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
-Done</panel_attributes>
-    <additional_attributes>290.0;20.0;10.0;20.0</additional_attributes>
+DoneProc</panel_attributes>
+    <additional_attributes>280.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>777</x>
+      <y>133</y>
+      <w>14</w>
+      <h>609</h>
+    </coordinates>
+    <panel_attributes>
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLFrame</id>
+    <coordinates>
+      <x>742</x>
+      <y>238</y>
+      <w>735</w>
+      <h>287</h>
+    </coordinates>
+    <panel_attributes>TFitService:ShowCurMin</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLFrame</id>
+    <coordinates>
+      <x>756</x>
+      <y>420</y>
+      <w>735</w>
+      <h>287</h>
+    </coordinates>
+    <panel_attributes>TFitService:ShowCurMin</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>

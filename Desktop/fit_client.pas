@@ -49,49 +49,6 @@ type
         AsyncDone
         );
 
-    { Handler to fill data table. }
-    TFillDatasheetTable = procedure(ExperimentalProfile: TTitlePointsSet;
-        CurvesList: TSelfCopiedCompList; ComputedProfile: TTitlePointsSet;
-        DeltaProfile: TTitlePointsSet; RFactorBounds: TTitlePointsSet) of object;
-    { Handler drawing points selected by user. }
-    TPlotSelectedPoints = procedure(Sender: TObject;
-        SelectedPoints: TTitlePointsSet) of object;
-    { Handler displaying data intervals. }
-    TPlotRFactorBounds = procedure(Sender: TObject;
-        RFactorBounds: TTitlePointsSet) of object;
-    { Handler hiding data intervals. }
-    THideRFactorBounds = procedure(Sender: TObject;
-        RFactorBounds: TTitlePointsSet) of object;
-    { Handler displaying curve positions. }
-    TPlotCurvePositions = procedure(Sender: TObject;
-        CurvePositions: TTitlePointsSet) of object;
-    { Handler hiding curve positions. }
-    THideCurvePositions = procedure(Sender: TObject;
-        CurvePositions: TTitlePointsSet) of object;
-    { Handler displaying background curve. }
-    TPlotBackground = procedure(Sender: TObject;
-        BackgroundPoints: TTitlePointsSet) of object;
-    { Handler hiding background curve. }
-    THideBackground = procedure(Sender: TObject;
-        BackgroundPoints: TTitlePointsSet) of object;
-    { Handler displaying data curve. }
-    TPlotDataPoints = procedure(Sender: TObject;
-        DataPoints: TTitlePointsSet) of object;
-    { Handler hiding data curve. }
-    THideDataPoints = procedure(Sender: TObject;
-        DataPoints: TTitlePointsSet) of object;
-
-    TPlotSelectedProfileInterval = procedure(Sender: TObject;
-        SelectedArea: TTitlePointsSet) of object;
-    TPlotComputedProfile = procedure(Sender: TObject;
-        ComputedProfile: TTitlePointsSet) of object;
-    TPlotDeltaProfile = procedure(Sender: TObject;
-        DeltaProfile: TTitlePointsSet) of object;
-    TRefresh = procedure(Sender: TObject) of object;
-    TRefreshPointsSet = procedure(Sender: TObject;
-        points_set: TNeutronPointsSet) of object;
-    TClear = procedure(Sender: TObject) of object;
-    THide  = procedure(Sender: TObject; points_set: TNeutronPointsSet) of object;
     TAsyncOperationFinished = procedure(Sender: TObject) of object;
     TPlotProc = procedure of object;
 
@@ -148,11 +105,8 @@ type
         { Callback on asynchronous operation finishing. }
         FAsyncOperationFinished: TAsyncOperationFinished;
 
-        { Is used in RefreshPointsSet, Hide. }
-        FToRefresh: TNeutronPointsSet;
-
         { Updates all the data and refreshes chart. }
-        procedure UpdateAll;
+        procedure UpdateComputedData;
         procedure HideCurves;
 
         { Wrappers for calls to external displaying methods. 
@@ -178,9 +132,9 @@ type
         procedure PlotComputedProfile;
         procedure PlotDeltaProfile;
         procedure Refresh;
-        procedure RefreshPointsSet;
+        procedure RefreshPointsSet(ToRefresh: TNeutronPointsSet);
         procedure Clear;
-        procedure Hide;
+        procedure Hide(ToRefresh: TNeutronPointsSet);
 {$IFDEF USE_GRIDS}
         procedure FillDatasheetTable;
 {$ENDIF}
@@ -522,8 +476,7 @@ end;
 
 procedure TFitClient.RemoveSelectedPoints;
 begin
-    FToRefresh := FSelectedPoints;
-    Hide;
+    Hide(FSelectedPoints);
     FSelectedPoints.Free;
     FSelectedPoints := nil;
 end;
@@ -537,27 +490,21 @@ end;
 
 procedure TFitClient.RemoveComputedProfile;
 begin
-    //  dopuskaetsya ravenstvo nil
-    FToRefresh := FComputedProfile;
-    Hide;
+    Hide(FComputedProfile);
     FComputedProfile.Free;
     FComputedProfile := nil;
 end;
 
 procedure TFitClient.RemoveDeltaProfile;
 begin
-    //  dopuskaetsya ravenstvo nil
-    FToRefresh := FDeltaProfile;
-    Hide;
+    Hide(FDeltaProfile);
     FDeltaProfile.Free;
     FDeltaProfile := nil;
 end;
 
 procedure TFitClient.RemoveSelectedArea;
 begin
-    //  dopuskaetsya ravenstvo nil
-    FToRefresh := FSelectedArea;
-    Hide;
+    Hide(FSelectedArea);
     FSelectedArea.Free;
     FSelectedArea := nil;
 end;
@@ -590,7 +537,7 @@ begin
         FFitViewer.ShowTime;
         FFitViewer.ShowRFactor;
         if FFitViewer.GetAnimationMode then
-            UpdateAll;
+            UpdateComputedData;
     end;
 end;
 
@@ -625,7 +572,7 @@ begin
         Result := FExperimentalProfile;
 end;
 
-procedure TFitClient.UpdateAll;
+procedure TFitClient.UpdateComputedData;
 begin
     RemoveComputedProfile;
     FComputedProfile := FitService.GetCalcProfilePointsSet;
@@ -647,7 +594,6 @@ begin
 
     RemoveCurvePositions;
     FCurvePositions.Free;
-    FCurvePositions := nil;
     FCurvePositions := FitService.GetCurvePositions;
     if Assigned(FCurvePositions) and (FCurvePositions.PointsCount <> 0) then
     begin
@@ -658,7 +604,6 @@ begin
 
     RemoveRFactorBounds; //  nuzhno skryvat', t.k. menyaetsya uk-l'
     FRFactorBounds.Free;
-    FRFactorBounds := nil;
     FRFactorBounds := FitService.GetRFactorBounds;
     if Assigned(FRFactorBounds) and (FRFactorBounds.PointsCount <> 0) then
     begin
@@ -669,13 +614,11 @@ begin
 
     HideCurves;
     FCurvesList.Free;
-    FCurvesList := nil;
     FCurvesList := FitService.GetCurvesList;
     if Assigned(FCurvesList) then
         SetCurvesListLambda;
 
     FCurveList.Free;
-    FCurveList := nil;
     FCurveList := FitService.GetCurveList;
     if Assigned(FCurveList) then
         FCurveList.FWaveLength := FWaveLength;
@@ -692,7 +635,7 @@ begin
     Assert(Assigned(FitService));
 
     ShowProfile;
-    UpdateAll;
+    UpdateComputedData;
     FAsyncState := AsyncDone;
 
     //  Updates UI.
@@ -878,8 +821,7 @@ begin
     if Assigned(FCurvesList) then
         for i := 0 to FCurvesList.Count - 1 do
         begin
-            FToRefresh := TNeutronPointsSet(FCurvesList.Items[i]);
-            Hide;
+            Hide(TNeutronPointsSet(FCurvesList.Items[i]));
         end;
 end;
 
@@ -971,13 +913,12 @@ begin
         FFitViewer.Refresh(Self);
 end;
 
-procedure TFitClient.RefreshPointsSet;
+procedure TFitClient.RefreshPointsSet(ToRefresh: TNeutronPointsSet);
 begin
-    Assert(Assigned(FToRefresh));
+    Assert(Assigned(ToRefresh));
 
     if Assigned(FFitViewer) then
-        FFitViewer.RefreshPointsSet(Self, FToRefresh);
-    FToRefresh := nil;
+        FFitViewer.RefreshPointsSet(Self, ToRefresh);
 end;
 
 procedure TFitClient.Clear;
@@ -986,11 +927,10 @@ begin
         FFitViewer.Clear(Self);
 end;
 
-procedure TFitClient.Hide;
+procedure TFitClient.Hide(ToRefresh: TNeutronPointsSet);
 begin
-    if Assigned(FFitViewer) then
-        FFitViewer.Hide(Self, FToRefresh);
-    FToRefresh := nil;
+    if Assigned(ToRefresh) and Assigned(FFitViewer) then
+        FFitViewer.Hide(Self, ToRefresh);
 end;
 
 procedure TFitClient.ReplacePointInProfile(PrevXValue, PrevYValue,
@@ -1064,7 +1004,7 @@ begin
     //AddPoint(FRFactorBounds, XValue, YValue, PlotRFactorBounds);
 
     FitService.AddPointToRFactorBounds(XValue, YValue);
-    UpdateAll;
+    UpdateComputedData;
 end;
 
 procedure TFitClient.AddPointToCurvePositions(XValue, YValue: double);
@@ -1074,7 +1014,7 @@ begin
     //AddPoint(FCurvePositions, XValue, YValue, PlotCurvePositions);
 
     FitService.AddPointToCurvePositions(XValue, YValue);
-    UpdateAll;
+    UpdateComputedData;
 end;
 
 procedure TFitClient.SetSelectionMode(ASelectionMode: TSelMode);
@@ -1189,8 +1129,7 @@ begin
     FitService.SmoothProfile;
     FExperimentalProfile.Free;
     FExperimentalProfile := FitService.GetProfilePointsSet;
-    FToRefresh := FExperimentalProfile;
-    RefreshPointsSet;
+    RefreshPointsSet(FExperimentalProfile);
 end;
 
 procedure TFitClient.SubtractBackground(Auto: boolean);

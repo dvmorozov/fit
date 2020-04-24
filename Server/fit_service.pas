@@ -1973,6 +1973,7 @@ begin
 {$IFDEF FIT}
     if Assigned(FitProxy) then
     begin
+        { These calls are necessary for animation mode. }
         CreateResultedProfile;
         CreateResultedCurvesList;
         FitProxy.ShowCurMin(FCurrentMinimum);

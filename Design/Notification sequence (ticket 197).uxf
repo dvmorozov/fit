@@ -292,7 +292,7 @@ FCurrentMinimum</panel_attributes>
       <h>28</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
-GetCalcProfile</panel_attributes>
+GetCalcProfile, GetCurvesList</panel_attributes>
     <additional_attributes>10.0;20.0;270.0;20.0</additional_attributes>
   </element>
   <element>
@@ -300,29 +300,6 @@ GetCalcProfile</panel_attributes>
     <coordinates>
       <x>784</x>
       <y>357</y>
-      <w>203</w>
-      <h>21</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>270.0;10.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>784</x>
-      <y>364</y>
-      <w>203</w>
-      <h>28</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-
-GetCurvesList</panel_attributes>
-    <additional_attributes>10.0;20.0;270.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>784</x>
-      <y>385</y>
       <w>203</w>
       <h>21</h>
     </coordinates>
@@ -484,7 +461,7 @@ ShowCurMin</panel_attributes>
       <w>483</w>
       <h>63</h>
     </coordinates>
-    <panel_attributes>TFitClient.UpdateAll
+    <panel_attributes>TFitClient.UpdateComputedData
 layer=1</panel_attributes>
     <additional_attributes/>
   </element>
@@ -515,7 +492,7 @@ GetCalcProfilePointsSet</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>784</x>
-      <y>546</y>
+      <y>525</y>
       <w>210</w>
       <h>28</h>
     </coordinates>
@@ -541,20 +518,20 @@ layer=1</panel_attributes>
       <x>742</x>
       <y>238</y>
       <w>735</w>
-      <h>287</h>
+      <h>280</h>
     </coordinates>
-    <panel_attributes>TFitService:ShowCurMin</panel_attributes>
+    <panel_attributes>TFitTask.ShowCurMin</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLFrame</id>
     <coordinates>
       <x>742</x>
-      <y>532</y>
+      <y>518</y>
       <w>735</w>
-      <h>147</h>
+      <h>161</h>
     </coordinates>
-    <panel_attributes>TFitService:ShowCurMin</panel_attributes>
+    <panel_attributes>TFitTask.Done</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -572,11 +549,11 @@ layer=1</panel_attributes>
     <id>UMLFrame</id>
     <coordinates>
       <x>966</x>
-      <y>581</y>
+      <y>574</y>
       <w>483</w>
-      <h>63</h>
+      <h>70</h>
     </coordinates>
-    <panel_attributes>TFitClient.UpdateAll
+    <panel_attributes>TFitClient.UpdateComputedData
 layer=1</panel_attributes>
     <additional_attributes/>
   </element>
@@ -602,5 +579,87 @@ GetCalcProfilePointsSet</panel_attributes>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>640.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>980</x>
+      <y>532</y>
+      <w>133</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+Done</panel_attributes>
+    <additional_attributes>170.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1092</x>
+      <y>539</y>
+      <w>133</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+Done</panel_attributes>
+    <additional_attributes>170.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1204</x>
+      <y>546</y>
+      <w>133</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+Done</panel_attributes>
+    <additional_attributes>170.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1316</x>
+      <y>553</y>
+      <w>126</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+ShowCurMin</panel_attributes>
+    <additional_attributes>160.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>973</x>
+      <y>539</y>
+      <w>14</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>784</x>
+      <y>539</y>
+      <w>203</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+GetCalcProfile, GetCurvesList</panel_attributes>
+    <additional_attributes>10.0;20.0;270.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>784</x>
+      <y>560</y>
+      <w>203</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>270.0;10.0;10.0;10.0</additional_attributes>
   </element>
 </diagram>

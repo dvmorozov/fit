@@ -116,7 +116,7 @@ type
     Label6: TLabel;
     LabelAngle: TLabel;
     LabelIntensity: TLabel;
-    LabelMin: TLabel;
+    LabelRFactor: TLabel;
     MainMenu: TMainMenu;
     MenuData: TMenuItem;
     MenuDoAllAutomatically: TMenuItem;
@@ -2433,7 +2433,7 @@ end;
 
 procedure TFormMain.ShowRFactor;
 begin
-    LabelMin.Caption := FitClientApp_.FitClient.GetRFactorStr;
+    LabelRFactor.Caption := FitClientApp_.FitClient.GetRFactorStr;
 end;
 
 procedure TFormMain.ShowHint(const Hint: string);

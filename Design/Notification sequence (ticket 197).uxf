@@ -118,7 +118,7 @@ UpdateResults(Self)</panel_attributes>
     <coordinates>
       <x>0</x>
       <y>147</y>
-      <w>1498</w>
+      <w>1715</w>
       <h>581</h>
     </coordinates>
     <panel_attributes>MinimizeNumberOfCurves
@@ -332,7 +332,7 @@ GetCalcProfile, GetCurvesList</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>980</x>
-      <y>392</y>
+      <y>357</y>
       <w>133</w>
       <h>28</h>
     </coordinates>
@@ -366,7 +366,7 @@ ShowCurMin</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>1092</x>
-      <y>399</y>
+      <y>364</y>
       <w>133</w>
       <h>28</h>
     </coordinates>
@@ -400,7 +400,7 @@ ShowCurMin</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>1204</x>
-      <y>406</y>
+      <y>371</y>
       <w>133</w>
       <h>28</h>
     </coordinates>
@@ -434,7 +434,7 @@ ShowCurMin</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>1316</x>
-      <y>413</y>
+      <y>378</y>
       <w>126</w>
       <h>28</h>
     </coordinates>
@@ -446,9 +446,9 @@ ShowCurMin</panel_attributes>
     <id>UMLGeneric</id>
     <coordinates>
       <x>1428</x>
-      <y>427</y>
+      <y>392</y>
       <w>14</w>
-      <h>77</h>
+      <h>112</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -493,12 +493,12 @@ GetCalcProfilePointsSet</panel_attributes>
     <coordinates>
       <x>784</x>
       <y>525</y>
-      <w>210</w>
+      <w>203</w>
       <h>28</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 DoneProc</panel_attributes>
-    <additional_attributes>280.0;20.0;10.0;20.0</additional_attributes>
+    <additional_attributes>270.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLGeneric</id>
@@ -517,7 +517,7 @@ layer=1</panel_attributes>
     <coordinates>
       <x>742</x>
       <y>238</y>
-      <w>735</w>
+      <w>952</w>
       <h>280</h>
     </coordinates>
     <panel_attributes>TFitTask.ShowCurMin</panel_attributes>
@@ -528,8 +528,8 @@ layer=1</panel_attributes>
     <coordinates>
       <x>742</x>
       <y>518</y>
-      <w>735</w>
-      <h>161</h>
+      <w>952</w>
+      <h>203</h>
     </coordinates>
     <panel_attributes>TFitTask.Done</panel_attributes>
     <additional_attributes/>
@@ -661,5 +661,97 @@ GetCalcProfile, GetCurvesList</panel_attributes>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>270.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1512</x>
+      <y>0</y>
+      <w>84</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>_:TFitViewer_</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1547</x>
+      <y>14</y>
+      <w>21</w>
+      <h>784</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;1100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1435</x>
+      <y>378</y>
+      <w>133</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+ShowRFactor</panel_attributes>
+    <additional_attributes>170.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1666</x>
+      <y>14</y>
+      <w>21</w>
+      <h>784</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;1100.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1631</x>
+      <y>0</y>
+      <w>84</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>_:TFormMain_</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1547</x>
+      <y>385</y>
+      <w>140</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+ShowRFactor</panel_attributes>
+    <additional_attributes>180.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1435</x>
+      <y>399</y>
+      <w>252</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+GetRFactorStr</panel_attributes>
+    <additional_attributes>10.0;20.0;340.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>980</x>
+      <y>399</y>
+      <w>462</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+GetRFactorStr</panel_attributes>
+    <additional_attributes>10.0;20.0;640.0;20.0</additional_attributes>
   </element>
 </diagram>

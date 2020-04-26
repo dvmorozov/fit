@@ -176,13 +176,13 @@ type
         procedure SubbCurveFromProfile(PS: TPointsSet);
         { Removes from list of curve positions those points
           for which calculated curves have zero amplitude. }
-        function DeleteCurvePositionsWithSmallAmplitude: boolean;
+        function DeleteCurvesWithSmallAmplitude: boolean;
         { Deletes from list of curve positions the point
           in which amplitude of curve is minimal. }
-        function DeleteCurvePositionWithMinimalAmplitude(var Deleted: TCurvePointsSet): boolean;
+        function DeleteCurveWithMinimalAmplitude(var Deleted: TCurvePointsSet): boolean;
         { Removes from list of curve positions the point
           in which experimental profile has maximal derivative.  }
-        function DeleteCurvePositionWithMaxExpDerivative(var Deleted: TCurvePointsSet): boolean;
+        function DeleteCurveWithMaxExpDerivative(var Deleted: TCurvePointsSet): boolean;
 
         { Auxiliary methods. }
         { Deletes poins with given X from the list passed via parameter. }
@@ -943,7 +943,7 @@ end;
 
    //  udalyaet iz spiska vydelennyh tochek te tochki,
    //  dlya kotoryh gaussiany imeyut nulevuyu intensivnost'
-function TFitTask.DeleteCurvePositionsWithSmallAmplitude: boolean;
+function TFitTask.DeleteCurvesWithSmallAmplitude: boolean;
 var
     i, j: longint;
     GP:   TCurvePointsSet;
@@ -996,7 +996,7 @@ begin
     end;
 end;
 
-function TFitTask.DeleteCurvePositionWithMaxExpDerivative(var Deleted: TCurvePointsSet): boolean;
+function TFitTask.DeleteCurveWithMaxExpDerivative(var Deleted: TCurvePointsSet): boolean;
 var
     Der, MaxDer: double;
     First: boolean;
@@ -1065,7 +1065,7 @@ end;
 
    //  udalyaet iz spiska vydelennyh tochek tu,
    //  u kotoroy amplituda krivoy minimal'na
-function TFitTask.DeleteCurvePositionWithMinimalAmplitude(var Deleted: TCurvePointsSet): boolean;
+function TFitTask.DeleteCurveWithMinimalAmplitude(var Deleted: TCurvePointsSet): boolean;
 var
     Min:   double;
     First: boolean;
@@ -1460,121 +1460,85 @@ begin
     ;
 end;
 
+type
+    TDeleteCurveStrategy = function(var Deleted: TCurvePointsSet): boolean of object;
+
 procedure TFitTask.MinimizeNumberOfCurvesAlg;
-var
-    ZerosDeleted, PointDeleted: boolean;
-    Deleted: TCurvePointsSet;
+
+    procedure DeleteCurves(Strategy: TDeleteCurveStrategy);
+    var
+        ZerosDeleted, PointDeleted: boolean;
+        Deleted: TCurvePointsSet;
+    begin
+        Deleted      := nil;
+        PointDeleted := False; PointDeleted := False;
+        //  udalyaem iz spiska vydelennyh tochek te tochki, dlya
+        //  kotoryh gaussiany imeyut nulevuyu amplitudu i te
+        //  tochki, v kotoryh proizvodnaya eksp. profilya maksimal'na
+        while (GetRFactor < FMaxAcceptableRFactor) and (not FTerminated) do
+        begin
+            //  predyduschiy tsikl optimizatsii umen'shil fakt. rash.;
+            //  sohranim parametry zdes'
+            BackupCurveParameters;
+            ZerosDeleted := DeleteCurvesWithSmallAmplitude;
+            Deleted.Free;
+            Deleted      := nil;
+            PointDeleted := Strategy(Deleted);
+
+            if ZerosDeleted or PointDeleted then
+            begin
+                ComputeProfile;
+
+                if GetRFactor > FMaxAcceptableRFactor then
+                begin
+                    Optimization;
+                    if GetRFactor > FMaxAcceptableRFactor then
+                    begin
+                        //  ne udalos' s pom. optimizatsii zagnat' fakt. rash. v
+                        //  trebuemyy diapazon - vosst. posled. "horoshee" sostoyanie
+                        //  !!! vosstanavlivaetsya tol'ko udalennaya krivaya
+                        //  v tochke s maksimal'noy proizvodnoy - udalennye
+                        //  krivye s nulevoy amplitudoy ne vosstanavlivayutsya !!!
+                        RestoreCurveParameters;
+                        if PointDeleted then
+                        begin
+                            Assert(Assigned(Deleted));
+                            if Deleted.Hasx0 then
+                                AddPointToCurvePositions(Deleted.FInitx0);
+                            FCurves.Add(Deleted);
+                            Deleted      := nil;
+                            PointDeleted := False;
+                        end;
+                        ComputeProfile;
+                        { Updates final optimal R-factor. }
+                        ShowCurMin;
+                        Break;
+                    end;
+                end
+                else
+                begin
+                    { Updates final optimal R-factor. }
+                    ShowCurMin;
+                end;
+            end
+            else
+                Break;
+            if FCurves.Count <= 1 then
+                Break;
+        end;
+
+        Deleted.Free;
+    end;
+
 begin
     { The first cycle of optimization. }
     Optimization;
 
-    Deleted      := nil;
-    //  initsializatsiya na sluchay esli uzhe posle pervogo tsikla
-    //  optimizatsii fakt. rash. prevyshaet porog
-    PointDeleted := False;
-    //  udalyaem iz spiska vydelennyh tochek te tochki, dlya
-    //  kotoryh gaussiany imeyut nulevuyu amplitudu i te
-    //  tochki, v kotoryh proizvodnaya eksp. profilya maksimal'na
-    while (GetRFactor < FMaxAcceptableRFactor) and (not FTerminated) do
-    begin
-        //  predyduschiy tsikl optimizatsii umen'shil fakt. rash.;
-        //  sohranim parametry zdes'
-        BackupCurveParameters;
-        ZerosDeleted := DeleteCurvePositionsWithSmallAmplitude;
-        Deleted.Free;
-        Deleted      := nil;
-        PointDeleted := DeleteCurvePositionWithMaxExpDerivative(Deleted);
+    DeleteCurves(DeleteCurveWithMaxExpDerivative);
 
-        if ZerosDeleted or PointDeleted then
-        begin
-            ComputeProfile;
+    DeleteCurves(DeleteCurveWithMinimalAmplitude);
 
-            if GetRFactor > FMaxAcceptableRFactor then
-            begin
-                Optimization;
-                if GetRFactor > FMaxAcceptableRFactor then
-                begin
-                    //  ne udalos' s pom. optimizatsii zagnat' fakt. rash. v
-                    //  trebuemyy diapazon - vosst. posled. "horoshee" sostoyanie
-                    //  !!! vosstanavlivaetsya tol'ko udalennaya krivaya
-                    //  v tochke s maksimal'noy proizvodnoy - udalennye
-                    //  krivye s nulevoy amplitudoy ne vosstanavlivayutsya !!!
-                    RestoreCurveParameters;
-                    if PointDeleted then
-                    begin
-                        Assert(Assigned(Deleted));
-                        if Deleted.Hasx0 then
-                            AddPointToCurvePositions(Deleted.FInitx0);
-                        FCurves.Add(Deleted);
-                        Deleted      := nil;
-                        PointDeleted := False;
-                    end;
-                    ComputeProfile;
-                    ShowCurMin;     //  neobhodimo dlya sohraneniya
-                    //  tekuschego znacheniya fakt. rash.
-                    Break;
-                end;
-            end
-            else
-                ShowCurMin;    //  neobhodimo dlya sohraneniya
-            //  tekuschego znacheniya fakt. rash.
-        end
-        else
-            Break;
-        if FCurves.Count <= 1 then
-            Break;
-    end;
-
-    //  udalyaem iz spiska vydelennyh tochek te tochki,
-    //  dlya kotoryh gaussiany imeyut nulevuyu amplitudu i
-    //  te tochki, v kotoryh amplituda gaussianov minimal'na
-    while (GetRFactor < FMaxAcceptableRFactor) and (not FTerminated) do
-    begin
-        BackupCurveParameters;
-        ZerosDeleted := DeleteCurvePositionsWithSmallAmplitude;
-        Deleted.Free;
-        Deleted      := nil;
-        PointDeleted := DeleteCurvePositionWithMinimalAmplitude(Deleted);
-
-        if ZerosDeleted or PointDeleted then
-        begin
-            ComputeProfile;
-
-            if GetRFactor > FMaxAcceptableRFactor then
-            begin
-                Optimization;
-                if GetRFactor > FMaxAcceptableRFactor then
-                begin
-                    //  vosst. posled. "horoshee" sostoyanie
-                    RestoreCurveParameters;
-                    if PointDeleted then
-                    begin
-                        Assert(Assigned(Deleted));
-                        if Deleted.Hasx0 then
-                            AddPointToCurvePositions(Deleted.FInitx0);
-                        FCurves.Add(Deleted);
-                        Deleted      := nil;
-                        PointDeleted := False;
-                    end;
-
-                    ComputeProfile;
-                    ShowCurMin;     //  neobhodimo dlya sohraneniya
-                    //  tekuschego znacheniya fakt. rash.
-                    Break;
-                end;
-            end
-            else
-                ShowCurMin;    //  neobhodimo dlya sohraneniya
-            //  tekuschego znacheniya fakt. rash.
-        end
-        else
-            Break;
-        if FCurves.Count <= 1 then
-            Break;
-    end;
-
-    Deleted.Free;
-    //SigmaVaryingDisabled := False;
+    { Final cycle of optimization. }
     Optimization;
 end;
 

@@ -37,7 +37,7 @@ end;
 
 procedure TAmplitudeCurveParameter.InitVariationStep;
 begin
-    FVariationStep := 100;
+    FVariationStep := 0.1;
 end;
 
 procedure TAmplitudeCurveParameter.InitValue;

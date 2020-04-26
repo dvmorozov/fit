@@ -625,7 +625,7 @@ object FormMain: TFormMain
         ParentColor = False
         ParentFont = False
       end
-      object LabelMin: TLabel
+      object LabelRFactor: TLabel
         Left = 46
         Height = 13
         Top = 156

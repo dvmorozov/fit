@@ -125,8 +125,8 @@ type
         procedure PlotCurvePositions(Sender: TObject;
             CurvePositions: TTitlePointsSet);
         { Method of IFitViewer interface. }
-        procedure PlotGaussProfile(Sender: TObject;
-            GaussProfile: TTitlePointsSet);
+        procedure PlotComputedProfile(Sender: TObject;
+            ComputedProfile: TTitlePointsSet);
         { Method of IFitViewer interface. }
         procedure PlotDeltaProfile(Sender: TObject;
             DeltaProfile: TTitlePointsSet);
@@ -160,8 +160,8 @@ type
         procedure SetUpdateLegends(Update: boolean);
 {$IFDEF USE_GRIDS}
         { Method of IFitViewer interface. }
-        procedure FillDatasheetTable(Profile: TTitlePointsSet;
-            CurvesList: TSelfCopiedCompList; GaussProfile: TTitlePointsSet;
+        procedure FillDatasheetTable(ExperimentalProfile: TTitlePointsSet;
+            CurvesList: TSelfCopiedCompList; ComputedProfile: TTitlePointsSet;
             DeltaProfile: TTitlePointsSet; RFactorBounds: TTitlePointsSet);
 {$ENDIF}
 {$IFNDEF SERVER}
@@ -581,12 +581,12 @@ begin
     PlotPointsSet(SelectedPoints);
 end;
 
-procedure TFitViewer.PlotGaussProfile(Sender: TObject; GaussProfile: TTitlePointsSet);
+procedure TFitViewer.PlotComputedProfile(Sender: TObject; ComputedProfile: TTitlePointsSet);
 var
     LS: TTASerie;
 begin
-    //Assert(Assigned(GaussProfile));
-    if not Assigned(GaussProfile) then
+    //Assert(Assigned(ComputedProfile));
+    if not Assigned(ComputedProfile) then
         Exit;
     if not Assigned(FPointsSetList) then
         Exit;
@@ -595,10 +595,10 @@ begin
     LS.PointStyle := psRectangle;
     LS.ShowPoints := FViewMarkers;
     LS.SeriesColor := clBlack;
-    LS.Title := GaussProfile.FTitle;
+    LS.Title := ComputedProfile.FTitle;
 
     TFormMain(Form).Chart.AddSerie(LS);
-    FPointsSetList.Add(GaussProfile);
+    FPointsSetList.Add(ComputedProfile);
 {$IFDEF USE_LEGEND}
     if FUpdateLegends then
     begin
@@ -1303,26 +1303,26 @@ begin
 {$ENDIF}
 end;
 
-procedure TFitViewer.FillDatasheetTable(Profile: TTitlePointsSet;
-    CurvesList: TSelfCopiedCompList; GaussProfile: TTitlePointsSet;
+procedure TFitViewer.FillDatasheetTable(ExperimentalProfile: TTitlePointsSet;
+    CurvesList: TSelfCopiedCompList; ComputedProfile: TTitlePointsSet;
     DeltaProfile: TTitlePointsSet; RFactorBounds: TTitlePointsSet);
 var
     i, j, k, StartIndex, EndIndex, RowIndex, ColIndex: longint;
     P:      TCurvePointsSet;
     StartX: double;
 begin
-    //Assert(Assigned(Profile));
+    //Assert(Assigned(ExperimentalProfile));
     //Assert(Assigned(CurvesList));
-    //Assert(Assigned(GaussProfile));
+    //Assert(Assigned(ComputedProfile));
     //Assert(Assigned(DeltaProfile));
     //Assert(Assigned(RFactorBounds));
     //Assert(RFactorBounds.PointsCount mod 2 = 0);
     //Assert(RFactorBounds.PointsCount <> 0);
-    if not Assigned(Profile) then
+    if not Assigned(ExperimentalProfile) then
         Exit;
     if not Assigned(CurvesList) then
         Exit;
-    if not Assigned(GaussProfile) then
+    if not Assigned(ComputedProfile) then
         Exit;
     if not Assigned(DeltaProfile) then
         Exit;
@@ -1343,7 +1343,7 @@ begin
         //  maksimal'noe chislo krivyh v nekotorom intervale
         ColCount    := 4 + GetMaxCurveNum(CurvesList, RFactorBounds);
         //  na kazhdyy interval dobavlyaetsya stroka zagolovka
-        RowCount    := 1 + GetPointsNumInBounds(Profile, RFactorBounds) +
+        RowCount    := 1 + GetPointsNumInBounds(ExperimentalProfile, RFactorBounds) +
             RFactorBounds.PointsCount div 2;
         FixedCols   := 1;
         FixedRows   := 1;
@@ -1370,16 +1370,16 @@ begin
             Cells[3, RowIndex]     := IntToStr(i div 2 + 1);
             Inc(RowIndex);
 
-            StartIndex := Profile.IndexOfValueX(RFactorBounds.PointXCoord[i]);
-            EndIndex   := Profile.IndexOfValueX(RFactorBounds.PointXCoord[i + 1]);
+            StartIndex := ExperimentalProfile.IndexOfValueX(RFactorBounds.PointXCoord[i]);
+            EndIndex   := ExperimentalProfile.IndexOfValueX(RFactorBounds.PointXCoord[i + 1]);
             for j := StartIndex to EndIndex do
             begin
                 Cells[0, RowIndex + j - StartIndex] :=
-                    ValToStr(Profile.PointXCoord[j]);
+                    ValToStr(ExperimentalProfile.PointXCoord[j]);
                 Cells[1, RowIndex + j - StartIndex] :=
-                    ValToStr(Profile.PointYCoord[j]);
+                    ValToStr(ExperimentalProfile.PointYCoord[j]);
                 Cells[2, RowIndex + j - StartIndex] :=
-                    ValToStr(GaussProfile.PointYCoord[j]);
+                    ValToStr(ComputedProfile.PointYCoord[j]);
                 Cells[3, RowIndex + j - StartIndex] :=
                     ValToStr(DeltaProfile.PointYCoord[j]);
             end;

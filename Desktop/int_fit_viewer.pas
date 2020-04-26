@@ -56,8 +56,8 @@ type
             BackgroundPoints: TTitlePointsSet);
         procedure HideBackground(Sender: TObject;
             BackgroundPoints: TTitlePointsSet);
-        procedure PlotGaussProfile(Sender: TObject;
-            GaussProfile: TTitlePointsSet);
+        procedure PlotComputedProfile(Sender: TObject;
+            ComputedProfile: TTitlePointsSet);
         procedure PlotDeltaProfile(Sender: TObject;
             DeltaProfile: TTitlePointsSet);
         { Refreshes all curves. }
@@ -72,7 +72,7 @@ type
 {$IFDEF USE_GRIDS}
         { Handler to fill data table. }
         procedure FillDatasheetTable(Profile: TTitlePointsSet;
-            CurvesList: TSelfCopiedCompList; GaussProfile: TTitlePointsSet;
+            CurvesList: TSelfCopiedCompList; ComputedProfile: TTitlePointsSet;
             DeltaProfile: TTitlePointsSet; RFactorBounds: TTitlePointsSet);
         procedure SetUpdateGrids(Update: boolean);
 {$ENDIF}

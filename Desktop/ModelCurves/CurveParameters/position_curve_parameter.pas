@@ -50,7 +50,7 @@ end;
 
 procedure TPositionCurveParameter.InitVariationStep;
 begin
-    FVariationStep := 0.01;
+    FVariationStep := 0.1;
 end;
 
 procedure TPositionCurveParameter.InitValue;

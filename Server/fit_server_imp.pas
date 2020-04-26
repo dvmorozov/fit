@@ -943,7 +943,7 @@ function TFitServer_ServiceImp.GetGraph(const Width: integer;
 var
     Problem: TFitServerApp;
     //  !!! osvobozhdat' ne nuzhno, poskol'ku kopii ne sozdayutsya !!!
-    Data, BackgroundPoints, GaussProfile, DeltaProfile, CurvePositions,
+    Data, BackgroundPoints, ComputedProfile, DeltaProfile, CurvePositions,
     RFactorBounds: TTitlePointsSet;
     Curves: TSelfCopiedCompList;
     Bitmap: TPNGImage;//TJPEGImage;
@@ -1060,16 +1060,16 @@ begin
             end;
 
             Result.ErrCode := Problem.FitStub.GetCalcProfilePointsSet(
-                GaussProfile, Result.ErrMsg);
+                ComputedProfile, Result.ErrMsg);
             if Result.ErrCode <> 0 then
                 Exit;
 
-            if Assigned(GaussProfile) and
-                (GaussProfile.PointsCount <> 0) then
+            if Assigned(ComputedProfile) and
+                (ComputedProfile.PointsCount <> 0) then
             begin
-                //GaussProfile.Lambda := WaveLength;
-                GaussProfile.Title := SummarizedName;
-                PlotGaussProfile(nil, GaussProfile);
+                //ComputedProfile.Lambda := WaveLength;
+                ComputedProfile.Title := SummarizedName;
+                PlotComputedProfile(nil, ComputedProfile);
             end;
 
             Result.ErrCode := Problem.FitStub.GetDeltaProfilePointsSet(

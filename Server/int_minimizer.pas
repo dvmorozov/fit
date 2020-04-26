@@ -71,24 +71,23 @@ type
     { Adapter supporting set of function pointers ("events") for any optimization task. }
     TMinimizer = class(TComponent)
     private
-        FOnFunc:     TFunc;
-        FOnCalcFunc: TCalcFunc;
-        FOnGetStep:  TGetStep;
-        FOnSetStep:  TSetStep;
+        FOnGetFunc:     TFunc;
+        FOnComputeFunc: TCalcFunc;
+        FOnGetVariationStep:  TGetStep;
+        FOnSetVariationStep:  TSetStep;
         FOnSetNextParam: TSetNextParam;
         FOnSetFirstParam: TSetFirstParam;
         FOnGetParam: TGetParam;
         FOnSetParam: TSetParam;
         FOnEndOfCycle: TEndOfCycle;
         FOnShowCurMin: TShowCurMin;
-        //FMinInterface: IMinimizer;
         FTerminated: boolean;
 
     protected
         procedure SetTerminated(ATerminated: boolean); virtual;
 
     public
-        CurrentMinimum: double;
+        FCurrentMinimum: double;
 
         procedure Minimize(var ErrorCode: longint); virtual; abstract;
         // vozvraschaet kod oshibki
@@ -100,10 +99,10 @@ type
     published
         //property MinInterface: IMinimizer
         //    read FMinInterface write FMinInterface;
-        property OnFunc: TFunc read FOnFunc write FOnFunc;
-        property OnCalcFunc: TCalcFunc read FOnCalcFunc write FOnCalcFunc;
-        property OnGetStep: TGetStep read FOnGetStep write FOnGetStep;
-        property OnSetStep: TSetStep read FOnSetStep write FOnSetStep;
+        property OnGetFunc: TFunc read FOnGetFunc write FOnGetFunc;
+        property OnComputeFunc: TCalcFunc read FOnComputeFunc write FOnComputeFunc;
+        property OnGetVariationStep: TGetStep read FOnGetVariationStep write FOnGetVariationStep;
+        property OnSetVariationStep: TSetStep read FOnSetVariationStep write FOnSetVariationStep;
         property OnSetNextParam: TSetNextParam
             read FOnSetNextParam write FOnSetNextParam;
         property OnSetFirstParam: TSetFirstParam
@@ -161,22 +160,22 @@ end;
 function TMinimizer.IsReady: longint;
 begin
     Result := MIN_NO_ERRORS;
-    if not Assigned(OnFunc) then
+    if not Assigned(OnGetFunc) then
     begin
         Result := MIN_FUNCTION_NOT_ASSIGNED;
         Exit;
     end;
-    if not Assigned(OnCalcFunc) then
+    if not Assigned(OnComputeFunc) then
     begin
         Result := MIN_FUNCTION_NOT_ASSIGNED;
         Exit;
     end;
-    if not Assigned(OnGetStep) then
+    if not Assigned(OnGetVariationStep) then
     begin
         Result := MIN_FUNCTION_NOT_ASSIGNED;
         Exit;
     end;
-    if not Assigned(OnSetStep) then
+    if not Assigned(OnSetVariationStep) then
     begin
         Result := MIN_FUNCTION_NOT_ASSIGNED;
         Exit;

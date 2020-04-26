@@ -13,14 +13,16 @@ unit downhill_simplex_minimizer;
 
 interface
 
-uses Classes, DownhillSimplexContainer, int_minimizer, SysUtils, Tools;
+uses Classes, DownhillSimplexServer, int_minimizer, log, SysUtils, Tools;
 
 type
     { Implements application interfaces required by downhill simplex algorithm. }
     TDownhillSimplexMinimizer = class(TMinimizer,
         IOptimizedFunction, IDownhillRealParameters, IUpdatingResults)
     private
-        Container: TDownhillSimplexContainer;
+        Server: TDownhillSimplexServer;
+
+        procedure SelectParameter(index: longint);
 
     protected
         procedure SetTerminated(ATerminated: boolean); override;
@@ -39,6 +41,8 @@ type
         function GetParametersNumber: longint;
         function GetParameter(index: longint): TVariableParameter;
         procedure SetParameter(index: longint; AParameter: TVariableParameter);
+        function GetVariationStep(index: LongInt): double;
+        procedure SetVariationStep(index: LongInt; Value: double);
 
         {IDiscretValue}
         function GetNumberOfValues: longint;
@@ -50,7 +54,7 @@ type
             MinValue, MaxValue, CurValue: longint);
         procedure ResetCurJobProgress(Sender: TComponent);
         procedure ShowMessage(Sender: TComponent; Msg: string);
-        procedure UpdatingResults(Sender: TComponent);
+        procedure UpdateResults(Sender: TComponent);
 
         constructor Create(AOwner: TComponent); override;
         destructor Destroy; override;
@@ -72,15 +76,15 @@ begin
     if ErrorCode <> MIN_NO_ERRORS then
         Exit;
 
-    with Container do
+    with Server do
         Run;
 end;
 
 {IOptimizedFunction}
 function TDownhillSimplexMinimizer.GetOptimizedFunction: double;
 begin
-    OnCalcFunc;
-    Result := OnFunc;
+    OnComputeFunc;
+    Result := OnGetFunc;
 end;
 
 {IDownhillRealParameters}
@@ -105,24 +109,32 @@ begin
 end;
 
 function TDownhillSimplexMinimizer.GetParameter(index: longint): TVariableParameter;
-var
-    i: longint;
 begin
-    i := 0;
-    OnSetFirstParam;
-    while not OnEndOfCycle do
-    begin
-        if i = index then
-            Break;
-        Inc(i);
-        OnSetNextParam;
-    end;
+    SelectParameter(index);
     Result.Limited := False;
     Result.Value   := OnGetParam;
 end;
 
 procedure TDownhillSimplexMinimizer.SetParameter(index: longint;
     AParameter: TVariableParameter);
+begin
+    SelectParameter(index);
+    OnSetParam(AParameter.Value);
+end;
+
+function TDownhillSimplexMinimizer.GetVariationStep(index: LongInt): double;
+begin
+    SelectParameter(index);
+    Result := OnGetVariationStep;
+end;
+
+procedure TDownhillSimplexMinimizer.SetVariationStep(index: LongInt; Value: double);
+begin
+    SelectParameter(index);
+    OnSetVariationStep(Value);
+end;
+
+procedure TDownhillSimplexMinimizer.SelectParameter(index: longint);
 var
     i: longint;
 begin
@@ -135,7 +147,6 @@ begin
         Inc(i);
         OnSetNextParam;
     end;
-    OnSetParam(AParameter.Value);
 end;
 
 {IDiscretValue}
@@ -174,12 +185,13 @@ end;
 
 {$hints on}
 
-procedure TDownhillSimplexMinimizer.UpdatingResults(Sender: TComponent);
+procedure TDownhillSimplexMinimizer.UpdateResults(Sender: TComponent);
 begin
     if Assigned(OnShowCurMin) then
     begin
-        CurrentMinimum := Container.TotalMinimum;
+        FCurrentMinimum := Server.FTotalMinimum;
         OnShowCurMin;
+        WriteLog('Current minimium = ' + FloatToStr(FCurrentMinimum), Debug);
     end;
 end;
 
@@ -187,26 +199,26 @@ procedure TDownhillSimplexMinimizer.SetTerminated(ATerminated: boolean);
 begin
     inherited;
     if ATerminated then
-        Container.StopAlgorithm;
+        Server.StopAlgorithm;
 end;
 
 constructor TDownhillSimplexMinimizer.Create(AOwner: TComponent);
 begin
     inherited Create(AOwner);
-    Container := TDownhillSimplexContainer.Create(nil);
-    Container.UpdatingResults := Self;
-    Container.OptimizedFunction := Self;
+    Server := TDownhillSimplexServer.Create(nil);
+    Server.UpdatingResults := Self;
+    Server.OptimizedFunction := Self;
     //  Final tolerance should have non zero value,
     //  otherwise computation will never end
-    //  (see TDownhillSimplexContainer.CreateAlgorithm).
-    Container.FinalTolerance := 0.0000001;
-    Container.RestartDisabled := False; //True;
-    Container.AddIDSPToList(Self);
+    //  (see TDownhillSimplexServer.CreateAlgorithm).
+    Server.FinalTolerance := 0.001; //1e-10;
+    Server.RestartDisabled := True;
+    Server.AddIDSPToList(Self);
 end;
 
 destructor TDownhillSimplexMinimizer.Destroy;
 begin
-    UtilizeObject(Container);
+    UtilizeObject(Server);
     inherited Destroy;
 end;
 

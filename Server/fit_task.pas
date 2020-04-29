@@ -273,8 +273,6 @@ end;
 
 procedure TFitTask.ComputeFunc;
 begin
-    //  krivye ne nuzhno pereschityvat', poskol'ku vse uzhe
-    //  pereschitano v SetParam
     ComputeProfile;
 end;
 
@@ -637,7 +635,6 @@ begin
                 FCommonVariableParameters[FCommonVaryingIndex].Name
                 ] := NewParamValue;
         end;
-        //ComputeProfile;
     end
     else
     begin
@@ -1563,41 +1560,20 @@ end;
 {$hints on}
 
 procedure TFitTask.MinimizeDifference;
-   //var    i: LongInt;
-   //GP: TPointsSet;
 begin
-    // nachal'naya initsializatsiya neobhodima, kogda pri
-    // vychislenii R-faktora predpolagaetsya, chto vse
-    // tochki vychislennogo profilya ne d.b. ravny 0
-    //Assert(Assigned(FCurves));
-    //with FCurves do
-    //  for i := 0 to Count - 1 do
-    //  begin
-    //      GP := TPointsSet(Items[i]);
-    //      if GP is TGaussPointsSet then
-    //          TGaussPointsSet(GP).Sigma := 0.6;
-    //      TGaussPointsSet(GP).A := 100;
-    //  end
-    //ComputeProfile;
-
-    //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyani
     Optimization;
     Done;
 end;
 
 procedure TFitTask.MinimizeDifferenceAgain;
 begin
-    //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyani
-    // povtornaya initsializatsiya gaussianov
     RecreateCurves(nil);
-    ComputeProfile;
     Optimization;
     Done;
 end;
 
 procedure TFitTask.MinimizeNumberOfCurves;
 begin
-    //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
     MinimizeNumberOfCurvesAlg;
     Done;
 end;

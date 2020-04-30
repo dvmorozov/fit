@@ -113,7 +113,6 @@ type
     Label3: TLabel;
     Label4: TLabel;
     Label5: TLabel;
-    Label6: TLabel;
     LabelAngle: TLabel;
     LabelIntensity: TLabel;
     LabelRFactor: TLabel;
@@ -1806,7 +1805,6 @@ begin
         DoEditHint;
     end;
     TimerBalloonShow.Enabled := False;
-    //TimerBalloonHide.Enabled := True;
 end;
 
 {$hints off}
@@ -2029,6 +2027,7 @@ var TimeStr: string;
 begin
     TimeStr := FitClientApp_.FitClient.GetCalcTimeStr;
     StatusBar.Panels[0].Text := 'Elapsed time: ' + TimeStr;
+    Application.ProcessMessages;
 end;
 
 procedure TFormMain.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -2434,6 +2433,7 @@ end;
 procedure TFormMain.ShowRFactor;
 begin
     LabelRFactor.Caption := FitClientApp_.FitClient.GetRFactorStr;
+    Application.ProcessMessages;
 end;
 
 procedure TFormMain.ShowHint(const Hint: string);
@@ -2441,6 +2441,8 @@ begin
     if csDestroying in ComponentState then Exit;    //  Otherwise sometimes
                                                     //  exception is thrown.
     StatusBar.Panels[1].Text := Hint;
+    Application.ProcessMessages;
+
     if Hint = HintDone then
         // Displays latest R-factor value.
         ShowRFactor;

@@ -908,7 +908,7 @@ procedure TFormMain.ActionSelectIntervalBoundsExecute(Sender: TObject);
 begin
     if not MenuSelectIntervalBounds.Checked then
     begin
-        FActiveNumber := FFitViewer.GetActiveCurve;
+        FActiveNumber := FFitViewer.GetActiveCurveIndex;
         FitClientApp_.FitClient.SelectionMode := ModeSelectIntervalBounds;
         ShowHint(HintFirstStart);
     end
@@ -923,7 +923,7 @@ begin
     //  perehodim v rezhim vvoda tochek fona
     if not MenuBackground.Checked then
     begin
-        FActiveNumber := FFitViewer.GetActiveCurve;
+        FActiveNumber := FFitViewer.GetActiveCurveIndex;
         FitClientApp_.FitClient.SelectionMode := ModeSelectBackground;
         ShowHint(HintFirst);
     end;
@@ -936,7 +936,7 @@ procedure TFormMain.ActionSelectBackgroundManuallyExecute(Sender: TObject);
 begin
     if not MenuBackground.Checked then
     begin
-        FActiveNumber := FFitViewer.GetActiveCurve;
+        FActiveNumber := FFitViewer.GetActiveCurveIndex;
         FitClientApp_.FitClient.SelectionMode := ModeSelectBackground;
         ShowHint(HintFirst);
     end
@@ -948,7 +948,7 @@ procedure TFormMain.ActionSelectCharacteristicPointsExecute(Sender: TObject);
 begin
     if not MenuSelectCharacteristicPoints.Checked then
     begin
-        FActiveNumber := FFitViewer.GetActiveCurve;
+        FActiveNumber := FFitViewer.GetActiveCurveIndex;
         FitClientApp_.FitClient.SelectionMode := ModeSelectCharacteristicPoints;
         ShowHint(HintFirstStart);
     end
@@ -961,7 +961,7 @@ var PS: TNeutronPointsSet;
 begin
     if not MenuSelectCurveBounds.Checked then
     begin
-        FActiveNumber := FFitViewer.GetActiveCurve;
+        FActiveNumber := FFitViewer.GetActiveCurveIndex;
         PS := FFitViewer.GetActivePointsSet;
         if not (PS is TCurvePointsSet) then
         begin
@@ -1071,7 +1071,7 @@ begin
     //  perehodim v rezhim vybora intervalov rascheta R-faktora
     if not MenuRFactorIntervals.Checked then
     begin
-        FActiveNumber := FFitViewer.GetActiveCurve;
+        FActiveNumber := FFitViewer.GetActiveCurveIndex;
         FitClientApp_.FitClient.SelectionMode := ModeSelectRFactorBounds;
         ShowHint(HintFirst);
     end;
@@ -1084,7 +1084,7 @@ procedure TFormMain.ActionSelectRFactorBoundsManuallyExecute(Sender: TObject);
 begin
     if not MenuRFactorIntervals.Checked then
     begin
-        FActiveNumber := FFitViewer.GetActiveCurve;
+        FActiveNumber := FFitViewer.GetActiveCurveIndex;
         FitClientApp_.FitClient.SelectionMode := ModeSelectRFactorBounds;
         ShowHint(HintFirst);
     end
@@ -1096,7 +1096,7 @@ procedure TFormMain.ActionSelectCurvePositionsManuallyExecute(Sender: TObject);
 begin
     if not MenuCurvePositions.Checked then
     begin
-        FActiveNumber := FFitViewer.GetActiveCurve;
+        FActiveNumber := FFitViewer.GetActiveCurveIndex;
         FitClientApp_.FitClient.SelectionMode := ModeSelectCurvePositions;
         ShowHint(HintFirst);
     end

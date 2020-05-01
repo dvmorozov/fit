@@ -149,7 +149,7 @@ type
         procedure Refresh(Sender: TObject);
         { Does not clear series but only refreshes intencities. }
         procedure RefreshPointsSet(Sender: TObject;
-            points_set: TNeutronPointsSet);
+            PointsSet: TNeutronPointsSet);
         { Method of IFitViewer interface. }
         procedure Clear(Sender: TObject);
         { Method of IFitViewer interface. }
@@ -185,9 +185,9 @@ type
           This function actually gives the number of active curve
           when only single curve is visible in the chart. This should
           be checked separately. }
-        function GetActiveCurve: longint;
+        function GetActiveCurveIndex: longint;
         function GetActivePointsSet: TNeutronPointsSet;
-        function GetPointsSet(ActiveNumber: longint): TNeutronPointsSet;
+        function GetPointsSet(ActiveCurveIndex: longint): TNeutronPointsSet;
 
         { Return boundary values among all curves. }
 
@@ -230,18 +230,16 @@ const
 
 procedure TFitViewer.Plot;
 var
-    SA: TNeutronPointsSet;
+    PointsSet: TNeutronPointsSet;
     j:  longint;
 begin
-    if not Assigned(FPointsSetList) then
-        Exit;
+    Assert(Assigned(FPointsSetList));
 
     for j := 0 to FPointsSetList.Count - 1 do
     begin
-        SA := TNeutronPointsSet(FPointsSetList.Items[j]);
-        PlotPointsSet(SA);
+        PointsSet := TNeutronPointsSet(FPointsSetList.Items[j]);
+        PlotPointsSet(PointsSet);
     end;
-    //ViewAllMarkers;     //??? nado
 end;
 
 procedure TFitViewer.PlotPointsSet(PointsSet: TNeutronPointsSet);
@@ -249,11 +247,10 @@ var
     Serie: TTASerie;
     i:  longint;
 begin
-    if not Assigned(PointsSet) then
-        Exit;
+    Assert(Assigned(PointsSet));
+    Assert(Assigned(FPointsSetList));
 
     Serie := TTASerie(TFormMain(Form).Chart.GetSerie(FPointsSetList.IndexOf(PointsSet)));
-    //Serie.HorizAxis := aBottomAxis;
     Serie.Clear;
     with PointsSet do
         for i := 0 to PointsCount - 1 do
@@ -269,31 +266,30 @@ end;
 
 procedure TFitViewer.PlotSelectedProfileInterval(Sender: TObject; SelectedArea: TTitlePointsSet);
 var
-    LS: TTASerie;
+    Serie: TTASerie;
 begin
-    //Assert(Assigned(SelectedArea));
-    if not Assigned(SelectedArea) then
-        Exit;
+    Assert(Assigned(SelectedArea));
+    Assert(Assigned(FPointsSetList));
 
     if FPointsSetList.IndexOf(SelectedArea) = -1 then
     begin
         //  dobavlenie nabora tochek v spisok naborov tochek
         FPointsSetList.Add(SelectedArea);
         //  dobavlenie serii
-        LS := TTASerie.Create(nil);
-        LS.PointStyle := psRectangle;
-        LS.ShowPoints := FViewMarkers;
-        LS.Title := SelectedArea.FTitle;
-        LS.SeriesColor := clRed;
-        LS.PointBrushStyle := bsClear;
+        Serie := TTASerie.Create(nil);
+        Serie.PointStyle := psRectangle;
+        Serie.ShowPoints := FViewMarkers;
+        Serie.Title := SelectedArea.FTitle;
+        Serie.SeriesColor := clRed;
+        Serie.PointBrushStyle := bsClear;
 
-        TFormMain(Form).Chart.AddSerie(LS);
+        TFormMain(Form).Chart.AddSerie(Serie);
 {$IFDEF USE_LEGEND}
         if FUpdateLegends then
         begin
-            TFormMain(Form).CheckListBoxLegend.Items.AddObject('Selected area', LS);
+            TFormMain(Form).CheckListBoxLegend.Items.AddObject('Selected area', Serie);
             TFormMain(Form).CheckListBoxLegend.Checked[
-                TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(LS)] := True;
+                TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(Serie)] := True;
         end;
 {$ENDIF}
     end;
@@ -309,8 +305,8 @@ end;
 procedure TFitViewer.PlotCurves(Sender: TObject;
     CurvePointsSetList: TSelfCopiedCompList; CurveList: TMSCRCurveList);
 var
-    LS: TTASerie;
-    SA: TNamedPointsSet;
+    Serie: TTASerie;
+    PointsSet: TNamedPointsSet;
     j:  longint;
 begin
 {$IFDEF USE_GRIDS}
@@ -323,30 +319,30 @@ begin
 
     for j := 0 to CurvePointsSetList.Count - 1 do
     begin
-        SA := TNamedPointsSet(CurvePointsSetList.Items[j]);
-        if FPointsSetList.IndexOf(SA) = -1 then
+        PointsSet := TNamedPointsSet(CurvePointsSetList.Items[j]);
+        if FPointsSetList.IndexOf(PointsSet) = -1 then
         begin
-            LS := TTASerie.Create(nil);
-            LS.PointStyle := psRectangle;
-            LS.ShowPoints := FViewMarkers;
-            TFormMain(Form).Chart.AddSerie(LS);
-            FPointsSetList.Add(SA);
+            Serie := TTASerie.Create(nil);
+            Serie.PointStyle := psRectangle;
+            Serie.ShowPoints := FViewMarkers;
+            TFormMain(Form).Chart.AddSerie(Serie);
+            FPointsSetList.Add(PointsSet);
 
-            LS.Title := SA.GetCurveTypeName + ' ' + IntToStr(j + 1);
+            Serie.Title := PointsSet.GetCurveTypeName + ' ' + IntToStr(j + 1);
 {$IFDEF USE_LEGEND}
             if FUpdateLegends then
             begin
-                TFormMain(Form).CheckListBoxLegend.Items.AddObject(LS.Title, LS);
+                TFormMain(Form).CheckListBoxLegend.Items.AddObject(Serie.Title, Serie);
                 TFormMain(Form).CheckListBoxLegend.Checked[
-                    TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(LS)] := True;
+                    TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(Serie)] := True;
             end;
 {$ENDIF}
             if j + 1 <= 16 then
-                LS.SeriesColor := ColorPalette[j + 1]
+                Serie.SeriesColor := ColorPalette[j + 1]
             else
-                LS.SeriesColor := ColorPalette[(j + 1) mod 16];
+                Serie.SeriesColor := ColorPalette[(j + 1) mod 16];
         end;
-        PlotPointsSet(SA);
+        PlotPointsSet(PointsSet);
     end;{for j := 0 to GL.Count - 1 do...}
 end;
 
@@ -360,8 +356,8 @@ begin
     if FUpdateLegends then
         TFormMain(Form).CheckListBoxLegend.Items.Clear;
 {$ENDIF}
-    if Assigned(FPointsSetList) then
-        FPointsSetList.Clear;
+    Assert(Assigned(FPointsSetList));
+    FPointsSetList.Clear;
 {$IFDEF USE_GRIDS}
     if FUpdateGrids then
     begin
@@ -379,10 +375,8 @@ procedure TFitViewer.Hide(Sender: TObject; PointsSet: TNeutronPointsSet);
 var
     Index: longint;
 begin
-    if not Assigned(PointsSet) then
-        Exit;
-    if not Assigned(FPointsSetList) then
-        Exit;
+    Assert(Assigned(PointsSet));
+    Assert(Assigned(FPointsSetList));
 
     Index := FPointsSetList.IndexOf(PointsSet);
     // el-t v CheckListBox svyazan s el-tom v FPointsSetList tol'ko po indeksu
@@ -401,39 +395,33 @@ end;
 procedure TFitViewer.Refresh(Sender: TObject);
 var
     i:  longint;
-    NS: TNeutronPointsSet;
+    PointsSet: TNeutronPointsSet;
 begin
-    //Assert(Assigned(FPointsSetList));
-    if not Assigned(FPointsSetList) then
-        Exit;
+    Assert(Assigned(FPointsSetList));
 
     for i := 0 to FPointsSetList.Count - 1 do
     begin
-        NS := TNeutronPointsSet(FPointsSetList.Items[i]);
-        RefreshPointsSet(Sender, NS);
+        PointsSet := TNeutronPointsSet(FPointsSetList.Items[i]);
+        RefreshPointsSet(Sender, PointsSet);
     end;
-    //ViewAllMarkers; ??? nado
 end;
 
-procedure TFitViewer.RefreshPointsSet(Sender: TObject; points_set: TNeutronPointsSet);
+procedure TFitViewer.RefreshPointsSet(Sender: TObject; PointsSet: TNeutronPointsSet);
 var
     Index, j: longint;
-    LS: TTASerie;
+    Serie: TTASerie;
 begin
-    //Assert(Assigned(PointsSet));
-    if not Assigned(points_set) then
-        Exit;
-    if not Assigned(FPointsSetList) then
-        Exit;
+    Assert(Assigned(PointsSet));
+    Assert(Assigned(FPointsSetList));
 
-    Index := FPointsSetList.IndexOf(points_set);
+    Index := FPointsSetList.IndexOf(PointsSet);
     Assert(Index <> -1);
 
-    LS := TTASerie(TFormMain(Form).Chart.GetSerie(Index));
-    Assert(LS.Count = points_set.PointsCount);
-    with points_set do
+    Serie := TTASerie(TFormMain(Form).Chart.GetSerie(Index));
+    Assert(Serie.Count = PointsSet.PointsCount);
+    with PointsSet do
         for j := 0 to PointsCount - 1 do
-            LS.SetYValue(j, PointIntensity[j]);
+            Serie.SetYValue(j, PointIntensity[j]);
 end;
 
 procedure TFitViewer.HideRFactorBounds(Sender: TObject;
@@ -449,34 +437,31 @@ end;
 procedure TFitViewer.PlotRFactorBounds(Sender: TObject;
     RFactorBounds: TTitlePointsSet);
 var
-    LS: TTASerie;
+    Serie: TTASerie;
 begin
-    //Assert(Assigned(RFactorBounds));
-    if not Assigned(RFactorBounds) then
-        Exit;
-    if not Assigned(FPointsSetList) then
-        Exit;
+    Assert(Assigned(RFactorBounds));
+    Assert(Assigned(FPointsSetList));
 
     if FPointsSetList.IndexOf(RFactorBounds) = -1 then
     begin
-        LS := TTASerie.Create(nil);
-        LS.PointStyle := psVertLineTB;
-        LS.ImageSize := 3;
-        LS.SeriesColor := clBlue;
-        LS.ShowLines := False;
-        LS.ShowPoints := True;
-        LS.InitShowLines := LS.ShowLines;
-        LS.InitShowPoints := LS.ShowPoints;
-        LS.Title := RFactorBounds.FTitle;
+        Serie := TTASerie.Create(nil);
+        Serie.PointStyle := psVertLineTB;
+        Serie.ImageSize := 3;
+        Serie.SeriesColor := clBlue;
+        Serie.ShowLines := False;
+        Serie.ShowPoints := True;
+        Serie.InitShowLines := Serie.ShowLines;
+        Serie.InitShowPoints := Serie.ShowPoints;
+        Serie.Title := RFactorBounds.FTitle;
 
-        TFormMain(Form).Chart.AddSerie(LS);
+        TFormMain(Form).Chart.AddSerie(Serie);
         FPointsSetList.Add(RFactorBounds);
 {$IFDEF USE_LEGEND}
         if FUpdateLegends then
         begin
-            TFormMain(Form).CheckListBoxLegend.Items.AddObject(LS.Title, LS);
+            TFormMain(Form).CheckListBoxLegend.Items.AddObject(Serie.Title, Serie);
             TFormMain(Form).CheckListBoxLegend.Checked[
-                TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(LS)] := True;
+                TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(Serie)] := True;
         end;
 {$ENDIF}
     end;
@@ -501,34 +486,31 @@ end;
 procedure TFitViewer.PlotCurvePositions(Sender: TObject;
     CurvePositions: TTitlePointsSet);
 var
-    LS: TTASerie;
+    Serie: TTASerie;
 begin
-    //Assert(Assigned(CurvePositions));
-    if not Assigned(CurvePositions) then
-        Exit;
-    if not Assigned(FPointsSetList) then
-        Exit;
+    Assert(Assigned(CurvePositions));
+    Assert(Assigned(FPointsSetList));
 
     if FPointsSetList.IndexOf(CurvePositions) = -1 then
     begin
-        LS := TTASerie.Create(nil);
-        LS.PointStyle := psDiagCross;
-        LS.ImageSize := 5;
-        LS.SeriesColor := clBlack;
-        LS.ShowLines := False;
-        LS.ShowPoints := True;
-        LS.InitShowLines := LS.ShowLines;
-        LS.InitShowPoints := LS.ShowPoints;
-        LS.Title := CurvePositions.FTitle;
+        Serie := TTASerie.Create(nil);
+        Serie.PointStyle := psDiagCross;
+        Serie.ImageSize := 5;
+        Serie.SeriesColor := clBlack;
+        Serie.ShowLines := False;
+        Serie.ShowPoints := True;
+        Serie.InitShowLines := Serie.ShowLines;
+        Serie.InitShowPoints := Serie.ShowPoints;
+        Serie.Title := CurvePositions.FTitle;
 
-        TFormMain(Form).Chart.AddSerie(LS);
+        TFormMain(Form).Chart.AddSerie(Serie);
         FPointsSetList.Add(CurvePositions);
 {$IFDEF USE_LEGEND}
         if FUpdateLegends then
         begin
-            TFormMain(Form).CheckListBoxLegend.Items.AddObject(LS.Title, LS);
+            TFormMain(Form).CheckListBoxLegend.Items.AddObject(Serie.Title, Serie);
             TFormMain(Form).CheckListBoxLegend.Checked[
-                TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(LS)] := True;
+                TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(Serie)] := True;
         end;
 {$ENDIF}
     end;
@@ -545,34 +527,31 @@ end;
 procedure TFitViewer.PlotSelectedPoints(Sender: TObject;
     SelectedPoints: TTitlePointsSet);
 var
-    LS: TTASerie;
+    Serie: TTASerie;
 begin
-    //Assert(Assigned(SelectedPoints));
-    if not Assigned(SelectedPoints) then
-        Exit;
-    if not Assigned(FPointsSetList) then
-        Exit;
+    Assert(Assigned(SelectedPoints));
+    Assert(Assigned(FPointsSetList));
 
     if FPointsSetList.IndexOf(SelectedPoints) = -1 then
     begin
-        LS := TTASerie.Create(nil);
-        LS.PointStyle := psVertLineBT;
-        LS.ImageSize := 3;
-        LS.SeriesColor := clGreen;
-        LS.ShowLines := False;
-        LS.ShowPoints := True;
-        LS.InitShowLines := LS.ShowLines;
-        LS.InitShowPoints := LS.ShowPoints;
-        LS.Title := SelectedPoints.FTitle;
+        Serie := TTASerie.Create(nil);
+        Serie.PointStyle := psVertLineBT;
+        Serie.ImageSize := 3;
+        Serie.SeriesColor := clGreen;
+        Serie.ShowLines := False;
+        Serie.ShowPoints := True;
+        Serie.InitShowLines := Serie.ShowLines;
+        Serie.InitShowPoints := Serie.ShowPoints;
+        Serie.Title := SelectedPoints.FTitle;
 
-        TFormMain(Form).Chart.AddSerie(LS);
+        TFormMain(Form).Chart.AddSerie(Serie);
         FPointsSetList.Add(SelectedPoints);
 {$IFDEF USE_LEGEND}
         if FUpdateLegends then
         begin
-            TFormMain(Form).CheckListBoxLegend.Items.AddObject(LS.Title, LS);
+            TFormMain(Form).CheckListBoxLegend.Items.AddObject(Serie.Title, Serie);
             TFormMain(Form).CheckListBoxLegend.Checked[
-                TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(LS)] := True;
+                TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(Serie)] := True;
         end;
 {$ENDIF}
     end;
@@ -583,28 +562,25 @@ end;
 
 procedure TFitViewer.PlotComputedProfile(Sender: TObject; ComputedProfile: TTitlePointsSet);
 var
-    LS: TTASerie;
+    Serie: TTASerie;
 begin
-    //Assert(Assigned(ComputedProfile));
-    if not Assigned(ComputedProfile) then
-        Exit;
-    if not Assigned(FPointsSetList) then
-        Exit;
+    Assert(Assigned(ComputedProfile));
+    Assert(Assigned(FPointsSetList));
 
-    LS := TTASerie.Create(nil);
-    LS.PointStyle := psRectangle;
-    LS.ShowPoints := FViewMarkers;
-    LS.SeriesColor := clBlack;
-    LS.Title := ComputedProfile.FTitle;
+    Serie := TTASerie.Create(nil);
+    Serie.PointStyle := psRectangle;
+    Serie.ShowPoints := FViewMarkers;
+    Serie.SeriesColor := clBlack;
+    Serie.Title := ComputedProfile.FTitle;
 
-    TFormMain(Form).Chart.AddSerie(LS);
+    TFormMain(Form).Chart.AddSerie(Serie);
     FPointsSetList.Add(ComputedProfile);
 {$IFDEF USE_LEGEND}
     if FUpdateLegends then
     begin
-        TFormMain(Form).CheckListBoxLegend.Items.AddObject(LS.Title, LS);
+        TFormMain(Form).CheckListBoxLegend.Items.AddObject(Serie.Title, Serie);
         TFormMain(Form).CheckListBoxLegend.Checked[
-            TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(LS)] := True;
+            TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(Serie)] := True;
     end;
 {$ENDIF}
     Plot; //??? sdelat' optimal'no - bez polnogo perestroeniya
@@ -612,26 +588,23 @@ end;
 
 procedure TFitViewer.PlotDeltaProfile(Sender: TObject; DeltaProfile: TTitlePointsSet);
 var
-    LS: TTASerie;
+    Serie: TTASerie;
 begin
-    //Assert(Assigned(DeltaProfile));
-    if not Assigned(DeltaProfile) then
-        Exit;
-    if not Assigned(FPointsSetList) then
-        Exit;
+    Assert(Assigned(DeltaProfile));
+    Assert(Assigned(FPointsSetList));
 
-    LS := TTASerie.Create(nil);
-    LS.PointStyle := psRectangle;
-    LS.ShowPoints := FViewMarkers;
-    LS.SeriesColor := clGreen;
-    LS.Title := DeltaProfile.FTitle;
+    Serie := TTASerie.Create(nil);
+    Serie.PointStyle := psRectangle;
+    Serie.ShowPoints := FViewMarkers;
+    Serie.SeriesColor := clGreen;
+    Serie.Title := DeltaProfile.FTitle;
 
-    TFormMain(Form).Chart.AddSerie(LS);
+    TFormMain(Form).Chart.AddSerie(Serie);
     FPointsSetList.Add(DeltaProfile);
 {$IFDEF USE_LEGEND}
-    TFormMain(Form).CheckListBoxLegend.Items.AddObject(LS.Title, LS);
+    TFormMain(Form).CheckListBoxLegend.Items.AddObject(Serie.Title, Serie);
     TFormMain(Form).CheckListBoxLegend.Checked[
-        TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(LS)] := True;
+        TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(Serie)] := True;
 {$ENDIF}
     Plot; //??? sdelat' optimal'no - bez polnogo perestroeniya
 end;
@@ -658,34 +631,31 @@ end;
 procedure TFitViewer.PlotBackground(Sender: TObject;
     BackgroundPoints: TTitlePointsSet);
 var
-    LS: TTASerie;
+    Serie: TTASerie;
 begin
-    //Assert(Assigned(BackgroundPoints));
-    if not Assigned(BackgroundPoints) then
-        Exit;
-    if not Assigned(FPointsSetList) then
-        Exit;
+    Assert(Assigned(BackgroundPoints));
+    Assert(Assigned(FPointsSetList));
 
     if FPointsSetList.IndexOf(BackgroundPoints) = -1 then
     begin
-        LS := TTASerie.Create(nil);
-        LS.PointStyle := psCircle;
-        LS.ImageSize := 3;
-        LS.SeriesColor := clGray;
-        LS.ShowLines := True;//False;
-        LS.ShowPoints := True;
-        LS.InitShowLines := LS.ShowLines;
-        LS.InitShowPoints := LS.ShowPoints;
-        LS.Title := BackgroundPoints.FTitle;
+        Serie := TTASerie.Create(nil);
+        Serie.PointStyle := psCircle;
+        Serie.ImageSize := 3;
+        Serie.SeriesColor := clGray;
+        Serie.ShowLines := True;//False;
+        Serie.ShowPoints := True;
+        Serie.InitShowLines := Serie.ShowLines;
+        Serie.InitShowPoints := Serie.ShowPoints;
+        Serie.Title := BackgroundPoints.FTitle;
 
-        TFormMain(Form).Chart.AddSerie(LS);
+        TFormMain(Form).Chart.AddSerie(Serie);
         FPointsSetList.Add(BackgroundPoints);
 {$IFDEF USE_LEGEND}
         if FUpdateLegends then
         begin
-            TFormMain(Form).CheckListBoxLegend.Items.AddObject(LS.Title, LS);
+            TFormMain(Form).CheckListBoxLegend.Items.AddObject(Serie.Title, Serie);
             TFormMain(Form).CheckListBoxLegend.Checked[
-                TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(LS)] := True;
+                TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(Serie)] := True;
         end;
 {$ENDIF}
     end;
@@ -699,30 +669,28 @@ end;
 
 procedure TFitViewer.PlotExpProfile(Sender: TObject; ExpProfile: TTitlePointsSet);
 var
-    LS: TTASerie;
+    Serie: TTASerie;
 begin
-    if not Assigned(ExpProfile) then
-        Exit;
-    if not Assigned(FPointsSetList) then
-        Exit;
+    Assert(Assigned(ExpProfile));
+    Assert(Assigned(FPointsSetList));
 
     if FPointsSetList.IndexOf(ExpProfile) = -1 then
     begin
-        LS := TTASerie.Create(nil);
-        LS.PointStyle := psRectangle;
-        LS.ShowPoints := FViewMarkers;
-        LS.SeriesColor := clRed;
-        LS.PointBrushStyle := bsClear;
-        LS.Title := ExpProfile.FTitle;
+        Serie := TTASerie.Create(nil);
+        Serie.PointStyle := psRectangle;
+        Serie.ShowPoints := FViewMarkers;
+        Serie.SeriesColor := clRed;
+        Serie.PointBrushStyle := bsClear;
+        Serie.Title := ExpProfile.FTitle;
 
-        TFormMain(Form).Chart.AddSerie(LS);
+        TFormMain(Form).Chart.AddSerie(Serie);
         FPointsSetList.Add(ExpProfile);
 {$IFDEF USE_LEGEND}
         if FUpdateLegends then
         begin
-            TFormMain(Form).CheckListBoxLegend.Items.AddObject(LS.Title, LS);
+            TFormMain(Form).CheckListBoxLegend.Items.AddObject(Serie.Title, Serie);
             TFormMain(Form).CheckListBoxLegend.Checked[
-                TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(LS)] := True;
+                TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(Serie)] := True;
         end;
 {$ENDIF}
     end;
@@ -799,7 +767,7 @@ begin
     inherited;
 end;
 
-function TFitViewer.GetActiveCurve: longint;
+function TFitViewer.GetActiveCurveIndex: longint;
 var
     i:  longint;
     TS: TTASerie;
@@ -821,32 +789,31 @@ end;
 
 function TFitViewer.GetActivePointsSet: TNeutronPointsSet;
 var
-    ActiveNumber: longint;
+    ActiveCurveIndex: longint;
 begin
-    if not Assigned(FPointsSetList) then
-    begin
-        Result := nil;
-        Exit;
-    end;
-    ActiveNumber := GetActiveCurve;
-    Result := TNeutronPointsSet(FPointsSetList.Items[ActiveNumber]);
+    Assert(Assigned(FPointsSetList));
+
+    ActiveCurveIndex := GetActiveCurveIndex;
+
+    Assert(ActiveCurveIndex >= 0);
+    Assert(ActiveCurveIndex < FPointsSetList.Count);
+    Result := TNeutronPointsSet(FPointsSetList.Items[ActiveCurveIndex]);
 end;
 
-function TFitViewer.GetPointsSet(ActiveNumber: longint): TNeutronPointsSet;
+function TFitViewer.GetPointsSet(ActiveCurveIndex: longint): TNeutronPointsSet;
 begin
-    if not Assigned(FPointsSetList) then
-    begin
-        Result := nil;
-        Exit;
-    end;
-    Result := TNeutronPointsSet(FPointsSetList.Items[ActiveNumber]);
+    Assert(Assigned(FPointsSetList));
+
+    Assert(ActiveCurveIndex >= 0);
+    Assert(ActiveCurveIndex < FPointsSetList.Count);
+    Result := TNeutronPointsSet(FPointsSetList.Items[ActiveCurveIndex]);
 end;
 
 procedure TFitViewer.SetXCoordMode(AMode: longint);
 begin
     FXCoordMode := AMode;
-    Plot;   //  dolzhen byt' obrabotchik sobytiya, a rezhim
-    //  dolzhen ustanavlivat'sya v TIntegralIntmaker'e
+    Plot;   //  TODO: dolzhen byt' obrabotchik sobytiya, a rezhim
+            //  dolzhen ustanavlivat'sya v TIntegralIntmaker'e
 end;
 
 function TFitViewer.GetMaxX: double; //  sredi vseh prisoedinennyh krivyh
@@ -874,44 +841,42 @@ begin
 end;
 
 procedure TFitViewer.GetMinMax(var AMinX, AMaxX, AMinY, AMaxY: double);
-//  sredi vseh prisoedinennyh krivyh
 var
     i, j: longint;
-    PS:   TNeutronPointsSet;
+    PointsSet: TNeutronPointsSet;
 begin
     AMinX := MAX_VALUE;
     AMaxX := MIN_VALUE;
     AMinY := MAX_VALUE;
     AMaxY := MIN_VALUE;
-    if not Assigned(FPointsSetList) then
-        Exit;
+    Assert(Assigned(FPointsSetList));
 
     for i := 0 to FPointsSetList.Count - 1 do
         if FPointsSetList.Items[i] is TPointsSet then
         begin
-            PS := TNeutronPointsSet(FPointsSetList.Items[i]);
-            for j := 0 to PS.PointsCount - 1 do
+            PointsSet := TNeutronPointsSet(FPointsSetList.Items[i]);
+            for j := 0 to PointsSet.PointsCount - 1 do
             begin
-                if PS.PointXCoord[j] > FMaxX then
+                if PointsSet.PointXCoord[j] > FMaxX then
                     case XCoordMode of
-                        XCM_T: AMaxX     := PS.PointT[j];
-                        XCM_2T: AMaxX    := PS.Point2T[j];
-                        XCM_SinTL: AMaxX := PS.PointSinTL[j];
+                        XCM_T: AMaxX     := PointsSet.PointT[j];
+                        XCM_2T: AMaxX    := PointsSet.Point2T[j];
+                        XCM_SinTL: AMaxX := PointsSet.PointSinTL[j];
                     end;
 
-                if PS.PointXCoord[j] < FMinX then
+                if PointsSet.PointXCoord[j] < FMinX then
                     case XCoordMode of
-                        XCM_T: AMinX     := PS.PointT[j];
-                        XCM_2T: AMinX    := PS.Point2T[j];
-                        XCM_SinTL: AMinX := PS.PointSinTL[j];
+                        XCM_T: AMinX     := PointsSet.PointT[j];
+                        XCM_2T: AMinX    := PointsSet.Point2T[j];
+                        XCM_SinTL: AMinX := PointsSet.PointSinTL[j];
                     end;
 
-                if PS.PointYCoord[j] > AMaxY then
-                    AMaxY := PS.PointYCoord[j];
-                if PS.PointYCoord[j] < AMinY then
-                    AMinY := PS.PointYCoord[j];
+                if PointsSet.PointYCoord[j] > AMaxY then
+                    AMaxY := PointsSet.PointYCoord[j];
+                if PointsSet.PointYCoord[j] < AMinY then
+                    AMinY := PointsSet.PointYCoord[j];
             end;
-        end{if FPointsSetList.Items[i] is TPointsSet then...};
+        end; {if FPointsSetList.Items[i] is TPointsSet then...}
 end;
 
 procedure TFitViewer.SetViewMarkers(AViewMarkers: boolean);

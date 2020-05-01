@@ -57,29 +57,29 @@ type
     protected
         FFitService:     IFitService;
         FDataLoader:     IDataLoader;
-        FDataLoaderInjector: IDataLoaderInjector;
+        FDataLoaderInjector:  IDataLoaderInjector;
         { All the data displayed on the chart. They are required to be able control of X-coordinate. }
         FExperimentalProfile: TTitlePointsSet;
         { Region of given profile data with which user is working at the given moment. }
-        FSelectedArea:   TTitlePointsSet;
+        FSelectedArea:     TTitlePointsSet;
         { Sum of all model curces which is compared with experimental data. }
-        FComputedProfile: TTitlePointsSet;
-        FDeltaProfile:   TTitlePointsSet;
+        FComputedProfile:  TTitlePointsSet;
+        FDeltaProfile:     TTitlePointsSet;
         { Set of points selected by user. }
-        FSelectedPoints: TTitlePointsSet;
+        FSelectedPoints:   TTitlePointsSet;
         { List of background points which is used for transmission between manual and automatic selection modes. }
         FBackgroundPoints: TTitlePointsSet;
         { List of point pairs which limit interval of R-factor calculation. 
           Always must be displayed in order to show user in which mode R-factor is calculated. }
-        FRFactorBounds:  TTitlePointsSet;
+        FRFactorBounds:    TTitlePointsSet;
         { Positions of curves. Only X-coordinates are used. }
-        FCurvePositions: TTitlePointsSet;
+        FCurvePositions:   TTitlePointsSet;
         { Containers of calculated curves. Each object contains data of specimen curve. }
-        FCurvesList:     TSelfCopiedCompList;
+        FCurvesList:       TSelfCopiedCompList;
         { Containers of parameters of curves. }
-        FCurveList:      TMSCRCurveList;
+        FCurveList:        TMSCRCurveList;
         { TODO: remove this attribute. }
-        FWaveLength:     double;
+        FWaveLength:       double;
         procedure SetCurvesListLambda;
 
     protected
@@ -549,7 +549,6 @@ begin
         //  naprimer udaleniya fona
         RemoveSelectedArea;
         FSelectedArea := FitService.GetSelectedProfileInterval;
-        //??? kak zdes' obrabatyvat' isklyucheniya
         FSelectedArea.WaveLength := FWaveLength;
         FSelectedArea.FTitle := SelectedAreaName;
         PlotSelectedProfileInterval;
@@ -1127,9 +1126,7 @@ begin
     Assert(Assigned(FitService));
 
     FitService.SmoothProfile;
-    FExperimentalProfile.Free;
-    FExperimentalProfile := FitService.GetProfilePointsSet;
-    RefreshPointsSet(FExperimentalProfile);
+    ShowProfile;
 end;
 
 procedure TFitClient.SubtractBackground(Auto: boolean);

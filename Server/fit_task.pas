@@ -54,7 +54,7 @@ type
         FCurveExpr:   string;
         { Parameters of user defined curve. Parameters are given from the caller. 
           The object is used to construct curve instances. }
-        FParams:      Curve_parameters;
+        FUserDefinedParameters: Curve_parameters;
         { Part of experimental profile corresponding to model interval. }
         FExpProfile:  TPointsSet;
         { List of background points. }
@@ -720,7 +720,7 @@ begin
     FSavedBackground.Free;
     FCurvePositions.Free;
     FMinimizer.Free;
-    FParams.Free;
+    FUserDefinedParameters.Free;
     FCommonVariableParameters.Free;
     inherited;
 end;
@@ -984,8 +984,7 @@ begin
                     DeletePoint(FCurvePositions, GP.FInitx0);
                     Result := True;
                     Break;
-                end//if FCurvePositions.PointXCoord[j] = GP.FInitx0 then
-            ;
+                end;  //if FCurvePositions.PointXCoord[j] = GP.FInitx0 then
             FCurves.Remove(GP);  //  osvobozhdaet GP
         end
         else
@@ -1710,8 +1709,8 @@ begin
     end;
 
     FCurveExpr := ACurveExpr;
-    FParams.Free;
-    FParams := AParams;
+    FUserDefinedParameters.Free;
+    FUserDefinedParameters := AParams;
 end;
 
 procedure TFitTask.StopAsyncOper;

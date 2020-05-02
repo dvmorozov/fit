@@ -999,19 +999,12 @@ end;
 
 procedure TFitClient.AddPointToRFactorBounds(XValue, YValue: double);
 begin
-    //Assert(Assigned(FRFactorBounds));
-    //AddPoint(FRFactorBounds, XValue, YValue, PlotRFactorBounds);
-
     FitService.AddPointToRFactorBounds(XValue, YValue);
     UpdateComputedData;
 end;
 
 procedure TFitClient.AddPointToCurvePositions(XValue, YValue: double);
 begin
-    //Assert(Assigned(FCurvePositions));
-    //Assert(Assigned(FRFactorBounds));
-    //AddPoint(FCurvePositions, XValue, YValue, PlotCurvePositions);
-
     FitService.AddPointToCurvePositions(XValue, YValue);
     UpdateComputedData;
 end;
@@ -1156,8 +1149,8 @@ end;
 procedure TFitClient.MinimizeDifference;
 begin
     Assert(Assigned(FitService));
-    //???    FitService.SetCurvePositions(FCurvePositions);
-    //???    FitService.SetRFactorBounds(FRFactorBounds);
+    { Curve positions and R-factor bounds are set by AddPointToCurvePositions,
+      AddPointToRFactorBounds. }
     FitService.MinimizeDifference;
     FAsyncState := AsyncWorks;
 end;
@@ -1165,8 +1158,8 @@ end;
 procedure TFitClient.MinimizeNumberOfCurves;
 begin
     Assert(Assigned(FitService));
-    //???    FitService.SetCurvePositions(FCurvePositions);
-    //???    FitService.SetRFactorBounds(FRFactorBounds);
+    { Curve positions and R-factor bounds are set by AddPointToCurvePositions,
+      AddPointToRFactorBounds. }
     FitService.MinimizeNumberOfCurves;
     FAsyncState := AsyncWorks;
 end;

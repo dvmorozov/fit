@@ -23,12 +23,6 @@ type
     protected
         function CreateTaskObject: TFitTask; override;
 
-        { Algorithms are executed in separate threads. }
-
-        procedure MinimizeNumberOfCurvesAlg; override;
-        procedure MinimizeDifferenceAlg; override;
-        procedure MinimizeDifferenceAgainAlg; override;
-
     public
         procedure AbortAsyncOper; override;
     end;
@@ -68,52 +62,6 @@ begin
     FMainCalcThread.Terminate;
     DestroyMainCalcThread;
     FState := FSavedState;
-end;
-
-procedure TFitServiceMultithreaded.MinimizeNumberOfCurvesAlg;
-var
-    i:  longint;
-    FT: TFitTask;
-begin
-    //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
-    CreateTasks;
-    InitTasks;
-    //??? eto budet rabotat' tol'ko poka net obschey Sigma
-    for i := 0 to FTaskList.Count - 1 do
-    begin
-        FT := TFitTask(FTaskList.Items[i]);
-        FT.MinimizeNumberOfCurves;
-    end;
-end;
-
-procedure TFitServiceMultithreaded.MinimizeDifferenceAlg;
-var
-    i:  longint;
-    FT: TFitTask;
-begin
-    //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
-    CreateTasks;
-    InitTasks;
-    //??? eto budet rabotat' tol'ko poka net obschey Sigma
-    for i := 0 to FTaskList.Count - 1 do
-    begin
-        FT := TFitTask(FTaskList.Items[i]);
-        FT.MinimizeDifference;
-    end;
-end;
-
-procedure TFitServiceMultithreaded.MinimizeDifferenceAgainAlg;
-var
-    i:  longint;
-    FT: TFitTask;
-begin
-    Assert(Assigned(FTaskList));
-    //??? eto budet rabotat' tol'ko poka net obschey Sigma
-    for i := 0 to FTaskList.Count - 1 do
-    begin
-        FT := TFitTask(FTaskList.Items[i]);
-        FT.MinimizeDifferenceAgain;
-    end;
 end;
 
 end.

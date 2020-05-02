@@ -2048,7 +2048,6 @@ var
     i:  longint;
     FT: TFitTask;
 begin
-    // metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
     CreateTasks;
     InitTasks;
     for i := 0 to FTaskList.Count - 1 do

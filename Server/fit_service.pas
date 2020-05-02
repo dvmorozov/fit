@@ -48,8 +48,7 @@ uses
     , user_points_set
 {$ENDIF}
     , user_curve_parameter, Windows
-{$ENDIF}
-    ;
+{$ENDIF}    ;
 
 type
     TRecreateServer = procedure of object;
@@ -304,8 +303,8 @@ type
 
         { All methods call ReplacePoint. }
 
-        procedure ReplacePointInProfile(PrevXValue, PrevYValue, NewXValue,
-            NewYValue: double);
+        procedure ReplacePointInProfile(PrevXValue, PrevYValue,
+            NewXValue, NewYValue: double);
         procedure ReplacePointInBackground(PrevXValue, PrevYValue,
             NewXValue, NewYValue: double);
         procedure ReplacePointInRFactorBounds(PrevXValue, PrevYValue,
@@ -889,7 +888,8 @@ begin
     end;
 end;
 
-function TFitService.ComputeCurvePositionsActual(SearchMinimums: boolean): TTitlePointsSet;
+function TFitService.ComputeCurvePositionsActual(SearchMinimums: boolean):
+TTitlePointsSet;
 var
     Data: TPointsSet;
     ExtremumValue: double;
@@ -1038,10 +1038,10 @@ end;
 procedure TFitService.ComputeCurvePositionsForAutoAlg;
 begin
     FCurvePositions.Free;
-    FCurvePositions      := nil;
+    FCurvePositions := nil;
     // vse tochki pikov vybirayutsya v kachestve tochek privyazki krivyh
     // TODO: use special value of TExtremumMode and generalize algorithm.
-    FCurvePositions      := ComputeCurvePositionsActual(False);
+    FCurvePositions := ComputeCurvePositionsActual(False);
 end;
 
 procedure TFitService.ComputeCurvePositionsAlg;
@@ -1699,7 +1699,8 @@ begin
         FSelectedArea.AddNewPoint(Points.PointXCoord[i], Points.PointYCoord[i]);
 end;
 
-function TFitService.SelectProfileInterval(StartPointIndex, StopPointIndex: longint): string;
+function TFitService.SelectProfileInterval(StartPointIndex, StopPointIndex:
+    longint): string;
 begin
     Result := '';
     if State = AsyncOperation then
@@ -2176,10 +2177,11 @@ begin
     end;
 end;
 
+{ https://github.com/dvmorozov/fit/issues/200 }
 procedure TFitService.CreateResultedCurvePositions;
 var
-    i, j: LongInt;
-    FitTask: TFitTask;
+    i, j:      longint;
+    FitTask:   TFitTask;
     PointsSet: TPointsSet;
 begin
     Assert(Assigned(FTaskList));
@@ -2189,12 +2191,13 @@ begin
 
     for i := 0 to FTaskList.Count - 1 do
     begin
-        FitTask := TFitTask(FTaskList.Items[i]);
+        FitTask   := TFitTask(FTaskList.Items[i]);
         PointsSet := FitTask.GetCurvePositions;
         Assert(Assigned(PointsSet));
 
         for j := 0 to PointsSet.PointsCount - 1 do
-            FCurvePositions.AddNewPoint(PointsSet.PointXCoord[j], PointsSet.PointYCoord[j]);
+            FCurvePositions.AddNewPoint(PointsSet.PointXCoord[j],
+                PointsSet.PointYCoord[j]);
     end;
 end;
 
@@ -3095,8 +3098,8 @@ begin
     FRFactorBounds.ReplacePoint(PrevXValue, PrevYValue, NewXValue, NewYValue);
 end;
 
-procedure TFitService.ReplacePointInCurvePositions(PrevXValue, PrevYValue,
-    NewXValue, NewYValue: double);
+procedure TFitService.ReplacePointInCurvePositions(PrevXValue,
+    PrevYValue, NewXValue, NewYValue: double);
 begin
     if State = AsyncOperation then
         raise EUserException.Create(InadmissibleServerState + CRLF +

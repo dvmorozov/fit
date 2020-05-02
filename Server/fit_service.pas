@@ -123,7 +123,7 @@ type
         FCurvePositions: TTitlePointsSet;
         { Containers of parameters of curves.
           TODO: change type and remove SetWaveLength. }
-        FCurveList:      TMSCRCurveList;
+        FCurveParameterList: TMSCRCurveList;
 
         { Dependent on this flag either data of the selected interval are used
           or data of the whole profile. }
@@ -154,9 +154,6 @@ type
         procedure AddPoint(var Points: TTitlePointsSet; XValue, YValue: double);
 
     protected
-        { Indicates that specimen positions were assigned automatically.
-          That is at each point different from background. }
-        FCurvePositionsAssignedAutomatically: boolean;
         FDoneDisabled: boolean;
 
         { These methods are executed in the separate thread. }
@@ -245,13 +242,12 @@ type
         { Calculates profile containing differences between calculated and experimental data.
           In the calculation all curves are included. Will not work properly if curves are overlapped. }
         procedure CreateDeltaProfile;
-        procedure CreateResultedCurvesList;
-        { Collects resulting set of curve positions. Points should not be collected from subtasks because
-          in this case part of points can be missed. This can confise the user. }
-        // procedure CreateResultedCurvePositions;
+        procedure FillCurvesList;
+        { Collects resulting set of curve positions. }
+        procedure CreateResultedCurvePositions;
         { Iterates through list of curves and creates common list of parameters
           of all curves complementing them with calculated parameters. }
-        procedure CreateCurveListAlg;
+        procedure FillCurveParameterList;
         { Prepares intermediate results for user. }
         procedure GoToReadyForFit;
 
@@ -578,10 +574,10 @@ begin
 
     try
         Assert(Assigned(ACurvePositions));
-        Assert(Assigned(FCurveList));
+        Assert(Assigned(FCurveParameterList));
 
         FCurvePositions.Clear;
-        FCurveList.Clear;
+        FCurveParameterList.Clear;
 
         for i := 0 to ACurvePositions.PointsCount - 1 do
             AddPoint(FCurvePositions, ACurvePositions.PointXCoord[i],
@@ -629,10 +625,10 @@ begin
 
     try
         Assert(Assigned(ARFactorBounds));
-        Assert(Assigned(FCurveList));
+        Assert(Assigned(FCurveParameterList));
 
         FRFactorBounds.Clear;
-        FCurveList.Clear;
+        FCurveParameterList.Clear;
 
         for i := 0 to ARFactorBounds.PointsCount - 1 do
             AddPoint(FRFactorBounds, ARFactorBounds.PointXCoord[i],
@@ -700,8 +696,8 @@ begin
     FRFactorBounds  := TTitlePointsSet.Create(nil);
     // elementy v eti spiski d. dobavlyat'sya sinhronno
     FCurvePositions := TTitlePointsSet.Create(nil);
-    FCurveList      := TMSCRCurveList.Create;
-    FCurveList.FWaveLength := WaveLength;
+    FCurveParameterList := TMSCRCurveList.Create;
+    FCurveParameterList.FWaveLength := WaveLength;
     FCurvesList     := TSelfCopiedCompList.Create;
 
     SetState(ProfileWaiting);
@@ -1046,7 +1042,6 @@ begin
     // vse tochki pikov vybirayutsya v kachestve tochek privyazki krivyh
     // TODO: use special value of TExtremumMode and generalize algorithm.
     FCurvePositions      := ComputeCurvePositionsActual(False);
-    FCurvePositionsAssignedAutomatically := True;
 end;
 
 procedure TFitService.ComputeCurvePositionsAlg;
@@ -1807,7 +1802,7 @@ var
 
 begin
     Assert(Assigned(Points));
-    Assert(Assigned(FCurveList));
+    Assert(Assigned(FCurveParameterList));
     Integral := IntegrateWithBoundaries(Points, StartPointIndex, StopPointIndex);
 
     CurveParameters := Curve_parameters(Points.Parameters.GetCopy);
@@ -1818,7 +1813,7 @@ begin
         AddNewParameter(FinishPosName, Points.PointXCoord[StopPointIndex]);
         AddNewParameter('Integral', Integral);
 
-        FCurveList.Add(CurveParameters);
+        FCurveParameterList.Add(CurveParameters);
 
     except
         CurveParameters.Free;
@@ -1913,23 +1908,11 @@ begin
             // vyzyvatsya v osnovnom potoke servera,
             // t.e. v tom zhe potoke, chto i ServerStub,
             // poetomu mozhno ispuskat' te zhe isklyucheniya
-            CreateResultedCurvesList;
-            // tochki privyazki ne dolzhny sobirat'sya iz podzadach,
-            // tak kak pri etom budut propadat' tochki ne voschedschie
-            // v podzadachi, a eto mozhet ozadachivat' pol'zovatelya
-            // CreateResultedCurvePositions;
+            FillCurvesList;
+            FillCurveParameterList;
+            CreateResultedCurvePositions;
             CreateResultedProfile;
             CreateDeltaProfile;
-            CreateCurveListAlg;
-
-            if FCurvePositionsAssignedAutomatically then
-            begin
-                // esli tochki privyazki byli naydeny avtomaticheski,
-                // to ih pokazyvat' ne nuzhno, t.k. eto vse tochki
-                // otlichnye ot fona
-                FCurvePositions.Clear;
-                FCurvePositionsAssignedAutomatically := False;
-            end;
 
             FState   := FSavedState; // vossta. sost. predshestvovashee
             // vhodu v AsyncOperation
@@ -1975,7 +1958,7 @@ begin
     begin
         { These calls are necessary for animation mode. }
         CreateResultedProfile;
-        CreateResultedCurvesList;
+        FillCurvesList;
         FitProxy.ShowCurMin(FCurrentMinimum);
     end;
 {$ENDIF}
@@ -2152,7 +2135,7 @@ end;
 function TFitService.GetCurveList: TMSCRCurveList;
 begin
     // vozvraschaem chto est' bez proverki
-    Result := TMSCRCurveList(FCurveList.GetCopy);
+    Result := TMSCRCurveList(FCurveParameterList.GetCopy);
 end;
 
 procedure TFitService.CreateResultedProfile;
@@ -2193,31 +2176,27 @@ begin
     end;
 end;
 
-   // tochki privyazki ne dolzhny sobirat'sya iz podzadach,
-   // tak kak pri etom budut propadat' tochki ne voschedschie
-   // v podzadachi, a eto mozhet ozadachivat' pol'zovatelya
-(*
-  procedure TFitService.CreateResultedCurvePositions;
-  var i, j: LongInt;
-  FT: TFitTask;
-  PS: TPointsSet;
-  begin
-  //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
-  Assert(Assigned(TaskList));
-  Assert(Assigned(CurvePositions));
+procedure TFitService.CreateResultedCurvePositions;
+var
+    i, j: LongInt;
+    FitTask: TFitTask;
+    PointsSet: TPointsSet;
+begin
+    Assert(Assigned(FTaskList));
+    Assert(Assigned(FCurvePositions));
 
-  CurvePositions.Clear;
+    FCurvePositions.Clear;
 
-  for i := 0 to TaskList.Count - 1 do
-  begin
-  FT := TFitTask(TaskList.Items[i]);
-  PS := FT.GetCurvePositions;
-  Assert(Assigned(PS));
-  for j := 0 to PS.PointsCount - 1 do
-  CurvePositions.AddNewPoint(PS.PointXCoord[j], PS.PointYCoord[j]);
-  end;
-  end;
-*)
+    for i := 0 to FTaskList.Count - 1 do
+    begin
+        FitTask := TFitTask(FTaskList.Items[i]);
+        PointsSet := FitTask.GetCurvePositions;
+        Assert(Assigned(PointsSet));
+
+        for j := 0 to PointsSet.PointsCount - 1 do
+            FCurvePositions.AddNewPoint(PointsSet.PointXCoord[j], PointsSet.PointYCoord[j]);
+    end;
+end;
 
 procedure TFitService.CreateDeltaProfile;
 var
@@ -2261,7 +2240,7 @@ begin
     end;
 end;
 
-procedure TFitService.CreateResultedCurvesList;
+procedure TFitService.FillCurvesList;
 var
     i, j, k:   longint;
     FitTask:   TFitTask;
@@ -2312,7 +2291,7 @@ begin
             Assert(Assigned(FBackgroundPoints));
             Assert(Assigned(FRFactorBounds));
             Assert(Assigned(FCurvePositions));
-            Assert(Assigned(FCurveList));
+            Assert(Assigned(FCurveParameterList));
             // chtoby mozhno bylo dobavlyat' tochki tablichno bez vhoda
             // v spets. rezhim
             FExpProfile.Clear;
@@ -2320,7 +2299,7 @@ begin
             FBackgroundPoints.Clear;
             FRFactorBounds.Clear;
             FCurvePositions.Clear;
-            FCurveList.Clear;
+            FCurveParameterList.Clear;
             FCurvesList.Clear;
 
             FSelectedArea.Free;
@@ -2382,9 +2361,9 @@ end;
 
 procedure TFitService.SetWaveLength(AWaveLength: double);
 begin
-    Assert(Assigned(FCurveList));
+    Assert(Assigned(FCurveParameterList));
     FWaveLength := AWaveLength;
-    FCurveList.FWaveLength := WaveLength;
+    FCurveParameterList.FWaveLength := WaveLength;
 end;
 
 function TFitService.GetWaveLength: double;
@@ -2429,7 +2408,7 @@ begin
     // TODO: mozhno optimizirovat' razbiv na nesk. funktsiy
     // i vyzyvaya ComputeCurvePositionsActual tol'ko odin raz
 
-    // set of curve positions selected by user is saved if given
+    // Set of curve positions selected by user is saved if provided.
     // https://action.mindjet.com/task/14588987
     // https://github.com/dvmorozov/fit/issues/12
     if FCurvePositions.PointsCount = 0 then
@@ -2494,10 +2473,8 @@ begin
     Assert(Assigned(Data));
     Data.Sort;
 
-    FRFactorBounds.Sort; // !!! tochki, ogranichivayuschie intervaly m.b.
-    // peredany izvne, poetomu sortirovka ne
-    // pomeshaet !!!
-    FCurvePositions.Sort; // !!! to zhe samoe !!!
+    FRFactorBounds.Sort;
+    FCurvePositions.Sort;
 
     FTaskList.Free;
     FTaskList := nil;
@@ -2638,20 +2615,20 @@ begin
         // rabotaet ne optimal'no, no podhodit dlya
         // povtornoy initsializatsii pri dobavlenii /
         // udalenii tochek privyazki ekzemplyarov patterna
-        FT.RecreateCurves(FCurveList);
+        FT.RecreateCurves(FCurveParameterList);
         FT.ComputeProfile;
     end;
 end;
 
-procedure TFitService.CreateCurveListAlg;
+procedure TFitService.FillCurveParameterList;
 var
     NS:   TCurvePointsSet;
     StartPointIndex, StopPointIndex: longint;
     i, j: longint;
 begin
     Assert(Assigned(FCurvesList));
-    Assert(Assigned(FCurveList));
-    FCurveList.Clear;
+    Assert(Assigned(FCurveParameterList));
+    FCurveParameterList.Clear;
 
     for i := 0 to FCurvesList.Count - 1 do
     begin
@@ -2689,7 +2666,7 @@ begin
         raise EUserException.Create(InadmissibleServerState + CRLF +
             StillNotDone);
     try
-        CreateCurveListAlg;
+        FillCurveParameterList;
     except
         SetState(ProfileWaiting);
         raise;
@@ -3020,14 +2997,11 @@ begin
         CreateTasks; // !!! sozdayutsya vremenno !!!
         InitTasks;
 
-        CreateResultedCurvesList;
-        // tochki privyazki ne dolzhny sobirat'sya iz podzadach,
-        // tak kak pri etom budut propadat' tochki ne voschedschie
-        // v podzadachi, a eto mozhet ozadachivat' pol'zovatelya
-        // CreateResultedCurvePositions;
+        FillCurvesList;
+        CreateResultedCurvePositions;
         CreateResultedProfile;
         CreateDeltaProfile;
-        CreateCurveListAlg;
+        FillCurveParameterList;
 
         SetState(ReadyForFit); // !!! udalyaet podzadachi !!!
     end;

@@ -404,7 +404,7 @@ type
     //procedure AddDummyCurve;
     //procedure DeleteDummyCurve;
     procedure ReadUserCurves;
-    procedure WriteUserCurve(ct: Curve_type);
+    procedure WriteUserCurve(CurveType: Curve_type);
     { Creates all menu items corresponding to user defined curves. }
     procedure CreateUserCurveMenus;
     { Adds menu item corresponding to user defined curve. }
@@ -507,11 +507,11 @@ var LB: TCheckListBox;
     Color: TColor;
     Square: TRect;
 begin
+    Assert(Assigned(Control));
+
     TS := TTASerie(Chart.GetSerie(Index));    //  otsutstvie serii s dannym
                                               //  indeksom est' nedopustimoe
                                               //  sostoyanie => d.b. isklyuchenie
-
-    Assert(Assigned(Control));
     LB := TCheckListBox(Control);
     Size := ARect.Bottom - ARect.Top;
     Color := LB.Canvas.Brush.Color;
@@ -619,6 +619,7 @@ procedure TFormMain.LoadDataFile(FileName: string);
 begin
     Assert(Assigned(FitClientApp_));
     Assert(Assigned(FitClientApp_.FitClient));
+
     //  v sluchae oshibki zagruzki d. vybrasyvat'sya isklyuchenie
     FitClientApp_.FitClient.LoadDataSet(FileName);
     Caption := ApplicationProperties.Title +
@@ -682,6 +683,7 @@ var CurveTypeIterator: ICurveTypeIterator;
 begin
     CurveTypeIterator := TCurveTypesSingleton.CreateCurveTypeIterator;
     CurveTypeSelector := TCurveTypesSingleton.CreateCurveTypeSelector;
+
     Assert(Assigned(CurveTypeIterator));
     Assert(Assigned(CurveTypeSelector));
 
@@ -749,12 +751,14 @@ end;
 procedure TFormMain.ActionAnimationModeExecute(Sender: TObject);
 begin
     Assert(Assigned(FFitViewer));
+
     FFitViewer.SetAnimationMode(not FFitViewer.GetAnimationMode);
 end;
 
 procedure TFormMain.ActionAnimationModeUpdate(Sender: TObject);
 begin
     Assert(Assigned(FFitViewer));
+
     ActionAnimationMode.Checked := FFitViewer.GetAnimationMode;
 end;
 
@@ -774,6 +778,7 @@ procedure TFormMain.ActionEnableBackgroundVariationExecute(Sender: TObject);
 begin
     Assert(Assigned(FitClientApp_));
     Assert(Assigned(FitClientApp_.FitClient));
+
     FitClientApp_.FitClient.BackgroundVariationEnabled :=
         not FitClientApp_.FitClient.BackgroundVariationEnabled;
     ActionEnableBackgroundVariationUpdate(Sender);
@@ -783,13 +788,16 @@ procedure TFormMain.ActionEnableBackgroundVariationUpdate(Sender: TObject);
 begin
     Assert(Assigned(FitClientApp_));
     Assert(Assigned(FitClientApp_.FitClient));
-    ActionEnableBackgroundVariation.Checked := FitClientApp_.FitClient.BackgroundVariationEnabled;
+
+    ActionEnableBackgroundVariation.Checked :=
+        FitClientApp_.FitClient.BackgroundVariationEnabled;
 end;
 
 procedure TFormMain.ActionEnableCurveScalingExecute(Sender: TObject);
 begin
     Assert(Assigned(FitClientApp_));
     Assert(Assigned(FitClientApp_.FitClient));
+
     FitClientApp_.FitClient.CurveScalingEnabled :=
         not FitClientApp_.FitClient.CurveScalingEnabled;
     ActionEnableCurveScalingUpdate(Sender);
@@ -799,6 +807,7 @@ procedure TFormMain.ActionEnableCurveScalingUpdate(Sender: TObject);
 begin
     Assert(Assigned(FitClientApp_));
     Assert(Assigned(FitClientApp_.FitClient));
+
     ActionEnableCurveScaling.Checked := FitClientApp_.FitClient.CurveScalingEnabled;
 end;
 
@@ -806,6 +815,7 @@ procedure TFormMain.ActionMinimizeDifferenceExecute(Sender: TObject);
 begin
     Assert(Assigned(FitClientApp_));
     Assert(Assigned(FitClientApp_.FitClient));
+
     ShowHint(HintMain);
     MenuSelectCurvePositionsManually.Checked := False;
     FitClientApp_.FitClient.MinimizeDifference;
@@ -819,6 +829,7 @@ procedure TFormMain.ActionMinimizeNumberOfCurvesExecute(Sender: TObject);
 begin
     Assert(Assigned(FitClientApp_));
     Assert(Assigned(FitClientApp_.FitClient));
+
     ShowHint(HintMain);
     MenuSelectCurvePositionsManually.Checked := False;
     FitClientApp_.FitClient.MinimizeNumberOfCurves;
@@ -832,6 +843,7 @@ procedure TFormMain.ActionReloadDataExecute(Sender: TObject);
 begin
     Assert(Assigned(FitClientApp_));
     Assert(Assigned(FitClientApp_.FitClient));
+
     FitClientApp_.FitClient.Reload;
     // chtoby proshlo obnovlenie grafika i Chart.XGraphMax
     // i dr. imeli pravil'nye znacheniya
@@ -846,6 +858,7 @@ procedure TFormMain.ActionRemoveBackgroundPointsExecute(Sender: TObject);
 begin
     Assert(Assigned(FitClientApp_));
     Assert(Assigned(FitClientApp_.FitClient));
+
     FitClientApp_.FitClient.RemoveBackgroundPoints;
     FitClientApp_.FitClient.SelectionMode := ModeSelectNothing;
 end;
@@ -854,6 +867,7 @@ procedure TFormMain.ActionRemoveRFactorBoundsExecute(Sender: TObject);
 begin
     Assert(Assigned(FitClientApp_));
     Assert(Assigned(FitClientApp_.FitClient));
+
     FitClientApp_.FitClient.RemoveRFactorBounds;
     FitClientApp_.FitClient.SelectionMode := ModeSelectNothing;
 end;
@@ -862,6 +876,7 @@ procedure TFormMain.ActionRemoveCurvePositionsExecute(Sender: TObject);
 begin
     Assert(Assigned(FitClientApp_));
     Assert(Assigned(FitClientApp_.FitClient));
+
     FitClientApp_.FitClient.RemoveCurvePositions;
     FitClientApp_.FitClient.SelectionMode := ModeSelectNothing;
 end;
@@ -870,6 +885,7 @@ procedure TFormMain.ActionSubtractBackgroundAutomaticallyExecute(Sender: TObject
 begin
     Assert(Assigned(FitClientApp_));
     Assert(Assigned(FitClientApp_.FitClient));
+
     FitClientApp_.FitClient.SelectionMode := ModeSelectNothing;
     SubtractBackground(True);
 end;
@@ -878,6 +894,7 @@ procedure TFormMain.ActionSubtractBackgroundBySelectedPointsExecute(Sender: TObj
 begin
     Assert(Assigned(FitClientApp_));
     Assert(Assigned(FitClientApp_.FitClient));
+
     if (FitClientApp_.FitClient.GetBackgroundPoints = nil) or
        (FitClientApp_.FitClient.GetBackgroundPoints.PointsCount < 2) then
        // zdes' eto dopustimaya oshibka
@@ -912,6 +929,7 @@ var SP: TNeutronPointsSet;
 begin
     Assert(Assigned(FitClientApp_));
     Assert(Assigned(FitClientApp_.FitClient));
+
     SP := FitClientApp_.FitClient.GetSelectedPoints;
     if (SP = nil) or (SP.PointsCount <> 2) then
     begin
@@ -945,6 +963,7 @@ begin
     Assert(Assigned(FitClientApp_));
     Assert(Assigned(FitClientApp_.FitClient));
     Assert(Assigned(FFitViewer));
+
     if not MenuSelectIntervalBounds.Checked then
     begin
         FActiveNumber := FFitViewer.GetActiveCurveIndex;
@@ -979,6 +998,7 @@ begin
     Assert(Assigned(FitClientApp_));
     Assert(Assigned(FitClientApp_.FitClient));
     Assert(Assigned(FFitViewer));
+
     if not MenuBackground.Checked then
     begin
         FActiveNumber := FFitViewer.GetActiveCurveIndex;
@@ -994,6 +1014,7 @@ begin
     Assert(Assigned(FitClientApp_));
     Assert(Assigned(FitClientApp_.FitClient));
     Assert(Assigned(FFitViewer));
+
     if not MenuSelectCharacteristicPoints.Checked then
     begin
         FActiveNumber := FFitViewer.GetActiveCurveIndex;
@@ -1010,6 +1031,7 @@ begin
     Assert(Assigned(FitClientApp_));
     Assert(Assigned(FitClientApp_.FitClient));
     Assert(Assigned(FFitViewer));
+
     if not MenuSelectCurveBounds.Checked then
     begin
         FActiveNumber := FFitViewer.GetActiveCurveIndex;
@@ -1050,8 +1072,10 @@ var
     NamedPointsSetClass: TNamedPointsSetClass;
 begin
     Assert(Assigned(Sender));
+
     CurveTypeIterator := TCurveTypesSingleton.CreateCurveTypeIterator;
     CurveTypeSelector := TCurveTypesSingleton.CreateCurveTypeSelector;
+
     Assert(Assigned(CurveTypeIterator));
     Assert(Assigned(CurveTypeSelector));
 
@@ -1059,6 +1083,7 @@ begin
     begin
         NamedPointsSetClass := NamedPointsSetClasses[i];
         Assert(Assigned(NamedPointsSetClass));
+
         if TMenuItem(Sender).Tag =
             CurveTypeIterator.GetCurveTypeTag(NamedPointsSetClass.GetCurveTypeId) then
         begin
@@ -1085,6 +1110,7 @@ begin
 {$IFNDEF FIT}
             Assert(Assigned(FitClientApp_));
             Assert(Assigned(FitClientApp_.FitClient));
+
             FitClientApp_.FitClient.CurveTypeId := NamedPointsSetClass.GetCurveTypeId_;
 {$ENDIF}
             CurveTypeSelector.SelectCurveType(NamedPointsSetClass.GetCurveTypeId);
@@ -1104,6 +1130,7 @@ procedure TFormMain.ActionSelectEntireProfileExecute(Sender: TObject);
 begin
     Assert(Assigned(FitClientApp_));
     Assert(Assigned(FitClientApp_.FitClient));
+
     FitClientApp_.FitClient.SelectEntireProfile;
     ShowHint(HintMain);
     // chtoby proshlo obnovlenie grafika i Chart.XGraphMax
@@ -1119,6 +1146,7 @@ procedure TFormMain.ActionSelectAllPointsAsCurvePositionsExecute(Sender: TObject
 begin
     Assert(Assigned(FitClientApp_));
     Assert(Assigned(FitClientApp_.FitClient));
+
     FitClientApp_.FitClient.SelectAllPointsAsCurvePositions;
 end;
 
@@ -1126,6 +1154,7 @@ procedure TFormMain.ActionComputCurvePositionsExecute(Sender: TObject);
 begin
     Assert(Assigned(FitClientApp_));
     Assert(Assigned(FitClientApp_.FitClient));
+
     FitClientApp_.FitClient.ComputeCurvePositions;
 end;
 
@@ -1151,6 +1180,7 @@ begin
     Assert(Assigned(FitClientApp_));
     Assert(Assigned(FitClientApp_.FitClient));
     Assert(Assigned(FFitViewer));
+
     if not MenuRFactorIntervals.Checked then
     begin
         FActiveNumber := FFitViewer.GetActiveCurveIndex;
@@ -1166,6 +1196,7 @@ begin
     Assert(Assigned(FitClientApp_));
     Assert(Assigned(FitClientApp_.FitClient));
     Assert(Assigned(FFitViewer));
+
     if not MenuCurvePositions.Checked then
     begin
         FActiveNumber := FFitViewer.GetActiveCurveIndex;
@@ -1181,6 +1212,7 @@ begin
     Assert(Assigned(FitClientApp_));
     Assert(Assigned(FitClientApp_.FitClient));
     Assert(Assigned(SetMaximumRFactorDlg));
+
     SetMaximumRFactorDlg.FValue := FitClientApp_.FitClient.MaxRFactor;
     if SetMaximumRFactorDlg.ShowModal = mrOk then
         FitClientApp_.FitClient.MaxRFactor := SetMaximumRFactorDlg.FValue;
@@ -1191,6 +1223,7 @@ begin
     Assert(Assigned(FitClientApp_));
     Assert(Assigned(FitClientApp_.FitClient));
     Assert(Assigned(InputBackFactorDlg));
+
     InputBackFactorDlg.FValue := FitClientApp_.FitClient.BackFactor;
     if InputBackFactorDlg.ShowModal = mrOk then
         FitClientApp_.FitClient.BackFactor := InputBackFactorDlg.FValue;
@@ -1208,12 +1241,14 @@ procedure TFormMain.ActionStopFitExecute(Sender: TObject);
 begin
     Assert(Assigned(FitClientApp_));
     Assert(Assigned(FitClientApp_.FitClient));
+
     FitClientApp_.FitClient.StopAsyncOper;
 end;
 
 procedure TFormMain.ActionViewMarkersExecute(Sender: TObject);
 begin
     Assert(Assigned(FFitViewer));
+
     MenuViewMarkers.Checked := not MenuViewMarkers.Checked;
     FFitViewer.SetViewMarkers(MenuViewMarkers.Checked);
 end;
@@ -1237,11 +1272,14 @@ begin
     begin
         Assert(ColCount >= 2);
         Assert(RowCount >= 1);
+
         XValue := StrToFloatDef(Cells[0, Row], 0);
         YValue := StrToFloatDef(Cells[1, Row], 0);
     end;
+
     Assert(Assigned(FitClientApp_));
     Assert(Assigned(FitClientApp_.FitClient));
+
     FitClientApp_.FitClient.AddPointToCurvePositions(XValue, YValue);
 end;
 
@@ -1254,11 +1292,14 @@ begin
     begin
         Assert(ColCount >= 2);
         Assert(RowCount >= 1);
+
         XValue := StrToFloatDef(Cells[0, Row], 0);
         YValue := StrToFloatDef(Cells[1, Row], 0);
     end;
+
     Assert(Assigned(FitClientApp_));
     Assert(Assigned(FitClientApp_.FitClient));
+
     FitClientApp_.FitClient.AddPointToRFactorBounds(XValue, YValue);
 end;
 
@@ -1271,11 +1312,14 @@ begin
     begin
         Assert(ColCount >= 2);
         Assert(RowCount >= 1);
+
         XValue := StrToFloatDef(Cells[0, Row], 0);
         YValue := StrToFloatDef(Cells[1, Row], 0);
     end;
+
     Assert(Assigned(FitClientApp_));
     Assert(Assigned(FitClientApp_.FitClient));
+
     FitClientApp_.FitClient.AddPointToBackground(XValue, YValue);
 end;
 
@@ -1295,8 +1339,8 @@ var PrevXValue, PrevYValue, NewXValue, NewYValue: Double;
 begin
     //  vvod vruchnuyu tochek fona poka nevozmozhen
     Assert(Assigned(Sender));
-    if Sender = GridBackground then Exit;
 
+    if Sender = GridBackground then Exit;
     try
         //  !!! pochemu-to vyzyvaetsya po tri raza,
         //  poetomu nuzhno ispol'zovat' flag !!!
@@ -1305,6 +1349,7 @@ begin
             begin
                 Assert(ColCount >= 2);
                 Assert(RowCount >= 1);
+
                 FEditDone := True;
                 if Col = 0 then
                 begin
@@ -1341,6 +1386,7 @@ begin
 
                     Assert(Assigned(FitClientApp_));
                     Assert(Assigned(FitClientApp_.FitClient));
+
                     if Sender = GridData then
                         FitClientApp_.FitClient.ReplacePointInProfile(
                             PrevXValue, PrevYValue, NewXValue, NewYValue
@@ -1413,6 +1459,7 @@ begin
     begin
         Assert(ColCount >= 2);
         Assert(RowCount >= 1);
+
         FSavedPos := Cells[0, Row];
         FSavedAmp := Cells[1, Row];
     end;
@@ -1432,6 +1479,9 @@ begin
     FFitViewer.Clear(Self);
 
     FActiveNumber := -1;
+
+    Assert(Assigned(FitClientApp_));
+    Assert(Assigned(FitClientApp_.FitClient));
 
     FitClientApp_.FitClient.OnAsyncOperationFinished := AsyncOperationFinished;
 
@@ -1512,6 +1562,10 @@ procedure TFormMain.SubtractBackground(Auto: Boolean);
 begin
     ShowHint(HintMain);
     MenuBackground.Checked := False;
+
+    Assert(Assigned(FitClientApp_));
+    Assert(Assigned(FitClientApp_.FitClient));
+
     FitClientApp_.FitClient.SubtractBackground(Auto);
 end;
 
@@ -1595,14 +1649,16 @@ end;
 
 procedure TFormMain.OnChartClick;
 var XValue, YValue: Double;
-    NS: TPointsSet;
+    PointsSet: TPointsSet;
 {$ifdef windows}
 //    BE: BalloonException;
     Handle: HWND;
 {$endif}
 begin
     Assert(Assigned(FitClientApp_));
+    Assert(Assigned(FitClientApp_.FitClient));
     Assert(Assigned(FFitViewer));
+
     try
         //  !!! esli m-u dvumya klikami ne bylo dvizheniya myshi i
         //  ChartDrawReticule ne vyzyvalas', to CurSerieIndex i ValueIndex
@@ -1630,10 +1686,10 @@ begin
 
                     ModeSelectIntervalBounds: begin
                         // vybor tochek, ogranichivayuschih oblast'
-                        NS := FitClientApp_.FitClient.GetSelectedPoints;
-                        Assert(Assigned(NS));
+                        PointsSet := FitClientApp_.FitClient.GetSelectedPoints;
+                        Assert(Assigned(PointsSet));
 
-                        case NS.PointsCount of
+                        case PointsSet.PointsCount of
                             0: ShowHint(HintSecondFinish);
                             1: ShowHint(HintSelectProfileInterval);
                             2: Exit;    //  bol'she tochek ne dobavlyaem
@@ -1642,10 +1698,10 @@ begin
 
                     ModeSelectCharacteristicPoints: begin
                         // vybor tochek harakterizuyuschih pik
-                        NS := FitClientApp_.FitClient.GetSelectedPoints;
-                        Assert(Assigned(NS));
+                        PointsSet := FitClientApp_.FitClient.GetSelectedPoints;
+                        Assert(Assigned(PointsSet));
 
-                        case NS.PointsCount of
+                        case PointsSet.PointsCount of
                             0: ShowHint(HintSecondPeak);
                             1: ShowHint(HintThirdFinish);
                             2: ShowHint(HintMovePeak);
@@ -1655,10 +1711,10 @@ begin
 
                     ModeSelectCurveBounds: begin
                         // vybor tochek, ogranichivayuschih gaussian
-                        NS := FitClientApp_.FitClient.GetSelectedPoints;
-                        Assert(Assigned(NS));
+                        PointsSet := FitClientApp_.FitClient.GetSelectedPoints;
+                        Assert(Assigned(PointsSet));
 
-                        case NS.PointsCount of
+                        case PointsSet.PointsCount of
                             0: ShowHint(HintSecondFinish);
                             1: ShowHint(HintMovePeak);
                             2: Exit;
@@ -1667,36 +1723,36 @@ begin
 
                     ModeSelectBackground: begin
                         // vybor tochek fona
-                        NS := FitClientApp_.FitClient.GetBackgroundPoints;
-                        Assert(Assigned(NS));
+                        PointsSet := FitClientApp_.FitClient.GetBackgroundPoints;
+                        Assert(Assigned(PointsSet));
 
-                        if NS.PointsCount > 0 then ShowHint(HintNextBackPoint)
+                        if PointsSet.PointsCount > 0 then ShowHint(HintNextBackPoint)
                         else ShowHint(HintFirst);
                     end;
 
                     ModeSelectCurvePositions: begin
                         // vybor tochek nachal'nogo polozheniya gaussianov
-                        NS := FitClientApp_.FitClient.GetCurvePositions;
-                        Assert(Assigned(NS));
+                        PointsSet := FitClientApp_.FitClient.GetCurvePositions;
+                        Assert(Assigned(PointsSet));
 
-                        if NS.PointsCount > 0 then ShowHint(HintNextPoint)
+                        if PointsSet.PointsCount > 0 then ShowHint(HintNextPoint)
                         else ShowHint(HintFirst);
                     end;
 
                     ModeSelectRFactorBounds: begin
                         //  vybor granits pikov
-                        NS := FitClientApp_.FitClient.GetRFactorBounds;
-                        Assert(Assigned(NS));
+                        PointsSet := FitClientApp_.FitClient.GetRFactorBounds;
+                        Assert(Assigned(PointsSet));
 
-                        if Odd(NS.PointsCount) then ShowHint(HintNextPointOdd)
+                        if Odd(PointsSet.PointsCount) then ShowHint(HintNextPointOdd)
                         else ShowHint(HintNextPointEven);
                     end;
                 end;
 
-                NS := FFitViewer.GetPointsSet(FCurSerieIndex);
+                PointsSet := FFitViewer.GetPointsSet(FCurSerieIndex);
 
-                XValue := NS.PointXCoord[FValueIndex];
-                YValue := NS.PointYCoord[FValueIndex];
+                XValue := PointsSet.PointXCoord[FValueIndex];
+                YValue := PointsSet.PointYCoord[FValueIndex];
                 FitClientApp_.FitClient.AddPointToActive(XValue, YValue);
             end;
         end;
@@ -1932,7 +1988,7 @@ end;
 
 procedure TFormMain.CheckListBoxChanged;
 var i: LongInt;
-    TS: TTASerie;
+    Serie: TTASerie;
 begin
     with CheckListBoxLegend do
         for i := 0 to Items.Count - 1 do
@@ -1941,17 +1997,17 @@ begin
             begin
                 if Items.Objects[i] is TTASerie then
                 begin
-                    TS := TTASerie(Items.Objects[i]);
+                    Serie := TTASerie(Items.Objects[i]);
 
                     if Checked[i] then
                     begin
-                        TS.ShowLines := TS.InitShowLines;
-                        TS.ShowPoints := TS.InitShowPoints;
+                        Serie.ShowLines := Serie.InitShowLines;
+                        Serie.ShowPoints := Serie.InitShowPoints;
                     end
                     else
                     begin
-                        TS.ShowLines := False;
-                        TS.ShowPoints := False;
+                        Serie.ShowLines := False;
+                        Serie.ShowPoints := False;
                     end;
                 end;
             end;
@@ -1967,8 +2023,14 @@ end;
 procedure TFormMain.MenuSinThetaLambdaClick(Sender: TObject);
 var SaveDecimalSeparator: Char;
 begin
+    Assert(Assigned(FitClientApp_));
+    Assert(Assigned(FitClientApp_.FitClient));
+    Assert(Assigned(FFitViewer));
+
     if FitClientApp_.FitClient.GetWaveLength = 0 then
     begin
+        Assert(Assigned(InputWavelengthDlg));
+
         if InputWavelengthDlg.ShowModal = mrOk then
         begin
             SaveDecimalSeparator := DecimalSeparator;
@@ -1991,7 +2053,7 @@ begin
             MenuSinThetaLambda.Checked := True;
             MenuSinThetaLambda2.Checked := True;
         end;
-    end{if FitClientApp_.FitClient.GetWaveLength = 0 then...}
+    end {if FitClientApp_.FitClient.GetWaveLength = 0 then...}
     else
     begin
         FFitViewer.XCoordMode := XCM_SINTL;
@@ -2012,6 +2074,8 @@ end;
 
 procedure TFormMain.MenuThetaClick(Sender: TObject);
 begin
+    Assert(Assigned(FFitViewer));
+
     FFitViewer.XCoordMode := XCM_T;
     if Assigned(FCurveList) then
     begin
@@ -2028,6 +2092,8 @@ end;
 
 procedure TFormMain.MenuN2ThetaClick(Sender: TObject);
 begin
+    Assert(Assigned(FFitViewer));
+
     FFitViewer.XCoordMode := XCM_2T;
     if Assigned(FCurveList) then
     begin
@@ -2192,6 +2258,9 @@ procedure TFormMain.MenuSetWavelengthClick(Sender: TObject);
 begin
     if InputWavelengthDlg.ShowModal = mrOk then
     begin
+        Assert(Assigned(FitClientApp_));
+        Assert(Assigned(FitClientApp_.FitClient));
+
         FitClientApp_.FitClient.SetWaveLength(InputWavelengthDlg.FValue);
         FFitViewer.XCoordMode := XCM_SINTL;
         if Assigned(FCurveList) then
@@ -2208,8 +2277,11 @@ procedure TFormMain.SetSelectionMode(ASelectionMode: TSelMode);
 //  dlya predotvrascheniya mertsaniya menyu
 var SelBackVisCaption, SelSpecPosVisCaption,
     SelRFactorIntervalsVisCaption: string;
-    NS: TPointsSet;
+    PointsSet: TPointsSet;
 begin
+    Assert(Assigned(FitClientApp_));
+    Assert(Assigned(FitClientApp_.FitClient));
+
     MenuSelectDataInterval.Tag := MenuSelectDataInterval.Tag and $FFFFFFFE;
     MenuSelectIntervalBounds.Tag := MenuSelectIntervalBounds.Tag and $FFFFFFFD;
     MenuSelectCharacteristicPoints.Tag := MenuSelectCharacteristicPoints.Tag and $FFFFFFFD;
@@ -2237,9 +2309,10 @@ begin
         ModeSelectIntervalBounds:
             begin
                 MenuSelectIntervalBounds.Tag := MenuSelectIntervalBounds.Tag or 2;
-                NS := FitClientApp_.FitClient.GetSelectedPoints;
-                Assert(Assigned(NS));
-                if NS.PointsCount = 2 then
+                PointsSet := FitClientApp_.FitClient.GetSelectedPoints;
+                Assert(Assigned(PointsSet));
+
+                if PointsSet.PointsCount = 2 then
                     MenuSelectDataInterval.Tag := MenuSelectDataInterval.Tag or 1;
             end;
         ModeSelectCharacteristicPoints:
@@ -2249,9 +2322,10 @@ begin
             begin
                 MenuRemoveBackgroundPoints.Tag := MenuRemoveBackgroundPoints.Tag or 1;
                 MenuBackground.Tag := MenuBackground.Tag or 2;
-                NS := FitClientApp_.FitClient.GetBackgroundPoints;
-                Assert(Assigned(NS));
-                if NS.PointsCount > 0 then
+                PointsSet := FitClientApp_.FitClient.GetBackgroundPoints;
+                Assert(Assigned(PointsSet));
+
+                if PointsSet.PointsCount > 0 then
                     ActionSubtractBackgroundBySelectedPoints.Tag := ActionSubtractBackgroundBySelectedPoints.Tag or 1
                 else
                     ActionSubtractBackgroundBySelectedPoints.Tag := ActionSubtractBackgroundBySelectedPoints.Tag and $FFFFFFFE;
@@ -2279,6 +2353,9 @@ end;
 
 procedure TFormMain.SetAsyncState(State: TAsyncState);
 begin
+    Assert(Assigned(FitClientApp_));
+    Assert(Assigned(FitClientApp_.FitClient));
+
     case State of
         AsyncWorks:
         begin
@@ -2354,6 +2431,8 @@ procedure TFormMain.SetOpenState(State: TOpenState);
 var
     FitServerState: TFitServerState;
 begin
+    Assert(Assigned(FitClientApp_));
+    Assert(Assigned(FitClientApp_.FitClient));
     //  File
     ActionReloadData.Tag := ActionReloadData.Tag and $FFFFFFFE;
     ActionSaveModelAsText.Tag := ActionSaveModelAsText.Tag and $FFFFFFFE;
@@ -2537,6 +2616,9 @@ end;
 
 procedure TFormMain.ShowRFactor;
 begin
+    Assert(Assigned(FitClientApp_));
+    Assert(Assigned(FitClientApp_.FitClient));
+
     LabelRFactor.Caption := FitClientApp_.FitClient.GetRFactorStr;
     Application.ProcessMessages;
 end;
@@ -2545,6 +2627,9 @@ procedure TFormMain.ShowHint(const Hint: string);
 begin
     if csDestroying in ComponentState then Exit;    //  Otherwise sometimes
                                                     //  exception is thrown.
+
+    Assert(StatusBar.Panels.Count <> 0);
+
     StatusBar.Panels[1].Text := Hint;
     Application.ProcessMessages;
 
@@ -2576,6 +2661,8 @@ procedure TFormMain.CreateMenuItem(Pos: LongInt; ct: Curve_type;
     ParentMenu: TMenuItem; OnClick: TNotifyEvent);
 var mi: TMenuItem;
 begin
+    Assert(Assigned(ParentMenu));
+
     mi := TMenuItem.Create(ParentMenu);
     mi.Caption := ct.Name;
     mi.OnClick := OnClick;
@@ -2649,6 +2736,10 @@ procedure TFormMain.DeleteUserCurve(ct: Curve_type);
 
 var mi: TMenuItem;
 begin
+    Assert(Assigned(ct));
+    Assert(Assigned(FSettings));
+    Assert(Assigned(FSettings.Curve_types));
+
     DeleteFile(PChar(ct.FFileName));
     FSettings.Curve_types.Delete(FSettings.Curve_types.IndexOf(ct));
     //AddDummyCurve;
@@ -2667,6 +2758,9 @@ var i: LongInt;
     mi: TMenuItem;
     Tag: LongInt;
 begin
+    Assert(Assigned(FSettings));
+    Assert(Assigned(FSettings.Curve_types));
+
     mi := TMenuItem(Sender);
     Tag := mi.Tag;
     //  udalenie pol'zovatel'skogo tipa krivoy
@@ -2695,6 +2789,13 @@ begin
 {$IFDEF WINDOWS_SPECIFIC}
     CurveTypeSelector := TCurveTypesSingleton.CreateCurveTypeSelector;
 
+    Assert(Assigned(CurveTypeSelector));
+    Assert(Assigned(Sender));
+    Assert(Assigned(FSettings);
+    Assert(Assigned(FSettings.Curve_types);
+    Assert(Assigned(FitClientApp_);
+    Assert(Assigned(FitClientApp_.FitClient);
+
     mi := TMenuItem(Sender);
     Tag := mi.Tag;
     //  poisk pol'zovatel'skogo tipa krivoy
@@ -2721,9 +2822,13 @@ procedure TFormMain.CreateUserCurveMenus;
     { True is returned if menu items were added. }
     function AddItem(ParentMenu: TMenuItem;
         var ItemCount: LongInt; OnClick: TNotifyEvent): Boolean;
+
     var i: LongInt;
         ct: Curve_type;
     begin
+        Assert(Assigned(FSettings));
+        Assert(Assigned(FSettings.Curve_types));
+
         Result := False;
         for i := 0 to FSettings.Curve_types.Count - 1 do
         begin
@@ -2799,47 +2904,59 @@ begin
 end;
 
 procedure TFormMain.ReadUserCurves;
-var F: TSearchRec;
+var SearchRec: TSearchRec;
     Path, FileName: string;
     XMLConfig: TXMLConfig;
-    C: Curve_type;
+    CurveType: Curve_type;
 begin
+    Assert(Assigned(FSettings));
+    Assert(Assigned(FSettings.Curve_types));
+
     Path := GetConfigDir;
-    if FindFirst(Path + '*.cpr', faAnyFile, F) = 0 then
+    if FindFirst(Path + '*.cpr', faAnyFile, SearchRec) = 0 then
     begin
         repeat
-            FileName := GetConfigDir + F.Name;
+            FileName := GetConfigDir + SearchRec.Name;
             XMLConfig := TXMLConfig.Create(FileName);
             try
-                C := nil;   //  !!! obyazat. d.b. proinitsializirovano nil !!!
+                //  !!! obyazat. d.b. proinitsializirovano nil !!!
+                CurveType := nil;
                 ReadComponentFromXMLConfig(XMLConfig, 'Component',
-                    TComponent(C), OnFindComponentClass, nil);
-                C.FFileName := FileName;
-                FSettings.Curve_types.Add(C);
-            except
-                C.Free;
+                    TComponent(CurveType), OnFindComponentClass, nil);
+                try
+                    Assert(Assigned(CurveType));
+
+                    CurveType.FFileName := FileName;
+                    FSettings.Curve_types.Add(CurveType);
+                except
+                    CurveType.Free;
+                end;
+            finally
+                XMLConfig.Free;
             end;
-            XMLConfig.Free;
-        until FindNext(F) <> 0;
+        until FindNext(SearchRec) <> 0;
 {$ifdef windows}
-        FindClose(F.FindHandle);
+        FindClose(SearchRec.FindHandle);
 {$else}
         FindClose(F);
 {$endif}
     end;
 end;
 
-procedure TFormMain.WriteUserCurve(ct: Curve_type);
+procedure TFormMain.WriteUserCurve(CurveType: Curve_type);
 var XMLConfig: TXMLConfig;
 begin
-    ct.FFileName := GetConfigDir +
+    Assert(Assigned(CurveType));
+
+    CurveType.FFileName := GetConfigDir +
         IntToStr(QWord(TimeStampToMSecs(DateTimeToTimeStamp(Now)))) + '.cpr';
-    XMLConfig := TXMLConfig.Create(ct.FFileName);
+    XMLConfig := TXMLConfig.Create(CurveType.FFileName);
     try
-        WriteComponentToXMLConfig(XMLConfig, 'Component', ct);
+        WriteComponentToXMLConfig(XMLConfig, 'Component', CurveType);
         XMLConfig.Flush;
-    except end;
-    XMLConfig.Free;
+    finally
+        XMLConfig.Free;
+    end;
 end;
 {$ENDIF}
 
@@ -2852,13 +2969,16 @@ begin
     begin
         XMLConfig := TXMLConfig.Create(FileName);
         try
-            ReadComponentFromXMLConfig(XMLConfig, 'Component',
-                TComponent(FSettings), OnFindComponentClass, nil);
-        except
-            FSettings.Free; FSettings := nil;
-            FSettings := Settings_v1.Create(nil);
+            try
+                ReadComponentFromXMLConfig(XMLConfig, 'Component',
+                    TComponent(FSettings), OnFindComponentClass, nil);
+            except
+                FSettings.Free; FSettings := nil;
+                FSettings := Settings_v1.Create(nil);
+            end;
+        finally
+            XMLConfig.Free;
         end;
-        XMLConfig.Free;
     end;
     //  inache ostayutsya nastroyki po-umolchaniyu
 end;
@@ -2872,8 +2992,9 @@ begin
     try
         WriteComponentToXMLConfig(XMLConfig, 'Component', FSettings);
         XMLConfig.Flush;
-    except end;
-    XMLConfig.Free;
+    finally
+        XMLConfig.Free;
+    end;
 end;
 
 procedure TFormMain.OnException(Sender: TObject; E: Exception);

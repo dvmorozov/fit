@@ -41,7 +41,7 @@ type
         { Returns copy of list which owns its items. }
         function GetSharedCopy: TObject; virtual;
         procedure CopyParameters(Dest: TObject); virtual;
-
+        { Redefines methods as virtual to be used in descendant classes. }
         procedure Insert(Index: integer; Item: TComponent); virtual;
         function Add(Item: TComponent): integer; virtual;
         procedure Delete(Index: integer); virtual;

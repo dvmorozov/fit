@@ -116,11 +116,11 @@ function CreateXMLReader(ADoc: TDOMDocument; const Path: string;
 var
     p:      Pointer;
     Driver: TAbstractObjectReader;
-    DummyStream: TMemoryStream;
+    Stream: TMemoryStream;
 begin
-    DummyStream := TMemoryStream.Create;
+    Stream := TMemoryStream.Create;
     try
-        Result := TReader.Create(DummyStream, 256);
+        Result := TReader.Create(Stream, 256);
         DestroyDriver := False;
         // hack to set a write protected variable.
         // DestroyDriver := True; TReader will free it
@@ -129,7 +129,7 @@ begin
         Result.Driver.Free;
         TAbstractObjectReader(p^) := Driver;
     finally
-        DummyStream := nil;
+        Stream := nil;
     end;
 end;
 

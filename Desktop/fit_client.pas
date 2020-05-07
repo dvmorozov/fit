@@ -730,15 +730,15 @@ end;
 procedure TFitClient.SetCurvesListLambda;
 var
     i:  longint;
-    NS: TNeutronPointsSet;
+    PointsSet: TNeutronPointsSet;
 begin
     Assert(Assigned(FCurvesList));
 
     with FCurvesList do
         for i := 0 to FCurvesList.Count - 1 do
         begin
-            NS := TNeutronPointsSet(FCurvesList.Items[i]);
-            NS.WaveLength := FWaveLength;
+            PointsSet := TNeutronPointsSet(FCurvesList.Items[i]);
+            PointsSet.WaveLength := FWaveLength;
         end;
 end;
 
@@ -799,9 +799,10 @@ begin
             // ...i posle etogo otobrazit' ego zanovo
             Plot;
             Exit;
-        end// !!! dvuh tochek s odinakovymi X i raznymi Y vse ravno byt'
+        end;
+    // !!! dvuh tochek s odinakovymi X i raznymi Y vse ravno byt'
     // ne mozhet, poetomu proveryaetsya tol'ko koordinata X !!!
-    ;
+
     // tochka ne naydena - dobavlyaem novuyu
     Points.AddNewPoint(XValue, YValue);
     Plot;
@@ -1125,6 +1126,7 @@ end;
 procedure TFitClient.SubtractBackground(Auto: boolean);
 begin
     Assert(Assigned(FitService));
+
     if not Auto then
     begin
         Assert(Assigned(FBackgroundPoints));
@@ -1142,6 +1144,7 @@ end;
 procedure TFitClient.DoAllAutomatically;
 begin
     Assert(Assigned(FitService));
+
     FitService.DoAllAutomatically;
     FAsyncState := AsyncWorks;
 end;
@@ -1167,6 +1170,7 @@ end;
 procedure TFitClient.ComputeCurveBounds;
 begin
     Assert(Assigned(FitService));
+
     FitService.ComputeCurveBounds;
     FAsyncState := AsyncWorks;
 end;
@@ -1174,6 +1178,7 @@ end;
 procedure TFitClient.ComputeBackgroundPoints;
 begin
     Assert(Assigned(FitService));
+
     FitService.ComputeBackgroundPoints;
     FAsyncState := AsyncWorks;
 end;
@@ -1181,6 +1186,7 @@ end;
 procedure TFitClient.ComputeCurvePositions;
 begin
     Assert(Assigned(FitService));
+
     FitService.ComputeCurvePositions;
     FAsyncState := AsyncWorks;
 end;
@@ -1188,6 +1194,7 @@ end;
 procedure TFitClient.SelectAllPointsAsCurvePositions;
 begin
     Assert(Assigned(FitService));
+
     FitService.SelectAllPointsAsCurvePositions;
     FAsyncState := AsyncWorks;
 end;
@@ -1195,12 +1202,14 @@ end;
 procedure TFitClient.CreateCurveList;
 begin
     Assert(Assigned(FitService));
+
     FitService.CreateCurveList;
 end;
 
 procedure TFitClient.StopAsyncOper;
 begin
     Assert(Assigned(FitService));
+
     FitService.StopAsyncOper;
     //  izvlechenie dannyh zdes' delat' ne nuzhno,
     //  poskol'ku Done vyzyvatsya standartnym obrazom
@@ -1209,60 +1218,70 @@ end;
 function TFitClient.AsyncOper: boolean;
 begin
     Assert(Assigned(FitService));
+
     Result := FitService.AsyncOper;
 end;
 
 function TFitClient.GetCalcTimeStr: string;
 begin
     Assert(Assigned(FitService));
+
     Result := FitService.GetCalcTimeStr;
 end;
 
 function TFitClient.GetRFactorStr: string;
 begin
     Assert(Assigned(FitService));
+
     Result := FitService.GetRFactorStr;
 end;
 
 function TFitClient.GetMaxRFactor: double;
 begin
     Assert(Assigned(FitService));
+
     Result := FitService.GetMaxRFactor;
 end;
 
 procedure TFitClient.SetMaxRFactor(AMaxRFactor: double);
 begin
     Assert(Assigned(FitService));
+
     FitService.SetMaxRFactor(AMaxRFactor);
 end;
 
 function TFitClient.GetBackFactor: double;
 begin
     Assert(Assigned(FitService));
+
     Result := FitService.GetBackFactor;
 end;
 
 procedure TFitClient.SetBackFactor(ABackFactor: double);
 begin
     Assert(Assigned(FitService));
+
     FitService.SetBackFactor(ABackFactor);
 end;
 
 function TFitClient.GetCurveThresh: double;
 begin
     Assert(Assigned(FitService));
+
     Result := FitService.GetCurveThresh;
 end;
 
 procedure TFitClient.SetCurveThresh(ACurveThresh: double);
 begin
     Assert(Assigned(FitService));
+
     FitService.SetCurveThresh(ACurveThresh);
 end;
 
 function TFitClient.GetCurveType: TCurveTypeId;
 begin
     Assert(Assigned(FitService));
+
     Result := FitService.GetCurveType;
 end;
 
@@ -1270,6 +1289,7 @@ end;
 procedure TFitClient.SetCurveType(ACurveType: TCurveTypeId);
 begin
     Assert(Assigned(FitProxy));
+
     FitProxy.SetCurveType(ACurveType);
 end;
 
@@ -1278,24 +1298,28 @@ end;
 function TFitClient.GetBackgroundVariationEnabled: boolean;
 begin
     Assert(Assigned(FitService));
+
     Result := FitService.GetBackgroundVariationEnabled;
 end;
 
 procedure TFitClient.SetBackgroundVariationEnabled(AEnable: boolean);
 begin
     Assert(Assigned(FitService));
+
     FitService.SetBackgroundVariationEnabled(AEnable);
 end;
 
 function TFitClient.GetCurveScalingEnabled: boolean;
 begin
     Assert(Assigned(FitService));
+
     Result := FitService.GetCurveScalingEnabled;
 end;
 
 procedure TFitClient.SetCurveScalingEnabled(AEnabled: boolean);
 begin
     Assert(Assigned(FitService));
+
     FitService.SetCurveScalingEnabled(AEnabled);
 end;
 
@@ -1306,6 +1330,7 @@ procedure TFitClient.SetSpecialCurveParameters(ACurveExpr: string;
     );
 begin
     Assert(Assigned(FitService));
+
     FitService.SetSpecialCurveParameters(ACurveExpr, CP);
 end;
 

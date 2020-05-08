@@ -1,7 +1,7 @@
 object FormMain: TFormMain
-  Left = 354
+  Left = 415
   Height = 599
-  Top = 98
+  Top = 106
   Width = 1054
   HorzScrollBar.Page = 1191
   VertScrollBar.Page = 502
@@ -2145,6 +2145,7 @@ object FormMain: TFormMain
       Hint = 'Load experimental data from file'
       ImageIndex = 4
       OnExecute = ActionLoadProfileExecute
+      ShortCut = 113
     end
     object ActionComputeRFactorBounds: TAction
       Category = 'Model'
@@ -2203,11 +2204,13 @@ object FormMain: TFormMain
       Category = 'Fit'
       Caption = 'Minimize Number of Curves'
       OnExecute = ActionMinimizeNumberOfCurvesExecute
+      ShortCut = 115
     end
     object ActionMinimizeDifference: TAction
       Category = 'Fit'
       Caption = 'Minimize Difference'
       OnExecute = ActionMinimizeDifferenceExecute
+      ShortCut = 116
     end
     object ActionStopFit: TAction
       Category = 'Fit'

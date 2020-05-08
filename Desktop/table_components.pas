@@ -638,7 +638,8 @@ var
     Flag: boolean;
 begin
     Flag   := Count = 0;
-    Result := inherited Add(Item);  //  список уже не пуст !!!
+    Result := inherited Add(Item);
+    //  список уже не пуст !!!
     if FAreRowHeightsReady and not Flag then
         AddRowHeightItem;
     //  должна вызываться последней, чтобы проверка
@@ -688,7 +689,8 @@ var
     Flag: boolean;
 begin
     Flag   := Count = 0;
-    Result := inherited Add(Item);  //  список уже не пуст !!!
+    Result := inherited Add(Item);
+    //  список уже не пуст !!!
     if FAreColWidthsReady and not Flag then
         AddColWidthItem;
     //  должна вызываться последней, чтобы проверка

@@ -175,8 +175,9 @@ begin
         AClassName := (Reader.Driver as TXMLObjectReader).GetRootClassName(IsInherited);
         if IsInherited then
             // inherited is not supported by this simple function
-            //DebugLn('ReadComponentFromXMLConfig WARNING: "inherited" is not supported by this simple function');
-        ;
+            raise Exception.Create('ReadComponentFromXMLConfig: ' +
+                '"inherited" is not supported by this function');
+
         AClass := nil;
         //  poisk tipa klassa po imeni klassa
         OnFindComponentClass(nil, AClassName, AClass);

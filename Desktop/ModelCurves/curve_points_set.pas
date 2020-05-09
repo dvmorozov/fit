@@ -112,8 +112,8 @@ type
 
         { These methods are used to limit direct access to variable parameters. }
 
-        function MinimumStepAchieved(VariableIndex: longint): boolean;
-        procedure InitVariationStep(VariableIndex: longint);
+        function MinimumStepAchieved(Index: longint): boolean;
+        procedure InitVariationStep(Index: longint);
 
         { Return True if attributes with predefined semantics were assigned. }
 
@@ -181,23 +181,26 @@ begin
     TCurvePointsSet(Dest).FInitHash := FInitHash;
 end;
 
-function TCurvePointsSet.MinimumStepAchieved(VariableIndex: longint): boolean;
+function TCurvePointsSet.MinimumStepAchieved(Index: longint): boolean;
 begin
-    Assert((VariableIndex >= 0) and (VariableIndex < FVariableParameters.Count));
-    Result := TSpecialCurveParameter(FVariableParameters[VariableIndex]).MinimumStepAchieved;
+    Assert((Index >= 0) and (Index < FVariableParameters.Count));
+
+    Result := TSpecialCurveParameter(FVariableParameters[Index]).MinimumStepAchieved;
 end;
 
-procedure TCurvePointsSet.InitVariationStep(VariableIndex: longint);
+procedure TCurvePointsSet.InitVariationStep(Index: longint);
 begin
-    Assert((VariableIndex >= 0) and (VariableIndex < FVariableParameters.Count));
-    TSpecialCurveParameter(FVariableParameters[VariableIndex]).InitVariationStep;
+    Assert((Index >= 0) and (Index < FVariableParameters.Count));
+
+    TSpecialCurveParameter(FVariableParameters[Index]).InitVariationStep;
 end;
 
 function TCurvePointsSet.GetVariableValue(Index: longint): double;
 var
     Parameter: TSpecialCurveParameter;
 begin
-    Assert(index < GetVariableCount);
+    Assert((index >= 0) and (index < GetVariableCount));
+
     Parameter := TSpecialCurveParameter(FVariableParameters.Items[index]);
     Result    := Parameter.Value;
 end;
@@ -206,7 +209,8 @@ function TCurvePointsSet.GetVariationStep(Index: longint): double;
 var
     Parameter: TSpecialCurveParameter;
 begin
-    Assert(Index < GetVariableCount);
+    Assert((Index >= 0) and (Index < GetVariableCount));
+
     Parameter := TSpecialCurveParameter(FVariableParameters.Items[index]);
     Assert(not Parameter.VariationDisabled);
     Result := Parameter.VariationStep;
@@ -216,7 +220,8 @@ procedure TCurvePointsSet.SetVariableValue(Index: longint; Value: double);
 var
     Parameter: TSpecialCurveParameter;
 begin
-    Assert((Index < GetVariableCount) and (Index >= 0));
+    Assert((Index >= 0) and (Index < GetVariableCount));
+
     FRecalculate := True;
     Parameter    := TSpecialCurveParameter(FVariableParameters.Items[Index]);
     Parameter.Value := Value;
@@ -227,6 +232,7 @@ var
     Parameter: TSpecialCurveParameter;
 begin
     Assert((Index < GetVariableCount) and (Index >= 0));
+
     Parameter := TSpecialCurveParameter(FVariableParameters.Items[Index]);
     Assert(not Parameter.VariationDisabled);
     Parameter.VariationStep := AStep;
@@ -251,6 +257,7 @@ end;
 procedure TCurvePointsSet.Setx0(Value: double);
 begin
     Assert(Assigned(FPositionP));
+
     FRecalculate     := True;
     FPositionP.Value := Value;
 end;
@@ -258,6 +265,7 @@ end;
 procedure TCurvePointsSet.SetA(Value: double);
 begin
     Assert(Assigned(FAmplitudeP));
+
     FRecalculate      := True;
     FAmplitudeP.Value := Value;
 end;
@@ -275,6 +283,7 @@ end;
 function TCurvePointsSet.Getx0: double;
 begin
     Assert(Assigned(FPositionP));
+
     Result := FPositionP.Value;
 end;
 
@@ -287,6 +296,7 @@ end;
 function TCurvePointsSet.GetSigma: double;
 begin
     Assert(Assigned(FSigmaP));
+
     Result := FSigmaP.Value;
 end;
 
@@ -323,6 +333,7 @@ end;
 procedure TCurvePointsSet.SetSpecParamPtr(Parameter: TSpecialCurveParameter);
 begin
     Assert(Assigned(Parameter));
+
     if UpperCase(Parameter.Name) = 'SIGMA' then
         FSigmaP := TSigmaCurveParameter(Parameter);
 

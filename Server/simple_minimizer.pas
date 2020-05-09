@@ -144,7 +144,6 @@ begin
         Exit;
     FCurrentMinimum := OnGetFunc;
 
-    //??? vydavat' kod oshibki ili vybrasyvat' isklyuchenie
     Assert(Assigned(FDivideVariationStepBy2));
 
     //  beskonechnyy tsikl optimizatsii
@@ -235,8 +234,6 @@ var
     TotalMinimum: double;
     NewMinFound: boolean;
     DownCount: longint;
-
-    debug: longint;//???
 begin
     //  proverka prisoedineniya interfeysnyh funktsiy
     ErrorCode := IsReady;
@@ -248,8 +245,6 @@ begin
 
     Assert(Assigned(FMultiplyVariationStep));
 
-    debug := 0;
-
     //  beskonechnyy tsikl optimizatsii
     while (not FEndOfCalculation) and (not Terminated) do
     begin
@@ -257,7 +252,6 @@ begin
         //  tsikl optimizatsii po vsem parametram
         while (not OnEndOfCycle) and (not Terminated) do
         begin
-            Inc(debug);
             //  poluchenie shaga izmeneniya dlya ocherednogo parametra
             Step      := OnGetVariationStep;
             //  poluchenie znacheniya ocherednogo parametra
@@ -312,7 +306,8 @@ begin
 
             if NewMinFound then
             begin
-                OnComputeFunc; //  pereschet nuzhno delat', chtoby dopolnitel'nye dannye
+                OnComputeFunc;
+                //  pereschet nuzhno delat', chtoby dopolnitel'nye dannye
                 //  imeli znacheniya, sootvetstvuyuschie minimal'nomu znacheniyu
                 //  funktsii
                 FCurrentMinimum := OnGetFunc;
@@ -335,9 +330,8 @@ begin
                 //  shag uvelichivaetsya
                 Inc(DownCount);
                 if DownCount >= 10 then
-                    FMultiplyVariationStep(1.01)
+                    FMultiplyVariationStep(1.01);
                 //OutputDebugString(PChar('Parameter steps increased...'));
-                ;
             end
             else
             begin
@@ -352,7 +346,7 @@ begin
         end
         else
             Break;
-    end;{while (not FEndOfCalculation) and (not Terminated) do...}
+    end; {while (not FEndOfCalculation) and (not Terminated) do...}
 end;
 
 end.

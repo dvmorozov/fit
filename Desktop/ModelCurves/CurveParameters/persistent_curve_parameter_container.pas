@@ -50,12 +50,14 @@ end;
 function TPersistentCurveParameterContainer.GetName: string;
 begin
     Assert(Assigned(FSpecialCurveParameter));
+
     Result := FSpecialCurveParameter.Name;
 end;
 
 procedure TPersistentCurveParameterContainer.SetName(AName: string);
 begin
     Assert(Assigned(FSpecialCurveParameter));
+
     FSpecialCurveParameter.Name := AName;
 end;
 

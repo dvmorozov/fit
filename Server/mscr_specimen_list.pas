@@ -114,7 +114,10 @@ end;
 
 procedure TMSCRCurveList.CopyParameters(Dest: TObject);
 begin
+    Assert(Assigned(Dest));
+
     inherited;
+
     TMSCRCurveList(Dest).FWaveLength   := FWaveLength;
     TMSCRCurveList(Dest).FViewMode := FViewMode;
 end;

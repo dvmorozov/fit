@@ -61,6 +61,7 @@ begin
     if Assigned(Bounds) then
     begin
         Assert((Bounds.PointsCount mod 2) = 0);
+
         for i := 0 to (Bounds.PointsCount shr 1) - 1 do
             for j := Trunc(Bounds.PointXCoord[i shl 1]) to
                 Trunc(Bounds.PointXCoord[(i shl 1) + 1]) do

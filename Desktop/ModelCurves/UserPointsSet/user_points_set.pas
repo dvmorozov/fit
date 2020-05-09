@@ -97,6 +97,7 @@ begin
     Assert(Assigned(Parameters));
     Assert(Assigned(FVariableParameters));
     Assert(Assigned(FArgP));
+
     { Sets up value of argument. }
     P   := FArgP;
     P.Value := ArgValue;
@@ -127,10 +128,9 @@ begin
     end
     else
         for j := 0 to PointsCount - 1 do
-            PointYCoord[j] := CalcValue(PointXCoord[j])
+            PointYCoord[j] := CalcValue(PointXCoord[j]);
     //  poskol'ku vid krivoy ne izvesten, to optimizatsiya
     //  nevozmozhna - delaem polnyy pereschet
-    ;
 end;
 
 procedure TUserPointsSet.CopyParameters(const Dest: TObject);

@@ -456,10 +456,6 @@ const
     StillNotDone: string = 'The calculation still not accomplished.';
     // Raschet ne byl zapuschen
     CalcNotStarted: string = 'The calculation not started.';
-    CurveListNotReady: string = 'Curve list not ready.';
-    CurveParameterListNotReady: string = 'Curve parameter list not ready.';
-    InadmissibleCurveIndex: string = 'Inadmissible specimen index.';
-    InadmissibleParameterIndex: string = 'Inadmissible parameter index.';
     CRLF: string = #13#10;
 
 implementation
@@ -1002,9 +998,9 @@ begin
                     Result.AddNewPoint(RightX0, Data.PointYCoord[RightIndex]);
                 end
                 else
-                    Break// !!! dlya sravneniya d. ispol'zovat'sya <,
+                    Break;
+            // !!! dlya sravneniya d. ispol'zovat'sya <,
             // tak kak inache piki mogut smykat'sya !!!
-            ;
             // iskusstvennoe ushirenie pika vpravo
             (*
               if RightIndex + 10 > Data.PointsCount - 1 then
@@ -1118,8 +1114,8 @@ var
                 end
                 else
                 if not DerivativeChanged then
-                    PeakFound := False// ischem peregib vniz
-                ;
+                    PeakFound := False;
+                // ischem peregib vniz
                 PrevValue     := CurValue;
             end;
         end;
@@ -1180,6 +1176,7 @@ var
     Data: TPointsSet;
 begin
     Assert(Assigned(FCurvePositions));
+
     FCurvePositions.Clear;
 
     if FSelectedAreaMode then
@@ -1203,6 +1200,7 @@ begin
     // !!! spisok ne ochischaetsya, chtoby naydennye tochki dobavlyalis'
     // k tochkam vybrannym pol'zovatelem !!!
     Assert(Assigned(FRFactorBounds));
+
     Peaks := ComputeCurvePositionsActual(False);
     try
         Assert(Assigned(Peaks));
@@ -1219,6 +1217,7 @@ begin
         else
             Data := FExpProfile;
         Assert(Assigned(Data));
+
         Data.Sort;
         // iz Peaks, poluchennyh posle vyzova ComputeCurvePositionsActual,
         // isklyuchayutsya vse tochki, krome tochek ogranichivayuschih pik
@@ -1247,8 +1246,8 @@ begin
                     FRFactorBounds.AddNewPoint(X,
                         Data.PointYCoord[i - 1]);
                 First := False;
-            end// ne tochka pika
-        ;
+            end;
+            // ne tochka pika
         if First then
         begin
             // perebrali vse tochki, no pravoy granitsy ne naschli -
@@ -1294,6 +1293,7 @@ begin
         Data := FSelectedArea
     else
         Data := FExpProfile;
+
     Assert(Assigned(Data));
     Data.Sort;
 
@@ -1389,7 +1389,8 @@ begin
     try
         // iz AsyncOperation perehodit v prezhnee sostoyanie
         SetState(FSavedState);
-        FState := FSavedState; // trebuetsya pri perehode iz AsyncOperation
+        FState := FSavedState;
+        // trebuetsya pri perehode iz AsyncOperation
 {$IFDEF FIT}
         if (not FDoneDisabled) and Assigned(FitProxy) then
             FitProxy.ComputeBackgroundPointsDone;
@@ -1564,8 +1565,7 @@ end;
 
 function TFitService.GetCurveCount: longint;
 begin
-    if not Assigned(FCurvesList) then
-        raise EUserException.Create(CurveListNotReady);
+    Assert(Assigned(FCurvesList));
     Result := FCurvesList.Count;
 end;
 
@@ -1574,8 +1574,7 @@ var
     Count: longint;
 begin
     Count := GetCurveCount;
-    if (SpecIndex < 0) or (SpecIndex >= Count) then
-        raise EUserException.Create(InadmissibleCurveIndex);
+    Assert((SpecIndex >= 0) and (SpecIndex < Count));
 
     Result := TNamedPointsSet(TNamedPointsSet(
         FCurvesList.Items[SpecIndex]).GetCopy);
@@ -1587,10 +1586,8 @@ var
     CurveParameters: Curve_parameters;
 begin
     SpecParamList := GetCurveList;
-    if not Assigned(SpecParamList) then
-        raise EUserException.Create(CurveParameterListNotReady);
-    if (SpecIndex < 0) or (SpecIndex >= SpecParamList.Count) then
-        raise EUserException.Create(InadmissibleCurveIndex);
+    Assert(Assigned(SpecParamList));
+    Assert((SpecIndex >= 0) and (SpecIndex < SpecParamList.Count));
 
     CurveParameters := Curve_parameters(SpecParamList.Items[SpecIndex]);
     Result := CurveParameters.Params.Count;
@@ -1604,14 +1601,11 @@ var
     Parameter: TSpecialCurveParameter;
 begin
     SpecParamList := GetCurveList;
-    if not Assigned(SpecParamList) then
-        raise EUserException.Create(CurveParameterListNotReady);
-    if (SpecIndex < 0) or (SpecIndex >= SpecParamList.Count) then
-        raise EUserException.Create(InadmissibleCurveIndex);
+    Assert(Assigned(SpecParamList));
+    Assert((SpecIndex >= 0) and (SpecIndex < SpecParamList.Count));
 
     CurveParameters := Curve_parameters(SpecParamList.Items[SpecIndex]);
-    if (ParamIndex < 0) or (ParamIndex >= CurveParameters.Params.Count) then
-        raise EUserException.Create(InadmissibleParameterIndex);
+    Assert((ParamIndex >= 0) and (ParamIndex < CurveParameters.Params.Count));
 
     Parameter := CurveParameters[ParamIndex];
     Name      := Parameter.Name;
@@ -1627,14 +1621,11 @@ var
     Parameter: TSpecialCurveParameter;
 begin
     SpecParamList := GetCurveList;
-    if not Assigned(SpecParamList) then
-        raise EUserException.Create(CurveParameterListNotReady);
-    if (SpecIndex < 0) or (SpecIndex >= SpecParamList.Count) then
-        raise EUserException.Create(InadmissibleCurveIndex);
+    Assert(Assigned(SpecParamList));
+    Assert((SpecIndex >= 0) and (SpecIndex < SpecParamList.Count));
 
     CurveParameters := Curve_parameters(SpecParamList.Items[SpecIndex]);
-    if (ParamIndex < 0) or (ParamIndex >= CurveParameters.Params.Count) then
-        raise EUserException.Create(InadmissibleParameterIndex);
+    Assert((ParamIndex >= 0) and (ParamIndex < CurveParameters.Params.Count));
 
     Parameter := CurveParameters[ParamIndex];
     Parameter.Value := Value;
@@ -1670,15 +1661,15 @@ end;
 
 procedure TFitService.SubtractBackground;
 var
-    SA: TPointsSet;
+    Points: TPointsSet;
 begin
     if FSelectedAreaMode then
-        SA := FSelectedArea
+        Points := FSelectedArea
     else
-        SA := FExpProfile;
-    Assert(Assigned(SA));
+        Points := FExpProfile;
+    Assert(Assigned(Points));
 
-    SubtractBackgroundLinearly(SA, 0, SA.PointsCount - 1);
+    SubtractBackgroundLinearly(Points, 0, Points.PointsCount - 1);
 end;
 
 procedure TFitService.SelectProfileIntervalActual(Points: TPointsSet;
@@ -1709,9 +1700,6 @@ begin
         Result := CalcAborted;
     end;
 
-    // if State = AsyncOperation then
-    // raise EUserException.Create(InadmissibleServerState + CRLF +
-    // NowCalculation);
     if State = ProfileWaiting then
         raise EUserException.Create(InadmissibleServerState + CRLF +
             DataMustBeSet);
@@ -1735,9 +1723,6 @@ begin
         Result := CalcAborted;
     end;
 
-    // if State = AsyncOperation then
-    // raise EUserException.Create(InadmissibleServerState + CRLF +
-    // NowCalculation);
     if State = ProfileWaiting then
         raise EUserException.Create(InadmissibleServerState + CRLF +
             DataMustBeSet);
@@ -1842,8 +1827,9 @@ var
     i:  longint;
     FT: TFitTask;
 begin
-    Result := 0;
     Assert(Assigned(FTaskList));
+
+    Result := 0;
     for i := 0 to FTaskList.Count - 1 do
     begin
         FT     := TFitTask(FTaskList.Items[i]);
@@ -1856,8 +1842,9 @@ var
     i:  longint;
     FT: TFitTask;
 begin
-    Result := 0;
     Assert(Assigned(FTaskList));
+
+    Result := 0;
     for i := 0 to FTaskList.Count - 1 do
     begin
         FT     := TFitTask(FTaskList.Items[i]);
@@ -1870,8 +1857,9 @@ var
     i:  longint;
     FT: TFitTask;
 begin
-    Result := 0;
     Assert(Assigned(FTaskList));
+
+    Result := 0;
     for i := 0 to FTaskList.Count - 1 do
     begin
         FT     := TFitTask(FTaskList.Items[i]);
@@ -2047,6 +2035,7 @@ var
     FT: TFitTask;
 begin
     Assert(Assigned(FTaskList));
+
     for i := 0 to FTaskList.Count - 1 do
     begin
         FT := TFitTask(FTaskList.Items[i]);
@@ -2149,6 +2138,7 @@ begin
     // metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
     Assert(Assigned(FTaskList));
     Assert(Assigned(FExpProfile));
+
     FCalcProfile.Free;
     FCalcProfile := nil;
     FCalcProfile := TTitlePointsSet.Create(nil);
@@ -2365,6 +2355,7 @@ end;
 procedure TFitService.SetWaveLength(AWaveLength: double);
 begin
     Assert(Assigned(FCurveParameterList));
+
     FWaveLength := AWaveLength;
     FCurveParameterList.FWaveLength := WaveLength;
 end;
@@ -2575,6 +2566,7 @@ begin
                     PosIndex :=
                         Data.IndexOfValueX(FCurvePositions.PointXCoord[i]);
                     Assert(PosIndex <> -1);
+
                     if (PosIndex >= BegIndex) and (PosIndex <= EndIndex) then
                         Temp.AddNewPoint(FCurvePositions.PointXCoord[i],
                             FCurvePositions.PointYCoord[i]);
@@ -2631,6 +2623,7 @@ var
 begin
     Assert(Assigned(FCurvesList));
     Assert(Assigned(FCurveParameterList));
+
     FCurveParameterList.Clear;
 
     for i := 0 to FCurvesList.Count - 1 do
@@ -3046,10 +3039,6 @@ begin
     if State = AsyncOperation then
         raise EUserException.Create(InadmissibleServerState + CRLF +
             NowCalculation);
-    // dopolnyat' dannye vsegda mozhno
-    // if State = ProfileWaiting then
-    // raise EUserException.Create(InadmissibleServerState + CRLF +
-    // DataMustBeSet);
 
     if FSelectedAreaMode then
     begin
@@ -3117,6 +3106,7 @@ procedure TFitService.RecreateMainCalcThread(ACurrentTask: TThreadMethod;
 begin
     Assert(Assigned(ACurrentTask));
     Assert(Assigned(ADoneProc));
+
     ACurrentTask;
     ADoneProc;
 end;

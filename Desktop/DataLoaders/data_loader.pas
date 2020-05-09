@@ -66,6 +66,7 @@ end;
 function TDataLoader.GetPointsSetCopy: TTitlePointsSet;
 begin
     Assert(Assigned(FPointsSet));
+
     Result := TTitlePointsSet.CreateFromPoints(nil, FPointsSet);
 end;
 

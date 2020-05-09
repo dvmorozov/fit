@@ -73,6 +73,7 @@ var
     i: longint;
 begin
     Assert(Assigned(Points));
+
     for i := 0 to Points.PointsCount - 1 do
         AddNewPoint(Points.PointXCoord[i], Points.PointYCoord[i]);
 end;
@@ -81,6 +82,7 @@ constructor TNeutronPointsSet.CreateFromPoints(AOwner: TComponent;
     const Points: TPointsSet);
 begin
     Assert(Assigned(Points));
+
     inherited Create(AOwner);
     CopyPointsFrom(Points);
 end;

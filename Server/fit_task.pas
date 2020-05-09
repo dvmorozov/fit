@@ -281,6 +281,7 @@ var
     i: longint;
 begin
     Assert(Assigned(FCalcProfile));
+
     Result := 0;
     for i := 0 to FCalcProfile.PointsCount - 1 do
         Result := Result + FCalcProfile.PointYCoord[i];
@@ -291,6 +292,7 @@ var
     i: longint;
 begin
     Assert(Assigned(FExpProfile));
+
     Result := 0;
     for i := 0 to FExpProfile.PointsCount - 1 do
         Result := Result + FExpProfile.PointYCoord[i];
@@ -315,7 +317,6 @@ begin
     //  metod vnutrenniy - ne vybrasyvaet isklyucheniya nedopustimogo sostoyaniya
     Assert(Assigned(FCalcProfile));
     Assert(Assigned(FExpProfile));
-
     Assert(Assigned(FCurves));
     //  esli ni u odnoy krivoy diapazon ne zadan,
     //  to R-faktor schitaetsya po vsemu profilyu
@@ -392,7 +393,6 @@ begin
     Assert(Assigned(FCalcProfile));
     Assert(Assigned(FExpProfile));
     Assert(Assigned(FCurves));
-
     { If range is not set, R-factor is computed by entire profile. }
     RangeDefined := False;
     if FUseCurveRanges then
@@ -508,10 +508,9 @@ begin
             while (FCommonVaryingIndex <> Count) and
                 FCommonVariableParameters[FCommonVaryingIndex].VariationDisabled do
                 Inc(FCommonVaryingIndex);
-        end//  poisk sleduyuschego obschego parametra,
+        end;
+    //  poisk sleduyuschego obschego parametra,
     //  variatsiya kotorogo ne zapreschena
-    ;
-
     if FCommonVaryingIndex < Count then
     begin
         FEndOfCycle := False;
@@ -522,10 +521,8 @@ begin
     if FEnableBackgroundVariation then
     begin
         if FBackgroundVaryingFlag then
-            Inc(FBackgroundVaryingIndex)
+            Inc(FBackgroundVaryingIndex);
         //  Increments parameter index for next iteration.
-        ;
-
         if FBackgroundVaryingIndex < //FBackground.PointsCount
             4 then
         begin
@@ -624,6 +621,7 @@ begin
     if FCommonVaryingFlag then
     begin
         Assert(FCommonVaryingIndex < FCommonVariableParameters.Params.Count);
+
         Parameter := FCommonVariableParameters[FCommonVaryingIndex];
         Parameter.Value := NewParamValue;
 
@@ -682,7 +680,6 @@ begin
         Result := True;
         WriteLog('Desired R-factor achived...', TMsgType.Notification);
     end
-
     else
     if MinimumStepAchieved then
     begin
@@ -944,7 +941,8 @@ function TFitTask.DeleteCurvesWithSmallAmplitude: boolean;
 var
     i, j: longint;
     GP:   TCurvePointsSet;
-    MaxA: double;       //     maks. amplituda krivoy
+    MaxA: double;
+    //     maks. amplituda krivoy
     //  konstanta, men'she kotoroy vse otnositel'nye
     //  amplitudy schitayutsya ravnymi nulyu
 const
@@ -1054,6 +1052,7 @@ begin
         end;
     end;
     Assert(Assigned(MaxGP));
+
     DeletePoint(FCurvePositions, MaxGP.FInitx0);
     Deleted := TCurvePointsSet(FCurves.Extract(MaxGP));
     Result  := True;
@@ -1108,6 +1107,7 @@ var
     Value: string;
 begin
     Assert(Assigned(Curve));
+
     Curve.FInitHash := 0;
     for i := 0 to Curve.Parameters.Params.Count - 1 do
     begin
@@ -1218,12 +1218,11 @@ begin
                     Parameter.Free;
                     raise;
                 end;
-            end//  Initializing list of common parameters. It is performed only
+            end;
+    //  Initializing list of common parameters. It is performed only
     //  once when the first curve instance is created (it is assumed
     //  that all the instances have the same type).
     //  TODO: remove the assumption mentioned above.
-    ;
-
     for i := 0 to Result.Parameters.Count - 1 do
     begin
         Result.Parameters[i].InitValue;
@@ -1452,8 +1451,8 @@ begin
                         raise;
                     end;
                 end;
-            end//  proveryaem vybrannye tochki i dobavlyaem novye ekz. patterna
-    ;
+            end;
+        //  proveryaem vybrannye tochki i dobavlyaem novye ekz. patterna
 end;
 
 type
@@ -1583,8 +1582,10 @@ var
 begin
     Assert(Assigned(FExpProfile));
     Assert(Assigned(FCurvePositions));
+
     Index := FExpProfile.IndexOfValueX(XValue);
     Assert(Index <> -1);
+
     FCurvePositions.AddNewPoint(XValue, FExpProfile.PointYCoord[Index]);
 end;
 

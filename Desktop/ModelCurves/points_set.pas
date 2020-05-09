@@ -76,6 +76,7 @@ begin
     Assert(Assigned(FPoints));
     Assert(index >= 0);
     Assert(index < PointsCount);
+
     Result := FPoints[index][1];
 end;
 
@@ -84,6 +85,7 @@ begin
     Assert(Assigned(FPoints));
     Assert(index >= 0);
     Assert(index < PointsCount);
+
     Result := FPoints[index][2];
 end;
 
@@ -92,6 +94,7 @@ begin
     Assert(Assigned(FPoints));
     Assert(index >= 0);
     Assert(index < PointsCount);
+
     FPoints[index][1] := Value;
 end;
 
@@ -100,6 +103,7 @@ begin
     Assert(Assigned(FPoints));
     Assert(index >= 0);
     Assert(index < PointsCount);
+
     FPoints[index][2] := Value;
 end;
 
@@ -202,6 +206,7 @@ begin
             else
             begin
                 Assert(Index < PointsCount - 1);
+
                 NewPoints[Index][1] := PointXCoord[j];
                 NewPoints[Index][2] := PointYCoord[j];
                 Inc(Index);
@@ -233,6 +238,7 @@ var
 begin
     if PointsCount = 0 then
         Exit;
+
     SetLength(NewPoints, PointsCount);
     try
         //  poisk indeksa tochki s min. X

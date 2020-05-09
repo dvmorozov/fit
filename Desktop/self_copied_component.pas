@@ -32,8 +32,6 @@ type
         procedure CopyParameters(Dest: TObject); virtual;
     end;
 
-    ESelfCopiedCompList = class(Exception);
-
     { List of self copied components. By default is always active, so copy of 
       list is also active. Caller should make the list inactive by itself if 
       necessary. }
@@ -43,7 +41,7 @@ type
         { Returns copy of list which owns its items. }
         function GetSharedCopy: TObject; virtual;
         procedure CopyParameters(Dest: TObject); virtual;
-
+        { Redefines methods as virtual to be used in descendant classes. }
         procedure Insert(Index: integer; Item: TComponent); virtual;
         function Add(Item: TComponent): integer; virtual;
         procedure Delete(Index: integer); virtual;
@@ -51,12 +49,12 @@ type
 
 implementation
 
-const
-    InvalidDestinationType: string = 'Invalid destination type...';
-
 function TSelfCopiedCompList.GetCopy: TObject;
 begin
     Result := NewInstance;
+
+    Assert(Assigned(Result));
+
     TSelfCopiedCompList(Result).Create;
     CopyParameters(Result);
 end;
@@ -66,6 +64,9 @@ var
     i: longint;
 begin
     Result := NewInstance;
+
+    Assert(Assigned(Result));
+
     TSelfCopiedCompList(Result).Create;
     for i := 0 to Count - 1 do
         TSelfCopiedCompList(Result).Add(TComponent(Items[i]));
@@ -75,8 +76,7 @@ procedure TSelfCopiedCompList.CopyParameters(Dest: TObject);
 var
     i:   longint;
 begin
-    if Dest.ClassType <> Self.ClassType then
-        raise ESelfCopiedCompList.Create(InvalidDestinationType);
+    Assert(Dest.ClassType = Self.ClassType);
 
     if Count <> 0 then
         if Count <> TSelfCopiedCompList(Dest).Count then
@@ -112,6 +112,9 @@ end;
 function TSelfCopiedComponent.GetCopy: TObject;
 begin
     Result := NewInstance;
+
+    Assert(Assigned(Result));
+
     try
         TSelfCopiedComponent(Result).Create(nil);
         CopyParameters(Result);
@@ -123,8 +126,7 @@ end;
 
 procedure TSelfCopiedComponent.CopyParameters(Dest: TObject);
 begin
-    if Dest.ClassType <> Self.ClassType then
-        raise ESelfCopiedCompList.Create(InvalidDestinationType);
+    Assert(Dest.ClassType = Self.ClassType);
 end;
 
 end.

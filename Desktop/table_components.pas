@@ -590,8 +590,9 @@ begin
     begin
         Last  := StartRow - GetFixedRows + RowsCount - 1;
         First := StartRow - GetFixedRows;
-        if (First < 0) or (Last > Count - 1) then
-            raise ERowCompList.Create('Invalid deleting parameters...');
+
+        Assert((First >= 0) and (Last < Count));
+
         i := 0;
         while i < RowsCount do
         begin
@@ -612,8 +613,7 @@ begin
     //  в пустой объект добавл€етс€ строка - сначала нужно
     //  добавить, а уже потом провер€ть
 
-    if (First < 0) or (First > Count - 1) then
-        raise ERowCompList.Create('Invalid insertion parameters...');
+    Assert((First >= 0) and (First < Count));
 
     for i := 1 to RowsCount do
         Insert(First, CreateNewObject);
@@ -638,7 +638,8 @@ var
     Flag: boolean;
 begin
     Flag   := Count = 0;
-    Result := inherited Add(Item);  //  список уже не пуст !!!
+    Result := inherited Add(Item);
+    //  список уже не пуст !!!
     if FAreRowHeightsReady and not Flag then
         AddRowHeightItem;
     //  должна вызыватьс€ последней, чтобы проверка
@@ -688,7 +689,8 @@ var
     Flag: boolean;
 begin
     Flag   := Count = 0;
-    Result := inherited Add(Item);  //  список уже не пуст !!!
+    Result := inherited Add(Item);
+    //  список уже не пуст !!!
     if FAreColWidthsReady and not Flag then
         AddColWidthItem;
     //  должна вызыватьс€ последней, чтобы проверка
@@ -725,8 +727,9 @@ begin
     begin
         Last  := StartCol - GetFixedCols + ColsCount - 1;
         First := StartCol - GetFixedCols;
-        if (First < 0) or (Last > Self.Count - 1) then
-            raise EColCompList.Create('Invalid deleting parameters...');
+
+        Assert((First >= 0) and (Last < Count));
+
         i := 0;
         while i < ColsCount do
         begin
@@ -747,8 +750,7 @@ begin
     //  в пустой объект добавл€етс€ столбец - сначала нужно
     //  добавить, а уже потом провер€ть
 
-    if (First < 0) or (First > Self.Count - 1) then
-        raise EColCompList.Create('Invalid insertion parameters...');
+    Assert((First >= 0) and (First < Count));
 
     for i := 1 to ColsCount do
         Insert(First, CreateNewObject);
@@ -760,7 +762,8 @@ begin
         DeleteColWidthItem(Index);
     //  должна вызыватьс€ первой, чтобы проверка
     //  индексов дала правильные результаты
-    inherited;  //  число элементов в списке изменилось
+    inherited;
+    //  число элементов в списке изменилось
     if (not FDestroying) and (Count = 0) and FAreColWidthsReady then
         AddColWidthItem;
     //  если удалены все данные нужно добавить один

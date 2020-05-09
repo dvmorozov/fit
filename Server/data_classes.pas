@@ -283,7 +283,7 @@ begin
             case ACol - GetFixedCols of
                 0, 1, 2, 3, 5: Result := '0';
                 4: Result := '1';
-            end{ Information area of the table is filled. };
+            end; { Information area of the table is filled. }
 end;
 
 function TCurveList.IsDataValid(const ACol, ARow: integer;

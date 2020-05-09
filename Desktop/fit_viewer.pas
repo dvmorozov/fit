@@ -304,31 +304,27 @@ end;
 {$hints off}
 procedure TFitViewer.PlotCurves(Sender: TObject;
     CurvePointsSetList: TSelfCopiedCompList; CurveList: TMSCRCurveList);
-var
-    Serie: TTASerie;
-    PointsSet: TNamedPointsSet;
-    j:  longint;
-begin
-{$IFDEF USE_GRIDS}
-    if FUpdateGrids then
-        FillCurveTable(CurveList);
-{$ENDIF}
-    //Assert(Assigned(CurvePointsSetList));
-    if not Assigned(CurvePointsSetList) then
-        Exit;
 
-    for j := 0 to CurvePointsSetList.Count - 1 do
+    procedure AddPointsSetToChart(PointsSet: TNamedPointsSet; Index: longint);
+    var
+        Serie: TTASerie;
     begin
-        PointsSet := TNamedPointsSet(CurvePointsSetList.Items[j]);
+        Assert(Assigned(Form));
+
         if FPointsSetList.IndexOf(PointsSet) = -1 then
         begin
             Serie := TTASerie.Create(nil);
-            Serie.PointStyle := psRectangle;
-            Serie.ShowPoints := FViewMarkers;
-            TFormMain(Form).Chart.AddSerie(Serie);
+            try
+                Serie.PointStyle := psRectangle;
+                Serie.ShowPoints := FViewMarkers;
+                TFormMain(Form).Chart.AddSerie(Serie);
+            except
+                Serie.Free;
+                raise;
+            end;
             FPointsSetList.Add(PointsSet);
 
-            Serie.Title := PointsSet.GetCurveTypeName + ' ' + IntToStr(j + 1);
+            Serie.Title := PointsSet.GetCurveTypeName + ' ' + IntToStr(Index);
 {$IFDEF USE_LEGEND}
             if FUpdateLegends then
             begin
@@ -337,19 +333,37 @@ begin
                     TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(Serie)] := True;
             end;
 {$ENDIF}
-            if j + 1 <= 16 then
-                Serie.SeriesColor := ColorPalette[j + 1]
+            if Index <= 16 then
+                Serie.SeriesColor := ColorPalette[Index]
             else
-                Serie.SeriesColor := ColorPalette[(j + 1) mod 16];
+                Serie.SeriesColor := ColorPalette[Index mod 16];
         end;
+    end;
+
+var
+    PointsSet: TNamedPointsSet;
+    j:  longint;
+begin
+{$IFDEF USE_GRIDS}
+    if FUpdateGrids then
+        FillCurveTable(CurveList);
+{$ENDIF}
+    Assert(Assigned(CurvePointsSetList));
+
+    for j := 0 to CurvePointsSetList.Count - 1 do
+    begin
+        PointsSet := TNamedPointsSet(CurvePointsSetList.Items[j]);
+        AddPointsSetToChart(PointsSet, j + 1);
         PlotPointsSet(PointsSet);
-    end;{for j := 0 to GL.Count - 1 do...}
+    end; {for j := 0 to GL.Count - 1 do...}
 end;
 
 {$hints on}
 
 procedure TFitViewer.Clear(Sender: TObject);
 begin
+    Assert(Assigned(Form));
+
     while TFormMain(Form).Chart.SeriesCount <> 0 do
         TFormMain(Form).Chart.DeleteSerie(TFormMain(Form).Chart.GetSerie(0));
 {$IFDEF USE_LEGEND}
@@ -357,6 +371,7 @@ begin
         TFormMain(Form).CheckListBoxLegend.Items.Clear;
 {$ENDIF}
     Assert(Assigned(FPointsSetList));
+
     FPointsSetList.Clear;
 {$IFDEF USE_GRIDS}
     if FUpdateGrids then
@@ -377,6 +392,7 @@ var
 begin
     Assert(Assigned(PointsSet));
     Assert(Assigned(FPointsSetList));
+    Assert(Assigned(Form));
 
     Index := FPointsSetList.IndexOf(PointsSet);
     // el-t v CheckListBox svyazan s el-tom v FPointsSetList tol'ko po indeksu
@@ -413,12 +429,14 @@ var
 begin
     Assert(Assigned(PointsSet));
     Assert(Assigned(FPointsSetList));
+    Assert(Assigned(Form));
 
     Index := FPointsSetList.IndexOf(PointsSet);
     Assert(Index <> -1);
 
     Serie := TTASerie(TFormMain(Form).Chart.GetSerie(Index));
     Assert(Serie.Count = PointsSet.PointsCount);
+
     with PointsSet do
         for j := 0 to PointsCount - 1 do
             Serie.SetYValue(j, PointIntensity[j]);
@@ -441,20 +459,28 @@ var
 begin
     Assert(Assigned(RFactorBounds));
     Assert(Assigned(FPointsSetList));
+    Assert(Assigned(Form));
 
     if FPointsSetList.IndexOf(RFactorBounds) = -1 then
     begin
         Serie := TTASerie.Create(nil);
-        Serie.PointStyle := psVertLineTB;
-        Serie.ImageSize := 3;
-        Serie.SeriesColor := clBlue;
-        Serie.ShowLines := False;
-        Serie.ShowPoints := True;
-        Serie.InitShowLines := Serie.ShowLines;
-        Serie.InitShowPoints := Serie.ShowPoints;
-        Serie.Title := RFactorBounds.FTitle;
 
-        TFormMain(Form).Chart.AddSerie(Serie);
+        try
+            Serie.PointStyle := psVertLineTB;
+            Serie.ImageSize := 3;
+            Serie.SeriesColor := clBlue;
+            Serie.ShowLines := False;
+            Serie.ShowPoints := True;
+            Serie.InitShowLines := Serie.ShowLines;
+            Serie.InitShowPoints := Serie.ShowPoints;
+            Serie.Title := RFactorBounds.FTitle;
+
+            TFormMain(Form).Chart.AddSerie(Serie);
+        except
+            Serie.Free;
+            raise
+        end;
+
         FPointsSetList.Add(RFactorBounds);
 {$IFDEF USE_LEGEND}
         if FUpdateLegends then
@@ -490,20 +516,28 @@ var
 begin
     Assert(Assigned(CurvePositions));
     Assert(Assigned(FPointsSetList));
+    Assert(Assigned(Form));
 
     if FPointsSetList.IndexOf(CurvePositions) = -1 then
     begin
         Serie := TTASerie.Create(nil);
-        Serie.PointStyle := psDiagCross;
-        Serie.ImageSize := 5;
-        Serie.SeriesColor := clBlack;
-        Serie.ShowLines := False;
-        Serie.ShowPoints := True;
-        Serie.InitShowLines := Serie.ShowLines;
-        Serie.InitShowPoints := Serie.ShowPoints;
-        Serie.Title := CurvePositions.FTitle;
 
-        TFormMain(Form).Chart.AddSerie(Serie);
+        try
+            Serie.PointStyle := psDiagCross;
+            Serie.ImageSize := 5;
+            Serie.SeriesColor := clBlack;
+            Serie.ShowLines := False;
+            Serie.ShowPoints := True;
+            Serie.InitShowLines := Serie.ShowLines;
+            Serie.InitShowPoints := Serie.ShowPoints;
+            Serie.Title := CurvePositions.FTitle;
+
+            TFormMain(Form).Chart.AddSerie(Serie);
+        except
+            Serie.Free;
+            raise;
+        end;
+
         FPointsSetList.Add(CurvePositions);
 {$IFDEF USE_LEGEND}
         if FUpdateLegends then
@@ -531,20 +565,27 @@ var
 begin
     Assert(Assigned(SelectedPoints));
     Assert(Assigned(FPointsSetList));
+    Assert(Assigned(Form));
 
     if FPointsSetList.IndexOf(SelectedPoints) = -1 then
     begin
         Serie := TTASerie.Create(nil);
-        Serie.PointStyle := psVertLineBT;
-        Serie.ImageSize := 3;
-        Serie.SeriesColor := clGreen;
-        Serie.ShowLines := False;
-        Serie.ShowPoints := True;
-        Serie.InitShowLines := Serie.ShowLines;
-        Serie.InitShowPoints := Serie.ShowPoints;
-        Serie.Title := SelectedPoints.FTitle;
 
-        TFormMain(Form).Chart.AddSerie(Serie);
+        try
+            Serie.PointStyle := psVertLineBT;
+            Serie.ImageSize := 3;
+            Serie.SeriesColor := clGreen;
+            Serie.ShowLines := False;
+            Serie.ShowPoints := True;
+            Serie.InitShowLines := Serie.ShowLines;
+            Serie.InitShowPoints := Serie.ShowPoints;
+            Serie.Title := SelectedPoints.FTitle;
+
+            TFormMain(Form).Chart.AddSerie(Serie);
+        except
+            Serie.Free;
+            raise;
+        end;
         FPointsSetList.Add(SelectedPoints);
 {$IFDEF USE_LEGEND}
         if FUpdateLegends then
@@ -566,14 +607,20 @@ var
 begin
     Assert(Assigned(ComputedProfile));
     Assert(Assigned(FPointsSetList));
+    Assert(Assigned(Form));
 
     Serie := TTASerie.Create(nil);
-    Serie.PointStyle := psRectangle;
-    Serie.ShowPoints := FViewMarkers;
-    Serie.SeriesColor := clBlack;
-    Serie.Title := ComputedProfile.FTitle;
+    try
+        Serie.PointStyle := psRectangle;
+        Serie.ShowPoints := FViewMarkers;
+        Serie.SeriesColor := clBlack;
+        Serie.Title := ComputedProfile.FTitle;
 
-    TFormMain(Form).Chart.AddSerie(Serie);
+        TFormMain(Form).Chart.AddSerie(Serie);
+    except
+        Serie.Free;
+        raise;
+    end;
     FPointsSetList.Add(ComputedProfile);
 {$IFDEF USE_LEGEND}
     if FUpdateLegends then
@@ -592,14 +639,20 @@ var
 begin
     Assert(Assigned(DeltaProfile));
     Assert(Assigned(FPointsSetList));
+    Assert(Assigned(Form));
 
     Serie := TTASerie.Create(nil);
-    Serie.PointStyle := psRectangle;
-    Serie.ShowPoints := FViewMarkers;
-    Serie.SeriesColor := clGreen;
-    Serie.Title := DeltaProfile.FTitle;
+    try
+        Serie.PointStyle := psRectangle;
+        Serie.ShowPoints := FViewMarkers;
+        Serie.SeriesColor := clGreen;
+        Serie.Title := DeltaProfile.FTitle;
 
-    TFormMain(Form).Chart.AddSerie(Serie);
+        TFormMain(Form).Chart.AddSerie(Serie);
+    except
+        Serie.Free;
+        raise;
+    end;
     FPointsSetList.Add(DeltaProfile);
 {$IFDEF USE_LEGEND}
     TFormMain(Form).CheckListBoxLegend.Items.AddObject(Serie.Title, Serie);
@@ -635,20 +688,26 @@ var
 begin
     Assert(Assigned(BackgroundPoints));
     Assert(Assigned(FPointsSetList));
+    Assert(Assigned(Form));
 
     if FPointsSetList.IndexOf(BackgroundPoints) = -1 then
     begin
         Serie := TTASerie.Create(nil);
-        Serie.PointStyle := psCircle;
-        Serie.ImageSize := 3;
-        Serie.SeriesColor := clGray;
-        Serie.ShowLines := True;//False;
-        Serie.ShowPoints := True;
-        Serie.InitShowLines := Serie.ShowLines;
-        Serie.InitShowPoints := Serie.ShowPoints;
-        Serie.Title := BackgroundPoints.FTitle;
+        try
+            Serie.PointStyle := psCircle;
+            Serie.ImageSize := 3;
+            Serie.SeriesColor := clGray;
+            Serie.ShowLines := True;
+            Serie.ShowPoints := True;
+            Serie.InitShowLines := Serie.ShowLines;
+            Serie.InitShowPoints := Serie.ShowPoints;
+            Serie.Title := BackgroundPoints.FTitle;
 
-        TFormMain(Form).Chart.AddSerie(Serie);
+            TFormMain(Form).Chart.AddSerie(Serie);
+        except
+            Serie.Free;
+            raise;
+        end;
         FPointsSetList.Add(BackgroundPoints);
 {$IFDEF USE_LEGEND}
         if FUpdateLegends then
@@ -673,17 +732,24 @@ var
 begin
     Assert(Assigned(ExpProfile));
     Assert(Assigned(FPointsSetList));
+    Assert(Assigned(Form));
 
     if FPointsSetList.IndexOf(ExpProfile) = -1 then
     begin
         Serie := TTASerie.Create(nil);
-        Serie.PointStyle := psRectangle;
-        Serie.ShowPoints := FViewMarkers;
-        Serie.SeriesColor := clRed;
-        Serie.PointBrushStyle := bsClear;
-        Serie.Title := ExpProfile.FTitle;
+        try
+            Serie.PointStyle := psRectangle;
+            Serie.ShowPoints := FViewMarkers;
+            Serie.SeriesColor := clRed;
+            Serie.PointBrushStyle := bsClear;
+            Serie.Title := ExpProfile.FTitle;
 
-        TFormMain(Form).Chart.AddSerie(Serie);
+            TFormMain(Form).Chart.AddSerie(Serie);
+        except
+            Serie.Free;
+            raise;
+        end;
+
         FPointsSetList.Add(ExpProfile);
 {$IFDEF USE_LEGEND}
         if FUpdateLegends then
@@ -770,15 +836,17 @@ end;
 function TFitViewer.GetActiveCurveIndex: longint;
 var
     i:  longint;
-    TS: TTASerie;
+    Serie: TTASerie;
 begin
     Result := -1;
+
+    Assert(Assigned(Form));
     Assert(TFormMain(Form).Chart.SeriesCount <> 0);
 
     for i := 0 to TFormMain(Form).Chart.SeriesCount - 1 do
     begin
-        TS := TTASerie(TFormMain(Form).Chart.GetSerie(i));
-        if TS.ShowPoints or TS.ShowLines then
+        Serie := TTASerie(TFormMain(Form).Chart.GetSerie(i));
+        if Serie.ShowPoints or Serie.ShowLines then
         begin
             Result := i;
             Break;
@@ -888,17 +956,18 @@ end;
 procedure TFitViewer.ViewAllMarkers;
 var
     i:  longint;
-    TS: TTASerie;
+    Serie: TTASerie;
 begin
+    Assert(Assigned(Form));
     //  vkl./vykl. markerov imeet smysl tol'ko dlya teh grafikov,
     //  u kot. vklyucheno otobrazhenie liniy
     for i := 0 to TFormMain(Form).Chart.SeriesCount - 1 do
     begin
-        TS := TTASerie(TFormMain(Form).Chart.GetSerie(i));
-        if (TS.ShowLines) or (TS.InitShowLines) then
+        Serie := TTASerie(TFormMain(Form).Chart.GetSerie(i));
+        if (Serie.ShowLines) or (Serie.InitShowLines) then
         begin
-            TS.ShowPoints     := FViewMarkers;
-            TS.InitShowPoints := FViewMarkers;
+            Serie.ShowPoints     := FViewMarkers;
+            Serie.InitShowPoints := FViewMarkers;
         end;
     end;
 end;
@@ -910,21 +979,13 @@ begin
     begin
         ColCount  := 2;
         //  poka ruchnoy vvod ne podderzhivaetsya
-        RowCount  := 1;//2;
+        RowCount  := 1;
         FixedCols := 0;
         FixedRows := 1;
 
         Cells[0, 0] := StartName;
         Cells[1, 0] := StopName;
 
-        //  ochistka dopolnitel'noy stroki
-        (*
-        Cells[0, 1] := '';
-        Cells[1, 1] := '';
-        //  priznaki NEzapolneniya yacheek
-        Objects[0, 1] := TObject(0);
-        Objects[1, 1] := TObject(0);
-        *)
         ResetColWidths;
     end;
 end;
@@ -936,9 +997,7 @@ procedure TFitViewer.FillBoundsTable(RFactorBounds: TTitlePointsSet);
 var
     i, RowIndex: longint;
 begin
-    //Assert(Assigned(RFactorBounds));
-    if not Assigned(RFactorBounds) then
-        Exit;
+    Assert(Assigned(RFactorBounds));
     //  !!! nel'zya isp., potomu chto sbivaet fokus vvoda !!!
     //ClearBoundsTable;
 
@@ -948,9 +1007,10 @@ begin
         //  ruchnoy vvod v etu tabl. poka ne podderzhivaetsya,
         //  poetomu stroka ne doavlyaetsya
         RowCount  := RFactorBounds.PointsCount div 2 +
-            RFactorBounds.PointsCount mod 2 +    //  dop. stroka dobavl.
+            RFactorBounds.PointsCount mod 2 +
+              //  dop. stroka dobavl.
               //  pri nechetnom chisle tochek
-            1;//2;
+            1;
         FixedCols := 0;
         FixedRows := 1;
 
@@ -969,17 +1029,7 @@ begin
             Inc(i);
             Inc(RowIndex);
         end;
-        //  ochistka dopolnitel'noy stroki
-        (*
-        if RowCount > FixedRows then
-        begin
-            Cells[0, RowCount - 1] := '';
-            Cells[1, RowCount - 1] := '';
-            //  priznaki NEzapolneniya yacheek
-            Objects[0, RowCount - 1] := TObject(0);
-            Objects[1, RowCount - 1] := TObject(0);
-        end;
-        *)
+
         ResetColWidths;
     end;
 end;
@@ -1011,21 +1061,13 @@ begin
         //  poka ruchnoy vvod ne podderzhivaetsya,
         //  poetomu lishnyaya stroka ne dobavlyaetsya
         ColCount  := 2;
-        RowCount  := 1;//2;
+        RowCount  := 1;
         FixedCols := 0;
         FixedRows := 1;
 
         Cells[0, 0] := '         ';
         Cells[1, 0] := '         ';
 
-        //  ochistka dopolnitel'noy stroki
-        (*
-        Cells[0, 1] := '';
-        Cells[1, 1] := '';
-        //  priznaki NEzapolneniya yacheek
-        Objects[0, 1] := TObject(0);
-        Objects[1, 1] := TObject(0);
-        *)
         ResetColWidths;
     end;
 {$IFDEF WINDOWS}
@@ -1043,21 +1085,13 @@ begin
         //  poka ruchnoy vvod ne podderzhivaetsya, poetomu
         //  lishnyaya stroka ne dobavlyaetsya
         ColCount  := 2;
-        RowCount  := 1;//2;
+        RowCount  := 1;
         FixedCols := 0;
         FixedRows := 1;
 
         Cells[0, 0] := NumberName;
         Cells[1, 0] := ArgumentName;
 
-        //  ochistka dopolnitel'noy stroki
-        (*
-        Cells[0, 1] := '';
-        Cells[1, 1] := '';
-        //  priznaki NEzapolneniya yacheek
-        Objects[0, 1] := TObject(0);
-        Objects[1, 1] := TObject(0);
-        *)
         ResetColWidths;
     end;
 end;
@@ -1069,21 +1103,13 @@ begin
         //  poka ruchnoy vvod ne podderzhivaetsya, poetomu
         //  lishnyaya stroka ne dobavlyaetsya
         ColCount  := 2;
-        RowCount  := 1;//2;
+        RowCount  := 1;
         FixedCols := 0;
         FixedRows := 1;
 
         Cells[0, 0] := ArgumentName;
         Cells[1, 0] := ValueName;
 
-        //  ochistka dopolnitel'noy stroki
-        (*
-        Cells[0, 1] := '';
-        Cells[1, 1] := '';
-        //  priznaki NEzapolneniya yacheek
-        Objects[0, 1] := TObject(0);
-        Objects[1, 1] := TObject(0);
-        *)
         ResetColWidths;
     end;
 end;
@@ -1092,9 +1118,7 @@ procedure TFitViewer.FillPositionsTable(CurvePositions: TTitlePointsSet);
 var
     j: longint;
 begin
-    //Assert(Assigned(CurvePositions));
-    if not Assigned(CurvePositions) then
-        Exit;
+    Assert(Assigned(CurvePositions));
     //  !!! nel'zya isp., potomu chto sbivaet fokus vvoda !!!
     //ClearPositionsTable;
 
@@ -1121,17 +1145,7 @@ begin
             Objects[0, j + 1] := TObject(1);
             Objects[1, j + 1] := TObject(1);
         end;
-        //  ochistka dopolnitel'noy stroki
-        (*
-        if RowCount > FixedRows then
-        begin
-            Cells[0, RowCount - 1] := '';
-            Cells[1, RowCount - 1] := '';
-            //  priznaki NEzapolneniya yacheek
-            Objects[0, RowCount - 1] := TObject(0);
-            Objects[1, RowCount - 1] := TObject(0);
-        end;
-        *)
+
         ResetColWidths;
     end;
 end;
@@ -1140,9 +1154,7 @@ procedure TFitViewer.FillBackgroundTable(BackgroundPoints: TTitlePointsSet);
 var
     j: longint;
 begin
-    //Assert(Assigned(BackgroundPoints));
-    if not Assigned(BackgroundPoints) then
-        Exit;
+    Assert(Assigned(BackgroundPoints));
     //  !!! nel'zya isp., potomu chto sbivaet fokus vvoda !!!
     //ClearBackgroundTable;
 
@@ -1169,17 +1181,7 @@ begin
             Objects[0, j + 1] := TObject(1);
             Objects[1, j + 1] := TObject(1);
         end;
-        //  ochistka dopolnitel'noy stroki
-        (*
-        if RowCount > FixedRows then
-        begin
-            Cells[0, RowCount - 1] := '';
-            Cells[1, RowCount - 1] := '';
-            //  priznaki NEzapolneniya yacheek
-            Objects[0, RowCount - 1] := TObject(0);
-            Objects[1, RowCount - 1] := TObject(0);
-        end;
-        *)
+
         ResetColWidths;
     end;
 end;
@@ -1210,9 +1212,7 @@ var
     j: longint;
 begin
     //  vozvraschaet polnyy profil' ili vybrannyy v dannyy moment uchastok
-    //Assert(Assigned(Profile));
-    if not Assigned(Profile) then
-        Exit;
+    Assert(Assigned(Profile));
     //  !!! nel'zya isp., potomu chto sbivaet fokus vvoda !!!
     //ClearDataTable;
 
@@ -1276,27 +1276,14 @@ var
     P:      TCurvePointsSet;
     StartX: double;
 begin
-    //Assert(Assigned(ExperimentalProfile));
-    //Assert(Assigned(CurvesList));
-    //Assert(Assigned(ComputedProfile));
-    //Assert(Assigned(DeltaProfile));
-    //Assert(Assigned(RFactorBounds));
-    //Assert(RFactorBounds.PointsCount mod 2 = 0);
-    //Assert(RFactorBounds.PointsCount <> 0);
-    if not Assigned(ExperimentalProfile) then
-        Exit;
-    if not Assigned(CurvesList) then
-        Exit;
-    if not Assigned(ComputedProfile) then
-        Exit;
-    if not Assigned(DeltaProfile) then
-        Exit;
-    if not Assigned(RFactorBounds) then
-        Exit;
-    if not (RFactorBounds.PointsCount mod 2 = 0) then
-        Exit;
-    if RFactorBounds.PointsCount = 0 then
-        Exit;
+    Assert(Assigned(ExperimentalProfile));
+    Assert(Assigned(CurvesList));
+    Assert(Assigned(ComputedProfile));
+    Assert(Assigned(DeltaProfile));
+    Assert(Assigned(RFactorBounds));
+    Assert(RFactorBounds.PointsCount mod 2 = 0);
+    Assert(RFactorBounds.PointsCount <> 0);
+
 {$IFDEF WINDOWS}
     TFormMain(Form).TabSheetDatasheet.TabVisible := True;
 {$ENDIF}
@@ -1371,9 +1358,8 @@ end;
 
 procedure TFitViewer.FillCurveTable(CurveList: TMSCRCurveList);
 begin
-    //Assert(Assigned(CurveList));
-    if not Assigned(CurveList) then
-        Exit;
+    Assert(Assigned(CurveList));
+
     TFormMain(Form).FCurveList := CurveList;
     CurveList.GridAssign(TFormMain(Form).GridParameters);
     TFormMain(Form).FModifiedParameters := True;
@@ -1393,15 +1379,9 @@ var
 begin
     Result := 0;
 
-    //Assert(Assigned(CurvesList));
-    //Assert(Assigned(RFactorBounds));
-    //Assert(RFactorBounds.PointsCount mod 2 = 0);
-    if not Assigned(CurvesList) then
-        Exit;
-    if not Assigned(RFactorBounds) then
-        Exit;
-    if not (RFactorBounds.PointsCount mod 2 = 0) then
-        Exit;
+    Assert(Assigned(CurvesList));
+    Assert(Assigned(RFactorBounds));
+    Assert(RFactorBounds.PointsCount mod 2 = 0);
 
     //  idem po vsem intervalam, podschityvaya krivye,
     //  kot. k nim otnosyatsya
@@ -1430,15 +1410,9 @@ var
 begin
     Result := 0;
 
-    //Assert(Assigned(Profile));
-    //Assert(Assigned(RFactorBounds));
-    //Assert(RFactorBounds.PointsCount mod 2 = 0);
-    if not Assigned(Profile) then
-        Exit;
-    if not Assigned(RFactorBounds) then
-        Exit;
-    if not (RFactorBounds.PointsCount mod 2 = 0) then
-        Exit;
+    Assert(Assigned(Profile));
+    Assert(Assigned(RFactorBounds));
+    Assert(RFactorBounds.PointsCount mod 2 = 0);
 
     j := 0;
     while j < RFactorBounds.PointsCount do

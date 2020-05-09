@@ -113,18 +113,21 @@ end;
 function T2BranchesPseudoVoigtPointsSet.GetEta: double;
 begin
     Assert(Assigned(FEtaP));
+
     Result := FEtaP.Value;
 end;
 
 function T2BranchesPseudoVoigtPointsSet.GetEtaRight: double;
 begin
     Assert(Assigned(FEtaRightP));
+
     Result := FEtaRightP.Value;
 end;
 
 function T2BranchesPseudoVoigtPointsSet.GetSigmaRight: double;
 begin
     Assert(Assigned(FSigmaRightP));
+
     Result := FSigmaRightP.Value;
 end;
 

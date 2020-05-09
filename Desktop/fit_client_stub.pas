@@ -46,36 +46,42 @@ uses
 procedure TFitClientStub.ShowCurMin(Min: double);
 begin
     Assert(Assigned(FitClient));
+
     TFitClient(FitClient).ShowCurMin(Min);
 end;
 
 procedure TFitClientStub.ShowProfile;
 begin
     Assert(Assigned(FitClient));
+
     TFitClient(FitClient).ShowProfile;
 end;
 
 procedure TFitClientStub.Done;
 begin
     Assert(Assigned(FitClient));
+
     TFitClient(FitClient).Done;
 end;
 
 procedure TFitClientStub.ComputeCurveBoundsDone;
 begin
     Assert(Assigned(FitClient));
+
     TFitClient(FitClient).ComputeCurveBoundsDone;
 end;
 
 procedure TFitClientStub.ComputeBackgroundPointsDone;
 begin
     Assert(Assigned(FitClient));
+
     TFitClient(FitClient).ComputeBackgroundPointsDone;
 end;
 
 procedure TFitClientStub.ComputeCurvePositionsDone;
 begin
     Assert(Assigned(FitClient));
+
     TFitClient(FitClient).ComputeCurvePositionsDone;
 end;
 

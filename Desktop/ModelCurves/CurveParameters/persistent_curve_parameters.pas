@@ -152,6 +152,7 @@ end;
 function Curve_parameters.GetParameter(Index: longint): TSpecialCurveParameter;
 begin
     Assert(Assigned(FParams));
+
     Result := TPersistentCurveParameterContainer(FParams.Items[Index]).Parameter;
 end;
 
@@ -159,12 +160,14 @@ procedure Curve_parameters.SetParameter(Index: longint;
     Parameter: TSpecialCurveParameter);
 begin
     Assert(Assigned(FParams));
+
     TPersistentCurveParameterContainer(FParams.Items[Index]).Parameter := Parameter;
 end;
 
 function Curve_parameters.GetCount: longint;
 begin
     Assert(Assigned(FParams));
+
     Result := FParams.Count;
 end;
 

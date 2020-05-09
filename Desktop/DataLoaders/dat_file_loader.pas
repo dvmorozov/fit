@@ -115,9 +115,8 @@ begin
             end;
             if Value2Found then
                 if FPointsSet.IndexOfValueX(Val1) = -1 then
-                    FPointsSet.AddNewPoint(Val1, Val2)
+                    FPointsSet.AddNewPoint(Val1, Val2);
             //  Duplicates by argument value are ignored.
-            ;
         end;
     finally
         Data.Free;

@@ -163,7 +163,7 @@ begin
 {$ENDIF}
             ActiveControl := RFactorValueEdit;
             CanClose      := False;
-        end;{if ModalResult = mrOk then...}
+        end; {if ModalResult = mrOk then...}
 end;
 
 procedure TSetMaximumRFactorDlg.FormActivate(Sender: TObject);

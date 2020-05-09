@@ -55,6 +55,9 @@ uses
 { TAboutBox }
 procedure TAboutBox.FormShow(Sender: TObject);
 begin
+    Assert(Assigned(FormMain));
+    Assert(Assigned(FormMain.ApplicationProperties));
+
     Caption := FormMain.ApplicationProperties.Title;
     StaticTextTitle.Caption := FormMain.ApplicationProperties.Title;
 end;

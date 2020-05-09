@@ -40,7 +40,7 @@ function TExtensionDataLoaderInjector.CreateDataLoader(AFileName: string): IData
 var
     Ext: string;
 begin
-    if FDataLoader <> nil then
+    if Assigned(FDataLoader) then
         FDataLoader.Free;
 
     Ext := UpperCase(ExtractFileExt(AFileName));

@@ -659,7 +659,7 @@ begin
     TFormMain(Form).CheckListBoxLegend.Checked[
         TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(Serie)] := True;
 {$ENDIF}
-    Plot; //??? sdelat' optimal'no - bez polnogo perestroeniya
+    Plot; //TODO: sdelat' optimal'no - bez polnogo perestroeniya
 end;
 
 procedure TFitViewer.HideExpProfile(Sender: TObject; DataPoints: TTitlePointsSet);

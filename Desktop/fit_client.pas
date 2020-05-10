@@ -106,7 +106,7 @@ type
         FAsyncOperationFinished: TAsyncOperationFinished;
 
         { Updates all the data and refreshes chart. }
-        procedure UpdateComputedData;
+        procedure UpdateComputedData(ShowExtraData: boolean);
         procedure HideCurves;
 
         { Wrappers for calls to external displaying methods. 
@@ -490,41 +490,62 @@ end;
 
 procedure TFitClient.RemoveComputedProfile;
 begin
-    Hide(FComputedProfile);
-    FComputedProfile.Free;
-    FComputedProfile := nil;
+    if Assigned(FComputedProfile) then
+    begin
+        Hide(FComputedProfile);
+        FComputedProfile.Free;
+        FComputedProfile := nil;
+    end;
 end;
 
 procedure TFitClient.RemoveDeltaProfile;
 begin
-    Hide(FDeltaProfile);
-    FDeltaProfile.Free;
-    FDeltaProfile := nil;
+    if Assigned(FDeltaProfile) then
+    begin
+        Hide(FDeltaProfile);
+        FDeltaProfile.Free;
+        FDeltaProfile := nil;
+    end;
 end;
 
 procedure TFitClient.RemoveSelectedArea;
 begin
-    Hide(FSelectedArea);
-    FSelectedArea.Free;
-    FSelectedArea := nil;
+    if Assigned(FSelectedArea) then
+    begin
+        Hide(FSelectedArea);
+        FSelectedArea.Free;
+        FSelectedArea := nil;
+    end;
 end;
 
 procedure TFitClient.RemoveRFactorBounds;
 begin
-    HideRFactorBounds;
-    FRFactorBounds.Clear; //  dlya posleduyuschego vvoda
+    if Assigned(FRFactorBounds) then
+    begin
+        HideRFactorBounds;
+        FRFactorBounds.Free;
+        FRFactorBounds := nil;
+    end;
 end;
 
 procedure TFitClient.RemoveCurvePositions;
 begin
-    HideCurvePositions;
-    FCurvePositions.Clear;   //  dlya posleduyuschego vvoda
+    if Assigned(FCurvePositions) then
+    begin
+        HideCurvePositions;
+        FCurvePositions.Free;
+        FCurvePositions := nil;
+    end;
 end;
 
 procedure TFitClient.RemoveBackgroundPoints;
 begin
-    HideBackground;
-    FBackgroundPoints.Clear; //  dlya posleduyuschego vvoda
+    if Assigned(FBackgroundPoints) then
+    begin
+        HideBackground;
+        FBackgroundPoints.Free;
+        FBackgroundPoints := nil;
+    end;
 end;
 
 procedure TFitClient.ShowCurMin(Min: double);
@@ -537,7 +558,7 @@ begin
         FFitViewer.ShowTime;
         FFitViewer.ShowRFactor;
         if FFitViewer.GetAnimationMode then
-            UpdateComputedData;
+            UpdateComputedData(False);
     end;
 end;
 
@@ -571,7 +592,7 @@ begin
         Result := FExperimentalProfile;
 end;
 
-procedure TFitClient.UpdateComputedData;
+procedure TFitClient.UpdateComputedData(ShowExtraData: boolean);
 begin
     RemoveComputedProfile;
     FComputedProfile := FitService.GetCalcProfilePointsSet;
@@ -592,23 +613,25 @@ begin
     end;
 
     RemoveCurvePositions;
-    FCurvePositions.Free;
-    FCurvePositions := FitService.GetCurvePositions;
-    if Assigned(FCurvePositions) and (FCurvePositions.PointsCount <> 0) then
-    begin
-        FCurvePositions.FTitle := CurvePositionsName;
-        FCurvePositions.WaveLength := FWaveLength;
-        PlotCurvePositions;
-    end;
+    RemoveRFactorBounds;
 
-    RemoveRFactorBounds; //  nuzhno skryvat', t.k. menyaetsya uk-l'
-    FRFactorBounds.Free;
-    FRFactorBounds := FitService.GetRFactorBounds;
-    if Assigned(FRFactorBounds) and (FRFactorBounds.PointsCount <> 0) then
+    if ShowExtraData then
     begin
-        FRFactorBounds.FTitle := RFactorBoundsName;
-        FRFactorBounds.WaveLength := FWaveLength;
-        PlotRFactorBounds;
+        FCurvePositions := FitService.GetCurvePositions;
+        if Assigned(FCurvePositions) and (FCurvePositions.PointsCount <> 0) then
+        begin
+            FCurvePositions.FTitle := CurvePositionsName;
+            FCurvePositions.WaveLength := FWaveLength;
+            PlotCurvePositions;
+        end;
+
+        FRFactorBounds := FitService.GetRFactorBounds;
+        if Assigned(FRFactorBounds) and (FRFactorBounds.PointsCount <> 0) then
+        begin
+            FRFactorBounds.FTitle := RFactorBoundsName;
+            FRFactorBounds.WaveLength := FWaveLength;
+            PlotRFactorBounds;
+        end;
     end;
 
     HideCurves;
@@ -634,7 +657,7 @@ begin
     Assert(Assigned(FitService));
 
     ShowProfile;
-    UpdateComputedData;
+    UpdateComputedData(True);
     FAsyncState := AsyncDone;
 
     //  Updates UI.
@@ -650,8 +673,6 @@ begin
     Assert(Assigned(FitService));
     //  nuzhno skryvat', t.k. menyaetsya uk-l'
     RemoveRFactorBounds;
-    FRFactorBounds.Free;
-    FRFactorBounds := nil;
     FRFactorBounds := FitService.GetRFactorBounds;
     if Assigned(FRFactorBounds) and (FRFactorBounds.PointsCount <> 0) then
     begin
@@ -672,8 +693,6 @@ begin
     Assert(Assigned(FitService));
 
     RemoveBackgroundPoints;
-    FBackgroundPoints.Free;
-    FBackgroundPoints := nil;
     FBackgroundPoints := FitService.GetBackgroundPoints;
     if Assigned(FBackgroundPoints) and (FBackgroundPoints.PointsCount <> 0) then
     begin
@@ -694,8 +713,6 @@ begin
     Assert(Assigned(FitService));
     //  nuzhno skryvat', t.k. menyaetsya uk-l'
     RemoveRFactorBounds;
-    FRFactorBounds.Free;
-    FRFactorBounds := nil;
     FRFactorBounds := FitService.GetRFactorBounds;
     if Assigned(FRFactorBounds) and (FRFactorBounds.PointsCount <> 0) then
     begin
@@ -705,8 +722,6 @@ begin
     end;
 
     RemoveCurvePositions;
-    FCurvePositions.Free;
-    FCurvePositions := nil;
     FCurvePositions := FitService.GetCurvePositions;
     if Assigned(FCurvePositions) and (FCurvePositions.PointsCount <> 0) then
     begin
@@ -772,6 +787,7 @@ procedure TFitClient.ReplacePoint(Points: TTitlePointsSet;
     PrevXValue, PrevYValue, NewXValue, NewYValue: double; Plot: TPlotProc);
 begin
     Assert(Assigned(Points));
+
     Points.ReplacePoint(PrevXValue, PrevYValue, NewXValue, NewYValue);
     //  vyvodit' nuzhno v lyubom sluchae dlya
     //  ochistki poley posle nepravil'nogo vvoda
@@ -810,7 +826,7 @@ end;
 
 procedure TFitClient.PlotCurves;
 begin
-    if Assigned(FFitViewer) then
+    if Assigned(FFitViewer) and Assigned(FCurveList) then
         FFitViewer.PlotCurves(Self, FCurvesList, FCurveList);
 end;
 
@@ -827,31 +843,31 @@ end;
 
 procedure TFitClient.PlotSelectedPoints;
 begin
-    if Assigned(FFitViewer) then
+    if Assigned(FFitViewer) and Assigned(FSelectedPoints) then
         FFitViewer.PlotSelectedPoints(Self, FSelectedPoints);
 end;
 
 procedure TFitClient.PlotRFactorBounds;
 begin
-    if Assigned(FFitViewer) then
+    if Assigned(FFitViewer) and Assigned(FRFactorBounds) then
         FFitViewer.PlotRFactorBounds(Self, FRFactorBounds);
 end;
 
 procedure TFitClient.HideRFactorBounds;
 begin
-    if Assigned(FFitViewer) then
+    if Assigned(FFitViewer) and Assigned(FRFactorBounds) then
         FFitViewer.HideRFactorBounds(Self, FRFactorBounds);
 end;
 
 procedure TFitClient.PlotCurvePositions;
 begin
-    if Assigned(FFitViewer) then
+    if Assigned(FFitViewer) and Assigned(FCurvePositions) then
         FFitViewer.PlotCurvePositions(Self, FCurvePositions);
 end;
 
 procedure TFitClient.HideCurvePositions;
 begin
-    if Assigned(FFitViewer) then
+    if Assigned(FFitViewer) and Assigned(FCurvePositions) then
         FFitViewer.HideCurvePositions(Self, FCurvePositions);
 end;
 
@@ -867,43 +883,43 @@ end;
 
 procedure TFitClient.PlotExpProfile;
 begin
-    if Assigned(FFitViewer) then
+    if Assigned(FFitViewer) and Assigned(FExperimentalProfile) then
        FFitViewer.PlotExpProfile(Self, FExperimentalProfile);
 end;
 
 procedure TFitClient.HideExpProfile;
 begin
-    if Assigned(FFitViewer) then
+    if Assigned(FFitViewer) and Assigned(FExperimentalProfile) then
         FFitViewer.HideExpProfile(Self, FExperimentalProfile);
 end;
 
 procedure TFitClient.PlotSelectedProfileInterval;
 begin
-    if Assigned(FFitViewer) then
+    if Assigned(FFitViewer) and Assigned(FSelectedArea) then
         FFitViewer.PlotSelectedProfileInterval(Self, FSelectedArea);
 end;
 
 procedure TFitClient.PlotBackground;
 begin
-    if Assigned(FFitViewer) then
+    if Assigned(FFitViewer) and Assigned(FBackgroundPoints) then
         FFitViewer.PlotBackground(Self, FBackgroundPoints);
 end;
 
 procedure TFitClient.HideBackground;
 begin
-    if Assigned(FFitViewer) then
+    if Assigned(FFitViewer) and Assigned(FBackgroundPoints) then
         FFitViewer.HideBackground(Self, FBackgroundPoints);
 end;
 
 procedure TFitClient.PlotComputedProfile;
 begin
-    if Assigned(FFitViewer) then
+    if Assigned(FFitViewer) and Assigned(FComputedProfile) then
         FFitViewer.PlotComputedProfile(Self, FComputedProfile);
 end;
 
 procedure TFitClient.PlotDeltaProfile;
 begin
-    if Assigned(FFitViewer) then
+    if Assigned(FFitViewer) and Assigned(FDeltaProfile) then
         FFitViewer.PlotDeltaProfile(Self, FDeltaProfile);
 end;
 
@@ -915,9 +931,7 @@ end;
 
 procedure TFitClient.RefreshPointsSet(ToRefresh: TNeutronPointsSet);
 begin
-    Assert(Assigned(ToRefresh));
-
-    if Assigned(FFitViewer) then
+    if Assigned(FFitViewer) and Assigned(ToRefresh) then
         FFitViewer.RefreshPointsSet(Self, ToRefresh);
 end;
 
@@ -957,7 +971,6 @@ begin
     Assert(Assigned(FSelectedPoints));
     ReplacePoint(FSelectedPoints,
         PrevXValue, PrevYValue, NewXValue, NewYValue, PlotSelectedPoints);
-    //???  vyzov servera
 end;
 
 procedure TFitClient.ReplacePointInBackground(
@@ -1001,13 +1014,13 @@ end;
 procedure TFitClient.AddPointToRFactorBounds(XValue, YValue: double);
 begin
     FitService.AddPointToRFactorBounds(XValue, YValue);
-    UpdateComputedData;
+    UpdateComputedData(True);
 end;
 
 procedure TFitClient.AddPointToCurvePositions(XValue, YValue: double);
 begin
     FitService.AddPointToCurvePositions(XValue, YValue);
-    UpdateComputedData;
+    UpdateComputedData(True);
 end;
 
 procedure TFitClient.SetSelectionMode(ASelectionMode: TSelMode);

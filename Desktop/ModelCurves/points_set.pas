@@ -68,7 +68,10 @@ implementation
 
 function TPointsSet.GetPointsCount: longint;
 begin
-    Result := Length(FPoints);
+    if Assigned(FPoints) then
+        Result := Length(FPoints)
+    else
+        Result := 0;
 end;
 
 function TPointsSet.GetPointXCoord(index: longint): double;

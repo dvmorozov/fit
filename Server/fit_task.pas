@@ -1167,16 +1167,16 @@ var
 begin
     SelectedCurveTypeId := FCurveTypeSelector.GetSelectedCurveType;
     if IsEqualGUID(SelectedCurveTypeId, TLorentzPointsSet.GetCurveTypeId) then
-        Result := TLorentzPointsSet.Create(nil)
+        Result := TLorentzPointsSet.Create(nil, 0)
     else
     if IsEqualGUID(SelectedCurveTypeId, TGaussPointsSet.GetCurveTypeId) then
-        Result := TGaussPointsSet.Create(nil)
+        Result := TGaussPointsSet.Create(nil, 0)
     else
     if IsEqualGUID(SelectedCurveTypeId, TPseudoVoigtPointsSet.GetCurveTypeId) then
-        Result := TPseudoVoigtPointsSet.Create(nil)
+        Result := TPseudoVoigtPointsSet.Create(nil, 0)
     else
     if IsEqualGUID(SelectedCurveTypeId, TAsymPseudoVoigtPointsSet.GetCurveTypeId) then
-        Result := TAsymPseudoVoigtPointsSet.Create(nil)
+        Result := TAsymPseudoVoigtPointsSet.Create(nil, 0)
     else
 {$IFDEF WINDOWS_SPECIFIC}
     if IsEqualGUID(SelectedCurveTypeId, TUserPointsSet.GetCurveTypeId) then
@@ -1190,7 +1190,7 @@ begin
 {$ENDIF}
     if IsEqualGUID(SelectedCurveTypeId,
         T2BranchesPseudoVoigtPointsSet.GetCurveTypeId) then
-        Result := T2BranchesPseudoVoigtPointsSet.Create(nil);
+        Result := T2BranchesPseudoVoigtPointsSet.Create(nil, 0);
 
     if FCommonVariableParameters.Count = 0 then
         for i := 0 to Result.Parameters.Count - 1 do

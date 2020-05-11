@@ -41,7 +41,7 @@ type
         procedure DoCalc(const Bounds: TPointsSet); override;
 
     public
-        constructor Create(AOwner: TComponent); override;
+        constructor Create(AOwner: TComponent; x0: double);
         { Overrides method defined in TNamedPointsSet. }
         class function GetCurveTypeName: string; override;
         { Overrides method defined in TNamedPointsSet. }
@@ -78,17 +78,18 @@ begin
         TwoBranchesPseudoVoigt(Points, A, Sigma, Eta, SigmaRight, EtaRight, x0);
 end;
 
-constructor T2BranchesPseudoVoigtPointsSet.Create(AOwner: TComponent);
+constructor T2BranchesPseudoVoigtPointsSet.Create(AOwner: TComponent; x0: double);
 var
     Parameter: TSpecialCurveParameter;
     Count:     longint;
 begin
-    inherited;
+    inherited Create(AOwner);
 
     Parameter := TAmplitudeCurveParameter.Create;
     AddParameter(Parameter);
 
-    Parameter := TPositionCurveParameter.Create(Self);
+    Parameter := TPositionCurveParameter.Create;
+    TPositionCurveParameter(Parameter).SetBoundaries(x0, Self);
     AddParameter(Parameter);
 
     Parameter := TSigmaCurveParameter.Create;

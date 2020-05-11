@@ -32,7 +32,7 @@ type
         procedure DoCalc(const Bounds: TPointsSet); override;
 
     public
-        constructor Create(AOwner: TComponent); override;
+        constructor Create(AOwner: TComponent; x0: double);
         { Overrides method defined in TNamedPointsSet. }
         class function GetCurveTypeName: string; override;
         { Overrides method defined in TNamedPointsSet. }
@@ -53,16 +53,17 @@ uses
 
 {=========================== TGaussPointsSet ==================================}
 
-constructor TGaussPointsSet.Create(AOwner: TComponent);
+constructor TGaussPointsSet.Create(AOwner: TComponent; x0: double);
 var
     Parameter: TSpecialCurveParameter;
     Count:     longint;
 begin
-    inherited;
+    inherited Create(AOwner);
     Parameter := TAmplitudeCurveParameter.Create;
     AddParameter(Parameter);
 
-    Parameter := TPositionCurveParameter.Create(Self);
+    Parameter := TPositionCurveParameter.Create;
+    TPositionCurveParameter(Parameter).SetBoundaries(x0, Self);  ;
     AddParameter(Parameter);
 
     Parameter := TSigmaCurveParameter.Create;

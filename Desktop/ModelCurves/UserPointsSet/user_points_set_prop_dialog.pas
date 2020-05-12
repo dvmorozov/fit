@@ -83,7 +83,7 @@ begin
     begin
         Parameter := FCurveType.Parameters[i];
         if (Parameter.Type_ = InvariablePosition) or
-            (Parameter.Type_ = VariablePosition) then
+           (Parameter.Type_ = VariablePosition) then
             Parameter.Type_ := Variable;
     end;
 
@@ -228,7 +228,7 @@ begin
             ComboPosition.Items.AddObject(Parameter.Name, Parameter);
 
             if (Parameter.Type_ = InvariablePosition) or
-                (Parameter.Type_ = VariablePosition) then
+               (Parameter.Type_ = VariablePosition) then
                 PosName := Parameter.Name;
         end;
     end;
@@ -246,8 +246,8 @@ begin
     begin
         Parameter := FCurveType.Parameters[i];
         if (Parameter.Type_ = Shared) or (Parameter.Type_ = Variable) or
-            (Parameter.Type_ = InvariablePosition) or
-            (Parameter.Type_ = VariablePosition) then
+           (Parameter.Type_ = InvariablePosition) or
+           (Parameter.Type_ = VariablePosition) then
         begin
             Index := CheckListFixed.Items.Add(Parameter.Name);
             if (Parameter.Type_ = Shared) or (Parameter.Type_ = InvariablePosition) then

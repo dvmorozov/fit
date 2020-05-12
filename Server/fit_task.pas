@@ -1193,6 +1193,7 @@ begin
         Result := T2BranchesPseudoVoigtPointsSet.Create(nil, x0);
 
     if FCommonVariableParameters.Count = 0 then
+    begin
         for i := 0 to Result.Parameters.Count - 1 do
             if (Result.Parameters[i].Type_ = Shared) and
                 (not Result.Parameters[i].VariationDisabled) then
@@ -1204,7 +1205,7 @@ begin
                 try
                     Container :=
                         TPersistentCurveParameterContainer(
-                        FCommonVariableParameters.Params.Add);
+                            FCommonVariableParameters.Params.Add);
 
                     try
                         Container.Parameter := Parameter;
@@ -1219,14 +1220,18 @@ begin
                     raise;
                 end;
             end;
-    //  Initializing list of common parameters. It is performed only
-    //  once when the first curve instance is created (it is assumed
-    //  that all the instances have the same type).
-    //  TODO: remove the assumption mentioned above.
-    for i := 0 to Result.Parameters.Count - 1 do
-    begin
-        Result.Parameters[i].InitValue;
-        Result.Parameters[i].InitVariationStep;
+        //  Initializing list of common parameters. It is performed only
+        //  once when the first curve instance is created (it is assumed
+        //  that all the instances have the same type).
+        //  TODO: remove the assumption mentioned above.
+        for i := 0 to FCommonVariableParameters.Params.Count - 1 do
+        begin
+            Container := TPersistentCurveParameterContainer(
+                FCommonVariableParameters.Params.Items[i]);
+
+            Container.Parameter.InitValue;
+            Container.Parameter.InitVariationStep;
+        end;
     end;
 end;
 

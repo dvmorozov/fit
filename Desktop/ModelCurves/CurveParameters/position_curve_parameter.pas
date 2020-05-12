@@ -18,17 +18,20 @@ type
         { X0 variation boundaries. }
         Fx0Low, Fx0High: double;
 
+        constructor Create; overload;
+        procedure SetBoundaries(x0: double; PointsSet: TPointsSet);
+
     protected
         procedure SetValue(AValue: double); override;
 
     public
-        constructor Create;
+        constructor Create(x0: double; PointsSet: TPointsSet); overload;
         function CreateCopy: TSpecialCurveParameter; override;
         procedure CopyTo(const Dest: TSpecialCurveParameter); override;
         procedure InitVariationStep; override;
         procedure InitValue; override;
         function MinimumStepAchieved: boolean; override;
-        procedure SetBoundaries(Value: double; PointsSet: TPointsSet);
+
     end;
 
 implementation
@@ -44,6 +47,16 @@ begin
     inherited Create;
     FName      := 'x0';
     FType      := VariablePosition;
+    Fx0Low     := MIN_VALUE;
+    Fx0High    := MAX_VALUE;
+end;
+
+constructor TPositionCurveParameter.Create(x0: double; PointsSet: TPointsSet);
+begin
+    inherited Create;
+    FName      := 'x0';
+    FType      := VariablePosition;
+    SetBoundaries(x0, PointsSet);
 end;
 
 procedure TPositionCurveParameter.InitVariationStep;
@@ -69,7 +82,7 @@ begin
     TPositionCurveParameter(Dest).Fx0High := Fx0High;
 end;
 
-procedure TPositionCurveParameter.SetBoundaries(Value: double; PointsSet: TPointsSet);
+procedure TPositionCurveParameter.SetBoundaries(x0: double; PointsSet: TPointsSet);
 var
     i: longint;
     TempDouble: double;
@@ -81,37 +94,34 @@ begin
     Lowindex  := -1;
 
     { Searches of curve points closest to the given position
-      value and return them as  boundaries of variation. }
+      x0 and return them as  boundaries of variation. }
     for i := 0 to PointsSet.PointsCount - 1 do
     begin
         TempDouble := PointsSet.PointXCoord[i];
-        if TempDouble < Value then
+        if TempDouble < x0 then
         begin
-            if Abs(TempDouble - Value) < Abs(Fx0Low - Value) then
+            if Abs(TempDouble - x0) < Abs(Fx0Low - x0) then
                 Fx0Low := TempDouble;
             Lowindex   := i;
         end;
-        if TempDouble > Value then
+        if TempDouble > x0 then
         begin
-            if Abs(TempDouble - Value) < Abs(Fx0High - Value) then
+            if Abs(TempDouble - x0) < Abs(Fx0High - x0) then
                 Fx0High := TempDouble;
             Highindex   := i;
         end;
     end;
 
     if Lowindex = -1 then
-        Fx0Low := Value;
+        Fx0Low := x0;
     if Highindex = -1 then
-        Fx0High := Value;
+        Fx0High := x0;
 end;
 
 procedure TPositionCurveParameter.SetValue(AValue: double);
 begin
-    //  nuzhno brat' po modulyu, potomu chto
-    //  algoritm optimizatsii mozhet zagonyat'
-    //  v oblast' otritsatel'nyh znacheniy
-    FValue := Abs(AValue);
-
+    FValue := AValue;
+    { Checks boundary conditions. }
     if FValue < Fx0Low then
     begin
         FValue := Fx0Low;

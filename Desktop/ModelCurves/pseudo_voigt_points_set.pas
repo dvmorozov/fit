@@ -81,8 +81,7 @@ begin
     Parameter := TAmplitudeCurveParameter.Create;
     AddParameter(Parameter);
 
-    Parameter := TPositionCurveParameter.Create;
-    TPositionCurveParameter(Parameter).SetBoundaries(x0, Self);
+    Parameter := TPositionCurveParameter.Create(x0, Self);
     AddParameter(Parameter);
 
     Parameter := TSigmaCurveParameter.Create;

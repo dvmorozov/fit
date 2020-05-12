@@ -202,7 +202,7 @@ type
     public
         constructor Create(AOwner: TComponent;
             AEnableBackgroundVariation: boolean;
-            ACurveScalingEnabled: boolean); virtual;
+            ACurveScalingEnabled: boolean); overload;
         destructor Destroy; override;
 
         { Sets up experimental profile data. }

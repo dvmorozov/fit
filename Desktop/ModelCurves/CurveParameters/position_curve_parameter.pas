@@ -53,7 +53,7 @@ end;
 
 procedure TPositionCurveParameter.InitValue;
 begin
-    //??? FValue := 0;
+    FValue := 0;
 end;
 
 function TPositionCurveParameter.CreateCopy: TSpecialCurveParameter;

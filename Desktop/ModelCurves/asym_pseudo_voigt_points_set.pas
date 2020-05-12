@@ -39,7 +39,7 @@ type
         property DeltaSigma: double read GetDeltaSigma;
 
     public
-        constructor Create(AOwner: TComponent); override;
+        constructor Create(AOwner: TComponent; x0: double);
         { Overrides method defined in TNamedPointsSet. }
         class function GetCurveTypeName: string; override;
         { Overrides method defined in TNamedPointsSet. }
@@ -78,7 +78,7 @@ begin
     Result := FDeltaSigmaP.Value;
 end;
 
-constructor TAsymPseudoVoigtPointsSet.Create(AOwner: TComponent);
+constructor TAsymPseudoVoigtPointsSet.Create(AOwner: TComponent; x0: double);
 var
     Count: longint;
 begin

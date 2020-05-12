@@ -52,7 +52,7 @@ type
 
         constructor Create(AOwner: TComponent;
             AEnableBackgroundVariation: boolean;
-            ACurveScalingEnabled: boolean); override;
+            ACurveScalingEnabled: boolean); overload;
         destructor Destroy; override;
         { Sets up termination flags and waits for
           actual termination of the thread. }

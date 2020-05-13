@@ -63,9 +63,6 @@ type
         FUpdateGrids: boolean;
         { Enables updating legend. By default is true. }
         FUpdateLegends: boolean;
-        { Enables animation mode in which UI is updated on every
-          computation cycle not only on finishing. By default is false. }
-        FAnimationMode: boolean;
 
         procedure SetXCoordMode(AMode: longint);
 
@@ -154,15 +151,17 @@ type
         procedure Clear(Sender: TObject);
         { Method of IFitViewer interface. }
         procedure Hide(Sender: TObject; PointsSet: TNeutronPointsSet);
+{$IFDEF USE_GRIDS}
         { Method of IFitViewer interface. }
         procedure SetUpdateGrids(Update: boolean);
-        { Method of IFitViewer interface. }
-        procedure SetUpdateLegends(Update: boolean);
-{$IFDEF USE_GRIDS}
         { Method of IFitViewer interface. }
         procedure FillDatasheetTable(ExperimentalProfile: TTitlePointsSet;
             CurvesList: TSelfCopiedCompList; ComputedProfile: TTitlePointsSet;
             DeltaProfile: TTitlePointsSet; RFactorBounds: TTitlePointsSet);
+{$ENDIF}
+{$IFDEF USE_LEGEND}
+        { Method of IFitViewer interface. }
+        procedure SetUpdateLegends(Update: boolean);
 {$ENDIF}
 {$IFNDEF SERVER}
         { Method of IFitViewer interface. }
@@ -171,10 +170,6 @@ type
         procedure ShowRFactor;
         { Method of IFitViewer interface. }
         procedure ShowHint(Hint: string);
-        { Method of IFitViewer interface. }
-        procedure SetAnimationMode(On: boolean);
-        { Method of IFitViewer interface. }
-        function GetAnimationMode: boolean;
 {$ENDIF}
 
         procedure SetViewMarkers(AViewMarkers: boolean);
@@ -768,15 +763,19 @@ begin
     PlotPointsSet(ExpProfile);
 end;
 
+{$IFDEF USE_GRIDS}
 procedure TFitViewer.SetUpdateGrids(Update: boolean);
 begin
     FUpdateGrids := Update;
 end;
+{$ENDIF}
 
+{$IFDEF USE_LEGEND}
 procedure TFitViewer.SetUpdateLegends(Update: boolean);
 begin
     FUpdateLegends := Update;
 end;
+{$ENDIF}
 
 {$IFNDEF SERVER}
 procedure TFitViewer.ShowTime;
@@ -793,27 +792,6 @@ procedure TFitViewer.ShowHint(Hint: string);
 begin
     TFormMain(Form).ShowHint(Hint);
 end;
-
-procedure TFitViewer.SetAnimationMode(On: boolean);
-begin
-    FAnimationMode := On;
-    if On then
-    begin
-        FUpdateGrids   := False;
-        FUpdateLegends := False;
-    end
-    else
-    begin
-        FUpdateGrids   := True;
-        FUpdateLegends := True;
-    end;
-end;
-
-function TFitViewer.GetAnimationMode: boolean;
-begin
-    Result := FAnimationMode;
-end;
-
 {$ENDIF}
 
 constructor TFitViewer.Create(AOwner: TComponent);
@@ -1284,76 +1262,79 @@ begin
     Assert(RFactorBounds.PointsCount mod 2 = 0);
     Assert(RFactorBounds.PointsCount <> 0);
 
-{$IFDEF WINDOWS}
-    TFormMain(Form).TabSheetDatasheet.TabVisible := True;
-{$ENDIF}
-    with TFormMain(Form).GridDatasheet do
+    if FUpdateGrids then
     begin
-        //  nastroyka parametrov setki
-        //  chislo kolonok = 1 (fiks.) + 3
-        //  (eksp. profil', rasschit. profil', raznost') +
-        //  maksimal'noe chislo krivyh v nekotorom intervale
-        ColCount    := 4 + GetMaxCurveNum(CurvesList, RFactorBounds);
-        //  na kazhdyy interval dobavlyaetsya stroka zagolovka
-        RowCount    := 1 + GetPointsNumInBounds(ExperimentalProfile, RFactorBounds) +
-            RFactorBounds.PointsCount div 2;
-        FixedCols   := 1;
-        FixedRows   := 1;
-        //  zapolnenie yacheek
-        //  zagolovki stolbtsov (!!! d.b. ne men'she 4-h - sm. nizhe !!!)
-        Cells[0, 0] := ArgumentName;
-        Cells[1, 0] := ValueName;
-        Cells[2, 0] := SummarizedName;
-        Cells[3, 0] := DeltaName;
-        for i := 4 to ColCount - 1 do
-            Cells[i, 0] := 'Curve ' + IntToStr(i - 3);
-
-        i := 0;
-        RowIndex := FixedRows;
-        while i < RFactorBounds.PointsCount do
+{$IFDEF WINDOWS}
+        TFormMain(Form).TabSheetDatasheet.TabVisible := True;
+{$ENDIF}
+        with TFormMain(Form).GridDatasheet do
         begin
-            //  !!! RowIndex d. ukazyvat' na nachalo dannyh intervala !!!
-            StartX := RFactorBounds.PointXCoord[i];
-            //  formiruetsya zagolovok
-            for j := 1 to ColCount - 1 do
-                Cells[j, RowIndex] := '';
-            Cells[1, RowIndex]     := 'Interval';
-            Cells[2, RowIndex]     := 'number';
-            Cells[3, RowIndex]     := IntToStr(i div 2 + 1);
-            Inc(RowIndex);
+            //  nastroyka parametrov setki
+            //  chislo kolonok = 1 (fiks.) + 3
+            //  (eksp. profil', rasschit. profil', raznost') +
+            //  maksimal'noe chislo krivyh v nekotorom intervale
+            ColCount    := 4 + GetMaxCurveNum(CurvesList, RFactorBounds);
+            //  na kazhdyy interval dobavlyaetsya stroka zagolovka
+            RowCount    := 1 + GetPointsNumInBounds(ExperimentalProfile, RFactorBounds) +
+                RFactorBounds.PointsCount div 2;
+            FixedCols   := 1;
+            FixedRows   := 1;
+            //  zapolnenie yacheek
+            //  zagolovki stolbtsov (!!! d.b. ne men'she 4-h - sm. nizhe !!!)
+            Cells[0, 0] := ArgumentName;
+            Cells[1, 0] := ValueName;
+            Cells[2, 0] := SummarizedName;
+            Cells[3, 0] := DeltaName;
+            for i := 4 to ColCount - 1 do
+                Cells[i, 0] := 'Curve ' + IntToStr(i - 3);
 
-            StartIndex := ExperimentalProfile.IndexOfValueX(RFactorBounds.PointXCoord[i]);
-            EndIndex   := ExperimentalProfile.IndexOfValueX(RFactorBounds.PointXCoord[i + 1]);
-            for j := StartIndex to EndIndex do
+            i := 0;
+            RowIndex := FixedRows;
+            while i < RFactorBounds.PointsCount do
             begin
-                Cells[0, RowIndex + j - StartIndex] :=
-                    ValToStr(ExperimentalProfile.PointXCoord[j]);
-                Cells[1, RowIndex + j - StartIndex] :=
-                    ValToStr(ExperimentalProfile.PointYCoord[j]);
-                Cells[2, RowIndex + j - StartIndex] :=
-                    ValToStr(ComputedProfile.PointYCoord[j]);
-                Cells[3, RowIndex + j - StartIndex] :=
-                    ValToStr(DeltaProfile.PointYCoord[j]);
-            end;
-            //  po vsem krivym, otnosyaschimsya k dannomu intervalu
-            ColIndex := 4;
-            for j := 0 to CurvesList.Count - 1 do
-            begin
-                P := TCurvePointsSet(CurvesList.Items[j]);
-                if StartX = P.PointXCoord[0] then
+                //  !!! RowIndex d. ukazyvat' na nachalo dannyh intervala !!!
+                StartX := RFactorBounds.PointXCoord[i];
+                //  formiruetsya zagolovok
+                for j := 1 to ColCount - 1 do
+                    Cells[j, RowIndex] := '';
+                Cells[1, RowIndex]     := 'Interval';
+                Cells[2, RowIndex]     := 'number';
+                Cells[3, RowIndex]     := IntToStr(i div 2 + 1);
+                Inc(RowIndex);
+
+                StartIndex := ExperimentalProfile.IndexOfValueX(RFactorBounds.PointXCoord[i]);
+                EndIndex   := ExperimentalProfile.IndexOfValueX(RFactorBounds.PointXCoord[i + 1]);
+                for j := StartIndex to EndIndex do
                 begin
-                    for k := 0 to P.PointsCount - 1 do
-                        Cells[ColIndex, RowIndex + k] :=
-                            ValToStr(P.PointYCoord[k]);
-                    Inc(ColIndex);
+                    Cells[0, RowIndex + j - StartIndex] :=
+                        ValToStr(ExperimentalProfile.PointXCoord[j]);
+                    Cells[1, RowIndex + j - StartIndex] :=
+                        ValToStr(ExperimentalProfile.PointYCoord[j]);
+                    Cells[2, RowIndex + j - StartIndex] :=
+                        ValToStr(ComputedProfile.PointYCoord[j]);
+                    Cells[3, RowIndex + j - StartIndex] :=
+                        ValToStr(DeltaProfile.PointYCoord[j]);
                 end;
+                //  po vsem krivym, otnosyaschimsya k dannomu intervalu
+                ColIndex := 4;
+                for j := 0 to CurvesList.Count - 1 do
+                begin
+                    P := TCurvePointsSet(CurvesList.Items[j]);
+                    if StartX = P.PointXCoord[0] then
+                    begin
+                        for k := 0 to P.PointsCount - 1 do
+                            Cells[ColIndex, RowIndex + k] :=
+                                ValToStr(P.PointYCoord[k]);
+                        Inc(ColIndex);
+                    end;
+                end;
+                i := i + 2;
+                RowIndex := RowIndex + EndIndex - StartIndex + 1;
             end;
-            i := i + 2;
-            RowIndex := RowIndex + EndIndex - StartIndex + 1;
+            ResetColWidths;
         end;
-        ResetColWidths;
+        TFormMain(Form).FModifiedDatasheet := True;
     end;
-    TFormMain(Form).FModifiedDatasheet := True;
 end;
 
 procedure TFitViewer.FillCurveTable(CurveList: TMSCRCurveList);
@@ -1367,7 +1348,6 @@ begin
     TFormMain(Form).TabSheetParameters.TabVisible := True;
 {$ENDIF}
 end;
-
 {$ENDIF}
 
 function TFitViewer.GetMaxCurveNum(CurvesList: TSelfCopiedCompList;

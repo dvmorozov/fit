@@ -750,16 +750,19 @@ end;
 
 procedure TFormMain.ActionAnimationModeExecute(Sender: TObject);
 begin
-    Assert(Assigned(FFitViewer));
+    Assert(Assigned(FitClientApp_));
+    Assert(Assigned(FitClientApp_.FitClient));
 
-    FFitViewer.SetAnimationMode(not FFitViewer.GetAnimationMode);
+    FitClientApp_.FitClient.AnimationMode :=
+        not FitClientApp_.FitClient.AnimationMode;
 end;
 
 procedure TFormMain.ActionAnimationModeUpdate(Sender: TObject);
 begin
-    Assert(Assigned(FFitViewer));
+    Assert(Assigned(FitClientApp_));
+    Assert(Assigned(FitClientApp_.FitClient));
 
-    ActionAnimationMode.Checked := FFitViewer.GetAnimationMode;
+    ActionAnimationMode.Checked := FitClientApp_.FitClient.AnimationMode;
 end;
 
 procedure TFormMain.ActionDoAllAutomaticallyExecute(Sender: TObject);

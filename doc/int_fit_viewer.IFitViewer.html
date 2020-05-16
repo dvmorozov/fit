@@ -29,11 +29,11 @@ Defines interface allowing to display data in chart and grids. Drawing methods f
 <table class="summary wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="int_fit_viewer.IFitViewer.html#GetAnimationMode">GetAnimationMode</a></b>: Boolean;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="int_fit_viewer.IFitViewer.html#Clear">Clear</a></b>(Sender: TObject);</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="int_fit_viewer.IFitViewer.html#Clear">Clear</a></b>(Sender: TObject);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="int_fit_viewer.IFitViewer.html#FillDatasheetTable">FillDatasheetTable</a></b>(Profile: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>; CurvesList: <a  href="self_copied_component.TSelfCopiedCompList.html">TSelfCopiedCompList</a>; ComputedProfile: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>; DeltaProfile: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>; RFactorBounds: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
@@ -41,55 +41,55 @@ Defines interface allowing to display data in chart and grids. Drawing methods f
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="int_fit_viewer.IFitViewer.html#HideBackground">HideBackground</a></b>( Sender: TObject; BackgroundPoints: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="int_fit_viewer.IFitViewer.html#HideBackground">HideBackground</a></b>(Sender: TObject; BackgroundPoints: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="int_fit_viewer.IFitViewer.html#HideCurvePositions">HideCurvePositions</a></b>( Sender: TObject; CurvePositions: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="int_fit_viewer.IFitViewer.html#HideCurvePositions">HideCurvePositions</a></b>(Sender: TObject; CurvePositions: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="int_fit_viewer.IFitViewer.html#HideDataPoints">HideDataPoints</a></b>( Sender: TObject; DataPoints: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="int_fit_viewer.IFitViewer.html#HideExpProfile">HideExpProfile</a></b>(Sender: TObject; DataPoints: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="int_fit_viewer.IFitViewer.html#HideRFactorIntervals">HideRFactorIntervals</a></b>( Sender: TObject; RFactorIntervals: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="int_fit_viewer.IFitViewer.html#HideRFactorBounds">HideRFactorBounds</a></b>(Sender: TObject; RFactorBounds: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="int_fit_viewer.IFitViewer.html#PlotBackground">PlotBackground</a></b>( Sender: TObject; BackgroundPoints: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="int_fit_viewer.IFitViewer.html#PlotBackground">PlotBackground</a></b>(Sender: TObject; BackgroundPoints: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="int_fit_viewer.IFitViewer.html#PlotCurvePositions">PlotCurvePositions</a></b>( Sender: TObject; CurvePositions: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="int_fit_viewer.IFitViewer.html#PlotComputedProfile">PlotComputedProfile</a></b>(Sender: TObject; ComputedProfile: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="int_fit_viewer.IFitViewer.html#PlotDataPoints">PlotDataPoints</a></b>( Sender: TObject; DataPoints: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="int_fit_viewer.IFitViewer.html#PlotCurvePositions">PlotCurvePositions</a></b>(Sender: TObject; CurvePositions: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="int_fit_viewer.IFitViewer.html#PlotDeltaProfile">PlotDeltaProfile</a></b>( Sender: TObject; DeltaProfile: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="int_fit_viewer.IFitViewer.html#PlotCurves">PlotCurves</a></b>(Sender: TObject; CurvePointsSetList: <a  href="self_copied_component.TSelfCopiedCompList.html">TSelfCopiedCompList</a>; CurveList: <a  href="mscr_specimen_list.TMSCRCurveList.html">TMSCRCurveList</a>);</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="int_fit_viewer.IFitViewer.html#PlotGaussProfile">PlotGaussProfile</a></b>( Sender: TObject; GaussProfile: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="int_fit_viewer.IFitViewer.html#PlotDeltaProfile">PlotDeltaProfile</a></b>(Sender: TObject; DeltaProfile: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="int_fit_viewer.IFitViewer.html#PlotRFactorIntervals">PlotRFactorIntervals</a></b>( Sender: TObject; RFactorIntervals: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="int_fit_viewer.IFitViewer.html#PlotExpProfile">PlotExpProfile</a></b>(Sender: TObject; DataPoints: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="int_fit_viewer.IFitViewer.html#PlotSelectedArea">PlotSelectedArea</a></b>( Sender: TObject; SelectedArea: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="int_fit_viewer.IFitViewer.html#PlotRFactorBounds">PlotRFactorBounds</a></b>(Sender: TObject; RFactorBounds: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="int_fit_viewer.IFitViewer.html#PlotSelectedPoints">PlotSelectedPoints</a></b>( Sender: TObject; SelectedPoints: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="int_fit_viewer.IFitViewer.html#PlotSelectedPoints">PlotSelectedPoints</a></b>(Sender: TObject; SelectedPoints: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="int_fit_viewer.IFitViewer.html#PlotSpecimens">PlotSpecimens</a></b>(Sender: TObject; CurvePointsSetList: <a  href="self_copied_component.TSelfCopiedCompList.html">TSelfCopiedCompList</a>; SpecimenList: <a  href="mscr_specimen_list.TMSCRSpecimenList.html">TMSCRSpecimenList</a>);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="int_fit_viewer.IFitViewer.html#PlotSelectedProfileInterval">PlotSelectedProfileInterval</a></b>(Sender: TObject; SelectedArea: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
@@ -97,21 +97,25 @@ Defines interface allowing to display data in chart and grids. Drawing methods f
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="int_fit_viewer.IFitViewer.html#RefreshPointsSet">RefreshPointsSet</a></b>( Sender: TObject; PointsSet: <a  href="neutron_points_set.TNeutronPointsSet.html">TNeutronPointsSet</a>);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="int_fit_viewer.IFitViewer.html#RefreshPointsSet">RefreshPointsSet</a></b>(Sender: TObject; PointsSet: <a  href="neutron_points_set.TNeutronPointsSet.html">TNeutronPointsSet</a>);</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="int_fit_viewer.IFitViewer.html#SetAnimationMode">SetAnimationMode</a></b>(On: Boolean);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="int_fit_viewer.IFitViewer.html#SetUpdateGrids">SetUpdateGrids</a></b>(Update: boolean);</code></td>
 </tr>
 <tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="int_fit_viewer.IFitViewer.html#SetUpdateLegends">SetUpdateLegends</a></b>(Update: boolean);</code></td>
+</tr>
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="int_fit_viewer.IFitViewer.html#ShowHint">ShowHint</a></b>(Hint: string);</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="int_fit_viewer.IFitViewer.html#ShowRFactor">ShowRFactor</a></b>;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="int_fit_viewer.IFitViewer.html#ShowTime">ShowTime</a></b>;</code></td>
 </tr>
@@ -121,21 +125,21 @@ Defines interface allowing to display data in chart and grids. Drawing methods f
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetAnimationMode"></span><code>function <b>GetAnimationMode</b>: Boolean;</code></td>
-</tr>
-<tr><td colspan="2">
-<p>
-Returns status of current animation mode.</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
 <td class="itemcode"><span id="Clear"></span><code>procedure <b>Clear</b>(Sender: TObject);</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
 Is called before cleaning all diagram data.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="FillDatasheetTable"></span><code>procedure <b>FillDatasheetTable</b>(Profile: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>; CurvesList: <a  href="self_copied_component.TSelfCopiedCompList.html">TSelfCopiedCompList</a>; ComputedProfile: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>; DeltaProfile: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>; RFactorBounds: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Handler to fill data table.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -151,7 +155,7 @@ Hides given point set and removes corresponding item from CheckBox.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="HideBackground"></span><code>procedure <b>HideBackground</b>( Sender: TObject; BackgroundPoints: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
+<td class="itemcode"><span id="HideBackground"></span><code>procedure <b>HideBackground</b>(Sender: TObject; BackgroundPoints: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -159,7 +163,7 @@ Hides given point set and removes corresponding item from CheckBox.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="HideCurvePositions"></span><code>procedure <b>HideCurvePositions</b>( Sender: TObject; CurvePositions: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
+<td class="itemcode"><span id="HideCurvePositions"></span><code>procedure <b>HideCurvePositions</b>(Sender: TObject; CurvePositions: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -167,7 +171,7 @@ Hides given point set and removes corresponding item from CheckBox.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="HideDataPoints"></span><code>procedure <b>HideDataPoints</b>( Sender: TObject; DataPoints: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
+<td class="itemcode"><span id="HideExpProfile"></span><code>procedure <b>HideExpProfile</b>(Sender: TObject; DataPoints: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -175,7 +179,7 @@ Hides given point set and removes corresponding item from CheckBox.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="HideRFactorIntervals"></span><code>procedure <b>HideRFactorIntervals</b>( Sender: TObject; RFactorIntervals: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
+<td class="itemcode"><span id="HideRFactorBounds"></span><code>procedure <b>HideRFactorBounds</b>(Sender: TObject; RFactorBounds: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -183,7 +187,7 @@ Hides given point set and removes corresponding item from CheckBox.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="PlotBackground"></span><code>procedure <b>PlotBackground</b>( Sender: TObject; BackgroundPoints: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
+<td class="itemcode"><span id="PlotBackground"></span><code>procedure <b>PlotBackground</b>(Sender: TObject; BackgroundPoints: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -191,7 +195,7 @@ Hides given point set and removes corresponding item from CheckBox.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="PlotCurvePositions"></span><code>procedure <b>PlotCurvePositions</b>( Sender: TObject; CurvePositions: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
+<td class="itemcode"><span id="PlotComputedProfile"></span><code>procedure <b>PlotComputedProfile</b>(Sender: TObject; ComputedProfile: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -199,7 +203,7 @@ Hides given point set and removes corresponding item from CheckBox.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="PlotDataPoints"></span><code>procedure <b>PlotDataPoints</b>( Sender: TObject; DataPoints: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
+<td class="itemcode"><span id="PlotCurvePositions"></span><code>procedure <b>PlotCurvePositions</b>(Sender: TObject; CurvePositions: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -207,52 +211,52 @@ Hides given point set and removes corresponding item from CheckBox.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="PlotDeltaProfile"></span><code>procedure <b>PlotDeltaProfile</b>( Sender: TObject; DeltaProfile: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="PlotGaussProfile"></span><code>procedure <b>PlotGaussProfile</b>( Sender: TObject; GaussProfile: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="PlotRFactorIntervals"></span><code>procedure <b>PlotRFactorIntervals</b>( Sender: TObject; RFactorIntervals: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="PlotSelectedArea"></span><code>procedure <b>PlotSelectedArea</b>( Sender: TObject; SelectedArea: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="PlotSelectedPoints"></span><code>procedure <b>PlotSelectedPoints</b>( Sender: TObject; SelectedPoints: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="PlotSpecimens"></span><code>procedure <b>PlotSpecimens</b>(Sender: TObject; CurvePointsSetList: <a  href="self_copied_component.TSelfCopiedCompList.html">TSelfCopiedCompList</a>; SpecimenList: <a  href="mscr_specimen_list.TMSCRSpecimenList.html">TMSCRSpecimenList</a>);</code></td>
+<td class="itemcode"><span id="PlotCurves"></span><code>procedure <b>PlotCurves</b>(Sender: TObject; CurvePointsSetList: <a  href="self_copied_component.TSelfCopiedCompList.html">TSelfCopiedCompList</a>; CurveList: <a  href="mscr_specimen_list.TMSCRCurveList.html">TMSCRCurveList</a>);</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
 Handler drawing specimen curves. Provides different ways of displaying data. Component which will actually display the data must store all pointers to visual components inside its own memory to be able <a class="normal" href="int_fit_viewer.IFitViewer.html#Hide">hide</a> them.</p>
 </td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="PlotDeltaProfile"></span><code>procedure <b>PlotDeltaProfile</b>(Sender: TObject; DeltaProfile: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="PlotExpProfile"></span><code>procedure <b>PlotExpProfile</b>(Sender: TObject; DataPoints: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="PlotRFactorBounds"></span><code>procedure <b>PlotRFactorBounds</b>(Sender: TObject; RFactorBounds: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="PlotSelectedPoints"></span><code>procedure <b>PlotSelectedPoints</b>(Sender: TObject; SelectedPoints: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="PlotSelectedProfileInterval"></span><code>procedure <b>PlotSelectedProfileInterval</b>(Sender: TObject; SelectedArea: <a  href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -267,7 +271,7 @@ Refreshes all curves.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="RefreshPointsSet"></span><code>procedure <b>RefreshPointsSet</b>( Sender: TObject; PointsSet: <a  href="neutron_points_set.TNeutronPointsSet.html">TNeutronPointsSet</a>);</code></td>
+<td class="itemcode"><span id="RefreshPointsSet"></span><code>procedure <b>RefreshPointsSet</b>(Sender: TObject; PointsSet: <a  href="neutron_points_set.TNeutronPointsSet.html">TNeutronPointsSet</a>);</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
@@ -277,12 +281,18 @@ Refreshes curve in the case of adding new or changing point.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="SetAnimationMode"></span><code>procedure <b>SetAnimationMode</b>(On: Boolean);</code></td>
+<td class="itemcode"><span id="SetUpdateGrids"></span><code>procedure <b>SetUpdateGrids</b>(Update: boolean);</code></td>
 </tr>
 <tr><td colspan="2">
-<p>
-Turns on/off animation mode in which UI is updated on every computation cycle not only on finishing.</p>
-</td></tr>
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetUpdateLegends"></span><code>procedure <b>SetUpdateLegends</b>(Update: boolean);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">

@@ -21,7 +21,7 @@
 <code>type TMinimizer = class(TComponent)</code></p>
 <h2 class="description">Description</h2>
 <p>
-Implements interface for optimization of any function.</p>
+Adapter supporting set of function pointers (&quot;events&quot;) for any optimization task.</p>
 <span id="PasDoc-Hierarchy"></span><h2 class="hierarchy">Hierarchy</h2>
 <ul class="hierarchy"><li class="ancestor">TComponent</li>
 <li class="thisitem">TMinimizer</li></ul><h2 class="overview">Overview</h2>
@@ -29,11 +29,11 @@ Implements interface for optimization of any function.</p>
 <table class="summary wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code><b><a  href="int_minimizer.TMinimizer.html#CurrentMinimum">CurrentMinimum</a></b>: Double;</code></td>
+<td class="itemcode"><code><b><a  href="int_minimizer.TMinimizer.html#FCurrentMinimum">FCurrentMinimum</a></b>: double;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
-<td class="itemcode"><code><b><a  href="int_minimizer.TMinimizer.html#FOnCalcFunc">FOnCalcFunc</a></b>: <a  href="int_minimizer.html#TCalcFunc">TCalcFunc</a>;</code></td>
+<td class="itemcode"><code><b><a  href="int_minimizer.TMinimizer.html#FOnComputeFunc">FOnComputeFunc</a></b>: <a  href="int_minimizer.html#TCalcFunc">TCalcFunc</a>;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
@@ -41,7 +41,7 @@ Implements interface for optimization of any function.</p>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
-<td class="itemcode"><code><b><a  href="int_minimizer.TMinimizer.html#FOnFunc">FOnFunc</a></b>: <a  href="int_minimizer.html#TFunc">TFunc</a>;</code></td>
+<td class="itemcode"><code><b><a  href="int_minimizer.TMinimizer.html#FOnGetFunc">FOnGetFunc</a></b>:     <a  href="int_minimizer.html#TFunc">TFunc</a>;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
@@ -49,7 +49,7 @@ Implements interface for optimization of any function.</p>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
-<td class="itemcode"><code><b><a  href="int_minimizer.TMinimizer.html#FOnGetStep">FOnGetStep</a></b>: <a  href="int_minimizer.html#TGetStep">TGetStep</a>;</code></td>
+<td class="itemcode"><code><b><a  href="int_minimizer.TMinimizer.html#FOnGetVariationStep">FOnGetVariationStep</a></b>:  <a  href="int_minimizer.html#TGetStep">TGetStep</a>;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
@@ -65,7 +65,7 @@ Implements interface for optimization of any function.</p>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
-<td class="itemcode"><code><b><a  href="int_minimizer.TMinimizer.html#FOnSetStep">FOnSetStep</a></b>: <a  href="int_minimizer.html#TSetStep">TSetStep</a>;</code></td>
+<td class="itemcode"><code><b><a  href="int_minimizer.TMinimizer.html#FOnSetVariationStep">FOnSetVariationStep</a></b>:  <a  href="int_minimizer.html#TSetStep">TSetStep</a>;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
@@ -73,7 +73,7 @@ Implements interface for optimization of any function.</p>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
-<td class="itemcode"><code><b><a  href="int_minimizer.TMinimizer.html#FTerminated">FTerminated</a></b>: Boolean;</code></td>
+<td class="itemcode"><code><b><a  href="int_minimizer.TMinimizer.html#FTerminated">FTerminated</a></b>: boolean;</code></td>
 </tr>
 </table>
 <span id="PasDoc-Methods"></span><h3 class="summary">Methods</h3>
@@ -84,31 +84,30 @@ Implements interface for optimization of any function.</p>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="int_minimizer.TMinimizer.html#IsReady">IsReady</a></b>: LongInt; virtual;</code></td>
+<td class="itemcode"><code>function <b><a  href="int_minimizer.TMinimizer.html#IsReady">IsReady</a></b>: longint; virtual;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="int_minimizer.TMinimizer.html#Minimize">Minimize</a></b>(var ErrorCode: LongInt); virtual; abstract;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="int_minimizer.TMinimizer.html#Minimize">Minimize</a></b>(var ErrorCode: longint); virtual; abstract;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="int_minimizer.TMinimizer.html#SetTerminated">SetTerminated</a></b>(ATerminated: Boolean); virtual;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="int_minimizer.TMinimizer.html#SetTerminated">SetTerminated</a></b>(ATerminated: boolean); virtual;</code></td>
 </tr>
 </table>
 <span id="PasDoc-Properties"></span><h3 class="summary">Properties</h3>
 <table class="summary wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
-<td class="itemcode"><code>property <b><a  href="int_minimizer.TMinimizer.html#OnCalcFunc">OnCalcFunc</a></b>: <a  href="int_minimizer.html#TCalcFunc">TCalcFunc</a> read <a  href="int_minimizer.TMinimizer.html#FOnCalcFunc">FOnCalcFunc</a> write <a  href="int_minimizer.TMinimizer.html#FOnCalcFunc">FOnCalcFunc</a>;</code></td>
+<td class="itemcode"><code>property <b><a  href="int_minimizer.TMinimizer.html#OnComputeFunc">OnComputeFunc</a></b>: <a  href="int_minimizer.html#TCalcFunc">TCalcFunc</a> read <a  href="int_minimizer.TMinimizer.html#FOnComputeFunc">FOnComputeFunc</a> write <a  href="int_minimizer.TMinimizer.html#FOnComputeFunc">FOnComputeFunc</a>;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
-<td class="itemcode"><code>property <b><a  href="int_minimizer.TMinimizer.html#OnEndOfCycle">OnEndOfCycle</a></b>: <a  href="int_minimizer.html#TEndOfCycle">TEndOfCycle</a>
-            read <a  href="int_minimizer.TMinimizer.html#FOnEndOfCycle">FOnEndOfCycle</a> write <a  href="int_minimizer.TMinimizer.html#FOnEndOfCycle">FOnEndOfCycle</a>;</code></td>
+<td class="itemcode"><code>property <b><a  href="int_minimizer.TMinimizer.html#OnEndOfCycle">OnEndOfCycle</a></b>: <a  href="int_minimizer.html#TEndOfCycle">TEndOfCycle</a> read <a  href="int_minimizer.TMinimizer.html#FOnEndOfCycle">FOnEndOfCycle</a> write <a  href="int_minimizer.TMinimizer.html#FOnEndOfCycle">FOnEndOfCycle</a>;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
-<td class="itemcode"><code>property <b><a  href="int_minimizer.TMinimizer.html#OnFunc">OnFunc</a></b>: <a  href="int_minimizer.html#TFunc">TFunc</a> read <a  href="int_minimizer.TMinimizer.html#FOnFunc">FOnFunc</a> write <a  href="int_minimizer.TMinimizer.html#FOnFunc">FOnFunc</a>;</code></td>
+<td class="itemcode"><code>property <b><a  href="int_minimizer.TMinimizer.html#OnGetFunc">OnGetFunc</a></b>: <a  href="int_minimizer.html#TFunc">TFunc</a> read <a  href="int_minimizer.TMinimizer.html#FOnGetFunc">FOnGetFunc</a> write <a  href="int_minimizer.TMinimizer.html#FOnGetFunc">FOnGetFunc</a>;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
@@ -116,7 +115,7 @@ Implements interface for optimization of any function.</p>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
-<td class="itemcode"><code>property <b><a  href="int_minimizer.TMinimizer.html#OnGetStep">OnGetStep</a></b>: <a  href="int_minimizer.html#TGetStep">TGetStep</a> read <a  href="int_minimizer.TMinimizer.html#FOnGetStep">FOnGetStep</a> write <a  href="int_minimizer.TMinimizer.html#FOnGetStep">FOnGetStep</a>;</code></td>
+<td class="itemcode"><code>property <b><a  href="int_minimizer.TMinimizer.html#OnGetVariationStep">OnGetVariationStep</a></b>: <a  href="int_minimizer.html#TGetStep">TGetStep</a> read <a  href="int_minimizer.TMinimizer.html#FOnGetVariationStep">FOnGetVariationStep</a> write <a  href="int_minimizer.TMinimizer.html#FOnGetVariationStep">FOnGetVariationStep</a>;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
@@ -134,16 +133,15 @@ Implements interface for optimization of any function.</p>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
-<td class="itemcode"><code>property <b><a  href="int_minimizer.TMinimizer.html#OnSetStep">OnSetStep</a></b>: <a  href="int_minimizer.html#TSetStep">TSetStep</a> read <a  href="int_minimizer.TMinimizer.html#FOnSetStep">FOnSetStep</a> write <a  href="int_minimizer.TMinimizer.html#FOnSetStep">FOnSetStep</a>;</code></td>
+<td class="itemcode"><code>property <b><a  href="int_minimizer.TMinimizer.html#OnSetVariationStep">OnSetVariationStep</a></b>: <a  href="int_minimizer.html#TSetStep">TSetStep</a> read <a  href="int_minimizer.TMinimizer.html#FOnSetVariationStep">FOnSetVariationStep</a> write <a  href="int_minimizer.TMinimizer.html#FOnSetVariationStep">FOnSetVariationStep</a>;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
-<td class="itemcode"><code>property <b><a  href="int_minimizer.TMinimizer.html#OnShowCurMin">OnShowCurMin</a></b>: <a  href="int_minimizer.html#TShowCurMin">TShowCurMin</a>
-            read <a  href="int_minimizer.TMinimizer.html#FOnShowCurMin">FOnShowCurMin</a> write <a  href="int_minimizer.TMinimizer.html#FOnShowCurMin">FOnShowCurMin</a>;</code></td>
+<td class="itemcode"><code>property <b><a  href="int_minimizer.TMinimizer.html#OnShowCurMin">OnShowCurMin</a></b>: <a  href="int_minimizer.html#TShowCurMin">TShowCurMin</a> read <a  href="int_minimizer.TMinimizer.html#FOnShowCurMin">FOnShowCurMin</a> write <a  href="int_minimizer.TMinimizer.html#FOnShowCurMin">FOnShowCurMin</a>;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>property <b><a  href="int_minimizer.TMinimizer.html#Terminated">Terminated</a></b>: Boolean read <a  href="int_minimizer.TMinimizer.html#FTerminated">FTerminated</a> write <a  href="int_minimizer.TMinimizer.html#SetTerminated">SetTerminated</a>;</code></td>
+<td class="itemcode"><code>property <b><a  href="int_minimizer.TMinimizer.html#Terminated">Terminated</a></b>: boolean read <a  href="int_minimizer.TMinimizer.html#FTerminated">FTerminated</a> write <a  href="int_minimizer.TMinimizer.html#SetTerminated">SetTerminated</a>;</code></td>
 </tr>
 </table>
 <h2 class="description">Description</h2>
@@ -151,7 +149,7 @@ Implements interface for optimization of any function.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="CurrentMinimum"></span><code><b>CurrentMinimum</b>: Double;</code></td>
+<td class="itemcode"><span id="FCurrentMinimum"></span><code><b>FCurrentMinimum</b>: double;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -159,7 +157,7 @@ Implements interface for optimization of any function.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
-<td class="itemcode"><span id="FOnCalcFunc"></span><code><b>FOnCalcFunc</b>: <a  href="int_minimizer.html#TCalcFunc">TCalcFunc</a>;</code></td>
+<td class="itemcode"><span id="FOnComputeFunc"></span><code><b>FOnComputeFunc</b>: <a  href="int_minimizer.html#TCalcFunc">TCalcFunc</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -175,7 +173,7 @@ Implements interface for optimization of any function.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
-<td class="itemcode"><span id="FOnFunc"></span><code><b>FOnFunc</b>: <a  href="int_minimizer.html#TFunc">TFunc</a>;</code></td>
+<td class="itemcode"><span id="FOnGetFunc"></span><code><b>FOnGetFunc</b>:     <a  href="int_minimizer.html#TFunc">TFunc</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -191,7 +189,7 @@ Implements interface for optimization of any function.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
-<td class="itemcode"><span id="FOnGetStep"></span><code><b>FOnGetStep</b>: <a  href="int_minimizer.html#TGetStep">TGetStep</a>;</code></td>
+<td class="itemcode"><span id="FOnGetVariationStep"></span><code><b>FOnGetVariationStep</b>:  <a  href="int_minimizer.html#TGetStep">TGetStep</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -223,7 +221,7 @@ Implements interface for optimization of any function.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
-<td class="itemcode"><span id="FOnSetStep"></span><code><b>FOnSetStep</b>: <a  href="int_minimizer.html#TSetStep">TSetStep</a>;</code></td>
+<td class="itemcode"><span id="FOnSetVariationStep"></span><code><b>FOnSetVariationStep</b>:  <a  href="int_minimizer.html#TSetStep">TSetStep</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -239,12 +237,10 @@ Implements interface for optimization of any function.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
-<td class="itemcode"><span id="FTerminated"></span><code><b>FTerminated</b>: Boolean;</code></td>
+<td class="itemcode"><span id="FTerminated"></span><code><b>FTerminated</b>: boolean;</code></td>
 </tr>
 <tr><td colspan="2">
-<p>
-FMinInterface: <a class="normal" href="int_minimizer.IMinimizer.html">IMinimizer</a>;</p>
-</td></tr>
+&nbsp;</td></tr>
 </table>
 <h3 class="detail">Methods</h3>
 <table class="detail wide_list">
@@ -258,7 +254,7 @@ FMinInterface: <a class="normal" href="int_minimizer.IMinimizer.html">IMinimizer
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="IsReady"></span><code>function <b>IsReady</b>: LongInt; virtual;</code></td>
+<td class="itemcode"><span id="IsReady"></span><code>function <b>IsReady</b>: longint; virtual;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
@@ -268,7 +264,7 @@ vozvraschaet kod oshibki</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="Minimize"></span><code>procedure <b>Minimize</b>(var ErrorCode: LongInt); virtual; abstract;</code></td>
+<td class="itemcode"><span id="Minimize"></span><code>procedure <b>Minimize</b>(var ErrorCode: longint); virtual; abstract;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -276,7 +272,7 @@ vozvraschaet kod oshibki</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="SetTerminated"></span><code>procedure <b>SetTerminated</b>(ATerminated: Boolean); virtual;</code></td>
+<td class="itemcode"><span id="SetTerminated"></span><code>procedure <b>SetTerminated</b>(ATerminated: boolean); virtual;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -285,7 +281,7 @@ vozvraschaet kod oshibki</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
-<td class="itemcode"><span id="OnCalcFunc"></span><code>property <b>OnCalcFunc</b>: <a  href="int_minimizer.html#TCalcFunc">TCalcFunc</a> read <a  href="int_minimizer.TMinimizer.html#FOnCalcFunc">FOnCalcFunc</a> write <a  href="int_minimizer.TMinimizer.html#FOnCalcFunc">FOnCalcFunc</a>;</code></td>
+<td class="itemcode"><span id="OnComputeFunc"></span><code>property <b>OnComputeFunc</b>: <a  href="int_minimizer.html#TCalcFunc">TCalcFunc</a> read <a  href="int_minimizer.TMinimizer.html#FOnComputeFunc">FOnComputeFunc</a> write <a  href="int_minimizer.TMinimizer.html#FOnComputeFunc">FOnComputeFunc</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -293,8 +289,7 @@ vozvraschaet kod oshibki</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
-<td class="itemcode"><span id="OnEndOfCycle"></span><code>property <b>OnEndOfCycle</b>: <a  href="int_minimizer.html#TEndOfCycle">TEndOfCycle</a>
-            read <a  href="int_minimizer.TMinimizer.html#FOnEndOfCycle">FOnEndOfCycle</a> write <a  href="int_minimizer.TMinimizer.html#FOnEndOfCycle">FOnEndOfCycle</a>;</code></td>
+<td class="itemcode"><span id="OnEndOfCycle"></span><code>property <b>OnEndOfCycle</b>: <a  href="int_minimizer.html#TEndOfCycle">TEndOfCycle</a> read <a  href="int_minimizer.TMinimizer.html#FOnEndOfCycle">FOnEndOfCycle</a> write <a  href="int_minimizer.TMinimizer.html#FOnEndOfCycle">FOnEndOfCycle</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -302,7 +297,7 @@ vozvraschaet kod oshibki</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
-<td class="itemcode"><span id="OnFunc"></span><code>property <b>OnFunc</b>: <a  href="int_minimizer.html#TFunc">TFunc</a> read <a  href="int_minimizer.TMinimizer.html#FOnFunc">FOnFunc</a> write <a  href="int_minimizer.TMinimizer.html#FOnFunc">FOnFunc</a>;</code></td>
+<td class="itemcode"><span id="OnGetFunc"></span><code>property <b>OnGetFunc</b>: <a  href="int_minimizer.html#TFunc">TFunc</a> read <a  href="int_minimizer.TMinimizer.html#FOnGetFunc">FOnGetFunc</a> write <a  href="int_minimizer.TMinimizer.html#FOnGetFunc">FOnGetFunc</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
@@ -320,7 +315,7 @@ property MinInterface: <a class="normal" href="int_minimizer.IMinimizer.html">IM
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
-<td class="itemcode"><span id="OnGetStep"></span><code>property <b>OnGetStep</b>: <a  href="int_minimizer.html#TGetStep">TGetStep</a> read <a  href="int_minimizer.TMinimizer.html#FOnGetStep">FOnGetStep</a> write <a  href="int_minimizer.TMinimizer.html#FOnGetStep">FOnGetStep</a>;</code></td>
+<td class="itemcode"><span id="OnGetVariationStep"></span><code>property <b>OnGetVariationStep</b>: <a  href="int_minimizer.html#TGetStep">TGetStep</a> read <a  href="int_minimizer.TMinimizer.html#FOnGetVariationStep">FOnGetVariationStep</a> write <a  href="int_minimizer.TMinimizer.html#FOnGetVariationStep">FOnGetVariationStep</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -354,7 +349,7 @@ property MinInterface: <a class="normal" href="int_minimizer.IMinimizer.html">IM
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
-<td class="itemcode"><span id="OnSetStep"></span><code>property <b>OnSetStep</b>: <a  href="int_minimizer.html#TSetStep">TSetStep</a> read <a  href="int_minimizer.TMinimizer.html#FOnSetStep">FOnSetStep</a> write <a  href="int_minimizer.TMinimizer.html#FOnSetStep">FOnSetStep</a>;</code></td>
+<td class="itemcode"><span id="OnSetVariationStep"></span><code>property <b>OnSetVariationStep</b>: <a  href="int_minimizer.html#TSetStep">TSetStep</a> read <a  href="int_minimizer.TMinimizer.html#FOnSetVariationStep">FOnSetVariationStep</a> write <a  href="int_minimizer.TMinimizer.html#FOnSetVariationStep">FOnSetVariationStep</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -362,8 +357,7 @@ property MinInterface: <a class="normal" href="int_minimizer.IMinimizer.html">IM
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
-<td class="itemcode"><span id="OnShowCurMin"></span><code>property <b>OnShowCurMin</b>: <a  href="int_minimizer.html#TShowCurMin">TShowCurMin</a>
-            read <a  href="int_minimizer.TMinimizer.html#FOnShowCurMin">FOnShowCurMin</a> write <a  href="int_minimizer.TMinimizer.html#FOnShowCurMin">FOnShowCurMin</a>;</code></td>
+<td class="itemcode"><span id="OnShowCurMin"></span><code>property <b>OnShowCurMin</b>: <a  href="int_minimizer.html#TShowCurMin">TShowCurMin</a> read <a  href="int_minimizer.TMinimizer.html#FOnShowCurMin">FOnShowCurMin</a> write <a  href="int_minimizer.TMinimizer.html#FOnShowCurMin">FOnShowCurMin</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -371,7 +365,7 @@ property MinInterface: <a class="normal" href="int_minimizer.IMinimizer.html">IM
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="Terminated"></span><code>property <b>Terminated</b>: Boolean read <a  href="int_minimizer.TMinimizer.html#FTerminated">FTerminated</a> write <a  href="int_minimizer.TMinimizer.html#SetTerminated">SetTerminated</a>;</code></td>
+<td class="itemcode"><span id="Terminated"></span><code>property <b>Terminated</b>: boolean read <a  href="int_minimizer.TMinimizer.html#FTerminated">FTerminated</a> write <a  href="int_minimizer.TMinimizer.html#SetTerminated">SetTerminated</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>

@@ -21,9 +21,9 @@
 <code>type TTitlePointsSet = class(<a class="normal" href="neutron_points_set.TNeutronPointsSet.html">TNeutronPointsSet</a>)</code></p>
 <h2 class="description">Description</h2>
 <p>
-Point set with <a class="normal" href="title_points_set.TTitlePointsSet.html#Title">title</a>. TODO: must implement functionality of <a class="normal" href="curve_points_set.html#Argument">argument</a> recalculation.</p>
+Point set with title. TODO: must implement functionality of <a class="normal" href="special_curve_parameter.html#Argument">argument</a> recalculation.</p>
 <span id="PasDoc-Hierarchy"></span><h2 class="hierarchy">Hierarchy</h2>
-<ul class="hierarchy"><li class="ancestor">TCBRCComponent</li>
+<ul class="hierarchy"><li class="ancestor">TComponent</li>
 <li class="ancestor"><a class="normal" href="self_copied_component.TSelfCopiedComponent.html">TSelfCopiedComponent</a></li>
 <li class="ancestor"><a class="normal" href="points_set.TPointsSet.html">TPointsSet</a></li>
 <li class="ancestor"><a class="normal" href="neutron_points_set.TNeutronPointsSet.html">TNeutronPointsSet</a></li>
@@ -32,18 +32,14 @@ Point set with <a class="normal" href="title_points_set.TTitlePointsSet.html#Tit
 <table class="summary wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code><b><a  href="title_points_set.TTitlePointsSet.html#Title">Title</a></b>: string;</code></td>
+<td class="itemcode"><code><b><a  href="title_points_set.TTitlePointsSet.html#FTitle">FTitle</a></b>: string;</code></td>
 </tr>
 </table>
 <span id="PasDoc-Methods"></span><h3 class="summary">Methods</h3>
 <table class="summary wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>constructor <b><a  href="title_points_set.TTitlePointsSet.html#CreateFromPoints">CreateFromPoints</a></b>( AOwner: TComponent; const Points: <a  href="points_set.TPointsSet.html">TPointsSet</a>);</code></td>
-</tr>
-<tr class="list2">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="title_points_set.TTitlePointsSet.html#CopyParameters">CopyParameters</a></b>(const Dest: TObject); override;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="title_points_set.TTitlePointsSet.html#CopyParameters">CopyParameters</a></b>(Dest: TObject); override;</code></td>
 </tr>
 </table>
 <h2 class="description">Description</h2>
@@ -51,26 +47,18 @@ Point set with <a class="normal" href="title_points_set.TTitlePointsSet.html#Tit
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="Title"></span><code><b>Title</b>: string;</code></td>
+<td class="itemcode"><span id="FTitle"></span><code><b>FTitle</b>: string;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
-<code>Title</code> which is displayed in chart legend.</p>
+<code>FTitle</code> which is displayed in chart legend.</p>
 </td></tr>
 </table>
 <h3 class="detail">Methods</h3>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="CreateFromPoints"></span><code>constructor <b>CreateFromPoints</b>( AOwner: TComponent; const Points: <a  href="points_set.TPointsSet.html">TPointsSet</a>);</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="CopyParameters"></span><code>procedure <b>CopyParameters</b>(const Dest: TObject); override;</code></td>
+<td class="itemcode"><span id="CopyParameters"></span><code>procedure <b>CopyParameters</b>(Dest: TObject); override;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>

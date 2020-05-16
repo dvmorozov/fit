@@ -18,10 +18,10 @@
 <a  href="fit_client_stub.html">fit_client_stub</a></p>
 <h2 class="declaration">Declaration</h2>
 <p class="declaration">
-<code>type TFitClientStub = class(TCBRCComponent, <a class="normal" href="int_client_callback.IClientCallback.html">IClientCallback</a>)</code></p>
+<code>type TFitClientStub = class(TInterfacedObject, <a class="normal" href="int_client_callback.IClientCallback.html">IClientCallback</a>)</code></p>
 <h2 class="description">Description</h2>
 <span id="PasDoc-Hierarchy"></span><h2 class="hierarchy">Hierarchy</h2>
-<ul class="hierarchy"><li class="ancestor">TCBRCComponent</li>
+<ul class="hierarchy"><li class="ancestor">TInterfacedObject</li>
 <li class="thisitem">TFitClientStub</li></ul><h2 class="overview">Overview</h2>
 <span id="PasDoc-Fields"></span><h3 class="summary">Fields</h3>
 <table class="summary wide_list">
@@ -34,23 +34,23 @@
 <table class="summary wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_client_stub.TFitClientStub.html#ComputeBackgroundPointsDone">ComputeBackgroundPointsDone</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_client_stub.TFitClientStub.html#ComputeCurveBoundsDone">ComputeCurveBoundsDone</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_client_stub.TFitClientStub.html#ComputeCurvePositionsDone">ComputeCurvePositionsDone</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="fit_client_stub.TFitClientStub.html#Done">Done</a></b>;</code></td>
 </tr>
-<tr class="list2">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="fit_client_stub.TFitClientStub.html#FindBackPointsDone">FindBackPointsDone</a></b>;</code></td>
-</tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="fit_client_stub.TFitClientStub.html#FindPeakBoundsDone">FindPeakBoundsDone</a></b>;</code></td>
-</tr>
-<tr class="list2">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="fit_client_stub.TFitClientStub.html#FindPeakPositionsDone">FindPeakPositionsDone</a></b>;</code></td>
-</tr>
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="fit_client_stub.TFitClientStub.html#ShowCurMin">ShowCurMin</a></b>(Min: Double);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_client_stub.TFitClientStub.html#ShowCurMin">ShowCurMin</a></b>(Min: double);</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
@@ -61,8 +61,7 @@
 <table class="summary wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>property <b><a  href="fit_client_stub.TFitClientStub.html#FitClient">FitClient</a></b>: TObject
-            read <a  href="fit_client_stub.TFitClientStub.html#FFitClient">FFitClient</a> write <a  href="fit_client_stub.TFitClientStub.html#FFitClient">FFitClient</a>;</code></td>
+<td class="itemcode"><code>property <b><a  href="fit_client_stub.TFitClientStub.html#FitClient">FitClient</a></b>: TObject read <a  href="fit_client_stub.TFitClientStub.html#FFitClient">FFitClient</a> write <a  href="fit_client_stub.TFitClientStub.html#FFitClient">FFitClient</a>;</code></td>
 </tr>
 </table>
 <h2 class="description">Description</h2>
@@ -79,6 +78,30 @@
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="ComputeBackgroundPointsDone"></span><code>procedure <b>ComputeBackgroundPointsDone</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="ComputeCurveBoundsDone"></span><code>procedure <b>ComputeCurveBoundsDone</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="ComputeCurvePositionsDone"></span><code>procedure <b>ComputeCurvePositionsDone</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
 <td class="itemcode"><span id="Done"></span><code>procedure <b>Done</b>;</code></td>
 </tr>
 <tr><td colspan="2">
@@ -87,31 +110,7 @@
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="FindBackPointsDone"></span><code>procedure <b>FindBackPointsDone</b>;</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="FindPeakBoundsDone"></span><code>procedure <b>FindPeakBoundsDone</b>;</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="FindPeakPositionsDone"></span><code>procedure <b>FindPeakPositionsDone</b>;</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="ShowCurMin"></span><code>procedure <b>ShowCurMin</b>(Min: Double);</code></td>
+<td class="itemcode"><span id="ShowCurMin"></span><code>procedure <b>ShowCurMin</b>(Min: double);</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -128,8 +127,7 @@
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="FitClient"></span><code>property <b>FitClient</b>: TObject
-            read <a  href="fit_client_stub.TFitClientStub.html#FFitClient">FFitClient</a> write <a  href="fit_client_stub.TFitClientStub.html#FFitClient">FFitClient</a>;</code></td>
+<td class="itemcode"><span id="FitClient"></span><code>property <b>FitClient</b>: TObject read <a  href="fit_client_stub.TFitClientStub.html#FFitClient">FFitClient</a> write <a  href="fit_client_stub.TFitClientStub.html#FFitClient">FFitClient</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>

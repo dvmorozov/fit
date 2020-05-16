@@ -18,18 +18,18 @@
 <a  href="curve_types_singleton.html">curve_types_singleton</a></p>
 <h2 class="declaration">Declaration</h2>
 <p class="declaration">
-<code>type TCurveTypesSingleton = class(TCBRCComponent, <a class="normal" href="int_curve_factory.ICurveFactory.html">ICurveFactory</a>, <a class="normal" href="int_curve_type_iterator.ICurveTypeIterator.html">ICurveTypeIterator</a>, <a class="normal" href="int_curve_type_selector.ICurveTypeSelector.html">ICurveTypeSelector</a>)</code></p>
+<code>type TCurveTypesSingleton = class(TInterfacedObject, <a class="normal" href="int_curve_factory.ICurveFactory.html">ICurveFactory</a>, <a class="normal" href="int_curve_type_iterator.ICurveTypeIterator.html">ICurveTypeIterator</a>, <a class="normal" href="int_curve_type_selector.ICurveTypeSelector.html">ICurveTypeSelector</a>)</code></p>
 <h2 class="description">Description</h2>
 <p>
-Class-singleton containing information about curve types.</p>
+Class-singleton containing information about curve types. Should be inherited from TCompoenent to</p>
 <span id="PasDoc-Hierarchy"></span><h2 class="hierarchy">Hierarchy</h2>
-<ul class="hierarchy"><li class="ancestor">TCBRCComponent</li>
+<ul class="hierarchy"><li class="ancestor">TInterfacedObject</li>
 <li class="thisitem">TCurveTypesSingleton</li></ul><h2 class="overview">Overview</h2>
 <span id="PasDoc-Fields"></span><h3 class="summary">Fields</h3>
 <table class="summary wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
-<td class="itemcode"><code><b><a  href="curve_types_singleton.TCurveTypesSingleton.html#FCurrentCurveType">FCurrentCurveType</a></b>: <a  href="curve_types_singleton.TCurveType.html">TCurveType</a>;</code></td>
+<td class="itemcode"><code><b><a  href="curve_types_singleton.TCurveTypesSingleton.html#FCurrentCurveType">FCurrentCurveType</a></b>: <a  href="int_curve_factory.TCurveType.html">TCurveType</a>;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
@@ -37,7 +37,7 @@ Class-singleton containing information about curve types.</p>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
-<td class="itemcode"><code><b><a  href="curve_types_singleton.TCurveTypesSingleton.html#FSelectedCurveType">FSelectedCurveType</a></b>: <a  href="curve_types_singleton.TCurveType.html">TCurveType</a>;</code></td>
+<td class="itemcode"><code><b><a  href="curve_types_singleton.TCurveTypesSingleton.html#FSelectedCurveType">FSelectedCurveType</a></b>: <a  href="int_curve_factory.TCurveType.html">TCurveType</a>;</code></td>
 </tr>
 </table>
 <span id="PasDoc-Methods"></span><h3 class="summary">Methods</h3>
@@ -48,31 +48,39 @@ Class-singleton containing information about curve types.</p>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>class function <b><a  href="curve_types_singleton.TCurveTypesSingleton.html#Create">Create</a></b>: <a  href="curve_types_singleton.TCurveTypesSingleton.html">TCurveTypesSingleton</a>;</code></td>
+<td class="itemcode"><code>class function <b><a  href="curve_types_singleton.TCurveTypesSingleton.html#CreateCurveFactory">CreateCurveFactory</a></b>: <a  href="int_curve_factory.ICurveFactory.html">ICurveFactory</a>;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="curve_types_singleton.TCurveTypesSingleton.html#CreatePointsSet">CreatePointsSet</a></b>(TypeId: <a  href="int_points_set.html#TCurveTypeId">TCurveTypeId</a>): <a  href="named_points_set.TNamedPointsSet.html">TNamedPointsSet</a>; virtual; abstract;</code></td>
+<td class="itemcode"><code>class function <b><a  href="curve_types_singleton.TCurveTypesSingleton.html#CreateCurveTypeIterator">CreateCurveTypeIterator</a></b>: <a  href="int_curve_type_iterator.ICurveTypeIterator.html">ICurveTypeIterator</a>;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="curve_types_singleton.TCurveTypesSingleton.html#EndCurveType">EndCurveType</a></b>: Boolean;</code></td>
+<td class="itemcode"><code>class function <b><a  href="curve_types_singleton.TCurveTypesSingleton.html#CreateCurveTypeSelector">CreateCurveTypeSelector</a></b>: <a  href="int_curve_type_selector.ICurveTypeSelector.html">ICurveTypeSelector</a>;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="curve_types_singleton.TCurveTypesSingleton.html#GetCurveTypeId">GetCurveTypeId</a></b>: <a  href="int_points_set.html#TCurveTypeId">TCurveTypeId</a>;</code></td>
+<td class="itemcode"><code>function <b><a  href="curve_types_singleton.TCurveTypesSingleton.html#EndCurveType">EndCurveType</a></b>: boolean;</code></td>
 </tr>
 <tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="curve_types_singleton.TCurveTypesSingleton.html#GetCurveTypeId">GetCurveTypeId</a></b>: <a  href="named_points_set.html#TCurveTypeId">TCurveTypeId</a>;</code></td>
+</tr>
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
 <td class="itemcode"><code>function <b><a  href="curve_types_singleton.TCurveTypesSingleton.html#GetCurveTypeName">GetCurveTypeName</a></b>: string;</code></td>
 </tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="curve_types_singleton.TCurveTypesSingleton.html#GetCurveTypeTag">GetCurveTypeTag</a></b>(CurveTypeId: <a  href="named_points_set.html#TCurveTypeId">TCurveTypeId</a>): integer;</code></td>
+</tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="curve_types_singleton.TCurveTypesSingleton.html#GetCurveTypeTag">GetCurveTypeTag</a></b>(CurveTypeId: <a  href="int_points_set.html#TCurveTypeId">TCurveTypeId</a>): Integer;</code></td>
+<td class="itemcode"><code>function <b><a  href="curve_types_singleton.TCurveTypesSingleton.html#GetSelectedCurveType">GetSelectedCurveType</a></b>: <a  href="named_points_set.html#TCurveTypeId">TCurveTypeId</a>;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="curve_types_singleton.TCurveTypesSingleton.html#GetSelectedCurveType">GetSelectedCurveType</a></b>: <a  href="int_points_set.html#TCurveTypeId">TCurveTypeId</a>;</code></td>
+<td class="itemcode"><code>function <b><a  href="curve_types_singleton.TCurveTypesSingleton.html#GetSelectedExtremumMode">GetSelectedExtremumMode</a></b>: <a  href="named_points_set.html#TExtremumMode">TExtremumMode</a>;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
@@ -84,11 +92,11 @@ Class-singleton containing information about curve types.</p>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="curve_types_singleton.TCurveTypesSingleton.html#RegisterCurveType">RegisterCurveType</a></b>(CurveClass: <a  href="curve_types_singleton.html#TCurveClass">TCurveClass</a>);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="curve_types_singleton.TCurveTypesSingleton.html#RegisterCurveType">RegisterCurveType</a></b>(CurveClass: <a  href="int_curve_factory.html#TCurveClass">TCurveClass</a>);</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="curve_types_singleton.TCurveTypesSingleton.html#SelectCurveType">SelectCurveType</a></b>(TypeId: <a  href="int_points_set.html#TCurveTypeId">TCurveTypeId</a>);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="curve_types_singleton.TCurveTypesSingleton.html#SelectCurveType">SelectCurveType</a></b>(TypeId: <a  href="named_points_set.html#TCurveTypeId">TCurveTypeId</a>);</code></td>
 </tr>
 </table>
 <h2 class="description">Description</h2>
@@ -96,7 +104,7 @@ Class-singleton containing information about curve types.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
-<td class="itemcode"><span id="FCurrentCurveType"></span><code><b>FCurrentCurveType</b>: <a  href="curve_types_singleton.TCurveType.html">TCurveType</a>;</code></td>
+<td class="itemcode"><span id="FCurrentCurveType"></span><code><b>FCurrentCurveType</b>: <a  href="int_curve_factory.TCurveType.html">TCurveType</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
@@ -114,11 +122,11 @@ Current curve type used in iteration.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
-<td class="itemcode"><span id="FSelectedCurveType"></span><code><b>FSelectedCurveType</b>: <a  href="curve_types_singleton.TCurveType.html">TCurveType</a>;</code></td>
+<td class="itemcode"><span id="FSelectedCurveType"></span><code><b>FSelectedCurveType</b>: <a  href="int_curve_factory.TCurveType.html">TCurveType</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
-Curve type selected by <a class="normal" href="app.html#User">user</a>.</p>
+Curve type selected by user.</p>
 </td></tr>
 </table>
 <h3 class="detail">Methods</h3>
@@ -133,7 +141,7 @@ Curve type selected by <a class="normal" href="app.html#User">user</a>.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="Create"></span><code>class function <b>Create</b>: <a  href="curve_types_singleton.TCurveTypesSingleton.html">TCurveTypesSingleton</a>;</code></td>
+<td class="itemcode"><span id="CreateCurveFactory"></span><code>class function <b>CreateCurveFactory</b>: <a  href="int_curve_factory.ICurveFactory.html">ICurveFactory</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -141,17 +149,7 @@ Curve type selected by <a class="normal" href="app.html#User">user</a>.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="CreatePointsSet"></span><code>function <b>CreatePointsSet</b>(TypeId: <a  href="int_points_set.html#TCurveTypeId">TCurveTypeId</a>): <a  href="named_points_set.TNamedPointsSet.html">TNamedPointsSet</a>; virtual; abstract;</code></td>
-</tr>
-<tr><td colspan="2">
-<p>
-TODO: <a class="normal" href="curve_types_singleton.TCurveTypesSingleton.html#Create">create</a> implementation based on <a class="normal" href="fit_task.TFitTask.html#GetPatternSpecimen">TFitTask.GetPatternSpecimen</a>: <a class="normal" href="curve_points_set.TCurvePointsSet.html">TCurvePointsSet</a>.</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="EndCurveType"></span><code>function <b>EndCurveType</b>: Boolean;</code></td>
+<td class="itemcode"><span id="CreateCurveTypeIterator"></span><code>class function <b>CreateCurveTypeIterator</b>: <a  href="int_curve_type_iterator.ICurveTypeIterator.html">ICurveTypeIterator</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -159,7 +157,23 @@ TODO: <a class="normal" href="curve_types_singleton.TCurveTypesSingleton.html#Cr
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetCurveTypeId"></span><code>function <b>GetCurveTypeId</b>: <a  href="int_points_set.html#TCurveTypeId">TCurveTypeId</a>;</code></td>
+<td class="itemcode"><span id="CreateCurveTypeSelector"></span><code>class function <b>CreateCurveTypeSelector</b>: <a  href="int_curve_type_selector.ICurveTypeSelector.html">ICurveTypeSelector</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="EndCurveType"></span><code>function <b>EndCurveType</b>: boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetCurveTypeId"></span><code>function <b>GetCurveTypeId</b>: <a  href="named_points_set.html#TCurveTypeId">TCurveTypeId</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -175,7 +189,7 @@ TODO: <a class="normal" href="curve_types_singleton.TCurveTypesSingleton.html#Cr
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetCurveTypeTag"></span><code>function <b>GetCurveTypeTag</b>(CurveTypeId: <a  href="int_points_set.html#TCurveTypeId">TCurveTypeId</a>): Integer;</code></td>
+<td class="itemcode"><span id="GetCurveTypeTag"></span><code>function <b>GetCurveTypeTag</b>(CurveTypeId: <a  href="named_points_set.html#TCurveTypeId">TCurveTypeId</a>): integer;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -183,12 +197,20 @@ TODO: <a class="normal" href="curve_types_singleton.TCurveTypesSingleton.html#Cr
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetSelectedCurveType"></span><code>function <b>GetSelectedCurveType</b>: <a  href="int_points_set.html#TCurveTypeId">TCurveTypeId</a>;</code></td>
+<td class="itemcode"><span id="GetSelectedCurveType"></span><code>function <b>GetSelectedCurveType</b>: <a  href="named_points_set.html#TCurveTypeId">TCurveTypeId</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
 Returns value of <a class="normal" href="curve_types_singleton.TCurveTypesSingleton.html#FCurrentCurveType">FCurrentCurveType</a>. The value should be checked on Nil.</p>
 </td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetSelectedExtremumMode"></span><code>function <b>GetSelectedExtremumMode</b>: <a  href="named_points_set.html#TExtremumMode">TExtremumMode</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -211,15 +233,17 @@ Implementation of <a class="normal" href="int_curve_type_iterator.ICurveTypeIter
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="RegisterCurveType"></span><code>procedure <b>RegisterCurveType</b>(CurveClass: <a  href="curve_types_singleton.html#TCurveClass">TCurveClass</a>);</code></td>
+<td class="itemcode"><span id="RegisterCurveType"></span><code>procedure <b>RegisterCurveType</b>(CurveClass: <a  href="int_curve_factory.html#TCurveClass">TCurveClass</a>);</code></td>
 </tr>
 <tr><td colspan="2">
-&nbsp;</td></tr>
+<p>
+function CreatePointsSet(TypeId: <a class="normal" href="named_points_set.html#TCurveTypeId">TCurveTypeId</a>): <a class="normal" href="named_points_set.TNamedPointsSet.html">TNamedPointsSet</a>; virtual; abstract;</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="SelectCurveType"></span><code>procedure <b>SelectCurveType</b>(TypeId: <a  href="int_points_set.html#TCurveTypeId">TCurveTypeId</a>);</code></td>
+<td class="itemcode"><span id="SelectCurveType"></span><code>procedure <b>SelectCurveType</b>(TypeId: <a  href="named_points_set.html#TCurveTypeId">TCurveTypeId</a>);</code></td>
 </tr>
 <tr><td colspan="2">
 <p>

@@ -40,7 +40,7 @@ This software is distributed under GPL in the hope that it will be useful, but W
 </tr>
 <tr class="list">
 <td class="itemname">Class&nbsp;<a class="bold" href="int_minimizer.TMinimizer.html"><code>TMinimizer</code></a></td>
-<td class="itemdesc">Implements interface for optimization of any function.</td>
+<td class="itemdesc">Adapter supporting set of function pointers (&quot;events&quot;) for any optimization task.</td>
 </tr>
 </table>
 <span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
@@ -55,16 +55,16 @@ This software is distributed under GPL in the hope that it will be useful, but W
 <td class="itemcode"><code><b><a  href="int_minimizer.html#TCalcFunc">TCalcFunc</a></b> = procedure of object;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="int_minimizer.html#TEndOfCycle">TEndOfCycle</a></b> = function: Boolean of object;</code></td>
+<td class="itemcode"><code><b><a  href="int_minimizer.html#TEndOfCycle">TEndOfCycle</a></b> = function: boolean of object;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code><b><a  href="int_minimizer.html#TFunc">TFunc</a></b> = function: Double of object;</code></td>
+<td class="itemcode"><code><b><a  href="int_minimizer.html#TFunc">TFunc</a></b> = function: double of object;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="int_minimizer.html#TGetParam">TGetParam</a></b> = function: Double of object;</code></td>
+<td class="itemcode"><code><b><a  href="int_minimizer.html#TGetParam">TGetParam</a></b> = function: double of object;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code><b><a  href="int_minimizer.html#TGetStep">TGetStep</a></b> = function: Double of object;</code></td>
+<td class="itemcode"><code><b><a  href="int_minimizer.html#TGetStep">TGetStep</a></b> = function: double of object;</code></td>
 </tr>
 <tr class="list2">
 <td class="itemcode"><code><b><a  href="int_minimizer.html#TSetFirstParam">TSetFirstParam</a></b> = procedure of object;</code></td>
@@ -73,10 +73,10 @@ This software is distributed under GPL in the hope that it will be useful, but W
 <td class="itemcode"><code><b><a  href="int_minimizer.html#TSetNextParam">TSetNextParam</a></b> = procedure of object;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="int_minimizer.html#TSetParam">TSetParam</a></b> = procedure(NewParamValue: Double) of object;</code></td>
+<td class="itemcode"><code><b><a  href="int_minimizer.html#TSetParam">TSetParam</a></b> = procedure(NewParamValue: double) of object;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code><b><a  href="int_minimizer.html#TSetStep">TSetStep</a></b> = procedure(NewStepValue: Double) of object;</code></td>
+<td class="itemcode"><code><b><a  href="int_minimizer.html#TSetStep">TSetStep</a></b> = procedure(NewStepValue: double) of object;</code></td>
 </tr>
 <tr class="list2">
 <td class="itemcode"><code><b><a  href="int_minimizer.html#TShowCurMin">TShowCurMin</a></b> = procedure of object;</code></td>
@@ -85,10 +85,10 @@ This software is distributed under GPL in the hope that it will be useful, but W
 <span id="PasDoc-Constants"></span><h3 class="summary">Constants</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code><b><a  href="int_minimizer.html#MIN_FUNCTION_NOT_ASSIGNED">MIN_FUNCTION_NOT_ASSIGNED</a></b>  : LongInt = 1;</code></td>
+<td class="itemcode"><code><b><a  href="int_minimizer.html#MIN_FUNCTION_NOT_ASSIGNED">MIN_FUNCTION_NOT_ASSIGNED</a></b>: longint = 1;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="int_minimizer.html#MIN_NO_ERRORS">MIN_NO_ERRORS</a></b>              : LongInt = 0;</code></td>
+<td class="itemcode"><code><b><a  href="int_minimizer.html#MIN_NO_ERRORS">MIN_NO_ERRORS</a></b>: longint = 0;</code></td>
 </tr>
 </table>
 <h2 class="description">Description</h2>
@@ -110,28 +110,28 @@ This software is distributed under GPL in the hope that it will be useful, but W
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="TEndOfCycle"></span><code><b>TEndOfCycle</b> = function: Boolean of object;</code></td>
+<td class="itemcode"><span id="TEndOfCycle"></span><code><b>TEndOfCycle</b> = function: boolean of object;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="TFunc"></span><code><b>TFunc</b> = function: Double of object;</code></td>
+<td class="itemcode"><span id="TFunc"></span><code><b>TFunc</b> = function: double of object;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="TGetParam"></span><code><b>TGetParam</b> = function: Double of object;</code></td>
+<td class="itemcode"><span id="TGetParam"></span><code><b>TGetParam</b> = function: double of object;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="TGetStep"></span><code><b>TGetStep</b> = function: Double of object;</code></td>
+<td class="itemcode"><span id="TGetStep"></span><code><b>TGetStep</b> = function: double of object;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
@@ -152,14 +152,14 @@ This software is distributed under GPL in the hope that it will be useful, but W
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="TSetParam"></span><code><b>TSetParam</b> = procedure(NewParamValue: Double) of object;</code></td>
+<td class="itemcode"><span id="TSetParam"></span><code><b>TSetParam</b> = procedure(NewParamValue: double) of object;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="TSetStep"></span><code><b>TSetStep</b> = procedure(NewStepValue: Double) of object;</code></td>
+<td class="itemcode"><span id="TSetStep"></span><code><b>TSetStep</b> = procedure(NewStepValue: double) of object;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
@@ -174,14 +174,14 @@ This software is distributed under GPL in the hope that it will be useful, but W
 <h3 class="detail">Constants</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="MIN_FUNCTION_NOT_ASSIGNED"></span><code><b>MIN_FUNCTION_NOT_ASSIGNED</b>  : LongInt = 1;</code></td>
+<td class="itemcode"><span id="MIN_FUNCTION_NOT_ASSIGNED"></span><code><b>MIN_FUNCTION_NOT_ASSIGNED</b>: longint = 1;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="MIN_NO_ERRORS"></span><code><b>MIN_NO_ERRORS</b>              : LongInt = 0;</code></td>
+<td class="itemcode"><span id="MIN_NO_ERRORS"></span><code><b>MIN_NO_ERRORS</b>: longint = 0;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>

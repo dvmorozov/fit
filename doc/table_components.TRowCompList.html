@@ -23,7 +23,7 @@
 <div class="nodescription">No description available, ancestor TTableCompList description follows</div><p>
 Component list which can display component properties in grid. Class implements functions of saving/reading table properties, but does not bind grid positions with list items. If number of columns returned by <a class="normal" href="table_components.TTableCompList.html#GetColCount">GetColCount</a> is changed then corresponding changes in <a class="normal" href="table_components.TTableCompList.html#SetCaption">SetCaption</a>, <a class="normal" href="table_components.TTableCompList.html#SetColOptions">SetColOptions</a>, <a class="normal" href="table_components.TTableCompList.html#SetColFunc">SetColFunc</a>, SetRowContents, GetRowContents should be done.</p>
 <span id="PasDoc-Hierarchy"></span><h2 class="hierarchy">Hierarchy</h2>
-<ul class="hierarchy"><li class="ancestor">TSelfCheckedComponentList</li>
+<ul class="hierarchy"><li class="ancestor">TComponentList</li>
 <li class="ancestor"><a class="normal" href="self_copied_component.TSelfCopiedCompList.html">TSelfCopiedCompList</a></li>
 <li class="ancestor"><a class="normal" href="table_components.TTableCompList.html">TTableCompList</a></li>
 <li class="thisitem">TRowCompList</li></ul><h2 class="overview">Overview</h2>
@@ -31,51 +31,51 @@ Component list which can display component properties in grid. Class implements 
 <table class="summary wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="table_components.TRowCompList.html#Add">Add</a></b>(Item: TComponent): Integer; override;</code></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TRowCompList.html#Add">Add</a></b>(Item: TComponent): integer; override;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="table_components.TRowCompList.html#GetColNumFixed">GetColNumFixed</a></b>: Boolean; override;</code></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TRowCompList.html#GetColNumFixed">GetColNumFixed</a></b>: boolean; override;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="table_components.TRowCompList.html#GetDataFromGrid">GetDataFromGrid</a></b>(Grid: TStringGrid): Boolean; override;</code></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TRowCompList.html#GetDataFromGrid">GetDataFromGrid</a></b>(Grid: TStringGrid): boolean; override;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="table_components.TRowCompList.html#GetInfoRows">GetInfoRows</a></b>: LongInt; override;</code></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TRowCompList.html#GetInfoRows">GetInfoRows</a></b>: longint; override;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="table_components.TRowCompList.html#GetRowContents">GetRowContents</a></b>( Grid: TStringGrid; RowNum: LongInt): Boolean; virtual; abstract;</code></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TRowCompList.html#GetRowContents">GetRowContents</a></b>( Grid: TStringGrid; RowNum: longint): boolean; virtual; abstract;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="table_components.TRowCompList.html#IsDataSourceEmpty">IsDataSourceEmpty</a></b>: Boolean; override;</code></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TRowCompList.html#IsDataSourceEmpty">IsDataSourceEmpty</a></b>: boolean; override;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="table_components.TRowCompList.html#MayIDoAddRow">MayIDoAddRow</a></b>: Boolean; override;</code></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TRowCompList.html#MayIDoAddRow">MayIDoAddRow</a></b>: boolean; override;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="table_components.TRowCompList.html#MayIDoClearAllCells">MayIDoClearAllCells</a></b>: Boolean; override;</code></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TRowCompList.html#MayIDoClearAllCells">MayIDoClearAllCells</a></b>: boolean; override;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="table_components.TRowCompList.html#MayIDoClearSelectedArea">MayIDoClearSelectedArea</a></b>: Boolean; override;</code></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TRowCompList.html#MayIDoClearSelectedArea">MayIDoClearSelectedArea</a></b>: boolean; override;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="table_components.TRowCompList.html#MayIDoDeleteAllData">MayIDoDeleteAllData</a></b>: Boolean; override;</code></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TRowCompList.html#MayIDoDeleteAllData">MayIDoDeleteAllData</a></b>: boolean; override;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="table_components.TRowCompList.html#MayIDoDeleteRows">MayIDoDeleteRows</a></b>(StartRow, RowsCount: LongInt): Boolean; override;</code></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TRowCompList.html#MayIDoDeleteRows">MayIDoDeleteRows</a></b>(StartRow, RowsCount: longint): boolean; override;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="table_components.TRowCompList.html#MayIDoInsertRows">MayIDoInsertRows</a></b>(StartRow, RowsCount: LongInt): Boolean; override;</code></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TRowCompList.html#MayIDoInsertRows">MayIDoInsertRows</a></b>(StartRow, RowsCount: longint): boolean; override;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
@@ -87,15 +87,15 @@ Component list which can display component properties in grid. Class implements 
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="table_components.TRowCompList.html#BeforeStringToValue">BeforeStringToValue</a></b>(const ACol, ARow: Integer; const AString: string); override;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="table_components.TRowCompList.html#BeforeStringToValue">BeforeStringToValue</a></b>(const ACol, ARow: integer; const AString: string); override;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="table_components.TRowCompList.html#Delete">Delete</a></b>(Index: Integer); override;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="table_components.TRowCompList.html#Delete">Delete</a></b>(Index: integer); override;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="table_components.TRowCompList.html#Insert">Insert</a></b>(Index: Integer; Item: TComponent); override;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="table_components.TRowCompList.html#Insert">Insert</a></b>(Index: integer; Item: TComponent); override;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
@@ -103,11 +103,11 @@ Component list which can display component properties in grid. Class implements 
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="table_components.TRowCompList.html#RowsDeleted">RowsDeleted</a></b>( const StartRow, RowsCount: LongInt); override;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="table_components.TRowCompList.html#RowsDeleted">RowsDeleted</a></b>(const StartRow, RowsCount: longint); override;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="table_components.TRowCompList.html#RowsInserted">RowsInserted</a></b>( const StartRow, RowsCount: LongInt); override;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="table_components.TRowCompList.html#RowsInserted">RowsInserted</a></b>(const StartRow, RowsCount: longint); override;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
@@ -115,7 +115,7 @@ Component list which can display component properties in grid. Class implements 
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="table_components.TRowCompList.html#SetRowContents">SetRowContents</a></b>( Grid: TStringGrid; RowNum: LongInt); virtual; abstract;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="table_components.TRowCompList.html#SetRowContents">SetRowContents</a></b>( Grid: TStringGrid; RowNum: longint); virtual; abstract;</code></td>
 </tr>
 </table>
 <h2 class="description">Description</h2>
@@ -123,7 +123,7 @@ Component list which can display component properties in grid. Class implements 
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="Add"></span><code>function <b>Add</b>(Item: TComponent): Integer; override;</code></td>
+<td class="itemcode"><span id="Add"></span><code>function <b>Add</b>(Item: TComponent): integer; override;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -131,7 +131,7 @@ Component list which can display component properties in grid. Class implements 
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetColNumFixed"></span><code>function <b>GetColNumFixed</b>: Boolean; override;</code></td>
+<td class="itemcode"><span id="GetColNumFixed"></span><code>function <b>GetColNumFixed</b>: boolean; override;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
@@ -141,7 +141,7 @@ Component list which can display component properties in grid. Class implements 
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetDataFromGrid"></span><code>function <b>GetDataFromGrid</b>(Grid: TStringGrid): Boolean; override;</code></td>
+<td class="itemcode"><span id="GetDataFromGrid"></span><code>function <b>GetDataFromGrid</b>(Grid: TStringGrid): boolean; override;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
@@ -151,7 +151,7 @@ Component list which can display component properties in grid. Class implements 
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetInfoRows"></span><code>function <b>GetInfoRows</b>: LongInt; override;</code></td>
+<td class="itemcode"><span id="GetInfoRows"></span><code>function <b>GetInfoRows</b>: longint; override;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -159,7 +159,7 @@ Component list which can display component properties in grid. Class implements 
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetRowContents"></span><code>function <b>GetRowContents</b>( Grid: TStringGrid; RowNum: LongInt): Boolean; virtual; abstract;</code></td>
+<td class="itemcode"><span id="GetRowContents"></span><code>function <b>GetRowContents</b>( Grid: TStringGrid; RowNum: longint): boolean; virtual; abstract;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -167,7 +167,7 @@ Component list which can display component properties in grid. Class implements 
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="IsDataSourceEmpty"></span><code>function <b>IsDataSourceEmpty</b>: Boolean; override;</code></td>
+<td class="itemcode"><span id="IsDataSourceEmpty"></span><code>function <b>IsDataSourceEmpty</b>: boolean; override;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -175,7 +175,7 @@ Component list which can display component properties in grid. Class implements 
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="MayIDoAddRow"></span><code>function <b>MayIDoAddRow</b>: Boolean; override;</code></td>
+<td class="itemcode"><span id="MayIDoAddRow"></span><code>function <b>MayIDoAddRow</b>: boolean; override;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -183,7 +183,7 @@ Component list which can display component properties in grid. Class implements 
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="MayIDoClearAllCells"></span><code>function <b>MayIDoClearAllCells</b>: Boolean; override;</code></td>
+<td class="itemcode"><span id="MayIDoClearAllCells"></span><code>function <b>MayIDoClearAllCells</b>: boolean; override;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -191,7 +191,7 @@ Component list which can display component properties in grid. Class implements 
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="MayIDoClearSelectedArea"></span><code>function <b>MayIDoClearSelectedArea</b>: Boolean; override;</code></td>
+<td class="itemcode"><span id="MayIDoClearSelectedArea"></span><code>function <b>MayIDoClearSelectedArea</b>: boolean; override;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -199,7 +199,7 @@ Component list which can display component properties in grid. Class implements 
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="MayIDoDeleteAllData"></span><code>function <b>MayIDoDeleteAllData</b>: Boolean; override;</code></td>
+<td class="itemcode"><span id="MayIDoDeleteAllData"></span><code>function <b>MayIDoDeleteAllData</b>: boolean; override;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -207,7 +207,7 @@ Component list which can display component properties in grid. Class implements 
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="MayIDoDeleteRows"></span><code>function <b>MayIDoDeleteRows</b>(StartRow, RowsCount: LongInt): Boolean; override;</code></td>
+<td class="itemcode"><span id="MayIDoDeleteRows"></span><code>function <b>MayIDoDeleteRows</b>(StartRow, RowsCount: longint): boolean; override;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -215,7 +215,7 @@ Component list which can display component properties in grid. Class implements 
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="MayIDoInsertRows"></span><code>function <b>MayIDoInsertRows</b>(StartRow, RowsCount: LongInt): Boolean; override;</code></td>
+<td class="itemcode"><span id="MayIDoInsertRows"></span><code>function <b>MayIDoInsertRows</b>(StartRow, RowsCount: longint): boolean; override;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -241,7 +241,7 @@ Component list which can display component properties in grid. Class implements 
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="BeforeStringToValue"></span><code>procedure <b>BeforeStringToValue</b>(const ACol, ARow: Integer; const AString: string); override;</code></td>
+<td class="itemcode"><span id="BeforeStringToValue"></span><code>procedure <b>BeforeStringToValue</b>(const ACol, ARow: integer; const AString: string); override;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -249,7 +249,7 @@ Component list which can display component properties in grid. Class implements 
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="Delete"></span><code>procedure <b>Delete</b>(Index: Integer); override;</code></td>
+<td class="itemcode"><span id="Delete"></span><code>procedure <b>Delete</b>(Index: integer); override;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -257,7 +257,7 @@ Component list which can display component properties in grid. Class implements 
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="Insert"></span><code>procedure <b>Insert</b>(Index: Integer; Item: TComponent); override;</code></td>
+<td class="itemcode"><span id="Insert"></span><code>procedure <b>Insert</b>(Index: integer; Item: TComponent); override;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -273,7 +273,7 @@ Component list which can display component properties in grid. Class implements 
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="RowsDeleted"></span><code>procedure <b>RowsDeleted</b>( const StartRow, RowsCount: LongInt); override;</code></td>
+<td class="itemcode"><span id="RowsDeleted"></span><code>procedure <b>RowsDeleted</b>(const StartRow, RowsCount: longint); override;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -281,7 +281,7 @@ Component list which can display component properties in grid. Class implements 
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="RowsInserted"></span><code>procedure <b>RowsInserted</b>( const StartRow, RowsCount: LongInt); override;</code></td>
+<td class="itemcode"><span id="RowsInserted"></span><code>procedure <b>RowsInserted</b>(const StartRow, RowsCount: longint); override;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -297,7 +297,7 @@ Component list which can display component properties in grid. Class implements 
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="SetRowContents"></span><code>procedure <b>SetRowContents</b>( Grid: TStringGrid; RowNum: LongInt); virtual; abstract;</code></td>
+<td class="itemcode"><span id="SetRowContents"></span><code>procedure <b>SetRowContents</b>( Grid: TStringGrid; RowNum: longint); virtual; abstract;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>

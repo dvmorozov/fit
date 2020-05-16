@@ -18,10 +18,10 @@
 <a  href="downhill_simplex_minimizer.html">downhill_simplex_minimizer</a></p>
 <h2 class="declaration">Declaration</h2>
 <p class="declaration">
-<code>type TDownhillSimplexMinimizer = class(<a class="normal" href="int_minimizer.TMinimizer.html">TMinimizer</a>, <a class="normal" href="downhill_simplex_container.IOptimizedFunction.html">IOptimizedFunction</a>, <a class="normal" href="downhill_simplex_container.IDownhillRealParameters.html">IDownhillRealParameters</a>, <a class="normal" href="downhill_simplex_container.IUpdatingResults.html">IUpdatingResults</a>)</code></p>
+<code>type TDownhillSimplexMinimizer = class(<a class="normal" href="int_minimizer.TMinimizer.html">TMinimizer</a>, IOptimizedFunction, IDownhillRealParameters, IUpdatingResults)</code></p>
 <h2 class="description">Description</h2>
 <p>
-Implements downhill simplex algorithm.</p>
+Implements application interfaces required by downhill simplex algorithm.</p>
 <span id="PasDoc-Hierarchy"></span><h2 class="hierarchy">Hierarchy</h2>
 <ul class="hierarchy"><li class="ancestor">TComponent</li>
 <li class="ancestor"><a class="normal" href="int_minimizer.TMinimizer.html">TMinimizer</a></li>
@@ -30,7 +30,7 @@ Implements downhill simplex algorithm.</p>
 <table class="summary wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
-<td class="itemcode"><code><b><a  href="downhill_simplex_minimizer.TDownhillSimplexMinimizer.html#Container">Container</a></b>: <a  href="downhill_simplex_container.TDownhillSimplexContainer.html">TDownhillSimplexContainer</a>;</code></td>
+<td class="itemcode"><code><b><a  href="downhill_simplex_minimizer.TDownhillSimplexMinimizer.html#Server">Server</a></b>: TDownhillSimplexServer;</code></td>
 </tr>
 </table>
 <span id="PasDoc-Methods"></span><h3 class="summary">Methods</h3>
@@ -45,51 +45,59 @@ Implements downhill simplex algorithm.</p>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="downhill_simplex_minimizer.TDownhillSimplexMinimizer.html#GetNumberOfValues">GetNumberOfValues</a></b>: LongInt;</code></td>
+<td class="itemcode"><code>function <b><a  href="downhill_simplex_minimizer.TDownhillSimplexMinimizer.html#GetNumberOfValues">GetNumberOfValues</a></b>: longint;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="downhill_simplex_minimizer.TDownhillSimplexMinimizer.html#GetOptimizedFunction">GetOptimizedFunction</a></b>: Double;</code></td>
+<td class="itemcode"><code>function <b><a  href="downhill_simplex_minimizer.TDownhillSimplexMinimizer.html#GetOptimizedFunction">GetOptimizedFunction</a></b>: double;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="downhill_simplex_minimizer.TDownhillSimplexMinimizer.html#GetParameter">GetParameter</a></b>(index: LongInt): <a  href="downhill_simplex_container.TVariableParameter.html">TVariableParameter</a>;</code></td>
+<td class="itemcode"><code>function <b><a  href="downhill_simplex_minimizer.TDownhillSimplexMinimizer.html#GetParameter">GetParameter</a></b>(index: longint): TVariableParameter;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="downhill_simplex_minimizer.TDownhillSimplexMinimizer.html#GetParametersNumber">GetParametersNumber</a></b>: LongInt;</code></td>
+<td class="itemcode"><code>function <b><a  href="downhill_simplex_minimizer.TDownhillSimplexMinimizer.html#GetParametersNumber">GetParametersNumber</a></b>: longint;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="downhill_simplex_minimizer.TDownhillSimplexMinimizer.html#GetValueIndex">GetValueIndex</a></b>: LongInt;</code></td>
+<td class="itemcode"><code>function <b><a  href="downhill_simplex_minimizer.TDownhillSimplexMinimizer.html#GetValueIndex">GetValueIndex</a></b>: longint;</code></td>
 </tr>
 <tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="downhill_simplex_minimizer.TDownhillSimplexMinimizer.html#GetVariationStep">GetVariationStep</a></b>(index: LongInt): double;</code></td>
+</tr>
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="downhill_simplex_minimizer.TDownhillSimplexMinimizer.html#CreateParameters">CreateParameters</a></b>;</code></td>
 </tr>
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="downhill_simplex_minimizer.TDownhillSimplexMinimizer.html#Minimize">Minimize</a></b>(var ErrorCode: LongInt); override;</code></td>
-</tr>
 <tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="downhill_simplex_minimizer.TDownhillSimplexMinimizer.html#Minimize">Minimize</a></b>(var ErrorCode: longint); override;</code></td>
+</tr>
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="downhill_simplex_minimizer.TDownhillSimplexMinimizer.html#ParametersUpdated">ParametersUpdated</a></b>;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="downhill_simplex_minimizer.TDownhillSimplexMinimizer.html#ResetCurJobProgress">ResetCurJobProgress</a></b>(Sender: TComponent);</code></td>
 </tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="downhill_simplex_minimizer.TDownhillSimplexMinimizer.html#SetParameter">SetParameter</a></b>(index: longint; AParameter: TVariableParameter);</code></td>
+</tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="downhill_simplex_minimizer.TDownhillSimplexMinimizer.html#SetParameter">SetParameter</a></b>(index: LongInt; AParameter: <a  href="downhill_simplex_container.TVariableParameter.html">TVariableParameter</a>);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="downhill_simplex_minimizer.TDownhillSimplexMinimizer.html#SetValueIndex">SetValueIndex</a></b>(const AValueIndex: longint);</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="downhill_simplex_minimizer.TDownhillSimplexMinimizer.html#SetValueIndex">SetValueIndex</a></b>(const AValueIndex: LongInt);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="downhill_simplex_minimizer.TDownhillSimplexMinimizer.html#SetVariationStep">SetVariationStep</a></b>(index: LongInt; Value: double);</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="downhill_simplex_minimizer.TDownhillSimplexMinimizer.html#ShowCurJobProgress">ShowCurJobProgress</a></b>(Sender: TComponent; MinValue, MaxValue, CurValue: LongInt);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="downhill_simplex_minimizer.TDownhillSimplexMinimizer.html#ShowCurJobProgress">ShowCurJobProgress</a></b>(Sender: TComponent; MinValue, MaxValue, CurValue: longint);</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
@@ -97,11 +105,15 @@ Implements downhill simplex algorithm.</p>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="downhill_simplex_minimizer.TDownhillSimplexMinimizer.html#UpdatingResults">UpdatingResults</a></b>(Sender: TComponent);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="downhill_simplex_minimizer.TDownhillSimplexMinimizer.html#UpdateResults">UpdateResults</a></b>(Sender: TComponent);</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="downhill_simplex_minimizer.TDownhillSimplexMinimizer.html#SetTerminated">SetTerminated</a></b>(ATerminated: Boolean); override;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="downhill_simplex_minimizer.TDownhillSimplexMinimizer.html#SetTerminated">SetTerminated</a></b>(ATerminated: boolean); override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="downhill_simplex_minimizer.TDownhillSimplexMinimizer.html#SelectParameter">SelectParameter</a></b>(index: longint);</code></td>
 </tr>
 </table>
 <h2 class="description">Description</h2>
@@ -109,7 +121,7 @@ Implements downhill simplex algorithm.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
-<td class="itemcode"><span id="Container"></span><code><b>Container</b>: <a  href="downhill_simplex_container.TDownhillSimplexContainer.html">TDownhillSimplexContainer</a>;</code></td>
+<td class="itemcode"><span id="Server"></span><code><b>Server</b>: TDownhillSimplexServer;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -134,27 +146,27 @@ Implements downhill simplex algorithm.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetNumberOfValues"></span><code>function <b>GetNumberOfValues</b>: LongInt;</code></td>
+<td class="itemcode"><span id="GetNumberOfValues"></span><code>function <b>GetNumberOfValues</b>: longint;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
-<a class="normal" href="comb_enumerator.IDiscretValue.html">IDiscretValue</a></p>
+IDiscretValue</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetOptimizedFunction"></span><code>function <b>GetOptimizedFunction</b>: Double;</code></td>
+<td class="itemcode"><span id="GetOptimizedFunction"></span><code>function <b>GetOptimizedFunction</b>: double;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
-<a class="normal" href="downhill_simplex_container.IOptimizedFunction.html">IOptimizedFunction</a></p>
+IOptimizedFunction</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetParameter"></span><code>function <b>GetParameter</b>(index: LongInt): <a  href="downhill_simplex_container.TVariableParameter.html">TVariableParameter</a>;</code></td>
+<td class="itemcode"><span id="GetParameter"></span><code>function <b>GetParameter</b>(index: longint): TVariableParameter;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -162,17 +174,25 @@ Implements downhill simplex algorithm.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetParametersNumber"></span><code>function <b>GetParametersNumber</b>: LongInt;</code></td>
+<td class="itemcode"><span id="GetParametersNumber"></span><code>function <b>GetParametersNumber</b>: longint;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
-<a class="normal" href="downhill_simplex_container.IDownhillSimplexParameters.html">IDownhillSimplexParameters</a></p>
+IDownhillSimplexParameters</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetValueIndex"></span><code>function <b>GetValueIndex</b>: LongInt;</code></td>
+<td class="itemcode"><span id="GetValueIndex"></span><code>function <b>GetValueIndex</b>: longint;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetVariationStep"></span><code>function <b>GetVariationStep</b>(index: LongInt): double;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -184,13 +204,13 @@ Implements downhill simplex algorithm.</p>
 </tr>
 <tr><td colspan="2">
 <p>
-<a class="normal" href="downhill_simplex_container.IDownhillRealParameters.html">IDownhillRealParameters</a></p>
+IDownhillRealParameters</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="Minimize"></span><code>procedure <b>Minimize</b>(var ErrorCode: LongInt); override;</code></td>
+<td class="itemcode"><span id="Minimize"></span><code>procedure <b>Minimize</b>(var ErrorCode: longint); override;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -214,7 +234,7 @@ Implements downhill simplex algorithm.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="SetParameter"></span><code>procedure <b>SetParameter</b>(index: LongInt; AParameter: <a  href="downhill_simplex_container.TVariableParameter.html">TVariableParameter</a>);</code></td>
+<td class="itemcode"><span id="SetParameter"></span><code>procedure <b>SetParameter</b>(index: longint; AParameter: TVariableParameter);</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -222,7 +242,7 @@ Implements downhill simplex algorithm.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="SetValueIndex"></span><code>procedure <b>SetValueIndex</b>(const AValueIndex: LongInt);</code></td>
+<td class="itemcode"><span id="SetValueIndex"></span><code>procedure <b>SetValueIndex</b>(const AValueIndex: longint);</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -230,11 +250,19 @@ Implements downhill simplex algorithm.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="ShowCurJobProgress"></span><code>procedure <b>ShowCurJobProgress</b>(Sender: TComponent; MinValue, MaxValue, CurValue: LongInt);</code></td>
+<td class="itemcode"><span id="SetVariationStep"></span><code>procedure <b>SetVariationStep</b>(index: LongInt; Value: double);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="ShowCurJobProgress"></span><code>procedure <b>ShowCurJobProgress</b>(Sender: TComponent; MinValue, MaxValue, CurValue: longint);</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
-<a class="normal" href="downhill_simplex_container.IUpdatingResults.html">IUpdatingResults</a></p>
+IUpdatingResults</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -248,7 +276,7 @@ Implements downhill simplex algorithm.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="UpdatingResults"></span><code>procedure <b>UpdatingResults</b>(Sender: TComponent);</code></td>
+<td class="itemcode"><span id="UpdateResults"></span><code>procedure <b>UpdateResults</b>(Sender: TComponent);</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -256,7 +284,15 @@ Implements downhill simplex algorithm.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="SetTerminated"></span><code>procedure <b>SetTerminated</b>(ATerminated: Boolean); override;</code></td>
+<td class="itemcode"><span id="SetTerminated"></span><code>procedure <b>SetTerminated</b>(ATerminated: boolean); override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="SelectParameter"></span><code>procedure <b>SelectParameter</b>(index: longint);</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>

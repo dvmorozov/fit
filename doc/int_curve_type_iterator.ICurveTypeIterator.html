@@ -29,11 +29,11 @@ Interface defining basic operation for iterating through curve types.</p>
 <table class="summary wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="int_curve_type_iterator.ICurveTypeIterator.html#EndCurveType">EndCurveType</a></b>: Boolean;</code></td>
+<td class="itemcode"><code>function <b><a  href="int_curve_type_iterator.ICurveTypeIterator.html#EndCurveType">EndCurveType</a></b>: boolean;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="int_curve_type_iterator.ICurveTypeIterator.html#GetCurveTypeId">GetCurveTypeId</a></b>: <a  href="int_points_set.html#TCurveTypeId">TCurveTypeId</a>;</code></td>
+<td class="itemcode"><code>function <b><a  href="int_curve_type_iterator.ICurveTypeIterator.html#GetCurveTypeId">GetCurveTypeId</a></b>: <a  href="named_points_set.html#TCurveTypeId">TCurveTypeId</a>;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
@@ -41,9 +41,13 @@ Interface defining basic operation for iterating through curve types.</p>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="int_curve_type_iterator.ICurveTypeIterator.html#FirstCurveType">FirstCurveType</a></b>;</code></td>
+<td class="itemcode"><code>function <b><a  href="int_curve_type_iterator.ICurveTypeIterator.html#GetCurveTypeTag">GetCurveTypeTag</a></b>(CurveTypeId: <a  href="named_points_set.html#TCurveTypeId">TCurveTypeId</a>): integer;</code></td>
 </tr>
 <tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="int_curve_type_iterator.ICurveTypeIterator.html#FirstCurveType">FirstCurveType</a></b>;</code></td>
+</tr>
+<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="int_curve_type_iterator.ICurveTypeIterator.html#NextCurveType">NextCurveType</a></b>;</code></td>
 </tr>
@@ -53,7 +57,7 @@ Interface defining basic operation for iterating through curve types.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="EndCurveType"></span><code>function <b>EndCurveType</b>: Boolean;</code></td>
+<td class="itemcode"><span id="EndCurveType"></span><code>function <b>EndCurveType</b>: boolean;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -61,7 +65,7 @@ Interface defining basic operation for iterating through curve types.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetCurveTypeId"></span><code>function <b>GetCurveTypeId</b>: <a  href="int_points_set.html#TCurveTypeId">TCurveTypeId</a>;</code></td>
+<td class="itemcode"><span id="GetCurveTypeId"></span><code>function <b>GetCurveTypeId</b>: <a  href="named_points_set.html#TCurveTypeId">TCurveTypeId</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -70,6 +74,14 @@ Interface defining basic operation for iterating through curve types.</p>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
 <td class="itemcode"><span id="GetCurveTypeName"></span><code>function <b>GetCurveTypeName</b>: string;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetCurveTypeTag"></span><code>function <b>GetCurveTypeTag</b>(CurveTypeId: <a  href="named_points_set.html#TCurveTypeId">TCurveTypeId</a>): integer;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>

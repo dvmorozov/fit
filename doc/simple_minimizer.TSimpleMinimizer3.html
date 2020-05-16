@@ -21,7 +21,7 @@
 <code>type TSimpleMinimizer3 = class(<a class="normal" href="int_minimizer.TMinimizer.html">TMinimizer</a>)</code></p>
 <h2 class="description">Description</h2>
 <p>
-Implements simple downhill simplex algorithm able to increase step size. Now this variant is used.</p>
+Implements simple downhill simplex algorithm able to increase step size. Currently this variant is used.</p>
 <span id="PasDoc-Hierarchy"></span><h2 class="hierarchy">Hierarchy</h2>
 <ul class="hierarchy"><li class="ancestor">TComponent</li>
 <li class="ancestor"><a class="normal" href="int_minimizer.TMinimizer.html">TMinimizer</a></li>
@@ -30,18 +30,18 @@ Implements simple downhill simplex algorithm able to increase step size. Now thi
 <table class="summary wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code><b><a  href="simple_minimizer.TSimpleMinimizer3.html#EndOfCalculation">EndOfCalculation</a></b>: function: Boolean of object;</code></td>
+<td class="itemcode"><code><b><a  href="simple_minimizer.TSimpleMinimizer3.html#FEndOfCalculation">FEndOfCalculation</a></b>: function: boolean of object;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code><b><a  href="simple_minimizer.TSimpleMinimizer3.html#MultipleSteps">MultipleSteps</a></b>: procedure(Factor: Double) of object;</code></td>
+<td class="itemcode"><code><b><a  href="simple_minimizer.TSimpleMinimizer3.html#FMultiplyVariationStep">FMultiplyVariationStep</a></b>: procedure(Factor: double) of object;</code></td>
 </tr>
 </table>
 <span id="PasDoc-Methods"></span><h3 class="summary">Methods</h3>
 <table class="summary wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="simple_minimizer.TSimpleMinimizer3.html#Minimize">Minimize</a></b>(var ErrorCode: LongInt); override;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="simple_minimizer.TSimpleMinimizer3.html#Minimize">Minimize</a></b>(var ErrorCode: longint); override;</code></td>
 </tr>
 </table>
 <h2 class="description">Description</h2>
@@ -49,7 +49,7 @@ Implements simple downhill simplex algorithm able to increase step size. Now thi
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="EndOfCalculation"></span><code><b>EndOfCalculation</b>: function: Boolean of object;</code></td>
+<td class="itemcode"><span id="FEndOfCalculation"></span><code><b>FEndOfCalculation</b>: function: boolean of object;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
@@ -59,7 +59,7 @@ Returns flag terminating calculation.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="MultipleSteps"></span><code><b>MultipleSteps</b>: procedure(Factor: Double) of object;</code></td>
+<td class="itemcode"><span id="FMultiplyVariationStep"></span><code><b>FMultiplyVariationStep</b>: procedure(Factor: double) of object;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -68,7 +68,7 @@ Returns flag terminating calculation.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="Minimize"></span><code>procedure <b>Minimize</b>(var ErrorCode: LongInt); override;</code></td>
+<td class="itemcode"><span id="Minimize"></span><code>procedure <b>Minimize</b>(var ErrorCode: longint); override;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>

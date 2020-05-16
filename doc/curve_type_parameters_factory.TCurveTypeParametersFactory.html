@@ -18,12 +18,12 @@
 <a  href="curve_type_parameters_factory.html">curve_type_parameters_factory</a></p>
 <h2 class="declaration">Declaration</h2>
 <p class="declaration">
-<code>type TCurveTypeParametersFactory = class(TCBRCComponent, <a class="normal" href="int_curve_type_parameters_factory.ICurveTypeParametersFactory.html">ICurveTypeParametersFactory</a>)</code></p>
+<code>type TCurveTypeParametersFactory = class(TInterfacedObject, <a class="normal" href="int_curve_type_parameters_factory.ICurveTypeParametersFactory.html">ICurveTypeParametersFactory</a>)</code></p>
 <h2 class="description">Description</h2>
 <p>
 Class-factory implementing operation for creating custom curve type object.</p>
 <span id="PasDoc-Hierarchy"></span><h2 class="hierarchy">Hierarchy</h2>
-<ul class="hierarchy"><li class="ancestor">TCBRCComponent</li>
+<ul class="hierarchy"><li class="ancestor">TInterfacedObject</li>
 <li class="thisitem">TCurveTypeParametersFactory</li></ul><h2 class="overview">Overview</h2>
 <span id="PasDoc-Methods"></span><h3 class="summary">Methods</h3>
 <table class="summary wide_list">
@@ -33,11 +33,11 @@ Class-factory implementing operation for creating custom curve type object.</p>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>class function <b><a  href="curve_type_parameters_factory.TCurveTypeParametersFactory.html#Create">Create</a></b>: <a  href="curve_type_parameters_factory.TCurveTypeParametersFactory.html">TCurveTypeParametersFactory</a>;</code></td>
+<td class="itemcode"><code>class function <b><a  href="curve_type_parameters_factory.TCurveTypeParametersFactory.html#Create">Create</a></b>: <a  href="int_curve_type_parameters_factory.ICurveTypeParametersFactory.html">ICurveTypeParametersFactory</a>;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="curve_type_parameters_factory.TCurveTypeParametersFactory.html#CreateUserCurveType">CreateUserCurveType</a></b>(Name: string; Expression: string; Parameters: <a  href="curve_points_set.Curve_parameters.html">Curve_parameters</a>): <a  href="app_settings.Curve_type.html">Curve_type</a>;</code></td>
+<td class="itemcode"><code>function <b><a  href="curve_type_parameters_factory.TCurveTypeParametersFactory.html#CreateUserCurveType">CreateUserCurveType</a></b>(Name: string; Expression: string; Parameters: <a  href="persistent_curve_parameters.Curve_parameters.html">Curve_parameters</a>): <a  href="app_settings.Curve_type.html">Curve_type</a>;</code></td>
 </tr>
 </table>
 <h2 class="description">Description</h2>
@@ -53,7 +53,7 @@ Class-factory implementing operation for creating custom curve type object.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="Create"></span><code>class function <b>Create</b>: <a  href="curve_type_parameters_factory.TCurveTypeParametersFactory.html">TCurveTypeParametersFactory</a>;</code></td>
+<td class="itemcode"><span id="Create"></span><code>class function <b>Create</b>: <a  href="int_curve_type_parameters_factory.ICurveTypeParametersFactory.html">ICurveTypeParametersFactory</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -61,7 +61,7 @@ Class-factory implementing operation for creating custom curve type object.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="CreateUserCurveType"></span><code>function <b>CreateUserCurveType</b>(Name: string; Expression: string; Parameters: <a  href="curve_points_set.Curve_parameters.html">Curve_parameters</a>): <a  href="app_settings.Curve_type.html">Curve_type</a>;</code></td>
+<td class="itemcode"><span id="CreateUserCurveType"></span><code>function <b>CreateUserCurveType</b>(Name: string; Expression: string; Parameters: <a  href="persistent_curve_parameters.Curve_parameters.html">Curve_parameters</a>): <a  href="app_settings.Curve_type.html">Curve_type</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>

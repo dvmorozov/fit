@@ -17,32 +17,18 @@ DiGraph Classes {
   IDataLoader [href="int_data_loader.IDataLoader.html"]
   IDataLoaderInjector -> IInterface
   IDataLoaderInjector [href="int_data_loader_injector.IDataLoaderInjector.html"]
-  IDiscretValue -> IInterface
-  IDiscretValue [href="comb_enumerator.IDiscretValue.html"]
-  IDownhillSimplexParameters -> IDiscretValue
-  IDownhillSimplexParameters [href="downhill_simplex_container.IDownhillSimplexParameters.html"]
-  IDownhillRealParameters -> IDownhillSimplexParameters
-  IDownhillRealParameters [href="downhill_simplex_container.IDownhillRealParameters.html"]
   IExpressionParser -> IInterface
   IExpressionParser [href="int_expression_parser.IExpressionParser.html"]
+  IFitServer -> IInterface
+  IFitServer [href="int_fit_server.IFitServer.html"]
   IFitService -> IInterface
   IFitService [href="int_fit_service.IFitService.html"]
   IFitProblem -> IFitService
   IFitProblem [href="int_fit_service.IFitProblem.html"]
   IFitViewer -> IInterface
   IFitViewer [href="int_fit_viewer.IFitViewer.html"]
-  IOptimizedFunction -> IInterface
-  IOptimizedFunction [href="downhill_simplex_container.IOptimizedFunction.html"]
-  IPointsSet -> IInterface
-  IPointsSet [href="int_points_set.IPointsSet.html"]
-  ISelfChecked -> IInterface
-  ISelfChecked [href="component_list.ISelfChecked.html"]
   ISelfCopied -> IInterface
   ISelfCopied [href="self_copied_component.ISelfCopied.html"]
-  IUpdatingResults -> IInterface
-  IUpdatingResults [href="downhill_simplex_container.IUpdatingResults.html"]
-  IFitServer -> IInvokable
-  IFitServer [href="int_fit_server.IFitServer.html"]
   IMinimizer -> IUnknown
   IMinimizer [href="int_minimizer.IMinimizer.html"]
   TBoolResult -> TBaseComplexRemotable
@@ -61,68 +47,10 @@ DiGraph Classes {
   TSpecParamResult [href="int_fit_server.TSpecParamResult.html"]
   TStringResult -> TBaseComplexRemotable
   TStringResult [href="int_fit_server.TStringResult.html"]
-  TFitServer_Proxy -> TBaseProxy
-  TFitServer_Proxy [href="fit_server_proxy.TFitServer_Proxy.html"]
   TFitServer_ServiceBinder -> TBaseServiceBinder
   TFitServer_ServiceBinder [href="fit_server_binder.TFitServer_ServiceBinder.html"]
   TFitServer_ServiceImp -> TBaseServiceImplementation
   TFitServer_ServiceImp [href="fit_server_imp.TFitServer_ServiceImp.html"]
-  TComponentList -> TCBRCComponent
-  TComponentList [href="component_list.TComponentList.html"]
-  TCreateUserPointsSetDlgAdapter -> TCBRCComponent
-  TCreateUserPointsSetDlgAdapter [href="create_user_points_set_dlg_adapter.TCreateUserPointsSetDlgAdapter.html"]
-  TCurveTypeParametersFactory -> TCBRCComponent
-  TCurveTypeParametersFactory [href="curve_type_parameters_factory.TCurveTypeParametersFactory.html"]
-  TCurveTypesSingleton -> TCBRCComponent
-  TCurveTypesSingleton [href="curve_types_singleton.TCurveTypesSingleton.html"]
-  TCurveTypeStorageAdapter -> TCBRCComponent
-  TCurveTypeStorageAdapter [href="curve_type_storage_adapter.TCurveTypeStorageAdapter.html"]
-  TDownhillRealParameters -> TCBRCComponent
-  TDownhillRealParameters [href="downhill_simplex_container.TDownhillRealParameters.html"]
-  TExpressionParserAdapter -> TCBRCComponent
-  TExpressionParserAdapter [href="expression_parser_adapter.TExpressionParserAdapter.html"]
-  TExtensionDataLoaderInjector -> TCBRCComponent
-  TExtensionDataLoaderInjector [href="extension_data_loader_injector.TExtensionDataLoaderInjector.html"]
-  TFitClient -> TCBRCComponent
-  TFitClient [href="fit_client.TFitClient.html"]
-  TFitClientStub -> TCBRCComponent
-  TFitClientStub [href="fit_client_stub.TFitClientStub.html"]
-  TFitProblem -> TCBRCComponent
-  TFitProblem [href="fit_problem.TFitProblem.html"]
-  TFitClientProxy -> TFitProblem
-  TFitClientProxy [href="fit_client_proxy.TFitClientProxy.html"]
-  TFitServer -> TCBRCComponent
-  TFitServer [href="fit_server.TFitServer.html"]
-  TFitServerWithThread -> TFitServer
-  TFitServerWithThread [href="fit_server_with_thread.TFitServerWithThread.html"]
-  TFitServerMultithreaded -> TFitServerWithThread
-  TFitServerMultithreaded [href="fit_server_multithreaded.TFitServerMultithreaded.html"]
-  TSelfCopiedComponent -> TCBRCComponent
-  TSelfCopiedComponent [href="self_copied_component.TSelfCopiedComponent.html"]
-  Curve_parameters -> TSelfCopiedComponent
-  Curve_parameters [href="curve_points_set.Curve_parameters.html"]
-  TPointsSet -> TSelfCopiedComponent
-  TPointsSet [href="points_set.TPointsSet.html"]
-  TNeutronPointsSet -> TPointsSet
-  TNeutronPointsSet [href="neutron_points_set.TNeutronPointsSet.html"]
-  TTitlePointsSet -> TNeutronPointsSet
-  TTitlePointsSet [href="title_points_set.TTitlePointsSet.html"]
-  TCurvePointsSet -> TTitlePointsSet
-  TCurvePointsSet [href="curve_points_set.TCurvePointsSet.html"]
-  TNamedPointsSet -> TCurvePointsSet
-  TNamedPointsSet [href="named_points_set.TNamedPointsSet.html"]
-  T2BranchesPseudoVoigtPointsSet -> TNamedPointsSet
-  T2BranchesPseudoVoigtPointsSet [href="two_branches_pseudo_voigt_points_set.T2BranchesPseudoVoigtPointsSet.html"]
-  TGaussPointsSet -> TNamedPointsSet
-  TGaussPointsSet [href="gauss_points_set.TGaussPointsSet.html"]
-  TLorentzPointsSet -> TGaussPointsSet
-  TLorentzPointsSet [href="lorentz_points_set.TLorentzPointsSet.html"]
-  TPseudoVoigtPointsSet -> TNamedPointsSet
-  TPseudoVoigtPointsSet [href="pseudo_voigt_points_set.TPseudoVoigtPointsSet.html"]
-  TAsymPseudoVoigtPointsSet -> TPseudoVoigtPointsSet
-  TAsymPseudoVoigtPointsSet [href="asym_pseudo_voigt_points_set.TAsymPseudoVoigtPointsSet.html"]
-  TUserPointsSet -> TNamedPointsSet
-  TUserPointsSet [href="user_points_set.TUserPointsSet.html"]
   TAboutBox -> TForm
   TAboutBox [href="about_box_dialog.TAboutBox.html"]
   TCreateUserPointsSetDlg -> TForm
@@ -133,21 +61,47 @@ DiGraph Classes {
   TFormMain [href="form_main.TFormMain.html"]
   TInputBackFactorDlg -> TForm
   TInputBackFactorDlg [href="input_back_factor_dialog.TInputBackFactorDlg.html"]
-  TInputMaxRFactorDlg -> TForm
-  TInputMaxRFactorDlg [href="input_max_rfactor_dialog.TInputMaxRFactorDlg.html"]
   TInputWavelengthDlg -> TForm
   TInputWavelengthDlg [href="input_wavelength_dialog.TInputWavelengthDlg.html"]
+  TSetMaximumRFactorDlg -> TForm
+  TSetMaximumRFactorDlg [href="set_maximum_rfactor_dialog.TSetMaximumRFactorDlg.html"]
   TUserPointsSetPropDlg -> TForm
   TUserPointsSetPropDlg [href="user_points_set_prop_dialog.TUserPointsSetPropDlg.html"]
+  TCreateUserPointsSetDlgAdapter -> TInterfacedObject
+  TCreateUserPointsSetDlgAdapter [href="create_user_points_set_dlg_adapter.TCreateUserPointsSetDlgAdapter.html"]
+  TCurveTypeParametersFactory -> TInterfacedObject
+  TCurveTypeParametersFactory [href="curve_type_parameters_factory.TCurveTypeParametersFactory.html"]
+  TCurveTypesSingleton -> TInterfacedObject
+  TCurveTypesSingleton [href="curve_types_singleton.TCurveTypesSingleton.html"]
+  TCurveTypeStorageAdapter -> TInterfacedObject
+  TCurveTypeStorageAdapter [href="curve_type_storage_adapter.TCurveTypeStorageAdapter.html"]
+  TExpressionParserAdapter -> TInterfacedObject
+  TExpressionParserAdapter [href="expression_parser_adapter.TExpressionParserAdapter.html"]
+  TExtensionDataLoaderInjector -> TInterfacedObject
+  TExtensionDataLoaderInjector [href="extension_data_loader_injector.TExtensionDataLoaderInjector.html"]
+  TFitClient -> TInterfacedObject
+  TFitClient [href="fit_client.TFitClient.html"]
+  TFitClientStub -> TInterfacedObject
+  TFitClientStub [href="fit_client_stub.TFitClientStub.html"]
+  TFitProblem -> TInterfacedObject
+  TFitProblem [href="fit_problem.TFitProblem.html"]
+  TFitClientProxy -> TFitProblem
+  TFitClientProxy [href="fit_client_proxy.TFitClientProxy.html"]
+  TFitServerProxy -> TInterfacedObject
+  TFitServerProxy [href="fit_server_proxy.TFitServerProxy.html"]
   TFitServer_ServiceBinderFactory -> TInterfacedObject
   TFitServer_ServiceBinderFactory [href="fit_server_binder.TFitServer_ServiceBinderFactory.html"]
+  TFitService -> TInterfacedObject
+  TFitService [href="fit_service.TFitService.html"]
+  TFitServiceWithThread -> TFitService
+  TFitServiceWithThread [href="fit_service_with_thread.TFitServiceWithThread.html"]
+  TFitServiceMultithreaded -> TFitServiceWithThread
+  TFitServiceMultithreaded [href="fit_service_multithreaded.TFitServiceMultithreaded.html"]
   Exception -> TObject
+  BalloonException -> Exception
+  BalloonException [href="set_maximum_rfactor_dialog.BalloonException.html"]
   EColCompList -> Exception
   EColCompList [href="table_components.EColCompList.html"]
-  EDownhillRealParameters -> Exception
-  EDownhillRealParameters [href="downhill_simplex_container.EDownhillRealParameters.html"]
-  EDownhillSimplexContainer -> Exception
-  EDownhillSimplexContainer [href="downhill_simplex_container.EDownhillSimplexContainer.html"]
   EFileNotExists -> Exception
   EFileNotExists [href="data_loader.EFileNotExists.html"]
   EInvalidFileFormat -> Exception
@@ -158,18 +112,10 @@ DiGraph Classes {
   ENotImplemented [href="curve_types_singleton.ENotImplemented.html"]
   ERowCompList -> Exception
   ERowCompList [href="table_components.ERowCompList.html"]
-  ESelfCopiedCompList -> Exception
-  ESelfCopiedCompList [href="self_copied_component.ESelfCopiedCompList.html"]
   ETableCompList -> Exception
   ETableCompList [href="table_components.ETableCompList.html"]
-  ETools -> Exception
-  ETools [href="Tools.ETools.html"]
   EWavelengthIsNotSpecified -> Exception
   EWavelengthIsNotSpecified [href="neutron_points_set.EWavelengthIsNotSpecified.html"]
-  TCombEnumerator -> TObject
-  TCombEnumerator [href="comb_enumerator.TCombEnumerator.html"]
-  TCombSelector -> TCombEnumerator
-  TCombSelector [href="comb_enumerator.TCombSelector.html"]
   TConfigurablePointsSet -> TObject
   TConfigurablePointsSet [href="configurable_points_set.TConfigurablePointsSet.html"]
   TConfigurableUserPointsSet -> TConfigurablePointsSet
@@ -177,18 +123,32 @@ DiGraph Classes {
   TNonConfigurablePointsSet -> TConfigurablePointsSet
   TNonConfigurablePointsSet [href="non_configurable_points_set.TNonConfigurablePointsSet.html"]
   TCurveType -> TObject
-  TCurveType [href="curve_types_singleton.TCurveType.html"]
+  TCurveType [href="int_curve_factory.TCurveType.html"]
   TFitClientApp -> TObject
   TFitClientApp [href="fit_client_app.TFitClientApp.html"]
-  TFitServerStub -> TObject
-  TFitServerStub [href="fit_server_stub.TFitServerStub.html"]
   TList -> TObject
-  TSelfCleanList -> TList
-  TSelfCleanList [href="component_list.TSelfCleanList.html"]
+  TObjectList -> TList
+  TComponentList -> TObjectList
+  TSelfCopiedCompList -> TComponentList
+  TSelfCopiedCompList [href="self_copied_component.TSelfCopiedCompList.html"]
+  TObjSavingStringList -> TSelfCopiedCompList
+  TObjSavingStringList [href="obj_saving_string_list.TObjSavingStringList.html"]
+  TTableCompList -> TSelfCopiedCompList
+  TTableCompList [href="table_components.TTableCompList.html"]
+  TColCompList -> TTableCompList
+  TColCompList [href="table_components.TColCompList.html"]
+  TIconicCompList -> TTableCompList
+  TIconicCompList [href="table_components.TIconicCompList.html"]
+  TRowCompList -> TTableCompList
+  TRowCompList [href="table_components.TRowCompList.html"]
+  TCurveList -> TRowCompList
+  TCurveList [href="data_classes.TCurveList.html"]
+  TMSCRCurveList -> TCurveList
+  TMSCRCurveList [href="mscr_specimen_list.TMSCRCurveList.html"]
   TPersistent -> TObject
   TCollectionItem -> TPersistent
-  TSpecialCurveParameter -> TCollectionItem
-  TSpecialCurveParameter [href="curve_points_set.TSpecialCurveParameter.html"]
+  TPersistentCurveParameterContainer -> TCollectionItem
+  TPersistentCurveParameterContainer [href="persistent_curve_parameter_container.TPersistentCurveParameterContainer.html"]
   TComponent -> TPersistent
   Curve_type -> TComponent
   Curve_type [href="app_settings.Curve_type.html"]
@@ -196,12 +156,6 @@ DiGraph Classes {
   Parameters_list [href="mscr_specimen_list.Parameters_list.html"]
   Settings_v1 -> TComponent
   Settings_v1 [href="app_settings.Settings_v1.html"]
-  TAlgorithmContainer -> TComponent
-  TAlgorithmContainer [href="algorithm_container.TAlgorithmContainer.html"]
-  TDownhillSimplexContainer -> TAlgorithmContainer
-  TDownhillSimplexContainer [href="downhill_simplex_container.TDownhillSimplexContainer.html"]
-  TRunningAlgorithmContainer -> TAlgorithmContainer
-  TRunningAlgorithmContainer [href="algorithm_container.TRunningAlgorithmContainer.html"]
   TDataLoader -> TComponent
   TDataLoader [href="data_loader.TDataLoader.html"]
   TCSVFileLoader -> TDataLoader
@@ -230,31 +184,49 @@ DiGraph Classes {
   TSimpleMinimizer3 [href="simple_minimizer.TSimpleMinimizer3.html"]
   TOpenCLFitTask -> TComponent
   TOpenCLFitTask [href="fit_task.TOpenCLFitTask.html"]
-  TRunner -> TComponent
-  TRunner [href="runner_thread.TRunner.html"]
-  TSelfSavedComponent -> TComponent
-  TSelfSavedComponent [href="self_saved_component.TSelfSavedComponent.html"]
+  TSelfCopiedComponent -> TComponent
+  TSelfCopiedComponent [href="self_copied_component.TSelfCopiedComponent.html"]
+  Curve_parameters -> TSelfCopiedComponent
+  Curve_parameters [href="persistent_curve_parameters.Curve_parameters.html"]
+  TPointsSet -> TSelfCopiedComponent
+  TPointsSet [href="points_set.TPointsSet.html"]
+  TNeutronPointsSet -> TPointsSet
+  TNeutronPointsSet [href="neutron_points_set.TNeutronPointsSet.html"]
+  TTitlePointsSet -> TNeutronPointsSet
+  TTitlePointsSet [href="title_points_set.TTitlePointsSet.html"]
+  TCurvePointsSet -> TTitlePointsSet
+  TCurvePointsSet [href="curve_points_set.TCurvePointsSet.html"]
+  TNamedPointsSet -> TCurvePointsSet
+  TNamedPointsSet [href="named_points_set.TNamedPointsSet.html"]
+  T2BranchesPseudoVoigtPointsSet -> TNamedPointsSet
+  T2BranchesPseudoVoigtPointsSet [href="two_branches_pseudo_voigt_points_set.T2BranchesPseudoVoigtPointsSet.html"]
+  TGaussPointsSet -> TNamedPointsSet
+  TGaussPointsSet [href="gauss_points_set.TGaussPointsSet.html"]
+  TLorentzPointsSet -> TGaussPointsSet
+  TLorentzPointsSet [href="lorentz_points_set.TLorentzPointsSet.html"]
+  TPseudoVoigtPointsSet -> TNamedPointsSet
+  TPseudoVoigtPointsSet [href="pseudo_voigt_points_set.TPseudoVoigtPointsSet.html"]
+  TAsymPseudoVoigtPointsSet -> TPseudoVoigtPointsSet
+  TAsymPseudoVoigtPointsSet [href="asym_pseudo_voigt_points_set.TAsymPseudoVoigtPointsSet.html"]
+  TSpecialCurveParameter -> TObject
+  TSpecialCurveParameter [href="special_curve_parameter.TSpecialCurveParameter.html"]
+  TAmplitudeCurveParameter -> TSpecialCurveParameter
+  TAmplitudeCurveParameter [href="amplitude_curve_parameter.TAmplitudeCurveParameter.html"]
+  TCalculatedCurveParameter -> TSpecialCurveParameter
+  TCalculatedCurveParameter [href="calculated_curve_parameter.TCalculatedCurveParameter.html"]
+  TDeltaSigmaCurveParameter -> TSpecialCurveParameter
+  TDeltaSigmaCurveParameter [href="delta_sigma_curve_parameter.TDeltaSigmaCurveParameter.html"]
+  TEtaCurveParameter -> TSpecialCurveParameter
+  TEtaCurveParameter [href="eta_curve_parameter.TEtaCurveParameter.html"]
+  TPositionCurveParameter -> TSpecialCurveParameter
+  TPositionCurveParameter [href="position_curve_parameter.TPositionCurveParameter.html"]
+  TSigmaCurveParameter -> TSpecialCurveParameter
+  TSigmaCurveParameter [href="sigma_curve_parameter.TSigmaCurveParameter.html"]
+  TUserCurveParameter -> TSpecialCurveParameter
+  TUserCurveParameter [href="user_curve_parameter.TUserCurveParameter.html"]
   TThread -> TObject
   TMainCalcThread -> TThread
   TMainCalcThread [href="main_calc_thread.TMainCalcThread.html"]
-  TRunningThread -> TThread
-  TRunningThread [href="runner_thread.TRunningThread.html"]
-  ValuePair -> TObject
-  ValuePair [href="gauss_points_set.ValuePair.html"]
-  TSelfCopiedCompList -> TSelfCheckedComponentList
-  TSelfCopiedCompList [href="self_copied_component.TSelfCopiedCompList.html"]
-  TObjSavingStringList -> TSelfCopiedCompList
-  TObjSavingStringList [href="obj_saving_string_list.TObjSavingStringList.html"]
-  TTableCompList -> TSelfCopiedCompList
-  TTableCompList [href="table_components.TTableCompList.html"]
-  TColCompList -> TTableCompList
-  TColCompList [href="table_components.TColCompList.html"]
-  TIconicCompList -> TTableCompList
-  TIconicCompList [href="table_components.TIconicCompList.html"]
-  TRowCompList -> TTableCompList
-  TRowCompList [href="table_components.TRowCompList.html"]
-  TSpecimenList -> TRowCompList
-  TSpecimenList [href="data_classes.TSpecimenList.html"]
-  TMSCRSpecimenList -> TSpecimenList
-  TMSCRSpecimenList [href="mscr_specimen_list.TMSCRSpecimenList.html"]
+  TValuePair -> TObject
+  TValuePair [href="gauss_points_set.TValuePair.html"]
 }

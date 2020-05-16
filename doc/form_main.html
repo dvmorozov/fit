@@ -12,10 +12,10 @@
 <h2>Fit</h2><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p><p><a href="GVClasses.png" class="navigation">Classes hierarchy graph</a></p></td><td class="content">
 <h1 class="unit">Unit form_main</h1>
 <div class="sections">
-<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Uses">Uses</a></div><div class="one_section"><a class="section" href="#PasDoc-Classes">Classes, Interfaces, Objects and Records</a></div><div class="one_section">Functions and Procedures</div><div class="one_section">Types</div><div class="one_section">Constants</div><div class="one_section"><a class="section" href="#PasDoc-Variables">Variables</a></div></div>
+<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Uses">Uses</a></div><div class="one_section"><a class="section" href="#PasDoc-Classes">Classes, Interfaces, Objects and Records</a></div><div class="one_section">Functions and Procedures</div><div class="one_section"><a class="section" href="#PasDoc-Types">Types</a></div><div class="one_section"><a class="section" href="#PasDoc-Constants">Constants</a></div><div class="one_section"><a class="section" href="#PasDoc-Variables">Variables</a></div></div>
 <span id="PasDoc-Description"></span><h2 class="description">Description</h2>
 <p>
-Contains hidden form used to render charts on the server.</p>
+Contains definition of <a class="normal" href="form_main.TFormMain.html">TFormMain</a>.</p>
 <p>
 This software is distributed under GPL in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
 
@@ -23,7 +23,7 @@ This software is distributed under GPL in the hope that it will be useful, but W
 
 <p></p>
 <span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
-<ul class="useslist"><li>Classes</li><li>Controls</li><li>Dialogs</li><li>ExtCtrls</li><li>Forms</li><li>Graphics</li><li>LResources</li><li>SysUtils</li><li>TAGraph</li></ul><h2 class="overview">Overview</h2>
+<ul class="useslist"><li>ActnList</li><li><a  href="app_settings.html">app_settings</a></li><li><a  href="asym_pseudo_voigt_points_set.html">asym_pseudo_voigt_points_set</a></li><li>CheckLst</li><li>Classes</li><li>ComCtrls</li><li>Controls</li><li><a  href="curve_points_set.html">curve_points_set</a></li><li>Dialogs</li><li>ExtCtrls</li><li><a  href="fit_client.html">fit_client</a></li><li><a  href="fit_viewer.html">fit_viewer</a></li><li>Forms</li><li><a  href="gauss_points_set.html">gauss_points_set</a></li><li>Graphics</li><li><a  href="int_fit_service.html">int_fit_service</a></li><li>Laz_XMLCfg</li><li>LCLIntf</li><li><a  href="log.html">log</a></li><li><a  href="lorentz_points_set.html">lorentz_points_set</a></li><li>LResources</li><li>Menus</li><li><a  href="mscr_specimen_list.html">mscr_specimen_list</a></li><li>MyExceptions</li><li><a  href="named_points_set.html">named_points_set</a></li><li><a  href="neutron_points_set.html">neutron_points_set</a></li><li>NumericGrid</li><li><a  href="points_set.html">points_set</a></li><li><a  href="pseudo_voigt_points_set.html">pseudo_voigt_points_set</a></li><li>StdCtrls</li><li>SysUtils</li><li>TAGraph</li><li><a  href="two_branches_pseudo_voigt_points_set.html">two_branches_pseudo_voigt_points_set</a></li><li>Windows</li></ul><h2 class="overview">Overview</h2>
 <span id="PasDoc-Classes"></span><h3 class="cio">Classes, Interfaces, Objects and Records</h3>
 <table class="classestable wide_list">
 <tr class="listheader">
@@ -35,6 +35,82 @@ This software is distributed under GPL in the hope that it will be useful, but W
 <td class="itemdesc"><code>TFormMain</code></td>
 </tr>
 </table>
+<span id="PasDoc-Types"></span><h3 class="summary">Types</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><b><a  href="form_main.html#TResState">TResState</a></b> = (...);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="form_main.html#TViewState">TViewState</a></b> = (...);</code></td>
+</tr>
+</table>
+<span id="PasDoc-Constants"></span><h3 class="summary">Constants</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><b><a  href="form_main.html#crCursorDrag">crCursorDrag</a></b>:       TCursor = 6;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="form_main.html#crCursorSelect">crCursorSelect</a></b>:     TCursor = 7;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="form_main.html#HintFirst">HintFirst</a></b>:          string = 'Now you can pick a first point';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="form_main.html#HintFirstStart">HintFirstStart</a></b>:     string = 'Now you can pick a first point - &quot;START&quot;';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="form_main.html#HintMain">HintMain</a></b>:           string =
+        'Drag mouse from top-left to bottom-right to zoom';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="form_main.html#HintMovePeak">HintMovePeak</a></b>:       string =
+        'Now you can pick the menu item &quot;Move Peak to Results&quot;';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="form_main.html#HintNextBackPoint">HintNextBackPoint</a></b>:  string =
+        'Now you can pick a next point or the menu item &quot;Remove Background&quot;';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="form_main.html#HintNextPoint">HintNextPoint</a></b>:      string =
+        'Now you can pick a next point or the menu item &quot;Minimize Difference&quot;';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="form_main.html#HintNextPointEven">HintNextPointEven</a></b>:  string = 'Now you can pick a right point of peak';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="form_main.html#HintNextPointOdd">HintNextPointOdd</a></b>:   string = 'Now you can pick a left point of peak';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="form_main.html#HintSecondFinish">HintSecondFinish</a></b>:   string = 'Now you can pick a second point - &quot;FINISH&quot;';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="form_main.html#HintSecondPeak">HintSecondPeak</a></b>:     string = 'Now you can pick a second point - &quot;PEAK&quot;';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="form_main.html#HintSelectProfileInterval">HintSelectProfileInterval</a></b>:     string = 'Now you can pick the menu item &quot;Select Area&quot;';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="form_main.html#HintThirdFinish">HintThirdFinish</a></b>:    string = 'Now you can pick a third point - &quot;FINISH&quot;';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="form_main.html#HintWait">HintWait</a></b>:           string = 'Calculation started. Please wait';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="form_main.html#MenuDelUserCapt">MenuDelUserCapt</a></b>:    string = 'Delete User';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="form_main.html#StartVisPosSel">StartVisPosSel</a></b>:     string = 'Start Visual Position Selection';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="form_main.html#StartVisualSel">StartVisualSel</a></b>:     string = 'Start Visual Selection';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="form_main.html#StopVisPosSel">StopVisPosSel</a></b>:      string = 'Stop Visual Position Selection';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="form_main.html#StopVisualSel">StopVisualSel</a></b>:      string = 'Stop Visual Selection';</code></td>
+</tr>
+</table>
 <span id="PasDoc-Variables"></span><h3 class="summary">Variables</h3>
 <table class="summary wide_list">
 <tr class="list">
@@ -42,21 +118,201 @@ This software is distributed under GPL in the hope that it will be useful, but W
 </tr>
 </table>
 <h2 class="description">Description</h2>
+<h3 class="detail">Types</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="TResState"></span><code><b>TResState</b> = (...);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+States of results grid window.</p>
+<h6 class="description_section">Values</h6>
+<ul>
+<li>
+<span id="GridInvisible">GridInvisible</span>: Window is invisible.</li>
+<li>
+<span id="GridSelEmpty">GridSelEmpty</span>: Window is visible but selection area is empty.</li>
+<li>
+<span id="GridSelNonEmpty">GridSelNonEmpty</span>: A few rows are selected.</li>
+<li>
+<span id="GridSelAll">GridSelAll</span>: Whole table is selected.</li>
+</ul>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="TViewState"></span><code><b>TViewState</b> = (...);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+States of graph output.</p>
+<h6 class="description_section">Values</h6>
+<ul>
+<li>
+<span id="GraphEmpty">GraphEmpty</span></li>
+<li>
+<span id="GraphNotEmpty">GraphNotEmpty</span></li>
+</ul>
+</td></tr>
+</table>
+<h3 class="detail">Constants</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="crCursorDrag"></span><code><b>crCursorDrag</b>:       TCursor = 6;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="crCursorSelect"></span><code><b>crCursorSelect</b>:     TCursor = 7;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="HintFirst"></span><code><b>HintFirst</b>:          string = 'Now you can pick a first point';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="HintFirstStart"></span><code><b>HintFirstStart</b>:     string = 'Now you can pick a first point - &quot;START&quot;';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="HintMain"></span><code><b>HintMain</b>:           string =
+        'Drag mouse from top-left to bottom-right to zoom';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="HintMovePeak"></span><code><b>HintMovePeak</b>:       string =
+        'Now you can pick the menu item &quot;Move Peak to Results&quot;';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="HintNextBackPoint"></span><code><b>HintNextBackPoint</b>:  string =
+        'Now you can pick a next point or the menu item &quot;Remove Background&quot;';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="HintNextPoint"></span><code><b>HintNextPoint</b>:      string =
+        'Now you can pick a next point or the menu item &quot;Minimize Difference&quot;';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="HintNextPointEven"></span><code><b>HintNextPointEven</b>:  string = 'Now you can pick a right point of peak';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="HintNextPointOdd"></span><code><b>HintNextPointOdd</b>:   string = 'Now you can pick a left point of peak';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="HintSecondFinish"></span><code><b>HintSecondFinish</b>:   string = 'Now you can pick a second point - &quot;FINISH&quot;';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="HintSecondPeak"></span><code><b>HintSecondPeak</b>:     string = 'Now you can pick a second point - &quot;PEAK&quot;';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="HintSelectProfileInterval"></span><code><b>HintSelectProfileInterval</b>:     string = 'Now you can pick the menu item &quot;Select Area&quot;';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="HintThirdFinish"></span><code><b>HintThirdFinish</b>:    string = 'Now you can pick a third point - &quot;FINISH&quot;';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="HintWait"></span><code><b>HintWait</b>:           string = 'Calculation started. Please wait';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="MenuDelUserCapt"></span><code><b>MenuDelUserCapt</b>:    string = 'Delete User';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="StartVisPosSel"></span><code><b>StartVisPosSel</b>:     string = 'Start Visual Position Selection';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="StartVisualSel"></span><code><b>StartVisualSel</b>:     string = 'Start Visual Selection';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="StopVisPosSel"></span><code><b>StopVisPosSel</b>:      string = 'Stop Visual Position Selection';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="StopVisualSel"></span><code><b>StopVisualSel</b>:      string = 'Stop Visual Selection';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
 <h3 class="detail">Variables</h3>
 <table class="detail wide_list">
 <tr class="list">
 <td class="itemcode"><span id="FormMain"></span><code><b>FormMain</b>: <a  href="form_main.TFormMain.html">TFormMain</a>;</code></td>
 </tr>
 <tr><td colspan="1">
-<p>
-public declarations</p>
-</td></tr>
+&nbsp;</td></tr>
 </table>
 <h2 class="authors">Author</h2>
 <ul class="authors">
-<li>Dmitry Morozov <a  href="mailto:dvmorozov@hotmail.com">dvmorozov@hotmail.com</a>, 
-LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794, 
-Facebook https://www.facebook.com/profile.php?id=100004082021870</li>
+<li>Dmitry Morozov <a  href="mailto:dvmorozov@hotmail.com">dvmorozov@hotmail.com</a>,
+LinkedIn: https://www.linkedin.com/in/dmitry-morozov-79490a59/
+Facebook: https://www.facebook.com/dmitry.v.morozov</li>
 </ul>
 <hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
 </span>

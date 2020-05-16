@@ -21,9 +21,9 @@
 <code>type TCurvePointsSet = class(<a class="normal" href="title_points_set.TTitlePointsSet.html">TTitlePointsSet</a>)</code></p>
 <h2 class="description">Description</h2>
 <p>
-Generic container for point set of all calcuated curves. TODO: must inherit <a class="normal" href="neutron_points_set.TNeutronPointsSet.html#Lambda">Lambda</a> from <a class="normal" href="neutron_points_set.TNeutronPointsSet.html">TNeutronPointsSet</a> to adjust <a class="normal" href="curve_points_set.html#Calculated">calculated</a> and experimental curves on chart.</p>
+Generic container for point set of all calcuated curves.</p>
 <span id="PasDoc-Hierarchy"></span><h2 class="hierarchy">Hierarchy</h2>
-<ul class="hierarchy"><li class="ancestor">TCBRCComponent</li>
+<ul class="hierarchy"><li class="ancestor">TComponent</li>
 <li class="ancestor"><a class="normal" href="self_copied_component.TSelfCopiedComponent.html">TSelfCopiedComponent</a></li>
 <li class="ancestor"><a class="normal" href="points_set.TPointsSet.html">TPointsSet</a></li>
 <li class="ancestor"><a class="normal" href="neutron_points_set.TNeutronPointsSet.html">TNeutronPointsSet</a></li>
@@ -32,76 +32,52 @@ Generic container for point set of all calcuated curves. TODO: must inherit <a c
 <span id="PasDoc-Fields"></span><h3 class="summary">Fields</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code><b><a  href="curve_points_set.TCurvePointsSet.html#AmplIndex">AmplIndex</a></b>: LongInt;</code></td>
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="curve_points_set.TCurvePointsSet.html#FAmplitudeP">FAmplitudeP</a></b>: <a  href="amplitude_curve_parameter.TAmplitudeCurveParameter.html">TAmplitudeCurveParameter</a>;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code><b><a  href="curve_points_set.TCurvePointsSet.html#AmplitudeP">AmplitudeP</a></b>: <a  href="curve_points_set.TSpecialCurveParameter.html">TSpecialCurveParameter</a>;</code></td>
-</tr>
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code><b><a  href="curve_points_set.TCurvePointsSet.html#ArgP">ArgP</a></b>: <a  href="curve_points_set.TSpecialCurveParameter.html">TSpecialCurveParameter</a>;</code></td>
-</tr>
-<tr class="list2">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code><b><a  href="curve_points_set.TCurvePointsSet.html#FParams">FParams</a></b>: <a  href="curve_points_set.Curve_parameters.html">Curve_parameters</a>;</code></td>
-</tr>
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code><b><a  href="curve_points_set.TCurvePointsSet.html#Fx0High">Fx0High</a></b>: Double;</code></td>
-</tr>
-<tr class="list2">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code><b><a  href="curve_points_set.TCurvePointsSet.html#Fx0IsSet">Fx0IsSet</a></b>: Boolean;</code></td>
-</tr>
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code><b><a  href="curve_points_set.TCurvePointsSet.html#Fx0Low">Fx0Low</a></b>: Double;</code></td>
-</tr>
-<tr class="list2">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code><b><a  href="curve_points_set.TCurvePointsSet.html#InitHash">InitHash</a></b>: Cardinal;</code></td>
+<td class="itemcode"><code><b><a  href="curve_points_set.TCurvePointsSet.html#FArgP">FArgP</a></b>: <a  href="special_curve_parameter.TSpecialCurveParameter.html">TSpecialCurveParameter</a>;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code><b><a  href="curve_points_set.TCurvePointsSet.html#Initx0">Initx0</a></b>: Double;</code></td>
+<td class="itemcode"><code><b><a  href="curve_points_set.TCurvePointsSet.html#FInitHash">FInitHash</a></b>: cardinal;</code></td>
 </tr>
 <tr class="list2">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code><b><a  href="curve_points_set.TCurvePointsSet.html#Links">Links</a></b>: TList;</code></td>
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code><b><a  href="curve_points_set.TCurvePointsSet.html#FInitx0">FInitx0</a></b>: double;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code><b><a  href="curve_points_set.TCurvePointsSet.html#MaxX">MaxX</a></b>: Double;</code></td>
+<td class="itemcode"><code><b><a  href="curve_points_set.TCurvePointsSet.html#FMaxX">FMaxX</a></b>: double;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code><b><a  href="curve_points_set.TCurvePointsSet.html#MinX">MinX</a></b>: Double;</code></td>
+<td class="itemcode"><code><b><a  href="curve_points_set.TCurvePointsSet.html#FMinX">FMinX</a></b>: double;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code><b><a  href="curve_points_set.TCurvePointsSet.html#Modified">Modified</a></b>: Boolean;</code></td>
-</tr>
-<tr class="list2">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code><b><a  href="curve_points_set.TCurvePointsSet.html#PosIndex">PosIndex</a></b>: LongInt;</code></td>
-</tr>
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code><b><a  href="curve_points_set.TCurvePointsSet.html#PositionP">PositionP</a></b>: <a  href="curve_points_set.TSpecialCurveParameter.html">TSpecialCurveParameter</a>;</code></td>
-</tr>
-<tr class="list2">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code><b><a  href="curve_points_set.TCurvePointsSet.html#RangeDefined">RangeDefined</a></b>: Boolean;</code></td>
-</tr>
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code><b><a  href="curve_points_set.TCurvePointsSet.html#SigmaIndex">SigmaIndex</a></b>: LongInt;</code></td>
+<td class="itemcode"><code><b><a  href="curve_points_set.TCurvePointsSet.html#FParams">FParams</a></b>: <a  href="persistent_curve_parameters.Curve_parameters.html">Curve_parameters</a>;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code><b><a  href="curve_points_set.TCurvePointsSet.html#SigmaP">SigmaP</a></b>: <a  href="curve_points_set.TSpecialCurveParameter.html">TSpecialCurveParameter</a>;</code></td>
+<td class="itemcode"><code><b><a  href="curve_points_set.TCurvePointsSet.html#FPositionP">FPositionP</a></b>: <a  href="position_curve_parameter.TPositionCurveParameter.html">TPositionCurveParameter</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code><b><a  href="curve_points_set.TCurvePointsSet.html#FRangeDefined">FRangeDefined</a></b>: boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="curve_points_set.TCurvePointsSet.html#FRecalculate">FRecalculate</a></b>: boolean;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="curve_points_set.TCurvePointsSet.html#FSigmaP">FSigmaP</a></b>: <a  href="sigma_curve_parameter.TSigmaCurveParameter.html">TSigmaCurveParameter</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="curve_points_set.TCurvePointsSet.html#FVariableParameters">FVariableParameters</a></b>: TList;</code></td>
 </tr>
 </table>
 <span id="PasDoc-Methods"></span><h3 class="summary">Methods</h3>
@@ -116,204 +92,173 @@ Generic container for point set of all calcuated curves. TODO: must inherit <a c
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="curve_points_set.TCurvePointsSet.html#HasA">HasA</a></b>: Boolean;</code></td>
+<td class="itemcode"><code>function <b><a  href="curve_points_set.TCurvePointsSet.html#HasA">HasA</a></b>: boolean;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="curve_points_set.TCurvePointsSet.html#HasSigma">HasSigma</a></b>: Boolean;</code></td>
+<td class="itemcode"><code>function <b><a  href="curve_points_set.TCurvePointsSet.html#Hasx0">Hasx0</a></b>: boolean;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="curve_points_set.TCurvePointsSet.html#Hasx0">Hasx0</a></b>: Boolean;</code></td>
+<td class="itemcode"><code>function <b><a  href="curve_points_set.TCurvePointsSet.html#MinimumStepAchieved">MinimumStepAchieved</a></b>(Index: longint): boolean;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code>function <b><a  href="curve_points_set.TCurvePointsSet.html#GetA">GetA</a></b>: Double;</code></td>
+<td class="itemcode"><code>function <b><a  href="curve_points_set.TCurvePointsSet.html#GetA">GetA</a></b>: double;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code>function <b><a  href="curve_points_set.TCurvePointsSet.html#GetParam">GetParam</a></b>(Index: LongInt): Double; virtual;</code></td>
+<td class="itemcode"><code>function <b><a  href="curve_points_set.TCurvePointsSet.html#GetSigma">GetSigma</a></b>: double;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code>function <b><a  href="curve_points_set.TCurvePointsSet.html#GetParamByName">GetParamByName</a></b>(Name: string): Double; virtual;</code></td>
+<td class="itemcode"><code>function <b><a  href="curve_points_set.TCurvePointsSet.html#GetValueByName">GetValueByName</a></b>(Name: string): double; virtual;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code>function <b><a  href="curve_points_set.TCurvePointsSet.html#GetParamCount">GetParamCount</a></b>: LongInt;</code></td>
+<td class="itemcode"><code>function <b><a  href="curve_points_set.TCurvePointsSet.html#GetVariableCount">GetVariableCount</a></b>: longint;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code>function <b><a  href="curve_points_set.TCurvePointsSet.html#GetSigma">GetSigma</a></b>: Double;</code></td>
+<td class="itemcode"><code>function <b><a  href="curve_points_set.TCurvePointsSet.html#GetVariableValue">GetVariableValue</a></b>(Index: longint): double; virtual;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code>function <b><a  href="curve_points_set.TCurvePointsSet.html#Getx0">Getx0</a></b>: Double;</code></td>
+<td class="itemcode"><code>function <b><a  href="curve_points_set.TCurvePointsSet.html#GetVariationStep">GetVariationStep</a></b>(Index: longint): double; virtual;</code></td>
 </tr>
 <tr class="list2">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="curve_points_set.TCurvePointsSet.html#CopyParameters">CopyParameters</a></b>(const Dest: TObject); override;</code></td>
-</tr>
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="curve_points_set.TCurvePointsSet.html#ReCalc">ReCalc</a></b>(const Intervals: <a  href="points_set.TPointsSet.html">TPointsSet</a>);</code></td>
-</tr>
-<tr class="list2">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="curve_points_set.TCurvePointsSet.html#RestoreParams">RestoreParams</a></b>;</code></td>
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>function <b><a  href="curve_points_set.TCurvePointsSet.html#Getx0">Getx0</a></b>: double;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="curve_points_set.TCurvePointsSet.html#SetParameters">SetParameters</a></b>(AParams: <a  href="curve_points_set.Curve_parameters.html">Curve_parameters</a>);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="curve_points_set.TCurvePointsSet.html#BackupParameters">BackupParameters</a></b>;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="curve_points_set.TCurvePointsSet.html#StoreParams">StoreParams</a></b>;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="curve_points_set.TCurvePointsSet.html#CopyParameters">CopyParameters</a></b>(Dest: TObject); override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="curve_points_set.TCurvePointsSet.html#InitVariationStep">InitVariationStep</a></b>(Index: longint);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="curve_points_set.TCurvePointsSet.html#ReCalc">ReCalc</a></b>(const Bounds: <a  href="points_set.TPointsSet.html">TPointsSet</a>);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="curve_points_set.TCurvePointsSet.html#RestoreParameters">RestoreParameters</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="curve_points_set.TCurvePointsSet.html#SetParameters">SetParameters</a></b>(AParams: <a  href="persistent_curve_parameters.Curve_parameters.html">Curve_parameters</a>);</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="curve_points_set.TCurvePointsSet.html#DoCalc">DoCalc</a></b>(const Intervals: <a  href="points_set.TPointsSet.html">TPointsSet</a>); virtual; abstract;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="curve_points_set.TCurvePointsSet.html#AddParameter">AddParameter</a></b>(Parameter: <a  href="special_curve_parameter.TSpecialCurveParameter.html">TSpecialCurveParameter</a>);</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="curve_points_set.TCurvePointsSet.html#InitLinks">InitLinks</a></b>;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="curve_points_set.TCurvePointsSet.html#DoCalc">DoCalc</a></b>(const Bounds: <a  href="points_set.TPointsSet.html">TPointsSet</a>); virtual; abstract;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="curve_points_set.TCurvePointsSet.html#ScaleCurve">ScaleCurve</a></b>(const Factor: Double);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="curve_points_set.TCurvePointsSet.html#InitListOfVariableParameters">InitListOfVariableParameters</a></b>;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="curve_points_set.TCurvePointsSet.html#SetA">SetA</a></b>(Value: Double);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="curve_points_set.TCurvePointsSet.html#ScaleCurve">ScaleCurve</a></b>(const Factor: double);</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="curve_points_set.TCurvePointsSet.html#SetParam">SetParam</a></b>(Index: LongInt; Value: Double); virtual;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="curve_points_set.TCurvePointsSet.html#SetA">SetA</a></b>(Value: double);</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="curve_points_set.TCurvePointsSet.html#SetParamByName">SetParamByName</a></b>(Name: string; Value: Double); virtual;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="curve_points_set.TCurvePointsSet.html#SetSpecParamPtr">SetSpecParamPtr</a></b>(Parameter: <a  href="special_curve_parameter.TSpecialCurveParameter.html">TSpecialCurveParameter</a>); virtual;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="curve_points_set.TCurvePointsSet.html#SetSigma">SetSigma</a></b>(Value: Double);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="curve_points_set.TCurvePointsSet.html#SetValueByName">SetValueByName</a></b>(Name: string; Value: double); virtual;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="curve_points_set.TCurvePointsSet.html#SetSpecParamPtr">SetSpecParamPtr</a></b>(P: <a  href="curve_points_set.TSpecialCurveParameter.html">TSpecialCurveParameter</a>); virtual;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="curve_points_set.TCurvePointsSet.html#SetVariableValue">SetVariableValue</a></b>(Index: longint; Value: double); virtual;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="curve_points_set.TCurvePointsSet.html#SetSpecParamVarIndex">SetSpecParamVarIndex</a></b>( P: <a  href="curve_points_set.TSpecialCurveParameter.html">TSpecialCurveParameter</a>; Index: LongInt); virtual;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="curve_points_set.TCurvePointsSet.html#SetVariationStep">SetVariationStep</a></b>(Index: longint; AStep: double); virtual;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="curve_points_set.TCurvePointsSet.html#Setx0">Setx0</a></b>(Value: Double);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="curve_points_set.TCurvePointsSet.html#Setx0">Setx0</a></b>(Value: double);</code></td>
 </tr>
 </table>
 <span id="PasDoc-Properties"></span><h3 class="summary">Properties</h3>
 <table class="summary wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>property <b><a  href="curve_points_set.TCurvePointsSet.html#A">A</a></b>: Double read <a  href="curve_points_set.TCurvePointsSet.html#GetA">GetA</a> write <a  href="curve_points_set.TCurvePointsSet.html#SetA">SetA</a>;</code></td>
+<td class="itemcode"><code>property <b><a  href="curve_points_set.TCurvePointsSet.html#A">A</a></b>: double read <a  href="curve_points_set.TCurvePointsSet.html#GetA">GetA</a> write <a  href="curve_points_set.TCurvePointsSet.html#SetA">SetA</a>;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>property <b><a  href="curve_points_set.TCurvePointsSet.html#Param">Param</a></b>[index:LongInt]: Double read <a  href="curve_points_set.TCurvePointsSet.html#GetParam">GetParam</a> write <a  href="curve_points_set.TCurvePointsSet.html#SetParam">SetParam</a>;</code></td>
+<td class="itemcode"><code>property <b><a  href="curve_points_set.TCurvePointsSet.html#Parameters">Parameters</a></b>: <a  href="persistent_curve_parameters.Curve_parameters.html">Curve_parameters</a> read <a  href="curve_points_set.TCurvePointsSet.html#FParams">FParams</a>;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>property <b><a  href="curve_points_set.TCurvePointsSet.html#ParamByName">ParamByName</a></b>[Name:string]: Double read <a  href="curve_points_set.TCurvePointsSet.html#GetParamByName">GetParamByName</a> write <a  href="curve_points_set.TCurvePointsSet.html#SetParamByName">SetParamByName</a>;</code></td>
+<td class="itemcode"><code>property <b><a  href="curve_points_set.TCurvePointsSet.html#Sigma">Sigma</a></b>: double read <a  href="curve_points_set.TCurvePointsSet.html#GetSigma">GetSigma</a>;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>property <b><a  href="curve_points_set.TCurvePointsSet.html#ParamCount">ParamCount</a></b>: LongInt read <a  href="curve_points_set.TCurvePointsSet.html#GetParamCount">GetParamCount</a>;</code></td>
+<td class="itemcode"><code>property <b><a  href="curve_points_set.TCurvePointsSet.html#ValuesByName">ValuesByName</a></b>[Name:string]: double
+            read <a  href="curve_points_set.TCurvePointsSet.html#GetValueByName">GetValueByName</a> write <a  href="curve_points_set.TCurvePointsSet.html#SetValueByName">SetValueByName</a>;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>property <b><a  href="curve_points_set.TCurvePointsSet.html#Params">Params</a></b>: <a  href="curve_points_set.Curve_parameters.html">Curve_parameters</a> read <a  href="curve_points_set.TCurvePointsSet.html#FParams">FParams</a>;</code></td>
+<td class="itemcode"><code>property <b><a  href="curve_points_set.TCurvePointsSet.html#VariableCount">VariableCount</a></b>: longint read <a  href="curve_points_set.TCurvePointsSet.html#GetVariableCount">GetVariableCount</a>;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>property <b><a  href="curve_points_set.TCurvePointsSet.html#Sigma">Sigma</a></b>: Double read <a  href="curve_points_set.TCurvePointsSet.html#GetSigma">GetSigma</a> write <a  href="curve_points_set.TCurvePointsSet.html#SetSigma">SetSigma</a>;</code></td>
+<td class="itemcode"><code>property <b><a  href="curve_points_set.TCurvePointsSet.html#VariableValues">VariableValues</a></b>[index:longint]: double
+            read <a  href="curve_points_set.TCurvePointsSet.html#GetVariableValue">GetVariableValue</a> write <a  href="curve_points_set.TCurvePointsSet.html#SetVariableValue">SetVariableValue</a>;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>property <b><a  href="curve_points_set.TCurvePointsSet.html#x0">x0</a></b>: Double read <a  href="curve_points_set.TCurvePointsSet.html#Getx0">Getx0</a> write <a  href="curve_points_set.TCurvePointsSet.html#Setx0">Setx0</a>;</code></td>
+<td class="itemcode"><code>property <b><a  href="curve_points_set.TCurvePointsSet.html#VariationSteps">VariationSteps</a></b>[index:longint]: double
+            read <a  href="curve_points_set.TCurvePointsSet.html#GetVariationStep">GetVariationStep</a> write <a  href="curve_points_set.TCurvePointsSet.html#SetVariationStep">SetVariationStep</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="curve_points_set.TCurvePointsSet.html#x0">x0</a></b>: double read <a  href="curve_points_set.TCurvePointsSet.html#Getx0">Getx0</a> write <a  href="curve_points_set.TCurvePointsSet.html#Setx0">Setx0</a>;</code></td>
 </tr>
 </table>
 <h2 class="description">Description</h2>
 <h3 class="detail">Fields</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="AmplIndex"></span><code><b>AmplIndex</b>: LongInt;</code></td>
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FAmplitudeP"></span><code><b>FAmplitudeP</b>: <a  href="amplitude_curve_parameter.TAmplitudeCurveParameter.html">TAmplitudeCurveParameter</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
-Curve amplitude.</p>
+Set of <a class="normal" href="special_curve_parameter.html#Variable">variable</a> <a class="normal" href="curve_points_set.TCurvePointsSet.html#Parameters">parameters</a> common for all curve types (meaning could be different in particular cases). <a class="normal" href="curve_points_set.TCurvePointsSet.html#Parameters">Parameters</a> with predefined semantics have constraints, which can be associated with curve <a class="normal" href="points_set.TPointsSet.html#Points">points</a>. Attributes store pointers to <a class="normal" href="curve_points_set.TCurvePointsSet.html#Parameters">parameters</a> with predefined semantics. <a class="normal" href="curve_points_set.TCurvePointsSet.html#Parameters">Parameters</a> are created in descendant constructors.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="AmplitudeP"></span><code><b>AmplitudeP</b>: <a  href="curve_points_set.TSpecialCurveParameter.html">TSpecialCurveParameter</a>;</code></td>
+<td class="itemcode"><span id="FArgP"></span><code><b>FArgP</b>: <a  href="special_curve_parameter.TSpecialCurveParameter.html">TSpecialCurveParameter</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
-Parameters with predefined semantics have constraints, which can be associated with curve <a class="normal" href="points_set.TPointsSet.html#Points">points</a>. Attributes store pointers to parameters with predefined semantics. Parameters are created in descendant constructors.</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="ArgP"></span><code><b>ArgP</b>: <a  href="curve_points_set.TSpecialCurveParameter.html">TSpecialCurveParameter</a>;</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="FParams"></span><code><b>FParams</b>: <a  href="curve_points_set.Curve_parameters.html">Curve_parameters</a>;</code></td>
-</tr>
-<tr><td colspan="2">
-<p>
-List of curve parameters.</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="Fx0High"></span><code><b>Fx0High</b>: Double;</code></td>
-</tr>
-<tr><td colspan="2">
-<p>
-<a class="normal" href="curve_points_set.TCurvePointsSet.html#x0">X0</a> variation boundaries.</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="Fx0IsSet"></span><code><b>Fx0IsSet</b>: Boolean;</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="Fx0Low"></span><code><b>Fx0Low</b>: Double;</code></td>
-</tr>
-<tr><td colspan="2">
-<p>
-<a class="normal" href="curve_points_set.TCurvePointsSet.html#x0">X0</a> variation boundaries.</p>
+It is used in TUserPointsSet. TODO: move it to TUserPointsSet.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="InitHash"></span><code><b>InitHash</b>: Cardinal;</code></td>
+<td class="itemcode"><span id="FInitHash"></span><code><b>FInitHash</b>: cardinal;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
@@ -323,7 +268,7 @@ Hash of initial parameter values.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="Initx0"></span><code><b>Initx0</b>: Double;</code></td>
+<td class="itemcode"><span id="FInitx0"></span><code><b>FInitx0</b>: double;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
@@ -332,18 +277,8 @@ Initial value of <a class="normal" href="curve_points_set.TCurvePointsSet.html#x
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="Links"></span><code><b>Links</b>: TList;</code></td>
-</tr>
-<tr><td colspan="2">
-<p>
-List of <a class="normal" href="curve_points_set.html#Variable">variable</a> parameters.</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="MaxX"></span><code><b>MaxX</b>: Double;</code></td>
+<td class="itemcode"><span id="FMaxX"></span><code><b>FMaxX</b>: double;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
@@ -353,7 +288,7 @@ Boundaries for R-factor calculation.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="MinX"></span><code><b>MinX</b>: Double;</code></td>
+<td class="itemcode"><span id="FMinX"></span><code><b>FMinX</b>: double;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
@@ -363,25 +298,17 @@ Boundaries for R-factor calculation.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="Modified"></span><code><b>Modified</b>: Boolean;</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="PosIndex"></span><code><b>PosIndex</b>: LongInt;</code></td>
+<td class="itemcode"><span id="FParams"></span><code><b>FParams</b>: <a  href="persistent_curve_parameters.Curve_parameters.html">Curve_parameters</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
-Curve position.</p>
+List of all curve <a class="normal" href="curve_points_set.TCurvePointsSet.html#Parameters">parameters</a>.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="PositionP"></span><code><b>PositionP</b>: <a  href="curve_points_set.TSpecialCurveParameter.html">TSpecialCurveParameter</a>;</code></td>
+<td class="itemcode"><span id="FPositionP"></span><code><b>FPositionP</b>: <a  href="position_curve_parameter.TPositionCurveParameter.html">TPositionCurveParameter</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -389,30 +316,38 @@ Curve position.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="RangeDefined"></span><code><b>RangeDefined</b>: Boolean;</code></td>
+<td class="itemcode"><span id="FRangeDefined"></span><code><b>FRangeDefined</b>: boolean;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
-Flag designating that boundaries of R-factor calculation has been set up. If False R-factor is <a class="normal" href="curve_points_set.html#Calculated">calculated</a> for all <a class="normal" href="points_set.TPointsSet.html#Points">points</a> of profile.</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="SigmaIndex"></span><code><b>SigmaIndex</b>: LongInt;</code></td>
-</tr>
-<tr><td colspan="2">
-<p>
-Curve width.</p>
+Flag designating that boundaries of R-factor calculation has been set up. If False R-factor is <a class="normal" href="special_curve_parameter.html#Calculated">calculated</a> for all <a class="normal" href="points_set.TPointsSet.html#Points">points</a> of profile.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="SigmaP"></span><code><b>SigmaP</b>: <a  href="curve_points_set.TSpecialCurveParameter.html">TSpecialCurveParameter</a>;</code></td>
+<td class="itemcode"><span id="FRecalculate"></span><code><b>FRecalculate</b>: boolean;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FSigmaP"></span><code><b>FSigmaP</b>: <a  href="sigma_curve_parameter.TSigmaCurveParameter.html">TSigmaCurveParameter</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FVariableParameters"></span><code><b>FVariableParameters</b>: TList;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+List of <a class="normal" href="special_curve_parameter.html#Variable">variable</a> <a class="normal" href="curve_points_set.TCurvePointsSet.html#Parameters">parameters</a>.</p>
+</td></tr>
 </table>
 <h3 class="detail">Methods</h3>
 <table class="detail wide_list">
@@ -434,7 +369,7 @@ Curve width.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="HasA"></span><code>function <b>HasA</b>: Boolean;</code></td>
+<td class="itemcode"><span id="HasA"></span><code>function <b>HasA</b>: boolean;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -442,25 +377,27 @@ Curve width.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="HasSigma"></span><code>function <b>HasSigma</b>: Boolean;</code></td>
+<td class="itemcode"><span id="Hasx0"></span><code>function <b>Hasx0</b>: boolean;</code></td>
 </tr>
 <tr><td colspan="2">
-&nbsp;</td></tr>
+<p>
+Return True if attributes with predefined semantics were assigned.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="Hasx0"></span><code>function <b>Hasx0</b>: Boolean;</code></td>
+<td class="itemcode"><span id="MinimumStepAchieved"></span><code>function <b>MinimumStepAchieved</b>(Index: longint): boolean;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
-Designate initialization of attributes with predefined semantics.</p>
+These methods are used to limit direct access to <a class="normal" href="special_curve_parameter.html#Variable">variable</a> <a class="normal" href="curve_points_set.TCurvePointsSet.html#Parameters">parameters</a>.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="GetA"></span><code>function <b>GetA</b>: Double;</code></td>
+<td class="itemcode"><span id="GetA"></span><code>function <b>GetA</b>: double;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -468,17 +405,15 @@ Designate initialization of attributes with predefined semantics.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="GetParam"></span><code>function <b>GetParam</b>(Index: LongInt): Double; virtual;</code></td>
+<td class="itemcode"><span id="GetSigma"></span><code>function <b>GetSigma</b>: double;</code></td>
 </tr>
 <tr><td colspan="2">
-<p>
-Returns <a class="normal" href="curve_points_set.html#Variable">variable</a> parameter by through index.</p>
-</td></tr>
+&nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="GetParamByName"></span><code>function <b>GetParamByName</b>(Name: string): Double; virtual;</code></td>
+<td class="itemcode"><span id="GetValueByName"></span><code>function <b>GetValueByName</b>(Name: string): double; virtual;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
@@ -488,17 +423,91 @@ Returns value of parameter with given name.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="GetParamCount"></span><code>function <b>GetParamCount</b>: LongInt;</code></td>
+<td class="itemcode"><span id="GetVariableCount"></span><code>function <b>GetVariableCount</b>: longint;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
-Returns total number of <a class="normal" href="curve_points_set.html#Variable">variable</a> parameters.</p>
+Returns total number of <a class="normal" href="special_curve_parameter.html#Variable">variable</a> <a class="normal" href="curve_points_set.TCurvePointsSet.html#Parameters">parameters</a>.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="GetSigma"></span><code>function <b>GetSigma</b>: Double;</code></td>
+<td class="itemcode"><span id="GetVariableValue"></span><code>function <b>GetVariableValue</b>(Index: longint): double; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Returns <a class="normal" href="special_curve_parameter.html#Variable">variable</a> parameter by through index.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="GetVariationStep"></span><code>function <b>GetVariationStep</b>(Index: longint): double; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Returns optimization step for parameter.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="Getx0"></span><code>function <b>Getx0</b>: double;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="BackupParameters"></span><code>procedure <b>BackupParameters</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Temporarily stores values of <a class="normal" href="special_curve_parameter.html#Variable">variable</a> <a class="normal" href="curve_points_set.TCurvePointsSet.html#Parameters">parameters</a> in internal memory area.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="CopyParameters"></span><code>procedure <b>CopyParameters</b>(Dest: TObject); override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="InitVariationStep"></span><code>procedure <b>InitVariationStep</b>(Index: longint);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="ReCalc"></span><code>procedure <b>ReCalc</b>(const Bounds: <a  href="points_set.TPointsSet.html">TPointsSet</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Set of pairs of indexes of X-coordinates forming intervals in which functions should be calcuated (boundaries are included). Equity to nil designates that functions should be <a class="normal" href="special_curve_parameter.html#Calculated">calculated</a> for all <a class="normal" href="points_set.TPointsSet.html#Points">points</a>. Indexes instead of coordinates are used to avoid searching.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="RestoreParameters"></span><code>procedure <b>RestoreParameters</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Restores values of <a class="normal" href="special_curve_parameter.html#Variable">variable</a> <a class="normal" href="curve_points_set.TCurvePointsSet.html#Parameters">parameters</a> from temporary storage.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetParameters"></span><code>procedure <b>SetParameters</b>(AParams: <a  href="persistent_curve_parameters.Curve_parameters.html">Curve_parameters</a>);</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -506,61 +515,15 @@ Returns total number of <a class="normal" href="curve_points_set.html#Variable">
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="Getx0"></span><code>function <b>Getx0</b>: Double;</code></td>
+<td class="itemcode"><span id="AddParameter"></span><code>procedure <b>AddParameter</b>(Parameter: <a  href="special_curve_parameter.TSpecialCurveParameter.html">TSpecialCurveParameter</a>);</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="CopyParameters"></span><code>procedure <b>CopyParameters</b>(const Dest: TObject); override;</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="ReCalc"></span><code>procedure <b>ReCalc</b>(const Intervals: <a  href="points_set.TPointsSet.html">TPointsSet</a>);</code></td>
-</tr>
-<tr><td colspan="2">
-<p>
-Set of pairs of indexes of X-coordinates forming intervals in which functions should be calcuated (boundaries are included). Equity to nil designates that functions should be <a class="normal" href="curve_points_set.html#Calculated">calculated</a> for all <a class="normal" href="points_set.TPointsSet.html#Points">points</a>. Indexes instead of coordinates are used to avoid searching.</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="RestoreParams"></span><code>procedure <b>RestoreParams</b>;</code></td>
-</tr>
-<tr><td colspan="2">
-<p>
-Restores values of <a class="normal" href="curve_points_set.html#Variable">variable</a> parameters from temporary storage.</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="SetParameters"></span><code>procedure <b>SetParameters</b>(AParams: <a  href="curve_points_set.Curve_parameters.html">Curve_parameters</a>);</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="StoreParams"></span><code>procedure <b>StoreParams</b>;</code></td>
-</tr>
-<tr><td colspan="2">
-<p>
-Temporarily stores values of <a class="normal" href="curve_points_set.html#Variable">variable</a> parameters in internal memory area.</p>
-</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="DoCalc"></span><code>procedure <b>DoCalc</b>(const Intervals: <a  href="points_set.TPointsSet.html">TPointsSet</a>); virtual; abstract;</code></td>
+<td class="itemcode"><span id="DoCalc"></span><code>procedure <b>DoCalc</b>(const Bounds: <a  href="points_set.TPointsSet.html">TPointsSet</a>); virtual; abstract;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
@@ -570,17 +533,17 @@ Performs recalculation of all profile <a class="normal" href="points_set.TPoints
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="InitLinks"></span><code>procedure <b>InitLinks</b>;</code></td>
+<td class="itemcode"><span id="InitListOfVariableParameters"></span><code>procedure <b>InitListOfVariableParameters</b>;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
-Performs intialization of <a class="normal" href="curve_points_set.html#Variable">variable</a> list parameters and set up of <a class="normal" href="curve_points_set.TCurvePointsSet.html#AmplIndex">AmplIndex</a>, <a class="normal" href="curve_points_set.TCurvePointsSet.html#PosIndex">PosIndex</a>, <a class="normal" href="curve_points_set.TCurvePointsSet.html#SigmaIndex">SigmaIndex</a>.</p>
+Performs intialization of <a class="normal" href="special_curve_parameter.html#Variable">variable</a> list <a class="normal" href="curve_points_set.TCurvePointsSet.html#Parameters">parameters</a>.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="ScaleCurve"></span><code>procedure <b>ScaleCurve</b>(const Factor: Double);</code></td>
+<td class="itemcode"><span id="ScaleCurve"></span><code>procedure <b>ScaleCurve</b>(const Factor: double);</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
@@ -590,7 +553,7 @@ Multiplies profile <a class="normal" href="points_set.TPointsSet.html#Points">po
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="SetA"></span><code>procedure <b>SetA</b>(Value: Double);</code></td>
+<td class="itemcode"><span id="SetA"></span><code>procedure <b>SetA</b>(Value: double);</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -598,17 +561,17 @@ Multiplies profile <a class="normal" href="points_set.TPointsSet.html#Points">po
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="SetParam"></span><code>procedure <b>SetParam</b>(Index: LongInt; Value: Double); virtual;</code></td>
+<td class="itemcode"><span id="SetSpecParamPtr"></span><code>procedure <b>SetSpecParamPtr</b>(Parameter: <a  href="special_curve_parameter.TSpecialCurveParameter.html">TSpecialCurveParameter</a>); virtual;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
-Sets value of <a class="normal" href="curve_points_set.html#Variable">variable</a> parameter.</p>
+Initializes pointers to <a class="normal" href="curve_points_set.TCurvePointsSet.html#Parameters">parameters</a> with predefined semantics.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="SetParamByName"></span><code>procedure <b>SetParamByName</b>(Name: string; Value: Double); virtual;</code></td>
+<td class="itemcode"><span id="SetValueByName"></span><code>procedure <b>SetValueByName</b>(Name: string; Value: double); virtual;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -616,46 +579,58 @@ Sets value of <a class="normal" href="curve_points_set.html#Variable">variable</
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="SetSigma"></span><code>procedure <b>SetSigma</b>(Value: Double);</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="SetSpecParamPtr"></span><code>procedure <b>SetSpecParamPtr</b>(P: <a  href="curve_points_set.TSpecialCurveParameter.html">TSpecialCurveParameter</a>); virtual;</code></td>
+<td class="itemcode"><span id="SetVariableValue"></span><code>procedure <b>SetVariableValue</b>(Index: longint; Value: double); virtual;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
-Initializes pointers to parameters with predefined semantics.</p>
+Sets value of <a class="normal" href="special_curve_parameter.html#Variable">variable</a> parameter.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="SetSpecParamVarIndex"></span><code>procedure <b>SetSpecParamVarIndex</b>( P: <a  href="curve_points_set.TSpecialCurveParameter.html">TSpecialCurveParameter</a>; Index: LongInt); virtual;</code></td>
+<td class="itemcode"><span id="SetVariationStep"></span><code>procedure <b>SetVariationStep</b>(Index: longint; AStep: double); virtual;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
-Initializes indexes of <a class="normal" href="curve_points_set.html#Variable">variable</a> parameters with predefined semantics.</p>
+Sets optimization step for parameter.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="Setx0"></span><code>procedure <b>Setx0</b>(Value: Double);</code></td>
+<td class="itemcode"><span id="Setx0"></span><code>procedure <b>Setx0</b>(Value: double);</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
-These functions don't perform profile recalculation and are used for initialization purposes (when <a class="normal" href="curve_points_set.TCurvePointsSet.html#Modified">Modified</a> is set up).</p>
+These functions don't perform profile recalculation and are used for initialization purposes (when Modified is set up).</p>
 </td></tr>
 </table>
 <h3 class="detail">Properties</h3>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="A"></span><code>property <b>A</b>: Double read <a  href="curve_points_set.TCurvePointsSet.html#GetA">GetA</a> write <a  href="curve_points_set.TCurvePointsSet.html#SetA">SetA</a>;</code></td>
+<td class="itemcode"><span id="A"></span><code>property <b>A</b>: double read <a  href="curve_points_set.TCurvePointsSet.html#GetA">GetA</a> write <a  href="curve_points_set.TCurvePointsSet.html#SetA">SetA</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+TODO: remove setter.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Parameters"></span><code>property <b>Parameters</b>: <a  href="persistent_curve_parameters.Curve_parameters.html">Curve_parameters</a> read <a  href="curve_points_set.TCurvePointsSet.html#FParams">FParams</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Returns object containing all <code>parameters</code>.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Sigma"></span><code>property <b>Sigma</b>: double read <a  href="curve_points_set.TCurvePointsSet.html#GetSigma">GetSigma</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -663,27 +638,18 @@ These functions don't perform profile recalculation and are used for initializat
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="Param"></span><code>property <b>Param</b>[index:LongInt]: Double read <a  href="curve_points_set.TCurvePointsSet.html#GetParam">GetParam</a> write <a  href="curve_points_set.TCurvePointsSet.html#SetParam">SetParam</a>;</code></td>
+<td class="itemcode"><span id="ValuesByName"></span><code>property <b>ValuesByName</b>[Name:string]: double
+            read <a  href="curve_points_set.TCurvePointsSet.html#GetValueByName">GetValueByName</a> write <a  href="curve_points_set.TCurvePointsSet.html#SetValueByName">SetValueByName</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
-Provides access to <a class="normal" href="curve_points_set.html#Variable">variable</a> parameters for optimizer.</p>
+Provides access to all <a class="normal" href="curve_points_set.TCurvePointsSet.html#Parameters">parameters</a> by name.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="ParamByName"></span><code>property <b>ParamByName</b>[Name:string]: Double read <a  href="curve_points_set.TCurvePointsSet.html#GetParamByName">GetParamByName</a> write <a  href="curve_points_set.TCurvePointsSet.html#SetParamByName">SetParamByName</a>;</code></td>
-</tr>
-<tr><td colspan="2">
-<p>
-Provides access to all parameters by name.</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="ParamCount"></span><code>property <b>ParamCount</b>: LongInt read <a  href="curve_points_set.TCurvePointsSet.html#GetParamCount">GetParamCount</a>;</code></td>
+<td class="itemcode"><span id="VariableCount"></span><code>property <b>VariableCount</b>: longint read <a  href="curve_points_set.TCurvePointsSet.html#GetVariableCount">GetVariableCount</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -691,29 +657,33 @@ Provides access to all parameters by name.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="Params"></span><code>property <b>Params</b>: <a  href="curve_points_set.Curve_parameters.html">Curve_parameters</a> read <a  href="curve_points_set.TCurvePointsSet.html#FParams">FParams</a>;</code></td>
+<td class="itemcode"><span id="VariableValues"></span><code>property <b>VariableValues</b>[index:longint]: double
+            read <a  href="curve_points_set.TCurvePointsSet.html#GetVariableValue">GetVariableValue</a> write <a  href="curve_points_set.TCurvePointsSet.html#SetVariableValue">SetVariableValue</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
-Returns object containing all parameters.</p>
+Provides access to <a class="normal" href="special_curve_parameter.html#Variable">variable</a> <a class="normal" href="curve_points_set.TCurvePointsSet.html#Parameters">parameters</a> for optimizer.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="Sigma"></span><code>property <b>Sigma</b>: Double read <a  href="curve_points_set.TCurvePointsSet.html#GetSigma">GetSigma</a> write <a  href="curve_points_set.TCurvePointsSet.html#SetSigma">SetSigma</a>;</code></td>
+<td class="itemcode"><span id="VariationSteps"></span><code>property <b>VariationSteps</b>[index:longint]: double
+            read <a  href="curve_points_set.TCurvePointsSet.html#GetVariationStep">GetVariationStep</a> write <a  href="curve_points_set.TCurvePointsSet.html#SetVariationStep">SetVariationStep</a>;</code></td>
 </tr>
 <tr><td colspan="2">
-&nbsp;</td></tr>
+<p>
+Provides access to variation steps for optimizer.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="x0"></span><code>property <b>x0</b>: Double read <a  href="curve_points_set.TCurvePointsSet.html#Getx0">Getx0</a> write <a  href="curve_points_set.TCurvePointsSet.html#Setx0">Setx0</a>;</code></td>
+<td class="itemcode"><span id="x0"></span><code>property <b>x0</b>: double read <a  href="curve_points_set.TCurvePointsSet.html#Getx0">Getx0</a> write <a  href="curve_points_set.TCurvePointsSet.html#Setx0">Setx0</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
-Variation of the parameter <code>x0</code> is limited by two adjacent <a class="normal" href="points_set.TPointsSet.html#Points">points</a>.</p>
+TODO: remove setter.</p>
 </td></tr>
 </table>
 <hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>

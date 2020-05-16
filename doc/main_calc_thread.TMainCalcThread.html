@@ -20,6 +20,8 @@
 <p class="declaration">
 <code>type TMainCalcThread = class(TThread)</code></p>
 <h2 class="description">Description</h2>
+<p>
+TODO: nuzhno sdelat' perehvat isklyucheniy i sohranenie soobscheniya v ob'ekte potoka dlya posleduyuschego chteniya.</p>
 <span id="PasDoc-Hierarchy"></span><h2 class="hierarchy">Hierarchy</h2>
 <ul class="hierarchy"><li class="ancestor">TThread</li>
 <li class="thisitem">TMainCalcThread</li></ul><h2 class="overview">Overview</h2>
@@ -27,42 +29,70 @@
 <table class="summary wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
-<td class="itemcode"><code><b><a  href="main_calc_thread.TMainCalcThread.html#CurrentTask">CurrentTask</a></b>: <a  href="main_calc_thread.html#TCurrentTask">TCurrentTask</a>;</code></td>
+<td class="itemcode"><code><b><a  href="main_calc_thread.TMainCalcThread.html#FAllDone">FAllDone</a></b>: TThreadMethod;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
-<td class="itemcode"><code><b><a  href="main_calc_thread.TMainCalcThread.html#DoneProc">DoneProc</a></b>: <a  href="main_calc_thread.html#TDoneProc">TDoneProc</a>;</code></td>
+<td class="itemcode"><code><b><a  href="main_calc_thread.TMainCalcThread.html#FComputeBackgroundPointsDone">FComputeBackgroundPointsDone</a></b>: TThreadMethod;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
-<td class="itemcode"><code><b><a  href="main_calc_thread.TMainCalcThread.html#ShowResultsProc">ShowResultsProc</a></b>: <a  href="main_calc_thread.html#TShowResultsProc">TShowResultsProc</a>;</code></td>
+<td class="itemcode"><code><b><a  href="main_calc_thread.TMainCalcThread.html#FComputeCurveBoundsDone">FComputeCurveBoundsDone</a></b>: TThreadMethod;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code><b><a  href="main_calc_thread.TMainCalcThread.html#FComputeCurvePositionsDone">FComputeCurvePositionsDone</a></b>: TThreadMethod;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code><b><a  href="main_calc_thread.TMainCalcThread.html#FDone">FDone</a></b>:    TThreadMethod;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code><b><a  href="main_calc_thread.TMainCalcThread.html#FShowCurMin">FShowCurMin</a></b>: TThreadMethod;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code><b><a  href="main_calc_thread.TMainCalcThread.html#FShowProfile">FShowProfile</a></b>: TThreadMethod;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code><b><a  href="main_calc_thread.TMainCalcThread.html#FTask">FTask</a></b>:    TThreadMethod;</code></td>
 </tr>
 </table>
 <span id="PasDoc-Methods"></span><h3 class="summary">Methods</h3>
 <table class="summary wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="main_calc_thread.TMainCalcThread.html#ComputeBackgroundPointsDone">ComputeBackgroundPointsDone</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="main_calc_thread.TMainCalcThread.html#ComputeCurveBoundsDone">ComputeCurveBoundsDone</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="main_calc_thread.TMainCalcThread.html#ComputeCurvePositionsDone">ComputeCurvePositionsDone</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="main_calc_thread.TMainCalcThread.html#Done">Done</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="main_calc_thread.TMainCalcThread.html#Execute">Execute</a></b>; override;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="main_calc_thread.TMainCalcThread.html#SetCurrentTask">SetCurrentTask</a></b>(ACurrentTask : <a  href="main_calc_thread.html#TCurrentTask">TCurrentTask</a>);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="main_calc_thread.TMainCalcThread.html#SetSyncMethods">SetSyncMethods</a></b>(ATask, AShowCurMin, AShowProfile, ADone, AComputeCurveBoundsDone, AComputeBackgroundPointsDone, AComputeCurvePositionsDone, AAllDone: TThreadMethod);</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="main_calc_thread.TMainCalcThread.html#SetDoneProc">SetDoneProc</a></b>(ADoneProc : <a  href="main_calc_thread.html#TDoneProc">TDoneProc</a>);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="main_calc_thread.TMainCalcThread.html#ShowCurMin">ShowCurMin</a></b>;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="main_calc_thread.TMainCalcThread.html#SetShowResultsProc">SetShowResultsProc</a></b>(AShowResultsProc : <a  href="main_calc_thread.html#TShowResultsProc">TShowResultsProc</a>);</code></td>
-</tr>
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="main_calc_thread.TMainCalcThread.html#ShowResults">ShowResults</a></b>;</code></td>
-</tr>
-<tr class="list2">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="main_calc_thread.TMainCalcThread.html#Synchronize">Synchronize</a></b>(Method: TThreadMethod);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="main_calc_thread.TMainCalcThread.html#ShowProfile">ShowProfile</a></b>;</code></td>
 </tr>
 </table>
 <h2 class="description">Description</h2>
@@ -70,7 +100,7 @@
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
-<td class="itemcode"><span id="CurrentTask"></span><code><b>CurrentTask</b>: <a  href="main_calc_thread.html#TCurrentTask">TCurrentTask</a>;</code></td>
+<td class="itemcode"><span id="FAllDone"></span><code><b>FAllDone</b>: TThreadMethod;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -78,7 +108,7 @@
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
-<td class="itemcode"><span id="DoneProc"></span><code><b>DoneProc</b>: <a  href="main_calc_thread.html#TDoneProc">TDoneProc</a>;</code></td>
+<td class="itemcode"><span id="FComputeBackgroundPointsDone"></span><code><b>FComputeBackgroundPointsDone</b>: TThreadMethod;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -86,14 +116,86 @@
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
-<td class="itemcode"><span id="ShowResultsProc"></span><code><b>ShowResultsProc</b>: <a  href="main_calc_thread.html#TShowResultsProc">TShowResultsProc</a>;</code></td>
+<td class="itemcode"><span id="FComputeCurveBoundsDone"></span><code><b>FComputeCurveBoundsDone</b>: TThreadMethod;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="FComputeCurvePositionsDone"></span><code><b>FComputeCurvePositionsDone</b>: TThreadMethod;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="FDone"></span><code><b>FDone</b>:    TThreadMethod;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="FShowCurMin"></span><code><b>FShowCurMin</b>: TThreadMethod;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
-These methods are synchronized with main application thread.</p>
+These methods are synchronized with UI thread.</p>
 </td></tr>
 </table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="FShowProfile"></span><code><b>FShowProfile</b>: TThreadMethod;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="FTask"></span><code><b>FTask</b>:    TThreadMethod;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
 <h3 class="detail">Methods</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="ComputeBackgroundPointsDone"></span><code>procedure <b>ComputeBackgroundPointsDone</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="ComputeCurveBoundsDone"></span><code>procedure <b>ComputeCurveBoundsDone</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="ComputeCurvePositionsDone"></span><code>procedure <b>ComputeCurvePositionsDone</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Done"></span><code>procedure <b>Done</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
@@ -105,7 +207,7 @@ These methods are synchronized with main application thread.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="SetCurrentTask"></span><code>procedure <b>SetCurrentTask</b>(ACurrentTask : <a  href="main_calc_thread.html#TCurrentTask">TCurrentTask</a>);</code></td>
+<td class="itemcode"><span id="SetSyncMethods"></span><code>procedure <b>SetSyncMethods</b>(ATask, AShowCurMin, AShowProfile, ADone, AComputeCurveBoundsDone, AComputeBackgroundPointsDone, AComputeCurvePositionsDone, AAllDone: TThreadMethod);</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -113,7 +215,7 @@ These methods are synchronized with main application thread.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="SetDoneProc"></span><code>procedure <b>SetDoneProc</b>(ADoneProc : <a  href="main_calc_thread.html#TDoneProc">TDoneProc</a>);</code></td>
+<td class="itemcode"><span id="ShowCurMin"></span><code>procedure <b>ShowCurMin</b>;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -121,23 +223,7 @@ These methods are synchronized with main application thread.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="SetShowResultsProc"></span><code>procedure <b>SetShowResultsProc</b>(AShowResultsProc : <a  href="main_calc_thread.html#TShowResultsProc">TShowResultsProc</a>);</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="ShowResults"></span><code>procedure <b>ShowResults</b>;</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="Synchronize"></span><code>procedure <b>Synchronize</b>(Method: TThreadMethod);</code></td>
+<td class="itemcode"><span id="ShowProfile"></span><code>procedure <b>ShowProfile</b>;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>

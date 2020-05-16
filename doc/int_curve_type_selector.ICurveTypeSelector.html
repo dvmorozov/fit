@@ -29,11 +29,15 @@ Interface defining basic operation for selecting curve type.</p>
 <table class="summary wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="int_curve_type_selector.ICurveTypeSelector.html#GetSelectedCurveType">GetSelectedCurveType</a></b>: <a  href="int_points_set.html#TCurveTypeId">TCurveTypeId</a>;</code></td>
+<td class="itemcode"><code>function <b><a  href="int_curve_type_selector.ICurveTypeSelector.html#GetSelectedCurveType">GetSelectedCurveType</a></b>: <a  href="named_points_set.html#TCurveTypeId">TCurveTypeId</a>;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="int_curve_type_selector.ICurveTypeSelector.html#SelectCurveType">SelectCurveType</a></b>(TypeId: <a  href="int_points_set.html#TCurveTypeId">TCurveTypeId</a>);</code></td>
+<td class="itemcode"><code>function <b><a  href="int_curve_type_selector.ICurveTypeSelector.html#GetSelectedExtremumMode">GetSelectedExtremumMode</a></b>: <a  href="named_points_set.html#TExtremumMode">TExtremumMode</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="int_curve_type_selector.ICurveTypeSelector.html#SelectCurveType">SelectCurveType</a></b>(TypeId: <a  href="named_points_set.html#TCurveTypeId">TCurveTypeId</a>);</code></td>
 </tr>
 </table>
 <h2 class="description">Description</h2>
@@ -41,7 +45,7 @@ Interface defining basic operation for selecting curve type.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetSelectedCurveType"></span><code>function <b>GetSelectedCurveType</b>: <a  href="int_points_set.html#TCurveTypeId">TCurveTypeId</a>;</code></td>
+<td class="itemcode"><span id="GetSelectedCurveType"></span><code>function <b>GetSelectedCurveType</b>: <a  href="named_points_set.html#TCurveTypeId">TCurveTypeId</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -49,7 +53,15 @@ Interface defining basic operation for selecting curve type.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="SelectCurveType"></span><code>procedure <b>SelectCurveType</b>(TypeId: <a  href="int_points_set.html#TCurveTypeId">TCurveTypeId</a>);</code></td>
+<td class="itemcode"><span id="GetSelectedExtremumMode"></span><code>function <b>GetSelectedExtremumMode</b>: <a  href="named_points_set.html#TExtremumMode">TExtremumMode</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SelectCurveType"></span><code>procedure <b>SelectCurveType</b>(TypeId: <a  href="named_points_set.html#TCurveTypeId">TCurveTypeId</a>);</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>

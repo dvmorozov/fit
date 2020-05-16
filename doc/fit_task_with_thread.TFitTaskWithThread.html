@@ -30,22 +30,18 @@ Executes task solution in separate thread.</p>
 <table class="summary wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code><b><a  href="fit_task_with_thread.TFitTaskWithThread.html#CS">CS</a></b>: TRTLCriticalSection;</code></td>
+<td class="itemcode"><code><b><a  href="fit_task_with_thread.TFitTaskWithThread.html#FDoneDisabled">FDoneDisabled</a></b>:   boolean;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code><b><a  href="fit_task_with_thread.TFitTaskWithThread.html#FDoneDisabled">FDoneDisabled</a></b>: Boolean;</code></td>
-</tr>
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code><b><a  href="fit_task_with_thread.TFitTaskWithThread.html#MainCalcThread">MainCalcThread</a></b>: <a  href="main_calc_thread.TMainCalcThread.html">TMainCalcThread</a>;</code></td>
+<td class="itemcode"><code><b><a  href="fit_task_with_thread.TFitTaskWithThread.html#FMainCalcThread">FMainCalcThread</a></b>: <a  href="main_calc_thread.TMainCalcThread.html">TMainCalcThread</a>;</code></td>
 </tr>
 </table>
 <span id="PasDoc-Methods"></span><h3 class="summary">Methods</h3>
 <table class="summary wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>constructor <b><a  href="fit_task_with_thread.TFitTaskWithThread.html#Create">Create</a></b>(AOwner: TComponent); override;</code></td>
+<td class="itemcode"><code>constructor <b><a  href="fit_task_with_thread.TFitTaskWithThread.html#Create">Create</a></b>(AOwner: TComponent; AEnableBackgroundVariation: boolean; ACurveScalingEnabled: boolean); overload;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
@@ -53,23 +49,23 @@ Executes task solution in separate thread.</p>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="fit_task_with_thread.TFitTaskWithThread.html#GetAllDone">GetAllDone</a></b>: Boolean; override;</code></td>
+<td class="itemcode"><code>function <b><a  href="fit_task_with_thread.TFitTaskWithThread.html#GetAllDone">GetAllDone</a></b>: boolean; override;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="fit_task_with_thread.TFitTaskWithThread.html#GetCurAbsMin">GetCurAbsMin</a></b>: Double; override;</code></td>
+<td class="itemcode"><code>function <b><a  href="fit_task_with_thread.TFitTaskWithThread.html#GetCurAbsMin">GetCurAbsMin</a></b>: double; override;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="fit_task_with_thread.TFitTaskWithThread.html#GetCurMin">GetCurMin</a></b>: Double; override;</code></td>
+<td class="itemcode"><code>function <b><a  href="fit_task_with_thread.TFitTaskWithThread.html#GetCurMin">GetCurMin</a></b>: double; override;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="fit_task_with_thread.TFitTaskWithThread.html#GetCurMinInitialized">GetCurMinInitialized</a></b>: Boolean; override;</code></td>
+<td class="itemcode"><code>function <b><a  href="fit_task_with_thread.TFitTaskWithThread.html#GetCurMinInitialized">GetCurMinInitialized</a></b>: boolean; override;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="fit_task_with_thread.TFitTaskWithThread.html#GetCurSqrMin">GetCurSqrMin</a></b>: Double; override;</code></td>
+<td class="itemcode"><code>function <b><a  href="fit_task_with_thread.TFitTaskWithThread.html#GetCurSqrMin">GetCurSqrMin</a></b>: double; override;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
@@ -77,23 +73,39 @@ Executes task solution in separate thread.</p>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_task_with_thread.TFitTaskWithThread.html#ComputeBackgroundPointsDoneSync">ComputeBackgroundPointsDoneSync</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_task_with_thread.TFitTaskWithThread.html#ComputeCurveBoundsDoneSync">ComputeCurveBoundsDoneSync</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_task_with_thread.TFitTaskWithThread.html#ComputeCurvePositionsDoneSync">ComputeCurvePositionsDoneSync</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="fit_task_with_thread.TFitTaskWithThread.html#DestroyMainCalcThread">DestroyMainCalcThread</a></b>;</code></td>
 </tr>
-<tr class="list2">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="fit_task_with_thread.TFitTaskWithThread.html#DoneProc">DoneProc</a></b>; override;</code></td>
-</tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="fit_task_with_thread.TFitTaskWithThread.html#FindGausses">FindGausses</a></b>; override;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_task_with_thread.TFitTaskWithThread.html#Done">Done</a></b>; override;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="fit_task_with_thread.TFitTaskWithThread.html#FindGaussesAgain">FindGaussesAgain</a></b>; override;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_task_with_thread.TFitTaskWithThread.html#DoneProcSync">DoneProcSync</a></b>;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="fit_task_with_thread.TFitTaskWithThread.html#FindGaussesSequentially">FindGaussesSequentially</a></b>; override;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_task_with_thread.TFitTaskWithThread.html#MinimizeDifference">MinimizeDifference</a></b>; override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_task_with_thread.TFitTaskWithThread.html#MinimizeDifferenceAgain">MinimizeDifferenceAgain</a></b>; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_task_with_thread.TFitTaskWithThread.html#MinimizeNumberOfCurves">MinimizeNumberOfCurves</a></b>; override;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
@@ -101,18 +113,26 @@ Executes task solution in separate thread.</p>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="fit_task_with_thread.TFitTaskWithThread.html#StopAsyncOper">StopAsyncOper</a></b>;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_task_with_thread.TFitTaskWithThread.html#ShowCurMinSync">ShowCurMinSync</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_task_with_thread.TFitTaskWithThread.html#ShowProfileSync">ShowProfileSync</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_task_with_thread.TFitTaskWithThread.html#StopAsyncOper">StopAsyncOper</a></b>; override;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="fit_task_with_thread.TFitTaskWithThread.html#RecreateMainCalcThread">RecreateMainCalcThread</a></b>( ACurrentTask: <a  href="main_calc_thread.html#TCurrentTask">TCurrentTask</a>; ADoneProc: <a  href="main_calc_thread.html#TDoneProc">TDoneProc</a>);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="fit_task_with_thread.TFitTaskWithThread.html#RecreateMainCalcThread">RecreateMainCalcThread</a></b>(ATask: TThreadMethod; AAllDone: TThreadMethod);</code></td>
 </tr>
 </table>
 <span id="PasDoc-Properties"></span><h3 class="summary">Properties</h3>
 <table class="summary wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>property <b><a  href="fit_task_with_thread.TFitTaskWithThread.html#DoneDisabled">DoneDisabled</a></b>: Boolean read <a  href="fit_task_with_thread.TFitTaskWithThread.html#FDoneDisabled">FDoneDisabled</a> write <a  href="fit_task_with_thread.TFitTaskWithThread.html#FDoneDisabled">FDoneDisabled</a>;</code></td>
+<td class="itemcode"><code>property <b><a  href="fit_task_with_thread.TFitTaskWithThread.html#DoneDisabled">DoneDisabled</a></b>: boolean read <a  href="fit_task_with_thread.TFitTaskWithThread.html#FDoneDisabled">FDoneDisabled</a> write <a  href="fit_task_with_thread.TFitTaskWithThread.html#FDoneDisabled">FDoneDisabled</a>;</code></td>
 </tr>
 </table>
 <h2 class="description">Description</h2>
@@ -120,7 +140,7 @@ Executes task solution in separate thread.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="CS"></span><code><b>CS</b>: TRTLCriticalSection;</code></td>
+<td class="itemcode"><span id="FDoneDisabled"></span><code><b>FDoneDisabled</b>:   boolean;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -128,17 +148,7 @@ Executes task solution in separate thread.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="FDoneDisabled"></span><code><b>FDoneDisabled</b>: Boolean;</code></td>
-</tr>
-<tr><td colspan="2">
-<p>
-Use instead of TCriticalSection.</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="MainCalcThread"></span><code><b>MainCalcThread</b>: <a  href="main_calc_thread.TMainCalcThread.html">TMainCalcThread</a>;</code></td>
+<td class="itemcode"><span id="FMainCalcThread"></span><code><b>FMainCalcThread</b>: <a  href="main_calc_thread.TMainCalcThread.html">TMainCalcThread</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -147,7 +157,7 @@ Use instead of TCriticalSection.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="Create"></span><code>constructor <b>Create</b>(AOwner: TComponent); override;</code></td>
+<td class="itemcode"><span id="Create"></span><code>constructor <b>Create</b>(AOwner: TComponent; AEnableBackgroundVariation: boolean; ACurveScalingEnabled: boolean); overload;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -163,7 +173,7 @@ Use instead of TCriticalSection.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetAllDone"></span><code>function <b>GetAllDone</b>: Boolean; override;</code></td>
+<td class="itemcode"><span id="GetAllDone"></span><code>function <b>GetAllDone</b>: boolean; override;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -171,7 +181,7 @@ Use instead of TCriticalSection.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetCurAbsMin"></span><code>function <b>GetCurAbsMin</b>: Double; override;</code></td>
+<td class="itemcode"><span id="GetCurAbsMin"></span><code>function <b>GetCurAbsMin</b>: double; override;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -179,7 +189,7 @@ Use instead of TCriticalSection.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetCurMin"></span><code>function <b>GetCurMin</b>: Double; override;</code></td>
+<td class="itemcode"><span id="GetCurMin"></span><code>function <b>GetCurMin</b>: double; override;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
@@ -189,7 +199,7 @@ Methods implement synchronization to work in multithreading environment.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetCurMinInitialized"></span><code>function <b>GetCurMinInitialized</b>: Boolean; override;</code></td>
+<td class="itemcode"><span id="GetCurMinInitialized"></span><code>function <b>GetCurMinInitialized</b>: boolean; override;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -197,7 +207,7 @@ Methods implement synchronization to work in multithreading environment.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetCurSqrMin"></span><code>function <b>GetCurSqrMin</b>: Double; override;</code></td>
+<td class="itemcode"><span id="GetCurSqrMin"></span><code>function <b>GetCurSqrMin</b>: double; override;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -209,8 +219,32 @@ Methods implement synchronization to work in multithreading environment.</p>
 </tr>
 <tr><td colspan="2">
 <p>
-Synchronous termination of long-term operation without call of termination procedure.</p>
+Sets up termination flags and waits for actual termination of the thread.</p>
 </td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="ComputeBackgroundPointsDoneSync"></span><code>procedure <b>ComputeBackgroundPointsDoneSync</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="ComputeCurveBoundsDoneSync"></span><code>procedure <b>ComputeCurveBoundsDoneSync</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="ComputeCurvePositionsDoneSync"></span><code>procedure <b>ComputeCurvePositionsDoneSync</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -219,13 +253,13 @@ Synchronous termination of long-term operation without call of termination proce
 </tr>
 <tr><td colspan="2">
 <p>
-ozhidaet zaversheniya vypolneniya potoka</p>
+Waits for thread termination.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="DoneProc"></span><code>procedure <b>DoneProc</b>; override;</code></td>
+<td class="itemcode"><span id="Done"></span><code>procedure <b>Done</b>; override;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -233,17 +267,7 @@ ozhidaet zaversheniya vypolneniya potoka</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="FindGausses"></span><code>procedure <b>FindGausses</b>; override;</code></td>
-</tr>
-<tr><td colspan="2">
-<p>
-Fits pattern specimens starting from given parameter set (initially or repeatedly).</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="FindGaussesAgain"></span><code>procedure <b>FindGaussesAgain</b>; override;</code></td>
+<td class="itemcode"><span id="DoneProcSync"></span><code>procedure <b>DoneProcSync</b>;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -251,11 +275,29 @@ Fits pattern specimens starting from given parameter set (initially or repeatedl
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="FindGaussesSequentially"></span><code>procedure <b>FindGaussesSequentially</b>; override;</code></td>
+<td class="itemcode"><span id="MinimizeDifference"></span><code>procedure <b>MinimizeDifference</b>; override;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
-Searches set of pattern specimens (curves) fitting exprerimental data with given accuracy sequentially decreasing number of curves.</p>
+Fits curves starting from given parameter set (initially or repeatedly).</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="MinimizeDifferenceAgain"></span><code>procedure <b>MinimizeDifferenceAgain</b>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="MinimizeNumberOfCurves"></span><code>procedure <b>MinimizeNumberOfCurves</b>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Searches set of pattern curves fitting exprerimental data with given accuracy sequentially decreasing number of such curves.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -269,28 +311,46 @@ Searches set of pattern specimens (curves) fitting exprerimental data with given
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="StopAsyncOper"></span><code>procedure <b>StopAsyncOper</b>;</code></td>
+<td class="itemcode"><span id="ShowCurMinSync"></span><code>procedure <b>ShowCurMinSync</b>;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
-Asynchronous termination of long-term operation with call of termination procedure.</p>
+TODO: methods should be implemented.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="ShowProfileSync"></span><code>procedure <b>ShowProfileSync</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="StopAsyncOper"></span><code>procedure <b>StopAsyncOper</b>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Sets up termination flags and returns. The method doesn't wait for actual termination of the thread.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="RecreateMainCalcThread"></span><code>procedure <b>RecreateMainCalcThread</b>( ACurrentTask: <a  href="main_calc_thread.html#TCurrentTask">TCurrentTask</a>; ADoneProc: <a  href="main_calc_thread.html#TDoneProc">TDoneProc</a>);</code></td>
+<td class="itemcode"><span id="RecreateMainCalcThread"></span><code>procedure <b>RecreateMainCalcThread</b>(ATask: TThreadMethod; AAllDone: TThreadMethod);</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
-Suppresses calling <a class="normal" href="fit_task_with_thread.TFitTaskWithThread.html#DoneProc">DoneProc</a>.</p>
+Suppresses calling <a class="normal" href="fit_task_with_thread.TFitTaskWithThread.html#Done">Done</a>.</p>
 </td></tr>
 </table>
 <h3 class="detail">Properties</h3>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="DoneDisabled"></span><code>property <b>DoneDisabled</b>: Boolean read <a  href="fit_task_with_thread.TFitTaskWithThread.html#FDoneDisabled">FDoneDisabled</a> write <a  href="fit_task_with_thread.TFitTaskWithThread.html#FDoneDisabled">FDoneDisabled</a>;</code></td>
+<td class="itemcode"><span id="DoneDisabled"></span><code>property <b>DoneDisabled</b>: boolean read <a  href="fit_task_with_thread.TFitTaskWithThread.html#FDoneDisabled">FDoneDisabled</a> write <a  href="fit_task_with_thread.TFitTaskWithThread.html#FDoneDisabled">FDoneDisabled</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>

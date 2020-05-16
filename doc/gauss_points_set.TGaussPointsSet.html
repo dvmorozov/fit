@@ -23,7 +23,7 @@
 <p>
 Curve having Gauss form.</p>
 <span id="PasDoc-Hierarchy"></span><h2 class="hierarchy">Hierarchy</h2>
-<ul class="hierarchy"><li class="ancestor">TCBRCComponent</li>
+<ul class="hierarchy"><li class="ancestor">TComponent</li>
 <li class="ancestor"><a class="normal" href="self_copied_component.TSelfCopiedComponent.html">TSelfCopiedComponent</a></li>
 <li class="ancestor"><a class="normal" href="points_set.TPointsSet.html">TPointsSet</a></li>
 <li class="ancestor"><a class="normal" href="neutron_points_set.TNeutronPointsSet.html">TNeutronPointsSet</a></li>
@@ -35,23 +35,23 @@ Curve having Gauss form.</p>
 <table class="summary wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>constructor <b><a  href="gauss_points_set.TGaussPointsSet.html#Create">Create</a></b>(AOwner: TComponent); override;</code></td>
+<td class="itemcode"><code>constructor <b><a  href="gauss_points_set.TGaussPointsSet.html#Create">Create</a></b>(AOwner: TComponent; x0: double);</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="gauss_points_set.TGaussPointsSet.html#GetCurveTypeId">GetCurveTypeId</a></b>: <a  href="int_points_set.html#TCurveTypeId">TCurveTypeId</a>; override;</code></td>
+<td class="itemcode"><code>class function <b><a  href="gauss_points_set.TGaussPointsSet.html#GetCurveTypeId">GetCurveTypeId</a></b>: <a  href="named_points_set.html#TCurveTypeId">TCurveTypeId</a>; override;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>class function <b><a  href="gauss_points_set.TGaussPointsSet.html#GetCurveTypeId_">GetCurveTypeId_</a></b>: <a  href="int_points_set.html#TCurveTypeId">TCurveTypeId</a>; override;</code></td>
+<td class="itemcode"><code>class function <b><a  href="gauss_points_set.TGaussPointsSet.html#GetCurveTypeName">GetCurveTypeName</a></b>: string; override;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="gauss_points_set.TGaussPointsSet.html#GetCurveTypeName">GetCurveTypeName</a></b>: string; override;</code></td>
+<td class="itemcode"><code>class function <b><a  href="gauss_points_set.TGaussPointsSet.html#GetExtremumMode">GetExtremumMode</a></b>: <a  href="named_points_set.html#TExtremumMode">TExtremumMode</a>; override;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="gauss_points_set.TGaussPointsSet.html#DoCalc">DoCalc</a></b>(const Intervals: <a  href="points_set.TPointsSet.html">TPointsSet</a>); override;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="gauss_points_set.TGaussPointsSet.html#DoCalc">DoCalc</a></b>(const Bounds: <a  href="points_set.TPointsSet.html">TPointsSet</a>); override;</code></td>
 </tr>
 </table>
 <h2 class="description">Description</h2>
@@ -59,7 +59,7 @@ Curve having Gauss form.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="Create"></span><code>constructor <b>Create</b>(AOwner: TComponent); override;</code></td>
+<td class="itemcode"><span id="Create"></span><code>constructor <b>Create</b>(AOwner: TComponent; x0: double);</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -67,7 +67,7 @@ Curve having Gauss form.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetCurveTypeId"></span><code>function <b>GetCurveTypeId</b>: <a  href="int_points_set.html#TCurveTypeId">TCurveTypeId</a>; override;</code></td>
+<td class="itemcode"><span id="GetCurveTypeId"></span><code>class function <b>GetCurveTypeId</b>: <a  href="named_points_set.html#TCurveTypeId">TCurveTypeId</a>; override;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
@@ -77,25 +77,25 @@ Overrides method defined in <a class="normal" href="named_points_set.TNamedPoint
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetCurveTypeId_"></span><code>class function <b>GetCurveTypeId_</b>: <a  href="int_points_set.html#TCurveTypeId">TCurveTypeId</a>; override;</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetCurveTypeName"></span><code>function <b>GetCurveTypeName</b>: string; override;</code></td>
+<td class="itemcode"><span id="GetCurveTypeName"></span><code>class function <b>GetCurveTypeName</b>: string; override;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
 Overrides method defined in <a class="normal" href="named_points_set.TNamedPointsSet.html">TNamedPointsSet</a>.</p>
 </td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetExtremumMode"></span><code>class function <b>GetExtremumMode</b>: <a  href="named_points_set.html#TExtremumMode">TExtremumMode</a>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="DoCalc"></span><code>procedure <b>DoCalc</b>(const Intervals: <a  href="points_set.TPointsSet.html">TPointsSet</a>); override;</code></td>
+<td class="itemcode"><span id="DoCalc"></span><code>procedure <b>DoCalc</b>(const Bounds: <a  href="points_set.TPointsSet.html">TPointsSet</a>); override;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>

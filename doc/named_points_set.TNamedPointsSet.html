@@ -18,12 +18,12 @@
 <a  href="named_points_set.html">named_points_set</a></p>
 <h2 class="declaration">Declaration</h2>
 <p class="declaration">
-<code>type TNamedPointsSet = class(<a class="normal" href="curve_points_set.TCurvePointsSet.html">TCurvePointsSet</a>, <a class="normal" href="int_points_set.IPointsSet.html">IPointsSet</a>)</code></p>
+<code>type TNamedPointsSet = class(<a class="normal" href="curve_points_set.TCurvePointsSet.html">TCurvePointsSet</a>)</code></p>
 <h2 class="description">Description</h2>
 <p>
-Base curve class allowing setting up type name. Type name distinguishes this curve from all other curve types, as opposite to the '<a class="normal" href="title_points_set.TTitlePointsSet.html#Title">Title</a>' attributes which is used to distinguish separate curve instances.</p>
+Base curve class allowing setting up type name. Type name distinguishes this curve from all other curve types, as opposite to the 'Title' attributes which is used to distinguish separate curve instances.</p>
 <span id="PasDoc-Hierarchy"></span><h2 class="hierarchy">Hierarchy</h2>
-<ul class="hierarchy"><li class="ancestor">TCBRCComponent</li>
+<ul class="hierarchy"><li class="ancestor">TComponent</li>
 <li class="ancestor"><a class="normal" href="self_copied_component.TSelfCopiedComponent.html">TSelfCopiedComponent</a></li>
 <li class="ancestor"><a class="normal" href="points_set.TPointsSet.html">TPointsSet</a></li>
 <li class="ancestor"><a class="normal" href="neutron_points_set.TNeutronPointsSet.html">TNeutronPointsSet</a></li>
@@ -33,10 +33,6 @@ Base curve class allowing setting up type name. Type name distinguishes this cur
 <span id="PasDoc-Fields"></span><h3 class="summary">Fields</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
-<td class="itemcode"><code><b><a  href="named_points_set.TNamedPointsSet.html#FCurveTypeId">FCurveTypeId</a></b>: <a  href="int_points_set.html#TCurveTypeId">TCurveTypeId</a>;</code></td>
-</tr>
-<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
 <td class="itemcode"><code><b><a  href="named_points_set.TNamedPointsSet.html#FName">FName</a></b>: string;</code></td>
 </tr>
@@ -49,35 +45,23 @@ Base curve class allowing setting up type name. Type name distinguishes this cur
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="named_points_set.TNamedPointsSet.html#GetCurveTypeId">GetCurveTypeId</a></b>: <a  href="int_points_set.html#TCurveTypeId">TCurveTypeId</a>; virtual;</code></td>
+<td class="itemcode"><code>class function <b><a  href="named_points_set.TNamedPointsSet.html#GetCurveTypeId">GetCurveTypeId</a></b>: <a  href="named_points_set.html#TCurveTypeId">TCurveTypeId</a>; virtual; abstract;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>class function <b><a  href="named_points_set.TNamedPointsSet.html#GetCurveTypeId_">GetCurveTypeId_</a></b>: <a  href="int_points_set.html#TCurveTypeId">TCurveTypeId</a>; virtual; abstract;</code></td>
+<td class="itemcode"><code>class function <b><a  href="named_points_set.TNamedPointsSet.html#GetCurveTypeName">GetCurveTypeName</a></b>: string; virtual; abstract;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="named_points_set.TNamedPointsSet.html#GetCurveTypeName">GetCurveTypeName</a></b>: string; virtual;</code></td>
+<td class="itemcode"><code>class function <b><a  href="named_points_set.TNamedPointsSet.html#GetExtremumMode">GetExtremumMode</a></b>: <a  href="named_points_set.html#TExtremumMode">TExtremumMode</a>; virtual; abstract;</code></td>
 </tr>
 <tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="named_points_set.TNamedPointsSet.html#SetCurveTypeId">SetCurveTypeId</a></b>(CurveTypeId: <a  href="int_points_set.html#TCurveTypeId">TCurveTypeId</a>); virtual;</code></td>
-</tr>
-<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
 <td class="itemcode"><code>procedure <b><a  href="named_points_set.TNamedPointsSet.html#SetCurveTypeName">SetCurveTypeName</a></b>(Name: string); virtual;</code></td>
 </tr>
 </table>
 <h2 class="description">Description</h2>
 <h3 class="detail">Fields</h3>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
-<td class="itemcode"><span id="FCurveTypeId"></span><code><b>FCurveTypeId</b>: <a  href="int_points_set.html#TCurveTypeId">TCurveTypeId</a>;</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
@@ -100,41 +84,31 @@ The attribute should not be used in descendants.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetCurveTypeId"></span><code>function <b>GetCurveTypeId</b>: <a  href="int_points_set.html#TCurveTypeId">TCurveTypeId</a>; virtual;</code></td>
+<td class="itemcode"><span id="GetCurveTypeId"></span><code>class function <b>GetCurveTypeId</b>: <a  href="named_points_set.html#TCurveTypeId">TCurveTypeId</a>; virtual; abstract;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
-Returns unique identifier of curve type.</p>
+Returns unique type identifier.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetCurveTypeId_"></span><code>class function <b>GetCurveTypeId_</b>: <a  href="int_points_set.html#TCurveTypeId">TCurveTypeId</a>; virtual; abstract;</code></td>
+<td class="itemcode"><span id="GetCurveTypeName"></span><code>class function <b>GetCurveTypeName</b>: string; virtual; abstract;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
-Abstract method returning unique type identifier.</p>
+Returns unique name of curve type.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetCurveTypeName"></span><code>function <b>GetCurveTypeName</b>: string; virtual;</code></td>
+<td class="itemcode"><span id="GetExtremumMode"></span><code>class function <b>GetExtremumMode</b>: <a  href="named_points_set.html#TExtremumMode">TExtremumMode</a>; virtual; abstract;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
-Returns name of curve type. It's better to use function instead of property because property assumes storing data in object, but storing any data is not necessary in this case.</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="SetCurveTypeId"></span><code>procedure <b>SetCurveTypeId</b>(CurveTypeId: <a  href="int_points_set.html#TCurveTypeId">TCurveTypeId</a>); virtual;</code></td>
-</tr>
-<tr><td colspan="2">
-<p>
-Sets unique identifier of curve type.</p>
+Returns algorithm of searching of extremum <a class="normal" href="points_set.TPointsSet.html#Points">points</a>.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">

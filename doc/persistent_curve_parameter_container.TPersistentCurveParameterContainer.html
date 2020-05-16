@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Fit: persistent_curve_parameter_container: Class TPersistentCurveParameterContainer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<table class="container"><tr><td class="navigation">
+<h2>Fit</h2><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p><p><a href="GVClasses.png" class="navigation">Classes hierarchy graph</a></p></td><td class="content">
+<span id="TPersistentCurveParameterContainer"></span><h1 class="cio">Class TPersistentCurveParameterContainer</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Hierarchy">Hierarchy</a></div><div class="one_section"><a class="section" href="#PasDoc-Fields">Fields</a></div><div class="one_section"><a class="section" href="#PasDoc-Methods">Methods</a></div><div class="one_section"><a class="section" href="#PasDoc-Properties">Properties</a></div></div>
+<span id="PasDoc-Description"></span><h2 class="unit">Unit</h2>
+<p class="unitlink">
+<a  href="persistent_curve_parameter_container.html">persistent_curve_parameter_container</a></p>
+<h2 class="declaration">Declaration</h2>
+<p class="declaration">
+<code>type TPersistentCurveParameterContainer = class(TCollectionItem)</code></p>
+<h2 class="description">Description</h2>
+<p>
+An item of TCollection, it is used for persistent storaging of <a class="normal" href="persistent_curve_parameter_container.TPersistentCurveParameterContainer.html#Parameter">parameter</a> attributes.</p>
+<span id="PasDoc-Hierarchy"></span><h2 class="hierarchy">Hierarchy</h2>
+<ul class="hierarchy"><li class="ancestor">TCollectionItem</li>
+<li class="thisitem">TPersistentCurveParameterContainer</li></ul><h2 class="overview">Overview</h2>
+<span id="PasDoc-Fields"></span><h3 class="summary">Fields</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code><b><a  href="persistent_curve_parameter_container.TPersistentCurveParameterContainer.html#FSpecialCurveParameter">FSpecialCurveParameter</a></b>: <a  href="special_curve_parameter.TSpecialCurveParameter.html">TSpecialCurveParameter</a>;</code></td>
+</tr>
+</table>
+<span id="PasDoc-Methods"></span><h3 class="summary">Methods</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>destructor <b><a  href="persistent_curve_parameter_container.TPersistentCurveParameterContainer.html#Destroy">Destroy</a></b>; override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>function <b><a  href="persistent_curve_parameter_container.TPersistentCurveParameterContainer.html#GetName">GetName</a></b>: string;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>function <b><a  href="persistent_curve_parameter_container.TPersistentCurveParameterContainer.html#GetType">GetType</a></b>: <a  href="special_curve_parameter.html#TParameterType">TParameterType</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>function <b><a  href="persistent_curve_parameter_container.TPersistentCurveParameterContainer.html#GetValue">GetValue</a></b>: string;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="persistent_curve_parameter_container.TPersistentCurveParameterContainer.html#SetName">SetName</a></b>(AName: string);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="persistent_curve_parameter_container.TPersistentCurveParameterContainer.html#SetType">SetType</a></b>(AType: <a  href="special_curve_parameter.html#TParameterType">TParameterType</a>);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="persistent_curve_parameter_container.TPersistentCurveParameterContainer.html#SetValue">SetValue</a></b>(AValue: string);</code></td>
+</tr>
+</table>
+<span id="PasDoc-Properties"></span><h3 class="summary">Properties</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a  href="persistent_curve_parameter_container.TPersistentCurveParameterContainer.html#Name">Name</a></b>: string read <a  href="persistent_curve_parameter_container.TPersistentCurveParameterContainer.html#GetName">GetName</a> write <a  href="persistent_curve_parameter_container.TPersistentCurveParameterContainer.html#SetName">SetName</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="persistent_curve_parameter_container.TPersistentCurveParameterContainer.html#Parameter">Parameter</a></b>: <a  href="special_curve_parameter.TSpecialCurveParameter.html">TSpecialCurveParameter</a>
+            read <a  href="persistent_curve_parameter_container.TPersistentCurveParameterContainer.html#FSpecialCurveParameter">FSpecialCurveParameter</a> write <a  href="persistent_curve_parameter_container.TPersistentCurveParameterContainer.html#FSpecialCurveParameter">FSpecialCurveParameter</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a  href="persistent_curve_parameter_container.TPersistentCurveParameterContainer.html#Type_">Type_</a></b>: <a  href="special_curve_parameter.html#TParameterType">TParameterType</a> read <a  href="persistent_curve_parameter_container.TPersistentCurveParameterContainer.html#GetType">GetType</a> write <a  href="persistent_curve_parameter_container.TPersistentCurveParameterContainer.html#SetType">SetType</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a  href="persistent_curve_parameter_container.TPersistentCurveParameterContainer.html#Value_">Value_</a></b>: string read <a  href="persistent_curve_parameter_container.TPersistentCurveParameterContainer.html#GetValue">GetValue</a> write <a  href="persistent_curve_parameter_container.TPersistentCurveParameterContainer.html#SetValue">SetValue</a>;</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Fields</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="FSpecialCurveParameter"></span><code><b>FSpecialCurveParameter</b>: <a  href="special_curve_parameter.TSpecialCurveParameter.html">TSpecialCurveParameter</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<h3 class="detail">Methods</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Destroy"></span><code>destructor <b>Destroy</b>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="GetName"></span><code>function <b>GetName</b>: string;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="GetType"></span><code>function <b>GetType</b>: <a  href="special_curve_parameter.html#TParameterType">TParameterType</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="GetValue"></span><code>function <b>GetValue</b>: string;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="SetName"></span><code>procedure <b>SetName</b>(AName: string);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="SetType"></span><code>procedure <b>SetType</b>(AType: <a  href="special_curve_parameter.html#TParameterType">TParameterType</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="private.gif" alt="Private" title="Private"></a></td>
+<td class="itemcode"><span id="SetValue"></span><code>procedure <b>SetValue</b>(AValue: string);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<h3 class="detail">Properties</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><span id="Name"></span><code>property <b>Name</b>: string read <a  href="persistent_curve_parameter_container.TPersistentCurveParameterContainer.html#GetName">GetName</a> write <a  href="persistent_curve_parameter_container.TPersistentCurveParameterContainer.html#SetName">SetName</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Published for XML-serialization.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Parameter"></span><code>property <b>Parameter</b>: <a  href="special_curve_parameter.TSpecialCurveParameter.html">TSpecialCurveParameter</a>
+            read <a  href="persistent_curve_parameter_container.TPersistentCurveParameterContainer.html#FSpecialCurveParameter">FSpecialCurveParameter</a> write <a  href="persistent_curve_parameter_container.TPersistentCurveParameterContainer.html#FSpecialCurveParameter">FSpecialCurveParameter</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><span id="Type_"></span><code>property <b>Type_</b>: <a  href="special_curve_parameter.html#TParameterType">TParameterType</a> read <a  href="persistent_curve_parameter_container.TPersistentCurveParameterContainer.html#GetType">GetType</a> write <a  href="persistent_curve_parameter_container.TPersistentCurveParameterContainer.html#SetType">SetType</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><span id="Value_"></span><code>property <b>Value_</b>: string read <a  href="persistent_curve_parameter_container.TPersistentCurveParameterContainer.html#GetValue">GetValue</a> write <a  href="persistent_curve_parameter_container.TPersistentCurveParameterContainer.html#SetValue">SetValue</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+String because some problem with XML-serialization as Double.</p>
+</td></tr>
+</table>
+<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+</span>
+</td></tr></table></body></html>

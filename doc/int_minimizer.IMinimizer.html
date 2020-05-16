@@ -29,19 +29,19 @@ Defines interface of data provider for optimization algorithm.</p>
 <table class="summary wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="int_minimizer.IMinimizer.html#EndOfCycle">EndOfCycle</a></b>: Boolean;</code></td>
+<td class="itemcode"><code>function <b><a  href="int_minimizer.IMinimizer.html#EndOfCycle">EndOfCycle</a></b>: boolean;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="int_minimizer.IMinimizer.html#Func">Func</a></b>: Double;</code></td>
+<td class="itemcode"><code>function <b><a  href="int_minimizer.IMinimizer.html#Func">Func</a></b>: double;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="int_minimizer.IMinimizer.html#GetParam">GetParam</a></b>: Double;</code></td>
+<td class="itemcode"><code>function <b><a  href="int_minimizer.IMinimizer.html#GetParam">GetParam</a></b>: double;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="int_minimizer.IMinimizer.html#GetStep">GetStep</a></b>: Double;</code></td>
+<td class="itemcode"><code>function <b><a  href="int_minimizer.IMinimizer.html#GetStep">GetStep</a></b>: double;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
@@ -57,11 +57,11 @@ Defines interface of data provider for optimization algorithm.</p>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="int_minimizer.IMinimizer.html#SetParam">SetParam</a></b>(NewParamValue: Double);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="int_minimizer.IMinimizer.html#SetParam">SetParam</a></b>(NewParamValue: double);</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="int_minimizer.IMinimizer.html#SetStep">SetStep</a></b>(NewStepValue: Double);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="int_minimizer.IMinimizer.html#SetStep">SetStep</a></b>(NewStepValue: double);</code></td>
 </tr>
 </table>
 <h2 class="description">Description</h2>
@@ -69,7 +69,7 @@ Defines interface of data provider for optimization algorithm.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="EndOfCycle"></span><code>function <b>EndOfCycle</b>: Boolean;</code></td>
+<td class="itemcode"><span id="EndOfCycle"></span><code>function <b>EndOfCycle</b>: boolean;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
@@ -79,7 +79,7 @@ Returns flag indicating end of calculation cycle (when the last parameter has be
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="Func"></span><code>function <b>Func</b>: Double;</code></td>
+<td class="itemcode"><span id="Func"></span><code>function <b>Func</b>: double;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
@@ -89,7 +89,7 @@ Returns result of function computation.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetParam"></span><code>function <b>GetParam</b>: Double;</code></td>
+<td class="itemcode"><span id="GetParam"></span><code>function <b>GetParam</b>: double;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
@@ -99,7 +99,7 @@ Returns value of selected parameter.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetStep"></span><code>function <b>GetStep</b>: Double;</code></td>
+<td class="itemcode"><span id="GetStep"></span><code>function <b>GetStep</b>: double;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
@@ -123,7 +123,7 @@ Calculates function value.</p>
 </tr>
 <tr><td colspan="2">
 <p>
-Selects the first <a class="normal" href="curve_points_set.html#Variable">variable</a> parameter.</p>
+Selects the first <a class="normal" href="special_curve_parameter.html#Variable">variable</a> parameter.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -133,13 +133,13 @@ Selects the first <a class="normal" href="curve_points_set.html#Variable">variab
 </tr>
 <tr><td colspan="2">
 <p>
-Selects next <a class="normal" href="curve_points_set.html#Variable">variable</a> parameter. Changes internal state of provider in such way to allow other methods to have access to parameter data.</p>
+Selects next <a class="normal" href="special_curve_parameter.html#Variable">variable</a> parameter. Changes internal state of provider in such way to allow other methods to have access to parameter data.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="SetParam"></span><code>procedure <b>SetParam</b>(NewParamValue: Double);</code></td>
+<td class="itemcode"><span id="SetParam"></span><code>procedure <b>SetParam</b>(NewParamValue: double);</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
@@ -149,7 +149,7 @@ Sets value of selected parameter.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="SetStep"></span><code>procedure <b>SetStep</b>(NewStepValue: Double);</code></td>
+<td class="itemcode"><span id="SetStep"></span><code>procedure <b>SetStep</b>(NewStepValue: double);</code></td>
 </tr>
 <tr><td colspan="2">
 <p>

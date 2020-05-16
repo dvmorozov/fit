@@ -12,7 +12,7 @@
 <h2>Fit</h2><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p><p><a href="GVClasses.png" class="navigation">Classes hierarchy graph</a></p></td><td class="content">
 <h1 class="unit">Unit int_fit_service</h1>
 <div class="sections">
-<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Uses">Uses</a></div><div class="one_section"><a class="section" href="#PasDoc-Classes">Classes, Interfaces, Objects and Records</a></div><div class="one_section">Functions and Procedures</div><div class="one_section">Types</div><div class="one_section">Constants</div><div class="one_section">Variables</div></div>
+<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Uses">Uses</a></div><div class="one_section"><a class="section" href="#PasDoc-Classes">Classes, Interfaces, Objects and Records</a></div><div class="one_section">Functions and Procedures</div><div class="one_section"><a class="section" href="#PasDoc-Types">Types</a></div><div class="one_section">Constants</div><div class="one_section">Variables</div></div>
 <span id="PasDoc-Description"></span><h2 class="description">Description</h2>
 <p>
 Contains base interface of communication from client to server.</p>
@@ -23,7 +23,7 @@ This software is distributed under GPL in the hope that it will be useful, but W
 
 <p></p>
 <span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
-<ul class="useslist"><li>Classes</li><li><a  href="common_types.html">common_types</a></li><li><a  href="curve_points_set.html">curve_points_set</a></li><li><a  href="int_points_set.html">int_points_set</a></li><li><a  href="mscr_specimen_list.html">mscr_specimen_list</a></li><li><a  href="points_set.html">points_set</a></li><li><a  href="self_copied_component.html">self_copied_component</a></li><li>SysUtils</li><li><a  href="title_points_set.html">title_points_set</a></li></ul><h2 class="overview">Overview</h2>
+<ul class="useslist"><li>Classes</li><li><a  href="mscr_specimen_list.html">mscr_specimen_list</a></li><li><a  href="named_points_set.html">named_points_set</a></li><li><a  href="persistent_curve_parameters.html">persistent_curve_parameters</a></li><li><a  href="points_set.html">points_set</a></li><li><a  href="self_copied_component.html">self_copied_component</a></li><li>SysUtils</li><li><a  href="title_points_set.html">title_points_set</a></li></ul><h2 class="overview">Overview</h2>
 <span id="PasDoc-Classes"></span><h3 class="cio">Classes, Interfaces, Objects and Records</h3>
 <table class="classestable wide_list">
 <tr class="listheader">
@@ -39,11 +39,43 @@ This software is distributed under GPL in the hope that it will be useful, but W
 <td class="itemdesc">Defines base interface of communication from client to server.</td>
 </tr>
 </table>
+<span id="PasDoc-Types"></span><h3 class="summary">Types</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><b><a  href="int_fit_service.html#TFitServerState">TFitServerState</a></b> = (...);</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Types</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="TFitServerState"></span><code><b>TFitServerState</b> = (...);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Server states. Sequence of states is designated by numbers.</p>
+<h6 class="description_section">Values</h6>
+<ul>
+<li>
+<span id="ProfileWaiting">ProfileWaiting</span>: Waiting of loading profile data.</li>
+<li>
+<span id="BackNotRemoved">BackNotRemoved</span>: Background isn't removed yet after last profile loading. State must not change on loading background points.</li>
+<li>
+<span id="AsyncOperation">AsyncOperation</span>: Computation is performed.</li>
+<li>
+<span id="ReadyForAutoFit">ReadyForAutoFit</span>: States below should be used only to inform user - optimization should be allowed in any case when background removed (ready to fit parameters in automatic mode).</li>
+<li>
+<span id="ReadyForFit">ReadyForFit</span>: Ready to fit with given user constraints.</li>
+<li>
+<span id="Finished">Finished</span>: Computation has been <code>finished</code>, allows further restarting.</li>
+</ul>
+</td></tr>
+</table>
 <h2 class="authors">Author</h2>
 <ul class="authors">
 <li>Dmitry Morozov <a  href="mailto:dvmorozov@hotmail.com">dvmorozov@hotmail.com</a>,
-LinkedIn https://ru.linkedin.com/pub/dmitry-morozov/59/90a/794,
-Facebook https://www.facebook.com/profile.php?id=100004082021870</li>
+LinkedIn: https://www.linkedin.com/in/dmitry-morozov-79490a59/
+Facebook: https://www.facebook.com/dmitry.v.morozov</li>
 </ul>
 <hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
 </span>

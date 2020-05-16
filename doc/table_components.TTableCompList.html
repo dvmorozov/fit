@@ -23,73 +23,73 @@
 <p>
 Component list which can display component properties in grid. Class implements functions of saving/reading table properties, but does not bind grid positions with list items. If number of columns returned by <a class="normal" href="table_components.TTableCompList.html#GetColCount">GetColCount</a> is changed then corresponding changes in <a class="normal" href="table_components.TTableCompList.html#SetCaption">SetCaption</a>, <a class="normal" href="table_components.TTableCompList.html#SetColOptions">SetColOptions</a>, <a class="normal" href="table_components.TTableCompList.html#SetColFunc">SetColFunc</a>, SetRowContents, GetRowContents should be done.</p>
 <span id="PasDoc-Hierarchy"></span><h2 class="hierarchy">Hierarchy</h2>
-<ul class="hierarchy"><li class="ancestor">TSelfCheckedComponentList</li>
+<ul class="hierarchy"><li class="ancestor">TComponentList</li>
 <li class="ancestor"><a class="normal" href="self_copied_component.TSelfCopiedCompList.html">TSelfCopiedCompList</a></li>
 <li class="thisitem">TTableCompList</li></ul><h2 class="overview">Overview</h2>
 <span id="PasDoc-Fields"></span><h3 class="summary">Fields</h3>
 <table class="summary wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code><b><a  href="table_components.TTableCompList.html#AreColWidthsReady">AreColWidthsReady</a></b>: Boolean;</code></td>
+<td class="itemcode"><code><b><a  href="table_components.TTableCompList.html#FAreColWidthsReady">FAreColWidthsReady</a></b>:  boolean;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code><b><a  href="table_components.TTableCompList.html#AreRowHeightsReady">AreRowHeightsReady</a></b>: Boolean;</code></td>
+<td class="itemcode"><code><b><a  href="table_components.TTableCompList.html#FAreRowHeightsReady">FAreRowHeightsReady</a></b>: boolean;</code></td>
 </tr>
 <tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code><b><a  href="table_components.TTableCompList.html#Destroying">Destroying</a></b>: Boolean;</code></td>
-</tr>
-<tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code><b><a  href="table_components.TTableCompList.html#FCaption">FCaption</a></b>: string;</code></td>
 </tr>
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code><b><a  href="table_components.TTableCompList.html#FSavedCol">FSavedCol</a></b>: LongInt;</code></td>
-</tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code><b><a  href="table_components.TTableCompList.html#FSavedLeftCol">FSavedLeftCol</a></b>: LongInt;</code></td>
+<td class="itemcode"><code><b><a  href="table_components.TTableCompList.html#FDestroying">FDestroying</a></b>: boolean;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code><b><a  href="table_components.TTableCompList.html#FSavedRow">FSavedRow</a></b>: LongInt;</code></td>
+<td class="itemcode"><code><b><a  href="table_components.TTableCompList.html#FHeightsSaved">FHeightsSaved</a></b>: boolean;</code></td>
 </tr>
 <tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="table_components.TTableCompList.html#FSavedCol">FSavedCol</a></b>: longint;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="table_components.TTableCompList.html#FSavedColWidths">FSavedColWidths</a></b>:     TLongArray;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="table_components.TTableCompList.html#FSavedLeftCol">FSavedLeftCol</a></b>: longint;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="table_components.TTableCompList.html#FSavedRow">FSavedRow</a></b>: longint;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="table_components.TTableCompList.html#FSavedRowHeights">FSavedRowHeights</a></b>:    TLongArray;</code></td>
+</tr>
+<tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><code><b><a  href="table_components.TTableCompList.html#FSavedSelection">FSavedSelection</a></b>: TGridRect;</code></td>
 </tr>
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code><b><a  href="table_components.TTableCompList.html#FSavedTopRow">FSavedTopRow</a></b>: LongInt;</code></td>
-</tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code><b><a  href="table_components.TTableCompList.html#HeightsSaved">HeightsSaved</a></b>: Boolean;</code></td>
+<td class="itemcode"><code><b><a  href="table_components.TTableCompList.html#FSavedTopRow">FSavedTopRow</a></b>: longint;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code><b><a  href="table_components.TTableCompList.html#SavedColWidths">SavedColWidths</a></b>: <a  href="Tools.html#TLongArray">TLongArray</a>;</code></td>
+<td class="itemcode"><code><b><a  href="table_components.TTableCompList.html#FSettingsSaved">FSettingsSaved</a></b>: boolean;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code><b><a  href="table_components.TTableCompList.html#SavedRowHeights">SavedRowHeights</a></b>: <a  href="Tools.html#TLongArray">TLongArray</a>;</code></td>
-</tr>
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code><b><a  href="table_components.TTableCompList.html#SettingsSaved">SettingsSaved</a></b>: Boolean;</code></td>
-</tr>
-<tr class="list2">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code><b><a  href="table_components.TTableCompList.html#WidthsSaved">WidthsSaved</a></b>: Boolean;</code></td>
+<td class="itemcode"><code><b><a  href="table_components.TTableCompList.html#FWidthsSaved">FWidthsSaved</a></b>: boolean;</code></td>
 </tr>
 </table>
 <span id="PasDoc-Methods"></span><h3 class="summary">Methods</h3>
 <table class="summary wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>constructor <b><a  href="table_components.TTableCompList.html#Create">Create</a></b>(AOwner: TComponent); override;</code></td>
+<td class="itemcode"><code>constructor <b><a  href="table_components.TTableCompList.html#Create">Create</a></b>;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
@@ -97,87 +97,87 @@ Component list which can display component properties in grid. Class implements 
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#AutoHeights">AutoHeights</a></b>: Boolean;</code></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#AutoHeights">AutoHeights</a></b>: boolean;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#AutoWidths">AutoWidths</a></b>: Boolean;</code></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#AutoWidths">AutoWidths</a></b>: boolean;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#GetCellColor">GetCellColor</a></b>( const ACol, ARow: LongInt; var Color: TColor): Boolean; virtual;</code></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#GetCellColor">GetCellColor</a></b>( const ACol, ARow: longint; var Color: TColor): boolean; virtual;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#GetCellEditMask">GetCellEditMask</a></b>( const ACol, ARow: LongInt): string; virtual;</code></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#GetCellEditMask">GetCellEditMask</a></b>(const ACol, ARow: longint): string; virtual;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#GetCellEnabledCharSet">GetCellEnabledCharSet</a></b>( const ACol, ARow: LongInt): <a  href="Tools.html#TCharSet">TCharSet</a>; virtual; abstract;</code></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#GetCellEnabledCharSet">GetCellEnabledCharSet</a></b>(const ACol, ARow: longint): TCharSet; virtual; abstract;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#GetCol">GetCol</a></b>: LongInt;</code></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#GetCol">GetCol</a></b>: longint;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#GetColCount">GetColCount</a></b>: LongInt; virtual;</code></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#GetColCount">GetColCount</a></b>: longint; virtual;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#GetColNumFixed">GetColNumFixed</a></b>: Boolean; virtual;</code></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#GetColNumFixed">GetColNumFixed</a></b>: boolean; virtual;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#GetColWidth">GetColWidth</a></b>(const Col: LongInt): LongInt;</code></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#GetColWidth">GetColWidth</a></b>(const Col: longint): longint;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#GetColWidthByDefault">GetColWidthByDefault</a></b>( const Index: LongInt): LongInt; virtual;</code></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#GetColWidthByDefault">GetColWidthByDefault</a></b>(const Index: longint): longint; virtual;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#GetDataFromGrid">GetDataFromGrid</a></b>(Grid: TStringGrid): Boolean; virtual; abstract;</code></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#GetDataFromGrid">GetDataFromGrid</a></b>(Grid: TStringGrid): boolean; virtual; abstract;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#GetFixedCols">GetFixedCols</a></b>: LongInt; virtual;</code></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#GetFixedCols">GetFixedCols</a></b>: longint; virtual;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#GetFixedRows">GetFixedRows</a></b>: LongInt; virtual;</code></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#GetFixedRows">GetFixedRows</a></b>: longint; virtual;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#GetInfoCols">GetInfoCols</a></b>: LongInt; virtual; abstract;</code></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#GetInfoCols">GetInfoCols</a></b>: longint; virtual; abstract;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#GetInfoRows">GetInfoRows</a></b>: LongInt; virtual; abstract;</code></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#GetInfoRows">GetInfoRows</a></b>: longint; virtual; abstract;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#GetLeftCol">GetLeftCol</a></b>: LongInt;</code></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#GetLeftCol">GetLeftCol</a></b>: longint;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#GetRow">GetRow</a></b>: LongInt;</code></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#GetRow">GetRow</a></b>: longint;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#GetRowCount">GetRowCount</a></b>: LongInt; virtual;</code></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#GetRowCount">GetRowCount</a></b>: longint; virtual;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#GetRowHeight">GetRowHeight</a></b>(const Row: LongInt): LongInt;</code></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#GetRowHeight">GetRowHeight</a></b>(const Row: longint): longint;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#GetRowHeightByDefault">GetRowHeightByDefault</a></b>( const Index: LongInt): LongInt; virtual;</code></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#GetRowHeightByDefault">GetRowHeightByDefault</a></b>(const Index: longint): longint; virtual;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#GetRowNumFixed">GetRowNumFixed</a></b>: Boolean; virtual;</code></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#GetRowNumFixed">GetRowNumFixed</a></b>: boolean; virtual;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
@@ -185,59 +185,59 @@ Component list which can display component properties in grid. Class implements 
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#GetTopRow">GetTopRow</a></b>: LongInt;</code></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#GetTopRow">GetTopRow</a></b>: longint;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#IsCellDisabled">IsCellDisabled</a></b>( const ACol, ARow: LongInt): Boolean; virtual;</code></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#IsCellDisabled">IsCellDisabled</a></b>( const ACol, ARow: longint): boolean; virtual;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#IsDataSourceEmpty">IsDataSourceEmpty</a></b>: Boolean; virtual; abstract;</code></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#IsDataSourceEmpty">IsDataSourceEmpty</a></b>: boolean; virtual; abstract;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#IsDataValid">IsDataValid</a></b>(const ACol, ARow: LongInt; const AString: string): Boolean; virtual; abstract;</code></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#IsDataValid">IsDataValid</a></b>(const ACol, ARow: longint; const AString: string): boolean; virtual; abstract;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#MayIDoAddColumn">MayIDoAddColumn</a></b>: Boolean; virtual;</code></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#MayIDoAddColumn">MayIDoAddColumn</a></b>: boolean; virtual;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#MayIDoAddRow">MayIDoAddRow</a></b>: Boolean; virtual;</code></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#MayIDoAddRow">MayIDoAddRow</a></b>: boolean; virtual;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#MayIDoClearAllCells">MayIDoClearAllCells</a></b>: Boolean; virtual;</code></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#MayIDoClearAllCells">MayIDoClearAllCells</a></b>: boolean; virtual;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#MayIDoClearSelectedArea">MayIDoClearSelectedArea</a></b>: Boolean; virtual;</code></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#MayIDoClearSelectedArea">MayIDoClearSelectedArea</a></b>: boolean; virtual;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#MayIDoDeleteAllData">MayIDoDeleteAllData</a></b>: Boolean; virtual;</code></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#MayIDoDeleteAllData">MayIDoDeleteAllData</a></b>: boolean; virtual;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#MayIDoDeleteColumns">MayIDoDeleteColumns</a></b>(StartCol, ColsCount: LongInt): Boolean; virtual;</code></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#MayIDoDeleteColumns">MayIDoDeleteColumns</a></b>(StartCol, ColsCount: longint): boolean; virtual;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#MayIDoDeleteRows">MayIDoDeleteRows</a></b>(StartRow, RowsCount: LongInt): Boolean; virtual;</code></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#MayIDoDeleteRows">MayIDoDeleteRows</a></b>(StartRow, RowsCount: longint): boolean; virtual;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#MayIDoInsertColumns">MayIDoInsertColumns</a></b>(StartCol, ColsCount: LongInt): Boolean; virtual;</code></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#MayIDoInsertColumns">MayIDoInsertColumns</a></b>(StartCol, ColsCount: longint): boolean; virtual;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#MayIDoInsertRows">MayIDoInsertRows</a></b>(StartRow, RowsCount: LongInt): Boolean; virtual;</code></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#MayIDoInsertRows">MayIDoInsertRows</a></b>(StartRow, RowsCount: longint): boolean; virtual;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#ValueToString">ValueToString</a></b>(const ACol, ARow: LongInt ): string; virtual; abstract;</code></td>
+<td class="itemcode"><code>function <b><a  href="table_components.TTableCompList.html#ValueToString">ValueToString</a></b>(const ACol, ARow: longint): string; virtual; abstract;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
@@ -253,7 +253,7 @@ Component list which can display component properties in grid. Class implements 
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="table_components.TTableCompList.html#BeforeStringToValue">BeforeStringToValue</a></b>(const ACol, ARow: LongInt; const AString: string); virtual; abstract;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="table_components.TTableCompList.html#BeforeStringToValue">BeforeStringToValue</a></b>(const ACol, ARow: longint; const AString: string); virtual; abstract;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
@@ -261,11 +261,11 @@ Component list which can display component properties in grid. Class implements 
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="table_components.TTableCompList.html#ColumnsDeleted">ColumnsDeleted</a></b>( const StartCol, ColsCount: LongInt); virtual;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="table_components.TTableCompList.html#ColumnsDeleted">ColumnsDeleted</a></b>(const StartCol, ColsCount: longint); virtual;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="table_components.TTableCompList.html#ColumnsInserted">ColumnsInserted</a></b>( const StartCol, ColsCount: LongInt); virtual;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="table_components.TTableCompList.html#ColumnsInserted">ColumnsInserted</a></b>(const StartCol, ColsCount: longint); virtual;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
@@ -277,11 +277,11 @@ Component list which can display component properties in grid. Class implements 
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="table_components.TTableCompList.html#DeleteColWidthItem">DeleteColWidthItem</a></b>(const Index: LongInt);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="table_components.TTableCompList.html#DeleteColWidthItem">DeleteColWidthItem</a></b>(const Index: longint);</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="table_components.TTableCompList.html#DeleteRowHeightItem">DeleteRowHeightItem</a></b>(const Index: LongInt);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="table_components.TTableCompList.html#DeleteRowHeightItem">DeleteRowHeightItem</a></b>(const Index: longint);</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
@@ -309,11 +309,11 @@ Component list which can display component properties in grid. Class implements 
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="table_components.TTableCompList.html#InsertColWidthItem">InsertColWidthItem</a></b>(const Index: LongInt);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="table_components.TTableCompList.html#InsertColWidthItem">InsertColWidthItem</a></b>(const Index: longint);</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="table_components.TTableCompList.html#InsertRowHeightItem">InsertRowHeightItem</a></b>(const Index: LongInt);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="table_components.TTableCompList.html#InsertRowHeightItem">InsertRowHeightItem</a></b>(const Index: longint);</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
@@ -321,31 +321,31 @@ Component list which can display component properties in grid. Class implements 
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="table_components.TTableCompList.html#RowsDeleted">RowsDeleted</a></b>( const StartRow, RowsCount: LongInt); virtual;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="table_components.TTableCompList.html#RowsDeleted">RowsDeleted</a></b>(const StartRow, RowsCount: longint); virtual;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="table_components.TTableCompList.html#RowsInserted">RowsInserted</a></b>( const StartRow, RowsCount: LongInt); virtual;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="table_components.TTableCompList.html#RowsInserted">RowsInserted</a></b>(const StartRow, RowsCount: longint); virtual;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="table_components.TTableCompList.html#SaveCol">SaveCol</a></b>(const Col: LongInt);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="table_components.TTableCompList.html#SaveCol">SaveCol</a></b>(const Col: longint);</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="table_components.TTableCompList.html#SaveColWidth">SaveColWidth</a></b>(const Col, Width: LongInt);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="table_components.TTableCompList.html#SaveColWidth">SaveColWidth</a></b>(const Col, Width: longint);</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="table_components.TTableCompList.html#SaveLeftCol">SaveLeftCol</a></b>(const LeftCol: LongInt);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="table_components.TTableCompList.html#SaveLeftCol">SaveLeftCol</a></b>(const LeftCol: longint);</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="table_components.TTableCompList.html#SaveRow">SaveRow</a></b>(const Row: LongInt);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="table_components.TTableCompList.html#SaveRow">SaveRow</a></b>(const Row: longint);</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="table_components.TTableCompList.html#SaveRowHeight">SaveRowHeight</a></b>(const Row, Height: LongInt);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="table_components.TTableCompList.html#SaveRowHeight">SaveRowHeight</a></b>(const Row, Height: longint);</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
@@ -353,7 +353,7 @@ Component list which can display component properties in grid. Class implements 
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="table_components.TTableCompList.html#SaveTopRow">SaveTopRow</a></b>(const TopRow: LongInt);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="table_components.TTableCompList.html#SaveTopRow">SaveTopRow</a></b>(const TopRow: longint);</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
@@ -381,52 +381,46 @@ Component list which can display component properties in grid. Class implements 
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="table_components.TTableCompList.html#SetValueByDefault">SetValueByDefault</a></b>(const ACol, ARow: LongInt); virtual; abstract;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="table_components.TTableCompList.html#SetValueByDefault">SetValueByDefault</a></b>(const ACol, ARow: longint); virtual; abstract;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="table_components.TTableCompList.html#StringToValue">StringToValue</a></b>(const ACol, ARow: LongInt; const AString: string ); virtual; abstract;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="table_components.TTableCompList.html#StringToValue">StringToValue</a></b>(const ACol, ARow: longint; const AString: string); virtual; abstract;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="table_components.TTableCompList.html#CheckColIndex">CheckColIndex</a></b>(const Index: LongInt);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="table_components.TTableCompList.html#CheckColIndex">CheckColIndex</a></b>(const Index: longint);</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code>procedure <b><a  href="table_components.TTableCompList.html#CheckRowIndex">CheckRowIndex</a></b>(const Index: LongInt);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="table_components.TTableCompList.html#CheckRowIndex">CheckRowIndex</a></b>(const Index: longint);</code></td>
 </tr>
 </table>
 <span id="PasDoc-Properties"></span><h3 class="summary">Properties</h3>
 <table class="summary wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>property <b><a  href="table_components.TTableCompList.html#Caption">Caption</a></b>: string
-            read <a  href="table_components.TTableCompList.html#FCaption">FCaption</a>               write <a  href="table_components.TTableCompList.html#FCaption">FCaption</a>;</code></td>
+<td class="itemcode"><code>property <b><a  href="table_components.TTableCompList.html#Caption">Caption</a></b>: string read <a  href="table_components.TTableCompList.html#FCaption">FCaption</a> write <a  href="table_components.TTableCompList.html#FCaption">FCaption</a>;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>property <b><a  href="table_components.TTableCompList.html#SavedCol">SavedCol</a></b>: LongInt
-            read <a  href="table_components.TTableCompList.html#GetCol">GetCol</a>                 write <a  href="table_components.TTableCompList.html#SaveCol">SaveCol</a>;</code></td>
+<td class="itemcode"><code>property <b><a  href="table_components.TTableCompList.html#SavedCol">SavedCol</a></b>: longint read <a  href="table_components.TTableCompList.html#GetCol">GetCol</a> write <a  href="table_components.TTableCompList.html#SaveCol">SaveCol</a>;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>property <b><a  href="table_components.TTableCompList.html#SavedLeftCol">SavedLeftCol</a></b>: LongInt
-            read <a  href="table_components.TTableCompList.html#GetLeftCol">GetLeftCol</a>             write <a  href="table_components.TTableCompList.html#SaveLeftCol">SaveLeftCol</a>;</code></td>
+<td class="itemcode"><code>property <b><a  href="table_components.TTableCompList.html#SavedLeftCol">SavedLeftCol</a></b>: longint read <a  href="table_components.TTableCompList.html#GetLeftCol">GetLeftCol</a> write <a  href="table_components.TTableCompList.html#SaveLeftCol">SaveLeftCol</a>;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>property <b><a  href="table_components.TTableCompList.html#SavedRow">SavedRow</a></b>: LongInt
-            read <a  href="table_components.TTableCompList.html#GetRow">GetRow</a>                 write <a  href="table_components.TTableCompList.html#SaveRow">SaveRow</a>;</code></td>
+<td class="itemcode"><code>property <b><a  href="table_components.TTableCompList.html#SavedRow">SavedRow</a></b>: longint read <a  href="table_components.TTableCompList.html#GetRow">GetRow</a> write <a  href="table_components.TTableCompList.html#SaveRow">SaveRow</a>;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>property <b><a  href="table_components.TTableCompList.html#SavedSelection">SavedSelection</a></b>: TGridRect
-            read <a  href="table_components.TTableCompList.html#GetSelection">GetSelection</a>           write <a  href="table_components.TTableCompList.html#SaveSelection">SaveSelection</a>;</code></td>
+<td class="itemcode"><code>property <b><a  href="table_components.TTableCompList.html#SavedSelection">SavedSelection</a></b>: TGridRect read <a  href="table_components.TTableCompList.html#GetSelection">GetSelection</a> write <a  href="table_components.TTableCompList.html#SaveSelection">SaveSelection</a>;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>property <b><a  href="table_components.TTableCompList.html#SavedTopRow">SavedTopRow</a></b>: LongInt
-            read <a  href="table_components.TTableCompList.html#GetTopRow">GetTopRow</a>              write <a  href="table_components.TTableCompList.html#SaveTopRow">SaveTopRow</a>;</code></td>
+<td class="itemcode"><code>property <b><a  href="table_components.TTableCompList.html#SavedTopRow">SavedTopRow</a></b>: longint read <a  href="table_components.TTableCompList.html#GetTopRow">GetTopRow</a> write <a  href="table_components.TTableCompList.html#SaveTopRow">SaveTopRow</a>;</code></td>
 </tr>
 </table>
 <h2 class="description">Description</h2>
@@ -434,7 +428,7 @@ Component list which can display component properties in grid. Class implements 
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="AreColWidthsReady"></span><code><b>AreColWidthsReady</b>: Boolean;</code></td>
+<td class="itemcode"><span id="FAreColWidthsReady"></span><code><b>FAreColWidthsReady</b>:  boolean;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
@@ -444,20 +438,10 @@ Indicates that array is already initialized.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="AreRowHeightsReady"></span><code><b>AreRowHeightsReady</b>: Boolean;</code></td>
+<td class="itemcode"><span id="FAreRowHeightsReady"></span><code><b>FAreRowHeightsReady</b>: boolean;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="Destroying"></span><code><b>Destroying</b>: Boolean;</code></td>
-</tr>
-<tr><td colspan="2">
-<p>
-Indicates that the object is destroyed.</p>
-</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -470,7 +454,25 @@ Indicates that the object is destroyed.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="FSavedCol"></span><code><b>FSavedCol</b>: LongInt;</code></td>
+<td class="itemcode"><span id="FDestroying"></span><code><b>FDestroying</b>: boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Indicates that the object is destroyed.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FHeightsSaved"></span><code><b>FHeightsSaved</b>: boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FSavedCol"></span><code><b>FSavedCol</b>: longint;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
@@ -480,7 +482,17 @@ Saved table properties.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="FSavedLeftCol"></span><code><b>FSavedLeftCol</b>: LongInt;</code></td>
+<td class="itemcode"><span id="FSavedColWidths"></span><code><b>FSavedColWidths</b>:     TLongArray;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Arrays are deleted from the destructor. Therefore deleting array items should be disabled during deleting the whole object.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FSavedLeftCol"></span><code><b>FSavedLeftCol</b>: longint;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
@@ -490,12 +502,20 @@ Saved table properties.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="FSavedRow"></span><code><b>FSavedRow</b>: LongInt;</code></td>
+<td class="itemcode"><span id="FSavedRow"></span><code><b>FSavedRow</b>: longint;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
 Saved table properties.</p>
 </td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FSavedRowHeights"></span><code><b>FSavedRowHeights</b>:    TLongArray;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -508,7 +528,7 @@ Saved table properties.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="FSavedTopRow"></span><code><b>FSavedTopRow</b>: LongInt;</code></td>
+<td class="itemcode"><span id="FSavedTopRow"></span><code><b>FSavedTopRow</b>: longint;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
@@ -518,33 +538,7 @@ Saved table properties.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="HeightsSaved"></span><code><b>HeightsSaved</b>: Boolean;</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="SavedColWidths"></span><code><b>SavedColWidths</b>: <a  href="Tools.html#TLongArray">TLongArray</a>;</code></td>
-</tr>
-<tr><td colspan="2">
-<p>
-Arrays are deleted from the destructor. Therefore deleting array items should be disabled during deleting the whole object.</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="SavedRowHeights"></span><code><b>SavedRowHeights</b>: <a  href="Tools.html#TLongArray">TLongArray</a>;</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="SettingsSaved"></span><code><b>SettingsSaved</b>: Boolean;</code></td>
+<td class="itemcode"><span id="FSettingsSaved"></span><code><b>FSettingsSaved</b>: boolean;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
@@ -554,7 +548,7 @@ Indicates that grid parameters were saved. It is set up in <a class="normal" hre
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="WidthsSaved"></span><code><b>WidthsSaved</b>: Boolean;</code></td>
+<td class="itemcode"><span id="FWidthsSaved"></span><code><b>FWidthsSaved</b>: boolean;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -563,7 +557,7 @@ Indicates that grid parameters were saved. It is set up in <a class="normal" hre
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="Create"></span><code>constructor <b>Create</b>(AOwner: TComponent); override;</code></td>
+<td class="itemcode"><span id="Create"></span><code>constructor <b>Create</b>;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -579,7 +573,7 @@ Indicates that grid parameters were saved. It is set up in <a class="normal" hre
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="AutoHeights"></span><code>function <b>AutoHeights</b>: Boolean;</code></td>
+<td class="itemcode"><span id="AutoHeights"></span><code>function <b>AutoHeights</b>: boolean;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -587,7 +581,7 @@ Indicates that grid parameters were saved. It is set up in <a class="normal" hre
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="AutoWidths"></span><code>function <b>AutoWidths</b>: Boolean;</code></td>
+<td class="itemcode"><span id="AutoWidths"></span><code>function <b>AutoWidths</b>: boolean;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -595,7 +589,7 @@ Indicates that grid parameters were saved. It is set up in <a class="normal" hre
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetCellColor"></span><code>function <b>GetCellColor</b>( const ACol, ARow: LongInt; var Color: TColor): Boolean; virtual;</code></td>
+<td class="itemcode"><span id="GetCellColor"></span><code>function <b>GetCellColor</b>( const ACol, ARow: longint; var Color: TColor): boolean; virtual;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
@@ -605,7 +599,7 @@ Indicates that grid parameters were saved. It is set up in <a class="normal" hre
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetCellEditMask"></span><code>function <b>GetCellEditMask</b>( const ACol, ARow: LongInt): string; virtual;</code></td>
+<td class="itemcode"><span id="GetCellEditMask"></span><code>function <b>GetCellEditMask</b>(const ACol, ARow: longint): string; virtual;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
@@ -615,7 +609,7 @@ Returns default empty mask.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetCellEnabledCharSet"></span><code>function <b>GetCellEnabledCharSet</b>( const ACol, ARow: LongInt): <a  href="Tools.html#TCharSet">TCharSet</a>; virtual; abstract;</code></td>
+<td class="itemcode"><span id="GetCellEnabledCharSet"></span><code>function <b>GetCellEnabledCharSet</b>(const ACol, ARow: longint): TCharSet; virtual; abstract;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -623,7 +617,7 @@ Returns default empty mask.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetCol"></span><code>function <b>GetCol</b>: LongInt;</code></td>
+<td class="itemcode"><span id="GetCol"></span><code>function <b>GetCol</b>: longint;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -631,7 +625,7 @@ Returns default empty mask.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetColCount"></span><code>function <b>GetColCount</b>: LongInt; virtual;</code></td>
+<td class="itemcode"><span id="GetColCount"></span><code>function <b>GetColCount</b>: longint; virtual;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -639,7 +633,7 @@ Returns default empty mask.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetColNumFixed"></span><code>function <b>GetColNumFixed</b>: Boolean; virtual;</code></td>
+<td class="itemcode"><span id="GetColNumFixed"></span><code>function <b>GetColNumFixed</b>: boolean; virtual;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
@@ -649,7 +643,7 @@ Returns default empty mask.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetColWidth"></span><code>function <b>GetColWidth</b>(const Col: LongInt): LongInt;</code></td>
+<td class="itemcode"><span id="GetColWidth"></span><code>function <b>GetColWidth</b>(const Col: longint): longint;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
@@ -659,7 +653,7 @@ Returns default empty mask.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetColWidthByDefault"></span><code>function <b>GetColWidthByDefault</b>( const Index: LongInt): LongInt; virtual;</code></td>
+<td class="itemcode"><span id="GetColWidthByDefault"></span><code>function <b>GetColWidthByDefault</b>(const Index: longint): longint; virtual;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -667,7 +661,7 @@ Returns default empty mask.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetDataFromGrid"></span><code>function <b>GetDataFromGrid</b>(Grid: TStringGrid): Boolean; virtual; abstract;</code></td>
+<td class="itemcode"><span id="GetDataFromGrid"></span><code>function <b>GetDataFromGrid</b>(Grid: TStringGrid): boolean; virtual; abstract;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -675,7 +669,7 @@ Returns default empty mask.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetFixedCols"></span><code>function <b>GetFixedCols</b>: LongInt; virtual;</code></td>
+<td class="itemcode"><span id="GetFixedCols"></span><code>function <b>GetFixedCols</b>: longint; virtual;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
@@ -685,7 +679,7 @@ Returns default empty mask.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetFixedRows"></span><code>function <b>GetFixedRows</b>: LongInt; virtual;</code></td>
+<td class="itemcode"><span id="GetFixedRows"></span><code>function <b>GetFixedRows</b>: longint; virtual;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
@@ -695,7 +689,7 @@ Returns default empty mask.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetInfoCols"></span><code>function <b>GetInfoCols</b>: LongInt; virtual; abstract;</code></td>
+<td class="itemcode"><span id="GetInfoCols"></span><code>function <b>GetInfoCols</b>: longint; virtual; abstract;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
@@ -705,7 +699,7 @@ Returns default empty mask.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetInfoRows"></span><code>function <b>GetInfoRows</b>: LongInt; virtual; abstract;</code></td>
+<td class="itemcode"><span id="GetInfoRows"></span><code>function <b>GetInfoRows</b>: longint; virtual; abstract;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
@@ -715,7 +709,7 @@ Returns default empty mask.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetLeftCol"></span><code>function <b>GetLeftCol</b>: LongInt;</code></td>
+<td class="itemcode"><span id="GetLeftCol"></span><code>function <b>GetLeftCol</b>: longint;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -723,7 +717,7 @@ Returns default empty mask.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetRow"></span><code>function <b>GetRow</b>: LongInt;</code></td>
+<td class="itemcode"><span id="GetRow"></span><code>function <b>GetRow</b>: longint;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -731,7 +725,7 @@ Returns default empty mask.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetRowCount"></span><code>function <b>GetRowCount</b>: LongInt; virtual;</code></td>
+<td class="itemcode"><span id="GetRowCount"></span><code>function <b>GetRowCount</b>: longint; virtual;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
@@ -741,7 +735,7 @@ Returns default empty mask.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetRowHeight"></span><code>function <b>GetRowHeight</b>(const Row: LongInt): LongInt;</code></td>
+<td class="itemcode"><span id="GetRowHeight"></span><code>function <b>GetRowHeight</b>(const Row: longint): longint;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -749,7 +743,7 @@ Returns default empty mask.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetRowHeightByDefault"></span><code>function <b>GetRowHeightByDefault</b>( const Index: LongInt): LongInt; virtual;</code></td>
+<td class="itemcode"><span id="GetRowHeightByDefault"></span><code>function <b>GetRowHeightByDefault</b>(const Index: longint): longint; virtual;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -757,7 +751,7 @@ Returns default empty mask.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetRowNumFixed"></span><code>function <b>GetRowNumFixed</b>: Boolean; virtual;</code></td>
+<td class="itemcode"><span id="GetRowNumFixed"></span><code>function <b>GetRowNumFixed</b>: boolean; virtual;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
@@ -775,7 +769,7 @@ Returns default empty mask.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetTopRow"></span><code>function <b>GetTopRow</b>: LongInt;</code></td>
+<td class="itemcode"><span id="GetTopRow"></span><code>function <b>GetTopRow</b>: longint;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -783,7 +777,7 @@ Returns default empty mask.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="IsCellDisabled"></span><code>function <b>IsCellDisabled</b>( const ACol, ARow: LongInt): Boolean; virtual;</code></td>
+<td class="itemcode"><span id="IsCellDisabled"></span><code>function <b>IsCellDisabled</b>( const ACol, ARow: longint): boolean; virtual;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -791,19 +785,17 @@ Returns default empty mask.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="IsDataSourceEmpty"></span><code>function <b>IsDataSourceEmpty</b>: Boolean; virtual; abstract;</code></td>
+<td class="itemcode"><span id="IsDataSourceEmpty"></span><code>function <b>IsDataSourceEmpty</b>: boolean; virtual; abstract;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
-///////////////////////////////////////////////////////////////////// методы нового интерфейса
-
-<p>методы данного интерфейса подразумевают, что активной является сетка, а источник данных пассивный (это также отражается в названиях методов) /////////////////////////////////////////////////////////////////////</p>
+///////////////////////////////////////////////////////////////////// методы нового интерфейса методы данного интерфейса подразумевают, что активной является сетка, а источник данных пассивный (это также отражается в названиях методов) /////////////////////////////////////////////////////////////////////</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="IsDataValid"></span><code>function <b>IsDataValid</b>(const ACol, ARow: LongInt; const AString: string): Boolean; virtual; abstract;</code></td>
+<td class="itemcode"><span id="IsDataValid"></span><code>function <b>IsDataValid</b>(const ACol, ARow: longint; const AString: string): boolean; virtual; abstract;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -811,7 +803,7 @@ Returns default empty mask.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="MayIDoAddColumn"></span><code>function <b>MayIDoAddColumn</b>: Boolean; virtual;</code></td>
+<td class="itemcode"><span id="MayIDoAddColumn"></span><code>function <b>MayIDoAddColumn</b>: boolean; virtual;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -819,7 +811,7 @@ Returns default empty mask.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="MayIDoAddRow"></span><code>function <b>MayIDoAddRow</b>: Boolean; virtual;</code></td>
+<td class="itemcode"><span id="MayIDoAddRow"></span><code>function <b>MayIDoAddRow</b>: boolean; virtual;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -827,7 +819,7 @@ Returns default empty mask.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="MayIDoClearAllCells"></span><code>function <b>MayIDoClearAllCells</b>: Boolean; virtual;</code></td>
+<td class="itemcode"><span id="MayIDoClearAllCells"></span><code>function <b>MayIDoClearAllCells</b>: boolean; virtual;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -835,7 +827,7 @@ Returns default empty mask.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="MayIDoClearSelectedArea"></span><code>function <b>MayIDoClearSelectedArea</b>: Boolean; virtual;</code></td>
+<td class="itemcode"><span id="MayIDoClearSelectedArea"></span><code>function <b>MayIDoClearSelectedArea</b>: boolean; virtual;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -843,7 +835,7 @@ Returns default empty mask.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="MayIDoDeleteAllData"></span><code>function <b>MayIDoDeleteAllData</b>: Boolean; virtual;</code></td>
+<td class="itemcode"><span id="MayIDoDeleteAllData"></span><code>function <b>MayIDoDeleteAllData</b>: boolean; virtual;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -851,7 +843,7 @@ Returns default empty mask.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="MayIDoDeleteColumns"></span><code>function <b>MayIDoDeleteColumns</b>(StartCol, ColsCount: LongInt): Boolean; virtual;</code></td>
+<td class="itemcode"><span id="MayIDoDeleteColumns"></span><code>function <b>MayIDoDeleteColumns</b>(StartCol, ColsCount: longint): boolean; virtual;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -859,7 +851,7 @@ Returns default empty mask.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="MayIDoDeleteRows"></span><code>function <b>MayIDoDeleteRows</b>(StartRow, RowsCount: LongInt): Boolean; virtual;</code></td>
+<td class="itemcode"><span id="MayIDoDeleteRows"></span><code>function <b>MayIDoDeleteRows</b>(StartRow, RowsCount: longint): boolean; virtual;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -867,7 +859,7 @@ Returns default empty mask.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="MayIDoInsertColumns"></span><code>function <b>MayIDoInsertColumns</b>(StartCol, ColsCount: LongInt): Boolean; virtual;</code></td>
+<td class="itemcode"><span id="MayIDoInsertColumns"></span><code>function <b>MayIDoInsertColumns</b>(StartCol, ColsCount: longint): boolean; virtual;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -875,7 +867,7 @@ Returns default empty mask.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="MayIDoInsertRows"></span><code>function <b>MayIDoInsertRows</b>(StartRow, RowsCount: LongInt): Boolean; virtual;</code></td>
+<td class="itemcode"><span id="MayIDoInsertRows"></span><code>function <b>MayIDoInsertRows</b>(StartRow, RowsCount: longint): boolean; virtual;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
@@ -885,7 +877,7 @@ Returns default empty mask.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="ValueToString"></span><code>function <b>ValueToString</b>(const ACol, ARow: LongInt ): string; virtual; abstract;</code></td>
+<td class="itemcode"><span id="ValueToString"></span><code>function <b>ValueToString</b>(const ACol, ARow: longint): string; virtual; abstract;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -917,7 +909,7 @@ Returns default empty mask.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="BeforeStringToValue"></span><code>procedure <b>BeforeStringToValue</b>(const ACol, ARow: LongInt; const AString: string); virtual; abstract;</code></td>
+<td class="itemcode"><span id="BeforeStringToValue"></span><code>procedure <b>BeforeStringToValue</b>(const ACol, ARow: longint; const AString: string); virtual; abstract;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -933,7 +925,7 @@ Returns default empty mask.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="ColumnsDeleted"></span><code>procedure <b>ColumnsDeleted</b>( const StartCol, ColsCount: LongInt); virtual;</code></td>
+<td class="itemcode"><span id="ColumnsDeleted"></span><code>procedure <b>ColumnsDeleted</b>(const StartCol, ColsCount: longint); virtual;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -941,7 +933,7 @@ Returns default empty mask.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="ColumnsInserted"></span><code>procedure <b>ColumnsInserted</b>( const StartCol, ColsCount: LongInt); virtual;</code></td>
+<td class="itemcode"><span id="ColumnsInserted"></span><code>procedure <b>ColumnsInserted</b>(const StartCol, ColsCount: longint); virtual;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -967,7 +959,7 @@ Returns default empty mask.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="DeleteColWidthItem"></span><code>procedure <b>DeleteColWidthItem</b>(const Index: LongInt);</code></td>
+<td class="itemcode"><span id="DeleteColWidthItem"></span><code>procedure <b>DeleteColWidthItem</b>(const Index: longint);</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -975,7 +967,7 @@ Returns default empty mask.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="DeleteRowHeightItem"></span><code>procedure <b>DeleteRowHeightItem</b>(const Index: LongInt);</code></td>
+<td class="itemcode"><span id="DeleteRowHeightItem"></span><code>procedure <b>DeleteRowHeightItem</b>(const Index: longint);</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -1007,9 +999,7 @@ Returns default empty mask.</p>
 </tr>
 <tr><td colspan="2">
 <p>
-///////////////////////////////////////////////////////////////////// методы старого интерфейса сохранить для совместимости с прежними приложениями, а также для того, чтобы можно было работать с неактивными сетками или когда активность таблицы не требуется
-
-<p>методы данного интерфейса подразумевают, что источник данных является активным, а сетка пассивной (это отражается в названиях методов) /////////////////////////////////////////////////////////////////////</p>
+///////////////////////////////////////////////////////////////////// методы старого интерфейса сохранить для совместимости с прежними приложениями, а также для того, чтобы можно было работать с неактивными сетками или когда активность таблицы не требуется методы данного интерфейса подразумевают, что источник данных является активным, а сетка пассивной (это отражается в названиях методов) /////////////////////////////////////////////////////////////////////</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1045,7 +1035,7 @@ Returns default empty mask.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="InsertColWidthItem"></span><code>procedure <b>InsertColWidthItem</b>(const Index: LongInt);</code></td>
+<td class="itemcode"><span id="InsertColWidthItem"></span><code>procedure <b>InsertColWidthItem</b>(const Index: longint);</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -1053,7 +1043,7 @@ Returns default empty mask.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="InsertRowHeightItem"></span><code>procedure <b>InsertRowHeightItem</b>(const Index: LongInt);</code></td>
+<td class="itemcode"><span id="InsertRowHeightItem"></span><code>procedure <b>InsertRowHeightItem</b>(const Index: longint);</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -1069,7 +1059,7 @@ Returns default empty mask.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="RowsDeleted"></span><code>procedure <b>RowsDeleted</b>( const StartRow, RowsCount: LongInt); virtual;</code></td>
+<td class="itemcode"><span id="RowsDeleted"></span><code>procedure <b>RowsDeleted</b>(const StartRow, RowsCount: longint); virtual;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
@@ -1079,7 +1069,7 @@ Returns default empty mask.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="RowsInserted"></span><code>procedure <b>RowsInserted</b>( const StartRow, RowsCount: LongInt); virtual;</code></td>
+<td class="itemcode"><span id="RowsInserted"></span><code>procedure <b>RowsInserted</b>(const StartRow, RowsCount: longint); virtual;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -1087,7 +1077,7 @@ Returns default empty mask.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="SaveCol"></span><code>procedure <b>SaveCol</b>(const Col: LongInt);</code></td>
+<td class="itemcode"><span id="SaveCol"></span><code>procedure <b>SaveCol</b>(const Col: longint);</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
@@ -1097,7 +1087,7 @@ Returns default empty mask.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="SaveColWidth"></span><code>procedure <b>SaveColWidth</b>(const Col, Width: LongInt);</code></td>
+<td class="itemcode"><span id="SaveColWidth"></span><code>procedure <b>SaveColWidth</b>(const Col, Width: longint);</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -1105,7 +1095,7 @@ Returns default empty mask.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="SaveLeftCol"></span><code>procedure <b>SaveLeftCol</b>(const LeftCol: LongInt);</code></td>
+<td class="itemcode"><span id="SaveLeftCol"></span><code>procedure <b>SaveLeftCol</b>(const LeftCol: longint);</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -1113,7 +1103,7 @@ Returns default empty mask.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="SaveRow"></span><code>procedure <b>SaveRow</b>(const Row: LongInt);</code></td>
+<td class="itemcode"><span id="SaveRow"></span><code>procedure <b>SaveRow</b>(const Row: longint);</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
@@ -1123,7 +1113,7 @@ Returns default empty mask.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="SaveRowHeight"></span><code>procedure <b>SaveRowHeight</b>(const Row, Height: LongInt);</code></td>
+<td class="itemcode"><span id="SaveRowHeight"></span><code>procedure <b>SaveRowHeight</b>(const Row, Height: longint);</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -1139,7 +1129,7 @@ Returns default empty mask.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="SaveTopRow"></span><code>procedure <b>SaveTopRow</b>(const TopRow: LongInt);</code></td>
+<td class="itemcode"><span id="SaveTopRow"></span><code>procedure <b>SaveTopRow</b>(const TopRow: longint);</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -1203,7 +1193,7 @@ Returns default empty mask.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="SetValueByDefault"></span><code>procedure <b>SetValueByDefault</b>(const ACol, ARow: LongInt); virtual; abstract;</code></td>
+<td class="itemcode"><span id="SetValueByDefault"></span><code>procedure <b>SetValueByDefault</b>(const ACol, ARow: longint); virtual; abstract;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -1211,7 +1201,7 @@ Returns default empty mask.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="StringToValue"></span><code>procedure <b>StringToValue</b>(const ACol, ARow: LongInt; const AString: string ); virtual; abstract;</code></td>
+<td class="itemcode"><span id="StringToValue"></span><code>procedure <b>StringToValue</b>(const ACol, ARow: longint; const AString: string); virtual; abstract;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -1219,7 +1209,7 @@ Returns default empty mask.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="CheckColIndex"></span><code>procedure <b>CheckColIndex</b>(const Index: LongInt);</code></td>
+<td class="itemcode"><span id="CheckColIndex"></span><code>procedure <b>CheckColIndex</b>(const Index: longint);</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
@@ -1229,7 +1219,7 @@ Checks that column (row) index is valid. Otherwise throws an exception.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="CheckRowIndex"></span><code>procedure <b>CheckRowIndex</b>(const Index: LongInt);</code></td>
+<td class="itemcode"><span id="CheckRowIndex"></span><code>procedure <b>CheckRowIndex</b>(const Index: longint);</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -1238,8 +1228,7 @@ Checks that column (row) index is valid. Otherwise throws an exception.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="Caption"></span><code>property <b>Caption</b>: string
-            read <a  href="table_components.TTableCompList.html#FCaption">FCaption</a>               write <a  href="table_components.TTableCompList.html#FCaption">FCaption</a>;</code></td>
+<td class="itemcode"><span id="Caption"></span><code>property <b>Caption</b>: string read <a  href="table_components.TTableCompList.html#FCaption">FCaption</a> write <a  href="table_components.TTableCompList.html#FCaption">FCaption</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -1247,8 +1236,7 @@ Checks that column (row) index is valid. Otherwise throws an exception.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="SavedCol"></span><code>property <b>SavedCol</b>: LongInt
-            read <a  href="table_components.TTableCompList.html#GetCol">GetCol</a>                 write <a  href="table_components.TTableCompList.html#SaveCol">SaveCol</a>;</code></td>
+<td class="itemcode"><span id="SavedCol"></span><code>property <b>SavedCol</b>: longint read <a  href="table_components.TTableCompList.html#GetCol">GetCol</a> write <a  href="table_components.TTableCompList.html#SaveCol">SaveCol</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -1256,8 +1244,7 @@ Checks that column (row) index is valid. Otherwise throws an exception.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="SavedLeftCol"></span><code>property <b>SavedLeftCol</b>: LongInt
-            read <a  href="table_components.TTableCompList.html#GetLeftCol">GetLeftCol</a>             write <a  href="table_components.TTableCompList.html#SaveLeftCol">SaveLeftCol</a>;</code></td>
+<td class="itemcode"><span id="SavedLeftCol"></span><code>property <b>SavedLeftCol</b>: longint read <a  href="table_components.TTableCompList.html#GetLeftCol">GetLeftCol</a> write <a  href="table_components.TTableCompList.html#SaveLeftCol">SaveLeftCol</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -1265,8 +1252,7 @@ Checks that column (row) index is valid. Otherwise throws an exception.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="SavedRow"></span><code>property <b>SavedRow</b>: LongInt
-            read <a  href="table_components.TTableCompList.html#GetRow">GetRow</a>                 write <a  href="table_components.TTableCompList.html#SaveRow">SaveRow</a>;</code></td>
+<td class="itemcode"><span id="SavedRow"></span><code>property <b>SavedRow</b>: longint read <a  href="table_components.TTableCompList.html#GetRow">GetRow</a> write <a  href="table_components.TTableCompList.html#SaveRow">SaveRow</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -1274,8 +1260,7 @@ Checks that column (row) index is valid. Otherwise throws an exception.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="SavedSelection"></span><code>property <b>SavedSelection</b>: TGridRect
-            read <a  href="table_components.TTableCompList.html#GetSelection">GetSelection</a>           write <a  href="table_components.TTableCompList.html#SaveSelection">SaveSelection</a>;</code></td>
+<td class="itemcode"><span id="SavedSelection"></span><code>property <b>SavedSelection</b>: TGridRect read <a  href="table_components.TTableCompList.html#GetSelection">GetSelection</a> write <a  href="table_components.TTableCompList.html#SaveSelection">SaveSelection</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>
@@ -1283,8 +1268,7 @@ Checks that column (row) index is valid. Otherwise throws an exception.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="SavedTopRow"></span><code>property <b>SavedTopRow</b>: LongInt
-            read <a  href="table_components.TTableCompList.html#GetTopRow">GetTopRow</a>              write <a  href="table_components.TTableCompList.html#SaveTopRow">SaveTopRow</a>;</code></td>
+<td class="itemcode"><span id="SavedTopRow"></span><code>property <b>SavedTopRow</b>: longint read <a  href="table_components.TTableCompList.html#GetTopRow">GetTopRow</a> write <a  href="table_components.TTableCompList.html#SaveTopRow">SaveTopRow</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 &nbsp;</td></tr>

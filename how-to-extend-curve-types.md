@@ -25,3 +25,6 @@ Each curve type should be defined in separate module and should implement interf
 1. New curve type should be automatically displayed in the sub-menu "Model -> Pattern Type". Items are sorted alphabetically.
 
 {% include google_ads.html %}
+
+[Home](README.md)
+

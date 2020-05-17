@@ -11,3 +11,5 @@ The architecture is based on the dependency inversion principle and uses depende
 1. If data loader should be created by file extension add new entry in the TExtensionDataLoaderInjector.CreateDataLoader method.
 
 {% include google_ads.html %}
+
+[Home](README.md)

@@ -667,7 +667,10 @@ begin
 
     PlotCurves;
 {$IFDEF USE_GRIDS}
-    //??? FillDatasheetTable;
+    if ShowExtraData then
+    begin
+        FillDatasheetTable;
+    end;
 {$ENDIF}
 end;
 

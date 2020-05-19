@@ -383,7 +383,7 @@ end;
 
 procedure TFitViewer.Hide(Sender: TObject; PointsSet: TNeutronPointsSet);
 var
-    Index: longint;
+    Index, CheckListBoxCount: longint;
 begin
     Assert(Assigned(PointsSet));
     Assert(Assigned(FPointsSetList));
@@ -394,6 +394,9 @@ begin
     if Index <> -1 then
     begin
 {$IFDEF USE_LEGEND}
+        CheckListBoxCount := TFormMain(Form).CheckListBoxLegend.Items.Count;
+        Assert((Index >= 0) and (Index < CheckListBoxCount));
+
         if FUpdateLegends then
             TFormMain(Form).CheckListBoxLegend.Items.Delete(Index);
 {$ENDIF}
@@ -604,28 +607,31 @@ begin
     Assert(Assigned(FPointsSetList));
     Assert(Assigned(Form));
 
-    Serie := TTASerie.Create(nil);
-    try
-        Serie.PointStyle := psRectangle;
-        Serie.ShowPoints := FViewMarkers;
-        Serie.SeriesColor := clBlack;
-        Serie.Title := ComputedProfile.FTitle;
-
-        TFormMain(Form).Chart.AddSerie(Serie);
-    except
-        Serie.Free;
-        raise;
-    end;
-    FPointsSetList.Add(ComputedProfile);
-{$IFDEF USE_LEGEND}
-    if FUpdateLegends then
+    if FPointsSetList.IndexOf(ComputedProfile) = -1 then
     begin
-        TFormMain(Form).CheckListBoxLegend.Items.AddObject(Serie.Title, Serie);
-        TFormMain(Form).CheckListBoxLegend.Checked[
-            TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(Serie)] := True;
-    end;
+        Serie := TTASerie.Create(nil);
+        try
+            Serie.PointStyle := psRectangle;
+            Serie.ShowPoints := FViewMarkers;
+            Serie.SeriesColor := clBlack;
+            Serie.Title := ComputedProfile.FTitle;
+
+            TFormMain(Form).Chart.AddSerie(Serie);
+        except
+            Serie.Free;
+            raise;
+        end;
+        FPointsSetList.Add(ComputedProfile);
+{$IFDEF USE_LEGEND}
+        if FUpdateLegends then
+        begin
+            TFormMain(Form).CheckListBoxLegend.Items.AddObject(Serie.Title, Serie);
+            TFormMain(Form).CheckListBoxLegend.Checked[
+                TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(Serie)] := True;
+        end;
 {$ENDIF}
-    Plot; //??? sdelat' optimal'no - bez polnogo perestroeniya
+    end;
+    Plot; // TODO: sdelat' optimal'no - bez polnogo perestroeniya
 end;
 
 procedure TFitViewer.PlotDeltaProfile(Sender: TObject; DeltaProfile: TTitlePointsSet);
@@ -636,24 +642,27 @@ begin
     Assert(Assigned(FPointsSetList));
     Assert(Assigned(Form));
 
-    Serie := TTASerie.Create(nil);
-    try
-        Serie.PointStyle := psRectangle;
-        Serie.ShowPoints := FViewMarkers;
-        Serie.SeriesColor := clGreen;
-        Serie.Title := DeltaProfile.FTitle;
+    if FPointsSetList.IndexOf(DeltaProfile) = -1 then
+    begin
+        Serie := TTASerie.Create(nil);
+        try
+            Serie.PointStyle := psRectangle;
+            Serie.ShowPoints := FViewMarkers;
+            Serie.SeriesColor := clGreen;
+            Serie.Title := DeltaProfile.FTitle;
 
-        TFormMain(Form).Chart.AddSerie(Serie);
-    except
-        Serie.Free;
-        raise;
-    end;
-    FPointsSetList.Add(DeltaProfile);
+            TFormMain(Form).Chart.AddSerie(Serie);
+        except
+            Serie.Free;
+            raise;
+        end;
+        FPointsSetList.Add(DeltaProfile);
 {$IFDEF USE_LEGEND}
-    TFormMain(Form).CheckListBoxLegend.Items.AddObject(Serie.Title, Serie);
-    TFormMain(Form).CheckListBoxLegend.Checked[
-        TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(Serie)] := True;
+        TFormMain(Form).CheckListBoxLegend.Items.AddObject(Serie.Title, Serie);
+        TFormMain(Form).CheckListBoxLegend.Checked[
+            TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(Serie)] := True;
 {$ENDIF}
+    end;
     Plot; //TODO: sdelat' optimal'no - bez polnogo perestroeniya
 end;
 
@@ -1409,7 +1418,6 @@ procedure TFitViewer.Paint;
 begin
     TFormMain(Form).Chart.Paint;
 end;
-
 {$ENDIF}
 
 end.

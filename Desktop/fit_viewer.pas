@@ -383,26 +383,43 @@ end;
 
 procedure TFitViewer.Hide(Sender: TObject; PointsSet: TNeutronPointsSet);
 var
-    Index, CheckListBoxCount: longint;
+    Index: longint;
+    Serie: TTASerie;
+    SerieTitle: string;
 begin
     Assert(Assigned(PointsSet));
     Assert(Assigned(FPointsSetList));
     Assert(Assigned(Form));
 
     Index := FPointsSetList.IndexOf(PointsSet);
-    // el-t v CheckListBox svyazan s el-tom v FPointsSetList tol'ko po indeksu
     if Index <> -1 then
     begin
-{$IFDEF USE_LEGEND}
-        CheckListBoxCount := TFormMain(Form).CheckListBoxLegend.Items.Count;
-        Assert((Index >= 0) and (Index < CheckListBoxCount));
+        { Series should be related one-to-one with items of FPointsSetList. }
+        Assert((Index >= 0) and (Index < TFormMain(Form).Chart.SeriesCount));
 
-        if FUpdateLegends then
-            TFormMain(Form).CheckListBoxLegend.Items.Delete(Index);
-{$ENDIF}
-        if Index < TFormMain(Form).Chart.SeriesCount then
-            TFormMain(Form).Chart.DeleteSerie(TFormMain(Form).Chart.GetSerie(Index));
+        Serie := TTASerie(TFormMain(Form).Chart.GetSerie(Index));
+        SerieTitle := Serie.Title;
+
+        TFormMain(Form).Chart.DeleteSerie(Serie);
         FPointsSetList.Extract(PointsSet);
+
+{$IFDEF USE_LEGEND}
+        { Searching should be done by unique curve name, because in animation
+          mode legend couldn't contain all of curves presented in the chart. }
+        if FUpdateLegends then
+            with TFormMain(Form).CheckListBoxLegend do
+            begin
+                { Searching of legend item. Item titles must be unique. }
+                for Index := 0 to Items.Count - 1 do
+                begin
+                    if Items[Index] = SerieTitle then
+                    begin
+                        Items.Delete(Index);
+                        break;
+                    end;
+                end;
+            end;
+{$ENDIF}
     end;
 end;
 

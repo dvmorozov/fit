@@ -51,7 +51,7 @@ type
         , IFitViewer
 {$ENDIF}
         )
-    protected
+    private
 {$IFNDEF SERVER}
         FFitClient: TFitClient;
 {$ENDIF}
@@ -66,10 +66,12 @@ type
 
         procedure SetXCoordMode(AMode: longint);
 
-    protected
+    private
         { List of data sets for each item of which chart serie is related.
           The list is passive, it contains pointers to external data. }
         FPointsSetList: TComponentList;
+
+        procedure AddSerieToChart(Serie: TTASerie);
         { Returns maximum number of curves in one of given R-factor intervals. }
         function GetMaxCurveNum(CurvesList: TSelfCopiedCompList;
             RFactorBounds: TTitlePointsSet): longint;
@@ -97,7 +99,7 @@ type
     public
 {$IFNDEF SERVER}
         procedure SetFitClient(AFitClient: TFitClient);
-    protected
+    private
 {$ELSE}
         procedure Paint;
 {$ENDIF}
@@ -259,6 +261,19 @@ begin
             end;{case XCoordMode of...}
 end;
 
+procedure TFitViewer.AddSerieToChart(Serie : TTASerie);
+begin
+    TFormMain(Form).Chart.AddSerie(Serie);
+{$IFDEF USE_LEGEND}
+    if FUpdateLegends then
+    begin
+        TFormMain(Form).CheckListBoxLegend.Items.AddObject(Serie.Title, Serie);
+        TFormMain(Form).CheckListBoxLegend.Checked[
+            TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(Serie)] := True;
+    end;
+{$ENDIF}
+end;
+
 procedure TFitViewer.PlotSelectedProfileInterval(Sender: TObject; SelectedArea: TTitlePointsSet);
 var
     Serie: TTASerie;
@@ -268,25 +283,23 @@ begin
 
     if FPointsSetList.IndexOf(SelectedArea) = -1 then
     begin
-        //  dobavlenie nabora tochek v spisok naborov tochek
-        FPointsSetList.Add(SelectedArea);
         //  dobavlenie serii
         Serie := TTASerie.Create(nil);
-        Serie.PointStyle := psRectangle;
-        Serie.ShowPoints := FViewMarkers;
-        Serie.Title := SelectedArea.FTitle;
-        Serie.SeriesColor := clRed;
-        Serie.PointBrushStyle := bsClear;
+        try
+            Serie.PointStyle := psRectangle;
+            Serie.ShowPoints := FViewMarkers;
+            Serie.Title := SelectedArea.FTitle;
+            Serie.SeriesColor := clRed;
+            Serie.PointBrushStyle := bsClear;
+            Serie.Title := 'Selected area';
 
-        TFormMain(Form).Chart.AddSerie(Serie);
-{$IFDEF USE_LEGEND}
-        if FUpdateLegends then
-        begin
-            TFormMain(Form).CheckListBoxLegend.Items.AddObject('Selected area', Serie);
-            TFormMain(Form).CheckListBoxLegend.Checked[
-                TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(Serie)] := True;
+            AddSerieToChart(Serie);
+        except
+            Serie.Free;
+            raise;
         end;
-{$ENDIF}
+        { Should be the last operation performed if everything before succeeded. }
+        FPointsSetList.Add(SelectedArea);
     end;
     SelectedArea.Sort;
 {$IFDEF USE_GRIDS}
@@ -312,26 +325,19 @@ procedure TFitViewer.PlotCurves(Sender: TObject;
             try
                 Serie.PointStyle := psRectangle;
                 Serie.ShowPoints := FViewMarkers;
-                TFormMain(Form).Chart.AddSerie(Serie);
+                Serie.Title := PointsSet.GetCurveTypeName + ' ' + IntToStr(Index);
+                if Index <= 16 then
+                    Serie.SeriesColor := ColorPalette[Index]
+                else
+                    Serie.SeriesColor := ColorPalette[Index mod 16];
+
+                AddSerieToChart(Serie);
             except
                 Serie.Free;
                 raise;
             end;
+            { Should be the last operation performed if everything before succeeded. }
             FPointsSetList.Add(PointsSet);
-
-            Serie.Title := PointsSet.GetCurveTypeName + ' ' + IntToStr(Index);
-{$IFDEF USE_LEGEND}
-            if FUpdateLegends then
-            begin
-                TFormMain(Form).CheckListBoxLegend.Items.AddObject(Serie.Title, Serie);
-                TFormMain(Form).CheckListBoxLegend.Checked[
-                    TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(Serie)] := True;
-            end;
-{$ENDIF}
-            if Index <= 16 then
-                Serie.SeriesColor := ColorPalette[Index]
-            else
-                Serie.SeriesColor := ColorPalette[Index mod 16];
         end;
     end;
 
@@ -490,21 +496,13 @@ begin
             Serie.InitShowPoints := Serie.ShowPoints;
             Serie.Title := RFactorBounds.FTitle;
 
-            TFormMain(Form).Chart.AddSerie(Serie);
+            AddSerieToChart(Serie);
         except
             Serie.Free;
             raise
         end;
-
-        FPointsSetList.Add(RFactorBounds);
-{$IFDEF USE_LEGEND}
-        if FUpdateLegends then
-        begin
-            TFormMain(Form).CheckListBoxLegend.Items.AddObject(Serie.Title, Serie);
-            TFormMain(Form).CheckListBoxLegend.Checked[
-                TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(Serie)] := True;
-        end;
-{$ENDIF}
+         { Should be the last operation performed if everything before succeeded. }
+         FPointsSetList.Add(RFactorBounds);
     end;
     //  !!! pri ispol'zovanii psVertLineXX trebuetsya sortirovka !!!
     RFactorBounds.Sort;
@@ -547,21 +545,13 @@ begin
             Serie.InitShowPoints := Serie.ShowPoints;
             Serie.Title := CurvePositions.FTitle;
 
-            TFormMain(Form).Chart.AddSerie(Serie);
+            AddSerieToChart(Serie);
         except
             Serie.Free;
             raise;
         end;
-
+        { Should be the last operation performed if everything before succeeded. }
         FPointsSetList.Add(CurvePositions);
-{$IFDEF USE_LEGEND}
-        if FUpdateLegends then
-        begin
-            TFormMain(Form).CheckListBoxLegend.Items.AddObject(Serie.Title, Serie);
-            TFormMain(Form).CheckListBoxLegend.Checked[
-                TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(Serie)] := True;
-        end;
-{$ENDIF}
     end;
     //  !!! pri ispol'zovanii psVertLineXX trebuetsya sortirovka !!!
     //  !!! dlya vyvoda tablitsy trebuetsya sortirovka !!!
@@ -596,20 +586,13 @@ begin
             Serie.InitShowPoints := Serie.ShowPoints;
             Serie.Title := SelectedPoints.FTitle;
 
-            TFormMain(Form).Chart.AddSerie(Serie);
+            AddSerieToChart(Serie);
         except
             Serie.Free;
             raise;
         end;
+        { Should be the last operation performed if everything before succeeded. }
         FPointsSetList.Add(SelectedPoints);
-{$IFDEF USE_LEGEND}
-        if FUpdateLegends then
-        begin
-            TFormMain(Form).CheckListBoxLegend.Items.AddObject(Serie.Title, Serie);
-            TFormMain(Form).CheckListBoxLegend.Checked[
-                TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(Serie)] := True;
-        end;
-{$ENDIF}
     end;
     //  !!! pri ispol'zovanii psVertLineXX trebuetsya sortirovka !!!
     SelectedPoints.Sort;
@@ -633,20 +616,13 @@ begin
             Serie.SeriesColor := clBlack;
             Serie.Title := ComputedProfile.FTitle;
 
-            TFormMain(Form).Chart.AddSerie(Serie);
+            AddSerieToChart(Serie);
         except
             Serie.Free;
             raise;
         end;
+        { Should be the last operation performed if everything before succeeded. }
         FPointsSetList.Add(ComputedProfile);
-{$IFDEF USE_LEGEND}
-        if FUpdateLegends then
-        begin
-            TFormMain(Form).CheckListBoxLegend.Items.AddObject(Serie.Title, Serie);
-            TFormMain(Form).CheckListBoxLegend.Checked[
-                TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(Serie)] := True;
-        end;
-{$ENDIF}
     end;
     Plot; // TODO: sdelat' optimal'no - bez polnogo perestroeniya
 end;
@@ -668,17 +644,13 @@ begin
             Serie.SeriesColor := clGreen;
             Serie.Title := DeltaProfile.FTitle;
 
-            TFormMain(Form).Chart.AddSerie(Serie);
+            AddSerieToChart(Serie);
         except
             Serie.Free;
             raise;
         end;
+        { Should be the last operation performed if everything before succeeded. }
         FPointsSetList.Add(DeltaProfile);
-{$IFDEF USE_LEGEND}
-        TFormMain(Form).CheckListBoxLegend.Items.AddObject(Serie.Title, Serie);
-        TFormMain(Form).CheckListBoxLegend.Checked[
-            TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(Serie)] := True;
-{$ENDIF}
     end;
     Plot; //TODO: sdelat' optimal'no - bez polnogo perestroeniya
 end;
@@ -724,20 +696,13 @@ begin
             Serie.InitShowPoints := Serie.ShowPoints;
             Serie.Title := BackgroundPoints.FTitle;
 
-            TFormMain(Form).Chart.AddSerie(Serie);
+            AddSerieToChart(Serie);
         except
             Serie.Free;
             raise;
         end;
+        { Should be the last operation performed if everything before succeeded. }
         FPointsSetList.Add(BackgroundPoints);
-{$IFDEF USE_LEGEND}
-        if FUpdateLegends then
-        begin
-            TFormMain(Form).CheckListBoxLegend.Items.AddObject(Serie.Title, Serie);
-            TFormMain(Form).CheckListBoxLegend.Checked[
-                TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(Serie)] := True;
-        end;
-{$ENDIF}
     end;
     BackgroundPoints.Sort;
 {$IFDEF USE_GRIDS}
@@ -765,21 +730,13 @@ begin
             Serie.PointBrushStyle := bsClear;
             Serie.Title := ExpProfile.FTitle;
 
-            TFormMain(Form).Chart.AddSerie(Serie);
+            AddSerieToChart(Serie);
         except
             Serie.Free;
             raise;
         end;
-
+        { Should be the last operation performed if everything before succeeded. }
         FPointsSetList.Add(ExpProfile);
-{$IFDEF USE_LEGEND}
-        if FUpdateLegends then
-        begin
-            TFormMain(Form).CheckListBoxLegend.Items.AddObject(Serie.Title, Serie);
-            TFormMain(Form).CheckListBoxLegend.Checked[
-                TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(Serie)] := True;
-        end;
-{$ENDIF}
     end;
     ExpProfile.Sort;
 {$IFDEF USE_GRIDS}

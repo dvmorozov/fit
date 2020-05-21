@@ -39,7 +39,7 @@ type
         property DeltaSigma: double read GetDeltaSigma;
 
     public
-        constructor Create(AOwner: TComponent; x0: double);
+        constructor Create(AOwner: TComponent; x0: double); overload;
         { Overrides method defined in TNamedPointsSet. }
         class function GetCurveTypeName: string; override;
         { Overrides method defined in TNamedPointsSet. }

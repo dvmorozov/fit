@@ -31,6 +31,12 @@ uses
 {$ENDIF}
     ;
 
+{$IFNDEF SERVER}
+// Switch on updating legend and grids.
+{$DEFINE USE_LEGEND}
+{$DEFINE USE_GRIDS}
+{$ENDIF}
+
 type
     { Modes of selectiion of active point set. }
     TSelMode    =
@@ -58,6 +64,9 @@ type
         FFitService:     IFitService;
         FDataLoader:     IDataLoader;
         FDataLoaderInjector:  IDataLoaderInjector;
+        { Enables animation mode in which UI is updated on every
+          computation cycle not only on finishing. By default is false. }
+        FAnimationMode: boolean;
         { All the data displayed on the chart. They are required to be able control of X-coordinate. }
         FExperimentalProfile: TTitlePointsSet;
         { Region of given profile data with which user is working at the given moment. }
@@ -294,6 +303,7 @@ type
         property OpenState: TOpenState read FOpenState;
         property AsyncState: TAsyncState read FAsyncState;
         property SelectedAreaMode: boolean read FSelectedAreaMode;
+        property AnimationMode: boolean read FAnimationMode write FAnimationMode;
 
         property FitService: IFitService read FFitService write FFitService;
     end;
@@ -557,7 +567,7 @@ begin
     begin
         FFitViewer.ShowTime;
         FFitViewer.ShowRFactor;
-        if FFitViewer.GetAnimationMode then
+        if FAnimationMode then
             UpdateComputedData(False);
     end;
 end;
@@ -594,6 +604,16 @@ end;
 
 procedure TFitClient.UpdateComputedData(ShowExtraData: boolean);
 begin
+    if Assigned(FFitViewer) then
+    begin
+{$IFDEF USE_GRIDS}
+        FFitViewer.SetUpdateGrids(ShowExtraData);
+{$ENDIF}
+{$IFDEF USE_LEGEND}
+        FFitViewer.SetUpdateLegends(ShowExtraData);
+{$ENDIF}
+    end;
+
     RemoveComputedProfile;
     FComputedProfile := FitService.GetCalcProfilePointsSet;
     if Assigned(FComputedProfile) and (FComputedProfile.PointsCount <> 0) then
@@ -647,8 +667,10 @@ begin
 
     PlotCurves;
 {$IFDEF USE_GRIDS}
-    if FUpdateGrids then
+    if ShowExtraData then
+    begin
         FillDatasheetTable;
+    end;
 {$ENDIF}
 end;
 
@@ -874,11 +896,10 @@ end;
 {$IFDEF USE_GRIDS}
 procedure TFitClient.FillDatasheetTable;
 begin
-    if Assigned(FitViewer) then
-        FitViewer.FillDatasheetTable(GetProfilePointsSet, CurvesList,
-            ComputedProfile, DeltaProfile, RFactorBounds);
+    if Assigned(FFitViewer) then
+        FFitViewer.FillDatasheetTable(FExperimentalProfile, FCurvesList,
+            FComputedProfile, FDeltaProfile, FRFactorBounds);
 end;
-
 {$ENDIF}
 
 procedure TFitClient.PlotExpProfile;
@@ -1158,6 +1179,7 @@ procedure TFitClient.DoAllAutomatically;
 begin
     Assert(Assigned(FitService));
 
+    Clear;
     FitService.DoAllAutomatically;
     FAsyncState := AsyncWorks;
 end;
@@ -1165,6 +1187,8 @@ end;
 procedure TFitClient.MinimizeDifference;
 begin
     Assert(Assigned(FitService));
+
+    Clear;
     { Curve positions and R-factor bounds are set by AddPointToCurvePositions,
       AddPointToRFactorBounds. }
     FitService.MinimizeDifference;
@@ -1174,6 +1198,8 @@ end;
 procedure TFitClient.MinimizeNumberOfCurves;
 begin
     Assert(Assigned(FitService));
+
+    Clear;
     { Curve positions and R-factor bounds are set by AddPointToCurvePositions,
       AddPointToRFactorBounds. }
     FitService.MinimizeNumberOfCurves;

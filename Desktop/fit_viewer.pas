@@ -51,7 +51,7 @@ type
         , IFitViewer
 {$ENDIF}
         )
-    protected
+    private
 {$IFNDEF SERVER}
         FFitClient: TFitClient;
 {$ENDIF}
@@ -63,16 +63,15 @@ type
         FUpdateGrids: boolean;
         { Enables updating legend. By default is true. }
         FUpdateLegends: boolean;
-        { Enables animation mode in which UI is updated on every
-          computation cycle not only on finishing. By default is false. }
-        FAnimationMode: boolean;
 
         procedure SetXCoordMode(AMode: longint);
 
-    protected
+    private
         { List of data sets for each item of which chart serie is related.
           The list is passive, it contains pointers to external data. }
         FPointsSetList: TComponentList;
+
+        procedure AddSerieToChart(Serie: TTASerie);
         { Returns maximum number of curves in one of given R-factor intervals. }
         function GetMaxCurveNum(CurvesList: TSelfCopiedCompList;
             RFactorBounds: TTitlePointsSet): longint;
@@ -100,7 +99,7 @@ type
     public
 {$IFNDEF SERVER}
         procedure SetFitClient(AFitClient: TFitClient);
-    protected
+    private
 {$ELSE}
         procedure Paint;
 {$ENDIF}
@@ -154,15 +153,17 @@ type
         procedure Clear(Sender: TObject);
         { Method of IFitViewer interface. }
         procedure Hide(Sender: TObject; PointsSet: TNeutronPointsSet);
+{$IFDEF USE_GRIDS}
         { Method of IFitViewer interface. }
         procedure SetUpdateGrids(Update: boolean);
-        { Method of IFitViewer interface. }
-        procedure SetUpdateLegends(Update: boolean);
-{$IFDEF USE_GRIDS}
         { Method of IFitViewer interface. }
         procedure FillDatasheetTable(ExperimentalProfile: TTitlePointsSet;
             CurvesList: TSelfCopiedCompList; ComputedProfile: TTitlePointsSet;
             DeltaProfile: TTitlePointsSet; RFactorBounds: TTitlePointsSet);
+{$ENDIF}
+{$IFDEF USE_LEGEND}
+        { Method of IFitViewer interface. }
+        procedure SetUpdateLegends(Update: boolean);
 {$ENDIF}
 {$IFNDEF SERVER}
         { Method of IFitViewer interface. }
@@ -171,10 +172,6 @@ type
         procedure ShowRFactor;
         { Method of IFitViewer interface. }
         procedure ShowHint(Hint: string);
-        { Method of IFitViewer interface. }
-        procedure SetAnimationMode(On: boolean);
-        { Method of IFitViewer interface. }
-        function GetAnimationMode: boolean;
 {$ENDIF}
 
         procedure SetViewMarkers(AViewMarkers: boolean);
@@ -264,6 +261,19 @@ begin
             end;{case XCoordMode of...}
 end;
 
+procedure TFitViewer.AddSerieToChart(Serie : TTASerie);
+begin
+    TFormMain(Form).Chart.AddSerie(Serie);
+{$IFDEF USE_LEGEND}
+    if FUpdateLegends then
+    begin
+        TFormMain(Form).CheckListBoxLegend.Items.AddObject(Serie.Title, Serie);
+        TFormMain(Form).CheckListBoxLegend.Checked[
+            TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(Serie)] := True;
+    end;
+{$ENDIF}
+end;
+
 procedure TFitViewer.PlotSelectedProfileInterval(Sender: TObject; SelectedArea: TTitlePointsSet);
 var
     Serie: TTASerie;
@@ -273,25 +283,23 @@ begin
 
     if FPointsSetList.IndexOf(SelectedArea) = -1 then
     begin
-        //  dobavlenie nabora tochek v spisok naborov tochek
-        FPointsSetList.Add(SelectedArea);
         //  dobavlenie serii
         Serie := TTASerie.Create(nil);
-        Serie.PointStyle := psRectangle;
-        Serie.ShowPoints := FViewMarkers;
-        Serie.Title := SelectedArea.FTitle;
-        Serie.SeriesColor := clRed;
-        Serie.PointBrushStyle := bsClear;
+        try
+            Serie.PointStyle := psRectangle;
+            Serie.ShowPoints := FViewMarkers;
+            Serie.Title := SelectedArea.FTitle;
+            Serie.SeriesColor := clRed;
+            Serie.PointBrushStyle := bsClear;
+            Serie.Title := 'Selected area';
 
-        TFormMain(Form).Chart.AddSerie(Serie);
-{$IFDEF USE_LEGEND}
-        if FUpdateLegends then
-        begin
-            TFormMain(Form).CheckListBoxLegend.Items.AddObject('Selected area', Serie);
-            TFormMain(Form).CheckListBoxLegend.Checked[
-                TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(Serie)] := True;
+            AddSerieToChart(Serie);
+        except
+            Serie.Free;
+            raise;
         end;
-{$ENDIF}
+        { Should be the last operation performed if everything before succeeded. }
+        FPointsSetList.Add(SelectedArea);
     end;
     SelectedArea.Sort;
 {$IFDEF USE_GRIDS}
@@ -317,26 +325,19 @@ procedure TFitViewer.PlotCurves(Sender: TObject;
             try
                 Serie.PointStyle := psRectangle;
                 Serie.ShowPoints := FViewMarkers;
-                TFormMain(Form).Chart.AddSerie(Serie);
+                Serie.Title := PointsSet.GetCurveTypeName + ' ' + IntToStr(Index);
+                if Index <= 16 then
+                    Serie.SeriesColor := ColorPalette[Index]
+                else
+                    Serie.SeriesColor := ColorPalette[Index mod 16];
+
+                AddSerieToChart(Serie);
             except
                 Serie.Free;
                 raise;
             end;
+            { Should be the last operation performed if everything before succeeded. }
             FPointsSetList.Add(PointsSet);
-
-            Serie.Title := PointsSet.GetCurveTypeName + ' ' + IntToStr(Index);
-{$IFDEF USE_LEGEND}
-            if FUpdateLegends then
-            begin
-                TFormMain(Form).CheckListBoxLegend.Items.AddObject(Serie.Title, Serie);
-                TFormMain(Form).CheckListBoxLegend.Checked[
-                    TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(Serie)] := True;
-            end;
-{$ENDIF}
-            if Index <= 16 then
-                Serie.SeriesColor := ColorPalette[Index]
-            else
-                Serie.SeriesColor := ColorPalette[Index mod 16];
         end;
     end;
 
@@ -389,22 +390,42 @@ end;
 procedure TFitViewer.Hide(Sender: TObject; PointsSet: TNeutronPointsSet);
 var
     Index: longint;
+    Serie: TTASerie;
+    SerieTitle: string;
 begin
     Assert(Assigned(PointsSet));
     Assert(Assigned(FPointsSetList));
     Assert(Assigned(Form));
 
     Index := FPointsSetList.IndexOf(PointsSet);
-    // el-t v CheckListBox svyazan s el-tom v FPointsSetList tol'ko po indeksu
     if Index <> -1 then
     begin
-{$IFDEF USE_LEGEND}
-        if FUpdateLegends then
-            TFormMain(Form).CheckListBoxLegend.Items.Delete(Index);
-{$ENDIF}
-        if Index < TFormMain(Form).Chart.SeriesCount then
-            TFormMain(Form).Chart.DeleteSerie(TFormMain(Form).Chart.GetSerie(Index));
+        { Series should be related one-to-one with items of FPointsSetList. }
+        Assert((Index >= 0) and (Index < TFormMain(Form).Chart.SeriesCount));
+
+        Serie := TTASerie(TFormMain(Form).Chart.GetSerie(Index));
+        SerieTitle := Serie.Title;
+
+        TFormMain(Form).Chart.DeleteSerie(Serie);
         FPointsSetList.Extract(PointsSet);
+
+{$IFDEF USE_LEGEND}
+        { Searching should be done by unique curve name, because in animation
+          mode legend couldn't contain all of curves presented in the chart. }
+        if FUpdateLegends then
+            with TFormMain(Form).CheckListBoxLegend do
+            begin
+                { Searching of legend item. Item titles must be unique. }
+                for Index := 0 to Items.Count - 1 do
+                begin
+                    if Items[Index] = SerieTitle then
+                    begin
+                        Items.Delete(Index);
+                        break;
+                    end;
+                end;
+            end;
+{$ENDIF}
     end;
 end;
 
@@ -475,21 +496,13 @@ begin
             Serie.InitShowPoints := Serie.ShowPoints;
             Serie.Title := RFactorBounds.FTitle;
 
-            TFormMain(Form).Chart.AddSerie(Serie);
+            AddSerieToChart(Serie);
         except
             Serie.Free;
             raise
         end;
-
-        FPointsSetList.Add(RFactorBounds);
-{$IFDEF USE_LEGEND}
-        if FUpdateLegends then
-        begin
-            TFormMain(Form).CheckListBoxLegend.Items.AddObject(Serie.Title, Serie);
-            TFormMain(Form).CheckListBoxLegend.Checked[
-                TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(Serie)] := True;
-        end;
-{$ENDIF}
+         { Should be the last operation performed if everything before succeeded. }
+         FPointsSetList.Add(RFactorBounds);
     end;
     //  !!! pri ispol'zovanii psVertLineXX trebuetsya sortirovka !!!
     RFactorBounds.Sort;
@@ -532,21 +545,13 @@ begin
             Serie.InitShowPoints := Serie.ShowPoints;
             Serie.Title := CurvePositions.FTitle;
 
-            TFormMain(Form).Chart.AddSerie(Serie);
+            AddSerieToChart(Serie);
         except
             Serie.Free;
             raise;
         end;
-
+        { Should be the last operation performed if everything before succeeded. }
         FPointsSetList.Add(CurvePositions);
-{$IFDEF USE_LEGEND}
-        if FUpdateLegends then
-        begin
-            TFormMain(Form).CheckListBoxLegend.Items.AddObject(Serie.Title, Serie);
-            TFormMain(Form).CheckListBoxLegend.Checked[
-                TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(Serie)] := True;
-        end;
-{$ENDIF}
     end;
     //  !!! pri ispol'zovanii psVertLineXX trebuetsya sortirovka !!!
     //  !!! dlya vyvoda tablitsy trebuetsya sortirovka !!!
@@ -581,20 +586,13 @@ begin
             Serie.InitShowPoints := Serie.ShowPoints;
             Serie.Title := SelectedPoints.FTitle;
 
-            TFormMain(Form).Chart.AddSerie(Serie);
+            AddSerieToChart(Serie);
         except
             Serie.Free;
             raise;
         end;
+        { Should be the last operation performed if everything before succeeded. }
         FPointsSetList.Add(SelectedPoints);
-{$IFDEF USE_LEGEND}
-        if FUpdateLegends then
-        begin
-            TFormMain(Form).CheckListBoxLegend.Items.AddObject(Serie.Title, Serie);
-            TFormMain(Form).CheckListBoxLegend.Checked[
-                TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(Serie)] := True;
-        end;
-{$ENDIF}
     end;
     //  !!! pri ispol'zovanii psVertLineXX trebuetsya sortirovka !!!
     SelectedPoints.Sort;
@@ -609,28 +607,24 @@ begin
     Assert(Assigned(FPointsSetList));
     Assert(Assigned(Form));
 
-    Serie := TTASerie.Create(nil);
-    try
-        Serie.PointStyle := psRectangle;
-        Serie.ShowPoints := FViewMarkers;
-        Serie.SeriesColor := clBlack;
-        Serie.Title := ComputedProfile.FTitle;
-
-        TFormMain(Form).Chart.AddSerie(Serie);
-    except
-        Serie.Free;
-        raise;
-    end;
-    FPointsSetList.Add(ComputedProfile);
-{$IFDEF USE_LEGEND}
-    if FUpdateLegends then
+    if FPointsSetList.IndexOf(ComputedProfile) = -1 then
     begin
-        TFormMain(Form).CheckListBoxLegend.Items.AddObject(Serie.Title, Serie);
-        TFormMain(Form).CheckListBoxLegend.Checked[
-            TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(Serie)] := True;
+        Serie := TTASerie.Create(nil);
+        try
+            Serie.PointStyle := psRectangle;
+            Serie.ShowPoints := FViewMarkers;
+            Serie.SeriesColor := clBlack;
+            Serie.Title := ComputedProfile.FTitle;
+
+            AddSerieToChart(Serie);
+        except
+            Serie.Free;
+            raise;
+        end;
+        { Should be the last operation performed if everything before succeeded. }
+        FPointsSetList.Add(ComputedProfile);
     end;
-{$ENDIF}
-    Plot; //??? sdelat' optimal'no - bez polnogo perestroeniya
+    Plot; // TODO: sdelat' optimal'no - bez polnogo perestroeniya
 end;
 
 procedure TFitViewer.PlotDeltaProfile(Sender: TObject; DeltaProfile: TTitlePointsSet);
@@ -641,24 +635,23 @@ begin
     Assert(Assigned(FPointsSetList));
     Assert(Assigned(Form));
 
-    Serie := TTASerie.Create(nil);
-    try
-        Serie.PointStyle := psRectangle;
-        Serie.ShowPoints := FViewMarkers;
-        Serie.SeriesColor := clGreen;
-        Serie.Title := DeltaProfile.FTitle;
+    if FPointsSetList.IndexOf(DeltaProfile) = -1 then
+    begin
+        Serie := TTASerie.Create(nil);
+        try
+            Serie.PointStyle := psRectangle;
+            Serie.ShowPoints := FViewMarkers;
+            Serie.SeriesColor := clGreen;
+            Serie.Title := DeltaProfile.FTitle;
 
-        TFormMain(Form).Chart.AddSerie(Serie);
-    except
-        Serie.Free;
-        raise;
+            AddSerieToChart(Serie);
+        except
+            Serie.Free;
+            raise;
+        end;
+        { Should be the last operation performed if everything before succeeded. }
+        FPointsSetList.Add(DeltaProfile);
     end;
-    FPointsSetList.Add(DeltaProfile);
-{$IFDEF USE_LEGEND}
-    TFormMain(Form).CheckListBoxLegend.Items.AddObject(Serie.Title, Serie);
-    TFormMain(Form).CheckListBoxLegend.Checked[
-        TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(Serie)] := True;
-{$ENDIF}
     Plot; //TODO: sdelat' optimal'no - bez polnogo perestroeniya
 end;
 
@@ -703,20 +696,13 @@ begin
             Serie.InitShowPoints := Serie.ShowPoints;
             Serie.Title := BackgroundPoints.FTitle;
 
-            TFormMain(Form).Chart.AddSerie(Serie);
+            AddSerieToChart(Serie);
         except
             Serie.Free;
             raise;
         end;
+        { Should be the last operation performed if everything before succeeded. }
         FPointsSetList.Add(BackgroundPoints);
-{$IFDEF USE_LEGEND}
-        if FUpdateLegends then
-        begin
-            TFormMain(Form).CheckListBoxLegend.Items.AddObject(Serie.Title, Serie);
-            TFormMain(Form).CheckListBoxLegend.Checked[
-                TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(Serie)] := True;
-        end;
-{$ENDIF}
     end;
     BackgroundPoints.Sort;
 {$IFDEF USE_GRIDS}
@@ -744,21 +730,13 @@ begin
             Serie.PointBrushStyle := bsClear;
             Serie.Title := ExpProfile.FTitle;
 
-            TFormMain(Form).Chart.AddSerie(Serie);
+            AddSerieToChart(Serie);
         except
             Serie.Free;
             raise;
         end;
-
+        { Should be the last operation performed if everything before succeeded. }
         FPointsSetList.Add(ExpProfile);
-{$IFDEF USE_LEGEND}
-        if FUpdateLegends then
-        begin
-            TFormMain(Form).CheckListBoxLegend.Items.AddObject(Serie.Title, Serie);
-            TFormMain(Form).CheckListBoxLegend.Checked[
-                TFormMain(Form).CheckListBoxLegend.Items.IndexOfObject(Serie)] := True;
-        end;
-{$ENDIF}
     end;
     ExpProfile.Sort;
 {$IFDEF USE_GRIDS}
@@ -768,15 +746,19 @@ begin
     PlotPointsSet(ExpProfile);
 end;
 
+{$IFDEF USE_GRIDS}
 procedure TFitViewer.SetUpdateGrids(Update: boolean);
 begin
     FUpdateGrids := Update;
 end;
+{$ENDIF}
 
+{$IFDEF USE_LEGEND}
 procedure TFitViewer.SetUpdateLegends(Update: boolean);
 begin
     FUpdateLegends := Update;
 end;
+{$ENDIF}
 
 {$IFNDEF SERVER}
 procedure TFitViewer.ShowTime;
@@ -793,27 +775,6 @@ procedure TFitViewer.ShowHint(Hint: string);
 begin
     TFormMain(Form).ShowHint(Hint);
 end;
-
-procedure TFitViewer.SetAnimationMode(On: boolean);
-begin
-    FAnimationMode := On;
-    if On then
-    begin
-        FUpdateGrids   := False;
-        FUpdateLegends := False;
-    end
-    else
-    begin
-        FUpdateGrids   := True;
-        FUpdateLegends := True;
-    end;
-end;
-
-function TFitViewer.GetAnimationMode: boolean;
-begin
-    Result := FAnimationMode;
-end;
-
 {$ENDIF}
 
 constructor TFitViewer.Create(AOwner: TComponent);
@@ -1284,76 +1245,79 @@ begin
     Assert(RFactorBounds.PointsCount mod 2 = 0);
     Assert(RFactorBounds.PointsCount <> 0);
 
-{$IFDEF WINDOWS}
-    TFormMain(Form).TabSheetDatasheet.TabVisible := True;
-{$ENDIF}
-    with TFormMain(Form).GridDatasheet do
+    if FUpdateGrids then
     begin
-        //  nastroyka parametrov setki
-        //  chislo kolonok = 1 (fiks.) + 3
-        //  (eksp. profil', rasschit. profil', raznost') +
-        //  maksimal'noe chislo krivyh v nekotorom intervale
-        ColCount    := 4 + GetMaxCurveNum(CurvesList, RFactorBounds);
-        //  na kazhdyy interval dobavlyaetsya stroka zagolovka
-        RowCount    := 1 + GetPointsNumInBounds(ExperimentalProfile, RFactorBounds) +
-            RFactorBounds.PointsCount div 2;
-        FixedCols   := 1;
-        FixedRows   := 1;
-        //  zapolnenie yacheek
-        //  zagolovki stolbtsov (!!! d.b. ne men'she 4-h - sm. nizhe !!!)
-        Cells[0, 0] := ArgumentName;
-        Cells[1, 0] := ValueName;
-        Cells[2, 0] := SummarizedName;
-        Cells[3, 0] := DeltaName;
-        for i := 4 to ColCount - 1 do
-            Cells[i, 0] := 'Curve ' + IntToStr(i - 3);
-
-        i := 0;
-        RowIndex := FixedRows;
-        while i < RFactorBounds.PointsCount do
+{$IFDEF WINDOWS}
+        TFormMain(Form).TabSheetDatasheet.TabVisible := True;
+{$ENDIF}
+        with TFormMain(Form).GridDatasheet do
         begin
-            //  !!! RowIndex d. ukazyvat' na nachalo dannyh intervala !!!
-            StartX := RFactorBounds.PointXCoord[i];
-            //  formiruetsya zagolovok
-            for j := 1 to ColCount - 1 do
-                Cells[j, RowIndex] := '';
-            Cells[1, RowIndex]     := 'Interval';
-            Cells[2, RowIndex]     := 'number';
-            Cells[3, RowIndex]     := IntToStr(i div 2 + 1);
-            Inc(RowIndex);
+            //  nastroyka parametrov setki
+            //  chislo kolonok = 1 (fiks.) + 3
+            //  (eksp. profil', rasschit. profil', raznost') +
+            //  maksimal'noe chislo krivyh v nekotorom intervale
+            ColCount    := 4 + GetMaxCurveNum(CurvesList, RFactorBounds);
+            //  na kazhdyy interval dobavlyaetsya stroka zagolovka
+            RowCount    := 1 + GetPointsNumInBounds(ExperimentalProfile, RFactorBounds) +
+                RFactorBounds.PointsCount div 2;
+            FixedCols   := 1;
+            FixedRows   := 1;
+            //  zapolnenie yacheek
+            //  zagolovki stolbtsov (!!! d.b. ne men'she 4-h - sm. nizhe !!!)
+            Cells[0, 0] := ArgumentName;
+            Cells[1, 0] := ValueName;
+            Cells[2, 0] := SummarizedName;
+            Cells[3, 0] := DeltaName;
+            for i := 4 to ColCount - 1 do
+                Cells[i, 0] := 'Curve ' + IntToStr(i - 3);
 
-            StartIndex := ExperimentalProfile.IndexOfValueX(RFactorBounds.PointXCoord[i]);
-            EndIndex   := ExperimentalProfile.IndexOfValueX(RFactorBounds.PointXCoord[i + 1]);
-            for j := StartIndex to EndIndex do
+            i := 0;
+            RowIndex := FixedRows;
+            while i < RFactorBounds.PointsCount do
             begin
-                Cells[0, RowIndex + j - StartIndex] :=
-                    ValToStr(ExperimentalProfile.PointXCoord[j]);
-                Cells[1, RowIndex + j - StartIndex] :=
-                    ValToStr(ExperimentalProfile.PointYCoord[j]);
-                Cells[2, RowIndex + j - StartIndex] :=
-                    ValToStr(ComputedProfile.PointYCoord[j]);
-                Cells[3, RowIndex + j - StartIndex] :=
-                    ValToStr(DeltaProfile.PointYCoord[j]);
-            end;
-            //  po vsem krivym, otnosyaschimsya k dannomu intervalu
-            ColIndex := 4;
-            for j := 0 to CurvesList.Count - 1 do
-            begin
-                P := TCurvePointsSet(CurvesList.Items[j]);
-                if StartX = P.PointXCoord[0] then
+                //  !!! RowIndex d. ukazyvat' na nachalo dannyh intervala !!!
+                StartX := RFactorBounds.PointXCoord[i];
+                //  formiruetsya zagolovok
+                for j := 1 to ColCount - 1 do
+                    Cells[j, RowIndex] := '';
+                Cells[1, RowIndex]     := 'Interval';
+                Cells[2, RowIndex]     := 'number';
+                Cells[3, RowIndex]     := IntToStr(i div 2 + 1);
+                Inc(RowIndex);
+
+                StartIndex := ExperimentalProfile.IndexOfValueX(RFactorBounds.PointXCoord[i]);
+                EndIndex   := ExperimentalProfile.IndexOfValueX(RFactorBounds.PointXCoord[i + 1]);
+                for j := StartIndex to EndIndex do
                 begin
-                    for k := 0 to P.PointsCount - 1 do
-                        Cells[ColIndex, RowIndex + k] :=
-                            ValToStr(P.PointYCoord[k]);
-                    Inc(ColIndex);
+                    Cells[0, RowIndex + j - StartIndex] :=
+                        ValToStr(ExperimentalProfile.PointXCoord[j]);
+                    Cells[1, RowIndex + j - StartIndex] :=
+                        ValToStr(ExperimentalProfile.PointYCoord[j]);
+                    Cells[2, RowIndex + j - StartIndex] :=
+                        ValToStr(ComputedProfile.PointYCoord[j]);
+                    Cells[3, RowIndex + j - StartIndex] :=
+                        ValToStr(DeltaProfile.PointYCoord[j]);
                 end;
+                //  po vsem krivym, otnosyaschimsya k dannomu intervalu
+                ColIndex := 4;
+                for j := 0 to CurvesList.Count - 1 do
+                begin
+                    P := TCurvePointsSet(CurvesList.Items[j]);
+                    if StartX = P.PointXCoord[0] then
+                    begin
+                        for k := 0 to P.PointsCount - 1 do
+                            Cells[ColIndex, RowIndex + k] :=
+                                ValToStr(P.PointYCoord[k]);
+                        Inc(ColIndex);
+                    end;
+                end;
+                i := i + 2;
+                RowIndex := RowIndex + EndIndex - StartIndex + 1;
             end;
-            i := i + 2;
-            RowIndex := RowIndex + EndIndex - StartIndex + 1;
+            ResetColWidths;
         end;
-        ResetColWidths;
+        TFormMain(Form).FModifiedDatasheet := True;
     end;
-    TFormMain(Form).FModifiedDatasheet := True;
 end;
 
 procedure TFitViewer.FillCurveTable(CurveList: TMSCRCurveList);
@@ -1367,7 +1331,6 @@ begin
     TFormMain(Form).TabSheetParameters.TabVisible := True;
 {$ENDIF}
 end;
-
 {$ENDIF}
 
 function TFitViewer.GetMaxCurveNum(CurvesList: TSelfCopiedCompList;
@@ -1429,7 +1392,6 @@ procedure TFitViewer.Paint;
 begin
     TFormMain(Form).Chart.Paint;
 end;
-
 {$ENDIF}
 
 end.

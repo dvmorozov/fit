@@ -23,6 +23,12 @@ uses
     mscr_specimen_list, neutron_points_set, self_copied_component,
     title_points_set;
 
+{$IFNDEF SERVER}
+// Switch on updating legend and grids.
+{$DEFINE USE_LEGEND}
+{$DEFINE USE_GRIDS}
+{$ENDIF}
+
 type
     { Defines interface allowing to display data in chart and grids.
       Drawing methods for grids and chart legend are optional, can be
@@ -85,11 +91,6 @@ type
         procedure ShowRFactor;
         { Displays hint about progress. }
         procedure ShowHint(Hint: string);
-        { Turns on/off animation mode in which UI is updated
-          on every computation cycle not only on finishing. }
-        procedure SetAnimationMode(On: boolean);
-        { Returns status of current animation mode. }
-        function GetAnimationMode: boolean;
     end;
 
 implementation

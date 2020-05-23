@@ -1179,6 +1179,7 @@ procedure TFitClient.DoAllAutomatically;
 begin
     Assert(Assigned(FitService));
 
+    Clear;
     FitService.DoAllAutomatically;
     FAsyncState := AsyncWorks;
 end;
@@ -1186,6 +1187,8 @@ end;
 procedure TFitClient.MinimizeDifference;
 begin
     Assert(Assigned(FitService));
+
+    Clear;
     { Curve positions and R-factor bounds are set by AddPointToCurvePositions,
       AddPointToRFactorBounds. }
     FitService.MinimizeDifference;
@@ -1195,6 +1198,8 @@ end;
 procedure TFitClient.MinimizeNumberOfCurves;
 begin
     Assert(Assigned(FitService));
+
+    Clear;
     { Curve positions and R-factor bounds are set by AddPointToCurvePositions,
       AddPointToRFactorBounds. }
     FitService.MinimizeNumberOfCurves;

@@ -508,6 +508,7 @@ var LB: TCheckListBox;
     Square: TRect;
 begin
     Assert(Assigned(Control));
+    Assert((Index >= 0) and (Index < Chart.SeriesCount));
 
     TS := TTASerie(Chart.GetSerie(Index));    //  otsutstvie serii s dannym
                                               //  indeksom est' nedopustimoe

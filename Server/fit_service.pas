@@ -1939,7 +1939,7 @@ begin
 end;
 
 {$HINTS off}
-
+{ TODO: remove Min from parameters. }
 procedure TFitService.ShowCurMin(Min: double);
 begin
 {$IFDEF FIT}

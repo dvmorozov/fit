@@ -37,6 +37,8 @@ type
       necessary. }
     TSelfCopiedCompList = class(TComponentList, ISelfCopied)
     public
+        { Forces ownership of items. }
+        constructor Create; overload;
         function GetCopy: TObject; virtual;
         { Returns copy of list which owns its items. }
         function GetSharedCopy: TObject; virtual;
@@ -49,13 +51,22 @@ type
 
 implementation
 
+constructor TSelfCopiedCompList.Create;
+begin
+    { The class and all its descendants should own all items by default. }
+    inherited Create(True);
+end;
+
 function TSelfCopiedCompList.GetCopy: TObject;
 begin
+    { Constructs object of the same type. }
     Result := NewInstance;
 
-    Assert(Assigned(Result));
+    if not Assigned(Result) then
+        raise EOutOfMemory.Create(
+            'Out of memory in TSelfCopiedCompList.GetCopy.');
 
-    TSelfCopiedCompList(Result).Create;
+    TSelfCopiedCompList(Result).Create(OwnsObjects);
     CopyParameters(Result);
 end;
 
@@ -63,11 +74,14 @@ function TSelfCopiedCompList.GetSharedCopy: TObject;
 var
     i: longint;
 begin
+    { Constructs object of the same type. }
     Result := NewInstance;
 
-    Assert(Assigned(Result));
+    if not Assigned(Result) then
+        raise EOutOfMemory.Create(
+            'Out of memory in TSelfCopiedCompList.GetSharedCopy.');
 
-    TSelfCopiedCompList(Result).Create;
+    TSelfCopiedCompList(Result).Create(OwnsObjects);
     for i := 0 to Count - 1 do
         TSelfCopiedCompList(Result).Add(TComponent(Items[i]));
 end;
@@ -111,9 +125,12 @@ end;
 
 function TSelfCopiedComponent.GetCopy: TObject;
 begin
+    { Constructs object of the same type. }
     Result := NewInstance;
 
-    Assert(Assigned(Result));
+    if not Assigned(Result) then
+        raise EOutOfMemory.Create(
+            'Out of memory in TSelfCopiedComponent.GetCopy.');
 
     try
         TSelfCopiedComponent(Result).Create(nil);

@@ -106,14 +106,14 @@ type
         procedure ReplacePointInCurvePositions(
             PrevXValue, PrevYValue, NewXValue, NewYValue: double);
 
-        function GetCurveList: TMSCRCurveList;
+        function GetCurveAttributes: TMSCRCurveList;
         function GetCurveCount: longint;
         function GetCurveParameterCount(SpecIndex: longint): longint;
         procedure GetCurveParameter(SpecIndex: longint; ParamIndex: longint;
             var Name: string; var Value: double; var Type_: longint);
         procedure SetCurveParameter(SpecIndex: longint; ParamIndex: longint;
             Value: double);
-        function GetCurvesList: TSelfCopiedCompList;
+        function GetCurves: TSelfCopiedCompList;
 
         function GetCalcProfilePointsSet: TTitlePointsSet;
         function GetDeltaProfilePointsSet: TTitlePointsSet;

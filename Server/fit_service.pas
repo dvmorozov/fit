@@ -117,12 +117,12 @@ type
 
         { Contains all curves collected from tasks (for example,
           for separate intervals). Items are added synchronously to the list. }
-        FCurvesList:     TSelfCopiedCompList;
+        FCurves:        TSelfCopiedCompList;
         { Positions of curves. Only X-coordinates are used. }
         FCurvePositions: TTitlePointsSet;
         { Containers of parameters of curves.
           TODO: change type and remove SetWaveLength. }
-        FCurveParameterList: TMSCRCurveList;
+        FCurveAttributes: TMSCRCurveList;
 
         { Dependent on this flag either data of the selected interval are used
           or data of the whole profile. }
@@ -313,9 +313,9 @@ type
             NewXValue, NewYValue: double);
 
         { Returns list of parameters of all curves. }
-        function GetCurveList: TMSCRCurveList;
+        function GetCurveAttributes: TMSCRCurveList;
         { Returns list of components containing sets of points. }
-        function GetCurvesList: TSelfCopiedCompList;
+        function GetCurves: TSelfCopiedCompList;
 
         { These methods check validity of server state and
           throw EUserException in the case when state is invalid. }
@@ -569,10 +569,10 @@ begin
 
     try
         Assert(Assigned(ACurvePositions));
-        Assert(Assigned(FCurveParameterList));
+        Assert(Assigned(FCurveAttributes));
 
         FCurvePositions.Clear;
-        FCurveParameterList.Clear;
+        FCurveAttributes.Clear;
 
         for i := 0 to ACurvePositions.PointsCount - 1 do
             AddPoint(FCurvePositions, ACurvePositions.PointXCoord[i],
@@ -620,10 +620,10 @@ begin
 
     try
         Assert(Assigned(ARFactorBounds));
-        Assert(Assigned(FCurveParameterList));
+        Assert(Assigned(FCurveAttributes));
 
         FRFactorBounds.Clear;
-        FCurveParameterList.Clear;
+        FCurveAttributes.Clear;
 
         for i := 0 to ARFactorBounds.PointsCount - 1 do
             AddPoint(FRFactorBounds, ARFactorBounds.PointXCoord[i],
@@ -691,9 +691,9 @@ begin
     FRFactorBounds  := TTitlePointsSet.Create(nil);
     // elementy v eti spiski d. dobavlyat'sya sinhronno
     FCurvePositions := TTitlePointsSet.Create(nil);
-    FCurveParameterList := TMSCRCurveList.Create;
-    FCurveParameterList.FWaveLength := WaveLength;
-    FCurvesList     := TSelfCopiedCompList.Create;
+    FCurveAttributes := TMSCRCurveList.Create;
+    FCurveAttributes.FWaveLength := WaveLength;
+    FCurves := TSelfCopiedCompList.Create;
 
     SetState(ProfileWaiting);
 end;
@@ -1555,18 +1555,18 @@ begin
         Result := nil;
 end;
 
-function TFitService.GetCurvesList: TSelfCopiedCompList;
+function TFitService.GetCurves: TSelfCopiedCompList;
 begin
-    if Assigned(FCurvesList) then
-        Result := TSelfCopiedCompList(FCurvesList.GetCopy)
+    if Assigned(FCurves) then
+        Result := TSelfCopiedCompList(FCurves.GetCopy)
     else
         Result := nil;
 end;
 
 function TFitService.GetCurveCount: longint;
 begin
-    Assert(Assigned(FCurvesList));
-    Result := FCurvesList.Count;
+    Assert(Assigned(FCurves));
+    Result := FCurves.Count;
 end;
 
 function TFitService.GetCurvePoints(SpecIndex: longint): TNamedPointsSet;
@@ -1577,7 +1577,7 @@ begin
     Assert((SpecIndex >= 0) and (SpecIndex < Count));
 
     Result := TNamedPointsSet(TNamedPointsSet(
-        FCurvesList.Items[SpecIndex]).GetCopy);
+        FCurves.Items[SpecIndex]).GetCopy);
 end;
 
 function TFitService.GetCurveParameterCount(SpecIndex: longint): longint;
@@ -1585,7 +1585,7 @@ var
     SpecParamList:   TMSCRCurveList;
     CurveParameters: Curve_parameters;
 begin
-    SpecParamList := GetCurveList;
+    SpecParamList := GetCurveAttributes;
     Assert(Assigned(SpecParamList));
     Assert((SpecIndex >= 0) and (SpecIndex < SpecParamList.Count));
 
@@ -1600,7 +1600,7 @@ var
     CurveParameters: Curve_parameters;
     Parameter: TSpecialCurveParameter;
 begin
-    SpecParamList := GetCurveList;
+    SpecParamList := GetCurveAttributes;
     Assert(Assigned(SpecParamList));
     Assert((SpecIndex >= 0) and (SpecIndex < SpecParamList.Count));
 
@@ -1620,7 +1620,7 @@ var
     CurveParameters: Curve_parameters;
     Parameter: TSpecialCurveParameter;
 begin
-    SpecParamList := GetCurveList;
+    SpecParamList := GetCurveAttributes;
     Assert(Assigned(SpecParamList));
     Assert((SpecIndex >= 0) and (SpecIndex < SpecParamList.Count));
 
@@ -1788,7 +1788,7 @@ var
 
 begin
     Assert(Assigned(Points));
-    Assert(Assigned(FCurveParameterList));
+    Assert(Assigned(FCurveAttributes));
     Integral := IntegrateWithBoundaries(Points, StartPointIndex, StopPointIndex);
 
     CurveParameters := Curve_parameters(Points.Parameters.GetCopy);
@@ -1799,7 +1799,7 @@ begin
         AddNewParameter(FinishPosName, Points.PointXCoord[StopPointIndex]);
         AddNewParameter('Integral', Integral);
 
-        FCurveParameterList.Add(CurveParameters);
+        FCurveAttributes.Add(CurveParameters);
 
     except
         CurveParameters.Free;
@@ -2122,10 +2122,9 @@ begin
     RecreateMainCalcThread(MinimizeDifferenceAlg, DoneProc);
 end;
 
-function TFitService.GetCurveList: TMSCRCurveList;
+function TFitService.GetCurveAttributes: TMSCRCurveList;
 begin
-    // vozvraschaem chto est' bez proverki
-    Result := TMSCRCurveList(FCurveParameterList.GetCopy);
+    Result := TMSCRCurveList(FCurveAttributes.GetCopy);
 end;
 
 procedure TFitService.CreateResultedProfile;
@@ -2243,9 +2242,8 @@ var
 begin
     Assert(Assigned(FTaskList));
 
-    FCurvesList.Free;
-    FCurvesList := nil;
-    FCurvesList := TSelfCopiedCompList.Create;
+    FCurves.Free;
+    FCurves := TSelfCopiedCompList.Create;
 
     for i := 0 to FTaskList.Count - 1 do
     begin
@@ -2262,7 +2260,7 @@ begin
             for k := 0 to CurveCopy.PointsCount - 1 do
                 CurveCopy.PointYCoord[k] :=
                     CurveCopy.PointYCoord[k] * ScalingFactor;
-            FCurvesList.Add(CurveCopy);
+            FCurves.Add(CurveCopy);
         end;
     end;
 end;
@@ -2284,7 +2282,7 @@ begin
             Assert(Assigned(FBackgroundPoints));
             Assert(Assigned(FRFactorBounds));
             Assert(Assigned(FCurvePositions));
-            Assert(Assigned(FCurveParameterList));
+            Assert(Assigned(FCurveAttributes));
             // chtoby mozhno bylo dobavlyat' tochki tablichno bez vhoda
             // v spets. rezhim
             FExpProfile.Clear;
@@ -2292,8 +2290,8 @@ begin
             FBackgroundPoints.Clear;
             FRFactorBounds.Clear;
             FCurvePositions.Clear;
-            FCurveParameterList.Clear;
-            FCurvesList.Clear;
+            FCurveAttributes.Clear;
+            FCurves.Clear;
 
             FSelectedArea.Free;
             FSelectedArea := nil;
@@ -2354,10 +2352,10 @@ end;
 
 procedure TFitService.SetWaveLength(AWaveLength: double);
 begin
-    Assert(Assigned(FCurveParameterList));
+    Assert(Assigned(FCurveAttributes));
 
     FWaveLength := AWaveLength;
-    FCurveParameterList.FWaveLength := WaveLength;
+    FCurveAttributes.FWaveLength := WaveLength;
 end;
 
 function TFitService.GetWaveLength: double;
@@ -2610,7 +2608,7 @@ begin
         // rabotaet ne optimal'no, no podhodit dlya
         // povtornoy initsializatsii pri dobavlenii /
         // udalenii tochek privyazki ekzemplyarov patterna
-        FT.RecreateCurves(FCurveParameterList);
+        FT.RecreateCurves(FCurveAttributes);
         FT.ComputeProfile;
     end;
 end;
@@ -2621,14 +2619,14 @@ var
     StartPointIndex, StopPointIndex: longint;
     i, j: longint;
 begin
-    Assert(Assigned(FCurvesList));
-    Assert(Assigned(FCurveParameterList));
+    Assert(Assigned(FCurves));
+    Assert(Assigned(FCurveAttributes));
 
-    FCurveParameterList.Clear;
+    FCurveAttributes.Clear;
 
-    for i := 0 to FCurvesList.Count - 1 do
+    for i := 0 to FCurves.Count - 1 do
     begin
-        NS := TCurvePointsSet(FCurvesList.Items[i]);
+        NS := TCurvePointsSet(FCurves.Items[i]);
         // opredelenie indeksov granichnyh tochek sravneniem s porogom
         StartPointIndex := -1;
         StopPointIndex := -1;

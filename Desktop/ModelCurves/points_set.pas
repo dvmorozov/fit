@@ -138,6 +138,8 @@ procedure TPointsSet.CopyParameters(Dest: TObject);
 var
     i: longint;
 begin
+    Assert(Dest.ClassType = Self.ClassType);
+
     TPointsSet(Dest).Clear;
     inherited;
     { TODO: optimize by copying entire array. }
@@ -189,7 +191,7 @@ end;
 procedure TPointsSet.Clear;
 begin
     { Terminates dynamic array controlled by reference counter. }
-    FPoints := nil;
+    SetLength(FPoints, 0);
 end;
 
 procedure TPointsSet.DeletePoint(XValue: double);

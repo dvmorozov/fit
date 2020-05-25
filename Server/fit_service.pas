@@ -2248,7 +2248,7 @@ begin
     begin
         FitTask := TFitTask(FTaskList.Items[i]);
         ScalingFactor := FitTask.GetScalingFactor;
-        TaskCurvesList := FitTask.GetCurvesList;
+        TaskCurvesList := FitTask.GetCurves;
 
         Assert(Assigned(TaskCurvesList));
 

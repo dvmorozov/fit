@@ -138,8 +138,9 @@ procedure TPointsSet.CopyParameters(Dest: TObject);
 var
     i: longint;
 begin
-    inherited;
     TPointsSet(Dest).Clear;
+    inherited;
+    { TODO: optimize by copying entire array. }
     for i := 0 to PointsCount - 1 do
         TPointsSet(Dest).AddNewPoint(PointXCoord[i], PointYCoord[i]);
 end;
@@ -187,8 +188,7 @@ end;
 
 procedure TPointsSet.Clear;
 begin
-    if Assigned(FPoints) then
-        SetLength(FPoints, 0);
+    { Terminates dynamic array controlled by reference counter. }
     FPoints := nil;
 end;
 

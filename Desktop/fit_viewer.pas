@@ -407,7 +407,7 @@ begin
         SerieTitle := Serie.Title;
 
         TFormMain(Form).Chart.DeleteSerie(Serie);
-        FPointsSetList.Extract(PointsSet);
+        FPointsSetList.Remove(PointsSet);
 
 {$IFDEF USE_LEGEND}
         { Searching should be done by unique curve name, because in animation

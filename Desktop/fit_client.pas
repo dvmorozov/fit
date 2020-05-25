@@ -92,7 +92,7 @@ type
         procedure SetCurvesListLambda;
 
     protected
-        FCurMin:         double;
+        FCurMin:           double;
         { If True then in all operations only data belonging to selected ared are used
           otherwise all profile data are used. }
         FSelectedAreaMode: boolean;

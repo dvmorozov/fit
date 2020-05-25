@@ -2139,7 +2139,6 @@ begin
     Assert(Assigned(FExpProfile));
 
     FCalcProfile.Free;
-    FCalcProfile := nil;
     FCalcProfile := TTitlePointsSet.Create(nil);
     // ustanavlivaetsya trebuemoe kol-vo tochek
     for i := 0 to FExpProfile.PointsCount - 1 do

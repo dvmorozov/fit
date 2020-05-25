@@ -32,13 +32,12 @@ type
         procedure CopyParameters(Dest: TObject); virtual;
     end;
 
-    { List of self copied components. By default is always active, so copy of 
-      list is also active. Caller should make the list inactive by itself if 
-      necessary. }
+    { List of self copied components. By default it keeps ownership of items
+      and destroys them in corresponding methods. Ownership is transferrred
+      to copy of list as well. }
     TSelfCopiedCompList = class(TComponentList, ISelfCopied)
     public
-        { Forces ownership of items. }
-        constructor Create; overload;
+        destructor Destroy; override;
         function GetCopy: TObject; virtual;
         { Returns copy of list which owns its items. }
         function GetSharedCopy: TObject; virtual;
@@ -47,14 +46,21 @@ type
         procedure Insert(Index: integer; Item: TComponent); virtual;
         function Add(Item: TComponent): integer; virtual;
         procedure Delete(Index: integer); virtual;
+        function Remove(AComponent: TComponent): Integer; virtual;
     end;
 
 implementation
 
-constructor TSelfCopiedCompList.Create;
+destructor TSelfCopiedCompList.Destroy;
 begin
-    { The class and all its descendants should own all items by default. }
-    inherited Create(True);
+    { Must free objects itself because neither TComponentList nor TObjectList
+      do that. }
+    if OwnsObjects then
+    begin
+        while Count > 0 do
+            Delete(0);
+    end;
+    inherited;
 end;
 
 function TSelfCopiedCompList.GetCopy: TObject;
@@ -120,7 +126,15 @@ end;
 
 procedure TSelfCopiedCompList.Delete(Index: integer);
 begin
+    Assert((Index >= 0) and (Index < Count));
+    { The object is freed by inherited Notify method. }
     inherited;
+end;
+
+function TSelfCopiedCompList.Remove(AComponent: TComponent): Integer;
+begin
+    { The object is freed by inherited Notify method. }
+    Result := inherited;
 end;
 
 function TSelfCopiedComponent.GetCopy: TObject;

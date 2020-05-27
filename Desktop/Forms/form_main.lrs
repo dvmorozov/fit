@@ -8,10 +8,10 @@ LazarusResources.Add('TFormMain','FORMDATA',[
   +' Serif'#4'Menu'#7#8'MainMenu'#12'OnCloseQuery'#7#14'FormCloseQuery'#8'OnCre'
   +'ate'#7#10'FormCreate'#9'OnDestroy'#7#11'FormDestroy'#8'Position'#7#9'poDefa'
   +'ult'#8'ShowHint'#9#10'LCLVersion'#6#7'2.0.6.0'#0#10'TStatusBar'#9'StatusBar'
-  +#4'Left'#2#0#6'Height'#2#19#3'Top'#3#135#1#5'Width'#3#30#4#11'Font.Height'#2
+  +#4'Left'#2#0#6'Height'#2#19#3'Top'#3'1'#2#5'Width'#3#30#4#11'Font.Height'#2
   +#247#9'Font.Name'#6#13'MS Sans Serif'#6'Panels'#14#1#5'Width'#3#240#0#0#1#5
   +'Width'#3#144#1#0#1#5'Width'#2'('#0#0#10'ParentFont'#8#11'SimplePanel'#8#0#0
-  +#12'TPageControl'#11'PageControl'#4'Left'#2#0#6'Height'#3#170#0#3'Top'#3#154
+  +#12'TPageControl'#11'PageControl'#4'Left'#2#0#6'Height'#3#170#0#3'Top'#3#135
   +#1#5'Width'#3#30#4#10'ActivePage'#7#18'TabSheetBackground'#5'Align'#7#8'alBo'
   +'ttom'#11'Font.Height'#2#247#9'Font.Name'#6#13'MS Sans Serif'#10'ParentFont'
   +#8#8'TabIndex'#2#0#8'TabOrder'#2#4#0#9'TTabSheet'#18'TabSheetBackground'#7'C'
@@ -1448,94 +1448,109 @@ LazarusResources.Add('TFormMain','FORMDATA',[
   +#3#128#1#0#0#6'TTimer'#16'TimerBalloonHide'#7'Enabled'#8#7'OnTimer'#7#21'Tim'
   +'erBalloonHideTimer'#4'left'#3#211#1#0#0#11'TActionList'#10'ActionList'#6'Im'
   +'ages'#7#10'ImageList2'#4'left'#3#128#1#3'top'#3#128#0#0#7'TAction'#10'Actio'
-  +'nQuit'#8'Category'#6#4'Data'#7'Caption'#6#5'&Quit'#9'OnExecute'#7#17'Action'
-  +'QuitExecute'#0#0#7'TAction ActionSelectCharacteristicPoints'#8'Category'#6#4
-  +'Data'#7'Caption'#6'$Select Characteristic Points of Peak'#9'OnExecute'#7''''
-  +'ActionSelectCharacteristicPointsExecute'#0#0#7'TAction'#19'ActionSmoothProf'
-  +'ile'#8'Category'#6#4'Data'#7'Caption'#6#14'Smooth Profile'#9'OnExecute'#7#26
-  +'ActionSmoothProfileExecute'#0#0#7'TAction'#27'ActionSetBackgroundFraction'#8
-  +'Category'#6#5'Model'#7'Caption'#6#26'Set Background Fraction...'#4'Hint'#6
-  +'LSet fraction of maximum amplitude for automatic background points generati'
-  +'on'#9'OnExecute'#7'"ActionSetBackgroundFractionExecute'#0#0#7'TAction'#29'A'
-  +'ctionComputeBackgroundPoints'#8'Category'#6#5'Model'#7'Caption'#6#21'Comput'
-  +'e Automatically'#4'Hint'#6'''Compute background points automatically'#10'Im'
-  +'ageIndex'#2#11#9'OnExecute'#7'$ActionComputeBackgroundPointsExecute'#0#0#7
-  +'TAction'#30'ActionSelectBackgroundManually'#8'Category'#6#5'Model'#7'Captio'
-  +'n'#6#22'Start Manual Selection'#9'OnExecute'#7'%ActionSelectBackgroundManua'
-  +'llyExecute'#0#0#7'TAction'#28'ActionRemoveBackgroundPoints'#8'Category'#6#5
-  +'Model'#7'Caption'#6#10'Remove All'#4'Hint'#6#24'Remove background points'#10
-  +'ImageIndex'#2#14#9'OnExecute'#7'#ActionRemoveBackgroundPointsExecute'#0#0#7
-  +'TAction%ActionSubtractBackgroundAutomatically'#8'Category'#6#5'Model'#7'Cap'
-  +'tion'#6#13'Automatically'#4'Hint'#6#21'Subract automatically'#10'ImageIndex'
-  +#2#12#9'OnExecute'#7',ActionSubtractBackgroundAutomaticallyExecute'#0#0#7'TA'
-  +'ction(ActionSubtractBackgroundBySelectedPoints'#8'Category'#6#5'Model'#7'Ca'
-  +'ption'#6#18'By Selected Points'#4'Hint'#6#27'Subtract by selected points'#10
-  +'ImageIndex'#2#15#9'OnExecute'#7'/ActionSubtractBackgroundBySelectedPointsEx'
-  +'ecute'#0#0#7'TAction'#26'ActionSelectIntervalBounds'#8'Category'#6#4'Data'#7
-  +'Caption'#6#22'Start Manual Selection'#9'OnExecute'#7'!ActionSelectIntervalB'
-  ,'oundsExecute'#0#0#7'TAction'#24'ActionSelectDataInterval'#8'Category'#6#4'D'
-  +'ata'#7'Caption'#6#20'Select Data Interval'#9'OnExecute'#7#31'ActionSelectDa'
-  +'taIntervalExecute'#0#0#7'TAction'#25'ActionSelectEntireProfile'#8'Category'
-  +#6#4'Data'#7'Caption'#6#21'Select Entire Profile'#9'OnExecute'#7' ActionSele'
-  +'ctEntireProfileExecute'#0#0#7'TAction'#16'ActionReloadData'#8'Category'#6#4
-  +'Data'#7'Caption'#6#7'&Reload'#4'Hint'#6'"Reload experimental data from file'
-  +#9'OnExecute'#7#23'ActionReloadDataExecute'#0#0#7'TAction'#17'ActionLoadProf'
-  +'ile'#8'Category'#6#4'Data'#7'Caption'#6#16'&Load Profile...'#4'Hint'#6' Loa'
-  +'d experimental data from file'#10'ImageIndex'#2#4#9'OnExecute'#7#24'ActionL'
-  +'oadProfileExecute'#8'ShortCut'#2'q'#0#0#7'TAction'#26'ActionComputeRFactorB'
-  +'ounds'#8'Category'#6#5'Model'#7'Caption'#6#21'Compute Automatically'#10'Ima'
-  +'geIndex'#2#11#9'OnExecute'#7'!ActionComputeRFactorBoundsExecute'#0#0#7'TAct'
-  +'ion!ActionSelectRFactorBoundsManually'#8'Category'#6#5'Model'#7'Caption'#6
-  +#22'Start Manual Selection'#9'OnExecute'#7'(ActionSelectRFactorBoundsManuall'
-  +'yExecute'#0#0#7'TAction'#25'ActionRemoveRFactorBounds'#8'Category'#6#5'Mode'
-  +'l'#7'Caption'#6#10'Remove All'#10'ImageIndex'#2#14#9'OnExecute'#7' ActionRe'
-  +'moveRFactorBoundsExecute'#0#0#7'TAction'#26'ActionComputCurvePositions'#8'C'
-  +'ategory'#6#5'Model'#7'Caption'#6#21'Compute Automatically'#10'ImageIndex'#2
-  +#11#9'OnExecute'#7'!ActionComputCurvePositionsExecute'#0#0#7'TAction"ActionS'
-  +'electCurvePositionsManually'#8'Category'#6#5'Model'#7'Caption'#6#22'Start M'
-  +'anual Selection'#9'OnExecute'#7')ActionSelectCurvePositionsManuallyExecute'
-  +#0#0#7'TAction'#26'ActionRemoveCurvePositions'#8'Category'#6#5'Model'#7'Capt'
-  +'ion'#6#10'Remove All'#10'ImageIndex'#2#14#9'OnExecute'#7'!ActionRemoveCurve'
-  +'PositionsExecute'#0#0#7'TAction'#23'ActionSelectCurveBounds'#8'Category'#6#5
-  +'Model'#7'Caption'#6#19'Select Curve Bounds'#9'OnExecute'#7#30'ActionSelectC'
-  +'urveBoundsExecute'#0#0#7'TAction'#21'ActionSaveModelAsText'#8'Category'#6#5
-  +'Model'#7'Caption'#6#20'Save as Text File...'#4'Hint'#6'"Save model paramete'
-  +'rs as text file'#10'ImageIndex'#2#0#9'OnExecute'#7#28'ActionSaveModelAsText'
-  +'Execute'#0#0#7'TAction'#24'ActionDoAllAutomatically'#8'Category'#6#3'Fit'#7
-  +'Caption'#6#20'Do All Automatically'#4'Hint'#6#20'Do all automatically'#10'I'
-  +'mageIndex'#2#11#9'OnExecute'#7#31'ActionDoAllAutomaticallyExecute'#0#0#7'TA'
-  +'ction'#28'ActionMinimizeNumberOfCurves'#8'Category'#6#3'Fit'#7'Caption'#6#25
-  +'Minimize Number of Curves'#9'OnExecute'#7'#ActionMinimizeNumberOfCurvesExec'
-  +'ute'#8'ShortCut'#2's'#0#0#7'TAction'#24'ActionMinimizeDifference'#8'Categor'
-  +'y'#6#3'Fit'#7'Caption'#6#19'Minimize Difference'#9'OnExecute'#7#31'ActionMi'
-  +'nimizeDifferenceExecute'#8'ShortCut'#2't'#0#0#7'TAction'#13'ActionStopFit'#8
-  +'Category'#6#3'Fit'#7'Caption'#6#4'Stop'#9'OnExecute'#7#20'ActionStopFitExec'
-  +'ute'#0#0#7'TAction'#23'ActionSetMaximumRFactor'#8'Category'#6#3'Fit'#7'Capt'
-  +'ion'#6' Set Max Acceptable Difference...'#9'OnExecute'#7#30'ActionSetMaximu'
-  +'mRFactorExecute'#0#0#7'TAction'#10'ActionCopy'#8'Category'#6#4'Edit'#7'Capt'
-  +'ion'#6#17'Copy to Clipboard'#10'ImageIndex'#2#1#9'OnExecute'#7#17'ActionCop'
-  +'yExecute'#0#0#7'TAction'#12'ActionDelete'#8'Category'#6#4'Edit'#7'Caption'#6
-  +#6'Delete'#9'OnExecute'#7#19'ActionDeleteExecute'#0#0#7'TAction'#15'ActionSe'
-  +'lectAll'#8'Category'#6#4'Edit'#7'Caption'#6#10'Select All'#9'OnExecute'#7#22
-  +'ActionSelectAllExecute'#0#0#7'TAction'#12'ActionZoomIn'#8'Category'#6#4'Vie'
-  +'w'#7'Caption'#6#7'Zoom In'#4'Hint'#6#7'Zoom in'#10'ImageIndex'#2#8#9'OnExec'
-  +'ute'#7#19'ActionZoomInExecute'#0#0#7'TAction'#13'ActionZoomOut'#8'Category'
-  +#6#4'View'#7'Caption'#6#8'Zoom Out'#4'Hint'#6#8'Zoom out'#10'ImageIndex'#2#9
-  +#9'OnExecute'#7#20'ActionZoomOutExecute'#0#0#7'TAction'#17'ActionViewMarkers'
-  +#8'Category'#6#4'View'#7'Caption'#6#12'View Markers'#9'OnExecute'#7#24'Actio'
-  +'nViewMarkersExecute'#0#0#7'TAction'#14'ActionGlossary'#8'Category'#6#4'Help'
-  +#7'Caption'#6#8'Glossary'#7'Visible'#8#0#0#7'TAction'#11'ActionAbout'#8'Cate'
-  +'gory'#6#4'Help'#7'Caption'#6#9'&About...'#9'OnExecute'#7#18'ActionAboutExec'
-  +'ute'#0#0#7'TAction%ActionSelectAllPointsAsCurvePositions'#8'Category'#6#5'M'
-  +'odel'#7'Caption'#6#14'At Every Point'#9'OnExecute'#7',ActionSelectAllPoints'
-  +'AsCurvePositionsExecute'#0#0#7'TAction'#19'ActionAnimationMode'#8'Category'
-  +#6#4'View'#7'Caption'#6#14'Animation Mode'#9'OnExecute'#7#26'ActionAnimation'
-  +'ModeExecute'#8'OnUpdate'#7#25'ActionAnimationModeUpdate'#0#0#7'TAction'#31
-  +'ActionEnableBackgroundVariation'#8'Category'#6#5'Model'#7'Caption'#6#16'Ena'
-  +'ble Variation'#9'OnExecute'#7'&ActionEnableBackgroundVariationExecute'#8'On'
-  +'Update'#7'%ActionEnableBackgroundVariationUpdate'#0#0#7'TAction'#24'ActionE'
-  +'nableCurveScaling'#8'Category'#6#3'Fit'#7'Caption'#6#20'Enable Curve Scalin'
-  +'g'#9'OnExecute'#7#31'ActionEnableCurveScalingExecute'#8'OnUpdate'#7#30'Acti'
-  +'onEnableCurveScalingUpdate'#0#0#0#6'TTimer'#10'TimerAsync'#7'Enabled'#8#8'I'
-  ,'nterval'#3#208#7#7'OnTimer'#7#15'TimerAsyncTimer'#4'left'#3#192#0#0#0#0
+  +'nQuit'#8'Category'#6#4'Data'#7'Caption'#6#5'&Quit'#4'Hint'#6#4'Quit'#9'OnEx'
+  +'ecute'#7#17'ActionQuitExecute'#0#0#7'TAction ActionSelectCharacteristicPoin'
+  +'ts'#8'Category'#6#4'Data'#7'Caption'#6'$Select Characteristic Points of Pea'
+  +'k'#4'Hint'#6'$Select characteristic points of peak'#9'OnExecute'#7'''Action'
+  +'SelectCharacteristicPointsExecute'#0#0#7'TAction'#19'ActionSmoothProfile'#8
+  +'Category'#6#4'Data'#7'Caption'#6#14'Smooth Profile'#4'Hint'#6#19'Smooth pro'
+  +'file data'#9'OnExecute'#7#26'ActionSmoothProfileExecute'#0#0#7'TAction'#27
+  +'ActionSetBackgroundFraction'#8'Category'#6#5'Model'#7'Caption'#6#26'Set Bac'
+  +'kground Fraction...'#4'Hint'#6'LSet fraction of maximum amplitude for autom'
+  +'atic background points generation'#9'OnExecute'#7'"ActionSetBackgroundFract'
+  +'ionExecute'#0#0#7'TAction'#29'ActionComputeBackgroundPoints'#8'Category'#6#5
+  +'Model'#7'Caption'#6#21'Compute Automatically'#4'Hint'#6'''Compute backgroun'
+  +'d points automatically'#10'ImageIndex'#2#11#9'OnExecute'#7'$ActionComputeBa'
+  +'ckgroundPointsExecute'#0#0#7'TAction'#30'ActionSelectBackgroundManually'#8
+  +'Category'#6#5'Model'#7'Caption'#6#22'Start Manual Selection'#4'Hint'#6'+Sta'
+  +'rt manual selection of background points'#9'OnExecute'#7'%ActionSelectBackg'
+  +'roundManuallyExecute'#0#0#7'TAction'#28'ActionRemoveBackgroundPoints'#8'Cat'
+  +'egory'#6#5'Model'#7'Caption'#6#10'Remove All'#4'Hint'#6#24'Remove backgroun'
+  +'d points'#10'ImageIndex'#2#14#9'OnExecute'#7'#ActionRemoveBackgroundPointsE'
+  +'xecute'#0#0#7'TAction%ActionSubtractBackgroundAutomatically'#8'Category'#6#5
+  +'Model'#7'Caption'#6#13'Automatically'#4'Hint'#6'''Subract background points'
+  +' automatically'#10'ImageIndex'#2#12#9'OnExecute'#7',ActionSubtractBackgroun'
+  +'dAutomaticallyExecute'#0#0#7'TAction(ActionSubtractBackgroundBySelectedPoin'
+  +'ts'#8'Category'#6#5'Model'#7'Caption'#6#18'By Selected Points'#4'Hint'#6'&S'
+  +'ubtract background by selected points'#10'ImageIndex'#2#15#9'OnExecute'#7'/'
+  ,'ActionSubtractBackgroundBySelectedPointsExecute'#0#0#7'TAction'#26'ActionSe'
+  +'lectIntervalBounds'#8'Category'#6#4'Data'#7'Caption'#6#22'Start Manual Sele'
+  +'ction'#4'Hint'#6')Start manual selection of interval bounds'#9'OnExecute'#7
+  +'!ActionSelectIntervalBoundsExecute'#0#0#7'TAction'#24'ActionSelectDataInter'
+  +'val'#8'Category'#6#4'Data'#7'Caption'#6#20'Select Data Interval'#4'Hint'#6
+  +#20'Select data interval'#9'OnExecute'#7#31'ActionSelectDataIntervalExecute'
+  +#0#0#7'TAction'#25'ActionSelectEntireProfile'#8'Category'#6#4'Data'#7'Captio'
+  +'n'#6#21'Select Entire Profile'#4'Hint'#6#21'Select entire profile'#9'OnExec'
+  +'ute'#7' ActionSelectEntireProfileExecute'#0#0#7'TAction'#16'ActionReloadDat'
+  +'a'#8'Category'#6#4'Data'#7'Caption'#6#7'&Reload'#4'Hint'#6'"Reload experime'
+  +'ntal data from file'#9'OnExecute'#7#23'ActionReloadDataExecute'#0#0#7'TActi'
+  +'on'#17'ActionLoadProfile'#8'Category'#6#4'Data'#7'Caption'#6#16'&Load Profi'
+  +'le...'#4'Hint'#6' Load experimental data from file'#10'ImageIndex'#2#4#9'On'
+  +'Execute'#7#24'ActionLoadProfileExecute'#8'ShortCut'#2'q'#0#0#7'TAction'#26
+  +'ActionComputeRFactorBounds'#8'Category'#6#5'Model'#7'Caption'#6#21'Compute '
+  +'Automatically'#4'Hint'#6'%Compute R-factor bounds automatically'#10'ImageIn'
+  +'dex'#2#11#9'OnExecute'#7'!ActionComputeRFactorBoundsExecute'#0#0#7'TAction!'
+  +'ActionSelectRFactorBoundsManually'#8'Category'#6#5'Model'#7'Caption'#6#22'S'
+  +'tart Manual Selection'#4'Hint'#6')Start manual selection of R-factor bounds'
+  +#9'OnExecute'#7'(ActionSelectRFactorBoundsManuallyExecute'#0#0#7'TAction'#25
+  +'ActionRemoveRFactorBounds'#8'Category'#6#5'Model'#7'Caption'#6#10'Remove Al'
+  +'l'#4'Hint'#6#26'Remove all R-factor bounds'#10'ImageIndex'#2#14#9'OnExecute'
+  +#7' ActionRemoveRFactorBoundsExecute'#0#0#7'TAction'#26'ActionComputCurvePos'
+  +'itions'#8'Category'#6#5'Model'#7'Caption'#6#21'Compute Automatically'#4'Hin'
+  +'t'#6'%Compute curve positions automatically'#10'ImageIndex'#2#11#9'OnExecut'
+  +'e'#7'!ActionComputCurvePositionsExecute'#0#0#7'TAction"ActionSelectCurvePos'
+  +'itionsManually'#8'Category'#6#5'Model'#7'Caption'#6#22'Start Manual Selecti'
+  +'on'#4'Hint'#6')Start manual selection of curve positions'#9'OnExecute'#7')A'
+  +'ctionSelectCurvePositionsManuallyExecute'#0#0#7'TAction'#26'ActionRemoveCur'
+  +'vePositions'#8'Category'#6#5'Model'#7'Caption'#6#10'Remove All'#4'Hint'#6#26
+  +'Remove all curve positions'#10'ImageIndex'#2#14#9'OnExecute'#7'!ActionRemov'
+  +'eCurvePositionsExecute'#0#0#7'TAction'#23'ActionSelectCurveBounds'#8'Catego'
+  +'ry'#6#5'Model'#7'Caption'#6#19'Select Curve Bounds'#4'Hint'#6#19'Select cur'
+  +'ve bounds'#9'OnExecute'#7#30'ActionSelectCurveBoundsExecute'#0#0#7'TAction'
+  +#21'ActionSaveModelAsText'#8'Category'#6#5'Model'#7'Caption'#6#20'Save as Te'
+  +'xt File...'#4'Hint'#6'"Save model parameters as text file'#10'ImageIndex'#2
+  +#0#9'OnExecute'#7#28'ActionSaveModelAsTextExecute'#0#0#7'TAction'#24'ActionD'
+  +'oAllAutomatically'#8'Category'#6#3'Fit'#7'Caption'#6#13'Automatically'#4'Hi'
+  +'nt'#6#28'Do computation automatically'#10'ImageIndex'#2#11#9'OnExecute'#7#31
+  +'ActionDoAllAutomaticallyExecute'#0#0#7'TAction'#28'ActionMinimizeNumberOfCu'
+  +'rves'#8'Category'#6#3'Fit'#7'Caption'#6#25'Minimize Number of Curves'#4'Hin'
+  +'t'#6#25'Minimize number of curves'#9'OnExecute'#7'#ActionMinimizeNumberOfCu'
+  +'rvesExecute'#8'ShortCut'#2's'#0#0#7'TAction'#24'ActionMinimizeDifference'#8
+  +'Category'#6#3'Fit'#7'Caption'#6#19'Minimize Difference'#4'Hint'#6#19'Minimi'
+  +'ze difference'#9'OnExecute'#7#31'ActionMinimizeDifferenceExecute'#8'ShortCu'
+  +'t'#2't'#0#0#7'TAction'#13'ActionStopFit'#8'Category'#6#3'Fit'#7'Caption'#6#4
+  +'Stop'#4'Hint'#6#16'Stop computation'#9'OnExecute'#7#20'ActionStopFitExecute'
+  +#0#0#7'TAction'#23'ActionSetMaximumRFactor'#8'Category'#6#3'Fit'#7'Caption'#6
+  +' Set Max Acceptable Difference...'#4'Hint'#6#29'Set max acceptable differen'
+  +'ce'#9'OnExecute'#7#30'ActionSetMaximumRFactorExecute'#0#0#7'TAction'#10'Act'
+  +'ionCopy'#8'Category'#6#4'Edit'#7'Caption'#6#17'Copy to Clipboard'#4'Hint'#6
+  +#17'Copy to clipboard'#10'ImageIndex'#2#1#9'OnExecute'#7#17'ActionCopyExecut'
+  +'e'#0#0#7'TAction'#12'ActionDelete'#8'Category'#6#4'Edit'#7'Caption'#6#6'Del'
+  +'ete'#4'Hint'#6#6'Delete'#9'OnExecute'#7#19'ActionDeleteExecute'#0#0#7'TActi'
+  +'on'#15'ActionSelectAll'#8'Category'#6#4'Edit'#7'Caption'#6#10'Select All'#4
+  +'Hint'#6#10'Select all'#9'OnExecute'#7#22'ActionSelectAllExecute'#0#0#7'TAct'
+  +'ion'#12'ActionZoomIn'#8'Category'#6#4'View'#7'Caption'#6#7'Zoom In'#4'Hint'
+  +#6#7'Zoom in'#10'ImageIndex'#2#8#9'OnExecute'#7#19'ActionZoomInExecute'#0#0#7
+  +'TAction'#13'ActionZoomOut'#8'Category'#6#4'View'#7'Caption'#6#8'Zoom Out'#4
+  +'Hint'#6#8'Zoom out'#10'ImageIndex'#2#9#9'OnExecute'#7#20'ActionZoomOutExecu'
+  +'te'#0#0#7'TAction'#17'ActionViewMarkers'#8'Category'#6#4'View'#7'Caption'#6
+  +#12'View Markers'#4'Hint'#6#12'View markers'#9'OnExecute'#7#24'ActionViewMar'
+  +'kersExecute'#0#0#7'TAction'#14'ActionGlossary'#8'Category'#6#4'Help'#7'Capt'
+  +'ion'#6#8'Glossary'#4'Hint'#6#8'Glossary'#7'Visible'#8#0#0#7'TAction'#11'Act'
+  ,'ionAbout'#8'Category'#6#4'Help'#7'Caption'#6#9'&About...'#4'Hint'#6#5'About'
+  +#9'OnExecute'#7#18'ActionAboutExecute'#0#0#7'TAction%ActionSelectAllPointsAs'
+  +'CurvePositions'#8'Category'#6#5'Model'#7'Caption'#6#14'At Every Point'#4'Hi'
+  +'nt'#6'$Select all points as curve positions'#9'OnExecute'#7',ActionSelectAl'
+  +'lPointsAsCurvePositionsExecute'#0#0#7'TAction'#19'ActionAnimationMode'#8'Ca'
+  +'tegory'#6#4'View'#7'Caption'#6#14'Animation Mode'#4'Hint'#6#14'Animation mo'
+  +'de'#9'OnExecute'#7#26'ActionAnimationModeExecute'#8'OnUpdate'#7#25'ActionAn'
+  +'imationModeUpdate'#0#0#7'TAction'#31'ActionEnableBackgroundVariation'#8'Cat'
+  +'egory'#6#5'Model'#7'Caption'#6#16'Enable Variation'#4'Hint'#6'%Enable varia'
+  +'tion of background points'#9'OnExecute'#7'&ActionEnableBackgroundVariationE'
+  +'xecute'#8'OnUpdate'#7'%ActionEnableBackgroundVariationUpdate'#0#0#7'TAction'
+  +#24'ActionEnableCurveScaling'#8'Category'#6#3'Fit'#7'Caption'#6#20'Enable Cu'
+  +'rve Scaling'#4'Hint'#6#20'Enable curve scaling'#9'OnExecute'#7#31'ActionEna'
+  +'bleCurveScalingExecute'#8'OnUpdate'#7#30'ActionEnableCurveScalingUpdate'#0#0
+  +#0#6'TTimer'#10'TimerAsync'#7'Enabled'#8#8'Interval'#3#208#7#7'OnTimer'#7#15
+  +'TimerAsyncTimer'#4'left'#3#192#0#0#0#0
 ]);

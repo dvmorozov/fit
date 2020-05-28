@@ -21,7 +21,7 @@ object FormMain: TFormMain
   object StatusBar: TStatusBar
     Left = 0
     Height = 19
-    Top = 391
+    Top = 561
     Width = 1054
     Font.Height = -9
     Font.Name = 'MS Sans Serif'
@@ -41,7 +41,7 @@ object FormMain: TFormMain
   object PageControl: TPageControl
     Left = 0
     Height = 170
-    Top = 410
+    Top = 391
     Width = 1054
     ActivePage = TabSheetBackground
     Align = alBottom
@@ -2068,16 +2068,19 @@ object FormMain: TFormMain
     object ActionQuit: TAction
       Category = 'Data'
       Caption = '&Quit'
+      Hint = 'Quit'
       OnExecute = ActionQuitExecute
     end
     object ActionSelectCharacteristicPoints: TAction
       Category = 'Data'
       Caption = 'Select Characteristic Points of Peak'
+      Hint = 'Select characteristic points of peak'
       OnExecute = ActionSelectCharacteristicPointsExecute
     end
     object ActionSmoothProfile: TAction
       Category = 'Data'
       Caption = 'Smooth Profile'
+      Hint = 'Smooth profile data'
       OnExecute = ActionSmoothProfileExecute
     end
     object ActionSetBackgroundFraction: TAction
@@ -2096,6 +2099,7 @@ object FormMain: TFormMain
     object ActionSelectBackgroundManually: TAction
       Category = 'Model'
       Caption = 'Start Manual Selection'
+      Hint = 'Start manual selection of background points'
       OnExecute = ActionSelectBackgroundManuallyExecute
     end
     object ActionRemoveBackgroundPoints: TAction
@@ -2108,30 +2112,33 @@ object FormMain: TFormMain
     object ActionSubtractBackgroundAutomatically: TAction
       Category = 'Model'
       Caption = 'Automatically'
-      Hint = 'Subract automatically'
+      Hint = 'Subract background points automatically'
       ImageIndex = 12
       OnExecute = ActionSubtractBackgroundAutomaticallyExecute
     end
     object ActionSubtractBackgroundBySelectedPoints: TAction
       Category = 'Model'
       Caption = 'By Selected Points'
-      Hint = 'Subtract by selected points'
+      Hint = 'Subtract background by selected points'
       ImageIndex = 15
       OnExecute = ActionSubtractBackgroundBySelectedPointsExecute
     end
     object ActionSelectIntervalBounds: TAction
       Category = 'Data'
       Caption = 'Start Manual Selection'
+      Hint = 'Start manual selection of interval bounds'
       OnExecute = ActionSelectIntervalBoundsExecute
     end
     object ActionSelectDataInterval: TAction
       Category = 'Data'
       Caption = 'Select Data Interval'
+      Hint = 'Select data interval'
       OnExecute = ActionSelectDataIntervalExecute
     end
     object ActionSelectEntireProfile: TAction
       Category = 'Data'
       Caption = 'Select Entire Profile'
+      Hint = 'Select entire profile'
       OnExecute = ActionSelectEntireProfileExecute
     end
     object ActionReloadData: TAction
@@ -2151,40 +2158,47 @@ object FormMain: TFormMain
     object ActionComputeRFactorBounds: TAction
       Category = 'Model'
       Caption = 'Compute Automatically'
+      Hint = 'Compute R-factor bounds automatically'
       ImageIndex = 11
       OnExecute = ActionComputeRFactorBoundsExecute
     end
     object ActionSelectRFactorBoundsManually: TAction
       Category = 'Model'
       Caption = 'Start Manual Selection'
+      Hint = 'Start manual selection of R-factor bounds'
       OnExecute = ActionSelectRFactorBoundsManuallyExecute
     end
     object ActionRemoveRFactorBounds: TAction
       Category = 'Model'
       Caption = 'Remove All'
+      Hint = 'Remove all R-factor bounds'
       ImageIndex = 14
       OnExecute = ActionRemoveRFactorBoundsExecute
     end
     object ActionComputCurvePositions: TAction
       Category = 'Model'
       Caption = 'Compute Automatically'
+      Hint = 'Compute curve positions automatically'
       ImageIndex = 11
       OnExecute = ActionComputCurvePositionsExecute
     end
     object ActionSelectCurvePositionsManually: TAction
       Category = 'Model'
       Caption = 'Start Manual Selection'
+      Hint = 'Start manual selection of curve positions'
       OnExecute = ActionSelectCurvePositionsManuallyExecute
     end
     object ActionRemoveCurvePositions: TAction
       Category = 'Model'
       Caption = 'Remove All'
+      Hint = 'Remove all curve positions'
       ImageIndex = 14
       OnExecute = ActionRemoveCurvePositionsExecute
     end
     object ActionSelectCurveBounds: TAction
       Category = 'Model'
       Caption = 'Select Curve Bounds'
+      Hint = 'Select curve bounds'
       OnExecute = ActionSelectCurveBoundsExecute
     end
     object ActionSaveModelAsText: TAction
@@ -2196,47 +2210,54 @@ object FormMain: TFormMain
     end
     object ActionDoAllAutomatically: TAction
       Category = 'Fit'
-      Caption = 'Do All Automatically'
-      Hint = 'Do all automatically'
+      Caption = 'Automatically'
+      Hint = 'Do computation automatically'
       ImageIndex = 11
       OnExecute = ActionDoAllAutomaticallyExecute
     end
     object ActionMinimizeNumberOfCurves: TAction
       Category = 'Fit'
       Caption = 'Minimize Number of Curves'
+      Hint = 'Minimize number of curves'
       OnExecute = ActionMinimizeNumberOfCurvesExecute
       ShortCut = 115
     end
     object ActionMinimizeDifference: TAction
       Category = 'Fit'
       Caption = 'Minimize Difference'
+      Hint = 'Minimize difference'
       OnExecute = ActionMinimizeDifferenceExecute
       ShortCut = 116
     end
     object ActionStopFit: TAction
       Category = 'Fit'
       Caption = 'Stop'
+      Hint = 'Stop computation'
       OnExecute = ActionStopFitExecute
     end
     object ActionSetMaximumRFactor: TAction
       Category = 'Fit'
       Caption = 'Set Max Acceptable Difference...'
+      Hint = 'Set max acceptable difference'
       OnExecute = ActionSetMaximumRFactorExecute
     end
     object ActionCopy: TAction
       Category = 'Edit'
       Caption = 'Copy to Clipboard'
+      Hint = 'Copy to clipboard'
       ImageIndex = 1
       OnExecute = ActionCopyExecute
     end
     object ActionDelete: TAction
       Category = 'Edit'
       Caption = 'Delete'
+      Hint = 'Delete'
       OnExecute = ActionDeleteExecute
     end
     object ActionSelectAll: TAction
       Category = 'Edit'
       Caption = 'Select All'
+      Hint = 'Select all'
       OnExecute = ActionSelectAllExecute
     end
     object ActionZoomIn: TAction
@@ -2256,38 +2277,45 @@ object FormMain: TFormMain
     object ActionViewMarkers: TAction
       Category = 'View'
       Caption = 'View Markers'
+      Hint = 'View markers'
       OnExecute = ActionViewMarkersExecute
     end
     object ActionGlossary: TAction
       Category = 'Help'
       Caption = 'Glossary'
+      Hint = 'Glossary'
       Visible = False
     end
     object ActionAbout: TAction
       Category = 'Help'
       Caption = '&About...'
+      Hint = 'About'
       OnExecute = ActionAboutExecute
     end
     object ActionSelectAllPointsAsCurvePositions: TAction
       Category = 'Model'
       Caption = 'At Every Point'
+      Hint = 'Select all points as curve positions'
       OnExecute = ActionSelectAllPointsAsCurvePositionsExecute
     end
     object ActionAnimationMode: TAction
       Category = 'View'
       Caption = 'Animation Mode'
+      Hint = 'Animation mode'
       OnExecute = ActionAnimationModeExecute
       OnUpdate = ActionAnimationModeUpdate
     end
     object ActionEnableBackgroundVariation: TAction
       Category = 'Model'
       Caption = 'Enable Variation'
+      Hint = 'Enable variation of background points'
       OnExecute = ActionEnableBackgroundVariationExecute
       OnUpdate = ActionEnableBackgroundVariationUpdate
     end
     object ActionEnableCurveScaling: TAction
       Category = 'Fit'
       Caption = 'Enable Curve Scaling'
+      Hint = 'Enable curve scaling'
       OnExecute = ActionEnableCurveScalingExecute
       OnUpdate = ActionEnableCurveScalingUpdate
     end

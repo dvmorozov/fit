@@ -321,7 +321,6 @@ const
     DeltaName: string = 'Difference';
     StartName: string = 'Starting Position';
     StopName: string = 'Final Position';
-    HintDone: string = 'Calculation done';
 
 implementation
 
@@ -685,8 +684,6 @@ begin
     //  Updates UI.
     if Assigned(OnAsyncOperationFinished) then
         OnAsyncOperationFinished(Self);
-    if Assigned(FFitViewer) then
-        FFitViewer.ShowHint(HintDone);
 end;
 
 procedure TFitClient.ComputeCurveBoundsDone;

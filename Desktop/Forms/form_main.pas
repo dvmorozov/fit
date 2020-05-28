@@ -820,7 +820,6 @@ begin
     Assert(Assigned(FitClientApp_));
     Assert(Assigned(FitClientApp_.FitClient));
 
-    ShowHint(HintMain);
     MenuSelectCurvePositionsManually.Checked := False;
     FitClientApp_.FitClient.MinimizeDifference;
     ShowHint(HintWait);
@@ -834,7 +833,6 @@ begin
     Assert(Assigned(FitClientApp_));
     Assert(Assigned(FitClientApp_.FitClient));
 
-    ShowHint(HintMain);
     MenuSelectCurvePositionsManually.Checked := False;
     FitClientApp_.FitClient.MinimizeNumberOfCurves;
     ShowHint(HintWait);
@@ -947,7 +945,6 @@ begin
         //FFitViewer.GetPointsSet(FActiveNumber);
     SP.Sort;
 
-    ShowHint(HintMain);
     FitClientApp_.FitClient.SelectProfileInterval(
         NP.IndexOfValueX(SP.PointXCoord[0]),
         NP.IndexOfValueX(SP.PointXCoord[1])
@@ -1136,7 +1133,6 @@ begin
     Assert(Assigned(FitClientApp_.FitClient));
 
     FitClientApp_.FitClient.SelectEntireProfile;
-    ShowHint(HintMain);
     // chtoby proshlo obnovlenie grafika i Chart.XGraphMax
     // i dr. imeli pravil'nye znacheniya
     Application.ProcessMessages;
@@ -1564,7 +1560,6 @@ end;
 
 procedure TFormMain.SubtractBackground(Auto: Boolean);
 begin
-    ShowHint(HintMain);
     MenuBackground.Checked := False;
 
     Assert(Assigned(FitClientApp_));
@@ -2195,6 +2190,7 @@ begin
     //kotoryy snova vhodit v Synchronize !!!
     //MessageDlg('Computation done...', mtInformation, [mbOk], 0);
     ShowTime;
+    ShowHint(HintMain);
 end;
 
 procedure TFormMain.ShowTime;
@@ -2308,7 +2304,6 @@ begin
             begin
                 if FitClientApp_.FitClient.SelectedAreaMode then
                     MenuSelectEntireProfile.Tag := MenuSelectEntireProfile.Tag or 1;
-                ShowHint(HintMain);
             end;
         ModeSelectIntervalBounds:
             begin
@@ -2636,10 +2631,6 @@ begin
 
     StatusBar.Panels[1].Text := Hint;
     Application.ProcessMessages;
-
-    if Hint = HintDone then
-        // Displays latest R-factor value.
-        ShowRFactor;
 end;
 
 {$hints off}

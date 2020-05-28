@@ -21,8 +21,8 @@
       <AutoIncrementBuild Value="True"/>
       <MajorVersionNr Value="1"/>
       <MinorVersionNr Value="1"/>
-      <RevisionNr Value="34"/>
-      <BuildNr Value="1570"/>
+      <RevisionNr Value="35"/>
+      <BuildNr Value="1573"/>
       <Attributes pvaDebug="True"/>
       <StringTable FileDescription="Desktop application." LegalCopyright="Dmitry Morozov" OriginalFilename="Fit" ProductName="Fit" ProductVersion="1.1.1"/>
     </VersionInfo>
@@ -116,7 +116,7 @@
         <MinVersion Major="1" Valid="True"/>
       </Item7>
     </RequiredPackages>
-    <Units Count="107">
+    <Units Count="108">
       <Unit0>
         <Filename Value="Fit.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -134,12 +134,13 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <TopLine Value="1469"/>
-        <CursorPos X="6" Y="1483"/>
+        <CursorPos X="10" Y="1480"/>
         <UsageCount Value="200"/>
         <Bookmarks Count="1">
           <Item0 Y="488"/>
         </Bookmarks>
         <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit1>
       <Unit2>
@@ -220,8 +221,7 @@
       <Unit9>
         <Filename Value="fit_client.pas"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="3"/>
         <TopLine Value="655"/>
         <CursorPos Y="672"/>
         <UsageCount Value="200"/>
@@ -286,7 +286,7 @@
       <Unit16>
         <Filename Value="fit_viewer.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="2"/>
         <TopLine Value="202"/>
         <CursorPos X="29" Y="216"/>
         <UsageCount Value="245"/>
@@ -791,10 +791,12 @@
       <Unit70>
         <Filename Value="ModelCurves\CurveParameters\position_curve_parameter.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="4"/>
-        <CursorPos X="17" Y="19"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="8"/>
+        <CursorPos X="11" Y="20"/>
         <UsageCount Value="222"/>
+        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit70>
       <Unit71>
@@ -883,7 +885,7 @@
         <EditorIndex Value="5"/>
         <TopLine Value="34"/>
         <CursorPos Y="51"/>
-        <UsageCount Value="73"/>
+        <UsageCount Value="75"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit80>
@@ -1049,6 +1051,7 @@
         <TopLine Value="1399"/>
         <CursorPos X="14" Y="1411"/>
         <UsageCount Value="37"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit99>
       <Unit100>
         <Filename Value="VBOXSVR\04_-_github\fitgrids\package\NumericGrid.pas"/>
@@ -1064,6 +1067,7 @@
         <TopLine Value="66"/>
         <CursorPos X="30" Y="80"/>
         <UsageCount Value="9"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit101>
       <Unit102>
         <Filename Value="..\Packages\synapse40\source\demo\MailCheck\mailchck.pas"/>
@@ -1087,6 +1091,7 @@
         <TopLine Value="140"/>
         <CursorPos X="48" Y="154"/>
         <UsageCount Value="8"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit104>
       <Unit105>
         <Filename Value="C:\lazarus\fpc\3.0.4\source\rtl\objpas\classes\lists.inc"/>
@@ -1094,15 +1099,21 @@
         <TopLine Value="144"/>
         <CursorPos Y="157"/>
         <UsageCount Value="11"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit105>
       <Unit106>
-        <Filename Value="..\..\..\..\..\..\usr\share\lazarus\2.0.6\lcl\include\customlistbox.inc"/>
-        <EditorIndex Value="3"/>
+        <Filename Value="E:\usr\share\lazarus\2.0.6\lcl\include\customlistbox.inc"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="246"/>
         <CursorPos Y="263"/>
-        <UsageCount Value="20"/>
-        <Loaded Value="True"/>
+        <UsageCount Value="22"/>
       </Unit106>
+      <Unit107>
+        <Filename Value="E:\usr\share\lazarus\2.0.6\ide\lazarus.pp"/>
+        <UnitName Value="Lazarus"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="12"/>
+      </Unit107>
     </Units>
     <OtherDefines Count="3">
       <Define0 Value="FIT"/>
@@ -1112,123 +1123,123 @@
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="fit_client.pas"/>
-        <Caret Line="568" Column="19" TopLine="540"/>
+        <Caret Line="607" Column="27" TopLine="579"/>
       </Position1>
       <Position2>
         <Filename Value="fit_client.pas"/>
-        <Caret Line="569" Column="19" TopLine="541"/>
+        <Caret Line="610" Column="19" TopLine="582"/>
       </Position2>
       <Position3>
         <Filename Value="fit_client.pas"/>
-        <Caret Line="607" Column="27" TopLine="579"/>
+        <Caret Line="613" Column="19" TopLine="585"/>
       </Position3>
       <Position4>
         <Filename Value="fit_client.pas"/>
-        <Caret Line="610" Column="19" TopLine="582"/>
+        <Caret Line="688" Column="27" TopLine="660"/>
       </Position4>
       <Position5>
         <Filename Value="fit_client.pas"/>
-        <Caret Line="613" Column="19" TopLine="585"/>
+        <Caret Line="689" Column="19" TopLine="661"/>
       </Position5>
       <Position6>
         <Filename Value="fit_client.pas"/>
-        <Caret Line="688" Column="27" TopLine="660"/>
+        <Caret Line="851" Column="27" TopLine="823"/>
       </Position6>
       <Position7>
         <Filename Value="fit_client.pas"/>
-        <Caret Line="689" Column="19" TopLine="661"/>
+        <Caret Line="852" Column="19" TopLine="824"/>
       </Position7>
       <Position8>
         <Filename Value="fit_client.pas"/>
-        <Caret Line="851" Column="27" TopLine="823"/>
+        <Caret Line="868" Column="27" TopLine="840"/>
       </Position8>
       <Position9>
         <Filename Value="fit_client.pas"/>
-        <Caret Line="852" Column="19" TopLine="824"/>
+        <Caret Line="869" Column="19" TopLine="841"/>
       </Position9>
       <Position10>
         <Filename Value="fit_client.pas"/>
-        <Caret Line="868" Column="27" TopLine="840"/>
+        <Caret Line="874" Column="27" TopLine="846"/>
       </Position10>
       <Position11>
         <Filename Value="fit_client.pas"/>
-        <Caret Line="869" Column="19" TopLine="841"/>
+        <Caret Line="875" Column="19" TopLine="847"/>
       </Position11>
       <Position12>
         <Filename Value="fit_client.pas"/>
-        <Caret Line="874" Column="27" TopLine="846"/>
+        <Caret Line="880" Column="27" TopLine="852"/>
       </Position12>
       <Position13>
         <Filename Value="fit_client.pas"/>
-        <Caret Line="875" Column="19" TopLine="847"/>
+        <Caret Line="881" Column="19" TopLine="853"/>
       </Position13>
       <Position14>
         <Filename Value="fit_client.pas"/>
-        <Caret Line="880" Column="27" TopLine="852"/>
+        <Caret Line="187" Column="14" TopLine="165"/>
       </Position14>
       <Position15>
         <Filename Value="fit_client.pas"/>
-        <Caret Line="881" Column="19" TopLine="853"/>
+        <Caret Line="447" Column="11" TopLine="419"/>
       </Position15>
       <Position16>
         <Filename Value="fit_client.pas"/>
-        <Caret Line="187" Column="14" TopLine="165"/>
+        <Caret Line="460" Column="10" TopLine="432"/>
       </Position16>
       <Position17>
         <Filename Value="fit_client.pas"/>
-        <Caret Line="447" Column="11" TopLine="419"/>
+        <Caret Line="494" Column="27" TopLine="466"/>
       </Position17>
       <Position18>
         <Filename Value="fit_client.pas"/>
-        <Caret Line="460" Column="10" TopLine="432"/>
+        <Caret Line="497" Column="31" TopLine="469"/>
       </Position18>
       <Position19>
         <Filename Value="fit_client.pas"/>
-        <Caret Line="494" Column="27" TopLine="466"/>
+        <Caret Line="591" Column="14" TopLine="563"/>
       </Position19>
       <Position20>
         <Filename Value="fit_client.pas"/>
-        <Caret Line="497" Column="31" TopLine="469"/>
+        <Caret Line="959" Column="27" TopLine="931"/>
       </Position20>
       <Position21>
         <Filename Value="fit_client.pas"/>
-        <Caret Line="591" Column="14" TopLine="563"/>
+        <Caret Line="962" Column="25" TopLine="934"/>
       </Position21>
       <Position22>
         <Filename Value="fit_client.pas"/>
-        <Caret Line="959" Column="27" TopLine="931"/>
+        <Caret Line="1115" Column="10" TopLine="1087"/>
       </Position22>
       <Position23>
         <Filename Value="fit_client.pas"/>
-        <Caret Line="962" Column="25" TopLine="934"/>
+        <Caret Line="1126" Column="10" TopLine="1098"/>
       </Position23>
       <Position24>
         <Filename Value="fit_client.pas"/>
-        <Caret Line="1115" Column="10" TopLine="1087"/>
+        <Caret Line="1143" Column="10" TopLine="1115"/>
       </Position24>
       <Position25>
         <Filename Value="fit_client.pas"/>
-        <Caret Line="1126" Column="10" TopLine="1098"/>
+        <Caret Line="1173" Column="10" TopLine="1145"/>
       </Position25>
       <Position26>
         <Filename Value="fit_client.pas"/>
-        <Caret Line="1143" Column="10" TopLine="1115"/>
+        <Caret Line="260" Column="30" TopLine="238"/>
       </Position26>
       <Position27>
         <Filename Value="fit_client.pas"/>
-        <Caret Line="1173" Column="10" TopLine="1145"/>
+        <Caret Line="1198" Column="40" TopLine="1171"/>
       </Position27>
       <Position28>
         <Filename Value="fit_client.pas"/>
-        <Caret Line="260" Column="30" TopLine="238"/>
+        <Caret Line="262" Column="19" TopLine="255"/>
       </Position28>
       <Position29>
-        <Filename Value="fit_client.pas"/>
-        <Caret Line="1198" Column="40" TopLine="1171"/>
+        <Filename Value="Forms\form_main.pas"/>
+        <Caret Line="1483" Column="6" TopLine="1469"/>
       </Position29>
       <Position30>
-        <Filename Value="fit_client.pas"/>
-        <Caret Line="262" Column="19" TopLine="255"/>
+        <Filename Value="Forms\form_main.pas"/>
+        <Caret Line="1480" Column="10" TopLine="1469"/>
       </Position30>
     </JumpHistory>
   </ProjectOptions>

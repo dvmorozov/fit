@@ -1,13 +1,13 @@
 object FormMain: TFormMain
-  Left = 415
+  Left = 408
   Height = 599
-  Top = 106
+  Top = 63
   Width = 1054
   HorzScrollBar.Page = 1191
   VertScrollBar.Page = 502
   ActiveControl = PanelTop
   Caption = 'FormMain'
-  ClientHeight = 580
+  ClientHeight = 579
   ClientWidth = 1054
   Font.Height = -9
   Font.Name = 'MS Sans Serif'
@@ -20,8 +20,8 @@ object FormMain: TFormMain
   LCLVersion = '2.0.6.0'
   object StatusBar: TStatusBar
     Left = 0
-    Height = 19
-    Top = 561
+    Height = 23
+    Top = 556
     Width = 1054
     Font.Height = -9
     Font.Name = 'MS Sans Serif'
@@ -41,7 +41,7 @@ object FormMain: TFormMain
   object PageControl: TPageControl
     Left = 0
     Height = 170
-    Top = 391
+    Top = 386
     Width = 1054
     ActivePage = TabSheetBackground
     Align = alBottom
@@ -52,8 +52,8 @@ object FormMain: TFormMain
     TabOrder = 4
     object TabSheetBackground: TTabSheet
       Caption = 'Background Points'
-      ClientHeight = 142
-      ClientWidth = 1048
+      ClientHeight = 144
+      ClientWidth = 1046
       Font.Height = -9
       Font.Name = 'MS Sans Serif'
       OnResize = TabSheetBackgroundResize
@@ -61,13 +61,13 @@ object FormMain: TFormMain
       ParentFont = False
       object PanelBackground: TPanel
         Left = 0
-        Height = 142
+        Height = 144
         Top = 0
-        Width = 1048
+        Width = 1046
         Align = alClient
         BevelOuter = bvNone
-        ClientHeight = 142
-        ClientWidth = 1048
+        ClientHeight = 144
+        ClientWidth = 1046
         Font.Height = -9
         Font.Name = 'MS Sans Serif'
         ParentColor = False
@@ -75,9 +75,9 @@ object FormMain: TFormMain
         TabOrder = 0
         object GridBackground: TNumericGrid
           Left = 24
-          Height = 142
+          Height = 144
           Top = 0
-          Width = 1024
+          Width = 1022
           Align = alClient
           Color = clBtnFace
           ColCount = 2
@@ -103,7 +103,7 @@ object FormMain: TFormMain
         end
         object EditBalloonGridBackground: TEdit
           Left = 39
-          Height = 20
+          Height = 21
           Top = 8
           Width = 2
           Font.Height = -9
@@ -113,7 +113,7 @@ object FormMain: TFormMain
         end
         object ToolBar1: TToolBar
           Left = 0
-          Height = 142
+          Height = 144
           Top = 0
           Width = 24
           Align = alLeft
@@ -505,7 +505,7 @@ object FormMain: TFormMain
     Cursor = crVSplit
     Left = 0
     Height = 6
-    Top = 385
+    Top = 380
     Width = 1054
     Align = alBottom
     Beveled = True
@@ -515,7 +515,7 @@ object FormMain: TFormMain
   end
   object SplitterLeftChart: TSplitter
     Left = 170
-    Height = 359
+    Height = 354
     Top = 26
     Width = 4
     Beveled = True
@@ -524,12 +524,12 @@ object FormMain: TFormMain
   end
   object PanelRight: TPanel
     Left = 884
-    Height = 359
+    Height = 354
     Top = 26
     Width = 170
     Align = alRight
     BevelOuter = bvNone
-    ClientHeight = 359
+    ClientHeight = 354
     ClientWidth = 170
     Font.Height = -9
     Font.Name = 'MS Sans Serif'
@@ -539,12 +539,12 @@ object FormMain: TFormMain
     TabStop = True
     object Panel2: TPanel
       Left = 0
-      Height = 359
+      Height = 354
       Top = 0
       Width = 170
       Align = alClient
       BevelOuter = bvNone
-      ClientHeight = 359
+      ClientHeight = 354
       ClientWidth = 170
       Font.Height = -9
       Font.Name = 'MS Sans Serif'
@@ -553,7 +553,7 @@ object FormMain: TFormMain
       TabStop = True
       object Label5: TLabel
         Left = 6
-        Height = 10
+        Height = 13
         Top = 8
         Width = 34
         Caption = 'Graphs'
@@ -565,7 +565,7 @@ object FormMain: TFormMain
       object Label1: TLabel
         Left = 6
         Height = 16
-        Top = 292
+        Top = 287
         Width = 50
         Anchors = [akLeft, akBottom]
         AutoSize = False
@@ -578,7 +578,7 @@ object FormMain: TFormMain
       object LabelAngle: TLabel
         Left = 57
         Height = 13
-        Top = 292
+        Top = 287
         Width = 109
         Anchors = [akLeft, akBottom]
         AutoSize = False
@@ -590,7 +590,7 @@ object FormMain: TFormMain
       object Label2: TLabel
         Left = 6
         Height = 14
-        Top = 313
+        Top = 308
         Width = 50
         Anchors = [akLeft, akBottom]
         AutoSize = False
@@ -603,7 +603,7 @@ object FormMain: TFormMain
       object LabelIntensity: TLabel
         Left = 57
         Height = 13
-        Top = 313
+        Top = 308
         Width = 109
         Anchors = [akLeft, akBottom]
         AutoSize = False
@@ -615,7 +615,7 @@ object FormMain: TFormMain
       object Label3: TLabel
         Left = 6
         Height = 13
-        Top = 337
+        Top = 332
         Width = 50
         Anchors = [akLeft, akBottom]
         AutoSize = False
@@ -628,7 +628,7 @@ object FormMain: TFormMain
       object LabelRFactor: TLabel
         Left = 61
         Height = 13
-        Top = 337
+        Top = 332
         Width = 105
         Anchors = [akLeft, akBottom]
         AutoSize = False
@@ -639,7 +639,7 @@ object FormMain: TFormMain
       end
       object CheckListBoxLegend: TCheckListBox
         Left = 6
-        Height = 259
+        Height = 254
         Top = 24
         Width = 158
         Anchors = [akTop, akLeft, akRight, akBottom]
@@ -653,13 +653,12 @@ object FormMain: TFormMain
         ParentFont = False
         Style = lbOwnerDrawFixed
         TabOrder = 0
-        TopIndex = -1
       end
     end
   end
   object SplitterChartRight: TSplitter
     Left = 880
-    Height = 359
+    Height = 354
     Top = 26
     Width = 4
     Align = alRight
@@ -670,12 +669,12 @@ object FormMain: TFormMain
   end
   object PanelChart: TPanel
     Left = 174
-    Height = 359
+    Height = 354
     Top = 26
     Width = 706
     Align = alClient
     BevelOuter = bvNone
-    ClientHeight = 359
+    ClientHeight = 354
     ClientWidth = 706
     Color = clWindow
     Font.Height = -9
@@ -686,7 +685,7 @@ object FormMain: TFormMain
     TabStop = True
     object Chart: TTAChart
       Left = 0
-      Height = 344
+      Height = 339
       Top = 0
       Width = 691
       AutoUpdateXMin = True
@@ -715,7 +714,7 @@ object FormMain: TFormMain
     object ScrollBarX: TScrollBar
       Left = 0
       Height = 15
-      Top = 344
+      Top = 339
       Width = 706
       Align = alBottom
       PageSize = 0
@@ -724,7 +723,7 @@ object FormMain: TFormMain
     end
     object ScrollBarY: TScrollBar
       Left = 691
-      Height = 344
+      Height = 339
       Top = 0
       Width = 15
       Align = alRight
@@ -735,7 +734,7 @@ object FormMain: TFormMain
     end
     object EditBalloonChart: TEdit
       Left = 51
-      Height = 20
+      Height = 21
       Top = 6
       Width = 4
       Font.Height = -9
@@ -746,12 +745,12 @@ object FormMain: TFormMain
   end
   object PanelLeft: TPanel
     Left = 0
-    Height = 359
+    Height = 354
     Top = 26
     Width = 170
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 359
+    ClientHeight = 354
     ClientWidth = 170
     Font.Height = -9
     Font.Name = 'MS Sans Serif'
@@ -761,7 +760,7 @@ object FormMain: TFormMain
     TabStop = True
     object Label4: TLabel
       Left = 6
-      Height = 10
+      Height = 13
       Top = 0
       Width = 23
       Caption = 'Data'
@@ -772,7 +771,7 @@ object FormMain: TFormMain
     end
     object GridData: TNumericGrid
       Left = 0
-      Height = 359
+      Height = 354
       Top = 0
       Width = 170
       Align = alClient
@@ -801,7 +800,7 @@ object FormMain: TFormMain
     end
     object EditBalloonGridData: TEdit
       Left = 19
-      Height = 20
+      Height = 21
       Top = 20
       Width = 4
       Font.Height = -9
@@ -866,120 +865,16 @@ object FormMain: TFormMain
     Images = ImageList2
     left = 192
     top = 64
-    object MenuData: TMenuItem
-      Caption = '&Data'
-      object MenuImportData: TMenuItem
+    object MenuFile: TMenuItem
+      Caption = '&File'
+      object MenuLoadProfile: TMenuItem
         Action = ActionLoadProfile
-        OnClick = ActionLoadProfileExecute
       end
-      object MenuReloadData: TMenuItem
+      object MenuReload: TMenuItem
         Action = ActionReloadData
-        Bitmap.Data = {
-          36040000424D3604000000000000360000002800000010000000100000000100
-          2000000000000004000064000000640000000000000000000000000000000000
-          00000000000000000000DB730D83D16108C3B75400FFB85500FFB65300FFD05F
-          06C3D86F0C8300000000000000000000000000000000D9710BFF000000000000
-          000000000000D16008FFE39200FFE49600FFE19300FFED9E00FFF9A200FFFDB0
-          0DFFFFBB17FFD56908FFD86F0AFF00000000D9700AFFEC951CFF000000000000
-          0000B55200FFE79B00FFE29300FFDE8F00FFE39000FFFAA500FFF8A708FFF9B0
-          1AFFFCB221FFFFC737FFF6AB28FFD46502FFF6AF2DFFED9621FF00000000C858
-          09FFE89C00FFDF8F00FFE39200FFF0A100FFF19005FFEF8F05FFEC8600FFFFC1
-          29FFFFBE2EFFFFC845FFFFCE50FFFFD964FFFFDC6DFFF3A224FFA24000FFE291
-          00FFE19300FFE39200FFF2A300FFC35508FFC25202FFD2670AFFD06508FFD164
-          07FFFFD965FFFFC945FFFFD058FFFFD767FFFFDC71FFF4A629FFA74200FFEA9C
-          00FFEC9C00FFF0A100FFC35508FF00000000000000000000000000000000F1A8
-          3EFFFFE393FFFFD055FFFFD563FFFFDE78FFFFE486FFF8AE2DFFB35000FFDE81
-          00FFDB7D00FFDD8000FFC65908FF000000000000000000000000DE7508FFFFCF
-          56FFFFEBA7FFFFF2C9FFFFEBA7FFFFDF7DFFFFE78DFFFCB52EFF000000000000
-          000000000000000000000000000000000000000000000000000000000000DD73
-          06FFDB6E00FFED900DFFEF8E0AFFFDC552FFFCC24FFFFECB56FFD47314FFDA7E
-          21FFD97D21FFB24300FFC24F00FFE17803FFE0780AFF00000000000000000000
-          0000000000000000000000000000000000000000000000000000B75300FFEA99
-          00FFF39A00FFFFD858FFFFEA9AFFFFF2C9FFFFDA52FFE0790CFF000000000000
-          000000000000F19718FFEF900FFFFFB71EFFFFB61DFFFEBD2CFFBC5700FFF5A0
-          00FFF8A303FFFCAD10FFF9A814FFFFB517FFD36503FF00000000000000000000
-          000000000000EF8E0AFFFFED97FFFFEB9DFFFFF2C9FFFFB61FFFC65C00FFFBA6
-          00FFF8A308FFFBB321FFFAB525FFFFCF4CFFDE740FFFE4810BFFEE9618FFEC90
-          14FFEF8E0AFFFFED97FFFFE386FFFFE9A7FFFFF6EAFFFFB921FFC95F00FFFBA9
-          04FFFCAE10FFFEB825FFFEB729FFFFC53FFFFFD44EFFFFD75DFFFFD359FFFFCD
-          50FFFFE383FFFFE385FFFFE17EFFFFF6EAFFFFD053FF00000000D16500FFFEAE
-          12FFC75905FFD66B08FFFFC834FFFFC53DFFFFC948FFFFD35EFFFFD765FFFFDC
-          79FFFFDC71FFFFE8A0FFFFF6EAFFFFD053FF0000000000000000D46800FFCB60
-          07FF0000000000000000D56805FFFFD456FFFFD24EFFFFD45EFFFFDB68FFFFDF
-          72FFFFE79CFFFFF6EAFFFFD156FF000000000000000000000000DC750DFF0000
-          0000000000000000000000000000ED8D1383EA8911C3F09212FFF8AA29FFF8A3
-          18FFFDAA15C3FFD0538300000000000000000000000000000000
-        }
-        ImageIndex = 5
-        OnClick = ActionReloadDataExecute
-      end
-      object MenuArgumentTransformation: TMenuItem
-        Caption = 'Argument Transformation'
-        object MenuCreateRule: TMenuItem
-          Caption = 'Create Rule...'
-          Visible = False
-        end
-        object MenuSetRuleParameters: TMenuItem
-          Caption = 'Set Rule Parameters'
-          object MenuSetWavelength: TMenuItem
-            Caption = 'Wavelength...'
-            OnClick = MenuSetWavelengthClick
-          end
-        end
-        object MenuUseRule: TMenuItem
-          Caption = 'Use Rule'
-          object MenuTheta: TMenuItem
-            Caption = 'MenuTheta'
-            OnClick = MenuThetaClick
-          end
-          object MenuN2Theta: TMenuItem
-            Caption = '2 * Theta'
-            OnClick = MenuN2ThetaClick
-          end
-          object MenuSinThetaLambda: TMenuItem
-            Caption = 'Sin(Theta)/Lambda'
-            OnClick = MenuSinThetaLambdaClick
-          end
-        end
-      end
-      object MenuSeparator9: TMenuItem
-        Caption = ' '
-        Enabled = False
-      end
-      object MenuRange: TMenuItem
-        Caption = 'Range'
-        object MenuSelectIntervalBounds: TMenuItem
-          Action = ActionSelectIntervalBounds
-          OnClick = ActionSelectIntervalBoundsExecute
-        end
-        object MenuSelectDataInterval: TMenuItem
-          Action = ActionSelectDataInterval
-          OnClick = ActionSelectDataIntervalExecute
-        end
-        object MenuSeparator18: TMenuItem
-          Caption = ' '
-          Enabled = False
-        end
-        object MenuSelectEntireProfile: TMenuItem
-          Action = ActionSelectEntireProfile
-          OnClick = ActionSelectEntireProfileExecute
-        end
-      end
-      object MenuSmoothProfile: TMenuItem
-        Action = ActionSmoothProfile
-        OnClick = ActionSmoothProfileExecute
-      end
-      object MenuSeparator8: TMenuItem
-        Caption = ' '
-        Enabled = False
-      end
-      object MenuSelectCharacteristicPoints: TMenuItem
-        Action = ActionSelectCharacteristicPoints
-        OnClick = ActionSelectCharacteristicPointsExecute
       end
       object MenuSeparator1: TMenuItem
-        Caption = ' '
-        Enabled = False
+        Caption = '-'
       end
       object MenuQuit: TMenuItem
         Action = ActionQuit
@@ -1020,7 +915,70 @@ object FormMain: TFormMain
           F8F47882F9F47881F8F47881F8F47881F8F47377F7F4645EF584
         }
         ImageIndex = 10
-        OnClick = ActionQuitExecute
+      end
+    end
+    object MenuData: TMenuItem
+      Caption = '&Data'
+      object MenuArgumentTransformation: TMenuItem
+        Caption = 'Argument Transformation'
+        object MenuCreateRule: TMenuItem
+          Caption = 'Create Rule...'
+          Visible = False
+        end
+        object MenuSetRuleParameters: TMenuItem
+          Caption = 'Set Rule Parameters'
+          object MenuSetWavelength: TMenuItem
+            Caption = 'Wavelength...'
+            OnClick = MenuSetWavelengthClick
+          end
+        end
+        object MenuUseRule: TMenuItem
+          Caption = 'Use Rule'
+          object MenuTheta: TMenuItem
+            Caption = 'MenuTheta'
+            OnClick = MenuThetaClick
+          end
+          object MenuN2Theta: TMenuItem
+            Caption = '2 * Theta'
+            OnClick = MenuN2ThetaClick
+          end
+          object MenuSinThetaLambda: TMenuItem
+            Caption = 'Sin(Theta)/Lambda'
+            OnClick = MenuSinThetaLambdaClick
+          end
+        end
+      end
+      object MenuSeparator2: TMenuItem
+        Caption = '-'
+      end
+      object MenuRange: TMenuItem
+        Caption = 'Range'
+        object MenuSelectIntervalBounds: TMenuItem
+          Action = ActionSelectIntervalBounds
+          OnClick = ActionSelectIntervalBoundsExecute
+        end
+        object MenuSelectDataInterval: TMenuItem
+          Action = ActionSelectDataInterval
+          OnClick = ActionSelectDataIntervalExecute
+        end
+        object MenuSeparator4: TMenuItem
+          Caption = '-'
+        end
+        object MenuSelectEntireProfile: TMenuItem
+          Action = ActionSelectEntireProfile
+          OnClick = ActionSelectEntireProfileExecute
+        end
+      end
+      object MenuSmoothProfile: TMenuItem
+        Action = ActionSmoothProfile
+        OnClick = ActionSmoothProfileExecute
+      end
+      object MenuSeparator3: TMenuItem
+        Caption = '-'
+      end
+      object MenuSelectCharacteristicPoints: TMenuItem
+        Action = ActionSelectCharacteristicPoints
+        OnClick = ActionSelectCharacteristicPointsExecute
       end
     end
     object MenuEdit: TMenuItem
@@ -1071,9 +1029,8 @@ object FormMain: TFormMain
         ImageIndex = 2
         OnClick = ActionDeleteExecute
       end
-      object MenuSeparator2: TMenuItem
-        Caption = ' '
-        Enabled = False
+      object MenuSeparator5: TMenuItem
+        Caption = '-'
       end
       object MenuSelectAll: TMenuItem
         Action = ActionSelectAll
@@ -1090,9 +1047,8 @@ object FormMain: TFormMain
         Action = ActionZoomOut
         OnClick = ActionZoomOutExecute
       end
-      object MenuSeparator4: TMenuItem
-        Caption = ' '
-        Enabled = False
+      object MenuSeparator6: TMenuItem
+        Caption = '-'
       end
       object MenuViewMarkers: TMenuItem
         Action = ActionViewMarkers
@@ -1118,9 +1074,8 @@ object FormMain: TFormMain
           Action = ActionSelectRFactorBoundsManually
           OnClick = ActionSelectRFactorBoundsManuallyExecute
         end
-        object MenuSeparator20: TMenuItem
-          Caption = ' '
-          Enabled = False
+        object MenuSeparator7: TMenuItem
+          Caption = '-'
         end
         object MenuRemoveRFactorBounds: TMenuItem
           Action = ActionRemoveRFactorBounds
@@ -1140,9 +1095,8 @@ object FormMain: TFormMain
         object MenuSelectCurvePositionsManually: TMenuItem
           Action = ActionSelectCurvePositionsManually
         end
-        object MenuSeparator19: TMenuItem
-          Caption = ' '
-          Enabled = False
+        object MenuSeparator12: TMenuItem
+          Caption = '-'
         end
         object MenuRemoveCurvePositions: TMenuItem
           Action = ActionRemoveCurvePositions
@@ -1185,17 +1139,15 @@ object FormMain: TFormMain
           Action = ActionEnableBackgroundVariation
         end
       end
-      object MenuSeparator16: TMenuItem
-        Caption = ' '
-        Enabled = False
+      object MenuSeparator8: TMenuItem
+        Caption = '-'
       end
       object MenuSelectCurveBounds: TMenuItem
         Action = ActionSelectCurveBounds
         OnClick = ActionSelectCurveBoundsExecute
       end
-      object MenuSeparator3: TMenuItem
-        Caption = ' '
-        Enabled = False
+      object MenuSeparator9: TMenuItem
+        Caption = '-'
       end
       object MenuSaveModelAsText: TMenuItem
         Action = ActionSaveModelAsText
@@ -1209,9 +1161,8 @@ object FormMain: TFormMain
         ImageIndex = 6
         OnClick = ActionDoAllAutomaticallyExecute
       end
-      object MenuSeparator5: TMenuItem
-        Caption = ' '
-        Enabled = False
+      object MenuSeparator10: TMenuItem
+        Caption = '-'
       end
       object MenuMinimizeNumberOfCurves: TMenuItem
         Action = ActionMinimizeNumberOfCurves
@@ -1262,9 +1213,8 @@ object FormMain: TFormMain
         ImageIndex = 7
         OnClick = ActionStopFitExecute
       end
-      object MenuSeparator6: TMenuItem
-        Caption = ' '
-        Enabled = False
+      object MenuSeparator11: TMenuItem
+        Caption = '-'
       end
       object MenuSetMaximumRFactor: TMenuItem
         Action = ActionSetMaximumRFactor
@@ -1278,11 +1228,6 @@ object FormMain: TFormMain
       Caption = '&Help'
       object MenuGlossary: TMenuItem
         Action = ActionGlossary
-      end
-      object MenuSeparator7: TMenuItem
-        Caption = ' '
-        Enabled = False
-        Visible = False
       end
       object MenuAbout: TMenuItem
         Action = ActionAbout
@@ -1299,7 +1244,7 @@ object FormMain: TFormMain
     top = 128
   end
   object ImageList1: TImageList
-    left = 384
+    left = 432
     top = 64
     Bitmap = {
       4C69060000001000000010000000000000FF000000FF000000FF000000FF0000
@@ -1498,7 +1443,7 @@ object FormMain: TFormMain
     }
   end
   object PopupViewMode: TPopupMenu
-    left = 301
+    left = 312
     top = 128
     object MenuTheta2: TMenuItem
       Caption = 'Theta'
@@ -1515,7 +1460,7 @@ object FormMain: TFormMain
     end
   end
   object ImageList2: TImageList
-    left = 467
+    left = 552
     top = 64
     Bitmap = {
       4C69100000001000000010000000ECC681FFF0CA82FFF4CA7DFFE8C788FFEFCF
@@ -2036,34 +1981,34 @@ object FormMain: TFormMain
   object SaveDialog: TSaveDialog
     Title = 'Select File to Save Data'
     Filter = 'Text files (*.TXT)|*.TXT|All files (*.*)|*.*'
-    left = 467
+    left = 552
     top = 128
   end
   object ApplicationProperties: TApplicationProperties
     Title = 'Fit'
     OnHint = ApplicationPropertiesHint
-    left = 301
+    left = 312
     top = 64
   end
   object TimerCheckState: TTimer
     Interval = 500
     OnTimer = TimerCheckStateTimer
-    left = 301
+    left = 312
   end
   object TimerBalloonShow: TTimer
     Enabled = False
     Interval = 200
     OnTimer = TimerBalloonShowTimer
-    left = 384
+    left = 432
   end
   object TimerBalloonHide: TTimer
     Enabled = False
     OnTimer = TimerBalloonHideTimer
-    left = 467
+    left = 552
   end
   object ActionList: TActionList
     Images = ImageList2
-    left = 384
+    left = 432
     top = 128
     object ActionQuit: TAction
       Category = 'Data'
@@ -2145,6 +2090,7 @@ object FormMain: TFormMain
       Category = 'Data'
       Caption = '&Reload'
       Hint = 'Reload experimental data from file'
+      ImageIndex = 5
       OnExecute = ActionReloadDataExecute
     end
     object ActionLoadProfile: TAction

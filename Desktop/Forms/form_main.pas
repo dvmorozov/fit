@@ -110,12 +110,10 @@ type
     GridIntervals: TNumericGrid;
     Label1: TLabel;
     Label2: TLabel;
-    Label3: TLabel;
     Label4: TLabel;
     Label5: TLabel;
     LabelAngle: TLabel;
     LabelIntensity: TLabel;
-    LabelRFactor: TLabel;
     MainMenu: TMainMenu;
     MenuData: TMenuItem;
     MenuDoAllAutomatically: TMenuItem;
@@ -2618,7 +2616,8 @@ begin
     Assert(Assigned(FitClientApp_));
     Assert(Assigned(FitClientApp_.FitClient));
 
-    LabelRFactor.Caption := FitClientApp_.FitClient.GetRFactorStr;
+    StatusBar.Panels[1].Text := 'R-factor: ' +
+        FitClientApp_.FitClient.GetRFactorStr;
     Application.ProcessMessages;
 end;
 
@@ -2629,7 +2628,7 @@ begin
 
     Assert(StatusBar.Panels.Count <> 0);
 
-    StatusBar.Panels[1].Text := Hint;
+    StatusBar.Panels[2].Text := Hint;
     Application.ProcessMessages;
 end;
 

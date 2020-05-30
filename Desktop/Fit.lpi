@@ -21,8 +21,8 @@
       <AutoIncrementBuild Value="True"/>
       <MajorVersionNr Value="1"/>
       <MinorVersionNr Value="1"/>
-      <RevisionNr Value="37"/>
-      <BuildNr Value="1583"/>
+      <RevisionNr Value="38"/>
+      <BuildNr Value="1586"/>
       <Attributes pvaDebug="True"/>
       <StringTable FileDescription="Desktop application." LegalCopyright="Dmitry Morozov" OriginalFilename="Fit" ProductName="Fit" ProductVersion="1.1.1"/>
     </VersionInfo>
@@ -134,11 +134,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="2257"/>
-        <CursorPos X="5" Y="2259"/>
+        <TopLine Value="2608"/>
+        <CursorPos X="9" Y="2618"/>
         <UsageCount Value="200"/>
         <Bookmarks Count="1">
-          <Item0 Y="488"/>
+          <Item0 Y="486"/>
         </Bookmarks>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -1137,123 +1137,123 @@
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="2260" Column="5" TopLine="2258"/>
+        <Caret Line="990" Column="17" TopLine="963"/>
       </Position1>
       <Position2>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="2261" Column="5" TopLine="2259"/>
+        <Caret Line="1007" Column="17" TopLine="980"/>
       </Position2>
       <Position3>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="2260" Column="5" TopLine="2258"/>
+        <Caret Line="1023" Column="17" TopLine="996"/>
       </Position3>
       <Position4>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="2261" Column="5" TopLine="2259"/>
+        <Caret Line="1047" Column="17" TopLine="1020"/>
       </Position4>
       <Position5>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="2260" Column="5" TopLine="2258"/>
+        <Caret Line="1171" Column="17" TopLine="1144"/>
       </Position5>
       <Position6>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="2261" Column="5" TopLine="2259"/>
+        <Caret Line="1188" Column="17" TopLine="1161"/>
       </Position6>
       <Position7>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="2260" Column="5" TopLine="2258"/>
+        <Caret Line="1204" Column="17" TopLine="1177"/>
       </Position7>
       <Position8>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="2261" Column="5" TopLine="2259"/>
+        <Caret Line="1488" Column="13" TopLine="1461"/>
       </Position8>
       <Position9>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="2260" Column="5" TopLine="2258"/>
+        <Caret Line="1692" Column="40" TopLine="1666"/>
       </Position9>
       <Position10>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="2261" Column="5" TopLine="2259"/>
+        <Caret Line="1693" Column="40" TopLine="1667"/>
       </Position10>
       <Position11>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="2260" Column="5" TopLine="2258"/>
+        <Caret Line="1704" Column="40" TopLine="1678"/>
       </Position11>
       <Position12>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="2261" Column="5" TopLine="2259"/>
+        <Caret Line="1705" Column="40" TopLine="1679"/>
       </Position12>
       <Position13>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="2260" Column="5" TopLine="2258"/>
+        <Caret Line="1706" Column="40" TopLine="1680"/>
       </Position13>
       <Position14>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="2261" Column="5" TopLine="2259"/>
+        <Caret Line="1717" Column="40" TopLine="1691"/>
       </Position14>
       <Position15>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="2260" Column="5" TopLine="2258"/>
+        <Caret Line="1718" Column="40" TopLine="1692"/>
       </Position15>
       <Position16>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="2261" Column="5" TopLine="2259"/>
+        <Caret Line="1728" Column="67" TopLine="1702"/>
       </Position16>
       <Position17>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="2260" Column="5" TopLine="2258"/>
+        <Caret Line="1729" Column="38" TopLine="1703"/>
       </Position17>
       <Position18>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="2261" Column="5" TopLine="2259"/>
+        <Caret Line="1737" Column="67" TopLine="1711"/>
       </Position18>
       <Position19>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="2260" Column="5" TopLine="2258"/>
+        <Caret Line="1738" Column="38" TopLine="1712"/>
       </Position19>
       <Position20>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="2261" Column="5" TopLine="2259"/>
+        <Caret Line="1746" Column="68" TopLine="1720"/>
       </Position20>
       <Position21>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="2260" Column="5" TopLine="2258"/>
+        <Caret Line="1747" Column="38" TopLine="1721"/>
       </Position21>
       <Position22>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="2261" Column="5" TopLine="2259"/>
+        <Caret Line="2193" Column="13" TopLine="2166"/>
       </Position22>
       <Position23>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="2260" Column="5" TopLine="2258"/>
+        <Caret Line="2632" Column="5" TopLine="2607"/>
       </Position23>
       <Position24>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="2261" Column="5" TopLine="2259"/>
+        <Caret Line="2200" Column="5" TopLine="2184"/>
       </Position24>
       <Position25>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="2260" Column="5" TopLine="2258"/>
+        <Caret Line="2632" Column="5" TopLine="2616"/>
       </Position25>
       <Position26>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="2261" Column="5" TopLine="2259"/>
+        <Caret Line="2215" Column="31" TopLine="2184"/>
       </Position26>
       <Position27>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="2260" Column="5" TopLine="2258"/>
+        <Caret Line="2200" Column="5" TopLine="2184"/>
       </Position27>
       <Position28>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="2259" Column="5" TopLine="2257"/>
+        <Caret Line="2622" Column="9" TopLine="2610"/>
       </Position28>
       <Position29>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="2260" Column="5" TopLine="2258"/>
+        <Caret Line="2621" Column="9" TopLine="2609"/>
       </Position29>
       <Position30>
         <Filename Value="Forms\form_main.pas"/>
-        <Caret Line="2259" Column="5" TopLine="2257"/>
+        <Caret Line="2620" Column="9" TopLine="2608"/>
       </Position30>
     </JumpHistory>
   </ProjectOptions>
@@ -1338,7 +1338,7 @@
         <WatchKind Value="wpkWrite"/>
         <Expression Value="not ((Index >= 0) and (Index &lt; Chart.SeriesCount))"/>
         <Source Value="Forms\form_main.pas"/>
-        <Line Value="511"/>
+        <Line Value="509"/>
       </Item5>
     </BreakPoints>
     <Exceptions Count="3">

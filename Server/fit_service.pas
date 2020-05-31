@@ -1582,29 +1582,23 @@ end;
 
 function TFitService.GetCurveParameterCount(SpecIndex: longint): longint;
 var
-    SpecParamList:   TMSCRCurveList;
     CurveParameters: Curve_parameters;
 begin
-    SpecParamList := GetCurveAttributes;
-    Assert(Assigned(SpecParamList));
-    Assert((SpecIndex >= 0) and (SpecIndex < SpecParamList.Count));
+    Assert((SpecIndex >= 0) and (SpecIndex < FCurveAttributes.Count));
 
-    CurveParameters := Curve_parameters(SpecParamList.Items[SpecIndex]);
+    CurveParameters := Curve_parameters(FCurveAttributes.Items[SpecIndex]);
     Result := CurveParameters.Params.Count;
 end;
 
 procedure TFitService.GetCurveParameter(SpecIndex: longint; ParamIndex: longint;
     var Name: string; var Value: double; var Type_: longint);
 var
-    SpecParamList: TMSCRCurveList;
     CurveParameters: Curve_parameters;
     Parameter: TSpecialCurveParameter;
 begin
-    SpecParamList := GetCurveAttributes;
-    Assert(Assigned(SpecParamList));
-    Assert((SpecIndex >= 0) and (SpecIndex < SpecParamList.Count));
+    Assert((SpecIndex >= 0) and (SpecIndex < FCurveAttributes.Count));
 
-    CurveParameters := Curve_parameters(SpecParamList.Items[SpecIndex]);
+    CurveParameters := Curve_parameters(FCurveAttributes.Items[SpecIndex]);
     Assert((ParamIndex >= 0) and (ParamIndex < CurveParameters.Params.Count));
 
     Parameter := CurveParameters[ParamIndex];
@@ -1616,15 +1610,12 @@ end;
 procedure TFitService.SetCurveParameter(SpecIndex: longint; ParamIndex: longint;
     Value: double);
 var
-    SpecParamList: TMSCRCurveList;
     CurveParameters: Curve_parameters;
     Parameter: TSpecialCurveParameter;
 begin
-    SpecParamList := GetCurveAttributes;
-    Assert(Assigned(SpecParamList));
-    Assert((SpecIndex >= 0) and (SpecIndex < SpecParamList.Count));
+    Assert((SpecIndex >= 0) and (SpecIndex < FCurveAttributes.Count));
 
-    CurveParameters := Curve_parameters(SpecParamList.Items[SpecIndex]);
+    CurveParameters := Curve_parameters(FCurveAttributes.Items[SpecIndex]);
     Assert((ParamIndex >= 0) and (ParamIndex < CurveParameters.Params.Count));
 
     Parameter := CurveParameters[ParamIndex];

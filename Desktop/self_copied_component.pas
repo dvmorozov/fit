@@ -87,7 +87,7 @@ begin
         raise EOutOfMemory.Create(
             'Out of memory in TSelfCopiedCompList.GetSharedCopy.');
 
-    TSelfCopiedCompList(Result).Create(OwnsObjects);
+    TSelfCopiedCompList(Result).Create(false);
     for i := 0 to Count - 1 do
         TSelfCopiedCompList(Result).Add(TComponent(Items[i]));
 end;

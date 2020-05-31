@@ -62,8 +62,6 @@ end;
 procedure TLorentzPointsSet.DoCalc(const Bounds: TPointsSet);
 var
     i, j: longint;
-    //x0Index, LastRightIndex: LongInt;
-    //Zero: Boolean;
 begin
     if Assigned(Bounds) then
     begin
@@ -71,55 +69,11 @@ begin
         for i := 0 to (Bounds.PointsCount shr 1) - 1 do
             for j := Trunc(Bounds.PointXCoord[i shl 1]) to
                 Trunc(Bounds.PointXCoord[(i shl 1) + 1]) do
-                Points[j][2] := LorentzPoint(A, Sigma, x0, Points[j][1])(*  takoy variant ne daet uskoreniya, a kazhetsya rabotaet
-                dazhe chut' medlennee - vse s'edaet poisk indeksov ?!
-            for j := IndexOfValueX(Bounds.GetPointXCoord(i shl 1)) to
-                IndexOfValueX(Bounds.GetPointXCoord((i shl 1) + 1)) do
-                    Points[j][2] := GaussPoint(A, Sigma, x0, Points[j][1]);
-            *);
+                FPoints[j][2] := LorentzPoint(A, Sigma, x0, FPoints[j][1])
     end
     else
     begin
-        //  snachala nuzhno obnulit' tochki, chtoby vse tochki, znachenie
-        //  funktsii v kotoryh < ZeroCurveAmplitude byli bez musora
-        for j := 0 to PointsCount - 1 do
-            PointYCoord[j] := 0;
-
-        //  schitaem optimal'no, ispol'zuya porog nulya i simmetriyu
-        (*  optimal'nyi schet rabotaet tol'ko kogda x0 ne var'iruetsya,
-            t.e. krivaya simmetrichna otnositel'no izmeneniya indeksa
-        x0Index := IndexOfValueX(x0);
-        Points[x0Index][2] := LorentzPoint(A, Sigma, x0, x0);
-
-        Zero := False; LastRightIndex := x0Index;
-
-        for j := x0Index - 1 downto 0 do
-        begin
-            Points[j][2] := LorentzPoint(A, Sigma, x0, Points[j][1]);
-            if (x0Index shl 1) - j <= PointsCount - 1 then
-            begin
-                Points[(x0Index shl 1) - j][2] := Points[j][2];
-                LastRightIndex := (x0Index shl 1) - j;
-            end;
-            //  vsegda polozhitelen
-            if Points[j][2] < ZeroCurveAmplitude then
-            begin
-                Zero := True;
-                Break;
-            end;
-        end;
-
-        if not Zero then
-            //  0 esche ne dostignut
-            for j := LastRightIndex + 1 to PointsCount - 1 do
-            begin
-                Points[j][2] := LorentzPoint(A, Sigma, x0, Points[j][1]);
-                //  vsegda polozhitelen
-                if Points[j][2] < ZeroCurveAmplitude then Break;
-            end;
-        *)
-        //  polnyy pereschet bez optimizatsii
-        Lorentz(Points, A, Sigma, x0);
+        Lorentz(FPoints, A, Sigma, x0);
     end;
 end;
 

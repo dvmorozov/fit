@@ -2226,7 +2226,7 @@ procedure TFitService.FillCurvesList;
 var
     i, j, k:   longint;
     FitTask:   TFitTask;
-    TaskCurvesList: TSelfCopiedCompList;
+    TaskCurves: TSelfCopiedCompList;
     ScalingFactor: double;
     CurveCopy: TPointsSet;
 begin
@@ -2239,14 +2239,15 @@ begin
     begin
         FitTask := TFitTask(FTaskList.Items[i]);
         ScalingFactor := FitTask.GetScalingFactor;
-        TaskCurvesList := FitTask.GetCurves;
+        TaskCurves := FitTask.GetCurves;
 
-        Assert(Assigned(TaskCurvesList));
+        Assert(Assigned(TaskCurves));
 
-        for j := 0 to TaskCurvesList.Count - 1 do
+        for j := 0 to TaskCurves.Count - 1 do
         begin
-            CurveCopy := TPointsSet(TPointsSet(TaskCurvesList.Items[j])
+            CurveCopy := TPointsSet(TPointsSet(TaskCurves.Items[j])
                 .GetCopy);
+            //  TODO: move scaling into separate method.
             for k := 0 to CurveCopy.PointsCount - 1 do
                 CurveCopy.PointYCoord[k] :=
                     CurveCopy.PointYCoord[k] * ScalingFactor;

@@ -32,11 +32,12 @@ type
         procedure CopyParameters(Dest: TObject); virtual;
     end;
 
-    { List of self copied components. By default is always active, so copy of 
-      list is also active. Caller should make the list inactive by itself if 
-      necessary. }
+    { List of self copied components. By default it keeps ownership of items
+      and destroys them in corresponding methods. Ownership is transferrred
+      to copy of list as well. }
     TSelfCopiedCompList = class(TComponentList, ISelfCopied)
     public
+        destructor Destroy; override;
         function GetCopy: TObject; virtual;
         { Returns copy of list which owns its items. }
         function GetSharedCopy: TObject; virtual;
@@ -45,17 +46,33 @@ type
         procedure Insert(Index: integer; Item: TComponent); virtual;
         function Add(Item: TComponent): integer; virtual;
         procedure Delete(Index: integer); virtual;
+        function Remove(AComponent: TComponent): Integer; virtual;
     end;
 
 implementation
 
+destructor TSelfCopiedCompList.Destroy;
+begin
+    { Must free objects itself because neither TComponentList nor TObjectList
+      do that. }
+    if OwnsObjects then
+    begin
+        while Count > 0 do
+            Delete(0);
+    end;
+    inherited;
+end;
+
 function TSelfCopiedCompList.GetCopy: TObject;
 begin
+    { Constructs object of the same type. }
     Result := NewInstance;
 
-    Assert(Assigned(Result));
+    if not Assigned(Result) then
+        raise EOutOfMemory.Create(
+            'Out of memory in TSelfCopiedCompList.GetCopy.');
 
-    TSelfCopiedCompList(Result).Create;
+    TSelfCopiedCompList(Result).Create(OwnsObjects);
     CopyParameters(Result);
 end;
 
@@ -63,11 +80,14 @@ function TSelfCopiedCompList.GetSharedCopy: TObject;
 var
     i: longint;
 begin
+    { Constructs object of the same type. }
     Result := NewInstance;
 
-    Assert(Assigned(Result));
+    if not Assigned(Result) then
+        raise EOutOfMemory.Create(
+            'Out of memory in TSelfCopiedCompList.GetSharedCopy.');
 
-    TSelfCopiedCompList(Result).Create;
+    TSelfCopiedCompList(Result).Create(false);
     for i := 0 to Count - 1 do
         TSelfCopiedCompList(Result).Add(TComponent(Items[i]));
 end;
@@ -106,14 +126,25 @@ end;
 
 procedure TSelfCopiedCompList.Delete(Index: integer);
 begin
+    Assert((Index >= 0) and (Index < Count));
+    { The object is freed by inherited Notify method. }
     inherited;
+end;
+
+function TSelfCopiedCompList.Remove(AComponent: TComponent): Integer;
+begin
+    { The object is freed by inherited Notify method. }
+    Result := inherited;
 end;
 
 function TSelfCopiedComponent.GetCopy: TObject;
 begin
+    { Constructs object of the same type. }
     Result := NewInstance;
 
-    Assert(Assigned(Result));
+    if not Assigned(Result) then
+        raise EOutOfMemory.Create(
+            'Out of memory in TSelfCopiedComponent.GetCopy.');
 
     try
         TSelfCopiedComponent(Result).Create(nil);

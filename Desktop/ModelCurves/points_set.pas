@@ -53,7 +53,6 @@ type
         function IndexOfNearestToX(XValue: double): longint;
 
         property PointsCount: longint read GetPointsCount;
-        property Points: TwoDimArray read FPoints;
         property PointXCoord[index: longint]: double
             read GetPointXCoord write SetPointXCoord;
         property PointYCoord[index: longint]: double
@@ -68,15 +67,11 @@ implementation
 
 function TPointsSet.GetPointsCount: longint;
 begin
-    if Assigned(FPoints) then
-        Result := Length(FPoints)
-    else
-        Result := 0;
+    Result := Length(FPoints);
 end;
 
 function TPointsSet.GetPointXCoord(index: longint): double;
 begin
-    Assert(Assigned(FPoints));
     Assert(index >= 0);
     Assert(index < PointsCount);
 
@@ -85,7 +80,6 @@ end;
 
 function TPointsSet.GetPointYCoord(index: longint): double;
 begin
-    Assert(Assigned(FPoints));
     Assert(index >= 0);
     Assert(index < PointsCount);
 
@@ -94,7 +88,6 @@ end;
 
 procedure TPointsSet.SetPointXCoord(index: longint; Value: double);
 begin
-    Assert(Assigned(FPoints));
     Assert(index >= 0);
     Assert(index < PointsCount);
 
@@ -103,7 +96,6 @@ end;
 
 procedure TPointsSet.SetPointYCoord(index: longint; Value: double);
 begin
-    Assert(Assigned(FPoints));
     Assert(index >= 0);
     Assert(index < PointsCount);
 
@@ -138,8 +130,11 @@ procedure TPointsSet.CopyParameters(Dest: TObject);
 var
     i: longint;
 begin
-    inherited;
+    Assert(Dest.ClassType = Self.ClassType);
+
     TPointsSet(Dest).Clear;
+    inherited;
+    { TODO: optimize by copying entire array. }
     for i := 0 to PointsCount - 1 do
         TPointsSet(Dest).AddNewPoint(PointXCoord[i], PointYCoord[i]);
 end;
@@ -187,9 +182,8 @@ end;
 
 procedure TPointsSet.Clear;
 begin
-    if Assigned(FPoints) then
-        SetLength(FPoints, 0);
-    FPoints := nil;
+    { Terminates dynamic array controlled by reference counter. }
+    SetLength(FPoints, 0);
 end;
 
 procedure TPointsSet.DeletePoint(XValue: double);
@@ -219,7 +213,7 @@ begin
                 //  nevozmozhnosti udalit' poslednyuyu tochku...
             end;
     except
-        NewPoints := nil;
+        SetLength(NewPoints, 0);
         raise;
     end;
     if Found then
@@ -228,7 +222,7 @@ begin
         FPoints := NewPoints;
     end
     else
-        NewPoints := nil;
+        SetLength(NewPoints, 0);
 end;
 
 procedure TPointsSet.Sort;
@@ -280,7 +274,7 @@ begin
             MinValueX := CurMaxValueX;
         end;
     except
-        NewPoints := nil;
+        SetLength(NewPoints, 0);
         raise;
     end;
 

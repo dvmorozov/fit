@@ -31,7 +31,7 @@ type
     protected
         { List of all curve parameters. }
         FParams: Curve_parameters;
-        { List of variable parameters. }
+        { Contains only references to variable parameters. }
         FVariableParameters: TList;
         { Set of variable parameters common for all curve types (meaning could
           be different in particular cases).
@@ -305,7 +305,7 @@ var
     i: longint;
 begin
     for i := 0 to PointsCount - 1 do
-        Points[i][2] := Points[i][2] * Factor;
+        FPoints[i][2] := FPoints[i][2] * Factor;
 end;
 
 procedure TCurvePointsSet.InitListOfVariableParameters;

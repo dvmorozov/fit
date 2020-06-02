@@ -84,15 +84,15 @@ type
         { Positions of curves. Only X-coordinates are used. }
         FCurvePositions:   TTitlePointsSet;
         { Containers of calculated curves. Each object contains data of specimen curve. }
-        FCurvesList:       TSelfCopiedCompList;
+        FCurves:           TSelfCopiedCompList;
         { Containers of parameters of curves. }
-        FCurveList:        TMSCRCurveList;
+        FCurveAttributes:  TMSCRCurveList;
         { TODO: remove this attribute. }
         FWaveLength:       double;
         procedure SetCurvesListLambda;
 
     protected
-        FCurMin:         double;
+        FCurMin:           double;
         { If True then in all operations only data belonging to selected ared are used
           otherwise all profile data are used. }
         FSelectedAreaMode: boolean;
@@ -342,10 +342,10 @@ end;
 
 destructor TFitClient.Destroy;
 begin
-    FCurveList.Free;
+    FCurveAttributes.Free;
     FBackgroundPoints.Free;
     FSelectedArea.Free;
-    FCurvesList.Free;
+    FCurves.Free;
     FDeltaProfile.Free;
     FComputedProfile.Free;
     FSelectedPoints.Free;
@@ -654,15 +654,15 @@ begin
     end;
 
     HideCurves;
-    FCurvesList.Free;
-    FCurvesList := FitService.GetCurvesList;
-    if Assigned(FCurvesList) then
+    FCurves.Free;
+    FCurves := FitService.GetCurves;
+    if Assigned(FCurves) then
         SetCurvesListLambda;
 
-    FCurveList.Free;
-    FCurveList := FitService.GetCurveList;
-    if Assigned(FCurveList) then
-        FCurveList.FWaveLength := FWaveLength;
+    FCurveAttributes.Free;
+    FCurveAttributes := FitService.GetCurveAttributes;
+    if Assigned(FCurveAttributes) then
+        FCurveAttributes.FWaveLength := FWaveLength;
 
     PlotCurves;
 {$IFDEF USE_GRIDS}
@@ -757,8 +757,8 @@ end;
 
 function TFitClient.GetCurveList: TMSCRCurveList;
 begin
-    Assert(Assigned(FCurveList));
-    Result := FCurveList;
+    Assert(Assigned(FCurveAttributes));
+    Result := FCurveAttributes;
 end;
 
 procedure TFitClient.SetCurvesListLambda;
@@ -766,12 +766,12 @@ var
     i:  longint;
     PointsSet: TNeutronPointsSet;
 begin
-    Assert(Assigned(FCurvesList));
+    Assert(Assigned(FCurves));
 
-    with FCurvesList do
-        for i := 0 to FCurvesList.Count - 1 do
+    with FCurves do
+        for i := 0 to FCurves.Count - 1 do
         begin
-            PointsSet := TNeutronPointsSet(FCurvesList.Items[i]);
+            PointsSet := TNeutronPointsSet(FCurves.Items[i]);
             PointsSet.WaveLength := FWaveLength;
         end;
 end;
@@ -791,10 +791,10 @@ begin
         FComputedProfile.WaveLength := AWaveLength;
     if Assigned(FDeltaProfile) then
         FDeltaProfile.WaveLength := AWaveLength;
-    if Assigned(FCurvesList) then
+    if Assigned(FCurves) then
         SetCurvesListLambda;
-    if Assigned(FCurveList) then
-        FCurveList.FWaveLength := FWaveLength;
+    if Assigned(FCurveAttributes) then
+        FCurveAttributes.FWaveLength := FWaveLength;
 end;
 
 function TFitClient.GetWaveLength: double;
@@ -845,18 +845,18 @@ end;
 
 procedure TFitClient.PlotCurves;
 begin
-    if Assigned(FFitViewer) and Assigned(FCurveList) then
-        FFitViewer.PlotCurves(Self, FCurvesList, FCurveList);
+    if Assigned(FFitViewer) and Assigned(FCurveAttributes) then
+        FFitViewer.PlotCurves(Self, FCurves, FCurveAttributes);
 end;
 
 procedure TFitClient.HideCurves;
 var
     i: longint;
 begin
-    if Assigned(FCurvesList) then
-        for i := 0 to FCurvesList.Count - 1 do
+    if Assigned(FCurves) then
+        for i := 0 to FCurves.Count - 1 do
         begin
-            Hide(TNeutronPointsSet(FCurvesList.Items[i]));
+            Hide(TNeutronPointsSet(FCurves.Items[i]));
         end;
 end;
 
@@ -894,7 +894,7 @@ end;
 procedure TFitClient.FillDatasheetTable;
 begin
     if Assigned(FFitViewer) then
-        FFitViewer.FillDatasheetTable(FExperimentalProfile, FCurvesList,
+        FFitViewer.FillDatasheetTable(FExperimentalProfile, FCurves,
             FComputedProfile, FDeltaProfile, FRFactorBounds);
 end;
 {$ENDIF}

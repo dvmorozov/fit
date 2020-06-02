@@ -70,12 +70,12 @@ begin
         for i := 0 to (Bounds.PointsCount shr 1) - 1 do
             for j := Trunc(Bounds.PointXCoord[i shl 1]) to
                 Trunc(Bounds.PointXCoord[(i shl 1) + 1]) do
-                Points[j][2] :=
+                FPoints[j][2] :=
                     TwoBranchesPseudoVoigtPoint(A, Sigma, Eta,
-                    SigmaRight, EtaRight, x0, Points[j][1]);
+                    SigmaRight, EtaRight, x0, FPoints[j][1]);
     end
     else
-        TwoBranchesPseudoVoigt(Points, A, Sigma, Eta, SigmaRight, EtaRight, x0);
+        TwoBranchesPseudoVoigt(FPoints, A, Sigma, Eta, SigmaRight, EtaRight, x0);
 end;
 
 constructor T2BranchesPseudoVoigtPointsSet.Create(AOwner: TComponent; x0: double);

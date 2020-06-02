@@ -65,11 +65,11 @@ begin
         for i := 0 to (Bounds.PointsCount shr 1) - 1 do
             for j := Trunc(Bounds.PointXCoord[i shl 1]) to
                 Trunc(Bounds.PointXCoord[(i shl 1) + 1]) do
-                Points[j][2] := AsymPseudoVoigtPoint(A, Sigma, Eta, x0,
-                        Points[j][1], DeltaSigma);
+                FPoints[j][2] := AsymPseudoVoigtPoint(A, Sigma, Eta, x0,
+                        FPoints[j][1], DeltaSigma);
     end
     else
-        AsymPseudoVoigt(Points, A, Sigma, Eta, x0, DeltaSigma);
+        AsymPseudoVoigt(FPoints, A, Sigma, Eta, x0, DeltaSigma);
 end;
 
 function TAsymPseudoVoigtPointsSet.GetDeltaSigma: double;

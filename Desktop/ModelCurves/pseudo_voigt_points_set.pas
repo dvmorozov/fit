@@ -65,10 +65,10 @@ begin
         for i := 0 to (Bounds.PointsCount shr 1) - 1 do
             for j := Trunc(Bounds.PointXCoord[i shl 1]) to
                 Trunc(Bounds.PointXCoord[(i shl 1) + 1]) do
-                Points[j][2] := PseudoVoigtPoint(A, Sigma, Eta, x0, Points[j][1]);
+                FPoints[j][2] := PseudoVoigtPoint(A, Sigma, Eta, x0, FPoints[j][1]);
     end
     else
-        PseudoVoigt(Points, A, Sigma, Eta, x0);
+        PseudoVoigt(FPoints, A, Sigma, Eta, x0);
 end;
 
 constructor TPseudoVoigtPointsSet.Create(AOwner: TComponent; x0: double);

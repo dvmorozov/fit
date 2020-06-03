@@ -49,11 +49,11 @@ The component which implements all server logic. It divides the task of profile 
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code><b><a  href="fit_service.TFitService.html#FCurveExpr">FCurveExpr</a></b>:  string;</code></td>
+<td class="itemcode"><code><b><a  href="fit_service.TFitService.html#FCurveAttributes">FCurveAttributes</a></b>: <a  href="mscr_specimen_list.TMSCRCurveList.html">TMSCRCurveList</a>;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code><b><a  href="fit_service.TFitService.html#FCurveParameterList">FCurveParameterList</a></b>: <a  href="mscr_specimen_list.TMSCRCurveList.html">TMSCRCurveList</a>;</code></td>
+<td class="itemcode"><code><b><a  href="fit_service.TFitService.html#FCurveExpr">FCurveExpr</a></b>:  string;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
@@ -61,11 +61,11 @@ The component which implements all server logic. It divides the task of profile 
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code><b><a  href="fit_service.TFitService.html#FCurveScalingEnabled">FCurveScalingEnabled</a></b>: boolean;</code></td>
+<td class="itemcode"><code><b><a  href="fit_service.TFitService.html#FCurves">FCurves</a></b>:        <a  href="self_copied_component.TSelfCopiedCompList.html">TSelfCopiedCompList</a>;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code><b><a  href="fit_service.TFitService.html#FCurvesList">FCurvesList</a></b>:     <a  href="self_copied_component.TSelfCopiedCompList.html">TSelfCopiedCompList</a>;</code></td>
+<td class="itemcode"><code><b><a  href="fit_service.TFitService.html#FCurveScalingEnabled">FCurveScalingEnabled</a></b>: boolean;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
@@ -188,11 +188,11 @@ The component which implements all server logic. It divides the task of profile 
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="fit_service.TFitService.html#GetCurveCount">GetCurveCount</a></b>: longint;</code></td>
+<td class="itemcode"><code>function <b><a  href="fit_service.TFitService.html#GetCurveAttributes">GetCurveAttributes</a></b>: <a  href="mscr_specimen_list.TMSCRCurveList.html">TMSCRCurveList</a>;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="fit_service.TFitService.html#GetCurveList">GetCurveList</a></b>: <a  href="mscr_specimen_list.TMSCRCurveList.html">TMSCRCurveList</a>;</code></td>
+<td class="itemcode"><code>function <b><a  href="fit_service.TFitService.html#GetCurveCount">GetCurveCount</a></b>: longint;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
@@ -208,11 +208,11 @@ The component which implements all server logic. It divides the task of profile 
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="fit_service.TFitService.html#GetCurveScalingEnabled">GetCurveScalingEnabled</a></b>: boolean;</code></td>
+<td class="itemcode"><code>function <b><a  href="fit_service.TFitService.html#GetCurves">GetCurves</a></b>: <a  href="self_copied_component.TSelfCopiedCompList.html">TSelfCopiedCompList</a>;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="fit_service.TFitService.html#GetCurvesList">GetCurvesList</a></b>: <a  href="self_copied_component.TSelfCopiedCompList.html">TSelfCopiedCompList</a>;</code></td>
+<td class="itemcode"><code>function <b><a  href="fit_service.TFitService.html#GetCurveScalingEnabled">GetCurveScalingEnabled</a></b>: boolean;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
@@ -663,21 +663,21 @@ Current total value of R-factor for all subtasks.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="FCurveExpr"></span><code><b>FCurveExpr</b>:  string;</code></td>
+<td class="itemcode"><span id="FCurveAttributes"></span><code><b>FCurveAttributes</b>: <a  href="mscr_specimen_list.TMSCRCurveList.html">TMSCRCurveList</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
-The expression for user defined curve.</p>
+Containers of parameters of curves. TODO: change type and remove <a class="normal" href="fit_service.TFitService.html#SetWaveLength">SetWaveLength</a>.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="FCurveParameterList"></span><code><b>FCurveParameterList</b>: <a  href="mscr_specimen_list.TMSCRCurveList.html">TMSCRCurveList</a>;</code></td>
+<td class="itemcode"><span id="FCurveExpr"></span><code><b>FCurveExpr</b>:  string;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
-Containers of parameters of curves. TODO: change type and remove <a class="normal" href="fit_service.TFitService.html#SetWaveLength">SetWaveLength</a>.</p>
+The expression for user defined curve.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -693,20 +693,20 @@ Positions of curves. Only X-coordinates are used.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="FCurveScalingEnabled"></span><code><b>FCurveScalingEnabled</b>: boolean;</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="FCurvesList"></span><code><b>FCurvesList</b>:     <a  href="self_copied_component.TSelfCopiedCompList.html">TSelfCopiedCompList</a>;</code></td>
+<td class="itemcode"><span id="FCurves"></span><code><b>FCurves</b>:        <a  href="self_copied_component.TSelfCopiedCompList.html">TSelfCopiedCompList</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
 Contains all curves collected from tasks (for example, for separate intervals). Items are added synchronously to the list.</p>
 </td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FCurveScalingEnabled"></span><code><b>FCurveScalingEnabled</b>: boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -978,21 +978,21 @@ Methods return copies of objects, they should be free by caller.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetCurveCount"></span><code>function <b>GetCurveCount</b>: longint;</code></td>
+<td class="itemcode"><span id="GetCurveAttributes"></span><code>function <b>GetCurveAttributes</b>: <a  href="mscr_specimen_list.TMSCRCurveList.html">TMSCRCurveList</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
-These methods check validity of server <a class="normal" href="fit_service.TFitService.html#State">state</a> and throw EUserException in the case when <a class="normal" href="fit_service.TFitService.html#State">state</a> is invalid.</p>
+Returns list of parameters of all curves.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetCurveList"></span><code>function <b>GetCurveList</b>: <a  href="mscr_specimen_list.TMSCRCurveList.html">TMSCRCurveList</a>;</code></td>
+<td class="itemcode"><span id="GetCurveCount"></span><code>function <b>GetCurveCount</b>: longint;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
-Returns list of parameters of all curves.</p>
+These methods check validity of server <a class="normal" href="fit_service.TFitService.html#State">state</a> and throw EUserException in the case when <a class="normal" href="fit_service.TFitService.html#State">state</a> is invalid.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -1022,20 +1022,20 @@ Returns list of parameters of all curves.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetCurveScalingEnabled"></span><code>function <b>GetCurveScalingEnabled</b>: boolean;</code></td>
-</tr>
-<tr><td colspan="2">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetCurvesList"></span><code>function <b>GetCurvesList</b>: <a  href="self_copied_component.TSelfCopiedCompList.html">TSelfCopiedCompList</a>;</code></td>
+<td class="itemcode"><span id="GetCurves"></span><code>function <b>GetCurves</b>: <a  href="self_copied_component.TSelfCopiedCompList.html">TSelfCopiedCompList</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>
 Returns list of components containing sets of points.</p>
 </td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetCurveScalingEnabled"></span><code>function <b>GetCurveScalingEnabled</b>: boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">

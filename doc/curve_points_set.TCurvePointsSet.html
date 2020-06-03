@@ -242,7 +242,7 @@ Generic container for point set of all calcuated curves.</p>
 </tr>
 <tr><td colspan="2">
 <p>
-Set of <a class="normal" href="special_curve_parameter.html#Variable">variable</a> <a class="normal" href="curve_points_set.TCurvePointsSet.html#Parameters">parameters</a> common for all curve types (meaning could be different in particular cases). <a class="normal" href="curve_points_set.TCurvePointsSet.html#Parameters">Parameters</a> with predefined semantics have constraints, which can be associated with curve <a class="normal" href="points_set.TPointsSet.html#Points">points</a>. Attributes store pointers to <a class="normal" href="curve_points_set.TCurvePointsSet.html#Parameters">parameters</a> with predefined semantics. <a class="normal" href="curve_points_set.TCurvePointsSet.html#Parameters">Parameters</a> are created in descendant constructors.</p>
+Set of <a class="normal" href="special_curve_parameter.html#Variable">variable</a> <a class="normal" href="curve_points_set.TCurvePointsSet.html#Parameters">parameters</a> common for all curve types (meaning could be different in particular cases). <a class="normal" href="curve_points_set.TCurvePointsSet.html#Parameters">Parameters</a> with predefined semantics have constraints, which can be associated with curve points. Attributes store pointers to <a class="normal" href="curve_points_set.TCurvePointsSet.html#Parameters">parameters</a> with predefined semantics. <a class="normal" href="curve_points_set.TCurvePointsSet.html#Parameters">Parameters</a> are created in descendant constructors.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -320,7 +320,7 @@ List of all curve <a class="normal" href="curve_points_set.TCurvePointsSet.html#
 </tr>
 <tr><td colspan="2">
 <p>
-Flag designating that boundaries of R-factor calculation has been set up. If False R-factor is <a class="normal" href="special_curve_parameter.html#Calculated">calculated</a> for all <a class="normal" href="points_set.TPointsSet.html#Points">points</a> of profile.</p>
+Flag designating that boundaries of R-factor calculation has been set up. If False R-factor is <a class="normal" href="special_curve_parameter.html#Calculated">calculated</a> for all points of profile.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -346,7 +346,7 @@ Flag designating that boundaries of R-factor calculation has been set up. If Fal
 </tr>
 <tr><td colspan="2">
 <p>
-List of <a class="normal" href="special_curve_parameter.html#Variable">variable</a> <a class="normal" href="curve_points_set.TCurvePointsSet.html#Parameters">parameters</a>.</p>
+Contains only references to <a class="normal" href="special_curve_parameter.html#Variable">variable</a> <a class="normal" href="curve_points_set.TCurvePointsSet.html#Parameters">parameters</a>.</p>
 </td></tr>
 </table>
 <h3 class="detail">Methods</h3>
@@ -491,7 +491,7 @@ Temporarily stores values of <a class="normal" href="special_curve_parameter.htm
 </tr>
 <tr><td colspan="2">
 <p>
-Set of pairs of indexes of X-coordinates forming intervals in which functions should be calcuated (boundaries are included). Equity to nil designates that functions should be <a class="normal" href="special_curve_parameter.html#Calculated">calculated</a> for all <a class="normal" href="points_set.TPointsSet.html#Points">points</a>. Indexes instead of coordinates are used to avoid searching.</p>
+Set of pairs of indexes of X-coordinates forming intervals in which functions should be calcuated (boundaries are included). Equity to nil designates that functions should be <a class="normal" href="special_curve_parameter.html#Calculated">calculated</a> for all points. Indexes instead of coordinates are used to avoid searching.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -527,7 +527,7 @@ Restores values of <a class="normal" href="special_curve_parameter.html#Variable
 </tr>
 <tr><td colspan="2">
 <p>
-Performs recalculation of all profile <a class="normal" href="points_set.TPointsSet.html#Points">points</a>.</p>
+Performs recalculation of all profile points.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -547,7 +547,7 @@ Performs intialization of <a class="normal" href="special_curve_parameter.html#V
 </tr>
 <tr><td colspan="2">
 <p>
-Multiplies profile <a class="normal" href="points_set.TPointsSet.html#Points">points</a> by given factor.</p>
+Multiplies profile points by given factor.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">

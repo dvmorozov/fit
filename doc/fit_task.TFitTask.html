@@ -101,15 +101,15 @@ Fits profile interval by model curves. Provides <a class="normal" href="special_
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code><b><a  href="fit_task.TFitTask.html#FCurveList">FCurveList</a></b>:      <a  href="self_copied_component.TSelfCopiedCompList.html">TSelfCopiedCompList</a>;</code></td>
+<td class="itemcode"><code><b><a  href="fit_task.TFitTask.html#FCurveNum">FCurveNum</a></b>: longint;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code><b><a  href="fit_task.TFitTask.html#FCurveNum">FCurveNum</a></b>: longint;</code></td>
+<td class="itemcode"><code><b><a  href="fit_task.TFitTask.html#FCurvePositions">FCurvePositions</a></b>: <a  href="points_set.TPointsSet.html">TPointsSet</a>;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><code><b><a  href="fit_task.TFitTask.html#FCurvePositions">FCurvePositions</a></b>: <a  href="points_set.TPointsSet.html">TPointsSet</a>;</code></td>
+<td class="itemcode"><code><b><a  href="fit_task.TFitTask.html#FCurves">FCurves</a></b>:      <a  href="self_copied_component.TSelfCopiedCompList.html">TSelfCopiedCompList</a>;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
@@ -220,7 +220,7 @@ Fits profile interval by model curves. Provides <a class="normal" href="special_
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="fit_task.TFitTask.html#GetCurvesList">GetCurvesList</a></b>: <a  href="self_copied_component.TSelfCopiedCompList.html">TSelfCopiedCompList</a>;</code></td>
+<td class="itemcode"><code>function <b><a  href="fit_task.TFitTask.html#GetCurves">GetCurves</a></b>: <a  href="self_copied_component.TSelfCopiedCompList.html">TSelfCopiedCompList</a>;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
@@ -617,16 +617,6 @@ Expression defining user curve type.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
-<td class="itemcode"><span id="FCurveList"></span><code><b>FCurveList</b>:      <a  href="self_copied_component.TSelfCopiedCompList.html">TSelfCopiedCompList</a>;</code></td>
-</tr>
-<tr><td colspan="2">
-<p>
-Set of curves used to model experimental data inside given interval.</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
 <td class="itemcode"><span id="FCurveNum"></span><code><b>FCurveNum</b>: longint;</code></td>
 </tr>
 <tr><td colspan="2">
@@ -642,6 +632,16 @@ Index of pattern instance (specimen) parameters of which are variated at the mom
 <tr><td colspan="2">
 <p>
 Contains positions of curves. Only X-coordinates are used.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FCurves"></span><code><b>FCurves</b>:      <a  href="self_copied_component.TSelfCopiedCompList.html">TSelfCopiedCompList</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Set of curves used to model experimental data inside given interval.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -884,7 +884,7 @@ Returns final list of curve positions.</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><span id="GetCurvesList"></span><code>function <b>GetCurvesList</b>: <a  href="self_copied_component.TSelfCopiedCompList.html">TSelfCopiedCompList</a>;</code></td>
+<td class="itemcode"><span id="GetCurves"></span><code>function <b>GetCurves</b>: <a  href="self_copied_component.TSelfCopiedCompList.html">TSelfCopiedCompList</a>;</code></td>
 </tr>
 <tr><td colspan="2">
 <p>

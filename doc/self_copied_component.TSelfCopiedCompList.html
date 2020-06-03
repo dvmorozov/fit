@@ -21,7 +21,7 @@
 <code>type TSelfCopiedCompList = class(TComponentList, <a class="normal" href="self_copied_component.ISelfCopied.html">ISelfCopied</a>)</code></p>
 <h2 class="description">Description</h2>
 <p>
-List of self copied components. By default is always active, so copy of list is also active. Caller should make the list inactive by itself if necessary.</p>
+List of self copied components. By default it keeps ownership of items and destroys them in corresponding methods. Ownership is transferrred to copy of list as well.</p>
 <span id="PasDoc-Hierarchy"></span><h2 class="hierarchy">Hierarchy</h2>
 <ul class="hierarchy"><li class="ancestor">TComponentList</li>
 <li class="thisitem">TSelfCopiedCompList</li></ul><h2 class="overview">Overview</h2>
@@ -29,15 +29,23 @@ List of self copied components. By default is always active, so copy of list is 
 <table class="summary wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="self_copied_component.TSelfCopiedCompList.html#Add">Add</a></b>(Item: TComponent): integer; virtual;</code></td>
+<td class="itemcode"><code>destructor <b><a  href="self_copied_component.TSelfCopiedCompList.html#Destroy">Destroy</a></b>; override;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
-<td class="itemcode"><code>function <b><a  href="self_copied_component.TSelfCopiedCompList.html#GetCopy">GetCopy</a></b>: TObject; virtual;</code></td>
+<td class="itemcode"><code>function <b><a  href="self_copied_component.TSelfCopiedCompList.html#Add">Add</a></b>(Item: TComponent): integer; virtual;</code></td>
 </tr>
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="self_copied_component.TSelfCopiedCompList.html#GetCopy">GetCopy</a></b>: TObject; virtual;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
 <td class="itemcode"><code>function <b><a  href="self_copied_component.TSelfCopiedCompList.html#GetSharedCopy">GetSharedCopy</a></b>: TObject; virtual;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="self_copied_component.TSelfCopiedCompList.html#Remove">Remove</a></b>(AComponent: TComponent): Integer; virtual;</code></td>
 </tr>
 <tr class="list2">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
@@ -54,6 +62,14 @@ List of self copied components. By default is always active, so copy of list is 
 </table>
 <h2 class="description">Description</h2>
 <h3 class="detail">Methods</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Destroy"></span><code>destructor <b>Destroy</b>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
@@ -79,6 +95,14 @@ List of self copied components. By default is always active, so copy of list is 
 <p>
 Returns copy of list which owns its items.</p>
 </td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Remove"></span><code>function <b>Remove</b>(AComponent: TComponent): Integer; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">

@@ -157,7 +157,7 @@ type
         { Method of IFitViewer interface. }
         procedure SetUpdateGrids(Update: boolean);
         { Method of IFitViewer interface. }
-        procedure FillDatasheetTable(ExperimentalProfile: TTitlePointsSet;
+        procedure FillSummaryTable(ExperimentalProfile: TTitlePointsSet;
             CurvesList: TSelfCopiedCompList; ComputedProfile: TTitlePointsSet;
             DeltaProfile: TTitlePointsSet; RFactorBounds: TTitlePointsSet);
 {$ENDIF}
@@ -1229,7 +1229,7 @@ begin
 {$ENDIF}
 end;
 
-procedure TFitViewer.FillDatasheetTable(ExperimentalProfile: TTitlePointsSet;
+procedure TFitViewer.FillSummaryTable(ExperimentalProfile: TTitlePointsSet;
     CurvesList: TSelfCopiedCompList; ComputedProfile: TTitlePointsSet;
     DeltaProfile: TTitlePointsSet; RFactorBounds: TTitlePointsSet);
 var
@@ -1237,11 +1237,11 @@ var
     P:      TCurvePointsSet;
     StartX: double;
 begin
-    Assert(Assigned(ExperimentalProfile));
-    Assert(Assigned(CurvesList));
-    Assert(Assigned(ComputedProfile));
-    Assert(Assigned(DeltaProfile));
-    Assert(Assigned(RFactorBounds));
+    { The method should silently exit if data are incomplete. }
+    if (not Assigned(ExperimentalProfile)) or (not Assigned(CurvesList)) or
+       (not Assigned(ComputedProfile)) or (not Assigned(DeltaProfile)) or
+       (not Assigned(RFactorBounds)) then Exit;
+
     Assert(RFactorBounds.PointsCount mod 2 = 0);
     Assert(RFactorBounds.PointsCount <> 0);
 

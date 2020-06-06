@@ -894,7 +894,7 @@ end;
 procedure TFitClient.FillDatasheetTable;
 begin
     if Assigned(FFitViewer) then
-        FFitViewer.FillDatasheetTable(FExperimentalProfile, FCurves,
+        FFitViewer.FillSummaryTable(FExperimentalProfile, FCurves,
             FComputedProfile, FDeltaProfile, FRFactorBounds);
 end;
 {$ENDIF}

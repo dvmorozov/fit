@@ -77,7 +77,7 @@ type
         procedure Hide(Sender: TObject; PointsSet: TNeutronPointsSet);
 {$IFDEF USE_GRIDS}
         { Handler to fill data table. }
-        procedure FillDatasheetTable(Profile: TTitlePointsSet;
+        procedure FillSummaryTable(Profile: TTitlePointsSet;
             CurvesList: TSelfCopiedCompList; ComputedProfile: TTitlePointsSet;
             DeltaProfile: TTitlePointsSet; RFactorBounds: TTitlePointsSet);
         procedure SetUpdateGrids(Update: boolean);

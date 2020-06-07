@@ -90,7 +90,7 @@ type
         procedure ClearBackgroundTable;
         procedure ClearPositionsTable;
         procedure ClearCurveTable;
-        procedure ClearDatasheetTable;
+        procedure ClearSummaryTable;
 {$ENDIF}
         function ValToStr(Value: double): string;
         { Clears serie set and fills it again. }
@@ -382,7 +382,7 @@ begin
         ClearPositionsTable;
         ClearBoundsTable;
         ClearCurveTable;
-        ClearDatasheetTable;
+        ClearSummaryTable;
     end;
 {$ENDIF}
 end;
@@ -944,8 +944,8 @@ begin
         FixedCols := 0;
         FixedRows := 1;
 
-        Cells[0, 0] := StartName;
-        Cells[1, 0] := StopName;
+        Cells[0, 0] := StartingPositionName;
+        Cells[1, 0] := FinalPositionName;
 
         ResetColWidths;
     end;
@@ -975,8 +975,8 @@ begin
         FixedCols := 0;
         FixedRows := 1;
 
-        Cells[0, 0] := StartName;
-        Cells[1, 0] := StopName;
+        Cells[0, 0] := StartingPositionName;
+        Cells[1, 0] := FinalPositionName;
 
         i := 0;
         RowIndex := FixedRows;
@@ -1031,9 +1031,7 @@ begin
 
         ResetColWidths;
     end;
-{$IFDEF WINDOWS}
-    TFormMain(Form).TabSheetParameters.TabVisible := False;
-{$ENDIF}
+    TFormMain(Form).TabSheetCurveAttributes.TabVisible := False;
 end;
 
 {$ENDIF}
@@ -1051,7 +1049,7 @@ begin
         FixedRows := 1;
 
         Cells[0, 0] := NumberName;
-        Cells[1, 0] := ArgumentName;
+        Cells[1, 0] := PositionName;
 
         ResetColWidths;
     end;
@@ -1068,8 +1066,8 @@ begin
         FixedCols := 0;
         FixedRows := 1;
 
-        Cells[0, 0] := ArgumentName;
-        Cells[1, 0] := ValueName;
+        Cells[0, 0] := PositionName;
+        Cells[1, 0] := AmplitudeName;
 
         ResetColWidths;
     end;
@@ -1095,8 +1093,8 @@ begin
         FixedCols := 0;
         FixedRows := 1;
 
-        Cells[0, 0] := ArgumentName;
-        Cells[1, 0] := ValueName;
+        Cells[0, 0] := PositionName;
+        Cells[1, 0] := AmplitudeName;
 
         for j := 0 to CurvePositions.PointsCount - 1 do
         begin
@@ -1131,8 +1129,8 @@ begin
         FixedCols := 0;
         FixedRows := 1;
 
-        Cells[0, 0] := ArgumentName;
-        Cells[1, 0] := ValueName;
+        Cells[0, 0] := PositionName;
+        Cells[1, 0] := AmplitudeName;
 
         for j := 0 to BackgroundPoints.PointsCount - 1 do
         begin
@@ -1156,8 +1154,8 @@ begin
         FixedCols := 0;
         FixedRows := 1;
 
-        Cells[0, 0]   := ArgumentName;
-        Cells[1, 0]   := ValueName;
+        Cells[0, 0]   := PositionName;
+        Cells[1, 0]   := AmplitudeName;
         //  ochistka dopolnitel'noy stroki
         Cells[0, 1]   := '';
         Cells[1, 1]   := '';
@@ -1186,8 +1184,8 @@ begin
         FixedCols := 0;
         FixedRows := 1;
 
-        Cells[0, 0] := ArgumentName;
-        Cells[1, 0] := ValueName;
+        Cells[0, 0] := PositionName;
+        Cells[1, 0] := AmplitudeName;
 
         for j := 0 to Profile.PointsCount - 1 do
         begin
@@ -1208,7 +1206,7 @@ begin
     end;
 end;
 
-procedure TFitViewer.ClearDatasheetTable;
+procedure TFitViewer.ClearSummaryTable;
 begin
     with TFormMain(Form).GridDatasheet do
     begin
@@ -1218,15 +1216,13 @@ begin
         FixedCols := 1;
         FixedRows := 1;
 
-        Cells[0, 0] := ArgumentName;
-        Cells[1, 0] := ValueName;
-        Cells[2, 0] := SummarizedName;
-        Cells[3, 0] := DeltaName;
+        Cells[0, 0] := PositionName;
+        Cells[1, 0] := AmplitudeName;
+        Cells[2, 0] := TotalAmplitudeName;
+        Cells[3, 0] := DifferenceName;
         ResetColWidths;
     end;
-{$IFDEF WINDOWS}
-    TFormMain(Form).TabSheetDatasheet.TabVisible := False;
-{$ENDIF}
+    TFormMain(Form).TabSheetSummary.TabVisible := False;
 end;
 
 procedure TFitViewer.FillSummaryTable(ExperimentalProfile: TTitlePointsSet;
@@ -1234,7 +1230,7 @@ procedure TFitViewer.FillSummaryTable(ExperimentalProfile: TTitlePointsSet;
     DeltaProfile: TTitlePointsSet; RFactorBounds: TTitlePointsSet);
 var
     i, j, k, StartIndex, EndIndex, RowIndex, ColIndex: longint;
-    P:      TCurvePointsSet;
+    Curve:  TCurvePointsSet;
     StartX: double;
 begin
     { The method should silently exit if data are incomplete. }
@@ -1247,9 +1243,7 @@ begin
 
     if FUpdateGrids then
     begin
-{$IFDEF WINDOWS}
-        TFormMain(Form).TabSheetDatasheet.TabVisible := True;
-{$ENDIF}
+        TFormMain(Form).TabSheetSummary.TabVisible := True;
         with TFormMain(Form).GridDatasheet do
         begin
             //  nastroyka parametrov setki
@@ -1264,10 +1258,10 @@ begin
             FixedRows   := 1;
             //  zapolnenie yacheek
             //  zagolovki stolbtsov (!!! d.b. ne men'she 4-h - sm. nizhe !!!)
-            Cells[0, 0] := ArgumentName;
-            Cells[1, 0] := ValueName;
-            Cells[2, 0] := SummarizedName;
-            Cells[3, 0] := DeltaName;
+            Cells[0, 0] := PositionName;
+            Cells[1, 0] := AmplitudeName;
+            Cells[2, 0] := TotalAmplitudeName;
+            Cells[3, 0] := DifferenceName;
             for i := 4 to ColCount - 1 do
                 Cells[i, 0] := 'Curve ' + IntToStr(i - 3);
 
@@ -1302,12 +1296,12 @@ begin
                 ColIndex := 4;
                 for j := 0 to CurvesList.Count - 1 do
                 begin
-                    P := TCurvePointsSet(CurvesList.Items[j]);
-                    if StartX = P.PointXCoord[0] then
+                    Curve := TCurvePointsSet(CurvesList.Items[j]);
+                    if StartX = Curve.PointXCoord[0] then
                     begin
-                        for k := 0 to P.PointsCount - 1 do
+                        for k := 0 to Curve.PointsCount - 1 do
                             Cells[ColIndex, RowIndex + k] :=
-                                ValToStr(P.PointYCoord[k]);
+                                ValToStr(Curve.PointYCoord[k]);
                         Inc(ColIndex);
                     end;
                 end;
@@ -1327,9 +1321,7 @@ begin
     TFormMain(Form).FCurveList := CurveList;
     CurveList.GridAssign(TFormMain(Form).GridParameters);
     TFormMain(Form).FModifiedParameters := True;
-{$IFDEF WINDOWS}
-    TFormMain(Form).TabSheetParameters.TabVisible := True;
-{$ENDIF}
+    TFormMain(Form).TabSheetCurveAttributes.TabVisible := True;
 end;
 {$ENDIF}
 

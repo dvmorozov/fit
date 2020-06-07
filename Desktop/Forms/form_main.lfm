@@ -1,7 +1,7 @@
 object FormMain: TFormMain
-  Left = 459
+  Left = 469
   Height = 599
-  Top = 125
+  Top = 168
   Width = 1054
   HorzScrollBar.Page = 1191
   VertScrollBar.Page = 502
@@ -50,6 +50,7 @@ object FormMain: TFormMain
     ParentFont = False
     TabIndex = 0
     TabOrder = 4
+    OnChange = PageControlChange
     object TabSheetBackground: TTabSheet
       Caption = 'Background Points'
       ClientHeight = 142
@@ -148,33 +149,33 @@ object FormMain: TFormMain
         end
       end
     end
-    object TabSheetIntervals: TTabSheet
-      Caption = 'Specimen Application Intervals'
+    object TabSheetCurveIntervals: TTabSheet
+      Caption = 'Curve Intervals'
       ClientHeight = 142
       ClientWidth = 1048
       Font.Height = -9
       Font.Name = 'MS Sans Serif'
-      OnShow = TabSheetIntervalsShow
+      OnShow = TabSheetCurveIntervalsShow
       ParentFont = False
       object PanelIntervals: TPanel
         Left = 0
-        Height = 115
+        Height = 142
         Top = 0
-        Width = 1270
+        Width = 1048
         Align = alClient
         BevelOuter = bvNone
-        ClientHeight = 115
-        ClientWidth = 1270
+        ClientHeight = 142
+        ClientWidth = 1048
         Font.Height = -9
         Font.Name = 'MS Sans Serif'
         ParentColor = False
         ParentFont = False
         TabOrder = 0
         object GridIntervals: TNumericGrid
-          Left = 30
-          Height = 115
+          Left = 24
+          Height = 142
           Top = 0
-          Width = 1240
+          Width = 1024
           Align = alClient
           AutoEdit = False
           Color = clBtnFace
@@ -201,7 +202,7 @@ object FormMain: TFormMain
         end
         object EditBalloonGridIntervals: TEdit
           Left = 10
-          Height = 24
+          Height = 20
           Top = 10
           Width = 4
           Font.Height = -9
@@ -211,9 +212,9 @@ object FormMain: TFormMain
         end
         object ToolBar2: TToolBar
           Left = 0
-          Height = 115
+          Height = 142
           Top = 0
-          Width = 30
+          Width = 24
           Align = alLeft
           AutoSize = True
           Caption = 'ToolBar2'
@@ -236,33 +237,33 @@ object FormMain: TFormMain
         end
       end
     end
-    object TabSheetSpecPositions: TTabSheet
-      Caption = 'Specimen Positions'
+    object TabSheetCurvePositions: TTabSheet
+      Caption = 'Curve Positions'
       ClientHeight = 142
       ClientWidth = 1048
       Font.Height = -9
       Font.Name = 'MS Sans Serif'
-      OnShow = TabSheetSpecPositionsShow
+      OnShow = TabSheetCurvePositionsShow
       ParentFont = False
       object PanelSpecPositions: TPanel
         Left = 0
-        Height = 115
+        Height = 142
         Top = 0
-        Width = 1270
+        Width = 1048
         Align = alClient
         BevelOuter = bvNone
-        ClientHeight = 115
-        ClientWidth = 1270
+        ClientHeight = 142
+        ClientWidth = 1048
         Font.Height = -9
         Font.Name = 'MS Sans Serif'
         ParentColor = False
         ParentFont = False
         TabOrder = 0
         object GridSpecPositions: TNumericGrid
-          Left = 30
-          Height = 115
+          Left = 24
+          Height = 142
           Top = 0
-          Width = 1240
+          Width = 1024
           Align = alClient
           AutoEdit = False
           Color = clBtnFace
@@ -289,7 +290,7 @@ object FormMain: TFormMain
         end
         object EditBalloonGridSpecPositions: TEdit
           Left = 10
-          Height = 24
+          Height = 20
           Top = 10
           Width = 4
           Font.Height = -9
@@ -299,9 +300,9 @@ object FormMain: TFormMain
         end
         object ToolBar3: TToolBar
           Left = 0
-          Height = 115
+          Height = 142
           Top = 0
-          Width = 30
+          Width = 24
           Align = alLeft
           AutoSize = True
           Caption = 'ToolBar3'
@@ -324,33 +325,33 @@ object FormMain: TFormMain
         end
       end
     end
-    object TabSheetParameters: TTabSheet
-      Caption = 'Specimen Parameters'
+    object TabSheetCurveAttributes: TTabSheet
+      Caption = 'Curve Attributes'
       ClientHeight = 142
       ClientWidth = 1048
       Font.Height = -9
       Font.Name = 'MS Sans Serif'
-      OnShow = TabSheetParametersShow
+      OnShow = TabSheetCurveAttributesShow
       ParentFont = False
       object PanelParameters: TPanel
         Left = 0
-        Height = 115
+        Height = 142
         Top = 0
-        Width = 1270
+        Width = 1048
         Align = alClient
         BevelOuter = bvNone
-        ClientHeight = 115
-        ClientWidth = 1270
+        ClientHeight = 142
+        ClientWidth = 1048
         Font.Height = -9
         Font.Name = 'MS Sans Serif'
         ParentColor = False
         ParentFont = False
         TabOrder = 0
         object GridParameters: TNumericGrid
-          Left = 30
-          Height = 115
+          Left = 24
+          Height = 142
           Top = 0
-          Width = 1240
+          Width = 1024
           Align = alClient
           AutoEdit = False
           Color = clBtnFace
@@ -377,7 +378,7 @@ object FormMain: TFormMain
         end
         object EditBalloonGridParameters: TEdit
           Left = 10
-          Height = 24
+          Height = 20
           Top = 10
           Width = 4
           Font.Height = -9
@@ -387,9 +388,9 @@ object FormMain: TFormMain
         end
         object ToolBar4: TToolBar
           Left = 0
-          Height = 115
+          Height = 142
           Top = 0
-          Width = 30
+          Width = 24
           Align = alLeft
           AutoSize = True
           Caption = 'ToolBar4'
@@ -412,33 +413,33 @@ object FormMain: TFormMain
         end
       end
     end
-    object TabSheetDatasheet: TTabSheet
-      Caption = 'Datasheet'
+    object TabSheetSummary: TTabSheet
+      Caption = 'Summary'
       ClientHeight = 142
       ClientWidth = 1048
       Font.Height = -9
       Font.Name = 'MS Sans Serif'
-      OnShow = TabSheetDatasheetShow
+      OnShow = TabSheetSummaryShow
       ParentFont = False
       object PanelDatasheet: TPanel
         Left = 0
-        Height = 115
+        Height = 142
         Top = 0
-        Width = 1270
+        Width = 1048
         Align = alClient
         BevelOuter = bvNone
-        ClientHeight = 115
-        ClientWidth = 1270
+        ClientHeight = 142
+        ClientWidth = 1048
         Font.Height = -9
         Font.Name = 'MS Sans Serif'
         ParentColor = False
         ParentFont = False
         TabOrder = 0
         object GridDatasheet: TNumericGrid
-          Left = 30
-          Height = 115
+          Left = 24
+          Height = 142
           Top = 0
-          Width = 1240
+          Width = 1024
           Align = alClient
           AutoEdit = False
           Color = clBtnFace
@@ -465,7 +466,7 @@ object FormMain: TFormMain
         end
         object EditBalloonGridDatasheet: TEdit
           Left = 10
-          Height = 24
+          Height = 20
           Top = 10
           Width = 4
           Font.Height = -9
@@ -475,9 +476,9 @@ object FormMain: TFormMain
         end
         object ToolBar5: TToolBar
           Left = 0
-          Height = 115
+          Height = 142
           Top = 0
-          Width = 30
+          Width = 24
           Align = alLeft
           AutoSize = True
           Caption = 'ToolBar5'

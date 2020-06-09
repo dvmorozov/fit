@@ -241,12 +241,12 @@ type
         { Calculates profile containing differences between calculated and experimental data.
           In the calculation all curves are included. Will not work properly if curves are overlapped. }
         procedure CreateDeltaProfile;
-        procedure FillCurvesList;
+        procedure CollectCurves;
         { Collects resulting set of curve positions. }
         procedure CreateResultedCurvePositions;
         { Iterates through list of curves and creates common list of parameters
-          of all curves complementing them with calculated parameters. }
-        procedure FillCurveParameterList;
+          of all curves complementing them with calculated values. }
+        procedure CollectCurveAttributes;
         { Prepares intermediate results for user. }
         procedure GoToReadyForFit;
 
@@ -1888,8 +1888,8 @@ begin
             // vyzyvatsya v osnovnom potoke servera,
             // t.e. v tom zhe potoke, chto i ServerStub,
             // poetomu mozhno ispuskat' te zhe isklyucheniya
-            FillCurvesList;
-            FillCurveParameterList;
+            CollectCurves;
+            CollectCurveAttributes;
             CreateResultedCurvePositions;
             CreateResultedProfile;
             CreateDeltaProfile;
@@ -1938,7 +1938,7 @@ begin
     begin
         { These calls are necessary for animation mode. }
         CreateResultedProfile;
-        FillCurvesList;
+        CollectCurves;
         FitProxy.ShowCurMin(FCurrentMinimum);
     end;
 {$ENDIF}
@@ -2222,19 +2222,20 @@ begin
     end;
 end;
 
-procedure TFitService.FillCurvesList;
+procedure TFitService.CollectCurves;
 var
     i, j, k:   longint;
     FitTask:   TFitTask;
     TaskCurves: TSelfCopiedCompList;
     ScalingFactor: double;
-    CurveCopy: TPointsSet;
+    CurveCopy: TNamedPointsSet;
 begin
     Assert(Assigned(FTaskList));
 
     FCurves.Free;
     FCurves := TSelfCopiedCompList.Create;
 
+    { Collect all curves into single list. }
     for i := 0 to FTaskList.Count - 1 do
     begin
         FitTask := TFitTask(FTaskList.Items[i]);
@@ -2245,12 +2246,15 @@ begin
 
         for j := 0 to TaskCurves.Count - 1 do
         begin
-            CurveCopy := TPointsSet(TPointsSet(TaskCurves.Items[j])
+            CurveCopy := TNamedPointsSet(TNamedPointsSet(TaskCurves.Items[j])
                 .GetCopy);
             //  TODO: move scaling into separate method.
             for k := 0 to CurveCopy.PointsCount - 1 do
                 CurveCopy.PointYCoord[k] :=
                     CurveCopy.PointYCoord[k] * ScalingFactor;
+
+            CurveCopy.FTitle := CurveCopy.GetCurveTypeName + ' [' +
+                IntToStr(i + 1) + ',' + IntToStr(j + 1) + ']';
             FCurves.Add(CurveCopy);
         end;
     end;
@@ -2604,7 +2608,7 @@ begin
     end;
 end;
 
-procedure TFitService.FillCurveParameterList;
+procedure TFitService.CollectCurveAttributes;
 var
     NS:   TCurvePointsSet;
     StartPointIndex, StopPointIndex: longint;
@@ -2651,7 +2655,7 @@ begin
         raise EUserException.Create(InadmissibleServerState + CRLF +
             StillNotDone);
     try
-        FillCurveParameterList;
+        CollectCurveAttributes;
     except
         SetState(ProfileWaiting);
         raise;
@@ -2982,11 +2986,11 @@ begin
         CreateTasks; // !!! sozdayutsya vremenno !!!
         InitTasks;
 
-        FillCurvesList;
+        CollectCurves;
         CreateResultedCurvePositions;
         CreateResultedProfile;
         CreateDeltaProfile;
-        FillCurveParameterList;
+        CollectCurveAttributes;
 
         SetState(ReadyForFit); // !!! udalyaet podzadachi !!!
     end;

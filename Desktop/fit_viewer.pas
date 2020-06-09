@@ -67,9 +67,9 @@ type
         procedure SetXCoordMode(AMode: longint);
 
     private
-        { List of data sets for each item of which chart serie is related.
+        { List of curves related with chart series.
           The list is passive, it contains pointers to external data. }
-        FPointsSetList: TComponentList;
+        FCurves: TComponentList;
 
         procedure AddSerieToChart(Serie: TTASerie);
         { Returns maximum number of curves in one of given R-factor intervals. }
@@ -90,7 +90,7 @@ type
         procedure ClearBackgroundTable;
         procedure ClearPositionsTable;
         procedure ClearCurveTable;
-        procedure ClearDatasheetTable;
+        procedure ClearSummaryTable;
 {$ENDIF}
         function ValToStr(Value: double): string;
         { Clears serie set and fills it again. }
@@ -115,8 +115,8 @@ type
             SelectedArea: TTitlePointsSet);
         { Method of IFitViewer interface. }
         procedure PlotCurves(Sender: TObject;
-            CurvePointsSetList: TSelfCopiedCompList;
-            CurveList: TMSCRCurveList);
+            Curves: TSelfCopiedCompList;
+            CurveAttributes: TMSCRCurveList);
         { Method of IFitViewer interface. }
         procedure PlotRFactorBounds(Sender: TObject;
             RFactorBounds: TTitlePointsSet);
@@ -230,11 +230,11 @@ var
     PointsSet: TNeutronPointsSet;
     j:  longint;
 begin
-    Assert(Assigned(FPointsSetList));
+    Assert(Assigned(FCurves));
 
-    for j := 0 to FPointsSetList.Count - 1 do
+    for j := 0 to FCurves.Count - 1 do
     begin
-        PointsSet := TNeutronPointsSet(FPointsSetList.Items[j]);
+        PointsSet := TNeutronPointsSet(FCurves.Items[j]);
         PlotPointsSet(PointsSet);
     end;
 end;
@@ -245,9 +245,9 @@ var
     i:  longint;
 begin
     Assert(Assigned(PointsSet));
-    Assert(Assigned(FPointsSetList));
+    Assert(Assigned(FCurves));
 
-    Serie := TTASerie(TFormMain(Form).Chart.GetSerie(FPointsSetList.IndexOf(PointsSet)));
+    Serie := TTASerie(TFormMain(Form).Chart.GetSerie(FCurves.IndexOf(PointsSet)));
     Serie.Clear;
     with PointsSet do
         for i := 0 to PointsCount - 1 do
@@ -279,9 +279,9 @@ var
     Serie: TTASerie;
 begin
     Assert(Assigned(SelectedArea));
-    Assert(Assigned(FPointsSetList));
+    Assert(Assigned(FCurves));
 
-    if FPointsSetList.IndexOf(SelectedArea) = -1 then
+    if FCurves.IndexOf(SelectedArea) = -1 then
     begin
         //  dobavlenie serii
         Serie := TTASerie.Create(nil);
@@ -299,7 +299,7 @@ begin
             raise;
         end;
         { Should be the last operation performed if everything before succeeded. }
-        FPointsSetList.Add(SelectedArea);
+        FCurves.Add(SelectedArea);
     end;
     SelectedArea.Sort;
 {$IFDEF USE_GRIDS}
@@ -311,21 +311,21 @@ end;
 
 {$hints off}
 procedure TFitViewer.PlotCurves(Sender: TObject;
-    CurvePointsSetList: TSelfCopiedCompList; CurveList: TMSCRCurveList);
+    Curves: TSelfCopiedCompList; CurveAttributes: TMSCRCurveList);
 
-    procedure AddPointsSetToChart(PointsSet: TNamedPointsSet; Index: longint);
+    procedure AddCurveToChart(Curve: TNamedPointsSet; Index: longint);
     var
         Serie: TTASerie;
     begin
         Assert(Assigned(Form));
 
-        if FPointsSetList.IndexOf(PointsSet) = -1 then
+        if FCurves.IndexOf(Curve) = -1 then
         begin
             Serie := TTASerie.Create(nil);
             try
                 Serie.PointStyle := psRectangle;
                 Serie.ShowPoints := FViewMarkers;
-                Serie.Title := PointsSet.GetCurveTypeName + ' ' + IntToStr(Index);
+                Serie.Title := Curve.FTitle;
                 if Index <= 16 then
                     Serie.SeriesColor := ColorPalette[Index]
                 else
@@ -337,25 +337,25 @@ procedure TFitViewer.PlotCurves(Sender: TObject;
                 raise;
             end;
             { Should be the last operation performed if everything before succeeded. }
-            FPointsSetList.Add(PointsSet);
+            FCurves.Add(Curve);
         end;
     end;
 
 var
-    PointsSet: TNamedPointsSet;
+    Curve: TNamedPointsSet;
     j:  longint;
 begin
 {$IFDEF USE_GRIDS}
     if FUpdateGrids then
-        FillCurveTable(CurveList);
+        FillCurveTable(CurveAttributes);
 {$ENDIF}
-    Assert(Assigned(CurvePointsSetList));
+    Assert(Assigned(Curves));
 
-    for j := 0 to CurvePointsSetList.Count - 1 do
+    for j := 0 to Curves.Count - 1 do
     begin
-        PointsSet := TNamedPointsSet(CurvePointsSetList.Items[j]);
-        AddPointsSetToChart(PointsSet, j + 1);
-        PlotPointsSet(PointsSet);
+        Curve := TNamedPointsSet(Curves.Items[j]);
+        AddCurveToChart(Curve, j + 1);
+        PlotPointsSet(Curve);
     end; {for j := 0 to GL.Count - 1 do...}
 end;
 
@@ -371,9 +371,9 @@ begin
     if FUpdateLegends then
         TFormMain(Form).CheckListBoxLegend.Items.Clear;
 {$ENDIF}
-    Assert(Assigned(FPointsSetList));
+    Assert(Assigned(FCurves));
 
-    FPointsSetList.Clear;
+    FCurves.Clear;
 {$IFDEF USE_GRIDS}
     if FUpdateGrids then
     begin
@@ -382,7 +382,7 @@ begin
         ClearPositionsTable;
         ClearBoundsTable;
         ClearCurveTable;
-        ClearDatasheetTable;
+        ClearSummaryTable;
     end;
 {$ENDIF}
 end;
@@ -394,20 +394,20 @@ var
     SerieTitle: string;
 begin
     Assert(Assigned(PointsSet));
-    Assert(Assigned(FPointsSetList));
+    Assert(Assigned(FCurves));
     Assert(Assigned(Form));
 
-    Index := FPointsSetList.IndexOf(PointsSet);
+    Index := FCurves.IndexOf(PointsSet);
     if Index <> -1 then
     begin
-        { Series should be related one-to-one with items of FPointsSetList. }
+        { Series should be related one-to-one with items of FCurves. }
         Assert((Index >= 0) and (Index < TFormMain(Form).Chart.SeriesCount));
 
         Serie := TTASerie(TFormMain(Form).Chart.GetSerie(Index));
         SerieTitle := Serie.Title;
 
         TFormMain(Form).Chart.DeleteSerie(Serie);
-        FPointsSetList.Remove(PointsSet);
+        FCurves.Remove(PointsSet);
 
 {$IFDEF USE_LEGEND}
         { Searching should be done by unique curve name, because in animation
@@ -434,11 +434,11 @@ var
     i:  longint;
     PointsSet: TNeutronPointsSet;
 begin
-    Assert(Assigned(FPointsSetList));
+    Assert(Assigned(FCurves));
 
-    for i := 0 to FPointsSetList.Count - 1 do
+    for i := 0 to FCurves.Count - 1 do
     begin
-        PointsSet := TNeutronPointsSet(FPointsSetList.Items[i]);
+        PointsSet := TNeutronPointsSet(FCurves.Items[i]);
         RefreshPointsSet(Sender, PointsSet);
     end;
 end;
@@ -449,10 +449,10 @@ var
     Serie: TTASerie;
 begin
     Assert(Assigned(PointsSet));
-    Assert(Assigned(FPointsSetList));
+    Assert(Assigned(FCurves));
     Assert(Assigned(Form));
 
-    Index := FPointsSetList.IndexOf(PointsSet);
+    Index := FCurves.IndexOf(PointsSet);
     Assert(Index <> -1);
 
     Serie := TTASerie(TFormMain(Form).Chart.GetSerie(Index));
@@ -479,10 +479,10 @@ var
     Serie: TTASerie;
 begin
     Assert(Assigned(RFactorBounds));
-    Assert(Assigned(FPointsSetList));
+    Assert(Assigned(FCurves));
     Assert(Assigned(Form));
 
-    if FPointsSetList.IndexOf(RFactorBounds) = -1 then
+    if FCurves.IndexOf(RFactorBounds) = -1 then
     begin
         Serie := TTASerie.Create(nil);
 
@@ -502,7 +502,7 @@ begin
             raise
         end;
          { Should be the last operation performed if everything before succeeded. }
-         FPointsSetList.Add(RFactorBounds);
+         FCurves.Add(RFactorBounds);
     end;
     //  !!! pri ispol'zovanii psVertLineXX trebuetsya sortirovka !!!
     RFactorBounds.Sort;
@@ -528,10 +528,10 @@ var
     Serie: TTASerie;
 begin
     Assert(Assigned(CurvePositions));
-    Assert(Assigned(FPointsSetList));
+    Assert(Assigned(FCurves));
     Assert(Assigned(Form));
 
-    if FPointsSetList.IndexOf(CurvePositions) = -1 then
+    if FCurves.IndexOf(CurvePositions) = -1 then
     begin
         Serie := TTASerie.Create(nil);
 
@@ -551,7 +551,7 @@ begin
             raise;
         end;
         { Should be the last operation performed if everything before succeeded. }
-        FPointsSetList.Add(CurvePositions);
+        FCurves.Add(CurvePositions);
     end;
     //  !!! pri ispol'zovanii psVertLineXX trebuetsya sortirovka !!!
     //  !!! dlya vyvoda tablitsy trebuetsya sortirovka !!!
@@ -569,10 +569,10 @@ var
     Serie: TTASerie;
 begin
     Assert(Assigned(SelectedPoints));
-    Assert(Assigned(FPointsSetList));
+    Assert(Assigned(FCurves));
     Assert(Assigned(Form));
 
-    if FPointsSetList.IndexOf(SelectedPoints) = -1 then
+    if FCurves.IndexOf(SelectedPoints) = -1 then
     begin
         Serie := TTASerie.Create(nil);
 
@@ -592,7 +592,7 @@ begin
             raise;
         end;
         { Should be the last operation performed if everything before succeeded. }
-        FPointsSetList.Add(SelectedPoints);
+        FCurves.Add(SelectedPoints);
     end;
     //  !!! pri ispol'zovanii psVertLineXX trebuetsya sortirovka !!!
     SelectedPoints.Sort;
@@ -604,10 +604,10 @@ var
     Serie: TTASerie;
 begin
     Assert(Assigned(ComputedProfile));
-    Assert(Assigned(FPointsSetList));
+    Assert(Assigned(FCurves));
     Assert(Assigned(Form));
 
-    if FPointsSetList.IndexOf(ComputedProfile) = -1 then
+    if FCurves.IndexOf(ComputedProfile) = -1 then
     begin
         Serie := TTASerie.Create(nil);
         try
@@ -622,7 +622,7 @@ begin
             raise;
         end;
         { Should be the last operation performed if everything before succeeded. }
-        FPointsSetList.Add(ComputedProfile);
+        FCurves.Add(ComputedProfile);
     end;
     Plot; // TODO: sdelat' optimal'no - bez polnogo perestroeniya
 end;
@@ -632,10 +632,10 @@ var
     Serie: TTASerie;
 begin
     Assert(Assigned(DeltaProfile));
-    Assert(Assigned(FPointsSetList));
+    Assert(Assigned(FCurves));
     Assert(Assigned(Form));
 
-    if FPointsSetList.IndexOf(DeltaProfile) = -1 then
+    if FCurves.IndexOf(DeltaProfile) = -1 then
     begin
         Serie := TTASerie.Create(nil);
         try
@@ -650,7 +650,7 @@ begin
             raise;
         end;
         { Should be the last operation performed if everything before succeeded. }
-        FPointsSetList.Add(DeltaProfile);
+        FCurves.Add(DeltaProfile);
     end;
     Plot; //TODO: sdelat' optimal'no - bez polnogo perestroeniya
 end;
@@ -680,10 +680,10 @@ var
     Serie: TTASerie;
 begin
     Assert(Assigned(BackgroundPoints));
-    Assert(Assigned(FPointsSetList));
+    Assert(Assigned(FCurves));
     Assert(Assigned(Form));
 
-    if FPointsSetList.IndexOf(BackgroundPoints) = -1 then
+    if FCurves.IndexOf(BackgroundPoints) = -1 then
     begin
         Serie := TTASerie.Create(nil);
         try
@@ -702,7 +702,7 @@ begin
             raise;
         end;
         { Should be the last operation performed if everything before succeeded. }
-        FPointsSetList.Add(BackgroundPoints);
+        FCurves.Add(BackgroundPoints);
     end;
     BackgroundPoints.Sort;
 {$IFDEF USE_GRIDS}
@@ -717,10 +717,10 @@ var
     Serie: TTASerie;
 begin
     Assert(Assigned(ExpProfile));
-    Assert(Assigned(FPointsSetList));
+    Assert(Assigned(FCurves));
     Assert(Assigned(Form));
 
-    if FPointsSetList.IndexOf(ExpProfile) = -1 then
+    if FCurves.IndexOf(ExpProfile) = -1 then
     begin
         Serie := TTASerie.Create(nil);
         try
@@ -736,7 +736,7 @@ begin
             raise;
         end;
         { Should be the last operation performed if everything before succeeded. }
-        FPointsSetList.Add(ExpProfile);
+        FCurves.Add(ExpProfile);
     end;
     ExpProfile.Sort;
 {$IFDEF USE_GRIDS}
@@ -782,7 +782,7 @@ begin
     inherited;
     { List shouldn't destroy components,
       they are destroyed by owners. }
-    FPointsSetList := TComponentList.Create(False);
+    FCurves := TComponentList.Create(False);
     FXCoordMode    := 0;
     FUpdateGrids   := True;
     FUpdateLegends := True;
@@ -790,7 +790,7 @@ end;
 
 destructor TFitViewer.Destroy;
 begin
-    FPointsSetList.Free;
+    FCurves.Free;
     inherited;
 end;
 
@@ -820,22 +820,22 @@ function TFitViewer.GetActivePointsSet: TNeutronPointsSet;
 var
     ActiveCurveIndex: longint;
 begin
-    Assert(Assigned(FPointsSetList));
+    Assert(Assigned(FCurves));
 
     ActiveCurveIndex := GetActiveCurveIndex;
 
     Assert(ActiveCurveIndex >= 0);
-    Assert(ActiveCurveIndex < FPointsSetList.Count);
-    Result := TNeutronPointsSet(FPointsSetList.Items[ActiveCurveIndex]);
+    Assert(ActiveCurveIndex < FCurves.Count);
+    Result := TNeutronPointsSet(FCurves.Items[ActiveCurveIndex]);
 end;
 
 function TFitViewer.GetPointsSet(ActiveCurveIndex: longint): TNeutronPointsSet;
 begin
-    Assert(Assigned(FPointsSetList));
+    Assert(Assigned(FCurves));
 
     Assert(ActiveCurveIndex >= 0);
-    Assert(ActiveCurveIndex < FPointsSetList.Count);
-    Result := TNeutronPointsSet(FPointsSetList.Items[ActiveCurveIndex]);
+    Assert(ActiveCurveIndex < FCurves.Count);
+    Result := TNeutronPointsSet(FCurves.Items[ActiveCurveIndex]);
 end;
 
 procedure TFitViewer.SetXCoordMode(AMode: longint);
@@ -878,12 +878,12 @@ begin
     AMaxX := MIN_VALUE;
     AMinY := MAX_VALUE;
     AMaxY := MIN_VALUE;
-    Assert(Assigned(FPointsSetList));
+    Assert(Assigned(FCurves));
 
-    for i := 0 to FPointsSetList.Count - 1 do
-        if FPointsSetList.Items[i] is TPointsSet then
+    for i := 0 to FCurves.Count - 1 do
+        if FCurves.Items[i] is TPointsSet then
         begin
-            PointsSet := TNeutronPointsSet(FPointsSetList.Items[i]);
+            PointsSet := TNeutronPointsSet(FCurves.Items[i]);
             for j := 0 to PointsSet.PointsCount - 1 do
             begin
                 if PointsSet.PointXCoord[j] > FMaxX then
@@ -905,7 +905,7 @@ begin
                 if PointsSet.PointYCoord[j] < AMinY then
                     AMinY := PointsSet.PointYCoord[j];
             end;
-        end; {if FPointsSetList.Items[i] is TPointsSet then...}
+        end; {if FCurves.Items[i] is TPointsSet then...}
 end;
 
 procedure TFitViewer.SetViewMarkers(AViewMarkers: boolean);
@@ -944,8 +944,8 @@ begin
         FixedCols := 0;
         FixedRows := 1;
 
-        Cells[0, 0] := StartName;
-        Cells[1, 0] := StopName;
+        Cells[0, 0] := StartingPositionName;
+        Cells[1, 0] := FinalPositionName;
 
         ResetColWidths;
     end;
@@ -975,8 +975,8 @@ begin
         FixedCols := 0;
         FixedRows := 1;
 
-        Cells[0, 0] := StartName;
-        Cells[1, 0] := StopName;
+        Cells[0, 0] := StartingPositionName;
+        Cells[1, 0] := FinalPositionName;
 
         i := 0;
         RowIndex := FixedRows;
@@ -1031,9 +1031,7 @@ begin
 
         ResetColWidths;
     end;
-{$IFDEF WINDOWS}
-    TFormMain(Form).TabSheetParameters.TabVisible := False;
-{$ENDIF}
+    TFormMain(Form).TabSheetCurveAttributes.TabVisible := False;
 end;
 
 {$ENDIF}
@@ -1051,7 +1049,7 @@ begin
         FixedRows := 1;
 
         Cells[0, 0] := NumberName;
-        Cells[1, 0] := ArgumentName;
+        Cells[1, 0] := PositionName;
 
         ResetColWidths;
     end;
@@ -1068,8 +1066,8 @@ begin
         FixedCols := 0;
         FixedRows := 1;
 
-        Cells[0, 0] := ArgumentName;
-        Cells[1, 0] := ValueName;
+        Cells[0, 0] := PositionName;
+        Cells[1, 0] := AmplitudeName;
 
         ResetColWidths;
     end;
@@ -1095,8 +1093,8 @@ begin
         FixedCols := 0;
         FixedRows := 1;
 
-        Cells[0, 0] := ArgumentName;
-        Cells[1, 0] := ValueName;
+        Cells[0, 0] := PositionName;
+        Cells[1, 0] := AmplitudeName;
 
         for j := 0 to CurvePositions.PointsCount - 1 do
         begin
@@ -1131,8 +1129,8 @@ begin
         FixedCols := 0;
         FixedRows := 1;
 
-        Cells[0, 0] := ArgumentName;
-        Cells[1, 0] := ValueName;
+        Cells[0, 0] := PositionName;
+        Cells[1, 0] := AmplitudeName;
 
         for j := 0 to BackgroundPoints.PointsCount - 1 do
         begin
@@ -1156,8 +1154,8 @@ begin
         FixedCols := 0;
         FixedRows := 1;
 
-        Cells[0, 0]   := ArgumentName;
-        Cells[1, 0]   := ValueName;
+        Cells[0, 0]   := PositionName;
+        Cells[1, 0]   := AmplitudeName;
         //  ochistka dopolnitel'noy stroki
         Cells[0, 1]   := '';
         Cells[1, 1]   := '';
@@ -1186,8 +1184,8 @@ begin
         FixedCols := 0;
         FixedRows := 1;
 
-        Cells[0, 0] := ArgumentName;
-        Cells[1, 0] := ValueName;
+        Cells[0, 0] := PositionName;
+        Cells[1, 0] := AmplitudeName;
 
         for j := 0 to Profile.PointsCount - 1 do
         begin
@@ -1208,7 +1206,7 @@ begin
     end;
 end;
 
-procedure TFitViewer.ClearDatasheetTable;
+procedure TFitViewer.ClearSummaryTable;
 begin
     with TFormMain(Form).GridDatasheet do
     begin
@@ -1218,23 +1216,21 @@ begin
         FixedCols := 1;
         FixedRows := 1;
 
-        Cells[0, 0] := ArgumentName;
-        Cells[1, 0] := ValueName;
-        Cells[2, 0] := SummarizedName;
-        Cells[3, 0] := DeltaName;
+        Cells[0, 0] := PositionName;
+        Cells[1, 0] := AmplitudeName;
+        Cells[2, 0] := TotalAmplitudeName;
+        Cells[3, 0] := DifferenceName;
         ResetColWidths;
     end;
-{$IFDEF WINDOWS}
-    TFormMain(Form).TabSheetDatasheet.TabVisible := False;
-{$ENDIF}
+    TFormMain(Form).TabSheetSummary.TabVisible := False;
 end;
 
 procedure TFitViewer.FillSummaryTable(ExperimentalProfile: TTitlePointsSet;
     CurvesList: TSelfCopiedCompList; ComputedProfile: TTitlePointsSet;
     DeltaProfile: TTitlePointsSet; RFactorBounds: TTitlePointsSet);
 var
-    i, j, k, StartIndex, EndIndex, RowIndex, ColIndex: longint;
-    P:      TCurvePointsSet;
+    i, j, k, LeftIndex, RightIndex, RowIndex, ColIndex: longint;
+    Curve:  TCurvePointsSet;
     StartX: double;
 begin
     { The method should silently exit if data are incomplete. }
@@ -1247,37 +1243,31 @@ begin
 
     if FUpdateGrids then
     begin
-{$IFDEF WINDOWS}
-        TFormMain(Form).TabSheetDatasheet.TabVisible := True;
-{$ENDIF}
+        TFormMain(Form).TabSheetSummary.TabVisible := True;
         with TFormMain(Form).GridDatasheet do
         begin
-            //  nastroyka parametrov setki
-            //  chislo kolonok = 1 (fiks.) + 3
-            //  (eksp. profil', rasschit. profil', raznost') +
-            //  maksimal'noe chislo krivyh v nekotorom intervale
+            { Computes total number of columns: 4 colums for profiles
+              and rest of colums are for curves data. }
             ColCount    := 4 + GetMaxCurveNum(CurvesList, RFactorBounds);
-            //  na kazhdyy interval dobavlyaetsya stroka zagolovka
+            { Every data interval has its own subheader. Adds row on this. }
             RowCount    := 1 + GetPointsNumInBounds(ExperimentalProfile, RFactorBounds) +
                 RFactorBounds.PointsCount div 2;
             FixedCols   := 1;
             FixedRows   := 1;
-            //  zapolnenie yacheek
-            //  zagolovki stolbtsov (!!! d.b. ne men'she 4-h - sm. nizhe !!!)
-            Cells[0, 0] := ArgumentName;
-            Cells[1, 0] := ValueName;
-            Cells[2, 0] := SummarizedName;
-            Cells[3, 0] := DeltaName;
-            for i := 4 to ColCount - 1 do
-                Cells[i, 0] := 'Curve ' + IntToStr(i - 3);
+            { Fills column headers. }
+            Assert(ColCount >= 4);
+            { Fills headers of fixed columns }
+            Cells[0, 0] := PositionName;
+            Cells[1, 0] := AmplitudeName;
+            Cells[2, 0] := TotalAmplitudeName;
+            Cells[3, 0] := DifferenceName;
 
             i := 0;
             RowIndex := FixedRows;
             while i < RFactorBounds.PointsCount do
             begin
-                //  !!! RowIndex d. ukazyvat' na nachalo dannyh intervala !!!
                 StartX := RFactorBounds.PointXCoord[i];
-                //  formiruetsya zagolovok
+                { Subheader for interval is formed. }
                 for j := 1 to ColCount - 1 do
                     Cells[j, RowIndex] := '';
                 Cells[1, RowIndex]     := 'Interval';
@@ -1285,34 +1275,41 @@ begin
                 Cells[3, RowIndex]     := IntToStr(i div 2 + 1);
                 Inc(RowIndex);
 
-                StartIndex := ExperimentalProfile.IndexOfValueX(RFactorBounds.PointXCoord[i]);
-                EndIndex   := ExperimentalProfile.IndexOfValueX(RFactorBounds.PointXCoord[i + 1]);
-                for j := StartIndex to EndIndex do
+                { Fills experimental, computed and delta profiles. }
+                LeftIndex := ExperimentalProfile.IndexOfValueX(RFactorBounds.PointXCoord[i]);
+                RightIndex := ExperimentalProfile.IndexOfValueX(RFactorBounds.PointXCoord[i + 1]);
+                for j := LeftIndex to RightIndex do
                 begin
-                    Cells[0, RowIndex + j - StartIndex] :=
+                    Cells[0, RowIndex + j - LeftIndex] :=
                         ValToStr(ExperimentalProfile.PointXCoord[j]);
-                    Cells[1, RowIndex + j - StartIndex] :=
+                    Cells[1, RowIndex + j - LeftIndex] :=
                         ValToStr(ExperimentalProfile.PointYCoord[j]);
-                    Cells[2, RowIndex + j - StartIndex] :=
+                    Cells[2, RowIndex + j - LeftIndex] :=
                         ValToStr(ComputedProfile.PointYCoord[j]);
-                    Cells[3, RowIndex + j - StartIndex] :=
+                    Cells[3, RowIndex + j - LeftIndex] :=
                         ValToStr(DeltaProfile.PointYCoord[j]);
                 end;
-                //  po vsem krivym, otnosyaschimsya k dannomu intervalu
+
+                { Fills curve data. }
                 ColIndex := 4;
                 for j := 0 to CurvesList.Count - 1 do
                 begin
-                    P := TCurvePointsSet(CurvesList.Items[j]);
-                    if StartX = P.PointXCoord[0] then
+                    Curve := TCurvePointsSet(CurvesList.Items[j]);
+                    if StartX = Curve.PointXCoord[0] then
                     begin
-                        for k := 0 to P.PointsCount - 1 do
+                        { Curve is inside interval. }
+                        Assert(RowCount = RowIndex + Curve.PointsCount);
+                        { Fills curve header. }
+                        Cells[ColIndex, 0] := Curve.FTitle;
+
+                        for k := 0 to Curve.PointsCount - 1 do
                             Cells[ColIndex, RowIndex + k] :=
-                                ValToStr(P.PointYCoord[k]);
+                                ValToStr(Curve.PointYCoord[k]);
                         Inc(ColIndex);
                     end;
                 end;
                 i := i + 2;
-                RowIndex := RowIndex + EndIndex - StartIndex + 1;
+                RowIndex := RowIndex + RightIndex - LeftIndex + 1;
             end;
             ResetColWidths;
         end;
@@ -1327,9 +1324,7 @@ begin
     TFormMain(Form).FCurveList := CurveList;
     CurveList.GridAssign(TFormMain(Form).GridParameters);
     TFormMain(Form).FModifiedParameters := True;
-{$IFDEF WINDOWS}
-    TFormMain(Form).TabSheetParameters.TabVisible := True;
-{$ENDIF}
+    TFormMain(Form).TabSheetCurveAttributes.TabVisible := True;
 end;
 {$ENDIF}
 

@@ -172,11 +172,11 @@ type
     SplitterChartRight: TSplitter;
     SplitterLeftChart: TSplitter;
     SplitterBottom: TSplitter;
-    TabSheetSpecPositions: TTabSheet;
+    TabSheetCurvePositions: TTabSheet;
     TabSheetBackground: TTabSheet;
-    TabSheetParameters: TTabSheet;
-    TabSheetIntervals: TTabSheet;
-    TabSheetDatasheet: TTabSheet;
+    TabSheetCurveAttributes: TTabSheet;
+    TabSheetCurveIntervals: TTabSheet;
+    TabSheetSummary: TTabSheet;
     Chart: TTAChart;
     TimerAsync: TTimer;
     TimerBalloonHide: TTimer;
@@ -294,6 +294,7 @@ type
     procedure ButAddSelectedDataPointClick(Sender: TObject);
     procedure CheckListBoxLegendDrawItem(Control: TWinControl; Index: Integer;
       ARect: TRect; State: TOwnerDrawState);
+    procedure PageControlChange(Sender: TObject);
     procedure TimerCheckStateTimer(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure GridDataEditingDone(Sender: TObject);
@@ -313,10 +314,10 @@ type
       Shift: TShiftState; X, Y: Integer);
     procedure ChartMouseUp(Sender: TOBject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
-    procedure TabSheetDatasheetShow(Sender: TObject);
-    procedure TabSheetIntervalsShow(Sender: TObject);
-    procedure TabSheetParametersShow(Sender: TObject);
-    procedure TabSheetSpecPositionsShow(Sender: TObject);
+    procedure TabSheetSummaryShow(Sender: TObject);
+    procedure TabSheetCurveIntervalsShow(Sender: TObject);
+    procedure TabSheetCurveAttributesShow(Sender: TObject);
+    procedure TabSheetCurvePositionsShow(Sender: TObject);
     procedure TAChart1Zoom(Sender: TComponent);
     procedure TimerAsyncTimer(Sender: TObject);
     procedure TimerBalloonHideTimer(Sender: TObject);
@@ -565,6 +566,12 @@ begin
     LB.Canvas.TextOut(
         ARect.Left + Size + 6, ARect.Top, LB.Items.Strings[Index]);
 end;
+
+procedure TFormMain.PageControlChange(Sender: TObject);
+begin
+
+end;
+
 {$hints on}
 
 procedure TFormMain.TimerCheckStateTimer(Sender: TObject);
@@ -910,13 +917,13 @@ end;
 
 procedure TFormMain.ActionSaveModelAsTextExecute(Sender: TObject);
 begin
-    if PageControl.ActivePage = TabSheetParameters then
+    if PageControl.ActivePage = TabSheetCurveAttributes then
     begin
         if SaveTableAsText(GridParameters) then
             FModifiedParameters := False;
     end
     else
-    if PageControl.ActivePage = TabSheetDatasheet then
+    if PageControl.ActivePage = TabSheetSummary then
     begin
         if SaveTableAsText(GridDatasheet) then
             FModifiedDatasheet := False;
@@ -1848,7 +1855,7 @@ begin
 end;
 {$hints on}
 
-procedure TFormMain.TabSheetDatasheetShow(Sender: TObject);
+procedure TFormMain.TabSheetSummaryShow(Sender: TObject);
 begin
 {$IFDEF _WINDOWS}
     LockWindowUpdate(Handle);       //  zdorovo pomogaet umen'sheniyu
@@ -1865,7 +1872,7 @@ begin
 {$ENDIF}
 end;
 
-procedure TFormMain.TabSheetIntervalsShow(Sender: TObject);
+procedure TFormMain.TabSheetCurveIntervalsShow(Sender: TObject);
 begin
 {$ifdef windows}
     LockWindowUpdate(Handle);       //  zdorovo pomogaet umen'sheniyu
@@ -1882,7 +1889,7 @@ begin
 {$endif}
 end;
 
-procedure TFormMain.TabSheetParametersShow(Sender: TObject);
+procedure TFormMain.TabSheetCurveAttributesShow(Sender: TObject);
 begin
 {$ifdef windows}
     LockWindowUpdate(Handle);       //  zdorovo pomogaet umen'sheniyu
@@ -1899,7 +1906,7 @@ begin
 {$endif}
 end;
 
-procedure TFormMain.TabSheetSpecPositionsShow(Sender: TObject);
+procedure TFormMain.TabSheetCurvePositionsShow(Sender: TObject);
 begin
 {$ifdef windows}
     LockWindowUpdate(Handle);       //  zdorovo pomogaet umen'sheniyu
@@ -2214,7 +2221,7 @@ begin
             if SaveTableAsText(GridParameters) then FModifiedParameters := False
             else
             begin
-                PageControl.ActivePage := TabSheetParameters;
+                PageControl.ActivePage := TabSheetCurveAttributes;
                 CanClose := False;
                 Exit;
             end;
@@ -2222,7 +2229,7 @@ begin
 
         if Result = mrCancel then
         begin
-            PageControl.ActivePage := TabSheetParameters;
+            PageControl.ActivePage := TabSheetCurveAttributes;
             CanClose := False;
             Exit;
         end;
@@ -2238,7 +2245,7 @@ begin
             if SaveTableAsText(GridDatasheet) then FModifiedDatasheet := False
             else
             begin
-                PageControl.ActivePage := TabSheetDatasheet;
+                PageControl.ActivePage := TabSheetSummary;
                 CanClose := False;
                 Exit;
             end;
@@ -2246,7 +2253,7 @@ begin
 
         if Result = mrCancel then
         begin
-            PageControl.ActivePage := TabSheetDatasheet;
+            PageControl.ActivePage := TabSheetSummary;
             CanClose := False;
         end;
     end;

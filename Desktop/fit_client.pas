@@ -309,18 +309,18 @@ type
     end;
 
 const
-    RFactorBoundsName: string = 'Spec.app.intervals';
+    CurveIntervalsName: string = 'Curve intervals';
     BackgroundPointsName: string = 'Background points';
-    CurvePositionsName: string = 'Spec.positions';
-    SelectedAreaName: string = 'Selected interval';
-    SummarizedName: string = 'Summarized';
-    ArgumentName: string = 'Position';
-    ProfileName: string = 'Data';
+    CurvePositionsName: string = 'Curve positions';
+    SelectedIntervalName: string = 'Selected interval';
+    TotalAmplitudeName: string = 'Total Amplitude';
+    PositionName: string = 'Position';
+    ProfileName: string = 'Profile';
     NumberName: string = 'Number';
-    ValueName: string = 'Amplitude';
-    DeltaName: string = 'Difference';
-    StartName: string = 'Starting Position';
-    StopName: string = 'Final Position';
+    AmplitudeName: string = 'Amplitude';
+    DifferenceName: string = 'Difference';
+    StartingPositionName: string = 'Starting Position';
+    FinalPositionName: string = 'Final Position';
 
 implementation
 
@@ -374,7 +374,7 @@ begin
     FBackgroundPoints.WaveLength := FWaveLength;
 
     FRFactorBounds := TTitlePointsSet.Create(nil);
-    FRFactorBounds.FTitle := RFactorBoundsName;
+    FRFactorBounds.FTitle := CurveIntervalsName;
     FRFactorBounds.WaveLength := FWaveLength;
 end;
 
@@ -426,7 +426,7 @@ begin
     FSelectedArea := TTitlePointsSet.Create(nil);
     try
         FSelectedArea.WaveLength := FWaveLength;
-        FSelectedArea.FTitle := SelectedAreaName;
+        FSelectedArea.FTitle := SelectedIntervalName;
         for i := StartPointIndex to StopPointIndex do
             FSelectedArea.AddNewPoint(
                 ANeutronPoints.PointXCoord[i], ANeutronPoints.PointYCoord[i]);
@@ -580,7 +580,7 @@ begin
         RemoveSelectedArea;
         FSelectedArea := FitService.GetSelectedProfileInterval;
         FSelectedArea.WaveLength := FWaveLength;
-        FSelectedArea.FTitle := SelectedAreaName;
+        FSelectedArea.FTitle := SelectedIntervalName;
         PlotSelectedProfileInterval;
     end
     else
@@ -617,7 +617,7 @@ begin
     FComputedProfile := FitService.GetCalcProfilePointsSet;
     if Assigned(FComputedProfile) and (FComputedProfile.PointsCount <> 0) then
     begin
-        FComputedProfile.FTitle := SummarizedName;
+        FComputedProfile.FTitle := TotalAmplitudeName;
         FComputedProfile.WaveLength := FWaveLength;
         PlotComputedProfile;
     end;
@@ -626,7 +626,7 @@ begin
     FDeltaProfile := FitService.GetDeltaProfilePointsSet;
     if Assigned(FDeltaProfile) and (FDeltaProfile.PointsCount <> 0) then
     begin
-        FDeltaProfile.FTitle := DeltaName;
+        FDeltaProfile.FTitle := DifferenceName;
         FDeltaProfile.WaveLength := FWaveLength;
         PlotDeltaProfile;
     end;
@@ -647,7 +647,7 @@ begin
         FRFactorBounds := FitService.GetRFactorBounds;
         if Assigned(FRFactorBounds) and (FRFactorBounds.PointsCount <> 0) then
         begin
-            FRFactorBounds.FTitle := RFactorBoundsName;
+            FRFactorBounds.FTitle := CurveIntervalsName;
             FRFactorBounds.WaveLength := FWaveLength;
             PlotRFactorBounds;
         end;
@@ -695,7 +695,7 @@ begin
     FRFactorBounds := FitService.GetRFactorBounds;
     if Assigned(FRFactorBounds) and (FRFactorBounds.PointsCount <> 0) then
     begin
-        FRFactorBounds.FTitle := RFactorBoundsName;
+        FRFactorBounds.FTitle := CurveIntervalsName;
         FRFactorBounds.WaveLength := FWaveLength;
 
         PlotRFactorBounds;
@@ -735,7 +735,7 @@ begin
     FRFactorBounds := FitService.GetRFactorBounds;
     if Assigned(FRFactorBounds) and (FRFactorBounds.PointsCount <> 0) then
     begin
-        FRFactorBounds.FTitle := RFactorBoundsName;
+        FRFactorBounds.FTitle := CurveIntervalsName;
         FRFactorBounds.WaveLength := FWaveLength;
         PlotRFactorBounds;
     end;

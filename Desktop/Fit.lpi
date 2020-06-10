@@ -21,10 +21,10 @@
       <AutoIncrementBuild Value="True"/>
       <MajorVersionNr Value="1"/>
       <MinorVersionNr Value="1"/>
-      <RevisionNr Value="41"/>
-      <BuildNr Value="1599"/>
+      <RevisionNr Value="42"/>
+      <BuildNr Value="1600"/>
       <Attributes pvaDebug="True"/>
-      <StringTable FileDescription="Desktop application." LegalCopyright="Dmitry Morozov" OriginalFilename="Fit" ProductName="Fit" ProductVersion="1.1.1"/>
+      <StringTable Comments="Desktop application." CompanyName="Dmitry Morozov" FileDescription="Fit" LegalCopyright="Dmitry Morozov" OriginalFilename="Fit" ProductName="Fit" ProductVersion="1.1"/>
     </VersionInfo>
     <BuildModes Count="2" Active="Any platform">
       <Item1 Name="Any platform" Default="True"/>
@@ -116,7 +116,7 @@
         <MinVersion Major="1" Valid="True"/>
       </Item7>
     </RequiredPackages>
-    <Units Count="107">
+    <Units Count="108">
       <Unit0>
         <Filename Value="Fit.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -394,8 +394,9 @@
       <Unit28>
         <Filename Value="ModelCurves\named_points_set.pas"/>
         <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="6"/>
-        <TopLine Value="20"/>
+        <TopLine Value="29"/>
         <CursorPos X="35" Y="36"/>
         <UsageCount Value="240"/>
         <Loaded Value="True"/>
@@ -630,7 +631,6 @@
       <Unit53>
         <Filename Value="..\Server\fit_service.pas"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="5"/>
         <TopLine Value="2221"/>
         <CursorPos X="36" Y="2225"/>
@@ -1049,7 +1049,6 @@
         <TopLine Value="1399"/>
         <CursorPos X="14" Y="1411"/>
         <UsageCount Value="26"/>
-        <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit99>
       <Unit100>
         <Filename Value="VBOXSVR\04_-_github\fitgrids\package\NumericGrid.pas"/>
@@ -1104,14 +1103,22 @@
         <TopLine Value="1827"/>
         <CursorPos X="14" Y="1872"/>
         <UsageCount Value="5"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit106>
+      <Unit107>
+        <Filename Value="..\..\fitgrids\package\NumericGrid.pas"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="5" Y="16"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit107>
     </Units>
     <OtherDefines Count="3">
       <Define0 Value="FIT"/>
       <Define1 Value="FITCLIENT"/>
       <Define2 Value="FITSERVER"/>
     </OtherDefines>
-    <JumpHistory Count="29" HistoryIndex="28">
+    <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="..\Server\fit_service.pas"/>
         <Caret Line="689" Column="24" TopLine="664"/>
@@ -1228,6 +1235,10 @@
         <Filename Value="ModelCurves\named_points_set.pas"/>
         <Caret Line="36" Column="35" TopLine="20"/>
       </Position29>
+      <Position30>
+        <Filename Value="..\Server\fit_service.pas"/>
+        <Caret Line="2225" Column="36" TopLine="2221"/>
+      </Position30>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

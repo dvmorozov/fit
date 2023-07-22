@@ -26,7 +26,7 @@ All applications are built from the same code base by following compilation keys
 
 Latest built was done with
 
-[Lazarus 1.8.4](https://sourceforge.net/projects/lazarus/files/Lazarus%20Windows%2064%20bits/Lazarus%201.8.4/lazarus-1.8.4-fpc-3.0.4-win64.exe/download)
+[Lazarus 2.2.6](https://sourceforge.net/projects/lazarus/files/Lazarus%20Windows%2064%20bits/Lazarus%202.2.6/lazarus-2.2.6-fpc-3.2.2-win64.exe/download)
 
 ### Install components
 
@@ -38,13 +38,21 @@ Latest built was done with
 
 [fitminimizers/master](https://github.com/dvmorozov/fitminimizers/tree/master)
 
-Install components into Lazarus, add included directories in project properties and rebuild projects.
+Install these components into Lazarus, add included directories in project properties and rebuild projects.
+
+### Command line parameters
+
+**/INFILE=file_name** - opens data file on application start up
+
+**/WRITE_PARAMS_LOG** - turns on logging of variable parameters
+
+On Windows log file is located in the folder **C:\Users\ _user_name_ \AppData\Roaming\Fit-x86_64-win64**
 
 ## How to build CgiClient, FitServer and ClientProxy
 
 ### Install Lazarus 0.9.24
 
-Unfortunately wst-0.5 can not be built without modifications with latest versions of Lazarus. So, it is recommended to use version 0.9.24. Delphi compatiblity mode should be turned on. This is supposed to be fixed by replacing this obsolete library.
+Unfortunately these components require wst-0.5 which can not be built without modifications with latest versions of Lazarus. So, it is recommended to use version 0.9.24. Delphi compatiblity mode should be turned on. This is supposed to be fixed by replacing this obsolete library.
 
 [Lazarus 0.9.24](https://sourceforge.net/projects/lazarus/files/Lazarus%20Windows%2032%20bits/Old%20releases/Lazarus%200.9.24/Lazarus-0.9.24-fpc-2.2.0-20071114-win32.exe/download)
 
@@ -53,6 +61,8 @@ Unfortunately wst-0.5 can not be built without modifications with latest version
 [fitgrids/lazarus-0-9-24](https://github.com/dvmorozov/fitgrids/tree/lazarus-0-9-24)
 
 [fitminimizers/lazarus-0-9-24](https://github.com/dvmorozov/fitminimizers/tree/lazarus-0-9-24)
+
+Install these components into Lazarus.
 
 ### Include files
 

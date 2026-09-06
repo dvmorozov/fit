@@ -1,0 +1,136 @@
+<!--  The prose of the Fit landing page. Everything technical - what is
+      registered, what state it is in - is generated and marked below with the
+      status-table placeholder; nothing in here restates it. Do not write that
+      placeholder out in full here: substitution does not skip comments, so a
+      second copy of it renders a second status table and tears this comment
+      open, spilling the rest of it onto the page.
+
+      The download links go through GitHub's /releases/latest/ redirect rather
+      than naming a version. Nothing rewrites them, so the page cannot be
+      published into a window where the release it names does not exist yet.
+      The file names are a contract with the renaming step in
+      .github/workflows/public-release.yml, which also renames the versioned
+      .deb and .rpm to the fixed names linked here; change one and change
+      both. tools/build-tests/release_assets.tests.ps1 checks that this table,
+      that renaming step, the upload list and the job that publishes the draft
+      all name the same files.  -->
+
+<p>An interactive curve-fitting application. You load a data set, place curves on
+it, and the app fits them &mdash; one peak or a hundred, by hand or fully
+automatically.</p>
+
+<p>Written in Free Pascal with Lazarus. It runs on <strong>Linux, Windows and
+macOS</strong>.</p>
+
+<h2>Download</h2>
+
+<p>Built by CI from the sources in this repository. On macOS, build it
+yourself: one script produces <code>Fit.app</code> and installs it.</p>
+
+<div class="table-scroll">
+<table>
+  <thead><tr><th>Platform</th><th>Download</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Linux</strong> (x86-64)</td><td><a href="https://github.com/dvmorozov/fit/releases/latest/download/Fit-linux.tar.gz">Fit-linux.tar.gz</a> &mdash; portable archive</td></tr>
+    <tr><td><strong>Debian, Ubuntu</strong> (x86-64)</td><td><a href="https://github.com/dvmorozov/fit/releases/latest/download/Fit-linux.deb">Fit-linux.deb</a> &mdash; <code>sudo apt install ./Fit-linux.deb</code></td></tr>
+    <tr><td><strong>Fedora, RHEL, openSUSE</strong> (x86-64)</td><td><a href="https://github.com/dvmorozov/fit/releases/latest/download/Fit-linux.rpm">Fit-linux.rpm</a> &mdash; <code>sudo dnf install ./Fit-linux.rpm</code></td></tr>
+    <tr><td><strong>Windows</strong> (x86-64)</td><td><a href="https://github.com/dvmorozov/fit/releases/latest/download/Fit-windows-setup.exe">Fit-windows-setup.exe</a> &mdash; installer</td></tr>
+    <tr><td><strong>macOS</strong> (Apple Silicon, Intel)</td><td><code>./scripts/build-app.ps1 -Task all -Install</code></td></tr>
+  </tbody>
+</table>
+</div>
+
+<p>Each link above serves the
+<a href="https://github.com/dvmorozov/fit/releases/latest">latest release</a> &middot;
+<a href="https://github.com/dvmorozov/fit/releases">all releases</a></p>
+
+<p>Fit is two programs: the desktop client, which has no fitting engine of its
+own, and the compute server it talks to over HTTP. <strong>Every installed Fit
+starts the server itself</strong> &mdash; the Windows shortcut, the Linux
+<code>fit</code> command and <code>Fit.app</code> all launch through a wrapper
+that starts a server on port 8787 when nothing answers there, and reuses one
+that does. The portable Linux archive is the exception: start
+<code>fit_server</code> before the client.</p>
+
+<p><a href="https://github.com/dvmorozov/fit/blob/main/docs/user-guide/building-from-source.md">Building
+from source</a> covers the script, the macOS bundle and a Lazarus IDE
+walkthrough with exact versions.</p>
+
+<h2>Look how fully automated fitting works</h2>
+
+<p><iframe width="560" height="315" src="https://www.youtube.com/embed/maWlNQ1006o"
+  title="Fitting a profile automatically" loading="lazy"
+  allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen></iframe></p>
+
+<p><img src="assets/images/2018-12-23_13h17_55.png" alt="A fitted profile, with the curve list and parameters beside it"></p>
+
+<h2>Where it stands</h2>
+
+{{STATUS_TABLE}}
+
+<h2>Using it</h2>
+
+<ul>
+  <li><a href="https://github.com/dvmorozov/fit/blob/main/docs/user-guide/curve-types.md">Curve types</a></li>
+  <li><a href="https://github.com/dvmorozov/fit/blob/main/docs/user-guide/user-defined-curves.md">User-defined curves</a> &mdash; your own formula, no code</li>
+  <li><a href="https://github.com/dvmorozov/fit/blob/main/docs/user-guide/argument-axes.md">Argument axes and units</a></li>
+  <li><a href="https://github.com/dvmorozov/fit/blob/main/docs/user-guide/loss-functions.md">Loss functions</a> &mdash; what &ldquo;best fit&rdquo; means here</li>
+  <li><a href="https://github.com/dvmorozov/fit/blob/main/docs/user-guide/compute-backends.md">Compute backends</a> &mdash; native, Python/lmfit, or a remote server</li>
+  <li><a href="https://github.com/dvmorozov/fit/blob/main/docs/user-guide/building-from-source.md">Building from source</a></li>
+</ul>
+
+<h2>Extending it</h2>
+
+<p>Fit is a framework as much as an application. A new curve type, data loader,
+optimiser, objective, REST verb or whole analysis vertical is added by
+<strong>registration</strong> &mdash; a directory plus one entry on a project's
+unit search path. No framework file changes.</p>
+
+<p>These pages are generated from the registries this build actually contains,
+every time the site is published:</p>
+
+<ul>
+  <li><a href="architecture.html">Architecture</a> &mdash; the three processes, the client-to-server call chain, how a running fit reports progress, the view seam, all ten extension seams, and the anatomy of a module</li>
+  <li><a href="extension-points.html">Extension points</a> &mdash; one section per seam: what you write, where it goes in, and what is registered through it today</li>
+  <li><a href="how-to-extend-curve-types.html">Adding a curve type</a> &mdash; the registration path, the curve classes, and curve types the user defines</li>
+  <li><a href="how-to-extend-data-loaders.html">Adding a data loader</a></li>
+</ul>
+
+<p>The prose that goes with them lives in the repository:
+<a href="https://github.com/dvmorozov/fit/blob/main/docs/contributing/writing-a-module.md">writing a module</a> &middot;
+<a href="https://github.com/dvmorozov/fit/tree/main/Modules/example-linear">a complete working module in six files</a> &middot;
+<a href="https://github.com/dvmorozov/fit/blob/main/AGENTS.md">AGENTS.md</a>, the invariants, for AI agents working on the code.</p>
+
+<h2>Command line</h2>
+
+<div class="table-scroll">
+<table>
+  <thead><tr><th>Option</th><th>Effect</th></tr></thead>
+  <tbody>
+    <tr><td><code>/INFILE=file_name</code></td><td>opens a data file at start-up</td></tr>
+    <tr><td><code>/LOG_LEVEL=level</code></td><td><code>fatal</code>, <code>warning</code>, <code>notification</code>, <code>debug</code> or <code>trace</code> &mdash; only ever turns the log <strong>down</strong></td></tr>
+    <tr><td><code>/WRITE_PARAMS_LOG</code></td><td>logs every variable parameter during a fit</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p>The client and the server keep separate logs &mdash;
+<code>fit_client.log</code> and <code>fit_server_log.txt</code> &mdash; in
+<code>$HOME/Fit/</code> on Linux and macOS, or
+<code>C:\Users\&lt;user&gt;\AppData\Roaming\Fit\</code> on Windows. Each rotates at
+32&nbsp;MB, keeping one previous generation as <code>&lt;name&gt;.1</code>.</p>
+
+<h2>Test data</h2>
+
+<p>A sample data set ships inside every download, under <code>Data/</code>.
+Separately: <a href="https://github.com/dvmorozov/fit/raw/main/Data/test_data.zip">test_data.zip</a>.</p>
+
+<h2>Contributing</h2>
+
+<p>This repository is published as a <strong>snapshot</strong>: each publication
+replaces <code>main</code> with a single commit, so a pull request cannot be
+merged directly. Open an issue or attach a patch &mdash; see
+<a href="https://github.com/dvmorozov/fit/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a>.</p>
+
+<p>GPLv3-or-later. Documentation CC BY 4.0.</p>

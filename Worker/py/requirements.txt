@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+# Pinned dependencies for the Python compute sidecar (Stage 2 slice 4).
+# Installed into Worker/py/.venv; never install ad hoc. See
+# docs/user-guide/building-from-source.md, "The optional Python sidecar".
+# lmfit pulls in numpy and scipy, but they are pinned explicitly so the fitted
+# numbers are reproducible across machines.
+numpy==2.2.1
+scipy==1.15.1
+lmfit==1.3.2
+# (asteval is still pulled in by lmfit, but the sidecar no longer uses it: the
+# curve expression is compiled once and evaluated against a numpy-only namespace,
+# which is ~4x faster in the fit's innermost loop.)

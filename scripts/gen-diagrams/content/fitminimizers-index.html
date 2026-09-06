@@ -1,0 +1,65 @@
+<!--  Prose only. The component table and the class diagram below are generated
+      from package/*.pas and marked {{COMPONENTS}} / {{CLASS_DIAGRAM}}. -->
+
+<p>The downhill simplex optimisation algorithm for Delphi and Lazarus, in two
+variants &mdash; the classical one and a version with simulated annealing &mdash;
+packaged so that the algorithm knows nothing about the problem it is solving.</p>
+
+<p>Written for <a href="https://dvmorozov.github.io/fit/">Fit</a>, and used by
+<a href="https://dvmorozov.github.io/motifmaster/">MotifMASTER</a> as well. Runs on
+Windows, Linux and macOS.</p>
+
+<h2>Licence</h2>
+
+<p><strong>GPL-3.0-or-later</strong> &mdash; see
+<a href="https://github.com/dvmorozov/fitminimizers/blob/master/LICENSE">LICENSE</a>.
+The same terms as Fit, the application these components were written for.</p>
+
+<h2>What is in it</h2>
+
+{{COMPONENTS}}
+
+<p><strong>The algorithm is abstracted from any particular task.</strong> The host
+implements <code>IDownhillSimplexServer</code> &mdash; it supplies the parameters
+and evaluates the goal function &mdash; and the algorithm never learns what they
+mean.</p>
+
+<p><code>RunningThread</code> does not depend on the LCL: it calls an injectable
+idle hook (<code>OnProcessMessages</code>) instead of the widget set, so a console
+program can use the runner pool without linking a UI.</p>
+
+{{CLASS_DIAGRAM}}
+
+<h2>Demo applications</h2>
+
+<p>The example problem is the <strong>minimum bounding box</strong>: given a set of
+3D points, find the smallest box that encloses them, by varying rotation angles.
+See <a href="https://en.wikipedia.org/wiki/Minimum_bounding_box">minimum bounding
+box</a> and <a href="https://en.wikipedia.org/wiki/Bounding_volume">bounding
+volume</a>. Many thanks to Ingo Wulf for contributing to the development and
+providing the test models.</p>
+
+<p>There are three, sharing the code in <code>examples/Common/</code>:</p>
+
+<div class="table-scroll">
+<table>
+  <thead><tr><th>Example</th><th>Shows</th></tr></thead>
+  <tbody>
+    <tr><td><code>examples/BoundingBoxServerForm/</code></td><td>Supplying the algorithm with data through an interface, and optimising independent tasks in parallel.</td></tr>
+    <tr><td><code>examples/BoundingBoxComponentForm/</code></td><td>Using the form component to run a long optimisation on its own thread, leaving the application responsive.</td></tr>
+    <tr><td><code>examples/BoundingBoxConsole/</code></td><td>The same optimisation with no UI at all &mdash; the case the LCL decoupling exists for.</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p><img src="assets/2019-11-29_10h53_34.png" alt="The bounding-box demo, with the model and the fitted box"></p>
+
+<p><img src="assets/2019-11-29_14h11_17.png" alt="The component demo, optimising on a background thread"></p>
+
+<h2>Using it</h2>
+
+<p>The package is <code>package/FitMinimizers.lpk</code> for Lazarus and
+<code>package/FitMinimizers.dpk</code> for Delphi. Open it in the IDE and compile.
+The examples are ordinary projects beside it &mdash;
+<code>bounding_box_cli.lpi</code> in <code>examples/BoundingBoxConsole/</code>, and
+one <code>.lpi</code> in each of the two form examples.</p>

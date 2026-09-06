@@ -1,0 +1,249 @@
+object UserPointsSetPropDlg: TUserPointsSetPropDlg
+  Left = 560
+  Height = 411
+  Top = 167
+  Width = 400
+  HorzScrollBar.Page = 399
+  VertScrollBar.Page = 410
+  ActiveControl = ButtonDone
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsDialog
+  Caption = 'Set Curve Type Properties'
+  ClientHeight = 411
+  ClientWidth = 400
+  OnActivate = FormActivate
+  Position = poMainFormCenter
+  LCLVersion = '2.0.6.0'
+  object BevelButtons: TBevel
+    Left = 6
+    Height = 399
+    Top = 6
+    Width = 388
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    Shape = bsFrame
+  end
+  object LabelExpression: TLabel
+    Left = 16
+    Height = 22
+    Top = 24
+    Width = 150
+    Anchors = [akTop, akLeft]
+    AutoSize = False
+    Caption = 'Expression:'
+    Layout = tlCenter
+    ParentColor = False
+    ParentFont = False
+  end
+  object LabelArgument: TLabel
+    Left = 16
+    Height = 22
+    Top = 64
+    Width = 150
+    Anchors = [akTop, akLeft]
+    AutoSize = False
+    Caption = 'Argument:'
+    Layout = tlCenter
+    ParentColor = False
+    ParentFont = False
+  end
+  object LabelPosition: TLabel
+    Left = 16
+    Height = 22
+    Top = 104
+    Width = 150
+    Anchors = [akTop, akLeft]
+    AutoSize = False
+    Caption = 'Position parameter:'
+    Layout = tlCenter
+    ParentColor = False
+    ParentFont = False
+  end
+  object LabelAmplitude: TLabel
+    Left = 16
+    Height = 22
+    Top = 144
+    Width = 150
+    Anchors = [akTop, akLeft]
+    AutoSize = False
+    Caption = 'Amplitude parameter:'
+    Layout = tlCenter
+    ParentColor = False
+    ParentFont = False
+  end
+  object LabelWidth: TLabel
+    Left = 16
+    Height = 22
+    Top = 184
+    Width = 150
+    Anchors = [akTop, akLeft]
+    AutoSize = False
+    Caption = 'Width parameter:'
+    Layout = tlCenter
+    ParentColor = False
+    ParentFont = False
+  end
+  object LabelFixedParameters: TLabel
+    Left = 16
+    Height = 22
+    Top = 224
+    Width = 150
+    Anchors = [akTop, akLeft]
+    AutoSize = False
+    Caption = 'Fixed parameters:'
+    Layout = tlCenter
+    ParentColor = False
+    ParentFont = False
+  end
+  object LabelInitialValue: TLabel
+    Left = 16
+    Height = 22
+    Top = 330
+    Width = 150
+    Anchors = [akTop, akLeft]
+    AutoSize = False
+    Caption = 'Initial value:'
+    Layout = tlCenter
+    ParentColor = False
+    ParentFont = False
+  end
+  object EditExpression: TEdit
+    Left = 176
+    Height = 31
+    Top = 18
+    Width = 208
+    Anchors = [akTop, akLeft, akRight]
+    Color = clBtnFace
+    ParentFont = False
+    ReadOnly = True
+    TabOrder = 8
+  end
+  object ComboArgument: TComboBox
+    Left = 176
+    Height = 31
+    Top = 58
+    Width = 208
+    Anchors = [akTop, akLeft, akRight]
+    ItemHeight = 0
+    MaxLength = 65535
+    OnChange = ComboArgumentChange
+    ParentFont = False
+    Sorted = True
+    Style = csDropDownList
+    TabOrder = 0
+  end
+  object ComboPosition: TComboBox
+    Left = 176
+    Height = 31
+    Top = 98
+    Width = 208
+    Anchors = [akTop, akLeft, akRight]
+    ItemHeight = 0
+    MaxLength = 65535
+    OnChange = ComboPositionChange
+    ParentFont = False
+    Sorted = True
+    Style = csDropDownList
+    TabOrder = 1
+  end
+  object ComboAmplitude: TComboBox
+    Left = 176
+    Height = 31
+    Top = 138
+    Width = 208
+    Anchors = [akTop, akLeft, akRight]
+    ItemHeight = 0
+    OnChange = ComboAmplitudeChange
+    ParentFont = False
+    Sorted = True
+    Style = csDropDownList
+    TabOrder = 9
+  end
+  object ComboWidth: TComboBox
+    Left = 176
+    Height = 31
+    Top = 178
+    Width = 208
+    Anchors = [akTop, akLeft, akRight]
+    ItemHeight = 0
+    OnChange = ComboWidthChange
+    ParentFont = False
+    Sorted = True
+    Style = csDropDownList
+    TabOrder = 10
+  end
+  object CheckListFixed: TCheckListBox
+    Left = 176
+    Height = 96
+    Top = 218
+    Width = 208
+    Anchors = [akTop, akLeft, akRight]
+    ItemHeight = 0
+    OnClick = CheckListFixedClick
+    OnClickCheck = CheckListFixedClickCheck
+    ParentFont = False
+    Sorted = True
+    TabOrder = 2
+    TopIndex = -1
+  end
+  object EditInitValue: TEdit
+    Left = 176
+    Height = 31
+    Top = 324
+    Width = 130
+    Anchors = [akTop, akLeft, akRight]
+    ParentFont = False
+    TabOrder = 3
+  end
+  object ButtonApply: TButton
+    Left = 314
+    Height = 31
+    Top = 324
+    Width = 70
+    Anchors = [akTop, akRight]
+    BorderSpacing.InnerBorder = 3
+    Caption = 'Apply'
+    OnClick = BtnApplyClick
+    ParentFont = False
+    TabOrder = 4
+  end
+  object ButtonBacktrack: TButton
+    Left = 16
+    Height = 31
+    Top = 364
+    Width = 110
+    Anchors = [akLeft, akBottom]
+    AutoSize = False
+    BorderSpacing.InnerBorder = 3
+    Caption = '<< Backtrack'
+    ModalResult = 4
+    ParentFont = False
+    TabOrder = 5
+  end
+  object ButtonDone: TButton
+    Left = 214
+    Height = 31
+    Top = 364
+    Width = 80
+    Anchors = [akRight, akBottom]
+    AutoSize = False
+    BorderSpacing.InnerBorder = 3
+    Caption = 'Done'
+    Default = True
+    ModalResult = 1
+    ParentFont = False
+    TabOrder = 6
+  end
+  object ButtonCancel: TButton
+    Left = 304
+    Height = 31
+    Top = 364
+    Width = 80
+    Anchors = [akRight, akBottom]
+    AutoSize = False
+    BorderSpacing.InnerBorder = 3
+    Caption = 'Cancel'
+    ModalResult = 2
+    ParentFont = False
+    TabOrder = 7
+  end
+end

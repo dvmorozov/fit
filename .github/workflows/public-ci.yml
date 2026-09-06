@@ -1,0 +1,269 @@
+#  The workflow a visitor gets, and the one that proves the published sources
+#  build. It runs scripts/build-app.ps1 - the same script the documentation tells
+#  people to run and the same one the maintainer runs before publishing - so the
+#  three cannot drift apart.
+#
+#  The internal CI (ci.yml) is not published: it runs the full internal suites,
+#  the coverage gate and the benchmark against a working tree this workflow never
+#  sees.
+#
+#  WHAT RUNS WHERE. On pull requests: the build matrix. On main: only the
+#  self-contained check - the commit pushed there is tagged moments later by the
+#  same release task, and Release builds all three platforms from that tag.
+#  Building on the main push as well compiled the same commit twice.
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build and test (${{ matrix.platform }})
+    #  NOT on a push to main. The release task pushes that commit to main and
+    #  then tags it seconds later, and the tag starts Release - which builds and
+    #  tests all three platforms from the very same commit. One menu entry was
+    #  paying for the matrix twice over. The self-contained job below still runs
+    #  on main, because what it checks only exists there.
+    if: github.event_name != 'push' || github.ref != 'refs/heads/main'
+    runs-on: ${{ matrix.os }}
+    strategy:
+      #  Every platform reports, rather than the first failure hiding the rest:
+      #  a break is usually specific to one of them.
+      fail-fast: false
+      matrix:
+        include:
+          - { os: ubuntu-latest,  platform: linux }
+          - { os: windows-latest, platform: windows }
+          #  macos-14, not macos-15, and not because 14 is preferable: it is
+          #  DEPRECATED. macOS 15's Command Line Tools ship a linker that
+          #  SEGFAULTS on what Free Pascal 3.2.2 hands it -
+          #  `ld: ... Segmentation fault: 11` out of ppaslink.sh, after every
+          #  unit has compiled cleanly. Moving to 15 broke the macOS build for
+          #  exactly that reason and was moved back. Going forward needs either
+          #  a newer Free Pascal or `-k-ld_classic`, neither of which should be
+          #  changed blind - so this stays pinned until one is tested.
+          #  COMPILE ONLY on macOS, which is why it carries a task of its own.
+          #  There is no macOS release build - a download built for arm64 could
+          #  not be verified on the Intel Mac available, so macOS is a source
+          #  build - and packaging one here would produce a bundle nobody checks.
+          #  What this row is for is the warning: code only macOS compiles has
+          #  broken before, and without this nothing would say so until someone
+          #  built it by hand.
+          - { os: macos-14,       platform: macos, task: build }
+    steps:
+      - uses: actions/checkout@v4
+        with: { path: fit }
+
+      #  The two sibling packages the projects require BY NAME. They must sit
+      #  beside fit/, which is what the relative package paths expect.
+      - uses: actions/checkout@v4
+        with: { repository: dvmorozov/fitminimizers, path: fitminimizers }
+      - uses: actions/checkout@v4
+        with: { repository: dvmorozov/fitgrids, path: fitgrids }
+
+      - name: Install Lazarus (Linux)
+        if: matrix.platform == 'linux'
+        run: sudo apt-get update && sudo apt-get install -y lazarus
+
+      - name: Install the Qt LCL widget set (Linux)
+        if: matrix.platform == 'linux'
+        #  The Linux desktop client is built on Qt, not GTK2: GTK2 cannot see
+        #  that a desktop is scaled, has one DPI for the whole session and no
+        #  live rescale. See docs/contributing/building.md.
+        #
+        #  Two different things are needed - the LCL's Qt interface units, which
+        #  lazbuild compiles against, and the qtNpas binding library the binary
+        #  loads. Tolerant on purpose: a runner image that packages neither still
+        #  produces a working build, on GTK2, and the build script says so in the log.
+        run: |
+          sudo apt-get install -y lcl-qt6 libqt6pas6             || sudo apt-get install -y lcl-qt5 libqt5pas1             || echo "No Qt LCL widget set available - this build falls back to GTK2."
+
+      #  NOT `brew install --cask lazarus`: that cask was disabled in January
+      #  2026 and the step failed on it. The script installs the official
+      #  release for the runner's architecture instead.
+      - name: Install Lazarus (macOS)
+        if: matrix.platform == 'macos'
+        #  `bash <script>`, not the script itself: the snapshot is staged on
+        #  Windows, where there is no executable bit to copy, so a mode lost in
+        #  publishing must not be what stops a release.
+        run: bash fit/scripts/install-lazarus-macos.sh
+
+      - name: Install Lazarus (Windows)
+        if: matrix.platform == 'windows'
+        run: choco install lazarus -y --no-progress
+
+      #  Neither installer puts lazbuild on PATH. The build script finds it
+      #  anyway, but putting it here means CI runs the same PATH-based path a
+      #  visitor does, rather than exercising only the fallback.
+      - name: Put lazbuild on PATH (macOS)
+        if: matrix.platform == 'macos'
+        run: echo '/Applications/lazarus' >> "$GITHUB_PATH"
+
+      - name: Put lazbuild on PATH (Windows)
+        if: matrix.platform == 'windows'
+        run: echo 'C:\lazarus' >> $env:GITHUB_PATH
+
+      #  The Windows half of -Task all builds the installer, and ISCC is what
+      #  builds one. It is on the runner image; installed here anyway, because
+      #  without this an image that stopped shipping it would turn into a build
+      #  that skips the installer with a word and still goes green.
+      - name: Inno Setup (Windows)
+        if: matrix.platform == 'windows'
+        shell: pwsh
+        run: |
+          $iscc = "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe"
+          if (-not (Test-Path $iscc)) { choco install innosetup -y --no-progress }
+          Split-Path -Parent $iscc >> $env:GITHUB_PATH
+
+      #  Exactly what building-from-source.md tells a visitor to run. If this
+      #  step fails, the instructions are wrong - which is the point of running
+      #  it here rather than something tailored to CI.
+      - name: Build, test and package
+        working-directory: fit
+        shell: pwsh
+        run: ./scripts/build-app.ps1 -Task ${{ matrix.task || 'all' }}
+
+      #  The corresponding binary check - that no curve type outside this
+      #  repository was linked in - runs before publication rather than here: it
+      #  can only be written by naming what must be absent, and naming it here
+      #  would publish exactly what withholding the module was meant to withhold.
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Fit-${{ matrix.platform }}
+          path: fit/dist/*.tar.gz
+          if-no-files-found: ignore
+
+  unit:
+    #  THE FAST GATE, and the only job that runs a Pascal test on a push to main.
+    #  The build matrix above is deliberately skipped there - the release task
+    #  tags that commit seconds later and Release builds all three platforms from
+    #  the tag - which left main with no Pascal test at all beyond the name-free
+    #  greps in self-contained. This closes that for the price of one apt install.
+    #
+    #  Exactly what building-from-source.md gives for the fast half. It builds no
+    #  compute server, because a unit test crosses no process boundary, so a
+    #  failure here is a failure in the code rather than in the environment - which
+    #  is what makes it worth running before anything slower.
+    #
+    #  NOT a `needs:` of the build matrix. fail-fast is off up there so that every
+    #  platform reports independently, and gating the whole matrix behind one Linux
+    #  job would undo that for no gain.
+    name: Unit suite (fast)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { path: fit }
+      - uses: actions/checkout@v4
+        with: { repository: dvmorozov/fitminimizers, path: fitminimizers }
+      - uses: actions/checkout@v4
+        with: { repository: dvmorozov/fitgrids, path: fitgrids }
+
+      - name: Install Lazarus
+        run: sudo apt-get update && sudo apt-get install -y lazarus
+
+      - name: Run the unit half of the suite
+        working-directory: fit
+        shell: pwsh
+        run: ./scripts/build-app.ps1 -Task test -Suite unit
+
+  self-contained:
+    #  A standing check that this repository builds what it says it builds, with
+    #  nothing reaching in from outside it.
+    #
+    #  It deliberately names nothing that is NOT here. A check written as "no
+    #  occurrence of <name>" would have to spell the name of every module that is
+    #  developed privately, which publishes the one thing withholding the module
+    #  was meant to withhold. The stronger, name-free checks are below; the
+    #  identifier-level gate runs before publication, where it can name whatever
+    #  it likes.
+    name: The published tree is self-contained
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: The module list is the framework's own
+        run: |
+          #  A module overrides these two by search-path order. If either copy
+          #  here were a module's, this build would link something a visitor's
+          #  clone does not have.
+          grep -q 'The published framework contains no module' Common/app_modules.pas
+          grep -q 'no module tests to link' tests/no-modules/module_tests.pas
+
+      - name: No project reaches outside this repository
+        run: |
+          #  SEARCH PATHS ONLY, resolved against each project's own directory.
+          #  Modules/* sit a level deeper, so their relative paths legitimately
+          #  climb further; and a project's run parameters carry a data-file path
+          #  that is relative to the built binary, not to the project. Reading
+          #  every "../" in the file reported all of those as escapes.
+          #
+          #  BACKSLASHES ARE SEPARATORS, not filename characters: the .lpi files
+          #  were written by Lazarus on Windows, and lazbuild reads them that way
+          #  on every platform. Left untranslated, "..\..\Common" is one absurd
+          #  file name that resolves INSIDE the checkout, which made this check
+          #  pass without ever testing a single real path.
+          bad=""
+          for lpi in $(find . -name '*.lpi'); do
+            dir=$(dirname "$lpi")
+            paths=$(grep -ohE '(OtherUnitFiles|IncludeFiles|Libraries|OtherSourcePath) Value="[^"]*"' "$lpi" \
+                    | sed 's/.*Value="//; s/"$//' | tr ';' '\n' | tr -d '\r' | tr '\\' '/' | sort -u)
+            for p in $paths; do
+              case "$p" in ''|*'$('*) continue;; esac
+              real=$(cd "$dir" 2>/dev/null && realpath -m "$p")
+              case "$real" in
+                "$PWD"/*) ;;                                   # inside the checkout
+                "$(dirname "$PWD")"/fitgrids/*) ;;             # the two sibling
+                "$(dirname "$PWD")"/fitminimizers/*) ;;        # packages
+                *) bad="$bad\n  $lpi -> $p" ;;
+              esac
+            done
+          done
+          if [ -n "$bad" ]; then
+            printf '::error::a project search path leaves this repository:%b\n' "$bad"
+            exit 1
+          fi
+          echo 'every search path stays inside the checkout or the two sibling packages'
+
+      - name: Every search path inside the repository exists
+        run: |
+          #  Resolved against each project's own directory, like the check above.
+          #  Only paths that land INSIDE the checkout are required to exist: the
+          #  two sibling packages are not checked out in this job, and the build
+          #  jobs - which do check them out - prove those paths for real.
+          miss=0
+          for lpi in $(find . -name '*.lpi'); do
+            dir=$(dirname "$lpi")
+            paths=$(grep -ohE '(OtherUnitFiles|IncludeFiles|OtherSourcePath) Value="[^"]*"' "$lpi" \
+                    | sed 's/.*Value="//; s/"$//' | tr ';' '\n' | tr -d '\r' | tr '\\' '/' | sort -u)
+            for p in $paths; do
+              case "$p" in ''|*'$('*) continue;; esac
+              real=$(cd "$dir" 2>/dev/null && realpath -m "$p")
+              case "$real" in
+                "$PWD"/*) [ -d "$real" ] || { echo "missing: $lpi -> $p"; miss=1; } ;;
+                *) ;;   # outside the checkout: the build jobs cover it
+              esac
+            done
+          done
+          [ "$miss" = 0 ] || { echo '::error::a project points at a directory that is not here'; exit 1; }
+          echo 'every in-repository search path resolves'
+
+  #  The rule and its rationale live in tidy.yml, called from Pages and Release
+  #  as well so the three run lists age the same way.
+  #
+  #  It waits on self-contained ALONE. It only ever runs on a push to main, and
+  #  build no longer runs there - a skipped job skips everything that needs it,
+  #  so listing build here would skip the cleanup in the one case it exists for.
+  tidy:
+    needs: self-contained
+    if: success() && github.event_name == 'push' && github.ref == 'refs/heads/main'
+    uses: ./.github/workflows/tidy.yml
+    permissions:
+      actions: write

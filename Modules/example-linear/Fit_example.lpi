@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectOptions>
+    <Version Value="12"/>
+    <General>
+      <Flags>
+        <LRSInOutputDirectory Value="False"/>
+        <CompatibilityMode Value="True"/>
+      </Flags>
+      <SessionStorage Value="InProjectDir"/>
+      <Title Value="Fit"/>
+      <Scaled Value="True"/>
+      <UseXPManifest Value="True"/>
+      <XPManifest>
+        <DpiAware Value="True/PM_V2"/>
+        <TextName Value="dvmorozov.fit"/>
+        <TextDesc Value="The curve fitting application."/>
+      </XPManifest>
+    </General>
+    <VersionInfo>
+      <UseVersionInfo Value="True"/>
+      <AutoIncrementBuild Value="True"/>
+      <MajorVersionNr Value="1"/>
+      <MinorVersionNr Value="2"/>
+      <RevisionNr Value="0"/>
+      <BuildNr Value="1775"/>
+      <Attributes pvaDebug="True"/>
+      <StringTable Comments="Desktop application." CompanyName="Dmitry Morozov" FileDescription="Fit" LegalCopyright="Dmitry Morozov" OriginalFilename="Fit" ProductName="Fit" ProductVersion="1.1"/>
+    </VersionInfo>
+    <BuildModes Count="2">
+      <Item1 Name="Any platform" Default="True"/>
+      <Item2 Name="Windows specific">
+        <CompilerOptions>
+          <Version Value="11"/>
+          <PathDelim Value="\"/>
+          <Target>
+            <Filename Value="o\$(TargetCPU)-$(TargetOS)\Fit-$(TargetCPU)-$(TargetOS)"/>
+          </Target>
+          <SearchPaths>
+            <IncludeFiles Value="$(LazarusDir)\lcl\include"/>
+            <OtherUnitFiles Value="..\..\Modules\example-linear;..\..\Server;..\..\Server\interfaces;..\..\Packages\TAGraph\Package;..\..\..\fitgrids\package;..\..\Desktop\DataLoaders;..\..\Desktop\ModelCurves;..\..\Desktop\ModelCurves\UserPointsSet;..\..\Desktop\Forms;..\..\Desktop\ModelCurves\CurveParameters;..\..\Common;..\..\Worker"/>
+            <UnitOutputDirectory Value="o\Fit\$(TargetCPU)-$(TargetOS)"/>
+          </SearchPaths>
+          <Parsing>
+            <SyntaxOptions>
+              <SyntaxMode Value="Delphi"/>
+            </SyntaxOptions>
+          </Parsing>
+          <CodeGeneration>
+            <Optimizations>
+              <OptimizationLevel Value="0"/>
+            </Optimizations>
+          </CodeGeneration>
+          <Linking>
+            <Debugging>
+              <DebugInfoType Value="dsDwarf2Set"/>
+            </Debugging>
+            <Options>
+              <Win32>
+                <GraphicApplication Value="True"/>
+              </Win32>
+            </Options>
+          </Linking>
+          <Other>
+            <CustomOptions Value="-dFIT
+-dFITCLIENT
+-dFITSERVER"/>
+            <OtherDefines Count="4">
+              <Define0 Value="FIT"/>
+              <Define1 Value="FITCLIENT"/>
+              <Define2 Value="FITSERVER"/>
+              <Define3 Value="Lazarus"/>
+            </OtherDefines>
+          </Other>
+        </CompilerOptions>
+      </Item2>
+    </BuildModes>
+    <PublishOptions>
+      <Version Value="2"/>
+    </PublishOptions>
+    <RunParams>
+      <local>
+        <CommandLineParams Value="/INFILE=../../../Data/2.dat /WRITE_PARAMS_LOG"/>
+        <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T &apos;Lazarus Run Output&apos; -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
+      </local>
+      <FormatVersion Value="2"/>
+      <Modes Count="1">
+        <Mode0 Name="default">
+          <local>
+            <CommandLineParams Value="/INFILE=../../../Data/2.dat /WRITE_PARAMS_LOG"/>
+            <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T &apos;Lazarus Run Output&apos; -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
+          </local>
+        </Mode0>
+      </Modes>
+    </RunParams>
+    <RequiredPackages Count="7">
+      <Item1>
+        <PackageName Value="FitMinimizers"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="FitGrids"/>
+        <MinVersion Valid="True"/>
+      </Item2>
+      <Item3>
+        <PackageName Value="ta"/>
+        <MinVersion Major="1" Minor="1" Valid="True"/>
+      </Item3>
+      <Item4>
+        <PackageName Value="LCL"/>
+      </Item4>
+      <Item5>
+        <PackageName Value="FCL"/>
+        <MinVersion Major="1" Valid="True"/>
+      </Item5>
+      <Item6>
+        <PackageName Value="IDEIntf"/>
+        <MinVersion Major="1" Valid="True"/>
+      </Item6>
+      <Item7>
+        <PackageName Value="TurboPowerIPro"/>
+        <MinVersion Major="1" Valid="True"/>
+      </Item7>
+    </RequiredPackages>
+    <Units Count="69">
+      <Unit0>
+        <Filename Value="../../Desktop/Fit.lpr"/>
+        <IsPartOfProject Value="True"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="../../Desktop/Forms/form_main.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FormMain"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="../../Desktop/Forms/input_wavelength_dialog.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="InputWavelengthDlg"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="../../Desktop/Forms/about_box_dialog.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="AboutBox"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="../../Desktop/Forms/input_back_factor_dialog.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="InputBackFactorDlg"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="../../Desktop/self_copied_component.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="../../Desktop/Forms/set_maximum_rfactor_dialog.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="InputMaxRFactorDlg"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="../../Desktop/curve_list_grid.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="../../Desktop/fit_client.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="../../Desktop/fit_client_stub.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="../../Desktop/fit_client_app.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit10>
+      <Unit11>
+        <Filename Value="../../Desktop/app_settings.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="../../Desktop/int_client_callback.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit12>
+      <Unit13>
+        <Filename Value="../../Desktop/int_fit_viewer.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit13>
+      <Unit14>
+        <Filename Value="../../Desktop/fit_viewer.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit14>
+      <Unit15>
+        <Filename Value="../../Desktop/DataLoaders/data_loader.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit15>
+      <Unit16>
+        <Filename Value="../../Desktop/DataLoaders/int_data_loader.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit16>
+      <Unit17>
+        <Filename Value="../../Desktop/DataLoaders/int_data_loader_injector.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit17>
+      <Unit18>
+        <Filename Value="../../Desktop/DataLoaders/extension_data_loader_injector.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit18>
+      <Unit19>
+        <Filename Value="../../Desktop/DataLoaders/dat_file_loader.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit19>
+      <Unit20>
+        <Filename Value="../../Desktop/DataLoaders/csv_file_loader.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit20>
+      <Unit21>
+        <Filename Value="../../Desktop/ModelCurves/points_set.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit21>
+      <Unit22>
+        <Filename Value="../../Desktop/ModelCurves/asym_pseudo_voigt_points_set.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit22>
+      <Unit23>
+        <Filename Value="../../Desktop/ModelCurves/CurveParameters/persistent_curve_parameters.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit23>
+      <Unit24>
+        <Filename Value="../../Desktop/ModelCurves/gauss_points_set.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit24>
+      <Unit25>
+        <Filename Value="../../Desktop/ModelCurves/lorentz_points_set.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit25>
+      <Unit26>
+        <Filename Value="../../Desktop/ModelCurves/named_points_set.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit26>
+      <Unit27>
+        <Filename Value="../../Desktop/ModelCurves/neutron_points_set.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit27>
+      <Unit28>
+        <Filename Value="../../Desktop/ModelCurves/pseudo_voigt_points_set.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit28>
+      <Unit29>
+        <Filename Value="../../Desktop/ModelCurves/title_points_set.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit29>
+      <Unit30>
+        <Filename Value="../../Desktop/ModelCurves/two_branches_pseudo_voigt_points_set.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit30>
+      <Unit31>
+        <Filename Value="../../Desktop/ModelCurves/int_curve_factory.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit31>
+      <Unit32>
+        <Filename Value="../../Desktop/ModelCurves/int_curve_type_iterator.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit32>
+      <Unit33>
+        <Filename Value="../../Desktop/ModelCurves/int_curve_type_selector.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit33>
+      <Unit34>
+        <Filename Value="../../Desktop/ModelCurves/curve_types_singleton.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit34>
+      <Unit35>
+        <Filename Value="../../Desktop/ModelCurves/UserPointsSet/user_points_set.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit35>
+      <Unit36>
+        <Filename Value="../../Desktop/ModelCurves/UserPointsSet/create_user_points_set_dlg.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="CreateUserPointsSetDlg"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit36>
+      <Unit37>
+        <Filename Value="../../Desktop/ModelCurves/UserPointsSet/user_points_set_prop_dialog.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="UserPointsSetPropDlg"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit37>
+      <Unit38>
+        <Filename Value="../../Desktop/ModelCurves/UserPointsSet/configurable_points_set.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit38>
+      <Unit39>
+        <Filename Value="../../Desktop/ModelCurves/UserPointsSet/configurable_user_points_set.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit39>
+      <Unit40>
+        <Filename Value="../../Desktop/ModelCurves/UserPointsSet/non_configurable_points_set.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit40>
+      <Unit41>
+        <Filename Value="../../Desktop/ModelCurves/UserPointsSet/int_expression_parser.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit41>
+      <Unit42>
+        <Filename Value="../../Desktop/ModelCurves/UserPointsSet/int_curve_type_parameters_factory.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit42>
+      <Unit43>
+        <Filename Value="../../Desktop/ModelCurves/UserPointsSet/int_curve_type_storage.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit43>
+      <Unit44>
+        <Filename Value="../../Desktop/ModelCurves/UserPointsSet/expression_parser_adapter.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit44>
+      <Unit45>
+        <Filename Value="../../Desktop/ModelCurves/UserPointsSet/create_user_points_set_dlg_adapter.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit45>
+      <Unit46>
+        <Filename Value="../../Desktop/ModelCurves/UserPointsSet/curve_type_parameters_factory.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit46>
+      <Unit47>
+        <Filename Value="../../Desktop/ModelCurves/UserPointsSet/curve_type_storage_adapter.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit47>
+      <Unit48>
+        <Filename Value="../../Server/curve_list.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit48>
+      <Unit49>
+        <Filename Value="../../Desktop/ModelCurves/CurveParameters/special_curve_parameter.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit49>
+      <Unit50>
+        <Filename Value="../../Server/mscr_specimen_list.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit50>
+      <Unit51>
+        <Filename Value="../../Desktop/ModelCurves/CurveParameters/amplitude_curve_parameter.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit51>
+      <Unit52>
+        <Filename Value="../../Desktop/ModelCurves/CurveParameters/persistent_curve_parameter_container.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit52>
+      <Unit53>
+        <Filename Value="../../Desktop/ModelCurves/CurveParameters/sigma_curve_parameter.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit53>
+      <Unit54>
+        <Filename Value="../../Desktop/ModelCurves/CurveParameters/position_curve_parameter.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit54>
+      <Unit55>
+        <Filename Value="../../Desktop/ModelCurves/CurveParameters/delta_sigma_curve_parameter.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit55>
+      <Unit56>
+        <Filename Value="../../Desktop/ModelCurves/CurveParameters/eta_curve_parameter.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit56>
+      <Unit57>
+        <Filename Value="../../Desktop/ModelCurves/curve_points_set.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit57>
+      <Unit58>
+        <Filename Value="../../Desktop/app.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit58>
+      <Unit59>
+        <Filename Value="../../Desktop/ModelCurves/UserPointsSet/user_curve_parameter.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit59>
+      <Unit60>
+        <Filename Value="../../Common/log.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit60>
+      <Unit61>
+        <Filename Value="../../Desktop/clientcallback.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ClientCallback"/>
+      </Unit61>
+      <Unit62>
+        <Filename Value="../../Server/interfaces/int_fit_service.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit62>
+      <Unit63>
+        <Filename Value="../../Desktop/ModelCurves/UserPointsSet/int_user_curve_dialogs.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit63>
+      <Unit64>
+        <Filename Value="../../Desktop/ModelCurves/UserPointsSet/user_curve_flow.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit64>
+      <Unit65>
+        <Filename Value="../../Desktop/ModelCurves/UserPointsSet/user_curve_roles_dlg_adapter.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit65>
+      <Unit66>
+        <Filename Value="../../Desktop/ModelCurves/UserPointsSet/user_formula_parameters.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit66>
+      <Unit67>
+        <Filename Value="../../Server/background_parameters.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit67>
+      <Unit68>
+        <Filename Value="../../Server/background_search.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit68>
+    </Units>
+  </ProjectOptions>
+  <CompilerOptions>
+    <Version Value="11"/>
+    <PathDelim Value="\"/>
+    <Target>
+      <Filename Value="o\$(TargetCPU)-$(TargetOS)\Fit-$(TargetCPU)-$(TargetOS)"/>
+    </Target>
+    <SearchPaths>
+      <IncludeFiles Value="$(LazarusDir)\lcl\include"/>
+      <OtherUnitFiles Value="..\..\Modules\example-linear;..\..\Common;..\..\Server;..\..\Server\interfaces;..\..\Packages\TAGraph\Package;..\..\..\fitgrids\package;..\..\Desktop\DataLoaders;..\..\Desktop\Forms;..\..\Desktop\ModelCurves;..\..\Desktop\ModelCurves\CurveParameters;..\..\Desktop\ModelCurves\UserPointsSet;..\..\Worker"/>
+      <UnitOutputDirectory Value="o\Fit\$(TargetCPU)-$(TargetOS)"/>
+    </SearchPaths>
+    <Parsing>
+      <SyntaxOptions>
+        <SyntaxMode Value="Delphi"/>
+      </SyntaxOptions>
+    </Parsing>
+    <CodeGeneration>
+      <Optimizations>
+        <OptimizationLevel Value="0"/>
+      </Optimizations>
+    </CodeGeneration>
+    <Linking>
+      <Debugging>
+        <DebugInfoType Value="dsDwarf2Set"/>
+      </Debugging>
+      <Options>
+        <Win32>
+          <GraphicApplication Value="True"/>
+        </Win32>
+      </Options>
+    </Linking>
+    <Other>
+      <Verbosity>
+        <ShowAll Value="True"/>
+      </Verbosity>
+      <CustomOptions Value="-SIcorba
+-dFIT
+-dFITCLIENT
+-dFITSERVER"/>
+      <OtherDefines Count="3">
+        <Define0 Value="FIT"/>
+        <Define1 Value="FITCLIENT"/>
+        <Define2 Value="FITSERVER"/>
+      </OtherDefines>
+    </Other>
+  </CompilerOptions>
+</CONFIG>

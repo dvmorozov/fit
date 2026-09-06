@@ -1,0 +1,3278 @@
+unit TAGraph;
+
+{ Because the module is from another author, messages are suppressed. }
+{$warnings off}
+{$hints off}
+{$notes off}
+
+{ Copyright (C) 2005 by Philippe Martinole  <philippe.martinole@teleauto.org>
+
+  This library is free software; you can redistribute it and/or modify it
+  under the terms of the GNU Library General Public License as published by
+  the Free Software Foundation; either version 2 of the License, or (at your
+  option) any later version.
+  
+  Please contact the author if you'd like to use this component but the LGPL
+  doesn't work with your project licensing.
+
+  This program is distributed in the hope that it will be useful, but WITHOUT
+  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+  FITNESS FOR A PARTICULAR PURPOSE.
+}
+
+{
+********************************************************************************
+*                              TAChart Graph Component                         *
+********************************************************************************
+*                                                                              *
+* The component is TAChart                                                     *
+* For both Delphi and Lazarus                                                  *
+* The series are TASerie, they can be added to the TAChart component           *
+* The properties and methods are the ones I need for the TeleAuto project.     *
+* Many others can be added.                                                    *
+*                                                                              *
+********************************************************************************
+Done :
+
+For 1.2
+- Faster SetXValue and SetYValue                                // Done 17/06/05
+- Faster GetPointNextTo                                         // Done 17/06/05
+- Faster GetYPointNextTo                                        // Done 17/06/05
+- BeginUpdate and EndUpdate added to speed up SetXValue
+  and SetYValue                                                 // Done 17/06/05
+}
+
+interface
+
+uses
+  {$IFDEF fpc}
+  LResources,
+  {$ELSE}
+  Windows,
+  {$ENDIF}
+   SysUtils, Classes, Controls, Graphics, Dialogs, StdCtrls;
+
+const
+  MinDouble=-1.7e308;
+  MaxDouble=1.7e308;
+  MaxArray=2;
+  MaxColor=15;
+  Colors:array[1..MaxColor] of TColor=
+     ( clRed,
+       clGreen,
+       clBlue,
+       clBlack,
+       clGray,
+       clFuchsia,
+       clTeal,
+       clNavy,
+       clMaroon,
+       clLime,
+       clOlive,
+       clPurple,
+       clSilver,
+       clAqua,
+       clCream
+       );
+
+type
+  TPointStyle=(psRectangle,psCircle,psCross,psDiagCross,psStar,
+  psVertLineBT,psVertLineTB                     // DM 29/01/08
+  );
+  TLineStyle=(lsVertical,lsHorizontal);
+
+  { Reports how long one repaint took, with a per-series breakdown of the parts
+    that took any measurable time at all. The component raises it and says
+    nothing about where it goes: the application decides whether that is a log
+    line, a status bar or nothing. It exists because a chart that has become slow
+    is otherwise invisible - the cost lands between two user actions, and no
+    amount of server-side logging can see it. }
+  TChartPaintTimingEvent=procedure(ADurationMs:Int64;const ADetail:string) of object;
+
+  TADoubleArray=array [0..MaxArray,1..MaxArray] of Double;
+  TADoubleArrayRow=array [0..MaxArray] of Double;
+  TAIntegerArrayRow=array [0..MaxArray] of Integer;
+
+  TTALigByte=array[0..999999] of Byte;
+  PTALigByte=^TTALigByte;
+  TTALigInteger=array[0..999999] of Integer;
+  PTALigInteger=^TTALigInteger;
+  TTALigDouble=array[0..999999] of Double;
+  PTALigDouble=^TTALigDouble;
+
+  TDrawVertReticule=procedure(Sender:TComponent;IndexSerie,Index,Xi,Yi:Integer;Xg,Yg:Double) of object;
+  TDrawReticule=procedure(Sender:TComponent;IndexSerie,Index,Xi,Yi:Integer;Xg,Yg:Double) of object;
+  TZoom=procedure(Sender:TComponent) of object;
+  
+  TTASerie = class(TComponent)
+  private
+    { Déclarations privées }
+    Chart:TGraphicControl;
+    FTitle:string;
+    FStyle:TPointStyle;
+    FPointBrushStyle:TBrushStyle;              // Brush style for point drawing (DM 02/10/07)
+    FSeriesColor:TColor;                       // Color associated with the serie (DM 01/10/07)
+    FImageSize:LongInt;                        // DM 01/10/07
+
+// Image = coordinates in the component
+// Graph = coordinates in the graph
+
+    XGraphMin,YGraphMin:Double;                // Max Graph value of points
+    XGraphMax,YGraphMax:Double;
+
+    XImage,YImage:PTALigInteger;               // Image coordinates of points
+    XGraph,YGraph:PTALigDouble;                // Graph coordinates of points
+
+    ColorR,ColorG,ColorB:PTALigByte;           // Color of points
+    XOfYGraphMin,XOfYGraphMax:Double;          // X max value of points
+    NbPoints:Integer;                          // Number of points
+    NbPointsMem:Integer;                       // Number of reserved points in heap
+    FAFit,FBFit,FErrorFit:Double;              // Linear fitting
+    FIndexMinFit,FIndexMaxFit:Integer;
+    FDisplayFit:Boolean;
+    FPenFit:TPen;
+    FFitReady:Boolean;
+    FShowPoints:Boolean;
+    FShowLines:Boolean;
+    FInitShowPoints:Boolean;                   // DM 13/02/08
+    FInitShowLines:Boolean;
+    
+    UpdateInProgress:Boolean;
+
+    procedure SetTitle(Value:string);
+    procedure SetIndexMinFit(Value:Integer);
+    procedure SetIndexMaxFit(Value:Integer);
+    procedure SetDisplayFit(Value:Boolean);
+    procedure SetPenFit(Value:TPen);
+    procedure SetShowPoints(Value:Boolean);
+    procedure SetShowLines(Value:Boolean);
+    procedure SetStyle(Value:TPointStyle);
+    { The two band styles are drawn with ordinary line primitives, never by
+      reading pixels back off the canvas - see the comment on DrawHatch. }
+    procedure DrawBandEdge(ACanvas:TCanvas;AX,ATop,ABottom:Integer);
+    procedure DrawHatch(ACanvas:TCanvas;AX1,AY1,AX2,AY2:Integer;
+      ADescending:Boolean);
+  protected
+    { Déclarations protégées }
+  public
+    { Déclarations publiques }
+    constructor Create(AOwner:TComponent); override;
+    destructor  Destroy; override;
+
+    procedure StyleChanged(Sender:TObject);
+    procedure Clear;
+    procedure Draw;
+    { True for a series that paints an area behind the data rather than a curve
+      of its own - the fit-interval and selected-point bands. The chart asks the
+      series what it is and derives the drawing order from that, instead of
+      keeping a list of which series goes before which. }
+    function  IsBackgroundBand:Boolean;
+    function  Count:Integer;
+    procedure AddXY(X,Y:Double;_Color:TColor);
+    function  GetXValue(Index:Integer):Double;
+    function  GetYValue(Index:Integer):Double;
+    procedure SetXValue(Index:Integer;Value:Double);
+    procedure SetYValue(Index:Integer;Value:Double);        
+    function  GetXImgValue(Index:Integer):Integer;
+    function  GetYImgValue(Index:Integer):Integer;
+    procedure Delete(Index:Integer);
+    procedure GetMin(var X,Y:Double);
+    procedure GetMax(var X,Y:Double);
+    function  GetXMin:Double;
+    function  GetXMax:Double;
+    function  GetYMin:Double;
+    function  GetYMax:Double;
+    procedure SetColor(Index:Integer;_Color:TColor);
+    function  GetColor(Index:Integer):TColor;
+    procedure LineFit;
+    procedure DrawLineFit;
+
+    property Title:string read FTitle write SetTitle;
+    property PointStyle:TPointStyle read FStyle write SetStyle;
+    property DisplayFit:Boolean read FDisplayFit write SetDisplayFit;
+    property IndexMinFit:Integer read FIndexMinFit write SetIndexMinFit;
+    property IndexMaxFit:Integer read FIndexMaxFit write SetIndexMaxFit;
+    property FitReady:Boolean read FFitReady;
+    property ShowPoints:Boolean read FShowPoints write SetShowPoints;
+    property ShowLines:Boolean read FShowLines write SetShowLines default True;
+    property InitShowPoints:Boolean read FInitShowPoints write FInitShowPoints;
+    property InitShowLines:Boolean read FInitShowLines write FInitShowLines;
+    property AFit:Double read FAFit;
+    property BFit:Double read FBFit;
+    property ErrorFit:Double read FErrorFit;
+
+    procedure BeginUpdate;
+    procedure EndUpdate;
+  published
+    { Déclarations publiées }
+    property PenFit:TPen read FPenFit write SetPenFit;
+    property SeriesColor:TColor read FSeriesColor write FSeriesColor;   //  DM 01/10/07
+    property ImageSize:LongInt read FImageSize write FImageSize;        //  DM 01/10/07
+    property PointBrushStyle:TBrushStyle read FPointBrushStyle          //  DM 02/10/07
+        write FPointBrushStyle;
+  end;
+
+  TTALine = class(TComponent)
+  private
+    { Déclarations privées }
+    Chart:TGraphicControl;
+
+    FVisible:Boolean;
+    FStyle:TLineStyle;
+
+    PosImage:Integer;                     // Image coordinates of line
+    PosGraph:Double;                      // Graph coordinates of line
+
+    FPen:TPen;
+
+    procedure SetVisible(Value:Boolean);
+    procedure SetPos(Value:Double);
+    procedure SetPen(Value:TPen);
+    procedure SetStyle(Value:TLineStyle);
+  protected
+    { Déclarations protégées }
+  public
+    { Déclarations publiques }
+    constructor Create(AOwner:TComponent); override;
+    destructor  Destroy; override;
+
+    procedure Draw;
+    procedure StyleChanged(Sender:TObject);
+
+    property  LineStyle:TLineStyle read FStyle write SetStyle;
+
+  published
+    { Déclarations publiées }
+    property Visible:Boolean read FVisible write SetVisible;
+    property Pen:TPen read FPen write SetPen;
+    property Position:Double read PosGraph write SetPos;
+  end;
+
+  TTAChart = class(TGraphicControl)
+  private
+    { Déclarations privées }
+    FTitle:string;
+    FTitleFont:TFont;
+    FShowTitle:Boolean;
+    FXAxisLabel,FYAxisLabel:string;             // Axis Labels
+    FShowAxisLabel:Boolean;
+    SeriesList:TList;                           // List of series
+    FMirrorX:Boolean;                           // From right to left ?
+    FSeriecount:Integer;                        // Number of series
+    YMarkWidth:Integer;                         // Depend on Y marks
+    XImageMin,YImageMin:Integer;                // Image coordinates of limits
+    XImageMax,YImageMax:Integer;
+    FXGraphMin,FYGraphMin:Double;               // Graph coordinates of limits
+    FXGraphMax,FYGraphMax:Double;
+    FOnPaintTiming:TChartPaintTimingEvent;      //  see TChartPaintTimingEvent
+    FPaintDetail:string;                        //  built by DisplaySeries
+    FAutoUpdateXMin:Boolean;                    // Automatic calculation of XMin limit of graph ?
+    FAutoUpdateXMax:Boolean;                    // Automatic calculation of XMax limit of graph ?
+    FAutoUpdateYMin:Boolean;                    // Automatic calculation of YMin limit of graph ?
+    FAutoUpdateYMax:Boolean;                    // Automatic calculation of YMax limit of graph ?
+    FShowLegend:Boolean;
+
+    FGraphBrush:TBrush;
+    ax,bx,ay,by:Double;                         // Image<->Graphe conversion coefs
+
+    Down:Boolean;
+    Zoom:Boolean;
+    Fixed:Boolean;
+    XDown,YDown,XOld,YOld:Integer;              // XDown - the point where key was pressed;
+                                                // XOld - the point to which mouse pointer was moved
+    XMarkOld,YMarkOld:Integer;                  // Are used in drawing strokes
+    ZoomRect:TRect;
+
+    FShowReticule:Boolean;
+    FShowVerticalReticule:Boolean;
+
+    FDrawVertReticule:TDrawVertReticule;
+    FDrawReticule:TDrawReticule;
+    FZoom:TZoom;                                //  DM 26/11/07
+
+    XReticule,YReticule:Integer;
+
+    procedure SetAutoUpdateXMin(Value:Boolean);
+    procedure SetAutoUpdateXMax(Value:Boolean);
+    procedure SetAutoUpdateYMin(Value:Boolean);
+    procedure SetAutoUpdateYMax(Value:Boolean);
+    procedure SetXGraphMin(Value:Double);
+    procedure SetYGraphMin(Value:Double);
+    procedure SetXGraphMax(Value:Double);
+    procedure SetYGraphMax(Value:Double);
+    procedure SetMirrorX(Value:Boolean);
+    procedure SetGraphBrush(Value:TBrush);
+    procedure SetShowTitle(Value:Boolean);
+    procedure SetShowLegend(Value:Boolean);
+    procedure SetTitle(Value:string);
+    procedure SetTitleFont(Value:TFont);
+    procedure SetShowAxisLabel(Value:Boolean);    
+    procedure SetXAxisLabel(Value:string);
+    procedure SetYAxisLabel(Value:string);
+    function  GetLegendWidth:Integer;
+    procedure GetPointNextTo(X,Y:Integer;var SerieNumberOut,PointNumberOut,XOut,YOut:Integer);
+    procedure GetXPointNextTo(X,Y:Integer;var SerieNumberOut,PointNumberOut,XOut,YOut:Integer);
+    procedure GetYPointNextTo(X,Y:Integer;var SerieNumberOut,PointNumberOut,XOut,YOut:Integer);
+    procedure DrawReticule(X,Y:Integer);
+    procedure DrawVerticalReticule(X:Integer);
+    procedure SetShowVerticalReticule(Value:Boolean);
+    procedure SetShowReticule(Value:Boolean);    
+    function GetCanvas: TCanvas;                //  DM  20/11/08
+  protected
+    { Déclarations protégées }
+    procedure MouseDown(Button: TMouseButton; Shift: TShiftState; X, Y: Integer); override;
+    procedure MouseMove(Shift: TShiftState; X, Y: Integer); override;
+    procedure MouseUp(Button: TMouseButton; Shift: TShiftState; X, Y: Integer); override;
+    procedure DoDrawVertReticule(IndexSerie,Index,Xi,Yi:Integer;Xg,Yg:Double); virtual;
+    procedure DoDrawReticule(IndexSerie,Index,Xi,Yi:Integer;Xg,Yg:Double); virtual;
+    procedure Resize; override;                 //  DM  20/11/08
+    function GetWidth: LongInt;                 //  DM  21/04/09
+    procedure SetWidth(Value: LongInt);
+    function GetHeight: LongInt;                //  Real bitmap size
+    procedure SetHeight(Value: LongInt);
+  public
+    { Déclarations publiques }
+    //  Was puplished to be set by client
+    //  DM 20/11/07
+    AxisColor:TColor;                           //  Axis color
+    //  Was published to provide access to size attributes
+    //  DM 20/11/07
+    Bitmap: TBitmap;
+    
+    constructor Create(AOwner:TComponent); override;
+    destructor  Destroy; override;
+    { One design pixel of this control's own drawing, in the pixels of the
+      display it is on. See the implementation for why the chart has to do
+      this for itself. }
+    function Sc(ADesignPixels:Integer):Integer;
+    procedure Paint; override;
+    procedure Refresh;
+    procedure Clean;
+    procedure DrawTitle;
+    procedure DrawAxis;
+    procedure DrawLegend;
+    { Raised at the end of every Paint. See TChartPaintTimingEvent. }
+    property OnPaintTiming:TChartPaintTimingEvent
+      read FOnPaintTiming write FOnPaintTiming;
+    { The phase/series breakdown of the last Refresh, in the form the timing
+      event reports. Readable on its own so a repaint can be profiled without a
+      window and an event loop - Refresh fills it, Paint only passes it on. }
+    property PaintDetail:string read FPaintDetail;
+    procedure ZoomIn;                           //  DM 25/11/07
+    procedure ZoomOut;                          //  DM 25/11/07
+
+    procedure AddSerie(Serie:TComponent);
+//    procedure DeleteSerie(Serie:TTASerie);
+    procedure DeleteSerie(Serie:TComponent);
+    function  GetSerie(i:Integer):TComponent;
+    procedure SetAutoXMin(Auto:Boolean);
+    procedure SetAutoXMax(Auto:Boolean);
+    procedure SetAutoYMin(Auto:Boolean);
+    procedure SetAutoYMax(Auto:Boolean);
+
+    procedure XGraphToImage(Xin:Double;var XOut:Integer);
+    procedure YGraphToImage(Yin:Double;var YOut:Integer);
+    procedure GraphToImage(Xin,Yin:Double;var XOut,YOut:Integer);
+    procedure XImageToGraph(XIn:Integer;var XOut:Double);
+    procedure YImageToGraph(YIn:Integer;var YOut:Double);
+    procedure ImageToGraph(XIn,YIn:Integer;var XOut,YOut:Double);
+    procedure DisplaySeries;
+
+    property SeriesCount:Integer read FSeriecount default 0;
+
+    function GetNewColor:TColor;
+
+  published
+    { Déclarations publiées }
+    procedure StyleChanged(Sender: TObject);
+    property AutoUpdateXMin:Boolean read FAutoUpdateXMin write SetAutoUpdateXMin;
+    property AutoUpdateXMax:Boolean read FAutoUpdateXMax write SetAutoUpdateXMax;
+    property AutoUpdateYMin:Boolean read FAutoUpdateYMin write SetAutoUpdateYMin;
+    property AutoUpdateYMax:Boolean read FAutoUpdateYMax write SetAutoUpdateYMax;
+    property XGraphMin:Double read FXGraphMin write SetXGraphMin;
+    property YGraphMin:Double read FYGraphMin write SetYGraphMin;
+    property XGraphMax:Double read FXGraphMax write SetXGraphMax;
+    property YGraphMax:Double read FYGraphMax write SetYGraphMax;
+    property MirrorX:Boolean read FMirrorX write SetMirrorX;
+    property GraphBrush:TBrush read FGraphBrush write SetGraphBrush;
+    property ShowLegend:Boolean read FShowLegend write SetShowLegend;
+    property ShowTitle:Boolean read FShowTitle write SetShowTitle;
+    property Title:string read FTitle write SetTitle;
+    property TitleFont:TFont read FTitleFont write SetTitleFont;
+    property ShowAxisLabel:Boolean read FShowAxisLabel write SetShowAxisLabel;
+    property XAxisLabel:string read FXAxisLabel write SetXAxisLabel;
+    property YAxisLabel:string read FYAxisLabel write SetYAxisLabel;
+    property ShowVerticalReticule:Boolean read FShowVerticalReticule write SetShowVerticalReticule;
+    property ShowReticule:Boolean read FShowReticule write SetShowReticule;
+
+    property OnDrawVertReticule:TDrawVertReticule read FDrawVertReticule write FDrawVertReticule;
+    property OnDrawReticule:TDrawReticule read FDrawReticule write FDrawReticule;
+    property OnZoom:TZoom read FZoom write FZoom;   //  DM 26/11/07
+
+    property Canvas: TCanvas read GetCanvas;        //  DM 20/11/08
+    
+    property Align;
+    property Color;
+    property DragCursor;
+    property DragMode;
+    property Enabled;
+    property ParentColor;
+    property ParentShowHint;
+    property PopupMenu;
+    property ShowHint;
+    property Visible;
+    property Anchors;
+    property AutoSize;
+    property Constraints;
+    property DragKind;
+
+    property OnClick;
+    property OnContextPopup;
+    property OnDblClick;
+    property OnDragDrop;
+    property OnDragOver;
+    property OnEndDrag;
+    property OnStartDrag;
+    property OnMouseDown;
+    property OnMouseMove;
+    property OnMouseUp;
+    property OnResize;
+    property OnConstrainedResize;
+    
+    property Width: LongInt read GetWidth write SetWidth;       //  DM 21/04/09
+    property Height: LongInt read GetHeight write SetHeight;    //  DM 21/04/09
+  end;
+  
+const
+  RightMargin:LongInt = 0;      //  DM 09/10/07
+  BottomMargin:LongInt = 0;
+
+procedure Register;
+
+implementation
+
+constructor TTALine.Create(AOwner:TComponent);
+begin
+inherited Create(AOwner);
+
+FVisible:=False;
+
+FPen:=TPen.Create;
+FPen.OnChange:=StyleChanged;
+
+LineStyle:=lsHorizontal;
+end;
+
+destructor TTALine.Destroy;
+begin
+inherited Destroy;
+
+if Chart<>nil then (Chart as TTAChart).DeleteSerie(Self);
+
+FPen.Free;
+end;
+
+procedure TTALine.StyleChanged(Sender:TObject);
+begin
+Chart.Invalidate;
+end;
+
+procedure TTALine.SetPen(Value:TPen);
+begin
+FPen.Assign(Value);
+end;
+
+procedure TTALine.SetStyle(Value:TLineStyle);
+begin
+if FStyle<>Value then
+   begin
+   FStyle:=Value;
+   if Chart<>nil then Chart.Invalidate;
+   end;
+end;
+
+procedure TTALine.SetVisible(Value:Boolean);
+begin
+FVisible:=Value;
+Chart.Invalidate;
+end;
+
+procedure TTALine.SetPos(Value:Double);
+begin
+PosGraph:=Value;
+Chart.Invalidate;
+end;
+
+procedure TTALine.Draw;
+var
+   i,j:Integer;
+   Larg:Integer;
+   xi1,yi1,xi2,yi2:Integer;
+   xg1,yg1,xg2,yg2:Double;
+   Min,Max,a,b:Double;
+   Inside1,Inside2:Boolean;
+   Chart1:TTAChart;
+   YLeft,YRight,XBottom,XTop:Double;
+   XLine,YLine:array[1..2] of Integer;
+   BLeft,BRight,BBottom,BTop:Boolean;
+   XLeftI,YLeftI,XRightI,YRightI,XBottomI,YBottomI,XTopI,YTopI:Integer;
+   Temp:Double;
+   dx,dy,dxy,qx,rx,qy,ry,u1,u2,u3,u4:Double;
+   OK:Boolean;
+   XMin,XMax,Ymin,Ymax,TempI:Integer;
+   label Points;
+begin
+with Chart as TTAChart do
+   begin
+   XMin:=XImageMin;
+   XMax:=XImageMax;
+   YMin:=YImageMin;
+   YMax:=YImageMax;
+   end;
+
+if XMin>XMax then
+   begin
+   TempI:=XMin;
+   XMin:=XMax;
+   XMax:=TempI;
+   end;
+if YMin>YMax then
+   begin
+   TempI:=YMin;
+   YMin:=YMax;
+   YMax:=TempI;
+   end;
+
+// Draw
+with (Chart as TTAChart) do Canvas.Pen.Assign(FPen);
+
+Min:=(Chart as TTAChart).XGraphMin;
+Max:=(Chart as TTAChart).XGraphMax;
+
+if LineStyle=lsHorizontal then
+   begin
+   (Chart as TTAChart).YGraphToImage(PosGraph,PosImage);
+
+   (Chart as TTAChart).Canvas.MoveTo(XMin,PosImage);
+   (Chart as TTAChart).Canvas.LineTo(XMax,PosImage);
+   end;
+
+if LineStyle=lsVertical then
+   begin
+   (Chart as TTAChart).XGraphToImage(PosGraph,PosImage);
+
+   (Chart as TTAChart).Canvas.MoveTo(PosImage,YMin);
+   (Chart as TTAChart).Canvas.LineTo(PosImage,YMax);
+   end;
+
+end;
+
+// Unit Windows deleted for linux compatibility
+// The three following function are copied from this unit
+
+function RGB(R:Byte;G:Byte;B:Byte) : LongWord;
+begin
+ Result:=B Shl 16 + G Shl 8 + R;
+end;
+
+function GetRValue( C : Cardinal) : Byte;
+begin
+ result :=C and $0000FF;
+end;
+
+function GetGValue( C : Cardinal) : Byte;
+begin
+ result :=(C and $00FF00) shr 8;
+end;
+
+function GetBValue( C : Cardinal) : Byte;
+begin
+ result :=(C and $FF0000) Shr 16;
+end;
+
+// Fin des modifications
+
+procedure CalculateBounds(Mini,Maxi:Double;var Debut,Pas:Double);
+var
+   Etendue,EtendueTmp:Double;
+   NbPas,Mult:array[1..3] of Double;
+
+   Index:array[1..3] of Byte;
+   Trouve:Boolean;
+   DTmp:Double;
+   BTmp:Byte;
+   i,j:Integer;
+begin
+//  There was a "if Maxi>59 then Sleep(1);" here - a debugging leftover, and the
+//  single most expensive thing on the chart once the band was fixed. DrawAxis
+//  calls this three times per repaint (Y to size the margin, then X and Y to
+//  draw), and every axis in this application runs past 59, so every repaint
+//  slept three times. Sleep(1) is a floor, not a duration: the measured cost was
+//  3 to 7 ms of a 9 ms repaint, doing nothing.
+Etendue:=Maxi-Mini;
+if Etendue=0 then begin Debut:=Mini; Pas:=1; Exit; end;
+
+Mult[1]:=1;
+EtendueTmp:=Etendue;
+NbPas[1]:=EtendueTmp;
+if NbPas[1]>=10 then
+   begin
+   while NbPas[1]>10 do
+      begin
+      EtendueTmp:=EtendueTmp/10;
+      Mult[1]:=Mult[1]/10;
+      NbPas[1]:=EtendueTmp;
+      end;
+   end
+else
+   begin
+   while EtendueTmp*10<=10 do
+      begin
+      EtendueTmp:=EtendueTmp*10;
+      Mult[1]:=Mult[1]*10;
+      NbPas[1]:=EtendueTmp;
+      end;
+   end;
+
+Mult[2]:=1;
+EtendueTmp:=Etendue;
+NbPas[2]:=EtendueTmp/0.5;
+if NbPas[2]>=10 then
+   begin
+   while NbPas[2]>10 do
+      begin
+      EtendueTmp:=EtendueTmp/10;
+      Mult[2]:=Mult[2]/10;
+      NbPas[2]:=EtendueTmp/0.5;
+      end;
+   end
+else
+   begin
+   while EtendueTmp*10/0.5<=10 do
+      begin
+      EtendueTmp:=EtendueTmp*10;
+      Mult[2]:=Mult[2]*10;
+      NbPas[2]:=EtendueTmp/0.5;
+      end;
+   end;
+
+Mult[3]:=1;
+EtendueTmp:=Etendue;
+NbPas[3]:=EtendueTmp/0.2;
+if NbPas[3]>=10 then
+   begin
+   while NbPas[3]>10 do
+      begin
+      EtendueTmp:=EtendueTmp/10;
+      Mult[3]:=Mult[3]/10;
+      NbPas[3]:=EtendueTmp/0.2;
+      end;
+   end
+else
+   begin
+   while EtendueTmp*10/0.2<=10 do
+      begin
+      EtendueTmp:=EtendueTmp*10;
+      Mult[3]:=Mult[3]*10;
+      NbPas[3]:=EtendueTmp/0.2;
+      end;
+   end;
+
+for i:=1 to 3 do Index[i]:=i;
+
+Trouve:=True;
+while Trouve do
+   begin
+   Trouve:=False;
+   for i:=1 to 2 do
+      if NbPas[i]>NbPas[i+1] then
+         begin
+         Trouve:=True;
+         DTmp:=NbPas[i];
+         NbPas[i]:=NbPas[i+1];
+         NbPas[i+1]:=DTmp;
+         BTmp:=Index[i];
+         Index[i]:=Index[i+1];
+         Index[i+1]:=BTmp;
+         end;
+   end;
+
+if NbPas[3]<=10 then j:=3
+else if NbPas[2]<=10 then j:=2
+else if NbPas[1]<=10 then j:=1
+else
+   begin
+//   ShowMessage(lang('Erreur'));
+   Exit;
+   end;
+
+if Index[j]=1 then Pas:=1;
+if Index[j]=2 then Pas:=0.5;
+if Index[j]=3 then Pas:=0.2;
+Pas:=Pas/Mult[Index[j]];
+// If 0 is in the interval, it is cool to have it as a mark !
+if (Mini<0) and (Maxi>0) then
+   begin
+   Debut:=0;
+   while Debut>Mini do Debut:=Debut-Pas;
+   end
+else
+   begin
+   // Don't work if mini is negative and > 1
+//   if Abs(Mini)<1 then
+      Debut:=Round((Mini-Pas)*Mult[Index[j]])/Mult[Index[j]]
+//   else
+//      Debut:=System.Int(Mini)-Pas; //null
+   end;
+end;
+
+// Gauss Jordan resolution
+function Gaussj(var a:TADoubleArray; n:Integer; var b:TADoubleArray; m:Integer):Boolean;
+var
+big,dum,pivinv:Double;
+i,icol,irow,j,k,l,ll:Integer;
+indxc,indxr,ipiv:TAIntegerArrayRow;
+begin
+Result:=True;
+for j:=1 to n do ipiv[j]:=0;
+for i:=1 to n do
+   begin
+   big:=0;
+   for j:=1 to n do
+      if ipiv[j]<>1 then
+         for k:=1 to n do
+            if ipiv[k]=0 then
+               if abs(a[j,k])>=big then
+                  begin
+                  big:=abs(a[j,k]);
+                  irow:=j;
+                  icol:=k;
+                  end
+               else if ipiv[k]>1 then begin Result:=False; Exit; end;
+   ipiv[icol]:=ipiv[icol]+1;
+   if irow<>icol then
+      begin
+      for l:=1 to n do
+         begin
+         dum:=a[irow,l];
+         a[irow,l]:=a[icol,l];
+         a[icol,l]:=dum;
+         end;
+      for l:=1 to m do
+         begin
+         dum:=b[irow,l];
+         b[irow,l]:=b[icol,l];
+         b[icol,l]:=dum;
+         end;
+      end;
+   indxr[i]:=irow;
+   indxc[i]:=icol;
+   if abs(a[icol,icol])<1e-18 then begin Result:=False; Exit; end;
+   pivinv:=1/a[icol,icol];
+   a[icol,icol]:=1;
+   for l:=1 to n do a[icol,l]:=a[icol,l]*pivinv;
+   for l:=1 to m do b[icol,l]:=b[icol,l]*pivinv;
+   for ll:=1 to n do
+      if ll<>icol then
+         begin
+         dum:=a[ll,icol];
+         a[ll,icol]:=0;
+         for l:=1 to n do a[ll,l]:=a[ll,l]-a[icol,l]*dum;
+         for l:=1 to m do b[ll,l]:=b[ll,l]-b[icol,l]*dum;
+         end;
+   end;
+for l:=n downto 1 do
+   if indxr[l]<>indxc[l] then
+      for k:=1 to n do
+         begin
+         dum:=a[k,indxr[l]];
+         a[k,indxr[l]]:=a[k,indxc[l]];
+         a[k,indxc[l]]:=dum;
+         end;
+Result:=True;
+end;
+
+// Linear least squares
+procedure lfitLin(var x,y,sig:PTALigDouble;
+                  ndata:Integer;
+                  var a:TADoubleArrayRow;
+                  var covar:TADoubleArray;
+                  var chisq:Double);
+var
+k,j,i:Integer;
+ym,wt,sum,sig2i:Double;
+beta:TADoubleArray;
+afunc:TADoubleArrayRow;
+ma:integer;
+begin
+// Init the main matrix and second term with 0
+for j:=1 to 2 do
+   begin
+   for k:=1 to 2 do covar[j,k]:=0;
+   beta[j,1]:=0;
+   end;
+
+// Coefs calculation
+for i:=1 to ndata do
+   begin
+   afunc[1]:=1;
+   afunc[2]:=x^[i];
+   ym:=y^[i];
+   sig2i:=1/sqr(sig^[i]);
+   for j:=1 to 2 do
+      begin
+      wt:=afunc[j]*sig2i ;
+      for k:=1 to j do
+         covar[j,k]:=covar[j,k]+wt*afunc[k];
+      beta[j,1]:=beta[j,1]+ym*wt;
+      end;
+   end;
+for j:=2 to 2 do
+   for k:=1 to j-1 do covar[k,j]:=covar[j,k];
+
+// Resolution
+GaussJ(covar,2,beta,1);
+for j:=1 to 2 do
+   a[j]:=beta[j,1];
+
+// Chi2 calculation
+chisq:=0;
+for i:=1 to ndata  do
+   begin
+   afunc[1]:=1;
+   afunc[2]:=x^[i];
+   sum:=0;
+   for j:=1 to 2 do
+      sum:=sum+a[j]*afunc[j];
+   chisq:=chisq+sqr((y^[i]-sum)/sig^[i]);
+   end;
+end;
+
+//*******************************************************************************
+//*******************************************************************************
+//*******************************************************************************
+
+constructor TTASerie.Create(AOwner:TComponent);
+begin
+inherited Create(AOwner);
+
+FPenFit:=TPen.Create;
+FPenFit.OnChange:=StyleChanged;
+
+PointStyle:=psCross;
+
+NbPoints:=0;
+NbPointsMem:=1000;
+GetMem(XGraph,NbPointsMem*8);
+GetMem(YGraph,NbPointsMem*8);
+GetMem(XImage,NbPointsMem*4);
+GetMem(YImage,NbPointsMem*4);
+GetMem(ColorR,NbPointsMem);
+GetMem(ColorG,NbPointsMem);
+GetMem(ColorB,NbPointsMem);
+FillChar(XGraph^,NbPointsMem*8,0);
+FillChar(YGraph^,NbPointsMem*8,0);
+FillChar(XImage^,NbPointsMem*4,0);
+FillChar(YImage^,NbPointsMem*4,0);
+FillChar(ColorR^,NbPointsMem,0);
+FillChar(ColorG^,NbPointsMem,0);
+FillChar(ColorB^,NbPointsMem,0);
+
+XGraphMin:=MaxDouble;
+YGraphMin:=MaxDouble;
+XGraphMax:=MinDouble;
+YGraphMax:=MinDouble;
+
+DisplayFit:=False;
+FFitReady:=False;
+ShowPoints:=False;
+ShowLines:=True;
+FInitShowPoints:=ShowPoints;        //  DM 13/02/08
+FInitShowLines:=ShowLines;
+
+UpdateInProgress:=False;
+
+FImageSize:=2;                      //  DM 01/10/07
+FPointBrushStyle:=bsSolid;          //  DM 02/10/07
+end;
+
+destructor TTASerie.Destroy;
+begin
+inherited Destroy;
+
+if Chart<>nil then (Chart as TTAChart).DeleteSerie(Self);
+
+FPenFit.Free;
+
+FreeMem(XGraph,NbPointsMem*8);
+FreeMem(YGraph,NbPointsMem*8);
+FreeMem(XImage,NbPointsMem*4);
+FreeMem(YImage,NbPointsMem*4);
+FreeMem(ColorR,NbPointsMem);
+FreeMem(ColorG,NbPointsMem);
+FreeMem(ColorB,NbPointsMem);
+end;
+
+procedure TTASerie.StyleChanged(Sender:TObject);
+begin
+Chart.Invalidate;
+end;
+
+procedure TTASerie.Clear;
+begin
+if NbPointsMem>1000 then
+   begin
+   FreeMem(XGraph,NbPointsMem*8);
+   FreeMem(YGraph,NbPointsMem*8);
+   FreeMem(XImage,NbPointsMem*4);
+   FreeMem(YImage,NbPointsMem*4);
+   FreeMem(ColorR,NbPointsMem);
+   FreeMem(ColorG,NbPointsMem);
+   FreeMem(ColorB,NbPointsMem);
+
+   NbPointsMem:=1000;
+   GetMem(XGraph,NbPointsMem*8);
+   GetMem(YGraph,NbPointsMem*8);
+   GetMem(XImage,NbPointsMem*4);
+   GetMem(YImage,NbPointsMem*4);
+   GetMem(ColorR,NbPointsMem);
+   GetMem(ColorG,NbPointsMem);
+   GetMem(ColorB,NbPointsMem);
+   end;
+
+NbPoints:=0;
+NbPointsMem:=1000;
+
+FillChar(XGraph^,NbPointsMem*8,0);
+FillChar(YGraph^,NbPointsMem*8,0);
+FillChar(XImage^,NbPointsMem*4,0);
+FillChar(YImage^,NbPointsMem*4,0);
+FillChar(ColorR^,NbPointsMem,0);
+FillChar(ColorG^,NbPointsMem,0);
+FillChar(ColorB^,NbPointsMem,0);
+
+XGraphMin:=MaxDouble;
+YGraphMin:=MaxDouble;
+XGraphMax:=MinDouble;
+YGraphMax:=MinDouble;
+
+FFitReady:=False;
+
+Chart.Invalidate;
+end;
+
+{ Why these two exist at all.
+
+  Both band styles used to be painted one pixel at a time, reading each pixel
+  back first (if Canvas.Pixels[x,y]=GraphBrush.Color) so the hatch would not
+  land on a curve that had already been drawn. On Windows, where this component
+  grew up, reading a pixel is a local GDI call and that is merely wasteful. On
+  X11 it is not local: LCL's gtk2 DCGetPixel is gdk_drawable_get_image(d,x,y,1,1),
+  one synchronous round trip to the X server per pixel, with the process blocked
+  on the reply. Over a full-width band that is hundreds of thousands of round
+  trips per repaint, which is what made every operation in the application lag
+  for seconds. (The canvas here is Bitmap.Canvas, an off-screen pixmap - still
+  server-side, so still a round trip, and the LCL notes the colour it reads back
+  from a TBitmap is not even reliable.)
+
+  So: no read-back, ever. The hatch is what the old test actually described -
+  the set of pixels where (x+y) or (x-y) is a multiple of N is a family of
+  parallel diagonals N pixels apart - drawn as lines, and the "don't cover the
+  curves" part is handled by drawing bands before the data series (see
+  TTAChart.DisplaySeries and TTASerie.IsBackgroundBand) rather than by asking
+  the canvas what is already there.
+
+  Only MoveTo/LineTo are used, and the segments are clipped arithmetically
+  rather than through Canvas.Clipping, so the result is the same on every
+  widgetset - Windows, macOS and Linux alike. }
+
+{ One edge of a band: the vertical line at a bound. }
+procedure TTASerie.DrawBandEdge(ACanvas:TCanvas;AX,ATop,ABottom:Integer);
+begin
+ACanvas.MoveTo(AX,ATop);
+ACanvas.LineTo(AX,ABottom);
+end;
+
+{ The diagonal hatch filling a band, over the inclusive rectangle
+  (AX1,AY1)-(AX2,AY2). ADescending picks the direction: down to the right, or up
+  to it.
+
+  On spacing. A fit interval defaults to the WHOLE profile, so this hatch
+  routinely covers the entire plot and is read through, not looked at: it has to
+  say "this region is selected" without competing with the data drawn over it.
+  The original five pixels put some 350 lines across a full-width plot, which
+  reads as a solid wash. Platform hatch brushes sit at eight (GDI's HS_BDIAGONAL
+  is an 8x8 pattern); for a fill this large, sparser again is better, so the
+  spacing is doubled from there.
+
+  The diagonals are anchored to the canvas origin - k runs over multiples of
+  Step in absolute coordinates, not from the band's own edge - so the pattern
+  stays put while a bound is dragged or the chart is zoomed, instead of crawling
+  with it. }
+procedure TTASerie.DrawHatch(ACanvas:TCanvas;AX1,AY1,AX2,AY2:Integer;
+  ADescending:Boolean);
+const
+   Step=16;                                     //  pixels between diagonals
+var
+   k,kMin,kMax,xa,xb,PX1,PY1,PX2,PY2:Integer;
+begin
+//  Clip to the plot rectangle first. A bound dragged far off-screen, or a
+//  degenerate graph range, puts XImage values millions of pixels away, and the
+//  work here is proportional to the rectangle asked for - so an unclipped band
+//  is an unbounded loop that looks like a hang. Nothing outside the plot is
+//  visible anyway.
+with Chart as TTAChart do
+   begin
+   PX1:=XImageMin; PX2:=XImageMax;
+   PY1:=YImageMin; PY2:=YImageMax;
+   end;
+if PX1>PX2 then begin k:=PX1; PX1:=PX2; PX2:=k; end;
+if PY1>PY2 then begin k:=PY1; PY1:=PY2; PY2:=k; end;
+if AX1<PX1 then AX1:=PX1;
+if AY1<PY1 then AY1:=PY1;
+if AX2>PX2 then AX2:=PX2;
+if AY2>PY2 then AY2:=PY2;
+
+if (AX2<AX1) or (AY2<AY1) then Exit;
+
+//  k is the invariant of one diagonal: x-y going down-right, x+y going up-right.
+if ADescending then
+   begin
+   kMin:=AX1-AY2;
+   kMax:=AX2-AY1;
+   end
+else
+   begin
+   kMin:=AX1+AY1;
+   kMax:=AX2+AY2;
+   end;
+
+//  First multiple of Step at or after kMin. Pascal div truncates towards zero,
+//  which already lands at or above kMin for a negative kMin; only a positive one
+//  needs the correction.
+k:=(kMin div Step)*Step;
+if k<kMin then Inc(k,Step);
+
+while k<=kMax do
+   begin
+   if ADescending then
+      begin
+      //  y=x-k, inside the rectangle for x in [k+AY1, k+AY2]
+      xa:=k+AY1; if xa<AX1 then xa:=AX1;
+      xb:=k+AY2; if xb>AX2 then xb:=AX2;
+      if xa<=xb then
+         begin
+         ACanvas.MoveTo(xa,xa-k);
+         ACanvas.LineTo(xb,xb-k);
+         end;
+      end
+   else
+      begin
+      //  y=k-x, inside the rectangle for x in [k-AY2, k-AY1]
+      xa:=k-AY2; if xa<AX1 then xa:=AX1;
+      xb:=k-AY1; if xb>AX2 then xb:=AX2;
+      if xa<=xb then
+         begin
+         ACanvas.MoveTo(xa,k-xa);
+         ACanvas.LineTo(xb,k-xb);
+         end;
+      end;
+   Inc(k,Step);
+   end;
+end;
+
+function TTASerie.IsBackgroundBand:Boolean;
+begin
+Result:=FStyle in [psVertLineBT,psVertLineTB];
+end;
+
+procedure TTASerie.SetStyle(Value:TPointStyle);
+begin
+if FStyle<>Value then
+   begin
+   FStyle:=Value;
+   if Chart<>nil then Chart.Invalidate;
+   end;
+end;
+
+procedure TTASerie.Draw;
+var
+   i,j:Integer;
+   Larg:Integer;
+   xi1,yi1,xi2,yi2:Integer;
+   xg1,yg1,xg2,yg2:Double;
+   Min,Max,a,b:Double;
+   Inside1,Inside2:Boolean;
+   Chart1:TTAChart;
+   YLeft,YRight,XBottom,XTop:Double;
+   XLine,YLine:array[1..2] of Integer;
+   BLeft,BRight,BBottom,BTop:Boolean;
+   XLeftI,YLeftI,XRightI,YRightI,XBottomI,YBottomI,XTopI,YTopI:Integer;
+   Temp:Double;
+   dx,dy,dxy,qx,rx,qy,ry,u1,u2,u3,u4:Double;
+   OK:Boolean;
+   XMin,XMax,Ymin,Ymax,TempI:Integer;
+   SavedColor:TColor;                   //  DM 02/10/07
+   (*SavedBrushStyle:TBrushStyle;*)
+   StartX,StopX:LongInt;                //  DM 01/02/08
+   label Points;
+begin
+if NBPoints=0 then Exit;
+
+with Chart as TTAChart do
+   begin
+   XMin:=XImageMin;
+   XMax:=XImageMax;
+   YMin:=YImageMin;
+   YMax:=YImageMax;
+   end;
+
+if XMin>XMax then
+   begin
+   TempI:=XMin;
+   XMin:=XMax;
+   XMax:=TempI;
+   end;
+if YMin>YMax then
+   begin
+   TempI:=YMin;
+   YMin:=YMax;
+   YMax:=TempI;
+   end;
+
+// Calculate again all points
+for i:=0 to NBPoints-1 do
+   (Chart as TTAChart).GraphToImage(XGraph^[i],YGraph^[i],XImage^[i],YImage^[i]);
+
+// Draw all points
+with (Chart as TTAChart) do
+   begin
+   Canvas.Pen.Mode:=pmCopy;
+   Canvas.Pen.Style:=psSolid;
+   //  A one-device-pixel curve is a hairline on a scaled display - see
+   //  TTAChart.Sc. The series is what the user is here to look at, so it is the
+   //  last thing that should thin out as the screen gets denser.
+   Canvas.Pen.Width:=Sc(1);
+   end;
+
+Min:=(Chart as TTAChart).XGraphMin;
+Max:=(Chart as TTAChart).XGraphMax;
+
+//  ImageSize is quoted at 96 dpi by everyone who sets it (see
+//  fit_viewer.pas), so the point markers scale with the rest of the chart.
+Larg:=(Chart as TTAChart).Sc(FImageSize);   //5;    DM 01/10/07
+//i:=0;
+//while XGraph^[i]<Min do Inc(i);
+//while (XGraph^[i]<Max) and (i<NbPoints-1) do
+for i:=0 to NbPoints-2 do
+   begin
+   with (Chart as TTAChart) do
+      begin
+      xi1:=XImage^[i];
+      yi1:=YImage^[i];
+      xi2:=XImage^[i+1];
+      yi2:=YImage^[i+1];
+      xg1:=XGraph^[i];
+      yg1:=YGraph^[i];
+      xg2:=XGraph^[i+1];
+      yg2:=YGraph^[i+1];
+
+      Canvas.Pen.Color:=RGB(ColorR^[i],ColorG^[i],ColorB^[i]);
+
+      if FShowLines then
+         begin
+         if (xg1>XGraphMin) and (xg2>XGraphMin) and (xg1<XGraphMax) and (xg2<XGraphMax) and
+            (yg1>YGraphMin) and (yg2>YGraphMin) and (yg1<YGraphMax) and (yg2<YGraphMax) then
+            begin
+            Canvas.MoveTo(xi1,yi1);
+            Canvas.LineTo(xi2,yi2);
+            goto Points;
+            end;
+
+         if ((xg1<XGraphMin) and (xg2<XGraphMin)) or ((xg1>XGraphMax) and (xg2>XGraphMax)) or
+            ((yg1<YGraphMin) and (yg2<YGraphMin)) or ((yg1>YGraphMax) and (yg2>YGraphMax)) then
+            goto Points;
+
+         if yg1>yg2 then
+            begin
+            Temp:=xg1; xg1:=xg2; xg2:=Temp;
+            Temp:=yg1; yg1:=yg2; yg2:=Temp;
+            end;
+
+         if yg1=yg2 then
+            begin
+            if xg1>xg2 then
+               begin
+               Temp:=xg1; xg1:=xg2; xg2:=Temp;
+               Temp:=yg1; yg1:=yg2; yg2:=Temp;
+               end;
+            if xg1<XGraphMin then xi1:=XImageMin;
+            if xg2>XGraphMax then xi2:=XImageMax;
+            Canvas.MoveTo(xi1,yi1);
+            Canvas.LineTo(xi2,yi2);
+            goto Points;
+            end;
+
+         if xg1=xg2 then
+            begin
+            if yg1<YGraphMin then yi1:=YImageMin;
+            if yg2>YGraphMax then yi2:=YImageMax;
+            Canvas.MoveTo(xi1,yi1);
+            Canvas.LineTo(xi2,yi2);
+            goto Points;
+            end;
+
+         dy:=yg1-yg2;
+         dx:=xg1-xg2;
+         dxy:=xg1*yg2-yg1*xg2;
+         qx:=XGraphMin*dy;
+         rx:=XGraphMax*dy;
+         qy:=YGraphMin*dx;
+         ry:=YGraphMax*dx;
+         u1:=qx-qy+dxy;
+         u2:=qx-ry+dxy;
+         u3:=rx-ry+dxy;
+         u4:=rx-qy+dxy;
+
+         OK:=False;
+         if u1*u2<0 then
+            begin
+            OK:=True;
+            if xg1<XGraphMin then
+               begin
+               yg1:=(XGraphMin*dy+dxy)/dx;
+               xg1:=XGraphMin;
+               dy:=yg1-yg2;
+               dx:=xg1-xg2;
+               dxy:=xg1*yg2-yg1*xg2;
+               end;
+            if xg2<XGraphMin then
+               begin
+               yg2:=(XGraphMin*dy+dxy)/dx;
+               xg2:=XGraphMin;
+               dy:=yg1-yg2;
+               dx:=xg1-xg2;
+               dxy:=xg1*yg2-yg1*xg2;
+               end;
+            end;
+
+         if u2*u3<0 then
+            begin
+            OK:=True;
+            if yg2>YGraphMax then
+               begin
+               xg2:=(YGraphMax*dx-dxy)/dy;
+               yg2:=YGraphMax;
+               dy:=yg1-yg2;
+               dx:=xg1-xg2;
+               dxy:=xg1*yg2-yg1*xg2;
+               end;
+            end;
+
+         if u3*u4<0 then
+            begin
+            OK:=True;
+            if xg1>XGraphMax then
+               begin
+               yg1:=(XGraphMax*dy+dxy)/dx;
+               xg1:=XGraphMax;
+               dy:=yg1-yg2;
+               dx:=xg1-xg2;
+               dxy:=xg1*yg2-yg1*xg2;
+               end;
+            if xg2>XGraphMax then
+               begin
+               yg2:=(XGraphMax*dy+dxy)/dx;
+               xg2:=XGraphMax;
+               dy:=yg1-yg2;
+               dx:=xg1-xg2;
+               dxy:=xg1*yg2-yg1*xg2;
+               end;
+            end;
+
+         if u4*u1<0 then
+            begin
+            OK:=True;
+            if yg1<YGraphMin then
+               begin
+               xg1:=(YGraphMin*dx-dxy)/dy;
+               yg1:=YGraphMin;
+               dy:=yg1-yg2;
+               dx:=xg1-xg2;
+               dxy:=xg1*yg2-yg1*xg2;
+               end;
+            end;
+
+         if OK then
+            begin
+            XGraphToImage(xg1,xi1);
+            YGraphToImage(yg1,yi1);
+            XGraphToImage(xg2,xi2);
+            YGraphToImage(yg2,yi2);
+
+            Canvas.MoveTo(xi1,yi1);
+            Canvas.LineTo(xi2,yi2);
+            end;
+
+         end;
+
+      Points:
+
+      if FShowPoints then
+      begin
+         if (YImage^[i]>YMin) and (YImage^[i]<YMax) //  DM 06/02/08
+            and (XImage^[i]>XMin) and (XImage^[i]<XMax) then
+         begin
+             SavedColor:=Canvas.Brush.Color;        //  DM 02/10/07
+             Canvas.Brush.Style:=FPointBrushStyle;  //bsClear;  DM 02/10/07
+             Canvas.Brush.Color:=Canvas.Pen.Color;  //  DM 02/10/07
+             case PointStyle of
+                psRectangle:
+                   begin
+                   Canvas.Rectangle(XImage^[i]-Larg,YImage^[i]-Larg,XImage^[i]+Larg+1,YImage^[i]+Larg+1);
+                   end;
+                psCross:
+                   begin
+                   Canvas.MoveTo(XImage^[i]-Larg,YImage^[i]);
+                   Canvas.LineTo(XImage^[i]+Larg+1,YImage^[i]);
+                   Canvas.MoveTo(XImage^[i],YImage^[i]-Larg);
+                   Canvas.LineTo(XImage^[i],YImage^[i]+Larg+1);
+                   end;
+                psDiagCross:
+                   begin
+                   Canvas.MoveTo(XImage^[i]-Larg,YImage^[i]-Larg);
+                   Canvas.LineTo(XImage^[i]+Larg+1,YImage^[i]+Larg+1);
+                   Canvas.MoveTo(XImage^[i]-Larg,YImage^[i]+Larg+1);
+                   Canvas.LineTo(XImage^[i]+Larg+1,YImage^[i]-Larg);
+                   end;
+                psStar:
+                   begin
+                   Canvas.MoveTo(XImage^[i]-Larg,YImage^[i]);
+                   Canvas.LineTo(XImage^[i]+Larg+1,YImage^[i]);
+                   Canvas.MoveTo(XImage^[i],YImage^[i]-Larg);
+                   Canvas.LineTo(XImage^[i],YImage^[i]+Larg+1);
+
+                   Canvas.MoveTo(XImage^[i]-Larg,YImage^[i]-Larg);
+                   Canvas.LineTo(XImage^[i]+Larg+1,YImage^[i]+Larg+1);
+                   Canvas.MoveTo(XImage^[i]-Larg,YImage^[i]+Larg+1);
+                   Canvas.LineTo(XImage^[i]+Larg+1,YImage^[i]-Larg);
+                   end;
+                psCircle:
+                   begin
+                   Canvas.Ellipse(XImage^[i]-Larg,YImage^[i]-Larg,XImage^[i]+Larg+1,YImage^[i]+Larg+1);
+                   end;
+                psVertLineBT:
+                   begin                                //  DM 29/01/08
+                   DrawBandEdge(Canvas,XImage^[i],YMin,YMax);
+                   if i mod 2 = 0 then
+                   begin
+                       //   even point - indexing starts from zero
+                       //   interval is located to the right
+                       //   this point is definitely not the last
+                       StartX:=XImage^[i];StopX:=XImage^[i+1]-1;
+                       if StopX>XMax-1 then StopX:=XMax-1;
+                       DrawHatch(Canvas,StartX,YMin,StopX,YMax-1,False);
+                   end;  //  if i mod 2 = 0 then
+                   end;  //  psVertLineBT
+                psVertLineTB:
+                   begin                                //  DM 29/01/08
+                   DrawBandEdge(Canvas,XImage^[i],YMin,YMax);
+                   if i mod 2 = 0 then
+                   begin
+                       //   even point - indexing starts from zero
+                       //   interval is located to the right
+                       //   this point is definitely not the last
+                       StartX:=XImage^[i];StopX:=XImage^[i+1]-1;
+                       if StopX>XMax-1 then StopX:=XMax-1;
+                       DrawHatch(Canvas,StartX,YMin,StopX,YMax-1,True);
+                   end;  //  if i mod 2 = 0 then
+                   end;  //  psVertLineTB
+                end;  //  case PointStyle of
+             Canvas.Brush.Style:=bsClear;           //  restore original condition (DM 02/10/07)
+             Canvas.Brush.Color:=SavedColor;        //  DM 02/10/07
+         end
+         else
+         begin
+             //  DM 06/02/08
+             SavedColor:=Canvas.Brush.Color;        //  DM 02/10/07
+             Canvas.Brush.Style:=FPointBrushStyle;  //  DM 02/10/07
+             Canvas.Brush.Color:=Canvas.Pen.Color;  //  DM 02/10/07
+             case PointStyle of
+                psVertLineBT: begin                 //  DM 29/01/08
+                   DrawBandEdge(Canvas,XImage^[i],YMin,YMax);
+                   if i mod 2 = 0 then
+                   begin
+                       //   even point - indexing starts from zero
+                       //   interval is located to the right
+                       //   this point is definitely not the last
+                       StartX:=XImage^[i];StopX:=XImage^[i+1]-1;
+                       if StartX<=XMin then
+                       begin
+                           StartX:=XMin;
+                           if StopX>XMax-1 then StopX:=XMax-1;
+                           DrawHatch(Canvas,StartX,YMin,StopX,YMax-1,False);
+                        end;
+                   end; //  if i mod 2 = 0 then
+                end;  //  psVertLineBT
+                psVertLineTB: begin                 //  DM 08/02/08
+                   DrawBandEdge(Canvas,XImage^[i],YMin,YMax);
+                   if i mod 2 = 0 then
+                   begin
+                       //  even point - indexing starts from zero
+                       //  interval is located to the right
+                       //  this point is definitely not the last
+                       //  combination of conditions providing that
+                       //  if given area is out of window then strokes
+                       //  aren't drawn
+                       StartX:=XImage^[i];StopX:=XImage^[i+1]-1;
+                       if StartX<=XMin then
+                       begin
+                           StartX:=XMin;
+                           if StopX>XMax-1 then StopX:=XMax-1;
+                           DrawHatch(Canvas,StartX,YMin,StopX,YMax-1,True);
+                        end;
+                   end; //  if i mod 2 = 0 then
+                end;  //  psVertLineTB
+             end;  //  case PointStyle of
+             Canvas.Brush.Style:=bsClear;               //  restore original condition (DM 02/10/07)
+             Canvas.Brush.Color:=SavedColor;            //  DM 02/10/07
+         end;  //  else
+      end;  //  if FShowPoints then
+      end;  //  with (Chart as TTAChart) do
+   end;  //  for i:=0 to NbPoints-2 do
+
+// Draw last point
+if FShowPoints and (YImage^[NbPoints-1]>YMin) and (YImage^[NbPoints-1]<YMax)
+   and (XImage^[NbPoints-1]>XMin) and (XImage^[NbPoints-1]<XMax) then
+   with (Chart as TTAChart) do
+      if (XGraph^[NbPoints-1]<Max) then
+         begin
+         Canvas.Pen.Color:=RGB(ColorR^[NbPoints-1],ColorG^[NbPoints-1],ColorB^[NbPoints-1]);
+         SavedColor:=Canvas.Brush.Color;            //  DM 02/10/07
+         Canvas.Brush.Style:=FPointBrushStyle;      //bsClear;  DM 02/10/07
+         Canvas.Brush.Color:=Canvas.Pen.Color;      //  DM 02/10/07
+         if PointStyle=psCross then
+            begin
+            Canvas.MoveTo(XImage^[NbPoints-1]-Larg,YImage^[NbPoints-1]);
+            Canvas.LineTo(XImage^[NbPoints-1]+Larg+1,YImage^[NbPoints-1]);
+            Canvas.MoveTo(XImage^[NbPoints-1],YImage^[NbPoints-1]-Larg);
+            Canvas.LineTo(XImage^[NbPoints-1],YImage^[NbPoints-1]+Larg+1);
+            end
+         else
+         if PointStyle=psCircle then
+            begin
+            Canvas.Ellipse(XImage^[NbPoints-1]-Larg,YImage^[NbPoints-1]-Larg,
+               XImage^[NbPoints-1]+Larg+1,YImage^[NbPoints-1]+Larg+1);
+            end
+         // styles below was inserted by DM 02/10/07
+         else
+         if PointStyle=psRectangle then
+            begin
+            Canvas.Rectangle(
+                XImage^[NbPoints-1]-Larg,YImage^[NbPoints-1]-Larg,
+                XImage^[NbPoints-1]+Larg+1,YImage^[NbPoints-1]+Larg+1);
+            end
+         else
+         if PointStyle=psDiagCross then
+            begin
+            Canvas.MoveTo(XImage^[NbPoints-1]-Larg,YImage^[NbPoints-1]-Larg);
+            Canvas.LineTo(XImage^[NbPoints-1]+Larg+1,YImage^[NbPoints-1]+Larg+1);
+            Canvas.MoveTo(XImage^[NbPoints-1]-Larg,YImage^[NbPoints-1]+Larg+1);
+            Canvas.LineTo(XImage^[NbPoints-1]+Larg+1,YImage^[NbPoints-1]-Larg);
+            end
+         else
+         if PointStyle=psStar then
+            begin
+            Canvas.MoveTo(XImage^[NbPoints-1]-Larg,YImage^[NbPoints-1]);
+            Canvas.LineTo(XImage^[NbPoints-1]+Larg+1,YImage^[NbPoints-1]);
+            Canvas.MoveTo(XImage^[NbPoints-1],YImage^[NbPoints-1]-Larg);
+            Canvas.LineTo(XImage^[NbPoints-1],YImage^[NbPoints-1]+Larg+1);
+
+            Canvas.MoveTo(XImage^[NbPoints-1]-Larg,YImage^[NbPoints-1]-Larg);
+            Canvas.LineTo(XImage^[NbPoints-1]+Larg+1,YImage^[NbPoints-1]+Larg+1);
+            Canvas.MoveTo(XImage^[NbPoints-1]-Larg,YImage^[NbPoints-1]+Larg+1);
+            Canvas.LineTo(XImage^[NbPoints-1]+Larg+1,YImage^[NbPoints-1]-Larg);
+            end
+         else
+         if (PointStyle=psVertLineBT) or (PointStyle=psVertLineTB) then
+            begin                                   //  DM 29/01/08
+            //  The closing edge of the last band. Both styles draw the same
+            //  vertical line here - only the hatch between a pair of bounds
+            //  differs, and there is no interval to the right of the last point.
+            with Chart as TTAChart do
+                DrawBandEdge(Canvas,XImage^[NbPoints-1],YMin,YMax);
+            end;
+         Canvas.Brush.Style:=bsClear;               //  restore original condition (DM 02/10/07)
+         Canvas.Brush.Color:=SavedColor;            //  DM 02/10/07
+         end;
+
+if FDisplayFit then
+   begin
+   LineFit;
+   DrawLineFit;
+   FFitReady:=True;
+   end;
+end;
+
+function TTASerie.Count:Integer;
+begin
+Result:=NBPoints;
+end;
+
+procedure TTASerie.AddXY(X,Y:Double;_Color:TColor);
+var
+   XImageTemp,YImageTemp:PTALigInteger;
+   XGraphTemp,YGraphTemp:PTALigDouble;
+   ColorRTemp,ColorVTemp,ColorBTemp:PTALigByte;
+begin
+if NBPoints+1>NBPointsMem then
+   begin
+   NBPointsMem:=NBPointsMem+1000;
+   GetMem(XGraphTemp,NbPointsMem*8);
+   GetMem(YGraphTemp,NbPointsMem*8);
+   GetMem(XImageTemp,NbPointsMem*4);
+   GetMem(YImageTemp,NbPointsMem*4);
+   GetMem(ColorRTemp,NbPointsMem);
+   GetMem(ColorVTemp,NbPointsMem);
+   GetMem(ColorBTemp,NbPointsMem);
+
+   Move(XGraph^,XGraphTemp^,NbPoints*8);
+   Move(YGraph^,YGraphTemp^,NbPoints*8);
+   Move(XImage^,XImageTemp^,NbPoints*4);
+   Move(YImage^,YImageTemp^,NbPoints*4);
+   Move(ColorR^,ColorRTemp^,NbPoints);
+   Move(ColorG^,ColorVTemp^,NbPoints);
+   Move(ColorB^,ColorBTemp^,NbPoints);
+
+   FreeMem(XGraph,NbPoints*8);
+   FreeMem(YGraph,NbPoints*8);
+   FreeMem(XImage,NbPoints*4);
+   FreeMem(YImage,NbPoints*4);
+   FreeMem(ColorR,NbPoints);
+   FreeMem(ColorG,NbPoints);
+   FreeMem(ColorB,NbPoints);
+
+   XImage:=XImageTemp;
+   YImage:=YImageTemp;
+   XGraph:=XGraphTemp;
+   YGraph:=YGraphTemp;
+   ColorR:=ColorRTemp;
+   ColorG:=ColorVTemp;
+   ColorB:=ColorBTemp;
+   end;
+
+// Update max
+if X>XGraphMax then XGraphMax:=X;
+if X<XGraphMin then XGraphMin:=X;
+if Y>YGraphMax then
+   begin
+   YGraphMax:=Y;
+   XOfYGraphMax:=X;
+   end;
+if Y<YGraphMin then
+   begin
+   YGraphMin:=Y;
+   XOfYGraphMin:=X;
+   end;
+
+// Add point
+XGraph^[NbPoints]:=X;
+YGraph^[NbPoints]:=Y;
+ColorR^[NbPoints]:=GetRValue(_Color);
+ColorG^[NbPoints]:=GetGValue(_Color);
+ColorB^[NbPoints]:=GetBValue(_Color);
+Inc(NBPoints);
+
+FFitReady:=False;
+
+Chart.Invalidate;
+end;
+
+function TTASerie.GetXValue(Index:Integer):Double;
+begin
+Result:=XGraph^[Index];
+end;
+
+function TTASerie.GetYValue(Index:Integer):Double;
+begin
+Result:=YGraph^[Index];
+end;
+
+procedure TTASerie.SetXValue(Index:Integer;Value:Double);
+var
+   i:Integer;
+   Val:Double;
+begin
+if not(UpdateInProgress) then
+   begin
+   if Value<XGraphMin then XGraphMin:=Value
+   else if Value>XGraphMax then XGraphMax:=Value
+   else
+      begin
+      if XGraph^[Index]=XGraphMax then
+         begin
+         XGraph^[Index]:=Value;
+         if Value<XGraphMax then
+            begin
+            XGraphMax:=MinDouble;
+            for i:=0 to NbPoints-1 do
+               begin
+               Val:=XGraph^[i];
+               if Val>XGraphMax then XGraphMax:=Val;
+               end;
+            end;
+         end
+      else if XGraph^[Index]=XGraphMin then
+         begin
+         XGraph^[Index]:=Value;
+         if Value>XGraphMin then
+            begin
+            XGraphMin:=MaxDouble;
+            for i:=0 to NbPoints-1 do
+               begin
+               Val:=XGraph^[i];
+               if Val<XGraphMin then XGraphMin:=Val;
+               end;
+            end;
+         end;
+      end;
+   end;
+
+  XGraph^[Index]:=Value;
+
+  Chart.Invalidate;
+end;
+
+procedure TTASerie.SetYValue(Index:Integer;Value:Double);
+var
+   i:Integer;
+   Val:Double;
+begin
+if not(UpdateInProgress) then
+   begin
+   if Value<YGraphMin then YGraphMin:=Value
+   else if Value>YGraphMax then YGraphMax:=Value
+   else
+      begin
+      if YGraph^[Index]=YGraphMax then
+         begin
+         YGraph^[Index]:=Value;
+         if Value<YGraphMax then
+            begin
+            YGraphMax:=MinDouble;
+            for i:=0 to NbPoints-1 do
+               begin
+               Val:=YGraph^[i];
+               if Val>YGraphMax then YGraphMax:=Val;
+               end;
+            end;
+         end
+      else if YGraph^[Index]=YGraphMin then
+         begin
+         YGraph^[Index]:=Value;
+         if Value>YGraphMin then
+            begin
+            YGraphMin:=MaxDouble;
+            for i:=0 to NbPoints-1 do
+               begin
+               Val:=YGraph^[i];
+               if Val<YGraphMin then YGraphMin:=Val;
+               end;
+            end;
+         end;
+      end;
+   end;
+
+  YGraph^[Index]:=Value;
+
+  Chart.Invalidate;
+end;
+
+function TTASerie.GetXImgValue(Index:Integer):Integer;
+begin
+Result:=XImage^[Index];
+end;
+
+function TTASerie.GetYImgValue(Index:Integer):Integer;
+begin
+Result:=YImage^[Index];
+end;
+
+procedure TTASerie.Delete(Index:Integer);
+var
+   i:Integer;
+begin
+if Index<NBPoints-1 then
+   begin
+   for i:=Index+1 to NBPoints-1 do
+      begin
+      XGraph^[i-1]:=XGraph^[i];
+      YGraph^[i-1]:=YGraph^[i];
+      end;
+   end;
+Dec(NBPoints);
+Chart.Invalidate;
+end;
+
+function TTASerie.GetXMin:Double;
+begin
+Result:=XGraphMin;
+end;
+
+function TTASerie.GetXMax:Double;
+begin
+Result:=XGraphMax;
+end;
+
+function TTASerie.GetYMin:Double;
+begin
+Result:=YGraphMin;
+end;
+
+function TTASerie.GetYMax:Double;
+begin
+Result:=YGraphMax;
+end;
+
+procedure TTASerie.GetMax(var X,Y:Double);
+begin
+X:=XOfYGraphMax;
+Y:=YGraphMax;
+end;
+
+procedure TTASerie.GetMin(var X,Y:Double);
+begin
+X:=XOfYGraphMin;
+Y:=YGraphMin;
+end;
+
+procedure TTASerie.SetColor(Index:Integer;_Color:TColor);
+begin
+ColorR^[Index]:=GetRValue(_Color);
+ColorG^[Index]:=GetGValue(_Color);
+ColorB^[Index]:=GetBValue(_Color);
+end;
+
+function TTASerie.GetColor(Index:Integer):TColor;
+begin
+Result:=RGB(ColorR^[Index],ColorG^[Index],ColorB^[Index]);
+end;
+
+procedure TTASerie.LineFit;
+var
+   x,y,Sig:PTALigDouble;
+   i,NbData:Integer;
+   var A:TADoubleArrayRow;
+   var Covar:TADoubleArray;
+   var ChiSQ:Double;
+begin
+if (FIndexMaxFit=0) and (FIndexMinFit=0) then
+   begin
+   FIndexMinFit:=0;
+   FIndexMaxFit:=NbPoints-1;
+   end;
+
+NBData:=FIndexMaxFit-FIndexMinFit+1;
+Getmem(x,(NBData+1)*8);
+Getmem(y,(NBData+1)*8);
+Getmem(Sig,(NBData+1)*8);
+
+try
+
+for i:=FIndexMinFit to FIndexMaxFit do
+   begin
+   x^[i+1]:=XGraph^[i];
+   y^[i+1]:=YGraph^[i];
+   Sig^[i+1]:=1;
+   end;
+
+// Linear least squares
+LFitLin(x,y,Sig,NbData,A,Covar,ChiSQ);
+
+// Coefs
+FAFit:=A[2];
+FBFit:=A[1];
+if NbData>2 then
+   FErrorFit:=Sqrt(ChiSQ/(NbData-2))
+else
+   FErrorFit:=0;
+
+finally
+Freemem(x,(NBData+1)*8);
+Freemem(y,(NBData+1)*8);
+Freemem(Sig,(NBData+1)*8);
+end;
+end;
+
+procedure TTASerie.DrawLineFit;
+var
+   i:Integer;
+   YLeft,YRight,XBottom,XTop:Double;
+   XLineFit,YLineFit:array[1..2] of Integer;
+begin
+with (Chart as TTAChart) do
+   Canvas.Pen.Assign(FPenFit);
+
+i:=0;
+with (Chart as TTAChart) do
+   begin
+   // Intersections
+   // Y=AFit*X+BFit
+   YLeft:=FAFit*XGraphMin+FBFit;
+   YRight:=FAFit*XGraphMax+FBFit;
+   // X=(Y-BFit)/AFit
+   XBottom:=(YGraphMin-FBFit)/FAFit;
+   XTop:=(YGraphMax-FBFit)/FAFit;
+
+   if (YLeft<YGraphMax) and (YLeft>YGraphMin) then
+      begin
+      Inc(i);
+      XLineFit[i]:=XImageMin;
+      YGraphToImage(YLeft,YLineFit[i]);
+      end;
+   if (YRight<YGraphMax) and (YRight>YGraphMin) then
+      begin
+      Inc(i);
+      XLineFit[i]:=XImageMax;
+      YGraphToImage(YRight,YLineFit[i]);
+      end;
+   if (XBottom<XGraphMax) and (XBottom>XGraphMin) then
+      begin
+      Inc(i);
+      XGraphToImage(XBottom,XLineFit[i]);
+      YLineFit[i]:=YImageMin;
+      end;
+   if (XTop<XGraphMax) and (XTop>XGraphMin) then
+      begin
+      Inc(i);
+      XGraphToImage(XTop,XLineFit[i]);
+      YLineFit[i]:=YImageMax;
+      end;
+   Canvas.MoveTo(XLineFit[1],YLineFit[1]);
+   Canvas.LineTo(XLineFit[2],YLineFit[2]);
+   end;
+end;
+
+procedure TTASerie.SetDisplayFit(Value:Boolean);
+begin
+FDisplayFit:=Value;
+if Chart<>nil then Chart.Invalidate;
+end;
+
+procedure TTASerie.SetTitle(Value:string);
+begin
+FTitle:=Value;
+if Chart<>nil then Chart.Invalidate;
+end;
+
+procedure TTASerie.SetIndexMinFit(Value:Integer);
+begin
+FIndexMinFit:=Value;
+FFitReady:=False;
+if Chart<>nil then Chart.Invalidate;
+end;
+
+procedure TTASerie.SetIndexMaxFit(Value:Integer);
+begin
+FIndexMaxFit:=Value;
+FFitReady:=False;
+if Chart<>nil then Chart.Invalidate;
+end;
+
+procedure TTASerie.SetPenFit(Value:TPen);
+begin
+FPenFit.Assign(Value);
+end;
+
+procedure TTASerie.SetShowPoints(Value:Boolean);
+begin
+FShowPoints:=Value;
+if Chart<>nil then Chart.Invalidate;
+end;
+
+procedure TTASerie.SetShowLines(Value:Boolean);
+begin
+FShowLines:=Value;
+if Chart<>nil then Chart.Invalidate;
+end;
+
+procedure TTASerie.BeginUpdate;
+begin
+UpdateInProgress:=True;
+end;
+
+procedure TTASerie.EndUpdate;
+var
+   i:Integer;
+   Val:Double;   
+begin
+UpdateInProgress:=False;
+
+XGraphMax:=MinDouble;
+XGraphMin:=MaxDouble;
+for i:=0 to NbPoints-1 do
+   begin
+   Val:=XGraph^[i];
+   if Val>XGraphMax then XGraphMax:=Val;
+   if Val<XGraphMin then XGraphMin:=Val;
+   end;
+
+YGraphMax:=MinDouble;
+YGraphMin:=MaxDouble;
+for i:=0 to NbPoints-1 do
+   begin
+   Val:=YGraph^[i];
+   if Val>YGraphMax then YGraphMax:=Val;
+   if Val<YGraphMin then YGraphMin:=Val;
+   end;
+
+Chart.Invalidate;
+end;
+
+//*******************************************************************************
+//*******************************************************************************
+//*******************************************************************************
+
+{ THE CHART SCALES ITS OWN DRAWING, because nothing else can.
+
+  Every other control in this application is scaled by the LCL: it reads the
+  bounds and the font off the streamed form and multiplies them by the ratio
+  between the design ppi and the ppi of the monitor the form opened on. That
+  machinery works on control bounds and control fonts. It cannot reach inside a
+  Paint method, and this control is very nearly nothing but a Paint method - the
+  axis frame, the tick marks, the gaps around the numbers and the size of the
+  numbers themselves are all literal pixel counts handed straight to a Canvas.
+
+  So on a 192 dpi display the window scaled and the chart inside it did not: a
+  full-size panel drawn with hairline ticks, four-pixel gaps and 13-pixel axis
+  numbers. Every one of those counts now goes through here.
+
+  Scale96ToFont rather than Scale96ToForm: these numbers are all in the company
+  of text - a tick is sized to sit beside its label, a margin is sized to hold
+  one - and it is the font's ppi that decides how big that text comes out.
+
+  Never returns 0 for a positive request: a gap of 4 may become 8, but a pen of
+  1 must not round down to a pen of 0, which draws nothing. }
+function TTAChart.Sc(ADesignPixels:Integer):Integer;
+begin
+Result:=Scale96ToFont(ADesignPixels);
+if (Result<1) and (ADesignPixels>0) then Result:=1;
+end;
+
+constructor TTAChart.Create(AOwner:TComponent);
+begin
+inherited Create(AOwner);
+
+Bitmap:=TBitmap.Create;                     //  DM 20/11/08
+Bitmap.Width:=600;                          // initialization
+Bitmap.Height:=450;
+
+Width:=600;
+Height:=450;
+
+XMarkOld:=-1;
+YMarkOld:=-1;
+
+SeriesList:=TList.Create;
+
+YMarkWidth:=35;
+
+FAutoUpdateXMin:=True;
+FAutoUpdateXMax:=True;
+FAutoUpdateYMin:=True;
+FAutoUpdateYMax:=True;
+
+// causes resetting ParentColor ParentColor
+//Color:=clBtnFace;                         //  DM 20/11/07
+AxisColor:=clBlack;
+
+FXGraphMax:=0;
+FXGraphMin:=0;
+FYGraphMax:=0;
+FYGraphMin:=0;
+
+MirrorX:=False;
+Fixed:=False;
+Zoom:=False;
+FShowTitle:=False;
+FShowLegend:=False;
+FShowReticule:=False;
+FShowVerticalReticule:=False;
+
+FGraphBrush:=TBrush.Create;
+FGraphBrush.OnChange:=StyleChanged;
+
+FTitleFont:=TFont.Create;
+FTitleFont.OnChange:=StyleChanged;
+end;
+
+destructor TTAChart.Destroy;
+var
+   MySerie:TTASerie;
+begin
+while SeriesCount>0 do
+   begin
+   MySerie:=SeriesList[0];
+   FSerieCount:=FSerieCount-1;
+   MySerie.Free;
+   SeriesList.Delete(0);
+   end;
+
+SeriesList.Free;
+FGraphBrush.Free;
+
+Bitmap.Free;                                //  DM  20/11/08
+
+inherited Destroy;
+end;
+
+procedure TTAChart.StyleChanged(Sender: TObject);
+begin
+Invalidate;
+end;
+
+procedure TTAChart.Paint;
+var
+   Started:Int64;
+begin
+Started:=Int64(GetTickCount64);
+//YImageMin:=Height-20;
+YImageMin:=Height-Sc(20)-BottomMargin;                          // DM 09/10/07
+YImageMax:=Sc(5);
+
+if FShowTitle then
+   YImageMax:=YImageMax+Sc(5)+Canvas.TextHeight(FTitle);
+
+if FShowAxisLabel then
+   begin
+   YImageMax:=YImageMax+Sc(5)+Canvas.TextHeight(FYAxisLabel);
+   //YImageMin:=YImageMin-5-Canvas.TextHeight(FXAxisLabel);
+   YImageMin:=YImageMin-Sc(5)-Canvas.TextHeight(FXAxisLabel)-BottomMargin;  // DM 09/10/07
+   end;
+
+if FMirrorX then
+   begin
+   //XImageMin:=Width-YMarkWidth-GetLegendWidth;
+   XImageMin:=Width-YMarkWidth-GetLegendWidth-RightMargin;  // DM 09/10/07
+   XImageMax:=Sc(10);
+   end
+else
+   begin
+   XImageMin:=YMarkWidth;
+   //XImageMax:=Width-10-GetLegendWidth;
+   XImageMax:=Width-Sc(10)-GetLegendWidth-RightMargin;          // DM 09/10/07
+   end;
+
+Refresh;
+
+if Assigned(FOnPaintTiming) then
+   FOnPaintTiming(Int64(GetTickCount64)-Started,FPaintDetail);
+end;
+
+procedure TTAChart.Clean;
+begin
+Canvas.Pen.Mode:=pmCopy;
+Canvas.Pen.Style:=psSolid;
+Canvas.Pen.Color:=Color;
+Canvas.Brush.Color:=Color;
+Canvas.Brush.Style:=bsSolid;
+Canvas.Rectangle(0,0,Width,Height);
+end;
+
+procedure TTAChart.DrawTitle;
+begin
+//Canvas.Brush.Assign(FGraphBrush);
+if FShowTitle then
+   begin
+   Canvas.Brush.Color:=Color;
+   Canvas.Font.Color:=clBlack;
+   //  THE CONTROL'S OWN FONT, not a pixel count of this unit's choosing. A
+   //  literal height here made the chart's text a different size from every
+   //  other caption in the window - and, once the window started following the
+   //  desktop's font, a visibly smaller one. Font is already scaled for the
+   //  display by the LCL, so this is correct at any ppi with nothing to convert.
+   Canvas.Font.Assign(Font);
+   Canvas.TextOut((Width-Canvas.TextWidth(FTitle)) div 2,Sc(5),Title);
+   end;
+end;
+
+{ On the cost of an axis. Every TextWidth, TextHeight and TextOut builds and
+  measures a text layout in the widget toolkit, and this routine runs on every
+  repaint: with ten marks an axis, the naive form asks for some sixty of them,
+  which measured at 7 of a 9 ms repaint once the series had been made cheap -
+  i.e. the axis had become the slowest thing on the chart.
+
+  Three things follow, and none of them changes what is drawn:
+
+  - the Y labels are measured once, not twice. The widths are needed BEFORE the
+    geometry is known (they set the left margin) and again while drawing, and
+    the mark sequence is identical in both passes, so the strings and widths are
+    kept from the first;
+  - the label height is asked for once. The font does not change between marks,
+    so neither does the height;
+  - the state that is the same for every mark - font, pen width, pen mode - is
+    set once outside the loops rather than per mark.
+
+  The font is also now set BEFORE the measuring pass. It used to be assigned
+  only in the drawing loops, so the left margin was computed with whatever font
+  the control happened to carry and the labels were then drawn at another size:
+  measuring with the font you draw with is what makes the margin right. }
+procedure TTAChart.DrawAxis;
+var
+  LargTexte,MaxLargTexte,HautTexte:Integer;
+  XTemp,YTemp,XPos:Integer;
+  MyText:string;
+  Marque,Debut,Pas:Double;
+  YTexts:array of string;                       //  the Y labels, measured once
+  YWidths:array of Integer;
+  YCount,YIndex:Integer;
+begin
+//  Every mark is drawn with this font, so measure with it too - and set it once.
+//  The font every mark is drawn with - the control's own, see DrawTitle.
+Canvas.Font.Assign(Font);
+Canvas.Pen.Width:=Sc(1);
+Canvas.Pen.Mode:=pmCopy;
+//  Constant for every label, so it is not asked for once per mark.
+HautTexte:=Canvas.TextHeight('0') div 2;
+
+// Find max mark width
+MaxLargTexte:=0;
+Debut:=FYGraphMax;
+Pas:=1;
+YCount:=0;
+SetLength(YTexts,0);
+SetLength(YWidths,0);
+CalculateBounds(FYGraphMin,FYGraphMax,Debut,Pas);
+if FYGraphMin<>FYGraphMax then
+   begin
+   Marque:=Debut;
+   while Marque<=FYGraphMax+Pas*10e-10 do
+      begin
+      if (Marque>=FYGraphMin) then
+         begin
+         YGraphToImage(Marque,YTemp);
+         MyText:=Trim(Format('%6.4g',[Marque]));
+         LargTexte:=Canvas.TextWidth(MyText);
+         if LargTexte>MaxLargTexte then MaxLargTexte:=LargTexte;
+         //  Kept for the drawing pass below, which walks the same marks.
+         SetLength(YTexts,YCount+1);
+         SetLength(YWidths,YCount+1);
+         YTexts[YCount]:=MyText;
+         YWidths[YCount]:=LargTexte;
+         Inc(YCount);
+         end;
+      Marque:=Marque+Pas;
+      end;
+   end;
+
+YMarkWidth:=Sc(35);
+if MaxLargTexte+Sc(7)+Sc(7)>YMarkWidth then
+   begin
+   YMarkWidth:=MaxLargTexte+Sc(7)+Sc(7);
+
+   if FMirrorX then
+      begin
+      XImageMin:=Width-YMarkWidth-GetLegendWidth-RightMargin;   // DM 09/10/07
+      XImageMax:=Sc(10);
+      end
+   else
+      begin
+      XImageMin:=YMarkWidth;
+      XImageMax:=Width-Sc(10)-GetLegendWidth-RightMargin;           // DM 09/10/07
+      end;
+
+   // Update coefs
+   ax:=(XImageMax-XImageMin)/(FXGraphMax-FXGraphMin);
+   bx:=XImageMax-ax*FXGraphMax;
+   ay:=(YImageMax-YImageMin)/(FYGraphMax-FYGraphMin);
+   by:=YImageMax-ay*FYGraphMax;
+   end;
+
+// Back
+// Cleaning and drawing frame
+//Canvas.Pen.Style:=psClear;                                    //  DM 20/11/07
+Canvas.Pen.Mode:=pmCopy;                                        //  DM 20/11/07
+Canvas.Pen.Color:=AxisColor;                                    //  DM 20/11/07
+Canvas.Pen.Style:=psSolid;                                      //  DM 20/11/07
+Canvas.Pen.Width:=Sc(1);                                        //  DM 20/11/07
+// Must be namely white for correct drawing of lines via xor
+Canvas.Brush.Color:=clWhite;                                    //  DM 20/11/07
+Canvas.Brush.Assign(FGraphBrush);
+Canvas.Rectangle(XImageMin,YImageMin,XImageMax,YImageMax);
+
+// Axes
+//Canvas.Pen.Style:=psSolid;                                    //  DM 20/11/07
+//Canvas.Pen.Mode:=pmCopy;
+//Canvas.Pen.Color:=AxisColor;
+//Canvas.Pen.Style:=psSolid;
+//Canvas.Pen.Width:=2;
+//Canvas.MoveTo(XImageMin,YImageMin);
+//Canvas.LineTo(XImageMin,YImageMax);
+//Canvas.MoveTo(XImageMin,YImageMin);
+//Canvas.LineTo(XImageMax,YImageMin);
+//Canvas.Pen.Width:=1;
+//Canvas.MoveTo(XImageMin,YImageMax);
+//Canvas.LineTo(XImageMax,YImageMax);
+//Canvas.MoveTo(XImageMax,YImageMin);
+//Canvas.LineTo(XImageMax,YImageMax);
+
+// Axis Labels
+if FShowAxisLabel then
+   begin
+   Canvas.Brush.Color:=Color;
+   Canvas.Font.Color:=clBlack;
+   //  THE CONTROL'S OWN FONT, not a pixel count of this unit's choosing. A
+   //  literal height here made the chart's text a different size from every
+   //  other caption in the window - and, once the window started following the
+   //  desktop's font, a visibly smaller one. Font is already scaled for the
+   //  display by the LCL, so this is correct at any ppi with nothing to convert.
+   Canvas.Font.Assign(Font);
+   if FMirrorX then
+      begin
+      if FShowTitle then
+         Canvas.TextOut(Width-Canvas.TextWidth(FYAxisLabel)-Sc(5),Sc(25),FYAxisLabel)
+      else
+         Canvas.TextOut(Width-Canvas.TextWidth(FYAxisLabel)-Sc(5),Sc(5),YAxisLabel);
+      Canvas.TextOut(Sc(5),Height-Sc(5)-Canvas.TextHeight(FXAxisLabel),FXAxisLabel);
+      end
+   else
+      begin
+      if FShowTitle then
+         Canvas.TextOut(Sc(5),Sc(25),FYAxisLabel)
+      else
+         Canvas.TextOut(Sc(5),Sc(5),YAxisLabel);
+      Canvas.TextOut(Width-Canvas.TextWidth(FXAxisLabel)-Sc(5),
+         Height-Sc(5)-Canvas.TextHeight(FXAxisLabel),FXAxisLabel);
+      end;
+   end;
+
+// X graduations
+Debut:=FXGraphMax;
+Pas:=1;
+CalculateBounds(FXGraphMin,FXGraphMax,Debut,Pas);
+if FXGraphMin<>FXGraphMax then
+   begin
+   Marque:=Debut;
+   while Marque<=FXGraphMax+Pas*10e-10 do
+      begin
+      if (Marque>=FXGraphMin) then
+         begin
+         XGraphToImage(Marque,XTemp);
+         Canvas.Pen.Color:=clGray;
+         Canvas.Pen.Style:=psDot;
+         Canvas.Brush.Assign(FGraphBrush);
+         if (XTemp<>XImageMax) and (XTemp<>XImageMin) then
+            begin
+            Canvas.MoveTo(XTemp,YImageMin);
+            Canvas.LineTo(XTemp,YImageMax);
+            end;
+         Canvas.Pen.Color:=AxisColor;
+         Canvas.Pen.Style:=psSolid;
+         Canvas.MoveTo(XTemp,YImageMin-Sc(4));
+         Canvas.LineTo(XTemp,YImageMin+Sc(4));
+         Canvas.Brush.Color:=Color;
+         MyText:=Trim(Format('%6.4g',[Marque]));
+         LargTexte:=Canvas.TextWidth(MyText) div 2;
+         XPos:=XTemp-LargTexte;
+         if XPos<1 then Xpos:=1;
+         if XPos+LargTexte*2>Width then Xpos:=Width-LargTexte*2-1;
+         Canvas.TextOut(Xpos,YImageMin+Sc(4),MyText);
+         end;
+      Marque:=Marque+Pas;
+      end;
+   end;
+
+// Y graduations
+MaxLargTexte:=0;
+Debut:=FYGraphMax;
+Pas:=1;
+YIndex:=0;
+CalculateBounds(FYGraphMin,FYGraphMax,Debut,Pas);
+if FYGraphMin<>FYGraphMax then
+   begin
+   Marque:=Debut;
+   while Marque<=FYGraphMax+Pas*10e-10 do
+      begin
+      if (Marque>=FYGraphMin) then
+         begin
+         YGraphToImage(Marque,YTemp);
+         Canvas.Pen.Color:=clGray;
+         Canvas.Pen.Style:=psDot;
+         Canvas.Brush.Assign(FGraphBrush);
+         if (YTemp<>YImageMax) and (YTemp<>YImageMin) then
+            begin
+            Canvas.MoveTo(XImageMin,YTemp);
+            Canvas.LineTo(XImageMax,YTemp);
+            end;
+         Canvas.Pen.Color:=AxisColor;
+         Canvas.Pen.Style:=psSolid;
+         Canvas.MoveTo(XImageMin-Sc(4),YTemp);
+         Canvas.LineTo(XImageMin+Sc(4),YTemp);
+         Canvas.Brush.Color:=Color;
+         //  Measured in the pass above, which walked these same marks.
+         if YIndex<YCount then
+            begin
+            MyText:=YTexts[YIndex];
+            LargTexte:=YWidths[YIndex];
+            end
+         else
+            begin
+            //  Belt and braces: if the sequences ever diverge, fall back to
+            //  measuring rather than drawing the wrong label.
+            MyText:=Trim(Format('%6.4g',[Marque]));
+            LargTexte:=Canvas.TextWidth(MyText);
+            end;
+         Inc(YIndex);
+         if FMirrorX then
+            Canvas.TextOut(XImageMin+Sc(6),YTemp-HautTexte,MyText)
+         else
+            Canvas.TextOut(XImageMin-Sc(7)-LargTexte,YTemp-HautTexte,MyText);
+         end;
+      Marque:=Marque+Pas;
+      end;
+   end;
+
+end;
+
+procedure TTAChart.DrawLegend;
+var
+   w,h,x1,y1,x2,y2,i,TH:Integer;
+   MySerie:TTASerie;
+begin
+w:=GetLegendWidth;
+TH:=Canvas.TextHeight('I');
+h:=Sc(5)+SeriesCount*(TH+Sc(5));
+x1:=Width-w-Sc(5);
+y1:=(Height-h) div 2;
+x2:=x1+w;
+y2:=y1+h;
+
+// Border
+Canvas.Brush.Assign(FGraphBrush);
+Canvas.Pen.Style:=psSolid;
+Canvas.Pen.Mode:=pmCopy;
+Canvas.Pen.Color:=AxisColor;
+Canvas.Pen.Style:=psSolid;
+Canvas.Pen.Width:=Sc(1);
+Canvas.Rectangle(x1,y1,x2,y2);
+
+// Lines and Series titles
+for i:=0 to SeriesCount-1 do
+   begin
+   MySerie:=SeriesList[i];
+   Canvas.TextOut(x1+Sc(20),y1+Sc(5)+i*(TH+Sc(5)),MySerie.Title);
+   Canvas.Pen.Color:=MySerie.GetColor(0);
+   Canvas.MoveTo(x1+Sc(5),y1+Sc(5)+i*(TH+Sc(5))+TH div 2);
+   Canvas.LineTo(x1+Sc(15),y1+Sc(5)+i*(TH+Sc(5))+TH div 2);
+   end;
+
+end;
+
+procedure TTAChart.SetAutoUpdateXMin(Value:Boolean);
+begin
+FAutoUpdateXMin:=Value;
+end;
+
+procedure TTAChart.SetAutoUpdateXMax(Value:Boolean);
+begin
+FAutoUpdateXMax:=Value;
+end;
+
+procedure TTAChart.SetAutoUpdateYMin(Value:Boolean);
+begin
+FAutoUpdateYMin:=Value;
+end;
+
+procedure TTAChart.SetAutoUpdateYMax(Value:Boolean);
+begin
+FAutoUpdateYMax:=Value;
+end;
+
+procedure TTAChart.SetXGraphMin(Value:Double);
+begin
+FXGraphMin:=Value;
+//Invalidate;   DM 10/10/07
+end;
+
+procedure TTAChart.SetYGraphMin(Value:Double);
+begin
+FYGraphMin:=Value;
+//Invalidate;   DM 10/10/07
+end;
+
+procedure TTAChart.SetXGraphMax(Value:Double);
+begin
+FXGraphMax:=Value;
+//Invalidate;   DM 10/10/07
+end;
+
+procedure TTAChart.SetYGraphMax(Value:Double);
+begin
+FYGraphMax:=Value;
+//Invalidate;   DM 10/10/07
+end;
+
+procedure TTAChart.SetMirrorX(Value:Boolean);
+begin
+if Value<>FMirrorX then
+   begin
+   if FMirrorX then
+      begin
+      XImageMin:=YMarkWidth;
+      //XImageMax:=Width-10-GetLegendWidth;
+      XImageMax:=Width-Sc(10)-GetLegendWidth-RightMargin;           // DM 09/10/07
+      FMirrorX:=False;
+      end
+   else
+      begin
+      //XImageMin:=Width-YMarkWidth-GetLegendWidth;
+      XImageMin:=Width-YMarkWidth-GetLegendWidth-RightMargin;   // DM 09/10/07
+      XImageMax:=Sc(10);
+      FMirrorX:=True;
+      end;
+   Invalidate;
+   end;
+end;
+
+procedure TTAChart.SetShowTitle(Value:Boolean);
+begin
+FShowTitle:=Value;
+Invalidate;
+end;
+
+procedure TTAChart.SetShowLegend(Value:Boolean);
+begin
+FShowLegend:=Value;
+Invalidate;
+end;
+
+procedure TTAChart.SetTitle(Value:string);
+begin
+FTitle:=Value;
+Invalidate;
+end;
+
+procedure TTAChart.SetTitleFont(Value:TFont);
+begin
+FTitleFont.Assign(Value);
+end;
+
+procedure TTAChart.SetShowAxisLabel(Value:Boolean);
+begin
+FShowAxisLabel:=Value;
+Invalidate;
+end;
+
+procedure TTAChart.SetXAxisLabel(Value:string);
+begin
+FXAxisLabel:=Value;
+Invalidate;
+end;
+
+procedure TTAChart.SetYAxisLabel(Value:string);
+begin
+FYAxisLabel:=Value;
+Invalidate;
+end;
+
+function TTAChart.GetLegendWidth:Integer;
+var
+   i,j,k:Integer;
+   MySerie:TTASerie;
+begin
+if not FShowLegend then begin Result:=0; Exit; end;
+
+j:=0;
+for i:=0 to SeriesCount-1 do
+   begin
+   MySerie:=SeriesList[i];
+   k:=Canvas.TextWidth(MySerie.Title);
+   if k>j then j:=k;
+   end;
+Result:=j+Sc(20)+Sc(10);
+end;
+
+procedure TTAChart.SetGraphBrush(Value:TBrush);
+begin
+FGraphBrush.Assign(Value);
+end;
+
+procedure TTAChart.AddSerie(Serie:TComponent);
+begin
+if FShowVerticalReticule then
+   DrawVerticalReticule(XMarkOld);
+if FShowReticule then
+   DrawReticule(XMarkOld,YMarkOld);
+
+Inc(FSerieCount);
+SeriesList.Add(Serie);
+if Serie is TTASerie then (Serie as TTASerie).Chart:=Self;
+if Serie is TTALine then (Serie as TTALine).Chart:=Self;
+end;
+
+procedure TTAChart.DeleteSerie(Serie:TComponent);
+var
+   i:Integer;
+   MySerie:TComponent;
+begin
+i:=0;
+while i< SeriesCount do
+   begin
+   MySerie:=SeriesList[i];
+   if Serie=MySerie then
+      begin
+      SeriesList.Delete(i);
+      Dec(FSerieCount);
+      Invalidate;
+      end
+   else Inc(i);
+   end;
+end;
+
+function TTAChart.GetSerie(i:Integer):TComponent;
+begin
+Result:=SeriesList[i];
+end;
+
+procedure TTAChart.SetAutoXMin(Auto:Boolean);
+begin
+FAutoUpdateXMin:=Auto;
+Refresh;
+end;
+
+procedure TTAChart.SetAutoXMax(Auto:Boolean);
+begin
+FAutoUpdateXMax:=Auto;
+Refresh;
+end;
+
+procedure TTAChart.SetAutoYMin(Auto:Boolean);
+begin
+FAutoUpdateYMin:=Auto;
+Refresh;
+end;
+
+procedure TTAChart.SetAutoYMax(Auto:Boolean);
+begin
+FAutoUpdateYMax:=Auto;
+Refresh;
+end;
+
+procedure TTAChart.Refresh;
+var
+   Tolerance,Valeur:Double;
+   i:Integer;
+   NBPointsMax:Integer;
+   Serie:TComponent;
+   XMinSeries,XMaxSeries,YMinSeries,YMaxSeries:Double;
+   SerieNumber,PointNumber:Integer;
+   R:TRect;                                     //  DM  20/11/08
+   Phase:Int64;
+
+   { Appends "<name>=<n>ms" for a phase that took any measurable time, and
+     restarts the clock for the next one. Silent phases stay out, so an ordinary
+     repaint reports nothing and a slow one names only what was slow. }
+   procedure AddPhase(const AName:string;var AStarted:Int64);
+   var Elapsed:Int64;
+   begin
+   Elapsed:=Int64(GetTickCount64)-AStarted;
+   if Elapsed>0 then
+      FPaintDetail:=FPaintDetail+Format(' %s=%dms',[AName,Elapsed]);
+   AStarted:=Int64(GetTickCount64);
+   end;
+
+begin
+FPaintDetail:='';
+if FShowVerticalReticule then                   //  removing marker lines
+   DrawVerticalReticule(XMarkOld);
+if FShowReticule then
+   DrawReticule(XMarkOld,YMarkOld);
+
+// Search # of points, min and max of all series
+if Zoom then
+   begin
+   Zoom:=False;
+   Fixed:=True;
+   XImageToGraph(ZoomRect.Left,FXGraphMin);     //  rectangle boundaries in pixels
+   XImageToGraph(ZoomRect.Right,FXGraphMax);    //  are transformed in unit of chart
+   YImageToGraph(ZoomRect.Bottom,FYGraphMin);
+   YImageToGraph(ZoomRect.Top,FYGraphMax);
+   end
+else if not Fixed then
+   begin
+   XMinSeries:=MaxDouble;
+   XMaxSeries:=MinDouble;
+   YMinSeries:=MaxDouble;
+   YMaxSeries:=MinDouble;
+   NBPointsMax:=0;
+   for i:=0 to SeriesList.Count-1 do
+      begin
+      Serie:=SeriesList[i];
+      if Serie is TTASerie then
+         with TTASerie(Serie) do
+            begin
+            NBPointsMax:=NBPointsMax+Count;
+            if XGraphMin<XMinSeries then XMinSeries:=XGraphMin;
+            if YGraphMin<YMinSeries then YMinSeries:=YGraphMin;
+            if XGraphMax>XMaxSeries then XMaxSeries:=XGraphMax;
+            if YGraphMax>YMaxSeries then YMaxSeries:=YGraphMax;
+            end;
+      if Serie is TTALine then
+         with TTALine(Serie) do
+            begin
+            if Visible then
+               begin
+               NBPointsMax:=NBPointsMax+1;
+               case LineStyle of
+                  lsHorizontal:
+                     begin
+                     if Position<YMinSeries then YMinSeries:=Position;
+                     if Position>YMaxSeries then YMaxSeries:=Position;
+                     end;
+                  lsVertical:
+                     begin
+                     if Position<XMinSeries then XMinSeries:=Position;
+                     if Position>XMaxSeries then XMaxSeries:=Position;
+                     end;
+                  end;
+               end;
+            end;
+      end;
+
+   if XMinSeries>MaxDouble/10 then XMinSeries:=0;
+   if YMinSeries>MaxDouble/10 then YMinSeries:=0;   
+   if XMaxSeries<MinDouble/10 then XMaxSeries:=0;
+   if YMaxSeries<MinDouble/10 then YMaxSeries:=0;
+
+   // Image coordinates calculation
+   // Update max in graph
+   // If one point : +/-10% of the point coordinates
+   Tolerance:=0.1;
+   if NBPointsMax=1 then
+      begin
+      if XMinSeries<>0 then
+         begin
+         if XMinSeries>0 then
+            begin
+            if FAutoUpdateXMin then FXGraphMin:=(1-Tolerance)*XMinSeries;
+            if FAutoUpdateXMax then FXGraphMax:=(1+Tolerance)*XMinSeries;
+            end
+         else
+            begin
+            if FAutoUpdateXMin then FXGraphMin:=(1+Tolerance)*XMinSeries;
+            if FAutoUpdateXMax then FXGraphMax:=(1-Tolerance)*XMinSeries;
+            end;
+         end
+      else
+         begin
+         if FAutoUpdateXMin then FXGraphMin:=XMinSeries-1;
+         if FAutoUpdateXMax then FXGraphMax:=XMinSeries+1;
+         end;
+      if YMinSeries<>0 then
+         begin
+         if YMinSeries>0 then
+            begin
+            if FAutoUpdateYMin then FYGraphMin:=(1-Tolerance)*YMinSeries;
+            if FAutoUpdateYMax then FYGraphMax:=(1+Tolerance)*YMinSeries;
+            end
+         else
+            begin
+            if FAutoUpdateYMin then FYGraphMin:=(1+Tolerance)*YMinSeries;
+            if FAutoUpdateYMax then FYGraphMax:=(1-Tolerance)*YMinSeries;
+            end;
+         end
+      else
+         begin
+         if FAutoUpdateYMin then FYGraphMin:=YMinSeries-1;
+         if FAutoUpdateYMax then FYGraphMax:=YMinSeries+1;
+         end;
+      end
+   else if NbPointsMax>1 then
+   // If several points : automatic +/-10% of interval
+      begin
+      Valeur:=Tolerance*(XMaxSeries-XMinSeries);
+      if Valeur<>0 then
+         begin
+         if FAutoUpdateXMin then FXGraphMin:=XMinSeries-Valeur;
+         if FAutoUpdateXMax then FXGraphMax:=XMaxSeries+Valeur;
+         end
+      else
+         begin
+         if FAutoUpdateXMin then FXGraphMin:=XMinSeries-1;
+         if FAutoUpdateXMax then FXGraphMax:=XMaxSeries+1;
+         end;
+      Valeur:=Tolerance*(YMaxSeries-YMinSeries);
+      if Valeur<>0 then
+         begin
+         if FAutoUpdateYMin then FYGraphMin:=YMinSeries-Valeur;
+         if FAutoUpdateYMax then FYGraphMax:=YMaxSeries+Valeur;
+         end
+      else
+         begin
+         if FAutoUpdateYMin then FYGraphMin:=YMinSeries-1;
+         if FAutoUpdateYMax then FYGraphMax:=YMinSeries+1;
+         end;
+      end
+   else
+   // 0 Points
+      begin
+      FXGraphMin:=0;
+      FXGraphMax:=0;
+      FYGraphMin:=0;
+      FYGraphMax:=0;
+      end;
+   end;
+
+// Image <-> Graph coeff calculation
+if FXGraphMax<>FXGraphMin then
+   begin
+   ax:=(XImageMax-XImageMin)/(FXGraphMax-FXGraphMin);
+   bx:=XImageMax-ax*FXGraphMax;
+   end
+else
+   begin
+   ax:=1;
+   bx:=0;
+   end;
+if FYGraphMax<>FYGraphMin then
+   begin
+   ay:=(YImageMax-YImageMin)/(FYGraphMax-FYGraphMin);
+   by:=YImageMax-ay*FYGraphMax;
+   end
+else
+   begin
+   ay:=1;
+   by:=0;
+   end;
+
+//  Phase timing, on the same footing as the per-series timing DisplaySeries
+//  builds: a repaint whose cost is NOT in the series has to name where it is
+//  instead, or the next slow phase is as unattributable as the last one was.
+Phase:=Int64(GetTickCount64);
+Clean;
+AddPhase('clean',Phase);
+DrawTitle;
+AddPhase('title',Phase);
+DrawAxis;
+AddPhase('axis',Phase);
+DisplaySeries;
+AddPhase('series',Phase);
+if FShowLegend then
+   begin
+   DrawLegend;
+   AddPhase('legend',Phase);
+   end;
+
+if FShowVerticalReticule then
+   DrawVerticalReticule(XMarkOld);
+if FShowReticule then
+   DrawReticule(XMarkOld,YMarkOld);
+
+AddPhase('reticule',Phase);
+
+R.Left:=0;R.Right:=ClientWidth;
+R.Top:=0;R.Bottom:=ClientHeight;
+with Self as TGraphicControl do             //  DM  20/11/08
+    Canvas.CopyRect(R,Bitmap.Canvas,R);
+AddPhase('blit',Phase);
+end;
+
+procedure TTAChart.XGraphToImage(Xin:Double;var XOut:Integer);
+begin
+XOut:=Round(ax*XIn+bx);
+end;
+
+procedure TTAChart.YGraphToImage(Yin:Double;var YOut:Integer);
+begin
+YOut:=Round(ay*YIn+by);
+end;
+
+procedure TTAChart.GraphToImage(Xin,Yin:Double;var XOut,YOut:Integer);
+begin
+XGraphToImage(Xin,XOut);
+YGraphToImage(Yin,YOut);
+end;
+
+procedure TTAChart.XImageToGraph(XIn:Integer;var XOut:Double);
+begin
+XOut:=(XIn-bx)/ax;
+end;
+
+procedure TTAChart.YImageToGraph(YIn:Integer;var YOut:Double);
+begin
+YOut:=(YIn-by)/ay;
+end;
+
+procedure TTAChart.ImageToGraph(XIn,YIn:Integer;var XOut,YOut:Double);
+begin
+XImageToGraph(XIn,XOut);
+YImageToGraph(YIn,YOut);
+end;
+
+{ Background bands are drawn before everything else, so the data lands on top of
+  them. That ordering is what replaced the old "read the pixel back and skip it
+  if a curve is already there" test, which cost one X round trip per pixel; see
+  the comment above TTASerie.DrawHatch.
+
+  Which series is a band is not listed here - each series is asked
+  (IsBackgroundBand), so a new band style needs no edit in this procedure. }
+procedure TTAChart.DisplaySeries;
+var
+   Pass,i:Integer;
+   Serie:TComponent;
+   Band:Boolean;
+   Started,Elapsed:Int64;
+begin
+// Update all series: pass 0 draws the background bands, pass 1 everything else.
+for Pass:=0 to 1 do
+   for i:=0 to SeriesList.Count-1 do
+      begin
+      Serie:=SeriesList[i];
+      if Serie is TTASerie then
+         begin
+         Band:=(Serie as TTASerie).IsBackgroundBand;
+         if Band=(Pass=0) then
+            begin
+            Started:=Int64(GetTickCount64);
+            (Serie as TTASerie).Draw;
+            Elapsed:=Int64(GetTickCount64)-Started;
+            if Elapsed>0 then
+               FPaintDetail:=FPaintDetail+Format(' %s=%dms',
+                  [(Serie as TTASerie).Title,Elapsed]);
+            end;
+         end;
+      //  Lines are annotations over the data, so they keep to the second pass -
+      //  which is where they were drawn when there was only one.
+      if (Serie is TTALine) and (Pass=1) then
+         if (Serie as TTALine).Visible then (Serie as TTALine).Draw;
+      end;
+end;
+
+procedure TTAChart.SetShowVerticalReticule(Value:Boolean);
+begin
+  FShowVerticalReticule:=Value;
+  Invalidate;
+end;
+
+procedure TTAChart.SetShowReticule(Value:Boolean);
+begin
+  FShowReticule:=Value;
+  Invalidate;
+end;
+
+procedure TTAChart.GetPointNextTo(X,Y:Integer;var SerieNumberOut,PointNumberOut,XOut,YOut:Integer);
+var
+   j,k,XPoint,YPoint,SerieNumber,PointNumber:Integer;
+   Mini,Dist,Xg,Yg,XgOut,YgOut:Double;
+   Serie:TComponent;
+   TASerie:TTASerie;
+   T1,T2:Double;
+begin
+Mini:=MaxDouble;
+for SerieNumber:=0 to SeriesList.Count-1 do
+   begin
+   Serie:=SeriesList[SerieNumber];
+   if Serie is TTASerie then
+      begin
+      TASerie:=TTASerie(Serie);
+      if TASerie.ShowPoints or TASerie.ShowLines then   //  DM 27/11/07
+         begin
+            for PointNumber:=0 to TASerie.Count-1 do
+               begin
+               XPoint:=TASerie.GetXImgValue(PointNumber);
+               YPoint:=TASerie.GetYImgValue(PointNumber);
+               T1:=X-XPoint;
+               T2:=Y-YPoint;
+               Dist:=Sqrt(Sqr(T1)+Sqr(T2));
+               if Dist<=Mini then
+                  begin
+                  Mini:=Dist;
+                  SerieNumberOut:=SerieNumber;
+                  PointNumberOut:=PointNumber;
+                  XOut:=XPoint;
+                  YOut:=YPoint;
+                  XgOut:=TASerie.GetXValue(PointNumber);
+                  YgOut:=TASerie.GetYValue(PointNumber);
+                  end;
+               end;
+            if SerieNumberOut=SerieNumber then DoDrawReticule(SerieNumberOut,PointNumberOut,XOut,YOut,XgOut,YgOut);
+         end;
+      end;
+   end;
+end;
+
+procedure TTAChart.GetXPointNextTo(X,Y:Integer;var SerieNumberOut,PointNumberOut,XOut,YOut:Integer);
+var
+   j,k,XPoint,YPoint,SerieNumber,PointNumber:Integer;
+   Mini,Dist,Xg,Yg:Double;
+   Serie:TComponent;
+   TASerie:TTASerie;
+begin
+Mini:=MaxDouble;
+SerieNumberOut:=-1;
+for SerieNumber:=0 to SeriesList.Count-1 do
+   begin
+   Serie:=SeriesList[SerieNumber];
+   if Serie is TTASerie then
+      begin
+      TASerie:=TTASerie(Serie);
+      if TASerie.ShowPoints or TASerie.ShowLines then   //  DM 27/11/07
+         begin
+            for PointNumber:=0 to TASerie.Count-1 do
+               begin
+               XPoint:=TASerie.GetXImgValue(PointNumber);
+               Dist:=Abs(X-XPoint);
+               if Dist<=Mini then
+                  begin
+                  Mini:=Dist;
+                  SerieNumberOut:=SerieNumber;
+                  PointNumberOut:=PointNumber;
+                  XOut:=XPoint;
+                  YOut:=TASerie.GetYImgValue(PointNumber);
+                  Xg:=TASerie.GetXValue(PointNumber);
+                  Yg:=TASerie.GetYValue(PointNumber);
+                  end;
+               end;
+            if SerieNumberOut=SerieNumber then DoDrawVertReticule(SerieNumberOut,PointNumberOut,XOut,YOut,Xg,Yg);
+         end;
+      end;
+   end;
+end;
+
+procedure TTAChart.GetYPointNextTo(X,Y:Integer;var SerieNumberOut,PointNumberOut,XOut,YOut:Integer);
+var
+   j,k,XPoint,YPoint,SerieNumber,PointNumber:Integer;
+   Mini,Dist,Xg,Yg:Double;
+   Serie:TComponent;
+   TASerie:TTASerie;
+begin
+Mini:=MaxDouble;
+for SerieNumber:=0 to SeriesList.Count-1 do
+   begin
+   Serie:=SeriesList[SerieNumber];
+   if Serie is TTASerie then
+      begin
+      TASerie:=TTASerie(Serie);
+      for PointNumber:=0 to TASerie.Count-1 do
+         begin
+         YPoint:=TASerie.GetYImgValue(PointNumber);
+         Dist:=Abs(Y-YPoint);
+         if Dist<=Mini then
+            begin
+            Mini:=Dist;
+            SerieNumberOut:=SerieNumber;
+            PointNumberOut:=PointNumber;
+            XOut:=XPoint;
+            YOut:=YPoint;
+            end;
+         end;
+      end;
+   end;
+end;
+
+procedure TTAChart.MouseDown(Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+Down:=True;
+XDown:=X;
+YDown:=Y;
+XOld:=X;
+YOld:=Y;
+//  removing marker lines
+if FShowVerticalReticule then
+   DrawVerticalReticule(XMarkOld);                                  // DM 22/11/07
+if FShowReticule then
+   DrawReticule(XMarkOld,YMarkOld);                                 // DM 22/11/07
+
+if Assigned(OnMouseDown) then OnMouseDown(Self,Button,Shift,X,Y);   // DM 10/10/07
+end;
+
+procedure TTAChart.DrawReticule(X,Y:Integer);
+begin
+Canvas.Pen.Style:=psSolid;
+Canvas.Pen.Mode:=pmXor;
+//  it would be AxisColor providng that background is white
+Canvas.Pen.Color:=(not AxisColor) and $00FFFFFF;                    //ClWhite; DM 20/11/07
+Canvas.Pen.Style:=psSolid;
+Canvas.Pen.Width:=1;
+//  workaround for correct drawing
+//Canvas.MoveTo(X,YImageMin);                                       // DM 20/11/07
+Canvas.MoveTo(X,YImageMin-2);
+//Canvas.LineTo(X,YImageMax);                                       // DM 20/11/07
+Canvas.LineTo(X,YImageMax+1);
+//Canvas.MoveTo(XImageMin,Y);                                       // DM 20/11/07
+Canvas.MoveTo(XImageMin+1,Y);
+Canvas.LineTo(XImageMax,Y);
+end;
+
+procedure TTAChart.DrawVerticalReticule(X:Integer);
+begin
+Canvas.Pen.Style:=psSolid;
+Canvas.Pen.Mode:=pmXor;
+Canvas.Pen.Color:=(not AxisColor) and $00FFFFFF;                    //ClWhite; DM 20/11/07
+Canvas.Pen.Style:=psSolid;
+Canvas.Pen.Width:=1;
+
+Canvas.MoveTo(X,YImageMin);
+Canvas.LineTo(X,YImageMax);
+end;
+
+procedure TTAChart.MouseMove(Shift: TShiftState; X, Y: Integer);
+var
+   i,SerieNumber,PointNumber,XMin,Xmax,YMin,YMax,Temp:Integer;
+   MySerie:TTASerie;
+begin
+if Down then
+   begin
+   Canvas.Brush.Style:=bsClear;
+   Canvas.Pen.Style:=psSolid;
+   Canvas.Pen.Mode:=pmXor;
+   Canvas.Pen.Color:=ClWhite;
+   Canvas.Pen.Style:=psSolid;
+   Canvas.Pen.Width:=1;
+
+   Canvas.Rectangle(XDown,YDown,XOld,YOld); //  clearing before drawing
+   Canvas.Rectangle(XDown,YDown,X,Y);       //  rectangle
+   
+   XOld:=X;
+   YOld:=Y;
+   end
+else
+   begin
+   XMin:=XImageMin;
+   XMax:=XImageMax;
+   YMin:=YImageMin;
+   YMax:=YImageMax;
+   if XMin>XMax then
+      begin
+      Temp:=XMin;
+      XMin:=XMax;
+      XMax:=Temp;
+      end;
+   if YMin>YMax then
+      begin
+      Temp:=YMin;
+      YMin:=YMax;
+      YMax:=Temp;
+      end;
+
+   for i:=0 to SeriesCount-1 do
+      begin
+      MySerie:=SeriesList[i];
+      if FShowVerticalReticule then
+         begin
+         GetXPointNextTo(X,Y,SerieNumber,PointNumber,XReticule,YReticule);
+         if (XReticule<>XMarkOld) and (XReticule>XMin) and (XReticule<XMax) then
+            begin
+            DrawVerticalReticule(XMarkOld);
+            DrawVerticalReticule(XReticule);
+            FShowVerticalReticule:=True;
+            XMarkOld:=XReticule;
+            YMarkOld:=YReticule;
+            end;
+         end;
+      if FShowReticule then
+         begin
+         GetPointNextTo(X,Y,SerieNumber,PointNumber,XReticule,YReticule);
+         if (XReticule<>XMarkOld) or (YReticule<>YMarkOld) then
+            if (XReticule>=XMin) and (XReticule<=XMax) and (YReticule>=YMin) and (YReticule<=YMax) then
+               begin
+               DrawReticule(XMarkOld,YMarkOld);     //  removing
+               DrawReticule(XReticule,YReticule);   //  and redrawing
+               FShowReticule:=True;
+               XMarkOld:=XReticule;
+               YMarkOld:=YReticule;
+               end;
+         end;
+      end;
+   end;
+end;
+
+procedure TTAChart.MouseUp(Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+if Down then                                        //  key pressed
+   begin
+   XMarkOld:=X;
+   YMarkOld:=Y;
+
+   Canvas.Brush.Style:=bsClear;
+   Canvas.Pen.Style:=psSolid;
+   Canvas.Pen.Mode:=pmXor;
+   Canvas.Pen.Color:=ClWhite;
+   Canvas.Pen.Style:=psSolid;
+   Canvas.Pen.Width:=1;
+
+   Canvas.Rectangle(XDown,YDown,XOld,YOld);         //  rectangle is cleaned
+
+   Down:=False;
+   // workaround to avoid exception
+   // Invalidate should not be called because marker
+   // lines are not drawn in this case
+   if FSeriecount=0 then Exit;                      //  DM 03/10/07
+   // special case is handled when coordianates coincide,
+   // calls Invalidate to hide marker lines
+   if (XDown=XOld) and (YDown=YOld) then
+   begin
+        Fixed:=True;                                //  DM 01/10/07
+   end
+   else
+   begin
+       if (XDown<XOld) and (YDown<YOld) then
+          begin                                     //  area is selected to the right
+                                                    //  and down from initial point,
+          Zoom:=True;                               //  zoomed only on that condition
+          end
+       else
+          begin
+          Zoom:=False;
+          Fixed:=False;
+          end;
+       if XDown<XOld then
+          begin
+          ZoomRect.Left:=XDown;                     //  proper coordinate order
+          ZoomRect.Right:=XOld;                     //  is set up
+          end
+       else
+          begin
+          ZoomRect.Left:=XOld;
+          ZoomRect.Right:=XDown;
+          end;
+       if YDown<YOld then
+          begin
+          ZoomRect.Bottom:=YOld;
+          ZoomRect.Top:=YDown;
+          end
+       else
+          begin
+          ZoomRect.Bottom:=YDown;
+          ZoomRect.Top:=YOld;
+          end;
+   end;
+
+   Invalidate;
+   end;
+   if Assigned(OnMouseUp) then OnMouseUp(Self,Button,Shift,X,Y);    // DM 10/10/07
+end;
+
+procedure TTAChart.DoDrawVertReticule(IndexSerie,Index,Xi,Yi:Integer;Xg,Yg:Double);
+begin
+if Assigned(FDrawVertReticule) then FDrawVertReticule(Self,IndexSerie,Index,Xi,Yi,Xg,Yg);
+end;
+
+procedure TTAChart.DoDrawReticule(IndexSerie,Index,Xi,Yi:Integer;Xg,Yg:Double);
+begin
+if Assigned(FDrawReticule) then FDrawReticule(Self,IndexSerie,Index,Xi,Yi,Xg,Yg);
+end;
+
+function TTAChart.GetNewColor:TColor;
+var
+   i,j:Integer;
+   MySerie:TTASerie;
+   ColorFound:Boolean;
+begin
+for i:=1 to MaxColor do
+   begin
+   ColorFound:=False;
+   for j:=0 to SeriesCount-1 do
+      begin
+      MySerie:=SeriesList[j];
+      if MySerie.GetColor(0)=Colors[i] then
+         ColorFound:=True;
+      end;
+   if not ColorFound then
+      begin
+      Result:=Colors[i];
+      Exit;
+      end;
+   end;
+Randomize;
+Result:=RGB(Random(255),Random(255),Random(255));
+end;
+
+//  DM 25/11/07
+procedure TTAChart.ZoomIn;
+var D: Double;
+begin
+    if SeriesCount <> 0 then
+    begin
+        Zoom := True;
+        D := XGraphMax - XGraphMin;
+        D := D * 0.1;
+        XGraphToImage(XGraphMin + D, ZoomRect.Left);
+        XGraphToImage(XGraphMax - D, ZoomRect.Right);
+
+        D := YGraphMax - YGraphMin;
+        D := D * 0.1;
+        YGraphToImage(YGraphMin + D, ZoomRect.Bottom);
+        YGraphToImage(YGraphMax - D, ZoomRect.Top);
+
+        Invalidate;
+    end;
+    if Assigned(OnZoom) then OnZoom(Self);
+end;
+
+//  DM 25/11/07
+procedure TTAChart.ZoomOut;
+var D: Double;
+begin
+    if SeriesCount <> 0 then
+    begin
+        Zoom := True;
+        D := XGraphMax - XGraphMin;
+        D := D * 0.1;
+        XGraphToImage(XGraphMin - D, ZoomRect.Left);
+        XGraphToImage(XGraphMax + D, ZoomRect.Right);
+
+        D := YGraphMax - YGraphMin;
+        D := D * 0.1;
+        YGraphToImage(YGraphMin - D, ZoomRect.Bottom);
+        YGraphToImage(YGraphMax + D, ZoomRect.Top);
+
+        Invalidate;
+    end;
+    if Assigned(OnZoom) then OnZoom(Self);
+end;
+
+procedure TTAChart.SetWidth(Value: Integer);
+begin
+    Bitmap.Width := Value;
+    TControl(Self).Width := Value;
+end;
+
+procedure TTAChart.SetHeight(Value: Integer);
+begin
+    Bitmap.Height := Value;
+    TControl(Self).Height := Value;
+end;
+
+function TTAChart.GetWidth: LongInt;
+begin
+    Result := Bitmap.Width;
+end;
+
+function TTAChart.GetHeight: LongInt;
+begin
+    Result := Bitmap.Height;
+end;
+
+procedure TTAChart.Resize;
+begin
+    inherited;
+    Bitmap.Width := ClientWidth;
+    Bitmap.Height := ClientHeight;
+end;
+
+function TTAChart.GetCanvas: TCanvas;
+begin
+    Result := Bitmap.Canvas;
+end;
+
+procedure Register;
+begin
+  RegisterComponents('Fit', [TTAChart]);
+end;
+
+{$IFDEF fpc}
+initialization
+{$I tachart.lrs}
+{$ENDIF}
+end.

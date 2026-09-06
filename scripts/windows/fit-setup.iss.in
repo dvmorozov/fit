@@ -1,0 +1,111 @@
+; SPDX-License-Identifier: GPL-3.0-or-later
+;
+; The Windows installer for Fit. A TEMPLATE: the build script substitutes the
+; @NAME@ placeholders and writes the result next to the staged files, because the
+; version has to come from the application's own version info - a number typed
+; here would drift from the one the About box reports - and because the private
+; variant installs under its own name and its own identity.
+;
+; WHAT THE SHORTCUTS POINT AT. fit_launcher.exe, never Fit.exe. Fit is a client
+; and a compute server and the client has no fitting engine: a shortcut straight
+; to the client gives a window that cannot fit anything until the user knows to
+; start a second program. The launcher probes the server, starts one only when
+; nothing answers, and then runs the client. That is the whole reason this
+; installer exists rather than a .zip.
+;
+; PER-USER BY DEFAULT. PrivilegesRequired=lowest installs under the user's own
+; profile and asks for nothing; the wizard still offers all-users to anyone who
+; wants it. This is a judgement about first impressions: the download is not code
+; signed, so an elevation prompt would name an unknown publisher before the user
+; has seen the program at all.
+;
+; NO FIREWALL RULE, deliberately. The compute server binds 127.0.0.1
+; (Worker/fit_server.lpr, DEFAULT_HOST) and Windows neither prompts for nor
+; filters a loopback listener. A rule would widen the exposure for no benefit. If
+; the server ever binds another interface, this decision has to be revisited.
+
+#define AppLabel     "@APPLABEL@"
+#define AppVersion   "@VERSION@"
+#define StageDir     "@STAGE@"
+#define OutDir       "@OUTDIR@"
+#define OutBase      "@OUTBASE@"
+
+[Setup]
+; The upgrade key. FIXED for the life of the application: a fresh one per build
+; would install every release beside the last instead of over it.
+AppId={{@APPID@}
+AppName={#AppLabel}
+AppVersion={#AppVersion}
+AppVerName={#AppLabel} {#AppVersion}
+AppPublisher=Dmitry Morozov
+AppPublisherURL=https://dvmorozov.github.io/fit/
+DefaultDirName={autopf}\{#AppLabel}
+DefaultGroupName={#AppLabel}
+DisableProgramGroupPage=yes
+LicenseFile={#StageDir}\LICENSE
+OutputDir={#OutDir}
+OutputBaseFilename={#OutBase}
+Compression=lzma2
+SolidCompression=yes
+WizardStyle=modern
+; x86_64 only, which is what the build produces.
+ArchitecturesAllowed=x64compatible
+ArchitecturesInstallIn64BitMode=x64compatible
+PrivilegesRequired=lowest
+PrivilegesRequiredOverridesAllowed=dialog
+UninstallDisplayIcon={app}\Fit.exe
+; Ask the Restart Manager to close a running Fit rather than writing over files
+; that are in use and demanding a reboot afterwards.
+CloseApplications=yes
+RestartApplications=no
+ChangesAssociations=yes
+@SIGNTOOLLINE@
+
+[Languages]
+Name: "english"; MessagesFile: "compiler:Default.isl"
+
+[Tasks]
+Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
+; OPT-IN, and only this extension. .fitproj is Fit's own and nobody else's;
+; claiming .dat or .csv would take generic formats away from whatever the user
+; already opens them with.
+Name: "associate"; Description: "Open .fitproj project files with {#AppLabel}"; Flags: unchecked
+
+[Files]
+Source: "{#StageDir}\fit_launcher.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#StageDir}\Fit.exe";          DestDir: "{app}"; Flags: ignoreversion
+Source: "{#StageDir}\fit_server.exe";   DestDir: "{app}"; Flags: ignoreversion
+Source: "{#StageDir}\Data\*";           DestDir: "{app}\Data"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "{#StageDir}\README.md";        DestDir: "{app}"; Flags: ignoreversion
+Source: "{#StageDir}\LICENSE";          DestDir: "{app}"; Flags: ignoreversion
+Source: "{#StageDir}\THIRD-PARTY.md";   DestDir: "{app}"; Flags: ignoreversion
+
+[Icons]
+; Both point at the launcher. See the note at the top of this file: a shortcut to
+; Fit.exe is the one way to install this application and leave it unusable.
+Name: "{group}\{#AppLabel}"; Filename: "{app}\fit_launcher.exe"; IconFilename: "{app}\Fit.exe"
+Name: "{autodesktop}\{#AppLabel}"; Filename: "{app}\fit_launcher.exe"; IconFilename: "{app}\Fit.exe"; Tasks: desktopicon
+
+[Registry]
+; HKA follows the install: HKCU for a per-user install, HKLM for all users.
+;
+; /PROJECT="%1" AND NOT "%1". Fit reads an argument only when it starts with / or
+; \ and names a switch (Desktop/Fit.lpr, CmdLineParamFound); handed a bare path it
+; opens an empty window and reports nothing. The launcher would translate a bare
+; path itself, but the switch is written here as well so the command line says
+; what it means.
+Root: HKA; Subkey: "Software\Classes\.fitproj"; ValueType: string; ValueName: ""; ValueData: "Fit.Project"; Flags: uninsdeletevalue; Tasks: associate
+Root: HKA; Subkey: "Software\Classes\Fit.Project"; ValueType: string; ValueName: ""; ValueData: "{#AppLabel} project"; Flags: uninsdeletekey; Tasks: associate
+Root: HKA; Subkey: "Software\Classes\Fit.Project\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\Fit.exe,0"; Tasks: associate
+Root: HKA; Subkey: "Software\Classes\Fit.Project\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\fit_launcher.exe"" /PROJECT=""%1"""; Tasks: associate
+
+[Run]
+Filename: "{app}\fit_launcher.exe"; Description: "{cm:LaunchProgram,{#AppLabel}}"; Flags: nowait postinstall skipifsilent
+
+[UninstallRun]
+; The compute server outlives the window on purpose, so an uninstall has to stop
+; it or its executable cannot be deleted. There is no shutdown route to ask
+; politely with - the server serves /health and /fit and nothing else - so this
+; is a kill, and it takes with it a server the user started by hand. That is the
+; cost of not having a shutdown route; adding one is the fix.
+Filename: "{sys}\taskkill.exe"; Parameters: "/F /IM fit_server.exe"; Flags: runhidden skipifdoesntexist; RunOnceId: "StopFitServer"

@@ -1,0 +1,249 @@
+/*  The shared look for fit, fitgrids and fitminimizers.
+
+    THE ONE COPY. The three sites ran jekyll-theme-dinky with a copied-and-edited
+    layout on top, so every change had to be made three times and drifted anyway.
+    This file is the source; scripts/gen-diagrams copies it into each site, so
+    the three cannot differ.
+
+    Light is defined on bare :root and dark only overrides the tokens, so a colour
+    is never defined solely inside a media query - a page that forgets one would
+    otherwise render half-themed for readers whose system is set the other way.
+*/
+
+:root {
+    --bg:        #ffffff;
+    --bg-soft:   #f6f7f9;
+    --bg-inset:  #eef0f3;
+    --fg:        #1b1f24;
+    --fg-muted:  #5a6472;
+    --rule:      #d8dce1;
+    --link:      #0b5fbf;
+    --link-hi:   #084791;
+
+    --ok-bg:     #dff3e4;  --ok-fg:     #10502a;  --ok-edge:   #9ed4b2;
+    --warn-bg:   #fdf0d5;  --warn-fg:   #6b4a06;  --warn-edge: #e3c377;
+    --idle-bg:   #e9ecf0;  --idle-fg:   #4a5563;  --idle-edge: #c4cad2;
+
+    --radius:    8px;
+    --measure:   46rem;
+    --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+            Arial, "Noto Sans", sans-serif;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+            "Liberation Mono", monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg:        #12151a;
+        --bg-soft:   #191d24;
+        --bg-inset:  #21262e;
+        --fg:        #e6e9ee;
+        --fg-muted:  #a3adbb;
+        --rule:      #303740;
+        --link:      #74b3ff;
+        --link-hi:   #a8cfff;
+
+        --ok-bg:     #16321f;  --ok-fg:     #8fdca9;  --ok-edge:   #2f6640;
+        --warn-bg:   #34290f;  --warn-fg:   #f0cd82;  --warn-edge: #6d5620;
+        --idle-bg:   #23272e;  --idle-fg:   #aab3bf;  --idle-edge: #3c434c;
+    }
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+    margin: 0;
+    /*  Both stated outright: the page must not borrow a colour from whatever
+        embeds it, or it reads as light text on light ground. */
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font);
+    font-size: 17px;
+    line-height: 1.65;
+}
+
+.wrap {
+    width: 100%;
+    max-width: var(--measure);
+    margin: 0 auto;
+    padding: 0 1.25rem;
+}
+
+/*  Visible only once focused, so a keyboard reader can get past the header. */
+.skip {
+    position: absolute;
+    left: -9999px;
+}
+.skip:focus {
+    left: 1rem;
+    top: 1rem;
+    z-index: 10;
+    background: var(--bg);
+    color: var(--fg);
+    padding: 0.5rem 0.9rem;
+    border: 2px solid var(--link);
+    border-radius: var(--radius);
+}
+
+/* ---------------------------------------------------------------- header */
+
+header.site {
+    background: var(--bg-soft);
+    border-bottom: 1px solid var(--rule);
+    padding: 2.25rem 0 1.75rem;
+    margin-bottom: 2.5rem;
+}
+
+.site-name {
+    margin: 0;
+    font-size: 1.9rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+.site-name a { color: var(--fg); text-decoration: none; }
+.site-name a:hover { color: var(--link); }
+
+.site-tagline {
+    margin: 0.35rem 0 0;
+    color: var(--fg-muted);
+    font-size: 1.02rem;
+}
+
+.site-links { margin: 1.15rem 0 0; }
+
+.button {
+    display: inline-block;
+    padding: 0.42rem 0.95rem;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    background: var(--bg);
+    color: var(--fg);
+    font-size: 0.92rem;
+    text-decoration: none;
+}
+.button:hover { border-color: var(--link); color: var(--link); }
+
+/* ---------------------------------------------------------------- content */
+
+main { padding-bottom: 4rem; }
+
+a { color: var(--link); }
+a:hover { color: var(--link-hi); }
+
+h1, h2, h3, h4 {
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    margin: 2.25rem 0 0.75rem;
+}
+h1 { font-size: 1.85rem; margin-top: 0; }
+h2 {
+    font-size: 1.35rem;
+    padding-bottom: 0.35rem;
+    border-bottom: 1px solid var(--rule);
+}
+h3 { font-size: 1.1rem; }
+
+p, ul, ol { margin: 0 0 1.1rem; }
+li { margin-bottom: 0.3rem; }
+
+hr { border: 0; border-top: 1px solid var(--rule); margin: 2.5rem 0; }
+
+blockquote {
+    margin: 1.25rem 0;
+    padding: 0.1rem 1.1rem;
+    border-left: 3px solid var(--rule);
+    color: var(--fg-muted);
+}
+
+img { max-width: 100%; height: auto; border-radius: var(--radius); }
+
+code {
+    font-family: var(--mono);
+    font-size: 0.88em;
+    background: var(--bg-inset);
+    padding: 0.13em 0.36em;
+    border-radius: 4px;
+}
+
+/*  Wide content scrolls INSIDE its own box. Without this a long code line or a
+    fourteen-row table makes the whole page scroll sideways on a phone. */
+pre {
+    background: var(--bg-inset);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    padding: 0.9rem 1rem;
+    overflow-x: auto;
+}
+pre code { background: none; padding: 0; font-size: 0.86rem; }
+
+.table-scroll, .mermaid-scroll { overflow-x: auto; margin: 0 0 1.4rem; }
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 0.93rem;
+    margin: 0 0 1.4rem;
+}
+th, td {
+    text-align: left;
+    padding: 0.5rem 0.7rem;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+}
+th { background: var(--bg-soft); font-weight: 600; }
+td small, th small { color: var(--fg-muted); }
+
+iframe { max-width: 100%; border: 0; border-radius: var(--radius); }
+
+/* ---------------------------------------------------------------- mermaid */
+
+pre.mermaid {
+    background: none;
+    border: 1px solid var(--rule);
+    padding: 1rem;
+    overflow-x: auto;
+    text-align: center;
+    /*  Until mermaid has drawn it, the block is unrendered source. Showing that
+        as a wall of flowchart syntax looks like a broken page, so it is hidden
+        until the script has had its turn. A diagram that FAILS to render is
+        shown again as its source, deliberately: broken should look broken. */
+    visibility: hidden;
+}
+pre.mermaid[data-rendered] { visibility: visible; }
+pre.mermaid svg { max-width: 100%; height: auto; }
+
+/* ---------------------------------------------------------------- status */
+
+/*  The WORD is the meaning; the colour only agrees with it. Anyone reading in
+    monochrome, or who cannot separate green from amber, loses nothing. */
+.status {
+    display: inline-block;
+    padding: 0.08em 0.5em;
+    border-radius: 999px;
+    border: 1px solid;
+    font-size: 0.78rem;
+    font-weight: 600;
+    white-space: nowrap;
+    line-height: 1.5;
+}
+.status--implemented { background: var(--ok-bg);   color: var(--ok-fg);   border-color: var(--ok-edge); }
+.status--partial     { background: var(--warn-bg); color: var(--warn-fg); border-color: var(--warn-edge); }
+.status--planned     { background: var(--idle-bg); color: var(--idle-fg); border-color: var(--idle-edge); }
+
+/* ---------------------------------------------------------------- footer */
+
+footer.site {
+    border-top: 1px solid var(--rule);
+    background: var(--bg-soft);
+    padding: 1.5rem 0 2.5rem;
+    color: var(--fg-muted);
+    font-size: 0.9rem;
+}
+footer.site h3 {
+    font-size: 0.9rem;
+    margin: 1rem 0 0.25rem;
+    color: var(--fg-muted);
+}
+footer.site p { margin: 0 0 0.4rem; }

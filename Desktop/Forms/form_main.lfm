@@ -1,0 +1,1799 @@
+object FormMain: TFormMain
+  Left = 355
+  Height = 568
+  Top = 184
+  Width = 1054
+  HorzScrollBar.Page = 1191
+  VertScrollBar.Page = 502
+  ActiveControl = PanelTop
+  Caption = 'FormMain'
+  ClientHeight = 568
+  ClientWidth = 1054
+  DesignTimePPI = 107
+  Menu = MainMenu
+  OnCloseQuery = FormCloseQuery
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  Position = poDefault
+  ShowHint = True
+  LCLVersion = '3.0.0.3'
+  object StatusBar: TStatusBar
+    Left = 0
+    Height = 23
+    Top = 545
+    Width = 1054
+    Panels = <    
+      item
+        Width = 268
+      end    
+      item
+        Width = 201
+      end    
+      item
+        Width = 557
+      end>
+    SimplePanel = False
+  end
+  object PageControl: TPageControl
+    Left = 0
+    Height = 189
+    Top = 356
+    Width = 1054
+    ActivePage = TabSheetBackground
+    Align = alBottom
+    TabIndex = 0
+    TabOrder = 4
+    OnChange = PageControlChange
+    object TabSheetBackground: TTabSheet
+      Caption = 'Background Points'
+      ClientHeight = 163
+      ClientWidth = 1044
+      OnResize = TabSheetBackgroundResize
+      OnShow = TabSheetBackgroundShow
+      object PanelBackground: TPanel
+        Left = 0
+        Height = 163
+        Top = 0
+        Width = 1044
+        Align = alClient
+        BevelOuter = bvNone
+        ClientHeight = 163
+        ClientWidth = 1044
+        ParentColor = False
+        TabOrder = 0
+        object GridBackground: TNumericGrid
+          Left = 27
+          Height = 163
+          Top = 0
+          Width = 1017
+          Align = alClient
+          Color = clBtnFace
+          ColCount = 2
+          FixedCols = 0
+          GridLineWidth = 0
+          Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goEditing, goTabs, goRowSelect, goDblClickAutoSize]
+          RowCount = 2
+          ScrollBars = ssBoth
+          TabOrder = 1
+          OnEditingDone = GridDataEditingDone
+          OnSelectEditor = GridDataSelectEditor
+          OddRowColor = clWhite
+          EvenRowColor = 15263976
+          SelectedRegionColor = clGray
+          ColNumFixed = False
+          RowNumFixed = False
+          DisabledColor = clSilver
+        end
+        object EditBalloonGridBackground: TEdit
+          Left = 43
+          Height = 26
+          Top = 9
+          Width = 2
+          TabOrder = 0
+        end
+        object ToolBarBackground: TToolBar
+          Left = 0
+          Height = 163
+          Top = 0
+          Width = 27
+          Align = alLeft
+          AutoSize = True
+          Flat = False
+          Images = ImageListToolbars
+          TabOrder = 2
+          object ToolButtonComputeBackgroundPoints: TToolButton
+            Left = 1
+            Top = 2
+            Action = ActionComputeBackgroundPoints
+          end
+          object ToolButtonSubtractBackgroundAutomatically: TToolButton
+            Left = 1
+            Top = 27
+            Action = ActionSubtractBackgroundAutomatically
+          end
+          object ToolButtonSubtractBackgroundBySelectedPoints: TToolButton
+            Left = 1
+            Top = 52
+            Action = ActionSubtractBackgroundBySelectedPoints
+          end
+          object ToolButtonRemoveBackgroundPoints: TToolButton
+            Left = 1
+            Top = 77
+            Action = ActionRemoveBackgroundPoints
+          end
+        end
+      end
+    end
+    object TabSheetCurveIntervals: TTabSheet
+      Caption = 'Fit Intervals'
+      ClientHeight = 163
+      ClientWidth = 1044
+      OnShow = TabSheetCurveIntervalsShow
+      object PanelIntervals: TPanel
+        Left = 0
+        Height = 163
+        Top = 0
+        Width = 1044
+        Align = alClient
+        BevelOuter = bvNone
+        ClientHeight = 163
+        ClientWidth = 1044
+        ParentColor = False
+        TabOrder = 0
+        object GridIntervals: TNumericGrid
+          Left = 27
+          Height = 163
+          Top = 0
+          Width = 1017
+          Align = alClient
+          AutoEdit = False
+          Color = clBtnFace
+          ColCount = 2
+          FixedCols = 0
+          GridLineWidth = 0
+          Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goTabs, goRowSelect, goDblClickAutoSize]
+          RowCount = 2
+          ScrollBars = ssBoth
+          TabOrder = 1
+          OnEditingDone = GridDataEditingDone
+          OnSelectEditor = GridDataSelectEditor
+          OddRowColor = clWhite
+          EvenRowColor = 15263976
+          SelectedRegionColor = clGray
+          ColNumFixed = False
+          RowNumFixed = False
+          DisabledColor = clSilver
+        end
+        object EditBalloonGridIntervals: TEdit
+          Left = 11
+          Height = 26
+          Top = 11
+          Width = 4
+          TabOrder = 0
+        end
+        object ToolBarCurveIntervals: TToolBar
+          Left = 0
+          Height = 163
+          Top = 0
+          Width = 27
+          Align = alLeft
+          AutoSize = True
+          Flat = False
+          Images = ImageListToolbars
+          TabOrder = 2
+          object ToolButtonComputeRFactorBounds: TToolButton
+            Left = 1
+            Top = 2
+            Action = ActionComputeRFactorBounds
+          end
+          object ToolButtonRemoveRFactorBounds: TToolButton
+            Left = 1
+            Top = 27
+            Action = ActionRemoveRFactorBounds
+          end
+        end
+      end
+    end
+    object TabSheetCurvePositions: TTabSheet
+      Caption = 'Curve Positions'
+      ClientHeight = 163
+      ClientWidth = 1044
+      OnShow = TabSheetCurvePositionsShow
+      object PanelSpecPositions: TPanel
+        Left = 0
+        Height = 163
+        Top = 0
+        Width = 1044
+        Align = alClient
+        BevelOuter = bvNone
+        ClientHeight = 163
+        ClientWidth = 1044
+        ParentColor = False
+        TabOrder = 0
+        object GridSpecPositions: TNumericGrid
+          Left = 27
+          Height = 163
+          Top = 0
+          Width = 1017
+          Align = alClient
+          AutoEdit = False
+          Color = clBtnFace
+          ColCount = 2
+          FixedCols = 0
+          GridLineWidth = 0
+          Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goTabs, goRowSelect, goDblClickAutoSize]
+          RowCount = 2
+          ScrollBars = ssBoth
+          TabOrder = 0
+          OnEditingDone = GridDataEditingDone
+          OnSelectEditor = GridDataSelectEditor
+          OddRowColor = clWhite
+          EvenRowColor = 15263976
+          SelectedRegionColor = clGray
+          ColNumFixed = False
+          RowNumFixed = False
+          DisabledColor = clSilver
+        end
+        object EditBalloonGridSpecPositions: TEdit
+          Left = 11
+          Height = 26
+          Top = 11
+          Width = 4
+          TabOrder = 1
+        end
+        object ToolBarCurvePositions: TToolBar
+          Left = 0
+          Height = 163
+          Top = 0
+          Width = 27
+          Align = alLeft
+          AutoSize = True
+          Flat = False
+          Images = ImageListToolbars
+          TabOrder = 2
+          object ToolButtonComputeCurvePositions: TToolButton
+            Left = 1
+            Top = 2
+            Action = ActionComputCurvePositions
+          end
+          object ToolButtonRemoveCurvePositions: TToolButton
+            Left = 1
+            Top = 27
+            Action = ActionRemoveCurvePositions
+          end
+        end
+      end
+    end
+    object TabSheetCurveAttributes: TTabSheet
+      Caption = 'Curve Attributes'
+      ClientHeight = 163
+      ClientWidth = 1044
+      OnShow = TabSheetCurveAttributesShow
+      object PanelParameters: TPanel
+        Left = 0
+        Height = 163
+        Top = 0
+        Width = 1044
+        Align = alClient
+        BevelOuter = bvNone
+        ClientHeight = 163
+        ClientWidth = 1044
+        ParentColor = False
+        TabOrder = 0
+        object GridParameters: TNumericGrid
+          Left = 27
+          Height = 163
+          Top = 0
+          Width = 1017
+          Align = alClient
+          AutoEdit = False
+          Color = clBtnFace
+          ColCount = 2
+          FixedCols = 0
+          GridLineWidth = 0
+          Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goTabs, goRowSelect, goDblClickAutoSize]
+          RowCount = 2
+          ScrollBars = ssBoth
+          TabOrder = 0
+          OnEditingDone = GridDataEditingDone
+          OnSelectEditor = GridDataSelectEditor
+          OddRowColor = clWhite
+          EvenRowColor = 15263976
+          SelectedRegionColor = clGray
+          ColNumFixed = False
+          RowNumFixed = False
+          DisabledColor = clSilver
+        end
+        object EditBalloonGridParameters: TEdit
+          Left = 11
+          Height = 26
+          Top = 11
+          Width = 4
+          TabOrder = 1
+        end
+        object ToolBarCurveAttributes: TToolBar
+          Left = 0
+          Height = 163
+          Top = 0
+          Width = 27
+          Align = alLeft
+          AutoSize = True
+          Flat = False
+          Images = ImageListToolbars
+          TabOrder = 2
+          object ToolButtonSaveModelAsTextAttributes: TToolButton
+            Left = 1
+            Top = 2
+            Action = ActionSaveModelAsText
+          end
+          object ToolButtonCopyAttributes: TToolButton
+            Left = 1
+            Top = 27
+            Action = ActionCopy
+          end
+        end
+      end
+    end
+    object TabSheetSummary: TTabSheet
+      Caption = 'Summary'
+      ClientHeight = 163
+      ClientWidth = 1044
+      OnShow = TabSheetSummaryShow
+      object PanelDatasheet: TPanel
+        Left = 0
+        Height = 163
+        Top = 0
+        Width = 1044
+        Align = alClient
+        BevelOuter = bvNone
+        ClientHeight = 163
+        ClientWidth = 1044
+        ParentColor = False
+        TabOrder = 0
+        object GridDatasheet: TNumericGrid
+          Left = 27
+          Height = 163
+          Top = 0
+          Width = 1017
+          Align = alClient
+          AutoEdit = False
+          Color = clBtnFace
+          ColCount = 2
+          FixedCols = 0
+          GridLineWidth = 0
+          Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goTabs, goRowSelect, goDblClickAutoSize]
+          RowCount = 2
+          ScrollBars = ssBoth
+          TabOrder = 0
+          OnEditingDone = GridDataEditingDone
+          OnSelectEditor = GridDataSelectEditor
+          OddRowColor = clWhite
+          EvenRowColor = 15263976
+          SelectedRegionColor = clGray
+          ColNumFixed = False
+          RowNumFixed = False
+          DisabledColor = clSilver
+        end
+        object EditBalloonGridDatasheet: TEdit
+          Left = 11
+          Height = 26
+          Top = 11
+          Width = 4
+          TabOrder = 1
+        end
+        object ToolBarSummary: TToolBar
+          Left = 0
+          Height = 163
+          Top = 0
+          Width = 27
+          Align = alLeft
+          AutoSize = True
+          Flat = False
+          Images = ImageListToolbars
+          TabOrder = 2
+          object ToolButtonSaveModelAsTextSummary: TToolButton
+            Left = 1
+            Top = 2
+            Action = ActionSaveModelAsText
+          end
+          object ToolButtonCopySummary: TToolButton
+            Left = 1
+            Top = 27
+            Action = ActionCopy
+          end
+        end
+      end
+    end
+  end
+  object SplitterBottom: TSplitter
+    Cursor = crVSplit
+    Left = 0
+    Height = 7
+    Top = 349
+    Width = 1054
+    Align = alBottom
+    Beveled = True
+    Color = clGray
+    ParentColor = False
+    ResizeAnchor = akBottom
+  end
+  object SplitterLeftChart: TSplitter
+    Left = 189
+    Height = 320
+    Top = 29
+    Width = 4
+    Beveled = True
+    Color = clGrayText
+    ParentColor = False
+  end
+  object PanelRight: TPanel
+    Left = 865
+    Height = 320
+    Top = 29
+    Width = 189
+    Align = alRight
+    BevelOuter = bvNone
+    ClientHeight = 320
+    ClientWidth = 189
+    ParentColor = False
+    TabOrder = 3
+    TabStop = True
+    object PanelRightContent: TPanel
+      Left = 0
+      Height = 320
+      Top = 0
+      Width = 189
+      Align = alClient
+      BevelOuter = bvNone
+      ClientHeight = 320
+      ClientWidth = 189
+      TabOrder = 0
+      TabStop = True
+      object LabelGraphs: TLabel
+        Left = 7
+        Height = 14
+        Top = 9
+        Width = 34
+        Caption = 'Graphs'
+        ParentColor = False
+      end
+      object LabelPositionCaption: TLabel
+        AnchorSideLeft.Control = PanelRightContent
+        AnchorSideBottom.Control = LabelIntensityCaption
+        AnchorSideBottom.Side = asrTop
+        Left = 7
+        Top = 267
+        Anchors = [akLeft, akBottom]
+        AutoSize = True
+        BorderSpacing.Left = 7
+        BorderSpacing.Bottom = 4
+        Caption = 'Position:'
+        ParentColor = False
+      end
+      object LabelPositionValue: TLabel
+        AnchorSideLeft.Control = LabelPositionCaption
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = LabelPositionCaption
+        AnchorSideBottom.Control = LabelPositionCaption
+        AnchorSideBottom.Side = asrBottom
+        Left = 64
+        Top = 268
+        Anchors = [akTop, akLeft, akRight, akBottom]
+        AutoSize = False
+        BorderSpacing.Left = 6
+        BorderSpacing.Right = 4
+        ParentColor = False
+      end
+      object LabelIntensityCaption: TLabel
+        AnchorSideLeft.Control = PanelRightContent
+        AnchorSideBottom.Control = PanelRightContent
+        AnchorSideBottom.Side = asrBottom
+        Left = 7
+        Top = 291
+        Anchors = [akLeft, akBottom]
+        AutoSize = True
+        BorderSpacing.Left = 7
+        BorderSpacing.Bottom = 6
+        Caption = 'Intensity:'
+        ParentColor = False
+      end
+      object LabelIntensityValue: TLabel
+        AnchorSideLeft.Control = LabelIntensityCaption
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = LabelIntensityCaption
+        AnchorSideBottom.Control = LabelIntensityCaption
+        AnchorSideBottom.Side = asrBottom
+        Left = 64
+        Top = 293
+        Anchors = [akTop, akLeft, akRight, akBottom]
+        AutoSize = False
+        BorderSpacing.Left = 6
+        BorderSpacing.Right = 4
+        ParentColor = False
+      end
+      object CheckListBoxLegend: TCheckListBox
+        AnchorSideBottom.Control = LabelPositionCaption
+        AnchorSideBottom.Side = asrTop
+        Left = 7
+        Height = 232
+        Top = 27
+        Width = 178
+        Anchors = [akTop, akLeft, akRight, akBottom]
+        BorderSpacing.Bottom = 6
+        BorderStyle = bsNone
+        ItemHeight = 13
+        Style = lbOwnerDrawFixed
+        TabOrder = 0
+        TopIndex = -1
+        OnClickCheck = CheckListBoxLegendClickCheck
+        OnDrawItem = CheckListBoxLegendDrawItem
+      end
+    end
+  end
+  object SplitterChartRight: TSplitter
+    Left = 861
+    Height = 320
+    Top = 29
+    Width = 4
+    Align = alRight
+    Beveled = True
+    Color = clGrayText
+    ParentColor = False
+    ResizeAnchor = akRight
+  end
+  object PanelChart: TPanel
+    Left = 193
+    Height = 320
+    Top = 29
+    Width = 668
+    Align = alClient
+    BevelOuter = bvNone
+    ClientHeight = 320
+    ClientWidth = 668
+    Color = clWindow
+    ParentBackground = False
+    ParentColor = False
+    TabOrder = 2
+    TabStop = True
+    object Chart: TTAChart
+      Left = 0
+      Height = 300
+      Top = 0
+      Width = 648
+      AutoUpdateXMin = True
+      AutoUpdateXMax = True
+      AutoUpdateYMin = True
+      AutoUpdateYMax = True
+      MirrorX = False
+      ShowLegend = False
+      ShowTitle = False
+      ShowAxisLabel = True
+      XAxisLabel = 'Position'
+      YAxisLabel = 'Amplitude'
+      ShowVerticalReticule = False
+      ShowReticule = True
+      OnDrawReticule = ChartDrawReticule
+      Align = alClient
+      ParentShowHint = False
+      ShowHint = True
+      OnMouseDown = ChartMouseDown
+      OnMouseUp = ChartMouseUp
+    end
+    object ScrollBarX: TScrollBar
+      Left = 0
+      Height = 20
+      Top = 300
+      Width = 668
+      Align = alBottom
+      PageSize = 0
+      TabOrder = 1
+      OnChange = ScrollBarXChange
+    end
+    object ScrollBarY: TScrollBar
+      Left = 648
+      Height = 300
+      Top = 0
+      Width = 20
+      Align = alRight
+      Kind = sbVertical
+      PageSize = 0
+      TabOrder = 2
+      OnChange = ScrollBarYChange
+    end
+    object EditBalloonChart: TEdit
+      Left = 57
+      Height = 26
+      Top = 7
+      Width = 4
+      TabOrder = 0
+    end
+  end
+  object PanelLeft: TPanel
+    Left = 0
+    Height = 320
+    Top = 29
+    Width = 189
+    Align = alLeft
+    BevelOuter = bvNone
+    ClientHeight = 320
+    ClientWidth = 189
+    ParentColor = False
+    TabOrder = 1
+    TabStop = True
+    object LabelData: TLabel
+      Left = 7
+      Height = 14
+      Top = 0
+      Width = 23
+      Caption = 'Data'
+      ParentColor = False
+    end
+    object GridData: TNumericGrid
+      Left = 0
+      Height = 320
+      Top = 0
+      Width = 189
+      Align = alClient
+      BorderStyle = bsNone
+      Color = clBtnFace
+      ColCount = 2
+      FixedCols = 0
+      GridLineWidth = 0
+      Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goEditing, goTabs, goRowSelect, goDblClickAutoSize]
+      RowCount = 2
+      ScrollBars = ssBoth
+      TabOrder = 1
+      OnEditingDone = GridDataEditingDone
+      OnSelectEditor = GridDataSelectEditor
+      OddRowColor = clWhite
+      EvenRowColor = 15263976
+      SelectedRegionColor = clGray
+      ColNumFixed = False
+      RowNumFixed = False
+      DisabledColor = clSilver
+    end
+    object EditBalloonGridData: TEdit
+      Left = 21
+      Height = 26
+      Top = 22
+      Width = 4
+      TabOrder = 0
+    end
+  end
+  object PanelTop: TPanel
+    Left = 0
+    Height = 29
+    Top = 0
+    Width = 1054
+    Align = alTop
+    AutoSize = True
+    ClientHeight = 29
+    ClientWidth = 1054
+    TabOrder = 0
+    TabStop = True
+    OnClick = PanelTopClick
+    object ToolBarMain: TToolBar
+      Left = 1
+      Height = 27
+      Top = 1
+      Width = 1052
+      AutoSize = True
+      Flat = False
+      Images = ImageListToolbars
+      TabOrder = 0
+      object ToolButtonLoadProfile: TToolButton
+        Left = 1
+        Top = 2
+        Action = ActionLoadProfile
+      end
+      object ToolButtonZoomIn: TToolButton
+        Left = 27
+        Top = 2
+        Action = ActionZoomIn
+      end
+      object ToolButtonZoomOut: TToolButton
+        Left = 53
+        Top = 2
+        Action = ActionZoomOut
+        Style = tbsCheck
+      end
+      object ToolButtonDoAllAutomatically: TToolButton
+        Left = 79
+        Top = 2
+        Action = ActionDoAllAutomatically
+      end
+    end
+  end
+  object MainMenu: TMainMenu
+    ParentBidiMode = False
+    Images = ImageListToolbars
+    Left = 214
+    Top = 71
+    object MenuFile: TMenuItem
+      Caption = '&File'
+      object MenuNewProject: TMenuItem
+        Action = ActionNewProject
+      end
+      object MenuOpenProject: TMenuItem
+        Action = ActionOpenProject
+      end
+      object MenuOpenRecent: TMenuItem
+        Caption = 'Open &Recent'
+      end
+      object MenuSeparatorAfterOpenProject: TMenuItem
+        Caption = '-'
+      end
+      object MenuSaveProject: TMenuItem
+        Action = ActionSaveProject
+      end
+      object MenuSaveProjectAs: TMenuItem
+        Action = ActionSaveProjectAs
+      end
+      object MenuSeparatorAfterSaveProject: TMenuItem
+        Caption = '-'
+      end
+      object MenuLoadProfile: TMenuItem
+        Action = ActionLoadProfile
+      end
+      object MenuReload: TMenuItem
+        Action = ActionReloadData
+      end
+      object MenuSeparatorBeforeExport: TMenuItem
+        Caption = '-'
+      end
+      object MenuExport: TMenuItem
+        Caption = '&Export'
+        object MenuExportCurveParameters: TMenuItem
+          Action = ActionExportCurveParameters
+        end
+        object MenuExportSummaryTable: TMenuItem
+          Action = ActionExportSummaryTable
+        end
+      end
+      object MenuSeparatorBeforeQuit: TMenuItem
+        Caption = '-'
+      end
+      object MenuQuit: TMenuItem
+        Action = ActionQuit
+        Bitmap.Data = {
+          36040000424D3604000000000000360000002800000010000000100000000100
+          20000000000000040000640000006400000000000000000000000E0CB900130F
+          CDF41311D5F41410D4F4130FD4F4110DD4F40B07D3F40601D1F40601D0F40B07
+          D3F4100CD4F4120ED4F4130ED3F4130ED3F4110DCAF40E09B3841412D1FF1D1D
+          F7FF1D1CF6FF1A19F6FF1311F3FF2924F1FF5D57F2FF908DF5FF908CF3FF5A55
+          ECFF2521E8FF110CF0FF1813F7FF1B15F6FF1A16F7FF120ECEFF1817DDF42023
+          F5FF1C1FF3FF1818F1FF807DF4FFF0EFFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFEFEFFAFF7D7AE5FF1310E5FF1A18F4FF1C1AF6FF1512DAF4191BDFF41F27
+          F5FF191CF2FF9B98F8FFFFFFFFFFF5F3FCFF8E8BF2FF5858EBFF5757EAFF8C8A
+          EDFFF4F3FAFFFFFFFFFF9694E5FF1313E3FF1C1EF7FF1716DDF41A1DE1F41925
+          F4FF8180F6FFFFFFFFFFD8D6FAFF3E3FF1FF0E13E6FF3C3FDBFF3D40E1FF0C0F
+          E2FF3A3BE3FFD5D4F5FFFFFFFFFF7A79DFFF151AEDFF1819E0F41A20E3F42E36
+          F6FFF1EFFEFFF1F0FEFF3F42F1FF101FF2FF4347E4FFF7F5FBFFF6F5F8FF4044
+          DBFF0E1AF1FF3A3CE1FFF0EFF9FFEFEEF8FF252ADEFF181BE3F4121AE5F4666A
+          F8FFFFFFFFFF908FF7FF1828F3FF192DF1FF575AE4FFFFFFFFFFFFFFFCFF5559
+          E1FF182AF3FF1422EDFF8A89E5FFFFFFFEFF6265E1FF1015E3F42B32EAF49CA0
+          FBFFFFFFFFFF6568F5FF1930F3FF1D32F1FF5458E4FFFFFFFFFFFFFEFBFF5256
+          E0FF1A2FF2FF152AF1FF6064E4FFFFFFFFFF9A9EEBFF282DE4F4545AEFF4B7BC
+          FCFFFFFFFFFF7175F6FF243CF3FF1C35F0FF5053E3FFFFFFFFFFFFFEFBFF4F53
+          DFFF1C34F2FF2239F2FF6C71E7FFFFFFFFFFA9ADEDFF5155EBF4616AF2F4A0A5
+          FBFFFFFFFFFFB4B3FAFF5F73F7FF5971F6FF8087F2FFFFFFFFFFFFFFFCFF7D84
+          EAFF5870F6FF5B6FF2FFB0AFEEFFFFFFFEFF9197E9FF5A61F1F46A74F4F47F8C
+          F9FFFFFFFFFFF7F6FEFF898FF7FF778FF9FF94A0FBFFFBF8FFFFF9F6F9FF8F9A
+          F1FF728BF8FF828AEDFFF6F5FCFFFFFFFEFF737FEBFF636BF3F47079F5F47D94
+          F9FFBDBEFBFFFFFFFFFFE8E7FDFF8B93F6FF7686F6FF8D94F5FF8B92EFFF7383
+          F2FF878FEFFFE7E6F9FFFFFFFFFFB6B7EFFF7389F5FF6770F4F4747DF6F487A3
+          F9FF7D8DF7FFC7C5FBFFFFFFFFFFF9F7FDFFBEBDF7FF9BA0F5FF9B9FF4FFBCBC
+          F4FFF8F7FCFFFFFFFFFFBEBDEFFF7484EEFF809BFBFF6C75F4F4757EF7F48DA8
+          FAFF8AA4FAFF8595F8FFB6B7F9FFF6F3FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFF5F3FCFFB2B3F0FF7C8DF0FF869FF9FF87A1F9FF717AF6F46D74F7FF8DA9
+          FAFF90ABFAFF90ABFAFF879FF9FF8B99F7FFA9AFF6FFC2C8F8FFC4CAF7FFAAB0
+          F3FF8896F1FF859DF6FF8EA9FBFF8DA8FAFF8BA6F9FF7075F6FF5C57F6846C72
+          F8F4747DF8F4757EF8F4767FF8F47681F8F4737CF8F46E74F6F46D74F6F4737D
+          F8F47882F9F47881F8F47881F8F47881F8F47377F7F4645EF584
+        }
+        ImageIndex = 10
+      end
+    end
+    object MenuData: TMenuItem
+      Caption = '&Data'
+      object MenuArgumentTransformation: TMenuItem
+        Caption = 'Argument Transformation'
+        object MenuCreateRule: TMenuItem
+          Caption = 'Create Rule...'
+          Visible = False
+        end
+        object MenuSetRuleParameters: TMenuItem
+          Caption = 'Set Rule Parameters'
+          object MenuSetWavelength: TMenuItem
+            Caption = 'Wavelength...'
+            OnClick = MenuSetWavelengthClick
+          end
+        end
+        object MenuUseRule: TMenuItem
+          Caption = 'Use Rule'
+          object MenuTheta: TMenuItem
+            Caption = 'Theta'
+            OnClick = MenuThetaClick
+          end
+          object MenuN2Theta: TMenuItem
+            Caption = '2 * Theta'
+            OnClick = MenuN2ThetaClick
+          end
+          object MenuSinThetaLambda: TMenuItem
+            Caption = 'Sin Theta / Lambda'
+            OnClick = MenuSinThetaLambdaClick
+          end
+        end
+      end
+      object MenuSeparatorBeforeRange: TMenuItem
+        Caption = '-'
+      end
+      object MenuRange: TMenuItem
+        Caption = 'Range'
+        object MenuSelectIntervalBounds: TMenuItem
+          Action = ActionSelectIntervalBounds
+          OnClick = ActionSelectIntervalBoundsExecute
+        end
+        object MenuSelectDataInterval: TMenuItem
+          Action = ActionSelectDataInterval
+          OnClick = ActionSelectDataIntervalExecute
+        end
+        object MenuSeparatorBeforeEntireProfile: TMenuItem
+          Caption = '-'
+        end
+        object MenuSelectEntireProfile: TMenuItem
+          Action = ActionSelectEntireProfile
+          OnClick = ActionSelectEntireProfileExecute
+        end
+      end
+      object MenuSmoothProfile: TMenuItem
+        Action = ActionSmoothProfile
+        OnClick = ActionSmoothProfileExecute
+      end
+      object MenuSeparatorBeforeCharacteristicPoints: TMenuItem
+        Caption = '-'
+      end
+      object MenuSelectCharacteristicPoints: TMenuItem
+        Action = ActionSelectCharacteristicPoints
+        OnClick = ActionSelectCharacteristicPointsExecute
+      end
+    end
+    object MenuEdit: TMenuItem
+      Caption = '&Edit'
+      object MenuCopy: TMenuItem
+        Action = ActionCopy
+        OnClick = ActionCopyExecute
+      end
+      object MenuDelete: TMenuItem
+        Action = ActionDelete
+        Caption = 'Delete'
+        Bitmap.Data = {
+          36040000424D3604000000000000360000002800000010000000100000000100
+          200000000000000400006400000064000000000000000000000000000000140E
+          AEFF1711B8FF100BA1FF00000000000000000000000000000000000000000000
+          00000000000000000000100BA1FF1711B8FF140EAEFF000000001F1AB5FF2522
+          E9FF2723F1FF1F1BD1FF130EA6FF000000000000000000000000000000000000
+          000000000000130EA6FF1F1BD1FF2723F1FF2522E9FF1F1AB5FF3D3AC8FF4648
+          F6FF2425F1FF2A2BF3FF2121D4FF140FADFF0000000000000000000000000000
+          0000140FADFF2121D4FF2A2BF3FF2425F1FF4648F6FF3D3AC8FF221CB6FF6262
+          E1FF444BF3FF262DEFFF2C33F2FF2326D7FF1812B3FF00000000000000001812
+          B3FF2326D7FF2C33F2FF262DEFFF474DF4FF6262E1FF221CB6FF00000000241D
+          BBFF6566E3FF4853F3FF2934EFFF2F3BF2FF262BD9FF1A13BAFF1A13BAFF262B
+          D9FF2F3BF2FF2834EFFF4752F3FF5F61DFFF241DBAFF00000000000000000000
+          00002621C2FF656AE5FF4756F3FF2C3DF0FF3041F1FF2B36E4FF2B36E4FF3041
+          F1FF2D3DF0FF4A59F3FF5D5FE0FF2119BFFF0000000000000000000000000000
+          0000000000002721C6FF6267E6FF4356F2FF3044F0FF3448F2FF3448F2FF3044
+          EFFF4255F2FF6166E5FF221AC4FF000000000000000000000000000000000000
+          000000000000000000002C23CCFF4551E9FF354DF1FF364CEFFF364CEFFF354D
+          F0FF4251EAFF2B23CDFF00000000000000000000000000000000000000000000
+          000000000000000000001D14CEFF3240E6FF3C54F2FF3850F0FF384FF0FF3B54
+          F2FF3445E9FF1D15CEFF00000000000000000000000000000000000000000000
+          0000000000001F17D4FF313EE4FF3E58F1FF3953F0FF455EF2FF455FF2FF3A53
+          F0FF3E57F0FF303AE3FF1F15D3FF000000000000000000000000000000000000
+          00002018D9FF3542E7FF425FF3FF3D59F1FF556EF3FF737FF2FF737EF2FF566E
+          F3FF3D59F1FF425EF3FF313AE4FF1F16D9FF0000000000000000000000002018
+          DEFF3744E9FF4663F2FF405DF1FF5C77F3FF6E76EFFF3028DFFF2E25DFFF7078
+          F0FF5D77F4FF405DF1FF4562F2FF333DE8FF2117DDFF00000000221BE2FF3947
+          ECFF4A69F3FF4462F2FF5F7AF3FF686EF0FF271FE2FF00000000000000002C23
+          E2FF717AF1FF607BF4FF4362F2FF4A69F3FF3846EBFF2019E2FF4144ECFF5372
+          F4FF4464F2FF6481F4FF6E76F2FF271EE6FF0000000000000000000000000000
+          00002D25E7FF747CF2FF6480F4FF4564F2FF5270F3FF3D41EBFF4441EDFF7B8F
+          F5FF7A94F6FF737BF3FF2D24EAFF000000000000000000000000000000000000
+          0000000000002D24EAFF737CF3FF7A93F6FF7A8FF6FF4441EDFF000000004845
+          F0FF5A59F2FF2D24EDFF00000000000000000000000000000000000000000000
+          000000000000000000002D24EDFF5959F2FF4844F0FF00000000
+        }
+        ImageIndex = 2
+        OnClick = ActionDeleteExecute
+      end
+      object MenuSeparatorBeforeSelectAll: TMenuItem
+        Caption = '-'
+      end
+      object MenuSelectAll: TMenuItem
+        Action = ActionSelectAll
+        OnClick = ActionSelectAllExecute
+      end
+    end
+    object MenuView: TMenuItem
+      Caption = '&View'
+      object MenuZoomIn: TMenuItem
+        Action = ActionZoomIn
+        OnClick = ActionZoomInExecute
+      end
+      object MenuZoomOut: TMenuItem
+        Action = ActionZoomOut
+        OnClick = ActionZoomOutExecute
+      end
+      object MenuSeparatorBeforeViewMarkers: TMenuItem
+        Caption = '-'
+      end
+      object MenuViewMarkers: TMenuItem
+        Action = ActionViewMarkers
+        OnClick = ActionViewMarkersExecute
+      end
+      object MenuAnimationMode: TMenuItem
+        Action = ActionAnimationMode
+      end
+    end
+    object MenuModel: TMenuItem
+      Caption = '&Model'
+      OnClick = MenuModelClick
+      object MenuSelectCurveType: TMenuItem
+        Caption = 'Curve Type'
+      end
+      object MenuRFactorIntervals: TMenuItem
+        Caption = 'Fit Intervals'
+        object MenuComputeRFactorBounds: TMenuItem
+          Action = ActionComputeRFactorBounds
+          OnClick = ActionComputeRFactorBoundsExecute
+        end
+        object MenuSelectRFactorBoundsManually: TMenuItem
+          Action = ActionSelectRFactorBoundsManually
+          OnClick = ActionSelectRFactorBoundsManuallyExecute
+        end
+        object MenuSeparatorBeforeRemoveBounds: TMenuItem
+          Caption = '-'
+        end
+        object MenuRemoveRFactorBounds: TMenuItem
+          Action = ActionRemoveRFactorBounds
+          OnClick = ActionRemoveRFactorBoundsExecute
+        end
+      end
+      object MenuCurvePositions: TMenuItem
+        Caption = 'Curve Positions'
+        OnClick = CurvePositionsClick
+        object MenuComputCurvePositions: TMenuItem
+          Action = ActionComputCurvePositions
+          AutoCheck = True
+        end
+        object MenuSelectAllPointsAsCurvePositions: TMenuItem
+          Action = ActionSelectAllPointsAsCurvePositions
+        end
+        object MenuSelectCurvePositionsManually: TMenuItem
+          Action = ActionSelectCurvePositionsManually
+        end
+        object MenuSeparatorBeforeRemovePositions: TMenuItem
+          Caption = '-'
+        end
+        object MenuRemoveCurvePositions: TMenuItem
+          Action = ActionRemoveCurvePositions
+          OnClick = ActionRemoveCurvePositionsExecute
+        end
+      end
+      object MenuBackground: TMenuItem
+        Caption = 'Background'
+        object MenuSetBackgroundFraction: TMenuItem
+          Action = ActionSetBackgroundFraction
+          OnClick = ActionSetBackgroundFractionExecute
+        end
+        object MenuBackgroundPoints: TMenuItem
+          Caption = 'Points'
+          object MenuComputeBackgroundPoints: TMenuItem
+            Action = ActionComputeBackgroundPoints
+            OnClick = ActionComputeBackgroundPointsExecute
+          end
+          object MenuSelectBackgroundManually: TMenuItem
+            Action = ActionSelectBackgroundManually
+            OnClick = ActionSelectBackgroundManuallyExecute
+          end
+          object MenuRemoveBackgroundPoints: TMenuItem
+            Action = ActionRemoveBackgroundPoints
+            OnClick = ActionRemoveBackgroundPointsExecute
+          end
+        end
+        object MenuSubtractBackground: TMenuItem
+          Caption = 'Subtract'
+          object MenuSubtractBackgroundAutomatically: TMenuItem
+            Action = ActionSubtractBackgroundAutomatically
+            OnClick = ActionSubtractBackgroundAutomaticallyExecute
+          end
+          object MenuSubtractBackgroundBySelectedPoints: TMenuItem
+            Action = ActionSubtractBackgroundBySelectedPoints
+            OnClick = ActionSubtractBackgroundBySelectedPointsExecute
+          end
+        end
+        object MenuEnableBackgroundVariation: TMenuItem
+          Action = ActionEnableBackgroundVariation
+        end
+      end
+      object MenuSeparatorBeforeCurveBounds: TMenuItem
+        Caption = '-'
+      end
+      object MenuSelectCurveBounds: TMenuItem
+        Action = ActionSelectCurveBounds
+        OnClick = ActionSelectCurveBoundsExecute
+      end
+    end
+    object MenuFit: TMenuItem
+      Caption = '&Fit'
+      object MenuDoAllAutomatically: TMenuItem
+        Action = ActionDoAllAutomatically
+        ImageIndex = 6
+        OnClick = ActionDoAllAutomaticallyExecute
+      end
+      object MenuSeparatorBeforeMinimizers: TMenuItem
+        Caption = '-'
+      end
+      object MenuMinimizeNumberOfCurves: TMenuItem
+        Action = ActionMinimizeNumberOfCurves
+        OnClick = ActionMinimizeNumberOfCurvesExecute
+      end
+      object MenuMinimizeDifference: TMenuItem
+        Action = ActionMinimizeDifference
+        OnClick = ActionMinimizeDifferenceExecute
+      end
+      object MenuStopFit: TMenuItem
+        Action = ActionStopFit
+        Bitmap.Data = {
+          36040000424D3604000000000000360000002800000010000000100000000100
+          2000000000000004000064000000640000000000000000000000000000000000
+          00000000000000000000DF9C344CE7AB469DE9B451E9ECB858F4ECB858F4E9B4
+          51E9E7AB469DDF9C344C00000000000000000000000000000000000000000000
+          0000DB95340CDFA038B8EFC46AFFF8D685FFF8DE90FFF9DD91FFF9DD91FFF8DE
+          90FFF8D685FFEFC46AFFDFA038B8DB95340C000000000000000000000000D68F
+          320BE0A140E2F5D17FFFFDDE90FFFADC8CFFFAD887FFFAD887FFFAD887FFFAD8
+          87FFFADC8CFFFDDE90FFF5D17FFFE0A140E2D68F320B0000000000000000D690
+          32B6F3CD78FFFBDA8AFFEBBE64FFE3B151FFE5B152FFE5B252FFE5B252FFE5B1
+          52FFE3B151FFEBBE64FFFBDA8AFFF3CD78FFD69032B600000000CE832A4AE7B4
+          5BFFF9D582FFE9BA5EFFB56F35FFD0A57AFFCEA073FFCEA073FFCEA073FFCEA0
+          73FFD0A57AFFB56F35FFE9BA5EFFF9D582FFE7B45BFFCE832A4AD18B329EF0C3
+          67FFF3CA74FFE0A846FFD8B189FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFD8B189FFE0A846FFF3CA74FFF0C367FFD18B329ED39143E9F3CC
+          76FFEEBC60FFE1A743FFD8AF80FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFD8AF80FFE1A743FFEEBC60FFF3CB76FFD39243E9D3964AF7F8DD
+          9EFFECBB5EFFE09F34FFDCB482FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFDCB482FFE09F34FFECBB5EFFF8DD9EFFD3944AF7CB8B3FF7F6D8
+          96FFEFCA87FFE3AB49FFE3BC8CFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFE3BC8CFFE3AB49FFEFCA87FFF6D896FFCB8A3DF7C37F39E9F2D2
+          8BFFEBC27AFFE6BE6FFFECD7B1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFECD7B1FFE6BE6FFFEBC27AFFF2D28BFFC37F39E9B668209EEAC9
+          8BFFEBC573FFE5B65DFFF3E0C1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFF3E0C1FFE5B65DFFEBC573FFEAC98BFFB668209EAC55104AD19B
+          5BFFF5DE9DFFE7B75FFFF1CF97FFF6E2C0FFF6E1BEFFF6E2C0FFF6E2C0FFF6E1
+          BEFFF6E2C0FFF1CF97FFE7B75FFFF5DE9DFFD19B5BFFAC55104A00000000A753
+          10B6E0BB78FFF3DB9BFFE7BF6BFFE4B352FFE2AF48FFE2AE42FFE2AE42FFE2AF
+          48FFE4B352FFE7BF6BFFF3DB9BFFE0BB78FFA75310B60000000000000000A955
+          150BA95913E2DEB46AFFF3DB95FFEED088FFE9C476FFE7C070FFE7C070FFE9C4
+          76FFEED088FFF3DB95FFDEB46AFFA95913E2A955150B00000000000000000000
+          0000A1490F0C9D480AB8C68C41FFE2BC6DFFEED386FFF2D88EFFF2D88EFFEED3
+          86FFE2BC6DFFC68C41FF9D480AB8A1490F0C0000000000000000000000000000
+          00000000000000000000963E034CA34F0F9DAB5F1EE9B46D2AF4B46D2AF4AB5F
+          1EE9A34F0F9D963E034C00000000000000000000000000000000
+        }
+        ImageIndex = 7
+        OnClick = ActionStopFitExecute
+      end
+      object MenuSeparatorBeforeMaxRFactor: TMenuItem
+        Caption = '-'
+      end
+      object MenuSetMaximumRFactor: TMenuItem
+        Action = ActionSetMaximumRFactor
+        OnClick = ActionSetMaximumRFactorExecute
+      end
+      object MenuEnableCurveScaling: TMenuItem
+        Action = ActionEnableCurveScaling
+      end
+      object MenuSeparatorMinimizer: TMenuItem
+        Caption = '-'
+      end
+      object MenuComputeServer: TMenuItem
+        Caption = 'Compute Server...'
+        OnClick = MenuComputeServerClick
+      end
+      object MenuMinimizer: TMenuItem
+        Caption = 'Minimizer'
+      end
+      object MenuWeighting: TMenuItem
+        Caption = 'Weighting'
+        Visible = False
+        object MenuWeightingPoisson: TMenuItem
+          AutoCheck = True
+          Caption = 'Poisson (counting statistics)'
+          Checked = True
+          GroupIndex = 8
+          RadioItem = True
+          OnClick = MenuWeightingPoissonClick
+        end
+        object MenuWeightingNone: TMenuItem
+          AutoCheck = True
+          Caption = 'None (unweighted)'
+          GroupIndex = 8
+          RadioItem = True
+          OnClick = MenuWeightingNoneClick
+        end
+      end
+    end
+    object MenuHelp: TMenuItem
+      Caption = '&Help'
+      object MenuGlossary: TMenuItem
+        Action = ActionGlossary
+      end
+      object MenuComputeBackends: TMenuItem
+        Caption = 'Compute Backends...'
+        OnClick = MenuComputeBackendsClick
+      end
+      object MenuAbout: TMenuItem
+        Action = ActionAbout
+        OnClick = ActionAboutExecute
+      end
+    end
+  end
+  object OpenDialog: TOpenDialog
+    Title = 'Open Profile Data'
+    DefaultExt = '.*.DAT'
+    Filter = 'All supported data (*.DAT;*.CSV)|*.DAT;*.dat;*.CSV;*.csv|Two-column data (*.DAT)|*.DAT;*.dat|Price data, OHLC (*.CSV)|*.CSV;*.csv|All files (*.*)|*.*'
+    Options = [ofPathMustExist, ofFileMustExist, ofNoTestFileCreate, ofEnableSizing, ofDontAddToRecent]
+    Left = 214
+    Top = 143
+  end
+  object ImageListMenuIcons: TImageList
+    Scaled = True
+    Left = 526
+    Top = 71
+    Bitmap = {
+      4C7A060000001000000010000000380100000000000078DAED58D10EC32008F4
+      BFFBEAB7F5B76E719D1D3211501F166B930BB516F094B3A62104848D31E0BA92
+      EDF1CFBE4D6BCC2F594FFE61FE31EAA8E4EFF1CDF9BB7D33467C1741641CA393
+      737A9FC3E39BAEF33C0BABC5C879A8CFA7A48A18AD38A98FE64DFEB46D1943CE
+      CB61E5D09B7F06FF91F99FB5FE5AFDC507E8EFE9FAE7B567D59EE44B63681A92
+      7C3DFAADE9DFB37FF4E49FC17F64FEB7FE9F8DE338DEA0F71ECC1A43719EB49C
+      B93BFB783FE70F66BFFDB8EF2F7F54F9A33A06DC1645BBE40F719CA8C46A417E
+      1FCAFA7F79A1CA5B5F7F108BC69CD4D61FDD6B3AA3FE67D4B0D74A1AF0B657D2
+      FF5AFB1F0A2DF8F843695BF700F9B9C49FEABEF5DC975B1E03DF33ECF3BAF5BF
+      B2FEA980DCFFE50CDF10893F84F9F83D1768B951FD166AFC21E81F0EFDC31053
+      D33F25B0F5FF7FFA7F01519DE597
+    }
+  end
+  object PopupViewMode: TPopupMenu
+    Left = 375
+    Top = 143
+    object PopupMenuTheta: TMenuItem
+      Caption = 'Theta'
+      OnClick = MenuThetaClick
+    end
+    object PopupMenuN2Theta: TMenuItem
+      Caption = '2 * Theta'
+      Checked = True
+      OnClick = MenuN2ThetaClick
+    end
+    object PopupMenuSinThetaLambda: TMenuItem
+      Caption = 'Sin Theta / Lambda'
+      OnClick = MenuSinThetaLambdaClick
+    end
+  end
+  object ImageListToolbars: TImageList
+    Scaled = True
+    Left = 678
+    Top = 71
+    Bitmap = {
+      4C7A1000000010000000100000009D2100000000000078DAED9B755854DBFAC7
+      E71E2C44DA40140105BBBBBB8E075BAC230676077677072A268A2D6221A28008
+      8A882818A4740F31C3C00C537B4F307C7F6B6D947BBC8A72CEBD7FFEF6F37C9F
+      BD78D7FB59EFCABDD79A198AC277A12472371491DB20787B1092283788634E49
+      8BA34E411C4D751AB2B8B36013DDC124B8233FEC30444F2720DBA39B298F5C45
+      61DB51A6F80CE4B8222D311E4A004CD917E9C05D99E9697817E8C9DDF3727380
+      8C83C8BD3B0CE9E7BA362C0CD90455963BB431F31117E68D4231832291804808
+      91301F5AC25F3FBE1119DE6371E7D219C4BC7D06A46C8432E910726E0E863068
+      1D54E91ED0452DC6A7106FF00B2428C8E3233F2F978B256580C01BFB01810B9E
+      DEF34064480010BB02EA94E32878FC27F29EB980493907ED0767AE8EE9594264
+      67A6232B3383ABAF44AEC695832B91E73D021E270FE16DF063126B0994F17BC1
+      BF3F1E695E0BC0249F86F69D13429F5C47628608E9E9E9484BCF405A6A3A0A04
+      855CB9D7CF9EE2F2C383BCA07D3F17F2E8EDC8F27440FABD85603E1F01A22723
+      E4CE01BC7B13814FE12FF1313CE48B5E22213A120971D188FA144F7C0E92FA3B
+      41FE611DD2AE8D44C6FDC550C7EEC2AB73337071CB6C9CD93013E73639FD8766
+      70A2791737CFC4AB8BF3C0462E45B2FB5024DD988192F0E5DCD855F5A2BEE2E0
+      49483CDB1FC93767A224742E672B1208E175F90A6E5EF0C0C5936E3875F0080E
+      EDD887DD9BB662F3EA0D983FC399F3A1BEC5FEBF23D6B537123CFE4471F0F47F
+      C72F2BAB52FC42DF81883ED215F1EE53217A36EE6FC717DCEF810FFB3A21FAEC
+      44143E19C1D92425126466A4213B2BB37CFCB3E83C482736A2AC0CA42627A3B8
+      B898F32DB8DD06113BDBE0E399F1103CEC5B11FFC1D5EBF074F780C7E933703B
+      74148777EDC31E127FCB9AF558346B5E45FC3C0F1BBCDD628FCFA7FB41E2DF9D
+      1B6BA10A48CD63902A507D919ABBA71490345152AE1242329FA96FA1675D84AC
+      B7C2ABF58D78A1EB1A2278A9399ECDAF56A1C09F2868716D3C5B520FAF375923
+      FCF1690873121509E1BE8808BC84A01B5B7163DF18CDA9656DC0ABC2151FE1CB
+      8D49A94689E2FC34A445BF4288E74E781D9D86538B5BFDB28C9897B7395EAD55
+      43262E84889F82C8A7E7212DCC83DF8565B8B4A1CF4FCBF8F4E2BA84F22A9506
+      1A0D0BAD468E882717F0E6912B426EEDAD90BFFB2A781E9A84C3CE36DF9417F9
+      ECD2179E855A4DDAA12B8544948908FFF3E5F5523128CCFA8C84F74FF1D6FB08
+      DC37F6C6951D0E1565BCF5BBC0F12C2B869614A0D5EAC03032443CBBCCF1B44E
+      B2E23CF093A311137C1D6F1EBAA2303F1B011E2E5C19A10F0E737E72513E9812
+      11D40A39346A29DE3DBDC0D9551A2DD41A06B2A21CE4264722FAA5278AF86978
+      7A7629764DD44798F751CE4F565C00798900ACBC188C5484B78F4F95F32A15E9
+      5B5A861C52311F19B1AFF1F6D119D247A77174AEDD7FF08590CB8A2027E9D007
+      27BEC457927ED172ED52B152888BF3919B1A0741663C4E2DEB40F8E39C9FA490
+      0F6951016425421417A6E3A5D75ECECEC80BA161E5A41F693D3460953232C6C9
+      A48F14B8E8D21BEF032E7CBFC0C92320F0FA96F27A89F349DD04602445A40C29
+      A90703A544C8E55DDA3018C7E7B7D2F99D5F8547A71696EBF462DCDE3D01AFEE
+      97F7AB4CF2B55D2230A46D1AB9146A59319777715DBF4AE756F863D76FF92F62
+      A5C5904B0B7FC9BFF62EEF3F89289BF44B2E9100D2E21C8849DF140B32ABCCFF
+      ECF23A34B1527ED3C8DABA0BA4FCD32BBA57E8CC8A1EE45E2EF78D0330BF0B8F
+      E3470E2BC1F46932B4B32BFEE57AA53ED388EFC8A1259CEFD041C5D8724289CD
+      6E0C5CB6C8491985A89C2D84CB5639369F66B0F90403CA0E1A5A84896B14183A
+      4F8679BB1458B15E86164DF2BF2BA39D7D01D66E253E3B1518467C27AC92A3DF
+      20119A36CA41AF114518B5588EA1CE32CCDA2CC7A2152568619D535146DB6639
+      58BD598AD95B1418427CA86FCFE122D8342CF7B1B1C8408FA1420C9F2BC34027
+      29666C90937A48D0B16526DADB6762D5C612386D507079C308DFA59F00B60DD2
+      BFA9A38D4532BA0D2EC0E059A45ED3A4705C2187CB0E195CB6CB307945B96DF0
+      4C393AF5CE8575FDE41FF69175837874EA9F8BFE53A5E835B104C366CA306C96
+      0CBD49BAFF941274ECCD8775BDB89F8E9155DD4FE83C301F7D27C9D0735C097A
+      8E2D411F92EE3A4C08AB7A9F7E39BE6D9B7DC0B0F142741B2D45770709A76EA3
+      4B30787C21DA34FBF853BE856D389C17E663C864193A92F9D175A48C53C7A112
+      0C769461CE823C34B50CFB6119CD6D43317F491E464C96A36D3FD2D64152B4E9
+      9ECB89A6DB11DBA8697238CDCA826DC397DF946167F51CF317F03172A21CADBA
+      4AD0A18F0CCDDB24C3D23C90134D535B4B923762821CB3E664C2CE2A902BA369
+      633F383B6763E81F72346F2741DB2E32346B9E080B33DF8A18344D6D348FFA8C
+      18ADE018CAF6EBFD0EC34732B0B397A2751B396C6DE351D7F8C1776DA4369A47
+      7DA82F65286B6DF914F64D8568D14C0AEB46313037BA5D691FD33CEA437D2943
+      59AE6CA38768601A0013836BBF1C5FEA437D2943FF7E70C373E2A7F79FA2A3DE
+      7D888A7AF73EEA03D1CBF00F511FC93DEA2F0A23FAAB2DF6635CF4E3DB771744
+      85BEC3717E284EA5BFE274223D94A8FC7E92DCBFCA95FC4DF5D5CF35279CEC3D
+      8241F9B6197BD02872019A7C5C0EBB4FCBE116B701D6E46EF371199A1235269A
+      1BE7828EC4D6E88BADC1E7C5157C97CFABD1246418ACC3C6A075F8445C889887
+      A661E360173616F6443624BD287C26BA864F4293B0D1B07F3D168DDF3B7CE5E5
+      F47D033179F9CBC85D449EED693EE5E9126DB9683AED315044F2E4D4AEE19EBF
+      8497870487C835E4FD28128A5054AC40714126C489B7B8749148FC450A88136E
+      92FD51068A8AE4109133017D9F3EB9FF481E1CF84AAE546921108A212C6620C8
+      4D8328FA0A0484111416133B914886C2A82B1092BD9180F005050228C97EE7C1
+      ED079447F6C3D148F51A8B8C47B390F5780EF80FC622979CAB0454AF77431471
+      14E2D72B21FE701CE2387788E32F02799E9487DF233FB9582226FBDC2CE4E416
+      829F1285FCF0E3C8E10B91939D8D9CAC6C64F305C825B6ECD44FC8CE15209B9C
+      6FA4D212DCBC7C4DEE73F781BC88F44B5A6A3232B2F2909918097EC84E728ECA
+      43467A2A279AE687ECE2F2A84F3AF195909857CE5F947B793D970B499F266797
+      20395F47F6D849C808DA8564BE12C959C54826E7A9E44C19D202B620392E0A89
+      99254848CA8650ACC2E9E31C8FAC27339170F74FA4FA2C4786CF6264DD19858C
+      977B90F36A0F725F1F44DE5BB2C70D5C00C1FB9310C65D4541CC6568F31E521E
+      B73DAEC9B3335311FD2112B1B149887FE78FA48773101B9788B8E868C4C74421
+      2E2E89D89CF139320071F149888DFA803C7E164E1E3A82BB373D1585A4FDC949
+      8948CDC8476AEC0B64FA4C454A461E525353497B52B97406B1D13CEA93929800
+      B1A498F047298F9741CFE17DEF1E7C7CFCF1C4F32C824F0E838FB71F7C1E3C2C
+      1749531BCDA33E3EF7EE23243888E3E74E9BC5DB4CCE16FF44931CC6EDE4FDB7
+      D7C4CF130D66A58A4C6627F34D6626F30D499A37E9B35355F1FAF312757E791A
+      F80AB4789C578A3B192AD45F988CAAF2ED577C063D39DE9102B7C94EDC872CE3
+      BACEB155E65B3A85E22559E217F280F339C065B2B51CB92B196D667F44BB65B1
+      68B7348653DB253168B3249AA48996C5A0FDF238541B13BA95F221E4DC762E1B
+      38935986D3646BF784D4E331D9623E1201DEA4BCFBF964AF960B7892F26F6591
+      3BF1F522F11ACD8A04E58395E038B734C2A794E124916B12702C0138421A7720
+      06D8F311D8FE0E58FF86280CD8F29EB47372285A4D0FC20B05899D41CA482EC3
+      EEB832AC8ED06171B80E0BC374700ED16156900E4B5EEAB0265487EDC4BEF54D
+      1976527EC273D84FF2C5DD22604E44192692FC31C13A8C7AA6C3F0A73A0CF629
+      45FF87A5E87DB714DD6F6BD1E98606DDAF6B31FA810E2B43083FCE9FE377A603
+      635E96611C61C706EAE0E0578AE1BEA518E25D8A01F74AD1CF538B1E3735E872
+      4D837697346876560B7B77A0C6E0FBB077B883BDA980C3F3328C0E20B149DC61
+      24EE2012B73F89DBDB93C4246CE7AB84BDAC419B0B1AB43AAF81DD857FF3DB13
+      8161FE651849620E7D548A81F74BD1D74B8B5EB735E8765D834E5708EB4E3935
+      ECDDD4687A4A0B9B33841F701B76236E60531C30D0A78C8B49EBDB8BC4EC7143
+      8D2E57D5E870498DB617D46879568566A75568725C05AB636A5893E355F5BED7
+      D172D435EC24633728081812000C7802F421AF8FEE0F81CE5E407B72BC6D750D
+      B0F7006CC963D7E61C11B937BD42E2F7BE0AFDD647AE7459150A9BE51168B238
+      1C8D1686C3727E382CE685A3FEDC70D49D1D06B399E130991106933FBF68E63B
+      984C7B857FB53C72FDBF5DBE69EB0CBF5B2BC5C7CCF7141E327D5D72CA0CAABB
+      ADA0BA6101DDDD7AAF113D71CF77E7FF453CBC9F5DB3A28CCF8BAA03F19381D8
+      31E43E13485D0464AE010A2E91C320797FC64CFE265ECC7C1ECA1E9AE1EDB4EA
+      48585A0B78D71578D30F881809C4113E713E79F76E225A0D08AE969711FDEF73
+      4FC42C1EB45ED550FAD0046501F628F36F45F8012436899FE844CA98067C1C07
+      F0F710ED03B2B77F5346F80CC2DFE69136D682D6D7169AA7F640940332D61A23
+      779701C4672D50E45A1792E3B581623278FCFD80D0B3BC8C67B6089AC283F22A
+      E5F550FAC004EA3B7581A70D10375FEFBB7EAD28437499EC2922003F6BF84FE4
+      A1F0020FF28B3C20692A5078B13C2F6502B236D5F9A60CE9390B485C8D01FF26
+      84B54259705BC4BBD445CA765B246FB3C5E3213C848EE5217BA31EB236D606EF
+      7F74A5BBD440EA0A1E8A5D0DB97ED0BD9980D2D0B1287B3F19BEE378C8D8C543
+      EA361ED277F2103EADD6377133D691318D22F341E459DE2E7ACFDC46E6C33194
+      3E6D0FCFC1A4FD977828222AB9C6C36BC75ADFD55B7AA73FE9F7D364CC1C81CF
+      73818C8D40EE7EA81EB6C3F5813CE49C246D3ECD03FF140FB21BE565844EF80D
+      B10B6B237A7E2DC4CCAB493618641E450C2365903E4E5CC8CD27C5EDF2CFA7DE
+      4DD58780C4CF3C515E06AD87D4B53A2427AAA3683F199757644EBD684FE626E1
+      3F91B9943C8FF0CB21BF6E5751D7A713782870277521F5C8A0E5B8F2A0B945E6
+      85672DA81F59A2F4B12DF0B607987B2D113FFF3730DEED507CD6F6DBB530BB16
+      173FF76C797B8A3D78505FE741F7C81078DE009F17D742D2CAF2714D5E551B45
+      671A7FD757A92E867B62E6D47AED3F898700471EFCC8FC8A9E55E375D2CA3ADF
+      ADDDE4D506DFF16EBDF41CAEFC6174F9CE8C26429F65AD1554344D6D34AFB239
+      E231DCA8CEC561FA01E187FA831FB80425B17B214B3AC289A6A98DE6511FEAFB
+      57F6F6047303CF89A639E9BE8B214F3D05F1A73D1084AD4241E84A14BC5A09E1
+      9B7510471F20796EA03ED497325FF95BE30CFDB202D643967A11052F574014BA
+      0E7C9F71C8BCD71F393E0EC8793C0E7CBFA910BC5C4ACA7007F5A50C65EF8C37
+      1C1575612A941997901F380F39DEBF83C98B82AA88ECB55F92721E8D8120682E
+      04817390E7F727F29FCDE57C2943D927F39B7808230FA3286C0D04C1CB90FB74
+      06E4D961151F658BE31F20CB7B2689EF84A2F07510BE58CEF95286B2AFB6F614
+      CA620F4318BA0145117B91F36832449F7DBFF99C47A59420E7F94EA4DCFC83F8
+      AD27E56C819430948D38D08755269F41E1BBBD280A5984945336E0875EFAE1E7
+      454A511A126F38212F7015D88CF38838D8878D751BC9AAD22F43E03F0545818E
+      4839D706D921577EC88B123F227C572764DD1E012DFF1A624F8D64634E0C10D2
+      EF220A03A6411ABE18C917BA20F5D9C56F38093F0D617B87E1D3BE6610F94F83
+      F8E56CC822D72296B051073B78885F2F40C99BE5507E74418A7B4FA4FA97D79F
+      111722E2CC22BCDED00879DEA3C144B940FA7605F77D85843094FDB0A3E5A87C
+      DF696062B7808DDF82944BFD11EB7D169F9FBAE3D90A1BA45DED0F4DE21628A3
+      3642FA6E35D14A30715B4019CA72EFB0139DFCA41FD6429D7A888CCF623C9C6D
+      81A8933DC0C66D8426793FA41F36136D848C8889DB4DD2EB40998A77E0F18E06
+      1957FAE6C8A3B7429B7912BAACC328CD3C0C45CC2EC8A3B74111BD1D4CFC1EA8
+      528E80FA505FCA7CB316DD3AD7C9F0E81E200E5B0C36711FD8F4135065B87262
+      D35DC124EC85246C09A80FF5ADF459EDDED121EFDED0CB82C7638585CF1C1554
+      344D6D34EF57CFFAB3FDF51C6E8C35BE7C6F5613E193E5AD1554344D6D34AF32
+      EEDAEFC6752E8FAC1D107E74107282969373E67EB2F68F73A2696AA379D487FA
+      FE95F572AC67E035CD3C27E3C912B23ECF90B57E10C2B0F5280859C589A6A98D
+      E6511FEA4B99AFBCE74413BFACE71BB9B55D40D678AEEF04B28E4722E7E1E072
+      9134B5157C5DFFC4973294BDEF68322AC6FD4FB2A62FA3C07F16A451E7C0E484
+      80C97E517EFF4B9AE6511FEA4B19CAFA2DB2F1288C3802D11B17F27C70823CEB
+      55A59FD7D23CEA437D2943D9D73B7A91F54FF8D0CDC87FB11245893E95F2348F
+      FA505FCA50F6FD91012C93741692C803E0DFFB1DFCA0A395F2348FFA505FCABC
+      3FDC8F8D3B3B8AA5DF9F163D9F89AC2B5D91F66477E5DFBB913CEA437D2913E7
+      368A8D3B3984AC7F323E41B391ED390449DE3B2BE5691EF5A1BEF2F7EB11776A
+      8830E648678F92D70B2127CF83AC3BC391E473A8729EE4511FEA4B19CA7EDAD3
+      7A54C1933FA1FEBC9B9CF167E2E9CA6E88BEB5199FAEBA7C236AA379D487FA52
+      86B2740E24B876F6937FDC086DCA61885ECC23EF8EF1C8F39980BCC75F44D2D4
+      46F3A80FF5A5CCD7F99770A2B341D6B58139CA981DD091F5AA493B0A4DD2816F
+      456C348FFA505FCA7CF3DE3ED3B54EE6D59E01748DAB12F671EB5E9D7E9213F7
+      1C20369A477DA86F65EB30F3525787827BC32F0B9F8C1716054C5550D134B5D1
+      BCAAECF7AE4CE7E1474A0DBDD0A5AA3CE2777E236A8BF1DE32B4AA3CFB6A0134
+      6F1672772A6A8BF6DE3AB0AABCE8D12414FB3A72772A6A8B7FBA7F4055F902AF
+      D19CF2BCFEE0EED426C98DE955D5BECAB93E8453F6D5C1DCBD323FAAE473BDFE
+      91BEF219EEBD3825B97545D26922B76E4838D905B1C73B718A3FD199B37DCD4F
+      3BD79DF3FFCAC71F6B8B24D70E8839D4A642D1449F0EB42ED7C1D6DFE4517FAA
+      AF7CC42EBBCAB5B359A5793FEB9377DB9B7CA3CAFCD2EE3AF78C39D9FDF7D833
+      BD47449DE8303CEBE1ECE1D41EB6C18253E8FA06DC9DDAA2DC1D5CE2DC7A0CA5
+      BEB16EBD47C49DEB33A8B2F10F5E658A172B4DB93B15B5C53DDDD3ADAAF3E7D9
+      527D3C277AF645D416FB644F95E7EF6367BD6FC4C5F7DD35F8BF59BF714F76F7
+      E3FDFFF53FBDACEC53F0DF2A2050FE8FF4953FE72EFE47FACAAFDF22F847FACA
+      4F9F9DFB8FF4BFE8BBFF9F81FFDD35630AB377D91A9562ED369562DD769562FD
+      0EA25D2A85CB569562C55A46B19CC885E46DDCAD566C24F6AF72D9C02AE6CD54
+      EE5DBE96C5312F0D5CEF95EBC015358E5C60E1E5CD20F49D0A61912CEE3E92E3
+      E05929F65D6670DC4B8B63773438725B8D55EB18ACDBCE2AE8DF876F6AB0EF8C
+      0A7EFE6A30F2EF7F03A69497E2B16F09B61E2BC17E12E3C03535566F6648BD19
+      C5811B6A6C3BC6E2ED1B6DF96F76581D5E04B370BFAA84FB150582821450B1A5
+      5CDE8B6009D6EE1563A7BB16CBD62914AB362915DBDCD4087E51CE0A0A743872
+      9AC1FAFD0C8EB92971E494042E7B6438704282827C35E7E3E74F6C879458B84A
+      A158B256A1D871B4DCCE3265387482C586136AB85DD542AB227561D43871518A
+      354754D87DB8188CB294FB818BCB0E11E62E952BE62C9129AEDE2A8FFDC45783
+      592E2CA6AD66B0F380EC4BCB4BB16D6F21A6AE62F0E74A191E798B39FEE43921
+      A6CF912A264D9728FC83CADBB69AF4A75D5F391A772BC1B889FC2FBFA5D162EC
+      C44C34EE2A43D35E322C5B5D50FEDB9107C518EF2852B4E95CA8B874B53CFEFC
+      454A34EC489E2B9DA5983435B7829F30390B961D64A8D75A8AD9F3CAED173D44
+      68D92E57616699A758B044C5D95C49DB2D5ACAD1B09D1453A6E756D4DF715A36
+      2C5ACB51B769310E1FCAE3EAEF3C3F1B26F5F80A4B1BBEA27D7706524919A425
+      651830580A136B19868CC805ABD492FE5261E0D05418594AD1BB6F364A246A48
+      C42AD8B7CE804523C25B652B1ADA2BB06B27537E4648D0A0FF00298CCCF3D177
+      402AFA0DCC461DE31CF4EEC3C7E77825E7B3795326EA5916C3A26196A261A34C
+      85750BD2EEC632B89F5755CCB5E34764983A558429530A71948C9B425EFE9DEF
+      59B73C989BF3D1B8098B06F5D315160DD21536CD94686C2D878585143BB72948
+      1D75DFCD5F8944836D9B096B92074B0B051A5B32A86796A2A86B16032B2B1656
+      8D19583664606E2A472B3B299CA6C8E07A4C09D7A3724C772C82BDAD00A6754A
+      6061CEA2513DE25B9F8599D12718D579C63337FEA83037FDACA86B12AF30378E
+      57981AC62B0C6AC6296AFC2B86289A4B9BD489579819917CA3384EA686910A23
+      7DDFBDBF7A3E98FA6AEA9AFA6B9A99BCD1AC30F9A076324E504F37CE609B57E5
+      D96276576363765F33DCE4B53AD6285EAD34CC56C13055556094AEBA6F9ACFDA
+      9B0958D34AD96B9A6AA6B734ED49EC62B33C156C652CDA2858342961615CC0C2
+      94CFDE332D62ABFF843735BDADF1304D53B12D552C1691797490E84F457959C6
+      054C9AA9889D52395F6A65E259F6C0344D8D814A060F551A48B5A538C368D089
+      F04602566B2A621654C61B5F430383ABD2E526317968A726CF3BC205ABB4D8A4
+      54A315E5856C11E127FCACFF9C976D7CF43431160EE4F1D24EABC508B9129D48
+      1F980B5898E4B33E84AF743FBADC697CA0202D819B7B0F1FDF87556028CCB318
+      18E5AA8BC8F8059BE6B2232B639D664C0F7CE6FF14E999198878EE8729B397BC
+      B53C153AB97602CE1B7D566D344E673B10FE877D3F79E2C4C017CF9F61F7AE9D
+      58B460019C86F60EB03A16548FE61926C088EB9B54558D1FB1A3478DE2D8BDBB
+      776181F31CFC3E72786055DF6323860E0D7C1914C8B1CE339D3078E0A02AB3FD
+      FBF60B0C092E679DA64F47CFEEDDABCCF6E9DBF75148F0738E9D356306BA76E9
+      12F877DEBF870F1EC0817D7B49DC697F9BA557CF1E3D787F4E9BAA23779FFFD5
+      9EC0E38E0A4432D70B4AB9EB4585FCC27546B678B9B0CA7BAD1B3E1A78C79461
+      FBB552ECF32CC5216F60EE5A49957977F23EBFE05F8A79FB3558715C830DEE65
+      98BAA0B8CAFC19F21CBFFCBC14CB8E6AB0E4B006D37794A163FFFC2AF327DC54
+      D8E45E8A16BFABD06A3883D6A34A61D9ACEABCD37C05C6AFD5C2B61F8B76BF13
+      11DEAA79D5F919739598BC5E039BDE2C5A0F261A5E8A467655E7FF745662FC4A
+      35ACBAB1683E8045CB815A58DAE655999F3E4789314BD5B0ECC8C2AEA712767D
+      B468645D79FC7A268ADB758D15490DEB2BBC78BCA2C869B3E518BD4883866D18
+      D87663D0ACAB160D1AE542FF37DF48835A015EB56B7A27D5AE79EFF6BF7F1BA7
+      B035AC26CFDFB0470DC7B56AD46FCDC0BE2779D6B76760DD8E4113528E754B16
+      B6ED004BEB12E8D7F0CED7AF71D7F63FEB518B274D59B95985A15335A8D34001
+      6B524E93160C392728616DAF8385A504B5AB07A4FCACEDFA3C71DCCA752C068F
+      53A14E5D05AC9A326864AB45C346E4EF5A2FE3AAD27FB5788294E52B19F41DA2
+      86A1B11A0D1B92E7BD4164CADF5983D579D9711BD6E9D0B367296AE945C4FD93
+      755CDF3421CDDEF67DDAFFE299D0BA157BC5508F519B1A314CA3C6ACAB5D17D6
+      B8AA6C8BA1AAC3E606E49DA5CFA07E03060D6C59D8746599F60EEA86557AC63A
+      AB1FF519A842751ED9F7D890F1ECC0A2593F153A8D573FA90A3F64B1E6F181FB
+      3A58D92861664DE611995BAD47A9306091FA8773BA595F56BF717BB676934E2A
+      C3E6C3D48FE7B96A31FB78291C5668D1799486C6C5E0655A8C5AA229FCE637CA
+      63D406ED46ABFD5B0C53F11B7766B3ED07A9854BCEEBB0FCA20E1D27A8D0B8BB
+      0C6D49BDDB7455A1655B166D5BA9BEF9FCA9C77475C088656AF49DA5465B0716
+      2B2EE9B0F49C0EEDC69339D8410CB3067C18191638999969EAD5E0291AFC67BD
+      072D50BF58E3A6C18CED1A8C5DABC2CACB3AB41ACD72AC79C33C98EA67BAFFAC
+      9FBA4DD72EFA7D8506C316903DCA700DDA8C52C2B29D08E6F5F930AECDD798E8
+      17D6FD555F37EE57F6AAE9A032D2C764ACED58D46D288649ED02125B06B33A9A
+      5F7E7EE6E9E973C7BAAB1CF5ECD46860C5A0AEA90A66062A981299D5613AFE8C
+      0DF27FEA16F4643F7A0EF49F6D6084C07AE64ACA7C55FCCF583F5F9F7D773DBD
+      B066E988A5157BC03ACA2E84BB4A144854E99EF7EDEB572B1F3F780067E739EB
+      FFEEBA8A8D8EEAE9F3E03E5C562C3BF14FD6E5EB572F784B172E58F04FD7B571
+      6DC91F9D3A2B127AF555C636AE27BD67A82735F8997F0D5E496353FD92452D5A
+      4AFDAC9BC83C9B3793F92FDEA2C6B2DD6A8C7364605243BABD32568F27B137AD
+      2DBDD5B397326DE9761586FFC1684638AA3076BD0AFDE7A83079930ACE9BD4B0
+      6EA808AEC613EB7FE56AF2A42666B5A5E7274C5761C7250D961ED2A0FB106562
+      7D5359474B1B69401FC2F69ECEA2D33816FD66B198BB4D83CE5D95E2DF788206
+      3579A21EDDBA2BE41BC83E622EE1DA0D53A26E7D99CBD7B28DF48A6B36B691F8
+      757260D07DB20A1D4631E83896C1F8156A72DE94963ACE506029D943F49CA942
+      A31632D239A2B63F7ED60A87DAB4161774229BF536C3C9F9740083318BD59848
+      CA6936883CB3EC8A3E1AFE2632FCD578D43148D8DCAA97141D86A9D08CAC21FB
+      FE2AF2EE2B84012FB94995CE5C2691F72690F777ABBE84EDAD4273B287684ECA
+      313749F8E53BA44EADE7671CA63068D98BB4B51D0BEB5662D87662D0B43B1913
+      72FE37ACF9F652656CB57FDD9CDC6B4016EC3B696046CEB28DEC19E2FF7CB5B1
+      D19BED56CDC9BBBC0D50AF510E6A55BBDEFF7B7A97758B36E1B06F5B06432331
+      EA37A6F7D7C9156364187CC5C28ABC479B94C1C0E099F0BBBEAF7733A1790B40
+      BF367946D6D5C0D82415D5F4F634FBAB4F6DFD870175EB03A66679A85E6D8773
+      45BDF5D6F4B2B74B84B19116464612181B6B50A3FA8193DFB54F6FB3BE817EA0
+      C4DC9CC4A9795950B17E0CF78F3635CE24E7F052981801B56BF9AA7EFBCDE187
+      DFCFE9E939B537AC9306438304E8E939B7E6CAADB6B4AE41CD178C29610DF4D3
+      897DCA8C9FEE0BAAEDBC6C4A6255D39BBFAFC256E3886DF56AFB9657ABB6AEF7
+      AFC6584F6FC6BF0CF4FDF2ABE96DD8F3A37CF1CDD690064D47F1FD9E105EEF04
+      FEF9F6C838D9126947ED11B9D0FC977B48B1CF50FA5F6F80E23250721C10ED01
+      F2D703050B1136B3C62FF9E27BFDE937D5282B38045DF66668535642133D17F8
+      EC48F89ABFE48BEEF6237C16CAF83B519AB606EAB8F9507D9C0CDDC7117833AB
+      D62F79D19DBE40593A74592476E262A8A366808D1C8DD2F0FE78335BFF977CE1
+      1D12BF3409DAB4D550C7CE061B31014CD810A882BA10FED7BFC9135CED01E892
+      B9D8AAF78E60DEFE0E45702F289FB4C09B39DFFF5E2BE57073A85E74813CA00F
+      8AAE5AA2E0461F807D0B4DEC1CB0EFC640F9722064BE1D20BFD7988C9F3E5E8C
+      E7717A39898710471E5E4DA985DC5B83489BDF01DA77D0652C84367E2ED88F8E
+      50BE1901B95F3748EED8A1F88A1984A779C83FF92F28029B217EB301C7D33ABC
+      72AC8EBCDB0348BB3F4027BC0E55C4083011E349BDFB42FAA82DC4372D213C53
+      1DD947782879500F9F37D4AA60BF5EAF2693326E0D04E43E60E3D74219DC1DF2
+      A75D21F1B245D12523E41E25AC9711E2D7D742C422CB1FF6E3AB29359177A53D
+      CAF28F4216DC1312CF4628BE6981FC13BFA1D8E33744BBD4266CC39F8E41E854
+      7DF04F5B93B9B30232BF36C83FCC83C49D874F6BEA10D6A24A67A8302743649C
+      6A0B65C23A302F5B21766B7DC236F85BDF5584391920FD6C1F1407CFC7DBB966
+      FFE87B8E37B30D1131DFF4A7ECFF01D2827B67
+    }
+  end
+  object ProjectOpenDialog: TOpenDialog
+    Title = 'Open Project'
+    DefaultExt = '.fitproj'
+    Filter = 'Fit project (*.fitproj)|*.fitproj|All files (*.*)|*.*'
+    Options = [ofPathMustExist, ofFileMustExist, ofNoTestFileCreate, ofEnableSizing, ofDontAddToRecent]
+    Left = 214
+    Top = 215
+  end
+  object ProjectSaveDialog: TSaveDialog
+    Title = 'Save Project'
+    DefaultExt = '.fitproj'
+    Filter = 'Fit project (*.fitproj)|*.fitproj|All files (*.*)|*.*'
+    Left = 678
+    Top = 215
+  end
+  object SaveDialog: TSaveDialog
+    Title = 'Select File to Save Data'
+    Filter = 'Text files (*.TXT)|*.TXT|All files (*.*)|*.*'
+    Left = 678
+    Top = 143
+  end
+  object ApplicationProperties: TApplicationProperties
+    Title = 'Fit'
+    OnHint = ApplicationPropertiesHint
+    Left = 375
+    Top = 71
+  end
+  object TimerCheckState: TTimer
+    Interval = 500
+    OnTimer = TimerCheckStateTimer
+    Left = 375
+  end
+  object TimerBalloonShow: TTimer
+    Enabled = False
+    Interval = 200
+    OnTimer = TimerBalloonShowTimer
+    Left = 526
+  end
+  object TimerBalloonHide: TTimer
+    Enabled = False
+    OnTimer = TimerBalloonHideTimer
+    Left = 678
+  end
+  object ActionList: TActionList
+    Images = ImageListToolbars
+    Left = 526
+    Top = 143
+    object ActionQuit: TAction
+      Category = 'Data'
+      Caption = '&Quit'
+      Hint = 'Quit'
+      OnExecute = ActionQuitExecute
+      ShortCut = 16465
+    end
+    object ActionSelectCharacteristicPoints: TAction
+      Category = 'Data'
+      Caption = 'Select Characteristic Points of Peak'
+      Hint = 'Select characteristic points of peak'
+      OnExecute = ActionSelectCharacteristicPointsExecute
+    end
+    object ActionSmoothProfile: TAction
+      Category = 'Data'
+      Caption = 'Smooth Profile'
+      Hint = 'Smooth profile data'
+      OnExecute = ActionSmoothProfileExecute
+    end
+    object ActionSetBackgroundFraction: TAction
+      Category = 'Model'
+      Caption = 'Set Background Fraction...'
+      Hint = 'Set fraction of maximum amplitude for automatic background points generation'
+      OnExecute = ActionSetBackgroundFractionExecute
+    end
+    object ActionComputeBackgroundPoints: TAction
+      Category = 'Model'
+      Caption = 'Compute Automatically'
+      Hint = 'Compute background points automatically'
+      ImageIndex = 11
+      OnExecute = ActionComputeBackgroundPointsExecute
+    end
+    object ActionSelectBackgroundManually: TAction
+      Category = 'Model'
+      Caption = 'Start Manual Selection'
+      Hint = 'Start manual selection of background points'
+      OnExecute = ActionSelectBackgroundManuallyExecute
+    end
+    object ActionRemoveBackgroundPoints: TAction
+      Category = 'Model'
+      Caption = 'Remove All'
+      Hint = 'Remove background points'
+      ImageIndex = 14
+      OnExecute = ActionRemoveBackgroundPointsExecute
+    end
+    object ActionSubtractBackgroundAutomatically: TAction
+      Category = 'Model'
+      Caption = 'Automatically'
+      Hint = 'Subract background points automatically'
+      ImageIndex = 12
+      OnExecute = ActionSubtractBackgroundAutomaticallyExecute
+    end
+    object ActionSubtractBackgroundBySelectedPoints: TAction
+      Category = 'Model'
+      Caption = 'By Selected Points'
+      Hint = 'Subtract background by selected points'
+      ImageIndex = 15
+      OnExecute = ActionSubtractBackgroundBySelectedPointsExecute
+    end
+    object ActionSelectIntervalBounds: TAction
+      Category = 'Data'
+      Caption = 'Start Manual Selection'
+      Hint = 'Start manual selection of interval bounds'
+      OnExecute = ActionSelectIntervalBoundsExecute
+    end
+    object ActionSelectDataInterval: TAction
+      Category = 'Data'
+      Caption = 'Select Data Interval'
+      Hint = 'Select data interval'
+      OnExecute = ActionSelectDataIntervalExecute
+    end
+    object ActionSelectEntireProfile: TAction
+      Category = 'Data'
+      Caption = 'Select Entire Profile'
+      Hint = 'Select entire profile'
+      OnExecute = ActionSelectEntireProfileExecute
+    end
+    object ActionReloadData: TAction
+      Category = 'Data'
+      Caption = '&Reload Profile'
+      Hint = 'Reload experimental data from file'
+      ImageIndex = 5
+      OnExecute = ActionReloadDataExecute
+    end
+    object ActionLoadProfile: TAction
+      Category = 'Data'
+      Caption = '&Import Profile...'
+      Hint = 'Import experimental data from a file into this project'
+      ImageIndex = 4
+      OnExecute = ActionLoadProfileExecute
+      ShortCut = 113
+    end
+    object ActionComputeRFactorBounds: TAction
+      Category = 'Model'
+      Caption = 'Compute Automatically'
+      Hint = 'Compute fit interval bounds automatically'
+      ImageIndex = 11
+      OnExecute = ActionComputeRFactorBoundsExecute
+    end
+    object ActionSelectRFactorBoundsManually: TAction
+      Category = 'Model'
+      Caption = 'Start Manual Selection'
+      Hint = 'Start manual selection of fit interval bounds'
+      OnExecute = ActionSelectRFactorBoundsManuallyExecute
+    end
+    object ActionRemoveRFactorBounds: TAction
+      Category = 'Model'
+      Caption = 'Remove All'
+      Hint = 'Remove all fit interval bounds'
+      ImageIndex = 14
+      OnExecute = ActionRemoveRFactorBoundsExecute
+    end
+    object ActionComputCurvePositions: TAction
+      Category = 'Model'
+      Caption = 'Compute Automatically'
+      Hint = 'Compute curve positions automatically'
+      ImageIndex = 11
+      OnExecute = ActionComputCurvePositionsExecute
+    end
+    object ActionSelectCurvePositionsManually: TAction
+      Category = 'Model'
+      Caption = 'Start Manual Selection'
+      Hint = 'Start manual selection of curve positions'
+      OnExecute = ActionSelectCurvePositionsManuallyExecute
+    end
+    object ActionRemoveCurvePositions: TAction
+      Category = 'Model'
+      Caption = 'Remove All'
+      Hint = 'Remove all curve positions'
+      ImageIndex = 14
+      OnExecute = ActionRemoveCurvePositionsExecute
+    end
+    object ActionSelectCurveBounds: TAction
+      Category = 'Model'
+      Caption = 'Select Curve Bounds'
+      Hint = 'Select curve bounds'
+      OnExecute = ActionSelectCurveBoundsExecute
+    end
+    object ActionExportCurveParameters: TAction
+      Category = 'File'
+      Caption = 'Curve &Parameters...'
+      Hint = 'Export the curve parameters as a tab-separated text file'
+      ImageIndex = 0
+      OnExecute = ActionExportCurveParametersExecute
+    end
+    object ActionExportSummaryTable: TAction
+      Category = 'File'
+      Caption = '&Summary Table...'
+      Hint = 'Export the summary table as a tab-separated text file'
+      OnExecute = ActionExportSummaryTableExecute
+    end
+    object ActionNewProject: TAction
+      Category = 'File'
+      Caption = '&New Project'
+      Hint = 'Close the current project and start an empty one'
+      ShortCut = 16462
+      OnExecute = ActionNewProjectExecute
+    end
+    object ActionOpenProject: TAction
+      Category = 'File'
+      Caption = '&Open Project...'
+      Hint = 'Open a saved project'
+      ShortCut = 16463
+      OnExecute = ActionOpenProjectExecute
+    end
+    object ActionSaveProject: TAction
+      Category = 'File'
+      Caption = '&Save Project'
+      Hint = 'Save the project, with everything needed to carry on fitting'
+      ShortCut = 16467
+      OnExecute = ActionSaveProjectExecute
+    end
+    object ActionSaveProjectAs: TAction
+      Category = 'File'
+      Caption = 'Save Project &As...'
+      Hint = 'Save the project under another name'
+      ShortCut = 24659
+      OnExecute = ActionSaveProjectAsExecute
+    end
+    object ActionDoAllAutomatically: TAction
+      Category = 'Fit'
+      Caption = 'Automatically'
+      Hint = 'Do computation automatically'
+      ImageIndex = 11
+      OnExecute = ActionDoAllAutomaticallyExecute
+    end
+    object ActionMinimizeNumberOfCurves: TAction
+      Category = 'Fit'
+      Caption = 'Minimize Number of Curves'
+      Hint = 'Minimize number of curves'
+      OnExecute = ActionMinimizeNumberOfCurvesExecute
+      ShortCut = 115
+    end
+    object ActionMinimizeDifference: TAction
+      Category = 'Fit'
+      Caption = 'Minimize Difference'
+      Hint = 'Minimize difference'
+      OnExecute = ActionMinimizeDifferenceExecute
+      ShortCut = 116
+    end
+    object ActionStopFit: TAction
+      Category = 'Fit'
+      Caption = 'Stop'
+      Hint = 'Stop computation'
+      OnExecute = ActionStopFitExecute
+    end
+    object ActionSetMaximumRFactor: TAction
+      Category = 'Fit'
+      Caption = 'Set Max Acceptable Difference...'
+      Hint = 'Set max acceptable difference'
+      OnExecute = ActionSetMaximumRFactorExecute
+    end
+    object ActionCopy: TAction
+      Category = 'Edit'
+      Caption = 'Copy to Clipboard'
+      Hint = 'Copy to clipboard'
+      ImageIndex = 1
+      OnExecute = ActionCopyExecute
+    end
+    object ActionDelete: TAction
+      Category = 'Edit'
+      Caption = 'Delete'
+      Hint = 'Delete'
+      OnExecute = ActionDeleteExecute
+    end
+    object ActionSelectAll: TAction
+      Category = 'Edit'
+      Caption = 'Select All'
+      Hint = 'Select all'
+      OnExecute = ActionSelectAllExecute
+    end
+    object ActionZoomIn: TAction
+      Category = 'View'
+      Caption = 'Zoom In'
+      Hint = 'Zoom in'
+      ImageIndex = 8
+      OnExecute = ActionZoomInExecute
+    end
+    object ActionZoomOut: TAction
+      Category = 'View'
+      Caption = 'Zoom Out'
+      Hint = 'Zoom out'
+      ImageIndex = 9
+      OnExecute = ActionZoomOutExecute
+    end
+    object ActionViewMarkers: TAction
+      Category = 'View'
+      Caption = 'View Markers'
+      Hint = 'View markers'
+      OnExecute = ActionViewMarkersExecute
+    end
+    object ActionGlossary: TAction
+      Category = 'Help'
+      Caption = 'Glossary'
+      Hint = 'Glossary'
+      Visible = False
+    end
+    object ActionAbout: TAction
+      Category = 'Help'
+      Caption = '&About...'
+      Hint = 'About'
+      OnExecute = ActionAboutExecute
+    end
+    object ActionSelectAllPointsAsCurvePositions: TAction
+      Category = 'Model'
+      Caption = 'At Every Point'
+      Hint = 'Select all points as curve positions'
+      OnExecute = ActionSelectAllPointsAsCurvePositionsExecute
+    end
+    object ActionAnimationMode: TAction
+      Category = 'View'
+      Caption = 'Animation Mode'
+      Hint = 'Animation mode'
+      OnExecute = ActionAnimationModeExecute
+      OnUpdate = ActionAnimationModeUpdate
+    end
+    object ActionEnableBackgroundVariation: TAction
+      Category = 'Model'
+      Caption = 'Enable Variation'
+      Hint = 'Enable variation of background points'
+      OnExecute = ActionEnableBackgroundVariationExecute
+      OnUpdate = ActionEnableBackgroundVariationUpdate
+    end
+    object ActionEnableCurveScaling: TAction
+      Category = 'Fit'
+      Caption = 'Enable Curve Scaling'
+      Hint = 'Enable curve scaling'
+      OnExecute = ActionEnableCurveScalingExecute
+      OnUpdate = ActionEnableCurveScalingUpdate
+    end
+  end
+end

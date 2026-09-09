@@ -1,0 +1,193 @@
+#  Tag-triggered per-OS binaries, built exactly the way a visitor builds them and
+#  attached to a GitHub Release. The site links these assets, so this is where a
+#  download comes from.
+name: Release
+
+on:
+  push:
+    tags: [ 'v*' ]
+  workflow_dispatch:
+
+permissions:
+  contents: write   #  to create the release and upload its assets
+
+jobs:
+  package:
+    name: Package (${{ matrix.platform }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { os: ubuntu-latest,  platform: linux }
+          - { os: windows-latest, platform: windows }
+          #  NO macOS ROW, and this is a decision rather than an omission. The
+          #  runners build arm64 only, and the one Mac available to check a
+          #  build on is an Intel one - so an arm64 download would be published
+          #  unverified, which is worse than publishing none. macOS is a source
+          #  build instead: scripts/build-app.ps1 -Task package -Install builds
+          #  the .app and installs it, and docs/user-guide/building-from-source.md
+          #  says how. A compile-only macOS job stays in the CI workflow, so a
+          #  break in code only macOS reaches is still caught.
+    steps:
+      - uses: actions/checkout@v4
+        with: { path: fit }
+      - uses: actions/checkout@v4
+        with: { repository: dvmorozov/fitminimizers, path: fitminimizers }
+      - uses: actions/checkout@v4
+        with: { repository: dvmorozov/fitgrids, path: fitgrids }
+
+      - name: Install Lazarus (Linux)
+        if: runner.os == 'Linux'
+        #  rpm and fakeroot are what turn the build into installable packages;
+        #  without them the script says so and produces only the archive.
+        run: sudo apt-get update && sudo apt-get install -y lazarus rpm fakeroot
+
+      - name: Install the Qt LCL widget set (Linux)
+        if: runner.os == 'Linux'
+        #  The Linux desktop client is built on Qt, not GTK2: GTK2 cannot see
+        #  that a desktop is scaled, has one DPI for the whole session and no
+        #  live rescale. See docs/contributing/building.md.
+        #
+        #  Two different things are needed - the LCL's Qt interface units, which
+        #  lazbuild compiles against, and the qtNpas binding library the binary
+        #  loads. Tolerant on purpose: a runner image that packages neither still
+        #  produces a working build, on GTK2, and the build script says so in the log.
+        run: |
+          sudo apt-get install -y lcl-qt6 libqt6pas6             || sudo apt-get install -y lcl-qt5 libqt5pas1             || echo "No Qt LCL widget set available - this build falls back to GTK2."
+      - name: Install Lazarus (Windows)
+        if: runner.os == 'Windows'
+        run: choco install lazarus -y --no-progress
+
+      #  The installer does not put lazbuild on PATH.
+      - name: Put lazbuild on PATH (Windows)
+        if: runner.os == 'Windows'
+        run: echo 'C:\lazarus' >> $env:GITHUB_PATH
+
+      #  The Windows download is an installer now, and ISCC is what builds one.
+      #  It is on the runner image today; installed here anyway, because an image
+      #  that stopped shipping it would turn a release into a build that skips
+      #  the installer with a word and publishes nothing for Windows.
+      - name: Inno Setup (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $iscc = "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe"
+          if (-not (Test-Path $iscc)) { choco install innosetup -y --no-progress }
+          Split-Path -Parent $iscc >> $env:GITHUB_PATH
+
+      - name: Build, test and package
+        working-directory: fit
+        shell: pwsh
+        run: ./scripts/build-app.ps1 -Task all
+
+      #  The archives carry the processor they were built for and the packages
+      #  carry the version; the site links four fixed names. Mapped explicitly
+      #  rather than by pattern, so a name that stops appearing fails here
+      #  instead of being uploaded misspelt.
+      - name: Name the downloads the way the site links them
+        working-directory: fit/dist
+        shell: bash
+        run: |
+          set -eu
+          case "${{ matrix.platform }}" in
+            linux)
+              map='Fit-linux-x86_64.tar.gz:Fit-linux.tar.gz'
+              #  The installable packages name their version themselves
+              #  (fit_1.2.3_amd64.deb, fit-1.2.3-1.x86_64.rpm), and the site
+              #  links a fixed name through /releases/latest/download/, which
+              #  matches literally and cannot follow a pattern. Neither dpkg
+              #  nor rpm reads the file name, so renaming costs the package
+              #  nothing. Two candidates would mean the build started
+              #  producing something else as well - an error, not a file to
+              #  pick between.
+              for ext in deb rpm; do
+                set -- *."$ext"
+                [ $# -eq 1 ] && [ -e "$1" ] \
+                  || { echo "::error::expected one .$ext in dist, found: $*"; exit 1; }
+                map="$map $1:Fit-linux.$ext"
+              done
+              ;;
+            windows) map='Fit-windows-x86_64-setup.exe:Fit-windows-setup.exe' ;;
+          esac
+          for pair in $map; do
+            from="${pair%%:*}"; to="${pair##*:}"
+            [ -e "$from" ] || { echo "::error::the build produced no $from"; exit 1; }
+            mv "$from" "$to"
+            echo "  $from -> $to"
+          done
+          ls -la
+
+      #  A DRAFT. The site links through /releases/latest/download/, which
+      #  ignores drafts - so until every archive is attached, that redirect goes
+      #  on serving the previous good release rather than a half-built new one.
+      #  Published asset-by-asset, a release becomes "latest" the moment its
+      #  first job finishes, and one failed platform then breaks the download
+      #  table for everybody.
+      - uses: softprops/action-gh-release@v2
+        with:
+          draft: true
+          files: |
+            fit/dist/Fit-linux.tar.gz
+            fit/dist/Fit-linux.deb
+            fit/dist/Fit-linux.rpm
+            fit/dist/Fit-windows-setup.exe
+          fail_on_unmatched_files: false
+          generate_release_notes: true
+
+  #  What turns the draft into a release, and the only thing that does. The
+  #  page links five files by name; the upload step above is deliberately
+  #  tolerant of missing files so that a platform whose build failed still
+  #  publishes what it has, so nothing else would notice one absent. A draft
+  #  that stays a draft is the failure mode we want: the site keeps serving the
+  #  last complete release instead of gaining dead links.
+  verify-assets:
+    name: Publish the release once every linked asset is attached
+    needs: package
+    #  always(), because the case this exists for is a package job that did NOT
+    #  succeed. Left on the default it is SKIPPED exactly when an archive is
+    #  missing, which is the one moment it had something to say.
+    if: always() && startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Publish it, or leave it a draft and say what is missing
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          #  Kept in step with the download table in
+          #  scripts/gen-diagrams/content/fit-index.html.
+          linked='Fit-linux.tar.gz Fit-linux.deb Fit-linux.rpm Fit-windows-setup.exe'
+
+          #  Every platform can have failed, leaving no draft at all - which is
+          #  not something to pass over quietly either.
+          if ! have=$(gh release view "$TAG" --json assets --jq '.assets[].name' 2>/dev/null); then
+            echo "::error::no release $TAG exists - every package job must have failed"
+            exit 1
+          fi
+          echo "attached to $TAG:"; echo "$have" | sed 's/^/  /'
+
+          missing=''
+          for a in $linked; do
+            echo "$have" | grep -qx "$a" || missing="$missing $a"
+          done
+          if [ -n "$missing" ]; then
+            echo "::error::$TAG stays a DRAFT - the site links assets it does not have:$missing"
+            echo 'The download table goes on pointing at the last complete release.'
+            exit 1
+          fi
+
+          gh release edit "$TAG" --draft=false --latest
+          echo "every linked asset is attached; $TAG is published"
+
+  #  A released tag is also when the earlier Release runs stop being worth
+  #  keeping. Tag runs only: on a manual run verify-assets is skipped, and a
+  #  skipped dependency skips this too, which is what we want.
+  tidy:
+    needs: [ package, verify-assets ]
+    if: success()
+    uses: ./.github/workflows/tidy.yml
+    permissions:
+      actions: write

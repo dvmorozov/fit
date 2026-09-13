@@ -1,0 +1,121 @@
+/Desktop/o/Fit/i386-win32/*.o
+/Desktop/o/Fit/i386-win32/*.ppu
+/Packages/TAGraph/Component/lib/i386-win32/*.o
+/Packages/TAGraph/Component/lib/i386-win32/*.ppu
+/Desktop/o/Fit/i386-win32/*.compiled
+/Packages/TAGraph/Component/lib/i386-win32/*.compiled
+/Desktop/o/i386-win32/*.exe
+/CgiClient/o
+/ClientProxy/*.res
+/ClientProxy/*.or
+/ClientProxy/*.bak
+/ClientProxy/*.o
+/ClientProxy/*.dll
+/ClientProxy/*.compiled
+/Desktop/o
+/MathExpr/VC/.vs/MathExpr/v15
+/MathExpr/VC/MathExpr.vcxproj.filters
+/MathExpr/VC/MathExpr.vcxproj
+/Server/o
+/Server/*.ppu
+/Server/*.o
+/Server/*.res
+/Server/*.bak
+/Server/*.rc
+/Packages/wst-0.5/*.rst
+/Packages/wst-0.5/*.ppu
+/Packages/wst-0.5/*.o
+/MathExpr/VC/Debug
+/Server/backup/*.bak
+/Server/client_interfaces/backup/*.bak
+
+# Additional Lazarus/FPC build artifacts
+*.exe
+*.dll
+*.cgi
+*.lps
+*.identcache
+/Packages/TAGraph/Package/lib/
+/Desktop/Forms/backup/
+/Desktop/backup/
+*.compiled
+*.or
+*.tmp
+*.~*
+*.local
+*.identcache
+Desktop/Fit.res
+
+# Runtime artifacts (app settings + params log)
+/Desktop/config.xml
+/config.xml
+/Desktop/log.txt
+/log.txt
+
+# Installer / release artifacts (published via GitHub Releases, never committed)
+*.AppImage
+*.deb
+*.rpm
+*.dmg
+*.pkg
+*.msi
+*.setup.exe
+
+# Test build artifacts
+/tests/fit_tests
+/tests/*.o
+/tests/*.ppu
+/tests/link*.res
+/tests/lib/
+/tests/log.txt
+/tests/config.xml
+/dist/
+
+# Compute worker build output
+/Worker/o/
+/Worker/lib/
+
+# Tools build output
+/tools/*.o
+/tools/*.ppu
+/tools/lib/
+/tools/link*.res
+
+# Python compute sidecar
+Worker/py/.venv/
+
+#  The icon generator's own environment (Pillow), built from
+#  tools/gen-icons/requirements.txt by the prerequisites step.
+/tools/gen-icons/.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.coverage
+
+#  A module build targets its suite binary here, so it lands in this tree.
+/tests/fit_tests_pro
+
+#  Coverage: the binaries and raw measurements are generated, and callgrind
+#  output is large. The BASELINE reports are committed deliberately - they are
+#  what an after-run is compared against - so they are not ignored here.
+/tests/fit_tests_cov
+/tests/fit_tests_cov_pro
+/tools/coverage/callgrind-*.out
+/tools/coverage/coverage-*.md
+
+#  Output of the example module's projects.
+/Modules/example-linear/o/
+/Modules/example-linear/lib/
+/tests/fit_tests_example
+/Worker/o/fit_server_example
+/Modules/example-linear/backup/
+*.lps
+
+# The registry dumper is built on demand to generate the site's diagrams; its
+# units and its binary are build output, not sources.
+/scripts/dump-registries/lib/
+/scripts/dump-registries/dump_registries
+/scripts/dump-registries/dump_registries.exe
+/tools/coverage/.lazpcp/
+/tests/probe
+/plans/

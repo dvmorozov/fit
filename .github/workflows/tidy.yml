@@ -1,0 +1,49 @@
+#  Deletes the runs a green run supersedes. Called by CI, Pages and Release
+#  rather than pasted into each: one copy of the rule, so the three lists age
+#  the same way.
+#
+#  Once a run is green, the runs before it are noise. A failed run's logs are
+#  evidence only while the failure is current; superseded by a green one they
+#  are a list of problems that no longer exist, which reads as a project in
+#  trouble rather than a project that fixed things.
+#
+#  Only ever deletes runs of the CALLING workflow, only completed ones, and
+#  never the run doing the deleting. The permanent record of what changed is the
+#  commit history, not the Actions list.
+name: Tidy
+
+on:
+  workflow_call:
+
+permissions:
+  actions: write        #  the only permission this needs
+
+jobs:
+  tidy:
+    name: Remove superseded runs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete the runs this one supersedes
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          RUN_ID: ${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          #  Identified by the workflow this run belongs to, rather than by file
+          #  name or title - both of which change without anything noticing.
+          #  Reached through workflow_call, RUN_ID is still the calling run, so
+          #  this resolves to whichever workflow actually triggered.
+          wf=$(gh api "repos/$REPO/actions/runs/$RUN_ID" --jq .workflow_id)
+          old=$(gh api --paginate "repos/$REPO/actions/workflows/$wf/runs?per_page=100" \
+                --jq ".workflow_runs[] | select(.id != $RUN_ID) | select(.status == \"completed\") | .id")
+          if [ -z "$old" ]; then
+            echo "nothing to remove"
+            exit 0
+          fi
+          n=0
+          for id in $old; do
+            gh api -X DELETE "repos/$REPO/actions/runs/$id" >/dev/null && n=$((n+1)) || \
+              echo "  could not delete run $id (still referenced?)"
+          done
+          echo "removed $n superseded run(s); this one remains"

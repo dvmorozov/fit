@@ -1,0 +1,69 @@
+#  Publishes the site from the gh-pages branch. It is a workflow rather than the
+#  repository's "deploy from branch" setting so that publishing is one step the
+#  repository owns - the deployment, and the cleanup of the runs it supersedes.
+#  The page itself needs no rewriting: its download links go through GitHub's
+#  /releases/latest/ redirect, so they are right whenever the site is published.
+#
+#  Requires Settings -> Pages -> Source = "GitHub Actions". Left on "Deploy from
+#  a branch" the built-in pages-build-deployment job publishes gh-pages verbatim
+#  and this workflow never runs.
+name: Pages
+
+on:
+  #  No `push` trigger here: a push runs the workflows of the branch pushed, and
+  #  this file lives on main. The gh-pages branch carries a stub that calls this
+  #  one, so publishing the site still happens on a push to it.
+  workflow_dispatch:
+  #  Callable, so a workflow that has a reason to republish the site can do it
+  #  without duplicating the deploy steps.
+  workflow_call:
+
+#  A called workflow cannot request more than its caller granted, and it cannot
+#  grant more than it lists here either - so `actions: write` has to appear in
+#  BOTH this block and the gh-pages stub that calls it, or the run does not start
+#  at all. It is listed per job below rather than relied on from here.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+  actions: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    #  Spelled out because the block above had to widen for the tidy job:
+    #  deploying the site has no business deleting workflow runs.
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: gh-pages }
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with: { path: . }
+      - id: deployment
+        uses: actions/deploy-pages@v4
+
+  #  Publishing is also when the older Pages runs stop being worth keeping.
+  #
+  #  Named with an explicit ref rather than `./`, unlike the other two callers.
+  #  This workflow is itself reached across a ref - the gh-pages stub calls it
+  #  @main - and what `./` resolves to from inside a workflow that was called
+  #  that way is not something the documentation settles. The site pipeline is
+  #  an expensive place to find out, so it is spelled out.
+  tidy:
+    needs: deploy
+    if: success()
+    uses: dvmorozov/fit/.github/workflows/tidy.yml@main
+    permissions:
+      actions: write

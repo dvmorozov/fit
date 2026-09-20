@@ -1,0 +1,166 @@
+#  Does the published site still work? Not "did the page build" - whether every
+#  link a visitor can click still resolves, the four downloads first of all.
+#
+#  Why this exists as a workflow of its own. The download table links
+#  /releases/latest/download/<name>, which resolves only while a PUBLISHED
+#  release carries that asset. Nothing in the page can go wrong for those links
+#  to die: a release turns back into a draft the moment its tag is deleted, and
+#  publishing the snapshot used to delete every tag on the remote - so a
+#  documentation change 404'd all four downloads, days after the release that
+#  built them, while every workflow stayed green and the page went on saying
+#  "latest". The site is the one artefact whose health is not a property of any
+#  single run, so it is checked on a schedule and after the runs that can affect
+#  it, against the live URL a visitor actually gets.
+#
+#  Reached by workflow_run rather than by being called from Release and Pages:
+#  a called workflow cannot ask for more permission than its caller granted, and
+#  wiring one into both would spread this check's needs across two files that
+#  have nothing else to do with it. workflow_run always runs the copy on the
+#  default branch, with its own permissions.
+name: Links
+
+on:
+  schedule:
+    #  Daily. The failure this exists for arrives hours or days after the run
+    #  that caused it, so "after every release" alone would never have caught it.
+    - cron: '17 6 * * *'
+  workflow_run:
+    workflows: [ Release, Pages ]
+    types: [ completed ]
+  workflow_dispatch:
+
+#  Wide enough for the tidy job below, which deletes the runs a green one
+#  supersedes; the check itself is narrowed back to read at the job.
+permissions:
+  contents: read
+  actions: write
+
+concurrency:
+  group: links
+  cancel-in-progress: false
+
+jobs:
+  check:
+    name: Every link on the published site
+    permissions:
+      contents: read
+    runs-on: ubuntu-latest
+    steps:
+      - name: Let a fresh deployment settle
+        if: github.event_name == 'workflow_run'
+        #  Pages serves the previous copy for a moment after the deployment job
+        #  reports success. Checking through that window would fail a site that
+        #  is fine, which is worse than checking a minute later.
+        run: sleep 60
+
+      - name: Walk the site and follow every link it offers
+        env:
+          SITE: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
+          REPO: ${{ github.repository }}
+        run: |
+          set -uo pipefail
+
+          #  Fetched, never assumed: this checks what is served, not what is in
+          #  the branch. Range-requested so a 24 MB installer costs one byte -
+          #  a server that ignores Range answers 200 and that is an answer too.
+          fetch_code() {
+            curl -sL --retry 2 --retry-delay 5 --max-time 60 \
+                 -r 0-0 -o /dev/null -w '%{http_code}' \
+                 -H 'User-Agent: fit-link-check' "$1"
+          }
+          ok_code() { [ "$1" -ge 200 ] && [ "$1" -lt 400 ]; }
+
+          #  Checked twice before being called broken. A single 5xx from a CDN
+          #  is not a broken site, and a check that cries wolf gets ignored.
+          check() {
+            code=$(fetch_code "$1")
+            if ok_code "$code"; then echo "$code"; return; fi
+            sleep 15
+            fetch_code "$1"
+          }
+
+          #  What this repository is responsible for: the site itself and the
+          #  links into its own GitHub repository. A social profile or a licence
+          #  text on another domain is not something a failing job here could
+          #  fix, and those hosts refuse robots anyway - listed as skipped so
+          #  the log still says what was NOT looked at.
+          ours() {
+            case "$1" in
+              "$SITE"*|https://github.com/$REPO*|https://github.com/$REPO) return 0 ;;
+              *) return 1 ;;
+            esac
+          }
+
+          #  The site is one flat directory of .html pages, so a queue of page
+          #  names is the whole crawl.
+          queue='index.html'
+          seen_pages=''
+          links=''
+
+          while [ -n "$queue" ]; do
+            page=${queue%% *}
+            rest=${queue#* }; [ "$rest" = "$queue" ] && rest=''
+            queue=$rest
+            case " $seen_pages " in *" $page "*) continue ;; esac
+            seen_pages="$seen_pages $page"
+
+            body=$(curl -sL --retry 2 --max-time 60 -H 'User-Agent: fit-link-check' "$SITE$page") || {
+              echo "::error::$SITE$page could not be fetched at all"
+              exit 1
+            }
+            echo "read $page ($(printf %s "$body" | wc -c) bytes)"
+
+            for href in $(printf %s "$body" | grep -oE '(href|src)="[^"]+"' | cut -d'"' -f2 | sort -u); do
+              href=${href%%#*}
+              [ -n "$href" ] || continue
+              case "$href" in
+                mailto:*|javascript:*|data:*) continue ;;
+                http://*|https://*) url=$href ;;
+                /*) continue ;;   # nothing on this site is written root-relative
+                *) url="$SITE$href"
+                   case "$href" in *.html)
+                     case " $seen_pages " in *" $href "*) ;; *) queue="$queue $href" ;; esac
+                   esac ;;
+              esac
+              case " $links " in *" $url "*) ;; *) links="$links $url" ;; esac
+            done
+          done
+
+          echo
+          bad=''
+          for url in $links; do
+            if ours "$url"; then
+              code=$(check "$url")
+              if ok_code "$code"; then
+                printf '  %s  %s\n' "$code" "$url"
+              else
+                printf '  %s  %s   <-- BROKEN\n' "$code" "$url"
+                bad="$bad $url"
+              fi
+            else
+              printf '  ---  %s   (not ours; not checked)\n' "$url"
+            fi
+          done
+
+          echo
+          if [ -n "$bad" ]; then
+            for url in $bad; do echo "::error::the published site links a dead URL: $url"; done
+            case "$bad" in
+              *releases/latest/download/*)
+                echo '::error::A download link is dead. /releases/latest serves only a PUBLISHED'
+                echo 'release: check that the newest release is not a draft and that its tag'
+                echo 'still exists on the remote - deleting the tag un-publishes the release.' ;;
+            esac
+            exit 1
+          fi
+          echo "every link on $SITE resolves"
+
+  #  A daily check that keeps a year of runs is its own kind of noise. Only on
+  #  the runs this workflow owns: reached through workflow_run it is still a
+  #  top-level run of THIS workflow, so tidy deletes Links runs and nothing else.
+  tidy:
+    needs: check
+    if: success()
+    uses: dvmorozov/fit/.github/workflows/tidy.yml@main
+    permissions:
+      actions: write

@@ -1,0 +1,122 @@
+<!--  The prose of the Fit landing page. Everything technical - what is
+      registered, what state it is in - is generated and marked below with the
+      status-table placeholder; nothing in here restates it. Do not write that
+      placeholder out in full here: substitution does not skip comments, so a
+      second copy of it renders a second status table and tears this comment
+      open, spilling the rest of it onto the page.
+
+      The download links go through GitHub's /releases/latest/ redirect rather
+      than naming a version. Nothing rewrites them, so the page cannot be
+      published into a window where the release it names does not exist yet.
+      The file names are a contract with the renaming step in
+      .github/workflows/public-release.yml, which also renames the versioned
+      .deb and .rpm to the fixed names linked here; change one and change
+      both. tools/build-tests/release_assets.tests.ps1 checks that this table,
+      that renaming step, the upload list and the job that publishes the draft
+      all name the same files.  -->
+
+<p>An interactive curve-fitting application. You load a data set, place curves on
+it, and the app fits them &mdash; one peak or a hundred, by hand or fully
+automatically.</p>
+
+<p>Written in Free Pascal with Lazarus. It runs on <strong>Linux, Windows and
+macOS</strong>.</p>
+
+<h2>Automatic decomposition</h2>
+
+<p>One command, <em>Fit &rarr; Automatically</em>, turns a raw profile into a
+small set of curves. It subtracts the background and seeds a curve on every point
+of every peak. It then removes curves one at a time for as long as the fit stays
+within the accuracy you set, the <em>maximum acceptable R-factor</em>. What is
+left is the fewest curves that accuracy allows. You don't guess the number of
+curves or tune a penalty weight. On the two-peak sample that ships with Fit, 32
+starting curves come down to 3 in well under a minute.</p>
+
+<p><a href="guide-fitting.html">How to use it</a> &middot;
+<a href="how-many-curves.html">How many curves does the profile need?</a>
+&mdash; the rule, and how it compares with AICc, BIC and the other published
+methods.</p>
+
+<h2>Download</h2>
+
+<p>Built by CI from the sources in this repository. On macOS, build it
+yourself: one script produces <code>Fit.app</code> and installs it.</p>
+
+<div class="table-scroll">
+<table>
+  <thead><tr><th>Platform</th><th>Download</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Linux</strong> (x86-64)</td><td><a href="https://github.com/dvmorozov/fit/releases/latest/download/Fit-linux.tar.gz">Fit-linux.tar.gz</a> &mdash; portable archive</td></tr>
+    <tr><td><strong>Debian, Ubuntu</strong> (x86-64)</td><td><a href="https://github.com/dvmorozov/fit/releases/latest/download/Fit-linux.deb">Fit-linux.deb</a> &mdash; <code>sudo apt install ./Fit-linux.deb</code></td></tr>
+    <tr><td><strong>Fedora, RHEL, openSUSE</strong> (x86-64)</td><td><a href="https://github.com/dvmorozov/fit/releases/latest/download/Fit-linux.rpm">Fit-linux.rpm</a> &mdash; <code>sudo dnf install ./Fit-linux.rpm</code></td></tr>
+    <tr><td><strong>Windows</strong> (x86-64)</td><td><a href="https://github.com/dvmorozov/fit/releases/latest/download/Fit-windows-setup.exe">Fit-windows-setup.exe</a> &mdash; installer</td></tr>
+    <tr><td><strong>macOS</strong> (Apple Silicon, Intel)</td><td><code>./scripts/build-app.ps1 -Task all -Install</code></td></tr>
+  </tbody>
+</table>
+</div>
+
+<p>Each link above serves the
+<a href="https://github.com/dvmorozov/fit/releases/latest">latest release</a> &middot;
+<a href="https://github.com/dvmorozov/fit/releases">all releases</a></p>
+
+<p>Fit is two programs: the desktop client, which has no fitting engine of its
+own, and the compute server it talks to over HTTP. <strong>Every installed Fit
+starts the server itself</strong> &mdash; the Windows shortcut, the Linux
+<code>fit</code> command and <code>Fit.app</code> all launch through a wrapper
+that starts a server on port 8787 when nothing answers there, and reuses one
+that does. The portable Linux archive is the exception: start
+<code>fit_server</code> before the client.</p>
+
+<p><a href="https://github.com/dvmorozov/fit/blob/main/docs/user-guide/building-from-source.md">Building
+from source</a> covers the script, the macOS bundle and a Lazarus IDE
+walkthrough with exact versions.</p>
+
+<h2>Watch it work</h2>
+
+<!--  The pictures below live in docs/, and the generator copies each one
+      this page names; a name with no file behind it fails generation rather
+      than publishing a broken image.  -->
+
+<p><video controls muted playsinline preload="metadata" poster="media/fit-project.png"
+  src="media/fit-demo.mp4" title="Fitting a profile automatically"></video></p>
+
+<p>A project run through <em>Fit &rarr; Automatically</em> with Animation Mode
+on: curves are seeded on every point of the peaks and removed one at a time while
+the fit stays within the accuracy set. Played three times faster than it runs.</p>
+
+<div class="gallery">
+<figure><img src="media/fit-project.png" alt="The project opened, before the fit" loading="lazy">
+<figcaption>The project, before the fit.</figcaption></figure>
+<figure><img src="media/fit-fitting.png" alt="The fit under way, with the curves being refined on the chart" loading="lazy">
+<figcaption>The fit under way.</figcaption></figure>
+<figure><img src="media/fit-fitted.png" alt="The result of the automatic fit" loading="lazy">
+<figcaption>The result of <em>Fit &rarr; Automatically</em>.</figcaption></figure>
+</div>
+
+<h2>Where it stands</h2>
+
+{{STATUS_TABLE}}
+
+<h2>User guide</h2>
+
+<p>Everything the program can do, one chapter per part of it &mdash; the same
+text Fit shows under <em>Help &rarr; Explain Everything</em>, published from the
+same source, so the site and the program say the same thing.
+<a href="guide.html">Contents</a>.</p>
+
+{{GUIDE_CHAPTERS}}
+
+<h2>For developers</h2>
+
+<p>Fit is a framework as much as an application: a new curve type, data loader,
+optimiser or whole analysis vertical is added by registration, with no framework
+file changed. <a href="developers.html">The developers' pages</a> hold the
+architecture, the extension points and the how-tos, generated from the build
+itself.</p>
+
+<h2>Test data</h2>
+
+<p>A sample data set ships inside every download, under <code>Data/</code>.
+Separately: <a href="https://github.com/dvmorozov/fit/raw/main/Data/test_data.zip">test_data.zip</a>.</p>
+
+<p>GPLv3-or-later. Documentation CC BY 4.0.</p>

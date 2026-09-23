@@ -1,0 +1,503 @@
+object Form1: TForm1
+  ActiveControl = TabSheet3
+  Caption = 'Test of TAChart'
+  ClientHeight = 579
+  ClientWidth = 649
+  OnClose = Form1Close
+  OnShow = Form1Show
+  PixelsPerInch = 96
+  HorzScrollBar.Page = 648
+  VertScrollBar.Page = 578
+  Left = 384
+  Height = 579
+  Top = 275
+  Width = 649
+  object TAChart1: TTAChart
+    AutoUpdateXMin = True
+    AutoUpdateXMax = True
+    AutoUpdateYMin = True
+    AutoUpdateYMax = True
+    OnDrawVertReticule = TAChart1DrawVertReticule
+    OnDrawReticule = TAChart1DrawReticule
+    Canvas.Color = clWhite
+    Align = alClient
+    Color = clBtnFace
+    Height = 430
+    Width = 649
+  end
+  object PageControl1: TPageControl
+    ActivePage = TabSheet2
+    Align = alBottom
+    TabIndex = 0
+    TabOrder = 0
+    Height = 149
+    Top = 430
+    Width = 649
+    object TabSheet2: TTabSheet
+      Caption = 'Series'
+      ClientHeight = 123
+      ClientWidth = 641
+      Height = 123
+      Width = 641
+      object Label2: TLabel
+        BorderSpacing.OnChange = nil
+        Caption = 'A fit ='
+        Color = clNone
+        Left = 212
+        Height = 13
+        Top = 28
+        Width = 31
+      end
+      object Label3: TLabel
+        BorderSpacing.OnChange = nil
+        Caption = 'B fit ='
+        Color = clNone
+        Left = 212
+        Height = 13
+        Top = 44
+        Width = 30
+      end
+      object Label4: TLabel
+        BorderSpacing.OnChange = nil
+        Caption = 'Error fit ='
+        Color = clNone
+        Left = 212
+        Height = 13
+        Top = 60
+        Width = 48
+      end
+      object Label8: TLabel
+        Caption = 'Label8'
+        Color = clNone
+        Left = 324
+        Height = 13
+        Top = 7
+        Width = 31
+      end
+      object Label9: TLabel
+        Caption = 'Label9'
+        Color = clNone
+        Left = 324
+        Height = 13
+        Top = 28
+        Width = 31
+      end
+      object Label10: TLabel
+        Caption = 'Label10'
+        Color = clNone
+        Left = 324
+        Height = 13
+        Top = 49
+        Width = 37
+      end
+      object Button8: TButton
+        BorderSpacing.InnerBorder = 2
+        Caption = 'Add sin'
+        OnClick = Button8Click
+        TabOrder = 0
+        Left = 8
+        Height = 25
+        Top = 9
+        Width = 90
+      end
+      object Button13: TButton
+        BorderSpacing.InnerBorder = 2
+        Caption = 'Add sqr'
+        OnClick = Button13Click
+        TabOrder = 1
+        Left = 8
+        Height = 25
+        Top = 34
+        Width = 90
+      end
+      object Button14: TButton
+        BorderSpacing.InnerBorder = 2
+        Caption = 'Add noisy line'
+        OnClick = Button14Click
+        TabOrder = 2
+        Left = 8
+        Height = 25
+        Top = 59
+        Width = 90
+      end
+      object Button15: TButton
+        BorderSpacing.InnerBorder = 2
+        Caption = 'Clear All'
+        OnClick = Button15Click
+        TabOrder = 3
+        Left = 8
+        Height = 25
+        Top = 90
+        Width = 90
+      end
+      object CheckBox2: TCheckBox
+        Caption = 'Show points'
+        OnClick = CheckBox2Click
+        TabOrder = 4
+        Left = 108
+        Height = 13
+        Top = 10
+        Width = 77
+      end
+      object CheckBox3: TCheckBox
+        Caption = 'Show lines'
+        Checked = True
+        OnClick = CheckBox3Click
+        State = cbChecked
+        TabOrder = 5
+        Left = 108
+        Height = 13
+        Top = 34
+        Width = 69
+      end
+      object Button1: TButton
+        BorderSpacing.OnChange = nil
+        BorderSpacing.InnerBorder = 2
+        Caption = 'Refresh'
+        OnClick = Button1Click
+        TabOrder = 6
+        Left = 108
+        Height = 25
+        Top = 60
+        Width = 90
+      end
+      object Button2: TButton
+        BorderSpacing.OnChange = nil
+        BorderSpacing.InnerBorder = 2
+        Caption = 'Set fit line color'
+        OnClick = Button2Click
+        TabOrder = 7
+        Left = 108
+        Height = 25
+        Top = 90
+        Width = 90
+      end
+      object CheckBox8: TCheckBox
+        Caption = 'Fit'
+        OnClick = CheckBox8Click
+        TabOrder = 8
+        Left = 212
+        Height = 13
+        Top = 9
+        Width = 31
+      end
+      object CheckBox12: TCheckBox
+        Caption = 'Show Reticule'
+        OnClick = CheckBox12Click
+        TabOrder = 9
+        Left = 364
+        Height = 13
+        Top = 92
+        Width = 86
+      end
+      object CheckBox13: TCheckBox
+        Caption = 'Show Vertical Reticule'
+        OnClick = CheckBox13Click
+        TabOrder = 10
+        Left = 484
+        Height = 13
+        Top = 92
+        Width = 124
+      end
+      object ComboBox1: TComboBox
+        Items.Strings = (
+          'Rectangle'
+          'Circle'
+          'Cross'
+          'DiagCross'
+          'Star'
+        )
+        ItemIndex = 2
+        MaxLength = 0
+        OnChange = ComboBox1Change
+        TabOrder = 11
+        Text = 'Cross'
+        Left = 217
+        Height = 21
+        Top = 87
+        Width = 100
+      end
+    end
+    object TabSheet1: TTabSheet
+      Caption = 'Graph'
+      ClientHeight = 123
+      ClientWidth = 641
+      Height = 123
+      Width = 641
+      object Label5: TLabel
+        Caption = 'Value :'
+        Color = clNone
+        Left = 322
+        Height = 17
+        Top = 12
+        Width = 65
+      end
+      object Label1: TLabel
+        Caption = 'Title :'
+        Color = clNone
+        Left = 410
+        Height = 17
+        Top = 7
+        Width = 34
+      end
+      object Label6: TLabel
+        Caption = 'Y Label :'
+        Color = clNone
+        Left = 411
+        Height = 17
+        Top = 54
+        Width = 65
+      end
+      object Label7: TLabel
+        Caption = 'X Label :'
+        Color = clNone
+        Left = 412
+        Height = 17
+        Top = 76
+        Width = 65
+      end
+      object CheckBox1: TCheckBox
+        BorderSpacing.OnChange = nil
+        Caption = 'Mirror X'
+        OnClick = CheckBox1Click
+        TabOrder = 0
+        Left = 2
+        Height = 23
+        Top = 2
+        Width = 58
+      end
+      object Button9: TButton
+        BorderSpacing.OnChange = nil
+        BorderSpacing.InnerBorder = 2
+        Caption = 'Set graph color'
+        OnClick = Button9Click
+        TabOrder = 1
+        Left = 3
+        Height = 25
+        Top = 31
+        Width = 99
+      end
+      object Button10: TButton
+        BorderSpacing.OnChange = nil
+        BorderSpacing.InnerBorder = 2
+        Caption = 'Set back color'
+        OnClick = Button10Click
+        TabOrder = 2
+        Left = 2
+        Height = 25
+        Top = 58
+        Width = 99
+      end
+      object CheckBox4: TCheckBox
+        BorderSpacing.OnChange = nil
+        Caption = 'Auto Xmin'
+        Checked = True
+        OnClick = CheckBox4Click
+        State = cbChecked
+        TabOrder = 3
+        Left = 120
+        Height = 23
+        Top = 10
+        Width = 90
+      end
+      object CheckBox5: TCheckBox
+        BorderSpacing.OnChange = nil
+        Caption = 'Auto Xmax'
+        Checked = True
+        OnClick = CheckBox5Click
+        State = cbChecked
+        TabOrder = 4
+        Left = 120
+        Height = 23
+        Top = 33
+        Width = 90
+      end
+      object CheckBox6: TCheckBox
+        BorderSpacing.OnChange = nil
+        Caption = 'Auto Ymin'
+        Checked = True
+        OnClick = CheckBox6Click
+        State = cbChecked
+        TabOrder = 5
+        Left = 120
+        Height = 23
+        Top = 58
+        Width = 90
+      end
+      object CheckBox7: TCheckBox
+        BorderSpacing.OnChange = nil
+        Caption = 'Auto Ymax'
+        Checked = True
+        OnClick = CheckBox7Click
+        State = cbChecked
+        TabOrder = 6
+        Left = 120
+        Height = 23
+        Top = 82
+        Width = 90
+      end
+      object Button4: TButton
+        BorderSpacing.OnChange = nil
+        BorderSpacing.InnerBorder = 2
+        Caption = 'Set X Min'
+        OnClick = Button4Click
+        TabOrder = 7
+        Left = 220
+        Height = 25
+        Top = 10
+        Width = 75
+      end
+      object Button6: TButton
+        BorderSpacing.OnChange = nil
+        BorderSpacing.InnerBorder = 2
+        Caption = 'Set X Max'
+        OnClick = Button6Click
+        TabOrder = 8
+        Left = 220
+        Height = 25
+        Top = 34
+        Width = 75
+      end
+      object Button11: TButton
+        BorderSpacing.OnChange = nil
+        BorderSpacing.InnerBorder = 2
+        Caption = 'Set Y Min'
+        OnClick = Button11Click
+        TabOrder = 9
+        Left = 220
+        Height = 25
+        Top = 58
+        Width = 75
+      end
+      object Button12: TButton
+        BorderSpacing.OnChange = nil
+        BorderSpacing.InnerBorder = 2
+        Caption = 'Set Y Max'
+        OnClick = Button12Click
+        TabOrder = 10
+        Left = 220
+        Height = 25
+        Top = 82
+        Width = 75
+      end
+      object Edit1: TEdit
+        TabOrder = 11
+        Text = '200'
+        Left = 320
+        Height = 23
+        Top = 31
+        Width = 80
+      end
+      object Edit2: TEdit
+        TabOrder = 12
+        Text = 'Title'
+        Left = 444
+        Height = 23
+        Top = 1
+        Width = 80
+      end
+      object CheckBox9: TCheckBox
+        Caption = 'Show title'
+        OnClick = CheckBox9Click
+        TabOrder = 13
+        Left = 410
+        Height = 23
+        Top = 28
+        Width = 90
+      end
+      object Edit3: TEdit
+        TabOrder = 14
+        Text = 'Y Label'
+        Left = 468
+        Height = 23
+        Top = 48
+        Width = 80
+      end
+      object Edit4: TEdit
+        TabOrder = 15
+        Text = 'X Label'
+        Left = 468
+        Height = 23
+        Top = 70
+        Width = 80
+      end
+      object CheckBox10: TCheckBox
+        Caption = 'Show Axis Labels'
+        OnClick = CheckBox10Click
+        TabOrder = 16
+        Left = 413
+        Height = 23
+        Top = 97
+        Width = 140
+      end
+      object CheckBox11: TCheckBox
+        Caption = 'Show legend'
+        OnClick = CheckBox11Click
+        TabOrder = 17
+        Left = 311
+        Height = 23
+        Top = 97
+        Width = 90
+      end
+    end
+    object TabSheet3: TTabSheet
+      Caption = 'Lines'
+      ClientHeight = 123
+      ClientWidth = 641
+      Height = 123
+      Width = 641
+      object Label11: TLabel
+        Caption = 'Line position: '
+        Color = clNone
+        Left = 133
+        Height = 13
+        Top = 11
+        Width = 66
+      end
+      object Button3: TButton
+        BorderSpacing.InnerBorder = 2
+        Caption = 'Add horizontal line'
+        OnClick = Button3Click
+        TabOrder = 0
+        Left = 7
+        Height = 25
+        Top = 7
+        Width = 117
+      end
+      object Button5: TButton
+        BorderSpacing.InnerBorder = 2
+        Caption = 'Add vertical line'
+        OnClick = Button5Click
+        TabOrder = 1
+        Left = 7
+        Height = 25
+        Top = 36
+        Width = 117
+      end
+      object Button7: TButton
+        BorderSpacing.InnerBorder = 2
+        Caption = 'Clear all'
+        OnClick = Button15Click
+        TabOrder = 2
+        Left = 7
+        Height = 25
+        Top = 65
+        Width = 117
+      end
+      object Edit5: TEdit
+        TabOrder = 3
+        Text = '0'
+        Left = 204
+        Height = 23
+        Top = 7
+        Width = 80
+      end
+    end
+  end
+  object ColorDialog1: TColorDialog
+    Title = 'Choisir une couleur'
+    Title = 'Choisir une couleur'
+    left = 464
+    top = 504
+  end
+end

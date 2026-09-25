@@ -1,0 +1,39 @@
+LazarusResources.Add('TAboutBox','FORMDATA',[
+  'TPF0'#9'TAboutBox'#8'AboutBox'#4'Left'#3#206#2#6'Height'#3#192#0#3'Top'#3'R'
+  +#1#5'Width'#3'U'#1#18'HorzScrollBar.Page'#3'o'#1#18'VertScrollBar.Page'#3#250
+  +#0#13'ActiveControl'#7#8'ButtonOK'#11'BorderStyle'#7#8'bsDialog'#7'Caption'#6
+  +#5'About'#12'ClientHeight'#3#192#0#11'ClientWidth'#3'U'#1#6'OnShow'#7#8'Form'
+  +'Show'#8'Position'#7#16'poMainFormCenter'#10'LCLVersion'#6#7'2.0.6.0'#0#6'TP'
+  +'anel'#10'PanelAbout'#4'Left'#2#6#6'Height'#3#148#0#3'Top'#2#6#5'Width'#3'I'
+  +#1#7'Anchors'#11#5'akTop'#6'akLeft'#7'akRight'#8'akBottom'#0#10'BevelInner'#7
+  +#9'bvLowered'#10'BevelOuter'#7#6'bvNone'#12'ClientHeight'#3#148#0#11'ClientW'
+  +'idth'#3'I'#1#8'TabOrder'#2#0#0#11'TStaticText'#20'StaticTextDesignedBy'#4'L'
+  +'eft'#3#144#0#6'Height'#2#18#3'Top'#2'8'#5'Width'#3#177#0#9'Alignment'#7#8't'
+  +'aCenter'#7'Caption'#6#11'designed by'#12'Font.CharSet'#7#18'EASTEUROPE_CHAR'
+  +'SET'#10'Font.Color'#7#7'clBlack'#11'Font.Height'#2#243#9'Font.Name'#6#11'Co'
+  +'urier New'#10'Font.Style'#11#6'fsBold'#0#10'ParentFont'#8#8'TabOrder'#2#0#0
+  +#0#11'TStaticText'#16'StaticTextAuthor'#4'Left'#3#144#0#6'Height'#2#18#3'Top'
+  +#2'P'#5'Width'#3#177#0#9'Alignment'#7#8'taCenter'#7'Caption'#6#10'D. Morozov'
+  +#12'Font.CharSet'#7#18'EASTEUROPE_CHARSET'#10'Font.Color'#7#7'clBlack'#11'Fo'
+  +'nt.Height'#2#243#9'Font.Name'#6#11'Courier New'#10'Font.Style'#11#6'fsBold'
+  +#0#10'ParentFont'#8#8'TabOrder'#2#1#0#0#11'TStaticText'#15'StaticTextTitle'#4
+  +'Left'#3#144#0#6'Height'#2#18#3'Top'#2#8#5'Width'#3#177#0#9'Alignment'#7#8't'
+  +'aCenter'#7'Caption'#6#3'Fit'#12'Font.CharSet'#7#18'EASTEUROPE_CHARSET'#10'F'
+  +'ont.Color'#7#7'clBlack'#11'Font.Height'#2#243#9'Font.Name'#6#11'Courier New'
+  +#10'Font.Style'#11#6'fsBold'#0#10'ParentFont'#8#8'TabOrder'#2#2#0#0#11'TStat'
+  +'icText'#17'StaticTextVersion'#4'Left'#3#144#0#6'Height'#2#18#3'Top'#2' '#5
+  +'Width'#3#177#0#9'Alignment'#7#8'taCenter'#7'Caption'#6#7'version'#12'Font.C'
+  +'harSet'#7#18'EASTEUROPE_CHARSET'#10'Font.Color'#7#7'clBlack'#11'Font.Height'
+  +#2#243#9'Font.Name'#6#11'Courier New'#10'Font.Style'#11#6'fsBold'#0#10'Paren'
+  +'tFont'#8#8'TabOrder'#2#3#0#0#11'TStaticText'#16'StaticTextGitHub'#6'Cursor'
+  +#7#11'crHandPoint'#4'Left'#3#144#0#6'Height'#2#18#3'Top'#2'v'#5'Width'#3#177
+  +#0#9'Alignment'#7#8'taCenter'#7'Caption'#6#14'View at GitHub'#10'DragCursor'
+  +#7#9'crDefault'#12'Font.CharSet'#7#15'RUSSIAN_CHARSET'#10'Font.Color'#7#6'cl'
+  +'Navy'#11'Font.Height'#2#244#9'Font.Name'#6#11'Courier New'#10'Font.Style'#11
+  +#11'fsUnderline'#0#7'OnClick'#7#21'StaticTextGitHubClick'#10'ParentFont'#8#8
+  +'TabOrder'#2#4#0#0#6'TImage'#9'ImageLogo'#4'Left'#2#8#6'Height'#3#128#0#3'To'
+  +'p'#2#8#5'Width'#3#128#0#6'Center'#9#12'Proportional'#9#7'Stretch'#9#0#0#0#7
+  +'TButton'#8'ButtonOK'#4'Left'#3#141#0#6'Height'#2#20#3'Top'#3#163#0#5'Width'
+  +#2'<'#7'Anchors'#11#8'akBottom'#0#25'BorderSpacing.InnerBorder'#2#3#7'Captio'
+  +'n'#6#2'OK'#7'Default'#9#11'ModalResult'#2#1#8'TabOrder'#2#1#0#0#0
+]);

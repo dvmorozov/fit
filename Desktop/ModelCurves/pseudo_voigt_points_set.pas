@@ -1,0 +1,172 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
+{
+This software is distributed under GPL
+in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
+
+@abstract(Contains definitions of class of curve having Pseudo-Voigt form.)
+
+@author(Dmitry Morozov dvmorozov@hotmail.com,
+LinkedIn: https://www.linkedin.com/in/dmitry-morozov-79490a59/
+Facebook: https://www.facebook.com/dmitry.v.morozov)
+}
+unit pseudo_voigt_points_set;
+
+{$IF NOT DEFINED(FPC)}
+{$DEFINE _WINDOWS}
+{$ELSEIF DEFINED(WINDOWS)}
+{$DEFINE _WINDOWS}
+{$ENDIF}
+
+interface
+
+uses
+    explanation, amplitude_curve_parameter, coordinate_axis, Classes, curve_points_set,
+    curve_types_singleton, eta_curve_parameter, named_points_set, points_set, position_curve_parameter,
+    sigma_curve_parameter, SimpMath, special_curve_parameter, SysUtils;
+
+type
+    { Function having Pseudo-Voigt form. }
+    TPseudoVoigtPointsSet = class(TNamedPointsSet)
+    protected
+        { Relative weights of gaussian and lorentzian. }
+        FEtaP: TEtaCurveParameter;
+
+        function GetEta: double;
+
+        { Performs recalculation of all points of function. }
+        procedure DoCalc; override;
+
+        property Eta: double read GetEta;
+
+    public
+        constructor Create(AOwner: TComponent; x0: double); overload;
+        { Overrides method defined in TNamedPointsSet. }
+        class function GetCurveTypeName: string; override;
+        { Overrides method defined in TNamedPointsSet. }
+        class function Explanation: TExplanation; override;
+        { Overrides method defined in TNamedPointsSet. }
+        class function GetCurveTypeId: TCurveTypeId; override;
+        class function GetExtremumMode: TExtremumMode; override;
+        { A diffraction lineshape: its argument is the scattering angle and its
+          value the measured intensity. }
+        class function PreferredAxisMode(ADimension: TAxisDimension): string;
+            override;
+        function GetCurveExpression: string; override;
+    end;
+
+implementation
+
+uses
+    int_curve_factory, checks, diffraction_axis_modes;
+
+{======================== TPseudoVoigtPointsSet ===============================}
+
+procedure TPseudoVoigtPointsSet.DoCalc;
+begin
+    PseudoVoigt(FPoints, A, Sigma, Eta, x0);
+end;
+
+constructor TPseudoVoigtPointsSet.Create(AOwner: TComponent; x0: double);
+var
+    Parameter: TSpecialCurveParameter;
+    Count:     longint;
+begin
+    inherited Create(AOwner);
+
+    Parameter := TAmplitudeCurveParameter.Create;
+    AddParameter(Parameter);
+
+    Parameter := TPositionCurveParameter.Create(x0, Self);
+    AddParameter(Parameter);
+
+    Parameter := TSigmaCurveParameter.Create;
+    Parameter.Type_ := Shared;          //  common parameter for all instances
+    AddParameter(Parameter);
+
+    FEtaP := TEtaCurveParameter.Create;
+    AddParameter(FEtaP);
+
+    InitListOfVariableParameters;
+    Count := FVariableParameters.Count;
+    CheckThat(Count = 3, 'the pseudo-Voigt curve must have built exactly its three variable parameters');
+end;
+
+function TPseudoVoigtPointsSet.GetEta: double;
+begin
+    CheckAssigned(FEtaP, 'the pseudo-Voigt shape mixing parameter eta');
+    Result := FEtaP.Value;
+end;
+
+class function TPseudoVoigtPointsSet.GetCurveTypeName: string;
+begin
+    Result := 'Pseudo-Voigt';
+end;
+
+class function TPseudoVoigtPointsSet.GetCurveTypeId: TCurveTypeId;
+begin
+    Result := StringToGUID('{9f27dc7c-970f-4dac-88cd-f5fb3400d38d}');
+end;
+
+class function TPseudoVoigtPointsSet.GetExtremumMode: TExtremumMode;
+begin
+    Result := OnlyMaximums;
+end;
+
+class function TPseudoVoigtPointsSet.PreferredAxisMode(
+    ADimension: TAxisDimension): string;
+begin
+    //  Coordinates of a diffraction pattern are stored in 2*Theta.
+    Result := DiffractionPreference(ADimension);
+end;
+
+function TPseudoVoigtPointsSet.GetCurveExpression: string;
+begin
+    //  Mirrors PseudoVoigtPoint in SimpMath.pas: (1-eta) Gaussian + eta Lorentzian,
+    //  each FWHM-normalized.
+    Result :=
+        'A*((1-eta)*(2*sqrt(log(2))/(sigma*sqrt(pi))*exp(-4*log(2)*(x0-x)**2/sigma**2))'
+        + '+eta*((2/(pi*sigma))*(1/(1+(2*(x-x0)/sigma)**2))))';
+end;
+
+var
+    CTS: ICurveFactory;
+
+class function TPseudoVoigtPointsSet.Explanation: TExplanation;
+begin
+    Result := NewExplanation('', '',
+        'A weighted sum of a Gaussian and a Lorentzian with one shared ' +
+        'width, used as a fast stand-in for the Voigt profile.',
+        esCanonical);
+    AddParagraph(Result,
+        'A ((1 - eta) G(x) + eta L(x)), where G and L are the ' +
+        'area-normalised Gaussian and Lorentzian with the same full width ' +
+        'at half maximum sigma. A is the area.');
+    AddParagraph(Result,
+        'eta, between 0 and 1, sets the mix: 0 is a pure Gaussian and 1 a ' +
+        'pure Lorentzian. It is the standard peak shape of ' +
+        'powder-diffraction profile fitting.');
+    Result.Quote := 'pV = eta L + (1 - eta) G';
+    AddLimitation(Result,
+        'It approximates the Voigt profile rather than computing it; the ' +
+        'approximation is close but not exact, so eta has no strict ' +
+        'physical meaning.');
+    AddLimitation(Result,
+        'Both components share one width, so it cannot represent a peak ' +
+        'whose Gaussian and Lorentzian widths differ strongly - use Voigt ' +
+        'for that.');
+    AddLimitation(Result,
+        'It is symmetric; see Asym. Pseudo-Voigt and 2 br. Pseudo-Voigt ' +
+        'for asymmetric peaks.');
+    AddReference(Result,
+        'P. Thompson, D. E. Cox and J. B. Hastings, Rietveld refinement ' +
+        'of Debye-Scherrer synchrotron X-ray data from Al2O3, J. Appl. ' +
+        'Cryst. 20 (1987)',
+        'pp. 79-83',
+        '');
+end;
+
+initialization
+    CTS := TCurveTypesSingleton.CreateCurveFactory;
+    CTS.RegisterCurveType(TPseudoVoigtPointsSet);
+end.

@@ -1,0 +1,35 @@
+<!--  Prose only. The component table and the class diagram below are generated
+      from package/NumericGrid.pas and marked {{COMPONENTS}} / {{CLASS_DIAGRAM}}. -->
+
+<p>A small set of <code>TStringGrid</code> descendants for Delphi and Lazarus,
+each adding one thing: clipboard support, an edit-finished event, row and column
+editing, a data-source binding, design-time cell colours, and numeric input
+validation.</p>
+
+<p>They were written for <a href="https://dvmorozov.github.io/fit/">Fit</a> and are
+used by <a href="https://dvmorozov.github.io/motifmaster/">MotifMASTER</a> as well.</p>
+
+<h2>Licence</h2>
+
+<p><strong>GPL-3.0-or-later</strong> &mdash; see
+<a href="https://github.com/dvmorozov/fitgrids/blob/master/LICENSE">LICENSE</a>.
+The same terms as Fit, the application these components were written for.</p>
+
+<h2>The components</h2>
+
+{{COMPONENTS}}
+
+{{CLASS_DIAGRAM}}
+
+<h2>Demo application</h2>
+
+<p>The example project in <code>examples/</code> puts every grid in one window.</p>
+
+<p><img src="assets/2017-03-11_15h21_53.png" alt="The example application, showing each grid type in its own panel"></p>
+
+<h2>Using it</h2>
+
+<p>The package is <code>package/FitGrids.lpk</code> for Lazarus and
+<code>package/FitGrids.dpk</code> for Delphi. Open it in the IDE and compile;
+there are no dependencies beyond the LCL or the VCL. Then drop a grid on a form
+like any other component.</p>

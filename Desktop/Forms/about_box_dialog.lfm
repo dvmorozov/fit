@@ -1,0 +1,149 @@
+object AboutBox: TAboutBox
+  Left = 718
+  Height = 560
+  Top = 338
+  Width = 520
+  HorzScrollBar.Page = 367
+  VertScrollBar.Page = 250
+  ActiveControl = ButtonOK
+  BorderIcons = [biSystemMenu, biMaximize]
+  BorderStyle = bsSizeable
+  Caption = 'About'
+  ClientHeight = 560
+  ClientWidth = 520
+  Constraints.MinHeight = 382
+  Constraints.MinWidth = 341
+  OnShow = FormShow
+  Position = poMainFormCenter
+  LCLVersion = '2.0.6.0'
+  object PanelAbout: TPanel
+    Left = 6
+    Height = 148
+    Top = 6
+    Width = 508
+    Anchors = [akTop, akLeft, akRight]
+    BevelInner = bvLowered
+    BevelOuter = bvNone
+    ClientHeight = 148
+    ClientWidth = 508
+    TabOrder = 0
+    object StaticTextDesignedBy: TStaticText
+      Left = 144
+      Height = 18
+      Top = 56
+      Width = 356
+      Anchors = [akTop, akLeft, akRight]
+      Alignment = taCenter
+      Caption = 'designed by'
+      Font.CharSet = EASTEUROPE_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 0
+    end
+    object StaticTextAuthor: TStaticText
+      Left = 144
+      Height = 18
+      Top = 80
+      Width = 356
+      Anchors = [akTop, akLeft, akRight]
+      Alignment = taCenter
+      Caption = 'D. Morozov'
+      Font.CharSet = EASTEUROPE_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 1
+    end
+    object StaticTextTitle: TStaticText
+      Left = 144
+      Height = 18
+      Top = 8
+      Width = 356
+      Anchors = [akTop, akLeft, akRight]
+      Alignment = taCenter
+      Caption = 'Fit'
+      Font.CharSet = EASTEUROPE_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 2
+    end
+    object StaticTextVersion: TStaticText
+      Left = 144
+      Height = 18
+      Top = 32
+      Width = 356
+      Anchors = [akTop, akLeft, akRight]
+      Alignment = taCenter
+      Caption = 'version'
+      Font.CharSet = EASTEUROPE_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 3
+    end
+    object StaticTextGitHub: TStaticText
+      Cursor = crHandPoint
+      Left = 144
+      Height = 18
+      Top = 118
+      Width = 356
+      Anchors = [akTop, akLeft, akRight]
+      Alignment = taCenter
+      Caption = 'View at GitHub'
+      DragCursor = crDefault
+      Font.CharSet = RUSSIAN_CHARSET
+      Font.Color = clNavy
+      Font.Height = -12
+      Font.Name = 'Courier New'
+      Font.Style = [fsUnderline]
+      OnClick = StaticTextGitHubClick
+      ParentFont = False
+      TabOrder = 4
+    end
+    object ImageLogo: TImage
+      Left = 8
+      Height = 128
+      Top = 8
+      Width = 128
+      Center = True
+      Proportional = True
+      Stretch = True
+    end
+  end
+  object MemoNotices: TMemo
+    Left = 6
+    Height = 362
+    Top = 160
+    Width = 508
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    ReadOnly = True
+    ScrollBars = ssAutoVertical
+    TabOrder = 2
+    WordWrap = True
+  end
+  object ButtonOK: TButton
+    Left = 230
+    Height = 20
+    Top = 531
+    Width = 60
+    AnchorSideLeft.Control = Owner
+    AnchorSideLeft.Side = asrCenter
+    Anchors = [akLeft, akBottom]
+    BorderSpacing.InnerBorder = 3
+    Cancel = True
+    Caption = 'OK'
+    Default = True
+    ModalResult = 1
+    TabOrder = 1
+  end
+end

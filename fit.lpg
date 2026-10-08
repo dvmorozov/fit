@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectGroup FileVersion="2">
+    <Targets>
+      <Target FileName="Desktop/Fit.lpi"/>
+      <Target FileName="Worker/fit_server.lpi"/>
+    </Targets>
+  </ProjectGroup>
+</CONFIG>

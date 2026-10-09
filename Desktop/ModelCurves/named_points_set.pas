@@ -1,0 +1,450 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
+{
+This software is distributed under GPL
+in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
+
+@abstract(Contains definitions of base curve class allowing setting up type name.)
+
+Copyright (C) Dmitry Morozov
+}
+unit named_points_set;
+
+{$IF NOT DEFINED(FPC)}
+{$DEFINE _WINDOWS}
+{$ELSEIF DEFINED(WINDOWS)}
+{$DEFINE _WINDOWS}
+{$ENDIF}
+
+interface
+
+uses
+    Types, coordinate_axis, configurable_points_set, curve_points_set,
+    explanation, self_copied_component;
+
+type
+    TNamedPointsSetClass = class of TNamedPointsSet;
+    TExtremumMode   = (
+        OnlyMaximums,
+        OnlyMinimums,
+        MaximumsAndMinimums
+        );
+    TCurveTypeId    = TGuid;
+    { Base curve class allowing setting up type name. Type name distinguishes
+      this curve from all other curve types, as opposite to the 'Title' attributes
+      which is used to distinguish separate curve instances. }
+    TNamedPointsSet = class(TCurvePointsSet)
+    private
+        { The attribute should not be used in descendants. }
+        FName: string;
+
+    public
+        { Sets name of curve type. The method is used in deserializing
+          objects received from server. }
+        procedure SetCurveTypeName(Name: string); virtual;
+        { Returns unique name of curve type. }
+        class function GetCurveTypeName: string; virtual; abstract;
+        { Returns unique type identifier. }
+        class function GetCurveTypeId: TCurveTypeId; virtual; abstract;
+        { The curve's analytic formula as a text expression in x and its parameter
+          names, in numpy syntax (e.g.
+          'A/(sigma*sqrt(2*pi))*exp(-(x0-x)**2/(2*sigma**2))'). This is what lets
+          the Python backend stay model-agnostic: it evaluates whatever formula it
+          is sent instead of re-implementing each curve type. Empty when the curve
+          has no closed-form expression the backend can evaluate. }
+        function GetCurveExpression: string; virtual;
+        { True when instances of this type have a closed-form expression that
+          the formula-based backends (Python sidecar, remote compute server) can
+          evaluate - i.e. exactly when GetCurveExpression returns non-empty.
+
+          It exists at CLASS level because the UI has to decide whether to offer
+          those backends before any instance is placed. The two must agree, and
+          a test walks the registry asserting they do, so a future type cannot
+          override one and forget the other. }
+        class function IsAnalytic: boolean; virtual;
+        { Optional grouping for the curve-type menu. Empty (the default) means
+          ungrouped, so every existing curve type keeps appearing exactly where
+          it does now; a non-empty group asks the UI for a submenu of that name.
+          Introduced for a wave-pattern pack, whose six pattern types would
+          otherwise crowd the flat list. }
+        class function GetCurveTypeGroup: string; virtual;
+        { True when this type's amplitude can move freely over orders of
+          magnitude during a fit, rather than being pinned near the data by how
+          the curve is seeded.
+
+          A capability, not a list of type names (D18): whether a given objective
+          may be used with a given curve type is DERIVED from this, so adding a
+          seventh pattern type needs no edit to any compatibility table.
+
+          What it guards: an objective normalised by the model's own integral
+          (fit_loss.LossIsSelfNormalising) can be reduced by inflating the model
+          instead of by fitting it, because the numerator is scale-invariant
+          while the denominator is not. A peak never exploits that - its
+          amplitude is seeded from the data and stays there - which is why the
+          defect went unnoticed for 25 years. A curve free to grow exploits it
+          immediately, so that pairing is refused. }
+        class function AmplitudeIsUnbounded: boolean; virtual;
+        { The named point set instances of this type are PLACED from, or empty
+          when they are placed from a single curve position.
+
+          A capability, not a type test (D18). The engine has one decision to
+          make before it can build a model - where the curves come from - and
+          this is the answer to it: empty means the existing path, one x per
+          curve, which is every peak type and therefore the default. A non-empty
+          name says the type is placed by marking an extent, and names the point
+          set the picks are collected into ('wave-bounds' for a wave
+          pattern).
+
+          WHY A NAME AND NOT A FLAG: the same answer tells the client which set
+          a pick belongs to and the server which stored set to slice per fit
+          interval, so a module can bring its own point set without another
+          edit to the engine.
+
+          WHY ASKED OF THE CLASS: the decision is a property of the type, known
+          before anything is built. Deriving it from an attempt to build - "did
+          the module handle this?" - is what makes an ordinary situation (the
+          type is selected, nothing is marked yet) fall through to the
+          position-based path, which with nothing marked generates one curve per
+          data point. That presented as a hang once already. }
+        class function PlacedByPointSet: string; virtual;
+        { True for a BACKGROUND SHAPE: a curve put under the peaks of a fit
+          interval rather than at a pick, one per interval, and never taken out
+          by curve reduction.
+
+          A capability, not a type list (D18). Everything that treats the
+          background differently - the peak-type menu leaving it out, the
+          background menu offering it, the engine building one per interval
+          beside the picks, curve reduction passing it by, the refusals in
+          fit_advice - asks this and nothing else, so a module's own background
+          shape takes part without an edit anywhere.
+
+          False by default: every type this framework had before is a peak. }
+        class function IsBackground: boolean; virtual;
+        { Whether a model made of this type takes a separate BACKGROUND curve.
+          False for a type whose curves describe the whole of the data, their
+          level included: a background beside them would be counted twice.
+          The engine refuses one, and the background menu greys out, through
+          fit_advice.AdviseBackgroundForModel. True by default - a peak sits on
+          a baseline. A capability, like IsBackground, so a module's types
+          answer it without a list anywhere. }
+        class function AcceptsBackground: boolean; virtual;
+        { True when the shape is defined only where x > 0 - a power law of x.
+          fit_advice refuses such a shape as the background of data that
+          reaches zero, in words, rather than letting the fit meet a NaN. }
+        class function ArgumentMustBePositive: boolean; virtual;
+        { True when no value of this curve may be below zero anywhere in its
+          window - a background, which is a count of what lies under the peaks.
+
+          A capability, not a type list (D18): the engine lifts such a curve
+          after every calculation (KeepValuesInRange) until its lowest point in
+          the window is zero, and a formula backend is told to do the same
+          (TFitCurveData.NonNegative), so a module's background takes part by
+          answering this alone.
+
+          WHY A LIFT, and not a clip at zero or a penalty in the objective. A
+          clip leaves the parameters of a curve that is wholly below zero with
+          nothing to change - every one of them gives the same zero - so the
+          fit can never bring it back. A penalty only discourages: the fit
+          trades it against the misfit, and a background still goes below zero
+          when that pays. The lift is a guarantee and keeps the curve's own
+          shape: the parameters that shape it still move the result, and the
+          level, held at the lift, can still rise from it.
+
+          False by default: a peak's sign is already its amplitude's, and
+          amplitudes are bounded at zero. }
+        class function ValuesAreNonNegative: boolean; virtual;
+        { The parameter that is this curve's LEVEL - adding to it raises every
+          value by the same amount - or '' when it has none. The lift is added
+          to it (AbsorbLift), and a formula backend is told it so the level it
+          returns is the one drawn. None by default. }
+        function LevelParameterName: string; virtual;
+        { Whether THIS instance is kept above zero: its type's values are not
+          negative, and the data in its window are not negative either. The
+          engine lifts by this, and a formula backend is told it. }
+        function KeepsAboveZero: boolean;
+        { Sets this curve's starting values from the data's own baseline: AX and
+          AY are points of the profile the curve will be fitted to, taken where
+          there is no peak (background_search.ProposeBackgroundPoints), in any
+          order.
+
+          What a pick is to a peak, this is to a background: the seed. Called by
+          the engine only for a type whose IsBackground is True, BEFORE the
+          values a previous fit found are restored, so a fitted background
+          keeps its fit and a new one starts from the data. Does nothing by
+          default. }
+        procedure SeedFromBaseline(const AX, AY: array of double); virtual;
+    protected
+        { Lifts the values until the lowest is zero, for a type whose values
+          may not be negative. }
+        procedure KeepValuesInRange; override;
+        { Called with the amount the values were just lifted by, so a type
+          with a level among its parameters adds it there and the parameters
+          the user reads describe the curve that is drawn. True when it did -
+          the values are then recalculated from the parameters. By default it
+          adds the lift to LevelParameterName, and answers False for a type
+          that names none: that type keeps its parameters, and draws the lift. }
+        function AbsorbLift(const ADelta: double): boolean; virtual;
+        { Sets to zero every value a rounding error below it; True when the
+          lowest value was no more than that. }
+        function ZeroRoundingBelowZero: boolean;
+    public
+        { What each of this curve's points is DRAWN ON, given the whole model
+          AModel it belongs to, or nil - the default - for zero.
+
+          A CAPABILITY, NOT A BRANCH (D18). A model is a sum of curves, and a
+          component whose contribution is a deviation - a nested pattern, its
+          own wiggle about its parent's leg, exactly zero at both ends - is
+          correct as computed and useless as drawn: it sits at the bottom of
+          the chart, far from what it belongs to. This says where it belongs
+          without changing what it contributes: the fit, the residual and every
+          statistic read PointYCoord alone, and only the chart adds this
+          (TTitlePointsSet.DrawnY).
+
+          WHY THE WHOLE MODEL: what a component rests on is other components -
+          its parent, and the parent's parent - so the answer needs the list,
+          not the curve alone. WHY ONE ARRAY, not a value per point: a type
+          that has to index the model before it can answer does that once.
+
+          ASKED ON THE SERVER, wherever a curve's points are sent - the points
+          route and every animated frame (TFitService.CurveDrawnBaseline) - and
+          carried as TPointsData.Baseline. An array of another length than
+          PointsCount is not sent.
+
+          REJECTED: drawing the line from a module's overlay as a series of
+          its own. The framework's near-zero line would still be drawn beside
+          it, and the overlay is not redrawn while a fit runs, so the line
+          would freeze for the length of every fit. And shifting the VALUES
+          instead would count what it rests on twice in the model's sum. }
+        function DrawnBaselineIn(AModel: TSelfCopiedCompList): TDoubleDynArray;
+            virtual;
+        { The axis mode (axis_mode_registry) this curve type's ADimension is
+          meant to be shown in, by id, or '' for none.
+
+          A PREFERENCE, NOT AN AXIS. The type names a registered mode and the
+          automatic rule (axis_choice) weighs it against the data's and the
+          other curves'; the type builds nothing, so it needs no wavelength or
+          any other setting, and a module's type can name its module's modes.
+
+          None by default: a type that is about no field in particular (a user
+          formula) says nothing, and the data or the general name answers.
+          Saying nothing is also right for a coordinate a type cannot know - a
+          wave pattern's value is a price, but whether its argument is a bar or
+          a date is the data's to say. }
+        class function PreferredAxisMode(ADimension: TAxisDimension): string; virtual;
+        { A WEAKER preference: the axis mode ADimension is shown in when the
+          data says nothing about it. Where PreferredAxisMode outranks the
+          data, this yields to it - for a coordinate the type can assume but
+          not know. A wave pattern's argument is a bar number unless the series
+          was read by date, and then the data says Date. '' for none. }
+        class function FallbackAxisMode(ADimension: TAxisDimension): string; virtual;
+        { Returns algorithm of searching of extremum points. }
+        class function GetExtremumMode: TExtremumMode; virtual; abstract;
+        class function GetConfigurablePointsSet: TConfigurablePointsSetClass; virtual;
+        { What this curve type is, in words a user can learn from: what its
+          formula means, what each parameter controls, where the shape is used,
+          what it does not cover, and where to read about it.
+
+          THE CLASS STATES THE CONTENT; the curve-type explanation provider
+          stamps the topic and, when this leaves it empty, the title - so an
+          override never repeats the type's identity and cannot get it wrong.
+
+          INCOMPLETE BY DEFAULT, deliberately. The base answers with no summary
+          and no body, so a type that does not override this fails the
+          registry-walking completeness test by name, instead of shipping a
+          curve type the application cannot explain. }
+        class function Explanation: TExplanation; virtual;
+    end;
+
+implementation
+
+uses
+    non_configurable_points_set;
+
+{============================ TNamedPointsSet =================================}
+
+procedure TNamedPointsSet.SetCurveTypeName(Name: string);
+begin
+    FName := Name;
+end;
+
+function TNamedPointsSet.GetCurveExpression: string;
+begin
+    //  No closed-form expression by default; analytic curves override this.
+    Result := '';
+end;
+
+class function TNamedPointsSet.IsAnalytic: boolean;
+begin
+    //  Analytic by default: every curve type this framework shipped with had a
+    //  formula, so this keeps their behaviour unchanged.
+    Result := True;
+end;
+
+class function TNamedPointsSet.GetCurveTypeGroup: string;
+begin
+    //  Ungrouped by default, so existing curve types are unaffected.
+    Result := '';
+end;
+
+class function TNamedPointsSet.AmplitudeIsUnbounded: boolean;
+begin
+    //  Bounded by default: every peak type is seeded from the data it sits on.
+    Result := False;
+end;
+
+class function TNamedPointsSet.PlacedByPointSet: string;
+begin
+    //  Placed from a single curve position by default, which is what every peak
+    //  type does - so adding this capability changes nothing for them.
+    Result := '';
+end;
+
+class function TNamedPointsSet.IsBackground: boolean;
+begin
+    Result := False;
+end;
+
+class function TNamedPointsSet.AcceptsBackground: boolean;
+begin
+    Result := True;
+end;
+
+function TNamedPointsSet.DrawnBaselineIn(
+    AModel: TSelfCopiedCompList): TDoubleDynArray;
+begin
+    //  Every type this framework has rests on nothing.
+    Result := nil;
+end;
+
+class function TNamedPointsSet.ValuesAreNonNegative: boolean;
+begin
+    Result := False;
+end;
+
+function TNamedPointsSet.ZeroRoundingBelowZero: boolean;
+const
+    { A lowest point this close to zero, relative to the curve's own size, is
+      the rounding of a curve that already touches zero. }
+    ROUNDING = 1e-12;
+var
+    i: longint;
+    Lowest, Largest: double;
+begin
+    Lowest := 0;
+    Largest := 0;
+    for i := 0 to PointsCount - 1 do
+    begin
+        if PointYCoord[i] < Lowest then
+            Lowest := PointYCoord[i];
+        if Abs(PointYCoord[i]) > Largest then
+            Largest := Abs(PointYCoord[i]);
+    end;
+    Result := -Lowest <= ROUNDING * Largest;
+    if Result then
+        for i := 0 to PointsCount - 1 do
+            if PointYCoord[i] < 0 then
+                PointYCoord[i] := 0;
+end;
+
+function TNamedPointsSet.KeepsAboveZero: boolean;
+begin
+    Result := ValuesAreNonNegative and FWindowDataNonNegative;
+end;
+
+procedure TNamedPointsSet.KeepValuesInRange;
+var
+    i: longint;
+    Lowest: double;
+
+    function LowestValue: double;
+    var
+        j: longint;
+    begin
+        Result := PointYCoord[0];
+        for j := 1 to PointsCount - 1 do
+            if PointYCoord[j] < Result then
+                Result := PointYCoord[j];
+    end;
+
+begin
+    if (not KeepsAboveZero) or (PointsCount = 0) then
+        Exit;
+    //  A FIXED POINT, not a creep. A curve lifted once is rebuilt on every
+    //  edit and every open from the level that carries the lift, and the
+    //  polynomial evaluated afresh lands its lowest point a rounding error
+    //  either side of zero. Lifting by that moved the level in the last place
+    //  each time, and a project saved and reopened was not the project saved.
+    //  Such a point is set to zero where it is, and the parameters are left
+    //  alone; the guarantee - nothing below zero - is kept exactly either way.
+    if ZeroRoundingBelowZero then
+        Exit;
+    Lowest := LowestValue;
+    //  NaN compares false, so a curve the formula could not evaluate is left
+    //  as it is rather than lifted by a NaN.
+    if not (Lowest < 0) then
+        Exit;
+    if AbsorbLift(-Lowest) then
+    begin
+        //  THE POINTS ARE WHAT THE PARAMETERS GIVE, bit for bit, and not "raw
+        //  plus the lift": a project is saved as parameters and reopened by
+        //  evaluating them, and the two differ by a rounding error that the
+        //  model-wide scaling factor then carries into every curve's integral.
+        DoCalc;
+        if ZeroRoundingBelowZero then
+            Exit;
+        //  THE GUARANTEE DOES NOT REST ON THE TYPE: a level that carried less
+        //  than it was handed leaves the rest to be drawn, as a type with no
+        //  level draws all of it.
+        Lowest := LowestValue;
+    end;
+    for i := 0 to PointsCount - 1 do
+        PointYCoord[i] := PointYCoord[i] - Lowest;
+end;
+
+function TNamedPointsSet.AbsorbLift(const ADelta: double): boolean;
+begin
+    Result := LevelParameterName <> '';
+    if Result then
+        ValuesByName[LevelParameterName] := ValuesByName[LevelParameterName] + ADelta;
+end;
+
+function TNamedPointsSet.LevelParameterName: string;
+begin
+    Result := '';
+end;
+
+class function TNamedPointsSet.ArgumentMustBePositive: boolean;
+begin
+    Result := False;
+end;
+
+{$hints off}
+procedure TNamedPointsSet.SeedFromBaseline(const AX, AY: array of double);
+begin
+    //  A peak is seeded from its pick, not from a baseline.
+end;
+
+class function TNamedPointsSet.PreferredAxisMode(ADimension: TAxisDimension): string;
+begin
+    Result := '';
+end;
+
+class function TNamedPointsSet.FallbackAxisMode(ADimension: TAxisDimension): string;
+begin
+    Result := '';
+end;
+{$hints on}
+
+class function TNamedPointsSet.Explanation: TExplanation;
+begin
+    //  Nothing to say by default - see the declaration for why that is the
+    //  right way to fail.
+    Result := Default(TExplanation);
+end;
+
+class function TNamedPointsSet.GetConfigurablePointsSet: TConfigurablePointsSetClass;
+begin
+    Result := TNonConfigurablePointsSet;
+end;
+
+end.

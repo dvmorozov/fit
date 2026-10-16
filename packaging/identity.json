@@ -1,0 +1,17 @@
+{
+  "_comment": "The project's PUBLIC identity, in one place. Every package, the site and the About box read it; nothing else may name the maintainer or a way to reach him (tools/build-tests/identity.tests.ps1 fails on a personal address or profile anywhere a build reads). Committed on purpose: packages are built on other machines from the sources. Free Fit has no mailbox - questions and reports go to the issue tracker; maintainerAddress is GitHub's no-reply address, which Debian's Maintainer field needs and which delivers nowhere. A module with a product of its own brings its own identity.",
+
+  "projectName": "Fit",
+  "homepageUrl": "https://dvmorozov.github.io/fit/",
+  "sourceUrl": "https://github.com/dvmorozov/fit",
+  "supportUrl": "https://github.com/dvmorozov/fit/issues",
+  "licenseId": "GPL-3.0-or-later",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "readmeFile": "README.md",
+  "updateProduct": "Fit",
+  "updateFeedUrl": "https://github.com/dvmorozov/fit/releases/latest/download/",
+
+  "maintainerName": "Dmitry Morozov",
+  "maintainerId": "dvmorozov",
+  "maintainerAddress": "7559490+dvmorozov@users.noreply.github.com"
+}

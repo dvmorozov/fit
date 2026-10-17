@@ -1,0 +1,68 @@
+<!--  The prose of the developers' part of the Fit site. The pages it leads to
+      are generated from the registries and the sources at every publication;
+      this page only says what each is for. Links into the repository point at
+      main, which is what the published snapshot replaces.  -->
+
+<h1>For developers</h1>
+
+<p>Fit is a framework as much as an application. A new curve type, data loader,
+optimiser, objective, REST verb or whole analysis vertical is added by
+<strong>registration</strong> &mdash; a directory plus one entry on a project's
+unit search path. No framework file changes.</p>
+
+<p>Using the program rather than changing it? The <a href="guide.html">user
+guide</a> is where that lives.</p>
+
+<h2>Generated from this build</h2>
+
+<p>These pages are generated from the registries the published build actually
+contains and from its sources, every time the site is published, so they cannot
+describe code that is no longer there.</p>
+
+<ul>
+  <li><a href="architecture.html">Architecture</a> &mdash; the three processes, the client-to-server call chain, how a running fit reports progress, the view seam, every extension seam, and the anatomy of a module</li>
+  <li><a href="extension-points.html">Extension points</a> &mdash; one section per seam: what you write, where it goes in, and what is registered through it today</li>
+  <li><a href="how-to-extend-curve-types.html">Adding a curve type</a> &mdash; the registration path, the curve classes, and curve types the user defines</li>
+  <li><a href="how-to-extend-data-loaders.html">Adding a data loader</a></li>
+</ul>
+
+<h2>Written in the repository</h2>
+
+<ul>
+  <li><a href="https://github.com/dvmorozov/fit/blob/main/AGENTS.md">AGENTS.md</a> &mdash; the invariants and the traps, for people and AI agents working on the code; read it first</li>
+  <li><a href="https://github.com/dvmorozov/fit/blob/main/docs/contributing/architecture.md">Architecture notes</a> and <a href="https://github.com/dvmorozov/fit/blob/main/docs/contributing/client-server.md">the client and the server</a></li>
+  <li><a href="https://github.com/dvmorozov/fit/blob/main/docs/contributing/module-architecture.md">The module contract</a> &middot; <a href="https://github.com/dvmorozov/fit/blob/main/docs/contributing/writing-a-module.md">writing a module</a> &middot; <a href="https://github.com/dvmorozov/fit/tree/main/Modules/example-linear">a complete working module in six files</a></li>
+  <li><a href="https://github.com/dvmorozov/fit/blob/main/docs/contributing/adding-a-curve-model.md">Adding a curve model</a> &middot; <a href="https://github.com/dvmorozov/fit/blob/main/docs/contributing/adding-an-axis-mode.md">adding an axis mode</a></li>
+  <li><a href="https://github.com/dvmorozov/fit/blob/main/docs/contributing/loss-functions.md">Loss functions</a> &middot; <a href="https://github.com/dvmorozov/fit/blob/main/docs/contributing/minimizer-comparison.md">minimizer comparison</a> &middot; <a href="https://github.com/dvmorozov/fit/blob/main/docs/contributing/no-silent-degradation.md">no silent degradation</a></li>
+  <li><a href="https://github.com/dvmorozov/fit/blob/main/docs/user-guide/building-from-source.md">Building from source</a> &middot; <a href="https://github.com/dvmorozov/fit/blob/main/docs/contributing/testing.md">testing</a> &middot; <a href="https://github.com/dvmorozov/fit/blob/main/docs/contributing/findings.md">findings</a></li>
+</ul>
+
+<h2>Everything explains itself</h2>
+
+<p>Whatever a user meets &mdash; a curve type, a menu command, a rule, a greyed
+entry &mdash; explains itself through one registry of explanations, each with a
+standing (canonical, convention, this software's choice, or unsettled), its
+limitations and its sources. The <a href="guide.html">user guide</a> on this site
+is generated from that registry; a module registers its own chapter the same way,
+and a completeness test fails the build for anything registered without one.</p>
+
+<h2>The REST API</h2>
+
+<p>The compute server describes itself: a running <code>fit_server</code>
+assembles its own OpenAPI 3.0.3 document at <code>/openapi.json</code> and
+renders it at <code>/docs</code>. It is not committed anywhere &mdash; what a
+build serves is what that build does.</p>
+
+<h2>Related packages</h2>
+
+<ul>
+  <li><a href="https://github.com/dvmorozov/fitgrids">fitgrids</a> &mdash; the grid components the window's tables are built on</li>
+  <li><a href="https://github.com/dvmorozov/fitminimizers">fitminimizers</a> &mdash; downhill simplex optimisation, with simulated annealing</li>
+</ul>
+
+<h2>Contributing</h2>
+
+<p>This repository is published as a <strong>snapshot</strong>: each publication
+replaces <code>main</code> with a single commit, so a pull request cannot be
+merged directly. Open an issue or attach a patch &mdash; see
+<a href="https://github.com/dvmorozov/fit/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a>.</p>

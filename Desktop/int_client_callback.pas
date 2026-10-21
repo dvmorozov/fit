@@ -1,0 +1,35 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
+{
+This software is distributed under GPL
+in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
+
+@abstract(Contains interface defining callback methods to notify client adout
+computation progress.)
+
+Copyright (C) Dmitry Morozov
+}
+unit int_client_callback;
+
+{$IF NOT DEFINED(FPC)}
+{$DEFINE _WINDOWS}
+{$ELSEIF DEFINED(WINDOWS)}
+{$DEFINE _WINDOWS}
+{$ENDIF}
+
+interface
+
+type
+    { Defines callback functions called from server to client. }
+    IClientCallback = interface
+        procedure ShowCurMin(Min: double);
+        procedure ShowProfile;
+        procedure Done;
+        procedure ComputeCurveBoundsDone;
+        procedure ComputeBackgroundPointsDone;
+        procedure ComputeCurvePositionsDone;
+    end;
+
+implementation
+
+end.

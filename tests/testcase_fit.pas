@@ -1,0 +1,320 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
+unit testcase_fit;
+{$mode objfpc}{$H+}
+interface
+uses
+  Classes, SysUtils, fpcunit, testregistry,
+  Math, fit_task, points_set, gauss_points_set, curve_types_singleton,
+  int_curve_type_selector, int_fit_service, int_fit_backend, native_fit_backend,
+  SimpMath, curve_points_set, curve_instance_id, fit_reduction;
+type
+  TCB = class
+    Improvements: longint;
+    procedure NoOp;
+    procedure Count;
+  end;
+  TFitTest = class(TTestCase)
+  private
+    { Fits one synthetic Gaussian with the given minimizer kind, returns R-factor. }
+    function RunGaussianFit(AMinimizerKind: longint): double;
+    { Builds a task with a synthetic Gaussian peak ready to optimize. Caller frees
+      the task; Profile/Positions are owned by it. CB must outlive the task.
+      AtEveryPoint seeds a position on every sample instead of one on the peak. }
+    function BuildGaussianTask(CB: TCB; AtEveryPoint: boolean = False;
+      AlsoAt: double = -1): TFitTask;
+  published
+    procedure FitsSyntheticGaussian;
+    procedure NativeBackendFitsAndReports;
+    procedure PositionsAtEveryDataPointStillMakeOneCurveEach;
+    procedure AStopBeforeItsMinimizerExistsStillReachesIt;
+    //  THE INSTANCES A MODULE PLACED, REDUCED BY BIC after the fit (Fit >
+    //  Automatically for patterns): each removed that no longer pays for
+    //  itself on the fitted model, and its handle kept for the module.
+    procedure AReductionOfInstancesRemovesWhatDoesNotPayAndSaysWhich;
+    //  The randomness veto beside BIC keeps nothing BIC rightly removes.
+    procedure ACurveWhoseRemovalLeavesNoiseStillGoes;
+    //  A model of counts is reduced against the noise measured from its data,
+    //  exactly as it always was, whatever a module's types may measure.
+    procedure AReductionOfCountsWeighsTheNoiseMeasuredFromTheData;
+  end;
+implementation
+
+procedure TCB.NoOp; begin end;
+procedure TCB.Count; begin Inc(Improvements); end;
+
+function TFitTest.BuildGaussianTask(CB: TCB; AtEveryPoint: boolean;
+  AlsoAt: double): TFitTask;
+var
+  Profile, Positions: TPointsSet;
+  Sel: ICurveTypeSelector;
+  x: double;
+  i: longint;
+begin
+  SetExceptionMask([exDenormalized, exUnderflow, exPrecision]);
+  Sel := TCurveTypesSingleton.CreateCurveTypeSelector;
+  Sel.SelectCurveType(TGaussPointsSet.GetCurveTypeId);
+
+  Profile := TPointsSet.Create(nil);
+  x := 0;
+  while x <= 20 + 1e-9 do
+  begin
+    Profile.AddNewPoint(x, GaussPoint(100, 1.5, 10, x));
+    x := x + 0.2;
+  end;
+  //  The position's y is the data height at that x - RecreateCurves seeds the
+  //  curve's amplitude from it. Passing 0 (as this test used to) starts the fit
+  //  from a zero-amplitude curve that never converges.
+  Positions := TPointsSet.Create(nil);
+  if AtEveryPoint then
+    for i := 0 to Profile.PointsCount - 1 do
+      Positions.AddNewPoint(Profile.PointXCoord[i], Profile.PointYCoord[i])
+  else
+    Positions.AddNewPoint(10, GaussPoint(100, 1.5, 10, 10));
+  if AlsoAt >= 0 then
+    Positions.AddNewPoint(AlsoAt, GaussPoint(100, 1.5, 10, AlsoAt));
+
+  Result := TFitTask.Create(nil, False, False);
+  Result.ServerShowCurMin := @CB.NoOp;
+  Result.ServerDoneProc := @CB.NoOp;
+  Result.SetProfilePointsSet(Profile);
+  Result.SetCurvePositions(Positions);
+  Result.RecreateCurves(nil);
+  Result.BegIndex := 0;
+  Result.EndIndex := Result.GetCalcProfile.PointsCount - 1;
+  SetExceptionMask([exInvalidOp, exDenormalized, exZeroDivide, exOverflow, exUnderflow, exPrecision]);
+end;
+
+function TFitTest.RunGaussianFit(AMinimizerKind: longint): double;
+var
+  Task: TFitTask;
+  CB: TCB;
+begin
+  CB := TCB.Create;
+  Task := BuildGaussianTask(CB);
+  try
+    Task.MinimizerKind := AMinimizerKind;
+    Task.MinimizeDifference;
+    Result := Task.GetCurMin;
+  finally
+    Task.Free;
+    CB.Free;
+  end;
+end;
+
+procedure TFitTest.FitsSyntheticGaussian;
+var
+  r: double;
+begin
+  //  The default Downhill Simplex kind (the only one exposed today) reproduces the
+  //  original baseline - also exercises the minimizer-selection seam end to end.
+  r := RunGaussianFit(MIN_KIND_DHS);
+  AssertTrue('R-factor genuinely small after fitting a matching peak (' + FloatToStr(r) + ')',
+    (r > 0) and (r < 0.05));
+end;
+
+procedure TFitTest.NativeBackendFitsAndReports;
+var
+  Task: TFitTask;
+  CB: TCB;
+  Backend: IFitBackend;
+  R: TFitResult;
+begin
+  //  The native backend performs one whole fit through the IFitBackend seam and
+  //  reports the outcome - this is the contract Stage 2's worker/sidecar backends
+  //  will implement.
+  CB := TCB.Create;
+  Task := BuildGaussianTask(CB);
+  try
+    Backend := TNativeFitBackend.Create;
+    AssertTrue('backend has a name', Backend.Name <> '');
+    R := Backend.Fit(Task);
+    AssertEquals('backend success code', 0, R.ErrorCode);
+    //  Must be strictly > 0: a 0 R-factor means the optimizer never ran.
+    AssertTrue('backend reports a genuine small R-factor (' + FloatToStr(R.RFactor) + ')',
+      (R.RFactor > 0) and (R.RFactor < 0.05));
+  finally
+    Task.Free;
+    CB.Free;
+  end;
+end;
+
+{ ONE CURVE PER DATA POINT IS THE ORDINARY STRATEGY FOR A PEAK TYPE, not an
+  accident: the automatic path seeds a curve on every sample, the amplitudes come
+  from the data and the unwanted ones are then pruned away. Only a type placed
+  from its own POINT SET rejects that reading, and the refusal and the
+  position-list rewrite that came with it are both keyed on
+  TNamedPointsSet.PlacedByPointSet, which a peak leaves empty.
+
+  So this states what a Gaussian must go on doing: every position becomes an
+  instance, and the position list is the user's, unchanged by the build. }
+procedure TFitTest.PositionsAtEveryDataPointStillMakeOneCurveEach;
+var
+  Task: TFitTask;
+  CB: TCB;
+  Count: longint;
+begin
+  CB := TCB.Create;
+  Task := BuildGaussianTask(CB, True);
+  try
+    Count := Task.ProfilePoints.PointsCount;
+    AssertTrue('the synthetic profile has points to seed from', Count > 1);
+    AssertEquals('one curve per position', Count, Task.GetCurves.Count);
+    AssertEquals('and the positions are still the ones that were set',
+      Count, Task.GetCurvePositions.PointsCount);
+  finally
+    Task.Free;
+    CB.Free;
+  end;
+end;
+
+{ A STOP THAT ARRIVED BETWEEN TWO MOMENTS OF THE FIT THREAD reached nothing. The
+  stop route runs on its own thread; Optimization looks at the task's flag and
+  then builds a minimizer, and a stop landing between the two set the flag after
+  it was read and before there was a minimizer to tell - so a whole optimisation
+  ran after Stop. That moment cannot be hit on purpose from outside, but the
+  state it leaves can be built: a task already stopped, reaching the point where
+  its minimizer is made. The minimizer must be born stopped. }
+procedure TFitTest.AStopBeforeItsMinimizerExistsStillReachesIt;
+var
+  Task: TFitTask;
+  CB: TCB;
+begin
+  CB := TCB.Create;
+  Task := BuildGaussianTask(CB);
+  try
+    Task.ServerShowCurMin := @CB.Count;
+    //  The peak's seeded width and height are guesses, so an optimisation
+    //  that runs improves many times and reports each - 87 before the fix.
+    Task.StopAsyncOper;
+    Task.RunNativeOptimization;
+    AssertTrue(Format('the stopped task optimised: %d improvement(s) reported',
+      [CB.Improvements]), CB.Improvements <= 1);
+  finally
+    Task.Free;
+    CB.Free;
+  end;
+end;
+
+procedure TFitTest.AReductionOfInstancesRemovesWhatDoesNotPayAndSaysWhich;
+var
+  Task: TFitTask;
+  CB: TCB;
+  Spurious: TCurveInstanceId;
+begin
+  CB := TCB.Create;
+  //  The peak at 10, and a curve on the flat ground at 3, where nothing is.
+  Task := BuildGaussianTask(CB, False, 3);
+  try
+    AssertEquals('two curves to start', 2, Task.GetCurves.Count);
+    Spurious := TCurvePointsSet(Task.GetCurves.Items[1]).FInstanceId;
+    if TCurvePointsSet(Task.GetCurves.Items[0]).FInitx0 < 5 then
+      Spurious := TCurvePointsSet(Task.GetCurves.Items[0]).FInstanceId;
+    Task.ReduceInstancesByBic;
+    AssertEquals('one curve left', 1, Task.GetCurves.Count);
+    AssertEquals('the peak', 10,
+      TCurvePointsSet(Task.GetCurves.Items[0]).x0, 0.5);
+    AssertEquals('and the one removed said', 1, Length(Task.RemovedInstances));
+    AssertTrue('by its handle',
+      SameCurveInstanceId(Task.RemovedInstances[0], Spurious));
+  finally
+    Task.Free;
+    CB.Free;
+  end;
+end;
+
+{ DIFFRACTION IS REDUCED AS IT ALWAYS WAS. A reduction weighs by the noise
+  rule of the model's curve types (TNamedPointsSet.NoiseRule); a Gaussian's is
+  the rule of counts (counts_noise_rule), so a model of Gaussians is weighed by
+  fit_reduction.NoiseVariancesOf over the task's own data, bit for bit - the
+  measure every count a reduction has ever made rests on. }
+procedure TFitTest.AReductionOfCountsWeighsTheNoiseMeasuredFromTheData;
+var
+  Task: TFitTask;
+  CB: TCB;
+  Obs: array of double;
+  Expected, Got: TNoiseVariances;
+  i: longint;
+begin
+  CB := TCB.Create;
+  Task := BuildGaussianTask(CB, False, 3);
+  try
+    SetLength(Obs, Task.ExpProfile.PointsCount);
+    for i := 0 to High(Obs) do
+      Obs[i] := Task.ExpProfile.PointYCoord[i];
+    Expected := NoiseVariancesOf(Obs);
+    Got := Task.NoiseVarianceOfTask;
+    AssertEquals('one variance per sample', Length(Expected), Length(Got));
+    for i := 0 to High(Expected) do
+      AssertTrue(Format('the same variance at sample %d: %g, not %g',
+        [i, Got[i], Expected[i]]), Got[i] = Expected[i]);
+  finally
+    Task.Free;
+    CB.Free;
+  end;
+end;
+
+{ THE VETO STAYS OUT OF WHAT BIC ALREADY DECIDES WELL. A large peak with a
+  low shoulder 12 to its right, on noise of 1: the large peak absorbs the
+  shoulder when its curve is taken away, and what is left is noise (Ljung-Box
+  p about 0.4), so the curve goes as BIC says. Probing heights 1.5 to 2.5
+  found no peak model where the veto kept a curve: with the noise variance
+  known, BIC already counts nearly all a Ljung-Box test over the curve's
+  samples would see. Where it does keep one is local structure a pattern
+  leaves (a module's own tests). }
+procedure TFitTest.ACurveWhoseRemovalLeavesNoiseStillGoes;
+var
+  Task: TFitTask;
+  CB: TCB;
+  Profile, Positions: TPointsSet;
+  Sel: ICurveTypeSelector;
+  i: longint;
+  Seed: longword;
+  U1, U2: double;
+
+  function Data(x: double): double;
+  begin
+    Result := GaussPoint(100, 5, 100, x) + GaussPoint(1.5, 3, 112, x);
+  end;
+
+begin
+  SetExceptionMask([exDenormalized, exUnderflow, exPrecision]);
+  Sel := TCurveTypesSingleton.CreateCurveTypeSelector;
+  Sel.SelectCurveType(TGaussPointsSet.GetCurveTypeId);
+  Profile := TPointsSet.Create(nil);
+  Seed := 31;
+  for i := 0 to 300 do
+  begin
+    Seed := Seed * 1103515245 + 12345;
+    U1 := ((Seed shr 8) and $FFFFFF + 1) / $1000001;
+    Seed := Seed * 1103515245 + 12345;
+    U2 := ((Seed shr 8) and $FFFFFF) / $1000000;
+    Profile.AddNewPoint(i, Data(i) + Sqrt(-2 * Ln(U1)) * Cos(2 * Pi * U2));
+  end;
+  Positions := TPointsSet.Create(nil);
+  Positions.AddNewPoint(100, Data(100));
+  Positions.AddNewPoint(112, Data(112));
+  CB := TCB.Create;
+  Task := TFitTask.Create(nil, False, False);
+  try
+    Task.ServerShowCurMin := @CB.NoOp;
+    Task.ServerDoneProc := @CB.NoOp;
+    Task.SetProfilePointsSet(Profile);
+    Task.SetCurvePositions(Positions);
+    Task.RecreateCurves(nil);
+    Task.BegIndex := 0;
+    Task.EndIndex := Task.GetCalcProfile.PointsCount - 1;
+    Task.ReductionCriterion := rcInformationCriterion;
+    Task.MinimizeNumberOfCurves;
+    AssertEquals('the shoulder''s curve removed', 1, Task.GetCurves.Count);
+    AssertEquals('the large peak kept', 100, TCurvePointsSet(Task.GetCurves.Items[0]).x0, 2);
+  finally
+    Task.Free;
+    CB.Free;
+    SetExceptionMask([exInvalidOp, exDenormalized, exZeroDivide, exOverflow,
+      exUnderflow, exPrecision]);
+  end;
+end;
+
+initialization
+  RegisterTest('integration', TFitTest);
+end.

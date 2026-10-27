@@ -1,0 +1,727 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
+{
+@abstract(The goodness-of-fit statistics computed off a live service.)
+
+WHAT IS BEING TESTED HERE, and what is not. fit_statistics holds the formulas and
+has its own tests. fit_service_statistics is the bridge: it reads the two profiles
+and the R-factor bounds through IFitService, decides which points are inside the
+fitting window, counts the varying parameters, and refuses with a stated reason
+when any of it is missing. Every one of those is a decision, and none of them was
+covered - the unit measured 0 of 54 lines, reachable only by running a fit to
+convergence against a real server.
+
+The service is a THttpFitService whose replies come from a table (see
+tests/mocks/mock_http_transport), so nothing here opens a socket. That the bridge
+reads its inputs through the same wire the desktop uses is part of what is
+asserted: a route renamed on one side shows up here.
+
+WHY THE REFUSALS MATTER MORE THAN THE NUMBERS. An invalid statistics record is
+indistinguishable from a bad fit at the call site, and the candidate ranking
+depends on it - when the record comes back invalid every count shows as "not
+scored" and the complexity penalty quietly does nothing. So each
+precondition gets its own test.
+}
+unit testcase_service_statistics;
+
+{$MODE Delphi}
+
+interface
+
+uses
+    Classes, SysUtils, fpcunit, testregistry,
+    mock_http_transport, fit_service_statistics, fit_statistics,
+    int_fit_service, sample_coverage, named_points_set, fit_reduction,
+    noise_rule, test_noise_rules;
+
+type
+    { Noise rules of the probes below. Asked at class level only. }
+    TConstantNoiseRule = class(TTestNoiseRule)
+    public
+        { A noise of 4 everywhere. }
+        class function Variances(const AY: array of double): TNoiseVariances;
+            override;
+    end;
+    { The point's position in the series, counted from 1 - so which samples
+      it was measured over is visible in the figure. }
+    TIndexedNoiseRule = class(TTestNoiseRule)
+    public
+        class function Variances(const AY: array of double): TNoiseVariances;
+            override;
+    end;
+    { A noise that dwarfs any difference: a variance of a million. }
+    TLoudNoiseRule = class(TTestNoiseRule)
+    public
+        class function Variances(const AY: array of double): TNoiseVariances;
+            override;
+    end;
+    { One that answers out of step with the data. }
+    TShortNoiseRule = class(TTestNoiseRule)
+    public
+        class function Variances(const AY: array of double): TNoiseVariances;
+            override;
+    end;
+
+    { Curve types whose data are not counts, each naming one of those rules.
+      Asked at class level only and never instantiated. }
+    TConstantNoiseProbe = class(TNamedPointsSet)
+    public
+        class function NoiseRule: TNoiseRuleClass; override;
+    end;
+    TIndexedNoiseProbe = class(TNamedPointsSet)
+    public
+        class function NoiseRule: TNoiseRuleClass; override;
+    end;
+    TLoudNoiseProbe = class(TNamedPointsSet)
+    public
+        class function NoiseRule: TNoiseRuleClass; override;
+    end;
+    TShortNoiseProbe = class(TNamedPointsSet)
+    public
+        class function NoiseRule: TNoiseRuleClass; override;
+    end;
+    { A curve type of counts (test_noise_rules). }
+    TCountsProbe = class(TNamedPointsSet)
+    public
+        class function NoiseRule: TNoiseRuleClass; override;
+    end;
+
+    TServiceStatisticsTest = class(TTestCase)
+    private
+        FSvc: TMockHttpService;
+        { Replies for a fit of AN points over one bound pair covering all of
+          them, with ACurves curves of AParams parameters each. }
+        procedure StubAFit;
+        { Four hundred samples of noise near 100 in two intervals, 0..199 and
+          200..399, with a wave the model of a flat 100 misses in the second. }
+        procedure StubAWaveInTheSecondInterval;
+    protected
+        procedure SetUp; override;
+        procedure TearDown; override;
+    published
+        //  When it refuses, and whether the reason is distinguishable.
+        procedure WithNoDataThereAreNoStatistics;
+        procedure WithNothingComputedThereAreNoStatistics;
+        procedure WithNoBoundsThereAreNoStatistics;
+        procedure ASingleBoundPointIsNotAnInterval;
+        procedure ProfilesOfDifferentLengthsAreRefused;
+
+        //  When it computes.
+        procedure AFittedProfileHasStatistics;
+        procedure OnlyThePointsInsideTheWindowAreCounted;
+        procedure PointsOutsideEveryIntervalAreExcluded;
+        procedure SeveralIntervalsAreAllIncluded;
+        procedure BoundsAreReadAsConsecutivePairs;
+        procedure AnIntervalIncludesItsEndpoints;
+
+        //  What the parameter count is taken from.
+        procedure TheParameterCountComesFromEveryCurve;
+        procedure WithNoCurvesTheDegreesOfFreedomAreEveryPoint;
+
+        //  The perfect and the hopeless fit, where the numbers are known.
+        procedure AnExactFitHasNoResidual;
+        procedure MoreParametersLeaveFewerDegreesOfFreedom;
+
+        //  The samples no curve covers: named, measured, and counted as before.
+        procedure TheUncoveredShareIsTheirPartOfTheSquaredDifference;
+        procedure UncoveredSamplesLeaveEveryFigureUnchanged;
+        procedure WithNoStretchThereIsNoShare;
+
+        //  Whether the difference is only noise, judged interval by interval.
+        procedure TheDifferenceIsJudgedForRandomnessInEachInterval;
+        procedure TheDifferenceIsJudgedAgainstTheNoiseTheModelMeasures;
+
+        //  How the residuals are weighted: as counts, unless the model's
+        //  types measure their noise.
+        procedure AModelOfCountsIsWeightedAsItAlwaysWas;
+        procedure AModelThatMeasuresItsNoiseIsWeightedByIt;
+        procedure TheNoiseIsMeasuredOverTheWholeSeriesAndReadInTheWindow;
+        procedure ANoiseOutOfStepWithTheDataIsNotUsed;
+        procedure WithNoTypesThereIsNoNoise;
+        procedure TheFirstTypeThatMeasuresTheNoiseDecides;
+        procedure AModelOfCountsAloneIsMeasuredAsCounts;
+        procedure ATypeWithoutARuleIsNotJudged;
+    end;
+
+implementation
+
+const
+    BASE = 'http://compute.example:8080';
+
+class function TConstantNoiseRule.Variances(
+    const AY: array of double): TNoiseVariances;
+var
+    i: longint;
+begin
+    SetLength(Result, Length(AY));
+    for i := 0 to High(Result) do
+        Result[i] := 4;
+end;
+
+class function TIndexedNoiseRule.Variances(
+    const AY: array of double): TNoiseVariances;
+var
+    i: longint;
+begin
+    SetLength(Result, Length(AY));
+    for i := 0 to High(Result) do
+        Result[i] := i + 1;
+end;
+
+class function TLoudNoiseRule.Variances(
+    const AY: array of double): TNoiseVariances;
+var
+    i: longint;
+begin
+    SetLength(Result, Length(AY));
+    for i := 0 to High(Result) do
+        Result[i] := 1e6;
+end;
+
+class function TShortNoiseRule.Variances(
+    const AY: array of double): TNoiseVariances;
+begin
+    SetLength(Result, 1);
+    Result[0] := 4;
+end;
+
+class function TConstantNoiseProbe.NoiseRule: TNoiseRuleClass;
+begin
+    Result := TConstantNoiseRule;
+end;
+
+class function TIndexedNoiseProbe.NoiseRule: TNoiseRuleClass;
+begin
+    Result := TIndexedNoiseRule;
+end;
+
+class function TLoudNoiseProbe.NoiseRule: TNoiseRuleClass;
+begin
+    Result := TLoudNoiseRule;
+end;
+
+class function TShortNoiseProbe.NoiseRule: TNoiseRuleClass;
+begin
+    Result := TShortNoiseRule;
+end;
+
+class function TCountsProbe.NoiseRule: TNoiseRuleClass;
+begin
+    Result := TTestCountsNoiseRule;
+end;
+
+procedure TServiceStatisticsTest.SetUp;
+begin
+    FSvc := TMockHttpService.Create(BASE);
+end;
+
+procedure TServiceStatisticsTest.TearDown;
+begin
+    FreeAndNil(FSvc);
+end;
+
+procedure TServiceStatisticsTest.StubAFit;
+begin
+    //  Six points, a calculated profile that misses each by one, and a single
+    //  interval covering the lot. Distinct y values so a swap of data and fit
+    //  would change the answer.
+    FSvc.Reply('profile',
+        '{"title":"e","x":[1,2,3,4,5,6],"y":[10,20,30,40,50,60]}');
+    FSvc.Reply('calc-profile',
+        '{"title":"c","x":[1,2,3,4,5,6],"y":[11,21,31,41,51,61]}');
+    FSvc.Reply('rfactor-bounds', '{"title":"r","x":[1,6],"y":[0,0]}');
+    FSvc.Reply('curves', '{"ok":true,"curves":[]}');
+end;
+
+{ ---- when it refuses ------------------------------------------------------- }
+
+procedure TServiceStatisticsTest.WithNoDataThereAreNoStatistics;
+var
+    S: TFitStatistics;
+begin
+    //  Nothing loaded at all. The reply carries no points, so the service
+    //  answers nil and the bridge must not dereference it.
+    FSvc.Reply('profile', '{"ok":true}');
+    FSvc.Reply('calc-profile', '{"title":"c","x":[1],"y":[1]}');
+    FSvc.Reply('rfactor-bounds', '{"title":"r","x":[1,2],"y":[0,0]}');
+    FSvc.Reply('curves', '{"ok":true,"curves":[]}');
+    S := ServiceStatistics(FSvc);
+    AssertFalse('no statistics', S.Valid);
+end;
+
+procedure TServiceStatisticsTest.WithNothingComputedThereAreNoStatistics;
+var
+    S: TFitStatistics;
+begin
+    //  Data loaded, no fit run. This is the ordinary state of a freshly opened
+    //  file, so it must be a refusal and not a fault.
+    FSvc.Reply('profile', '{"title":"e","x":[1,2],"y":[1,2]}');
+    FSvc.Reply('calc-profile', '{"ok":true}');
+    FSvc.Reply('rfactor-bounds', '{"title":"r","x":[1,2],"y":[0,0]}');
+    FSvc.Reply('curves', '{"ok":true,"curves":[]}');
+    S := ServiceStatistics(FSvc);
+    AssertFalse('no statistics', S.Valid);
+end;
+
+procedure TServiceStatisticsTest.WithNoBoundsThereAreNoStatistics;
+var
+    S: TFitStatistics;
+begin
+    //  No fitting window. Computing over the whole profile instead would let the
+    //  zero tails of the calculated profile swamp the residuals and report a
+    //  hopeless fit as a bad one.
+    FSvc.Reply('profile', '{"title":"e","x":[1,2],"y":[1,2]}');
+    FSvc.Reply('calc-profile', '{"title":"c","x":[1,2],"y":[1,2]}');
+    FSvc.Reply('rfactor-bounds', '{"ok":true}');
+    FSvc.Reply('curves', '{"ok":true,"curves":[]}');
+    S := ServiceStatistics(FSvc);
+    AssertFalse('no statistics', S.Valid);
+end;
+
+procedure TServiceStatisticsTest.ASingleBoundPointIsNotAnInterval;
+var
+    S: TFitStatistics;
+begin
+    //  Bounds arrive as consecutive (start, end) pairs, so an odd count means a
+    //  half-picked interval. Reading it as an interval would take the pair from
+    //  past the end of the set.
+    FSvc.Reply('profile', '{"title":"e","x":[1,2],"y":[1,2]}');
+    FSvc.Reply('calc-profile', '{"title":"c","x":[1,2],"y":[1,2]}');
+    FSvc.Reply('rfactor-bounds', '{"title":"r","x":[1],"y":[0]}');
+    FSvc.Reply('curves', '{"ok":true,"curves":[]}');
+    S := ServiceStatistics(FSvc);
+    AssertFalse('no statistics', S.Valid);
+end;
+
+procedure TServiceStatisticsTest.ProfilesOfDifferentLengthsAreRefused;
+var
+    S: TFitStatistics;
+begin
+    //  The two profiles are sampled at the same points by construction, so
+    //  different lengths mean one of them is stale. Pairing them anyway would
+    //  compute residuals between unrelated abscissae - a plausible-looking
+    //  number that means nothing.
+    FSvc.Reply('profile', '{"title":"e","x":[1,2,3],"y":[1,2,3]}');
+    FSvc.Reply('calc-profile', '{"title":"c","x":[1,2],"y":[1,2]}');
+    FSvc.Reply('rfactor-bounds', '{"title":"r","x":[1,3],"y":[0,0]}');
+    FSvc.Reply('curves', '{"ok":true,"curves":[]}');
+    S := ServiceStatistics(FSvc);
+    AssertFalse('no statistics', S.Valid);
+end;
+
+{ ---- when it computes ------------------------------------------------------ }
+
+procedure TServiceStatisticsTest.AFittedProfileHasStatistics;
+var
+    S: TFitStatistics;
+begin
+    StubAFit;
+    S := ServiceStatistics(FSvc);
+    AssertTrue('statistics were computed', S.Valid);
+    AssertEquals('every point was in the window', 6, S.DataPoints);
+    AssertTrue('and there is a residual', S.ChiSquare > 0);
+end;
+
+procedure TServiceStatisticsTest.OnlyThePointsInsideTheWindowAreCounted;
+var
+    S: TFitStatistics;
+begin
+    //  THE WHOLE POINT of the bounds. The window is the region the engine's own
+    //  R-factor is taken over, and a statistic taken over a wider one is not
+    //  comparable with the R-factor shown beside it.
+    FSvc.Reply('profile',
+        '{"title":"e","x":[1,2,3,4,5,6],"y":[10,20,30,40,50,60]}');
+    FSvc.Reply('calc-profile',
+        '{"title":"c","x":[1,2,3,4,5,6],"y":[11,21,31,41,51,61]}');
+    FSvc.Reply('rfactor-bounds', '{"title":"r","x":[2,4],"y":[0,0]}');
+    FSvc.Reply('curves', '{"ok":true,"curves":[]}');
+    S := ServiceStatistics(FSvc);
+    AssertTrue('computed', S.Valid);
+    AssertEquals('three of the six points', 3, S.DataPoints);
+end;
+
+procedure TServiceStatisticsTest.PointsOutsideEveryIntervalAreExcluded;
+var
+    S: TFitStatistics;
+begin
+    //  An interval covering nothing in the data. Two points are the minimum the
+    //  formulas need, so this comes back invalid rather than as a division by a
+    //  zero count.
+    FSvc.Reply('profile',
+        '{"title":"e","x":[1,2,3],"y":[10,20,30]}');
+    FSvc.Reply('calc-profile',
+        '{"title":"c","x":[1,2,3],"y":[11,21,31]}');
+    FSvc.Reply('rfactor-bounds', '{"title":"r","x":[100,200],"y":[0,0]}');
+    FSvc.Reply('curves', '{"ok":true,"curves":[]}');
+    S := ServiceStatistics(FSvc);
+    AssertFalse('nothing was in the window, so nothing was computed', S.Valid);
+end;
+
+procedure TServiceStatisticsTest.SeveralIntervalsAreAllIncluded;
+var
+    S: TFitStatistics;
+begin
+    //  Two disjoint windows - which is what picking two curve regions gives -
+    //  and both contribute. Taking only the first is the mistake this catches,
+    //  and it would report a statistic over half the fitted data.
+    FSvc.Reply('profile',
+        '{"title":"e","x":[1,2,3,4,5,6],"y":[10,20,30,40,50,60]}');
+    FSvc.Reply('calc-profile',
+        '{"title":"c","x":[1,2,3,4,5,6],"y":[11,21,31,41,51,61]}');
+    FSvc.Reply('rfactor-bounds',
+        '{"title":"r","x":[1,2,5,6],"y":[0,0,0,0]}');
+    FSvc.Reply('curves', '{"ok":true,"curves":[]}');
+    S := ServiceStatistics(FSvc);
+    AssertTrue('computed', S.Valid);
+    AssertEquals('two points from each interval', 4, S.DataPoints);
+end;
+
+procedure TServiceStatisticsTest.BoundsAreReadAsConsecutivePairs;
+var
+    S: TFitStatistics;
+begin
+    //  PAIRS, not a run of alternating edges: (1,2) and (5,6) are intervals and
+    //  (2,5) is the gap between them. Reading every adjacent pair instead would
+    //  include the gap and count all six points.
+    FSvc.Reply('profile',
+        '{"title":"e","x":[1,2,3,4,5,6],"y":[10,20,30,40,50,60]}');
+    FSvc.Reply('calc-profile',
+        '{"title":"c","x":[1,2,3,4,5,6],"y":[11,21,31,41,51,61]}');
+    FSvc.Reply('rfactor-bounds',
+        '{"title":"r","x":[1,2,5,6],"y":[0,0,0,0]}');
+    FSvc.Reply('curves', '{"ok":true,"curves":[]}');
+    S := ServiceStatistics(FSvc);
+    AssertEquals('the gap between the pairs is not a window', 4, S.DataPoints);
+end;
+
+procedure TServiceStatisticsTest.AnIntervalIncludesItsEndpoints;
+var
+    S: TFitStatistics;
+begin
+    //  Closed, not open. The user picked those two abscissae as the region to
+    //  fit; excluding them would drop a point at each end of every interval.
+    FSvc.Reply('profile',
+        '{"title":"e","x":[1,2,3],"y":[10,20,30]}');
+    FSvc.Reply('calc-profile',
+        '{"title":"c","x":[1,2,3],"y":[11,21,31]}');
+    FSvc.Reply('rfactor-bounds', '{"title":"r","x":[1,3],"y":[0,0]}');
+    FSvc.Reply('curves', '{"ok":true,"curves":[]}');
+    S := ServiceStatistics(FSvc);
+    AssertEquals('all three, endpoints included', 3, S.DataPoints);
+end;
+
+{ ---- the parameter count --------------------------------------------------- }
+
+procedure TServiceStatisticsTest.TheParameterCountComesFromEveryCurve;
+var
+    S: TFitStatistics;
+begin
+    //  SUMMED ACROSS CURVES. The degrees of freedom, and so the reduced
+    //  chi-squared and both information criteria, are wrong by the parameters of
+    //  every curve after the first if this counts only one.
+    StubAFit;
+    FSvc.Reply('curves', '{"ok":true,"curves":[' +
+        '{"params":[{"name":"A","value":1},{"name":"S","value":2}]},' +
+        '{"params":[{"name":"A","value":3},{"name":"S","value":4},' +
+        '{"name":"P","value":5}]}]}');
+    S := ServiceStatistics(FSvc);
+    AssertTrue('computed', S.Valid);
+    AssertEquals('two curves, five parameters', 5, S.Params);
+    AssertEquals('six points less five parameters', 1, S.DegreesOfFreedom);
+end;
+
+procedure TServiceStatisticsTest.WithNoCurvesTheDegreesOfFreedomAreEveryPoint;
+var
+    S: TFitStatistics;
+begin
+    StubAFit;
+    S := ServiceStatistics(FSvc);
+    AssertEquals('no parameters', 0, S.Params);
+    AssertEquals('so every point is a degree of freedom',
+        S.DataPoints, S.DegreesOfFreedom);
+end;
+
+{ ---- the two ends of the scale --------------------------------------------- }
+
+procedure TServiceStatisticsTest.AnExactFitHasNoResidual;
+var
+    S: TFitStatistics;
+begin
+    //  The model reproduces the data exactly. Chi-squared is zero and R^2 is
+    //  one; anything else here means the two profiles are not being paired
+    //  point for point.
+    FSvc.Reply('profile',
+        '{"title":"e","x":[1,2,3,4],"y":[10,20,30,40]}');
+    FSvc.Reply('calc-profile',
+        '{"title":"c","x":[1,2,3,4],"y":[10,20,30,40]}');
+    FSvc.Reply('rfactor-bounds', '{"title":"r","x":[1,4],"y":[0,0]}');
+    FSvc.Reply('curves', '{"ok":true,"curves":[]}');
+    S := ServiceStatistics(FSvc);
+    AssertTrue('computed', S.Valid);
+    AssertEquals('no residual', 0.0, S.ChiSquare, 1E-12);
+    AssertEquals('and all the variance explained', 1.0, S.RSquared, 1E-12);
+end;
+
+procedure TServiceStatisticsTest.MoreParametersLeaveFewerDegreesOfFreedom;
+var
+    Few, Many: TFitStatistics;
+begin
+    //  The complexity penalty, which is the whole reason the parameter count is
+    //  read at all: two models that fit equally well must not score equally.
+    StubAFit;
+    Few := ServiceStatistics(FSvc);
+    FSvc.Reply('curves', '{"ok":true,"curves":[' +
+        '{"params":[{"name":"A","value":1},{"name":"S","value":2},' +
+        '{"name":"P","value":3}]}]}');
+    Many := ServiceStatistics(FSvc);
+    AssertTrue('both computed', Few.Valid and Many.Valid);
+    AssertEquals('the same data', Few.DataPoints, Many.DataPoints);
+    AssertTrue('but fewer degrees of freedom',
+        Many.DegreesOfFreedom < Few.DegreesOfFreedom);
+    AssertTrue('and a worse information criterion', Many.AIC > Few.AIC);
+end;
+
+{ ---- the samples no curve covers ------------------------------------------ }
+
+procedure TServiceStatisticsTest.TheUncoveredShareIsTheirPartOfTheSquaredDifference;
+var
+    S: TFitStatistics;
+begin
+    //  x = 1 is no curve's, so the model is 0 there: its residual is 10 squared
+    //  against 1 at each of the other three.
+    FSvc.Reply('profile',
+        '{"title":"e","x":[1,2,3,4],"y":[10,20,30,40]}');
+    FSvc.Reply('calc-profile',
+        '{"title":"c","x":[1,2,3,4],"y":[0,21,31,41]}');
+    FSvc.Reply('rfactor-bounds', '{"title":"r","x":[1,4],"y":[0,0]}');
+    FSvc.Reply('curves', '{"ok":true,"curves":[]}');
+    S := ServiceStatistics(FSvc,
+        UncoveredRanges([1, 2, 3, 4], [False, True, True, True]));
+    AssertEquals('the stretch is carried', 1, Length(S.UncoveredRanges));
+    AssertEquals('100 of 103', 100 / 103, S.UncoveredResidualShare, 1E-12);
+end;
+
+procedure TServiceStatisticsTest.UncoveredSamplesLeaveEveryFigureUnchanged;
+var
+    Plain, Named: TFitStatistics;
+begin
+    //  NAMED, NOT DROPPED: every sample still counts in every figure, or the
+    //  statistics would change with how the model happens to be placed.
+    StubAFit;
+    Plain := ServiceStatistics(FSvc);
+    Named := ServiceStatistics(FSvc,
+        UncoveredRanges([1, 2, 3, 4, 5, 6],
+        [False, True, True, True, True, False]));
+    AssertEquals('points', Plain.DataPoints, Named.DataPoints);
+    AssertEquals('chi-squared', Plain.ChiSquare, Named.ChiSquare, 0);
+    AssertEquals('R squared', Plain.RSquared, Named.RSquared, 0);
+    AssertEquals('AIC', Plain.AIC, Named.AIC, 0);
+    AssertEquals('BIC', Plain.BIC, Named.BIC, 0);
+    AssertEquals('two of six equal residuals', 2 / 6,
+        Named.UncoveredResidualShare, 1E-12);
+end;
+
+{ Two intervals of 200 samples; the second holds a wave the model left out.
+  The verdict names a stretch there and none in the first - a window never
+  spans the gap between them (residual_randomness). }
+procedure TServiceStatisticsTest.StubAWaveInTheSecondInterval;
+var
+    XS, DS, CS: string;
+    i: longint;
+    Seed: longword;
+    Y: double;
+    FS: TFormatSettings;
+begin
+    FS := DefaultFormatSettings;
+    FS.DecimalSeparator := '.';
+    XS := '';
+    DS := '';
+    CS := '';
+    Seed := 5;
+    for i := 0 to 399 do
+    begin
+        Seed := Seed * 1103515245 + 12345;
+        Y := 100 + 4 * (((Seed shr 16) and $7FFF) / $7FFF - 0.5);
+        if i >= 200 then
+            Y := Y + 4 * Sin(2 * Pi * i / 40);
+        if i > 0 then
+        begin
+            XS := XS + ',';
+            DS := DS + ',';
+            CS := CS + ',';
+        end;
+        XS := XS + IntToStr(i);
+        DS := DS + FloatToStr(Y, FS);
+        CS := CS + '100';
+    end;
+    FSvc.Reply('profile', Format('{"title":"e","x":[%s],"y":[%s]}', [XS, DS]));
+    FSvc.Reply('calc-profile', Format('{"title":"c","x":[%s],"y":[%s]}',
+        [XS, CS]));
+    FSvc.Reply('rfactor-bounds', '{"title":"r","x":[0,199,200,399],"y":[0,0,0,0]}');
+    FSvc.Reply('curves', '{"ok":true,"curves":[]}');
+end;
+
+procedure TServiceStatisticsTest.TheDifferenceIsJudgedForRandomnessInEachInterval;
+var
+    S: TFitStatistics;
+begin
+    StubAWaveInTheSecondInterval;
+    S := ServiceStatistics(FSvc, nil, [TCountsProbe]);
+    AssertTrue('judged', S.Residual.Tested);
+    AssertTrue('not random', S.Residual.P < 0.05);
+    AssertEquals('every sample of both intervals', 400, S.Residual.Samples);
+    AssertTrue('a stretch is named', Length(S.Residual.NonRandomRanges) > 0);
+    AssertTrue('in the second interval only',
+        S.Residual.NonRandomRanges[0].FromX >= 200);
+end;
+
+procedure TServiceStatisticsTest.TheDifferenceIsJudgedAgainstTheNoiseTheModelMeasures;
+var
+    S: TFitStatistics;
+begin
+    //  WHERE IS JUDGED AGAINST THE NOISE THE MODEL'S RULE MEASURES, as the
+    //  figures are weighted: a wave of amplitude four inside a noise of a
+    //  thousand is no stretch at all. Judged against the noise of counts, the
+    //  same wave is named (the test above) - which is how a price, whose noise
+    //  grows with its level, came to have its quiet years named as structure
+    //  and its loud ones as noise.
+    StubAWaveInTheSecondInterval;
+    S := ServiceStatistics(FSvc, nil, [TLoudNoiseProbe]);
+    AssertTrue('judged', S.Residual.Tested);
+    AssertEquals('every sample of both intervals', 400, S.Residual.Samples);
+    AssertEquals('no stretch is named', 0,
+        Length(S.Residual.NonRandomRanges));
+end;
+
+procedure TServiceStatisticsTest.WithNoStretchThereIsNoShare;
+var
+    S: TFitStatistics;
+begin
+    StubAFit;
+    S := ServiceStatistics(FSvc, nil);
+    AssertTrue('computed', S.Valid);
+    AssertEquals('no stretch', 0, Length(S.UncoveredRanges));
+    AssertEquals('no share', 0, S.UncoveredResidualShare, 0);
+end;
+
+{ ---- how the residuals are weighted --------------------------------------- }
+
+procedure TServiceStatisticsTest.AModelOfCountsIsWeightedAsItAlwaysWas;
+var
+    Before, S: TFitStatistics;
+begin
+    //  ADDITIVE: a model of a type whose rule weighs as counts scores exactly
+    //  as every model did before a type could say its data are not counts.
+    StubAFit;
+    Before := ComputeFitStatistics([10, 20, 30, 40, 50, 60],
+        [11, 21, 31, 41, 51, 61], 0, WeightPoisson);
+    S := ServiceStatistics(FSvc, nil, [TCountsProbe]);
+    AssertTrue('weighted as counts', S.Weighting = WeightPoisson);
+    AssertEquals('chi-square', Before.ChiSquare, S.ChiSquare, 0);
+    AssertEquals('BIC', Before.BIC, S.BIC, 0);
+end;
+
+procedure TServiceStatisticsTest.AModelThatMeasuresItsNoiseIsWeightedByIt;
+var
+    S: TFitStatistics;
+begin
+    //  Six differences of one, each over a variance of 4.
+    StubAFit;
+    S := ServiceStatistics(FSvc, nil, [TConstantNoiseProbe]);
+    AssertTrue('computed', S.Valid);
+    AssertTrue('weighted by the measured noise',
+        S.Weighting = WeightMeasuredNoise);
+    AssertEquals('chi-square', 6 / 4, S.ChiSquare, 1e-12);
+    AssertEquals('BIC, the reduction''s', ReductionBic(6 / 4, 6, 0), S.BIC,
+        1e-12);
+end;
+
+procedure TServiceStatisticsTest.TheNoiseIsMeasuredOverTheWholeSeriesAndReadInTheWindow;
+var
+    S: TFitStatistics;
+begin
+    //  The window holds samples 2..4 of six; their variances, measured over the
+    //  whole series, are 2, 3 and 4. Measured over the window alone they would
+    //  be 1, 2 and 3.
+    FSvc.Reply('profile',
+        '{"title":"e","x":[1,2,3,4,5,6],"y":[10,20,30,40,50,60]}');
+    FSvc.Reply('calc-profile',
+        '{"title":"c","x":[1,2,3,4,5,6],"y":[11,21,31,41,51,61]}');
+    FSvc.Reply('rfactor-bounds', '{"title":"r","x":[2,4],"y":[0,0]}');
+    FSvc.Reply('curves', '{"ok":true,"curves":[]}');
+    S := ServiceStatistics(FSvc, nil, [TIndexedNoiseProbe]);
+    AssertEquals('three samples', 3, S.DataPoints);
+    AssertEquals('chi-square', 1 / 2 + 1 / 3 + 1 / 4, S.ChiSquare, 1e-12);
+end;
+
+procedure TServiceStatisticsTest.ANoiseOutOfStepWithTheDataIsNotUsed;
+var
+    S: TFitStatistics;
+begin
+    StubAFit;
+    S := ServiceStatistics(FSvc, nil, [TShortNoiseProbe]);
+    AssertTrue('weighted as counts', S.Weighting = WeightPoisson);
+end;
+
+procedure TServiceStatisticsTest.WithNoTypesThereIsNoNoise;
+begin
+    AssertEquals(0, Length(ModelResidualNoise([], [1, 2, 3])));
+end;
+
+procedure TServiceStatisticsTest.TheFirstTypeThatMeasuresTheNoiseDecides;
+var
+    Noise: TNoiseVariances;
+    Rule: TNoiseRuleClass;
+begin
+    //  A type of counts beside ones that measure: the data are not counts,
+    //  whatever the order, and one out of step is passed over.
+    Noise := ModelResidualNoise([TCountsProbe, TShortNoiseProbe,
+        TIndexedNoiseProbe, TConstantNoiseProbe], [5, 6, 7], Rule);
+    AssertEquals('one per point', 3, Length(Noise));
+    AssertEquals('the first that answers in step', 3, Noise[2], 0);
+    AssertTrue('and that rule is named', Rule = TIndexedNoiseRule);
+    //  THE OTHER WAY ROUND: counts last, and the measuring type that decides
+    //  first in the list rather than behind one that is passed over.
+    Noise := ModelResidualNoise([TIndexedNoiseProbe, TConstantNoiseProbe,
+        TShortNoiseProbe, TCountsProbe], [5, 6, 7], Rule);
+    AssertEquals('one per point, counts last', 3, Length(Noise));
+    AssertEquals('the first in the list that answers in step', 3, Noise[2], 0);
+    AssertTrue('and that rule is named, counts last',
+        Rule = TIndexedNoiseRule);
+end;
+
+{ Counts are what a peak or a background type says of any data; a model of
+  them alone is counts. }
+procedure TServiceStatisticsTest.AModelOfCountsAloneIsMeasuredAsCounts;
+var
+    Noise: TNoiseVariances;
+    Rule: TNoiseRuleClass;
+begin
+    Noise := ModelResidualNoise([TCountsProbe], [5, 6, 7, 8], Rule);
+    AssertTrue('the rule of counts', Rule = TTestCountsNoiseRule);
+    AssertEquals('one per point', 4, Length(Noise));
+end;
+
+{ The bare base names no rule, so a model of it has none: nothing to judge
+  the difference against, and the figures weigh as counts. }
+procedure TServiceStatisticsTest.ATypeWithoutARuleIsNotJudged;
+var
+    S: TFitStatistics;
+    Rule: TNoiseRuleClass;
+begin
+    AssertEquals('no noise', 0,
+        Length(ModelResidualNoise([TNamedPointsSet], [1, 2, 3], Rule)));
+    AssertTrue('no rule', Rule = nil);
+    //  A MODEL OF SUCH CURVES, not a model of none: the service is handed
+    //  the type, as it is for any model, and judges nothing by it.
+    StubAWaveInTheSecondInterval;
+    S := ServiceStatistics(FSvc, nil, [TNamedPointsSet]);
+    AssertTrue('computed', S.Valid);
+    AssertFalse('not judged', S.Residual.Tested);
+    AssertTrue('weighted as counts', S.Weighting = WeightPoisson);
+end;
+
+initialization
+    //  A unit test: the service is a real THttpFitService over a table of
+    //  replies, so no socket is opened and no fit is run.
+    RegisterTest('unit', TServiceStatisticsTest);
+end.

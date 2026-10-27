@@ -1,0 +1,724 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
+{
+This software is distributed under GPL.
+
+@abstract(Coordinate axis abstraction - for the argument and the value alike.)
+
+Every point is stored as it was loaded. A coordinate axis is a display-only
+transform: it converts a stored coordinate to and from the value shown to the
+user and supplies the axis name and unit. It never alters stored data or the fit.
+
+ONE ABSTRACTION FOR BOTH COORDINATES. The horizontal axis was the only one that
+could be transformed, and the vertical one was captioned by a fixed word written
+into the form - "Intensity" over a price series. An axis does not care which
+coordinate it transforms, so the same class serves both, and which modes are
+offered for which coordinate is declared by the mode (axis_mode_registry).
+
+A VALUE WITH NO PLACE ON THE AXIS IS NaN. A logarithm of zero or of a negative
+number does not exist; ToDisplay answers NaN, and the chart leaves a gap there.
+The alternatives were each worse: a floor or a clamp draws a point that is not
+in the data, and raising stops the whole plot over one sample.
+}
+unit coordinate_axis;
+
+{$mode objfpc}{$H+}
+
+interface
+
+uses
+    Classes, SysUtils, Types, Math;
+
+type
+    { What an axis shows: the argument of the data (horizontal) or its value
+      (vertical) - or the R-factor of a running fit, which the progress chart
+      draws against time and the line above it prints.
+
+      THE R-FACTOR IS A THIRD DIMENSION, NOT A REGISTRY OF ITS OWN. How it is
+      shown - linear, logarithmic, the user's own formula, a module's - is the
+      same question as how a coordinate of the data is shown, answered by the
+      same modes, menus and persistence; a parallel "R-factor transformer"
+      would have been a second copy of all of it (AGENTS.md, non-negotiable 6).
+      It is never data: no curve type or loader states a preference for it,
+      and nothing it does reaches the fit. }
+    TAxisDimension = (adArgument, adValue, adLoss);
+    TAxisDimensions = set of TAxisDimension;
+    { A calendar date per point of the data, by the point's index. }
+    TAxisDates = array of TDateTime;
+
+    { Display-only transform between a stored (raw) coordinate and the shown value. }
+    ICoordinateAxis = interface
+        function DisplayName: string;
+        function UnitName: string;
+        function ToDisplay(const RawValue: double): double;
+        function FromDisplay(const DisplayValue: double): double;
+    end;
+
+    { Common base so callers can hold/free any axis by one type.
+
+      THE MARKS ARE THE AXIS'S TO CHOOSE, when it has a reason to. An axis whose
+      values are a plain number leaves the chart to place its marks and print
+      them as numbers; an axis whose values are a quantity with units of its
+      own - a duration, say - picks steps that suit those units and writes each
+      mark in them. The defaults below are the first kind. }
+    TCoordinateAxis = class(TObject, ICoordinateAxis)
+    public
+        function DisplayName: string; virtual; abstract;
+        function UnitName: string; virtual; abstract;
+        function ToDisplay(const RawValue: double): double; virtual; abstract;
+        function FromDisplay(const DisplayValue: double): double; virtual; abstract;
+        { The first mark at or after AMin and the distance between marks, for
+          shown values from AMin to AMax. False leaves the chart's own. }
+        function ChooseMarks(AMin, AMax: double;
+            out AStart, AStep: double): boolean; virtual;
+        { THE MARKS THEMSELVES, for an axis whose marks are not evenly spaced
+          in what it shows - a logarithm marked at 1, 2, 5, 10. At most
+          AMaxMarks of them, in order, from AMin to AMax. False lists none and
+          leaves the marks to ChooseMarks, and then to the chart. }
+        function MarkValues(AMin, AMax: double; AMaxMarks: integer;
+            out AValues: TDoubleDynArray): boolean; virtual;
+        { Whether MarkText writes the marks, rather than the chart. }
+        function FormatsMarks: boolean; virtual;
+        { A mark at AValue on an axis marked every AStep. }
+        function MarkText(AValue, AStep: double): string; virtual;
+        { What the chart writes along the axis: 'Name [unit]', or the name alone
+          when the axis has no unit. }
+        function Title: string; virtual;
+        { The caption beside the pointer's coordinate on this axis. }
+        function ReadoutCaption: string;
+        { What a number taken from ToDisplay is called. DisplayName unless the
+          axis draws something other than the quantity it is read in - a
+          logarithmic axis is read in prices and draws their logarithm. }
+        function DrawnQuantityName: string; virtual;
+        { The pointer's coordinate, given as the SHOWN value, in the words of
+          this axis. Plain numbers by default; an axis whose marks are its own
+          reads out the same way its marks are written. }
+        function ReadoutText(ADisplayValue: double): string; virtual;
+    end;
+
+    { The stored coordinate as loaded, under a name saying what it is -
+      Position, Intensity, Price. No transform at all. }
+    TNamedAxis = class(TCoordinateAxis)
+    private
+        FName: string;
+        FUnit: string;
+    public
+        constructor Create(const AName, AUnit: string);
+        function DisplayName: string; override;
+        function UnitName: string; override;
+        function ToDisplay(const RawValue: double): double; override;
+        function FromDisplay(const DisplayValue: double): double; override;
+    end;
+
+    { The decimal logarithm of a quantity, READ IN THE QUANTITY: the spacing is
+      logarithmic, and the marks and the readout are the prices or counts
+      themselves, as on any log chart. A value at or below zero has no
+      logarithm and is left undrawn (NaN). }
+    TLogarithmicAxis = class(TCoordinateAxis)
+    private
+        FName: string;
+        FUnit: string;
+    public
+        { The quantity whose logarithm is drawn, by its own name and unit. }
+        constructor Create(const AQuantityName, AQuantityUnit: string);
+        function DisplayName: string; override;
+        function UnitName: string; override;
+        function ToDisplay(const RawValue: double): double; override;
+        function FromDisplay(const DisplayValue: double): double; override;
+        { At whole decades and, where those are few, at their twos and fives
+          or at every digit - the densest of these that stays within
+          AMaxMarks; past ten decades, every second, fifth, tenth... decade.
+          False where even every digit gives fewer than three marks, a price
+          across part of one decade: the chart's even steps say more there. }
+        function MarkValues(AMin, AMax: double; AMaxMarks: integer;
+            out AValues: TDoubleDynArray): boolean; override;
+        function FormatsMarks: boolean; override;
+        function MarkText(AValue, AStep: double): string; override;
+        function Title: string; override;
+        function ReadoutText(ADisplayValue: double): string; override;
+        function DrawnQuantityName: string; override;
+    end;
+
+    { A calendar date, stored as the day count TDateTime uses, and marked and
+      read out as a date. }
+    TDateAxis = class(TCoordinateAxis)
+    public
+        function DisplayName: string; override;
+        function UnitName: string; override;
+        function ToDisplay(const RawValue: double): double; override;
+        function FromDisplay(const DisplayValue: double): double; override;
+        function ChooseMarks(AMin, AMax: double;
+            out AStart, AStep: double): boolean; override;
+        function FormatsMarks: boolean; override;
+        function MarkText(AValue, AStep: double): string; override;
+        function ReadoutText(ADisplayValue: double): string; override;
+    end;
+
+    { User-defined axis: display and its inverse are arbitrary formulas of the
+      single variable x (the stored raw value for the forward transform, the
+      shown value for the inverse), evaluated by the native expression engine.
+      Purely presentational - it never changes stored data or the fit. }
+    TExpressionAxis = class(TCoordinateAxis)
+    private
+        FDisplayName: string;
+        FUnitName: string;
+        FForwardExpr: string;   //  display = f(x),   x = raw value
+        FInverseExpr: string;   //  raw = g(x),       x = shown value
+    public
+        constructor Create(const ADisplayName, AUnitName,
+            AForwardExpr, AInverseExpr: string);
+        function DisplayName: string; override;
+        function UnitName: string; override;
+        function ToDisplay(const RawValue: double): double; override;
+        function FromDisplay(const DisplayValue: double): double; override;
+    end;
+
+    { Elapsed time, stored and shown in seconds and marked in the units that
+      read at its length: seconds, minutes, hours, days. The loss chart's axis. }
+    TDurationAxis = class(TCoordinateAxis)
+    public
+        function DisplayName: string; override;
+        function UnitName: string; override;
+        function ToDisplay(const RawValue: double): double; override;
+        function FromDisplay(const DisplayValue: double): double; override;
+        function ChooseMarks(AMin, AMax: double;
+            out AStart, AStep: double): boolean; override;
+        function FormatsMarks: boolean; override;
+        function MarkText(AValue, AStep: double): string; override;
+    end;
+
+type
+    { BARS LABELLED BY THEIR DATES. The argument is the bar's number - so the
+      bars stay evenly spaced, which is what a count is read in - and each mark
+      and each reading names the day that bar was recorded on, from a table of
+      one date per bar. A position between bars names the nearest one; one
+      beyond the series names nothing, rather than the day of the last bar. }
+    TBarDateAxis = class(TCoordinateAxis)
+    private
+        FDates: TAxisDates;
+        function DateAt(AValue: double): string;
+    public
+        constructor Create(const ADates: TAxisDates);
+        function DisplayName: string; override;
+        function UnitName: string; override;
+        function ToDisplay(const RawValue: double): double; override;
+        function FromDisplay(const DisplayValue: double): double; override;
+        function ChooseMarks(AMin, AMax: double;
+            out AStart, AStep: double): boolean; override;
+        function FormatsMarks: boolean; override;
+        function MarkText(AValue, AStep: double): string; override;
+        function ReadoutText(ADisplayValue: double): string; override;
+    end;
+
+{ What a tick of AAxis reads at AValue: the axis's own text when it writes its
+  marks (a date, a power of ten), the chart's format otherwise - and with no
+  axis at all. }
+function AxisMarkText(AAxis: TCoordinateAxis; AValue, AStep: double): string;
+
+implementation
+
+uses
+    status_readout,
+    native_math_expr, checks;
+
+{ TCoordinateAxis }
+
+{$hints off}
+function TCoordinateAxis.ChooseMarks(AMin, AMax: double;
+    out AStart, AStep: double): boolean;
+begin
+    AStart := AMin;
+    AStep := 0;
+    Result := False;
+end;
+
+function TCoordinateAxis.MarkValues(AMin, AMax: double; AMaxMarks: integer;
+    out AValues: TDoubleDynArray): boolean;
+begin
+    AValues := nil;
+    Result := False;
+end;
+
+function TCoordinateAxis.FormatsMarks: boolean;
+begin
+    Result := False;
+end;
+
+function TCoordinateAxis.MarkText(AValue, AStep: double): string;
+begin
+    Result := '';
+end;
+{$hints on}
+
+function TCoordinateAxis.Title: string;
+begin
+    Result := DisplayName;
+    if UnitName <> '' then
+        Result := Result + ' [' + UnitName + ']';
+end;
+
+function TCoordinateAxis.ReadoutCaption: string;
+begin
+    Result := DisplayName + ':';
+end;
+
+function TCoordinateAxis.ReadoutText(ADisplayValue: double): string;
+begin
+    Result := CoordinateReadout(ADisplayValue);
+end;
+
+function TCoordinateAxis.DrawnQuantityName: string;
+begin
+    Result := DisplayName;
+end;
+
+{ TNamedAxis }
+
+constructor TNamedAxis.Create(const AName, AUnit: string);
+begin
+    inherited Create;
+    FName := AName;
+    FUnit := AUnit;
+end;
+
+function TNamedAxis.DisplayName: string; begin Result := FName; end;
+function TNamedAxis.UnitName: string; begin Result := FUnit; end;
+function TNamedAxis.ToDisplay(const RawValue: double): double; begin Result := RawValue; end;
+function TNamedAxis.FromDisplay(const DisplayValue: double): double; begin Result := DisplayValue; end;
+
+{ TLogarithmicAxis }
+
+constructor TLogarithmicAxis.Create(const AQuantityName, AQuantityUnit: string);
+begin
+    inherited Create;
+    FName := AQuantityName;
+    FUnit := AQuantityUnit;
+end;
+
+function TLogarithmicAxis.DisplayName: string; begin Result := FName; end;
+function TLogarithmicAxis.UnitName: string; begin Result := FUnit; end;
+
+function TLogarithmicAxis.ToDisplay(const RawValue: double): double;
+begin
+    //  Tested BEFORE Log10 is called: the logarithm of zero raises on some
+    //  targets and answers -Inf on others, and neither is a point.
+    if RawValue > 0 then
+        Result := Log10(RawValue)
+    else
+        Result := NaN;
+end;
+
+function TLogarithmicAxis.FromDisplay(const DisplayValue: double): double;
+begin
+    Result := Power(10, DisplayValue);
+end;
+
+{ The logarithms of Digits x 10^d for every whole d with each one within AMin
+  to AMax, and of every Stride-th decade only (d a multiple of Stride). }
+function DecadeMarks(AMin, AMax: double; const Digits: array of integer;
+    AStride: Int64): TDoubleDynArray;
+const
+    //  A mark computed as log10(2) - 6 lands a rounding away from the
+    //  window's edge when the edge is exactly there.
+    Slack = 1e-9;
+var
+    d, First, Last: Int64;
+    i, n: integer;
+    V: double;
+begin
+    Result := nil;
+    First := Floor(AMin) - 1;
+    Last := Ceil(AMax);
+    n := 0;
+    for d := First to Last do
+    begin
+        if d mod AStride <> 0 then
+            Continue;
+        for i := 0 to High(Digits) do
+        begin
+            V := d + Log10(Digits[i]);
+            if (V >= AMin - Slack) and (V <= AMax + Slack) then
+            begin
+                SetLength(Result, n + 1);
+                Result[n] := V;
+                Inc(n);
+            end;
+        end;
+    end;
+end;
+
+function TLogarithmicAxis.MarkValues(AMin, AMax: double; AMaxMarks: integer;
+    out AValues: TDoubleDynArray): boolean;
+const
+    //  Two marks are a scale bar, not a scale.
+    FewestMarks = 3;
+    EveryDigit: array[0..8] of integer = (1, 2, 3, 4, 5, 6, 7, 8, 9);
+    TwosAndFives: array[0..2] of integer = (1, 2, 5);
+    DecadesOnly: array[0..0] of integer = (1);
+    //  Every k-th decade, for the k that are round: 1, 2, 5, 10, 20, 50...
+    StrideFactors: array[0..2] of integer = (1, 2, 5);
+var
+    Stride: Int64;
+    f: integer;
+begin
+    //  WHY NOT EVEN STEPS IN THE LOGARITHM, which is what the chart would
+    //  give: they land on 10^0.25 multiples - 1.778, 3.162, 5.623 - and on
+    //  the R-factor's chart four lines went to a decade (2026-10-25). Marks a
+    //  reader can count decades by are 1, 2, 5, 10, as on log paper.
+    AValues := nil;
+    Result := False;
+    if IsNan(AMin) or IsNan(AMax) or IsInfinite(AMin) or IsInfinite(AMax)
+        or (AMax <= AMin) or (AMax - AMin > 1e4)
+        or (AMaxMarks < FewestMarks) then
+        Exit;
+    AValues := DecadeMarks(AMin, AMax, EveryDigit, 1);
+    if Length(AValues) > AMaxMarks then
+        AValues := DecadeMarks(AMin, AMax, TwosAndFives, 1);
+    Stride := 1;
+    while Length(AValues) > AMaxMarks do
+    begin
+        for f := 0 to High(StrideFactors) do
+        begin
+            AValues := DecadeMarks(AMin, AMax, DecadesOnly,
+                StrideFactors[f] * Stride);
+            if Length(AValues) <= AMaxMarks then
+                Break;
+        end;
+        Stride := Stride * 10;
+    end;
+    if Length(AValues) < FewestMarks then
+    begin
+        AValues := nil;
+        Exit;
+    end;
+    Result := True;
+end;
+
+function TLogarithmicAxis.FormatsMarks: boolean;
+begin
+    Result := True;
+end;
+
+{$hints off}
+function TLogarithmicAxis.MarkText(AValue, AStep: double): string;
+const
+    //  Within these a mark reads as a plain number; beyond them it reads as a
+    //  mantissa and a power of ten.
+    SmallestPlain = 1e-3;
+    LargestPlain = 1e4;
+var
+    Fmt: TFormatSettings;
+    V, Mantissa: double;
+    Exponent: integer;
+begin
+    Fmt := DefaultFormatSettings;
+    Fmt.DecimalSeparator := '.';
+    V := Power(10, AValue);
+    //  Four significant figures: a price series spans well under one decade,
+    //  so its marks are close together in the quantity and need the digits.
+    if (V >= SmallestPlain) and (V < LargestPlain) then
+        Exit(Trim(Format('%6.4g', [V], Fmt)));
+    //  WRITTEN BY THIS AXIS, not by %g, which turns to an exponent only below
+    //  1E-5 and pads it: the R-factor's marks read 0.00001 beside 5E-6. The
+    //  exponent is the mark's own decade, so 2E-6 is not 20E-7.
+    Exponent := Floor(AValue + 1e-9);
+    Mantissa := Power(10, AValue - Exponent);
+    Result := Trim(Format('%6.4g', [Mantissa], Fmt));
+    if Result = '10' then
+    begin
+        Result := '1';
+        Inc(Exponent);
+    end;
+    Result := Result + 'E' + IntToStr(Exponent);
+end;
+{$hints on}
+
+function TLogarithmicAxis.Title: string;
+begin
+    Result := inherited Title + ', log scale';
+end;
+
+function TLogarithmicAxis.ReadoutText(ADisplayValue: double): string;
+begin
+    Result := Trim(CoordinateReadout(Power(10, ADisplayValue)));
+end;
+
+function TLogarithmicAxis.DrawnQuantityName: string;
+begin
+    Result := 'log10 ' + FName;
+end;
+
+{ TDateAxis }
+
+const
+    { The steps a date axis is marked in, in days: whole days, weeks, and
+      roughly months, quarters, years and multiples of them. }
+    DATE_STEPS: array[0..12] of double = (
+        1, 2, 7, 14, 28, 56, 91, 182, 364, 728, 1820, 3640, 7280);
+    DATE_MAX_INTERVALS = 8;
+
+function TDateAxis.DisplayName: string; begin Result := 'Date'; end;
+{ Written into every mark, so the axis caption carries none. }
+function TDateAxis.UnitName: string; begin Result := ''; end;
+function TDateAxis.ToDisplay(const RawValue: double): double; begin Result := RawValue; end;
+function TDateAxis.FromDisplay(const DisplayValue: double): double; begin Result := DisplayValue; end;
+
+function TDateAxis.ChooseMarks(AMin, AMax: double;
+    out AStart, AStep: double): boolean;
+var
+    i: longint;
+begin
+    AStep := DATE_STEPS[High(DATE_STEPS)];
+    for i := 0 to High(DATE_STEPS) do
+        if (AMax - AMin) / DATE_STEPS[i] <= DATE_MAX_INTERVALS then
+        begin
+            AStep := DATE_STEPS[i];
+            Break;
+        end;
+    //  On whole days, so every mark names the day it stands on rather than a
+    //  moment part-way through it.
+    AStart := Ceil(AMin / AStep - 1e-9) * AStep;
+    Result := True;
+end;
+
+function TDateAxis.FormatsMarks: boolean;
+begin
+    Result := True;
+end;
+
+{$hints off}
+function TDateAxis.MarkText(AValue, AStep: double): string;
+begin
+    Result := FormatDateTime('yyyy-mm-dd', Floor(AValue + 1e-9));
+end;
+{$hints on}
+
+function TDateAxis.ReadoutText(ADisplayValue: double): string;
+begin
+    Result := FormatDateTime('yyyy-mm-dd', Floor(ADisplayValue + 1e-9));
+end;
+
+{ TExpressionAxis }
+
+{ Evaluates Expr with the single variable x set to XValue. Raises on an invalid
+  or non-evaluable formula so the caller can report it. }
+function EvalWithX(const Expr: string; const XValue: double): double;
+var
+    Fmt: TFormatSettings;
+    Params: string;
+begin
+    Fmt := DefaultFormatSettings;
+    Fmt.DecimalSeparator := '.';
+    Params := 'x=' + FloatToStr(XValue, Fmt) + #0;
+    Result := 0;
+    if ParseAndCalcExpression(PChar(Expr), PChar(Params), @Result) <> 1 then
+        raise Exception.CreateFmt(
+            'The axis formula could not be evaluated: "%s". Use x as the ' +
+            'variable and standard functions, e.g. ln(x).', [Expr]);
+end;
+
+constructor TExpressionAxis.Create(const ADisplayName, AUnitName,
+    AForwardExpr, AInverseExpr: string);
+begin
+    inherited Create;
+    FDisplayName := ADisplayName;
+    FUnitName    := AUnitName;
+    FForwardExpr := AForwardExpr;
+    FInverseExpr := AInverseExpr;
+end;
+
+function TExpressionAxis.DisplayName: string;
+begin
+    Result := FDisplayName;
+end;
+
+function TExpressionAxis.UnitName: string;
+begin
+    Result := FUnitName;
+end;
+
+function TExpressionAxis.ToDisplay(const RawValue: double): double;
+begin
+    Result := EvalWithX(FForwardExpr, RawValue);
+end;
+
+function TExpressionAxis.FromDisplay(const DisplayValue: double): double;
+begin
+    Result := EvalWithX(FInverseExpr, DisplayValue);
+end;
+
+{ TDurationAxis }
+
+const
+    { The steps a duration is marked in, each a round number in its own unit. }
+    DURATION_STEPS: array[0..24] of double = (
+        0.1, 0.2, 0.5, 1, 2, 5, 10, 15, 30,
+        60, 120, 300, 600, 900, 1800,
+        3600, 7200, 10800, 21600, 43200,
+        86400, 172800, 432000, 864000, 2592000);
+    { At most this many intervals across the axis, which is about what the
+      chart's own marks come to on the numeric axes beside it. }
+    DURATION_MAX_INTERVALS = 8;
+
+function TDurationAxis.DisplayName: string;
+begin
+    Result := 'Elapsed time';
+end;
+
+{ Written into every mark, so the axis caption carries none. }
+function TDurationAxis.UnitName: string;
+begin
+    Result := '';
+end;
+
+function TDurationAxis.ToDisplay(const RawValue: double): double;
+begin
+    Result := RawValue;
+end;
+
+function TDurationAxis.FromDisplay(const DisplayValue: double): double;
+begin
+    Result := DisplayValue;
+end;
+
+function TDurationAxis.ChooseMarks(AMin, AMax: double;
+    out AStart, AStep: double): boolean;
+var
+    i: longint;
+begin
+    AStep := DURATION_STEPS[High(DURATION_STEPS)];
+    for i := 0 to High(DURATION_STEPS) do
+        if (AMax - AMin) / DURATION_STEPS[i] <= DURATION_MAX_INTERVALS then
+        begin
+            AStep := DURATION_STEPS[i];
+            Break;
+        end;
+    AStart := Ceil(AMin / AStep - 1e-9) * AStep;
+    Result := True;
+end;
+
+function TDurationAxis.FormatsMarks: boolean;
+begin
+    Result := True;
+end;
+
+function TDurationAxis.MarkText(AValue, AStep: double): string;
+var
+    Total, Days, Hours, Minutes: int64;
+    Seconds: double;
+    Fmt: TFormatSettings;
+
+    procedure Append(const APart: string);
+    begin
+        if Result <> '' then
+            Result := Result + ' ';
+        Result := Result + APart;
+    end;
+
+begin
+    Result := '';
+    //  Rounded to the step's own precision, so 0.30000000000000004 is 0.3.
+    if AStep < 1 then
+        AValue := Round(AValue * 10) / 10
+    else
+        AValue := Round(AValue);
+    if AValue <= 0 then
+    begin
+        Result := '0';
+        Exit;
+    end;
+    Total := Trunc(AValue);
+    Days := Total div 86400;
+    Hours := (Total mod 86400) div 3600;
+    Minutes := (Total mod 3600) div 60;
+    Seconds := AValue - (Total - Total mod 60);
+    if Days > 0 then
+        Append(IntToStr(Days) + ' d');
+    if Hours > 0 then
+        Append(IntToStr(Hours) + ' h');
+    if Minutes > 0 then
+        Append(IntToStr(Minutes) + ' min');
+    if Seconds > 0 then
+    begin
+        Fmt := DefaultFormatSettings;
+        Fmt.DecimalSeparator := '.';
+        if AStep < 1 then
+            Append(FormatFloat('0.0', Seconds, Fmt) + ' s')
+        else
+            Append(IntToStr(Round(Seconds)) + ' s');
+    end;
+end;
+
+{ TBarDateAxis }
+
+constructor TBarDateAxis.Create(const ADates: TAxisDates);
+begin
+    inherited Create;
+    FDates := Copy(ADates);
+end;
+
+function TBarDateAxis.DateAt(AValue: double): string;
+var
+    Index: int64;
+begin
+    Result := '';
+    if IsNan(AValue) then
+        Exit;
+    Index := Round(AValue);
+    if (Index < 0) or (Index > High(FDates)) then
+        Exit;
+    Result := FormatDateTime('yyyy-mm-dd', FDates[Index]);
+end;
+
+function TBarDateAxis.DisplayName: string; begin Result := 'Date'; end;
+function TBarDateAxis.UnitName: string; begin Result := ''; end;
+function TBarDateAxis.ToDisplay(const RawValue: double): double; begin Result := RawValue; end;
+function TBarDateAxis.FromDisplay(const DisplayValue: double): double; begin Result := DisplayValue; end;
+
+const
+    { The steps bars are marked in: whole bars, in round numbers of them. }
+    BAR_STEPS: array[0..11] of double = (
+        1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000);
+
+function TBarDateAxis.ChooseMarks(AMin, AMax: double;
+    out AStart, AStep: double): boolean;
+var
+    i: longint;
+begin
+    //  ON WHOLE BARS, so every mark stands on a bar and names its day.
+    AStep := BAR_STEPS[High(BAR_STEPS)];
+    for i := 0 to High(BAR_STEPS) do
+        if (AMax - AMin) / BAR_STEPS[i] <= DATE_MAX_INTERVALS then
+        begin
+            AStep := BAR_STEPS[i];
+            Break;
+        end;
+    AStart := Ceil(AMin / AStep - 1e-9) * AStep;
+    Result := True;
+end;
+
+function TBarDateAxis.FormatsMarks: boolean;
+begin
+    Result := True;
+end;
+
+{$hints off}
+function TBarDateAxis.MarkText(AValue, AStep: double): string;
+begin
+    Result := DateAt(AValue);
+end;
+{$hints on}
+
+function TBarDateAxis.ReadoutText(ADisplayValue: double): string;
+begin
+    Result := DateAt(ADisplayValue);
+end;
+
+function AxisMarkText(AAxis: TCoordinateAxis; AValue, AStep: double): string;
+begin
+    if Assigned(AAxis) and AAxis.FormatsMarks then
+        Result := AAxis.MarkText(AValue, AStep)
+    else
+        Result := Trim(Format('%6.4g', [AValue]));
+end;
+
+end.

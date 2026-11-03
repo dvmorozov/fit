@@ -1,0 +1,244 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
+{
+This software is distributed under GPL
+in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+without even the warranty of FITNESS FOR A PARTICULAR PURPOSE.
+
+@abstract(The framework's own axis modes, which name no field.)
+
+THE FRAMEWORK'S OWN MODES name no field: the coordinate as loaded (General
+Position, General Value), its decimal logarithm, and an axis of the user's own
+formulas. Each serves either coordinate the same way, which is what lets the
+value axis be logarithmic without a line written for it.
+
+NO FIELD'S MODES ARE REGISTERED FROM HERE. A field's coordinates are its
+module's, registered from that module's front door through the same
+RegisterAxisMode call: the price-series coordinates left this unit for the
+module that analyses price series, and the diffraction angles and intensity
+for the scientific module, beside the peak shapes that prefer them.
+CoreAxisModes is what this unit registers, and a test holds it to no field's.
+
+EXPLICIT, NOT AN initialization SECTION, for data_loader_registration's reason:
+a unit that was never linked never runs its initialization, which is the very
+thing that would go unnoticed.
+}
+unit axis_mode_registration;
+
+{$mode objfpc}{$H+}
+
+interface
+
+uses
+    SysUtils, coordinate_axis, axis_mode_registry;
+
+const
+    PositionAxisModeId = 'position';
+    ValueAxisModeId = 'value';
+    LogarithmicAxisModeId = 'logarithmic';
+    CustomAxisModeId = 'custom';
+
+type
+    { The argument as loaded, under the field-neutral name Position. }
+    TPositionAxisMode = class(TAxisMode)
+    public
+        class function Info: TAxisModeInfo; override;
+        class function CreateAxis(ADimension: TAxisDimension;
+            const AContext: TAxisContext): TCoordinateAxis; override;
+    end;
+
+    { The value as loaded, under the field-neutral name Value - and the
+      R-factor as it is, on a linear scale. }
+    TValueAxisMode = class(TAxisMode)
+    public
+        class function Info: TAxisModeInfo; override;
+        class function CaptionFor(ADimension: TAxisDimension): string; override;
+        class function TopicFor(ADimension: TAxisDimension): string; override;
+        class function CreateAxis(ADimension: TAxisDimension;
+            const AContext: TAxisContext): TCoordinateAxis; override;
+    end;
+
+    { The decimal logarithm of whatever the coordinate is, read in that
+      quantity. For either coordinate: a log value axis is the ordinary
+      logarithmic chart, and a log argument is how a dose or a concentration
+      is plotted. And for the R-factor, which a fit drives down by factors of
+      ten - the scale it is drawn on unless the user chooses another. }
+    TLogarithmicAxisMode = class(TAxisMode)
+    public
+        class function Info: TAxisModeInfo; override;
+        class function CreateAxis(ADimension: TAxisDimension;
+            const AContext: TAxisContext): TCoordinateAxis; override;
+    end;
+
+    { The user's own pair of formulas, one pair per coordinate. }
+    TCustomAxisMode = class(TAxisMode)
+    public
+        class function Info: TAxisModeInfo; override;
+        class function CaptionFor(ADimension: TAxisDimension): string; override;
+        class function CreateAxis(ADimension: TAxisDimension;
+            const AContext: TAxisContext): TCoordinateAxis; override;
+    end;
+
+{ Registers the framework's own modes and checks the result. Idempotent. They
+  come first, so they head every menu; a module's follow, from its front door -
+  the diffraction angles among them, the scientific module's. }
+procedure RegisterAllAxisModes;
+
+{ The framework's own modes, in the order the menus list them: what
+  RegisterAllAxisModes registers. No field's - a test holds them to that. }
+function CoreAxisModes: TAxisModeClasses;
+
+{ The name a coordinate goes by when nothing says what it is. }
+function GeneralQuantityName(ADimension: TAxisDimension): string;
+
+implementation
+
+uses
+    guide_data, fit_progress_explanations;
+
+function GeneralQuantityName(ADimension: TAxisDimension): string;
+begin
+    case ADimension of
+        adArgument: Result := 'Position';
+        adValue:    Result := 'Value';
+        //  Whatever the objective is: the progress chart plots the R-factor,
+        //  the figure the status bar shows once the fit ends.
+        adLoss:     Result := 'R-factor';
+    end;
+end;
+
+
+function NewInfo(const AId, ACaption, ATopic: string;
+    ADimensions: TAxisDimensions): TAxisModeInfo;
+begin
+    Result.Id := AId;
+    Result.Caption := ACaption;
+    Result.Topic := ATopic;
+    Result.Dimensions := ADimensions;
+    Result.Parameter := apNone;
+    Result.ParameterRequired := False;
+end;
+
+{ TPositionAxisMode }
+
+class function TPositionAxisMode.Info: TAxisModeInfo;
+begin
+    Result := NewInfo(PositionAxisModeId, 'General Position', ArgumentAxesTopic,
+        [adArgument]);
+end;
+
+{$hints off}
+class function TPositionAxisMode.CreateAxis(ADimension: TAxisDimension;
+    const AContext: TAxisContext): TCoordinateAxis;
+begin
+    Result := TNamedAxis.Create(GeneralQuantityName(adArgument), '');
+end;
+{$hints on}
+
+{ TValueAxisMode }
+
+class function TValueAxisMode.Info: TAxisModeInfo;
+begin
+    Result := NewInfo(ValueAxisModeId, 'General Value', ValueAxesTopic,
+        [adValue, adLoss]);
+end;
+
+class function TValueAxisMode.CaptionFor(ADimension: TAxisDimension): string;
+begin
+    //  The R-factor is not a "general" anything: the entry says what it does
+    //  to it.
+    if ADimension = adLoss then
+        Result := 'Linear'
+    else
+        Result := inherited CaptionFor(ADimension);
+end;
+
+class function TValueAxisMode.TopicFor(ADimension: TAxisDimension): string;
+begin
+    if ADimension = adLoss then
+        Result := RFactorScaleTopic
+    else
+        Result := inherited TopicFor(ADimension);
+end;
+
+{$hints off}
+class function TValueAxisMode.CreateAxis(ADimension: TAxisDimension;
+    const AContext: TAxisContext): TCoordinateAxis;
+begin
+    Result := TNamedAxis.Create(GeneralQuantityName(ADimension), '');
+end;
+{$hints on}
+
+{ TLogarithmicAxisMode }
+
+class function TLogarithmicAxisMode.Info: TAxisModeInfo;
+begin
+    Result := NewInfo(LogarithmicAxisModeId, 'Logarithmic', LogarithmicAxisTopic,
+        [adArgument, adValue, adLoss]);
+end;
+
+class function TLogarithmicAxisMode.CreateAxis(ADimension: TAxisDimension;
+    const AContext: TAxisContext): TCoordinateAxis;
+var
+    Name_: string;
+begin
+    //  The quantity's own name when the automatic rule found one, so a log
+    //  intensity is still captioned Intensity; the general name otherwise.
+    Name_ := Trim(AContext.QuantityName);
+    if Name_ = '' then
+        Name_ := GeneralQuantityName(ADimension);
+    Result := TLogarithmicAxis.Create(Name_, AContext.QuantityUnit);
+end;
+
+{ TCustomAxisMode }
+
+class function TCustomAxisMode.Info: TAxisModeInfo;
+begin
+    Result := NewInfo(CustomAxisModeId, 'Custom...', CustomAxisTopic,
+        [adArgument, adValue, adLoss]);
+    Result.Parameter := apDefinition;
+    Result.ParameterRequired := True;
+end;
+
+class function TCustomAxisMode.CaptionFor(ADimension: TAxisDimension): string;
+begin
+    //  The argument's entry kept the caption it has always had, so the guide
+    //  and every user who learnt it still find it.
+    case ADimension of
+        adArgument: Result := 'Custom Position...';
+        adValue:    Result := 'Custom Value...';
+        adLoss:     Result := 'Custom R-factor...';
+    end;
+end;
+
+{$hints off}
+class function TCustomAxisMode.CreateAxis(ADimension: TAxisDimension;
+    const AContext: TAxisContext): TCoordinateAxis;
+begin
+    Result := TExpressionAxis.Create(AContext.Definition.Name,
+        AContext.Definition.UnitName, AContext.Definition.Forward,
+        AContext.Definition.Inverse);
+end;
+{$hints on}
+
+function CoreAxisModes: TAxisModeClasses;
+begin
+    Result := nil;
+    SetLength(Result, 4);
+    Result[0] := TPositionAxisMode;
+    Result[1] := TValueAxisMode;
+    Result[2] := TLogarithmicAxisMode;
+    Result[3] := TCustomAxisMode;
+end;
+
+procedure RegisterAllAxisModes;
+var
+    M: TAxisModeClass;
+begin
+    for M in CoreAxisModes do
+        RegisterAxisMode(M);
+    //  THE DIFFRACTION ANGLES ARE THE SCIENTIFIC MODULE'S, registered from its
+    //  front door through this same call (scientific_module); they were the
+    //  one field still registered from here.
+end;
+
+end.

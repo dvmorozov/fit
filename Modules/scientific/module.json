@@ -1,0 +1,11 @@
+{
+  "_comment": "The scientific module: the curve shapes a measured profile is decomposed into - the peak shapes, the background shapes and the user's own formula - which free Fit links and a product for another field leaves out (fit/tools/build-lib/product_modules.ps1). Its types keep the owner 'Standard', the framework's own, so a peak, a background and a user's formula still go in one model. data: Fit's Data folder, its diffraction profiles 1.dat to 9.dat, which a package ships only for a product linking this module (Get-ProductSampleDirs). forms: the Free and Pro client's own windows for this module (Desktop/ScientificForms), which the module never names - linked only into a client that links it, through client_modules. server: the background arithmetic (background_search), which only the compute server links.",
+  "name": "scientific",
+  "data": "../../Data",
+  "paths": [".", "../../Desktop/ScientificForms"],
+  "testPaths": ["tests"],
+  "client": { "unit": "scientific_module", "register": "RegisterScientificModule" },
+  "server": { "unit": "scientific_server_module", "register": "RegisterScientificServer" },
+  "forms": { "unit": "scientific_forms", "register": "RegisterScientificForms" },
+  "tests": "scientific_tests"
+}

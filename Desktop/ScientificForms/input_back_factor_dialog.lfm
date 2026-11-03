@@ -1,0 +1,74 @@
+object InputBackFactorDlg: TInputBackFactorDlg
+  Left = 254
+  Height = 108
+  Top = 290
+  Width = 292
+  HorzScrollBar.Page = 250
+  VertScrollBar.Page = 107
+  ActiveControl = ButtonOK
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsDialog
+  Caption = 'Background Factor'
+  ClientHeight = 108
+  ClientWidth = 292
+  DesignTimePPI = 96
+  OnActivate = FormActivate
+  OnCloseQuery = FormCloseQuery
+  ParentFont = True
+  Position = poMainFormCenter
+  LCLVersion = '1.8.4.0'
+  object BevelButtons: TBevel
+    Left = 8
+    Height = 60
+    Top = 8
+    Width = 276
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    Shape = bsFrame
+  end
+  object LabelBackFactor: TLabel
+    AnchorSideRight.Control = EditBackFactor
+    AnchorSideRight.Side = asrTop
+    Left = 16
+    Height = 18
+    Top = 30
+    Width = 156
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = True
+    BorderSpacing.Right = 8
+    Caption = 'Background factor value 1 / :'
+    ParentColor = False
+    WordWrap = True
+  end
+  object ButtonOK: TButton
+    Left = 124
+    Height = 25
+    Top = 73
+    Width = 76
+    Anchors = [akRight, akBottom]
+    BorderSpacing.InnerBorder = 4
+    Caption = 'OK'
+    Default = True
+    ModalResult = 1
+    TabOrder = 0
+  end
+  object ButtonCancel: TButton
+    Left = 206
+    Height = 25
+    Top = 73
+    Width = 76
+    Anchors = [akRight, akBottom]
+    BorderSpacing.InnerBorder = 4
+    Cancel = True
+    Caption = 'Cancel'
+    ModalResult = 2
+    TabOrder = 1
+  end
+  object EditBackFactor: TEdit
+    Left = 182
+    Height = 24
+    Top = 27
+    Width = 100
+    Anchors = [akTop, akRight]
+    TabOrder = 2
+  end
+end

@@ -1,0 +1,7 @@
+{
+  "_comment": "What a product needs to link this module (fit/tools/build-lib/product_modules.ps1): its directories and its front doors. The module's own app_modules and module_tests describe a build of it alone (Fit_example.lpi); a product of several modules writes its own copies from this file.",
+  "name": "example-linear",
+  "paths": ["."],
+  "client": { "unit": "example_module", "register": "RegisterExampleModule" },
+  "tests": "example_tests"
+}

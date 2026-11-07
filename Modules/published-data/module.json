@@ -1,0 +1,8 @@
+{
+  "_comment": "The published-data module: data deposited in public repositories (Zenodo, figshare) - found by DOI or by words, browsed by subject, and opened inside the archives they are deposited in. Field-neutral, so it is a module of its own rather than part of any field's: free Fit and Fit Pro link it, a product with no use for published research data leaves it out (fit/tools/build-lib/product_modules.ps1).",
+  "name": "published-data",
+  "paths": ["."],
+  "testPaths": ["tests"],
+  "client": { "unit": "published_data_module", "register": "RegisterPublishedDataModule" },
+  "tests": "published_data_tests"
+}

@@ -1,0 +1,23 @@
+LazarusResources.Add('TInputMaxRFactorDlg','FORMDATA',[
+  'TPF0'#19'TInputMaxRFactorDlg'#18'InputMaxRFactorDlg'#4'Left'#3#254#0#6'Heigh'
+  +'t'#2'h'#3'Top'#3#153#0#5'Width'#3'L'#1#18'HorzScrollBar.Page'#3#250#0#18'Ve'
+  +'rtScrollBar.Page'#2'k'#13'ActiveControl'#7#8'ButtonOK'#11'BorderIcons'#11#12
+  +'biSystemMenu'#0#11'BorderStyle'#7#8'bsDialog'#7'Caption'#6#25'Max Acceptabl'
+  +'e Difference'#12'ClientHeight'#2'h'#11'ClientWidth'#3'L'#1#13'DesignTimePPI'
+  +#2'`'#10'OnActivate'#7#12'FormActivate'#12'OnCloseQuery'#7#14'FormCloseQuery'
+  +#10'ParentFont'#9#8'Position'#7#16'poMainFormCenter'#10'LCLVersion'#6#7'1.8.'
+  +'4.0'#0#6'TBevel'#12'BevelButtons'#4'Left'#2#8#6'Height'#2'<'#3'Top'#2#8#5'W'
+  +'idth'#3'<'#1#7'Anchors'#11#5'akTop'#6'akLeft'#7'akRight'#8'akBottom'#0#5'Sh'
+  +'ape'#7#7'bsFrame'#0#0#6'TLabel'#15'LabelMaxRFactor'#4'Left'#2#16#6'Height'#2
+  +#18#3'Top'#2#30#5'Width'#3#197#0#7'Anchors'#11#5'akTop'#6'akLeft'#7'akRight'
+  +#0#8'AutoSize'#8#7'Caption'#6'$Max acceptable difference (percent):'#11'Pare'
+  +'ntColor'#8#8'WordWrap'#9#0#0#7'TButton'#8'ButtonOK'#4'Left'#3#164#0#6'Heigh'
+  +'t'#2#25#3'Top'#2'I'#5'Width'#2'L'#7'Anchors'#11#7'akRight'#8'akBottom'#0#25
+  +'BorderSpacing.InnerBorder'#2#4#7'Caption'#6#2'OK'#7'Default'#9#11'ModalResu'
+  +'lt'#2#1#8'TabOrder'#2#0#0#0#7'TButton'#12'ButtonCancel'#4'Left'#3#246#0#6'H'
+  +'eight'#2#25#3'Top'#2'I'#5'Width'#2'L'#7'Anchors'#11#7'akRight'#8'akBottom'#0
+  +#25'BorderSpacing.InnerBorder'#2#4#6'Cancel'#9#7'Caption'#6#6'Cancel'#11'Mod'
+  +'alResult'#2#2#8'TabOrder'#2#1#0#0#5'TEdit'#14'EditMaxRFactor'#4'Left'#3#222
+  +#0#6'Height'#2#24#3'Top'#2#27#5'Width'#2'd'#7'Anchors'#11#5'akTop'#7'akRight'
+  +#0#8'TabOrder'#2#2#0#0#0
+]);
